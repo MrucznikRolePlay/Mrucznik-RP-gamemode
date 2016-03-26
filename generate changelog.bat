@@ -1,0 +1,3 @@
+@echo off
+github_changelog_generator
+pause
