@@ -36,7 +36,7 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik ----> edycja Jakub 2015
     <-------------------------------------------------------->
 	Kubi cwel
 	aktualizacja 2015.11.15 kryptonim PAèDZIOCH
-	
+
 
 */
 //----------------------------------------------------*------------------------------------------------------//
@@ -107,9 +107,9 @@ main()
 	print("R | ---         |          --- | R");
 	print("P | ---         O          --- | P");
 	print("----------------------------------\n");
-	
+
 	//exit;
-	//WasteDeAMXersTime();
+	WasteDeAMXersTime();
 }
 //------------------------------------------------------------------------------------------------------
 
@@ -619,7 +619,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		#endif
         return 0;
  	}
-	
+
 	//PAèDZIOCH
 	if(IsAHeliModel(GetVehicleModel(vehicleid)) && ispassenger)
  	{
@@ -652,9 +652,9 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		if (IsACopCar(vehicleid) && !ispassenger)
 		{
-			if(IsACop(playerid)) 
-			{ 
-				SendClientMessage(playerid, COLOR_BLUE, "Po≥πczy≥eú siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnπ"); 
+			if(IsACop(playerid))
+			{
+				SendClientMessage(playerid, COLOR_BLUE, "Po≥πczy≥eú siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnπ");
 			}
    			else
 			{
@@ -667,12 +667,12 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		if (IsAnAmbulance(vehicleid) && !ispassenger)
 		{
 		    if(IsAMedyk(playerid) && JobDuty[playerid] == 0 )
-			{ 
-				SendClientMessage(playerid, COLOR_GRAD1, "Nie jesteú medykiem na s≥uøbie!"); 
+			{
+				SendClientMessage(playerid, COLOR_GRAD1, "Nie jesteú medykiem na s≥uøbie!");
 			}
 			else if(!IsAMedyk(playerid))
 			{
-				SendClientMessage(playerid, COLOR_GRAD1, "Nie jesteú medykiem!"); 
+				SendClientMessage(playerid, COLOR_GRAD1, "Nie jesteú medykiem!");
 			}
 		}
 		if (GetVehicleModel(vehicleid) == 525)
@@ -722,7 +722,7 @@ public OnPlayerConnect(playerid)
 		#endif
 		return 1;
     }
-	
+
 	new mysql_injection[MAX_PLAYER_NAME];
 	mysql_real_escape_string(nick, mysql_injection);
 	if(strcmp(nick,mysql_injection,true) != 0)
@@ -734,7 +734,7 @@ public OnPlayerConnect(playerid)
 		#endif
 		return 1;
 	}
-	
+
 	//Poczπtkowe ustawienia:
     SetTimerEx("OPCLogin", 100, 0, "i", playerid);
 
@@ -776,7 +776,7 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pPos_z] = GetPVarFloat(playerid, "kolejka-z");
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
-	
+
 	//PAèDZIOCH - lina SWAT
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
@@ -785,7 +785,7 @@ public OnPlayerDisconnect(playerid, reason)
     		DestroyDynamicObject(r0pes[playerid][i]);
       	}
 	}
-	
+
     if(GetPVarInt(playerid, "kostka"))
     {
         new id = GetPVarInt(playerid, "kostka-player");
@@ -802,7 +802,7 @@ public OnPlayerDisconnect(playerid, reason)
 		new wl = PoziomPoszukiwania[playerid];
 		PlayerInfo[playerid][pWL] = wl;
 	}
-	
+
     if(TransportDist[playerid] > 0.0 && TransportDriver[playerid] < 999)
 	{
         Taxi_Pay(playerid);
@@ -1069,7 +1069,7 @@ public OnPlayerDeath(playerid, killerid, reason)
     {
         OnPlayerLeaveGangZone(playerid, GetPVarInt(playerid, "zoneid"));
     }
-	
+
 	//PAèDZIOCH - lina SWAT
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
@@ -1124,14 +1124,14 @@ public OnPlayerDeath(playerid, killerid, reason)
 	{
 		GetPlayerName(playerid, playername, sizeof(playername));
 		GetPlayerName(killerid, killername, sizeof(killername));
-	
+
 		//-------<[    Zmienne    ]>---------
 		StopAudioStreamForPlayer(playerid);
 		gPlayerSpawned[playerid] = 0;
 		PlayerInfo[playerid][pLocal] = 255;
 		PlayerInfo[playerid][pDeaths] ++;
-		
-	
+
+
 		//-------<[  Antyczity  ]>---------
 		if(reason <= 54 && reason > 0)
 		{
@@ -1189,8 +1189,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 				ABroadCast(COLOR_YELLOW,string,1);
 				WarningLog(string);
 			}
-		
-		
+
+
 			//-------<[    Inne    ]>---------
 			if(PlayerPaintballing[playerid] != 0)
 			{
@@ -1281,8 +1281,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 			lowcaz[playerid] = 501;
 			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta≥o anulowane - nie moøesz wziaúÊ teraz zlecenia na tego samego gracza!");
 		}
-		
-		
+
+
 		//-------<[     WL      ]>---------
 		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 		{
@@ -1298,7 +1298,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					strcat(string, " £owcy NagrÛd");
 				if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER || GetPlayerState(killerid) == PLAYER_STATE_PASSENGER)
 					strcat(string, " z okna pojazdu");
-					
+
 				PlayerPlaySound(killerid, 1083, 0.0, 0.0, 0.0);
 				PoziomPoszukiwania[killerid] ++;
 				SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
@@ -1324,7 +1324,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
     PlayerInfo[playerid][pMuted] = 0;
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
-	
+
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 1);
@@ -1336,11 +1336,11 @@ public OnPlayerSpawn(playerid) //Przebudowany
     if(PlayerInfo[playerid][pStylWalki] == 1) SetPlayerFightingStyle(playerid, FIGHT_STYLE_BOXING);
 	else if(PlayerInfo[playerid][pStylWalki] == 2) SetPlayerFightingStyle(playerid, FIGHT_STYLE_KUNGFU);
 	else if(PlayerInfo[playerid][pStylWalki] == 3) SetPlayerFightingStyle(playerid, FIGHT_STYLE_KNEEHEAD);
-	
+
 	//DüwiÍki
 	StopAudioStreamForPlayer(playerid);
 	PlayerFixRadio(playerid);
-	
+
 	//Kubi
 	INT_AirTowerLS_Exit(playerid, false, true);
 
@@ -1348,7 +1348,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
 	if(PlayerInfo[playerid][pDom] != 0)
  		Dom[PlayerInfo[playerid][pDom]][hData_DD] = 0; //Zerowanie dni do usuniÍcia domu
 	SetPlayerToTeamColor(playerid);
-	
+
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
 	#if DEBUG == 1
@@ -1745,7 +1745,7 @@ SetPlayerSpawnWeapon(playerid)
 {
 	//Resetowanie broni
     ResetPlayerWeapons(playerid);
-    
+
     //Dawanie spawnowych broni
 	if(GetPlayerFraction(playerid))
     	DajBronieFrakcyjne(playerid);
@@ -1755,7 +1755,7 @@ SetPlayerSpawnWeapon(playerid)
 	    DajBroniePracy(playerid);
     if(MaZapisanaBron(playerid))
 		PrzywrocBron(playerid);
-    
+
     //HP:
     if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
     {
@@ -1776,9 +1776,9 @@ SetPlayerSpawnWeapon(playerid)
 
 SetPlayerSpawnSkin(playerid)
 {
-    if(PlayerInfo[playerid][pChar] > 0) 
+    if(PlayerInfo[playerid][pChar] > 0)
 		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
-    
+
     if(GetPlayerFraction(playerid) == FRAC_FBI && PlayerInfo[playerid][pTajniak] != 0)
     {
         if(PlayerInfo[playerid][pRank] < 4)
@@ -1815,10 +1815,10 @@ SetPlayerSpawnSkin(playerid)
 			return 1;
 		}
     }
-    
+
 	if(PlayerInfo[playerid][pSkin] != 0)
 	{
-		if(GetPlayerFraction(playerid) != 0) 
+		if(GetPlayerFraction(playerid) != 0)
 		{
 			if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC)
 			{
@@ -1846,7 +1846,7 @@ SetPlayerSpawnSkin(playerid)
 	{
 		SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
 	}
-    
+
 	return 1;
 }
 
@@ -1858,7 +1858,7 @@ public OnPlayerEnterCheckpoint(playerid)
 	new string[128];
 	new name[MAX_PLAYER_NAME];
     DisablePlayerCheckpoint(playerid);
-	
+
 	//PAèDZIOCH
 	if(GetPVarInt(playerid,"roped") == 1)
     {
@@ -3715,7 +3715,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 		        }
 		        else
 		        {
-		            format(string, sizeof(string), "UkoÒczy≥eú wyúcig jako %d !", Ukonczyl); 
+		            format(string, sizeof(string), "UkoÒczy≥eú wyúcig jako %d !", Ukonczyl);
 					SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 					format(string, sizeof(string), "Komunikat wyúcigu: {FFFFFF}%s ukoÒczy≥ wyúcig jako %d !", GetNick(playerid), Ukonczyl);
 					WyscigMessage(COLOR_YELLOW, string);
@@ -4305,17 +4305,17 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    antyczolg[playerid] ++;
 		    if(PlayerInfo[playerid][pFlyLic] < 1)
 			{
-			    if(TakingLesson[playerid] == 1) 
+			    if(TakingLesson[playerid] == 1)
 				{
 					#if DEBUG == 1
 						printf("%s[%d] OnPlayerStateChange - end", GetNick(playerid), playerid);
 					#endif
 					return 1;
 				}
-			    else 
+			    else
 				{
 					SendClientMessage(playerid, COLOR_GREY, "   Nie wiesz w jaki sposÛb lataÊ samolotem, wiÍc decydujesz siÍ go opuúciÊ !");
-					RemovePlayerFromVehicleEx(playerid); 
+					RemovePlayerFromVehicleEx(playerid);
 				}
 			}
 		}
@@ -4323,16 +4323,16 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		{
 			if(PlayerInfo[playerid][pCarLic] != 1)
 			{
-				if(TakingLesson[playerid] == 1) 
+				if(TakingLesson[playerid] == 1)
 				{
 					#if DEBUG == 1
 						printf("%s[%d] OnPlayerStateChange - end", GetNick(playerid), playerid);
 					#endif
 					return 1;
 				}
-				else 
+				else
 				{
-					SendClientMessage(playerid, COLOR_GREY, "   Nie masz prawa jazdy, postanawiasz opuúciÊ pojazd!"); 
+					SendClientMessage(playerid, COLOR_GREY, "   Nie masz prawa jazdy, postanawiasz opuúciÊ pojazd!");
 					RemovePlayerFromVehicleEx(playerid);
 				}
 
@@ -4523,7 +4523,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerExitVehicle - begin", GetNick(playerid), playerid);
 	#endif
-    if(vehicleid > MAX_VEHICLES || vehicleid < 0) 
+    if(vehicleid > MAX_VEHICLES || vehicleid < 0)
 	{
 		#if DEBUG == 1
 			printf("%s[%d] OnPlayerExitVehicle - end", GetNick(playerid), playerid);
@@ -4670,7 +4670,7 @@ public OnGameModeInit()
 			wybory[i] = dini_IntSet("wybory.ini", string, 0);
 		}
 	}
-	
+
 	//Mrucznik:
 	Ac_OnGameModeInit();//Antyczit
 	MruMySQL_Connect();//mysql
@@ -4711,7 +4711,7 @@ public OnGameModeInit()
     Patrol_Init();
     LoadServerInfo(); //Informacja dla graczy np. o wylaczeniu czegos
     LoadDisallowedCommands();
-	
+
 	SetGameModeText("Mrucznik-RP "VERSION);
 
     //13.06
@@ -5096,7 +5096,7 @@ public OnPlayerUpdate(playerid)
 		printf("Problem z Update, nick: %s", GetNick(playerid));
         KickEx(playerid);
     }
-	
+
 	//Anty BH PAèDZIOCH
 	if(GetPVarInt(playerid, "Jumping") == 1)
 	{
@@ -5117,7 +5117,7 @@ public OnPlayerUpdate(playerid)
         {
             new keys, ud, lr;
             GetPlayerKeys(playerid, keys, ud, lr);
-            if((keys & KEY_FIRE)) 
+            if((keys & KEY_FIRE))
 			{
 				#if DEBUG == 1
 					printf("%s[%d] OnPlayerUpdate - end", GetNick(playerid), playerid);
@@ -5129,7 +5129,7 @@ public OnPlayerUpdate(playerid)
         {
             new keys, ud, lr;
             GetPlayerKeys(playerid, keys, ud, lr);
-            if((keys & KEY_ACTION)) 
+            if((keys & KEY_ACTION))
 			{
 				#if DEBUG == 1
 					printf("%s[%d] OnPlayerUpdate - end", GetNick(playerid), playerid);
@@ -5310,7 +5310,7 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 			return 1;
 		}
-		
+
 		//----------------------------
 		//£adowanie konta i zmiennych:
 		//----------------------------
@@ -5320,7 +5320,7 @@ OnPlayerLogin(playerid, password[])
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b≥πd konta. Zg≥oú zaistnia≥π sytuacjÍ na forum.");
 			printf("Nick %s posiada blad krytyczny konta (pusty rekord?)", nick);
 			KickEx(playerid);
-			return 1; 
+			return 1;
 		}
 
 		//Sprawdzanie blockÛw:
@@ -5328,8 +5328,8 @@ OnPlayerLogin(playerid, password[])
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}To konto jest zablokowane, nie moøesz na nim graÊ.");
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] Jeúli uwaøasz, øe konto zosta≥o zablokowane nies≥usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
-			KickEx(playerid); 
-			return 1; 
+			KickEx(playerid);
+			return 1;
 		}
         else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][pCK] == 1)
 		{
@@ -5337,14 +5337,14 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 			return 1;
 		}
-		
+
 		//Nadawanie pieniÍdzy:
 		ResetujKase(playerid);
 		DajKase(playerid,PlayerInfo[playerid][pCash]);
-			
+
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
-		
+
         Car_LoadForPlayer(playerid); //System aut
 
 		//Powitanie:
@@ -5410,7 +5410,7 @@ OnPlayerLogin(playerid, password[])
 		DajKase(playerid, 5000);
 	}
 
-	//Filtry na konto:	
+	//Filtry na konto:
 	/*if(dini_Exists("Filtry.ini"))
 	{
 		new filtr;
@@ -5449,7 +5449,7 @@ OnPlayerLogin(playerid, password[])
 		dini_Create("Filtry.ini");
 		dini_IntSet("Filtry.ini", "Liczba", 0);
 	}*/
-	
+
     if(PlayerInfo[playerid][pBW] == 60 || PlayerInfo[playerid][pBW] == 122 || PlayerInfo[playerid][pBW] == 123 || PlayerInfo[playerid][pBW] > 600)
     {
         PlayerInfo[playerid][pBW] = 0;
@@ -5481,7 +5481,7 @@ OnPlayerLogin(playerid, password[])
     		SendClientMessage(playerid, COLOR_WHITE,string);
         }
 	}
-	
+
 	//Niwelacje hajsu i matsÛw w zaleønoúci od lvl:
 	Niwelacje(playerid);
     if(PlayerInfo[playerid][pWarns] >= 3)
@@ -5492,7 +5492,7 @@ OnPlayerLogin(playerid, password[])
     }
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;
 
-    	
+
     MRP_LoadPremium(playerid);
 
 	//Odbugowywanie domÛw:
@@ -5745,7 +5745,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
                         x-=2.0*floatsin(-rot, degrees);
                         y-=2.0*floatcos(-rot, degrees);
                         GetVehicleRotation(vehid, h, a, b);
-                        if(floatabs(b) > 15.0) 
+                        if(floatabs(b) > 15.0)
 						{
 							#if DEBUG == 1
 								printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
@@ -5818,7 +5818,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				cmd_kogut(playerid);
 		}
 	}
-	/*if(newkeys & KEY_NO && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))//id 131072 
+	/*if(newkeys & KEY_NO && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))//id 131072
 	{
 		if(IsACop(playerid))
 		{
@@ -5828,7 +5828,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			}
 		}
 	}*/
-	if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))//id 131072 
+	if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))//id 131072
 	{
 		new engine, unused;
 		GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine , unused , unused, unused, unused, unused, unused);
@@ -5945,9 +5945,9 @@ public OnVehicleDeath(vehicleid, killerid)
 			OOCNews(COLOR_LIGHTGREEN, str);
 		}
 	}
-	
+
 	//PAèDZIOCH
-	if(IsAHeliModel(GetVehicleModel(vehicleid))) 	
+	if(IsAHeliModel(GetVehicleModel(vehicleid)))
 	{
   		for(new i=0;i<=MAX_PLAYERS;i++)
     	{
