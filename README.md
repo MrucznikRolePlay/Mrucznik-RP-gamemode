@@ -1,2 +1,2 @@
-# Mrucznik Role Play v2.x
-Mapa Mrucznik Role Play w wersji 2.x
+# Mrucznik Role Play v2.5
+Mapa serwera Mrucznik Role Play
