@@ -1,0 +1,8 @@
+#AMX file format
+*.amx
+
+#Exec's
+*.exe
+
+#Log files
+*.log
