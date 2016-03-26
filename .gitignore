@@ -25,6 +25,10 @@ $RECYCLE.BIN/
 *.so
 *.pdb
 
+#Scriptfiles and plugins igonre
+scriptfiles/**
+plugins/**
+
 #AMX file format
 *.amx
 
