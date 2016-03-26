@@ -17,8 +17,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Windows bat files
-*.bat
 
 #---< My Excludes >---
 #Server files and plugins
