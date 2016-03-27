@@ -177,7 +177,7 @@ stock Car_Load()
     for(new i=lLoad;i<gCars;i++)
     {
         new vid = Car_Spawn(i, true, false);
-		
+
 		//Sultany PD:
 		if(CarData[i][c_Siren] == 1)
 		{

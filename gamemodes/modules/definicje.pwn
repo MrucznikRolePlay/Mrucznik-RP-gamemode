@@ -14,7 +14,7 @@
 	(((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
-		
+
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
 #define MRP_PREM_HOURS    15      //Ilosc godzin potrzebnych do przegrania
@@ -150,7 +150,7 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define TAJNIAK_YKZ		4
 #define TAJNIAK_VAGOS	5
 #define TAJNIAK_CYWIL	6
-	
+
 //15.06
 #define WARN_UNBAN          21
 #define WARN_UNBLOCK        22
@@ -391,7 +391,7 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define MAX_BBD_DISTANCE    20.0
 
 //14.11
-#define MAX_CARS        10_000
+#define MAX_CARS        100000
 #define MAX_CAR_SLOT    10
 #define INVALID_CAR_OWNER   0
 #define CAR_OWNER_FRACTION  1
