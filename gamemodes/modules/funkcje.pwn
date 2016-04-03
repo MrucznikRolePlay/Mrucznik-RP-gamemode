@@ -75,13 +75,13 @@ stock PDTuneSultan(vehicleid)
 	o[4] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
 	o[5] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
 	o[6] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
-	AttachDynamicObjectToVehicle(o[0], vehicleid, 0.000000, 0.141000, 0.877499, 0.000000, 0.000000, 0.000000); //Object Model: 19620 | 
-	AttachDynamicObjectToVehicle(o[1], vehicleid, 0.000000, 0.141000, 0.877499, 0.000000, 0.000000, 0.000000); //Object Model: 19620 | 
-	AttachDynamicObjectToVehicle(o[2], vehicleid, 0.234999, 2.598513, -0.222499, 0.000000, -0.000001, 178.890090); //Object Model: 19797 | 
-	AttachDynamicObjectToVehicle(o[3], vehicleid, -0.234999, 2.598513, -0.217499, 0.000000, 179.895095, 182.910110); //Object Model: 19797 | 
-	AttachDynamicObjectToVehicle(o[4], vehicleid, 0.000000, -2.374014, 0.159999, 0.000000, 0.000000, 0.000000); //Object Model: 19797 | 
-	AttachDynamicObjectToVehicle(o[5], vehicleid, -0.674999, -2.362517, 0.110000, 0.000000, 0.000000, 0.000000); //Object Model: 19797 | 
-	AttachDynamicObjectToVehicle(o[6], vehicleid, 0.676498, -2.344018, 0.110000, 0.000000, 179.895095, -0.000001); //Object Model: 19797 | 
+	AttachDynamicObjectToVehicle(o[0], vehicleid, 0.000000, 0.141000, 0.877499, 0.000000, 0.000000, 0.000000); //Object Model: 19620 |
+	AttachDynamicObjectToVehicle(o[1], vehicleid, 0.000000, 0.141000, 0.877499, 0.000000, 0.000000, 0.000000); //Object Model: 19620 |
+	AttachDynamicObjectToVehicle(o[2], vehicleid, 0.234999, 2.598513, -0.222499, 0.000000, -0.000001, 178.890090); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[3], vehicleid, -0.234999, 2.598513, -0.217499, 0.000000, 179.895095, 182.910110); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[4], vehicleid, 0.000000, -2.374014, 0.159999, 0.000000, 0.000000, 0.000000); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[5], vehicleid, -0.674999, -2.362517, 0.110000, 0.000000, 0.000000, 0.000000); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[6], vehicleid, 0.676498, -2.344018, 0.110000, 0.000000, 179.895095, -0.000001); //Object Model: 19797 |
 }
 
 stock PDTuneInfernus(vehicleid)
@@ -91,7 +91,7 @@ stock PDTuneInfernus(vehicleid)
     new lspdo1 = CreateDynamicObject(19280, -0.5947266,2.6767578,-0.4871000,341.4990234,0.0000000,12.7496338);
     new lspdo3 = CreateDynamicObject(19280, -0.7447000,2.6440001,-0.4871000,341.4990234,0.0000000,12.7496338);
     new lspdo4 = CreateDynamicObject(19280, 0.6053000,2.6768000,-0.4871000,341.4990234,0.0000000,346.7496338);
-    new lspdo5 = CreateDynamicObject(19280, 0.7545000,2.6418002,-0.4871000,341.4990234,0.0000000,346.7449951); 
+    new lspdo5 = CreateDynamicObject(19280, 0.7545000,2.6418002,-0.4871000,341.4990234,0.0000000,346.7449951);
     SetDynamicObjectMaterial(lspdo1, 1, 18646, "matcolours", "red");
     SetDynamicObjectMaterial(lspdo3, 1, 18646, "matcolours", "red");
     SetDynamicObjectMaterial(lspdo4, 1, 18646, "matcolours", "blue");
@@ -101,12 +101,12 @@ stock PDTuneInfernus(vehicleid)
     AttachDynamicObjectToVehicle(lspdo1, vehicleid, -0.5947266,2.6767578,-0.4871000,341.4990234,0.0000000,12.7496338);
     AttachDynamicObjectToVehicle(lspdo3, vehicleid, -0.7447000,2.6440001,-0.4871000,341.4990234,0.0000000,12.7496338);
     AttachDynamicObjectToVehicle(lspdo4, vehicleid, 0.6053000,2.6768000,-0.4871000,341.4990234,0.0000000,346.7496338);
-    AttachDynamicObjectToVehicle(lspdo5, vehicleid, 0.7545000,2.6418002,-0.4871000,341.4990234,0.0000000,346.7449951); 
-    new hsiu_text = CreateDynamicObject(2659,-1.1012001,0.0907000,-0.1102000,0.0000000,0.0000000,271.5000000); 
+    AttachDynamicObjectToVehicle(lspdo5, vehicleid, 0.7545000,2.6418002,-0.4871000,341.4990234,0.0000000,346.7449951);
+    new hsiu_text = CreateDynamicObject(2659,-1.1012001,0.0907000,-0.1102000,0.0000000,0.0000000,271.5000000);
     new hsiu_text2 = CreateDynamicObject(2659,1.1012998,0.0907000,-0.1102000,0.0000000,0.0000000,88.7496338);
     SetDynamicObjectMaterialText(hsiu_text, 0, " SAPD", OBJECT_MATERIAL_SIZE_256x128, "Arial", 74, 1, 0xFFFFFFFF, 0, 1);
     SetDynamicObjectMaterialText(hsiu_text2, 0, " SAPD", OBJECT_MATERIAL_SIZE_256x128, "Arial", 74, 1, 0xFFFFFFFF, 0, 1);
-    AttachDynamicObjectToVehicle(hsiu_text, vehicleid, -1.1012001,0.0907000,-0.150000,0.0000000,0.0000000,271.5000000); 
+    AttachDynamicObjectToVehicle(hsiu_text, vehicleid, -1.1012001,0.0907000,-0.150000,0.0000000,0.0000000,271.5000000);
     AttachDynamicObjectToVehicle(hsiu_text2, vehicleid, 1.1013298,0.0907000,-0.150000,0.0000000,0.0000000,88.7496338);
 }
 
@@ -394,7 +394,7 @@ AntyReklama(result[])
 		return 1;
 	if ( strfind(result , "www." , true)>=0 || strfind(result , ".pl" , true)>=0 || strfind(result , ".net" , true)>=0 || strfind(result , ".com" , true)>=0)//strony internetowe
 		return 2;
-		
+
 	new dwukrop = strfind(result , ":" , true);
 	if ( dwukrop>=0)//adersy ip
 	{
@@ -417,18 +417,18 @@ AntyCzitText(result[])
 		return 0;
 }
 
-stock GetPlayerSpeed(playerid) 
+stock GetPlayerSpeed(playerid)
 {
     new
         Float: vX = Float: GetPlayerVehicleID(playerid),
         Float: vY,
         Float: vZ
     ;
-    if(_: vX) 
+    if(_: vX)
 	{
         GetVehicleVelocity(_: vX, vX, vY, vZ);
-    } 
-	else 
+    }
+	else
 	{
         GetPlayerVelocity(playerid, vX, vY, vZ);
     }
@@ -1065,9 +1065,9 @@ KoniecWyscigu(playerid)
 		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony - wszyscy dojechali do mety!", Wyscig[Scigamy][wNazwa]);
 	else
 		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony przez %s.", Wyscig[Scigamy][wNazwa], GetNick(playerid));
-		
+
 	WyscigMessage(COLOR_YELLOW, string);
-	
+
 	foreach(Player, i)
 	{
 		if(ScigaSie[i] != 666)
@@ -7167,7 +7167,7 @@ FunkcjaK(string[])
 {
 	new Float:x;
 	new ilosc_k=0;
-	
+
 	if(strval(string) != 0 && strlen(string) > 1)
 	{
 		for(new i=strlen(string); i>0; i--)
@@ -10264,9 +10264,9 @@ stock Oil_GetIDAtPosition(Float:x, Float:y, Float:z, Float:radius)
 
 stock ChangePlayerName(playerid, name[])
 {
-    if(strlen(name) >= 23)
+    if(strlen(name) >= 21)
 	{
-		SendClientMessage(playerid, COLOR_RED, "Nowy nick mo¿e mieæ maksymalnie 22 znaki!");
+		SendClientMessage(playerid, COLOR_RED, "Nowy nick mo¿e mieæ maksymalnie 20 znaków!");
 		return 0;
 	}
 
