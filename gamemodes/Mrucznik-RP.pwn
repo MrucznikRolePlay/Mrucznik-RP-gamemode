@@ -4690,9 +4690,10 @@ public OnGameModeInit()
 	ZaladujPickupy();
 	ZaladujSamochody(); //Auta do kradziezy
 	Zaladuj3DTexty();
-	ZaladujIkony();
+	ZaladujIkony(); printf("TUTAJ CRASH ZARAZ");
     Car_Load(); //Wszystkie pojazdy MySQL
-
+	printf("A JEDNAK NIE");
+	
 	//GF:
 	LoadBoxer();
 	LoadStuff();

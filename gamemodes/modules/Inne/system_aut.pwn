@@ -135,7 +135,7 @@ stock Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
 
 stock Car_Load()
 {
-    new lStr[256], lLoad=gCars, unused;
+    new lStr[512], lLoad=gCars, unused;
     mysql_query("SELECT * FROM `mru_cars` WHERE `ownertype` != 3 AND `ownertype` != 0");
     mysql_store_result();
     while(mysql_fetch_row_format(lStr, "|"))
@@ -212,8 +212,8 @@ stock Car_Load()
         }
     }
 
-
-    new lText[128], lowner,ldesc[128];
+	//ZBUGOWANE:
+    /*new lText[128], lowner,ldesc[128];
     mysql_query("SELECT `owner`, `desc` FROM `mru_opisy` WHERE `typ`=2");
     mysql_store_result();
     while(mysql_fetch_row_format(lStr, "|"))
@@ -232,7 +232,33 @@ stock Car_Load()
                 strpack(CarDesc[i], ldesc);
             }
         }
-    }
+    }*/
+	//naprawione:
+	new qText[128], lText[128], ldesc[128];
+	for(new i=0;i<MAX_VEHICLES;i++)
+	{
+		if(VehicleUID[i][vUID] == 0) continue;
+        if(CarData[VehicleUID[i][vUID]][c_UID] > 0)
+		{
+			
+			format(qText, sizeof(qText), "SELECT `desc` FROM `mru_opisy` WHERE `typ`=2 AND `owner`=%d LIMIT 1", CarData[VehicleUID[i][vUID]][c_UID]);
+			mysql_query(qText);
+			mysql_store_result();
+			if(mysql_num_rows())
+			{
+				mysql_fetch_row_format(lStr, "|");
+				sscanf(lStr, "s[128]", ldesc);
+				
+				WordWrap(ldesc, true, lText);
+
+				CarOpis[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i);
+				format(CarOpisCaller[i], MAX_PLAYER_NAME, "SYSTEM");
+
+				strpack(CarDesc[i], ldesc);
+			}
+		}
+	}
+	
     mysql_free_result();
     printf("Wczytano %d pojazdów", gCars-1);
 }
