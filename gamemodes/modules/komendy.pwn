@@ -504,6 +504,8 @@ CMD:mysql_query(playerid, params[])
 
 CMD:opis(playerid, params[])
 {
+	SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
+	/*
     if(PlayerInfo[playerid][pConnectTime] < 4) return SendClientMessage(playerid, COLOR_GRAD2, "(OPIS) Dostêpne tylko od 4 godzin online!");
     new var[8], id=-1;
     sscanf(params, "s[8]K<fix>(-1)", var, id);
@@ -535,13 +537,14 @@ CMD:opis(playerid, params[])
 	else
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
-	}
+	}*/
 	return 1;
 }
 
 CMD:vopis(playerid, params[])
 {
-    if(PlayerInfo[playerid][pConnectTime] < 4) return SendClientMessage(playerid, COLOR_GRAD2, "(OPIS) Dostêpne tylko od 4 godzin online!");
+	SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
+    /*if(PlayerInfo[playerid][pConnectTime] < 4) return SendClientMessage(playerid, COLOR_GRAD2, "(OPIS) Dostêpne tylko od 4 godzin online!");
 
     new var[8], id=-1;
     sscanf(params, "s[8]D(-1)", var, id);
@@ -583,7 +586,7 @@ CMD:vopis(playerid, params[])
 	else
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
-	}
+	}*/
 	return 1;
 }
 
