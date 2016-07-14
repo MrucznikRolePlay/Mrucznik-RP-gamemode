@@ -1169,7 +1169,7 @@ if(PlayerInfo[playerid][pDomWKJ] != 0)
 	SetPlayerVirtualWorld(playerid, 0);
 	PlayerInfo[playerid][pDomWKJ] = 0;
 }
-GameTextForPlayer(playerid, "~r~Koniec czasu nupie", 5000, 1);
+GameTextForPlayer(playerid, "~r~Koniec czasu, zapraszamy do kupna!", 5000, 1);
 DomOgladany[playerid] = 1;
 SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
 return 1;
@@ -3129,6 +3129,10 @@ IsAtGasStation(playerid)
 		else if(PlayerToPoint(3.0,playerid,2584.5634765625,61.7255859375,25.61093711853) || PlayerToPoint(2.5,playerid,2584.5595703125,66.3486328125,25.61093711853))
 		{//Palomino Creek
 		    return 1;
+		}
+		else if(PlayerToPoint(3.0,playerid,1381.5094,459.3204,20.3452))
+		{//Montgomery
+			return 1;
 		}
 		else if(PlayerToPoint(5.0,playerid,-2086.8000488281,-108.19999694824,35.599998474121))
 		{
@@ -6674,6 +6678,20 @@ OOCNews(color,const string[])
 		if(IsPlayerConnected(i))
 		{
 		    if(!gNews[i])
+		    {
+				SendClientMessage(i, color, string);
+			}
+		}
+	}
+}
+
+OOCOgloszenie(color,const string[])
+{
+	foreach(Player, i)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if(!gOgloszenie[i])
 		    {
 				SendClientMessage(i, color, string);
 			}

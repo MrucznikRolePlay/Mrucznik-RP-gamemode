@@ -1380,7 +1380,7 @@ SetPlayerSpawnPos(playerid)
     //Tutorial:
     else if(PlayerInfo[playerid][pTut] == 0)
     {
-		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
+		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; gOgloszenie[playerid] = 1;
 		TogglePlayerControllable(playerid, 0);
 		RegistrationStep[playerid] = 1;
 	    SetPlayerPosEx(playerid, 1275.0283203125, -1337.3585205078, -5.0);

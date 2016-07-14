@@ -663,7 +663,7 @@ CMD:pomoc(playerid)
 	SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /resetulepszen(100k) /kupbron /zamknij /skill /laptop /licencje /lotto /zmienspawn /stopani /pobij /wyscigi");
 	SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /report /anuluj /akceptuj /wywal /wezdragi /kontrakt /tankuj /kanister /oczysc /wezwij /rodziny /wepchnij");
 	SendClientMessage(playerid, COLOR_GRAD3,"*** CHAT *** (/w)iadomosc (/o)oc (/k)rzyk (/s)zept (/l)ocal (/b) (/og)loszenie (/f)amily /me (/n)ewbie /sprobuj");
-	SendClientMessage(playerid, COLOR_GRAD3,"*** BLOKADY *** /togooc /tognews /togfam /togw /togtel /toglicznik /tognewbie /togadmin");
+	SendClientMessage(playerid, COLOR_GRAD3,"*** BLOKADY *** /togooc /tognews /togog /togfam /togw /togtel /toglicznik /tognewbie /togadmin");
 	SendClientMessage(playerid, COLOR_GRAD4,"*** BANK *** /stan /wyplac /bank /przelew");
 	if(PlayerInfo[playerid][pJob] == 1) {
 	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /namierz /wanted /poddajsie /zlecenie (/m)egafon"); }
@@ -6351,7 +6351,7 @@ CMD:brama(playerid)
         }
 		if(IsPlayerInFraction(playerid, FRAC_KT, 5000))
 		{
-		    if(IsPlayerInRangeOfPoint(playerid, 10.0, 2424.28, -2085.80, 13.29))
+		    if(IsPlayerInRangeOfPoint(playerid, 15.0, 2424.28, -2085.80, 13.29))
 			{
                 new Float:x, Float:y, Float:z;
                 GetDynamicObjectPos(GATE_KT, x ,y ,z);
@@ -7772,7 +7772,7 @@ CMD:kod(playerid,params[])
     if(VAR_NGKeypad) return SendClientMessage(playerid, COLOR_GREY, "* Ktos ju¿ wpisuje kod.");
     if(GetPVarInt(playerid, "ng-gatekey") == 0)
     {
-    	if(IsPlayerInRangeOfPoint(playerid,8.0, 2720.3491, -2509.8152, 13.8384))
+    	if(IsPlayerInRangeOfPoint(playerid,8.0, 2720.3491, -2509.8152, 13.8384)) 
     	{
     	    SelectTextDraw(playerid, 0x00FF00FF);
             TextDrawShowForPlayer(playerid,NG_GateTD[0]);
@@ -15620,7 +15620,7 @@ CMD:og(playerid, params[])
         	}
 			DajKase(playerid, - payout);
 			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d",  params, sendername,PlayerInfo[playerid][pPnumber]);
-			OOCNews(TEAM_GROVE_COLOR,string);
+			OOCOgloszenie(TEAM_GROVE_COLOR,string);
 			format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
 			GameTextForPlayer(playerid, string, 5000, 5);
 			if (PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pDonateRank] < 2)
@@ -15857,8 +15857,8 @@ CMD:noa(playerid, params[])
 	return 1;
 }
 
-CMD:zablokujooc(playerid) return cmd_togooc(playerid);
-CMD:togooc(playerid)
+CMD:zablokujo(playerid) return cmd_togo(playerid);
+CMD:togo(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
@@ -15983,6 +15983,26 @@ CMD:icons(playerid)
 			}
 		}
         MSGBOX_Show(playerid, "Ikony wlaczone!", MSGBOX_ICON_TYPE_OK);
+	}
+	return 1;
+}
+
+CMD:togog(playerid) return blokujog(playerid);
+CMD:zablokujog(playerid) return blokujog(playerid);
+CMD:blokujog(playerid)
+{
+    if(IsPlayerConnected(playerid))
+    {
+		if (!gOgloszenie[playerid])
+		{
+			gOgloszenie[playerid] = 1;
+            MSGBOX_Show(playerid, "Ogloszenia ~r~OFF", MSGBOX_ICON_TYPE_OK);
+		}
+		else if (gOgloszenie[playerid])
+		{
+			gOgloszenie[playerid] = 0;
+            MSGBOX_Show(playerid, "Ogloszenia ~g~ON", MSGBOX_ICON_TYPE_OK);
+		}
 	}
 	return 1;
 }
@@ -18673,11 +18693,11 @@ CMD:wejdz(playerid)
 		{
 		    ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parkingi\n[Poziom 0]Komisariat\n[Poziom 1]Pokoje Przes³uchañ\n[Poziom 2]Biura\n[Poziom 3]Sale Treningowe\n[Poziom 4]Dach","Jedz","");
 		}
-		else if((IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360) && IsABOR(playerid))//Podziemia BOR
+		else if(IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360)//Podziemia BOR
 		|| IsPlayerInRangeOfPoint(playerid,3,1483.8867, -1491.1559, 13.9085)
 		|| IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
 		|| IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
-		|| IsPlayerInRangeOfPoint(playerid,3, 1495.1107, -1468.8528, 40.8256)&& IsABOR(playerid))//dach BOR
+		|| IsPlayerInRangeOfPoint(playerid,3, 1495.1107, -1468.8528, 40.8256))//dach BOR
 		{
 			ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking wewnêtrzny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala BOR\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
 		}
@@ -18895,7 +18915,7 @@ CMD:wejdz(playerid)
 				{
 					if(PlayerInfo[playerid][pBiletsamolotowy]==1 || IsPlayerInFraction(playerid, FRAC_KT, 5000))
 					{
-						GameTextForPlayer(playerid, "Witamy w samolocie! ZnajdŸ swoje miejsce", 4000, 3);
+						GameTextForPlayer(playerid, "Witamy w samolocie! Znajdz swoje miejsce!", 4000, 3);
 						SetPlayerPosEx(playerid, 3.5040+KTAir_Offsets[0],30.7375+KTAir_Offsets[1],0.5391+100+KTAir_Offsets[2]);
                         SetPlayerVirtualWorld(playerid, 2);
                         //PlayerInfo[playerid][pBiletsamolotowy]=0;
@@ -19811,7 +19831,7 @@ CMD:wejdz(playerid)
         IsPlayerInRangeOfPoint(playerid,2.0,1174.5618,-1376.4209,24.2193)||
         IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112))
     	{
-    		ShowPlayerDialogEx(playerid, D_ELEVATOR_LSMC, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba\n{660000}[2] {D2CFA6}Bufet oraz strefa pracowników LSMC\n{660000}[3] {D2CFA6}Sale operacyjne oraz pooperacyjne\n{660000}[4] {D2CFA6}Sale Specjalistyczne\n{660000}[5] {D2CFA6}Akademia Medyczna\n{660000}[6] {D2CFA6}Gabinety lekarskie\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
+    		ShowPlayerDialogEx(playerid, w, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba\n{660000}[2] {D2CFA6}Bufet oraz strefa pracowników LSMC\n{660000}[3] {D2CFA6}Sale operacyjne oraz pooperacyjne\n{660000}[4] {D2CFA6}Sale Specjalistyczne\n{660000}[5] {D2CFA6}Akademia Medyczna\n{660000}[6] {D2CFA6}Gabinety lekarskie\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
     	}
      	else if(IsPlayerInRangeOfPoint(playerid,5,1172.6564, -1323.4110, 15.6034))
     	{
@@ -20136,11 +20156,11 @@ CMD:wyjdz(playerid)
 			ShowPlayerDialogEx(playerid, 121, DIALOG_STYLE_LIST, "Wybierz pomieszczenie", "Salka Konferencyjna\nBiura\nPiwnice", "Wybierz", "WyjdŸ");
 	    }
 		//winda bor
-		else if((IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360)&& IsABOR(playerid))//podziemny parking
+		else if((IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360))//podziemny parking
 		|| IsPlayerInRangeOfPoint(playerid,3,1483.8867, -1491.1559, 13.9085)
 		|| IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
 		|| IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
-		|| (IsPlayerInRangeOfPoint(playerid,3, 1495.1107, -1468.8528, 40.8256)&& IsABOR(playerid)))//dach
+		|| IsPlayerInRangeOfPoint(playerid,3, 1495.1107, -1468.8528, 40.8256))//dach
 		{
 			ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking wewnêtrzny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala BOR\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
 		}
@@ -34857,8 +34877,12 @@ CMD:teleturniej(playerid,params[])
 }
 
 CMD:zamek(playerid, params[])
-{
-    if(IsPlayerInRangeOfPoint(playerid, 5.0, 725.7198,-1439.3527,13.5391))
+    if(IsPlayerInRangeOfPoint(playerid, 5.0, 725.7198,-1439.3527,13.5391) ||
+	IsPlayerInRangeOfPoint(playerid, 5.0, 734.0619, -1451.6720, 22.5920) ||
+	IsPlayerInRangeOfPoint(playerid, 5.0, 725.5906, -1450.9875, 17.7069) ||
+	IsPlayerInRangeOfPoint(playerid, 5.0, 722.0778, -1450.7183, 26.0396) ||
+	IsPlayerInRangeOfPoint(playerid, 5.0, 735.2055, -1472.9760, 22.5920) ||
+	IsPlayerInRangeOfPoint(playerid, 5.0, 736.3939, -1472.8465, 22.5920))
     {
         if(IsPlayerInFraction(playerid, FRAC_LCN, 5000))
         {
@@ -34871,6 +34895,8 @@ CMD:zamek(playerid, params[])
     }
     return 1;
 }
+
+
 CMD:tower(playerid, params[]) return cmd_wieza(playerid, params);
 CMD:wieza(playerid, params[])
 {

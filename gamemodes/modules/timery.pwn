@@ -1416,6 +1416,9 @@ public JednaSekundaTimer()
 
     new plname[MAX_PLAYER_NAME],level, Float:angle,Lost = 0, trigger = 0,winner[MAX_PLAYER_NAME], loser[MAX_PLAYER_NAME],titel[MAX_PLAYER_NAME];
 
+	
+	
+
 	if(PaintballPlayers >= 2 && PaintballRound != 1 && StartingPaintballRound != 1)
 	{
 		StartingPaintballRound = 1;
@@ -1440,6 +1443,9 @@ public JednaSekundaTimer()
         GetPlayerPos(i, x, y, z);
 		GetPlayerArmour(i, pancerzyy);
         vehicleid = GetPlayerVehicleID(i);
+		
+		if(!IsPlayerInRangeOfPoint(i,8.0, 2720.3491, -2509.8152, 13.8384)) VAR_NGKeypad = false;
+		
 		if(State == PLAYER_STATE_DRIVER && !ToggleSpeedo[i])
 		{
 			VehicleModel = GetVehicleModel(vehicleid);
@@ -1929,7 +1935,7 @@ public JednaSekundaTimer()
 			else if(TutTime[i] == 125)
 			{
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
-				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
+				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0; gOgloszenie[i] = 0;
 				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
 				SetPlayerSpawn(i);
