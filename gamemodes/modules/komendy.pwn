@@ -12456,6 +12456,7 @@ CMD:kamera_wiezienie(playerid, params[])
 					TogglePlayerControllable(playerid, 1);
 					SetCameraBehindPlayer(playerid);
 					PlayerInfo[playerid][pMuted] = 0;
+					SetPlayerPosEx(playerid, 319.72470092773, -1548.3374023438, 13.845289230347);
 				}
 			}
 			else
@@ -14841,7 +14842,7 @@ CMD:up(playerid)
 
 CMD:fly(playerid)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 15)
+	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pNewAP] >= 5)
 	{
 		new Float:px, Float:py, Float:pz, Float:pa;
 		GetPlayerFacingAngle(playerid,pa);
@@ -15858,6 +15859,7 @@ CMD:noa(playerid, params[])
 }
 
 CMD:zablokujo(playerid) return cmd_togo(playerid);
+CMD:togooc(playerid) return cmd_togo(playerid);
 CMD:togo(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -16071,7 +16073,7 @@ CMD:zablokujw(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pDonateRank] > 0 || PlayerInfo[playerid][pAdmin] > 1)
+        if(PlayerInfo[playerid][pDonateRank] > 0 || PlayerInfo[playerid][pAdmin] > 1 || PlayerInfo[playerid][pNewAP] >= 5)
         {
 			if (!HidePM[playerid])
 			{
@@ -21646,6 +21648,15 @@ CMD:a(playerid, params[])
 			}
 			printf("Admin %s: %s", sendername, params);
 		}
+		if(PlayerInfo[playerid][pNewAP] >= 5)
+		{
+			format(string, sizeof(string), "* Skrypter %s: %s", sendername, params);
+			if (PlayerInfo[playerid][pNewAP] >= 1)
+			{
+				SendAdminMessage(0xFFC0CB, string);
+			}
+			printf("Skrypter %s: %s", sendername, params);
+		}
 		if(PlayerInfo[playerid][pNewAP] >= 1)
 		{
 			format(string, sizeof(string), "*%d Pó³Admin %s: %s", PlayerInfo[playerid][pNewAP], sendername, params);
@@ -21740,6 +21751,12 @@ CMD:zaufanyggracz(playerid, params[])
 			SendZGMessage(0x7AA1C9FF/*COLOR_LIGHTBROWN*/, string);
 			printf("Admin %s: %s", sendername, params);
 		}
+		if(PlayerInfo[playerid][pNewAP] >= 5)
+		{
+			format(string, sizeof(string), "* Skrypter %s: %s", sendername, params);
+			SendZGMessage(0x7AA1C9FF/*COLOR_LIGHTBROWN*/, string);
+			printf("Skrypter %s: %s", sendername, params);
+		}
 		if(PlayerInfo[playerid][pNewAP] >= 1)
 		{
 			format(string, sizeof(string), "*%d Pó³Admin %s: %s", PlayerInfo[playerid][pNewAP], sendername, params);
@@ -21816,6 +21833,10 @@ CMD:newbie(playerid, params[])
 			else if(PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 		    {
 				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], sendername, params);
+			}
+			else if(PlayerInfo[playerid][pNewAP] >= 5)
+			{
+				format(nobvhat, sizeof(nobchat), "(({FFD700} Skrypter %s: {8D8DFF}%s ))", sendername, params);
 			}
 	 		else if(PlayerInfo[playerid][pDonateRank] == 10)
 			{
@@ -23573,7 +23594,7 @@ CMD:gotopos(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 		    new Float:x, Float:y, Float:z;
 			if( sscanf(params, "fff", x,y,z))
@@ -23607,7 +23628,7 @@ CMD:gotols(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5  || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -23636,7 +23657,7 @@ CMD:gotoszpital(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5  || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -23665,7 +23686,7 @@ CMD:gotolv(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -23694,7 +23715,7 @@ CMD:gotosf(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -23754,7 +23775,7 @@ CMD:gotocar(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			new Float:cwx2,Float:cwy2,Float:cwz2;
 			GetVehiclePos(testcar, cwx2, cwy2, cwz2);
@@ -23782,7 +23803,7 @@ CMD:mark(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			GetPlayerPos(playerid, TeleportDest[playerid][0],TeleportDest[playerid][1],TeleportDest[playerid][2]);
 			SendClientMessage(playerid, COLOR_GRAD1, "   Miejsce teleportu zmienione");
@@ -23799,7 +23820,7 @@ CMD:gotomark(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -23825,7 +23846,7 @@ CMD:gotoin(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -23851,7 +23872,7 @@ CMD:gotostad(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -23877,7 +23898,7 @@ CMD:gotojet(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -23928,7 +23949,7 @@ CMD:goto(playerid, params[])
 					{
 						if(IsPlayerConnected(i))
 						{
-							if(PlayerInfo[i][pAdmin] >= 1 || (PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] < 4))
+							if(PlayerInfo[i][pAdmin] >= 1 || (PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] < 4)  || PlayerInfo[playerid][pNewAP] >= 5)
 							{
 								liczydelko=true;
 								break;
@@ -24038,7 +24059,7 @@ CMD:gethere(playerid, params[])
 		{
 		    if(plo != INVALID_PLAYER_ID)
 		    {
-				if (PlayerInfo[playerid][pAdmin] >= 1)
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 5)
 				{
 					GetPlayerPos(playerid, plocx, plocy, plocz);
 					if(PlayerInfo[playerid][pInt] > 0)
@@ -24604,7 +24625,7 @@ CMD:slap(playerid, params[])
 		new Float:shealth;
 		new Float:slx, Float:sly, Float:slz;
 
-		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2)
+		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -24709,12 +24730,12 @@ CMD:kick(playerid, params[])
 		{
 			if(sscanf(params, "ds[64]", giveplayerid, result)) 
 			{
-				SendClientMessage(playerid, COLOR_GRAD2, "Ten gracz ma zbugowane ID. Wpisz jego ID zamiast nicku aby go zbanowaæ.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Ten gracz ma zbugowane ID. Wpisz jego ID zamiast nicku aby go wywaliæ.");
 				return 1;
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 1 || PlayerInfo[playerid][pNewAP] >= 5)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -25169,6 +25190,12 @@ CMD:admini(playerid)
 		{
 			GetPlayerName(i, sendername, sizeof(sendername));
 			format(string, sizeof(string), "Pó³Admin: %s", sendername);
+			SendClientMessage(playerid, COLOR_GRAD2, string);
+		}
+		else if(PlayerInfo[playerid][pNewAP] >= 5)
+		{
+			GetPlayerName(i, sendername, sizeof(sendername));
+			format(string, sizeof(string), "Skrypter: %s", sendername);
 			SendClientMessage(playerid, COLOR_GRAD2, string);
 		}
 	}
@@ -25667,6 +25694,10 @@ CMD:ap(playerid)
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
+	}
+	if (PlayerInfo[playerid][pNewAP] >= 5)
+	{
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* Skrypter *** /fly /togw /sblock /goto /spec /a(dmin) chat");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{

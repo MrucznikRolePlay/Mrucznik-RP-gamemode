@@ -30,6 +30,12 @@ JailDeMorgan(playerid)
 	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
+stock set(newstring[],oldstring[])
+{
+	for (new i, j=  strlen(oldstring); i < j; ++i) newstring[i] = oldstring[i];
+	newstring[strlen(oldstring)] = EOS;
+}
+
 // WYPUSZCZANIE z DEMORGAN
 UnJailDeMorgan(playerid)
 {
