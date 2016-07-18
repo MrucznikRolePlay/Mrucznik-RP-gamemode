@@ -15,6 +15,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         #endif
         return 1;
     }
+	
+	//AntyCheat - Antycrasher
+	format(inputtext, 128, "%s", inputtext);
+	for(new s; s < strlen(inputtext); s++)
+	{
+		if (inputtext[s] == '%')
+		{
+			inputtext[s] = ' ';
+		}
+	}
+	
     if(IsDialogProtected(dialogid) || true) //MySQL anti injection
     {
 		for(new i; i<strlen(inputtext); i++)
