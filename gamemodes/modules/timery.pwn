@@ -1583,22 +1583,27 @@ public JednaSekundaTimer()
 					else
 					{
 						new veh = GetPlayerVehicleID(cop);
-						new seat = GetFreeVehicleSeat(veh);
-						if(seat != -1)
+					
+						if(GetFreeVehicleSeat(veh, 2))
 						{
-							PutPlayerInVehicleEx(i, veh, seat);
+							PutPlayerInVehicleEx(i, veh, 2);
+							TogglePlayerControllable(i, 0);
+						}
+						else if(GetFreeVehicleSeat(veh, 3))
+						{
+							PutPlayerInVehicleEx(i, veh, 3);
 							TogglePlayerControllable(i, 0);
 						}
 						else
 						{
-							PutPlayerInVehicleEx(i, veh, 2);
+							GameTextForPlayer(cop, "~b~W tym pojezdzie nie ma wiecej miejsca. ~n~Ty³ zajêty.", 4000, 3);
 						}
+						
+						
 					}
 				}
 			}
 		}
-
-
         if(SafeTime[i] > 0)//3minuty na zalogowanie
 		{
 			SafeTime[i]--;

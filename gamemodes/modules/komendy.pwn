@@ -1769,7 +1769,7 @@ CMD:kajdanki(playerid, params[])
 											ShowPlayerDialogEx(giveplayerid, 98, DIALOG_STYLE_MSGBOX, "Aresztowanie", "Policjant chce za³o¿yæ ci kajdanki, jeœli osacza ciê niedu¿a liczba policjantów mo¿esz spróbowaæ siê wyrwaæ\nJednak pamiêtaj jeœli siê wyrwiesz i jesteœ uzbrojony policjant ma prawo ciê zabiæ. \nMo¿esz tak¿e dobrowolnie poddaæ siê policjantom.", "Poddaj siê", "Wyrwij siê");
 											PDkuje[giveplayerid] = playerid;
 											uzytekajdanki[giveplayerid] = 1;
-											SetTimerEx("UzyteKajdany",60000,0,"d",giveplayerid);
+											SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
 										}
 									}
 									else
@@ -32046,8 +32046,22 @@ CMD:akceptuj(playerid, params[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* %s zap³aci³ mandat $%d.", sendername, TicketMoney[playerid]);
 							SendClientMessage(TicketOffer[playerid], COLOR_LIGHTBLUE, string);
+							
+							
+							new faction_cash = floatround(0.90 * TicketMoney[playerid]),
+							playercash = floatround(0.10 * TicketMoney[playerid]);
+							
+							format(string, sizeof(string), "* Otrzyma³eœ premiê w wysokoœci $%d!\nNa konto frakcyjne dodano: $%d", playercash, faction_cash);
+							SendClientMessage(TicketOffer[playerid], COLOR_LIGHTBLUE, string);
+							
+							
 							ZabierzKase(playerid, TicketMoney[playerid]);
-							DajKase(TicketOffer[playerid], TicketMoney[playerid]);
+							DajKase(TicketOffer[playerid], playercash);
+							
+							new frac=GetPlayerFraction(TicketOffer[playerid]);
+							Sejf_Add(frac, faction_cash);
+							Sejf_Save(frac);
+							
 							TicketOffer[playerid] = 999;
 							TicketMoney[playerid] = 0;
 							return 1;
