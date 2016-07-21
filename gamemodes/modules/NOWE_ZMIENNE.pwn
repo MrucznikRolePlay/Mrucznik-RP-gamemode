@@ -979,6 +979,7 @@ ZerujZmienne(playerid)
 	okrazenia[playerid] = 0;//¯u¿el
 	okregi[playerid] = 0;//¯u¿el
 	SpamujeMechanik[playerid] = 0;//mechanik
+	AntySpamPraca[playerid] = 0;
 	AntySpam[playerid] = 0;
 	CenaDawanegoAuta[playerid] = 0;
 	BusCzit[playerid] = 0;

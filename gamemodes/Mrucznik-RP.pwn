@@ -1548,7 +1548,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_YKZ: //6
 						{
-						    SetPlayerPosEx(playerid, 738.8827,-1429.9484,13.5234);
+						    SetPlayerPosEx(playerid, 2797.4734,-1095.1035,30.7188);
 						}
 						case FRAC_BOR: //7
 						{
@@ -5605,16 +5605,21 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
     //11.06.2014
     if(PRESSED(KEY_JUMP) && Spectate[playerid] != INVALID_PLAYER_ID)
-    {
+	{
 		PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
 		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-        Spectate[playerid] = INVALID_PLAYER_ID;
-        TogglePlayerSpectating(playerid, 0);
-        return 0;
-    }
+		Spectate[playerid] = INVALID_PLAYER_ID;
+		TogglePlayerSpectating(playerid, 0);
+		Unspec[playerid][Coords][0] = 0.0;
+		Unspec[playerid][Coords][1] = 0.0;
+		Unspec[playerid][Coords][2] = 0.0;
+		Unspec[playerid][sPint] = 0;
+		Unspec[playerid][sPvw] = 0;
+		return 0;
+	}
     //30.10
     if(HOLDING(KEY_ANALOG_UP))
     {

@@ -815,6 +815,12 @@ SpamujeMechanik[playerid] = 0;
 return 1;
 }
 
+public AntySpamPracaTimer(playerid)
+{
+AntySpamPraca[playerid] = 0;
+return 1;
+}
+
 public PoscigTimer(playerid){
 poscig[playerid] = 0;
 SendClientMessage(playerid,COLOR_PANICRED,"|_________________Tryb Poœcigu ZAKOÑCZONY_________________|");
@@ -3762,6 +3768,12 @@ stock KasynoLog(text[])
 stock PayLog(text[])
 {
     new plik[32] = "logi/pay.log";
+    Log(plik, text);
+}
+
+stock PayLogPraca(text[])
+{
+    new plik[32] = "logi/pay_praca.log";
     Log(plik, text);
 }
 

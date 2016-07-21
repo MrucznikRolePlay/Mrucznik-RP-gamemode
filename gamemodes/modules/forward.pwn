@@ -51,6 +51,7 @@ forward naczasbicie(playerid);
 forward UzyteKajdany(playerid);
 forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
+forward AntySpamPracaTimer(playerid);
 forward PoscigTimer(playerid);
 forward AntySpamTimer(playerid);
 forward AntyBusCzit(playerid);
