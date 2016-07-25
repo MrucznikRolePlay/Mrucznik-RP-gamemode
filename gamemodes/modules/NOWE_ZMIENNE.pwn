@@ -906,6 +906,7 @@ new PDkuje[MAX_PLAYERS];//Kajdany
 new SkutyGracz[MAX_PLAYERS];//Kajdany
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
+new AntySpamPraca[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
 new DomOgladany[MAX_PLAYERS];//SYSTEM DOMÓW BY MRUCZNIK
 new carselect[15];

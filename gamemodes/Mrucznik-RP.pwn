@@ -51,6 +51,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <md5>
 #include <nex-ac>
 #include <dialogs>
+#include <dini>
 #include <ACSBM>
 #include <YSI\y_safereturn>				// By Bartekdvd & Y_Less: 		http://forum.sa-mp.com/showthread.php?t=456132
 

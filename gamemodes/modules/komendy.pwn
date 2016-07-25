@@ -2652,7 +2652,7 @@ CMD:respawn(playerid)
 	new string[128];
 	if(Count >= 20)
 	{
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 			SendClientMessage(playerid,COLOR_YELLOW, "Odliczanie rozpoczête");
 			BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
@@ -8425,7 +8425,7 @@ CMD:zmienprace(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /setjob [playerid/CzêœæNicku] [id pracy]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -8799,7 +8799,7 @@ CMD:podglad(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -8890,7 +8890,7 @@ CMD:antybh(playerid, params[])
 		new bh;
 		if( sscanf(params, "d", bh))
 		{
-			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /podglad [0-off, 1-on]");
+			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /antybh [0-off, 1-on]");
 			return 1;
 		}
 
@@ -9197,7 +9197,7 @@ CMD:blok(playerid, params[])
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -15989,8 +15989,8 @@ CMD:icons(playerid)
 	return 1;
 }
 
-CMD:togog(playerid) return blokujog(playerid);
-CMD:zablokujog(playerid) return blokujog(playerid);
+CMD:togog(playerid) return cmd_blokujog(playerid);
+CMD:zablokujog(playerid) return cmd_blokujog(playerid);
 CMD:blokujog(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -19833,7 +19833,7 @@ CMD:wejdz(playerid)
         IsPlayerInRangeOfPoint(playerid,2.0,1174.5618,-1376.4209,24.2193)||
         IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112))
     	{
-    		ShowPlayerDialogEx(playerid, w, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba\n{660000}[2] {D2CFA6}Bufet oraz strefa pracowników LSMC\n{660000}[3] {D2CFA6}Sale operacyjne oraz pooperacyjne\n{660000}[4] {D2CFA6}Sale Specjalistyczne\n{660000}[5] {D2CFA6}Akademia Medyczna\n{660000}[6] {D2CFA6}Gabinety lekarskie\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
+    		ShowPlayerDialogEx(playerid, D_ELEVATOR_LSMC, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba\n{660000}[2] {D2CFA6}Bufet oraz strefa pracowników LSMC\n{660000}[3] {D2CFA6}Sale operacyjne oraz pooperacyjne\n{660000}[4] {D2CFA6}Sale Specjalistyczne\n{660000}[5] {D2CFA6}Akademia Medyczna\n{660000}[6] {D2CFA6}Gabinety lekarskie\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
     	}
      	else if(IsPlayerInRangeOfPoint(playerid,5,1172.6564, -1323.4110, 15.6034))
     	{
@@ -21845,7 +21845,7 @@ CMD:newbie(playerid, params[])
 			}
 			else if(PlayerInfo[playerid][pNewAP] == 5)
 			{
-				format(nobvhat, sizeof(nobchat), "(({FFD700} Skrypter %s: {8D8DFF}%s ))", sendername, params);
+				format(nobchat, sizeof(nobchat), "(({FFD700} Skrypter %s: {8D8DFF}%s ))", sendername, params);
 			}
 	 		else if(PlayerInfo[playerid][pDonateRank] == 10)
 			{
@@ -22194,7 +22194,7 @@ CMD:unjail(playerid, params[])
 				}
 			}
 		}
-		else if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+		else if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -22251,7 +22251,7 @@ CMD:adminajail(playerid, params[])
 
 		if (PlayerInfo[playa][pJailed] == 0)
 		{
-			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 			{
 			    if(IsPlayerConnected(playa))
 			    {
@@ -24017,7 +24017,7 @@ CMD:goto(playerid, params[])
 CMD:tp(playerid, params[])
 {
 
-	new getplayer_id, giveplayer_id, string[128];
+	new getplayer_id, giveplayer_id;
 	if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pNewAP] == 5)
 	{
 		if(sscanf(params, "uu", getplayer_id, giveplayer_id))
@@ -24052,7 +24052,7 @@ CMD:tp(playerid, params[])
 			PlayerInfo[getplayer_id][pInt] = PlayerInfo[giveplayer_id][pInt];
 			PlayerInfo[getplayer_id][pLocal] = PlayerInfo[giveplayer_id][pLocal];
 		}
-		if(plocz > 530.0 && PlayerInfo[giveplayer_id][pInt] == 0) //the highest land point in sa = 526.8
+		if(PosZ > 530.0 && PlayerInfo[giveplayer_id][pInt] == 0) //the highest land point in sa = 526.8
 		{
 			//SetPlayerInterior(playerid,1);
 			PlayerInfo[getplayer_id][pInt] = 1;
@@ -24692,7 +24692,7 @@ CMD:slap(playerid, params[])
 		new Float:shealth;
 		new Float:slx, Float:sly, Float:slz;
 
-		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pZG] >= 2)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -24741,7 +24741,7 @@ CMD:ucisz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -24802,7 +24802,7 @@ CMD:kick(playerid, params[])
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pZG] >= 1)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -24820,7 +24820,7 @@ CMD:kick(playerid, params[])
 		            }
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-  					if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+  					if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
   					{
       					SendClientMessage(giveplayerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
@@ -25145,7 +25145,7 @@ CMD:zamroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pZG] >= 7)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -25186,7 +25186,7 @@ CMD:odmroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pZG] >= 6)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -25753,7 +25753,7 @@ CMD:ap(playerid)
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
     if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pAdmin] > 0)
         SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /supportduty /tickets");
-	if (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+	if (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /KickEx");
         SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo");
@@ -35011,6 +35011,7 @@ CMD:teleturniej(playerid,params[])
 }
 
 CMD:zamek(playerid, params[])
+{
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 725.7198,-1439.3527,13.5391) ||
 	IsPlayerInRangeOfPoint(playerid, 5.0, 734.0619, -1451.6720, 22.5920) ||
 	IsPlayerInRangeOfPoint(playerid, 5.0, 725.5906, -1450.9875, 17.7069) ||
