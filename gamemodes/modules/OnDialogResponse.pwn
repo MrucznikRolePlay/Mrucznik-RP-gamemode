@@ -9691,7 +9691,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		}
 		if(dialogid == 8000)
-		{/*
+		{
 		    if(response)
 		    {
 		        switch(listitem)
@@ -9724,7 +9724,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
 		        }
-		    }*/
+		    }
 		}
 		if(dialogid == 8001)
 		{
