@@ -15989,8 +15989,8 @@ CMD:icons(playerid)
 	return 1;
 }
 
-CMD:togog(playerid) return cmd_blokujog(playerid);
-CMD:zablokujog(playerid) return cmd_blokujog(playerid);
+CMD:togog(playerid) return blokujog(playerid);
+CMD:zablokujog(playerid) return blokujog(playerid);
 CMD:blokujog(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -21845,7 +21845,7 @@ CMD:newbie(playerid, params[])
 			}
 			else if(PlayerInfo[playerid][pNewAP] == 5)
 			{
-				format(nobchat, sizeof(nobchat), "(({FFD700} Skrypter %s: {8D8DFF}%s ))", sendername, params);
+				format(nobvhat, sizeof(nobchat), "(({FFD700} Skrypter %s: {8D8DFF}%s ))", sendername, params);
 			}
 	 		else if(PlayerInfo[playerid][pDonateRank] == 10)
 			{
@@ -24017,7 +24017,7 @@ CMD:goto(playerid, params[])
 CMD:tp(playerid, params[])
 {
 
-	new getplayer_id, giveplayer_id;
+	new getplayer_id, giveplayer_id, string[128];
 	if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pNewAP] == 5)
 	{
 		if(sscanf(params, "uu", getplayer_id, giveplayer_id))
@@ -24052,7 +24052,7 @@ CMD:tp(playerid, params[])
 			PlayerInfo[getplayer_id][pInt] = PlayerInfo[giveplayer_id][pInt];
 			PlayerInfo[getplayer_id][pLocal] = PlayerInfo[giveplayer_id][pLocal];
 		}
-		if(PosZ > 530.0 && PlayerInfo[giveplayer_id][pInt] == 0) //the highest land point in sa = 526.8
+		if(plocz > 530.0 && PlayerInfo[giveplayer_id][pInt] == 0) //the highest land point in sa = 526.8
 		{
 			//SetPlayerInterior(playerid,1);
 			PlayerInfo[getplayer_id][pInt] = 1;
@@ -25755,25 +25755,28 @@ CMD:ap(playerid)
         SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /supportduty /tickets");
 	if (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 	{
-		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /KickEx");
-        SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /slap /aj /check /freeze /unfreeze /ucisz");
+        SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /ban /goto /spec /respawn /a(dmin chat) /cmdinfo");
     }
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
-		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /check /sban /sblock /goto /spec /a(dmin chat)");
 	}
 	if (PlayerInfo[playerid][pNewAP] == 5)
 	{
 
-		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /KickEx");
-        SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo");
-		SendClientMessage(playerid, COLOR_GRAD1, "*4* Skrypter *** /fly /togw /sblock /goto /spec /a(dmin) chat");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* Skrypter *** Ta ranga ma wyodr�bione komendy.");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* Skrypter *** /slap /aj /check /freeze /unfreeze /ucisz");
+        SendClientMessage(playerid, COLOR_GRAD1, "*4* Skrypter *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* Skrypter *** /fly /togw /sblock /goto /spec /a(dmin chat) /gethere");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* Skrypter *** /podglad /getposp /gotopos  /gotols /gotoszpital");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* Skrypter *** /gotolv /gotosf /gotoin /gotostad /gotojet /gotocar /gotomark /mark");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /slap /kick /aj /bp /warn /block /ban /pblock /pban /pwarn /paj");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /freeze /unfreeze /mute /kill /dpa /mark /gotomark");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setint /getint /setvw /getvw /wybieralka /clearwlall");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setint /getint /setvw /getvw /clearwlall");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /mordinfo /gotomechy /podglad /gotocar /ip");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /check /pojazdygracza /checkprawko /sb /pokazcb");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /carjump /goto /up /getcar /gethere");
@@ -35011,7 +35014,6 @@ CMD:teleturniej(playerid,params[])
 }
 
 CMD:zamek(playerid, params[])
-{
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 725.7198,-1439.3527,13.5391) ||
 	IsPlayerInRangeOfPoint(playerid, 5.0, 734.0619, -1451.6720, 22.5920) ||
 	IsPlayerInRangeOfPoint(playerid, 5.0, 725.5906, -1450.9875, 17.7069) ||
