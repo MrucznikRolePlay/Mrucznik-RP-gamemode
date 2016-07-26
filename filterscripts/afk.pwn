@@ -8,24 +8,23 @@ new afk_timer[MAX_PLAYERS];
 forward PlayerAFK(playerid, afktime, breaktime);
 public PlayerAFK(playerid, afktime, breaktime)
 {
-	new caption[32];
-	if(afktime > 60)
-		format(caption, sizeof(caption), "[AFK] %d sekund.", afktime);
-	else
-		format(caption, sizeof(caption), "[AFK] %d minut %d sekund.", afktime/60, afktime%60);
-	
-	if(afktime > 300)
-	{
-		SendClientMessage(playerid, 0xAA3333AA, "Zostałeś skickowany za zbyt długie AFK (powyżej 5 minut)");
-		SetTimerEx("KickEx", 500, false, "i", playerid);
-	}
-	else
-	{
-		SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
-	}
-	
 	if(IsPlayerPaused(playerid))
 	{
+		new caption[32];
+		if(afktime < 60)
+			format(caption, sizeof(caption), "[AFK] %d sekund.", afktime);
+		else
+			format(caption, sizeof(caption), "[AFK] %d min. %d sekund.", afktime/60, afktime%60);
+		
+		if(afktime > 300)
+		{
+			SendClientMessage(playerid, 0xAA3333AA, "Zostałeś skickowany za zbyt długie AFK (powyżej 5 minut)");
+			SetTimerEx("KickEx", 500, false, "i", playerid);
+		}
+		else
+		{
+			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+		}
 		afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, afktime+1, 0);
 	}
 	else
