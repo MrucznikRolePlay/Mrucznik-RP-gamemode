@@ -4,6 +4,7 @@
 #undef MAX_PLAYERS
 #define MAX_PLAYERS 500
 
+new afk_timer[MAX_PLAYERS];
 new afkCzas[MAX_PLAYERS];
 
 forward oneSecond();
@@ -13,10 +14,6 @@ public oneSecond()
 	{
 		if(IsPlayerConnected(i) && !IsPlayerNPC(i) && IsPlayerPaused(i))
 		{
-		    //if(afkCzas[i] >= 600)
-			//{
-			//	Kick(i);
-			//}
 			if(afkCzas[i] >= 300)
 			{
 				new caption[32];
@@ -54,29 +51,32 @@ public oneSecond()
 				SetPlayerChatBubble(i, caption, 0x33AA33AA, 20.0, 1500);
 			}
 			afkCzas[i]++;
+			KillTimer(afk_timer[i]);
 		}
 	}
 
 	return 1;
 }
-
+forward ThreeMinutes(playerid);
+public ThreeMinutes(playerid)
+{
+	afkCzas[playerid] = 0;
+	return 1;
+}
 public OnFilterScriptInit()
 {
 	SetTimer("oneSecond", 1000, true);
 
 	return 1;
 }
-
-public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+public OnPlayerResume(playerid, time)
 {
-	afkCzas[playerid] = 0;
-
+    afk_timer[playerid] = SetTimerEx("ThreeMinutes", 180000, false, "i", playerid);
 	return 1;
 }
 
 public OnPlayerConnect(playerid)
 {
 	afkCzas[playerid] = 0;
-
 	return 1;
 }
