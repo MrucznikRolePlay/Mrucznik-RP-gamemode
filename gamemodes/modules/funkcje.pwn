@@ -7525,11 +7525,11 @@ public OPCLogin(playerid)
     new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
 
-    new rand = random(AUDIO_LoginTotal);
+    //new rand = random(AUDIO_LoginTotal);
     TogglePlayerControllable(playerid, 0);
-    new str[128];
-    format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
-    PlayAudioStreamForPlayer(playerid, str);
+    // str[128];
+    //format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
+    //PlayAudioStreamForPlayer(playerid, str);
 
     SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
     SetPlayerCameraPos(playerid, 1868.1099, -1936.2098, 48.0756);

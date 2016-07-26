@@ -1340,7 +1340,7 @@ CMD:poscig(playerid, params[])
 					{
 						if(poscig[giveplayerid] == 1)
 						{
-							SendClientMessage(playerid, COLOR_GREY, "   Ten gracz nie ma ju¿ poœcig!");
+							SendClientMessage(playerid, COLOR_GREY, "   Ten gracz ma ju¿ poœcig!");
 							return 1;
 						}
 						SendClientMessage(playerid,COLOR_LIGHTBLUE,"Rozpocza³eœ poœcig! Trwa on 7 minut.");
@@ -1851,6 +1851,11 @@ CMD:obezwladnij(playerid, params[])
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "U¿yj: /ob [ID gracza]");
 			return 1;
+		}
+		if(giveplayerid == playerid)
+		{
+		    SendClientMessage(playerid, COLOR_WHITE, "Nie mo¿esz obezw³adniæ samego siebie!");
+		    return 1;
 		}
 		new Float:x, Float:y, Float:z;
 		GetPlayerPos(giveplayerid, x, y, z);
@@ -2854,7 +2859,11 @@ CMD:yo(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD2, "U¿yj: /yo [ID gracza]");
 			return 1;
 		}
-
+        if(Spectate[playa] != INVALID_PLAYER_ID)
+		{
+			SendClientMessage(playerid, COLOR_GRAD1, "Ten gracz jest za daleko.");
+			return 1;
+		}
 		if (ProxDetectorS(5.0, playerid, playa))
 		{
 		    if(IsPlayerConnected(playa))
@@ -3046,9 +3055,11 @@ CMD:witaj(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD2, "U¿yj: /witaj [ID gracza]");
 			return 1;
 		}
-
-
-
+        if(Spectate[playa] != INVALID_PLAYER_ID)
+		{
+			SendClientMessage(playerid, COLOR_GRAD1, "Ten gracz jest za daleko.");
+			return 1;
+		}
 		if (ProxDetectorS(5.0, playerid, playa))
 		{
 		    if(IsPlayerConnected(playa))
@@ -3088,6 +3099,11 @@ CMD:caluj(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
+		            if(Spectate[playa] != INVALID_PLAYER_ID)
+					{
+						SendClientMessage(playerid, COLOR_GRAD1, "Ten gracz jest za daleko.");
+						return 1;
+					}
   					new nick[200];
 					new witany[MAX_PLAYER_NAME];
 					SendClientMessage(playa, COLOR_WHITE, "Calujesz siê");
@@ -3894,7 +3910,7 @@ CMD:pokazdowod(playerid, params[])
 	                else if(PlayerInfo[playerid][pJob] == 12) { jtext = "Bokser"; }
                     else if(PlayerInfo[playerid][pJob] == 14) { jtext = "Taksówkarz"; }
                     else if(PlayerInfo[playerid][pJob] == 15) { jtext = "Gazeciarz"; }
-                    else if(PlayerInfo[playerid][pJob] == 16) { jtext = "Tirowiec"; }
+                    else if(PlayerInfo[playerid][pJob] == 16) { jtext = "Kurier"; }
                     else { jtext = "Bezrobotny"; }
 			       //
        				SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Dowód Osobisty ______________|");
@@ -9645,6 +9661,7 @@ CMD:spec(playerid, params[])
             SetPlayerColor(playerid,COLOR_SPEC);
 			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"));
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
+			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);
             if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
             else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
@@ -13193,8 +13210,8 @@ CMD:sejf(playerid) return cmd_sejfpomoc(playerid);
 CMD:sejfpanel(playerid) return cmd_sejfpomoc(playerid);
 CMD:sejfpomoc(playerid)
 {
-	SendClientMessage(playerid, COLOR_PANICRED, "Sejf wy³¹czony na czas naprawy. Przepraszamy za uniedogodnienia.");
-    /*if(IsPlayerConnected(playerid))
+	//SendClientMessage(playerid, COLOR_PANICRED, "Sejf wy³¹czony na czas naprawy. Przepraszamy za uniedogodnienia.");
+    if(IsPlayerConnected(playerid))
     {
 	    if(gPlayerLogged[playerid] == 1)
 	    {
@@ -13239,7 +13256,7 @@ CMD:sejfpomoc(playerid)
 		        }
 		    }
 	    }
-	}*/
+	}
 	return 1;
 }
 
@@ -14530,7 +14547,12 @@ CMD:plac(playerid, params[])
 			    {
 			        if(PlayerInfo[giveplayerid][pLocal] == 106)
 					{
-						SendClientMessage(playerid, COLOR_GRAD1, "Komenda nie dzia³a w tym miejscuu");
+						SendClientMessage(playerid, COLOR_GRAD1, "Komenda nie dzia³a w tym miejscu.");
+						return 1;
+					}
+			        if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
+					{
+						SendClientMessage(playerid, COLOR_GRAD1, "Ten gracz jest za daleko.");
 						return 1;
 					}
 					if (ProxDetectorS(5.0, playerid, giveplayerid))
@@ -14573,7 +14595,7 @@ CMD:plac(playerid, params[])
 					}
 					else
 					{
-						SendClientMessage(playerid, COLOR_GRAD1, "   Jesteœ zadaleko od gracza.");
+						SendClientMessage(playerid, COLOR_GRAD1, "   Jesteœ za daleko od gracza.");
 					}
 				}//invalid id
 			}
@@ -14634,6 +14656,11 @@ CMD:teczka(playerid, params[])
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
+			        if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
+					{
+						SendClientMessage(playerid, COLOR_GRAD1, "Ten gracz jest za daleko.");
+						return 1;
+					}
 			        if(PlayerInfo[giveplayerid][pLocal] == 106)
 					{
 						SendClientMessage(playerid, COLOR_GRAD1, "Komenda nie dzia³a w tym miejscuu");
@@ -23879,6 +23906,91 @@ CMD:gotojet(playerid)
 	return 1;
 }
 
+CMD:tp(playerid, params[])
+{
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+
+    if(IsPlayerConnected(playerid))
+    {
+        new plo, plo1;
+		if( sscanf(params, "k<fix>d", plo1, plo))
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /tp [playerid/CzêœæNicku] [playerid/CzêœæNicku]");
+			return 1;
+		}
+		new Float:plocx,Float:plocy,Float:plocz;
+
+		if (IsPlayerConnected(plo) && IsPlayerConnected(plo1))
+		{
+		    if(plo != INVALID_PLAYER_ID && plo1 != INVALID_PLAYER_ID)
+		    {
+				GetPlayerName(plo1, sendername, sizeof(sendername));
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL))
+				{
+					//SZUKANIE ADMINOW I P@ na serwerze
+
+					new bool:liczydelko=false;
+					foreach(Player, i)
+					{
+						if(IsPlayerConnected(i))
+						{
+							if(PlayerInfo[i][pAdmin] >= 1 || (PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] < 4))
+							{
+								liczydelko=true;
+								break;
+							}
+						}
+					}
+					//koniec szukania adminkow
+					if(liczydelko==true && PlayerInfo[playerid][pZG]==10)
+					{
+						SendClientMessage(playerid, COLOR_GRAD1, "   Sa Admini wiec nie mozesz uzyc tej komendy!");
+						return 1;
+					}
+					if(Spectate[playerid] != INVALID_PLAYER_ID)
+					{
+						Spectate[playerid] = INVALID_PLAYER_ID;
+					}
+					GetPlayerPos(plo, plocx, plocy, plocz);
+					SetPlayerInterior(plo1, GetPlayerInterior(plo));
+					SetPlayerVirtualWorld(plo1, GetPlayerVirtualWorld(plo));
+					if(PlayerInfo[plo][pInt] > 0)
+					{
+						PlayerInfo[plo1][pInt] = PlayerInfo[plo][pInt];
+						PlayerInfo[plo1][pLocal] = PlayerInfo[plo][pLocal];
+					}
+					if(plocz > 530.0 && PlayerInfo[plo][pInt] == 0) //the highest land point in sa = 526.8
+					{
+						//SetPlayerInterior(playerid,1);
+						PlayerInfo[plo1][pInt] = 1;
+					}
+					if (GetPlayerState(plo1) == 2)
+					{
+						new tmpcar = GetPlayerVehicleID(plo1);
+						SetVehiclePos(tmpcar, plocx, plocy+4, plocz);
+					}
+					else
+					{
+						SetPlayerPosEx(plo1,plocx,plocy+2, plocz);
+					}
+					SendClientMessage(plo1, COLOR_GRAD1, "   Zosta³eœ teleportowany");
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy!");
+				}
+			}
+		}
+		else
+		{
+			format(string, sizeof(string), "   %d lub %d nie jest aktywnym graczem.", plo, plo1);
+			SendClientMessage(playerid, COLOR_GRAD1, string);
+		}
+	}
+	return 1;
+}
+
 CMD:goto(playerid, params[])
 {
 	new string[128];
@@ -25759,6 +25871,7 @@ CMD:skill(playerid, params[])
 		SendClientMessage(playerid, COLOR_GREY, "| 3: Prostytutka         8: Busiarz");
 		SendClientMessage(playerid, COLOR_GREY, "| 4: Diler Dragów        9: Boxer");
 		SendClientMessage(playerid, COLOR_GREY, "| 5: Z³odziej aut        10: Diler Broni");
+		SendClientMessage(playerid, COLOR_GREY, "| 11: Kurier             12: --------");
 		SendClientMessage(playerid, COLOR_WHITE, "|________________________________________________|");
 		return 1;
 	}
@@ -25862,15 +25975,15 @@ CMD:skill(playerid, params[])
 		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Dilera Broni s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz sprzedaæ %d broni aby zwiêkszyæ skill.", 400 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
 		else if(level >= 401) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Dilera Broni s¹ na poziomie = 5."); }
 	}
-    /*else if (level == 13)//Trucker
+    else if (level == 11)//Kurier
 	{
 		level = PlayerInfo[playerid][pTruckSkill];
-		if(level >= 0 && level <= 50) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Truckera s¹ na poziomie = 1."); format(string, sizeof(string), "Musisz przewiezc %d paczek aby zwiêkszyæ skill.", (50 - level)*10); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 51 && level <= 100) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Truckera s¹ na poziomie = 2."); format(string, sizeof(string), "Musisz przewiezc %d paczek aby zwiêkszyæ skill.", (100 - level)*10); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 101 && level <= 200) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Truckera s¹ na poziomie = 3."); format(string, sizeof(string), "Musisz przewiezc %d paczek aby zwiêkszyæ skill.", (200 - level)*10); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Truckera s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz przewiezc %d paczek aby zwiêkszyæ skill.", (400 - level)*10); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 401) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Truckera s¹ na poziomie = 5."); }
-	}*/
+		if(level >= 0 && level <= 50) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kuriera s¹ na poziomie = 1."); format(string, sizeof(string), "Musisz przewiezc %d paczek aby zwiêkszyæ skill.", (50 - level)*5); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 51 && level <= 100) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kuriera s¹ na poziomie = 2."); format(string, sizeof(string), "Musisz przewiezc %d paczek aby zwiêkszyæ skill.", (100 - level)*5); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 101 && level <= 200) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kuriera s¹ na poziomie = 3."); format(string, sizeof(string), "Musisz przewiezc %d paczek aby zwiêkszyæ skill.", (200 - level)*5); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kuriera s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz przewiezc %d paczek aby zwiêkszyæ skill.", (400 - level)*5); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 401) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kuriera s¹ na poziomie = 5."); }
+	}
 	else
 	{
         return cmd_skill(playerid, "");
@@ -30238,7 +30351,7 @@ CMD:materialy(playerid, params[])
 				    ZabierzKase(playerid, price);
 				    MatsHolding[playerid] = moneys;
 				    SetPlayerCheckpoint(playerid, 2218.6000976563,-2228,13.5, 30);
-				    SetTimerEx("Matsowanie", 2*60000 ,0,"d",playerid);
+				    SetTimerEx("Matsowanie", 1*90000 ,0,"d",playerid);
 				    MatsGood[playerid] = 1;
 				}
 				else
@@ -36808,7 +36921,7 @@ CMD:togname(playerid)
     return 1;
 }
 
-CMD:glosuj(playerid)
+/*CMD:glosuj(playerid)
 {
 	if(gPlayerLogged[playerid] == 1)
 	{
@@ -36844,5 +36957,5 @@ CMD:glosuj(playerid)
 			SendClientMessage(playerid, COLOR_GRAD2, "Nie masz 3 lvl.");
 		}
 	}
-}
+}*/
 //end.
