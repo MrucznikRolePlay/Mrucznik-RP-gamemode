@@ -1252,7 +1252,18 @@ public CustomPickups()
 			{
 				switch (OrderReady[i])
 				{
-					case 1:
+				    case 1:
+					{
+						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
+						DajKase(i, - 5000);
+						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
+						SetPlayerArmour(i, 90);
+						SetPlayerHealth(i, 100);
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+					}
+					case 2:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
 						DajKase(i, - 5000);
@@ -1264,7 +1275,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 2:
+					case 3:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1);
 						DajKase(i, - 6000);
@@ -1277,7 +1288,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 3:
+					case 4:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1);
 						DajKase(i, - 6000);
@@ -1290,7 +1301,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 4:
+					case 5:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
 						DajKase(i, - 8000);
@@ -1304,7 +1315,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 5:
+					case 6:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
 						DajKase(i, - 8000);
@@ -1318,7 +1329,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 6:
+					case 7:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
 						DajKase(i, - 8500);
@@ -1332,7 +1343,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 7:
+					case 8:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
 						DajKase(i, - 8500);
@@ -1346,7 +1357,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 8:
+					case 9:
 					{
 						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
 						DajKase(i, - 10000);
@@ -1355,6 +1366,20 @@ public CustomPickups()
 						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
 						PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 207;
 						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
+						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
+						SetPlayerArmour(i, 90);
+						SetPlayerHealth(i, 100);
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+					}
+					case 10:
+					{
+						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
+						DajKase(i, - 10000);
+						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
+						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
+						PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 207;
+						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);

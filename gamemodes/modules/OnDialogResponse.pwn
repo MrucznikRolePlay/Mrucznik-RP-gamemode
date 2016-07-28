@@ -27,7 +27,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
 		}
     }
-	if(dialogid == D_KUBICWEL)
+	/*if(dialogid == D_KUBICWEL)
 	{
 		if(response)
 		{
@@ -38,7 +38,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string,sizeof(string), "Odda³eœ g³os na %s", inputtext);
 			SendClientMessage(playerid, COLOR_GREEN, string);
 		}
-	}
+	}*/
 	//2.5.2
 	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
@@ -7089,6 +7089,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     if(IsCarOwner(playerid, veh))
 					{
 						ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
+						MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
 						SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
 						DajKase(playerid, -1500);
 					}
