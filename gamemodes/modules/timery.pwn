@@ -1,6 +1,64 @@
 //timery.pwn
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
 
+//AFK timer
+forward PlayerAFK(playerid, afktime, breaktime);
+public PlayerAFK(playerid, afktime, breaktime)
+{
+	if(IsPlayerPaused(playerid))
+	{
+		new caption[32];
+		if(afktime < 60)
+			format(caption, sizeof(caption), "[AFK] %d sekund.", afktime);
+		else
+			format(caption, sizeof(caption), "[AFK] %d min. %d sekund.", afktime/60, afktime%60);
+
+		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 || afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
+		{
+		    if(afktime > 1800)
+		    {
+				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
+				SetTimerEx("KickEx", 500, false, "i", playerid);
+			}
+        	SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+		}
+		else if(afktime > 600 && PlayerInfo[playerid][pDonateRank] >= 1)
+		{
+		    if(afktime > 1200)
+		    {
+				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (20 minut).");
+				SetTimerEx("KickEx", 500, false, "i", playerid);
+			}
+			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+		}
+		else if(afktime > 600)
+		{
+			SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (10 minut).");
+			SetTimerEx("KickEx", 500, false, "i", playerid);
+		}
+		else
+		{
+			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+		}
+		afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, afktime+1, 0);
+	}
+	else
+	{
+		if(breaktime > afktime || breaktime > 180)
+		{
+			new name[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, name, sizeof(name));
+			printf("%s byl afk przez %d", name, afktime);
+			afk_timer[playerid] = -1;
+		}
+		else
+		{
+			afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, afktime, breaktime+1);
+		}
+	}
+	return 1;
+}
+
 //PADZIOCH
 forward syncanim(playerid);
 public syncanim(playerid)
@@ -1150,7 +1208,7 @@ public Production()
 		if(PlayerInfo[i][pFishes] >= 5) { if(FishCount[i] >= 3) { PlayerInfo[i][pFishes] = 0; } else { FishCount[i] += 1; } }
 		if(PlayerDrunk[i] > 0) { PlayerDrunkTime[i] = 0; GameTextForPlayer(i, "~p~Jestes mniej pijany~n~~r~Pijaku", 3500, 1); }
 		if(GetPlayerDrunkLevel(i) < 1999 && PlayerDrunk[i] > 0) { PlayerDrunk[i] = 0; PlayerDrunkTime[i] = 0; GameTextForPlayer(i, "~p~Wytrzezwiales~n~~r~Pijaku", 3500, 1); }
-		if(PlayerInfo[i][pPayDay] < 6) { PlayerInfo[i][pPayDay] += 1; } //+ 5 min to PayDay anti-abuse
+		if(PlayerInfo[i][pPayDay] < 6 && !IsPlayerPaused(i)) { PlayerInfo[i][pPayDay] += 1; } //+ 5 min to PayDay anti-abuse
 		new wl = PoziomPoszukiwania[i];
 		PlayerInfo[i][pWL] = wl;
 	}
@@ -1252,7 +1310,18 @@ public CustomPickups()
 			{
 				switch (OrderReady[i])
 				{
-					case 1:
+				    case 1:
+					{
+						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
+						DajKase(i, - 5000);
+						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
+						SetPlayerArmour(i, 90);
+						SetPlayerHealth(i, 100);
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+					}
+					case 2:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
 						DajKase(i, - 5000);
@@ -1264,7 +1333,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 2:
+					case 3:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1);
 						DajKase(i, - 6000);
@@ -1277,7 +1346,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 3:
+					case 4:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1);
 						DajKase(i, - 6000);
@@ -1290,7 +1359,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 4:
+					case 5:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
 						DajKase(i, - 8000);
@@ -1304,7 +1373,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 5:
+					case 6:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
 						DajKase(i, - 8000);
@@ -1318,7 +1387,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 6:
+					case 7:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
 						DajKase(i, - 8500);
@@ -1332,7 +1401,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 7:
+					case 8:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
 						DajKase(i, - 8500);
@@ -1346,7 +1415,7 @@ public CustomPickups()
 						SetPlayerHealth(i, 100);
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
-					case 8:
+					case 9:
 					{
 						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
 						DajKase(i, - 10000);
@@ -1355,6 +1424,20 @@ public CustomPickups()
 						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
 						PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 207;
 						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
+						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
+						SetPlayerArmour(i, 90);
+						SetPlayerHealth(i, 100);
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+					}
+					case 10:
+					{
+						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
+						DajKase(i, - 10000);
+						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
+						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
+						PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 207;
+						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);

@@ -1547,10 +1547,10 @@ HandlePlayerItemSelection(playerid, selecteditem)
 
 stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 {
-	DestroyDynamicObject(Barier[frac][id]);
-	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
-	if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
-	BarierState[frac][id] = true;
+    DestroyDynamicObject(Barier[frac][id]);
+    new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
+    if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
+    BarierState[frac][id] = true;
     return 1;
 }
 
@@ -1582,7 +1582,7 @@ stock BARIERKA_Init()
 
 public EditObj(playerid, obj)
 {
-    EditDynamicObject(playerid, obj);
+    EditObject(playerid, obj);
 }
 
 SetPlayerWeatherEx(playerid, id)
@@ -4179,7 +4179,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
 			SendClientMessage(playerid, COLOR_GRAD6,coordsstring);
@@ -9872,7 +9872,7 @@ stock Scena_CreateAt(Float:x, Float:y, Float:z)
 
     //Napis mid
     ScenaScreenObject = CreateDynamicObject(4988, 6.5, 0.00000, 4.18430,   0.00000, 0.00000, 100.0000);
-    SetDynamicObjectMaterialText(ScenaScreenObject, 0, "JKUBI", OBJECT_MATERIAL_SIZE_512x256, "Arial", 72, 1, 0xFFFFFFFF, 0, 1);
+    SetDynamicObjectMaterialText(ScenaScreenObject, 0, "KUBI ©", OBJECT_MATERIAL_SIZE_512x256, "Arial", 72, 1, 0xFFFFFFFF, 0, 1);
     //
     CreateDynamicObject(2232, -2.04205, 8.23906, 0.73210,   0.00000, 0.00000, -72.24001);
     CreateDynamicObject(2232, -2.04225, -8.23434, 0.73210,   0.00000, 0.00000, -110.27997);
