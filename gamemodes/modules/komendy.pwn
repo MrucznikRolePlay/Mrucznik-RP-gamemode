@@ -10179,7 +10179,11 @@ CMD:naucz(playerid, params[])
 		}
 		if(PlayerInfo[playerid][pJob] == 12 || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
+<<<<<<< HEAD
 			if(GetDistanceBetweenPlayers(playerid,playa) < 5 && obezwladniony[playa] != 1)
+=======
+			if(GetDistanceBetweenPlayers(playerid,playa) < 5 || obezwladniony[playa] == 1)
+>>>>>>> origin/PECET
 			{
 				if(styl > 3 || styl < 1)
 				{
