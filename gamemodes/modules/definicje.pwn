@@ -127,7 +127,7 @@
 #define FRAC_LSMC   4
 #define FRAC_LCN    5
 #define FRAC_YKZ    6
-#define FRAC_BOR    7
+#define FRAC_RR    	7 //Rangers Regiment
 #define FRAC_HA     8
 #define FRAC_SN     9
 #define FRAC_KT     10

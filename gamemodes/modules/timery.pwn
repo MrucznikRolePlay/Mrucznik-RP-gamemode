@@ -1569,7 +1569,7 @@ public JednaSekundaTimer()
 			cop = PDkuje[i];
 			if(IsPlayerConnected(cop))
 			{
-				if(IsACop(cop) || IsABOR(cop))
+				if(IsACop(cop) || IsARR(cop))
 				{
 					if(GetPlayerState(cop) == 1)
 					{

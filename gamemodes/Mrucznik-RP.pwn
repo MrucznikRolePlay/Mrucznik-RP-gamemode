@@ -1551,10 +1551,9 @@ SetPlayerSpawnPos(playerid)
 						{
 						    SetPlayerPosEx(playerid, 2797.4734,-1095.1035,30.7188);
 						}
-						case FRAC_BOR: //7
+						case FRAC_RR: //7
 						{
-						    SetPlayerPosEx(playerid, 1512.9001,-1471.3433,9.5000);
-							//SetPlayerPosEx(playerid, 1525.9830, -1453.0792, 68.0118);
+						    SetPlayerPosEx(playerid, 2519.0017, -2456.7346, 14.1171);
 						}
 						case FRAC_HA: //8
 						{
@@ -5816,7 +5815,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	if(newkeys & KEY_CROUCH && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
 	{
-		if((IsACop(playerid) || IsABOR(playerid) && PlayerInfo[playerid][pRank] >= 1) && OnDuty[playerid] == 1)
+		if((IsACop(playerid) || IsARR(playerid) && PlayerInfo[playerid][pRank] >= 1) && OnDuty[playerid] == 1)
 		{
 			veh = GetPlayerVehicleID(playerid);
 			if(veh == 148 || veh == 43 || IsAKogutCar(veh))

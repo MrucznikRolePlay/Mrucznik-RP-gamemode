@@ -2119,7 +2119,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		            	if(IsACop(playerid) || IsABOR(playerid))
+		            	if(IsACop(playerid) || IsARR(playerid))
            				{
 			                SetPlayerPosEx(playerid,1569.0193, -1690.5186, 5.9972);
 			                SetPlayerVirtualWorld(playerid,0);
@@ -2180,7 +2180,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 5:
 		            {
-		           		 if(IsACop(playerid) || IsABOR(playerid))
+		           		 if(IsACop(playerid) || IsARR(playerid))
            				{
 			                SetPlayerPosEx(playerid,1565.0798, -1665.6580, 28.4782);
 			                SetPlayerVirtualWorld(playerid,0);
@@ -2238,7 +2238,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        case 0:
 			        {
-           				if(IsAUrzednik(playerid) || IsABOR(playerid))//zaplecze
+           				if(IsAUrzednik(playerid) || IsARR(playerid))//zaplecze
            				{
 					        SetPlayerPosEx(playerid,1412.3348388672, -1790.5777587891, 15.370599746704);
 					        SetPlayerVirtualWorld(playerid,0);
@@ -2312,7 +2312,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					case 0:
 					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
+						if(!IsARR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1510.7217, -1470.1677, 9.7360);
 						SetPlayerVirtualWorld (playerid, 0);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
@@ -2320,7 +2320,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1:
 					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
+						if(!IsARR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid,1483.8867, -1491.1559, 13.9085);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						TogglePlayerControllable(playerid,0);
@@ -2341,7 +2341,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 3:
 					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
+						if(!IsARR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1482.2319, -1531.1719, 70.0080);
 						SetPlayerVirtualWorld (playerid, 80) ;
 						TogglePlayerControllable(playerid,0);
@@ -2351,7 +2351,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 4:
 					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
+						if(!IsARR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1495.1107, -1468.8528, 40.8256);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Dach");

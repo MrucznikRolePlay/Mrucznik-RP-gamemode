@@ -57,7 +57,7 @@ MruMySQL_Connect()
 		SendRconCommand("exit");
 		return 0;
 	}
-    mysql_debug(0); //DISABLE!!!
+    mysql_debug(1); //DISABLE!!!
     mysql_query("SET NAMES 'cp1250'");
 	return 1;
 }

@@ -2027,7 +2027,7 @@ IsAUrzednik(playerid)
 	return 0;
 }
 
-IsABOR(playerid)
+IsARR(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -2369,17 +2369,17 @@ DajBronieFrakcyjne(playerid)
 	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
 	    }
 	}
-	else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7)
+	else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7) // RR
 	{
-	    if(PlayerInfo[playerid][pGun1] == 0)
+	    if(PlayerInfo[playerid][pGun1] == 0) // Pa³ka policyjna
 	    {
 	        PlayerInfo[playerid][pGun1] = 3; PlayerInfo[playerid][pAmmo1] = 1;
 	    }
-	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
+	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7) //Deagle
 	    {
 	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 207;
 	    }
-	    if(PlayerInfo[playerid][pGun3] == 0 || PlayerInfo[playerid][pGun3] == 25 && PlayerInfo[playerid][pAmmo3] < 50 || PlayerInfo[playerid][pAmmo3] <= 5)
+	    if(PlayerInfo[playerid][pGun3] == 0 || PlayerInfo[playerid][pGun3] == 25 && PlayerInfo[playerid][pAmmo3] < 50 || PlayerInfo[playerid][pAmmo3] <= 5) //Shotgun
 	    {
 	        PlayerInfo[playerid][pGun3] = 25; PlayerInfo[playerid][pAmmo3] = 100;
 	    }
@@ -2387,10 +2387,23 @@ DajBronieFrakcyjne(playerid)
 	    {
 	        PlayerInfo[playerid][pGun4] = 29; PlayerInfo[playerid][pAmmo4] = 530;
 	    }
+		if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 31 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
+	    {
+	        PlayerInfo[playerid][pGun5] = 31; PlayerInfo[playerid][pAmmo5] = 250;
+	    }
+		if(PlayerInfo[playerid][pGun6] == 0 || PlayerInfo[playerid][pGun6] == 34 && PlayerInfo[playerid][pAmmo6] < 10 || PlayerInfo[playerid][pAmmo6] <= 20)
+	    {
+	        PlayerInfo[playerid][pGun6] = 34; PlayerInfo[playerid][pAmmo6] = 20;
+	    }
+		if(PlayerInfo[playerid][pGun8] == 0 || PlayerInfo[playerid][pGun8] == 17 && PlayerInfo[playerid][pAmmo8] < 10 || PlayerInfo[playerid][pAmmo8] <= 2)
+	    {
+	        PlayerInfo[playerid][pGun8] = 17; PlayerInfo[playerid][pAmmo8] = 20;
+	    }
 	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 500 || PlayerInfo[playerid][pAmmo9] <= 30)
 	    {
 	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 10000;
 	    }
+		
 	}
 	else if(PlayerInfo[playerid][pMember] == 8 || PlayerInfo[playerid][pLider] == 8)
 	{
@@ -4011,7 +4024,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
-			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1)
+			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsARR(playerid) && OnDuty[playerid] == 1)
 			    {
       				PoziomPoszukiwania[playerid] = 0;
 				}
@@ -4024,7 +4037,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 				{
 					if(IsPlayerConnected(i))
 					{
-					    if(IsACop(i))
+					    if(IsACop(i) || IsARR(playerid))
 					    {
 					        if(gCrime[i] == 0)
 					        {
