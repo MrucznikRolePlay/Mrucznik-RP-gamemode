@@ -13,11 +13,11 @@ public PlayerAFK(playerid, afktime, breaktime)
 		else
 			format(caption, sizeof(caption), "[AFK] %d min. %d sekund.", afktime/60, afktime%60);
 
-		if(afktime > 10)
+		if(afktime > 600)
 		{
 		    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 			{
-		    	if(afktime > 30)
+		    	if(afktime > 1800)
 		    	{
 					SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
 					SetTimerEx("KickEx", 500, false, "i", playerid);
@@ -26,7 +26,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			}
 			else if(PlayerInfo[playerid][pDonateRank] >= 1)
 			{
-		    	if(afktime > 20)
+		    	if(afktime > 1200)
 		    	{
 					SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (20 minut).");
 					SetTimerEx("KickEx", 500, false, "i", playerid);
