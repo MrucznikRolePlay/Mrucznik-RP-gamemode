@@ -13,26 +13,26 @@ public PlayerAFK(playerid, afktime, breaktime)
 		else
 			format(caption, sizeof(caption), "[AFK] %d min. %d sekund.", afktime/60, afktime%60);
 
-		if(afktime > 600)
+		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
-		    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+			if(afktime > 1800)
 			{
-		    	if(afktime > 1800)
-		    	{
-					SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
-					SetTimerEx("KickEx", 500, false, "i", playerid);
-				}
-        		SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
+				SetTimerEx("KickEx", 500, false, "i", playerid);
 			}
-			else if(PlayerInfo[playerid][pDonateRank] >= 1)
+			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+		}
+		else if(afktime > 600 && PlayerInfo[playerid][pDonateRank] >= 1)
+		{
+			if(afktime > 1200)
 			{
-		    	if(afktime > 1200)
-		    	{
-					SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (20 minut).");
-					SetTimerEx("KickEx", 500, false, "i", playerid);
-				}
-				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (20 minut).");
+				SetTimerEx("KickEx", 500, false, "i", playerid);
 			}
+			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+		}
+		else if(afktime > 600)
+		{
 			SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (10 minut).");
 			SetTimerEx("KickEx", 500, false, "i", playerid);
 		}

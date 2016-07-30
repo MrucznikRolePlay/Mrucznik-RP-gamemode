@@ -3772,7 +3772,7 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
 		printf("%s[%d] OnPlayerEditObject - begin", GetNick(playerid), playerid);
 	#endif
     //printf("OnPlayerEditObject(%d, %d, %d, %d, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f) BAR %d", playerid, playerobject, objectid, response, fX, fY, fZ, fRotX, fRotY, fRotZ, GetPVarInt(playerid, "Barier-id"));
-    if(IsValidDynamicObject(objectid))
+    if(IsValidObject(objectid))
     {
         if(response < EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "Barier-id") != 0)
         {
@@ -3783,26 +3783,26 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
             if(!IsPlayerInRangeOfPoint(playerid, 5.0, fX,fY,fZ))
             {
                 new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
-                GetDynamicObjectRot(objectid, rox, roy, roz);
-                GetDynamicObjectPos(objectid, X, Y, Z);
+                GetObjectRot(objectid, rox, roy, roz);
+                GetObjectPos(objectid, X, Y, Z);
                 SendClientMessage(playerid, -1, "Jesteœ za daleko.");
                 BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, CLR_LIGHTBLUE, X, Y, Z+0.3, 4.0);
-                SetDynamicObjectPos(objectid, X, Y, Z);
-                SetDynamicObjectRot(objectid, rox, roy, roz);
+                SetObjectPos(objectid, X, Y, Z);
+                SetObjectRot(objectid, rox, roy, roz);
             }
             else
             {
                 BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, CLR_LIGHTBLUE, fX, fY, fZ+0.3, 4.0);
-                SetDynamicObjectPos(objectid, fX, fY, fZ);
-                SetDynamicObjectRot(objectid, fRotX, fRotY, fRotZ);
+                SetObjectPos(objectid, fX, fY, fZ);
+                SetObjectRot(objectid, fRotX, fRotY, fRotZ);
             }
             SetPVarInt(playerid, "Barier-id", 0);
         }
         else if(response == EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "Barier-id") != 0)
         {
             new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
-            GetDynamicObjectRot(objectid, rox, roy, roz);
-            GetDynamicObjectPos(objectid, X, Y, Z);
+            GetObjectRot(objectid, rox, roy, roz);
+            GetObjectPos(objectid, X, Y, Z);
             for(new i=0;i<MAX_PLAYERS;i++)
             {
                 if(GetPlayerSurfingObjectID(i) == objectid)
@@ -3816,12 +3816,12 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
             if(!IsPlayerInRangeOfPoint(playerid, 5.0, fX,fY,fZ))
             {
                 SendClientMessage(playerid, 0xFF0000FF, "Podejdz do obiektu!");
-                SetDynamicObjectPos(objectid, X, Y, Z);
+                SetObjectPos(objectid, X, Y, Z);
             }
             else
             {
                 new Float:speed = VectorSize(X-fX, Y-fY, Z-fZ);
-                MoveDynamicObject(objectid, fX, fY, fZ, speed, fRotX, fRotY, fRotZ);
+                MoveObject(objectid, fX, fY, fZ, speed, fRotX, fRotY, fRotZ);
             }
         }
     }

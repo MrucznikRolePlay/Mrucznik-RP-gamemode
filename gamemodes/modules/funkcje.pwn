@@ -1547,8 +1547,8 @@ HandlePlayerItemSelection(playerid, selecteditem)
 
 stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 {
-	DestroyDynamicObject(Barier[frac][id]);
-	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
+	DestroyObject(Barier[frac][id]);
+	new oid = CreateObject(model, x, y, z, 0.0, 0.0, a);
 	if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
 	BarierState[frac][id] = true;
     return 1;
@@ -1556,7 +1556,7 @@ stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 
 stock BARIERKA_Remove(frakcja, id)
 {
-    SetDynamicObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
+    SetObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
     DestroyDynamic3DTextLabel(BarText[frakcja][id]);
     BarierState[frakcja][id] = false;
     return 1;
@@ -1568,13 +1568,13 @@ stock BARIERKA_Init()
     {
         for(new i=0;i<10;i++)
         {
-            Barier[j][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+            Barier[j][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
             BarierState[j][i] = false;
         }
     }
     for(new i=0;i<10;i++) //LSFD
     {
-        Barier[FRAC_LSFD][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+        Barier[FRAC_LSFD][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
         BarierState[FRAC_LSFD][i] = false;
     }
     return 1;
@@ -1582,7 +1582,7 @@ stock BARIERKA_Init()
 
 public EditObj(playerid, obj)
 {
-    EditDynamicObject(playerid, obj);
+    EditObject(playerid, obj);
 }
 
 SetPlayerWeatherEx(playerid, id)

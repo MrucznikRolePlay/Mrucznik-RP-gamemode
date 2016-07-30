@@ -9538,7 +9538,7 @@ CMD:setname(playerid, params[])
 	new sendername[MAX_PLAYER_NAME];
 
 	new newname[MAX_PLAYER_NAME];
-	if (PlayerInfo[playerid][pAdmin] >= 5000)//Uprawnienia(playerid, ACCESS_OWNER))
+	if (Uprawnienia(playerid, ACCESS_OWNER))
 	{
 		new giveplayerid;
 		if( sscanf(params, "k<fix>s[24]", giveplayerid, newname))
@@ -16782,11 +16782,6 @@ CMD:dutycd(playerid)
 		if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "   Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
-			return 1;
-		}
-		if(PlayerInfo[playerid][pRank] < 1)
-		{
-			SendClientMessage(playerid, COLOR_GRAD2, "   Masz za nisk¹ rangê !");
 			return 1;
 		}
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return SendClientMessage(playerid, COLOR_GRAD2, "   Aby wzi¹sæ s³u¿be musisz byæ pieszo!");
