@@ -16804,7 +16804,7 @@ CMD:dutycd(playerid)
 					DajBronieFrakcyjne(playerid);
 					SetPlayerArmour(playerid, 90);
 	    		    SetPlayerHealth(playerid, 100);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+	    		    //SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 					OnDuty[playerid] = 1;
                     //SetPlayerToTeamColor(playerid);
 				}
@@ -16814,7 +16814,7 @@ CMD:dutycd(playerid)
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					SetPlayerArmour(playerid, 0.0);
 	    		    SetPlayerHealth(playerid, 100);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+	    		    //SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
                     OnDuty[playerid] = 0;
                     PrzywrocBron(playerid);
                     //SetPlayerToTeamColor(playerid);
