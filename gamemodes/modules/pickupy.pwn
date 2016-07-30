@@ -108,7 +108,7 @@ ZaladujPickupy()
 Zaladuj3DTexty()
 {
 	//wybory
-	CreateDynamic3DTextLabel("Urna wyborcza", 0x33CCFFAA, 1304.1296, -1299.9874, 35.6941, 25.0);
+	//CreateDynamic3DTextLabel("Urna wyborcza", 0x33CCFFAA, 1304.1296, -1299.9874, 35.6941, 25.0);
 
 	okienko[0] = CreateDynamic3DTextLabel("Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}Nieczynne",COLOR_WHITE,1090.3307,1057.3446,-15.8397,9,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 50);
 	okienko[1] = CreateDynamic3DTextLabel("Urz¹d Miasta Los Santos\n{0080FF}Okienko 2 \n {FF0000}Nieczynne",COLOR_WHITE,1086.4092,1057.3446,-15.8397,9,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 50);
@@ -300,8 +300,8 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("Przystanek \n Jefferson - Koœció³ \n Kursuje linia: {4682B4}55", COLOR_BLUE ,2220.5141601563,-1438.9367675781,24.0, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n Idlewood - Skate Park \n Kursuje linia: {4682B4}55", COLOR_BLUE ,1839.6973876953,-1362.1072998047,13.5625, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n Idlewood - Skate Park \n Kursuje linia: {4682B4}55", COLOR_BLUE ,1859.5150146484,-1392.0882568359,13.5625, 20.0); //
-	CreateDynamic3DTextLabel("Przystanek \n Market - Szpital Wszytkich Swietych \n Kursuje linia: {FF8C00}72 {FF00FF}85", COLOR_BLUE ,1213.7967529297,-1315.9571533203,16.557159423828, 20.0); //
-	CreateDynamic3DTextLabel("Przystanek \n Market - Szpital Wszytkich Swietych \n Kursuje linia: {FF8C00}72 {FF00FF}85", COLOR_BLUE ,1189.6943359375,-1355.6044921875,16.567205429077, 20.0); //
+	CreateDynamic3DTextLabel("Przystanek \n Market - Szpital Wszystkich Swietych \n Kursuje linia: {FF8C00}72 {FF00FF}85", COLOR_BLUE ,1213.7967529297,-1315.9571533203,16.557159423828, 20.0); //
+	CreateDynamic3DTextLabel("Przystanek \n Market - Szpital Wszystkich Swietych \n Kursuje linia: {FF8C00}72 {FF00FF}85", COLOR_BLUE ,1189.6943359375,-1355.6044921875,16.567205429077, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n Miedzynarodowy Port Lotniczy Los Santos - Terminale \n Nie kursuje ¿adna linia.", COLOR_BLUE ,1692.3889160156,-2246.84375,13.539621353149, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n Miedzynarodowy Port Lotniczy Los Santos - Terminale \n Nie kursuje ¿adna linia.", COLOR_BLUE ,1672.7529296875,-2261.7868652344,13.529561042786, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n Miedzynarodowy Port Lotniczy Los Santos - Pas Startowy \n Kursuje linia: {008000}96", COLOR_BLUE ,1977.9957275391,-2174.1936035156,13.540592193604, 20.0); //

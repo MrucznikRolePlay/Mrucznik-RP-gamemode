@@ -9,6 +9,9 @@ new regexURL;
 new r0pes[MAX_PLAYERS][ROPELENGTH];
 new Float:pl_pos[MAX_PLAYERS][5];
 
+//AFK timer
+new afk_timer[MAX_PLAYERS];
+
 //2015.08.25
 new wybory[6];
 ///
@@ -152,7 +155,9 @@ new bool:VAR_Kolejka=false;
 
 new Brama_HA;
 new Brama_HA1;
+new Brama_HA2;
 new Brama_Move_HA = 0;
+new Brama_Move_HA1 = 0;
 new GATE_SAD[42] = {0, ...};
 new bool:GATE_SAD_ALARM = false;
 new GATE_ALARM_OBJ[7];
@@ -871,9 +876,12 @@ new pojazdid[MAX_PLAYERS];//SYSTEM AUT
 new CenaPojazdu[MAX_PLAYERS];//SYSTEM AUT
 new KolorPierwszy[MAX_PLAYERS];//SYSTEM AUT
 new CenaDawanegoAuta[MAX_PLAYERS];//SYSTEM AUT
+new CenaWymienianegoAuta[MAX_PLAYERS];//SYSTEM AUT
+new IDWymienianegoAuta[MAX_PLAYERS];//SYSTEM AUT
 new CenaDawanegoLodz[MAX_PLAYERS];//SYSTEM AUT
 new CenaDawanegoSamolot[MAX_PLAYERS];//SYSTEM AUT
 new GraczDajacy[MAX_PLAYERS];//SYSTEM AUT
+new GraczWymieniajacy[MAX_PLAYERS];//SYSTEM AUT
 new IDAuta[MAX_PLAYERS];//SYSTEM AUT
 new GraczDajacyLodz[MAX_PLAYERS];//SYSTEM AUT
 new IDLodzi[MAX_PLAYERS];//SYSTEM AUT
