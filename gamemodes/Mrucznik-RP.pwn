@@ -6846,8 +6846,20 @@ public OnPlayerText(playerid, text[])
 						Mobile[playerid] = 1255;
 						return 0;
 					}
+					new guyname[MAX_PLAYER_NAME];
+					new turner[MAX_PLAYER_NAME];
+					new wanted[128];
+					
 					SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Ostrze¿emy wszystkie jednostki w danym obszarze.");
 					SendClientMessage(playerid, COLOR_DBLUE, "Dziêkujemy za zg³oszenie przestêpstwa");
+					
+					GetPlayerName(badguy, guyname, sizeof(guyname));
+					GetPlayerName(playerid, turner, sizeof(turner));
+					format(wanted, sizeof(wanted), "HQ: Do Wszystkich Jednostek: Nadawca: %s",turner);
+					SendFamilyMessage(1, COLOR_DBLUE, wanted);
+					format(wanted, sizeof(wanted), "HQ: Przestepstwo: %s, Poszukiwany: %s",PlayerCrime[playerid][pAccusing],guyname);
+					SendFamilyMessage(1, COLOR_DBLUE, wanted);
+					
                     PlayCrimeReportForPlayer(playerid, playerid, 9);
 
 					SetPlayerCriminal(badguy,playerid, PlayerCrime[playerid][pAccusing]);
