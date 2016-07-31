@@ -8445,45 +8445,6 @@ CMD:setveh(playerid, params[])
 	}
 	return 1;
 }
-CMD:pracadiler(playerid, params[])
-{
-	new para1;
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
-	
-	if(sscanf(params, "k<fix>", para1))
-	{
-		SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /pracadiler [playerid/CzêœæNicku]");
-		return 1;
-	}
-	if(Uprawnienia(playerid, ACCESS_PANEL))
-	{
-		if(IsPlayerConnected(para1))
-		{
-			if(para1 != INVALID_PLAYER_ID)
-			{
-			    GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				PlayerInfo[para1][pJob] = 9;
-				printf("AdmCmd: %s zmieni³ pracê %s na Diler Broni.", sendername, giveplayer);
-				format(string, sizeof(string), "   Twoja praca zosta³a zmieniona na Diler Broni przez %s", sendername);
-				SendClientMessage(para1, COLOR_LIGHTBLUE, string);
-				format(string, sizeof(string), "   Zmieni³eœ pracê graczowi %s na pracê Dilera Broni.", giveplayer);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			}
-		}
-		else
-		{
-			SendClientMessage(playerid, COLOR_GRAD1, "   Nie ma takiego gracza!");
-		}
-	}
-	else
-	{
-		SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy!");
-	}
-	return 1;
-}
 CMD:setjob(playerid, params[]) return cmd_zmienprace(playerid, params);
 CMD:zmienjob(playerid, params[]) return cmd_zmienprace(playerid, params);
 CMD:zmienprace(playerid, params[])
