@@ -4440,12 +4440,12 @@ CMD:brama(playerid)
     			{
     			    case 0: //otwieranie
     		 		{
-						MoveDynamicObject(bramafd[0], 1712.68005, -1141.50000, 27.41000, 1.77, 0.00000, 77.00000, 90.00000);//Otwieranie szybsze ze wzglêdu na wyjazd na akcje
+						MoveDynamicObject(bramafd[0], 1712.68005, -1141.50000, 27.41000, 1.77, 0.00000, 77.00000, 90.00000);//Otwieranie szybsze ze wzgl?du na wyjazd na akcje
 						bramyfd[0] = true;
     				}
     				case 1: //zamykanie
     				{
-						MoveDynamicObject(bramafd[0], 1712.68005, -1141.50000, 25.27000, 0.71, 0.00000, 0.00000, 90.00000);//Zamykanie wolniejsze ze wzglêdu na mo¿liwe zaklinowanie siê pojazdu
+						MoveDynamicObject(bramafd[0], 1712.68005, -1141.50000, 25.27000, 0.71, 0.00000, 0.00000, 90.00000);//Zamykanie wolniejsze ze wzgl?du na mo?liwe zaklinowanie si? pojazdu
 						bramyfd[0] = false;
     				}
     			}
@@ -4528,7 +4528,7 @@ CMD:brama(playerid)
     			    }
     			}
         }
-        //S¥D bramy
+        //S?D bramy
         if(IsPlayerInFraction(playerid, FRAC_BOR, 5000) || GetPlayerOrg(playerid) == FAMILY_SAD || IsAHA(playerid))
         {
         	if(IsPlayerInRangeOfPoint(playerid,3,1303.55847, -1328.83032, 39.66740))
@@ -5117,8 +5117,8 @@ CMD:brama(playerid)
 				return 1;
 			}
 		}
-		//brama do konfesjona³u
-     	if(IsPlayerInRangeOfPoint(playerid,3,1957.14050, -361.36722, 1092.92456))//KOŒCIÓ£!
+		//brama do konfesjona?u
+     	if(IsPlayerInRangeOfPoint(playerid,3,1957.14050, -361.36722, 1092.92456))//KO?CI?!
  		{
 	        if(kosmove == 0)
 	        {
@@ -5145,7 +5145,7 @@ CMD:brama(playerid)
 			    kos2move  = 0;
 			}
 			return 1;
-    	}//koniec bramy do konfesjona³u
+    	}//koniec bramy do konfesjona?u
 		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pAdmin] >= 1000 /*|| IsAHA(playerid)*/)
 		{
 			if(PlayerToPoint(20.0, playerid, 1544.6816, -1630.8596, 12.9796))
@@ -6008,7 +6008,7 @@ CMD:brama(playerid)
 				}
 			}
 		}
-		
+
 		//recepcja fbi
 		/*if(IsPlayerInRangeOfPoint(playerid,5,620.82562, -1458.85901, 89.61560))
 		{
@@ -6025,7 +6025,7 @@ CMD:brama(playerid)
 				FBImove1 = 0;
 			}
 		}*/
-		//drzwi do wiêzienia stanowego FBI
+		//drzwi do wi?zienia stanowego FBI
 		/*if(IsPlayerInRangeOfPoint(playerid,5,633.10693, -1488.77295, 89.61260))
 		{
 			if(FBImove4 == 0)
@@ -6101,7 +6101,7 @@ CMD:brama(playerid)
 			    }
 			}
 		}
-		if(IsAMedyk(playerid) || PlayerInfo[playerid][pAdmin] >= 1000 || IsAHA(playerid))//POCZ¥TEK
+		if(IsAMedyk(playerid) || PlayerInfo[playerid][pAdmin] >= 1000 || IsAHA(playerid))//POCZ?TEK
 		{
             if(IsPlayerInRangeOfPoint(playerid,3,1158.82922, -1325.31738, 31.39840))
         	{
@@ -24832,7 +24832,43 @@ CMD:dajkase(playerid, params[])
 	return 1;
 }
 
+CMD:carslot(playerid, params[])
+{
+	new string[128];
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
 
+    if(IsPlayerConnected(playerid))
+    {
+		new playa;
+		if( sscanf(params, "k<fix>", playa))
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /carslot [playerid/CzêœæNicku]");
+			return 1;
+		}
+
+		if (PlayerInfo[playerid][pAdmin] >=1000)
+		{
+		    if(IsPlayerConnected(playa))
+		    {
+		        if(playa != INVALID_PLAYER_ID)
+		        {
+			        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					PlayerInfo[playa][pCarSlots] = 4;
+					printf("AdmCmd: %s nada³ sloty %s",sendername,  giveplayer);
+					format(string, sizeof(string), "AdmCmd: %s nada³ sloty %s",sendername, giveplayer);
+					ABroadCast(COLOR_LIGHTRED,string,1);
+				}
+			}
+		}
+		else
+		{
+			SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy!");
+		}
+	}
+	return 1;
+}
 CMD:slap(playerid, params[])
 {
 	new string[128];
