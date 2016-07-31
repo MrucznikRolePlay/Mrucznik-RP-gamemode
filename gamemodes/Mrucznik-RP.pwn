@@ -1337,6 +1337,13 @@ public OnPlayerSpawn(playerid) //Przebudowany
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
 
+	//Diler Broni
+	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
+	{
+	    PlayerInfo[playerid][pJob] = 0;
+	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
+	}
+
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 1);

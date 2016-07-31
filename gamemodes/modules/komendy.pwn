@@ -680,12 +680,12 @@ CMD:pomoc(playerid)
 	SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** P³atny numer SMS - /sms [od 100 do 150], dostajesz tyle stówek ile jest po 1 (nr. 125 - 25 * 100 = 2500$)");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /zamknijlinie /otworzlinie /linie"); }
 	else if(PlayerInfo[playerid][pJob] == 7) {
-	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /nitro /hydraulika /maluj /felga /zderzak");
-	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /kolory /malunki /felgi /sluzba"); }
+	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba"); }// /nitro /hydraulika /maluj /felga /zderzak");
+	//SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /kolory /malunki /felgi /sluzba"); }
 	else if(PlayerInfo[playerid][pJob] == 8) {
 	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ochrona"); }
 	else if(PlayerInfo[playerid][pJob] == 9) {
-	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /materialy  /wywalmaterialy"); }
+	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /materialy /wywalmaterialy /sprzedajbron"); }
 	else if(PlayerInfo[playerid][pJob] == 12) {
 	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /walka /boxstats /naucz"); }
     else if(PlayerInfo[playerid][pJob] == JOB_TRUCKER) {
@@ -1813,7 +1813,7 @@ CMD:kajdanki(playerid, params[])
 
 CMD:barierka(playerid, params[])
 {
-    if(!(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_BOR)) return 1;
+    if(!(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_BOR) || GetPlayerOrg(playerid) == 12) return 1;
     if(isnull(params))
     {
         DestroySelectionMenu(playerid);
@@ -8445,7 +8445,45 @@ CMD:setveh(playerid, params[])
 	}
 	return 1;
 }
-
+CMD:pracadiler(playerid, params[])
+{
+	new para1;
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
+	
+	if(sscanf(params, "k<fix>", para1))
+	{
+		SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /pracadiler [playerid/CzêœæNicku]");
+		return 1;
+	}
+	if(Uprawnienia(playerid, ACCESS_PANEL))
+	{
+		if(IsPlayerConnected(para1))
+		{
+			if(para1 != INVALID_PLAYER_ID)
+			{
+			    GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+				GetPlayerName(playerid, sendername, sizeof(sendername));
+				PlayerInfo[para1][pJob] = 9;
+				printf("AdmCmd: %s zmieni³ pracê %s na Diler Broni.", sendername, giveplayer);
+				format(string, sizeof(string), "   Twoja praca zosta³a zmieniona na Diler Broni przez %s", sendername);
+				SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "   Zmieni³eœ pracê graczowi %s na pracê Dilera Broni.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			}
+		}
+		else
+		{
+			SendClientMessage(playerid, COLOR_GRAD1, "   Nie ma takiego gracza!");
+		}
+	}
+	else
+	{
+		SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy!");
+	}
+	return 1;
+}
 CMD:setjob(playerid, params[]) return cmd_zmienprace(playerid, params);
 CMD:zmienjob(playerid, params[]) return cmd_zmienprace(playerid, params);
 CMD:zmienprace(playerid, params[])
@@ -10410,7 +10448,7 @@ CMD:nos(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
 	 	{
 	    	new playa;
 			if( sscanf(params, "k<fix>", playa))
@@ -10565,7 +10603,7 @@ CMD:hydraulika(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
 	 	{
 	    	new playa;
 			if( sscanf(params, "k<fix>", playa))
@@ -10655,7 +10693,7 @@ CMD:malunek(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
 	 	{
 	    	new playa, malunek;
 			if( sscanf(params, "k<fix>d", playa, malunek))
@@ -10762,7 +10800,7 @@ CMD:felga(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
 	 	{
 	    	new playa, idfelgi;
 			if( sscanf(params, "k<fix>d", playa, idfelgi))
@@ -11249,7 +11287,7 @@ CMD:zderzaki(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
 	 	{
    			new playa;
 			if( sscanf(params, "k<fix>", playa))
@@ -15307,8 +15345,8 @@ CMD:kuparmor(playerid)
 }
 
 
-CMD:buygun(playerid, params[]) return cmd_kupbron(playerid, params);
-CMD:kupbron(playerid, params[])
+//CMD:buygun(playerid, params[]) return cmd_kupbron(playerid, params);
+/*CMD:kupbron(playerid, params[])
 {
 	if(PlayerInfo[playerid][pConnectTime] >= 4)
 	{
@@ -15342,7 +15380,7 @@ CMD:kupbron(playerid, params[])
 		return 1;
 	}
 	return 1;
-}
+}*/
 
 CMD:kupdildo(playerid)
 {
@@ -31260,7 +31298,7 @@ CMD:dolacz(playerid)
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
 				    GettingJob[playerid] = 8;
 		  		}
-		  		else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,1366.4325,-1275.2096,13.5469))
+		  		else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,1366.4325,-1275.2096,13.5469) && IsADilerBroni(playerid))
 		  		{
 		  		    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Dilerem Broni, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
