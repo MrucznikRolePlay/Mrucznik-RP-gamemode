@@ -1,88 +1,82 @@
 #include <a_samp>
-#include <fixes2>
 #include <callbacks>
 
-new afk_timer[MAX_PLAYERS];
+#undef MAX_PLAYERS
+#define MAX_PLAYERS 500
 
-//-------------------------------[ Timers ]-------------------------------
-forward PlayerAFK(playerid, afktime, breaktime);
-public PlayerAFK(playerid, afktime, breaktime)
+new afkCzas[MAX_PLAYERS];
+
+forward oneSecond();
+public oneSecond()
 {
-	if(IsPlayerPaused(playerid))
+	for(new i = 0; i < MAX_PLAYERS; i++)
 	{
-		new caption[32];
-		if(afktime < 60)
-			format(caption, sizeof(caption), "[AFK] %d sekund.", afktime);
-		else
-			format(caption, sizeof(caption), "[AFK] %d min. %d sekund.", afktime/60, afktime%60);
-		
-		if(afktime > 300)
+		if(IsPlayerConnected(i) && !IsPlayerNPC(i) && IsPlayerPaused(i))
 		{
-			SendClientMessage(playerid, 0xAA3333AA, "Zostałeś skickowany za zbyt długie AFK (powyżej 5 minut)");
-			SetTimerEx("KickEx", 500, false, "i", playerid);
+		    //if(afkCzas[i] >= 600)
+			//{
+			//	Kick(i);
+			//}
+			if(afkCzas[i] >= 300)
+			{
+				new caption[32];
+				format(caption, sizeof(caption), "[AFK] PONAD 5 MINUT!");
+				SetPlayerChatBubble(i, caption, 0xAA3333AA, 20.0, 1500);
+			}
+			else if(afkCzas[i] >= 240 && afkCzas[i] < 300)
+			{
+				new caption[32];
+				format(caption, sizeof(caption), "[AFK] 4 min. %02d sekund.", (afkCzas[i]-240));
+				SetPlayerChatBubble(i, caption, 0x33AA33AA, 20.0, 1500);
+			}
+			else if(afkCzas[i] >= 180 && afkCzas[i] < 240)
+			{
+				new caption[32];
+				format(caption, sizeof(caption), "[AFK] 3 min. %02d sekund.", (afkCzas[i]-180));
+				SetPlayerChatBubble(i, caption, 0x33AA33AA, 20.0, 1500);
+			}
+			else if(afkCzas[i] >= 120 && afkCzas[i] < 180)
+			{
+				new caption[32];
+				format(caption, sizeof(caption), "[AFK] 2 min. %02d sekund.", (afkCzas[i]-120));
+				SetPlayerChatBubble(i, caption, 0x33AA33AA, 20.0, 1500);
+			}
+			else if(afkCzas[i] >= 60 && afkCzas[i] < 120)
+			{
+				new caption[32];
+				format(caption, sizeof(caption), "[AFK] 1 min. %02d sekund.", (afkCzas[i]-60));
+				SetPlayerChatBubble(i, caption, 0x33AA33AA, 20.0, 1500);
+			}
+			else if(afkCzas[i] >= 30 && afkCzas[i] < 60)
+			{
+				new caption[32];
+				format(caption, sizeof(caption), "[AFK] %02d sekund.", afkCzas[i]);
+				SetPlayerChatBubble(i, caption, 0x33AA33AA, 20.0, 1500);
+			}
+			afkCzas[i]++;
 		}
-		else
-		{
-			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
-		}
-		afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, afktime+1, 0);
 	}
-	else
-	{
-		if(breaktime > afktime || breaktime > 180)
-		{
-			new name[MAX_PLAYER_NAME];
-			GetPlayerName(playerid, name, sizeof(name));
-			printf("%s byl afk przez %d", name, afktime);
-			afk_timer[playerid] = -1;
-		}
-		else
-		{
-			afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, afktime, breaktime+1);
-		}
-	}
+
 	return 1;
 }
 
-forward KickEx(playerid);
-public KickEx(playerid)
-{
-	Kick(playerid);
-	return 1;
-}
-
-//-------------------------------[ Callbacks ]-------------------------------
 public OnFilterScriptInit()
 {
-	for(new i; i<MAX_PLAYERS; i++)
-		afk_timer[i] = -1;
+	SetTimer("oneSecond", 1000, true);
+
 	return 1;
 }
 
-public OnFilterScriptExit()
+public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
-	for(new i; i<MAX_PLAYERS; i++)
-	{
-		if(afk_timer[i] != -1)
-			KillTimer(afk_timer[i]);
-	}
-}
+	afkCzas[playerid] = 0;
 
-public OnPlayerDisconnect(playerid, reason)
-{
-	if(afk_timer[playerid] != -1)
-	{
-		KillTimer(afk_timer[playerid]);
-		afk_timer[playerid] = -1;
-	}
 	return 1;
 }
 
-public OnPlayerPause(playerid)
+public OnPlayerConnect(playerid)
 {
-	if(afk_timer[playerid] == -1)
-	{
-		afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, 1, 0);
-	}
+	afkCzas[playerid] = 0;
+
 	return 1;
 }

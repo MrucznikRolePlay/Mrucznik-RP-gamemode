@@ -1337,13 +1337,6 @@ public OnPlayerSpawn(playerid) //Przebudowany
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
 
-	//Diler Broni
-	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
-	{
-	    PlayerInfo[playerid][pJob] = 0;
-	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
-	}
-
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 1);
@@ -3779,7 +3772,7 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
 		printf("%s[%d] OnPlayerEditObject - begin", GetNick(playerid), playerid);
 	#endif
     //printf("OnPlayerEditObject(%d, %d, %d, %d, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f) BAR %d", playerid, playerobject, objectid, response, fX, fY, fZ, fRotX, fRotY, fRotZ, GetPVarInt(playerid, "Barier-id"));
-    if(IsValidObject(objectid))
+    if(IsValidDynamicObject(objectid))
     {
         if(response < EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "Barier-id") != 0)
         {
@@ -3790,26 +3783,26 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
             if(!IsPlayerInRangeOfPoint(playerid, 5.0, fX,fY,fZ))
             {
                 new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
-                GetObjectRot(objectid, rox, roy, roz);
-                GetObjectPos(objectid, X, Y, Z);
+                GetDynamicObjectRot(objectid, rox, roy, roz);
+                GetDynamicObjectPos(objectid, X, Y, Z);
                 SendClientMessage(playerid, -1, "Jesteœ za daleko.");
                 BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, CLR_LIGHTBLUE, X, Y, Z+0.3, 4.0);
-                SetObjectPos(objectid, X, Y, Z);
-                SetObjectRot(objectid, rox, roy, roz);
+                SetDynamicObjectPos(objectid, X, Y, Z);
+                SetDynamicObjectRot(objectid, rox, roy, roz);
             }
             else
             {
                 BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, CLR_LIGHTBLUE, fX, fY, fZ+0.3, 4.0);
-                SetObjectPos(objectid, fX, fY, fZ);
-                SetObjectRot(objectid, fRotX, fRotY, fRotZ);
+                SetDynamicObjectPos(objectid, fX, fY, fZ);
+                SetDynamicObjectRot(objectid, fRotX, fRotY, fRotZ);
             }
             SetPVarInt(playerid, "Barier-id", 0);
         }
         else if(response == EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "Barier-id") != 0)
         {
             new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
-            GetObjectRot(objectid, rox, roy, roz);
-            GetObjectPos(objectid, X, Y, Z);
+            GetDynamicObjectRot(objectid, rox, roy, roz);
+            GetDynamicObjectPos(objectid, X, Y, Z);
             for(new i=0;i<MAX_PLAYERS;i++)
             {
                 if(GetPlayerSurfingObjectID(i) == objectid)
@@ -3823,12 +3816,12 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
             if(!IsPlayerInRangeOfPoint(playerid, 5.0, fX,fY,fZ))
             {
                 SendClientMessage(playerid, 0xFF0000FF, "Podejdz do obiektu!");
-                SetObjectPos(objectid, X, Y, Z);
+                SetDynamicObjectPos(objectid, X, Y, Z);
             }
             else
             {
                 new Float:speed = VectorSize(X-fX, Y-fY, Z-fZ);
-                MoveObject(objectid, fX, fY, fZ, speed, fRotX, fRotY, fRotZ);
+                MoveDynamicObject(objectid, fX, fY, fZ, speed, fRotX, fRotY, fRotZ);
             }
         }
     }
@@ -6853,20 +6846,8 @@ public OnPlayerText(playerid, text[])
 						Mobile[playerid] = 1255;
 						return 0;
 					}
-					new guyname[MAX_PLAYER_NAME];
-					new turner[MAX_PLAYER_NAME];
-					new wanted[128];
-					
 					SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Ostrze¿emy wszystkie jednostki w danym obszarze.");
 					SendClientMessage(playerid, COLOR_DBLUE, "Dziêkujemy za zg³oszenie przestêpstwa");
-					
-					GetPlayerName(badguy, guyname, sizeof(guyname));
-					GetPlayerName(playerid, turner, sizeof(turner));
-					format(wanted, sizeof(wanted), "HQ: Do Wszystkich Jednostek: Nadawca: %s",turner);
-					SendFamilyMessage(1, COLOR_DBLUE, wanted);
-					format(wanted, sizeof(wanted), "HQ: Przestepstwo: %s, Poszukiwany: %s",PlayerCrime[playerid][pAccusing],guyname);
-					SendFamilyMessage(1, COLOR_DBLUE, wanted);
-					
                     PlayCrimeReportForPlayer(playerid, playerid, 9);
 
 					SetPlayerCriminal(badguy,playerid, PlayerCrime[playerid][pAccusing]);
