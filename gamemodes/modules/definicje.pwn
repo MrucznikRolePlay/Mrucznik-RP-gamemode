@@ -329,6 +329,9 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 //2.5.2
 #define DIALOG_HA_ZMIENSKIN(%0)			3345+%0
 
+//uniformnew
+#define DIALOGID_UNIFORM 3445
+
 //------------------------------------------------------------------------------
 //                              INNE
 //------------------------------------------------------------------------------
