@@ -115,16 +115,16 @@ public OznaczCzitera(playerid)
 {
 	new string[64];
 	SetPVarInt(playerid, "AC_oznaczony", 1);
-	format(string, sizeof(string), "UWAGA! %s[%d] posiada s0beita na 99\%. Zbanuj go, gdy u¿yje czitów, b¹dŸ po pewnym czasie gry, aby nie wy³¹czy³ czitów przy wejœciu na serwer!", GetNick(playerid), playerid);
+	format(string, sizeof(string), "UWAGA! %s[%d] posiada s0beita na 99\%. Zbanuj go, gdy uï¿½yje czitï¿½w, bï¿½dï¿½ po pewnym czasie gry, aby nie wyï¿½ï¿½czyï¿½ czitï¿½w przy wejï¿½ciu na serwer!", GetNick(playerid), playerid);
 	SendAdminMessage(COLOR_PANICRED, string);
-	SendAdminMessage(COLOR_PANICRED, "Gracz ten zosta³ dodany do listy cziterów, wpisz /cziterzy aby zobaczyæ t¹ listê.");
+	SendAdminMessage(COLOR_PANICRED, "Gracz ten zostaï¿½ dodany do listy cziterï¿½w, wpisz /cziterzy aby zobaczyï¿½ tï¿½ listï¿½.");
 	return 1;
 }
 
 stock ListaCziterow(playerid)
 {
 	new string[32];
-	SendClientMessage(playerid, COLOR_RED, "Lista cziterów u których wykryto s0beita:");
+	SendClientMessage(playerid, COLOR_RED, "Lista cziterï¿½w u ktï¿½rych wykryto s0beita:");
 	foreach(Player, i)
 	{
 		if(GetPVarInt(playerid, "AC_oznaczony") == 1)
@@ -178,24 +178,24 @@ stock Odpolszcz(text[])
 {
     new string[256], i_pos;
     format(string, sizeof(string), text);
-	while ((i_pos = strfind(string, "¥", false, i_pos)) != -1) string[i_pos] = 'A';
-	while ((i_pos = strfind(string, "¹", false, i_pos)) != -1) string[i_pos] = 'a';
-	while ((i_pos = strfind(string, "Æ", false, i_pos)) != -1) string[i_pos] = 'C';
-	while ((i_pos = strfind(string, "æ", false, i_pos)) != -1) string[i_pos] = 'c';
-	while ((i_pos = strfind(string, "Ê", false, i_pos)) != -1) string[i_pos] = 'E';
-	while ((i_pos = strfind(string, "ê", false, i_pos)) != -1) string[i_pos] = 'e';
-	while ((i_pos = strfind(string, "£", false, i_pos)) != -1) string[i_pos] = 'L';
-	while ((i_pos = strfind(string, "³", false, i_pos)) != -1) string[i_pos] = 'l';
-	while ((i_pos = strfind(string, "Ñ", false, i_pos)) != -1) string[i_pos] = 'N';
-	while ((i_pos = strfind(string, "ñ", false, i_pos)) != -1) string[i_pos] = 'n';
-	while ((i_pos = strfind(string, "Œ", false, i_pos)) != -1) string[i_pos] = 'S';
-	while ((i_pos = strfind(string, "œ", false, i_pos)) != -1) string[i_pos] = 's';
-	while ((i_pos = strfind(string, "Ó", false, i_pos)) != -1) string[i_pos] = 'O';
-	while ((i_pos = strfind(string, "ó", false, i_pos)) != -1) string[i_pos] = 'o';
-	while ((i_pos = strfind(string, "¯", false, i_pos)) != -1) string[i_pos] = 'Z';
-	while ((i_pos = strfind(string, "¿", false, i_pos)) != -1) string[i_pos] = 'z';
-	while ((i_pos = strfind(string, "", false, i_pos)) != -1) string[i_pos] = 'Z';
-	while ((i_pos = strfind(string, "Ÿ", false, i_pos)) != -1) string[i_pos] = 'z';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'A';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'a';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'C';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'c';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'E';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'e';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'L';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'l';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'N';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'n';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'S';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 's';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'O';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'o';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'Z';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'z';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'Z';
+	while ((i_pos = strfind(string, "ï¿½", false, i_pos)) != -1) string[i_pos] = 'z';
 	return string;
 }
 
@@ -227,7 +227,7 @@ stock Taxi_FareEnd(playerid)
     for(new i=0;i<4;i++) if(TransportClient[playerid][i] != INVALID_PLAYER_ID) Taxi_Pay(TransportClient[playerid][i]); //Handle to 4 passenger
 
 	TransportDuty[playerid] = 0;
-	format(string, sizeof(string), "* Zakoñczy³eœ s³u¿bê, zarobi³eœ: $%d.", TransportMoney[playerid]);
+	format(string, sizeof(string), "* Zakoï¿½czyï¿½eï¿½ sï¿½uï¿½bï¿½, zarobiï¿½eï¿½: $%d.", TransportMoney[playerid]);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	if(GetPlayerFraction(playerid) != FRAC_KT) DajKase(playerid, TransportMoney[playerid]);
     else
@@ -307,7 +307,7 @@ stock Opis_Usun(playerid, message=false)
         Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
         if(message)
         {
-            SendClientMessage(playerid, COLOR_YELLOW, "Opis: Usuniêto.");
+            SendClientMessage(playerid, COLOR_YELLOW, "Opis: Usuniï¿½to.");
         }
         return 1;
     }
@@ -323,7 +323,7 @@ stock CarOpis_Usun(playerid, vehicleid, message=false)
         CarOpis[vehicleid] = Text3D:INVALID_3DTEXT_ID;
         if(message)
         {
-            SendClientMessage(playerid, COLOR_YELLOW, "Opis: Usuniêto.");
+            SendClientMessage(playerid, COLOR_YELLOW, "Opis: Usuniï¿½to.");
         }
         return 1;
     }
@@ -338,7 +338,7 @@ stock DopalaczPD(playerid)
 	Velocity[2] = VectorSize(Velocity[0], Velocity[1], 0.0);
 	if(Velocity[2] > 0.95)
 	{
-		SendClientMessage(playerid, TEAM_CYAN_COLOR, "Aktywowa³eœ dopalacz!!!");
+		SendClientMessage(playerid, TEAM_CYAN_COLOR, "Aktywowaï¿½eï¿½ dopalacz!!!");
 		SetTimerEx("Dopalaj",1000,0,"d",playerid);
 	}
 	return 1;
@@ -367,13 +367,13 @@ public Dopalaj(playerid)
 		}
 		else
 		{
-			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dopalacz deaktywowany - zbyt ma³a prêdkoœæ");
+			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dopalacz deaktywowany - zbyt maï¿½a prï¿½dkoï¿½ï¿½");
 			return 1;
 		}
 	}
 	else
 	{
-		SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dopalacz deaktywowany - wysiad³eœ z wozu");
+		SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dopalacz deaktywowany - wysiadï¿½eï¿½ z wozu");
 		return 1;
 	}
 	return 1;
@@ -390,7 +390,7 @@ ClearChat(playerid)
 
 AntyReklama(result[])
 {
-	if ( strfind(result , "lsrp" , true)>=0 ||  strfind(result , "ls-rp" , true)>=0 || strfind(result , "n4g" , true)>=0 || strfind(result , "net4game" , true)>=0)//nazwy serwerówhile
+	if ( strfind(result , "lsrp" , true)>=0 ||  strfind(result , "ls-rp" , true)>=0 || strfind(result , "n4g" , true)>=0 || strfind(result , "net4game" , true)>=0)//nazwy serwerï¿½while
 		return 1;
 	if ( strfind(result , "www." , true)>=0 || strfind(result , ".pl" , true)>=0 || strfind(result , ".net" , true)>=0 || strfind(result , ".com" , true)>=0)//strony internetowe
 		return 2;
@@ -464,7 +464,7 @@ stock HABox(numer, playerid)
     }
     if(IsPlayerConnected(playerid))
     {
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontrakt który podpisa³eœ zosta³ odebrany przez Hitmanów. Spodziewaj siê wykonania zlecenia.");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontrakt ktï¿½ry podpisaï¿½eï¿½ zostaï¿½ odebrany przez Hitmanï¿½w. Spodziewaj siï¿½ wykonania zlecenia.");
     }
 	return 1;
 }
@@ -491,7 +491,7 @@ public StartPaintball()
             	PlayerInfo[i][pGun1] = 29;
             	PlayerInfo[i][pAmmo1] = 999;
 	            TogglePlayerControllable(i, 1);
-	            SendClientMessage(i, COLOR_YELLOW, "Mecz Pintballa rozpoczêty, skoñczy siê za 4 minuty.");
+	            SendClientMessage(i, COLOR_YELLOW, "Mecz Pintballa rozpoczï¿½ty, skoï¿½czy siï¿½ za 4 minuty.");
 	            PlayerPlaySound(i, 1057, 0.0, 0.0, 0.0);
 	        }
 	    }
@@ -506,7 +506,7 @@ public PreparePaintball()
 	{
 		if(PlayerPaintballing[i] != 0)
 		{
-			SendClientMessage(i, COLOR_YELLOW, "Mecz Pintballa rozpocznie siê za 20 sekund, proszê czekaæ.");
+			SendClientMessage(i, COLOR_YELLOW, "Mecz Pintballa rozpocznie siï¿½ za 20 sekund, proszï¿½ czekaï¿½.");
 		}
 	}
  	SetTimer("StartPaintball", 20000, 0);
@@ -567,7 +567,7 @@ public CountDown()
 	else
 	{
 		GameTextForAll("~g~Respawn", 2500, 1);
-		SendClientMessageToAll(COLOR_PANICRED, "|___Nast¹pi³ respawn nieu¿ywanych pojazdów___|");
+		SendClientMessageToAll(COLOR_PANICRED, "|___Nastï¿½piï¿½ respawn nieuï¿½ywanych pojazdï¿½w___|");
 		Count = 20;
 		new bool:used[CAR_AMOUNT] = {false, ... };
 		foreach(Player, p)
@@ -599,7 +599,7 @@ public Odmroz(playerid)
     return 1;
 }
 
-public Wchodzenie(playerid) //Zmiana na inteligentny system odmra¿ania
+public Wchodzenie(playerid) //Zmiana na inteligentny system odmraï¿½ania
 {
     if(GetPVarInt(playerid, "enter-check") == 0)
     {
@@ -639,7 +639,7 @@ public Wchodzenie(playerid) //Zmiana na inteligentny system odmra¿ania
             TogglePlayerControllable(playerid, 1);
             SetPVarInt(playerid, "enter-check", 0);
             new str[128];
-            SendClientMessage(playerid, -1, "(OBJ LOADER Inteligencja) - B³¹d z wczytaniem obiektów, nie mo¿na dodaæ nowych - zg³os to z debugiem:");
+            SendClientMessage(playerid, -1, "(OBJ LOADER Inteligencja) - Bï¿½ï¿½d z wczytaniem obiektï¿½w, nie moï¿½na dodaï¿½ nowych - zgï¿½os to z debugiem:");
             format(str, 128, "CHK |%d| NowOBJ |%d| Stuff |%d:%d| VW.o |%d| VW.n |%d| T |%d| T.n |%d| T.s |%d| Count |%d|", GetPVarInt(playerid, "enter-check"),GetPVarInt(playerid, "enter-nowobj"),GetPVarInt(playerid, "enter-stuffobj"),GetPVarInt(playerid, "enter-stuff"),GetPVarInt(playerid, "enter-oldvw"),GetPVarInt(playerid, "enter-vw"),GetPVarInt(playerid, "enter-time"), gettime(), gettime()-GetPVarInt(playerid, "enter-time"),count);
             SendClientMessage(playerid, -1, str);
             printf("(OBJ LOADER Inteligencja) FAIL [%d]! CHK |%d| NowOBJ |%d| Stuff |%d:%d| VW.o |%d| VW.n |%d| T |%d| T.n |%d| T.s |%d| Count |%d|", playerid, GetPVarInt(playerid, "enter-check"),GetPVarInt(playerid, "enter-nowobj"),GetPVarInt(playerid, "enter-stuffobj"),GetPVarInt(playerid, "enter-stuff"),GetPVarInt(playerid, "enter-oldvw"),GetPVarInt(playerid, "enter-vw"),GetPVarInt(playerid, "enter-time"), gettime(), gettime()-GetPVarInt(playerid, "enter-time"),count);
@@ -668,7 +668,7 @@ public AntySB(playerid)
 	AntySpawnBroni[playerid] = 0;
 	//SendClientMessage(playerid,COLOR_P@,"|_________________________ Nowe premium _________________________|");
 	//SendClientMessage(playerid,COLOR_WHITE,"INFO INFO INFO INFO");
-	//SendClientMessage(playerid,COLOR_P@,"|____________________________>>> Mi³ej gry<<<____________________________|");
+	//SendClientMessage(playerid,COLOR_P@,"|____________________________>>> Miï¿½ej gry<<<____________________________|");
 	return 1;
 }
 
@@ -682,9 +682,9 @@ public TiNzPJwGUI(playerid)
 	PlayerInfo[playerid][pMinalczasnazdpr] = 1;
 	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 0;
 	GetPlayerName(playerid, playername, sizeof(playername));
-	format(string, sizeof(string), "* S³ychaæ dŸwiêk koñca czasu na rozwi¹znie testu ((%s))", playername);
+	format(string, sizeof(string), "* Sï¿½ychaï¿½ dï¿½wiï¿½k koï¿½ca czasu na rozwiï¿½znie testu ((%s))", playername);
 	ProxDetector(40.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	ShowPlayerDialogEx(playerid, 13, DIALOG_STYLE_MSGBOX, "Czas min¹³!", "Przykro nam!\nUp³yn¹ czas na udzielenie poprawnej odpowiedzi.\nOblewasz egzamin i mo¿esz go zdaæ ponownie za 2h.", "Wyjdz", "");
+	ShowPlayerDialogEx(playerid, 13, DIALOG_STYLE_MSGBOX, "Czas minï¿½ï¿½!", "Przykro nam!\nUpï¿½ynï¿½ czas na udzielenie poprawnej odpowiedzi.\nOblewasz egzamin i moï¿½esz go zdaï¿½ ponownie za 2h.", "Wyjdz", "");
 	return 1;
 }
 
@@ -733,7 +733,7 @@ public zabezpieczeniewoz(playerid)
 {
 	if(IsPlayerInAnyVehicle(playerid))
 	{
-	    SendClientMessage(playerid, COLOR_PANICRED, "Dosta³eœ kicka za prawdopodobieñstwo u¿ycia czitów. Jeœli to bug, napisz na forum: www.mrucznik-rp.net");
+	    SendClientMessage(playerid, COLOR_PANICRED, "Dostaï¿½eï¿½ kicka za prawdopodobieï¿½stwo uï¿½ycia czitï¿½w. Jeï¿½li to bug, napisz na forum: www.mrucznik-rp.net");
 		KickEx(playerid);
 	}
 	return 1;
@@ -811,9 +811,9 @@ return 1;
 
 public PoscigTimer(playerid){
 poscig[playerid] = 0;
-SendClientMessage(playerid,COLOR_PANICRED,"|_________________Tryb Poœcigu ZAKOÑCZONY_________________|");
-SendClientMessage(playerid,COLOR_WHITE,"Czas na z³apanie ciê dobieg³ koñca.");
-SendClientMessage(playerid,COLOR_WHITE,"Je¿eli nie przeprowadzasz ju¿ ¿adnej akcji RP, mo¿esz bezpiecznie wyjœæ z gry");
+SendClientMessage(playerid,COLOR_PANICRED,"|_________________Tryb Poï¿½cigu ZAKOï¿½CZONY_________________|");
+SendClientMessage(playerid,COLOR_WHITE,"Czas na zï¿½apanie ciï¿½ dobiegï¿½ koï¿½ca.");
+SendClientMessage(playerid,COLOR_WHITE,"Jeï¿½eli nie przeprowadzasz juï¿½ ï¿½adnej akcji RP, moï¿½esz bezpiecznie wyjï¿½ï¿½ z gry");
 SendClientMessage(playerid,COLOR_PANICRED,"|______________________________________________|");
 return 1;
 }
@@ -837,7 +837,7 @@ return 1;
 public Next(playerid, msg[])
 {
 	SendClientMessage(playerid, COLOR_WHITE, msg);
-    ProxDetector(15.0, playerid, msg, COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);//system autobusów
+    ProxDetector(15.0, playerid, msg, COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);//system autobusï¿½w
     return 1;
     printf("second has passed, also we have a message: %s", msg);
     return 1;
@@ -855,35 +855,35 @@ public odpalanie(playerid)
 		new rand = random(1000);
 		if(rand <= health)
 		{
-			format(string, sizeof(string), "* silnik odpali³ (( %s ))", sendername);
+			format(string, sizeof(string), "* silnik odpaliï¿½ (( %s ))", sendername);
 			ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
       		SetVehicleParamsEx(GetPlayerVehicleID(playerid) , 1, lights, alarm, doors, bonnet, boot, objective);
 		}
 		else
 		{
-		    format(string, sizeof(string), "* silnik nie odpali³ (( %s ))", sendername);
+		    format(string, sizeof(string), "* silnik nie odpaliï¿½ (( %s ))", sendername);
 			ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
 	}
 	else
 	{
-	 	format(string, sizeof(string), "* na desce rozdzielczej pojawia siê informacja o braku paliwa (( %s ))", sendername);
+	 	format(string, sizeof(string), "* na desce rozdzielczej pojawia siï¿½ informacja o braku paliwa (( %s ))", sendername);
 		ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	}
 	return 1;
 }
 //SYSTEM KRADZIEZY AUT!
 
-//uda³o siê
+//udaï¿½o siï¿½
 
 public udalo1(playerid){
-//³¹czenie kabelków
+//ï¿½ï¿½czenie kabelkï¿½w
 if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 {
 	new komunikat[128];
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, sizeof(nick));
-	format(komunikat, sizeof(komunikat),"* %s ³¹czy kabelki i wyjmuje œrubokrêt i odkrêca nastêpn¹ os³onkê.", nick);
+	format(komunikat, sizeof(komunikat),"* %s ï¿½ï¿½czy kabelki i wyjmuje ï¿½rubokrï¿½t i odkrï¿½ca nastï¿½pnï¿½ osï¿½onkï¿½.", nick);
 	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	SetTimerEx("udalo2",6000,0,"d",playerid);
 }
@@ -913,27 +913,27 @@ public udalo2(playerid){
 }
 
 public udalo3(playerid){
-//odpali³
+//odpaliï¿½
     if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
     {
     	new komunikat[128];
     	new nick[MAX_PLAYER_NAME];
     	GetPlayerName(playerid, nick, sizeof(nick));
-    	format(komunikat, sizeof(komunikat),"* %s ³¹czy odpowiednie kabelki i wy³¹czy³ alarm.", nick);
+    	format(komunikat, sizeof(komunikat),"* %s ï¿½ï¿½czy odpowiednie kabelki i wyï¿½ï¿½czyï¿½ alarm.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     	TogglePlayerControllable(playerid, 1);
     	NieSpamujKradnij[playerid] = 0;
-    	SendClientMessage(playerid, COLOR_GRAD2, "Skill z³odzieja aut +1");
+    	SendClientMessage(playerid, COLOR_GRAD2, "Skill zï¿½odzieja aut +1");
     	PlayerInfo[playerid][pJackSkill] ++;
         KradniecieWozu[playerid] = GetPlayerVehicleID(playerid);
     	if(PlayerInfo[playerid][pJackSkill] == 50)
-    	{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 2, masz teraz wiêksze szanse ¿e uda ci siê ukraœæ wóz."); }
+    	{ SendClientMessage(playerid, COLOR_YELLOW, "* Twï¿½j skill zï¿½odzieja samochodï¿½w wynosi teraz 2, masz teraz wiï¿½ksze szanse ï¿½e uda ci siï¿½ ukraï¿½ï¿½ wï¿½z."); }
     	else if(PlayerInfo[playerid][pJackSkill] == 100)
-    	{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 3, masz teraz wiêksze szanse ¿e uda ci siê ukraœæ wóz."); }
+    	{ SendClientMessage(playerid, COLOR_YELLOW, "* Twï¿½j skill zï¿½odzieja samochodï¿½w wynosi teraz 3, masz teraz wiï¿½ksze szanse ï¿½e uda ci siï¿½ ukraï¿½ï¿½ wï¿½z."); }
     	else if(PlayerInfo[playerid][pJackSkill] == 200)
-    	{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 4, masz teraz wiêksze szanse ¿e uda ci siê ukraœæ wóz."); }
+    	{ SendClientMessage(playerid, COLOR_YELLOW, "* Twï¿½j skill zï¿½odzieja samochodï¿½w wynosi teraz 4, masz teraz wiï¿½ksze szanse ï¿½e uda ci siï¿½ ukraï¿½ï¿½ wï¿½z."); }
     	else if(PlayerInfo[playerid][pJackSkill] == 400)
-    	{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 5, masz teraz wiêksze szanse ¿e uda ci siê ukraœæ wóz."); }
+    	{ SendClientMessage(playerid, COLOR_YELLOW, "* Twï¿½j skill zï¿½odzieja samochodï¿½w wynosi teraz 5, masz teraz wiï¿½ksze szanse ï¿½e uda ci siï¿½ ukraï¿½ï¿½ wï¿½z."); }
     }
     else
     {
@@ -942,16 +942,16 @@ public udalo3(playerid){
     return 1;
 }
 
-//nie uda³o siê
+//nie udaï¿½o siï¿½
 
 public nieudalo1(playerid){
-    //³¹czenie kabelków
+    //ï¿½ï¿½czenie kabelkï¿½w
     if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
     {
     	new komunikat[128];
     	new nick[MAX_PLAYER_NAME];
     	GetPlayerName(playerid, nick, sizeof(nick));
-    	format(komunikat, sizeof(komunikat),"* %s ³¹czy kabelki i wyjmuje œrubokrêt i odkrêca nastêpn¹ os³onkê.", nick);
+    	format(komunikat, sizeof(komunikat),"* %s ï¿½ï¿½czy kabelki i wyjmuje ï¿½rubokrï¿½t i odkrï¿½ca nastï¿½pnï¿½ osï¿½onkï¿½.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     	SetTimerEx("nieudalo2",6000,0,"d",playerid);
     }
@@ -981,7 +981,7 @@ public nieudalo2(playerid){
 }
 
 public nieudalo3(playerid){
-//alarm siê w³¹cza
+//alarm siï¿½ wï¿½ï¿½cza
     if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
     {
     	new komunikat[128];
@@ -989,12 +989,12 @@ public nieudalo3(playerid){
     	new vehi = GetPlayerVehicleID(playerid);
     	new engine, lights, alarm, doors, bonnet, boot, objective;
     	GetPlayerName(playerid, nick, sizeof(nick));
-    	format(komunikat, sizeof(komunikat),"* %s Ÿle ³¹czy kabelki po czym w³¹cza siê alarm.", nick);
+    	format(komunikat, sizeof(komunikat),"* %s ï¿½le ï¿½ï¿½czy kabelki po czym wï¿½ï¿½cza siï¿½ alarm.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         GetVehicleParamsEx(vehi, engine, lights, alarm, doors, bonnet, boot, objective);
         SetVehicleParamsEx(vehi, engine, lights, true, doors, bonnet, boot, objective);
     	SetTimerEx("WylaczAlarm", 90000, false, "d", vehi);
-    	SendClientMessage(playerid, COLOR_PANICRED, "Uciekaj! Zaraz tu bêd¹ gliny!");
+    	SendClientMessage(playerid, COLOR_PANICRED, "Uciekaj! Zaraz tu bï¿½dï¿½ gliny!");
     	TogglePlayerControllable(playerid, 1);
     	RemovePlayerFromVehicleEx(playerid);
     	KradniecieWozu[playerid] = 0;
@@ -1060,11 +1060,11 @@ KoniecWyscigu(playerid)
 {
 	new string[256];
 	if(playerid == -1)
-		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony przez system.", Wyscig[Scigamy][wNazwa]);
+		format(string, sizeof(string), "Komunikat wyï¿½cigowy: {FFFFFF}Wyscig %s zakoï¿½czony przez system.", Wyscig[Scigamy][wNazwa]);
 	else if(playerid == -2)
-		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony - wszyscy dojechali do mety!", Wyscig[Scigamy][wNazwa]);
+		format(string, sizeof(string), "Komunikat wyï¿½cigowy: {FFFFFF}Wyscig %s zakoï¿½czony - wszyscy dojechali do mety!", Wyscig[Scigamy][wNazwa]);
 	else
-		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony przez %s.", Wyscig[Scigamy][wNazwa], GetNick(playerid));
+		format(string, sizeof(string), "Komunikat wyï¿½cigowy: {FFFFFF}Wyscig %s zakoï¿½czony przez %s.", Wyscig[Scigamy][wNazwa], GetNick(playerid));
 
 	WyscigMessage(COLOR_YELLOW, string);
 
@@ -1089,8 +1089,8 @@ _prawojazdy_unpolish(text[])
 {
     new replacements[][] =
     {
-        {'¹', 'a'},
-        {'ó', 'o'}
+        {'ï¿½', 'a'},
+        {'ï¿½', 'o'}
     };
 
     for(new i; i < strlen(text); i++)
@@ -1127,13 +1127,13 @@ PrawoJazdyRandomGUITest(playerid, questions_available[], questions_count)
     {
         "Jaki jest poprawny numer alarmowy?\n\nPodaj w cyfrach",
         "Czy nitro jest dozwolone?\n\nTak/Nie",
-        "Ile wynosi dopuszczalna prêdkoœæ\nprzy holowaniu w terenie zabudowanym?\n\nPodaj w cyfrach",
-        "Któr¹ stron¹ jezdni nale¿y jechaæ?\n\nPodaj jeden wyraz",
-        "Co nale¿y rozstawiæ po wypadku?\n\nPodaj jeden wyraz",
-        "Dozwolona prêdkoœæ na autostradzie?\n\nPodaj w cyfrach",
-        "Dozwolona prêdkoœæ na mieœcie?\n\nPodaj w cyfrach",
-        "Jaka jest maksymalna, dozwolona\nprêdkoœæ na drodze szybkiego ruchu?\n\nPodaj w cyfrach",
-        "Co trzeba wyci¹gn¹æ po wypadku\nby ostrzec o nim?\n\nPodaj jeden wyraz"
+        "Ile wynosi dopuszczalna prï¿½dkoï¿½ï¿½\nprzy holowaniu w terenie zabudowanym?\n\nPodaj w cyfrach",
+        "Ktï¿½rï¿½ stronï¿½ jezdni naleï¿½y jechaï¿½?\n\nPodaj jeden wyraz",
+        "Co naleï¿½y rozstawiï¿½ po wypadku?\n\nPodaj jeden wyraz",
+        "Dozwolona prï¿½dkoï¿½ï¿½ na autostradzie?\n\nPodaj w cyfrach",
+        "Dozwolona prï¿½dkoï¿½ï¿½ na mieï¿½cie?\n\nPodaj w cyfrach",
+        "Jaka jest maksymalna, dozwolona\nprï¿½dkoï¿½ï¿½ na drodze szybkiego ruchu?\n\nPodaj w cyfrach",
+        "Co trzeba wyciï¿½gnï¿½ï¿½ po wypadku\nby ostrzec o nim?\n\nPodaj jeden wyraz"
     };
 
     new random_question = random(questions_count);
@@ -1197,7 +1197,7 @@ public TablicaWynikow(playerid)
 	{
 		if(IsPlayerInRangeOfPoint(i, 500, -1106.9854, -966.4719, 129.1807))
 		{
-			SendClientMessage(i, COLOR_LIGHTGREEN, "Tabela wyników:");
+			SendClientMessage(i, COLOR_LIGHTGREEN, "Tabela wynikï¿½w:");
             foreach(Player, di)
 			{
 			    if(zawodnik[di] == 1)
@@ -1207,7 +1207,7 @@ public TablicaWynikow(playerid)
 			            new iplayer[MAX_PLAYER_NAME];
 			            new string[256];
 				        GetPlayerName(di, iplayer, sizeof(iplayer));
-				        format(string, sizeof(string), "%s - %d okr¹¿eñ", iplayer, okregi[di]);
+				        format(string, sizeof(string), "%s - %d okrï¿½ï¿½eï¿½", iplayer, okregi[di]);
 						SendClientMessage(i, COLOR_WHITE, string);
 					}
 			    }
@@ -1259,7 +1259,7 @@ stock IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Fl
     return ((x2 * x2) + (y2 * y2) + (z2 * z2)) < (range * range);
 }
 
-//->Powiêkszenie czatu --->>>Skubany
+//->Powiï¿½kszenie czatu --->>>Skubany
 stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', maxlenght = sizeof (output))
 {
 	new len = strlen (source);
@@ -1304,7 +1304,7 @@ stock GetNick(playerid)
 
 stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
 {
-    //Kilka sprawdzeñ
+    //Kilka sprawdzeï¿½
     if(!quit && !IsPlayerConnected(loser)) return 0;
     if(strlen(GetNick(loser)) < 4) return 0;
     if(strlen(GetNick(playerid)) < 4) return 0;
@@ -1529,7 +1529,7 @@ HandlePlayerItemSelection(playerid, selecteditem)
     new frac = GetPlayerFraction(playerid);
     new id = GetBarierID(frac); //FRAKCJA!!
 
-    if(id == -1) return SendClientMessage(playerid, -1, "Osi¹gniêto limit barierek.");
+    if(id == -1) return SendClientMessage(playerid, -1, "Osiï¿½gniï¿½to limit barierek.");
 
     new Float:x, Float:y, Float:z, Float:a;
     GetPlayerPos(playerid, x, y, z);
@@ -1547,8 +1547,8 @@ HandlePlayerItemSelection(playerid, selecteditem)
 
 stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 {
-	DestroyDynamicObject(Barier[frac][id]);
-	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
+	DestroyObject(Barier[frac][id]);
+	new oid = CreateObject(model, x, y, z, 0.0, 0.0, a);
 	if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
 	BarierState[frac][id] = true;
     return 1;
@@ -1556,7 +1556,7 @@ stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 
 stock BARIERKA_Remove(frakcja, id)
 {
-    SetDynamicObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
+    SetObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
     DestroyDynamic3DTextLabel(BarText[frakcja][id]);
     BarierState[frakcja][id] = false;
     return 1;
@@ -1568,13 +1568,13 @@ stock BARIERKA_Init()
     {
         for(new i=0;i<10;i++)
         {
-            Barier[j][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+            Barier[j][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
             BarierState[j][i] = false;
         }
     }
     for(new i=0;i<10;i++) //LSFD
     {
-        Barier[FRAC_LSFD][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+        Barier[FRAC_LSFD][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
         BarierState[FRAC_LSFD][i] = false;
     }
     return 1;
@@ -1582,7 +1582,7 @@ stock BARIERKA_Init()
 
 public EditObj(playerid, obj)
 {
-    EditDynamicObject(playerid, obj);
+    EditObject(playerid, obj);
 }
 
 SetPlayerWeatherEx(playerid, id)
@@ -1704,10 +1704,10 @@ SearchingHit(playerid)
 				        	if(PlayerInfo[k][pMember] == 8 || PlayerInfo[k][pLider] == 8)
 				        	{
 	               				SendClientMessage(k, COLOR_WHITE, "|__________________ Hitman Agency News __________________|");
-				                SendClientMessage(k, COLOR_DBLUE, "*** Wiadomoœæ: Nowe zlecenia s¹ ju¿ dostêpne. ***");
+				                SendClientMessage(k, COLOR_DBLUE, "*** Wiadomoï¿½ï¿½: Nowe zlecenia sï¿½ juï¿½ dostï¿½pne. ***");
 				                format(string, sizeof(string), "Osoba: %s   ID: %d   Kasa: $%d", giveplayer, i, PlayerInfo[i][pHeadValue]);
 								SendClientMessage(k, COLOR_DBLUE, string);
-								SendClientMessage(k, COLOR_YELLOW, "Wpisz Givehit [hitmanid], aby podpisaæ kontrakt z hitmanem.");
+								SendClientMessage(k, COLOR_YELLOW, "Wpisz Givehit [hitmanid], aby podpisaï¿½ kontrakt z hitmanem.");
 								SendClientMessage(k, COLOR_WHITE, "|________________________________________________________|");
 	      					}
 					    }
@@ -1719,12 +1719,12 @@ SearchingHit(playerid)
 	}
 	if(searchhit == 0)
 	{
-	    SendClientMessage(playerid, COLOR_GREY, "   Nie ma dostêpnych zleceñ !");
+	    SendClientMessage(playerid, COLOR_GREY, "   Nie ma dostï¿½pnych zleceï¿½ !");
 	}
 	return 0;
 }
 
-public PaintballEnded()//nowe domy biznes wa¿ne
+public PaintballEnded()//nowe domy biznes waï¿½ne
 {
 	new string[256];
 	new name[MAX_PLAYER_NAME];
@@ -1737,7 +1737,7 @@ public PaintballEnded()//nowe domy biznes wa¿ne
 	            if(IsPlayerConnected(PaintballWinner))
 	            {
 	                GetPlayerName(PaintballWinner, name, sizeof(name));
-	                format(string,sizeof(string), "** %s wygra³ mecz Pintballa z %d trafieniami **",name,PaintballWinnerKills);
+	                format(string,sizeof(string), "** %s wygraï¿½ mecz Pintballa z %d trafieniami **",name,PaintballWinnerKills);
 	                SendClientMessage(i, COLOR_WHITE, string);
 	            }
 	            ResetPlayerWeapons(i);
@@ -1760,7 +1760,7 @@ StartZuzling()
 	    {
 	        if(zawodnik[i] == 1)
 	        {
-	            SendClientMessage(i, COLOR_GREEN, "Zielone œwiat³o, go go go !");
+	            SendClientMessage(i, COLOR_GREEN, "Zielone ï¿½wiatï¿½o, go go go !");
 	            PlayerPlaySound(i, 1057, 0.0, 0.0, 0.0);
 	            SetPlayerCheckpoint(i,-1083.2609,-1006.3092,128.9274,5.0);
 	            okrazenia[i] = 0;
@@ -1902,6 +1902,32 @@ IsAPrzestepca(playerid)
 		    return 1;
 		}
 		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA || GetPlayerOrgType(playerid) == ORG_TYPE_RACE)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+
+IsADilerBroni(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==5 || member==6 || member==8 || member==12 || member==13 || member==14)
+		{
+		    return 1;
+		}
+		else if(leader==5 || leader==6 || leader==8 || leader==12  || leader==13 || leader==14)
+		{
+		    return 1;
+		}
+		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+		{
+		    return 1;
+		}
+		if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
 		{
 		    return 1;
 		}
@@ -2146,7 +2172,7 @@ IsASpojler(vehid)
 	if(IsPlayerConnected(playerid))
 	{
 	    if(PlayerToPoint(5.0,playerid,2298.1984863281,-1651.3073730469,14.745365142822) || PlayerToPoint(5.0,playerid,2649.0324707031,-1686.6606445313,10.840973854065) || PlayerToPoint(5.0,playerid,1583.9058837891,-2286.2392578125,13.539621353149) || PlayerToPoint(5.0,playerid,1275.4959716797,-2062.037109375,59.199634552002))
-	    {//Pierwsze 4 (Green Bar, Stadion, Lotnisko, Bia³y Dom)
+	    {//Pierwsze 4 (Green Bar, Stadion, Lotnisko, Biaï¿½y Dom)
 	        return 1;
 	    }
 	    else if(PlayerToPoint(5.0,playerid,1370.4241943359,-1738.8614501953,13.546875) || PlayerToPoint(5.0,playerid,1524.1988525391,-1674.310546875,13.546875) || PlayerToPoint(5.0,playerid,1503.8745117188,-1028.2069091797,23.795171737671) || PlayerToPoint(5.0,playerid,1800.5361328125,-1169.9978027344,23.828125))
@@ -2154,7 +2180,7 @@ IsASpojler(vehid)
 		    return 1;
 		}
 		else if(PlayerToPoint(5.0,playerid,374.65921020508,-1996.0040283203,7.8359375) || PlayerToPoint(5.0,playerid,360.93704223633,-1503.9656982422,32.828647613525) || PlayerToPoint(5.0,playerid,364.40408325195, -1358.9102783203, 14.809542655945) || PlayerToPoint(5.0,playerid,1827.2419433594,-1709.5623779297,13.546875))
-		{//Trzecie 4 (Motel(nie ma), Molo?, Zwi¹zek Emerytów, Salon Samochodowy)
+		{//Trzecie 4 (Motel(nie ma), Molo?, Zwiï¿½zek Emerytï¿½w, Salon Samochodowy)
 		    return 1;
 		}
 		else if(PlayerToPoint(5.0,playerid,1190.0697021484,-1360.7618408203,13.55712890625) || PlayerToPoint(5.0,playerid,1841.7498779297,-1414.1690673828,13.5625) || PlayerToPoint(5.0,playerid,1326.9821777344,-918.90075683594,37.077602386475) || PlayerToPoint(5.0,playerid,997.08544921875,-1135.2745361328,23.828125))
@@ -2162,7 +2188,7 @@ IsASpojler(vehid)
 		    return 1;
 		}
 		else if(PlayerToPoint(5.0,playerid,1731.9656982422,-1861.1456298828,13.577872276306) || PlayerToPoint(5.0,playerid,570.83056640625,-1243.8570556641,17.4817943573) || PlayerToPoint(5.0,playerid,2490.0905761719,-1509.2993164063,23.828125) || PlayerToPoint(5.0,playerid,2563.310546875, -2404.4309082031, 13.640625) || PlayerToPoint(5.0,playerid,2152.5356445313, -1109.5147705078, 25.406316757202))
-		{//Pi¹te 4 (Kasyno Liderowe, Cywilarnia, Wyporzyczalnia wozów, Salon Samochodów Terenowych + ten motel co nie by³o w trzeciej 4 zmieniony na bazê wojskow¹)
+		{//Piï¿½te 4 (Kasyno Liderowe, Cywilarnia, Wyporzyczalnia wozï¿½w, Salon Samochodï¿½w Terenowych + ten motel co nie byï¿½o w trzeciej 4 zmieniony na bazï¿½ wojskowï¿½)
 		    return 1;
 		}
 	}
@@ -2173,17 +2199,17 @@ UsunBron(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		PlayerInfo[playerid][pGun0] = 0;//Piêœæ lub kastet
-		PlayerInfo[playerid][pGun1] = 0;//Broñ bia³a
+		PlayerInfo[playerid][pGun0] = 0;//Piï¿½ï¿½ lub kastet
+		PlayerInfo[playerid][pGun1] = 0;//Broï¿½ biaï¿½a
 		PlayerInfo[playerid][pGun2] = 0;//Pistolety
 		PlayerInfo[playerid][pGun3] = 0;//Shotguny
-		PlayerInfo[playerid][pGun4] = 0;//Broñ maszynowa
+		PlayerInfo[playerid][pGun4] = 0;//Broï¿½ maszynowa
 		PlayerInfo[playerid][pGun5] = 0;//Karabiny
 		PlayerInfo[playerid][pGun6] = 0;//Snajperki
-		PlayerInfo[playerid][pGun7] = 0;//Ciê¿ka broñ
-		PlayerInfo[playerid][pGun8] = 0;//Broñ wybuchowa
+		PlayerInfo[playerid][pGun7] = 0;//Ciï¿½ka broï¿½
+		PlayerInfo[playerid][pGun8] = 0;//Broï¿½ wybuchowa
 		PlayerInfo[playerid][pGun9] = 0;//Sprej/Gasnica/Aparat
-		PlayerInfo[playerid][pGun10] = 0;//Nietypowa broñ bia³a
+		PlayerInfo[playerid][pGun10] = 0;//Nietypowa broï¿½ biaï¿½a
 		PlayerInfo[playerid][pGun11] = 0;//Spadochron
 		PlayerInfo[playerid][pGun12] = 0;//Detonator
 		PlayerInfo[playerid][pAmmo0] = 0;
@@ -2654,7 +2680,7 @@ WyjmijBron(playerid)
     a8 = Dom[dom][hS_A8];
     a9 = Dom[dom][hS_A9];
     format(bron, sizeof(bron), "%s\n%s\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\n%s",b0,b1,b2,a2,b3,a3,b4,a4,b5,a5,b6,a6,b7,a7,b8,a8,b9,a9,b10,b11);
-    ShowPlayerDialogEx(playerid, 8241, DIALOG_STYLE_LIST, "Wybierz broñ któr¹ chcesz wyj¹æ", bron, "Wybierz", "Cofnij");
+    ShowPlayerDialogEx(playerid, 8241, DIALOG_STYLE_LIST, "Wybierz broï¿½ ktï¿½rï¿½ chcesz wyjï¿½ï¿½", bron, "Wybierz", "Cofnij");
 }
 
 SchowajBron(playerid)
@@ -2677,7 +2703,7 @@ SchowajBron(playerid)
 	format(b11, sizeof(b11), "%s", GunNames[BronieF[11][0]]);
 	new bron28itrzyipol[2000];
  	format(bron28itrzyipol, sizeof(bron28itrzyipol), "%s\n%s\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\n%s",b0,b1,b2,a2,b3,a3,b4,a4,b5,a5,b6,a6,b7,a7,b8,a8,b9,a9,b10,b11);
- 	ShowPlayerDialogEx(playerid, 8242, DIALOG_STYLE_LIST, "Wybierz broñ któr¹ chcesz schowaæ", bron28itrzyipol, "Wybierz", "Cofnij");
+ 	ShowPlayerDialogEx(playerid, 8242, DIALOG_STYLE_LIST, "Wybierz broï¿½ ktï¿½rï¿½ chcesz schowaï¿½", bron28itrzyipol, "Wybierz", "Cofnij");
 }
 
 ListaBroni(playerid)
@@ -2707,7 +2733,7 @@ ListaBroni(playerid)
     a8 = Dom[dom][hS_A8];
     a9 = Dom[dom][hS_A9];
     format(bron, sizeof(bron), "%s\n%s\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\tAmunicja:%d\n%s\n%s",b0,b1,b2,a2,b3,a3,b4,a4,b5,a5,b6,a6,b7,a7,b8,a8,b9,a9,b10,b11);
-    ShowPlayerDialogEx(playerid, 8243, DIALOG_STYLE_LIST, "Lista broni", bron, "Usuñ", "Cofnij");
+    ShowPlayerDialogEx(playerid, 8243, DIALOG_STYLE_LIST, "Lista broni", bron, "Usuï¿½", "Cofnij");
 }
 
 MaZapisanaBron(playerid)
@@ -2976,7 +3002,7 @@ PrzyczepKogut(playerid, veh)
     }
     else
     {
-        SendClientMessage(playerid, COLOR_WHITE, "Na tym wozie nie mo¿na przyczepiæ koguta");
+        SendClientMessage(playerid, COLOR_WHITE, "Na tym wozie nie moï¿½na przyczepiï¿½ koguta");
     }
     VehicleUID[veh][vSiren] = CreateDynamicObject(18646, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
     AttachDynamicObjectToVehicle(VehicleUID[veh][vSiren], veh, x,y,z, 0.0, 0.0, 0.0);
@@ -3033,7 +3059,7 @@ GraczBankomat(playerid)
     {
         return 1;
     }
-	//PADZIOCH
+	//PAï¿½DZIOCH
 	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 2423.41968, -2066.13257, 13.16730))
     {
         return 1;
@@ -3115,7 +3141,7 @@ IsAtGasStation(playerid)
 		    return 1;
 		}
 		else if(PlayerToPoint(8.0,playerid,-1130.1172,-1018.0840,129.2188))
-		{//¯u¿el
+		{//ï¿½uï¿½el
 		    return 1;
 		}
 		else if(PlayerToPoint(7.0,playerid,2482.4558,-2130.1379,13.5530))
@@ -3135,7 +3161,7 @@ IsAtGasStation(playerid)
 		    return 1;
 		}//Plac manewrowy
 		else if(PlayerToPoint(6.0,playerid,1011.7135,-1352.0660,13.5839) || PlayerToPoint(6.0,playerid,1011.8489,-1356.9026,13.5839))
-		{//Stacja pod p¹czkiem LS
+		{//Stacja pod pï¿½czkiem LS
 		    return 1;
 		}
 	}
@@ -3203,7 +3229,7 @@ IsAtBar(playerid)
 		    return 1;
 		}
 		else if(IsPlayerInRangeOfPoint(playerid,4.0,-785.6683,498.2613,1371.7422) || IsPlayerInRangeOfPoint(playerid,7.0,598.6794,-2204.8613,1.8190))
-		{//Basen "tsunami i W³oska restauracja
+		{//Basen "tsunami i Wï¿½oska restauracja
 		    return 1;
  		}
 		else if(IsPlayerInRangeOfPoint(playerid, 4.0, 1980.4153,-1290.2195,5620.3687) || IsPlayerInRangeOfPoint(playerid,4.0,-223.3081,1406.5033,27.7734))
@@ -3246,7 +3272,7 @@ IsABike(carid)
 
 IsABoat(carid)
 {
-	if(GetVehicleModel(carid) == 472 || GetVehicleModel(carid) == 473 || GetVehicleModel(carid) == 493 || GetVehicleModel(carid) == 595 || GetVehicleModel(carid) == 484 || GetVehicleModel(carid) == 430 || GetVehicleModel(carid) == 453 || GetVehicleModel(carid) == 452 || GetVehicleModel(carid) == 446 || GetVehicleModel(carid) == 454)//³odzie
+	if(GetVehicleModel(carid) == 472 || GetVehicleModel(carid) == 473 || GetVehicleModel(carid) == 493 || GetVehicleModel(carid) == 595 || GetVehicleModel(carid) == 484 || GetVehicleModel(carid) == 430 || GetVehicleModel(carid) == 453 || GetVehicleModel(carid) == 452 || GetVehicleModel(carid) == 446 || GetVehicleModel(carid) == 454)//ï¿½odzie
 	{
 		return 1;
 	}
@@ -3363,7 +3389,7 @@ JoinChannel(playerid, number, line[])
 	    }
 	    else
 	    {
-	        SendClientMessage(playerid, COLOR_GREY, "   Z³e has³o !");
+	        SendClientMessage(playerid, COLOR_GREY, "   Zï¿½e hasï¿½o !");
 	    }
 	}
 	return 1;
@@ -3378,7 +3404,7 @@ JoinChannelNr(playerid, number)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(PlayersChannel[playerid] < 999)
 	    {
-			format(string, sizeof(string), "* %s opuœci³ ten kana³.", sendername);
+			format(string, sizeof(string), "* %s opuï¿½ciï¿½ ten kanaï¿½.", sendername);
 			SendIRCMessage(PlayersChannel[playerid], COLOR_GREEN, string);
 			IRCInfo[PlayersChannel[playerid]][iPlayers] -= 1;
 	    }
@@ -3390,17 +3416,17 @@ JoinChannelNr(playerid, number)
 		strmid(wstring, string, 0, strlen(string), 255);
 		if(strcmp(IRCInfo[number][iAdmin],wstring, true ) == 0 )
 		{
-		    format(string, sizeof(string), "* Do³¹czy³eœ do kana³u numer %d jako Administartor.", channel);
+		    format(string, sizeof(string), "* Doï¿½ï¿½czyï¿½eï¿½ do kanaï¿½u numer %d jako Administartor.", channel);
 			SendClientMessage(playerid, COLOR_YELLOW, string);
 		}
 		else
 		{
-		    format(string, sizeof(string), "* Do³¹czy³eœ do kana³u numer %d, Administrator kana³u: %s.", channel, IRCInfo[number][iAdmin]);
+		    format(string, sizeof(string), "* Doï¿½ï¿½czyï¿½eï¿½ do kanaï¿½u numer %d, Administrator kanaï¿½u: %s.", channel, IRCInfo[number][iAdmin]);
 			SendClientMessage(playerid, COLOR_YELLOW, string);
 		}
 		format(string, sizeof(string), "MOTD: %s.", IRCInfo[number][iMOTD]);
 		SendClientMessage(playerid, COLOR_YELLOW, string);
-		format(string, sizeof(string), "* %s do³¹czy³ do tego kana³u.", sendername);
+		format(string, sizeof(string), "* %s doï¿½ï¿½czyï¿½ do tego kanaï¿½u.", sendername);
 		SendIRCMessage(number, COLOR_GREEN, string);
 	}
 	return 1;
@@ -3649,7 +3675,7 @@ Lotto(number)
 	new JackpotFallen = 0;
 	new string[256];
 	new winner[MAX_PLAYER_NAME];
-	format(string, sizeof(string), "Totolotek: Wygra³a liczba: %d.", number);
+	format(string, sizeof(string), "Totolotek: Wygraï¿½a liczba: %d.", number);
     OOCOff(COLOR_WHITE, string);
     foreach(Player, i)
 	{
@@ -3661,16 +3687,16 @@ Lotto(number)
 			    {
 			        JackpotFallen = 1;
 			        GetPlayerName(i, winner, sizeof(winner));
-					format(string, sizeof(string), "Totolotek: %s Wygra³ nagrodê w wysokoœci: $%d.", winner, Jackpot);
+					format(string, sizeof(string), "Totolotek: %s Wygraï¿½ nagrodï¿½ w wysokoï¿½ci: $%d.", winner, Jackpot);
 					OOCOff(COLOR_WHITE, string);
 					PayLog(string);
-					format(string, sizeof(string), "* Wygra³eœ nagrodê o wysokoœci: $%d dziêki wytypowaniu prawid³owej liczby !", Jackpot);
+					format(string, sizeof(string), "* Wygraï¿½eï¿½ nagrodï¿½ o wysokoï¿½ci: $%d dziï¿½ki wytypowaniu prawidï¿½owej liczby !", Jackpot);
 					SendClientMessage(i, COLOR_YELLOW, string);
 			    	DajKase(i, Jackpot);
 			    }
 			    else
 			    {
-			        SendClientMessage(i, COLOR_LIGHTBLUE, "* Tym razem nie wygra³eœ w totolotku. Spróbuj innym razem :) .");
+			        SendClientMessage(i, COLOR_LIGHTBLUE, "* Tym razem nie wygraï¿½eï¿½ w totolotku. Sprï¿½buj innym razem :) .");
 			    }
 			}
 			PlayerInfo[i][pLottoNr] = 0;
@@ -3681,16 +3707,16 @@ Lotto(number)
 	    new rand = random(125000); rand += 15789;
 	    Jackpot = rand;
 	    SaveStuff();
-	    format(string, sizeof(string), "Totolotek: Losowanie rozpoczête, przewidywana nagroda: $%d.", Jackpot);
+	    format(string, sizeof(string), "Totolotek: Losowanie rozpoczï¿½te, przewidywana nagroda: $%d.", Jackpot);
 		OOCOff(COLOR_WHITE, string);
-		SendClientMessageToAll(COLOR_YELLOW, "Komora losowania jest pusta, proszê o zwolnienie blokady");
+		SendClientMessageToAll(COLOR_YELLOW, "Komora losowania jest pusta, proszï¿½ o zwolnienie blokady");
 	}
 	else
 	{
 	    new rand = random(15000); rand += 2158;
 	    Jackpot += rand;
 	    SaveStuff();
-	    format(string, sizeof(string), "Totolotek: Nagroda zosta³a podwy¿szona do: $%d.", Jackpot);
+	    format(string, sizeof(string), "Totolotek: Nagroda zostaï¿½a podwyï¿½szona do: $%d.", Jackpot);
 		OOCOff(COLOR_WHITE, string);
 	}
 	return 1;
@@ -3906,7 +3932,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 				strmid(PlayerCrime[declare][pAccusing], reason, 0, strlen(reason), 255);
 			}
 		}
-		format(turnmes, sizeof(turnmes), "Pope³ni³eœ przestêpstwo ( %s ). Zg³osi³: %s.",reason,turner);
+		format(turnmes, sizeof(turnmes), "Popeï¿½niï¿½eï¿½ przestï¿½pstwo ( %s ). Zgï¿½osiï¿½: %s.",reason,turner);
 		SendClientMessage(playerid, COLOR_LIGHTRED, turnmes);
 		if(points > 0)
 		{
@@ -4006,9 +4032,9 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 					    {
 					        if(gCrime[i] == 0)
 					        {
-								format(cbjstore, sizeof(turnmes), "HQ: Do wszystkich jednostek: Zg³osi³: %s",turner);
+								format(cbjstore, sizeof(turnmes), "HQ: Do wszystkich jednostek: Zgï¿½osiï¿½: %s",turner);
 								SendClientMessage(i, COLOR_LFBI, cbjstore);
-								format(cbjstore, sizeof(turnmes), "HQ: Przestêpstwo: %s, Podejrzany: %s WL: %d",reason,turned, PoziomPoszukiwania[playerid]);
+								format(cbjstore, sizeof(turnmes), "HQ: Przestï¿½pstwo: %s, Podejrzany: %s WL: %d",reason,turned, PoziomPoszukiwania[playerid]);
 								SendClientMessage(i, COLOR_LFBI, cbjstore);
 							}
 						}
@@ -4019,7 +4045,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 	}//not connected
 }
 
-/*SetPlayerWeapons(playerid)//megawa¿ne
+/*SetPlayerWeapons(playerid)//megawaï¿½ne
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -4101,7 +4127,7 @@ ShowStats(playerid,targetid)
 	{
 		new cash = kaska[targetid];
 		new atext[20];
-		if(PlayerInfo[targetid][pSex] == 1) { atext = "Mê¿czyzna"; }
+		if(PlayerInfo[targetid][pSex] == 1) { atext = "Mï¿½czyzna"; }
 		else if(PlayerInfo[targetid][pSex] == 2) { atext = "Kobieta"; }
   		new otext[20];
 		if(PlayerInfo[targetid][pOrigin] == 1) { otext = "USA"; }
@@ -4169,15 +4195,15 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Level:[%d] P³eæ:[%s] Wiek:[%d] Pochodzenie:[%s] Zdrowie:[%.1f] Kasa:[$%d] Bank:[$%d] Telefon:[%d]", level,atext,age,otext,shealth+50, cash, account, pnumber);
+		format(coordsstring, sizeof(coordsstring), "Level:[%d] Pï¿½eï¿½:[%s] Wiek:[%d] Pochodzenie:[%s] Zdrowie:[%.1f] Kasa:[$%d] Bank:[$%d] Telefon:[%d]", level,atext,age,otext,shealth+50, cash, account, pnumber);
 		SendClientMessage(playerid, COLOR_GRAD1,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Konto Premium:[%s] Œlub z:[%s] On-Line:[%d] LottoNr:[%d] Praca:[%s] Punkty karne:[%d]", drank,PlayerInfo[targetid][pMarriedTo],ptime,lotto,jtext, PlayerInfo[targetid][pPK]);
+		format(coordsstring, sizeof(coordsstring), "Konto Premium:[%s] ï¿½lub z:[%s] On-Line:[%d] LottoNr:[%d] Praca:[%s] Punkty karne:[%d]", drank,PlayerInfo[targetid][pMarriedTo],ptime,lotto,jtext, PlayerInfo[targetid][pPK]);
 		SendClientMessage(playerid, COLOR_GRAD2,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] Przestêpstwa:[%d] Czas Aresztu:[%d] Smierci bêd¹c Poszukiwanym:[%d]", fishes,bigfish,crimes,arrests,warrests );
+		format(coordsstring, sizeof(coordsstring), "Ryb Zï¿½owionych:[%d] Najwiï¿½ksza Ryba:[%d] Przestï¿½pstwa:[%d] Czas Aresztu:[%d] Smierci bï¿½dï¿½c Poszukiwanym:[%d]", fishes,bigfish,crimes,arrests,warrests );
 		SendClientMessage(playerid, COLOR_GRAD3,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s]",kills,deaths,costlevel,exp,expamount,wanted,f2text);
+		format(coordsstring, sizeof(coordsstring), "Zabiï¿½:[%d] ï¿½mierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s]",kills,deaths,costlevel,exp,expamount,wanted,f2text);
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
+		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostï¿½pnych zmian nickï¿½w:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 		{
@@ -4492,7 +4518,7 @@ stock orgInvitePlayer(playerid, orguid)
     gPlayerOrgLeader[playerid] = false;
     gTeam[playerid] = 5;
     new lStr[64];
-    format(lStr, 64, "ORG » Zosta³eœ przyjêty do organizacji %s.", OrgInfo[orgid][o_Name]);
+    format(lStr, 64, "ORG ï¿½ Zostaï¿½eï¿½ przyjï¿½ty do organizacji %s.", OrgInfo[orgid][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
     return 1;
 }
@@ -4507,7 +4533,7 @@ stock orgUnInvitePlayer(playerid)
     gTeam[playerid] = 3;
     new lStr[64];
     if(!orgIsValid(orgid)) return 0;
-    format(lStr, 64, "ORG » Zosta³eœ wyproszony z organizacji %s.", OrgInfo[orgid][o_Name]);
+    format(lStr, 64, "ORG ï¿½ Zostaï¿½eï¿½ wyproszony z organizacji %s.", OrgInfo[orgid][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
     gPlayerOrgLeader[playerid] = false;
     return 1;
@@ -4535,7 +4561,7 @@ stock orgSetSpawnAtPlayerPos(playerid, orgid)
     if(!orgIsValid(orgid)) return 0;
     GetPlayerPos(playerid, OrgInfo[orgid][o_Spawn][0], OrgInfo[orgid][o_Spawn][1], OrgInfo[orgid][o_Spawn][2]);
     GetPlayerFacingAngle(playerid, OrgInfo[orgid][o_Spawn][3]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, "ORG » Spawn zmieniony.");
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, "ORG ï¿½ Spawn zmieniony.");
     return 1;
 }
 
@@ -4544,7 +4570,7 @@ stock orgGivePlayerRank(playerid, callerid, rankid)
     new orgid = gPlayerOrg[playerid];
     if(!orgIsValid(orgid)) return 0;
     new lStr[128];
-    format(lStr, 128, "ORG » Otrzyma³eœ %d rangê (%s) w organizacji %s. Nada³: %s.", rankid, (strlen(FamRang[PlayerInfo[playerid][pOrg]][rankid]) > 1) ? (FamRang[PlayerInfo[playerid][pOrg]][rankid]) : (FamRang[0][rankid]), OrgInfo[orgid][o_Name], (callerid == INVALID_PLAYER_ID) ? ("SYSTEM") : (GetNick(callerid)));
+    format(lStr, 128, "ORG ï¿½ Otrzymaï¿½eï¿½ %d rangï¿½ (%s) w organizacji %s. Nadaï¿½: %s.", rankid, (strlen(FamRang[PlayerInfo[playerid][pOrg]][rankid]) > 1) ? (FamRang[PlayerInfo[playerid][pOrg]][rankid]) : (FamRang[0][rankid]), OrgInfo[orgid][o_Name], (callerid == INVALID_PLAYER_ID) ? ("SYSTEM") : (GetNick(callerid)));
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
     PlayerInfo[playerid][pRank] = rankid;
     return 1;
@@ -4679,14 +4705,14 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
 {
     if(IsPlayerInAnyVehicle(playerid))
     {
-        SendClientMessage(playerid, COLOR_GRAD2, "WyjdŸ z pojazdu.");
+        SendClientMessage(playerid, COLOR_GRAD2, "Wyjdï¿½ z pojazdu.");
         return 0;
     }
     new komunikat[256];
 
     if(CountPlayerCars(playerid) >= PlayerInfo[playerid][pCarSlots])
     {
-        SendClientMessage(playerid, COLOR_YELLOW, "Nie masz wolnych slotów.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Nie masz wolnych slotï¿½w.");
         return 0;
     }
     new losuj = random(sizeof(LosowyParking));
@@ -4714,14 +4740,14 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
 
     if(carid == -1)
     {
-        SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Rekord nie zosta³ dodany do bazy.");
+        SendClientMessage(playerid, COLOR_PANICRED, "Nie moï¿½na stworzyï¿½ pojazdu! Rekord nie zostaï¿½ dodany do bazy.");
         return 0;
     }
     //Assign
     Car_MakePlayerOwner(playerid, carid);
 
     //Info
-    format(komunikat, sizeof(komunikat), "Kupi³eœ unikatowy %s za %d MC. Komendy auta znajdziesz w /auto. Gratulujemy zakupu!",VehicleNames[model-400], cena);
+    format(komunikat, sizeof(komunikat), "Kupiï¿½eï¿½ unikatowy %s za %d MC. Komendy auta znajdziesz w /auto. Gratulujemy zakupu!",VehicleNames[model-400], cena);
 	SendClientMessage(playerid,COLOR_NEWS, komunikat);
 
     format(komunikat, sizeof(komunikat), "%s kupil UNIKATOWY pojazd %s za %d MC. UID %d", nick, VehicleNames[model-400], cena, carid);
@@ -4729,7 +4755,7 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
     //TODO
     if(carid >= MAX_CARS)
     {
-        SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Mo¿liwe przepe³nienie, auto zosta³o kupione lecz nie mo¿esz go u¿yæ.");
+        SendClientMessage(playerid, COLOR_PANICRED, "Nie moï¿½na stworzyï¿½ pojazdu! Moï¿½liwe przepeï¿½nienie, auto zostaï¿½o kupione lecz nie moï¿½esz go uï¿½yï¿½.");
         return 1;
     }
 	PutPlayerInVehicleEx(playerid, CarData[carid][c_ID], 0);
@@ -4738,13 +4764,13 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
 
 KupowaniePojazdu(playerid, model, kolor1, kolor2, cena)
 {
-    if(IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GRAD2, "WyjdŸ z pojazdu.");
+    if(IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GRAD2, "Wyjdï¿½ z pojazdu.");
     new komunikat[256];
 	if(kaska[playerid] >= cena)
 	{
 	    if(model >= 400 && model <= 611)
 	    {
-            if(CountPlayerCars(playerid) >= PlayerInfo[playerid][pCarSlots]) return SendClientMessage(playerid, COLOR_YELLOW, "Nie masz wolnych slotów.");
+            if(CountPlayerCars(playerid) >= PlayerInfo[playerid][pCarSlots]) return SendClientMessage(playerid, COLOR_YELLOW, "Nie masz wolnych slotï¿½w.");
 			new losuj = random(sizeof(LosowyParking));
 			new losuj2 = random(sizeof(LosowyParkingLodz));
 			new losuj3 = random(sizeof(LosowyParkingLot));
@@ -4768,12 +4794,12 @@ KupowaniePojazdu(playerid, model, kolor1, kolor2, cena)
 			}
             else carid = Car_Create(model, LosowyParking[losuj][0],LosowyParking[losuj][1],LosowyParking[losuj][2], LosowyParking[losuj][3], kolor1, kolor2);
 
-            if(carid == -1) return SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Rekord nie zosta³ dodany do bazy.");
+            if(carid == -1) return SendClientMessage(playerid, COLOR_PANICRED, "Nie moï¿½na stworzyï¿½ pojazdu! Rekord nie zostaï¿½ dodany do bazy.");
             //Assign
             Car_MakePlayerOwner(playerid, carid);
 
             //Info
-            format(komunikat, sizeof(komunikat), "Kupi³eœ %s za %d$. Komendy auta znajdziesz w /auto. Gratulujemy zakupu!",VehicleNames[model-400], cena);
+            format(komunikat, sizeof(komunikat), "Kupiï¿½eï¿½ %s za %d$. Komendy auta znajdziesz w /auto. Gratulujemy zakupu!",VehicleNames[model-400], cena);
 			SendClientMessage(playerid,COLOR_NEWS, komunikat);
 
             ZabierzKase(playerid, cena);
@@ -4781,18 +4807,18 @@ KupowaniePojazdu(playerid, model, kolor1, kolor2, cena)
             format(komunikat, sizeof(komunikat), "%s kupil pojazd %s za %d$. UID %d", nick, VehicleNames[model-400], cena, carid);
 			PayLog(komunikat);
             //TODO
-            if(carid >= MAX_CARS) return SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Mo¿liwe przepe³nienie, auto zosta³o kupione lecz nie mo¿esz go u¿yæ.");
+            if(carid >= MAX_CARS) return SendClientMessage(playerid, COLOR_PANICRED, "Nie moï¿½na stworzyï¿½ pojazdu! Moï¿½liwe przepeï¿½nienie, auto zostaï¿½o kupione lecz nie moï¿½esz go uï¿½yï¿½.");
 
 			PutPlayerInVehicleEx(playerid, CarData[carid][c_ID], 0);
 		}
 		else
 		{
-		    SendClientMessage(playerid, COLOR_WHITE, "B£¥D - z³y model! Zg³oœ okolicznoœci na forum.");
+		    SendClientMessage(playerid, COLOR_WHITE, "Bï¿½ï¿½D - zï¿½y model! Zgï¿½oï¿½ okolicznoï¿½ci na forum.");
 		}
 	}
 	else
  	{
- 	    format(komunikat, sizeof(komunikat), "Nie staæ Ciê na zakup tego pojazdu. Kosztuje on %d$ a Ty posiadasz tylko %d$.",cena, kaska[playerid]);
+ 	    format(komunikat, sizeof(komunikat), "Nie staï¿½ Ciï¿½ na zakup tego pojazdu. Kosztuje on %d$ a Ty posiadasz tylko %d$.",cena, kaska[playerid]);
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 	}
 	return 1;
@@ -5164,7 +5190,7 @@ StworzDom(playerid, interior, oplata)
 {
 	if(interior == 8 || interior == 14)
 	{
-	    SendClientMessage(playerid, COLOR_RED, "Ten interior zosta³ usuniêty");
+	    SendClientMessage(playerid, COLOR_RED, "Ten interior zostaï¿½ usuniï¿½ty");
 	    return 1;
 	} // loled
 	if(interior == 33)
@@ -5186,7 +5212,7 @@ StworzDom(playerid, interior, oplata)
 	mnoznik = Mnoznik(pZone);
 	if(dini_Exists(string))
 	{
-	    SendClientMessageToAll(COLOR_RED, "B£AD PRZY TWORZENIU DOMU");
+	    SendClientMessageToAll(COLOR_RED, "Bï¿½AD PRZY TWORZENIU DOMU");
 	    return 1;
 	}
 	else
@@ -5305,7 +5331,7 @@ StworzDom(playerid, interior, oplata)
   		new Float:cenadomu = ((intcena*koxX)+oplata);//cena domu
 		Dom[dld][hCena] = floatround(cenadomu, floatround_ceil);
 		new string2[256];
-		format(string2, sizeof(string2), "Dom %d || NrDom %d || Mno¿nik %d || Parcela %s || Cene ogólna %d$.", dld, Dom[dld][hDomNr], mnoznik, pZone, floatround(cenadomu, floatround_ceil));
+		format(string2, sizeof(string2), "Dom %d || NrDom %d || Mnoï¿½nik %d || Parcela %s || Cene ogï¿½lna %d$.", dld, Dom[dld][hDomNr], mnoznik, pZone, floatround(cenadomu, floatround_ceil));
 		SendClientMessage(playerid, COLOR_NEWS, string2);
 		//
 		ZapiszDom(dld);
@@ -5317,7 +5343,7 @@ stock Dom_ChangeInt(playerid, dld, interior)
 {
 	if(interior == 8 || interior == 14)
 	{
-	    SendClientMessage(playerid, COLOR_RED, "Ten interior zosta³ usuniêty");
+	    SendClientMessage(playerid, COLOR_RED, "Ten interior zostaï¿½ usuniï¿½ty");
 	    return 1;
 	}
 	if(interior == 33)
@@ -5402,7 +5428,7 @@ L_StworzDom(playerid, kategoria, oplata)
     format(string, sizeof(string), "Domy/Dom%d.ini", dld );
 	if(dini_Exists(string))
 	{
-	    SendClientMessageToAll(COLOR_RED, "B£AD PRZY TWORZENIU DOMU (DOM INSTNIEJE)");
+	    SendClientMessageToAll(COLOR_RED, "Bï¿½AD PRZY TWORZENIU DOMU (DOM INSTNIEJE)");
 	    return 1;
 	}
 	else
@@ -5525,7 +5551,7 @@ L_StworzDom(playerid, kategoria, oplata)
 		}
 		else
 		{
-		    SendClientMessageToAll(COLOR_RED, "B£AD PRZY TWORZENIU DOMU (Z£A KATEGORIA)");
+		    SendClientMessageToAll(COLOR_RED, "Bï¿½AD PRZY TWORZENIU DOMU (Zï¿½A KATEGORIA)");
 	    	return 1;
 		}
 		//Dom[dld][hParcela] = dini_Int(string, "Parcela");//niet
@@ -5620,7 +5646,7 @@ L_StworzDom(playerid, kategoria, oplata)
   		new Float:cenadomu = ((intcena*koxX)+oplata);//cena domu
 		Dom[dld][hCena] = floatround(cenadomu, floatround_ceil);
 		new string2[256];
-		format(string2, sizeof(string2), "Dom %d || NrDom %d || Mno¿nik %d || Parcela %s || Cene ogólna %d$.", dld, Dom[dld][hDomNr], mnoznik, pZone, floatround(cenadomu, floatround_ceil));
+		format(string2, sizeof(string2), "Dom %d || NrDom %d || Mnoï¿½nik %d || Parcela %s || Cene ogï¿½lna %d$.", dld, Dom[dld][hDomNr], mnoznik, pZone, floatround(cenadomu, floatround_ceil));
 		SendClientMessage(playerid, COLOR_NEWS, string2);
 		//
 		ZapiszDom(dld);
@@ -5634,7 +5660,7 @@ KupowanieDomu(playerid, dom, platnosc)
     format(string, sizeof(string), "Domy/Dom%d.ini", dom);
 	if(!dini_Exists(string))
 	{
-        format(string, 256, "B£AD PRZY KUPOWANIU DOMU - Dom %d gracz %d", dom, playerid);
+        format(string, 256, "Bï¿½AD PRZY KUPOWANIU DOMU - Dom %d gracz %d", dom, playerid);
 	    SendClientMessageToAll(COLOR_RED, string);
 	    return 1;
 	}
@@ -5655,12 +5681,12 @@ KupowanieDomu(playerid, dom, platnosc)
 	        if(kaska[playerid] >= cenadomu && cenadomu != 0 && cenadomu > 0 && kaska[playerid] != 0 && kaska[playerid] > 0)
 	        {
 				ZabierzKase(playerid, cenadomu);
-				format(str2, sizeof(str2), "Gratulacje! Kupi³eœ dom za %d$. Masz teraz %d$.", cenadomu, kaska[playerid]);
+				format(str2, sizeof(str2), "Gratulacje! Kupiï¿½eï¿½ dom za %d$. Masz teraz %d$.", cenadomu, kaska[playerid]);
 				SendClientMessage(playerid, COLOR_NEWS, str2);
 			}
 			else
 			{
-			    SendClientMessage(playerid, COLOR_NEWS, "Nie staæ ciê!!!!");
+			    SendClientMessage(playerid, COLOR_NEWS, "Nie staï¿½ ciï¿½!!!!");
 			    return 1;
 			}
 	    }
@@ -5669,12 +5695,12 @@ KupowanieDomu(playerid, dom, platnosc)
 		    if(PlayerInfo[playerid][pAccount] >= cenadomu && cenadomu != 0 && cenadomu > 0 && PlayerInfo[playerid][pAccount] != 0 && PlayerInfo[playerid][pAccount] > 0)
 	        {
 				PlayerInfo[playerid][pAccount] += -cenadomu;
-				format(str2, sizeof(str2), "Gratulacje! Kupi³eœ dom za %d$. Zosta³o one odliczone od twojego konta bankowego które wynosi teraz %d", cenadomu, PlayerInfo[playerid][pAccount]);
+				format(str2, sizeof(str2), "Gratulacje! Kupiï¿½eï¿½ dom za %d$. Zostaï¿½o one odliczone od twojego konta bankowego ktï¿½re wynosi teraz %d", cenadomu, PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_PANICRED, str2);
 			}
 			else
 			{
-			    SendClientMessage(playerid, COLOR_PANICRED, "Nie staæ ciê!!!!");
+			    SendClientMessage(playerid, COLOR_PANICRED, "Nie staï¿½ ciï¿½!!!!");
 			    return 1;
 			}
 		}
@@ -5696,7 +5722,7 @@ KupowanieDomu(playerid, dom, platnosc)
 	    SetPlayerVirtualWorld(playerid, Dom[dom][hVW]);
 	    PlayerInfo[playerid][pDomWKJ] = dom;
 	    PlayerInfo[playerid][pDomT] = h;
-	    SendClientMessage(playerid, COLOR_NEWS, "Aby zobaczyæ komendy domu wpisz /dompomoc");
+	    SendClientMessage(playerid, COLOR_NEWS, "Aby zobaczyï¿½ komendy domu wpisz /dompomoc");
         format(str2, sizeof(str2), "%s kupil dom (id %d) za %d$", GeT, dom, cenadomu);
 		PayLog(str2);
 	    //
@@ -5813,7 +5839,7 @@ ZlomowanieDomu(playerid, dom)
 			PlayerInfo[playerid][pDom] = 0;
 			DajKase(playerid, (Dom[dom][hCena]/2));
 			new GeT2[512];
-			format(GeT2, sizeof(GeT2), "Sprzeda³eœ swój dom za %d$. Osoby wynajmuj¹ce zosta³y wyeksmitowane. Przedmioty w sejfie oraz dodatki do domu przepad³y.", (Dom[dom][hCena]/2));
+			format(GeT2, sizeof(GeT2), "Sprzedaï¿½eï¿½ swï¿½j dom za %d$. Osoby wynajmujï¿½ce zostaï¿½y wyeksmitowane. Przedmioty w sejfie oraz dodatki do domu przepadï¿½y.", (Dom[dom][hCena]/2));
 			SendClientMessage(playerid, COLOR_NEWS, GeT2);
             format(GeT2, sizeof(GeT2), "%s zezlomowal dom nr %d i dostal %d$", GeT4, dom, (Dom[dom][hCena]/2));
 			PayLog(GeT2);
@@ -5834,7 +5860,7 @@ ZlomowanieDomu(playerid, dom)
 	}
 	else
 	{
-	    SendClientMessage(playerid, COLOR_NEWS, "B£AD - Twój dom nie istnieje, zg³oœ to na forum !!");
+	    SendClientMessage(playerid, COLOR_NEWS, "Bï¿½AD - Twï¿½j dom nie istnieje, zgï¿½oï¿½ to na forum !!");
 	}
     return 1;
 }
@@ -5868,7 +5894,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 		{
 			Dom[PlayerInfo[playerid][pDom]][hKupiony] = 1;
 			ZapiszDom(PlayerInfo[playerid][pDom]);
-			SendClientMessage(playerid, COLOR_PANICRED, "Wykryto bug z niekupionym domem, zosta³ on automatycznie naprawiony. Je¿eli komunikat bêdzie siê powtarza³ lub wyst¹pi¹ inne bugi, zg³oœ to koniecznie na forum!");
+			SendClientMessage(playerid, COLOR_PANICRED, "Wykryto bug z niekupionym domem, zostaï¿½ on automatycznie naprawiony. Jeï¿½eli komunikat bï¿½dzie siï¿½ powtarzaï¿½ lub wystï¿½piï¿½ inne bugi, zgï¿½oï¿½ to koniecznie na forum!");
 			format(string, sizeof(string), "%s posiadal buga z niekupionym domem o (id %d)", GetNick(playerid), PlayerInfo[playerid][pDom] );
 			PayLog(string);
 		}
@@ -5878,7 +5904,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 		if(Dom[PlayerInfo[playerid][pDom]][hKupiony] == 0)
 		{
 			DajKase(playerid, (Dom[PlayerInfo[playerid][pDom]][hCena]/2));
-			SendClientMessage(playerid, COLOR_PANICRED, "Twój dom zosta³ zabrany z powodu nieaktywnoœci, otrzymujesz po³owê wartosci domu!");
+			SendClientMessage(playerid, COLOR_PANICRED, "Twï¿½j dom zostaï¿½ zabrany z powodu nieaktywnoï¿½ci, otrzymujesz poï¿½owï¿½ wartosci domu!");
 			format(string, sizeof(string), "%s stracil dom z powodu nieaktywnosci (id %d) i dostal %d$", GetNick(playerid), PlayerInfo[playerid][pDom], Dom[PlayerInfo[playerid][pDom]][hCena]/2 );
 			PayLog(string);
 			PlayerInfo[playerid][pDom] = 0;
@@ -5886,7 +5912,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 		else
 		{
 			DajKase(playerid, (Dom[PlayerInfo[playerid][pDom]][hCena]/2));
-			SendClientMessage(playerid, COLOR_PANICRED, "Wykro bug z dwoma w³aœcicielami! Jesteœ drugim w³aœcicielem, wiêc tracisz dom, otrzymujesz po³owê wartosci domu.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Wykro bug z dwoma wï¿½aï¿½cicielami! Jesteï¿½ drugim wï¿½aï¿½cicielem, wiï¿½c tracisz dom, otrzymujesz poï¿½owï¿½ wartosci domu.");
 			format(string, sizeof(string), "%s stracil dom z powodu dwoch wlascicieli (id %d) i dostal %d$", GetNick(playerid), PlayerInfo[playerid][pDom], Dom[PlayerInfo[playerid][pDom]][hCena]/2 );
 			PayLog(string);
 			PlayerInfo[playerid][pDom] = 0;
@@ -5894,7 +5920,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 	}
 	else
 	{
-		SendClientMessage(playerid, COLOR_PANICRED, "Twój dom nie istnieje! Prawdopodobnie zosta³ usuniêty lub coœ posz³o nie tak.");
+		SendClientMessage(playerid, COLOR_PANICRED, "Twï¿½j dom nie istnieje! Prawdopodobnie zostaï¿½ usuniï¿½ty lub coï¿½ poszï¿½o nie tak.");
 		format(string, sizeof(string), "Brak domu gracza %s dom (id %d)", GetNick(playerid), PlayerInfo[playerid][pDom]);
 		PayLog(string);
 		PlayerInfo[playerid][pDom] = 0;
@@ -5903,7 +5929,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 
 DialogZbrojowni(playerid)
 {
-    ShowPlayerDialogEx(playerid, 8282, DIALOG_STYLE_LIST, "Kup przystosowanie do przechowywania:", "Kastetu\t\t\t\t\t1 000$\nSpadochronu\t\t\t\t5 000$\nSpreju, gaœnicy i aparatu\t\t40 000$\nWibratorów,kwiatów i laski\t\t50 000$\nBroni bia³ej\t\t\t\t750 000$\nPistoletów\t\t\t\t250 000$\nStrzelb\t\t\t\t\t450 000$\nPistoletów maszynowych\t\t550 000$\nKarabinów szturmowych\t\t850 000$\nSnajperek\t\t\t\t700 000$\nBroni ciê¿kiej\t\t\t\t2 000 000$\n£adunków wybuchowych\t\t4 000 000$", "Wybierz", "Cofnij");
+    ShowPlayerDialogEx(playerid, 8282, DIALOG_STYLE_LIST, "Kup przystosowanie do przechowywania:", "Kastetu\t\t\t\t\t1 000$\nSpadochronu\t\t\t\t5 000$\nSpreju, gaï¿½nicy i aparatu\t\t40 000$\nWibratorï¿½w,kwiatï¿½w i laski\t\t50 000$\nBroni biaï¿½ej\t\t\t\t750 000$\nPistoletï¿½w\t\t\t\t250 000$\nStrzelb\t\t\t\t\t450 000$\nPistoletï¿½w maszynowych\t\t550 000$\nKarabinï¿½w szturmowych\t\t850 000$\nSnajperek\t\t\t\t700 000$\nBroni ciï¿½kiej\t\t\t\t2 000 000$\nï¿½adunkï¿½w wybuchowych\t\t4 000 000$", "Wybierz", "Cofnij");
 }
 
 Przystanek(playerid, color, tekst[])
@@ -6084,11 +6110,11 @@ KupowanieDodatkow(playerid, dom)
 	}
 	if(Dom[dom][hGaraz] == 0)
 	{
-		format(Garaz, sizeof(Garaz), "Gara¿\t\t\tLevel: %d\tCena: %d$\n", 1, 1000000);
+		format(Garaz, sizeof(Garaz), "Garaï¿½\t\t\tLevel: %d\tCena: %d$\n", 1, 1000000);
 	}
 	else
 	{
-	    format(Garaz, sizeof(Garaz), "Gara¿\t\t\tLevel: %d\tCena: %d$\n", (Dom[dom][hGaraz]/20)+1, 500000*((Dom[dom][hGaraz]/20)+1));
+	    format(Garaz, sizeof(Garaz), "Garaï¿½\t\t\tLevel: %d\tCena: %d$\n", (Dom[dom][hGaraz]/20)+1, 500000*((Dom[dom][hGaraz]/20)+1));
 	}
 	if(Dom[dom][hApteczka] == 0)
 	{
@@ -6108,22 +6134,22 @@ KupowanieDodatkow(playerid, dom)
 	}
 	if(Dom[dom][hLadowisko] == 0)
 	{
-	    format(Ladowisko, sizeof(Ladowisko), "L¹dowisko\t\tLevel: %d\tCena: %d$\n", 1, 10000000);
+	    format(Ladowisko, sizeof(Ladowisko), "Lï¿½dowisko\t\tLevel: %d\tCena: %d$\n", 1, 10000000);
 	}
 	else
 	{
-	    format(Ladowisko, sizeof(Ladowisko), "L¹dowisko\t\tLevel: %d\tCena: %d$\n", (Dom[dom][hLadowisko]/20)+1, 1000000*((Dom[dom][hLadowisko]/20)+1));
+	    format(Ladowisko, sizeof(Ladowisko), "Lï¿½dowisko\t\tLevel: %d\tCena: %d$\n", (Dom[dom][hLadowisko]/20)+1, 1000000*((Dom[dom][hLadowisko]/20)+1));
 	}
   	format(Alarm, sizeof(Alarm), "Alarm\t\t\tLevel: %d\tCena: %d$\n", Dom[dom][hAlarm]+1, 0*(Dom[dom][hAlarm]+1));
    	format(Zamek, sizeof(Zamek), "Zamek\t\t\tLevel: %d\tCena: %d$\n", Dom[dom][hZamekD]+1, 0*(Dom[dom][hZamekD]+1));
     format(Komputer, sizeof(Komputer), "Komputer\t\tLevel: %d\tCena: %d$\n", Dom[dom][hKomputer]+1, 0*(Dom[dom][hKomputer]+1));
-    format(RTV, sizeof(RTV), "Sprzêt RTV\t\tLevel: %d\tCena: %d$\n", Dom[dom][hRTV]+1, 0*(Dom[dom][hRTV]+1));
+    format(RTV, sizeof(RTV), "Sprzï¿½t RTV\t\tLevel: %d\tCena: %d$\n", Dom[dom][hRTV]+1, 0*(Dom[dom][hRTV]+1));
     format(Hazard, sizeof(Hazard), "Zestaw hazardzisty\tLevel: %d\tCena: %d$\n", Dom[dom][hHazard]+1, 0*(Dom[dom][hHazard]+1));
     format(Szafa, sizeof(Szafa), "Szafa\t\t\tLevel: %d\tCena: %d$\n", Dom[dom][hSzafa]+1, 0*(Dom[dom][hSzafa]+1));
     format(Tajne, sizeof(Tajne), "Tajemnicze dodatki\tLevel: %d\tCena: %d$\n", Dom[dom][hTajemnicze]+1, 0*(Dom[dom][hTajemnicze]+1));
     //ALL
 	format(strALL, sizeof(strALL), "%s%s%s%s%s%s%s%s%s%s%s%s%s", Sejf, Zbrojownia, Garaz, Apteczka, Pancerz, Ladowisko, Alarm, Zamek, Komputer, RTV, Hazard, Szafa, Tajne);
-    ShowPlayerDialogEx(playerid, 826, DIALOG_STYLE_LIST, "Kupowanie dodatków", strALL, "Wybierz", "WyjdŸ");
+    ShowPlayerDialogEx(playerid, 826, DIALOG_STYLE_LIST, "Kupowanie dodatkï¿½w", strALL, "Wybierz", "Wyjdï¿½");
     return 1;
 }
 
@@ -6255,7 +6281,7 @@ LadujInteriory()
     IntInfo[5][Kategoria] = 1;
     IntInfo[5][Pokoje] = 2;
     IntInfo[5][Cena] = 2000000;
-    IntInfo[6][Int_X] = 1207.6346435547;//dom 6 DOMEK Z MUZYCZK¥
+    IntInfo[6][Int_X] = 1207.6346435547;//dom 6 DOMEK Z MUZYCZKï¿½
     IntInfo[6][Int_Y] = -42.482707977295;
     IntInfo[6][Int_Z] = 1000.953125;
     IntInfo[6][Int] = 3;
@@ -6522,7 +6548,7 @@ LadujInteriory()
     IntInfo[42][Kategoria] = 5;
     IntInfo[42][Pokoje] = 11;
     IntInfo[42][Cena] = 40000000;
-    //Kategoria 6 (pa³ace)
+    //Kategoria 6 (paï¿½ace)
     IntInfo[43][Int_X] = 1263.1934814453;//dom 43 MADD DOG kategoria 8
     IntInfo[43][Int_Y] = -785.47039794922;
     IntInfo[43][Int_Z] = 1091.90625;
@@ -7179,7 +7205,7 @@ FunkcjaK(string[])
 		{
 			strdel(string, strlen(string)-ilosc_k, strlen(string));
 			x=floatstr(string);
-			return floatround((ilosc_k==1) ? (x*1000) : ((ilosc_k==2) ? (x*1000000) : (x*1000000000)), floatround_tozero); //zbugowane potêgi: x*(1000^ilosc_k)
+			return floatround((ilosc_k==1) ? (x*1000) : ((ilosc_k==2) ? (x*1000000) : (x*1000000000)), floatround_tozero); //zbugowane potï¿½gi: x*(1000^ilosc_k)
 		}
 	}
 	return strval(string);
@@ -7191,7 +7217,7 @@ Niwelacje(playerid)
 	GetPlayerName(playerid, playername2, sizeof(playername2));
 	if(PlayerInfo[playerid][pMats] >= 500000000)
 	{
-		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d MATSÓW DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pMats],PlayerInfo[playerid][pLevel]);
+		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d MATSï¿½W DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pMats],PlayerInfo[playerid][pLevel]);
 		SendClientMessage(playerid, COLOR_PANICRED, kox);
 		strins(kox, playername2, 0);
   		PlayerInfo[playerid][pMats] = 0;
@@ -7201,7 +7227,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 5000000)//5mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
@@ -7209,7 +7235,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 5000000)//5mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
@@ -7217,7 +7243,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 5000000)//5mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
@@ -7232,7 +7258,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 20000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
@@ -7240,7 +7266,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 20000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pCash] = 0;
@@ -7248,7 +7274,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 20000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
@@ -7259,7 +7285,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 50000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
@@ -7267,7 +7293,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 50000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
@@ -7276,7 +7302,7 @@ Niwelacje(playerid)
 		if(PlayerInfo[playerid][pAccount] >= 50000000)//1 000000 - 1mln
 		{
 
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
@@ -7287,7 +7313,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 75000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
@@ -7295,7 +7321,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 75000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
@@ -7303,7 +7329,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 75000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
@@ -7314,7 +7340,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 100000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
@@ -7322,7 +7348,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 100000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
@@ -7331,7 +7357,7 @@ Niwelacje(playerid)
 		if(PlayerInfo[playerid][pAccount] >= 100000000)//1 000000 - 1mln
 		{
 
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
@@ -7342,7 +7368,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 150000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
@@ -7350,7 +7376,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 150000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
@@ -7358,7 +7384,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 150000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pAccount] = 0;
 			strins(kox, playername2, 0);
@@ -7369,7 +7395,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 200000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
@@ -7377,7 +7403,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 200000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
@@ -7385,7 +7411,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 200000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pAccount] = 0;
@@ -7396,7 +7422,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 250000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             ResetujKase(playerid);
@@ -7404,7 +7430,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 250000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pCash] = 0;
@@ -7412,7 +7438,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 250000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pAccount] = 0;
@@ -7423,7 +7449,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 350000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             ResetujKase(playerid);
@@ -7431,7 +7457,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 350000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pCash] = 0;
@@ -7439,7 +7465,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 350000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pAccount] = 0;
@@ -7450,7 +7476,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 500000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             ResetujKase(playerid);
 			strins(kox, playername2, 0);
@@ -7458,7 +7484,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 500000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pCash] = 0;
@@ -7466,7 +7492,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 500000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
             PlayerInfo[playerid][pAccount] = 0;
             SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
@@ -7477,7 +7503,7 @@ Niwelacje(playerid)
 	{
 		if(kaska[playerid] >= 1000000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
             ResetujKase(playerid);
             SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
@@ -7485,7 +7511,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pCash] >= 1000000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
             PlayerInfo[playerid][pCash] = 0;
             SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
@@ -7493,7 +7519,7 @@ Niwelacje(playerid)
 		}
 		if(PlayerInfo[playerid][pAccount] >= 1000000000)//1 000000 - 1mln
 		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JEï¿½ELI UWAï¿½ASZ, ï¿½E NIESï¿½USZNIE - ZGï¿½Oï¿½ STRATï¿½ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
             PlayerInfo[playerid][pAccount] = 0;
             SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
@@ -7565,16 +7591,16 @@ public OPCLogin(playerid)
 	{
         //Logowanie
 		new string[256];
-		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na serwerze Mrucznik Role Play! Zaloguj siê aby rozpocz¹æ grê.");
-		format(string, sizeof(string), "Nick %s jest zarejestrowany.\nZaloguj siê wpisuj¹c w okienko poni¿ej has³o.\nJeœli nie znasz has³a do tego konta, wejdŸ pod innym nickiem", nick);
-		ShowPlayerDialogEx(playerid, D_LOGIN, DIALOG_STYLE_PASSWORD, "Logowanie", string, "Zaloguj", "WyjdŸ");
+		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na serwerze Mrucznik Role Play! Zaloguj siï¿½ aby rozpoczï¿½ï¿½ grï¿½.");
+		format(string, sizeof(string), "Nick %s jest zarejestrowany.\nZaloguj siï¿½ wpisujï¿½c w okienko poniï¿½ej hasï¿½o.\nJeï¿½li nie znasz hasï¿½a do tego konta, wejdï¿½ pod innym nickiem", nick);
+		ShowPlayerDialogEx(playerid, D_LOGIN, DIALOG_STYLE_PASSWORD, "Logowanie", string, "Zaloguj", "Wyjdï¿½");
 		gPlayerAccount[playerid] = 1; //logowanie
 	}
     else if(result == -999)
     {
         new string[256];
-		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na serwerze Mrucznik Role Play! Zaloguj siê aby rozpocz¹æ grê.");
-		format(string, sizeof(string), "Nick podobny do %s jest zarejestrowany.\n{FF0000}Podobny nick jest ju¿ w bazie, sprawdŸ wielkosæ znaków.", nick);
+		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na serwerze Mrucznik Role Play! Zaloguj siï¿½ aby rozpoczï¿½ï¿½ grï¿½.");
+		format(string, sizeof(string), "Nick podobny do %s jest zarejestrowany.\n{FF0000}Podobny nick jest juï¿½ w bazie, sprawdï¿½ wielkosï¿½ znakï¿½w.", nick);
         SendClientMessage(playerid, COLOR_RED, string);
         SendClientMessage(playerid, COLOR_RED, string);
         SendClientMessage(playerid, COLOR_RED, string);
@@ -7584,13 +7610,13 @@ public OPCLogin(playerid)
 	{
         if(VAR_MySQLREGISTER)
         {
-    		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na serwerze Mrucznik Role Play! Zarejestruj swoje konto aby rozpocz¹æ grê.");
-    		ShowPlayerDialogEx(playerid, D_REGISTER, DIALOG_STYLE_INPUT, "Rejestracja konta", "Witaj. Aby zacz¹æ grê na serwerze musisz siê zarejestrowaæ.\nAby to zrobiæ wpisz w okienko poni¿ej has³o które chcesz u¿ywaæ w swoim koncie.\nZapamiêtaj je gdy¿ bêdziesz musia³ go u¿ywaæ za ka¿dym razem kiedy wejdziesz na serwer", "Rejestruj", "WyjdŸ");
+    		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na serwerze Mrucznik Role Play! Zarejestruj swoje konto aby rozpoczï¿½ï¿½ grï¿½.");
+    		ShowPlayerDialogEx(playerid, D_REGISTER, DIALOG_STYLE_INPUT, "Rejestracja konta", "Witaj. Aby zaczï¿½ï¿½ grï¿½ na serwerze musisz siï¿½ zarejestrowaï¿½.\nAby to zrobiï¿½ wpisz w okienko poniï¿½ej hasï¿½o ktï¿½re chcesz uï¿½ywaï¿½ w swoim koncie.\nZapamiï¿½taj je gdyï¿½ bï¿½dziesz musiaï¿½ go uï¿½ywaï¿½ za kaï¿½dym razem kiedy wejdziesz na serwer", "Rejestruj", "Wyjdï¿½");
     		gPlayerAccount[playerid] = 0;//rejestracja
         }
         else
         {
-            SendClientMessage(playerid, COLOR_RED, "Rejestracja zosta³a wy³¹czona na czas ataków, przepraszamy za uniedogodnienia.");
+            SendClientMessage(playerid, COLOR_RED, "Rejestracja zostaï¿½a wyï¿½ï¿½czona na czas atakï¿½w, przepraszamy za uniedogodnienia.");
             KickEx(playerid);
         }
 	}
@@ -7800,7 +7826,7 @@ stock LoadConfig()
 
     format(VINYL_Stream, 128, "%s",RadioSANDos);
 
-    print("Wczytano podstawow¹ konfiguracjê");
+    print("Wczytano podstawowï¿½ konfiguracjï¿½");
     mysql_free_result();
 }
 
@@ -7978,7 +8004,7 @@ stock Sejf_Load()
     mysql_free_result();
 }
 
-//Wysy³anie logów
+//Wysyï¿½anie logï¿½w
 stock MASTER_StripNewLine(string[]) {
     new len = strlen(string);
     if (string[0]==0) return ;
@@ -8044,7 +8070,7 @@ stock CheckAlfaNumericNick(password[])
 
 stock CheckAlfaNumeric(password[])
 {
-    new charsets[46] = "0123456789a¹bcædeêfghijkl³mnñoóprsœtuvwyz¿Ÿxq";
+    new charsets[46] = "0123456789aï¿½bcï¿½deï¿½fghijklï¿½mnï¿½oï¿½prsï¿½tuvwyzï¿½ï¿½xq";
 
     new bool:validchars[64]={false,...};
 
@@ -8322,7 +8348,7 @@ stock ProceedSkinSelection(playerid, index, typ)
         new docalc = 9-ilosc;
         if(docalc != 0) calibrate = docalc*0.5;
 
-        xstart=640-floatmul(floatadd(w,margin),ilosc+calibrate)-(w*1.5); //Mno¿enie szerokosci i marginesu przez ilosc elementow w tablicy ze skinami
+        xstart=640-floatmul(floatadd(w,margin),ilosc+calibrate)-(w*1.5); //Mnoï¿½enie szerokosci i marginesu przez ilosc elementow w tablicy ze skinami
 
         x=xstart+margin;
         y=ystart+margin;
@@ -8596,7 +8622,7 @@ public B_TrailerCheck()
     }
 }
 
-//25.07     SYSTEM STREF GANGÓW
+//25.07     SYSTEM STREF GANGï¿½W
 public Zone_HideInfo(playerid)
 {
     ZoneTXD_Hide(playerid);
@@ -8623,7 +8649,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
                     GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
                     if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
+                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangï¿½w", false);
                 }
                 else if(GetPlayerOrg(i) == defender-100)
                 {
@@ -8642,7 +8668,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
                     GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
                     if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
+                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangï¿½w", false);
                 }
                 else if(defender != 0 && GetPlayerFraction(i) == defender)
                 {
@@ -8664,7 +8690,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
                     GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
                     if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
+                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangï¿½w", false);
                 }
                 else if(GetPlayerOrg(i) == defender-100)
                 {
@@ -8683,7 +8709,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
                     GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
                     if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
+                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangï¿½w", false);
                 }
                 else if(defender != 0 && GetPlayerFraction(i) == defender)
                 {
@@ -8708,7 +8734,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
     ZoneAttackData[zoneid][3] = defender;
     ZoneGangLimit[attacker] = false;
     ZoneAttackTimer[zoneid] = SetTimerEx("Zone_AttackEnd", ZONE_DEF_TIME*1000, 0, "iii", zoneid, attacker, defender);
-    printf("[GangZone] Atak na strefê %d przez %d. Atakuje %d osób broni %d osób.", zoneid, attacker, ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
+    printf("[GangZone] Atak na strefï¿½ %d przez %d. Atakuje %d osï¿½b broni %d osï¿½b.", zoneid, attacker, ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
 }
 
 stock Zone_GangUpdate(bool:cash=false)
@@ -9361,7 +9387,7 @@ stock FlyMode(playerid, typ)
 	GetPlayerPos(playerid, X, Y, Z);
 	noclipdata[playerid][flyobject] = CreatePlayerObject(playerid, 19300, X, Y, Z, 0.0, 0.0, 0.0);
 
-    if(noclipdata[playerid][flyobject] == INVALID_OBJECT_ID) return SendClientMessage(playerid, -1, " B³¹d limitu obiektów.");
+    if(noclipdata[playerid][flyobject] == INVALID_OBJECT_ID) return SendClientMessage(playerid, -1, " Bï¿½ï¿½d limitu obiektï¿½w.");
 
     GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
     Unspec[playerid][sPint] = GetPlayerInterior(playerid);
@@ -9834,7 +9860,7 @@ stock Patrol_CreateMarker(patrolid, Float:x, Float:y, type)
 stock Scena_CreateAt(Float:x, Float:y, Float:z)
 {
     new start, end, objstart, objend;
-    //Pod³oga
+    //Podï¿½oga
     start = CreateDynamicObject(19464, 0.00000, 0.00000, 0.00000,   0.00000, 90.00000, 0.00000);
     objstart = start;
     CreateDynamicObject(19464, 0.00000, 5.93500, 0.00000,   0.00000, 90.00000, 0.00000);
@@ -9853,7 +9879,7 @@ stock Scena_CreateAt(Float:x, Float:y, Float:z)
     CreateDynamicObject(19463, 2.79501, 8.83527, -1.65150,   0.00000, 0.00000, 90.00000);
     objend = CreateDynamicObject(19463, 2.79500, -8.83530, -1.65150,   0.00000, 0.00000, 90.00000);
     for(new i=objstart;i<=objend;i++) SetDynamicObjectMaterial(i, 0, 3862, "hashmarket_sfsx", "ws_tarp4");
-    //Ty³
+    //Tyï¿½
     objstart = CreateDynamicObject(18766, 7.14500, -6.39960, 3.81240,   0.00000, 90.00000, 90.00000);
     CreateDynamicObject(18766, 7.14500, -1.39960, 3.81240,   0.00000, 90.00000, 90.00000);
     CreateDynamicObject(18766, 7.14500, 3.60040, 3.81240,   0.00000, 90.00000, 90.00000);
@@ -9872,7 +9898,7 @@ stock Scena_CreateAt(Float:x, Float:y, Float:z)
 
     //Napis mid
     ScenaScreenObject = CreateDynamicObject(4988, 6.5, 0.00000, 4.18430,   0.00000, 0.00000, 100.0000);
-    SetDynamicObjectMaterialText(ScenaScreenObject, 0, "JKUBI", OBJECT_MATERIAL_SIZE_512x256, "Arial", 72, 1, 0xFFFFFFFF, 0, 1);
+    SetDynamicObjectMaterialText(ScenaScreenObject, 0, "SCENA", OBJECT_MATERIAL_SIZE_512x256, "Arial", 72, 1, 0xFFFFFFFF, 0, 1);
     //
     CreateDynamicObject(2232, -2.04205, 8.23906, 0.73210,   0.00000, 0.00000, -72.24001);
     CreateDynamicObject(2232, -2.04225, -8.23434, 0.73210,   0.00000, 0.00000, -110.27997);
@@ -10117,7 +10143,7 @@ stock Oil_OnPlayerPress(playerid, keys)
     else if((keys == KEY_RIGHT*2) && PlayerOilKeys[playerid][2] == 2) Oil_PressedOK(playerid);
     else
     {
-        //Co siê dzieje gdy wcisniêto niepoprawny przycisk
+        //Co siï¿½ dzieje gdy wcisniï¿½to niepoprawny przycisk
         new lStr[16];
         PlayerPlaySound(playerid, 1053, 0.0, 0.0, 0.0);
         if(OilData[GetPVarInt(playerid, "oil_id")][oilHP] < OIL_MAX_HEALTH)
@@ -10266,25 +10292,25 @@ stock ChangePlayerName(playerid, name[])
 {
     if(strlen(name) >= 21)
 	{
-		SendClientMessage(playerid, COLOR_RED, "Nowy nick mo¿e mieæ maksymalnie 20 znaków!");
+		SendClientMessage(playerid, COLOR_RED, "Nowy nick moï¿½e mieï¿½ maksymalnie 20 znakï¿½w!");
 		return 0;
 	}
 
     if(toupper(name[0]) != name[0])
     {
-        SendClientMessage(playerid, COLOR_RED, "Litery pocz¹tkowe musz¹ zaczynaæ siê od du¿ej.");
+        SendClientMessage(playerid, COLOR_RED, "Litery poczï¿½tkowe muszï¿½ zaczynaï¿½ siï¿½ od duï¿½ej.");
         return 0;
     }
     if(name[strlen(name)-1] == '_')
     {
-        SendClientMessage(playerid, COLOR_RED, "Nie moze byc pod³ogi na koñcu.");
+        SendClientMessage(playerid, COLOR_RED, "Nie moze byc podï¿½ogi na koï¿½cu.");
         return 0;
     }
     for(new i=0;i<strlen(name);i++)
     {
         if(name[i] == ' ')
         {
-            SendClientMessage(playerid, COLOR_RED, "Nick zawiera spacjê, zmieñ to.");
+            SendClientMessage(playerid, COLOR_RED, "Nick zawiera spacjï¿½, zmieï¿½ to.");
 		    return 0;
         }
     }
@@ -10295,7 +10321,7 @@ stock ChangePlayerName(playerid, name[])
         {
             if(toupper(name[i+1]) != name[i+1])
             {
-                SendClientMessage(playerid, COLOR_RED, "Litery pocz¹tkowe musz¹ zaczynaæ siê od du¿ej.");
+                SendClientMessage(playerid, COLOR_RED, "Litery poczï¿½tkowe muszï¿½ zaczynaï¿½ siï¿½ od duï¿½ej.");
                 return 0;
             }
             stabcount++;
@@ -10303,7 +10329,7 @@ stock ChangePlayerName(playerid, name[])
     }
     if(stabcount == 0 || stabcount > 2)
     {
-        SendClientMessage(playerid, COLOR_RED, "Nick nie zawiera podkresleñ, lub ma ich ponad 2.");
+        SendClientMessage(playerid, COLOR_RED, "Nick nie zawiera podkresleï¿½, lub ma ich ponad 2.");
 		return 0;
     }
 
@@ -10315,7 +10341,7 @@ stock ChangePlayerName(playerid, name[])
 
 	if(MruMySQL_DoesAccountExist(name) != 0)
 	{
-		SendClientMessage(playerid, COLOR_YELLOW, "Ten Nick jest ju¿ zajêty przez innego gracza.");
+		SendClientMessage(playerid, COLOR_YELLOW, "Ten Nick jest juï¿½ zajï¿½ty przez innego gracza.");
 		return 0;
 	}
 
@@ -10487,14 +10513,14 @@ stock TJD_Load()
     TextDrawSetSelectable(TXD_TJDImg, 0);
 
     new lStr[64];
-    format(lStr, 64, "Liczba materia³ów\n{99311E}%d\n{646464}(/zlecenie)", TJD_Materials);
+    format(lStr, 64, "Liczba materiaï¿½ï¿½w\n{99311E}%d\n{646464}(/zlecenie)", TJD_Materials);
     TJD_Label = CreateDynamic3DTextLabel(lStr, -1, TransportJobData[0][eTJDStartX], TransportJobData[0][eTJDStartY], TransportJobData[0][eTJDStartZ]+1.0, 15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
 }
 
 stock TJD_UpdateLabel()
 {
     new lStr[64];
-    format(lStr, 64, "Liczba materia³ów\n{99311E}%d\n{646464}(/zlecenie)", TJD_Materials);
+    format(lStr, 64, "Liczba materiaï¿½ï¿½w\n{99311E}%d\n{646464}(/zlecenie)", TJD_Materials);
     UpdateDynamic3DTextLabelText(TJD_Label, -1, lStr);
 }
 
@@ -10519,10 +10545,10 @@ stock TJD_JobEnd(playerid, bool:quiter=false)
     new ile = GetPVarInt(playerid, "transboxes");
     SetPVarInt(playerid, "transboxes", 0);
     new money = ile*96;
-    format(str, 64, "Praca zakoñczona. Przewioz³es %d paczek.", ile);
+    format(str, 64, "Praca zakoï¿½czona. Przewiozï¿½es %d paczek.", ile);
     SendClientMessage(playerid, -1, str);
     if(quiter) money/=2, ile/=2;
-    format(str, 64, "Zarabiasz $%d oraz otrzymujesz %d umiejêtnosci.", money, floatround(ile/5, floatround_floor));
+    format(str, 64, "Zarabiasz $%d oraz otrzymujesz %d umiejï¿½tnosci.", money, floatround(ile/5, floatround_floor));
     SendClientMessage(playerid, 0x99311EFF, str);
     DajKase(playerid, money);
 
@@ -10755,7 +10781,7 @@ public TJD_LoadTime(playerid, count, maxcount)
         SetPVarInt(playerid, "trans", GetPVarInt(playerid, "trans")+1);
         SetPVarInt(playerid, "transtime", gettime());
         SetPlayerCheckpoint(playerid, TransportJobData[idx][eTJDEndX], TransportJobData[idx][eTJDEndY], TransportJobData[idx][eTJDEndZ], 5.0);
-        SendClientMessage(playerid, 0x00FF00FF, "Towar za³adowany, udaj siê na miejsce wypakunku.");
+        SendClientMessage(playerid, 0x00FF00FF, "Towar zaï¿½adowany, udaj siï¿½ na miejsce wypakunku.");
         TogglePlayerControllable(playerid, 1);
     }
     else
@@ -10842,7 +10868,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
         else if(speed > 30) ile = -TransportJobData[idx][eTJDMoney];
         else ile = floatround(TransportJobData[idx][eTJDMoney] - ((speed - 8.5) * 100));
 
-        format(str, 64, "Towar wy³adowany, zarabiasz %d$", ile);
+        format(str, 64, "Towar wyï¿½adowany, zarabiasz %d$", ile);
         SendClientMessage(playerid, 0x00FF00FF, str);
 
         DajKase(playerid, ile);
@@ -10854,7 +10880,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
             PlayerInfo[playerid][pTruckSkill]=clamp(PlayerInfo[playerid][pTruckSkill]+lSkill, 0, 500);
         }
 
-        if(ile != TransportJobData[idx][eTJDMoney]) SendClientMessage(playerid, 0x00FF00FF, "Pamiêtaj, ¿e im szybciej jedziesz, tym wiêcej gubisz towaru!");
+        if(ile != TransportJobData[idx][eTJDMoney]) SendClientMessage(playerid, 0x00FF00FF, "Pamiï¿½taj, ï¿½e im szybciej jedziesz, tym wiï¿½cej gubisz towaru!");
         TogglePlayerControllable(playerid, 1);
     }
     else
@@ -11028,7 +11054,7 @@ public UnhireRentCar(playerid, veh)
                 {
                     SetVehicleVelocity(veh, 0.0, 0.0, 0.0);
                     RemovePlayerFromVehicleEx(playerid);
-                    SendClientMessage(playerid, COLOR_YELLOW, "Czas wypo¿yczenia min¹³!");
+                    SendClientMessage(playerid, COLOR_YELLOW, "Czas wypoï¿½yczenia minï¿½ï¿½!");
                 }
                 SetPVarInt(playerid, "rentTimer", 0);
             }
@@ -11048,7 +11074,7 @@ stock EDIT_ShowRangNames(playerid, typ, uid, bool:edit=false)
         else
             format(str, 512, "%s[%d] %s\n", str, i, (typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i]));
     }
-    if(edit) ShowPlayerDialogEx(playerid, D_EDIT_RANG_SET, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", str, "Zmieñ", "Wróæ");
+    if(edit) ShowPlayerDialogEx(playerid, D_EDIT_RANG_SET, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", str, "Zmieï¿½", "Wrï¿½ï¿½");
     else ShowPlayerDialogEx(playerid, D_INFO, DIALOG_STYLE_LIST, "{8FCB04}Nazwy {FFFFFF}rang", str, "Wyjdz", "");
     return 1;
 }
@@ -11227,7 +11253,7 @@ stock Support_ShowTickets(playerid)
     }
     if(strlen(str) > 10)
     {
-        ShowPlayerDialogEx(playerid, D_SUPPORT_LIST, DIALOG_STYLE_LIST, "Zg³oszenia", str, "Wybierz", "WyjdŸ");
+        ShowPlayerDialogEx(playerid, D_SUPPORT_LIST, DIALOG_STYLE_LIST, "Zgï¿½oszenia", str, "Wybierz", "Wyjdï¿½");
         SetPVarInt(playerid, "support_dialog", 1);
     }
     else
