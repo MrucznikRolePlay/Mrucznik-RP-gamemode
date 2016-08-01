@@ -1547,8 +1547,8 @@ HandlePlayerItemSelection(playerid, selecteditem)
 
 stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 {
-	DestroyDynamicObject(Barier[frac][id]);
-	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
+	DestroyObject(Barier[frac][id]);
+	new oid = CreateObject(model, x, y, z, 0.0, 0.0, a);
 	if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
 	BarierState[frac][id] = true;
     return 1;
@@ -1556,7 +1556,7 @@ stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 
 stock BARIERKA_Remove(frakcja, id)
 {
-    SetDynamicObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
+    SetObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
     DestroyDynamic3DTextLabel(BarText[frakcja][id]);
     BarierState[frakcja][id] = false;
     return 1;
@@ -1568,13 +1568,13 @@ stock BARIERKA_Init()
     {
         for(new i=0;i<10;i++)
         {
-            Barier[j][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+            Barier[j][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
             BarierState[j][i] = false;
         }
     }
     for(new i=0;i<10;i++) //LSFD
     {
-        Barier[FRAC_LSFD][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+        Barier[FRAC_LSFD][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
         BarierState[FRAC_LSFD][i] = false;
     }
     return 1;
@@ -1582,7 +1582,7 @@ stock BARIERKA_Init()
 
 public EditObj(playerid, obj)
 {
-    EditDynamicObject(playerid, obj);
+    EditObject(playerid, obj);
 }
 
 SetPlayerWeatherEx(playerid, id)
@@ -1902,6 +1902,32 @@ IsAPrzestepca(playerid)
 		    return 1;
 		}
 		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA || GetPlayerOrgType(playerid) == ORG_TYPE_RACE)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+
+IsADilerBroni(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==5 || member==6 || member==8 || member==12 || member==13 || member==14)
+		{
+		    return 1;
+		}
+		else if(leader==5 || leader==6 || leader==8 || leader==12  || leader==13 || leader==14)
+		{
+		    return 1;
+		}
+		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+		{
+		    return 1;
+		}
+		if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
 		{
 		    return 1;
 		}
@@ -9872,7 +9898,7 @@ stock Scena_CreateAt(Float:x, Float:y, Float:z)
 
     //Napis mid
     ScenaScreenObject = CreateDynamicObject(4988, 6.5, 0.00000, 4.18430,   0.00000, 0.00000, 100.0000);
-    SetDynamicObjectMaterialText(ScenaScreenObject, 0, "JKUBI", OBJECT_MATERIAL_SIZE_512x256, "Arial", 72, 1, 0xFFFFFFFF, 0, 1);
+    SetDynamicObjectMaterialText(ScenaScreenObject, 0, "SCENA", OBJECT_MATERIAL_SIZE_512x256, "Arial", 72, 1, 0xFFFFFFFF, 0, 1);
     //
     CreateDynamicObject(2232, -2.04205, 8.23906, 0.73210,   0.00000, 0.00000, -72.24001);
     CreateDynamicObject(2232, -2.04225, -8.23434, 0.73210,   0.00000, 0.00000, -110.27997);

@@ -40,6 +40,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 	}*/
 	//2.5.2
+	else if(dialogid == DIALOGID_UNIFORM)
+	{
+		if(response)
+		{
+            new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[1][listitem]);
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
 	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)
