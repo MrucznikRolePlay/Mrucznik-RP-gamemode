@@ -22698,7 +22698,7 @@ CMD:setint(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 			SetPlayerInterior(gracz,intid);
 			PlayerInfo[gracz][pInt] = intid;
@@ -22734,7 +22734,7 @@ CMD:setvw(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 			SetPlayerVirtualWorld(gracz, intid);
 			format(string, sizeof(string), "Ustawi³eœ %s virtualworld nr %d.", GetNick(gracz), intid);
@@ -22765,7 +22765,7 @@ CMD:getint(playerid, params[])
 		return 1;
 	}
 
-	if (PlayerInfo[playerid][pAdmin] >= 1)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 	{
 		format(string, sizeof(string), "Interior gracza %s to %d.", GetNick(gracz), GetPlayerInterior(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -22792,7 +22792,7 @@ CMD:getvw(playerid, params[])
 		return 1;
 	}
 
-	if (PlayerInfo[playerid][pAdmin] >= 1)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 	{
 		format(string, sizeof(string), "VirutalWorld gracza %s to %d.", GetNick(gracz), GetPlayerVirtualWorld(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -22895,6 +22895,30 @@ CMD:przyjmij(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy(tylko liderzy)!");
 		}
 	}
+	return 1;
+}
+
+CMD:fpanel(playerid, params[])
+{
+	if(PlayerInfo[playerid][pNewAP] != 5) return SendClientMessage(playerid, COLOR_GRAD1, "Panel gracza jest w trakcie tworzenia.");
+	if(PlayerInfo[playerid][pLider] >= 1)
+	{
+		new tekst[250];
+		format(tekst, sizeof(tekst), ""COL_GREY2"Statystyki frakcji\n", tekst);
+		format(tekst, sizeof(tekst), "%s\n"COL_GREY2"Lista wszystkich osób\n", tekst);
+		format(tekst, sizeof(tekst), "%s\n"COL_GREY2"Przyjmij osobê [PO ID]\n", tekst);
+		format(tekst, sizeof(tekst), "%s\n"COL_GREY2"Zwolnij osobê [PO ID]\n", tekst);
+		//format(tekst, sizeof(tekst), "%s\n"COL_GREY2"Pojazdy frakcyjne [RESP]\n", tekst);
+		
+		
+		
+		ShowPlayerDialogEx(playerid, D_F_PANEL, DIALOG_STYLE_LIST,""COL_GREY2"Panel lidera",tekst,"Wybierz","Anuluj");
+	}
+	else
+	{
+		SendClientMessage(playerid, COLOR_GRAD1, "   Nie jestes upowazniony do uzywania tej komendy !");
+	}
+	
 	return 1;
 }
 
@@ -23263,7 +23287,7 @@ CMD:makeleader(playerid, params[])
 					else if(level == 4) { PlayerInfo[para1][pSkin] = 228; } //Fire/Ambulance
 					else if(level == 5) { PlayerInfo[para1][pSkin] = 113; } //La Cosa Nostra
 					else if(level == 6) { PlayerInfo[para1][pSkin] = 120; } //Yakuza
-					else if(level == 7) { PlayerInfo[para1][pSkin] = 57; } //BOR
+					else if(level == 7) { PlayerInfo[para1][pSkin] = 285; } //RR
 					else if(level == 8) { PlayerInfo[para1][pSkin] = 294; } //Hitmans
 					else if(level == 9) { PlayerInfo[para1][pSkin] = 227; } //News Reporters
 					else if(level == 10) { PlayerInfo[para1][pSkin] = 61; } //Taxi Cab Company
@@ -23319,7 +23343,7 @@ CMD:makewomanleader(playerid, params[])
                     {
     		            if(PlayerInfo[playerid][pMember] > 0 || GetPlayerOrg(para1) != 0)
     		            {
-    		                SendClientMessage(playerid, COLOR_GREY, "   Ten gracz jest we frakcji jako cz³oenk lub w rodzinie !");
+    		                SendClientMessage(playerid, COLOR_GREY, "   Ten gracz jest we frakcji jako cz³onek lub w rodzinie !");
     		                return 1;
     		            }
                     }
@@ -23405,7 +23429,7 @@ CMD:makemember(playerid, params[])
 					else if(level == 4) { PlayerInfo[para1][pSkin] = 70; } //Fire/Ambulance
 					else if(level == 5) { PlayerInfo[para1][pSkin] = 258; } //La Cosa Nostra
 					else if(level == 6) { PlayerInfo[para1][pSkin] = 120; } //Yakuza
-					else if(level == 7) { PlayerInfo[para1][pSkin] = 240; } //Mayor
+					else if(level == 7) { PlayerInfo[para1][pSkin] = 285; } //Mayor
 					else if(level == 8) { PlayerInfo[para1][pSkin] = 127; } //Hitman Agency
 					else if(level == 9) { PlayerInfo[para1][pSkin] = 148; } //News Reporters
 					else if(level == 10) { PlayerInfo[para1][pSkin] = 255; } //Taxi Cab Company
@@ -23523,7 +23547,7 @@ CMD:frakcjaskin(playerid, params[])
 			        else if(PlayerInfo[para1][pMember] == 4) { PlayerInfo[para1][pTeam] = 8; ChosenSkin[para1] = 46; }
 			        else if(PlayerInfo[para1][pMember] == 5) { PlayerInfo[para1][pTeam] = 9; ChosenSkin[para1] = 174; }
 			        else if(PlayerInfo[para1][pMember] == 6) { PlayerInfo[para1][pTeam] = 2; ChosenSkin[para1] = 280; }
-		         	else if(PlayerInfo[para1][pMember] == 7) { PlayerInfo[para1][pTeam] = 2; ChosenSkin[para1] = 163; }
+		         	else if(PlayerInfo[para1][pMember] == 7) { PlayerInfo[para1][pTeam] = 2; ChosenSkin[para1] = 285; }
 			        else if(PlayerInfo[para1][pMember] == 11) { PlayerInfo[para1][pTeam] = 2; ChosenSkin[para1] = 164; }
 			        else if(PlayerInfo[para1][pMember] == 8) { PlayerInfo[para1][pTeam] = 10; ChosenSkin[para1] = 186; }
 			        else if(PlayerInfo[para1][pMember] == 12) { PlayerInfo[para1][pTeam] = 5; ChosenSkin[para1] = 270; }

@@ -4668,6 +4668,19 @@ public OnGameModeInit()
 			wybory[i] = dini_IntSet("wybory.ini", string, 0);
 		}
 	}
+	
+	new hostname[64];
+    GetConsoleVarAsString("hostname", hostname, sizeof(hostname));
+	
+	new serverPort = GetConsoleVarAsInt("port");
+	printf("Server Port: %i", serverPort);
+	
+	 new queryEnabled = GetConsoleVarAsBool("query");
+ 
+    if(!queryEnabled)
+    {
+        print("WARNING: Querying is disabled. The server will appear offline in the server browser.");
+    }
 
 	//Mrucznik:
 	Ac_OnGameModeInit();//Antyczit

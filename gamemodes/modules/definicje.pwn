@@ -14,6 +14,7 @@
 	(((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
+#define function%0(%1) forward%0(%1);public%0(%1)
 
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
@@ -273,6 +274,8 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define D_EDIT_RANG_NAME    1319
 #define D_EDIT_CAR_COLOR    1320
 #define D_ASK_DODATKI       1321
+
+#define D_F_PANEL			5000+1
 
 #define D_TRANSPORT         5439
 #define D_TRANSPORT_FAST    5440

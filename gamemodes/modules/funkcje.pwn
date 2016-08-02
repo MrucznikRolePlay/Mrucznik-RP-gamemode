@@ -605,6 +605,19 @@ public Odmroz(playerid)
     return 1;
 }
 
+function sprawdzwejdz(playerid, Float:XsprawdzX, Float:YsprawdzY, Float:ZsprawdzZ)
+{
+	new Float:plPosX, Float:plPosZ, Float:plPosY;
+	GetPlayerPos(playerid, plPosX, plPosY, plPosZ);
+	
+	if(plPosZ+5 < ZsprawdzZ)
+	{
+		SetPlayerPosEx(playerid, XsprawdzX, YsprawdzY, ZsprawdzZ);
+		SendClientMessage(playerid, COLOR_LIGHTRED, "Zosta³eœ teleportowany do drzwi, gdy¿ wykryto spadanie twojej postaci.");
+	}
+	return 1;
+}
+
 public Wchodzenie(playerid) //Zmiana na inteligentny system odmra¿ania
 {
     if(GetPVarInt(playerid, "enter-check") == 0)
