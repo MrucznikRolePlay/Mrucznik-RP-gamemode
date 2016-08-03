@@ -676,9 +676,9 @@ CMD:pomoc(playerid)
 	else if(PlayerInfo[playerid][pJob] == 5) {
 	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ukradnij"); }
 	else if(PlayerInfo[playerid][pMember] == 9) {
-	SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /napisz /gazety /wywiad /news [text] /reflektor /studia /glosnik /call-live /radiostacja");
+	SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /wywiad /news [text] /reflektor /studia /glosnik /call-live /radiostacja /scena");
 	SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** P³atny numer SMS - /sms [od 100 do 150], dostajesz tyle stówek ile jest po 1 (nr. 125 - 25 * 100 = 2500$)");
-    SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /zamknijlinie /otworzlinie /linie"); }
+    SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /zamknijlinie /otworzlinie /linie /duty"); }
 	else if(PlayerInfo[playerid][pJob] == 7) {
 	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /nitro /hydraulika /maluj /felga /zderzak");
 	SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /kolory /malunki /felgi /sluzba"); }
@@ -4367,12 +4367,12 @@ CMD:wrzuc(playerid, params[])
 	if (GetPlayerState(playerid)!=PLAYER_STATE_DRIVER)
 	return SendClientMessage(playerid, COLOR_GRAD1, "Musisz byæ w pojeŸdzie.");
 
-	if (!IsPlayerInAnyVehicle(person))
+	if (IsPlayerInAnyVehicle(person))
 	return SendClientMessage(playerid, COLOR_GRAD1, "Gracz nie mo¿e znajdowaæ siê w pojeŸdzie.");
 
 	if(pobity[person] >= 1)
     {
-		if (GetDistanceBetweenPlayers(playerid,person) > 5)
+		if (GetDistanceBetweenPlayers(playerid,person) < 5)
 		return SendClientMessage(playerid, COLOR_GRAD1, "Gracz nie jest w pobli¿u.");
 
 
@@ -10381,133 +10381,138 @@ CMD:nos(playerid, params[])
 				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt zamontowania to: 5000$");
 				return 1;
 			}
-
-
 			if(IsPlayerConnected(playa))
 		    {
-   				if(playa != INVALID_PLAYER_ID)
-			    {
-				    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+				if(IsAtWarsztat(playerid))
+				{
+					if(playa != INVALID_PLAYER_ID)
 					{
-					    if(IsPlayerInAnyVehicle(playa))
+						if(GetDistanceBetweenPlayers(playerid,playa) < 10)
 						{
-						    if(kaska[playerid] > 5000)
+							if(IsPlayerInAnyVehicle(playa))
 							{
-							    new pojazd = GetPlayerVehicleID(playa);
-                                if(!IsCarOwner(playa, pojazd))
-                                    return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
+								if(kaska[playerid] > 5000)
+								{
+									new pojazd = GetPlayerVehicleID(playa);
+									if(!IsCarOwner(playa, pojazd))
+										return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
 
-							    if(PlayerInfo[playerid][pMechSkill] <= 50)
-							    {
-							    	GetPlayerName(playerid, sendername, sizeof(sendername));
-				        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						         	format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 2) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
-								    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 2 w twoim samochodzie",sendername);
-							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-									ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							        AddVehicleComponent(pojazd, 1009);
-							        DajKase(playerid, -5000);
-							        format(string, sizeof(string), "~r~-$%d", 5000);
-									GameTextForPlayer(playerid, string, 5000, 1);
-							        PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-							        if(playa != playerid)
-							        {
-							            PlayerInfo[playerid][pMechSkill] ++;
-							            SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-							            PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-							        }
-                                    CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
-							    }
-							    else if(PlayerInfo[playerid][pMechSkill] >= 50 && PlayerInfo[playerid][pMechSkill] <= 99)
-							    {
-							    	GetPlayerName(playerid, sendername, sizeof(sendername));
-				        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						         	format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 5) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
-								    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 5 w twoim samochodzie",sendername);
-							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-									ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							        AddVehicleComponent(pojazd, 1008);
-							        DajKase(playerid, -5000);
-							        format(string, sizeof(string), "~r~-$%d", 5000);
-									GameTextForPlayer(playerid, string, 5000, 1);
-							        PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-							        if(playa != playerid)
-							        {
-							            PlayerInfo[playerid][pMechSkill] ++;
-							            SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-							            PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-							        }
-                                    CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1008;
-							    }
-							    else if(PlayerInfo[playerid][pMechSkill] >= 100)
-							    {
-							    	GetPlayerName(playerid, sendername, sizeof(sendername));
-				        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						         	format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 10) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
-								    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci: 10 w twoim samochodzie",sendername);
-							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-									ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							        AddVehicleComponent(pojazd, 1010);
-							        DajKase(playerid, -5000);
-							        format(string, sizeof(string), "~r~-$%d", 5000);
-									GameTextForPlayer(playerid, string, 5000, 1);
-							        PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-							        if(playa != playerid)
-							        {
-							            PlayerInfo[playerid][pMechSkill] ++;
-							            SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-							            PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-							        }
-                                    CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1010;
-							    }
-							    else
-							    {
-							    	GetPlayerName(playerid, sendername, sizeof(sendername));
-				        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						         	format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 2) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
-								    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 2 w twoim samochodzie",sendername);
-							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-									ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							        AddVehicleComponent(pojazd, 1009);
-							        DajKase(playerid, -5000);
-							        format(string, sizeof(string), "~r~-$%d", 5000);
-									GameTextForPlayer(playerid, string, 5000, 1);
-							        PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-							        if(playa != playerid)
-							        {
-							            PlayerInfo[playerid][pMechSkill] ++;
-							            SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-							            PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-							        }
-                                    CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
-							    }
+									if(PlayerInfo[playerid][pMechSkill] <= 50)
+									{
+										GetPlayerName(playerid, sendername, sizeof(sendername));
+										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+										format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 2) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
+										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 2 w twoim samochodzie",sendername);
+										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+										AddVehicleComponent(pojazd, 1009);
+										DajKase(playerid, -5000);
+										format(string, sizeof(string), "~r~-$%d", 5000);
+										GameTextForPlayer(playerid, string, 5000, 1);
+										PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+										if(playa != playerid)
+										{
+											PlayerInfo[playerid][pMechSkill] ++;
+											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+											PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+										}
+										CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
+									}
+									else if(PlayerInfo[playerid][pMechSkill] >= 50 && PlayerInfo[playerid][pMechSkill] <= 99)
+									{
+										GetPlayerName(playerid, sendername, sizeof(sendername));
+										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+										format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 5) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
+										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 5 w twoim samochodzie",sendername);
+										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+										AddVehicleComponent(pojazd, 1008);
+										DajKase(playerid, -5000);
+										format(string, sizeof(string), "~r~-$%d", 5000);
+										GameTextForPlayer(playerid, string, 5000, 1);
+										PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+										if(playa != playerid)
+										{
+											PlayerInfo[playerid][pMechSkill] ++;
+											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+											PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+										}
+										CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1008;
+									}
+									else if(PlayerInfo[playerid][pMechSkill] >= 100)
+									{
+										GetPlayerName(playerid, sendername, sizeof(sendername));
+										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+										format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 10) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
+										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci: 10 w twoim samochodzie",sendername);
+										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+										AddVehicleComponent(pojazd, 1010);
+										DajKase(playerid, -5000);
+										format(string, sizeof(string), "~r~-$%d", 5000);
+										GameTextForPlayer(playerid, string, 5000, 1);
+										PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+										if(playa != playerid)
+										{
+											PlayerInfo[playerid][pMechSkill] ++;
+											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+											PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+										}
+										CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1010;
+									}
+									else
+									{
+										GetPlayerName(playerid, sendername, sizeof(sendername));
+										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+										format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 2) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
+										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 2 w twoim samochodzie",sendername);
+										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+										AddVehicleComponent(pojazd, 1009);
+										DajKase(playerid, -5000);
+										format(string, sizeof(string), "~r~-$%d", 5000);
+										GameTextForPlayer(playerid, string, 5000, 1);
+										PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+										if(playa != playerid)
+										{
+											PlayerInfo[playerid][pMechSkill] ++;
+											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+											PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+										}
+										CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
+									}
+								}
+								else
+								{
+									SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (5000$)");
+								}
 							}
 							else
 							{
-							    SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (5000$)");
+								SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
 							}
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
+							SendClientMessage(playerid, COLOR_WHITE, "Gracz jest za daleko");
 						}
-                    }
+					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
+						SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
 					}
 				}
 				else
 				{
-				    SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
+					SendClientMessage(playerid, COLOR_WHITE, "Nie jesteœ w jednym z warsztatów sygnowanym czerwonym szyldem z pojazdem");
 				}
 			}
 		}
@@ -10539,64 +10544,71 @@ CMD:hydraulika(playerid, params[])
 
 			if(IsPlayerConnected(playa))
 		    {
-   				if(playa != INVALID_PLAYER_ID)
-			    {
-				    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+				if(IsAtWarsztat(playerid))
+				{
+					if(playa != INVALID_PLAYER_ID)
 					{
-					    if(IsPlayerInAnyVehicle(playa))
+						if(GetDistanceBetweenPlayers(playerid,playa) < 10)
 						{
-						    if(kaska[playerid] > 10000)
+							if(IsPlayerInAnyVehicle(playa))
 							{
-							    if(PlayerInfo[playerid][pMechSkill] >= 50)
-							    {
-								    new pojazd = GetPlayerVehicleID(playa);
-                                    if(!IsCarOwner(playa, pojazd))
-                                        return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
+								if(kaska[playerid] > 10000)
+								{
+									if(PlayerInfo[playerid][pMechSkill] >= 50)
+									{
+										new pojazd = GetPlayerVehicleID(playa);
+										if(!IsCarOwner(playa, pojazd))
+											return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
 
-				        			AddVehicleComponent(pojazd,1087);//hydraulika
-				        			GetPlayerName(playerid, sendername, sizeof(sendername));
-				        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-				        			format(string, sizeof(string), "* Zamontowa³eœ graczowi %s hydraulike (-10 000$)",giveplayer);
-								    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string), "* Mechanik %s zamontowa³ hydraulike w twoim samochodzie",sendername);
-							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje hydraulike w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-									ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	                                DajKase(playerid, -10000);
-	                                format(string, sizeof(string), "~r~-$%d", 10000);
-									GameTextForPlayer(playerid, string, 5000, 1);
-	                                PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-	                                if(playa != playerid)
-								    {
-	           							PlayerInfo[playerid][pMechSkill] ++;
-	           							SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-	           							PlayerPlaySound(playa, 1141, 0.0, 0.0, 0.0);
-				        			}
-                                    CarData[VehicleUID[pojazd][vUID]][c_bHydraulika] = true;
-				        		}
-				        		else
-				        		{
-				        		    SendClientMessage(playerid, COLOR_GRAD2, "Musisz mieæ 2 skill mechanika aby montowaæ hydraulike.");
-				        		}
-			        		}
+										AddVehicleComponent(pojazd,1087);//hydraulika
+										GetPlayerName(playerid, sendername, sizeof(sendername));
+										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+										format(string, sizeof(string), "* Zamontowa³eœ graczowi %s hydraulike (-10 000$)",giveplayer);
+										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string), "* Mechanik %s zamontowa³ hydraulike w twoim samochodzie",sendername);
+										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+										format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje hydraulike w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+										DajKase(playerid, -10000);
+										format(string, sizeof(string), "~r~-$%d", 10000);
+										GameTextForPlayer(playerid, string, 5000, 1);
+										PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
+										if(playa != playerid)
+										{
+											PlayerInfo[playerid][pMechSkill] ++;
+											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+											PlayerPlaySound(playa, 1141, 0.0, 0.0, 0.0);
+										}
+										CarData[VehicleUID[pojazd][vUID]][c_bHydraulika] = true;
+									}
+									else
+									{
+										SendClientMessage(playerid, COLOR_GRAD2, "Musisz mieæ 2 skill mechanika aby montowaæ hydraulike.");
+									}
+								}
+								else
+								{
+									SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (10 000$)");
+								}
+							}
 							else
 							{
-							    SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (10 000$)");
+								SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
 							}
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
+							SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
 						}
-                    }
+					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
+						SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
 					}
 				}
 				else
 				{
-				    SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
+				SendClientMessage(playerid, COLOR_WHITE, "Nie jesteœ w jednym z warsztatów sygnowanym czerwonym szyldem z pojazdem");
 				}
 			}
 		}
@@ -10631,78 +10643,85 @@ CMD:malunek(playerid, params[])
 		    {
    				if(playa != INVALID_PLAYER_ID)
 			    {
-				    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+					if(IsAtWarsztat(playerid))
 					{
-					    if(IsPlayerInAnyVehicle(playa))
+						if(GetDistanceBetweenPlayers(playerid,playa) < 10)
 						{
-						    if(kaska[playerid] > 20000)
+							if(IsPlayerInAnyVehicle(playa))
 							{
-							    if(PlayerInfo[playerid][pMechSkill] >= 100)
-							    {
-								    new pojazd = GetPlayerVehicleID(playa);
-                                    if(!IsCarOwner(playa, pojazd))
-                                        return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
-
-								    new model = GetVehicleModel(pojazd);
-								    if(model == 412 || model >= 534 && model <= 536 || model >= 558 && model <= 562 || model >= 565 && model <= 567 || model == 575 || model == 576 || model == 483)
+								if(kaska[playerid] > 20000)
+								{
+									if(PlayerInfo[playerid][pMechSkill] >= 100)
 									{
-									    if(malunek >= 0 && malunek <= 3)
-									    {
-						        			GetPlayerName(playerid, sendername, sizeof(sendername));
-						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						        			format(string, sizeof(string), "* Zrobi³eœ graczowi %s malunek samochodu (-20 000$)",giveplayer);
-										    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        format(string, sizeof(string), "* Mechanik %s zrobi³ malnuek na twoim %s",sendername, VehicleNames[model-400]);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-			                                format(string, sizeof(string),"* Mechanik %s wyci¹ga sprey i tworzy malunek na %s.", sendername, VehicleNames[model-400]);
-											ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			                                DajKase(playerid, -20000);
-			                                format(string, sizeof(string), "~r~-$%d", 20000);
-											GameTextForPlayer(playerid, string, 5000, 1);
-			                                ChangeVehiclePaintjob(pojazd,malunek);
-		                                 	PlayerPlaySound(playerid, 1134, 0.0, 0.0, 0.0);
-											if(playa != playerid)
-										    {
-			           							PlayerInfo[playerid][pMechSkill] ++;
-			           							SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-			           							PlayerPlaySound(playa, 1134, 0.0, 0.0, 0.0);
-						        			}
-                                            CarData[VehicleUID[pojazd][vUID]][c_Malunek] = malunek;
-						        		}
-						        		else
-						        		{
-						        		    SendClientMessage(playerid, COLOR_GRAD2, "ID malunku od 0 do 3 (wpisz /malunki aby zobaczyæ dostêpne malunki)");
-						        		}
-					        		}
-					        		else
-					        		{
-					        		    format(string, sizeof(string), "Wozu %s nie mo¿na pomalowaæ, wpisz /malunki aby zobaczyæ jakie wozy mo¿na pomalowaæ", VehicleNames[GetVehicleModel(pojazd)-400]);
-								        SendClientMessage(playerid, COLOR_GRAD4, string);
-								    }
+										new pojazd = GetPlayerVehicleID(playa);
+										if(!IsCarOwner(playa, pojazd))
+											return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
+
+										new model = GetVehicleModel(pojazd);
+										if(model == 412 || model >= 534 && model <= 536 || model >= 558 && model <= 562 || model >= 565 && model <= 567 || model == 575 || model == 576 || model == 483)
+										{
+											if(malunek >= 0 && malunek <= 3)
+											{
+												GetPlayerName(playerid, sendername, sizeof(sendername));
+												GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+												format(string, sizeof(string), "* Zrobi³eœ graczowi %s malunek samochodu (-20 000$)",giveplayer);
+												SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+												format(string, sizeof(string), "* Mechanik %s zrobi³ malnuek na twoim %s",sendername, VehicleNames[model-400]);
+												SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+												format(string, sizeof(string),"* Mechanik %s wyci¹ga sprey i tworzy malunek na %s.", sendername, VehicleNames[model-400]);
+												ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+												DajKase(playerid, -20000);
+												format(string, sizeof(string), "~r~-$%d", 20000);
+												GameTextForPlayer(playerid, string, 5000, 1);
+												ChangeVehiclePaintjob(pojazd,malunek);
+												PlayerPlaySound(playerid, 1134, 0.0, 0.0, 0.0);
+												if(playa != playerid)
+												{
+													PlayerInfo[playerid][pMechSkill] ++;
+													SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+													PlayerPlaySound(playa, 1134, 0.0, 0.0, 0.0);
+												}
+												CarData[VehicleUID[pojazd][vUID]][c_Malunek] = malunek;
+											}
+											else
+											{
+												SendClientMessage(playerid, COLOR_GRAD2, "ID malunku od 0 do 3 (wpisz /malunki aby zobaczyæ dostêpne malunki)");
+											}
+										}
+										else
+										{
+											format(string, sizeof(string), "Wozu %s nie mo¿na pomalowaæ, wpisz /malunki aby zobaczyæ jakie wozy mo¿na pomalowaæ", VehicleNames[GetVehicleModel(pojazd)-400]);
+											SendClientMessage(playerid, COLOR_GRAD4, string);
+										}
+									}
+									else
+									{
+										SendClientMessage(playerid, COLOR_GRAD4, "Musisz mieæ 3 skill mechanika");
+									}
 								}
 								else
 								{
-								    SendClientMessage(playerid, COLOR_GRAD4, "Musisz mieæ 3 skill mechanika");
+									SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (20 000$)");
 								}
-			        		}
+							}
 							else
 							{
-							    SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (20 000$)");
+								SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
 							}
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
+							SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
 						}
-                    }
+					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
+						SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
 					}
 				}
 				else
 				{
-				    SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
+					SendClientMessage(playerid, COLOR_WHITE, "Nie jesteœ w jednym z warsztatów sygnowanym czerwonym szyldem z pojazdem");
 				}
 			}
 		}
@@ -10738,79 +10757,86 @@ CMD:felga(playerid, params[])
 		    {
    				if(playa != INVALID_PLAYER_ID)
 			    {
-				    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+					if(IsAtWarsztat(playerid))
 					{
-					    if(IsPlayerInAnyVehicle(playa))
+						if(GetDistanceBetweenPlayers(playerid,playa) < 10)
 						{
-						    if(kaska[playerid] > 15000)
+							if(IsPlayerInAnyVehicle(playa))
 							{
-							    if(idfelgi >= 1 && idfelgi <= 17)
-							    {
-							        if(PlayerInfo[playerid][pMechSkill] >= 100)
+								if(kaska[playerid] > 15000)
+								{
+									if(idfelgi >= 1 && idfelgi <= 17)
 									{
-									    new pojazd = GetPlayerVehicleID(playa);
-                                        if(!IsCarOwner(playa, pojazd))
-                                            return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
+										if(PlayerInfo[playerid][pMechSkill] >= 100)
+										{
+											new pojazd = GetPlayerVehicleID(playa);
+											if(!IsCarOwner(playa, pojazd))
+												return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
 
-									    new felga = idfelgi+1072;
-										GetPlayerName(playerid, sendername, sizeof(sendername));
-					        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-										format(string, sizeof(string), "* Zamontowa³eœ nowe felgi graczowi %s (koszt -15 000$)",giveplayer);
-									    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								        format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowe felgi",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-								        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-		                                format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe felgi w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-										DajKase(playerid, -15000);
-										format(string, sizeof(string), "~r~-$%d", 15000);
-										GameTextForPlayer(playerid, string, 5000, 1);
-	                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-										if(felga >= 173 && felga <= 1085)
-										{
-										    AddVehicleComponent(pojazd,felga);//felga1079
-                                            CarData[VehicleUID[pojazd][vUID]][c_Felgi] = felga;
+											new felga = idfelgi+1072;
+											GetPlayerName(playerid, sendername, sizeof(sendername));
+											GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+											format(string, sizeof(string), "* Zamontowa³eœ nowe felgi graczowi %s (koszt -15 000$)",giveplayer);
+											SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+											format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowe felgi",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+											SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+											format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe felgi w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+											ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+											DajKase(playerid, -15000);
+											format(string, sizeof(string), "~r~-$%d", 15000);
+											GameTextForPlayer(playerid, string, 5000, 1);
+											PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+											if(felga >= 173 && felga <= 1085)
+											{
+												AddVehicleComponent(pojazd,felga);//felga1079
+												CarData[VehicleUID[pojazd][vUID]][c_Felgi] = felga;
+											}
+											else if(felga >= 1086 && felga <= 1088)
+											{
+												AddVehicleComponent(pojazd,felga+10);//felga
+												CarData[VehicleUID[pojazd][vUID]][c_Felgi] = felga+10;
+											}
+											else if(idfelgi == 17)
+											{
+												AddVehicleComponent(pojazd,1025);//felga
+												CarData[VehicleUID[pojazd][vUID]][c_Felgi] = 1025;
+											}
+											if(playa != playerid)
+											{
+												PlayerInfo[playerid][pMechSkill] ++;
+												SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+												PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+											}
 										}
-									 	else if(felga >= 1086 && felga <= 1088)
+										else
 										{
-										    AddVehicleComponent(pojazd,felga+10);//felga
-                                            CarData[VehicleUID[pojazd][vUID]][c_Felgi] = felga+10;
+											SendClientMessage(playerid, COLOR_GRAD2, "Musisz mieæ 3 skill mechanika");
 										}
-										else if(idfelgi == 17)
-										{
-											AddVehicleComponent(pojazd,1025);//felga
-                                            CarData[VehicleUID[pojazd][vUID]][c_Felgi] = 1025;
-										}
-										if(playa != playerid)
-									    {
-		           							PlayerInfo[playerid][pMechSkill] ++;
-		           							SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-		           							PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-					        			}
 									}
-									else
-									{
-									    SendClientMessage(playerid, COLOR_GRAD2, "Musisz mieæ 3 skill mechanika");
-									}
-				        		}
-			        		}
+								}
+								else
+								{
+									SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (15000$)");
+								}
+							}
 							else
 							{
-							    SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (15000$)");
+								SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
 							}
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
+							SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
 						}
-                    }
+					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
+						SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
 					}
 				}
 				else
 				{
-				    SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
+					SendClientMessage(playerid, COLOR_WHITE, "Nie jesteœ w jednym z warsztatów sygnowanym czerwonym szyldem z pojazdem");
 				}
 			}
 		}
@@ -15192,7 +15218,8 @@ CMD:kuparmor(playerid)
 CMD:buygun(playerid, params[]) return cmd_kupbron(playerid, params);
 CMD:kupbron(playerid, params[])
 {
-	if(PlayerInfo[playerid][pConnectTime] >= 4)
+	SendClientMessage(playerid, COLOR_GREY, "   Sprzeda¿ broni zosta³a zakazana!");
+	/*if(PlayerInfo[playerid][pConnectTime] >= 4)
 	{
 		if(PlayerInfo[playerid][pGunLic] == 1)
 		{
@@ -15222,7 +15249,7 @@ CMD:kupbron(playerid, params[])
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"Musisz mieæ przegrane 4h na serwerze aby móc kupowaæ broñ.");
 		return 1;
-	}
+	}*/
 	return 1;
 }
 
@@ -18952,9 +18979,19 @@ CMD:wejdz(playerid)
 	    }
 	    else if(PlayerToPoint(10.0, playerid, 1791.212036,-1164.631713,23.828100))//gunshop
 	    {
-	        SetPlayerInterior(playerid,1);
+			SendClientMessage(playerid,COLOR_PURPLE,"**Naciskasz klamkê od drzwi Gun Shopa i orientujesz siê, ze drzwi sa zamkniête.");
+			SendClientMessage(playerid,COLOR_PURPLE,"**Spogl¹dasz wy¿ej i dostrzegasz za drzwiami kartkê na której jest napisane:");
+			SendClientMessage(playerid,COLOR_GRAD2,"			************************************************************************************");
+			SendClientMessage(playerid,COLOR_WHITE,"				Œledztwo FBI wykaza³o, ¿e placówka ta handlowa³a");
+			SendClientMessage(playerid,COLOR_WHITE,"				broni¹ ciê¿k¹ (M4, AK47 i karabin snajperski).");
+			SendClientMessage(playerid,COLOR_WHITE,"			  	Jest to naruszenie koncesji i powoduje ZAMKNIÊCIE GUN SHOPU");
+			SendClientMessage(playerid,COLOR_WHITE,"			  	do czasu zakoñczenia œledztwa w tej sprawie i zabezpieczenia dowodów.");
+			SendClientMessage(playerid,COLOR_WHITE,"			  															Podpisano, ");
+			SendClientMessage(playerid,COLOR_WHITE,"																Eric Haysen, Dyrektor FBI ");
+			SendClientMessage(playerid,COLOR_GRAD2,"			************************************************************************************");
+	        /*SetPlayerInterior(playerid,1);
 	        SetPlayerPosEx(playerid,286.15,-41.54,1003.57);//gun shop œrodek
-	        GameTextForPlayer(playerid, "~w~Witamy w ~r~GUN ~y~SHOP", 5000, 1);
+	        GameTextForPlayer(playerid, "~w~Witamy w ~r~GUN ~y~SHOP", 5000, 1);*/
 	        return 1;
 	    }
 		/*else if(PlayerToPoint(10.0, playerid, 1310.126586,-1367.812255,13.540800))//pintball
@@ -23734,7 +23771,7 @@ CMD:gotocar(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAKO(playerid))
 		{
 			new Float:cwx2,Float:cwy2,Float:cwz2;
 			GetVehiclePos(testcar, cwx2, cwy2, cwz2);
@@ -23899,7 +23936,7 @@ CMD:goto(playerid, params[])
 		    if(plo != INVALID_PLAYER_ID)
 		    {
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid))
 				{
 					//SZUKANIE ADMINOW I P@ na serwerze
 
@@ -24077,7 +24114,7 @@ CMD:getcar(playerid, params[])
 		new Float:plocx,Float:plocy,Float:plocz;
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid))
 		{
 			GetPlayerPos(playerid, plocx, plocy, plocz);
 			SetVehiclePos(plo,plocx,plocy+4, plocz);
@@ -32374,7 +32411,7 @@ CMD:akceptuj(playerid, params[])
 		else if(strcmp(x_job,"refill",true) == 0 || strcmp(x_job,"tankowanie",true) == 0)
 		{
 		    if(RefillOffer[playerid] < 999)
-		    {
+		    {	
 		        if(IsPlayerConnected(RefillOffer[playerid]) && IsPlayerInAnyVehicle(playerid))
 		        {
 		            if(kaska[playerid] > RefillPrice[playerid] && RefillPrice[playerid] > 0)
@@ -32735,55 +32772,63 @@ CMD:akceptuj(playerid, params[])
 		{
 		    if(RepairOffer[playerid] < 999)
 		    {
-		        if(kaska[playerid] > RepairPrice[playerid] && RepairPrice[playerid] > 0)
-			    {
-				    if(IsPlayerInAnyVehicle(playerid))
-				    {
-				        if(IsPlayerConnected(RepairOffer[playerid]))
-				        {
-					        GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
-							GetPlayerName(playerid, sendername, sizeof(sendername));
-					        RepairCar[playerid] = GetPlayerVehicleID(playerid);
-					        SetVehicleHealth(RepairCar[playerid], 1000.0);
-					        RepairVehicle(RepairCar[playerid]);
+				if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 10))
+				{
+					if(kaska[playerid] > RepairPrice[playerid] && RepairPrice[playerid] > 0)
+					{
+						if(IsPlayerInAnyVehicle(playerid))
+						{
+							if(IsPlayerConnected(RepairOffer[playerid]))
+							{
+								GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
+								GetPlayerName(playerid, sendername, sizeof(sendername));
+								RepairCar[playerid] = GetPlayerVehicleID(playerid);
+								SetVehicleHealth(RepairCar[playerid], 1000.0);
+								RepairVehicle(RepairCar[playerid]);
 
-                            CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
-                            CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
+								CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
+								CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
 
-					        PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
-					        PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
-							format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,RepairPrice[playerid]);
-							SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia oraz naprawia %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
-							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			 				format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
-							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
-			                if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
-							{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-							else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
-							{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-							else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
-							{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-							else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
-							{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-							ZabierzKase(playerid, RepairPrice[playerid]);
-							DajKase(RepairOffer[playerid], RepairPrice[playerid]);
-					        RepairOffer[playerid] = 999;
-							RepairPrice[playerid] = 0;
+								PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
+								PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
+								format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,RepairPrice[playerid]);
+								SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
+								format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia oraz naprawia %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
+								ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
+								ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
+								if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
+								{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+								else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
+								{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+								else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
+								{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+								else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
+								{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+								ZabierzKase(playerid, RepairPrice[playerid]);
+								DajKase(RepairOffer[playerid], RepairPrice[playerid]);
+								RepairOffer[playerid] = 999;
+								RepairPrice[playerid] = 0;
+								return 1;
+							}
 							return 1;
 						}
 						return 1;
 					}
-					return 1;
+					else
+					{
+						SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê na naprawe !");
+						return 1;
+					}
 				}
 				else
 				{
-				    SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê na naprawe !");
-				    return 1;
+					SendClientMessage(playerid, COLOR_GREY, "   Jesteœ za daleko mechanika, który zaoferowa³ ci naprawê !");
 				}
+					
 		    }
 		    else
 		    {
@@ -36304,7 +36349,7 @@ CMD:scena(playerid, params[])
 
 CMD:scenaallow(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] < 200) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 200 || IsAKO(playerid)) return 1;
     new id;
     if(sscanf(p, "k<fix>", id)) return SendClientMessage(playerid, COLOR_GRAD2, "U¿yj: /scenaallow [Nick/ID]");
     if(GetPVarInt(id, "scena-req") != 2 && PlayerInfo[playerid][pAdmin] < 1) return SendClientMessage(playerid, COLOR_GRAD2, "Ten gracz nie prosi³ o to.");
