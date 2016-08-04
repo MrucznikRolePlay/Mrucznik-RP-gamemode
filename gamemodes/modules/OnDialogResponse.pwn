@@ -13357,10 +13357,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendFamilyMessage(15, COLOR_YELLOW, komunikat);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wyœcig zorganizowany! Udaj siê na start i zaproœ osoby do wyscigu komend¹ /wyscig [id].");
 					SetPlayerRaceCheckpoint(playerid,1,wCheckpoint[tworzenietrasy[playerid]][0][0], wCheckpoint[tworzenietrasy[playerid]][0][1], wCheckpoint[tworzenietrasy[playerid]][0][2],wCheckpoint[tworzenietrasy[playerid]][1][0], wCheckpoint[tworzenietrasy[playerid]][1][1], wCheckpoint[tworzenietrasy[playerid]][1][2], 10);
+					ZabierzKase(playerid, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					Sejf_Add(FRAC_NOA, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
-					DajKase(playerid, -Wyscig[tworzenietrasy[playerid]][wNagroda]);
+					ZabierzKase(playerid, Wyscig[tworzenietrasy[playerid]][wNagroda]);
 					owyscig[playerid] = tworzenietrasy[playerid];
 					tworzenietrasy[playerid] = 666;
+					
+					format(komunikat, sizeof(komunikat), "%s zorganizowal wyscig %s (koszt: %d, nagroda: %d)", sendername, Wyscig[tworzenietrasy[playerid]][wNazwa], (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000, Wyscig[tworzenietrasy[playerid]][wNagroda]);
+					PayLog(komunikat);
 				}
 				else
 				{

@@ -25204,6 +25204,107 @@ CMD:unwarn(playerid, params[])
 	return 1;
 }
 
+CMD:skick(playerid, params[])
+{
+	new string[256];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
+
+    if(IsPlayerConnected(playerid))
+    {
+    	new giveplayerid;
+		if( sscanf(params, "k<fix>", giveplayerid))
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /skick [playerid/CzêœæNicku]");
+			return 1;
+		}
+
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 4 || PlayerInfo[playerid][pAdmin] == 7)
+		{
+		    if(AntySpam[playerid] == 1)
+		    {
+		        SendClientMessage(playerid, COLOR_GREY, "Odczekaj 5 sekund");
+		        return 1;
+		    }
+			if(IsPlayerConnected(giveplayerid))
+			{
+			    if(giveplayerid != INVALID_PLAYER_ID)
+			    {
+			        if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || PlayerInfo[giveplayerid][pZG] >= 4)
+		            {
+		                SendClientMessage(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ Admina !");
+		                return 1;
+		            }
+			        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					format(string, sizeof(string), "AdmCmd: Admin %s was kicked by admin %s, Powód: CICHY kick", giveplayer, sendername);
+					KickLog(string);
+					KickEx(giveplayerid);
+					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+					AntySpam[playerid] = 1;
+			    }
+			}
+		}
+		else
+		{
+			format(string, sizeof(string), "   Gracz o ID %d nie istnieje.", giveplayerid);
+			SendClientMessage(playerid, COLOR_GRAD1, string);
+		}
+	}
+	return 1;
+}
+
+CMD:sban(playerid, params[])
+{
+	new string[256];
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
+
+    if(IsPlayerConnected(playerid))
+    {
+    	new giveplayerid, result[128];
+		if( sscanf(params, "k<fix>s[128]", giveplayerid, result))
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /sban [playerid/CzêœæNicku] [reason]");
+			return 1;
+		}
+
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 4 || PlayerInfo[playerid][pAdmin] == 7)
+		{
+		    if(AntySpam[playerid] == 1)
+		    {
+		        SendClientMessage(playerid, COLOR_GREY, "Odczekaj 5 sekund");
+		        return 1;
+		    }
+		    if(IsPlayerConnected(giveplayerid))
+		    {
+		        if(giveplayerid != INVALID_PLAYER_ID)
+		        {
+					if(PlayerInfo[giveplayerid][pAdmin] >= 1)
+					{
+						SendClientMessage(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina!");
+						return 1;
+					}
+					
+					format(string, sizeof(string), "AdmCmd: Ukryty (/sban) Admin %s zbanowal %s, powód: %s",  sendername, giveplayer, result);
+					BanLog(string);
+				    MruMySQL_Banuj(giveplayerid, result, playerid);
+					KickEx(giveplayerid);
+					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+					AntySpam[playerid] = 1;
+					return 1;
+				}
+			}//not connected
+		}
+		else
+		{
+			format(string, sizeof(string), "   Gracz o ID %d nie istnieje.", giveplayerid);
+			SendClientMessage(playerid, COLOR_GRAD1, string);
+		}
+	}
+	return 1;
+}
+
 CMD:ban(playerid, params[])
 {
 	new string[256];
@@ -25218,22 +25319,13 @@ CMD:ban(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /ban [playerid/CzêœæNicku] [powód]");
 			return 1;
 		}
-		if(giveplayerid == 65535)
-		{
-			if(sscanf(params, "ds[64]", giveplayerid, result)) 
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "Ten gracz ma zbugowane ID. Wpisz jego ID zamiast nicku aby go zbanowaæ.");
-				return 1;
-			}
-		}
 		
-
 	    if(AntySpam[playerid] == 1)
 	    {
 	        SendClientMessage(playerid, COLOR_GREY, "Odczekaj 5 sekund");
 	        return 1;
 	    }
-	    if(IsPlayerConnected(giveplayerid) || true)//bug z id
+	    if(IsPlayerConnected(giveplayerid))//bug z id
 	    {
 	        if(giveplayerid != INVALID_PLAYER_ID)
 	        {
@@ -25247,7 +25339,7 @@ CMD:ban(playerid, params[])
 						SendClientMessage(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Head Admina !");
 						return 1;
 					}
-					if((PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || PlayerInfo[giveplayerid][pZG] >= 4) && PlayerInfo[playerid][pZG] >= 4)
+					if( (PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || PlayerInfo[giveplayerid][pZG] >= 4) && PlayerInfo[playerid][pZG] >= 4)
 					{
 						SendClientMessage(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina, P@ i ZG!");
 						return 1;
@@ -25281,7 +25373,7 @@ CMD:ban(playerid, params[])
 					if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 					{
 					    MruMySQL_Banuj(playerid, result, giveplayerid);
-						format(str, sizeof(str), "%s zostal zbanowany za zbanowanie admina /sban",sendername);
+						format(str, sizeof(str), "%s zostal zbanowany za zbanowanie admina /ban",sendername);
 						BanLog(str);
 					    KickEx(playerid);
 					}
@@ -25980,6 +26072,10 @@ CMD:ap(playerid)
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /getposp /gotopos  /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom");
+	}
+	if (PlayerInfo[playerid][pAdmin] == 7)
+	{
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /sban /sblock /skick");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 10)
 	{

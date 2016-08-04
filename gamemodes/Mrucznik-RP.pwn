@@ -66,7 +66,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.21"
+#define VERSION "v2.5.3"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
