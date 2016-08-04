@@ -40,7 +40,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 	}*/
 	//2.5.2
-	else if(dialogid == DIALOGID_UNIFORM)
+	if(dialogid == DIALOGID_UNIFORM)
 	{
 		if(response)
 		{

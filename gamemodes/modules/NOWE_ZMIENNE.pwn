@@ -240,9 +240,6 @@ new ACCESS[MAX_PLAYERS], OLD_ACCESS[MAX_PLAYERS];
 //15.06 system aut kradziezy
 new CAR_End = 0;
 
-new GATE_KT,
-    bool:GATE_KT_S = false;
-
 //13.06
 //lsmc exterior
 new lsmcex1;
