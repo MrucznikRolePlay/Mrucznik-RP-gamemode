@@ -1813,7 +1813,8 @@ CMD:kajdanki(playerid, params[])
 
 CMD:barierka(playerid, params[])
 {
-    if(!(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_BOR) || GetPlayerOrg(playerid) == 12) return 1;
+    if(!(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_BOR || GetPlayerOrg(playerid) == 12)) 
+		return 1;
     if(isnull(params))
     {
         DestroySelectionMenu(playerid);
@@ -6388,19 +6389,27 @@ CMD:brama(playerid)
         }
 		if(IsPlayerInFraction(playerid, FRAC_KT, 5000) || IsAHA(playerid))
 		{
-		    if(IsPlayerInRangeOfPoint(playerid, 10.0, 2424.28, -2085.80, 13.29))
-			{
-                new Float:x, Float:y, Float:z;
-                GetDynamicObjectPos(GATE_KT, x ,y ,z);
-			    if(GATE_KT_S)
-			    {
-                    MoveDynamicObject(GATE_KT, x, y, z+0.01, 0.01, 0.0, 90.0, 270.0);
-    				GATE_KT_S = false;
-			    }
-			    else
+			new Float:gate_pos[3][2][6] = {
+				{	//x, y, z, rx, ry, rz
+					{2424.25342, -2096.28613, 13.22150,   0.00000, 0.00000, 90.00000}, //open
+					{2424.25342, -2096.28613, 13.22150,   0.00000, 90.00000, 90.00000} //close
+				},
 				{
-                    MoveDynamicObject(GATE_KT, x, y, z-0.01, 0.01, 0.0, 0.0, 270.0);
-                    GATE_KT_S = true;
+					{2424.25342, -2081.89453, 13.22150,   0.00000, 0.00000, 90.00000}, 
+					{2424.25342, -2081.89453, 13.22150,   0.00000, -90.00000, 90.00000}
+				},
+				{
+					{2540.9431, -2117.0085, 11.0,   0.00000, 0.00000, 90.00000}, 
+					{2540.94312, -2117.00854, 14.19210,   0.00000, 0.00000, 90.00000}
+				}
+			};
+			for(new i; i<3; i++)
+			{
+				if(IsPlayerInRangeOfPoint(playerid, 7.0, gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2]))
+				{
+					MoveDynamicObject(brama_kt[i], gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2], 2,
+						gate_pos[i][brama_kt_state[i]][3], gate_pos[i][brama_kt_state[i]][4], gate_pos[i][brama_kt_state[i]][5]);
+					brama_kt_state[i] = !brama_kt_state[i];
 				}
 			}
 		}
@@ -8302,7 +8311,7 @@ CMD:pojazdygracza(playerid, params[])
 
 CMD:checkcar(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL))
+	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL)  || PlayerInfo[playerid][pAdmin] == 7)
 	{
         new vehid;
 		if( sscanf(params, "d", vehid))
@@ -9160,7 +9169,7 @@ CMD:flip(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 1 )
+        if(PlayerInfo[playerid][pAdmin] < 1  && PlayerInfo[playerid][pAdmin] != 7)
 		{
 		    SendClientMessage(playerid, COLOR_GRAD1, "   Nie jestes upowazniony do uzywania tej komendy !");
 		    return 1;
@@ -14935,7 +14944,7 @@ CMD:dn(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 15)
+		if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
@@ -14971,7 +14980,7 @@ CMD:up(playerid)
 
 CMD:fly(playerid)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 15)
+	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
 	{
 		new Float:px, Float:py, Float:pz, Float:pa;
 		GetPlayerFacingAngle(playerid,pa);
@@ -15032,7 +15041,7 @@ CMD:lt(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 15)
+		if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
@@ -15051,7 +15060,7 @@ CMD:rt(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 15)
+		if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
@@ -24597,7 +24606,7 @@ CMD:zmienhp(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 10)
+		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pAdmin] == 7)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -24698,7 +24707,7 @@ CMD:fixveh(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 10)
+        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7)
 		{
 		    SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy!");
 		    return 1;
