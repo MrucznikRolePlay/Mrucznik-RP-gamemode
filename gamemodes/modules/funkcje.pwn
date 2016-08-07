@@ -1908,26 +1908,78 @@ IsAPrzestepca(playerid)
 	}
 	return 0;
 }
-
+IsAGang(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==12 || member==13 || member==14)
+		{
+		    return 1;
+		}
+		else if(leader==12  || leader==13 || leader==14)
+		{
+		    return 1;
+		}
+		else if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+IsAMafia(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==5 || member==6)
+		{
+		    return 1;
+		}
+		else if(leader==5 || leader==6)
+		{
+		    return 1;
+		}
+		else if(GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
 IsADilerBroni(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
 	    new leader = PlayerInfo[playerid][pLider];
 	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==8 || member==12 || member==13 || member==14)
+	    if(member==5 || member==6 || member==12 || member==13 || member==14)
 		{
 		    return 1;
 		}
-		else if(leader==5 || leader==6 || leader==8 || leader==12  || leader==13 || leader==14)
+		else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14)
 		{
 		    return 1;
 		}
-		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+		else if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
 		{
 		    return 1;
 		}
-		if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
+		else if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+IsASklepZBronia(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(GetPlayerOrg(playerid) == 21 && PlayerInfo[playerid][pRank] > 3 || GetPlayerOrg(playerid) == 22 && PlayerInfo[playerid][pRank] > 3 || GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] > 3)
 		{
 		    return 1;
 		}
@@ -4205,7 +4257,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
 			format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
 			SendClientMessage(playerid, COLOR_GRAD6,coordsstring);

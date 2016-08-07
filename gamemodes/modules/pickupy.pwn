@@ -168,7 +168,7 @@ Zaladuj3DTexty()
     CreateDynamic3DTextLabel("Verte Bank\nOddzia³ Los Santos", COLOR_BLUE, 1462.395751,-1012.391174,26.843799, 10.0);
     CreateDynamic3DTextLabel("Verte Bank\nOddzia³ Palomino Creek", COLOR_BLUE, 2302.7798,-15.9637,26.4844, 10.0);
     CreateDynamic3DTextLabel("Motel 'Dziki Tygrys'", 0xFF69B4, 1941.1919,-2115.6655,13.6953, 10.0);
-    CreateDynamic3DTextLabel("Biuro\nKorporacji Transportowej", COLOR_BLUE, 2458.3215, -2116.7236, 13.5976, 7.0);
+    CreateDynamic3DTextLabel("Biuro\nKorporacji Transportowej", COLOR_BLUE, 2518.0, -2127.0, 13.5, 7.0);
     CreateDynamic3DTextLabel("Tylne wejœcie", COLOR_BLUE, 593.5989,-1489.5365,15.2650, 5.0);
 
 	//--------------[Moje Pickupy i 3D moje 3d texty]---------------- {9ACD32}

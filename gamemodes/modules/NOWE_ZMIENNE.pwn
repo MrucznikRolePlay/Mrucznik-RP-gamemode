@@ -153,6 +153,8 @@ new AI_SIGN[3],
 new bool:VAR_Kolejka=false;
 //13.08  s¹d int, drobne zmiany errorów, fly mode dla 1000+ @
 
+new brama_kt[3];
+new brama_kt_state[3];
 new Brama_HA;
 new Brama_HA1;
 new Brama_HA2;
@@ -237,9 +239,6 @@ new GATE_ICC[3], bool:GATE_ICC_S[3] = {false, false, false};
 new ACCESS[MAX_PLAYERS], OLD_ACCESS[MAX_PLAYERS];
 //15.06 system aut kradziezy
 new CAR_End = 0;
-
-new GATE_KT,
-    bool:GATE_KT_S = false;
 
 //13.06
 //lsmc exterior
