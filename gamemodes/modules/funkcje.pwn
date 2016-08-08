@@ -4272,7 +4272,7 @@ SetPlayerToTeamColor(playerid)
 	{
 	    if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
 		{
-		    if(OnDuty[playerid])
+		    if(OnDuty[playerid] && OnDutyCD[playerid] == 0)
 		    {
 		    	SetPlayerColor(playerid, COLOR_LIGHTBLUE);
 		    }

@@ -16832,6 +16832,7 @@ CMD:dutycd(playerid)
 	    		    SetPlayerHealth(playerid, 100);
 	    		    //SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 					OnDuty[playerid] = 1;
+					OnDutyCD[playerid] = 1;
                     //SetPlayerToTeamColor(playerid);
 				}
 				else if(OnDuty[playerid]==1)
@@ -16842,6 +16843,7 @@ CMD:dutycd(playerid)
 	    		    SetPlayerHealth(playerid, 100);
 	    		    //SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
                     OnDuty[playerid] = 0;
+                    OnDutyCD[playerid] = 0;
                     PrzywrocBron(playerid);
                     //SetPlayerToTeamColor(playerid);
 				}
@@ -16875,6 +16877,11 @@ CMD:sluzba(playerid)
 		if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "   Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
+			return 1;
+		}
+		if(IsACop(playerid) && OnDutyCD[playerid] == 1)
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "   U¿yj /dutycd !");
 			return 1;
 		}
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return SendClientMessage(playerid, COLOR_GRAD2, "   Aby wzi¹sæ s³u¿be musisz byæ pieszo!");
@@ -34917,9 +34924,9 @@ CMD:wywaz(playerid, params[])
 				       	SendClientMessage(playerid, COLOR_GREY, "   Ten dom jest za daleko !");
 				        return 1;
 				    }
-				    if (!IsACop(giveplayerid))
+				    if (!IsACop(giveplayerid) && OnDuty[giveplayerid] != 1)
 				    {
-				       	SendClientMessage(playerid, COLOR_GREY, "   Ten gracz nie jest policjantem !");
+				       	SendClientMessage(playerid, COLOR_GREY, "   Ten gracz nie jest policjantem na s³u¿bie!");
 				        return 1;
 				    }
 				    if (giveplayerid == playerid)

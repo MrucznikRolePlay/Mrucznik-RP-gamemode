@@ -1842,7 +1842,7 @@ SetPlayerSpawnSkin(playerid)
 		{
 			if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC)
 			{
-				if(OnDuty[playerid] == 1)
+				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 				else
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
