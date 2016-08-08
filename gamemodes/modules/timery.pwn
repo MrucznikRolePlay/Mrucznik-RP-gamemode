@@ -1475,7 +1475,7 @@ public IdleKick()
 {
 	foreach(Player, i)
 	{
-		if(PlayerInfo[i][pAdmin] < 1)
+		if(PlayerInfo[i][pAdmin] < 1 || PlayerInfo[i][pNewAP] < 1)
 		{
 			GetPlayerPos(i, PlayerPos[i][0], PlayerPos[i][1], PlayerPos[i][2]);
 			if(PlayerPos[i][0] == PlayerPos[i][3] && PlayerPos[i][1] == PlayerPos[i][4] && PlayerPos[i][2] == PlayerPos[i][5])

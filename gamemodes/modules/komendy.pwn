@@ -504,8 +504,8 @@ CMD:mysql_query(playerid, params[])
 
 CMD:opis(playerid, params[])
 {
-	SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
-	/*
+	//SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
+	
     if(PlayerInfo[playerid][pConnectTime] < 4) return SendClientMessage(playerid, COLOR_GRAD2, "(OPIS) Dostêpne tylko od 4 godzin online!");
     new var[8], id=-1;
     sscanf(params, "s[8]K<fix>(-1)", var, id);
@@ -537,14 +537,14 @@ CMD:opis(playerid, params[])
 	else
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
-	}*/
+	}
 	return 1;
 }
 
 CMD:vopis(playerid, params[])
 {
-	SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
-    /*if(PlayerInfo[playerid][pConnectTime] < 4) return SendClientMessage(playerid, COLOR_GRAD2, "(OPIS) Dostêpne tylko od 4 godzin online!");
+	//SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
+    if(PlayerInfo[playerid][pConnectTime] < 4) return SendClientMessage(playerid, COLOR_GRAD2, "(OPIS) Dostêpne tylko od 4 godzin online!");
 
     new var[8], id=-1;
     sscanf(params, "s[8]D(-1)", var, id);
@@ -586,7 +586,7 @@ CMD:vopis(playerid, params[])
 	else
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
-	}*/
+	}
 	return 1;
 }
 
@@ -1445,6 +1445,11 @@ CMD:namierz(playerid, params[])
 				if(giveplayerid == playerid)
 				{
 					SendClientMessage(playerid, COLOR_GREY, "Nie mo¿esz szukaæ samego siebie!"); return 1;
+				}
+				if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
+				{
+					SendClientMessage(playerid, COLOR_GRAD1, "Nie mo¿esz namierzyæ tego gracza.");
+					return 1;
 				}
 				new points;
 				new level = PlayerInfo[playerid][pDetSkill];
@@ -9546,7 +9551,7 @@ CMD:setname(playerid, params[])
 	new sendername[MAX_PLAYER_NAME];
 
 	new newname[MAX_PLAYER_NAME];
-	if (Uprawnienia(playerid, ACCESS_OWNER))
+	if (PlayerInfo[playerid][pAdmin] >= 5000)//(Uprawnienia(playerid, ACCESS_OWNER))
 	{
 		new giveplayerid;
 		if( sscanf(params, "k<fix>s[24]", giveplayerid, newname))
@@ -10932,7 +10937,7 @@ CMD:spoiler(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
 	 	{
 			new playa, spojlerid;
 			if( sscanf(params, "k<fix>d", playa, spojlerid))
@@ -16827,6 +16832,7 @@ CMD:dutycd(playerid)
 	    		    SetPlayerHealth(playerid, 100);
 	    		    //SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 					OnDuty[playerid] = 1;
+					OnDutyCD[playerid] = 1;
                     //SetPlayerToTeamColor(playerid);
 				}
 				else if(OnDuty[playerid]==1)
@@ -16837,6 +16843,7 @@ CMD:dutycd(playerid)
 	    		    SetPlayerHealth(playerid, 100);
 	    		    //SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
                     OnDuty[playerid] = 0;
+                    OnDutyCD[playerid] = 0;
                     PrzywrocBron(playerid);
                     //SetPlayerToTeamColor(playerid);
 				}
@@ -16870,6 +16877,11 @@ CMD:sluzba(playerid)
 		if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "   Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
+			return 1;
+		}
+		if(IsACop(playerid) && OnDutyCD[playerid] == 1)
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "   U¿yj /dutycd !");
 			return 1;
 		}
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return SendClientMessage(playerid, COLOR_GRAD2, "   Aby wzi¹sæ s³u¿be musisz byæ pieszo!");
@@ -19007,7 +19019,7 @@ CMD:wejdz(playerid)
 	        TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
 	    }
-	    else if(IsPlayerInRangeOfPoint(playerid, 5.0, 2458.3215, -2116.7236, 13.5976))//biuro KT wejscie
+	    else if(IsPlayerInRangeOfPoint(playerid, 5.0, 2518.0, -2127.0, 13.5))//5.0, 2458.3215, -2116.7236, 13.5976))//biuro KT wejscie
 	    {
 	        SetPlayerPosEx(playerid, 2452.1274, -2117.2329, 32.2572);//biuro KT srodek
 	        GameTextForPlayer(playerid, "~w~Transport ~y~to podstawa!", 5000, 1);
@@ -20418,7 +20430,7 @@ CMD:wyjdz(playerid)
 	    }
 		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 2452.1274, -2117.2329, 32.2572))//biuro KT srodek
 	    {
-	        SetPlayerPosEx(playerid, 2458.3215, -2116.7236, 13.5976);//biuro KT exit
+	        SetPlayerPosEx(playerid, 2518.0, -2127.0, 13.5);//2458.3215, -2116.7236, 13.5976);//biuro KT exit
 	        GameTextForPlayer(playerid, "~w~Jestesmy najszybsi w miescie!", 3000, 1);
 	        SetPlayerVirtualWorld(playerid, 0);
 	    }
@@ -26009,10 +26021,10 @@ CMD:liderpomoc(playerid)
 {
 	if (PlayerInfo[playerid][pLider] >= 1)
 	{
-		ShowPlayerDialogEx(playerid, 1214, DIALOG_STYLE_MSGBOX, "Komendy Lidera", "/przyjmij - Przyjmujesz danego gracza do swojej - rodziny/frakcji\n/zwolnij - Wyrzucasz danego gracza ze swojej - rodziny/frakcji\n/dajrange - Wystawiasz danemu graczowi range (1-6)\n/awans - Dajesz cz³onkowi frakcji/rodziny awans\n/degraduj - Degradujesz cz³onka z danej rangi na ni¿sz¹.\n/pracownicy - Pokazuje liste pracowników online", "Zamknij", "");
+		ShowPlayerDialogEx(playerid, DIALOG_LIDER01, DIALOG_STYLE_MSGBOX, "Komendy Lidera", "/przyjmij - Przyjmujesz danego gracza do swojej - rodziny/frakcji\n/zwolnij - Wyrzucasz danego gracza ze swojej - rodziny/frakcji\n/dajrange - Wystawiasz danemu graczowi range (1-6)\n/awans - Dajesz cz³onkowi frakcji/rodziny awans\n/degraduj - Degradujesz cz³onka z danej rangi na ni¿sz¹.\n/pracownicy - Pokazuje liste pracowników online", "Zamknij", "");
 		if(PlayerInfo[playerid][pLider] == 11)
 		{
-			ShowPlayerDialogEx(playerid, 1215, DIALOG_STYLE_MSGBOX, "Komendy Lidera", "/podatek(/dajpodatek) - dajesz pieniadze policjantom", "Zamknij", "");
+			ShowPlayerDialogEx(playerid, DIALOG_LIDER02, DIALOG_STYLE_MSGBOX, "Komendy Lidera", "/podatek(/dajpodatek) - dajesz pieniadze policjantom", "Zamknij", "");
 		}
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	}
@@ -30741,11 +30753,19 @@ CMD:sprzedajbron(playerid, params[])
 			if( sscanf(params, "k<fix>S[16]", giveplayerid, x_weapon))
 			{
 				SendClientMessage(playerid, COLOR_GRAD1, "U¿yj: /sprzedajbron [ID gracza] [nazwa broni]");
-				SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: kwiaty(25) katana(100) pistolety(bez licencji)(150) shotgun(250)");
+				SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - GANG]----");
+				SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150)");
+				SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
+				SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: UZI(1750)");
+				SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - MAFIA]----");
+				SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150) shotgun(250)");
 				SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400) mp5(450)");
 				SendClientMessage(playerid, COLOR_GREY, "Bronie 3 Skill: ak47(650) m4(700) rifle(650)");
 				SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: spas12(1500) UZI(1750) sniper(2000) pila(1000)");
 				SendClientMessage(playerid, COLOR_GREY, "Bronie 5 Skill: c4(5000) ogniomiotacz(10000)");
+				SendClientMessage(playerid, COLOR_GREY, "----[SKLEP Z BRONI¥]----");
+				SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: katana(100) pistolety(150) shotgun(250)");
+				SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
 				return 1;
 			}
 
@@ -30767,12 +30787,20 @@ CMD:sprzedajbron(playerid, params[])
 							{
 								SendClientMessage(playerid, COLOR_GREEN, "________________________________________________");
 								SendClientMessage(playerid, COLOR_WHITE, "*** Sprzedaj broñ ***");
-								SendClientMessage(playerid, COLOR_GREY, "U¿yj: /sprzedajbron [ID gracza] [nazwa broni]");
-								SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: katana(100) pistolety(bez licencji)(150) shotgun(250)");
+       							SendClientMessage(playerid, COLOR_GRAD1, "U¿yj: /sprzedajbron [ID gracza] [nazwa broni]");
+								SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - GANG]----");
+								SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150)");
+								SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
+								SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: UZI(1750)");
+								SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - MAFIA]----");
+								SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150) shotgun(250)");
 								SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400) mp5(450)");
 								SendClientMessage(playerid, COLOR_GREY, "Bronie 3 Skill: ak47(650) m4(700) rifle(650)");
 								SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: spas12(1500) UZI(1750) sniper(2000) pila(1000)");
-								SendClientMessage(playerid, COLOR_GREY, "Bronie 5 Skill: c4(2500) ogniomiotacz(10000)");
+								SendClientMessage(playerid, COLOR_GREY, "Bronie 5 Skill: c4(5000) ogniomiotacz(10000)");
+								SendClientMessage(playerid, COLOR_GREY, "----[SKLEP Z BRONI¥]----");
+								SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: katana(100) pistolety(150) shotgun(250)");
+								SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
 								SendClientMessage(playerid, COLOR_GREEN, "________________________________________________");
 								return 1;
 							}
@@ -30797,9 +30825,9 @@ CMD:sprzedajbron(playerid, params[])
 						{
 							skillz = 5;
 						}
-						if(strcmp(x_weapon,"katana",true) == 0)
+						if(strcmp(x_weapon,"katana",true) == 0)//
 						{
-							if(PlayerInfo[playerid][pMats] > 99)
+							if(PlayerInfo[playerid][pMats] > 99 && IsASklepZBronia(playerid))
 							{
 								weapon[playerid] = 8;
 								price[playerid] = 100;
@@ -30813,31 +30841,11 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Masz za ma³o materia³ów na tê broñ lub nie jesteœ pracownikiem sklepu z broni¹!");
 								return 1;
 							}
 						}
-						else if(strcmp(x_weapon,"kwiaty",true) == 0)
-						{
-							if(PlayerInfo[playerid][pMats] > 24)
-							{
-								weapon[playerid] = 14;
-								price[playerid] = 25;
-								ammo[playerid] = 1;
-								umiejetnosc = 1;
-								if(umiejetnosc <= skillz)
-								{
-									PlayerInfo[giveplayerid][pGun10] = 14;
-									PlayerInfo[giveplayerid][pAmmo10] = 1;
-								}
-							}
-							else
-							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
-								return 1;
-							}
-						}
-						else if(strcmp(x_weapon,"sdpistol",true) == 0)
+						else if(strcmp(x_weapon,"sdpistol",true) == 0)//
 						{
 							if(PlayerInfo[playerid][pMats] > 249)
 							{
@@ -30857,9 +30865,9 @@ CMD:sprzedajbron(playerid, params[])
 								return 1;
 							}
 						}
-						else if(strcmp(x_weapon,"pila",true) == 0)
+						else if(strcmp(x_weapon,"pila",true) == 0)//
 						{
-							if(PlayerInfo[playerid][pMats] > 999)
+							if(PlayerInfo[playerid][pMats] > 999 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 9;
 								price[playerid] = 1000;
@@ -30873,11 +30881,11 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
-						else if(strcmp(x_weapon,"pistolety",true) == 0)
+						else if(strcmp(x_weapon,"pistolety",true) == 0)//
 						{
 							if(PlayerInfo[playerid][pMats] > 149)
 							{
@@ -30897,7 +30905,7 @@ CMD:sprzedajbron(playerid, params[])
 								return 1;
 							}
 						}
-						else if(strcmp(x_weapon,"eagle",true) == 0)
+						else if(strcmp(x_weapon,"eagle",true) == 0)//
 						{
 							if(PlayerInfo[playerid][pMats] > 399)
 							{
@@ -30917,9 +30925,9 @@ CMD:sprzedajbron(playerid, params[])
 								return 1;
 							}
 						}
-						else if(strcmp(x_weapon,"mp5",true) == 0)
+						else if(strcmp(x_weapon,"mp5",true) == 0)//
 						{
-							if(PlayerInfo[playerid][pMats] > 449)
+							if(PlayerInfo[playerid][pMats] > 449 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 29;
 								price[playerid] = 450;
@@ -30933,13 +30941,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
-						else if(strcmp(x_weapon,"uzi",true) == 0)
+						else if(strcmp(x_weapon,"uzi",true) == 0)//
 						{
-							if(PlayerInfo[playerid][pMats] > 1749)
+							if(PlayerInfo[playerid][pMats] > 1749 && (IsAGang(playerid) || IsAMafia(playerid)))
 							{
 								weapon[playerid] = 28;
 								price[playerid] = 1750;
@@ -30953,13 +30961,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do gangu/mafii!");
 								return 1;
 							}
 						}
-						else if(strcmp(x_weapon,"shotgun",true) == 0)
+						else if(strcmp(x_weapon,"shotgun",true) == 0)//
 						{
-							if(PlayerInfo[playerid][pMats] > 249)
+							if(PlayerInfo[playerid][pMats] > 249 && (IsASklepZBronia(playerid) || IsAMafia(playerid)))
 							{
 								weapon[playerid] = 25;
 								price[playerid] = 250;
@@ -30973,13 +30981,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Masz za ma³o materia³ów na tê broñ lub nie nale¿ysz do mafii/nie jesteœ pracownikiem sklepu z broni¹!");
 								return 1;
 							}
 						}
-						else if(strcmp(x_weapon,"spas12",true) == 0)
+						else if(strcmp(x_weapon,"spas12",true) == 0)//
 						{
-							if(PlayerInfo[playerid][pMats] > 1499)
+							if(PlayerInfo[playerid][pMats] > 1499 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 27;
 								price[playerid] = 1500;
@@ -30993,13 +31001,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
 						else if(strcmp(x_weapon,"ak47",true) == 0)
 						{
-							if(PlayerInfo[playerid][pMats] > 649)
+							if(PlayerInfo[playerid][pMats] > 649 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 30;
 								price[playerid] = 650;
@@ -31013,13 +31021,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
 						else if(strcmp(x_weapon,"m4",true) == 0)
 						{
-							if(PlayerInfo[playerid][pMats] > 699)
+							if(PlayerInfo[playerid][pMats] > 699 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 31;
 								price[playerid] = 700;
@@ -31033,13 +31041,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
 						else if(strcmp(x_weapon,"rifle",true) == 0)
 						{
-							if(PlayerInfo[playerid][pMats] > 649)
+							if(PlayerInfo[playerid][pMats] > 649 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 33;
 								price[playerid] = 650;
@@ -31053,13 +31061,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
 						else if(strcmp(x_weapon,"sniper",true) == 0)
 						{
-							if(PlayerInfo[playerid][pMats] > 1999)
+							if(PlayerInfo[playerid][pMats] > 1999 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 34;
 								price[playerid] = 2000;
@@ -31073,13 +31081,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
 						else if(strcmp(x_weapon,"c4",true) == 0)
 						{
-							if(PlayerInfo[playerid][pMats] > 2499)
+							if(PlayerInfo[playerid][pMats] > 2499 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 39;
 								price[playerid] = 2500;
@@ -31096,13 +31104,13 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
 						else if(strcmp(x_weapon,"ogniomiotacz",true) == 0)
 						{
-							if(PlayerInfo[playerid][pMats] > 9999)
+							if(PlayerInfo[playerid][pMats] > 9999 && IsAMafia(playerid))
 							{
 								weapon[playerid] = 37;
 								price[playerid] = 10000;
@@ -31116,7 +31124,7 @@ CMD:sprzedajbron(playerid, params[])
 							}
 							else
 							{
-								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
+								SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ lub nie nale¿ysz do mafii!");
 								return 1;
 							}
 						}
@@ -31155,7 +31163,7 @@ CMD:sprzedajbron(playerid, params[])
 								PlayerInfo[playerid][pMats] -= price[playerid];
 								if(playerid != giveplayerid)
 								{
-									if(strcmp(x_weapon,"katana",true) == 0 || strcmp(x_weapon,"kwiaty",true) == 0)
+									if(strcmp(x_weapon,"katana",true) == 0)
 									{
 										SetTimerEx("spamujebronia",10000,0,"d",playerid);
 										zmatsowany[playerid] = 1;
@@ -34916,14 +34924,19 @@ CMD:wywaz(playerid, params[])
 				       	SendClientMessage(playerid, COLOR_GREY, "   Ten dom jest za daleko !");
 				        return 1;
 				    }
-				    if (!IsACop(giveplayerid))
+				    if (!IsACop(giveplayerid) && OnDuty[giveplayerid] != 1)
 				    {
-				       	SendClientMessage(playerid, COLOR_GREY, "   Ten gracz nie jest policjantem !");
+				       	SendClientMessage(playerid, COLOR_GREY, "   Ten gracz nie jest policjantem na s³u¿bie!");
 				        return 1;
 				    }
 				    if (giveplayerid == playerid)
 				    {
 				       	SendClientMessage(playerid, COLOR_GREY, "   Nie mo¿esz sam wywa¿yæ drzwi !");
+				        return 1;
+				    }
+				    if(Dom[dom][hKupiony] == 0)
+				    {
+				       	SendClientMessage(playerid, COLOR_GREY, "   Nie mo¿esz wywa¿yæ tych drzwi !");
 				        return 1;
 				    }
                     if(Dom[dom][hZamek] == 0)
@@ -36033,21 +36046,23 @@ CMD:cennik(playerid)
 CMD:czity(playerid, params[]) return cmd_cziterzy(playerid, params);
 CMD:cziterzy(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] < 1) return 1;
-    new str[128];
-    SendClientMessage(playerid, -1, "Potencjalna lista cziterów:");
-    foreach(Player, i)
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)//if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     {
-        if(GetPVarInt(i, "AC-warn") > 1)
-        {
-            if(PlayerInfo[i][pLevel] <= 3)
-            {
-                format(str, 128, "= %s (%d) LVL [%d], AC sprawdzenia: %d", GetNick(i), i, PlayerInfo[i][pLevel], GetPVarInt(i, "AC-warn"));
-                SendClientMessage(playerid, -1, str);
-            }
-        }
-    }
-	ListaCziterow(playerid);
+    	new str[128];
+    	SendClientMessage(playerid, -1, "Potencjalna lista cziterów:");
+    	foreach(Player, i)
+    	{
+        	if(GetPVarInt(i, "AC-warn") > 1)
+        	{
+            	if(PlayerInfo[i][pLevel] <= 3)
+            	{
+                	format(str, 128, "= %s (%d) LVL [%d], AC sprawdzenia: %d", GetNick(i), i, PlayerInfo[i][pLevel], GetPVarInt(i, "AC-warn"));
+                	SendClientMessage(playerid, -1, str);
+            	}
+        	}
+    	}
+		ListaCziterow(playerid);
+	}
     return 1;
 }
 

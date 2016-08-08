@@ -79,47 +79,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			case 0:
 			{
+			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANUno);
 				return 1;
 			}
 			case 1:
 			{
+			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANDos);
 				return 1;
 			}
 			case 2:
 			{
+			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://radiozetmp3-07.eurozet.pl:8400/listen.pls");
 				return 1;
 			}
 			case 3:
 			{
+				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmffm.pls");
 				return 1;
 			}
 			case 4:
 			{
+				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls");
 				return 1;
 			}
 			case 5:
 			{
+				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://acdn.smcloud.net/t062-1.mp3.pls");
 				return 1;
 			}
 			case 6:
 			{
+				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
 			case 7:
 			{
+			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
 				PlayerFixRadio(playerid);
 				StopAudioStreamForPlayer(playerid);
@@ -129,17 +137,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	else if(dialogid == DIALOGID_MUZYKA_URL)
 	{
-		if(IsAValidURL(inputtext))
+		if(response)
 		{
-			StopAudioStreamForPlayer(playerid);
-			PlayAudioStreamForPlayer(playerid, inputtext);
-		}
-		else
-		{
-			SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
-			ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
-		}
-		return 1;
+			if(IsAValidURL(inputtext))
+			{
+				StopAudioStreamForPlayer(playerid);
+				PlayAudioStreamForPlayer(playerid, inputtext);
+			}
+			else
+			{
+				SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
+				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
+			}
+		}//return 1;
 	}
 	else if(dialogid == DIALOGID_PODSZYJ)
 	{
@@ -567,6 +577,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d³ugosæ opisu.");
             return 1;
         }
+        else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
+		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.') || (inputtext[i] == '!') || (inputtext[i] == ':') || (inputtext[i] == '-') || (inputtext[i] == '{') || (inputtext[i] == '}') || (inputtext[i] == '[') || (inputtext[i] == ']'))
+				continue;
+            else if ((inputtext[i] == 'Ê') || (inputtext[i] == 'Ó') || (inputtext[i] == '¥') || (inputtext[i] == 'Œ') || (inputtext[i] == '£') || (inputtext[i] == '¯') || (inputtext[i] == '') || (inputtext[i] == 'Æ') || (inputtext[i] == 'Ñ') || (inputtext[i] == 'ê') || (inputtext[i] == 'ó') || (inputtext[i] == '¹') || (inputtext[i] == 'œ') || (inputtext[i] == '³') || (inputtext[i] == '¿') || (inputtext[i] == 'Ÿ') || (inputtext[i] == 'æ') || (inputtext[i] == 'ñ'))
+                continue;
+			else return SendClientMessage(playerid, COLOR_GRAD1, "Opis: U¿y³eœ nieodpowiednich znaków opisu.");
+		}
         strdel(PlayerDesc[playerid], 0, 128 char);
         strpack(PlayerDesc[playerid], inputtext);
         MruMySQL_UpdateOpis(playerid, PlayerInfo[playerid][pUID], 1);
@@ -629,6 +646,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d³ugosæ opisu.");
             return 1;
         }
+         else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
+		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.') || (inputtext[i] == '!') || (inputtext[i] == ':') || (inputtext[i] == '-') || (inputtext[i] == '{') || (inputtext[i] == '}') || (inputtext[i] == '[') || (inputtext[i] == ']'))
+				continue;
+            else if ((inputtext[i] == 'Ê') || (inputtext[i] == 'Ó') || (inputtext[i] == '¥') || (inputtext[i] == 'Œ') || (inputtext[i] == '£') || (inputtext[i] == '¯') || (inputtext[i] == '') || (inputtext[i] == 'Æ') || (inputtext[i] == 'Ñ') || (inputtext[i] == 'ê') || (inputtext[i] == 'ó') || (inputtext[i] == '¹') || (inputtext[i] == 'œ') || (inputtext[i] == '³') || (inputtext[i] == '¿') || (inputtext[i] == 'Ÿ') || (inputtext[i] == 'æ') || (inputtext[i] == 'ñ'))
+                continue;
+			else return SendClientMessage(playerid, COLOR_GRAD1, "Opis: U¿y³eœ nieodpowiednich znaków opisu.");
+		}
         new veh = GetPlayerVehicleID(playerid);
         strdel(CarDesc[veh], 0, 128 char);
         strpack(CarDesc[veh], inputtext);
@@ -8253,8 +8277,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 1://Zamykanie domu
 		            {
-		                if(Dom[dom][hZamek] == 1)
+		                if(Dom[dom][hZamek] == 1 && AntySpam[playerid] == 1)
 		                {
+							ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Odczekaj 10 sekund zanim zamkniesz dom ponownie.", "Wróæ", "WyjdŸ");
+						}
+						else if(Dom[dom][hZamek] == 1)
+		                {
+		                    SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+	    					AntySpam[playerid] = 1;
 							Dom[dom][hZamek] = 0;
 							ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Dom zosta³ zamkniêty pomyœlnie", "Wróæ", "WyjdŸ");
 						}

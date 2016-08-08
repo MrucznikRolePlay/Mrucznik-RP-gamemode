@@ -605,6 +605,7 @@ new wywalzdmv[MAX_PLAYERS];
 new poscig[MAX_PLAYERS];
 new PoziomPoszukiwania[MAX_PLAYERS];
 new OnDuty[MAX_PLAYERS];
+new OnDutyCD[MAX_PLAYERS];
 new gPlayerCheckpointStatus[MAX_PLAYERS];
 new gPlayerLogged[MAX_PLAYERS];
 new gPlayerLogTries[MAX_PLAYERS];
@@ -1023,7 +1024,7 @@ ZerujZmienne(playerid)
 	DrugGram[playerid] = 0; ConnectedToPC[playerid] = 0; OrderReady[playerid] = 0;
 	JailPrice[playerid] = 0; MedicTime[playerid] = 0; NeedMedicTime[playerid] = 0; MedicBill[playerid] = 0; GotHit[playerid] = 0;
 	GoChase[playerid] = 999; GetChased[playerid] = 999; PlacedNews[playerid] = 0;
-	OnDuty[playerid] = 0; PoziomPoszukiwania[playerid] = 0; TestFishes[playerid] = 0;
+	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; PoziomPoszukiwania[playerid] = 0; TestFishes[playerid] = 0;
 	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; ChangePos2[playerid][1] = 0; iddialog[playerid] = -1;
 	TransportDuty[playerid] = 0; PlayerTied[playerid] = 0; weryfikacja[playerid] = 0;
 	BusCallTime[playerid] = 0; TaxiCallTime[playerid] = 0; MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;

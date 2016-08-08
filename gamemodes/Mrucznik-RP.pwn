@@ -1396,6 +1396,7 @@ SetPlayerSpawnPos(playerid)
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
 			Unspec[playerid][Coords][0] = 0.0, Unspec[playerid][Coords][1] = 0.0, Unspec[playerid][Coords][2] = 0.0;
 			Spectate[playerid] = INVALID_PLAYER_ID;
+			PhoneOnline[playerid] = 0;
 		}
     }
     //Tutorial:
@@ -1841,7 +1842,7 @@ SetPlayerSpawnSkin(playerid)
 		{
 			if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC)
 			{
-				if(OnDuty[playerid] == 1)
+				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 				else
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);

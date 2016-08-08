@@ -332,6 +332,9 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 //uniformnew
 #define DIALOGID_UNIFORM 3445
 
+#define DIALOG_LIDER01 3001
+#define DIALOG_LIDER02 3002
+
 //------------------------------------------------------------------------------
 //                              INNE
 //------------------------------------------------------------------------------
