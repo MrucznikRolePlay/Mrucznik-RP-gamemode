@@ -109,7 +109,6 @@ stock PDTuneInfernus(vehicleid)
     AttachDynamicObjectToVehicle(hsiu_text, vehicleid, -1.1012001,0.0907000,-0.150000,0.0000000,0.0000000,271.5000000);
     AttachDynamicObjectToVehicle(hsiu_text2, vehicleid, 1.1013298,0.0907000,-0.150000,0.0000000,0.0000000,88.7496338);
 }
-
 forward OznaczCzitera(playerid);
 public OznaczCzitera(playerid)
 {
@@ -1886,7 +1885,19 @@ IsAFakeKonto(playerid)
 	}
 	return 0;
 }
-
+IsAFLD(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new nick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, nick, sizeof(nick));
+		if(strcmp(nick,"Matthew_McVinsley", false) == 0)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
 IsAPrzestepca(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2633,13 +2644,13 @@ DajBroniePracy(playerid)
 				PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 1;
 			}
 		}
-		case JOB_LOWCA:
+		/*case JOB_LOWCA:
 		{
 			if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
 			{
 				PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
 			}
-		}
+		}*/
 	}
 }
 
@@ -7251,6 +7262,8 @@ FunkcjaK(string[])
 		for(new i=strlen(string); i>0; i--)
 		{
 			if(string[i] == 'k')
+				ilosc_k++;
+            else if(string[i] == 'K')
 				ilosc_k++;
 		}
 		if(ilosc_k != 0)

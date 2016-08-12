@@ -45,8 +45,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
             new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[1][listitem]);
-			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
+			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
 	}
@@ -3120,7 +3120,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
 				}
-				if(cops >= 3)
+				if(cops >= 3 || TazerAktywny[playerid] == 1 && cops == 2)
 				{
 	                format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -3131,7 +3131,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
 				}
-				else if(cops == 2)
+				else if(cops == 2 || TazerAktywny[playerid] == 1 && cops < 2)
 				{
 				    new rand = random(100);
 				    if(rand <= 50)

@@ -8,10 +8,13 @@ new regexURL;
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
 new Float:pl_pos[MAX_PLAYERS][5];
-
+//dodatkiPD
+new DodatkiPD[MAX_PLAYERS];
 //AFK timer
 new afk_timer[MAX_PLAYERS];
-
+//tazer
+new MaTazer[MAX_PLAYERS];
+new TazerAktywny[MAX_PLAYERS];
 //2015.08.25
 new wybory[6];
 ///
@@ -1006,6 +1009,7 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	
 	//z conecta
+	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
 	cbradijo[playerid] = 0; adminpodgladcb[playerid] = 0; matogczas[playerid] = 0;
 	dajeKontrakt[playerid] = 9999;
 	SelectChar[playerid] = 0; HidePM[playerid] = 0; PhoneOnline[playerid] = 0; spamwl[playerid] = 0;
