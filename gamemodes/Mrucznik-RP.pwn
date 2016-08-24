@@ -702,17 +702,7 @@ public OnPlayerConnect(playerid)
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-	if(strfind(nick, "_") == -1)
-	{
-		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
-		KickEx(playerid);
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-		#endif
-		return 1;
-	}
-
-    if(CheckAlfaNumericNick(nick))
+    if(IsNickCorrect(nick))
     {
         SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
@@ -721,18 +711,6 @@ public OnPlayerConnect(playerid)
 		#endif
 		return 1;
     }
-
-	new mysql_injection[MAX_PLAYER_NAME];
-	mysql_real_escape_string(nick, mysql_injection);
-	if(strcmp(nick,mysql_injection,true) != 0)
-	{
-		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko! @SQL");
-		KickEx(playerid);
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-		#endif
-		return 1;
-	}
 
 	//Pocz¹tkowe ustawienia:
     SetTimerEx("OPCLogin", 100, 0, "i", playerid);
@@ -5404,23 +5382,6 @@ OnPlayerLogin(playerid, password[])
 	}
 	else
 	{//z³e has³o
-		if(strlen(password) > 19)
-		{
-			strdel(password, 19, strlen(password));
-            format(oldpass, 64, "%s", password);
-            Encrypt(oldpass);
-            if(UseDINI)
-            {
-				if(strcmp(PlayerInfo[playerid][pKey],oldpass, true ) == 0)
-				{
-					SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wykryto b³¹d z 19 literowym has³em (twoje has³o ma tak na prawdê tylko 19 liter)");
-					SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Aby naprawiæ ten b³¹d, zaleca siê u¿yæ komendy /zmienhaslo");
-					printf("Nick %s posiada blad 19 literowego hasla", nick);
-					OnPlayerLogin(playerid, password);
-					return 1;
-				}
-            }
-		}
 		SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Z³e has³o.");
 		format(string, sizeof(string), "Nick %s jest zarejestrowany.\nZaloguj siê wpisuj¹c w okienko poni¿ej has³o.\nJe¿li nie znasz has³a do tego konta, wejdŸ pod innym nickiem", nick);
 		ShowPlayerDialogEx(playerid, 230, DIALOG_STYLE_PASSWORD, "Logowanie", string, "Zaloguj", "WyjdŸ");

@@ -8098,26 +8098,13 @@ stock MASTER_SendLog(typ)
     MASTER_SendTextToWebsite(plik);
 }
 
-stock CheckAlfaNumericNick(password[])
+stock IsNickCorrect(nick[])
 {
-    new charsets[46] = "abcdefghijklmnoprstuvwyzxq_";
-
-    new bool:validchars[64]={false,...};
-
-    new bool:doeschange=false;
-    for(new i=0;i<strlen(password);i++)
-    {
-        for(new a=0;a<46;a++)
-        {
-            if(tolower(password[i]) == charsets[a]) validchars[i] = true;
-        }
-        if(!validchars[i]) //!alpha
-        {
-            password[i] = charsets[random(sizeof(charsets))];
-            if(!doeschange) doeschange=true;
-        }
-    }
-    return doeschange;
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$" >= 0)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 stock CheckAlfaNumeric(password[])

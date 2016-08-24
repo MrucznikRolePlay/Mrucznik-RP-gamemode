@@ -850,7 +850,7 @@ MruMySQL_Blockuj(nick[], admin, powod[])
         GetPlayerName(admin, admnick, 32);
         format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`,`powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%s', '%d', '%s', '%d')", validnick, powod, PlayerInfo[admin][pUID], admnick,WARN_BLOCK);
     }
-    else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `powod`, `typ`, `nadal`) VALUES ('%s', '%s', '%d', 'SYSTEM')", validnick, powod,WARN_BAN);
+    else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `powod`, `typ`, `nadal`) VALUES ('%s', '%s', '%d', 'SYSTEM')", validnick, powod,WARN_BLOCK);
 	mysql_query(query);
 
 	return 1;
