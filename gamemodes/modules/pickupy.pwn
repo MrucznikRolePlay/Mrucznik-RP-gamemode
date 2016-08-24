@@ -242,6 +242,7 @@ Zaladuj3DTexty()
     CreateDynamic3DTextLabel(str2,COLOR_NEWS,570.76820068,-2029.58264160,17.9,8.5,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 30);
 	CreateDynamic3DTextLabel("Wejscie tylko dla personelu \n(wpisz /wyjdz aby wejsc)", COLOR_BLUE ,562.2107,-2029.9917,16.1670, 2.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 30);
 	CreateDynamic3DTextLabel("Trampoliny", COLOR_BLUE ,578.6193,-2195.7708,1.6288, 3.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 30);
+	CreateDynamic3DTextLabel("U¿yj: /kupkredyty", COLOR_BLUE ,570.63, -2031.03, 16.2, 3.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 30);
 //sklepy z ubraniami
 	CreateDynamic3DTextLabel("Sub Urban", COLOR_BLUE ,2112.7527,-1212.0103,23.9637, 20.0);
 	CreateDynamic3DTextLabel("ZIP", COLOR_BLUE ,1456.7676,-1138.7638,23.9991, 20.0);

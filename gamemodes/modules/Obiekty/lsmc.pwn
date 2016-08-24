@@ -67,10 +67,11 @@ LOADLSMC()
 	SetDynamicObjectMaterial(CreateDynamicObject(19362, 1150.37573, -1318.40100, 14.37040,   0.00000, 0.00000, 90.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1150.68616, -1314.86804, 16.06410,   0.00000, 90.00000, 0.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1150.69128, -1314.84802, 12.64010,   0.00000, 90.00000, 0.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
-	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1128.81384, -1324.55945, 13.07240,   0.00000, 0.00000, 0.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
-	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1128.81384, -1314.96838, 13.07240,   0.00000, 0.00000, 0.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
-	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1128.82458, -1334.14307, 13.07240,   0.00000, 0.00000, 0.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
+	//SetDynamicObjectMaterial(CreateDynamicObject(19377, 1128.81384, -1324.55945, 13.07240,   0.00000, 0.00000, 0.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
+	//SetDynamicObjectMaterial(CreateDynamicObject(19377, 1128.81384, -1314.96838, 13.07240,   0.00000, 0.00000, 0.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
+	//SetDynamicObjectMaterial(CreateDynamicObject(19377, 1128.82458, -1334.14307, 13.07240,   0.00000, 0.00000, 0.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1136.39343, -1354.92847, 14.64040,   0.00000, 0.00000, 90.00000), 0, 10945, "skyscrap_sfse", "concpanel_la", 0xFFFFFFFF);
+    CreateDynamicObject(19377, 1089.95996, -1330.90002, 13.07240, 0.00000, 0.00000, 0.00000);//
 	//Reszta
 	CreateDynamicObject(1649, 1147.73096, -1310.08459, 16.70520,   0.00000, 0.00000, 180.00000);
 	CreateDynamicObject(1649, 1147.73096, -1310.08459, 16.70520,   0.00000, 0.00000, 0.00000);

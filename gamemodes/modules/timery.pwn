@@ -8,7 +8,7 @@ public DostalTazerem(playerid)
     TazerAktywny[playerid] = 0;
     GameTextForPlayer(playerid, "JUZ MOZESZ SIE RUSZAC!", 3000, 5);
     ClearAnimations(playerid);
-    SetPlayerDrunkLevel(playerid, 4000);
+    SetPlayerDrunkLevel(playerid, 3000);
     return 1;
 }
 //tazer

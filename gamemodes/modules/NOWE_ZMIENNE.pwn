@@ -5,6 +5,9 @@ new gTeam[MAX_PLAYERS];
 //regex
 new regexURL;
 
+//Actor
+new PaniJanina;
+
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
 new Float:pl_pos[MAX_PLAYERS][5];

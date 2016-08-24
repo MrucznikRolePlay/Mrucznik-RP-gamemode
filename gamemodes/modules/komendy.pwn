@@ -8183,9 +8183,9 @@ CMD:setskin(playerid, params[])
 		{
 		    if(IsPlayerConnected(para1))
 		    {
-		        if(level > 299)
+		        if(level > 311)
 				{
-					SendClientMessage(playerid, COLOR_GREY, "   Numer skinu od 0 do 300!");
+					SendClientMessage(playerid, COLOR_GREY, "   Numer skinu od 0 do 311!");
 					if(PlayerInfo[playerid][pAdmin] != 12345)
 					{
 						return 1;
@@ -8211,9 +8211,9 @@ CMD:setskin(playerid, params[])
 		{
 		    if(IsPlayerConnected(para1))
 		    {
-		        if(level > 299)
+		        if(level > 311)
 				{
-					SendClientMessage(playerid, COLOR_GREY, "   Numer skinu od 0 do 300!");
+					SendClientMessage(playerid, COLOR_GREY, "   Numer skinu od 0 do 311!");
 					if(PlayerInfo[playerid][pAdmin] != 12345)
 					{
 						return 1;
@@ -8591,7 +8591,45 @@ CMD:zmienprace(playerid, params[])
 	}
 	return 1;
 }
+CMD:setslot(playerid, params[])
+{
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
 
+    if(IsPlayerConnected(playerid))
+    {
+		new para1, level;
+		if( sscanf(params, "k<fix>d", para1, level))
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /setslot [playerid/CzêœæNicku] [id pracy]");
+			return 1;
+		}
+		if (PlayerInfo[playerid][pAdmin] >= 5000)
+		{
+		    if(IsPlayerConnected(para1))
+		    {
+		    	if(para1 != INVALID_PLAYER_ID)
+	        	{
+                    if(!(0 <= level <= 12)) return 1;
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					PlayerInfo[para1][pCarSlots] = level;
+					printf("AdmCmd: %s sloty %s na %d.", sendername, giveplayer, level);
+					format(string, sizeof(string), "   Liczba slotow zostala zmieniona %d przez %s", level, sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "   Zmieni³eœ sloty graczowi %s na %d.", giveplayer,level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				}
+			}
+		}
+		else
+		{
+			SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy!");
+		}
+	}
+	return 1;
+}
 
 
 CMD:setdom(playerid, params[]) return cmd_zmiendom(playerid, params);
@@ -11515,7 +11553,24 @@ CMD:dajneony(playerid, params[])
 	//rup
 	return 1;
 }
-
+CMD:kupkredyty(playerid)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(GUIExit[playerid] == 0)
+    	{
+    	    if(IsPlayerInRangeOfPoint(playerid, 5.0, 570.63, -2031.03, 16.2))
+    	    {
+  				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_LIST, "Kup Kredyty", "{FFFFFF}Pakiet 50 kredytów - 1 000$\nPakiet 100 kredytów - 2 000$\nPakiet 250 kredytów - 4 000$\nPakiet 500 kredytów - 8 000$", "Kup", "Anuluj");
+    	    }
+    	    else
+    	    {
+   				SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ na basenie Tsunami!");
+    	    }
+    	}
+    }
+	return 1;
+}
 CMD:kupneon(playerid) return cmd_kupneony(playerid);
 CMD:kupneony(playerid)
 {
@@ -12638,7 +12693,7 @@ CMD:uniform2(playerid, params[])
 	return 1;
 }
 
-CMD:podszyj(playerid, params[]) return cmd_podszyjsie(playerid, params);
+/*CMD:podszyj(playerid, params[]) return cmd_podszyjsie(playerid, params);
 CMD:podszyjsie(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
@@ -12654,7 +12709,7 @@ CMD:podszyjsie(playerid, params[])
 		}
 	}
 	return 1;
-}
+}*/
 
 CMD:fed(playerid, params[]) return cmd_federalne(playerid, params);
 CMD:federalne(playerid, params[])
@@ -19879,6 +19934,7 @@ CMD:wejdz(playerid)
 		    SetPlayerPosEx(playerid, 575.5542,-2048.8000,16.1670 ); // Basen œrodek (recepcja)
 		    GameTextForPlayer(playerid, "~w~Witamy w kasach ~g~Basenu Tsunami.", 5000, 1);
 	     	SetPlayerVirtualWorld(playerid, 30);
+	     	SetActorVirtualWorld(PaniJanina, 30);
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
             return 1;
@@ -24270,7 +24326,7 @@ CMD:tp(playerid, params[])
 		{
 		    if(plo != INVALID_PLAYER_ID && plo1 != INVALID_PLAYER_ID)
 		    {
-				GetPlayerName(plo1, sendername, sizeof(sendername));
+				GetPlayerName(playerid, sendername, sizeof(sendername));
 				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL))
 				{
 					//SZUKANIE ADMINOW I P@ na serwerze
@@ -24300,9 +24356,9 @@ CMD:tp(playerid, params[])
 					GetPlayerPos(plo, plocx, plocy, plocz);
 					SetPlayerInterior(plo1, GetPlayerInterior(plo));
 					SetPlayerVirtualWorld(plo1, GetPlayerVirtualWorld(plo));
-					format(string, sizeof(string), "Zosta³eœ teleportowany do ID %d.", plo);
+					format(string, sizeof(string), "Zosta³eœ teleportowany do ID %d przez Admina %s.", plo, sendername);
 					SendClientMessage(plo1, COLOR_GRAD1, string);
-					format(string, sizeof(string), "Teleportowano tutaj ID %d.", plo1);
+					format(string, sizeof(string), "Teleportowano tutaj ID %d przez Admina %s.", plo1, sendername);
 					SendClientMessage(plo, COLOR_GRAD1, string);
 					format(string, sizeof(string), "Teleportowano ID %d do ID %d.", plo1, plo);
 					SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -31847,12 +31903,18 @@ CMD:tazer(playerid, params[])
     		if((GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && MaTazer[playerid] == 0)
 			{
  				MaTazer[playerid] = 1;
+ 				//PlayerInfo[playerid][pGun2] = 23;
+				//GivePlayerWeapon(playerid, 23, PlayerInfo[playerid][pAmmo2]);
+				//SetPlayerAttachedObject(playerid, 9,18642, 6, 0.09, 0.05, 0.05, 0, 180, 90, 2, 2, 2);
        			format(string, sizeof(string), "* %s odbezpiecza, ³aduje nabój i aktywuje tazer.", sendername);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
  			}
   			else if((GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && MaTazer[playerid] == 1)
 			{
 				MaTazer[playerid] = 0;
+				//PlayerInfo[playerid][pGun2] = 24;
+				//GivePlayerWeapon(playerid, 24, PlayerInfo[playerid][pAmmo2]);
+				//RemovePlayerAttachedObject(playerid, 9);
 				format(string, sizeof(string), "* %s zabezpiecza i dezaktywuje tazer.", sendername);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			}
