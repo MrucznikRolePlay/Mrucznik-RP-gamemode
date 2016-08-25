@@ -1,6 +1,17 @@
 //timery.pwn
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
-
+//tazer
+forward DostalTazerem(playerid);
+public DostalTazerem(playerid)
+{
+    TogglePlayerControllable(playerid, 1);
+    TazerAktywny[playerid] = 0;
+    GameTextForPlayer(playerid, "JUZ MOZESZ SIE RUSZAC!", 3000, 5);
+    ClearAnimations(playerid);
+    SetPlayerDrunkLevel(playerid, 4000);
+    return 1;
+}
+//tazer
 //AFK timer
 forward PlayerAFK(playerid, afktime, breaktime);
 public PlayerAFK(playerid, afktime, breaktime)

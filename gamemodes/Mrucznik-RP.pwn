@@ -182,6 +182,11 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
+    if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && hittype != 1)
+    {
+    	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+		MaTazer[playerid] = 0;
+	}
     return 1;
 }
 
@@ -1005,6 +1010,39 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+    if(issuerid != INVALID_PLAYER_ID)
+	{
+	    new Float:health;
+    	GetPlayerHealth(playerid,health);
+        if(MaTazer[issuerid] == 1 && (GetPlayerWeapon(issuerid) == 23 || GetPlayerWeapon(issuerid) == 24) && TazerAktywny[playerid] == 0 && GetDistanceBetweenPlayers(playerid,issuerid) < 11)
+		{
+		    SetPlayerHealth(playerid, health);
+ 		   	new giveplayer[MAX_PLAYER_NAME];
+			new sendername[MAX_PLAYER_NAME];
+  		  	GetPlayerName(issuerid, giveplayer, sizeof(giveplayer));
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+            TazerAktywny[playerid] = 1;
+            SetTimerEx("DostalTazerem", 10000, false, "i", playerid);
+            new string[128];
+            GameTextForPlayer(playerid, "DOSTALES TAZEREM! ODCZEKAJ CHWILE!", 3000, 5);
+            GameTextForPlayer(issuerid, "~g~TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+            format(string, sizeof(string), "* %s strzela tazerem w %s.", giveplayer, sendername);
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			MaTazer[issuerid] = 0;
+			PlayerPlaySound(issuerid, 6300, 0.0, 0.0, 0.0);
+			PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
+            ApplyAnimation(playerid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
+            ClearAnimations(playerid);
+            ApplyAnimation(playerid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
+            TogglePlayerControllable(playerid, 0);
+        }
+        else if(MaTazer[issuerid] == 1 && (GetPlayerWeapon(issuerid) == 23 || GetPlayerWeapon(issuerid) == 24) && TazerAktywny[playerid] == 0 && GetDistanceBetweenPlayers(playerid,issuerid) > 10)
+		{
+		    SetPlayerHealth(playerid, health);
+			GameTextForPlayer(issuerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+			MaTazer[issuerid] = 0;
+		}
+    }
 	switch(bodypart)
 	{
 	    case BODY_PART_LEFT_LEG:
@@ -4339,7 +4377,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 
 			}
-			else if(PlayerDrunk[playerid] >= 5 || GetPlayerDrunkLevel(playerid) > 1999)
+			else if(PlayerDrunk[playerid] >= 5 || GetPlayerDrunkLevel(playerid) > 1999 && TazerAktywny[playerid] == 0)
 			{
 				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda po alkoholu");
 			}
