@@ -7381,7 +7381,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 			    if(IsPlayerConnected(playerid))
 			    {
-			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
+			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 50)
 			        {
 						if(strcmp(inputtext, "GuL973TekeSTDz4-128", false) == 0)
 						{
@@ -7426,7 +7426,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(IsPlayerConnected(playerid))
 			    {
-			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
+			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 19)
 			        {
 						OnPlayerRegister(playerid, inputtext);
 						GUIExit[playerid] = 0;
@@ -7454,7 +7454,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
+		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 50)
 			    {
 			        if(strcmp(inputtext,"SiveMopY", false) == 0 )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67
 			        {
@@ -7481,9 +7481,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-			       SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za niewpisanie has³a!");
-					ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany z powodu bezpieczeñstwa za wpisanie pustego lub zbyt d³ugiego has³a. Zapraszamy ponownie.", "WyjdŸ", "");
-					GUIExit[playerid] = 0;
+			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
+				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
+				    GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 0);
 					KickEx(playerid);
 			    }
@@ -7794,7 +7794,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if (kaska[playerid] >= 25000000 && PlayerInfo[playerid][pExp] >= 180)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
-							NickLog(string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktów respektu");
 							PlayerInfo[playerid][pZmienilNick] --;
@@ -7811,7 +7810,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    if (PlayerInfo[playerid][pExp] >= 340)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
-							NickLog(string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
 							PlayerInfo[playerid][pZmienilNick] --;

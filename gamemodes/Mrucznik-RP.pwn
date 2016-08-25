@@ -52,6 +52,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <md5>
 #include <nex-ac>
 #include <dialogs>
+#include <fadescreen>
 #include <ACSBM>
 #include <YSI\y_safereturn>				// By Bartekdvd & Y_Less: 		http://forum.sa-mp.com/showthread.php?t=456132
 
@@ -186,6 +187,9 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
     {
     	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
 		MaTazer[playerid] = 0;
+		//PlayerInfo[playerid][pGun2] = 24;
+		//GivePlayerWeapon(playerid, 24, PlayerInfo[playerid][pAmmo2]);
+		//RemovePlayerAttachedObject(playerid, 9);
 	}
     return 1;
 }
@@ -1007,15 +1011,23 @@ public OnPlayerDisconnect(playerid, reason)
 	#endif
 	return 1;
 }
-
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
-    if(issuerid != INVALID_PLAYER_ID)
+    if(weaponid == WEAPON_GRENADE || weaponid == 51)
 	{
-	    new Float:health;
-    	GetPlayerHealth(playerid,health);
+		new Float:health;
+		GetPlayerHealth(playerid,health);
+		SetPlayerHealth(playerid, (health)-5);
+	    ShowPlayerFadeScreenToBlank(playerid, 20, 255, 255, 255, 255);
+		SetPlayerDrunkLevel(playerid, 3000);
+	}
+    else if(issuerid != INVALID_PLAYER_ID)
+	{
+	    
         if(MaTazer[issuerid] == 1 && (GetPlayerWeapon(issuerid) == 23 || GetPlayerWeapon(issuerid) == 24) && TazerAktywny[playerid] == 0 && GetDistanceBetweenPlayers(playerid,issuerid) < 11)
 		{
+		    new Float:health;
+    		GetPlayerHealth(playerid,health);
 		    SetPlayerHealth(playerid, health);
  		   	new giveplayer[MAX_PLAYER_NAME];
 			new sendername[MAX_PLAYER_NAME];
@@ -1029,6 +1041,9 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
             format(string, sizeof(string), "* %s strzela tazerem w %s.", giveplayer, sendername);
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			MaTazer[issuerid] = 0;
+			//PlayerInfo[issuerid][pGun2] = 24;
+			//GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
+			//RemovePlayerAttachedObject(issuerid, 9);
 			PlayerPlaySound(issuerid, 6300, 0.0, 0.0, 0.0);
 			PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
             ApplyAnimation(playerid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
@@ -1038,9 +1053,14 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
         }
         else if(MaTazer[issuerid] == 1 && (GetPlayerWeapon(issuerid) == 23 || GetPlayerWeapon(issuerid) == 24) && TazerAktywny[playerid] == 0 && GetDistanceBetweenPlayers(playerid,issuerid) > 10)
 		{
+		    new Float:health;
+    		GetPlayerHealth(playerid,health);
 		    SetPlayerHealth(playerid, health);
 			GameTextForPlayer(issuerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
 			MaTazer[issuerid] = 0;
+			//PlayerInfo[issuerid][pGun2] = 24;
+			//GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
+			//RemovePlayerAttachedObject(issuerid, 9);
 		}
     }
 	switch(bodypart)
@@ -4693,7 +4713,9 @@ public OnGameModeInit()
 	#endif
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
     Streamer_SetVisibleItems(0, 900);
-
+    
+    PaniJanina = CreateActor(88, 570.63, -2031.03, 16.2, 180.0);//basen
+	SetActorVirtualWorld(PaniJanina, 30);
 	//AFK timer
 	for(new i; i<MAX_PLAYERS; i++)
 	{
@@ -5933,6 +5955,20 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		   	}
 		}
 	}
+	/*if(PRESSED(KEY_ACTION))
+	{
+		if(IsPlayerInAnyVehicle(playerid))
+		{
+			AddVehicleComponent(GetPlayerVehicleID(playerid), 1010);
+		}
+	}
+	if(RELEASED(KEY_ACTION))
+ 	{
+ 	    if(IsPlayerInAnyVehicle(playerid))
+ 	    {
+ 	        RemoveVehicleComponent(GetPlayerVehicleID(playerid), 1010);
+ 	    }
+ 	}*/
 	if(IsPlayerInAnyVehicle(playerid))
 	{
 	    if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
