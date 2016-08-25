@@ -10385,7 +10385,7 @@ stock ChangePlayerName(playerid, name[])
 		return 0;
     }
 
-    if(IsNickCorrect(name))
+    if(!IsNickCorrect(name))
     {
         SendClientMessage(playerid, COLOR_RED, "Nick zawiera niepoprawne znaki (znaki polskie, cyfry lub specjalne).");
         return 0;

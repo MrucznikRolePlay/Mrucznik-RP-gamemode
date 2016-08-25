@@ -641,8 +641,8 @@ stock MruMySQL_UpdateOpis(handle, uid, typ)
 
 stock MruMySQL_CheckOpis(uid, typ)
 {
-    new lStr[64];
-    format(lStr, 128, "SELECT `UID` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
+    new lStr[128];
+    format(lStr, sizeof(lStr), "SELECT `UID` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
     mysql_query(lStr);
     mysql_store_result();
     if(mysql_num_rows())
