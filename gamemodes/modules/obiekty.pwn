@@ -19,7 +19,7 @@
 #include "modules/Obiekty/ibiza.pwn"
 #include "modules/Obiekty/icc.pwn"
 #include "modules/Obiekty/kt.pwn"
-#include "modules/Obiekty/las.pwn"
+//#include "modules/Obiekty/las.pwn"
 #include "modules/Obiekty/ls_grape.pwn"
 #include "modules/Obiekty/lsfd.pwn"
 #include "modules/Obiekty/lsmc.pwn"

@@ -26558,7 +26558,7 @@ CMD:dl(playerid, params[])
 				{
 				    SendClientMessage(playerid, COLOR_WHITE, "U¯YJ: /dajlicencje [nazwa] [playerid/CzêœæNicku]");
 				    SendClientMessage(playerid, COLOR_WHITE, "LUB: /dajl [nazwa] [playerid/CzêœæNicku]");
-				    SendClientMessage(playerid, COLOR_WHITE, "Dostêpne nazwy: Auto, Lot, Lodzie, Ryby.");//, Bron.");
+				    SendClientMessage(playerid, COLOR_WHITE, "Dostêpne nazwy: Auto, Lot, Lodzie, Ryby, Bron.");//, Bron.");
 					return 1;
 				}
 			    if(strcmp(x_nr,"auto",true) == 0)
@@ -26749,7 +26749,7 @@ CMD:dl(playerid, params[])
 	       				SendClientMessage(playerid, COLOR_GREY, "   Najpierw wyrób graczowi dowód ( komenda /wydaj ) !");
 				    }
 				}
-				/*else if(strcmp(x_nr,"bron",true) == 0)
+				else if(strcmp(x_nr,"bron",true) == 0)
 				{
 					if(PlayerInfo[playerid][pRank] >= 1)
 		            {
@@ -26795,7 +26795,7 @@ CMD:dl(playerid, params[])
 					{
 						SendClientMessage(playerid, COLOR_GREY, "  Potrzebujesz 1 rangi aby móc wydaæ t¹ licencjê");
 					}
-				}*/
+				}
 				else
 				{
 				    SendClientMessage(playerid, COLOR_WHITE, "Dostêpne nazwy: Auto, Lot, Lodzie, Ryby, Bron.");
