@@ -78,7 +78,6 @@ public obiekty_timer(wartosc)
     INT_FamilySad();
     FDU_Load();
     EXT_Grove();
-    EXT_LoadForest();
     INT_VagosPub();
     INT_LSFD();
     LS_ElCorona();

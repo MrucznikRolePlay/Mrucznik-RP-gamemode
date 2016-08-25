@@ -8113,7 +8113,7 @@ stock MASTER_SendLog(typ)
 
 stock IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$" >= 0)
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
 	{
 		return 1;
 	}
@@ -10385,7 +10385,7 @@ stock ChangePlayerName(playerid, name[])
 		return 0;
     }
 
-    if(CheckAlfaNumericNick(name))
+    if(IsNickCorrect(name))
     {
         SendClientMessage(playerid, COLOR_RED, "Nick zawiera niepoprawne znaki (znaki polskie, cyfry lub specjalne).");
         return 0;
