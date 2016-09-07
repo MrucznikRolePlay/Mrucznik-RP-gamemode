@@ -14,7 +14,6 @@
 	(((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
-#define function%0(%1) forward%0(%1);public%0(%1)
 
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
@@ -128,7 +127,7 @@
 #define FRAC_LSMC   4
 #define FRAC_LCN    5
 #define FRAC_YKZ    6
-#define FRAC_RR    	7 //Rangers Regiment
+#define FRAC_BOR    7
 #define FRAC_HA     8
 #define FRAC_SN     9
 #define FRAC_KT     10
@@ -139,6 +138,7 @@
 #define FRAC_NOA    15
 #define FRAC_WPS    16
 #define FRAC_LSFD   17
+#define FRAC_RR   18
 
 new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
     FAMILY_FDU = -1;
@@ -331,6 +331,12 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 //2.5.2
 #define DIALOG_HA_ZMIENSKIN(%0)			3345+%0
+
+//uniformnew
+#define DIALOGID_UNIFORM 3445
+
+#define DIALOG_LIDER01 3001
+#define DIALOG_LIDER02 3002
 
 //------------------------------------------------------------------------------
 //                              INNE

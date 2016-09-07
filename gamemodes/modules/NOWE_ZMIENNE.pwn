@@ -5,10 +5,19 @@ new gTeam[MAX_PLAYERS];
 //regex
 new regexURL;
 
+//Actor
+new PaniJanina;
+
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
 new Float:pl_pos[MAX_PLAYERS][5];
-
+//dodatkiPD
+new DodatkiPD[MAX_PLAYERS];
+//AFK timer
+new afk_timer[MAX_PLAYERS];
+//tazer
+new MaTazer[MAX_PLAYERS];
+new TazerAktywny[MAX_PLAYERS];
 //2015.08.25
 new wybory[6];
 ///
@@ -150,9 +159,13 @@ new AI_SIGN[3],
 new bool:VAR_Kolejka=false;
 //13.08  sπd int, drobne zmiany errorÛw, fly mode dla 1000+ @
 
+new brama_kt[3];
+new brama_kt_state[3];
 new Brama_HA;
 new Brama_HA1;
+new Brama_HA2;
 new Brama_Move_HA = 0;
+new Brama_Move_HA1 = 0;
 new GATE_SAD[42] = {0, ...};
 new bool:GATE_SAD_ALARM = false;
 new GATE_ALARM_OBJ[7];
@@ -232,9 +245,6 @@ new GATE_ICC[3], bool:GATE_ICC_S[3] = {false, false, false};
 new ACCESS[MAX_PLAYERS], OLD_ACCESS[MAX_PLAYERS];
 //15.06 system aut kradziezy
 new CAR_End = 0;
-
-new GATE_KT,
-    bool:GATE_KT_S = false;
 
 //13.06
 //lsmc exterior
@@ -601,6 +611,7 @@ new wywalzdmv[MAX_PLAYERS];
 new poscig[MAX_PLAYERS];
 new PoziomPoszukiwania[MAX_PLAYERS];
 new OnDuty[MAX_PLAYERS];
+new OnDutyCD[MAX_PLAYERS];
 new gPlayerCheckpointStatus[MAX_PLAYERS];
 new gPlayerLogged[MAX_PLAYERS];
 new gPlayerLogTries[MAX_PLAYERS];
@@ -872,9 +883,12 @@ new pojazdid[MAX_PLAYERS];//SYSTEM AUT
 new CenaPojazdu[MAX_PLAYERS];//SYSTEM AUT
 new KolorPierwszy[MAX_PLAYERS];//SYSTEM AUT
 new CenaDawanegoAuta[MAX_PLAYERS];//SYSTEM AUT
+new CenaWymienianegoAuta[MAX_PLAYERS];//SYSTEM AUT
+new IDWymienianegoAuta[MAX_PLAYERS];//SYSTEM AUT
 new CenaDawanegoLodz[MAX_PLAYERS];//SYSTEM AUT
 new CenaDawanegoSamolot[MAX_PLAYERS];//SYSTEM AUT
 new GraczDajacy[MAX_PLAYERS];//SYSTEM AUT
+new GraczWymieniajacy[MAX_PLAYERS];//SYSTEM AUT
 new IDAuta[MAX_PLAYERS];//SYSTEM AUT
 new GraczDajacyLodz[MAX_PLAYERS];//SYSTEM AUT
 new IDLodzi[MAX_PLAYERS];//SYSTEM AUT
@@ -906,7 +920,6 @@ new PDkuje[MAX_PLAYERS];//Kajdany
 new SkutyGracz[MAX_PLAYERS];//Kajdany
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
-new AntySpamPraca[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
 new DomOgladany[MAX_PLAYERS];//SYSTEM DOM”W BY MRUCZNIK
 new carselect[15];
@@ -980,7 +993,6 @@ ZerujZmienne(playerid)
 	okrazenia[playerid] = 0;//Øuøel
 	okregi[playerid] = 0;//Øuøel
 	SpamujeMechanik[playerid] = 0;//mechanik
-	AntySpamPraca[playerid] = 0;
 	AntySpam[playerid] = 0;
 	CenaDawanegoAuta[playerid] = 0;
 	BusCzit[playerid] = 0;
@@ -1001,6 +1013,7 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	
 	//z conecta
+	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
 	cbradijo[playerid] = 0; adminpodgladcb[playerid] = 0; matogczas[playerid] = 0;
 	dajeKontrakt[playerid] = 9999;
 	SelectChar[playerid] = 0; HidePM[playerid] = 0; PhoneOnline[playerid] = 0; spamwl[playerid] = 0;
@@ -1019,7 +1032,7 @@ ZerujZmienne(playerid)
 	DrugGram[playerid] = 0; ConnectedToPC[playerid] = 0; OrderReady[playerid] = 0;
 	JailPrice[playerid] = 0; MedicTime[playerid] = 0; NeedMedicTime[playerid] = 0; MedicBill[playerid] = 0; GotHit[playerid] = 0;
 	GoChase[playerid] = 999; GetChased[playerid] = 999; PlacedNews[playerid] = 0;
-	OnDuty[playerid] = 0; PoziomPoszukiwania[playerid] = 0; TestFishes[playerid] = 0;
+	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; PoziomPoszukiwania[playerid] = 0; TestFishes[playerid] = 0;
 	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; ChangePos2[playerid][1] = 0; iddialog[playerid] = -1;
 	TransportDuty[playerid] = 0; PlayerTied[playerid] = 0; weryfikacja[playerid] = 0;
 	BusCallTime[playerid] = 0; TaxiCallTime[playerid] = 0; MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;

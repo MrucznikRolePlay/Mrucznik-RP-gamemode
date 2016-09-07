@@ -3,10 +3,10 @@
 new bool:MYSQL_ON = true;
 new bool:MYSQL_SAVING = true;
 
-new MYSQL_HOST[32];
-new MYSQL_USER[32];
-new MYSQL_DATABASE[32];
-new MYSQL_PASS[256];
+//new MYSQL_HOST[32];
+//new MYSQL_USER[32];
+//new MYSQL_DATABASE[32];
+//new MYSQL_PASS[256];
 	
 forward MruMySQL_Error(error[]);
 
@@ -19,7 +19,7 @@ public OnQueryError(errorid, error[], resultid, extraid, callback[], query[], co
 //Moje funkcje:
 
 //--------------------------------------------------------------<[ Konta ]>--------------------------------------------------------------
-LoadConnectionValues()
+/*LoadConnectionValues()
 {
 	new file[64];
 	format(file, sizeof(file), "MySQL/connect.ini");
@@ -32,23 +32,23 @@ LoadConnectionValues()
 		return 1;
 	}
 	return 0;
-}
+}*/
 
 MruMySQL_Connect()
 {
 	if(!MYSQL_ON) return 0;
-	if(!LoadConnectionValues())
-	{
-		print("MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
-		SendRconCommand("gamemodetext Brak polaczenia MySQL");
-		SendRconCommand("exit");
-	}
+	//if(!LoadConnectionValues())
+	//{
+	//	print("MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
+//		SendRconCommand("gamemodetext Brak polaczenia MySQL");
+//		SendRconCommand("exit");
+//	}
 
-    mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_DATABASE, MYSQL_PASS);
+    mysql_connect("mysql-ols1.ServerProject.pl", "db_17956", "db_17956", "fC4lFMEYJkoo");
 	print(" ");
 	if(mysql_ping() == 1)
 	{
-		print("MYSQL: Polaczono sie z baza MySQL");
+		print("MYSQL: Polaczono sie z baza MySQL Ver");
 	}
 	else
 	{
@@ -57,8 +57,8 @@ MruMySQL_Connect()
 		SendRconCommand("exit");
 		return 0;
 	}
-    mysql_debug(1); //DISABLE!!!
-    mysql_query("SET NAMES 'cp1250'");
+    //mysql_debug(0); //DISABLE!!!
+   // mysql_query("SET NAMES 'cp1250'");
 	return 1;
 }
 
@@ -641,8 +641,8 @@ stock MruMySQL_UpdateOpis(handle, uid, typ)
 
 stock MruMySQL_CheckOpis(uid, typ)
 {
-    new lStr[64];
-    format(lStr, 128, "SELECT `UID` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
+    new lStr[128];
+    format(lStr, sizeof(lStr), "SELECT `UID` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
     mysql_query(lStr);
     mysql_store_result();
     if(mysql_num_rows())
@@ -850,7 +850,7 @@ MruMySQL_Blockuj(nick[], admin, powod[])
         GetPlayerName(admin, admnick, 32);
         format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`,`powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%s', '%d', '%s', '%d')", validnick, powod, PlayerInfo[admin][pUID], admnick,WARN_BLOCK);
     }
-    else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `powod`, `typ`, `nadal`) VALUES ('%s', '%s', '%d', 'SYSTEM')", validnick, powod,WARN_BAN);
+    else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `powod`, `typ`, `nadal`) VALUES ('%s', '%s', '%d', 'SYSTEM')", validnick, powod,WARN_BLOCK);
 	mysql_query(query);
 
 	return 1;

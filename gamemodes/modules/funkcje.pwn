@@ -30,12 +30,6 @@ JailDeMorgan(playerid)
 	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
-stock set(newstring[],oldstring[])
-{
-	for (new i, j=  strlen(oldstring); i < j; ++i) newstring[i] = oldstring[i];
-	newstring[strlen(oldstring)] = EOS;
-}
-
 // WYPUSZCZANIE z DEMORGAN
 UnJailDeMorgan(playerid)
 {
@@ -115,7 +109,6 @@ stock PDTuneInfernus(vehicleid)
     AttachDynamicObjectToVehicle(hsiu_text, vehicleid, -1.1012001,0.0907000,-0.150000,0.0000000,0.0000000,271.5000000);
     AttachDynamicObjectToVehicle(hsiu_text2, vehicleid, 1.1013298,0.0907000,-0.150000,0.0000000,0.0000000,88.7496338);
 }
-
 forward OznaczCzitera(playerid);
 public OznaczCzitera(playerid)
 {
@@ -605,19 +598,6 @@ public Odmroz(playerid)
     return 1;
 }
 
-function sprawdzwejdz(playerid, Float:XsprawdzX, Float:YsprawdzY, Float:ZsprawdzZ)
-{
-	new Float:plPosX, Float:plPosZ, Float:plPosY;
-	GetPlayerPos(playerid, plPosX, plPosY, plPosZ);
-	
-	if(plPosZ+5 < ZsprawdzZ)
-	{
-		SetPlayerPosEx(playerid, XsprawdzX, YsprawdzY, ZsprawdzZ);
-		SendClientMessage(playerid, COLOR_LIGHTRED, "Zosta³eœ teleportowany do drzwi, gdy¿ wykryto spadanie twojej postaci.");
-	}
-	return 1;
-}
-
 public Wchodzenie(playerid) //Zmiana na inteligentny system odmra¿ania
 {
     if(GetPVarInt(playerid, "enter-check") == 0)
@@ -825,12 +805,6 @@ return 1;
 
 public AntySpamMechanik(playerid){
 SpamujeMechanik[playerid] = 0;
-return 1;
-}
-
-public AntySpamPracaTimer(playerid)
-{
-AntySpamPraca[playerid] = 0;
 return 1;
 }
 
@@ -1572,16 +1546,16 @@ HandlePlayerItemSelection(playerid, selecteditem)
 
 stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 {
-    DestroyDynamicObject(Barier[frac][id]);
-    new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
-    if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
-    BarierState[frac][id] = true;
+	DestroyObject(Barier[frac][id]);
+	new oid = CreateObject(model, x, y, z, 0.0, 0.0, a);
+	if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
+	BarierState[frac][id] = true;
     return 1;
 }
 
 stock BARIERKA_Remove(frakcja, id)
 {
-    SetDynamicObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
+    SetObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
     DestroyDynamic3DTextLabel(BarText[frakcja][id]);
     BarierState[frakcja][id] = false;
     return 1;
@@ -1593,13 +1567,13 @@ stock BARIERKA_Init()
     {
         for(new i=0;i<10;i++)
         {
-            Barier[j][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+            Barier[j][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
             BarierState[j][i] = false;
         }
     }
     for(new i=0;i<10;i++) //LSFD
     {
-        Barier[FRAC_LSFD][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+        Barier[FRAC_LSFD][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
         BarierState[FRAC_LSFD][i] = false;
     }
     return 1;
@@ -1911,7 +1885,19 @@ IsAFakeKonto(playerid)
 	}
 	return 0;
 }
-
+IsAFLD(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new nick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, nick, sizeof(nick));
+		if(strcmp(nick,"Matthew_McVinsley", false) == 0)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
 IsAPrzestepca(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -1927,6 +1913,84 @@ IsAPrzestepca(playerid)
 		    return 1;
 		}
 		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA || GetPlayerOrgType(playerid) == ORG_TYPE_RACE)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+IsAGang(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==12 || member==13 || member==14)
+		{
+		    return 1;
+		}
+		else if(leader==12  || leader==13 || leader==14)
+		{
+		    return 1;
+		}
+		else if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+IsAMafia(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==5 || member==6)
+		{
+		    return 1;
+		}
+		else if(leader==5 || leader==6)
+		{
+		    return 1;
+		}
+		else if(GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+IsADilerBroni(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==5 || member==6 || member==12 || member==13 || member==14)
+		{
+		    return 1;
+		}
+		else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14)
+		{
+		    return 1;
+		}
+		else if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+		{
+		    return 1;
+		}
+		else if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+IsASklepZBronia(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(GetPlayerOrg(playerid) == 21 && PlayerInfo[playerid][pRank] > 3 || GetPlayerOrg(playerid) == 22 && PlayerInfo[playerid][pRank] > 3 || GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] > 3)
 		{
 		    return 1;
 		}
@@ -2040,7 +2104,7 @@ IsAUrzednik(playerid)
 	return 0;
 }
 
-IsARR(playerid)
+IsABOR(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -2051,6 +2115,24 @@ IsARR(playerid)
 		    return 1;
 		}
 		else if(leader==7 )
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+
+IsARR(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==18)
+		{
+		    return 1;
+		}
+		else if(leader==18 )
 		{
 		    return 1;
 		}
@@ -2352,37 +2434,7 @@ DajBronieFrakcyjne(playerid)
     	    }
         }
 	}
-	else if(PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][pLider] == 5)
-	{
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pLider] == 6)
-	{
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 8; PlayerInfo[playerid][pAmmo1] = 1;
-	    }
-     	if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7) // RR
+	else if(PlayerInfo[playerid][pMember] == 18 || PlayerInfo[playerid][pLider] == 18) // RR
 	{
 	    if(PlayerInfo[playerid][pGun1] == 0) // Pa³ka policyjna
 	    {
@@ -2417,6 +2469,59 @@ DajBronieFrakcyjne(playerid)
 	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 10000;
 	    }
 		
+	}
+	else if(PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][pLider] == 5)
+	{
+	    if(PlayerInfo[playerid][pGun0] == 0)
+	    {
+	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
+	    }
+	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
+	    {
+	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
+	    }
+	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
+	    {
+	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
+	    }
+	}
+	else if(PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pLider] == 6)
+	{
+	    if(PlayerInfo[playerid][pGun1] == 0)
+	    {
+	        PlayerInfo[playerid][pGun1] = 8; PlayerInfo[playerid][pAmmo1] = 1;
+	    }
+     	if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
+	    {
+	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
+	    }
+	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
+	    {
+	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
+	    }
+	}
+	else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7)
+	{
+	    if(PlayerInfo[playerid][pGun1] == 0)
+	    {
+	        PlayerInfo[playerid][pGun1] = 3; PlayerInfo[playerid][pAmmo1] = 1;
+	    }
+	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
+	    {
+	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 207;
+	    }
+	    if(PlayerInfo[playerid][pGun3] == 0 || PlayerInfo[playerid][pGun3] == 25 && PlayerInfo[playerid][pAmmo3] < 50 || PlayerInfo[playerid][pAmmo3] <= 5)
+	    {
+	        PlayerInfo[playerid][pGun3] = 25; PlayerInfo[playerid][pAmmo3] = 100;
+	    }
+	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 29 && PlayerInfo[playerid][pAmmo4] < 200 || PlayerInfo[playerid][pAmmo4] <= 30)
+	    {
+	        PlayerInfo[playerid][pGun4] = 29; PlayerInfo[playerid][pAmmo4] = 530;
+	    }
+	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 500 || PlayerInfo[playerid][pAmmo9] <= 30)
+	    {
+	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 10000;
+	    }
 	}
 	else if(PlayerInfo[playerid][pMember] == 8 || PlayerInfo[playerid][pLider] == 8)
 	{
@@ -2593,13 +2698,13 @@ DajBroniePracy(playerid)
 				PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 1;
 			}
 		}
-		case JOB_LOWCA:
+		/*case JOB_LOWCA:
 		{
 			if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
 			{
 				PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
 			}
-		}
+		}*/
 	}
 }
 
@@ -3317,6 +3422,8 @@ IsACopCar(carid)
         if(CarData[lID][c_Owner] == FRAC_LSPD) return 1;
         else if(CarData[lID][c_Owner] == FRAC_FBI) return 1;
         else if(CarData[lID][c_Owner] == FRAC_NG) return 1;
+		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
+		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
     }
 	return 0;
 }
@@ -3797,12 +3904,6 @@ stock PayLog(text[])
     Log(plik, text);
 }
 
-stock PayLogPraca(text[])
-{
-    new plik[32] = "logi/pay_praca.log";
-    Log(plik, text);
-}
-
 stock KickLog(text[])
 {
     new plik[32] = "logi/kick.log";
@@ -4037,7 +4138,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
-			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsARR(playerid) && OnDuty[playerid] == 1)
+			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1 || IsARR(playerid) && OnDuty[playerid] == 1)
 			    {
       				PoziomPoszukiwania[playerid] = 0;
 				}
@@ -4050,7 +4151,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 				{
 					if(IsPlayerConnected(i))
 					{
-					    if(IsACop(i) || IsARR(playerid))
+					    if(IsACop(i) || IsARR(i))
 					    {
 					        if(gCrime[i] == 0)
 					        {
@@ -4227,7 +4328,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
 			format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
 			SendClientMessage(playerid, COLOR_GRAD6,coordsstring);
@@ -4242,9 +4343,20 @@ SetPlayerToTeamColor(playerid)
 	{
 	    if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
 		{
-		    if(OnDuty[playerid])
+		    if(OnDuty[playerid] && OnDutyCD[playerid] == 0)
 		    {
 		    	SetPlayerColor(playerid, COLOR_LIGHTBLUE);
+		    }
+		    else
+		    {
+		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
+		    }
+		}
+		if(PlayerInfo[playerid][pMember] == 18 || PlayerInfo[playerid][pLider] == 18) // RR
+		{
+		    if(OnDuty[playerid])
+		    {
+		    	SetPlayerColor(playerid, COLOR_RR);
 		    }
 		    else
 		    {
@@ -6715,20 +6827,6 @@ OOCNewbie(const string[])
 	}
 }
 
-OOCNews(color,const string[])
-{
-	foreach(Player, i)
-	{
-		if(IsPlayerConnected(i))
-		{
-		    if(!gNews[i])
-		    {
-				SendClientMessage(i, color, string);
-			}
-		}
-	}
-}
-
 OOCOgloszenie(color,const string[])
 {
 	foreach(Player, i)
@@ -6736,6 +6834,20 @@ OOCOgloszenie(color,const string[])
 		if(IsPlayerConnected(i))
 		{
 		    if(!gOgloszenie[i])
+		    {
+				SendClientMessage(i, color, string);
+			}
+		}
+	}
+}
+
+OOCNews(color,const string[])
+{
+	foreach(Player, i)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if(!gNews[i])
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -7058,7 +7170,7 @@ PolicjantWStrefie(Float:radi, playerid)
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
 	    	if(IsPlayerInRangeOfPoint(i, radi, rangex, rangey, rangez))
 	        {
-	            if(IsACop(i))
+	            if(IsACop(i) || IsARR(i))
 	            {
 	            	return 1;
 	            }
@@ -7235,6 +7347,8 @@ FunkcjaK(string[])
 		for(new i=strlen(string); i>0; i--)
 		{
 			if(string[i] == 'k')
+				ilosc_k++;
+            else if(string[i] == 'K')
 				ilosc_k++;
 		}
 		if(ilosc_k != 0)
@@ -7587,11 +7701,11 @@ public OPCLogin(playerid)
     new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
 
-    new rand = random(AUDIO_LoginTotal);
+    //new rand = random(AUDIO_LoginTotal);
     TogglePlayerControllable(playerid, 0);
-    new str[128];
-    format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
-    PlayAudioStreamForPlayer(playerid, str);
+    // str[128];
+    //format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
+    //PlayAudioStreamForPlayer(playerid, str);
 
     SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
     SetPlayerCameraPos(playerid, 1868.1099, -1936.2098, 48.0756);
@@ -8082,26 +8196,13 @@ stock MASTER_SendLog(typ)
     MASTER_SendTextToWebsite(plik);
 }
 
-stock CheckAlfaNumericNick(password[])
+stock IsNickCorrect(nick[])
 {
-    new charsets[46] = "abcdefghijklmnoprstuvwyzxq_";
-
-    new bool:validchars[64]={false,...};
-
-    new bool:doeschange=false;
-    for(new i=0;i<strlen(password);i++)
-    {
-        for(new a=0;a<46;a++)
-        {
-            if(tolower(password[i]) == charsets[a]) validchars[i] = true;
-        }
-        if(!validchars[i]) //!alpha
-        {
-            password[i] = charsets[random(sizeof(charsets))];
-            if(!doeschange) doeschange=true;
-        }
-    }
-    return doeschange;
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 stock CheckAlfaNumeric(password[])
@@ -9934,7 +10035,7 @@ stock Scena_CreateAt(Float:x, Float:y, Float:z)
 
     //Napis mid
     ScenaScreenObject = CreateDynamicObject(4988, 6.5, 0.00000, 4.18430,   0.00000, 0.00000, 100.0000);
-    SetDynamicObjectMaterialText(ScenaScreenObject, 0, "KUBI ©", OBJECT_MATERIAL_SIZE_512x256, "Arial", 72, 1, 0xFFFFFFFF, 0, 1);
+    SetDynamicObjectMaterialText(ScenaScreenObject, 0, "SCENA", OBJECT_MATERIAL_SIZE_512x256, "Arial", 72, 1, 0xFFFFFFFF, 0, 1);
     //
     CreateDynamicObject(2232, -2.04205, 8.23906, 0.73210,   0.00000, 0.00000, -72.24001);
     CreateDynamicObject(2232, -2.04225, -8.23434, 0.73210,   0.00000, 0.00000, -110.27997);
@@ -10369,7 +10470,7 @@ stock ChangePlayerName(playerid, name[])
 		return 0;
     }
 
-    if(CheckAlfaNumericNick(name))
+    if(!IsNickCorrect(name))
     {
         SendClientMessage(playerid, COLOR_RED, "Nick zawiera niepoprawne znaki (znaki polskie, cyfry lub specjalne).");
         return 0;

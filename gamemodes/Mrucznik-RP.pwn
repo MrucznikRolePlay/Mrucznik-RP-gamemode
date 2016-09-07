@@ -40,18 +40,20 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik ----> edycja Jakub 2015
 //----------------------------------------------------*------------------------------------------------------//
 
 //-------------------------------------------<[ Includy ]>---------------------------------------------------//
-//-                                                                                                          -//
+//-                                                                                                         -//
 #include <a_samp>
 #include <fixes>
+#include <callbacks>
 #include <a_http>
 #include <utils>
 #include <double-o-files2>
 #include <foreach>
 #include <zcmd>
 #include <md5>
+#include <dini>
 #include <nex-ac>
 #include <dialogs>
-#include <dini>
+#include <fadescreen>
 #include <ACSBM>
 #include <YSI\y_safereturn>				// By Bartekdvd & Y_Less: 		http://forum.sa-mp.com/showthread.php?t=456132
 
@@ -66,7 +68,7 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.21"
+#define VERSION "v2.5.4"
 
 //Modu≥y mapy
 #include "modules/definicje.pwn"
@@ -182,6 +184,14 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
+    if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && hittype != 1)
+    {
+    	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+		MaTazer[playerid] = 0;
+		//PlayerInfo[playerid][pGun2] = 24;
+		//GivePlayerWeapon(playerid, 24, PlayerInfo[playerid][pAmmo2]);
+		//RemovePlayerAttachedObject(playerid, 9);
+	}
     return 1;
 }
 
@@ -647,11 +657,11 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!ispassenger && !engine) MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
     }
 
-	if(gTeam[playerid] >= 3 || !IsACop(playerid))
+	if(gTeam[playerid] >= 3 || !IsACop(playerid) || !IsARR(playerid))
 	{
 		if (IsACopCar(vehicleid) && !ispassenger)
 		{
-			if(IsACop(playerid))
+			if(IsACop(playerid) || IsARR(playerid))
 			{
 				SendClientMessage(playerid, COLOR_BLUE, "Po≥πczy≥eú siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnπ");
 			}
@@ -702,17 +712,7 @@ public OnPlayerConnect(playerid)
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-	if(strfind(nick, "_") == -1)
-	{
-		SendClientMessage(playerid, COLOR_NEWS, "SERWER: TwÛj nick jest niepoprawny! Nick musi posiadaÊ formÍ: ImiÍ_Nazwisko!");
-		KickEx(playerid);
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-		#endif
-		return 1;
-	}
-
-    if(CheckAlfaNumericNick(nick))
+    if(!IsNickCorrect(nick))
     {
         SendClientMessage(playerid, COLOR_NEWS, "SERWER: TwÛj nick jest niepoprawny! Nick musi posiadaÊ formÍ: ImiÍ_Nazwisko!");
 		KickEx(playerid);
@@ -721,18 +721,6 @@ public OnPlayerConnect(playerid)
 		#endif
 		return 1;
     }
-
-	new mysql_injection[MAX_PLAYER_NAME];
-	mysql_real_escape_string(nick, mysql_injection);
-	if(strcmp(nick,mysql_injection,true) != 0)
-	{
-		SendClientMessage(playerid, COLOR_NEWS, "SERWER: TwÛj nick jest niepoprawny! Nick musi posiadaÊ formÍ: ImiÍ_Nazwisko! @SQL");
-		KickEx(playerid);
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-		#endif
-		return 1;
-	}
 
 	//Poczπtkowe ustawienia:
     SetTimerEx("OPCLogin", 100, 0, "i", playerid);
@@ -756,7 +744,15 @@ public OnPlayerConnect(playerid)
 	return 1;
 }
 
-
+//--------------------<[  OnPlayerPause  ]>--------------------
+public OnPlayerPause(playerid)
+{
+	if(afk_timer[playerid] == -1)
+	{
+		afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, 1, 0);
+	}
+	return 1;
+}
 //-------------------------------<[  OnPlayerDisconnect  ]>-------------------------------
 public OnPlayerDisconnect(playerid, reason)
 {
@@ -775,7 +771,12 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pPos_z] = GetPVarFloat(playerid, "kolejka-z");
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
-
+	//AFK timer
+	if(afk_timer[playerid] != -1)
+	{
+		KillTimer(afk_timer[playerid]);
+		afk_timer[playerid] = -1;
+	}
 	//PAèDZIOCH - lina SWAT
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
@@ -1011,9 +1012,58 @@ public OnPlayerDisconnect(playerid, reason)
 	#endif
 	return 1;
 }
-
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+    if(weaponid == WEAPON_GRENADE || weaponid == 51)
+	{
+		new Float:health;
+		GetPlayerHealth(playerid,health);
+		SetPlayerHealth(playerid, (health)-5);
+	    ShowPlayerFadeScreenToBlank(playerid, 20, 255, 255, 255, 255);
+		SetPlayerDrunkLevel(playerid, 3000);
+	}
+    else if(issuerid != INVALID_PLAYER_ID)
+	{
+	    
+        if(MaTazer[issuerid] == 1 && (GetPlayerWeapon(issuerid) == 23 || GetPlayerWeapon(issuerid) == 24) && TazerAktywny[playerid] == 0 && GetDistanceBetweenPlayers(playerid,issuerid) < 11)
+		{
+		    new Float:health;
+    		GetPlayerHealth(playerid,health);
+		    SetPlayerHealth(playerid, health);
+ 		   	new giveplayer[MAX_PLAYER_NAME];
+			new sendername[MAX_PLAYER_NAME];
+  		  	GetPlayerName(issuerid, giveplayer, sizeof(giveplayer));
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+            TazerAktywny[playerid] = 1;
+            SetTimerEx("DostalTazerem", 10000, false, "i", playerid);
+            new string[128];
+            GameTextForPlayer(playerid, "DOSTALES TAZEREM! ODCZEKAJ CHWILE!", 3000, 5);
+            GameTextForPlayer(issuerid, "~g~TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+            format(string, sizeof(string), "* %s strzela tazerem w %s.", giveplayer, sendername);
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			MaTazer[issuerid] = 0;
+			//PlayerInfo[issuerid][pGun2] = 24;
+			//GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
+			//RemovePlayerAttachedObject(issuerid, 9);
+			PlayerPlaySound(issuerid, 6300, 0.0, 0.0, 0.0);
+			PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
+            ApplyAnimation(playerid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
+            ClearAnimations(playerid);
+            ApplyAnimation(playerid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
+            TogglePlayerControllable(playerid, 0);
+        }
+        else if(MaTazer[issuerid] == 1 && (GetPlayerWeapon(issuerid) == 23 || GetPlayerWeapon(issuerid) == 24) && TazerAktywny[playerid] == 0 && GetDistanceBetweenPlayers(playerid,issuerid) > 10)
+		{
+		    new Float:health;
+    		GetPlayerHealth(playerid,health);
+		    SetPlayerHealth(playerid, health);
+			GameTextForPlayer(issuerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+			MaTazer[issuerid] = 0;
+			//PlayerInfo[issuerid][pGun2] = 24;
+			//GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
+			//RemovePlayerAttachedObject(issuerid, 9);
+		}
+    }
 	switch(bodypart)
 	{
 	    case BODY_PART_LEFT_LEG:
@@ -1285,10 +1335,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 		//-------<[     WL      ]>---------
 		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 		{
-			if(!IsACop(killerid) && lowcaz[killerid] != playerid)
+			if(!IsACop(killerid) && lowcaz[killerid] != playerid || !IsARR(playerid))
 			{
 				format(string, sizeof(string), "Morderstwo");
-				if(IsACop(playerid))
+				if(IsACop(playerid) || !IsARR(playerid))
 				{
 					PoziomPoszukiwania[killerid] += 2;
 					strcat(string, " Policjanta");
@@ -1323,6 +1373,13 @@ public OnPlayerSpawn(playerid) //Przebudowany
     PlayerInfo[playerid][pMuted] = 0;
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
+
+	//Diler Broni
+	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
+	{
+	    PlayerInfo[playerid][pJob] = 0;
+	    SendClientMessage(playerid, COLOR_WHITE, "Zosta≥eú wyrzucony z pracy!");
+	}
 
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
@@ -1369,13 +1426,14 @@ SetPlayerSpawnPos(playerid)
 	//Po /spec off
     if(Unspec[playerid][Coords][0] != 0.0 && Unspec[playerid][Coords][1] != 0.0 && Unspec[playerid][Coords][2] != 0.0)
     {
-		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 )
+		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] >= 1)
 		{
 			SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
 			Unspec[playerid][Coords][0] = 0.0, Unspec[playerid][Coords][1] = 0.0, Unspec[playerid][Coords][2] = 0.0;
 			Spectate[playerid] = INVALID_PLAYER_ID;
+			PhoneOnline[playerid] = 0;
 		}
     }
     //Tutorial:
@@ -1549,11 +1607,12 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_YKZ: //6
 						{
-						    SetPlayerPosEx(playerid, 2797.4734,-1095.1035,30.7188);
+						    SetPlayerPosEx(playerid, 738.8827,-1429.9484,13.5234);
 						}
-						case FRAC_RR: //7
+						case FRAC_BOR: //7
 						{
-						    SetPlayerPosEx(playerid, 2519.0017, -2456.7346, 14.1171);
+						    SetPlayerPosEx(playerid, 1512.9001,-1471.3433,9.5000);
+							//SetPlayerPosEx(playerid, 1525.9830, -1453.0792, 68.0118);
 						}
 						case FRAC_HA: //8
 						{
@@ -1619,6 +1678,12 @@ SetPlayerSpawnPos(playerid)
 						    SetPlayerPosEx(playerid, 1757.6122,-1123.4604,227.8059);
 				            SetPlayerVirtualWorld(playerid, 22);
 						    SetPlayerFacingAngle(playerid,180.0);
+						    Wchodzenie(playerid);
+						}
+						case FRAC_RR: //17
+						{
+						    SetPlayerPosEx(playerid, 2519.0017,-2456.7346,14.1171);
+				            SetPlayerVirtualWorld(playerid, 0);
 						    Wchodzenie(playerid);
 						}
 				    }
@@ -1820,7 +1885,7 @@ SetPlayerSpawnSkin(playerid)
 		{
 			if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC)
 			{
-				if(OnDuty[playerid] == 1)
+				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 				else
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
@@ -1834,6 +1899,10 @@ SetPlayerSpawnSkin(playerid)
 			}
 			else
 				SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+		}
+		else if(GetPlayerOrg(playerid) != 0)
+		{
+ 			SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 		}
 		else if(JobDuty[playerid] == 1)
 		{
@@ -3754,7 +3823,7 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
 		printf("%s[%d] OnPlayerEditObject - begin", GetNick(playerid), playerid);
 	#endif
     //printf("OnPlayerEditObject(%d, %d, %d, %d, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f) BAR %d", playerid, playerobject, objectid, response, fX, fY, fZ, fRotX, fRotY, fRotZ, GetPVarInt(playerid, "Barier-id"));
-    if(IsValidDynamicObject(objectid))
+    if(IsValidObject(objectid))
     {
         if(response < EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "Barier-id") != 0)
         {
@@ -3765,26 +3834,26 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
             if(!IsPlayerInRangeOfPoint(playerid, 5.0, fX,fY,fZ))
             {
                 new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
-                GetDynamicObjectRot(objectid, rox, roy, roz);
-                GetDynamicObjectPos(objectid, X, Y, Z);
+                GetObjectRot(objectid, rox, roy, roz);
+                GetObjectPos(objectid, X, Y, Z);
                 SendClientMessage(playerid, -1, "Jesteú za daleko.");
                 BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, CLR_LIGHTBLUE, X, Y, Z+0.3, 4.0);
-                SetDynamicObjectPos(objectid, X, Y, Z);
-                SetDynamicObjectRot(objectid, rox, roy, roz);
+                SetObjectPos(objectid, X, Y, Z);
+                SetObjectRot(objectid, rox, roy, roz);
             }
             else
             {
                 BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, CLR_LIGHTBLUE, fX, fY, fZ+0.3, 4.0);
-                SetDynamicObjectPos(objectid, fX, fY, fZ);
-                SetDynamicObjectRot(objectid, fRotX, fRotY, fRotZ);
+                SetObjectPos(objectid, fX, fY, fZ);
+                SetObjectRot(objectid, fRotX, fRotY, fRotZ);
             }
             SetPVarInt(playerid, "Barier-id", 0);
         }
         else if(response == EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "Barier-id") != 0)
         {
             new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
-            GetDynamicObjectRot(objectid, rox, roy, roz);
-            GetDynamicObjectPos(objectid, X, Y, Z);
+            GetObjectRot(objectid, rox, roy, roz);
+            GetObjectPos(objectid, X, Y, Z);
             for(new i=0;i<MAX_PLAYERS;i++)
             {
                 if(GetPlayerSurfingObjectID(i) == objectid)
@@ -3798,12 +3867,12 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
             if(!IsPlayerInRangeOfPoint(playerid, 5.0, fX,fY,fZ))
             {
                 SendClientMessage(playerid, 0xFF0000FF, "Podejdz do obiektu!");
-                SetDynamicObjectPos(objectid, X, Y, Z);
+                SetObjectPos(objectid, X, Y, Z);
             }
             else
             {
                 new Float:speed = VectorSize(X-fX, Y-fY, Z-fZ);
-                MoveDynamicObject(objectid, fX, fY, fZ, speed, fRotX, fRotY, fRotZ);
+                MoveObject(objectid, fX, fY, fZ, speed, fRotX, fRotY, fRotZ);
             }
         }
     }
@@ -4335,7 +4404,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 
 			}
-			else if(PlayerDrunk[playerid] >= 5 || GetPlayerDrunkLevel(playerid) > 1999)
+			else if(PlayerDrunk[playerid] >= 5 || GetPlayerDrunkLevel(playerid) > 1999 && TazerAktywny[playerid] == 0)
 			{
 				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda po alkoholu");
 			}
@@ -4568,6 +4637,10 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	{
 	    naprawiony[playerid] = 0;
 	}
+	if(IDWymienianegoAuta[playerid] != 0)
+	{
+	    IDWymienianegoAuta[playerid] = 0;
+	}
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerExitVehicle - end", GetNick(playerid), playerid);
 	#endif
@@ -4647,6 +4720,14 @@ public OnGameModeInit()
 	#endif
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
     Streamer_SetVisibleItems(0, 900);
+    
+    PaniJanina = CreateActor(88, 570.63, -2031.03, 16.2, 180.0);//basen
+	SetActorVirtualWorld(PaniJanina, 30);
+	//AFK timer
+	for(new i; i<MAX_PLAYERS; i++)
+	{
+		afk_timer[i] = -1;
+	}
 
 	//Wybory:
 	if(dini_Exists("wybory.ini"))
@@ -4668,19 +4749,6 @@ public OnGameModeInit()
 			wybory[i] = dini_IntSet("wybory.ini", string, 0);
 		}
 	}
-	
-	new hostname[64];
-    GetConsoleVarAsString("hostname", hostname, sizeof(hostname));
-	
-	new serverPort = GetConsoleVarAsInt("port");
-	printf("Server Port: %i", serverPort);
-	
-	 new queryEnabled = GetConsoleVarAsBool("query");
- 
-    if(!queryEnabled)
-    {
-        print("WARNING: Querying is disabled. The server will appear offline in the server browser.");
-    }
 
 	//Mrucznik:
 	Ac_OnGameModeInit();//Antyczit
@@ -4844,6 +4912,12 @@ public OnGameModeExit()
 	#if DEBUG == 1
 		printf("OnGameModeExit - begin");
 	#endif
+	//AFK timer
+	for(new i; i<MAX_PLAYERS; i++)
+	{
+		if(afk_timer[i] != -1)
+			KillTimer(afk_timer[i]);
+	}
     for(new i=0;i<MAX_ORG;i++)
     {
         orgSave(i, ORG_SAVE_TYPE_BASIC);
@@ -5074,6 +5148,11 @@ PayDay()
 	}
 	else if(shifthour == 4)
 	{
+	    foreach(Player, i)
+		{
+			Kick(i);
+		}
+	    ZapiszDomy();
 	    SendClientMessageToAll(COLOR_YELLOW, "UWAGA!! ZARAZ NAST•PI RESTART SERWERA!!!!");
 	    SendClientMessageToAll(COLOR_YELLOW, "UWAGA!! ZARAZ NAST•PI RESTART SERWERA!!!!");
 	    SendClientMessageToAll(COLOR_YELLOW, "UWAGA!! ZARAZ NAST•PI RESTART SERWERA!!!!");
@@ -5370,23 +5449,6 @@ OnPlayerLogin(playerid, password[])
 	}
 	else
 	{//z≥e has≥o
-		if(strlen(password) > 19)
-		{
-			strdel(password, 19, strlen(password));
-            format(oldpass, 64, "%s", password);
-            Encrypt(oldpass);
-            if(UseDINI)
-            {
-				if(strcmp(PlayerInfo[playerid][pKey],oldpass, true ) == 0)
-				{
-					SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wykryto b≥πd z 19 literowym has≥em (twoje has≥o ma tak na prawdÍ tylko 19 liter)");
-					SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Aby naprawiÊ ten b≥πd, zaleca siÍ uøyÊ komendy /zmienhaslo");
-					printf("Nick %s posiada blad 19 literowego hasla", nick);
-					OnPlayerLogin(playerid, password);
-					return 1;
-				}
-            }
-		}
 		SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Z≥e has≥o.");
 		format(string, sizeof(string), "Nick %s jest zarejestrowany.\nZaloguj siÍ wpisujπc w okienko poniøej has≥o.\nJeøli nie znasz has≥a do tego konta, wejdü pod innym nickiem", nick);
 		ShowPlayerDialogEx(playerid, 230, DIALOG_STYLE_PASSWORD, "Logowanie", string, "Zaloguj", "Wyjdü");
@@ -5618,21 +5680,16 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
     //11.06.2014
     if(PRESSED(KEY_JUMP) && Spectate[playerid] != INVALID_PLAYER_ID)
-	{
+    {
 		PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
 		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-		Spectate[playerid] = INVALID_PLAYER_ID;
-		TogglePlayerSpectating(playerid, 0);
-		Unspec[playerid][Coords][0] = 0.0;
-		Unspec[playerid][Coords][1] = 0.0;
-		Unspec[playerid][Coords][2] = 0.0;
-		Unspec[playerid][sPint] = 0;
-		Unspec[playerid][sPvw] = 0;
-		return 0;
-	}
+        Spectate[playerid] = INVALID_PLAYER_ID;
+        TogglePlayerSpectating(playerid, 0);
+        return 0;
+    }
     //30.10
     if(HOLDING(KEY_ANALOG_UP))
     {
@@ -5828,7 +5885,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	if(newkeys & KEY_CROUCH && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
 	{
-		if((IsACop(playerid) || IsARR(playerid) && PlayerInfo[playerid][pRank] >= 1) && OnDuty[playerid] == 1)
+		if((IsACop(playerid) || IsABOR(playerid) && PlayerInfo[playerid][pRank] >= 1) && OnDuty[playerid] == 1)
 		{
 			veh = GetPlayerVehicleID(playerid);
 			if(veh == 148 || veh == 43 || IsAKogutCar(veh))
@@ -5905,6 +5962,20 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		   	}
 		}
 	}
+	/*if(PRESSED(KEY_ACTION))
+	{
+		if(IsPlayerInAnyVehicle(playerid))
+		{
+			AddVehicleComponent(GetPlayerVehicleID(playerid), 1010);
+		}
+	}
+	if(RELEASED(KEY_ACTION))
+ 	{
+ 	    if(IsPlayerInAnyVehicle(playerid))
+ 	    {
+ 	        RemoveVehicleComponent(GetPlayerVehicleID(playerid), 1010);
+ 	    }
+ 	}*/
 	if(IsPlayerInAnyVehicle(playerid))
 	{
 	    if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
@@ -6501,10 +6572,10 @@ public OnPlayerText(playerid, text[])
 		    tmp = strtok(text, idx);
 		    if ((strcmp("1", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("1")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
-			    if(kaska[playerid] > 4999)
+			    //if(PlayerInfo[playerid][pRank] < 0) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(kaska[playerid] > 2499)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczkÍ numer 1 ($5000), zostanie dostarczona do drzwi Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczkÍ numer 1 ($2500), zostanie dostarczona do drzwi Agencji.");
 			        OrderReady[playerid] = 1;
 			        return 0;
 			    }
@@ -6514,12 +6585,12 @@ public OnPlayerText(playerid, text[])
 			        return 0;
 			    }
 			}
-			else if ((strcmp("2", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("2")))
+		    else if ((strcmp("2", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("2")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
-			    if(kaska[playerid] > 5999)
+			    if(PlayerInfo[playerid][pRank] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(kaska[playerid] > 4999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 2 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczkÍ numer 2 ($5000), zostanie dostarczona do drzwi Agencji.");
 			        OrderReady[playerid] = 2;
 			        return 0;
 			    }
@@ -6546,10 +6617,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("4", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("4")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
-			    if(kaska[playerid] > 7999)
+			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(kaska[playerid] > 5999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 4 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 4 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 4;
 			        return 0;
 			    }
@@ -6576,10 +6647,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("6", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("6")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
-			    if(kaska[playerid] > 8499)
+			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(kaska[playerid] > 7999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 6 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 6 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 6;
 			        return 0;
 			    }
@@ -6606,11 +6677,41 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("8", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("8")))
 			{
+			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(kaska[playerid] > 8499)
+			    {
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 8 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        OrderReady[playerid] = 8;
+			        return 0;
+			    }
+			    else
+			    {
+			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        return 0;
+			    }
+			}
+			else if ((strcmp("9", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("9")))
+			{
 			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 9999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 8 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
-			        OrderReady[playerid] = 8;
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 9 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        OrderReady[playerid] = 9;
+			        return 0;
+			    }
+			    else
+			    {
+			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        return 0;
+			    }
+			}
+			else if ((strcmp("10", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("10")))
+			{
+			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(kaska[playerid] > 9999)
+			    {
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 10 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        OrderReady[playerid] = 10;
 			        return 0;
 			    }
 			    else
@@ -6622,15 +6723,17 @@ public OnPlayerText(playerid, text[])
 			else
 			{
 			    SendClientMessage(playerid, COLOR_WHITE, "|__________________ DostÍpne paczki __________________|");
-			    if(PlayerInfo[playerid][pRank] >= 1) { SendClientMessage(playerid, COLOR_GREY, "|(1) ($5000) Ranga 1: NÛø, Desert Eagle, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(2) ($6000) Ranga 2: NÛø, Desert Eagle, M4, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(3) ($6000) Ranga 2: NÛø, Desert Eagle, AK47, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(4) ($8000) Ranga 3: NÛø, Desert Eagle, M4, MP5, Shotgun, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(5) ($8000) Ranga 3: NÛø, Desert Eagle, AK47, MP5, Shotgun, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(6) ($8500) Ranga 4: NÛø, Desert Eagle, M4, MP5, Spas12, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(7) ($8500) Ranga 4: NÛø, Desert Eagle, AK47, MP5, Spas12, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(8) ($10000) Ranga 5 - 6: NÛø, Desert Eagle, AK47, UZI, Spas12, Snajperka, Pancerz"); }
-			    SendClientMessage(playerid, COLOR_WHITE, "|________________________________________________________|");
+			    if(PlayerInfo[playerid][pRank] >= 0) { SendClientMessage(playerid, COLOR_GREY, "|(1) ($2500) Ranga 0: NÛø, Desert Eagle, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 1) { SendClientMessage(playerid, COLOR_GREY, "|(2) ($5000) Ranga 1: NÛø, Desert Eagle, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(3) ($6000) Ranga 2: NÛø, Desert Eagle, M4, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(4) ($6000) Ranga 2: NÛø, Desert Eagle, AK47, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(5) ($8000) Ranga 3: NÛø, Desert Eagle, M4, MP5, Shotgun, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(6) ($8000) Ranga 3: NÛø, Desert Eagle, AK47, MP5, Shotgun, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(7) ($8500) Ranga 4: NÛø, Desert Eagle, M4, MP5, Spas12, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(8) ($8500) Ranga 4: NÛø, Desert Eagle, AK47, MP5, Spas12, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(9) ($10000) Ranga 5-9: NÛø, Desert Eagle, M4, UZI, Spas12, Snajperka, Pancerz"); }
+                if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(10) ($10000) Ranga 5-9: NÛø, Desert Eagle, AK47, UZI, Spas12, Snajperka, Pancerz"); }
+				SendClientMessage(playerid, COLOR_WHITE, "|________________________________________________________|");
 			    return 0;
 			}
 		}
@@ -6793,8 +6896,20 @@ public OnPlayerText(playerid, text[])
 						Mobile[playerid] = 1255;
 						return 0;
 					}
+					new guyname[MAX_PLAYER_NAME];
+					new turner[MAX_PLAYER_NAME];
+					new wanted[128];
+					
 					SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Ostrzeøemy wszystkie jednostki w danym obszarze.");
 					SendClientMessage(playerid, COLOR_DBLUE, "DziÍkujemy za zg≥oszenie przestÍpstwa");
+					
+					GetPlayerName(badguy, guyname, sizeof(guyname));
+					GetPlayerName(playerid, turner, sizeof(turner));
+					format(wanted, sizeof(wanted), "HQ: Do Wszystkich Jednostek: Nadawca: %s",turner);
+					SendFamilyMessage(1, COLOR_DBLUE, wanted);
+					format(wanted, sizeof(wanted), "HQ: Przestepstwo: %s, Poszukiwany: %s",PlayerCrime[playerid][pAccusing],guyname);
+					SendFamilyMessage(1, COLOR_DBLUE, wanted);
+					
                     PlayCrimeReportForPlayer(playerid, playerid, 9);
 
 					SetPlayerCriminal(badguy,playerid, PlayerCrime[playerid][pAccusing]);

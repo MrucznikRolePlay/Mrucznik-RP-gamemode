@@ -15,17 +15,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         #endif
         return 1;
     }
-	
-	//AntyCheat - Antycrasher
-	format(inputtext, 128, "%s", inputtext);
-	for(new s; s < strlen(inputtext); s++)
-	{
-		if (inputtext[s] == '%')
-		{
-			inputtext[s] = ' ';
-		}
-	}
-	
     if(IsDialogProtected(dialogid) || true) //MySQL anti injection
     {
 		for(new i; i<strlen(inputtext); i++)
@@ -38,7 +27,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
 		}
     }
-	if(dialogid == D_KUBICWEL)
+	/*if(dialogid == D_KUBICWEL)
 	{
 		if(response)
 		{
@@ -49,8 +38,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string,sizeof(string), "Odda³eœ g³os na %s", inputtext);
 			SendClientMessage(playerid, COLOR_GREEN, string);
 		}
-	}
+	}*/
 	//2.5.2
+	if(dialogid == DIALOGID_UNIFORM)
+	{
+		if(response)
+		{
+            new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
+			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
 	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)
@@ -80,47 +79,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			case 0:
 			{
+			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANUno);
 				return 1;
 			}
 			case 1:
 			{
+			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANDos);
 				return 1;
 			}
 			case 2:
 			{
+			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://radiozetmp3-07.eurozet.pl:8400/listen.pls");
 				return 1;
 			}
 			case 3:
 			{
+				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmffm.pls");
 				return 1;
 			}
 			case 4:
 			{
+				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls");
 				return 1;
 			}
 			case 5:
 			{
+				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://acdn.smcloud.net/t062-1.mp3.pls");
 				return 1;
 			}
 			case 6:
 			{
+				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
 			case 7:
 			{
+			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
 				PlayerFixRadio(playerid);
 				StopAudioStreamForPlayer(playerid);
@@ -132,6 +139,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
+<<<<<<< HEAD
 			if(strfind(inputtext, "http://", true))
 			{
 				SendClientMessage(playerid, COLOR_GREY, "Link musi rozpoczynaæ siê na ( http:// )");
@@ -142,6 +150,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GREY, "Link nie mo¿e przekroczyæ 64 znaków!");
 				return 1;
 			}
+=======
+>>>>>>> origin/master
 			if(IsAValidURL(inputtext))
 			{
 				StopAudioStreamForPlayer(playerid);
@@ -152,9 +162,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 			}
+<<<<<<< HEAD
 		}
 		
 		return 1;
+=======
+		}//return 1;
+>>>>>>> origin/master
 	}
 	else if(dialogid == DIALOGID_PODSZYJ)
 	{
@@ -582,6 +596,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d³ugosæ opisu.");
             return 1;
         }
+        else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
+		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.') || (inputtext[i] == '!') || (inputtext[i] == ':') || (inputtext[i] == '-') || (inputtext[i] == '{') || (inputtext[i] == '}') || (inputtext[i] == '[') || (inputtext[i] == ']'))
+				continue;
+            else if ((inputtext[i] == 'Ê') || (inputtext[i] == 'Ó') || (inputtext[i] == '¥') || (inputtext[i] == 'Œ') || (inputtext[i] == '£') || (inputtext[i] == '¯') || (inputtext[i] == '') || (inputtext[i] == 'Æ') || (inputtext[i] == 'Ñ') || (inputtext[i] == 'ê') || (inputtext[i] == 'ó') || (inputtext[i] == '¹') || (inputtext[i] == 'œ') || (inputtext[i] == '³') || (inputtext[i] == '¿') || (inputtext[i] == 'Ÿ') || (inputtext[i] == 'æ') || (inputtext[i] == 'ñ'))
+                continue;
+			else return SendClientMessage(playerid, COLOR_GRAD1, "Opis: U¿y³eœ nieodpowiednich znaków opisu.");
+		}
         strdel(PlayerDesc[playerid], 0, 128 char);
         strpack(PlayerDesc[playerid], inputtext);
         MruMySQL_UpdateOpis(playerid, PlayerInfo[playerid][pUID], 1);
@@ -644,6 +665,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d³ugosæ opisu.");
             return 1;
         }
+         else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
+		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.') || (inputtext[i] == '!') || (inputtext[i] == ':') || (inputtext[i] == '-') || (inputtext[i] == '{') || (inputtext[i] == '}') || (inputtext[i] == '[') || (inputtext[i] == ']'))
+				continue;
+            else if ((inputtext[i] == 'Ê') || (inputtext[i] == 'Ó') || (inputtext[i] == '¥') || (inputtext[i] == 'Œ') || (inputtext[i] == '£') || (inputtext[i] == '¯') || (inputtext[i] == '') || (inputtext[i] == 'Æ') || (inputtext[i] == 'Ñ') || (inputtext[i] == 'ê') || (inputtext[i] == 'ó') || (inputtext[i] == '¹') || (inputtext[i] == 'œ') || (inputtext[i] == '³') || (inputtext[i] == '¿') || (inputtext[i] == 'Ÿ') || (inputtext[i] == 'æ') || (inputtext[i] == 'ñ'))
+                continue;
+			else return SendClientMessage(playerid, COLOR_GRAD1, "Opis: U¿y³eœ nieodpowiednich znaków opisu.");
+		}
         new veh = GetPlayerVehicleID(playerid);
         strdel(CarDesc[veh], 0, 128 char);
         strpack(CarDesc[veh], inputtext);
@@ -1146,7 +1174,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
 			{
 			    case 0:
-                    ElevatorTravel(playerid, 1144.6638, -1331.1571, 13.5890, 0,90.0);
+                    ElevatorTravel(playerid, 1144.4740, -1333.2556, 13.8348, 0,90.0);
 				case 1:
 					ElevatorTravel(playerid, 1167.2428,-1311.8409,31.6567,90,180.0);
 				case 2:
@@ -2119,7 +2147,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		            	if(IsACop(playerid) || IsARR(playerid))
+		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
 			                SetPlayerPosEx(playerid,1569.0193, -1690.5186, 5.9972);
 			                SetPlayerVirtualWorld(playerid,0);
@@ -2180,7 +2208,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 5:
 		            {
-		           		 if(IsACop(playerid) || IsARR(playerid))
+		           		 if(IsACop(playerid) || IsABOR(playerid))
            				{
 			                SetPlayerPosEx(playerid,1565.0798, -1665.6580, 28.4782);
 			                SetPlayerVirtualWorld(playerid,0);
@@ -2238,7 +2266,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        case 0:
 			        {
-           				if(IsAUrzednik(playerid) || IsARR(playerid))//zaplecze
+           				if(IsAUrzednik(playerid) || IsABOR(playerid))//zaplecze
            				{
 					        SetPlayerPosEx(playerid,1412.3348388672, -1790.5777587891, 15.370599746704);
 					        SetPlayerVirtualWorld(playerid,0);
@@ -2312,7 +2340,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					case 0:
 					{
-						if(!IsARR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1510.7217, -1470.1677, 9.7360);
 						SetPlayerVirtualWorld (playerid, 0);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
@@ -2320,7 +2348,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1:
 					{
-						if(!IsARR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid,1483.8867, -1491.1559, 13.9085);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						TogglePlayerControllable(playerid,0);
@@ -2341,7 +2369,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 3:
 					{
-						if(!IsARR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1482.2319, -1531.1719, 70.0080);
 						SetPlayerVirtualWorld (playerid, 80) ;
 						TogglePlayerControllable(playerid,0);
@@ -2351,7 +2379,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 4:
 					{
-						if(!IsARR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1495.1107, -1468.8528, 40.8256);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Dach");
@@ -3116,7 +3144,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
 				}
-				if(cops >= 3)
+				if(cops >= 3 || TazerAktywny[playerid] == 1 && cops == 2)
 				{
 	                format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -3127,7 +3155,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
 				}
-				else if(cops == 2)
+				else if(cops == 2 || TazerAktywny[playerid] == 1 && cops < 2)
 				{
 				    new rand = random(100);
 				    if(rand <= 50)
@@ -7119,6 +7147,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     if(IsCarOwner(playerid, veh))
 					{
 						ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
+						MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
 						SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
 						DajKase(playerid, -1500);
 					}
@@ -7376,7 +7405,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 			    if(IsPlayerConnected(playerid))
 			    {
-			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 50)
+			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			        {
 						if(strcmp(inputtext, "GuL973TekeSTDz4-128", false) == 0)
 						{
@@ -7421,7 +7450,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(IsPlayerConnected(playerid))
 			    {
-			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 19)
+			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			        {
 						OnPlayerRegister(playerid, inputtext);
 						GUIExit[playerid] = 0;
@@ -7449,7 +7478,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 50)
+		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			    {
 			        if(strcmp(inputtext,"SiveMopY", false) == 0 )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67
 			        {
@@ -7476,9 +7505,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
-				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
-				    GUIExit[playerid] = 0;
+			       SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za niewpisanie has³a!");
+					ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany z powodu bezpieczeñstwa za wpisanie pustego lub zbyt d³ugiego has³a. Zapraszamy ponownie.", "WyjdŸ", "");
+					GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 0);
 					KickEx(playerid);
 			    }
@@ -7789,6 +7818,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if (kaska[playerid] >= 25000000 && PlayerInfo[playerid][pExp] >= 180)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
+							NickLog(string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktów respektu");
 							PlayerInfo[playerid][pZmienilNick] --;
@@ -7805,6 +7835,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    if (PlayerInfo[playerid][pExp] >= 340)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
+							NickLog(string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
 							PlayerInfo[playerid][pZmienilNick] --;
@@ -8272,8 +8303,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 1://Zamykanie domu
 		            {
-		                if(Dom[dom][hZamek] == 1)
+		                if(Dom[dom][hZamek] == 1 && AntySpam[playerid] == 1)
 		                {
+							ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Odczekaj 10 sekund zanim zamkniesz dom ponownie.", "Wróæ", "WyjdŸ");
+						}
+						else if(Dom[dom][hZamek] == 1)
+		                {
+		                    SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+	    					AntySpam[playerid] = 1;
 							Dom[dom][hZamek] = 0;
 							ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Dom zosta³ zamkniêty pomyœlnie", "Wróæ", "WyjdŸ");
 						}
@@ -9721,7 +9758,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		}
 		if(dialogid == 8000)
-		{/*
+		{
 		    if(response)
 		    {
 		        switch(listitem)
@@ -9754,7 +9791,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
 		        }
-		    }*/
+		    }
 		}
 		if(dialogid == 8001)
 		{
@@ -13058,6 +13095,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);
 		    }
 		}
+		else if(dialogid == 1403)
+		{
+		    if(response)
+		    {
+		        switch(listitem)
+		        {
+		            case 0:
+		            {
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 50 kredytów za jedyne 1 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie.");
+                        Kredyty[playerid] += 50;
+                        DajKase(playerid, -1000);
+		            }
+		            case 1:
+		            {
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 100 kredytów za jedyne 2 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie.");
+                        Kredyty[playerid] += 100;
+                        DajKase(playerid, -2000);
+		            }
+		            case 2://Zielony
+		            {
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 250 kredytów za jedyne 4 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie.");
+                        Kredyty[playerid] += 250;
+                        DajKase(playerid, -4000);
+		            }
+		            case 3://Niebieski
+		            {
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 500 kredytów za jedyne 8 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie.");
+                        Kredyty[playerid] += 500;
+                        DajKase(playerid, -8000);
+		            }
+		        }
+		    }
+		}
 		else if(dialogid == 1402)//rupxnup
 		{
             if(response || !response)
@@ -13376,10 +13450,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendFamilyMessage(15, COLOR_YELLOW, komunikat);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wyœcig zorganizowany! Udaj siê na start i zaproœ osoby do wyscigu komend¹ /wyscig [id].");
 					SetPlayerRaceCheckpoint(playerid,1,wCheckpoint[tworzenietrasy[playerid]][0][0], wCheckpoint[tworzenietrasy[playerid]][0][1], wCheckpoint[tworzenietrasy[playerid]][0][2],wCheckpoint[tworzenietrasy[playerid]][1][0], wCheckpoint[tworzenietrasy[playerid]][1][1], wCheckpoint[tworzenietrasy[playerid]][1][2], 10);
+					ZabierzKase(playerid, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					Sejf_Add(FRAC_NOA, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
-					DajKase(playerid, -Wyscig[tworzenietrasy[playerid]][wNagroda]);
+					ZabierzKase(playerid, Wyscig[tworzenietrasy[playerid]][wNagroda]);
 					owyscig[playerid] = tworzenietrasy[playerid];
 					tworzenietrasy[playerid] = 666;
+					
+					format(komunikat, sizeof(komunikat), "%s zorganizowal wyscig %s (koszt: %d, nagroda: %d)", sendername, Wyscig[tworzenietrasy[playerid]][wNazwa], (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000, Wyscig[tworzenietrasy[playerid]][wNagroda]);
+					PayLog(komunikat);
 				}
 				else
 				{
@@ -15723,7 +15801,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new id = strval(inputtext);
         if(typ == 0)
         {
-            if(id < 1 || id > 17) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
+            if(id < 1 || id > 18) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
         }
         else
         {
