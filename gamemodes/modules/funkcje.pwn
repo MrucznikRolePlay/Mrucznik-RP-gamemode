@@ -1872,6 +1872,30 @@ IsASkuban(playerid)
 	return 0;
 }
 
+IsAtWarsztat(playerid)
+{
+    if(IsPlayerConnected(playerid))
+	{
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 5.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 5.0, 1805.4418,-1713.5634,13.5176)
+		{//Warsztat czerwony
+		    return 1;
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 40.0, 2333.7273,-1241.2806,22.0628))
+		{//warsztat niebieski
+		    return 1;
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 20.0, 644.3516,-503.4102,15.8941))
+		{//warsztat dillmore
+		  	return 1;
+		}
+        else if(IsPlayerInRangeOfPoint(playerid, 20.0, 991.3269,-1347.3071,12.9392))
+		{//warsztat przy p¹czkarni
+		  	return 1;
+		}
+	}
+	return 0;
+}
+
 IsAFakeKonto(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2121,7 +2145,19 @@ IsABOR(playerid)
 	}
 	return 0;
 }
-
+IsAKO(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new nick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, nick, sizeof(nick));
+		if(strcmp(nick,"Armin_Verwest", false) == 0)
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
 stock MozePobic(playerid)
 {
 	if(IsPlayerConnected(playerid))
