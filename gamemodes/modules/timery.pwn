@@ -2023,7 +2023,7 @@ public JednaSekundaTimer()
 			else if(TutTime[i] == 125)
 			{
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
-				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
+				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0; gOgloszenie[i] = 0;
 				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
 				SetPlayerSpawn(i);

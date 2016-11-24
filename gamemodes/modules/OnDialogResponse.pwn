@@ -149,7 +149,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 			}
-		}//return 1;
+		}
+		
+		return 1;
+		}
 	}
 	else if(dialogid == DIALOGID_PODSZYJ)
 	{
@@ -2321,6 +2324,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					case 0:
 					{
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1510.7217, -1470.1677, 9.7360);
 						SetPlayerVirtualWorld (playerid, 0);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
@@ -2328,34 +2332,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1:
 					{
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid,1483.8867, -1491.1559, 13.9085);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						TogglePlayerControllable(playerid,0);
-                     Wchodzenie(playerid);
+						Wchodzenie(playerid);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking zewnêtrzny");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 2:
 					{
+
 						SetPlayerPosEx(playerid,1496.9330, -1457.8887, 64.5854);
 						GameTextForPlayer(playerid, "~w~Centrala BOR \n ~r~by abram01", 5000, 1);
 						SetPlayerVirtualWorld (playerid, 80) ;
 						TogglePlayerControllable(playerid,0);
-                     Wchodzenie(playerid);
+						Wchodzenie(playerid);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Centrala BOR");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 3:
 					{
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1482.2319, -1531.1719, 70.0080);
 						SetPlayerVirtualWorld (playerid, 80) ;
 						TogglePlayerControllable(playerid,0);
-                     Wchodzenie(playerid);
+						Wchodzenie(playerid);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Sale Treningowe");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 4:
 					{
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1495.1107, -1468.8528, 40.8256);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Dach");
@@ -8163,7 +8171,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(PlayerInfo[playerid][pLevel] > 1) return 1;
 		    if(response)
 		    {
-		        gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
+		        gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; gOgloszenie[playerid] = 1;
 				TogglePlayerControllable(playerid, 0);
 				SetPlayerVirtualWorld(playerid, 0);
 				GUIExit[playerid] = 0;
@@ -15777,7 +15785,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new id = strval(inputtext);
         if(typ == 0)
         {
-            if(id < 1 || id > 17) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
+            if(id < 1 || id > 18) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
         }
         else
         {

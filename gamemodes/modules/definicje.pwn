@@ -138,6 +138,7 @@
 #define FRAC_NOA    15
 #define FRAC_WPS    16
 #define FRAC_LSFD   17
+#define FRAC_RR   18
 
 new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
     FAMILY_FDU = -1;
@@ -273,6 +274,8 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define D_EDIT_RANG_NAME    1319
 #define D_EDIT_CAR_COLOR    1320
 #define D_ASK_DODATKI       1321
+
+#define D_F_PANEL			5000+1
 
 #define D_TRANSPORT         5439
 #define D_TRANSPORT_FAST    5440

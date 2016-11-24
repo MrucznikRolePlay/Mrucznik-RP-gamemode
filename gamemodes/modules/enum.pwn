@@ -438,7 +438,7 @@ new FractionNames[][40] = {
     "Nightmare of Adrenalin",
     "Hammerskins Nation",
     "Los Santos Fire Department",
-    "Brak",
+    "Rangers Regiment",
     "Brak",
     "Brak"
 };
@@ -462,7 +462,7 @@ new SkrotFrakcji[][40] = {
     "NoA",
     "HN",
     "LSFD",
-    "Brak",
+    "RR",
     "Brak",
     "Brak"
 };

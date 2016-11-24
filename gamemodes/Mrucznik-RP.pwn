@@ -50,6 +50,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <foreach>
 #include <zcmd>
 #include <md5>
+#include <dini>
 #include <nex-ac>
 #include <dialogs>
 #include <fadescreen>
@@ -656,11 +657,11 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!ispassenger && !engine) MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
     }
 
-	if(gTeam[playerid] >= 3 || !IsACop(playerid))
+	if(gTeam[playerid] >= 3 || !IsACop(playerid) || !IsARR(playerid))
 	{
 		if (IsACopCar(vehicleid) && !ispassenger)
 		{
-			if(IsACop(playerid))
+			if(IsACop(playerid) || IsARR(playerid))
 			{
 				SendClientMessage(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
 			}
@@ -1334,10 +1335,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 		//-------<[     WL      ]>---------
 		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 		{
-			if(!IsACop(killerid) && lowcaz[killerid] != playerid)
+			if(!IsACop(killerid) && lowcaz[killerid] != playerid || !IsARR(playerid))
 			{
 				format(string, sizeof(string), "Morderstwo");
-				if(IsACop(playerid))
+				if(IsACop(playerid) || !IsARR(playerid))
 				{
 					PoziomPoszukiwania[killerid] += 2;
 					strcat(string, " Policjanta");
@@ -1438,7 +1439,7 @@ SetPlayerSpawnPos(playerid)
     //Tutorial:
     else if(PlayerInfo[playerid][pTut] == 0)
     {
-		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
+		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; gOgloszenie[playerid] = 1;
 		TogglePlayerControllable(playerid, 0);
 		RegistrationStep[playerid] = 1;
 	    SetPlayerPosEx(playerid, 1275.0283203125, -1337.3585205078, -5.0);
@@ -1677,6 +1678,12 @@ SetPlayerSpawnPos(playerid)
 						    SetPlayerPosEx(playerid, 1757.6122,-1123.4604,227.8059);
 				            SetPlayerVirtualWorld(playerid, 22);
 						    SetPlayerFacingAngle(playerid,180.0);
+						    Wchodzenie(playerid);
+						}
+						case FRAC_RR: //17
+						{
+						    SetPlayerPosEx(playerid, 2519.0017,-2456.7346,14.1171);
+				            SetPlayerVirtualWorld(playerid, 0);
 						    Wchodzenie(playerid);
 						}
 				    }

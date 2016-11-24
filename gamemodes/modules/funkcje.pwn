@@ -1168,7 +1168,7 @@ if(PlayerInfo[playerid][pDomWKJ] != 0)
 	SetPlayerVirtualWorld(playerid, 0);
 	PlayerInfo[playerid][pDomWKJ] = 0;
 }
-GameTextForPlayer(playerid, "~r~Koniec czasu nupie", 5000, 1);
+GameTextForPlayer(playerid, "~r~Koniec czasu, zapraszamy do kupna!", 5000, 1);
 DomOgladany[playerid] = 1;
 SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
 return 1;
@@ -1872,30 +1872,6 @@ IsASkuban(playerid)
 	return 0;
 }
 
-IsAtWarsztat(playerid)
-{
-    if(IsPlayerConnected(playerid))
-	{
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 5.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 5.0, 1805.4418,-1713.5634,13.5176)
-		{//Warsztat czerwony
-		    return 1;
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 40.0, 2333.7273,-1241.2806,22.0628))
-		{//warsztat niebieski
-		    return 1;
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 20.0, 644.3516,-503.4102,15.8941))
-		{//warsztat dillmore
-		  	return 1;
-		}
-        else if(IsPlayerInRangeOfPoint(playerid, 20.0, 991.3269,-1347.3071,12.9392))
-		{//warsztat przy p¹czkarni
-		  	return 1;
-		}
-	}
-	return 0;
-}
-
 IsAFakeKonto(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2145,6 +2121,25 @@ IsABOR(playerid)
 	}
 	return 0;
 }
+
+IsARR(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new leader = PlayerInfo[playerid][pLider];
+	    new member = PlayerInfo[playerid][pMember];
+	    if(member==18)
+		{
+		    return 1;
+		}
+		else if(leader==18 )
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+
 IsAKO(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2158,6 +2153,7 @@ IsAKO(playerid)
 	}
 	return 0;
 }
+
 stock MozePobic(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2451,6 +2447,42 @@ DajBronieFrakcyjne(playerid)
     	        PlayerInfo[playerid][pGun9] = 42; PlayerInfo[playerid][pAmmo9] = 10000;
     	    }
         }
+	}
+	else if(PlayerInfo[playerid][pMember] == 18 || PlayerInfo[playerid][pLider] == 18) // RR
+	{
+	    if(PlayerInfo[playerid][pGun1] == 0) // Pa³ka policyjna
+	    {
+	        PlayerInfo[playerid][pGun1] = 3; PlayerInfo[playerid][pAmmo1] = 1;
+	    }
+	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7) //Deagle
+	    {
+	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 207;
+	    }
+	    if(PlayerInfo[playerid][pGun3] == 0 || PlayerInfo[playerid][pGun3] == 25 && PlayerInfo[playerid][pAmmo3] < 50 || PlayerInfo[playerid][pAmmo3] <= 5) //Shotgun
+	    {
+	        PlayerInfo[playerid][pGun3] = 25; PlayerInfo[playerid][pAmmo3] = 100;
+	    }
+	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 29 && PlayerInfo[playerid][pAmmo4] < 200 || PlayerInfo[playerid][pAmmo4] <= 30)
+	    {
+	        PlayerInfo[playerid][pGun4] = 29; PlayerInfo[playerid][pAmmo4] = 530;
+	    }
+		if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 31 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
+	    {
+	        PlayerInfo[playerid][pGun5] = 31; PlayerInfo[playerid][pAmmo5] = 250;
+	    }
+		if(PlayerInfo[playerid][pGun6] == 0 || PlayerInfo[playerid][pGun6] == 34 && PlayerInfo[playerid][pAmmo6] < 10 || PlayerInfo[playerid][pAmmo6] <= 20)
+	    {
+	        PlayerInfo[playerid][pGun6] = 34; PlayerInfo[playerid][pAmmo6] = 20;
+	    }
+		if(PlayerInfo[playerid][pGun8] == 0 || PlayerInfo[playerid][pGun8] == 17 && PlayerInfo[playerid][pAmmo8] < 10 || PlayerInfo[playerid][pAmmo8] <= 2)
+	    {
+	        PlayerInfo[playerid][pGun8] = 17; PlayerInfo[playerid][pAmmo8] = 20;
+	    }
+	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 500 || PlayerInfo[playerid][pAmmo9] <= 30)
+	    {
+	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 10000;
+	    }
+		
 	}
 	else if(PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][pLider] == 5)
 	{
@@ -3255,6 +3287,10 @@ IsAtGasStation(playerid)
 		{//Palomino Creek
 		    return 1;
 		}
+		else if(PlayerToPoint(3.0,playerid,1381.5094,459.3204,20.3452))
+		{//Montgomery
+			return 1;
+		}
 		else if(PlayerToPoint(5.0,playerid,-2086.8000488281,-108.19999694824,35.599998474121))
 		{
 		    return 1;
@@ -3400,6 +3436,8 @@ IsACopCar(carid)
         if(CarData[lID][c_Owner] == FRAC_LSPD) return 1;
         else if(CarData[lID][c_Owner] == FRAC_FBI) return 1;
         else if(CarData[lID][c_Owner] == FRAC_NG) return 1;
+		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
+		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
     }
 	return 0;
 }
@@ -4114,7 +4152,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
-			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1)
+			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1 || IsARR(playerid) && OnDuty[playerid] == 1)
 			    {
       				PoziomPoszukiwania[playerid] = 0;
 				}
@@ -4127,7 +4165,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 				{
 					if(IsPlayerConnected(i))
 					{
-					    if(IsACop(i))
+					    if(IsACop(i) || IsARR(i))
 					    {
 					        if(gCrime[i] == 0)
 					        {
@@ -4322,6 +4360,17 @@ SetPlayerToTeamColor(playerid)
 		    if(OnDuty[playerid] && OnDutyCD[playerid] == 0)
 		    {
 		    	SetPlayerColor(playerid, COLOR_LIGHTBLUE);
+		    }
+		    else
+		    {
+		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
+		    }
+		}
+		if(PlayerInfo[playerid][pMember] == 18 || PlayerInfo[playerid][pLider] == 18) // RR
+		{
+		    if(OnDuty[playerid])
+		    {
+		    	SetPlayerColor(playerid, COLOR_RR);
 		    }
 		    else
 		    {
@@ -6792,6 +6841,20 @@ OOCNewbie(const string[])
 	}
 }
 
+OOCOgloszenie(color,const string[])
+{
+	foreach(Player, i)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if(!gOgloszenie[i])
+		    {
+				SendClientMessage(i, color, string);
+			}
+		}
+	}
+}
+
 OOCNews(color,const string[])
 {
 	foreach(Player, i)
@@ -7121,7 +7184,7 @@ PolicjantWStrefie(Float:radi, playerid)
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
 	    	if(IsPlayerInRangeOfPoint(i, radi, rangex, rangey, rangez))
 	        {
-	            if(IsACop(i))
+	            if(IsACop(i) || IsARR(i))
 	            {
 	            	return 1;
 	            }
