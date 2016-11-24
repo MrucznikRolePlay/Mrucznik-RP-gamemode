@@ -139,19 +139,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-<<<<<<< HEAD
-			if(strfind(inputtext, "http://", true))
-			{
-				SendClientMessage(playerid, COLOR_GREY, "Link musi rozpoczynaæ siê na ( http:// )");
-				return 1;
-			}
-			if(strlen(inputtext) > 64)
-			{
-				SendClientMessage(playerid, COLOR_GREY, "Link nie mo¿e przekroczyæ 64 znaków!");
-				return 1;
-			}
-=======
->>>>>>> origin/master
 			if(IsAValidURL(inputtext))
 			{
 				StopAudioStreamForPlayer(playerid);
@@ -162,13 +149,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 			}
-<<<<<<< HEAD
 		}
 		
 		return 1;
-=======
-		}//return 1;
->>>>>>> origin/master
+		}
 	}
 	else if(dialogid == DIALOGID_PODSZYJ)
 	{
