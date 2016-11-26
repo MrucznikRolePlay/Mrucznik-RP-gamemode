@@ -81,6 +81,7 @@ public obiekty_timer(wartosc)
     INT_VagosPub();
     INT_LSFD();
     LS_ElCorona();
+	LadujObiektyBanku();
 
     ChangeLSMCElevatorState();
 	return 1;
