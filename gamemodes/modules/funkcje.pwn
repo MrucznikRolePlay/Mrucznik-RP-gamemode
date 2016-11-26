@@ -3469,7 +3469,6 @@ IsACopCar(carid)
         else if(CarData[lID][c_Owner] == FRAC_FBI) return 1;
         else if(CarData[lID][c_Owner] == FRAC_NG) return 1;
 		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
-		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
     }
 	return 0;
 }
