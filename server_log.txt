@@ -1,0 +1,274 @@
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:09:35] 
+[01:09:35] Server Plugins
+[01:09:35] --------------
+[01:09:35]  Loading plugin: crashdetect
+[01:09:35]   CrashDetect v4.15.1 is OK.
+[01:09:35]   Loaded.
+[01:09:35]  Loading plugin: mysql_R5
+[01:09:35] 
+
+  > MySQL plugin R5 successfully loaded.
+
+[01:09:35]   Loaded.
+[01:09:35]  Loading plugin: sscanf
+[01:09:35] 
+
+[01:09:35]  ===============================
+
+[01:09:35]       sscanf plugin loaded.     
+
+[01:09:35]          Version:  2.8.2        
+
+[01:09:35]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:09:35]  ===============================
+
+[01:09:35]   Loaded.
+[01:09:35]  Loading plugin: streamer
+[01:09:35] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[01:09:35]   Loaded.
+[01:09:35]  Loading plugin: MapAndreas
+[01:09:35]   Loaded.
+[01:09:35]  Loading plugin: libRegEx
+[01:09:35] 
+[01:09:35]  ------------------------------
+[01:09:35]  |
+[01:09:35]  | -> Regular Expression Plugin v0.2
+[01:09:35]  | -> Using Oniguruma v5.9.5
+[01:09:35]  |
+[01:09:35]  ------ (c) 2014, Koala -------
+[01:09:35] 
+[01:09:35]   Loaded.
+[01:09:35]  Loaded 6 plugins.
+
+[01:09:35] I couldn't load any gamemode scripts. Please verify your server.cfg
+[01:09:35] It needs a gamemode0 line at the very least.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:09:50] 
+[01:09:50] Server Plugins
+[01:09:50] --------------
+[01:09:50]  Loading plugin: crashdetect
+[01:09:50]   CrashDetect v4.15.1 is OK.
+[01:09:50]   Loaded.
+[01:09:50]  Loading plugin: mysql_R5
+[01:09:50] 
+
+  > MySQL plugin R5 successfully loaded.
+
+[01:09:50]   Loaded.
+[01:09:50]  Loading plugin: sscanf
+[01:09:50] 
+
+[01:09:50]  ===============================
+
+[01:09:50]       sscanf plugin loaded.     
+
+[01:09:50]          Version:  2.8.2        
+
+[01:09:50]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:09:50]  ===============================
+
+[01:09:50]   Loaded.
+[01:09:50]  Loading plugin: streamer
+[01:09:50] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[01:09:50]   Loaded.
+[01:09:50]  Loading plugin: MapAndreas
+[01:09:50]   Loaded.
+[01:09:50]  Loading plugin: libRegEx
+[01:09:50] 
+[01:09:50]  ------------------------------
+[01:09:50]  |
+[01:09:50]  | -> Regular Expression Plugin v0.2
+[01:09:50]  | -> Using Oniguruma v5.9.5
+[01:09:50]  |
+[01:09:50]  ------ (c) 2014, Koala -------
+[01:09:50] 
+[01:09:50]   Loaded.
+[01:09:50]  Loaded 6 plugins.
+
+[01:09:50] 
+[01:09:50] Filterscripts
+[01:09:50] ---------------
+[01:09:50]   Loading filterscript 'scanhp.amx'...
+[01:09:50] Wypadek by Mrucznik
+[01:09:50]   Loading filterscript 'animy.amx'...
+[01:09:50]   Loading filterscript 'sobeitblock.amx'...
+[01:09:50]   Loading filterscript 'afk.amx'...
+[01:09:50]   Loaded 4 filterscripts.
+
+[01:09:50]  
+[01:09:50] --------------------------------------
+[01:09:50]  Anticheat Nex-AC zaï¿½adowany!
+[01:09:50]  Anticheat wersja: 1.9.10
+[01:09:50]  Autor: Nexius
+[01:09:50] --------------------------------------
+
+[01:09:50] [REGEX] Default syntax set to ONIG_SYNTAX_PERL.
+[01:09:51]  
+[01:09:51] MYSQL: Nieudane polaczenie z baza MySQL
+[01:09:51] Wczytano podstawow¹ konfiguracjê
+[01:09:51] Wczytano rangi
+[01:09:51] Wczytano skiny
+[01:09:51] 0 | Wczytano organizacje
+[01:09:51] Wczytano 165 aut do kradzie¿y
+[01:09:51] TUTAJ CRASH ZARAZ
+[01:09:51] Wczytano 0 pojazdów
+[01:09:51] A JEDNAK NIE
+[01:09:51] GameMode init - done!
+[01:09:51] [Nex-AC] Ta wersja Antycheat nie nadaje siï¿½ do wersji tej serwera
+[01:09:51] 
+----------------------------------
+[01:09:51] M | --- Mrucznik Role Play --- | M
+[01:09:51] R | ---        ****        --- | R
+[01:09:51] U | ---        v2.5        --- | U
+[01:09:51] C | ---        ****        --- | C
+[01:09:51] Z | ---    by Mrucznik     --- | Z
+[01:09:51] N | ---                    --- | N
+[01:09:51] I | ---       /\_/\        --- | I
+[01:09:51] K | ---   ===( *.* )===    --- | K
+[01:09:51]   | ---       \_^_/        --- |  
+[01:09:51] R | ---         |          --- | R
+[01:09:51] P | ---         O          --- | P
+[01:09:51] ----------------------------------
+
+[01:09:51] Number of vehicle models: 9
+[01:09:51] --- Server Shutting Down.
+[01:09:51] Serwer zostaje wy³¹czony.
+[01:09:51]  
+[01:09:51] --------------------------------------
+[01:09:51]  Statystyki antycheat Nex-AC
+[01:09:51]  Wykrycia i zapobiegania:
+[01:09:51]   0 prï¿½by cheatowania
+[01:09:51]   0 prï¿½by hackowania
+[01:09:51]   0 prï¿½by crashowania
+[01:09:51]   0 prï¿½by floodowania
+[01:09:51]   0 ataki
+[01:09:51]  Razem wykrytych i zapobiegnietych 0 cheaterï¿½w
+[01:09:51] --------------------------------------
+
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:11:09] 
+[01:11:09] Server Plugins
+[01:11:09] --------------
+[01:11:09]  Loading plugin: crashdetect
+[01:11:09]   CrashDetect v4.15.1 is OK.
+[01:11:09]   Loaded.
+[01:11:09]  Loading plugin: mysql_R5
+[01:11:09] 
+
+  > MySQL plugin R5 successfully loaded.
+
+[01:11:09]   Loaded.
+[01:11:09]  Loading plugin: sscanf
+[01:11:09] 
+
+[01:11:09]  ===============================
+
+[01:11:09]       sscanf plugin loaded.     
+
+[01:11:09]          Version:  2.8.2        
+
+[01:11:09]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:11:09]  ===============================
+
+[01:11:09]   Loaded.
+[01:11:09]  Loading plugin: streamer
+[01:11:09] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[01:11:09]   Loaded.
+[01:11:09]  Loading plugin: MapAndreas
+[01:11:09]   Loaded.
+[01:11:09]  Loading plugin: libRegEx
+[01:11:09] 
+[01:11:09]  ------------------------------
+[01:11:09]  |
+[01:11:09]  | -> Regular Expression Plugin v0.2
+[01:11:09]  | -> Using Oniguruma v5.9.5
+[01:11:09]  |
+[01:11:09]  ------ (c) 2014, Koala -------
+[01:11:09] 
+[01:11:09]   Loaded.
+[01:11:09]  Loaded 6 plugins.
+
+[01:11:09] 
+[01:11:09] Filterscripts
+[01:11:09] ---------------
+[01:11:09]   Loading filterscript 'scanhp.amx'...
+[01:11:09] Wypadek by Mrucznik
+[01:11:09]   Loading filterscript 'animy.amx'...
+[01:11:09]   Loading filterscript 'sobeitblock.amx'...
+[01:11:10]   Loading filterscript 'afk.amx'...
+[01:11:10]   Loaded 4 filterscripts.
+
+[01:11:10]  
+[01:11:10] --------------------------------------
+[01:11:10]  Anticheat Nex-AC zaï¿½adowany!
+[01:11:10]  Anticheat wersja: 1.9.10
+[01:11:10]  Autor: Nexius
+[01:11:10] --------------------------------------
+
+[01:11:10] [REGEX] Default syntax set to ONIG_SYNTAX_PERL.
+[01:11:10]  
+[01:11:10] MYSQL: Polaczono sie z baza MySQL
+[01:11:10] Wczytano podstawow¹ konfiguracjê
+[01:11:10] Wczytano rangi
+[01:11:10] Wczytano skiny
+[01:11:10] 0 | Wczytano organizacje
+[01:11:10] Wczytano 165 aut do kradzie¿y
+[01:11:10] TUTAJ CRASH ZARAZ
+[01:11:10] Wczytano 0 pojazdów
+[01:11:10] A JEDNAK NIE
+[01:11:10] GameMode init - done!
+[01:11:10] [Nex-AC] Ta wersja Antycheat nie nadaje siï¿½ do wersji tej serwera
+[01:11:10] 
+----------------------------------
+[01:11:10] M | --- Mrucznik Role Play --- | M
+[01:11:10] R | ---        ****        --- | R
+[01:11:10] U | ---        v2.5        --- | U
+[01:11:10] C | ---        ****        --- | C
+[01:11:10] Z | ---    by Mrucznik     --- | Z
+[01:11:10] N | ---                    --- | N
+[01:11:10] I | ---       /\_/\        --- | I
+[01:11:10] K | ---   ===( *.* )===    --- | K
+[01:11:10]   | ---       \_^_/        --- |  
+[01:11:10] R | ---         |          --- | R
+[01:11:10] P | ---         O          --- | P
+[01:11:10] ----------------------------------
+
+[01:11:10] Number of vehicle models: 10
+[01:11:19] --- Server Shutting Down.
