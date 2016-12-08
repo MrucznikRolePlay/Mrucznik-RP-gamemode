@@ -422,4 +422,51 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 //23.12
 #define MAX_TICKETS     50
+
+
+
+// Y_SAFERETURN ! ! !
+forward _SafeReturnCode_(dest[], src[], bytes);
+public _SafeReturnCode_(dest[], src[], bytes)
+{
+    memcpy(dest, src, 0, bytes, bytes);
+}
+
+stock SafeReturnCode(const src[], const bytes = sizeof (src))
+{
+    // Push the lengths for the memcpy (needs "pri", so done first).
+    #emit LOAD.S.pri    bytes
+    #emit SHL.C.pri     2
+    #emit PUSH.pri
+    #emit PUSH.pri
+   
+    // Get the parameter count.
+    #emit LOAD.S.pri    0
+    #emit MOVE.alt
+    #emit ADD.C         8
+    #emit LOAD.I
+   
+    // Get the desination pointer.
+    #emit ADD
+    #emit ADD.C         12
+    #emit LOAD.I
+   
+    // Do a raw memcpy (pointer to pointer, not array to array).
+    #emit PUSH.C        0
+    #emit PUSH.S        src
+    #emit PUSH.pri
+    #emit PUSH.C        20
+    #emit SYSREQ.C      memcpy
+   
+    // Return to the caller's caller.
+    #emit MOVE.pri
+    #emit SCTRL         5
+    #emit SCTRL         4
+    #emit RETN
+   
+    // Compiler cleanup.
+    return 0;
+}
+
+#define safe_return%0; return SafeReturnCode(%0),(%0);
 //EOF

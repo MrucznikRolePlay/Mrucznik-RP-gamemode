@@ -10,7 +10,6 @@ new PaniJanina;
 
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
-new Float:pl_pos[MAX_PLAYERS][5];
 //dodatkiPD
 new DodatkiPD[MAX_PLAYERS];
 //AFK timer
@@ -451,8 +450,6 @@ new Text:Textdraw3,
 	    bool:NapisUzywany,
 	    NapisTimer;*/
 
-new czasINT[MAX_PLAYERS];
-
 //N!ree
 new cbradijo[MAX_PLAYERS];
 new adminpodgladcb[MAX_PLAYERS];
@@ -756,17 +753,11 @@ new BramaNG2S = 0;
 new BramaWDol;
 new BramaWDolS = 1;
 //fbi
-new FBIdrzwi1;
-new FBIdrzwi2;
 new FBIdrzwi3;
 new FBIdrzwi4;
-new FBIdrzwi5;
-new FBIdrzwi6;
 new FBIdrzwi7;
-new FBImove1 = 0;
 new FBImove2 = 0;
 new FBImove3 = 0;
-new FBImove4 = 0;
 new FBImove5 = 0;
 new Celaki[3];
 //koniecfbi
@@ -791,7 +782,6 @@ new BramaZuzS = 1;
 //koniec garazpd
 //inne
 new starabron[MAX_PLAYERS];
-new ZmienianieSkinu[MAX_PLAYERS] = 0;
 new ZapisSkinu[MAX_PLAYERS];
 new PDGPS = -1;//gps
 //koniec inne
@@ -955,7 +945,6 @@ new shifthour;
 
 new intrate = 1;
 new levelexp = 4;
-new idletime = 600000; //10 mins
 //new civnokill = 0;
 //new suecost = 2000;
 new cchargetime = 60;
