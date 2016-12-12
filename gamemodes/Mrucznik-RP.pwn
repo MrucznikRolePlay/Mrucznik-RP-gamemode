@@ -41,34 +41,29 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 
 //-------------------------------------------<[ Includy ]>---------------------------------------------------//
 //-                                                                                                         -//
-
-// debug ysi //
-#define _DEBUG 3    
-
-
 #include <a_samp>
 #include <fixes>
 #include <callbacks>
 #include <a_http>
 #include <utils>
 #include <double-o-files2>
-//#include <foreach>
+#include <foreach>
 #include <zcmd>
 #include <md5>
 #include <dini>
-#include <crashdetect>                  // By Zeex, 4.15.1              https://github.com/Zeex/samp-plugin-crashdetect/releases   
-
+#include <dialogs>
 #include <fadescreen>
 #include <ACSBM>
-//#include <YSI\y_safereturn>				// By Bartekdvd & Y_Less: 		http://forum.sa-mp.com/showthread.php?t=456132
-    // safereturn znajduje sie teraz w /modules/definicje.pwn ! ! !
 #include <nex-ac>						// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include <dialogs>    
-#include <YSI\YSI\y_debug>
-#include <YSI\YSI\y_dialog>     
+
+//YSI po crashDetect
+#include <crashdetect>                  // By Zeex, 4.15.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
+#include <code-parse.inc>    
+#include <YSI\YSI\y_inline>
+#include <YSI\YSI\y_dialog>
+
 //-------<[ Pluginy ]>-------
 #include <mapandreas>
-
 #include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
 #define REGEX_ON
 #if defined REGEX_ON
@@ -184,7 +179,6 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 
 //---------------------------<[  OnDialogResponse   ]>--------------------------------------------------
 #include "modules/OnDialogResponse.pwn"
-#include "modules/dialog.pwn"
 
 
 public OnPlayerClickPlayer(playerid, clickedplayerid, source)
@@ -202,6 +196,39 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 		//GivePlayerWeapon(playerid, 24, PlayerInfo[playerid][pAmmo2]);
 		//RemovePlayerAttachedObject(playerid, 9);
 	}
+    if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) < 11 && hittype == 1)
+    {
+        new giveplayer[MAX_PLAYER_NAME];
+        new sendername[MAX_PLAYER_NAME];
+        GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+        GetPlayerName(hitid, sendername, sizeof(sendername));
+        TazerAktywny[hitid] = 1;
+        SetTimerEx("DostalTazerem", 10000, false, "i", hitid);
+        new string[128];
+        GameTextForPlayer(hitid, "DOSTALES TAZEREM! ODCZEKAJ CHWILE!", 3000, 5);
+        GameTextForPlayer(playerid, "~g~TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+        format(string, sizeof(string), "* %s strzela tazerem w %s.", giveplayer, sendername);
+        ProxDetector(30.0, hitid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+        MaTazer[playerid] = 0;
+        //PlayerInfo[issuerid][pGun2] = 24;
+        //GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
+        //RemovePlayerAttachedObject(issuerid, 9);
+        PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
+        PlayerPlaySound(hitid, 6300, 0.0, 0.0, 0.0);
+        ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
+        ClearAnimations(hitid);
+        ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
+        TogglePlayerControllable(hitid, 0);
+        return 0; //nie zabiera hp ! ! !
+    }
+    else if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) > 10 && hittype == 1)
+    {
+        GameTextForPlayer(playerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+        MaTazer[playerid] = 0;
+        //PlayerInfo[issuerid][pGun2] = 24;
+        //GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
+        //RemovePlayerAttachedObject(issuerid, 9);
+    }
     return 1;
 }
 
@@ -797,7 +824,7 @@ public OnPlayerDisconnect(playerid, reason)
     {
         new id = GetPVarInt(playerid, "kostka-player");
         Kostka_Wygrana(id, playerid, GetPVarInt(id, "kostka-cash"), true);
-        SendClientMessage(id, COLOR_RED, "Wspó³zawodnik opósci³ serwer, otrzymujesz zwrot wp³aconej kwoty z podatkiem.");
+        SendClientMessage(id, COLOR_RED, "Wspó³zawodnik opusci³ serwer, otrzymujesz zwrot wp³aconej kwoty z podatkiem.");
     }
 	if(pobity[playerid] == 1 || PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
@@ -1030,47 +1057,12 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	    ShowPlayerFadeScreenToBlank(playerid, 20, 255, 255, 255, 255);
 		SetPlayerDrunkLevel(playerid, 3000);
 	}
-    else if(issuerid != INVALID_PLAYER_ID)
-	{
-	    
-        if(MaTazer[issuerid] == 1 && (GetPlayerWeapon(issuerid) == 23 || GetPlayerWeapon(issuerid) == 24) && TazerAktywny[playerid] == 0 && GetDistanceBetweenPlayers(playerid,issuerid) < 11)
-		{
-		    new Float:health;
-    		GetPlayerHealth(playerid,health);
-		    SetPlayerHealth(playerid, health);
- 		   	new giveplayer[MAX_PLAYER_NAME];
-			new sendername[MAX_PLAYER_NAME];
-  		  	GetPlayerName(issuerid, giveplayer, sizeof(giveplayer));
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-            TazerAktywny[playerid] = 1;
-            SetTimerEx("DostalTazerem", 10000, false, "i", playerid);
-            new string[128];
-            GameTextForPlayer(playerid, "DOSTALES TAZEREM! ODCZEKAJ CHWILE!", 3000, 5);
-            GameTextForPlayer(issuerid, "~g~TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
-            format(string, sizeof(string), "* %s strzela tazerem w %s.", giveplayer, sendername);
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			MaTazer[issuerid] = 0;
-			//PlayerInfo[issuerid][pGun2] = 24;
-			//GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
-			//RemovePlayerAttachedObject(issuerid, 9);
-			PlayerPlaySound(issuerid, 6300, 0.0, 0.0, 0.0);
-			PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
-            ApplyAnimation(playerid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
-            ClearAnimations(playerid);
-            ApplyAnimation(playerid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
-            TogglePlayerControllable(playerid, 0);
+    if(issuerid != INVALID_PLAYER_ID) {
+        if(IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969)) {
+            new Float:health;
+            GetPlayerHealth(playerid, health);
+            SetPlayerHealth(playerid, health+amount);
         }
-        else if(MaTazer[issuerid] == 1 && (GetPlayerWeapon(issuerid) == 23 || GetPlayerWeapon(issuerid) == 24) && TazerAktywny[playerid] == 0 && GetDistanceBetweenPlayers(playerid,issuerid) > 10)
-		{
-		    new Float:health;
-    		GetPlayerHealth(playerid,health);
-		    SetPlayerHealth(playerid, health);
-			GameTextForPlayer(issuerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
-			MaTazer[issuerid] = 0;
-			//PlayerInfo[issuerid][pGun2] = 24;
-			//GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
-			//RemovePlayerAttachedObject(issuerid, 9);
-		}
     }
 	switch(bodypart)
 	{
@@ -1391,7 +1383,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
 
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
-	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 1);
+	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 500);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_MICRO_UZI, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL, 500);
     SetPlayerSkillLevel(playerid, WEAPONSKILL_SNIPERRIFLE, 1);
@@ -1831,12 +1823,12 @@ SetPlayerSpawnWeapon(playerid)
     if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
     {
         SetPlayerHealth(playerid, 90);
-		SetPlayerArmour(playerid, 15);
+	    SetPlayerArmour(playerid, 15);
     }
     else if(IsAPrzestepca(playerid))
 	{
 	    SetPlayerHealth(playerid, 90);
-	    SetPlayerArmour(playerid, 15);
+        //SetPlayerArmour(playerid, 15);
 	}
 	else
 	{
@@ -3388,7 +3380,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 20 minut.", SELLCAR1[rand]);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, SELLCAR1[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 1200;
+			    PlayerInfo[playerid][pCarTime] = 600;
 			}
 			else if(level >= 51 && level <= 100)
 			{
@@ -3396,7 +3388,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 18 minut.", SELLCAR2[rand]);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, SELLCAR2[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 1080;
+			    PlayerInfo[playerid][pCarTime] = 540;
 			}
 			else if(level >= 101 && level <= 200)
 			{
@@ -3404,7 +3396,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 16 minut.", SELLCAR3[rand]);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, SELLCAR3[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 960;
+			    PlayerInfo[playerid][pCarTime] = 480;
 			}
 			else if(level >= 201 && level <= 400)
 			{
@@ -3412,7 +3404,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 14 minut.", SELLCAR4[rand]);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, SELLCAR4[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 840;
+			    PlayerInfo[playerid][pCarTime] = 420;
 			}
 			else if(level >= 401)
 			{
@@ -3420,7 +3412,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 12 minut.", money);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, money);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 720;
+			    PlayerInfo[playerid][pCarTime] = 360;
 			}
 			GameTextForPlayer(playerid, "~y~Sprzedales pojazd", 2500, 1);
 			CP[playerid] = 0;
@@ -6117,6 +6109,10 @@ public OnVehicleSpawn(vehicleid)
 	    DestroyDynamicObject(VehicleUID[vehicleid][vSiren]);
 	    VehicleUID[vehicleid][vSiren] = 0;
 	}
+    if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION || Car_GetOwnerType(vehicleid) == CAR_OWNER_FAMILY || Car_GetOwnerType(vehicleid) == CAR_OWNER_JOB) {
+        RepairVehicle(vehicleid); // 
+
+    }
 	#if DEBUG == 1
 		printf("%d OnVehicleSpawn - end", vehicleid);
 	#endif

@@ -42,6 +42,8 @@ new CarDesc[MAX_VEHICLES][128 char];
 new MRP_PremiumHours[MAX_PLAYERS];
 new bool:InitMyItems[MAX_PLAYERS];
 //03.12
+//8.12 2016
+new carStreamUrl[MAX_VEHICLES][180 char];
 new bool:RANG_ApplyChanges[2][MAX_ORG];
 //new bool:SEJF_ApplyChanges[2][MAX_ORG];
 //
@@ -615,6 +617,7 @@ new gPlayerLogTries[MAX_PLAYERS];
 new gPlayerSpawned[MAX_PLAYERS];
 new gLastCar[MAX_PLAYERS];
 new gOoc[MAX_PLAYERS];
+new gMuteDepo[MAX_PLAYERS];
 new gCrime[MAX_PLAYERS];
 new gNewbie[MAX_PLAYERS];
 new gNews[MAX_PLAYERS];
@@ -1032,7 +1035,7 @@ ZerujZmienne(playerid)
     ConsumingMoney[playerid] = 0; AntySpawnBroni[playerid] = 0; AntyWlamSejf[playerid] = 0;
     gLastCar[playerid] = 0; FirstSpawn[playerid] = 0; lowcaz[playerid] = 501;
 	gOoc[playerid] = 0; gNews[playerid] = 0; BigEar[playerid] = 0; gDice[playerid] = 0; gFam[playerid] = 0; gNewbie[playerid] = 0; gOgloszenie[playerid] = 0;
- 	gGas[playerid] = 0; GUIExit[playerid] = 0;
+ 	gGas[playerid] = 0; GUIExit[playerid] = 0; gMuteDepo[playerid] = 0;
 	gPlayerLogged[playerid] = 0; gPlayerLogTries[playerid] = 0; gPlayerAccount[playerid] = 0;
 	gPlayerSpawned[playerid] = 0; PlayerKarting[playerid] = 0; PlayerInKart[playerid] = 0;
 	PlayerTazeTime[playerid] = 0; PlayerStoned[playerid] = 0; PlayerStonedStop[playerid] = 0;

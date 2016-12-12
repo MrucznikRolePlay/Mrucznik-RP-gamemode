@@ -1651,19 +1651,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-	if(dialogid != iddialog[playerid]) {
-		printf("cos nie tak");
-	}
 	else if(dialogid == iddialog[playerid])
 	{
-		printf("TESTINHO");
-		printf("a %d", dialogid);
 		if(dialogid == 1)
 	    {
-	    	printf("sraka logineiro");
 	        if(response)
 	        {
-	        	printf(":(");
 	            LogujeSieBezKlauna[playerid] = 0;
 	            GUIExit[playerid] = 0;
 	      		SendClientMessage(playerid, 0xFFFFFFFF, "Pozycja przywrócona");
@@ -2683,8 +2676,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    DajKase(playerid,-5000);
 						    GameTextForPlayer(playerid, "~r~-$5000", 5000, 1);
 							PlayerInfo[playerid][pGun9] = 43;
-							PlayerInfo[playerid][pAmmo9] += 10;
-						    GivePlayerWeapon(playerid, 43, 10);
+							PlayerInfo[playerid][pAmmo9] += 100;
+						    GivePlayerWeapon(playerid, 43, 100);
 							SendClientMessage(playerid, COLOR_GRAD4, "Aparat zakupiony! Mo¿esz nim teraz robiæ zdjêcia!");
 							return 1;
 						}
@@ -5627,41 +5620,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 			}
-			Dialog_Garbage(dialogid);
-		}
-		else if(dialogid == 5617)
-	    {
-	        if(response)
-	        {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-		        		ShowPlayerDialogEx(playerid,5618,DIALOG_STYLE_MSGBOX,"Test 1","TTest 1","Go back","Exit");
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid,5618,DIALOG_STYLE_MSGBOX,"Test 2","TTest 2","Go back","Exit");
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid,5618,DIALOG_STYLE_MSGBOX,"Test 3","TTest 3","Go back","Exit");
-					}
-	    			case 3:
-					{
-					    ShowPlayerDialogEx(playerid,5618,DIALOG_STYLE_MSGBOX,"Test 4","TTest 4","Go back","Exit");
-					}
-  					case 4:
-					{
-					    ShowPlayerDialogEx(playerid,5618,DIALOG_STYLE_MSGBOX,"Test 5","TTest 5","Go back","Exit");
-					}
-				}
-			}
-		}
-		else if(dialogid == 5618) {
-			if(response) {
-				ShowPlayerDialogEx(playerid, 5617, DIALOG_STYLE_LIST, "Test Me", "Test1\nTest2\nTest3\nTest4\nTest4\nTest5", "Wybierz", "WyjdŸ");
-			}
 		}
 		else if(dialogid == 5003 || dialogid == 5002 || dialogid == 5001)
 	    {
@@ -5669,7 +5627,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	        {
 	            ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesuj¹c¹ ciê zagadnienie", "Linia 55\nLinia 72\nLinia 82\nLinia 96\nLinia 85\nWycieczki\nInformacje\nPomoc", "Wybierz", "WyjdŸ");
 	        }
-	        Dialog_Garbage(dialogid);
 	    }
  	if(dialogid == D_PJTEST)
 	{
@@ -12590,6 +12547,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    if(response)
 		    {
 		        new veh = GetPlayerVehicleID(playerid);
+		        new dont_override = false;
 		        new engine,lights,alarm,doors,bonnet,boot,objective;
 		        GetVehicleParamsEx(veh,engine,lights,alarm,doors,bonnet,boot,objective);
 
@@ -12711,6 +12669,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         }
                     }
                 }
+                else if(strfind(inputtext, "W³asny Stream") != -1)
+                {
+                    if(!response) return 1;
+                    if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
+                    	dont_override = true;
+                    	ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny stream", "Wklej poni¿ej link do streama", "Start", "Wróæ");
+                    }
+                }
                 else if(strfind(inputtext, "Wy³¹cz radio") != -1)
                 {
                     if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
@@ -12754,10 +12720,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
                 //
-                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nWy³¹cz radio", komunikat);
+                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nW³asny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 //
-				ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
+                if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
+		}
+		else if(dialogid == 670) {
+			if(response)
+			{
+				new veh = GetPlayerVehicleID(playerid);
+				if(IsAValidURL(inputtext))
+				{
+					if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
+						foreach(Player, i) {
+							if(IsPlayerInVehicle(i, veh)) {
+								PlayAudioStreamForPlayer(i, inputtext);
+							}
+						}
+					}
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
+					ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny Stream", "WprowadŸ adres URL do radia/piosenki", "Start", "Anuluj");
+				}
+			}
+			return 1;
 		}
         else if(dialogid == 667)
         {

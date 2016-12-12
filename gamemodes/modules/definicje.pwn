@@ -332,6 +332,18 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 //2.5.2
 #define DIALOG_HA_ZMIENSKIN(%0)			3345+%0
 
+// niceczlowiek
+#define KARA_SPECJALNA "{800080}"
+#define KARA_BANICJI "{ff0000}"
+#define KARA_BARDZOCIEZKA "{ff0000}"
+#define KARA_CIEZKA "{ff8c00}"
+#define KARA_SREDNIA "{8b4513}"
+#define KARA_LEKKA "{008000}"
+#define KARA_NIEZNACZNA "{00ff00}"
+#define KARA_STRZALKA "{363F45}"
+#define KARA_TEKST2 "{FEB41C}"
+#define KARA_TEKST "{5E7C88}"    
+
 //uniformnew
 #define DIALOGID_UNIFORM 3445
 
@@ -422,9 +434,6 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 //23.12
 #define MAX_TICKETS     50
-
-
-
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);
 public _SafeReturnCode_(dest[], src[], bytes)

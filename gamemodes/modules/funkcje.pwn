@@ -6900,7 +6900,7 @@ OOCNews(color,const string[])
 	}
 }
 
-SendTeamMessage(team, color, string[])
+SendTeamMessage(team, color, string[], isDepo = 0)
 {
 	foreach(Player, i)
 	{
@@ -6908,7 +6908,10 @@ SendTeamMessage(team, color, string[])
 		{
 		    if(PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team)
 		    {
-				SendClientMessage(i, color, string);
+		    	printf("isdepo %d       gmutedepo[i] = %d", isDepo, gMuteDepo[i]);
+		    	if(isDepo == 1 && gMuteDepo[i] == 0) {
+		    		SendClientMessage(i, color, string);
+		    	}
 			}
 		}
 	}

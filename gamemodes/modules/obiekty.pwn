@@ -33,6 +33,7 @@
 #include "modules/Obiekty/vinyl.pwn"
 #include "modules/Obiekty/ykz.pwn"
 #include "modules/Obiekty/bank.pwn"
+#include "modules/Obiekty/nowiMechanicy.pwn"
 
 Stworz_Obiekty()
 {
@@ -82,7 +83,7 @@ public obiekty_timer(wartosc)
     INT_LSFD();
     LS_ElCorona();
 	LadujObiektyBanku();
-
+    nowiMechanicy_StworzObiekty();
     ChangeLSMCElevatorState();
 	return 1;
 }
@@ -103,7 +104,7 @@ DeleteObjects(playerid)
 {
 	//Z funkcji
 	Dillimore_DeleteMapObjects(playerid);
-
+    nowiMechanicy_UsunObiekty(playerid);
     //___Obiekty usuniête - Osiedle Idlewood/Alhambra___
     RemoveBuildingForPlayer(playerid, 5544, 1873.7422, -1682.4766, 34.7969, 0.25);
     RemoveBuildingForPlayer(playerid, 1524, 1837.6641, -1640.3828, 13.7578, 0.25);
