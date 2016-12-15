@@ -1845,3 +1845,285 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [02:21:47] Andre_Celestin has logged in.
 [02:22:58] Admin Andre_Celestin: xD
 [02:23:01] Admin Andre_Celestin: a
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:58:25] 
+[01:58:25] Server Plugins
+[01:58:25] --------------
+[01:58:25]  Loading plugin: crashdetect
+[01:58:25]   CrashDetect v4.15.1 is OK.
+[01:58:25]   Loaded.
+[01:58:25]  Loading plugin: mysql_R5
+[01:58:25] 
+
+  > MySQL plugin R5 successfully loaded.
+
+[01:58:25]   Loaded.
+[01:58:25]  Loading plugin: sscanf
+[01:58:25] 
+
+[01:58:25]  ===============================
+
+[01:58:25]       sscanf plugin loaded.     
+
+[01:58:25]          Version:  2.8.2        
+
+[01:58:25]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:58:25]  ===============================
+
+[01:58:25]   Loaded.
+[01:58:25]  Loading plugin: streamer
+[01:58:25] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[01:58:25]   Loaded.
+[01:58:25]  Loading plugin: MapAndreas
+[01:58:25]   Loaded.
+[01:58:25]  Loading plugin: libRegEx
+[01:58:25] 
+[01:58:25]  ------------------------------
+[01:58:25]  |
+[01:58:25]  | -> Regular Expression Plugin v0.2
+[01:58:25]  | -> Using Oniguruma v5.9.5
+[01:58:25]  |
+[01:58:25]  ------ (c) 2014, Koala -------
+[01:58:25] 
+[01:58:25]   Loaded.
+[01:58:25]  Loaded 6 plugins.
+
+[01:58:25] 
+[01:58:25] Filterscripts
+[01:58:25] ---------------
+[01:58:25]   Loading filterscript 'scanhp.amx'...
+[01:58:25] Wypadek by Mrucznik
+[01:58:25]   Loading filterscript 'animy.amx'...
+[01:58:25]   Loading filterscript 'sobeitblock.amx'...
+[01:58:25]   Loading filterscript 'afk.amx'...
+[01:58:26]   Loaded 4 filterscripts.
+
+[01:58:26]  
+[01:58:26] --------------------------------------
+[01:58:26]  Anticheat Nex-AC zaï¿½adowany!
+[01:58:26]  Anticheat wersja: 1.9.9
+[01:58:26]  Autor: Nexius
+[01:58:26] --------------------------------------
+
+[01:58:26]  
+[01:58:26]  
+[01:58:26]  
+[01:58:26]  ======================================= 
+[01:58:26]  |                                     | 
+[01:58:26]  |        YSI version 4.00.0001        | 
+[01:58:26]  |        By Alex "Y_Less" Cole        | 
+[01:58:26]  |                                     | 
+[01:58:26]  ======================================= 
+[01:58:26]  
+[01:58:26] *** YSI Warning: y_malloc set up via "CallLocalFunction", memory corruption is a remote possibility
+[01:58:28] [REGEX] Default syntax set to ONIG_SYNTAX_PERL.
+[01:58:28]  
+[01:58:28] MYSQL: Polaczono sie z baza MySQL
+[01:58:28] Wczytano podstawow¹ konfiguracjê
+[01:58:28] Wczytano rangi
+[01:58:28] Wczytano skiny
+[01:58:28] 0 | Wczytano organizacje
+[01:58:28] Wczytano 165 aut do kradzie¿y
+[01:58:28] TUTAJ CRASH ZARAZ
+[01:58:28] Wczytano 0 pojazdów
+[01:58:28] A JEDNAK NIE
+[01:58:28] GameMode init - done!
+[01:58:28] 
+----------------------------------
+[01:58:28] M | --- Mrucznik Role Play --- | M
+[01:58:28] R | ---        ****        --- | R
+[01:58:28] U | ---        v2.5        --- | U
+[01:58:28] C | ---        ****        --- | C
+[01:58:28] Z | ---    by Mrucznik     --- | Z
+[01:58:28] N | ---                    --- | N
+[01:58:28] I | ---       /\_/\        --- | I
+[01:58:28] K | ---   ===( *.* )===    --- | K
+[01:58:28]   | ---       \_^_/        --- |  
+[01:58:28] R | ---         |          --- | R
+[01:58:28] P | ---         O          --- | P
+[01:58:28] ----------------------------------
+
+[01:58:28] Number of vehicle models: 10
+[01:58:43] [connection] 127.0.0.1:55725 requests connection cookie.
+[01:58:44] [connection] incoming connection: 127.0.0.1:55725 id: 0
+[01:58:44] [join] Andre_Celestin has joined the server (0:127.0.0.1)
+[01:58:44] Poprawnie Connect ID: 0
+[01:58:45] Kubi aka Smigol: Moj skarb!! Nie oddam mojego skarbu!
+[01:58:50] (PERM) -> Player 0 (1) access flags is 1111111111111
+[01:58:50] Andre_Celestin has logged in.
+[01:58:53] [part] Andre_Celestin has left the server (0:2)
+[01:59:09] [connection] 127.0.0.1:52577 requests connection cookie.
+[01:59:10] [connection] incoming connection: 127.0.0.1:52577 id: 0
+[01:59:11] [join] Andre_Celestin has joined the server (0:127.0.0.1)
+[01:59:11] Poprawnie Connect ID: 0
+[01:59:14] (PERM) -> Player 0 (1) access flags is 1111111111111
+[01:59:14] Andre_Celestin has logged in.
+[01:59:36] AdmCmd: Andre_Celestin [ID: 0] wyczyscil czat !
+[01:59:36] AdmCmd: Andre_Celestin [ID: 0] wyczyscil czat !
+[01:59:42] [part] Andre_Celestin has left the server (0:1)
+[01:59:42] [connection] incoming connection: 127.0.0.1:51449 id: 0
+[01:59:43] [join] Andre_Celestin has joined the server (0:127.0.0.1)
+[01:59:43] Poprawnie Connect ID: 0
+[01:59:46] (PERM) -> Player 0 (1) access flags is 1111111111111
+[01:59:46] Andre_Celestin has logged in.
+[02:00:13] [part] Andre_Celestin has left the server (0:2)
+[02:00:14] [part] Andre_Celestin has left the server (0:0)
+[02:00:15] [connection] 127.0.0.1:54090 requests connection cookie.
+[02:00:16] [connection] incoming connection: 127.0.0.1:54090 id: 0
+[02:00:16] [join] Andre_Celestin has joined the server (0:127.0.0.1)
+[02:00:16] Poprawnie Connect ID: 0
+[02:00:21] (PERM) -> Player 0 (1) access flags is 1111111111111
+[02:00:21] Andre_Celestin has logged in.
+[02:00:40] -> Updating GangZones
+[02:00:40] -> Removing Houses MapIcons
+[02:00:40] -> Doing respawn
+[02:00:40] 
+[02:00:40] ----------
+[02:00:40] Reloaded log file: "server_log.txt".
+[02:00:40] ----------
+[02:03:48] Andre_Celestin byl afk przez 72
+[02:16:24] [part] Andre_Celestin has left the server (0:1)
+[03:00:07] -> Updating GangZones
+[03:00:08] -> Removing Houses MapIcons
+[03:00:08] -> Doing respawn
+[03:00:08] 
+[03:00:08] ----------
+[03:00:08] Reloaded log file: "server_log.txt".
+[03:00:08] ----------
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:45:36] 
+[15:45:36] Server Plugins
+[15:45:36] --------------
+[15:45:36]  Loading plugin: crashdetect
+[15:45:36]   CrashDetect v4.15.1 is OK.
+[15:45:36]   Loaded.
+[15:45:36]  Loading plugin: mysql_R5
+[15:45:36] 
+
+  > MySQL plugin R5 successfully loaded.
+
+[15:45:36]   Loaded.
+[15:45:36]  Loading plugin: sscanf
+[15:45:36] 
+
+[15:45:36]  ===============================
+
+[15:45:36]       sscanf plugin loaded.     
+
+[15:45:36]          Version:  2.8.2        
+
+[15:45:36]    (c) 2012 Alex "Y_Less" Cole  
+
+[15:45:36]  ===============================
+
+[15:45:36]   Loaded.
+[15:45:36]  Loading plugin: streamer
+[15:45:36] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:45:36]   Loaded.
+[15:45:36]  Loading plugin: MapAndreas
+[15:45:36]   Loaded.
+[15:45:36]  Loading plugin: libRegEx
+[15:45:36] 
+[15:45:36]  ------------------------------
+[15:45:36]  |
+[15:45:36]  | -> Regular Expression Plugin v0.2
+[15:45:36]  | -> Using Oniguruma v5.9.5
+[15:45:36]  |
+[15:45:36]  ------ (c) 2014, Koala -------
+[15:45:36] 
+[15:45:36]   Loaded.
+[15:45:36]  Loaded 6 plugins.
+
+[15:45:36] 
+[15:45:36] Filterscripts
+[15:45:36] ---------------
+[15:45:36]   Loading filterscript 'scanhp.amx'...
+[15:45:36] Wypadek by Mrucznik
+[15:45:36]   Loading filterscript 'animy.amx'...
+[15:45:36]   Loading filterscript 'sobeitblock.amx'...
+[15:45:36]   Loading filterscript 'afk.amx'...
+[15:45:37]   Loaded 4 filterscripts.
+
+[15:45:37]  
+[15:45:37] --------------------------------------
+[15:45:37]  Anticheat Nex-AC zaï¿½adowany!
+[15:45:37]  Anticheat wersja: 1.9.9
+[15:45:37]  Autor: Nexius
+[15:45:37] --------------------------------------
+
+[15:45:37]  
+[15:45:37]  
+[15:45:37]  
+[15:45:37]  ======================================= 
+[15:45:37]  |                                     | 
+[15:45:37]  |        YSI version 4.00.0001        | 
+[15:45:37]  |        By Alex "Y_Less" Cole        | 
+[15:45:37]  |                                     | 
+[15:45:37]  ======================================= 
+[15:45:37]  
+[15:45:37] *** YSI Warning: y_malloc set up via "CallLocalFunction", memory corruption is a remote possibility
+[15:45:39] [REGEX] Default syntax set to ONIG_SYNTAX_PERL.
+[15:45:40]  
+[15:45:40] MYSQL: Nieudane polaczenie z baza MySQL
+[15:45:40] Wczytano podstawow¹ konfiguracjê
+[15:45:40] Wczytano rangi
+[15:45:40] Wczytano skiny
+[15:45:40] 0 | Wczytano organizacje
+[15:45:40] Wczytano 165 aut do kradzie¿y
+[15:45:40] TUTAJ CRASH ZARAZ
+[15:45:40] Wczytano 0 pojazdów
+[15:45:40] A JEDNAK NIE
+[15:45:40] GameMode init - done!
+[15:45:40] 
+----------------------------------
+[15:45:40] M | --- Mrucznik Role Play --- | M
+[15:45:40] R | ---        ****        --- | R
+[15:45:40] U | ---        v2.5        --- | U
+[15:45:40] C | ---        ****        --- | C
+[15:45:40] Z | ---    by Mrucznik     --- | Z
+[15:45:40] N | ---                    --- | N
+[15:45:40] I | ---       /\_/\        --- | I
+[15:45:40] K | ---   ===( *.* )===    --- | K
+[15:45:40]   | ---       \_^_/        --- |  
+[15:45:40] R | ---         |          --- | R
+[15:45:40] P | ---         O          --- | P
+[15:45:40] ----------------------------------
+
+[15:45:40] Number of vehicle models: 9
+[15:45:40] --- Server Shutting Down.
+[15:45:40] Serwer zostaje wy³¹czony.
+[15:45:40]  
+[15:45:40] --------------------------------------
+[15:45:40]  Statystyki antycheat Nex-AC
+[15:45:40]  Wykrycia i zapobiegania:
+[15:45:40]   0 prï¿½by cheatowania
+[15:45:40]   0 prï¿½by hackowania
+[15:45:40]   0 prï¿½by crashowania
+[15:45:40]   0 prï¿½by floodowania
+[15:45:40]   0 ataki
+[15:45:40]  Razem wykrytych i zapobiegnietych 0 cheaterï¿½w
+[15:45:40] --------------------------------------
+

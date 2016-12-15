@@ -772,13 +772,13 @@ CMD:pomoc2(playerid, params[])
         switch(listitem) {
             case 1: {
                 format(komendy, sizeof(komendy), ""#KARA_TEKST"Komendy Ogólne");
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /czas\t/plac\t/datek\t/kup", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /dajklucz\t/zmienklucz\t/id\t/pij", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /pokazlicencje\t/ubranie\t/report\t/anuluj", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /akceptuj\t/wywal\t/wezdragi\t/kontrakt", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /tankuj\t/kanister\t/oczysc\t/wezwij", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /wyscigi\t/stopani\t/pobij\t/lotto", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /wyrzucbronie\t/muzyka\t/rodziny", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /czas /plac /datek /kup", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /dajklucz /zmienklucz /id /pij", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /pokazlicencje /ubranie /report /anuluj", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /akceptuj /wywal /wezdragi /kontrakt", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /tankuj /kanister /oczysc /wezwij", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /wyscigi /stopani /pobij /lotto", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /wyrzucbronie /muzyka /rodziny", komendy);
                 Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2_POWROT, DIALOG_STYLE_TABLIST, "Podrêcznik", komendy, "Ok", "Wróæ");
             }
             case 2: {
@@ -791,12 +791,12 @@ CMD:pomoc2(playerid, params[])
             }
             case 3: {
                 format(komendy, sizeof(komendy), ""#KARA_TEKST"Komendy zwi¹zane z czatami");
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(w)iadomosc\t/(o)oc\t/(k)rzyk\t/(s)zept", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(l)ocal\t/b\t/(og)loszenia\t/(f)amily", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(n)ewbie\t/sprobuj\t/togooc\t/tognews", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /togog\t/togfam\t/togw\t/togtel", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /toglicznik\t/togdepo\t/(f)amily(o)oc\t/togadmin", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /tognewbie\t/me", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(w)iadomosc /(o)oc /(k)rzyk /(s)zept", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(l)ocal /b /(og)loszenia /(f)amily", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(n)ewbie /sprobuj /togooc /tognews", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /togog /togfam /togw /togtel", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /toglicznik /togdepo /(f)amily(o)oc /togadmin", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /tognewbie /me", komendy);
                 Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2_POWROT, DIALOG_STYLE_TABLIST, "Podrêcznik", komendy, "Ok", "Wróæ");
             }
             case 4: {
@@ -809,9 +809,9 @@ CMD:pomoc2(playerid, params[])
             }
             case 5: {
                 format(komendy, sizeof(komendy), ""#KARA_TEKST"Komendy zwi¹zane z domem");
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /wejdz\t/wyjdz\t/dom\t/zlomujdom", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /tv (off)\t/ulecz\t/pancerz\t/zbrojownia", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /dominfo\t/garazuj\t/sejf", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /wejdz /wyjdz /dom /zlomujdom", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /tv (off) /ulecz /pancerz /zbrojownia", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /dominfo /garazuj /sejf", komendy);
                 Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2_POWROT, DIALOG_STYLE_TABLIST, "Podrêcznik", komendy, "Ok", "Wróæ");
             }
             case 6: {
