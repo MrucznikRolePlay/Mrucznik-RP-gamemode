@@ -1,4 +1,31 @@
 //OnDialogResponse.pwn  AKTUALNA MAPA
+forward OnDialogDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
+public OnDialogDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
+	if(dialogid >= DIALOG_HA_ZMIENSKIN(1) && dialogid <= DIALOG_HA_ZMIENSKIN(MAX_FRAC))
+	{
+		if(response)
+		{
+			new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+		else
+		{
+			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
+		}
+	}
+	else if(dialogid == DIALOGID_UNIFORM)
+	{
+		if(response)
+		{
+            new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
+			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
+}
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	#if DEBUG == 1
@@ -40,35 +67,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 	}*/
 	//2.5.2
-	if(dialogid == DIALOGID_UNIFORM)
+	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)
 		{
-            new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
-			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		}
-	}
-	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
-	{
-		if(response)
-		{
-			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Zmiana ubrania", DialogListaSkinow(listitem+1), "Start", "Anuluj");
-		}
-	}
-	else if(dialogid >= DIALOG_HA_ZMIENSKIN(1) && dialogid <= DIALOG_HA_ZMIENSKIN(MAX_FRAC))
-	{
-		if(response)
-		{
-			new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
-			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		}
-		else
-		{
-			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
+			static array[1][1];
+			new models[22];
+			models = DialogListaSkinow(listitem+1);
+			ShowPlayerPreviewModelDialog(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Wybierz Ubranie", models, array, "Wybierz", "Anuluj");
 		}
 	}
 	
