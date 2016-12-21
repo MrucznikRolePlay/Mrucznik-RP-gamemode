@@ -7,19 +7,15 @@
 #include <code-parse>
 #include <YSI\YSI\y_dialog>
 #include <YSI\YSI\y_inline>
+#undef USER_FILE_PATH
 #define USER_FILE_PATH  "Swieta/%s.ini"
 #define COLOR_LAWNGREEN 0x7CFC00AA
 new vehicleid;
-new gift_fake[1000];
-#define MAX_PLAYERS 500
 new dostalPrezent[MAX_PLAYERS][2];
 new dodatek[MAX_PLAYERS];
-new gift_real[1000];
-new MAX_GIFTS = 1000;
+new gift_real[1750];
+new MAX_GIFTS = 1750;
 new gifts = 0;
-//new obj,obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8,obj9,obj10,
-//obj11,obj12,obj13,obj14,obj15,obj16,obj17,obj18,obj19,obj20,obj21,obj22,
-//obj23,obj24,obj25,obj26,obj27,obj28,obj29,obj30;
 new obj[31];
 new SantaPickupModel[][1] = {
         {19054},
@@ -86,6 +82,8 @@ public OnFilterScriptInit()
 }
 CMD:sanie(playerid,params[])
 {
+    // zabezpieczenie komendy mozesz zrobic inne, w/e
+    if(strval(params) != 19613) return 1;
     new Float:x, Float:y, Float:z, Float:a;
     GetPlayerPos(playerid, x, y, z);
     GetPlayerFacingAngle(playerid, a);
@@ -125,7 +123,8 @@ CMD:sanie(playerid,params[])
     PutPlayerInVehicle(playerid, vehicleid, 0);
     return 1;
 }
-CMD:prezent(playerid, params) {
+CMD:prezent(playerid, params[]) {
+    if(strval(params) != 19613) return 1;
     new smodel = random(sizeof(SantaPickupModel)), Float:piox, Float:pioy, Float:pioz;
     GetPlayerPos(playerid, piox, pioy, pioz);
     gift_real[gifts] = CreateDynamicPickup(SantaPickupModel[smodel][0],8,piox,pioy-4,pioz,0,0);
@@ -219,7 +218,7 @@ CMD:swieta(playerid, params[]) {
         if(!response) return 1;
         if(!dostalPrezent[playerid][1]) return SendClientMessage(playerid, COLOR_LAWNGREEN, "Niestety, nie uda³o Ci siê zdobyæ œwi¹tecznego prezentu");
         switch(listitem) {
-            case 0: return Dialog_ShowCallback(playerid, using inline DLG_SWIETA_RESPONSE, DIALOG_STYLE_LIST, "Menu œwi¹teczne", "Co chcesz zrobiæ?\n\n1. Ubierz œwi¹teczny dodatek\n2. Zdejmij œwi¹teczny dodatek\n3. Edytuj œwi¹teczny dodatek", "Dalej", "Anuluj");
+            case 0: return Dialog_ShowCallback(playerid, using inline DLG_SWIETA_RESPONSE, DIALOG_STYLE_LIST, "Menu œwi¹teczne", "Co chcesz zrobiæ?\n1. Ubierz œwi¹teczny dodatek\n2. Zdejmij œwi¹teczny dodatek\n3. Edytuj œwi¹teczny dodatek", "Dalej", "Anuluj");
             case 1: {
                 // ubierz dod
                 if(IsPlayerAttachedObjectSlotUsed(playerid, 9)) return SendClientMessage(playerid, COLOR_LAWNGREEN, "Posiadasz ju¿ na sobie œwi¹teczny dodatek!");
@@ -237,7 +236,7 @@ CMD:swieta(playerid, params[]) {
             }
         }
     }
-    Dialog_ShowCallback(playerid, using inline DLG_SWIETA_RESPONSE, DIALOG_STYLE_LIST, "Menu œwi¹teczne", "Co chcesz zrobiæ?\n\n1. Ubierz œwi¹teczny dodatek\n2. Zdejmij œwi¹teczny dodatek\n3. Edytuj œwi¹teczny dodatek", "Dalej", "Anuluj");
+    Dialog_ShowCallback(playerid, using inline DLG_SWIETA_RESPONSE, DIALOG_STYLE_LIST, "Menu œwi¹teczne", "Co chcesz zrobiæ?\n\t1. Ubierz œwi¹teczny dodatek\n\t2. Zdejmij œwi¹teczny dodatek\n\t3. Edytuj œwi¹teczny dodatek", "Dalej", "Anuluj");
     return 1;
 }
 public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
