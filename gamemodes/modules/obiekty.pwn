@@ -1,5 +1,5 @@
 //obiekty.pwn
-// KOLEJNOÔøΩÔøΩ: rX,rY,rZ,VirtualWorld,Interior);
+// KOLEJNOå∆: rX,rY,rZ,VirtualWorld,Interior);
 
 //OBIEKTY
 #include "modules/Obiekty/admin.pwn"
@@ -33,7 +33,6 @@
 #include "modules/Obiekty/vinyl.pwn"
 #include "modules/Obiekty/ykz.pwn"
 #include "modules/Obiekty/bank.pwn"
-#include "modules/Obiekty/nowiMechanicy.pwn"
 
 Stworz_Obiekty()
 {
@@ -83,7 +82,7 @@ public obiekty_timer(wartosc)
     INT_LSFD();
     LS_ElCorona();
 	LadujObiektyBanku();
-    nowiMechanicy_StworzObiekty();
+
     ChangeLSMCElevatorState();
 	return 1;
 }
@@ -104,8 +103,8 @@ DeleteObjects(playerid)
 {
 	//Z funkcji
 	Dillimore_DeleteMapObjects(playerid);
-    nowiMechanicy_UsunObiekty(playerid);
-    //___Obiekty usuniÔøΩte - Osiedle Idlewood/Alhambra___
+
+    //___Obiekty usuniÍte - Osiedle Idlewood/Alhambra___
     RemoveBuildingForPlayer(playerid, 5544, 1873.7422, -1682.4766, 34.7969, 0.25);
     RemoveBuildingForPlayer(playerid, 1524, 1837.6641, -1640.3828, 13.7578, 0.25);
     RemoveBuildingForPlayer(playerid, 620, 1855.7188, -1741.5391, 10.8047, 0.25);
@@ -138,17 +137,17 @@ DeleteObjects(playerid)
     //K.A.C.C LV bramy
     RemoveBuildingForPlayer(playerid, 985, 2497.4063, 2777.0703, 11.5313, 0.25);
     RemoveBuildingForPlayer(playerid, 986, 2497.4063, 2769.1094, 11.5313, 0.25);
-    //SÔøΩd
-    RemoveBuildingForPlayer(playerid, 620, 1330.6016, -1340.9844, 6.1094, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 620, 1326.6953, -1316.0078, 8.7266, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 620, 1327.5938, -1333.6719, 6.1094, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 620, 1332.0000, -1309.4297, 8.7266, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 620, 1321.5234, -1374.4297, 12.5859, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 620, 1292.0000, -1374.2969, 12.3672, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 620, 1300.5859, -1374.2969, 12.3672, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 620, 1329.4766, -1374.4297, 12.5859, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 1312, 1307.6172, -1394.4766, 16.5000, 0.25); //SÔøΩD
-	RemoveBuildingForPlayer(playerid, 1297, 1309.8984, -1390.1172, 15.6406, 0.25); //SÔøΩD
+    //Sπd
+    RemoveBuildingForPlayer(playerid, 620, 1330.6016, -1340.9844, 6.1094, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 620, 1326.6953, -1316.0078, 8.7266, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 620, 1327.5938, -1333.6719, 6.1094, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 620, 1332.0000, -1309.4297, 8.7266, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 620, 1321.5234, -1374.4297, 12.5859, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 620, 1292.0000, -1374.2969, 12.3672, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 620, 1300.5859, -1374.2969, 12.3672, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 620, 1329.4766, -1374.4297, 12.5859, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 1312, 1307.6172, -1394.4766, 16.5000, 0.25); //S•D
+	RemoveBuildingForPlayer(playerid, 1297, 1309.8984, -1390.1172, 15.6406, 0.25); //S•D
 
     RemoveBuildingForPlayer(playerid, 13024, -87.3047, -347.5000, 3.1719, 0.25); //HA
 	RemoveBuildingForPlayer(playerid, 12932, -117.9609, -337.4531, 3.6172, 0.25); //HA
@@ -255,7 +254,7 @@ DeleteObjects(playerid)
 	RemoveBuildingForPlayer(playerid, 1412, 1951.6094, -1800.0625, 13.8125, 0.25);
 	RemoveBuildingForPlayer(playerid, 1226, 545.2109, -1523.2344, 17.5000, 0.25);
 	
-	//UrzÔøΩd miasta PC by abram01
+	//Urzπd miasta PC by abram01
 	RemoveBuildingForPlayer(playerid, 13374, 2241.4063, 21.4609, 33.1719, 0.25);
 	RemoveBuildingForPlayer(playerid, 781, 2253.7734, -79.5313, 25.4922, 0.25);
 	RemoveBuildingForPlayer(playerid, 781, 2259.3906, -79.4141, 25.4922, 0.25);
@@ -600,7 +599,7 @@ Stare_Obiekty()
 	CreateDynamicObject(2780,1042.35550000,-1117.28060000,25.91620000,0.00000000,0.00000000,0.00000000,-1,3); //
 	CreateDynamicObject(18553,2549.45650000,-1290.49820000,1061.92910000,90.00000000,0.00000000,90.00000000,-1,3); //
 
-	//obiekty dom Saula(mÔøΩj)
+	//obiekty dom Saula(mÛj)
 	CreateDynamicObject(10444,714.69720459,-1052.42102051,45.46129608,0.00000000,0.00000000,330.09008789,0,0); //object(poolwater_sfs) (1)
 	CreateDynamicObject(1646,723.42962646,-1041.49548340,46.01116943,0.00000000,0.00000000,314.12011719,0,0); //object(lounge_towel_up) (1)
 	CreateDynamicObject(1255,716.92156982,-1064.18481445,46.24763489,0.00000000,0.00000000,111.65499878,0,0); //object(lounger) (1)
@@ -618,8 +617,8 @@ Stare_Obiekty()
 	CreateDynamicObject(1419,429.03393555,-1270.05395508,51.06263733,0.00000000,0.00000000,21.18713379,0,0); //object(dyn_f_iron_1) (5)
 	CreateDynamicObject(1419,425.26156616,-1271.50561523,51.06263733,0.00000000,0.00000000,21.18713379,0,0); //object(dyn_f_iron_1) (6)
 	CreateDynamicObject(1419,437.84967041,-1264.45593262,51.06263733,0.00000000,0.00000000,110.96228027,0,0); //object(dyn_f_iron_1) (7)
-	//CreateDynamicObject(3409,429.45864868,-1260.13549805,44.96957779,5.95498657,0.00000000,17.86486816,0,0); //object(grassplant) (1) FBI spaliÔøΩo ;(
-	//CreateDynamicObject(3409,431.13986206,-1264.63269043,43.89460373,5.95458984,0.00000000,21.83374023,0,0); //object(grassplant) (2) FBI spaliÔøΩo ;(
+	//CreateDynamicObject(3409,429.45864868,-1260.13549805,44.96957779,5.95498657,0.00000000,17.86486816,0,0); //object(grassplant) (1) FBI spali≥o ;(
+	//CreateDynamicObject(3409,431.13986206,-1264.63269043,43.89460373,5.95458984,0.00000000,21.83374023,0,0); //object(grassplant) (2) FBI spali≥o ;(
 	CreateDynamicObject(3810,434.11508179,-1252.78820801,52.54722595,0.00000000,0.00000000,109.71505737,0,0); //object(sfx_plant04) (1)
 	
 	//DOM 0VERTE
@@ -835,7 +834,7 @@ Stare_Obiekty()
 	CreateDynamicObject(1231, 293.28, -1920.01, 3.54,   0.00, 0.00, 0.00,0,0);
 	CreateDynamicObject(1419, 291.13, -1920.92, 1.44,   0.00, 0.00, 0.00,0,0);
 
-	//obiekty DMV (wystrÔøΩj zewnÔøΩtrzny)
+	//obiekty DMV (wystrÛj zewnÍtrzny)
 	CreateDynamicObject(970,1476.31958008,-1719.46972656,13.34835243,0.00000000,0.00000000,0.00000000,0,0); //object(fencesmallb) (10)
 	CreateDynamicObject(970,1481.92138672,-1719.46972656,13.34835243,0.00000000,0.00000000,0.00000000,0,0); //object(fencesmallb) (11)
 	CreateDynamicObject(970,1487.39587402,-1719.46972656,13.44835091,0.00000000,0.00000000,0.00000000,0,0); //object(fencesmallb) (12)
@@ -969,7 +968,7 @@ Stare_Obiekty()
 	CreateDynamicObject(1432,1476.41101074,-1708.50402832,13.04687500,0.00000000,0.00000000,0.00000000,0,0); //object(dyn_table_2) (1)
 	CreateDynamicObject(1432,1482.62805176,-1706.97802734,13.04687500,0.00000000,0.00000000,0.00000000,0,0); //object(dyn_table_2) (2)
 	CreateDynamicObject(1432,1480.52124023,-1710.84973145,13.04687500,0.00000000,0.00000000,0.00000000,0,0); //object(dyn_table_2) (3)*/
-	//obiekty DMV wystrÔøΩj zewnÔøΩtrzny - znaki drogowe (by Dywan)
+	//obiekty DMV wystrÛj zewnÍtrzny - znaki drogowe (by Dywan)
 	CreateDynamicObject(19073, 1304.75708, -1716.70325, 11.35780,   0.00000, 0.00000, 0.00000);
 	CreateDynamicObject(19073, 1305.01172, -1772.52588, 11.35780,   0.00000, 0.00000, 0.00000);
 	CreateDynamicObject(19073, 1305.05261, -1813.29785, 11.35780,   0.00000, 0.00000, 0.00000);
@@ -1160,7 +1159,7 @@ Stare_Obiekty()
 	CreateDynamicObject(5269,2137.0000000,-2253.8999023,22.0000000,0.0000000,0.0000000,135.9892578,0,0); //object(las2dkwar05) (6)
 	CreateDynamicObject(7023,2236.0000000,-2220.5000000,12.5000000,0.0000000,0.0000000,224.0000000,0,0); //object(vgngatesecurity) (1)
 	//CreateDynamicObject(975,2231.5000000,-2213.6000977,14.1999998,0.0000000,0.0000000,136.0000000,0,0); //object(columbiangate) (4)
-	CreateDynamicObject(3109,2119.1999512,-2275.6000977,20.8999996,0.0000000,0.0000000,44.0000000); //object(imy_la_door) (1) drzwi blokujÔøΩce skrÔøΩt
+	CreateDynamicObject(3109,2119.1999512,-2275.6000977,20.8999996,0.0000000,0.0000000,44.0000000); //object(imy_la_door) (1) drzwi blokujπce skrÛt
 	CreateDynamicObject(970,2233.3000488,-2218.1999512,13.1000004,0.0000000,0.0000000,43.0000000,0,0); //object(fencesmallb) (1)
 	CreateDynamicObject(970,2233.1999512,-2221.1000977,13.1000004,0.0000000,0.0000000,313.0000000,0,0); //object(fencesmallb) (2)
 	CreateDynamicObject(3799,2255.0000000,-2249.1000977,13.6000004,0.0000000,0.0000000,320.0000000,0,0); //object(acbox2_sfs) (1)
@@ -1172,7 +1171,7 @@ Stare_Obiekty()
 	CreateDynamicObject(19323, 1117.59, -1490.01, 32.72,   0.00, 0.00, 0.00,0,0);
 
 
-	//Biurowiec prawnikÔøΩw i ÔøΩowcÔøΩw nagrÔøΩd
+	//Biurowiec prawnikÛw i ≥owcÛw nagrÛd
 	CreateDynamicObject(14590,300.82740000,-1514.81160000,18.12210000,0.00000000,0.00000000,322.28530000,0,0); //
 	CreateDynamicObject(1506,290.52650000,-1532.98510000,12.82490000,0.00000000,0.00000000,320.12010000,0,0); //
 	CreateDynamicObject(14638,291.82870000,-1533.85840000,12.82240000,0.00000000,0.00000000,51.83500000,0,0); //
@@ -1206,7 +1205,7 @@ Stare_Obiekty()
 	/////////////
 	///KARETKA///
 	/////////////
-	//PodÔøΩoga
+	//Pod≥oga
 	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1082.92090, -1313.85168, 20.53920,   0.00000, 90.00000, 0.00000, 32), 0, 14383, "burg_1", "wall6", 0);
 	//Drzwi
 	new d1 = CreateDynamicObject(3089, 1078.03735, -1309.11047, 21.84780,   0.00000, 0.00000, 0.00000, 32);
@@ -1215,7 +1214,7 @@ Stare_Obiekty()
     SetDynamicObjectMaterial(d2, 1, 2151, "cj_kitchen", "CJ_RED", 0);
     SetDynamicObjectMaterial(d1, 2, 14383, "burg_1", "wall6", 0);
     SetDynamicObjectMaterial(d2, 2, 14383, "burg_1", "wall6", 0);
-	//ÔøΩciany
+	//åciany
 	SetDynamicObjectMaterial(CreateDynamicObject(19460, 1077.93750, -1313.86328, 21.73170,   0.00000, 0.00000, 0.00000, 32), 0, 14383, "burg_1", "wall6", 0);
 	SetDynamicObjectMaterial(CreateDynamicObject(19460, 1081.09180, -1313.87964, 21.73170,   0.00000, 0.00000, 0.00000, 32), 0, 14383, "burg_1", "wall6", 0);
 	SetDynamicObjectMaterial(CreateDynamicObject(19460, 1079.64441, -1313.25513, 21.73170,   0.00000, 0.00000, 90.00000, 32), 0, 14383, "burg_1", "wall6", 0);
@@ -1233,7 +1232,7 @@ Stare_Obiekty()
 	CreateDynamicObject(2684, 1078.07336, -1311.84863, 21.86770,   0.00000, 0.00000, 90.00000, 32);
 	CreateDynamicObject(2687, 1078.07739, -1311.30884, 21.83970,   0.00000, 0.00000, 90.00000, 32);
     CreateDynamicObject(3384, 1081.1053, -1311.9226, 21.9358,   0.00000, 180.00000, 180.00000, 32);
-	//Boki ÔøΩcian
+	//Boki úcian
 	//SetDynamicObjectMaterial(, 0, 2151, "cj_kitchen", "CJ_RED", 0);
 	SetDynamicObjectMaterial(CreateDynamicObject(18762, 1081.49597, -1311.59766, 21.64820,   0.00000, 90.00000, 90.00000, 32), 0, 2151, "cj_kitchen", "CJ_RED", 0);
 	SetDynamicObjectMaterial(CreateDynamicObject(18762, 1079.51868, -1313.65698, 21.64820,   0.00000, 90.00000, 0.00000, 32), 0, 2151, "cj_kitchen", "CJ_RED", 0);
@@ -1247,7 +1246,7 @@ Stare_Obiekty()
     SetDynamicObjectMaterial(CreateDynamicObject(19377, 1082.92090, -1313.85168, 23.29000,   0.00000, 90.00000, 0.00000, 32), 0, 14383, "burg_1", "wall6", 0);
 
 	//------------------------------
-	//FILLING COUNTRY TOR ÔøΩUZLOWY
+	//FILLING COUNTRY TOR ØUZLOWY
 	//------------------------------
 
 	CreateDynamicObject(1299,-1123.60473633,-1060.97473145,132.61489868,0.00000000,0.00000000,0.00000000,0,0); //object(smashboxpile) (1)
@@ -1451,7 +1450,7 @@ Stare_Obiekty()
 	CreateDynamicObject(7657,4.38200000,-6.50650000,999.01630000,0.00000000,0.00000000,357.69070000); //
 	CreateDynamicObject(7657,2.03510000,-6.10010000,998.36650000,270.27000000,248.16980000,246.35910000); //
 
-	//obiekty wodnych domÔøΩw
+	//obiekty wodnych domÛw
 	CreateDynamicObject(16000,655.50292969,-2030.10449219,0.75000000,90.00000000,0.00000000,0.00000000,0,0); //object(drvin_screen) (1)
 	CreateDynamicObject(16000,655.51531982,-2051.39062500,0.75000000,90.00000000,0.00000000,180.00000000,0,0); //object(drvin_screen) (2)
 	CreateDynamicObject(2782,663.85253906,-2032.21374512,1.04672658,0.00000000,0.00000000,142.92004395,0,0); //object(cj_oyster_2) (1)
@@ -1529,7 +1528,7 @@ Stare_Obiekty()
 	//                                                      !!!!!!!!!!
 	//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Nowe-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Obiekty-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-MichaÔøΩa-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Micha≥a-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 	//                                                     !!!!!!!!!!!
 	//                                                     !!!!!!!!!!!
 	//=======================================================================================================================
@@ -1597,13 +1596,13 @@ Stare_Obiekty()
 	CreateDynamicObject(2942,1186.23657227,-1368.89025879,13.30330658,0.00000000,0.00000000,91.31002808,0,0); //object(kmb_atm1)(14)
 	CreateDynamicObject(2942,1505.09997559,-1755.40002441,13.19999981,0.00000000,0.00000000,180.00000000,0,0); //object(kmb_atm1) (1) bakomat przy dmv
 	CreateDynamicObject(2943,1497.40002441,-1825.40002441,12.89999962,0.00000000,86.00000000,236.00000000,0,0); //object(kmb_atm2) (1) zniszczony bankomat
-		//PAÔøΩDZIOCH
+		//PAèDZIOCH
 	CreateDynamicObject(19324, 2423.41968, -2066.13257, 13.16730,   0.00000, 0.00000, -90.00000); // Pod KT
 	CreateDynamicObject(19324, 1001.01910, -923.60107, 41.94500,   0.00000, 0.00000, -80.00000); // Stacja Temple
-	CreateDynamicObject(19324, 388.61719, -1806.26758, 7.45220,   0.00000, 0.00000, -140.00000); // Pod ibizÔøΩ
+	CreateDynamicObject(19324, 388.61719, -1806.26758, 7.45220,   0.00000, 0.00000, -140.00000); // Pod ibizπ
 	CreateDynamicObject(19324, 647.26550, -1368.86865, 13.26730,   0.00000, 0.00000, -90.00000); // Pod San News
 	CreateDynamicObject(19324, 661.38593, -575.82269, 15.95790,   0.00000, 0.00000, -90.00000); // Stacja Dillmore
-	CreateDynamicObject(19324, 2273.16821, -76.34060, 26.18810,   0.00000, 0.00000, 0.00000); // UrzÔøΩd PC
+	CreateDynamicObject(19324, 2273.16821, -76.34060, 26.18810,   0.00000, 0.00000, 0.00000); // Urzπd PC
 
 	//obiekrt groove (blokada groove st.)
 
@@ -1729,17 +1728,17 @@ Stare_Obiekty()
 	CreateDynamicObject(2939,2351.29687500,-1251.53027344,22.67210579,157.14843750,0.00000000,266.21520996,0,0); //object(ramp_bot)(2)
 	CreateDynamicObject(2939,2345.31298828,-1252.29846191,22.67099571,172.35662842,0.00000000,266.21520996,0,0); //object(ramp_bot)(3)
 
-	//obiekty cywilne przystanek BAZA MECHANIKÔøΩW (pÔøΩtla)
+	//obiekty cywilne przystanek BAZA MECHANIK”W (pÍtla)
 	CreateDynamicObject(1280,2821.6999512,-1578.5999756,10.5000000,0.0000000,0.0000000,344.0000000,0,0); //object(parkbench1) (1)
 	CreateDynamicObject(1280,2822.1999512,-1582.4000244,10.5000000,0.0000000,0.0000000,23.9974365,0,0); //object(parkbench1) (2)
 	CreateDynamicObject(1280,2824.1000977,-1575.5000000,10.5000000,0.0000000,0.0000000,303.9971924,0,0); //object(parkbench1) (3)
 	CreateDynamicObject(1229,2825.1000977,-1573.0000000,11.6999998,0.0000000,0.0000000,140.0000000,0,0); //object(bussign1) (1)
 	CreateDynamicObject(1229,2821.8000488,-1584.8000488,11.6999998,0.0000000,0.0000000,15.9987793,0,0); //object(bussign1) (2)
 	CreateDynamicObject(2431,2820.3999023,-1579.0999756,13.3999996,346.0000000,0.0000000,71.7500000,0,0); //napis2 BM petla
-	//SetDynamicObjectMaterialText(BMpetla, "Baza MechanikÔøΩw (pÔøΩtla)", 0, OBJECT_MATERIAL_SIZE_256x128,"Arial", 28, 1, 0xFFFFFFFF, 0, OBJECT_MATERIAL_TEXT_ALIGN_CENTER);
-	//SetDynamicObjectMaterialText(,0,"{000000}Przystanek\nBaza MechanikÔøΩw (pÔøΩtla)\nKursuje linia: 72",28,"Ariel",30,0,0xFFFFFFFF,0x000000FF,0);
+	//SetDynamicObjectMaterialText(BMpetla, "Baza MechanikÛw (pÍtla)", 0, OBJECT_MATERIAL_SIZE_256x128,"Arial", 28, 1, 0xFFFFFFFF, 0, OBJECT_MATERIAL_TEXT_ALIGN_CENTER);
+	//SetDynamicObjectMaterialText(,0,"{000000}Przystanek\nBaza MechanikÛw (pÍtla)\nKursuje linia: 72",28,"Ariel",30,0,0xFFFFFFFF,0x000000FF,0);
 	//new obiekt_petla = CreateDynamicObject(19466, 2820.3999023,-1579.0999756,13.3999996,346.0000000,0.0000000,71.7500000,0);
-	//SetDynamicObjectMaterialText(obiekt_petla, 0, "{000000}Przystanek\nBaza MechanikÔøΩw (pÔøΩtla)\nKursuje linia: 72",OBJECT_MATERIAL_SIZE_256x128, "Arial", 24, 1,0xFFFFFFFF, 0, 0);
+	//SetDynamicObjectMaterialText(obiekt_petla, 0, "{000000}Przystanek\nBaza MechanikÛw (pÍtla)\nKursuje linia: 72",OBJECT_MATERIAL_SIZE_256x128, "Arial", 24, 1,0xFFFFFFFF, 0, 0);
 	CreateDynamicObject(970,2834.5000000,-1580.3000488,10.6000004,0.0000000,0.0000000,58.0000000,0,0); //object(fencesmallb) (1)
 	CreateDynamicObject(949,2822.5000000,-1576.8000488,10.6999998,0.0000000,0.0000000,0.0000000,0,0); //object(plant_pot_4) (1)
 	CreateDynamicObject(949,2821.3999023,-1580.5000000,10.6999998,0.0000000,0.0000000,0.0000000,0,0); //object(plant_pot_4) (2)
@@ -1756,7 +1755,7 @@ Stare_Obiekty()
 	CreateDynamicObject(949,2825.8000488,-1574.3000488,10.6999998,0.0000000,0.0000000,0.0000000,0,0); //object(plant_pot_4) (4)
 	CreateDynamicObject(949,2823.3000488,-1584.3000488,10.6999998,0.0000000,0.0000000,0.0000000,0,0); //object(plant_pot_4) (6)
 	CreateDynamicObject(970,2825.3999023,-1586.0999756,10.6000004,0.0000000,0.0000000,331.9945068,0,0); //object(fencesmallb) (5)
-	CreateDynamicObject(14467,2792.3999023,-1535.8000488,12.8000002,0.0000000,0.0000000,50.0000000,0,0); //krÔøΩl mechanikÔøΩw
+	CreateDynamicObject(14467,2792.3999023,-1535.8000488,12.8000002,0.0000000,0.0000000,50.0000000,0,0); //krÛl mechanikÛw
 	
 	//stacja benzynowa pod paczkiem
 	CreateDynamicObject(13296,1017.70147705,-1353.82678223,15.60587311,0.00000000,0.00000000,270.25000000,0,0); //object(ce_roadsidegas) (1)
@@ -1928,7 +1927,7 @@ Stare_Obiekty()
 	CreateDynamicObject(1023,2446.1001000,-1760.8000500,14.7000000,0.0000000,0.0000000,282.0000000,0,0); //object(spl_b_bbb_m) (1)
 	CreateDynamicObject(10282,2452.5000000,-1759.1999500,13.7000000,0.0000000,0.0000000,2.0000000,0,0); //object(mich_int_sfe) (1)
 	CreateDynamicObject(1128,2446.8000500,-1763.9000200,14.2000000,60.0000000,0.0000000,358.0000000,0,0); //object(rf_lr_bl1) (1)
-	//obiekty cywilne ( ZNISZCZONE studio tatuaÔøΩu)
+	//obiekty cywilne ( ZNISZCZONE studio tatuaøu)
 	CreateDynamicObject(8231,-218.42950439,-25.94187164,1001.49285889,0.00000000,0.00000000,0.00000000,0,15); //object(vgsbikeschl05) (1)
 	CreateDynamicObject(9039,-230.99691772,13.53933716,1005.83648682,0.00000000,0.00000000,0.00000000,0,15); //object(csrspalace04_lvs) (1)
 	CreateDynamicObject(2296,-219.62890625,-26.70410156,999.78973389,0.00000000,0.00000000,0.00000000,0,15); //object(tv_unit_1) (1)
@@ -2206,7 +2205,7 @@ Stare_Obiekty()
 	//#CreateDynamicObject(1349,1831.69128418,-1845.47314453,13.14850998,0.00000000,0.00000000,129.61004639,0,0); //object(cj_shtrolly)(6)
 	//#CreateDynamicObject(1349,1830.03417969,-1839.27929688,13.14850998,0.00000000,0.00000000,258.94226074,0,0); //object(cj_shtrolly)(7)
 
-	//koÔøΩciÔøΩÔøΩ + konfesjonaÔøΩ
+	//koúciÛ≥ + konfesjona≥
 	CreateDynamicObject(9931, 1947.54004, -368.51270, 1108.01086,   0.00000, 0.00000, 90.00000,0,3); //
 	CreateDynamicObject(3976, 1970.65723, -341.23883, 1100.22949,   0.00000, 0.00000, 0.00000,0,3); //
 	CreateDynamicObject(9931, 1980.55762, -368.51563, 1108.01086,   0.00000, 0.00000, 90.00000,0,3); //
@@ -2532,7 +2531,7 @@ Stare_Obiekty()
 	CreateDynamicObject(1232,2743.20483398,-1090.13061523,71.21476746,0.00000000,0.00000000,0.00000000,0,0); //object(streetlamp1) (2)
 
 
-	//zajezdnia autobusowa commerce (+ wystrÔøΩj) obiekty cywilne
+	//zajezdnia autobusowa commerce (+ wystrÛj) obiekty cywilne
 	CreateDynamicObject(1229,1146.40002441,-1734.80004883,14.30000019,0.00000000,0.00000000,90.00000000,0,0); //object(bussign1) (1)
 	CreateDynamicObject(1257,1135.69995117,-1732.69995117,14.10000038,0.00000000,0.00000000,90.00000000,0,0); //object(bustopm) (1)
 	CreateDynamicObject(1257,1142.30004883,-1732.80004883,14.10000038,0.00000000,0.00000000,90.00000000,0,0); //object(bustopm) (2)
@@ -2600,7 +2599,7 @@ Stare_Obiekty()
 	CreateDynamicObject(1280,1163.00000000,-1756.09997559,13.00000000,0.00000000,0.00000000,359.99816895,0,0); //object(parkbench1) (2)
 	CreateDynamicObject(1280,1139.40002441,-1758.80004883,13.00000000,0.00000000,0.00000000,89.99450684,0,0); //object(parkbench1) (3)
 
-	//SALA PRZERSUCHAÔøΩ int 10
+	//SALA PRZERSUCHA— int 10
 
 	CreateDynamicObject(18065,2353.54809570,591.89672852,4894.79394531,0.00000000,0.00000000,0.00000000,0,10); //object(ab_sfammumain)(1)
 	CreateDynamicObject(1649,2380.29003906,588.78314209,4898.24072266,0.00000000,0.00000000,0.00000000,0,10); //object(wglasssmash)(1)
@@ -3057,7 +3056,7 @@ Stare_Obiekty()
 	CreateDynamicObject(1886,-1683.59997559,1062.90002441,23.60000038,10.00000000,0.00000000,315.00000000,0,0); //object(shop_sec_cam) (7)
 	
 	
-	// gÔøΩÔøΩwne vica firekku
+	// g≥Ûwne vica firekku
 	
 	CreateDynamicObject(3944,1298.59960938,-1082.00000000,5969.89990234,0.00000000,0.00000000,0.00000000,0,0); //object(bistro_blok) (1)
 	CreateDynamicObject(3944,1298.80004883,-1085.59997559,5969.70019531,0.00000000,0.00000000,179.99450684,0,0); //object(bistro_blok) (2)
@@ -3219,7 +3218,7 @@ Stare_Obiekty()
 	CreateDynamicObject(1533,1300.90002441,-1095.50000000,5971.20019531,0.00000000,0.00000000,180.00000000,0,0); //object(gen_doorext12) (2)
 
 
-	//vica forelli gÔøΩowne parking
+	//vica forelli g≥owne parking
 
 	
 	CreateDynamicObject(2765,1299.19921875,-989.09960938,37.70000076,90.00000000,179.99450684,179.99450684,0,0); //object(cj_cb_list1) (1)
