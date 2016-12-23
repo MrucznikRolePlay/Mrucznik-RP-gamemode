@@ -398,11 +398,15 @@ AntyReklama(result[])
 	if ( dwukrop>=0)//adersy ip
 	{
 		if(result[dwukrop+1] != '\0')
+		{
 			if(result[dwukrop+1] >= '1' && result[dwukrop+1] <= '9')
 				return 3;
+		}
 		else if(result[dwukrop+2] != '\0')
+		{
 			if(result[dwukrop+2] >= '1' && result[dwukrop+2] <= '9')
 				return 3;
+		}
 	}
 	return 0;
 }
@@ -1849,6 +1853,10 @@ IsACop(playerid)
 	    if(member==1 || member==2 || member==3)
 		{
 		    return 1;
+		}
+		else if(IsARR(playerid))
+		{
+			return 1;
 		}
 		else if(leader==1 || leader==2 || leader==3)
 		{
@@ -3379,6 +3387,30 @@ IsAtBar(playerid)
 	return 0;
 }
 
+IsAtWarsztat(playerid)
+{
+    if(IsPlayerConnected(playerid))
+	{
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 5.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 5.0, 1805.4418,-1713.5634,13.5176))
+		{//Warsztat czerwony
+		    return 1;
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 40.0, 2333.7273,-1241.2806,22.0628))
+		{//warsztat niebieski
+		    return 1;
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 20.0, 644.3516,-503.4102,15.8941))
+		{//warsztat dillmore
+		  	return 1;
+		}
+        else if(IsPlayerInRangeOfPoint(playerid, 20.0, 991.3269,-1347.3071,12.9392))
+		{//warsztat przy p1czkarni
+		  	return 1;
+		}
+	}
+	return 0;
+}
+
 IsARower(carid)
 {
 	if(GetVehicleModel(carid) == 509 || GetVehicleModel(carid) == 481 || GetVehicleModel(carid) == 510)//rowery
@@ -3436,7 +3468,6 @@ IsACopCar(carid)
         if(CarData[lID][c_Owner] == FRAC_LSPD) return 1;
         else if(CarData[lID][c_Owner] == FRAC_FBI) return 1;
         else if(CarData[lID][c_Owner] == FRAC_NG) return 1;
-		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
 		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
     }
 	return 0;
@@ -4152,7 +4183,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
-			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1 || IsARR(playerid) && OnDuty[playerid] == 1)
+			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1)
 			    {
       				PoziomPoszukiwania[playerid] = 0;
 				}
@@ -4165,7 +4196,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 				{
 					if(IsPlayerConnected(i))
 					{
-					    if(IsACop(i) || IsARR(i))
+					    if(IsACop(i))
 					    {
 					        if(gCrime[i] == 0)
 					        {
@@ -7184,7 +7215,7 @@ PolicjantWStrefie(Float:radi, playerid)
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
 	    	if(IsPlayerInRangeOfPoint(i, radi, rangex, rangey, rangez))
 	        {
-	            if(IsACop(i) || IsARR(i))
+	            if(IsACop(i))
 	            {
 	            	return 1;
 	            }

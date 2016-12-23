@@ -443,30 +443,6 @@ new FractionNames[][40] = {
     "Brak"
 };
 
-new SkrotFrakcji[][40] = {
-    "Brak",
-    "LSPD",
-    "FBI",
-    "SASP",
-    "LSMC",
-    "BCF",
-    "YKZ",
-    "USSS",
-    "HA",
-    "SN",
-    "KT",
-    "Rz¹d",//11
-    "GS",
-    "187 NPA",
-    "HN 14",
-    "NoA",
-    "HN",
-    "LSFD",
-    "RR",
-    "Brak",
-    "Brak"
-};
-
 new JobNames[][20] = {
     "Brak",
     "£owca nagród",
@@ -504,15 +480,6 @@ new SavePlayerPos[MAX_PLAYERS][SavePlayerPosEnum];
 //new UpdateSeconds = 1;
 
 new Music[MAX_PLAYERS];
-new Songs[7][1] = {
-{1187},
-{1185},
-{1183},
-{1097},
-{1076},
-{1068},
-{1062}
-};
 
 enum eBO {
     bM, Float:bX, Float:bY, Float:bZ, Float:brX, Float:brY, Float:brZ

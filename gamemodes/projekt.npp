@@ -1,0 +1,89 @@
+<NotepadPlus>
+    <Project name="Mrucznik-RP">
+        <Folder name="gamemodes">
+            <Folder name="modules">
+                <Folder name="Inne">
+                    <File name="modules\Inne\AC.inc" />
+                    <File name="modules\Inne\external.pwn" />
+                    <File name="modules\Inne\ibiza.inc" />
+                    <File name="modules\Inne\soundmanager.pwn" />
+                    <File name="modules\Inne\system_aut.pwn" />
+                    <File name="modules\Inne\system_kp.pwn" />
+                </Folder>
+                <Folder name="new">
+                    <Folder name="bramy">
+                        <File name="modules\new\bramy\bramy.def" />
+                        <File name="modules\new\bramy\bramy.hwn" />
+                        <File name="modules\new\bramy\bramy.pwn" />
+                    </Folder>
+                    <Folder name="wejsca">
+                        <File name="modules\new\wejscia\wejscia.def" />
+                        <File name="modules\new\wejscia\wejscia.hwn" />
+                        <File name="modules\new\wejscia\wejscia.pwn" />
+                    </Folder>
+                </Folder>
+                <Folder name="Obiekty">
+                    <File name="modules\Obiekty\!empty.pwn" />
+                    <File name="modules\Obiekty\admin.pwn" />
+                    <File name="modules\Obiekty\alhambra.pwn" />
+                    <File name="modules\Obiekty\ballas.pwn" />
+                    <File name="modules\Obiekty\bank.pwn" />
+                    <File name="modules\Obiekty\basen.pwn" />
+                    <File name="modules\Obiekty\bor.pwn" />
+                    <File name="modules\Obiekty\bramy.pwn" />
+                    <File name="modules\Obiekty\bs.pwn" />
+                    <File name="modules\Obiekty\bus.pwn" />
+                    <File name="modules\Obiekty\christmas.pwn" />
+                    <File name="modules\Obiekty\dillimore.pwn" />
+                    <File name="modules\Obiekty\dmv.pwn" />
+                    <File name="modules\Obiekty\fam_fdu.pwn" />
+                    <File name="modules\Obiekty\fbi.pwn" />
+                    <File name="modules\Obiekty\grove.pwn" />
+                    <File name="modules\Obiekty\ha.pwn" />
+                    <File name="modules\Obiekty\ibiza.pwn" />
+                    <File name="modules\Obiekty\icc.pwn" />
+                    <File name="modules\Obiekty\kt.pwn" />
+                    <File name="modules\Obiekty\kubi.inc" />
+                    <File name="modules\Obiekty\las.pwn" />
+                    <File name="modules\Obiekty\lsfd.pwn" />
+                    <File name="modules\Obiekty\lsmc.pwn" />
+                    <File name="modules\Obiekty\lspd.pwn" />
+                    <File name="modules\Obiekty\ls_grape.pwn" />
+                    <File name="modules\Obiekty\ng.pwn" />
+                    <File name="modules\Obiekty\pc.pwn" />
+                    <File name="modules\Obiekty\rsc.pwn" />
+                    <File name="modules\Obiekty\sad.pwn" />
+                    <File name="modules\Obiekty\sn.pwn" />
+                    <File name="modules\Obiekty\vagos.pwn" />
+                    <File name="modules\Obiekty\vinyl.pwn" />
+                    <File name="modules\Obiekty\wps.pwn" />
+                    <File name="modules\Obiekty\ykz.pwn" />
+                </Folder>
+                <File name="modules\definicje.pwn" />
+                <File name="modules\enum.pwn" />
+                <File name="modules\forward.pwn" />
+                <File name="modules\funkcje.pwn" />
+                <File name="modules\kolory.pwn" />
+                <File name="modules\komendy.pwn" />
+                <File name="modules\mru_mysql.pwn" />
+                <File name="modules\NOWE_ZMIENNE.pwn" />
+                <File name="modules\obiekty.pwn" />
+                <File name="modules\OnDialogResponse.pwn" />
+                <File name="modules\pickupy.pwn" />
+                <File name="modules\textdraw.pwn" />
+                <File name="modules\timery.pwn" />
+            </Folder>
+            <File name="Mrucznik-RP.pwn" />
+        </Folder>
+        <Folder name="filterscripts">
+            <File name="I:\2_Mrucznik Role Play\SA-MP\Mrucznik-RP-2.5\filterscripts\afk.pwn" />
+            <File name="I:\2_Mrucznik Role Play\SA-MP\Mrucznik-RP-2.5\filterscripts\animy.pwn" />
+            <File name="I:\2_Mrucznik Role Play\SA-MP\Mrucznik-RP-2.5\filterscripts\attachments.pwn" />
+            <File name="I:\2_Mrucznik Role Play\SA-MP\Mrucznik-RP-2.5\filterscripts\flymode.pwn" />
+            <File name="I:\2_Mrucznik Role Play\SA-MP\Mrucznik-RP-2.5\filterscripts\fsdebug.pwn" />
+            <File name="I:\2_Mrucznik Role Play\SA-MP\Mrucznik-RP-2.5\filterscripts\Idlewood.pwn" />
+            <File name="I:\2_Mrucznik Role Play\SA-MP\Mrucznik-RP-2.5\filterscripts\scanhp.pwn" />
+            <File name="I:\2_Mrucznik Role Play\SA-MP\Mrucznik-RP-2.5\filterscripts\sobeitblock.pwn" />
+        </Folder>
+    </Project>
+</NotepadPlus>
