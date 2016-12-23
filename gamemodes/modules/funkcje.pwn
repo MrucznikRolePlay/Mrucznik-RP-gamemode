@@ -1,5 +1,14 @@
 //funkcje.pwn     AKTUALNA MAPA
 
+// swieta
+public swieta_dajKase(playa) {
+	new kaska = 250000 + random(300000); // mysle ze spoko nagroda a rzadko wypada :P
+	DajKase(playa, kaska);
+	new string[64];
+	format(string, sizeof(string), "Otrzymujesz $%d od miko³aja! Wszystkiego najlepszego!", kaska);
+	SendClientMessage(playa, 0x7CFC00AA, string);
+}
+
 //2.5.2
 
 stock GetMajatek(playerid)
@@ -52,17 +61,15 @@ DialogListaFrakcji()
 	}
 	safe_return frakcje;
 }
-
 DialogListaSkinow(frakcja)
 {
-	new skiny[512];
+	new skiny[22];
 	for(new i=0;i<MAX_SKIN_SELECT;i++)
 	{
 		if(FRAC_SKINS[frakcja][i] == 0) break;
-		format(skiny, sizeof(skiny), "%s%d\nSkin %d\n", skiny, FRAC_SKINS[frakcja][i], i);
+		skiny[i] = FRAC_SKINS[frakcja][i];
 	}
-	strdel(skiny, strlen(skiny)-2, strlen(skiny));
-	safe_return skiny;
+	return skiny;
 }
 
 stock PDTuneSultan(vehicleid)
@@ -6900,7 +6907,7 @@ OOCNews(color,const string[])
 	}
 }
 
-SendTeamMessage(team, color, string[])
+SendTeamMessage(team, color, string[], isDepo = 0)
 {
 	foreach(Player, i)
 	{
@@ -6908,7 +6915,10 @@ SendTeamMessage(team, color, string[])
 		{
 		    if(PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team)
 		    {
-				SendClientMessage(i, color, string);
+		    	printf("isdepo %d       gmutedepo[i] = %d", isDepo, gMuteDepo[i]);
+		    	if(isDepo == 1 && gMuteDepo[i] == 0) {
+		    		SendClientMessage(i, color, string);
+		    	}
 			}
 		}
 	}

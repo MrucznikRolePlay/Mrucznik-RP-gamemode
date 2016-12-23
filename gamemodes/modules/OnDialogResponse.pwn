@@ -1,4 +1,31 @@
 //OnDialogResponse.pwn  AKTUALNA MAPA
+forward OnDialogDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
+public OnDialogDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
+	if(dialogid >= DIALOG_HA_ZMIENSKIN(1) && dialogid <= DIALOG_HA_ZMIENSKIN(MAX_FRAC))
+	{
+		if(response)
+		{
+			new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+		else
+		{
+			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
+		}
+	}
+	else if(dialogid == DIALOGID_UNIFORM)
+	{
+		if(response)
+		{
+            new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
+			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
+}
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	#if DEBUG == 1
@@ -40,35 +67,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 	}*/
 	//2.5.2
-	if(dialogid == DIALOGID_UNIFORM)
+	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)
 		{
-            new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
-			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		}
-	}
-	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
-	{
-		if(response)
-		{
-			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Zmiana ubrania", DialogListaSkinow(listitem+1), "Start", "Anuluj");
-		}
-	}
-	else if(dialogid >= DIALOG_HA_ZMIENSKIN(1) && dialogid <= DIALOG_HA_ZMIENSKIN(MAX_FRAC))
-	{
-		if(response)
-		{
-			new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
-			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		}
-		else
-		{
-			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
+			static array[1][1];
+			new models[22];
+			models = DialogListaSkinow(listitem+1);
+			ShowPlayerPreviewModelDialog(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Wybierz Ubranie", models, array, "Wybierz", "Anuluj");
 		}
 	}
 	
@@ -2676,8 +2682,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    DajKase(playerid,-5000);
 						    GameTextForPlayer(playerid, "~r~-$5000", 5000, 1);
 							PlayerInfo[playerid][pGun9] = 43;
-							PlayerInfo[playerid][pAmmo9] += 10;
-						    GivePlayerWeapon(playerid, 43, 10);
+							PlayerInfo[playerid][pAmmo9] += 100;
+						    GivePlayerWeapon(playerid, 43, 100);
 							SendClientMessage(playerid, COLOR_GRAD4, "Aparat zakupiony! Mo¿esz nim teraz robiæ zdjêcia!");
 							return 1;
 						}
@@ -12547,6 +12553,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    if(response)
 		    {
 		        new veh = GetPlayerVehicleID(playerid);
+		        new dont_override = false;
 		        new engine,lights,alarm,doors,bonnet,boot,objective;
 		        GetVehicleParamsEx(veh,engine,lights,alarm,doors,bonnet,boot,objective);
 
@@ -12668,6 +12675,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         }
                     }
                 }
+                else if(strfind(inputtext, "W³asny Stream") != -1)
+                {
+                    if(!response) return 1;
+                    if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
+                    	dont_override = true;
+                    	ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny stream", "Wklej poni¿ej link do streama", "Start", "Wróæ");
+                    }
+                }
                 else if(strfind(inputtext, "Wy³¹cz radio") != -1)
                 {
                     if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
@@ -12711,10 +12726,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
                 //
-                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nWy³¹cz radio", komunikat);
+                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nW³asny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 //
-				ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
+                if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
+		}
+		else if(dialogid == 670) {
+			if(response)
+			{
+				new veh = GetPlayerVehicleID(playerid);
+				if(IsAValidURL(inputtext))
+				{
+					if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
+						foreach(Player, i) {
+							if(IsPlayerInVehicle(i, veh)) {
+								PlayAudioStreamForPlayer(i, inputtext);
+							}
+						}
+					}
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
+					ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny Stream", "WprowadŸ adres URL do radia/piosenki", "Start", "Anuluj");
+				}
+			}
+			return 1;
 		}
         else if(dialogid == 667)
         {
