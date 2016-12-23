@@ -13,8 +13,9 @@
 new vehicleid;
 new dostalPrezent[MAX_PLAYERS][2];
 new dodatek[MAX_PLAYERS];
+new sanie = false;
 new gift_real[1750];
-new MAX_GIFTS = 1750;
+new MAX_GIFTS = 1749;
 new gifts = 0;
 new obj[31];
 new SantaPickupModel[][1] = {
@@ -36,44 +37,44 @@ new dodatki[][1] = {
 };
 public OnFilterScriptExit() {
     for(new i=0, j=sizeof(obj); i<j; i++) {
-        DestroyObject(obj[i]);
+        DestroyDynamicObject(obj[i]);
     }
     DestroyVehicle(vehicleid);
     return 1;
 }
 public OnFilterScriptInit()
 {
-        obj[0] = CreateObject(1251, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[1] = CreateObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[2] = CreateObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[3] = CreateObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[4] = CreateObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[5] = CreateObject(1736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[6] = CreateObject(1736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[7] = CreateObject(1736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[8] = CreateObject(1736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[9] = CreateObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[10] = CreateObject(1408, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[11] = CreateObject(1408, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[12] = CreateObject(1724, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[13] = CreateObject(2745, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[14] = CreateObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[15] = CreateObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[16] = CreateObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[17] = CreateObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[18] = CreateObject(19054, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[19] = CreateObject(19055, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[20] = CreateObject(19058, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[21] = CreateObject(19056, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[22] = CreateObject(19065, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[23] = CreateObject(1251, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[24] = CreateObject(1251, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[25] = CreateObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[26] = CreateObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[27] = CreateObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[28] = CreateObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[29] = CreateObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        obj[30] = CreateObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[0] = CreateDynamicObject(1251, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[1] = CreateDynamicObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[2] = CreateDynamicObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[3] = CreateDynamicObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[4] = CreateDynamicObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[5] = CreateDynamicObject(1736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[6] = CreateDynamicObject(1736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[7] = CreateDynamicObject(1736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[8] = CreateDynamicObject(1736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[9] = CreateDynamicObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[10] = CreateDynamicObject(1408, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[11] = CreateDynamicObject(1408, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[12] = CreateDynamicObject(1724, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[13] = CreateDynamicObject(2745, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[14] = CreateDynamicObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[15] = CreateDynamicObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[16] = CreateDynamicObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[17] = CreateDynamicObject(19439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[18] = CreateDynamicObject(19054, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[19] = CreateDynamicObject(19055, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[20] = CreateDynamicObject(19058, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[21] = CreateDynamicObject(19056, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[22] = CreateDynamicObject(19065, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[23] = CreateDynamicObject(1251, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[24] = CreateDynamicObject(1251, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[25] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[26] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[27] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[28] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[29] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        obj[30] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         vehicleid = 578;
         for(new i=0; i<MAX_PLAYERS; i++) {
             OnPlayerConnect(i);
@@ -84,44 +85,54 @@ CMD:sanie(playerid,params[])
 {
     // zabezpieczenie komendy mozesz zrobic inne, w/e
     if(strval(params) != 19613) return 1;
-    new Float:x, Float:y, Float:z, Float:a;
-    GetPlayerPos(playerid, x, y, z);
-    GetPlayerFacingAngle(playerid, a);
-    vehicleid = CreateVehicle(578, x +2, y, z+4, a, -1, -1, 60);
-	AttachObjectToVehicle(obj[0], vehicleid, 0.000000, 1.699998, 0.634999, 0.000000, 0.000000, 0.000000); //Object Model: 1251 |
-	AttachObjectToVehicle(obj[1], vehicleid, 0.374999, 4.085045, 0.344999, -1.004999, 1.005000, 88.439956); //Object Model: 19315 |
-	AttachObjectToVehicle(obj[2], vehicleid, -0.389999, 4.085045, 0.344999, -1.004999, 1.005000, 88.439956); //Object Model: 19315 |
-	AttachObjectToVehicle(obj[3], vehicleid, -0.389999, 2.195002, 0.344999, -1.004999, 1.005000, 88.439956); //Object Model: 19315 |
-	AttachObjectToVehicle(obj[4], vehicleid, 0.359999, 2.195002, 0.344999, -1.004999, 1.005000, 88.439956); //Object Model: 19315 |
-	AttachObjectToVehicle(obj[5], vehicleid, 0.359999, 2.590011, 0.704999, -1.004999, 1.005000, 175.875076); //Object Model: 1736 |
-	AttachObjectToVehicle(obj[6], vehicleid, -0.344999, 2.590011, 0.704999, -1.004999, 1.005000, 175.875076); //Object Model: 1736 |
-	AttachObjectToVehicle(obj[7], vehicleid, -0.344999, 4.440053, 0.704999, -1.004999, 1.005000, 175.875076); //Object Model: 1736 |
-	AttachObjectToVehicle(obj[8], vehicleid, 0.399999, 4.440053, 0.704999, -1.004999, 1.005000, 175.875076); //Object Model: 1736 |
-	AttachObjectToVehicle(obj[9], vehicleid, 0.000000, 0.014999, 0.624999, 24.119993, 91.454948, 0.000000); //Object Model: 19439 |
-	AttachObjectToVehicle(obj[10], vehicleid, 1.459998, -1.769998, 0.869999, -152.759963, 0.000000, 90.824928); //Object Model: 1408 |
-	AttachObjectToVehicle(obj[11], vehicleid, -1.429998, -1.769998, 0.869999, -205.020217, 0.000000, 90.824928); //Object Model: 1408 |
-	AttachObjectToVehicle(obj[12], vehicleid, 0.549999, -0.584999, 0.329999, -358.785949, 0.000000, 178.260070); //Object Model: 1724 |
-	AttachObjectToVehicle(obj[13], vehicleid, 0.029999, -0.050000, 0.789999, -404.011169, 4.019999, 190.320129); //Object Model: 2745 |
-	AttachObjectToVehicle(obj[14], vehicleid, -0.509999, -1.389998, 0.454999, -359.790954, 91.454948, 450.616394); //Object Model: 19439 |
-	AttachObjectToVehicle(obj[15], vehicleid, -0.509999, -2.640012, 0.454999, -359.790954, 91.454948, 450.616394); //Object Model: 19439 |
-	AttachObjectToVehicle(obj[16], vehicleid, 0.519999, -2.640012, 0.454999, -359.790954, 91.454948, 450.616394); //Object Model: 19439 |
-	AttachObjectToVehicle(obj[17], vehicleid, 0.519999, -1.369999, 0.454999, -359.790954, 91.454948, 450.616394); //Object Model: 19439 |
-	AttachObjectToVehicle(obj[18], vehicleid, 0.519999, -1.369999, 1.104999, -361.800964, -2.009999, 358.155944); //Object Model: 19054 |
-	AttachObjectToVehicle(obj[19], vehicleid, -0.754999, -1.369999, 1.104999, -361.800964, -2.009999, 358.155944); //Object Model: 19055 |
-	AttachObjectToVehicle(obj[20], vehicleid, -0.714999, -3.770038, 1.104999, -361.800964, -2.009999, 358.155944); //Object Model: 19058 |
-	AttachObjectToVehicle(obj[21], vehicleid, 0.734999, -3.770038, 1.104999, -361.800964, -2.009999, 358.155944); //Object Model: 19056 |
-	AttachObjectToVehicle(obj[22], vehicleid, 0.085000, -0.659999, 1.769998, 1.004999, 17.084999, 94.469940); //Object Model: 19065 |
-	AttachObjectToVehicle(obj[23], vehicleid, -1.149999, -1.889998, -0.439999, 1.004999, 17.084999, 1.005000); //Object Model: 1251 |
-	AttachObjectToVehicle(obj[24], vehicleid, 1.119999, -1.889998, -0.439999, 1.004999, 17.084999, 1.005000); //Object Model: 1251 |
-	AttachObjectToVehicle(obj[25], vehicleid, -1.224999, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000); //Object Model: 1319 |
-	AttachObjectToVehicle(obj[26], vehicleid, 1.079999, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000); //Object Model: 1319 |
-	AttachObjectToVehicle(obj[27], vehicleid, 1.079999, -3.960043, 0.000000, 0.000000, 0.000000, 0.000000); //Object Model: 1319 |
-	AttachObjectToVehicle(obj[28], vehicleid, -1.164999, -3.960043, 0.000000, 0.000000, 0.000000, 0.000000); //Object Model: 1319 |
-	AttachObjectToVehicle(obj[29], vehicleid, 0.994999, 1.904998, -0.129999, -53.265010, -1.004999, 6.030002); //Object Model: 1319 |
-	AttachObjectToVehicle(obj[30], vehicleid, -1.279998, 1.904998, -0.129999, -53.265010, -1.004999, 6.030002); //Object Model: 1319 |
-    LinkVehicleToInterior(vehicleid, 6);
-    PutPlayerInVehicle(playerid, vehicleid, 0);
-    return 1;
+    if(sanie) {
+        for(new i=0, j=sizeof(obj); i<j; i++) {
+            DestroyDynamicObject(obj[i]);
+        }
+        DestroyVehicle(vehicleid);
+        sanie = false;
+        return 1;
+    } else {
+        new Float:x, Float:y, Float:z, Float:a;
+        GetPlayerPos(playerid, x, y, z);
+        GetPlayerFacingAngle(playerid, a);
+        vehicleid = CreateVehicle(578, x +2, y, z+4, a, -1, -1, 60);
+        AttachDynamicObjectToVehicle(obj[0], vehicleid, 0.000000, 1.699998, 0.634999, 0.000000, 0.000000, 0.000000); //Object Model: 1251 |
+        AttachDynamicObjectToVehicle(obj[1], vehicleid, 0.374999, 4.085045, 0.344999, -1.004999, 1.005000, 88.439956); //Object Model: 19315 |
+        AttachDynamicObjectToVehicle(obj[2], vehicleid, -0.389999, 4.085045, 0.344999, -1.004999, 1.005000, 88.439956); //Object Model: 19315 |
+        AttachDynamicObjectToVehicle(obj[3], vehicleid, -0.389999, 2.195002, 0.344999, -1.004999, 1.005000, 88.439956); //Object Model: 19315 |
+        AttachDynamicObjectToVehicle(obj[4], vehicleid, 0.359999, 2.195002, 0.344999, -1.004999, 1.005000, 88.439956); //Object Model: 19315 |
+        AttachDynamicObjectToVehicle(obj[5], vehicleid, 0.359999, 2.590011, 0.704999, -1.004999, 1.005000, 175.875076); //Object Model: 1736 |
+        AttachDynamicObjectToVehicle(obj[6], vehicleid, -0.344999, 2.590011, 0.704999, -1.004999, 1.005000, 175.875076); //Object Model: 1736 |
+        AttachDynamicObjectToVehicle(obj[7], vehicleid, -0.344999, 4.440053, 0.704999, -1.004999, 1.005000, 175.875076); //Object Model: 1736 |
+        AttachDynamicObjectToVehicle(obj[8], vehicleid, 0.399999, 4.440053, 0.704999, -1.004999, 1.005000, 175.875076); //Object Model: 1736 |
+        AttachDynamicObjectToVehicle(obj[9], vehicleid, 0.000000, 0.014999, 0.624999, 24.119993, 91.454948, 0.000000); //Object Model: 19439 |
+        AttachDynamicObjectToVehicle(obj[10], vehicleid, 1.459998, -1.769998, 0.869999, -152.759963, 0.000000, 90.824928); //Object Model: 1408 |
+        AttachDynamicObjectToVehicle(obj[11], vehicleid, -1.429998, -1.769998, 0.869999, -205.020217, 0.000000, 90.824928); //Object Model: 1408 |
+        AttachDynamicObjectToVehicle(obj[12], vehicleid, 0.549999, -0.584999, 0.329999, -358.785949, 0.000000, 178.260070); //Object Model: 1724 |
+        AttachDynamicObjectToVehicle(obj[13], vehicleid, 0.029999, -0.050000, 0.789999, -404.011169, 4.019999, 190.320129); //Object Model: 2745 |
+        AttachDynamicObjectToVehicle(obj[14], vehicleid, -0.509999, -1.389998, 0.454999, -359.790954, 91.454948, 450.616394); //Object Model: 19439 |
+        AttachDynamicObjectToVehicle(obj[15], vehicleid, -0.509999, -2.640012, 0.454999, -359.790954, 91.454948, 450.616394); //Object Model: 19439 |
+        AttachDynamicObjectToVehicle(obj[16], vehicleid, 0.519999, -2.640012, 0.454999, -359.790954, 91.454948, 450.616394); //Object Model: 19439 |
+        AttachDynamicObjectToVehicle(obj[17], vehicleid, 0.519999, -1.369999, 0.454999, -359.790954, 91.454948, 450.616394); //Object Model: 19439 |
+        AttachDynamicObjectToVehicle(obj[18], vehicleid, 0.519999, -1.369999, 1.104999, -361.800964, -2.009999, 358.155944); //Object Model: 19054 |
+        AttachDynamicObjectToVehicle(obj[19], vehicleid, -0.754999, -1.369999, 1.104999, -361.800964, -2.009999, 358.155944); //Object Model: 19055 |
+        AttachDynamicObjectToVehicle(obj[20], vehicleid, -0.714999, -3.770038, 1.104999, -361.800964, -2.009999, 358.155944); //Object Model: 19058 |
+        AttachDynamicObjectToVehicle(obj[21], vehicleid, 0.734999, -3.770038, 1.104999, -361.800964, -2.009999, 358.155944); //Object Model: 19056 |
+        AttachDynamicObjectToVehicle(obj[22], vehicleid, 0.085000, -0.659999, 1.769998, 1.004999, 17.084999, 94.469940); //Object Model: 19065 |
+        AttachDynamicObjectToVehicle(obj[23], vehicleid, -1.149999, -1.889998, -0.439999, 1.004999, 17.084999, 1.005000); //Object Model: 1251 |
+        AttachDynamicObjectToVehicle(obj[24], vehicleid, 1.119999, -1.889998, -0.439999, 1.004999, 17.084999, 1.005000); //Object Model: 1251 |
+        AttachDynamicObjectToVehicle(obj[25], vehicleid, -1.224999, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000); //Object Model: 1319 |
+        AttachDynamicObjectToVehicle(obj[26], vehicleid, 1.079999, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000); //Object Model: 1319 |
+        AttachDynamicObjectToVehicle(obj[27], vehicleid, 1.079999, -3.960043, 0.000000, 0.000000, 0.000000, 0.000000); //Object Model: 1319 |
+        AttachDynamicObjectToVehicle(obj[28], vehicleid, -1.164999, -3.960043, 0.000000, 0.000000, 0.000000, 0.000000); //Object Model: 1319 |
+        AttachDynamicObjectToVehicle(obj[29], vehicleid, 0.994999, 1.904998, -0.129999, -53.265010, -1.004999, 6.030002); //Object Model: 1319 |
+        AttachDynamicObjectToVehicle(obj[30], vehicleid, -1.279998, 1.904998, -0.129999, -53.265010, -1.004999, 6.030002); //Object Model: 1319 |
+        LinkVehicleToInterior(vehicleid, 6);
+        PutPlayerInVehicle(playerid, vehicleid, 0);
+        sanie = true;
+        return 1;
+    }
 }
 CMD:prezent(playerid, params[]) {
     if(strval(params) != 19613) return 1;
@@ -133,7 +144,7 @@ CMD:prezent(playerid, params[]) {
 }
 public OnPlayerPickUpDynamicPickup(playerid,pickupid){
     new string[60];
-    for(new i=0; i<MAX_GIFTS; i++) {
+    for(new i=0; i<=MAX_GIFTS; i++) {
         if(pickupid == gift_real[i]) {
             new nagroda = random(13);
             if(nagroda >= 0 && nagroda <= 2) {
@@ -159,6 +170,7 @@ public OnPlayerPickUpDynamicPickup(playerid,pickupid){
             }
             DOF2_SaveFile();
             SendClientMessage(playerid, COLOR_LAWNGREEN, string);
+            DestroyDynamicPickup(pickupid);
         }    
     }
     return 1;

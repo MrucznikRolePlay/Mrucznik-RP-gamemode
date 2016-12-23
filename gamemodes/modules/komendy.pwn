@@ -1571,6 +1571,7 @@ CMD:namierz(playerid, params[])
 			}
 			if(IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
 			{
+                if(!PhoneOnline[giveplayerid]) return SendClientMessage(playerid, COLOR_GRAD1, "Ten gracz posiada wy³¹czony telefon komórkowy");
 				if(giveplayerid == playerid)
 				{
 					SendClientMessage(playerid, COLOR_GREY, "Nie mo¿esz szukaæ samego siebie!"); return 1;
@@ -16692,8 +16693,8 @@ CMD:zablokujtel(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pDonateRank] > 0 || PlayerInfo[playerid][pLevel] >= 3)
-        {
+        //if(PlayerInfo[playerid][pDonateRank] > 0 || PlayerInfo[playerid][pLevel] >= 3)
+        //{
 			if (!PhoneOnline[playerid])
 			{
 				PhoneOnline[playerid] = 1;
@@ -16704,12 +16705,12 @@ CMD:zablokujtel(playerid)
 				PhoneOnline[playerid] = 0;
                 MSGBOX_Show(playerid, "Telefon ~g~ON", MSGBOX_ICON_TYPE_OK);
 			}
-		}
-		else
-		{
-		    SendClientMessage(playerid, COLOR_GREY, "   Nie masz 3 levela / Nie posiadasz Konta premium !");
-            return 1;
-		}
+		//}
+		//else
+		//{
+		//    SendClientMessage(playerid, COLOR_GREY, "   Nie masz 3 levela / Nie posiadasz Konta premium !");
+        //   return 1;
+		//}
 	}
 	return 1;
 }

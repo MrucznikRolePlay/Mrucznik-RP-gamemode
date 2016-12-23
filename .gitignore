@@ -17,7 +17,20 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#---< My Excludes >---
+#Server files and plugins
+*.exe
+*.dll
+*.so
+*.pdb
 
+#Scriptfiles and plugins igonre
+scriptfiles/**
+plugins/**
 
 #AMX file format
 *.amx
+
+#Log files
+*.log
+/*.txt
