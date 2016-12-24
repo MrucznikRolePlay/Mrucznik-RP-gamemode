@@ -8030,7 +8030,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(PlayerInfo[playerid][pLevel] > 1) return 1;
 		    if(response)
 		    {
-		        gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; gOgloszenie[playerid] = 1;
+		        gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
 				TogglePlayerControllable(playerid, 0);
 				SetPlayerVirtualWorld(playerid, 0);
 				GUIExit[playerid] = 0;
@@ -15675,7 +15675,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new id = strval(inputtext);
         if(typ == 0)
         {
-            if(id < 1 || id > 18) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
+            if(id < 1 || id > 17) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
         }
         else
         {

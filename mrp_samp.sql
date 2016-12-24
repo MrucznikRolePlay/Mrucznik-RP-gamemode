@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `mru_konta` (
   `CK` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `Muted` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `Respect` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `Money` int(11) NOT NULL,
+  `Money` int(11) NOT NULL DEFAULT '5000000',
   `Bank` int(11) NOT NULL,
   `Crimes` smallint(5) unsigned NOT NULL DEFAULT '0',
   `Kills` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -336,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `mru_konta` (
   `Spawn` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `BW` smallint(5) unsigned NOT NULL DEFAULT '0',
   `Czystka` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `CarSlots` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `CarSlots` tinyint(3) unsigned NOT NULL DEFAULT '5',
   `Hat` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `FW` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `connected` tinyint(4) NOT NULL

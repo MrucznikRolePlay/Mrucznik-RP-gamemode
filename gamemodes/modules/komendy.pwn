@@ -658,10 +658,11 @@ CMD:reloadbans(playerid)
 	}
 	return 1;
 }
+#define SendClientFormattedMessage(%0,%1,%2) do{new _str[128];format(_str,128,%2);SendClientMessage(%0,%1,_str);}while(FALSE)
 
 CMD:pomoc2(playerid, params[])
 {
-    new string[1250];
+    new string[2000];
     //SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc /anim");
     format(string, sizeof(string), ""#KARA_TEKST"Komendy powszechne");
     format(string, sizeof(string), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Ogólne", string);
@@ -672,6 +673,7 @@ CMD:pomoc2(playerid, params[])
     format(string, sizeof(string), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Zwi¹zane z telefonem", string);
     format(string, sizeof(string), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Zwi¹zane z IRC", string);
     format(string, sizeof(string), "%s\n"#KARA_TEKST"Reszta komend", string);
+    new msg[128];
     switch(PlayerInfo[playerid][pJob]) {
         case 1: {
             format(string, sizeof(string), "%s\n    "#KARA_STRZALKA"(£owca G³ów)"#KARA_TEKST2" /namierz /wanted /poddajsie /zlecenie /(m)egafon", string);
@@ -791,7 +793,7 @@ CMD:pomoc2(playerid, params[])
     inline DIALOG_POMOC2(pid, dialogid, response, listitem, string:inputtext[]) {
         #pragma unused pid, dialogid, inputtext
         if(!response) return 1;
-        new komendy[750];
+        new komendy[4000];
         inline DIALOG_POMOC2_POWROT(pid1, dialogid1, response1, listitem1, string:inputtext1[]) {
             #pragma unused pid1, dialogid1, listitem1, inputtext1
             if(!response1) return Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2, DIALOG_STYLE_LIST, "Komendy", string, "Ok", "Anuluj");
@@ -822,7 +824,7 @@ CMD:pomoc2(playerid, params[])
                 format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(w)iadomosc /(o)oc /(k)rzyk /(s)zept", komendy);
                 format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(l)ocal /b /(og)loszenia /(f)amily", komendy);
                 format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /(n)ewbie /sprobuj /togooc /tognews", komendy);
-                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /togog /togfam /togw /togtel", komendy);
+                format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /togfam /togw /togtel", komendy);
                 format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /toglicznik /togdepo /(f)amily(o)oc /togadmin", komendy);
                 format(komendy, sizeof(komendy), "%s\n    "#KARA_TEKST2" /tognewbie /me", komendy);
                 Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2_POWROT, DIALOG_STYLE_TABLIST, "Podrêcznik", komendy, "Ok", "Wróæ");
@@ -858,7 +860,9 @@ CMD:pomoc2(playerid, params[])
                 return Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2, DIALOG_STYLE_LIST, "Komendy", string, "Ok", "Anuluj");
             }
         } 
+        SendClientFormattedMessage(playerid, COLOR_RED, "Sizeof(komendy) #1: %d", msg, sizeof(komendy));
     }
+    SendClientFormattedMessage(playerid, COLOR_RED, "Sizeof(string) #1: %d", sizeof(string));
     Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2, DIALOG_STYLE_LIST, "Komendy", string, "Ok", "Anuluj");
     return true;
 }
@@ -1829,27 +1833,6 @@ CMD:odznaka(playerid, params[])
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"Identyfikator uprawnia do obserwacji wszytkich dzia³añ");
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"jedn. adm. pub. oraz otrzymywania informacji o tych dzia³aniach.");
 						SendClientMessage(giveplayerid, COLOR_NEWS, "|_____ San Andreas Network _____|");
-					}
-					if(GetPlayerFraction(playerid) == FRAC_RR)
-					{
-						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "|_______________ Odznaka RR ______________|");
-						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
-						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
-						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-						format(string, sizeof(string), "Ranga: %s", FracRang[FRAC_RR][PlayerInfo[playerid][pRank]]);
-						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-						if(OnDuty[playerid] == 0)
-						{
-							SendClientMessage(giveplayerid,COLOR_WHITE,"Mo¿liwoœæ interwencji: Nie");
-						}
-						else
-						{
-							SendClientMessage(giveplayerid,COLOR_WHITE,"Mo¿liwoœæ interwencji: Tak");
-						}
-						SendClientMessage(giveplayerid,COLOR_GRAD2,"Ta odznaka upowa¿nia do zatrzymania osób podejrzewanych");
-						SendClientMessage(giveplayerid,COLOR_GRAD2,"o dzia³ania terrorystyczne na ca³ym terenie San Andreas Prezydent");
-						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "|___________ Rangers  Regiment ___________|");
 					}
 					//
 					format(string, sizeof(string), "* %s pokazuje dokumenty %s.", sendername ,giveplayer);
@@ -2872,7 +2855,7 @@ CMD:respawn(playerid)
 	new string[128];
 	if(Count >= 20)
 	{
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 		{
 			SendClientMessage(playerid,COLOR_YELLOW, "Odliczanie rozpoczête");
 			BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
@@ -6078,7 +6061,7 @@ CMD:brama(playerid)
 		}
         if(IsPlayerInFraction(playerid, FRAC_NG, 5000))
         {
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2497.04663, -2554.21484, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))//Od tad w dol only NG
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2497.04663, -2554.21484, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))//Od tad w dol only NG
     		{
     			if(moveng[2] == 0)
     			{
@@ -6091,7 +6074,7 @@ CMD:brama(playerid)
     				MoveDynamicObject(bramkang[2],2497.04663, -2554.21484, 15.39000,3);
     			}
     		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2561.47461, -2534.93188, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2561.47461, -2534.93188, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
     		{
     			if(moveng[3] == 0)
     			{
@@ -6104,7 +6087,7 @@ CMD:brama(playerid)
     				MoveDynamicObject(bramkang[3],2561.47461, -2534.93188, 15.39000,3);
     			}
     		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2475.38354, -2523.96680, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2475.38354, -2523.96680, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
     		{
     			if(moveng[5] == 0)
     			{
@@ -6117,7 +6100,7 @@ CMD:brama(playerid)
     				MoveDynamicObject(bramkang[5],2475.38354, -2523.96680, 15.39000,3);
     			}
     		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2785.98389, -2353.13599, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2785.98389, -2353.13599, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
     		{
     			if(moveng[6] == 0)
     			{
@@ -6130,7 +6113,7 @@ CMD:brama(playerid)
     				MoveDynamicObject(bramkang[6],2785.98389, -2353.13599, 15.39000,3);
     			}
     		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2770.54028, -2393.62891, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2770.54028, -2393.62891, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
     		{
     			if(moveng[7] == 0)
     			{
@@ -6143,7 +6126,7 @@ CMD:brama(playerid)
     				MoveDynamicObject(bramkang[7],2770.54028, -2393.62891, 15.39000,3);
     			}
     		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2760.87671, -2471.70020, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2760.87671, -2471.70020, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
     		{
     			if(moveng[8] == 0)
     			{
@@ -6156,7 +6139,7 @@ CMD:brama(playerid)
     				MoveDynamicObject(bramkang[8],2760.87671, -2471.70020, 15.39000,3);
     			}
     		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2725.83521, -2493.09351, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2725.83521, -2493.09351, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
     		{
     			if(moveng[9] == 0)
     			{
@@ -6169,7 +6152,7 @@ CMD:brama(playerid)
     				MoveDynamicObject(bramkang[9],2725.83521, -2493.09351, 15.39000,3);
     			}
     		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2560.51147, -2357.69849, 18.50030)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2560.51147, -2357.69849, 18.50030)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
     		{
     			if(moveng[12] == 0)
     			{
@@ -6182,7 +6165,7 @@ CMD:brama(playerid)
     				MoveDynamicObject(bramkang[12],2560.51147, -2357.69849, 18.50030,3);
     			}
     		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2552.1902, -2381.8513, 15.1715)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid)))
+    		if(IsPlayerInRangeOfPoint(playerid,15.0,2552.1902, -2381.8513, 15.1715)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
     		{
     			if(moveng[13] == 0)
     			{
@@ -6196,7 +6179,7 @@ CMD:brama(playerid)
     			}
     		}
         }
-		if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || IsARR(playerid))
+		if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
 		{
 			if(PlayerToPoint(12.0, playerid, 68.021484375, -1545.892578125, 5.1986169815063))
 			{
@@ -9536,7 +9519,7 @@ CMD:blok(playerid, params[])
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -15350,7 +15333,7 @@ CMD:up(playerid)
 
 CMD:fly(playerid)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pAdmin] == 7)
+	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
 	{
 		new Float:px, Float:py, Float:pz, Float:pa;
 		GetPlayerFacingAngle(playerid,pa);
@@ -16130,7 +16113,7 @@ CMD:og(playerid, params[])
         	}
 			DajKase(playerid, - payout);
 			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d",  params, sendername,PlayerInfo[playerid][pPnumber]);
-			OOCOgloszenie(TEAM_GROVE_COLOR,string);
+			OOCNews(TEAM_GROVE_COLOR,string);
 			format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
 			GameTextForPlayer(playerid, string, 5000, 5);
 			if (PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pDonateRank] < 2)
@@ -16191,55 +16174,6 @@ CMD:fbi(playerid, params[])
 	return 1;
 }
 
-
-CMD:rr(playerid, params[])
-{
-	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
-    {
-		if(IsPlayerInFraction(playerid, FRAC_RR))
-		{
-			if(PlayerInfo[playerid][pRank] < 1)
-			{
-			    SendClientMessage(playerid, COLOR_GREY, "   Musisz mieæ 1 range aby u¿ywaæ tej komendy !");
-			    return 1;
-			}
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			if(isnull(params))
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "WPISZ: /rr [text]");
-				return 1;
-			}
-			if(PlayerInfo[playerid][pBP] >= 1)
-			{
-			    format(string, sizeof(string), "   Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
-				SendClientMessage(playerid, TEAM_CYAN_COLOR, string);
-				return 1;
-			}
-			if (strfind(params , "ip:" , true)>=0 ||strfind(params , "www." , true)>=0 || strfind(params , ".pl" , true)>=0 || strfind(params , ",pl" , true)>=0  || strfind(params , " ip" , true)>=0 || strfind(params , ":7" , true)>=0 || strfind(params , "795" , true)>=0 || strfind(params , ":3" , true)>=0 || strfind(params , ":4" , true)>=0 || strfind(params , ":5" , true)>=0 || strfind(params , ":6" , true)>=0 || strfind(params , ":8" , true)>=0)
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
-				format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
-				ABroadCast(COLOR_LIGHTRED,string,1);
-				CzitLog(string);
-			}
-			else
-			{
-				SendClientMessageToAll(COLOR_RR, "|___________ Rangers Regiment ___________|");
-				format(string, sizeof(string), "Operator %s: %s", sendername, params);
-				SendClientMessageToAll(COLOR_RR, string);
-			}
-		}
-		else
-		{
-			SendClientMessage(playerid, COLOR_GREY, "   Nie jesteœ operatorem Rangers Regiment!");
-		    return 1;
-		}
-	}
-	return 1;
-}
 
 CMD:pd(playerid, params[]) return cmd_lspd(playerid, params);
 CMD:lspd(playerid, params[])
@@ -16564,26 +16498,6 @@ CMD:icons(playerid)
 	return 1;
 }
 
-CMD:togog(playerid) return cmd_blokujog(playerid);
-CMD:zablokujog(playerid) return cmd_blokujog(playerid);
-CMD:blokujog(playerid)
-{
-    if(IsPlayerConnected(playerid))
-    {
-		if (!gOgloszenie[playerid])
-		{
-			gOgloszenie[playerid] = 1;
-            MSGBOX_Show(playerid, "Ogloszenia ~r~OFF", MSGBOX_ICON_TYPE_OK);
-		}
-		else if (gOgloszenie[playerid])
-		{
-			gOgloszenie[playerid] = 0;
-            MSGBOX_Show(playerid, "Ogloszenia ~g~ON", MSGBOX_ICON_TYPE_OK);
-		}
-	}
-	return 1;
-}
-
 CMD:tognews(playerid) return cmd_blokujnews(playerid);
 CMD:zablokujnews(playerid) return cmd_blokujnews(playerid);
 CMD:blokujnews(playerid)
@@ -16648,7 +16562,7 @@ CMD:zablokujw(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pDonateRank] > 0 || PlayerInfo[playerid][pAdmin] > 1 || PlayerInfo[playerid][pNewAP] == 5)
+        if(PlayerInfo[playerid][pDonateRank] > 0 || PlayerInfo[playerid][pAdmin] > 1)
         {
 			if (!HidePM[playerid])
 			{
@@ -17086,11 +17000,6 @@ CMD:megafon(playerid, params[])
 			format(string, sizeof(string), "[Stra¿ak %s:o< %s]", sendername, params);
 			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
-		else if(PlayerInfo[playerid][pMember] == 18||PlayerInfo[playerid][pLider] == 18)
-		{
-			format(string, sizeof(string), "[Operator %s:o< %s]", sendername, params);
-			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-		}
         else if(GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
         {
             if(IsPlayerInRangeOfPoint(playerid, 5.0, 1310.2848,-1299.7623,36.9401))
@@ -17131,7 +17040,7 @@ CMD:r(playerid, params[])
 			return 1;
 		}
         new member = GetPlayerFraction(playerid);
-        if(0 < member <= 4 || member == 11 || member == 7 || member == 17 || member == 18)
+        if(0 < member <= 4 || member == 11 || member == 7 || member == 17)
 	    {
             format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],sendername, params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
@@ -17179,7 +17088,7 @@ CMD:rooc(playerid, params[])
 			return 1;
 		}
         new member = GetPlayerFraction(playerid);
-	    if(0 < member <= 4 || member == 11 || member == 7 || member == 17 || member == 18)
+	    if(0 < member <= 4 || member == 11 || member == 7 || member == 17)
 	    {
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],sendername, params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
@@ -17308,38 +17217,6 @@ CMD:dutycd(playerid)
 				return 1;
 			}
 		}
-		if(PlayerInfo[playerid][pMember] == 18 || PlayerInfo[playerid][pLider] == 18)
-		{
-			if (PlayerToPoint(5, playerid,2519.0017,-2456.7346,14.1171))
-			{
-				if(OnDuty[playerid]==0)
-		        {
-			    	format(string, sizeof(string), "* Operator %s bierze odznakê i broñ ze swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					DajBronieFrakcyjne(playerid);
-					SetPlayerArmour(playerid, 90);
-	    		    SetPlayerHealth(playerid, 100);
-	    		    //SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-					OnDuty[playerid] = 1;
-				}
-				else if(OnDuty[playerid]==1)
-				{
-					format(string, sizeof(string), "* Operator %s odk³ada odznakê i broñ do swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					SetPlayerArmour(playerid, 0.0);
-	    		    SetPlayerHealth(playerid, 100);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                    OnDuty[playerid] = 0;
-                    PrzywrocBron(playerid);
-                    SetPlayerToTeamColor(playerid);
-				}
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
-				return 1;
-			}
-		}
 		else
 		{
 		    SendClientMessage(playerid, COLOR_GRAD1, "   Nie masz uprawnieñ by u¿yæ tej komendy !");
@@ -17355,348 +17232,314 @@ CMD:dutycd(playerid)
 CMD:duty(playerid) return cmd_sluzba(playerid);
 CMD:sluzba(playerid)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
+    new string[128];
+    new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
-		{
-			SendClientMessage(playerid, COLOR_GRAD2, "   Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
-			return 1;
-		}
-		if(IsACop(playerid) && OnDutyCD[playerid] == 1)
-		{
-			SendClientMessage(playerid, COLOR_GRAD2, "   U¿yj /dutycd !");
-			return 1;
-		}
+        if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
+        {
+            SendClientMessage(playerid, COLOR_GRAD2, "   Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
+            return 1;
+        }
+        if(IsACop(playerid) && OnDutyCD[playerid] == 1)
+        {
+            SendClientMessage(playerid, COLOR_GRAD2, "   U¿yj /dutycd !");
+            return 1;
+        }
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return SendClientMessage(playerid, COLOR_GRAD2, "   Aby wzi¹sæ s³u¿be musisz byæ pieszo!");
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
-		{
-			if (PlayerToPoint(3, playerid,255.3,77.4,1003.6)
-			|| PlayerToPoint(5, playerid, 266.7904,118.9303,1004.6172)
-			|| PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609)
-			|| PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
-			|| PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
-			|| PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
-			|| PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141))//nowe komi by dywan
+        GetPlayerName(playerid, sendername, sizeof(sendername));
+        if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
+        {
+            if (PlayerToPoint(3, playerid,255.3,77.4,1003.6)
+            || PlayerToPoint(5, playerid, 266.7904,118.9303,1004.6172)
+            || PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609)
+            || PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
+            || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
+            || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
+            || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141))//nowe komi by dywan
 
-			{
-				if(OnDuty[playerid]==0)
-		        {
-			    	format(string, sizeof(string), "* Oficer %s bierze odznakê i broñ ze swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					DajBronieFrakcyjne(playerid);
-					SetPlayerArmour(playerid, 90);
-	    		    SetPlayerHealth(playerid, 100);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-					OnDuty[playerid] = 1;
-                    SetPlayerToTeamColor(playerid);
-				}
-				else if(OnDuty[playerid]==1)
-				{
-					format(string, sizeof(string), "* Oficer %s odk³ada odznakê i broñ do swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					SetPlayerArmour(playerid, 0.0);
-	    		    SetPlayerHealth(playerid, 100);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                    OnDuty[playerid] = 0;
-                    PrzywrocBron(playerid);
-                    SetPlayerToTeamColor(playerid);
-				}
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
-				return 1;
-			}
-		}
-		if(PlayerInfo[playerid][pMember] == 18 || PlayerInfo[playerid][pLider] == 18)
-		{
-			if (PlayerToPoint(3, playerid, 2519.0017,-2456.7346,14.1171))//nowe komi by dywan
-
-			{
-				if(OnDuty[playerid]==0)
-		        {
-			    	format(string, sizeof(string), "* Operator %s bierze odznakê i broñ ze swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					DajBronieFrakcyjne(playerid);
-					SetPlayerArmour(playerid, 90);
-	    		    SetPlayerHealth(playerid, 100);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-					OnDuty[playerid] = 1;
-                    SetPlayerToTeamColor(playerid);
-				}
-				else if(OnDuty[playerid]==1)
-				{
-					format(string, sizeof(string), "* Operator %s odk³ada odznakê i broñ do swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					SetPlayerArmour(playerid, 0.0);
-	    		    SetPlayerHealth(playerid, 100);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                    OnDuty[playerid] = 0;
-                    PrzywrocBron(playerid);
-                    SetPlayerToTeamColor(playerid);
-				}
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
-				return 1;
-			}
-		}
-		else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
-		{
-			if (PlayerToPoint(3, playerid, 571.9957,-1453.4821,32.9522) //nowe FBI by Dywan
-			|| PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
-			|| PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ))//nowe domy /duty w domu
-			{
-				if(OnDuty[playerid]==0)
-		        {
-         			format(string, sizeof(string), "* Agent FBI %s bierze odznakê i broñ ze swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					DajBronieFrakcyjne(playerid);
-					SetPlayerArmour(playerid, 90);
-	    		    SetPlayerHealth(playerid, 100);
-					OnDuty[playerid] = 1;
-					if(PlayerInfo[playerid][pRank] != 4)
-	    		    {
-	    		    	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-                        SetPlayerToTeamColor(playerid);
-	    		    }
-				}
-				else if(OnDuty[playerid]==1)
-				{
-					format(string, sizeof(string), "* Agent FBI %s odk³ada odznakê i broñ do swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					SetPlayerArmour(playerid, 0.0);
-	    		    SetPlayerHealth(playerid, 100);
-                    OnDuty[playerid] = 0;
-                    PrzywrocBron(playerid);
-	    		    if(PlayerInfo[playerid][pRank] != 4)
-	    		    {
-	    		    	SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                        SetPlayerToTeamColor(playerid);
-	    		    }
-				}
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
-				return 1;
-			}
-		}
-		else if(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
-		{
-			if ( IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) || IsPlayerInRangeOfPoint(playerid, 5.0, 609.0364,-555.1090,19.4573) ) //PlayerToPoint(3, playerid,255.3,77.4,1003.6) || PlayerToPoint(3,playerid,266.7904,118.9303,1004.6172) || PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
-			{
-				if(OnDuty[playerid]==0)
-		        {
-         			format(string, sizeof(string), "* Policjant Stanowy %s bierze mundur i broñ ze swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					DajBronieFrakcyjne(playerid);
-					SetPlayerArmour(playerid, 90);
-	    		    SetPlayerHealth(playerid, 100);
-                    OnDuty[playerid] = 1;
-	    		    SetPlayerToTeamColor(playerid);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-				}
-				else if(OnDuty[playerid]==1)
-				{
-					format(string, sizeof(string), "* Policjant Stanowy %s odk³ada mundur i broñ do swojej szafki.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					SetPlayerArmour(playerid, 0.0);
-	    		    SetPlayerHealth(playerid, 100);
-                    OnDuty[playerid] = 0;
-	    		    SetPlayerToTeamColor(playerid);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                    PrzywrocBron(playerid);
-				}
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
-				return 1;
-			}
-		}
-		else if(PlayerInfo[playerid][pMember] == 4||PlayerInfo[playerid][pLider] == 4)
-		{
-			if (PlayerToPoint(4, playerid,1147.3623,-1314.4891,13.6743))
-			{
-			    if(JobDuty[playerid] == 1)
-			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie medyka, nie bêdziesz widzia³ zg³oszeñ.");
-			        JobDuty[playerid] = 0;
-			        Medics -= 1;
-	    			SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                    SetPlayerToTeamColor(playerid);
-			    }
-			    else
-			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie medyka, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
-			        JobDuty[playerid] = 1;
-			        Medics += 1;
-	    			SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-                    SetPlayerToTeamColor(playerid);
-			    }
-	    	}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
-				return 1;
-			}
-		}
-        else if(GetPlayerFraction(playerid) == FRAC_LSFD)
-		{
-			if (IsPlayerInRangeOfPoint(playerid, 4.0, 1758.4077,-1123.4249,227.8059))
-			{
-			    if(JobDuty[playerid] == 1)
-			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie stra¿aka.");
-			        JobDuty[playerid] = 0;
-                    PrzywrocBron(playerid);
-	    			SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                    SetPlayerToTeamColor(playerid);
-			    }
-			    else
-			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie stra¿aka.");
-			        JobDuty[playerid] = 1;
+            {
+                if(OnDuty[playerid]==0)
+                {
+                    format(string, sizeof(string), "* Oficer %s bierze odznakê i broñ ze swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     DajBronieFrakcyjne(playerid);
-	    			SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerArmour(playerid, 90);
+                    SetPlayerHealth(playerid, 100);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    OnDuty[playerid] = 1;
                     SetPlayerToTeamColor(playerid);
-			    }
-	    	}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
-				return 1;
-			}
-		}
-		else if(PlayerInfo[playerid][pMember] == 11||PlayerInfo[playerid][pLider] == 11)
-		{
-		    if(JobDuty[playerid] == 1)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie urzêdasa.");
-		        JobDuty[playerid] = 0;
+                }
+                else if(OnDuty[playerid]==1)
+                {
+                    format(string, sizeof(string), "* Oficer %s odk³ada odznakê i broñ do swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 0.0);
+                    SetPlayerHealth(playerid, 100);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    OnDuty[playerid] = 0;
+                    PrzywrocBron(playerid);
+                    SetPlayerToTeamColor(playerid);
+                }
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
+                return 1;
+            }
+        }
+        else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
+        {
+            if (PlayerToPoint(3, playerid, 571.9957,-1453.4821,32.9522) //nowe FBI by Dywan
+            || PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
+            || PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ))//nowe domy /duty w domu
+            {
+                if(OnDuty[playerid]==0)
+                {
+                    format(string, sizeof(string), "* Agent FBI %s bierze odznakê i broñ ze swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    DajBronieFrakcyjne(playerid);
+                    SetPlayerArmour(playerid, 90);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 1;
+                    if(PlayerInfo[playerid][pRank] != 4)
+                    {
+                        SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                        SetPlayerToTeamColor(playerid);
+                    }
+                }
+                else if(OnDuty[playerid]==1)
+                {
+                    format(string, sizeof(string), "* Agent FBI %s odk³ada odznakê i broñ do swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 0.0);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 0;
+                    PrzywrocBron(playerid);
+                    if(PlayerInfo[playerid][pRank] != 4)
+                    {
+                        SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                        SetPlayerToTeamColor(playerid);
+                    }
+                }
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
+                return 1;
+            }
+        }
+        else if(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
+        {
+            if ( IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) || IsPlayerInRangeOfPoint(playerid, 5.0, 609.0364,-555.1090,19.4573) ) //PlayerToPoint(3, playerid,255.3,77.4,1003.6) || PlayerToPoint(3,playerid,266.7904,118.9303,1004.6172) || PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
+            {
+                if(OnDuty[playerid]==0)
+                {
+                    format(string, sizeof(string), "* Policjant Stanowy %s bierze mundur i broñ ze swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    DajBronieFrakcyjne(playerid);
+                    SetPlayerArmour(playerid, 90);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 1;
+                    SetPlayerToTeamColor(playerid);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                }
+                else if(OnDuty[playerid]==1)
+                {
+                    format(string, sizeof(string), "* Policjant Stanowy %s odk³ada mundur i broñ do swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 0.0);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 0;
+                    SetPlayerToTeamColor(playerid);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    PrzywrocBron(playerid);
+                }
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
+                return 1;
+            }
+        }
+        else if(PlayerInfo[playerid][pMember] == 4||PlayerInfo[playerid][pLider] == 4)
+        {
+            if (PlayerToPoint(4, playerid,1147.3623,-1314.4891,13.6743))
+            {
+                if(JobDuty[playerid] == 1)
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie medyka, nie bêdziesz widzia³ zg³oszeñ.");
+                    JobDuty[playerid] = 0;
+                    Medics -= 1;
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerToTeamColor(playerid);
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie medyka, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
+                    JobDuty[playerid] = 1;
+                    Medics += 1;
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerToTeamColor(playerid);
+                }
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
+                return 1;
+            }
+        }
+        else if(GetPlayerFraction(playerid) == FRAC_LSFD)
+        {
+            if (IsPlayerInRangeOfPoint(playerid, 4.0, 1758.4077,-1123.4249,227.8059))
+            {
+                if(JobDuty[playerid] == 1)
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie stra¿aka.");
+                    JobDuty[playerid] = 0;
+                    PrzywrocBron(playerid);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerToTeamColor(playerid);
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie stra¿aka.");
+                    JobDuty[playerid] = 1;
+                    DajBronieFrakcyjne(playerid);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerToTeamColor(playerid);
+                }
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w szatni !");
+                return 1;
+            }
+        }
+        else if(PlayerInfo[playerid][pMember] == 11||PlayerInfo[playerid][pLider] == 11)
+        {
+            if(JobDuty[playerid] == 1)
+            {
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie urzêdasa.");
+                JobDuty[playerid] = 0;
                 SetPlayerToTeamColor(playerid);
-		        SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-    		}
-    		else
-    		{
-    		    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ ju¿ na s³u¿bie urzêdasa. IdŸ do Urzêdu urzêdasie.");
-		        JobDuty[playerid] = 1;
+                SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ ju¿ na s³u¿bie urzêdasa. IdŸ do Urzêdu urzêdasie.");
+                JobDuty[playerid] = 1;
                 SetPlayerToTeamColor(playerid);
-		        SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-			}
-		}
-		else if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7)
-		{
+                SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+            }
+        }
+        else if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7)
+        {
             if (PlayerToPoint(5, playerid,1525.9830, -1453.0792, 68.0118))
-			{
-				if(OnDuty[playerid]==0)
-		        {
-         			format(string, sizeof(string), "* Agent USSS %s wyci¹ga broñ i garnitur z szafy.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+            {
+                if(OnDuty[playerid]==0)
+                {
+                    format(string, sizeof(string), "* Agent USSS %s wyci¹ga broñ i garnitur z szafy.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     OnDuty[playerid]= 1;
                     DajBronieFrakcyjne(playerid);
-					SetPlayerArmour(playerid, 90);
-	    		    SetPlayerHealth(playerid, 100);
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-	    		    SetPlayerToTeamColor(playerid);
-				}
-				else if(OnDuty[playerid]==1)
-				{
-					format(string, sizeof(string), "* Agent USSS %s chowa broñ i garnitur do szafy.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					SetPlayerArmour(playerid, 0);
-	    		    SetPlayerHealth(playerid, 100);
+                    SetPlayerArmour(playerid, 90);
+                    SetPlayerHealth(playerid, 100);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerToTeamColor(playerid);
+                }
+                else if(OnDuty[playerid]==1)
+                {
+                    format(string, sizeof(string), "* Agent USSS %s chowa broñ i garnitur do szafy.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 0);
+                    SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
-	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
                     SetPlayerToTeamColor(playerid);
                     PrzywrocBron(playerid);
-				}
-			}
-		}
-		else if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
-		{
-			if (PlayerToPoint(4, playerid,2482.7566, -2105.6033, 32.2773))
-			{
-				if(JobDuty[playerid] == 1)
-				{
+                }
+            }
+        }
+        else if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
+        {
+            if (PlayerToPoint(4, playerid,2482.7566, -2105.6033, 32.2773))
+            {
+                if(JobDuty[playerid] == 1)
+                {
 
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie.");
-					JobDuty[playerid] = 0;
-					SetPlayerToTeamColor(playerid);
-					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-				}
-				else
-				{
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ ju¿ na s³u¿bie. Kieruj siê do pojazdu.");
-					JobDuty[playerid] = 1;
-					SetPlayerToTeamColor(playerid);
-					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-				}
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w biurze KT !");
-				return 1;
-			}
-		}
-		else if(PlayerInfo[playerid][pJob] == 7)
-		{
-		    if(AntySpam[playerid] == 0)
-		    {
-			    if(JobDuty[playerid] == 1)
-			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie mechanika, nie bêd¹ ci siê wyœwietlaæ zg³oszenia.");
-			        JobDuty[playerid] = 0;
-			        Mechanics -= 1;
-			    }
-			    else
-			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie mechanika, kiedy ktoœ bêdzie ciê potrzebowa³ zostanie wyœwietlony komunikat.");
-			        JobDuty[playerid] = 1;
-			        Mechanics += 1;
-			    }
-			    AntySpam[playerid] = 1;
-			    SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
-			}
-			else
-			{
-			    SendClientMessage(playerid, COLOR_GREY, "Odczekaj 10 sekund");
-			}
-		}
-		else if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
-		{
-		    if(SanDuty[playerid] == 1)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie reportera, komunikaty oraz kasa za SMS nie bêd¹ wysy³ane.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie.");
+                    JobDuty[playerid] = 0;
+                    SetPlayerToTeamColor(playerid);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ ju¿ na s³u¿bie. Kieruj siê do pojazdu.");
+                    JobDuty[playerid] = 1;
+                    SetPlayerToTeamColor(playerid);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                }
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "   Nie jesteœ w biurze KT !");
+                return 1;
+            }
+        }
+        else if(PlayerInfo[playerid][pJob] == 7)
+        {
+            if(AntySpam[playerid] == 0)
+            {
+                if(JobDuty[playerid] == 1)
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie mechanika, nie bêd¹ ci siê wyœwietlaæ zg³oszenia.");
+                    JobDuty[playerid] = 0;
+                    Mechanics -= 1;
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie mechanika, kiedy ktoœ bêdzie ciê potrzebowa³ zostanie wyœwietlony komunikat.");
+                    JobDuty[playerid] = 1;
+                    Mechanics += 1;
+                }
+                AntySpam[playerid] = 1;
+                SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GREY, "Odczekaj 10 sekund");
+            }
+        }
+        else if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
+        {
+            if(SanDuty[playerid] == 1)
+            {
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie reportera, komunikaty oraz kasa za SMS nie bêd¹ wysy³ane.");
                 SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
                 SanDuty[playerid] = 0;
                 SetPlayerToTeamColor(playerid);
-		    }
-		    else
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie reportera.");
-		        SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie reportera.");
+                SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
                 SanDuty[playerid] = 1;
                 SetPlayerToTeamColor(playerid);
-		    }
-		}
-		else
-		{
-		    SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ policjantem !");
-		}
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ policjantem !");
+        }
         if(GetPlayerSkin(playerid) == 0)
         {
             SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
             SendClientMessage(playerid, COLOR_GRAD1, "  Nie masz skina frakcyjnego!");
         }
-	}
-	return 1;
+    }
+    return 1;
 }
 
 CMD:swat(playerid)
@@ -17716,8 +17559,7 @@ CMD:swat(playerid)
 			|| PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 )
 			|| PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
 			|| PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141)//nowe komi by dywan
-			|| PlayerToPoint(3.5, playerid, 579.7598,-1467.8156,32.9522)//nowe FBI by dywan
-			|| PlayerToPoint(3, playerid,2519.0017,-2456.7346,14.1171))//Nowa frakcja RR
+			|| PlayerToPoint(3.5, playerid, 579.7598,-1467.8156,32.9522))//nowe FBI by dywan
 			{
 				if(OnDuty[playerid] == 1)
 				{
@@ -17905,7 +17747,7 @@ CMD:departament(playerid, params[])
 				return 1;
 			}
             new member = GetPlayerFraction(playerid);
-    	    if(0 < member <= 4 || member == 17 || member == 18)
+    	    if(0 < member <= 4 || member == 17)
     	    {
                 format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],sendername, params);
                 SendTeamMessage(17,COLOR_ALLDEPT,string);
@@ -17953,7 +17795,7 @@ CMD:depo(playerid, params[])
 		}
         if(gMuteDepo[playerid] == 1) return SendClientMessage(playerid, COLOR_GRAD2, "Nie mo¿esz pisaæ na depo, zablokowa³eœ ten czat (U¿yj /togdepo)");
         new member = GetPlayerFraction(playerid);
-	    if(0 < member <= 4 || member == 17 || member == 18)
+	    if(0 < member <= 4 || member == 17)
 	    {
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],sendername, params);
             SendTeamMessage(17, COLOR_ALLDEPT, string, 1);
@@ -19468,11 +19310,12 @@ CMD:wejdz(playerid)
         {
             ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parkingi\n[Poziom 0]Komisariat\n[Poziom 1]Pokoje Przes³uchañ\n[Poziom 2]Biura\n[Poziom 3]Sale Treningowe\n[Poziom 4]Dach","Jedz","");
         }
-        else if(IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360)//Podziemia BOR
+        //else if(IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360)//Podziemia BOR
+        else if((IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360) && IsABOR(playerid))//Podziemia BOR
         || IsPlayerInRangeOfPoint(playerid,3,1483.8867, -1491.1559, 13.9085)
         || IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
         || IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
-        || IsPlayerInRangeOfPoint(playerid,3, 1495.1107, -1468.8528, 40.8256))//dach BOR
+        || IsPlayerInRangeOfPoint(playerid,3, 1495.1107, -1468.8528, 40.8256)&& IsABOR(playerid))//dach BOR
         {
             ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking wewnêtrzny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala USSS\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
         }
@@ -22439,15 +22282,6 @@ CMD:a(playerid, params[])
 			}
 			printf("Admin %s: %s", sendername, params);
 		}
-		if(PlayerInfo[playerid][pNewAP] == 5 && PlayerInfo[playerid][pAdmin] == 0)
-		{
-			format(string, sizeof(string), "* Skrypter %s: %s", sendername, params);
-			if (PlayerInfo[playerid][pNewAP] >= 1)
-			{
-				SendAdminMessage(0xFFC0CB, string);
-			}
-			printf("Skrypter %s: %s", sendername, params);
-		}
 		if((PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pNewAP] <= 4) && PlayerInfo[playerid][pAdmin] == 0)
 		{
 			format(string, sizeof(string), "*%d Pó³Admin %s: %s", PlayerInfo[playerid][pNewAP], sendername, params);
@@ -22542,12 +22376,6 @@ CMD:zaufanyggracz(playerid, params[])
 			SendZGMessage(0x7AA1C9FF/*COLOR_LIGHTBROWN*/, string);
 			printf("Admin %s: %s", sendername, params);
 		}
-		if(PlayerInfo[playerid][pNewAP] == 5 && PlayerInfo[playerid][pAdmin] == 0)
-		{
-			format(string, sizeof(string), "* Skrypter %s: %s", sendername, params);
-			SendZGMessage(0x7AA1C9FF/*COLOR_LIGHTBROWN*/, string);
-			printf("Skrypter %s: %s", sendername, params);
-		}
 		if((PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pNewAP] <= 4) && PlayerInfo[playerid][pAdmin] == 0)
 		{
 			format(string, sizeof(string), "*%d Pó³Admin %s: %s", PlayerInfo[playerid][pNewAP], sendername, params);
@@ -22624,10 +22452,6 @@ CMD:newbie(playerid, params[])
 			else if(PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 		    {
 				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], sendername, params);
-			}
-			else if(PlayerInfo[playerid][pNewAP] == 5)
-			{
-				format(nobchat, sizeof(nobchat), "(({FFD700} Skrypter %s: {8D8DFF}%s ))", sendername, params);
 			}
 	 		else if(PlayerInfo[playerid][pDonateRank] == 10)
 			{
@@ -22976,7 +22800,7 @@ CMD:unjail(playerid, params[])
 				}
 			}
 		}
-		else if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+		else if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -23033,7 +22857,7 @@ CMD:adminajail(playerid, params[])
 
 		if (PlayerInfo[playa][pJailed] == 0)
 		{
-			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 			{
 			    if(IsPlayerConnected(playa))
 			    {
@@ -23428,7 +23252,7 @@ CMD:setint(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			SetPlayerInterior(gracz,intid);
 			PlayerInfo[gracz][pInt] = intid;
@@ -23464,7 +23288,7 @@ CMD:setvw(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			SetPlayerVirtualWorld(gracz, intid);
 			format(string, sizeof(string), "Ustawi³eœ %s virtualworld nr %d.", GetNick(gracz), intid);
@@ -23495,7 +23319,7 @@ CMD:getint(playerid, params[])
 		return 1;
 	}
 
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
 		format(string, sizeof(string), "Interior gracza %s to %d.", GetNick(gracz), GetPlayerInterior(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -23522,7 +23346,7 @@ CMD:getvw(playerid, params[])
 		return 1;
 	}
 
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
 		format(string, sizeof(string), "VirutalWorld gracza %s to %d.", GetNick(gracz), GetPlayerVirtualWorld(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -23598,7 +23422,6 @@ CMD:przyjmij(playerid, params[])
                         else if(PlayerInfo[playerid][pLider] == 15) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "NoA"; PlayerInfo[para1][pSkin] = 8; SetPlayerSkin(para1, 8); }
                         else if(PlayerInfo[playerid][pLider] == 16) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "WPS"; PlayerInfo[para1][pSkin] = 206; SetPlayerSkin(para1, 206); }
                         else if(PlayerInfo[playerid][pLider] == 17) { PlayerInfo[para1][pTeam] = 1; gTeam[para1] = 1; ftext = "LSFD"; SetPlayerSkin(para1, 278); PlayerInfo[para1][pSkin] = 278;}
-						else if(PlayerInfo[playerid][pLider] == 18) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; ftext = "RR"; SetPlayerSkin(para1, 285); PlayerInfo[para1][pSkin] = 285;}
 						else return 1;
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -24007,7 +23830,6 @@ CMD:makeleader(playerid, params[])
 					else if(level == 15) { PlayerInfo[para1][pSkin] = 60; } //NoA
 					else if(level == 16) { PlayerInfo[para1][pSkin] = 112; } //Dziady
                     else if(level == 17) { PlayerInfo[para1][pSkin] = 279; } //LSFD
-					else if(level == 18) { PlayerInfo[para1][pSkin] = 285; } //RR
 				    if(level != 0)
                     {
                         gTeam[para1] = 11;
@@ -24082,7 +23904,6 @@ CMD:makewomanleader(playerid, params[])
 					else if(level == 15) { PlayerInfo[para1][pSkin] = 192; } //NoA
 					else if(level == 16) { PlayerInfo[para1][pSkin] = 129; } //WPS
                     else if(level == 17) { PlayerInfo[para1][pSkin] = 278; } //WPS
-					else if(level == 18) { PlayerInfo[para1][pSkin] = 285; } //RR
 				    gTeam[para1] = 19;
 				    PlayerInfo[para1][pTeam] = 19;
                     PlayerInfo[para1][pRank] = 6;
@@ -24150,7 +23971,6 @@ CMD:makemember(playerid, params[])
 					else if(level == 14) { PlayerInfo[para1][pSkin] = 108; } //Vagos
 					else if(level == 15) { PlayerInfo[para1][pSkin] = 8; } //NoA
                     else if(level == 17) PlayerInfo[para1][pSkin] = 277; //NoA
-					else if(level == 18) { PlayerInfo[para1][pSkin] = 285; } //RR
 				    gTeam[para1] = 19;
 				    PlayerInfo[para1][pTeam] = 19;
 				    if(PlayerInfo[para1][pSkin] != 0) SetPlayerSkin(para1, PlayerInfo[para1][pSkin]);
@@ -24391,7 +24211,7 @@ CMD:gotopos(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5)
 		{
 		    new Float:x, Float:y, Float:z;
 			if( sscanf(params, "fff", x,y,z))
@@ -24425,7 +24245,7 @@ CMD:gotols(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -24454,7 +24274,7 @@ CMD:gotoszpital(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -24483,7 +24303,7 @@ CMD:gotolv(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -24512,7 +24332,7 @@ CMD:gotosf(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -24548,7 +24368,7 @@ CMD:entercar(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 10)
 		{
 			PutPlayerInVehicleEx(playerid, testcar, 1);
 			SendClientMessage(playerid, COLOR_GRAD1, "   Zosta³eœ teleportowany");
@@ -24600,7 +24420,7 @@ CMD:mark(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			GetPlayerPos(playerid, TeleportDest[playerid][0],TeleportDest[playerid][1],TeleportDest[playerid][2]);
 			SendClientMessage(playerid, COLOR_GRAD1, "   Miejsce teleportu zmienione");
@@ -24617,7 +24437,7 @@ CMD:gotomark(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -24643,7 +24463,7 @@ CMD:gotoin(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -24669,7 +24489,7 @@ CMD:gotostad(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -24695,7 +24515,7 @@ CMD:gotojet(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -24737,7 +24557,7 @@ CMD:tp(playerid, params[])
 		    if(plo != INVALID_PLAYER_ID && plo1 != INVALID_PLAYER_ID)
 		    {
 				GetPlayerName(plo1, sendername, sizeof(sendername));
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pNewAP] == 5)
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL))
 				{
 					//SZUKANIE ADMINOW I P@ na serwerze
 
@@ -24947,7 +24767,7 @@ CMD:gethere(playerid, params[])
 		{
 		    if(plo != INVALID_PLAYER_ID)
 		    {
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+				if (PlayerInfo[playerid][pAdmin] >= 1)
 				{
 					GetPlayerPos(playerid, plocx, plocy, plocz);
 					if(PlayerInfo[playerid][pInt] > 0)
@@ -25006,7 +24826,7 @@ CMD:getcar(playerid, params[])
 		new Float:plocx,Float:plocy,Float:plocz;
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pNewAP] == 5 || IsAKO(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid))
 		{
 			GetPlayerPos(playerid, plocx, plocy, plocz);
 			SetVehiclePos(plo,plocx,plocy+4, plocz);
@@ -25264,25 +25084,6 @@ CMD:zmienhp(playerid, params[])
 				}
 			}
 		}
-		else if(PlayerInfo[playerid][pNewAP] == 5)
-		{
-			if(IsPlayerConnected(playerid))
-		    {
-		        if(playerid != INVALID_PLAYER_ID)
-		        {
-					SetPlayerHealth(playerid, health);
-					if(IsPlayerInAnyVehicle(playerid))
-					{
-					    GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						printf("AdmCmd: %s da³ $d hp %s", sendername, health,  giveplayer);
-					    SetVehicleHealth(GetPlayerVehicleID(playerid), health);
-                        CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
-						SendClientMessage(playerid, COLOR_GRAD2, ">> Zmieni³eœ sobie poziom HP!");
-					}
-				}
-			}
-		}
 		else
 		{
 			SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy!");
@@ -25387,7 +25188,7 @@ CMD:pogoda(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 1 || PlayerInfo[playerid][pNewAP] == 5)
+        if(PlayerInfo[playerid][pAdmin] < 1)
 		{
 		    SendClientMessage(playerid, COLOR_GRAD1, "   Nie jesteœ upowa¿niony do u¿ywania tej komendy!");
 		    return 1;
@@ -25413,7 +25214,7 @@ CMD:pogodaall(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 4 || PlayerInfo[playerid][pZG] >= 7 || PlayerInfo[playerid][pNewAP] == 5)
+        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 4 || PlayerInfo[playerid][pZG] >= 7)
 		{
 			new weather;
 			if( sscanf(params, "d", weather))
@@ -25567,7 +25368,7 @@ CMD:slap(playerid, params[])
 		new Float:shealth;
 		new Float:slx, Float:sly, Float:slz;
 
-		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -25616,7 +25417,7 @@ CMD:ucisz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -25677,7 +25478,7 @@ CMD:kick(playerid, params[])
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 1)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -25689,10 +25490,9 @@ CMD:kick(playerid, params[])
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
                     if(PlayerInfo[giveplayerid][pAdmin] >= 1) return SendClientMessage(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ Admina !");
-					if(PlayerInfo[playerid][pNewAP] == 5) return SendClientMessage(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ skryptera !");
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-  					if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+  					if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
   					{
       					SendClientMessage(giveplayerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
@@ -26108,7 +25908,7 @@ CMD:zamroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7|| PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -26149,7 +25949,7 @@ CMD:odmroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6|| PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -26220,12 +26020,6 @@ CMD:admini(playerid)
 		{
 			GetPlayerName(i, sendername, sizeof(sendername));
 			format(string, sizeof(string), "Pó³Admin: %s", sendername);
-			SendClientMessage(playerid, COLOR_GRAD2, string);
-		}
-		else if(PlayerInfo[playerid][pNewAP] == 5)
-		{
-			GetPlayerName(i, sendername, sizeof(sendername));
-			format(string, sizeof(string), "Skrypter: %s", sendername);
 			SendClientMessage(playerid, COLOR_GRAD2, string);
 		}
 	}
@@ -26723,16 +26517,6 @@ CMD:ap(playerid)
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
-	}
-	if (PlayerInfo[playerid][pNewAP] == 5)
-	{
-
-		SendClientMessage(playerid, COLOR_GRAD1, "*5* Skrypter *** Ta ranga ma wyodrêbione komendy.");
-		SendClientMessage(playerid, COLOR_GRAD1, "*5* Skrypter *** /slap /aj /check /freeze /unfreeze /ucisz");
-        SendClientMessage(playerid, COLOR_GRAD1, "*5* Skrypter *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo");
-		SendClientMessage(playerid, COLOR_GRAD1, "*5* Skrypter *** /fly /togw /sblock /goto /spec /a(dmin chat) /gethere");
-		SendClientMessage(playerid, COLOR_GRAD1, "*5* Skrypter *** /podglad /getposp /gotopos  /gotols /gotoszpital");
-		SendClientMessage(playerid, COLOR_GRAD1, "*5* Skrypter *** /gotolv /gotosf /gotoin /gotostad /gotojet /gotocar /gotomark /mark");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
@@ -32223,7 +32007,7 @@ CMD:zatankuj(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(IsAtGasStation(playerid) || PlayerInfo[playerid][pNewAP] == 5)
+		if(IsAtGasStation(playerid))
 		{
 		    if(IsPlayerInAnyVehicle(playerid))
 		    {
@@ -37317,7 +37101,7 @@ CMD:zrobkolejke(playerid)
 
 CMD:gotoadmin(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1 || PlayerInfo[playerid][pNewAP] == 5) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     SetPlayerVirtualWorld(playerid, 5000);
     SetPlayerPosEx(playerid,3524.550292, -236.021621, 35.619190);
     Wchodzenie(playerid);
@@ -37326,7 +37110,7 @@ CMD:gotoadmin(playerid)
 
 CMD:gotomechy(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1 || PlayerInfo[playerid][pNewAP] == 5) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     SetPlayerPosEx(playerid,2771.0842, -1628.4905, 12.98190);
     SetPlayerVirtualWorld(playerid, 0);
     return 1;
@@ -38287,31 +38071,6 @@ CMD:togname(playerid)
 //end.
 
 
-//Veroon
-
-CMD:fpanel(playerid, params[])
-{
-	if(PlayerInfo[playerid][pNewAP] != 5) return SendClientMessage(playerid, COLOR_GRAD1, "Panel gracza jest w trakcie tworzenia.");
-	if(PlayerInfo[playerid][pLider] >= 1)
-	{
-		new tekst[250];
-		format(tekst, sizeof(tekst), ""COL_GREY2"Statystyki frakcji\n", tekst);
-		format(tekst, sizeof(tekst), "%s\n"COL_GREY2"Lista wszystkich osób\n", tekst);
-		format(tekst, sizeof(tekst), "%s\n"COL_GREY2"Przyjmij osobê [PO ID]\n", tekst);
-		format(tekst, sizeof(tekst), "%s\n"COL_GREY2"Zwolnij osobê [PO ID]\n", tekst);
-		//format(tekst, sizeof(tekst), "%s\n"COL_GREY2"Pojazdy frakcyjne [RESP]\n", tekst);
-		
-		
-		
-		ShowPlayerDialogEx(playerid, D_F_PANEL, DIALOG_STYLE_LIST,""COL_GREY2"Panel lidera",tekst,"Wybierz","Anuluj");
-	}
-	else
-	{
-		SendClientMessage(playerid, COLOR_GRAD1, "   Nie jestes upowazniony do uzywania tej komendy !");
-	}
-	
-	return 1;
-}
 
 
 CMD:lkiz(playerid, params[]) return cmd_podrecznik(playerid, params);

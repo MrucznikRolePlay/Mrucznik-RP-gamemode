@@ -80,6 +80,7 @@ public OnFilterScriptInit()
             OnPlayerConnect(i);
         }
         return 1;
+
 }
 CMD:sanie(playerid,params[])
 {

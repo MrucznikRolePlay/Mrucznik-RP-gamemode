@@ -37,7 +37,7 @@ public MRP_GetPlayerUID(playerid) return PlayerInfo[playerid][pUID];
 public MRP_GetPlayerKP(playerid) return PlayerInfo[playerid][pDonateRank];
 public MRP_IsInPolice(playerid)
 {
-    if(GetPlayerFraction(playerid) == FRAC_LSPD || GetPlayerFraction(playerid) == FRAC_FBI || GetPlayerFraction(playerid) == FRAC_RR || GetPlayerFraction(playerid) == FRAC_NG) return 1;
+    if(GetPlayerFraction(playerid) == FRAC_LSPD || GetPlayerFraction(playerid) == FRAC_FBI || GetPlayerFraction(playerid) == FRAC_NG) return 1;
     return 0;
 }
 public MRP_IsInGang(playerid)

@@ -2,8 +2,7 @@
 
 // swieta
 public swieta_dajKase(playa) {
-	new kaska = 250000 + random(300000); // mysle ze spoko nagroda a rzadko wypada :P
-	DajKase(playa, kaska);
+	DajKase(playa, 250000 + random(300000));
 	new string[64];
 	format(string, sizeof(string), "Otrzymujesz $%d od miko³aja! Wszystkiego najlepszego!", kaska);
 	SendClientMessage(playa, 0x7CFC00AA, string);
@@ -1179,7 +1178,7 @@ if(PlayerInfo[playerid][pDomWKJ] != 0)
 	SetPlayerVirtualWorld(playerid, 0);
 	PlayerInfo[playerid][pDomWKJ] = 0;
 }
-GameTextForPlayer(playerid, "~r~Koniec czasu, zapraszamy do kupna!", 5000, 1);
+GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
 DomOgladany[playerid] = 1;
 SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
 return 1;
@@ -1861,10 +1860,6 @@ IsACop(playerid)
 		{
 		    return 1;
 		}
-		else if(IsARR(playerid))
-		{
-			return 1;
-		}
 		else if(leader==1 || leader==2 || leader==3)
 		{
 		    return 1;
@@ -2130,24 +2125,6 @@ IsABOR(playerid)
 		    return 1;
 		}
 		else if(leader==7 )
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsARR(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==18)
-		{
-		    return 1;
-		}
-		else if(leader==18 )
 		{
 		    return 1;
 		}
@@ -2462,42 +2439,6 @@ DajBronieFrakcyjne(playerid)
     	        PlayerInfo[playerid][pGun9] = 42; PlayerInfo[playerid][pAmmo9] = 10000;
     	    }
         }
-	}
-	else if(PlayerInfo[playerid][pMember] == 18 || PlayerInfo[playerid][pLider] == 18) // RR
-	{
-	    if(PlayerInfo[playerid][pGun1] == 0) // Pa³ka policyjna
-	    {
-	        PlayerInfo[playerid][pGun1] = 3; PlayerInfo[playerid][pAmmo1] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7) //Deagle
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 207;
-	    }
-	    if(PlayerInfo[playerid][pGun3] == 0 || PlayerInfo[playerid][pGun3] == 25 && PlayerInfo[playerid][pAmmo3] < 50 || PlayerInfo[playerid][pAmmo3] <= 5) //Shotgun
-	    {
-	        PlayerInfo[playerid][pGun3] = 25; PlayerInfo[playerid][pAmmo3] = 100;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 29 && PlayerInfo[playerid][pAmmo4] < 200 || PlayerInfo[playerid][pAmmo4] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun4] = 29; PlayerInfo[playerid][pAmmo4] = 530;
-	    }
-		if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 31 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 31; PlayerInfo[playerid][pAmmo5] = 250;
-	    }
-		if(PlayerInfo[playerid][pGun6] == 0 || PlayerInfo[playerid][pGun6] == 34 && PlayerInfo[playerid][pAmmo6] < 10 || PlayerInfo[playerid][pAmmo6] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun6] = 34; PlayerInfo[playerid][pAmmo6] = 20;
-	    }
-		if(PlayerInfo[playerid][pGun8] == 0 || PlayerInfo[playerid][pGun8] == 17 && PlayerInfo[playerid][pAmmo8] < 10 || PlayerInfo[playerid][pAmmo8] <= 2)
-	    {
-	        PlayerInfo[playerid][pGun8] = 17; PlayerInfo[playerid][pAmmo8] = 20;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 500 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 10000;
-	    }
-		
 	}
 	else if(PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][pLider] == 5)
 	{
@@ -3475,7 +3416,6 @@ IsACopCar(carid)
         if(CarData[lID][c_Owner] == FRAC_LSPD) return 1;
         else if(CarData[lID][c_Owner] == FRAC_FBI) return 1;
         else if(CarData[lID][c_Owner] == FRAC_NG) return 1;
-		else if(CarData[lID][c_Owner] == FRAC_RR) return 1;
     }
 	return 0;
 }
@@ -4398,17 +4338,6 @@ SetPlayerToTeamColor(playerid)
 		    if(OnDuty[playerid] && OnDutyCD[playerid] == 0)
 		    {
 		    	SetPlayerColor(playerid, COLOR_LIGHTBLUE);
-		    }
-		    else
-		    {
-		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
-		    }
-		}
-		if(PlayerInfo[playerid][pMember] == 18 || PlayerInfo[playerid][pLider] == 18) // RR
-		{
-		    if(OnDuty[playerid])
-		    {
-		    	SetPlayerColor(playerid, COLOR_RR);
 		    }
 		    else
 		    {
@@ -6879,7 +6808,7 @@ OOCNewbie(const string[])
 	}
 }
 
-OOCOgloszenie(color,const string[])
+/*OOCOgloszenie(color,const string[])
 {
 	foreach(Player, i)
 	{
@@ -6891,7 +6820,7 @@ OOCOgloszenie(color,const string[])
 			}
 		}
 	}
-}
+}*/
 
 OOCNews(color,const string[])
 {

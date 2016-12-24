@@ -1439,7 +1439,7 @@ SetPlayerSpawnPos(playerid)
     //Tutorial:
     else if(PlayerInfo[playerid][pTut] == 0)
     {
-		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; gOgloszenie[playerid] = 1;
+		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; 
 		TogglePlayerControllable(playerid, 0);
 		RegistrationStep[playerid] = 1;
 	    SetPlayerPosEx(playerid, 1275.0283203125, -1337.3585205078, -5.0);
@@ -1678,12 +1678,6 @@ SetPlayerSpawnPos(playerid)
 						    SetPlayerPosEx(playerid, 1757.6122,-1123.4604,227.8059);
 				            SetPlayerVirtualWorld(playerid, 22);
 						    SetPlayerFacingAngle(playerid,180.0);
-						    Wchodzenie(playerid);
-						}
-						case FRAC_RR: //17
-						{
-						    SetPlayerPosEx(playerid, 2519.0017,-2456.7346,14.1171);
-				            SetPlayerVirtualWorld(playerid, 0);
 						    Wchodzenie(playerid);
 						}
 				    }
