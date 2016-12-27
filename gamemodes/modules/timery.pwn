@@ -1871,6 +1871,26 @@ public JednaSekundaTimer()
 				UsedFind[i] = 0;
 			}
 		}
+        if(GetPVarInt(i, "finding") == 1) {
+            new findtime = GetPVarInt(i, "findtime");
+            if(findtime == 0) {
+                SetPVarInt(i, "finding", 0);
+                SetPVarInt(i, "findtime", 0);
+                SetPVarInt(i, "findingId", 999);
+                SetPVarInt(i, "findingRange", 0);
+                GangZoneDestroy(pFindZone[i]);
+                GameTextForPlayer(i, "~r~Strefa Ulegla Destrukcji", 2500, 1);
+            } else { 
+                new kogo = GetPVarInt(i, "findingId");
+                new range = GetPVarInt(i, "findingRange");
+                new Float:X,Float:Y,Float:Z;
+                GetPlayerPos(kogo, X,Y,Z);
+                if(pFindZone[i]) GangZoneDestroy(pFindZone[i]);
+                pFindZone[i] = GangZoneCreate(X-range, Y-range, X+range, Y+range);
+                GangZoneShowForPlayer(i, pFindZone[i], 0xff00eeBB);
+                SetPVarInt(i, "findtime", findtime-1);
+            }
+        }
 		if(MedicTime[i] > 0)
 		{
 			if(MedicTime[i] == 3)

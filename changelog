@@ -1,3 +1,14 @@
+2.5.5(2)
+
+
+- od teraz bokserzy mogą uczyć domyślnego stylu walki, od 1 skilla, koszt to $7500
+- nowy exterior dla LSPD,
+- ustandaryzowanie większości komunikatów na serwerze
+- /find teraz pokazuje strefę, w której znajduje się poszukiwany gracz i aby namierzyć osobę należy znać jej numer telefonu
+
+
+2.5.5
+
 - usunieto komunikat "silnik jest zepsuty" i niemoznosc odpalenia auta			http://mrucznik-rp.pl/topic/30634-
 - dodano wlasny stream do /dr													http://mrucznik-rp.pl/topic/31568-
 - podniesiono limity dla /plac: $12500 dla lvl 1,2,								http://mrucznik-rp.pl/topic/30634-
@@ -25,10 +36,3 @@
 																				http://mrucznik-rp.pl/topic/26162-
 
 
-
-
-v2
-
-
-teraz nie można namierzyć osoby z wyłączonym telefonem, komenda /togtel dostępna od 1lvl
-																				http://mrucznik-rp.pl/topic/30143-apropozycja-wywaltelefon/

@@ -2137,10 +2137,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
-			                SetPlayerPosEx(playerid,1569.0193, -1690.5186, 5.9972);
+			                SetPlayerPosEx(playerid,1576.4360,-1649.7135,7.9030);
 			                SetPlayerVirtualWorld(playerid,0);
 			                SetPlayerInterior(playerid,0);
-			                GameTextForPlayer(playerid, "~w~ [Poziom -1]~n~~b~Parking LSPD", 5000, 1);
+			                GameTextForPlayer(playerid, "~w~ [Poziom -1]~n~~b~Parking Dolny", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
                         }
 						else
@@ -2149,50 +2149,66 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 		            }
-		            case 1:
+		            case 1: {
+		            	// parking gorny
+		            	if(IsACop(playerid) || IsABOR(playerid))
+           				{
+			                SetPlayerPosEx(playerid,1560.1825,-1636.2950,13.3748); // pos gornego
+			                SetPlayerVirtualWorld(playerid,0);
+			                SetPlayerInterior(playerid,0);
+			                GameTextForPlayer(playerid, "~w~ [Poziom 0]~n~~b~Parking Gorny", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+                        }
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
+		            }
+		            case 2:
 		            {
 		                SetPlayerPosEx(playerid,-1645.1858, 883.1620, -45.4112);
 		                SetPlayerVirtualWorld(playerid,1);
 		                TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-		                GameTextForPlayer(playerid, "~w~ [Poziom 0]~n~~b~Komisariat", 5000, 1);
+		                GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Komisariat", 5000, 1);
 						PlayerInfo[playerid][pInt] = 10;
 		            }
-		            case 2:
+		            case 3:
 		            {
 		                SetPlayerPosEx(playerid,-1621.7272, 834.5807, -26.1115);
 		                SetPlayerVirtualWorld(playerid,1);
 		                TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-                 		GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Pokoje przesluchan", 5000, 1);
+                 		GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Pokoje przesluchan", 5000, 1);
 						PlayerInfo[playerid][pInt] = 10;
 		            }
-		            case 3:
+		            case 4:
 		            {
 		                SetPlayerPosEx(playerid,-1745.1101, 824.0737, -48.0110);
 		                SetPlayerVirtualWorld(playerid,1);
 		                TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Biura", 5000, 1);
+	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
 						PlayerInfo[playerid][pInt] = 10;
 		            }
-		            case 4:
+		            case 5:
 		            {
 		                SetPlayerPosEx(playerid,1568.1061, 2205.3196, -50.9522);
 		                SetPlayerVirtualWorld(playerid,3);
 		                TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Sale treningowe", 5000, 1);
+	                	GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale treningowe", 5000, 1);
 						PlayerInfo[playerid][pInt] = 10;
 		            }
-		            case 5:
+		            case 6:
 		            {
 						if(IsACop(playerid) || IsABOR(playerid))
 						{
 							SetPlayerPosEx(playerid,1565.0798, -1665.6580, 28.4782);
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerInterior(playerid,0);
-							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Dach", 5000, 1);
+							GameTextForPlayer(playerid, "~w~ [Poziom 5]~n~~b~Dach", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
 						}
 						else

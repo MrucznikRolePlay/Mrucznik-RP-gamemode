@@ -1,5 +1,10 @@
 //zmienne.pwn
 
+
+new Zgloszenie[OSTATNIE_ZGLOSZENIA][hqZgloszenia];
+new ilosczgloszen = 0;
+
+
 new gTeam[MAX_PLAYERS];
 
 //regex
@@ -17,6 +22,7 @@ new afk_timer[MAX_PLAYERS];
 //tazer
 new MaTazer[MAX_PLAYERS];
 new TazerAktywny[MAX_PLAYERS];
+new pFindZone[MAX_PLAYERS];
 //2015.08.25
 new wybory[6];
 ///
@@ -681,10 +687,16 @@ new Wodliczanie;
 //koniec wozy Ballas
 //new WindaW;//Winda
 //new WindaWP = 0;//Winda
-new BramaPolicja;//ro
-new BramaPolicjaState = 1;//ro
-new SzlabanPolicja;//ro
-new SzlabanPolicjaState = 1;//ro
+//new BramaPolicja;//ro
+//new BramaPolicjaState = 1;//ro
+//new SzlabanPolicja;//ro
+//new SzlabanPolicjaState = 1;//ro
+new lspdWjazdGora;
+new lspdWjazdGoraState = 0; // 0 close 1 open
+new lspdWjazdDolny;
+new lspdWjazdDolnyState = 0; // 0 close 1 open
+new lspdExtDoors;
+new lspdExtDoorsState;
 /*new DrzwiTajniak1a;
 new DrzwiTajniak1b;
 new DrzwiTajniak1State = 1;

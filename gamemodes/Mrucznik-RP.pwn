@@ -72,7 +72,7 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.5"
+#define VERSION "v2.5.5(3)"
 
 //Modu≥y mapy
 #include "modules/definicje.pwn"
@@ -698,7 +698,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		if(IsACop(playerid))
 		{
-			SendClientMessage(playerid, COLOR_BLUE, "Po≥πczy≥eú siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnπ");
+			sendTipMessageEx(playerid, COLOR_BLUE, "Po≥πczy≥eú siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnπ");
 		}
 		else
 		{
@@ -712,16 +712,16 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		if(IsAMedyk(playerid) && JobDuty[playerid] == 0 )
 		{
-			SendClientMessage(playerid, COLOR_GRAD1, "Nie jesteú medykiem na s≥uøbie!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteú medykiem na s≥uøbie!");
 		}
 		else if(!IsAMedyk(playerid))
 		{
-			SendClientMessage(playerid, COLOR_GRAD1, "Nie jesteú medykiem!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteú medykiem!");
 		}
 	}
 	if (GetVehicleModel(vehicleid) == 525)
 	{
-		SendClientMessage(playerid, COLOR_BROWN, "Wsiad≥eú do holownika, naciúnij CTRL alby podholowaÊ wÛz.");
+		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad≥eú do holownika, naciúnij CTRL alby podholowaÊ wÛz.");
 	}
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerEnterVehicle - end", GetNick(playerid), playerid);
@@ -811,6 +811,9 @@ public OnPlayerDisconnect(playerid, reason)
 		KillTimer(afk_timer[playerid]);
 		afk_timer[playerid] = -1;
 	}
+    if(GetPVarInt(playerid, "finding") == 1) {
+        GangZoneDestroy(pFindZone[playerid]);
+    }
 	//PAèDZIOCH - lina SWAT
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
@@ -1299,7 +1302,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		{
 			if(caller < 255)
 			{
-				SendClientMessage(caller,  COLOR_GRAD2, "   Po≥πczenie zakoÒczone....");
+				SendClientMessage(caller,  COLOR_GRAD2, "Po≥πczenie zakoÒczone....");
 				Callin[playerid] = 0;
 				Callin[caller] = 0;
 				CellTime[caller] = 0;
@@ -1548,7 +1551,7 @@ SetPlayerSpawnPos(playerid)
 						{
 						    new rand = random(sizeof(gCopPlayerSpawns));
 							SetPlayerPosEx(playerid, gCopPlayerSpawns[rand][0], gCopPlayerSpawns[rand][1], gCopPlayerSpawns[rand][2]);
-							SetPlayerFacingAngle(playerid, 270.0);
+							SetPlayerFacingAngle(playerid, 90.0);
 						}
 						case FRAC_FBI: //2
 						{
@@ -4356,7 +4359,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		{
 		    if(PlayerInfo[playerid][pBoatLic] < 1)
 			{
-			    SendClientMessage(playerid, COLOR_GREY, "   Nie wiesz w jaki sposÛb p≥ywaÊ ≥odziπ, wiÍc decydujesz siÍ jπ opuúciÊ !");
+			    sendTipMessageEx(playerid, COLOR_GREY, "Nie wiesz w jaki sposÛb p≥ywaÊ ≥odziπ, wiÍc decydujesz siÍ jπ opuúciÊ !");
 			    RemovePlayerFromVehicleEx(playerid);
 			}
 		}
@@ -4374,7 +4377,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 			    else
 				{
-					SendClientMessage(playerid, COLOR_GREY, "   Nie wiesz w jaki sposÛb lataÊ samolotem, wiÍc decydujesz siÍ go opuúciÊ !");
+					sendTipMessageEx(playerid, COLOR_GREY, "Nie wiesz w jaki sposÛb lataÊ samolotem, wiÍc decydujesz siÍ go opuúciÊ !");
 					RemovePlayerFromVehicleEx(playerid);
 				}
 			}
@@ -4392,7 +4395,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 				else
 				{
-					SendClientMessage(playerid, COLOR_GREY, "   Nie masz prawa jazdy, postanawiasz opuúciÊ pojazd!");
+					sendTipMessageEx(playerid, COLOR_GREY, "Nie masz prawa jazdy, postanawiasz opuúciÊ pojazd!");
 					RemovePlayerFromVehicleEx(playerid);
 				}
 
@@ -4411,7 +4414,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		            if(GetVehicleModel(newcar) != 445)
 		            {
 		            	RemovePlayerFromVehicleEx(playerid);
-		            	SendClientMessage(playerid, COLOR_GREY, "Musisz byÊ na s≥uøbie aby jeüdziÊ autem policyjnym !");
+		            	sendTipMessageEx(playerid, COLOR_GREY, "Musisz byÊ na s≥uøbie aby jeüdziÊ autem policyjnym !");
 						#if DEBUG == 1
 							printf("%s[%d] OnPlayerStateChange - end", GetNick(playerid), playerid);
 						#endif
@@ -4426,7 +4429,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         {
             if(KradniecieWozu[playerid] != newcar)
 		    {
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Moøesz ukraúÊ ten wÛz, wpisz /kradnij sprÛbowaÊ to zrobiÊ lub /wyjdz aby wyjúÊ.");
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Moøesz ukraúÊ ten wÛz, wpisz /kradnij sprÛbowaÊ to zrobiÊ lub /wyjdz aby wyjúÊ.");
                 KradniecieWozu[playerid] = newcar;
                 if(PlayerInfo[playerid][pCarLic] == 1) TogglePlayerControllable(playerid, 0);
 			}
@@ -4440,7 +4443,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                 {
                     if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
                     format(string, sizeof(string), " Ten pojazd naleøy do %s i nie moøesz nim kierowaÊ.", FractionNames[CarData[lcarid][c_Owner]]);
-                    SendClientMessage(playerid,COLOR_GREY,string);
+                    sendTipMessageEx(playerid,COLOR_GREY,string);
                     RemovePlayerFromVehicleEx(playerid);
 					#if DEBUG == 1
 						printf("%s[%d] OnPlayerStateChange - end", GetNick(playerid), playerid);
@@ -4450,8 +4453,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
     	        {
                     if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
-                    format(string, sizeof(string), "   Aby kierowaÊ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
-    		        SendClientMessage(playerid,COLOR_GREY,string);
+                    format(string, sizeof(string), "Aby kierowaÊ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
+    		        sendTipMessageEx(playerid,COLOR_GREY,string);
     		        RemovePlayerFromVehicleEx(playerid);
     	        }
     	    }
@@ -4471,7 +4474,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                 {
                     if(zawodnik[playerid] != 1)
         		    {
-        				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie jesteú zawodnikiem øuølowym, zg≥oú siÍ do administracji jeúli chcesz nim zostaÊ.");
+        				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Nie jesteú zawodnikiem øuølowym, zg≥oú siÍ do administracji jeúli chcesz nim zostaÊ.");
         				RemovePlayerFromVehicleEx(playerid);
         			}
                 }
@@ -4493,8 +4496,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                     if(wywal)
                     {
                         if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
-                        format(string, sizeof(string), "  Aby prowadziÊ ten pojazd potrzebujesz %d skilla w zawodzie %s.", CarData[lcarid][c_Rang], JobNames[CarData[lcarid][c_Owner]]);
-                        SendClientMessage(playerid,COLOR_GREY,string);
+                        format(string, sizeof(string), "Aby prowadziÊ ten pojazd potrzebujesz %d skilla w zawodzie %s.", CarData[lcarid][c_Rang], JobNames[CarData[lcarid][c_Owner]]);
+                        sendTipMessageEx(playerid,COLOR_GREY,string);
         		        RemovePlayerFromVehicleEx(playerid);
 						#if DEBUG == 1
 							printf("%s[%d] OnPlayerStateChange - end", GetNick(playerid), playerid);
@@ -4509,15 +4512,15 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                         if(GetPlayerFraction(playerid) == FRAC_KT) return 1;
                     }
                     if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
-                    format(string, sizeof(string), "  Aby prowadziÊ ten pojazd musisz byÊ w zawodzie %s.", JobNames[CarData[lcarid][c_Owner]]);
-                    SendClientMessage(playerid,COLOR_GREY,string);
+                    format(string, sizeof(string), "Aby prowadziÊ ten pojazd musisz byÊ w zawodzie %s.", JobNames[CarData[lcarid][c_Owner]]);
+                    sendTipMessageEx(playerid,COLOR_GREY,string);
     		        RemovePlayerFromVehicleEx(playerid);
 					#if DEBUG == 1
 						printf("%s[%d] OnPlayerStateChange - end", GetNick(playerid), playerid);
 					#endif
                     return 1;
                 }
-                if(CarData[lcarid][c_Owner] == JOB_BUSDRIVER) SendClientMessage(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpoczπÊ pracÍ");
+                if(CarData[lcarid][c_Owner] == JOB_BUSDRIVER) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpoczπÊ pracÍ");
             }
             else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FAMILY)// wszystkie auta RODZIN
     	    {
@@ -4527,7 +4530,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					//ERROR WUT
                     //format(string, sizeof(string), " Ten pojazd naleøy do rodziny %s i nie moøesz nim kierowaÊ.", OrgInfo[orgID(CarData[lcarid][c_Owner])][o_Name]);
                     format(string, sizeof(string), " Ten pojazd naleøy do rodziny i nie moøesz nim kierowaÊ.");
-                    SendClientMessage(playerid,COLOR_GREY,string);
+                    sendTipMessageEx(playerid,COLOR_GREY,string);
                     RemovePlayerFromVehicleEx(playerid);
 					#if DEBUG == 1
 						printf("%s[%d] OnPlayerStateChange - end", GetNick(playerid), playerid);
@@ -4537,8 +4540,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
     	        {
                     if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
-                    format(string, sizeof(string), "   Aby kierowaÊ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
-    		        SendClientMessage(playerid,COLOR_GREY,string);
+                    format(string, sizeof(string), "Aby kierowaÊ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
+    		        sendTipMessageEx(playerid,COLOR_GREY,string);
     		        RemovePlayerFromVehicleEx(playerid);
     	        }
     	    }
@@ -4550,7 +4553,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                     {
                         if(CarData[lcarid][c_Keys] != PlayerInfo[playerid][pUID])
         	       	    {
-                            SendClientMessage(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta≥y zabrane przez w≥aúciciela.");
+                            sendTipMessageEx(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta≥y zabrane przez w≥aúciciela.");
                             PlayerInfo[playerid][pKluczeAuta] = 0;
         				   	RemovePlayerFromVehicleEx(playerid);
         	       	    }
@@ -4558,7 +4561,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     	       	}
     	       	else
     	       	{
-    	       	    SendClientMessage(playerid, COLOR_NEWS, "Nie masz kluczy do tego pojazdu, a zabezpieczenia sπ zbyt dobre abyú mÛg≥ go ukraúÊ.");
+    	       	    sendTipMessageEx(playerid, COLOR_NEWS, "Nie masz kluczy do tego pojazdu, a zabezpieczenia sπ zbyt dobre abyú mÛg≥ go ukraúÊ.");
     	       		RemovePlayerFromVehicleEx(playerid);
     	       	}
             }
@@ -4890,6 +4893,7 @@ public OnGameModeInit()
 		VehicleUID[v][vUID] = 0;
 		SetVehicleNumberPlate(v, "{1F9F06}M-RP");
 	}
+    pusteZgloszenia();
     print("GameMode init - done!");
     //SendRconCommand("reloadfs MRP/mrpshop");
     //SendRconCommand("reloadfs MRP/mrpattach");
@@ -6271,7 +6275,7 @@ public OnPlayerText(playerid, text[])
 		{
 		    if(PlayerInfo[playerid][pRank] < 4)
 		    {
-		        SendClientMessage(playerid, COLOR_GREY, "   Tylko Hitmani z 4 rangπ mogπ sprawdzaÊ listÍ kontraktÛw !");
+		        SendClientMessage(playerid, COLOR_GREY, "Tylko Hitmani z 4 rangπ mogπ sprawdzaÊ listÍ kontraktÛw !");
 		        return 0;
 		    }
 		    SearchingHit(playerid);
@@ -6300,12 +6304,12 @@ public OnPlayerText(playerid, text[])
 				}//lets start
 				if(strcmp(x_nr,"1",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Musisz miec 3 rangÍ aby pisaÊ newsy Hitman Agency !"); return 0; }
+				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
+				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz miec 3 rangÍ aby pisaÊ newsy Hitman Agency !"); return 0; }
 				    if(News[hTaken1] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
-				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "   Za krÛtki tekst newsa !"); return 0; }
+				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "Za krÛtki tekst newsa !"); return 0; }
 						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd1], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact1], string, 0, strlen(string));
 						News[hTaken1] = 1; PlacedNews[playerid] = 1;
@@ -6314,18 +6318,18 @@ public OnPlayerText(playerid, text[])
 				    }
 				    else
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest zajety !");
+				        SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajety !");
 				        return 0;
 				    }
 				}
 				else if(strcmp(x_nr,"2",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
+				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
+				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken2] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
-				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "   News jest za krÛtki !"); return 0; }
+				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krÛtki !"); return 0; }
 						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd2], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact2], string, 0, strlen(string));
 						News[hTaken2] = 1; PlacedNews[playerid] = 1;
@@ -6334,18 +6338,18 @@ public OnPlayerText(playerid, text[])
 				    }
 				    else
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest aktualnie w uøyciu !");
+				        SendClientMessage(playerid, COLOR_GREY, "Ten numer jest aktualnie w uøyciu !");
 				        return 0;
 				    }
 				}
 				else if(strcmp(x_nr,"3",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
+				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
+				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken3] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
-				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "   News jest za krÛtki !"); return 0; }
+				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krÛtki !"); return 0; }
 						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd3], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact3], string, 0, strlen(string));
 						News[hTaken3] = 1; PlacedNews[playerid] = 1;
@@ -6354,18 +6358,18 @@ public OnPlayerText(playerid, text[])
 				    }
 				    else
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest aktualnie w uøyciu !");
+				        SendClientMessage(playerid, COLOR_GREY, "Ten numer jest aktualnie w uøyciu !");
 				        return 0;
 				    }
 				}
 				else if(strcmp(x_nr,"4",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
+				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
+				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken4] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
-				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "   News jest za krÛtki !"); return 0; }
+				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krÛtki !"); return 0; }
 						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd4], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact4], string, 0, strlen(string));
 						News[hTaken4] = 1; PlacedNews[playerid] = 1;
@@ -6374,18 +6378,18 @@ public OnPlayerText(playerid, text[])
 				    }
 				    else
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest aktualnie w uøyciu !");
+				        SendClientMessage(playerid, COLOR_GREY, "Ten numer jest aktualnie w uøyciu !");
 				        return 0;
 				    }
 				}
 				else if(strcmp(x_nr,"5",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
+				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
+				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken5] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
-				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "   News jest za krÛtki !"); return 0; }
+				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krÛtki !"); return 0; }
 						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd5], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact5], string, 0, strlen(string));
 						News[hTaken5] = 1; PlacedNews[playerid] = 1;
@@ -6394,7 +6398,7 @@ public OnPlayerText(playerid, text[])
 				    }
 				    else
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Ten numer jest aktualnie w uøyciu !");
+				        SendClientMessage(playerid, COLOR_GREY, "Ten numer jest aktualnie w uøyciu !");
 				        return 0;
 				    }
 				}
@@ -6402,7 +6406,7 @@ public OnPlayerText(playerid, text[])
 				{
 				    if(PlayerInfo[playerid][pRank] < 4)
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Musisz mieÊ 4 rangÍ aby usuwaÊ newsy z kana≥u Hitman Agency !");
+				        SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 4 rangÍ aby usuwaÊ newsy z kana≥u Hitman Agency !");
 				        return 0;
 				    }
 				    new string1[MAX_PLAYER_NAME];
@@ -6484,12 +6488,12 @@ public OnPlayerText(playerid, text[])
 		{
 		    if(PlayerInfo[playerid][pRank] < 4)
 		    {
-		        SendClientMessage(playerid, COLOR_GREY, "   Musisz mieÊ 4 rangÍ aby dawaÊ kontrakty Hitmanom !");
+		        SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 4 rangÍ aby dawaÊ kontrakty Hitmanom !");
 		        return 0;
 		    }
 		    if(hitfound == 0)
 		    {
-		        SendClientMessage(playerid, COLOR_GREY, "   Nie sprawdzi≥eú jeszcze kontraktÛw, zrÛb to w laptopie (wpisz 'kontrakty') !");
+		        SendClientMessage(playerid, COLOR_GREY, "Nie sprawdzi≥eú jeszcze kontraktÛw, zrÛb to w laptopie (wpisz 'kontrakty') !");
 		        return 0;
 		    }
 		    tmp = strtok(text, idx);
@@ -6506,12 +6510,12 @@ public OnPlayerText(playerid, text[])
 			    {
 				    if(!IsAHA(giveplayerid))
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Ten gracz nie jest Hitmanem !");
+				        SendClientMessage(playerid, COLOR_GREY, "Ten gracz nie jest Hitmanem !");
 						return 0;
 				    }
 				    if(GoChase[giveplayerid] < 999)
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Ten Hitman wykonuje juø jakieú zlecenie !");
+				        SendClientMessage(playerid, COLOR_GREY, "Ten Hitman wykonuje juø jakieú zlecenie !");
 						return 0;
 				    }
 				    if(IsPlayerConnected(hitmanid))
@@ -6531,7 +6535,7 @@ public OnPlayerText(playerid, text[])
 				    }
 				    else
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "   Osoby, na ktÛrπ jest zlecenie, nie ma na serwerze. SprÛbuj pÛüniej !");
+				        SendClientMessage(playerid, COLOR_GREY, "Osoby, na ktÛrπ jest zlecenie, nie ma na serwerze. SprÛbuj pÛüniej !");
 				        return 0;
 				    }
 				}
@@ -6539,7 +6543,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else
 			{
-			    SendClientMessage(playerid, COLOR_GREY, "   Tego gracza nie ma na serwerze lub nie jest Hitmanem !");
+			    SendClientMessage(playerid, COLOR_GREY, "Tego gracza nie ma na serwerze lub nie jest Hitmanem !");
 			    return 0;
 			}
 		}
@@ -6563,13 +6567,13 @@ public OnPlayerText(playerid, text[])
 		{
 		    if(OrderReady[playerid] > 0)
 		    {
-		        SendClientMessage(playerid, COLOR_GREY, "   ZamÛwi≥eú juø paczki z broniπ, idü do swojej bazy aby je odebraÊ !");
+		        SendClientMessage(playerid, COLOR_GREY, "ZamÛwi≥eú juø paczki z broniπ, idü do swojej bazy aby je odebraÊ !");
 		        return 0;
 		    }
 		    tmp = strtok(text, idx);
 		    if ((strcmp("1", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("1")))
 			{
-			    //if(PlayerInfo[playerid][pRank] < 0) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    //if(PlayerInfo[playerid][pRank] < 0) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 2499)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczkÍ numer 1 ($2500), zostanie dostarczona do drzwi Agencji.");
@@ -6578,13 +6582,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 		    else if ((strcmp("2", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("2")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 1) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 4999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczkÍ numer 2 ($5000), zostanie dostarczona do drzwi Agencji.");
@@ -6593,13 +6597,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 			else if ((strcmp("3", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("3")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 5999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 3 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -6608,13 +6612,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 			else if ((strcmp("4", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("4")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 5999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 4 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -6623,13 +6627,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 			else if ((strcmp("5", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("5")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 7999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 5 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -6638,13 +6642,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 			else if ((strcmp("6", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("6")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 7999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 6 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -6653,13 +6657,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 			else if ((strcmp("7", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("7")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 8499)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 7 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -6668,13 +6672,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 			else if ((strcmp("8", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("8")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 8499)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 8 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -6683,13 +6687,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 			else if ((strcmp("9", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("9")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 9999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 9 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -6698,13 +6702,13 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
 			else if ((strcmp("10", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("10")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "   Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 9999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 10 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -6713,7 +6717,7 @@ public OnPlayerText(playerid, text[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_GREY,"   Nie staÊ ciÍ na to !");
+			        SendClientMessage(playerid, COLOR_GREY,"Nie staÊ ciÍ na to !");
 			        return 0;
 			    }
 			}
@@ -6818,7 +6822,7 @@ public OnPlayerText(playerid, text[])
 			SendTeamMessage(4, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Dyspozytor: Zg≥oszono: %s",text);
 			SendTeamMessage(4, COLOR_ALLDEPT, wanted);
-			SendClientMessage(playerid, COLOR_GRAD2, "   Rozmowa zakoÒczona...");
+			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoÒczona...");
 			Mobile[playerid] = 1255;
 			return 0;
 		}
@@ -6838,7 +6842,7 @@ public OnPlayerText(playerid, text[])
 			SendTeamMessage(17, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Dyspozytor: Zg≥oszono: %s",text);
 			SendTeamMessage(17, COLOR_ALLDEPT, wanted);
-			SendClientMessage(playerid, COLOR_GRAD2, "   Rozmowa zakoÒczona...");
+			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoÒczona...");
 			Mobile[playerid] = 1255;
 			return 0;
 		}
@@ -6849,8 +6853,7 @@ public OnPlayerText(playerid, text[])
 				SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem");
 				return 0;
 			}
-			if ((strcmp("nie", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("nie")))
-			{
+			else {
 				new turner[MAX_PLAYER_NAME];
 				new wanted[128];
 				GetPlayerName(playerid, turner, sizeof(turner));
@@ -6860,67 +6863,8 @@ public OnPlayerText(playerid, text[])
 				SendFamilyMessage(1, COLOR_DBLUE, wanted);
 				format(wanted, sizeof(wanted), "HQ: Przestepstwo: %s, Poszukiwany: Nieznany",PlayerCrime[playerid][pAccusing]);
 				SendFamilyMessage(1, COLOR_DBLUE, wanted);
-				SendClientMessage(playerid, COLOR_GRAD2, "   Rozmowa zakoÒczona...");
+				SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoÒczona...");
 				Mobile[playerid] = 1255;
-				return 0;
-			}
-			new badguy;
-			//badguy = strval(tmp);
-			badguy = ReturnUser(tmp);
-			if (IsPlayerConnected(badguy))
-			{
-			    if(badguy != INVALID_PLAYER_ID)
-			    {
-					if (gTeam[badguy] == 2 || gTeam[badguy] == 1)
-					{
-						SendClientMessage(playerid, COLOR_DBLUE, "LSPD HQ: Musisz poinformowaÊ kogoú innego. To jest linia ratunkowa");
-						SendClientMessage(playerid, COLOR_GRAD2, "   Rozmowa zakoÒczona...");
-						Mobile[playerid] = 1255;
-						return 0;
-					}
-					if (PoziomPoszukiwania[badguy] > 0)
-					{
-						SendClientMessage(playerid, COLOR_DBLUE, "LSPD HQ: Aktualnie prowadzimy úledztwo w tej sprawie");
-						SendClientMessage(playerid, COLOR_DBLUE, "DziÍkujemy za zg≥oszenie przestÍpstwa");
-						SendClientMessage(playerid, COLOR_GRAD2, "   Rozmowa zakoÒczona...");
-						Mobile[playerid] = 1255;
-						return 0;
-					}
-					if (badguy == playerid)
-					{
-						SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Nie wyg≥upiaj siÍ, to jest linia ratunkowa!");
-						SendClientMessage(playerid, COLOR_GRAD2, "   Rozmowa zakoÒczona...");
-						Mobile[playerid] = 1255;
-						return 0;
-					}
-					new guyname[MAX_PLAYER_NAME];
-					new turner[MAX_PLAYER_NAME];
-					new wanted[128];
-					
-					SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Ostrzeøemy wszystkie jednostki w danym obszarze.");
-					SendClientMessage(playerid, COLOR_DBLUE, "DziÍkujemy za zg≥oszenie przestÍpstwa");
-					
-					GetPlayerName(badguy, guyname, sizeof(guyname));
-					GetPlayerName(playerid, turner, sizeof(turner));
-					format(wanted, sizeof(wanted), "HQ: Do Wszystkich Jednostek: Nadawca: %s",turner);
-					SendFamilyMessage(1, COLOR_DBLUE, wanted);
-					format(wanted, sizeof(wanted), "HQ: Przestepstwo: %s, Poszukiwany: %s",PlayerCrime[playerid][pAccusing],guyname);
-					SendFamilyMessage(1, COLOR_DBLUE, wanted);
-					
-                    PlayCrimeReportForPlayer(playerid, playerid, 9);
-
-					SetPlayerCriminal(badguy,playerid, PlayerCrime[playerid][pAccusing]);
-
-					if(PoziomPoszukiwania[badguy] > 0) { } else { PoziomPoszukiwania[badguy] += 1; }
-					Mobile[playerid] = 1255;
-					return 0;
-				}//invalid id
-				return 0;
-			}//not connected
-			else
-			{
-				format(string, sizeof(string), "Police HQ: Nie mamy øadnych informacji o %s, czy to napewno dobre nazwisko?",tmp);
-				SendClientMessage(playerid, COLOR_DBLUE, string);
 				return 0;
 			}
 		}
@@ -6931,9 +6875,19 @@ public OnPlayerText(playerid, text[])
 				SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem");
 				return 0;
 			}
-			strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
-			SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Jeúli nie wiesz kto to by≥, powiedz poprostu 'nie'.");
-			Mobile[playerid] = 913;
+			//strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
+			new id = getWolneZgloszenie();
+            new Hour, Minute;
+            gettime(Hour, Minute);
+            new datapowod[160];
+            format(datapowod, sizeof(datapowod), "%02d:%02d",  Hour, Minute);
+            strmid(Zgloszenie[id][zgloszenie_kiedy], datapowod, 0, sizeof(datapowod), 36);
+            format(Zgloszenie[id][zgloszenie_nadal], MAX_PLAYER_NAME, "%s", GetNick(playerid, true));
+            strmid(Zgloszenie[id][zgloszenie_tresc], text, 0, strlen(text) + 9, 128);
+            Zgloszenie[id][zgloszenie_status] = 0;
+            SendFamilyMessage(1, COLOR_DBLUE, "HQ: Do Wszystkich Jednostek: Otrzymano nowe zg≥oszenie!");
+            sendTipMessageEx(playerid, COLOR_GRAD2, "[Telefon] Rozmowa zakoÒczona");
+            Mobile[playerid] = 1255;
 			return 0;
 		}
 

@@ -140,7 +140,4 @@ forward BBD_Timer();
 forward UnhireRentCar(playerid, veh);
 forward MyItems_Load(playerid);
 
-//swieta
-forward swieta_dajKase(playa);
-
 //EOF

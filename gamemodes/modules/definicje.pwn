@@ -15,6 +15,10 @@
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
 
+
+#define OSTATNIE_ZGLOSZENIA 10
+
+
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
 #define MRP_PREM_HOURS    15      //Ilosc godzin potrzebnych do przegrania

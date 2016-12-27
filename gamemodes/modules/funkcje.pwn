@@ -1,13 +1,43 @@
 //funkcje.pwn     AKTUALNA MAPA
 
-// swieta
-public swieta_dajKase(playa) {
-	DajKase(playa, 250000 + random(300000));
-	new string[64];
-	format(string, sizeof(string), "Otrzymujesz $%d od miko³aja! Wszystkiego najlepszego!", kaska);
-	SendClientMessage(playa, 0x7CFC00AA, string);
+stock pusteZgloszenia() {
+	for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
+		new Hour, Minute;
+		gettime(Hour, Minute);
+		new string[36];
+		format(string, sizeof(string), "%02d:%02d",  Hour, Minute);
+		strmid(Zgloszenie[i][zgloszenie_kiedy], string, 0, sizeof(string), 36);
+		strmid(Zgloszenie[i][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
+		strmid(Zgloszenie[i][zgloszenie_tresc], "Brak", 0, 4, 70);
+	}
+}
+stock getWolneZgloszenie() {
+	if(ilosczgloszen == OSTATNIE_ZGLOSZENIA) {
+		ilosczgloszen = 0;
+	}
+	return ilosczgloszen++;
 }
 
+sendNotification(id, title[], text[], time) {
+	CallRemoteFunction("notify", "dssd", id, title, text, time);
+}
+
+noAccessMessage(id) {
+    return SendClientMessage(id,COLOR_FADE2,"»» Nie posiadasz dostêpu do tej komendy");
+}
+sendTipMessage(id, string:msg[], color = COLOR_GRAD3) {
+	new _str[128];
+	format(_str,128,"»» %s", msg);
+	return SendClientMessage(id, color, _str);
+}
+sendTipMessageEx(id, color = COLOR_GRAD3, string:msg[]) { //CM do sendclientmessage (:
+	return sendTipMessage(id, msg, color);
+}
+sendErrorMessage(id, string:msg[]) {
+	new _str[128];
+	format(_str,128,"»» %s", msg);
+	return SendClientMessage(id, COLOR_LIGHTRED, _str);
+}
 //2.5.2
 
 stock GetMajatek(playerid)
@@ -23,6 +53,8 @@ stock GetMajatek(playerid)
     }
 	return kaska[playerid]+PlayerInfo[playerid][pAccount]+vehvalues+Dom[PlayerInfo[playerid][pDom]][hCena];
 }
+
+
 
 //WRZUCANIE DO DEMORGAN
 JailDeMorgan(playerid)
@@ -1304,10 +1336,16 @@ stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', 
 	}
 }
 
-stock GetNick(playerid)
+stock GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, sizeof(nick));
+	if(rp) {
+		for(new i; i < MAX_PLAYER_NAME; i++)
+		{
+			if(nick[i] == '_') nick[i] = ' ';
+		}
+	}
 	return nick;
 }
 
@@ -6844,8 +6882,10 @@ SendTeamMessage(team, color, string[], isDepo = 0)
 		{
 		    if(PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team)
 		    {
-		    	printf("isdepo %d       gmutedepo[i] = %d", isDepo, gMuteDepo[i]);
+		    	//printf("isdepo %d       gmutedepo[i] = %d", isDepo, gMuteDepo[i]);
 		    	if(isDepo == 1 && gMuteDepo[i] == 0) {
+		    		SendClientMessage(i, color, string);
+		    	} else {
 		    		SendClientMessage(i, color, string);
 		    	}
 			}
@@ -6978,7 +7018,7 @@ SendIRCMessage(channel, color, string[])
 	}
 }
 
-SendTeamBeepMessage(team, color, string[])
+/*SendTeamBeepMessage(team, color, string[])
 {
 	foreach(Player, i)
 	{
@@ -6991,7 +7031,7 @@ SendTeamBeepMessage(team, color, string[])
 			}
 		}
 	}
-}
+}*/
 
 SendEnemyMessage(color, string[])
 {

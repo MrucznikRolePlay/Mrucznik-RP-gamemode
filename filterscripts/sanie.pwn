@@ -44,6 +44,15 @@ public OnFilterScriptExit() {
 }
 public OnFilterScriptInit()
 {
+        stworzObj();
+        vehicleid = 578;
+        for(new i=0; i<MAX_PLAYERS; i++) {
+            OnPlayerConnect(i);
+        }
+        return 1;
+
+}
+stworzObj() {
         obj[0] = CreateDynamicObject(1251, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         obj[1] = CreateDynamicObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         obj[2] = CreateDynamicObject(19315, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
@@ -75,12 +84,6 @@ public OnFilterScriptInit()
         obj[28] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         obj[29] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         obj[30] = CreateDynamicObject(1319, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        vehicleid = 578;
-        for(new i=0; i<MAX_PLAYERS; i++) {
-            OnPlayerConnect(i);
-        }
-        return 1;
-
 }
 CMD:sanie(playerid,params[])
 {
@@ -94,6 +97,7 @@ CMD:sanie(playerid,params[])
         sanie = false;
         return 1;
     } else {
+        stworzObj();
         new Float:x, Float:y, Float:z, Float:a;
         GetPlayerPos(playerid, x, y, z);
         GetPlayerFacingAngle(playerid, a);
@@ -150,10 +154,12 @@ public OnPlayerPickUpDynamicPickup(playerid,pickupid){
             new nagroda = random(13);
             if(nagroda >= 0 && nagroda <= 2) {
                 if(dostalPrezent[playerid][0]) return SendClientMessage(playerid, COLOR_LAWNGREEN, "Dosta³eœ ju¿ pieni¹dze, daj spróbowaæ innym!");
-                format(string, sizeof(string), "Otwierasz prezent... widaæ tam coœ super!");
+                new kaska = 250000 + random(300000);
+                format(string, sizeof(string), "Otrzymujesz $%d! Wszystkiego najlepszego!", kaska);
                 // callRemoteFunction("swieta_dajKase"
                 DOF2_SetBool( USER_FILE ( playerid ), "Kasa", true); 
-                CallRemoteFunction("swieta_dajKase", "i", playerid);
+                CallRemoteFunction("DajKase", "ii", playerid, kaska);
+                //CallRemoteFunctionDajKase(playerid, kaska);
                 dostalPrezent[playerid][0] = true;
             }
             if(nagroda >= 3 && nagroda <= 8) {
