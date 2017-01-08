@@ -72,7 +72,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.5|2"
+#define VERSION "v2.5.5"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
@@ -106,9 +106,9 @@ main()
 	print("C | ---        ****        --- | C");
 	print("Z | ---    by Mrucznik     --- | Z");
 	print("N | ---                    --- | N");
-	print("I | ---       /\\_/\\        --- | I");
+	print("I | ---       /\\_/\\      --- | I");
 	print("K | ---   ===( *.* )===    --- | K");
-	print("  | ---       \\_^_/        --- |  ");
+	print("  | ---       \\_^_/       --- |  ");
 	print("R | ---         |          --- | R");
 	print("P | ---         O          --- | P");
 	print("----------------------------------\n");
