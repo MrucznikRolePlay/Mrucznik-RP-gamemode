@@ -17714,12 +17714,6 @@ CMD:swat(playerid)
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	    		    SetPlayerSkin(playerid, 285);
 					SetPlayerColor(playerid, 0x000000FF); // czarny
-	    		    if(PlayerInfo[playerid][pGun8] == 0)
-	    		    {
-	    		        PlayerInfo[playerid][pGun8] = 17;
-	    		        PlayerInfo[playerid][pAmmo8] = 10;
-	    		    	GivePlayerWeapon(playerid, 16, 10); // daje 16 czyli granaty hukowe zamiast 17 czyli tych smolkow 
-	    		    }
 	    		    if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
 	    		    {
 	    		    	RemovePlayerAttachedObject(playerid, 2);
@@ -33873,6 +33867,12 @@ CMD:akceptuj(playerid, params[])
 							format(string, sizeof(string), "* Kupi³eœ %d gram za $%d od Dilera Dragów %s. Aby je wzi¹æ wpisz /wezdragi.",DrugGram[playerid],DrugPrice[playerid],giveplayer);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* %s kupi³ od ciebie %d gram, $%d zostanie dodane do twojej wyp³aty.",sendername,DrugGram[playerid],DrugPrice[playerid]);
+                            SetPVarInt(DrugOffer[playerid], "wydragowany", 60);
+                            //
+                            format(string, sizeof(string), "%s kupi³ dragi za $%d od %s", sendername, DrugPrice[playerid], giveplayer);
+                            ABroadCast(COLOR_YELLOW,string,1);
+                            printf("%s", string);
+                            //
 							SendClientMessage(DrugOffer[playerid], COLOR_LIGHTBLUE, string);
 							PlayerInfo[DrugOffer[playerid]][pPayCheck] += DrugPrice[playerid];
 							PlayerInfo[DrugOffer[playerid]][pDrugsSkill] ++;
@@ -33927,6 +33927,7 @@ CMD:akceptuj(playerid, params[])
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 							format(string, sizeof(string), "* Uprawiasz ostry sex z dziwk¹ %s, za $%d.", giveplayer, SexPrice[playerid]);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                            SetPVarInt(SexOffer[playerid], "wysekszony", 120);
 							format(string, sizeof(string), "* %s uprawia z tob¹ sex. $%d zostanie dodane do twojej wyp³aty.", sendername, SexPrice[playerid]);
 							SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, string);
 							PlayerInfo[SexOffer[playerid]][pPayCheck] += SexPrice[playerid];
@@ -34831,9 +34832,9 @@ CMD:sprzedajnarkotyki(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /sprzedajdragi [playerid/CzêœæNicku] [iloœæ] [cena]");
 			return 1;
 		}
-
+        if(GetPVarInt(playerid, "wydragowany") > 0) return sendErrorMessage(playerid, "Dragi mo¿esz sprzedawaæ raz na minutê!");
 		if(needed < 1 || needed > 99) { SendClientMessage(playerid, COLOR_GREY, "   Iloœæ gram od 1 do 60!"); return 1; }
-		if(money < 1 || money > 99999) { SendClientMessage(playerid, COLOR_GREY, "   Cena od 1 do 99999!"); return 1; }
+		if(money < 1 || money > 9999) { SendClientMessage(playerid, COLOR_GREY, "   Cena od 1 do 9999!"); return 1; }
 		if(needed > PlayerInfo[playerid][pDrugs]) { SendClientMessage(playerid, COLOR_GREY, "   Nie masz a¿ tylu narkotyków przy sobie !"); return 1; }
 		if(IsPlayerConnected(playa))
 		{
@@ -35082,7 +35083,6 @@ CMD:sex(playerid, params[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Prostytutka %s oferuje uprawianie sexu z ni¹ za $%d (wpisz /akceptuj sex) aby siê zgodziæ.", sendername, money);
 							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-                            SetPVarInt(playerid, "wysekszony", 120);
 				            SexOffer[giveplayerid] = playerid;
 				            SexPrice[giveplayerid] = money;
 			            }

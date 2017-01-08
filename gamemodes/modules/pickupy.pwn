@@ -278,8 +278,6 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("Przystanek \n East Beach - Baza Mechanikow \n Kursuje linia: {FFFF00}82  {FFFF00}82A {FF00FF}85", COLOR_BLUE ,2847.9274902344,-1563.1618652344,13.793752861023, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n East Beach - Baza Mechanikow \n Kursuje linia: {FFFF00}82  {FFFF00}82A {FF00FF}85", COLOR_BLUE ,2867.8012695313,-1539.7840576172,13.793752861023, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n East Beach - Baza Mechanikow \n Kursuje linia: {FFFF00}82  {FFFF00}82A {FF00FF}85", COLOR_BLUE ,2847.9274902344,-1563.1618652344,13.793752861023, 20.0); //
-	CreateDynamic3DTextLabel("Przystanek \n East Beach - Baza Mechanikow (pêtla) \n Kursuje linia: {FF8C00}72", COLOR_BLUE ,2821.8999023438,-1584.8000488281,13.300 , 10.0); //
-	CreateDynamic3DTextLabel("Przystanek \n East Beach - Baza Mechanikow (pêtla) \n Kursuje linia: {FF8C00}72", COLOR_BLUE ,2825.1999511719,-1573,13.300000190735, 10.0); //
 	CreateDynamic3DTextLabel("Przystanek \n East Beach - Agencja Ochrony braci Izumi \n Kursuje linia: {FFFF00}82  {FFFF00}82A {FF00FF}85", COLOR_BLUE ,2843.7377929688,-1097.9293212891,26.818738174438, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n East Beach - Agencja Ochrony braci Izumi \n Kursuje linia: {FFFF00}82  {FFFF00}82A {FF00FF}85", COLOR_BLUE ,2832.1416015625,-1101.7882080078,26.810314941406, 20.0); //
 	CreateDynamic3DTextLabel("Przystanek \n East Los Santos - Pig Pen \n Kursuje linia: 96", COLOR_BLUE ,2436.2917480469,-1262.3370361328,26.70008, 20.0); //
