@@ -41,10 +41,9 @@ nowyExtPd_StworzObiekty()
 	SetDynamicObjectMaterial(CreateDynamicObject(19381, 1583.90247, -1662.81982, 6.81460,   0.00000, 90.00000, 0.00000), 0, 8390, "vegasemulticar", "ws_carpark3", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19381, 1583.90247, -1653.18640, 6.81460,   0.00000, 90.00000, 0.00000), 0, 8390, "vegasemulticar", "ws_carpark3", 0xFFFFFFFF);
 	//podstawa
-	SetObjectMaterial(CreateObject(19545, 1611.21680, -1629.80457, 12.54870,   0.00000, 0.00000, 0.00000), 0, 10023, "bigwhitesfe", "ws_carpark2", 0xFFFFFFFF);
-	SetObjectMaterial(CreateObject(19545, 1547.03455, -1679.64758, 12.55150,   0.00000, 0.00000, 0.00000), 0, 10023, "bigwhitesfe", "ws_carpark2", 0xFFFFFFFF);
 	SetObjectMaterial(CreateObject(19545, 1570.76135, -1714.80066, 12.54870,   0.00000, 0.00000, 90.00000), 0, 10023, "bigwhitesfe", "ws_carpark2", 0xFFFFFFFF);
-	SetObjectMaterial(CreateObject(19545, 1605.59937, -1691.62256, 12.54670,   0.00000, 0.00000, 0.00000), 0, 10023, "bigwhitesfe", "ws_carpark2", 0xFFFFFFFF);
+	CreateObject(19545, 1570.95691, -1627.67407, 12.34130,   0.00000, 0.00000, 90.00000);
+	CreateObject(19545, 1571.35559, -1610.28540, 12.34130,   0.00000, 0.00000, 90.00000);
 	    //przedkomi
 	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1555.24170, -1654.79492, 12.46550,   0.00000, 90.00000, 0.00000), 0, 6340, "rodeo05_law2", "badmarb1_LAn", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1555.23962, -1664.42627, 12.46550,   0.00000, 90.00000, 0.00000), 0, 6340, "rodeo05_law2", "badmarb1_LAn", 0xFFFFFFFF);
@@ -115,8 +114,10 @@ nowyExtPd_StworzObiekty()
     CreateDynamicObject(8843, 1561.62439, -1628.67932, 12.37990,   0.00000, 0.00000, -90.00000);
 	CreateDynamicObject(8843, 1555.11633, -1623.43225, 12.39990,   0.00000, 0.00000, 90.00000);
 		//sciankigora
-	SetDynamicObjectMaterial(CreateDynamicObject(19454, 1539.6462, -1636.1387, 13.9719,   90.00000, 0.00000, 0.00000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
-	SetDynamicObjectMaterial(CreateDynamicObject(19454, 1541.4843, -1637.8000, 13.9719,   90.00000, 0.00000, 90.00000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
+	//SetDynamicObjectMaterial(CreateDynamicObject(19454, 1539.6462, -1636.1387, 13.9719,   90.00000, 0.00000, 0.00000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
+	//SetDynamicObjectMaterial(CreateDynamicObject(19454, 1541.4843, -1637.8000, 13.9719,   90.00000, 0.00000, 90.00000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
+	SetDynamicObjectMaterial(CreateDynamicObject(19454, 1539.6462, -1636.1387, 13.9719, 90.0000, 0.0000, 0.0000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
+	SetDynamicObjectMaterial(CreateDynamicObject(19454, 1541.4843, -1637.8000, 13.9719, 90.0000, 0.0000, 90.0000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19376, 1603.69922, -1636.03027, 13.54350,   0.00000, 0.00000, 0.00000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19376, 1539.64355, -1618.05762, 13.53950,   0.00000, 0.00000, 0.00000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19376, 1603.70325, -1616.76355, 13.54350,   0.00000, 0.00000, 0.00000), 0, 12931, "sw_brewery", "parking2plain", 0xFFFFFFFF);
@@ -257,8 +258,8 @@ nowyExtPd_StworzObiekty()
 	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1573.84570, -1635.19666, 15.80390,   0.00000, 90.00000, 0.00000), 0, 12850, "cunte_block1", "sjmbrwn3", 0xFFFFFFFF);//sufit
 	SetDynamicObjectMaterial(CreateDynamicObject(19377, 1579.30261, -1635.19666, 15.80590,   0.00000, 90.00000, 0.00000), 0, 12850, "cunte_block1", "sjmbrwn3", 0xFFFFFFFF);//sufit
 	CreateDynamicObject(2192, 1568.90527, -1630.47205, 15.88500,   0.00000, 0.00000, 43.93500);
-	CreateDynamicObject(19454, 1539.64624, -1616.71667, 16.16780,   0.00000, 0.00000, 0.00000);
-	CreateDynamicObject(19454, 1539.64429, -1616.72070, 14.16850,   0.00000, 0.00000, 0.00000);
+	//CreateDynamicObject(19454, 1539.64624, -1616.71667, 16.16780,   0.00000, 0.00000, 0.00000);
+	//CreateDynamicObject(19454, 1539.64429, -1616.72070, 14.16850,   0.00000, 0.00000, 0.00000);
 	CreateDynamicObject(19391, 1568.63538, -1633.50513, 14.14170,   0.00000, 0.00000, 0.00000);
 	CreateDynamicObject(1649, 1571.19385, -1630.38440, 13.91330,   0.00000, 0.00000, 180.00000);
 	CreateDynamicObject(1649, 1584.50354, -1633.70593, 13.91330,   0.00000, 0.00000, 90.00000);
@@ -332,6 +333,14 @@ nowyExtPd_StworzObiekty()
     SetDynamicObjectMaterialText(niewidzialne2, 0, " ", 100, "Arial Black", 45, 1, 0xFFFFFFFF, 0, 1);//niewidzialne
     SetDynamicObjectMaterialText(niewidzialne, 1," ", 100, "Arial Black", 45, 1, 0xFFFFFFFF, 0, 1);//niewidzialne
     SetDynamicObjectMaterialText(niewidzialne2,  1," ", 100, "Arial Black", 45, 1, 0xFFFFFFFF, 0, 1);//niewidzialne
+
+    //dalsza podstawa
+    SetObjectMaterial(CreateObject(19545, 1611.21680, -1629.80457, 12.54870,   0.00000, 0.00000, 0.00000), 0, 10023, "bigwhitesfe", "ws_carpark2", 0xFFFFFFFF);
+	SetObjectMaterial(CreateObject(19545, 1547.03455, -1679.64758, 12.55150,   0.00000, 0.00000, 0.00000), 0, 10023, "bigwhitesfe", "ws_carpark2", 0xFFFFFFFF);
+	
+	SetObjectMaterial(CreateObject(19545, 1605.59937, -1691.62256, 12.54670,   0.00000, 0.00000, 0.00000), 0, 10023, "bigwhitesfe", "ws_carpark2", 0xFFFFFFFF);
+    //end dalsza podstawa
+
 	//winda - góra
 	CreateDynamicObject(18755, 1560.1951, -1639.2027, 14.3007,0.0000, 0.0000, -90.0000);
 	CreateDynamicObject(18757, 1560.1442, -1635.3511, 14.3162,   0.00000, 0.00000, 90.00000);
