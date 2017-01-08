@@ -1313,7 +1313,7 @@ public CustomPickups()
 		}
 		else if (mystate == 1 && GraczBankomat(i))
 		{
-			GameTextForPlayer(i, "~g~Wpisz ~w~/wyplac ~g~aby uzyc bankomatu", 5000, 3);
+			GameTextForPlayer(i, "~g~Uzyj ~w~/wplac ~g~lub ~w~/wyplac~n~ ~g~aby skorzystac z bankomatu", 5000, 3);
 		}
 		else if(IsPlayerInRangeOfPoint(i, 2.0,-50,-269,6.599999))
 		{
@@ -1871,6 +1871,32 @@ public JednaSekundaTimer()
 				UsedFind[i] = 0;
 			}
 		}
+        if(GetPVarInt(i, "wysekszony") > 0) {
+            SetPVarInt(i, "wysekszony", GetPVarInt(i, "wysekszony")-1);
+        }
+        if(GetPVarInt(i, "wydragowany") > 0) {
+            SetPVarInt(i, "wydragowany", GetPVarInt(i, "wydragowany")-1);
+        }
+        if(GetPVarInt(i, "finding") == 1) {
+            new findtime = GetPVarInt(i, "findtime");
+            if(findtime == 0) {
+                SetPVarInt(i, "finding", 0);
+                SetPVarInt(i, "findtime", 0);
+                SetPVarInt(i, "findingId", 999);
+                SetPVarInt(i, "findingRange", 0);
+                GangZoneDestroy(pFindZone[i]);
+                GameTextForPlayer(i, "~r~Strefa Ulegla Destrukcji", 2500, 1);
+            } else { 
+                new kogo = GetPVarInt(i, "findingId");
+                new range = GetPVarInt(i, "findingRange");
+                new Float:X,Float:Y,Float:Z;
+                GetPlayerPos(kogo, X,Y,Z);
+                if(pFindZone[i]) GangZoneDestroy(pFindZone[i]);
+                pFindZone[i] = GangZoneCreate(X-range, Y-range, X+range, Y+range);
+                GangZoneShowForPlayer(i, pFindZone[i], 0xff00eeBB);
+                SetPVarInt(i, "findtime", findtime-1);
+            }
+        }
 		if(MedicTime[i] > 0)
 		{
 			if(MedicTime[i] == 3)
@@ -2023,7 +2049,7 @@ public JednaSekundaTimer()
 			else if(TutTime[i] == 125)
 			{
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
-				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0; gOgloszenie[i] = 0;
+				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
 				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
 				SetPlayerSpawn(i);

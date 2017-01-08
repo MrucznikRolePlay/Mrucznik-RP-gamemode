@@ -3,10 +3,10 @@
 new bool:MYSQL_ON = true;
 new bool:MYSQL_SAVING = true;
 
-//new MYSQL_HOST[32];
-//new MYSQL_USER[32];
-//new MYSQL_DATABASE[32];
-//new MYSQL_PASS[256];
+new MYSQL_HOST[32];
+new MYSQL_USER[32];
+new MYSQL_DATABASE[32];
+new MYSQL_PASS[256];
 	
 forward MruMySQL_Error(error[]);
 
@@ -19,7 +19,7 @@ public OnQueryError(errorid, error[], resultid, extraid, callback[], query[], co
 //Moje funkcje:
 
 //--------------------------------------------------------------<[ Konta ]>--------------------------------------------------------------
-/*LoadConnectionValues()
+LoadConnectionValues()
 {
 	new file[64];
 	format(file, sizeof(file), "MySQL/connect.ini");
@@ -32,23 +32,23 @@ public OnQueryError(errorid, error[], resultid, extraid, callback[], query[], co
 		return 1;
 	}
 	return 0;
-}*/
+}
 
 MruMySQL_Connect()
 {
 	if(!MYSQL_ON) return 0;
-	//if(!LoadConnectionValues())
-	//{
-	//	print("MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
-//		SendRconCommand("gamemodetext Brak polaczenia MySQL");
-//		SendRconCommand("exit");
-//	}
+	if(!LoadConnectionValues())
+	{
+		print("MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
+		SendRconCommand("gamemodetext Brak polaczenia MySQL");
+		SendRconCommand("exit");
+	}
 
-    mysql_connect("mysql-ols1.ServerProject.pl", "db_17956", "db_17956", "fC4lFMEYJkoo");
+    mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_DATABASE, MYSQL_PASS);
 	print(" ");
 	if(mysql_ping() == 1)
 	{
-		print("MYSQL: Polaczono sie z baza MySQL Ver");
+		print("MYSQL: Polaczono sie z baza MySQL");
 	}
 	else
 	{
@@ -57,8 +57,13 @@ MruMySQL_Connect()
 		SendRconCommand("exit");
 		return 0;
 	}
-    //mysql_debug(0); //DISABLE!!!
-   // mysql_query("SET NAMES 'cp1250'");
+	#if DEBUG == 1
+		mysql_debug(1);
+	#else
+		mysql_debug(0);
+	#endif
+	
+	mysql_query("SET NAMES 'cp1250'");
 	return 1;
 }
 
@@ -994,6 +999,22 @@ bool:MruMySQL_SprawdzBany(playerid)
 }
 
 //Pobieranie i zwracanie pojedynczych zmiennych:
+
+stock MruMySQL_GetNameFromUID(uid) {
+	new wartosc[MAX_PLAYER_NAME], string[128];
+	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `UID` = '%d'", uid);
+	mysql_query(string);
+	mysql_store_result();
+		
+	if(mysql_retrieve_row())
+	{
+		mysql_fetch_field_row(wartosc, "Nick");
+	}
+	strunpack(wartosc, wartosc);
+	mysql_free_result();
+	return wartosc;
+}
+
 stock MruMySQL_GetAccString(kolumna[], nick[])
 {
 	new string[128], wartosc[256];
