@@ -447,7 +447,6 @@ new FractionNames[][40] = {
     "Nightmare of Adrenalin",
     "Hammerskins Nation",
     "Los Santos Fire Department",
-    "Rangers Regiment",
     "Brak",
     "Brak"
 };

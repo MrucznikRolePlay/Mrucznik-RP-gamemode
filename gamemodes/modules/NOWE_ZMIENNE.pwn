@@ -1,8 +1,10 @@
 //zmienne.pwn
 
-
 new Zgloszenie[OSTATNIE_ZGLOSZENIA][hqZgloszenia];
 new ilosczgloszen = 0;
+
+
+new pFindZone[MAX_PLAYERS];
 
 
 new gTeam[MAX_PLAYERS];
@@ -22,7 +24,6 @@ new afk_timer[MAX_PLAYERS];
 //tazer
 new MaTazer[MAX_PLAYERS];
 new TazerAktywny[MAX_PLAYERS];
-new pFindZone[MAX_PLAYERS];
 //2015.08.25
 new wybory[6];
 ///

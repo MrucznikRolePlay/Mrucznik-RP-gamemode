@@ -67,7 +67,7 @@ nowyExtPd_StworzObiekty()
 	SetDynamicObjectMaterial(CreateDynamicObject(19379, 1586.77344, -1717.49121, 12.46550,   0.00000, 90.00000, 0.00000), 0, 13691, "bevcunto2_lahills", "ws_floortiles2", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19379, 1597.27197, -1717.49121, 12.46550,   0.00000, 90.00000, 0.00000), 0, 13691, "bevcunto2_lahills", "ws_floortiles2", 0xFFFFFFFF);
 	//napis
-	SetDynamicObjectMaterialText(CreateDynamicObject(19325, 1539.55115, -1615.38074, 15.34600,   0.00000, 0.00000, 0.00000), 0, "Police \n Departament", 100, "Arial Black", 45, 1, 0xFF014DFE, 0, 1);
+	SetDynamicObjectMaterialText(CreateDynamicObject(19325, 1539.55115, -1615.38074, 15.34600,   0.00000, 0.00000, 0.00000), 0, "Police \n Department", 100, "Arial Black", 45, 1, 0xFF014DFE, 0, 1);
 	//poprawki
 	SetDynamicObjectMaterial(CreateDynamicObject(19439, 1582.19409, -1639.99841, 17.12230,   0.00000, 0.00000, 90.00000), 0, 18202, "w_towncs_t", "plaintarmac1", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(CreateDynamicObject(19439, 1584.51453, -1639.16736, 17.1203,   0.00000, 0.00000, 0.00000), 0, 18202, "w_towncs_t", "plaintarmac1", 0xFFFFFFFF);

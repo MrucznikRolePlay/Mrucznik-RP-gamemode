@@ -345,8 +345,8 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define KARA_LEKKA "{008000}"
 #define KARA_NIEZNACZNA "{00ff00}"
 #define KARA_STRZALKA "{363F45}"
-#define KARA_TEKST2 "{FEB41C}"
-#define KARA_TEKST "{5E7C88}"    
+#define KARA_TEKST2 "{33AA33}"
+#define KARA_TEKST "{f9f9f9}"    
 
 //uniformnew
 #define DIALOGID_UNIFORM 3445

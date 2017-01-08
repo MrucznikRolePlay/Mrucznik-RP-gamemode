@@ -72,7 +72,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.5(3)"
+#define VERSION "v2.5.5|2"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
@@ -112,7 +112,6 @@ main()
 	print("R | ---         |          --- | R");
 	print("P | ---         O          --- | P");
 	print("----------------------------------\n");
-
 	//exit;
 	WasteDeAMXersTime();
 }
@@ -1383,6 +1382,15 @@ public OnPlayerSpawn(playerid) //Przebudowany
 	    PlayerInfo[playerid][pJob] = 0;
 	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
 	}
+    // usuwanie
+    if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
+        PlayerInfo[playerid][pRank] = 0;
+        PlayerInfo[playerid][pMember] = 0;
+        MruMySQL_SetAccInt("Rank", GetNick(playerid), 0);
+        MruMySQL_SetAccInt("Member", GetNick(playerid), 0);
+        UsunBron(playerid);
+        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta³eœ wyrzucony z pracy przez lidera, gdy by³eœ offline!");   
+    }
 
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
@@ -4767,9 +4775,7 @@ public OnGameModeInit()
 	ZaladujPickupy();
 	ZaladujSamochody(); //Auta do kradziezy
 	Zaladuj3DTexty();
-	ZaladujIkony(); printf("TUTAJ CRASH ZARAZ");
-    Car_Load(); //Wszystkie pojazdy MySQL
-	printf("A JEDNAK NIE");
+	ZaladujIkony();
 	
 	//GF:
 	LoadBoxer();
@@ -4793,7 +4799,9 @@ public OnGameModeInit()
     //13.06
     LoadTXD();
     //30.10
-    TJD_Load();
+    TJD_Load(); printf("TUTAJ CRASH ZARAZ");
+    Car_Load(); //Wszystkie pojazdy MySQL
+    printf("A JEDNAK NIE");
 
     new string[MAX_PLAYER_NAME];
     new string1[MAX_PLAYER_NAME];

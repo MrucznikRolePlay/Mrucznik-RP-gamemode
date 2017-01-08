@@ -999,6 +999,22 @@ bool:MruMySQL_SprawdzBany(playerid)
 }
 
 //Pobieranie i zwracanie pojedynczych zmiennych:
+
+stock MruMySQL_GetNameFromUID(uid) {
+	new wartosc[MAX_PLAYER_NAME], string[128];
+	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `UID` = '%d'", uid);
+	mysql_query(string);
+	mysql_store_result();
+		
+	if(mysql_retrieve_row())
+	{
+		mysql_fetch_field_row(wartosc, "Nick");
+	}
+	strunpack(wartosc, wartosc);
+	mysql_free_result();
+	return wartosc;
+}
+
 stock MruMySQL_GetAccString(kolumna[], nick[])
 {
 	new string[128], wartosc[256];

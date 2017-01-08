@@ -1313,7 +1313,7 @@ public CustomPickups()
 		}
 		else if (mystate == 1 && GraczBankomat(i))
 		{
-			GameTextForPlayer(i, "~g~Wpisz ~w~/wyplac ~g~aby uzyc bankomatu", 5000, 3);
+			GameTextForPlayer(i, "~g~Uzyj ~w~/wplac ~g~lub ~w~/wyplac~n~ ~g~aby skorzystac z bankomatu", 5000, 3);
 		}
 		else if(IsPlayerInRangeOfPoint(i, 2.0,-50,-269,6.599999))
 		{
@@ -1871,6 +1871,9 @@ public JednaSekundaTimer()
 				UsedFind[i] = 0;
 			}
 		}
+        if(GetPVarInt(i, "wysekszony") > 0) {
+            SetPVarInt(i, "wysekszony", GetPVarInt(i, "wysekszony")-1);
+        }
         if(GetPVarInt(i, "finding") == 1) {
             new findtime = GetPVarInt(i, "findtime");
             if(findtime == 0) {
