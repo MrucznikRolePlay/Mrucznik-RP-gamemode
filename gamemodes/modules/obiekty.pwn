@@ -34,6 +34,7 @@
 #include "modules/Obiekty/ykz.pwn"
 #include "modules/Obiekty/bank.pwn"
 #include "modules/Obiekty/nowy_exterior_lspd.pwn"
+#include "modules/Obiekty/new_mech.pwn"
 
 Stworz_Obiekty()
 {
@@ -49,6 +50,7 @@ public obiekty_timer(wartosc)
     Stare_Obiekty();
 	ZaladujBramy();
     nowyExtPd_StworzObiekty();
+    noweMech_StworzObiekty();
     BazaLSFD();
     EXT_GrapeStreet();
     EXT_BazaHA();
@@ -105,7 +107,7 @@ DeleteObjects(playerid)
 {
 	//Z funkcji
 	Dillimore_DeleteMapObjects(playerid);
-
+    noweMech_UsunObiekty(playerid);
     nowyExtPd_UsunObiekty(playerid);
 
 
@@ -1734,7 +1736,7 @@ Stare_Obiekty()
 	CreateDynamicObject(2939,2345.31298828,-1252.29846191,22.67099571,172.35662842,0.00000000,266.21520996,0,0); //object(ramp_bot)(3)
 
 	//obiekty cywilne przystanek BAZA MECHANIKÓW (pêtla)
-	CreateDynamicObject(1280,2821.6999512,-1578.5999756,10.5000000,0.0000000,0.0000000,344.0000000,0,0); //object(parkbench1) (1)
+	/*CreateDynamicObject(1280,2821.6999512,-1578.5999756,10.5000000,0.0000000,0.0000000,344.0000000,0,0); //object(parkbench1) (1)
 	CreateDynamicObject(1280,2822.1999512,-1582.4000244,10.5000000,0.0000000,0.0000000,23.9974365,0,0); //object(parkbench1) (2)
 	CreateDynamicObject(1280,2824.1000977,-1575.5000000,10.5000000,0.0000000,0.0000000,303.9971924,0,0); //object(parkbench1) (3)
 	CreateDynamicObject(1229,2825.1000977,-1573.0000000,11.6999998,0.0000000,0.0000000,140.0000000,0,0); //object(bussign1) (1)
@@ -1759,7 +1761,7 @@ Stare_Obiekty()
 	CreateDynamicObject(1280,2832.1999512,-1577.3000488,10.5000000,0.0000000,0.0000000,223.9971924,0,0); //object(parkbench1) (4)
 	CreateDynamicObject(949,2825.8000488,-1574.3000488,10.6999998,0.0000000,0.0000000,0.0000000,0,0); //object(plant_pot_4) (4)
 	CreateDynamicObject(949,2823.3000488,-1584.3000488,10.6999998,0.0000000,0.0000000,0.0000000,0,0); //object(plant_pot_4) (6)
-	CreateDynamicObject(970,2825.3999023,-1586.0999756,10.6000004,0.0000000,0.0000000,331.9945068,0,0); //object(fencesmallb) (5)
+	CreateDynamicObject(970,2825.3999023,-1586.0999756,10.6000004,0.0000000,0.0000000,331.9945068,0,0); //object(fencesmallb) (5) */
 	CreateDynamicObject(14467,2792.3999023,-1535.8000488,12.8000002,0.0000000,0.0000000,50.0000000,0,0); //król mechaników
 	
 	//stacja benzynowa pod paczkiem

@@ -37297,9 +37297,10 @@ CMD:gotoadmin(playerid)
 
 CMD:gotomechy(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1 || PlayerInfo[playerid][pNewAP] != 5) return 1;
-    SetPlayerPosEx(playerid,2771.0842, -1628.4905, 12.98190);
-    SetPlayerVirtualWorld(playerid, 0);
+    if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5) {
+        SetPlayerPosEx(playerid,2771.0842, -1628.4905, 12.98190);
+        SetPlayerVirtualWorld(playerid, 0);
+    }
     return 1;
 }
 
