@@ -202,10 +202,11 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
         GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
         GetPlayerName(hitid, sendername, sizeof(sendername));
         TazerAktywny[hitid] = 1;
-        SetTimerEx("DostalTazerem", 10000, false, "i", hitid);
+        SetTimerEx("DostalTazerem", 30000, false, "i", hitid);
         new string[128];
         GameTextForPlayer(hitid, "DOSTALES TAZEREM! ODCZEKAJ CHWILE!", 3000, 5);
         GameTextForPlayer(playerid, "~g~TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
+        SetPVarInt(playerid, "wytazerowany", 15);
         format(string, sizeof(string), "* %s strzela tazerem w %s.", giveplayer, sendername);
         ProxDetector(30.0, hitid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         MaTazer[playerid] = 0;
@@ -846,7 +847,12 @@ public OnPlayerDisconnect(playerid, reason)
 
     //System aut
     Car_UnloadForPlayer(playerid);
-
+    // zapisanie PPK
+    new karne = GetPVarInt(playerid, "mandat_punkty");
+    if(karne>0) {
+        PlayerInfo[playerid][pPK] += karne;
+    }
+    //
 	//Zapis statystyk:
     MruMySQL_SaveAccount(playerid, false, true);
 
@@ -1391,7 +1397,15 @@ public OnPlayerSpawn(playerid) //Przebudowany
         UsunBron(playerid);
         sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta³eœ wyrzucony z pracy przez lidera, gdy by³eœ offline!");   
     }
-
+    // zabieranie prawka //
+    new string[128];
+    if(PlayerInfo[playerid][pPK] > 24) {
+    format(string, sizeof(string), "* Przekroczy³eœ limit 24 PK. Tracisz prawo jazdy na 1 DZIEÑ");
+    SendClientMessage(playerid, COLOR_RED, string);
+                                    //86400
+    PlayerInfo[playerid][pPK] = 0;
+    PlayerInfo[playerid][pCarLic] = gettime()+86400;
+    }
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 500);
@@ -1618,7 +1632,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_YKZ: //6
 						{
-						    SetPlayerPosEx(playerid, 738.8827,-1429.9484,13.5234);
+                            SetPlayerPosEx(playerid, 2794.8042,-1087.1310,30.7188);
 						}
 						case FRAC_BOR: //7
 						{

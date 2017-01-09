@@ -1874,6 +1874,9 @@ public JednaSekundaTimer()
         if(GetPVarInt(i, "wysekszony") > 0) {
             SetPVarInt(i, "wysekszony", GetPVarInt(i, "wysekszony")-1);
         }
+        if(GetPVarInt(i, "wytazerowany") > 0) {
+            SetPVarInt(i, "wytazerowany", GetPVarInt(i, "wytazerowany")-1);
+        }
         if(GetPVarInt(i, "wydragowany") > 0) {
             SetPVarInt(i, "wydragowany", GetPVarInt(i, "wydragowany")-1);
         }

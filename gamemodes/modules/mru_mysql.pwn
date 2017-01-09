@@ -89,6 +89,7 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     {
         //Punkty karne
         if(PlayerInfo[playerid][pPK] > 0) PoziomPoszukiwania[playerid] += 10000+(PlayerInfo[playerid][pPK]*100);
+        
     }
 
 	new query[1024], bool:fault=true;

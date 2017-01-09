@@ -105,21 +105,17 @@ DialogListaSkinow(frakcja)
 
 stock PDTuneSultan(vehicleid)
 {
-	new o[7];
-	o[0] = CreateDynamicObject(19620, 0, 0, 0, 0, 0, 0);
-	o[1] = CreateDynamicObject(19620, 0, 0, 0, 0, 0, 0);
+	new o[5];
+	o[0] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
+	o[1] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
 	o[2] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
 	o[3] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
 	o[4] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
-	o[5] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
-	o[6] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
-	AttachDynamicObjectToVehicle(o[0], vehicleid, 0.000000, 0.141000, 0.877499, 0.000000, 0.000000, 0.000000); //Object Model: 19620 |
-	AttachDynamicObjectToVehicle(o[1], vehicleid, 0.000000, 0.141000, 0.877499, 0.000000, 0.000000, 0.000000); //Object Model: 19620 |
-	AttachDynamicObjectToVehicle(o[2], vehicleid, 0.234999, 2.598513, -0.222499, 0.000000, -0.000001, 178.890090); //Object Model: 19797 |
-	AttachDynamicObjectToVehicle(o[3], vehicleid, -0.234999, 2.598513, -0.217499, 0.000000, 179.895095, 182.910110); //Object Model: 19797 |
-	AttachDynamicObjectToVehicle(o[4], vehicleid, 0.000000, -2.374014, 0.159999, 0.000000, 0.000000, 0.000000); //Object Model: 19797 |
-	AttachDynamicObjectToVehicle(o[5], vehicleid, -0.674999, -2.362517, 0.110000, 0.000000, 0.000000, 0.000000); //Object Model: 19797 |
-	AttachDynamicObjectToVehicle(o[6], vehicleid, 0.676498, -2.344018, 0.110000, 0.000000, 179.895095, -0.000001); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[0], vehicleid, 0.234999, 2.598513, -0.222499, 0.000000, -0.000001, 178.890090); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[1], vehicleid, -0.234999, 2.598513, -0.217499, 0.000000, 179.895095, 182.910110); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[2], vehicleid, 0.000000, -2.374014, 0.159999, 0.000000, 0.000000, 0.000000); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[3], vehicleid, -0.674999, -2.362517, 0.110000, 0.000000, 0.000000, 0.000000); //Object Model: 19797 |
+	AttachDynamicObjectToVehicle(o[4], vehicleid, 0.676498, -2.344018, 0.110000, 0.000000, 179.895095, -0.000001); //Object Model: 19797 |
 }
 
 stock PDTuneInfernus(vehicleid)
@@ -3281,7 +3277,7 @@ IsAtGasStation(playerid)
 		{//Palomino Creek
 		    return 1;
 		}
-		else if(PlayerToPoint(3.0,playerid,1381.5094,459.3204,20.3452))
+		else if(PlayerToPoint(8.0,playerid,1381.5094,459.3204,20.3452))
 		{//Montgomery
 			return 1;
 		}
@@ -3392,6 +3388,10 @@ IsAtWarsztat(playerid)
         else if(IsPlayerInRangeOfPoint(playerid, 20.0, 991.3269,-1347.3071,12.9392))
 		{//warsztat przy p1czkarni
 		  	return 1;
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 50.0, 1099.7108,-1240.7935,15.8203)) {
+			// WARSZTAT NA MARKET XD
+			return 1;
 		}
 	}
 	return 0;
@@ -6874,6 +6874,7 @@ OOCNews(color,const string[])
 	}
 }
 
+
 SendTeamMessage(team, color, string[], isDepo = 0)
 {
 	foreach(Player, i)
@@ -6882,16 +6883,19 @@ SendTeamMessage(team, color, string[], isDepo = 0)
 		{
 		    if(PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team)
 		    {
-		    	//printf("isdepo %d       gmutedepo[i] = %d", isDepo, gMuteDepo[i]);
-		    	if(isDepo == 1 && gMuteDepo[i] == 0) {
-		    		SendClientMessage(i, color, string);
-		    	} else {
-		    		SendClientMessage(i, color, string);
-		    	}
+		    	if(isDepo == 1 && gMuteDepo[i] == 0) 
+                {
+                    SendClientMessage(i, color, string);
+                }
+              	if(isDepo == 0) {
+              		SendClientMessage(i, color, string);
+              	}
+				//SendClientMessage(i, color, string);
 			}
 		}
 	}
 }
+
 
 SendRadioMessage(member, color, string[])
 {
