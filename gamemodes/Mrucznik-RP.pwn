@@ -847,7 +847,7 @@ public OnPlayerDisconnect(playerid, reason)
 
     //System aut
     Car_UnloadForPlayer(playerid);
-    // zapisanie PPK
+    // zapisanie PK
     new karne = GetPVarInt(playerid, "mandat_punkty");
     if(karne>0) {
         PlayerInfo[playerid][pPK] += karne;
@@ -1400,11 +1400,11 @@ public OnPlayerSpawn(playerid) //Przebudowany
     // zabieranie prawka //
     new string[128];
     if(PlayerInfo[playerid][pPK] > 24) {
-    format(string, sizeof(string), "* Przekroczy³eœ limit 24 PK. Tracisz prawo jazdy na 1 DZIEÑ");
-    SendClientMessage(playerid, COLOR_RED, string);
-                                    //86400
-    PlayerInfo[playerid][pPK] = 0;
-    PlayerInfo[playerid][pCarLic] = gettime()+86400;
+        format(string, sizeof(string), "* Przekroczy³eœ limit 24 PK. Tracisz prawo jazdy na 1 DZIEÑ");
+        SendClientMessage(playerid, COLOR_RED, string);
+                                        //86400
+        PlayerInfo[playerid][pPK] = 0;
+        PlayerInfo[playerid][pCarLic] = gettime()+86400;
     }
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
@@ -6896,15 +6896,20 @@ public OnPlayerText(playerid, text[])
 			{
 				SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem");
 				return 0;
-			}
+			} else if(strlen(text) > 75) {
+                return SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem. Proszê powtórzyæ ((max 75 znaków))");
+            }
 			//strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
 			new id = getWolneZgloszenie();
             new Hour, Minute;
             gettime(Hour, Minute);
             new datapowod[160];
             format(datapowod, sizeof(datapowod), "%02d:%02d",  Hour, Minute);
+            new pZone[MAX_ZONE_NAME];
+            GetPlayer2DZone(giveplayerid, pZone, MAX_ZONE_NAME);
             strmid(Zgloszenie[id][zgloszenie_kiedy], datapowod, 0, sizeof(datapowod), 36);
             format(Zgloszenie[id][zgloszenie_nadal], MAX_PLAYER_NAME, "%s", GetNick(playerid, true));
+            format(Zgloszenie[id][zgloszenie_lokacja], MAX_ZONE_NAME, "%s", pZone);
             strmid(Zgloszenie[id][zgloszenie_tresc], text, 0, strlen(text) + 9, 128);
             Zgloszenie[id][zgloszenie_status] = 0;
             SendFamilyMessage(1, COLOR_DBLUE, "HQ: Do Wszystkich Jednostek: Otrzymano nowe zg³oszenie!");

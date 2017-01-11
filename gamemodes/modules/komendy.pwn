@@ -1647,7 +1647,7 @@ CMD:namierz(playerid, params[])
 				return 1;
 			}
             new givenumber;
-			new giveplayerid = 999;
+			new giveplayerid = INVALID_PLAYER_ID;
 			if(sscanf(params, "d", givenumber))
 			{
 				sendTipMessage(playerid, "U¿yj /namierz [numer telefonu]");
@@ -1661,7 +1661,7 @@ CMD:namierz(playerid, params[])
                     giveplayerid = i;
                 }
             }
-            if(giveplayerid == 999) return sendTipMessage(playerid, "Nie uda³o siê namierzyæ numeru...");
+            if(giveplayerid == INVALID_PLAYER_ID) return sendTipMessage(playerid, "Nie uda³o siê namierzyæ numeru...");
 			//if(IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
 			//{
             // PhoneOnline jest 1 gdy wylaczony x~D
@@ -10581,293 +10581,240 @@ CMD:sprzedajalkohol(playerid, params[])
 
 CMD:naucz(playerid, params[])
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
+    new string[128];
+    new sendername[MAX_PLAYER_NAME];
+    new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
         new playa, styl;
-		if( sscanf(params, "k<fix>d", playa, styl))
-		{
-			sendTipMessage(playerid, "U¿yj /naucz [ID gracza] [numer stylu]");
-			SendClientMessage(playerid, COLOR_LIGHTGREEN, "Dostêpne style: 1- Gangsterski(2500$), 2- Kung-Fu(5000$), 3- KickBoxing(10000$), 4- Domyœlny ($7500)");
-			SendClientMessage(playerid, COLOR_GRAD2, "Kiedy sprzedajesz komuœ styl zabiera ci kase (iloœæ podana przy stylu)");
-   			SendClientMessage(playerid, COLOR_LIGHTGREEN, "Aby zarobic dawaj 2-4 razy wiêksze ceny");
-			return 1;
-		}
-		if(PlayerInfo[playerid][pJob] == 12 || PlayerInfo[playerid][pAdmin] >= 1000)
-		{
-			if(GetDistanceBetweenPlayers(playerid,playa) < 5 && obezwladniony[playa] != 1 && IsPlayerInRangeOfPoint(playerid, 9.0, 762.9852,2.4439,1001.5942))
-			{
-				if(styl > 4 || styl < 1)
-				{
-					sendTipMessage(playerid, "Dostêpne style: 1- gangster(2500$), 2- kung-fu(5000$), 3- KickEx-boxing(10000$), 4- Domyœlny ($7500)");
-					return 1;
-				}
-			    if(IsPlayerConnected(playa))
-			    {
-			        if(Spectate[playa] != INVALID_PLAYER_ID)
-					{
-						sendTipMessage(playerid, "Ten gracz jest za daleko.");
-						return 1;
-					}
-			        if(playa != INVALID_PLAYER_ID)
-			        {
-						if(styl == 1)
-						{
-						    if(kaska[playerid] < 2500)
-							{
-								sendErrorMessage(playerid, "Nie masz wystarczaj¹co du¿o pieniêdzy ($2500).");
-							}
-							else if(GetPlayerFightingStyle(playa) == FIGHT_STYLE_BOXING)
-							{
-								sendErrorMessage(playerid, "Gracz aktualnie u¿ywa stylu walki 'Gangster'");
-							}
-							else
-							{
-								SetPlayerFightingStyle(playa, FIGHT_STYLE_BOXING);
-								PlayerInfo[playa][pStylWalki] = 1;
-								DajKase(playerid, -2500);
-                                GetPlayerName(playerid, sendername, sizeof(sendername));
-						        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					            format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'gangster', koszty nauki wynios³y 2500$",giveplayer);
-						        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						        format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki stylu walki 'gangster'",sendername);
-						        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-						        SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki");
-						        format(string, sizeof(string), "~r~-$%d", 2500);
-								GameTextForPlayer(playerid, string, 5000, 1);
-	 							if(playerid != playa)
-	 							{
-									SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
-									SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
-									SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-									SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-									SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
-									GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
-                                    if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
-									BoxWaitTime[playerid] = 1; BoxWaitTime[BoxOffer[playerid]] = 1;
-									if(BoxDelay < 1){ BoxDelay = 20; }
-									InRing = 1;
-									Boxer1 = playa;
-									Boxer2 = playerid;
-									PlayerBoxing[playerid] = 1;
-									PlayerBoxing[BoxOffer[playerid]] = 1;
-									BoxDelay = 0;
-									BoxWaitTime[playerid] = 0;
-									PlayerPlaySound(playerid, 1057, 0.0, 0.0, 0.0);
-									PlayerPlaySound(playa, 1057, 0.0, 0.0, 0.0);
-									GameTextForPlayer(playerid, "~g~Walka rozpoczeta", 5000, 1);
-									GameTextForPlayer(playa, "~g~Walka rozpoczeta", 5000, 1);
-									RoundStarted = 1;
-									PlayerInfo[playerid][pBoxSkill] ++;
-									PlayerInfo[playerid][pBoxSkill] ++;
-									PlayerInfo[playerid][pBoxSkill] ++;
-	 							    SendClientMessage(playerid, COLOR_GRAD2, "Skill + 3");
-								}
-							}
-						}
-						else if(styl == 2)
-						{
-						    if(kaska[playerid] < 5000)
-							{
-								sendErrorMessage(playerid, "Nie masz wystarczaj¹co du¿o pieniêdzy ($5000).");
-							}
-							else if(GetPlayerFightingStyle(playa) == FIGHT_STYLE_KUNGFU)
-							{
-								sendErrorMessage(playerid, "Gracz aktualnie u¿ywa stylu walki 'Kung Fu'");
-							}
-							else
-							{
-							    if(PlayerInfo[playerid][pBoxSkill] > 100)
-							    {
-									SetPlayerFightingStyle(playa, FIGHT_STYLE_KUNGFU);
-									PlayerInfo[playa][pStylWalki] = 2;
-									DajKase(playerid, -5000);
-									GetPlayerName(playerid, sendername, sizeof(sendername));
-							        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						            format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'kung-fu', koszty nauki wynios³y 5000$",giveplayer);
-							        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki stylu walki 'kung-fu'",sendername);
-							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							        SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki");
-							        format(string, sizeof(string), "~r~-$%d", 5000);
-									GameTextForPlayer(playerid, string, 5000, 1);
-									if(playerid != playa)
-		 							{
-										SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
-										SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
-										SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-										SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-										SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
-										TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
-										GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
-                                        if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
-										BoxWaitTime[playerid] = 1; BoxWaitTime[BoxOffer[playerid]] = 1;
-										if(BoxDelay < 1){ BoxDelay = 20; }
-										InRing = 1;
-										Boxer1 = playa;
-										Boxer2 = playerid;
-										PlayerBoxing[playerid] = 1;
-										PlayerBoxing[BoxOffer[playerid]] = 1;
-										BoxDelay = 0;
-										BoxWaitTime[playerid] = 0;
-										PlayerPlaySound(playerid, 1057, 0.0, 0.0, 0.0);
-										PlayerPlaySound(playa, 1057, 0.0, 0.0, 0.0);
-										GameTextForPlayer(playerid, "~g~Walka rozpoczeta", 5000, 1);
-										GameTextForPlayer(playa, "~g~Walka rozpoczeta", 5000, 1);
-										TogglePlayerControllable(playerid, 1);
-										TogglePlayerControllable(playa, 1);
-										RoundStarted = 1;
-										PlayerInfo[playerid][pBoxSkill] ++;
-										PlayerInfo[playerid][pBoxSkill] ++;
-										PlayerInfo[playerid][pBoxSkill] ++;
-		 							    SendClientMessage(playerid, COLOR_GRAD2, "Skill + 3");
-									}
-								}
-								else
-								{
-								    sendTipMessage(playerid, "Potrzebujesz 3 skillu Boxera aby móc uczyæ kung fu");
-								}
-							}
-						}
-						else if(styl == 3)
-						{
-						    if(kaska[playerid] < 10000)
-							{
-								sendErrorMessage(playerid, "Nie masz wystarczaj¹co du¿o pieniêdzy ($10000).");
-							}
-							else if(GetPlayerFightingStyle(playa) == FIGHT_STYLE_KNEEHEAD)
-							{
-								sendErrorMessage(playerid, "Gracz aktualnie u¿ywa stylu walki 'KickBoxing'");
-							}
-							else
-							{
-							    if(PlayerInfo[playerid][pBoxSkill] > 200)
-							    {
-									SetPlayerFightingStyle(playa, FIGHT_STYLE_KNEEHEAD);
-									PlayerInfo[playa][pStylWalki] = 3;
-									DajKase(playerid, -10000);
-                                    GetPlayerName(playerid, sendername, sizeof(sendername));
-							        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						            format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'Kick Boxing', koszty nauki wynios³y 10000$",giveplayer);
-							        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki stylu walki 'Kick Boxing'",sendername);
-							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							        SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki");
-							        format(string, sizeof(string), "~r~-$%d", 10000);
-									GameTextForPlayer(playerid, string, 5000, 1);
-									if(playerid != playa)
-		 							{
-										SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
-										SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
-										SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-										SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-										SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
-										TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
-										GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
-                                        if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
-										BoxWaitTime[playerid] = 1; BoxWaitTime[BoxOffer[playerid]] = 1;
-										if(BoxDelay < 1){ BoxDelay = 20; }
-										InRing = 1;
-										Boxer1 = playa;
-										Boxer2 = playerid;
-										PlayerBoxing[playerid] = 1;
-										PlayerBoxing[BoxOffer[playerid]] = 1;
-										BoxDelay = 0;
-										BoxWaitTime[playerid] = 0;
-										PlayerPlaySound(playerid, 1057, 0.0, 0.0, 0.0);
-										PlayerPlaySound(playa, 1057, 0.0, 0.0, 0.0);
-										GameTextForPlayer(playerid, "~g~Walka rozpoczeta", 5000, 1);
-										GameTextForPlayer(playa, "~g~Walka rozpoczeta", 5000, 1);
-										TogglePlayerControllable(playerid, 1);
-										TogglePlayerControllable(playa, 1);
-										RoundStarted = 1;
-										PlayerInfo[playerid][pBoxSkill] ++;
-		 							    PlayerInfo[playerid][pBoxSkill] ++;
-										PlayerInfo[playerid][pBoxSkill] ++;
-		 							    SendClientMessage(playerid, COLOR_GRAD2, "Skill + 3");
-									}
-								}
-								else
-								{
-								    sendTipMessage(playerid, "Potrzebujesz 4 skillu Boxera aby móc uczyæ Kick Boxingu");
-								}
-							}
-						}
-                        else if(styl == 4) {
-                            if(kaska[playerid] < 7500) {
-                                return sendErrorMessage(playerid, "Nie masz wystarczaj¹co du¿o pieniêdzy ($7500).");
-                            }
-                            if(GetPlayerFightingStyle(playa) == FIGHT_STYLE_NORMAL) {
-                                return sendErrorMessage(playerid, "Gracz aktualnie u¿ywa stylu walki 'Domyœlny'");
-                            }
-                            SetPlayerFightingStyle(playa, FIGHT_STYLE_NORMAL);
-                            PlayerInfo[playa][pStylWalki] = 0;
-                            DajKase(playerid, -7500);
-                            GetPlayerName(playerid, sendername, sizeof(sendername));
-                            GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                            format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'Domyœlny', koszty nauki wynios³y 10000$",giveplayer);
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki stylu walki 'Domyœlny'",sendername);
-                            SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-                            SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki");
-                            format(string, sizeof(string), "~r~-$%d", 7500);
-                            GameTextForPlayer(playerid, string, 5000, 1);
-                            if(playerid != playa)
+        if( sscanf(params, "k<fix>d", playa, styl))
+        {
+            SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /naucz [ID gracza] [numer stylu]");
+            SendClientMessage(playerid, COLOR_LIGHTGREEN, "Dostêpne style: 1- Gangsterski(2500$), 2- Kung-Fu(5000$), 3- KickBoxing(10000$)");
+            SendClientMessage(playerid, COLOR_GRAD2, "Kiedy sprzedajesz komuœ styl zabiera ci kase (iloœæ podana przy stylu)");
+            SendClientMessage(playerid, COLOR_LIGHTGREEN, "Aby zarobic dawaj 2-4 razy wiêksze ceny");
+            return 1;
+        }
+        if(PlayerInfo[playerid][pJob] == 12 || PlayerInfo[playerid][pAdmin] >= 1000)
+        {
+            if(GetDistanceBetweenPlayers(playerid,playa) < 5 && obezwladniony[playa] != 1 && IsPlayerInRangeOfPoint(playerid, 9.0, 762.9852,2.4439,1001.5942))
+            {
+                if(styl > 3 || styl < 1)
+                {
+                    SendClientMessage(playerid, COLOR_GRAD2, "Dostêpne style: 1- gangster(2500$), 2- kung-fu(5000$), 3- KickEx-boxing(10000$)");
+                    return 1;
+                }
+                if(IsPlayerConnected(playa))
+                {
+                    if(Spectate[playa] != INVALID_PLAYER_ID)
+                    {
+                        SendClientMessage(playerid, COLOR_GRAD1, "Ten gracz jest za daleko.");
+                        return 1;
+                    }
+                    if(playa != INVALID_PLAYER_ID)
+                    {
+                        if(styl == 1)
+                        {
+                            if(kaska[playerid] < 2500)
                             {
-                                SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
-                                SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
-                                SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-                                SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                                SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
-                                TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
-                                GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
-                                if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
-                                BoxWaitTime[playerid] = 1; BoxWaitTime[BoxOffer[playerid]] = 1;
-                                if(BoxDelay < 1){ BoxDelay = 20; }
-                                InRing = 1;
-                                Boxer1 = playa;
-                                Boxer2 = playerid;
-                                PlayerBoxing[playerid] = 1;
-                                PlayerBoxing[BoxOffer[playerid]] = 1;
-                                BoxDelay = 0;
-                                BoxWaitTime[playerid] = 0;
-                                PlayerPlaySound(playerid, 1057, 0.0, 0.0, 0.0);
-                                PlayerPlaySound(playa, 1057, 0.0, 0.0, 0.0);
-                                GameTextForPlayer(playerid, "~g~Walka rozpoczeta", 5000, 1);
-                                GameTextForPlayer(playa, "~g~Walka rozpoczeta", 5000, 1);
-                                TogglePlayerControllable(playerid, 1); TogglePlayerControllable(playa, 1);
-                                RoundStarted = 1;
-                                PlayerInfo[playerid][pBoxSkill] ++;
-                                PlayerInfo[playerid][pBoxSkill] ++;
-                                PlayerInfo[playerid][pBoxSkill] ++;
-                                PlayerInfo[playerid][pBoxSkill] ++;
-                                SendClientMessage(playerid, COLOR_GRAD2, "Skill + 4");
+                                SendClientMessage(playerid, COLOR_RED, "Nie masz wystarczaj¹co du¿o pieniêdzy ($2500).");
                             }
-
+                            else if(GetPlayerFightingStyle(playa) == FIGHT_STYLE_BOXING)
+                            {
+                                SendClientMessage(playerid, COLOR_RED, "Gracz aktualnie u¿ywa stylu walki 'Gangster'");
+                            }
+                            else
+                            {
+                                SetPlayerFightingStyle(playa, FIGHT_STYLE_BOXING);
+                                PlayerInfo[playa][pStylWalki] = 1;
+                                DajKase(playerid, -2500);
+                                GetPlayerName(playerid, sendername, sizeof(sendername));
+                                GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'gangster', koszty nauki wynios³y 2500$",giveplayer);
+                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki stylu walki 'gangster'",sendername);
+                                SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki");
+                                format(string, sizeof(string), "~r~-$%d", 2500);
+                                GameTextForPlayer(playerid, string, 5000, 1);
+                                if(playerid != playa)
+                                {
+                                    SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
+                                    SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
+                                    SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
+                                    SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+                                    SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                    GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
+                                    if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
+                                    BoxWaitTime[playerid] = 1; BoxWaitTime[BoxOffer[playerid]] = 1;
+                                    if(BoxDelay < 1){ BoxDelay = 20; }
+                                    InRing = 1;
+                                    Boxer1 = playa;
+                                    Boxer2 = playerid;
+                                    PlayerBoxing[playerid] = 1;
+                                    PlayerBoxing[BoxOffer[playerid]] = 1;
+                                    BoxDelay = 0;
+                                    BoxWaitTime[playerid] = 0;
+                                    PlayerPlaySound(playerid, 1057, 0.0, 0.0, 0.0);
+                                    PlayerPlaySound(playa, 1057, 0.0, 0.0, 0.0);
+                                    GameTextForPlayer(playerid, "~g~Walka rozpoczeta", 5000, 1);
+                                    GameTextForPlayer(playa, "~g~Walka rozpoczeta", 5000, 1);
+                                    RoundStarted = 1;
+                                    PlayerInfo[playerid][pBoxSkill] ++;
+                                    PlayerInfo[playerid][pBoxSkill] ++;
+                                    PlayerInfo[playerid][pBoxSkill] ++;
+                                    SendClientMessage(playerid, COLOR_GRAD2, "Skill + 3");
+                                }
+                            }
                         }
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Gracz nie istnieje.");
-					}
-				}
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Gracz jest za daleko.");
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nie jesteœ bokserem.");
-		}
-	}
-	return 1;
+                        else if(styl == 2)
+                        {
+                            if(kaska[playerid] < 5000)
+                            {
+                                SendClientMessage(playerid, COLOR_RED, "Nie masz wystarczaj¹co du¿o pieniêdzy ($5000).");
+                            }
+                            else if(GetPlayerFightingStyle(playa) == FIGHT_STYLE_KUNGFU)
+                            {
+                                SendClientMessage(playerid, COLOR_RED, "Gracz aktualnie u¿ywa stylu walki 'Kung Fu'");
+                            }
+                            else
+                            {
+                                if(PlayerInfo[playerid][pBoxSkill] > 100)
+                                {
+                                    SetPlayerFightingStyle(playa, FIGHT_STYLE_KUNGFU);
+                                    PlayerInfo[playa][pStylWalki] = 2;
+                                    DajKase(playerid, -5000);
+                                    GetPlayerName(playerid, sendername, sizeof(sendername));
+                                    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                    format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'kung-fu', koszty nauki wynios³y 5000$",giveplayer);
+                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki stylu walki 'kung-fu'",sendername);
+                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                    SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki");
+                                    format(string, sizeof(string), "~r~-$%d", 5000);
+                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    if(playerid != playa)
+                                    {
+                                        SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
+                                        SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
+                                        SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
+                                        SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+                                        SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                        TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
+                                        GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
+                                        if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
+                                        BoxWaitTime[playerid] = 1; BoxWaitTime[BoxOffer[playerid]] = 1;
+                                        if(BoxDelay < 1){ BoxDelay = 20; }
+                                        InRing = 1;
+                                        Boxer1 = playa;
+                                        Boxer2 = playerid;
+                                        PlayerBoxing[playerid] = 1;
+                                        PlayerBoxing[BoxOffer[playerid]] = 1;
+                                        BoxDelay = 0;
+                                        BoxWaitTime[playerid] = 0;
+                                        PlayerPlaySound(playerid, 1057, 0.0, 0.0, 0.0);
+                                        PlayerPlaySound(playa, 1057, 0.0, 0.0, 0.0);
+                                        GameTextForPlayer(playerid, "~g~Walka rozpoczeta", 5000, 1);
+                                        GameTextForPlayer(playa, "~g~Walka rozpoczeta", 5000, 1);
+                                        TogglePlayerControllable(playerid, 1);
+                                        TogglePlayerControllable(playa, 1);
+                                        RoundStarted = 1;
+                                        PlayerInfo[playerid][pBoxSkill] ++;
+                                        PlayerInfo[playerid][pBoxSkill] ++;
+                                        PlayerInfo[playerid][pBoxSkill] ++;
+                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill + 3");
+                                    }
+                                }
+                                else
+                                {
+                                    SendClientMessage(playerid, COLOR_RED, "Potrzebujesz 3 skillu Boxera aby móc uczyæ kung fu");
+                                }
+                            }
+                        }
+                        else if(styl == 3)
+                        {
+                            if(kaska[playerid] < 10000)
+                            {
+                                SendClientMessage(playerid, COLOR_RED, "Nie masz wystarczaj¹co du¿o pieniêdzy ($10000).");
+                            }
+                            else if(GetPlayerFightingStyle(playa) == FIGHT_STYLE_KNEEHEAD)
+                            {
+                                SendClientMessage(playerid, COLOR_RED, "Gracz aktualnie u¿ywa stylu walki 'KickBoxing'");
+                            }
+                            else
+                            {
+                                if(PlayerInfo[playerid][pBoxSkill] > 200)
+                                {
+                                    SetPlayerFightingStyle(playa, FIGHT_STYLE_KNEEHEAD);
+                                    PlayerInfo[playa][pStylWalki] = 3;
+                                    DajKase(playerid, -10000);
+                                    GetPlayerName(playerid, sendername, sizeof(sendername));
+                                    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                    format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'Kick Boxing', koszty nauki wynios³y 10000$",giveplayer);
+                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki stylu walki 'Kick Boxing'",sendername);
+                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                    SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki");
+                                    format(string, sizeof(string), "~r~-$%d", 10000);
+                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    if(playerid != playa)
+                                    {
+                                        SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
+                                        SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
+                                        SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
+                                        SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+                                        SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                        TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
+                                        GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
+                                        if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
+                                        BoxWaitTime[playerid] = 1; BoxWaitTime[BoxOffer[playerid]] = 1;
+                                        if(BoxDelay < 1){ BoxDelay = 20; }
+                                        InRing = 1;
+                                        Boxer1 = playa;
+                                        Boxer2 = playerid;
+                                        PlayerBoxing[playerid] = 1;
+                                        PlayerBoxing[BoxOffer[playerid]] = 1;
+                                        BoxDelay = 0;
+                                        BoxWaitTime[playerid] = 0;
+                                        PlayerPlaySound(playerid, 1057, 0.0, 0.0, 0.0);
+                                        PlayerPlaySound(playa, 1057, 0.0, 0.0, 0.0);
+                                        GameTextForPlayer(playerid, "~g~Walka rozpoczeta", 5000, 1);
+                                        GameTextForPlayer(playa, "~g~Walka rozpoczeta", 5000, 1);
+                                        TogglePlayerControllable(playerid, 1);
+                                        TogglePlayerControllable(playa, 1);
+                                        RoundStarted = 1;
+                                        PlayerInfo[playerid][pBoxSkill] ++;
+                                        PlayerInfo[playerid][pBoxSkill] ++;
+                                        PlayerInfo[playerid][pBoxSkill] ++;
+                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill + 3");
+                                    }
+                                }
+                                else
+                                {
+                                    SendClientMessage(playerid, COLOR_RED, "Potrzebujesz 4 skillu Boxera aby móc uczyæ Kick Boxingu");
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        SendClientMessage(playerid, COLOR_RED, "Gracz nie istnieje.");
+                    }
+                }
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_RED, "Gracz jest za daleko.");
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_RED, "Nie jesteœ bokserem.");
+        }
+    }
+    return 1;
 }
-
 //---------------------------------------[Mechanik]---------------------------------------------------------------------------------------------
 
 
@@ -13029,17 +12976,13 @@ CMD:uniform2(playerid, params[])
 {
     if(IsPlayerConnected(playerid) && IsAtClothShop(playerid) && PlayerInfo[playerid][pMember] != 0)
     {
-        static array[1][1];
-        new models[22];
-        models = DialogListaSkinow(PlayerInfo[playerid][pMember]);
-        ShowPlayerPreviewModelDialog(playerid, DIALOGID_UNIFORM, DIALOG_STYLE_PREVMODEL, "Wybierz Ubranie", models, array, "Wybierz", "Anuluj");
-		//ShowPlayerDialogEx(playerid,DIALOGID_UNIFORM,DIALOG_STYLE_PREVMODEL_LIST,"Zmien skin frakcyjny",DialogListaSkinow(PlayerInfo[playerid][pMember]),"Zmien skin","Anuluj"); //zmieñ dialogid
-	}
-	else
-	{
-		SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w sklepie odzie¿owym!");
-	}
-	return 1;
+        ShowPlayerDialogEx(playerid,DIALOGID_UNIFORM,DIALOG_STYLE_PREVMODEL_LIST,"Zmien skin frakcyjny",DialogListaSkinow(PlayerInfo[playerid][pMember]),"Zmien skin","Anuluj"); //zmieñ dialogid
+    }
+    else
+    {
+        SendClientMessage(playerid, COLOR_GRAD2, "  Nie jesteœ w sklepie odzie¿owym!");
+    }
+    return 1;
 }
 
 /*CMD:podszyj(playerid, params[]) return cmd_podszyjsie(playerid, params);
@@ -20885,7 +20828,8 @@ CMD:wyjdz(playerid)
 		|| IsPlayerInRangeOfPoint(playerid,4,1568.1061, 2205.3196, -50.9522)//treningowe miejsca
 		|| IsPlayerInRangeOfPoint(playerid,4,1565.0798, -1665.6580, 28.4782) && IsACop(playerid))//dach LSPD
 		{
-		    ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parkingi\n[Poziom 0]Komisariat\n[Poziom 1]Pokoje Przes³uchañ\n[Poziom 2]Biura\n[Poziom 3]Sale Treningowe\n[Poziom 4]Dach","Jedz","");
+		    //ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parkingi\n[Poziom 0]Komisariat\n[Poziom 1]Pokoje Przes³uchañ\n[Poziom 2]Biura\n[Poziom 3]Sale Treningowe\n[Poziom 4]Dach","Jedz","");
+            ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
 		}
 		//w     szpital na zewnatrz
         else if(IsPlayerInRangeOfPoint(playerid,5,1171.9703, -1322.4764, 31.6913))
@@ -21341,11 +21285,13 @@ CMD:wyjdz(playerid)
             GameTextForPlayer(playerid, "~w~Witamy w garazu", 5000, 1);
             return 1;
         }
-		if(IsPlayerInRangeOfPoint(playerid,5,-1693.1406,890.4065,-52.3141))//glowne wyjscie
+		if(IsPlayerInRangeOfPoint(playerid,5,-1693.1406,890.4065,-52.3141))//glowne wyjscie KOMI
 		{
 			SetPlayerPosEx(playerid,1555.0505, -1675.6409, 16.2821);
 			SetPlayerVirtualWorld(playerid,0);
 			SetPlayerInterior(playerid,0);
+            TogglePlayerControllable(playerid, 0);
+            Wchodzenie(playerid);
 			PlayerInfo[playerid][pLocal] = 255;
 		}
 		else if (PlayerToPoint(4.0, playerid,246.6659,108.0529,1003.2188)) //Komisariat nowy wyjscie nowe komi
@@ -32256,7 +32202,7 @@ CMD:wywaldmv(playerid, params[])
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 							format(string, sizeof(string), "* %s wywala z dmv %s.", sendername, giveplayer);
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							format(string, sizeof(string), "* Zosta³eœ wywalony z dmv przez %s na 10 minut.", giveplayer);
+							format(string, sizeof(string), "* Zosta³eœ wywalony z DMV przez %s na 10 minut.", sendername);
 							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Wywali³eœ z dmv %s na 10 minut.", giveplayer);
 							wywalzdmv[giveplayerid] = 1;
@@ -33298,11 +33244,16 @@ CMD:akceptuj(playerid, params[])
                                     SendClientMessage(TicketOffer[playerid], COLOR_RED, string);
                                 }
                             }
-                            format(string, sizeof(string), "* %s zap³aci³ mandat $%d.", sendername, TicketMoney[playerid]);
-                            SendClientMessage(TicketOffer[playerid], COLOR_LIGHTBLUE, string);
 
+                            //format(string, sizeof(string), "* %s zap³aci³ mandat $%d. Otrzymujesz po³owê tej kwoty.", sendername, TicketMoney[playerid]);
+                            format(string, sizeof(string), "* %s zap³aci³ mandat $%d", sendername, TicketMoney[playerid]);
+                            SendClientMessage(TicketOffer[playerid], COLOR_LIGHTBLUE, string);
+                            SetPVarInt(playerid, "mandat_punkty", 0);
                             ZabierzKase(playerid, TicketMoney[playerid]);
-                            DajKase(TicketOffer[playerid], TicketMoney[playerid]);
+                            DajKase(playerid, TicketMoney[playerid]);
+                            //new depo2 = floatround(((TicketMoney[playerid]/100) * 50), floatround_round);
+                            //DajKase(TicketOffer[playerid], depo2);
+                            //Sejf_Add(PlayerInfo[TicketOffer[playerid]][pMember], depo2);
                             TicketOffer[playerid] = 999;
                             TicketMoney[playerid] = 0;
                             return 1;
@@ -33788,6 +33739,7 @@ CMD:akceptuj(playerid, params[])
             if(giveplayerid == -1)
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /akceptuj prawnik [playerid/CzêœæNicku]");
+                sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Pamiêtaj, ze pieni¹dze ($20 000) zostan¹ pobrane z Twojego portfela!");
                 return 1;
             }
 
@@ -33799,9 +33751,10 @@ CMD:akceptuj(playerid, params[])
                     {
                         if(PlayerInfo[giveplayerid][pJob] == 2)
                         {
+                            if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania pozwolenia prawniczego to $20 000. Nie masz tyle!");
                             GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
                             GetPlayerName(playerid, sendername, sizeof(sendername));
-                            format(string, sizeof(string), "* Da³eœ zgodê %s na uwolnienie wiêŸnia z celi.", giveplayer);
+                            format(string, sizeof(string), "* Da³eœ zgodê %s na uwolnienie wiêŸnia z celi. Tracisz $10 000 z portfela", giveplayer);
                             SendClientMessage(playerid, COLOR_LIGHTBLUE,string);
                             format(string, sizeof(string), "* Policjant %s da³ ci zgodê na uwolnienie wiêŸnia z celi. (wpisz /uwolnij)", sendername);
                             SendClientMessage(giveplayerid, COLOR_LIGHTBLUE,string);
@@ -33809,6 +33762,8 @@ CMD:akceptuj(playerid, params[])
                             SendRadioMessage(1, COLOR_PANICRED, string);
                             SendRadioMessage(2, COLOR_PANICRED, string);
                             SendRadioMessage(3, COLOR_PANICRED, string);
+                            DajKase(playerid, -20000);
+                            //Sejf_Add(PlayerInfo[playerid][pMember], 10000);
                             ApprovedLawyer[giveplayerid] = 1;
                             return 1;
                         }
@@ -33874,12 +33829,12 @@ CMD:akceptuj(playerid, params[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* %s kupi³ od ciebie %d gram, $%d zostanie dodane do twojej wyp³aty.",sendername,DrugGram[playerid],DrugPrice[playerid]);
                             SetPVarInt(DrugOffer[playerid], "wydragowany", 60);
+                            SendClientMessage(DrugOffer[playerid], COLOR_LIGHTBLUE, string);
                             //
                             format(string, sizeof(string), "%s kupi³ dragi za $%d od %s", sendername, DrugPrice[playerid], giveplayer);
                             ABroadCast(COLOR_YELLOW,string,1);
                             printf("%s", string);
                             //
-							SendClientMessage(DrugOffer[playerid], COLOR_LIGHTBLUE, string);
 							PlayerInfo[DrugOffer[playerid]][pPayCheck] += DrugPrice[playerid];
 							PlayerInfo[DrugOffer[playerid]][pDrugsSkill] ++;
 							ZabierzKase(playerid, DrugPrice[playerid]);
@@ -35994,11 +35949,17 @@ CMD:aresztuj(playerid, params[])
 						            new price2 = PoziomPoszukiwania[playa]*1000;
 						            new bail = PoziomPoszukiwania[playa]*16000;
 						            new jt = PoziomPoszukiwania[playa]*200;
-						            DajKase(playerid, price);
+						            //DajKase(playerid, price);
 								    DajKase(playa, -price2);
 	                                GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 	                                GetPlayerName(playerid, sendername, sizeof(sendername));
-									format(string, sizeof(string), "* Uwiêzi³eœ %s w Wiêzieniu, nagroda za przestêpcê: %d.", giveplayer, price);
+                                   // new depo2 = floatround(((price/100) * 75), floatround_round);
+                                   // new depo3 = floatround(((price/100) * 25), floatround_round);
+                                   // DajKase(playerid, depo3);
+                                   // Sejf_Add(PlayerInfo[playerid][pMember], depo2);
+								   // format(string, sizeof(string), "* Uwiêzi³eœ %s w Wiêzieniu, nagroda za przestêpcê: %d. Otrzymujesz 25procent tej kwoty.", giveplayer, price);
+                                    format(string, sizeof(string), "* Uwiêzi³eœ %s w Wiêzieniu, nagroda za przestêpcê: %d", giveplayer, price);
+                                    DajKase(playerid, price);
 									SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 									PlayerInfo[playa][pJailed] = 1;
 								    PlayerInfo[playa][pJailTime] = jt;
@@ -36854,7 +36815,7 @@ CMD:cennik(playerid)
 CMD:czity(playerid, params[]) return cmd_cziterzy(playerid, params);
 CMD:cziterzy(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)//if(PlayerInfo[playerid][pAdmin] < 1) return 1;
+    /*if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)//if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     {
     	new str[128];
     	SendClientMessage(playerid, -1, "Potencjalna lista cziterów:");
@@ -36869,8 +36830,31 @@ CMD:cziterzy(playerid, params[])
             	}
         	}
     	}
+
 		ListaCziterow(playerid);
-	}
+	} */
+    new czity = 0;
+    new string[1500];
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1) {
+        foreach(Player, i) {
+            if(GetPVarInt(i, "AC-warn") > 1) {
+                format(string, sizeof(string), "%s[AC] %s (ID: %d)\n", string, GetNick(i), i);
+                czity++;
+            } else if(GetPVarInt(i, "AC-oznaczony") == 1) {
+                format(string, sizeof(string), "%s[S0BEIT] %s (ID: %d)\n", string, GetNick(i), i);
+                czity++;
+            } 
+        }
+    }
+    inline DLG_CZITERZY_MAIN(playerid1, dialogid1, response1, listitem1, string:inputtext1[]) {
+        #pragma unused playerid1, dialogid1, inputtext1, listitem1
+        if(!response1) return 1;
+        return cmd_cziterzy(playerid1, params);
+    }
+    if(czity == 0) {
+        sendTipMessage(playerid, "Nie wykryto ¿adnych potencjalnych cziterów");
+    }
+    Dialog_ShowCallback(playerid, using inline DLG_CZITERZY_MAIN, DIALOG_STYLE_LIST, ("Potencjalna Lista Cziterów"), string, "Ok", "Anuluj");
     return 1;
 }
 
@@ -37980,11 +37964,11 @@ CMD:rentcar(playerid)
     return 1;
 }
 
-CMD:premium(playerid)
+/*CMD:premium(playerid)
 {
     CallRemoteFunction("MRP_Shop_ShowPremiumMenu", "i", playerid);
     return 1;
-}
+} */
 
 CMD:kupdodatki(playerid)
 {
@@ -38444,7 +38428,7 @@ CMD:hq(playerid, params[]) {
     // tylko dla: PD
     if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
     {
-        new string[2750];
+        new string[3881];
         // nie wpisano nicku, glowne hq
         format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"========================"#HQ_COLOR_TEKST"[HQ]"#HQ_COLOR_PLACEHOLDER"========================");
         format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Lista poszukiwanych", string);
@@ -38457,11 +38441,11 @@ CMD:hq(playerid, params[]) {
                     case 0,3: return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");       
                     case 1: {
                         new przestepcy = false;
+                        format(string, sizeof(string), ""#HQ_COLOR_TEKST2"Przestêpcy");
+                        format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
                         for(new i = 0, j=MAX_PLAYERS; i<j; i++) {
                             // do zast¹pienia zmienn¹ WL
                             if(PoziomPoszukiwania[i] > 0) {
-                                format(string, sizeof(string), ""#HQ_COLOR_TEKST2"Przestêpcy");
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
                                 format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST2" %s "#HQ_COLOR_TEKST"WL: %d", string, GetNick(i, true), PoziomPoszukiwania[i]);
                                 przestepcy = true;
                             }
@@ -38477,14 +38461,15 @@ CMD:hq(playerid, params[]) {
                                 return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, ("HQ"), string, "Ok", "Anuluj");
                             }
                             if(responseX) {
+                                format(string, sizeof(string), ""#HQ_COLOR_TEKST2"Przestêpcy");
+                                format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
                                 for(new i = 0, j=MAX_PLAYERS; i<j; i++) {
+                                    // do zast¹pienia zmienn¹ WL
                                     if(PoziomPoszukiwania[i] > 0) {
-                                        // do zast¹pienia zmienn¹ WL
-                                        format(string, sizeof(string), ""#HQ_COLOR_TEKST2"Przestêpcy");
-                                        format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
                                         format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST2" %s "#HQ_COLOR_TEKST"WL: %d", string, GetNick(i, true), PoziomPoszukiwania[i]);
-                                        }
+                                        przestepcy = true;
                                     }
+                                }
                                 Dialog_ShowCallback(playerid, using inline DLG_HQ_ZGL_NICNIEROB, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");
                             }
                         }
@@ -38498,8 +38483,14 @@ CMD:hq(playerid, params[]) {
                                 format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"%s", string, Zgloszenie[i][zgloszenie_tresc]);
                             } else if(Zgloszenie[i][zgloszenie_status] == 1) {
                                 format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"%s", string, Zgloszenie[i][zgloszenie_tresc]);
-                            } else {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"%s", string, Zgloszenie[i][zgloszenie_tresc]);
+                            } else if(Zgloszenie[i][zgloszenie_status] == 2) {
+                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"[Odrzucone] %s", string, Zgloszenie[i][zgloszenie_tresc]);
+                            } else if(Zgloszenie[i][zgloszenie_status] == 3) {
+                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_FALSZYWE"[Fa³szywe] %s", string, Zgloszenie[i][zgloszenie_tresc]);
+                            } else if(Zgloszenie[i][zgloszenie_status] == 4) {
+                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_WYKONANE"[Wykonane] %s", string, Zgloszenie[i][zgloszenie_tresc]);
+                            } else if(Zgloszenie[i][zgloszenie_status] == 5) {
+                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"[Anulowane] %s", string, Zgloszenie[i][zgloszenie_tresc]);
                             }
                         }
                         format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
@@ -38533,46 +38524,83 @@ CMD:hq(playerid, params[]) {
                             format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Treœæ: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_tresc]);
                             format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Godzina: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_kiedy]);
                             format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Zg³osi³: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_nadal]);
+                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Obszar: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_lokacja]);
                             new statusTxt[30];
                             switch(Zgloszenie[szczegol][zgloszenie_status]) {
                                 case 0: statusTxt = "Nie podjêto jeszcze decyzji";
                                 case 1: statusTxt = "Akceptowane";
                                 case 2: statusTxt = "Odrzucone";
+                                case 3: statusTxt = "Fa³szywe";
+                                case 4: statusTxt = "Wykonane";
+                                case 5: statusTxt = "Anulowane";
                             }
                             format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Status: "#HQ_COLOR_TEKST2"%s", string, statusTxt);
                             format(string, sizeof(string), "%s\n ", string);
                             if(Zgloszenie[szczegol][zgloszenie_status] == 1) {
                                 format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Przyj¹³: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_przyjal]);
+                                if(!strcmp(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true))) {
+                                    //SetPVarInt(playerid, "zgloszenia_status", 1);
+                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"Oznacz jako: WYKONANE", string);
+                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"Oznacz jako: FA£SZYWE", string);    
+                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"Oznacz jako: ANULOWANE", string);
+                                }
                             } else if(Zgloszenie[szczegol][zgloszenie_status] == 0) {
+                                //SetPVarInt(playerid, "zgloszenia_status", 0);
                                 format(string, sizeof(string), "%s\n ", string);
                                 format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"Akceptuj zg³oszenie", string);
                                 format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"Odrzuæ zg³oszenie", string);    
+                            } else if(Zgloszenie[szczegol][zgloszenie_status] == 2) {
+                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Odrzuci³: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_przyjal]);
+                            } else {
+                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Wyda³ decyzjê: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_przyjal]);
                             }
             
                             inline DLG_HQ_ZGL_NIEROBINIC(player2, dialogid2, response2, listitem2, string:inputtext2[]) {
                                 #pragma unused player2, dialogid2, inputtext2
                                 if(response2) {
-                                    if(listitem2 == 8) {
-                                        strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
-                                        Zgloszenie[szczegol][zgloszenie_status] = 1;
-                                    } else if (listitem2 == 9) {
-                                        new Hour, Minute;
-                                        gettime(Hour, Minute);
-                                        new string_data[36];
-                                        format(string_data, sizeof(string_data), "%02d:%02d",  Hour, Minute);
-                                        strmid(Zgloszenie[szczegol][zgloszenie_kiedy], string_data, 0, sizeof(string_data), 36);
-                                        strmid(Zgloszenie[szczegol][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
-                                        strmid(Zgloszenie[szczegol][zgloszenie_tresc], "Brak", 0, 4, 70);
-                                        Zgloszenie[szczegol][zgloszenie_status] = 0;
+                                    if(listitem2 == 9) {
+                                        new zglstatus = Zgloszenie[szczegol][zgloszenie_status];
+                                        if(zglstatus == 0) {
+                                            if(!strcmp(Zgloszenie[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na akceptowaæ!");
+                                            strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+                                            Zgloszenie[szczegol][zgloszenie_status] = 1;
+                                        } else {
+                                            Zgloszenie[szczegol][zgloszenie_status] = 4;
+                                        }
+                                    } else if (listitem2 == 10) {
+                                        new zglstatus = Zgloszenie[szczegol][zgloszenie_status];
+                                        if(zglstatus == 0) {
+                                            //new Hour, Minute;
+                                            //gettime(Hour, Minute);
+                                            //new string_data[36];
+                                            //format(string_data, sizeof(string_data), "%02d:%02d",  Hour, Minute);
+                                            //strmid(Zgloszenie[szczegol][zgloszenie_kiedy], string_data, 0, sizeof(string_data), 36);
+                                            //strmid(Zgloszenie[szczegol][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
+                                            //strmid(Zgloszenie[szczegol][zgloszenie_tresc], "Brak", 0, 4, 70);
+                                            //Zgloszenie[szczegol][zgloszenie_status] = 0;
+                                            if(!strcmp(Zgloszenie[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na odrzucaæ!");
+                                            strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+                                            Zgloszenie[szczegol][zgloszenie_status] = 2;
+                                        } else {
+                                            Zgloszenie[szczegol][zgloszenie_status] = 3;
+                                        }
+                                    } else if(listitem2 == 11) {
+                                        Zgloszenie[szczegol][zgloszenie_status] = 5;
                                     }
                                     format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"===================="#HQ_COLOR_TEKST"[ZG£OSZENIA]"#HQ_COLOR_PLACEHOLDER"====================");
                                     for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
                                         if(Zgloszenie[i][zgloszenie_status] == 0) {
                                             format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"%s", string, Zgloszenie[i][zgloszenie_tresc]);
                                         } else if(Zgloszenie[i][zgloszenie_status] == 1) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"%s", string, Zgloszenie[i][zgloszenie_tresc]);
-                                        } else {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"%s", string, Zgloszenie[i][zgloszenie_tresc]);
+                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"[Przyjête] %s", string, Zgloszenie[i][zgloszenie_tresc]);
+                                        } else if(Zgloszenie[i][zgloszenie_status] == 2) {
+                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"[Odrzucone] %s", string, Zgloszenie[i][zgloszenie_tresc]);
+                                        } else if(Zgloszenie[i][zgloszenie_status] == 3) {
+                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_FALSZYWE"[Fa³szywe] %s", string, Zgloszenie[i][zgloszenie_tresc]);
+                                        } else if(Zgloszenie[i][zgloszenie_status] == 4) {
+                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_WYKONANE"[Wykonane] %s", string, Zgloszenie[i][zgloszenie_tresc]);
+                                        } else if(Zgloszenie[i][zgloszenie_status] == 5) {
+                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"[Anulowane] %s", string, Zgloszenie[i][zgloszenie_tresc]);
                                         }
                                     }
                                     format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
@@ -38600,8 +38628,6 @@ CMD:fpanel(playerid) {
     new id = PlayerInfo[playerid][pLider];
     format(fpanel_string, sizeof(fpanel_string), ""#KARA_TEKST"Zarz¹dzanie pracownikami");
     format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    »» {f9f9f9}Lista Pracowników", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    »» {f9f9f9}Lista Liderów", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    »» {f9f9f9}Przyjmij (Offline)", fpanel_string);
     format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    »» {f9f9f9}Zwolnij (Offline)", fpanel_string);
     format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"Zarz¹dzanie pojazdami", fpanel_string);
     format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"Zarz¹dzanie skinami", fpanel_string);
@@ -38610,10 +38636,14 @@ CMD:fpanel(playerid) {
         #pragma unused player, dialogid, inputtext
         if(!response) return 1;
         switch(listitem) {
-            case 0,2,3,4,5,6: {
+            case 0: {
                 return cmd_fpanel(playerid);
             }
-            case 7: {
+            case 2,3,4: {
+                sendTipMessage(playerid, "Funkcje w przygotowaniu!");   
+                return cmd_fpanel(playerid);
+            }
+            case 5: {
                 return cmd_sejff(playerid);
             }
             case 1: {
@@ -38709,6 +38739,8 @@ CMD:fpanel(playerid) {
     Dialog_ShowCallback(playerid, using inline DLG_FPANEL_MAIN, DIALOG_STYLE_LIST, ftitle, fpanel_string, "Ok", "Anuluj");
     return 1;
 }
+
+
 
 //eof
 

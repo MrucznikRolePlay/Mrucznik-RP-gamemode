@@ -1671,16 +1671,17 @@ public JednaSekundaTimer()
 					else
 					{
 						new veh = GetPlayerVehicleID(cop);
-						new seat = GetFreeVehicleSeat(veh);
-						if(seat != -1)
-						{
-							PutPlayerInVehicleEx(i, veh, seat);
-							TogglePlayerControllable(i, 0);
-						}
-						else
-						{
-							PutPlayerInVehicleEx(i, veh, 2);
-						}
+                        new veh_zakuty = GetPlayerVehicleID(i);
+                        if(veh != veh_zakuty) 
+                        {
+                            new seat = GetFreeVehicleSeat(veh);
+                            if(seat != -1)
+                            {
+                                PutPlayerInVehicleEx(i, veh, seat);
+                                TogglePlayerControllable(i, 0);
+                                SetPVarInt(i, "kajdany_siedzenie", seat);
+                            }
+                        }
 					}
 				}
 			}

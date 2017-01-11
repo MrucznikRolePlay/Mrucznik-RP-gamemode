@@ -94,13 +94,15 @@ DialogListaFrakcji()
 }
 DialogListaSkinow(frakcja)
 {
-	new skiny[22];
+	new skiny[512];
 	for(new i=0;i<MAX_SKIN_SELECT;i++)
 	{
 		if(FRAC_SKINS[frakcja][i] == 0) break;
-		skiny[i] = FRAC_SKINS[frakcja][i];
+		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[frakcja][i], i);
 	}
-	return skiny;
+	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	printf(skiny);
+	safe_return skiny;
 }
 
 stock PDTuneSultan(vehicleid)
@@ -146,27 +148,27 @@ stock PDTuneInfernus(vehicleid)
 forward OznaczCzitera(playerid);
 public OznaczCzitera(playerid)
 {
-	new string[64];
+	new string[71+MAX_PLAYER_NAME];
 	SetPVarInt(playerid, "AC_oznaczony", 1);
-	format(string, sizeof(string), "UWAGA! %s[%d] posiada s0beita na 99\%. Zbanuj go, gdy u¿yje czitów, b¹dŸ po pewnym czasie gry, aby nie wy³¹czy³ czitów przy wejœciu na serwer!", GetNick(playerid), playerid);
+	format(string, sizeof(string), "UWAGA! %s[%d] jest podejrzany o S0beit. Pilnujcie go!", GetNick(playerid), playerid);
 	SendAdminMessage(COLOR_PANICRED, string);
-	SendAdminMessage(COLOR_PANICRED, "Gracz ten zosta³ dodany do listy cziterów, wpisz /cziterzy aby zobaczyæ t¹ listê.");
+	SendAdminMessage(COLOR_PANICRED, "Gracz ten zosta³ dodany do listy cziterów, wpisz /cziterzy aby zobaczyæ t¹ listê");
 	return 1;
 }
 
-stock ListaCziterow(playerid)
+/*stock ListaCziterow(playerid)
 {
 	new string[32];
 	SendClientMessage(playerid, COLOR_RED, "Lista cziterów u których wykryto s0beita:");
 	foreach(Player, i)
 	{
-		if(GetPVarInt(playerid, "AC_oznaczony") == 1)
+		if(GetPVarInt(i, "AC_oznaczony") == 1)
 		{
 			format(string, sizeof(string), "%s[%d]", GetNick(i), i);
 			SendClientMessage(playerid, COLOR_WHITE, string);
 		}
 	}
-}
+}*/
 
 IsAValidURL(string[])
 {
@@ -178,13 +180,12 @@ IsAValidURL(string[])
 	return 1;
 	#endif
 }
-
 stock GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
 	foreach(Player, i)
 	{
-		if(IsPlayerInVehicle(i, vehicleid))
+		if(IsPlayerInVehicle(i,vehicleid))
 		{
 			if(GetPlayerVehicleSeat(i) == 0) Seat[0] = true;
 			else if(GetPlayerVehicleSeat(i) == 1) Seat[1] = true;

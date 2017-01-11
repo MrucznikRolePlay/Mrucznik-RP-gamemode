@@ -1,31 +1,5 @@
 //OnDialogResponse.pwn  AKTUALNA MAPA
-forward OnDialogDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
-public OnDialogDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
-	if(dialogid >= DIALOG_HA_ZMIENSKIN(1) && dialogid <= DIALOG_HA_ZMIENSKIN(MAX_FRAC))
-	{
-		if(response)
-		{
-			new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
-			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		}
-		else
-		{
-			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
-		}
-	}
-	else if(dialogid == DIALOGID_UNIFORM)
-	{
-		if(response)
-		{
-            new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
-			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		}
-	}
-}
+
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	#if DEBUG == 1
@@ -71,10 +45,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			static array[1][1];
-			new models[22];
-			models = DialogListaSkinow(listitem+1);
-			ShowPlayerPreviewModelDialog(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Wybierz Ubranie", models, array, "Wybierz", "Anuluj");
+			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Zmiana ubrania", DialogListaSkinow(listitem+1), "Start", "Anuluj");
+		}
+	}
+	else if(dialogid >= DIALOG_HA_ZMIENSKIN(1) && dialogid <= DIALOG_HA_ZMIENSKIN(MAX_FRAC))
+	{
+		if(response)
+		{
+			new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+		else
+		{
+			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
 		}
 	}
 	
@@ -2140,6 +2125,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                SetPlayerPosEx(playerid,1576.4360,-1649.7135,7.9030);
 			                SetPlayerVirtualWorld(playerid,0);
 			                SetPlayerInterior(playerid,0);
+			                TogglePlayerControllable(playerid,0);
+							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom -1]~n~~b~Parking Dolny", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
                         }
@@ -2156,6 +2143,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                SetPlayerPosEx(playerid,1560.1825,-1636.2950,13.3748); // pos gornego
 			                SetPlayerVirtualWorld(playerid,0);
 			                SetPlayerInterior(playerid,0);
+			                TogglePlayerControllable(playerid,0);
+							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom 0]~n~~b~Parking Gorny", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
                         }
@@ -5899,6 +5888,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(IsPlayerInAnyVehicle(playerid))
                     {
+                    	if(CarData[lUID][c_ID] == 0) return SendClientMessage(playerid, 0xFFC0CB, "Auto nie jest zespawnowane!");
+                    	if(CarData[lUID][c_ID] != GetPlayerVehicleID(playerid)) return SendClientMessage(playerid, 0xFFC0CB, "Nie siedzisz w aucie, ktore chcesz zezlomowac!");
                     	ShowPlayerDialogEx(playerid, D_AUTO_DESTROY, DIALOG_STYLE_MSGBOX, "Z³omowanie wozu", "Czy na pewno chcesz zez³omowaæ ten wóz? Zarobisz na tym tylko 5000$!", "Z£OMUJ", "WYJD");
                     }
                 }
