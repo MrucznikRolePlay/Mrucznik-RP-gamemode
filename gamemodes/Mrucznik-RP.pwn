@@ -828,6 +828,14 @@ public OnPlayerDisconnect(playerid, reason)
         new id = GetPVarInt(playerid, "kostka-player");
         Kostka_Wygrana(id, playerid, GetPVarInt(id, "kostka-cash"), true);
         SendClientMessage(id, COLOR_RED, "Wspó³zawodnik opusci³ serwer, otrzymujesz zwrot wp³aconej kwoty z podatkiem.");
+        SetPVarInt(playerid, "kostka",0);
+        SetPVarInt(playerid, "kostka-throw", 0);
+        SetPVarInt(playerid, "kostka-suma", 0);
+        SetPVarInt(playerid, "kostka-cash", 0);
+        SetPVarInt(playerid, "kostka-first", 0);
+        SetPVarInt(playerid, "kostka-rzut", 0);
+        SetPVarInt(playerid, "kostka-wait", 0);
+        SetPVarInt(playerid, "kostka-player", 0);
     }
 	if(pobity[playerid] == 1 || PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
@@ -1166,7 +1174,7 @@ public OnPlayerDeath(playerid, killerid, reason)
                     }
                 }
             }
-            if(inzone)
+            if(inzone || GetSVarInt("BW_OnlyGangZones") == 1)
             {
                 new Float:x, Float:y, Float:z;
                 GetPlayerPos(playerid, x, y, z);
@@ -1336,7 +1344,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		if(lowcaz[playerid] == killerid)
 		{
 			lowcaz[playerid] = 501;
-			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta³o anulowane - nie mo¿esz wziaœæ teraz zlecenia na tego samego gracza!");
+			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta³o anulowane - nie mo¿esz wzi¹æ teraz zlecenia na tego samego gracza!");
 		}
 
 
@@ -4767,6 +4775,18 @@ public OnGameModeInit()
 			wybory[i] = dini_IntSet("wybory.ini", string, 0);
 		}
 	}
+    //Ustawienia BW
+    if(dini_Exists("BWSettings.ini"))
+    {
+        new ust = dini_Int("BWSettings.ini", "OnlyGangZones");
+        SetSVarInt("BW_OnlyGangZones", ust);
+    }
+    else
+    {
+        dini_Create("BWSettings.ini");
+        dini_IntSet("BWSettings.ini", "OnlyGangZones", 0);
+        SetSVarInt("BW_OnlyGangZones", 0);
+    }
 
 	//Mrucznik:
 	Ac_OnGameModeInit();//Antyczit
@@ -6896,8 +6916,10 @@ public OnPlayerText(playerid, text[])
 			{
 				SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem");
 				return 0;
-			} else if(strlen(text) > 75) {
-                return SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem. Proszê powtórzyæ ((max 75 znaków))");
+			} else if(strlen(text) > 82) {
+                Mobile[playerid] = 912;
+                SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem. Proszê powtórzyæ ((max 75 znaków))");
+                return 0;
             }
 			//strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
 			new id = getWolneZgloszenie();
@@ -7050,32 +7072,34 @@ public OnPlayerSelectDynamicObject(playerid, objectid, modelid, Float:x, Float:y
 
 public OnPlayerEnterGangZone(playerid, zoneid)
 {
-    /*new frac=GetPlayerFraction(playerid), org = GetPlayerOrg(playerid);
-    if(FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
-    {
-        ZoneTXD_Show(playerid, zoneid);
-        if(ZonePlayerTimer[playerid] == 0) ZonePlayerTimer[playerid] = SetTimerEx("Zone_HideInfo", 30000, 0, "i", playerid);
+    if(ZONE_DISABLED == 0) {
+        new frac=GetPlayerFraction(playerid), org = GetPlayerOrg(playerid);
+        if(FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
+        {
+            ZoneTXD_Show(playerid, zoneid);
+            if(ZonePlayerTimer[playerid] == 0) ZonePlayerTimer[playerid] = SetTimerEx("Zone_HideInfo", 30000, 0, "i", playerid);
+        }
+        //Attack sync
+        if(ZoneAttack[zoneid] && PlayerInfo[playerid][pBW] == 0)
+        {
+            if(frac == ZoneAttackData[zoneid][2] || org == ZoneAttackData[zoneid][2]) // attacker
+            {
+                if(!ZoneAttacker[playerid])
+                {
+                    ZoneAttacker[playerid] = true;
+                    ZoneAttackData[zoneid][0]++;
+                }
+            }
+            else if(frac == ZoneAttackData[zoneid][3] || org == ZoneAttackData[zoneid][3]) // defender
+            {
+                if(!ZoneDefender[playerid])
+                {
+                    ZoneDefender[playerid] = true;
+                    ZoneAttackData[zoneid][1]++;
+                }
+            }
+        }
     }
-    //Attack sync
-    if(ZoneAttack[zoneid] && PlayerInfo[playerid][pBW] == 0)
-    {
-        if(frac == ZoneAttackData[zoneid][2] || org == ZoneAttackData[zoneid][2]) // attacker
-        {
-            if(!ZoneAttacker[playerid])
-            {
-                ZoneAttacker[playerid] = true;
-                ZoneAttackData[zoneid][0]++;
-            }
-        }
-        else if(frac == ZoneAttackData[zoneid][3] || org == ZoneAttackData[zoneid][3]) // defender
-        {
-            if(!ZoneDefender[playerid])
-            {
-                ZoneDefender[playerid] = true;
-                ZoneAttackData[zoneid][1]++;
-            }
-        }
-    }*/
 }
 
 public OnPlayerLeaveGangZone(playerid, zoneid)

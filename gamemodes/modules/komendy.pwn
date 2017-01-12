@@ -195,7 +195,8 @@ CMD:panel(playerid, params[])
     	        mysql_query(str);
 
                 format(str, 128, "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
-                SendPunishMessage(str);
+                //SendPunishMessage(str);
+                ABroadCast(COLOR_YELLOW,str,1);
                 WarnLog(str);
             }
             else sendTipMessage(playerid, "Gracz nie posiada warnów");
@@ -11350,8 +11351,8 @@ CMD:unblock(playerid, params[])
         if(MruMySQL_Unblock(params, playerid))
         {
     		format(string, sizeof(string), "Administrator %s ublokowa³ %s", sendername, params);
-            SendPunishMessage(string);
-
+            //SendPunishMessage(string);
+            ABroadCast(COLOR_YELLOW,string,1);
             BanLog(string);
         }
 	}
@@ -22366,7 +22367,7 @@ CMD:a(playerid, params[])
 			}
 			printf("Admin %s: %s", sendername, params);
 		}
-		if(PlayerInfo[playerid][pNewAP] != 5 && (PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pNewAP] <= 4) && PlayerInfo[playerid][pAdmin] == 0)
+		if((PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pNewAP] <= 4) && PlayerInfo[playerid][pAdmin] == 0)
 		{
 			format(string, sizeof(string), "*%d Pó³Admin %s: %s", PlayerInfo[playerid][pNewAP], sendername, params);
 			if (PlayerInfo[playerid][pNewAP] >= 1)
@@ -22469,7 +22470,7 @@ CMD:zaufanyggracz(playerid, params[])
 			SendZGMessage(0x7AA1C9FF/*COLOR_LIGHTBROWN*/, string);
 			printf("Admin %s: %s", sendername, params);
 		}
-		if(PlayerInfo[playerid][pNewAP] != 5 && PlayerInfo[playerid][pZG] == 0 && (PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pNewAP] <= 4) && PlayerInfo[playerid][pAdmin] == 0)
+		if(PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pNewAP] <= 4 )
 		{
 			format(string, sizeof(string), "*%d Pó³Admin %s: %s", PlayerInfo[playerid][pNewAP], sendername, params);
 			SendZGMessage(0x7AA1C9FF, string);
@@ -25583,7 +25584,7 @@ CMD:kick(playerid, params[])
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 1)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -28276,7 +28277,7 @@ CMD:raport(playerid, params[])
                 SendClientMessage(playerid, 0x008000AA,"** Forma poprawnego zg³oszenia: {ADFF2F}/report 0 DM LUB /report 0 Cheater{FFFFFF} **");
 				return 1;
 			}
-			format(string, sizeof(string), "» » Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
+			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
 			ABroadCast(COLOR_YELLOW,string,1);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "Je¿eli Administracja nie reaguje na Twój report, oznacza to, ¿e...");//By: Dawid
@@ -32892,7 +32893,7 @@ CMD:akceptuj(playerid, params[])
                                 if(IsABoat(pojazd) || IsAPlane(pojazd) || IsABike(pojazd))
                                 {
                                     GraczDajacyNeon[playerid] = 999;
-                                    SendClientMessage(playerid, COLOR_GREY, "W helikoptrze/samolocie/³odzi/motorze nie mo¿na zamontowaæ neonów.");
+                                    SendClientMessage(playerid, COLOR_GREY, "W helikopterze/samolocie/³odzi/motorze nie mo¿na zamontowaæ neonów.");
                                     return  1;
                                 }
                                 if(ProxDetectorS(10.0, playerid, dawacz))
@@ -36974,16 +36975,17 @@ CMD:removezoneprotect(playerid, p[])
 
 CMD:gangzone(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
-    new id;
-    if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /gangzone [0/1]");
-    if(id < 0 || id > 1) return 1;
-    ZONE_DISABLED = id;
-    new str[64];
-    format(str, 64, "UPDATE `mru_config` SET `gangzone`='%d'", id);
-    mysql_query(str);
+    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
+        new id;
+        if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /gangzone [0/1]");
+        if(id < 0 || id > 1) return 1;
+        ZONE_DISABLED = id;
+        new str[64];
+        format(str, 64, "UPDATE `mru_config` SET `gangzone`='%d'", id);
+        mysql_query(str);
 
-    sendTipMessageEx(playerid, COLOR_GRAD2, "OK");
+        sendTipMessageEx(playerid, COLOR_GRAD2, "OK");
+    }
     return 1;
 }
 
@@ -38740,7 +38742,40 @@ CMD:fpanel(playerid) {
     return 1;
 }
 
+CMD:anulujzp(playerid, params[]) {
+    if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5) {
+        new giveid, adminnick[MAX_PLAYER_NAME], gracznick[MAX_PLAYER_NAME];
+        if(sscanf(params, "k<fix>", giveid)) return sendTipMessage(playerid, "U¿yj /anulujzp [czêœæ nicku/id]"); 
+        if(PlayerInfo[giveid][pCarLic] == 0 || PlayerInfo[giveid][pCarLic] == 1) {
+            return sendErrorMessage(playerid, "Ten gracz nie posiada zabranego prawa jazdy!");
+        }
+        PlayerInfo[giveid][pPK] = 0;
+        PlayerInfo[giveid][pCarLic] = 0;
+        GetPlayerName(playerid, adminnick, MAX_PLAYER_NAME);
+        GetPlayerName(giveid, gracznick, MAX_PLAYER_NAME);
+        new string[128];
+        format(string, sizeof(string), "Admin %s zlikwidowa³ Twoj¹ blokadê na prawo jazdy!", adminnick);
+        sendTipMessage(giveid, string, COLOR_LIGHTBLUE);
+        format(string, sizeof(string), "Zlikwidowa³eœ %s blokadê na prawo jazdy!", gracznick);
+        sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
+    } else {
+        noAccessMessage(playerid);
+    }
+    return 1;
+}
 
+CMD:bwsettings(playerid, params[]) {
+    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] > 50 || PlayerInfo[playerid][pNewAP] == 5) {
+        new ust = GetSVarInt("BW_OnlyGangZones");
+        SetSVarInt("BW_OnlyGangZones", !ust);
+        dini_IntSet("BWSettings.ini", "OnlyGangZones", !ust);
+        new string[70];
+        format(string, sizeof(string), "Od teraz BW nadawane bêdzie %s", (ust == 1) ? ("tylko w obrêbie stref") : ("w ca³ym San Andreas"));
+        sendTipMessage(playerid, string);
+    } else {
+        return noAccessMessage(playerid);
+    }
+    return 1;
+}
 
 //eof
-

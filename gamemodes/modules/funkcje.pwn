@@ -8142,6 +8142,7 @@ stock Sejf_Add(frakcja, kasa)
         SejfLog(str);
     }
     Sejf_Frakcji[frakcja]+=kasa;
+    Sejf_Save(frakcja);
 }
 
 stock SejfR_Add(frakcja, kasa)
@@ -8150,6 +8151,7 @@ stock SejfR_Add(frakcja, kasa)
     format(str, 80, "RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
     SejfLog(str);
     Sejf_Rodziny[frakcja]+=kasa;
+    SejfR_Save(frakcja);
 }
 
 stock Sejf_Save(frakcja)
