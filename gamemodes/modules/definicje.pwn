@@ -15,6 +15,10 @@
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
 
+
+#define OSTATNIE_ZGLOSZENIA 10
+
+
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
 #define MRP_PREM_HOURS    15      //Ilosc godzin potrzebnych do przegrania
@@ -138,6 +142,7 @@
 #define FRAC_NOA    15
 #define FRAC_WPS    16
 #define FRAC_LSFD   17
+#define FRAC_RR   18
 
 new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
     FAMILY_FDU = -1;
@@ -274,6 +279,8 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define D_EDIT_CAR_COLOR    1320
 #define D_ASK_DODATKI       1321
 
+#define D_F_PANEL			5000+1
+
 #define D_TRANSPORT         5439
 #define D_TRANSPORT_FAST    5440
 #define D_TRANSPORT_LIST    5441
@@ -328,6 +335,18 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 //2.5.2
 #define DIALOG_HA_ZMIENSKIN(%0)			3345+%0
+
+// niceczlowiek
+#define KARA_SPECJALNA "{800080}"
+#define KARA_BANICJI "{ff0000}"
+#define KARA_BARDZOCIEZKA "{ff0000}"
+#define KARA_CIEZKA "{ff8c00}"
+#define KARA_SREDNIA "{8b4513}"
+#define KARA_LEKKA "{008000}"
+#define KARA_NIEZNACZNA "{00ff00}"
+#define KARA_STRZALKA "{363F45}"
+#define KARA_TEKST2 "{33AA33}"
+#define KARA_TEKST "{f9f9f9}"    
 
 //uniformnew
 #define DIALOGID_UNIFORM 3445
@@ -419,4 +438,48 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 //23.12
 #define MAX_TICKETS     50
+// Y_SAFERETURN ! ! !
+forward _SafeReturnCode_(dest[], src[], bytes);
+public _SafeReturnCode_(dest[], src[], bytes)
+{
+    memcpy(dest, src, 0, bytes, bytes);
+}
+
+stock SafeReturnCode(const src[], const bytes = sizeof (src))
+{
+    // Push the lengths for the memcpy (needs "pri", so done first).
+    #emit LOAD.S.pri    bytes
+    #emit SHL.C.pri     2
+    #emit PUSH.pri
+    #emit PUSH.pri
+   
+    // Get the parameter count.
+    #emit LOAD.S.pri    0
+    #emit MOVE.alt
+    #emit ADD.C         8
+    #emit LOAD.I
+   
+    // Get the desination pointer.
+    #emit ADD
+    #emit ADD.C         12
+    #emit LOAD.I
+   
+    // Do a raw memcpy (pointer to pointer, not array to array).
+    #emit PUSH.C        0
+    #emit PUSH.S        src
+    #emit PUSH.pri
+    #emit PUSH.C        20
+    #emit SYSREQ.C      memcpy
+   
+    // Return to the caller's caller.
+    #emit MOVE.pri
+    #emit SCTRL         5
+    #emit SCTRL         4
+    #emit RETN
+   
+    // Compiler cleanup.
+    return 0;
+}
+
+#define safe_return%0; return SafeReturnCode(%0),(%0);
 //EOF

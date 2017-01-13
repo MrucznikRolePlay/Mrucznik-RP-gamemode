@@ -1,4 +1,13 @@
 //enum.pwn
+enum hqZgloszenia {
+    zgloszenie_kiedy[36], // kiedy nadane zgloszenie
+    zgloszenie_nadal[MAX_PLAYER_NAME], // nick ktory nadal zgloszenie
+    zgloszenie_tresc[128], // tresc zgloszenia
+    zgloszenie_przyjal[MAX_PLAYER_NAME], // :)
+    zgloszenie_status // 0 - nowe, 1 - akceptowane, 2 - odrzucone
+}
+
+
 //23.12
 enum eSupportData {
     bool:suppValid,
@@ -439,31 +448,6 @@ new FractionNames[][40] = {
     "Hammerskins Nation",
     "Los Santos Fire Department",
     "Brak",
-    "Brak",
-    "Brak"
-};
-
-new SkrotFrakcji[][40] = {
-    "Brak",
-    "LSPD",
-    "FBI",
-    "SASP",
-    "LSMC",
-    "BCF",
-    "YKZ",
-    "USSS",
-    "HA",
-    "SN",
-    "KT",
-    "Rz¹d",//11
-    "GS",
-    "187 NPA",
-    "HN 14",
-    "NoA",
-    "HN",
-    "LSFD",
-    "Brak",
-    "Brak",
     "Brak"
 };
 
@@ -504,15 +488,6 @@ new SavePlayerPos[MAX_PLAYERS][SavePlayerPosEnum];
 //new UpdateSeconds = 1;
 
 new Music[MAX_PLAYERS];
-new Songs[7][1] = {
-{1187},
-{1185},
-{1183},
-{1097},
-{1076},
-{1068},
-{1062}
-};
 
 enum eBO {
     bM, Float:bX, Float:bY, Float:bZ, Float:brX, Float:brY, Float:brZ
@@ -1112,8 +1087,8 @@ new CountText[20][20] ={
 };
 
 new Float:gCopPlayerSpawns[2][3] = {
-{1579.6686,-1635.5955,13.5607},
-{1603.9210,-1624.4594,13.5077}
+{1578.2158,-1633.9244,13.3991},
+{1578.2158,-1633.9244,13.3991}
 //{614.8,-608.2,17.2},
 //{611.5,-607.8,17.2}
 };

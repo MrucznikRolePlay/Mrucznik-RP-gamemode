@@ -1,5 +1,12 @@
 //zmienne.pwn
 
+new Zgloszenie[OSTATNIE_ZGLOSZENIA][hqZgloszenia];
+new ilosczgloszen = 0;
+
+
+new pFindZone[MAX_PLAYERS];
+
+
 new gTeam[MAX_PLAYERS];
 
 //regex
@@ -10,7 +17,6 @@ new PaniJanina;
 
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
-new Float:pl_pos[MAX_PLAYERS][5];
 //dodatkiPD
 new DodatkiPD[MAX_PLAYERS];
 //AFK timer
@@ -43,6 +49,7 @@ new CarDesc[MAX_VEHICLES][128 char];
 new MRP_PremiumHours[MAX_PLAYERS];
 new bool:InitMyItems[MAX_PLAYERS];
 //03.12
+//8.12 2016
 new bool:RANG_ApplyChanges[2][MAX_ORG];
 //new bool:SEJF_ApplyChanges[2][MAX_ORG];
 //
@@ -451,8 +458,6 @@ new Text:Textdraw3,
 	    bool:NapisUzywany,
 	    NapisTimer;*/
 
-new czasINT[MAX_PLAYERS];
-
 //N!ree
 new cbradijo[MAX_PLAYERS];
 new adminpodgladcb[MAX_PLAYERS];
@@ -618,6 +623,7 @@ new gPlayerLogTries[MAX_PLAYERS];
 new gPlayerSpawned[MAX_PLAYERS];
 new gLastCar[MAX_PLAYERS];
 new gOoc[MAX_PLAYERS];
+new gMuteDepo[MAX_PLAYERS];
 new gCrime[MAX_PLAYERS];
 new gNewbie[MAX_PLAYERS];
 new gNews[MAX_PLAYERS];
@@ -682,10 +688,16 @@ new Wodliczanie;
 //koniec wozy Ballas
 //new WindaW;//Winda
 //new WindaWP = 0;//Winda
-new BramaPolicja;//ro
-new BramaPolicjaState = 1;//ro
-new SzlabanPolicja;//ro
-new SzlabanPolicjaState = 1;//ro
+//new BramaPolicja;//ro
+//new BramaPolicjaState = 1;//ro
+//new SzlabanPolicja;//ro
+//new SzlabanPolicjaState = 1;//ro
+new lspdWjazdGora;
+new lspdWjazdGoraState = 0; // 0 close 1 open
+new lspdWjazdDolny;
+new lspdWjazdDolnyState = 0; // 0 close 1 open
+new lspdExtDoors;
+new lspdExtDoorsState;
 /*new DrzwiTajniak1a;
 new DrzwiTajniak1b;
 new DrzwiTajniak1State = 1;
@@ -755,17 +767,11 @@ new BramaNG2S = 0;
 new BramaWDol;
 new BramaWDolS = 1;
 //fbi
-new FBIdrzwi1;
-new FBIdrzwi2;
 new FBIdrzwi3;
 new FBIdrzwi4;
-new FBIdrzwi5;
-new FBIdrzwi6;
 new FBIdrzwi7;
-new FBImove1 = 0;
 new FBImove2 = 0;
 new FBImove3 = 0;
-new FBImove4 = 0;
 new FBImove5 = 0;
 new Celaki[3];
 //koniecfbi
@@ -790,7 +796,6 @@ new BramaZuzS = 1;
 //koniec garazpd
 //inne
 new starabron[MAX_PLAYERS];
-new ZmienianieSkinu[MAX_PLAYERS] = 0;
 new ZapisSkinu[MAX_PLAYERS];
 new PDGPS = -1;//gps
 //koniec inne
@@ -954,7 +959,6 @@ new shifthour;
 
 new intrate = 1;
 new levelexp = 4;
-new idletime = 600000; //10 mins
 //new civnokill = 0;
 //new suecost = 2000;
 new cchargetime = 60;
@@ -1042,7 +1046,7 @@ ZerujZmienne(playerid)
     ConsumingMoney[playerid] = 0; AntySpawnBroni[playerid] = 0; AntyWlamSejf[playerid] = 0;
     gLastCar[playerid] = 0; FirstSpawn[playerid] = 0; lowcaz[playerid] = 501;
 	gOoc[playerid] = 0; gNews[playerid] = 0; BigEar[playerid] = 0; gDice[playerid] = 0; gFam[playerid] = 0; gNewbie[playerid] = 0;
- 	gGas[playerid] = 0; GUIExit[playerid] = 0;
+ 	gGas[playerid] = 0; GUIExit[playerid] = 0; gMuteDepo[playerid] = 0;
 	gPlayerLogged[playerid] = 0; gPlayerLogTries[playerid] = 0; gPlayerAccount[playerid] = 0;
 	gPlayerSpawned[playerid] = 0; PlayerKarting[playerid] = 0; PlayerInKart[playerid] = 0;
 	PlayerTazeTime[playerid] = 0; PlayerStoned[playerid] = 0; PlayerStonedStop[playerid] = 0;

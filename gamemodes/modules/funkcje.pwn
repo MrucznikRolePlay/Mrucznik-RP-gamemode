@@ -1,5 +1,43 @@
 //funkcje.pwn     AKTUALNA MAPA
 
+stock pusteZgloszenia() {
+	for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
+		new Hour, Minute;
+		gettime(Hour, Minute);
+		new string[36];
+		format(string, sizeof(string), "%02d:%02d",  Hour, Minute);
+		strmid(Zgloszenie[i][zgloszenie_kiedy], string, 0, sizeof(string), 36);
+		strmid(Zgloszenie[i][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
+		strmid(Zgloszenie[i][zgloszenie_tresc], "Brak", 0, 4, 70);
+	}
+}
+stock getWolneZgloszenie() {
+	if(ilosczgloszen == OSTATNIE_ZGLOSZENIA) {
+		ilosczgloszen = 0;
+	}
+	return ilosczgloszen++;
+}
+
+sendNotification(id, title[], text[], time) {
+	CallRemoteFunction("notify", "dssd", id, title, text, time);
+}
+
+noAccessMessage(id) {
+    return SendClientMessage(id,COLOR_FADE2,"»» Nie posiadasz dostêpu do tej komendy");
+}
+sendTipMessage(id, string:msg[], color = COLOR_GRAD3) {
+	new _str[128];
+	format(_str,128,"»» %s", msg);
+	return SendClientMessage(id, color, _str);
+}
+sendTipMessageEx(id, color = COLOR_GRAD3, string:msg[]) { //CM do sendclientmessage (:
+	return sendTipMessage(id, msg, color);
+}
+sendErrorMessage(id, string:msg[]) {
+	new _str[128];
+	format(_str,128,"»» %s", msg);
+	return SendClientMessage(id, COLOR_LIGHTRED, _str);
+}
 //2.5.2
 
 stock GetMajatek(playerid)
@@ -15,6 +53,8 @@ stock GetMajatek(playerid)
     }
 	return kaska[playerid]+PlayerInfo[playerid][pAccount]+vehvalues+Dom[PlayerInfo[playerid][pDom]][hCena];
 }
+
+
 
 //WRZUCANIE DO DEMORGAN
 JailDeMorgan(playerid)
@@ -52,17 +92,15 @@ DialogListaFrakcji()
 	}
 	safe_return frakcje;
 }
-
 DialogListaSkinow(frakcja)
 {
-	new skiny[512];
+	new skiny[22];
 	for(new i=0;i<MAX_SKIN_SELECT;i++)
 	{
 		if(FRAC_SKINS[frakcja][i] == 0) break;
-		format(skiny, sizeof(skiny), "%s%d\nSkin %d\n", skiny, FRAC_SKINS[frakcja][i], i);
+		skiny[i] = FRAC_SKINS[frakcja][i];
 	}
-	strdel(skiny, strlen(skiny)-2, strlen(skiny));
-	safe_return skiny;
+	return skiny;
 }
 
 stock PDTuneSultan(vehicleid)
@@ -398,11 +436,15 @@ AntyReklama(result[])
 	if ( dwukrop>=0)//adersy ip
 	{
 		if(result[dwukrop+1] != '\0')
+		{
 			if(result[dwukrop+1] >= '1' && result[dwukrop+1] <= '9')
 				return 3;
+		}
 		else if(result[dwukrop+2] != '\0')
+		{
 			if(result[dwukrop+2] >= '1' && result[dwukrop+2] <= '9')
 				return 3;
+		}
 	}
 	return 0;
 }
@@ -1168,7 +1210,7 @@ if(PlayerInfo[playerid][pDomWKJ] != 0)
 	SetPlayerVirtualWorld(playerid, 0);
 	PlayerInfo[playerid][pDomWKJ] = 0;
 }
-GameTextForPlayer(playerid, "~r~Koniec czasu nupie", 5000, 1);
+GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
 DomOgladany[playerid] = 1;
 SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
 return 1;
@@ -1294,10 +1336,16 @@ stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', 
 	}
 }
 
-stock GetNick(playerid)
+stock GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, sizeof(nick));
+	if(rp) {
+		for(new i; i < MAX_PLAYER_NAME; i++)
+		{
+			if(nick[i] == '_') nick[i] = ' ';
+		}
+	}
 	return nick;
 }
 
@@ -2115,6 +2163,20 @@ IsABOR(playerid)
 		    return 1;
 		}
 		else if(leader==7 )
+		{
+		    return 1;
+		}
+	}
+	return 0;
+}
+
+IsAKO(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    new nick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, nick, sizeof(nick));
+		if(strcmp(nick,"Armin_Verwest", false) == 0)
 		{
 		    return 1;
 		}
@@ -3219,6 +3281,10 @@ IsAtGasStation(playerid)
 		{//Palomino Creek
 		    return 1;
 		}
+		else if(PlayerToPoint(3.0,playerid,1381.5094,459.3204,20.3452))
+		{//Montgomery
+			return 1;
+		}
 		else if(PlayerToPoint(5.0,playerid,-2086.8000488281,-108.19999694824,35.599998474121))
 		{
 		    return 1;
@@ -3301,6 +3367,30 @@ IsAtBar(playerid)
 		}
         else if(IsPlayerInRangeOfPoint(playerid, 4.0, 1983.4441,-1296.2300,-9.1928))
 		{//bar       glenpark
+		  	return 1;
+		}
+	}
+	return 0;
+}
+
+IsAtWarsztat(playerid)
+{
+    if(IsPlayerConnected(playerid))
+	{
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 5.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 5.0, 1805.4418,-1713.5634,13.5176))
+		{//Warsztat czerwony
+		    return 1;
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 40.0, 2333.7273,-1241.2806,22.0628))
+		{//warsztat niebieski
+		    return 1;
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 20.0, 644.3516,-503.4102,15.8941))
+		{//warsztat dillmore
+		  	return 1;
+		}
+        else if(IsPlayerInRangeOfPoint(playerid, 20.0, 991.3269,-1347.3071,12.9392))
+		{//warsztat przy p1czkarni
 		  	return 1;
 		}
 	}
@@ -6756,6 +6846,20 @@ OOCNewbie(const string[])
 	}
 }
 
+/*OOCOgloszenie(color,const string[])
+{
+	foreach(Player, i)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if(!gOgloszenie[i])
+		    {
+				SendClientMessage(i, color, string);
+			}
+		}
+	}
+}*/
+
 OOCNews(color,const string[])
 {
 	foreach(Player, i)
@@ -6770,7 +6874,7 @@ OOCNews(color,const string[])
 	}
 }
 
-SendTeamMessage(team, color, string[])
+SendTeamMessage(team, color, string[], isDepo = 0)
 {
 	foreach(Player, i)
 	{
@@ -6778,7 +6882,12 @@ SendTeamMessage(team, color, string[])
 		{
 		    if(PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team)
 		    {
-				SendClientMessage(i, color, string);
+		    	//printf("isdepo %d       gmutedepo[i] = %d", isDepo, gMuteDepo[i]);
+		    	if(isDepo == 1 && gMuteDepo[i] == 0) {
+		    		SendClientMessage(i, color, string);
+		    	} else {
+		    		SendClientMessage(i, color, string);
+		    	}
 			}
 		}
 	}
@@ -6909,7 +7018,7 @@ SendIRCMessage(channel, color, string[])
 	}
 }
 
-SendTeamBeepMessage(team, color, string[])
+/*SendTeamBeepMessage(team, color, string[])
 {
 	foreach(Player, i)
 	{
@@ -6922,7 +7031,7 @@ SendTeamBeepMessage(team, color, string[])
 			}
 		}
 	}
-}
+}*/
 
 SendEnemyMessage(color, string[])
 {
@@ -8111,26 +8220,13 @@ stock MASTER_SendLog(typ)
     MASTER_SendTextToWebsite(plik);
 }
 
-stock CheckAlfaNumericNick(password[])
+stock IsNickCorrect(nick[])
 {
-    new charsets[46] = "abcdefghijklmnoprstuvwyzxq_";
-
-    new bool:validchars[64]={false,...};
-
-    new bool:doeschange=false;
-    for(new i=0;i<strlen(password);i++)
-    {
-        for(new a=0;a<46;a++)
-        {
-            if(tolower(password[i]) == charsets[a]) validchars[i] = true;
-        }
-        if(!validchars[i]) //!alpha
-        {
-            password[i] = charsets[random(sizeof(charsets))];
-            if(!doeschange) doeschange=true;
-        }
-    }
-    return doeschange;
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 stock CheckAlfaNumeric(password[])
@@ -10398,7 +10494,7 @@ stock ChangePlayerName(playerid, name[])
 		return 0;
     }
 
-    if(CheckAlfaNumericNick(name))
+    if(!IsNickCorrect(name))
     {
         SendClientMessage(playerid, COLOR_RED, "Nick zawiera niepoprawne znaki (znaki polskie, cyfry lub specjalne).");
         return 0;

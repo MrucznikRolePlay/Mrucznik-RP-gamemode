@@ -1,4 +1,31 @@
 //OnDialogResponse.pwn  AKTUALNA MAPA
+forward OnDialogDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
+public OnDialogDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
+	if(dialogid >= DIALOG_HA_ZMIENSKIN(1) && dialogid <= DIALOG_HA_ZMIENSKIN(MAX_FRAC))
+	{
+		if(response)
+		{
+			new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+		else
+		{
+			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
+		}
+	}
+	else if(dialogid == DIALOGID_UNIFORM)
+	{
+		if(response)
+		{
+            new string[64];
+			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
+			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
+}
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	#if DEBUG == 1
@@ -40,35 +67,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 	}*/
 	//2.5.2
-	if(dialogid == DIALOGID_UNIFORM)
+	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)
 		{
-            new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[PlayerInfo[playerid][pMember]][listitem]);
-			format(string, sizeof(string), "* %s przebiera siê w nowe ubrania.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		}
-	}
-	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
-	{
-		if(response)
-		{
-			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Zmiana ubrania", DialogListaSkinow(listitem+1), "Start", "Anuluj");
-		}
-	}
-	else if(dialogid >= DIALOG_HA_ZMIENSKIN(1) && dialogid <= DIALOG_HA_ZMIENSKIN(MAX_FRAC))
-	{
-		if(response)
-		{
-			new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
-			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		}
-		else
-		{
-			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
+			static array[1][1];
+			new models[22];
+			models = DialogListaSkinow(listitem+1);
+			ShowPlayerPreviewModelDialog(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Wybierz Ubranie", models, array, "Wybierz", "Anuluj");
 		}
 	}
 	
@@ -149,7 +155,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 			}
-		}//return 1;
+		}
+		return 1;
 	}
 	else if(dialogid == DIALOGID_PODSZYJ)
 	{
@@ -2130,10 +2137,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
-			                SetPlayerPosEx(playerid,1569.0193, -1690.5186, 5.9972);
+			                SetPlayerPosEx(playerid,1576.4360,-1649.7135,7.9030);
 			                SetPlayerVirtualWorld(playerid,0);
 			                SetPlayerInterior(playerid,0);
-			                GameTextForPlayer(playerid, "~w~ [Poziom -1]~n~~b~Parking LSPD", 5000, 1);
+			                GameTextForPlayer(playerid, "~w~ [Poziom -1]~n~~b~Parking Dolny", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
                         }
 						else
@@ -2142,61 +2149,68 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 		            }
-		            case 1:
+		            case 1: {
+		            	// parking gorny
+		            	if(IsACop(playerid) || IsABOR(playerid))
+           				{
+			                SetPlayerPosEx(playerid,1560.1825,-1636.2950,13.3748); // pos gornego
+			                SetPlayerVirtualWorld(playerid,0);
+			                SetPlayerInterior(playerid,0);
+			                GameTextForPlayer(playerid, "~w~ [Poziom 0]~n~~b~Parking Gorny", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+                        }
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
+		            }
+		            case 2:
 		            {
 		                SetPlayerPosEx(playerid,-1645.1858, 883.1620, -45.4112);
 		                SetPlayerVirtualWorld(playerid,1);
 		                TogglePlayerControllable(playerid,0);
-                  Wchodzenie(playerid);
-		                GameTextForPlayer(playerid, "~w~ [Poziom 0]~n~~b~Komisariat", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
-		            }
-		            case 2:
-		            {
-		                SetPlayerPosEx(playerid,-1621.7272, 834.5807, -26.1115);
-		                SetPlayerVirtualWorld(playerid,1);
-		                TogglePlayerControllable(playerid,0);
-                   Wchodzenie(playerid);
-                 		GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Pokoje przesluchan", 5000, 1);
+						Wchodzenie(playerid);
+		                GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Komisariat", 5000, 1);
 						PlayerInfo[playerid][pInt] = 10;
 		            }
 		            case 3:
 		            {
+		                SetPlayerPosEx(playerid,-1621.7272, 834.5807, -26.1115);
+		                SetPlayerVirtualWorld(playerid,1);
+		                TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+                 		GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Pokoje przesluchan", 5000, 1);
+						PlayerInfo[playerid][pInt] = 10;
+		            }
+		            case 4:
+		            {
 		                SetPlayerPosEx(playerid,-1745.1101, 824.0737, -48.0110);
 		                SetPlayerVirtualWorld(playerid,1);
 		                TogglePlayerControllable(playerid,0);
-                  Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Biura", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
-		            }
-		            /*case 4:
-		            {
-		                SetPlayerPosEx(playerid,-1695.1617, 1046.9861, -65.4119);
-		                SetPlayerVirtualWorld(playerid,1);
-		                TogglePlayerControllable(playerid,0);
-		                freezeme(playerid);
-                  Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Jadlodajnia", 5000, 1);
-		            }*/
-		            case 4:
-		            {
-		                SetPlayerPosEx(playerid,1568.1061, 2205.3196, -50.9522);
-		                SetPlayerVirtualWorld(playerid,3);
-		                TogglePlayerControllable(playerid,0);
-                  Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Sale treningowe", 5000, 1);
+						Wchodzenie(playerid);
+	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
 						PlayerInfo[playerid][pInt] = 10;
 		            }
 		            case 5:
 		            {
-		           		 if(IsACop(playerid) || IsABOR(playerid))
-           				{
-			                SetPlayerPosEx(playerid,1565.0798, -1665.6580, 28.4782);
-			                SetPlayerVirtualWorld(playerid,0);
-			                SetPlayerInterior(playerid,0);
-			                GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Dach", 5000, 1);
+		                SetPlayerPosEx(playerid,1568.1061, 2205.3196, -50.9522);
+		                SetPlayerVirtualWorld(playerid,3);
+		                TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+	                	GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale treningowe", 5000, 1);
+						PlayerInfo[playerid][pInt] = 10;
+		            }
+		            case 6:
+		            {
+						if(IsACop(playerid) || IsABOR(playerid))
+						{
+							SetPlayerPosEx(playerid,1565.0798, -1665.6580, 28.4782);
+							SetPlayerVirtualWorld(playerid,0);
+							SetPlayerInterior(playerid,0);
+							GameTextForPlayer(playerid, "~w~ [Poziom 5]~n~~b~Dach", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
-		                 }
+						}
 						else
 						{
 							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
@@ -2218,7 +2232,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        GameTextForPlayer(playerid, "~w~Witamy w salce konferencyjnej", 5000, 1);
 				        SetPlayerVirtualWorld(playerid, 35);
 				        TogglePlayerControllable(playerid, 0);
-            Wchodzenie(playerid);
+						Wchodzenie(playerid);
 	                }
 	                case 1:
 	                {
@@ -2226,15 +2240,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        GameTextForPlayer(playerid, "~w~Projekt by Kacper Monari", 5000, 1);
 				        SetPlayerVirtualWorld(playerid, 35);
 				        TogglePlayerControllable(playerid, 0);
-          Wchodzenie(playerid);
-                 }
+						Wchodzenie(playerid);
+					}
 	                case 2:
 	                {
 						SetPlayerPosEx(playerid, 694.27490234375,-569.04272460938,-79.225189208984);//piwnica
 				        GameTextForPlayer(playerid, "~w~Mroczne piwnice i stare biura", 5000, 1);
 				        SetPlayerVirtualWorld(playerid, 0);
 				        TogglePlayerControllable(playerid, 0);
-          Wchodzenie(playerid);
+						Wchodzenie(playerid);
 	                }
 	            }
 	        }
@@ -2321,6 +2335,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					case 0:
 					{
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1510.7217, -1470.1677, 9.7360);
 						SetPlayerVirtualWorld (playerid, 0);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
@@ -2328,34 +2343,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1:
 					{
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid,1483.8867, -1491.1559, 13.9085);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						TogglePlayerControllable(playerid,0);
-                     Wchodzenie(playerid);
+						Wchodzenie(playerid);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking zewnêtrzny");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 2:
 					{
+
 						SetPlayerPosEx(playerid,1496.9330, -1457.8887, 64.5854);
 						GameTextForPlayer(playerid, "~w~Centrala BOR \n ~r~by abram01", 5000, 1);
 						SetPlayerVirtualWorld (playerid, 80) ;
 						TogglePlayerControllable(playerid,0);
-                     Wchodzenie(playerid);
+						Wchodzenie(playerid);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Centrala BOR");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 3:
 					{
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1482.2319, -1531.1719, 70.0080);
 						SetPlayerVirtualWorld (playerid, 80) ;
 						TogglePlayerControllable(playerid,0);
-                     Wchodzenie(playerid);
+						Wchodzenie(playerid);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Sale Treningowe");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 4:
 					{
+						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
 						SetPlayerPosEx(playerid, 1495.1107, -1468.8528, 40.8256);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Dach");
@@ -2679,8 +2698,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    DajKase(playerid,-5000);
 						    GameTextForPlayer(playerid, "~r~-$5000", 5000, 1);
 							PlayerInfo[playerid][pGun9] = 43;
-							PlayerInfo[playerid][pAmmo9] += 10;
-						    GivePlayerWeapon(playerid, 43, 10);
+							PlayerInfo[playerid][pAmmo9] += 100;
+						    GivePlayerWeapon(playerid, 43, 100);
 							SendClientMessage(playerid, COLOR_GRAD4, "Aparat zakupiony! Mo¿esz nim teraz robiæ zdjêcia!");
 							return 1;
 						}
@@ -7381,7 +7400,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 			    if(IsPlayerConnected(playerid))
 			    {
-			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 50)
+			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			        {
 						if(strcmp(inputtext, "GuL973TekeSTDz4-128", false) == 0)
 						{
@@ -7426,7 +7445,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(IsPlayerConnected(playerid))
 			    {
-			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 19)
+			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			        {
 						OnPlayerRegister(playerid, inputtext);
 						GUIExit[playerid] = 0;
@@ -7454,7 +7473,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 50)
+		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			    {
 			        if(strcmp(inputtext,"SiveMopY", false) == 0 )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67
 			        {
@@ -7481,9 +7500,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
-				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
-				    GUIExit[playerid] = 0;
+					SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za niewpisanie has³a!");
+					ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany z powodu bezpieczeñstwa za wpisanie pustego lub zbyt d³ugiego has³a. Zapraszamy ponownie.", "WyjdŸ", "");
+					GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 0);
 					KickEx(playerid);
 			    }
@@ -7497,142 +7516,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				KickEx(playerid);
 		    }
 		}
-		/*if(dialogid == 236)
-		{
-		    if(response)
-		    {
-		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 50)
-			    {
-			        new nickbrusz[MAX_PLAYER_NAME];
-			        new fap;
-			        GetPlayerName(playerid, nickbrusz, sizeof(nickbrusz));
-			        new gf[64], gf2[64];
-			        new nick_p[64], weryf_p[64];
-					format(gf, sizeof(gf), "Admini/%s.ini", nickbrusz);
-			        if(!dini_Exists(gf))
-			        {
-			            dini_Create(gf);
-			            dini_IntSet(gf, "Godziny_Online", 0);
-						dini_FloatSet(gf, "Realna_aktywnosc", 0);
-						dini_IntSet(gf, "Ilosc_AJ", 0);
-						dini_IntSet(gf, "Ilosc_Kickow", 0);
-						dini_IntSet(gf, "Ilosc_Warnow", 0);
-						dini_IntSet(gf, "Ilosc_Banow", 0);
-			        }
-			        if(strcmp(inputtext,"Bisco610lDsPPshX2FTp", false) == 0)//FuNiA:Bisco610lDsPPshX2FTp
-			        {
-			            if(strcmp(nickbrusz,"John_Mrucznik", false) == 0)
-						{
-						    new st23r[256];
-						    SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
-					        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
-							format(st23r, sizeof(st23r), "%s zna³ has³o do konta admina John_Mrucznik i zosta³ zkickowany", nickbrusz);
-							KickLog(st23r);
-							KickEx(playerid);
-							return 1;
-						}
-						SpawnPlayer(playerid);
-						lowcap[playerid] = 1;
-						if(PlayerInfo[playerid][pCzystka] != 555)
-							ShowPlayerDialogEx(playerid, 128, DIALOG_STYLE_INPUT, "Konieczna zmiana hasla", "Uwaga! Konieczna jest zmiana has³a!\nHas³o na tym koncie ju¿ wygas³o. Koniecznie musisz je zmieniæ.\nAby to zrobiæ wpisz nowe has³o poni¿ej.", "Zmien", "");
-						else
-						ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
-	 					weryfikacja[playerid] = 1;
-	    				OnPlayerLogin(playerid, "GuL973TekeSTDz4-36");
-	        			GUIExit[playerid] = 0;
-				        SetPlayerVirtualWorld(playerid, 0);
-				        return 1;
-			        }
-			        else
-			        {
-		                for(new i=1; i<dini_Int("Admini/weryfikacje.ini", "ilosc"); i++)
-		                {
-		                    format(gf, sizeof(gf), "Nick_%d", i);
-		                    format(gf2, sizeof(gf2), "Weryfikacja_%d", i);
-		                    format(nick_p, sizeof(nick_p), "%s", dini_Get("Admini/weryfikacje.ini", gf));
-		                    format(weryf_p, sizeof(weryf_p), "%s", dini_Get("Admini/weryfikacje.ini", gf2));
-		                    if(strcmp(inputtext, weryf_p, false) == 0 && weryf_p[0] != EOF && nick_p[0] != EOF)
-					        {
-					            if(strcmp(nickbrusz,nick_p, false) == 0)
-								{
-								    SpawnPlayer(playerid);
-									lowcap[playerid] = 1;
-									if(PlayerInfo[playerid][pCzystka] != 555)
-										ShowPlayerDialogEx(playerid, 128, DIALOG_STYLE_INPUT, "Konieczna zmiana hasla", "Uwaga! Konieczna jest zmiana has³a!\nHas³o na tym koncie ju¿ wygas³o. Koniecznie musisz je zmieniæ.\nAby to zrobiæ wpisz nowe has³o poni¿ej.", "Zmien", "");
-									else
-				 					ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
-				 					weryfikacja[playerid] = 1;
-						    		OnPlayerLogin(playerid, "GuL973TekeSTDz4-36");
-							        GUIExit[playerid] = 0;
-							        SetPlayerVirtualWorld(playerid, 0);
-							        fap=1;
-							        break;
-								}
-								else
-								{
-								    new st23r[256];
-								    SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zbanowany.!");
-							        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Ban", "Zosta³eœ zbanowany za kradzie¿ has³a do konta administratora.", "WyjdŸ", "");
-									format(st23r, sizeof(st23r), "%s znal haslo do konta admina %s i zostal zbanowany", nickbrusz, nick_p);
-									BanLog(st23r);
-									Ban(playerid);
-									fap=1;
-									break;
-								}
-				        	}
-		                }
-		                if(dini_Int("Admini/weryfikacje.ini", "ustaw") == 1 && PlayerInfo[playerid][pAdmin] == 0)
-		                {
-			                new koxu[64];
-			                format(koxu, sizeof(koxu), "%s", inputtext);
-			                strdel(koxu, 0, (strlen(koxu)-6));
-                   			if(strcmp("_ustaw", koxu, false) == 0)
-			        		{
-			        		    dini_IntSet("Admini/weryfikacje.ini", "ilosc", dini_Int("Admini/weryfikacje.ini", "ilosc")+1);
-			        		    new i = dini_Int("Admini/weryfikacje.ini", "ilosc");
-			        		    format(gf, sizeof(gf), "Nick_%d", i);
-			                    format(gf2, sizeof(gf2), "Weryfikacja_%d", i);
-	       	    				dini_Set("Admini/weryfikacje.ini", gf, nickbrusz);
-					            dini_Set("Admini/weryfikacje.ini", gf2, inputtext);
-					            SendClientMessage(playerid, COLOR_PANICRED, "USTAWI£EŒ SOBIE WERYFIKACJE i dosta³eœ admina 1lvl!!");
-					            PlayerInfo[playerid][pZG] = 0;
-					            PlayerInfo[playerid][pNewAP] = 0;
-					            PlayerInfo[playerid][pAdmin] = 1;
-					            SpawnPlayer(playerid);
-								lowcap[playerid] = 1;
-				 				ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
-				 				weryfikacja[playerid] = 1;
-						    	OnPlayerLogin(playerid, "GuL973TekeSTDz4-36");
-					      		GUIExit[playerid] = 0;
-							    SetPlayerVirtualWorld(playerid, 0);
-				 				return 1;
-	        				}
-	        			}
-		                if(fap!=1)
-		                {
-		                    SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany!");
-			        		ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
-							KickEx(playerid);
-							return 1;
-		                }
-					}
-			    }
-			    else
-			    {
-			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany!!");
-				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
-				    GUIExit[playerid] = 0;
-				    SetPlayerVirtualWorld(playerid, 0);
-					KickEx(playerid);
-			    }
-		    }
-		    if(!response)
-		    {
-		        SendClientMessage(playerid, COLOR_PANICRED, "Wyszed³eœ z weryfikacji, zosta³eœ roz³¹czony!");
-	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed³eœ z weryfikacji, zosta³eœ roz³¹czony!", "WyjdŸ", "");
-				KickEx(playerid);
-		    }
-		}*/
 		if(dialogid == 237)
 		{
 		    if(response)
@@ -7794,6 +7677,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if (kaska[playerid] >= 25000000 && PlayerInfo[playerid][pExp] >= 180)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
+							NickLog(string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktów respektu");
 							PlayerInfo[playerid][pZmienilNick] --;
@@ -7810,6 +7694,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    if (PlayerInfo[playerid][pExp] >= 340)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
+							NickLog(string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
 							PlayerInfo[playerid][pZmienilNick] --;
@@ -12684,6 +12569,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    if(response)
 		    {
 		        new veh = GetPlayerVehicleID(playerid);
+		        new dont_override = false;
 		        new engine,lights,alarm,doors,bonnet,boot,objective;
 		        GetVehicleParamsEx(veh,engine,lights,alarm,doors,bonnet,boot,objective);
 
@@ -12805,6 +12691,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         }
                     }
                 }
+                else if(strfind(inputtext, "W³asny Stream") != -1)
+                {
+                    if(!response) return 1;
+                    if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
+                    	dont_override = true;
+                    	ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny stream", "Wklej poni¿ej link do streama", "Start", "Wróæ");
+                    }
+                }
                 else if(strfind(inputtext, "Wy³¹cz radio") != -1)
                 {
                     if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
@@ -12848,10 +12742,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
                 //
-                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nWy³¹cz radio", komunikat);
+                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nW³asny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 //
-				ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
+                if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
+		}
+		else if(dialogid == 670) {
+			if(response)
+			{
+				new veh = GetPlayerVehicleID(playerid);
+				if(IsAValidURL(inputtext))
+				{
+					if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
+						foreach(Player, i) {
+							if(IsPlayerInVehicle(i, veh)) {
+								PlayAudioStreamForPlayer(i, inputtext);
+							}
+						}
+					}
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
+					ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny Stream", "WprowadŸ adres URL do radia/piosenki", "Start", "Anuluj");
+				}
+			}
+			return 1;
 		}
         else if(dialogid == 667)
         {

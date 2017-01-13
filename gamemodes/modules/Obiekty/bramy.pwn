@@ -9,12 +9,19 @@ ZaladujBramy()
 	BramaBOR = CreateDynamicObject(980,1534.90002441,-1451.30004883,15.19999981,0.00000000,0.00000000,180.00000000); //object(airportgate) (1)
 	bor = CreateDynamicObject(1569, 1501.6648, -1452.1390, 63.3306,   0.00000, 0.00000, 270.00000,80,0);//nowa baza
 	bor1 = CreateDynamicObject(1569, 1513.57556, -1468.74573, 66.82270,   0.00000, 0.00000, 90.00000,80,0);//nowa baza
-	BramaPolicja = CreateDynamicObject(10558, 1589.0277099609, -1638.2808837891, 14.430500030518, 0, 0, 270);//12
-	SzlabanPolicja = CreateDynamicObject(968, 1544.6816, -1630.8596, 12.9796, 0, 87.6625, 89.3814);//szlaabn 13
+	//BramaPolicja = CreateDynamicObject(10558, 1589.0277099609, -1638.2808837891, 14.430500030518, 0, 0, 270);//12
+	//SzlabanPolicja = CreateDynamicObject(968, 1544.6816, -1630.8596, 12.9796, 0, 87.6625, 89.3814);//szlaabn 13
 //	DrzwiTajniak1a = CreateDynamicObject(1569, 227.76820373535, 122.23600769043, 1002.3569335938, 0.000000, 0.000000, 90); //object (adam_v_door) (5) 14
 //	DrzwiTajniak1b = CreateDynamicObject(1569, 227.72761535645, 124.85906982422, 1002.3569335938, 0.000000, 0.000000, 270); //object (adam_v_door) (6) 15
 //	DrzwiTajniak2a = CreateDynamicObject(1569, 260.35290527344, 126.68900299072, 1007.9876708984, 0.000000, 0.000000, 270); //object (adam_v_door) (7) 16
 //	DrzwiTajniak2b = CreateDynamicObject(1569, 260.36807250977, 123.75452423096, 1007.9876708984, 0.000000, 0.000000, 90); //object (adam_v_door) (8) 17
+
+	// Nowa policja
+	lspdWjazdGora = CreateDynamicObject(980, 1539.6946, -1628.6476, 15.1434, 0.0000, 0.0000, 90.0000); //zamknieta brama
+	lspdWjazdDolny = CreateDynamicObject(19880, 1588.4932, -1638.2795, 17.0965, 0.0000, 0.0000, 0.0000); //zamknieta brama
+	lspdExtDoors = CreateDynamicObject(1535, 1568.6215, -1634.2524, 12.3902, 0.0000, 0.0000, 90.0000); //zamkniete drzwi
+	// End nowa policja
+
 	DrzwiPDKomi = CreateDynamicObject(1569,253.18164062,108.04980469,1002.21875000,0.00000000,0.00000000,90.00000000); //brama pd1 stary komisariat (old komi)
 	DrzwiPDKomi2 = CreateDynamicObject(1569,253.22167969,124.16796875,1002.21875000,0.00000000,0.00000000,90.00000000); //bramapd 2b stary komisariat (old komi)
 	DrzwiPDKomi3 = CreateDynamicObject(1569,238.32324219,119.16503906,1002.21875000,0.00000000,0.00000000,179.99450684); //brama pd3 stary komisariat (old komi)

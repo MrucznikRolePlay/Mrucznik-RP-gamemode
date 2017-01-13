@@ -57,8 +57,13 @@ MruMySQL_Connect()
 		SendRconCommand("exit");
 		return 0;
 	}
-    mysql_debug(0); //DISABLE!!!
-    mysql_query("SET NAMES 'cp1250'");
+	#if DEBUG == 1
+		mysql_debug(1);
+	#else
+		mysql_debug(0);
+	#endif
+	
+	mysql_query("SET NAMES 'cp1250'");
 	return 1;
 }
 
@@ -641,8 +646,8 @@ stock MruMySQL_UpdateOpis(handle, uid, typ)
 
 stock MruMySQL_CheckOpis(uid, typ)
 {
-    new lStr[64];
-    format(lStr, 128, "SELECT `UID` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
+    new lStr[128];
+    format(lStr, sizeof(lStr), "SELECT `UID` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
     mysql_query(lStr);
     mysql_store_result();
     if(mysql_num_rows())
@@ -850,7 +855,7 @@ MruMySQL_Blockuj(nick[], admin, powod[])
         GetPlayerName(admin, admnick, 32);
         format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`,`powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%s', '%d', '%s', '%d')", validnick, powod, PlayerInfo[admin][pUID], admnick,WARN_BLOCK);
     }
-    else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `powod`, `typ`, `nadal`) VALUES ('%s', '%s', '%d', 'SYSTEM')", validnick, powod,WARN_BAN);
+    else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `powod`, `typ`, `nadal`) VALUES ('%s', '%s', '%d', 'SYSTEM')", validnick, powod,WARN_BLOCK);
 	mysql_query(query);
 
 	return 1;
@@ -994,6 +999,22 @@ bool:MruMySQL_SprawdzBany(playerid)
 }
 
 //Pobieranie i zwracanie pojedynczych zmiennych:
+
+stock MruMySQL_GetNameFromUID(uid) {
+	new wartosc[MAX_PLAYER_NAME], string[128];
+	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `UID` = '%d'", uid);
+	mysql_query(string);
+	mysql_store_result();
+		
+	if(mysql_retrieve_row())
+	{
+		mysql_fetch_field_row(wartosc, "Nick");
+	}
+	strunpack(wartosc, wartosc);
+	mysql_free_result();
+	return wartosc;
+}
+
 stock MruMySQL_GetAccString(kolumna[], nick[])
 {
 	new string[128], wartosc[256];
