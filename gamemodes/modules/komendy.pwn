@@ -927,7 +927,7 @@ CMD:pomoc2(playerid)
     }
     if (PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** FBI *** /podszyj /namierz /fbi /federalne /cela");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** FBI *** /zmienskin /namierz /fbi /federalne /cela");
     }
     if (PlayerInfo[playerid][pMember] == 17 || PlayerInfo[playerid][pLider] == 17)
     {
@@ -10169,9 +10169,9 @@ CMD:zmienskin(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (IsAHA(playerid))
+		if (IsAHA(playerid) || PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
 		{
-			if(PlayerInfo[playerid][pRank] >= 0)
+			if(PlayerInfo[playerid][pRank] >= 2)
 			{
 				printf(DialogListaFrakcji());
 				ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
@@ -10183,7 +10183,7 @@ CMD:zmienskin(playerid)
 		}
 		else
 		{
-			sendTipMessage(playerid, "Tylko dla Hitman Agency.");
+			sendTipMessage(playerid, "Tylko dla Hitman Agency i FBI.");
 		}
 	}
 	return 1;
