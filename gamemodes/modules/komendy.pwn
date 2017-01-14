@@ -11040,7 +11040,7 @@ CMD:hydraulika(playerid, params[])
 										AddVehicleComponent(pojazd,1087);//hydraulika
 										GetPlayerName(playerid, sendername, sizeof(sendername));
 										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-										format(string, sizeof(string), "* Zamontowa³eœ graczowi %s hydraulike (-10 000$)",giveplayer);
+										format(string, sizeof(string), "* Zamontowa³eœ graczowi %s hydraulike (-250 000$)",giveplayer);
 										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 										format(string, sizeof(string), "* Mechanik %s zamontowa³ hydraulike w twoim samochodzie",sendername);
 										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
@@ -11070,7 +11070,7 @@ CMD:hydraulika(playerid, params[])
 								}
 								else
 								{
-									sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy (10 000$)");
+									sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy (250 000$)");
 								}
 							}
 							else
@@ -11303,7 +11303,7 @@ CMD:felga(playerid, params[])
 								}
 								else
 								{
-									sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy (15000$)");
+									sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy (250 000$)");
 								}
 							}
 							else
@@ -11405,7 +11405,7 @@ CMD:spoiler(playerid, params[])
 			if( sscanf(params, "k<fix>d", playa, spojlerid))
 			{
 				sendTipMessage(playerid, "U¿yj /spojler [Nick/ID] [id spojlera]");
-				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt spojera to: 200000 , aby zobaczyæ listê spojlerów wpisz /spojlery");
+				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt spojera to: $200 000, aby zobaczyæ listê spojlerów wpisz /spojlery");
 				return 1;
 			}
 			if(IsPlayerConnected(playa))
@@ -11820,7 +11820,7 @@ CMD:zderzaki(playerid, params[])
 			        		}
 							else
 							{
-							    sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy (10 000$)");
+							    sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy (250 000$)");
 							}
 						}
 						else
