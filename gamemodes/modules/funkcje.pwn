@@ -9359,7 +9359,7 @@ stock Zone_MinimumPeople(zoneid)
 {
     new Float:area = Zone_Area[zoneid]/10000;
     new ppl;
-    if(0 < area < 1.0) ppl = 2;
+    if(0 < area < 1.0) ppl = 3;
     else if(1.0 <= area < 2.0) ppl = 5;
     else if(2.0 <= area < 4.0) ppl = 7;
     else if(4.0 <= area < 8.0) ppl = 10;

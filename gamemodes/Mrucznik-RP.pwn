@@ -1167,7 +1167,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         new frac = GetPlayerFraction(killerid),
             fam = GetPlayerOrg(killerid);
 
-        if((IsACop(killerid) && OnDuty[playerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == 5 || frac == 6 || frac == 8 || 6 <= fam <= 10 || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
+        if((IsACop(killerid) && OnDuty[playerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == 5 || frac == 6 || frac == 8 || 6 <= fam <= 10 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
         {
             new bool:inzone=false;
             for(new i=0;i<MAX_ZONES;i++)
