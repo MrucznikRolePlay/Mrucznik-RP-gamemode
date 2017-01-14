@@ -3928,7 +3928,10 @@ stock KasynoLog(text[])
     new plik[32] = "logi/kasyno.log";
     Log(plik, text);
 }
-
+stock PrzekretLog(text[]) {
+	new plik32[] = "logi/przekret.log";
+	Log(plik, text);
+}
 stock PayLog(text[])
 {
     new plik[32] = "logi/pay.log";
@@ -4768,6 +4771,8 @@ ZaladujTrasy()
 {
 	new trasaS[24];
 	new numerCH[12];
+	new s, e;
+	s = GetTickCount();
     for(new i=0; i<sizeof(Wyscig); i++)
 	{
 	    format(trasaS, sizeof(trasaS), "Inne/trasa_%d.ini", i);
@@ -4828,6 +4833,8 @@ ZaladujTrasy()
 		    }
 		}
 	}
+	e = GetTickCount();
+	printf("DINI1: LADOWANIE TRAS czas wykonania: %d", e-s);
 	return 1;
 }
 
@@ -8802,6 +8809,7 @@ stock ZoneTXD_Unload()
     for(new i=0;i<4;i++) TextDrawDestroy(Text:i);
 }
 
+
 stock Zone_StartAttack(zoneid, attacker, defender)
 {
     ZoneAttack[zoneid] = true; //make
@@ -8901,6 +8909,8 @@ stock Zone_StartAttack(zoneid, attacker, defender)
     ZoneAttackData[zoneid][2] = attacker;
     ZoneAttackData[zoneid][3] = defender;
     ZoneGangLimit[attacker] = false;
+    format(str, 128, "ZONEDEFTIME_%d", zoneid);
+    SetSVarInt(str, ZONE_DEF_TIME);
     ZoneAttackTimer[zoneid] = SetTimerEx("Zone_AttackEnd", ZONE_DEF_TIME*1000, 0, "iii", zoneid, attacker, defender);
     printf("[GangZone] Atak na strefê %d przez %d. Atakuje %d osób broni %d osób.", zoneid, attacker, ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
 }
@@ -8938,10 +8948,9 @@ stock Zone_GangUpdate(bool:cash=false)
 public Zone_AttackEnd(zoneid, attacker, defender)
 {
     ZoneAttack[zoneid] = false;
-
+    new str[128];
     if(ZoneAttackData[zoneid][1] < ZoneAttackData[zoneid][0]) //win
     {
-        new str[128];
         format(str, 128, "UPDATE `mru_strefy` SET `gang`='%d' WHERE `id`='%d'", attacker, zoneid);
         mysql_query(str);
 
@@ -8975,7 +8984,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
                 GangZoneShowForPlayer(i, zoneid, OrgInfo[thisorg][o_Color] | 0x44);
             }
         }
-
+        
         if(attacker > 100) //gangi
         {
             if(defender > 100) //gang-gang
@@ -9105,6 +9114,8 @@ public Zone_AttackEnd(zoneid, attacker, defender)
             }
         }
     }
+    format(str, 128, "ZONEDEFTIME_%d", zoneid);
+    DeleteSVar(str);
     printf("FINAL Attackers: %d Defenders: %d", ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
     GangZoneStopFlashForAll(zoneid);
     ZoneAttackData[zoneid][0] = 0;
@@ -9348,7 +9359,7 @@ stock Zone_MinimumPeople(zoneid)
 {
     new Float:area = Zone_Area[zoneid]/10000;
     new ppl;
-    if(0 < area < 1.0) ppl = 3;
+    if(0 < area < 1.0) ppl = 2;
     else if(1.0 <= area < 2.0) ppl = 5;
     else if(2.0 <= area < 4.0) ppl = 7;
     else if(4.0 <= area < 8.0) ppl = 10;
@@ -11358,11 +11369,7 @@ public MyItems_Load(playerid)
         CallRemoteFunction("SEC_MyItems_HandleItems", "dddfffffffffd", playerid, model, uid, x, y, z, rx, ry, rz, sx, sy, sz, active);
     }
     mysql_free_result();
-    if(PlayerInfo[playerid][pHat] > 0)
-    {
-        CallRemoteFunction("SEC_MyItems_HandleOne", "dd", playerid, 19065);
-        PlayerInfo[playerid][pHat] = 0;
-    }
+    //CallRemoteFunction("SEC_MyItems_HandleOne", "dd", playerid, 19065);
     InitMyItems[playerid] = true;
 }
 

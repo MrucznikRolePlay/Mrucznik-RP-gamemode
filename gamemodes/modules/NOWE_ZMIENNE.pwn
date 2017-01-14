@@ -990,6 +990,9 @@ new TiPJTGBKubi[MAX_PLAYERS];
 //-----------------------------------------------
 ZerujZmienne(playerid)
 {
+    SetPVarInt(playerid, "budka-Mobile", 999);
+    SetPVarInt(playerid, "budka-used", 999);
+    SetPVarInt(playerid, "prawnik-oferuje", 999);
 	//z disconecta
 	zawodnik[playerid] = 0;//¯u¿el
 	komentator[playerid] = 0;//¯u¿el

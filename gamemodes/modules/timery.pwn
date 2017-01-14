@@ -1,4 +1,5 @@
 //timery.pwn
+
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
 //tazer
 forward DostalTazerem(playerid);
@@ -102,6 +103,7 @@ public MainTimer()
     {
         VehicleUpdate();
         CustomPickups();
+        GangZone_ShowInfoToParticipants();
     }
     if(TICKS_MySQLRefresh == 14)
     {
@@ -1702,6 +1704,25 @@ public JednaSekundaTimer()
 				}
 			}
 		}
+
+
+        //budki telefoniczne//
+        if(GetPVarInt(i, "budka-used") != 999) {
+            new budkaid = GetPVarInt(i, "budka-used");
+            if(GetPlayerDistanceFromPoint(i, budki[budkaid][b_x], budki[budkaid][b_y], budki[budkaid][b_z]) > 3.5) {
+                sendTipMessage(i, "Oddali³eœ siê zbytnio od budki, po³¹czenie przerwane...", COLOR_PAPAYAWHIP);
+                new caller = GetPVarInt(i, "budka-Mobile");
+                SetPVarInt(i, "budka-Mobile", 999);
+                SetPVarInt(i, "budka-used", 999);
+                if(GetPVarInt(caller, "budka-Mobile") == i) {
+                    sendTipMessage(caller, "**biiip biiip** po³¹czenie zosta³o przerwane...", COLOR_PAPAYAWHIP);
+                    SetPVarInt(caller, "budka-Mobile", 999);
+                    SetPVarInt(caller, "budka-used", 999);
+                }
+            }
+        }
+
+
   		if(CellTime[i] > 0 && Mobile[i] >= 0 && Mobile[i] < MAX_PLAYERS)
 		{
 			if (CellTime[i] == cchargetime)
@@ -2579,10 +2600,12 @@ public GangZone_Process()
         GetPlayerPos(i, x, y, z);
         for(new g=0;g<MAX_ZONES;g++) //zone loop
         {
+            printf("Loop %d", g);
             if(x >= Zone_Data[g][0] && x <= Zone_Data[g][2] && y >= Zone_Data[g][1] && y <= Zone_Data[g][3])
-    		{
+            {
                 if(!bInZone[i][g])
                 {
+                    printf("%s entered gangzone %d", GetNick(i), g);
                     bInZone[i][g] = true;
                     CallLocalFunction("OnPlayerEnterGangZone", "ii", i, g);
                     break;
@@ -2590,6 +2613,7 @@ public GangZone_Process()
             }
             else if(bInZone[i][g])
             {
+                printf("%s left gangzone %d", GetNick(i), g);
                 bInZone[i][g] = false;
                 CallLocalFunction("OnPlayerLeaveGangZone", "ii", i, g);
                 break;
@@ -2597,7 +2621,34 @@ public GangZone_Process()
         }
     }
 }
-
+forward GangZone_ShowInfoToParticipants();
+public GangZone_ShowInfoToParticipants() {
+    new string[60];
+    foreach(Player, i) {
+        new frac = GetPlayerFraction(i);
+        if(frac == 0) frac = GetPlayerOrg(i);
+        new pzone = GetPVarInt(i, "zoneid");
+        if(pzone == -1) return 1;
+        if(ZoneAttack[pzone])
+        {
+            new svar_data[30];
+            format(svar_data, 128, "ZONEDEFTIME_%d", pzone);
+            format(string, 128, "~n~~n~~n~~n~~n~ATAK NA STREFE~n~~y~%d", GetSVarInt(svar_data));
+            GameTextForPlayer(i, string, 2500, 3);
+            if(ZoneAttackData[pzone][2] > 100)
+            {
+                //GameTextForAll(string, 3000, 3);
+                GameTextForPlayer(i, string, 1500, 3);
+            }
+            else
+            {
+                GameTextForPlayer(i, string, 1500, 3);   
+            }
+            SetSVarInt(svar_data, GetSVarInt(svar_data)-2);
+        }
+    }
+    return 1;
+}
 public VehicleUpdate()
 {
 	#if DEBUG == 1

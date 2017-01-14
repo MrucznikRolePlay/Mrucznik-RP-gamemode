@@ -46,7 +46,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <callbacks>
 #include <a_http>
 #include <utils>
-#include <double-o-files2>
 #include <foreach>
 #include <zcmd>
 #include <md5>
@@ -86,14 +85,17 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 //Nowe modu³y .def:
 #include "modules\new\bramy\bramy.def"
 #include "modules\new\wejscia\wejscia.def"
+#include "modules\new\budki\budki.def"
 
 //Nowe modu³y .hwn:
 #include "modules\new\bramy\bramy.hwn"
 #include "modules\new\wejscia\wejscia.hwn"
+#include "modules\new\budki\budki.hwn"
 
 //Nowe modu³y .pwn:
 #include "modules\new\bramy\bramy.pwn"
 #include "modules\new\wejscia\wejscia.pwn"
+#include "modules\new\budki\budki.pwn"
 
 
 //------------------------------------------------------------------------------------------------------
@@ -187,7 +189,7 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
-    if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && hittype != 1)
+    if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
     {
     	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
 		MaTazer[playerid] = 0;
@@ -823,6 +825,18 @@ public OnPlayerDisconnect(playerid, reason)
       	}
 	}
 
+    //budki telefoniczne
+    if(GetPVarInt(playerid, "budka-Mobile") != 999) {
+        new caller = GetPVarInt(playerid, "budka-Mobile");
+        if(GetPVarInt(caller, "budka-Mobile") == playerid) {
+            sendTipMessage(caller, "**biiip biiip** po³¹czenie zosta³o przerwane ((Wyjœcie z gry))", COLOR_PAPAYAWHIP);
+            budki[GetPVarInt(playerid, "budka-used")][isCurrentlyUsed] = 0;
+            budki[GetPVarInt(caller, "budka-used")][isCurrentlyUsed] = 0;
+            SetPVarInt(caller, "budka-Mobile", 999);
+            SetPVarInt(caller, "budka-used", 999);
+        }
+    }
+
     if(GetPVarInt(playerid, "kostka"))
     {
         new id = GetPVarInt(playerid, "kostka-player");
@@ -1073,13 +1087,6 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	    ShowPlayerFadeScreenToBlank(playerid, 20, 255, 255, 255, 255);
 		SetPlayerDrunkLevel(playerid, 3000);
 	}
-    if(issuerid != INVALID_PLAYER_ID) {
-        if(IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969)) {
-            new Float:health;
-            GetPlayerHealth(playerid, health);
-            SetPlayerHealth(playerid, health+amount);
-        }
-    }
 	switch(bodypart)
 	{
 	    case BODY_PART_LEFT_LEG:
@@ -1160,7 +1167,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         new frac = GetPlayerFraction(killerid),
             fam = GetPlayerOrg(killerid);
 
-        if(IsACop(killerid) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || 6 <= fam <= 10)
+        if((IsACop(killerid) && OnDuty[playerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || 6 <= fam <= 10)
         {
             new bool:inzone=false;
             for(new i=0;i<MAX_ZONES;i++)
@@ -1178,7 +1185,7 @@ public OnPlayerDeath(playerid, killerid, reason)
             {
                 new Float:x, Float:y, Float:z;
                 GetPlayerPos(playerid, x, y, z);
-                PlayerInfo[playerid][pBW] = 3*60; //czas
+                PlayerInfo[playerid][pBW] = GetSVarInt("BW_Time");
                 SetSpawnInfo(playerid, 0, GetPlayerSkin(playerid), x, y, z, 0.0, 0, 0, 0, 0, 0, 0);
                 SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
             }
@@ -1552,9 +1559,10 @@ SetPlayerSpawnPos(playerid)
         SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
         TogglePlayerControllable(playerid, 0);
         ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.1, 0, 0, 0, 0, 0, 1);
-        GameTextForPlayer(playerid, "Zostales brutalnie pobity! (3min)", 15000, 5);
+        GameTextForPlayer(playerid, "Zostales brutalnie pobity!", 15000, 5);
         PlayerInfo[playerid][pMuted] = 1;
         if(GetPVarInt(playerid, "bw-skin") != 0) SetPlayerSkin(playerid, GetPVarInt(playerid, "bw-skin"));
+
 	}
     else
     {
@@ -1850,7 +1858,8 @@ SetPlayerSpawnWeapon(playerid)
     if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
     {
         SetPlayerHealth(playerid, 90);
-	    SetPlayerArmour(playerid, 15);
+        if(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
+	       SetPlayerArmour(playerid, 15);
     }
     else if(IsAPrzestepca(playerid))
 	{
@@ -4754,7 +4763,6 @@ public OnGameModeInit()
 	{
 		afk_timer[i] = -1;
 	}
-
 	//Wybory:
 	if(dini_Exists("wybory.ini"))
 	{
@@ -4780,14 +4788,17 @@ public OnGameModeInit()
     {
         new ust = dini_Int("BWSettings.ini", "OnlyGangZones");
         SetSVarInt("BW_OnlyGangZones", ust);
+        ust = dini_Int("BWSettings.ini", "Time");
+        SetSVarInt("BW_Time", ust);
     }
     else
     {
         dini_Create("BWSettings.ini");
         dini_IntSet("BWSettings.ini", "OnlyGangZones", 0);
+        dini_IntSet("BWSettings.ini", "Time", 180);
         SetSVarInt("BW_OnlyGangZones", 0);
+        SetSVarInt("BW_Time", 180);
     }
-
 	//Mrucznik:
 	Ac_OnGameModeInit();//Antyczit
 	MruMySQL_Connect();//mysql
@@ -4996,7 +5007,6 @@ public OnGameModeExit()
         MruMySQL_SaveAccount(i, true, true);
     }
     GLOBAL_EXIT = true;
-	DOF2_Exit();
     print("Serwer zostaje wy³¹czony.");
 	#if DEBUG == 1
 		printf("OnGameModeExit - end");
@@ -5148,6 +5158,7 @@ PayDay()
     printf("-> Updating GangZones");
     Zone_GangUpdate(true);
     printf("-> Removing Houses MapIcons");
+
 	for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
 	{
 		DestroyDynamicMapIcon(Dom[i][hIkonka]);
@@ -6840,6 +6851,32 @@ public OnPlayerText(playerid, text[])
 		}
 		return 0;
 	}
+    if(GetPVarInt(playerid, "budka-Mobile") != 999) {
+        new idx;
+        tmp = strtok(text, idx);
+        GetPlayerName(playerid, sendername, sizeof(sendername));
+        new budkaused = GetPVarInt(playerid, "budka-used");
+        new budkatalker = GetPVarInt(playerid, "budka-Mobile");
+
+        if(budkaused != 999) {
+            format(string, sizeof(string), "%s mówi (budka): %s", (PlayerInfo[playerid][pSex] == 1) ? ("Mê¿czyzna") : ("Kobieta"), text);
+        } else {
+            format(string, sizeof(string), "%s mówi (telefon): %s", sendername, text);
+        }
+        ProxDetector(20.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+        if(IsPlayerConnected(budkatalker) || GetPVarInt(budkatalker, "budka-Mobile") == playerid)
+        {
+            if(GetPVarInt(budkatalker, "budka-Mobile") == playerid)
+            {
+                SendClientMessage(budkatalker, COLOR_YELLOW,string);
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_YELLOW,"Nikt siê nie odzywa");
+        }
+        return 0;
+    }
 	if(Mobile[playerid] != 1255)
 	{
 		new idx;
