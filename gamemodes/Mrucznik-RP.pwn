@@ -888,14 +888,36 @@ public OnPlayerDisconnect(playerid, reason)
         TextDrawShowForPlayer(playerid, OilTXD_BG[1]);
     }
 
-    if(GetPVarInt(playerid, "patrol") != 0)
+    /*if(GetPVarInt(playerid, "patrol") != 0)
     {
         cmd_patrol(playerid, "stop");
     }
     if(GetPVarInt(playerid, "patrolmap") == 1)
     {
         Patrol_HideMap(playerid);
+    } */
+    if(GetPVarInt(playerid, "patrol") != 0) {
+        new patrol = GetPVarInt(playerid, "patrol-id");
+        if(PatrolInfo[patrol][patroluje][1] != INVALID_PLAYER_ID) {
+            // patrol z kims
+            if(PatrolInfo[patrol][patroluje][1] == playerid) {
+                // lider patrolu
+                cmd_patrol(patrol, "stop");
+                cmd_patrol(playerid, "stop");
+                sendTipMessageEx(patrol, COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+            } else {
+                // nie lider
+                cmd_patrol(playerid, "stop");
+                cmd_patrol(patrol, "stop");
+                sendTipMessageEx(patrol, COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+            }
+        } else {
+            // samemu
+            cmd_patrol(playerid, "stop");
+        }
     }
+    //SetPVarInt(playerid, "patrol-id", pat);
+    //SetPVarInt(playerid, "patrol", 1);
     if(GetPVarInt(playerid, "rentTimer") != 0)
     {
         UnhireRentCar(playerid, GetPVarInt(playerid, "rentCar"));
@@ -1167,7 +1189,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         new frac = GetPlayerFraction(killerid),
             fam = GetPlayerOrg(killerid);
 
-        if((IsACop(killerid) && OnDuty[playerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == 5 || frac == 6 || frac == 8 || 6 <= fam <= 10 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
+        if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == 5 || frac == 6 || frac == 8 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
         {
             new bool:inzone=false;
             for(new i=0;i<MAX_ZONES;i++)
@@ -1423,7 +1445,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
     }
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
-	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 500);
+	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 1000);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_MICRO_UZI, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL, 500);
     SetPlayerSkillLevel(playerid, WEAPONSKILL_SNIPERRIFLE, 1);
@@ -6996,7 +7018,7 @@ public OnPlayerText(playerid, text[])
 	    {
 	        return 0;
       	}
-		if(GetPlayerState(playerid) == 2 || GetPlayerState(playerid) == 3)
+		/*if(GetPlayerState(playerid) == 2 || GetPlayerState(playerid) == 3)
       	{
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			format(string, sizeof(string), "%s mówi (w pojeŸdzie): %s", sendername, text);
@@ -7010,7 +7032,30 @@ public OnPlayerText(playerid, text[])
 			ProxDetector(20.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
 			SetPlayerChatBubble(playerid,text,COLOR_FADE1,20.0,8000);
     		ApplyAnimation(playerid,"PED","IDLE_CHAT",4.0,0,0,0,4,4);
-		}
+		} */
+        if(strlen(text) < 78)
+        {
+            format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), text);
+            ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+            SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
+        }
+        else
+        {
+            new pos = strfind(text, " ", true, strlen(text) / 2);
+            if(pos != -1)
+            {
+                new text2[64];
+
+                strmid(text2, text, pos + 1, strlen(text));
+                strdel(text, pos, strlen(text));
+
+                format(string, sizeof(string), "%s mówi: %s [.]", GetNick(playerid, true), text);
+                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+
+                format(string, sizeof(string), "[.] %s", text2);
+                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+            }
+        }
 		return 0;
 	}
 	#if DEBUG == 1

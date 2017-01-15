@@ -1,5 +1,7 @@
 //funkcje.pwn     AKTUALNA MAPA
-
+new scm_buf[144];
+#define sendTipMessageFormat(%0,%1,%2) \
+	(format(scm_buf, sizeof scm_buf, %1,%2), sendTipMessage(%0,scm_buf))
 stock pusteZgloszenia() {
 	for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
 		new Hour, Minute;
@@ -17,11 +19,9 @@ stock getWolneZgloszenie() {
 	}
 	return ilosczgloszen++;
 }
-
 sendNotification(id, title[], text[], time) {
 	CallRemoteFunction("notify", "dssd", id, title, text, time);
 }
-
 noAccessMessage(id) {
     return SendClientMessage(id,COLOR_FADE2,"»» Nie posiadasz dostêpu do tej komendy");
 }

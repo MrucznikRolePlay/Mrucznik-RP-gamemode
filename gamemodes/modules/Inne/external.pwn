@@ -19,11 +19,12 @@ forward MRP_SetPlayerPhone(playerid, val);
 forward MRP_SetPlayerNickChanges(playerid, val);
 forward MRP_SetPlayerAge(playerid, val);
 forward MRP_SetPlayerKP(playerid, val);
-
 forward MRP_ShopPurchaseCar(playerid, model, cena);
 forward MRP_ForceDialog(playerid, dialogid);
-
 forward MRP_CreatePlayerAttachedItem(playerid, model);
+
+//OTHERS
+forward MRP_IsPhoneNumberAvailable(number);
 
 //CALLBACKS
 //GET
@@ -55,7 +56,10 @@ public MRP_SetPlayerMC(playerid, val)
     return 1;
 }
 public MRP_SetPlayerCarSlots(playerid, val)  PlayerInfo[playerid][pCarSlots] = val;
-public MRP_SetPlayerPhone(playerid, val)  PlayerInfo[playerid][pPnumber] = val;
+public MRP_SetPlayerPhone(playerid, val)  {
+    PlayerInfo[playerid][pPnumber] = val;
+    MruMySQL_SetAccInt("PhoneNr", GetNick(playerid), val);
+}
 public MRP_SetPlayerNickChanges(playerid, val)  PlayerInfo[playerid][pZmienilNick] = val;
 public MRP_SetPlayerAge(playerid, val)  PlayerInfo[playerid][pAge] = val;
 public MRP_SetPlayerKP(playerid, val)  PlayerInfo[playerid][pDonateRank] = val;
@@ -74,6 +78,21 @@ public MRPWeryfikacja(index, response_code, data[])
 {
     print("Kubi aka Smigol: Moj skarb!! Nie oddam mojego skarbu!");
 	return 1;
+}
+
+// OTHERS
+public MRP_IsPhoneNumberAvailable(number) {
+    new string[70];
+    format(string, sizeof(string), "SELECT `UID` FROM `mru_konta` WHERE `PhoneNr` = %d", number);
+    mysql_query(string);
+    mysql_store_result();
+    if(mysql_num_rows() > 0)
+    {
+        mysql_free_result();
+        return true;
+    }
+    mysql_free_result();
+    return false;
 }
 
 //END

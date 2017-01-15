@@ -1902,6 +1902,9 @@ public JednaSekundaTimer()
         if(GetPVarInt(i, "wydragowany") > 0) {
             SetPVarInt(i, "wydragowany", GetPVarInt(i, "wydragowany")-1);
         }
+        if(GetPVarInt(i, "wyreportowany") > 0) {
+            SetPVarInt(i, "wyreportowany", GetPVarInt(i, "wyreportowany")-1);
+        }
         if(GetPVarInt(i, "finding") == 1) {
             new findtime = GetPVarInt(i, "findtime");
             if(findtime == 0) {
@@ -2465,6 +2468,11 @@ public JednaSekundaTimer()
 				obezwladniony[i] = 0;
 				PlayerInfo[i][pMuted] = 0;
 				PlayerTied[i] = 0;
+                PlayerInfo[i][pBW]=0;
+                TogglePlayerControllable(i, 1);
+                GameTextForPlayer(i, "Obudziles sie po pobiciu!", 5000, 5);
+                SetPVarInt(i, "bw-sync", 0);
+                PlayerInfo[i][pMuted] = 0;
 			}
 			else
 			{
@@ -2600,7 +2608,6 @@ public GangZone_Process()
         GetPlayerPos(i, x, y, z);
         for(new g=0;g<MAX_ZONES;g++) //zone loop
         {
-            printf("Loop %d", g);
             if(x >= Zone_Data[g][0] && x <= Zone_Data[g][2] && y >= Zone_Data[g][1] && y <= Zone_Data[g][3])
             {
                 if(!bInZone[i][g])
