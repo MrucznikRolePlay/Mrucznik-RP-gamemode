@@ -1,5 +1,26 @@
 //zmienne.pwn
 
+
+//legal
+new DB:db_handle;
+enum eLegalWpns {
+    weaponLegal1,
+    weaponLegal2,
+    weaponLegal3,
+    weaponLegal4,
+    weaponLegal5,
+    weaponLegal6,
+    weaponLegal7,
+    weaponLegal8,
+    weaponLegal9,
+    weaponLegal10,
+    weaponLegal11,
+    weaponLegal12,
+    weaponLegal13
+}
+new playerWeapons[MAX_PLAYERS][eLegalWpns];
+
+
 new Zgloszenie[OSTATNIE_ZGLOSZENIA][hqZgloszenia];
 new ilosczgloszen = 0;
 
@@ -11,6 +32,8 @@ new gTeam[MAX_PLAYERS];
 
 //regex
 new regexURL;
+
+new lastMsg[MAX_PLAYERS];
 
 //Actor
 new PaniJanina;
@@ -1018,6 +1041,8 @@ ZerujZmienne(playerid)
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
 	
+    lastMsg[playerid] = 0;
+
 	//z conecta
 	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
 	cbradijo[playerid] = 0; adminpodgladcb[playerid] = 0; matogczas[playerid] = 0;

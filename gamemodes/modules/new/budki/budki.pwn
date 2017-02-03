@@ -32,6 +32,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 stock dodajBudke(fobiekt, Float:x, Float:y, Float:z, Float: rx, Float:ry, Float: rz)
 {
+	#pragma unused x,y,z,rx,ry,rz,fobiekt
 	/*budki[iloscbudek][b_model] = fobiekt;
 	budki[iloscbudek][b_x] = x;
 	budki[iloscbudek][b_y] = y;

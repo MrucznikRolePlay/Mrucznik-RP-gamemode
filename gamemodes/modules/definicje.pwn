@@ -142,9 +142,8 @@
 #define FRAC_BALLAS 13
 #define FRAC_VAGOS  14
 #define FRAC_NOA    15
-#define FRAC_WPS    16
+#define FRAC_WPS    16 
 #define FRAC_LSFD   17
-#define FRAC_RR   18
 #define SPOILER_D 200000
 #define ZDERZAK_D 250000
 #define FELGA_D 250000

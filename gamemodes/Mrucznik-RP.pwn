@@ -71,7 +71,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.5"
+#define VERSION "v2.5.6"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
@@ -193,6 +193,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
     {
     	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
 		MaTazer[playerid] = 0;
+        return 0;
 		//PlayerInfo[playerid][pGun2] = 24;
 		//GivePlayerWeapon(playerid, 24, PlayerInfo[playerid][pAmmo2]);
 		//RemovePlayerAttachedObject(playerid, 9);
@@ -227,6 +228,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
     {
         GameTextForPlayer(playerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
         MaTazer[playerid] = 0;
+        return 0;
         //PlayerInfo[issuerid][pGun2] = 24;
         //GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
         //RemovePlayerAttachedObject(issuerid, 9);
@@ -902,19 +904,30 @@ public OnPlayerDisconnect(playerid, reason)
             // patrol z kims
             if(PatrolInfo[patrol][patroluje][1] == playerid) {
                 // lider patrolu
-                cmd_patrol(patrol, "stop");
-                cmd_patrol(playerid, "stop");
-                sendTipMessageEx(patrol, COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+                cmd_patrol(PatrolInfo[patrol][patroluje][0], "stop");
+                cmd_patrol(PatrolInfo[patrol][patroluje][1], "stop");
             } else {
                 // nie lider
-                cmd_patrol(playerid, "stop");
-                cmd_patrol(patrol, "stop");
-                sendTipMessageEx(patrol, COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+                cmd_patrol(PatrolInfo[patrol][patroluje][1], "stop");
+                cmd_patrol(PatrolInfo[patrol][patroluje][0], "stop");
             }
+            sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+            sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
         } else {
             // samemu
             cmd_patrol(playerid, "stop");
         }
+    }
+    if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+    {
+        new callin = Callin[playerid];
+        new talker = TalkingLive[playerid];
+        TalkingLive[playerid] = INVALID_PLAYER_ID;
+        TalkingLive[callin] = INVALID_PLAYER_ID;
+        TalkingLive[talker] = INVALID_PLAYER_ID;
+        Mobile[callin] = 1255;
+        Mobile[playerid] = 1255;
+        return 0;
     }
     //SetPVarInt(playerid, "patrol-id", pat);
     //SetPVarInt(playerid, "patrol", 1);
@@ -1186,8 +1199,7 @@ public OnPlayerDeath(playerid, killerid, reason)
     //Strefy
     if(killerid != INVALID_PLAYER_ID)
     {
-        new frac = GetPlayerFraction(killerid),
-            fam = GetPlayerOrg(killerid);
+        new frac = GetPlayerFraction(killerid);
 
         if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == 5 || frac == 6 || frac == 8 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
         {
@@ -1210,6 +1222,8 @@ public OnPlayerDeath(playerid, killerid, reason)
                 PlayerInfo[playerid][pBW] = GetSVarInt("BW_Time");
                 SetSpawnInfo(playerid, 0, GetPlayerSkin(playerid), x, y, z, 0.0, 0, 0, 0, 0, 0, 0);
                 SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
+                SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
+                SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
             }
         }
     }
@@ -1429,6 +1443,12 @@ public OnPlayerSpawn(playerid) //Przebudowany
     if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
         PlayerInfo[playerid][pRank] = 0;
         PlayerInfo[playerid][pMember] = 0;
+        gTeam[playerid] = 3;
+        PlayerInfo[playerid][pTeam] = 3;
+        PlayerInfo[playerid][pMember] = 0;
+        PlayerInfo[playerid][pRank] = 0;
+        PlayerInfo[playerid][pSkin] = 0;
+        PlayerInfo[playerid][pTajniak] = 0;
         MruMySQL_SetAccInt("Rank", GetNick(playerid), 0);
         MruMySQL_SetAccInt("Member", GetNick(playerid), 0);
         UsunBron(playerid);
@@ -1577,7 +1597,8 @@ SetPlayerSpawnPos(playerid)
 		MedicTime[playerid] = 0;
 		NeedMedicTime[playerid] = 0;
 		SetPlayerHealth(playerid, 10.0);
-		SetPlayerVirtualWorld(playerid, 0);
+		SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
+        SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
         SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
         TogglePlayerControllable(playerid, 0);
         ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.1, 0, 0, 0, 0, 0, 1);
@@ -1720,7 +1741,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_BALLAS: //13
 						{
-						    SetPlayerPosEx(playerid,1936.8698,-1104.7007,26.4531);
+						    SetPlayerPosEx(playerid,2502.7222,-1244.7454,35.4519);
+                            SetPlayerFacingAngle(playerid, 181.7818);
 						}
 						case FRAC_VAGOS: //14
 						{
@@ -3817,7 +3839,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 		        }
 		        else
 		        {
-		        	format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s wygra³ wyœcig %s", GetNick(playerid), Wyscig[Scigamy][wNazwa]);
+		        	format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s wygra³ wyœcig %s", GetNick(playerid, true), Wyscig[Scigamy][wNazwa]);
 		        	foreach(Player, i)
 		        	{
 		        	    if(ScigaSie[i] == Scigamy && i != playerid)
@@ -3834,7 +3856,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 	            if(Ukonczyl >= IloscZawodnikow)
 		        {
 		            SendClientMessage(playerid, COLOR_LIGHTGREEN, "Ukoñczy³eœ wyœcig jako ostatni - cienias!");
-					format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s ukoñczy³ wyœcig jako ostatni !", GetNick(playerid));
+					format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s ukoñczy³ wyœcig jako ostatni !", GetNick(playerid, true));
 					WyscigMessage(COLOR_YELLOW, string);
 		            KoniecWyscigu(-2);
 		        }
@@ -3842,7 +3864,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 		        {
 		            format(string, sizeof(string), "Ukoñczy³eœ wyœcig jako %d !", Ukonczyl);
 					SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
-					format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s ukoñczy³ wyœcig jako %d !", GetNick(playerid), Ukonczyl);
+					format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s ukoñczy³ wyœcig jako %d !", GetNick(playerid, true), Ukonczyl);
 					WyscigMessage(COLOR_YELLOW, string);
 	            	Ukonczyl++;
 		        }
@@ -4000,7 +4022,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 			if(GetPVarInt(player, "koxubankotfunia") != 19769)
 			{
 				new str[128];
-				format(str, 128, "RCON: U¿ytkownik %s (%d) próbowa³ siê zalogowaæ na rcona bez wymaganych uprawnieñ!", GetNick(player), player);
+				format(str, 128, "RCON: U¿ytkownik %s (%d) próbowa³ siê zalogowaæ na rcona bez wymaganych uprawnieñ!", GetNick(player, true), player);
 				SendAdminMessage(COLOR_PANICRED, str);
 				print(str);
 				#if DEBUG == 1
@@ -4806,21 +4828,27 @@ public OnGameModeInit()
 		}
 	}
     //Ustawienia BW
-    if(dini_Exists("BWSettings.ini"))
+    if(dini_Exists("Settings.ini"))
     {
-        new ust = dini_Int("BWSettings.ini", "OnlyGangZones");
+        new ust = dini_Int("Settings.ini", "OnlyGangZones");
         SetSVarInt("BW_OnlyGangZones", ust);
-        ust = dini_Int("BWSettings.ini", "Time");
+        ust = dini_Int("Settings.ini", "Time");
         SetSVarInt("BW_Time", ust);
+        //dini_Get("Settings.ini", "muzyka_bonehead");
+        SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
     }
     else
     {
-        dini_Create("BWSettings.ini");
-        dini_IntSet("BWSettings.ini", "OnlyGangZones", 0);
-        dini_IntSet("BWSettings.ini", "Time", 180);
+        dini_Create("Settings.ini");
+        dini_IntSet("Settings.ini", "OnlyGangZones", 0);
+        dini_IntSet("Settings.ini", "Time", 180);
+        //dini_S("Settings.ini", "muzyka_bonehead");
+        dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
         SetSVarInt("BW_OnlyGangZones", 0);
         SetSVarInt("BW_Time", 180);
     }
+
+
 	//Mrucznik:
 	Ac_OnGameModeInit();//Antyczit
 	MruMySQL_Connect();//mysql
@@ -4968,6 +4996,44 @@ public OnGameModeInit()
 		VehicleUID[v][vUID] = 0;
 		SetVehicleNumberPlate(v, "{1F9F06}M-RP");
 	}
+
+
+    //LEGAL
+    /*
+    CREATE TABLE mru_legal (
+        pID integer,
+        weapon1 integer not null,
+        weapon2 integer not null,
+        weapon3 integer not null,
+        weapon4 integer not null,
+        weapon5 integer not null,
+        weapon6 integer not null,
+        weapon7 integer not null,
+        weapon8 integer not null,
+        weapon9 integer not null,
+        weapon10 integer not null,
+        weapon11 integer not null,
+        weapon12 integer not null,
+        weapon13 integer not null,
+        unique (pID)
+    );
+    */
+
+    if((db_handle = db_open("mru.db")) == DB:0)
+    {
+        // Error
+        print("Failed to open a connection to \"mru.db\".");
+        print("Wylaczam serwer.... Powod: brak mru.db");
+        SendRconCommand("exit");
+    }
+    else
+    {
+        // Success
+        print("Successfully created a connection to \"mru.db\".");
+    }
+
+    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_legal (pID integer,weapon1 integer not null,weapon2 integer not null,weapon3 integer not null,weapon4 integer not null,weapon5 integer not null,weapon6 integer not null,weapon7 integer not null,weapon8 integer not null,weapon9 integer not null,weapon10 integer not null,weapon11 integer not null,weapon12 integer not null,weapon13 integer not null,unique (pID));"));
+
     pusteZgloszenia();
     print("GameMode init - done!");
     //SendRconCommand("reloadfs MRP/mrpshop");
@@ -6213,7 +6279,7 @@ public OnPlayerText(playerid, text[])
 	new giveplayerid;
 	if(PlayerInfo[playerid][pMuted] == 1)
 	{
-		SendClientMessage(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ jesteœ uciszony");
+		sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ jesteœ uciszony");
 		return 0;
 	}
 	if(MarriageCeremoney[playerid] > 0)
@@ -6873,32 +6939,6 @@ public OnPlayerText(playerid, text[])
 		}
 		return 0;
 	}
-    if(GetPVarInt(playerid, "budka-Mobile") != 999) {
-        new idx;
-        tmp = strtok(text, idx);
-        GetPlayerName(playerid, sendername, sizeof(sendername));
-        new budkaused = GetPVarInt(playerid, "budka-used");
-        new budkatalker = GetPVarInt(playerid, "budka-Mobile");
-
-        if(budkaused != 999) {
-            format(string, sizeof(string), "%s mówi (budka): %s", (PlayerInfo[playerid][pSex] == 1) ? ("Mê¿czyzna") : ("Kobieta"), text);
-        } else {
-            format(string, sizeof(string), "%s mówi (telefon): %s", sendername, text);
-        }
-        ProxDetector(20.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-        if(IsPlayerConnected(budkatalker) || GetPVarInt(budkatalker, "budka-Mobile") == playerid)
-        {
-            if(GetPVarInt(budkatalker, "budka-Mobile") == playerid)
-            {
-                SendClientMessage(budkatalker, COLOR_YELLOW,string);
-            }
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_YELLOW,"Nikt siê nie odzywa");
-        }
-        return 0;
-    }
 	if(Mobile[playerid] != 1255)
 	{
 		new idx;

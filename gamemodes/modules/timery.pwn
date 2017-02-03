@@ -27,7 +27,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 
 		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
-			if(afktime > 1800)
+			if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
 			{
 				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
 				SetTimerEx("KickEx", 500, false, "i", playerid);
@@ -2083,7 +2083,7 @@ public JednaSekundaTimer()
 				SetPlayerSpawn(i);
 				LogujeSieBezKlauna[i] = 0;
                 SetPVarInt(i, "class-sel", 1);
-				ForceClassSelection(i);
+				//ForceClassSelection(i);
                 TogglePlayerSpectating(i, true);
                 TogglePlayerSpectating(i, false);
 				SetPlayerVirtualWorld(i, 0);
@@ -2546,6 +2546,7 @@ public Fillup()
 			{
 				format(string,sizeof(string),"* Nie posiadasz doœæ pieniêdzy ( $%d ) aby zatankowaæ ten pojazd.",FillUp);
 				SendClientMessage(i,COLOR_LIGHTBLUE,string);
+                Refueling[i] = 0;
 			}
 		}
 	}
@@ -2640,7 +2641,11 @@ public GangZone_ShowInfoToParticipants() {
         {
             new svar_data[30];
             format(svar_data, 128, "ZONEDEFTIME_%d", pzone);
-            format(string, 128, "~n~~n~~n~~n~~n~ATAK NA STREFE~n~~y~%d", GetSVarInt(svar_data));
+            if(GetSVarInt(svar_data) < 0)
+                format(string, 128, "~n~~n~~n~~n~~n~ATAK NA STREFE~n~~y~PRAWIE KONIEC");
+            else {
+                format(string, 128, "~n~~n~~n~~n~~n~ATAK NA STREFE~n~~y~%d", GetSVarInt(svar_data));
+            }
             GameTextForPlayer(i, string, 2500, 3);
             if(ZoneAttackData[pzone][2] > 100)
             {
@@ -2689,5 +2694,8 @@ public VehicleUpdate()
 		printf("VehicleUpdate - end");
 	#endif
 }
+
+
+
 
 //EOF

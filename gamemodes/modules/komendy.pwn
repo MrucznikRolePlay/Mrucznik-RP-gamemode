@@ -1,4 +1,4 @@
-//komendy.pwn  AKTUALNA MAPA
+//komendy.pwn  AKTUALNA MAPA 
 
 /* SSCANF FIX */
 SSCANF:fix(string[])
@@ -51,6 +51,32 @@ SSCANF:fix(string[])
 	return 1;
 }*/
 
+CMD:setcarint(playerid, params[])
+{
+    if(IsPlayerConnected(playerid))
+    {
+        new plo;
+        if( sscanf(params, "d", plo))
+        {
+            sendTipMessage(playerid, "Uøyj /setcarint [carid]");
+            return 1;
+        }
+        if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid) || PlayerInfo[playerid][pNewAP] == 5)
+        {
+
+            LinkVehicleToInterior(plo, GetPlayerInterior(playerid));
+        }
+        else
+        {
+            noAccessMessage(playerid);
+        }
+    }
+    else
+    {
+        SendClientMessage(playerid, COLOR_GREY, "B≥πd!");
+    }
+    return 1;
+}
 
 CMD:panel(playerid, params[])
 {
@@ -523,9 +549,9 @@ CMD:opis(playerid, params[])
             else
             {
                 new str[64];
-                format(str, 64, "(OPIS) - Administrator %s usunπ≥ TwÛj opis.", GetNick(playerid));
+                format(str, 64, "(OPIS) - Administrator %s usunπ≥ TwÛj opis.", GetNick(playerid, true));
                 SendClientMessage(id, COLOR_PURPLE, str);
-                format(str, 64, "(OPIS) - Usunπ≥eú opis graczowi %s.", GetNick(id));
+                format(str, 64, "(OPIS) - Usunπ≥eú opis graczowi %s.", GetNick(id, true));
                 SendClientMessage(playerid, COLOR_PURPLE, str);
                 return 1;
             }
@@ -635,7 +661,7 @@ CMD:pracownicy(playerid)
 		{
 		    if(frac == GetPlayerFraction(i))
 		    {
-		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][pRank]);
+		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i, true), i, PlayerInfo[i][pRank]);
 		        SendClientMessage(playerid, COLOR_GRAD1, string);
 		    }
 		}
@@ -886,7 +912,7 @@ CMD:pomoc2(playerid)
     else if(PlayerInfo[playerid][pJob] == 5) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ukradnij"); }
     else if(PlayerInfo[playerid][pMember] == 9) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /napisz /gazety /wywiad /news [text] /reflektor /studia /glosnik /call-live /radiostacja");
+    SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /napisz /gazety /wywiad /news [text] /reflektor /studia /glosnik /calllive /radiostacja");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** P≥atny numer SMS - /sms [od 100 do 150], dostajesz tyle stÛwek ile jest po 1 (nr. 125 - 25 * 100 = 2500$)");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /zamknijlinie /otworzlinie /linie"); }
     else if(PlayerInfo[playerid][pJob] == 7) {
@@ -921,10 +947,10 @@ CMD:pomoc2(playerid)
     if(GetPlayerOrg(playerid) == FAMILY_IBIZA) SendClientMessage(playerid,COLOR_GRAD5,"*** Klub *** /sprzedajbilet /cennik /polej /ibiza");
     if (IsACop(playerid))
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat (/gov) /stanowe /camera /wywaz /obezwladnij /gps /odznaka /wepchnij");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat (/gov) /stanowe /camera /wywaz /obezwladnij /gps /odznaka ");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /pacholek /barierka /kolczatka /skuj /rozkuj /mdc /aresztuj /sluzba /poszukiwani /tazer /cywil");
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /cela /togcrime /poscig");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** (/r)adio (/d)epartment (/m)egafon (/su)spect /ro(radiooc) /depo(departamentooc) /pd(wiadomosc)");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /cela /togcrime /poscig NEW: /pozwolenie");
     }
     if (PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
     {
@@ -967,7 +993,7 @@ CMD:id(playerid, params[])
 		}
 
   		SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
-		format(string, sizeof(string), "Gracz (ID: %d) %s.", giveplayerid, GetNick(giveplayerid));
+		format(string, sizeof(string), "Gracz (ID: %d) %s.", giveplayerid, GetNick(giveplayerid, true));
 		SendClientMessage(playerid, COLOR_GRAD1, string);
 
 		return 1;
@@ -1162,9 +1188,9 @@ CMD:dajbilet(playerid, params[])
 				return 1;
 			}
 			//
-			format(string, sizeof(string), "Da≥eú bilet graczowi %s. Koszt wydania biletu: 20 000$", GetNick(giveplayerid));
+			format(string, sizeof(string), "Da≥eú bilet graczowi %s. Koszt wydania biletu: 20 000$", GetNick(giveplayerid, true));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			format(string, sizeof(string), "Otrzyma≥eú bilet do klubu Alhmabra od %s", GetNick(playerid));
+			format(string, sizeof(string), "Otrzyma≥eú bilet do klubu Alhmabra od %s", GetNick(playerid, true));
 			SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
             DajKase(playerid, -20000);
             SejfR_Add(FAMILY_ALHAMBRA, 20000);
@@ -1192,9 +1218,9 @@ CMD:dajbilet(playerid, params[])
 			}
             if(typ > 2 || typ < 1) return 1;
 			//
-			format(string, sizeof(string), "Da≥eú bilet graczowi %s. Koszt wydania biletu: 20 000$", GetNick(giveplayerid));
+			format(string, sizeof(string), "Da≥eú bilet graczowi %s. Koszt wydania biletu: 20 000$", GetNick(giveplayerid, true));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			format(string, sizeof(string), "Otrzyma≥eú bilet do klubu Vinyl od %s", GetNick(playerid));
+			format(string, sizeof(string), "Otrzyma≥eú bilet do klubu Vinyl od %s", GetNick(playerid, true));
 			SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 
             if(typ == 1)
@@ -2956,6 +2982,7 @@ CMD:respawn(playerid)
 	return 1;
 }
 
+CMD:respp(playerid, params[]) return cmd_respawnplayer(playerid, params);
 CMD:respawnplayer(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
@@ -2974,6 +3001,7 @@ CMD:respawnplayer(playerid, params[])
     return 1;
 }
 
+CMD:respcar(playerid, params[]) return cmd_respawncar(playerid, params);
 CMD:respawncar(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
@@ -3375,7 +3403,7 @@ CMD:caluj(playerid, params[])
 		        {
 		            if(Spectate[playa] != INVALID_PLAYER_ID)
 					{
-						sendErrorMessage(playerid, "Ten gracz jest za daleko.");
+						sendErrorMessage(playerid, "Jesteú za daleko !");
 						return 1;
 					}
   					new nick[200];
@@ -6771,7 +6799,7 @@ CMD:brama(playerid)
 			};
 			for(new i; i<3; i++)
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 7.0, gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2]))
+				if(IsPlayerInRangeOfPoint(playerid, 15.0, gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2]))
 				{
 					MoveDynamicObject(brama_kt[i], gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2], 2,
 						gate_pos[i][brama_kt_state[i]][3], gate_pos[i][brama_kt_state[i]][4], gate_pos[i][brama_kt_state[i]][5]);
@@ -10830,516 +10858,464 @@ CMD:naucz(playerid, params[])
 CMD:nitro(playerid, params[]) return cmd_nos(playerid, params);
 CMD:nos(playerid, params[])
 {
-	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
+    new string[256];
+    new sendername[MAX_PLAYER_NAME];
+    new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
-	 	{
-	    	new playa;
-			if( sscanf(params, "k<fix>", playa))
-			{
-				sendTipMessage(playerid, "Uøyj /nitro [Nick/ID]");
-				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt zamontowania to: 500000$");
-				return 1;
-			}
-			if(IsPlayerConnected(playa))
-		    {
-				if(IsAtWarsztat(playerid))
-				{
-					if(playa != INVALID_PLAYER_ID)
-					{
-						if(GetDistanceBetweenPlayers(playerid,playa) < 10)
-						{
-							if(IsPlayerInAnyVehicle(playa))
-							{
-								if(kaska[playerid] > NITRO_D)
-								{
-									new pojazd = GetPlayerVehicleID(playa);
-									if(!IsCarOwner(playa, pojazd))
-										return sendErrorMessage(playerid, "Ten pojazd nie naleøy do tego gracza.");
+        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        {
+            if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteú w warsztacie, w ktÛrym moøna prowadziÊ tuning");
+            new playa;
+            if( sscanf(params, "k<fix>", playa))
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "UØYJ: /nitro [Nick/ID]");
+                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt zamontowania to: 5000$");
+                return 1;
+            }
 
-									if(PlayerInfo[playerid][pMechSkill] <= 50)
-									{
-										GetPlayerName(playerid, sendername, sizeof(sendername));
-										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-										format(string, sizeof(string), "* Zamontowa≥eú graczowi %s nitro(pojemnoúÊ: 2) w jego samochodzie [-500000$](wiÍkszy skill-wiÍksza pojemnoúÊ)",giveplayer);
-										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string), "* Mechanik %s zamontowa≥ nitro o pojemnoúci 2 w twoim samochodzie",sendername);
-										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-										AddVehicleComponent(pojazd, 1009);
-										DajKase(playerid, -NITRO_D);
-                                        if(GetPlayerOrg(playerid) > 0) {
-                                            SejfR_Add(GetPlayerOrg(playerid), floatround((NITRO_D/100) * 50));
-                                        } else {
-                                            Sejf_Add(GetPlayerFraction(playerid), floatround((NITRO_D/100) * 50));
-                                        }
-										format(string, sizeof(string), "~r~-$%d", NITRO_D);
-										GameTextForPlayer(playerid, string, 5000, 1);
-										PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-										if(playa != playerid)
-										{
-											PlayerInfo[playerid][pMechSkill] ++;
-											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-											PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-										}
-										CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
-									}
-									else if(PlayerInfo[playerid][pMechSkill] >= 50 && PlayerInfo[playerid][pMechSkill] <= 99)
-									{
-										GetPlayerName(playerid, sendername, sizeof(sendername));
-										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-										format(string, sizeof(string), "* Zamontowa≥eú graczowi %s nitro(pojemnoúÊ: 5) w jego samochodzie [-500000$](wiÍkszy skill-wiÍksza pojemnoúÊ)",giveplayer);
-										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string), "* Mechanik %s zamontowa≥ nitro o pojemnoúci 5 w twoim samochodzie",sendername);
-										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-										AddVehicleComponent(pojazd, 1008);
-										DajKase(playerid, -NITRO_D);
-                                        if(GetPlayerOrg(playerid) > 0) {
-                                            SejfR_Add(GetPlayerOrg(playerid), floatround((NITRO_D/100) * 50));
-                                        } else {
-                                            Sejf_Add(GetPlayerFraction(playerid), floatround((NITRO_D/100) * 50));
-                                        }
-                                        format(string, sizeof(string), "~r~-$%d", NITRO_D);
-										GameTextForPlayer(playerid, string, 5000, 1);
-										PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-										if(playa != playerid)
-										{
-											PlayerInfo[playerid][pMechSkill] ++;
-											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-											PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-										}
-										CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1008;
-									}
-									else if(PlayerInfo[playerid][pMechSkill] >= 100)
-									{
-										GetPlayerName(playerid, sendername, sizeof(sendername));
-										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-										format(string, sizeof(string), "* Zamontowa≥eú graczowi %s nitro(pojemnoúÊ: 10) w jego samochodzie [-500000$](wiÍkszy skill-wiÍksza pojemnoúÊ)",giveplayer);
-										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string), "* Mechanik %s zamontowa≥ nitro o pojemnoúci: 10 w twoim samochodzie",sendername);
-										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-										AddVehicleComponent(pojazd, 1010);
-										DajKase(playerid, -NITRO_D);
-                                        if(GetPlayerOrg(playerid) > 0) {
-                                            SejfR_Add(GetPlayerOrg(playerid), floatround((NITRO_D/100) * 50));
-                                        } else {
-                                            Sejf_Add(GetPlayerFraction(playerid), floatround((NITRO_D/100) * 50));
-                                        }
-                                        format(string, sizeof(string), "~r~-$%d", NITRO_D);
-										GameTextForPlayer(playerid, string, 5000, 1);
-										PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-										if(playa != playerid)
-										{
-											PlayerInfo[playerid][pMechSkill] ++;
-											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-											PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-										}
-										CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1010;
-									}
-									else
-									{
-										GetPlayerName(playerid, sendername, sizeof(sendername));
-										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-										format(string, sizeof(string), "* Zamontowa≥eú graczowi %s nitro(pojemnoúÊ: 2) w jego samochodzie [-500000$](wiÍkszy skill-wiÍksza pojemnoúÊ)",giveplayer);
-										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string), "* Mechanik %s zamontowa≥ nitro o pojemnoúci 2 w twoim samochodzie",sendername);
-										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-										AddVehicleComponent(pojazd, 1009);
-										DajKase(playerid, -NITRO_D);
-                                        if(GetPlayerOrg(playerid) > 0) {
-                                            SejfR_Add(GetPlayerOrg(playerid), floatround((NITRO_D/100) * 50));
-                                        } else {
-                                            Sejf_Add(GetPlayerFraction(playerid), floatround((NITRO_D/100) * 50));
-                                        }
-                                        format(string, sizeof(string), "~r~-$%d", NITRO_D);
-										GameTextForPlayer(playerid, string, 5000, 1);
-										PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-										if(playa != playerid)
-										{
-											PlayerInfo[playerid][pMechSkill] ++;
-											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-											PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-										}
-										CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
-									}
-								}
-								else
-								{
-									sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci pieniÍdzy (500000$)");
-								}
-							}
-							else
-							{
-								sendErrorMessage(playerid, "Gracz nie jest w samochodzie");
-							}
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Gracz jest za daleko");
-						}
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie ma takiego gracza");
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteú w jednym z warsztatÛw sygnowanym czerwonym szyldem z pojazdem");
-				}
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nie jesteú mechanikiem");
-		}
-	}
-	return 1;
+
+            if(IsPlayerConnected(playa))
+            {
+                if(playa != INVALID_PLAYER_ID)
+                {
+                    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+                    {
+                        if(IsPlayerInAnyVehicle(playa))
+                        {
+                            if(kaska[playerid] > 5000)
+                            {
+                                new pojazd = GetPlayerVehicleID(playa);
+                                if(!IsCarOwner(playa, pojazd))
+                                    return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie naleøy do tego gracza.");
+
+                                if(PlayerInfo[playerid][pMechSkill] <= 50)
+                                {
+                                    GetPlayerName(playerid, sendername, sizeof(sendername));
+                                    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                    format(string, sizeof(string), "* Zamontowa≥eú graczowi %s nitro(pojemnoúÊ: 2) w jego samochodzie [-5000$](wiÍkszy skill-wiÍksza pojemnoúÊ)",giveplayer);
+                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ nitro o pojemnoúci 2 w twoim samochodzie",sendername);
+                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                    AddVehicleComponent(pojazd, 1009);
+                                    DajKase(playerid, -5000);
+                                    format(string, sizeof(string), "~r~-$%d", 5000);
+                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                    if(playa != playerid)
+                                    {
+                                        PlayerInfo[playerid][pMechSkill] ++;
+                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                    }
+                                    CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
+                                }
+                                else if(PlayerInfo[playerid][pMechSkill] >= 50 && PlayerInfo[playerid][pMechSkill] <= 99)
+                                {
+                                    GetPlayerName(playerid, sendername, sizeof(sendername));
+                                    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                    format(string, sizeof(string), "* Zamontowa≥eú graczowi %s nitro(pojemnoúÊ: 5) w jego samochodzie [-5000$](wiÍkszy skill-wiÍksza pojemnoúÊ)",giveplayer);
+                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ nitro o pojemnoúci 5 w twoim samochodzie",sendername);
+                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                    AddVehicleComponent(pojazd, 1008);
+                                    DajKase(playerid, -5000);
+                                    format(string, sizeof(string), "~r~-$%d", 5000);
+                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                    if(playa != playerid)
+                                    {
+                                        PlayerInfo[playerid][pMechSkill] ++;
+                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                    }
+                                    CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1008;
+                                }
+                                else if(PlayerInfo[playerid][pMechSkill] >= 100)
+                                {
+                                    GetPlayerName(playerid, sendername, sizeof(sendername));
+                                    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                    format(string, sizeof(string), "* Zamontowa≥eú graczowi %s nitro(pojemnoúÊ: 10) w jego samochodzie [-5000$](wiÍkszy skill-wiÍksza pojemnoúÊ)",giveplayer);
+                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ nitro o pojemnoúci: 10 w twoim samochodzie",sendername);
+                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                    AddVehicleComponent(pojazd, 1010);
+                                    DajKase(playerid, -5000);
+                                    format(string, sizeof(string), "~r~-$%d", 5000);
+                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                    if(playa != playerid)
+                                    {
+                                        PlayerInfo[playerid][pMechSkill] ++;
+                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                    }
+                                    CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1010;
+                                }
+                                else
+                                {
+                                    GetPlayerName(playerid, sendername, sizeof(sendername));
+                                    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                    format(string, sizeof(string), "* Zamontowa≥eú graczowi %s nitro(pojemnoúÊ: 2) w jego samochodzie [-5000$](wiÍkszy skill-wiÍksza pojemnoúÊ)",giveplayer);
+                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ nitro o pojemnoúci 2 w twoim samochodzie",sendername);
+                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                    AddVehicleComponent(pojazd, 1009);
+                                    DajKase(playerid, -5000);
+                                    format(string, sizeof(string), "~r~-$%d", 5000);
+                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                    if(playa != playerid)
+                                    {
+                                        PlayerInfo[playerid][pMechSkill] ++;
+                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                    }
+                                    CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
+                                }
+                            }
+                            else
+                            {
+                                SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczajπcej iloúci pieniÍdzy (5000$)");
+                            }
+                        }
+                        else
+                        {
+                            SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
+                        }
+                    }
+                    else
+                    {
+                        SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
+                    }
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
+                }
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "Nie jesteú mechanikiem");
+        }
+    }
+    return 1;
 }
 
 CMD:hydraulika(playerid, params[])
 {
-	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
+    new string[256];
+    new sendername[MAX_PLAYER_NAME];
+    new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
-	 	{
-	    	new playa;
-			if( sscanf(params, "k<fix>", playa))
-			{
-				sendTipMessage(playerid, "Uøyj /hydraulika [Nick/ID]");
-				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt zamontowania to: 250 000$");
-				return 1;
-			}
+        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        {
+            if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteú w warsztacie, w ktÛrym moøna prowadziÊ tuning");
+            new playa;
+            if( sscanf(params, "k<fix>", playa))
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "UØYJ: /hydraulika [Nick/ID]");
+                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt zamontowania to: 10 000$");
+                return 1;
+            }
 
-			if(IsPlayerConnected(playa))
-		    {
-				if(IsAtWarsztat(playerid))
-				{
-					if(playa != INVALID_PLAYER_ID)
-					{
-						if(GetDistanceBetweenPlayers(playerid,playa) < 10)
-						{
-							if(IsPlayerInAnyVehicle(playa))
-							{
-								if(kaska[playerid] > HYDRA_D)
-								{
-									if(PlayerInfo[playerid][pMechSkill] >= 50)
-									{
-										new pojazd = GetPlayerVehicleID(playa);
-										if(!IsCarOwner(playa, pojazd))
-											return sendErrorMessage(playerid, "Ten pojazd nie naleøy do tego gracza.");
+            if(IsPlayerConnected(playa))
+            {
+                if(playa != INVALID_PLAYER_ID)
+                {
+                    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+                    {
+                        if(IsPlayerInAnyVehicle(playa))
+                        {
+                            if(kaska[playerid] > 10000)
+                            {
+                                if(PlayerInfo[playerid][pMechSkill] >= 50)
+                                {
+                                    new pojazd = GetPlayerVehicleID(playa);
+                                    if(!IsCarOwner(playa, pojazd))
+                                        return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie naleøy do tego gracza.");
 
-										AddVehicleComponent(pojazd,1087);//hydraulika
-										GetPlayerName(playerid, sendername, sizeof(sendername));
-										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-										format(string, sizeof(string), "* Zamontowa≥eú graczowi %s hydraulike (-250 000$)",giveplayer);
-										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string), "* Mechanik %s zamontowa≥ hydraulike w twoim samochodzie",sendername);
-										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-										format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje hydraulike w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-										ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-										DajKase(playerid, -HYDRA_D);
-                                        if(GetPlayerOrg(playerid) > 0) {
-                                            SejfR_Add(GetPlayerOrg(playerid), floatround((HYDRA_D/100) * 50));
-                                        } else {
-                                            Sejf_Add(GetPlayerFraction(playerid), floatround((HYDRA_D/100) * 50));
-                                        }
-                                        format(string, sizeof(string), "~r~-$%d", HYDRA_D);
-										GameTextForPlayer(playerid, string, 5000, 1);
-										PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-										if(playa != playerid)
-										{
-											PlayerInfo[playerid][pMechSkill] ++;
-											SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-											PlayerPlaySound(playa, 1141, 0.0, 0.0, 0.0);
-										}
-										CarData[VehicleUID[pojazd][vUID]][c_bHydraulika] = true;
-									}
-									else
-									{
-										sendErrorMessage(playerid, "Musisz mieÊ 2 skill mechanika aby montowaÊ hydraulike.");
-									}
-								}
-								else
-								{
-									sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci pieniÍdzy (250 000$)");
-								}
-							}
-							else
-							{
-								sendErrorMessage(playerid, "Gracz nie jest w samochodzie");
-							}
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Gracz nie jest za daleko");
-						}
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie ma takiego gracza");
-					}
-				}
-				else
-				{
-				sendErrorMessage(playerid, "Nie jesteú w jednym z warsztatÛw sygnowanym czerwonym szyldem z pojazdem");
-				}
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nie jesteú mechanikiem");
-		}
-	}
-	return 1;
+                                    AddVehicleComponent(pojazd,1087);//hydraulika
+                                    GetPlayerName(playerid, sendername, sizeof(sendername));
+                                    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                    format(string, sizeof(string), "* Zamontowa≥eú graczowi %s hydraulike (-10 000$)",giveplayer);
+                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ hydraulike w twoim samochodzie",sendername);
+                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje hydraulike w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                    DajKase(playerid, -10000);
+                                    format(string, sizeof(string), "~r~-$%d", 10000);
+                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
+                                    if(playa != playerid)
+                                    {
+                                        PlayerInfo[playerid][pMechSkill] ++;
+                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                        PlayerPlaySound(playa, 1141, 0.0, 0.0, 0.0);
+                                    }
+                                    CarData[VehicleUID[pojazd][vUID]][c_bHydraulika] = true;
+                                }
+                                else
+                                {
+                                    SendClientMessage(playerid, COLOR_GRAD2, "Musisz mieÊ 2 skill mechanika aby montowaÊ hydraulike.");
+                                }
+                            }
+                            else
+                            {
+                                SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczajπcej iloúci pieniÍdzy (10 000$)");
+                            }
+                        }
+                        else
+                        {
+                            SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
+                        }
+                    }
+                    else
+                    {
+                        SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
+                    }
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
+                }
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "Nie jesteú mechanikiem");
+        }
+    }
+    return 1;
 }
 
 CMD:maluj(playerid, params[]) return cmd_malunek(playerid, params);
 CMD:malunek(playerid, params[])
 {
-	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
+    new string[256];
+    new sendername[MAX_PLAYER_NAME];
+    new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
-	 	{
-	    	new playa, malunek;
-			if( sscanf(params, "k<fix>d", playa, malunek))
-			{
-				sendTipMessage(playerid, "Uøyj /malunek [Nick/ID] [id malunku]");
-				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt namalowania to: 20 000$ , aby zobaczyÊ liste malunkÛw wpisz /malunki");
-				return 1;
-			}
+        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        {
+            if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteú w warsztacie, w ktÛrym moøna prowadziÊ tuning");
+            new playa, malunek;
+            if( sscanf(params, "k<fix>d", playa, malunek))
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "UØYJ: /malunek [Nick/ID] [id malunku]");
+                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt namalowania to: 20 000$ , aby zobaczyÊ liste malunkÛw wpisz /malunki");
+                return 1;
+            }
 
-			if(IsPlayerConnected(playa))
-		    {
-   				if(playa != INVALID_PLAYER_ID)
-			    {
-					if(IsAtWarsztat(playerid))
-					{
-						if(GetDistanceBetweenPlayers(playerid,playa) < 10)
-						{
-							if(IsPlayerInAnyVehicle(playa))
-							{
-								if(kaska[playerid] > 20000)
-								{
-									if(PlayerInfo[playerid][pMechSkill] >= 100)
-									{
-										new pojazd = GetPlayerVehicleID(playa);
-										if(!IsCarOwner(playa, pojazd))
-											return sendErrorMessage(playerid, "Ten pojazd nie naleøy do tego gracza.");
+            if(IsPlayerConnected(playa))
+            {
+                if(playa != INVALID_PLAYER_ID)
+                {
+                    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+                    {
+                        if(IsPlayerInAnyVehicle(playa))
+                        {
+                            if(kaska[playerid] > 20000)
+                            {
+                                if(PlayerInfo[playerid][pMechSkill] >= 100)
+                                {
+                                    new pojazd = GetPlayerVehicleID(playa);
+                                    if(!IsCarOwner(playa, pojazd))
+                                        return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie naleøy do tego gracza.");
 
-										new model = GetVehicleModel(pojazd);
-										if(model == 412 || model >= 534 && model <= 536 || model >= 558 && model <= 562 || model >= 565 && model <= 567 || model == 575 || model == 576 || model == 483)
-										{
-											if(malunek >= 0 && malunek <= 3)
-											{
-												GetPlayerName(playerid, sendername, sizeof(sendername));
-												GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-												format(string, sizeof(string), "* Zrobi≥eú graczowi %s malunek samochodu (-20 000$)",giveplayer);
-												SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-												format(string, sizeof(string), "* Mechanik %s zrobi≥ malnuek na twoim %s",sendername, VehicleNames[model-400]);
-												SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-												format(string, sizeof(string),"* Mechanik %s wyciπga sprey i tworzy malunek na %s.", sendername, VehicleNames[model-400]);
-												ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-												DajKase(playerid, -20000);
-												format(string, sizeof(string), "~r~-$%d", 20000);
-												GameTextForPlayer(playerid, string, 5000, 1);
-												ChangeVehiclePaintjob(pojazd,malunek);
-												PlayerPlaySound(playerid, 1134, 0.0, 0.0, 0.0);
-												if(playa != playerid)
-												{
-													PlayerInfo[playerid][pMechSkill] ++;
-													SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-													PlayerPlaySound(playa, 1134, 0.0, 0.0, 0.0);
-												}
-												CarData[VehicleUID[pojazd][vUID]][c_Malunek] = malunek;
-											}
-											else
-											{
-												sendTipMessage(playerid, "ID malunku od 0 do 3 (wpisz /malunki aby zobaczyÊ dostÍpne malunki)");
-											}
-										}
-										else
-										{
-											format(string, sizeof(string), "Wozu %s nie moøna pomalowaÊ, wpisz /malunki aby zobaczyÊ jakie wozy moøna pomalowaÊ", VehicleNames[GetVehicleModel(pojazd)-400]);
-											sendTipMessage(playerid, string);
-										}
-									}
-									else
-									{
-										sendErrorMessage(playerid, "Musisz mieÊ 3 skill mechanika");
-									}
-								}
-								else
-								{
-									sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci pieniÍdzy (20 000$)");
-								}
-							}
-							else
-							{
-								sendErrorMessage(playerid, "Gracz nie jest w samochodzie");
-							}
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Gracz nie jest za daleko");
-						}
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie ma takiego gracza");
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteú w jednym z warsztatÛw sygnowanym czerwonym szyldem z pojazdem");
-				}
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nie jesteú mechanikiem");
-		}
-	}
-	return 1;
+                                    new model = GetVehicleModel(pojazd);
+                                    if(model == 412 || model >= 534 && model <= 536 || model >= 558 && model <= 562 || model >= 565 && model <= 567 || model == 575 || model == 576 || model == 483)
+                                    {
+                                        if(malunek >= 0 && malunek <= 3)
+                                        {
+                                            GetPlayerName(playerid, sendername, sizeof(sendername));
+                                            GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                            format(string, sizeof(string), "* Zrobi≥eú graczowi %s malunek samochodu (-20 000$)",giveplayer);
+                                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                            format(string, sizeof(string), "* Mechanik %s zrobi≥ malnuek na twoim %s",sendername, VehicleNames[model-400]);
+                                            SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                            format(string, sizeof(string),"* Mechanik %s wyciπga sprey i tworzy malunek na %s.", sendername, VehicleNames[model-400]);
+                                            ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                            DajKase(playerid, -20000);
+                                            format(string, sizeof(string), "~r~-$%d", 20000);
+                                            GameTextForPlayer(playerid, string, 5000, 1);
+                                            ChangeVehiclePaintjob(pojazd,malunek);
+                                            PlayerPlaySound(playerid, 1134, 0.0, 0.0, 0.0);
+                                            if(playa != playerid)
+                                            {
+                                                PlayerInfo[playerid][pMechSkill] ++;
+                                                SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                PlayerPlaySound(playa, 1134, 0.0, 0.0, 0.0);
+                                            }
+                                            CarData[VehicleUID[pojazd][vUID]][c_Malunek] = malunek;
+                                        }
+                                        else
+                                        {
+                                            SendClientMessage(playerid, COLOR_GRAD2, "ID malunku od 0 do 3 (wpisz /malunki aby zobaczyÊ dostÍpne malunki)");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        format(string, sizeof(string), "Wozu %s nie moøna pomalowaÊ, wpisz /malunki aby zobaczyÊ jakie wozy moøna pomalowaÊ", VehicleNames[GetVehicleModel(pojazd)-400]);
+                                        SendClientMessage(playerid, COLOR_GRAD4, string);
+                                    }
+                                }
+                                else
+                                {
+                                    SendClientMessage(playerid, COLOR_GRAD4, "Musisz mieÊ 3 skill mechanika");
+                                }
+                            }
+                            else
+                            {
+                                SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczajπcej iloúci pieniÍdzy (20 000$)");
+                            }
+                        }
+                        else
+                        {
+                            SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
+                        }
+                    }
+                    else
+                    {
+                        SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
+                    }
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
+                }
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "Nie jesteú mechanikiem");
+        }
+    }
+    return 1;
 }
 
 
 CMD:zmienfelge(playerid, params[]) return cmd_felga(playerid, params);
 CMD:felga(playerid, params[])
 {
-	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
+    new string[256];
+    new sendername[MAX_PLAYER_NAME];
+    new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
-	 	{
-	    	new playa, idfelgi;
-			if( sscanf(params, "k<fix>d", playa, idfelgi))
-			{
-				sendTipMessage(playerid, "Uøyj /felga [Nick/ID] [id felgi]");
-				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt tuningu to: 250 000$ , aby zobaczyÊ liste felg wpisz /felgi");
-				return 1;
-			}
+        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        {
+            if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteú w warsztacie, w ktÛrym moøna prowadziÊ tuning");
+            new playa, idfelgi;
+            if( sscanf(params, "k<fix>d", playa, idfelgi))
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "UØYJ: /felga [Nick/ID] [id felgi]");
+                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt tuningu to: 15 000$ , aby zobaczyÊ liste felg wpisz /felgi");
+                return 1;
+            }
 
-			if(IsPlayerConnected(playa))
-		    {
-   				if(playa != INVALID_PLAYER_ID)
-			    {
-					if(IsAtWarsztat(playerid))
-					{
-						if(GetDistanceBetweenPlayers(playerid,playa) < 10)
-						{
-							if(IsPlayerInAnyVehicle(playa))
-							{
-								if(kaska[playerid] > FELGA_D)
-								{
-									if(idfelgi >= 1 && idfelgi <= 17)
-									{
-										if(PlayerInfo[playerid][pMechSkill] >= 100)
-										{
-											new pojazd = GetPlayerVehicleID(playa);
-											if(!IsCarOwner(playa, pojazd))
-												return sendErrorMessage(playerid, "Ten pojazd nie naleøy do tego gracza.");
+            if(IsPlayerConnected(playa))
+            {
+                if(playa != INVALID_PLAYER_ID)
+                {
+                    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+                    {
+                        if(IsPlayerInAnyVehicle(playa))
+                        {
+                            if(kaska[playerid] > 15000)
+                            {
+                                if(idfelgi >= 1 && idfelgi <= 17)
+                                {
+                                    if(PlayerInfo[playerid][pMechSkill] >= 100)
+                                    {
+                                        new pojazd = GetPlayerVehicleID(playa);
+                                        if(!IsCarOwner(playa, pojazd))
+                                            return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie naleøy do tego gracza.");
 
-											new felga = idfelgi+1072;
-											GetPlayerName(playerid, sendername, sizeof(sendername));
-											GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-											format(string, sizeof(string), "* Zamontowa≥eú nowe felgi graczowi %s (koszt -250 000$)",giveplayer);
-											SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-											format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowe felgi",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-											SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-											format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nowe felgi w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-											ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-											DajKase(playerid, -FELGA_D);
-                                            if(GetPlayerOrg(playerid) > 0) {
-                                                SejfR_Add(GetPlayerOrg(playerid), floatround((FELGA_D/100) * 50));
-                                            } else {
-                                                Sejf_Add(GetPlayerFraction(playerid), floatround((FELGA_D/100) * 50));
-                                            }
-											format(string, sizeof(string), "~r~-$%d", FELGA_D);
-											GameTextForPlayer(playerid, string, 5000, 1);
-											PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-											if(felga >= 173 && felga <= 1085)
-											{
-												AddVehicleComponent(pojazd,felga);//felga1079
-												CarData[VehicleUID[pojazd][vUID]][c_Felgi] = felga;
-											}
-											else if(felga >= 1086 && felga <= 1088)
-											{
-												AddVehicleComponent(pojazd,felga+10);//felga
-												CarData[VehicleUID[pojazd][vUID]][c_Felgi] = felga+10;
-											}
-											else if(idfelgi == 17)
-											{
-												AddVehicleComponent(pojazd,1025);//felga
-												CarData[VehicleUID[pojazd][vUID]][c_Felgi] = 1025;
-											}
-											if(playa != playerid)
-											{
-												PlayerInfo[playerid][pMechSkill] ++;
-												SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-												PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-											}
-										}
-										else
-										{
-											SendClientMessage(playerid, COLOR_GRAD2, "Musisz mieÊ 3 skill mechanika");
-										}
-									}
-								}
-								else
-								{
-									sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci pieniÍdzy (250 000$)");
-								}
-							}
-							else
-							{
-								sendErrorMessage(playerid, "Gracz nie jest w samochodzie");
-							}
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Gracz nie jest za daleko");
-						}
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie ma takiego gracza");
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteú w jednym z warsztatÛw sygnowanym czerwonym szyldem z pojazdem");
-				}
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nie jesteú mechanikiem");
-		}
-	}
-	return 1;
+                                        new felga = idfelgi+1072;
+                                        GetPlayerName(playerid, sendername, sizeof(sendername));
+                                        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                        format(string, sizeof(string), "* Zamontowa≥eú nowe felgi graczowi %s (koszt -15 000$)",giveplayer);
+                                        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                        format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowe felgi",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                        format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nowe felgi w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                        ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                        DajKase(playerid, -15000);
+                                        format(string, sizeof(string), "~r~-$%d", 15000);
+                                        GameTextForPlayer(playerid, string, 5000, 1);
+                                        PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                        if(felga >= 173 && felga <= 1085)
+                                        {
+                                            AddVehicleComponent(pojazd,felga);//felga1079
+                                            CarData[VehicleUID[pojazd][vUID]][c_Felgi] = felga;
+                                        }
+                                        else if(felga >= 1086 && felga <= 1088)
+                                        {
+                                            AddVehicleComponent(pojazd,felga+10);//felga
+                                            CarData[VehicleUID[pojazd][vUID]][c_Felgi] = felga+10;
+                                        }
+                                        else if(idfelgi == 17)
+                                        {
+                                            AddVehicleComponent(pojazd,1025);//felga
+                                            CarData[VehicleUID[pojazd][vUID]][c_Felgi] = 1025;
+                                        }
+                                        if(playa != playerid)
+                                        {
+                                            PlayerInfo[playerid][pMechSkill] ++;
+                                            SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                            PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        SendClientMessage(playerid, COLOR_GRAD2, "Musisz mieÊ 3 skill mechanika");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczajπcej iloúci pieniÍdzy (15000$)");
+                            }
+                        }
+                        else
+                        {
+                            SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest w samochodzie");
+                        }
+                    }
+                    else
+                    {
+                        SendClientMessage(playerid, COLOR_WHITE, "Gracz nie jest za daleko");
+                    }
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_WHITE, "Nie ma takiego gracza");
+                }
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "Nie jesteú mechanikiem");
+        }
+    }
+    return 1;
 }
 
 CMD:dajfiltr(playerid, params[])
@@ -11400,373 +11376,330 @@ CMD:unblock(playerid, params[])
 CMD:spojler(playerid, params[]) return cmd_spoiler(playerid, params);
 CMD:spoiler(playerid, params[])
 {
-	new string[256];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
+    new string[256];
+    new giveplayer[MAX_PLAYER_NAME];
+    new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
-	 	{
-			new playa, spojlerid;
-			if( sscanf(params, "k<fix>d", playa, spojlerid))
-			{
-				sendTipMessage(playerid, "Uøyj /spojler [Nick/ID] [id spojlera]");
-				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt spojera to: $200 000, aby zobaczyÊ listÍ spojlerÛw wpisz /spojlery");
-				return 1;
-			}
-			if(IsPlayerConnected(playa))
-			{
-				if(playa != INVALID_PLAYER_ID)
-				{
-					if(GetDistanceBetweenPlayers(playerid,playa) < 10)
-					{
-						if(IsPlayerInAnyVehicle(playa))
-						{
-							if(kaska[playerid] > SPOILER_D)
-							{
-								if(PlayerInfo[playerid][pMechSkill] >= 200)
-								{
-									if(spojlerid >= 1 && spojlerid <= 10)
-									{
-										new pojazd = GetPlayerVehicleID(playa);
-										GetPlayerName(playerid, sendername, sizeof(sendername));
-										GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-										if(IsASpojler(pojazd))
-										{
-											if(spojlerid < 5)
-											{
-												new spojler = spojlerid+999;
-												format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-												SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-												format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-												SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-												format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-												ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-												DajKase(playerid, -SPOILER_D);
-                                                if(GetPlayerOrg(playerid) > 0) {
-                                                    SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                } else {
-                                                    Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
-                                                }
-												format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-												GameTextForPlayer(playerid, string, 5000, 1);
-												PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-												AddVehicleComponent(pojazd,spojler);//spojler
+        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        {
+            if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteú w warsztacie, w ktÛrym moøna prowadziÊ tuning");
+            new playa, spojlerid;
+            if( sscanf(params, "k<fix>d", playa, spojlerid))
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "UØYJ: /spojler [Nick/ID] [id spojlera]");
+                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt spojera to: 25 000$ , aby zobaczyÊ listÍ spojlerÛw wpisz /spojlery");
+                return 1;
+            }
+
+            if(IsPlayerConnected(playa))
+            {
+                if(playa != INVALID_PLAYER_ID)
+                {
+                    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+                    {
+                        if(IsPlayerInAnyVehicle(playa))
+                        {
+                            if(kaska[playerid] > 25000)
+                            {
+                                if(PlayerInfo[playerid][pMechSkill] >= 200)
+                                {
+                                    if(spojlerid >= 1 && spojlerid <= 10)
+                                    {
+                                        new pojazd = GetPlayerVehicleID(playa);
+                                        GetPlayerName(playerid, sendername, sizeof(sendername));
+                                        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                                        if(IsASpojler(pojazd))
+                                        {
+                                            if(spojlerid < 5)
+                                            {
+                                                new spojler = spojlerid+999;
+                                                format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                DajKase(playerid, -25000);
+                                                format(string, sizeof(string), "~r~-$%d", 25000);
+                                                GameTextForPlayer(playerid, string, 5000, 1);
+                                                PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                AddVehicleComponent(pojazd,spojler);//spojler
                                                 CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-												if(playa != playerid)
-												{
-													PlayerInfo[playerid][pMechSkill] ++;
-													SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-													PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-												}
-											}
-											else if(spojlerid >= 5 && spojlerid <= 7)
-											{
-												new spojler = spojlerid+1009;
-												format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-												SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-												format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-												SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-												format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-												ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-												DajKase(playerid, -SPOILER_D);
-                                                if(GetPlayerOrg(playerid) > 0) {
-                                                    SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                } else {
-                                                    Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
+                                                if(playa != playerid)
+                                                {
+                                                    PlayerInfo[playerid][pMechSkill] ++;
+                                                    SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                    PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
                                                 }
-												format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-												GameTextForPlayer(playerid, string, 5000, 1);
-												PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-												AddVehicleComponent(pojazd,spojler);//spojler
+                                            }
+                                            else if(spojlerid >= 5 && spojlerid <= 7)
+                                            {
+                                                new spojler = spojlerid+1009;
+                                                format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                DajKase(playerid, -25000);
+                                                format(string, sizeof(string), "~r~-$%d", 25000);
+                                                GameTextForPlayer(playerid, string, 5000, 1);
+                                                PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                AddVehicleComponent(pojazd,spojler);//spojler
                                                 CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-												if(playa != playerid)
-												{
-													PlayerInfo[playerid][pMechSkill] ++;
-													SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-													PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-												}
-											}
-											else if(spojlerid == 8)
-											{
-												new spojler = 1023;
-												format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-												SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-												format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-												SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-												format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-												ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-												DajKase(playerid, -SPOILER_D);
-                                                if(GetPlayerOrg(playerid) > 0) {
-                                                    SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                } else {
-                                                    Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
+                                                if(playa != playerid)
+                                                {
+                                                    PlayerInfo[playerid][pMechSkill] ++;
+                                                    SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                    PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
                                                 }
-												format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-												GameTextForPlayer(playerid, string, 5000, 1);
-												PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-												AddVehicleComponent(pojazd,spojler);//spojler
+                                            }
+                                            else if(spojlerid == 8)
+                                            {
+                                                new spojler = 1023;
+                                                format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                DajKase(playerid, -25000);
+                                                format(string, sizeof(string), "~r~-$%d", 25000);
+                                                GameTextForPlayer(playerid, string, 5000, 1);
+                                                PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                AddVehicleComponent(pojazd,spojler);//spojler
                                                 CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-												if(playa != playerid)
-												{
-													PlayerInfo[playerid][pMechSkill] ++;
-													SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-													PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-												}
-											}
-											else if(spojlerid >= 9)
-											{
-												if(GetVehicleModel(pojazd) == 558)
-												{
-													new spojler = 1154+spojlerid;
-													format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-													SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-													DajKase(playerid, -SPOILER_D);
-                                                    if(GetPlayerOrg(playerid) > 0) {
-                                                        SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                    } else {
-                                                        Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
-                                                    }
-													format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-													GameTextForPlayer(playerid, string, 5000, 1);
-													PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-													AddVehicleComponent(pojazd,spojler);//spojler
+                                                if(playa != playerid)
+                                                {
+                                                    PlayerInfo[playerid][pMechSkill] ++;
+                                                    SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                    PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                                }
+                                            }
+                                            else if(spojlerid >= 9)
+                                            {
+                                                if(GetVehicleModel(pojazd) == 558)
+                                                {
+                                                    new spojler = 1154+spojlerid;
+                                                    format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                    DajKase(playerid, -25000);
+                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                    AddVehicleComponent(pojazd,spojler);//spojler
                                                     CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-													if(playa != playerid)
-													{
-														PlayerInfo[playerid][pMechSkill] ++;
-														SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-														PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-													}
-												}
-												else if(GetVehicleModel(pojazd) == 559)
-												{
-													new spojler;
-													if(spojlerid == 9)
-													{
-														spojler = 1162;
-													}
-													else if(spojlerid == 10)
-													{
-														spojler = 1158;
-													}
-													format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-													SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-													DajKase(playerid, -SPOILER_D);
-                                                    if(GetPlayerOrg(playerid) > 0) {
-                                                        SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                    } else {
-                                                        Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
+                                                    if(playa != playerid)
+                                                    {
+                                                        PlayerInfo[playerid][pMechSkill] ++;
+                                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
                                                     }
-													format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-													GameTextForPlayer(playerid, string, 5000, 1);
-													PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-													AddVehicleComponent(pojazd,spojler);//spojler
-                                                    CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-													if(playa != playerid)
-													{
-														PlayerInfo[playerid][pMechSkill] ++;
-														SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-														PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-													}
-												}
-												else if(GetVehicleModel(pojazd) == 560)
-												{
-													new spojler;
-													if(spojlerid == 9)
-													{
-														spojler = 1138;
-													}
-													else if(spojlerid == 10)
-													{
-														spojler = 1139;
-													}
-													format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-													SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-													DajKase(playerid, -SPOILER_D);
-                                                    if(GetPlayerOrg(playerid) > 0) {
-                                                        SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                    } else {
-                                                        Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
+                                                }
+                                                else if(GetVehicleModel(pojazd) == 559)
+                                                {
+                                                    new spojler;
+                                                    if(spojlerid == 9)
+                                                    {
+                                                        spojler = 1162;
                                                     }
-													format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-													GameTextForPlayer(playerid, string, 5000, 1);
-													PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-													AddVehicleComponent(pojazd,spojler);//spojler
-                                                    CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-													if(playa != playerid)
-													{
-														PlayerInfo[playerid][pMechSkill] ++;
-														SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-														PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-													}
-												}
-												else if(GetVehicleModel(pojazd) == 561)
-												{
-													new spojler;
-													if(spojlerid == 9)
-													{
-														spojler = 1058;
-													}
-													else if(spojlerid == 10)
-													{
-														spojler = 1060;
-													}
-													format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-													SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-													DajKase(playerid, -SPOILER_D);
-                                                    if(GetPlayerOrg(playerid) > 0) {
-                                                        SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                    } else {
-                                                        Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
+                                                    else if(spojlerid == 10)
+                                                    {
+                                                        spojler = 1158;
                                                     }
-													format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-													GameTextForPlayer(playerid, string, 5000, 1);
-													PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-													AddVehicleComponent(pojazd,spojler);//spojler
+                                                    format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                    DajKase(playerid, -25000);
+                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                    AddVehicleComponent(pojazd,spojler);//spojler
                                                     CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-													if(playa != playerid)
-													{
-														PlayerInfo[playerid][pMechSkill] ++;
-														SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-														PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-													}
-												}
-												else if(GetVehicleModel(pojazd) == 562)
-												{
-													new spojler;
-													if(spojlerid == 9)
-													{
-														spojler = 1146;
-													}
-													else if(spojlerid == 10)
-													{
-														spojler = 1147;
-													}
-													format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-													SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-													DajKase(playerid, -SPOILER_D);
-                                                    if(GetPlayerOrg(playerid) > 0) {
-                                                        SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                    } else {
-                                                        Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
+                                                    if(playa != playerid)
+                                                    {
+                                                        PlayerInfo[playerid][pMechSkill] ++;
+                                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
                                                     }
-													format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-													GameTextForPlayer(playerid, string, 5000, 1);
-													PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-													AddVehicleComponent(pojazd,spojler);//spojler
-                                                    CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-													if(playa != playerid)
-													{
-														PlayerInfo[playerid][pMechSkill] ++;
-														SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-														PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-													}
-												}
-												else if(GetVehicleModel(pojazd) == 565)
-												{
-													new spojler;
-													if(spojlerid == 9)
-													{
-														spojler = 1049;
-													}
-													else if(spojlerid == 10)
-													{
-														spojler = 1050;
-													}
-													format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -200 000$)", giveplayer);
-													SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-													format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-													ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-													DajKase(playerid, -SPOILER_D);
-                                                    if(GetPlayerOrg(playerid) > 0) {
-                                                        SejfR_Add(GetPlayerOrg(playerid), floatround((SPOILER_D/100) * 50));
-                                                    } else {
-                                                        Sejf_Add(GetPlayerFraction(playerid), floatround((SPOILER_D/100) * 50));
+                                                }
+                                                else if(GetVehicleModel(pojazd) == 560)
+                                                {
+                                                    new spojler;
+                                                    if(spojlerid == 9)
+                                                    {
+                                                        spojler = 1138;
                                                     }
-													format(string, sizeof(string), "~r~-$%d", SPOILER_D);
-													GameTextForPlayer(playerid, string, 5000, 1);
-													PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
-													AddVehicleComponent(pojazd,spojler);//spojler
+                                                    else if(spojlerid == 10)
+                                                    {
+                                                        spojler = 1139;
+                                                    }
+                                                    format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25000$)", giveplayer);
+                                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                    DajKase(playerid, -25000);
+                                                    format(string, sizeof(string), "~r~-$%d", 2500);
+                                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                    AddVehicleComponent(pojazd,spojler);//spojler
                                                     CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
-													if(playa != playerid)
-													{
-														PlayerInfo[playerid][pMechSkill] ++;
-														SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-														PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
-													}
-												}
-												else
-												{
-													sendTipMessage(playerid, "W tym wozie nie moøna zamontowaÊ spoileru Alien ani X-Flow", COLOR_LIGHTBLUE);
-												}
-											}
-										}
-										else
-										{
-											sendErrorMessage(playerid, "W tym wozie nie moøna zamontowaÊ spoileru");
-										}
-									}
-									else
-									{
-										sendErrorMessage(playerid, "Z≥y numer spoilera");
-									}
-								}
-								else
-								{
-									sendTipMessage(playerid, "Potrzebujesz 4 skilla mechanika aby mÛc dawaÊ spojlery");
-								}
-							}
-							else
-							{
-								sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci pieniÍdzy (25 000$)");
-							}
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Gracz nie jest w samochodzie");
-						}
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Gracz nie jest za daleko");
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie ma takiego gracza");
-				}
-			}
-		}
-		else
-		{
- 			sendErrorMessage(playerid, "Nie jesteú mechanikiem");
-		}
-	}
-	return 1;
+                                                    if(playa != playerid)
+                                                    {
+                                                        PlayerInfo[playerid][pMechSkill] ++;
+                                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                                    }
+                                                }
+                                                else if(GetVehicleModel(pojazd) == 561)
+                                                {
+                                                    new spojler;
+                                                    if(spojlerid == 9)
+                                                    {
+                                                        spojler = 1058;
+                                                    }
+                                                    else if(spojlerid == 10)
+                                                    {
+                                                        spojler = 1060;
+                                                    }
+                                                    format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                    DajKase(playerid, -25000);
+                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                    AddVehicleComponent(pojazd,spojler);//spojler
+                                                    CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
+                                                    if(playa != playerid)
+                                                    {
+                                                        PlayerInfo[playerid][pMechSkill] ++;
+                                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                                    }
+                                                }
+                                                else if(GetVehicleModel(pojazd) == 562)
+                                                {
+                                                    new spojler;
+                                                    if(spojlerid == 9)
+                                                    {
+                                                        spojler = 1146;
+                                                    }
+                                                    else if(spojlerid == 10)
+                                                    {
+                                                        spojler = 1147;
+                                                    }
+                                                    format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                    DajKase(playerid, -25000);
+                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                    AddVehicleComponent(pojazd,spojler);//spojler
+                                                    CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
+                                                    if(playa != playerid)
+                                                    {
+                                                        PlayerInfo[playerid][pMechSkill] ++;
+                                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                                    }
+                                                }
+                                                else if(GetVehicleModel(pojazd) == 565)
+                                                {
+                                                    new spojler;
+                                                    if(spojlerid == 9)
+                                                    {
+                                                        spojler = 1049;
+                                                    }
+                                                    else if(spojlerid == 10)
+                                                    {
+                                                        spojler = 1050;
+                                                    }
+                                                    format(string, sizeof(string), "* Zamontowa≥eú nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+                                                    format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                                                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                                    DajKase(playerid, -25000);
+                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                                    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+                                                    AddVehicleComponent(pojazd,spojler);//spojler
+                                                    CarData[VehicleUID[pojazd][vUID]][c_Spoiler] = spojler;
+                                                    if(playa != playerid)
+                                                    {
+                                                        PlayerInfo[playerid][pMechSkill] ++;
+                                                        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+                                                        PlayerPlaySound(playa, 1133, 0.0, 0.0, 0.0);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "W tym wozie nie moøna zamontowaÊ spojleru Alien ani X-Flow");
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            SendClientMessage(playerid, COLOR_LIGHTBLUE, "W tym wozie nie moøna zamontowaÊ spojleru");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        SendClientMessage(playerid, COLOR_GREY, "Z≥y numer spojlera");
+                                    }
+                                }
+                                else
+                                {
+                                    SendClientMessage(playerid, COLOR_GREY, "Potrzebujesz 4 skilla mechanika aby mÛc dawaÊ spojlery");
+                                }
+                            }
+                            else
+                            {
+                                SendClientMessage(playerid, COLOR_GREY, "Nie masz wystarczajπcej iloúci pieniÍdzy (25 000$)");
+                            }
+                        }
+                        else
+                        {
+                            SendClientMessage(playerid, COLOR_GREY, "Gracz nie jest w samochodzie");
+                        }
+                    }
+                    else
+                    {
+                        SendClientMessage(playerid, COLOR_GREY, "Gracz nie jest za daleko");
+                    }
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_GREY, "Nie ma takiego gracza");
+                }
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_GREY, "Nie jesteú mechanikiem");
+        }
+    }
+    return 1;
 }
 
 
@@ -11775,83 +11708,84 @@ CMD:zderzaki(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-		if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
-	 	{
-   			new playa;
-			if( sscanf(params, "k<fix>", playa))
-			{
-				sendTipMessage(playerid, "Uøyj /zderzak [Nick/ID]");
-				SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt tuningu to: 250 000$");
-				return 1;
-			}
+        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        {
+            if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteú w warsztacie, w ktÛrym moøna prowadziÊ tuning");
+            new playa;
+            if( sscanf(params, "k<fix>", playa))
+            {
+                SendClientMessage(playerid, COLOR_GRAD2, "UØYJ: /zderzak [Nick/ID]");
+                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt tuningu to: 10 000$");
+                return 1;
+            }
 
 
-			if(IsPlayerConnected(playa))
-		    {
-   				if(playa != INVALID_PLAYER_ID)
-			    {
-				    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
-					{
-					    if(IsPlayerInAnyVehicle(playa))
-						{
-						    if(kaska[playerid] > ZDERZAK_D)
-							{
-							    if(PlayerInfo[playerid][pMechSkill] >= 200)
-								{
-								    if(GUIExit[playerid] == 0)
-									{
-									    mechanikid[playerid] = playa;
-									    new pojazd = GetVehicleModel(GetPlayerVehicleID(playa));
-	                                    if(pojazd >= 558 && pojazd <= 562 || pojazd == 565)//alien i x-flow
-										{
-										    ShowPlayerDialogEx(playerid, 501, DIALOG_STYLE_LIST, "Wybierz zderzaki", "X-Flow\nAlien", "Montuj", "Wyjdü");
-										}
-										else if(pojazd == 575 || pojazd == 534 || pojazd == 536 || pojazd == 567 || pojazd == 576)//lowrider
-										{
-										    ShowPlayerDialogEx(playerid, 502, DIALOG_STYLE_LIST, "Wybierz zderzaki", "Chromowe\nMasywne", "Montuj", "Wyjdü");
-										}
-										else if(pojazd == 535)//slamvan
-										{
-										    ShowPlayerDialogEx(playerid, 503, DIALOG_STYLE_LIST, "Wybierz zderzaki", "Masywne", "Montuj", "Wyjdü");
-										}
-										else
-										{
-										    sendErrorMessage(playerid, "W tym wozie nie moøna zamontowac zderzakÛw");
-										}
-									}
-								}
-								else
-								{
-								    sendTipMessage(playerid, "Musisz mieÊ 4 skill mechanika");
-								}
-			        		}
-							else
-							{
-							    sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci pieniÍdzy (250 000$)");
-							}
-						}
-						else
-						{
-						    sendErrorMessage(playerid, "Gracz nie jest w samochodzie");
-						}
+            if(IsPlayerConnected(playa))
+            {
+                if(playa != INVALID_PLAYER_ID)
+                {
+                    if(GetDistanceBetweenPlayers(playerid,playa) < 10)
+                    {
+                        if(IsPlayerInAnyVehicle(playa))
+                        {
+                            if(kaska[playerid] > 10000)
+                            {
+                                if(PlayerInfo[playerid][pMechSkill] >= 200)
+                                {
+                                    if(GUIExit[playerid] == 0)
+                                    {
+                                        mechanikid[playerid] = playa;
+                                        new pojazd = GetVehicleModel(GetPlayerVehicleID(playa));
+                                        if(pojazd >= 558 && pojazd <= 562 || pojazd == 565)//alien i x-flow
+                                        {
+                                            ShowPlayerDialogEx(playerid, 501, DIALOG_STYLE_LIST, "Wybierz zderzaki", "X-Flow\nAlien", "Montuj", "Wyjdü");
+                                        }
+                                        else if(pojazd == 575 || pojazd == 534 || pojazd == 536 || pojazd == 567 || pojazd == 576)//lowrider
+                                        {
+                                            ShowPlayerDialogEx(playerid, 502, DIALOG_STYLE_LIST, "Wybierz zderzaki", "Chromowe\nMasywne", "Montuj", "Wyjdü");
+                                        }
+                                        else if(pojazd == 535)//slamvan
+                                        {
+                                            ShowPlayerDialogEx(playerid, 503, DIALOG_STYLE_LIST, "Wybierz zderzaki", "Masywne", "Montuj", "Wyjdü");
+                                        }
+                                        else
+                                        {
+                                            SendClientMessage(playerid, COLOR_GREY, "W tym wozie nie moøna zamontowac zderzakÛw");
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 4 skill mechanika");
+                                }
+                            }
+                            else
+                            {
+                                SendClientMessage(playerid, COLOR_GREY, "Nie masz wystarczajπcej iloúci pieniÍdzy (10 000$)");
+                            }
+                        }
+                        else
+                        {
+                            SendClientMessage(playerid, COLOR_GREY, "Gracz nie jest w samochodzie");
+                        }
                     }
-					else
-					{
-					    sendErrorMessage(playerid, "Gracz nie jest za daleko");
-					}
-				}
-				else
-				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza");
-				}
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nie jesteú mechanikiem");
-		}
-	}
-	return 1;
+                    else
+                    {
+                        SendClientMessage(playerid, COLOR_GREY, "Gracz nie jest za daleko");
+                    }
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_GREY, "Nie ma takiego gracza");
+                }
+            }
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_GREY, "Nie jesteú mechanikiem");
+        }
+    }
+    return 1;
 }
 
 CMD:sprzedajneon(playerid, params[]) return cmd_dajneony(playerid, params);
@@ -11859,74 +11793,76 @@ CMD:dajneon(playerid, params[]) return cmd_dajneony(playerid, params);
 CMD:sprzedajneony(playerid, params[]) return cmd_dajneony(playerid, params);
 CMD:dajneony(playerid, params[])
 {
-	new string[256];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
+    new string[256];
+    new giveplayer[MAX_PLAYER_NAME];
+    new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
         if(IsANoA(playerid) && PlayerInfo[playerid][pRank] >= 3)
         {
-            if(IsAtWarsztat(playerid))
-    	    {
-    	        new playa;
-				if( sscanf(params, "k<fix>", playa))
-				{
-					sendTipMessage(playerid, "Uøyj /dajneon [Nick/ID]");
-					SendClientMessage(playerid, COLOR_RED, "UWAGA: Koszt zamontowania neonÛw to 3 000 000$. Automatycznie ponosi je kupujπcy. Ty zarabiasz na tym 25 000$");
-					return 1;
-				}
+            if(IsPlayerInRangeOfPoint(playerid, 25.0, 2333.9292,-1245.2999,22.5000))
+            {
+
+                new playa;
+                if( sscanf(params, "k<fix>", playa))
+                {
+                    SendClientMessage(playerid, COLOR_GRAD2, "UØYJ: /dajneon [Nick/ID]");
+                    SendClientMessage(playerid, COLOR_RED, "UWAGA: Koszt zamontowania neonÛw to 3 000 000$. Automatycznie ponosi je kupujπcy. Ty zarabiasz na tym 25 000$");
+                    return 1;
+                }
 
 
-				//
-    	        if(ProxDetectorS(10.0, playerid, playa))
-				{
-				    if(IsPlayerInAnyVehicle(playa))
-					{
-  						new pojazd = GetPlayerVehicleID(playa);
-				       	if(IsCarOwner(playa, pojazd))
-				        {
-				            if(IsABoat(pojazd) || IsAPlane(pojazd) || IsABike(pojazd))
-    	                    {
-    	                        sendErrorMessage(playerid, "W helikoptrze/samolocie/≥odzi/motorze nie moøna zamontowaÊ neonÛw.");
-    	                        return  1;
-    	                    }
-							GetPlayerName(playerid, sendername, sizeof(sendername));
-       						GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-       						format(string, sizeof(string), "%s oferuje ci sprzedaø neonÛw za 3 000 000$. Jeúli chcesz zakupiÊ neony do swojego %s wpisz /akceptuj neon.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
-       						SendClientMessage(playa, 0xFFC0CB, string);
-                   			format(string, sizeof(string), "Oferujesz %s sprzedaø neonÛw", giveplayer);
-		                    SendClientMessage(playerid, 0xFFC0CB, string);
-		                    GraczDajacyNeon[playa] = playerid;
-	       				}
-	       				else
-	       				{
-	       				    sendErrorMessage(playerid, "Pojazd w ktÛrym siedzi klient nie naleøy do niego.");
-       					}
-					}
-					else
-					{
-					    sendErrorMessage(playerid, "Ten gracz nie siedzi w samochodzie.");
-					}
-				}
-				else
-	    	    {
-	    	        sendErrorMessage(playerid, "Jesteú za daleko od gracza");
-	    	    }
-    	    }
-    	    else
-    	    {
-    	        sendErrorMessage(playerid, "Nie jesteú w warsztacie");
-    	    }
+                //
+                if(ProxDetectorS(10.0, playerid, playa))
+                {
+                    if(IsPlayerInAnyVehicle(playa))
+                    {
+                        new pojazd = GetPlayerVehicleID(playa);
+                        if(IsCarOwner(playa, pojazd))
+                        {
+                            if(IsABoat(pojazd) || IsAPlane(pojazd) || IsABike(pojazd))
+                            {
+                                SendClientMessage(playerid, COLOR_GREY, "W helikoptrze/samolocie/≥odzi/motorze nie moøna zamontowaÊ neonÛw.");
+                                return  1;
+                            }
+                            GetPlayerName(playerid, sendername, sizeof(sendername));
+                            GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+                            format(string, sizeof(string), "%s oferuje ci sprzedaø neonÛw za 3 000 000$. Jeúli chcesz zakupiÊ neony do swojego %s wpisz /akceptuj neon.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                            SendClientMessage(playa, 0xFFC0CB, string);
+                            format(string, sizeof(string), "Oferujesz %s sprzedaø neonÛw", giveplayer);
+                            SendClientMessage(playerid, 0xFFC0CB, string);
+                            GraczDajacyNeon[playa] = playerid;
+                        }
+                        else
+                        {
+                            SendClientMessage(playerid, COLOR_GREY, "Pojazd w ktÛrym siedzi klient nie naleøy do niego.");
+                        }
+                    }
+                    else
+                    {
+                        SendClientMessage(playerid, COLOR_GREY, "Ten gracz nie siedzi w samochodzie.");
+                    }
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_GREY, "Jesteú za daleko od gracza");
+                }
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GREY, "Nie jesteú w warsztacie");
+            }
         }
         else
         {
-            sendErrorMessage(playerid, "Nie jesteú z NoA/nie masz 3 lub wiÍkszej rangi");
+            SendClientMessage(playerid, COLOR_GREY, "Nie jesteú z NoA/nie masz 3 lub wiÍkszej rangi");
         }
-	}
-	//rup
-	return 1;
+    }
+    //rup
+    return 1;
 }
+
 CMD:kupkredyty(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -16384,7 +16320,7 @@ CMD:lspd(playerid, params[])
 			else
 			{
 				SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat LSPD ___________|");
-				format(string, sizeof(string), "Oficer %s: %s", sendername, params);
+				format(string, sizeof(string), "Oficer %s: %s", GetNick(playerid, true), params);
 				SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 			}
 		}
@@ -17000,9 +16936,32 @@ CMD:say(playerid, params[])
 			sendTipMessage(playerid, "Uøyj /(l)ocal [tekst]");
 			return 1;
 		}
-		format(string, sizeof(string), "%s mÛwi: %s", sendername, params);
+		/*format(string, sizeof(string), "%s mÛwi: %s", sendername, params);
 		ProxDetector(20.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-		printf("%s", string);
+		printf("%s", string); */
+        if(strlen(params) < 78)
+        {
+            format(string, sizeof(string), "%s mÛwi: %s", GetNick(playerid, true), params);
+            ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+            SetPlayerChatBubble(playerid,params,COLOR_FADE1,10.0,8000);
+        }
+        else
+        {
+            new pos = strfind(params, " ", true, strlen(params) / 2);
+            if(pos != -1)
+            {
+                new text2[64];
+
+                strmid(text2, params, pos + 1, strlen(params));
+                strdel(params, pos, strlen(params));
+
+                format(string, sizeof(string), "%s mÛwi: %s [.]", GetNick(playerid, true), params);
+                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+
+                format(string, sizeof(string), "[.] %s", text2);
+                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+            }
+        }
 		//Text 3 D
 		format(string, sizeof(string), "mÛwi: %s", params);
 		SetPlayerChatBubble(playerid,string,COLOR_FADE1,20.0,8000);
@@ -17032,11 +16991,37 @@ CMD:b(playerid, params[])
 			sendTipMessage(playerid, "Uøyj /b [CZAT OOC]");
 			return 1;
 		}
-		format(string, sizeof(string), "%s [%d] Czat OOC: (( %s ))", sendername, playerid, params);
-		ProxDetector(25.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-		printf("%s", string);
+		//format(string, sizeof(string), "%s [%d] Czat OOC: (( %s ))", sendername, playerid, params);
+		//ProxDetector(25.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+		
 		//Text 3 D
-	    format(string, sizeof(string), "(( Napisa≥: %s ))", params);
+        if(strlen(params) < 78)
+        {
+            format(string, sizeof(string), "%s [%d] Czat OOC: (( %s ))", GetNick(playerid, true), playerid, params);
+            ProxDetector(25.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+        }
+        else
+        {
+            new pos = strfind(params, " ", true, strlen(params) / 2);
+            if(pos != -1)
+            {
+                new text[64];
+
+                strmid(text, params, pos + 1, strlen(params));
+                strdel(params, pos, strlen(params));
+
+                //format(string, sizeof(string), "%s szepcze: %s", GetNick(playerid, true), params);
+                //ProxDetector(5.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+                format(string, sizeof(string), "%s [%d] Czat OOC: (( %s [.]", GetNick(playerid, true), playerid, params);
+                ProxDetector(25.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+                //format(string, sizeof(string), "[.] %s", text);
+                //ProxDetector(5.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+                format(string, sizeof(string), "[.] %s ))", text);
+                ProxDetector(25.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+            }
+        }
+	    format(string, sizeof(string), "(( %s Napisa≥: %s ))", GetNick(playerid, false), params);
+        printf("%s", string);
 		SetPlayerChatBubble(playerid,string,COLOR_FADE1,25.0,8000);
 	}
 	return 1;
@@ -17274,7 +17259,7 @@ CMD:r(playerid, params[])
         new member = GetPlayerFraction(playerid);
         if(0 < member <= 4 || member == 11 || member == 7 || member == 17)
 	    {
-            format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],sendername, params);
+            format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
             format(string, sizeof(string), "%s mÛwi przez radio: %s", sendername, params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
@@ -17285,7 +17270,7 @@ CMD:r(playerid, params[])
         else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po≥aczenie
         {
             member = GetPlayerOrg(playerid);
-            format(string, sizeof(string), "** %s %s: %s **", FamRang[member][PlayerInfo[playerid][pRank]],sendername, params);
+            format(string, sizeof(string), "** %s %s: %s **", FamRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             format(string, sizeof(string), "%s mÛwi przez radio: %s", sendername, params);
@@ -17309,11 +17294,10 @@ CMD:ro(playerid, params[]) return cmd_rooc(playerid, params);
 CMD:rooc(playerid, params[])
 {
 	new string[256];
-	new sendername[MAX_PLAYER_NAME];
+
 
     if(IsPlayerConnected(playerid))
     {
-		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "Uøyj (/r)adio [tekst]");
@@ -17322,14 +17306,14 @@ CMD:rooc(playerid, params[])
         new member = GetPlayerFraction(playerid);
 	    if(0 < member <= 4 || member == 11 || member == 7 || member == 17)
 	    {
-            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],sendername, params);
+            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
             printf("%s", string);
         }
         else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po≥aczenie
         {
             member = GetPlayerOrg(playerid);
-            format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+            format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNick(playerid, true), params);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             printf("%s", string);
@@ -18036,7 +18020,7 @@ CMD:departament(playerid, params[])
             new member = GetPlayerFraction(playerid);
             if(0 < member <= 4 || member == 17)
             {
-                format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],sendername, params);
+                format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
                 SendTeamMessage(17,COLOR_ALLDEPT,string);
                 SendTeamMessage(4, COLOR_ALLDEPT, string);
                 SendTeamMessage(3, COLOR_ALLDEPT, string);
@@ -18101,7 +18085,7 @@ CMD:depo(playerid, params[])
         new member = GetPlayerFraction(playerid);
         if(0 < member <= 4 || member == 17)
         {
-            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],sendername, params);
+            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
             SendTeamMessage(17, COLOR_ALLDEPT, string, 1);
             SendTeamMessage(4, COLOR_ALLDEPT, string, 1);
             SendTeamMessage(3, COLOR_ALLDEPT, string, 1);
@@ -18284,75 +18268,75 @@ CMD:po(playerid, params[])
 CMD:w(playerid, params[]) return cmd_wiadomosc(playerid, params);
 CMD:wiadomosc(playerid, params[])
 {
-	if(gPlayerLogged[playerid] == 0)
-	{
-		return 1;
-	}
+    if(gPlayerLogged[playerid] == 0)
+    {
+        return 1;
+    }
 
-	new giveplayerid, text[128];
-	if( sscanf(params, "k<fix>s[128]", giveplayerid, text))
-	{
-		sendTipMessage(playerid, "Uøyj /(w)iadomosc [playerid/CzÍúÊNicku] [tekst]");
-		return 1;
-	}
+    new giveplayerid, text[128];
+    if( sscanf(params, "k<fix>s[128]", giveplayerid, text))
+    {
+        sendTipMessage(playerid, "Uøyj /(w)iadomosc [playerid/CzÍúÊNicku] [tekst]");
+        return 1;
+    }
 
-	if (IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
-	{
-		if(HidePM[giveplayerid] > 0)
-		{
-			sendTipMessage(playerid, "Ten gracz blokuje wiadomoúci !");
-			return 1;
-		}
-		if(HidePM[playerid] > 0)
-		{
-			sendTipMessage(playerid, "   Masz zablokowane wiadomoúci, uøyj /togw aby je odblokowaÊ !");
-			return 1;
-		}
+    if (IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
+    {
+        if(HidePM[giveplayerid] > 0)
+        {
+            sendTipMessage(playerid, "Ten gracz blokuje wiadomoúci!");
+            return 1;
+        }
+        if(HidePM[playerid] > 0)
+        {
+            sendTipMessage(playerid, "   Masz zablokowane wiadomoúci, uøyj /togw aby je odblokowaÊ !");
+            return 1;
+        }
         if(PlayerInfo[playerid][pBW] > 0 && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0 && (PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)) {
             return sendErrorMessage(playerid, "Gdy masz BW moøesz wysy≥aÊ wiadomoúci jedynie na ma≥π odleg≥oúÊ");
         }
-		new giveplayer[MAX_PLAYER_NAME];
-		new sendername[MAX_PLAYER_NAME];
-		new string[128];
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+        new giveplayer[MAX_PLAYER_NAME];
+        new sendername[MAX_PLAYER_NAME];
+        new string[128];
+        GetPlayerName(playerid, sendername, sizeof(sendername));
+        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 
-		if(giveplayerid == playerid) //easter egg
-		{
-			format(string, sizeof(string), "* %s mruczy (jak Mrucznik) coú pod nosem.", sendername);
-			ProxDetector(5.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			//return 1;
-		}
+        if(giveplayerid == playerid) //easter egg
+        {
+            format(string, sizeof(string), "* %s mruczy (jak Mrucznik) coú pod nosem.", sendername);
+            ProxDetector(5.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+            //return 1;
+        }
 
-		if (AntyReklama(text) != 0)
-		{
-			SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
-			format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,text);
-			ABroadCast(COLOR_LIGHTRED,string,1);
-			CzitLog(string);
-			return 1;
-		}
-		if (AntyCzitText(text))
-		{
-			format(string, sizeof(string), "AdmWarning: [%d]%s mÛwi coú o cheat'ach do[%s]: %s",playerid,sendername, giveplayer,text);
-			ABroadCast(COLOR_LIGHTRED,string,1);
-			CzitLog(string);
-		}
+        if (AntyReklama(text) != 0)
+        {
+            SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
+            format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,text);
+            ABroadCast(COLOR_LIGHTRED,string,1);
+            CzitLog(string);
+            return 1;
+        }
+        if (AntyCzitText(text))
+        {
+            format(string, sizeof(string), "AdmWarning: [%d]%s mÛwi coú o cheat'ach do[%s]: %s",playerid,sendername, giveplayer,text);
+            ABroadCast(COLOR_LIGHTRED,string,1);
+            CzitLog(string);
+        }
 
-		//wiadomoúci:
-		//format(string, sizeof(string), "ª %s (ID: %d) wiadomoúÊ: %s", sendername, playerid, tekst);
-		//SendClientMessage(giveplayerid, COLOR_NEWS, string);
+        //wiadomoúci:
+        //format(string, sizeof(string), "ª %s (ID: %d) wiadomoúÊ: %s", sendername, playerid, tekst);
+        //SendClientMessage(giveplayerid, COLOR_NEWS, string);
 
-		//new isplayerafk;
-		//format(string, sizeof(string), "´ WiadomoúÊ wys≥ana do %s (ID: %d)%s: %s", giveplayer, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (" [AFK] "),tekst); //IS PLAYER AFK
-		//SendClientMessage(playerid,  COLOR_YELLOW, string);
+        //new isplayerafk;
+        //format(string, sizeof(string), "´ WiadomoúÊ wys≥ana do %s (ID: %d)%s: %s", giveplayer, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (" [AFK] "),tekst); //IS PLAYER AFK
+        //SendClientMessage(playerid,  COLOR_YELLOW, string);
 
         if(strlen(params) < 78)
         {
-            format(string, sizeof(string), "´ %s (%d): %s", GetNick(giveplayerid, true), giveplayerid, text);
-            SendClientMessage(playerid, COLOR_NEWS, string);
+            format(string, sizeof(string), "´´ %s (%d%s): %s", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+            SendClientMessage(playerid, COLOR_YELLOW, string);
             
-            format(string, sizeof(string), "ª %s (%d): %s", GetNick(playerid, true), playerid, text);
+            format(string, sizeof(string), "ªª %s (%d): %s", GetNick(playerid, true), playerid, text);
             SendClientMessage(giveplayerid, COLOR_NEWS, string);
         } else {
             new pos = strfind(params, " ", true, strlen(params) / 2);
@@ -18363,14 +18347,14 @@ CMD:wiadomosc(playerid, params[])
                 strmid(text2, text, pos, strlen(text));
                 strdel(text, pos, strlen(text));
 
-                format(string, sizeof(string), "´ %s (%d): %s [.]", GetNick(giveplayerid, true), giveplayerid, text);
-                SendClientMessage(playerid, COLOR_NEWS, string);
+                format(string, sizeof(string), "´´ %s (%d%s): %s [.]", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+                SendClientMessage(playerid, COLOR_YELLOW, string);
             
                 format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(playerid, COLOR_NEWS, string);
+                SendClientMessage(playerid, COLOR_YELLOW, string);
                 
                 
-                format(string, sizeof(string), "´ %s (%d): %s [.]", GetNick(playerid, true), playerid, text);
+                format(string, sizeof(string), "´´ %s (%d): %s [.]", GetNick(playerid, true), playerid, text);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
                 
                 format(string, sizeof(string), "[.] %s", text2);
@@ -18378,24 +18362,33 @@ CMD:wiadomosc(playerid, params[])
             }
         }
 
-		//düwiÍki
-		PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
-		PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);
-
-		//podglπd
-		if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
-		{
-			format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", sendername, playerid, giveplayer, giveplayerid, text);
-			ABroadCast(COLOR_LIGHTGREEN,string,1);
-		}
-	}
-	else
-	{
-		sendErrorMessage(playerid, "Nie ma na serwerze takiego gracza!");
-	}
-	return 1;
+        //düwiÍki
+        PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
+        PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);
+        lastMsg[giveplayerid] = playerid;
+        //podglπd
+        if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
+        {
+            format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", sendername, playerid, giveplayer, giveplayerid, text);
+            ABroadCast(COLOR_LIGHTGREEN,string,1);
+        }
+    }
+    else
+    {
+        sendErrorMessage(playerid, "Nie ma na serwerze takiego gracza!");
+    }
+    return 1;
 }
-
+CMD:reply(playerid, params[]) return cmd_re(playerid, params);
+CMD:re(playerid, params[]) {
+    if(lastMsg[playerid] != INVALID_PLAYER_ID) {
+        if(!IsPlayerConnected(lastMsg[playerid])) return sendErrorMessage(playerid, "Tego gracza nie ma na serwerze!");
+        new buf[177];
+        format(buf, sizeof(buf), "%d %s", lastMsg[playerid], params);
+        return cmd_wiadomosc(playerid, buf);
+    }
+    return 1;
+}
 
 CMD:withdraw(playerid, params[]) return cmd_wyplac(playerid, params);
 CMD:wyplac(playerid, params[])
@@ -19447,39 +19440,6 @@ CMD:z(playerid)
 				}
 			}
 		}
-
-        caller = GetPVarInt(playerid, "budka-Mobile");
-        if(IsPlayerConnected(caller)) {
-            if(caller == 999) {
-                printf("%d chce sie rozlaczyc z %d");
-                foreach(Player, i) {
-                    if(GetPVarInt(i, "budka-Mobile") == playerid) {
-                        sendTipMessageEx(i,  COLOR_GRAD2, "Druga osoba odrzuci≥a po≥πczenie.");
-                        sendTipMessageEx(playerid,  COLOR_GRAD2, "Odrzuci≥eú po≥πczenie.");
-                        budki[GetPVarInt(i, "budka-used")][isCurrentlyUsed] = 0;
-                        budki[GetPVarInt(playerid, "budka-used")][isCurrentlyUsed] = 0;
-                        SetPVarInt(i, "budka-Mobile", 999);
-                        SetPVarInt(i, "budka-used", 999);
-                        SetPVarInt(playerid, "budka-Mobile", 999);
-                        SetPVarInt(playerid, "budka-used", 999);
-                        return 1;
-                    }
-                }
-            }
-            if(caller != INVALID_PLAYER_ID) {
-                //if(caller == playerid) {
-                sendTipMessageEx(caller,  COLOR_GRAD2, "Rozmowa zakoÒczona.");
-                sendTipMessageEx(playerid,  COLOR_GRAD2, "Roz≥πczy≥eú siÍ.");
-                budki[GetPVarInt(caller, "budka-used")][isCurrentlyUsed] = 0;
-                SetPVarInt(caller, "budka-Mobile", 999);
-                SetPVarInt(caller, "budka-used", 999);
-                //}
-                budki[GetPVarInt(playerid, "budka-used")][isCurrentlyUsed] = 0;
-                SetPVarInt(playerid, "budka-Mobile", 999);
-                SetPVarInt(playerid, "budka-used", 999);
-                return 1;
-            }
-        } 
         sendTipMessage(playerid, "TwÛj telefon jest w kieszeni.");
 	}
 	return 1;
@@ -19781,7 +19741,9 @@ CMD:wejdz(playerid)
             GameTextForPlayer(playerid, "~w~ Witamy w~n~ ~g~ Bonehead Club", 5000, 1);
             SetPlayerVirtualWorld(playerid,1);
             SetPlayerPosEx(playerid,2455.1021,-1958.0905,120.8159);
-            PlayAudioStreamForPlayer(playerid,"http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls",2447.8284,-1963.1549,13.5469,100,0);
+            new muzik[128];
+            GetSVarString("muzyka_bonehead", muzik, 128);
+            PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
             TogglePlayerControllable(playerid,0);
             Wchodzenie(playerid);
         }
@@ -23759,7 +23721,14 @@ CMD:skydive(playerid)
     {
 		if (PlayerInfo[playerid][pAdmin] >= 25)
 		{
-            SendClientMessage(playerid, COLOR_GRAD1, "   Komenda wyjebana ~ Kubi");
+            new Float:rx, Float:ry, Float:rz;
+            GetPlayerPos(playerid, rx, ry, rz);
+            if(IsPlayerConnected(playerid))
+            {
+                GivePlayerWeapon(playerid, 46, 1);
+                SetPlayerPos(playerid,rx, ry, rz+1500);
+                SendClientMessage(playerid, COLOR_WHITE, "GO!! GO!! GO!!");
+            }
 		}
 		else
 		{
@@ -26428,45 +26397,44 @@ CMD:endround(playerid)
 CMD:admins(playerid) return cmd_admini(playerid);
 CMD:admini(playerid)
 {
-	new string[64];
-	new sendername[MAX_PLAYER_NAME];
-
-	SendClientMessage(playerid, COLOR_GRAD1, "Lista administratorÛw:");
-	foreach(Player, i)
-	{
-		if(PlayerInfo[i][pAdmin] >= 1)
-		{
+    new string[64];
+    new sendername[MAX_PLAYER_NAME];
+    SendClientMessage(playerid, COLOR_GRAD1, "Lista administratorÛw:");
+    foreach(Player, i)
+    {
+        if(PlayerInfo[i][pAdmin] >= 1)
+        {
             if(PlayerInfo[i][pAdmin] == 5555 || PlayerInfo[i][pAdmin] == 7)
             {
                 if(PlayerInfo[playerid][pAdmin] != 5000) continue;
             }
-			GetPlayerName(i, sendername, sizeof(sendername));
-			if(PlayerInfo[playerid][pAdmin] >= 1)
-			{
-				format(string, sizeof(string), "Admin: %s lvl %d", sendername, PlayerInfo[i][pAdmin]);
-			}
-			else
-			{
-				format(string, sizeof(string), "Admin: %s", sendername);
-			}
-			SendClientMessage(playerid, COLOR_GRAD1, string);
-		}
-		else if(PlayerInfo[i][pNewAP] >=1 && PlayerInfo[i][pNewAP] <= 3)
-		{
-			GetPlayerName(i, sendername, sizeof(sendername));
-			format(string, sizeof(string), "PÛ≥Admin: %s", sendername);
-			SendClientMessage(playerid, COLOR_GRAD2, string);
-		}
+            GetPlayerName(i, sendername, sizeof(sendername));
+            if(PlayerInfo[playerid][pAdmin] >= 1)
+            {
+                format(string, sizeof(string), "Admin: %s (ID: %d) lvl %d", sendername, i, PlayerInfo[i][pAdmin]);
+            }
+            else
+            {
+                format(string, sizeof(string), "Admin: %s (ID: %d)", sendername, i);
+            }
+            SendClientMessage(playerid, COLOR_GRAD1, string);
+        }
+        else if(PlayerInfo[i][pNewAP] >=1 && PlayerInfo[i][pNewAP] <= 3)
+        {
+            GetPlayerName(i, sendername, sizeof(sendername));
+            format(string, sizeof(string), "PÛ≥Admin: %s (ID: %d)", sendername, i);
+            SendClientMessage(playerid, COLOR_GRAD2, string);
+        }
         else if(PlayerInfo[i][pNewAP] == 5)
         {
             GetPlayerName(i, sendername, sizeof(sendername));
-            format(string, sizeof(string), "Skrypter: %s", sendername);
+            format(string, sizeof(string), "Skrypter: %s (ID: %d)", sendername, i);
             SendClientMessage(playerid, COLOR_GRAD3, string);
         }
-	}
-	SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomÛc lub nie odpowiada na twoje pytanie? Jest na to sposÛb!");
-	SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyÊ listÍ Zaufanych Graczy. Oni teø pomogπ!");
-	return 1;
+    }
+    SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomÛc lub nie odpowiada na twoje pytanie? Jest na to sposÛb!");
+    SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyÊ listÍ Zaufanych Graczy. Oni teø pomogπ!");
+    return 1;
 }
 
 CMD:zaufani(playerid)
@@ -26976,12 +26944,13 @@ CMD:ap(playerid)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /carjump /goto /up /getcar /gethere");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /opis usun [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
+        SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /getposp /gotopos  /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
-		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom");
+		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom NEW: /anulujzp");
 	}
 	if (PlayerInfo[playerid][pAdmin] == 7)
 	{
@@ -27001,7 +26970,7 @@ CMD:ap(playerid)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 25)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*25* ADMIN *** /flip /snn /unaj /setfamily /forceskin /skydive");
+		SendClientMessage(playerid, COLOR_GRAD4,"*25* ADMIN *** /flip /snn /unaj /setfamily /forceskin /skydive NEW: /bonehead");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 35)
 	{
@@ -27020,7 +26989,7 @@ CMD:ap(playerid)
 	{
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /weather /weatherall /makeadmin /makeleader /tod /savemission /loadmission /startlotto");
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /pacholek /usunpach /barierka /usunbarier /kolczatka /usunkol /wydaj /cela /sprzedaja");
-		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /unfrakcja /makeircadmin /makemember /unmember /giverank /checkcars");
+		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /unfrakcja /makeircadmin /makemember /unmember /giverank /checkcars NEW: /bwsettings");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 2000)
 	{
@@ -27032,7 +27001,7 @@ CMD:ap(playerid)
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /KickEx_all /bdaj /starttimer /startalltimer /killtimer /killalltimer /zniszczobiekty /stworzobiekty");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /setmats /setskin /setjob /setdom /setdomk /setwiek /setname /setstat /setarmor /givegun /money /givemoney");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zrobdom /lzrobdom /usundom /blokujdom /resetsejfhasla /zapiszdomy /zapiszkonta");
-		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /rodzinalider /scena /houseowner /domint");
+		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /rodzinalider /scena /houseowner /domint NEW: /dajskryptera /bwtime");
 	}
 	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5)
 	{
@@ -31376,61 +31345,61 @@ CMD:sb(playerid, params[])
 					    format(string, sizeof(string), "|__________ Wynik przeszukania %s __________|", giveplayer);
 					    if(BronieF[10][0] != 0)
 					    {
-					        format(string, sizeof(string), "BroÒ bia≥a: %s.", GunNames[BronieF[10][0]]);
+					        format(string, sizeof(string), "BroÒ bia≥a: %s ó %s", GunNames[BronieF[10][0]], (playerWeapons[giveplayerid][weaponLegal11] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 					    }
 					    if(BronieF[1][0] != 0)
 					    {
-							format(string, sizeof(string), "BroÒ bia≥a: %s.", GunNames[BronieF[1][0]]);
+							format(string, sizeof(string), "BroÒ bia≥a: %s ó %s", GunNames[BronieF[1][0]], (playerWeapons[giveplayerid][weaponLegal2] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
 						if(BronieF[2][0] != 0)
 					    {
-							format(string, sizeof(string), "Pistolet: %s z %d nabojami.", GunNames[BronieF[2][0]], BronieF[2][1]);
+							format(string, sizeof(string), "Pistolet: %s z %d nabojami ó %s", GunNames[BronieF[2][0]], BronieF[2][1], (playerWeapons[giveplayerid][weaponLegal3] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
 						if(BronieF[3][0] != 0)
 					    {
-							format(string, sizeof(string), "Strzelba: %s z %d nabojami.", GunNames[BronieF[3][0]], BronieF[3][1]);
+							format(string, sizeof(string), "Strzelba: %s z %d nabojami ó %s", GunNames[BronieF[3][0]], BronieF[3][1], (playerWeapons[giveplayerid][weaponLegal4] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
 						if(BronieF[4][0] != 0)
 					    {
-							format(string, sizeof(string), "Pistolet maszynowy: %s z %d nabojami.", GunNames[BronieF[4][0]], BronieF[4][1]);
+							format(string, sizeof(string), "Pistolet maszynowy: %s z %d nabojami ó %s", GunNames[BronieF[4][0]], BronieF[4][1], (playerWeapons[giveplayerid][weaponLegal5] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
 						if(BronieF[5][0] != 0)
 					    {
-							format(string, sizeof(string), "Karabin: %s z %d nabojami.", GunNames[BronieF[5][0]], BronieF[5][1]);
+							format(string, sizeof(string), "Karabin: %s z %d nabojami ó %s", GunNames[BronieF[5][0]], BronieF[5][1], (playerWeapons[giveplayerid][weaponLegal6] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
 						if(BronieF[6][0] != 0)
 					    {
-							format(string, sizeof(string), "Snajperka: %s z %d nabojami.", GunNames[BronieF[6][0]], BronieF[6][1]);
+							format(string, sizeof(string), "Snajperka: %s z %d nabojami ó %s", GunNames[BronieF[6][0]], BronieF[6][1], (playerWeapons[giveplayerid][weaponLegal7] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
 						if(BronieF[7][0] != 0)
 					    {
-							format(string, sizeof(string), "BroÒ ciÍøka: %s z %d nabojami.", GunNames[BronieF[7][0]], BronieF[7][1]);
+							format(string, sizeof(string), "BroÒ ciÍøka: %s z %d nabojami ó %s", GunNames[BronieF[7][0]], BronieF[7][1], (playerWeapons[giveplayerid][weaponLegal8] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
 						if(BronieF[8][0] != 0)
 					    {
-							format(string, sizeof(string), "£adunek wybuchowy: %s z %d nabojami.", GunNames[BronieF[8][0]], BronieF[8][1]);
+							format(string, sizeof(string), "£adunek wybuchowy: %s z %d nabojami ó %s", GunNames[BronieF[8][0]], BronieF[8][1], (playerWeapons[giveplayerid][weaponLegal9] == 1) ? ("LEGALNA") : ("NIEZNANE èR”D£O"));
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
 						if(BronieF[9][0] != 0)
 					    {
-							format(string, sizeof(string), "Inne przedmioty: %s.", GunNames[BronieF[9][0]]);
+							format(string, sizeof(string), "Inne przedmioty: %s", GunNames[BronieF[9][0]]);
 							SendClientMessage(playerid, COLOR_P@, string);
 							checker ++;
 						}
@@ -31448,7 +31417,7 @@ CMD:sb(playerid, params[])
 						}
 						if(checker == 0)
 						{
-						    format(string, sizeof(string), "Bronie: %s.", GunNames[BronieF[0][0]]);
+						    format(string, sizeof(string), "Bronie: %s", GunNames[BronieF[0][0]]);
 							SendClientMessage(playerid, COLOR_P@, string);
 						}
 						format(string, sizeof(string), "* %s przeszuka≥ %s w poszukiwaniu broni.", sendername ,giveplayer);
@@ -31693,22 +31662,19 @@ CMD:sprzedajbron(playerid, params[])
             new skillz;
             new x_weapon[16],weapon[MAX_PLAYERS],ammo[MAX_PLAYERS],price[MAX_PLAYERS];
             new giveplayerid;
-            if( sscanf(params, "k<fix>S[16]", giveplayerid, x_weapon))
+            if( sscanf(params, "k<fix>s[16]", giveplayerid, x_weapon))
             {
                 SendClientMessage(playerid, COLOR_GRAD1, "Uøyj: /sprzedajbron [ID gracza] [nazwa broni]");
                 SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - GANG]----");
                 SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150)");
                 SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
                 SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: UZI(1750)");
-                SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - MAFIA]----");
+                SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - MAFIA / SKLEP Z BRONI•]----");
                 SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150) shotgun(250)");
                 SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400) mp5(450)");
                 SendClientMessage(playerid, COLOR_GREY, "Bronie 3 Skill: ak47(650) m4(700) rifle(650)");
                 SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: spas12(1500) UZI(1750) sniper(2000) pila(1000)");
                 SendClientMessage(playerid, COLOR_GREY, "Bronie 5 Skill: c4(5000) ogniomiotacz(10000)");
-                SendClientMessage(playerid, COLOR_GREY, "----[SKLEP Z BRONI•]----");
-                SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: katana(100) pistolety(150) shotgun(250)");
-                SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
                 return 1;
             }
 
@@ -31735,16 +31701,12 @@ CMD:sprzedajbron(playerid, params[])
                                 SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150)");
                                 SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
                                 SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: UZI(1750)");
-                                SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - MAFIA]----");
+                                SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - MAFIA / SKLEP Z BRONI•]----");
                                 SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150) shotgun(250)");
                                 SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400) mp5(450)");
                                 SendClientMessage(playerid, COLOR_GREY, "Bronie 3 Skill: ak47(650) m4(700) rifle(650)");
                                 SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: spas12(1500) UZI(1750) sniper(2000) pila(1000)");
                                 SendClientMessage(playerid, COLOR_GREY, "Bronie 5 Skill: c4(5000) ogniomiotacz(10000)");
-                                SendClientMessage(playerid, COLOR_GREY, "----[SKLEP Z BRONI•]----");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: katana(100) pistolety(150) shotgun(250)");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
-                                SendClientMessage(playerid, COLOR_GREEN, "________________________________________________");
                                 return 1;
                             }
                         }
@@ -31768,6 +31730,7 @@ CMD:sprzedajbron(playerid, params[])
                         {
                             skillz = 5;
                         }
+                        new slot;
                         if(strcmp(x_weapon,"katana",true) == 0)//
                         {
                             if(PlayerInfo[playerid][pMats] > 99 && IsASklepZBronia(playerid))
@@ -31781,6 +31744,7 @@ CMD:sprzedajbron(playerid, params[])
                                     PlayerInfo[giveplayerid][pGun1] = 8;
                                     PlayerInfo[giveplayerid][pAmmo1] = 1;
                                 }
+                                slot = 2;
                             }
                             else
                             {
@@ -31796,6 +31760,7 @@ CMD:sprzedajbron(playerid, params[])
                                 price[playerid] = 250;
                                 ammo[playerid] = 114;
                                 umiejetnosc = 2;
+                                slot = 3;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun2] = 23;
@@ -31810,12 +31775,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"pila",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 999 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 9;
                                 price[playerid] = 1000;
                                 ammo[playerid] = 1;
                                 umiejetnosc = 4;
+                                slot = 2;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun1] = 9;
@@ -31836,6 +31802,7 @@ CMD:sprzedajbron(playerid, params[])
                                 price[playerid] = 150;
                                 ammo[playerid] = 200;
                                 umiejetnosc = 1;
+                                slot = 3;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun2] = 22;
@@ -31856,6 +31823,7 @@ CMD:sprzedajbron(playerid, params[])
                                 price[playerid] = 400;
                                 ammo[playerid] = 107;
                                 umiejetnosc = 2;
+                                slot = 3;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun2] = 24;
@@ -31870,12 +31838,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"mp5",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 449 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 449 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 29;
                                 price[playerid] = 450;
                                 ammo[playerid] = 700;
                                 umiejetnosc = 2;
+                                slot = 5;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun4] = 29;
@@ -31890,12 +31859,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"uzi",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 1749 && (IsAGang(playerid) || IsAMafia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 1749 && (IsAGang(playerid) || IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 28;
                                 price[playerid] = 1750;
                                 ammo[playerid] = 750;
                                 umiejetnosc = 4;
+                                slot = 5;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun4] = 28;
@@ -31916,6 +31886,7 @@ CMD:sprzedajbron(playerid, params[])
                                 price[playerid] = 250;
                                 ammo[playerid] = 50;
                                 umiejetnosc = 1;
+                                slot = 4;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun3] = 25;
@@ -31930,12 +31901,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"spas12",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 1499 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 1499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 27;
                                 price[playerid] = 1500;
                                 ammo[playerid] = 57;
                                 umiejetnosc = 4;
+                                slot = 4;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun3] = 27;
@@ -31950,12 +31922,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"ak47",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 649 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 649 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 30;
                                 price[playerid] = 650;
                                 ammo[playerid] = 550;
                                 umiejetnosc = 3;
+                                slot = 6;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun5] = 30;
@@ -31970,12 +31943,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"m4",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 699 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 699 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 31;
                                 price[playerid] = 700;
                                 ammo[playerid] = 550;
                                 umiejetnosc = 3;
+                                slot = 6;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun5] = 31;
@@ -31990,12 +31964,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"rifle",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 649 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 649 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 33;
                                 price[playerid] = 650;
                                 ammo[playerid] = 51;
                                 umiejetnosc = 3;
+                                slot = 7;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun6] = 33;
@@ -32010,12 +31985,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"sniper",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 1999 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 1999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 34;
                                 price[playerid] = 2000;
                                 ammo[playerid] = 51;
                                 umiejetnosc = 4;
+                                slot = 7;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun6] = 34;
@@ -32030,12 +32006,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"c4",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 2499 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 2499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 39;
                                 price[playerid] = 2500;
                                 ammo[playerid] = 10;
                                 umiejetnosc = 5;
+                                slot = 9;
                                 if(umiejetnosc <= skillz)
                                 {
                                     GivePlayerWeapon(giveplayerid, 40, 1);
@@ -32053,12 +32030,13 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"ogniomiotacz",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 9999 && IsAMafia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 9999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 37;
                                 price[playerid] = 10000;
                                 ammo[playerid] = 200;
                                 umiejetnosc = 5;
+                                slot = 8;
                                 if(umiejetnosc <= skillz)
                                 {
                                     PlayerInfo[giveplayerid][pGun7] = 37;
@@ -32091,6 +32069,7 @@ CMD:sprzedajbron(playerid, params[])
                                     SendClientMessage(playerid, COLOR_RED, "Ten gracz nie posiada licencji na broÒ, moøesz sprzedaÊ mu tylko bronie dla 1 skillu !");
                                     return 1;
                                 }
+
                                 ConsumingMoney[playerid] = 1;
                                 GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
                                 GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -32104,6 +32083,99 @@ CMD:sprzedajbron(playerid, params[])
                                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                 GivePlayerWeapon(giveplayerid,weapon[playerid],ammo[playerid]);
                                 PlayerInfo[playerid][pMats] -= price[playerid];
+                                new weapons[13][2];
+                                for (new i = 0; i <= 12; i++)
+                                {
+                                    GetPlayerWeaponData(giveplayerid, i, weapons[i][0], weapons[i][1]);
+                                }
+                                if(IsAMafia(playerid)) {
+                                    switch(slot) {
+                                        case 2: {
+                                            //if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal2] = 0;
+                                            //}
+                                        }
+                                        case 3: {
+                                            //if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal3] = 0;
+                                            //}
+                                        }
+                                        case 5: {
+                                            //if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal5] = 0;
+                                            //}
+                                        }
+                                        case 4: {
+                                            //if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal4] = 0;
+                                            //}
+                                        }
+                                        case 6: {
+                                            //if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal6] = 0;
+                                            //}
+                                        }
+                                        case 7: {
+                                            //if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal7] = 0;
+                                            //}
+                                        }
+                                        case 9: {
+                                            //if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal9] = 0;
+                                            //}
+                                        }
+                                        case 8: {
+                                            //if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal8] = 0;
+                                            //}
+                                        }
+                                    }
+                                } else {
+                                    switch(slot) {
+                                        case 2: {
+                                            if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal2] = 1;
+                                            }
+                                        }
+                                        case 3: {
+                                            if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal3] = 1;
+                                            }
+                                        }
+                                        case 5: {
+                                            if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal5] = 1;
+                                            }
+                                        }
+                                        case 4: {
+                                            if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal4] = 1;
+                                            }
+                                        }
+                                        case 6: {
+                                            if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal6] = 1;
+                                            }
+                                        }
+                                        case 7: {
+                                            if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal7] = 1;
+                                            }
+                                        }
+                                        case 9: {
+                                            if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal9] = 1;
+                                            }
+                                        }
+                                        case 8: {
+                                            if(weapons[slot-1][0] == 0) {
+                                                playerWeapons[giveplayerid][weaponLegal8] = 1;
+                                            }
+                                        }
+                                    }
+                                }
+                                //saveLegale(giveplayerid);
                                 if(playerid != giveplayerid)
                                 {
                                     if(strcmp(x_weapon,"katana",true) == 0)
@@ -32459,6 +32531,8 @@ CMD:zatankuj(playerid)
                 new engine, niewazne;
                 GetVehicleParamsEx(GetPlayerVehicleID(playerid), engine, niewazne, niewazne, niewazne, niewazne, niewazne, niewazne); 
                 if(engine == 1) return SendClientMessage(playerid, COLOR_GREY, "Nie moøna tankowaÊ, gdy silnik jest odpalony!");
+                //easter egg dla bugerow :D
+                if(OdpalanieSpam[playerid] == 1) return SendClientMessage(playerid, COLOR_GREY, "Nie prÛbuj bugowaÊ bo przez Ciebie musze przy kodzie siedziec :D");
 			    GameTextForPlayer(playerid,"~w~~n~~n~~n~~n~~n~~n~~n~~n~~n~Tankowanie pojazdu, prosze czekac",2000,3);
 				SetTimer("Fillup",RefuelWait,0);
 				Refueling[playerid] = 1;
@@ -34803,11 +34877,11 @@ CMD:fooc(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-	    if(PlayerInfo[playerid][pMuted] == 1)
+	    /*if(PlayerInfo[playerid][pMuted] == 1)
 		{
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie moøesz pisaÊ poniewaø jesteú wyciszony");
 			return 1;
-		}
+		}*/
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
@@ -36289,10 +36363,7 @@ CMD:aresztuj(playerid, params[])
 						    {
 						        if(PoziomPoszukiwania[playa] >= 1 && PoziomPoszukiwania[playa] <= 5)
 						        {
-                                    PoziomPoszukiwania[playa] = 0;
-                                    zakuty[playa] = 0;//Kajdany
-                                    PDkuje[playerid] = 0;
-                                    uzytekajdanki[playerid] = 0;
+                                    
 						            new price = PoziomPoszukiwania[playa]*4000;
 						            new price2 = PoziomPoszukiwania[playa]*1000;
 						            new bail = PoziomPoszukiwania[playa]*16000;
@@ -36302,6 +36373,10 @@ CMD:aresztuj(playerid, params[])
 	                                GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 	                                GetPlayerName(playerid, sendername, sizeof(sendername));
                                     new depo2 = floatround(((price/100) * 50), floatround_round);
+                                    PoziomPoszukiwania[playa] = 0;
+                                    zakuty[playa] = 0;//Kajdany
+                                    PDkuje[playerid] = 0;
+                                    uzytekajdanki[playerid] = 0;
                                     DajKase(playerid, depo2);
                                     Sejf_Add(PlayerInfo[playerid][pMember], depo2);
 								    format(string, sizeof(string), "UwiÍzi≥eú %s, nagroda za przestÍpcÍ: %d. Otrzymujesz $%d", giveplayer, price, depo2);
@@ -38804,41 +38879,8 @@ CMD:hq(playerid, params[]) {
                 switch(listitem) {
                     case 0,3: return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");       
                     case 1: {
-                        new przestepcy = false;
-                        format(string, sizeof(string), ""#HQ_COLOR_TEKST2"PrzestÍpcy");
-                        format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                        for(new i = 0, j=MAX_PLAYERS; i<j; i++) {
-                            // do zastπpienia zmiennπ WL
-                            if(PoziomPoszukiwania[i] > 0) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    ªª "#HQ_COLOR_TEKST2" %s "#HQ_COLOR_TEKST"WL: %d", string, GetNick(i, true), PoziomPoszukiwania[i]);
-                                przestepcy = true;
-                            }
-                        }
-                        inline DLG_HQ_ZGL_NICNIEROB(playerX, dialogidX, responseX, listitemX, string:inputtextX[]) {
-                            #pragma unused playerX, dialogidX, listitemX, inputtextX
-                            if(!responseX) {
-                                format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"========================"#HQ_COLOR_TEKST"[HQ]"#HQ_COLOR_PLACEHOLDER"========================");
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    ªª "#HQ_COLOR_TEKST"Lista poszukiwanych", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    ªª "#HQ_COLOR_TEKST"Ostatnie zg≥oszenia", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                                //return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");
-                                return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, ("HQ"), string, "Ok", "Anuluj");
-                            }
-                            if(responseX) {
-                                format(string, sizeof(string), ""#HQ_COLOR_TEKST2"PrzestÍpcy");
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                                for(new i = 0, j=MAX_PLAYERS; i<j; i++) {
-                                    // do zastπpienia zmiennπ WL
-                                    if(PoziomPoszukiwania[i] > 0) {
-                                        format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    ªª "#HQ_COLOR_TEKST2" %s "#HQ_COLOR_TEKST"WL: %d", string, GetNick(i, true), PoziomPoszukiwania[i]);
-                                        przestepcy = true;
-                                    }
-                                }
-                                Dialog_ShowCallback(playerid, using inline DLG_HQ_ZGL_NICNIEROB, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");
-                            }
-                        }
-                        if(!przestepcy) return sendTipMessage(playerid, "Brak poszukiwanych osÛb!");
-                        Dialog_ShowCallback(playerid, using inline DLG_HQ_ZGL_NICNIEROB, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");
+                        cmd_hq(playerid, params);
+                        return cmd_wanted(playerid);
                     }
                     case 2: {
                         format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"===================="#HQ_COLOR_TEKST"[ZG£OSZENIA]"#HQ_COLOR_PLACEHOLDER"====================");
@@ -38987,41 +39029,39 @@ CMD:hq(playerid, params[]) {
 CMD:fpanel(playerid) {
     if(PlayerInfo[playerid][pNewAP] != 5) return sendTipMessageEx(playerid, COLOR_GRAD1, "Panel lidera frakcji jest w trakcie tworzenia.");
     if(PlayerInfo[playerid][pLider] < 1) return noAccessMessage(playerid);
-    new fpanel_string[7500], ftitle[120];
+    new fpanel_string[12500], ftitle[120];
     new query[140];
     new id = PlayerInfo[playerid][pLider];
-    format(fpanel_string, sizeof(fpanel_string), ""#KARA_TEKST"Zarzπdzanie pracownikami");
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    ªª {f9f9f9}Lista PracownikÛw", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    ªª {f9f9f9}Zwolnij (Offline)", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"Zarzπdzanie pojazdami", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"Zarzπdzanie skinami", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"Zarzπdzanie sejfem", fpanel_string);
+    format(fpanel_string, sizeof(fpanel_string), ""#KARA_TEKST"ªª Zarzπdzanie pracownikami");
+    //format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    ªª {f9f9f9}Lista PracownikÛw", fpanel_string);
+    //format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    ªª {f9f9f9}Zwolnij (Offline)", fpanel_string);
+    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"ªª Zarzπdzanie pojazdami", fpanel_string);
+    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"ªª Zarzπdzanie skinami", fpanel_string);
+    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"ªª Zarzπdzanie sejfem", fpanel_string);
     inline DLG_FPANEL_MAIN(player, dialogid, response, listitem, string:inputtext[]) {
         #pragma unused player, dialogid, inputtext
         if(!response) return 1;
         switch(listitem) {
-            case 0: {
-                return cmd_fpanel(playerid);
-            }
-            case 2,3,4: {
+            case 1,2: {
                 sendTipMessage(playerid, "Funkcje w przygotowaniu!");   
                 return cmd_fpanel(playerid);
             }
-            case 5: {
+            case 3: {
                 return cmd_sejff(playerid);
             }
-            case 1: {
+            case 0: {
                 format(query, 140, "SELECT UID,Nick,Rank,Lider FROM `mru_konta` WHERE `Member`='%d' ORDER BY Rank DESC", id);
                 mysql_query(query);
                 mysql_store_result();
-                new nick[24], uid, i = 1, rank;
+                new nick[24], uid, i = 1, rank, lider = 0;
                 format(fpanel_string, sizeof(fpanel_string), "StopieÒ\tImie i Nazwisko\tRanga");
                 while(mysql_fetch_row_format(query, "|"))
                 {
-                    sscanf(query, "p<|>ds[24]dd", uid, nick, rank);
+                    //A9C4E4
+                    sscanf(query, "p<|>ds[24]dd", uid, nick, rank, lider);
                     new rankname[26];
                     strmid(rankname, FracRang[id][rank], 0, 25, 26);
-                    format(fpanel_string, sizeof(fpanel_string), "%s\n%d\t%s\t%s", fpanel_string, rank, nick, rankname);
+                    format(fpanel_string, sizeof(fpanel_string), "%s\n%s%d\t%s\t%s", fpanel_string, (lider == 1) ? ("{FF0000}") : ("{A9C4E4}"), rank, nick, rankname);
                     new pvarname[24];
                     format(pvarname, sizeof(pvarname), "fP_%d", i);
                     SetPVarInt(playerid, pvarname, uid);
@@ -39105,7 +39145,7 @@ CMD:fpanel(playerid) {
 }
 
 CMD:anulujzp(playerid, params[]) {
-    if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5) {
         new giveid, adminnick[MAX_PLAYER_NAME], gracznick[MAX_PLAYER_NAME];
         if(sscanf(params, "k<fix>", giveid)) return sendTipMessage(playerid, "Uøyj /anulujzp [czÍúÊ nicku/id]"); 
         if(PlayerInfo[giveid][pCarLic] == 0 || PlayerInfo[giveid][pCarLic] == 1) {
@@ -39130,7 +39170,7 @@ CMD:bwsettings(playerid, params[]) {
     if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pNewAP] == 5) {
         new ust = GetSVarInt("BW_OnlyGangZones");
         SetSVarInt("BW_OnlyGangZones", !ust);
-        dini_IntSet("BWSettings.ini", "OnlyGangZones", !ust);
+        dini_IntSet("Settings.ini", "OnlyGangZones", !ust);
         new string[70];
         format(string, sizeof(string), "Od teraz BW nadawane bÍdzie %s", (ust == 1) ? ("tylko w obrÍbie stref") : ("w ca≥ym San Andreas"));
         sendTipMessage(playerid, string);
@@ -39143,8 +39183,22 @@ CMD:bwtime(playerid, params[]) {
     if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5) {
         new ust;
         if(sscanf(params, "d", ust)) return sendTipMessage(playerid, "Uøyj /bwtime [Czas BW w Sekundach]");
-        dini_IntSet("BWSettings.ini", "Time", ust);
+        dini_IntSet("Settings.ini", "Time", ust);
         SetSVarInt("BW_Time", ust);
+    } else {
+        return noAccessMessage(playerid);
+    }
+    return 1;
+}
+
+CMD:bonehead(playerid, params[]) {
+    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 25 || PlayerInfo[playerid][pNewAP] == 5) {
+        new ust[128];
+        if(sscanf(params, "s[128]", ust)) return sendTipMessage(playerid, "Uøyj /bonehead [URL do linku muzyki]");
+        //dini_IntSet("BWSettings.ini", "Time", ust);
+        //SetSVarInt("BW_Time", ust);
+        dini_Set("Settings.ini", "muzyka_bonehead", ust);
+        SetSVarString("muzyka_bonehead", ust);
     } else {
         return noAccessMessage(playerid);
     }

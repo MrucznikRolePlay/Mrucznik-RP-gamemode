@@ -4357,19 +4357,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 		   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -250 000$)",giveplayer);
+							format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 			    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		      				format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -ZDERZAK_D);
-                            if(GetPlayerOrg(playerid) > 0) {
-                            	SejfR_Add(GetPlayerOrg(playerid), floatround((ZDERZAK_D/100) * 50));
-                           	} else {
-                            	Sejf_Add(GetPlayerFraction(playerid), floatround((ZDERZAK_D/100) * 50));
-                            }
-							format(string, sizeof(string), "~r~-$%d", ZDERZAK_D);
+							DajKase(playerid, -10000);
+							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
 			    			AddVehicleComponent(pojazd, zderzakid);//zderzak
@@ -4429,19 +4424,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 		   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -250 000$)",giveplayer);
+							format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 			    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		      				format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -ZDERZAK_D);
-                            if(GetPlayerOrg(playerid) > 0) {
-                            	SejfR_Add(GetPlayerOrg(playerid), floatround((ZDERZAK_D/100) * 50));
-                           	} else {
-                            	Sejf_Add(GetPlayerFraction(playerid), floatround((ZDERZAK_D/100) * 50));
-                            }
-							format(string, sizeof(string), "~r~-$%d", ZDERZAK_D);
+							DajKase(playerid, -10000);
+							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
 			    			AddVehicleComponent(pojazd, zderzakid);//zderzak
@@ -4503,19 +4493,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    new string[256];
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 		   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -250 000$)",giveplayer);
+							format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 			    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		      				format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -ZDERZAK_D);
-                            if(GetPlayerOrg(playerid) > 0) {
-                            	SejfR_Add(GetPlayerOrg(playerid), floatround((ZDERZAK_D/100) * 50));
-                           	} else {
-                            	Sejf_Add(GetPlayerFraction(playerid), floatround((ZDERZAK_D/100) * 50));
-                            }
-							format(string, sizeof(string), "~r~-$%d", ZDERZAK_D);
+							DajKase(playerid, -10000);
+							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
 			    			AddVehicleComponent(pojazd, zderzakid);//zderzak
@@ -4568,19 +4553,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    new string[256];
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 		   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -250 000$)",giveplayer);
+							format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 			    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		      				format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -ZDERZAK_D);
-                            if(GetPlayerOrg(playerid) > 0) {
-                            	SejfR_Add(GetPlayerOrg(playerid), floatround((ZDERZAK_D/100) * 50));
-                           	} else {
-                            	Sejf_Add(GetPlayerFraction(playerid), floatround((ZDERZAK_D/100) * 50));
-                            }
-							format(string, sizeof(string), "~r~-$%d", ZDERZAK_D);
+							DajKase(playerid, -10000);
+							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
 			    			AddVehicleComponent(pojazd, zderzakid);//zderzak
@@ -4609,19 +4589,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 	   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -250 000$)",giveplayer);
+						format(string, sizeof(string), "* Zamontowa³eœ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 		    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	      				format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						DajKase(playerid, -ZDERZAK_D);
-                        if(GetPlayerOrg(playerid) > 0) {
-                           	SejfR_Add(GetPlayerOrg(playerid), floatround((ZDERZAK_D/100) * 50));
-                        } else {
-                            Sejf_Add(GetPlayerFraction(playerid), floatround((ZDERZAK_D/100) * 50));
-                        }
-						format(string, sizeof(string), "~r~-$%d", ZDERZAK_D);
+						DajKase(playerid, -10000);
+						format(string, sizeof(string), "~r~-$%d", 10000);
 						GameTextForPlayer(playerid, string, 5000, 1);
 	     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
 		    			AddVehicleComponent(pojazd,1117);//zderzak
@@ -12711,7 +12686,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(!response) return 1;
                     if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
-                    	dont_override = true;
                     	ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny stream", "Wklej poni¿ej link do streama", "Start", "Wróæ");
                     }
                 }
@@ -12775,6 +12749,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								PlayAudioStreamForPlayer(i, inputtext);
 							}
 						}
+						SetPVarString(playerid, "radioUrl", inputtext);
+						SetPVarInt(playerid, "sanlisten", 3);
 					}
 				}
 				else
@@ -15844,8 +15820,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     else if(dialogid == D_DODATKI_TYP)
     {
         if(!response) return 1;
-        if(listitem == 2 && !MRP_IsInPolice(playerid)) return SendClientMessage(playerid, COLOR_GRAD2, " Nie jestes w policji!");
-        if(listitem == 4 && !MRP_IsInGang(playerid)) return SendClientMessage(playerid, COLOR_GRAD2, " Nie jestes w gangu!");
+        if(listitem == 2 && !MRP_IsInPolice(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w policji!");
+        if(listitem == 4 && !MRP_IsInGang(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w gangu!");
         CallRemoteFunction("SEC_Dodatki_Show", "dd", playerid, listitem);
         return 1;
     }
