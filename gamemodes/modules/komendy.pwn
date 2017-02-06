@@ -10308,7 +10308,7 @@ CMD:skret(playerid)
 
 CMD:pobij(playerid, params[])
 {
-	new string[128];
+	/*new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
@@ -10450,7 +10450,8 @@ CMD:pobij(playerid, params[])
 			sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 			return 1;
 		}
-	}
+	} */
+    sendTipMessage(playerid, "Komenda dezaktywowana od wersji 2.5.6");
 	return 1;
 }
 
