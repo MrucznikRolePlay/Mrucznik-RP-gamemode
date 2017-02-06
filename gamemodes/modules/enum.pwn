@@ -3,6 +3,7 @@ enum hqZgloszenia {
     zgloszenie_kiedy[36], // kiedy nadane zgloszenie
     zgloszenie_nadal[MAX_PLAYER_NAME], // nick ktory nadal zgloszenie
     zgloszenie_tresc[128], // tresc zgloszenia
+    zgloszenie_lokacja[MAX_ZONE_NAME],
     zgloszenie_przyjal[MAX_PLAYER_NAME], // :)
     zgloszenie_status // 0 - nowe, 1 - akceptowane, 2 - odrzucone
 }
