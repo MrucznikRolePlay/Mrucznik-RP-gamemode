@@ -13613,7 +13613,6 @@ CMD:houseinfo(playerid)
 	}
 	return 1;
 }
-
 CMD:dom(playerid) return cmd_house(playerid);
 CMD:house(playerid)
 {
@@ -15443,7 +15442,35 @@ CMD:up(playerid)
 	}
 	return 1;
 }
-
+CMD:usunpozar(playerid)
+{
+	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
+	{
+	    DeleteAllFire();
+	    sendTipMessage(playerid, "Usun¹³eœ aktywne po¿ary!");
+	    sendTipMessage(playerid, "Aby wywo³aæ losowy po¿ar wpisz /losowypozar !");
+	}
+	else
+	{
+		noAccessMessage(playerid);
+	}
+	return 1;
+}
+CMD:losowypozar(playerid)
+{
+	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
+	{
+	    DeleteAllFire();
+	    AktywujPozar();
+	    sendTipMessage(playerid, "Aktywowa³eœ losowy po¿ar dla LSFD!");
+	    sendTipMessage(playerid, "Aby usun¹æ po¿ar wpisz /usunpozar !");
+	}
+	else
+	{
+		noAccessMessage(playerid);
+	}
+	return 1;
+}
 CMD:fly(playerid)
 {
 	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
@@ -18103,6 +18130,55 @@ CMD:depo(playerid, params[])
     }
     return 1;
 }
+
+CMD:tablet(playerid, params[])
+{
+	new string[512];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
+
+    if(IsPlayerConnected(playerid))
+    {
+        if(!IsACop(playerid))
+        {
+            sendErrorMessage(playerid, "Nie jesteœ policjantem!");
+            return 1;
+        }
+		new giveplayerid;
+		if( sscanf(params, "k<fix>", giveplayerid))
+		{
+			sendTipMessage(playerid, "U¿yj /tablet [id gracza/czêœæ nicku]");
+			return 1;
+		}
+		if(OnDuty[playerid] == 1)
+		{
+			if(IsPlayerConnected(giveplayerid))
+			{
+			    if(giveplayerid != INVALID_PLAYER_ID)
+			    {
+			        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+			        format(string, sizeof(string), "Imiê i nazwisko:\t%s\nWiek:\t%d\n{00ABFF}Przestêpstwo:\t{FF0000}%s\n{00ABFF}Zg³oszone przez:\t{FF0000}%s\n{FF3535}Poziom poszukiwania:\t{FF3535}%d", giveplayer, PlayerInfo[giveplayerid][pAge], PlayerCrime[giveplayerid][pAccusedof], PlayerCrime[giveplayerid][pVictim], PoziomPoszukiwania[giveplayerid]);
+	                ShowPlayerDialogEx(playerid, 9111, DIALOG_STYLE_TABLIST, "TABLET POLICYJNY", string, "Zamknij", "");
+	                format(string, sizeof(string), "* %s wyci¹ga z kieszeni tablet, po czym wpisuje dane.", sendername);
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				}
+			}
+			else
+			{
+			    sendErrorMessage(playerid, "Nie ma takiego gracza !");
+			    return 1;
+			}
+		}
+		else
+		{
+		    sendTipMessage(playerid, "Nie jesteœ na s³u¿bie.");
+			return 1;
+		}
+	}
+	return 1;
+}
+
 CMD:mdc(playerid, params[])
 {
 	new string[128];
@@ -25562,7 +25638,6 @@ CMD:veh(playerid, params[])
 	}
 	return 1;
 }
-
 CMD:fixveh(playerid)
 {
     if(IsPlayerConnected(playerid))

@@ -54,6 +54,7 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik ----> edycja Jakub 2015
 #include <fadescreen>
 #include <ACSBM>
 #include <nex-ac>						// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include "../pawno/include/systempozarow" //System PoøarÛw v0.1
 
 //YSI po crashDetect
 #include <crashdetect>                  // By Zeex, 4.15.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
@@ -4848,7 +4849,7 @@ public OnGameModeInit()
         SetSVarInt("BW_Time", 180);
     }
 
-
+    systempozarow_init();//System PoøarÛw v0.1
 	//Mrucznik:
 	Ac_OnGameModeInit();//Antyczit
 	MruMySQL_Connect();//mysql
@@ -4964,6 +4965,7 @@ public OnGameModeInit()
 		SetWorldTime(tmphour);
 	}
 	//timery
+	SetTimer("AktywujPozar", 10800000, true);//System PoøarÛw v0.1
     SetTimer("MainTimer", 1000, true);
     //SetTimer("MySQL_Refresh", 15000, true);
 	//SetTimer("JednaSekundaTimer", 1000, true);//1 sekunda timer
@@ -5325,7 +5327,9 @@ public OnPlayerUpdate(playerid)
 		printf("Problem z Update, nick: %s", GetNick(playerid));
         KickEx(playerid);
     }
-
+    
+    systempozarow_OnPlayerUpdate(playerid);//System PoøarÛw v0.1
+    
 	//Anty BH PAèDZIOCH
 	if(GetPVarInt(playerid, "Jumping") == 1)
 	{

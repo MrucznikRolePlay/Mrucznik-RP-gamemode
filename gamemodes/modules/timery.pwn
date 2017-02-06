@@ -1,6 +1,328 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
+
+//System Po¿arów v0.1
+forward UsunPozar();
+public UsunPozar()
+{
+    DeleteAllFire();
+    return 1;
+}
+forward AktywujPozar();
+public AktywujPozar()
+{
+    SetTimer("UsunPozar", 3600000, false);
+    new losowy = random(10);
+	if(losowy == 1)
+	{
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: DOM JEDNORODZINNY - IDLEWOOD");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH KUCHENKI GAZOWEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+   		SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	AddFire(2016.998,-1696.110,15.036, 100);
+		AddFire(2016.998,-1697.411,15.036, 100);
+		AddFire(2016.998,-1698.870,15.036, 100);
+		AddFire(2016.998,-1700.310,15.036, 100);
+		AddFire(2016.998,-1701.901,15.036, 100);
+		AddFire(2016.998,-1703.541,15.036, 100);
+		AddFire(2016.998,-1705.311,15.036, 100);
+		AddFire(2018.499,-1704.381,15.546, 100);
+		AddFire(2018.499,-1702.281,15.546, 100);
+		AddFire(2018.499,-1699.971,15.546, 100);
+		AddFire(2018.499,-1697.660,15.546, 100);
+		AddFire(2019.839,-1706.760,12.916, 100);
+		AddFire(2019.839,-1707.570,12.916, 100);
+		AddFire(2019.839,-1708.760,12.916, 100);
+		AddFire(2019.839,-1709.791,12.916, 100);
+		AddFire(2017.880,-1703.500,12.206, 100);
+		AddFire(2016.910,-1701.301,13.456, 10);
+		AddFire(2016.910,-1698.461,13.456, 100);
+		AddFire(2017.568,-1695.621,15.726, 100);
+		AddFire(2018.899,-1695.621,15.726, 100);
+    }
+	else if(losowy == 2)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 W OKOLICACH DMV");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK SKLEPU");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	AddFire(1362.514,-1759.767,12.359,100);
+		AddFire(1361.113,-1759.767,12.359,100);
+		AddFire(1360.043,-1759.767,12.359,100);
+		AddFire(1358.473,-1759.767,12.359,100);
+		AddFire(1357.153,-1759.767,12.359,100);
+		AddFire(1355.792,-1759.767,12.359,100);
+		AddFire(1354.202,-1759.767,12.359,100);
+		AddFire(1352.442,-1759.767,12.689,100);
+		AddFire(1352.442,-1759.767,11.189,100);
+		AddFire(1350.571,-1759.767,12.849,100);
+		AddFire(1348.951,-1759.767,12.339,100);
+		AddFire(1347.871,-1759.767,12.339,100);
+		AddFire(1347.871,-1759.767,12.339,100);
+		AddFire(1345.991,-1759.767,12.339,100);
+		AddFire(1344.361,-1759.767,12.339,100);
+		AddFire(1342.791,-1759.767,12.339,100);
+		AddFire(1342.791,-1758.750,16.589,100);
+		AddFire(1344.001,-1758.750,16.589,100);
+		AddFire(1345.682,-1758.750,16.589,100);
+		AddFire(1347.502,-1758.750,16.589,100);
+		AddFire(1356.223,-1758.750,16.589,100);
+		AddFire(1358.063,-1758.750,16.589,100);
+		AddFire(1359.403,-1758.750,16.589,100);
+		AddFire(1361.223,-1758.750,16.589,100);
+		AddFire(1362.794,-1758.750,16.589,100);
+    }
+	else if(losowy == 3)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: PIZZERIA IDLEWOOD    ");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA KUCHENKI GAZOWEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK RESTAURACJI");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		AddFire(2105.741,-1796.412,12.551, 100);
+		AddFire(2105.741,-1797.312,12.551, 100);
+		AddFire(2105.741,-1798.193,12.551, 100);
+		AddFire(2105.741,-1799.383,12.551, 100);
+		AddFire(2105.741,-1799.913,12.551, 100);
+		AddFire(2105.741,-1801.174,12.551, 100);
+		AddFire(2105.741,-1801.834,12.551, 100);
+		AddFire(2105.741,-1802.924,12.551, 100);
+		AddFire(2105.741,-1804.234,12.551, 100);
+		AddFire(2105.741,-1802.444,12.551, 100);
+		AddFire(2105.741,-1806.724,12.551, 100);
+		AddFire(2105.741,-1806.724,11.411, 100);
+		AddFire(2105.741,-1809.305,12.681, 100);
+		AddFire(2105.741,-1810.035,12.681, 100);
+		AddFire(2105.741,-1811.015,12.681, 100);
+		AddFire(2105.741,-1811.975,12.681, 100);
+		AddFire(2105.741,-1812.695,12.681, 100);
+		AddFire(2105.741,-1813.716,12.681, 100);
+		AddFire(2105.741,-1814.646,12.681, 100);
+		AddFire(2105.741,-1815.466,12.681, 100);
+		AddFire(2105.741,-1816.326,12.681, 100);
+		AddFire(2105.741,-1817.026,12.681, 100);
+    }
+	else if(losowy == 4)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP BINCO - GANTON    ");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		AddFire(2248.296,-1667.368,14.286, 100);
+		AddFire(2247.255,-1667.017,14.286, 100);
+		AddFire(2246.314,-1666.797,14.286, 100);
+		AddFire(2245.373,-1666.537,14.286, 100);
+		AddFire(2244.122,-1665.946,14.286, 100);
+		AddFire(2244.122,-1665.946,13.066, 100);
+		AddFire(2241.772,-1665.426,14.506, 100);
+		AddFire(2240.772,-1665.426,14.506, 100);
+		AddFire(2239.651,-1665.096,14.506, 100);
+		AddFire(2240.231,-1665.096,14.506, 100);
+		AddFire(2237.981,-1664.275,14.506, 100);
+		AddFire(2237.690,-1664.275,13.356, 100);
+    }
+	else if(losowy == 5)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: STACJA PALIW - TEMPLE    ");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH DYSTRYBUTORA");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK STACJI");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	AddFire(995.978,-938.445,40.229, 100);
+		AddFire(997.778,-938.445,40.229, 100);
+		AddFire(999.308,-938.445,40.229, 100);
+		AddFire(1000.818,-938.445,40.229, 100);
+		AddFire(1002.468,-938.445,40.229, 100);
+		AddFire(1001.478,-938.445,40.229, 100);
+		AddFire(1004.688,-938.445,40.229, 100);
+		AddFire(1006.008,-938.445,40.229, 100);
+		AddFire(1006.838,-938.445,40.229, 100);
+		AddFire(1008.369,-938.445,40.229, 100);
+		AddFire(1010.778,-938.445,40.229, 100);
+		AddFire(1009.228,-938.445,40.229, 100);
+    }
+	else if(losowy == 6)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: KONTENERY - LOSTNISKO LOS SANTOS");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: OCHRONA LOTNISKA");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	AddFire(2067.007,-2206.814,13.666, 100);
+		AddFire(2067.007,-2208.004,13.666, 100);
+		AddFire(2067.007,-2209.165,13.666, 100);
+		AddFire(2067.007,-2210.565,13.666, 100);
+		AddFire(2067.007,-2211.836,13.666, 100);
+		AddFire(2067.007,-2213.237,13.666, 100);
+		AddFire(2067.007,-2213.947,13.666, 100);
+		AddFire(2065.203,-2216.167,13.666, 100);
+		AddFire(2065.203,-2215.047,13.666, 100);
+		AddFire(2065.203,-2215.047,15.166, 100);
+		AddFire(2065.203,-2215.867,15.166, 100);
+		AddFire(2065.203,-2215.867,12.566, 100);
+		AddFire(2065.203,-2217.038,12.566, 100);
+		AddFire(2065.203,-2218.678,12.566, 100);
+		AddFire(2065.203,-2218.678,11.466, 100);
+		AddFire(2065.203,-2217.418,11.806, 100);
+		AddFire(2065.203,-2215.966,11.496, 100);
+		AddFire(2065.203,-2214.605,11.496, 100);
+		AddFire(2065.203,-2214.605,12.966, 100);
+		AddFire(2064.492,-2205.578,11.466, 100);
+		AddFire(2064.492,-2204.597,11.466, 100);
+		AddFire(2064.492,-2203.546,11.466, 100);
+		AddFire(2064.492,-2202.516,11.466, 100);
+		AddFire(2064.492,-2202.516,11.466, 100);
+		AddFire(2064.492,-2202.516,13.776, 100);
+    }
+	else if(losowy == 7)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: P¥CZKARNIA NA MARKET    ");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		AddFire(1037.776,-1341.086,12.726, 100);
+		AddFire(1038.607,-1341.086,12.726, 100);
+		AddFire(1038.897,-1341.086,11.326, 100);
+		AddFire(1037.667,-1341.086,11.326, 100);
+		AddFire(1040.315,-1339.865,14.896, 100);
+		AddFire(1041.766,-1339.865,14.896, 100);
+		AddFire(1038.706,-1339.865,14.896, 100);
+		AddFire(1036.616,-1339.865,14.896, 100);
+		AddFire(1035.096,-1339.865,14.896, 100);
+		AddFire(1033.426,-1339.865,14.896, 100);
+		AddFire(1031.756,-1339.865,14.896, 100);
+		AddFire(1030.695,-1339.865,14.896, 100);
+		AddFire(1029.575,-1341.645,14.896, 100);
+		AddFire(1029.575,-1343.986,14.896, 100);
+		AddFire(1042.866,-1340.755,14.896, 100);
+		AddFire(1042.866,-1340.755,12.506, 100);
+		AddFire(1042.866,-1344.856,12.506, 100);
+		AddFire(1042.866,-1344.856,14.656, 100);
+		AddFire(1042.915,-1347.697,14.656, 100);
+		AddFire(1042.154,-1339.937,11.956, 100);
+    }
+	else if(losowy == 8)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BAR W DILLIMORE    ");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	AddFire(681.627,-473.598,15.457, 100);
+		AddFire(681.627,-473.598,14.177, 100);
+		AddFire(679.547,-473.598,15.637, 100);
+		AddFire(678.266,-473.598,15.637, 100);
+		AddFire(675.796,-472.148,14.657, 100);
+		AddFire(674.576,-472.148,14.657, 100);
+		AddFire(673.396,-470.028,14.657, 100);
+		AddFire(673.396,-468.698,14.657, 100);
+		AddFire(673.396,-465.828,14.657, 100);
+		AddFire(672.246,-465.828,14.657, 100);
+		AddFire(673.975,-463.198,15.717, 100);
+		AddFire(673.975,-464.258,15.717, 100);
+		AddFire(673.975,-459.138,15.717, 100);
+		AddFire(673.975,-458.078,15.717, 100);
+		AddFire(667.795,-455.208,14.887, 100);
+		AddFire(669.115,-455.208,14.887, 100);
+		AddFire(670.155,-455.208,14.887, 100);
+		AddFire(670.155,-456.478,14.887, 100);
+		AddFire(674.785,-448.958,15.987, 100);
+		AddFire(673.225,-448.958,15.987, 100);
+		AddFire(692.644,-452.308,15.987, 100);
+		AddFire(692.644,-453.698,15.987, 100);
+		AddFire(689.085,-457.988,15.457, 100);
+		AddFire(689.085,-458.678,15.457, 100);
+		AddFire(689.085,-462.858,15.457, 100);
+		AddFire(689.085,-463.728,15.457, 100);
+		AddFire(689.085,-467.868,15.457, 100);
+		AddFire(689.085,-468.638,15.457, 100);
+		AddFire(687.184,-472.008,14.697, 100);
+		AddFire(684.235,-473.468,15.467, 100);
+    }
+	else if(losowy == 9)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: URZ¥D MIASTA PALOMINO CREEK");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK URZÊDU MIASTA");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	AddFire(2269.603,-74.425,25.554, 100);
+		AddFire(2269.603,-74.425,24.344, 100);
+		AddFire(2265.882,-76.155,24.344, 100);
+		AddFire(2266.783,-76.155,24.344, 100);
+		AddFire(2266.783,-76.155,27.574, 100);
+		AddFire(2265.833,-76.155,27.574, 100);
+		AddFire(2263.582,-76.155,27.574, 100);
+		AddFire(2261.831,-76.155,27.574, 100);
+		AddFire(2260.870,-76.155,27.574, 100);
+		AddFire(2259.750,-76.155,27.574, 100);
+		AddFire(2257.250,-76.155,27.574, 100);
+		AddFire(2255.900,-76.155,27.574, 100);
+		AddFire(2254.439,-76.155,27.574, 100);
+		AddFire(2253.129,-76.155,27.574, 100);
+		AddFire(2255.081,-76.155,24.344, 100);
+		AddFire(2256.581,-76.155,24.344, 100);
+		AddFire(2259.382,-76.155,24.344, 100);
+		AddFire(2260.893,-76.155,24.344, 100);
+		AddFire(2262.263,-76.155,24.344, 100);
+		AddFire(2263.484,-76.155,24.344, 100);
+    }
+	else if(losowy == 10)
+	{
+		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 - IDLEWOOD    ");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		AddFire(1833.399,-1840.566,12.578, 100);
+		AddFire(1833.399,-1838.866,12.578, 100);
+		AddFire(1833.399,-1837.385,12.578, 100);
+		AddFire(1833.399,-1836.025,12.578, 100);
+		AddFire(1833.719,-1842.266,12.578, 100);
+		AddFire(1833.719,-1842.266,11.268, 100);
+		AddFire(1833.719,-1843.546,11.268, 100);
+		AddFire(1833.719,-1843.546,12.728, 100);
+		AddFire(1833.719,-1845.406,12.728, 100);
+		AddFire(1833.719,-1846.675,12.728, 100);
+		AddFire(1833.719,-1848.166,12.728, 100);
+		AddFire(1833.719,-1849.596,12.728, 100);
+		AddFire(1833.719,-1849.596,11.348, 100);
+		AddFire(1833.719,-1848.346,11.348, 100);
+		AddFire(1833.719,-1847.066,11.348, 100);
+		AddFire(1833.719,-1845.565,11.348, 100);
+		AddFire(1833.719,-1839.965,11.348, 100);
+		AddFire(1833.719,-1838.075,11.348, 100);
+		AddFire(1833.719,-1836.774,11.348, 100);
+		AddFire(1833.719,-1835.814,11.348, 100);
+	}
+    return 1;
+}
+
 //tazer
 forward DostalTazerem(playerid);
 public DostalTazerem(playerid)
