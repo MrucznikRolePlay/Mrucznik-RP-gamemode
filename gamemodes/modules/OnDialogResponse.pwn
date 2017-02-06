@@ -15442,6 +15442,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             Car_Unspawn(CarData[car][c_ID], true);
             dotp=true;
         }
+		new oldmodel = CarData[car][c_Model];
         CarData[car][c_Model] = strval(inputtext);
         Car_Save(car, CAR_SAVE_STATE);
         if(dotp)
@@ -15450,6 +15451,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SetVehiclePos(CarData[car][c_ID], x, y, z);
             SetVehicleZAngle(CarData[car][c_ID], a);
         }
+		
+		//logi
+		new string[128];
+		format(string, sizeof(string), "%s zmienil model pojazdu %d z %d na %d", GetNick(playerid), car, oldmodel, strval(inputtext));
+		ActionLog(string);
         return 1;
     }
     else if(dialogid == D_EDIT_CAR_RANG)

@@ -9184,6 +9184,10 @@ CMD:unfrakcja(playerid, params[])
 					SpawnPlayer(para1);
 					format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					
+					//logi
+					format(string, sizeof(string), "%s unfrakcjowal gracza %s", sendername, GetNick(para1));
+					ActionLog(string);
 				}
 			}//not connected
 		}
@@ -24204,6 +24208,11 @@ CMD:dajlideraorg(playerid, params[])
         SendClientMessage(id, COLOR_LIGHTBLUE, str);
         format(str, 128, "Da³eœ kontrolê nad rodzin¹ %s (%d) graczowi %s", OrgInfo[orgID(family)][o_Name], family, GetNick(id));
         SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
+		
+		//logi
+		format(str, sizeof(str), "%s dal kontrole nad rodzina %d graczowi %s", GetNick(playerid), family, GetNick(id));
+		ActionLog(str);
+		
         PlayerInfo[id][pTeam] = 5;
         gTeam[id] = 5;
     }
@@ -24229,7 +24238,7 @@ CMD:zabierzlideraorg(playerid, params[])
     if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return 1;
     new id=-1;
 	if( sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /zabierzlideraorg [ID/Nick]");
-    if(id != -1)
+	if(id != -1)
     {
         if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Brak takiego gracza!");
         if(!gPlayerOrgLeader[id]) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie ma lidera rodziny!");
@@ -24243,6 +24252,10 @@ CMD:zabierzlideraorg(playerid, params[])
         SendClientMessage(id, COLOR_LIGHTBLUE, str);
         format(str, 128, "Odebra³eœ kontrolê nad rodzin¹ %s graczowi %s", OrgInfo[gPlayerOrg[id]][o_Name], GetNick(id));
         SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
+		
+		//logi
+		format(str, sizeof(str), "%s odebral kontrole nad rodzina %d graczowi %s", GetNick(playerid), gPlayerOrg[id], GetNick(id));
+		ActionLog(str);
     }
     return 1;
 }
@@ -24287,6 +24300,11 @@ CMD:makeleader(playerid, params[])
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ graczowi %s kontrolê nad frakcj¹ numer %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					
+					//logi
+					format(string, sizeof(string), "%s dal kontrole nad frakcja numer %d graczowi %s", sendername, level, giveplayer);
+					ActionLog(string);
+					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
 					else if(level == 1) { PlayerInfo[para1][pSkin] = 288; } //Police Force
 					else if(level == 2) { PlayerInfo[para1][pSkin] = 295; } //FBI/ATF
@@ -24361,6 +24379,11 @@ CMD:makewomanleader(playerid, params[])
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ kontrolê graczowi %s nad frakcj¹ numer %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					
+					//logi
+					format(string, sizeof(string), "%s dal kontrole nad frakcja numer %d graczowi %s", sendername, level, giveplayer);
+					ActionLog(string);
+					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
 					else if(level == 1) { PlayerInfo[para1][pSkin] = 93; } //Police Force
 					else if(level == 2) { PlayerInfo[para1][pSkin] = 193; } //FBI/ATF
@@ -24429,6 +24452,11 @@ CMD:makemember(playerid, params[])
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ membera graczowi %s nad frakcj¹ numer %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					
+					//logi
+					format(string, sizeof(string), "%s mianowal na czlonka frakcji numer %d gracza %s", sendername, level, giveplayer);
+					ActionLog(string);
+					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
 					else if(level == 1) { PlayerInfo[para1][pSkin] = 280; } //Police Force
 					else if(level == 2) { PlayerInfo[para1][pSkin] = 285; } //FBI/ATF
@@ -24490,6 +24518,11 @@ CMD:unmember(playerid, params[])
 						format(string, sizeof(string), "* Zosta³eœ wyrzucony z rodziny przez %s.", sendername);
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ teraz cywilem.");
+						
+						//logi
+						format(string, sizeof(string), "%s wyrzucil z frakcji gracza %s", sendername, giveplayer);
+						ActionLog(string);
+						
 		                gTeam[para1] = 3;
                         UsunBron(para1);
 						PlayerInfo[para1][pTeam] = 3;
