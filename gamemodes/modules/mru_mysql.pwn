@@ -89,6 +89,7 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     {
         //Punkty karne
         if(PlayerInfo[playerid][pPK] > 0) PoziomPoszukiwania[playerid] += 10000+(PlayerInfo[playerid][pPK]*100);
+        
     }
 
 	new query[1024], bool:fault=true;
@@ -408,6 +409,8 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     //Zapis MruCoinow
     MRP_SaveMC(playerid);
 
+    saveLegale(playerid);
+
 	return fault;
 }
 
@@ -601,6 +604,45 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pBW],
 		PlayerInfo[playerid][pCzystka],
         PlayerInfo[playerid][pCarSlots]);
+	}
+
+	//legal
+	format(lStr, sizeof lStr, "SELECT * FROM `mru_legal` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
+	new DBResult:db_result;
+	db_result = db_query(db_handle, lStr);
+
+	playerWeapons[playerid][weaponLegal1] 	= 1;
+	playerWeapons[playerid][weaponLegal2] 	= 1;
+	playerWeapons[playerid][weaponLegal3] 	= 1;
+	playerWeapons[playerid][weaponLegal4] 	= 1;
+	playerWeapons[playerid][weaponLegal5] 	= 1;
+	playerWeapons[playerid][weaponLegal6] 	= 1;
+	playerWeapons[playerid][weaponLegal7] 	= 1;
+	playerWeapons[playerid][weaponLegal8] 	= 1;
+	playerWeapons[playerid][weaponLegal9] 	= 1;
+	playerWeapons[playerid][weaponLegal10] 	= 1;
+	playerWeapons[playerid][weaponLegal11] 	= 1;
+	playerWeapons[playerid][weaponLegal12] 	= 1;
+	playerWeapons[playerid][weaponLegal13] 	= 1;
+
+	if(db_num_rows(db_result)) {
+		playerWeapons[playerid][weaponLegal1] = db_get_field_assoc_int(db_result, "weapon1");
+		playerWeapons[playerid][weaponLegal2] = db_get_field_assoc_int(db_result, "weapon2");
+		playerWeapons[playerid][weaponLegal3] = db_get_field_assoc_int(db_result, "weapon3");
+		playerWeapons[playerid][weaponLegal4] = db_get_field_assoc_int(db_result, "weapon4");
+		playerWeapons[playerid][weaponLegal5] = db_get_field_assoc_int(db_result, "weapon5");
+		playerWeapons[playerid][weaponLegal6] = db_get_field_assoc_int(db_result, "weapon6");
+		playerWeapons[playerid][weaponLegal7] = db_get_field_assoc_int(db_result, "weapon7");
+		playerWeapons[playerid][weaponLegal8] = db_get_field_assoc_int(db_result, "weapon8");
+		playerWeapons[playerid][weaponLegal9] = db_get_field_assoc_int(db_result, "weapon9");
+		playerWeapons[playerid][weaponLegal10] = db_get_field_assoc_int(db_result, "weapon10");
+		playerWeapons[playerid][weaponLegal11] = db_get_field_assoc_int(db_result, "weapon11");
+		playerWeapons[playerid][weaponLegal12] = db_get_field_assoc_int(db_result, "weapon12");
+		playerWeapons[playerid][weaponLegal13] = db_get_field_assoc_int(db_result, "weapon13");
+		printf("Wczytano cos kurwa");
+	} else {
+		format(lStr, sizeof lStr, "INSERT INTO `mru_legal` (`pID`,`weapon1`, `weapon2`, `weapon3`, `weapon4`, `weapon5`, `weapon6`, `weapon7`, `weapon8`, `weapon9`, `weapon10`, `weapon11`, `weapon12`, `weapon13`) VALUES (%d, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)", PlayerInfo[playerid][pUID]);
+		db_free_result(db_query(db_handle, lStr));
 	}
 
     MruMySQL_LoadAccess(playerid);

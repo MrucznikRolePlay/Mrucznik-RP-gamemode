@@ -4,6 +4,8 @@
 
 #define DEBUG 2
 
+
+
 //Makra:
 #define GetPlayerWeather(%1) GetPVarInt(%1, "Weather")
 #define Distance3D(%1,%2,%3,%4,%5,%6) (VectorSize(%1-%4,%2-%5,%3-%6))/100)
@@ -140,9 +142,13 @@
 #define FRAC_BALLAS 13
 #define FRAC_VAGOS  14
 #define FRAC_NOA    15
-#define FRAC_WPS    16
+#define FRAC_WPS    16 
 #define FRAC_LSFD   17
-#define FRAC_RR   18
+#define SPOILER_D 200000
+#define ZDERZAK_D 250000
+#define FELGA_D 250000
+#define NITRO_D 500000
+#define HYDRA_D 250000
 
 new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
     FAMILY_FDU = -1;
@@ -425,6 +431,9 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define CAR_OWNER_JOB       4
 #define CAR_OWNER_SPECIAL   5
 #define CAR_OWNER_PUBLIC    6
+
+
+
 
 //Auta specjalne
 #define RENT_CAR        1
