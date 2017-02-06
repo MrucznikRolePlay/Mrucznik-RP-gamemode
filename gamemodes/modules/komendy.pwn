@@ -23848,24 +23848,24 @@ CMD:przyjmij(playerid, params[])
 				            sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz przyj¹æ tego gracza, gdy¿ posiada ju¿ pracê!");
 				            return 1;
 				        }
-                        /*if(PlayerInfo[playerid][pLider] == 1) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; ftext = "Policja"; PlayerInfo[para1][pSkin] = 280; SetPlayerSkin(para1, 280); }
-				        else if(PlayerInfo[playerid][pLider] == 2) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; ftext = "FBI"; PlayerInfo[para1][pSkin] = 286; SetPlayerSkin(para1, 286); }
-				        else if(PlayerInfo[playerid][pLider] == 3) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; ftext = "SASP"; PlayerInfo[para1][pSkin] = 287; SetPlayerSkin(para1, 287); }
-				        else if(PlayerInfo[playerid][pLider] == 4) { PlayerInfo[para1][pTeam] = 1; gTeam[para1] = 1; ftext = "Lekarze"; PlayerInfo[para1][pSkin] = 70; SetPlayerSkin(para1, 70); }
-				        else if(PlayerInfo[playerid][pLider] == 5) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "ICC"; PlayerInfo[para1][pSkin] = 258; SetPlayerSkin(para1, 120); }
-				        else if(PlayerInfo[playerid][pLider] == 6) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "Yakuza"; PlayerInfo[para1][pSkin] = 120; SetPlayerSkin(para1, 258); }
-				        else if(PlayerInfo[playerid][pLider] == 7) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; ftext = "BOR"; PlayerInfo[para1][pSkin] = 59; SetPlayerSkin(para1, 59); }
-				        else if(PlayerInfo[playerid][pLider] == 8) { PlayerInfo[para1][pTeam] = 10; gTeam[para1] = 12; ftext = "Hitman Agency"; PlayerInfo[para1][pSkin] = 127; SetPlayerSkin(para1, 127); }
-				        else if(PlayerInfo[playerid][pLider] == 9) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; ftext = "San News Studio"; PlayerInfo[para1][pSkin] = 148; SetPlayerSkin(para1, 148); }
-				        else if(PlayerInfo[playerid][pLider] == 10) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; ftext = "Taxi Corporation"; PlayerInfo[para1][pSkin] = 253; SetPlayerSkin(para1, 253); }
-				        else if(PlayerInfo[playerid][pLider] == 11) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; ftext = "Urzêdnicy"; PlayerInfo[para1][pSkin] = 60; SetPlayerSkin(para1, 60); }
-				        else if(PlayerInfo[playerid][pLider] == 12) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "Grove Street"; PlayerInfo[para1][pSkin] = 270; SetPlayerSkin(para1, 270); }
-				        else if(PlayerInfo[playerid][pLider] == 13) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "Ballas"; PlayerInfo[para1][pSkin] = 103; SetPlayerSkin(para1, 103); }
-				        else if(PlayerInfo[playerid][pLider] == 14) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "Latin Kings"; PlayerInfo[para1][pSkin] = 108; SetPlayerSkin(para1, 108); }
-                        else if(PlayerInfo[playerid][pLider] == 15) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "NoA"; PlayerInfo[para1][pSkin] = 8; SetPlayerSkin(para1, 8); }
-                        else if(PlayerInfo[playerid][pLider] == 16) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; ftext = "WPS"; PlayerInfo[para1][pSkin] = 206; SetPlayerSkin(para1, 206); }
-                        else if(PlayerInfo[playerid][pLider] == 17) { PlayerInfo[para1][pTeam] = 1; gTeam[para1] = 1; ftext = "LSFD"; SetPlayerSkin(para1, 278); PlayerInfo[para1][pSkin] = 278;}
-						else return 1; */
+                        if(PlayerInfo[playerid][pLider] == 1) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; PlayerInfo[para1][pSkin] = 280; SetPlayerSkin(para1, 280); }
+				        else if(PlayerInfo[playerid][pLider] == 2) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; PlayerInfo[para1][pSkin] = 286; SetPlayerSkin(para1, 286); }
+				        else if(PlayerInfo[playerid][pLider] == 3) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; PlayerInfo[para1][pSkin] = 287; SetPlayerSkin(para1, 287); }
+				        else if(PlayerInfo[playerid][pLider] == 4) { PlayerInfo[para1][pTeam] = 1; gTeam[para1] = 1; PlayerInfo[para1][pSkin] = 70; SetPlayerSkin(para1, 70); }
+				        else if(PlayerInfo[playerid][pLider] == 5) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 258; SetPlayerSkin(para1, 120); }
+				        else if(PlayerInfo[playerid][pLider] == 6) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 120; SetPlayerSkin(para1, 258); }
+				        else if(PlayerInfo[playerid][pLider] == 7) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; PlayerInfo[para1][pSkin] = 59; SetPlayerSkin(para1, 59); }
+				        else if(PlayerInfo[playerid][pLider] == 8) { PlayerInfo[para1][pTeam] = 10; gTeam[para1] = 12; PlayerInfo[para1][pSkin] = 127; SetPlayerSkin(para1, 127); }
+				        else if(PlayerInfo[playerid][pLider] == 9) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; PlayerInfo[para1][pSkin] = 148; SetPlayerSkin(para1, 148); }
+				        else if(PlayerInfo[playerid][pLider] == 10) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; PlayerInfo[para1][pSkin] = 253; SetPlayerSkin(para1, 253); }
+				        else if(PlayerInfo[playerid][pLider] == 11) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; PlayerInfo[para1][pSkin] = 60; SetPlayerSkin(para1, 60); }
+				        else if(PlayerInfo[playerid][pLider] == 12) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 270; SetPlayerSkin(para1, 270); }
+				        else if(PlayerInfo[playerid][pLider] == 13) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 103; SetPlayerSkin(para1, 103); }
+				        else if(PlayerInfo[playerid][pLider] == 14) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 108; SetPlayerSkin(para1, 108); }
+                        else if(PlayerInfo[playerid][pLider] == 15) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 8; SetPlayerSkin(para1, 8); }
+                        else if(PlayerInfo[playerid][pLider] == 16) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 206; SetPlayerSkin(para1, 206); }
+                        else if(PlayerInfo[playerid][pLider] == 17) { PlayerInfo[para1][pTeam] = 1; gTeam[para1] = 1; SetPlayerSkin(para1, 278); PlayerInfo[para1][pSkin] = 278;}
+						else return 1;
                         new ftextid = PlayerInfo[playerid][pLider];
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
