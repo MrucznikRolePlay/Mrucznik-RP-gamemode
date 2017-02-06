@@ -26916,6 +26916,28 @@ CMD:changelog(playerid, params[])
         SendClientMessage(playerid,COLOR_WHITE,"Nowy wyglπd komendy /zmienskin dla HA.");
         SendClientMessage(playerid,COLOR_WHITE,"Nowe miejsce DeMorgan.");
     }
+	else if(strcmp(wersja,"2.5.6",true) == 0)
+	{
+		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
+		SendClientMessage(playerid,COLOR_BLUE,"----------   BY niceCzlowiek   ---------");
+		SendClientMessage(playerid,COLOR_WHITE,"Frakcje porzπdkowe otrzymujπ teraz pieniπdze do sejfu frakcyjnego za aresztowania, mandaty oraz kaucje.");
+		SendClientMessage(playerid,COLOR_WHITE,"Pozwolenia prawnicze wydaje siÍ teraz za pomocπ /pozwolenie [id], druga osoba musi je akceptowaÊ za pomocπ /app ");
+		SendClientMessage(playerid,COLOR_WHITE,"Wprowadzono komendÍ /bwtime, ktÛra pozwala administracji ustaliÊ czas BW,");
+		SendClientMessage(playerid,COLOR_WHITE,"Wprowadzono komendÍ /kamizelka, ktÛra pozwala policjantom przywdziaÊ kamizelkÍ (obiekt oraz 100% pancerza),");
+		SendClientMessage(playerid,COLOR_WHITE,"Podniesiono skill SDPistol,");
+		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono resetowanie patrolu, gdy jeden z patrolujπcych wyjdzie z serwera,");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano zawijanie czatu do normalnego czatu, oraz komend: /w /s /k /me /do,");
+		SendClientMessage(playerid,COLOR_WHITE,"Oddzielono anty-spam /report od reszty licznikÛw anty-spamu,");
+		SendClientMessage(playerid,COLOR_WHITE,"W≥πczono BW na ca≥e San Andreas,");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano moøliwoúÊ zmiany muzyki w klubie bonehead");
+		SendClientMessage(playerid,COLOR_WHITE,"UsuniÍto bug z /tankuj");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano legalnoúÊ broni Od teraz, kaøda zakupiona broÒ w gunstore bÍdzie w /sb wyúwietla≥a siÍ jako LEGALNA...");
+		SendClientMessage(playerid,COLOR_WHITE,"... a kaøda broÒ zakupiona od mafii bÍdzie okreúlona jako Z NIEZNANEGO èR”D£A");
+		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono sloty rodzin oraz odbudowano sejfy frakcyjne");
+		SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano system poøarÛw by PECET");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendÍ /tablet dla org. porzπdkowych - PECET");
+	}
 	else
 	{
 		SendClientMessage(playerid,COLOR_BLUE,"----------   DostÍpne wersje   ---------");
@@ -26927,6 +26949,7 @@ CMD:changelog(playerid, params[])
 		SendClientMessage(playerid,COLOR_WHITE,"2.4.92");
         SendClientMessage(playerid,COLOR_WHITE,"2.4.93");
         SendClientMessage(playerid,COLOR_WHITE,"2.5.2");
+		SendClientMessage(playerid,COLOR_WHITE,"2.5.6");
 		SendClientMessage(playerid,COLOR_BLUE,"------ Aktualna wersja: "VERSION" ------");
 	}
 	return 1;
