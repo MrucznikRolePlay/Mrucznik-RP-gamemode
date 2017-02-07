@@ -16820,7 +16820,7 @@ CMD:do(playerid, params[])
     {
         //format(string, sizeof(string), "* %s %s", GetNick(playerid, true), params);
         format(string, sizeof(string), "* %s (( %s ))", params, GetNick(playerid, true));
-        ProxDetector(10.0, playerid, string, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff);
+        ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     }
     else
     {
@@ -16833,10 +16833,10 @@ CMD:do(playerid, params[])
             strdel(params, pos, strlen(params));
 
             format(string, sizeof(string), "* %s [.]", params);
-            ProxDetector(10.0, playerid, string, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff);
+            ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 
             format(string, sizeof(string), "[.] %s (( %s ))", text, GetNick(playerid, true));
-            ProxDetector(10.0, playerid, string, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff, 0xCB8DEBff);
+            ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         }
     }
     return 1;
@@ -17150,7 +17150,7 @@ CMD:k(playerid, params[])
 		ProxDetector(30.0, playerid, string,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_FADE1,COLOR_FADE2); */
         if(strlen(params) < 78)
         {
-            format(string, sizeof(string), "%s krzyczy: %s", GetNick(playerid, true), params);
+            format(string, sizeof(string), "%s krzyczy: %s!!", GetNick(playerid, true), params);
             ProxDetector(30.0, playerid, string,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_FADE1,COLOR_FADE2);
         }
         else
@@ -17165,7 +17165,7 @@ CMD:k(playerid, params[])
 
                 format(string, sizeof(string), "%s krzyczy: %s", GetNick(playerid, true), params);
                 ProxDetector(30.0, playerid, string,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_FADE1,COLOR_FADE2);
-                format(string, sizeof(string), "[.] %s", text);
+                format(string, sizeof(string), "[.] %s!!", text);
                 ProxDetector(30.0, playerid, string,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_FADE1,COLOR_FADE2);
             }
         }
@@ -17859,7 +17859,20 @@ CMD:kamizelka(playerid)
         GetPlayerName(playerid, sendername, sizeof(sendername));
         if(IsACop(playerid))
         {
-            if (PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141))
+            if (PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141)
+			|| PlayerToPoint(3, playerid,255.3,77.4,1003.6)
+            || PlayerToPoint(5, playerid, 266.7904,118.9303,1004.6172)
+            //|| PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609) //STARE DUTY
+            || PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
+            || PlayerToPoint(3, playerid, 1572.0812,-1631.5923,13.3991) // NOWE DUTY KILSON
+            || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
+            || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
+            || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
+			|| PlayerToPoint(3, playerid, 571.9957,-1453.4821,32.9522) //nowe FBI by Dywan
+            || PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
+            || PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ) //nowe komi by dywan)
+			|| IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) 
+			|| IsPlayerInRangeOfPoint(playerid, 5.0, 609.0364,-555.1090,19.4573))
             {
                 if(OnDuty[playerid] == 1 && GetPVarInt(playerid, "kamizelka-Pd") == 0)
                 {
@@ -25530,10 +25543,16 @@ CMD:givegun(playerid, params[])
 		            	PlayerInfo[playa][pAmmo7] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 					}
-					else if( gun >= 41 && gun <= 43)
+					else if( gun == 41 || gun == 43)
 					{
 					    PlayerInfo[playa][pGun7] = gun;
 		            	PlayerInfo[playa][pAmmo7] = ammo;
+						GivePlayerWeapon(playa, gun, ammo);
+					}
+					else if( gun == 42)
+					{
+					    PlayerInfo[playa][pGun9] = gun;
+		            	PlayerInfo[playa][pAmmo9] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 					}
 					else if( gun == 46)

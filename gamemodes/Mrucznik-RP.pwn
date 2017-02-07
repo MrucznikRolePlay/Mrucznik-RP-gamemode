@@ -49,7 +49,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <foreach>
 #include <zcmd>
 #include <md5>
-#include <dini>
+#include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
 #include <ACSBM>
@@ -5097,6 +5097,9 @@ public OnGameModeExit()
         if(noclipdata[i][cameramode] == CAMERA_MODE_FLY) CancelFlyMode(i);
         MruMySQL_SaveAccount(i, true, true);
     }
+	
+	DOF2_Exit();
+	
     GLOBAL_EXIT = true;
     print("Serwer zostaje wy³¹czony.");
 	#if DEBUG == 1
