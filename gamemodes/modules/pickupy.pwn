@@ -403,7 +403,7 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("Przejœcie do cel\n U¿yj: /wejdz", COLOR_GRAD1, -1674.5769,903.1641,-48.9141, 3.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);//138
 
 	CreateDynamic3DTextLabel("Wyjœcie", COLOR_PANICRED,  -1674.4122,917.7183,-52.4141, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);//nowe komi
-	CreateDynamic3DTextLabel("Zbrojownia SWAT \n U¿yj: /swat", COLOR_BLACK,  -1674.8365,866.0356,-52.4141, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
+	CreateDynamic3DTextLabel("Zbrojownia LSPD \n Komendy: /kamizelka /swat /szturmowy", COLOR_LIGHTBLUE,  -1674.8365,866.0356,-52.4141, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
 	CreateDynamic3DTextLabel("{6699FF}Bonehead Club",0x80FF0084,2447.8284,-1963.1549,13.5469,15);
 
 	NapislotLS1 = CreateDynamic3DTextLabel("Kasa 1\nCena biletu:\nBrak", COLOR_BLUE, 1593.3000488281,-2285.6000976563,-75, 25.0);

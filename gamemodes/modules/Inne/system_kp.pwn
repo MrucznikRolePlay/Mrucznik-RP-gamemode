@@ -133,17 +133,6 @@ stock MRP_LoadPremium(playerid)
         PlayerMC[playerid]+=200*PlayerInfo[playerid][pDonateRank];
         PlayerInfo[playerid][pCarSlots] += clamp(PlayerInfo[playerid][pDonateRank], 1, 2);
         if(PlayerInfo[playerid][pGaraz] > 0) PlayerInfo[playerid][pCarSlots]++;
-        new nickchange=0;
-        switch(PlayerInfo[playerid][pDonateRank])
-        {
-            case 1: nickchange=4;
-            case 2: nickchange=6;
-            case 3: nickchange=8;
-        }
-        new nc=1+nickchange;
-        new amount = nc-PlayerInfo[playerid][pZmienilNick];
-        if(amount < 0) amount = 0;
-        PlayerInfo[playerid][pZmienilNick] = amount;
         MRP_GiveKP(playerid, 0);
 
     }
@@ -260,7 +249,7 @@ public MRP_GiveKP(playerid, time)
         {
             SendClientMessage(playerid, COLOR_LIGHTBLUE, "Otrzyma³es Konto Premium na czas nieokreœlony.");
             SendClientMessage(playerid, COLOR_LIGHTBLUE, "Pamiêtaj, ¿e wymagamy przegrania 15 godzin w ci¹gu 3 miesi¹cy!");
-            PlayerInfo[playerid][pDonateRank] = 10;
+            PlayerInfo[playerid][pDonateRank] = 0;
         }
         else
         {
