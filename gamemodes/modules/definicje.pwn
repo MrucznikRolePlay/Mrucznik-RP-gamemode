@@ -225,6 +225,7 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define D_AUTO_ACTION           500
 #define D_AUTO_RESPAWN          7780
 #define D_AUTO_UNSPAWN          7781
+#define D_AUTO_REJESTRACJA      7783
 #define D_AUTO_RESPRAY          33
 #define D_AUTO_RESPRAY2         34
 #define D_AUTO_RESPRAY_OWN      37

@@ -1,5 +1,10 @@
 //funkcje.pwn     AKTUALNA MAPA
 
+public Lowienie(playerid)
+{
+FishGood[playerid] = 0;
+return 1;
+}
 
 stock saveLegale(playerid) {
 	//LEGAL
@@ -1651,6 +1656,7 @@ SetWeatherEx(id)
 {
     if(!(1 < id < 21) || id == 11 || id == 19) return 1;
 	SetWeather(id);
+	ServerWeather = id;
 	foreach(Player, i)
 	{
     	SetPVarInt(i, "Weather", id);
@@ -1933,7 +1939,7 @@ IsAFakeKonto(playerid)
 	{
 	    new nick[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Gniewomir_Wonsz", false) == 0 || strcmp(nick,"Filemon_Paprotka", false) == 0 || strcmp(nick,"Bernardo_Velasco", false) == 0)
+		if(strcmp(nick,"Gniewomir_Wonsz", false) == 0 || strcmp(nick,"Filemon_Paprotka", false) == 0 || strcmp(nick,"Julia_Westfield", false) == 0)
 		{
 		    return 1;
 		}
@@ -4247,7 +4253,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
-			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1)
+			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1 || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
 			    {
       				PoziomPoszukiwania[playerid] = 0;
 				}
@@ -6895,6 +6901,30 @@ ABroadCast(color,const string[],level)
 			{
 				SendClientMessage(i, color, string);
 			}
+		}
+	}
+	printf("%s", string);
+	return 1;
+}
+
+ABroadCast2(color,const string[],level)
+{
+	foreach(Player, i)
+	{
+		if(IsPlayerConnected(i))
+		{
+			if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
+			{
+				SendClientMessage(i, color, string);
+			}
+			else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
+			{
+				SendClientMessage(i, color, string);
+			}
+			/*else if (PlayerInfo[i][pZG] >= level && TogPodglad[i] == 0)
+			{
+				SendClientMessage(i, color, string);
+			}*/
 		}
 	}
 	printf("%s", string);
@@ -10509,6 +10539,10 @@ stock Oil_Destroy(lID)
         TextDrawHideForPlayer(i, OilTXD_BG[0]);
         TextDrawHideForPlayer(i, OilTXD_BG[1]);
         ApplyAnimation(i, "BOMBER", "BOM_Plant_Crouch_Out", 4.0, 0, 0, 0, 0, -1);
+        SendClientMessage(i, COLOR_WHITE, "[LSFD] Usun¹³eœ plamê oleju! Otrzymujesz 2 500$! [LSFD]");
+        DajKase(i, 2500);
+        SendFamilyMessage(17, COLOR_GREEN, "[LSFD] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 2 500$! [LSFD]");
+        Sejf_Add(17, 2500);
     }
 }
 

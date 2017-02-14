@@ -49,12 +49,13 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <foreach>
 #include <zcmd>
 #include <md5>
-#include <dini>
+#include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
 #include <ACSBM>
+#define AC_MAX_CONNECTS_FROM_IP		5
 #include <nex-ac>						// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include <systempozarow> //System Po¿arów v0.1
+#include "../pawno/include/systempozarow" //System Po¿arów v0.1
 
 //YSI po crashDetect
 #include <crashdetect>                  // By Zeex, 4.15.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
@@ -1434,6 +1435,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
 
+    SetWeatherEx(ServerWeather);//Pogoda
 	//Diler Broni
 	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
 	{
@@ -4939,6 +4941,7 @@ public OnGameModeInit()
 	if(!realtime)
 	{
 		SetWorldTime(wtime);
+		ServerTime = wtime;
 	}
     SetWeatherEx(3);
 	AllowInteriorWeapons(1);
@@ -4963,6 +4966,7 @@ public OnGameModeInit()
 		new tmphour, tmpminute, tmpsecond;
 		gettime(tmphour, tmpminute, tmpsecond);
 		SetWorldTime(tmphour);
+		ServerTime = tmphour;
 	}
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
@@ -5096,6 +5100,9 @@ public OnGameModeExit()
         if(noclipdata[i][cameramode] == CAMERA_MODE_FLY) CancelFlyMode(i);
         MruMySQL_SaveAccount(i, true, true);
     }
+	
+	DOF2_Exit();
+	
     GLOBAL_EXIT = true;
     print("Serwer zostaje wy³¹czony.");
 	#if DEBUG == 1
