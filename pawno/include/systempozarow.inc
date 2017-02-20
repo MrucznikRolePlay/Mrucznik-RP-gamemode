@@ -81,6 +81,7 @@ public systempozarow_OnPlayerUpdate(playerid)
  	        	    if(PlayerFaces(playerid, FirePos[i][0],  FirePos[i][1],  FirePos[i][2]+2, 1) && IsPlayerInRangeOfPoint(playerid, 10, FirePos[i][0],  FirePos[i][1],  FirePos[i][2]))
  	        		{
 			    		FireHealth[i]-=2;
+
 			    		if(FireHealth[i] <= 0 && TotalFires == 1)
 			    		{
 			    		    DeleteFire(i);

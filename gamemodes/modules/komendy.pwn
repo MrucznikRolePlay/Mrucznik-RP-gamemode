@@ -9681,7 +9681,7 @@ CMD:blok(playerid, params[])
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -16536,6 +16536,7 @@ CMD:togooc(playerid)
 	}
 	return 1;
 }
+
 CMD:togpodglad(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -16556,6 +16557,7 @@ CMD:togpodglad(playerid)
 	}
 	return 1;
 }
+
 CMD:togcrime(playerid) return cmd_togwl(playerid);
 CMD:toghq(playerid) return cmd_togwl(playerid);
 CMD:togwl(playerid)
@@ -16861,7 +16863,6 @@ CMD:do(playerid, params[])
         return 1;
     }
     new string[256];
-    //params[0] = tolower(params[0]);
     
     if(strlen(params) < 78)
     {
@@ -16901,7 +16902,9 @@ CMD:odpal(playerid)
             return 1;
         }
         if(Refueling[playerid] == 1) return sendTipMessage(playerid, "Nie mo¿na odpaliæ silnika, gdy pojazd jest tankowany!");
+
         if(Naprawiasie[playerid] == 1) return sendTipMessage(playerid, "Nie mo¿na odpaliæ silnika, gdy pojazd jest naprawiany!");
+
         if(OdpalanieSpam[playerid] == 1)
         {
             sendTipMessage(playerid, "Odpalasz ju¿ wóz!");
@@ -17471,7 +17474,9 @@ CMD:dutycd(playerid)
 			return 1;
 		}
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby wzi¹æ s³u¿be musisz byæ pieszo!");
+
         if(OnDuty[playerid]==1 && OnDutyCD[playerid] == 0) return sendTipMessage(playerid, "U¿yj /duty !");
+
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
 		{
@@ -17504,12 +17509,12 @@ CMD:dutycd(playerid)
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					SetPlayerArmour(playerid, 0.0);
 	    		    SetPlayerHealth(playerid, 100);
-	    		    //SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+					
 	    		    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
                     OnDuty[playerid] = 0;
                     OnDutyCD[playerid] = 0;
                     PrzywrocBron(playerid);
-                    //SetPlayerToTeamColor(playerid);
+                    SetPlayerToTeamColor(playerid);
 				}
 			}
 			else
@@ -18148,6 +18153,7 @@ CMD:departament(playerid, params[])
                 return 1;
             }
             new member = GetPlayerFraction(playerid);
+			
             if(0 < member <= 4 || member == 17)// || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
             {
                 format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
@@ -18156,10 +18162,12 @@ CMD:departament(playerid, params[])
                 SendTeamMessage(3, COLOR_ALLDEPT, string);
                 SendTeamMessage(2, COLOR_ALLDEPT, string);
                 SendTeamMessage(1, COLOR_ALLDEPT, string);
+				
                 format(string, sizeof(string), "%s mówi przez radio: %s", sendername, params);
                 ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
                 printf("%s", string);
                 format(string, sizeof(string), "%s mówi przez radio: %s", sendername, params);
+
                 SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
             }
             else
@@ -19972,8 +19980,10 @@ CMD:wejdz(playerid)
             SetPlayerPosEx(playerid,1294.6075, -1324.5051, 38.9696);
             GameTextForPlayer(playerid, "~r~Witamy w sadzie! ~n~ by abram01", 6000, 1);
             SetPlayerVirtualWorld ( playerid, 500 ) ;
+			
             SetPlayerWeather(playerid, 3);//Pogoda
             SetPlayerTime(playerid, 14, 0);//Czas
+			
             Wchodzenie(playerid);
         }
         else if(IsPlayerInRangeOfPoint(playerid,2,1286.0413,-1329.2007,13.5515))
@@ -23507,7 +23517,7 @@ CMD:adminajail(playerid, params[])
 
 		if (PlayerInfo[playa][pJailed] == 0)
 		{
-			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 			{
 			    if(IsPlayerConnected(playa))
 			    {
@@ -23634,6 +23644,7 @@ CMD:tod(playerid, params[])
 		{
             SetWorldTime(hour);
             ServerTime = hour;
+			
 			format(string, sizeof(string), "Czas zmieniony na %d Godzine.", hour);
 			BroadCast(COLOR_GRAD1, string);
 
@@ -25283,6 +25294,7 @@ CMD:tp(playerid, params[])
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				GetPlayerName(plo1, giveplayer01, sizeof(giveplayer01));
 				GetPlayerName(plo, giveplayer02, sizeof(giveplayer02));
+				
 				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL))
 				{
 					new bool:liczydelko=false;
@@ -25806,7 +25818,7 @@ CMD:zmienhp(playerid, params[])
 					{
 					    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-						printf("AdmCmd: %s da³ $d hp %s", sendername, health,  giveplayer);
+						printf("AdmCmd: %s da³ %d hp %s", sendername, health,  giveplayer);
 					    SetVehicleHealth(GetPlayerVehicleID(playa), health);
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
 					}
@@ -26279,7 +26291,7 @@ CMD:warn(playerid, params[])
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 		{
             if(AntySpam[playerid] == 1)
 		    {
@@ -26528,7 +26540,7 @@ CMD:ban(playerid, params[])
 	            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				new str[128];
-	            if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4)
+	            if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] == 5)
 	            {
 					if(IsPlayerAdmin(giveplayerid) || Uprawnienia(giveplayerid, ACCESS_OWNER))
 					{
@@ -34885,38 +34897,6 @@ CMD:akceptuj(playerid, params[])
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia ze skrzynki oraz zaczyna naprawiaæ pojazd %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
                             ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                             Naprawiasie[playerid] = 1;
-                            /*GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
-                            GetPlayerName(playerid, sendername, sizeof(sendername));
-                            RepairCar[playerid] = GetPlayerVehicleID(playerid);
-                            SetVehicleHealth(RepairCar[playerid], 1000.0);
-                            RepairVehicle(RepairCar[playerid]);
-
-                            CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
-                            CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
-
-                            PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
-                            PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
-                            format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,RepairPrice[playerid]);
-                            SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia oraz naprawia %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
-                            ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                            format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
-                            ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                            PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
-                            if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            ZabierzKase(playerid, RepairPrice[playerid]);
-                            DajKase(RepairOffer[playerid], RepairPrice[playerid]);
-                            RepairOffer[playerid] = 999;
-                            RepairPrice[playerid] = 0;*/
                             return 1;
                         }
                         return 1;
@@ -39606,11 +39586,17 @@ CMD:fpanel(playerid) {
     return 1;
 }
 
-CMD:anulujzp(playerid, params[]) {
-    if(PlayerInfo[playerid][pAdmin] >= 5) {
+CMD:anulujzp(playerid, params[]) 
+{
+    if(PlayerInfo[playerid][pAdmin] >= 5) 
+	{
         new giveid, adminnick[MAX_PLAYER_NAME], gracznick[MAX_PLAYER_NAME];
-        if(sscanf(params, "k<fix>", giveid)) return sendTipMessage(playerid, "U¿yj /anulujzp [czêœæ nicku/id]"); 
-        if(PlayerInfo[giveid][pCarLic] == 0 || PlayerInfo[giveid][pCarLic] == 1) {
+		
+        if(sscanf(params, "k<fix>", giveid)) 
+			return sendTipMessage(playerid, "U¿yj /anulujzp [czêœæ nicku/id]"); 
+			
+        if(PlayerInfo[giveid][pCarLic] == 0 || PlayerInfo[giveid][pCarLic] == 1) 
+		{
             return sendErrorMessage(playerid, "Ten gracz nie posiada zabranego prawa jazdy!");
         }
         PlayerInfo[giveid][pPK] = 0;
@@ -39622,7 +39608,9 @@ CMD:anulujzp(playerid, params[]) {
         sendTipMessage(giveid, string, COLOR_LIGHTBLUE);
         format(string, sizeof(string), "Zlikwidowa³eœ %s blokadê na prawo jazdy!", gracznick);
         sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
-    } else {
+    } 
+	else 
+	{
         noAccessMessage(playerid);
     }
     return 1;

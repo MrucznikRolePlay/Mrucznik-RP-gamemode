@@ -2,8 +2,8 @@
 
 public Lowienie(playerid)
 {
-FishGood[playerid] = 0;
-return 1;
+	FishGood[playerid] = 0;
+	return 1;
 }
 
 stock saveLegale(playerid) {

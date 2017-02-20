@@ -1,5 +1,6 @@
 //zmienne.pwn
 
+
 //FishGood
 new FishGood[MAX_PLAYERS];
 //WINDA
@@ -10,6 +11,8 @@ new SadWindap4 = 0;//Winda Sπd
 
 new ServerTime = 14;//Czas
 new ServerWeather = 3;//Pogoda
+
+
 //legal
 new DB:db_handle;
 enum eLegalWpns {
@@ -49,8 +52,10 @@ new PaniJanina;
 
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
+
 //Podglad
 new TogPodglad[MAX_PLAYERS];
+
 //dodatkiPD
 new DodatkiPD[MAX_PLAYERS];
 //AFK timer
