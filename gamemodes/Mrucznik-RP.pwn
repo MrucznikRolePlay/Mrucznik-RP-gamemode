@@ -1435,6 +1435,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
 
+    SetWeatherEx(ServerWeather);//Pogoda
 	//Diler Broni
 	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
 	{
@@ -4940,6 +4941,7 @@ public OnGameModeInit()
 	if(!realtime)
 	{
 		SetWorldTime(wtime);
+		ServerTime = wtime;
 	}
     SetWeatherEx(3);
 	AllowInteriorWeapons(1);
@@ -4964,6 +4966,7 @@ public OnGameModeInit()
 		new tmphour, tmpminute, tmpsecond;
 		gettime(tmphour, tmpminute, tmpsecond);
 		SetWorldTime(tmphour);
+		ServerTime = tmphour;
 	}
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1

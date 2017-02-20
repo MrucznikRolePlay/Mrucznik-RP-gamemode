@@ -81,7 +81,17 @@ public systempozarow_OnPlayerUpdate(playerid)
  	        	    if(PlayerFaces(playerid, FirePos[i][0],  FirePos[i][1],  FirePos[i][2]+2, 1) && IsPlayerInRangeOfPoint(playerid, 10, FirePos[i][0],  FirePos[i][1],  FirePos[i][2]))
  	        		{
 			    		FireHealth[i]-=2;
-					    if(FireHealth[i] <= 0)
+
+			    		if(FireHealth[i] <= 0 && TotalFires == 1)
+			    		{
+			    		    DeleteFire(i);
+			    		    SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    						SendFamilyMessage(17, 0xAA3333AA, "[RADIO] Centrala do LSFD: Po¿ar zosta³ ugaszony!");
+    						SendFamilyMessage(17, 0x33AA33AA, "[LSFD] Do sejfu frakcji wp³ywa 20 000$! [LSFD]");
+			    		    Sejf_Add(17, 20000);
+							CallRemoteFunction("OnFireDeath", "dd", i, playerid);
+			    		}
+					    else if(FireHealth[i] <= 0)
 					    {
 							DeleteFire(i);
 							CallRemoteFunction("OnFireDeath", "dd", i, playerid);
@@ -99,7 +109,16 @@ public systempozarow_OnPlayerUpdate(playerid)
  	        	    if(PlayerFaces(playerid, FirePos[i][0],  FirePos[i][1],  FirePos[i][2], 5) && IsPlayerInRangeOfPoint(playerid, 20, FirePos[i][0],  FirePos[i][1],  FirePos[i][2]))
  	        		{
 			    		FireHealth[i]-=1;
-					    if(FireHealth[i] <= 0)
+			    		if(FireHealth[i] <= 0 && TotalFires == 1)
+			    		{
+			    		    DeleteFire(i);
+			    		    SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    						SendFamilyMessage(17, 0xAA3333AA, "[RADIO] Centrala: Po¿ar zosta³ ugaszony!");
+    						SendFamilyMessage(17, 0x33AA33AA, "[LSFD] Do sejfu frakcji wp³ywa 20 000$! [LSFD]");
+			    		    Sejf_Add(17, 20000);
+							CallRemoteFunction("OnFireDeath", "dd", i, playerid);
+			    		}
+					    else if(FireHealth[i] <= 0)
 					    {
 							DeleteFire(i);
 							CallRemoteFunction("OnFireDeath", "dd", i, playerid);

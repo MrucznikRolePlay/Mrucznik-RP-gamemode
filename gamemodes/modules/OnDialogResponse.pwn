@@ -5639,68 +5639,67 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesuj¹c¹ ciê zagadnienie", "Linia 55\nLinia 72\nLinia 82\nLinia 96\nLinia 85\nWycieczki\nInformacje\nPomoc", "Wybierz", "WyjdŸ");
 	        }
 	    }
- 	if(dialogid == D_PJTEST)
-	{
-		if(response == 1)
-        {
-            new __[9] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-            PlayerInfo[playerid][pPraojazdyniewylosowane] = __;
-            PrawoJazdyRandomGUITest(playerid, PlayerInfo[playerid][pPraojazdyniewylosowane], 9 - PlayerInfo[playerid][pPrawojazdypytania]);
-            return 1;
- 		}
-    }
-  	new question_ids[] = {3, 4, 5, 6, 7, 8, 9, 10, 21};
-    new correct_answers[][] = {"911", "tak", "30", "prawa", "trojkat", "140", "50", "120", "trojkat"};
+	 	if(dialogid == D_PJTEST)
+		{
+			if(response == 1)
+      	  	{
+            	new __[9] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+            	PlayerInfo[playerid][pPraojazdyniewylosowane] = __;
+            	PrawoJazdyRandomGUITest(playerid, PlayerInfo[playerid][pPraojazdyniewylosowane], 9 - PlayerInfo[playerid][pPrawojazdypytania]);
+            	return 1;
+ 			}
+    	}
+  		new question_ids[] = {3, 4, 5, 6, 7, 8, 9, 10, 21};
+    	new correct_answers[][] = {"911", "tak", "30", "prawa", "trojkat", "140", "50", "120", "trojkat"};
 
-    new question_id = -1;
+    	new question_id = -1;
 
-   	for(new i; i < sizeof(question_ids); i++)
-    {
-        if(dialogid == question_ids[i])
-        {
-            question_id = i;
-            break;
-        }
-    }
+   		for(new i; i < sizeof(question_ids); i++)
+    	{
+        	if(dialogid == question_ids[i])
+        	{
+            	question_id = i;
+           		break;
+        	}
+    	}
+	   	if(question_id != -1 && response)
+		{
+			if((strcmp(inputtext, correct_answers[question_id], true) == 0
+        	|| strcmp(inputtext, _prawojazdy_unpolish(correct_answers[question_id])) == 0)
+        	&& strlen(inputtext) > 1)
+        	{
+            	PlayerInfo[playerid][pPrawojazdydobreodp] += 1;
+        	}
+        	KillTimer(TiPJTGBKubi[playerid]);
+       		PlayerInfo[playerid][pPrawojazdypytania] += 1;
 
-   if(question_id != -1 && response)
-   {
-		if((strcmp(inputtext, correct_answers[question_id], true) == 0
-        || strcmp(inputtext, _prawojazdy_unpolish(correct_answers[question_id])) == 0)
-        && strlen(inputtext) > 1)
-        {
-            PlayerInfo[playerid][pPrawojazdydobreodp] += 1;
-        }
-        KillTimer(TiPJTGBKubi[playerid]);
-       PlayerInfo[playerid][pPrawojazdypytania] += 1;
-
-       if(PlayerInfo[playerid][pPrawojazdypytania] == 3)
-       {
-           if(PlayerInfo[playerid][pPrawojazdydobreodp] == 3)
-           {
-                PlayerInfo[playerid][pSprawdzczyzdalprawko] = 1;
-                ShowPlayerDialogEx(playerid, 2, DIALOG_STYLE_MSGBOX, "Zda³eœ!", "Gratulujemy!\r\nZda³eœ test na Prawo Jazdy.\r\nZg³oœ siê do Urzêdnika w celu\r\nodebrania tych dokumentów!", "OK", "");
-                PlayerInfo[playerid][pCarLic] = 2;
-            }
-           else
-           {
-                PlayerInfo[playerid][pSprawdzczyzdalprawko] = 0;
-                ShowPlayerDialogEx(playerid, 15, DIALOG_STYLE_MSGBOX, "Obla³eœ!", "Obla³eœ!\r\nNie zda³eœ poprawnie testu\r\nna prawo jazdy!\r\nZg³oœ siê za 1h", "OK", "");
-           }
-		   new string [256];
-           new playername[MAX_PLAYER_NAME];
-		   GetPlayerName(playerid, playername, sizeof(playername));
-		   format(string, sizeof(string), "* %s odk³ada d³ugopis i przesuwa test w stronê urzêdnika", playername);
-		   ProxDetector(40.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-           PlayerInfo[playerid][pWtrakcietestprawa] = 0;
-           SetTimerEx("CleanPlayaPointsPJ", 30000, 0, "i", playerid);
-		   }
-		   else
-		   {
-		   PrawoJazdyRandomGUITest(playerid, PlayerInfo[playerid][pPraojazdyniewylosowane], 9 - PlayerInfo[playerid][pPrawojazdypytania]);
-		   }
+       		if(PlayerInfo[playerid][pPrawojazdypytania] == 3)
+       		{
+           		if(PlayerInfo[playerid][pPrawojazdydobreodp] == 3)
+           		{
+                	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 1;
+               		ShowPlayerDialogEx(playerid, 2, DIALOG_STYLE_MSGBOX, "Zda³eœ!", "Gratulujemy!\r\nZda³eœ test na Prawo Jazdy.\r\nZg³oœ siê do Urzêdnika w celu\r\nodebrania tych dokumentów!", "OK", "");
+                	PlayerInfo[playerid][pCarLic] = 2;
+            	}
+           		else
+           		{
+                	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 0;
+                	ShowPlayerDialogEx(playerid, 15, DIALOG_STYLE_MSGBOX, "Obla³eœ!", "Obla³eœ!\r\nNie zda³eœ poprawnie testu\r\nna prawo jazdy!\r\nZg³oœ siê za 1h", "OK", "");
+           		}
+		   		new string [256];
+           		new playername[MAX_PLAYER_NAME];
+		   		GetPlayerName(playerid, playername, sizeof(playername));
+		   		format(string, sizeof(string), "* %s odk³ada d³ugopis i przesuwa test w stronê urzêdnika", playername);
+		   		ProxDetector(40.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+           		PlayerInfo[playerid][pWtrakcietestprawa] = 0;
+           		SetTimerEx("CleanPlayaPointsPJ", 30000, 0, "i", playerid);
+		   		}
+			else
+ 			{
+ 				PrawoJazdyRandomGUITest(playerid, PlayerInfo[playerid][pPraojazdyniewylosowane], 9 - PlayerInfo[playerid][pPrawojazdypytania]);
+			}
 		}
-        if(dialogid == 443)
+  		if(dialogid == 443)
 		{
 		    if(response)
 		    {
@@ -5904,9 +5903,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     CarData[lUID][c_Bumper][1] = 0;
                     SendClientMessage(playerid, 0xFFC0CB, "Tuning zostanie usuniêty przy najbli¿szym respawnie.");
                 }
+                /*case 8://rejestracja prototyp
+                {
+                    ShowPlayerDialogEx(playerid, D_AUTO_REJESTRACJA, DIALOG_STYLE_INPUT, "Rejestracja", "WprowadŸ nowy numer/tekst na swojej tablicy rejestracyjnej (do 5 znaków):", "Ustaw", "Wróæ");
+                }*/
             }
             return 1;
         }
+        else if(dialogid == D_AUTO_REJESTRACJA)
+    	{
+    	new lUID = IloscAut[playerid];
+        if(!response) return cmd_car(playerid);
+        if(strlen(inputtext) < 1 || strlen(inputtext) > 5)
+        {
+            cmd_car(playerid);
+            SendClientMessage(playerid, COLOR_GRAD1, "Nieodpowiednia iloœæ znaków.");
+            return 1;
+        }
+        else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
+		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' '))
+				continue;
+			else return SendClientMessage(playerid, COLOR_GRAD1, "U¿y³eœ nieodpowiednich znaków rejestracji (tylko litery i cyfry).");
+		}
+        CarData[lUID][c_Rejestracja] = strval(inputtext);
+        SendClientMessage(playerid, 0xFFC0CB, "Tablica zostanie zmieniona po respawnie.");
+        return 1;
+		}
 		if(dialogid == 440)//SYSTEM AUT - kategorie
 		{
 		    if(response)
@@ -15063,30 +15085,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 			    case 0:
 				{
-				    SetPlayerPosEx(playerid, 1327.6746, -1324.7770, 39.9210);
-				    GameTextForPlayer(playerid, "~r~Hol sadu ~n~ by abram01", 6000, 1);
-				    SetPlayerVirtualWorld ( playerid, 500 );
-                    Wchodzenie(playerid);
+				    if(SadWindap1 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+					{
+				    	SetPlayerPosEx(playerid, 1327.6746, -1324.7770, 39.9210);
+				    	GameTextForPlayer(playerid, "~r~Hol sadu ~n~ by abram01", 6000, 1);
+				    	SetPlayerVirtualWorld ( playerid, 500 );
+                    	Wchodzenie(playerid);
+                    	SetPlayerWeather(playerid, 3);//Pogoda
+            			SetPlayerTime(playerid, 14, 0);//Czas
+					}
+					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
 				}
 				case 1:
     			{
-					SetPlayerPosEx(playerid, 1289.0969, -1292.7489, 35.9681);
-					GameTextForPlayer(playerid, "~r~Sad Stanu San Andreas ~n~ by abram01", 6000, 1);
-					SetPlayerVirtualWorld (playerid, 501 );
-                    Wchodzenie(playerid);
+    			    if(SadWindap2 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+					{
+						SetPlayerPosEx(playerid, 1289.0969, -1292.7489, 35.9681);
+						GameTextForPlayer(playerid, "~r~Sad Stanu San Andreas ~n~ by abram01", 6000, 1);
+						SetPlayerVirtualWorld (playerid, 501 );
+                    	Wchodzenie(playerid);
+                    	SetPlayerWeather(playerid, 3);//Pogoda
+            			SetPlayerTime(playerid, 14, 0);//Czas
+                    }
+					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
 				}
 				case 2:
 				{
-				    SetPlayerPosEx(playerid,1310.3494, -1361.7319, 39.0876);
-				    GameTextForPlayer(playerid, "~r~Biura urzednikow sadowych ~n~ by abram01", 8000, 1);
-				    SetPlayerVirtualWorld ( playerid, 502 );
-                    Wchodzenie(playerid);
+				    if(SadWindap3 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+					{
+				    	SetPlayerPosEx(playerid,1310.3494, -1361.7319, 39.0876);
+				    	GameTextForPlayer(playerid, "~r~Biura urzednikow sadowych ~n~ by abram01", 8000, 1);
+				    	SetPlayerVirtualWorld ( playerid, 502 );
+                    	Wchodzenie(playerid);
+                    	SetPlayerWeather(playerid, 3);//Pogoda
+            			SetPlayerTime(playerid, 14, 0);//Czas
+                    }
+					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
 				}
                 case 3:
 				{
-				    SetPlayerPosEx(playerid,1310.0021, -1319.7189, 35.5984);
-				    SetPlayerVirtualWorld ( playerid, 0 );
-                    Wchodzenie(playerid);
+				    if(SadWindap4 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+					{
+				    	SetPlayerPosEx(playerid,1310.0021, -1319.7189, 35.5984);
+				    	SetPlayerVirtualWorld ( playerid, 0 );
+				    	SetPlayerWeather(playerid, ServerWeather);
+    					SetPlayerTime(playerid, ServerTime, 0);
+                    	Wchodzenie(playerid);
+                    }
+					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
+
 				}
 			}
 		}

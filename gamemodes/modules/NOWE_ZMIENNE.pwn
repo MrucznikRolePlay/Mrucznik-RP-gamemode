@@ -1,6 +1,18 @@
 //zmienne.pwn
 
 
+//FishGood
+new FishGood[MAX_PLAYERS];
+//WINDA
+new SadWindap1 = 0;//Winda S퉐
+new SadWindap2 = 0;//Winda S퉐
+new SadWindap3 = 0;//Winda S퉐
+new SadWindap4 = 0;//Winda S퉐
+
+new ServerTime = 14;//Czas
+new ServerWeather = 3;//Pogoda
+
+
 //legal
 new DB:db_handle;
 enum eLegalWpns {
@@ -40,6 +52,11 @@ new PaniJanina;
 
 //PA뢈ZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
+<<<<<<< HEAD
+=======
+//Podglad
+new TogPodglad[MAX_PLAYERS];
+>>>>>>> PECET
 //dodatkiPD
 new DodatkiPD[MAX_PLAYERS];
 //AFK timer
@@ -1005,6 +1022,7 @@ new Float:OldCoordsX[MAX_PLAYERS], Float:OldCoordsY[MAX_PLAYERS];
 
 new Gas[CAR_AMOUNT];
 new Refueling[MAX_PLAYERS];
+new Naprawiasie[MAX_PLAYERS];
 
 new TiPJTGBKubi[MAX_PLAYERS];
 
@@ -1044,6 +1062,7 @@ ZerujZmienne(playerid)
     lastMsg[playerid] = 0;
 
 	//z conecta
+	TogPodglad[playerid] = 0;
 	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
 	cbradijo[playerid] = 0; adminpodgladcb[playerid] = 0; matogczas[playerid] = 0;
 	dajeKontrakt[playerid] = 9999;

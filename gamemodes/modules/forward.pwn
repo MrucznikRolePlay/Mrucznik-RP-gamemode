@@ -1,5 +1,8 @@
 //komendy.pwn
 
+forward Naprawa(playerid);//
+forward Lowienie(playerid);
+
 forward PrepareKarting();
 forward PreparePaintball();
 forward OtherTimer();
