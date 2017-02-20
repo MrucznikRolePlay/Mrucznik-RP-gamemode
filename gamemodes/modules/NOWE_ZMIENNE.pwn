@@ -52,11 +52,10 @@ new PaniJanina;
 
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
-<<<<<<< HEAD
-=======
+
 //Podglad
 new TogPodglad[MAX_PLAYERS];
->>>>>>> PECET
+
 //dodatkiPD
 new DodatkiPD[MAX_PLAYERS];
 //AFK timer
