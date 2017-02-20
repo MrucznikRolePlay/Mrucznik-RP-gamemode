@@ -25605,7 +25605,7 @@ CMD:zmienhp(playerid, params[])
 					{
 					    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-						printf("AdmCmd: %s da³ $d hp %s", sendername, health,  giveplayer);
+						printf("AdmCmd: %s da³ %d hp %s", sendername, health,  giveplayer);
 					    SetVehicleHealth(GetPlayerVehicleID(playa), health);
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
 					}
