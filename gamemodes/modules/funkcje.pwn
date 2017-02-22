@@ -3287,6 +3287,10 @@ GraczBankomat(playerid)
     {
         return 1;
     }
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 1822.5533,-1544.7983,13.3347))
+	{
+		return 1;
+	}
 	return 0;
 }
 

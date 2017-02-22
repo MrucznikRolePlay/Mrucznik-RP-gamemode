@@ -5427,25 +5427,6 @@ CMD:brama(playerid)
 		}
 		if(PlayerInfo[playerid][pLider] == 7 || PlayerInfo[playerid][pMember] == 7 || IsAHA(playerid))
 		{
-			if(PlayerToPoint(20.0, playerid, 1534.90002441,-1451.30004883,15.19999981))
-			{
-				if(BramaBORS == 1)
-				{
-					MoveDynamicObject(BramaBOR, 1534.90002441,-1451.30004883,19.19999981, 3.5);
-					//SetDynamicObjectRot(BramaBOR, 0, 0, 180);
-					BramaBORS = 0;
-					//PlayerPlaySound(playerid, 1153, 0.0, 0.0, 0.0);
-					//SetTimerEx("StopBrama",3500,0,"d",playerid);
-				}
-				else
-				{
-					MoveDynamicObject(BramaBOR, 1534.90002441,-1451.30004883,15.19999981, 3.5);
-					//SetDynamicObjectRot(BramaBOR, 0, 0, 180);
-					BramaBORS = 1;
-					//PlayerPlaySound(playerid, 1153, 0.0, 0.0, 0.0);
-					//SetTimerEx("StopBrama",3500,0,"d",playerid);
-				}
-			}
 			if(IsPlayerInRangeOfPoint(playerid,3,1501.6648, -1452.1390, 63.3306))
 			{
 				if(bormove == 0)
@@ -26583,6 +26564,42 @@ CMD:changelog(playerid, params[])
 		SendClientMessage(playerid,COLOR_WHITE,"Dodano system po¿arów by PECET");
 		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /tablet dla org. porz¹dkowych - PECET");
 	}
+	else if(strcmp(wersja,"2.5.7",true) == 0)
+	{
+		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
+		SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
+		SendClientMessage(playerid,COLOR_WHITE,"System Po¿arów v0.2");
+		SendClientMessage(playerid,COLOR_WHITE,"Do sejfu LSFD trafia 20k od zgaszonego po¿aru");
+		SendClientMessage(playerid,COLOR_WHITE,"Wyd³u¿ono czas gaszenia po¿arów");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano wiêcej scenariuszy po¿arów");
+		SendClientMessage(playerid,COLOR_WHITE,"Usprawniono informowanie o po¿arach (dla Administracji)");
+		SendClientMessage(playerid,COLOR_WHITE,"Do sejfu LSFD i do stra¿aka trafia po 2,5k za usuniêt¹ plamê oleju");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /windalock dla S¹du (w przysz³oœci planowane dodanie dla innych frakcji, które bêd¹ chcia³y komendê)");
+		SendClientMessage(playerid,COLOR_WHITE,"Usprawniono interior S¹du (jest jaœniej i niezale¿nie od pogody na zewn¹trz - wewn¹trz nie pada)");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano /odznaka dla pracowników S¹du");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano /dutysbi dla SASP");
+		SendClientMessage(playerid,COLOR_WHITE,"Poprawiono komendê /tp (dla Administracji)");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano /togpodglad (dla Administracji)");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano /wejdz i /wyjdz na strzelnicê dla Gunshop LS");
+		SendClientMessage(playerid,COLOR_WHITE,"Domenda /akceptuj naprawa tylko na wy³¹czonym silniku, trwa okreœlon¹ iloœæ czasu i wymaga mechanika w pobli¿u, który w momencie naprawiania musi staæ obok pojazdu");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /armia-wiadomosc dla U.S. Army");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /sprzedajrybe - OD TERAZ MO¯ESZ SPRZEDAÆ RYBY, KTÓRE Z£OWI£EŒ W 24/7! Cena za kilogram: 20$!");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /su, /ob, /barierka, brak otrzymywania WL za zabójstwo dla F.S. Army");
+		SendClientMessage(playerid,COLOR_WHITE,"Mniejsze poprawki maj¹ce na celu optymalizacjê i usprawnienie skryptu.");
+		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
+		SendClientMessage(playerid,COLOR_WHITE,"Pos¹g Los Santos - KilsOn");
+		SendClientMessage(playerid,COLOR_WHITE,"Przeniesiona centrala GSA - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty 'Ciekawostki' - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Czêsto skracane zakrêty - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Nowa baza San Andreas Army - soldiercolt");
+		SendClientMessage(playerid,COLOR_WHITE,"OP dla Blueberry - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Interior rady miasta Blueberry - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Interior 'Komisja ds. Mechaników' - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Op dla Dillimore - Niuniek");
+		SendClientMessage(playerid,COLOR_WHITE,"Poprawki Rockstar/obecnej mapy - KilsOn i _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty przed DMV - KilsOn");
+		SendClientMessage(playerid,COLOR_WHITE,"Parking podziemny dla FBI - _Szymon");
+	}
 	else
 	{
 		SendClientMessage(playerid,COLOR_BLUE,"----------   Dostêpne wersje   ---------");
@@ -39221,7 +39238,7 @@ CMD:wyjedz(playerid)
 		if (IsPlayerInAnyVehicle (playerid))
 		{
 			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 1825.18274, -1538.21204, 13.11075);
+			SetVehiclePos (vehicleid, 1828.2227,-1538.9498,13.2345);
 		}
 		else
 		{
