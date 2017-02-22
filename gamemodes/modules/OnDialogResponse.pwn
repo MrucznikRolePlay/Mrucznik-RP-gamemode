@@ -2325,7 +2325,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 0:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1510.7217, -1470.1677, 9.7360);
+						SetPlayerPosEx(playerid, 1752.0090,-1524.4808,-8.5162);
 						SetPlayerVirtualWorld (playerid, 0);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
@@ -2333,7 +2333,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 1:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid,1483.8867, -1491.1559, 13.9085);
+						SetPlayerPosEx(playerid,1772.1613,-1547.9675,9.9067);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2364,7 +2364,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 4:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1495.1107, -1468.8528, 40.8256);
+						SetPlayerPosEx(playerid, 1795.4104,-1551.2864,22.9192);
 						SetPlayerVirtualWorld (playerid, 0) ;
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Dach");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
@@ -2378,7 +2378,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				switch(listitem)
 				{
-					case 0://parking
+					case 0://parking podziemny
+					{
+						if(IsACop(playerid))
+						{
+							SetPlayerVirtualWorld(playerid,0);
+							SetPlayerPosEx(playerid,565.6246,-1485.8623,-8.8300);
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
+							PlayerInfo[playerid][pLocal] = 255;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+						}
+					}
+					case 1://parking
 					{
 						if(IsACop(playerid))
 						{
@@ -2393,7 +2407,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
 						}
 					}
-					case 1://recepcja
+					case 2://recepcja
 					{
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2403,7 +2417,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 2://szatnia
+					case 3://szatnia
 					{
 						if(IsAFBI(playerid))
 						{
@@ -2422,7 +2436,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					
 					}
-					case 3://centrum szkol.
+					case 4://centrum szkol.
 					{
 						if(IsACop(playerid))
 						{
@@ -2440,7 +2454,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
 						}
 					}
-					case 4://Sala Konferencyjna
+					case 5://Sala Konferencyjna
 					{
 						if(IsACop(playerid))
 						{
@@ -2457,7 +2471,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
 						}
 					}
-					case 5://Sale przesluchan
+					case 6://Sale przesluchan
 					{
 
 						TogglePlayerControllable(playerid,0);
@@ -2468,7 +2482,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 6://biura Federalne
+					case 7://biura Federalne
 					{
 						SetPlayerPosEx(playerid,610.6687, -1454.7335, 73.9460);
 						TogglePlayerControllable(playerid,0);
@@ -2478,7 +2492,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 7://dach
+					case 8://dach
 					{
 						if(IsACop(playerid))
 						{

@@ -312,10 +312,6 @@ new DoorInfo[MAX_DOORS][eDoors];
 new Text3D:Opis[MAX_PLAYERS] = {Text3D:INVALID_3DTEXT_ID, ...};
 
 //nowe stanowe
-new bramkang[14]; //+ brama
-new moveng[14]; //+ brama
-new cela[34]; //+ cela
-new celamove[34] = {0,...}; //+ cela
 new bool:VAR_NGKeypad = false;
 //Barierki kubi
 new gTotalItems = TOTAL_ITEMS;
@@ -881,8 +877,6 @@ new Text3D:okienko[8];
 
 new bramadmv[19];
 new movedmv[20] = 0;
-new BramaBOR;
-new BramaBORS = 1;
 new bramadom1;
 new bramadom1State = 1;//brama NoA
 //new DzwiDMV;

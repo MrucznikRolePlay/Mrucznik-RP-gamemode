@@ -158,7 +158,6 @@ Zaladuj3DTexty()
     CreateDynamic3DTextLabel("Przebieralnia", COLOR_NEWS, 994.54052734375,-3676.474609375,1.2307510375977, 10.0);
     CreateDynamic3DTextLabel("Sala przes³uchañ", COLOR_NEWS, 276.32934570313,122.20029449463,1004.1166992188, 10.0);
     CreateDynamic3DTextLabel("SAN - g³ówne wejœcie", COLOR_NEWS, 646.9418,-1355.8645,13.5625, 30.0);
-    CreateDynamic3DTextLabel("Centrala Government Protection Bureau", COLOR_BLUE, 1518.8350,-1452.4341,14.2031, 20.0);
     CreateDynamic3DTextLabel("Dyrekcja", COLOR_BLUE, 1523.0439,-1466.9510,64.7786, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 32);
     CreateDynamic3DTextLabel("Sala posiedzeñ", COLOR_BLUE, -778.3271484375,496.4326171875,1368.5303955078, 5.0);
     CreateDynamic3DTextLabel("Zaklad Bukmaherski", COLOR_BLUE, 1631.7883300781,-1171.4095458984,24.078125, 15.0);
@@ -215,8 +214,6 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("Dystrybutor\nWpisz /tankuj", COLOR_BLUE ,-1130.3420,-1018.1770,129.2188, 10.0);
 	CreateDynamic3DTextLabel("Glen Park Bar", COLOR_BLUE ,1970.8337,-1285.3256,28.4919, 15.0);
 	CreateDynamic3DTextLabel("Mrucznikowy Gun Shop'", COLOR_BLUE ,1791.212036,-1164.631713,23.828100, 15.0);
-
-	CreateDynamic3DTextLabel("Winda", COLOR_BLUE ,1510.40002,-1470,9.5, 5.0);
 	
 	CreateDynamic3DTextLabel("{FFFFFF}{FF0000}J{FFFFFF}ack {FF0000}S{FFFFFF}imon\nNadwodny Arcymak Gubernatora", 0x008080FF, 1528.4802, -1458.5370, 67.3899, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 80);
  	CreateDynamic3DTextLabel("{FFFFFF}Biuro Dyrektora GPB", 0x008080FF, 1513.5140, -1467.9963, 69.3863, 5.0,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 80);
