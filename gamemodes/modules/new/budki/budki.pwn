@@ -33,14 +33,14 @@
 stock dodajBudke(fobiekt, Float:x, Float:y, Float:z, Float: rx, Float:ry, Float: rz)
 {
 	#pragma unused x,y,z,rx,ry,rz,fobiekt
-	/*budki[iloscbudek][b_model] = fobiekt;
+	budki[iloscbudek][b_model] = fobiekt;
 	budki[iloscbudek][b_x] = x;
 	budki[iloscbudek][b_y] = y;
 	budki[iloscbudek][b_z] = z;
 	budki[iloscbudek][b_rx] = rx;
 	budki[iloscbudek][b_ry] = ry;
 	budki[iloscbudek][b_rz] = rz;
-	budki[iloscbudek][b_Id] = CreateDynamicObject(fobiekt, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz); */
+	budki[iloscbudek][b_Id] = CreateDynamicObject(fobiekt, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz); 
 	return iloscbudek++;
 }
 

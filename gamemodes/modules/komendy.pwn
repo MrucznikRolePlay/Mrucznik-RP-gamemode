@@ -5427,25 +5427,6 @@ CMD:brama(playerid)
 		}
 		if(PlayerInfo[playerid][pLider] == 7 || PlayerInfo[playerid][pMember] == 7 || IsAHA(playerid))
 		{
-			if(PlayerToPoint(20.0, playerid, 1534.90002441,-1451.30004883,15.19999981))
-			{
-				if(BramaBORS == 1)
-				{
-					MoveDynamicObject(BramaBOR, 1534.90002441,-1451.30004883,19.19999981, 3.5);
-					//SetDynamicObjectRot(BramaBOR, 0, 0, 180);
-					BramaBORS = 0;
-					//PlayerPlaySound(playerid, 1153, 0.0, 0.0, 0.0);
-					//SetTimerEx("StopBrama",3500,0,"d",playerid);
-				}
-				else
-				{
-					MoveDynamicObject(BramaBOR, 1534.90002441,-1451.30004883,15.19999981, 3.5);
-					//SetDynamicObjectRot(BramaBOR, 0, 0, 180);
-					BramaBORS = 1;
-					//PlayerPlaySound(playerid, 1153, 0.0, 0.0, 0.0);
-					//SetTimerEx("StopBrama",3500,0,"d",playerid);
-				}
-			}
 			if(IsPlayerInRangeOfPoint(playerid,3,1501.6648, -1452.1390, 63.3306))
 			{
 				if(bormove == 0)
@@ -6179,178 +6160,6 @@ CMD:brama(playerid)
 				}
 			}
 		}
-        if(IsPlayerInRangeOfPoint(playerid,15.0, 2413.09448, -2428.88940, 15.39000) && (IsACop(playerid)|| PlayerInfo[playerid][pLinia96] == 1 ))//KT i NG
-		{
-			if(moveng[0] == 0)
-			{
-				MoveDynamicObject(bramkang[0],2413.09448, -2428.88940, 8.9220,3);
-				moveng[0] = 1;
-			}
-			else
-			{
-				MoveDynamicObject(bramkang[0],2413.09448, -2428.88940, 15.39000,3);
-				moveng[0] = 0;
-			}
-		}
-		if(IsPlayerInRangeOfPoint(playerid,15.0, 2339.92285, -2355.13550, 15.39000)&& (IsACop(playerid) || PlayerInfo[playerid][pLinia96] == 1))//KT i NG
-		{
-			if(moveng[1] == 0)
-			{
-				moveng[1] = 1;
-				MoveDynamicObject(bramkang[1],2339.92285, -2355.13550, 8.9220,3);
-			}
-			else
-			{
-				moveng[1] = 0;
-				MoveDynamicObject(bramkang[1],2339.92285, -2355.13550, 15.39000,3);
-			}
-		}
-        if(IsPlayerInRangeOfPoint(playerid,15.0,2665.93652, -2504.40503, 15.39000)&& (IsACop(playerid) || PlayerInfo[playerid][pLinia96] == 1))//dla KT i NG
-		{
-			if(moveng[10] == 0)
-			{
-				moveng[10] = 1;
-				MoveDynamicObject(bramkang[10],2665.93652, -2504.40503, 8.9220,3);
-			}
-			else
-			{
-				moveng[10] = 0;
-				MoveDynamicObject(bramkang[10],2665.93652, -2504.40503, 15.39000,3);
-			}
-		}
-        if(IsPlayerInRangeOfPoint(playerid,15.0,2481.11011, -2496.14087, 15.39000)&& (IsACop(playerid) || PlayerInfo[playerid][pLinia96] == 1))
-		{
-			if(moveng[4] == 0)
-			{
-				moveng[4] = 1;
-				MoveDynamicObject(bramkang[4],2481.11011, -2496.14087,8.9220,3);
-			}
-			else
-			{
-				moveng[4] = 0;
-				MoveDynamicObject(bramkang[4],2481.11011, -2496.14087, 15.39000,3);
-			}
-		}
-        if(IsPlayerInFraction(playerid, FRAC_NG, 5000))
-        {
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2497.04663, -2554.21484, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))//Od tad w dol only NG
-    		{
-    			if(moveng[2] == 0)
-    			{
-    				moveng[2] = 1;
-    				MoveDynamicObject(bramkang[2],2497.04663, -2554.21484, 8.9220,3);
-    			}
-    			else
-    			{
-    				moveng[2] = 0;
-    				MoveDynamicObject(bramkang[2],2497.04663, -2554.21484, 15.39000,3);
-    			}
-    		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2561.47461, -2534.93188, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
-    		{
-    			if(moveng[3] == 0)
-    			{
-    				moveng[3] = 1;
-    				MoveDynamicObject(bramkang[3],2561.47461, -2534.93188, 8.9220,3);
-    			}
-    			else
-    			{
-    				moveng[3] = 0;
-    				MoveDynamicObject(bramkang[3],2561.47461, -2534.93188, 15.39000,3);
-    			}
-    		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2475.38354, -2523.96680, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
-    		{
-    			if(moveng[5] == 0)
-    			{
-    				moveng[5] = 1;
-    				MoveDynamicObject(bramkang[5],2475.38354, -2523.96680, 8.9220,3);
-    			}
-    			else
-    			{
-    				moveng[5] = 0;
-    				MoveDynamicObject(bramkang[5],2475.38354, -2523.96680, 15.39000,3);
-    			}
-    		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2785.98389, -2353.13599, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
-    		{
-    			if(moveng[6] == 0)
-    			{
-    				moveng[6] = 1;
-    				MoveDynamicObject(bramkang[6],2785.98389, -2353.13599, 8.9220,3);
-    			}
-    			else
-    			{
-    				moveng[6] = 0;
-    				MoveDynamicObject(bramkang[6],2785.98389, -2353.13599, 15.39000,3);
-    			}
-    		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2770.54028, -2393.62891, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
-    		{
-    			if(moveng[7] == 0)
-    			{
-    				moveng[7] = 1;
-    				MoveDynamicObject(bramkang[7],2770.54028, -2393.62891, 8.9220,3);
-    			}
-    			else
-    			{
-    				moveng[7] = 0;
-    				MoveDynamicObject(bramkang[7],2770.54028, -2393.62891, 15.39000,3);
-    			}
-    		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2760.87671, -2471.70020, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
-    		{
-    			if(moveng[8] == 0)
-    			{
-    				moveng[8] = 1;
-    				MoveDynamicObject(bramkang[8],2760.87671, -2471.70020, 8.9220,3);
-    			}
-    			else
-    			{
-    				moveng[8] = 0;
-    				MoveDynamicObject(bramkang[8],2760.87671, -2471.70020, 15.39000,3);
-    			}
-    		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2725.83521, -2493.09351, 15.39000)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
-    		{
-    			if(moveng[9] == 0)
-    			{
-    				moveng[9] = 1;
-    				MoveDynamicObject(bramkang[9],2725.83521, -2493.09351, 8.9220,3);
-    			}
-    			else
-    			{
-    				moveng[9] = 0;
-    				MoveDynamicObject(bramkang[9],2725.83521, -2493.09351, 15.39000,3);
-    			}
-    		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2560.51147, -2357.69849, 18.50030)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
-    		{
-    			if(moveng[12] == 0)
-    			{
-    				moveng[12] = 1;
-    				MoveDynamicObject(bramkang[12],2560.51147, -2357.69849, 11.9220,3);
-    			}
-    			else
-    			{
-    				moveng[12] = 0;
-    				MoveDynamicObject(bramkang[12],2560.51147, -2357.69849, 18.50030,3);
-    			}
-    		}
-    		if(IsPlayerInRangeOfPoint(playerid,15.0,2552.1902, -2381.8513, 15.1715)&& (PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3))
-    		{
-    			if(moveng[13] == 0)
-    			{
-    				moveng[13] = 1;
-    				MoveDynamicObject(bramkang[13],2552.1902, -2381.8513, 9.1194,3);
-    			}
-    			else
-    			{
-    				MoveDynamicObject(bramkang[13],2552.1902, -2381.8513, 15.1715,3);
-    				moveng[13] = 0;
-    			}
-    		}
-        }
 		if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
 		{
 			if(PlayerToPoint(12.0, playerid, 68.021484375, -1545.892578125, 5.1986169815063))
@@ -7643,453 +7452,6 @@ CMD:roleta(playerid,params[])
 	}
 }
 
-CMD:cela(playerid,params[])
-{
-    if(!(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3 || PlayerInfo[playerid][pAdmin] >= 5000)) return 1;
-	if(IsPlayerInRangeOfPoint(playerid,2,  2804.36084, -2497.83154, 16.72590 ))
-	{
-	    if(celamove[0] == 0)
-	    {
-			MoveDynamicObject(cela[0],2804.3440, -2498.8708, 16.7259  ,2);
-	        celamove[0] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[0],   2804.36084, -2497.83154, 16.72590 ,2);
-	        celamove[0] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2804.36084, -2507.05176, 16.72590  ))
-	{
-	    if(celamove[1] == 0)
-	    {
-			MoveDynamicObject(cela[1], 2804.3608, -2508.1018, 16.7259 ,2);
-	        celamove[1] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[1],2804.36084, -2507.05176, 16.72590,2);
-	        celamove[1] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2804.36084, -2516.33057, 16.72590 ))
-	{
-	    if(celamove[2] == 0)
-	    {
-			MoveDynamicObject(cela[2], 2804.3608, -2517.3806, 16.7259 ,2);
-	        celamove[2] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[2],  2804.36084, -2516.33057, 16.72590 ,2);
-	        celamove[2] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,  2800.92090, -2520.32324, 13.90790 ))
-	{
-	    if(celamove[3] == 0)
-	    {
-			MoveDynamicObject(cela[3],2800.9209, -2521.3732, 13.9079,2);
-	        celamove[3] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[3],  2800.92090, -2520.32324, 13.90790  ,2);
-	        celamove[3] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2800.92090, -2511.46509, 13.90790  ))
-	{
-	    if(celamove[4] == 0)
-	    {
-			MoveDynamicObject(cela[4],2800.9209, -2512.5151, 13.9079,2);
-	        celamove[4] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[4], 2800.92090, -2511.46509, 13.90790  ,2);
-	        celamove[4] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2800.92090, -2502.70142, 13.90790  ))
-	{
-	    if(celamove[5] == 0)
-	    {
-			MoveDynamicObject(cela[5],2800.9209, -2503.7514, 13.9079 ,2);
-	        celamove[5] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[5], 2800.92090, -2502.70142, 13.90790  ,2);
-	        celamove[5] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,  2800.92090, -2494.03369, 13.90790 ))
-	{
-	    if(celamove[6] == 0)
-	    {
-			MoveDynamicObject(cela[6],2800.9209, -2495.0417, 13.9079 ,2);
-	        celamove[6] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[6],   2800.92090, -2494.03369, 13.90790 ,2);
-	        celamove[6] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2788.23218, -2522.54419, 16.72590  ))
-	{
-	    if(celamove[7] == 0)
-	    {
-			MoveDynamicObject(cela[7],2788.2322, -2523.5522, 16.7259,2);
-	        celamove[7] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[7],  2788.23218, -2522.54419, 16.72590  ,2);
-	        celamove[7] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2788.24341, -2513.69995, 16.72590 ))
-	{
-	    if(celamove[8] == 0)
-	    {
-			MoveDynamicObject(cela[8],2788.2434, -2514.7500, 16.7259 ,2);
-	        celamove[8] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[8],  2788.24341, -2513.69995, 16.72590 ,2);
-	        celamove[8] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2788.23218, -2505.00708, 16.72590  ))
-	{
-	    if(celamove[9] == 0)
-	    {
-			MoveDynamicObject(cela[9], 2788.2322, -2506.0571, 16.7259,2);
-	        celamove[9] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[9], 2788.23218, -2505.00708, 16.72590  ,2);
-	        celamove[9] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2780.70776, -2500.57397, 16.72590  ))
-	{
-	    if(celamove[10] == 0)
-	    {
-			MoveDynamicObject(cela[10], 2780.7078, -2501.6240, 16.7259 ,2);
-	        celamove[10] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[10], 2780.70776, -2500.57397, 16.72590  ,2);
-	        celamove[10] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2780.70776, -2509.28491, 16.72590 ))
-	{
-	    if(celamove[11] == 0)
-	    {
-			MoveDynamicObject(cela[11], 2780.7078, -2510.3349, 16.7259 ,2);
-	        celamove[11] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[11], 2780.70776, -2509.28491, 16.72590  ,2);
-	        celamove[11] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2780.70776, -2518.14893, 16.72590 ))
-	{
-	    if(celamove[12] == 0)
-	    {
-			MoveDynamicObject(cela[12], 2780.7078, -2519.1569, 16.7259 ,2);
-	        celamove[12] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[12], 2780.70776, -2518.14893, 16.72590  ,2);
-	        celamove[12] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2737.59473, -2531.68481, 16.72590 ))
-	{
-	    if(celamove[13] == 0)
-	    {
-			MoveDynamicObject(cela[13],2737.5947, -2532.7348, 16.7259  ,2);
-	        celamove[13] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[13], 2737.59473, -2531.68481, 16.72590  ,2);
-	        celamove[13] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2790.23340, -2524.67285, 13.90790 ))
-	{
-	    if(celamove[14] == 0)
-	    {
-			MoveDynamicObject(cela[14], 2790.2334, -2525.7229, 13.9079 ,2);
-	        celamove[14] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[14], 2790.23340, -2524.67285, 13.90790  ,2);
-	        celamove[14] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2790.23340, -2515.93164, 13.90790  ))
-	{
-	    if(celamove[15] == 0)
-	    {
-			MoveDynamicObject(cela[15], 2790.2334, -2517.0236, 13.9079 ,2);
-	        celamove[15] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[15], 2790.23340, -2515.93164, 13.90790  ,2);
-	        celamove[15] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2790.23340, -2507.18188, 13.90790 ))
-	{
-	    if(celamove[16] == 0)
-	    {
-			MoveDynamicObject(cela[16],  2790.2334, -2508.2319, 13.9079,2);
-	        celamove[16] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[16], 2790.23340, -2507.18188, 13.90790  ,2);
-	        celamove[16] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2790.23340, -2498.47729, 13.90790 ))
-	{
-	    if(celamove[17] == 0)
-	    {
-			MoveDynamicObject(cela[17], 2790.2334, -2499.5273, 13.9079 ,2);
-	        celamove[17] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[17],2790.23340, -2498.47729, 13.90790   ,2);
-	        celamove[17] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2778.81470, -2493.95605, 13.90790  ))
-	{
-	    if(celamove[18] == 0)
-	    {
-			MoveDynamicObject(cela[18],2778.8147, -2495.0481, 13.9079  ,2);
-	        celamove[18] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[18],  2778.81470, -2493.95605, 13.90790  ,2);
-	        celamove[18] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2778.81470, -2502.78296, 13.90790  ))
-	{
-	    if(celamove[19] == 0)
-	    {
-			MoveDynamicObject(cela[19],2778.8147, -2503.8330, 13.9079  ,2);
-	        celamove[19] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[19],  2778.81470, -2502.78296, 13.90790  ,2);
-	        celamove[19] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,  2778.81470, -2511.54077, 13.90790 ))
-	{
-	    if(celamove[20] == 0)
-	    {
-			MoveDynamicObject(cela[20], 2778.8147, -2512.5908, 13.9079 ,2);
-	        celamove[20] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[20],   2778.81470, -2511.54077, 13.90790 ,2);
-	        celamove[20] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2778.81470, -2520.29419, 13.90790  ))
-	{
-	    if(celamove[21] == 0)
-	    {
-			MoveDynamicObject(cela[21], 2778.8147, -2521.3442, 13.9079 ,2);
-	        celamove[21] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[21],   2778.81470, -2520.29419, 13.90790 ,2);
-	        celamove[21] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2741.56396, -2536.51147, 13.90790  ))
-	{
-	    if(celamove[22] == 0)
-	    {
-			MoveDynamicObject(cela[22],2741.5640, -2537.5615, 13.9079 ,2);
-	        celamove[22] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[22],2741.56396, -2536.51147, 13.90790   ,2);
-	        celamove[22] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2741.56396, -2527.58862, 13.90790))
-	{
-	    if(celamove[23] == 0)
-	    {
-			MoveDynamicObject(cela[23],2741.5640, -2528.6386, 13.9079 ,2);
-	        celamove[23] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[23],2741.56396, -2527.58862, 13.90790,2);
-	        celamove[23] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2755.57666, -2517.47388, 16.72590 ))
-	{
-	    if(celamove[24] == 0)
-	    {
-			MoveDynamicObject(cela[24],2754.4847, -2517.4739, 16.7259,2);
-	        celamove[24] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[24], 2755.57666, -2517.47388, 16.72590,2);
-	        celamove[24] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2771.63916, -2537.47754, 16.72590))
-	{
-	    if(celamove[25] == 0)
-	    {
-			MoveDynamicObject(cela[25],2770.5892, -2537.4775, 16.7259,2);
-	        celamove[25] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[25],2771.63916, -2537.47754, 16.72590,2);
-	        celamove[25] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2781.96265, -2537.47754, 16.72590))
-	{
-	    if(celamove[26] == 0)
-	    {
-			MoveDynamicObject(cela[26],2780.8706, -2537.4775, 16.7259,2);
-	        celamove[26] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[26],2781.96265, -2537.47754, 16.72590,2);
-	        celamove[26] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2792.25391, -2537.47754, 16.72590))
-	{
-	    if(celamove[27] == 0)
-	    {
-			MoveDynamicObject(cela[27],2791.2458, -2537.4775, 16.7259,2);
-	        celamove[27] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[27],2792.25391, -2537.47754, 16.72590,2);
-	        celamove[27] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2759.78394, -2520.47339, 13.90790))
-	{
-	    if(celamove[28] == 0)
-	    {
-			MoveDynamicObject(cela[28],2758.6919, -2520.4734, 13.9079,2);
-	        celamove[28] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[28],2759.78394, -2520.47339, 13.90790,2);
-	        celamove[28] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2751.01294, -2520.49414, 13.90790))
-	{
-	    if(celamove[29] == 0)
-	    {
-			MoveDynamicObject(cela[29],2750.0049, -2520.4941, 13.9079,2);
-	        celamove[29] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[29],2751.01294, -2520.49414, 13.90790,2);
-	        celamove[29] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2768.40405, -2533.79834, 13.90790))
-	{
-	    if(celamove[30] == 0)
-	    {
-			MoveDynamicObject(cela[30],2767.3541, -2533.7983, 13.9079,2);
-	        celamove[30] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[30], 2768.40405, -2533.79834, 13.90790,2);
-	        celamove[30] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2777.35767, -2533.79834, 13.90790))
-	{
-	    if(celamove[31] == 0)
-	    {
-			MoveDynamicObject(cela[31],2776.3076, -2533.7983, 13.9079,2);
-	        celamove[31] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[31],2777.35767, -2533.79834, 13.90790,2);
-	        celamove[31] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2, 2786.37427, -2533.79834, 13.90790))
-	{
-	    if(celamove[32] == 0)
-	    {
-			MoveDynamicObject(cela[32],2785.3243, -2533.7983, 13.9079,2);
-	        celamove[32] = 1;
-	    }
-	    else
-	    {
-			MoveDynamicObject(cela[32], 2786.37427, -2533.79834, 13.90790,2);
-	  		celamove[32] = 0 ;
-	    }
-	}
-	if(IsPlayerInRangeOfPoint(playerid,2,2795.34888, -2533.79834, 13.90790))
-	{
-	    if(celamove[33] == 0)
-	    {
-	        MoveDynamicObject(cela[33],2794.2989, -2533.7983, 13.9079,2);
-	        celamove[33] = 1;
-	    }
-	    else
-	    {
-	        MoveDynamicObject(cela[33],2795.34888, -2533.79834, 13.90790,2);
-	        celamove[33] = 0 ;
-	    }
-	}
-	return 1;
-}
 /*
 CMD:cela2(playerid, params[])
 {
@@ -17597,7 +16959,8 @@ CMD:sluzba(playerid)
             || PlayerToPoint(3, playerid, 1572.0812,-1631.5923,13.3991) // NOWE DUTY KILSON
             || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
             || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
-            || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141))//nowe komi by dywan
+            || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
+			|| PlayerToPoint(3, playerid, 2522.8916,-2441.6270,13.6435))//nowe komi by dywan
 
             {
                 if(OnDuty[playerid]==0)
@@ -17701,6 +17064,35 @@ CMD:sluzba(playerid)
                 return 1;
             }
         }
+		else if(GetPlayerOrg(playerid) == 12)
+		{
+			if ( IsPlayerInRangeOfPoint(playerid, 5.0, 2522.8916,-2441.6270,13.6435) )
+            {
+				if(OnDuty[playerid]==0)
+                {
+                    format(string, sizeof(string), "* ¯o³nierz %s bierze odznakê i broñ ze swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 90);
+                    SetPlayerHealth(playerid, 100);
+					
+					if(PlayerInfo[playerid][pSex] == 1)
+						SetPlayerSkin(playerid, 287);
+					else
+						SetPlayerSkin(playerid, 191);
+                    OnDuty[playerid] = 1;
+                }
+                else if(OnDuty[playerid]==1)
+                {
+                    format(string, sizeof(string), "* ¯o³nierz %s odk³ada odznakê i broñ do swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 0.0);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 0;
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    PrzywrocBron(playerid);
+                }
+			}
+		}
         else if(PlayerInfo[playerid][pMember] == 4||PlayerInfo[playerid][pLider] == 4)
         {
             if (PlayerToPoint(4, playerid,1147.3623,-1314.4891,13.6743))
@@ -17774,7 +17166,7 @@ CMD:sluzba(playerid)
         }
         else if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7)
         {
-            if (PlayerToPoint(5, playerid,1525.9830, -1453.0792, 68.0118))
+            if (PlayerToPoint(5, playerid,1527.2361,-1453.2623,67.8331))
             {
                 if(OnDuty[playerid]==0)
                 {
@@ -19939,14 +19331,14 @@ CMD:wejdz(playerid)
         {
             ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
         }
-        //else if(IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360)//Podziemia BOR
-        else if((IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360) && IsABOR(playerid))//Podziemia BOR
-        || IsPlayerInRangeOfPoint(playerid,3,1483.8867, -1491.1559, 13.9085)
+        //else if(IsPlayerInRangeOfPoint(playerid,3,1752.0090,-1524.4808,-8.5162)//Podziemia BOR
+        else if((IsPlayerInRangeOfPoint(playerid,3,1752.0090,-1524.4808,-8.5162) && IsABOR(playerid))//Podziemia BOR
+        || IsPlayerInRangeOfPoint(playerid,3,1772.1613,-1547.9675,9.9067)
         || IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
         || IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
-        || IsPlayerInRangeOfPoint(playerid,3, 1495.1107, -1468.8528, 40.8256)&& IsABOR(playerid))//dach BOR
+        || IsPlayerInRangeOfPoint(playerid,3, 1795.4104,-1551.2864,22.9192)&& IsABOR(playerid))//dach BOR
         {
-            ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking wewnêtrzny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala USSS\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking podziemny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala USSS\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
         }
         //winda FBI
         else if(IsPlayerInRangeOfPoint(playerid,5,618.0215,-1452.7937,90.6158)//przy recepcji
@@ -19956,9 +19348,10 @@ CMD:wejdz(playerid)
         || IsPlayerInRangeOfPoint(playerid,5,564.9237, -1466.3726, 33.0378)//Szatnie Toalety, Zbrojownia
         || IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//Dach
         || IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
+		|| IsPlayerInRangeOfPoint(playerid,5,565.6246,-1485.8623,-8.8300)//Parking podziemny
         || IsPlayerInRangeOfPoint(playerid,5,599.7307, -1499.7308, 37.5980))//Sale Konferencyjne
         {
-            ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia i Toalety\n[Poziom 3]Centrum szkoleniowe\n[Poziom 4]Sala Konferencyjna\n[Poziom 5]Wiêzienie stanowe\n[Poziom 6]Biura Federalne\n[Poziom 7]Dach FBI","Jedz","Anuluj");
+            ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia i Toalety\n[Poziom 3]Centrum szkoleniowe\n[Poziom 4]Sala Konferencyjna\n[Poziom 5]Wiêzienie stanowe\n[Poziom 6]Biura Federalne\n[Poziom 7]Dach FBI","Jedz","Anuluj");
         }
         else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1142.2214355469, -1337.7125244141, 419.69830322266))//wyklady wejscie
         {
@@ -21431,11 +20824,11 @@ CMD:wyjdz(playerid)
 			ShowPlayerDialogEx(playerid, 121, DIALOG_STYLE_LIST, "Wybierz pomieszczenie", "Salka Konferencyjna\nBiura\nPiwnice", "Wybierz", "WyjdŸ");
 	    }
 		//winda bor
-		else if((IsPlayerInRangeOfPoint(playerid,3,1510.7217, -1470.1677, 9.7360)&& IsABOR(playerid))//podziemny parking
-		|| IsPlayerInRangeOfPoint(playerid,3,1483.8867, -1491.1559, 13.9085)
+		else if((IsPlayerInRangeOfPoint(playerid,3,1752.0090,-1524.4808,-8.5162)&& IsABOR(playerid))//podziemny parking
+		|| IsPlayerInRangeOfPoint(playerid,3,1772.1613,-1547.9675,9.9067)
 		|| IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
 		|| IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
-		|| (IsPlayerInRangeOfPoint(playerid,3, 1495.1107, -1468.8528, 40.8256)&& IsABOR(playerid)))//dach
+		|| (IsPlayerInRangeOfPoint(playerid,3, 1795.4104,-1551.2864,22.9192)&& IsABOR(playerid)))//dach
 		{
 			ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking wewnêtrzny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala BOR\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
 		}
@@ -21447,10 +20840,11 @@ CMD:wyjdz(playerid)
 		|| IsPlayerInRangeOfPoint(playerid,5,564.9237, -1466.3726, 33.0378)//Szatnie Toalety, Zbrojownia
 		|| IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//Dach
 		|| IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
+		|| IsPlayerInRangeOfPoint(playerid,5,565.6246,-1485.8623,-8.8300)//Parking podziemny
 		|| IsPlayerInRangeOfPoint(playerid,5,599.7307, -1499.7308, 37.5980))//Sale Konferencyjne
 		{
-			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia i Toalety\n[Poziom 3]Centrum szkoleniowe\n[Poziom 4]Sala Konferencyjna\n[Poziom 5]Wiêzienie stanowe\n[Poziom 6]Biura Federalne\n[Poziom 7]Dach FBI","Jedz","Anuluj");
-		}
+			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia i Toalety\n[Poziom 3]Centrum szkoleniowe\n[Poziom 4]Sala Konferencyjna\n[Poziom 5]Wiêzienie stanowe\n[Poziom 6]Biura Federalne\n[Poziom 7]Dach FBI","Jedz","Anuluj");
+        }
 		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1144.0762939453, -1324.9822998047, 419.69830322266))//wypoczynek srodek
 		{
 		    SetPlayerPosEx(playerid, 1143.5290527344, -1327.2391357422, 419.69830322266);//wypoczynek wejscie
@@ -21948,7 +21342,7 @@ CMD:wyjdz(playerid)
 		}
 		else if (PlayerToPoint(5.0, playerid, 1526,-1451,64)) // baza bor srodek
 		{
-		    SetPlayerPosEx(playerid, 1518.8350,-1452.4341,14.2031); // baza bor wejscie
+		    SetPlayerPosEx(playerid, 1797.99829, -1578.78772, 14.01125); // baza bor wejscie
 		    SetPlayerVirtualWorld(playerid, 0);
 		    GameTextForPlayer(playerid, "~w~Milego dnia.", 5000, 1);
 		    return 1;
@@ -27169,6 +26563,42 @@ CMD:changelog(playerid, params[])
 		SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
 		SendClientMessage(playerid,COLOR_WHITE,"Dodano system po¿arów by PECET");
 		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /tablet dla org. porz¹dkowych - PECET");
+	}
+	else if(strcmp(wersja,"2.5.7",true) == 0)
+	{
+		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
+		SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
+		SendClientMessage(playerid,COLOR_WHITE,"System Po¿arów v0.2");
+		SendClientMessage(playerid,COLOR_WHITE,"Do sejfu LSFD trafia 20k od zgaszonego po¿aru");
+		SendClientMessage(playerid,COLOR_WHITE,"Wyd³u¿ono czas gaszenia po¿arów");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano wiêcej scenariuszy po¿arów");
+		SendClientMessage(playerid,COLOR_WHITE,"Usprawniono informowanie o po¿arach (dla Administracji)");
+		SendClientMessage(playerid,COLOR_WHITE,"Do sejfu LSFD i do stra¿aka trafia po 2,5k za usuniêt¹ plamê oleju");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /windalock dla S¹du (w przysz³oœci planowane dodanie dla innych frakcji, które bêd¹ chcia³y komendê)");
+		SendClientMessage(playerid,COLOR_WHITE,"Usprawniono interior S¹du (jest jaœniej i niezale¿nie od pogody na zewn¹trz - wewn¹trz nie pada)");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano /odznaka dla pracowników S¹du");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano /dutysbi dla SASP");
+		SendClientMessage(playerid,COLOR_WHITE,"Poprawiono komendê /tp (dla Administracji)");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano /togpodglad (dla Administracji)");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano /wejdz i /wyjdz na strzelnicê dla Gunshop LS");
+		SendClientMessage(playerid,COLOR_WHITE,"Domenda /akceptuj naprawa tylko na wy³¹czonym silniku, trwa okreœlon¹ iloœæ czasu i wymaga mechanika w pobli¿u, który w momencie naprawiania musi staæ obok pojazdu");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /armia-wiadomosc dla U.S. Army");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /sprzedajrybe - OD TERAZ MO¯ESZ SPRZEDAÆ RYBY, KTÓRE Z£OWI£EŒ W 24/7! Cena za kilogram: 20$!");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /su, /ob, /barierka, brak otrzymywania WL za zabójstwo dla F.S. Army");
+		SendClientMessage(playerid,COLOR_WHITE,"Mniejsze poprawki maj¹ce na celu optymalizacjê i usprawnienie skryptu.");
+		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
+		SendClientMessage(playerid,COLOR_WHITE,"Pos¹g Los Santos - KilsOn");
+		SendClientMessage(playerid,COLOR_WHITE,"Przeniesiona centrala GSA - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty 'Ciekawostki' - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Czêsto skracane zakrêty - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Nowa baza San Andreas Army - soldiercolt");
+		SendClientMessage(playerid,COLOR_WHITE,"OP dla Blueberry - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Interior rady miasta Blueberry - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Interior 'Komisja ds. Mechaników' - _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Op dla Dillimore - Niuniek");
+		SendClientMessage(playerid,COLOR_WHITE,"Poprawki Rockstar/obecnej mapy - KilsOn i _Szymon");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty przed DMV - KilsOn");
+		SendClientMessage(playerid,COLOR_WHITE,"Parking podziemny dla FBI - _Szymon");
 	}
 	else
 	{
@@ -37570,59 +37000,6 @@ CMD:ibiza(playerid)
 	return 1;
 }
 
-CMD:wjedz(playerid) //POWTÓRKA
-{
-	// Wjazd AUTO
-	if(IsPlayerInRangeOfPoint(playerid, 5.0, 384.2610,-1825.6091,7.9316) && PlayerInfo[playerid][pRank] >=6 && GetPlayerVirtualWorld(playerid) == 0 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
-	{
-		if(IbizaZamek) return sendTipMessageEx(playerid, 0xB52E2BFF, "Klub jest w tej chwili zamkniêty");
-		if(!IsPlayerInAnyVehicle(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ w pojeŸdzie");
-		if(IbizaWjazd) return sendTipMessageEx(playerid, 0xB52E2BFF, "Przejazd jest w tej chwili u¿ywany, spróbuj póŸniej.");
-		new veh = GetPlayerVehicleID(playerid);
-		if(GetPlayerVehicleSeat(playerid) != 0 ) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ kierowc¹");
-		IbizaWjazd = true;
-
-		TogglePlayerControllable(playerid, false);
-		SetTimerEx("FreezeVeh", 50, false, "ddd", veh, playerid, 0);
-		SetVehiclePos(veh, 1952.7168,-2466.7805,18.6352);
-		SetVehicleZAngle(veh, 234.9069);
-		SetVehicleVirtualWorld(veh, 1);
-		for(new i=0; i<MAX_PLAYERS; i++)
-		{
-			if(!IsPlayerInVehicle(i, veh) ) continue;
-			SetPlayerVirtualWorld(i, 1);
-			SetPVarInt(i, "IbizaWejdz", 1);
-			PlayAudioStreamForPlayer(i, IbizaStream[IbizaStreamID]);
-			if(IbizaSwiatla) WlaczSwiatlaP(i);
-			else WylaczSwiatlaP(i);
-		}
-	}
-	return 1;
-}
-
-CMD:wyjedz(playerid) //POWTÓRKA
-{
-	//WYJAZD AUTO
-	if(IsPlayerInRangeOfPoint(playerid, 5.0, 1952.7168,-2466.7805,15.6352) && PlayerInfo[playerid][pRank] >= 6 && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
-	{
-		if(!IsPlayerInAnyVehicle(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ w pojeŸdzie");
-		new veh = GetPlayerVehicleID(playerid);
-		if(GetPlayerVehicleSeat(playerid) != 0 ) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ kierowc¹");
-		if(IbizaWjazd) return sendTipMessageEx(playerid, 0xB52E2BFF, "Przejazd jest w tej chwili u¿ywany, spróbuj póŸniej.");
-		SetVehiclePos(veh, 384.2610,-1825.6091,7.9316);
-		SetVehicleZAngle(veh, 69.6582);
-		SetVehicleVirtualWorld(veh, 0);
-		for(new i=0; i<MAX_PLAYERS; i++)
-		{
-			if(!IsPlayerInVehicle(i, veh) ) continue;
-			SetPlayerVirtualWorld(i, 0);
-			SetPVarInt(i, "IbizaWejdz", 0);
-			StopAudioStreamForPlayer(i);
-			IbizaWyjscie(playerid);
-		}
-	}
-	return 1;
-}
 CMD:sprzedajbilet(playerid, params[])
 {
 	if(GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
@@ -39750,5 +39127,165 @@ if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania poz
                             Sejf_Add(PlayerInfo[playerid][pMember], 10000);
                             ApprovedLawyer[giveplayerid] = 1;
 */
+
+//noweobiekty 2.5.7 aktualizacja szym3k wjedz wyjedz gsa 
+CMD:wjedz(playerid)
+{
+	if(IsPlayerInRangeOfPoint(playerid, 5.0, 384.2610,-1825.6091,7.9316) && PlayerInfo[playerid][pRank] >=6 && GetPlayerVirtualWorld(playerid) == 0 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+	{
+		if(IbizaZamek) return sendTipMessageEx(playerid, 0xB52E2BFF, "Klub jest w tej chwili zamkniêty");
+		if(!IsPlayerInAnyVehicle(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ w pojeŸdzie");
+		if(IbizaWjazd) return sendTipMessageEx(playerid, 0xB52E2BFF, "Przejazd jest w tej chwili u¿ywany, spróbuj póŸniej.");
+		new veh = GetPlayerVehicleID(playerid);
+		if(GetPlayerVehicleSeat(playerid) != 0 ) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ kierowc¹");
+		IbizaWjazd = true;
+
+		TogglePlayerControllable(playerid, false);
+		SetTimerEx("FreezeVeh", 50, false, "ddd", veh, playerid, 0);
+		SetVehiclePos(veh, 1952.7168,-2466.7805,18.6352);
+		SetVehicleZAngle(veh, 234.9069);
+		SetVehicleVirtualWorld(veh, 1);
+		for(new i=0; i<MAX_PLAYERS; i++)
+		{
+			if(!IsPlayerInVehicle(i, veh) ) continue;
+			SetPlayerVirtualWorld(i, 1);
+			SetPVarInt(i, "IbizaWejdz", 1);
+			PlayAudioStreamForPlayer(i, IbizaStream[IbizaStreamID]);
+			if(IbizaSwiatla) WlaczSwiatlaP(i);
+			else WylaczSwiatlaP(i);
+		}
+	}
+	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1825.18274, -1538.21204, 13.11075))
+	{
+		if (IsPlayerInAnyVehicle (playerid))
+		{
+			new vehicleid = GetPlayerVehicleID (playerid);
+			SetVehiclePos (vehicleid, 1818.77222, -1536.09314, 13.11075);
+		}
+		else
+		{
+			SetPlayerPos (playerid, 1818.77222, -1536.09314, 13.11075);
+		}
+	}
+	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1750.55762, -1537.86279, 9.51801))//wew
+	{
+		if (IsPlayerInAnyVehicle (playerid))
+		{
+			new vehicleid = GetPlayerVehicleID (playerid);
+			SetVehiclePos (vehicleid, 1767.4446,-1544.5099,-8.6924);
+
+		}
+		else
+		{
+			SetPlayerPos (playerid, 1767.4446,-1544.5099,-8.6924);
+		}
+	}
+	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1754.29529, -1593.04077, 13.51426))
+	{
+		if (IsPlayerInAnyVehicle (playerid))
+		{
+			new vehicleid = GetPlayerVehicleID (playerid);
+			SetVehiclePos (vehicleid, 1753.16077, -1587.40088, 13.51426);
+		}
+		else
+		{
+			SetPlayerPos (playerid, 1753.16077, -1587.40088, 13.51426);
+		}
+	}
+	//FBI
+	else if (IsPlayerInRangeOfPoint(playerid, 10.0, 593.47217, -1509.27258, 15.75509))
+	{
+		if (IsPlayerInAnyVehicle (playerid))
+		{
+			new vehicleid = GetPlayerVehicleID (playerid);
+			SetVehiclePos (vehicleid, 583.2587,-1507.0612,-8.8230);
+			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Aby wyjechaæ wpisz /wyjedz");
+		}
+		else
+		{
+		SetPlayerPos (playerid, 583.2587,-1507.0612,-8.8230);
+		SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Aby wyjechaæ wpisz /wyjedz");
+		}
+
+	}
+	return 1;
+}
+
+
+CMD:wyjedz(playerid)
+{
+	if(IsPlayerInRangeOfPoint(playerid, 5.0, 1952.7168,-2466.7805,15.6352) && PlayerInfo[playerid][pRank] >= 6 && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+	{
+		if(!IsPlayerInAnyVehicle(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ w pojeŸdzie");
+		new veh = GetPlayerVehicleID(playerid);
+		if(GetPlayerVehicleSeat(playerid) != 0 ) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ kierowc¹");
+		if(IbizaWjazd) return sendTipMessageEx(playerid, 0xB52E2BFF, "Przejazd jest w tej chwili u¿ywany, spróbuj póŸniej.");
+		SetVehiclePos(veh, 384.2610,-1825.6091,7.9316);
+		SetVehicleZAngle(veh, 69.6582);
+		SetVehicleVirtualWorld(veh, 0);
+		for(new i=0; i<MAX_PLAYERS; i++)
+		{
+			if(!IsPlayerInVehicle(i, veh) ) continue;
+			SetPlayerVirtualWorld(i, 0);
+			SetPVarInt(i, "IbizaWejdz", 0);
+			StopAudioStreamForPlayer(i);
+			IbizaWyjscie(playerid);
+		}
+	}
+	//GSA
+	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1818.77222, -1536.09314, 13.11075))
+	{
+		if (IsPlayerInAnyVehicle (playerid))
+		{
+			new vehicleid = GetPlayerVehicleID (playerid);
+			SetVehiclePos (vehicleid, 1828.2227,-1538.9498,13.2345);
+		}
+		else
+		{
+			SetPlayerPos (playerid, 1825.18274, -1538.21204, 13.11075);
+		}
+	}
+	else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1767.4446,-1544.5099,-8.6924))
+	{
+		if (IsPlayerInAnyVehicle (playerid))
+		{
+			new vehicleid = GetPlayerVehicleID (playerid);
+			SetVehiclePos (vehicleid, 1753.65845, -1537.63806, 9.45862);
+		}
+		else
+		{
+			SetPlayerPos (playerid, 1753.65845, -1537.63806, 9.45862);
+		}
+	}
+	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1753.16077, -1587.40088, 13.51426))
+	{
+		if (IsPlayerInAnyVehicle (playerid))
+		{
+			new vehicleid = GetPlayerVehicleID (playerid);
+			SetVehiclePos (vehicleid, 1752.72913, -1596.25830, 13.35654);
+		}
+		else
+		{
+			SetPlayerPos (playerid, 1752.72913, -1596.25830, 13.35654);
+		}
+	}
+	//FBI
+
+	else if (IsPlayerInRangeOfPoint(playerid, 15.0, 583.2587,-1507.0612,-8.8230))
+	{
+		if (IsPlayerInAnyVehicle (playerid))
+		{
+			new vehicleid = GetPlayerVehicleID (playerid);
+			SetVehiclePos (vehicleid, 593.47217, -1509.27258, 15.75509);
+			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Opuœci³eœ parking wewnêtrzny! Aby ponownie wjechaæ wpisz /wjedz");
+		}
+		else
+		{
+			SetPlayerPos (playerid,  593.47217, -1509.27258, 15.75509);
+			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Opuœci³eœ parking wewnêtrzny! Aby ponownie wjechaæ wpisz /wjedz");
+		}
+	}
+	return 1;
+}
 
 //eof

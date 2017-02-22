@@ -40,6 +40,7 @@ public Naprawa(playerid)
     DajKase(RepairOffer[playerid], RepairPrice[playerid]);
     RepairOffer[playerid] = 999;
     RepairPrice[playerid] = 0;
+	Naprawiasie[playerid] = 0;
     return 1;
 }
 

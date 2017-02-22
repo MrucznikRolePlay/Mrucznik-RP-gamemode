@@ -3287,6 +3287,10 @@ GraczBankomat(playerid)
     {
         return 1;
     }
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 1822.5533,-1544.7983,13.3347))
+	{
+		return 1;
+	}
 	return 0;
 }
 
@@ -7929,7 +7933,7 @@ public NG_OpenGateWithKey(playerid)
 		TextDrawHideForPlayer(playerid,NG_GateTD[5]);
 		TextDrawHideForPlayer(playerid,NG_GateTD[6]);
 		TextDrawHideForPlayer(playerid,NG_GateTD[7]);
-	    if(moveng[11] == 0)
+	    /*if(moveng[11] == 0)
 	    {
 	        moveng[11] = 1;
 	        MoveDynamicObject(bramkang[11],2720.24146, -2504.48486, 8.9220,3);
@@ -7938,7 +7942,7 @@ public NG_OpenGateWithKey(playerid)
 	    {
 	        moveng[11] = 0;
 	        MoveDynamicObject(bramkang[11],2720.24146, -2504.48486, 15.39000,3);
-	    }
+	    }*/
         VAR_NGKeypad = false;
     }
     else
