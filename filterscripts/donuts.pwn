@@ -32,5 +32,6 @@ public OnFilterScriptInit()
 public OnPlayerConnect(playerid)
 {
 	RemoveBuildingForPlayer(playerid, 1231, 1479.6953, -1702.5313, 15.6250, 0.25);
+	RemoveBuildingForPlayer(playerid, 1231, 1479.3828, -1692.3906, 15.6328, 0.25);
 }
 
