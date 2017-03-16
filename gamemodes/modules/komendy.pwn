@@ -34195,7 +34195,7 @@ CMD:akceptuj(playerid, params[])
                             //
                             format(string, sizeof(string), "%s jeba³ siê za $%d z %s", sendername, SexPrice[playerid], giveplayer);
                             ABroadCast(COLOR_YELLOW,string,1);
-                            printf("%s", string);
+                            PayLog(string);
                             //
 							ZabierzKase(playerid, SexPrice[playerid]);
 							if(PlayerInfo[SexOffer[playerid]][pSexSkill] == 50)
@@ -38218,7 +38218,7 @@ CMD:rentcar(playerid)
     return 1;
 }
 
-CMD:premium(playerid)
+/*CMD:premium(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
         CallRemoteFunction("MRP_ShowPremiumMenu", "i", playerid);
@@ -38246,7 +38246,7 @@ CMD:dodatki(playerid)
     }
     else CallRemoteFunction("SEC_MyItems_Show", "i", playerid);
     return 1;
-}
+}*/
 
 CMD:ao_setspecial(playerid, p[])
 {

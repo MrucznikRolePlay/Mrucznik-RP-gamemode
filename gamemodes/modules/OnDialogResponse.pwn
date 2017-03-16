@@ -28,18 +28,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
 		}
     }
-	/*if(dialogid == D_KUBICWEL)
-	{
-		if(response)
-		{
-			new string[128];
-			format(string,sizeof(string), "kandydat%d", listitem);
-			dini_IntSet("wybory.ini", string, wybory[listitem]++);
-			PlayerInfo[playerid][pCzystka] = 1339;
-			format(string,sizeof(string), "Odda³eœ g³os na %s", inputtext);
-			SendClientMessage(playerid, COLOR_GREEN, string);
-		}
-	}*/
+	
+	//2.5.8
+	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	//2.5.2
 	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
@@ -15952,12 +15943,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wróciæ do poprzedniej pozycji wpisz /ticketend", GetNick(pid));
         SendClientMessage(playerid, COLOR_YELLOW, str);
 
-        return 1;
-    }
-    else if(dialogid == D_ASK_DODATKI)
-    {
-        if(!response) cmd_dodatki(playerid);
-        else CallRemoteFunction("SEC_MyItems_Reattach", "d", playerid);
         return 1;
     }
 	return 0;

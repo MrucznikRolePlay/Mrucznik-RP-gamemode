@@ -131,3 +131,79 @@
 	#define COL_PINK			"{FF60D0}"
 	#define COL_LIGHTBLUE		"{00C0FF}"
 	#define COL_LGREEN			"{747b41}"
+	
+//Podstawowe kolory:
+#define INCOLOR_WHITE		"{FFFFFF}"
+#define INCOLOR_BLACK		"{000000}"
+#define INCOLOR_GREY		"{808080}"
+#define INCOLOR_LIGHTGREY	"{A0A0A0}"
+#define INCOLOR_DARKGREY	"{606060}"
+#define INCOLOR_SILVER		"{C0C0C0}"
+#define INCOLOR_LIGHTSILVER	"{D7D7D7}"
+#define INCOLOR_DARKSILVER	"{4F4F4F}"
+
+#define INCOLOR_GRAD1 		"{B4B5B7}"	//ciemny szary
+#define INCOLOR_GRAD2 		"{BFC0C2}"
+#define INCOLOR_GRAD3 		"{CBCCCE}"
+#define INCOLOR_GRAD4 		"{D8D8D8}"
+#define INCOLOR_GRAD5 		"{E3E3E3}"
+#define INCOLOR_GRAD6 		"{F0F0F0}"	//jasny szary
+
+//Czerwone kolory:
+#define INCOLOR_RED			"{AA3333}"
+#define INCOLOR_LIGHTRED	"{FF6347}"
+#define INCOLOR_DARKRED		"{CF2929}"
+#define INCOLOR_PANICRED	"{FF0000}"
+
+//Pomarañczowe kolory:
+#define INCOLOR_ORANGE		"{FFA500}"
+#define INCOLOR_LIGHTORANGE	"{FFC125}"
+#define INCOLOR_DARKORANGE	"{FF8000}"
+#define INCOLOR_RUDY		"{CD5700}"
+
+//¯ó³te kolory:
+#define INCOLOR_YELLOW		"{FFFF00}"
+#define INCOLOR_LIGHTYELLOW	"{FFFF33}"
+#define INCOLOR_DARKYELLOW	"{FFBF00}"
+#define INCOLOR_GOLD		"{FFD700}"
+
+#define INCOLOR_YELLOW1		"{FFFF33}"
+#define INCOLOR_YELLOW2		"{FFFF15}"
+#define INCOLOR_YELLOW3		"{FFFF00}"
+#define INCOLOR_YELLOW4		"{FFDF00}"
+#define INCOLOR_YELLOW5		"{FFCF00}"
+#define INCOLOR_YELLOW6		"{FFBF00}"
+
+//Br¹zowe kolory:
+#define INCOLOR_BROWN		"{A52A2A}"
+#define INCOLOR_LIGHTBROWN	"{CD7F32}"
+#define INCOLOR_DARKBROWN	"{7B3F00}"
+
+//Zielone kolory:
+#define INCOLOR_GREEN		"{00FF00}"
+#define INCOLOR_GREEN2		"{63FF60}"
+#define INCOLOR_LIGHTGREEN	"{9ACD32}"
+#define INCOLOR_DARKGREEN	"{008000}"
+#define INCOLOR_OLIVE		"{808000}"
+#define INCOLOR_MINT		"{22DD64}"
+#define INCOLOR_LIGHTMINT	"{BCE27F}"
+
+//Niebieskie kolory:
+#define INCOLOR_BLUE		"{0000FF}"
+#define INCOLOR_LIGHTBLUE	"{33CCFF}"
+#define INCOLOR_DARKBLUE	"{082567}"
+#define INCOLOR_CYAN		"{00FFFF}"
+
+//Fioletowe i purpurowe kolory:
+#define INCOLOR_PURPLE		"{800080}"
+#define INCOLOR_VIOLET		"{EE82EE}"
+
+//Ró¿owe kolory:
+#define INCOLOR_PINK		"{FF00FF}"
+#define INCOLOR_LIGHTPINK	"{EE82EE}"
+#define INCOLOR_DARKPINK	"{FF0090}"
+#define INCOLOR_HOT_PINK	"{FF69B4}"
+
+//Inne:
+#define INDIALOG_COLOR 		"{A9C4E4}"
+#define INCOLOR_DIALOG 		"{A9C4E4}"

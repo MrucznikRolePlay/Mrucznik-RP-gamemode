@@ -53,6 +53,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <dialogs>
 #include <fadescreen>
 #include <ACSBM>
+#include <timestamp.inc>
 #define AC_MAX_CONNECTS_FROM_IP		5
 #include <nex-ac>						// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include "../pawno/include/systempozarow" //System Po¿arów v0.1
@@ -73,7 +74,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.7"
+#define VERSION "v2.5.8"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
@@ -88,16 +89,19 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include "modules\new\bramy\bramy.def"
 #include "modules\new\wejscia\wejscia.def"
 #include "modules\new\budki\budki.def"
+#include "modules\new\premium\premium.def"
 
 //Nowe modu³y .hwn:
 #include "modules\new\bramy\bramy.hwn"
 #include "modules\new\wejscia\wejscia.hwn"
 #include "modules\new\budki\budki.hwn"
+#include "modules\new\premium\premium.hwn"
 
 //Nowe modu³y .pwn:
 #include "modules\new\bramy\bramy.pwn"
 #include "modules\new\wejscia\wejscia.pwn"
 #include "modules\new\budki\budki.pwn"
+#include "modules\new\premium\premium.pwn"
 
 
 //------------------------------------------------------------------------------------------------------
