@@ -32,7 +32,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
     aktualizacja 7 paŸdziernika
     aktualizacja 10.08
     aktualizacja 29.X
-    <-------------------------------------------------------->
+    <---------------------------------R----------------------->
 	Kubi cwel
 	aktualizacja 2015.11.15 kryptonim PADZIOCH
 
@@ -102,6 +102,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include "modules\new\wejscia\wejscia.pwn"
 #include "modules\new\budki\budki.pwn"
 #include "modules\new\premium\premium.pwn"
+#include "modules\new\premium\premium_dialogs.pwn"
 
 
 //------------------------------------------------------------------------------------------------------
@@ -143,8 +144,8 @@ main()
 #include "modules/timery.pwn"
 
 //Obiekty:
-#include "modules/obiekty.pwn"
-#include "modules/noweobiekty.pwn"
+#include "modules/obiekty/stare_obiekty.pwn"
+#include "modules/obiekty/nowe_obiekty.pwn"
 
 //Samochody/Pickupy/3DTexty:
 #include "modules/pickupy.pwn"
@@ -748,8 +749,8 @@ public OnPlayerConnect(playerid)
 	#endif
 	Ac_OnPlayerConnect(playerid);
 	ZerujZmienne(playerid);
-	UsunObiekty(playerid);
-	noweobiekty_RemoveBuildings(playerid);
+	Usun_Obiekty(playerid); //stare obiekty
+	obiekty_OnPlayerConnect(playerid);//nowe obiekty
 	LoadTextDraws(playerid);
 	ClearChat(playerid);
 
@@ -4027,11 +4028,13 @@ public OnRconLoginAttempt(ip[], password[], success)
     {
         if(player != -1)
         {
-			if(GetPVarInt(player, "koxubankotfunia") != 19769)
+			new name[32]; format(name, sizeof(name), "rcon/%s", GetNick(player));
+			if(!dini_Exists(name))
 			{
 				new str[128];
 				format(str, 128, "RCON: U¿ytkownik %s (%d) próbowa³ siê zalogowaæ na rcona bez wymaganych uprawnieñ!", GetNick(player, true), player);
 				SendAdminMessage(COLOR_PANICRED, str);
+				KickEx(player);
 				print(str);
 				#if DEBUG == 1
 					printf("OnRconLoginAttempt - end");
@@ -4871,11 +4874,7 @@ public OnGameModeInit()
     BARIERKA_Init(); //Przed limitem obiektów
 	
     Stworz_Obiekty();//obiekty
-	noweobiekty_LoadObjects();
-	noweobiekty_Load3DTexts();
-	noweobiekty_LoadPickups();
-	noweobiekty_LoadGates();
-	noweobiekty_LoadDoors();
+	obiekty_OnGameModeInit();//nowe obiekty
 	
     ZaladujDomy();//System Domów
     orgLoad();
@@ -4909,9 +4908,8 @@ public OnGameModeInit()
     //13.06
     LoadTXD();
     //30.10
-    TJD_Load(); printf("TUTAJ CRASH ZARAZ");
+    TJD_Load();
     Car_Load(); //Wszystkie pojazdy MySQL
-    printf("A JEDNAK NIE");
 
     new string[MAX_PLAYER_NAME];
     new string1[MAX_PLAYER_NAME];

@@ -121,6 +121,9 @@ CMD:kp(playerid, params[]) return cmd_premium(playerid, params);
 CMD:dotacje(playerid, params[]) return cmd_premium(playerid, params);
 CMD:premium(playerid, params[])
 {
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Ju¿ wkrótce!");
+	return 1;
+
     if(IsPlayerConnected(playerid) && gPlayerLogged[playerid] != 0)
     {
         DialogMenuDotacje(playerid);
@@ -136,6 +139,7 @@ CMD:premium(playerid, params[])
 CMD:setmc(playerid, params[]) return cmd_dajmc(playerid, params);
 CMD:dajmc(playerid, params[])
 {
+	return 1;
 	if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
 		new giveplayerid, value;
@@ -160,6 +164,7 @@ CMD:dajmc(playerid, params[])
 CMD:setkp(playerid, params[]) return cmd_dajmc(playerid, params);
 CMD:dajkp(playerid, params[])
 {
+	return 1;
 	if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
 		new giveplayerid, value;
