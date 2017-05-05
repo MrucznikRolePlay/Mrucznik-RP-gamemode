@@ -450,8 +450,6 @@ Zaladuj3DTexty()
     CreateDynamic3DTextLabel("Dach San News", 0xFFA500FF, 721.5504,-1381.8588,25.7176, 15.0);
     CreateDynamic3DTextLabel("Zaplecze San News", 0xFFA500FF, 732.5052,-1343.5123,13.5206, 15.0);
 
-    CreateDynamic3DTextLabel("Przebieralnia\n[/uniform]", 0xFFA500FF, 1636.9476,-1813.6195,13.5263, 5.0);
-
     CreateDynamic3DTextLabel("Siedziba S¹du Najwy¿szego", COLOR_BLUE, 1310.1124,-1367.6780,13.5391, 35.0);
     CreateDynamic3DTextLabel("Wejœcie ewakuacyjne", COLOR_LIGHTBLUE, 1286.0413,-1329.2007,13.5515, 9.0);
     CreateDynamic3DTextLabel("Wyjœcie ewakuacyjne", COLOR_LIGHTBLUE, 1305.0424,-1291.6113,35.6751, 9.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 501);

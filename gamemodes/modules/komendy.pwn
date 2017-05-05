@@ -26557,6 +26557,31 @@ CMD:changelog(playerid, params[])
 		SendClientMessage(playerid,COLOR_WHITE,"Obiekty przed DMV - KilsOn");
 		SendClientMessage(playerid,COLOR_WHITE,"Parking podziemny dla FBI - _Szymon");
 	}
+	else if(strcmp(wersja,"2.5.8",true) == 0)
+	{
+		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
+		SendClientMessage(playerid,COLOR_WHITE,"Poprawiono bugi i b³êdy.");
+		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
+		SendClientMessage(playerid,COLOR_WHITE,"Central Bank Los Santos - exterior banku");
+		SendClientMessage(playerid,COLOR_WHITE,"Centrum rozrywki Los Santos - interior");
+		SendClientMessage(playerid,COLOR_WHITE,"Centrum rozrywki Los Santos - exterior");
+		SendClientMessage(playerid,COLOR_WHITE,"OP dla góry Chiliad ");
+		SendClientMessage(playerid,COLOR_WHITE,"Ciekawostki na mapie");
+		SendClientMessage(playerid,COLOR_WHITE,"Poprawienie b³êdów Rockstar");
+		SendClientMessage(playerid,COLOR_WHITE,"Oznakowanie Los Santos");
+		SendClientMessage(playerid,COLOR_WHITE,"Usuniêcie parkingu LSPD");
+		SendClientMessage(playerid,COLOR_WHITE,"Nowy parking LSPD - ulepszany z ka¿dym kolejnym update");
+		SendClientMessage(playerid,COLOR_WHITE,"Parking na zaholowane pojazdy dla LSPD");
+		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono wypadaj¹ce samochody GSA");
+		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono wypadaj¹ce samochody FBI");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodanie nowego miejsca dla biznesu - LSCDF");
+		SendClientMessage(playerid,COLOR_WHITE,"Upiêkszenia Los Santos");
+		SendClientMessage(playerid,COLOR_WHITE,"Parking przed LSMC");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty z propozycji");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla Money Makers");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla CassinoAutoService");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla low folow ");
+	}
 	else
 	{
 		SendClientMessage(playerid,COLOR_BLUE,"----------   Dostêpne wersje   ---------");
@@ -26569,6 +26594,7 @@ CMD:changelog(playerid, params[])
         SendClientMessage(playerid,COLOR_WHITE,"2.4.93");
         SendClientMessage(playerid,COLOR_WHITE,"2.5.2");
 		SendClientMessage(playerid,COLOR_WHITE,"2.5.6");
+		SendClientMessage(playerid,COLOR_WHITE,"2.5.7");
 		SendClientMessage(playerid,COLOR_BLUE,"------ Aktualna wersja: "VERSION" ------");
 	}
 	return 1;
