@@ -2113,7 +2113,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
-			                SetPlayerPosEx(playerid,1576.4360,-1649.7135,7.9030);
+			                SetPlayerPosEx(playerid,1568.7660,-1691.4886,5.8906);
 			                SetPlayerVirtualWorld(playerid,0);
 			                SetPlayerInterior(playerid,0);
 			                TogglePlayerControllable(playerid,0);
@@ -2131,7 +2131,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            	// parking gorny
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
-			                SetPlayerPosEx(playerid,1560.1825,-1636.2950,13.3748); // pos gornego
+			                SetPlayerPosEx(playerid,1579.8573,-1637.0537,13.5522); // pos gornego
 			                SetPlayerVirtualWorld(playerid,0);
 			                SetPlayerInterior(playerid,0);
 			                TogglePlayerControllable(playerid,0);
@@ -2316,7 +2316,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 0:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1752.0090,-1524.4808,-8.5162);
+						SetPlayerPosEx(playerid, -2089.55835, -414.24173, 36.32352);
 						SetPlayerVirtualWorld (playerid, 0);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
@@ -15506,7 +15506,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		
 		//logi
 		new string[128];
-		format(string, sizeof(string), "%s zmienil model pojazdu %d z %d na %d", GetNick(playerid), CarData[car][c_ID], oldmodel, strval(inputtext));
+		format(string, sizeof(string), "%s zmienil model pojazdu %d z %d na %d", GetNick(playerid), car, oldmodel, CarData[car][c_Model]);
 		ActionLog(string);
         return 1;
     }

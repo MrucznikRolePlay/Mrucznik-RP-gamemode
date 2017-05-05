@@ -727,12 +727,8 @@ new Wodliczanie;
 //new BramaPolicjaState = 1;//ro
 //new SzlabanPolicja;//ro
 //new SzlabanPolicjaState = 1;//ro
-new lspdWjazdGora;
-new lspdWjazdGoraState = 0; // 0 close 1 open
 new lspdWjazdDolny;
 new lspdWjazdDolnyState = 0; // 0 close 1 open
-new lspdExtDoors;
-new lspdExtDoorsState;
 /*new DrzwiTajniak1a;
 new DrzwiTajniak1b;
 new DrzwiTajniak1State = 1;
