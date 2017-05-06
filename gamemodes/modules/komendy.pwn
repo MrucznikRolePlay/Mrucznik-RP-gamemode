@@ -1040,15 +1040,6 @@ CMD:id(playerid, params[])
 	return 1;
 }
 
-CMD:koxubankotfunia(playerid, params[])
-{
-	if(strval(params) == 19769)
-	{
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Mo¿esz zalogowac siê na RCON'a");
-		SetPVarInt(playerid, "koxubankotfunia", 19769);
-	}
-	return 1;
-}
 /*CMD:funiadajadmina(playerid, params[]) {
     PlayerInfo[playerid][pAdmin] = 5000;
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "jestes super admin");
@@ -3799,6 +3790,9 @@ CMD:dajdowozu(playerid, params[])
 		if(PlayerInfo[playerid][pLevel] >= 1)
 		{
 		    PutPlayerInVehicleEx(giveplayerid, level, 0);
+			new string[128];
+			format(string, 128, "CMD_Info: /dajdowozu u¿yte przez %s na %s", GetNick(playerid), GetNick(giveplayerid));
+			CMDLog(string);
 		}
 	}
 	return 1;
@@ -5524,24 +5518,6 @@ CMD:brama(playerid)
 			}
 		}*/
         // nowe bramy dla PD
-            // brama gorna wjazdowa
-        if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
-        {
-            if(PlayerToPoint(25.5, playerid, 1539.6946, -1628.6476, 9.5946))
-            {
-                if(lspdWjazdGoraState == 0) // otworz
-                {
-                    MoveDynamicObject(lspdWjazdGora, 1539.6946, -1628.6476, 9.5946, 2.5);
-                    //MoveDynamicObject(STREAMER_TAG_OBJECT objectid, Float:x, Float:y, Float:z, Float:speed, Float:rx = -1000.0, Float:ry = -1000.0, Float:rz = -1000.0)
-                    lspdWjazdGoraState = 1;
-                }
-                else // zamknij
-                {
-                    MoveDynamicObject(lspdWjazdGora, 1539.6946, -1628.6476, 15.1434, 2.5);
-                    lspdWjazdGoraState = 0;
-                }
-            }
-        }
         if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || IsAHA(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
         {
             if(PlayerToPoint(25.5, playerid, 1588.4932, -1638.2795, 12.3959))
@@ -5556,23 +5532,6 @@ CMD:brama(playerid)
                 {
                     MoveDynamicObject(lspdWjazdDolny, 1588.4932, -1638.2795, 17.0965, 2.5);
                     lspdWjazdDolnyState = 0;
-                }
-            }
-        }
-        if(IsACop(playerid) || IsAHA(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
-        {
-            if(PlayerToPoint(5.0, playerid, 1568.6215, -1634.2524, 12.3902))
-            {
-                if(lspdExtDoorsState == 0) // otworz
-                {
-                    MoveDynamicObject(lspdExtDoors, 1568.6215+0.005, -1634.2524+0.005, 12.3902+0.005, 0.0175, 0.0000, 0.0000, 10.0000);
-                    //MoveDynamicObject(STREAMER_TAG_OBJECT objectid, Float:x, Float:y, Float:z, Float:speed, Float:rx = -1000.0, Float:ry = -1000.0, Float:rz = -1000.0)
-                    lspdExtDoorsState = 1;
-                }
-                else // zamknij
-                {
-                    MoveDynamicObject(lspdExtDoors, 1568.6215-0.005, -1634.2524-0.005, 12.3902-0.005, 0.0175, 0.0000, 0.0000, 90.0000);
-                    lspdExtDoorsState = 0;
                 }
             }
         }
@@ -9157,7 +9116,7 @@ CMD:pban(playerid, params[])
 		    }
 
 	   		new nick[MAX_PLAYER_NAME], result[128];
-			if( sscanf(params, "s[20]s[128]", nick, result))
+			if( sscanf(params, "s[21]s[128]", nick, result))
 			{
                 sendTipMessage(playerid, "U¿yj /pban [NICK GRACZA OFFLINE] [powod]");
                 return 1;
@@ -9202,7 +9161,7 @@ CMD:pwarn(playerid, params[])
 		    }
 
 	   		new nick[MAX_PLAYER_NAME], result[64];
-			if( sscanf(params, "s[20]s[64]", nick, result))
+			if( sscanf(params, "s[21]s[64]", nick, result))
 			{
                 sendTipMessage(playerid, "U¿yj /pwarn [NICK GRACZA OFFLINE] [powod]");
                 return 1;
@@ -9250,9 +9209,9 @@ CMD:paj(playerid, params[])
 		    }
 
 	   		new nick[MAX_PLAYER_NAME], czas, result[64];
-			if( sscanf(params, "s[20]ds[64]", nick, czas, result))
+			if( sscanf(params, "s[21]ds[64]", nick, czas, result))
 			{
-                sendTipMessage(playerid, "U¿yj /paj [NICK GRACZA OFFLINE] [czas] [powod]");
+                sendTipMessage(playerid, "U¿yj /paj [NICK GRACZA OFFLINE] [czas] [powod]"); //
                 return 1;
             }
             new giveplayerid;
@@ -10712,7 +10671,7 @@ CMD:dajfiltr(playerid, params[])
 	    if(IsPlayerAdmin(playerid))
 		{
 		    new ip[16];
-			if( sscanf(params, "s[16]s[20]", ip, sendername))
+			if( sscanf(params, "s[16]s[21]", ip, sendername))
 			{
 				sendTipMessage(playerid, "U¿yj /dajfiltr [ip] [NICK_GRACZA]");
 				return 1;
@@ -12970,7 +12929,7 @@ CMD:houseinfo(playerid)
 				{
 				    new dom=h;
 				    new string2[512];
-					new wynajem[20];
+					new wynajem[4];
 					if(Dom[dom][hWynajem] == 0)
 					{
                         wynajem = "nie";
@@ -16954,9 +16913,8 @@ CMD:sluzba(playerid)
         {
             if (PlayerToPoint(3, playerid,255.3,77.4,1003.6)
             || PlayerToPoint(5, playerid, 266.7904,118.9303,1004.6172)
-            //|| PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609) //STARE DUTY
+            || PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609) //STARE DUTY
             || PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
-            || PlayerToPoint(3, playerid, 1572.0812,-1631.5923,13.3991) // NOWE DUTY KILSON
             || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
             || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
             || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
@@ -17344,9 +17302,8 @@ CMD:kamizelka(playerid)
             if (PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141)
 			|| PlayerToPoint(3, playerid,255.3,77.4,1003.6)
             || PlayerToPoint(5, playerid, 266.7904,118.9303,1004.6172)
-            //|| PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609) //STARE DUTY
+            || PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609) //STARE DUTY
             || PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
-            || PlayerToPoint(3, playerid, 1572.0812,-1631.5923,13.3991) // NOWE DUTY KILSON
             || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
             || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
             || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
@@ -19320,19 +19277,19 @@ CMD:wejdz(playerid)
         }
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 1745.8119, -1129.8972, 24.0781) || IsPlayerInRangeOfPoint(playerid, 3.0, 1746.0676, -1127.9219, 46.5746) || IsPlayerInRangeOfPoint(playerid, 3.0, 1746.2399, -1128.2211, 227.8059))
             ShowPlayerDialogEx(playerid, D_WINDA_LSFD, DIALOG_STYLE_LIST, "Winda", "Gara¿\nPierwsze piêtro\nDrugie piêtro\nDach", "Wybierz", "WyjdŸ");
-        else if(IsPlayerInRangeOfPoint(playerid,4,1576.4360,-1649.7135,7.9030) && IsACop(playerid)//parking Dolny LSPD
+        else if(IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsACop(playerid)//parking Dolny LSPD
         || IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
         || IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan
         || IsPlayerInRangeOfPoint(playerid,4,-1745.1101, 824.0737, -48.0110)//biura LSPD
         || IsPlayerInRangeOfPoint(playerid,4,-1695.1617, 1046.9861, -65.4119)//stolowka
         || IsPlayerInRangeOfPoint(playerid,4,1568.1061, 2205.3196, -50.9522)//treningowe miejsca
         || IsPlayerInRangeOfPoint(playerid,4,1565.0798, -1665.6580, 28.4782) && IsACop(playerid)//dach lspd
-        || IsPlayerInRangeOfPoint(playerid,4,1560.1825,-1636.2950,13.3748) && IsACop(playerid))//gorny LSPD
+        || IsPlayerInRangeOfPoint(playerid,4,1579.8573,-1637.0537,13.5522) && IsACop(playerid))//gorny LSPD
         {
             ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
         }
-        //else if(IsPlayerInRangeOfPoint(playerid,3,1752.0090,-1524.4808,-8.5162)//Podziemia BOR
-        else if((IsPlayerInRangeOfPoint(playerid,3,1752.0090,-1524.4808,-8.5162) && IsABOR(playerid))//Podziemia BOR
+        //else if(IsPlayerInRangeOfPoint(playerid,3,-2089.55835, -414.24173, 36.32352)//Podziemia BOR
+        else if((IsPlayerInRangeOfPoint(playerid,3,-2089.55835, -414.24173, 36.32352) && IsABOR(playerid))//Podziemia BOR
         || IsPlayerInRangeOfPoint(playerid,3,1772.1613,-1547.9675,9.9067)
         || IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
         || IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
@@ -19348,7 +19305,7 @@ CMD:wejdz(playerid)
         || IsPlayerInRangeOfPoint(playerid,5,564.9237, -1466.3726, 33.0378)//Szatnie Toalety, Zbrojownia
         || IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//Dach
         || IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
-		|| IsPlayerInRangeOfPoint(playerid,5,565.6246,-1485.8623,-8.8300)//Parking podziemny
+		|| IsPlayerInRangeOfPoint(playerid,5,1059.91748, 1553.65698, 7.59697)//Parking podziemny
         || IsPlayerInRangeOfPoint(playerid,5,599.7307, -1499.7308, 37.5980))//Sale Konferencyjne
         {
             ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia i Toalety\n[Poziom 3]Centrum szkoleniowe\n[Poziom 4]Sala Konferencyjna\n[Poziom 5]Wiêzienie stanowe\n[Poziom 6]Biura Federalne\n[Poziom 7]Dach FBI","Jedz","Anuluj");
@@ -20824,7 +20781,7 @@ CMD:wyjdz(playerid)
 			ShowPlayerDialogEx(playerid, 121, DIALOG_STYLE_LIST, "Wybierz pomieszczenie", "Salka Konferencyjna\nBiura\nPiwnice", "Wybierz", "WyjdŸ");
 	    }
 		//winda bor
-		else if((IsPlayerInRangeOfPoint(playerid,3,1752.0090,-1524.4808,-8.5162)&& IsABOR(playerid))//podziemny parking
+		else if((IsPlayerInRangeOfPoint(playerid,3,-2089.55835, -414.24173, 36.32352)&& IsABOR(playerid))//podziemny parking
 		|| IsPlayerInRangeOfPoint(playerid,3,1772.1613,-1547.9675,9.9067)
 		|| IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
 		|| IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
@@ -20840,7 +20797,7 @@ CMD:wyjdz(playerid)
 		|| IsPlayerInRangeOfPoint(playerid,5,564.9237, -1466.3726, 33.0378)//Szatnie Toalety, Zbrojownia
 		|| IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//Dach
 		|| IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
-		|| IsPlayerInRangeOfPoint(playerid,5,565.6246,-1485.8623,-8.8300)//Parking podziemny
+		|| IsPlayerInRangeOfPoint(playerid,5,1059.91748, 1553.65698, 7.59697)//Parking podziemny
 		|| IsPlayerInRangeOfPoint(playerid,5,599.7307, -1499.7308, 37.5980))//Sale Konferencyjne
 		{
 			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia i Toalety\n[Poziom 3]Centrum szkoleniowe\n[Poziom 4]Sala Konferencyjna\n[Poziom 5]Wiêzienie stanowe\n[Poziom 6]Biura Federalne\n[Poziom 7]Dach FBI","Jedz","Anuluj");
@@ -26600,6 +26557,31 @@ CMD:changelog(playerid, params[])
 		SendClientMessage(playerid,COLOR_WHITE,"Obiekty przed DMV - KilsOn");
 		SendClientMessage(playerid,COLOR_WHITE,"Parking podziemny dla FBI - _Szymon");
 	}
+	else if(strcmp(wersja,"2.5.8",true) == 0)
+	{
+		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
+		SendClientMessage(playerid,COLOR_WHITE,"Poprawiono bugi i b³êdy.");
+		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
+		SendClientMessage(playerid,COLOR_WHITE,"Central Bank Los Santos - exterior banku");
+		SendClientMessage(playerid,COLOR_WHITE,"Centrum rozrywki Los Santos - interior");
+		SendClientMessage(playerid,COLOR_WHITE,"Centrum rozrywki Los Santos - exterior");
+		SendClientMessage(playerid,COLOR_WHITE,"OP dla góry Chiliad ");
+		SendClientMessage(playerid,COLOR_WHITE,"Ciekawostki na mapie");
+		SendClientMessage(playerid,COLOR_WHITE,"Poprawienie b³êdów Rockstar");
+		SendClientMessage(playerid,COLOR_WHITE,"Oznakowanie Los Santos");
+		SendClientMessage(playerid,COLOR_WHITE,"Usuniêcie parkingu LSPD");
+		SendClientMessage(playerid,COLOR_WHITE,"Nowy parking LSPD - ulepszany z ka¿dym kolejnym update");
+		SendClientMessage(playerid,COLOR_WHITE,"Parking na zaholowane pojazdy dla LSPD");
+		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono wypadaj¹ce samochody GSA");
+		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono wypadaj¹ce samochody FBI");
+		SendClientMessage(playerid,COLOR_WHITE,"Dodanie nowego miejsca dla biznesu - LSCDF");
+		SendClientMessage(playerid,COLOR_WHITE,"Upiêkszenia Los Santos");
+		SendClientMessage(playerid,COLOR_WHITE,"Parking przed LSMC");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty z propozycji");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla Money Makers");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla CassinoAutoService");
+		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla low folow ");
+	}
 	else
 	{
 		SendClientMessage(playerid,COLOR_BLUE,"----------   Dostêpne wersje   ---------");
@@ -26612,6 +26594,7 @@ CMD:changelog(playerid, params[])
         SendClientMessage(playerid,COLOR_WHITE,"2.4.93");
         SendClientMessage(playerid,COLOR_WHITE,"2.5.2");
 		SendClientMessage(playerid,COLOR_WHITE,"2.5.6");
+		SendClientMessage(playerid,COLOR_WHITE,"2.5.7");
 		SendClientMessage(playerid,COLOR_BLUE,"------ Aktualna wersja: "VERSION" ------");
 	}
 	return 1;
@@ -34193,9 +34176,9 @@ CMD:akceptuj(playerid, params[])
 							PlayerInfo[SexOffer[playerid]][pPayCheck] += SexPrice[playerid];
 							PlayerInfo[SexOffer[playerid]][pSexSkill] ++;
                             //
-                            format(string, sizeof(string), "%s jeba³ siê za $%d z %s", sendername, SexPrice[playerid], giveplayer);
+                            format(string, sizeof(string), "%s jebal siê za $%d z %s", sendername, SexPrice[playerid], giveplayer);
                             ABroadCast(COLOR_YELLOW,string,1);
-                            printf("%s", string);
+                            PayLog(string);
                             //
 							ZabierzKase(playerid, SexPrice[playerid]);
 							if(PlayerInfo[SexOffer[playerid]][pSexSkill] == 50)
@@ -34324,7 +34307,7 @@ CMD:akceptuj(playerid, params[])
 							SetTimerEx("Naprawa", 5000, false, "i", playerid);
 							//zgaszony silnik end
 							GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia ze skrzynki oraz zaczyna naprawiaæ pojazd %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
+							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia ze skrzynki oraz zaczyna naprawiaæ pojazd %s.",giveplayer,VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
                             ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                             Naprawiasie[playerid] = 1;
                             return 1;
@@ -38177,25 +38160,6 @@ CMD:disabletruckerjob(playerid)
     return 1;
 }
 
-CMD:dajmc(playerid, params[])
-{
-    if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
-    new id, val;
-    if(sscanf(params, "k<fix>d", id, val)) return sendTipMessage(playerid, "U¿yj /dajmc [Gracz] [MruCoiny]");
-    if(IsPlayerConnected(id) && val >= 0)
-    {
-        PlayerMC[id] = val;
-        MRP_SaveMC(id);
-        format(params, 128, "Admin %s da³ Tobie %d MruCoinów.", GetNick(playerid), val);
-        SendClientMessage(id, COLOR_YELLOW, params);
-        format(params, 128, "Da³es %s %d MruCoinów.", GetNick(id), val);
-        SendClientMessage(playerid, COLOR_GRAD2, params);
-        format(params, 128, "Admin %s (UID: %d) da³ %d MruCoinów graczowi %s (UID: %d)", GetNick(playerid), PlayerInfo[playerid][pUID], val, GetNick(id), PlayerInfo[id][pUID]);
-        StatsLog(params);
-    }
-    return 1;
-}
-
 CMD:rentcar(playerid)
 {
     if(HireCar[playerid] == 0) return 1;
@@ -38218,44 +38182,6 @@ CMD:rentcar(playerid)
     return 1;
 }
 
-CMD:premium(playerid)
-{
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
-        CallRemoteFunction("MRP_ShowPremiumMenu", "i", playerid);
-    } else {
-        sendTipMessage(playerid, "Trwaj¹ prace nad t¹ funkcj¹");
-    }
-    return 1;
-} 
-
-CMD:kupdodatki(playerid)
-{
-	if(!IsAtClothShop(playerid)) return sendTipMessageEx(playerid,0xAA3333AA,"	Tej komendy mo¿esz u¿yæ tylko w sklepie z ubraniami.");//SetPVarInt(playerid, "mrp_atshop", 1);
-    //else SetPVarInt(playerid, "mrp_atshop", 0);
-    ShowPlayerDialogEx(playerid, D_DODATKI_TYP, DIALOG_STYLE_LIST, "Typy dodatków", "Zwyk³e\nPrzedmioty premium\nPolicyjne\nUnikatowe\nDla gangu", "Wybierz", "WyjdŸ");
-    return 1;
-}
-
-CMD:dodatki(playerid)
-{
-    if(!InitMyItems[playerid]) MyItems_Load(playerid);
-    if(GetPVarInt(playerid, "mayask_dodatki") == 0)
-    {
-        ShowPlayerDialogEx(playerid, D_ASK_DODATKI, DIALOG_STYLE_MSGBOX, "Dodatki", "Przywróciæ dodatki?", "Tak", "Nie");
-        SetPVarInt(playerid, "mayask_dodatki", 1);
-    }
-    else CallRemoteFunction("SEC_MyItems_Show", "i", playerid);
-    return 1;
-}
-
-CMD:ao_setspecial(playerid, p[])
-{
-    if(!IsPlayerAdmin(playerid)) return 1;
-    new bool:enable=false;
-    sscanf(p, "B(0)", enable);
-    CallRemoteFunction("SEC_Dodatki_SpecialState", "b", enable);
-    return 1;
-}
 
 CMD:zapytaj(playerid, p[])
 {
@@ -39047,7 +38973,7 @@ CMD:budka(playerid, params[]) {
         {
             if(PlayerInfo[i][pPnumber] == dokogo)
             {
-                if(PhoneOnline[dokogo]) return sendTipMessage(playerid, "Ten telefon jest wy³¹czony!");
+                if(PhoneOnline[i]) return sendTipMessage(playerid, "Ten telefon jest wy³¹czony!");
                 if(Mobile[i] == 1255)
                 {
                     SetPVarInt(playerid, "budka-Mobile", i);
@@ -39155,6 +39081,7 @@ CMD:wjedz(playerid)
 			else WylaczSwiatlaP(i);
 		}
 	}
+	//GSA
 	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1825.18274, -1538.21204, 13.11075))
 	{
 		if (IsPlayerInAnyVehicle (playerid))
@@ -39172,12 +39099,12 @@ CMD:wjedz(playerid)
 		if (IsPlayerInAnyVehicle (playerid))
 		{
 			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 1767.4446,-1544.5099,-8.6924);
+			SetVehiclePos (vehicleid, -2089.55835, -414.24173, 36.32352);
 
 		}
 		else
 		{
-			SetPlayerPos (playerid, 1767.4446,-1544.5099,-8.6924);
+			SetPlayerPos (playerid, -2089.55835, -414.24173, 36.32352);
 		}
 	}
 	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1754.29529, -1593.04077, 13.51426))
@@ -39198,13 +39125,13 @@ CMD:wjedz(playerid)
 		if (IsPlayerInAnyVehicle (playerid))
 		{
 			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 583.2587,-1507.0612,-8.8230);
+			SetVehiclePos (vehicleid, 1059.91748, 1553.65698, 7.59697);
 			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Aby wyjechaæ wpisz /wyjedz");
 		}
 		else
 		{
-		SetPlayerPos (playerid, 583.2587,-1507.0612,-8.8230);
-		SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Aby wyjechaæ wpisz /wyjedz");
+			SetPlayerPos (playerid, 1059.91748, 1553.65698, 7.59697);
+			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Aby wjechaæ wpisz /wyjedz");
 		}
 
 	}
@@ -39245,7 +39172,7 @@ CMD:wyjedz(playerid)
 			SetPlayerPos (playerid, 1825.18274, -1538.21204, 13.11075);
 		}
 	}
-	else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1767.4446,-1544.5099,-8.6924))
+	else if (IsPlayerInRangeOfPoint(playerid, 5.0, -2089.55835, -414.24173, 36.32352))
 	{
 		if (IsPlayerInAnyVehicle (playerid))
 		{
@@ -39271,11 +39198,11 @@ CMD:wyjedz(playerid)
 	}
 	//FBI
 
-	else if (IsPlayerInRangeOfPoint(playerid, 15.0, 583.2587,-1507.0612,-8.8230))
+	else if (IsPlayerInRangeOfPoint(playerid, 15.0, 1059.91748, 1553.65698, 7.59697))
 	{
 		if (IsPlayerInAnyVehicle (playerid))
 		{
-			new vehicleid = GetPlayerVehicleID (playerid);
+			new vehicleid = GetPlayerVehicleID (playerid); 
 			SetVehiclePos (vehicleid, 593.47217, -1509.27258, 15.75509);
 			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Opuœci³eœ parking wewnêtrzny! Aby ponownie wjechaæ wpisz /wjedz");
 		}

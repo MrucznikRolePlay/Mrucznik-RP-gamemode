@@ -1939,7 +1939,7 @@ IsAFakeKonto(playerid)
 	{
 	    new nick[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Gniewomir_Wonsz", false) == 0 || strcmp(nick,"Filemon_Paprotka", false) == 0 || strcmp(nick,"Julia_Westfield", false) == 0)
+		if(strcmp(nick,"Gniewomir_Wonsz", false) == 0 || strcmp(nick,"Filemon_Paprotka", false) == 0 || strcmp(nick,"Julia_Wisefield", false) == 0)
 		{
 		    return 1;
 		}
@@ -4022,6 +4022,11 @@ stock PayLog(text[])
     new plik[32] = "logi/pay.log";
     Log(plik, text);
 }
+stock PremiumLog(text[])
+{
+    new plik[32] = "logi/premium.log";
+    Log(plik, text);
+}
 
 stock KickLog(text[])
 {
@@ -4991,6 +4996,8 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
     }
     //Assign
     Car_MakePlayerOwner(playerid, carid);
+	
+	ZabierzMC(playerid, cena);
 
     //Info
     format(komunikat, sizeof(komunikat), "Kupi³eœ unikatowy %s za %d MC. Komendy auta znajdziesz w /auto. Gratulujemy zakupu!",VehicleNames[model-400], cena);

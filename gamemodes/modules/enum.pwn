@@ -1232,6 +1232,7 @@ enum pInfo
 	pLevel,
 	pAdmin,
 	pDonateRank,
+	pMrucznikCoins,
 	gPupgrade,
 	pConnectTime,
 	pReg,
