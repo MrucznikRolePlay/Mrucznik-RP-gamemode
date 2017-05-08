@@ -6622,7 +6622,9 @@ ac_fpublic ac_OnCheatDetected(playerid, ip_address[], type, code)//detektor
 				static ac_strtmp[sizeof KICK_MSG];
 				format(ac_strtmp, sizeof ac_strtmp, KICK_MSG, code);
 				SendClientMessage(playerid, AC_DEFAULT_COLOR, ac_strtmp);
-				SendCommandLogMessage(ac_strtmp);
+				new string[128];
+				format(string, 128, "AntiCheat: Gracz %s [%d] zosta³ wyrzucony. || Kod: %d !", GetNick(playerid), playerid, code);
+        		SendCommandLogMessage(string);
 				#undef AC_DEFAULT_COLOR
 			}
 		}
