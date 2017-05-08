@@ -4113,12 +4113,12 @@ static stock fs_AntiCheatSetNextDialog(playerid, dialogid)
 					{
 						switch(ac_stateanim)
 						{
-							case -1:
+							case 0:
 							{
 								if(ACInfo[playerid][acACAllow][24])
 								{
 									#if defined OnCheatDetected
-										ac_KickWithCode(playerid, "", 0, 24);
+										ac_KickWithCode(playerid, "", 0, 24);//kod 24
 									#else
 										return ac_KickWithCode(playerid, "", 0, 24);
 									#endif
