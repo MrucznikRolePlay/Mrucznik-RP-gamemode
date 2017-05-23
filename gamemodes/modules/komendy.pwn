@@ -6119,7 +6119,7 @@ CMD:brama(playerid)
 				}
 			}
 		}
-		if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
+		/*if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
 		{
 			if(PlayerToPoint(12.0, playerid, 68.021484375, -1545.892578125, 5.1986169815063))
 			{
@@ -11171,9 +11171,9 @@ CMD:dajneony(playerid, params[])
                             }
                             GetPlayerName(playerid, sendername, sizeof(sendername));
                             GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                            format(string, sizeof(string), "%s oferuje ci sprzeda¿ neonów za 3 000 000$. Jeœli chcesz zakupiæ neony do swojego %s wpisz /akceptuj neon.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+                            format(string, sizeof(string), "%s oferuje ci kupno neonów za 3 000 000$. Jeœli chcesz zakupiæ neony do swojego %s wpisz /akceptuj neon.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                             SendClientMessage(playa, 0xFFC0CB, string);
-                            format(string, sizeof(string), "Oferujesz %s sprzeda¿ neonów", giveplayer);
+                            format(string, sizeof(string), "Oferujesz %s kupno neonów", giveplayer);
                             SendClientMessage(playerid, 0xFFC0CB, string);
                             GraczDajacyNeon[playa] = playerid;
                         }
@@ -14216,20 +14216,7 @@ CMD:sprzedajauto(playerid, params[])
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
         }
-        else {
-            if(CarData[IDAuta[playa]][c_Neon] != 0)
-            {
-                new neon[20];
-                if(CarData[IDAuta[playa]][c_Neon] == 18652 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "bia³y";
-                if(CarData[IDAuta[playa]][c_Neon] == 18650 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "¿ó³ty";
-                if(CarData[IDAuta[playa]][c_Neon] == 18649 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "zielony";
-                if(CarData[IDAuta[playa]][c_Neon] == 18648 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "niebieski";
-                if(CarData[IDAuta[playa]][c_Neon] == 18647 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "czerwony";
-                if(CarData[IDAuta[playa]][c_Neon] == 18651 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "ró¿owy";
-                sendTipMessageFormat(playa, "Ten samochód posiada %s neon", neon);
-            }
-        }
-        format(string, sizeof(string), "Oferujesz %s sprzeda¿ twojego %s za %d$", giveplayer, VehicleNames[GetVehicleModel(lVeh)-400], cena);
+        format(string, sizeof(string), "Oferujesz %s kupno twojego %s za %d$", giveplayer, VehicleNames[GetVehicleModel(lVeh)-400], cena);
         SendClientMessage(playerid, 0xFFC0CB, string);
         GraczDajacy[playa] = playerid;
 		CenaDawanegoAuta[playa] = cena;
@@ -15539,7 +15526,7 @@ CMD:og(playerid, params[])
                 return 1;
             }
             DajKase(playerid, - payout);
-            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d ((%d))",  params, sendername,PlayerInfo[playerid][pPnumber], playerid);
+            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d ((%d))",  params,PlayerInfo[playerid][pPnumber], playerid);
             OOCNews(TEAM_GROVE_COLOR,string);
             format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
             GameTextForPlayer(playerid, string, 5000, 5);
@@ -31435,8 +31422,8 @@ CMD:materialy(playerid, params[])
 					    sendTipMessage(playerid, string);
                         if(PlayerInfo[playerid][pMiserPerk] > 0) {
                             new poziom = PlayerInfo[playerid][pMiserPerk];
-                            PlayerInfo[playerid][pMats] += poziom*20;
-                            format(string, sizeof(string), "Dziêki ulepszeniu MATSIARZ otrzymujesz dodatkowo %d mats", poziom*20);
+                            PlayerInfo[playerid][pMats] += poziom*30;
+                            format(string, sizeof(string), "Dziêki ulepszeniu MATSIARZ otrzymujesz dodatkowo %d mats", poziom*30);
                             sendTipMessage(playerid, string);
                         }
 			            PlayerInfo[playerid][pMats] += payout;

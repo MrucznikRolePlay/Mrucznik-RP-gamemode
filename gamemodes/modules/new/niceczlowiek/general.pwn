@@ -67,7 +67,7 @@ stock zerujZmienne_offerSystem(playerid) {
 #define OFFER_SWIADEK 	19
 #define OFFER_VCARD		20
 
-// Typy zapÄ¹â€šaty
+// Typy zapÅ‚aty
 
 #define PAYBY_ERROR     0
 #define PAYBY_WALLET	1
@@ -77,7 +77,7 @@ stock zerujZmienne_offerSystem(playerid) {
 stock guiMsg(playerid, title[80], str[])
 {
 	new final_title[80];
-	format(final_title, sizeof(final_title), "{49A350}Mrucznik Â» {FFFFFF}%s", title);
+	format(final_title, sizeof(final_title), "{49A350}Mrucznik » {FFFFFF}%s", title);
 	Dialog_Show(playerid, DIALOG_STYLE_MSGBOX, final_title, str, "Ok", "");
 	return 1;
 }
@@ -126,12 +126,12 @@ public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Fl
         if(fScaleX > 1.1 || fScaleY > 1.66 || fScaleZ > 1.66 || fScaleX < 1 || fScaleY < 1 || fScaleZ < 1) {
             RemovePlayerAttachedObject(playerid, 7);
             SetPlayerAttachedObject(playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2);//Armour
-            return sendErrorMessage(playerid, "Zmiany nie zostaÅ‚y zapisane, dodatek byÅ‚ zbyt duÅ¼y lub zbyt maÅ‚y!");
+            return sendErrorMessage(playerid, "Zmiany nie zosta³y zapisane, dodatek by³ zbyt du¿y lub zbyt ma³y!");
         }
         if(fOffsetX > 0.2 || fOffsetY > 0.2 || fOffsetZ > 0.2 || fOffsetX < -0.2 || fOffsetY < -0.2 || fOffsetZ < -0.2) {
             RemovePlayerAttachedObject(playerid, 7);
             SetPlayerAttachedObject(playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2);//Armour
-            return sendErrorMessage(playerid, "Zmiany nie zostaÅ‚y zapisane, dodatek byÅ‚ zbyt oddalony od gracza!");
+            return sendErrorMessage(playerid, "Zmiany nie zosta³y zapisane, dodatek by³ zbyt oddalony od gracza!");
         }
     }
     else

@@ -2215,9 +2215,10 @@ public JednaSekundaTimer()
 					GetVehicleHealth(vehicleid, health);
 					if(health <= 999)
 					{
-						SendClientMessage(i, 0xFFC0CB, "Twój pojazd zosta³ naprawiony za 2500$");
+						new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(i)));
+				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", cena);
+				        DajKase(i, -cena);
 						RepairVehicle(vehicleid);
-						DajKase(i, -2500);
 						naprawiony[i] = 1;
 						SetTimerEx("Naprawianie",60000,0,"d",i);
 					}

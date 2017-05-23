@@ -9,17 +9,17 @@ CMD:oferuj(playerid, params[]) {
     new giveplayerid, value1, price;
     if(!strcmp(type, "vcard", true)) {
     	price = 0;
-        if(PhoneOnline[playerid]) return sendTipMessage(playerid, "TwÃ³j telefon jest wyÅ‚Ä…czozny, nie moÅ¼esz wysÅ‚aÄ‡ vCarda"); 
+        if(PhoneOnline[playerid]) return sendTipMessage(playerid, "Twój telefon jest wy³¹czozny, nie mo¿esz wys³aæ vCarda"); 
         if(PlayerInfo[playerid][pPnumber] == 0) return sendTipMessage(playerid, "Nie masz telefonu!");
         if(sscanf(other, "d", giveplayerid)) return sendTipMessage(playerid, "Parametry dla /o vcard: [id gracza]");
         if(!gPlayerLogged[giveplayerid]) {
             return guiMsg(playerid, "Twoja Oferta", "Gracz nie jest zalogowany!");
         }
-        if(giveplayerid == playerid) return sendTipMessage(playerid, "Nie moÅ¼esz wysÅ‚aÄ‡ vCard samemu sobie!");
-        if(giveplayerid == INVALID_PLAYER_ID) return sendTipMessage(playerid, "PodaÅ‚eÅ› nieprawidÅ‚owe ID!");
+        if(giveplayerid == playerid) return sendTipMessage(playerid, "Nie mo¿esz wys³aæ vCard samemu sobie!");
+        if(giveplayerid == INVALID_PLAYER_ID) return sendTipMessage(playerid, "Poda³eœ nieprawid³owe ID!");
         if(PlayerInfo[giveplayerid][pPnumber] == 0) return sendTipMessage(playerid, "Ten gracz nie posiada telefonu!");
         if(GetDistanceBetweenPlayers(playerid, giveplayerid) > 5) {
-            return guiMsg(playerid, "Twoja Oferta", "JesteÅ› zbyt daleko od osoby, ktÃ³rej skÅ‚adasz ofertÄ™!");
+            return guiMsg(playerid, "Twoja Oferta", "Jesteœ zbyt daleko od osoby, której sk³adasz ofertê!");
         }
         format(query, sizeof(query), "SELECT * FROM mru_kontakty WHERE contact_number=%d AND contact_owner=%d", PlayerInfo[playerid][pPnumber], PlayerInfo[giveplayerid][pPnumber]);
         mysql_query(query);
@@ -28,7 +28,7 @@ CMD:oferuj(playerid, params[]) {
 		if(mysql_num_rows())
 		{
 			mysql_free_result();
-			return guiMsg(playerid, "Twoja Oferta", "Ten gracz posiada juÅ¼ TwÃ³j vCard!");
+			return guiMsg(playerid, "Twoja Oferta", "Ten gracz posiada ju¿ Twój vCard!");
 		}
 		mysql_free_result();
         offer_sendToPlayer(playerid, giveplayerid, OFFER_VCARD, "vCard", price, 0);
@@ -40,7 +40,7 @@ CMD:dopasuj(playerid, params[])
 {
 	new type[24];
     if(sscanf(params, "s[24]", type)) {
-        return sendTipMessage(playerid, "Dostepne /dopasuj: /kamizelke");
+        return sendTipMessage(playerid, "Dostepne /dopasuj: kamizelke");
     }
     if(!strcmp(type, "kamizelke", true))
     {
@@ -69,7 +69,7 @@ CMD:o(playerid, params[])
 		        {
 				    if(PlayerInfo[playerid][pDonateRank] < 3)
 				    {
-						sendErrorMessage(playerid, "KanaÅ‚ OOC zostaÅ‚ zablokowany przez administratora !");
+						sendErrorMessage(playerid, "Kana³ OOC zosta³ zablokowany przez administratora !");
 						return 1;
 					}
 				}
@@ -77,19 +77,19 @@ CMD:o(playerid, params[])
 		}
 		if(PlayerInfo[playerid][pMuted] == 1)
 		{
-			sendTipMessage(playerid, "Nie moÅ¼esz mÃ³wiÄ‡ gdyÅ¼ zostaÅ‚eÅ› uciszony!", TEAM_CYAN_COLOR);
+			sendTipMessage(playerid, "Nie mo¿esz mówiæ gdy¿ zosta³eœ uciszony!", TEAM_CYAN_COLOR);
 			return 1;
 		}
 		if(PlayerInfo[playerid][pBP] >= 1)
 		{
-		    format(string, sizeof(string), "Nie moÅ¼esz napisaÄ‡ na tym czacie, gdyÅ¼ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
+		    format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
 			sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
 			return 1;
 		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
-			sendTipMessage(playerid, "UÅ¼yj (/o)oc [ooc chat]");
+			sendTipMessage(playerid, "U¿yj (/o)oc [ooc chat]");
 			return 1;
 		}
 		if (strfind(params , "ip:" , true)>=0 ||strfind(params , "-roleplay" , true)>=0 || strfind(params , "Nicolson" , true)>=0 || strfind(params , "roleplay." , true)>=0  || strfind(params , " ip" , true)>=0 || strfind(params , "794" , true)>=0 || strfind(params , "772" , true)>=0 || strfind(params , "797" , true)>=0 || strfind(params , "795" , true)>=0 || strfind(params , "775" , true)>=0 || strfind(params , "91." , true)>=0 || strfind(params , "91," , true)>=0)
@@ -101,7 +101,7 @@ CMD:o(playerid, params[])
 		}
 		else if (strfind(params , "kurwa" , true)>=0 ||strfind(params , "huj" , true)>=0 || strfind(params , "pizda" , true)>=0 || strfind(params , "cipa" , true)>=0  || strfind(params , "n00b" , true)>=0 || strfind(params , "noob" , true)>=0 || strfind(params , "pierdole" , true)>=0 || strfind(params , "debil" , true)>=0 || strfind(params , "fiut" , true)>=0 || strfind(params , "kutas" , true)>=0 || strfind(params , "jeb" , true)>=0 || strfind(params , "ssij" , true)>=0)
 		{
-			SendClientMessage(playerid, COLOR_LIGHTBLUE, "OkaÅ¼ trochÄ™ kultury na kanale OOC! Nie przeklinaj.");
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Oka¿ trochê kultury na kanale OOC! Nie przeklinaj.");
 			format(string, 128, "AdmWarning: [%d] %s Przeklina: %s.",playerid,sendername,params);
 			ABroadCast(COLOR_LIGHTRED,string,1);
 			WarningLog(string);
@@ -156,7 +156,7 @@ CMD:tel(playerid, params[]) {
 					while(mysql_fetch_row_format(string, "|"))
 		            {
 		                sscanf(string, "p<|>s[26]", nazwa);
-		                format(string, 256, "Kontakt %s\n \nZmieÅ„ nazwÄ™\nUsuÅ„", nazwa, PlayerInfo[playerid][pPnumber]);
+		                format(string, 256, "Kontakt %s\n \nZmieñ nazwê\nUsuñ", nazwa, PlayerInfo[playerid][pPnumber]);
 		            }
 					mysql_free_result();
 					inline D_OSOBA_OPTION(playeridz, dialogidz, responsez, listitemz, string:inputtextz[]) {
@@ -167,20 +167,20 @@ CMD:tel(playerid, params[]) {
 									#pragma unused playeridc, dialogidc, listitemc
 									if(responsec) {
 										if(strlen(inputtextc) > 25 || strlen(inputtextc) < 1) {
-											sendErrorMessage(playerid, "Nazwa kontaktu moÅ¼e mieÄ‡ max. 25 znakÃ³w");
-											return Dialog_ShowCallback(playerid, using inline D_OSOBA_ZMIENN, DIALOG_STYLE_INPUT, ("Edytuj Kontakt"), "Wpisz nowÄ… nazwÄ™ dla kontaktu", "PotwierdÅº", "Anuluj");		    
+											sendErrorMessage(playerid, "Nazwa kontaktu mo¿e mieæ max. 25 znaków");
+											return Dialog_ShowCallback(playerid, using inline D_OSOBA_ZMIENN, DIALOG_STYLE_INPUT, ("Edytuj Kontakt"), "Wpisz now¹ nazwê dla kontaktu", "PotwierdŸ", "Anuluj");		    
 										}
 										format(string, sizeof(string), "UPDATE mru_kontakty SET contact_name = '%s' WHERE contact_number=%d AND contact_owner=%d", inputtextc, numer, PlayerInfo[playerid][pPnumber]);
 			        					mysql_query(string);
-			        					sendTipMessage(playerid, "Zmieniono nazwÄ™ kontaktu");
+			        					sendTipMessage(playerid, "Zmieniono nazwê kontaktu");
 			        					return cmd_tel(playerid, "");
 									}
 								}
-								Dialog_ShowCallback(playerid, using inline D_OSOBA_ZMIENN, DIALOG_STYLE_INPUT, ("Edytuj Kontakt"), "Wpisz nowÄ… nazwÄ™ dla kontaktu", "PotwierdÅº", "Anuluj");		    
+								Dialog_ShowCallback(playerid, using inline D_OSOBA_ZMIENN, DIALOG_STYLE_INPUT, ("Edytuj Kontakt"), "Wpisz now¹ nazwê dla kontaktu", "PotwierdŸ", "Anuluj");		    
 							} else if (listitemz == 3) {
 								format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE contact_number=%d AND contact_owner=%d", numer, PlayerInfo[playerid][pPnumber]);
 			        			mysql_query(string);
-			        			sendTipMessage(playerid, "UsuniÄ™to kontakt");
+			        			sendTipMessage(playerid, "Usuniêto kontakt");
 			        			return cmd_tel(playerid, "");
 							}
 						}
@@ -202,7 +202,7 @@ CMD:tel(playerid, params[]) {
 					if(mysql_num_rows())
 					{
 						mysql_free_result();
-						return Dialog_ShowCallback(playerid, using inline D_VCARD_ADD, DIALOG_STYLE_INPUT, ("Dodaj Kontakt"), "Ten numer figuruje juÅ¼ na liÅ›cie!\n\nWpisz numer telefonu do dodania", "PotwierdÅº", "Anuluj");
+						return Dialog_ShowCallback(playerid, using inline D_VCARD_ADD, DIALOG_STYLE_INPUT, ("Dodaj Kontakt"), "Ten numer figuruje ju¿ na liœcie!\n\nWpisz numer telefonu do dodania", "PotwierdŸ", "Anuluj");
 					}
 					mysql_free_result();
 	    	    }
@@ -210,8 +210,8 @@ CMD:tel(playerid, params[]) {
 					#pragma unused playeridxx, dialogidxx, listitemxx
 		    	    if(responsexx) {
 		    	    	if(strlen(inputtextxx) > 25 || strlen(inputtextxx) < 1) {
-							sendErrorMessage(playerid, "Nazwa kontaktu moÅ¼e mieÄ‡ max. 25 znakÃ³w");
-							return Dialog_ShowCallback(playerid, using inline D_VCARD_ADDx, DIALOG_STYLE_INPUT, ("Dodaj Kontakt"), "Wpisz nazwÄ™ dodanego kontaktu", "PotwierdÅº", "Anuluj");		    
+							sendErrorMessage(playerid, "Nazwa kontaktu mo¿e mieæ max. 25 znaków");
+							return Dialog_ShowCallback(playerid, using inline D_VCARD_ADDx, DIALOG_STYLE_INPUT, ("Dodaj Kontakt"), "Wpisz nazwê dodanego kontaktu", "PotwierdŸ", "Anuluj");		    
 						}
 		    	    	format(string, 128, "INSERT INTO `mru_kontakty` (contact_number, contact_name, contact_owner) VALUES (%d, '%s', %d)", dodaj_numer, inputtextxx, PlayerInfo[playerid][pPnumber]);
 		    	    	mysql_query(string);
@@ -219,9 +219,9 @@ CMD:tel(playerid, params[]) {
 		    	    	return cmd_tel(playerid, "");
 		    	    }    
 	    		}
-	    		Dialog_ShowCallback(playerid, using inline D_VCARD_ADDx, DIALOG_STYLE_INPUT, ("Dodaj Kontakt"), "Wpisz nazwÄ™ dodanego kontaktu", "PotwierdÅº", "Anuluj");		    
+	    		Dialog_ShowCallback(playerid, using inline D_VCARD_ADDx, DIALOG_STYLE_INPUT, ("Dodaj Kontakt"), "Wpisz nazwê dodanego kontaktu", "PotwierdŸ", "Anuluj");		    
 			}
-			Dialog_ShowCallback(playerid, using inline D_VCARD_ADD, DIALOG_STYLE_INPUT, ("Dodaj Kontakt"), "Wpisz numer telefonu do dodania", "PotwierdÅº", "Anuluj");
+			Dialog_ShowCallback(playerid, using inline D_VCARD_ADD, DIALOG_STYLE_INPUT, ("Dodaj Kontakt"), "Wpisz numer telefonu do dodania", "PotwierdŸ", "Anuluj");
 		}
 	}
 	format(string, 256, "{DADADA}Numer Telefonu: %d\n \n\n{DADADA}Kontakty\n{DADADA}Dodaj kontakt", PlayerInfo[playerid][pPnumber]);
@@ -232,14 +232,14 @@ CMD:tel(playerid, params[]) {
 
 CMD:przejazd(playerid, params[]) {
 	if(!gPlayerLogged[playerid]) return sendErrorMessage(playerid, "Nope!");
-	if(GetPVarInt(playerid, "wybramkowany") == 1) return sendErrorMessage(playerid, "Poczekaj na zamkniÄ™cie siÄ™ poprzedniej bramki!");
+	if(GetPVarInt(playerid, "wybramkowany") == 1) return sendErrorMessage(playerid, "Poczekaj na zamkniêcie siê poprzedniej bramki!");
 	for(new i; i < sizeof(bramki_sasd); i++)
 	{
 		new Float:x,Float:y,Float:z;
 		GetDynamicObjectPos(bramki_sasd[i], x, y, z);
 		if(IsPlayerInRangeOfPoint(playerid, 7.4, x,y,z))
 		{
-			if(bramki_sasd_state[i] == true) return sendErrorMessage(playerid, "Ta bramka jest aktualnie w uÅ¼yciu");
+			if(bramki_sasd_state[i] == true) return sendErrorMessage(playerid, "Ta bramka jest aktualnie w u¿yciu");
 			for(new j; j<iloscbram; j++)
 			{
 				if(bramy[j][b_obiekt] == bramki_sasd[i])
@@ -248,8 +248,16 @@ CMD:przejazd(playerid, params[]) {
 					bramy[j][b_flaga] = false;
 					SetTimerEx("closeGate", 5000, false, "iii", i, j, playerid);
 					bramki_sasd_state[i] = true;
-					DajKase(playerid, -1750);
-					Sejf_Add(FRAC_NG, 1750);
+					if(IsACop(playerid) && OnDuty[playerid] == 1)
+					{
+						sendTipMessage(playerid, "Jesteœ funkcjonariuszem na s³u¿bie. Twój przejazd jest darmowy!");
+					}
+					else
+					{
+						DajKase(playerid, -1750);
+						Sejf_Add(FRAC_NG, 1750);
+					}
+					bramy[j][b_flaga] = false;
 					SetPVarInt(playerid, "wybramkowany", 1);
 					return showTimedMsgBox(playerid, 6, "~y~~h~Oplata pobrana~n~~y~~h~Masz~r~ 5s ~n~~y~~h~na przejazd");
 				}
@@ -265,6 +273,7 @@ public closeGate(i, j, playerid)
 {
     bramki_sasd_state[i] = false;
     SetPVarInt(playerid, "wybramkowany", 0);
+    bramy[j][b_flaga] = true;
     MoveDynamicObject(bramy[j][b_obiekt], bramy[j][b_x2],  bramy[j][b_y2], bramy[j][b_z2], bramy[j][b_speed], bramy[j][b_rx2],  bramy[j][b_ry2], bramy[j][b_rz2]);
     return 1;
 }

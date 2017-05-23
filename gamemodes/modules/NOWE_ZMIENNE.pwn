@@ -1,8 +1,8 @@
 //zmienne.pwn
 
 new CzasInformacyjnego[MAX_PLAYERS];
-new bramki_sasd[16];
-new bool:bramki_sasd_state[16];
+new bramki_sasd[18];
+new bool:bramki_sasd_state[18];
 
 //FishGood
 new FishGood[MAX_PLAYERS];
