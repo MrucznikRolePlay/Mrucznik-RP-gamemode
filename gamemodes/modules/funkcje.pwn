@@ -34,6 +34,12 @@ stock getWolneZgloszenie() {
 	}
 	return ilosczgloszen++;
 }
+stock getWolneZgloszenieSasp() {
+	if(ilosczgloszenSasp == OSTATNIE_ZGLOSZENIASASP) {
+		ilosczgloszenSasp = 0;
+	}
+	return ilosczgloszenSasp++;
+}
 sendNotification(id, title[], text[], time) {
 	CallRemoteFunction("notify", "dssd", id, title, text, time);
 }

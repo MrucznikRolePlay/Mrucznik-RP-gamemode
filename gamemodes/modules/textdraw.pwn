@@ -39,6 +39,10 @@ new Text:MSGBOXtd_Kubi;
 
 /*----------------------------------------- MessageBox END ---------------------------------------------------*/
 
+new PlayerText:TextInformacyjny[MAX_PLAYERS];
+new PlayerText:TextAdminLog[MAX_PLAYERS];
+new PlayerText:TextOferta1[MAX_PLAYERS];
+
 //TXD   Taxi licznik
 new Text:TAXI_BG[2];
 new PlayerText:TAXI_DIST[MAX_PLAYERS];
@@ -263,6 +267,34 @@ LoadTextDraws(playerid)
     PlayerTextDrawSetSelectable(playerid, TAXI_COST[playerid], 0);
 
     Speedo_PlayerLoad(playerid);
+
+    TextInformacyjny[playerid] = CreatePlayerTextDraw(playerid, 510.000000, 300.000000, "");
+    //CreatePlayerTextDraw(playerid, Float:x, Float:y, text[])
+    PlayerTextDrawAlignment(playerid, TextInformacyjny[playerid], 2);\
+    PlayerTextDrawBackgroundColor(playerid, TextInformacyjny[playerid], 255);
+    PlayerTextDrawFont(playerid, TextInformacyjny[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, TextInformacyjny[playerid], 0.469998, 1.399999);
+    PlayerTextDrawColor(playerid, TextInformacyjny[playerid], -1);
+    PlayerTextDrawSetOutline(playerid, TextInformacyjny[playerid], 1);
+    PlayerTextDrawSetProportional(playerid, TextInformacyjny[playerid], 1);
+    PlayerTextDrawUseBox(playerid, TextInformacyjny[playerid], 1);
+    PlayerTextDrawBoxColor(playerid, TextInformacyjny[playerid], 55);
+    PlayerTextDrawTextSize(playerid, TextInformacyjny[playerid], 93.000000, 191.000000);
+
+
+    TextOferta1[playerid] = CreatePlayerTextDraw(playerid, 519.000000, 141.700012, " ");
+    PlayerTextDrawAlignment(playerid, TextOferta1[playerid], 2);
+    PlayerTextDrawBackgroundColor(playerid, TextOferta1[playerid], 255);
+    PlayerTextDrawFont(playerid, TextOferta1[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, TextOferta1[playerid], 0.319999, 0.899999);
+    PlayerTextDrawColor(playerid, TextOferta1[playerid], -1);
+    PlayerTextDrawSetOutline(playerid, TextOferta1[playerid], 0);
+    PlayerTextDrawSetProportional(playerid, TextOferta1[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, TextOferta1[playerid], 1);
+    PlayerTextDrawUseBox(playerid, TextOferta1[playerid], 1);
+    PlayerTextDrawBoxColor(playerid, TextOferta1[playerid], 926365495);
+    PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
+    
 	return 1;
 }
 
