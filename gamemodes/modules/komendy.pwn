@@ -14216,6 +14216,19 @@ CMD:sprzedajauto(playerid, params[])
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
         }
+        else {
+            if(CarData[IDAuta[playa]][c_Neon] != 0)
+            {
+                new neon[20];
+                if(CarData[IDAuta[playa]][c_Neon] == 18652 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "bia³y";
+                if(CarData[IDAuta[playa]][c_Neon] == 18650 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "¿ó³ty";
+                if(CarData[IDAuta[playa]][c_Neon] == 18649 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "zielony";
+                if(CarData[IDAuta[playa]][c_Neon] == 18648 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "niebieski";
+                if(CarData[IDAuta[playa]][c_Neon] == 18647 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "czerwony";
+                if(CarData[IDAuta[playa]][c_Neon] == 18651 && CarData[IDAuta[playa]][c_Neon] != 0) neon = "ró¿owy";
+                sendTipMessageFormat(playa, "Ten samochód posiada %s neon", neon);
+            }
+        }
         format(string, sizeof(string), "Oferujesz %s sprzeda¿ twojego %s za %d$", giveplayer, VehicleNames[GetVehicleModel(lVeh)-400], cena);
         SendClientMessage(playerid, 0xFFC0CB, string);
         GraczDajacy[playa] = playerid;
@@ -15526,7 +15539,7 @@ CMD:og(playerid, params[])
                 return 1;
             }
             DajKase(playerid, - payout);
-            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d",  params, sendername,PlayerInfo[playerid][pPnumber]);
+            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d ((%d))",  params, sendername,PlayerInfo[playerid][pPnumber], playerid);
             OOCNews(TEAM_GROVE_COLOR,string);
             format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
             GameTextForPlayer(playerid, string, 5000, 5);
@@ -31418,8 +31431,14 @@ CMD:materialy(playerid, params[])
 		            if(MatsGood[playerid] != 1)
 		            {
 			            new payout = (50)*(MatsHolding[playerid]);
-			            format(string, sizeof(string), "* Fabryka wyprodukowa³a %d Materia³ów z twoich %d paczek materia³ów.", payout, MatsHolding[playerid]);
-					    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			            format(string, sizeof(string), "Fabryka wyprodukowa³a %d Materia³ów z twoich %d paczek materia³ów.", payout, MatsHolding[playerid]);
+					    sendTipMessage(playerid, string);
+                        if(PlayerInfo[playerid][pMiserPerk] > 0) {
+                            new poziom = PlayerInfo[playerid][pMiserPerk];
+                            PlayerInfo[playerid][pMats] += poziom*20;
+                            format(string, sizeof(string), "Dziêki ulepszeniu MATSIARZ otrzymujesz dodatkowo %d mats", poziom*20);
+                            sendTipMessage(playerid, string);
+                        }
 			            PlayerInfo[playerid][pMats] += payout;
 			            MatsHolding[playerid] = 0;
 			            DisablePlayerCheckpoint(playerid);
@@ -36114,6 +36133,7 @@ CMD:paka(playerid, params[])
                     format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, moneys, depo2);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					DajKase(suspect, -moneys);
+                    poscig[suspect] = 1;
 					//DajKase(playerid, moneys);
 					format(string, sizeof(string), "Aresztowany przez %s ~n~    grzywna $%d", sendername, moneys);
 					GameTextForPlayer(suspect, string, 5000, 5);
@@ -36231,6 +36251,7 @@ CMD:aresztuj(playerid, params[])
 								    PlayerInfo[playa][pJailTime] = jt;
 								    format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i otrzyma³eœ grzywnê w wysokoœci $%d, kaucja to: %d$.", PlayerInfo[playa][pJailTime], price,bail);
 								    SendClientMessage(playa, COLOR_LIGHTRED, string);
+                                    poscig[playa] = 1;
 									WantLawyer[playa] = 1;
 									PlayerInfo[playa][pArrested] += 1;
 									SetPlayerVirtualWorld(playa, 1);
