@@ -2018,11 +2018,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 1:
                 {
+                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z biurem szeryfa, prosze czekaæ.");
+    				Mobile[playerid] = 928;
+    				SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Witam, prosze podaæ krótki opis przestêpstwa.");	
+                }
+                case 2:
+                {
     			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze szpitalem, prosze czekaæ.");
     				Mobile[playerid] = 914;
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Szpital: Witam, prosze podaæ krótki opis zdarzenia.");
                 }
-                case 2:
+                case 3:
                 {
     			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z dyspozytorem, prosze czekaæ.");
     				Mobile[playerid] = 916;
