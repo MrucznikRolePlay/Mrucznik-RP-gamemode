@@ -30,10 +30,15 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-stock DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Float:frz1, Float:fx2, Float:fy2, Float:fz2, Float:frx2, Float:fry2, Float:frz2, Float:fspeed, Float:frange, fuprtyp=0, fuprval=0)
+stock DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Float:frz1, Float:fx2, Float:fy2, Float:fz2, Float:frx2, Float:fry2, Float:frz2, Float:fspeed, Float:frange, fuprtyp=0, fuprval=0, bool:flag=false)
 {
 	bramy[iloscbram][b_obiekt] = fobiekt;
-	bramy[iloscbram][b_flaga] = false;
+	if(flag==false) {
+		bramy[iloscbram][b_flaga] = false;
+	}
+	else {
+		bramy[iloscbram][b_flaga] = true;
+	}
 	bramy[iloscbram][b_x1] = fx1;
 	bramy[iloscbram][b_y1] = fy1;
 	bramy[iloscbram][b_z1] = fz1;
@@ -59,13 +64,18 @@ stock SprawdzBramy(playerid)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2]))
 		{
-			if( (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+			if( (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
 			{
 				if(bramy[i][b_flaga])
+				{
 					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1],  bramy[i][b_ry1], bramy[i][b_rz1]);
+					bramy[i][b_flaga]=false;
+				}
 				else
+				{
 					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2],  bramy[i][b_ry2], bramy[i][b_rz2]);
-				bramy[i][b_flaga]=~bramy[i][b_flaga];
+					bramy[i][b_flaga]=true;
+				}
 				return 1;
 			}
 		}

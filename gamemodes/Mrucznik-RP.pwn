@@ -74,7 +74,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.8"
+#define VERSION "v2.5.81"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
@@ -83,6 +83,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include "modules/textdraw.pwn"
 #include "modules/enum.pwn"
 #include "modules/NOWE_ZMIENNE.pwn"
+#include "modules/new/niceczlowiek/general.pwn"    
 #include "modules/mru_mysql.pwn"
 
 //Nowe modu³y .def:
@@ -153,6 +154,7 @@ main()
 //------------------------------------------------------------------------------------------------------
 
 #include "modules/komendy.pwn"
+#include "modules/new/niceczlowiek/cmd.pwn"
 
 public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
@@ -631,8 +633,9 @@ public OnEnterExitModShop(playerid, enterexit, interiorid)
 	#endif
     if(enterexit == 0)
     {
-        SendClientMessage(playerid, COLOR_WHITE, "Zap³aci³eœ 2500$ za naprawê wozu.");
-        DajKase(playerid, -2500);
+        new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid)));
+        sendTipMessageFormat(playerid, "Zap³aci³eœ $%d za wizytê w warsztacie", cena);
+        DajKase(playerid, -cena);
 
         if(GetPlayerVehicleID(playerid) != 0)
             CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
@@ -1778,7 +1781,7 @@ SetPlayerSpawnPos(playerid)
 				}
 				else if(GetPlayerOrg(playerid) > 0) //Spawn Organizacji
 				{
-		            new org = gPlayerOrg[playerid];
+		            new org = GetPlayerOrg(playerid);
 		            if(OrgInfo[org][o_Spawn][0] != 0.0)
 		            {
 		                SetPlayerVirtualWorld(playerid, OrgInfo[org][o_VW]);
@@ -1788,7 +1791,7 @@ SetPlayerSpawnPos(playerid)
 		            }
 		            else
 		            {
-						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawna - spawnujesz siê jako cywil.");
+						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawnu - spawnujesz siê jako cywil.");
                         new rand = random(sizeof(gRandomPlayerSpawns));
 			    		SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 			    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
@@ -4043,7 +4046,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 			}
 			else
 			{
-				SendAdminMessage(COLOR_LIGHTBLUE, "Witaj, Rkornisto");
+				SendPlayerMessage(playerid, COLOR_LIGHTBLUE, "Witaj, Rkornisto");
 			}
         }
     }
@@ -7059,6 +7062,35 @@ public OnPlayerText(playerid, text[])
             Mobile[playerid] = 1255;
 			return 0;
 		}
+        if(Mobile[playerid] == 928)
+        {
+            if(!strlen(tmp))
+            {
+                SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem");
+                return 0;
+            } else if(strlen(text) > 82) {
+                Mobile[playerid] = 928;
+                SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem. Proszê powtórzyæ ((max 75 znaków))");
+                return 0;
+            }
+            //strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
+            new id = getWolneZgloszenieSasp();
+            new Hour, Minute;
+            gettime(Hour, Minute);
+            new datapowod[160];
+            format(datapowod, sizeof(datapowod), "%02d:%02d",  Hour, Minute);
+            new pZone[MAX_ZONE_NAME];
+            GetPlayer2DZone(giveplayerid, pZone, MAX_ZONE_NAME);
+            strmid(ZgloszenieSasp[id][zgloszenie_kiedy], datapowod, 0, sizeof(datapowod), 36);
+            format(ZgloszenieSasp[id][zgloszenie_nadal], MAX_PLAYER_NAME, "%s", GetNick(playerid, true));
+            format(ZgloszenieSasp[id][zgloszenie_lokacja], MAX_ZONE_NAME, "%s", pZone);
+            strmid(ZgloszenieSasp[id][zgloszenie_tresc], text, 0, strlen(text) + 9, 128);
+            ZgloszenieSasp[id][zgloszenie_status] = 0;
+            SendFamilyMessage(3, COLOR_DBLUE, "HQ: Do Wszystkich Jednostek: Otrzymano nowe zg³oszenie!");
+            sendTipMessageEx(playerid, COLOR_GRAD2, "[Telefon] Rozmowa zakoñczona");
+            Mobile[playerid] = 1255;
+            return 0;
+        }
 
 		if(IsPlayerConnected(Mobile[playerid]))
 		{
