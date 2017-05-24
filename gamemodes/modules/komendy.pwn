@@ -2134,6 +2134,11 @@ CMD:obezwladnij(playerid, params[])
 		    sendErrorMessage(playerid, "Nie mo¿esz obezw³adniæ samego siebie!");
 		    return 1;
 		}
+		if(!IsPlayerConnected(giveplayerid))
+		{
+		    sendErrorMessage(playerid, "Nie ma takiego gracza!");
+			return 1;
+		}
 		if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
 		{
 			sendErrorMessage(playerid, "Ten gracz jest za daleko.");

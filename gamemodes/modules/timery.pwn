@@ -11,6 +11,11 @@ public Naprawa(playerid)
 	GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
 	GetPlayerName(playerid, sendername, sizeof(sendername));
 	RepairCar[playerid] = GetPlayerVehicleID(playerid);
+	if(RepairCar[playerid] == INVALID_VEHICLE_ID)
+	{
+		return 1;
+	}
+	
 	SetVehicleHealth(RepairCar[playerid], 1000.0);
 	RepairVehicle(RepairCar[playerid]);
 

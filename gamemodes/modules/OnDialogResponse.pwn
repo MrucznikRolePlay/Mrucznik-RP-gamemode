@@ -15506,7 +15506,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		
 		//logi
 		new string[128];
-		format(string, sizeof(string), "%s zmienil model pojazdu %d z %d na %d", GetNick(playerid), car, oldmodel, CarData[car][c_Model]);
+		format(string, sizeof(string), "%s zmienil model pojazdu %d z %d na %d", GetNick(playerid), CarData[car][c_UID], oldmodel, CarData[car][c_Model]);
 		ActionLog(string);
         return 1;
     }
