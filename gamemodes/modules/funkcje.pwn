@@ -3604,6 +3604,13 @@ IsATrain(carid)
 	return 0;
 }
 
+IsAAdministrator(playerid)
+{
+	if(PlayerInfo[playerid][pAdmin] > 0)
+		return 1;
+	return 0;
+}
+
 Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja)
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))

@@ -6124,56 +6124,6 @@ CMD:brama(playerid)
 				}
 			}
 		}
-		/*if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
-		{
-			if(PlayerToPoint(12.0, playerid, 68.021484375, -1545.892578125, 5.1986169815063))
-			{
-				if(BramaNGS == 1)
-				{
-					SetDynamicObjectRot(BramaNG, 0, 0, 270);
-					BramaNGS = 0;
-				}
-				else
-				{
-					SetDynamicObjectRot(BramaNG, 9, 270, 270);
-					BramaNGS = 1;
-				}
-			}
-		}
-		if(PlayerInfo[playerid][pAdmin] >= 1000 || IsACop(playerid) || IsAHA(playerid))
-		{
-			if(PlayerToPoint(12.0, playerid, 35.3408203125, -1517.900390625, 5.2259092330933))
-			{
-				if(BramaNG2S == 1)
-				{
-					SetDynamicObjectRot(BramaNG2, 0, 0, 90);
-					BramaNG2S = 0;
-				}
-				else
-				{
-					SetDynamicObjectRot(BramaNG2, 0, 270, 87);
-					BramaNG2S = 1;
-				}
-			}
-		}
-		/*if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAUrzednik(playerid))
-		{
-			if(PlayerToPoint(10.0, playerid, 365.75811767578,189.45112609863,1008.443115234))
-			{
-				if(DzwiDMVs == 1)
-				{
-					MoveDynamicObject(DzwiDMV, 365.75811767578,189.45112609863,1008.443115234, 2.5);
-					SetDynamicObjectRot(DzwiDMV, 0, 0, 0);
-					DzwiDMVs = 0;
-				}
-				else
-				{
-					MoveDynamicObject(DzwiDMV,365.75811767578,189.45112609863,1008.443115234, 2.5);
-					SetDynamicObjectRot(DzwiDMV, 0, 0, 90);
-					DzwiDMVs = 1;
-				}
-			}
-		}*/
 		//old komi
 		if(PlayerInfo[playerid][pAdmin] >= 1000 || IsACop(playerid) || IsAHA(playerid))
 		{

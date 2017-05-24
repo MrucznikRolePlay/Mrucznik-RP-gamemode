@@ -254,7 +254,7 @@ CMD:przejazd(playerid, params[]) {
 					}
 					else
 					{
-						DajKase(playerid, -1750);
+						ZabierzKase(playerid, 1750);
 						Sejf_Add(FRAC_NG, 1750);
 					}
 					bramy[j][b_flaga] = false;
