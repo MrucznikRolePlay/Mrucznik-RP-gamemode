@@ -635,7 +635,7 @@ public OnEnterExitModShop(playerid, enterexit, interiorid)
     {
         new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid)));
         sendTipMessageFormat(playerid, "Zap³aci³eœ $%d za wizytê w warsztacie", cena);
-        DajKase(playerid, -cena);
+        ZabierzKase(playerid, cena);
 
         if(GetPlayerVehicleID(playerid) != 0)
             CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
@@ -4046,7 +4046,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 			}
 			else
 			{
-				SendPlayerMessage(playerid, COLOR_LIGHTBLUE, "Witaj, Rkornisto");
+				SendClientMessage(player, COLOR_LIGHTBLUE, "Witaj, Rkornisto");
 			}
         }
     }

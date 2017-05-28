@@ -34240,10 +34240,10 @@ CMD:akceptuj(playerid, params[])
         {
             if(RepairOffer[playerid] < 999)
             {
-                if(kaska[playerid] > RepairPrice[playerid] && RepairPrice[playerid] > 0)
-                {
-                    if(IsPlayerInAnyVehicle(playerid))
-                    {
+				if(IsPlayerInAnyVehicle(playerid))
+				{
+					if(kaska[playerid] > RepairPrice[playerid]+przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid))) && RepairPrice[playerid] > 0)
+					{
                         if(IsPlayerConnected(RepairOffer[playerid]))
                         {
                             if(IsPlayerInAnyVehicle(RepairOffer[playerid])) return sendErrorMessage(playerid, "Mechanik nie mo¿e byæ w pojeŸdzie!");
@@ -34264,13 +34264,13 @@ CMD:akceptuj(playerid, params[])
                         }
                         return 1;
                     }
-                    return 1;
-                }
-                else
-                {
-                    SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê na naprawe !");
-                    return 1;
-                }
+					else
+					{
+						SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê na naprawe !");
+						return 1;
+					}
+				}
+				return 1;
             }
             else
             {
@@ -34502,7 +34502,7 @@ CMD:napraw(playerid, params[])
 								GetPlayerName(playerid, sendername, sizeof(sendername));
 							    format(string, sizeof(string), "* Oferujesz %s naprawê wozu za $%d .",giveplayer,money);
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								format(string, sizeof(string), "* Mechanik %s proponuje naprawê twojego wozu za $%d, (wpisz /akceptuj naprawe) aby akceptowaæ.",sendername,money);
+								format(string, sizeof(string), "* Mechanik %s proponuje naprawê twojego wozu za $%d (+%d wartoœci auta), (wpisz /akceptuj naprawe) aby akceptowaæ.",sendername,money, przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playa))));
 								SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 								RepairOffer[playa] = playerid;
 								RepairPrice[playa] = money;

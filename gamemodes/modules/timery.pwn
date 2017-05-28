@@ -11,7 +11,7 @@ public Naprawa(playerid)
 	GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
 	GetPlayerName(playerid, sendername, sizeof(sendername));
 	RepairCar[playerid] = GetPlayerVehicleID(playerid);
-	if(RepairCar[playerid] == INVALID_VEHICLE_ID)
+	if(RepairCar[playerid] == INVALID_VEHICLE_ID || !IsPlayerInAnyVehicle(playerid))
 	{
 		return 1;
 	}
@@ -25,7 +25,7 @@ public Naprawa(playerid)
 	PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
 	PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
 	new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid)));
-	cena = floatround((cena/100) * 25, floatround_round);
+	cena = floatround(cena/4, floatround_round);
 	format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d(+$%d) przez %s.",RepairPrice[playerid],cena,giveplayer);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	format(string, sizeof(string), "* Naprawi³eœ pojazd %s, otrzymujesz $%d.",giveplayer,RepairPrice[playerid]);
@@ -44,7 +44,7 @@ public Naprawa(playerid)
 	else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
 	{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
 	ZabierzKase(playerid, RepairPrice[playerid]);
-    ZabierzKase(playerid, -cena);
+    ZabierzKase(playerid, cena);
 	DajKase(RepairOffer[playerid], RepairPrice[playerid]);
 	RepairOffer[playerid] = 999;
 	RepairPrice[playerid] = 0;
