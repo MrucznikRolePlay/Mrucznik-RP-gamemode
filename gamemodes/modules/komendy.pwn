@@ -23779,17 +23779,25 @@ CMD:dajlideraorg(playerid, params[])
     new str[128];
     if(id != -1)
     {
-        format(str, 128, "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNick(playerid), OrgInfo[orgID(family)][o_Name], family);
-        SendClientMessage(id, COLOR_LIGHTBLUE, str);
-        format(str, 128, "Da³eœ kontrolê nad rodzin¹ %s (%d) graczowi %s", OrgInfo[orgID(family)][o_Name], family, GetNick(id));
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
-		
-		//logi
-		format(str, sizeof(str), "%s dal kontrole nad rodzina %d graczowi %s", GetNick(playerid), family, GetNick(id));
-		ActionLog(str);
-		
-        PlayerInfo[id][pTeam] = 5;
-        gTeam[id] = 5;
+		new orgUID = orgID(family);
+		if(orgUID = 0xFFFF)
+		{
+			format(str, sizeof(str), "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNick(playerid), OrgInfo[orgUID][o_Name], family);
+			SendClientMessage(id, COLOR_LIGHTBLUE, str);
+			format(str, sizeof(str), "Da³eœ kontrolê nad rodzin¹ %s (%d) graczowi %s", OrgInfo[orgUID][o_Name], family, GetNick(id));
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
+			
+			//logi
+			format(str, sizeof(str), "%s dal kontrole nad rodzina %d graczowi %s", GetNick(playerid), family, GetNick(id));
+			ActionLog(str);
+			
+			PlayerInfo[id][pTeam] = 5;
+			gTeam[id] = 5;
+		}
+		else
+		{
+			SendClientMessage(playerid, COLOR_RED, "ERROR! Wyst¹pi³ b³¹d, zg³oœ okolicznoœci do Mrucznika na slacku.");
+		}
     }
     else
     {
@@ -38291,7 +38299,7 @@ CMD:addcar(playerid, p[])
 
 CMD:removecar(playerid, p[])
 {
-    if(!Uprawnienia(playerid, ACCESS_EDITCAR) || PlayerInfo[playerid][pAdmin] != 5000) return 1;
+    if(!Uprawnienia(playerid, ACCESS_EDITCAR) || PlayerInfo[playerid][pAdmin] != 5001) return 1;
     new car;
     if(sscanf(p, "d", car)) return sendTipMessage(playerid, "U¿yj /removecar [Car UID]");
 
