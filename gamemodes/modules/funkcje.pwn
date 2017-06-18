@@ -75,7 +75,6 @@ sendErrorMessage(id, string:msg[]) {
 stock GetMajatek(playerid)
 {
 	new vehvalues;
-	printf("[1/2] Getujemy majatek %d", playerid);
 	for(new i=0;i<MAX_CAR_SLOT;i++)
     {
 		new car_id = PlayerInfo[playerid][pCars][i];
@@ -84,7 +83,6 @@ stock GetMajatek(playerid)
             vehvalues += VehiclePrice[CarData[car_id][c_Model]];
         }
     }
-    printf("[1/2] Wygetowany majatek %d", playerid);
 	return kaska[playerid]+PlayerInfo[playerid][pAccount]+vehvalues+Dom[PlayerInfo[playerid][pDom]][hCena];
 }
 

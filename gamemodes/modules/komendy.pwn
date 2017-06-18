@@ -26,6 +26,8 @@ SSCANF:fix(string[])
 	return ret;
 }
 
+
+#if DEBUG == 1
 CMD:pakietmrucznika(playerid)
 {
     PlayerInfo[playerid][pLevel] = 22;
@@ -43,6 +45,7 @@ CMD:pakietmrucznika(playerid)
     sendTipMessage(playerid, "[Dostajesz 10 slotow na wozy oraz 200kk, jak wydasz kase uzyj ponownie zeby dostac znowu kase]");
     return 1;
 }
+#endif
 
 
 //PAèDZIOCH
@@ -39342,27 +39345,6 @@ CMD:wyjedz(playerid)
 		}
 	}
 	return 1;
-}
-
-
-CMD:kupdodatki(playerid)
-{
-    if(!IsAtClothShop(playerid)) return sendTipMessageEx(playerid,0xAA3333AA,"  Tej komendy moøesz uøyÊ tylko w sklepie z ubraniami.");//SetPVarInt(playerid, "mrp_atshop", 1);
-    //else SetPVarInt(playerid, "mrp_atshop", 0);
-    ShowPlayerDialogEx(playerid, D_DODATKI_TYP, DIALOG_STYLE_LIST, "Typy dodatkÛw", "Zwyk≥e\nPrzedmioty premium\nPolicyjne\nUnikatowe\nDla gangu", "Wybierz", "Wyjdü");
-    return 1;
-}
-
-CMD:dodatki(playerid)
-{
-    if(!InitMyItems[playerid]) MyItems_Load(playerid);
-    if(GetPVarInt(playerid, "mayask_dodatki") == 0)
-    {
-        ShowPlayerDialogEx(playerid, D_ASK_DODATKI, DIALOG_STYLE_MSGBOX, "Dodatki", "PrzywrÛciÊ dodatki?", "Tak", "Nie");
-        SetPVarInt(playerid, "mayask_dodatki", 1);
-    }
-    else CallRemoteFunction("SEC_MyItems_Show", "i", playerid);
-    return 1;
 }
 
 //eof

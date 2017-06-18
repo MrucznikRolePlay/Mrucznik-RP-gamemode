@@ -1241,11 +1241,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 		PlayerInfo[playerid][pLocal] = 255;
 		PlayerInfo[playerid][pDeaths] ++;
 
-        // usun to potem
-        format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] w jakiœ sposób", killername, killerid, playername, playerid);
-        DeWu(string, 1);
-
-
 		//-------<[  Antyczity  ]>---------
 		if(reason <= 54 && reason > 0)
 		{
