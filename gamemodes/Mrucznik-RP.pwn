@@ -4094,27 +4094,6 @@ public OnPlayerExitedMenu(playerid)
 
 public OnPlayerStateChange(playerid, newstate, oldstate)
 {
-	#if DEBUG == 2
-		if(newstate == PLAYER_STATE_DRIVER)
-		{
-			printf("%s[%d] OnPlayerStateChange - newstate: %d oldstate: %d", GetNick(playerid), playerid, newstate, oldstate);
-			new koxv = GetPlayerVehicleID(playerid), Float:koxhp, Float:x, Float:y, Float:z, Float:xa;
-			GetVehicleHealth(koxv, koxhp);
-			GetVehicleZAngle(koxv, xa);
-			GetVehiclePos(koxv, x, y, z);
-			printf("Pojazd: %d | Model pojazdu: %d | HP Pojazdu: %f", koxv, GetVehicleModel(koxv), koxhp);
-			printf("Pozycja: x: %f y: %f z: %f", x, y, z);
-			printf("Rotacja: %f", xa);
-			if(x >= 20000.0 || x <= -20000.0 || y >= 20000.0 || y <= -20000.0 || z >= 20000.0 || z <= -20000.0)
-			{
-				new string[256];
-				SetVehiclePos(koxv, 0.0, 0.0, 0.0);
-				Kick(playerid);
-				format(string, sizeof(string), "Pozycja: x: %f y: %f z: %f\nRotacja: %f", x, y, z, xa);
-				VehicleErrorLog(string);
-			}
-		}
-	#endif
 	new string[256];
     //---------------------------------------------- Anti Cheat ------------------------------------//
 

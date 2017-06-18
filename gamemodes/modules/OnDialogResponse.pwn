@@ -12792,7 +12792,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(!response) return 1;
             SetPVarInt(playerid, "sanradio", listitem);
-            ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykê", "Disco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio 1\nMrucznik Radio 2\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
         }
         else if(dialogid == 669)
         {
@@ -12801,12 +12801,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 switch(listitem)
                 {
-                    case 0: format(RadioSANUno, 128, "http://www.polskastacja.pl/play/aac_discopolo.pls");
-                    case 1: format(RadioSANUno, 128, "http://www.polskastacja.pl/play/aac_dance100.pls");
-                    case 2: format(RadioSANUno, 128, "http://www.polskastacja.pl/play/aac_mnt.pls");
-                    case 3: format(RadioSANUno, 128, "http://www.polskastacja.pl/play/aac_hiphop.pls");
-                    case 4: format(RadioSANUno, 128, "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 5: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
+                    case 0: format(RadioSANUno, sizeof(RadioSANUno), "http://s1.slotex.pl:7170");
+                    case 1: format(RadioSANUno, sizeof(RadioSANUno), "http://4stream.pl:18240");
+                    case 2: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 3: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 4: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 5: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 6: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 7: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
                 }
                 foreach(Player, i)
                 {
@@ -12823,12 +12825,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 switch(listitem)
                 {
-                    case 0: format(RadioSANDos, 128, "http://www.polskastacja.pl/play/aac_discopolo.pls");
-                    case 1: format(RadioSANDos, 128, "http://www.polskastacja.pl/play/aac_dance100.pls");
-                    case 2: format(RadioSANDos, 128, "http://www.polskastacja.pl/play/aac_mnt.pls");
-                    case 3: format(RadioSANDos, 128, "http://www.polskastacja.pl/play/aac_hiphop.pls");
-                    case 4: format(RadioSANDos, 128, "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 5: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
+                    case 0: format(RadioSANDos, sizeof(RadioSANDos), "http://s1.slotex.pl:7170");
+                    case 1: format(RadioSANDos, sizeof(RadioSANDos), "http://4stream.pl:18240");
+                    case 2: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 3: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 4: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 5: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 6: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 7: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
                 }
                 foreach(Player, i)
                 {
@@ -12884,12 +12888,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-		            case 0: format(SANrepertuar, 128, "http://www.polskastacja.pl/play/aac_discopolo.pls");
-                    case 1: format(SANrepertuar, 128, "http://www.polskastacja.pl/play/aac_dance100.pls");
-                    case 2: format(SANrepertuar, 128, "http://www.polskastacja.pl/play/aac_mnt.pls");
-                    case 3: format(SANrepertuar, 128, "http://www.polskastacja.pl/play/aac_hiphop.pls");
-                    case 4: format(SANrepertuar, 128, "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 5: return ShowPlayerDialogEx(playerid, 767, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL do wybranego utworu", "Wybierz", "Anuluj");
+                    case 0: format(SANrepertuar, sizeof(SANrepertuar), "http://s1.slotex.pl:7170");
+                    case 1: format(SANrepertuar, sizeof(SANrepertuar), "http://4stream.pl:18240");
+		            case 2: format(SANrepertuar, sizeof(SANrepertuar), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 3: format(SANrepertuar, sizeof(SANrepertuar), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 4: format(SANrepertuar, sizeof(SANrepertuar), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 5: format(SANrepertuar, sizeof(SANrepertuar), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 6: format(SANrepertuar, sizeof(SANrepertuar), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 7: return ShowPlayerDialogEx(playerid, 767, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL do wybranego utworu", "Wybierz", "Anuluj");
 		        }
                 ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
 		    }
