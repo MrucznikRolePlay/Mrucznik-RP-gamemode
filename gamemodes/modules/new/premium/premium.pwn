@@ -117,9 +117,9 @@ IsAUnikat(modelid)
 }
 
 //-----------------<[ Komendy: ]>-------------------
-CMD:kp(playerid, params[]) return cmd_premium(playerid, params);
-CMD:dotacje(playerid, params[]) return cmd_premium(playerid, params);
-CMD:premium(playerid, params[])
+//CMD:kp(playerid, params[]) return cmd_premium(playerid, params);
+//CMD:dotacje(playerid, params[]) return cmd_premium(playerid, params);
+/*CMD:premium(playerid, params[])
 {
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Ju¿ wkrótce!");
 	return 1;
@@ -133,7 +133,7 @@ CMD:premium(playerid, params[])
         SendClientMessage(playerid, COLOR_GREY, "B³¹d!");
     }
     return 1;
-}
+} */
 
 //----- Admin -----
 CMD:setmc(playerid, params[]) return cmd_dajmc(playerid, params);
