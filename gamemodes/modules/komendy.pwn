@@ -30,6 +30,9 @@ SSCANF:fix(string[])
 #if DEBUG == 1
 CMD:pakietmrucznika(playerid)
 {
+
+    if(gettime() < GetPVarInt(playerid, "pakietl")) return sendTipMessage(playerid, "{dafc10}Mo¿esz u¿ywaæ tego co 60s");
+
     PlayerInfo[playerid][pLevel] = 22;
     PlayerInfo[playerid][pDowod] = 1;
     PlayerInfo[playerid][pCarLic] = 1;
@@ -38,11 +41,59 @@ CMD:pakietmrucznika(playerid)
     PlayerInfo[playerid][pFishLic] = 1;
     PlayerInfo[playerid][pGunLic] = 1;
     PlayerInfo[playerid][pCarSlots] = 10;
+    PlayerInfo[playerid][pConnectTime] = 2137;
 
     DajKase(playerid, 200000000);
 
     sendTipMessage(playerid, "[Dostajesz dowod, prawko, licke na latanie, lodke, rybolostwo i pozwolenie na bron]");
     sendTipMessage(playerid, "[Dostajesz 10 slotow na wozy oraz 200kk, jak wydasz kase uzyj ponownie zeby dostac znowu kase]");
+
+    sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "[Nie spam t¹ komend¹ inaczej dostaniesz bana]");
+
+    SetPVarInt(playerid, "pakietl", gettime() + 60);
+
+    return 1;
+}
+#endif
+
+#if DEBUG == 1
+CMD:dosalonu(playerid)
+{
+    if(gettime() < GetPVarInt(playerid, "salonl")) return sendTipMessage(playerid, "{dafc10}TP pod salon co 3minuty");
+
+    SetPlayerInterior(playerid, 0);
+    SetPlayerVirtualWorld(playerid, 0);
+
+    sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
+
+    SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
+
+    SetPVarInt(playerid, "salonl", gettime() + 180);
+
+    return 1;
+}
+#endif
+
+#if DEBUG == 1
+CMD:skille(playerid)
+{
+    PlayerInfo[playerid][pDetSkill] = 5000;
+    PlayerInfo[playerid][pLawSkill] = 5000;
+    PlayerInfo[playerid][pMechSkill] = 5000;
+    PlayerInfo[playerid][pNewsSkill] = 5000;
+    PlayerInfo[playerid][pJackSkill] = 5000;
+    PlayerInfo[playerid][pDrugsSkill] = 5000;
+    PlayerInfo[playerid][pSexSkill] = 5000;
+    PlayerInfo[playerid][pBoxSkill] = 5000;
+    PlayerInfo[playerid][pGunSkill] = 5000;
+    PlayerInfo[playerid][pFishSkill] = 5000;
+    PlayerInfo[playerid][pFishSkill] = 5000;
+    PlayerInfo[playerid][pTruckSkill] = 5000;
+
+    PlayerInfo[playerid][pMats] = 50000;
+
+    sendTipMessage(playerid, "[Dosta³eœ skille 5 w ka¿dej dziedzinie i 50000 mats]");
+
     return 1;
 }
 #endif
@@ -15546,7 +15597,7 @@ CMD:og(playerid, params[])
                 return 1;
             }
             DajKase(playerid, - payout);
-            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d ((%d))",  params,PlayerInfo[playerid][pPnumber], playerid);
+            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d ¦ %s",  params,PlayerInfo[playerid][pPnumber], GetNick(playerid, true));
             OOCNews(TEAM_GROVE_COLOR,string);
             format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
             GameTextForPlayer(playerid, string, 5000, 5);
@@ -26615,6 +26666,23 @@ CMD:changelog(playerid, params[])
 		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla CassinoAutoService");
 		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla low folow ");
 	}
+    else if(strcmp(wersja,"2.5.82",true) == 0)
+    {
+        new string[1600];
+        format(string, 500, "{FFFFFF}Lista zmian aktualizacji 2.5.82\n\n");
+        format(string, 500, "%s{C0C0C0}nowoœæ\t{FFFFFF}panel dla liderów frakcji ( /fpanel )\t\n", string);
+        format(string, 500, "%s{C0C0C0}zmiana\t{FFFFFF}powrót komendy /pobij - brak aj za /q oraz 45s czekania po pobiciu\t\n", string);
+        format(string, 500, "%s{C0C0C0}bugfix\t{FFFFFF}naprawiony bug z domkami\t\n", string);
+        format(string, 500, "%s{C0C0C0}nowoœæ\t{FFFFFF}/hq dla sasd oraz sasd w /call 911\t\n", string);
+        format(string, 500, "%s{C0C0C0}nowoœæ\t{FFFFFF}przejazd na granicach p³atny $1750 ( /przejazd )\t\n", string);
+        format(string, 500, "%s{C0C0C0}zmiana\t{FFFFFF}ulepszenie matsiarz daje bonusowe materia³y przy dostarczeniu\t\n", string);
+        format(string, 500, "%s{C0C0C0}nowoœæ\t{FFFFFF}dopasowanie kamizelki na skinie ( /dopasuj )\t\n", string);
+        format(string, 500, "%s{C0C0C0}zmiana\t{FFFFFF}po pójœciu do paki przez cmd /paka /aresztuj poœcig siê deaktywuje\t\n", string);
+        format(string, 500, "%s{C0C0C0}nowoœæ\t{FFFFFF}interior biura i magazyny dla /rodziny 23\t\n", string);
+        format(string, 500, "%s{C0C0C0}zmiana\t{FFFFFF}niewielkie poprawki stabilnoœci\t\n", string);
+
+        ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_MSGBOX, "{C0C0C0}Mrucznik-RP » Zmiany w wersji 2.5.82", string, "Ok", "");
+    }
 	else
 	{
 		SendClientMessage(playerid,COLOR_BLUE,"----------   Dostêpne wersje   ---------");
@@ -26628,6 +26696,8 @@ CMD:changelog(playerid, params[])
         SendClientMessage(playerid,COLOR_WHITE,"2.5.2");
 		SendClientMessage(playerid,COLOR_WHITE,"2.5.6");
 		SendClientMessage(playerid,COLOR_WHITE,"2.5.7");
+        SendClientMessage(playerid,COLOR_WHITE,"2.5.8");
+        SendClientMessage(playerid,COLOR_WHITE,"2.5.82");
 		SendClientMessage(playerid,COLOR_BLUE,"------ Aktualna wersja: "VERSION" ------");
 	}
 	return 1;
@@ -34331,7 +34401,7 @@ CMD:akceptuj(playerid, params[])
         {
             if(RepairOffer[playerid] < 999)
             {
-                if(kaska[playerid] > RepairPrice[playerid]+floatround((przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid)))/100) * 25, floatround_round) && RepairPrice[playerid] > 0)
+                if(kaska[playerid] > RepairPrice[playerid] && RepairPrice[playerid] > 0)
                 {
                     if(IsPlayerInAnyVehicle(playerid))
                     {
@@ -34594,7 +34664,7 @@ CMD:napraw(playerid, params[])
 								GetPlayerName(playerid, sendername, sizeof(sendername));
 							    format(string, sizeof(string), "* Oferujesz %s naprawê wozu za $%d .",giveplayer,money);
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								format(string, sizeof(string), "* Mechanik %s proponuje naprawê za $%d +1proc ($%d) ceny wozu. /akceptuj naprawe aby akceptowac",sendername,money,floatround((przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playa)))/100) * 25, floatround_round));
+								format(string, sizeof(string), "* Mechanik %s proponuje naprawê za $%d. /akceptuj naprawe aby akceptowac",sendername,money);
 								SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 								RepairOffer[playa] = playerid;
 								RepairPrice[playa] = money;

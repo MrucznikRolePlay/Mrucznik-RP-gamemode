@@ -636,9 +636,6 @@ public OnEnterExitModShop(playerid, enterexit, interiorid)
 	#endif
     if(enterexit == 0)
     {
-        new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid)));
-        sendTipMessageFormat(playerid, "Zap³aci³eœ $%d za wizytê w warsztacie", cena);
-        ZabierzKase(playerid, cena);
 
         if(GetPlayerVehicleID(playerid) != 0)
             CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;

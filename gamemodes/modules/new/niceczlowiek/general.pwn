@@ -109,16 +109,6 @@ stock showTimedMsgBox(playerid, delay, text[]) {
 }
 
 
-stock przeliczBogactwo(vehModel) {
-	if(vehModel >= 400 && vehModel <= 611)
-	{
-		new cena = VehiclePrice[vehModel-400];
-		return (floatround(((cena/100) * 1), floatround_round));
-	}
-	return 0;
-}
-
-
 public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
 	if(modelid != 19142) return 1;

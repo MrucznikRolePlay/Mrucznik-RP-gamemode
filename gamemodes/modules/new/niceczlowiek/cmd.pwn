@@ -36,18 +36,6 @@ CMD:oferuj(playerid, params[]) {
     return true;
 }*/
 
-CMD:dopasuj(playerid, params[])
-{
-	new type[24];
-    if(sscanf(params, "s[24]", type)) {
-        return sendTipMessage(playerid, "Dostepne /dopasuj: kamizelke");
-    }
-    if(!strcmp(type, "kamizelke", true))
-    {
-    	EditAttachedObject(playerid, 7);
-    }
-    return 1;
-}
 
 CMD:ooc(playerid, params[]) return cmd_o(playerid, params);
 CMD:o(playerid, params[])
@@ -122,6 +110,19 @@ CMD:o(playerid, params[])
 		}
 	}
 	return 1;
+}
+
+CMD:dopasuj(playerid, params[])
+{
+	new type[24];
+    if(sscanf(params, "s[24]", type)) {
+        return sendTipMessage(playerid, "Dostepne /dopasuj: kamizelke");
+    }
+    if(!strcmp(type, "kamizelke", true))
+    {
+    	EditAttachedObject(playerid, 7);
+    }
+    return 1;
 }
 
 /*CMD:telefon(playerid, params[]) return cmd_tel(playerid, params);
@@ -277,3 +278,4 @@ public closeGate(i, j, playerid)
     MoveDynamicObject(bramy[j][b_obiekt], bramy[j][b_x2],  bramy[j][b_y2], bramy[j][b_z2], bramy[j][b_speed], bramy[j][b_rx2],  bramy[j][b_ry2], bramy[j][b_rz2]);
     return 1;
 }
+
