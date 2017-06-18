@@ -11,6 +11,10 @@ public Naprawa(playerid)
 	GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
 	GetPlayerName(playerid, sendername, sizeof(sendername));
 	RepairCar[playerid] = GetPlayerVehicleID(playerid);
+	if(RepairCar[playerid] == INVALID_VEHICLE_ID || !IsPlayerInAnyVehicle(playerid))
+  	{
+  		return 1;
+  	}
 	SetVehicleHealth(RepairCar[playerid], 1000.0);
 	RepairVehicle(RepairCar[playerid]);
 
@@ -21,6 +25,15 @@ public Naprawa(playerid)
 	PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
 	new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid)));
 	cena = floatround((cena/100) * 25, floatround_round);
+	if(RepairPrice[playerid]+cena > kaska[playerid])
+	{
+		sendTipMessage(playerid, "Nie staæ ciê na naprawê wozu");
+		sendTipMessage(RepairOffer[playerid], "Tej osoby nie staæ na naprawê wozu");
+		RepairOffer[playerid] = 999;
+    	RepairPrice[playerid] = 0;
+		Naprawiasie[playerid] = 0;
+		return 0;
+	}
 	format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d(+$%d) przez %s.",RepairPrice[playerid],cena,giveplayer);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	format(string, sizeof(string), "* Naprawi³eœ pojazd %s, otrzymujesz $%d.",giveplayer,RepairPrice[playerid]);
@@ -39,7 +52,8 @@ public Naprawa(playerid)
     else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
     { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
     ZabierzKase(playerid, RepairPrice[playerid]);
-    DajKase(playerid, -cena);
+    //DajKase(playerid, -cena);
+    ZabierzKase(playerid, cena);
     DajKase(RepairOffer[playerid], RepairPrice[playerid]);
     RepairOffer[playerid] = 999;
     RepairPrice[playerid] = 0;
@@ -2217,10 +2231,11 @@ public JednaSekundaTimer()
 					{
 						new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(i)));
 				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", cena);
-				        DajKase(i, -cena);
+				        //DajKase(i, -cena);
+				        ZabierzKase(i, cena);
 						RepairVehicle(vehicleid);
 						naprawiony[i] = 1;
-						SetTimerEx("Naprawianie",60000,0,"d",i);
+						SetTimerEx("Naprawianie",10000,0,"d",i);
 					}
 				}
 			}

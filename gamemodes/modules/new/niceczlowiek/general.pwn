@@ -110,8 +110,12 @@ stock showTimedMsgBox(playerid, delay, text[]) {
 
 
 stock przeliczBogactwo(vehModel) {
-	new cena = VehiclePrice[vehModel-400];
-	return (floatround(((cena/1000) * 1), floatround_round));
+	if(vehModel >= 400 && vehModel <= 611)
+	{
+		new cena = VehiclePrice[vehModel-400];
+		return (floatround(((cena/100) * 1), floatround_round));
+	}
+	return 0;
 }
 
 

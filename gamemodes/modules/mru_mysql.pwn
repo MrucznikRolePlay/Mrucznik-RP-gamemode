@@ -713,7 +713,7 @@ MruMySQL_LoadAccess(playerid)
     {
         ACCESS[playerid] = mysql_fetch_int();
         OLD_ACCESS[playerid] = ACCESS[playerid];
-        printf("(PERM) -> Player %d (%d) access flags is %b", playerid, PlayerInfo[playerid][pUID], ACCESS[playerid]);
+        printf("(PERM) -> Player %d (%d) access flags: %b", playerid, PlayerInfo[playerid][pUID], ACCESS[playerid]);
     }
     mysql_free_result();
     return 1;
@@ -752,6 +752,7 @@ stock MruMySQL_ReturnPassword(nick[])
 	new string[128], key[64];
 	
 	format(string, sizeof(string), "SELECT `Key` FROM `mru_konta` WHERE `Nick` = '%s'", nick);
+
 	mysql_query(string);
 	mysql_store_result();
 	

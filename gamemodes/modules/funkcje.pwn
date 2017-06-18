@@ -29,6 +29,15 @@ stock pusteZgloszenia() {
 		strmid(Zgloszenie[i][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
 		strmid(Zgloszenie[i][zgloszenie_tresc], "Brak", 0, 4, 70);
 	}
+	for(new i = 0, j=OSTATNIE_ZGLOSZENIASASP; i<j; i++) {
+		new Hour, Minute;
+		gettime(Hour, Minute);
+		new string[36];
+		format(string, sizeof(string), "%02d:%02d",  Hour, Minute);
+		strmid(ZgloszenieSasp[i][zgloszenie_kiedy], string, 0, sizeof(string), 36);
+		strmid(ZgloszenieSasp[i][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
+		strmid(ZgloszenieSasp[i][zgloszenie_tresc], "Brak", 0, 4, 70);
+	}
 }
 stock getWolneZgloszenie() {
 	if(ilosczgloszen == OSTATNIE_ZGLOSZENIA) {
@@ -66,6 +75,7 @@ sendErrorMessage(id, string:msg[]) {
 stock GetMajatek(playerid)
 {
 	new vehvalues;
+	printf("[1/2] Getujemy majatek %d", playerid);
 	for(new i=0;i<MAX_CAR_SLOT;i++)
     {
 		new car_id = PlayerInfo[playerid][pCars][i];
@@ -74,6 +84,7 @@ stock GetMajatek(playerid)
             vehvalues += VehiclePrice[CarData[car_id][c_Model]];
         }
     }
+    printf("[1/2] Wygetowany majatek %d", playerid);
 	return kaska[playerid]+PlayerInfo[playerid][pAccount]+vehvalues+Dom[PlayerInfo[playerid][pDom]][hCena];
 }
 

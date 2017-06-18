@@ -31,6 +31,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	
 	//2.5.8
 	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	//2.5.2
 	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
@@ -3010,11 +3011,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid, 0);
 						TogglePlayerControllable(bijep[playerid], 1);
 						PlayerCuffed[playerid] = 3;
-						PlayerCuffedTime[playerid] = 120;
+						PlayerCuffedTime[playerid] = 45;
 						pobity[playerid] = 1;
 						PlayerInfo[playerid][pMuted] = 1;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 120 sekund");
-						SetTimerEx("pobito",120000,0,"d",bijep[playerid]);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
+						SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
 						pobilem[bijep[playerid]] = 1;
 						PlayerFixRadio(playerid);
 						PlayerFixRadio(bijep[playerid]);
@@ -3047,11 +3048,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					TogglePlayerControllable(playerid, 0);
 					TogglePlayerControllable(bijep[playerid], 1);
 					PlayerCuffed[playerid] = 3;
-					PlayerCuffedTime[playerid] = 120;
+					PlayerCuffedTime[playerid] = 45;
 					pobity[playerid] = 1;
 					PlayerInfo[playerid][pMuted] = 1;
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 120 sekund");
-					SetTimerEx("pobito",120000,0,"d",bijep[playerid]);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
+					SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
 					pobilem[bijep[playerid]] = 1;
 					PlayerFixRadio(playerid);
 					PlayerFixRadio(bijep[playerid]);
@@ -3085,11 +3086,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				TogglePlayerControllable(playerid, 0);
 				TogglePlayerControllable(bijep[playerid], 1);
 				PlayerCuffed[playerid] = 3;
-				PlayerCuffedTime[playerid] = 120;
+				PlayerCuffedTime[playerid] = 45;
 				pobity[playerid] = 1;
 				PlayerInfo[playerid][pMuted] = 1;
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 120 sekund");
-				SetTimerEx("pobito",120000,0,"d",bijep[playerid]);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
+				SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
 				pobilem[bijep[playerid]] = 1;
 				PlayerFixRadio(playerid);
 				PlayerFixRadio(bijep[playerid]);
@@ -5923,22 +5924,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         else if(dialogid == D_AUTO_REJESTRACJA)
     	{
-    	new lUID = IloscAut[playerid];
-        if(!response) return cmd_car(playerid);
-        if(strlen(inputtext) < 1 || strlen(inputtext) > 5)
-        {
-            cmd_car(playerid);
-            SendClientMessage(playerid, COLOR_GRAD1, "Nieodpowiednia iloœæ znaków.");
-            return 1;
-        }
-        else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
-		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' '))
-				continue;
-			else return SendClientMessage(playerid, COLOR_GRAD1, "U¿y³eœ nieodpowiednich znaków rejestracji (tylko litery i cyfry).");
-		}
-        CarData[lUID][c_Rejestracja] = strval(inputtext);
-        SendClientMessage(playerid, 0xFFC0CB, "Tablica zostanie zmieniona po respawnie.");
-        return 1;
+	    	new lUID = IloscAut[playerid];
+	        if(!response) return cmd_car(playerid);
+	        if(strlen(inputtext) < 1 || strlen(inputtext) > 5)
+	        {
+	            cmd_car(playerid);
+	            SendClientMessage(playerid, COLOR_GRAD1, "Nieodpowiednia iloœæ znaków.");
+	            return 1;
+	        }
+	        else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
+			    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' '))
+					continue;
+				else return SendClientMessage(playerid, COLOR_GRAD1, "U¿y³eœ nieodpowiednich znaków rejestracji (tylko litery i cyfry).");
+			}
+	        CarData[lUID][c_Rejestracja] = strval(inputtext);
+	        SendClientMessage(playerid, 0xFFC0CB, "Tablica zostanie zmieniona po respawnie.");
+	        return 1;
 		}
 		if(dialogid == 440)//SYSTEM AUT - kategorie
 		{
@@ -9190,10 +9191,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    if(response)
 		    {
 		        new dom = PlayerInfo[playerid][pDom];
-		        if(strlen(inputtext) >= 1 || strlen(inputtext) <= 1000)
+		        if(strlen(inputtext) >= 1 || strlen(inputtext) <= 128)
 		        {
 		            new DM[128];
 	                format(DM, sizeof(DM), "%s", inputtext);
+	                mysql_real_escape_string(DM, DM);
 		            Dom[dom][hKomunikatWynajmu] = DM;
 				    ZapiszDom(dom);
 				    SendClientMessage(playerid, COLOR_P@, "Komunikat wynajmu to teraz:");
@@ -9752,6 +9754,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	             	new kod[64];
 	                new kodplik[20];
 	                format(kodplik, sizeof(kodplik), "%s", inputtext);
+	                mysql_real_escape_string(kodplik, kodplik);
 					Dom[PlayerInfo[playerid][pDom]][hKodSejf] = kodplik;
 					ZapiszDom(PlayerInfo[playerid][pDom]);
 					format(kod, sizeof(kod), "Kod do sejfu to teraz: %s", inputtext);
@@ -15950,7 +15953,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         SendClientMessage(playerid, COLOR_YELLOW, str);
 
         return 1;
-    }
+    }    
 	return 0;
 }
 //ondialogresponse koniec

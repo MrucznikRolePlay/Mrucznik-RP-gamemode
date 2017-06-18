@@ -55,14 +55,16 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <ACSBM>
 #include <timestamp.inc>
 #define AC_MAX_CONNECTS_FROM_IP		5
-#include <nex-ac>						// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include "../pawno/include/systempozarow" //System Po¿arów v0.1
+#include <nex-ac>						     // By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include "../pawno/include/systempozarow"   //System Po¿arów v0.1
+
+#include "modules\new\niceczlowiek\dynamicgui.pwn"
 
 //YSI po crashDetect
 #include <crashdetect>                  // By Zeex, 4.15.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
 #include <code-parse.inc>    
-#include <YSI\YSI\y_inline>
-#include <YSI\YSI\y_dialog>
+/*#include <YSI\YSI\y_inline>
+#include <YSI\YSI\y_dialog> */ // ¿egnaj YSI dobry druchu :( ale to nie na te lata...
 
 //-------<[ Pluginy ]>-------
 #include <mapandreas>
@@ -74,7 +76,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 
-#define VERSION "v2.5.81"
+#define VERSION "v2.5.82"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
@@ -145,8 +147,8 @@ main()
 #include "modules/timery.pwn"
 
 //Obiekty:
-#include "modules/obiekty/stare_obiekty.pwn"
-#include "modules/obiekty/nowe_obiekty.pwn"
+#include "modules/obiekty/include/stare_obiekty.pwn"
+#include "modules/obiekty/include/nowe_obiekty.pwn"
 
 //Samochody/Pickupy/3DTexty:
 #include "modules/pickupy.pwn"
@@ -155,6 +157,7 @@ main()
 
 #include "modules/komendy.pwn"
 #include "modules/new/niceczlowiek/cmd.pwn"
+#include "modules/new/niceczlowiek/noysi.pwn"
 
 public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
@@ -635,7 +638,7 @@ public OnEnterExitModShop(playerid, enterexit, interiorid)
     {
         new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid)));
         sendTipMessageFormat(playerid, "Zap³aci³eœ $%d za wizytê w warsztacie", cena);
-        DajKase(playerid, -cena);
+        ZabierzKase(playerid, cena);
 
         if(GetPlayerVehicleID(playerid) != 0)
             CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
@@ -865,7 +868,7 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-	if(pobity[playerid] == 1 || PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
+	if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0) || zakuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
     	PlayerInfo[playerid][pJailed] = 10;
 	}
@@ -912,23 +915,10 @@ public OnPlayerDisconnect(playerid, reason)
     } */
     if(GetPVarInt(playerid, "patrol") != 0) {
         new patrol = GetPVarInt(playerid, "patrol-id");
-        if(PatrolInfo[patrol][patroluje][1] != INVALID_PLAYER_ID) {
-            // patrol z kims
-            if(PatrolInfo[patrol][patroluje][1] == playerid) {
-                // lider patrolu
-                cmd_patrol(PatrolInfo[patrol][patroluje][0], "stop");
-                cmd_patrol(PatrolInfo[patrol][patroluje][1], "stop");
-            } else {
-                // nie lider
-                cmd_patrol(PatrolInfo[patrol][patroluje][1], "stop");
-                cmd_patrol(PatrolInfo[patrol][patroluje][0], "stop");
-            }
-            sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
-            sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
-        } else {
-            // samemu
-            cmd_patrol(playerid, "stop");
-        }
+        cmd_patrol(PatrolInfo[patrol][patroluje][0], "stop");
+        cmd_patrol(PatrolInfo[patrol][patroluje][1], "stop");
+        sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+        sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
     }
     if(TalkingLive[playerid] != INVALID_PLAYER_ID)
     {
@@ -1250,6 +1240,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 		gPlayerSpawned[playerid] = 0;
 		PlayerInfo[playerid][pLocal] = 255;
 		PlayerInfo[playerid][pDeaths] ++;
+
+        // usun to potem
+        format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] w jakiœ sposób", killername, killerid, playername, playerid);
+        DeWu(string, 1);
 
 
 		//-------<[  Antyczity  ]>---------
@@ -4046,7 +4040,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 			}
 			else
 			{
-				SendAdminMessage(COLOR_LIGHTBLUE, "Witaj, Rkornisto");
+				SendClientMessage(player, COLOR_LIGHTBLUE, "Witaj, Rkornisto");
 			}
         }
     }
@@ -4097,27 +4091,6 @@ public OnPlayerExitedMenu(playerid)
 
 public OnPlayerStateChange(playerid, newstate, oldstate)
 {
-	#if DEBUG == 2
-		if(newstate == PLAYER_STATE_DRIVER)
-		{
-			printf("%s[%d] OnPlayerStateChange - newstate: %d oldstate: %d", GetNick(playerid), playerid, newstate, oldstate);
-			new koxv = GetPlayerVehicleID(playerid), Float:koxhp, Float:x, Float:y, Float:z, Float:xa;
-			GetVehicleHealth(koxv, koxhp);
-			GetVehicleZAngle(koxv, xa);
-			GetVehiclePos(koxv, x, y, z);
-			printf("Pojazd: %d | Model pojazdu: %d | HP Pojazdu: %f", koxv, GetVehicleModel(koxv), koxhp);
-			printf("Pozycja: x: %f y: %f z: %f", x, y, z);
-			printf("Rotacja: %f", xa);
-			if(x >= 20000.0 || x <= -20000.0 || y >= 20000.0 || y <= -20000.0 || z >= 20000.0 || z <= -20000.0)
-			{
-				new string[256];
-				SetVehiclePos(koxv, 0.0, 0.0, 0.0);
-				Kick(playerid);
-				format(string, sizeof(string), "Pozycja: x: %f y: %f z: %f\nRotacja: %f", x, y, z, xa);
-				VehicleErrorLog(string);
-			}
-		}
-	#endif
 	new string[256];
     //---------------------------------------------- Anti Cheat ------------------------------------//
 
@@ -4914,6 +4887,9 @@ public OnGameModeInit()
     TJD_Load();
     Car_Load(); //Wszystkie pojazdy MySQL
 
+    //noYsi
+    LoadPrzewinienia();
+
     new string[MAX_PLAYER_NAME];
     new string1[MAX_PLAYER_NAME];
 	for(new c=0;c<CAR_AMOUNT;c++)
@@ -5612,6 +5588,7 @@ OnPlayerLogin(playerid, password[])
 	else
 	{//z³e has³o
 		SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Z³e has³o.");
+        
 		format(string, sizeof(string), "Nick %s jest zarejestrowany.\nZaloguj siê wpisuj¹c w okienko poni¿ej has³o.\nJe¿li nie znasz has³a do tego konta, wejdŸ pod innym nickiem", nick);
 		ShowPlayerDialogEx(playerid, 230, DIALOG_STYLE_PASSWORD, "Logowanie", string, "Zaloguj", "WyjdŸ");
 		gPlayerLogTries[playerid] += 1;
@@ -7044,6 +7021,7 @@ public OnPlayerText(playerid, text[])
                 SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem. Proszê powtórzyæ ((max 75 znaków))");
                 return 0;
             }
+            mysql_real_escape_string(text, text);
 			//strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
 			new id = getWolneZgloszenie();
             new Hour, Minute;
@@ -7075,6 +7053,7 @@ public OnPlayerText(playerid, text[])
             }
             //strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
             new id = getWolneZgloszenieSasp();
+            mysql_real_escape_string(text, text);
             new Hour, Minute;
             gettime(Hour, Minute);
             new datapowod[160];

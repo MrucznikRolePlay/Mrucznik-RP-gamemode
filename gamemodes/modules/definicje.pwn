@@ -2,7 +2,7 @@
 
 #pragma tabsize 0 // <------------------------------------------
 
-#define DEBUG 2
+#define DEBUG 1
 
 
 
