@@ -67,7 +67,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <YSI\YSI\y_dialog> */ // ¿egnaj YSI dobry druchu :( ale to nie na te lata...
 
 //-------<[ Pluginy ]>-------
-#include <mapandreas>
+//#include <mapandreas>                 nie potrzeba i tak tego
 #include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
 #define REGEX_ON
 #if defined REGEX_ON

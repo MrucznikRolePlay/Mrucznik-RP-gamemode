@@ -110,4 +110,16 @@ public MRP_UpdateAttachedItem(playerid, model, Float:x, Float:y, Float:z, Float:
     mysql_query(str);
 }
 
+IsAAdministrator(playerid)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(PlayerInfo[playerid][pAdmin] > 0)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 //END
