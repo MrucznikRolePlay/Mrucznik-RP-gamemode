@@ -147,8 +147,8 @@ main()
 #include "modules/timery.pwn"
 
 //Obiekty:
-#include "modules/obiekty/include/stare_obiekty.pwn"
-#include "modules/obiekty/include/nowe_obiekty.pwn"
+#include "modules/obiekty/stare_obiekty.pwn"
+#include "modules/obiekty/nowe_obiekty.pwn"
 
 //Samochody/Pickupy/3DTexty:
 #include "modules/pickupy.pwn"
