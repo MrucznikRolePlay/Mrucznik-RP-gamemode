@@ -17,6 +17,8 @@ stock saveLegale(playerid) {
 new scm_buf[144];
 #define sendTipMessageFormat(%0,%1,%2) \
 	(format(scm_buf, sizeof scm_buf, %1,%2), sendTipMessage(%0,scm_buf))
+#define sendTipMessageFormatEx(%0,%1,%2,%3) \
+	(format(scm_buf, sizeof scm_buf, %2,%3), sendTipMessageEx(%0,%1,scm_buf))	
 stock pusteZgloszenia() {
 	for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
 		new Hour, Minute;
@@ -33,6 +35,12 @@ stock getWolneZgloszenie() {
 		ilosczgloszen = 0;
 	}
 	return ilosczgloszen++;
+}
+stock getWolneZgloszenieSasp() {
+	if(ilosczgloszenSasp == OSTATNIE_ZGLOSZENIASASP) {
+		ilosczgloszenSasp = 0;
+	}
+	return ilosczgloszenSasp++;
 }
 sendNotification(id, title[], text[], time) {
 	CallRemoteFunction("notify", "dssd", id, title, text, time);
@@ -3593,6 +3601,13 @@ IsATrain(carid)
     {
         if(CarData[lID][c_Owner] == FRAC_KT && GetVehicleModel(carid) == 538) return 1;
     }
+	return 0;
+}
+
+IsAAdministrator(playerid)
+{
+	if(PlayerInfo[playerid][pAdmin] > 0)
+		return 1;
 	return 0;
 }
 

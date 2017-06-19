@@ -1,5 +1,8 @@
 //zmienne.pwn
 
+new CzasInformacyjnego[MAX_PLAYERS];
+new bramki_sasd[18];
+new bool:bramki_sasd_state[18];
 
 //FishGood
 new FishGood[MAX_PLAYERS];
@@ -35,7 +38,8 @@ new playerWeapons[MAX_PLAYERS][eLegalWpns];
 
 new Zgloszenie[OSTATNIE_ZGLOSZENIA][hqZgloszenia];
 new ilosczgloszen = 0;
-
+new ilosczgloszenSasp = 0;
+new ZgloszenieSasp[OSTATNIE_ZGLOSZENIASASP][hqZgloszeniaSasp];
 
 new pFindZone[MAX_PLAYERS];
 
@@ -790,10 +794,6 @@ new BramaHAS = 1;
 new BrF[8];
 new BrFS[8];
 
-new BramaNG;
-new BramaNGS = 0;
-new BramaNG2;
-new BramaNG2S = 0;
 //nowe bramy
 new BramaWDol;
 new BramaWDolS = 1;
