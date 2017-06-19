@@ -1,1 +1,0 @@
-# Skrypt do testowania obiektów

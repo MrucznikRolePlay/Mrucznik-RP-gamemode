@@ -1,1 +1,0 @@
-# Obiekty obemujące całe San Andreas
