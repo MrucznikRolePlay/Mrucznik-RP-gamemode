@@ -27,6 +27,78 @@ SSCANF:fix(string[])
 }
 
 
+#if DEBUG == 1
+CMD:pakietmrucznika(playerid)
+{
+
+    if(gettime() < GetPVarInt(playerid, "pakietl")) return sendTipMessage(playerid, "{dafc10}Mo¿esz u¿ywaæ tego co 60s");
+
+    PlayerInfo[playerid][pLevel] = 22;
+    PlayerInfo[playerid][pDowod] = 1;
+    PlayerInfo[playerid][pCarLic] = 1;
+    PlayerInfo[playerid][pFlyLic] = 1;
+    PlayerInfo[playerid][pBoatLic] = 1;
+    PlayerInfo[playerid][pFishLic] = 1;
+    PlayerInfo[playerid][pGunLic] = 1;
+    PlayerInfo[playerid][pCarSlots] = 10;
+    PlayerInfo[playerid][pConnectTime] = 2137;
+
+    DajKase(playerid, 200000000);
+
+    sendTipMessage(playerid, "[Dostajesz dowod, prawko, licke na latanie, lodke, rybolostwo i pozwolenie na bron]");
+    sendTipMessage(playerid, "[Dostajesz 10 slotow na wozy oraz 200kk, jak wydasz kase uzyj ponownie zeby dostac znowu kase]");
+
+    sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "[Nie spam t¹ komend¹ inaczej dostaniesz bana]");
+
+    SetPVarInt(playerid, "pakietl", gettime() + 60);
+
+    return 1;
+}
+#endif
+
+#if DEBUG == 1
+CMD:dosalonu(playerid)
+{
+    if(gettime() < GetPVarInt(playerid, "salonl")) return sendTipMessage(playerid, "{dafc10}TP pod salon co 3minuty");
+
+    SetPlayerInterior(playerid, 0);
+    SetPlayerVirtualWorld(playerid, 0);
+
+    sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
+
+    SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
+
+    SetPVarInt(playerid, "salonl", gettime() + 180);
+
+    return 1;
+}
+#endif
+
+#if DEBUG == 1
+CMD:skille(playerid)
+{
+    PlayerInfo[playerid][pDetSkill] = 5000;
+    PlayerInfo[playerid][pLawSkill] = 5000;
+    PlayerInfo[playerid][pMechSkill] = 5000;
+    PlayerInfo[playerid][pNewsSkill] = 5000;
+    PlayerInfo[playerid][pJackSkill] = 5000;
+    PlayerInfo[playerid][pDrugsSkill] = 5000;
+    PlayerInfo[playerid][pSexSkill] = 5000;
+    PlayerInfo[playerid][pBoxSkill] = 5000;
+    PlayerInfo[playerid][pGunSkill] = 5000;
+    PlayerInfo[playerid][pFishSkill] = 5000;
+    PlayerInfo[playerid][pFishSkill] = 5000;
+    PlayerInfo[playerid][pTruckSkill] = 5000;
+
+    PlayerInfo[playerid][pMats] = 50000;
+
+    sendTipMessage(playerid, "[Dosta³eœ skille 5 w ka¿dej dziedzinie i 50000 mats]");
+
+    return 1;
+}
+#endif
+
+
 //PADZIOCH
 /*CMD:lina(playerid, cmdtext[])
 {
@@ -884,7 +956,7 @@ CMD:pomoc2(playerid, params[])
                 Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2_POWROT, DIALOG_STYLE_LIST, "Podrêcznik", komendy, "Ok", "Wróæ");
             }
             default: {
-                return Dialog_ShowCallback(playerid, using inline DIALOG_POMOC2, DIALOG_STYLE_LIST, "Komendy", string, "Ok", "Anuluj");
+                return Dialog_1(playerid, using inline DIALOG_POMOC2, DIALOG_STYLE_LIST, "Komendy", string, "Ok", "Anuluj");
             }
         } 
     }
@@ -6124,6 +6196,7 @@ CMD:brama(playerid)
 				}
 			}
 		}
+
 		//old komi
 		if(PlayerInfo[playerid][pAdmin] >= 1000 || IsACop(playerid) || IsAHA(playerid))
 		{
@@ -9605,7 +9678,7 @@ CMD:skret(playerid)
 
 CMD:pobij(playerid, params[])
 {
-	/*new string[128];
+	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
@@ -9666,7 +9739,7 @@ CMD:pobij(playerid, params[])
 										return 1;
 									}
 					       			// {
-					       			new rand = random(100);
+					       			new rand = random(15);
 			            			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									GetPlayerName(playerid, sendername, sizeof(sendername));
 			                        // }
@@ -9712,9 +9785,9 @@ CMD:pobij(playerid, params[])
 										PlayerPlaySound(playa, 1130, 0.0, 0.0, 0.0);
 										TogglePlayerControllable(playerid, 0);
 										PlayerCuffed[playerid] = 2;
-										PlayerCuffedTime[playerid] = 120;
+										PlayerCuffedTime[playerid] = 45;
 										pobity[playerid] = 1;
-										SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 120 sekund");
+										SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
 										SetTimerEx("pobito",000,0,"d",playerid);
 										pobilem[playerid] = 1;
 									}
@@ -9747,8 +9820,7 @@ CMD:pobij(playerid, params[])
 			sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 			return 1;
 		}
-	} */
-    sendTipMessage(playerid, "Komenda dezaktywowana od wersji 2.5.6");
+	} 
 	return 1;
 }
 
@@ -15481,7 +15553,7 @@ CMD:og(playerid, params[])
                 return 1;
             }
             DajKase(playerid, - payout);
-            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d ((%d))",  params,PlayerInfo[playerid][pPnumber], playerid);
+            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d ¦ %s",  params,PlayerInfo[playerid][pPnumber], GetNick(playerid, true));
             OOCNews(TEAM_GROVE_COLOR,string);
             format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
             GameTextForPlayer(playerid, string, 5000, 5);
@@ -23724,7 +23796,7 @@ CMD:dajlideraorg(playerid, params[])
     if(id != -1)
     {
 		new orgUID = orgID(family);
-		if(orgUID = 0xFFFF)
+		if(orgUID != 0xFFFF)
 		{
 			format(str, sizeof(str), "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNick(playerid), OrgInfo[orgUID][o_Name], family);
 			SendClientMessage(id, COLOR_LIGHTBLUE, str);
@@ -25121,7 +25193,7 @@ CMD:zmienhp(playerid, params[])
 					{
 					    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-						printf("AdmCmd: %s da³ %d hp %s", sendername, health,  giveplayer);
+						printf("SETHP: AdmCmd: %s da³ %d hp %s", sendername, health,  giveplayer);
 					    SetVehicleHealth(GetPlayerVehicleID(playa), health);
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
 					}
@@ -25220,10 +25292,34 @@ CMD:fixveh(playerid)
 		    SetVehicleHealth(GetPlayerVehicleID(playerid), 1000.0);
 		    RepairVehicle(GetPlayerVehicleID(playerid));
             CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
-		    sendTipMessageEx(playerid, COLOR_GREY, "Pojazd naprawiony !");
 		}
 	}
 	return 1;
+}
+
+CMD:fixallveh(playerid)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(PlayerInfo[playerid][pAdmin] < 1000)
+        {
+            noAccessMessage(playerid);
+            return 1;
+        }
+        foreach(Player, i)
+        {
+            if(IsPlayerInAnyVehicle(playerid))
+            {
+                SetVehicleHealth(GetPlayerVehicleID(playerid), 1000.0);
+                RepairVehicle(GetPlayerVehicleID(playerid));
+                CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
+            }
+        }
+        new string[128];
+        format(string, sizeof(string), "Admin %s naprawi³ wszystkim graczom pojazdy", GetNick(playerid, true));
+        SendClientMessageToAll(COLOR_LIGHTBLUE, string);
+    }
+    return 1;
 }
 
 CMD:weather(playerid, params[]) return cmd_pogoda(playerid, params);
@@ -26190,367 +26286,7 @@ CMD:muzyczka(playerid, params[])
     PlayerPlaySound(playerid, muzyczka, 0.0, 0.0, 0.0);
 	return 1;
 }
-CMD:zmiany(playerid, params[]) return cmd_changelog(playerid, params);
-CMD:changelog(playerid, params[])
-{
-	new wersja[8];
-	sscanf(params, "S("VERSION")[8]", wersja);
-    if(strfind(wersja, "v", true) != -1) strdel(wersja, 0, 1);
 
-	if(strcmp(wersja,"2.4.810",true) == 0 || strcmp(wersja,"2.4.8",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Zablokowano wjazd do fabryki broni. Poprawiono jej wnêtrze.");
-		SendClientMessage(playerid,COLOR_WHITE,"Nowe Verona Mall (z pomieszczeniami do zagospodarowania)");
-		SendClientMessage(playerid,COLOR_WHITE,"Zmodyfikowany dwa sultany LSPD, tak aby bardziej przypomina³y radiolki");
-		SendClientMessage(playerid,COLOR_WHITE,"Oznakowano dwa Sultany FBI");
-		SendClientMessage(playerid,COLOR_WHITE,"Osoba zakuta w kajdanki ma je na rêkach");
-		SendClientMessage(playerid,COLOR_WHITE,"Ruchomy diabelski m³yn (by Pablo_Borsellino)");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano konfesjona³y (by abram01)");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano koguty dla taxówek specjalnych");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Modyfikacje komend   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Mo¿liwoœc stosowania komend: /fed /su i /tazer wobec SP nie bêd¹cych na s³u¿bie");
-		SendClientMessage(playerid,COLOR_WHITE,"Zmiana komunikatów dot. s³u¿by SP wyœwietlanej w /odznaka");
-		SendClientMessage(playerid,COLOR_WHITE,"Osoby z WL nie mog¹ braæ /duty");
-		SendClientMessage(playerid,COLOR_WHITE,"W komendzie /mandat kwoty pieniê¿ne zast¹piono stawkami dziennymi");
-		SendClientMessage(playerid,COLOR_WHITE,"Po w³¹czeniu czatu /n wyœwietlany jest samouczek na temat zachowania siê na tym czacie");
-		SendClientMessage(playerid,COLOR_WHITE,"W komendach z pieniêdzmi mo¿emy wpisywaæ u¿ywaæ skrótu 'k', np. /przelew 45 60kk = /przelew 45 60000000 ");
-		SendClientMessage(playerid,COLOR_WHITE,"Broñ u dilera mog¹ kupiæ osoby z co najmniej 2lvl i licencj¹ na broñ.");
-		SendClientMessage(playerid,COLOR_WHITE,"Sd pistol to broñ od 2 skilla dilera broni a pistolety (z mo¿liwoœci¹ kupna bez licencji) od 1 skilla");
-		SendClientMessage(playerid,COLOR_WHITE,"Komenda /take dzia³a od 1 rangi");
-		SendClientMessage(playerid,COLOR_WHITE,"Wymóg posiadania s³u¿by dla komend: /ob , /kajdanki");
-		SendClientMessage(playerid,COLOR_WHITE,"Zmiana nazw niektórych rang na czacie /n");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   B³êdy i niedoróbki   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêto b³¹d z niewidocznymi powodami kar.");
-		SendClientMessage(playerid,COLOR_WHITE,"Poprawiono niedoróbki zwi¹zane z nowym komi.");
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêto czystkê ballas");
-		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono licznik zabiæ z /stats");
-		SendClientMessage(playerid,COLOR_WHITE,"Poprawiono warning o Drive-By");
-		SendClientMessage(playerid,COLOR_WHITE,"Brak komunikatu o wpisanie /spec off przy wpisaniu pustego /spec");
-		SendClientMessage(playerid,COLOR_WHITE,"Brak komunikatu o wpisanie /sethp [id] [ilosc] przy wpisaniu pustego /sethp [id]");
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêto podwójne 'dalej' w samouczku");
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêto ma³e bugi i b³êdy.");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Personalizacja frakcji   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Zmiana kobiecego skina SAN(9) z ID 148 na 141");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Skryptowe   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Uporz¹dkowano czytelnoœæ i wydajnoœæ kodu w wybranych callback'ach");
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêto czêœc zbêdnych zmiennych i funkcji");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Systemy   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Aktualizator hase³: co 6 miesiêcy system bêdzie prosi³ gracza o zmianê has³a w celu poprawy bezpieczeñstwa kont");
-		SendClientMessage(playerid,COLOR_WHITE,"Podwy¿szenie zarobków w pracy kierowcy autobusu");
-		SendClientMessage(playerid,COLOR_WHITE,"Ulepszono zamykanie drzwi, zmodyfikowano trasê lini nr 72");
-		SendClientMessage(playerid,COLOR_WHITE,"Nieznaczna zmiana miejsca dostarczania materia³ów");
-		SendClientMessage(playerid,COLOR_WHITE,"Zwiêkszenie cen materia³ów (500$/1 paczka) i benzyny (40/1%%)");
-		SendClientMessage(playerid,COLOR_WHITE,"Przebudowano system nadawania WL za morderstwo");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Nowe komendy   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"/setint - ustawia graczowi interior (1 @lvl)");
-		SendClientMessage(playerid,COLOR_WHITE,"/setvw - ustawia graczowi vw (1@)");
-		SendClientMessage(playerid,COLOR_WHITE,"/clearwlall - zeruje wszystkim graczom WL (1@)");
-		SendClientMessage(playerid,COLOR_WHITE,"/getint - pobiera interior gracza");
-		SendClientMessage(playerid,COLOR_WHITE,"/getvw - pobiera vw gracza");
-		SendClientMessage(playerid,COLOR_WHITE,"/changelog [wersja] - wyœwietla zmiany wprowadzone w ostatniej aktualizacji lub podanej wersji");
-		SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.4.810 <<<_______________________|");
-	}
-	else if(strcmp(wersja,"2.4.811",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   B³êdy i niedoróbki   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Skiny WPS (206 202 133 291) nie s¹ ju¿ dostêpne dla osób spoza tej frakcji");
-		SendClientMessage(playerid,COLOR_WHITE,"Wyœwietlanie nazwy WPS i ich rang w /stats");
-		SendClientMessage(playerid,COLOR_WHITE,"KT po zalogowaniu i œmierci otrzymuj¹ skin i kolor cywila");
-		SendClientMessage(playerid,COLOR_WHITE,"Frakcja WPS mo¿e ju¿ korzystaæ z komend przestêpczych");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano interior Bonehead Club wraz z bramami");
-		SendClientMessage(playerid,COLOR_WHITE,"Zoptymalizowano obiety");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Modyfikacje komend   ---------");
-		//SendClientMessage(playerid,COLOR_WHITE,"Zmodyfikowano komendê /w - teraz zbyt d³ugi tekst przenoszony jest do nastêpnego /w");
-		//SendClientMessage(playerid,COLOR_WHITE,"Komenda /podglad nie przywraca podgl¹du po relogu gracza");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano czat /f i /fo dla frakcji WPS");
-		SendClientMessage(playerid,COLOR_WHITE,"Przywrócono czat /fo dla BOR i Urzêdu");
-		SendClientMessage(playerid,COLOR_WHITE,"Patent ¿eglarski mo¿na wydawaæ dopiero od 2 rangi");
-		SendClientMessage(playerid,COLOR_WHITE,"Komenda /omdv i /cmdv jest dostêpna od 1 rangi");
-		SendClientMessage(playerid,COLOR_WHITE,"Prawo jazdy mo¿na teraz wydawaæ od pierwszej rangi");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Inne   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano skin klauna, kurczaka i lidera DMV do wybieralki");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano skin Tempenego dla LSPD");
-		if(PlayerInfo[playerid][pAdmin] == 5000)
-		{
-			SendClientMessage(playerid,COLOR_BLUE,"----------   Skryptowe   ---------");
-			SendClientMessage(playerid,COLOR_WHITE,"Dodano nowe funkcje: AntyReklama(string[]), AntyCzitText(string[])");
-		}
-		SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.4.811 <<<_______________________|");
-	}
-	else if(strcmp(wersja,"2.4.9",true) == 0)
-	{
-		cmd_changelog(playerid, "2.4.811");
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   G³ówne systemy   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Podpiêto mapê pod bazy danych");
-		SendClientMessage(playerid,COLOR_WHITE,"W³¹czono konwersje plików kont na bazy danych");
-		SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.4.9 <<<_______________________|");
-	}
-	else if(strcmp(wersja,"2.4.91",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-		SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Automat do usuwania podwójnych w³ascicieli, kontroli aktywnoœci i bugu z ikonk¹.");
-		//SendClientMessage(playerid,COLOR_WHITE,"Przerobiono system banów na nowy, wydajniejszy i wygodniejszy");
-		//SendClientMessage(playerid,COLOR_WHITE,"Taksometr KT wylicza stawki za kilometr i nie znika (by Kubi)");//NIE DZIA£A
-		//SendClientMessage(playerid,COLOR_WHITE,"Ulepszono pracê ³owcy nagród (poddawanie siê w GUI, automatyczny dobór zleceñ, pogonie i inne)");
-		//SendClientMessage(playerid,COLOR_WHITE,"");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Wybudowano dom przy molo bez ko³a (by Sejciak)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Utworzono ruchom¹ bramê na plac manewrowy(by abram01)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano i opracowano now¹ bazê BOR (by abram01)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Zmieniono bramê NoA (by abram01)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Wstawiono i opracowano nowy interior FBI (by Dywan)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Wnêtrze karetki dostêpne poprzez /wejdzw (by abram01 & Mrucznik)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Wnêtrze Kampinga (model 508 - Journey) dostêpne poprzez /wejdzw (by CrucixTM & Mrucznik)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Zamykane sklepy w Verona Mall (by Kobaltowy Eryk)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Lepiej oznakowano wejœcie do placu manewrowego DMV (by abram01)");
-		SendClientMessage(playerid,COLOR_WHITE,"Znaki drogowe pod DMV (by Dywan)");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Pojazdy   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Zmienione pozycje i kolor pojazdów Vagos");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Znaki TAXI dla heli, sultana i limuzyny KT");//sprawdzone - dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Full tuning dla sultana KT");//sprawdzone - dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Zmiana pojazdów LSPD ID 66(427)/151(482)/281(521) na modele 498/413/528"); //sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Dodanie napisów SWAT dla Boxville'a LSPD (id 66) ");//sprawdzone - dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Niedaleko bazy mechaników znajduje siê Predator LSPD (id 212)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"£odzie YKZ s¹ dostêpne niezale¿nie od posiadanej rangi");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Zmiana pozycji Hummera NG (id 16)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Podmiana pojazdów NG ID 280(539)/23(497)/24(595) na modele 497/548/430");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêcie PCJ-600 FBI (id 142) i zmiana spawnów wybranych pojazdów.");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Podmiana pojazdów FBI ID 141(541)/139(541) na modele 490/482");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Dodanie napisów FBI 'Emergency Support Unit' dla Buritto FBI (id 141)");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Drobne    ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Nowy spawn Vagos");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Za³atano dziurê w bazie HA");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Inny stream w Bonehead Club");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Zmiana nazwy dla przykrywki YKZ");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Ca³kowita zmiana nazwy frakcji z TFaTf na NoA");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Automatyczne wznawianie GUI przy zakupach w 24/7");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêto informacje o posiadaniu pojazdów, przywróceniu broni i kosztach leczenia przy wejœciu na serwer");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Komendy   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Za pomoc¹ /fixr mo¿na naprawiæ bug z dŸwiêkiem helikoptera");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Odpalanie i gaszenie silnika klawiszem Y - {7CFC00}WA¯NE");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Koguty mo¿na w³¹czaæ klawiszem H");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Komenda /kajdanki dzia³a tak¿e dla agentów BOR z 2 rang¹");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Medycy mog¹ teraz aktywowaæ i odbieraæ sygna³ GPS");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Po zmiane nicku wywo³ywany jest kreator postaci umo¿liwiaj¹cy zmianê wieku, pochodzenia i p³ci.");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /taryfikator zawieraj¹ca spis przewinieñ za które mo¿na otrzymaæ mandat");//nie dzia³a przerzucanie dialogów, pomoc prawna crashuje serwer
-		if (PlayerInfo[playerid][pDonateRank] == 3)
-		{
-			SendClientMessage(playerid,COLOR_WHITE,"Mo¿liwoœc zyskania jednej zmiany nicku za pomoca komendy /odejmijzmiane (dla KP lvl 3)");//sprawdzone-dzia³a
-		}
-		SendClientMessage(playerid,COLOR_BLUE,"----------   B³êdy i niedoróbki   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Przywrócono koœció³ i poprawiono napis nad nim.");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono komendê /odznaka dla stra¿y po¿arnej");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Komenda /wezportfel dzia³a poprawnie dla frakcji WPS");//sprawdzone-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono licznik KT.");//chyba-dzia³a
-		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono wyjœcie ze sklepu przy stacji benzynowej");//chyba-dzia³a
-		if (PlayerInfo[playerid][pAdmin] >= 1)
-		{
-			SendClientMessage(playerid,COLOR_BLUE,"----------   Dla adminów   ---------");
-			SendClientMessage(playerid,COLOR_WHITE,"Dopisano wszytkie komendy admina do /ah");//sprawdzone-dzia³a
-			SendClientMessage(playerid,COLOR_WHITE,"Rangi @ z nowy komendami to teraz: 1,5,(7),10,15,20,25,35,50,100,200,1000,2000,5000");//sprawdzone-dzia³a
-			SendClientMessage(playerid,COLOR_WHITE,"Wp³aty na /charity s¹ teraz widoczne dla wszytkich @");//sprawdzone-dzia³a
-			SendClientMessage(playerid,COLOR_WHITE,"Data w pay.log");//sprawdzone-dzia³a
-			SendClientMessage(playerid,COLOR_WHITE,"Dodano komunikat o ZNIWELOWANIU maj¹tku do pay.log");//chyba-dzia³a
-			SendClientMessage(playerid,COLOR_WHITE,"Dodano komunikat o Z£OMOWANIU DOMU z powodu: nieaktywnoœci i podwójnego w³asciciela do pay.log");//chyba-dzia³a
-			SendClientMessage(playerid,COLOR_WHITE,"Po wpisaniu komendy /spec wyœwietla siê dodatkowo level i prawo jazdy gracza (0=brak, 1=posiada)");//sprawdzone-dzia³a
-		}
-		//Dodaj kary w txd by kubi
-		SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja 2.4.91 <<<_______________________|");
-	}
-	else if(strcmp(wersja,"2.4.911",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-		SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Przywrócono system ³owienia ryb oraz gotowania posi³ków (z mapy Godfather)");
-		SendClientMessage(playerid,COLOR_WHITE,"Przeniesiono ca³kowicie stary system kont na nowy");//komenda /zmiennick na standardy mysql
-		SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja 2.4.911 <<<_______________________|");
-	}
-	else if(strcmp(wersja,"2.4.92",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-        SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
-        SendClientMessage(playerid,COLOR_WHITE,"Likwidacja starego systemu pojazdów frakcyjnych (przypisanych na sta³e) wprowadzenie nowego");
-        SendClientMessage(playerid,COLOR_WHITE,"Poprawiono optymalnosæ g³ównych timerów serwera");
-        SendClientMessage(playerid,COLOR_WHITE,"Wprowadzenie banów w MySQL");
-        SendClientMessage(playerid,COLOR_WHITE,"Ogólna poprawa kondycji kont graczy w MySQL");
-        SendClientMessage(playerid,COLOR_WHITE,"System uprawnieñ (do panelu kar i logów oraz do pewnych komend np. /dajzaufanego)");
-        SendClientMessage(playerid,COLOR_WHITE,"Nowy system barierek dla frakcji (/barierka i /barierka usun). Maksymalna ilosæ to 10 na frakcjê!");
-        SendClientMessage(playerid,COLOR_WHITE,"Dynamiczne nazwy rang - mo¿liwosc zmiany rang aktualnie tylko przez te osoby (0Verte, Mrucznik, Kubi)");
-        SendClientMessage(playerid,COLOR_WHITE,"Kierunkowskazy dla pojazdów ko³owych");
-        SendClientMessage(playerid,COLOR_BLUE,"----------    Obiekty   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Biuro ICC (projekt DywaniK)");
-		SendClientMessage(playerid,COLOR_WHITE,"Przebudowa szpitala LSMC (projekt abram01)");
-		SendClientMessage(playerid,COLOR_WHITE,"Stworzenie remizy stra¿ackiej (projekt abram01)");
-        SendClientMessage(playerid,COLOR_WHITE,"Nowa siedziba San News (projekt DywaniK)");
-        SendClientMessage(playerid,COLOR_WHITE,"Nowa baza wojska SFHQ (projekt DywaniK)");
-        SendClientMessage(playerid,COLOR_WHITE,"Poprawiona wersja warsztatów rodziny RSC (14)");
-        SendClientMessage(playerid,COLOR_WHITE,"Nowy bar na Glen Park");
-        SendClientMessage(playerid,COLOR_WHITE,"Vinyl Club interior (projekt Albert i Patryk)");
-        SendClientMessage(playerid,COLOR_WHITE,"Ibiza Club interior");
-        SendClientMessage(playerid,COLOR_WHITE,"Ca³kowicie zmiana bazy KT, nowy wygl¹d z zewn¹trz i nowe biura (projekt Kubi)");
-        SendClientMessage(playerid,COLOR_WHITE,"Nowy interior AT-400 (projekt Kubi)");
-        SendClientMessage(playerid,COLOR_BLUE,"----------   Komendy   ---------");
-        SendClientMessage(playerid,COLOR_WHITE,"Przerobione komendê /spec dla administracji");
-        SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /opis (FINALLY) wiêcej informacji w /opispomoc");
-        SendClientMessage(playerid,COLOR_WHITE,"ICC otrzyma³o komendê na otwieranie drzwi restauracji (/zamek)");
-        SendClientMessage(playerid,COLOR_WHITE,"Modyfikacja /kajdanki dla BOR");
-        SendClientMessage(playerid,COLOR_WHITE,"Modyfikacja /su dla BOR (mog¹ nadaæ tylko pierwszy WL)");
-        SendClientMessage(playerid,COLOR_WHITE,"Dla taksówek: /fare od teraz liczy trasê w kilometrach");
-        SendClientMessage(playerid,COLOR_WHITE,"Przywrócono AT-400 oraz komendy do zarz¹dzania lotniskami i lotami (/lot)");
-        SendClientMessage(playerid,COLOR_BLUE,"----------   Poprawki   ---------");
-        SendClientMessage(playerid,COLOR_WHITE,"Naprawiono b³¹d, gdzie policja mog³a u¿ywaæ /mdc po wyjsciu z interioru");
-        SendClientMessage(playerid,COLOR_WHITE,"Poprawiono komendê /rodziny i /biznesy, wywietlaj¹ teraz prawid³owe informacje");
-        SendClientMessage(playerid,COLOR_WHITE,"Kostka w kasynie zosta³a ca³kowicie zmieniona");
-        SendClientMessage(playerid,COLOR_WHITE,"G³osnik SN ma teraz d³u¿szy link do wpisania");
-        SendClientMessage(playerid,COLOR_BLUE,"----------   Inne   ---------");
-        SendClientMessage(playerid,COLOR_WHITE,"Usuniêto mo¿liwosc teleportacji do wiêzienia stanowego (przez komisariat)");
-        SendClientMessage(playerid,COLOR_WHITE,"Piêkno: Dodano animacje podczas postrza³u w czêsci cia³a");
-        SendClientMessage(playerid,COLOR_WHITE,"Piêkno: Dodano nowy styl TXD dla rozmaitych informacji (np. /togw /togtel)");
-        SendClientMessage(playerid,COLOR_WHITE,"Ballas dosta³o zmianê pojazdów, spawna");
-        SendClientMessage(playerid,COLOR_WHITE,"Frakcja LSFD otrzyma³a w³asny slot 17. Od teraz jest osobn¹ frakcj¹ o czatach radiowych");
-        SendClientMessage(playerid,COLOR_WHITE,"Piêkno: DŸwiêk dzwoni¹cego telefonu oraz wybierania numerów");
-        SendClientMessage(playerid,COLOR_WHITE,"Piêkno: Modernizacja /call 911 - dodano listê GUI i mo¿liwosæ wezwania stra¿y");
-        SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja 2.4.92 <<<_______________________|");
-	}
-    else if(strcmp(wersja,"2.4.93",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-        SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
-        SendClientMessage(playerid,COLOR_WHITE,"Stworzono system stref gangów i wojny gangów. Frakcje takie jak Groove, BallaZ, Nortenos, WPS oraz");
-        SendClientMessage(playerid,COLOR_WHITE,"gangi na slotach rodzin od 5 do 10 maj¹ uprawnienia do podbijania stref. Frakcje w/w maj¹ swoje sta³e");
-        SendClientMessage(playerid,COLOR_WHITE,"strefy kontroli, których nie da siê przej¹æ. Gangi przejmuj¹ teren, gdy maj¹ wystarczaj¹c¹ iloœæ osób");
-        SendClientMessage(playerid,COLOR_WHITE,"w tej samej strefie. Atak rozpoczyna osoba z rang¹ 4 lub wiêksz¹. Warunkiem przejêcia jest równie¿");
-        SendClientMessage(playerid,COLOR_WHITE,"taka sama lub wiêksza iloœæ gangsterów online kontroluj¹cych dan¹ strefê. Strefê przejmuje siê w ci¹gu 15 minut.");
-        SendClientMessage(playerid,COLOR_WHITE,"Podczas ataku, osoby umieraj¹ce otrzymuj¹ BW na 3 minuty, które mo¿e byæ nadane tylko przez gangsterów lub policjê.");
-        SendClientMessage(playerid,COLOR_WHITE,"Strefa zostaje przejêta, gdy ³¹czna iloœæ obroñców w strefie jest mniejsza od iloœci atakuj¹cych.");
-        SendClientMessage(playerid,COLOR_WHITE,"Atak na strefê jest oznaczony na mapie poprzez miganie strefy na kolor czerwony.");
-        SendClientMessage(playerid,COLOR_BLUE,"----------   Komendy   ---------");
-        SendClientMessage(playerid,COLOR_WHITE,"Dla administracji: /unbw oraz /respawncar");
-        SendClientMessage(playerid,COLOR_WHITE,"Dla rodzin: /pr kolor (wymagane do podbojów)");
-        SendClientMessage(playerid,COLOR_WHITE,"/zaznacz - pozwala wybraæ Textdraw (np. do licznika)");
-        SendClientMessage(playerid,COLOR_BLUE,"----------   Inne   ---------");
-        SendClientMessage(playerid,COLOR_WHITE,"Przesuniêto TXD stref gangów");
-        SendClientMessage(playerid,COLOR_WHITE,"Dodano nowy licznik prêdkoœci");
-        SendClientMessage(playerid,COLOR_BLUE,"----------   ZMIANY   ---------");
-        SendClientMessage(playerid,COLOR_WHITE,"29.08 - Naprawa crashu z adresu 0x00756B89");
-        SendClientMessage(playerid,COLOR_WHITE,"30.08 - /vopis, zmiana koloru czatu /zg");
-        SendClientMessage(playerid,COLOR_WHITE,"Ikona w prawym górnym rogu oznacza informacje ze strony serwera, aby zaznaczyæ wpisz (/zaznacz i ESC)");
-    }
-    else if(strcmp(wersja,"2.5.2",true) == 0)
-	{
-        SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-        SendClientMessage(playerid,COLOR_WHITE,"Dodano now¹ frakcjê - SASP (San Andreas State Police).");
-        SendClientMessage(playerid,COLOR_WHITE,"Dodano bramki SASP na autostradach.");
-        SendClientMessage(playerid,COLOR_WHITE,"Nowy interior posterunku BaySide.");
-        SendClientMessage(playerid,COLOR_WHITE,"Nowy wygl¹d komendy /zmienskin dla HA.");
-        SendClientMessage(playerid,COLOR_WHITE,"Nowe miejsce DeMorgan.");
-    }
-	else if(strcmp(wersja,"2.5.6",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   BY niceCzlowiek   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Frakcje porz¹dkowe otrzymuj¹ teraz pieni¹dze do sejfu frakcyjnego za aresztowania, mandaty oraz kaucje.");
-		SendClientMessage(playerid,COLOR_WHITE,"Pozwolenia prawnicze wydaje siê teraz za pomoc¹ /pozwolenie [id], druga osoba musi je akceptowaæ za pomoc¹ /app ");
-		SendClientMessage(playerid,COLOR_WHITE,"Wprowadzono komendê /bwtime, która pozwala administracji ustaliæ czas BW,");
-		SendClientMessage(playerid,COLOR_WHITE,"Wprowadzono komendê /kamizelka, która pozwala policjantom przywdziaæ kamizelkê (obiekt oraz 100% pancerza),");
-		SendClientMessage(playerid,COLOR_WHITE,"Podniesiono skill SDPistol,");
-		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono resetowanie patrolu, gdy jeden z patroluj¹cych wyjdzie z serwera,");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano zawijanie czatu do normalnego czatu, oraz komend: /w /s /k /me /do,");
-		SendClientMessage(playerid,COLOR_WHITE,"Oddzielono anty-spam /report od reszty liczników anty-spamu,");
-		SendClientMessage(playerid,COLOR_WHITE,"W³¹czono BW na ca³e San Andreas,");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano mo¿liwoœæ zmiany muzyki w klubie bonehead");
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêto bug z /tankuj");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano legalnoœæ broni Od teraz, ka¿da zakupiona broñ w gunstore bêdzie w /sb wyœwietla³a siê jako LEGALNA...");
-		SendClientMessage(playerid,COLOR_WHITE,"... a ka¿da broñ zakupiona od mafii bêdzie okreœlona jako Z NIEZNANEGO RÓD£A");
-		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono sloty rodzin oraz odbudowano sejfy frakcyjne");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano system po¿arów by PECET");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /tablet dla org. porz¹dkowych - PECET");
-	}
-	else if(strcmp(wersja,"2.5.7",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"System Po¿arów v0.2");
-		SendClientMessage(playerid,COLOR_WHITE,"Do sejfu LSFD trafia 20k od zgaszonego po¿aru");
-		SendClientMessage(playerid,COLOR_WHITE,"Wyd³u¿ono czas gaszenia po¿arów");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano wiêcej scenariuszy po¿arów");
-		SendClientMessage(playerid,COLOR_WHITE,"Usprawniono informowanie o po¿arach (dla Administracji)");
-		SendClientMessage(playerid,COLOR_WHITE,"Do sejfu LSFD i do stra¿aka trafia po 2,5k za usuniêt¹ plamê oleju");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /windalock dla S¹du (w przysz³oœci planowane dodanie dla innych frakcji, które bêd¹ chcia³y komendê)");
-		SendClientMessage(playerid,COLOR_WHITE,"Usprawniono interior S¹du (jest jaœniej i niezale¿nie od pogody na zewn¹trz - wewn¹trz nie pada)");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano /odznaka dla pracowników S¹du");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano /dutysbi dla SASP");
-		SendClientMessage(playerid,COLOR_WHITE,"Poprawiono komendê /tp (dla Administracji)");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano /togpodglad (dla Administracji)");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano /wejdz i /wyjdz na strzelnicê dla Gunshop LS");
-		SendClientMessage(playerid,COLOR_WHITE,"Domenda /akceptuj naprawa tylko na wy³¹czonym silniku, trwa okreœlon¹ iloœæ czasu i wymaga mechanika w pobli¿u, który w momencie naprawiania musi staæ obok pojazdu");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /armia-wiadomosc dla U.S. Army");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /sprzedajrybe - OD TERAZ MO¯ESZ SPRZEDAÆ RYBY, KTÓRE Z£OWI£EŒ W 24/7! Cena za kilogram: 20$!");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /su, /ob, /barierka, brak otrzymywania WL za zabójstwo dla F.S. Army");
-		SendClientMessage(playerid,COLOR_WHITE,"Mniejsze poprawki maj¹ce na celu optymalizacjê i usprawnienie skryptu.");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Pos¹g Los Santos - KilsOn");
-		SendClientMessage(playerid,COLOR_WHITE,"Przeniesiona centrala GSA - _Szymon");
-		SendClientMessage(playerid,COLOR_WHITE,"Obiekty 'Ciekawostki' - _Szymon");
-		SendClientMessage(playerid,COLOR_WHITE,"Czêsto skracane zakrêty - _Szymon");
-		SendClientMessage(playerid,COLOR_WHITE,"Nowa baza San Andreas Army - soldiercolt");
-		SendClientMessage(playerid,COLOR_WHITE,"OP dla Blueberry - _Szymon");
-		SendClientMessage(playerid,COLOR_WHITE,"Interior rady miasta Blueberry - _Szymon");
-		SendClientMessage(playerid,COLOR_WHITE,"Interior 'Komisja ds. Mechaników' - _Szymon");
-		SendClientMessage(playerid,COLOR_WHITE,"Op dla Dillimore - Niuniek");
-		SendClientMessage(playerid,COLOR_WHITE,"Poprawki Rockstar/obecnej mapy - KilsOn i _Szymon");
-		SendClientMessage(playerid,COLOR_WHITE,"Obiekty przed DMV - KilsOn");
-		SendClientMessage(playerid,COLOR_WHITE,"Parking podziemny dla FBI - _Szymon");
-	}
-	else if(strcmp(wersja,"2.5.8",true) == 0)
-	{
-		SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
-		SendClientMessage(playerid,COLOR_WHITE,"Poprawiono bugi i b³êdy.");
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"Central Bank Los Santos - exterior banku");
-		SendClientMessage(playerid,COLOR_WHITE,"Centrum rozrywki Los Santos - interior");
-		SendClientMessage(playerid,COLOR_WHITE,"Centrum rozrywki Los Santos - exterior");
-		SendClientMessage(playerid,COLOR_WHITE,"OP dla góry Chiliad ");
-		SendClientMessage(playerid,COLOR_WHITE,"Ciekawostki na mapie");
-		SendClientMessage(playerid,COLOR_WHITE,"Poprawienie b³êdów Rockstar");
-		SendClientMessage(playerid,COLOR_WHITE,"Oznakowanie Los Santos");
-		SendClientMessage(playerid,COLOR_WHITE,"Usuniêcie parkingu LSPD");
-		SendClientMessage(playerid,COLOR_WHITE,"Nowy parking LSPD - ulepszany z ka¿dym kolejnym update");
-		SendClientMessage(playerid,COLOR_WHITE,"Parking na zaholowane pojazdy dla LSPD");
-		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono wypadaj¹ce samochody GSA");
-		SendClientMessage(playerid,COLOR_WHITE,"Naprawiono wypadaj¹ce samochody FBI");
-		SendClientMessage(playerid,COLOR_WHITE,"Dodanie nowego miejsca dla biznesu - LSCDF");
-		SendClientMessage(playerid,COLOR_WHITE,"Upiêkszenia Los Santos");
-		SendClientMessage(playerid,COLOR_WHITE,"Parking przed LSMC");
-		SendClientMessage(playerid,COLOR_WHITE,"Obiekty z propozycji");
-		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla Money Makers");
-		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla CassinoAutoService");
-		SendClientMessage(playerid,COLOR_WHITE,"Obiekty dla low folow ");
-	}
-	else
-	{
-		SendClientMessage(playerid,COLOR_BLUE,"----------   Dostêpne wersje   ---------");
-		SendClientMessage(playerid,COLOR_WHITE,"2.4.810");
-		SendClientMessage(playerid,COLOR_WHITE,"2.4.811");
-		SendClientMessage(playerid,COLOR_WHITE,"2.4.9");
-		SendClientMessage(playerid,COLOR_WHITE,"2.4.91");
-		SendClientMessage(playerid,COLOR_WHITE,"2.4.911");
-		SendClientMessage(playerid,COLOR_WHITE,"2.4.92");
-        SendClientMessage(playerid,COLOR_WHITE,"2.4.93");
-        SendClientMessage(playerid,COLOR_WHITE,"2.5.2");
-		SendClientMessage(playerid,COLOR_WHITE,"2.5.6");
-		SendClientMessage(playerid,COLOR_WHITE,"2.5.7");
-		SendClientMessage(playerid,COLOR_BLUE,"------ Aktualna wersja: "VERSION" ------");
-	}
-	return 1;
-}//:chagelog(
 
 CMD:cellphonehelp(playerid) return cmd_telefonpomoc(playerid);
 CMD:telefonpomoc(playerid)
@@ -27420,6 +27156,7 @@ CMD:pr(playerid, params[])
 					sendTipMessage(playerid, "U¿yj /pr nazwa [Nazwa Rodziny]");
 					return 1;
 				}
+                mysql_real_escape_string(name, name);
                 if(orgSetName(org, name)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ nazwê swojej rodziny.");
 			}
 			else if(strcmp(x_nr,"motd",true) == 0)
@@ -27430,6 +27167,7 @@ CMD:pr(playerid, params[])
 					sendTipMessage(playerid, "U¿yj /pr MOTD [Tekst MOTD Rodziny]");
 					return 1;
 				}
+                mysql_real_escape_string(lStr, lStr);
 			    if(orgSetMotd(org, lStr)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ MOTD rodziny.");
 			}
 			else if(strcmp(x_nr,"color",true) == 0 || strcmp(x_nr,"kolor",true) == 0)
@@ -28096,8 +27834,8 @@ CMD:dajpodatek(playerid)
 		}
 		if(Cops >= 1)
 		{
-		    new value = Tax / 2;
-		    new price = value / Cops;
+		    new valuex = Tax / 2;
+		    new price = valuex / Cops;
 		    foreach(Player, i)
 			{
 			    if(IsPlayerConnected(i))
@@ -29250,7 +28988,7 @@ CMD:glosnik(playerid)
             }
 		    if(inpos)
 		    {
-		        ShowPlayerDialogEx(playerid, 765, DIALOG_STYLE_LIST, "Wybierz muzykê", "Disco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 765, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio 1\nMrucznik Radio 2\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
 		    }
 		    else
 		    {
@@ -34250,7 +33988,7 @@ CMD:akceptuj(playerid, params[])
             {
 				if(IsPlayerInAnyVehicle(playerid))
 				{
-					if(kaska[playerid] > RepairPrice[playerid]+przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid))) && RepairPrice[playerid] > 0)
+					if(kaska[playerid] > RepairPrice[playerid] && RepairPrice[playerid] > 0)
 					{
                         if(IsPlayerConnected(RepairOffer[playerid]))
                         {
@@ -34505,12 +34243,13 @@ CMD:napraw(playerid, params[])
 					    {
 					        if(!IsPlayerInAnyVehicle(playerid))
 					        {
+
 							    if(playa == playerid) { SendClientMessage(playerid, COLOR_GREY, "Nie mo¿esz naprawiæ wozu samemu sobie!"); return 1; }
 						    	GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 								GetPlayerName(playerid, sendername, sizeof(sendername));
 							    format(string, sizeof(string), "* Oferujesz %s naprawê wozu za $%d .",giveplayer,money);
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								format(string, sizeof(string), "* Mechanik %s proponuje naprawê twojego wozu za $%d (+%d wartoœci auta), (wpisz /akceptuj naprawe) aby akceptowaæ.",sendername,money, przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playa))));
+								format(string, sizeof(string), "* Mechanik %s proponuje naprawê za $%d. /akceptuj naprawe aby akceptowac",sendername,money);
 								SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 								RepairOffer[playa] = playerid;
 								RepairPrice[playa] = money;
@@ -37028,15 +36767,11 @@ CMD:cziterzy(playerid, params[])
             } 
         }
     }
-    inline DLG_CZITERZY_MAIN(playerid1, dialogid1, response1, listitem1, string:inputtext1[]) {
-        #pragma unused playerid1, dialogid1, inputtext1, listitem1
-        if(!response1) return 1;
-        return cmd_cziterzy(playerid1, params);
-    }
+
     if(czity == 0) {
         sendTipMessage(playerid, "Nie wykryto ¿adnych potencjalnych cziterów");
     }
-    Dialog_ShowCallback(playerid, using inline DLG_CZITERZY_MAIN, DIALOG_STYLE_LIST, ("Potencjalna Lista Cziterów"), string, "Ok", "Anuluj");
+    ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_LIST, "Lista Potencjalnych Cziterów", string, "Ok", "");
     return 1;
 }
 
@@ -38345,668 +38080,6 @@ CMD:togname(playerid)
     return 1;
 }
 
-/*CMD:glosuj(playerid)
-{
-	if(gPlayerLogged[playerid] == 1)
-	{
-		if(PlayerInfo[playerid][pLevel] >= 3 && PlayerInfo[playerid][pDowod] >= 1)
-		{
-			if(PlayerInfo[playerid][pCzystka] != 1339)
-			{
-				if(IsPlayerInRangeOfPoint(playerid, 5.0, 1304.1296, -1299.9874, 35.6941))
-				{
-					new hour,minuite,second;
-					gettime(hour,minuite,second);
-					if(hour >= 8 && hour <= 21)
-					{
-						ShowPlayerDialogEx(playerid, D_KUBICWEL, DIALOG_STYLE_LIST, "Karta wyborcza", "Grand Old Party - Armin Verwest\nPartia Dobra Stanu - Roman Poziomka", "G³osuj", "WyjdŸ");
-					}
-					else
-					{
-						SendClientMessage(playerid, COLOR_GRAD2, "Wybory od 8 do 21");
-					}
-				}
-				else
-				{
-					SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w lokalu wyborczym (znajduje siê w budynku s¹du)");
-				}
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "Ju¿ g³osowa³eœ!");
-			}
-		}
-		else
-		{
-			SendClientMessage(playerid, COLOR_GRAD2, "Nie masz 3 lvl.");
-		}
-	}
-}*/
-//end.
-
-
-
-
-CMD:lkiz(playerid, params[]) return cmd_podrecznik(playerid, params);
-CMD:pomoc(playerid, params[]) return cmd_podrecznik(playerid, params);
-CMD:podrecznik(playerid, params[]) {
-    new lkiz[2000];
-    format(lkiz, sizeof(lkiz), ""#KARA_TEKST"Zasady panuj¹ce na serwerze");
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Typy Kar", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Przewinienia", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Zasady Nadawania Kar", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_TEKST"Dla nowicjuszy", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Czym jest Role Play", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Profity posiadania konta na forum", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Jak uzyskaæ dodatkow¹ pomoc", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Inne pomocne artyku³y", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_TEKST"Inne", lkiz);
-    format(lkiz, sizeof(lkiz), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST2"Komendy dostêpne na serwerze", lkiz);
-    inline DIALOG_LKIZ(pid, dialogid, response, listitem, string:inputtext[]) {
-        #pragma unused pid, dialogid, inputtext
-        if(!response) return true;
-        new zasady[3300];
-        switch(listitem) {
-            case 1: {
-                new typy_kar[500];
-                format(typy_kar, sizeof(typy_kar), "Stopieñ\t\t\tKara");
-                format(typy_kar, sizeof(typy_kar), "%s\n"#KARA_NIEZNACZNA"Kara Nieznaczna (I stopieñ)\t\t\t"#KARA_TEKST2"Do 5 minut AJ", typy_kar);
-                format(typy_kar, sizeof(typy_kar), "%s\n"#KARA_LEKKA"Kara Lekka (II stopieñ)\t\t\t"#KARA_TEKST2"Do 10 minut AJ", typy_kar);
-                format(typy_kar, sizeof(typy_kar), "%s\n"#KARA_SREDNIA"Kara Œrednia (III stopieñ)\t\t\t"#KARA_TEKST2"Do 20 minut AJ", typy_kar);
-                format(typy_kar, sizeof(typy_kar), "%s\n"#KARA_CIEZKA"Kara Ciê¿ka (IV stopieñ)\t\t\t"#KARA_TEKST2"Do 30 minut AJ, Warn", typy_kar);
-                format(typy_kar, sizeof(typy_kar), "%s\n"#KARA_BARDZOCIEZKA"Kara Bardzo Ciê¿ka (V stopieñ)\t\t\t"#KARA_TEKST2"Warn, Ban", typy_kar);
-                format(typy_kar, sizeof(typy_kar), "%s\n"#KARA_SPECJALNA"Kara Specjalna\t\t\t"#KARA_TEKST2"Opisana przy przypadku", typy_kar);
-                format(typy_kar, sizeof(typy_kar), "%s\n"#KARA_BANICJI"Kara Banicji\t\t\t"#KARA_TEKST2"Ban", typy_kar);
-                inline DIALOG_LKIZ_TYPKARY(pid1, dialogid1, response1, listitem1, string:inputtext1[]) {
-                    #pragma unused pid1, dialogid1, listitem1, inputtext1
-                    if(response1)
-                        Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_TYPKARY, DIALOG_STYLE_TABLIST_HEADERS, "Typy Kar", typy_kar, "Ok", "Wróæ");
-                    else
-                        return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");
-                }
-                Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_TYPKARY, DIALOG_STYLE_TABLIST_HEADERS, "Typy Kar", typy_kar, "Ok", "Wróæ");
-            }
-            case 2: {
-                new przewinienia[3000];
-                new File:file = fopen("kary.mrp", io_read), line[700];
-                format(przewinienia, sizeof(przewinienia), "Przewinienie\t\t\tTyp kary");
-                new counter = 0;
-                new opis_przewinienia[50][600];
-                while(fread(file, line))
-                {
-                    new typKary;
-                    new przewinienie[70];
-                    new typKaryStr[45];
-                    new opisp[600];
-                    sscanf(line, "p<|>s[70]ds[600]", przewinienie, typKary, opisp);
-                    switch(typKary) {
-                        case 0: typKaryStr = ""#KARA_NIEZNACZNA"Kara nieznaczna";
-                        case 1: typKaryStr = ""#KARA_LEKKA"Kara lekka";
-                        case 2: typKaryStr = ""#KARA_SREDNIA"Kara œrednia";
-                        case 3: typKaryStr = ""#KARA_CIEZKA"Kara ciê¿ka";
-                        case 4: typKaryStr = ""#KARA_BARDZOCIEZKA"Kara bardzo ciê¿ka";
-                        case 5: typKaryStr = ""#KARA_BANICJI"Kara banicji";
-                        case 6: typKaryStr = ""#KARA_SPECJALNA"Kara specjalna";
-                    }
-                    format(przewinienia, sizeof(przewinienia), "%s\n"#KARA_TEKST2"%s\t\t\t%s", przewinienia, przewinienie, typKaryStr);
-                    for(new i = strlen(opisp) - 1; i > -1; i--) {
-                        if(opisp[i] == '*') {
-                            opisp[i] = '\n';
-                        }
-                    }
-                    format(opis_przewinienia[counter], sizeof(opisp), "%s", opisp);
-                    counter++;
-                }
-                fclose(file);
-                inline DIALOG_LKIZ_PRZEWINIENIE(pid12, dialogid12, response12, listitem12, string:inputtext12[]) {
-                    #pragma unused pid12, dialogid12, listitem12, inputtext12
-                    if(!response12) return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");
-                    inline DIALOG_LKIZ_OPIS(pid123, dialogid123, response123, listitem123, string:inputtext123[]) {
-                        #pragma unused pid123, dialogid123, listitem123, inputtext123
-                        if(response123) return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_PRZEWINIENIE, DIALOG_STYLE_TABLIST_HEADERS, "Przewinienia", przewinienia, "Ok", "Wróæ");
-                    }
-                    Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_OPIS, DIALOG_STYLE_MSGBOX, "Opis Przewinienia", opis_przewinienia[listitem12], "Ok", "");
-                }
-                Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_PRZEWINIENIE, DIALOG_STYLE_TABLIST_HEADERS, "Przewinienia", przewinienia, "Ok", "Wróæ");
-            }
-            case 3: {
-                format(zasady, sizeof(zasady), "1. Admin ma prawo nadaæ karê tylko i wy³¹cznie za czynnoœci przewidziane w LKiZ oraz o wysokoœci przewidzianej w LKiZ. \n\tZa jedn¹ czynnoœæ niezgodn¹ z LKiZ gracz mo¿e otrzymaæ tylko 1 karê.");
-                format(zasady, sizeof(zasady), "%s\n \n2. Je¿eli czynnoœæ jest zabroniona w LKiZ, ale wykonywanie tej czynnoœci przez gracza nikomu nie przeszkadza oraz jest \n\takceptowana przez wszystkich obecnych graczy, admin mo¿e siê powstrzymaæ od ukarania (tylko gdy jest pewien, ¿e akcja nie przeszkadza ¿adnemu graczowi który j¹ widzi/s³yszy).", zasady);
-                format(zasady, sizeof(zasady), "%s\n \n3. Staramy siê nadawaæ karê adekwatnie do sytuacji oraz postawy gracza", zasady);
-                format(zasady, sizeof(zasady), "%s\n \n4. Obowi¹zuje zakaz ³¹czenia wartoœci kar. Je¿eli gracz pope³ni³ 2 czyny do 15minut AJ oraz 1 do 30minut AJ to dajemy mu karê maksymalnie 30 minut AJ \n\ti resztê jego przewinieñ mo¿emy umieœciæ w nawiasie.", zasady);
-                format(zasady, sizeof(zasady), "%s\n \n5. Podawany powód musi byæ czytelny i jednoznaczny, powinien wyraŸnie informowaæ co gracz zrobi³ Ÿle.", zasady);
-                format(zasady, sizeof(zasady), "%s\n \n6. Je¿eli gracz z³o¿y³ skargê na forum, stopieñ kary mo¿e zostaæ podniesiony o 1 poziom (lub wartoœæ mo¿e byæ zwiêkszona x2 w przypadku kar specjalnych)", zasady);
-                format(zasady, sizeof(zasady), "%s\n \n7. Je¿eli jakaœ czynnoœæ jest wykonywana nagminnie, pomimo upomnieñ i kar, mo¿na nadaæ warna \n\t(nawet je¿eli stopieñ przewinienia tego nie przewiduje) lub zwiêkszyæ wartoœæ kary x2 lub stopieñ kary o 1.", zasady);
-                format(zasady, sizeof(zasady), "%s\n \n8. Je¿eli czynnoœæ dotyczy wielu graczy, jest wykonywana na wiêcej ni¿ 3 osobach, mamy prawo podnieœæ stopieñ kary o 1. \n\t(np. HK dla 10 = Masowe HK i kara stopnia 5)\n\tUwaga! Przy nadawaniu takiej kary administrator musi wpisaæ w powodzie s³owo \"Masowe\".\n\tUwaga! Zasada dzia³a jedynie dla nastêpuj¹cych przewinieñ: DM(i jego odmiany), DB, HK, CK, DD/CZ", zasady);
-                inline DIALOG_LKIZ_ZASADY(pid12, dialogid12, response12, listitem12, string:inputtext12[]) {
-                    #pragma unused pid12, dialogid12, listitem12, inputtext12
-                    if(response12) return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");
-                }
-                Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_ZASADY, DIALOG_STYLE_MSGBOX, "Zasady", zasady, "Ok");    
-            }
-            case 5: {
-                format(zasady, sizeof(zasady), "To odgrywanie prawdziwego ¿ycia w œwiecie wirtualnym. Role Play na naszym serwerze polega na kreowaniu swojej postaci i odgrywaniu prawdziwego ¿ycia w grze. \nOznacza to ¿e mo¿emy pracowaæ (jako policjant, mechanik czy te¿ p³atny morderca), kupowaæ domy, samochody oraz wiele innych rzeczy.");
-/*
-                format(zasady, sizeof(zasady), "%s\n", zasady);
-*/  
-                format(zasady, sizeof(zasady), "%s\nOdgrywamy tak¿e ró¿ne sytuacje, np. napady na bank, wyœcigi uliczne, sprzeda¿ narkotyków. Nasze postacie zarabiaj¹ pieni¹dze oraz zdobywaj¹ umiejêtnoœci i znajomoœci.\n\tAby graæ zgodnie z zasadami RP - po prostu wczuj siê w postaæ tak, jakbyœ to ty ni¹ by³.", zasady);
-                format(zasady, sizeof(zasady), "%s\nJednak na naszym podejœciu panuje tak¿e tak zwane \"LuŸne RP\". Oznacza to, ¿e na naszym serwerze odgrywanie prawdziwego ¿ycia\n\tprzystosowuje siê do warunków jakie daje GTA SA i to, ¿e nie musimy szanowaæ ¿ycia swojej postaci jak w³asnego.", zasady);
-                format(zasady, sizeof(zasady), "%s\nW ten sposób aby odegrywaæ prawid³owo nie pytamy siê siebie w myœli - \"co bym zrobi³ gdybym by³ \n\tw prawdziwym ¿yciu\" - tylko - \"co bym zrobi³ w prawdziwym ¿yciu gdyby prawdziwe ¿ycie wygl¹da³o tak jak sytuacja ogólna w grze\".", zasady);
-                format(zasady, sizeof(zasady), "%s\n \nAby wczuæ siê w Role Play panuj¹cy na Mruczniku, prezentujemy krótki rys fabularny serwera: \n ", zasady);           
-                format(zasady, sizeof(zasady), "%s\nLos Santos jest miastem opanowanym przez przestêpców, nawet cywile chodz¹ po mieœcie uzbrojeni. Ka¿dy walczy o swoje miejsce si³¹ a tych,\n\t\tktórzy stoj¹ na drodze do ich celu traktuj¹ seri¹ z ka³acha.", zasady);
-                format(zasady, sizeof(zasady), "%s\nSantos to nie el dorado pokoju gdzie ludzie ¿yj¹ w zgodzie z Policj¹ i wszyscy poœwiêcaj¹ siê radosnej i owocnej wspó³pracy.\n\tTo miasto, w którym co drugi obywatel jest kryminalist¹ a na ka¿dym zakrêcie mo¿e czekaæ ciê œmieræ.", zasady);
-                format(zasady, sizeof(zasady), "%s\nWiêc nie czekaj, weŸ sprawy w swoje rêcê i do³¹cz do ludzi siej¹cych zamêt w Los Santos lub grup, które maj¹ na celu uspokojenie mot³ochu i sprawienie by sprawiedliwoœæ zatriumfowa³a.\n\tB¹dŸ zostañ (nie)uczciwym pracownikiem i stañ siê najbogatszym cz³owiekiem w LS.", zasady);
-                format(zasady, sizeof(zasady), "%s\n \nJak ¿ycie twojej postaci potoczy siê dalej, zale¿y tylko i wy³¹cznie od ciebie! Powodzenia!", zasady);
-                inline DIALOG_LKIZ_ZASADY(pid12, dialogid12, response12, listitem12, string:inputtext12[]) {
-                    #pragma unused pid12, dialogid12, listitem12, inputtext12
-                    if(response12) return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");
-                }
-                Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_ZASADY, DIALOG_STYLE_MSGBOX, "{ffffff}Czym jest Role Play", zasady, "Ok");   
-            }
-            case 6: {
-                format(zasady, sizeof(zasady), ""#KARA_TEKST2"Opcja\t"#KARA_BANICJI"Bez forum\t"#KARA_NIEZNACZNA"Z forum");
-                format(zasady, sizeof(zasady), "%s\n"#KARA_TEKST2"Swobodna gra na serwerze\t"#KARA_NIEZNACZNA"Tak\t"#KARA_NIEZNACZNA"Tak", zasady);
-                format(zasady, sizeof(zasady), "%s\n"#KARA_TEKST2"Branie udzia³u w ¿yciu spo³ecznoœci\t"#KARA_BANICJI"Nie\t"#KARA_NIEZNACZNA"Tak", zasady);
-                format(zasady, sizeof(zasady), "%s\n"#KARA_TEKST2"Do³¹czanie do frakcji\t"#KARA_SREDNIA"Zazwyczaj nie\t"#KARA_NIEZNACZNA"Tak", zasady);
-                format(zasady, sizeof(zasady), "%s\n"#KARA_TEKST2"Dostêp do poradników\t"#KARA_BANICJI"Nie\t"#KARA_NIEZNACZNA"Tak", zasady);
-                format(zasady, sizeof(zasady), "%s\n"#KARA_TEKST2"Dostêp do informacji o aktualizacjach\t"#KARA_BANICJI"Nie\t"#KARA_NIEZNACZNA"Tak", zasady);
-                format(zasady, sizeof(zasady), "%s\n \n \n"#KARA_TEKST2"Nie czekaj! Zarejestruj siê na {FFFFFF}Mrucznik-RP.pl", zasady);
-                inline DIALOG_LKIZ_ZASADY(pid12, dialogid12, response12, listitem12, string:inputtext12[]) {
-                    #pragma unused pid12, dialogid12, listitem12, inputtext12
-                    if(response12) return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");
-                }
-                Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_ZASADY, DIALOG_STYLE_TABLIST_HEADERS, "{ffffff}Profity posiadania konta na forum", zasady, "Ok", "");    
-            }
-            case 7: {
-                format(zasady, sizeof(zasady), "W celu uzyskania dodatkowej pomocy, skorzystaj z komendy /zapytaj.\n \nWpisz /zapytaj [NAG£ÓWEK- na przyk³ad SALON AUT] Treœæ- na przyk³ad: gdzie znajduje siê salon aut\n \n");
-                inline DIALOG_LKIZ_ZASADY(pid12, dialogid12, response12, listitem12, string:inputtext12[]) {
-                    #pragma unused pid12, dialogid12, listitem12, inputtext12
-                    if(response12) return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");
-                }
-                Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_ZASADY, DIALOG_STYLE_MSGBOX, "{ffffff}Dodatkowa Pomoc", zasady, "Ok");   
-            }
-            case 8: {
-                new artykuly[1000];
-                new File:file_2 = fopen("artykuly.mrp", io_read), line2[1100];
-                format(artykuly, sizeof(artykuly), "{a9c4e4}Artyku³\tTwórca");
-                new counter_2 = 1;
-                new artykul[10][1000];
-                while(fread(file_2, line2))
-                {
-                    new tytul_artykulu[70];
-                    new tresc_artykulu[1000];
-                    new tworca[50];
-                    sscanf(line2, "p<|>s[70]s[1000]s[50]", tytul_artykulu, tresc_artykulu, tworca);
-                    format(artykuly, sizeof(artykuly), "%s\n"#KARA_TEKST2"%s\t"#KARA_TEKST"%s", artykuly, tytul_artykulu, tworca);
-                    for(new i = strlen(tresc_artykulu) - 1; i > -1; i--)
-                        if(tresc_artykulu[i] == '*')
-                            tresc_artykulu[i] = '\n';
-                    format(artykul[counter_2-1], sizeof(tresc_artykulu), "%s", tresc_artykulu);
-                    counter_2++;
-                }
-                fclose(file_2);
-                inline DIALOG_LKIZ_PRZEWINIENIE(pid12, dialogid12, response12, listitem12, string:inputtext12[]) {
-                    #pragma unused pid12, dialogid12, inputtext12
-                    if(!response12) return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");
-                    inline DIALOG_LKIZ_OPIS(pid123, dialogid123, response123, listitem123, string:inputtext123[]) {
-                        #pragma unused pid123, dialogid123, listitem123, inputtext123
-                        if(response123) return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_PRZEWINIENIE, DIALOG_STYLE_TABLIST_HEADERS, "Artyku³y", artykuly, "Ok", "Wróæ");
-                    }
-                    Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_OPIS, DIALOG_STYLE_MSGBOX, "Artyku³", artykul[listitem12], "Ok", "");
-                }
-                Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ_PRZEWINIENIE, DIALOG_STYLE_TABLIST_HEADERS, "Artyku³y", artykuly, "Ok", "Wróæ");
-            }
-            case 0,4,9: {
-                return Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");        
-            }
-            case 10: {
-                return cmd_pomoc2(playerid);
-            }
-        }
-    }
-    Dialog_ShowCallback(playerid, using inline DIALOG_LKIZ, DIALOG_STYLE_LIST, "Podrêcznik", lkiz, "Ok", "Anuluj");
-    return true;
-}
-
-CMD:hq(playerid, params[]) {
-    // tylko dla: PD
-    if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
-    {
-        new string[3881];
-        // nie wpisano nicku, glowne hq
-        format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"========================"#HQ_COLOR_TEKST"[HQ]"#HQ_COLOR_PLACEHOLDER"========================");
-        format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Lista poszukiwanych", string);
-        format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Ostatnie zg³oszenia", string);
-        format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-        inline DLG_HQ_NONICK_MAIN(player, dialogid, response, listitem, string:inputtext[]) {
-            #pragma unused player, dialogid, inputtext
-            if(response) {
-                switch(listitem) {
-                    case 0,3: return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");       
-                    case 1: {
-                        cmd_hq(playerid, params);
-                        return cmd_wanted(playerid);
-                    }
-                    case 2: {
-                        format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"===================="#HQ_COLOR_TEKST"[ZG£OSZENIA]"#HQ_COLOR_PLACEHOLDER"====================");
-                        for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
-                            if(Zgloszenie[i][zgloszenie_status] == 0) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"%s", string, Zgloszenie[i][zgloszenie_tresc]);
-                            } else if(Zgloszenie[i][zgloszenie_status] == 1) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"%s", string, Zgloszenie[i][zgloszenie_tresc]);
-                            } else if(Zgloszenie[i][zgloszenie_status] == 2) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"[Odrzucone] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                            } else if(Zgloszenie[i][zgloszenie_status] == 3) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_FALSZYWE"[Fa³szywe] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                            } else if(Zgloszenie[i][zgloszenie_status] == 4) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_WYKONANE"[Wykonane] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                            } else if(Zgloszenie[i][zgloszenie_status] == 5) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"[Anulowane] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                            }
-                        }
-                        format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                        inline DLG_HQ_SELECT_ZGLOSZENIE(player1, dialogid1, response1, listitem1, string:inputtext1[]) {
-                            #pragma unused player1, dialogid1, inputtext1
-                            if(!response1) {
-                                format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"========================="#HQ_COLOR_TEKST"[HQ]"#HQ_COLOR_PLACEHOLDER"=========================");
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Lista poszukiwanych", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Ostatnie zg³oszenia", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"======================================================", string);
-                                return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");
-                            }
-                            new szczegol;
-                            switch(listitem1) {
-                                case 0,11: {
-                                    Dialog_ShowCallback(playerid, using inline DLG_HQ_SELECT_ZGLOSZENIE, DIALOG_STYLE_LIST, "Ostatnie zg³oszenia", string, "Ok", "Anuluj");
-                                }
-                                case 1: szczegol = 0;
-                                case 2: szczegol = 1;
-                                case 3: szczegol = 2;
-                                case 4: szczegol = 3;
-                                case 5: szczegol = 4;
-                                case 6: szczegol = 5;
-                                case 7: szczegol = 6;
-                                case 8: szczegol = 7;
-                                case 9: szczegol = 8;
-                                case 10: szczegol = 9;
-                            }
-                            format(string, sizeof(string), ""#HQ_COLOR_TEKST2"Informacja o zg³oszeniu");
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Treœæ: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_tresc]);
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Godzina: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_kiedy]);
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Zg³osi³: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_nadal]);
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Obszar: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_lokacja]);
-                            new statusTxt[30];
-                            switch(Zgloszenie[szczegol][zgloszenie_status]) {
-                                case 0: statusTxt = "Nie podjêto jeszcze decyzji";
-                                case 1: statusTxt = "Akceptowane";
-                                case 2: statusTxt = "Odrzucone";
-                                case 3: statusTxt = "Fa³szywe";
-                                case 4: statusTxt = "Wykonane";
-                                case 5: statusTxt = "Anulowane";
-                            }
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Status: "#HQ_COLOR_TEKST2"%s", string, statusTxt);
-                            format(string, sizeof(string), "%s\n ", string);
-                            if(Zgloszenie[szczegol][zgloszenie_status] == 1) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Przyj¹³: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_przyjal]);
-                                if(!strcmp(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true))) {
-                                    //SetPVarInt(playerid, "zgloszenia_status", 1);
-                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"Oznacz jako: WYKONANE", string);
-                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"Oznacz jako: FA£SZYWE", string);    
-                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"Oznacz jako: ANULOWANE", string);
-                                }
-                            } else if(Zgloszenie[szczegol][zgloszenie_status] == 0) {
-                                //SetPVarInt(playerid, "zgloszenia_status", 0);
-                                format(string, sizeof(string), "%s\n ", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"Akceptuj zg³oszenie", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"Odrzuæ zg³oszenie", string);    
-                            } else if(Zgloszenie[szczegol][zgloszenie_status] == 2) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Odrzuci³: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_przyjal]);
-                            } else {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Wyda³ decyzjê: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[szczegol][zgloszenie_przyjal]);
-                            }
-            
-                            inline DLG_HQ_ZGL_NIEROBINIC(player2, dialogid2, response2, listitem2, string:inputtext2[]) {
-                                #pragma unused player2, dialogid2, inputtext2
-                                if(response2) {
-                                    if(listitem2 == 9) {
-                                        new zglstatus = Zgloszenie[szczegol][zgloszenie_status];
-                                        if(zglstatus == 0) {
-                                            if(!strcmp(Zgloszenie[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na akceptowaæ!");
-                                            strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
-                                            Zgloszenie[szczegol][zgloszenie_status] = 1;
-                                        } else {
-                                            Zgloszenie[szczegol][zgloszenie_status] = 4;
-                                        }
-                                    } else if (listitem2 == 10) {
-                                        new zglstatus = Zgloszenie[szczegol][zgloszenie_status];
-                                        if(zglstatus == 0) {
-                                            //new Hour, Minute;
-                                            //gettime(Hour, Minute);
-                                            //new string_data[36];
-                                            //format(string_data, sizeof(string_data), "%02d:%02d",  Hour, Minute);
-                                            //strmid(Zgloszenie[szczegol][zgloszenie_kiedy], string_data, 0, sizeof(string_data), 36);
-                                            //strmid(Zgloszenie[szczegol][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
-                                            //strmid(Zgloszenie[szczegol][zgloszenie_tresc], "Brak", 0, 4, 70);
-                                            //Zgloszenie[szczegol][zgloszenie_status] = 0;
-                                            if(!strcmp(Zgloszenie[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na odrzucaæ!");
-                                            strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
-                                            Zgloszenie[szczegol][zgloszenie_status] = 2;
-                                        } else {
-                                            Zgloszenie[szczegol][zgloszenie_status] = 3;
-                                        }
-                                    } else if(listitem2 == 11) {
-                                        Zgloszenie[szczegol][zgloszenie_status] = 5;
-                                    }
-                                    format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"===================="#HQ_COLOR_TEKST"[ZG£OSZENIA]"#HQ_COLOR_PLACEHOLDER"====================");
-                                    for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
-                                        if(Zgloszenie[i][zgloszenie_status] == 0) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"%s", string, Zgloszenie[i][zgloszenie_tresc]);
-                                        } else if(Zgloszenie[i][zgloszenie_status] == 1) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"[Przyjête] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                                        } else if(Zgloszenie[i][zgloszenie_status] == 2) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"[Odrzucone] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                                        } else if(Zgloszenie[i][zgloszenie_status] == 3) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_FALSZYWE"[Fa³szywe] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                                        } else if(Zgloszenie[i][zgloszenie_status] == 4) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_WYKONANE"[Wykonane] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                                        } else if(Zgloszenie[i][zgloszenie_status] == 5) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"[Anulowane] %s", string, Zgloszenie[i][zgloszenie_tresc]);
-                                        }
-                                    }
-                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                                    Dialog_ShowCallback(playerid, using inline DLG_HQ_SELECT_ZGLOSZENIE, DIALOG_STYLE_LIST, ("Ostatnie zg³oszenia"), string, "Ok", "Anuluj");
-                                }
-                            }
-                            Dialog_ShowCallback(playerid, using inline DLG_HQ_ZGL_NIEROBINIC, DIALOG_STYLE_LIST, ("Przegl¹d zg³oszenia"), string, "Wstecz", "WyjdŸ");   
-                        }
-                        Dialog_ShowCallback(playerid, using inline DLG_HQ_SELECT_ZGLOSZENIE, DIALOG_STYLE_LIST, ("Ostatnie zg³oszenia"), string, "Ok", "Anuluj");
-                    }
-                }
-            }
-        }
-        Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, ("HQ"), string, "Ok", "Anuluj");
-    } 
-    else if(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
-    {
-        new string[3881];
-        // nie wpisano nicku, glowne hq
-        format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"========================"#HQ_COLOR_TEKST"[HQ]"#HQ_COLOR_PLACEHOLDER"========================");
-        format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Lista poszukiwanych", string);
-        format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Ostatnie zg³oszenia", string);
-        format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-        inline DLG_HQ_NONICK_MAIN(player, dialogid, response, listitem, string:inputtext[]) {
-            #pragma unused player, dialogid, inputtext
-            if(response) {
-                switch(listitem) {
-                    case 0,3: return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");       
-                    case 1: {
-                        cmd_hq(playerid, params);
-                        return cmd_wanted(playerid);
-                    }
-                    case 2: {
-                        format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"===================="#HQ_COLOR_TEKST"[ZG£OSZENIA]"#HQ_COLOR_PLACEHOLDER"====================");
-                        for(new i = 0, j=OSTATNIE_ZGLOSZENIASASP; i<j; i++) {
-                            if(ZgloszenieSasp[i][zgloszenie_status] == 0) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"%s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                            } else if(ZgloszenieSasp[i][zgloszenie_status] == 1) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"%s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                            } else if(ZgloszenieSasp[i][zgloszenie_status] == 2) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"[Odrzucone] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                            } else if(ZgloszenieSasp[i][zgloszenie_status] == 3) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_FALSZYWE"[Fa³szywe] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                            } else if(ZgloszenieSasp[i][zgloszenie_status] == 4) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_WYKONANE"[Wykonane] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                            } else if(ZgloszenieSasp[i][zgloszenie_status] == 5) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"[Anulowane] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                            }
-                        }
-                        format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                        inline DLG_HQ_SELECT_ZGLOSZENIE(player1, dialogid1, response1, listitem1, string:inputtext1[]) {
-                            #pragma unused player1, dialogid1, inputtext1
-                            if(!response1) {
-                                format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"========================="#HQ_COLOR_TEKST"[HQ]"#HQ_COLOR_PLACEHOLDER"=========================");
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Lista poszukiwanych", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Ostatnie zg³oszenia", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"======================================================", string);
-                                return Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, "HQ", string, "Ok", "Anuluj");
-                            }
-                            new szczegol;
-                            switch(listitem1) {
-                                case 0,11: {
-                                    Dialog_ShowCallback(playerid, using inline DLG_HQ_SELECT_ZGLOSZENIE, DIALOG_STYLE_LIST, "Ostatnie zg³oszenia", string, "Ok", "Anuluj");
-                                }
-                                case 1: szczegol = 0;
-                                case 2: szczegol = 1;
-                                case 3: szczegol = 2;
-                                case 4: szczegol = 3;
-                                case 5: szczegol = 4;
-                                case 6: szczegol = 5;
-                                case 7: szczegol = 6;
-                                case 8: szczegol = 7;
-                                case 9: szczegol = 8;
-                                case 10: szczegol = 9;
-                            }
-                            format(string, sizeof(string), ""#HQ_COLOR_TEKST2"Informacja o zg³oszeniu");
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Treœæ: "#HQ_COLOR_TEKST2"%s", string, ZgloszenieSasp[szczegol][zgloszenie_tresc]);
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Godzina: "#HQ_COLOR_TEKST2"%s", string, ZgloszenieSasp[szczegol][zgloszenie_kiedy]);
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Zg³osi³: "#HQ_COLOR_TEKST2"%s", string, ZgloszenieSasp[szczegol][zgloszenie_nadal]);
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Obszar: "#HQ_COLOR_TEKST2"%s", string, ZgloszenieSasp[szczegol][zgloszenie_lokacja]);
-                            new statusTxt[30];
-                            switch(ZgloszenieSasp[szczegol][zgloszenie_status]) {
-                                case 0: statusTxt = "Nie podjêto jeszcze decyzji";
-                                case 1: statusTxt = "Akceptowane";
-                                case 2: statusTxt = "Odrzucone";
-                                case 3: statusTxt = "Fa³szywe";
-                                case 4: statusTxt = "Wykonane";
-                                case 5: statusTxt = "Anulowane";
-                            }
-                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Status: "#HQ_COLOR_TEKST2"%s", string, statusTxt);
-                            format(string, sizeof(string), "%s\n ", string);
-                            if(ZgloszenieSasp[szczegol][zgloszenie_status] == 1) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Przyj¹³: "#HQ_COLOR_TEKST2"%s", string, ZgloszenieSasp[szczegol][zgloszenie_przyjal]);
-                                if(!strcmp(ZgloszenieSasp[szczegol][zgloszenie_przyjal], GetNick(playerid, true))) {
-                                    //SetPVarInt(playerid, "zgloszenia_status", 1);
-                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"Oznacz jako: WYKONANE", string);
-                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"Oznacz jako: FA£SZYWE", string);    
-                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"Oznacz jako: ANULOWANE", string);
-                                }
-                            } else if(ZgloszenieSasp[szczegol][zgloszenie_status] == 0) {
-                                //SetPVarInt(playerid, "zgloszenia_status", 0);
-                                format(string, sizeof(string), "%s\n ", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"Akceptuj zg³oszenie", string);
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"Odrzuæ zg³oszenie", string);    
-                            } else if(ZgloszenieSasp[szczegol][zgloszenie_status] == 2) {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Odrzuci³: "#HQ_COLOR_TEKST2"%s", string, ZgloszenieSasp[szczegol][zgloszenie_przyjal]);
-                            } else {
-                                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Wyda³ decyzjê: "#HQ_COLOR_TEKST2"%s", string, ZgloszenieSasp[szczegol][zgloszenie_przyjal]);
-                            }
-            
-                            inline DLG_HQ_ZGL_NIEROBINIC(player2, dialogid2, response2, listitem2, string:inputtext2[]) {
-                                #pragma unused player2, dialogid2, inputtext2
-                                if(response2) {
-                                    if(listitem2 == 9) {
-                                        new zglstatus = ZgloszenieSasp[szczegol][zgloszenie_status];
-                                        if(zglstatus == 0) {
-                                            if(!strcmp(ZgloszenieSasp[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na akceptowaæ!");
-                                            strmid(ZgloszenieSasp[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
-                                            ZgloszenieSasp[szczegol][zgloszenie_status] = 1;
-                                        } else {
-                                            ZgloszenieSasp[szczegol][zgloszenie_status] = 4;
-                                        }
-                                    } else if (listitem2 == 10) {
-                                        new zglstatus = ZgloszenieSasp[szczegol][zgloszenie_status];
-                                        if(zglstatus == 0) {
-                                            //new Hour, Minute;
-                                            //gettime(Hour, Minute);
-                                            //new string_data[36];
-                                            //format(string_data, sizeof(string_data), "%02d:%02d",  Hour, Minute);
-                                            //strmid(Zgloszenie[szczegol][zgloszenie_kiedy], string_data, 0, sizeof(string_data), 36);
-                                            //strmid(Zgloszenie[szczegol][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
-                                            //strmid(Zgloszenie[szczegol][zgloszenie_tresc], "Brak", 0, 4, 70);
-                                            //Zgloszenie[szczegol][zgloszenie_status] = 0;
-                                            if(!strcmp(ZgloszenieSasp[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na odrzucaæ!");
-                                            strmid(ZgloszenieSasp[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
-                                            ZgloszenieSasp[szczegol][zgloszenie_status] = 2;
-                                        } else {
-                                            ZgloszenieSasp[szczegol][zgloszenie_status] = 3;
-                                        }
-                                    } else if(listitem2 == 11) {
-                                        ZgloszenieSasp[szczegol][zgloszenie_status] = 5;
-                                    }
-                                    format(string, sizeof(string), ""#HQ_COLOR_PLACEHOLDER"===================="#HQ_COLOR_TEKST"[ZG£OSZENIA]"#HQ_COLOR_PLACEHOLDER"====================");
-                                    for(new i = 0, j=OSTATNIE_ZGLOSZENIASASP; i<j; i++) {
-                                        if(ZgloszenieSasp[i][zgloszenie_status] == 0) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"%s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                                        } else if(ZgloszenieSasp[i][zgloszenie_status] == 1) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"[Przyjête] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                                        } else if(ZgloszenieSasp[i][zgloszenie_status] == 2) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"[Odrzucone] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                                        } else if(ZgloszenieSasp[i][zgloszenie_status] == 3) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_FALSZYWE"[Fa³szywe] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                                        } else if(ZgloszenieSasp[i][zgloszenie_status] == 4) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_WYKONANE"[Wykonane] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                                        } else if(ZgloszenieSasp[i][zgloszenie_status] == 5) {
-                                            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"[Anulowane] %s", string, ZgloszenieSasp[i][zgloszenie_tresc]);
-                                        }
-                                    }
-                                    format(string, sizeof(string), "%s\n"#HQ_COLOR_PLACEHOLDER"====================================================", string);
-                                    Dialog_ShowCallback(playerid, using inline DLG_HQ_SELECT_ZGLOSZENIE, DIALOG_STYLE_LIST, ("Ostatnie zg³oszenia"), string, "Ok", "Anuluj");
-                                }
-                            }
-                            Dialog_ShowCallback(playerid, using inline DLG_HQ_ZGL_NIEROBINIC, DIALOG_STYLE_LIST, ("Przegl¹d zg³oszenia"), string, "Wstecz", "WyjdŸ");   
-                        }
-                        Dialog_ShowCallback(playerid, using inline DLG_HQ_SELECT_ZGLOSZENIE, DIALOG_STYLE_LIST, ("Ostatnie zg³oszenia"), string, "Ok", "Anuluj");
-                    }
-                }
-            }
-        }
-        Dialog_ShowCallback(playerid, using inline DLG_HQ_NONICK_MAIN, DIALOG_STYLE_LIST, ("HQ"), string, "Ok", "Anuluj");
-    }
-    else return sendErrorMessage(playerid, "Nie jesteœ z LSPD!");
-    return 1;
-}
-
-// fpanel
-CMD:fpanel(playerid) {
-    if(PlayerInfo[playerid][pNewAP] != 5) return sendTipMessageEx(playerid, COLOR_GRAD1, "Panel lidera frakcji jest w trakcie tworzenia.");
-    if(PlayerInfo[playerid][pLider] < 1) return noAccessMessage(playerid);
-    new fpanel_string[12500], ftitle[120];
-    new query[140];
-    new id = PlayerInfo[playerid][pLider];
-    format(fpanel_string, sizeof(fpanel_string), ""#KARA_TEKST"»» Zarz¹dzanie pracownikami");
-    //format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    »» {f9f9f9}Lista Pracowników", fpanel_string);
-    //format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_STRZALKA"    »» {f9f9f9}Zwolnij (Offline)", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"»» Zarz¹dzanie pojazdami", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"»» Zarz¹dzanie skinami", fpanel_string);
-    format(fpanel_string, sizeof(fpanel_string), "%s\n"#KARA_TEKST"»» Zarz¹dzanie sejfem", fpanel_string);
-    inline DLG_FPANEL_MAIN(player, dialogid, response, listitem, string:inputtext[]) {
-        #pragma unused player, dialogid, inputtext
-        if(!response) return 1;
-        switch(listitem) {
-            case 1,2: {
-                sendTipMessage(playerid, "Funkcje w przygotowaniu!");   
-                return cmd_fpanel(playerid);
-            }
-            case 3: {
-                return cmd_sejff(playerid);
-            }
-            case 0: {
-                format(query, 140, "SELECT UID,Nick,Rank,Lider FROM `mru_konta` WHERE `Member`='%d' ORDER BY Rank DESC", id);
-                mysql_query(query);
-                mysql_store_result();
-                new nick[24], uid, i = 1, rank, lider = 0;
-                format(fpanel_string, sizeof(fpanel_string), "Stopieñ\tImie i Nazwisko\tRanga");
-                while(mysql_fetch_row_format(query, "|"))
-                {
-                    //A9C4E4
-                    sscanf(query, "p<|>ds[24]dd", uid, nick, rank, lider);
-                    new rankname[26];
-                    strmid(rankname, FracRang[id][rank], 0, 25, 26);
-                    format(fpanel_string, sizeof(fpanel_string), "%s\n%s%d\t%s\t%s", fpanel_string, (lider == 1) ? ("{FF0000}") : ("{A9C4E4}"), rank, nick, rankname);
-                    new pvarname[24];
-                    format(pvarname, sizeof(pvarname), "fP_%d", i);
-                    SetPVarInt(playerid, pvarname, uid);
-                    i++;
-                }
-                inline DLG_FPANEL_OSOBA(player1, dialogid1, response1, listitem1, string:inputtext1[]) {
-                    #pragma unused player1, dialogid1, inputtext1
-                    if(!response1) return cmd_fpanel(playerid);
-                    new pracownik_nick[24], pracownik_uid, rankname[26], ranga, employeestring[1500] = "";
-                    new isLider;
-                    format(pracownik_nick, sizeof(pracownik_nick), "fP_%d", listitem1+1);
-                    pracownik_uid = GetPVarInt(playerid, pracownik_nick);
-                    strmid(pracownik_nick, MruMySQL_GetNameFromUID(pracownik_uid), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
-                    ranga = MruMySQL_GetAccInt("Rank", pracownik_nick);
-                    isLider = MruMySQL_GetAccInt("Lider", pracownik_nick);
-                    if(isLider > 0) {
-                        sendTipMessage(playerid, "Dostêp do danych na temat osób z panelem zabroniony", COLOR_LIGHTBLUE);
-                        return Dialog_ShowCallback(playerid, using inline DLG_FPANEL_OSOBA, DIALOG_STYLE_TABLIST_HEADERS, "Panel Lidera » Lista Pracowników", fpanel_string, "Ok", "Wstecz");
-                    }
-                    strmid(rankname, FracRang[id][ranga], 0, 25, 26);
-                    format(employeestring, sizeof(employeestring), ""#KARA_STRZALKA"    »» "#KARA_TEKST"Nick: "#KARA_TEKST"%s", pracownik_nick);
-                    format(employeestring, sizeof(employeestring), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Ranga: "#KARA_TEKST"%s", employeestring, rankname);
-                    format(employeestring, sizeof(employeestring), "%s\n ", employeestring);
-                    if(isLider == 0) format(employeestring, sizeof(employeestring), "%s\n"#HQ_COLOR_STRZALKA"    »» {00007f}Wyrzuæ Pracownika", employeestring);    
-                    inline DLG_FPANEL_MANAGE(player2, dialogid2, response2, listitem2, string:inputtext2[]) {
-                        #pragma unused player2, dialogid2, inputtext2
-                        if(!response2) return Dialog_ShowCallback(playerid, using inline DLG_FPANEL_OSOBA, DIALOG_STYLE_TABLIST_HEADERS, "Panel Lidera » Zarz¹dzanie Pracownikiem", fpanel_string, "Ok", "Wstecz");
-                        if(listitem2 != 3) {
-                            return Dialog_ShowCallback(playerid, using inline DLG_FPANEL_MANAGE, DIALOG_STYLE_LIST, "Panel Lidera » Zarz¹dzanie Pracownikiem", employeestring, "Ok", "Wstecz");
-                        } else {
-                            if(ReturnUser(pracownik_nick) != INVALID_PLAYER_ID) {
-                                //sendTipMessage(playerid, "Gracz jest online, u¿yj /zwolnij");
-                                new idzwolnij[5];
-                                valstr(idzwolnij, ReturnUser(pracownik_nick));
-                                cmd_zwolnij(playerid, idzwolnij);
-                                return Dialog_ShowCallback(playerid, using inline DLG_FPANEL_OSOBA, DIALOG_STYLE_TABLIST_HEADERS, "Panel Lidera » Lista Pracowników", fpanel_string, "Ok", "Wstecz");
-                            }
-                            // Zwalnianie
-                            /*
-                            PlayerInfo[para1][pTeam] = 3; Team
-                            PlayerInfo[para1][pMember] = 0; Member // ustawiamy 99 aby usunelo bron gdy ktos wejdzie (:
-                            PlayerInfo[para1][pRank] = 0; Rank // ustawiamy 99 aby usunê³o broñ, gdy ktoœ wejdzie (:
-                            PlayerInfo[para1][pSkin] = 0; Skin
-                            PlayerInfo[para1][pTajniak] = 0; PodszywanieSie
-                            */
-                            MruMySQL_SetAccInt("Rank", pracownik_nick, 99);
-                            MruMySQL_SetAccInt("Member", pracownik_nick, 99);
-                            MruMySQL_SetAccInt("PodszywanieSie", pracownik_nick, 0);
-                            MruMySQL_SetAccInt("Skin", pracownik_nick, 0);
-                            MruMySQL_SetAccInt("Team", pracownik_nick, 3);
-                            new msg[160];
-                            format(msg, sizeof(msg), "Zwolni³eœ %s ze swojej frakcji %s", pracownik_nick, FractionNames[id]);
-                            sendTipMessage(playerid, msg, COLOR_LIGHTBLUE);
-                            format(query, 140, "SELECT UID,Nick,Rank,Lider FROM `mru_konta` WHERE `Member`='%d' AND Member < 9 ORDER BY Rank DESC", id);
-                            mysql_query(query);
-                            mysql_store_result();
-                            format(fpanel_string, sizeof(fpanel_string), "Stopieñ\tImie i Nazwisko\tRanga");
-                            while(mysql_fetch_row_format(query, "|"))
-                            {
-                                sscanf(query, "p<|>ds[24]dd", uid, nick, rank);
-                                strmid(rankname, FracRang[id][rank], 0, 25, 26);
-                                format(fpanel_string, sizeof(fpanel_string), "%s\n%d\t%s\t%s", fpanel_string, rank, nick, rankname);
-                                new pvarname[24];
-                                format(pvarname, sizeof(pvarname), "fP_%d", i);
-                                SetPVarInt(playerid, pvarname, uid);
-                                i++;
-                            }
-                            return Dialog_ShowCallback(playerid, using inline DLG_FPANEL_OSOBA, DIALOG_STYLE_TABLIST_HEADERS, "Panel Lidera » Lista Pracowników", fpanel_string, "Ok", "Wstecz");
-                            //return Dialog_ShowCallback(playerid, using inline DLG_FPANEL_OSOBA, DIALOG_STYLE_LIST, "Panel Lidera » Lista Pracowników", fpanel_string, "Ok", "Wstecz");
-                        }
-                    }
-                    Dialog_ShowCallback(playerid, using inline DLG_FPANEL_MANAGE, DIALOG_STYLE_LIST, "Panel Lidera » Zarz¹dzanie Pracownikiem", employeestring, "Ok", "Wstecz");
-                }
-                Dialog_ShowCallback(playerid, using inline DLG_FPANEL_OSOBA, DIALOG_STYLE_TABLIST_HEADERS, "Panel Lidera » Lista Pracowników", fpanel_string, "Ok", "Wstecz");
-            }
-        }
-    }
-    format(ftitle, sizeof(ftitle), "%s »» Panel Lidera", FractionNames[id]);
-    Dialog_ShowCallback(playerid, using inline DLG_FPANEL_MAIN, DIALOG_STYLE_LIST, ftitle, fpanel_string, "Ok", "Anuluj");
-    return 1;
-}
-
 CMD:anulujzp(playerid, params[]) 
 {
     if(PlayerInfo[playerid][pAdmin] >= 5) 
@@ -39076,43 +38149,6 @@ CMD:bonehead(playerid, params[]) {
     return 1;
 }
 
-CMD:budka(playerid, params[]) {
-    new budkaid = jestObokBudki(playerid);
-    if(budkaid == 0) return sendErrorMessage(playerid, "Nie znajdujesz siê przy budce!");
-    if(kaska[playerid] < PRICE_PER_CALL) return sendErrorMessage(playerid, "Nie staæ Ciê na skorzystanie z budki!");
-    if(budki[budkaid][isCurrentlyUsed] == 1) return sendErrorMessage(playerid, "Ktoœ korzysta ju¿ z tej budki!");
-    if(Mobile[playerid] != 1255) return sendErrorMessage(playerid, "Korzystasz ju¿ z telefonu komórkowego");
-    if(GetPVarInt(playerid, "budka-Mobile") != 999) return sendErrorMessage(playerid, "Korzystasz ju¿ jakiejœ budki!");
-    new dokogo, string[128], sendername[MAX_PLAYER_NAME];
-    if(sscanf(params, "d", dokogo)) return sendTipMessage(playerid, "U¿yj /budka [nr tel]");
-    foreach(Player, i)
-    {
-        if(IsPlayerConnected(i))
-        {
-            if(PlayerInfo[i][pPnumber] == dokogo)
-            {
-                if(PhoneOnline[i]) return sendTipMessage(playerid, "Ten telefon jest wy³¹czony!");
-                if(Mobile[i] == 1255)
-                {
-                    SetPVarInt(playerid, "budka-Mobile", i);
-                    SetPVarInt(playerid, "budka-used", budkaid);
-
-                    PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
-                    SendClientMessage(i, COLOR_YELLOW, "Twój telefon dzwoni, (aby odebraæ wpisz: /P) dzwoni¹cy: Budka telefoniczna");
-                    GetPlayerName(i, sendername, sizeof(sendername));
-                    RingTone[i] = 10;
-                    format(string, sizeof(string), "* Telefon %s zaczyna dzwoniæ.", sendername);
-                    SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: U¿yj T aby rozmawiaæ przez telefon i /Z aby sie roz³¹czyæ");
-                    ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    return 1;
-                } else {
-                    return sendTipMessage(playerid, "Zajête!");
-                }
-            }
-        }
-    }
-    return 1;
-}
 
 //new depo2 = floatround(((TicketMoney[playerid]/100) * 50), floatround_round);
 

@@ -29,6 +29,15 @@ stock pusteZgloszenia() {
 		strmid(Zgloszenie[i][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
 		strmid(Zgloszenie[i][zgloszenie_tresc], "Brak", 0, 4, 70);
 	}
+	for(new i = 0, j=OSTATNIE_ZGLOSZENIASASP; i<j; i++) {
+		new Hour, Minute;
+		gettime(Hour, Minute);
+		new string[36];
+		format(string, sizeof(string), "%02d:%02d",  Hour, Minute);
+		strmid(ZgloszenieSasp[i][zgloszenie_kiedy], string, 0, sizeof(string), 36);
+		strmid(ZgloszenieSasp[i][zgloszenie_nadal], "Brak", 0, 4, MAX_PLAYER_NAME+1);
+		strmid(ZgloszenieSasp[i][zgloszenie_tresc], "Brak", 0, 4, 70);
+	}
 }
 stock getWolneZgloszenie() {
 	if(ilosczgloszen == OSTATNIE_ZGLOSZENIA) {
@@ -4707,12 +4716,17 @@ stock orgSave(lID, savetype)
 {
     if(!orgIsValid(lID)) return 0;
     if(!MYSQL_SAVING) return 1;
-    new lQuery[256];
+    new lQuery[512];
+	new name_escaped[32];
+	new motd_escaped[128];
+	mysql_real_escape_string(OrgInfo[lID][o_Name], name_escaped);
+	mysql_real_escape_string(OrgInfo[lID][o_Motd], motd_escaped);
+	
     switch(savetype)
     {
-        case ORG_SAVE_TYPE_BASIC: format(lQuery, 256, "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `UID`='%d'",
+        case ORG_SAVE_TYPE_BASIC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `UID`='%d'",
         OrgInfo[lID][o_Type],OrgInfo[lID][o_Color],OrgInfo[lID][o_Spawn][0],OrgInfo[lID][o_Spawn][1],OrgInfo[lID][o_Spawn][2],OrgInfo[lID][o_Spawn][3], OrgInfo[lID][o_Int], OrgInfo[lID][o_VW], OrgInfo[lID][o_UID]);
-        case ORG_SAVE_TYPE_DESC: format(lQuery, 256, "UPDATE `mru_org` SET `Name`='%s', `Motd`='%s' WHERE `UID`='%d'", OrgInfo[lID][o_Name],OrgInfo[lID][o_Motd], OrgInfo[lID][o_UID]);
+        case ORG_SAVE_TYPE_DESC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Name`='%s', `Motd`='%s' WHERE `UID`='%d'", name_escaped, motd_escaped, OrgInfo[lID][o_UID]);
     }
     if(lQuery[0]) mysql_query(lQuery);
     return 1;
@@ -4725,7 +4739,9 @@ stock orgAdd(typ, name[], uid, id)
     OrgInfo[id][o_Color] = 0xFF0000;
     orgSetName(id, name);
     new lStr[128];
-    format(lStr, 128, "INSERT INTO `mru_org` (`UID`, `Name`, `Type`) VALUES ('%d', '%s', '%d')", uid, name, typ);
+	new name_escaped[32];
+	mysql_real_escape_string(OrgInfo[id][o_Name], name_escaped);
+    format(lStr, 128, "INSERT INTO `mru_org` (`UID`, `Name`, `Type`) VALUES ('%d', '%s', '%d')", uid, name_escaped, typ);
     mysql_query(lStr);
 }
 

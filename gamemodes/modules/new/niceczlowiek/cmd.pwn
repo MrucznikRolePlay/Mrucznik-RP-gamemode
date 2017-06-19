@@ -36,19 +36,6 @@ CMD:oferuj(playerid, params[]) {
     return true;
 }*/
 
-CMD:dopasuj(playerid, params[])
-{
-	new type[24];
-    if(sscanf(params, "s[24]", type)) {
-        return sendTipMessage(playerid, "Dostepne /dopasuj: kamizelke");
-    }
-    if(!strcmp(type, "kamizelke", true))
-    {
-    	EditAttachedObject(playerid, 7);
-    }
-    return 1;
-}
-
 CMD:ooc(playerid, params[]) return cmd_o(playerid, params);
 CMD:o(playerid, params[])
 {
@@ -122,6 +109,19 @@ CMD:o(playerid, params[])
 		}
 	}
 	return 1;
+}
+
+CMD:dopasuj(playerid, params[])
+{
+	new type[24];
+    if(sscanf(params, "s[24]", type)) {
+        return sendTipMessage(playerid, "Dostepne /dopasuj: kamizelke");
+    }
+    if(!strcmp(type, "kamizelke", true))
+    {
+    	EditAttachedObject(playerid, 7);
+    }
+    return 1;
 }
 
 /*CMD:telefon(playerid, params[]) return cmd_tel(playerid, params);

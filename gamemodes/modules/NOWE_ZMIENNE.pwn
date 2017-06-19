@@ -794,6 +794,7 @@ new BramaHAS = 1;
 new BrF[8];
 new BrFS[8];
 
+
 //nowe bramy
 new BramaWDol;
 new BramaWDolS = 1;
