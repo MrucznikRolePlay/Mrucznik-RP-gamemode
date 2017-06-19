@@ -5,12 +5,17 @@
 //Naprawianie timer
 public Naprawa(playerid)
 {
-    new string[256];
-    new giveplayer[MAX_PLAYER_NAME];
-    new sendername[MAX_PLAYER_NAME];
+	new string[256];
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
 	GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
 	GetPlayerName(playerid, sendername, sizeof(sendername));
 	RepairCar[playerid] = GetPlayerVehicleID(playerid);
+	if(RepairCar[playerid] == INVALID_VEHICLE_ID || !IsPlayerInAnyVehicle(playerid))
+	{
+		return 1;
+	}
+	
 	SetVehicleHealth(RepairCar[playerid], 1000.0);
 	RepairVehicle(RepairCar[playerid]);
 
@@ -19,27 +24,30 @@ public Naprawa(playerid)
 
 	PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
 	PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
-	format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
+	new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(playerid)));
+	cena = floatround(cena/4, floatround_round);
+	format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d(+$%d) przez %s.",RepairPrice[playerid],cena,giveplayer);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	format(string, sizeof(string), "* Naprawi³eœ pojazd %s, otrzymujesz $%d.",giveplayer,RepairPrice[playerid]);
 	SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
 	format(string, sizeof(string),"* Mechanik %s naprawia pojazd %s i chowa narzêdzia do skrzynki.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
 	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
- 	format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
- 	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-  	PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
-   	if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
-    { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-    else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
-   	{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-    else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
-    { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-    else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
-    { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-    ZabierzKase(playerid, RepairPrice[playerid]);
-    DajKase(RepairOffer[playerid], RepairPrice[playerid]);
-    RepairOffer[playerid] = 999;
-    RepairPrice[playerid] = 0;
+	format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
+	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
+	if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
+	{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+	else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
+	{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+	else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
+	{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+	else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
+	{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+	ZabierzKase(playerid, RepairPrice[playerid]);
+    ZabierzKase(playerid, cena);
+	DajKase(RepairOffer[playerid], RepairPrice[playerid]);
+	RepairOffer[playerid] = 999;
+	RepairPrice[playerid] = 0;
 	Naprawiasie[playerid] = 0;
     return 1;
 }
@@ -2212,9 +2220,10 @@ public JednaSekundaTimer()
 					GetVehicleHealth(vehicleid, health);
 					if(health <= 999)
 					{
-						SendClientMessage(i, 0xFFC0CB, "Twój pojazd zosta³ naprawiony za 2500$");
+						new cena = przeliczBogactwo(GetVehicleModel(GetPlayerVehicleID(i)));
+				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", cena);
+				        ZabierzKase(i, -cena);
 						RepairVehicle(vehicleid);
-						DajKase(i, -2500);
 						naprawiony[i] = 1;
 						SetTimerEx("Naprawianie",60000,0,"d",i);
 					}
@@ -2914,6 +2923,14 @@ public JednaSekundaTimer()
 				}
 			}
 		}
+		if(CzasInformacyjnego[i] > 0)
+        {
+            CzasInformacyjnego[i]--;
+            if(CzasInformacyjnego[i] == 0)
+            {
+                PlayerTextDrawHide(i, TextInformacyjny[i]);
+            }
+        }
 		if(StartingPaintballRound == 1 && AnnouncedPaintballRound == 0)
 		{
 			AnnouncedPaintballRound = 1;
