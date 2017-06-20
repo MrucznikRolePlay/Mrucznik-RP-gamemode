@@ -1766,7 +1766,7 @@ SetPlayerSpawnPos(playerid)
 				}
 				else if(GetPlayerOrg(playerid) > 0) //Spawn Organizacji
 				{
-		            new org = GetPlayerOrg(playerid);
+                    new org = gPlayerOrg[playerid];
 		            if(OrgInfo[org][o_Spawn][0] != 0.0)
 		            {
 		                SetPlayerVirtualWorld(playerid, OrgInfo[org][o_VW]);
@@ -1776,7 +1776,7 @@ SetPlayerSpawnPos(playerid)
 		            }
 		            else
 		            {
-						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawnu - spawnujesz siê jako cywil.");
+						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawnu - spawnujesz siê jako cywil");
                         new rand = random(sizeof(gRandomPlayerSpawns));
 			    		SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 			    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);

@@ -20,18 +20,18 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 		{
 			case 0:
 			{
-				new string[1800];
-		        format(string, 1800, "{FFFFFF}Lista zmian aktualizacji 2.5.82\n\n");
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}panel dla liderów frakcji ( /fpanel )\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}zmiana\t{FFFFFF}powrót komendy /pobij - brak aj za /q oraz 45s czekania po pobiciu\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}bugfix\t{FFFFFF}naprawiony bug z domkami\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}/hq dla sasd oraz sasd w /call 911\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}przejazd na granicach p³atny $1750 ( /przejazd )\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}zmiana\t{FFFFFF}ulepszenie matsiarz daje bonusowe materia³y przy dostarczeniu\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}dopasowanie kamizelki na skinie ( /dopasuj )\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}zmiana\t{FFFFFF}po pójœciu do paki przez cmd /paka /aresztuj poœcig siê deaktywuje\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}interior biura i magazyny dla /rodziny 23\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}zmiana\t{FFFFFF}niewielkie poprawki stabilnoœci\t\n", string);
+				new string[2200];
+		        format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.82\n\n");
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}panel dla liderów frakcji ( /fpanel )\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}powrót komendy /pobij - brak aj za /q oraz 45s czekania po pobiciu\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}naprawiony bug z domkami\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}/hq dla sasd oraz sasd w /call 911\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}przejazd na granicach p³atny $1750 ( /przejazd )\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}ulepszenie matsiarz daje bonusowe materia³y przy dostarczeniu\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}dopasowanie kamizelki na skinie ( /dopasuj )\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}po pójœciu do paki przez cmd /paka /aresztuj poœcig siê deaktywuje\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}interior biura i magazyny dla /rodziny 23\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}niewielkie poprawki stabilnoœci\t\n", string);
 
 		        if (PlayerInfo[playerid][pAdmin] >= 1000)
 				{
@@ -538,7 +538,7 @@ stock showFactionWorkers(playerid, page=1)
 
 	new id = PlayerInfo[playerid][pLider];
 
-	format(query, sizeof(query), "SELECT COUNT(*) FROM `mru_konta` WHERE `Member`='%d' OR `Lider`='%d'", id, id);
+	format(query, sizeof(query), "SELECT COUNT(*) FROM `mru_konta` WHERE `Member`='%d' AND Rank < 90", id);
 
 	mysql_query(query);
 	mysql_store_result();
@@ -561,7 +561,7 @@ stock showFactionWorkers(playerid, page=1)
 
 	new offset = (page - 1) * FPANEL_PER_PAGE;
 
-	format(query, sizeof(query), "SELECT UID,Nick,Rank,Lider FROM `mru_konta` WHERE `Member`='%d' OR `Lider`='%d' ORDER BY Rank Desc LIMIT %d,%d;", id, id, offset, FPANEL_PER_PAGE);
+	format(query, sizeof(query), "SELECT UID,Nick,Rank,Lider FROM `mru_konta` WHERE `Member`='%d' AND Rank < 90 ORDER BY Rank Desc LIMIT %d,%d;", id, offset, FPANEL_PER_PAGE);
 	mysql_query(query);
 	mysql_store_result();
 
@@ -569,16 +569,19 @@ stock showFactionWorkers(playerid, page=1)
     while(mysql_fetch_row_format(query, "|"))
     {
         sscanf(query, "p<|>ds[24]dd", uid, nick, rank, lider);
-        strmid(rankname, FracRang[id][rank], 0, 35, 36);
-        format(str, sizeof(str), "%s\n%s\t[%d] %s", str, nick, rank, rankname);
-        DynamicGui_AddRow(playerid, FPANEL_DG_OSOBA, uid);
+        if(rank != 99)
+        {
+	        strmid(rankname, FracRang[id][rank], 0, 35, 36);
+	        format(str, sizeof(str), "%s\n%s\t[%d] %s", str, nick, rank, rankname);
+	        DynamicGui_AddRow(playerid, FPANEL_DG_OSOBA, uid);
+	    }
     }
 
     if( page > 1 )
 	{
 		format(str, sizeof(str), "%s\n\n{888888}<<< Poprzednia strona\n  \n", str);
 		DynamicGui_AddRow(playerid, FPANEL_DG_PREV);
-		
+
 		DynamicGui_AddBlankRow(playerid);
 	}
 

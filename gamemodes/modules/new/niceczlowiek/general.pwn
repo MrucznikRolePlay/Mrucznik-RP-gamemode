@@ -117,12 +117,12 @@ public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Fl
 	//playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2
     if(response)
     {
-        if(fScaleX > 1.1 || fScaleY > 1.66 || fScaleZ > 1.66 || fScaleX < 1 || fScaleY < 1 || fScaleZ < 1) {
+        if(fScaleX > 1.6 || fScaleY > 1.96 || fScaleZ > 1.96 || fScaleX < 0.7 || fScaleY < 0.7 || fScaleZ < 0.7) {
             RemovePlayerAttachedObject(playerid, 7);
             SetPlayerAttachedObject(playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2);//Armour
             return sendErrorMessage(playerid, "Zmiany nie zosta³y zapisane, dodatek by³ zbyt du¿y lub zbyt ma³y!");
         }
-        if(fOffsetX > 0.2 || fOffsetY > 0.2 || fOffsetZ > 0.2 || fOffsetX < -0.2 || fOffsetY < -0.2 || fOffsetZ < -0.2) {
+        if(fOffsetX > 0.35 || fOffsetY > 0.35 || fOffsetZ > 0.35 || fOffsetX < -0.35 || fOffsetY < -0.35 || fOffsetZ < -0.35) {
             RemovePlayerAttachedObject(playerid, 7);
             SetPlayerAttachedObject(playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2);//Armour
             return sendErrorMessage(playerid, "Zmiany nie zosta³y zapisane, dodatek by³ zbyt oddalony od gracza!");
