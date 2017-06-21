@@ -82,7 +82,7 @@
 #define SCENA_NEON_OFFSET_Z 0.12630
 
 //system barierek by Kubi
-#define TOTAL_ITEMS         11
+#define TOTAL_ITEMS         12
 #define SELECTION_ITEMS     4
 #define ITEMS_PER_LINE      2
 

@@ -499,18 +499,65 @@ stock fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[
             DeletePVar(playerid, "fpanel_uid");
 
             return showFactionWorkers(playerid, GetPVarInt(playerid, "fpanel_Page"));
-    	} else {
+    	} 
+    	else if(listitem == 4)
+    	{
+
+    		new fracid = PlayerInfo[playerid][pLider];
+    		new typ = 0;
+    		new str[512];
+		    for(new i=0;i<10;i++)
+		    {
+		        if(strlen((typ == 0) ? (FracRang[fracid][i]) : (FamRang[fracid][i])) < 2)
+		            format(str, 512, "%s[%d] -\n", str, i);
+		        else
+		            format(str, 512, "%s[%d] %s\n", str, i, (typ == 0) ? (FracRang[fracid][i]) : (FamRang[fracid][i]));
+		    }
+
+		    return ShowPlayerDialogEx(playerid, 1966, DIALOG_STYLE_LIST, "Wybierz rangê, któr¹ chcesz nadaæ graczu", str, "Nadaj", "Anuluj");
+    	}
+    	else
+    	{
     		new uid = GetPVarInt(playerid, "fpanel_uid");
 			DeletePVar(playerid, "fpanel_uid");    		
     		return showEmployeeInfo(playerid, uid);
     	}
+	}
+	if(dialogid == 1966)
+	{
+		if( !response )
+		{
+			showEmployeeInfo(playerid, GetPVarInt(playerid, "fpanel_uid"));
+			DeletePVar(playerid, "fpanel_uid");
+			return 1;
+		}
+		if(strlen(FracRang[GetPlayerFraction(playerid)][listitem]) < 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
+
+		new pracownik_nick[26];
+    	strmid(pracownik_nick, MruMySQL_GetNameFromUID(GetPVarInt(playerid, "fpanel_uid")), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+		if(ReturnUser(pracownik_nick) != INVALID_PLAYER_ID) {
+            sendTipMessage(playerid, "Gracz jest online, u¿yj /dajrange");
+            return showFactionWorkers(playerid, GetPVarInt(playerid, "fpanel_Page"));
+        }
+        if(MruMySQL_GetAccInt("Member", pracownik_nick) != PlayerInfo[playerid][pLider] ) return sendErrorMessage(playerid, "No ³adne hakowanie!");
+
+		MruMySQL_SetAccInt("Rank", pracownik_nick, listitem);
+
+		new msg[128];
+
+		format(msg, sizeof(msg), "Awansowa³eœ %s na rangê %s", pracownik_nick, FracRang[PlayerInfo[playerid][pLider]][listitem]);
+        sendTipMessage(playerid, msg, COLOR_LIGHTBLUE);
+
+        new uid = GetPVarInt(playerid, "fpanel_uid");
+		DeletePVar(playerid, "fpanel_uid");    		
+    	return showEmployeeInfo(playerid, uid);
 	}
 	return 0;
 }
 
 stock showEmployeeInfo(playerid, employeeUid)
 {
-	new pracownik_nick[26], rankname[26], ranga, employeestring[888];
+	new pracownik_nick[26], rankname[26], ranga, employeestring[1100];
     new isLider;
                
     strmid(pracownik_nick, MruMySQL_GetNameFromUID(employeeUid), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
@@ -526,7 +573,8 @@ stock showEmployeeInfo(playerid, employeeUid)
     format(employeestring, sizeof(employeestring), ""#KARA_STRZALKA"    »» "#KARA_TEKST"Nick: "#KARA_TEKST"%s", pracownik_nick);
     format(employeestring, sizeof(employeestring), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Ranga: "#KARA_TEKST"%s", employeestring, rankname);
     format(employeestring, sizeof(employeestring), "%s\n ", employeestring);
-    if(isLider == 0) format(employeestring, sizeof(employeestring), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Wyrzuæ Pracownika", employeestring);  
+    format(employeestring, sizeof(employeestring), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Wyrzuæ Pracownika", employeestring);  
+    format(employeestring, sizeof(employeestring), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Zmieñ rangê", employeestring);  
     SetPVarInt(playerid, "fpanel_uid", employeeUid);
     ShowPlayerDialogEx(playerid, 1960, DIALOG_STYLE_LIST, "Panel Lidera » Zarz¹dzanie Pracownikiem", employeestring, "Ok", "Wstecz");
     return 1;

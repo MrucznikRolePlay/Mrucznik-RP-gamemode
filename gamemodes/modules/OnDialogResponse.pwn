@@ -54,7 +54,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
 		}
 	}
-	
+	else if(dialogid == 9519)
+	{
+		if(!response) return 1;
+		if(kaska[playerid] < 30000) return sendErrorMessage(playerid, "Nie masz tyle kasy");
+		SetPlayerArmour(playerid, 90);
+		SetPlayerHealth(playerid, 100);
+		DajKase(playerid, -30000);
+		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i ¿ycie");
+	}	
 	//PADZIOCH
 	else if(dialogid == DIALOGID_MUZYKA) 
 	{

@@ -2274,6 +2274,22 @@ CMD:wyrzucbronie(playerid)
 	return 1;
 }
 
+CMD:wyrzuckami(playerid) return cmd_zdejmijkevlar(playerid);
+CMD:zdejmijkami(playerid) return cmd_zdejmijkevlar(playerid);
+CMD:zdejmijkevlar(playerid)
+{
+    if(IsPlayerConnected(playerid))
+    {
+            new string[64], sendername[MAX_PLAYER_NAME];
+            GetPlayerName(playerid, sendername, sizeof(sendername));
+            format(string, sizeof(string),"%s zdejmuje kevlar i rzuca go na ziemie", sendername);
+            ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+
+            SetPlayerArmour(playerid, 0);
+    }
+    return 1;
+}
+
 CMD:ub(playerid) return cmd_usunbron(playerid);
 CMD:usunbron(playerid)
 {
@@ -4643,9 +4659,17 @@ CMD:zakoncztrase(playerid)
 	return 1;
 }
 
+CMD:mojskin(playerid)
+{
+    new str[32];
+    format(str, 32, "ID Twojego skina: %d", GetPlayerSkin(playerid));
+    sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, str);
+    return 1;
+}
+
 CMD:okienko(playerid)
 {
-	if (IsAUrzednik(playerid) || IsAMedyk(playerid) || IsACop(playerid))
+	if (IsAUrzednik(playerid))
 	{
 		if(IsPlayerConnected(playerid))
 		{
@@ -15183,10 +15207,7 @@ CMD:kuparmor(playerid)
 {
 	if(PlayerToPoint(7.0, playerid, 296.1448,-38.1248,1001.5156))
 	{
-		SetPlayerArmour(playerid, 90);
-		SetPlayerHealth(playerid, 100);
-		DajKase(playerid, -5000);
-		sendTipMessage(playerid, "Zaplaciles 5000$ za kamizelke i ¿ycie");
+        ShowPlayerDialogEx(playerid, 9519, DIALOG_STYLE_MSGBOX, "Kamizelka i ¿ycie", "Czy chcesz odnowiæ kamizelkê i ¿ycie za $30000 ?", "Tak", "Nie");
 	}
 	else
 	{
@@ -32488,6 +32509,8 @@ CMD:rozkuj(playerid, params[])
 }
 
 CMD:guard(playerid, params[]) return cmd_ochrona(playerid, params);
+CMD:sellkami(playerid, params[]) return cmd_ochrona(playerid, params);
+CMD:sellkamizelke(playerid, params[]) return cmd_ochrona(playerid, params);
 CMD:ochrona(playerid, params[])
 {
 	new string[128];
@@ -32506,26 +32529,38 @@ CMD:ochrona(playerid, params[])
 		return 1;
 	}
 
-	if(money < 1000 || money > 10000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 1000 do 10 000!"); return 1; }
+	if(money < 5000 || money > 15000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 5000 do 15000!"); return 1; }
 	if(IsPlayerConnected(giveplayerid))
 	{
 	    if(giveplayerid != INVALID_PLAYER_ID)
 	    {
 	        if(ProxDetectorS(8.0, playerid, giveplayerid))
 			{
+                if(gettime() < GetPVarInt(playerid, "armoryTimeLimit"))
+                {
+                    sendErrorMessage(playerid, "Kamizelki oferowaæ mo¿esz co 30 sekund");
+                }
 			    if(giveplayerid == playerid)
 			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz proponowaæ ochrony samemu sobie !");
+			        if(gettime() < GetPVarInt(playerid, "selfArmorLimit")) {
+                        return sendErrorMessage(playerid, "Mo¿esz oferowaæ kamizelke samemu sobie co 15 minut");
+                    }
+                    SetPVarInt(playerid, "selfArmorLimit", gettime() + 900);
+                    SetPlayerArmour(playerid, 90);
+
+                    sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "Da³eœ sobie samemu kamizelkê");
 			        return 1;
 			    }
 			    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 			    format(string, sizeof(string), "* Oferujesz ochronê %s za $%d.", giveplayer, money);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-				format(string, sizeof(string), "* Ochroniarz %s chce ciê ochroniaæ i daæ pancerz za $%d, (wpisz /akceptuj ochrona) aby akceptowaæ.", sendername, money);
+				format(string, sizeof(string), "* Ochroniarz %s oferuje ci kamielkê za $%d, (wpisz /akceptuj ochrona) aby akceptowaæ", sendername, money);
 				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				GuardOffer[giveplayerid] = playerid;
 				GuardPrice[giveplayerid] = money;
+
+                SetPVarInt(playerid, "armoryTimeLimit", gettime() + 29);
 			}
 			else
 			{
@@ -37022,6 +37057,7 @@ CMD:zoneid(playerid)
     }
     return 1;
 }
+
 
 CMD:unlock(playerid) return cmd_lock(playerid);
 CMD:lock(playerid)

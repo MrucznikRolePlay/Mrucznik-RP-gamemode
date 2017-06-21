@@ -4084,7 +4084,19 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 {
 	new string[256];
     //---------------------------------------------- Anti Cheat ------------------------------------//
-
+   /* if(newstate == PLAYER_STATE_DRIVER) {
+        if(GetPVarInt(playerid, "iLastDrive") != 0 && (gettime() - GetPVarInt(playerid, "iLastDrive")) <= 1) {
+            SetPVarInt(playerid, "iFlags", GetPVarInt(playerid, "iLastDrive")+1);
+            if(GetPVarInt(playerid, "iLastDrive") >= 2) {
+                format(string, 256, "%s podejrzany o tepanie aut. Dostal kicka. LVL: %d (%dh online)", GetNick(playerid), PlayerInfo[playerid][pLevel], PlayerInfo[playerid][pConnectTime]);
+                SendAdminMessage(COLOR_LIGHTRED, string);
+                Kick(playerid);
+                return true;
+            }
+        }
+        
+        SetPVarInt(playerid, "iLastDrive", gettime());
+    } */
 	if(newstate == PLAYER_STATE_DRIVER)
     {
         if(!ToggleSpeedo[playerid])
@@ -5314,6 +5326,8 @@ public OnPlayerUpdate(playerid)
 		printf("Problem z Update, nick: %s", GetNick(playerid));
         KickEx(playerid);
     }
+
+
     
     systempozarow_OnPlayerUpdate(playerid);//System Po¿arów v0.1
     

@@ -332,7 +332,7 @@ new Barier[MAX_FRAC][10];
 new Text3D:BarText[MAX_FRAC][10];
 
 new gItemList[TOTAL_ITEMS] = {
-1424,3091,1238,3578,997,1427 ,1422,1434,981,7933,1237
+1424,3091,1238,3578,997,1427 ,1422,1434,981,7933,1237,19834
 };
 //LSMC
 new Float:ElevatorDoors[7][5] = { //18756 - lewe | 18757 - prawe

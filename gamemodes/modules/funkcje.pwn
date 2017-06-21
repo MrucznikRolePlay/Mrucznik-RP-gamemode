@@ -1309,6 +1309,10 @@ stock IsPlayerInCube(playerid, Float:xmin, Float:ymin, Float:zmin, Float:xmax, F
 
 stock GetPlayer2DZone(playerid, zone[], len)
 {
+	if(PlayerInfo[playerid][pJailed] == 3) 
+	{
+		return format(zone, len, "Nieznane ((AJ))", 0);
+	}
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
  	for(new i = 0; i != sizeof(gSAZones); i++ )
@@ -9556,6 +9560,7 @@ stock Zone_GetCash(zoneid)
 
 stock Car_Lock(playerid, veh)
 {
+	if(IsABike(veh)) return sendErrorMessage(playerid, "Nie mo¿esz u¿yæ /lock na motocyklu");
     new engine, lights, alarm, doors, bonnet, boot, objective;
     GetVehicleParamsEx(veh, engine, lights, alarm, doors, bonnet, boot, objective);
     if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT) ApplyAnimation(playerid, "INT_HOUSE", "wash_up",4.1, 0, 0, 0, 0, 0, 1);
@@ -9570,6 +9575,8 @@ stock Car_Lock(playerid, veh)
         GameTextForPlayer(playerid, "Zamek w drzwiach ~g~otwarty!", 2000, 5);
     }
     SetVehicleParamsEx(veh, engine, lights, alarm, doors, bonnet, boot, objective);
+
+    return 1;
 }
 
 
