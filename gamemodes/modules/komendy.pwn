@@ -2350,7 +2350,9 @@ CMD:bp(playerid, params[])//blokada pisania
 					format(string, sizeof(string), "AdmCmd: %s dostal BP od %s na %d godzin, z powodem %s", giveplayer, sendername, czas, text);
 					KickLog(string);
 					//opis
-                    Opis_Usun(giveplayerid);
+                    //Opis_Usun(giveplayerid);
+                    Update3DTextLabelText(PlayerInfo[giveplayerid][pDescLabel], 0xBBACCFFF, "");
+                    PlayerInfo[giveplayerid][pDesc][0] = EOS;
 					return 1;
 				}
 				else
@@ -3071,9 +3073,8 @@ CMD:respawn(playerid)
 	new string[128];
 	if(Count >= 20)
 	{
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pZG] > 7)
+		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 		{
-            if(areThereAnyAdminsOrPolAdmins() || PlayerInfo[playerid][pZG] > 7) return sendErrorMessage("Nie mo¿esz u¿yæ tej komendy gdy admini s¹ na serwerze");
 			SendClientMessage(playerid,COLOR_YELLOW, "Odliczanie rozpoczête");
 			BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
 			format(string, sizeof(string), "AdmCmd: %s [ID: %d] rozpocz¹³ odliczanie do Respawnu Aut !", GetNick(playerid), playerid);
@@ -14414,7 +14415,7 @@ CMD:kogut(playerid)
 								format(string, sizeof(string), "* %s przyczepia kogut na dach samochodu.", sendername);
 								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							}
-							sendErrorMessage(playerid, "OSTRZE¯ENIE: Nadu¿ywaie kogutów skutkuje natychmiastowym wyrzuceniem z frakcji.");
+							sendErrorMessage(playerid, "OSTRZE¯ENIE: Nadu¿ywanie kogutów skutkuje natychmiastowym wyrzuceniem z frakcji.");
 						}
 						else
 						{
@@ -16182,6 +16183,7 @@ CMD:ja(playerid, params[])
 
 CMD:narracja(playerid, params[])
 {
+    new string[250];
     if(PlayerInfo[playerid][pAdmin] > 10 || PlayerInfo[playerid][pNewAP] == 5)
     {
         if(isnull(params))

@@ -937,6 +937,7 @@ new CenaBroni[MAX_PLAYERS];//ALL W GUI
 new IDBroniZbrojownia[MAX_PLAYERS];//ALL W GUI
 new weryfikacja[MAX_PLAYERS];//ANTY HACKED
 new iddialog[MAX_PLAYERS];//ANTY HACKED
+new antyHider[MAX_PLAYERS];
 new taxitest[MAX_PLAYERS];//Taxi Test
 new mechanikid[MAX_PLAYERS];//Mechanik w GUI
 new naprawiony[MAX_PLAYERS];//Napr
@@ -1272,7 +1273,7 @@ ZerujZmienne(playerid)
 	ClearGroceries(playerid);
 	ClearMarriage(playerid);
 
-    Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
+//    Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
 	

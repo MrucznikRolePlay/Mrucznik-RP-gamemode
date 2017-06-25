@@ -55,7 +55,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <ACSBM>
 #include <timestamp.inc>
 #define AC_MAX_CONNECTS_FROM_IP		5
-#include <nex-ac>						     // By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include "../pawno/include/nexac"			// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include "../pawno/include/systempozarow"   //System Po¿arów v0.1
 
 #include "modules\new\niceczlowiek\dynamicgui.pwn"
@@ -943,12 +943,6 @@ public OnPlayerDisconnect(playerid, reason)
 
     //12.06.2014  opis
     //Opis_Usun(playerid);
-    if(Opis[playerid] != Text3D:INVALID_3DTEXT_ID)
-    {
-        DestroyDynamic3DTextLabel(Text3D:Opis[playerid]);
-        Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
-    }
-    DestroyDynamic3DTextLabel(Text3D:Opis[playerid]);
 
     if(noclipdata[playerid][fireobject] != 0)
     {

@@ -28,7 +28,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
 		}
     }
-	
+	if(antyHider[playerid] != 1)
+	{
+		new string[128];
+		format(string, sizeof(string), "AdmWarn: %s(ID: %i) <- ten gnoj czituje dialogi sprawdzcie co robi", GetNick(playerid, true), playerid);
+		SendAdminMessage(COLOR_YELLOW, string);
+		return 1;
+	}
+
+	antyHider[playerid] = 0;
 	//2.5.8
 	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
@@ -515,73 +523,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		return 1;
 	}
-    if(dialogid == D_OPIS)
-    {
-        if(!response) return 1;
-        new id;
-        if(strcmp(inputtext, "» Ustaw opis", false, 12) == 0) id = 1;
-        else if(strcmp(inputtext, "» Zmieñ opis", false, 12) == 0) id = 2;
-        else if(strcmp(inputtext, "» Usuñ", false, 6) == 0) id = 3;
-
-        switch(id)
-        {
-            case 1:
-            {
-                if(strcmp(PlayerDesc[playerid], "BRAK", true) == 0)
-                {
-                    cmd_opis(playerid, "");
-                    SendClientMessage(playerid, COLOR_GRAD2, "Nie posiadasz opisu, zmieñ go.");
-                    return 1;
-                }
-                Opis_Usun(playerid);
-
-                new opis[128];
-                strunpack(opis, PlayerDesc[playerid]);
-                new str[128];
-                WordWrap(opis, true, str);
-
-                Opis[playerid] = CreateDynamic3DTextLabel(str, COLOR_PURPLE, 0.0, 0.0, -0.67, 3.0, playerid);
-                SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis postaci, by go usun¹æ wpisz {CC3333}/opis usuñ{CC3333}");
-            }
-            case 2:
-            {
-                ShowPlayerDialogEx(playerid, D_OPIS_UPDATE, DIALOG_STYLE_INPUT, "Opis postaci", "WprowadŸ ni¿ej w³asny opis postaci.", "Ustaw", "Wróæ");
-            }
-            case 3:
-            {
-                if(!Opis_Usun(playerid, true))
-                {
-                    SendClientMessage(playerid, -1, "Opis: Nie posiadasz opisu.");
-                    cmd_opis(playerid, "");
-                    return 1;
-                }
-                cmd_opis(playerid, "");
-            }
-        }
-        return 1;
-    }
-    else if(dialogid == D_OPIS_UPDATE)
-    {
-        if(!response) return cmd_opis(playerid, "");
-        if(strlen(inputtext) < 4 || strlen(inputtext) > 120)
-        {
-            cmd_opis(playerid, "");
-            SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d³ugosæ opisu.");
-            return 1;
-        }
-        else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
-		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.') || (inputtext[i] == '!') || (inputtext[i] == ':') || (inputtext[i] == '-') || (inputtext[i] == '{') || (inputtext[i] == '}') || (inputtext[i] == '[') || (inputtext[i] == ']'))
-				continue;
-            else if ((inputtext[i] == 'Ê') || (inputtext[i] == 'Ó') || (inputtext[i] == '¥') || (inputtext[i] == 'Œ') || (inputtext[i] == '£') || (inputtext[i] == '¯') || (inputtext[i] == '') || (inputtext[i] == 'Æ') || (inputtext[i] == 'Ñ') || (inputtext[i] == 'ê') || (inputtext[i] == 'ó') || (inputtext[i] == '¹') || (inputtext[i] == 'œ') || (inputtext[i] == '³') || (inputtext[i] == '¿') || (inputtext[i] == 'Ÿ') || (inputtext[i] == 'æ') || (inputtext[i] == 'ñ'))
-                continue;
-			else return SendClientMessage(playerid, COLOR_GRAD1, "Opis: U¿y³eœ nieodpowiednich znaków opisu.");
-		}
-        strdel(PlayerDesc[playerid], 0, 128 char);
-        strpack(PlayerDesc[playerid], inputtext);
-        MruMySQL_UpdateOpis(playerid, PlayerInfo[playerid][pUID], 1);
-        cmd_opis(playerid, "");
-        return 1;
-    }
     else if(dialogid == D_VEHOPIS)
     {
         if(!response) return 1;

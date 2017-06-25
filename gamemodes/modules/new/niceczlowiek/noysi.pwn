@@ -61,6 +61,7 @@ stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		strcopy(inputOpis, inputtext, 256);
 
 		mysql_real_escape_string(inputOpis, inputOpis);
+		
 		new DBResult:db_result;
 		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`='%d' AND `text`='%s'", PlayerInfo[playerid][pUID], inputOpis));
 
@@ -97,28 +98,28 @@ COMMAND:opis(playerid, params[])
 	}
 
 	DynamicGui_Init(playerid);
-	new string[1000];
+	new string[1400];
 	
 	if(!isnull(PlayerInfo[playerid][pDesc]))
 	{
 		new str[256];
 		strcopy(str, PlayerInfo[playerid][pDesc], 256);
 		strdel(str, 48, 256);
-		format(string, sizeof(string), "%s{f4f5fa}%s...\n", string, str);
+		format(string, sizeof(string), "%s{f4f5fa}%s\n", string, str);
 		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
 		
-		format(string, sizeof(string), "%s##\t Usuñ opis\n", string);
+		format(string, sizeof(string), "%s{888888}##\t{ff0000}Usuñ opis\n", string);
 		DynamicGui_AddRow(playerid, DG_DESC_DELETE);
 	}
 	else
 	{
-		format(string, sizeof(string), "%s##\t Ustaw opis\n", string);
+		format(string, sizeof(string), "%s{888888}##\t{00B33C}Ustaw opis\n", string);
 		DynamicGui_AddRow(playerid, DG_DESC_ADD);
 	}
 
 	format(string, sizeof(string), "%s\t\t\n", string);
 	DynamicGui_AddBlankRow(playerid);
-	format(string, sizeof(string), "%s{dafc10}Ostatnie opisy\n", string);
+	format(string, sizeof(string), "%s{00B33C}Ostatnie opisy\n", string);
 	DynamicGui_AddBlankRow(playerid);
 
 	new DBResult:db_result;
@@ -172,6 +173,20 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 			case 0:
 			{
 				new string[2200];
+				format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.83\n\n");
+				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}przebieranie siê w skiny frakcyjne/cywilne dla frakcji bez /duty ( /skinf )\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}naprawa b³êdu uniemo¿liwiaj¹cego YKZ u¿yæ /wepchnij\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}usuniêto mo¿liwoœæ u¿ywania /ub po /wb (do czasu respawnu)\t\n", string);
+
+				if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pNewAP] == 5)
+				{
+					format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}dodano /narracja (opis na slacku)\t\n", string);
+					
+				}
+			}
+			case 1:
+			{
+				new string[2200];
 		        format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.82\n\n");
 		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}panel dla liderów frakcji ( /fpanel )\t\n", string);
 		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}powrót komendy /pobij - brak aj za /q oraz 45s czekania po pobiciu\t\n", string);
@@ -191,7 +206,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        ShowPlayerDialogEx(playerid, 1963, DIALOG_STYLE_MSGBOX, "{C0C0C0}Mrucznik-RP » Zmiany w wersji 2.5.82", string, "Ok", "");
 			}
-			case 1:
+			case 2:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono bugi i b³êdy.");
@@ -218,7 +233,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 2:
+			case 3:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
@@ -256,7 +271,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 3:
+			case 4:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   BY niceCzlowiek   ---------");
@@ -280,7 +295,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 4: 
+			case 5: 
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_WHITE,"Dodano now¹ frakcjê - SASP (San Andreas State Police).");
@@ -291,7 +306,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 5:
+			case 6:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -317,7 +332,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 6:
+			case 7:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -366,7 +381,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 7:
+			case 8:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -376,7 +391,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 8:
+			case 9:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -451,7 +466,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 9:
+			case 10:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   G³ówne systemy   ---------");
@@ -461,7 +476,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 10:
+			case 11:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   B³êdy i niedoróbki   ---------");
@@ -492,7 +507,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 11:
+			case 12:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
@@ -559,7 +574,8 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 	if(page == CHANGELOG_MAIN)
 	{
 		new string[900];
-		format(string, sizeof(string), "##\t"#HQ_COLOR_TEKST2"2.5.82\n");
+		format(string, sizeof(string), "##\t"#HQ_COLOR_TEKST2"2.5.83\n");
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.82\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.8\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.7\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.6\n", string);

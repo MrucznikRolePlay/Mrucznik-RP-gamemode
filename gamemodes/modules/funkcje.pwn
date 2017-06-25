@@ -365,22 +365,6 @@ stock GetPlayerFraction(playerid)
     else return PlayerInfo[playerid][pMember];
 }
 
-stock Opis_Usun(playerid, message=false)
-{
-    if(playerid >= MAX_PLAYERS) return 0;
-    if(Opis[playerid] != Text3D:INVALID_3DTEXT_ID)
-    {
-        DestroyDynamic3DTextLabel(Text3D:Opis[playerid]);
-        Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
-        if(message)
-        {
-            SendClientMessage(playerid, COLOR_YELLOW, "Opis: Usuniêto.");
-        }
-        return 1;
-    }
-    return 0;
-}
-
 stock CarOpis_Usun(playerid, vehicleid, message=false)
 {
     if(vehicleid >= MAX_VEHICLES) return 0;
@@ -7493,6 +7477,8 @@ stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[]
 {
 	ShowPlayerDialog(playerid, dialogid, style, caption, info, button1, button2);
 	iddialog[playerid] = dialogid;
+	antyHider[playerid] = 1;
+
 	return 1;
 }
 
