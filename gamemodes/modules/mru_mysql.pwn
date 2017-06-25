@@ -646,7 +646,7 @@ public MruMySQL_LoadAcocount(playerid)
 	}
 
     MruMySQL_LoadAccess(playerid);
-    MruMySQL_WczytajOpis(playerid, PlayerInfo[playerid][pUID], 1);
+    //MruMySQL_WczytajOpis(playerid, PlayerInfo[playerid][pUID], 1);
 	if(id != 4) return false;
 	return true;
 }

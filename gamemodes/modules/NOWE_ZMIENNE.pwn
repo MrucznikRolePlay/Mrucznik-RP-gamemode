@@ -1025,6 +1025,11 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
 	//z disconecta
+
+    new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
+
+    PlayerInfo[playerid][pDescLabel] = tmp_label;
+
 	zawodnik[playerid] = 0;//¯u¿el
 	komentator[playerid] = 0;//¯u¿el
 	okrazenia[playerid] = 0;//¯u¿el

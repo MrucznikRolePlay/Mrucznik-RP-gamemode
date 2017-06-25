@@ -12810,6 +12810,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(!response) return 1;
             SetPVarInt(playerid, "sanradio", listitem);
             ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio 1\nMrucznik Radio 2\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
+
         }
         else if(dialogid == 669)
         {

@@ -1,3 +1,154 @@
+new sprintfStr[500];
+
+#define sprintf(%0,%1) (format(sprintfStr, 1000, %0, %1), sprintfStr)
+
+stock strcopy(dest[], src[], sz=sizeof(dest))
+{
+  dest[0] = 0;
+  return strcat(dest,src,sz); //Notice that I have used strcat instead of writing my own loops
+}
+
+#define DLG_NO_ACTION		1
+#define DG_DESC_DELETE 		2
+#define DG_DESC_ADD 		3
+#define DG_DESC_USEOLD		4
+
+stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	if(dialogid==4192)
+	{
+		if( response == 0 ) return 1;
+		new dg_value = DynamicGui_GetValue(playerid, listitem);
+
+		if( dg_value == DG_DESC_DELETE )
+		{
+			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+			PlayerInfo[playerid][pDesc][0] = EOS;
+			sendTipMessage(playerid, "Usun¹³eœ swój opis");
+		}
+		else if( dg_value == DG_DESC_ADD)
+		{
+			ShowPlayerDialogEx(playerid, 4193, DIALOG_STYLE_INPUT, "Ustaw opis postaci", "Wpisz nowy opis postaci\t", "Ok", "WyjdŸ");
+		}
+		else if( dg_value == DG_DESC_USEOLD )
+		{
+			new DBResult:db_result;
+			db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `uid`=%d", DynamicGui_GetDataInt(playerid, listitem)));
+
+			new oldDesc[256];
+			db_get_field_assoc(db_result, "text", oldDesc, 256);
+
+			db_result = db_query(db_handle, sprintf("UPDATE * FROM `mru_opisy` SET `last_used`=%d WHERE `uid`=%d", gettime(), DynamicGui_GetDataInt(playerid, listitem)));
+
+			strcopy(PlayerInfo[playerid][pDesc], oldDesc);
+			
+			Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
+
+			WordWrap(oldDesc, true, oldDesc);
+
+			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, oldDesc);
+			
+			sendTipMessage(playerid, "Ustawi³eœ nowy opis");
+		}
+	}
+	if(dialogid==4193)
+	{
+		if( response == 0 ) return cmd_opis(playerid, "");
+
+		if(strlen(inputtext) > 110) return sendTipMessage(playerid, "Zbyt d³uga wiadomoœæ");
+
+		new inputOpis[256];
+		strcopy(inputOpis, inputtext, 256);
+
+		mysql_real_escape_string(inputOpis, inputOpis);
+		new DBResult:db_result;
+		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`='%d' AND `text`='%s'", PlayerInfo[playerid][pUID], inputOpis));
+
+		new rows = db_num_rows(db_result);
+
+		if( rows )
+		{
+			new descUid = db_get_field_assoc_int(db_result, "uid");
+
+			db_result = db_query(db_handle, sprintf("UPDATE `mru_opisy` SET `last_used`=%d WHERE `uid`=%d", gettime(), descUid));
+		}
+		else
+		{
+			db_free_result(db_query(db_handle, sprintf("INSERT INTO `mru_opisy` (`uid`,`text`, `owner`, `last_used`) VALUES (null, '%s', '%d', '%d')", inputOpis, PlayerInfo[playerid][pUID], gettime())));
+		}
+
+		strcopy(PlayerInfo[playerid][pDesc], inputOpis);
+
+		WordWrap(inputOpis, true, inputOpis);
+
+		Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
+		Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, inputOpis);
+		sendTipMessage(playerid, "Ustawi³eœ nowy opis");
+	}
+	return 0;
+}
+
+COMMAND:opis(playerid, params[])
+{
+
+	if(PlayerInfo[playerid][pBP] != 0)
+	{
+		return SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
+	}
+
+	DynamicGui_Init(playerid);
+	new string[1000];
+	
+	if(!isnull(PlayerInfo[playerid][pDesc]))
+	{
+		new str[256];
+		strcopy(str, PlayerInfo[playerid][pDesc], 256);
+		strdel(str, 48, 256);
+		format(string, sizeof(string), "%s{f4f5fa}%s...\n", string, str);
+		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
+		
+		format(string, sizeof(string), "%s##\t Usuñ opis\n", string);
+		DynamicGui_AddRow(playerid, DG_DESC_DELETE);
+	}
+	else
+	{
+		format(string, sizeof(string), "%s##\t Ustaw opis\n", string);
+		DynamicGui_AddRow(playerid, DG_DESC_ADD);
+	}
+
+	format(string, sizeof(string), "%s\t\t\n", string);
+	DynamicGui_AddBlankRow(playerid);
+	format(string, sizeof(string), "%s{dafc10}Ostatnie opisy\n", string);
+	DynamicGui_AddBlankRow(playerid);
+
+	new DBResult:db_result;
+	db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`=%d ORDER BY `last_used` DESC LIMIT 5", PlayerInfo[playerid][pUID]));
+
+	new rows = db_num_rows(db_result);
+	
+	if( rows )
+	{
+		//for(new row = 0; row < rows; row++)
+		for(new row; row < rows; row++,db_next_row(db_result))   
+		{
+			new tmpText[256];
+			db_get_field(db_result, 1, tmpText, sizeof(tmpText));
+
+			format(string, sizeof(string), "%s(%d)\t%s\n", string, row+1, tmpText);
+			DynamicGui_AddRow(playerid, DG_DESC_USEOLD, db_get_field_assoc_int(db_result, "uid"));
+		}
+	}
+	else 
+	{
+		format(string, sizeof(string), "%sBrak\n", string);
+		DynamicGui_AddBlankRow(playerid);
+	}
+
+	ShowPlayerDialogEx(playerid, 4192, DIALOG_STYLE_LIST, "Opis", string, "Ok", "X");
+	return 1;
+}
+
+
 #define CHANGELOG_MAIN		1
 
 COMMAND:zmiany(playerid, params[]) return cmd_changelog(playerid, params);
@@ -35,7 +186,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        if (PlayerInfo[playerid][pAdmin] >= 1000)
 				{
-					SendClientMessage(playerid,COLOR_BLUE,"%s\n{C0C0C0}nowoœæ\t{FFFFFF}dodano /fixallveh\t");
+					format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}dodano /fixallveh\t\n", string);
 				}
 
 		        ShowPlayerDialogEx(playerid, 1963, DIALOG_STYLE_MSGBOX, "{C0C0C0}Mrucznik-RP » Zmiany w wersji 2.5.82", string, "Ok", "");
@@ -432,7 +583,7 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 #define FPANEL_MANAGES		4
 #define FPANEL_SEJF			5
 
-#define FPANEL_PER_PAGE 	20 // iloœæ osó na stronê
+#define FPANEL_PER_PAGE 	10 // iloœæ osó na stronê
 
 #define FPANEL_DG_OSOBA		1
 #define FPANEL_DG_PREV		2
@@ -440,6 +591,7 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 
 stock fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	if(dialogid == 1958)
 	{
@@ -617,7 +769,7 @@ stock showFactionWorkers(playerid, page=1)
     while(mysql_fetch_row_format(query, "|"))
     {
         sscanf(query, "p<|>ds[24]dd", uid, nick, rank, lider);
-        if(rank != 99)
+        if(rank != 99 && lider == 0)
         {
 	        strmid(rankname, FracRang[id][rank], 0, 35, 36);
 	        format(str, sizeof(str), "%s\n%s\t[%d] %s", str, nick, rank, rankname);

@@ -86,7 +86,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include "modules/enum.pwn"
 #include "modules/NOWE_ZMIENNE.pwn"
 #include "modules/new/niceczlowiek/general.pwn"    
-#include "modules/mru_mysql.pwn"
+#include "modules/mru_mysql.pwn" // mam nie otwierac mam nie otwierac mam nie otwierac.... !!!
 
 //Nowe modu³y .def:
 #include "modules\new\bramy\bramy.def"
@@ -820,6 +820,9 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pPos_z] = GetPVarFloat(playerid, "kolejka-z");
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
+
+    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+
 	//AFK timer
 	if(afk_timer[playerid] != -1)
 	{
@@ -864,9 +867,12 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-	if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0) || zakuty[playerid] >= 1 || poscig[playerid] == 1)
+    if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
-    	PlayerInfo[playerid][pJailed] = 10;
+        if(pobity[playerid] == 0)
+        {
+            PlayerInfo[playerid][pJailed] = 10;
+        }
 	}
 
 	if(PoziomPoszukiwania[playerid] >= 1)
@@ -936,7 +942,13 @@ public OnPlayerDisconnect(playerid, reason)
     }
 
     //12.06.2014  opis
-    Opis_Usun(playerid);
+    //Opis_Usun(playerid);
+    if(Opis[playerid] != Text3D:INVALID_3DTEXT_ID)
+    {
+        DestroyDynamic3DTextLabel(Text3D:Opis[playerid]);
+        Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
+    }
+    DestroyDynamic3DTextLabel(Text3D:Opis[playerid]);
 
     if(noclipdata[playerid][fireobject] != 0)
     {
@@ -1423,6 +1435,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
 		printf("%s[%d] OnPlayerSpawn - begin", GetNick(playerid), playerid);
 	#endif
 	//Czyszczenie zmiennych
+    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
 	if(GetPVarInt(playerid, "class-sel")) DeletePVar(playerid, "class-sel");
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
@@ -1452,6 +1465,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
         UsunBron(playerid);
         sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta³eœ wyrzucony z pracy przez lidera, gdy by³eœ offline!");   
     }
+    SetPVarInt(playerid, "mozeUsunacBronie", 1);
     // zabieranie prawka //
     new string[128];
     if(PlayerInfo[playerid][pPK] > 24) {
@@ -1975,7 +1989,7 @@ SetPlayerSpawnSkin(playerid)
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
 			}
 			else
-				SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+				SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
 		}
 		else if(GetPlayerOrg(playerid) != 0)
 		{
@@ -5031,6 +5045,13 @@ public OnGameModeInit()
     }
 
     db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_legal (pID integer,weapon1 integer not null,weapon2 integer not null,weapon3 integer not null,weapon4 integer not null,weapon5 integer not null,weapon6 integer not null,weapon7 integer not null,weapon8 integer not null,weapon9 integer not null,weapon10 integer not null,weapon11 integer not null,weapon12 integer not null,weapon13 integer not null,unique (pID));"));
+
+    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_opisy(uid INTEGER PRIMARY KEY AUTOINCREMENT, text VARCHAR, owner INT, last_used INT);"));
+
+    for(new i;i<MAX_PLAYERS;i++)
+    {
+        PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
+    }
 
     pusteZgloszenia();
     print("GameMode init - done!");

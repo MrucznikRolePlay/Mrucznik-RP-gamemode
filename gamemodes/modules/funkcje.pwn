@@ -1,5 +1,6 @@
 //funkcje.pwn     AKTUALNA MAPA
 
+
 public Lowienie(playerid)
 {
 	FishGood[playerid] = 0;
@@ -4395,6 +4396,13 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 		}
 	}
 }*/
+
+stock getEngineState(vehid)
+{
+	new engine, tmp;
+	GetVehicleParamsEx(vehid, engine, tmp, tmp, tmp, tmp, tmp, tmp);
+	return engine;
+}
 
 ShowStats(playerid,targetid)
 {
@@ -10593,6 +10601,23 @@ stock Oil_Destroy(lID)
         SendFamilyMessage(17, COLOR_GREEN, "[LSFD] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 2 500$! [LSFD]");
         Sejf_Add(17, 2500);
     }
+}
+
+stock areThereAnyAdminsOrPolAdmins()
+{
+	new bool:liczydelko=false;
+	foreach(Player, i)
+	{
+		if(IsPlayerConnected(i))
+		{
+			if(PlayerInfo[i][pAdmin] >= 1 || (PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] < 5))
+			{
+				liczydelko=true;
+				break;
+			}
+		}
+	}
+	return liczydelko;
 }
 
 stock Oil_GenerateID()
