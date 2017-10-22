@@ -1401,7 +1401,9 @@ enum pInfo
     pPK,
     pCars[MAX_CAR_SLOT],
     pCarSlots,
-    pHat
+    pHat,
+    Text3D:pDescLabel,
+    pDesc[128]
 };
 
 new PlayerInfo[MAX_PLAYERS][pInfo];

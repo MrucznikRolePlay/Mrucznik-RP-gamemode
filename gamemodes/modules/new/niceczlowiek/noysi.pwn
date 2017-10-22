@@ -1,3 +1,155 @@
+new sprintfStr[500];
+
+#define sprintf(%0,%1) (format(sprintfStr, 1000, %0, %1), sprintfStr)
+
+stock strcopy(dest[], src[], sz=sizeof(dest))
+{
+  dest[0] = 0;
+  return strcat(dest,src,sz); //Notice that I have used strcat instead of writing my own loops
+}
+
+#define DLG_NO_ACTION		1
+#define DG_DESC_DELETE 		2
+#define DG_DESC_ADD 		3
+#define DG_DESC_USEOLD		4
+
+stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	if(dialogid==4192)
+	{
+		if( response == 0 ) return 1;
+		new dg_value = DynamicGui_GetValue(playerid, listitem);
+
+		if( dg_value == DG_DESC_DELETE )
+		{
+			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+			PlayerInfo[playerid][pDesc][0] = EOS;
+			sendTipMessage(playerid, "Usun¹³eœ swój opis");
+		}
+		else if( dg_value == DG_DESC_ADD)
+		{
+			ShowPlayerDialogEx(playerid, 4193, DIALOG_STYLE_INPUT, "Ustaw opis postaci", "Wpisz nowy opis postaci\t", "Ok", "WyjdŸ");
+		}
+		else if( dg_value == DG_DESC_USEOLD )
+		{
+			new DBResult:db_result;
+			db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `uid`=%d", DynamicGui_GetDataInt(playerid, listitem)));
+
+			new oldDesc[256];
+			db_get_field_assoc(db_result, "text", oldDesc, 256);
+
+			db_result = db_query(db_handle, sprintf("UPDATE * FROM `mru_opisy` SET `last_used`=%d WHERE `uid`=%d", gettime(), DynamicGui_GetDataInt(playerid, listitem)));
+
+			strcopy(PlayerInfo[playerid][pDesc], oldDesc);
+			
+			Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
+
+			WordWrap(oldDesc, true, oldDesc);
+
+			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, oldDesc);
+			
+			sendTipMessage(playerid, "Ustawi³eœ nowy opis");
+		}
+	}
+	if(dialogid==4193)
+	{
+		if( response == 0 ) return cmd_opis(playerid, "");
+
+		if(strlen(inputtext) > 110) return sendTipMessage(playerid, "Zbyt d³uga wiadomoœæ");
+
+		new inputOpis[256];
+		strcopy(inputOpis, inputtext, 256);
+
+		mysql_real_escape_string(inputOpis, inputOpis);
+		
+		new DBResult:db_result;
+		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`='%d' AND `text`='%s'", PlayerInfo[playerid][pUID], inputOpis));
+
+		new rows = db_num_rows(db_result);
+
+		if( rows )
+		{
+			new descUid = db_get_field_assoc_int(db_result, "uid");
+
+			db_result = db_query(db_handle, sprintf("UPDATE `mru_opisy` SET `last_used`=%d WHERE `uid`=%d", gettime(), descUid));
+		}
+		else
+		{
+			db_free_result(db_query(db_handle, sprintf("INSERT INTO `mru_opisy` (`uid`,`text`, `owner`, `last_used`) VALUES (null, '%s', '%d', '%d')", inputOpis, PlayerInfo[playerid][pUID], gettime())));
+		}
+
+		strcopy(PlayerInfo[playerid][pDesc], inputOpis);
+
+		WordWrap(inputOpis, true, inputOpis);
+
+		Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
+		Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, inputOpis);
+		sendTipMessage(playerid, "Ustawi³eœ nowy opis");
+	}
+	return 0;
+}
+
+COMMAND:opis(playerid, params[])
+{
+
+	if(PlayerInfo[playerid][pBP] != 0)
+	{
+		return SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
+	}
+
+	DynamicGui_Init(playerid);
+	new string[1400];
+	
+	if(!isnull(PlayerInfo[playerid][pDesc]))
+	{
+		new str[256];
+		strcopy(str, PlayerInfo[playerid][pDesc], 256);
+		strdel(str, 48, 256);
+		format(string, sizeof(string), "%s{f4f5fa}%s\n", string, str);
+		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
+		
+		format(string, sizeof(string), "%s{888888}##\t{ff0000}Usuñ opis\n", string);
+		DynamicGui_AddRow(playerid, DG_DESC_DELETE);
+	}
+	else
+	{
+		format(string, sizeof(string), "%s{888888}##\t{00B33C}Ustaw opis\n", string);
+		DynamicGui_AddRow(playerid, DG_DESC_ADD);
+	}
+
+	format(string, sizeof(string), "%s\t\t\n", string);
+	DynamicGui_AddBlankRow(playerid);
+	format(string, sizeof(string), "%s{00B33C}Ostatnie opisy\n", string);
+	DynamicGui_AddBlankRow(playerid);
+
+	new DBResult:db_result;
+	db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`=%d ORDER BY `last_used` DESC LIMIT 5", PlayerInfo[playerid][pUID]));
+
+	new rows = db_num_rows(db_result);
+	
+	if( rows )
+	{
+		//for(new row = 0; row < rows; row++)
+		for(new row; row < rows; row++,db_next_row(db_result))   
+		{
+			new tmpText[256];
+			db_get_field(db_result, 1, tmpText, sizeof(tmpText));
+
+			format(string, sizeof(string), "%s(%d)\t%s\n", string, row+1, tmpText);
+			DynamicGui_AddRow(playerid, DG_DESC_USEOLD, db_get_field_assoc_int(db_result, "uid"));
+		}
+	}
+	else 
+	{
+		format(string, sizeof(string), "%sBrak\n", string);
+		DynamicGui_AddBlankRow(playerid);
+	}
+
+	ShowPlayerDialogEx(playerid, 4192, DIALOG_STYLE_LIST, "Opis", string, "Ok", "X");
+	return 1;
+}
+
+
 #define CHANGELOG_MAIN		1
 
 COMMAND:zmiany(playerid, params[]) return cmd_changelog(playerid, params);
@@ -20,27 +172,41 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 		{
 			case 0:
 			{
-				new string[1800];
-		        format(string, 1800, "{FFFFFF}Lista zmian aktualizacji 2.5.82\n\n");
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}panel dla liderów frakcji ( /fpanel )\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}zmiana\t{FFFFFF}powrót komendy /pobij - brak aj za /q oraz 45s czekania po pobiciu\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}bugfix\t{FFFFFF}naprawiony bug z domkami\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}/hq dla sasd oraz sasd w /call 911\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}przejazd na granicach p³atny $1750 ( /przejazd )\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}zmiana\t{FFFFFF}ulepszenie matsiarz daje bonusowe materia³y przy dostarczeniu\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}dopasowanie kamizelki na skinie ( /dopasuj )\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}zmiana\t{FFFFFF}po pójœciu do paki przez cmd /paka /aresztuj poœcig siê deaktywuje\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}nowoœæ\t{FFFFFF}interior biura i magazyny dla /rodziny 23\t\n", string);
-		        format(string, 1800, "%s{C0C0C0}zmiana\t{FFFFFF}niewielkie poprawki stabilnoœci\t\n", string);
+				new string[2200];
+				format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.83\n\n");
+				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}przebieranie siê w skiny frakcyjne/cywilne dla frakcji bez /duty ( /skinf )\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}naprawa b³êdu uniemo¿liwiaj¹cego YKZ u¿yæ /wepchnij\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}usuniêto mo¿liwoœæ u¿ywania /ub po /wb (do czasu respawnu)\t\n", string);
+
+				if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pNewAP] == 5)
+				{
+					format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}dodano /narracja (opis na slacku)\t\n", string);
+					
+				}
+			}
+			case 1:
+			{
+				new string[2200];
+		        format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.82\n\n");
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}panel dla liderów frakcji ( /fpanel )\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}powrót komendy /pobij - brak aj za /q oraz 45s czekania po pobiciu\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}naprawiony bug z domkami\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}/hq dla sasd oraz sasd w /call 911\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}przejazd na granicach p³atny $1750 ( /przejazd )\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}ulepszenie matsiarz daje bonusowe materia³y przy dostarczeniu\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}dopasowanie kamizelki na skinie ( /dopasuj )\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}po pójœciu do paki przez cmd /paka /aresztuj poœcig siê deaktywuje\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}interior biura i magazyny dla /rodziny 23\t\n", string);
+		        format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}niewielkie poprawki stabilnoœci\t\n", string);
 
 		        if (PlayerInfo[playerid][pAdmin] >= 1000)
 				{
-					SendClientMessage(playerid,COLOR_BLUE,"%s\n{C0C0C0}nowoœæ\t{FFFFFF}dodano /fixallveh\t");
+					format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}dodano /fixallveh\t\n", string);
 				}
 
 		        ShowPlayerDialogEx(playerid, 1963, DIALOG_STYLE_MSGBOX, "{C0C0C0}Mrucznik-RP » Zmiany w wersji 2.5.82", string, "Ok", "");
 			}
-			case 1:
+			case 2:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono bugi i b³êdy.");
@@ -67,7 +233,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 2:
+			case 3:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
@@ -105,7 +271,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 3:
+			case 4:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   BY niceCzlowiek   ---------");
@@ -129,7 +295,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 4: 
+			case 5: 
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_WHITE,"Dodano now¹ frakcjê - SASP (San Andreas State Police).");
@@ -140,7 +306,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 5:
+			case 6:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -166,7 +332,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 6:
+			case 7:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -215,7 +381,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 7:
+			case 8:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -225,7 +391,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 8:
+			case 9:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -300,7 +466,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 9:
+			case 10:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   G³ówne systemy   ---------");
@@ -310,7 +476,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 10:
+			case 11:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   B³êdy i niedoróbki   ---------");
@@ -341,7 +507,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 11:
+			case 12:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
@@ -408,7 +574,8 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 	if(page == CHANGELOG_MAIN)
 	{
 		new string[900];
-		format(string, sizeof(string), "##\t"#HQ_COLOR_TEKST2"2.5.82\n");
+		format(string, sizeof(string), "##\t"#HQ_COLOR_TEKST2"2.5.83\n");
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.82\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.8\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.7\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.6\n", string);
@@ -432,7 +599,7 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 #define FPANEL_MANAGES		4
 #define FPANEL_SEJF			5
 
-#define FPANEL_PER_PAGE 	20 // iloœæ osó na stronê
+#define FPANEL_PER_PAGE 	10 // iloœæ osó na stronê
 
 #define FPANEL_DG_OSOBA		1
 #define FPANEL_DG_PREV		2
@@ -440,6 +607,7 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 
 stock fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	if(dialogid == 1958)
 	{
@@ -499,18 +667,65 @@ stock fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[
             DeletePVar(playerid, "fpanel_uid");
 
             return showFactionWorkers(playerid, GetPVarInt(playerid, "fpanel_Page"));
-    	} else {
+    	} 
+    	else if(listitem == 4)
+    	{
+
+    		new fracid = PlayerInfo[playerid][pLider];
+    		new typ = 0;
+    		new str[512];
+		    for(new i=0;i<10;i++)
+		    {
+		        if(strlen((typ == 0) ? (FracRang[fracid][i]) : (FamRang[fracid][i])) < 2)
+		            format(str, 512, "%s[%d] -\n", str, i);
+		        else
+		            format(str, 512, "%s[%d] %s\n", str, i, (typ == 0) ? (FracRang[fracid][i]) : (FamRang[fracid][i]));
+		    }
+
+		    return ShowPlayerDialogEx(playerid, 1966, DIALOG_STYLE_LIST, "Wybierz rangê, któr¹ chcesz nadaæ graczu", str, "Nadaj", "Anuluj");
+    	}
+    	else
+    	{
     		new uid = GetPVarInt(playerid, "fpanel_uid");
 			DeletePVar(playerid, "fpanel_uid");    		
     		return showEmployeeInfo(playerid, uid);
     	}
+	}
+	if(dialogid == 1966)
+	{
+		if( !response )
+		{
+			showEmployeeInfo(playerid, GetPVarInt(playerid, "fpanel_uid"));
+			DeletePVar(playerid, "fpanel_uid");
+			return 1;
+		}
+		if(strlen(FracRang[GetPlayerFraction(playerid)][listitem]) < 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
+
+		new pracownik_nick[26];
+    	strmid(pracownik_nick, MruMySQL_GetNameFromUID(GetPVarInt(playerid, "fpanel_uid")), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+		if(ReturnUser(pracownik_nick) != INVALID_PLAYER_ID) {
+            sendTipMessage(playerid, "Gracz jest online, u¿yj /dajrange");
+            return showFactionWorkers(playerid, GetPVarInt(playerid, "fpanel_Page"));
+        }
+        if(MruMySQL_GetAccInt("Member", pracownik_nick) != PlayerInfo[playerid][pLider] ) return sendErrorMessage(playerid, "No ³adne hakowanie!");
+
+		MruMySQL_SetAccInt("Rank", pracownik_nick, listitem);
+
+		new msg[128];
+
+		format(msg, sizeof(msg), "Awansowa³eœ %s na rangê %s", pracownik_nick, FracRang[PlayerInfo[playerid][pLider]][listitem]);
+        sendTipMessage(playerid, msg, COLOR_LIGHTBLUE);
+
+        new uid = GetPVarInt(playerid, "fpanel_uid");
+		DeletePVar(playerid, "fpanel_uid");    		
+    	return showEmployeeInfo(playerid, uid);
 	}
 	return 0;
 }
 
 stock showEmployeeInfo(playerid, employeeUid)
 {
-	new pracownik_nick[26], rankname[26], ranga, employeestring[888];
+	new pracownik_nick[26], rankname[26], ranga, employeestring[1100];
     new isLider;
                
     strmid(pracownik_nick, MruMySQL_GetNameFromUID(employeeUid), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
@@ -526,7 +741,8 @@ stock showEmployeeInfo(playerid, employeeUid)
     format(employeestring, sizeof(employeestring), ""#KARA_STRZALKA"    »» "#KARA_TEKST"Nick: "#KARA_TEKST"%s", pracownik_nick);
     format(employeestring, sizeof(employeestring), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Ranga: "#KARA_TEKST"%s", employeestring, rankname);
     format(employeestring, sizeof(employeestring), "%s\n ", employeestring);
-    if(isLider == 0) format(employeestring, sizeof(employeestring), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Wyrzuæ Pracownika", employeestring);  
+    format(employeestring, sizeof(employeestring), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Wyrzuæ Pracownika", employeestring);  
+    format(employeestring, sizeof(employeestring), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Zmieñ rangê", employeestring);  
     SetPVarInt(playerid, "fpanel_uid", employeeUid);
     ShowPlayerDialogEx(playerid, 1960, DIALOG_STYLE_LIST, "Panel Lidera » Zarz¹dzanie Pracownikiem", employeestring, "Ok", "Wstecz");
     return 1;
@@ -538,7 +754,7 @@ stock showFactionWorkers(playerid, page=1)
 
 	new id = PlayerInfo[playerid][pLider];
 
-	format(query, sizeof(query), "SELECT COUNT(*) FROM `mru_konta` WHERE `Member`='%d' OR `Lider`='%d'", id, id);
+	format(query, sizeof(query), "SELECT COUNT(*) FROM `mru_konta` WHERE `Member`='%d' AND Rank < 90", id);
 
 	mysql_query(query);
 	mysql_store_result();
@@ -561,7 +777,7 @@ stock showFactionWorkers(playerid, page=1)
 
 	new offset = (page - 1) * FPANEL_PER_PAGE;
 
-	format(query, sizeof(query), "SELECT UID,Nick,Rank,Lider FROM `mru_konta` WHERE `Member`='%d' OR `Lider`='%d' ORDER BY Rank Desc LIMIT %d,%d;", id, id, offset, FPANEL_PER_PAGE);
+	format(query, sizeof(query), "SELECT UID,Nick,Rank,Lider FROM `mru_konta` WHERE `Member`='%d' AND Rank < 90 ORDER BY Rank Desc LIMIT %d,%d;", id, offset, FPANEL_PER_PAGE);
 	mysql_query(query);
 	mysql_store_result();
 
@@ -569,16 +785,19 @@ stock showFactionWorkers(playerid, page=1)
     while(mysql_fetch_row_format(query, "|"))
     {
         sscanf(query, "p<|>ds[24]dd", uid, nick, rank, lider);
-        strmid(rankname, FracRang[id][rank], 0, 35, 36);
-        format(str, sizeof(str), "%s\n%s\t[%d] %s", str, nick, rank, rankname);
-        DynamicGui_AddRow(playerid, FPANEL_DG_OSOBA, uid);
+        if(rank != 99 && lider == 0)
+        {
+	        strmid(rankname, FracRang[id][rank], 0, 35, 36);
+	        format(str, sizeof(str), "%s\n%s\t[%d] %s", str, nick, rank, rankname);
+	        DynamicGui_AddRow(playerid, FPANEL_DG_OSOBA, uid);
+	    }
     }
 
     if( page > 1 )
 	{
 		format(str, sizeof(str), "%s\n\n{888888}<<< Poprzednia strona\n  \n", str);
 		DynamicGui_AddRow(playerid, FPANEL_DG_PREV);
-		
+
 		DynamicGui_AddBlankRow(playerid);
 	}
 

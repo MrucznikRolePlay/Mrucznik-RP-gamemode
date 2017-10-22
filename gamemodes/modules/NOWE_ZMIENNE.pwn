@@ -332,7 +332,7 @@ new Barier[MAX_FRAC][10];
 new Text3D:BarText[MAX_FRAC][10];
 
 new gItemList[TOTAL_ITEMS] = {
-1424,3091,1238,3578,997,1427 ,1422,1434,981,7933,1237
+1424,3091,1238,3578,997,1427 ,1422,1434,981,7933,1237,19834
 };
 //LSMC
 new Float:ElevatorDoors[7][5] = { //18756 - lewe | 18757 - prawe
@@ -937,6 +937,7 @@ new CenaBroni[MAX_PLAYERS];//ALL W GUI
 new IDBroniZbrojownia[MAX_PLAYERS];//ALL W GUI
 new weryfikacja[MAX_PLAYERS];//ANTY HACKED
 new iddialog[MAX_PLAYERS];//ANTY HACKED
+new antyHider[MAX_PLAYERS];
 new taxitest[MAX_PLAYERS];//Taxi Test
 new mechanikid[MAX_PLAYERS];//Mechanik w GUI
 new naprawiony[MAX_PLAYERS];//Napr
@@ -1025,6 +1026,11 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
 	//z disconecta
+
+    new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
+
+    PlayerInfo[playerid][pDescLabel] = tmp_label;
+
 	zawodnik[playerid] = 0;//¯u¿el
 	komentator[playerid] = 0;//¯u¿el
 	okrazenia[playerid] = 0;//¯u¿el
@@ -1267,7 +1273,7 @@ ZerujZmienne(playerid)
 	ClearGroceries(playerid);
 	ClearMarriage(playerid);
 
-    Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
+//    Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
 	

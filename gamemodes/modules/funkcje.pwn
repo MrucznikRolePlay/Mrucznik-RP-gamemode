@@ -1,5 +1,6 @@
 //funkcje.pwn     AKTUALNA MAPA
 
+
 public Lowienie(playerid)
 {
 	FishGood[playerid] = 0;
@@ -362,22 +363,6 @@ stock GetPlayerFraction(playerid)
 {
     if(PlayerInfo[playerid][pMember] == 0) return PlayerInfo[playerid][pLider];
     else return PlayerInfo[playerid][pMember];
-}
-
-stock Opis_Usun(playerid, message=false)
-{
-    if(playerid >= MAX_PLAYERS) return 0;
-    if(Opis[playerid] != Text3D:INVALID_3DTEXT_ID)
-    {
-        DestroyDynamic3DTextLabel(Text3D:Opis[playerid]);
-        Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
-        if(message)
-        {
-            SendClientMessage(playerid, COLOR_YELLOW, "Opis: Usuniêto.");
-        }
-        return 1;
-    }
-    return 0;
 }
 
 stock CarOpis_Usun(playerid, vehicleid, message=false)
@@ -1309,6 +1294,10 @@ stock IsPlayerInCube(playerid, Float:xmin, Float:ymin, Float:zmin, Float:xmax, F
 
 stock GetPlayer2DZone(playerid, zone[], len)
 {
+	if(PlayerInfo[playerid][pJailed] == 3) 
+	{
+		return format(zone, len, "Nieznane ((AJ))", 0);
+	}
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
  	for(new i = 0; i != sizeof(gSAZones); i++ )
@@ -4391,6 +4380,13 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 		}
 	}
 }*/
+
+stock getEngineState(vehid)
+{
+	new engine, tmp;
+	GetVehicleParamsEx(vehid, engine, tmp, tmp, tmp, tmp, tmp, tmp);
+	return engine;
+}
 
 ShowStats(playerid,targetid)
 {
@@ -7481,6 +7477,8 @@ stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[]
 {
 	ShowPlayerDialog(playerid, dialogid, style, caption, info, button1, button2);
 	iddialog[playerid] = dialogid;
+	antyHider[playerid] = 1;
+
 	return 1;
 }
 
@@ -9556,6 +9554,7 @@ stock Zone_GetCash(zoneid)
 
 stock Car_Lock(playerid, veh)
 {
+	if(IsABike(veh)) return sendErrorMessage(playerid, "Nie mo¿esz u¿yæ /lock na motocyklu");
     new engine, lights, alarm, doors, bonnet, boot, objective;
     GetVehicleParamsEx(veh, engine, lights, alarm, doors, bonnet, boot, objective);
     if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT) ApplyAnimation(playerid, "INT_HOUSE", "wash_up",4.1, 0, 0, 0, 0, 0, 1);
@@ -9570,6 +9569,8 @@ stock Car_Lock(playerid, veh)
         GameTextForPlayer(playerid, "Zamek w drzwiach ~g~otwarty!", 2000, 5);
     }
     SetVehicleParamsEx(veh, engine, lights, alarm, doors, bonnet, boot, objective);
+
+    return 1;
 }
 
 
@@ -10586,6 +10587,23 @@ stock Oil_Destroy(lID)
         SendFamilyMessage(17, COLOR_GREEN, "[LSFD] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 2 500$! [LSFD]");
         Sejf_Add(17, 2500);
     }
+}
+
+stock areThereAnyAdminsOrPolAdmins()
+{
+	new bool:liczydelko=false;
+	foreach(Player, i)
+	{
+		if(IsPlayerConnected(i))
+		{
+			if(PlayerInfo[i][pAdmin] >= 1 || (PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] < 5))
+			{
+				liczydelko=true;
+				break;
+			}
+		}
+	}
+	return liczydelko;
 }
 
 stock Oil_GenerateID()

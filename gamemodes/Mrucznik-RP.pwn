@@ -55,7 +55,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <ACSBM>
 #include <timestamp.inc>
 #define AC_MAX_CONNECTS_FROM_IP		5
-#include <nex-ac>						     // By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include "../pawno/include/nexac"			// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include "../pawno/include/systempozarow"   //System Po¿arów v0.1
 
 #include "modules\new\niceczlowiek\dynamicgui.pwn"
@@ -86,7 +86,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include "modules/enum.pwn"
 #include "modules/NOWE_ZMIENNE.pwn"
 #include "modules/new/niceczlowiek/general.pwn"    
-#include "modules/mru_mysql.pwn"
+#include "modules/mru_mysql.pwn" // mam nie otwierac mam nie otwierac mam nie otwierac.... !!!
 
 //Nowe modu³y .def:
 #include "modules\new\bramy\bramy.def"
@@ -820,6 +820,9 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pPos_z] = GetPVarFloat(playerid, "kolejka-z");
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
+
+    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+
 	//AFK timer
 	if(afk_timer[playerid] != -1)
 	{
@@ -864,9 +867,12 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-	if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0) || zakuty[playerid] >= 1 || poscig[playerid] == 1)
+    if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
-    	PlayerInfo[playerid][pJailed] = 10;
+        if(pobity[playerid] == 0)
+        {
+            PlayerInfo[playerid][pJailed] = 10;
+        }
 	}
 
 	if(PoziomPoszukiwania[playerid] >= 1)
@@ -936,7 +942,7 @@ public OnPlayerDisconnect(playerid, reason)
     }
 
     //12.06.2014  opis
-    Opis_Usun(playerid);
+    //Opis_Usun(playerid);
 
     if(noclipdata[playerid][fireobject] != 0)
     {
@@ -1423,6 +1429,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
 		printf("%s[%d] OnPlayerSpawn - begin", GetNick(playerid), playerid);
 	#endif
 	//Czyszczenie zmiennych
+    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
 	if(GetPVarInt(playerid, "class-sel")) DeletePVar(playerid, "class-sel");
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
@@ -1452,6 +1459,7 @@ public OnPlayerSpawn(playerid) //Przebudowany
         UsunBron(playerid);
         sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta³eœ wyrzucony z pracy przez lidera, gdy by³eœ offline!");   
     }
+    SetPVarInt(playerid, "mozeUsunacBronie", 1);
     // zabieranie prawka //
     new string[128];
     if(PlayerInfo[playerid][pPK] > 24) {
@@ -1766,7 +1774,7 @@ SetPlayerSpawnPos(playerid)
 				}
 				else if(GetPlayerOrg(playerid) > 0) //Spawn Organizacji
 				{
-		            new org = GetPlayerOrg(playerid);
+                    new org = gPlayerOrg[playerid];
 		            if(OrgInfo[org][o_Spawn][0] != 0.0)
 		            {
 		                SetPlayerVirtualWorld(playerid, OrgInfo[org][o_VW]);
@@ -1776,7 +1784,7 @@ SetPlayerSpawnPos(playerid)
 		            }
 		            else
 		            {
-						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawnu - spawnujesz siê jako cywil.");
+						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawnu - spawnujesz siê jako cywil");
                         new rand = random(sizeof(gRandomPlayerSpawns));
 			    		SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 			    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
@@ -1975,7 +1983,7 @@ SetPlayerSpawnSkin(playerid)
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
 			}
 			else
-				SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+				SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
 		}
 		else if(GetPlayerOrg(playerid) != 0)
 		{
@@ -4084,7 +4092,19 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 {
 	new string[256];
     //---------------------------------------------- Anti Cheat ------------------------------------//
-
+   /* if(newstate == PLAYER_STATE_DRIVER) {
+        if(GetPVarInt(playerid, "iLastDrive") != 0 && (gettime() - GetPVarInt(playerid, "iLastDrive")) <= 1) {
+            SetPVarInt(playerid, "iFlags", GetPVarInt(playerid, "iLastDrive")+1);
+            if(GetPVarInt(playerid, "iLastDrive") >= 2) {
+                format(string, 256, "%s podejrzany o tepanie aut. Dostal kicka. LVL: %d (%dh online)", GetNick(playerid), PlayerInfo[playerid][pLevel], PlayerInfo[playerid][pConnectTime]);
+                SendAdminMessage(COLOR_LIGHTRED, string);
+                Kick(playerid);
+                return true;
+            }
+        }
+        
+        SetPVarInt(playerid, "iLastDrive", gettime());
+    } */
 	if(newstate == PLAYER_STATE_DRIVER)
     {
         if(!ToggleSpeedo[playerid])
@@ -5020,6 +5040,13 @@ public OnGameModeInit()
 
     db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_legal (pID integer,weapon1 integer not null,weapon2 integer not null,weapon3 integer not null,weapon4 integer not null,weapon5 integer not null,weapon6 integer not null,weapon7 integer not null,weapon8 integer not null,weapon9 integer not null,weapon10 integer not null,weapon11 integer not null,weapon12 integer not null,weapon13 integer not null,unique (pID));"));
 
+    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_opisy(uid INTEGER PRIMARY KEY AUTOINCREMENT, text VARCHAR, owner INT, last_used INT);"));
+
+    for(new i;i<MAX_PLAYERS;i++)
+    {
+        PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
+    }
+
     pusteZgloszenia();
     print("GameMode init - done!");
     //SendRconCommand("reloadfs MRP/mrpshop");
@@ -5314,6 +5341,8 @@ public OnPlayerUpdate(playerid)
 		printf("Problem z Update, nick: %s", GetNick(playerid));
         KickEx(playerid);
     }
+
+
     
     systempozarow_OnPlayerUpdate(playerid);//System Po¿arów v0.1
     

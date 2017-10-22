@@ -681,6 +681,7 @@ public MainTimer()
     }
     if(TICKS_3Sec == 2)
     {
+    	
         VehicleUpdate();
         CustomPickups();
         GangZone_ShowInfoToParticipants();
