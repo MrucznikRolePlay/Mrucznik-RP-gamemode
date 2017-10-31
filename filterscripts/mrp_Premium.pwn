@@ -355,18 +355,6 @@ new dodatki[][e_AddonData] = {
 	{0, 19047, 6000000, 1, 6, -0.032099, -0.015371, 0.009, -108.3, -114.4, 88.3}
 };
 
-stock GetNick(playerid, rp = false)
-{
-	new nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	if(rp) {
-		for(new i; i < MAX_PLAYER_NAME; i++)
-		{
-			if(nick[i] == '_') nick[i] = ' ';
-		}
-	}
-	return nick;
-}
 
 getFreeSlot(playerid) {
 	new kp = CallRemoteFunction("MRP_GetPlayerKP", "d", playerid);

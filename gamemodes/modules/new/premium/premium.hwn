@@ -36,7 +36,8 @@ enum ePremiumDialog
 	SLOTY_POJAZDU,
 	ZMIANY_NICKU,
 	SKINY,
-	TELEFON
+	TELEFON,
+	ZMIENSKIN
 };
 
 enum ePremiumInfo
@@ -44,7 +45,7 @@ enum ePremiumInfo
 	pMC,
 	pKP,
 	pSponsor,
-	pExpirationDate[3]
+	pExpires
 };
 
 enum ePojazdyPremium
@@ -53,7 +54,13 @@ enum ePojazdyPremium
 	Cena
 };
 
+enum eSkinyPremium
+{
+	Model
+};
+
 //-----------------<[ Zmienne: ]>-------------------
+new bool:UniqueSkins[MAX_PLAYERS][MAX_PREMIUM_SKINS] = {false, ...};
 new PremiumInfo[MAX_PLAYERS][ePremiumInfo];
 new PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =
 {
@@ -97,8 +104,37 @@ new PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =
 	{433, 1}, //38 Barracks
 	{428, 1}, //39 Securicar
 	{408, 1}, //40 Trashmaster (œmieciarka)
-	{406, 1}, //41 Dumper (wywrotka)
-	{552, 1} //42 Utility Van
+	{552, 1} //41 Utility Van
+};
+
+new SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
+{
+	{93},
+	{102},
+	{103},
+	{104},
+	{105},
+	{106},
+	{107},
+	{108},
+	{109},
+	{110},
+	{111},
+	{112},
+	{113},
+	{114},
+	{115},
+	{116},
+	{117},
+	{120},
+	{121},
+	{122},
+	{123},
+	{124},
+	{125},
+	{126},
+	{127},
+	{149}
 };
 
 //------------------<[ Forwardy: ]>--------------------

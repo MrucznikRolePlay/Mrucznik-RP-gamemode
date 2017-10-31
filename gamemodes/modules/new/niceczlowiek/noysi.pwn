@@ -1,6 +1,31 @@
-new sprintfStr[500];
-
-#define sprintf(%0,%1) (format(sprintfStr, 1000, %0, %1), sprintfStr)
+stock BreakLines(string[], delimiter[], limit)
+{
+	new inserts, tempLimit = limit, pos[50], string2[150], lastEmptyPos;
+	format(string2, 150, string);
+	
+	for(new i; i < strlen(string); i++)
+	{
+		if( string[i] == ' ' ) lastEmptyPos = i;
+		if( string[i] == '~' && string[i+1] == 'n' && string[i+2] == '~' ) tempLimit = i + limit;
+		if( i >= tempLimit )
+		{
+			inserts += 1;
+			tempLimit = i + limit;
+			
+			pos[inserts-1] = lastEmptyPos + ((inserts-1) * strlen(delimiter));
+			if( inserts > 1 ) pos[inserts-1] -= (inserts-1);
+		}
+	}
+	
+	for(new d; d < 50; d++)
+	{
+		if( pos[d] == 0 ) break;
+		strdel(string2, pos[d], pos[d]+1);
+		strins(string2, delimiter, pos[d]);
+	}
+	
+	return _:string2;
+}
 
 stock strcopy(dest[], src[], sz=sizeof(dest))
 {
@@ -44,9 +69,8 @@ stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			
 			Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
 
-			WordWrap(oldDesc, true, oldDesc);
 
-			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, oldDesc);
+			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, BreakLines(oldDesc, "\n", 32));
 			
 			sendTipMessage(playerid, "Ustawi³eœ nowy opis");
 		}
@@ -67,6 +91,39 @@ stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 		new rows = db_num_rows(db_result);
 
+		new dLen = strlen(inputOpis);
+		
+		new initPoint, endPoint, tempCounts;
+
+		for(endPoint = 0; endPoint < dLen; endPoint++) {
+
+		    if(inputOpis[endPoint] == '{') {
+
+		        initPoint = endPoint;
+		        endPoint += 7;
+		        if(endPoint < dLen) {
+
+		            if(inputOpis[endPoint] == '}') {
+
+		                for(tempCounts = 1; tempCounts < 7; tempCounts++) {
+
+		                    if(!(tolower(inputOpis[initPoint+tempCounts]) >= 97
+		                    && tolower(inputOpis[initPoint+tempCounts]) <= 102)
+		                    && !(inputOpis[initPoint+tempCounts] >= 48
+		                    && inputOpis[initPoint+tempCounts] <= 57))
+		                        break;
+						}
+						if(tempCounts != 7)
+						    continue;
+
+						strdel(inputOpis, initPoint, ++endPoint);
+						dLen = strlen(inputOpis);
+						endPoint -= 8;
+					}
+				}
+			}
+		}
+
 		if( rows )
 		{
 			new descUid = db_get_field_assoc_int(db_result, "uid");
@@ -80,10 +137,9 @@ stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 		strcopy(PlayerInfo[playerid][pDesc], inputOpis);
 
-		WordWrap(inputOpis, true, inputOpis);
 
 		Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
-		Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, inputOpis);
+		Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, BreakLines(inputOpis, "\n", 32));
 		sendTipMessage(playerid, "Ustawi³eœ nowy opis");
 	}
 	return 0;
@@ -91,23 +147,21 @@ stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 COMMAND:opis(playerid, params[])
 {
-
 	if(PlayerInfo[playerid][pBP] != 0)
 	{
 		return SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
 	}
-
 	DynamicGui_Init(playerid);
 	new string[1400];
-	
+		
 	if(!isnull(PlayerInfo[playerid][pDesc]))
 	{
 		new str[256];
 		strcopy(str, PlayerInfo[playerid][pDesc], 256);
-		strdel(str, 48, 256);
-		format(string, sizeof(string), "%s{f4f5fa}%s\n", string, str);
+		strdel(str, 55, 256); // jednak pokazujemy ca³y opis :D
+		format(string, sizeof(string), "%s{f4f5fa}%s...\n", string, str);
 		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
-		
+	
 		format(string, sizeof(string), "%s{888888}##\t{ff0000}Usuñ opis\n", string);
 		DynamicGui_AddRow(playerid, DG_DESC_DELETE);
 	}
@@ -126,16 +180,16 @@ COMMAND:opis(playerid, params[])
 	db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`=%d ORDER BY `last_used` DESC LIMIT 5", PlayerInfo[playerid][pUID]));
 
 	new rows = db_num_rows(db_result);
-	
+		
 	if( rows )
 	{
-		//for(new row = 0; row < rows; row++)
+			//for(new row = 0; row < rows; row++)
 		for(new row; row < rows; row++,db_next_row(db_result))   
 		{
 			new tmpText[256];
 			db_get_field(db_result, 1, tmpText, sizeof(tmpText));
-
-			format(string, sizeof(string), "%s(%d)\t%s\n", string, row+1, tmpText);
+			strdel(tmpText, 55, 256);
+			format(string, sizeof(string), "%s(%d)\t%s...\n", string, row+1, tmpText);
 			DynamicGui_AddRow(playerid, DG_DESC_USEOLD, db_get_field_assoc_int(db_result, "uid"));
 		}
 	}
@@ -146,6 +200,30 @@ COMMAND:opis(playerid, params[])
 	}
 
 	ShowPlayerDialogEx(playerid, 4192, DIALOG_STYLE_LIST, "Opis", string, "Ok", "X");
+	return 1;
+}
+
+COMMAND:usunopis(playerid, params[])
+{
+	if(PlayerInfo[playerid][pAdmin] == 0) return 1;
+	new id;
+    if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(USUÑ OPIS) - Podaj Nick lub ID gracza.");
+    if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Nie ma takiego gracza");
+
+    if(isnull(PlayerInfo[id][pDesc]))
+	{
+		return sendErrorMessage(playerid, "Ten gracz nie ma ustawionego opisu");
+	}
+	else
+	{
+		Update3DTextLabelText(PlayerInfo[id][pDescLabel], 0xBBACCFFF, "");
+		PlayerInfo[id][pDesc][0] = EOS;
+		new msg[128];
+		format(msg, 128, "Administrator %s usun¹³ twój opis", GetNick(playerid, true));
+		sendErrorMessage(id, msg);
+		format(msg, 128, "Usun¹³eœ opis %s", GetNick(id, true));
+		sendErrorMessage(playerid, msg);
+	}
 	return 1;
 }
 
@@ -174,15 +252,23 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 			{
 				new string[2200];
 				format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.83\n\n");
+				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}wprowadzono opisy z mapy 3.0 ( /opis )\t\n", string);
 				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}przebieranie siê w skiny frakcyjne/cywilne dla frakcji bez /duty ( /skinf )\t\n", string);
+				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}mechanicy mog¹ sprawdziæ neony w aucie ( /sprawdzneon ) (koszt 10k)\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}na koñcu komunikatu o AFK bêdzie pojawia³o siê ID gracza\t\n", string);
 				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}naprawa b³êdu uniemo¿liwiaj¹cego YKZ u¿yæ /wepchnij\t\n", string);
 				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}usuniêto mo¿liwoœæ u¿ywania /ub po /wb (do czasu respawnu)\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}poprawiono kilka pomniejszych b³êdów\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}pozbyto siê bugów, przez które z³odzieje mogli korzystaæ z sejfów innych bez has³a\t\n", string);
 
-				if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pNewAP] == 5)
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 				{
-					format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}dodano /narracja (opis na slacku)\t\n", string);
-					
+					format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}dodano /marcepan który przeprowadza symulacjê Marcepana\t\n", string);
+					format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}gdy gracz wyjdzie i ma dostaæ Marcepana admini zobacz¹ log na czacie\t\n", string);
+					format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}/opis usun [id] to teraz /usunopis [id]\t\n", string);
 				}
+
+				ShowPlayerDialogEx(playerid, 1963, DIALOG_STYLE_MSGBOX, "{C0C0C0}Mrucznik-RP » Zmiany w wersji 2.5.83", string, "Ok", "");
 			}
 			case 1:
 			{
@@ -599,7 +685,7 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 #define FPANEL_MANAGES		4
 #define FPANEL_SEJF			5
 
-#define FPANEL_PER_PAGE 	10 // iloœæ osó na stronê
+#define FPANEL_PER_PAGE 	20 // iloœæ osó na stronê
 
 #define FPANEL_DG_OSOBA		1
 #define FPANEL_DG_PREV		2

@@ -797,7 +797,7 @@ new VehicleNames[215][] = {
    "Blista Compact", "Policyjny Maverick", "Boxville", "Benson","Mesa","RC Goblin",
    "Hotring Racer", "Hotring Racer", "Bloodring Banger", "Rancher",  "Super GT",
    "Elegant", "Kamping", "Rower", "Rower Gorski", "Beagle", "Cropdust", "Stunt",
-   "Tanker", "Pociag", "Nebula", "Majestic", "Buccaneer", "Shamal",  "Hydra",
+   "Tanker", "RoadTrain", "Nebula", "Majestic", "Buccaneer", "Shamal",  "Hydra",
    "FCR-900","NRG-500","HPV1000","Cement Truck","Tow Truck","Fortune","Cadrona",
    "Armatka Wodna", "Willard", "Forklift","Traktor","Combine","Feltzer","Remington",
    "Slamvan", "Blade", "Freight", "Streak","Vortex","Vincent","Bullet","Clover",

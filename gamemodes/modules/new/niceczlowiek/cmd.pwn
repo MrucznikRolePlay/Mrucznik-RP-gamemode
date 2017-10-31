@@ -119,10 +119,17 @@ CMD:dopasuj(playerid, params[])
     }
     if(!strcmp(type, "kamizelke", true))
     {
+    	new Float:armor;
+    	GetPlayerArmour(playerid, armor);
+    	if(armor < 1.0) return 1;
+		//RemovePlayerAttachedObject(playerid, 7);
+		SetPlayerAttachedObject(playerid, 7, 19142, 1, GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
     	EditAttachedObject(playerid, 7);
     }
     return 1;
 }
+
+
 
 /*CMD:telefon(playerid, params[]) return cmd_tel(playerid, params);
 CMD:tel(playerid, params[]) {
