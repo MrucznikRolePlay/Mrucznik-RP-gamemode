@@ -1,5 +1,6 @@
 //zmienne.pwn
 
+
 new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
 new bool:bramki_sasd_state[18];
@@ -941,6 +942,10 @@ new antyHider[MAX_PLAYERS];
 new taxitest[MAX_PLAYERS];//Taxi Test
 new mechanikid[MAX_PLAYERS];//Mechanik w GUI
 new naprawiony[MAX_PLAYERS];//Napr
+
+new pName[MAX_PLAYERS][26];
+new pNameRp[MAX_PLAYERS][26];
+
 new zawodnik[MAX_PLAYERS];//¯u¿el
 new wyscigz;//¿u¿el
 new iloscwygranych;//¿u¿el
@@ -1025,11 +1030,18 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-Mobile", 999);
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
+
+
+    premium_clearCache(playerid);
+
+
 	//z disconecta
 
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
 
     PlayerInfo[playerid][pDescLabel] = tmp_label;
+
+    PlayerInfo[playerid][pDesc][0] = EOS;
 
 	zawodnik[playerid] = 0;//¯u¿el
 	komentator[playerid] = 0;//¯u¿el
@@ -1056,6 +1068,9 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	
     lastMsg[playerid] = 0;
+
+    pName[playerid][0] = EOS;
+    pNameRp[playerid][0] = EOS;
 
 	//z conecta
 	TogPodglad[playerid] = 0;
@@ -1272,6 +1287,7 @@ ZerujZmienne(playerid)
 	ClearCooking(playerid);
 	ClearGroceries(playerid);
 	ClearMarriage(playerid);
+
 
 //    Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
     grajacy[playerid]=0;

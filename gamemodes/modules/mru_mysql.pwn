@@ -407,9 +407,11 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     if(!mysql_query(query)) fault=false;
 
     //Zapis MruCoinow
-    MRP_SaveMC(playerid);
+    premium_saveMc(playerid);
 
     saveLegale(playerid);
+
+    saveKevlarPos(playerid);
 
 	return fault;
 }
@@ -606,6 +608,10 @@ public MruMySQL_LoadAcocount(playerid)
         PlayerInfo[playerid][pCarSlots]);
 	}
 
+	// Pozycje kamizelki
+
+	loadKamiPos(playerid);
+
 	//legal
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_legal` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
 	new DBResult:db_result;
@@ -639,7 +645,6 @@ public MruMySQL_LoadAcocount(playerid)
 		playerWeapons[playerid][weaponLegal11] = db_get_field_assoc_int(db_result, "weapon11");
 		playerWeapons[playerid][weaponLegal12] = db_get_field_assoc_int(db_result, "weapon12");
 		playerWeapons[playerid][weaponLegal13] = db_get_field_assoc_int(db_result, "weapon13");
-		printf("Wczytano cos kurwa");
 	} else {
 		format(lStr, sizeof lStr, "INSERT INTO `mru_legal` (`pID`,`weapon1`, `weapon2`, `weapon3`, `weapon4`, `weapon5`, `weapon6`, `weapon7`, `weapon8`, `weapon9`, `weapon10`, `weapon11`, `weapon12`, `weapon13`) VALUES (%d, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)", PlayerInfo[playerid][pUID]);
 		db_free_result(db_query(db_handle, lStr));
@@ -971,7 +976,7 @@ MruMySQL_Unblock(nick[]="Brak", admin)
     new admnick[32];
     GetPlayerName(admin, admnick, 32);
 
-    format(query, 128, "UPDATE `mru_konta` SET `Block`=0 WHERE `Nick`='%s'", nick);
+    format(query, 128, "UPDATE `mru_konta` SET `Block`=0, `CK`=0 WHERE `Nick`='%s'", nick);
     mysql_query(query);
     query="\0";
 

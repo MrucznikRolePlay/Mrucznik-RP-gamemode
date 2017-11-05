@@ -15,6 +15,74 @@ stock saveLegale(playerid) {
 }
 
 
+stock loadKamiPos(playerid)
+{
+	new lStr[256];
+	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
+	new DBResult:db_result;
+	printf(lStr);
+	db_result = db_query(db_handle, lStr);
+
+	if(db_num_rows(db_result)) {
+		//RemovePlayerAttachedObject(playerid, 7);
+		//SetPlayerAttachedObject(playerid, 7, 19142, 1, db_get_field_assoc_float(db_result, "offsetX"), db_get_field_assoc_float(db_result, "offsetY"), db_get_field_assoc_float(db_result, "offsetZ"), db_get_field_assoc_float(db_result, "rotX"), db_get_field_assoc_float(db_result, "rotY"), db_get_field_assoc_float(db_result, "rotZ"), db_get_field_assoc_float(db_result, "scaleX"), db_get_field_assoc_float(db_result, "scaleY"), db_get_field_assoc_float(db_result, "scaleY"));
+
+		SetPVarFloat(playerid, "k_offsetX", db_get_field_assoc_float(db_result, "offsetX"));
+		SetPVarFloat(playerid, "k_offsetY", db_get_field_assoc_float(db_result, "offsetY"));
+		SetPVarFloat(playerid, "k_offsetZ", db_get_field_assoc_float(db_result, "offsetZ"));
+		SetPVarFloat(playerid, "k_rotX", db_get_field_assoc_float(db_result, "rotX"));
+		SetPVarFloat(playerid, "k_rotY", db_get_field_assoc_float(db_result, "rotY"));
+		SetPVarFloat(playerid, "k_rotZ", db_get_field_assoc_float(db_result, "rotZ"));
+		SetPVarFloat(playerid, "k_scaleX", db_get_field_assoc_float(db_result, "scaleX"));
+		SetPVarFloat(playerid, "k_scaleY", db_get_field_assoc_float(db_result, "scaleY"));
+		SetPVarFloat(playerid, "k_scaleZ", db_get_field_assoc_float(db_result, "scaleZ"));
+
+		db_free_result(db_result);
+	}
+	else
+	{
+		SetPVarFloat(playerid, "k_offsetX", 0.1);
+		SetPVarFloat(playerid, "k_offsetY", 0.05);
+		SetPVarFloat(playerid, "k_offsetZ", 0.0);
+		SetPVarFloat(playerid, "k_rotX", 0.0);
+		SetPVarFloat(playerid, "k_rotY", 0.0);
+		SetPVarFloat(playerid, "k_rotZ", 0.0);
+		SetPVarFloat(playerid, "k_scaleX", 1.0);
+		SetPVarFloat(playerid, "k_scaleY", 1.2);
+		SetPVarFloat(playerid, "k_scaleZ", 1.0);
+	}
+}
+
+
+stock saveKevlarPos(playerid)
+{
+	new lStr[256];
+	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
+	printf(lStr);
+	new DBResult:db_result;
+	db_result = db_query(db_handle, lStr);
+
+	if(!db_num_rows(db_result)) 
+	{
+		format(lStr, sizeof lStr, "INSERT INTO `mru_kevlar` (`pID`,`offsetX`, `offsetY`, `offsetZ`, `rotX`, `rotY`, `rotZ`, `scaleX`, `scaleY`, `scaleZ`) VALUES (%d, 0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2,1.0)", PlayerInfo[playerid][pUID]);
+
+		printf(lStr);
+
+		db_free_result(db_query(db_handle, lStr));
+
+		saveKevlarPos(playerid);
+	}
+	else
+	{
+		format(lStr, sizeof lStr, "UPDATE mru_kevlar SET offsetX=%f, offsetY=%f, offsetZ=%f, rotX=%f, rotY=%f, rotZ=%f, scaleX=%f, scaleY=%f, scaleZ=%f WHERE pID = %d", GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"), PlayerInfo[playerid][pUID]);
+
+		printf(lStr);
+
+		db_free_result(db_query(db_handle, lStr));
+	}
+}
+
+
 new scm_buf[144];
 #define sendTipMessageFormat(%0,%1,%2) \
 	(format(scm_buf, sizeof scm_buf, %1,%2), sendTipMessage(%0,scm_buf))
@@ -55,19 +123,32 @@ stock getWolneZgloszenieSasp() {
 sendNotification(id, title[], text[], time) {
 	CallRemoteFunction("notify", "dssd", id, title, text, time);
 }
+new _str[144];
+_MruAdmin(id, string:msg[])
+{
+	format(_str, 144, "»» %s", msg);
+	return SendClientMessage(id, 0xACD32FFF, _str);
+}
+
+
+_MruGracz(id, string:msg[], bool:noArrows=false)
+{
+	format(_str, 144, "%s%s", (!noArrows) ? ("»» ") : (""), msg);
+	return SendClientMessage(id, COLOR_GOLD, _str);
+}
+
 noAccessMessage(id) {
     return SendClientMessage(id,COLOR_FADE2,"»» Nie posiadasz dostêpu do tej komendy");
 }
 sendTipMessage(id, string:msg[], color = COLOR_GRAD3) {
-	new _str[128];
 	format(_str,128,"»» %s", msg);
 	return SendClientMessage(id, color, _str);
 }
+
 sendTipMessageEx(id, color = COLOR_GRAD3, string:msg[]) { //CM do sendclientmessage (:
 	return sendTipMessage(id, msg, color);
 }
 sendErrorMessage(id, string:msg[]) {
-	new _str[128];
 	format(_str,128,"»» %s", msg);
 	return SendClientMessage(id, COLOR_LIGHTRED, _str);
 }
@@ -183,9 +264,12 @@ public OznaczCzitera(playerid)
 {
 	new string[71+MAX_PLAYER_NAME];
 	SetPVarInt(playerid, "AC_oznaczony", 1);
-	format(string, sizeof(string), "UWAGA! %s[%d] jest podejrzany o S0beit. Pilnujcie go!", GetNick(playerid), playerid);
-	SendAdminMessage(COLOR_PANICRED, string);
-	SendAdminMessage(COLOR_PANICRED, "Gracz ten zosta³ dodany do listy cziterów, wpisz /cziterzy aby zobaczyæ t¹ listê");
+	if(gettime() > GetPVarInt(playerid, "lastSobMsg"))
+	{
+		SetPVarInt(playerid, "lastSobMsg", gettime() + 60);
+		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid, true), playerid);
+		SendAdminMessage(COLOR_PANICRED, string);
+	}
 	return 1;
 }
 
@@ -282,7 +366,7 @@ stock Uprawnienia(playerid, flags, bool:part=false)
 
 stock Taxi_FareEnd(playerid)
 {
-    new string[64];
+    new string[128];
     if(TransportDuty[playerid] == 1)
 	{
 		TaxiDrivers -= 1;
@@ -294,8 +378,13 @@ stock Taxi_FareEnd(playerid)
     for(new i=0;i<4;i++) if(TransportClient[playerid][i] != INVALID_PLAYER_ID) Taxi_Pay(TransportClient[playerid][i]); //Handle to 4 passenger
 
 	TransportDuty[playerid] = 0;
-	format(string, sizeof(string), "* Zakoñczy³eœ s³u¿bê, zarobi³eœ $%d dla Korporacji Transportowej", TransportMoney[playerid]);
-	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+	format(string, sizeof(string), "Zakoñczy³eœ s³u¿bê, zarobi³eœ $%d dla Korporacji Transportowej", TransportMoney[playerid]);
+
+	_MruGracz(playerid, string);
+
+	format(string,128,"%s zarobil $%d dla KT podczas /duty",GetNick(playerid), TransportMoney[playerid]);
+	PayLog(string);
+
 	if(GetPlayerFraction(playerid) != FRAC_KT) DajKase(playerid, TransportMoney[playerid]);
     else
     {
@@ -313,12 +402,19 @@ stock Taxi_Pay(playerid)
         new slot = GetPVarInt(playerid, "taxi-slot");
         new string[64];
         TransportCost[playerid] = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
-	    format(string, sizeof(string), "~w~Koszt przewozu~n~~r~$%d",TransportCost[playerid]);
-	    GameTextForPlayer(playerid, string, 5000, 1);
-	    format(string, sizeof(string), "~w~Klient opuscil taxi~n~~g~Zarobiles $%d",TransportCost[playerid]);
+	    if(PlayerInfo[playerid][pLevel] < 3)
+	    {
+	    	ZabierzKase(playerid, floatround(TransportCost[playerid]/2));//moneycheat
+	    }
+	    else
+	    {
+	    	ZabierzKase(playerid, floatround(TransportCost[playerid]));//moneycheat
+	    }
+		new doZaplaty = floatround(TransportCost[playerid]);
+		TransportMoney[taxidriver] += doZaplaty;
+
+	    format(string, sizeof(string), "~w~Klient opuscil taxi~n~~g~Zarobiles $%d",doZaplaty+TransportValue[taxidriver]);
 	    GameTextForPlayer(taxidriver, string, 5000, 1);
-		ZabierzKase(playerid, TransportCost[playerid]);//moneycheat
-		TransportMoney[taxidriver] += TransportCost[playerid];
 
 		TransportCost[playerid] = 0;
         TransportDist[playerid] = 0.0;
@@ -381,6 +477,7 @@ stock CarOpis_Usun(playerid, vehicleid, message=false)
     return 0;
 }
 
+
 stock DopalaczPD(playerid)
 {
 	new Float:Velocity[3], veh;
@@ -441,6 +538,8 @@ ClearChat(playerid)
 
 AntyReklama(result[])
 {
+	if ( strfind(result , "mrucznik-rp.pl" , true)>=0)
+		return 0;
 	if ( strfind(result , "lsrp" , true)>=0 ||  strfind(result , "ls-rp" , true)>=0 || strfind(result , "n4g" , true)>=0 || strfind(result , "net4game" , true)>=0)//nazwy serwerówhile
 		return 1;
 	if ( strfind(result , "www." , true)>=0 || strfind(result , ".pl" , true)>=0 || strfind(result , ".net" , true)>=0 || strfind(result , ".com" , true)>=0)//strony internetowe
@@ -519,7 +618,7 @@ stock HABox(numer, playerid)
     }
     if(IsPlayerConnected(playerid))
     {
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontrakt który podpisa³eœ zosta³ odebrany przez Hitmanów. Spodziewaj siê wykonania zlecenia.");
+        _MruGracz(playerid, "Kontrakt który podpisa³eœ zosta³ odebrany przez Hitmanów. Spodziewaj siê wykonania zlecenia.");
     }
 	return 1;
 }
@@ -596,6 +695,17 @@ public PlayerFixRadio(playerid)
 		PlayerPlaySound(playerid, 1068, 0.0, 0.0, 0.0);
 		Fixr[playerid] = 1;
 	}
+}
+
+stock MruDialog(playerid, title[], text[])
+{
+	return ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_MSGBOX, MruTitle(title), text, "Ok", "");
+}
+stock MruTitle(text[])
+{
+	new title_str[128];
+	format(title_str, 128, "Mrucznik-RP » {00b33c}%s", text);
+	return title_str;
 }
 
 public PlayerFixRadio2()
@@ -1119,7 +1229,7 @@ KoniecWyscigu(playerid)
 	else if(playerid == -2)
 		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony - wszyscy dojechali do mety!", Wyscig[Scigamy][wNazwa]);
 	else
-		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony przez %s.", Wyscig[Scigamy][wNazwa], GetNick(playerid));
+		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony przez %s.", Wyscig[Scigamy][wNazwa], GetNick(playerid, true));
 
 	WyscigMessage(COLOR_YELLOW, string);
 
@@ -1137,6 +1247,17 @@ KoniecWyscigu(playerid)
 	Ukonczyl = 1;
 	Scigamy = 666;
 	return 1;
+}
+
+stock strreplace(string[], find, replace)
+{
+    for(new i=0; string[i]; i++)
+    {
+        if(string[i] == find)
+        {
+            string[i] = replace;
+        }
+    }
 }
 
 
@@ -1356,15 +1477,9 @@ stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', 
 
 stock GetNick(playerid, rp = false)
 {
-	new nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	if(rp) {
-		for(new i; i < MAX_PLAYER_NAME; i++)
-		{
-			if(nick[i] == '_') nick[i] = ' ';
-		}
-	}
-	return nick;
+	if(rp)
+		return pNameRp[playerid];
+	return pName[playerid];
 }
 
 stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
@@ -2195,7 +2310,7 @@ IsAKO(playerid)
 	{
 	    new nick[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Armin_Verwest", false) == 0)
+		if(strcmp(nick,"Kylie_Lorens", false) == 0 || strcmp(nick,"Largo_Marks", false) == 0)
 		{
 		    return 1;
 		}
@@ -2514,7 +2629,7 @@ DajBronieFrakcyjne(playerid)
     	        PlayerInfo[playerid][pGun1] = 6; PlayerInfo[playerid][pAmmo1] = 1;
     	        playerWeapons[playerid][weaponLegal2] = 1;
     	    }
-            if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 42 && PlayerInfo[playerid][pAmmo9] < 500 || PlayerInfo[playerid][pAmmo9] <= 30 )
+            if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 42)
     	    {
     	        PlayerInfo[playerid][pGun9] = 42; PlayerInfo[playerid][pAmmo9] = 10000;
     	        playerWeapons[playerid][weaponLegal10] = 1;
@@ -4979,6 +5094,7 @@ ZapiszTrase(trasa)
 	return 1;
 }
 
+
 public MRP_ShopPurchaseCar(playerid, model, cena)
 {
     if(IsPlayerInAnyVehicle(playerid))
@@ -5028,14 +5144,17 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
 
     //Info
     format(komunikat, sizeof(komunikat), "Kupi³eœ unikatowy %s za %d MC. Komendy auta znajdziesz w /auto. Gratulujemy zakupu!",VehicleNames[model-400], cena);
-	SendClientMessage(playerid,COLOR_NEWS, komunikat);
+
+    _MruAdmin(playerid, komunikat);
+
+	//SendClientMessage(playerid,COLOR_NEWS, komunikat);
 
     format(komunikat, sizeof(komunikat), "%s kupil UNIKATOWY pojazd %s za %d MC. UID %d", nick, VehicleNames[model-400], cena, carid);
 	PayLog(komunikat);
     //TODO
     if(carid >= MAX_CARS)
     {
-        SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Mo¿liwe przepe³nienie, auto zosta³o kupione lecz nie mo¿esz go u¿yæ.");
+        sendErrorMessage(playerid, "Nie mo¿na stworzyæ pojazdu! Mo¿liwe przepe³nienie, auto zosta³o kupione lecz nie mo¿esz go u¿yæ.");
         return 1;
     }
 	PutPlayerInVehicleEx(playerid, CarData[carid][c_ID], 0);
@@ -7496,7 +7615,7 @@ Otwieramdrzwibusa(playerid)
 
 SoundForAll(sound)
 {
-	for(new i = 0, j = GetMaxPlayers(); i < j; i ++)
+	for(new i = 0, j = MAX_PLAYERS; i < j; i ++)
 		if (IsPlayerConnected(i))
 			PlayerPlaySound(i,sound,0.0,0.0,0.0);
 }
@@ -8152,8 +8271,6 @@ stock LoadConfig()
     }
 
     format(data, 256, "mrucznik-loginsound.lqs.pl/game/audio/%s.ogg", AUDIO_LoginData[0]);
-    HTTP(40, HTTP_GET, data, "", "MUSIC_Response");
-    HTTP(638, HTTP_GET, "skryptowanie.pl/premium/verify.txt", "", "MRPWeryfikacja");
 
     format(VINYL_Stream, 128, "%s",RadioSANDos);
 
@@ -8564,7 +8681,7 @@ public TRAIN_DoHorn(veh)
     new Float:x, Float:y, Float:z;
     GetVehiclePos(veh, x, y,z);
     new Float:angle, Float:ix, Float:iy, Float:iz, Float:dist;
-    for(new i=0;i<GetMaxPlayers();i++)
+    for(new i=0;i<MAX_PLAYERS;i++)
     {
         if(IsPlayerInRangeOfPoint(i, 100.0, x, y, z))
         {
@@ -10702,6 +10819,13 @@ stock ChangePlayerName(playerid, name[])
 	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
 	SetPlayerName(playerid, name);
+
+	GetPlayerName(playerid, pName[playerid], 60);
+    pName[playerid][0] = chrtoupper(pName[playerid][0]);
+
+    strcat(pName[playerid], pNameRp[playerid]);
+    strreplace(pNameRp[playerid], '_', ' ');
+	
     format(PlayerInfo[playerid][pNick], 32, "%s", name);
 
     MruMySQL_SaveAccount(playerid);
@@ -11639,3 +11763,4 @@ public AddsOn()
 }
 
 //EOF
+

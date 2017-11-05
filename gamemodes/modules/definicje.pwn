@@ -2,9 +2,24 @@
 
 #pragma tabsize 0 // <------------------------------------------
 
-#define DEBUG 1
+#define DEBUG 2
 
+new Float:czitX;
+new Float:czitY;
+new Float:czitZ;
 
+#define chrtoupper(%1) \
+        (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
+
+#include "modules/new/niceczlowiek/definicje.pwn"
+
+#define         MAX_VEHICLE_ID_CHANGES          3
+
+new LastVehicleID[MAX_PLAYERS];
+new VehicleIDChanges[MAX_PLAYERS];
+new VehicleIDChangeTime[MAX_PLAYERS];
+
+new acstr[128];
 
 //Makra:
 #define GetPlayerWeather(%1) GetPVarInt(%1, "Weather")

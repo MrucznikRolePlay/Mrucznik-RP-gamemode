@@ -30,13 +30,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
 	if(antyHider[playerid] != 1)
 	{
-		new string[128];
-		format(string, sizeof(string), "AdmWarn: %s(ID: %i) <- ten gnoj czituje dialogi sprawdzcie co robi", GetNick(playerid, true), playerid);
-		SendAdminMessage(COLOR_YELLOW, string);
+		if(gettime() > GetPVarInt(playerid, "lastDialogCzitMsg"))
+		{
+			SetPVarInt(playerid, "lastDialogCzitMsg", gettime() + 60);
+			new string[128];
+			format(string, sizeof(string), "AdmWarn: %s(ID: %i) <- ten gnoj czituje dialogi sprawdzcie co robi", GetNick(playerid, true), playerid);
+			SendAdminMessage(COLOR_YELLOW, string);	
+		}
 		return 1;
 	}
 
 	antyHider[playerid] = 0;
+	
 	//2.5.8
 	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
@@ -138,16 +143,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(IsAValidURL(inputtext))
-			{
+			//if(IsAValidURL(inputtext))
+			//{
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, inputtext);
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
-				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
-			}
+			//}
+			//else
+			//{
+			//	SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
+			//	ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
+			//}
 		}
 		return 1;
 	}
@@ -2087,7 +2092,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            	// parking gorny
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
-			                SetPlayerPosEx(playerid,1579.8573,-1637.0537,13.5522); // pos gornego
+			                SetPlayerPosEx(playerid,1570.9799,-1636.7758,13.5713); // pos gornego
 			                SetPlayerVirtualWorld(playerid,0);
 			                SetPlayerInterior(playerid,0);
 			                TogglePlayerControllable(playerid,0);
@@ -3212,6 +3217,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				else
 				{
 				    format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
+				    TogglePlayerControllable(playerid, 1);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					PDkuje[playerid] = 0;
 					PoziomPoszukiwania[playerid] += 1;
@@ -10027,6 +10033,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	         		ShowPlayerDialogEx(playerid, 8015, DIALOG_STYLE_INPUT, "Sejf - wpisz kod", "Ten sejf jest zabezpieczony kodem. Aby siê do niego dostaæ wpisz poprawny kod w okienko poni¿ej", "ZatwierdŸ", "WyjdŸ");
 					return 1;
 				}
+				
+				if(GetPVarInt(playerid, "kodVw") != GetPlayerVirtualWorld(playerid)) return 1;
 				new kod[20];
 				format(kod, sizeof(kod), "%s", Dom[PlayerInfo[playerid][pDomWKJ]][hKodSejf]);
 				if(strcmp(kod, inputtext, true ) == 0)
@@ -12667,9 +12675,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         }
                     }
                 }
-                else if(strfind(inputtext, "W³asny Stream") != -1)
+                else if(strfind(inputtext, "Wlasny Stream") != -1)
                 {
                     if(!response) return 1;
+                    dont_override = true;
                     if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
                     	ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny stream", "Wklej poni¿ej link do streama", "Start", "Wróæ");
                     }
@@ -12717,7 +12726,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
                 //
-                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nW³asny Stream\nWy³¹cz radio", komunikat); //+ 35char
+                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 //
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
@@ -12726,23 +12735,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(response)
 			{
 				new veh = GetPlayerVehicleID(playerid);
-				if(IsAValidURL(inputtext))
-				{
-					if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
-						foreach(Player, i) {
-							if(IsPlayerInVehicle(i, veh)) {
-								PlayAudioStreamForPlayer(i, inputtext);
-							}
+				//if(IsAValidURL(inputtext))
+				//{
+				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
+					foreach(Player, i) {
+						if(IsPlayerInVehicle(i, veh)) {
+							PlayAudioStreamForPlayer(i, inputtext);
 						}
-						SetPVarString(playerid, "radioUrl", inputtext);
-						SetPVarInt(playerid, "sanlisten", 3);
 					}
+					SetPVarString(playerid, "radioUrl", inputtext);
+					SetPVarInt(playerid, "sanlisten", 3);
 				}
-				else
-				{
-					SendClientMessage(playerid, COLOR_GREY, "Z³y adres URL");
-					ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W³asny Stream", "WprowadŸ adres URL do radia/piosenki", "Start", "Anuluj");
-				}
+				//}
 			}
 			return 1;
 		}

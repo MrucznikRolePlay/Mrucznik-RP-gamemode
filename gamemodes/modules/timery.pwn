@@ -2,61 +2,6 @@
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
 
-//Naprawianie timer
-public Naprawa(playerid)
-{
-	new string[256];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
-	GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
-	GetPlayerName(playerid, sendername, sizeof(sendername));
-	RepairCar[playerid] = GetPlayerVehicleID(playerid);
-	if(RepairCar[playerid] == INVALID_VEHICLE_ID || !IsPlayerInAnyVehicle(playerid))
-	{
-		return 1;
-	}
-	
-	SetVehicleHealth(RepairCar[playerid], 1000.0);
-	RepairVehicle(RepairCar[playerid]);
-
-	CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
-	CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
-
-	PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
-	PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
-	if(RepairPrice[playerid] > kaska[playerid])
-	{
-		sendTipMessage(playerid, "Nie staæ ciê na naprawê wozu");
-		sendTipMessage(RepairOffer[playerid], "Tej osoby nie staæ na naprawê wozu");
-		RepairOffer[playerid] = 999;
-    	RepairPrice[playerid] = 0;
-		Naprawiasie[playerid] = 0;
-		return 0;
-	}
-	format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez %s.",RepairPrice[playerid],giveplayer);
-	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	format(string, sizeof(string), "* Naprawi³eœ pojazd %s, otrzymujesz $%d.",giveplayer,RepairPrice[playerid]);
-	SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
-	format(string, sizeof(string),"* Mechanik %s naprawia pojazd %s i chowa narzêdzia do skrzynki.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
-	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
- 	format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
- 	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-  	PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
-   	if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
-    { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-    else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
-   	{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-    else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
-    { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-    else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
-    { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-    ZabierzKase(playerid, RepairPrice[playerid]);
-    DajKase(RepairOffer[playerid], RepairPrice[playerid]);
-    RepairOffer[playerid] = 999;
-    RepairPrice[playerid] = 0;
-	Naprawiasie[playerid] = 0;
-    return 1;
-}
 
 //System Po¿arów v0.1
 forward UsunPozar();
@@ -601,9 +546,9 @@ public PlayerAFK(playerid, afktime, breaktime)
 	{
 		new caption[32];
 		if(afktime < 60)
-			format(caption, sizeof(caption), "[AFK] %d sekund.", afktime);
+			format(caption, sizeof(caption), "[AFK] %d sekund (%d)", afktime, playerid);
 		else
-			format(caption, sizeof(caption), "[AFK] %d min. %d sekund.", afktime/60, afktime%60);
+			format(caption, sizeof(caption), "[AFK] %d min. %d sek (%d)", afktime/60, afktime%60, playerid);
 
 		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
@@ -1914,7 +1859,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 2:
 					{
@@ -1926,7 +1871,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 3:
 					{
@@ -1939,7 +1884,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 4:
 					{
@@ -1952,7 +1897,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 5:
 					{
@@ -1966,7 +1911,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 6:
 					{
@@ -1980,7 +1925,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 7:
 					{
@@ -1994,7 +1939,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 8:
 					{
@@ -2008,7 +1953,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 9:
 					{
@@ -2022,7 +1967,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 					case 10:
 					{
@@ -2036,7 +1981,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
 					}
 				}
 				OrderReady[i] = 0;
@@ -2161,7 +2106,7 @@ public JednaSekundaTimer()
         //JAIL
 		if(PlayerInfo[i][pJailed] > 0)
 		{
-			if(PlayerInfo[i][pJailTime] > 0 && WantLawyer[i] == 0)
+			if(PlayerInfo[i][pJailTime] > 0 && WantLawyer[i] == 0 && gPlayerSpawned[i] == 1)
 			{
 				PlayerInfo[i][pJailTime]--;
 			}
@@ -2181,6 +2126,7 @@ public JednaSekundaTimer()
 				else if(PlayerInfo[i][pJailed] == 3)
 				{
 					SetPlayerInterior(i, 0);
+					PlayerInfo[i][pJailed] = 0;
 					PlayerInfo[i][pJailTime] = 0;
 					SetPlayerVirtualWorld(i, 0);
 					PlayerInfo[i][pMuted] = 0;
@@ -2326,7 +2272,7 @@ public JednaSekundaTimer()
 		}
 		if((taxidriver = TransportDriver[i]) != 999) //Taxi
 		{
-            TransportDist[i]+=VectorSize(SavePlayerPos[i][LastX] - x, SavePlayerPos[i][LastY] - y, SavePlayerPos[i][LastZ]-z)/1000;
+            TransportDist[i]+=(VectorSize(SavePlayerPos[i][LastX] - x, SavePlayerPos[i][LastY] - y, SavePlayerPos[i][LastZ]-z)/1000)*3;
             format(string, 128, "%.1fKM", TransportDist[i]);
             PlayerTextDrawSetString(i, TAXI_DIST[i], string);
             PlayerTextDrawSetString(taxidriver, TAXI_DIST[taxidriver], string);
@@ -2334,7 +2280,7 @@ public JednaSekundaTimer()
             PlayerTextDrawShow(i, TAXI_DIST[i]);
             PlayerTextDrawShow(taxidriver, TAXI_DIST[taxidriver]);
 
-            format(string, 128, "$%d", floatround(TransportDist[i]*TransportValue[taxidriver]));
+            format(string, 128, "$%d", floatround((TransportDist[i]*TransportValue[taxidriver])+TransportValue[taxidriver]));
             PlayerTextDrawSetString(i, TAXI_COST[i], string);
             PlayerTextDrawSetString(taxidriver, TAXI_COST[taxidriver], string);
 
@@ -2356,6 +2302,12 @@ public JednaSekundaTimer()
         SavePlayerPos[i][LastX] = x;
         SavePlayerPos[i][LastY] = y;
         SavePlayerPos[i][LastZ] = z;
+
+        /*if(GetPlayerWeapon(i) != 0 && GetPlayerWeapon(i) != 1 && GetPVarInt(i, "obezwladniony") > gettime())
+        {
+        	SetPlayerArmedWeapon(i, 0);
+        	MruDialog(i, "Informacja", "Niedawno zosta³es obezw³adniony, nie mo¿esz korzystaæ z broni przez pewien czas!");
+        }*/
 
 		// serce zapisu broni
 		if(State >= 1 && State <= 6)
@@ -2663,12 +2615,25 @@ public JednaSekundaTimer()
 				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
 				SetPlayerSpawn(i);
-				LogujeSieBezKlauna[i] = 0;
-                SetPVarInt(i, "class-sel", 1);
+				//LogujeSieBezKlauna[i] = 0;
+                //SetPVarInt(i, "class-sel", 1);
 				//ForceClassSelection(i);
-                TogglePlayerSpectating(i, true);
-                TogglePlayerSpectating(i, false);
-				SetPlayerVirtualWorld(i, 0);
+                //TogglePlayerSpectating(i, true);
+                //TogglePlayerSpectating(i, false);
+				//SetPlayerVirtualWorld(i, 0);
+
+				SetPlayerSpawn(i);
+				SpawnPlayer(i);
+
+				SetPVarInt(i, "wyborPierwszego", 1);
+
+				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
+				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
+
+				NowaWybieralka::Setup(i);
+
+				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
+				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
 			}
 		}
 		if(PlayerTazeTime[i] >= 1)
@@ -2798,7 +2763,7 @@ public JednaSekundaTimer()
 										}
 										else
 										{
-											SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boxera !");
+											_MruGracz(Boxer2, "* Zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boksera!");
 										}
 									}
 									else
@@ -2813,29 +2778,29 @@ public JednaSekundaTimer()
 								}
 							}//TBoxer
 							format(string, sizeof(string), "* Przegra³eœ walkê z %s.", winner);
-							SendClientMessage(Boxer1, COLOR_LIGHTBLUE, string);
+							_MruGracz(Boxer1, string);
 							GameTextForPlayer(Boxer1, "~r~you lost", 3500, 1);
 							format(string, sizeof(string), "* Wygra³eœ walkê z %s.", loser);
-							SendClientMessage(Boxer2, COLOR_LIGHTBLUE, string);
+							_MruGracz(Boxer2, string);
 							GameTextForPlayer(Boxer2, "~r~Wygrales", 3500, 1);
 							if(GetPlayerHealth(Boxer1, health) < 20)
 							{
-								SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								_MruGracz(Boxer1, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
 								SetPlayerHealth(Boxer1, 30.0);
 							}
 							else
 							{
-								SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								_MruGracz(Boxer1, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer1, 50.0);
 							}
 							if(GetPlayerHealth(Boxer2, health) < 10)
 							{
-								SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* Czujesz siê wykoñczony, idŸ coœ zjeœæ.");
+								_MruGracz(Boxer2, "* Czujesz siê wykoñczony, idŸ coœ zjeœæ.");
 								SetPlayerHealth(Boxer2, 30.0);
 							}
 							else
 							{
-								SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								_MruGracz(Boxer2, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer2, 50.0);
 							}
 							GameTextForPlayer(Boxer1, "~g~Walka skonczona", 5000, 1); GameTextForPlayer(Boxer2, "~g~Walka skonczona", 5000, 1);
@@ -2874,7 +2839,7 @@ public JednaSekundaTimer()
 										}
 										else
 										{
-											SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boxera !");
+											_MruGracz(Boxer1, "* Zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boksera !");
 										}
 									}
 									else
@@ -2889,29 +2854,29 @@ public JednaSekundaTimer()
 								}
 							}//TBoxer
 							format(string, sizeof(string), "* Przegra³eœ walkê z %s.", winner);
-							SendClientMessage(Boxer2, COLOR_LIGHTBLUE, string);
+							_MruGracz(Boxer2, string);
 							GameTextForPlayer(Boxer2, "~r~Przegrana", 3500, 1);
 							format(string, sizeof(string), "* Wygra³eœ walkê z %s.", loser);
-							SendClientMessage(Boxer1, COLOR_LIGHTBLUE, string);
+							_MruGracz(Boxer1, string);
 							GameTextForPlayer(Boxer1, "~g~Wygrana", 3500, 1);
 							if(GetPlayerHealth(Boxer1, health) < 20)
 							{
-								SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								_MruGracz(Boxer1, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
 								SetPlayerHealth(Boxer1, 30.0);
 							}
 							else
 							{
-								SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								_MruGracz(Boxer1, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer1, 50.0);
 							}
 							if(GetPlayerHealth(Boxer2, health) < 20)
 							{
-								SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								_MruGracz(Boxer2, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
 								SetPlayerHealth(Boxer2, 30.0);
 							}
 							else
 							{
-								SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								_MruGracz(Boxer2, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer2, 50.0);
 							}
 							GameTextForPlayer(Boxer1, "~g~Koniec walki", 5000, 1); GameTextForPlayer(Boxer2, "~g~Koniec walki", 5000, 1);
@@ -3055,7 +3020,7 @@ public JednaSekundaTimer()
 				PlayerCuffed[i] = 0;
 				PlayerCuffedTime[i] = 0;
 				pobity[i] = 0;
-				obezwladniony[i] = 0;
+				//obezwladniony[i] = 0;
 				PlayerInfo[i][pMuted] = 0;
 				PlayerTied[i] = 0;
                 PlayerInfo[i][pBW]=0;
@@ -3127,15 +3092,15 @@ public Fillup()
 			{
 				Gas[VID] += FillUp;
 				FillUp = FillUp * 40;
-				format(string,sizeof(string),"* Pojazd zatankowany za: $%d.",FillUp);
-				SendClientMessage(i,COLOR_LIGHTBLUE,string);
+				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUp);
+				_MruGracz(i,string);
 				DajKase(i, - FillUp);
 				Refueling[i] = 0;
 			}
 			else
 			{
-				format(string,sizeof(string),"* Nie posiadasz doœæ pieniêdzy ( $%d ) aby zatankowaæ ten pojazd.",FillUp);
-				SendClientMessage(i,COLOR_LIGHTBLUE,string);
+				format(string,sizeof(string),"Nie posiadasz doœæ pieniêdzy ($%d) aby zatankowaæ ten pojazd.",FillUp);
+				sendErrorMessage(i,string);
                 Refueling[i] = 0;
 			}
 		}
@@ -3240,11 +3205,11 @@ public GangZone_ShowInfoToParticipants() {
             if(ZoneAttackData[pzone][2] > 100)
             {
                 //GameTextForAll(string, 3000, 3);
-                GameTextForPlayer(i, string, 1500, 3);
+                GameTextForPlayer(i, string, 1000, 3);
             }
             else
             {
-                GameTextForPlayer(i, string, 1500, 3);   
+                GameTextForPlayer(i, string, 1000, 3);   
             }
             SetSVarInt(svar_data, GetSVarInt(svar_data)-2);
         }

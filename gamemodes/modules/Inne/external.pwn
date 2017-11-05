@@ -89,6 +89,9 @@ public MRPWeryfikacja(index, response_code, data[])
 
 // OTHERS
 public MRP_IsPhoneNumberAvailable(number) {
+    
+    if(100 >= number <= 150) return false;
+    if(number == 555) return false;
     new string[70];
     format(string, sizeof(string), "SELECT `UID` FROM `mru_konta` WHERE `PhoneNr` = %d", number);
     mysql_query(string);
