@@ -128,6 +128,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 * @author       ZeeX
 * @version      4.5.1
 */
+#include "crashdetect"
 
 /**
 *               systempozarow
@@ -874,9 +875,8 @@ public OnPlayerConnect(playerid)
 
     ClearChat(playerid);	
 
-    // Wy³¹czone na testy
-    //Usun_Obiekty(playerid); //stare obiekty
-    //obiekty_OnPlayerConnect(playerid);//nowe obiekty
+    Usun_Obiekty(playerid); //stare obiekty
+    obiekty_OnPlayerConnect(playerid);//nowe obiekty
 
     pName[playerid][0] = EOS;
     pNameRp[playerid][0] = EOS;
@@ -5784,9 +5784,9 @@ OnPlayerLogin(playerid, password[])
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;
 
 
-    //MRP_LoadPremium(playerid);
+    MRP_LoadPremium(playerid);
 
-    premium_loadForPlayer(playerid);
+    //premium_loadForPlayer(playerid);
 
 	//Odbugowywanie domów:
     if(PlayerInfo[playerid][pDom] != 0)

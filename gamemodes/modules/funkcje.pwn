@@ -20,7 +20,6 @@ stock loadKamiPos(playerid)
 	new lStr[256];
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
 	new DBResult:db_result;
-	printf(lStr);
 	db_result = db_query(db_handle, lStr);
 
 	if(db_num_rows(db_result)) {
@@ -58,7 +57,6 @@ stock saveKevlarPos(playerid)
 {
 	new lStr[256];
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
-	printf(lStr);
 	new DBResult:db_result;
 	db_result = db_query(db_handle, lStr);
 
@@ -66,7 +64,6 @@ stock saveKevlarPos(playerid)
 	{
 		format(lStr, sizeof lStr, "INSERT INTO `mru_kevlar` (`pID`,`offsetX`, `offsetY`, `offsetZ`, `rotX`, `rotY`, `rotZ`, `scaleX`, `scaleY`, `scaleZ`) VALUES (%d, 0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2,1.0)", PlayerInfo[playerid][pUID]);
 
-		printf(lStr);
 
 		db_free_result(db_query(db_handle, lStr));
 
@@ -76,7 +73,6 @@ stock saveKevlarPos(playerid)
 	{
 		format(lStr, sizeof lStr, "UPDATE mru_kevlar SET offsetX=%f, offsetY=%f, offsetZ=%f, rotX=%f, rotY=%f, rotZ=%f, scaleX=%f, scaleY=%f, scaleZ=%f WHERE pID = %d", GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"), PlayerInfo[playerid][pUID]);
 
-		printf(lStr);
 
 		db_free_result(db_query(db_handle, lStr));
 	}
@@ -215,7 +211,6 @@ DialogListaSkinow(frakcja)
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[frakcja][i], i);
 	}
 	strdel(skiny, strlen(skiny)-2, strlen(skiny));
-	printf(skiny);
 	safe_return skiny;
 }
 

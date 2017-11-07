@@ -2614,7 +2614,7 @@ public JednaSekundaTimer()
 				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
 				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
-				SetPlayerSpawn(i);
+				//SetPlayerSpawn(i);
 				//LogujeSieBezKlauna[i] = 0;
                 //SetPVarInt(i, "class-sel", 1);
 				//ForceClassSelection(i);
