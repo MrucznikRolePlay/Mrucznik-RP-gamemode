@@ -1,9 +1,9 @@
 //timery.pwn
 
-//25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
+//25.06.2014 Aktualizacja timerÃ³w (wszystkich) - optymalizacja Kubi
 
 
-//System Po¿arów v0.1
+//System PoÂ¿arÃ³w v0.1
 forward UsunPozar();
 public UsunPozar()
 {
@@ -18,13 +18,13 @@ public AktywujPozar()
 	if(losowy == 1)
 	{
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: DOM JEDNORODZINNY - IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH KUCHENKI GAZOWEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-   		SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: DOM JEDNORODZINNY - IDLEWOOD");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: WYBUCH KUCHENKI GAZOWEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRZECHODZIEÃ‘");
+   		SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: DOM JEDNORODZINNY - IDLEWOOD",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: DOM JEDNORODZINNY - IDLEWOOD",1);
     	AddFire(2016.998,-1696.110,15.036, 400);
 		AddFire(2016.998,-1697.411,15.036, 400);
 		AddFire(2016.998,-1698.870,15.036, 400);
@@ -49,13 +49,13 @@ public AktywujPozar()
 	else if(losowy == 2)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 W OKOLICACH DMV");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK SKLEPU");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: SKLEP 24/7 W OKOLICACH DMV");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: AWARIA INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRACOWNIK SKLEPU");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP 24/7 W OKOLICACH DMV",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: SKLEP 24/7 W OKOLICACH DMV",1);
     	AddFire(1362.514,-1759.767,12.359,400);
 		AddFire(1361.113,-1759.767,12.359,400);
 		AddFire(1360.043,-1759.767,12.359,400);
@@ -85,13 +85,13 @@ public AktywujPozar()
 	else if(losowy == 3)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: PIZZERIA IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA KUCHENKI GAZOWEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK RESTAURACJI");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: PIZZERIA IDLEWOOD");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: AWARIA KUCHENKI GAZOWEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRACOWNIK RESTAURACJI");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: PIZZERIA IDLEWOOD",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: PIZZERIA IDLEWOOD",1);
 		AddFire(2105.741,-1796.412,12.551, 400);
 		AddFire(2105.741,-1797.312,12.551, 400);
 		AddFire(2105.741,-1798.193,12.551, 400);
@@ -118,13 +118,13 @@ public AktywujPozar()
 	else if(losowy == 4)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP BINCO - GANTON");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: SKLEP BINCO - GANTON");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRZECHODZIEÃ‘");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP BINCO - GANTON",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: SKLEP BINCO - GANTON",1);
 		AddFire(2248.296,-1667.368,14.286, 400);
 		AddFire(2247.255,-1667.017,14.286, 400);
 		AddFire(2246.314,-1666.797,14.286, 400);
@@ -141,13 +141,13 @@ public AktywujPozar()
 	else if(losowy == 5)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: STACJA PALIW - TEMPLE");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH DYSTRYBUTORA");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK STACJI");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: STACJA PALIW - TEMPLE");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: WYBUCH DYSTRYBUTORA");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRACOWNIK STACJI");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: STACJA PALIW - TEMPLE",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: STACJA PALIW - TEMPLE",1);
     	AddFire(995.978,-938.445,40.229, 400);
 		AddFire(997.778,-938.445,40.229, 400);
 		AddFire(999.308,-938.445,40.229, 400);
@@ -164,13 +164,13 @@ public AktywujPozar()
 	else if(losowy == 6)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: KONTENERY - LOSTNISKO LOS SANTOS");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: OCHRONA LOTNISKA");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: KONTENERY - LOSTNISKO LOS SANTOS");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: WYBUCH");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: OCHRONA LOTNISKA");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: KONTENERY - LOSTNISKO LOS SANTOS",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: KONTENERY - LOSTNISKO LOS SANTOS",1);
     	AddFire(2067.007,-2206.814,13.666, 400);
 		AddFire(2067.007,-2208.004,13.666, 400);
 		AddFire(2067.007,-2209.165,13.666, 400);
@@ -200,13 +200,13 @@ public AktywujPozar()
 	else if(losowy == 7)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: P¥CZKARNIA NA MARKET");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: PÂ¥CZKARNIA NA MARKET");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRZECHODZIEÃ‘");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: P¥CZKARNIA NA MARKET",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: PÂ¥CZKARNIA NA MARKET",1);
 		AddFire(1037.776,-1341.086,12.726, 400);
 		AddFire(1038.607,-1341.086,12.726, 400);
 		AddFire(1038.897,-1341.086,11.326, 400);
@@ -231,13 +231,13 @@ public AktywujPozar()
 	else if(losowy == 8)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BAR W DILLIMORE");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: BAR W DILLIMORE");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRZECHODZIEÃ‘");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BAR W DILLIMORE",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: BAR W DILLIMORE",1);
     	AddFire(681.627,-473.598,15.457, 400);
 		AddFire(681.627,-473.598,14.177, 400);
 		AddFire(679.547,-473.598,15.637, 400);
@@ -272,13 +272,13 @@ public AktywujPozar()
 	else if(losowy == 9)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: URZ¥D MIASTA PALOMINO CREEK");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK URZÊDU MIASTA");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: URZÂ¥D MIASTA PALOMINO CREEK");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRACOWNIK URZÃŠDU MIASTA");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: URZ¥D MIASTA PALOMINO CREEK",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: URZÂ¥D MIASTA PALOMINO CREEK",1);
     	AddFire(2269.603,-74.425,25.554, 400);
 		AddFire(2269.603,-74.425,24.344, 400);
 		AddFire(2265.882,-76.155,24.344, 400);
@@ -303,13 +303,13 @@ public AktywujPozar()
 	else if(losowy == 10)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 - IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: SKLEP 24/7 - IDLEWOOD");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRZECHODZIEÃ‘");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP 24/7 - IDLEWOOD",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: SKLEP 24/7 - IDLEWOOD",1);
 		AddFire(1833.399,-1840.566,12.578, 400);
 		AddFire(1833.399,-1838.866,12.578, 400);
 		AddFire(1833.399,-1837.385,12.578, 400);
@@ -334,13 +334,13 @@ public AktywujPozar()
 	else if(losowy == 11)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: MOTEL JEFFERSON");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: MOTEL JEFFERSON");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRZECHODZIEÃ‘");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: MOTEL JEFFERSON",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: MOTEL JEFFERSON",1);
     	AddFire(2233.332,-1160.049,23.629, 400);
 		AddFire(2233.332,-1160.049,25.089, 400);
 		AddFire(2233.332,-1164.379,25.089, 400);
@@ -376,13 +376,13 @@ public AktywujPozar()
 	else if(losowy == 12)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SALON AUT");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: SALON AUT");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRACOWNIK");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SALON AUT",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: SALON AUT",1);
     	AddFire(2133.200,-1151.196,23.681, 400);
     	AddFire(2133.200,-1151.196,22.271, 400);
     	AddFire(2131.720,-1151.196,22.271, 400);
@@ -412,13 +412,13 @@ public AktywujPozar()
 	else if(losowy == 13)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: GUNSHOP OBOK BAZY LSFD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: GUNSHOP OBOK BAZY LSFD");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: PODPALENIE");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRACOWNIK");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: GUNSHOP OBOK BAZY LSFD",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: GUNSHOP OBOK BAZY LSFD",1);
     	AddFire(1781.413,-1161.296,22.015, 400);
     	AddFire(1781.413,-1161.296,23.765, 400);
     	AddFire(1782.823,-1161.837,23.765, 400);
@@ -448,13 +448,13 @@ public AktywujPozar()
 	else if(losowy == 14)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK BIUROWCA FBI");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: BUDYNEK OBOK BIUROWCA FBI");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRZECHODZIEÃ‘");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BUDYNEK OBOK BIUROWCA FBI",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: BUDYNEK OBOK BIUROWCA FBI",1);
     	AddFire(651.468,-1458.514,14.407, 400);
     	AddFire(651.468,-1459.935,14.407, 400);
     	AddFire(651.468,-1460.804,14.407, 400);
@@ -484,13 +484,13 @@ public AktywujPozar()
 	else if(losowy == 15)
 	{
 		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK VINYL CLUB");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCHÂ£ POÂ¯AR!");
+    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE POÂ¯ARU: BUDYNEK OBOK VINYL CLUB");
+    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA POÂ¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(17, 0xAA3333AA, "ZGÂ£OSIÂ£: PRZECHODZIEÃ‘");
+    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÃŠ NA MIEJSCE!!!!");
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BUDYNEK OBOK VINYL CLUB",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM POÂ¯ARÃ“W] Aktywowano poÂ¿ar: BUDYNEK OBOK VINYL CLUB",1);
     	AddFire(830.011,-1385.443,15.928, 400);
     	AddFire(830.862,-1385.703,15.928, 400);
     	AddFire(831.782,-1385.703,15.928, 400);
@@ -554,7 +554,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 		{
 			if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
 			{
-				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
+				SendClientMessage(playerid, 0xAA3333AA, "ZostaÂ³eÂœ skickowany za zbyt dÂ³ugie AFK (30 minut).");
 				SetTimerEx("KickEx", 500, false, "i", playerid);
 			}
 			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
@@ -563,14 +563,14 @@ public PlayerAFK(playerid, afktime, breaktime)
 		{
 			if(afktime > 1200)
 			{
-				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (20 minut).");
+				SendClientMessage(playerid, 0xAA3333AA, "ZostaÂ³eÂœ skickowany za zbyt dÂ³ugie AFK (20 minut).");
 				SetTimerEx("KickEx", 500, false, "i", playerid);
 			}
 			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
 		}
 		else if(afktime > 600)
 		{
-			SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (10 minut).");
+			SendClientMessage(playerid, 0xAA3333AA, "ZostaÂ³eÂœ skickowany za zbyt dÂ³ugie AFK (10 minut).");
 			SetTimerEx("KickEx", 500, false, "i", playerid);
 		}
 		else
@@ -596,7 +596,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 	return 1;
 }
 
-//PADZIOCH
+//PAÂDZIOCH
 forward syncanim(playerid);
 public syncanim(playerid)
 {
@@ -812,7 +812,7 @@ public Spectator()
 			{
 				if(PlayerInfo[i][pDonateRank] == 0)
 				{
-					SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka, POWÓD: Ping wiêkszy ni¿ 2 000");
+					SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka, POWÃ“D: Ping wiÃªkszy niÂ¿ 2 000");
 					KickEx(i);
 				}
 			}
@@ -884,7 +884,7 @@ public Spectator()
     							PrzywrocBron(i);
     						}
     					}
-    					case 3://pa³ka policyjna
+    					case 3://paÂ³ka policyjna
     					{
     						if(PlayerInfo[i][pGun1] != 3)
     						{
@@ -892,7 +892,7 @@ public Spectator()
     							PrzywrocBron(i);
     						}
     					}
-                        case 4://nó¿
+                        case 4://nÃ³Â¿
     					{
     						if(PlayerInfo[i][pGun1] != 4 && PlayerInfo[i][pMember] != 8 && PlayerInfo[i][pLider] != 8)
     						{
@@ -902,7 +902,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -915,7 +915,7 @@ public Spectator()
     							PrzywrocBron(i);
     						}
     					}
-    					case 6://³opata
+    					case 6://Â³opata
     					{
     						if(PlayerInfo[i][pGun1] != 6)
     						{
@@ -941,12 +941,12 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
     					}
-    					case 9://pi³a
+    					case 9://piÂ³a
     					{
     						if(PlayerInfo[i][pGun1] != 9)
     						{
@@ -956,7 +956,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1019,7 +1019,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1042,12 +1042,12 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
     					}
-    					//Broñ 19, 20 i 21 nie istniej¹
+    					//BroÃ± 19, 20 i 21 nie istniejÂ¹
     					case 22://9mm
     					{
     						if(PlayerInfo[i][pGun2] != 22)
@@ -1058,12 +1058,12 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
     					}
-    					case 23://9mm t³umik
+    					case 23://9mm tÂ³umik
     					{
     						if(PlayerInfo[i][pGun2] != 23)
     						{
@@ -1073,7 +1073,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1088,7 +1088,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1103,7 +1103,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1118,7 +1118,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1133,7 +1133,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1148,7 +1148,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1163,7 +1163,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1178,7 +1178,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1193,7 +1193,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1208,7 +1208,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1223,7 +1223,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1238,7 +1238,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1253,7 +1253,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1268,7 +1268,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1283,7 +1283,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1298,7 +1298,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1313,7 +1313,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1328,12 +1328,12 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
     					}
-    					case 42://gaœnica
+    					case 42://gaÂœnica
     					{
     						if(PlayerInfo[i][pGun9] != 42)
     						{
@@ -1343,7 +1343,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1366,7 +1366,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1381,7 +1381,7 @@ public Spectator()
     							}
                                 else
                                 {
-        							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+        							SendClientMessage(i, COLOR_PANICRED, "DostaÂ³eÂœ kicka od systemu, powÃ³d: Spawn Broni");
         							KickEx(i);
                                 }
     						}
@@ -1406,7 +1406,7 @@ public Spectator()
 			ResetPlayerWeapons(i);
 		}
 	//}
-//---------------------------[/me wyci¹ga broñ ...]---------------------------
+//---------------------------[/me wyciÂ¹ga broÃ± ...]---------------------------
         if(starabron[i]!=weaponID)
 		{
 			if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
@@ -1418,91 +1418,91 @@ public Spectator()
                     {
     					case 0:
     					{
-    						format(string, sizeof(string), "* %s chowa Broñ.", specNAME);
+    						format(string, sizeof(string), "* %s chowa BroÃ±.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 1:
     					{
-    						format(string, sizeof(string), "* %s chowa Broñ.", specNAME);
+    						format(string, sizeof(string), "* %s chowa BroÃ±.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 2:
     					{
-    						format(string, sizeof(string), "* %swyci¹ga Kij Golfowy.", specNAME);
+    						format(string, sizeof(string), "* %swyciÂ¹ga Kij Golfowy.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 3:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Pa³kê Policyjn¹.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga PaÂ³kÃª PolicyjnÂ¹.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 4:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Nó¿.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga NÃ³Â¿.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 5:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Bejzbol.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Bejzbol.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 6:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga £opatê.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Â£opatÃª.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 7:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Kij Bilardowy.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Kij Bilardowy.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 8:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Katane.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Katane.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 9:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Pi³ê Mechaniczn¹.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga PiÂ³Ãª MechanicznÂ¹.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 14:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Kwiaty.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Kwiaty.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 15:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Dêbow¹ Laskê.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga DÃªbowÂ¹ LaskÃª.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 16:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Granat.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Granat.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 17:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Gaz £zawi¹cy.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Gaz Â£zawiÂ¹cy.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 18:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Koktajl Mo³otova.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Koktajl MoÂ³otova.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
@@ -1510,85 +1510,85 @@ public Spectator()
 
     					case 22:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga z kieszeni Pistolety 9mm.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga z kieszeni Pistolety 9mm.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 23:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Pistolet z T³umikiem.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Pistolet z TÂ³umikiem.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 24:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Pistolet Deagle.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Pistolet Deagle.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 25:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli Shotgun'a.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga zza koszuli Shotgun'a.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 26:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga z rzeŸni Obrzyny.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga z rzeÂŸni Obrzyny.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 27:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli Spas-12.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga zza koszuli Spas-12.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 28:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga z kabury UZI.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga z kabury UZI.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 29:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli MP5.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga zza koszuli MP5.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 30:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli AK47.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga zza koszuli AK47.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 31:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli M4.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga zza koszuli M4.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 32:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga z kabury TEC-9.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga z kabury TEC-9.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 33:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli Strzelbê.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga zza koszuli StrzelbÃª.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 34:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli Snajperkê.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga zza koszuli SnajperkÃª.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 35:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza ucha RPG.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga zza ucha RPG.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
@@ -1600,7 +1600,7 @@ public Spectator()
 
     					case 37:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga z ognia Miotacz Ognia.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga z ognia Miotacz Ognia.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
@@ -1612,51 +1612,51 @@ public Spectator()
 
     					case 39:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga z torby C4.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga z torby C4.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 40:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga detonator.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga detonator.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 41:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Gaz Pieprzowy / Spray.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Gaz Pieprzowy / Spray.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 42:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Gaœnicê.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga GaÂœnicÃª.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 43:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga Aparat Fotograficzny.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga Aparat Fotograficzny.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
 
     					case 44:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga noktowizor", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga noktowizor", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     						ResetPlayerWeapons(i);
     					}
 
     					case 45:
     					{
-    						format(string, sizeof(string), "* %s wyci¹ga termowizor.", specNAME);
+    						format(string, sizeof(string), "* %s wyciÂ¹ga termowizor.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     						ResetPlayerWeapons(i);
     					}
 
     					case 46:
     					{
-    						format(string, sizeof(string), "* %s zak³ada Spadochron na plecy.", specNAME);
+    						format(string, sizeof(string), "* %s zakÂ³ada Spadochron na plecy.", specNAME);
     						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     					}
                     }
@@ -1664,7 +1664,7 @@ public Spectator()
 					{
                         if(GetPVarInt(i, "tazer") == 1)
                         {
-							format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", specNAME);
+							format(string, sizeof(string), "* %s wyÂ³Â¹cza i chowa paralizator do kabury.", specNAME);
 							ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							RemovePlayerAttachedObject(i, 9);
                             SetPVarInt(i, "tazer", 0);
@@ -1859,7 +1859,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 2:
 					{
@@ -1871,7 +1871,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 3:
 					{
@@ -1884,7 +1884,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 4:
 					{
@@ -1897,7 +1897,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 5:
 					{
@@ -1911,7 +1911,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 6:
 					{
@@ -1925,7 +1925,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 7:
 					{
@@ -1939,7 +1939,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 8:
 					{
@@ -1953,7 +1953,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 9:
 					{
@@ -1967,7 +1967,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 					case 10:
 					{
@@ -1981,7 +1981,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						_MruAdmin(i, "OdebraÂ³eÂœ swoje zamÃ³wienie");
 					}
 				}
 				OrderReady[i] = 0;
@@ -2137,7 +2137,7 @@ public JednaSekundaTimer()
 					StopAudioStreamForPlayer(i);
 				}
 				PlayerInfo[i][pJailed] = 0;
-				SendClientMessage(i, COLOR_GRAD1,"   Wolnoœæ! Odsiedzia³eœ karê, mamy nadzieje ¿e to ciê czegoœ nauczy³o.");
+				SendClientMessage(i, COLOR_GRAD1,"   WolnoÂœÃ¦! OdsiedziaÂ³eÂœ karÃª, mamy nadzieje Â¿e to ciÃª czegoÂœ nauczyÂ³o.");
 				format(string, sizeof(string), "~g~Wolnosc!~n~~w~Staraj sie byc lepszym obywatelem");
 				GameTextForPlayer(i, string, 5000, 1);
 				if(gTeam[i] == 4) { gTeam[i] = 3; }
@@ -2173,7 +2173,7 @@ public JednaSekundaTimer()
 					GetVehicleHealth(vehicleid, health);
 					if(health <= 999)
 					{
-				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", 2500);
+				        sendTipMessageFormat(i, "ZapÂ³aciÂ³eÂœ $%d za wizytÃª w warsztacie", 2500);
 				        ZabierzKase(i, 2500);
 						RepairVehicle(vehicleid);
 						naprawiony[i] = 1;
@@ -2238,12 +2238,12 @@ public JednaSekundaTimer()
         if(GetPVarInt(i, "budka-used") != 999) {
             new budkaid = GetPVarInt(i, "budka-used");
             if(GetPlayerDistanceFromPoint(i, budki[budkaid][b_x], budki[budkaid][b_y], budki[budkaid][b_z]) > 3.5) {
-                sendTipMessage(i, "Oddali³eœ siê zbytnio od budki, po³¹czenie przerwane...", COLOR_PAPAYAWHIP);
+                sendTipMessage(i, "OddaliÂ³eÂœ siÃª zbytnio od budki, poÂ³Â¹czenie przerwane...", COLOR_PAPAYAWHIP);
                 new caller = GetPVarInt(i, "budka-Mobile");
                 SetPVarInt(i, "budka-Mobile", 999);
                 SetPVarInt(i, "budka-used", 999);
                 if(GetPVarInt(caller, "budka-Mobile") == i) {
-                    sendTipMessage(caller, "**biiip biiip** po³¹czenie zosta³o przerwane...", COLOR_PAPAYAWHIP);
+                    sendTipMessage(caller, "**biiip biiip** poÂ³Â¹czenie zostaÂ³o przerwane...", COLOR_PAPAYAWHIP);
                     SetPVarInt(caller, "budka-Mobile", 999);
                     SetPVarInt(caller, "budka-used", 999);
                 }
@@ -2306,7 +2306,7 @@ public JednaSekundaTimer()
         /*if(GetPlayerWeapon(i) != 0 && GetPlayerWeapon(i) != 1 && GetPVarInt(i, "obezwladniony") > gettime())
         {
         	SetPlayerArmedWeapon(i, 0);
-        	MruDialog(i, "Informacja", "Niedawno zosta³es obezw³adniony, nie mo¿esz korzystaæ z broni przez pewien czas!");
+        	MruDialog(i, "Informacja", "Niedawno zostaÂ³es obezwÂ³adniony, nie moÂ¿esz korzystaÃ¦ z broni przez pewien czas!");
         }*/
 
 		// serce zapisu broni
@@ -2471,7 +2471,7 @@ public JednaSekundaTimer()
 			MedicTime[i] ++;
 			if(MedicTime[i] >= NeedMedicTime[i])
 			{
-				format(string, sizeof(string), "DOKTOR: %d zosta³eœ uleczony.", i);
+				format(string, sizeof(string), "DOKTOR: %d zostaÂ³eÂœ uleczony.", i);
 				SendClientMessage(i, TEAM_CYAN_COLOR, string);
 				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
@@ -2500,7 +2500,7 @@ public JednaSekundaTimer()
 			}
 			if(WantLawyer[i] >= 20)
 			{
-				SendClientMessage(i, COLOR_LIGHTRED, "Nie mo¿esz ju¿ wezwaæ prawnika, Czas odsiadki rozpoczêty.");
+				SendClientMessage(i, COLOR_LIGHTRED, "Nie moÂ¿esz juÂ¿ wezwaÃ¦ prawnika, Czas odsiadki rozpoczÃªty.");
 				WantLawyer[i] = 0;
 				CallLawyer[i] = 0;
 			}
@@ -2513,10 +2513,10 @@ public JednaSekundaTimer()
 				SetPlayerPosEx(i, 849.62371826172, -989.92199707031, -5.0);
 				SetPlayerCameraPos(i, 849.62371826172, -989.92199707031, 53.211112976074);// kamera
 				SetPlayerCameraLookAt(i, 907.40313720703, -913.14117431641, 77.788856506348);// patrz
-				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: Pocz¹tek ____|");
-				SendClientMessage(i, COLOR_WHITE, "Ooo... nowy na serwerze.... wiêc musisz o czymœ wiedzieæ.");
-				SendClientMessage(i, COLOR_WHITE, "Jest to serwer Role Play(RP). Role Playing to odzwierciedlanie realnego ¿ycia w grze.");
-				SendClientMessage(i, COLOR_WHITE, "Skoro ju¿ wiesz, co to jest Role Play musisz poznaæ zasady serwera.");
+				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: PoczÂ¹tek ____|");
+				SendClientMessage(i, COLOR_WHITE, "Ooo... nowy na serwerze.... wiÃªc musisz o czymÂœ wiedzieÃ¦.");
+				SendClientMessage(i, COLOR_WHITE, "Jest to serwer Role Play(RP). Role Playing to odzwierciedlanie realnego Â¿ycia w grze.");
+				SendClientMessage(i, COLOR_WHITE, "Skoro juÂ¿ wiesz, co to jest Role Play musisz poznaÃ¦ zasady serwera.");
 			}
 			else if(TutTime[i] == 14)
 			{
@@ -2527,12 +2527,12 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 16)
 			{
-				SendClientMessage(i, COLOR_WHITE, "Na serwerze obowi¹zuje absolutny zakaz jakiegokolwiek DeathMatch`u(DM).");
-				SendClientMessage(i, COLOR_WHITE, "Nie chcemy na serwerze osób które bezmyœlnie zabijaj¹ wszystko co siê rusza.");
-				SendClientMessage(i, COLOR_WHITE, "Chodzi o to, ¿e w prawdziwym ¿yciu, nie zabija³byœ wszystkich dooko³a.");
-				SendClientMessage(i, COLOR_WHITE, "Wiêc jeœli chcesz kogoœ zabiæ, musisz mieæ naprawdê wa¿ny powód.");
-				SendClientMessage(i, COLOR_WHITE, "Na serwerze trzeba mieæ nick typu Imie_Nazwisko (np. Jan_Kowalski)");
-				SendClientMessage(i, COLOR_WHITE, "Jeœli masz inny nick ni¿ Imie_Nazwisko to poproœ admina o zmianê go.");
+				SendClientMessage(i, COLOR_WHITE, "Na serwerze obowiÂ¹zuje absolutny zakaz jakiegokolwiek DeathMatch`u(DM).");
+				SendClientMessage(i, COLOR_WHITE, "Nie chcemy na serwerze osÃ³b ktÃ³re bezmyÂœlnie zabijajÂ¹ wszystko co siÃª rusza.");
+				SendClientMessage(i, COLOR_WHITE, "Chodzi o to, Â¿e w prawdziwym Â¿yciu, nie zabijaÂ³byÂœ wszystkich dookoÂ³a.");
+				SendClientMessage(i, COLOR_WHITE, "WiÃªc jeÂœli chcesz kogoÂœ zabiÃ¦, musisz mieÃ¦ naprawdÃª waÂ¿ny powÃ³d.");
+				SendClientMessage(i, COLOR_WHITE, "Na serwerze trzeba mieÃ¦ nick typu Imie_Nazwisko (np. Jan_Kowalski)");
+				SendClientMessage(i, COLOR_WHITE, "JeÂœli masz inny nick niÂ¿ Imie_Nazwisko to poproÂœ admina o zmianÃª go.");
 			}
 			else if(TutTime[i] == 30)
 			{
@@ -2543,10 +2543,10 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 32)
 			{
-				SendClientMessage(i, COLOR_WHITE, "Je¿eli widzisz, ¿e ktoœ cheatuje, powiadom administratorów przez komendê /report.");
-				SendClientMessage(i, COLOR_WHITE, "Nie wolno u¿ywaæ Bugów (np. znasz jakiegoœ buga który daje ci kase).");
-				SendClientMessage(i, COLOR_WHITE, "Jeœli masz czity, wy³¹cz je i idŸ na jakiœ inny serwer. Tu nie mo¿na czitowaæ.");
-				SendClientMessage(i, COLOR_WHITE, "Osoba korzystaj¹ca z Cheatów i Bugów mo¿e zostaæ zbanowana lub ostrze¿ona.");
+				SendClientMessage(i, COLOR_WHITE, "JeÂ¿eli widzisz, Â¿e ktoÂœ cheatuje, powiadom administratorÃ³w przez komendÃª /report.");
+				SendClientMessage(i, COLOR_WHITE, "Nie wolno uÂ¿ywaÃ¦ BugÃ³w (np. znasz jakiegoÂœ buga ktÃ³ry daje ci kase).");
+				SendClientMessage(i, COLOR_WHITE, "JeÂœli masz czity, wyÂ³Â¹cz je i idÂŸ na jakiÂœ inny serwer. Tu nie moÂ¿na czitowaÃ¦.");
+				SendClientMessage(i, COLOR_WHITE, "Osoba korzystajÂ¹ca z CheatÃ³w i BugÃ³w moÂ¿e zostaÃ¦ zbanowana lub ostrzeÂ¿ona.");
 			}
 			else if(TutTime[i] == 52)
 			{
@@ -2557,12 +2557,12 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 54)
 			{
-				SendClientMessage(i, COLOR_WHITE, "A wiêc musisz wiedzieæ co to jest OOC i IC, oraz poprawnie to interpretowaæ.");
-				SendClientMessage(i, COLOR_WHITE, "Ta zasada jest bardzo wa¿na, wiêc czytaj uwa¿nie, oraz zapamiêtaj to.");
-				SendClientMessage(i, COLOR_WHITE, "OOC to wszystko co NIE JEST zwi¹zane z twoj¹ postaci¹.(np. twoja szko³a).");
-				SendClientMessage(i, COLOR_WHITE, "OOC to wszytskie rzeczy zwi¹zane z tob¹ w realu, oraz z komendami, adminami itp.");
+				SendClientMessage(i, COLOR_WHITE, "A wiÃªc musisz wiedzieÃ¦ co to jest OOC i IC, oraz poprawnie to interpretowaÃ¦.");
+				SendClientMessage(i, COLOR_WHITE, "Ta zasada jest bardzo waÂ¿na, wiÃªc czytaj uwaÂ¿nie, oraz zapamiÃªtaj to.");
+				SendClientMessage(i, COLOR_WHITE, "OOC to wszystko co NIE JEST zwiÂ¹zane z twojÂ¹ postaciÂ¹.(np. twoja szkoÂ³a).");
+				SendClientMessage(i, COLOR_WHITE, "OOC to wszytskie rzeczy zwiÂ¹zane z tobÂ¹ w realu, oraz z komendami, adminami itp.");
 				SendClientMessage(i, COLOR_WHITE, "Rzeczy OOC piszemy w chatach: /b /o /i oraz /ro i /depo");
-				SendClientMessage(i, COLOR_WHITE, "Poprawnie napisany tekst OOC: /b elo, jesteœ adminem? /b jak tam w szkole? itp.");
+				SendClientMessage(i, COLOR_WHITE, "Poprawnie napisany tekst OOC: /b elo, jesteÂœ adminem? /b jak tam w szkole? itp.");
 			}
 			else if(TutTime[i] == 74)
 			{
@@ -2573,10 +2573,10 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 76)
 			{
-				SendClientMessage(i, COLOR_WHITE, "Musisz te¿ wiedzieæ co to jest IC, oraz poprawnie to interpretowaæ.");
-				SendClientMessage(i, COLOR_WHITE, "IC to tak jakby przeciwnoœæ OOC. To wszystko co JEST zwi¹zane z twoj¹ postaci¹.");
-				SendClientMessage(i, COLOR_WHITE, "Rzeczy IC piszemy w chatach: /l /s /k /t /ad oraz w zwyk³ym chacie itp.");
-				SendClientMessage(i, COLOR_WHITE, "Poprawnie napisany teskt IC: /l witam pana /k staæ policja, rêce do góry! itp.");
+				SendClientMessage(i, COLOR_WHITE, "Musisz teÂ¿ wiedzieÃ¦ co to jest IC, oraz poprawnie to interpretowaÃ¦.");
+				SendClientMessage(i, COLOR_WHITE, "IC to tak jakby przeciwnoÂœÃ¦ OOC. To wszystko co JEST zwiÂ¹zane z twojÂ¹ postaciÂ¹.");
+				SendClientMessage(i, COLOR_WHITE, "Rzeczy IC piszemy w chatach: /l /s /k /t /ad oraz w zwykÂ³ym chacie itp.");
+				SendClientMessage(i, COLOR_WHITE, "Poprawnie napisany teskt IC: /l witam pana /k staÃ¦ policja, rÃªce do gÃ³ry! itp.");
 			}
 			else if(TutTime[i] == 96)
 			{
@@ -2588,25 +2588,25 @@ public JednaSekundaTimer()
 			else if(TutTime[i] == 98)
 			{
 				SendClientMessage(i, COLOR_WHITE, "MG (MetaGamming) - to wykorzystywanie informacji OOC do IC.");
-				SendClientMessage(i, COLOR_WHITE, "Czyli widzisz nick nad g³ow¹ gracza i mówisz do niego na chacie IC po imieniu");
-				SendClientMessage(i, COLOR_WHITE, "Lub wtedy gdy ktoœ mówi na /b jestem liderem LCN, a ty siê go pytasz o pracê w LCN");
-				SendClientMessage(i, COLOR_WHITE, "PG - to zmuszanie kogoœ do akcji RP, mimo i¿ ta osoba tego nie chce.");
-				SendClientMessage(i, COLOR_WHITE, "Czyli np. ktoœ podchodzisz do kogoœ i dajesz /me bije Johna tak ¿e umiera, to jest PG.");
+				SendClientMessage(i, COLOR_WHITE, "Czyli widzisz nick nad gÂ³owÂ¹ gracza i mÃ³wisz do niego na chacie IC po imieniu");
+				SendClientMessage(i, COLOR_WHITE, "Lub wtedy gdy ktoÂœ mÃ³wi na /b jestem liderem LCN, a ty siÃª go pytasz o pracÃª w LCN");
+				SendClientMessage(i, COLOR_WHITE, "PG - to zmuszanie kogoÂœ do akcji RP, mimo iÂ¿ ta osoba tego nie chce.");
+				SendClientMessage(i, COLOR_WHITE, "Czyli np. ktoÂœ podchodzisz do kogoÂœ i dajesz /me bije Johna tak Â¿e umiera, to jest PG.");
 			}
 			else if(TutTime[i] == 112)
 			{
 				SetPlayerPosEx(i, 412.80743408203, -1312.4066162109, -5.0);
 				SetPlayerCameraPos(i, 402.2776184082, -1351.4703369141, 43.704566955566);// kamera
 				SetPlayerCameraLookAt(i, 412.80743408203, -1312.4066162109, 39.677307128906);// patrz
-				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zakoñczenie ____|");
+				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zakoÃ±czenie ____|");
 			}
 			else if(TutTime[i] == 114)
 			{
 				SendClientMessage(i, COLOR_WHITE, "Masz sie trzymac wymienionych zasad zrozumiano?.");
-				SendClientMessage(i, COLOR_WHITE, "Poprostu pamiêtaj o nich i ciesz siê gr¹, a jak nie... ");
-				SendClientMessage(i, COLOR_WHITE, "zapewne masz jeszcze sporo pytañ dotycz¹cych gry, znajdziesz na nie odpowiedŸ");
+				SendClientMessage(i, COLOR_WHITE, "Poprostu pamiÃªtaj o nich i ciesz siÃª grÂ¹, a jak nie... ");
+				SendClientMessage(i, COLOR_WHITE, "zapewne masz jeszcze sporo pytaÃ± dotyczÂ¹cych gry, znajdziesz na nie odpowiedÂŸ");
 				SendClientMessage(i, COLOR_WHITE, "na specjalnym kanale stworzonym dla nowych graczy. Po prostu wpisz /n [swoje pytanie]");
-				SendClientMessage(i, COLOR_WHITE, "To ju¿ koniec samouczka, lecz zasad jest jeszcze wiele. znajdziesz je na forum.");
+				SendClientMessage(i, COLOR_WHITE, "To juÂ¿ koniec samouczka, lecz zasad jest jeszcze wiele. znajdziesz je na forum.");
 			}
 			else if(TutTime[i] == 125)
 			{
@@ -2614,7 +2614,6 @@ public JednaSekundaTimer()
 				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
 				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
-				//SetPlayerSpawn(i);
 				//LogujeSieBezKlauna[i] = 0;
                 //SetPVarInt(i, "class-sel", 1);
 				//ForceClassSelection(i);
@@ -2758,18 +2757,18 @@ public JednaSekundaTimer()
 											Titel[TitelWins] = PlayerInfo[TBoxer][pWins];
 											Titel[TitelLoses] = PlayerInfo[TBoxer][pLoses];
 											SaveBoxer();
-											format(string, sizeof(string), "Boks News: %s wygra³ walkê z Mistrzem %s i teraz to ON jest Mistrzem Boksu.",  titel, loser);
+											format(string, sizeof(string), "Boks News: %s wygraÂ³ walkÃª z Mistrzem %s i teraz to ON jest Mistrzem Boksu.",  titel, loser);
 											OOCOff(COLOR_WHITE,string);
 										}
 										else
 										{
-											_MruGracz(Boxer2, "* Zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boksera!");
+											_MruGracz(Boxer2, "* ZostaÂ³byÂœ mistrzem bokserskim gdybyÂœ miaÂ³ pracÃª boksera!");
 										}
 									}
 									else
 									{
 										GetPlayerName(TBoxer, titel, sizeof(titel));
-										format(string, sizeof(string), "Boks News: Mistrz boksu %s wygra³ walkê z %s.",  titel, loser);
+										format(string, sizeof(string), "Boks News: Mistrz boksu %s wygraÂ³ walkÃª z %s.",  titel, loser);
 										OOCOff(COLOR_WHITE,string);
 										Titel[TitelWins] = PlayerInfo[TBoxer][pWins];
 										Titel[TitelLoses] = PlayerInfo[Boxer2][pLoses];
@@ -2777,30 +2776,30 @@ public JednaSekundaTimer()
 									}
 								}
 							}//TBoxer
-							format(string, sizeof(string), "* Przegra³eœ walkê z %s.", winner);
+							format(string, sizeof(string), "* PrzegraÂ³eÂœ walkÃª z %s.", winner);
 							_MruGracz(Boxer1, string);
 							GameTextForPlayer(Boxer1, "~r~you lost", 3500, 1);
-							format(string, sizeof(string), "* Wygra³eœ walkê z %s.", loser);
+							format(string, sizeof(string), "* WygraÂ³eÂœ walkÃª z %s.", loser);
 							_MruGracz(Boxer2, string);
 							GameTextForPlayer(Boxer2, "~r~Wygrales", 3500, 1);
 							if(GetPlayerHealth(Boxer1, health) < 20)
 							{
-								_MruGracz(Boxer1, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								_MruGracz(Boxer1, "* Czujesz siÃª wyczerpany, idÂŸ coÂœ zjeÂœÃ¦.");
 								SetPlayerHealth(Boxer1, 30.0);
 							}
 							else
 							{
-								_MruGracz(Boxer1, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								_MruGracz(Boxer1, "* Czujesz siÃª wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer1, 50.0);
 							}
 							if(GetPlayerHealth(Boxer2, health) < 10)
 							{
-								_MruGracz(Boxer2, "* Czujesz siê wykoñczony, idŸ coœ zjeœæ.");
+								_MruGracz(Boxer2, "* Czujesz siÃª wykoÃ±czony, idÂŸ coÂœ zjeÂœÃ¦.");
 								SetPlayerHealth(Boxer2, 30.0);
 							}
 							else
 							{
-								_MruGracz(Boxer2, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								_MruGracz(Boxer2, "* Czujesz siÃª wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer2, 50.0);
 							}
 							GameTextForPlayer(Boxer1, "~g~Walka skonczona", 5000, 1); GameTextForPlayer(Boxer2, "~g~Walka skonczona", 5000, 1);
@@ -2834,18 +2833,18 @@ public JednaSekundaTimer()
 											Titel[TitelWins] = PlayerInfo[TBoxer][pWins];
 											Titel[TitelLoses] = PlayerInfo[TBoxer][pLoses];
 											SaveBoxer();
-											format(string, sizeof(string), "Boks News: %s wygra³ walkê z Mistrzem %s i teraz to ON jest Mistrzem Boksu.",  titel, loser);
+											format(string, sizeof(string), "Boks News: %s wygraÂ³ walkÃª z Mistrzem %s i teraz to ON jest Mistrzem Boksu.",  titel, loser);
 											OOCOff(COLOR_WHITE,string);
 										}
 										else
 										{
-											_MruGracz(Boxer1, "* Zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boksera !");
+											_MruGracz(Boxer1, "* ZostaÂ³byÂœ mistrzem bokserskim gdybyÂœ miaÂ³ pracÃª boksera !");
 										}
 									}
 									else
 									{
 										GetPlayerName(TBoxer, titel, sizeof(titel));
-										format(string, sizeof(string), "Boks News: Mistrz boksu %s wygra³ walkê z %s.",  titel, loser);
+										format(string, sizeof(string), "Boks News: Mistrz boksu %s wygraÂ³ walkÃª z %s.",  titel, loser);
 										OOCOff(COLOR_WHITE,string);
 										Titel[TitelWins] = PlayerInfo[TBoxer][pWins];
 										Titel[TitelLoses] = PlayerInfo[Boxer1][pLoses];
@@ -2853,30 +2852,30 @@ public JednaSekundaTimer()
 									}
 								}
 							}//TBoxer
-							format(string, sizeof(string), "* Przegra³eœ walkê z %s.", winner);
+							format(string, sizeof(string), "* PrzegraÂ³eÂœ walkÃª z %s.", winner);
 							_MruGracz(Boxer2, string);
 							GameTextForPlayer(Boxer2, "~r~Przegrana", 3500, 1);
-							format(string, sizeof(string), "* Wygra³eœ walkê z %s.", loser);
+							format(string, sizeof(string), "* WygraÂ³eÂœ walkÃª z %s.", loser);
 							_MruGracz(Boxer1, string);
 							GameTextForPlayer(Boxer1, "~g~Wygrana", 3500, 1);
 							if(GetPlayerHealth(Boxer1, health) < 20)
 							{
-								_MruGracz(Boxer1, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								_MruGracz(Boxer1, "* Czujesz siÃª wyczerpany, idÂŸ coÂœ zjeÂœÃ¦.");
 								SetPlayerHealth(Boxer1, 30.0);
 							}
 							else
 							{
-								_MruGracz(Boxer1, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								_MruGracz(Boxer1, "* Czujesz siÃª wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer1, 50.0);
 							}
 							if(GetPlayerHealth(Boxer2, health) < 20)
 							{
-								_MruGracz(Boxer2, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								_MruGracz(Boxer2, "* Czujesz siÃª wyczerpany, idÂŸ coÂœ zjeÂœÃ¦.");
 								SetPlayerHealth(Boxer2, 30.0);
 							}
 							else
 							{
-								_MruGracz(Boxer2, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								_MruGracz(Boxer2, "* Czujesz siÃª wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer2, 50.0);
 							}
 							GameTextForPlayer(Boxer1, "~g~Koniec walki", 5000, 1); GameTextForPlayer(Boxer2, "~g~Koniec walki", 5000, 1);
@@ -2907,7 +2906,7 @@ public JednaSekundaTimer()
 			AnnouncedPaintballRound = 1;
 			if(PlayerPaintballing[i] != 0)
 			{
-				SendClientMessage(i, COLOR_YELLOW, "Mecz Pintball`u rozpocznie siê za 15 sekund (Aby do³¹czy³o wiêcej uczestników).");
+				SendClientMessage(i, COLOR_YELLOW, "Mecz Pintball`u rozpocznie siÃª za 15 sekund (Aby doÂ³Â¹czyÂ³o wiÃªcej uczestnikÃ³w).");
 			}
 		}
 		if(StartingKartRound == 1 && AnnouncedKartRound == 0)
@@ -2915,7 +2914,7 @@ public JednaSekundaTimer()
 			AnnouncedKartRound = 1;
 			if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
 			{
-				SendClientMessage(i, COLOR_YELLOW, "Wyœcig gokartów rozpocznie siê za 15 sekund (Aby do³¹czy³o wiêcej uczestników).");
+				SendClientMessage(i, COLOR_YELLOW, "WyÂœcig gokartÃ³w rozpocznie siÃª za 15 sekund (Aby doÂ³Â¹czyÂ³o wiÃªcej uczestnikÃ³w).");
 			}
 		}
 		if(EndingKartRound == 1)
@@ -3013,7 +3012,7 @@ public JednaSekundaTimer()
 			if(PlayerCuffedTime[i] <= 0)
 			{
                 GetPlayerName(i, winner, sizeof(winner));
-				format(string, sizeof(string), "* %s po wielu próbach poluzowa³ sznur i jest wolny.", winner);
+				format(string, sizeof(string), "* %s po wielu prÃ³bach poluzowaÂ³ sznur i jest wolny.", winner);
 				ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				GameTextForPlayer(i, "~r~Jestes wolny!", 2500, 3);
 				TogglePlayerControllable(i, 1);
@@ -3099,7 +3098,7 @@ public Fillup()
 			}
 			else
 			{
-				format(string,sizeof(string),"Nie posiadasz doœæ pieniêdzy ($%d) aby zatankowaæ ten pojazd.",FillUp);
+				format(string,sizeof(string),"Nie posiadasz doÂœÃ¦ pieniÃªdzy ($%d) aby zatankowaÃ¦ ten pojazd.",FillUp);
 				sendErrorMessage(i,string);
                 Refueling[i] = 0;
 			}
@@ -3118,7 +3117,7 @@ public CarCheck()
 		{
 			if(MoneyMessage[j]==0)
 			{
-				format(string, sizeof(string), "Masz d³ugi, musisz zarobiæ do nastêpnej wyp³aty $%d inaczej naœlemy na ciebie policje.",PlayerInfo[j][pCash]);
+				format(string, sizeof(string), "Masz dÂ³ugi, musisz zarobiÃ¦ do nastÃªpnej wypÂ³aty $%d inaczej naÂœlemy na ciebie policje.",PlayerInfo[j][pCash]);
 				SendClientMessage(j, COLOR_LIGHTRED, string);
 				MoneyMessage[j] = 1;
 			}
@@ -3132,7 +3131,7 @@ public CarCheck()
             if(lTime > PlayerInfo[j][pCarLic])
             {
                 PlayerInfo[j][pCarLic] = 0;
-                SendClientMessage(j, COLOR_LIGHTRED, "Blokada licencji na prowadzenie pojazdu minê³a!");
+                SendClientMessage(j, COLOR_LIGHTRED, "Blokada licencji na prowadzenie pojazdu minÃªÂ³a!");
             }
         }
 	}	
