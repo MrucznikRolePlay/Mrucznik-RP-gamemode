@@ -610,6 +610,7 @@ CMD:dajkp(playerid, params[])
 
 		_MruAdmin(playerid, sprintf("Da³eœ KP graczowi %s [ID: %d] na czas %d.", GetNick(giveplayerid, true), giveplayerid, givetime));
 		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ KP od Admina %s [ID: %d]", GetNick(playerid, true), playerid));
+		return 1;
 	}
 	else return noAccessMessage(playerid);
 }

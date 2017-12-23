@@ -20,7 +20,6 @@ stock loadKamiPos(playerid)
 	new lStr[256];
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
 	new DBResult:db_result;
-	printf(lStr);
 	db_result = db_query(db_handle, lStr);
 
 	if(db_num_rows(db_result)) {
@@ -58,7 +57,6 @@ stock saveKevlarPos(playerid)
 {
 	new lStr[256];
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
-	printf(lStr);
 	new DBResult:db_result;
 	db_result = db_query(db_handle, lStr);
 

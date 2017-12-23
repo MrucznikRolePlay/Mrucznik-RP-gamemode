@@ -42,144 +42,42 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 //-------------------------------------------<[ Includy ]>---------------------------------------------------//
 //-                                                                                                         -//
 #include <a_samp>
+#include <fixes>
+#include <callbacks>
+#include <a_http>
+#include <utils>
+#include <foreach>
+#include <zcmd>
+#include <md5>
+#include <double-o-files2>
+#include <dialogs>
+#include <fadescreen>
+#include <ACSBM>
+#include <timestamp>
+#define AC_MAX_CONNECTS_FROM_IP		5
+#include <nex-ac>						     // By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include "../pawno/include/systempozarow"   //System Po¿arów v0.1
 
-#undef MAX_PLAYERS
-#define MAX_PLAYERS 250
+#include "modules\new\niceczlowiek\dynamicgui.pwn"
 
+//YSI po crashDetect
+#include <crashdetect>                  // By Zeex, 4.15.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
+#include <code-parse.inc>    
+/*#include <YSI\YSI\y_inline>
+#include <YSI\YSI\y_dialog> */ // ¯egnaj YSI dobry druchu :( ale to nie na te lata...
 
-/**
-*               fixes
-* @author       samp community
-*/
-#include "fixes"
+//-------<[ Pluginy ]>-------
+//#include <mapandreas>                 nie potrzeba i tak tego
+#include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
+#define REGEX_ON
+#if defined REGEX_ON
+#include <libRegEx>						// By Koala818 v0.2				https://github.com/FF-Koala/Regular-Expressions-Plugin
+#endif
+#include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
+#include <mysql_R5>						// R5
+#include <timestamptodate>
 
-
-#include "sscanf2"
-
-/**
-*               foreach
-* @author       y_less?
-* @version      v19
-*/
-#include "foreach"
-
-/**
-*               callbacks
-* @author       Emmet_
-* @version      ?
-*/
-#include "callbacks"
-
-/**
-*               utils
-* @author       ?
-* @version      ?
-*/
-#include "utils"
-
-
-/**
-*               zcmd
-* @author       ZeeX
-* @version      v3114
-*/
-#include "zcmd"
-
-/**
-*               md5
-*/
-#include "md5"
-
-/**
-*               dialogs
-* @author       gammix
-* @version      2.7.3
-*/
-#include "dialogs"
-
-/**
-*               dof2
-*/
-#include "double-o-files2"
-
-/**
-*               Fadescreen
-* @author       Maku
-* @version      2.1
-*/
-#include "fadescreen"
-
-/**
-*               acsbm
-* @author       Mrucznik
-* @version      1.0
-*/
-#include "ACSBM"
-
-/**
-*               timestamp
-* @author       AbyssMorgan
-* @version      1.0
-*/
-#include "timestamp"
-
-/**
-*               CrashDetect
-* @author       ZeeX
-* @version      4.5.1
-*/
-
-/**
-*               systempozarow
-* @author       PECET
-*/
-#include "../pawno/include/systempozarow"
-
-/**
-*                OnPlayerAirBreak/OnPlayerTeleport
-* @author        _EMMET
-*/
-//#include "opab"
-
-/**
-*               NEX-AC
-* @author       OstGot
-*/
-#define AC_MAX_CONNECTS_FROM_IP 5
-#include "../pawno/include/nexacpecet"
-
-#include "crashdetect" 
-
-//#include "YSI\y_hooks"
-//#include "YSI\y_iterate"
-
-
-/**
-*               DynamicGui
-* @author       NiceCzlowiek
-* @version      1.0
-*/
-
-#include "modules/new/niceczlowiek/dynamicgui.pwn"
-
-
-
-// sscanf 2 included by fixes2.inc
-
-/**
-*               libRegEx
-*/
-#include "libRegEx"
-
-/**
-*               Incognito's Streamer
-*/
-#include "streamer"
-
-
-#include "mysql_R5"
-
-#define VERSION "v2.5.87"
+#define VERSION "v2.5.89"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
@@ -875,8 +773,8 @@ public OnPlayerConnect(playerid)
     ClearChat(playerid);	
 
     // Wy³¹czone na testy
-    //Usun_Obiekty(playerid); //stare obiekty
-    //obiekty_OnPlayerConnect(playerid);//nowe obiekty
+    Usun_Obiekty(playerid); //stare obiekty
+    obiekty_OnPlayerConnect(playerid);//nowe obiekty
 
     pName[playerid][0] = EOS;
     pNameRp[playerid][0] = EOS;
@@ -5784,6 +5682,7 @@ OnPlayerLogin(playerid, password[])
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;
 
 
+	//TODO: new premium
     //MRP_LoadPremium(playerid);
 
     premium_loadForPlayer(playerid);
