@@ -34253,7 +34253,7 @@ CMD:tankowanie(playerid, params[])
 				return 1;
 			}
 
-			if(money < 300 || money > 2500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 300$ do 2500$!"); return 1; }
+			if(money < 600 || money > 2500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 600$ do 2500$!"); return 1; }
 			if(IsPlayerConnected(playa))
 			{
 			    if(playa != INVALID_PLAYER_ID)
@@ -34326,7 +34326,7 @@ CMD:napraw(playerid, params[])
             }
             money = FunkcjaK(string);
 
-            if(money < 800 || money > 4000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 800$ do 4000$!"); return 1; }
+            if(money < 1600 || money > 4000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 1600$ do 4000$!"); return 1; }
             if(IsPlayerConnected(playa))
             {
                 if(playa != INVALID_PLAYER_ID)

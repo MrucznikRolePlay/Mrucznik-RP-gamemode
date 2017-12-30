@@ -2173,8 +2173,8 @@ public JednaSekundaTimer()
 					GetVehicleHealth(vehicleid, health);
 					if(health <= 999)
 					{
-				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", 2500);
-				        ZabierzKase(i, 2500);
+				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", 7500);
+				        ZabierzKase(i, 7500);
 						RepairVehicle(vehicleid);
 						naprawiony[i] = 1;
 						SetTimerEx("Naprawianie",10000,0,"d",i);
@@ -3091,7 +3091,7 @@ public Fillup()
 			if(kaska[i] >= FillUp+4)
 			{
 				Gas[VID] += FillUp;
-				FillUp = FillUp * 40;
+				FillUp = FillUp * 120;
 				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUp);
 				_MruGracz(i,string);
 				DajKase(i, - FillUp);
