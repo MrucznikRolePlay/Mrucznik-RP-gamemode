@@ -2311,7 +2311,7 @@ IsAKO(playerid)
 	{
 	    new nick[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Kylie_Lorens", false) == 0 || strcmp(nick,"Largo_Marks", false) == 0)
+		if(strcmp(nick,"Armin_Verwest", false) == 0)
 		{
 		    return 1;
 		}
