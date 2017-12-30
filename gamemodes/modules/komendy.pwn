@@ -9446,12 +9446,6 @@ CMD:setname(playerid, params[])
                         ShowPlayerDialogEx(giveplayerid, 70, DIALOG_STYLE_MSGBOX, "Zmiana nicku", "W³aœnie zmieni³eœ nick. Nastêpuj¹ce elementy zosta³y wyzerowane:\n\nPraca\nFrakcja\nWanted Level\nRodzina\nLider\nRanga\nSkin\nZaufany Gracz\n\n\nPamiêtaj, ¿e ka¿da zmiana nicku jest na wagê z³ota wiêc nie trwoñ ich pochopnie!\nJe¿eli dosz³o do b³êdnej zmiany zg³oœ ten fakt prêdko na forum w panelu strat!\nPamiêtaj: nowa postaæ = nowe ¿ycie.", "Dalej", "");
 
     					SetPlayerName(giveplayerid, newname);
-
-                        GetPlayerName(playerid, pName[playerid], 60);
-                        pName[playerid][0] = chrtoupper(pName[playerid][0]);
-
-                        strcat(pName[playerid], pNameRp[playerid]);
-                        strreplace(pNameRp[playerid], '_', ' ');
                     }
 				}
 				else

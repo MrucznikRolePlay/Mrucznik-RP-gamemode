@@ -943,9 +943,6 @@ new taxitest[MAX_PLAYERS];//Taxi Test
 new mechanikid[MAX_PLAYERS];//Mechanik w GUI
 new naprawiony[MAX_PLAYERS];//Napr
 
-new pName[MAX_PLAYERS][26];
-new pNameRp[MAX_PLAYERS][26];
-
 new zawodnik[MAX_PLAYERS];//¯u¿el
 new wyscigz;//¿u¿el
 new iloscwygranych;//¿u¿el
@@ -1068,9 +1065,6 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	
     lastMsg[playerid] = 0;
-
-    pName[playerid][0] = EOS;
-    pNameRp[playerid][0] = EOS;
 
 	//z conecta
 	TogPodglad[playerid] = 0;

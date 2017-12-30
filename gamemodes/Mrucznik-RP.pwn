@@ -776,22 +776,8 @@ public OnPlayerConnect(playerid)
     Usun_Obiekty(playerid); //stare obiekty
     obiekty_OnPlayerConnect(playerid);//nowe obiekty
 
-    pName[playerid][0] = EOS;
-    pNameRp[playerid][0] = EOS;
-
-    new name[MAX_PLAYER_NAME+1];
-
-    GetPlayerName(playerid, name, MAX_PLAYER_NAME+1);
-
-    strcat(pName[playerid], name);
-    strcat(pNameRp[playerid], name);
-
-    strreplace(pNameRp[playerid], '_', ' ');
-
 	LoadTextDraws(playerid);
-
     LoadingShow(playerid);
-
     LoadingHide(playerid);
 
 	//Poprawny nick:

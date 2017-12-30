@@ -1475,9 +1475,12 @@ stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', 
 
 stock GetNick(playerid, rp = false)
 {
-	if(rp)
-		return pNameRp[playerid];
-	return pName[playerid];
+	new nick[MAX_PLAYER_NAME];
+-	GetPlayerName(playerid, nick, sizeof(nick));
+-	if(rp) {
+		strreplace(nick, '_', ' ');
+-	}
+-	return nick;
 }
 
 stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
@@ -10817,12 +10820,6 @@ stock ChangePlayerName(playerid, name[])
 	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
 	SetPlayerName(playerid, name);
-
-	GetPlayerName(playerid, pName[playerid], 60);
-    pName[playerid][0] = chrtoupper(pName[playerid][0]);
-
-    strcat(pName[playerid], pNameRp[playerid]);
-    strreplace(pNameRp[playerid], '_', ' ');
 	
     format(PlayerInfo[playerid][pNick], 32, "%s", name);
 
