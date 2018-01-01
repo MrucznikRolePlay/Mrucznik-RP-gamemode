@@ -10804,6 +10804,12 @@ stock ChangePlayerName(playerid, name[])
         SendClientMessage(playerid, COLOR_RED, "Nick zawiera niepoprawne znaki (znaki polskie, cyfry lub specjalne).");
         return 0;
     }
+	
+	if(ReturnUser(name) != INVALID_PLAYER_ID) 
+	{
+        SendClientMessage(playerid, COLOR_RED, "Gracz o takim nicku gra obecnie na serwerze!");
+		return 0;
+	}
 
 	if(MruMySQL_DoesAccountExist(name) != 0)
 	{

@@ -9491,9 +9491,6 @@ CMD:zmiennick(playerid, params[])
 				}
 				else
 				{
-                    if(ReturnUser(params) != INVALID_PLAYER_ID) {
-                        return sendErrorMessage(playerid, "Bug zg³oszony przez Odyseusz_Verone");
-                    }
                     if(ChangePlayerName(playerid, params))
                     {
                         format(string, sizeof(string), "%s[%d] zmieni³ sobie nick - Nowy nick: %s",sendername,PlayerInfo[playerid][pUID],params);
