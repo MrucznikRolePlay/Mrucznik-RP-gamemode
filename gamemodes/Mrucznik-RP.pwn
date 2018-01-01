@@ -5387,17 +5387,6 @@ OnPlayerRegister(playerid, password[])
 	if(IsPlayerConnected(playerid))
 	{
         new string[128];
-        if(CheckAlfaNumeric(password))
-        {
-            format(string, 128, "Twoje has³o posiada³o nie-alfanumeryczne znaki - nowe has³o: %s", password);
-            _MruGracz(playerid, string);
-            _MruGracz(playerid, "Zalecamy zmieniæ has³o poprzez /zmienhaslo");
-            _MruGracz(playerid, "Zalecamy zmieniæ has³o poprzez /zmienhaslo");
-            _MruGracz(playerid, "Zalecamy zmieniæ has³o poprzez /zmienhaslo");
-            _MruGracz(playerid, "Zalecamy zmieniæ has³o poprzez /zmienhaslo");
-            _MruGracz(playerid, string);
-            _MruGracz(playerid, "Zalecamy zmieniæ has³o poprzez /zmienhaslo");
-        }
 		MruMySQL_CreateAccount(playerid, password);
 		OnPlayerLogin(playerid, password);
 	}

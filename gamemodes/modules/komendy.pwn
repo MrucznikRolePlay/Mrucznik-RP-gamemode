@@ -9640,14 +9640,13 @@ CMD:zmienhaslo(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /zmienhaslo [nowehaslo]");
 			return 1;
 		}
-        if(CheckAlfaNumeric(tmppass)) return sendErrorMessage(playerid, "To has³o posiada nieodpowiednie znaki, zmieñ je.");
-        mysql_real_escape_string(tmppass, string);
-        if(strcmp(tmppass,string) != 0)  //Anty non-alpha
-        {
-            sendErrorMessage(playerid, "UWAGA! Twoje has³o zawiera³o niepoprawne znaki!!");
+		
+		if(strfind(params, "%") != -1)
+		{
+            sendErrorMessage(playerid, "Has³o nie mo¿e zawieraæ znaku procenta!");
             return 1;
-        }
-
+		}
+		
 		sendErrorMessage(playerid, "Twoje has³o do konta w grze zosta³o zmienione!!!!");
 		sendErrorMessage(playerid, "Jeœli wpisa³eœ t¹ komendê przypadkowo, nie wychodŸ z serwera i zmieñ has³o ponownie za pomoc¹ tej komendy");
 
