@@ -29,6 +29,7 @@ SSCANF:fix(string[])
 
 CMD:marcepan(playerid, params[])
 {
+    return SendClientMessage(playerid, COLOR_PAPAYAWHIP, "S³ucham?");
     /*
     if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
     {
@@ -16629,11 +16630,11 @@ CMD:megafon(playerid, params[])
 		    format(string, sizeof(string), "[Agent BOR %s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
-		/*else if(PlayerInfo[playerid][pJob] == 1 && PlayerInfo[playerid][pDetSkill] > 400)
+		else if(PlayerInfo[playerid][pJob] == 1 && PlayerInfo[playerid][pDetSkill] > 400)
 		{
 		    format(string, sizeof(string), "[£owca Nagród %s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-		}*/
+		}
 		else if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
 		{
 		    format(string, sizeof(string), "[Specjalista SAM-ERS %s:o< %s]", sendername, params);
@@ -22904,30 +22905,7 @@ CMD:unjail(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 25)
-		{
-		    if(IsPlayerConnected(playa))
-		    {
-		        if(playa != INVALID_PLAYER_ID)
-		        {
-			        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "* Uwolni³eœ %s.", giveplayer);
-					_MruAdmin(playerid, string);
-					format(string, sizeof(string), "* Zosta³eœ uwolniony przez %s.", sendername);
-					_MruAdmin(playa, string);
-					PlayerInfo[playa][pJailed] = 0;
-					PlayerInfo[playa][pJailTime] = 0;
-                    poscig[playa] = 0;
-					SetPlayerInterior(playa, 0);
-					SetPlayerPosEx(playa,-1677.0605,917.2449,-52.4141);
-					SetPlayerVirtualWorld(playa, 1);
-                    PlayerInfo[playa][pMuted] = 0;
-                    Wchodzenie(playa);
-				}
-			}
-		}
-		else if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -22941,6 +22919,10 @@ CMD:unjail(playerid, params[])
 						_MruAdmin(playerid, string);
 						format(string, sizeof(string), "* Zosta³eœ uwolniony przez %s.", sendername);
 						_MruAdmin(playa, string);
+						format(string, sizeof(string), "ADMCMD: Administrator %s uwolni³ %s z AJ", sendername, giveplayer);
+						SendAdminMessage(COLOR_RED, string);
+						format(string, sizeof(string), "ADMCMD: Administrator %s uwolnil %s z AJ", sendername, giveplayer);
+                        KickLog(string);
 
 						PlayerInfo[playa][pJailed] = 0;
 						PlayerInfo[playa][pJailTime] = 0;
@@ -24134,7 +24116,7 @@ CMD:makemember(playerid, params[])
 		}
 
 		if(level > 17 || level < 0) { SendClientMessage(playerid, COLOR_GREY, "Od 0 do 17 !"); return 1; }
-		if (PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pNewAP] == 5 || Uprawnienia(playerid, ACCESS_MAKELEADER))
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -24288,7 +24270,7 @@ CMD:dajrange(playerid, params[])
 
 		if(level > 9 || level < 0)
 		{sendTipMessageEx(playerid, COLOR_GREY, "Numer rangi od 0 do 9!"); return 1; }
-		if (PlayerInfo[playerid][pLider] >= 1 || PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pLider] >= 1 || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
