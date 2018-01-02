@@ -1618,7 +1618,11 @@ CMD:wezportfel(playerid, params[])
 								GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 								GetPlayerName(playerid, sendername, sizeof(sendername));
 								pieniadze = kaska[giveplayerid] / 4;
-
+								if(pieniadze > 1000000)
+								{
+									pieniadze = 1000000;
+								}
+								
                                 _MruGracz(giveplayerid, sprintf("%s zabra³ Ci portfel z $%d w œrodku", GetNick(playerid, true), pieniadze));
                                 _MruGracz(playerid, sprintf("Zabra³eœ portfel %s, w œrodku jest $%d", GetNick(giveplayerid, true), pieniadze));
 
