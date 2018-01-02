@@ -2065,6 +2065,13 @@ IsAFakeKonto(playerid)
 		{
 		    return 1;
 		}
+	
+		new ip[32];
+		GetPlayerIp(giveplayerid,ip,32);
+		if(strcmp(ip,"185.6.30.124", false) == 0)
+		{
+			return 1;
+		}
 	}
 	return 0;
 }
@@ -7593,7 +7600,8 @@ public MRP_ForceDialog(playerid, dialogid)
     return 1;
 }
 
-stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[])
+forward ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[]);
+public ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[])
 {
 	ShowPlayerDialog(playerid, dialogid, style, caption, info, button1, button2);
 	iddialog[playerid] = dialogid;

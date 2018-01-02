@@ -55,7 +55,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <ACSBM>
 #include <timestamp>
 #define AC_MAX_CONNECTS_FROM_IP		5
-#include <nex-ac>						     // By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+//#include <nex-ac>						     // By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include "../pawno/include/nexac"   //System Po¿arów v0.1
 #include "../pawno/include/systempozarow"   //System Po¿arów v0.1
 
 #include "modules\new\niceczlowiek\dynamicgui.pwn"
