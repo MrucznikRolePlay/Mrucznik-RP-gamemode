@@ -795,6 +795,7 @@ public OnPlayerConnect(playerid)
 
 	//Poczπtkowe ustawienia:
     SetTimerEx("OPCLogin", 100, 0, "i", playerid);
+    saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
 
 	//system barierek by Kubi
 	gHeaderTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
@@ -854,6 +855,11 @@ public OnPlayerDisconnect(playerid, reason)
     if(GetPVarInt(playerid, "finding") == 1) {
         GangZoneDestroy(pFindZone[playerid]);
     }
+	if(saveMyAccountTimer[playerid] != -1)
+	{
+		KillTimer(saveMyAccountTimer[playerid]);
+	}
+	
 	//PAèDZIOCH - lina SWAT
 	if(GetPVarInt(playerid,"roped") == 1)
  	{

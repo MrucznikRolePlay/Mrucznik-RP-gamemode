@@ -650,7 +650,7 @@ public MainTimer()
     }
     if(TICKS_15Min == (60*15)-1)
     {
-        AccountSave();
+        ServerStuffSave();
         IdleKick();
     }
     if(TICKS_30Min == (60*30)-1)
@@ -706,15 +706,25 @@ public MainTimer()
 	#endif
 }
 
-public AccountSave()
+//TODO: mysql asynchroniczny
+forward SaveMyAccountTimer(playerid);
+public SaveMyAccountTimer(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(gPlayerLogged[playerid] == 1)
+		{
+			MruMySQL_SaveAccount(playerid);
+		}
+	}
+	return 1;
+}
+
+public ServerStuffSave()
 {
 	#if DEBUG == 1
-		printf("AccountSave - begin");
+		printf("ServerStuffSave - begin");
 	#endif
-    foreach(Player, i)
-    {
-        MruMySQL_SaveAccount(i);
-    }
     for(new i=0;i<MAX_FRAC;i++)
     {
         Sejf_Save(i);
@@ -737,7 +747,7 @@ public AccountSave()
         }
     }
 	#if DEBUG == 1
-		printf("AccountSave - end");
+		printf("ServerStuffSave - end");
 	#endif
 }
 
