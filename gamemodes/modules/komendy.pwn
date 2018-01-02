@@ -1401,11 +1401,11 @@ CMD:dajmaterialy(playerid, params[])
 							new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
-
-                            _MruGracz(giveplayerid, sprintf("Dosta³eœ %d materia³ów od %s", moneys, GetNick(playerid, true)));
-                            _MruGracz(playerid, sprintf("Da³eœ %d materia³ów graczowi %s", moneys, GetNick(giveplayerid, true)));
-
-							format(string, sizeof(string),"%s da³ %s torbê z materia³ami.", GetNick(playerid, true), giveplayer);
+                            format(string, sizeof(string), "   Dosta³eœ %d materia³ów od gracza %s", moneys, sendername);
+							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+							format(string, sizeof(string), "   Da³eœ materia³y graczowi %s ( %d materia³ów).", giveplayer,moneys);
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+							format(string, sizeof(string),"%s da³ %s torbê z materia³ami.", playerid, giveplayer);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							PlayerInfo[playerid][pMats] -= moneys;
 							PlayerInfo[giveplayerid][pMats] += moneys;
@@ -2670,12 +2670,15 @@ CMD:dpa(playerid, params[])
 			{
 				if(PlayerInfo[para1][pNewAP] >= 1 && PlayerInfo[para1][pNewAP] <= 3)
 				{
+					new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 					PlayerInfo[para1][pNewAP] -= 1;
 					new level = PlayerInfo[para1][pNewAP];
-
-                    _MruAdmin(playerid, sprintf("Zdegradowa³eœ Pó³Admina %s na %d lvl rangi", GetNick(para1, true), level));
-                    if(para1 != playerid)
-                        _MruAdmin(para1, sprintf("%s zdegradowa³ Ciê na %d rangê Pó³Admina", GetNick(playerid, true), level));
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					format(string, sizeof(string), "   Zosta³eœ zdegradowany przez admina %s, masz teraz %d rangê pó³admina", sendername, level);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "   Zdegradowa³eœ gracza %s, ma teraz %d rangê pó³admina.", giveplayer, level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
 				else
 				{
@@ -2716,7 +2719,7 @@ CMD:apteczka(playerid, params[])
 				if(playa != INVALID_PLAYER_ID)
 				{
 					SetPlayerHealth(playa, health);
-                    _MruGracz(playa, sprintf("Zosta³eœ uzdrowiony przez lekarza %s", GetNick(playerid, true)));
+					SendClientMessage(playa, COLOR_WHITE, "Zostales uzdrowiony przez Lekarza");
 					format(string, sizeof(string),"* Lekarz %s wyci¹ga apteczkê, banda¿uje rany oraz podaje leki %s.", sendername, giveplayer);
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", giveplayer);
@@ -2759,7 +2762,7 @@ CMD:zastrzyk(playerid, params[])
 				if(playa != INVALID_PLAYER_ID)
 				{
 					SetPlayerHealth(playa, 90);
-					_MruGracz(playa, sprintf("%s da³ Ci zastrzyk i wyleczy³ z choroby", GetNick(playerid, true)));
+					SendClientMessage(playa, COLOR_WHITE, "Lekarz da³ ci zastrzyk i wyleczy³ z choroby");
 					format(string, sizeof(string),"* Lekarz %s wyci¹ga strzykawkê i wstrzykuje leki %s.", sendername, giveplayer);
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					format(string, sizeof(string), "%s czuje siê lepiej oraz pozby³ siê choroby.", giveplayer);
@@ -2806,24 +2809,20 @@ CMD:zmienplec(playerid, params[])
                         if(kaska[playerid] < 50000) return sendErrorMessage(playerid, "Nie masz 50 000$ na operacjê.");
 						format(string, sizeof(string),"Przeprowadzi³eœ operacje zmiany p³ci na %s. Koszt: 50 000$", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-
-                        _MruGracz(playerid, sprintf("Przeprowadzi³eœ operacjê zmiany p³ci na %s za $50 000", GetNick(playa, true)));
-
                         DajKase(playerid, -50000);
                         Sejf_Add(FRAC_LSMC, 50000);
-
 						if(PlayerInfo[playa][pSex] == 1)
 						{
-                            _MruGracz(playa, sprintf("%s przeprowadzi³ na tobie operacjê zmiany p³ci - jesteœ kobiet¹", GetNick(playerid, true)));
+							format(string, sizeof(string), "Lekarz %s przeprowadzi³ na tobie operacje zmiany p³ci. Jesteœ teraz kobiet¹!", giveplayer);
+							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Operacja zmiany p³ci powiod³a siê! %s jest teraz kobiet¹ ((%s))", giveplayer, sendername);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							PlayerInfo[playa][pSex] = 2;
 						}
 						else
 						{
-							//format(string, sizeof(string), "Lekarz %s przeprowadzi³ na tobie operacje zmiany p³ci. Jesteœ teraz mê¿czyzn¹!", giveplayer);
-                            _MruGracz(playa, sprintf("%s przeprowadzi³ na tobie operacjê zmiany p³ci - jesteœ mê¿czyzn¹", GetNick(playerid, true)));
-							//SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+							format(string, sizeof(string), "Lekarz %s przeprowadzi³ na tobie operacje zmiany p³ci. Jesteœ teraz mê¿czyzn¹!", giveplayer);
+							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Operacja zmiany p³ci powiod³a siê! %s jest teraz mê¿czyzn¹ ((%s))", giveplayer, sendername);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							PlayerInfo[playa][pSex] = 1;
@@ -3164,10 +3163,11 @@ CMD:respawnplayer(playerid, params[])
     if(!IsPlayerConnected(v)) return sendErrorMessage(playerid, "Niepoprawne ID gracza.");
     new pstate = GetPlayerState(v);
     if(pstate == 0 || pstate == 7 || pstate == 9) return sendErrorMessage(playerid, "Nie mo¿esz go teraz zrespawnowaæ!");
-
-    _MruAdmin(playerid, sprintf("Przywróci³eœ na pozycje startow¹ %s [ID: %d]", GetNick(v, true), v));
-    if(v != playerid)
-        _MruAdmin(v, sprintf("Zosta³eœ przywrócony na pozycje startow¹ przez %s [ID: %d]", GetNick(playerid, true), playerid));
+    new str[128];
+    format(str, 128, "$System$ » Zosta³eœ zrespawnowany przez admina %s", GetNick(playerid));
+    SendClientMessage(v, COLOR_LIGHTGREEN, str);
+    format(str, 128, "$System$ » Zrespawnowa³eœ gracza o nicku %s", GetNick(v));
+    SendClientMessage(playerid, COLOR_LIGHTGREEN, str);
 
     SpawnPlayer(v);
     return 1;
@@ -4734,7 +4734,7 @@ CMD:mojskin(playerid)
 {
     new str[32];
     format(str, 32, "ID Twojego skina: %d", GetPlayerSkin(playerid));
-    _MruGracz(playerid, str);
+    sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, str);
     return 1;
 }
 
@@ -7925,7 +7925,9 @@ CMD:zuzel_stop(playerid)
 
 CMD:setskin(playerid, params[])
 {
-
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -7951,14 +7953,16 @@ CMD:setskin(playerid, params[])
 		        if(para1 != INVALID_PLAYER_ID)
 		        {
                     if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby nadaæ skina gracz musi byæ pieszo!");
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerSkin(para1, level);
 					PlayerInfo[para1][pModel] = level;
 					PlayerInfo[para1][pSkin] = level;
-					printf("AdmCmd: %s zmieni³ skin gracza %s na %d.", GetNick(playerid), GetNick(para1), level);
-
-                    _MruAdmin(playerid, sprintf("Zmieni³eœ skin graczowi %s na %d", GetNick(para1, true), level));
-                    if(para1 != playerid)
-                        _MruAdmin(para1, sprintf("Twój skin zosta³ zmieniony na %d przez %s", level, GetNick(playerid, true)));
+					printf("AdmCmd: %s zmieni³ skin gracza %s na %d.", sendername, giveplayer, level);
+					format(string, sizeof(string), "   Twój skin zosta³ zmieniony na %d przez %s", level, sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "   Zmieni³eœ skin graczowi %s na %d.", giveplayer,level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
 			}
 		}
@@ -7977,11 +7981,15 @@ CMD:setskin(playerid, params[])
 		        if(para1 != INVALID_PLAYER_ID)
 		        {
                     if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby nadaæ skina gracz musi byæ pieszo!");
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerSkin(para1, level);
 					PlayerInfo[para1][pModel] = level;
-					printf("AdmCmd: %s zmieni³ sobie skin na %d", GetNick(playerid), level);
-					
-                    _MruAdmin(para1, sprintf("Twój skin zosta³ zmieniony na %d", level));
+					printf("AdmCmd: %s zmieni³ skin gracza %s na %d.", sendername, giveplayer, level);
+					format(string, sizeof(string), "   Twój skin zosta³ zmieniony na %d przez %s", level, sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "   Zmieni³eœ skin graczowi %s na %d.", giveplayer,level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
 			}
 		}
@@ -8030,6 +8038,10 @@ CMD:rozwiedz(playerid, params[])
 CMD:setwl(playerid, params[]) return cmd_zmienwl(playerid, params);
 CMD:zmienwl(playerid, params[])
 {
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
+
     if(IsPlayerConnected(playerid))
     {
 		new para1, level;
@@ -8048,13 +8060,14 @@ CMD:zmienwl(playerid, params[])
 				}
 		        if(para1 != INVALID_PLAYER_ID)
 		        {
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PoziomPoszukiwania[para1] = level;
-					printf("AdmCmd: %s zmieni³ wanted level gracza %s na %d.", GetNick(playerid), GetNick(para1), level);
-
-
-                    _MruAdmin(playerid, sprintf("Zmieni³eœ Wanted Level graczowi %s na %d", GetNick(para1, true), level));
-                    if(playerid != para1)
-                        _MruAdmin(para1, sprintf("Admin %s zmieni³ Ci Wanted Level na %d", GetNick(playerid, true), level));
+					printf("AdmCmd: %s zmieni³ wanted level gracza %s na %d.", sendername, giveplayer, level);
+					format(string, sizeof(string), "   Twój Poziom Poszukiwania zosta³ zmieniony na %d przez %s", level, sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "   Zmieni³eœ poziom poszukiwania %s na %d.", giveplayer,level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
 			}
 		}
@@ -8300,7 +8313,9 @@ CMD:setjob(playerid, params[]) return cmd_zmienprace(playerid, params);
 CMD:zmienjob(playerid, params[]) return cmd_zmienprace(playerid, params);
 CMD:zmienprace(playerid, params[])
 {
-
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -8317,12 +8332,14 @@ CMD:zmienprace(playerid, params[])
 		    	if(para1 != INVALID_PLAYER_ID)
 	        	{
                     if(!(0 <= level <= 17)) return 1;
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pJob] = level;
-					printf("AdmCmd: %s zmieni³ pracê %s na %d.", GetNick(playerid), GetNick(para1), level);
-
-                    _MruAdmin(playerid, sprintf("Zmieni³eœ graczowi %s pracê na %d", GetNick(para1, true), level));
-                    if(para1 != playerid)
-                        _MruAdmin(para1, sprintf("Admin %s zmieni³ ci pracê na %d", GetNick(playerid, true), level));
+					printf("AdmCmd: %s zmieni³ pracê %s na %d.", sendername, giveplayer, level);
+					format(string, sizeof(string), "   Twoja praca zosta³a zmieniona na %d przez %s", level, sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "   Zmieni³eœ pracê graczowi %s na pracê %d.", giveplayer,level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
 			}
 		}
@@ -8335,6 +8352,10 @@ CMD:zmienprace(playerid, params[])
 }
 CMD:setslot(playerid, params[])
 {
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
+
     if(IsPlayerConnected(playerid))
     {
 		new para1, level;
@@ -8350,12 +8371,14 @@ CMD:setslot(playerid, params[])
 		    	if(para1 != INVALID_PLAYER_ID)
 	        	{
                     if(!(0 <= level <= 12)) return 1;
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pCarSlots] = level;
-					printf("AdmCmd: %s sloty %s na %d.", GetNick(playerid), GetNick(para1), level);
-
-                    _MruAdmin(playerid, sprintf("Zmieni³eœ graczowi %s iloœæ slotów na %d", GetNick(para1, true), level));
-                    if(para1 != playerid)
-                        _MruAdmin(para1, sprintf("Admin %s zmieni³ ci iloœæ slotów na %d", GetNick(playerid, true), level));
+					printf("AdmCmd: %s sloty %s na %d.", sendername, giveplayer, level);
+					format(string, sizeof(string), "   Liczba slotow zostala zmieniona %d przez %s", level, sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "   Zmieni³eœ sloty graczowi %s na %d.", giveplayer,level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
 			}
 		}
@@ -8463,6 +8486,10 @@ CMD:setwiek(playerid, params[]) return cmd_zmienwiek(playerid, params);
 CMD:setage(playerid, params[]) return cmd_zmienwiek(playerid, params);
 CMD:zmienwiek(playerid, params[])
 {
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
+
     if(IsPlayerConnected(playerid))
     {
 		new para1, level;
@@ -8479,14 +8506,14 @@ CMD:zmienwiek(playerid, params[])
 		    {
 		    	if(para1 != INVALID_PLAYER_ID)
 	        	{
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pAge] = level;
-					printf("AdmCmd: %s zmieni³ wiek %s na %d.", GetNick(playerid), GetNick(para1), level);
-
-                    _MruAdmin(playerid, sprintf("Zmieni³eœ graczowi %s wiek na %d", GetNick(para1, true), level));
-                    if(para1 != playerid)
-                        _MruAdmin(para1, sprintf("Admin %s zmieni³ ci wiek na %d", GetNick(playerid, true), level));
-
-
+					printf("AdmCmd: %s zmieni³ wiek %s na %d.", sendername, giveplayer, level);
+					format(string, sizeof(string), "   Twój wiek zosta³ zmieniony na %d lat przez %s", level, sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "   Zmieni³eœ wiek graczowi %s na %d lat.", giveplayer,level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
 			}
 		}
@@ -8607,22 +8634,17 @@ CMD:unfrakcja(playerid, params[])
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					printf("AdmCmd: %s zosta³ wyrzucony przez %s.", sendername, giveplayer);
-
-                    _MruAdmin(para1, sprintf("Admin %s wyrzuci³ ciê z frakcji. Jesteœ cywilem.", GetNick(playerid)));
-
+					format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
 					PlayerInfo[para1][pMember] = 0;
 					PlayerInfo[para1][pLider] = 0;
 					PlayerInfo[para1][pJob] = 0;
-                    MruMySQL_SetAccInt("Rank", giveplayer, 0);
-                    MruMySQL_SetAccInt("Member", giveplayer, 0);
-                    MruMySQL_SetAccInt("Lider", giveplayer, 0);
                     orgUnInvitePlayer(para1);
 					MedicBill[para1] = 0;
 					SpawnPlayer(para1);
 					format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-
-                    _MruAdmin(playerid, sprintf("Wyrzuci³eœ %s z frakcji", GetNick(para1, true)));
 					
 					//logi
 					format(string, sizeof(string), "%s unfrakcjowal gracza %s", sendername, GetNick(para1));
@@ -8806,12 +8828,11 @@ CMD:undemorgan(playerid, params[])
 	        {
 	            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-
-                _MruAdmin(playerid, sprintf("Uwolni³eœ %s [%d] z DeMorgan", GetNick(giveplayerid, true), giveplayerid));
-
-                _MruAdmin(giveplayerid, sprintf("Zosta³eœ uwolniony z DeMorgan przez admina %s [%d]", GetNick(playerid, true), playerid));
-
-				format(string, sizeof(string), "* %s uwolni³ %s z DeMorgan",giveplayer, sendername);
+				format(string, sizeof(string), "* Uwolni³eœ %s z Fortu DeMorgan.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTRED, string);
+				format(string, sizeof(string), "* Zosta³eœ uwolniony z DeMorgan przez admina %s.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTRED, string);
+				format(string, sizeof(string), "* %s zosta³ uwolniony z DeMorgan przez admina %s.",giveplayer, sendername);
                 SendPunishMessage(string, giveplayerid);
 	            UnJailDeMorgan(giveplayerid);
                 poscig[giveplayerid] = 0;
@@ -8921,12 +8942,13 @@ CMD:hpall(playerid)
     {
         if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
+        	format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", sendername);
+    		SendClientMessageToAll(COLOR_LIGHTGREEN, string);
             foreach(Player, i)
 			{
 			    if(IsPlayerConnected(i))
 			    {
 				    SetPlayerHealth(i, 100);
-                    _MruAdmin(i, sprintf("Administrator %s uleczy³ wszystkich", GetNick(playerid, true)));
 				}
 			}
 		}
@@ -10801,7 +10823,7 @@ CMD:dajfiltr(playerid, params[])
 			dini_Set("Filtry.ini", string, sendername);
 			dini_IntSet("Filtry.ini", "Liczba", numer+1);
 			format(string, sizeof(string), "Filtr na IP %s dla konta %s zosta³ dodany pomyœlnie", ip, sendername);
-            _MruAdmin(playerid, string);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			return 1;
 		}
 	}
@@ -12523,10 +12545,8 @@ CMD:federalne(playerid, params[])
 								spamwl[giveplayerid] = 1;
 								SetTimerEx("spamujewl",60000,0,"d",giveplayerid);
 								SetPlayerCriminal(giveplayerid,playerid, result);
-								//SendClientMessage(giveplayerid, COLOR_LFBI, "Pope³ni³eœ przestêpstwo federalne, twoj¹ sprawê przejê³o FBI!");
-                                _MruGracz(giveplayerid, "Pope³ni³eœ przestêpstwo federalne, twoj¹ sprawê przejê³o FBI");
-								//SendClientMessage(playerid, COLOR_LFBI, "Oskar¿y³eœ gracza o przestêpstwo federalne. Ma on teraz 6 Poziom Poszukiwania !");
-                                _MruGracz(playerid, sprintf("Oskar¿y³eœ %s o przestêpstwo federalne. Ma on teraz 6 poziom poszukiwania", GetNick(giveplayerid, true)));
+								SendClientMessage(giveplayerid, COLOR_LFBI, "   Pope³ni³eœ przestêpstwo federalne, twoj¹ sprawê przejê³o FBI !");
+								SendClientMessage(playerid, COLOR_LFBI, "   Oskar¿y³eœ gracza o przestêpstwo federalne. Ma on teraz 6 Poziom Poszukiwania !");
 								return 1;
 							}
 							else
@@ -13355,8 +13375,7 @@ CMD:rentroom(playerid)
 										Dom[i][hPW] ++;
 										PlayerInfo[playerid][pWynajem] = i;
 										format(string, sizeof(string), "Wynaj¹³eœ pokój w tym domu za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom");
-										//sendTipMessage(playerid, string, COLOR_NEWS);
-                                        _MruGracz(playerid, string);
+										sendTipMessage(playerid, string, COLOR_NEWS);
 									}
 									else if(Dom[i][hWynajem] == 3)
 									{
@@ -13409,7 +13428,7 @@ CMD:rentroom(playerid)
 												Dom[i][hPW] ++;
 												PlayerInfo[playerid][pWynajem] = i;
 												format(string, sizeof(string), "Wynaj¹³eœ pokój w tym domu za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom");
-												_MruGracz(playerid, string);
+												sendTipMessage(playerid, string, COLOR_NEWS);
 										    }
 										    else
 										    {
@@ -13467,7 +13486,7 @@ CMD:rentroom(playerid)
 													frakcja = "Latin Kings";
 										        }
 										        format(string, sizeof(string), "Nie spe³niasz warunku wynajmu. Tylko ludzie z %s moga wynaj¹æ ten dom.", frakcja);
-										        _MruGracz(playerid, string);
+										        sendTipMessage(playerid, string);
 							        			return 1;
 										    }
 										}
@@ -13520,12 +13539,12 @@ CMD:rentroom(playerid)
 												Dom[i][hPW] ++;
 												PlayerInfo[playerid][pWynajem] = i;
 												format(string, sizeof(string), "Wynaj¹³eœ pokój w tym domu za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom");
-												_MruGracz(playerid, string);
+												sendTipMessage(playerid, string, COLOR_NEWS);
 										    }
 										    else
 										    {
 										    	format(string, sizeof(string), "Nie spe³niasz warunku wynajmu. Tylko ludzie z rodziny %d moga wynaj¹æ ten dom.", Dom[i][hTWW]);
-										        _MruGracz(playerid, string);
+										        sendTipMessage(playerid, string);
 							        			return 1;
 										    }
 									    }
@@ -13578,12 +13597,12 @@ CMD:rentroom(playerid)
 												Dom[i][hPW] ++;
 												PlayerInfo[playerid][pWynajem] = i;
 												format(string, sizeof(string), "Wynaj¹³eœ pokój w tym domu za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom");
-												_MruGracz(playerid, string);
+												sendTipMessage(playerid, string, COLOR_NEWS);
 										    }
 										    else
 										    {
 										        format(string, sizeof(string), "Nie spe³niasz warunku wynajmu. Tylko ludzie z levelem wy¿szym lub równym %d moga wynaj¹æ ten dom.", Dom[i][hTWW]);
-										        _MruGracz(playerid, string);
+										        sendTipMessage(playerid, string);
 							        			return 1;
 										    }
 										}
@@ -13636,12 +13655,12 @@ CMD:rentroom(playerid)
 												Dom[i][hPW] ++;
 												PlayerInfo[playerid][pWynajem] = i;
 												format(string, sizeof(string), "Wynaj¹³eœ pokój w tym domu za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom");
-												_MruGracz(playerid, string);
+												sendTipMessage(playerid, string, COLOR_NEWS);
 										    }
 											else
 											{
 											    format(string, sizeof(string), "Nie spe³niasz warunku wynajmu. Tylko ludzie z Kontem Premium wy¿szym lub równym %d moga wynaj¹æ ten dom.", Dom[i][hTWW]);
-										        _MruGracz(playerid, string);
+										        sendTipMessage(playerid, string);
 							        			return 1;
 											}
 										}
@@ -13724,10 +13743,10 @@ CMD:giveroom(playerid, params[])
 							            GetPlayerName(playerid, sendername, sizeof(sendername));
 							            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 										format(string, sizeof(string), "Gracz %s proponuje ci wynajem pokoju za %d$, aby go wynaj¹æ wpisz /akceptuj wynajem.", sendername, Dom[PlayerInfo[playerid][pDom]][hCenaWynajmu]);
-                                        _MruGracz(playerid, string);
 										SendClientMessage(giveplayerid, COLOR_WHITE, "Aby zobaczyæ informacje o proponowanym domu wpisz /wynajeminfo przy domu.");
+										SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 										format(string, sizeof(string), "Zaoferowa³eœ graczowi %s wynajem pokoju w swoim domu za %d$", giveplayer, Dom[PlayerInfo[playerid][pDom]][hCenaWynajmu]);
-										_MruGracz(playerid, string);
+										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 										WynajemOffer[giveplayerid] = playerid;
 									}
 									else
@@ -13898,11 +13917,10 @@ CMD:selldom(playerid, params[])
 						            GetPlayerName(playerid, sendername, sizeof(sendername));
 						            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 									format(string, sizeof(string), "Gracz %s proponuje ci sprzeda¿ swojego domu za %d$, aby go kupiæ wpisz /akceptuj dom.", sendername, money);
-                                    _MruGracz(giveplayerid, string);
-									_MruGracz(giveplayerid, "Aby zobaczyæ informacje o proponowanym domu wpisz /dominfo przy domu.");
-									
+									SendClientMessage(giveplayerid, COLOR_WHITE, "Aby zobaczyæ informacje o proponowanym domu wpisz /dominfo przy domu.");
+									SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 									format(string, sizeof(string), "Zaoferowa³eœ graczowi %s sprzeda¿ swojego domu za %d$", giveplayer, money);
-									_MruGracz(playerid, string);
+									SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 									DomOffer[giveplayerid] = playerid;
 									DomCena[giveplayerid] = money;
 								}
@@ -14075,7 +14093,7 @@ CMD:zaparkuj(playerid)
                 Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE);
 
 				format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(lVeh)-400]);
-				_MruGracz(playerid, string);
+				sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
 			}
 			else
 			{
@@ -14156,9 +14174,9 @@ CMD:dajklucze(playerid, params[])
 					}
 
 					format(string, sizeof(string), "Dosta³eœ kluczyki do pojazdu od %s. Wpisz /autoklucze aby coœ z nim zrobiæ. Aby je wywaliæ wpisz /wywalklucz.",sendername);
-     				_MruGracz(playa, string);
+     				SendClientMessage(playa, 0xFFC0CB, string);
      				format(string, sizeof(string), "Da³eœ %s kluczyki do twojego pojazdu. Jeœli chcesz mu je odebraæ wpisz /odbierzklucze.",giveplayer);
-     				_MruGracz(playerid, string);
+     				SendClientMessage(playerid, 0xFFC0CB, string);
      				format(string, sizeof(string), "* %s wyjmuje kluczyki i podaje je %s.", sendername ,giveplayer);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
      			}
@@ -14198,7 +14216,7 @@ CMD:zk(playerid, params[])
         if(CarData[PlayerInfo[playerid][pCars][numerp]][c_Keys] == 0) return sendErrorMessage(playerid, "Nikomu nie dawa³eœ kluczyków od tego pojazdu.");
 
         CarData[PlayerInfo[playerid][pCars][numerp]][c_Keys] = 0;
-  		_MruGracz(playerid, "Kluczyki zabrane");
+  		sendTipMessage(playerid, "Kluczyki zabrane", COLOR_LIGHTBLUE);
         Car_Save(PlayerInfo[playerid][pCars][numerp], CAR_SAVE_OWNER);
 	}
 	return 1;
@@ -14216,7 +14234,7 @@ CMD:wk(playerid)
         new uid = Car_GetIDXFromUID(PlayerInfo[playerid][pKluczeAuta]);
         if(uid != -1) CarData[uid][c_Keys] = 0;
   		PlayerInfo[playerid][pKluczeAuta] = 0;
-  		_MruGracz(playerid, "Kluczyki wywalone (skrót komendy: /wk)");
+  		sendTipMessage(playerid, "Kluczyki wywalone (skrót komendy: /wk)", COLOR_LIGHTBLUE);
   	}
   	else
   	{
@@ -14262,24 +14280,24 @@ CMD:wymiana(playerid, params[])
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 
 	    format(string, sizeof(string), "%s oferuje ci wymianê %s za %s z twoj¹ dop³at¹ %d$. Jeœli siê zgadzasz, wpisz /akceptuj wymiana.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], VehicleNames[GetVehicleModel(GetPlayerVehicleID(playa))-400], cena);
-        _MruGracz(playa, string);
+        SendClientMessage(playa, 0xFFC0CB, string);
         //TODO
         if(PlayerInfo[playa][pDonateRank] == 0)
         {
             if(CarData[IDAuta[playa]][c_Neon] != 18652 && CarData[IDAuta[playa]][c_Neon] != 0)
             {
-                _MruGracz(playa, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
+                SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
         }
         if(PlayerInfo[playerid][pDonateRank] == 0)
         {
             if(CarData[IDAuta[playerid]][c_Neon] != 18652 && CarData[IDAuta[playerid]][c_Neon] != 0)
             {
-                _MruGracz(playerid, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
+                SendClientMessage(playerid, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
         }
         format(string, sizeof(string), "Oferujesz %s wymianê twojego %s za %s z jego dop³at¹ %d$", giveplayer, VehicleNames[GetVehicleModel(lVeh)-400], VehicleNames[GetVehicleModel(GetPlayerVehicleID(playa))-400], cena);
-        _MruGracz(playerid, string);
+        SendClientMessage(playerid, 0xFFC0CB, string);
         GraczWymieniajacy[playa] = playerid;
 		CenaWymienianegoAuta[playa] = cena;
 		IDWymienianegoAuta[playa] = GetPlayerVehicleID(playa);
@@ -14327,17 +14345,17 @@ CMD:sprzedajauto(playerid, params[])
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 
 	    format(string, sizeof(string), "%s oferuje ci sprzeda¿ %s za %d$. Jeœli chcesz kupiæ to auto wpisz /akceptuj pojazd aby kupiæ.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], cena);
-        _MruGracz(playa, string);
+        SendClientMessage(playa, 0xFFC0CB, string);
         //TODO
         if(PlayerInfo[playa][pDonateRank] == 0)
         {
             if(CarData[IDAuta[playa]][c_Neon] != 18652 && CarData[IDAuta[playa]][c_Neon] != 0)
             {
-                _MruGracz(playa, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
+                SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
         }
         format(string, sizeof(string), "Oferujesz %s kupno twojego %s za %d$", giveplayer, VehicleNames[GetVehicleModel(lVeh)-400], cena);
-        _MruGracz(playerid, string);
+        SendClientMessage(playerid, 0xFFC0CB, string);
         GraczDajacy[playa] = playerid;
 		CenaDawanegoAuta[playa] = cena;
 	}
@@ -14609,11 +14627,11 @@ CMD:plac(playerid, params[])
 						    ConsumingMoney[giveplayerid] = 1;
 							DajKase(playerid, (0 - moneys));
 							DajKase(giveplayerid, moneys);
-							format(string, sizeof(string), "Da³eœ $%d graczowi %s [ID: %d]", moneys,GetNick(giveplayerid, true),giveplayerid);
+							format(string, sizeof(string), "   Da³eœ %s(gracz: %d), $%d.", giveplayer,giveplayerid, moneys);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							_MruGracz(playerid, string);
-							format(string, sizeof(string), "Otrzyma³eœ $%d od %s [ID: %d]", moneys, GetNick(playerid, true), playerid);
-							_MruGracz(giveplayerid, string);
+							SendClientMessage(playerid, COLOR_GRAD1, string);
+							format(string, sizeof(string), "   Otrzyma³eœ $%d od %s(gracz: %d).", moneys, sendername, playerid);
+							SendClientMessage(giveplayerid, COLOR_GRAD1, string);
 							format(string, sizeof(string), "%s da³ $%d graczowi %s", sendername, moneys, giveplayer);
 							PayLog(string);
 							if(moneys >= 1000000)
@@ -14720,11 +14738,11 @@ CMD:teczka(playerid, params[])
 						    ConsumingMoney[giveplayerid] = 1;
 							DajKase(playerid, (0 - moneys));
 							DajKase(giveplayerid, moneys);
-                            format(string, sizeof(string), "Da³eœ $%d graczowi %s [ID: %d]", moneys,GetNick(giveplayerid, true),giveplayerid);
-                            PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-                            _MruGracz(playerid, string);
-                            format(string, sizeof(string), "Otrzyma³eœ $%d od %s [ID: %d]", moneys, GetNick(playerid, true), playerid);
-                            _MruGracz(giveplayerid, string);
+							format(string, sizeof(string), "   Da³eœ %s(gracz: %d), $%d.", giveplayer,giveplayerid, moneys);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							SendClientMessage(playerid, COLOR_GRAD1, string);
+							format(string, sizeof(string), "   Otrzyma³eœ $%d od %s(gracz: %d).", moneys, sendername, playerid);
+							SendClientMessage(giveplayerid, COLOR_GRAD1, string);
 							format(string, sizeof(string), "%s dal teczke z $%d graczowi %s", sendername, moneys, giveplayer);
 							PayLog(string);
 							if(moneys >= 10000000)
@@ -15266,8 +15284,8 @@ CMD:reset_ulepszen(playerid)
 		PlayerInfo[playerid][pTraderPerk] = 0;
 		DajKase(playerid,-100000);
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-		format(string, sizeof(string), "Zresetowa³eœ punkty ulepszeñ, masz ich teraz %d.",PlayerInfo[playerid][gPupgrade]);
-		_MruGracz(playerid, string);
+		format(string, sizeof(string), "   Masz teraz %d niewykorzystanych Punktów Ulepszenia !",PlayerInfo[playerid][gPupgrade]);
+		SendClientMessage(playerid, COLOR_GRAD2, string);
 	}
 	return 1;
 }
@@ -15632,7 +15650,7 @@ CMD:og(playerid, params[])
             if(kaska[playerid] < payout)
             {
                 format(string, sizeof(string), "* U¿y³eœ %d zanków i masz zap³aciæ $%d, nie posiadasz a¿ tyle.", strlen(params), payout);
-                _MruGracz(playerid, string);
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                 return 1;
             }
             DajKase(playerid, - payout);
@@ -18115,7 +18133,7 @@ CMD:wplac(playerid, params[])
 			PlayerInfo[playerid][pAccount]=(cashdeposit-depo2)+PlayerInfo[playerid][pAccount];
             if(GraczBankomat(playerid)) {
                 format(string, sizeof(string), "Wp³aci³eœ $%d na swoje konto, obecny stan to: $%d ", cashdeposit-depo2,PlayerInfo[playerid][pAccount]);
-                _MruGracz(playerid, string);
+                SendClientMessage(playerid, COLOR_YELLOW, string);
             } else {
                 SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
                 format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);
@@ -18569,13 +18587,11 @@ CMD:przelew(playerid, params[])
 					    {
 							PlayerInfo[playerid][pAccount] -= moneys;
 							PlayerInfo[giveplayerid][pAccount] += moneys;
-
-                            format(string, sizeof(string), "Wys³a³eœ przelew o wartoœci $%d graczowi %s [ID: %d]", moneys,GetNick(giveplayerid, true),giveplayerid);
-                            PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-                            _MruGracz(playerid, string);
-                            format(string, sizeof(string), "Otrzyma³eœ przelew o wartoœci $%d od %s [ID: %d]", moneys, GetNick(playerid, true), playerid);
-                            _MruGracz(giveplayerid, string);
-
+							format(string, sizeof(string), "Dokona³eœ przelewu $%d na konto %s", moneys, giveplayer,giveplayerid);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							SendClientMessage(playerid, COLOR_GRAD1, string);
+							format(string, sizeof(string), "Otrzyma³eœ przelew $%d od %s", moneys, sendername, playerid);
+							SendClientMessage(giveplayerid, COLOR_GRAD1, string);
 							format(string, sizeof(string), "%s przela³ $%d do %s", sendername, moneys, giveplayer);
 			                if(moneys >= 50000)
 							{
@@ -18588,13 +18604,9 @@ CMD:przelew(playerid, params[])
 						else
 						{
 						    PlayerInfo[playerid][pAccount] -= moneys;
-							
-                            format(string, sizeof(string), "Wys³a³eœ przelew o wartoœci $%d graczowi %s [ID: %d]", moneys,GetNick(giveplayerid, true),giveplayerid);
-                            PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-                            _MruGracz(playerid, string);
-                            format(string, sizeof(string), "Otrzyma³eœ przelew o wartoœci $%d od %s [ID: %d]", moneys, GetNick(playerid, true), playerid);
-                            _MruGracz(giveplayerid, string);
-
+							format(string, sizeof(string), "Dokona³eœ przelewu $%d na konto %s", moneys, giveplayer,giveplayerid);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							SendClientMessage(playerid, COLOR_GRAD1, string);
 							format(string, sizeof(string), "%s przela³ $%d do %s (fikcyjny)", sendername, moneys, giveplayer);
 			                if(moneys >= 50000)
 							{
@@ -22990,9 +23002,9 @@ CMD:adminajail(playerid, params[])
 				        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
-						_MruAdmin(playerid, string);
-						format(string, sizeof(string), "* Zosta³eœ uwiêziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
-						_MruAdmin(playa, string);
+						SendClientMessage(playerid, COLOR_LIGHTRED, string);
+						format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
+						SendClientMessage(playa, COLOR_LIGHTRED, string);
 						ResetPlayerWeapons(playa);
 						PlayerInfo[playa][pJailed] = 3;
 						PlayerInfo[playa][pJailTime] = money*60;
@@ -23000,7 +23012,7 @@ CMD:adminajail(playerid, params[])
 						PlayerInfo[playa][pMuted] = 1;
 						SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
 						format(string, sizeof(string), "Zosta³eœ ukarany na %d minut. Powod: %s", money, (result));
-						_MruAdmin(playa, string);
+						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
                         SendPunishMessage(string, playa);
                         poscig[playa] = 0;
@@ -23051,9 +23063,9 @@ CMD:jail(playerid, params[])
 			        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Uwiêzi³eœ %s.", giveplayer);
-					_MruAdmin(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTRED, string);
 					format(string, sizeof(string), "* Zosta³eœ uwiêziony przez Admina %s.", sendername);
-					_MruAdmin(playa, string);
+					SendClientMessage(playa, COLOR_LIGHTRED, string);
 					ResetPlayerWeapons(playa);
 					PoziomPoszukiwania[playa] = 0;
 					PlayerInfo[playa][pJailed] = 1;
@@ -23063,7 +23075,7 @@ CMD:jail(playerid, params[])
 				    new losuj= random(sizeof(Cela));
 					SetPlayerPosEx(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 					format(string, sizeof(string), "Zosta³eœ uwiêziony na %s minut.   Kaucja: Niedostêpna", money);
-					_MruAdmin(playa, string);
+					SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                     Wchodzenie(playa);
 				}
 			}
@@ -23307,7 +23319,7 @@ CMD:setstat(playerid, params[])
 						}
 
 					}
-					_MruAdmin(playerid, string);
+					SendClientMessage(playerid, COLOR_GRAD1, string);
 					format(string, sizeof(string), "%s da³ %s: %s", GetNick(playerid), GetNick(giveplayerid), string);
 					StatsLog(string);
 				}
@@ -23368,10 +23380,10 @@ CMD:setint(playerid, params[])
 		{
 			SetPlayerInterior(gracz,intid);
 			PlayerInfo[gracz][pInt] = intid;
-			format(string, sizeof(string), "Ustawi³eœ %s interior %d.", GetNick(gracz), intid);
-			_MruAdmin(playerid, string);
-			format(string, sizeof(string), "Admin %s ustawi³ ci interior %d.", GetNick(playerid), intid);
-			_MruAdmin(gracz, string);
+			format(string, sizeof(string), "Ustawi³eœ %s interior nr %d.", GetNick(gracz), intid);
+			SendClientMessage(playerid, COLOR_GRAD1, string);
+			format(string, sizeof(string), "Admin %s ustawi³ ci interior nr %d.", GetNick(playerid), intid);
+			SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
 		}
 		else
 		{
@@ -23404,9 +23416,9 @@ CMD:setvw(playerid, params[])
 		{
 			SetPlayerVirtualWorld(gracz, intid);
 			format(string, sizeof(string), "Ustawi³eœ %s virtualworld nr %d.", GetNick(gracz), intid);
-			_MruAdmin(playerid, string);
+			SendClientMessage(playerid, COLOR_GRAD1, string);
 			format(string, sizeof(string), "Admin %s ustawi³ ci virtualworld nr %d.", GetNick(playerid), intid);
-			_MruAdmin(gracz, string);
+			SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
 		}
 		else
 		{
@@ -23434,7 +23446,7 @@ CMD:getint(playerid, params[])
 	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 	{
 		format(string, sizeof(string), "Interior gracza %s to %d.", GetNick(gracz), GetPlayerInterior(gracz));
-		_MruAdmin(playerid, string);
+		SendClientMessage(playerid, COLOR_GRAD1, string);
 	}
 	else
 	{
@@ -23461,7 +23473,7 @@ CMD:getvw(playerid, params[])
 	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 	{
 		format(string, sizeof(string), "VirutalWorld gracza %s to %d.", GetNick(gracz), GetPlayerVirtualWorld(gracz));
-		_MruAdmin(playerid, string);
+		SendClientMessage(playerid, COLOR_GRAD1, string);
 	}
 	else
 	{
@@ -23482,7 +23494,7 @@ CMD:skydive(playerid)
             {
                 GivePlayerWeapon(playerid, 46, 1);
                 SetPlayerPos(playerid,rx, ry, rz+1500);
-                _MruAdmin(playerid, "GO!! GO!! GO!!");
+                SendClientMessage(playerid, COLOR_WHITE, "GO!! GO!! GO!!");
             }
 		}
 		else
@@ -23548,12 +23560,12 @@ CMD:przyjmij(playerid, params[])
 						PlayerInfo[para1][pJob] = 0;
 						printf("AdmCmd: %s przyj¹³ gracza %s do frakcji %s.", sendername, giveplayer, FractionNames[ftextid]);
 						format(string, sizeof(string), "Zosta³eœ przyjêty do %s przez lidera %s", FractionNames[ftextid], sendername);
-						_MruGracz(para1, string);
+						sendTipMessageEx(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "Przyj¹³eœ %s do swojej frakcji %s", giveplayer,FractionNames[ftextid]);
-						_MruGracz(playerid, string);
+						sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
                         MruMySQL_SetAccInt("Member", giveplayer, PlayerInfo[playerid][pLider]);
                         MruMySQL_SetAccInt("Rank", giveplayer, 0);
-					    _MruGracz(para1, "U¿yj /uniform w sklepie z ciuchami aby zmieniæ ubranie robocze.");
+					    sendTipMessageEx(para1, COLOR_LIGHTRED, "U¿yj /uniform w sklepie z ciuchami aby zmieniæ ubranie robocze.");
 					}
 					else
 					{
@@ -23603,7 +23615,7 @@ CMD:zwolnij(playerid, params[])
                             new liderid = PlayerInfo[playerid][pLider];
 							printf("AdmCmd: %s wyprosil %s.", sendername, giveplayer);
 							format(string, sizeof(string), "Zostales wyrzucony z frakcji %s przez %s.", FractionNames[liderid],sendername);
-							_MruGracz(para1, string);
+							sendTipMessageEx(para1, COLOR_LIGHTBLUE, string);
 							gTeam[para1] = 3;
 							PlayerInfo[para1][pTeam] = 3;
 							PlayerInfo[para1][pMember] = 0;
@@ -23620,12 +23632,12 @@ CMD:zwolnij(playerid, params[])
                             MruMySQL_SetAccInt("Rank", giveplayer, 0);
                             MruMySQL_SetAccInt("Member", giveplayer, 0);
 							format(string, sizeof(string), "Wyrzuci³eœ %s ze swojej frakcji %s", giveplayer, FractionNames[liderid]);
-							_MruGracz(playerid, string);
+							sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
 						}
 						else
 						{
 							format(string, sizeof(string), "Gracz %s nie nale¿y do Twojej frakcji.", giveplayer);
-							_MruGracz(playerid, string);
+							sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
 						}
 					}
 				}
@@ -23682,9 +23694,9 @@ CMD:dajpomocnika(playerid, params[])
 				format(string, sizeof(string), "AdmCmd: %s mianowal %s na %d level poladmina.", sendername, giveplayer, level);
 				CKLog(string);
 				format(string, sizeof(string), "Zosta³eœ mianowany na %d level pó³admina przez %s", level, sendername);
-				_MruAdmin(para1, string);
+				SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "Da³eœ %s pó³admina o levelu %d.", giveplayer,level);
-				_MruAdmin(playerid, string);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
             }
 			else
 			{
@@ -23718,9 +23730,9 @@ CMD:dajskryptera(playerid, params[])
             format(string, sizeof(string), "AdmCmd: %s mianowal %s na skryptera.", sendername, giveplayer);
             CKLog(string);
             format(string, sizeof(string), "Zosta³eœ mianowany na skryptera przez %s", sendername);
-            _MruAdmin(para1, string);
+            SendClientMessage(para1, COLOR_LIGHTBLUE, string);
             format(string, sizeof(string), "Da³eœ %s skryptera.", giveplayer);
-            _MruAdmin(playerid, string);
+            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         }
     }
     return 1;
@@ -23747,15 +23759,15 @@ CMD:dajzaufanego(playerid, params[])
 				format(string, sizeof(string), "AdmCmd: %s mianowa³ %s na %d level zaufanego.", sendername, giveplayer, level);
 				CKLog(string);
 				format(string, sizeof(string), "Zosta³eœ mianowany na %d level zaufanego gracza przez %s", level, sendername);
-				_MruAdmin(para1, string);
+				SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "Da³eœ %s zaufanego o levelu %d.", giveplayer,level);
-				_MruAdmin(playerid, string);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 
                 PlayerInfo[para1][pZG] = level;
             }
 			else
 			{
-				sendTipMessageEx(playerid, COLOR_NEWS, "Level od 1 do 10!");
+				sendTipMessageEx(playerid, COLOR_NEWS, "Level od 1 do 10 !");
 			}
 		}
 	}
@@ -23882,9 +23894,9 @@ CMD:dajlideraorg(playerid, params[])
 		if(orgUID != 0xFFFF)
 		{
 			format(str, sizeof(str), "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNick(playerid), OrgInfo[orgUID][o_Name], family);
-			_MruAdmin(id, str);
+			SendClientMessage(id, COLOR_LIGHTBLUE, str);
 			format(str, sizeof(str), "Da³eœ kontrolê nad rodzin¹ %s (%d) graczowi %s", OrgInfo[orgUID][o_Name], family, GetNick(id));
-			_MruAdmin(playerid, str);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
 			
 			//logi
 			format(str, sizeof(str), "%s dal kontrole nad rodzina %d graczowi %s", GetNick(playerid), family, GetNick(id));
@@ -23931,9 +23943,9 @@ CMD:zabierzlideraorg(playerid, params[])
     if(id != -1)
     {
         format(str, 128, "Admin %s odebra³ Tobie kontrolê nad rodzin¹ %s", GetNick(playerid), OrgInfo[gPlayerOrg[id]][o_Name]);
-        _MruAdmin(id, str);
+        SendClientMessage(id, COLOR_LIGHTBLUE, str);
         format(str, 128, "Odebra³eœ kontrolê nad rodzin¹ %s graczowi %s", OrgInfo[gPlayerOrg[id]][o_Name], GetNick(id));
-        _MruAdmin(playerid, str);
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
 		
 		//logi
 		format(str, sizeof(str), "%s odebral kontrole nad rodzina %d graczowi %s", GetNick(playerid), gPlayerOrg[id], GetNick(id));
@@ -23979,9 +23991,9 @@ CMD:makeleader(playerid, params[])
                     MruMySQL_SetAccInt("Member", giveplayer, level);
                     MruMySQL_SetAccInt("Lider", giveplayer, level);
 					format(string, sizeof(string), "Zosta³eœ mianowany liderem frakcji przez %s", sendername);
-					_MruAdmin(para1, string);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ graczowi %s kontrolê nad frakcj¹ numer %d.", giveplayer,level);
-					_MruAdmin(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					
 					//logi
 					format(string, sizeof(string), "%s dal kontrole nad frakcja numer %d graczowi %s", sendername, level, giveplayer);
@@ -24057,10 +24069,10 @@ CMD:makewomanleader(playerid, params[])
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pLider] = level;
-					format(string, sizeof(string), "Zosta³aœ mianowana liderk¹ frakcji przez Administratora %s", sendername);
-					_MruAdmin(para1, string);
+					format(string, sizeof(string), "Zosta³eœ mianowany liderem frakcji przez Administratora: %s", sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ kontrolê graczowi %s nad frakcj¹ numer %d.", giveplayer,level);
-					_MruAdmin(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					
 					//logi
 					format(string, sizeof(string), "%s dal kontrole nad frakcja numer %d graczowi %s", sendername, level, giveplayer);
@@ -24131,9 +24143,9 @@ CMD:makemember(playerid, params[])
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pMember] = level;
 					format(string, sizeof(string), "Zosta³eœ mianowany pracownikiem frakcji numer %d przez Administratora: %s", level,sendername);
-					_MruAdmin(para1, string);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ membera graczowi %s nad frakcj¹ numer %d.", giveplayer,level);
-					_MruAdmin(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					
 					//logi
 					format(string, sizeof(string), "%s mianowal na czlonka frakcji numer %d gracza %s", sendername, level, giveplayer);
@@ -24209,9 +24221,9 @@ CMD:frakcjaskin(playerid, params[])
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Zosta³eœ wybrany do zmiany skinu przez Administratora %s.", sendername);
-					_MruAdmin(para1, string);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* Wymusi³eœ zmiane skinu na %s.", giveplayer);
-					_MruAdmin(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					if(PlayerInfo[para1][pMember] == 1) { PlayerInfo[para1][pTeam] = 5; ChosenSkin[para1] = 59; }
 			        else if(PlayerInfo[para1][pMember] == 2) { PlayerInfo[para1][pTeam] = 6; ChosenSkin[para1] = 121; }
 			        else if(PlayerInfo[para1][pMember] == 3) { PlayerInfo[para1][pTeam] = 7; ChosenSkin[para1] = 98; }
@@ -24284,9 +24296,9 @@ CMD:dajrange(playerid, params[])
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						PlayerInfo[para1][pRank] = level;
 						format(string, sizeof(string), "Lider %s zmieni³ twoj¹ rangê", sendername);
-						_MruGracz(para1, string);
+						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "Da³eœ %s Rangê %d.", giveplayer,level);
-						_MruGracz(playerid, string);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         MruMySQL_SetAccInt("Rank", giveplayer, PlayerInfo[para1][pRank]);
 					}
 					else
@@ -24398,7 +24410,7 @@ CMD:gotols(playerid)
 			}
             SetPlayerVirtualWorld(playerid, 0);
             SetPlayerInterior(playerid, 0);
-			_MruAdmin(playerid, "Zosta³eœ teleportowany !");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany !");
 			SetPlayerInterior(playerid,0);
 			PlayerInfo[playerid][pInt] = 0;
 		}
@@ -24427,7 +24439,7 @@ CMD:gotoszpital(playerid)
 			}
             SetPlayerVirtualWorld(playerid, 0);
             SetPlayerInterior(playerid, 0);
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 			SetPlayerInterior(playerid,0);
 			PlayerInfo[playerid][pInt] = 0;
 		}
@@ -24456,7 +24468,7 @@ CMD:gotolv(playerid)
 			}
             SetPlayerVirtualWorld(playerid, 0);
             SetPlayerInterior(playerid, 0);
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 			SetPlayerInterior(playerid,0);
 			PlayerInfo[playerid][pInt] = 0;
 		}
@@ -24485,7 +24497,7 @@ CMD:gotosf(playerid)
 			}
             SetPlayerVirtualWorld(playerid, 0);
             SetPlayerInterior(playerid, 0);
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 			SetPlayerInterior(playerid,0);
 			PlayerInfo[playerid][pInt] = 0;
 		}
@@ -24511,7 +24523,7 @@ CMD:entercar(playerid, params[])
 		if (PlayerInfo[playerid][pAdmin] >= 10)
 		{
 			PutPlayerInVehicleEx(playerid, testcar, 1);
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 		}
 		else
 		{
@@ -24545,7 +24557,7 @@ CMD:gotocar(playerid, params[])
 			{
 				SetPlayerPosEx(playerid, cwx2, cwy2, cwz2);
 			}
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 			SetPlayerInterior(playerid,0);
 		}
 		else
@@ -24588,7 +24600,7 @@ CMD:gotomark(playerid)
 			{
 				SetPlayerPosEx(playerid, TeleportDest[playerid][0],TeleportDest[playerid][1],TeleportDest[playerid][2]);
 			}
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 			SetPlayerInterior(playerid,0);
 		}
 		else
@@ -24614,7 +24626,7 @@ CMD:gotoin(playerid)
 			{
 				SetPlayerPosEx(playerid, 1416.107000,0.268620,1000.926000);
 			}
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 			SetPlayerInterior(playerid,1);
 		}
 		else
@@ -24641,7 +24653,7 @@ CMD:gotostad(playerid)
 				SetPlayerPosEx(playerid, -1435.75, -652.664, 1054.94);
 			}
 			SetPlayerInterior(playerid,4);
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 		}
 		else
 		{
@@ -24667,7 +24679,7 @@ CMD:gotojet(playerid)
 				SetPlayerPosEx(playerid, 1.71875, 30.4062, 1200.34);
 			}
 			SetPlayerInterior(playerid,1);
-			_MruAdmin(playerid, "Zosta³eœ teleportowany!");
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 		}
 		else
 		{
@@ -24728,12 +24740,12 @@ CMD:tp(playerid, params[])
 					GetPlayerPos(plo, plocx, plocy, plocz);
 					SetPlayerInterior(plo1, GetPlayerInterior(plo));
 					SetPlayerVirtualWorld(plo1, GetPlayerVirtualWorld(plo));
-					format(string, sizeof(string), "Zosta³eœ teleportowany do %s [ID: %d] przez Admina %s.", giveplayer02, plo, sendername);
-					_MruAdmin(plo1, string);
-					format(string, sizeof(string), "Teleportowano tutaj %s [ID: %d] przez Admina %s.", giveplayer01, plo1, sendername);
-					_MruAdmin(plo, string);
-					format(string, sizeof(string), "Teleportowano %s [ID: %d] do %s [ID: %d)]", giveplayer01, plo1, giveplayer02, plo);
-					_MruAdmin(playerid, string);
+					format(string, sizeof(string), "Zosta³eœ teleportowany do %s (ID: %d) przez Admina %s.", giveplayer02, plo, sendername);
+					SendClientMessage(plo1, COLOR_GRAD1, string);
+					format(string, sizeof(string), "Teleportowano tutaj %s (ID: %d) przez Admina %s.", giveplayer01, plo1, sendername);
+					SendClientMessage(plo, COLOR_GRAD1, string);
+					format(string, sizeof(string), "Teleportowano %s (ID: %d) do %s (ID: %d).", giveplayer01, plo1, giveplayer02, plo);
+					SendClientMessage(playerid, COLOR_GRAD1, string);
 					if(PlayerInfo[plo][pInt] > 0)
 					{
 						PlayerInfo[plo1][pInt] = PlayerInfo[plo][pInt];
@@ -24945,7 +24957,7 @@ CMD:gethere(playerid, params[])
 					}
                     SetPlayerInterior(plo, GetPlayerInterior(playerid));
 					SetPlayerVirtualWorld(plo, GetPlayerVirtualWorld(playerid));
-					_MruAdmin(plo, "Zosta³eœ teleportowany");
+					sendTipMessageEx(plo, COLOR_GRAD1, "Zosta³eœ teleportowany");
 				}
 				else
 				{
@@ -25404,7 +25416,7 @@ CMD:pogodaall(playerid, params[])
 
 			if(weather < 2||weather > 20) { sendTipMessageEx(playerid, COLOR_GREY, "Id pogody od 2 do 20 !"); return 1; }
 			SetWeatherEx(weather);
-			_MruAdmin(playerid, "Pogoda zmieniona dla wszystkich !");
+			sendTipMessageEx(playerid, COLOR_GREY, "Pogoda zmieniona dla wszystkich !");
             new string[128];
             format(string, 128, "CMD_Info: /pogodaall u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
@@ -25564,7 +25576,7 @@ CMD:slap(playerid, params[])
 					format(string, sizeof(string), "AdmCmd: %s da³ klapsa w dupsko %s",sendername, giveplayer);
 					ABroadCast(COLOR_LIGHTRED,string,1);
 					format(string, sizeof(string), "Dosta³eœ klapsa w dupsko od administratora %s, widocznie zrobi³eœ coœ z³ego :)", sendername);
-					_MruAdmin(playa, string);
+					SendClientMessage(playa, COLOR_PANICRED, string);
 				}
 			}
 		}
@@ -25611,7 +25623,7 @@ CMD:ucisz(playerid, params[])
 						format(string, sizeof(string), "AdmCmd: %s uciszyl %s",sendername, giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);
 						format(string, sizeof(string), "Zosta³eœ uciszony przez administratora %s, widocznie powiedzia³eœ coœ z³ego :)", sendername);
-						_MruAdmin(playa, string);
+						SendClientMessage(playa, COLOR_PANICRED, string);
 					}
 					else
 					{
@@ -25620,7 +25632,7 @@ CMD:ucisz(playerid, params[])
 						format(string, sizeof(string), "AdmCmd: %s odciszy³ %s",sendername, giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);
 						format(string, sizeof(string), "Zosta³eœ odciszony przez administratora %s, popraw siê :)", sendername);
-						_MruAdmin(playa, string);
+						SendClientMessage(playa, COLOR_PANICRED, string);
 					}
 				}
 			}
@@ -26721,9 +26733,9 @@ CMD:dl(playerid, params[])
 									        GetPlayerName(playerid, sendername, sizeof(sendername));
 									        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
                                             format(string, sizeof(string), "* Da³eœ licencjê na auto graczowi %s. Koszt licencji (7 500$) zosta³ pobrany z twojego portfela.",giveplayer);
-								            _MruAdmin(playerid, string);
+								            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 									        format(string, sizeof(string), "* Urzêdnik %s da³ tobie prawo jazdy.",sendername);
-									        _MruAdmin(giveplayerid, string);
+									        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 									        format(string, sizeof(string), "* Urzêdnik %s da³ prawo jazdy %s. Urz¹d zarobi³ 7 500$.",sendername,giveplayer);
 									        SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 									        DajKase(playerid, -7500);
@@ -26773,9 +26785,9 @@ CMD:dl(playerid, params[])
 								        GetPlayerName(playerid, sendername, sizeof(sendername));
 								        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							            format(string, sizeof(string), "* Da³eœ licencjê na latanie graczowi %s. Koszt licencji (5 100 000$) zosta³ pobrany z twojego portfela.",giveplayer);
-								        _MruAdmin(playerid, string);
+								        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 								        format(string, sizeof(string), "* Urzêdnik %s da³ tobie licencjê na latanie.",sendername);
-								        _MruAdmin(giveplayerid, string);
+								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string), "* Urzêdnik %s da³ licencje na latanie %s. Urz¹d zarobi³ 5 100 000$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 								        DajKase(playerid, -5100000);
@@ -26820,9 +26832,9 @@ CMD:dl(playerid, params[])
 								        GetPlayerName(playerid, sendername, sizeof(sendername));
 								        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							            format(string, sizeof(string), "* Da³eœ licencjê na p³ywanie ³odziami graczowi %s. Koszt licencji (70 000$) zosta³ pobrany z twojego portfela.",giveplayer);
-								        _MruAdmin(playerid, string);
+								        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 								        format(string, sizeof(string), "* Urzêdnik %s da³ tobie licencjê na p³ywanie ³odziami.",sendername);
-								        _MruAdmin(giveplayerid, string);
+								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string), "* Urzêdnik %s da³ licencjê na p³ywanie %s. Urz¹d zarobi³ 70 000$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 								        DajKase(playerid, -70000);
@@ -26865,9 +26877,9 @@ CMD:dl(playerid, params[])
 							        GetPlayerName(playerid, sendername, sizeof(sendername));
 							        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						            format(string, sizeof(string), "* Da³eœ kartê wêdkarsk¹ graczowi %s. Koszt licencji (1 500$) zosta³ pobrany z twojego portfela.",giveplayer);
-							        _MruAdmin(playerid, string);
+							        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							        format(string, sizeof(string), "* Urzêdnik %s da³ tobie kartê wêdkarsk¹.",sendername);
-							        _MruAdmin(giveplayerid, string);
+							        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "* Urzêdnik %s da³ kartê wêdkarsk¹ %s. Urz¹d zarobi³ 1 500$.",sendername,giveplayer);
 									SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 							        DajKase(playerid, -1500);
@@ -26907,9 +26919,9 @@ CMD:dl(playerid, params[])
 								        GetPlayerName(playerid, sendername, sizeof(sendername));
 								        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							            format(string, sizeof(string), "* Da³eœ licencjê na broñ graczowi %s. Koszt licencji (22 500$) zosta³ pobrany z twojego portfela.",giveplayer);
-								        _MruAdmin(playerid, string);
+								        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 								        format(string, sizeof(string), "* Urzêdnik %s da³ tobie licencjê na broñ.",sendername);
-								        _MruAdmin(giveplayerid, string);
+								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string), "* Urzêdnik %s da³ licencjê na broñ %s. Urz¹d zarobi³ 22 500$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 								        DajKase(playerid, -22500);
@@ -26992,9 +27004,9 @@ CMD:startujlekcje(playerid, params[])
 					        GetPlayerName(playerid, sendername, sizeof(sendername));
 					        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					        format(string, sizeof(string), "* Zacz¹³eœ egzamin z %s.",giveplayer);
-					        _MruAdmin(playerid, string);
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Urzêdnik %s zacz¹³ z tob¹ egzamin.",sendername);
-					        _MruAdmin(giveplayerid, string);
+					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        TakingLesson[giveplayerid] = 1;
 					        DajKase(playerid, -3000);
                             Sejf_Add(FRAC_GOV, 3000);
@@ -27060,9 +27072,9 @@ CMD:zatrzymajlekcje(playerid, params[])
 			        GetPlayerName(playerid, sendername, sizeof(sendername));
 			        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 			        format(string, sizeof(string), "* Zakonczy³eœ egzamin z %s.",giveplayer);
-			        _MruAdmin(playerid, string);
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			        format(string, sizeof(string), "* Urzêdnik %s zakoñczy³ z tob¹ egzamin.",sendername);
-			        _MruAdmin(giveplayerid, string);
+			        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 			        TakingLesson[giveplayerid] = 0;
 			        PlayerInfo[giveplayerid][pCarLic] = 2;
 			    }
@@ -27111,9 +27123,9 @@ CMD:zaliczegz(playerid, params[])
 			        GetPlayerName(playerid, sendername, sizeof(sendername));
 			        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 			        format(string, sizeof(string), "* %s otrzyma³ zaliczenie egzaminu praktycznego.",giveplayer);
-			        _MruAdmin(playerid, string);
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			        format(string, sizeof(string), "* Gratulacje! Urzêdnik %s wystawi³ ci ocenê poztywna z egzaminu! IdŸ do okienka odebraæ prawo jazdy!",sendername);
-			        _MruAdmin(giveplayerid, string);
+			        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 			        TakingLesson[giveplayerid] = 0;
 			        PlayerInfo[giveplayerid][pCarLic] = 3;
 			    }
@@ -27387,9 +27399,9 @@ CMD:rozwod(playerid, params[])
 					if(strcmp(dstring ,wstring, true ) == 0 )
 					{
 					    format(string, sizeof(string), "* Wys³a³eœ papiery rozwodowe do %s.", giveplayer);
-						_MruAdmin(playerid, string);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* %s wys³a³ Ci papiery rozwodowe (wpisz /akceptuj rozwod) aby akceptowaæ.", sendername);
-						_MruAdmin(giveplayerid, string);
+						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				        DivorceOffer[giveplayerid] = playerid;
 				        return 1;
 					}
@@ -27455,9 +27467,9 @@ CMD:slub(playerid, params[])
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Oœwiadczy³eœ siê %s.", giveplayer);
-					_MruAdmin(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* %s chcê wzi¹æ z tob¹ œlub (wpisz /akceptuj slub) aby zaakceptowaæ.", sendername);
-					_MruAdmin(giveplayerid, string);
+					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 			        ProposeOffer[giveplayerid] = playerid;
 				}
 				else
@@ -27502,9 +27514,9 @@ CMD:swiadek(playerid, params[])
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Zaproponowa³eœ %s aby by³ œwiadkiem na twoim œlubie.", giveplayer);
-					_MruAdmin(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* %s zaproponowa³ abyœ by³ œwiadkiem na jego œlubie (wpisz /akceptuj swiadek) aby zaakceptowaæ.", sendername);
-					_MruAdmin(giveplayerid, string);
+					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 			        MarryWitnessOffer[giveplayerid] = playerid;
 				}
 				else
@@ -27832,11 +27844,11 @@ CMD:podatek(playerid, params[])
 			return 1;
 		}
 
-		if(moneys < 1 || moneys > 5000) { SendClientMessage(playerid, COLOR_GREY, "Kwota podatku od 1 do 5000!"); return 1; }
+		if(moneys < 1 || moneys > 5000) { SendClientMessage(playerid, COLOR_GREY, "   Kwota podatku od 1 do 5000 !"); return 1; }
 		Tax = moneys;
 		SaveStuff();
 		format(string, sizeof(string), "* Podatek to teraz $%d na gracza.", Tax);
-		_MruAdmin(playerid, string);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
     }
     return 1;
 }
@@ -27933,9 +27945,9 @@ CMD:stanowe(playerid, params[])
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						format(string, sizeof(string), "* Uwiêzi³eœ %s w Wiêzieniu stanowym.", giveplayer);
-						_MruAdmin(playerid, string);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
-						_MruAdmin(giveplayerid, string);
+						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 						JailDeMorgan(giveplayerid);
 						ResetPlayerWeapons(giveplayerid);
 						UsunBron(giveplayerid);//usun bron
@@ -28343,7 +28355,7 @@ CMD:lotto(playerid, params[])
 
 		if(lottonr < 1 || lottonr > 80) { sendTipMessageEx(playerid, COLOR_GREY, "Numer lotto od 1 do 80 !"); return 1; }
 		format(string, sizeof(string), "* Kupi³eœ los lotto z numerem: %d.", lottonr);
-		_MruAdmin(playerid, string);
+		sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
 		DajKase(playerid, - 1500);
 		PlayerInfo[playerid][pLottoNr] = lottonr;
     }
@@ -28387,9 +28399,9 @@ CMD:zabierz(playerid, params[])
 						    GetPlayerName(playerid, sendername, sizeof(sendername));
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					        format(string, sizeof(string), "* Zabra³eœ %s prawo jazdy.", giveplayer);
-					        _MruAdmin(playerid, string);
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ Ci prawo jazdy.", sendername);
-					        _MruAdmin(giveplayerid, string);
+					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ %s prawo jazdy.", sendername, giveplayer);
 					        printf(string);
 					        PlayerInfo[giveplayerid][pCarLic] = 0;
@@ -28418,9 +28430,9 @@ CMD:zabierz(playerid, params[])
 						    GetPlayerName(playerid, sendername, sizeof(sendername));
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					        format(string, sizeof(string), "* Zabra³eœ %s Licencje na latanie.", giveplayer);
-					        _MruAdmin(playerid, string);
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ Ci licencjê na latanie.", sendername);
-					        _MruAdmin(giveplayerid, string);
+					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na latanie.", sendername, giveplayer);
 					        printf(string);
 					        PlayerInfo[giveplayerid][pFlyLic] = 0;
@@ -28449,9 +28461,9 @@ CMD:zabierz(playerid, params[])
 						    GetPlayerName(playerid, sendername, sizeof(sendername));
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					        format(string, sizeof(string), "* Zabra³eœ %s Licencjê na Broñ.", giveplayer);
-					        _MruAdmin(playerid, string);
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ Ci licencjê na broñ.", sendername);
-					        _MruAdmin(giveplayerid, string);
+					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na broñ.", sendername, giveplayer);
 					        printf(string);
 					        PlayerInfo[giveplayerid][pGunLic] = 0;
@@ -28480,9 +28492,9 @@ CMD:zabierz(playerid, params[])
 						    GetPlayerName(playerid, sendername, sizeof(sendername));
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					        format(string, sizeof(string), "* Zabra³eœ %s Licencje na p³ywanie ³odziami.", giveplayer);
-					        _MruAdmin(playerid, string);
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ Ci twoj¹ licencjê na p³ywanie ³odziami.", sendername);
-					        _MruAdmin(giveplayerid, string);
+					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na lodz.", sendername, giveplayer);
 					        printf(string);
 					        PlayerInfo[giveplayerid][pBoatLic] = 0;
@@ -28511,9 +28523,9 @@ CMD:zabierz(playerid, params[])
 						    GetPlayerName(playerid, sendername, sizeof(sendername));
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					        format(string, sizeof(string), "* Zabra³eœ %s Bronie.", giveplayer);
-					        _MruAdmin(playerid, string);
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ twoj¹ broñ.", sendername);
-					        _MruAdmin(giveplayerid, string);
+					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ %s broñ.", sendername, giveplayer);
 					        printf(string);
 					        ResetPlayerWeapons(giveplayerid);
@@ -28543,9 +28555,9 @@ CMD:zabierz(playerid, params[])
 						    GetPlayerName(playerid, sendername, sizeof(sendername));
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						    format(string, sizeof(string), "* Zabra³eœ %s dragi.", giveplayer);
-					        _MruAdmin(playerid, string);
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ twoje narkotyki.", sendername);
-					        _MruAdmin(giveplayerid, string);
+					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ %s dragi %d.", sendername, giveplayer, PlayerInfo[giveplayerid][pDrugs]);
 					        printf(string);
 					        PlayerInfo[giveplayerid][pDrugs] = 0;
@@ -28574,9 +28586,9 @@ CMD:zabierz(playerid, params[])
 						    GetPlayerName(playerid, sendername, sizeof(sendername));
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						    format(string, sizeof(string), "* Zabra³eœ %s Materia³y.", giveplayer);
-					        _MruAdmin(playerid, string);
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ twoje Materia³y.", sendername);
-					        _MruAdmin(giveplayerid, string);
+					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string), "* Oficer %s zabra³ %s matsy %d.", sendername, giveplayer, PlayerInfo[giveplayerid][pMats]);
 					        printf(string);
 					        PlayerInfo[giveplayerid][pMats] = 0;
@@ -28858,7 +28870,7 @@ CMD:ustawmistrz(playerid, params[])
 					Titel[TitelLoses] = PlayerInfo[giveplayerid][pLoses];
 					SaveBoxer();
 					format(string, sizeof(string), "* Mianowa³eœ %s nowym mistrzem bokserskim.", giveplayer);
-					_MruAdmin(playerid, string);
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
 	            }
 	        }
 	        else
@@ -28976,9 +28988,9 @@ CMD:boks(playerid, params[])
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Oferujesz walkê boksersk¹ %s.", giveplayer);
-					_MruGracz(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* Boxer %s chce z tob¹ walczyæ (wpisz /akceptuj box) aby akceptowaæ.", sendername);
-					_MruGracz(giveplayerid, string);
+					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 			        BoxOffer[giveplayerid] = playerid;
 				}
 				else
@@ -29269,9 +29281,9 @@ CMD:zwiaz(playerid, params[])
 					        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 					        format(string, sizeof(string), "* Zosta³eœ zwi¹zany przez %s.", sendername);
-							_MruGracz(giveplayerid, string);
+							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Zwi¹za³eœ %s tak aby nie móg³ siê rozwi¹zaæ.", giveplayer);
-							_MruGracz(playerid, string);
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* %s wyci¹ga linê i zwi¹zuje %s aby nigdzie nie uciek³.", sendername ,giveplayer);
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							GameTextForPlayer(giveplayerid, "~r~Zwiazany", 2500, 3);
@@ -29342,9 +29354,9 @@ CMD:rozwiaz(playerid, params[])
 						    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 						    format(string, sizeof(string), "* Zosta³eœ odwi¹zany przez %s.", sendername);
-							_MruGracz(giveplayerid, string);
+							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Odwi¹za³eœ %s.", giveplayer);
-							_MruGracz(playerid, string);
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							GameTextForPlayer(giveplayerid, "~g~Wolnosc", 2500, 3);
 							TogglePlayerControllable(giveplayerid, 1);
 							PlayerTied[giveplayerid] = 0;
@@ -31124,7 +31136,7 @@ CMD:materialy(playerid, params[])
 				if(kaska[playerid] > price)
 				{
 				    format(string, sizeof(string), "* Kupi³eœ %d paczek materia³ów za $%d jedŸ do fabryki materia³ów. Dok³adn¹ lokalizacjê musisz ustaliæ sam.", moneys, price);
-				    _MruGracz(playerid, string);
+				    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				    ZabierzKase(playerid, price);
 				    MatsHolding[playerid] = moneys;
 				    SetPlayerCheckpoint(playerid, 2218.6000976563,-2228,13.5, 30);
@@ -31161,7 +31173,7 @@ CMD:materialy(playerid, params[])
                             new poziom = PlayerInfo[playerid][pMiserPerk];
                             PlayerInfo[playerid][pMats] += poziom*30;
                             format(string, sizeof(string), "Dziêki ulepszeniu MATSIARZ otrzymujesz dodatkowo %d mats", poziom*30);
-                            _MruGracz(playerid, string);
+                            sendTipMessage(playerid, string);
                         }
 			            PlayerInfo[playerid][pMats] += payout;
 			            MatsHolding[playerid] = 0;
@@ -31888,7 +31900,7 @@ CMD:wez(playerid, params[])
 			    if(kaska[playerid] > price)
 			    {
 			        format(string, sizeof(string), "* Kupi³eœ %d gram dragów za $%d.", ammount, price);
-					_MruGracz(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			        ZabierzKase(playerid, price);
 					PlayerInfo[playerid][pDrugs] = ammount;
 			    }
@@ -31910,7 +31922,7 @@ CMD:wez(playerid, params[])
 			{
 			    new price = 20 * 40;
 			    format(string, sizeof(string), "* Wzi¹³eœ kanister z 20% paliwa za $%d",price);
-			    _MruGracz(playerid, string);
+			    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			    PlayerInfo[playerid][pFuel] = 20;
 				ZabierzKase(playerid, price);
 				return 1;
@@ -32569,9 +32581,9 @@ CMD:ochrona(playerid, params[])
 			    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 			    format(string, sizeof(string), "* Oferujesz ochronê %s za $%d.", giveplayer, money);
-				_MruGracz(playerid, string);
-				format(string, sizeof(string), "* Ochroniarz %s oferuje ci kamizelkê za $%d, (wpisz /akceptuj ochrona) aby akceptowaæ", sendername, money);
-				_MruGracz(giveplayerid, string);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Ochroniarz %s oferuje ci kamielkê za $%d, (wpisz /akceptuj ochrona) aby akceptowaæ", sendername, money);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				GuardOffer[giveplayerid] = playerid;
 				GuardPrice[giveplayerid] = money;
 
@@ -32689,9 +32701,9 @@ CMD:wypusc(playerid, params[])
 					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia.", giveplayer);
-					_MruGracz(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s.", sendername);
-					_MruGracz(giveplayerid, string);
+					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					ApprovedLawyer[playerid] = 0;
 					WantLawyer[giveplayerid] = 0;
 					CallLawyer[giveplayerid] = 0;
@@ -32782,7 +32794,7 @@ CMD:anuluj(playerid, params[])
 					        {
 					            TaxiAccepted[i] = 999;
 					            GameTextForPlayer(i, "~w~Klient~n~~r~Anulowal wezwanie", 5000, 1);
-					            _MruGracz(TaxiCall, "Klient Anulowal wezwanie");
+					            SendClientMessage(TaxiCall, COLOR_RED, "Klient Anulowal wezwanie");
 					            TaxiCallTime[i] = 0;
 					            DisablePlayerCheckpoint(i);
 					            DisablePlayerCheckpoint(TaxiCall);
@@ -32926,9 +32938,9 @@ CMD:akceptuj(playerid, params[])
                                     GetPlayerName(dawacz, giveplayer, sizeof(giveplayer));
                                     GetPlayerName(playerid, sendername, sizeof(sendername));
                                     format(string, sizeof(string), "* Kupi³eœ neony od %s za 3 000 000$. Wybierz kolor neonów!", giveplayer);
-                                    _MruGracz(playerid, string);
+                                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "* %s akceptowa³ sprzeda¿ neonów, zarabiasz 25 000$.", sendername);
-                                    _MruGracz(dawacz, string);
+                                    SendClientMessage(dawacz, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "%s kupi³ od %s neony do auta %s (UID auta:%d)", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
                                     PayLog(string);
                                     DajKase(playerid, -3000000);
@@ -33000,9 +33012,9 @@ CMD:akceptuj(playerid, params[])
                             GetPlayerName(GraczDajacy[playerid], giveplayer, sizeof(giveplayer));
                             GetPlayerName(playerid, sendername, sizeof(sendername));
                             format(string, sizeof(string), "* Akceptowa³eœ sprzeda¿ %s od %s za %d. Wpisz /autopomoc aby zobaczyæ nowe komendy!", VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczDajacy[playerid]))-400], giveplayer, CenaDawanegoAuta[playerid]);
-                            _MruGracz(playerid, string);
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                             format(string, sizeof(string), "* %s akceptowa³ sprzeda¿ twojego %s, zarabiasz %d.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczDajacy[playerid]))-400], CenaDawanegoAuta[playerid]);
-                            _MruGracz(GraczDajacy[playerid], string);
+                            SendClientMessage(GraczDajacy[playerid], COLOR_LIGHTBLUE, string);
 
                             format(string, sizeof(string), "%s kupi³ od %s auto marki %s (ID pliku auta:%d) za %d$", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczDajacy[playerid]))-400], CarData[IDAuta[playerid]][c_UID], CenaDawanegoAuta[playerid]);
 
@@ -33084,9 +33096,9 @@ CMD:akceptuj(playerid, params[])
                             GetPlayerName(GraczWymieniajacy[playerid], giveplayer, sizeof(giveplayer));
                             GetPlayerName(playerid, sendername, sizeof(sendername));
                             format(string, sizeof(string), "* Akceptowa³eœ wymianê %s od %s za %d. Wpisz /autopomoc aby zobaczyæ nowe komendy!", VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczWymieniajacy[playerid]))-400], giveplayer, CenaWymienianegoAuta[playerid]);
-                            _MruGracz(playerid, string);
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                             format(string, sizeof(string), "* %s akceptowa³ wymianê twojego %s, zarabiasz %d.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczWymieniajacy[playerid]))-400], CenaWymienianegoAuta[playerid]);
-                            _MruGracz(GraczWymieniajacy[playerid], string);
+                            SendClientMessage(GraczWymieniajacy[playerid], COLOR_LIGHTBLUE, string);
 
                             format(string, sizeof(string), "%s wymieni³ z %s auto marki %s (ID pliku auta:%d) za %s (ID pliku auta:%d) z dop³at¹ %d$", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczWymieniajacy[playerid]))-400], CarData[IDAuta[playerid]][c_UID], VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_UID], CenaDawanegoAuta[playerid]);
 
@@ -33131,9 +33143,9 @@ CMD:akceptuj(playerid, params[])
                         GetPlayerName(DivorceOffer[playerid], giveplayer, sizeof(giveplayer));
                         GetPlayerName(playerid, sendername, sizeof(sendername));
                         format(string, sizeof(string), "* Akceptowa³eœ wniosek %s do rozwodu.", giveplayer);
-                        _MruGracz(playerid, string);
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         format(string, sizeof(string), "* %s akceptowa³ twój wniosek o rozwód.", sendername);
-                        _MruGracz(DivorceOffer[playerid], string);
+                        SendClientMessage(DivorceOffer[playerid], COLOR_LIGHTBLUE, string);
                         ClearMarriage(playerid);
                         ClearMarriage(DivorceOffer[playerid]);
                         PlayerInfo[playerid][pPbiskey] = 255;
@@ -33163,9 +33175,9 @@ CMD:akceptuj(playerid, params[])
                         GetPlayerName(MarryWitnessOffer[playerid], giveplayer, sizeof(giveplayer));
                         GetPlayerName(playerid, sendername, sizeof(sendername));
                         format(string, sizeof(string), "* Akceptowa³eœ proœbê %s aby byæ œwiadkiem.", giveplayer);
-                        _MruGracz(playerid, string);
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         format(string, sizeof(string), "* %s zaakceptowa³ twoj¹ proœbê aby by³ œwiadkiem.", sendername);
-                        _MruGracz(MarryWitnessOffer[playerid], string);
+                        SendClientMessage(MarryWitnessOffer[playerid], COLOR_LIGHTBLUE, string);
                         MarryWitness[MarryWitnessOffer[playerid]] = playerid;
                         MarryWitnessOffer[playerid] = 999;
                         return 1;
@@ -33208,9 +33220,9 @@ CMD:akceptuj(playerid, params[])
                                 GetPlayerName(ProposeOffer[playerid], giveplayer, sizeof(giveplayer));
                                 GetPlayerName(playerid, sendername, sizeof(sendername));
                                 format(string, sizeof(string), "* Akceptowa³eœ œlub z %s.", giveplayer);
-                                _MruGracz(playerid, string);
+                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 format(string, sizeof(string), "* %s Akceptowa³a œlub z tob¹.", sendername);
-                                _MruGracz(ProposeOffer[playerid], string);
+                                SendClientMessage(ProposeOffer[playerid], COLOR_LIGHTBLUE, string);
                                 format(string, sizeof(string), "Ksi¹dz: %s czy chcesz aby %s zosta³ twoim mê¿em? (wpisz 'tak', cokolwiek innego anuluje œlub)", sendername, giveplayer);
                                 SendClientMessage(playerid, COLOR_WHITE, string);
                                 MarriageCeremoney[playerid] = 1;
@@ -33255,19 +33267,19 @@ CMD:akceptuj(playerid, params[])
                             GetPlayerName(playerid, sendername, sizeof(sendername));
                             new karne = GetPVarInt(playerid, "mandat_punkty");
                             format(string, sizeof(string), "* Zap³aci³eœ mandat w wysokoœci $%d Policjantowi %s.", TicketMoney[playerid], giveplayer);
-                            _MruGracz(playerid, string);
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                             if(karne>0) {
                                 format(string, sizeof(string), "* Dosta³eœ te¿ %d PK", karne);
-                                _MruGracz(playerid, string);
+                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 PlayerInfo[playerid][pPK] += karne;
                                 if(PlayerInfo[playerid][pPK] > 24) {
                                     format(string, sizeof(string), "* Przekroczy³eœ limit 24 PK. Tracisz prawo jazdy na 1 DZIEÑ");
-                                    _MruGracz(playerid, string);
+                                    SendClientMessage(playerid, COLOR_RED, string);
                                     //86400
                                     PlayerInfo[playerid][pPK] = 0;
                                     PlayerInfo[playerid][pCarLic] = gettime()+86400;
                                     format(string, sizeof(string), "* %s straci³ prawo jazdy z powodu przekroczenia limitu 24 PK", sendername);
-                                    _MruGracz(TicketOffer[playerid], string);
+                                    SendClientMessage(TicketOffer[playerid], COLOR_RED, string);
                                 }
                             }
 
@@ -33278,7 +33290,7 @@ CMD:akceptuj(playerid, params[])
                             new depo2 = floatround(((TicketMoney[playerid]/100) * 80), floatround_round); //sejf
                             new depo3 = floatround(((TicketMoney[playerid]/100) * 20), floatround_round); //pd
                             format(string, sizeof(string), "* %s zap³aci³ mandat $%d. Otrzymujesz $%d", sendername, TicketMoney[playerid], depo3);
-                            _MruGracz(TicketOffer[playerid], string);
+                            SendClientMessage(TicketOffer[playerid], COLOR_LIGHTBLUE, string);
                             DajKase(TicketOffer[playerid], depo3);
                             new ktodal = TicketOffer[playerid];
                             Sejf_Add(PlayerInfo[ktodal][pMember], depo2);
@@ -33335,9 +33347,9 @@ CMD:akceptuj(playerid, params[])
                         mypoints = 30;
                     }
                     format(string, sizeof(string), "* Akceptowa³eœ walkê boksersk¹ z %s, zaczynasz z %d Punktami ¯ycia.",giveplayer,mypoints);
-                    _MruGracz(playerid, string);
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                     format(string, sizeof(string), "* %s akceptowa³ walkê boksersk¹ z tob¹, zaczynasz z %d Punktami ¯ycia.",sendername,points);
-                    _MruGracz(BoxOffer[playerid], string);
+                    SendClientMessage(BoxOffer[playerid], COLOR_LIGHTBLUE, string);
                     SetPlayerHealth(playerid, mypoints);
                     SetPlayerHealth(BoxOffer[playerid], points);
                     SetPlayerInterior(playerid, 5); SetPlayerInterior(BoxOffer[playerid], 5);
@@ -33410,9 +33422,9 @@ CMD:akceptuj(playerid, params[])
                     GetPlayerName(playerid, sendername, sizeof(sendername));
                     GetPlayerName(TaxiCall, giveplayer, sizeof(giveplayer));
                     format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, jedŸ do czerwonego markera.",giveplayer);
-                    _MruGracz(playerid, string);
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                     format(string, sizeof(string), "* Taksówkarz %s akceptowa³ twoje zlecenie, czekaj na niego i nie ruszaj siê z miejsca.",sendername);
-                    _MruGracz(TaxiCall, string);
+                    SendClientMessage(TaxiCall, COLOR_LIGHTBLUE, string);
                     GameTextForPlayer(playerid, "~w~Jedz do~n~~r~czerwonego punktu", 5000, 1);
                     TaxiCallTime[playerid] = 1;
                     TaxiAccepted[playerid] = TaxiCall;
@@ -33456,9 +33468,9 @@ CMD:akceptuj(playerid, params[])
                     GetPlayerName(playerid, sendername, sizeof(sendername));
                     GetPlayerName(HeliCall, giveplayer, sizeof(giveplayer));
                     format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, leæ do czerwonego markera.",giveplayer);
-                    _MruGracz(playerid, string);
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                     format(string, sizeof(string), "* Pilot %s akceptowa³ twoje zlecenie, czekaj na niego i nie ruszaj siê z miejsca.",sendername);
-                    _MruGracz(HeliCall, string);
+                    SendClientMessage(HeliCall, COLOR_LIGHTBLUE, string);
                     GameTextForPlayer(playerid, "~w~Lec do~n~~r~czerwonego punktu", 5000, 1);
                     TaxiCallTime[playerid] = 1;
                     TaxiAccepted[playerid] = HeliCall;
@@ -33501,9 +33513,9 @@ CMD:akceptuj(playerid, params[])
                     GetPlayerName(playerid, sendername, sizeof(sendername));
                     GetPlayerName(BusCall, giveplayer, sizeof(giveplayer));
                     format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, jedŸ do czerwonego markera.",giveplayer);
-                    _MruGracz(playerid, string);
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                     format(string, sizeof(string), "* Kierowca Autobusu %s akceptowa³ twoje wezwanie, czekaj na niego i nie ruszaj siê z miejsca.",sendername);
-                    _MruGracz(BusCall, string);
+                    SendClientMessage(BusCall, COLOR_LIGHTBLUE, string);
                     new Float:X,Float:Y,Float:Z;
                     GetPlayerPos(BusCall, X, Y, Z);
                     SetPlayerCheckpoint(playerid, X, Y, Z, 5);
@@ -33541,10 +33553,10 @@ CMD:akceptuj(playerid, params[])
                         GetPlayerName(playerid, sendername, sizeof(sendername));
                         GetPlayerName(MedicCall, giveplayer, sizeof(giveplayer));
                         format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, masz 30 sekund na dojechanie tam.",giveplayer);
-                        _MruGracz(playerid, string);
-                        _MruGracz(playerid, "* Po 30 sekundach marker zniknie.");
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Po 30 sekundach marker zniknie.");
                         format(string, sizeof(string), "* Medyk %s akceptowa³ twoje zlecenie, NIE RUSZAJ SIÊ z miejsca.",sendername);
-                        _MruGracz(MedicCall, string);
+                        SendClientMessage(MedicCall, COLOR_LIGHTBLUE, string);
                         new Float:X,Float:Y,Float:Z;
                         GetPlayerPos(MedicCall, X, Y, Z);
                         SetPlayerCheckpoint(playerid, X, Y, Z, 5);
@@ -33590,10 +33602,10 @@ CMD:akceptuj(playerid, params[])
                     GetPlayerName(playerid, sendername, sizeof(sendername));
                     GetPlayerName(MechanicCall, giveplayer, sizeof(giveplayer));
                     format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, masz 30 sekund aby tam dojechaæ.",giveplayer);
-                    _MruGracz(playerid, string);
-                    _MruGracz(playerid, "* Po 30 sekundach marker zniknie.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Po 30 sekundach marker zniknie.");
                     format(string, sizeof(string), "* Mechanik %s akceptowa³ twoje zlecenie, czekaj i nie ruszaj siê z miejsca.",sendername);
-                    _MruGracz(MechanicCall, string);
+                    SendClientMessage(MechanicCall, COLOR_LIGHTBLUE, string);
                     new Float:X,Float:Y,Float:Z;
                     GetPlayerPos(MechanicCall, X, Y, Z);
                     SetPlayerCheckpoint(playerid, X, Y, Z, 5);
@@ -33624,8 +33636,8 @@ CMD:akceptuj(playerid, params[])
                         return 1;
                     }
                 }
-                _MruGracz(playerid, "* Podpisa³eœ umowe na 2,5 godziny, zaczynasz now¹ pracê.");
-                _MruGracz(playerid, "* Gratulujemy nowej pracy, wpisz /pomoc aby zobaczyæ nowe komendy.");
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Podpisa³eœ umowe na 2,5 godziny, zaczynasz now¹ pracê.");
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Gratulujemy nowej pracy, wpisz /pomoc aby zobaczyæ nowe komendy.");
                 PlayerInfo[playerid][pJob] = GettingJob[playerid];
                 if(GettingJob[playerid] == 14)
                 {
@@ -33696,9 +33708,9 @@ CMD:akceptuj(playerid, params[])
                         else if(level >= 401)
                         { fuel = 100; }
                         format(string, sizeof(string), "* Twój pojazd zosta³ dotankowany o %d% przez mechanika %s, koszt $%d.",fuel,giveplayer,RefillPrice[playerid]);
-                        _MruGracz(playerid, string);
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         format(string, sizeof(string), "* Zatankowa³eœ pojazd %s o %d% paliwa, doliczono ci $%d do wyp³aty.",sendername,fuel,RefillPrice[playerid]);
-                        _MruGracz(RefillOffer[playerid], string);
+                        SendClientMessage(RefillOffer[playerid], COLOR_LIGHTBLUE, string);
                         format(string, sizeof(string),"* Mechanik %s wyci¹ga kanister i dotankowuje auto %s.",giveplayer,VehicleNames[GetVehicleModel(vehicleid)-400]);
                         ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                         format(string, sizeof(string), "* Bak nape³niony o %d jednostek paliwa (( %s ))", fuel, giveplayer);
@@ -33738,8 +33750,8 @@ CMD:akceptuj(playerid, params[])
                 {
                     if (ProxDetectorS(5.0, playerid, LiveOffer[playerid]))
                     {
-                        _MruGracz(playerid, "* Wywiad rozpoczêty, wszystko co teraz powiesz bêdzie na antenie.");
-                        _MruGracz(LiveOffer[playerid], "* Rozpocz¹³eœ wywiad. Aby go zakoñczyæ ponownie wpisz /wywiad.");
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wywiad rozpoczêty, wszystko co teraz powiesz bêdzie na antenie.");
+                        SendClientMessage(LiveOffer[playerid], COLOR_LIGHTBLUE, "* Rozpocz¹³eœ wywiad. Aby go zakoñczyæ ponownie wpisz /wywiad.");
                         TalkingLive[playerid] = LiveOffer[playerid];
                         TalkingLive[LiveOffer[playerid]] = playerid;
                         HidePM[playerid] = 3;
@@ -33816,9 +33828,9 @@ CMD:akceptuj(playerid, params[])
                         GetPlayerName(GuardOffer[playerid], giveplayer, sizeof(giveplayer));
                         GetPlayerName(playerid, sendername, sizeof(sendername));
                         format(string, sizeof(string), "* Akceptowa³eœ ochronê, zap³aci³eœ $%d ochroniarzowi %s.",GuardPrice[playerid],giveplayer);
-                        _MruGracz(playerid, string);
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         format(string, sizeof(string), "* %s akceptowa³ twoj¹ oferte ochrony, $%d zostanie doliczone do twojej wyp³aty.",sendername,GuardPrice[playerid]);
-                        _MruGracz(GuardOffer[playerid], string);
+                        SendClientMessage(GuardOffer[playerid], COLOR_LIGHTBLUE, string);
                         PlayerInfo[GuardOffer[playerid]][pPayCheck] += GuardPrice[playerid];
                         ZabierzKase(playerid, GuardPrice[playerid]);
                         SetPlayerArmour(playerid, 90);
@@ -33856,10 +33868,10 @@ CMD:akceptuj(playerid, params[])
 				            GetPlayerName(DrugOffer[playerid], giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 							format(string, sizeof(string), "* Kupi³eœ %d gram za $%d od Dilera Dragów %s. Aby je wzi¹æ wpisz /wezdragi.",DrugGram[playerid],DrugPrice[playerid],giveplayer);
-							_MruGracz(playerid, string);
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* %s kupi³ od ciebie %d gram, $%d zostanie dodane do twojej wyp³aty.",sendername,DrugGram[playerid],DrugPrice[playerid]);
                             SetPVarInt(DrugOffer[playerid], "wydragowany", 60);
-                            _MruGracz(DrugOffer[playerid], string);
+                            SendClientMessage(DrugOffer[playerid], COLOR_LIGHTBLUE, string);
                             //
                             format(string, sizeof(string), "%s kupi³ dragi za $%d od %s", sendername, DrugPrice[playerid], giveplayer);
                             ABroadCast(COLOR_YELLOW,string,1);
@@ -33917,10 +33929,10 @@ CMD:akceptuj(playerid, params[])
 							GetPlayerName(SexOffer[playerid], giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 							format(string, sizeof(string), "* Uprawiasz ostry sex z dziwk¹ %s, za $%d.", giveplayer, SexPrice[playerid]);
-							_MruGracz(playerid, string);
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                             SetPVarInt(SexOffer[playerid], "wysekszony", 120);
 							format(string, sizeof(string), "* %s uprawia z tob¹ sex. $%d zostanie dodane do twojej wyp³aty.", sendername, SexPrice[playerid]);
-							_MruGracz(SexOffer[playerid], string);
+							SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, string);
 							PlayerInfo[SexOffer[playerid]][pPayCheck] += SexPrice[playerid];
 							PlayerInfo[SexOffer[playerid]][pSexSkill] ++;
                             //
@@ -34001,14 +34013,14 @@ CMD:akceptuj(playerid, params[])
 			      				}
 								else
 								{
-								    _MruGracz(SexOffer[playerid], "* Ten gracz u¿ywa kondom.");
-								    _MruGracz(playerid, "* U¿y³eœ kondom.");
+								    SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Ten gracz u¿ywa kondom.");
+								    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* U¿y³eœ kondom.");
 								    Condom[playerid] --;
 								}
 							}
 							else
 							{
-							    _MruGracz(SexOffer[playerid], "* Ten gracz zosta³ zara¿ony drog¹ p³ciow¹.");
+							    SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Ten gracz zosta³ zara¿ony drog¹ p³ciow¹.");
 							    return 1;
 							}
 							SexOffer[playerid] = 999;
@@ -34147,9 +34159,9 @@ CMD:akceptuj(playerid, params[])
                     Dom[dom][hPW] ++;
                     PlayerInfo[playerid][pWynajem] = dom;
                     format(string, sizeof(string), "Wynaj¹³eœ pokój w tym domu. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom");
-                    _MruGracz(playerid, string);
+                    SendClientMessage(playerid, COLOR_NEWS, string);
                     format(string, sizeof(string), "%s wynaj¹³ pokój w twoim domu!", sendername);
-                    _MruGracz(WynajemOffer[playerid], string);
+                    SendClientMessage(WynajemOffer[playerid], COLOR_NEWS, string);
                     WynajemOffer[playerid] = 999;
                     return 1;
                 }
@@ -34177,10 +34189,10 @@ CMD:akceptuj(playerid, params[])
                         GetPlayerName(DomOffer[playerid], giveplayer, sizeof(giveplayer));
                         GetPlayerName(playerid, sendername, sizeof(sendername));
                         format(string, sizeof(string), "Sprzeda³eœ dom graczowi %s za %d$.", sendername, DomCena[playerid]);
-                        _MruGracz(DomOffer[playerid], string);
+                        SendClientMessage(DomOffer[playerid], COLOR_NEWS, string);
                         format(string, sizeof(string), "Kupi³eœ dom od %s za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom", giveplayer, DomCena[playerid]);
-                        _MruGracz(playerid, string);
-                        _MruGracz(playerid, "UWAGA! Pamiêtaj aby zmieniæ kod do sejfu !!!!!!");
+                        SendClientMessage(playerid, COLOR_NEWS, string);
+                        SendClientMessage(playerid, COLOR_PANICRED, "UWAGA! Pamiêtaj aby zmieniæ kod do sejfu !!!!!!");
                         Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = sendername;
                         PlayerInfo[playerid][pDom] = PlayerInfo[DomOffer[playerid]][pDom];
                         PlayerInfo[DomOffer[playerid]][pDom] = 0;
@@ -34244,9 +34256,9 @@ CMD:tankowanie(playerid, params[])
 							    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 								GetPlayerName(playerid, sendername, sizeof(sendername));
 							    format(string, sizeof(string), "* Oferujesz %s zatankowanie jego auta za $%d .",giveplayer,money);
-								_MruGracz(playerid, string);
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 								format(string, sizeof(string), "* Mechanik %s proponuje ci dotankowanie twojego auta za $%d, (wpisz /akceptuj tankowanie) aby akceptowaæ.",sendername,money);
-								_MruGracz(playa, string);
+								SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 								RefillOffer[playa] = playerid;
 								RefillPrice[playa] = money;
 								SpamujeMechanik[playerid] = 1;
@@ -34368,10 +34380,10 @@ CMD:wezwijwoz(playerid)
 	        new Float:plocx,Float:plocy,Float:plocz;
             GetPlayerPos(playerid, plocx, plocy, plocz);
 			SetVehiclePos(CarID[playerid],plocx,plocy+4, plocz);
-			_MruGracz(playerid, "* Kupiony wóz przywo³any.");
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Kupiony wóz przywo³any.");
 			CarCalls[playerid] -= 1;
 			format(string, sizeof(string), "* Mo¿esz wezwaæ swój wóz jeszcze %d razy.", CarCalls[playerid]);
-			_MruGracz(playerid, string);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	    }
 	    else
 	    {
@@ -35004,9 +35016,9 @@ CMD:wywal(playerid, params[])
 						GetPlayerName(playerid,PName,sizeof(PName));
 						GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 						format(string, sizeof(string), "* Wywali³eœ %s z pojazdu!", giveplayer);
-						_MruGracz(playerid, string);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* Zosta³eœ wywalony z pojazdu przez %s !", PName);
-						_MruGracz(playa, string);
+						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						RemovePlayerFromVehicleEx(playa);
 					}
 					else
@@ -35065,9 +35077,9 @@ CMD:sex(playerid, params[])
 						    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 							format(string, sizeof(string), "* Oferujesz %s uprawianie sexu z tob¹ za $%d.", giveplayer, money);
-							_MruGracz(playerid, string);
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Prostytutka %s oferuje uprawianie sexu z ni¹ za $%d (wpisz /akceptuj sex) aby siê zgodziæ.", sendername, money);
-							_MruGracz(giveplayerid, string);
+							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				            SexOffer[giveplayerid] = playerid;
 				            SexPrice[giveplayerid] = money;
 			            }
@@ -35579,7 +35591,7 @@ CMD:kaucja(playerid)
 		        {
                     GetPlayerName(playerid, sendername, sizeof(sendername));
 		            format(string, sizeof(string), "Wp³aci³eœ za siebie kaucje $%d", JailPrice[playerid]);
-					_MruGracz(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "%s wp³aci³ za siebie kaucjê %d", sendername, JailPrice[playerid]);
 					SendTeamMessage(3, COLOR_ALLDEPT, string);
 					SendTeamMessage(2, COLOR_ALLDEPT, string);
@@ -35647,9 +35659,9 @@ CMD:wyczysc(playerid, params[])
 					    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						format(string, sizeof(string), "* Oczyœci³eœ z zarzutów %s.", giveplayer);
-						_MruGracz(playerid, string);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* Policjant %s oczyœci³ ciê z zarzutów (Wanted Level).", sendername);
-						_MruGracz(giveplayerid, string);
+						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "HQ: Polijant %s oczyœci³ z zarzutów %s",sendername, giveplayer);
 						SendFamilyMessage(1, COLOR_PANICRED, string);
 						format(string, sizeof(string), "HQ: Polijant %s oczyœci³ z zarzutów %s",sendername, giveplayer);
@@ -35811,15 +35823,15 @@ CMD:mandacik(playerid, params[])
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Da³eœ %s mandat $%d (%dSD), %d PK, powód: %s", giveplayer, moneys, stawki, karne, (result));
-					_MruGracz(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* Policjant %s da³ Tobie mandat w wysokoœci $%d (%d0\% twojej wyp³aty), powód: %s", sendername, moneys, stawki, (result));
-					_MruGracz(giveplayerid, string);
+					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                     if(karne > 0)
                     {
                         format(string, sizeof(string), "* Mandat zawiera równie¿ punkty karne w iloœci %d.", karne);
-    					_MruGracz(giveplayerid, string);
+    					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                     }
-					_MruGracz(giveplayerid, "* Wpisz /akceptuj mandat, aby akceptowaæ.");
+					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "* Wpisz /akceptuj mandat, aby akceptowaæ.");
 					TicketOffer[giveplayerid] = playerid;
 					TicketMoney[giveplayerid] = moneys;
                     SetPVarInt(giveplayerid, "mandat_punkty", karne);
@@ -35923,13 +35935,13 @@ CMD:paka(playerid, params[])
 						JailPrice[suspect] = bailprice;
                         SetPVarInt(suspect, "kaucja-dlaKogo", PlayerInfo[playerid][pMember]);
 						format(string, sizeof(string), "Zosta³eœ uwiêziony na %d sekund.   Kaucja: $%d", PlayerInfo[suspect][pJailTime], JailPrice[suspect]);
-						_MruGracz(suspect, string);
+						SendClientMessage(suspect, COLOR_LIGHTBLUE, string);
 					}
 					else
 					{
 					    JailPrice[suspect] = 0;
 						format(string, sizeof(string), "Zosta³eœ uwiêziony na %d sekund.   Kaucja: Niedostêpna", PlayerInfo[suspect][pJailTime]);
-						_MruGracz(suspect, string);
+						SendClientMessage(suspect, COLOR_LIGHTBLUE, string);
 					}
 					PlayerInfo[suspect][pJailed] = 1;
 			        PlayerInfo[suspect][pArrested] += 1;
@@ -36155,7 +36167,7 @@ CMD:kontrakt(playerid, params[])
 					format(string, sizeof(string), "%s podpisa³ kontrakt na %s, nagroda za wykonanie $%d.",sendername, giveplayer, moneys);
 					SendFamilyMessage(8, COLOR_YELLOW, string);
 					format(string, sizeof(string), "* Podpisa³eœ kontrakt na %s, za $%d.",giveplayer, moneys);
-					_MruGracz(playerid, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 				}
 				else

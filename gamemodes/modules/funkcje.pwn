@@ -616,7 +616,7 @@ stock HABox(numer, playerid)
     }
     if(IsPlayerConnected(playerid))
     {
-        _MruGracz(playerid, "Kontrakt który podpisa³eœ zosta³ odebrany przez Hitmanów. Spodziewaj siê wykonania zlecenia.");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontrakt który podpisa³eœ zosta³ odebrany przez Hitmanów. Spodziewaj siê wykonania zlecenia.");
     }
 	return 1;
 }

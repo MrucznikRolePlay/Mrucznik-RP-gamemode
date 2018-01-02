@@ -282,11 +282,7 @@ ZabierzMC(playerid, mc)
 KupKP(playerid)
 {
 	ZabierzMC(playerid, MIESIAC_KP_CENA);
-
-	_MruGracz(playerid, "Gratulacjê! Zakupi³eœ konto premium. Od teraz masz dostêp do mo¿liwoœci premium. Dziêkujemy za wspieranie serwera!"); 
-	DajKP(playerid, gettime()+2682000, false);
-
-	return 1;
+	SendClientMessage(playerid, COLOR_LIGHTGREEN, "Gratulacjê! Zakupi³eœ konto premium. Od teraz masz dostêp do mo¿liwoœci premium. Dziêkujemy za wspieranie serwera!"); 
 }
 
 KupPojazdPremium(playerid, id)
