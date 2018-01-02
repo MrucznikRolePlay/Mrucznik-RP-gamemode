@@ -1478,7 +1478,7 @@ stock GetNick(playerid, rp = false)
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
 	if(rp) {
-		strreplace(nick, '_', ' ');
+		return nickRP[playerid];
 	}
 	return nick;
 }
@@ -10826,11 +10826,20 @@ stock ChangePlayerName(playerid, name[])
 	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
 	SetPlayerName(playerid, name);
+	SetRPName(playerid);
 	
     format(PlayerInfo[playerid][pNick], 32, "%s", name);
-
+	
     MruMySQL_SaveAccount(playerid);
     return 1;
+}
+
+stock SetRPName(playerid)
+{
+	new nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	strcat(nickRP[playerid], nick, MAX_PLAYER_NAME);
+	strreplace(nickRP[playerid], '_', ' ');
 }
 
 public VendCheck(playerid)

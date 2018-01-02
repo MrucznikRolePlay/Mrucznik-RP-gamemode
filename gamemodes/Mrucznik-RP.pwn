@@ -792,6 +792,7 @@ public OnPlayerConnect(playerid)
 		#endif
 		return 1;
     }
+	SetRPName(playerid);
 
 	//Pocz¹tkowe ustawienia:
     SetTimerEx("OPCLogin", 100, 0, "i", playerid);

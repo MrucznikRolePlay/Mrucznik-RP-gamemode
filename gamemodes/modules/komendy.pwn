@@ -9648,6 +9648,8 @@ CMD:zmienhaslo(playerid, params[])
 		
 		sendErrorMessage(playerid, "Twoje has³o do konta w grze zosta³o zmienione!!!!");
 		sendErrorMessage(playerid, "Jeœli wpisa³eœ t¹ komendê przypadkowo, nie wychodŸ z serwera i zmieñ has³o ponownie za pomoc¹ tej komendy");
+		sendErrorMessage(playerid, "Nowe has³o:");
+		SendClientMessage(playerid, COLOR_PANICRED, tmppass);
 
 		format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", MD5_Hash(tmppass), GetNick(playerid));
 		mysql_query(string);

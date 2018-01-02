@@ -1,6 +1,7 @@
 //zmienne.pwn
 
 new saveMyAccountTimer[MAX_PLAYERS];//respawn
+new nickRP[MAX_PLAYERS][MAX_PLAYER_NAME];
 
 new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
