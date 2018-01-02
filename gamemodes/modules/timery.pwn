@@ -3018,7 +3018,7 @@ public JednaSekundaTimer()
 				PlayerCuffedTime[i] -= 1;
 			}
 		}
-		if(PlayerCuffed[i] == 2 || PlayerCuffed[i] == 3)
+		if(PlayerCuffed[i] == 2 || PlayerCuffed[i] == 3 || PlayerTied[i] == 1)
 		{
 			if(PlayerCuffedTime[i] <= 0)
 			{
@@ -3030,7 +3030,6 @@ public JednaSekundaTimer()
 				PlayerCuffed[i] = 0;
 				PlayerCuffedTime[i] = 0;
 				pobity[i] = 0;
-				//obezwladniony[i] = 0;
 				PlayerInfo[i][pMuted] = 0;
 				PlayerTied[i] = 0;
                 PlayerInfo[i][pBW]=0;

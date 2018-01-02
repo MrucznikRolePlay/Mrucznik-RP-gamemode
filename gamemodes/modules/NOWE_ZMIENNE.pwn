@@ -895,7 +895,6 @@ new pobity[MAX_PLAYERS];//pobity
 new pobilem[MAX_PLAYERS];
 new podczasbicia[MAX_PLAYERS];
 new spamwl[MAX_PLAYERS];
-new obezwladniony[MAX_PLAYERS];//obezwladniony
 new poddaje[MAX_PLAYERS];//poddaje siê
 new lowcap[MAX_PLAYERS];//³owca nagród który proponowa³ poddanie siê
 new lowcaz[MAX_PLAYERS];//³owca nagród dostaje zlecenie

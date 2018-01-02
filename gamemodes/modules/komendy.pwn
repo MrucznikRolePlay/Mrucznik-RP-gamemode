@@ -41,9 +41,9 @@ CMD:marcepan(playerid, params[])
         SendClientMessage(playerid, COLOR_PAPAYAWHIP, "========================================");
         format(string, 128, "Symulacja Marcepan_Marks dla %s", GetNick(id, true));
         SendClientMessage(playerid, COLOR_P@, string);
-        format(string, 128, "Zwi¹zany (lub /ob i inne) = %s", (PlayerTied[id] > 0) ? ("Tak") : ("Nie"));
+        format(string, 128, "Zwi¹zany = %s", (PlayerTied[id] > 0) ? ("Tak") : ("Nie"));
         SendClientMessage(playerid, COLOR_YELLOW, string);
-        format(string, 128, "Skuty w aucie (lub /ob i inne) = %s", (PlayerCuffed[id] > 0) ? ("Tak") : ("Nie"));
+        format(string, 128, "Skuty w aucie = %s", (PlayerCuffed[id] > 0) ? ("Tak") : ("Nie"));
         SendClientMessage(playerid, COLOR_YELLOW, string);
         format(string, 128, "Skuty pieszo = %s", (zakuty[id] > 0) ? ("Tak") : ("Nie"));
         SendClientMessage(playerid, COLOR_YELLOW, string);
@@ -1154,10 +1154,14 @@ CMD:id(playerid, params[])
 	return 1;
 }
 
-/*CMD:funiadajadmina(playerid, params[]) {
+#if DEBUG == 1
+CMD:funiadajadmina(playerid, params[]) {
     PlayerInfo[playerid][pAdmin] = 5000;
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "jestes super admin");
-}*/
+}
+#endif
+
+
 CMD:koxubankot(playerid, params[])
 {
 	new string[128];
@@ -2258,6 +2262,11 @@ CMD:obezwladnij(playerid, params[])
 		    sendErrorMessage(playerid, "Nie ma takiego gracza!");
 			return 1;
 		}
+		if(GetPlayerWeapon(giveplayerid) != 0)
+		{
+		    sendErrorMessage(playerid, "Nie mo¿esz obezw³adniæ uzbrojonego gracza!");
+			return 1;
+		}
 		if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
 		{
 			sendErrorMessage(playerid, "Ten gracz jest za daleko.");
@@ -2271,7 +2280,7 @@ CMD:obezwladnij(playerid, params[])
             Teraz zamiast freezowaæ gracza, zostanie mu wyrwana broñ z rêki i nie bêdzie móg³ jej u¿yæ przez 30 sekund
         */
 
-		if(ProxDetectorS(5.0, playerid, giveplayerid))
+		if(ProxDetectorS(3.0, playerid, giveplayerid))
 		{
 			new string[64], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
@@ -2280,10 +2289,6 @@ CMD:obezwladnij(playerid, params[])
 			//ApplyAnimation(giveplayerid, "PED", "FightSh_Left", 4.0, 0, 1, 1, 1, -1);
 			format(string, sizeof(string), "* %s obezw³adnia %s", sendername, giveplayer);
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			//SetTimerEx("friz", 2000, false, "i", playerid);
-			//obezwladniony[giveplayerid] = 1;
-			//PlayerCuffed[giveplayerid] = 2;
-			//PlayerCuffedTime[giveplayerid] = 30;
 
             SetPVarInt(giveplayerid, "obezwladniony", gettime()+30);
 
@@ -2699,6 +2704,12 @@ CMD:apteczka(playerid, params[])
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+		if(playa == playerid)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz uzdrowiæ samego siebie!");
+			return 1;
+		}
+		
 		if(GetDistanceBetweenPlayers(playerid,playa) < 5)
 		{
 			if(health < 25 || health > 110)
@@ -2717,7 +2728,7 @@ CMD:apteczka(playerid, params[])
 					format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", giveplayer);
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					pobity[playa] = 0;
-					obezwladniony[playa] = 0;
+					PlayerInfo[playa][pBW] = 2;
 				}
 			}
 		}
@@ -9810,7 +9821,7 @@ CMD:pobij(playerid, params[])
     							        sendTipMessage(playerid, "Musisz mieæ 3 lvl aby u¿ywaæ tej komendy!");
 					       			    return 1;
     							    }
-	     				    	    if(pobity[playa] == 1 || pobity[playerid] == 1 || PlayerCuffed[playerid] == 1 || obezwladniony[playerid] || zakuty[playerid] >= 1 || zakuty[playa] >= 1)
+	     				    	    if(pobity[playa] == 1 || pobity[playerid] == 1 || PlayerCuffed[playerid] == 1 || zakuty[playerid] >= 1 || zakuty[playa] >= 1)
 					       			{
 					        			sendTipMessage(playerid, "Nie mo¿esz pobiæ pobitego gracza / jesteœ pobity, nie mo¿esz biæ innych.");
 						       			return 1;
@@ -10091,7 +10102,7 @@ CMD:naucz(playerid, params[])
         }
         if(PlayerInfo[playerid][pJob] == 12 || PlayerInfo[playerid][pAdmin] >= 1000)
         {
-            if(GetDistanceBetweenPlayers(playerid,playa) < 5 && obezwladniony[playa] != 1 && IsPlayerInRangeOfPoint(playerid, 9.0, 762.9852,2.4439,1001.5942))
+            if(GetDistanceBetweenPlayers(playerid,playa) < 5 && IsPlayerInRangeOfPoint(playerid, 9.0, 762.9852,2.4439,1001.5942))
             {
                 if(styl > 3 || styl < 1)
                 {
@@ -17413,7 +17424,7 @@ CMD:kamizelka(playerid)
                 {
                     if(kaska[playerid] < 10000) return sendErrorMessage(playerid, "Nie staæ ciê na kamizelke");
                     ZabierzKase(playerid, 10000);
-                    sendTipMessageEx(playerid, COLOR_P@, "Zap³aci³eœ $10000 za kamizelkê"); 
+                    sendTipMessageEx(playerid, COLOR_P@, "Zap³aci³eœ $10000 za kamizelkê - wpisz /dopasuj aby dopasowaæ."); 
                     format(string, sizeof(string), "* %s wyci¹ga z szafki i ubiera kamizelkê.", sendername);
                     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     //SetPlayerAttachedObject(playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2);//Armour
@@ -17421,13 +17432,14 @@ CMD:kamizelka(playerid)
                     SetPVarInt(playerid, "kamizelka-Pd", 1);
                     SetPlayerArmour(playerid, 90);
                 }
-                else if(OnDuty[playerid] == 1 && GetPVarInt(playerid, "kamizelka-Pd") == 1)
+                /*else if(OnDuty[playerid] == 1 && GetPVarInt(playerid, "kamizelka-Pd") == 1)
                 {
                     RemovePlayerAttachedObject(playerid,7);
-                    //format(string, sizeof(string), "* %s œci¹ga z siebie kamizelkê i chowa j¹ szafki.", sendername);
-                    //ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    format(string, sizeof(string), "* %s wyci¹ga z szafki i ubiera kamizelkê.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     SetPVarInt(playerid, "kamizelka-Pd", 2);
                     SetPlayerArmour(playerid, 90);
+                    cmd_dopasuj(playerid, "kamizelke");
                 }
                 else if(OnDuty[playerid] == 1 && GetPVarInt(playerid, "kamizelka-Pd") == 2)
                 {
@@ -17436,7 +17448,7 @@ CMD:kamizelka(playerid)
                     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     SetPVarInt(playerid, "kamizelka-Pd", 0);
                     SetPlayerArmour(playerid, 0.0);
-                }
+                }*/
                 else
                 {
                     sendTipMessage(playerid, "Nie jesteœ na s³u¿bie!");
@@ -26507,7 +26519,7 @@ CMD:stopanim(playerid)
     {
         new Float:Velocity[3];
 		GetPlayerVelocity(playerid, Velocity[0], Velocity[1], Velocity[2]);
-        if(!IsPlayerInAnyVehicle(playerid) && Velocity[2] == 0 && obezwladniony[playerid] == 0)
+        if(!IsPlayerInAnyVehicle(playerid) && Velocity[2] == 0)
         {
 	        ClearAnimations(playerid);
 	        SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
@@ -29256,6 +29268,7 @@ CMD:zwiaz(playerid, params[])
 							GameTextForPlayer(giveplayerid, "~r~Zwiazany", 2500, 3);
 							TogglePlayerControllable(giveplayerid, 0);
 							PlayerTied[giveplayerid] = 1;
+							PlayerCuffedTime[giveplayerid] = 5*60;
 							pobity[giveplayerid] = 0;
 					    }
 					    else

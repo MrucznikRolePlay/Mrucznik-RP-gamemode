@@ -79,6 +79,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <timestamptodate>
 
 #define VERSION "v2.5.84"
+#define DEBUG 1
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
@@ -907,11 +908,11 @@ public OnPlayerDisconnect(playerid, reason)
         new powod[36];
         if(PlayerTied[playerid] >= 1)
         {
-            strcat(powod, "bycie zwiazanym (lub /ob), ");
+            strcat(powod, "bycie zwiazanym, ");
         }
         if(PlayerCuffed[playerid] >= 1)
         {
-            strcat(powod, "kajdanki w aucie (lub /ob), ");
+            strcat(powod, "kajdanki w aucie, ");
         }
         if(zakuty[playerid] >= 1)
         {
@@ -5785,11 +5786,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		}
 	}
 
-    if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT && GetPVarInt(playerid, "obezwladniony") > gettime())
+    if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT && GetPVarInt(playerid, "obezwladniony") > gettime()-15)
     {
         if(HOLDING(KEY_SPRINT))
         {
-            MruDialog(playerid, "Informacja", "Nie mo¿esz sprintowaæ poniewa¿ zosta³eœ obezw³adniony");
+			ApplyAnimation(playerid, "WUZI", "CS_Dead_Guy", 4.0, 0, 1, 1, 1, -1);
         }
     }
 
