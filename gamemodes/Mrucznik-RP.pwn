@@ -77,7 +77,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <mysql_R5>						// R5
 #include <timestamptodate>
 
-#define VERSION "v2.5.89"
+#define VERSION "v2.5.84"
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
