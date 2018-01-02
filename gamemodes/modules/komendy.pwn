@@ -35146,7 +35146,7 @@ CMD:szukani(playerid)
 		{
 		    if(PlayerToPoint(5.0,playerid,325.0463,306.9240,999.1484))
 		    {
-			    if(PlayerInfo[playerid][pDetSkill] <= 50)
+			    if(PlayerInfo[playerid][pDetSkill] < 50)
 			    {
 			        new x;
 					SendClientMessage(playerid, COLOR_GREEN, "Poszukiwani ¯ywi lub Martwi:");
@@ -35180,7 +35180,7 @@ CMD:szukani(playerid)
 					SendClientMessage(playerid, COLOR_GREEN, "Aby wzi¹æ zlecenie na kogoœ wpisz /zlecenie");
 					SendClientMessage(playerid, COLOR_GRAD1, "Wy¿szy skill £owcy Nagród, wiêksze nagrody");
 				}
-				else if(PlayerInfo[playerid][pDetSkill] >= 51 && PlayerInfo[playerid][pDetSkill] < 100)
+				else if(PlayerInfo[playerid][pDetSkill] >= 50 && PlayerInfo[playerid][pDetSkill] < 100)
 			    {
 			        new x;
 					SendClientMessage(playerid, COLOR_GREEN, "Poszukiwani ¯ywi lub Martwi:");
@@ -35214,7 +35214,7 @@ CMD:szukani(playerid)
    					SendClientMessage(playerid, COLOR_GREEN, "Aby wzi¹æ zlecenie na kogoœ wpisz /zlecenie");
    					SendClientMessage(playerid, COLOR_GRAD1, "Wy¿szy skill £owcy Nagród, wiêksze nagrody");
 				}
-				else if(PlayerInfo[playerid][pDetSkill] >= 101 && PlayerInfo[playerid][pDetSkill] < 200)
+				else if(PlayerInfo[playerid][pDetSkill] >= 100 && PlayerInfo[playerid][pDetSkill] < 200)
 			    {
 			        new x;
 					SendClientMessage(playerid, COLOR_GREEN, "Poszukiwani ¯ywi lub Martwi:");
