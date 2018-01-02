@@ -256,7 +256,6 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}Przyczepialne obiekty kamizelki\t\n", string);
 				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}Anty-sprint po obezw³adnieniu\t\n", string);
 				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}Nowa wybiera³ka\t\n", string);
-				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}Nowa wybiera³ka\t\n", string);
 				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Inny sposób sprawdzania uprawnieñ pojazdów\t\n", string);
 				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Zmiana spawnu NOA\t\n", string);
 				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Brak kamizelki na spawnie dla s³u¿b porz¹dkowych\t\n", string);
