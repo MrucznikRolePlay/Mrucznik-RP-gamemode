@@ -4958,7 +4958,13 @@ public OnGameModeInit()
         PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
     }
 
-    for(new i = 0; i<MAX_PLAYERS; i++) if(IsPlayerConnected(i)) OnPlayerConnect(i, 1);
+    for(new i = 0; i<MAX_PLAYERS; i++) 
+	{
+		if(IsPlayerConnected(i)) 
+		{
+			OnPlayerConnect(i);
+		}
+	}
 
     pusteZgloszenia();
     print("GameMode init - done!");
@@ -5386,7 +5392,6 @@ OnPlayerRegister(playerid, password[])
 {
 	if(IsPlayerConnected(playerid))
 	{
-        new string[128];
 		MruMySQL_CreateAccount(playerid, password);
 		OnPlayerLogin(playerid, password);
 	}

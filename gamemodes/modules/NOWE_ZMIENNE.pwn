@@ -869,8 +869,6 @@ new WindaYKZ;
 new WindaYKZ2 = 0;
 new WindaYKZKrata;
 new WindaYKZKratas = 1;
-new BramaYKZ;
-new BramaYKZs = 1;
 new Text3D:okienko[8];
 
 new bramadmv[19];

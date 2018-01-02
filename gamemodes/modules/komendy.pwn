@@ -29,16 +29,9 @@ SSCANF:fix(string[])
 
 CMD:marcepan(playerid, params[])
 {
+	//komenda tymczasowo wy³¹czona
     return SendClientMessage(playerid, COLOR_PAPAYAWHIP, "S³ucham?");
-    /*
-    if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
-    {
-        if(pobity[playerid] == 0)
-        {
-            PlayerInfo[playerid][pJailed] = 10;
-        }
-    }
-    */
+	
     if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5)
     {
         new id;
@@ -1623,8 +1616,8 @@ CMD:wezportfel(playerid, params[])
 									pieniadze = 1000000;
 								}
 								
-                                _MruGracz(giveplayerid, sprintf("%s zabra³ Ci portfel z $%d w œrodku", GetNick(playerid, true), pieniadze));
-                                _MruGracz(playerid, sprintf("Zabra³eœ portfel %s, w œrodku jest $%d", GetNick(giveplayerid, true), pieniadze));
+                                SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("%s zabra³ Ci portfel z $%d w œrodku", GetNick(playerid, true), pieniadze));
+                                SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zabra³eœ portfel %s, w œrodku jest $%d", GetNick(giveplayerid, true), pieniadze));
 
 								format(string, sizeof(string), "* %s zabiera portfel %s razem z %d$", sendername ,giveplayer, pieniadze);
 								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -2577,9 +2570,9 @@ CMD:awans(playerid, params[])
 					PlayerInfo[para1][pRank] += 1;
 					new level = PlayerInfo[para1][pRank];
 
-                    _MruGracz(playerid, sprintf("Awansowa³eœ %s na rangê %s", GetNick(para1, true), FracRang[GetPlayerFraction(para1)][level]));
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Awansowa³eœ %s na rangê %s", GetNick(para1, true), FracRang[GetPlayerFraction(para1)][level]));
                     if(playerid != para1)
-                        _MruGracz(para1, sprintf("Gratulacje! Otrzyma³eœ awans na rangê %s od %s", FracRang[GetPlayerFraction(para1)][level],  GetNick(playerid, true)));
+                        SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Gratulacje! Otrzyma³eœ awans na rangê %s od %s", FracRang[GetPlayerFraction(para1)][level],  GetNick(playerid, true)));
 
                     MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][pRank]);
 				}
@@ -2620,9 +2613,8 @@ CMD:degraduj(playerid, params[])
 					if(PlayerInfo[para1][pRank] == 0)
 					{
                         if(PlayerInfo[para1][pLider] != 0) return sendErrorMessage(playerid, "Nie mo¿esz wyrzuciæ lidera.");
-						//SendClientMessage(para1, COLOR_GRAD1, "Zosta³eœ wywalony ze swojej frakcji, (degradacja do 0 rangi)!");
 
-                        _MruGracz(para1, sprintf("%s zdegradowa³ Ciê. Masz ju¿ rangê 0 - zostajesz zwolniony z frakcji", GetNick(playerid, true)));
+                        SendClientMessage(para1, COLOR_RED, sprintf("%s zdegradowa³ Ciê. Masz ju¿ rangê 0 - zostajesz zwolniony z frakcji", GetNick(playerid, true)));
 
                         new str[32];
                         valstr(str, para1);
@@ -2633,9 +2625,9 @@ CMD:degraduj(playerid, params[])
 						PlayerInfo[para1][pRank] -= 1;
 						new level = PlayerInfo[para1][pRank];
 
-                        _MruGracz(playerid, sprintf("Zdegradowa³eœ %s na rangê %s", GetNick(para1, true), FracRang[GetPlayerFraction(para1)][level]));
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zdegradowa³eœ %s na rangê %s", GetNick(para1, true), FracRang[GetPlayerFraction(para1)][level]));
                         if(playerid != para1)
-                            _MruGracz(para1, sprintf("Zosta³eœ zdegradowany na rangê %s przez %s", FracRang[GetPlayerFraction(para1)][level],  GetNick(playerid, true)));
+                            SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Zosta³eœ zdegradowany na rangê %s przez %s", FracRang[GetPlayerFraction(para1)][level],  GetNick(playerid, true)));
 
                         MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][pRank]);
 					}
@@ -3109,9 +3101,9 @@ CMD:wypisz(playerid, params[])
 				{
 				    if(giveplayerid != INVALID_PLAYER_ID)
 				    {
-                        _MruGracz(playerid, sprintf("Da³eœ dowód osobisty %s", GetNick(giveplayerid, true)));
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Da³eœ dowód osobisty %s", GetNick(giveplayerid, true)));
                         if(giveplayerid != playerid)
-                            _MruGracz(giveplayerid, sprintf("Urzêdnik %s da³ Tobie dowód osobisty", GetNick(playerid, true)));
+                            SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("Urzêdnik %s da³ Tobie dowód osobisty", GetNick(playerid, true)));
 
 				        PlayerInfo[giveplayerid][pDowod] = 1;
 				        return 1;
@@ -6129,22 +6121,6 @@ CMD:brama(playerid)
 				}
 			}
 		}
-		/*if(PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pLider] == 6 || IsAHA(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
-		{
-			if(PlayerToPoint(7.5, playerid, -2169.5669, 639.9651, 1051.4132))
-			{
-				if(BramaYKZs == 1)
-				{
-					SetDynamicObjectRot(BramaYKZ, 0.0, 0.0, 180.0);
-					BramaYKZs = 0;
-				}
-				else
-				{
-				    SetDynamicObjectRot(BramaYKZ, 0.0, 0.0, 10.0);
-					BramaYKZs = 1;
-				}
-			}
-		}*/
 		if(IsAHA(playerid) || PlayerInfo[playerid][pAdmin] >= 5000)
 		{
 			if(PlayerToPoint(10.0, playerid, -1.39941406,-267.09960938,7.19999981))
@@ -9063,9 +9039,6 @@ CMD:ip(playerid, params[])
 
 CMD:flip(playerid, params[])
 {
-	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
         if(PlayerInfo[playerid][pAdmin] < 1  && PlayerInfo[playerid][pAdmin] != 7)
@@ -24901,14 +24874,6 @@ CMD:gotoint(playerid, params[])
 	return 1;
 }
 
-/*COMMAND:gethp(playerid) // Do sprawdzenia bugu
-{
-    new Float:hp;
-    GetPlayerHealth(playerid, hp);
-    _MruGracz(playerid, sprintf("Masz %0.f HP", hp));
-    return 1;
-}*/
-
 CMD:gethere(playerid, params[])
 {
 	new string[128];
@@ -31168,7 +31133,7 @@ CMD:materialy(playerid, params[])
 		            {
 			            new payout = (50)*(MatsHolding[playerid]);
 			            format(string, sizeof(string), "Dosta³eœ od handlarza %d materia³ów z twoich %d paczek mats", payout, MatsHolding[playerid]);
-					    _MruGracz(playerid, string);
+					    sendTipMessage(playerid, string);
                         if(PlayerInfo[playerid][pMiserPerk] > 0) {
                             new poziom = PlayerInfo[playerid][pMiserPerk];
                             PlayerInfo[playerid][pMats] += poziom*30;
@@ -33834,7 +33799,7 @@ CMD:akceptuj(playerid, params[])
                         PlayerInfo[GuardOffer[playerid]][pPayCheck] += GuardPrice[playerid];
                         ZabierzKase(playerid, GuardPrice[playerid]);
                         SetPlayerArmour(playerid, 90);
-                        _MruGracz(playerid, "Dosta³eœ kamizelkê kuloodporn¹ od ochroniarza.");
+                        sendTipMessage(playerid, "Dosta³eœ kamizelkê kuloodporn¹ od ochroniarza.");
                         format(string, sizeof(string), "%s kupil kamizelke od %s za $%d", sendername, giveplayer, GuardPrice[playerid]);
                         PayLog(string);
                         GuardOffer[playerid] = 999;
@@ -34068,9 +34033,9 @@ CMD:akceptuj(playerid, params[])
                             PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
                             PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
                             format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
-                            _MruGracz(playerid, string);
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                             format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,RepairPrice[playerid]);
-                            _MruGracz(RepairOffer[playerid], string);
+                            SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
                             format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia oraz naprawia %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
                             ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                             format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
@@ -34325,13 +34290,13 @@ CMD:napraw(playerid, params[])
                         {
                             if(!IsPlayerInAnyVehicle(playerid))
                             {
-                                if(playa == playerid) { _MruGracz(playerid, "Nie mo¿esz naprawiæ wozu samemu sobie!"); return 1; }
+                                if(playa == playerid) { sendErrorMessage(playerid, "Nie mo¿esz naprawiæ wozu samemu sobie!"); return 1; }
                                 GetPlayerName(playa, giveplayer, sizeof(giveplayer));
                                 GetPlayerName(playerid, sendername, sizeof(sendername));
                                 format(string, sizeof(string), "* Oferujesz %s naprawê wozu za $%d .",giveplayer,money);
-                                _MruGracz(playerid, string);
+                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 format(string, sizeof(string), "* Mechanik %s proponuje naprawê twojego wozu za $%d, (wpisz /akceptuj naprawe) aby akceptowaæ.",sendername,money);
-                                _MruGracz(playa, string);
+                                SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                 RepairOffer[playa] = playerid;
                                 RepairPrice[playa] = money;
                                 SpamujeMechanik[playerid] = 1;
@@ -35904,7 +35869,7 @@ CMD:paka(playerid, params[])
                     DajKase(playerid, depo3);
                     Sejf_Add(PlayerInfo[playerid][pMember], depo2);
                     format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, moneys, depo3);
-                    _MruGracz(playerid, string);
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					DajKase(suspect, -moneys);
                     poscig[suspect] = 0;
 					//DajKase(playerid, moneys);
@@ -36020,11 +35985,11 @@ CMD:aresztuj(playerid, params[])
 								    format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, price, depo3);
                                    // format(string, sizeof(string), "* Uwiêzi³eœ %s w Wiêzieniu, nagroda za przestêpcê: %d", giveplayer, price);
                                     //DajKase(playerid, price);
-									_MruGracz(playerid, string);
+									SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 									PlayerInfo[playa][pJailed] = 1;
 								    PlayerInfo[playa][pJailTime] = jt;
 								    format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i otrzyma³eœ grzywnê w wysokoœci $%d, kaucja to: %d$.", PlayerInfo[playa][pJailTime], price,bail);
-								    _MruGracz(playa, string);
+								    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     poscig[playa] = 0;
 									WantLawyer[playa] = 1;
 									PlayerInfo[playa][pArrested] += 1;
@@ -38530,7 +38495,7 @@ CMD:sprawdzneon(playerid, params[])
         //if(playerid != pid) SendClientMessage(playerid, COLOR_GRAD1, string);
         ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
         format(string, sizeof(string), "Pomog³eœ %s w sprawdzeniu neonów! Skill +1", GetNick(pid, true));
-        _MruGracz(playerid, string);
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         ZabierzKase(playerid, 10000);
         PlayerInfo[playerid][pMechSkill] ++;
         SetPVarInt(playerid, "checkNeonLimit", gettime() + 40);

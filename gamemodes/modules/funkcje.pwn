@@ -1476,11 +1476,11 @@ stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', 
 stock GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
--	GetPlayerName(playerid, nick, sizeof(nick));
--	if(rp) {
+ 	GetPlayerName(playerid, nick, sizeof(nick));
+	if(rp) {
 		strreplace(nick, '_', ' ');
--	}
--	return nick;
+	}
+	return nick;
 }
 
 stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)

@@ -239,6 +239,7 @@ COMMAND:changelog(playerid, params[])
 
 stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	#pragma unused inputtext
 	if(dialogid == 1963)
 	{
 		return showChangeLog(playerid);
@@ -989,6 +990,7 @@ stock LoadPrzewinienia()
 
 stock noYsi_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	#pragma unused inputtext
 	if(dialogid == 1590)
 	{
 		if(!response) return 1;

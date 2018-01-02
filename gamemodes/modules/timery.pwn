@@ -3093,7 +3093,7 @@ public Fillup()
 				Gas[VID] += FillUp;
 				FillUp = FillUp * 120;
 				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUp);
-				_MruGracz(i,string);
+				SendClientMessage(i, COLOR_LIGHTBLUE,string);
 				DajKase(i, - FillUp);
 				Refueling[i] = 0;
 			}
