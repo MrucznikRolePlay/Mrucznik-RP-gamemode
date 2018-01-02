@@ -62,7 +62,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include "modules\new\niceczlowiek\dynamicgui.pwn"
 
 //YSI po crashDetect
-#include <crashdetect>                  // By Zeex, 4.15.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
+#include <crashdetect>                  // By Zeex, 4.18.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
 #include <code-parse.inc>    
 /*#include <YSI\YSI\y_inline>
 #include <YSI\YSI\y_dialog> */ // ¯egnaj YSI dobry druchu :( ale to nie na te lata...
@@ -74,7 +74,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #if defined REGEX_ON
 #include <libRegEx>						// By Koala818 v0.2				https://github.com/FF-Koala/Regular-Expressions-Plugin
 #endif
-#include <streamer>						// By Incognito, 2.7.7:			http://forum.sa-mp.com/showthread.php?t=102865
+#include <streamer>						// By Incognito, 2.9.2:			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// R5
 #include <timestamptodate>
 

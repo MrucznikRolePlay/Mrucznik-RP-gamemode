@@ -2067,7 +2067,7 @@ IsAFakeKonto(playerid)
 		}
 	
 		new ip[32];
-		GetPlayerIp(giveplayerid,ip,32);
+		GetPlayerIp(playerid,ip,sizeof(ip));
 		if(strcmp(ip,"185.6.30.124", false) == 0)
 		{
 			return 1;
