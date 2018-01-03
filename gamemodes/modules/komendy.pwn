@@ -2262,7 +2262,7 @@ CMD:obezwladnij(playerid, params[])
 		    sendErrorMessage(playerid, "Nie ma takiego gracza!");
 			return 1;
 		}
-		if(GetPlayerWeapon(giveplayerid) != 0)
+		if(GetPlayerWeapon(giveplayerid) != 0 && GetPlayerWeapon(giveplayerid) != 1)
 		{
 		    sendErrorMessage(playerid, "Nie mo¿esz obezw³adniæ uzbrojonego gracza!");
 			return 1;
@@ -2272,13 +2272,13 @@ CMD:obezwladnij(playerid, params[])
 			sendErrorMessage(playerid, "Ten gracz jest za daleko.");
 			return 1;
 		}
+		if(GetPVarInt(giveplayerid, "obezwladniony") > gettime())
+		{
+			sendTipMessage(playerid, "Jesteœ zbyt zmêczony aby ponownie obezw³adniæ tego gracza, odczekaj chwilê.");
+			return 1;
+		}
 		new Float:x, Float:y, Float:z;
 		GetPlayerPos(giveplayerid, x, y, z);
-
-        /*
-        Nowe dzia³anie komendy:
-            Teraz zamiast freezowaæ gracza, zostanie mu wyrwana broñ z rêki i nie bêdzie móg³ jej u¿yæ przez 30 sekund
-        */
 
 		if(ProxDetectorS(3.0, playerid, giveplayerid))
 		{
@@ -2286,12 +2286,11 @@ CMD:obezwladnij(playerid, params[])
 			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			ApplyAnimation(giveplayerid, "WUZI", "CS_Dead_Guy", 4.0, 0, 1, 1, 1, -1);
-			//ApplyAnimation(giveplayerid, "PED", "FightSh_Left", 4.0, 0, 1, 1, 1, -1);
 			format(string, sizeof(string), "* %s obezw³adnia %s", sendername, giveplayer);
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 
             SetPVarInt(giveplayerid, "obezwladniony", gettime()+30);
-
+			SetTimerEx("WstalPoOB", 15000, false, "i", giveplayerid);
             SetPlayerArmedWeapon(giveplayerid, 0);
 
 		}
@@ -17420,35 +17419,16 @@ CMD:kamizelka(playerid)
             || IsPlayerInRangeOfPoint(playerid, 5.0, 1527.2361,-1453.2623,67.8331)
 			|| IsPlayerInRangeOfPoint(playerid, 5.0, 609.0364,-555.1090,19.4573))
             {
-                if(OnDuty[playerid] == 1 && GetPVarInt(playerid, "kamizelka-Pd") == 0)
+                if(OnDuty[playerid] == 1)
                 {
                     if(kaska[playerid] < 10000) return sendErrorMessage(playerid, "Nie staæ ciê na kamizelke");
                     ZabierzKase(playerid, 10000);
                     sendTipMessageEx(playerid, COLOR_P@, "Zap³aci³eœ $10000 za kamizelkê - wpisz /dopasuj aby dopasowaæ."); 
                     format(string, sizeof(string), "* %s wyci¹ga z szafki i ubiera kamizelkê.", sendername);
                     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    //SetPlayerAttachedObject(playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2);//Armour
                     cmd_dopasuj(playerid, "kamizelke");
-                    SetPVarInt(playerid, "kamizelka-Pd", 1);
                     SetPlayerArmour(playerid, 90);
                 }
-                /*else if(OnDuty[playerid] == 1 && GetPVarInt(playerid, "kamizelka-Pd") == 1)
-                {
-                    RemovePlayerAttachedObject(playerid,7);
-                    format(string, sizeof(string), "* %s wyci¹ga z szafki i ubiera kamizelkê.", sendername);
-                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    SetPVarInt(playerid, "kamizelka-Pd", 2);
-                    SetPlayerArmour(playerid, 90);
-                    cmd_dopasuj(playerid, "kamizelke");
-                }
-                else if(OnDuty[playerid] == 1 && GetPVarInt(playerid, "kamizelka-Pd") == 2)
-                {
-                    RemovePlayerAttachedObject(playerid,7);
-                    format(string, sizeof(string), "* %s œci¹ga z siebie kamizelkê i chowa j¹ do szafki.", sendername);
-                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    SetPVarInt(playerid, "kamizelka-Pd", 0);
-                    SetPlayerArmour(playerid, 0.0);
-                }*/
                 else
                 {
                     sendTipMessage(playerid, "Nie jesteœ na s³u¿bie!");

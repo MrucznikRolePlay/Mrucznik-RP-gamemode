@@ -1172,6 +1172,8 @@ public OnPlayerDisconnect(playerid, reason)
 	    if(JobDuty[playerid] == 1) { Mechanics -= 1; }
 	}
 
+	TransportDuty[playerid] = 0;
+	JobDuty[playerid] = 0;
     gPlayerLogged[playerid] = 0; //wylogowany
     MRP_PremiumHours[playerid] = 0;
 	#if DEBUG == 1
@@ -1190,24 +1192,39 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	    ShowPlayerFadeScreenToBlank(playerid, 20, 255, 255, 255, 255);
 		SetPlayerDrunkLevel(playerid, 3000);
 	}
-	switch(bodypart)
+	
+	new Float:armour;
+	GetPlayerArmour(playerid, armour);
+	if(armour <= 1.0)
 	{
-	    case BODY_PART_LEFT_LEG:
-	    {
-	        ApplyAnimation(playerid, "ped", "DAM_LegL_frmLT", 4.1, 0, 0, 0, 0, 0, 1);
-	    }
-	    case BODY_PART_RIGHT_LEG:
-	    {
-	        ApplyAnimation(playerid, "ped", "DAM_LegR_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
-	    }
-	    case BODY_PART_LEFT_ARM:
-	    {
-	        ApplyAnimation(playerid, "ped", "DAM_armL_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
-	    }
-	    case BODY_PART_RIGHT_ARM:
-	    {
-	        ApplyAnimation(playerid, "ped", "DAM_armR_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
-	    }
+		switch(bodypart)
+		{
+			case BODY_PART_LEFT_LEG:
+			{
+				if(random(100) < 30)
+					ApplyAnimation(playerid, "ped", "DAM_LegL_frmLT", 4.1, 0, 0, 0, 0, 0, 1);
+			}
+			case BODY_PART_RIGHT_LEG:
+			{
+				if(random(100) < 30)
+					ApplyAnimation(playerid, "ped", "DAM_LegR_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
+			}
+			case BODY_PART_LEFT_ARM:
+			{
+				if(random(100) < 10)
+					ApplyAnimation(playerid, "ped", "DAM_armL_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
+			}
+			case BODY_PART_RIGHT_ARM:
+			{
+				if(random(100) < 10)
+					ApplyAnimation(playerid, "ped", "DAM_armR_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
+			}
+			case BODY_PART_HEAD:
+			{
+				if(random(100) < 60)
+					ApplyAnimation(playerid,"PED","SHOT_partial", 4.1, 0, 0, 0, 0, 0, 1);
+			}
+		}
 	}
 	return 1;
 }
@@ -5786,7 +5803,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		}
 	}
 
-    if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT && GetPVarInt(playerid, "obezwladniony") > gettime()-15)
+    if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT && GetPVarInt(playerid, "obezwladniony")-15 > gettime())
     {
         if(HOLDING(KEY_SPRINT))
         {

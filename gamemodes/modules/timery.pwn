@@ -538,6 +538,17 @@ public DostalTazerem(playerid)
     return 1;
 }
 //tazer
+
+//po /ob
+
+forward WstalPoOB(playerid);
+public WstalPoOB(playerid)
+{
+    GameTextForPlayer(playerid, "Odzyskales sprawnosc", 3000, 5);
+    ClearAnimations(playerid);
+	return 1;
+}
+
 //AFK timer
 forward PlayerAFK(playerid, afktime, breaktime);
 public PlayerAFK(playerid, afktime, breaktime)
