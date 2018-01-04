@@ -4567,6 +4567,7 @@ ShowStats(playerid,targetid)
 		new expamount = nxtlevel*levelexp;
 		new costlevel = nxtlevel*levelcost;//10k for testing purposes
 		new housekey = PlayerInfo[targetid][pDom];
+		new skin = GetPlayerSkin(targetid);
 		new Float:shealth = PlayerInfo[targetid][pSHealth];
 		new Float:health;
 		new name[MAX_PLAYER_NAME];
@@ -4584,7 +4585,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD2,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] Przestêpstwa:[%d] Czas Aresztu:[%d] Smierci bêd¹c Poszukiwanym:[%d]", fishes,bigfish,crimes,arrests,warrests );
 		SendClientMessage(playerid, COLOR_GRAD3,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s]",kills,deaths,costlevel,exp,expamount,wanted,f2text);
+		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s] ID Skina:[%d]",kills,deaths,costlevel,exp,expamount,wanted,f2text, skin);
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
