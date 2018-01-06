@@ -105,24 +105,6 @@ CMD:pakietmrucznika(playerid)
 #endif
 
 #if DEBUG == 1
-CMD:dosalonu(playerid)
-{
-    if(gettime() < GetPVarInt(playerid, "salonl")) return sendTipMessage(playerid, "{dafc10}TP pod salon co 3minuty");
-
-    SetPlayerInterior(playerid, 0);
-    SetPlayerVirtualWorld(playerid, 0);
-
-    sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
-
-    SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
-
-    SetPVarInt(playerid, "salonl", gettime() + 180);
-
-    return 1;
-}
-#endif
-
-#if DEBUG == 1
 CMD:skille(playerid)
 {
     PlayerInfo[playerid][pDetSkill] = 5000;
@@ -19776,8 +19758,9 @@ CMD:wejdz(playerid)
             SetPlayerInterior(playerid,15);
             SetPlayerPosEx(playerid,207.5219,-109.7448,1005.1328);
             SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina- dostêpne komendy_______________|");
-            SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin cywilny.");
-            SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Dla rodzin i frakcji.");
+            SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
+            SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty");
+            SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
             SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
             /*SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Remanent - przepraszamy_______________|");
             SendClientMessage(playerid,COLOR_WHITE,"Z powodu du¿ego zainteresowania nasz¹ oferta jesteœmu zmuszeni sprowadziæ nowy towar");
@@ -24474,6 +24457,20 @@ CMD:gotosf(playerid)
 		}
 	}
 	return 1;
+}
+
+CMD:gotosalon(playerid)
+{
+	#if DEBUG == 1
+	if(PlayerInfo[playerid][pAdmin] < 5 && PlayerInfo[playerid][pNewAP] != 5)
+		return 1;
+	#endif
+
+    SetPlayerInterior(playerid, 0);
+    SetPlayerVirtualWorld(playerid, 0);
+    SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
+    sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
+    return 1;
 }
 
 CMD:entercar(playerid, params[])

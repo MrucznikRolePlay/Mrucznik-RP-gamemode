@@ -79,7 +79,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <timestamptodate>
 
 #define VERSION "v2.5.84"
-#define DEBUG 1
+#define DEBUG 2
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
