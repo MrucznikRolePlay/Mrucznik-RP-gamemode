@@ -6133,11 +6133,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			    for(new v; v < MAX_VEHICLES; v++)
 			    {
 					new model = GetVehicleModel(v);
-					if(model == 484 || model == 519 || model == 553 || model == 409)
+					if(IsAInteriorVehicle(playerid))
 					{
 		   				new Float:vehx, Float:vehy, Float:vehz;
 		          		GetVehiclePos(v, vehx, vehy, vehz);
-		          		if(IsPlayerInRangeOfPoint(playerid, 10.0, vehx, vehy, vehz))
+		          		if(IsVehicleStreamedIn(v, playerid) && IsPlayerInRangeOfPoint(playerid, 10.0, vehx, vehy, vehz))
 		          		{
 							if(VehicleUID[v][vIntLock] == 1)
 			          	    {

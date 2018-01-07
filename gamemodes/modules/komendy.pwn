@@ -19131,7 +19131,7 @@ CMD:wejdzw(playerid)
 		    for(new v; v < MAX_VEHICLES; v++)
 		    {
 				new model = GetVehicleModel(v);
-				if(model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508)
+				if(IsAInteriorVehicle(model))
 				{
 	   				new Float:vehx, Float:vehy, Float:vehz;
 	          		GetVehiclePos(v, vehx, vehy, vehz);
@@ -19148,7 +19148,7 @@ CMD:wejdzw(playerid)
                             }
                             return 1;
                         }
-	          		    if(VehicleUID[v][vIntLock] == 1 || model == 416)
+	          		    if(VehicleUID[v][vIntLock] == 1)
 	          		    {
 							Do_WnetrzaWozu(playerid, v, model);
 							return 1;
@@ -19178,9 +19178,13 @@ CMD:lockint(playerid)
 		{
 			new vehicleid = GetPlayerVehicleID(playerid);
 			new model = GetVehicleModel(vehicleid);
-			if(model == 484 || model == 519 || model == 553 || model == 409 || model == 508)
+			if(IsAInteriorVehicle(model))
 			{
-                if(!IsCarOwner(playerid, vehicleid)) return sendTipMessageEx(playerid, COLOR_LIGHTGREEN, "Ten pojazd nie nale¿y do Ciebie!");
+                if(!(IsCarOwner(playerid, vehicleid) || Car_GetOwnerType(playerid) == CAR_OWNER_FRACTION && Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))) 
+				{
+					return sendTipMessageEx(playerid, COLOR_LIGHTGREEN, "Ten pojazd nie nale¿y do Ciebie!");
+				}
+				
 				if(VehicleUID[vehicleid][vIntLock] == 0)
 				{
 				    VehicleUID[vehicleid][vIntLock] = 1;
