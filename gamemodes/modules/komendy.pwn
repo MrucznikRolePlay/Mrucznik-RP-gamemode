@@ -19180,7 +19180,11 @@ CMD:lockint(playerid)
 			new model = GetVehicleModel(vehicleid);
 			if(IsAInteriorVehicle(model))
 			{
+<<<<<<< HEAD
                 if(!(IsCarOwner(playerid, vehicleid) || Car_GetOwnerType(playerid) == CAR_OWNER_FRACTION && Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))) 
+=======
+                if(!(IsCarOwner(playerid, vehicleid) || Car_GetOwnerType(i) == CAR_OWNER_FRACTION && Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))) 
+>>>>>>> 1d500ab96eaec450674ef6ac925ec7eeab4a2e33
 				{
 					return sendTipMessageEx(playerid, COLOR_LIGHTGREEN, "Ten pojazd nie nale¿y do Ciebie!");
 				}
