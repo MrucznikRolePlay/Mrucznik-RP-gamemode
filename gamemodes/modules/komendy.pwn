@@ -30,8 +30,6 @@ SSCANF:fix(string[])
 /*CMD:marcepan(playerid, params[])
 {
 	//komenda tymczasowo wy³¹czona
-    return SendClientMessage(playerid, COLOR_PAPAYAWHIP, "S³ucham?");
-	
     if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5)
     {
         new id;
