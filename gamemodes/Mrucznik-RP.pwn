@@ -4647,6 +4647,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 
 public OnPlayerRequestSpawn(playerid)
 {
+    //Zwrócenie 0 uniemo¿liwi spawn.
 	if(gPlayerLogged[playerid] != 1)
 	{
 		

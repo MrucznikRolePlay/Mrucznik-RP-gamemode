@@ -1093,11 +1093,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
 			{
 			    case 0:
-                    ElevatorTravel(playerid, 1144.4740, -1333.2556, 13.8348, 0,90.0);
+			    	if(LSMCWindap0 == 0 || PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+					{
+				    	ElevatorTravel(playerid, 1144.4740, -1333.2556, 13.8348, 0,90.0);
+					}
+					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika LSMC!");
+
 				case 1:
 					ElevatorTravel(playerid, 1167.2428,-1311.8409,31.6567,90,180.0);
 				case 2:
-				    ElevatorTravel(playerid,1104.2808,-1291.9760,21.6958,94,180.0);
+					if(LSMCWindap2 == 0 || PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+					{
+        				ElevatorTravel(playerid,1104.2808,-1291.9760,21.6958,94,180.0);
+					}
+					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika LSMC!");
+
 				case 3:
 				    ElevatorTravel(playerid,1135.2930,-1358.6663,25.5729,91,90.0);
 				case 4:
@@ -1109,7 +1119,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     			case 7:
 				    ElevatorTravel(playerid,1174.5618,-1376.4209,24.2193,93,270.0);
 				case 8:
-				    ElevatorTravel(playerid, 1161.8228, -1337.0521, 31.6112,0,180.0);
+                    if(LSMCWindap8 == 0 || PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+					{
+            			ElevatorTravel(playerid, 1161.8228, -1337.0521, 31.6112,0,180.0);
+					}
+                    else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika LSMC!");
 			}
         }
 	}

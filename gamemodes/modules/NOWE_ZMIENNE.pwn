@@ -15,6 +15,10 @@ new SadWindap2 = 0;//Winda S¹d
 new SadWindap3 = 0;//Winda S¹d
 new SadWindap4 = 0;//Winda S¹d
 
+new LSMCWindap0 = 0;//Winda LSMC
+new LSMCWindap2 = 0;//Winda LSMC
+new LSMCWindap8 = 0;//Winda LSMC
+
 new ServerTime = 14;//Czas
 new ServerWeather = 3;//Pogoda
 

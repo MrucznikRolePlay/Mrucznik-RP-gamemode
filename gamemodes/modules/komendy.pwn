@@ -27,7 +27,7 @@ SSCANF:fix(string[])
 }
 
 
-CMD:marcepan(playerid, params[])
+/*CMD:marcepan(playerid, params[])
 {
 	//komenda tymczasowo wy³¹czona
     return SendClientMessage(playerid, COLOR_PAPAYAWHIP, "S³ucham?");
@@ -72,7 +72,7 @@ CMD:marcepan(playerid, params[])
         return noAccessMessage(playerid);
     }
     return 1;
-}
+}*/
 
 
 #if DEBUG == 1
@@ -9559,7 +9559,7 @@ CMD:spec(playerid, params[])
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
             SetPlayerColor(playerid,COLOR_SPEC);
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"));
+			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | Jail/AJ - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailed] > 0) ? ("Tak") : ("Nie"));
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);
@@ -19289,6 +19289,69 @@ CMD:windalock(playerid, params[])
 			{
 		 		sendErrorMessage(playerid, "Nieodpowiedni poziom windy!");
 		 		return 1;
+			}
+		}
+		else if((IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) ||
+        IsPlayerInRangeOfPoint(playerid,2.0, 1167.2428,-1311.8409,31.6567) ||
+        IsPlayerInRangeOfPoint(playerid,2.0,1104.2808,-1291.9760,21.6958)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1135.2930,-1358.6663,25.5729)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1170.3951,-1296.2148,31.7773)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1155.3907,-1363.1615,26.9370)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1127.3309,-1344.8870,20.3422)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1174.5618,-1376.4209,24.2193)||
+        IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112)) && (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4))
+        {
+            if(level == 0 && LSMCWindap0 == 0)//level 00
+		    {
+		    	LSMCWindap0 = 1;
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [0]!");
+				GetPlayerName(playerid, nick, sizeof(nick));
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [0].", nick);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(level == 0 && LSMCWindap0 == 1)//level 00
+		    {
+		    	LSMCWindap0 = 0;
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [0]!");
+				GetPlayerName(playerid, nick, sizeof(nick));
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [0].", nick);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(level == 2 && LSMCWindap2 == 0)//level 02
+		    {
+		    	LSMCWindap2 = 1;
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [2]!");
+				GetPlayerName(playerid, nick, sizeof(nick));
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [2].", nick);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(level == 2 && LSMCWindap2 == 1)//level 02
+		    {
+		    	LSMCWindap2 = 0;
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [2]!");
+				GetPlayerName(playerid, nick, sizeof(nick));
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [2].", nick);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(level == 8 && LSMCWindap8 == 0)//level 08
+		    {
+		    	LSMCWindap8 = 1;
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [8]!");
+				GetPlayerName(playerid, nick, sizeof(nick));
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [8].", nick);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(level == 8 && LSMCWindap8 == 1)//level 08
+		    {
+		    	LSMCWindap8 = 0;
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [8]!");
+				GetPlayerName(playerid, nick, sizeof(nick));
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [8].", nick);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else
+		    {
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "B³¹d! Mo¿esz zarz¹dzaæ tylko poziomami [0], [2], [8]!");
 			}
 		}
 		else
