@@ -228,7 +228,14 @@ public scanhp(playerid)
 						SetPlayerHealth(playerid, zyciewypadku-20);
 					    format(string, sizeof(string), "* %s z powodu wypadku wylecia³ z pojazdu.", nick);
 						ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-					    SendClientMessage(playerid,COLOR,"Ale przywali³eœ, aby unikn¹æ wypadania z pojazdu wpisz /zp lub /kask!");
+						if(IsABike(GetPlayerVehicleID(playerid)))
+	    				{
+					    	SendClientMessage(playerid,COLOR,"Wypad³eœ z pojazdu, aby unikn¹æ wypadania z pojazdu wpisz /kask!");
+						}
+						else
+						{
+						    SendClientMessage(playerid,COLOR,"Wypad³eœ z pojazdu, aby unikn¹æ wypadania z pojazdu wpisz /zp!");
+						}
 					    new Float:px, Float:py, Float:pz, Float:pa;
 						GetPlayerFacingAngle(playerid,pa);
 						if(pa >= 0.0 && pa <= 22.5) //n1
@@ -286,9 +293,16 @@ public scanhp(playerid)
 						GetPlayerName(playerid, nick, sizeof(nick));
 						GetPlayerHealth(playerid, zyciewypadku);
 						SetPlayerHealth(playerid, zyciewypadku-7);
-					    format(string, sizeof(string), "* %s mia³ uderzy³ g³ow¹ w kierownicê. (( %s ))", nick, nick);
+					    format(string, sizeof(string), "* %s uderzy³ g³ow¹ w kierownicê. (( %s ))", nick, nick);
 						ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-					    SendClientMessage(playerid,COLOR,"Kolejna st³uczka, aby unikn¹æ obra¿eñ wpisz /zp lub /kask!");
+						if(IsABike(GetPlayerVehicleID(playerid)))
+	    				{
+					    	SendClientMessage(playerid,COLOR,"Kolejna st³uczka, aby unikn¹æ obra¿eñ wpisz /kask!");
+						}
+						else
+						{
+						    SendClientMessage(playerid,COLOR,"Kolejna st³uczka, aby unikn¹æ obra¿eñ wpisz /zp!");
+						}
 					}
 				}
 			}
