@@ -5747,9 +5747,9 @@ OnPlayerLogin(playerid, password[])
 
 
 	//TODO: new premium
-    //MRP_LoadPremium(playerid);
+    MRP_LoadPremium(playerid);
 
-    premium_loadForPlayer(playerid);
+    //premium_loadForPlayer(playerid);
 
 	//Odbugowywanie domów:
     if(PlayerInfo[playerid][pDom] != 0)
