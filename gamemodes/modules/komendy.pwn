@@ -1089,32 +1089,42 @@ CMD:id(playerid, params[])
 	}
 	else
 	{
-
 		if(strlen(params) < 3)
-        {
-            MruDialog(playerid, "Informacja", "Musisz podaæ conajmniej 3 litery nicku.");
-            return 1;
-        }
+		{
+			sendErrorMessage(playerid, "Za krótka fraza.");
+			return 1;
+		}
+
+		SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
+
+		new c = 0;
+		new nick[MAX_PLAYER_NAME];
 
 		foreach(Player, i)
-        {
-            new name[24];
-            GetPlayerName(i, name, sizeof(name));
-            if(strfind(name, params, true) >= 0)
-            {
-                format(string, sizeof(string), "%s\n%d\t%s", string, i, name);
-            }
-        }
+		{
+			if(c >= 10) break;
 
-        if(strlen(string))
-        {
-            ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_LIST, "Wyniki wyszukiwania:", string, "Okej", "");
-        }
-        else
-        {
-            MruDialog(playerid, "Informacja", "Nie znaleziono ¿adnego gracza");
-        }
-		
+			GetPlayerName(i, nick, sizeof(nick));
+
+			if(strfind(nick, params, true) != -1)
+			{
+				format(string, sizeof(string), "ID: (%d) %s",i,nick);
+				SendClientMessage(playerid, COLOR_GRAD1, string);
+				c++;
+			}
+		}
+
+		if(c >= 10)
+		{
+			sendErrorMessage(playerid, "Zbyt du¿o wyników, zmieñ kryteria.");
+			return 1;
+		}
+
+		if(c == 0)
+		{
+			sendErrorMessage(playerid, "Nie znaleziono takiego nicku.");
+			return 1;
+		}
 	}
 	return 1;
 }
@@ -18939,7 +18949,7 @@ CMD:sms(playerid, params[])
 
 
 CMD:podnies(playerid) return cmd_od(playerid);
-CMD:pp(playerid) return cmd_od(playerid);
+CMD:p(playerid) return cmd_od(playerid);
 CMD:od(playerid)
 {
 	new string[64];
