@@ -4166,7 +4166,7 @@ static fs_AntiCheatSetNextDialog(playerid, dialogid)
 								(ACInfo[playerid][acSet][8] == -1 || floatcmp(ac_dist_set, 25.0) == 1 &&
 								floatcmp(ac_dist_set, ACVehInfo[ac_vehid][acPosDiff] + ((ac_dist_set / 2.6) * 1.8)) == 1))
 								{
-									if(ACInfo[playerid][acACAllow][3] && floatcmp(ACInfo[playerid][acPosZ], -95.0 && GetPlayerPing(playerid) < 250) == 1)
+									if(ACInfo[playerid][acACAllow][3] && floatcmp(ACInfo[playerid][acPosZ], -95.0) == 1 && GetPlayerPing(playerid) < 250)
 									{
 										#if defined DEBUG
 											printf("[Nex-AC debug] Distance: %f, distance set: %f, old pos diff: %f, speed: %.1f, vehicleid: %d",
@@ -6769,7 +6769,7 @@ ac_fpublic ac_OnCheatDetected(playerid, ip_address[], type, code)
         		SendCommandLogMessage(string);
         		if(code == 16)
         		{
-        		    SendCommandLogMessage("Gracz prawdopodobnie posiada Ammo-Hack!")
+        		    SendCommandLogMessage("Gracz prawdopodobnie posiada Ammo-Hack!");
         		}
 				#undef AC_DEFAULT_COLOR
 			}
