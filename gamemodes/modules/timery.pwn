@@ -2,6 +2,54 @@
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
 
+//Naprawianie timer
+public Naprawa(playerid)
+{
+	if(IsPlayerInAnyVehicle(playerid))
+	{
+		new string[256];
+		new giveplayer[MAX_PLAYER_NAME];
+		new sendername[MAX_PLAYER_NAME];
+		GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
+		GetPlayerName(playerid, sendername, sizeof(sendername));
+		RepairCar[playerid] = GetPlayerVehicleID(playerid);
+		SetVehicleHealth(RepairCar[playerid], 1000.0);
+		RepairVehicle(RepairCar[playerid]);
+
+		CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
+		CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
+
+		PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
+		PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
+		format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string), "* Naprawi³eœ pojazd %s, otrzymujesz $%d.",giveplayer,RepairPrice[playerid]);
+		SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string),"* Mechanik %s naprawia pojazd %s i chowa narzêdzia do skrzynki.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
+		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
+		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
+		if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
+		{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+		else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
+		{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+		else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
+		{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+		else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
+		{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+		ZabierzKase(playerid, RepairPrice[playerid]);
+		DajKase(RepairOffer[playerid], RepairPrice[playerid]);
+		RepairOffer[playerid] = 999;
+		RepairPrice[playerid] = 0;
+		Naprawiasie[playerid] = 0;
+	}
+	else
+	{
+		SendClientMessage(playerid, -1, "Naprawa przerwana - wyszed³eœ z pojazdu");
+	}
+    return 1;
+}
 
 //System Po¿arów v0.1
 forward UsunPozar();
@@ -2633,6 +2681,12 @@ public JednaSekundaTimer()
 			else if(TutTime[i] == 124)
 			{
 				TogglePlayerSpectating(i, false);
+				
+				SetPlayerPosEx(i, 208.3876,-34.8742,1001.9297);
+				SetPlayerFacingAngle(i, 138.8926);
+
+				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
+				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
 			}
 			else if(TutTime[i] == 125)
 			{

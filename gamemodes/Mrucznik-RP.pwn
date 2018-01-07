@@ -1616,8 +1616,8 @@ SetPlayerSpawnPos(playerid)
 			PhoneOnline[playerid] = 0;
 		}
     }
-    //Tutorial:
-	if(PlayerInfo[playerid][pJailed] == 1)
+    //Wiêzienie:
+	else if(PlayerInfo[playerid][pJailed] == 1)
 	{
 		SetPlayerInterior(playerid, 0);
 	    SetPlayerVirtualWorld(playerid, 1);
@@ -1631,6 +1631,7 @@ SetPlayerSpawnPos(playerid)
 	{
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Twój wyrok nie dobieg³ koñca, wracasz do wiêzienia stanowego");
 		JailDeMorgan(playerid);
+		return 1;
 	}
 	else if(PlayerInfo[playerid][pJailed] == 3)
 	{
@@ -4647,6 +4648,14 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 public OnPlayerRequestSpawn(playerid)
 {
     //Zwrócenie 0 uniemo¿liwi spawn.
+	if(gPlayerLogged[playerid] != 1)
+	{
+		
+	}
+	else
+	{
+		
+	}
     return 0;
 }
 
@@ -4654,6 +4663,7 @@ public OnPlayerRequestClass(playerid, classid)
 {
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerRequestClass - begin", GetNick(playerid), playerid);
+		SendClientMessage(playerid, -1, "OnPlayerRequestClass");
 	#endif
 	
 	if(PlayerInfo[playerid][pModel] == 0)
@@ -4665,7 +4675,11 @@ public OnPlayerRequestClass(playerid, classid)
 	{
 		TogglePlayerSpectating(playerid, true);
 		SetTimerEx("OPCLogin", 100, 0, "i", playerid);
-		new rand = random(4);
+		
+		//Dla graczy którzy nie maj¹ najnowszej wersji samp'a
+		PlayerPlaySound(playerid, 1187, 0.0, 0.0, 0.0);
+		
+		new rand = random(5);
 		switch(rand)
 		{
 			case 0:
@@ -4678,9 +4692,13 @@ public OnPlayerRequestClass(playerid, classid)
 			}
 			case 2:
 			{
-				PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
+				PlayerPlaySound(playerid, 1076, 0.0, 0.0, 0.0);
 			}
 			case 3:
+			{
+				PlayerPlaySound(playerid, 1187, 0.0, 0.0, 0.0);
+			}
+			case 4:
 			{
 				new rand2 = random(8);
 				switch(rand2)
@@ -4722,7 +4740,7 @@ public OnPlayerRequestClass(playerid, classid)
 		}
 	}
 	else
-	{	
+	{
 		TogglePlayerSpectating(playerid, true);
 		TogglePlayerSpectating(playerid, false);
 	}
@@ -5036,14 +5054,6 @@ public OnGameModeInit()
     {
         PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
     }
-
-    for(new i = 0; i<MAX_PLAYERS; i++) 
-	{
-		if(IsPlayerConnected(i)) 
-		{
-			OnPlayerConnect(i);
-		}
-	}
 
     pusteZgloszenia();
     print("GameMode init - done!");
@@ -5596,7 +5606,10 @@ OnPlayerLogin(playerid, password[])
 
 		//Nadawanie pieniêdzy:
 		ResetujKase(playerid);
-		DajKase(playerid,PlayerInfo[playerid][pCash]);
+		if(PlayerInfo[playerid][pCash] > 0)
+			DajKase(playerid, PlayerInfo[playerid][pCash]);
+		else
+			ZabierzKase(playerid, PlayerInfo[playerid][pCash]);
 
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
@@ -5808,8 +5821,6 @@ OnPlayerLogin(playerid, password[])
         SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; 
 		PlayerInfo[playerid][pMuted] = 1;
-	    SetPlayerCameraPos(playerid, 1275.0283203125, -1337.3585205078, 10.852507591248);// kamera
-		SetPlayerCameraLookAt(playerid, 1235.1977539063, -1341.1885986328, 54.349945068359);// patrz
 		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");
 		SendClientMessage(playerid, COLOR_WHITE, "Aby zacz¹æ grê musisz przejœæ procedury rejestracji.");
 		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeœli jesteœ tu nowy, to przygotowaliœmy dla ciebie poradnik\nZa chwilê bêdziesz móg³ go obejrzeæ, lecz najpierw bêdziesz musia³ opisaæ postaæ któr¹ bêdziesz sterowa³\nAby przejœæ dalej wciœnij przycisk 'dalej'", "Dalej", "");
@@ -6123,11 +6134,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			    for(new v; v < MAX_VEHICLES; v++)
 			    {
 					new model = GetVehicleModel(v);
-					if(model == 484 || model == 519 || model == 553 || model == 409)
+					if(IsAInteriorVehicle(playerid))
 					{
 		   				new Float:vehx, Float:vehy, Float:vehz;
 		          		GetVehiclePos(v, vehx, vehy, vehz);
-		          		if(IsPlayerInRangeOfPoint(playerid, 10.0, vehx, vehy, vehz))
+		          		if(IsVehicleStreamedIn(v, playerid) && IsPlayerInRangeOfPoint(playerid, 10.0, vehx, vehy, vehz))
 		          		{
 							if(VehicleUID[v][vIntLock] == 1)
 			          	    {

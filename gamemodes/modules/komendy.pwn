@@ -497,21 +497,6 @@ CMD:msgbox(playerid, params[])
     return 1;
 }
 
-CMD:bilet(playerid, params[])
-{
-    if(!IS_AtAutomatBiletowy(playerid)) return 1;
-    new kasa = kaska[playerid];
-    if(kasa < 1000) return PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
-    DajKase(playerid, -1000);
-    PlayerPlaySound(playerid, 12201, 0.0, 0.0, 0.0);
-    Sejf_Add(FRAC_KT, 1000);
-    new str[64];
-    GetPlayerName(playerid, str, 64);
-    format(str, 64, "* %s kupuje bilet *", str);
-    ProxDetector(15.0, playerid, str, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    return 1;
-}
-
 CMD:loadconfig(playerid, params[])
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
@@ -1788,7 +1773,7 @@ CMD:namierz(playerid, params[])
 			//if(IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
 			//{
             // PhoneOnline jest 1 gdy wylaczony x~D
-            if(PhoneOnline[giveplayerid]) return sendTipMessage(playerid, "Ten telefon jest wy³¹czony!");
+            //if(PhoneOnline[giveplayerid]) return sendTipMessage(playerid, "Ten telefon jest wy³¹czony!");
 			if(giveplayerid == playerid)
 			{
 				sendErrorMessage(playerid, "Nie mo¿esz szukaæ samego siebie!"); return 1;
@@ -2932,8 +2917,15 @@ CMD:reklama(playerid)
 		}
 		SendClientMessageToAll(COLOR_WHITE, "|___________ Firma Sprz¹taj¹ca ___________|");
 		SendClientMessageToAll(COLOR_LIGHTBLUE, "Chcesz pozbyæ siê jakiegoœ œmiecia? Skorzystaj z us³ug ciecia! ((/kontrakt))");
-        format(string, 128, "CMD_Info: /ha u¿yte przez %s [%d]", GetNick(playerid), playerid);
+        format(string, sizeof(string), "CMD_Info: /ha u¿yte przez %s [%d]", GetNick(playerid), playerid);
         SendCommandLogMessage(string);
+		foreach(Player, i)
+		{
+			if(PlayerInfo[i][pMember] == 8 || PlayerInfo[i][pLider] == 8 )
+			{
+				SendClientMessage(i, 0xD8C173FF, string);
+			}
+		}
         CMDLog(string);
 		AntySpam[playerid] = 1;
 		SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
@@ -8631,8 +8623,9 @@ CMD:unfrakcja(playerid, params[])
 CMD:skinf(playerid)
 {
     if(!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) return 1;
-    if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC || GetPlayerFraction(playerid) == FRAC_SN) return 1;
-    if(GetPlayerFraction(playerid) == 0) return 1;
+    if(GetPlayerFraction(playerid) == 0) return sendErrorMessage(playerid, "Nie jesteœ we frakcji!");
+    if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC || GetPlayerFraction(playerid) == FRAC_SN) return sendErrorMessage(playerid, "Twoja frakcja nie posiada tej komendy!");
+	if(GetPlayerVehicleID(playerid) != 0) return sendErrorMessage(playerid, "Nie mo¿esz znajdowaæ siê w pojeŸdzie!");
     if(GetPVarInt(playerid, "skinF") == 0)
     {
         SetPVarInt(playerid, "skinF", 1);
@@ -16557,7 +16550,7 @@ CMD:k(playerid, params[])
             }
         }
 		//Text 3 D
-        format(string, sizeof(string), "Krzyczy: %s!!", params);
+        format(string, sizeof(string), "%s Krzyczy: %s!!", GetNick(playerid), params);
         printf("%s", string);
 		//SetPlayerChatBubble(playerid,string,COLOR_WHITE,30.0,8000);
         ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
@@ -19130,7 +19123,7 @@ CMD:wejdzw(playerid)
 		    for(new v; v < MAX_VEHICLES; v++)
 		    {
 				new model = GetVehicleModel(v);
-				if(model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508)
+				if(IsAInteriorVehicle(model))
 				{
 	   				new Float:vehx, Float:vehy, Float:vehz;
 	          		GetVehiclePos(v, vehx, vehy, vehz);
@@ -19147,7 +19140,7 @@ CMD:wejdzw(playerid)
                             }
                             return 1;
                         }
-	          		    if(VehicleUID[v][vIntLock] == 1 || model == 416)
+	          		    if(VehicleUID[v][vIntLock] == 1)
 	          		    {
 							Do_WnetrzaWozu(playerid, v, model);
 							return 1;
@@ -19177,9 +19170,13 @@ CMD:lockint(playerid)
 		{
 			new vehicleid = GetPlayerVehicleID(playerid);
 			new model = GetVehicleModel(vehicleid);
-			if(model == 484 || model == 519 || model == 553 || model == 409 || model == 508)
+			if(IsAInteriorVehicle(model))
 			{
-                if(!IsCarOwner(playerid, vehicleid)) return sendTipMessageEx(playerid, COLOR_LIGHTGREEN, "Ten pojazd nie nale¿y do Ciebie!");
+                if(!(IsCarOwner(playerid, vehicleid) || Car_GetOwnerType(playerid) == CAR_OWNER_FRACTION && Car_GetOwner(vehicleid) == GetPlayerFraction(playerid)))
+				{
+					return sendTipMessageEx(playerid, COLOR_LIGHTGREEN, "Ten pojazd nie nale¿y do Ciebie!");
+				}
+				
 				if(VehicleUID[vehicleid][vIntLock] == 0)
 				{
 				    VehicleUID[vehicleid][vIntLock] = 1;
@@ -22950,10 +22947,12 @@ CMD:unjail(playerid, params[])
 
 						PlayerInfo[playa][pJailed] = 0;
 						PlayerInfo[playa][pJailTime] = 0;
+						PlayerInfo[playa][pMuted] = 0;
 						SetPlayerInterior(playa, 0);
 						SetPlayerPosEx(playa,-1677.0605,917.2449,-52.4141);
 						SetPlayerVirtualWorld(playa, 1);
                         Wchodzenie(playa);
+						PlayerPlaySound(playa, 0, 0.0, 0.0, 0.0);
 						StopAudioStreamForPlayer(playa);
 					}
 					else
@@ -23034,7 +23033,7 @@ CMD:adminajail(playerid, params[])
 				        dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
 						SendClientMessage(playa, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
                         Wchodzenie(playa);
-						PlayerPlaySound(playa, 141, 0.0, 0.0, 0.0);
+						PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
                     }
 				}
 			}
@@ -24236,7 +24235,6 @@ CMD:forceskin(playerid, params[])
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* Wymusi³eœ zmiane skinu na %s.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					
 					NowaWybieralka::Setup(para1);
 				}
 			}
@@ -26455,7 +26453,7 @@ CMD:ah(playerid)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop");
+		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop /rapidfly");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /getposp /gotopos  /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom NEW: /anulujzp");
 	}
@@ -37143,7 +37141,7 @@ CMD:lock(playerid)
 
 CMD:rapidfly(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
     {
         new typ;
         sscanf(p, "D(0)", typ);

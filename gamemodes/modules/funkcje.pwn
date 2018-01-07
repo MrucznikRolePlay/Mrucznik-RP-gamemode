@@ -3684,6 +3684,12 @@ IsAnAmbulance(carid)
 	return 0;
 }
 
+IsAInteriorVehicle(model)
+{
+	//484- Jacht(Marquis), 519 - Shamal, 553 - Nevada, 409 - Stretch, 416 - Ambulance, 508 - Journey, 582 - Newsvan
+	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582);
+}
+
 stock IS_KomunikacjaMiejsca(carid)
 {
     new lID = VehicleUID[carid][vUID];
@@ -6581,8 +6587,8 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	}
 	else if(model == 553)//nevada
 	{
-        SetPlayerInterior(playerid, 9);
-	    SetPlayerPosEx(playerid, 315.856170, 1024.496459, 1949.797363);
+        SetPlayerInterior(playerid, 1);
+	    SetPlayerPosEx(playerid, 1.808619,32.384357,1199.593750);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~nevadzie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 409)//limuzyna
@@ -6604,6 +6610,14 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	{
 		SetPlayerInterior(playerid, 1);
 	    SetPlayerPosEx(playerid, 2512.8455,-1729.0057,778.6371);
+        Wchodzenie(playerid);
+	    TogglePlayerControllable(playerid, 0);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	}
+	else if(model == 508)//journey
+	{
+		SetPlayerInterior(playerid, 1);
+	    SetPlayerPosEx(playerid, 739.4379,-1365.5950,25.8281);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -8715,11 +8729,6 @@ public TRAIN_DoHorn(veh)
     }
 }
 
-stock IS_AtAutomatBiletowy(playerid)
-{
-    if(IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1899.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1896.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1893.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1902.91455, 13.58940)) return 1;
-    return 0;
-}
 
 //13.07 system skinow mysql
 stock DestroySkinSelection(playerid)
