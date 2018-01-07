@@ -19294,7 +19294,7 @@ CMD:windalock(playerid, params[])
 		 		return 1;
 			}
 		}
-		else if(IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) ||
+		else if((IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) ||
         IsPlayerInRangeOfPoint(playerid,2.0, 1167.2428,-1311.8409,31.6567) ||
         IsPlayerInRangeOfPoint(playerid,2.0,1104.2808,-1291.9760,21.6958)||
         IsPlayerInRangeOfPoint(playerid,2.0,1135.2930,-1358.6663,25.5729)||
@@ -19302,7 +19302,7 @@ CMD:windalock(playerid, params[])
         IsPlayerInRangeOfPoint(playerid,2.0,1155.3907,-1363.1615,26.9370)||
         IsPlayerInRangeOfPoint(playerid,2.0,1127.3309,-1344.8870,20.3422)||
         IsPlayerInRangeOfPoint(playerid,2.0,1174.5618,-1376.4209,24.2193)||
-        IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112) && (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4))
+        IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112)) && (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4))
         {
             if(level == 0 && LSMCWindap0 == 0)//level 00
 		    {
