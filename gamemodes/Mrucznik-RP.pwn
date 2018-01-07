@@ -1616,7 +1616,7 @@ SetPlayerSpawnPos(playerid)
 			PhoneOnline[playerid] = 0;
 		}
     }
-    //Tutorial:
+    //Wiêzienie:
 	else if(PlayerInfo[playerid][pJailed] == 1)
 	{
 		SetPlayerInterior(playerid, 0);

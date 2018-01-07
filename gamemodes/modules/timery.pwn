@@ -5,7 +5,7 @@
 //Naprawianie timer
 public Naprawa(playerid)
 {
-	if(IsPlayerInAnyVehicle(playerid)
+	if(IsPlayerInAnyVehicle(playerid))
 	{
 		new string[256];
 		new giveplayer[MAX_PLAYER_NAME];
