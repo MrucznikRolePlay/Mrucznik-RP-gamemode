@@ -2155,6 +2155,7 @@ public JednaSekundaTimer()
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
 					SetPlayerHealth(i, 0.0);
+					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
 				}
 				PlayerInfo[i][pJailed] = 0;
@@ -2629,32 +2630,20 @@ public JednaSekundaTimer()
 				SendClientMessage(i, COLOR_WHITE, "na specjalnym kanale stworzonym dla nowych graczy. Po prostu wpisz /n [swoje pytanie]");
 				SendClientMessage(i, COLOR_WHITE, "To ju¿ koniec samouczka, lecz zasad jest jeszcze wiele. znajdziesz je na forum.");
 			}
+			else if(TutTime[i] == 124)
+			{
+				TogglePlayerSpectating(i, false);
+			}
 			else if(TutTime[i] == 125)
 			{
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
 				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
-				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
-				//SetPlayerSpawn(i);
-				//LogujeSieBezKlauna[i] = 0;
-                //SetPVarInt(i, "class-sel", 1);
-				//ForceClassSelection(i);
-                //TogglePlayerSpectating(i, true);
-                //TogglePlayerSpectating(i, false);
-				//SetPlayerVirtualWorld(i, 0);
-
-				SetPlayerSpawn(i);
-				SpawnPlayer(i);
-
+				PlayerInfo[i][pMuted] = 0;
+				
+				SendClientMessage(i, COLOR_NEWS, "A teraz wybierz, jak ma wygl¹daæ twoja postaæ.");
 				SetPVarInt(i, "wyborPierwszego", 1);
-
-				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
-				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
-
 				NowaWybieralka::Setup(i);
-
-				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
-				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
 			}
 		}
 		if(PlayerTazeTime[i] >= 1)

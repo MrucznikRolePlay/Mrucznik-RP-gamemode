@@ -1594,7 +1594,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-	            LogujeSieBezKlauna[playerid] = 0;
 	            GUIExit[playerid] = 0;
 	      		SendClientMessage(playerid, 0xFFFFFFFF, "Pozycja przywrócona");
 	      		lowcap[playerid] = 0;
@@ -1605,15 +1604,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                SendClientMessage(playerid, 0xFFFFFFFF, "Twoja pozycja zosta³a b³êdnie zapisana, dlatego zespawnujesz siê na zwyk³ym spawnie.");
                     SetPVarInt(playerid, "spawn", 1);
                 }
-                SpawnPlayer(playerid);
+				TogglePlayerSpectating(playerid, false);
+				SpawnPlayer(playerid);
 		        return 1;
 			}
 			if(!response)
 			{
                 SetPVarInt(playerid, "spawn", 1);
-			    LogujeSieBezKlauna[playerid] = 0;
 			    GUIExit[playerid] = 0;
-			    SpawnPlayer(playerid);
+				TogglePlayerSpectating(playerid, false);
+				SpawnPlayer(playerid);
 			    lowcap[playerid] = 0;
 			}
 	    }
@@ -7466,7 +7466,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         else
                         {
                             SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
-                            SpawnPlayer(playerid);
+                            TogglePlayerSpectating(playerid, false);
+							SpawnPlayer(playerid);
                         }
 					}
 			        else
@@ -8038,7 +8039,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_WHITE, "Chodzi o to, ¿e w prawdziwym ¿yciu, nie zabija³byœ wszystkich dooko³a.");
 				SendClientMessage(playerid, COLOR_WHITE, "Wiêc jeœli chcesz kogoœ zabiæ, musisz mieæ wa¿ny powód.");
 				SendClientMessage(playerid, COLOR_WHITE, "OK, znasz ju¿ najwa¿niejsz¹ zasadê, resztê poznasz póŸniej.");
-				RegistrationStep[playerid] = 0;
 	   			TutTime[playerid] = 1;
 		    }
 		    if(!response)

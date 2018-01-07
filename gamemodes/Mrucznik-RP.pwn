@@ -55,8 +55,8 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik ----> edycja Jakub 2015
 #include <ACSBM>
 #include <timestamp>
 #define AC_MAX_CONNECTS_FROM_IP		5
-//#include <nex-ac>						     // By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include "../pawno/include/nexac"   //System PoøarÛw v0.1
+#include <nex-ac>						     // By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+//#include "../pawno/include/nexac"   //System PoøarÛw v0.1
 #include "../pawno/include/systempozarow"   //System PoøarÛw v0.1
 
 #include "modules\new\niceczlowiek\dynamicgui.pwn"
@@ -79,7 +79,7 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik ----> edycja Jakub 2015
 #include <timestamptodate>
 
 #define VERSION "v2.5.84"
-#define DEBUG 2
+#define DEBUG 1
 
 //Modu≥y mapy
 #include "modules/definicje.pwn"
@@ -797,7 +797,6 @@ public OnPlayerConnect(playerid)
 	SetRPName(playerid);
 
 	//Poczπtkowe ustawienia:
-    SetTimerEx("OPCLogin", 100, 0, "i", playerid);
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
 
 	//system barierek by Kubi
@@ -1511,8 +1510,13 @@ public OnPlayerSpawn(playerid) //Przebudowany
 	#endif
 	//Czyszczenie zmiennych
     //Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+	if(gPlayerLogged[playerid] != 1)
+	{
+		sendErrorMessage(playerid, "Zespawnowa≥eú siÍ, a nie jesteú zalogowany! Zosta≥eú wyrzucony z serwera.");
+		KickEx(playerid);
+		return 0;
+	}
 
-	if(GetPVarInt(playerid, "class-sel")) DeletePVar(playerid, "class-sel");
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
     PlayerInfo[playerid][pMuted] = 0;
@@ -1613,20 +1617,7 @@ SetPlayerSpawnPos(playerid)
 		}
     }
     //Tutorial:
-    else if(PlayerInfo[playerid][pTut] == 0)
-    {
-		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; 
-		TogglePlayerControllable(playerid, 0);
-		RegistrationStep[playerid] = 1;
-	    SetPlayerPosEx(playerid, 1275.0283203125, -1337.3585205078, -5.0);
-	    SetPlayerCameraPos(playerid, 1275.0283203125, -1337.3585205078, 10.852507591248);// kamera
-		SetPlayerCameraLookAt(playerid, 1235.1977539063, -1341.1885986328, 54.349945068359);// patrz
-		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");
-		SendClientMessage(playerid, COLOR_WHITE, "Aby zaczπÊ grÍ musisz przejúÊ procedury rejestracji.");
-		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeúli jesteú tu nowy, to przygotowaliúmy dla ciebie poradnik\nZa chwilÍ bÍdziesz mÛg≥ go obejrzeÊ, lecz najpierw bÍdziesz musia≥ opisaÊ postaÊ ktÛrπ bÍdziesz sterowa≥\nAby przejúÊ dalej wciúnij przycisk 'dalej'", "Dalej", "");
-    }
-    //WiÍzienie:
-	else if(PlayerInfo[playerid][pJailed] == 1)
+	if(PlayerInfo[playerid][pJailed] == 1)
 	{
 		SetPlayerInterior(playerid, 0);
 	    SetPlayerVirtualWorld(playerid, 1);
@@ -1647,6 +1638,7 @@ SetPlayerSpawnPos(playerid)
 		SetPlayerPosEx(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
 		PlayerInfo[playerid][pMuted] = 1;
 		SetPlayerVirtualWorld(playerid, 1000+playerid);
+		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Gra≥eú NON-RP. Wracasz do Admin Jaila.");
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)
@@ -1911,9 +1903,10 @@ SetPlayerSpawnPos(playerid)
 						{
 						    SetPlayerPosEx(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
 						}
-						/*case JOB_BODYGUARD:
+						case JOB_BODYGUARD:
 						{
-						}*/
+						    SetPlayerPosEx(playerid, 2207.4038,-1725.1147,13.4060);
+						}
 						default:
 						{
 							new rand = random(sizeof(gRandomPlayerSpawns));
@@ -4654,8 +4647,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 public OnPlayerRequestSpawn(playerid)
 {
     //ZwrÛcenie 0 uniemoøliwi spawn.
-    if(GetPVarInt(playerid, "class-sel")) DeletePVar(playerid, "class-sel");
-    return 1;
+    return 0;
 }
 
 public OnPlayerRequestClass(playerid, classid)
@@ -4663,42 +4655,82 @@ public OnPlayerRequestClass(playerid, classid)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerRequestClass - begin", GetNick(playerid), playerid);
 	#endif
-    //if(GetPlayerState(playerid) == 0) return 1;
-	//PlayerPlaySound(playerid, 1187, 0.0, 0.0, 0.0);
-	//if(LogujeSieBezKlauna[playerid] == 0)
-	//{
-//		PlayerInfo[playerid][pModel] = Peds[classid][0];
-	//}
-	//SetPlayerTeamFromClass(playerid,classid);
-	//SetupPlayerForClassSelection(playerid);
-
-    
-
+	
+	if(PlayerInfo[playerid][pModel] == 0)
+		PlayerInfo[playerid][pModel] = 252;
+	
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
+	
+	if(gPlayerLogged[playerid] != 1)
+	{
+		TogglePlayerSpectating(playerid, true);
+		SetTimerEx("OPCLogin", 100, 0, "i", playerid);
+		new rand = random(4);
+		switch(rand)
+		{
+			case 0:
+			{
+				PlayerPlaySound(playerid, 171, 0.0, 0.0, 0.0);
+			}
+			case 1:
+			{
+				PlayerPlaySound(playerid, 176, 0.0, 0.0, 0.0);
+			}
+			case 2:
+			{
+				PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
+			}
+			case 3:
+			{
+				new rand2 = random(8);
+				switch(rand2)
+				{
+					case 0:
+					{
+						PlayerPlaySound(playerid, 157, 0.0, 0.0, 0.0);
+					}
+					case 1:
+					{
+						PlayerPlaySound(playerid, 162, 0.0, 0.0, 0.0);
+					}
+					case 2:
+					{
+						PlayerPlaySound(playerid, 169, 0.0, 0.0, 0.0);
+					}
+					case 3:
+					{
+						PlayerPlaySound(playerid, 178, 0.0, 0.0, 0.0);
+					}
+					case 4:
+					{
+						PlayerPlaySound(playerid, 180, 0.0, 0.0, 0.0);
+					}
+					case 5:
+					{
+						PlayerPlaySound(playerid, 181, 0.0, 0.0, 0.0);
+					}
+					case 6:
+					{
+						PlayerPlaySound(playerid, 147, 0.0, 0.0, 0.0);
+					}
+					case 7:
+					{
+						PlayerPlaySound(playerid, 140, 0.0, 0.0, 0.0);
+					}
+				}
+			}
+		}
+	}
+	else
+	{	
+		TogglePlayerSpectating(playerid, true);
+		TogglePlayerSpectating(playerid, false);
+	}
+	
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerRequestClass - end", GetNick(playerid), playerid);
 	#endif
-	return 1;
-}
-
-public SetupPlayerForClassSelection(playerid)
-{
-	#if DEBUG == 1
-		printf("%s[%d] SetupPlayerForClassSelection - begin", GetNick(playerid), playerid);
-	#endif
-    SetPlayerInterior(playerid,0);
-	SetPlayerPosEx(playerid,-1657.5237,1207.6644,13.6719);
-	SetPlayerFacingAngle(playerid,357.7);
-    SetPlayerCameraPos(playerid, -1657.4678,1211.2292,13.6781);
-    SetPlayerCameraLookAt(playerid,-1657.5237,1207.6644,13.6719);
-	#if DEBUG == 1
-		printf("%s[%d] SetupPlayerForClassSelection - end", GetNick(playerid), playerid);
-	#endif
-}
-
-public SetPlayerTeamFromClass(playerid,classid)
-{
-    gTeam[playerid] = 3;
-    PlayerInfo[playerid][pTeam] = 3;
+	return 0;
 }
 
 //----------------------[koniec]-----------------------------------
@@ -5284,14 +5316,6 @@ public OnPlayerUpdate(playerid)
 	/*#if DEBUG == 1
 		printf("%s[%d] OnPlayerUpdate - begin", GetNick(playerid), playerid);
 	#endif*/
-    if(gPlayerLogged[playerid] == 0)
-    {
-		printf("Problem z Update, nick: %s", GetNick(playerid, true));
-        KickEx(playerid);
-    }
-
-
-    
     systempozarow_OnPlayerUpdate(playerid);//System PoøarÛw v0.1
     
 	//Anty BH PAèDZIOCH
@@ -5754,13 +5778,20 @@ OnPlayerLogin(playerid, password[])
         else
         {
             SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
-            SpawnPlayer(playerid);
+            TogglePlayerSpectating(playerid, false);
+			SpawnPlayer(playerid);
         }
 	}
     else
     {
         SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
-        SpawnPlayer(playerid);
+		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1; 
+		PlayerInfo[playerid][pMuted] = 1;
+	    SetPlayerCameraPos(playerid, 1275.0283203125, -1337.3585205078, 10.852507591248);// kamera
+		SetPlayerCameraLookAt(playerid, 1235.1977539063, -1341.1885986328, 54.349945068359);// patrz
+		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");
+		SendClientMessage(playerid, COLOR_WHITE, "Aby zaczπÊ grÍ musisz przejúÊ procedury rejestracji.");
+		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeúli jesteú tu nowy, to przygotowaliúmy dla ciebie poradnik\nZa chwilÍ bÍdziesz mÛg≥ go obejrzeÊ, lecz najpierw bÍdziesz musia≥ opisaÊ postaÊ ktÛrπ bÍdziesz sterowa≥\nAby przejúÊ dalej wciúnij przycisk 'dalej'", "Dalej", "");
     }
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerLogin - end", GetNick(playerid), playerid);

@@ -8004,9 +8004,6 @@ public MUSIC_Response(index, response_code, data[])
 
 public OPCLogin(playerid)
 {
-    //Sprawdzanie kar
-    //if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
-
     new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
 
@@ -8015,14 +8012,14 @@ public OPCLogin(playerid)
     // str[128];
     //format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
     //PlayAudioStreamForPlayer(playerid, str);
-
-    SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
+	
+    /*SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
     SetPlayerCameraPos(playerid, 1868.1099, -1936.2098, 48.0756);
-    SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);
+    SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);*/
     SetPlayerVirtualWorld(playerid, 0);
     SetPlayerInterior(playerid, 0);
 
-    //TourCamera(playerid, 0);
+    TourCamera(playerid, 0);
 
     //Strefy load
     ZonePTXD_Load(playerid);
@@ -8038,7 +8035,6 @@ public OPCLogin(playerid)
     }
 
 	SetPlayerHealth(playerid, 100);
-	LogujeSieBezKlauna[playerid] = 1;
 	GUIExit[playerid] = 1;
 	SafeTime[playerid] = 60*3;//ogarniczenie 3 minuty na logowanie
 	SetPlayerColor(playerid,COLOR_GRAD2);

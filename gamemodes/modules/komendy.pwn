@@ -3146,7 +3146,7 @@ CMD:respawnplayer(playerid, params[])
     if(sscanf(params, "k<fix>", v)) return sendTipMessage(playerid, "U¿yj /respawnplayer [ID/Nick]");
     if(!IsPlayerConnected(v)) return sendErrorMessage(playerid, "Niepoprawne ID gracza.");
     new pstate = GetPlayerState(v);
-    if(pstate == 0 || pstate == 7 || pstate == 9) return sendErrorMessage(playerid, "Nie mo¿esz go teraz zrespawnowaæ!");
+    if((pstate == 0 || pstate == 7 || pstate == 9) && PlayerInfo[playerid][pAdmin] < 5000) return sendErrorMessage(playerid, "Nie mo¿esz go teraz zrespawnowaæ!");
     new str[128];
     format(str, 128, "$System$ » Zosta³eœ zrespawnowany przez admina %s", GetNick(playerid));
     SendClientMessage(v, COLOR_LIGHTGREEN, str);
@@ -8663,12 +8663,6 @@ CMD:ubranie(playerid)
 	{
 	    if(IsAtClothShop(playerid))
 	    {
-            /*SetPVarInt(playerid, "class-sel", 1);
-			ForceClassSelection(playerid);
-            TogglePlayerSpectating(playerid, true);
-            TogglePlayerSpectating(playerid, false);
-			SendClientMessage(playerid, COLOR_BLUE, "Wybierz interesuj¹cy ciê skin");*/
-
             NowaWybieralka::Setup(playerid);
 		}
 		else
@@ -19312,6 +19306,9 @@ CMD:wejdz(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
+		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
+		
+		
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
         
         if(SprawdzWejscia(playerid))
@@ -20796,6 +20793,8 @@ CMD:wyjdz(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
+		PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
+	
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
 		
 		if(SprawdzWejscia(playerid))
@@ -22972,6 +22971,7 @@ CMD:adminajail(playerid, params[])
 				        dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
 						SendClientMessage(playa, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
                         Wchodzenie(playa);
+						PlayerPlaySound(playa, 141, 0.0, 0.0, 0.0);
                     }
 				}
 			}
@@ -24140,8 +24140,7 @@ CMD:makemember(playerid, params[])
 }
 
 
-CMD:forceskin(playerid, params[]) return cmd_frakcjaskin(playerid, params);
-CMD:frakcjaskin(playerid, params[])
+CMD:forceskin(playerid, params[])
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
@@ -24152,7 +24151,7 @@ CMD:frakcjaskin(playerid, params[])
 		new para1;
 		if( sscanf(params, "k<fix>", para1))
 		{
-			sendTipMessage(playerid, "U¿yj /frakcjaskin [playerid/CzêœæNicku]");
+			sendTipMessage(playerid, "U¿yj /forceskin [playerid/CzêœæNicku]");
 			return 1;
 		}
 
@@ -24174,35 +24173,8 @@ CMD:frakcjaskin(playerid, params[])
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* Wymusi³eœ zmiane skinu na %s.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					if(PlayerInfo[para1][pMember] == 1) { PlayerInfo[para1][pTeam] = 5; ChosenSkin[para1] = 59; }
-			        else if(PlayerInfo[para1][pMember] == 2) { PlayerInfo[para1][pTeam] = 6; ChosenSkin[para1] = 121; }
-			        else if(PlayerInfo[para1][pMember] == 3) { PlayerInfo[para1][pTeam] = 7; ChosenSkin[para1] = 98; }
-			        else if(PlayerInfo[para1][pMember] == 4) { PlayerInfo[para1][pTeam] = 8; ChosenSkin[para1] = 46; }
-			        else if(PlayerInfo[para1][pMember] == 5) { PlayerInfo[para1][pTeam] = 9; ChosenSkin[para1] = 174; }
-			        else if(PlayerInfo[para1][pMember] == 6) { PlayerInfo[para1][pTeam] = 2; ChosenSkin[para1] = 280; }
-		         	else if(PlayerInfo[para1][pMember] == 7) { PlayerInfo[para1][pTeam] = 2; ChosenSkin[para1] = 163; }
-			        else if(PlayerInfo[para1][pMember] == 11) { PlayerInfo[para1][pTeam] = 2; ChosenSkin[para1] = 164; }
-			        else if(PlayerInfo[para1][pMember] == 8) { PlayerInfo[para1][pTeam] = 10; ChosenSkin[para1] = 186; }
-			        else if(PlayerInfo[para1][pMember] == 12) { PlayerInfo[para1][pTeam] = 5; ChosenSkin[para1] = 270; }
-			        else if(PlayerInfo[para1][pMember] == 13) { PlayerInfo[para1][pTeam] = 5; ChosenSkin[para1] = 103; }
-			        else if(PlayerInfo[para1][pMember] == 14) { PlayerInfo[para1][pTeam] = 5; ChosenSkin[para1] = 108; }
-			        else if(PlayerInfo[para1][pMember] == 15) { PlayerInfo[para1][pTeam] = 5; ChosenSkin[para1] = 8; }
-			        else { return 1; }
-                    SetPlayerInterior(para1,0);
-					new rand = random(sizeof(gInviteSpawns));
-					SetPlayerPosEx(para1, gInviteSpawns[rand][0], gInviteSpawns[rand][1], gInviteSpawns[rand][2]); // Warp the player
-					SetPlayerFacingAngle(para1, gInviteSpawns[rand][3]);
-					SetPlayerCameraPos(para1,gInviteSpawns[rand][0] + 3, gInviteSpawns[rand][1], gInviteSpawns[rand][2]);
-					SetPlayerCameraLookAt(para1,gInviteSpawns[rand][0], gInviteSpawns[rand][1], gInviteSpawns[rand][2]);
-					TogglePlayerControllable(para1, 0);
-				    SelectChar[para1] = 255;
-				    SelectCharID[para1] = PlayerInfo[para1][pMember];
-				    SelectCharPlace[para1] = 1;
-				    PlayerInfo[para1][pModel] = ChosenSkin[para1];
-			    	PlayerInfo[para1][pSkin] = ChosenSkin[para1];
-					SendClientMessage(para1, COLOR_LIGHTRED, "* U¿yj 'next' aby zobaczyæ nastêpny skin.");
-		   			SendClientMessage(para1, COLOR_LIGHTRED, "* Jeœli zdecydowa³eœ siê na konkretny skin wpisz 'gotowe'.");
-		   			SendClientMessage(para1, COLOR_LIGHTRED, "* Je¿eli nie ma tu wszytkich skinów twojej frakcji u¿yj /uniform w sklepie z ciuchami");
+					
+					NowaWybieralka::Setup(para1);
 				}
 			}
 		}
