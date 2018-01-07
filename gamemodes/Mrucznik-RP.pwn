@@ -4755,6 +4755,27 @@ public OnGameModeInit()
 	regex_syntax(SYNTAX_PERL); //regex
 	regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
 	#endif
+	
+	#if DEBUG == 1
+	if(dini_Exists("production.info"))
+	{
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		SendRconCommand("exit");
+		return 0;
+	}
+	#endif
 
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
     Streamer_SetVisibleItems(0, 900);
