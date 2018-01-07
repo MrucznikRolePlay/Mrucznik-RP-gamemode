@@ -31920,7 +31920,7 @@ CMD:wez(playerid, params[])
 		{
 		    if(IsAtGasStation(playerid))
 			{
-			    new price = 20 * 40;
+			    new price = 20 * 120;
 			    format(string, sizeof(string), "* Wzi¹³eœ kanister z 20% paliwa za $%d",price);
 			    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			    PlayerInfo[playerid][pFuel] = 20;
