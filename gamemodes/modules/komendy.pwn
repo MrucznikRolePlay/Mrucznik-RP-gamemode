@@ -8631,8 +8631,9 @@ CMD:unfrakcja(playerid, params[])
 CMD:skinf(playerid)
 {
     if(!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) return 1;
-    if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC || GetPlayerFraction(playerid) == FRAC_SN) return 1;
-    if(GetPlayerFraction(playerid) == 0) return 1;
+    if(GetPlayerFraction(playerid) == 0) return sendErrorMessage(playerid, "Nie jesteœ we frakcji!");
+    if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC || GetPlayerFraction(playerid) == FRAC_SN) return sendErrorMessage(playerid, "Twoja frakcja nie posiada tej komendy!");
+	if(GetPlayerVehicleID(playerid) != 0) return sendErrorMessage(playerid, "Nie mo¿esz znajdowaæ siê w pojeŸdzie!");
     if(GetPVarInt(playerid, "skinF") == 0)
     {
         SetPVarInt(playerid, "skinF", 1);
@@ -22887,10 +22888,12 @@ CMD:unjail(playerid, params[])
 
 						PlayerInfo[playa][pJailed] = 0;
 						PlayerInfo[playa][pJailTime] = 0;
+						PlayerInfo[playa][pMuted] = 0;
 						SetPlayerInterior(playa, 0);
 						SetPlayerPosEx(playa,-1677.0605,917.2449,-52.4141);
 						SetPlayerVirtualWorld(playa, 1);
                         Wchodzenie(playa);
+						PlayerPlaySound(playa, 0, 0.0, 0.0, 0.0);
 						StopAudioStreamForPlayer(playa);
 					}
 					else
@@ -26392,7 +26395,7 @@ CMD:ah(playerid)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop");
+		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop /rapidfly");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /getposp /gotopos  /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom NEW: /anulujzp");
 	}
@@ -37080,7 +37083,7 @@ CMD:lock(playerid)
 
 CMD:rapidfly(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
     {
         new typ;
         sscanf(p, "D(0)", typ);

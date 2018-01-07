@@ -1605,7 +1605,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     SetPVarInt(playerid, "spawn", 1);
                 }
 				TogglePlayerSpectating(playerid, false);
-				SpawnPlayer(playerid);
 		        return 1;
 			}
 			if(!response)
@@ -1613,7 +1612,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 SetPVarInt(playerid, "spawn", 1);
 			    GUIExit[playerid] = 0;
 				TogglePlayerSpectating(playerid, false);
-				SpawnPlayer(playerid);
 			    lowcap[playerid] = 0;
 			}
 	    }

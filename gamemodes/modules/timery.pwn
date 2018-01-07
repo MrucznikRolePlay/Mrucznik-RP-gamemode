@@ -2633,6 +2633,12 @@ public JednaSekundaTimer()
 			else if(TutTime[i] == 124)
 			{
 				TogglePlayerSpectating(i, false);
+				
+				SetPlayerPosEx(i, 208.3876,-34.8742,1001.9297);
+				SetPlayerFacingAngle(i, 138.8926);
+
+				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
+				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
 			}
 			else if(TutTime[i] == 125)
 			{
