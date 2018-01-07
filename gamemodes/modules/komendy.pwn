@@ -1788,7 +1788,7 @@ CMD:namierz(playerid, params[])
 			//if(IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
 			//{
             // PhoneOnline jest 1 gdy wylaczony x~D
-            if(PhoneOnline[giveplayerid]) return sendTipMessage(playerid, "Ten telefon jest wy³¹czony!");
+            //if(PhoneOnline[giveplayerid]) return sendTipMessage(playerid, "Ten telefon jest wy³¹czony!");
 			if(giveplayerid == playerid)
 			{
 				sendErrorMessage(playerid, "Nie mo¿esz szukaæ samego siebie!"); return 1;
