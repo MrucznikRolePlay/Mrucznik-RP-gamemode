@@ -47,7 +47,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	    incar[playerid] = 1;
 		return 1;
 	}
-	if(oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT)
+	if((oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT) || (oldstate == PLAYER_STATE_PASSENGER && newstate == PLAYER_STATE_ONFOOT))
 	{
 		KillTimer(scan);
 		new nick[MAX_PLAYER_NAME];
@@ -84,21 +84,35 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 		if(!strcmp(cmdtext, "/zp", true) || !strcmp(cmdtext, "/zapnijpasy", true))
 		{
-		    new nick[MAX_PLAYER_NAME];
-		   	new string[256];
-			GetPlayerName(playerid, nick, sizeof(nick));
-	    	format(string, sizeof(string), "* %s zapina pasy", nick);
-			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-			pasy[playerid] = 1;
+		    if(!IsABike(GetPlayerVehicleID(playerid)))
+	    	{
+		    	new nick[MAX_PLAYER_NAME];
+		   		new string[256];
+				GetPlayerName(playerid, nick, sizeof(nick));
+	    		format(string, sizeof(string), "* %s zapina pasy", nick);
+				ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+				pasy[playerid] = 1;
+            }
+			else
+			{
+				SendClientMessage(playerid,COLOR,"Nie mo¿esz zapi¹æ pasów!");
+			}
 		}
 		if(!strcmp(cmdtext, "/op", true) || !strcmp(cmdtext, "/odepnijpasy", true))
 		{
-		    new nick[MAX_PLAYER_NAME];
-		   	new string[256];
-			GetPlayerName(playerid, nick, sizeof(nick));
-	    	format(string, sizeof(string), "* %s odpina pasy", nick);
-			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-			pasy[playerid] = 0;
+		    if(!IsABike(GetPlayerVehicleID(playerid)))
+	    	{
+		    	new nick[MAX_PLAYER_NAME];
+		   		new string[256];
+				GetPlayerName(playerid, nick, sizeof(nick));
+	    		format(string, sizeof(string), "* %s odpina pasy", nick);
+				ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+				pasy[playerid] = 0;
+            }
+			else
+			{
+				SendClientMessage(playerid,COLOR,"Nie mo¿esz odpi¹æ pasów!");
+			}
 		}
 		if(!strcmp(cmdtext, "/kask", true))
 		{
@@ -116,7 +130,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				}
 				else if(kask[playerid] != 1)
 				{
-			    	format(string, sizeof(string), "* %s zak³ada kask na g³owê", nick);
+			    	format(string, sizeof(string), "* %s zak³ada kask na g³owê.", nick);
 					ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
 					SetPlayerAttachedObject(playerid,3 , 18645, 2, 0.07, 0.017, 0, 88, 75, 0);
 					kask[playerid] = 1;
@@ -272,7 +286,7 @@ public scanhp(playerid)
 						GetPlayerName(playerid, nick, sizeof(nick));
 						GetPlayerHealth(playerid, zyciewypadku);
 						SetPlayerHealth(playerid, zyciewypadku-7);
-					    format(string, sizeof(string), "* %s mia³ odpiête pasy i uderzy³ g³ow¹ w kierownicê (( %s ))", nick, nick);
+					    format(string, sizeof(string), "* %s mia³ uderzy³ g³ow¹ w kierownicê. (( %s ))", nick, nick);
 						ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
 					    SendClientMessage(playerid,COLOR,"Kolejna st³uczka, aby unikn¹æ obra¿eñ wpisz /zp lub /kask!");
 					}
