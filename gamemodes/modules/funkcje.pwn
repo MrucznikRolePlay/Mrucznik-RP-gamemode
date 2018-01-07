@@ -1478,7 +1478,7 @@ stock GetNick(playerid, rp = false)
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
 	if(rp) {
-		strreplace(nick, '_', ' ');
+		return nickRP[playerid];
 	}
 	return nick;
 }
@@ -2064,6 +2064,13 @@ IsAFakeKonto(playerid)
 		if(strcmp(nick,"Gniewomir_Wonsz", false) == 0 || strcmp(nick,"Filemon_Paprotka", false) == 0 || strcmp(nick,"Julia_Wisefield", false) == 0)
 		{
 		    return 1;
+		}
+	
+		new ip[32];
+		GetPlayerIp(playerid,ip,sizeof(ip));
+		if(strcmp(ip,"185.6.30.124", false) == 0)
+		{
+			return 1;
 		}
 	}
 	return 0;
@@ -3677,6 +3684,12 @@ IsAnAmbulance(carid)
 	return 0;
 }
 
+IsAInteriorVehicle(model)
+{
+	//484- Jacht(Marquis), 519 - Shamal, 553 - Nevada, 409 - Stretch, 416 - Ambulance, 508 - Journey, 582 - Newsvan
+	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582);
+}
+
 stock IS_KomunikacjaMiejsca(carid)
 {
     new lID = VehicleUID[carid][vUID];
@@ -4567,6 +4580,7 @@ ShowStats(playerid,targetid)
 		new expamount = nxtlevel*levelexp;
 		new costlevel = nxtlevel*levelcost;//10k for testing purposes
 		new housekey = PlayerInfo[targetid][pDom];
+		new skin = PlayerInfo[targetid][pModel];
 		new Float:shealth = PlayerInfo[targetid][pSHealth];
 		new Float:health;
 		new name[MAX_PLAYER_NAME];
@@ -4584,7 +4598,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD2,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] Przestêpstwa:[%d] Czas Aresztu:[%d] Smierci bêd¹c Poszukiwanym:[%d]", fishes,bigfish,crimes,arrests,warrests );
 		SendClientMessage(playerid, COLOR_GRAD3,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s]",kills,deaths,costlevel,exp,expamount,wanted,f2text);
+		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s] ID Skina:[%d]",kills,deaths,costlevel,exp,expamount,wanted,f2text, skin);
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
@@ -6573,8 +6587,8 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	}
 	else if(model == 553)//nevada
 	{
-        SetPlayerInterior(playerid, 9);
-	    SetPlayerPosEx(playerid, 315.856170, 1024.496459, 1949.797363);
+        SetPlayerInterior(playerid, 1);
+	    SetPlayerPosEx(playerid, 1.808619,32.384357,1199.593750);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~nevadzie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 409)//limuzyna
@@ -6596,6 +6610,14 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	{
 		SetPlayerInterior(playerid, 1);
 	    SetPlayerPosEx(playerid, 2512.8455,-1729.0057,778.6371);
+        Wchodzenie(playerid);
+	    TogglePlayerControllable(playerid, 0);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	}
+	else if(model == 508)//journey
+	{
+		SetPlayerInterior(playerid, 1);
+	    SetPlayerPosEx(playerid, 739.4379,-1365.5950,25.8281);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -7593,7 +7615,8 @@ public MRP_ForceDialog(playerid, dialogid)
     return 1;
 }
 
-stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[])
+forward ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[]);
+public ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[])
 {
 	ShowPlayerDialog(playerid, dialogid, style, caption, info, button1, button2);
 	iddialog[playerid] = dialogid;
@@ -7996,9 +8019,6 @@ public MUSIC_Response(index, response_code, data[])
 
 public OPCLogin(playerid)
 {
-    //Sprawdzanie kar
-    //if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
-
     new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
 
@@ -8007,14 +8027,14 @@ public OPCLogin(playerid)
     // str[128];
     //format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
     //PlayAudioStreamForPlayer(playerid, str);
-
-    SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
+	
+    /*SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
     SetPlayerCameraPos(playerid, 1868.1099, -1936.2098, 48.0756);
-    SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);
+    SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);*/
     SetPlayerVirtualWorld(playerid, 0);
     SetPlayerInterior(playerid, 0);
 
-    //TourCamera(playerid, 0);
+    TourCamera(playerid, 0);
 
     //Strefy load
     ZonePTXD_Load(playerid);
@@ -8030,7 +8050,6 @@ public OPCLogin(playerid)
     }
 
 	SetPlayerHealth(playerid, 100);
-	LogujeSieBezKlauna[playerid] = 1;
 	GUIExit[playerid] = 1;
 	SafeTime[playerid] = 60*3;//ogarniczenie 3 minuty na logowanie
 	SetPlayerColor(playerid,COLOR_GRAD2);
@@ -8710,11 +8729,6 @@ public TRAIN_DoHorn(veh)
     }
 }
 
-stock IS_AtAutomatBiletowy(playerid)
-{
-    if(IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1899.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1896.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1893.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1902.91455, 13.58940)) return 1;
-    return 0;
-}
 
 //13.07 system skinow mysql
 stock DestroySkinSelection(playerid)
@@ -10826,11 +10840,20 @@ stock ChangePlayerName(playerid, name[])
 	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
 	SetPlayerName(playerid, name);
+	SetRPName(playerid);
 	
     format(PlayerInfo[playerid][pNick], 32, "%s", name);
-
+	
     MruMySQL_SaveAccount(playerid);
     return 1;
+}
+
+stock SetRPName(playerid)
+{
+	new nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	format(nickRP[playerid], MAX_PLAYER_NAME, "%s", nick);
+	strreplace(nickRP[playerid], '_', ' ');
 }
 
 public VendCheck(playerid)

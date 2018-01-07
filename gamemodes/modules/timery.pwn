@@ -2,6 +2,54 @@
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
 
+//Naprawianie timer
+public Naprawa(playerid)
+{
+	if(IsPlayerInAnyVehicle(playerid))
+	{
+		new string[256];
+		new giveplayer[MAX_PLAYER_NAME];
+		new sendername[MAX_PLAYER_NAME];
+		GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
+		GetPlayerName(playerid, sendername, sizeof(sendername));
+		RepairCar[playerid] = GetPlayerVehicleID(playerid);
+		SetVehicleHealth(RepairCar[playerid], 1000.0);
+		RepairVehicle(RepairCar[playerid]);
+
+		CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
+		CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
+
+		PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
+		PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
+		format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string), "* Naprawi³eœ pojazd %s, otrzymujesz $%d.",giveplayer,RepairPrice[playerid]);
+		SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string),"* Mechanik %s naprawia pojazd %s i chowa narzêdzia do skrzynki.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
+		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
+		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
+		if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
+		{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+		else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
+		{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+		else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
+		{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+		else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
+		{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+		ZabierzKase(playerid, RepairPrice[playerid]);
+		DajKase(RepairOffer[playerid], RepairPrice[playerid]);
+		RepairOffer[playerid] = 999;
+		RepairPrice[playerid] = 0;
+		Naprawiasie[playerid] = 0;
+	}
+	else
+	{
+		SendClientMessage(playerid, -1, "Naprawa przerwana - wyszed³eœ z pojazdu");
+	}
+    return 1;
+}
 
 //System Po¿arów v0.1
 forward UsunPozar();
@@ -538,6 +586,17 @@ public DostalTazerem(playerid)
     return 1;
 }
 //tazer
+
+//po /ob
+
+forward WstalPoOB(playerid);
+public WstalPoOB(playerid)
+{
+    GameTextForPlayer(playerid, "Odzyskales sprawnosc", 3000, 5);
+    ClearAnimations(playerid);
+	return 1;
+}
+
 //AFK timer
 forward PlayerAFK(playerid, afktime, breaktime);
 public PlayerAFK(playerid, afktime, breaktime)
@@ -650,7 +709,7 @@ public MainTimer()
     }
     if(TICKS_15Min == (60*15)-1)
     {
-        AccountSave();
+        ServerStuffSave();
         IdleKick();
     }
     if(TICKS_30Min == (60*30)-1)
@@ -706,15 +765,25 @@ public MainTimer()
 	#endif
 }
 
-public AccountSave()
+//TODO: mysql asynchroniczny
+forward SaveMyAccountTimer(playerid);
+public SaveMyAccountTimer(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(gPlayerLogged[playerid] == 1)
+		{
+			MruMySQL_SaveAccount(playerid);
+		}
+	}
+	return 1;
+}
+
+public ServerStuffSave()
 {
 	#if DEBUG == 1
-		printf("AccountSave - begin");
+		printf("ServerStuffSave - begin");
 	#endif
-    foreach(Player, i)
-    {
-        MruMySQL_SaveAccount(i);
-    }
     for(new i=0;i<MAX_FRAC;i++)
     {
         Sejf_Save(i);
@@ -737,7 +806,7 @@ public AccountSave()
         }
     }
 	#if DEBUG == 1
-		printf("AccountSave - end");
+		printf("ServerStuffSave - end");
 	#endif
 }
 
@@ -2134,6 +2203,7 @@ public JednaSekundaTimer()
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
 					SetPlayerHealth(i, 0.0);
+					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
 				}
 				PlayerInfo[i][pJailed] = 0;
@@ -2608,32 +2678,26 @@ public JednaSekundaTimer()
 				SendClientMessage(i, COLOR_WHITE, "na specjalnym kanale stworzonym dla nowych graczy. Po prostu wpisz /n [swoje pytanie]");
 				SendClientMessage(i, COLOR_WHITE, "To ju¿ koniec samouczka, lecz zasad jest jeszcze wiele. znajdziesz je na forum.");
 			}
+			else if(TutTime[i] == 124)
+			{
+				TogglePlayerSpectating(i, false);
+				
+				SetPlayerPosEx(i, 208.3876,-34.8742,1001.9297);
+				SetPlayerFacingAngle(i, 138.8926);
+
+				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
+				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
+			}
 			else if(TutTime[i] == 125)
 			{
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
 				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
-				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
-				//SetPlayerSpawn(i);
-				//LogujeSieBezKlauna[i] = 0;
-                //SetPVarInt(i, "class-sel", 1);
-				//ForceClassSelection(i);
-                //TogglePlayerSpectating(i, true);
-                //TogglePlayerSpectating(i, false);
-				//SetPlayerVirtualWorld(i, 0);
-
-				SetPlayerSpawn(i);
-				SpawnPlayer(i);
-
+				PlayerInfo[i][pMuted] = 0;
+				
+				SendClientMessage(i, COLOR_NEWS, "A teraz wybierz, jak ma wygl¹daæ twoja postaæ.");
 				SetPVarInt(i, "wyborPierwszego", 1);
-
-				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
-				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
-
 				NowaWybieralka::Setup(i);
-
-				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
-				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
 			}
 		}
 		if(PlayerTazeTime[i] >= 1)
@@ -3008,7 +3072,7 @@ public JednaSekundaTimer()
 				PlayerCuffedTime[i] -= 1;
 			}
 		}
-		if(PlayerCuffed[i] == 2 || PlayerCuffed[i] == 3)
+		if(PlayerCuffed[i] == 2 || PlayerCuffed[i] == 3 || PlayerTied[i] == 1)
 		{
 			if(PlayerCuffedTime[i] <= 0)
 			{
@@ -3020,7 +3084,6 @@ public JednaSekundaTimer()
 				PlayerCuffed[i] = 0;
 				PlayerCuffedTime[i] = 0;
 				pobity[i] = 0;
-				//obezwladniony[i] = 0;
 				PlayerInfo[i][pMuted] = 0;
 				PlayerTied[i] = 0;
                 PlayerInfo[i][pBW]=0;

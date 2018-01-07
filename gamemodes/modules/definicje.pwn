@@ -1,8 +1,6 @@
 //definicje.pwn
 
-#pragma tabsize 0 // <------------------------------------------
-
-#define DEBUG 2
+//#pragma tabsize 0 // <------------------------------------------nope
 
 new Float:czitX;
 new Float:czitY;

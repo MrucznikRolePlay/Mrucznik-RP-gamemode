@@ -27,13 +27,7 @@ forward StartKarting();
 forward StartPaintball();
 forward SetPlayerUnjail();
 forward StoppedVehicle();
-forward AccountSave();
-
-//Do public
-forward SetupPlayerForClassSelection(playerid);
-forward SetPlayerTeamFromClass(playerid,classid);
-/*forward OnPlayerLogin(playerid,password[]);
-forward OnPlayerRegister(playerid, password[]);*/
+forward ServerStuffSave();
 
 //  09.06.2014
 //Przeniesione z funkcji

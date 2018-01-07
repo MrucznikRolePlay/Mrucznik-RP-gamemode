@@ -8,6 +8,7 @@ new scan;
 new Float:oldhealth[MAX_PLAYERS];
 new Float:newhealth[MAX_PLAYERS];
 new pasy[100];//pasy
+new kask[100];
 
 forward ProxDetector(Float:radi, playerid, string[],col1,col2,col3,col4,col5);
 
@@ -46,7 +47,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	    incar[playerid] = 1;
 		return 1;
 	}
-	if(oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT)
+	if((oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT) || (oldstate == PLAYER_STATE_PASSENGER && newstate == PLAYER_STATE_ONFOOT))
 	{
 		KillTimer(scan);
 		new nick[MAX_PLAYER_NAME];
@@ -54,9 +55,16 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		GetPlayerName(playerid, nick, sizeof(nick));
 		if(pasy[playerid] == 1)
 		{
-		   	format(string, sizeof(string), "* %s odpina pasy", nick);
+		   	format(string, sizeof(string), "* %s odpina pasy.", nick);
 			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
 			pasy[playerid] = 0;
+		}
+		if(kask[playerid] == 1)
+		{
+		   	format(string, sizeof(string), "* %s œci¹ga kask z g³owy.", nick);
+			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+			RemovePlayerAttachedObject(playerid, 3);
+			kask[playerid] = 0;
 		}
 		incar[playerid] = 0;
 		return 1;
@@ -76,21 +84,62 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 		if(!strcmp(cmdtext, "/zp", true) || !strcmp(cmdtext, "/zapnijpasy", true))
 		{
-		    new nick[MAX_PLAYER_NAME];
-		   	new string[256];
-			GetPlayerName(playerid, nick, sizeof(nick));
-	    	format(string, sizeof(string), "* %s zapina pasy", nick);
-			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-			pasy[playerid] = 1;
+		    if(!IsABike(GetPlayerVehicleID(playerid)))
+	    	{
+		    	new nick[MAX_PLAYER_NAME];
+		   		new string[256];
+				GetPlayerName(playerid, nick, sizeof(nick));
+	    		format(string, sizeof(string), "* %s zapina pasy", nick);
+				ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+				pasy[playerid] = 1;
+            }
+			else
+			{
+				SendClientMessage(playerid,COLOR,"Nie mo¿esz zapi¹æ pasów!");
+			}
 		}
 		if(!strcmp(cmdtext, "/op", true) || !strcmp(cmdtext, "/odepnijpasy", true))
 		{
-		    new nick[MAX_PLAYER_NAME];
-		   	new string[256];
-			GetPlayerName(playerid, nick, sizeof(nick));
-	    	format(string, sizeof(string), "* %s odpina pasy", nick);
-			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-			pasy[playerid] = 0;
+		    if(!IsABike(GetPlayerVehicleID(playerid)))
+	    	{
+		    	new nick[MAX_PLAYER_NAME];
+		   		new string[256];
+				GetPlayerName(playerid, nick, sizeof(nick));
+	    		format(string, sizeof(string), "* %s odpina pasy", nick);
+				ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+				pasy[playerid] = 0;
+            }
+			else
+			{
+				SendClientMessage(playerid,COLOR,"Nie mo¿esz odpi¹æ pasów!");
+			}
+		}
+		if(!strcmp(cmdtext, "/kask", true))
+		{
+			if(IsABike(GetPlayerVehicleID(playerid)))
+	    	{
+		    	new nick[MAX_PLAYER_NAME];
+		   		new string[256];
+				GetPlayerName(playerid, nick, sizeof(nick));
+	    		if(kask[playerid] == 1)
+				{
+		   			format(string, sizeof(string), "* %s œci¹ga kask z g³owy.", nick);
+					ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+					RemovePlayerAttachedObject(playerid, 3);
+					kask[playerid] = 0;
+				}
+				else if(kask[playerid] != 1)
+				{
+			    	format(string, sizeof(string), "* %s zak³ada kask na g³owê.", nick);
+					ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+					SetPlayerAttachedObject(playerid,3 , 18645, 2, 0.07, 0.017, 0, 88, 75, 0);
+					kask[playerid] = 1;
+				}
+			}
+			else
+			{
+				SendClientMessage(playerid,COLOR,"Nie mo¿esz za³o¿yæ kasku!");
+			}
 		}
 	}
 	return 0;
@@ -137,6 +186,33 @@ public scanhp(playerid)
 					}
 				}
 			}
+			else if(kask[playerid] == 1)
+		    {
+		        if(WszedlDoPojazdu[playerid] == 0)
+		        {
+			        if(oldhealth[playerid] > (newhealth[playerid] + 120))
+					{
+					    new nick[MAX_PLAYER_NAME];
+				    	new string[256];
+				    	new Float:zyciewypadku;
+						GetPlayerName(playerid, nick, sizeof(nick));
+						GetPlayerHealth(playerid, zyciewypadku);
+						SetPlayerHealth(playerid, zyciewypadku-7);
+					    format(string, sizeof(string), "* %s uderzy³ kaskiem w kierownicê.", nick);
+						ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+						SendClientMessage(playerid,COLOR,"Ale przywali³eœ, szczêœcie ¿e mia³eœ kask na g³owie!");
+					}
+			        else if(oldhealth[playerid] > (newhealth[playerid] + hp))
+					{
+				 		new nick[MAX_PLAYER_NAME];
+				    	new string[256];
+						GetPlayerName(playerid, nick, sizeof(nick));
+					    format(string, sizeof(string), "* Kask uratowa³ %s i nie dozna³ powa¿nych obra¿eñ. (( %s ))", nick, nick);
+						ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+					    SendClientMessage(playerid,COLOR,"Kolejna st³uczka, mia³eœ kask na g³owie i nic ci siê nie sta³o!");
+					}
+				}
+			}
 			else
 			{
 			    if(WszedlDoPojazdu[playerid] == 0)
@@ -150,9 +226,16 @@ public scanhp(playerid)
 						GetPlayerHealth(playerid, zyciewypadku);
 						TogglePlayerControllable(playerid, 0);
 						SetPlayerHealth(playerid, zyciewypadku-20);
-					    format(string, sizeof(string), "* %s z powodu wypadku wylecia³ z auta", nick);
+					    format(string, sizeof(string), "* %s z powodu wypadku wylecia³ z pojazdu.", nick);
 						ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-					    SendClientMessage(playerid,COLOR,"Ale przywali³eœ, aby unikn¹æ wypadania z samochodu wpisz /zp!");
+						if(IsABike(GetPlayerVehicleID(playerid)))
+	    				{
+					    	SendClientMessage(playerid,COLOR,"Wypad³eœ z pojazdu, aby unikn¹æ wypadania z pojazdu wpisz /kask!");
+						}
+						else
+						{
+						    SendClientMessage(playerid,COLOR,"Wypad³eœ z pojazdu, aby unikn¹æ wypadania z pojazdu wpisz /zp!");
+						}
 					    new Float:px, Float:py, Float:pz, Float:pa;
 						GetPlayerFacingAngle(playerid,pa);
 						if(pa >= 0.0 && pa <= 22.5) //n1
@@ -210,9 +293,16 @@ public scanhp(playerid)
 						GetPlayerName(playerid, nick, sizeof(nick));
 						GetPlayerHealth(playerid, zyciewypadku);
 						SetPlayerHealth(playerid, zyciewypadku-7);
-					    format(string, sizeof(string), "* %s mia³ odpiête pasy i uderzy³ g³ow¹ w kierownice (( %s ))", nick, nick);
+					    format(string, sizeof(string), "* %s uderzy³ g³ow¹ w kierownicê. (( %s ))", nick, nick);
 						ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-					    SendClientMessage(playerid,COLOR,"Kolejna st³uczka, aby unikn¹æ obra¿eñ wpisz /zp!");
+						if(IsABike(GetPlayerVehicleID(playerid)))
+	    				{
+					    	SendClientMessage(playerid,COLOR,"Kolejna st³uczka, aby unikn¹æ obra¿eñ wpisz /kask!");
+						}
+						else
+						{
+						    SendClientMessage(playerid,COLOR,"Kolejna st³uczka, aby unikn¹æ obra¿eñ wpisz /zp!");
+						}
 					}
 				}
 			}
@@ -270,4 +360,15 @@ public ProxDetector(Float:radi, playerid, string[],col1,col2,col3,col4,col5)
 		}
 	}//not connected
 	return 1;
+}
+stock IsABike(vehicleid) //Made by me :D
+{
+	new result;
+	new model = GetVehicleModel(vehicleid);
+    switch(model)
+    {
+        case 509, 481, 510, 462, 448, 581, 522, 461, 521, 523, 463, 586, 468, 471: result = model;
+        default: result = 0;
+    }
+	return result;
 }
