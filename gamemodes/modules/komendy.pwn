@@ -2921,7 +2921,7 @@ CMD:reklama(playerid)
         SendCommandLogMessage(string);
 		foreach(Player, i)
 		{
-			if(PlayerInfo[i][pMemebr] == 8 || PlayerInfo[i][pLider] == 8 )
+			if(PlayerInfo[i][pMember] == 8 || PlayerInfo[i][pLider] == 8 )
 			{
 				SendClientMessage(i, 0xD8C173FF, string);
 			}
@@ -22970,7 +22970,7 @@ CMD:adminajail(playerid, params[])
 				        dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
 						SendClientMessage(playa, COLOR_NEWS, "Sprawdü czy otrzymana kara jest zgodna z listπ kar i zasad, znajdziesz jπ na www.Mrucznik-RP.pl");
                         Wchodzenie(playa);
-						PlayerPlaySound(playa, 141, 0.0, 0.0, 0.0);
+						PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
                     }
 				}
 			}
