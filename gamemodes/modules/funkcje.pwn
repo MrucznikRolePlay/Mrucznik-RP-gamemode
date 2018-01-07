@@ -8728,11 +8728,6 @@ public TRAIN_DoHorn(veh)
     }
 }
 
-stock IS_AtAutomatBiletowy(playerid)
-{
-    if(IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1899.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1896.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1893.91455, 13.58940) || IsPlayerInRangeOfPoint(playerid, 3.0, 1736.0, -1902.91455, 13.58940)) return 1;
-    return 0;
-}
 
 //13.07 system skinow mysql
 stock DestroySkinSelection(playerid)

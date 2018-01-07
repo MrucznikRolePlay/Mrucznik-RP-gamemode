@@ -497,21 +497,6 @@ CMD:msgbox(playerid, params[])
     return 1;
 }
 
-CMD:bilet(playerid, params[])
-{
-    if(!IS_AtAutomatBiletowy(playerid)) return 1;
-    new kasa = kaska[playerid];
-    if(kasa < 1000) return PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
-    DajKase(playerid, -1000);
-    PlayerPlaySound(playerid, 12201, 0.0, 0.0, 0.0);
-    Sejf_Add(FRAC_KT, 1000);
-    new str[64];
-    GetPlayerName(playerid, str, 64);
-    format(str, 64, "* %s kupuje bilet *", str);
-    ProxDetector(15.0, playerid, str, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    return 1;
-}
-
 CMD:loadconfig(playerid, params[])
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
@@ -2932,8 +2917,15 @@ CMD:reklama(playerid)
 		}
 		SendClientMessageToAll(COLOR_WHITE, "|___________ Firma Sprz¹taj¹ca ___________|");
 		SendClientMessageToAll(COLOR_LIGHTBLUE, "Chcesz pozbyæ siê jakiegoœ œmiecia? Skorzystaj z us³ug ciecia! ((/kontrakt))");
-        format(string, 128, "CMD_Info: /ha u¿yte przez %s [%d]", GetNick(playerid), playerid);
+        format(string, sizeof(string), "CMD_Info: /ha u¿yte przez %s [%d]", GetNick(playerid), playerid);
         SendCommandLogMessage(string);
+		foreach(Player, i)
+		{
+			if(PlayerInfo[i][pMemebr] == 8 || PlayerInfo[i][pLider] == 8 )
+			{
+				SendClientMessage(i, 0xD8C173FF, string);
+			}
+		}
         CMDLog(string);
 		AntySpam[playerid] = 1;
 		SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
@@ -16558,7 +16550,7 @@ CMD:k(playerid, params[])
             }
         }
 		//Text 3 D
-        format(string, sizeof(string), "Krzyczy: %s!!", params);
+        format(string, sizeof(string), "%s Krzyczy: %s!!", GetNick(playerid), params);
         printf("%s", string);
 		//SetPlayerChatBubble(playerid,string,COLOR_WHITE,30.0,8000);
         ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
