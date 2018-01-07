@@ -34700,7 +34700,7 @@ CMD:news(playerid, params[])
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					//OOCNews(COLOR_NEWS,string);
-                    OOCNews(0xFF8C55FF, string);
+                    OOCNews(0xBB5D00FF, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
 					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }
