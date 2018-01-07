@@ -239,6 +239,7 @@ COMMAND:changelog(playerid, params[])
 
 stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	#pragma unused inputtext
 	if(dialogid == 1963)
 	{
 		return showChangeLog(playerid);
@@ -249,6 +250,28 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 		switch(listitem)
 		{
 			case 0:
+			{
+				new string[2200];
+				format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.84\n\n");
+				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}Przyczepialne obiekty kamizelki\t\n", string);
+				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}Anty-sprint po obezw³adnieniu\t\n", string);
+				format(string, 2200, "%s{C0C0C0}nowoœæ\t{FFFFFF}Nowa wybiera³ka\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Inny sposób sprawdzania uprawnieñ pojazdów\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Zmiana spawnu NOA\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Brak kamizelki na spawnie dla s³u¿b porz¹dkowych\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}G³oœnik nie jest ju¿ wyjmowany z pojazdu SAN\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Zmiany w iloœci pieniêdzy przyznawanej za zabicie przestêpcy\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}80%% trafia do sejfu, 20%% do oficera\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}20 osób na stronê dla komendy /fpanel\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Zmiany w komendzie /napraw\t\n", string);
+				format(string, 2200, "%s{C0C0C0}zmiana\t{FFFFFF}Zwiêkszenie cen za tankowanie i naprawê\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}Bugfix GPS\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}Naprawiono bug z pust¹ list¹ /wanted u ³owców nagród\t\n", string);
+				format(string, 2200, "%s{C0C0C0}bugfix\t{FFFFFF}Ograniczono /wezportfel do 1 000 000$\t\n", string);
+
+				ShowPlayerDialogEx(playerid, 1963, DIALOG_STYLE_MSGBOX, "{C0C0C0}Mrucznik-RP » Zmiany w wersji 2.5.84", string, "Ok", "");
+			}
+			case 1:
 			{
 				new string[2200];
 				format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.83\n\n");
@@ -270,7 +293,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				ShowPlayerDialogEx(playerid, 1963, DIALOG_STYLE_MSGBOX, "{C0C0C0}Mrucznik-RP » Zmiany w wersji 2.5.83", string, "Ok", "");
 			}
-			case 1:
+			case 2:
 			{
 				new string[2200];
 		        format(string, 2200, "{FFFFFF}Lista zmian aktualizacji 2.5.82\n\n");
@@ -292,7 +315,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        ShowPlayerDialogEx(playerid, 1963, DIALOG_STYLE_MSGBOX, "{C0C0C0}Mrucznik-RP » Zmiany w wersji 2.5.82", string, "Ok", "");
 			}
-			case 2:
+			case 3:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono bugi i b³êdy.");
@@ -319,7 +342,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 3:
+			case 4:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   BY PECET   ---------");
@@ -357,7 +380,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 4:
+			case 5:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   BY niceCzlowiek   ---------");
@@ -381,7 +404,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 5: 
+			case 6: 
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_WHITE,"Dodano now¹ frakcjê - SASP (San Andreas State Police).");
@@ -392,7 +415,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 6:
+			case 7:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -418,7 +441,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 7:
+			case 8:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 		        SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -467,7 +490,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 		        showChangeLog(playerid);
 			}
-			case 8:
+			case 9:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -477,7 +500,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 9:
+			case 10:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------    Systemy   ---------");
@@ -552,7 +575,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 10:
+			case 11:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   G³ówne systemy   ---------");
@@ -562,7 +585,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 11:
+			case 12:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   B³êdy i niedoróbki   ---------");
@@ -593,7 +616,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
-			case 12:
+			case 13:
 			{
 				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
 				SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
@@ -660,7 +683,8 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 	if(page == CHANGELOG_MAIN)
 	{
 		new string[900];
-		format(string, sizeof(string), "##\t"#HQ_COLOR_TEKST2"2.5.83\n");
+		format(string, sizeof(string), "##\t"#HQ_COLOR_TEKST2"2.5.84\n");
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.83\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.82\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.8\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.7\n", string);
@@ -989,6 +1013,7 @@ stock LoadPrzewinienia()
 
 stock noYsi_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	#pragma unused inputtext
 	if(dialogid == 1590)
 	{
 		if(!response) return 1;

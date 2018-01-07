@@ -1,5 +1,7 @@
 //zmienne.pwn
 
+new saveMyAccountTimer[MAX_PLAYERS];//respawn
+new nickRP[MAX_PLAYERS][MAX_PLAYER_NAME];
 
 new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
@@ -562,7 +564,6 @@ new SanDuty[MAX_PLAYERS];
 new sanwyjdz[MAX_PLAYERS];
 new WarningDuty[MAX_PLAYERS];
 new NJDuty[MAX_PLAYERS];
-new RegistrationStep[MAX_PLAYERS];
 new MapIconsShown[MAX_PLAYERS];
 new OnCK[MAX_PLAYERS];
 new GettingCK[MAX_PLAYERS];
@@ -693,7 +694,6 @@ new CallCost[MAX_PLAYERS];
 new gPlayerAccount[MAX_PLAYERS];
 new gPlayerMission[MAX_PLAYERS];
 new vKickEx[MAX_PLAYERS];
-new LogujeSieBezKlauna[MAX_PLAYERS];
 //new MissionPlayable = 0;
 new newbie = 1;
 new noooc = 1;
@@ -869,8 +869,6 @@ new WindaYKZ;
 new WindaYKZ2 = 0;
 new WindaYKZKrata;
 new WindaYKZKratas = 1;
-new BramaYKZ;
-new BramaYKZs = 1;
 new Text3D:okienko[8];
 
 new bramadmv[19];
@@ -895,7 +893,6 @@ new pobity[MAX_PLAYERS];//pobity
 new pobilem[MAX_PLAYERS];
 new podczasbicia[MAX_PLAYERS];
 new spamwl[MAX_PLAYERS];
-new obezwladniony[MAX_PLAYERS];//obezwladniony
 new poddaje[MAX_PLAYERS];//poddaje siê
 new lowcap[MAX_PLAYERS];//³owca nagród który proponowa³ poddanie siê
 new lowcaz[MAX_PLAYERS];//³owca nagród dostaje zlecenie
@@ -1083,7 +1080,7 @@ ZerujZmienne(playerid)
 	TalkingLive[playerid] = INVALID_PLAYER_ID; LiveOffer[playerid] = 999; TakingLesson[playerid] = 0; CenaDawanegoSamolot[playerid] = 999;
 	RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; MapIconsShown[playerid] = 0; CenaDawanegoAuta[playerid] = 999; AntySpam[playerid] = 0; poscig[playerid] = 0;
 	DrugOffer[playerid] = 999; PlayerCuffed[playerid] = 0; PlayerCuffedTime[playerid] = 0; CenaDawanegoLodz[playerid] = 999;
-	DrugPrice[playerid] = 0; RegistrationStep[playerid] = 0; OnCK[playerid] = 999; GettingCK[playerid] = 999; OdpalanieSpam[playerid] = 0;
+	DrugPrice[playerid] = 0; OnCK[playerid] = 999; GettingCK[playerid] = 999; OdpalanieSpam[playerid] = 0;
 	DrugGram[playerid] = 0; ConnectedToPC[playerid] = 0; OrderReady[playerid] = 0;
 	JailPrice[playerid] = 0; MedicTime[playerid] = 0; NeedMedicTime[playerid] = 0; MedicBill[playerid] = 0; GotHit[playerid] = 0;
 	GoChase[playerid] = 999; GetChased[playerid] = 999; PlacedNews[playerid] = 0;

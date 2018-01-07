@@ -616,7 +616,7 @@ stock HABox(numer, playerid)
     }
     if(IsPlayerConnected(playerid))
     {
-        _MruGracz(playerid, "Kontrakt który podpisa³eœ zosta³ odebrany przez Hitmanów. Spodziewaj siê wykonania zlecenia.");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontrakt który podpisa³eœ zosta³ odebrany przez Hitmanów. Spodziewaj siê wykonania zlecenia.");
     }
 	return 1;
 }
@@ -1476,11 +1476,11 @@ stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', 
 stock GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
--	GetPlayerName(playerid, nick, sizeof(nick));
--	if(rp) {
-		strreplace(nick, '_', ' ');
--	}
--	return nick;
+ 	GetPlayerName(playerid, nick, sizeof(nick));
+	if(rp) {
+		return nickRP[playerid];
+	}
+	return nick;
 }
 
 stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
@@ -2064,6 +2064,13 @@ IsAFakeKonto(playerid)
 		if(strcmp(nick,"Gniewomir_Wonsz", false) == 0 || strcmp(nick,"Filemon_Paprotka", false) == 0 || strcmp(nick,"Julia_Wisefield", false) == 0)
 		{
 		    return 1;
+		}
+	
+		new ip[32];
+		GetPlayerIp(playerid,ip,sizeof(ip));
+		if(strcmp(ip,"185.6.30.124", false) == 0)
+		{
+			return 1;
 		}
 	}
 	return 0;
@@ -7593,7 +7600,8 @@ public MRP_ForceDialog(playerid, dialogid)
     return 1;
 }
 
-stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[])
+forward ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[]);
+public ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[])
 {
 	ShowPlayerDialog(playerid, dialogid, style, caption, info, button1, button2);
 	iddialog[playerid] = dialogid;
@@ -7996,9 +8004,6 @@ public MUSIC_Response(index, response_code, data[])
 
 public OPCLogin(playerid)
 {
-    //Sprawdzanie kar
-    //if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
-
     new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
 
@@ -8007,14 +8012,14 @@ public OPCLogin(playerid)
     // str[128];
     //format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
     //PlayAudioStreamForPlayer(playerid, str);
-
-    SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
+	
+    /*SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
     SetPlayerCameraPos(playerid, 1868.1099, -1936.2098, 48.0756);
-    SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);
+    SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);*/
     SetPlayerVirtualWorld(playerid, 0);
     SetPlayerInterior(playerid, 0);
 
-    //TourCamera(playerid, 0);
+    TourCamera(playerid, 0);
 
     //Strefy load
     ZonePTXD_Load(playerid);
@@ -8030,7 +8035,6 @@ public OPCLogin(playerid)
     }
 
 	SetPlayerHealth(playerid, 100);
-	LogujeSieBezKlauna[playerid] = 1;
 	GUIExit[playerid] = 1;
 	SafeTime[playerid] = 60*3;//ogarniczenie 3 minuty na logowanie
 	SetPlayerColor(playerid,COLOR_GRAD2);
@@ -10826,11 +10830,20 @@ stock ChangePlayerName(playerid, name[])
 	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
 	SetPlayerName(playerid, name);
+	SetRPName(playerid);
 	
     format(PlayerInfo[playerid][pNick], 32, "%s", name);
-
+	
     MruMySQL_SaveAccount(playerid);
     return 1;
+}
+
+stock SetRPName(playerid)
+{
+	new nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	format(nickRP[playerid], MAX_PLAYER_NAME, "%s", nick);
+	strreplace(nickRP[playerid], '_', ' ');
 }
 
 public VendCheck(playerid)

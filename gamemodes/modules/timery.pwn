@@ -538,6 +538,17 @@ public DostalTazerem(playerid)
     return 1;
 }
 //tazer
+
+//po /ob
+
+forward WstalPoOB(playerid);
+public WstalPoOB(playerid)
+{
+    GameTextForPlayer(playerid, "Odzyskales sprawnosc", 3000, 5);
+    ClearAnimations(playerid);
+	return 1;
+}
+
 //AFK timer
 forward PlayerAFK(playerid, afktime, breaktime);
 public PlayerAFK(playerid, afktime, breaktime)
@@ -650,7 +661,7 @@ public MainTimer()
     }
     if(TICKS_15Min == (60*15)-1)
     {
-        AccountSave();
+        ServerStuffSave();
         IdleKick();
     }
     if(TICKS_30Min == (60*30)-1)
@@ -706,15 +717,25 @@ public MainTimer()
 	#endif
 }
 
-public AccountSave()
+//TODO: mysql asynchroniczny
+forward SaveMyAccountTimer(playerid);
+public SaveMyAccountTimer(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(gPlayerLogged[playerid] == 1)
+		{
+			MruMySQL_SaveAccount(playerid);
+		}
+	}
+	return 1;
+}
+
+public ServerStuffSave()
 {
 	#if DEBUG == 1
-		printf("AccountSave - begin");
+		printf("ServerStuffSave - begin");
 	#endif
-    foreach(Player, i)
-    {
-        MruMySQL_SaveAccount(i);
-    }
     for(new i=0;i<MAX_FRAC;i++)
     {
         Sejf_Save(i);
@@ -737,7 +758,7 @@ public AccountSave()
         }
     }
 	#if DEBUG == 1
-		printf("AccountSave - end");
+		printf("ServerStuffSave - end");
 	#endif
 }
 
@@ -1859,7 +1880,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 2:
 					{
@@ -1871,7 +1892,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 3:
 					{
@@ -1884,7 +1905,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 4:
 					{
@@ -1897,7 +1918,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 5:
 					{
@@ -1911,7 +1932,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 6:
 					{
@@ -1925,7 +1946,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 7:
 					{
@@ -1939,7 +1960,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 8:
 					{
@@ -1953,7 +1974,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 9:
 					{
@@ -1967,7 +1988,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 					case 10:
 					{
@@ -1981,7 +2002,7 @@ public CustomPickups()
 						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
 						SetPlayerArmour(i, 90);
 						SetPlayerHealth(i, 100);
-						_MruAdmin(i, "Odebra³eœ swoje zamówienie");
+						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 				}
 				OrderReady[i] = 0;
@@ -2134,6 +2155,7 @@ public JednaSekundaTimer()
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
 					SetPlayerHealth(i, 0.0);
+					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
 				}
 				PlayerInfo[i][pJailed] = 0;
@@ -2608,32 +2630,20 @@ public JednaSekundaTimer()
 				SendClientMessage(i, COLOR_WHITE, "na specjalnym kanale stworzonym dla nowych graczy. Po prostu wpisz /n [swoje pytanie]");
 				SendClientMessage(i, COLOR_WHITE, "To ju¿ koniec samouczka, lecz zasad jest jeszcze wiele. znajdziesz je na forum.");
 			}
+			else if(TutTime[i] == 124)
+			{
+				TogglePlayerSpectating(i, false);
+			}
 			else if(TutTime[i] == 125)
 			{
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
 				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
-				TogglePlayerControllable(i, 1);
 				MedicBill[i] = 0;
-				//SetPlayerSpawn(i);
-				//LogujeSieBezKlauna[i] = 0;
-                //SetPVarInt(i, "class-sel", 1);
-				//ForceClassSelection(i);
-                //TogglePlayerSpectating(i, true);
-                //TogglePlayerSpectating(i, false);
-				//SetPlayerVirtualWorld(i, 0);
-
-				SetPlayerSpawn(i);
-				SpawnPlayer(i);
-
+				PlayerInfo[i][pMuted] = 0;
+				
+				SendClientMessage(i, COLOR_NEWS, "A teraz wybierz, jak ma wygl¹daæ twoja postaæ.");
 				SetPVarInt(i, "wyborPierwszego", 1);
-
-				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
-				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
-
 				NowaWybieralka::Setup(i);
-
-				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
-				SetPlayerCameraLookAt(i, 208.775955, -34.981678, 1001.929687);
 			}
 		}
 		if(PlayerTazeTime[i] >= 1)
@@ -2763,7 +2773,7 @@ public JednaSekundaTimer()
 										}
 										else
 										{
-											_MruGracz(Boxer2, "* Zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boksera!");
+											SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boxera !");
 										}
 									}
 									else
@@ -2778,29 +2788,29 @@ public JednaSekundaTimer()
 								}
 							}//TBoxer
 							format(string, sizeof(string), "* Przegra³eœ walkê z %s.", winner);
-							_MruGracz(Boxer1, string);
+							SendClientMessage(Boxer1, COLOR_LIGHTBLUE, string);
 							GameTextForPlayer(Boxer1, "~r~you lost", 3500, 1);
 							format(string, sizeof(string), "* Wygra³eœ walkê z %s.", loser);
-							_MruGracz(Boxer2, string);
+							SendClientMessage(Boxer2, COLOR_LIGHTBLUE, string);
 							GameTextForPlayer(Boxer2, "~r~Wygrales", 3500, 1);
 							if(GetPlayerHealth(Boxer1, health) < 20)
 							{
-								_MruGracz(Boxer1, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
 								SetPlayerHealth(Boxer1, 30.0);
 							}
 							else
 							{
-								_MruGracz(Boxer1, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer1, 50.0);
 							}
 							if(GetPlayerHealth(Boxer2, health) < 10)
 							{
-								_MruGracz(Boxer2, "* Czujesz siê wykoñczony, idŸ coœ zjeœæ.");
+								SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* Czujesz siê wykoñczony, idŸ coœ zjeœæ.");
 								SetPlayerHealth(Boxer2, 30.0);
 							}
 							else
 							{
-								_MruGracz(Boxer2, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer2, 50.0);
 							}
 							GameTextForPlayer(Boxer1, "~g~Walka skonczona", 5000, 1); GameTextForPlayer(Boxer2, "~g~Walka skonczona", 5000, 1);
@@ -2839,7 +2849,7 @@ public JednaSekundaTimer()
 										}
 										else
 										{
-											_MruGracz(Boxer1, "* Zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boksera !");
+											SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* zosta³byœ mistrzem bokserskim gdybyœ mia³ pracê boxera !");
 										}
 									}
 									else
@@ -2854,29 +2864,29 @@ public JednaSekundaTimer()
 								}
 							}//TBoxer
 							format(string, sizeof(string), "* Przegra³eœ walkê z %s.", winner);
-							_MruGracz(Boxer2, string);
+							SendClientMessage(Boxer2, COLOR_LIGHTBLUE, string);
 							GameTextForPlayer(Boxer2, "~r~Przegrana", 3500, 1);
 							format(string, sizeof(string), "* Wygra³eœ walkê z %s.", loser);
-							_MruGracz(Boxer1, string);
+							SendClientMessage(Boxer1, COLOR_LIGHTBLUE, string);
 							GameTextForPlayer(Boxer1, "~g~Wygrana", 3500, 1);
 							if(GetPlayerHealth(Boxer1, health) < 20)
 							{
-								_MruGracz(Boxer1, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
 								SetPlayerHealth(Boxer1, 30.0);
 							}
 							else
 							{
-								_MruGracz(Boxer1, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								SendClientMessage(Boxer1, COLOR_LIGHTBLUE, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer1, 50.0);
 							}
 							if(GetPlayerHealth(Boxer2, health) < 20)
 							{
-								_MruGracz(Boxer2, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
+								SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* Czujesz siê wyczerpany, idŸ coœ zjeœæ.");
 								SetPlayerHealth(Boxer2, 30.0);
 							}
 							else
 							{
-								_MruGracz(Boxer2, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
+								SendClientMessage(Boxer2, COLOR_LIGHTBLUE, "* Czujesz siê wspaniale, pomimo odbytego pojedynku.");
 								SetPlayerHealth(Boxer2, 50.0);
 							}
 							GameTextForPlayer(Boxer1, "~g~Koniec walki", 5000, 1); GameTextForPlayer(Boxer2, "~g~Koniec walki", 5000, 1);
@@ -3008,7 +3018,7 @@ public JednaSekundaTimer()
 				PlayerCuffedTime[i] -= 1;
 			}
 		}
-		if(PlayerCuffed[i] == 2 || PlayerCuffed[i] == 3)
+		if(PlayerCuffed[i] == 2 || PlayerCuffed[i] == 3 || PlayerTied[i] == 1)
 		{
 			if(PlayerCuffedTime[i] <= 0)
 			{
@@ -3020,7 +3030,6 @@ public JednaSekundaTimer()
 				PlayerCuffed[i] = 0;
 				PlayerCuffedTime[i] = 0;
 				pobity[i] = 0;
-				//obezwladniony[i] = 0;
 				PlayerInfo[i][pMuted] = 0;
 				PlayerTied[i] = 0;
                 PlayerInfo[i][pBW]=0;
@@ -3093,7 +3102,7 @@ public Fillup()
 				Gas[VID] += FillUp;
 				FillUp = FillUp * 120;
 				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUp);
-				_MruGracz(i,string);
+				SendClientMessage(i, COLOR_LIGHTBLUE,string);
 				DajKase(i, - FillUp);
 				Refueling[i] = 0;
 			}
