@@ -38127,6 +38127,56 @@ CMD:removecar(playerid, p[])
     return 1;
 } */
 
+CMD:setac(playerid, params[])
+{
+	if(PlayerInfo[playerid][pAdmin] >= 1000)
+	{
+		new string[128];
+		new ac_option;
+		new option;
+		
+		if(sscanf(params, "dD(-1)", ac_option, option)) 
+		{
+			sendTipMessage(playerid, "U¿yj /setac [id opcji] (on = 1, off = 0)");
+			return 1; 
+		}
+		
+		if(ac_option == -1)
+		{
+			for(new i; i<sizeof(nexac_ac_names); i++)
+			{
+				format(string, sizeof(string), "AC: %s = %s", nexac_ac_names[i], (IsAntiCheatEnabled(i)) ? "true" : "false");
+				SendClientMessage(playerid, -1, string);
+			}
+			return 1;
+		}
+		if(ac_option >= sizeof(nexac_ac_names) || ac_option < 0)
+		{
+			SendClientMessage(playerid, -1, "Nie ma takiej opcji");
+			return 1;
+		}
+		
+		//panel ac
+		if(option == -1)
+		{
+			format(string, sizeof(string), "AC: %s = %s", nexac_ac_names[ac_option], (IsAntiCheatEnabled(ac_option)) ? "true" : "false");
+			SendClientMessage(playerid, -1, string);
+		}
+		else if(option == 0 || option == 1)
+		{
+			format(string, sizeof(string), "AC set for %s: %s = %s", GetNick(giveplayerid), nexac_ac_names[ac_option], (option) ? "true" : "false");
+			SendClientMessage(playerid, -1, string);
+			EnableAntiCheat(ac_option, option);
+		}
+		else
+		{
+			SendClientMessage(playerid, -1, "1 - on, 0 - off");
+			return 1; 
+		}
+	}
+	return 1;
+}
+
 
 CMD:adminduty(playerid)
 {
