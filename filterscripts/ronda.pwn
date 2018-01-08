@@ -53,7 +53,7 @@
 
 
 #define RoundAbout::	RoundAbout_ // i kinda like it
-
+#define ITER_NONE -1
 
 #define MAX_ROUNDABOUTS 20 // to be expanded, honestly i dont think we're gonna use more cuz it's just for the lolz
 
@@ -100,6 +100,8 @@ new editingRoundAboutID[MAX_PLAYERS];
 COMMAND:ar(playerid, params[]) return cmd_aroundabout(playerid, params);
 COMMAND:aroundabout(playerid, params[])
 {
+	if(!IsPlayerAdmin(playerid)) return 1;
+
 	if( isnull(params) )
 		return SendClientMessage(playerid, -1, "(ROUNDABOUT) Params: create delete edit");
 

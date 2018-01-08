@@ -503,6 +503,8 @@ CMD:kp(playerid, params[]) return cmd_premium(playerid, params);
 CMD:dotacje(playerid, params[]) return cmd_premium(playerid, params);
 CMD:premium(playerid, params[])
 {
+	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
+
     if(IsPlayerConnected(playerid) && gPlayerLogged[playerid] != 0)
     {
         DialogMenuDotacje(playerid);
@@ -517,6 +519,8 @@ CMD:premium(playerid, params[])
 COMMAND:unikat(playerid, params[]) return cmd_premiumskin(playerid, params);
 COMMAND:premiumskin(playerid, params[])
 {
+	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
+	
 	if(isnull(params))
 		return sendTipMessage(playerid, "U¿yj /premiumskin [ID Skina]");
 
@@ -541,6 +545,8 @@ COMMAND:premiumskin(playerid, params[])
 
 COMMAND:skiny(playerid, params[])
 {
+	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
+	
 	ListPlayerUniqueSkins(playerid);
 
 	return 1;
@@ -549,6 +555,8 @@ COMMAND:skiny(playerid, params[])
 //----- Admin -----
 CMD:setmc(playerid, params[])
 {
+	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
+	
 	if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
 		new giveplayerid, VARmcVal;
@@ -580,6 +588,8 @@ CMD:setmc(playerid, params[])
 
 CMD:dajkp(playerid, params[])
 {
+	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
+	
 	if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
 		new giveplayerid, givetime;

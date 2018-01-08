@@ -30,8 +30,6 @@ SSCANF:fix(string[])
 /*CMD:marcepan(playerid, params[])
 {
 	//komenda tymczasowo wy³¹czona
-    return SendClientMessage(playerid, COLOR_PAPAYAWHIP, "S³ucham?");
-	
     if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5)
     {
         new id;
@@ -1091,32 +1089,42 @@ CMD:id(playerid, params[])
 	}
 	else
 	{
-
 		if(strlen(params) < 3)
-        {
-            MruDialog(playerid, "Informacja", "Musisz podaæ conajmniej 3 litery nicku.");
-            return 1;
-        }
+		{
+			sendErrorMessage(playerid, "Za krótka fraza.");
+			return 1;
+		}
+
+		SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
+
+		new c = 0;
+		new nick[MAX_PLAYER_NAME];
 
 		foreach(Player, i)
-        {
-            new name[24];
-            GetPlayerName(i, name, sizeof(name));
-            if(strfind(name, params, true) >= 0)
-            {
-                format(string, sizeof(string), "%s\n%d\t%s", string, i, name);
-            }
-        }
+		{
+			if(c >= 10) break;
 
-        if(strlen(string))
-        {
-            ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_LIST, "Wyniki wyszukiwania:", string, "Okej", "");
-        }
-        else
-        {
-            MruDialog(playerid, "Informacja", "Nie znaleziono ¿adnego gracza");
-        }
-		
+			GetPlayerName(i, nick, sizeof(nick));
+
+			if(strfind(nick, params, true) != -1)
+			{
+				format(string, sizeof(string), "ID: (%d) %s",i,nick);
+				SendClientMessage(playerid, COLOR_GRAD1, string);
+				c++;
+			}
+		}
+
+		if(c >= 10)
+		{
+			sendErrorMessage(playerid, "Zbyt du¿o wyników, zmieñ kryteria.");
+			return 1;
+		}
+
+		if(c == 0)
+		{
+			sendErrorMessage(playerid, "Nie znaleziono takiego nicku.");
+			return 1;
+		}
 	}
 	return 1;
 }
@@ -18941,7 +18949,7 @@ CMD:sms(playerid, params[])
 
 
 CMD:podnies(playerid) return cmd_od(playerid);
-CMD:pp(playerid) return cmd_od(playerid);
+CMD:p(playerid) return cmd_od(playerid);
 CMD:od(playerid)
 {
 	new string[64];
@@ -19172,7 +19180,7 @@ CMD:lockint(playerid)
 			new model = GetVehicleModel(vehicleid);
 			if(IsAInteriorVehicle(model))
 			{
-                if(!(IsCarOwner(playerid, vehicleid) || Car_GetOwnerType(playerid) == CAR_OWNER_FRACTION && Car_GetOwner(vehicleid) == GetPlayerFraction(playerid)))
+                if(!(IsCarOwner(playerid, vehicleid) || (Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && Car_GetOwner(vehicleid) == GetPlayerFraction(playerid)) ))
 				{
 					return sendTipMessageEx(playerid, COLOR_LIGHTGREEN, "Ten pojazd nie nale¿y do Ciebie!");
 				}
@@ -23078,6 +23086,8 @@ CMD:jail(playerid, params[])
 					SendClientMessage(playerid, COLOR_LIGHTRED, string);
 					format(string, sizeof(string), "* Zosta³eœ uwiêziony przez Admina %s.", sendername);
 					SendClientMessage(playa, COLOR_LIGHTRED, string);
+					format(string, sizeof(string), "* %s zosta³ uwiêziony w wiêzieniu na %d sekund przez admina %s.",giveplayer, money, sendername);
+					SendPunishMessage(string, playa);
 					ResetPlayerWeapons(playa);
 					PoziomPoszukiwania[playa] = 0;
 					PlayerInfo[playa][pJailed] = 1;
@@ -31910,7 +31920,7 @@ CMD:wez(playerid, params[])
 		{
 		    if(IsAtGasStation(playerid))
 			{
-			    new price = 20 * 40;
+			    new price = 20 * 120;
 			    format(string, sizeof(string), "* Wzi¹³eœ kanister z 20% paliwa za $%d",price);
 			    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			    PlayerInfo[playerid][pFuel] = 20;
@@ -34690,7 +34700,7 @@ CMD:news(playerid, params[])
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					//OOCNews(COLOR_NEWS,string);
-                    OOCNews(0xFF8C55FF, string);
+                    OOCNews(0xBB5D00FF, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
 					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }

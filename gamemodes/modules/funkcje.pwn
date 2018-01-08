@@ -6614,7 +6614,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
-	else if(model == 508)//journey
+	else if(model == 582)//sanvan
 	{
 		SetPlayerInterior(playerid, 1);
 	    SetPlayerPosEx(playerid, 739.4379,-1365.5950,25.8281);
@@ -6622,7 +6622,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
-	if(model != 416) SetPlayerVirtualWorld(playerid, vehicleid);
+	SetPlayerVirtualWorld(playerid, vehicleid);
     WnetrzeWozu[playerid] = vehicleid;
 	return 1;
 }
