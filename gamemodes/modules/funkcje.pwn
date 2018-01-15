@@ -6657,7 +6657,7 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	}
 	else if(model == 582)//sanvan
 	{
-	    SetPlayerPosEx(playerid, vehx-2, vehy-1, vehz);
+	    SetPlayerPosEx(playerid, vehx-1, vehy-1, vehz);
 	}
 	GameTextForPlayer(playerid, "~w~Opusciles pojazd", 5000, 1);
     SetPlayerVirtualWorld(playerid, 0);
