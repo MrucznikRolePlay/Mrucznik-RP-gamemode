@@ -12570,7 +12570,7 @@ CMD:stworzdom(playerid, params[])
 				return 1;
 			}
 
-			if(interior >= 1 && interior <= 46)
+			if(interior >= 1 && interior <= MAX_NrDOM)
 			{
 			    if(kesz >= 0 && kesz <= 1000000000)
 			    {
@@ -12604,7 +12604,7 @@ CMD:domint(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /domint [dom ID] [interior] ");
 			return 1;
 		}
-		if(interior >= 1 && interior <= 46)
+		if(interior >= 1 && interior <= MAX_NrDOM)
 		{
             Dom_ChangeInt(playerid, dld, interior);
 		}
@@ -20816,48 +20816,43 @@ CMD:wejdz(playerid)
                         PlayerInfo[playerid][pDomT] = h;
                         PlayerInfo[playerid][pDomWKJ] = i;
                         GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
-                        return 1;
                     }
-                    else
-                    {
-                        if(Dom[i][hZamek] == 1)
-                        {
-                            new deem = Dom[i][hDomNr];
-                            new h, m;
-                            GetPlayerTime(playerid, h, m);
-                            SetPlayerPosEx(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
-                            SetPlayerInterior(playerid, IntInfo[deem][Int]);
-                            SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
-                            SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);
-                            PlayerInfo[playerid][pDomT] = h;
-                            PlayerInfo[playerid][pDomWKJ] = i;
-                            GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
-                            return 1;
-                        }
-                        else
-                        {
-                            if(PlayerInfo[playerid][pAdmin] >= 1000)
-                            {
-                                new deem = Dom[i][hDomNr];
-                                new h, m;
-                                GetPlayerTime(playerid, h, m);
-                                SetPlayerPosEx(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
-                                SetPlayerInterior(playerid, IntInfo[deem][Int]);
-                                SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
-                                SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);
-                                PlayerInfo[playerid][pDomT] = h;
-                                PlayerInfo[playerid][pDomWKJ] = i;
-                                GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
-                                return 1;
-                            }
-                            else
-                            {
-                                sendErrorMessage(playerid, "Drzwi s¹ zamkniête.");
-                                GameTextForPlayer(playerid, "~r~Zamkniete", 5000, 1);
-                                return 1;
-                            }
-                        }
-                    }
+                    else if(Dom[i][hZamek] == 1)
+					{
+						new deem = Dom[i][hDomNr];
+						new h, m;
+						GetPlayerTime(playerid, h, m);
+						SetPlayerPosEx(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
+						SetPlayerInterior(playerid, IntInfo[deem][Int]);
+						SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
+						SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);
+						PlayerInfo[playerid][pDomT] = h;
+						PlayerInfo[playerid][pDomWKJ] = i;
+						GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
+					}
+					else if(PlayerInfo[playerid][pAdmin] >= 1000)
+					{
+						new deem = Dom[i][hDomNr];
+						new h, m;
+						GetPlayerTime(playerid, h, m);
+						SetPlayerPosEx(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
+						SetPlayerInterior(playerid, IntInfo[deem][Int]);
+						SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
+						SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);
+						PlayerInfo[playerid][pDomT] = h;
+						PlayerInfo[playerid][pDomWKJ] = i;
+						GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Drzwi s¹ zamkniête.");
+						GameTextForPlayer(playerid, "~r~Zamkniete", 5000, 1);
+						return 1;
+					}
+					
+					if(Dom[i][hVW] == 2001)
+						Wchodzenie(playerid);
+					return 1;
                 }
             }
         }
@@ -21990,7 +21985,7 @@ CMD:wyjdz(playerid)
 		    Wyjdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
 			Wyjdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
 
-			for(new i; i<MAX_NrDOM; i++)
+			for(new i; i<=MAX_NrDOM; i++)
 		    {
 				if(IsPlayerInRangeOfPoint(playerid, 5.0, IntInfo[i][Int_X], IntInfo[i][Int_Y], IntInfo[i][Int_Z]))
 				{

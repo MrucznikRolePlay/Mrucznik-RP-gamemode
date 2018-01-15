@@ -5656,7 +5656,11 @@ StworzDom(playerid, interior, oplata)
 		Dom[dld][hInt_Z] = IntInfo[interior][Int_Z];
 		Dom[dld][hInterior] = IntInfo[interior][Int];
 		//Dom[dld][hParcela] = dini_Int(string, "Parcela");//niet
-		Dom[dld][hVW] = dld;
+		
+		if(interior == 47)
+			Dom[dld][hVW] = 2001;
+		else
+			Dom[dld][hVW] = dld;
 		//format(GeT, sizeof(GeT), "%s", dini_Get(string, "Tekst_3D"));
 		//Dom[dld][h3D_txt] = GeT;
 		//hK_3D,
@@ -7004,13 +7008,13 @@ LadujInteriory()
     IntInfo[46][Pokoje] = 4;
     IntInfo[46][Cena] = 5000000;
 
-    IntInfo[47][Int_X] = 0;//dla shawna
-    IntInfo[47][Int_Y] = 0;
-    IntInfo[47][Int_Z] = 0;
+    IntInfo[47][Int_X] = 1284.1958;//WOŒP
+    IntInfo[47][Int_Y] = -810.7264;
+    IntInfo[47][Int_Z] = 109.1989;
     IntInfo[47][Int] = 0;
-    IntInfo[47][Kategoria] = 7;
-    IntInfo[47][Pokoje] = 10;
-    IntInfo[47][Cena] = 100000000;
+    IntInfo[47][Kategoria] = 5;
+    IntInfo[47][Pokoje] = 7;
+    IntInfo[47][Cena] = 40000000;
     return 1;
 }
 
