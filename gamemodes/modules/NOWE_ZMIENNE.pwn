@@ -1,5 +1,7 @@
 //zmienne.pwn
 
+new Text3D:WOSP[MAX_PLAYERS];
+
 new saveMyAccountTimer[MAX_PLAYERS];//respawn
 new nickRP[MAX_PLAYERS][MAX_PLAYER_NAME];
 

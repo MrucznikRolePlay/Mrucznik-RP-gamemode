@@ -14782,6 +14782,15 @@ CMD:datek(playerid, params[])
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 		SendClientMessage(playerid, COLOR_GRAD1, string);
 		PayLog(string);
+		
+		//WOŒP
+		if(WOSP[playerid] == 0)
+		{
+			WOSP[playerid] = Create3DTextLabel("WOŒP 2018", COLOR_WHITE, 0.0, 0.0, 0.3, 20.0, 0, 1);
+			Attach3DTextLabelToPlayer(WOSP[playerid], playerid, 0.0, 0.0, 0.3);
+			SetPlayerAttachedObject(playerid, 1, 1240, 2, 0.514999, -0.027999, 0.044999, 0.000000, 90.0, -7.400016);
+		}
+		
 	}
 	return 1;
 }
@@ -25181,13 +25190,7 @@ CMD:givegun(playerid, params[])
 		            	PlayerInfo[playa][pAmmo7] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 					}
-					else if( gun == 41 || gun == 43)
-					{
-					    PlayerInfo[playa][pGun7] = gun;
-		            	PlayerInfo[playa][pAmmo7] = ammo;
-						GivePlayerWeapon(playa, gun, ammo);
-					}
-					else if( gun == 42)
+					else if( gun >= 41 || gun <= 43)
 					{
 					    PlayerInfo[playa][pGun9] = gun;
 		            	PlayerInfo[playa][pAmmo9] = ammo;
@@ -34661,8 +34664,8 @@ CMD:news(playerid, params[])
 				        return 1;
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
-					//OOCNews(COLOR_NEWS,string);
-                    OOCNews(0xFF8C55FF, string);
+					OOCNews(COLOR_NEWS,string);
+                    //OOCNews(0xFF8C55FF, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
 					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }
@@ -38126,6 +38129,51 @@ CMD:removecar(playerid, p[])
     }
     return 1;
 } */
+
+CMD:setac(playerid, params[])
+{
+	if(PlayerInfo[playerid][pAdmin] >= 1000)
+	{
+		new string[128];
+		new ac_option;
+		new option;
+		
+		if(sscanf(params, "dD(-1)", ac_option, option)) 
+		{
+			sendTipMessage(playerid, "U¿yj /setac [id opcji] (on = 1, off = 0)");
+			return 1; 
+		}
+		
+		if(ac_option == -1)
+		{
+			for(new i; i<sizeof(nexac_ac_names); i++)
+			{
+				format(string, sizeof(string), "AC: %s = %s", nexac_ac_names[i], (IsAntiCheatEnabled(i)) ? "true" : "false");
+				SendClientMessage(playerid, -1, string);
+			}
+			return 1;
+		}
+		if(ac_option >= sizeof(nexac_ac_names) || ac_option < 0)
+		{
+			SendClientMessage(playerid, -1, "Nie ma takiej opcji");
+			return 1;
+		}
+		
+		//panel ac
+		if(option == -1)
+		{
+			format(string, sizeof(string), "AC set: %s = %s", nexac_ac_names[ac_option], (IsAntiCheatEnabled(ac_option)) ? "true" : "false");
+			SendClientMessage(playerid, -1, string);
+			EnableAntiCheat(ac_option, option);
+		}
+		else
+		{
+			SendClientMessage(playerid, -1, "1 - on, 0 - off");
+			return 1; 
+		}
+	}
+	return 1;
+}
 
 
 CMD:adminduty(playerid)

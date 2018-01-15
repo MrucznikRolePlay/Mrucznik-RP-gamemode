@@ -1,6 +1,5 @@
 //funkcje.pwn     AKTUALNA MAPA
 
-
 public Lowienie(playerid)
 {
 	FishGood[playerid] = 0;
@@ -6583,13 +6582,13 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    SetPlayerPosEx(playerid, 1074.3032226563, -1843.8029785156, 10657.265625);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
-	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~odrzutowcu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~odrzutowcu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 553)//nevada
 	{
         SetPlayerInterior(playerid, 1);
 	    SetPlayerPosEx(playerid, 1.808619,32.384357,1199.593750);
-	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~nevadzie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~nevadzie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 409)//limuzyna
 	{
@@ -6597,14 +6596,14 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    SetPlayerPosEx(playerid, 2985.498046875, 1866.7770996094, 371.35998535156);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
-	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~limuzynie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~limuzynie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 416)//karetka
 	{
 		SetPlayerVirtualWorld(playerid, 32);
 	    SetPlayerPosEx(playerid, 1079.5173, -1309.6299, 22.0575);
         Wchodzenie(playerid);
-	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Skalpel ~r~w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Skalpel ~r~w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 508)//journey
 	{
@@ -6612,7 +6611,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    SetPlayerPosEx(playerid, 2512.8455,-1729.0057,778.6371);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
-	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 582)//sanvan
 	{
@@ -6620,7 +6619,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    SetPlayerPosEx(playerid, 739.4379,-1365.5950,25.8281);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
-	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Mikrofon w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	SetPlayerVirtualWorld(playerid, vehicleid);
     WnetrzeWozu[playerid] = vehicleid;
@@ -6635,8 +6634,6 @@ Z_WnetrzaWozu(playerid, vehicleid)
     if(model == 484)//jacht
 	{
 	    SetPlayerPosEx(playerid, vehx, vehy, vehz+2);
-        Wchodzenie(playerid);
-	    TogglePlayerControllable(playerid, 0);
 	}
 	else if(model == 519)//shamal
 	{
@@ -6658,10 +6655,16 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
 	}
+	else if(model == 582)//sanvan
+	{
+	    SetPlayerPosEx(playerid, vehx-1, vehy-1, vehz);
+	}
 	GameTextForPlayer(playerid, "~w~Opusciles pojazd", 5000, 1);
     SetPlayerVirtualWorld(playerid, 0);
 	SetPlayerInterior(playerid, 0);
     WnetrzeWozu[playerid] = 0;
+	Wchodzenie(playerid);
+	TogglePlayerControllable(playerid, 0);
 	return 1;
 }
 
