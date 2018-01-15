@@ -4,16 +4,18 @@
 #define hp 30
 new incar[MAX_PLAYERS];
 new WszedlDoPojazdu[MAX_PLAYERS];
-new scan;
 new Float:oldhealth[MAX_PLAYERS];
 new Float:newhealth[MAX_PLAYERS];
-new pasy[100];//pasy
-new kask[100];
+new pasy[MAX_PLAYERS];//pasy
+new kask[MAX_PLAYERS];
+new scantimer[MAX_PLAYERS];
 
 forward ProxDetector(Float:radi, playerid, string[],col1,col2,col3,col4,col5);
 
 public OnFilterScriptInit()
 {
+	for(new i; i<MAX_PLAYERS; i++)
+		scantimer[i] = -1;
 	print("Wypadek by Mrucznik");
 	return 1;
 }
@@ -26,13 +28,17 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerDisconnect(playerid, reason)
 {
-	if(incar[playerid] == 1) KillTimer(scan);
+	if(incar[playerid] == 1) 
+	{
+		KillScanhpTimer(playerid);
+	}
 	return 1;
 }
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-	if(incar[playerid] == 1) KillTimer(scan);
+	if(incar[playerid] == 1)
+		KillScanhpTimer(playerid);
 	return 1;
 }
 
@@ -42,14 +48,14 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	GetVehicleHealth(vehicleid,newhealth[playerid]);
 	if(oldstate == PLAYER_STATE_ONFOOT && newstate == PLAYER_STATE_DRIVER)
 	{
-	    SetTimerEx("scanhp",1000,1,"i",playerid);
+		StarScanhpTimer(playerid);
 	    GetVehicleHealth(vehicleid,oldhealth[playerid]);
 	    incar[playerid] = 1;
 		return 1;
 	}
 	if((oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT) || (oldstate == PLAYER_STATE_PASSENGER && newstate == PLAYER_STATE_ONFOOT))
 	{
-		KillTimer(scan);
+		KillScanhpTimer(playerid);
 		new nick[MAX_PLAYER_NAME];
 	   	new string[256];
 		GetPlayerName(playerid, nick, sizeof(nick));
@@ -371,4 +377,23 @@ stock IsABike(vehicleid) //Made by me :D
         default: result = 0;
     }
 	return result;
+}
+
+StarScanhpTimer(playerid)
+{
+	if(!IsScanhpTimerActive(playerid))
+	{
+		scantimer[playerid] = SetTimerEx("scanhp",1000,true,"i",playerid);
+	}
+}
+
+IsScanhpTimerActive(playerid)
+{
+	return scantimer[playerid] != -1;
+}
+
+KillScanhpTimer(playerid)
+{
+	KillTimer(scantimer[playerid]);
+	scantimer[playerid] = -1;
 }
