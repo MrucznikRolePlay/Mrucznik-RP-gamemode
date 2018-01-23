@@ -319,7 +319,9 @@ CMD:panel(playerid, params[])
             new warny = MruMySQL_GetAccInt("Warnings", var);
             if(warny > 0)
             {
-                format(str, 128, "UPDATE `mru_konta` SET `Warnings` = `Warnings`-1 WHERE `Nick` = '%s'", var);
+				new escaped_nick[MAX_PLAYER_NAME];
+				mysql_real_escape_string(var, escaped_nick);
+                format(str, 128, "UPDATE `mru_konta` SET `Warnings` = `Warnings`-1 WHERE `Nick` = '%s'", escaped_nick);
     	        mysql_query(str);
 
                 format(str, 128, "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
@@ -589,7 +591,9 @@ CMD:rodzinaskrypt(playerid, params[])
         FAMILY_FDU = id;
     }
     new query[75];
-    format(query, 75, "UPDATE `mru_rodziny` SET `id`=%d WHERE `name`='%s'", id, nazwa);
+	new nazwa_escaped[32];
+	mysql_real_escape_string(nazwa, nazwa_escaped);
+    format(query, 75, "UPDATE `mru_rodziny` SET `id`=%d WHERE `name`='%s'", id, nazwa_escaped);
     mysql_query(query);
     return 1;
 }

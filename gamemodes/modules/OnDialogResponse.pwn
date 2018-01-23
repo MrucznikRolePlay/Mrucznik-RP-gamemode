@@ -749,7 +749,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             return 0;
         }
         new lStr[256];
-        format(lStr, 256, "SELECT `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s'", inputtext);
+		new nick_escaped[MAX_PLAYER_NAME];
+		mysql_real_escape_string(inputtext, nick_escaped);
+        format(lStr, 256, "SELECT `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s'", nick_escaped);
         mysql_query(lStr);
         mysql_store_result();
         if(mysql_num_rows())
@@ -5644,7 +5646,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	   	if(question_id != -1 && response)
 		{
 			if((strcmp(inputtext, correct_answers[question_id], true) == 0
-        	|| strcmp(inputtext, _prawojazdy_unpolish(correct_answers[question_id])) == 0)
+        	/*|| strcmp(inputtext, _prawojazdy_unpolish(correct_answers[question_id])) == 0*/)
         	&& strlen(inputtext) > 1)
         	{
             	PlayerInfo[playerid][pPrawojazdydobreodp] += 1;
