@@ -15925,7 +15925,70 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         SendClientMessage(playerid, COLOR_YELLOW, str);
 
         return 1;
-    }    
+    }
+    else if(dialogid == 7079)
+	{
+		if(response)
+		{
+		    if(HireCar[playerid] == 0)
+			{
+			    TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}
+    		/*if(PlayerInfo[playerid][pDonateRank] == 0)
+			{
+				sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd wypo¿yczyæ mo¿e tylko Konto Premium!");
+				TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}*/
+    		new veh = HireCar[playerid];
+    		if(veh == 0) return 1;
+    		if(Car_GetOwner(veh) != RENT_CAR || Car_GetOwnerType(veh) != CAR_OWNER_SPECIAL)
+			{
+				sendTipMessageEx(playerid, COLOR_GRAD2, "Tego pojazdu nie mo¿na wypo¿yczyæ.");
+				TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}
+    		if(CarData[VehicleUID[veh][vUID]][c_Rang] != 0)
+			{
+			    sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd jest aktualnie wypo¿yczony przez inn¹ osobê.");
+			    TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}
+   			if(GetPVarInt(playerid, "rentTimer") != 0)
+   			{
+   				sendTipMessageEx(playerid, COLOR_GRAD2, "Aktualnie wypo¿yczasz pewien pojazd.");
+   				TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}
+    		CarData[VehicleUID[veh][vUID]][c_Rang] = (playerid+1);
+
+    		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 15*60*1000, 0, "ii", playerid, veh));
+
+    		sendTipMessageEx(playerid, COLOR_YELLOW, "Wypo¿yczy³es pojazd na 15 minut za 5000$.");
+    		TogglePlayerControllable(playerid, 1);
+    		DajKase(playerid, -5000);
+    		HireCar[playerid] = veh;
+    		SetPVarInt(playerid, "rentCar", veh);
+		}
+		if(!response)
+		{
+			sendTipMessageEx(playerid, COLOR_GRAD2, "Odrzuci³eœ propozycjê wypo¿yczenia pojazdu.");
+			TogglePlayerControllable(playerid, 1);
+			RemovePlayerFromVehicleEx(playerid);
+			HireCar[playerid] = 0;
+		}
+	}
 	return 0;
 }
 //ondialogresponse koniec

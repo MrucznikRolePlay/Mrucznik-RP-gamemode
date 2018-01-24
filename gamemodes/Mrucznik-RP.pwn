@@ -707,11 +707,20 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
     }
 
     if(!ispassenger)
-    {
+	{
         if(!Player::CanUseCar(playerid, vehicleid))
-            return Player::RemoveFromVeh(playerid);
+        	return Player::RemoveFromVeh(playerid);
     }
-
+    /*new lcarid = VehicleUID[vehicleid][vUID];
+    if(!ispassenger && CarData[lcarid][c_Owner] == RENT_CAR)
+    {
+		if (CarData[lcarid][c_Rang]-1 != playerid)
+		{
+		    TogglePlayerControllable(playerid, 0);
+			HireCar[playerid] = vehicleid;
+			ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", "Mo¿esz wypo¿yczyæ ten pojazd!\nCena: 5000$ za 15 minut.\n\n(TYLKO DLA KONT PREMIUM)", "Wynajmij", "WyjdŸ");
+		}
+	}*/
 	if(IsARower(vehicleid))
 	{
 	    SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
@@ -4202,6 +4211,23 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     } */
 	if(newstate == PLAYER_STATE_DRIVER)
     {
+        if(newstate == PLAYER_STATE_DRIVER)
+        {
+        	new vehicleid = GetPlayerVehicleID(playerid);
+        	new lcarid = VehicleUID[vehicleid][vUID];
+        	if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL)
+        	{
+ 				if(CarData[lcarid][c_Owner] == RENT_CAR)
+    			{
+					if (CarData[lcarid][c_Rang]-1 != playerid)
+					{
+		    			TogglePlayerControllable(playerid, 0);
+						HireCar[playerid] = vehicleid;
+						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", "Mo¿esz wypo¿yczyæ ten pojazd!\nCena: 5000$ za 15 minut.", "Wynajmij", "WyjdŸ");
+					}
+				}
+			}
+		}
         if(!ToggleSpeedo[playerid])
         {
             //Speedo
@@ -4224,7 +4250,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(newstate == PLAYER_STATE_DRIVER)
         {
             new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player::CanUseCar(playerid, vehicleid))
+            if(!Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1)
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
 
@@ -4564,7 +4590,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	if(newstate == PLAYER_STATE_DRIVER) //buggy dont finnish
 	{// 38 / 49 / 56 = SS
 		new newcar = GetPlayerVehicleID(playerid);
-
         //NOWY SYSTEM AUT FRAKCYJNYCH I PUBLICZNYCH
         if(newcar <= CAR_End) //do kradziezy
         {

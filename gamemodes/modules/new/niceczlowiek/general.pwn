@@ -201,9 +201,18 @@ Player::CanUseCar(playerid, newcar)
         new lcarid = VehicleUID[newcar][vUID];
 	    if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FRACTION)// wszystkie auta frakcji
 	    {
-            if(CarData[lcarid][c_Owner] != GetPlayerFraction(playerid))
+            if(CarData[lcarid][c_Owner] != GetPlayerFraction(playerid) && CarData[lcarid][c_Owner] != 11)
             {
                 if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+                format(string, sizeof(string), " Ten pojazd nale¿y do %s i nie mo¿esz nim kierowaæ.", FractionNames[CarData[lcarid][c_Owner]]);
+                sendTipMessageEx(playerid,COLOR_GREY,string);
+                return 0;
+            }
+            if(CarData[lcarid][c_Owner] == 11)
+            {
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+                if(GetPlayerFraction(playerid) == 11) return 1;
+                if(TakingLesson[playerid] == 1) return 1;
                 format(string, sizeof(string), " Ten pojazd nale¿y do %s i nie mo¿esz nim kierowaæ.", FractionNames[CarData[lcarid][c_Owner]]);
                 sendTipMessageEx(playerid,COLOR_GREY,string);
                 return 0;
@@ -218,17 +227,18 @@ Player::CanUseCar(playerid, newcar)
 	    }
         else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL) //specjalne
         {
-            if(CarData[lcarid][c_Owner] == RENT_CAR)
+            /*if(CarData[lcarid][c_Owner] == RENT_CAR)
             {
                 if (CarData[lcarid][c_Rang]-1 != playerid)
     			{
-    				format(string, sizeof(string), "~w~Mozesz wypozyczyc ten pojazd~n~Cena:~g~$%d~n~~w~Aby to zrobic wpisz ~g~/rentcar~w~~n~aby wyjsc wpisz ~r~/wyjdz",5000);
-    				TogglePlayerControllable(playerid, 0);
-    				GameTextForPlayer(playerid, string, 5000, 3);
-                    HireCar[playerid] = newcar;
+    			    sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ten pojazd nale¿y do wypo¿yczalni! Nie wypo¿yczy³eœ go!");
+    				//format(string, sizeof(string), "~w~Mozesz wypozyczyc ten pojazd~n~Cena:~g~$%d~n~~w~Aby to zrobic wpisz ~g~/rentcar~w~~n~aby wyjsc wpisz ~r~/wyjdz",5000);
+    				//TogglePlayerControllable(playerid, 0);
+    				//GameTextForPlayer(playerid, string, 5000, 3);
+                    //HireCar[playerid] = newcar;
     			}
-            }
-            else if(CarData[lcarid][c_Owner] == CAR_ZUZEL)
+            }*/
+            if(CarData[lcarid][c_Owner] == CAR_ZUZEL)
             {
                 if(zawodnik[playerid] != 1)
     		    {
