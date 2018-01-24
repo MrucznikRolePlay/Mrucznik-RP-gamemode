@@ -2323,7 +2323,7 @@ CMD:zdejmijkevlar(playerid)
             GetPlayerName(playerid, sendername, sizeof(sendername));
             format(string, sizeof(string),"%s zdejmuje kevlar i rzuca go na ziemie", sendername);
             ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-
+            RemovePlayerAttachedObject(playerid, 7);
             SetPlayerArmour(playerid, 0);
     }
     return 1;
@@ -7968,7 +7968,47 @@ CMD:setskin(playerid, params[])
 	}
 	return 1;
 }
+CMD:naprawskin(playerid, params[])
+{
+	new sendername[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
 
+    if(IsPlayerConnected(playerid))
+    {
+		new para1;
+		if( sscanf(params, "k<fix>", para1))
+		{
+			sendTipMessage(playerid, "U¿yj /naprawskin [playerid/CzêœæNicku]");
+			return 1;
+		}
+		if (PlayerInfo[playerid][pAdmin] >= 10)
+		{
+		    if(IsPlayerConnected(para1))
+		    {
+		        if(para1 != INVALID_PLAYER_ID)
+		        {
+					if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby naprawiæ skin gracz musi byæ pieszo!");
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					printf("AdmCmd: %s naprawi³ skin gracza %s.", sendername, giveplayer);
+					
+					new level = PlayerInfo[para1][pModel];
+					SetPlayerSkin(para1, level);
+					PlayerInfo[para1][pSkin] = level;
+
+					_MruAdmin(playerid, sprintf("Naprawi³eœ skin graczowi %s [%d] za pomoc¹ komendy.", GetNick(para1, true), para1));
+                    _MruAdmin(para1, sprintf("Twój skin zosta³ naprawiony przez %s [%d].", GetNick(playerid, true), playerid));
+					SendCommandLogMessage(sprintf("Admin %s [%d] naprawi³ skin graczowi %s [%d].", GetNick(playerid, true), playerid, GetNick(para1, true), para1));
+				}
+			}
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
+	return 1;
+}
 CMD:rozwiedz(playerid, params[])
 {
 	new string[64];
@@ -8329,7 +8369,7 @@ CMD:setslot(playerid, params[])
 		new para1, level;
 		if( sscanf(params, "k<fix>d", para1, level))
 		{
-			sendTipMessage(playerid, "U¿yj /setslot [playerid/CzêœæNicku] [id pracy]");
+			sendTipMessage(playerid, "U¿yj /setslot [playerid/CzêœæNicku] [liczba slotów]");
 			return 1;
 		}
 		if (PlayerInfo[playerid][pAdmin] >= 5000)
@@ -10078,7 +10118,7 @@ CMD:naucz(playerid, params[])
         }
         if(PlayerInfo[playerid][pJob] == 12 || PlayerInfo[playerid][pAdmin] >= 1000)
         {
-            if(GetDistanceBetweenPlayers(playerid,playa) < 5 && IsPlayerInRangeOfPoint(playerid, 9.0, 762.9852,2.4439,1001.5942))
+            if(ProxDetectorS(8.0, playerid, playa) && IsPlayerInRangeOfPoint(playerid, 9.0, 762.9852,2.4439,1001.5942))
             {
                 if(styl > 3 || styl < 1)
                 {
@@ -10109,33 +10149,31 @@ CMD:naucz(playerid, params[])
                                 SetPlayerFightingStyle(playa, FIGHT_STYLE_BOXING);
                                 PlayerInfo[playa][pStylWalki] = 1;
                                 DajKase(playerid, -2500);
-                                GetPlayerName(playerid, sendername, sizeof(sendername));
-                                GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                                format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'gangster', koszty nauki wynios³y 2500$",giveplayer);
+                                format(string, sizeof(string), "* Nauczy³eœ gracza %s stylu walki 'gangster', koszty nauki wynios³y 2500$",GetNick(playa));
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                                format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki stylu walki 'gangster'",sendername);
+                                format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki 'gangster'.",GetNick(playerid));
                                 SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-                                SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki");
+                                SendClientMessage(playa, COLOR_GRAD4, "INFORMACJA: Nawet po wyjœciu z gry twoja postaæ nadal bêdzie posiada³a ten styl walki.");
                                 format(string, sizeof(string), "~r~-$%d", 2500);
                                 GameTextForPlayer(playerid, string, 5000, 1);
                                 if(playerid != playa)
                                 {
-                                    SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
-                                    SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
+                                    SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem.");
+                                    SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê.");
                                     SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
                                     SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
                                     SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
                                     GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
-                                    if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
-                                    BoxWaitTime[playerid] = 1; BoxWaitTime[BoxOffer[playerid]] = 1;
-                                    if(BoxDelay < 1){ BoxDelay = 20; }
+                                    //if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
+									/*if(BoxDelay < 1){ BoxDelay = 20; }
                                     InRing = 1;
                                     Boxer1 = playa;
                                     Boxer2 = playerid;
                                     PlayerBoxing[playerid] = 1;
-                                    PlayerBoxing[BoxOffer[playerid]] = 1;
-                                    BoxDelay = 0;
+                                    PlayerBoxing[playa] = 1;
                                     BoxWaitTime[playerid] = 0;
+                                    BoxWaitTime[playa] = 0;
+                                    BoxDelay = 0;
                                     PlayerPlaySound(playerid, 1057, 0.0, 0.0, 0.0);
                                     PlayerPlaySound(playa, 1057, 0.0, 0.0, 0.0);
                                     GameTextForPlayer(playerid, "~g~Walka rozpoczeta", 5000, 1);
@@ -10144,7 +10182,21 @@ CMD:naucz(playerid, params[])
                                     PlayerInfo[playerid][pBoxSkill] ++;
                                     PlayerInfo[playerid][pBoxSkill] ++;
                                     PlayerInfo[playerid][pBoxSkill] ++;
-                                    SendClientMessage(playerid, COLOR_GRAD2, "Skill + 3");
+                                    SendClientMessage(playerid, COLOR_GRAD2, "Skill + 3");*/
+                                    //
+                    				TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
+                        			TBoxer = playerid;
+                        			BoxDelay = 30;
+                    				BoxWaitTime[playerid] = 1; BoxWaitTime[playa] = 1;
+                    				if(BoxDelay < 1) { BoxDelay = 20; }
+                    				InRing = 1;
+                    				Boxer1 = playa;
+                    				Boxer2 = playerid;
+                    				PlayerBoxing[playerid] = 1;
+                    				PlayerBoxing[playa] = 1;
+                    				BoxOffer[playerid] = 999;
+                    				BoxOffer[playa] = 999;
+                                    //
                                 }
                             }
                         }
@@ -16155,7 +16207,8 @@ CMD:sprobuj(playerid, params[])
 	if(isnull(params)) return sendTipMessage(playerid, "U¿yj /sprobuj [Akcja] np. trafiæ do kosza");
     new string[256];
 	//switch(random(4)+1) 
-    switch(random(1))
+	new rand = random(2);
+    switch(rand)
 	{
 		case 0: format(string, 256, "*** %s spróbowa³ %s i uda³o mu siê ***",GetNick(playerid, true), params);
 		case 1: format(string, 256, "*** %s spróbowa³ %s i nie uda³o mu siê ***",GetNick(playerid, true), params);
@@ -17896,6 +17949,11 @@ CMD:wiadomosc(playerid, params[])
 
     if (IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
     {
+        if(gPlayerLogged[giveplayerid] == 0)
+        {
+        	sendTipMessage(playerid, "Nie mo¿esz napisaæ prywatnej wiadomoœci, bo ten gracz aktualnie loguje siê do gry.");
+			return 1;
+       	}
         if(HidePM[giveplayerid] > 0)
         {
             sendTipMessage(playerid, "Ten gracz blokuje wiadomoœci!");
@@ -25098,6 +25156,7 @@ CMD:givegun(playerid, params[])
     if(IsPlayerConnected(playerid))
     {
 		new playa, gun, ammo;
+		new string[128];
 		if( sscanf(params, "k<fix>dd", playa, gun, ammo))
 		{
 			sendTipMessage(playerid, "U¿yj /givegun [ID gracza] [Broñ] [Amunicja]");
@@ -25122,24 +25181,37 @@ CMD:givegun(playerid, params[])
 		            	PlayerInfo[playa][pGun0] = gun;
 		            	PlayerInfo[playa][pAmmo0] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						//logi broñ
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 		            if(gun >= 2 && gun <= 9)
 		            {
 		            	PlayerInfo[playa][pGun1] = gun;
 		            	PlayerInfo[playa][pAmmo1] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if(gun >= 10 && gun <= 15)
 					{
 					    PlayerInfo[playa][pGun10] = gun;
 		            	PlayerInfo[playa][pAmmo10] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if(gun >= 16 && gun <= 18)
 					{
 					    PlayerInfo[playa][pGun8] = gun;
 		            	PlayerInfo[playa][pAmmo8] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if(gun >= 19 && gun <= 21)
 					{
@@ -25150,30 +25222,44 @@ CMD:givegun(playerid, params[])
 					    PlayerInfo[playa][pGun2] = gun;
 		            	PlayerInfo[playa][pAmmo2] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if(gun >= 25 && gun <= 27)
 					{
 					    PlayerInfo[playa][pGun3] = gun;
 		            	PlayerInfo[playa][pAmmo3] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if(gun == 28 || gun == 29 || gun == 32)
 					{
 					    PlayerInfo[playa][pGun4] = gun;
 		            	PlayerInfo[playa][pAmmo4] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if(gun == 30 || gun == 31)
 					{
 					    PlayerInfo[playa][pGun5] = gun;
 		            	PlayerInfo[playa][pAmmo5] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
 					}
 					else if(gun == 33 || gun == 34)
 					{
 					    PlayerInfo[playa][pGun6] = gun;
 		            	PlayerInfo[playa][pAmmo6] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if( gun == 39)
 					{
@@ -25183,24 +25269,36 @@ CMD:givegun(playerid, params[])
 		            	PlayerInfo[playa][pAmmo12] = 1;
 						GivePlayerWeapon(playa, gun, ammo);
 						GivePlayerWeapon(playa, 40, 1);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if( gun >= 35 || gun <= 38)
 					{
 					    PlayerInfo[playa][pGun7] = gun;
 		            	PlayerInfo[playa][pAmmo7] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if( gun >= 41 || gun <= 43)
 					{
 					    PlayerInfo[playa][pGun9] = gun;
 		            	PlayerInfo[playa][pAmmo9] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else if( gun == 46)
 					{
 					    PlayerInfo[playa][pGun11] = gun;
 		            	PlayerInfo[playa][pAmmo11] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
+						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+						WeapLog(string);
+						SendCommandLogMessage(string);
 					}
 					else
 					{
@@ -26462,7 +26560,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /carjump /goto /up /getcar /gethere");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
-        SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint");
+        SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint /naprawskin");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
@@ -31702,6 +31800,8 @@ CMD:sprzedajbron(playerid, params[])
                                 format(string, sizeof(string), "* %s stworzy³ broñ z materia³ów i da³ j¹ %s.", sendername ,giveplayer);
                                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                 GivePlayerWeapon(giveplayerid,weapon[playerid],ammo[playerid]);
+                                format(string, sizeof(string), "Gracz %s sprzedal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), weapon[playerid], ammo[playerid], GetNick(giveplayerid));
+								WeapLog(string);
                                 PlayerInfo[playerid][pMats] -= price[playerid];
                                 new weapons[13][2];
                                 for (new i = 0; i <= 12; i++)
@@ -37946,7 +38046,7 @@ CMD:disabletruckerjob(playerid)
     return 1;
 }
 
-CMD:rentcar(playerid)
+/*CMD:rentcar(playerid)
 {
     if(HireCar[playerid] == 0) return 1;
     if(PlayerInfo[playerid][pDonateRank] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd wypo¿yczyæ mo¿e tylko Konto Premium!");
@@ -37966,7 +38066,7 @@ CMD:rentcar(playerid)
     HireCar[playerid] = veh;
     SetPVarInt(playerid, "rentCar", veh);
     return 1;
-}
+}*/
 
 
 CMD:zapytaj(playerid, p[])
