@@ -835,15 +835,7 @@ public OnPlayerDisconnect(playerid, reason)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerDisconnect - begin", GetNick(playerid), playerid);
 	#endif
-	
-	if(WOSP[playerid] != 0)
-	{
-		RemovePlayerAttachedObject(playerid, 1);
-		Delete3DTextLabel(WOSP[playerid]);
-		WOSP[playerid] = 0;
-	}
 
-	
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
 

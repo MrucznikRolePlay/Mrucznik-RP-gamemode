@@ -14786,65 +14786,9 @@ CMD:datek(playerid, params[])
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 		SendClientMessage(playerid, COLOR_GRAD1, string);
 		PayLog(string);
-		
-		//WOŒP
-		if(WOSP[playerid] == 0)
-		{
-			WOSP[playerid] = Create3DTextLabel("WOŒP 2018", COLOR_WHITE, 0.0, 0.0, 0.3, 20.0, 0, 1);
-			Attach3DTextLabelToPlayer(WOSP[playerid], playerid, 0.0, 0.0, 0.3);
-			SetPlayerAttachedObject(playerid, 1, 1240, 2, 0.514999, -0.027999, 0.044999, 0.000000, 90.0, -7.400016);
-		}
-		
 	}
 	return 1;
 }
-
-/*CMD:wosp(playerid, params[])
-{
-    if(gettime() - GetPVarInt(playerid, "wospcall") < 0)
-        return SendClientMessage(playerid, COLOR_GRAD2, " Odczekaj 5 minut do nastêpnej wp³aty.");
-
-    new string[128];
-	new moneys;
-	if( sscanf(params, "s[16]", string))
-	{
-		sendTipMessage(playerid, "U¿yj /wosp [kwota] np. /wosp 10kk");
-		return 1;
-	}
-	moneys = FunkcjaK(string);
-
-	if(moneys < 1000000)
-	{
-		SendClientMessage(playerid, COLOR_GRAD1, "Minimaln¹ kwot¹ dla WOŒP jest 1kk.");
-		return 1;
-	}
-	if(kaska[playerid] < moneys)
-	{
-	    SendClientMessage(playerid, COLOR_GRAD1, "Nie masz a¿ tyle pieniêdzy.");
-		return 1;
-	}
-	ZabierzKase(playerid, moneys);
-    GLOB_WOSP+=moneys;
-    format(string,128,"WOŒP: Dziêkujemy %s za wp³atê %.1fkk! Zebraliœmy ju¿ %.1fkk!", GetNick(playerid), floatdiv(moneys,1000000), floatdiv(GLOB_WOSP,1000000));
-	SendClientMessageToAll(COLOR_NEWS, string);
-	PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-	PayLog(string);
-
-    SetPVarInt(playerid, "wospcall", gettime()+(60*5));
-
-    SendClientMessage(playerid, COLOR_LIGHTRED, "Dziêkujemy za wsparcie fina³u WOŒP! Pieni¹dze zostan¹ przekazane na szlachetny cel!");
-
-    if(CallRemoteFunction("SEC_MyItems_HavePlayerItem", "dd", playerid, 1240) == 0)
-    {
-        SendClientMessage(playerid, COLOR_LIGHTRED, "W zamian za pomoc otrzymujesz serduszko WOŒP! (/dodatki)");
-        new uid = MRP_CreatePlayerAttachedItem(playerid, 1240);
-        CallRemoteFunction("SEC_MyItems_HandleOne", "ddd", playerid, 1240, uid);
-    }
-
-    format(string, 128, "UPDATE mru_config SET wosp=%d", GLOB_WOSP);
-    mysql_query(string);
-	return 1;
-}*/
 
 CMD:stats(playerid) return cmd_staty(playerid);
 CMD:statystyki(playerid) return cmd_staty(playerid);
