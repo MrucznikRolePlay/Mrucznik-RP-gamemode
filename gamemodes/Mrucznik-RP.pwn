@@ -5356,6 +5356,11 @@ public OnPlayerUpdate(playerid)
 	/*#if DEBUG == 1
 		printf("%s[%d] OnPlayerUpdate - begin", GetNick(playerid), playerid);
 	#endif*/
+	
+	//desync players ommiting onplayerspawn
+	if(gPlayerLogged[playerid] == 0)
+		return 0;
+	
     systempozarow_OnPlayerUpdate(playerid);//System PoøarÛw v0.1
     
 	//Anty BH PAèDZIOCH

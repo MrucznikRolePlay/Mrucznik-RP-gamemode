@@ -23003,64 +23003,66 @@ CMD:adminajail(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playa][pJailed] == 0)
+		if(IsPlayerConnected(playa) && playa != INVALID_PLAYER_ID)
 		{
-			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+			if (PlayerInfo[playa][pJailed] == 0)
 			{
-			    if(IsPlayerConnected(playa))
-			    {
-			        if(playa != INVALID_PLAYER_ID)
-			        {
-						if (PlayerInfo[playerid][pZG] >= 6 && PlayerInfo[playerid][pZG] < 8 && money > 7)
-						{
-							sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 7 minut AJ!");
-							return 1;
-						}
-						if (PlayerInfo[playerid][pZG] >= 8 && PlayerInfo[playerid][pZG] < 9 && money > 12)
-						{
-							sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 12 minut AJ!");
-							return 1;
-						}
-						if (PlayerInfo[playerid][pZG] >= 9 && money > 17)
-						{
-							sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 17 minut AJ!");
-							return 1;
-						}
-				        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
-						SendClientMessage(playerid, COLOR_LIGHTRED, string);
-						format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
-						SendClientMessage(playa, COLOR_LIGHTRED, string);
-						ResetPlayerWeapons(playa);
-						PlayerInfo[playa][pJailed] = 3;
-						PlayerInfo[playa][pJailTime] = money*60;
-						SetPlayerVirtualWorld(playa, 1000+playa);
-						PlayerInfo[playa][pMuted] = 1;
-						SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
-						format(string, sizeof(string), "Zosta³eœ ukarany na %d minut. Powod: %s", money, (result));
-						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
-                        SendPunishMessage(string, playa);
-                        poscig[playa] = 0;
-                        KickLog(string);
-						//adminowe logi
-   						format(string, sizeof(string), "Admini/%s.ini", sendername);
-				        dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
-						SendClientMessage(playa, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
-                        Wchodzenie(playa);
-						PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
-                    }
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+				{
+					if (PlayerInfo[playerid][pZG] >= 6 && PlayerInfo[playerid][pZG] < 8 && money > 7)
+					{
+						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 7 minut AJ!");
+						return 1;
+					}
+					if (PlayerInfo[playerid][pZG] >= 8 && PlayerInfo[playerid][pZG] < 9 && money > 12)
+					{
+						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 12 minut AJ!");
+						return 1;
+					}
+					if (PlayerInfo[playerid][pZG] >= 9 && money > 17)
+					{
+						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 17 minut AJ!");
+						return 1;
+					}
+					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
+					SendClientMessage(playerid, COLOR_LIGHTRED, string);
+					format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
+					SendClientMessage(playa, COLOR_LIGHTRED, string);
+					ResetPlayerWeapons(playa);
+					PlayerInfo[playa][pJailed] = 3;
+					PlayerInfo[playa][pJailTime] = money*60;
+					SetPlayerVirtualWorld(playa, 1000+playa);
+					PlayerInfo[playa][pMuted] = 1;
+					SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
+					format(string, sizeof(string), "Zosta³eœ ukarany na %d minut. Powod: %s", money, (result));
+					SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
+					SendPunishMessage(string, playa);
+					poscig[playa] = 0;
+					KickLog(string);
+					//adminowe logi
+					format(string, sizeof(string), "Admini/%s.ini", sendername);
+					dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
+					SendClientMessage(playa, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
+					Wchodzenie(playa);
+					PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
+				}
+				else
+				{
+					noAccessMessage(playerid);
 				}
 			}
 			else
 			{
-				noAccessMessage(playerid);
+				sendErrorMessage(playerid, "Ten gracz ju¿ siedzi w wiêzieniu !");
 			}
 		}
 		else
 		{
-		    sendErrorMessage(playerid, "Ten gracz ju¿ siedzi w wiêzieniu !");
+		    sendErrorMessage(playerid, "Nie ma takiego gracza !");
+			return 1;
 		}
 	}
 	return 1;
@@ -37481,6 +37483,7 @@ CMD:deleteobject(playerid, p[])
 CMD:patrol(playerid, params[])
 {
     new var[32];
+	if(!IsPlayerConnected(playerid)) return 1;
     if(GetPlayerFraction(playerid) != FRAC_LSPD) return 1;
     if(sscanf(params, "s[32]", var)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Dostêpne parametry: start, stop, mapa, akceptuj, lista");
     if(strcmp(var, "start", true) == 0)
