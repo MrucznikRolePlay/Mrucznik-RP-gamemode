@@ -2074,19 +2074,7 @@ IsAFakeKonto(playerid)
 	}
 	return 0;
 }
-IsAFLD(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new nick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Matthew_McVinsley", false) == 0)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
+
 IsAPrzestepca(playerid)
 {
 	if(IsPlayerConnected(playerid))

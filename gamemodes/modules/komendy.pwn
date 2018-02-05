@@ -3016,62 +3016,8 @@ CMD:alkomat(playerid, params[])
 	}
 	return 1;
 }
-/*
-CMD:bronlic(playerid, params[])
-{
-	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
-    if(IsPlayerConnected(playerid))
-    {
-        if(IsAFLD(playerid) || PlayerInfo[playerid][pAdmin] >= 5000)
-        {
-			new giveplayerid;
-			if( sscanf(params, "k<fix>", giveplayerid))
-			{
-                sendTipMessage(playerid, "U¿yj /bronlic [playerid]");
-				return 1;
-			}
-			if(IsPlayerConnected(giveplayerid))
-			{
-				if(giveplayerid != INVALID_PLAYER_ID)
-				{
-				    if(kaska[playerid] >= 25000)
-					{
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-						format(string, sizeof(string), "* Da³eœ licencjê na broñ graczowi %s. Koszt licencji (25 000$) zosta³ pobrany z twojego portfela.",giveplayer);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 
-						format(string, sizeof(string), "* Urzêdnik %s da³ tobie licencjê na broñ.",sendername);
-						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-						DajKase(playerid, -25000);
-						PlayerInfo[giveplayerid][pGunLic] = 1;
-						return 1;
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Koszt wydania tej licencji to 25 000$ a ty tyle nie masz!");
-						return 1;
-					}
-			  	}
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Gracz jest nieaktywny !");
-				return 1;
-			}
-        }
-        else
-        {
-            sendErrorMessage(playerid, "Licencjê na broñ wydaje tylko urzêdnik z Firearms Licensing Department!");
-            return 1;
-        }
-    }
-    return 1;
-}
-*/
 CMD:wydaj(playerid, params[]) return cmd_wypisz(playerid, params);
 CMD:wypisz(playerid, params[])
 {
