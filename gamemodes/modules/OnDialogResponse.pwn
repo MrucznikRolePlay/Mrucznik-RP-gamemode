@@ -85,51 +85,58 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
-				PlayAudioStreamForPlayer(playerid, RadioSANUno);
+				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18434");
 				return 1;
 			}
 			case 1:
 			{
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
-				PlayAudioStreamForPlayer(playerid, RadioSANDos);
+				PlayAudioStreamForPlayer(playerid, RadioSANUno);
 				return 1;
 			}
 			case 2:
+			{
+			    if(!response) return 1;
+				PlayerFixRadio(playerid);
+				PlayAudioStreamForPlayer(playerid, RadioSANDos);
+				return 1;
+			}
+			case 3:
 			{
 			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://radiozetmp3-07.eurozet.pl:8400/listen.pls");
 				return 1;
 			}
-			case 3:
+			case 4:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmffm.pls");
 				return 1;
 			}
-			case 4:
+			case 5:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls");
 				return 1;
 			}
-			case 5:
+			case 6:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://acdn.smcloud.net/t062-1.mp3.pls");
 				return 1;
 			}
-			case 6:
+			case 7:
 			{
 				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
-			case 7:
+			case 8:
 			{
 			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
@@ -12652,6 +12659,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ProxDetector(30.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				    }
                 }
+				else if(strfind(inputtext, "Mrucznik Radio") != -1)
+                {
+					if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+					{
+						foreach(Player, i)
+						{
+							if(IsPlayerInVehicle(i, veh))
+							{
+								PlayAudioStreamForPlayer(i, "http://4stream.pl:18434");
+								SetPVarInt(i, "sanlisten", 3);
+							}
+						}
+					}
+                }
                 else if(strfind(inputtext, "Radio SAN1") != -1)
                 {
                     if(RadioSANUno[0] != EOF)
@@ -12768,7 +12789,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(!response) return 1;
             SetPVarInt(playerid, "sanradio", listitem);
-            ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio 1\nMrucznik Radio 2\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
 
         }
         else if(dialogid == 669)
@@ -12778,14 +12799,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 switch(listitem)
                 {
-                    case 0: format(RadioSANUno, sizeof(RadioSANUno), "http://s1.slotex.pl:7170");
-                    case 1: format(RadioSANUno, sizeof(RadioSANUno), "http://4stream.pl:18240");
-                    case 2: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_discopolo.pls");
-                    case 3: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_dance100.pls");
-                    case 4: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_mnt.pls");
-                    case 5: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_hiphop.pls");
-                    case 6: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 7: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
+                    case 0: format(RadioSANUno, sizeof(RadioSANUno), "http://4stream.pl:18434");
+                    case 1: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 2: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 3: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 4: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 5: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
                 }
                 foreach(Player, i)
                 {

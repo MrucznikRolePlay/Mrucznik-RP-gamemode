@@ -769,6 +769,7 @@ public OnPlayerConnect(playerid)
 	#endif
         
 	Ac_OnPlayerConnect(playerid);
+	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
 	ZerujZmienne(playerid);
 
@@ -1184,6 +1185,20 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+	if(issuerid < 0 || issuerid > MAX_PLAYERS)
+	{
+		return 1;
+	}
+	
+	if(gPlayerLogged[issuerid] != 1)
+	{
+		new Float:health, Float:armour;
+		GetPlayerHealth(playerid, health);
+		SetPlayerHealth(playerid, health);
+		GetPlayerArmour(playerid, armour);
+		SetPlayerArmour(playerid, armour);
+	}
+
     if(weaponid == WEAPON_GRENADE || weaponid == 51)
 	{
 		new Float:health;
@@ -1516,6 +1531,10 @@ public OnPlayerSpawn(playerid) //Przebudowany
 		sendErrorMessage(playerid, "Zespawnowa³eœ siê, a nie jesteœ zalogowany! Zosta³eœ wyrzucony z serwera.");
 		KickEx(playerid);
 		return 0;
+	}
+	else
+	{
+		SetPlayerVirtualWorld(playerid, 0);
 	}
 
 	DeletePVar(playerid, "Vinyl-bilet");
@@ -4192,6 +4211,18 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         
         SetPVarInt(playerid, "iLastDrive", gettime());
     } */
+	if(gPlayerLogged[playerid] == 0)
+	{
+		if(newstate == PLAYER_STATE_SPAWNED || newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
+		{
+			format(string, sizeof(string), "%s zostal skickowany za bycie niezalogowanym (OPST)", GetNick(playerid));
+			KickLog(string);
+			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
+			KickEx(playerid);
+			return 1;
+		}
+	}
+	
 	if(newstate == PLAYER_STATE_DRIVER)
     {
         if(!ToggleSpeedo[playerid])
@@ -5349,9 +5380,22 @@ public OnPlayerUpdate(playerid)
 		printf("%s[%d] OnPlayerUpdate - begin", GetNick(playerid), playerid);
 	#endif*/
 	
-	//desync players ommiting onplayerspawn
 	if(gPlayerLogged[playerid] == 0)
-		return 0;
+	{
+		if(GetPlayerVirtualWorld(playerid) != 1488)
+		{
+			SetPlayerVirtualWorld(playerid, 1488);
+		}
+		if(GetPlayerState(playerid) == PLAYER_STATE_SPAWNED || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER || GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+		{
+			new string[128];
+			format(string, sizeof(string), "%s zostal skickowany za bycie niezalogowanym", GetNick(playerid));
+			KickLog(string);
+			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
+			KickEx(playerid);
+			return 0;
+		}
+	}
 	
     systempozarow_OnPlayerUpdate(playerid);//System Po¿arów v0.1
     

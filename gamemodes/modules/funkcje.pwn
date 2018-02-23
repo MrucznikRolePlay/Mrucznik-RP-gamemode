@@ -52,7 +52,7 @@ stock loadKamiPos(playerid)
 }
 
 
-stock saveKevlarPos(playerid)
+stock saveKevlarPos(playerid, recurention=1)
 {
 	new lStr[256];
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
@@ -67,7 +67,8 @@ stock saveKevlarPos(playerid)
 
 		db_free_result(db_query(db_handle, lStr));
 
-		saveKevlarPos(playerid);
+		if(recurention)
+			saveKevlarPos(playerid, 0);
 	}
 	else
 	{
