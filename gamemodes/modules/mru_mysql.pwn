@@ -727,6 +727,7 @@ MruMySQL_LoadAccess(playerid)
 MruMySQL_DoesAccountExist(nick[])
 {
 	new string[128];
+	mysql_real_escape_string(nick, nick);
 	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `Nick` = BINARY '%s'", nick);
 	mysql_query(string);
 	mysql_store_result();
@@ -756,6 +757,7 @@ stock MruMySQL_ReturnPassword(nick[])
 {
 	new string[128], key[64];
 	
+	mysql_real_escape_string(nick, nick);
 	format(string, sizeof(string), "SELECT `Key` FROM `mru_konta` WHERE `Nick` = '%s'", nick);
 
 	mysql_query(string);
@@ -1074,6 +1076,8 @@ stock MruMySQL_GetNameFromUID(uid) {
 stock MruMySQL_GetAccString(kolumna[], nick[])
 {
 	new string[128], wartosc[256];
+	mysql_real_escape_string(kolumna, kolumna);
+	mysql_real_escape_string(nick, nick);
 	
 	format(string, sizeof(string), "SELECT `%s` FROM `mru_konta` WHERE `Nick` = '%s'", kolumna, nick);
 	mysql_query(string);
@@ -1091,6 +1095,8 @@ stock MruMySQL_GetAccString(kolumna[], nick[])
 stock MruMySQL_GetAccInt(kolumna[], nick[])
 {
 	new string[128], wartosc;
+	mysql_real_escape_string(kolumna, kolumna);
+	mysql_real_escape_string(nick, nick);
 	format(string, sizeof(string), "SELECT `%s` FROM `mru_konta` WHERE `Nick` = '%s'", kolumna, nick);
 	mysql_query(string);
 	mysql_store_result();
@@ -1105,6 +1111,8 @@ stock MruMySQL_GetAccInt(kolumna[], nick[])
 stock MruMySQL_GetAccFloat(kolumna[], nick[])
 {
 	new string[128], Float:wartosc;
+	mysql_real_escape_string(kolumna, kolumna);
+	mysql_real_escape_string(nick, nick);
 	format(string, sizeof(string), "SELECT `%s` FROM `mru_konta` WHERE `Nick` = '%s'", kolumna, nick);
 	mysql_query(string);
 	mysql_store_result();
@@ -1117,6 +1125,8 @@ stock MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
 {
 	new string[128];
 	mysql_real_escape_string(wartosc, wartosc);
+	mysql_real_escape_string(nick, nick);
+	mysql_real_escape_string(kolumna, kolumna);
 	format(string, sizeof(string), "UPDATE `mru_konta` SET `%s` = '%s' WHERE `Nick` = '%s'", kolumna, wartosc, nick);
 	mysql_query(string);
 	return 1;
@@ -1125,6 +1135,8 @@ stock MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
 stock MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 {
 	new string[128];
+	mysql_real_escape_string(nick, nick);
+	mysql_real_escape_string(kolumna, kolumna);
 	format(string, sizeof(string), "UPDATE `mru_konta` SET `%s` = '%d' WHERE `Nick` = '%s'", kolumna, wartosc, nick);
 	mysql_query(string);
 	return 1;
@@ -1133,6 +1145,8 @@ stock MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 stock MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 {
 	new string[128];
+	mysql_real_escape_string(nick, nick);
+	mysql_real_escape_string(kolumna, kolumna);
 	format(string, sizeof(string), "UPDATE `mru_konta` SET `%s` = '%f' WHERE `Nick` = '%s'", kolumna, wartosc, nick);
 	mysql_query(string);
 	return 0;

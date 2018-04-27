@@ -4215,7 +4215,7 @@ static fs_AntiCheatSetNextDialog(playerid, dialogid)
 					{
 						switch(ac_sa)
 						{
-							case -1:
+							case 0:
 							{
 								if(ACInfo[playerid][acACAllow][24])
 								{

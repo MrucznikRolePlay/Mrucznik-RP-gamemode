@@ -177,7 +177,7 @@ Zaladuj3DTexty()
     CreateDynamic3DTextLabel("Taras", 0x9ACD32AA, 725.4005,-1450.4960,17.6953, 30.0);
     CreateDynamic3DTextLabel("Agencja Ochrony braci Nakajima", 0xFF0000FF, 2793.9031,-1087.2518,30.7188, 30.0);
     new str2[512];
-    str2 = "{FFA500}Dowód osobisty - {9ACD32}5000$ +akt urodz.\n{FFA500}Wydanie Prawa Jazdy - {9ACD32}12 500$ +zal. egz.\n {FFA500}Patent ¯eglarski - {9ACD32}100 000$\n {FFA500}Pozwolenie na Bron - {9ACD32}37 500$\n {FFA500}Licencja Pilota - {9ACD32}5 400 000$\n {FFA500}Karty wêdkarskie - {9ACD32}4000$\n{9ACD32}Egzamin teoretyczny - 5 000${FFA500}\n{9ACD32}Egzamin praktyczny- {9ACD32} 10 000$";
+    str2 = "{FFA500}Dowód osobisty - {9ACD32}5000$ +akt urodz.\n{FFA500}Wydanie Prawa Jazdy - {9ACD32}20 000$ +zal. egz.\n {FFA500}Patent ¯eglarski - {9ACD32}350 000$\n {FFA500}Pozwolenie na bron - {9ACD32}500 000$\n {FFA500}Licencja Pilota - {9ACD32}5 000 000$\n {FFA500}Karta wêdkarska - {9ACD32}10 000$\n{9ACD32}Egzamin teoretyczny - 10 000${FFA500}\n{9ACD32}Egzamin praktyczny- {9ACD32} 15 000$";
     CreateDynamic3DTextLabel(str2, COLOR_NEWS, 1099.1101,1059.0592,-19.6241,12,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 50);//Cennik DMV
     str2 = "BACZNOŒÆ \n{7CFC00}By nie zostaæ oszukanym:\n {8B0000}1. NIGDY NIE GRAJ gdy ktoœ chce graæ o wiêcej ni¿ ma w {FFFFFF}/sprawdzkase [ID]\n{9ACD32}Je¿eli mimo to zostaniesz oszukany NATYCHMIAST zg³oœ ten fakt na {FFFFFF}/report{9ACD32} - oszust otrzyma od razu blocka\nGdy taka osoba otrzyma blokadê ty masz 10min na napisanie na niego skargi\nW ten sposób mo¿esz odzyskaæ nawet 100%% wygranej!!";
 	CreateDynamic3DTextLabel(str2, COLOR_PANICRED ,1032.8098,-1091.7827,-66.5729, 20.0);
@@ -359,7 +359,7 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("Melina", COLOR_BLUE, 2165.9409179688,-1671.8609619141,15.074726104736, 15.0);
 	CreateDynamic3DTextLabel("Szamboa Gym", COLOR_BLUE, 2229.2248535156,-1721.9586181641,13.567801475525, 15.0);
 	CreateDynamic3DTextLabel("Cluckin'Bell", COLOR_BLUE, 2397.3500976563,-1898.1529541016,13.546875, 15.0);
-	CreateDynamic3DTextLabel("Pizzeria", COLOR_BLUE, 2104.4970703125,-1806.3927001953,13.5546875, 15.0);
+	//CreateDynamic3DTextLabel("Pizzeria", COLOR_BLUE, 2104.4970703125,-1806.3927001953,13.5546875, 15.0);
 	CreateDynamic3DTextLabel("Sklep 24/7", COLOR_BLUE, 1833.1099853516,-1842.603515625,13.578125, 15.0);
 	CreateDynamic3DTextLabel("Motel Jefferson", COLOR_BLUE, 2232.5,-1159.7940673828,25.890625, 15.0);
 	CreateDynamic3DTextLabel("Dom na Las Collinas", COLOR_BLUE, 2351.8894042969,-1169.4614257813,28.001684188843, 15.0);

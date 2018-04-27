@@ -1,7 +1,7 @@
 //-----------------------------------------[Mapa Mrucznik Role Play]-----------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //---------------------------------(Stworzona na podstawie mapy The Godfather)-------------------------------//
-//-------------------------------------------------(v2.5)----------------------------------------------------//
+//-------------------------------------------------(v2.6)----------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -20,22 +20,13 @@
 //----------------------------------------------------*------------------------------------------------------//
 /*
 
-Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
-
-    <-------------------------------------------------------->
-    aktualizacja 2.5 system aut mysql, us³ugi p³atne
-    aktualizacja 2.4.94 prace dorywcze, boomboxy
-    aktualizacja 2.4.93 strefy gangów
-    aktualizacja v 2.4.92 Kubi
-    Edit by Kubi - v 2.4.8 noMysql
-    <-------------------------------------------------------->
-    aktualizacja 7 paŸdziernika
-    aktualizacja 10.08
-    aktualizacja 29.X
-    <---------------------------------R----------------------->
-	Kubi cwel
-	aktualizacja 2015.11.15 kryptonim PADZIOCH
-
+Mrucznik® Role Play ----> stworzy³ Mrucznik
+	Inni developerzy: 
+		Kubi - zwyk³y skurwysyn
+		Akil - chyba nic nie zrobi³ koniec koñców
+		Niceczlowiek - okry³ siê hañb¹ publikuj¹c mapê
+		PECET - dobry skrypter
+	
 */
 //----------------------------------------------------*------------------------------------------------------//
 
@@ -55,30 +46,21 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include <ACSBM>
 #include <timestamp>
 #define AC_MAX_CONNECTS_FROM_IP		5
-				    
 #include "../pawno/include/nex-ac"    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include "../pawno/include/systempozarow"   //System Po¿arów v0.1
-
-#include "modules\new\niceczlowiek\dynamicgui.pwn"
-
-//YSI po crashDetect
-#include <crashdetect>                  // By Zeex, 4.18.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
-#include <code-parse.inc>    
-/*#include <YSI\YSI\y_inline>
-#include <YSI\YSI\y_dialog> */ // ¯egnaj YSI dobry druchu :( ale to nie na te lata...
+#include "../pawno/include/systempozarow"   //System Po¿arów v0.1 by PECET
 
 //-------<[ Pluginy ]>-------
-//#include <mapandreas>                 nie potrzeba i tak tego
+#include <crashdetect>                  // By Zeex, 4.18.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
 #include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
 #define REGEX_ON
 #if defined REGEX_ON
 #include <libRegEx>						// By Koala818 v0.2				https://github.com/FF-Koala/Regular-Expressions-Plugin
 #endif
-#include <streamer>						// By Incognito, 2.9.2:			http://forum.sa-mp.com/showthread.php?t=102865
-#include <mysql_R5>						// R5
+#include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
+#include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
 #include <timestamptodate>
+#define VERSION "v2.6"
 
-#define VERSION "v2.5.84"
 #define DEBUG 2
 
 //Modu³y mapy
@@ -87,8 +69,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include "modules/forward.pwn"
 #include "modules/textdraw.pwn"
 #include "modules/enum.pwn"
-#include "modules/NOWE_ZMIENNE.pwn"
-#include "modules/new/niceczlowiek/general.pwn"    
+#include "modules/zmienne.pwn"
+#include "modules/new/niceczlowiek/general.pwn"
+#include "modules/new/niceczlowiek/dynamicgui.pwn"
 #include "modules/mru_mysql.pwn"
 
 //Nowe modu³y .def:
@@ -110,6 +93,26 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik ----> edycja Jakub 2015
 #include "modules\new\premium\premium.pwn"
 #include "modules\new\premium\premium_dialogs.pwn"
 
+//Inne:
+#include "modules/Inne/ibiza.inc"
+#include "modules/Inne/system_aut.pwn"
+#include "modules/Inne/system_kp.pwn"
+#include "modules/Inne/external.pwn"
+
+//Modu³y mapy c.d.
+#include "modules/funkcje.pwn"
+#include "modules/timery.pwn"
+
+//Obiekty:
+#include "modules/obiekty/stare_obiekty.pwn"
+#include "modules/obiekty/nowe_obiekty.pwn"
+#include "modules/pickupy.pwn" //Samochody/Pickupy/3DTexty:
+
+//Modu³y mapy c.d.
+#include "modules/komendy.pwn"
+#include "modules/new/niceczlowiek/cmd.pwn"
+#include "modules/new/niceczlowiek/noysi.pwn"
+#include "modules/new/niceczlowiek/wybieralka.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()
@@ -128,40 +131,12 @@ main()
 	print("P | ---         O          --- | P");
 	print("----------------------------------\n");
 	//exit;
+	AntiDeAMX();
 	WasteDeAMXersTime();
 }
 //------------------------------------------------------------------------------------------------------
 
-//Inne:
-#include "modules/Inne/ibiza.inc"
-
-//System aut
-#include "modules/Inne/system_aut.pwn"
-
-#include "modules/Inne/system_kp.pwn"
-
-//EXTERNAL CALLS
-#include "modules/Inne/external.pwn"
-
-//Funkcje:
-#include "modules/funkcje.pwn"
-
-//Timery:
-#include "modules/timery.pwn"
-
-//Obiekty:
-#include "modules/obiekty/stare_obiekty.pwn"
-#include "modules/obiekty/nowe_obiekty.pwn"
-
-//Samochody/Pickupy/3DTexty:
-#include "modules/pickupy.pwn"
-
-//------------------------------------------------------------------------------------------------------
-
-#include "modules/komendy.pwn"
-#include "modules/new/niceczlowiek/cmd.pwn"
-#include "modules/new/niceczlowiek/noysi.pwn"
-#include "modules/new/niceczlowiek/wybieralka.pwn"
+//---------------------------<[  Callbacks   ]>--------------------------------------------------
 
 public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
@@ -181,11 +156,11 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
 		return 0;
 	}
-    if(GetTickCount() - StaryCzas[playerid] < 100)//antyspam
+    /*if(GetTickCount() - StaryCzas[playerid] < 100)//antyspam
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
 		return 0;
-	}
+	}*/
     if(IsCommandBlocked(cmdtext))
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
@@ -195,9 +170,8 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 	return 1;
 }
 
-//---------------------------<[  OnDialogResponse   ]>--------------------------------------------------
+//public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 #include "modules/OnDialogResponse.pwn"
-
 
 public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 {
@@ -206,14 +180,13 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
+	//return 0; = strza³ nie zabiera hp
+
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
     {
     	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
 		MaTazer[playerid] = 0;
         return 0;
-		//PlayerInfo[playerid][pGun2] = 24;
-		//GivePlayerWeapon(playerid, 24, PlayerInfo[playerid][pAmmo2]);
-		//RemovePlayerAttachedObject(playerid, 9);
 	}
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) < 11 && hittype == 1)
     {
@@ -230,25 +203,19 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
         format(string, sizeof(string), "* %s strzela tazerem w %s.", giveplayer, sendername);
         ProxDetector(30.0, hitid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         MaTazer[playerid] = 0;
-        //PlayerInfo[issuerid][pGun2] = 24;
-        //GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
-        //RemovePlayerAttachedObject(issuerid, 9);
         PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
         PlayerPlaySound(hitid, 6300, 0.0, 0.0, 0.0);
         ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
         ClearAnimations(hitid);
         ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
         TogglePlayerControllable(hitid, 0);
-        return 0; //nie zabiera hp ! ! !
+        return 0;
     }
     else if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) > 10 && hittype == 1)
     {
         GameTextForPlayer(playerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
         MaTazer[playerid] = 0;
         return 0;
-        //PlayerInfo[issuerid][pGun2] = 24;
-        //GivePlayerWeapon(issuerid, 24, PlayerInfo[issuerid][pAmmo2]);
-        //RemovePlayerAttachedObject(issuerid, 9);
     }
     return 1;
 }
@@ -631,10 +598,10 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 	return 1;
 }
 
-/*public OnVehicleDamageStatusUpdate(vehicleid, playerid)
+public OnVehicleDamageStatusUpdate(vehicleid, playerid)
 {
     return 1;
-} */
+}
 
 public OnEnterExitModShop(playerid, enterexit, interiorid)
 {
@@ -707,11 +674,10 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
     }
 
     if(!ispassenger)
-    {
+	{
         if(!Player::CanUseCar(playerid, vehicleid))
-            return Player::RemoveFromVeh(playerid);
+        	return Player::RemoveFromVeh(playerid);
     }
-
 	if(IsARower(vehicleid))
 	{
 	    SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
@@ -759,9 +725,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	return 1;
 }
 
-#define PreloadAnimLib(%1,%2)   ApplyAnimation(%1,%2,"null",0.0,0,0,0,0,0)
-
-//---------------------------<[  OnPlayerConnect:  ]>---------------------------
 public OnPlayerConnect(playerid)
 {
 	#if DEBUG == 1
@@ -769,6 +732,7 @@ public OnPlayerConnect(playerid)
 	#endif
         
 	Ac_OnPlayerConnect(playerid);
+	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
 	ZerujZmienne(playerid);
 
@@ -818,7 +782,6 @@ public OnPlayerConnect(playerid)
 	return 1;
 }
 
-//--------------------<[  OnPlayerPause  ]>--------------------
 public OnPlayerPause(playerid)
 {
 	if(afk_timer[playerid] == -1)
@@ -827,7 +790,7 @@ public OnPlayerPause(playerid)
 	}
 	return 1;
 }
-//-------------------------------<[  OnPlayerDisconnect  ]>-------------------------------
+
 public OnPlayerDisconnect(playerid, reason)
 {
 	//Pobieranie starej pozycji:
@@ -835,15 +798,7 @@ public OnPlayerDisconnect(playerid, reason)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerDisconnect - begin", GetNick(playerid), playerid);
 	#endif
-	
-	if(WOSP[playerid] != 0)
-	{
-		RemovePlayerAttachedObject(playerid, 1);
-		Delete3DTextLabel(WOSP[playerid]);
-		WOSP[playerid] = 0;
-	}
 
-	
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
 
@@ -909,8 +864,6 @@ public OnPlayerDisconnect(playerid, reason)
     //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
     if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || zakuty[playerid] >= 1 || poscig[playerid] == 1) 
 	{
-        //if(pobity[playerid] == 0)
-        //{
         PlayerInfo[playerid][pJailed] = 10;
         new string[130];
         new powod[36];
@@ -973,14 +926,6 @@ public OnPlayerDisconnect(playerid, reason)
         TextDrawShowForPlayer(playerid, OilTXD_BG[1]);
     }
 
-    /*if(GetPVarInt(playerid, "patrol") != 0)
-    {
-        cmd_patrol(playerid, "stop");
-    }
-    if(GetPVarInt(playerid, "patrolmap") == 1)
-    {
-        Patrol_HideMap(playerid);
-    } */
     if(GetPVarInt(playerid, "patrol") != 0) {
         new patrol = GetPVarInt(playerid, "patrol-id");
         cmd_patrol(PatrolInfo[patrol][patroluje][0], "stop");
@@ -1192,6 +1137,20 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+	if(issuerid < 0 || issuerid > MAX_PLAYERS)
+	{
+		return 1;
+	}
+	
+	if(gPlayerLogged[issuerid] != 1)
+	{
+		new Float:health, Float:armour;
+		GetPlayerHealth(playerid, health);
+		SetPlayerHealth(playerid, health);
+		GetPlayerArmour(playerid, armour);
+		SetPlayerArmour(playerid, armour);
+	}
+
     if(weaponid == WEAPON_GRENADE || weaponid == 51)
 	{
 		new Float:health;
@@ -1389,8 +1348,12 @@ public OnPlayerDeath(playerid, killerid, reason)
 				ABroadCast(COLOR_YELLOW,string,1);
 				WarningLog(string);
 			}
-
-
+			if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
+			{
+                format(string, 128, "AdmWarning: £owca Nagród [%d]%s zabi³ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
+				ABroadCast(COLOR_YELLOW,string,1);
+				WarningLog(string);
+			}
 			//-------<[    Inne    ]>---------
 			if(PlayerPaintballing[playerid] != 0)
 			{
@@ -1512,7 +1475,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	return 1;
 }
 
-public OnPlayerSpawn(playerid) //Przebudowany
+public OnPlayerSpawn(playerid)
 {
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerSpawn - begin", GetNick(playerid), playerid);
@@ -1524,6 +1487,10 @@ public OnPlayerSpawn(playerid) //Przebudowany
 		sendErrorMessage(playerid, "Zespawnowa³eœ siê, a nie jesteœ zalogowany! Zosta³eœ wyrzucony z serwera.");
 		KickEx(playerid);
 		return 0;
+	}
+	else
+	{
+		SetPlayerVirtualWorld(playerid, 0);
 	}
 
 	DeletePVar(playerid, "Vinyl-bilet");
@@ -4078,19 +4045,6 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 	#endif
 }
 
-forward MySQL_DoForceGMX();
-public MySQL_DoForceGMX()
-{
-    SendRconCommand("gmx");
-}
-
-new bool:GMX_needed=false;
-public MySQL_Close()
-{
-    if(GMX_needed) SetTimer("MySQL_DoForceGMX", 500, 0);
-    else mysql_close();
-}
-
 public OnRconLoginAttempt(ip[], password[], success)
 {
 	#if DEBUG == 1
@@ -4162,14 +4116,6 @@ public OnPlayerObjectMoved(playerid, objectid)
 
 public OnPlayerPickUpPickup(playerid, pickupid)
 {
-    /*if(pickupid == pickup)
-	{
-		SendClientMessage(playerid, COLOR_PANICRED, "PICKUP 1!!!!!");
-	}
-	else if(pickupid == pickup2)
-	{
-		SendClientMessage(playerid, COLOR_PANICRED, "PICKUP 2!!!!");
-	}*/
 	return 1;
 }
 
@@ -4200,8 +4146,37 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         
         SetPVarInt(playerid, "iLastDrive", gettime());
     } */
+	if(gPlayerLogged[playerid] == 0)
+	{
+		if(newstate == PLAYER_STATE_SPAWNED || newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
+		{
+			format(string, sizeof(string), "%s zostal skickowany za bycie niezalogowanym (OPST)", GetNick(playerid));
+			KickLog(string);
+			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
+			KickEx(playerid);
+			return 1;
+		}
+	}
+	
 	if(newstate == PLAYER_STATE_DRIVER)
     {
+        if(newstate == PLAYER_STATE_DRIVER)
+        {
+        	new vehicleid = GetPlayerVehicleID(playerid);
+        	new lcarid = VehicleUID[vehicleid][vUID];
+        	if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL)
+        	{
+ 				if(CarData[lcarid][c_Owner] == RENT_CAR)
+    			{
+					if (CarData[lcarid][c_Rang]-1 != playerid)
+					{
+		    			TogglePlayerControllable(playerid, 0);
+						HireCar[playerid] = vehicleid;
+						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", "Mo¿esz wypo¿yczyæ ten pojazd!\nCena: 5000$ za 15 minut.", "Wynajmij", "WyjdŸ");
+					}
+				}
+			}
+		}
         if(!ToggleSpeedo[playerid])
         {
             //Speedo
@@ -4224,7 +4199,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(newstate == PLAYER_STATE_DRIVER)
         {
             new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player::CanUseCar(playerid, vehicleid))
+            if(!Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1)
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
 
@@ -4564,7 +4539,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	if(newstate == PLAYER_STATE_DRIVER) //buggy dont finnish
 	{// 38 / 49 / 56 = SS
 		new newcar = GetPlayerVehicleID(playerid);
-
         //NOWY SYSTEM AUT FRAKCYJNYCH I PUBLICZNYCH
         if(newcar <= CAR_End) //do kradziezy
         {
@@ -4651,8 +4625,6 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	#endif
 	return 1;
 }
-
-//----------------------[spawny]-----------------------------------
 
 public OnPlayerRequestSpawn(playerid)
 {
@@ -4758,17 +4730,6 @@ public OnPlayerRequestClass(playerid, classid)
 		printf("%s[%d] OnPlayerRequestClass - end", GetNick(playerid), playerid);
 	#endif
 	return 0;
-}
-
-//----------------------[koniec]-----------------------------------
-
-AntiDeAMX()
-{
-    new a[][] = {
-        "Trololo (Wpierdol)",
-        "Brass K"
-    };
-    #pragma unused a
 }
 
 public OnGameModeInit()
@@ -4986,21 +4947,6 @@ public OnGameModeInit()
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
-    //SetTimer("MySQL_Refresh", 15000, true);
-	//SetTimer("JednaSekundaTimer", 1000, true);//1 sekunda timer
-    //SetTimer("GangZone_Process", 1750, true);//OnPlayerEnterGangZone / OnPlayerLeaveGangZone
-	//SetTimer("SyncUp", 60000, 1);//1min
-	//SetTimer("SetPlayerUnjail", 1000, 1);//1sek - wywaliæ
-	//SetTimer("CarCheck", 30000, 1);//30sek - wywaliæ
-	//SetTimer("CustomPickups", 2000, 1);//2sek - wywaliæ
-	//SetTimer("Spectator", 2000, 1);//2sek - wywaliæ
-	//SetTimer("IdleKick", idletime, 1);//ildetime sek
-	//SetTimer("Production", 300000, 1); //5 mins (300 000)
-    //SetTimer("AccountSave", 900000, 1); //15min acc save
-	//SetTimer("SaveAccounts", 1800000, 1); //30 mins every account saved
-	//SetTimer("CheckGas", RunOutTime, 1);//RunOutTime sek - ???
-    //SetTimer("VehicleUpdate", 3000, 1); //3s anty wybuch, plamy
-    //SetTimer("BBD_Timer", 3500, 1); //Boombox system
 
     for(new i=0;i<MAX_VEHICLES;i++)
     {
@@ -5073,7 +5019,6 @@ public OnGameModeInit()
 	#endif
 	return 1;
 }
-//koniec OnGameModeInit();
 
 public OnGameModeExit()
 {
@@ -5348,14 +5293,29 @@ PayDay()
 	return 1;
 }
 
-
-
-
 public OnPlayerUpdate(playerid)
 {
 	/*#if DEBUG == 1
 		printf("%s[%d] OnPlayerUpdate - begin", GetNick(playerid), playerid);
 	#endif*/
+	
+	if(gPlayerLogged[playerid] == 0)
+	{
+		if(GetPlayerVirtualWorld(playerid) != 1488)
+		{
+			SetPlayerVirtualWorld(playerid, 1488);
+		}
+		if(GetPlayerState(playerid) == PLAYER_STATE_SPAWNED || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER || GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+		{
+			new string[128];
+			format(string, sizeof(string), "%s zostal skickowany za bycie niezalogowanym", GetNick(playerid));
+			KickLog(string);
+			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
+			KickEx(playerid);
+			return 0;
+		}
+	}
+	
     systempozarow_OnPlayerUpdate(playerid);//System Po¿arów v0.1
     
 	//Anty BH PADZIOCH
@@ -6088,25 +6048,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
             return 0;
 		}
 	}
-	/*if(newkeys & KEY_CROUCH && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
-	{
-		if((IsACop(playerid) || IsABOR(playerid) && PlayerInfo[playerid][pRank] >= 1) && OnDuty[playerid] == 1)
-		{
-			veh = GetPlayerVehicleID(playerid);
-			if(veh == 148 || veh == 43 || IsAKogutCar(veh))
-				cmd_kogut(playerid);
-		}
-	}*/
-	/*if(newkeys & KEY_NO && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))//id 131072
-	{
-		if(IsACop(playerid))
-		{
-			if(IsACopCar(GetPlayerVehicleID(playerid)))
-			{
-				DopalaczPD(playerid);
-			}
-		}
-	}*/
 	if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))//id 131072
 	{
 		new engine, unused;
@@ -6171,20 +6112,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		   	}
 		}
 	}
-	/*if(PRESSED(KEY_ACTION))
-	{
-		if(IsPlayerInAnyVehicle(playerid))
-		{
-			AddVehicleComponent(GetPlayerVehicleID(playerid), 1010);
-		}
-	}
-	if(RELEASED(KEY_ACTION))
- 	{
- 	    if(IsPlayerInAnyVehicle(playerid))
- 	    {
- 	        RemoveVehicleComponent(GetPlayerVehicleID(playerid), 1010);
- 	    }
- 	}*/
 	if(IsPlayerInAnyVehicle(playerid))
 	{
 	    if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
@@ -7206,76 +7133,6 @@ public OnPlayerText(playerid, text[])
 	return 1;
 }//OnPlayerText
 
-IBIZA_Reszta()
-{
-    IbizaDrinkiPobierz();
-	mysql_query("SELECT `hajs` FROM `ibiza` WHERE `id`=2");
-	mysql_store_result();
-	if(mysql_num_rows())
-	{
-		new bufor[64];
-		mysql_fetch_row_format(bufor, "|");
-		sscanf(bufor, "d", IbizaBilet);
-	}
-	mysql_free_result();
-	//TEXTDRAWY
-
-    TDIbiza[0] = TextDrawCreate(390.00000, 21.500000, "01/01/1999  21:21");
-    TextDrawFont(TDIbiza[0], 2);
-    TextDrawLetterSize(TDIbiza[0], 0.599999, 2.000000);
-    TextDrawColor(TDIbiza[0], 0xFFFFFFFF);
-    TextDrawSetOutline(TDIbiza[0], 1);
-
-    TDIbiza[1] = TextDrawCreate(326.000000, 373.000000, "LD_BEAT:right");
-    TextDrawFont(TDIbiza[1], 4);
-	TextDrawTextSize(TDIbiza[1], 40.00, 40.00);
-	TextDrawSetSelectable(TDIbiza[1], 1);
-
-    TDIbiza[2] = TextDrawCreate(261.500000, 373.000000, "LD_BEAT:left");
-    TextDrawFont(TDIbiza[2], 4);
-	TextDrawTextSize(TDIbiza[2], 40.00, 40.00);
-	TextDrawSetSelectable(TDIbiza[2], 1);
-
-    	//OBIEKTY INTEK IBIZA
-	IbizaKafle[0] = CreateDynamicObject(19128,1936.5900000,-2482.1700000,12.5084,0.0000000,0.0000000,0.0000000, 1, 0, -1); //Object number 473
-	IbizaKafle[1] = CreateDynamicObject(19128,1953.6400000,-2482.1300000,12.5084,0.0000000,0.0000000,0.0000000, 1, 0, -1); //Object number 474
-	IbizaKafle[2] = CreateDynamicObject(19128,1953.6500000,-2497.4700000,12.5084,0.0000000,0.0000000,0.0000000, 1, 0, -1); //Object number 475
-	IbizaKafle[3] = CreateDynamicObject(19128,1936.6100000,-2497.4700000,12.5084,0.0000000,0.0000000,0.0000000, 1, 0, -1); //Object number 476
-	IbizaRuryObiekty[0] = CreateDynamicObject(3503,1936.6000, -2482.1799, 11.0000,0.0000000,0.0000000,0.0000000, 1, 0, -1); //Object number 477
-	IbizaRuryObiekty[1] = CreateDynamicObject(3503,1953.6300, -2482.1299, 11.0000,0.0000000,0.0000000,0.0000000, 1, 0, -1); //Object number 478
-	IbizaRuryObiekty[2] = CreateDynamicObject(3503,1936.5900, -2497.4700, 11.0000,0.0000000,0.0000000,0.0000000, 1, 0, -1); //Object number 479
-	IbizaRuryObiekty[3] = CreateDynamicObject(3503,1953.6500, -2497.4600, 11.0000,0.0000000,0.0000000,0.0000000, 1, 0, -1); //Object number 480
-	IbizaBarierkiObiekty[0] = CreateDynamicObject(2773,1953.8400000,-2470.7100000,14.9000000,0.0000000,0.0000000,93.1800000, 1, 0, -1); //Object number 423
-	IbizaBarierkiObiekty[1] = CreateDynamicObject(2773,1951.9300000,-2470.8200000,14.9000000,0.0000000,0.0000000,93.1800000, 1, 0, -1); //Object number 424
-	IbizaBarierkiObiekty[2] = CreateDynamicObject(2773,1950.0100000,-2470.8700000,14.9000000,0.0000000,0.0000000,89.7000000, 1, 0, -1); //Object number 425
-	IbizaPiasek[0] = CreateDynamicObject(19377,1939.8800000,-2485.0000000,12.5500000,0.0000000,90.0000000,0.0000000, 1, 0, -1);
-	IbizaPiasek[1] = CreateDynamicObject(19377,1950.3800000,-2485.0000000,12.5500000,0.0000000,90.0000000,0.0000000, 1, 0, -1);
-	IbizaPiasek[2] = CreateDynamicObject(19377,1939.8800000,-2494.6300000,12.5500000,0.0000000,90.0000000,0.0000000, 1, 0, -1);
-	IbizaPiasek[3] = CreateDynamicObject(19377,1950.3800000,-2494.6300000,12.5500000,0.0000000,90.0000000,0.0000000, 1, 0, -1);
-	IbizaKameryObiekty[0] = CreateDynamicObject(1616,1958.9700000,-2477.3400000,21.7100000,0.0000000,0.0000000,90.7200000, 1, 0, -1); //przy scenie, paczy na VIP
-	IbizaKameryObiekty[1] = CreateDynamicObject(1616,1921.0300000,-2503.7500000,22.6100000,0.0000000,0.0000000,-97.3800000, 1, 0, -1); //nad VIPEm, paczy na parkiet
-	IbizaKameryObiekty[2] = CreateDynamicObject(1616,1892.9300000,-2473.6900000,21.7100000,0.0000000,0.0000000,-197.8200000, 1, 0, -1); //paczy na wejscie i bar, po lewo od prezesa
-	IbizaKameryObiekty[3] = CreateDynamicObject(1616,1892.9700000,-2493.0300000,20.7300000,0.0000000,0.0000000,-114.3000000, 1, 0, -1); //nad wejœciem paczy na prezesa
-	IbizaKameryObiekty[4] = CreateDynamicObject(1616,1913.9400000,-2474.1600000,21.3700000,0.0000000,0.0000000,73.5000000, 1, 0, -1); //przy prezesie prawo
-	IbizaKameryObiekty[5] = CreateDynamicObject(1616,1757.2200000,-2467.5000000,24.0100000,-15.7800000,-14.4000000,40.1400000, 1, 0, -1); //przedsionek
-	IbizaKameryObiekty[6] = CreateDynamicObject(1616,1533.5800000,-2558.0900000,19.00000,0.0000000,0.0000000,-118.6800000, 1, 0, -1); //kibel
-	IbizaKameryObiekty[7] = CreateDynamicObject(1616,1533.5800000,-2558.0900000,19.00000,0.0000000,0.0000000,-118.6800000, 2, 0, -1); //kibel
-	IbizaKanciapaObiekt = CreateDynamicObject(19302, 1902.58, -2465.68, 19.12,   0.00, 0.00, 90.00, 1, 0, -1);
-
-	//IBIZA OBIEKTY NA ZEWN¥TRZ
-	IbizaKameryObiekty[8] = CreateDynamicObject(1616,386.9000000,-1808.9100000,12.9700000,0.0000000,0.0000000,20.0400000,0, 0, -1); //przy bramie
-	IbizaKameryObiekty[9] = CreateDynamicObject(1616,389.5400000,-1805.8600000,12.9800000,0.0000000,0.0000000,-114.0600000,0, 0, -1); //nad wejœciem
-	IbizaKameryObiekty[10] = CreateDynamicObject(1616,436.0300000,-1787.4700000,19.5600000,0.0000000,0.0000000,48.3000000,0, 0, -1); //palma bli¿sza na wejœcie
-	IbizaKameryObiekty[11] = CreateDynamicObject(1616,308.5300000,-1816.9700000,10.0100000,0.0000000,0.0000000,-122.2800000,0, 0, -1); //z parkingu
-	IbizaBramaObiekty[0] = CreateDynamicObject(2372,420.9000000,-1783.4000000,4.3100000,0.0000000,0.0000000,0.0000000,0, 0, -1);
-	IbizaBramaObiekty[1] = CreateDynamicObject(2372,358.4000000,-1783.9000000,4.2000000,0.0000000,0.0000000,0.0000000,0, 0, -1);
-}
-
-stock IBIZA_end()
-{
-    IbizaDrinkiZapisz();
-}
-
 public OnPlayerSelectDynamicObject(playerid, objectid, modelid, Float:x, Float:y, Float:z)
 {
 	#if DEBUG == 1
@@ -7368,30 +7225,6 @@ public OnPlayerLeaveGangZone(playerid, zoneid)
 	#endif
 }
 
-stock SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
-{
-    SetPlayerPos(playerid,X,Y,Z);
-}
-
-stock PutPlayerInVehicleEx(playerid,vehicleid,seatid)
-{
-    PutPlayerInVehicle(playerid,vehicleid,seatid);
-}
-
-stock RemovePlayerFromVehicleEx(playerid)
-{
-    new veh = GetPlayerVehicleID(playerid);
-    new model = GetVehicleModel(veh);
-    if(model == 538 || model == 537 || model == 449)
-    {
-        new Float:x, Float:y, Float:z;
-        GetPlayerPos(playerid, x, y, z);
-        SetPlayerPosEx(playerid, x, y, z+0.7);
-    }
-    RemovePlayerFromVehicle(playerid);
-}
-
-
 public OnTrailerUpdate(playerid, vehicleid)
 {
     return 1;
@@ -7482,6 +7315,15 @@ public OnPlayerStreamIn(playerid, forplayerid)
     return 1;
 }
 
+AntiDeAMX()
+{
+    new a[][] = {
+        "Trololo (Wpierdol)",
+        "Brass K"
+    };
+    #pragma unused a
+}
+
 WasteDeAMXersTime()
 {
     new b;
@@ -7490,4 +7332,3 @@ WasteDeAMXersTime()
 }
 
 //Koniec.
-
