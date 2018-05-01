@@ -1,4 +1,4 @@
-//OnDialogResponse.pwn  AKTUALNA MAPA
+//OnDialogResponse.pwn
 
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
@@ -85,51 +85,58 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
-				PlayAudioStreamForPlayer(playerid, RadioSANUno);
+				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18434");
 				return 1;
 			}
 			case 1:
 			{
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
-				PlayAudioStreamForPlayer(playerid, RadioSANDos);
+				PlayAudioStreamForPlayer(playerid, RadioSANUno);
 				return 1;
 			}
 			case 2:
+			{
+			    if(!response) return 1;
+				PlayerFixRadio(playerid);
+				PlayAudioStreamForPlayer(playerid, RadioSANDos);
+				return 1;
+			}
+			case 3:
 			{
 			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://radiozetmp3-07.eurozet.pl:8400/listen.pls");
 				return 1;
 			}
-			case 3:
+			case 4:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmffm.pls");
 				return 1;
 			}
-			case 4:
+			case 5:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls");
 				return 1;
 			}
-			case 5:
+			case 6:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://acdn.smcloud.net/t062-1.mp3.pls");
 				return 1;
 			}
-			case 6:
+			case 7:
 			{
 				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
-			case 7:
+			case 8:
 			{
 			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
@@ -749,7 +756,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             return 0;
         }
         new lStr[256];
-        format(lStr, 256, "SELECT `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s'", inputtext);
+		new nick_escaped[MAX_PLAYER_NAME];
+		mysql_real_escape_string(inputtext, nick_escaped);
+        format(lStr, 256, "SELECT `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s'", nick_escaped);
         mysql_query(lStr);
         mysql_store_result();
         if(mysql_num_rows())
@@ -3237,6 +3246,36 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 		    }
 		}
+		else if(dialogid == 7080)
+		{
+		    new string[256];
+		    new giveplayer[MAX_PLAYER_NAME];
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(PDkuje[playerid], giveplayer, sizeof(giveplayer));
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			//
+		    if(response)
+		    {
+		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ ³owcy %s.", sendername, giveplayer);
+				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		        format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", sendername);
+				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
+				zakuty[playerid] = 1;
+	            TogglePlayerControllable(playerid, 0);
+	            uzytekajdanki[PDkuje[playerid]] = 1;
+	            SkutyGracz[PDkuje[playerid]] = playerid;
+				ClearAnimations(playerid);
+                SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
+                SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+		    }
+		    if(!response)
+		    {
+				format(string, sizeof(string), "* %s wyrywa siê i rzuca siê na ³owcê!", sendername);
+				TogglePlayerControllable(playerid, 1);
+				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				PDkuje[playerid] = 0;
+		    }
+		}
 		else if(dialogid == 160)
 		{
 		    if(response)
@@ -4589,6 +4628,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 			if(response)
 			{
+			    new string[64], sendername[MAX_PLAYER_NAME];
+            	GetPlayerName(playerid, sendername, sizeof(sendername));
 			    switch(listitem)
 			    {
 			        case 0:
@@ -4598,6 +4639,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój kastet zosta³ usuniêty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+            			format(string, sizeof(string),"%s niszczy kastet i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+            			
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 1:
@@ -4607,6 +4652,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja broñ bia³a zosta³a usniêta");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy broñ bia³¹ i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 2:
@@ -4616,6 +4664,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet zosta³ usuniêty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy pistolet i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 3:
@@ -4625,6 +4676,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja strzelba zosta³a usuniêta");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy strzelbê i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 4:
@@ -4634,6 +4688,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet maszynowy zosta³ usuniêty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy pistolet maszynowy i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 5:
@@ -4643,6 +4700,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój karabin maszynowy zosta³ usuniêty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy karabin maszynowy i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 6:
@@ -4652,6 +4712,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja snajperka zosta³a usuniêta");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy snajperkê i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 7:
@@ -4661,6 +4724,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój ogniomiotacz zosta³ usuniêty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy ogniomiotacz i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 8:
@@ -4672,6 +4738,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje C4 zosta³o usuniête");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy C4 i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 9:
@@ -4681,6 +4750,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój sprej/aparat/gaœnica zosta³ usuniêty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy spray/aparat/gaœnicê i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 10:
@@ -4690,6 +4762,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje kwiaty/laska/dildo zosta³o usuniête");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy kwiaty/laskê/dildo i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 11:
@@ -4699,6 +4774,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój spadochron zosta³ usuniêty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy spadochron i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 12:
@@ -4708,6 +4786,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój detonator zosta³ usuniêty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+						
+						format(string, sizeof(string),"%s niszczy detonator i rzuca na ziemiê.", sendername);
+            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			    }
@@ -5644,7 +5725,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	   	if(question_id != -1 && response)
 		{
 			if((strcmp(inputtext, correct_answers[question_id], true) == 0
-        	|| strcmp(inputtext, _prawojazdy_unpolish(correct_answers[question_id])) == 0)
+        	/*|| strcmp(inputtext, _prawojazdy_unpolish(correct_answers[question_id])) == 0*/)
         	&& strlen(inputtext) > 1)
         	{
             	PlayerInfo[playerid][pPrawojazdydobreodp] += 1;
@@ -12650,6 +12731,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ProxDetector(30.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				    }
                 }
+				else if(strfind(inputtext, "Mrucznik Radio") != -1)
+                {
+					if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+					{
+						foreach(Player, i)
+						{
+							if(IsPlayerInVehicle(i, veh))
+							{
+								PlayAudioStreamForPlayer(i, "http://4stream.pl:18434");
+								SetPVarInt(i, "sanlisten", 3);
+							}
+						}
+					}
+                }
                 else if(strfind(inputtext, "Radio SAN1") != -1)
                 {
                     if(RadioSANUno[0] != EOF)
@@ -12766,7 +12861,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(!response) return 1;
             SetPVarInt(playerid, "sanradio", listitem);
-            ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio 1\nMrucznik Radio 2\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
 
         }
         else if(dialogid == 669)
@@ -12776,14 +12871,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 switch(listitem)
                 {
-                    case 0: format(RadioSANUno, sizeof(RadioSANUno), "http://s1.slotex.pl:7170");
-                    case 1: format(RadioSANUno, sizeof(RadioSANUno), "http://4stream.pl:18240");
-                    case 2: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_discopolo.pls");
-                    case 3: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_dance100.pls");
-                    case 4: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_mnt.pls");
-                    case 5: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_hiphop.pls");
-                    case 6: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 7: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
+                    case 0: format(RadioSANUno, sizeof(RadioSANUno), "http://4stream.pl:18434");
+                    case 1: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 2: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 3: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 4: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 5: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
                 }
                 foreach(Player, i)
                 {
@@ -15546,6 +15640,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 CarData[car][c_OwnerType] = 0;
                 Car_Save(car, CAR_SAVE_OWNER);
+				
+				format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype 0 - %s", car, GetNick(playerid));
+				StatsLog(string);
             }
             case 1:
             {
@@ -15608,6 +15705,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 CarData[car][c_OwnerType] = 6;
                 Car_Save(car, CAR_SAVE_OWNER);
+				
+				format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype 6 - %s", car, GetNick(playerid));
+				StatsLog(string);
             }
         }
         ShowCarEditDialog(playerid);
@@ -15667,6 +15767,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             CarData[car][c_Owner] = strval(inputtext);
             Car_Save(car, CAR_SAVE_OWNER);
         }
+		
+		format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype %d owner %d - %s", car, typ, strval(inputtext), GetNick(playerid));
+		StatsLog(string);
+		
         ShowCarEditDialog(playerid);
         return 1;
     }
@@ -15925,7 +16029,70 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         SendClientMessage(playerid, COLOR_YELLOW, str);
 
         return 1;
-    }    
+    }
+    else if(dialogid == 7079)
+	{
+		if(response)
+		{
+		    if(HireCar[playerid] == 0)
+			{
+			    TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}
+    		/*if(PlayerInfo[playerid][pDonateRank] == 0)
+			{
+				sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd wypo¿yczyæ mo¿e tylko Konto Premium!");
+				TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}*/
+    		new veh = HireCar[playerid];
+    		if(veh == 0) return 1;
+    		if(Car_GetOwner(veh) != RENT_CAR || Car_GetOwnerType(veh) != CAR_OWNER_SPECIAL)
+			{
+				sendTipMessageEx(playerid, COLOR_GRAD2, "Tego pojazdu nie mo¿na wypo¿yczyæ.");
+				TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}
+    		if(CarData[VehicleUID[veh][vUID]][c_Rang] != 0)
+			{
+			    sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd jest aktualnie wypo¿yczony przez inn¹ osobê.");
+			    TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}
+   			if(GetPVarInt(playerid, "rentTimer") != 0)
+   			{
+   				sendTipMessageEx(playerid, COLOR_GRAD2, "Aktualnie wypo¿yczasz pewien pojazd.");
+   				TogglePlayerControllable(playerid, 1);
+				RemovePlayerFromVehicleEx(playerid);
+				HireCar[playerid] = 0;
+				return 0;
+			}
+    		CarData[VehicleUID[veh][vUID]][c_Rang] = (playerid+1);
+
+    		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 15*60*1000, 0, "ii", playerid, veh));
+
+    		sendTipMessageEx(playerid, COLOR_YELLOW, "Wypo¿yczy³es pojazd na 15 minut za 5000$.");
+    		TogglePlayerControllable(playerid, 1);
+    		DajKase(playerid, -5000);
+    		HireCar[playerid] = veh;
+    		SetPVarInt(playerid, "rentCar", veh);
+		}
+		if(!response)
+		{
+			sendTipMessageEx(playerid, COLOR_GRAD2, "Odrzuci³eœ propozycjê wypo¿yczenia pojazdu.");
+			TogglePlayerControllable(playerid, 1);
+			RemovePlayerFromVehicleEx(playerid);
+			HireCar[playerid] = 0;
+		}
+	}
 	return 0;
 }
 //ondialogresponse koniec

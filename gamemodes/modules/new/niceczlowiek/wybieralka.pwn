@@ -117,7 +117,7 @@ stock NowaWybieralka::ClickedTxd(playerid, Text:clickedid)
 	if(clickedid == NowaWybieralka::Left)
 	{
 
-		if(GetPVarInt(playerid, "NowaWybieralka") == sizeof(Przebierz)-1) SetPVarInt(playerid, "NowaWybieralka", 0);
+		if(GetPVarInt(playerid, "NowaWybieralka") <= 0) SetPVarInt(playerid, "NowaWybieralka", sizeof(Przebierz)-1);
 		else SetPVarInt(playerid, "NowaWybieralka", GetPVarInt(playerid, "NowaWybieralka")-1);
 
 		SetPlayerSkin(playerid, Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);
@@ -127,8 +127,7 @@ stock NowaWybieralka::ClickedTxd(playerid, Text:clickedid)
 	}
 	if(clickedid == NowaWybieralka::Right)
 	{
-
-		if(GetPVarInt(playerid, "NowaWybieralka") == sizeof(Przebierz)-1) SetPVarInt(playerid, "NowaWybieralka", 0);
+		if(GetPVarInt(playerid, "NowaWybieralka") >= sizeof(Przebierz)-1) SetPVarInt(playerid, "NowaWybieralka", 0);
 		else SetPVarInt(playerid, "NowaWybieralka", GetPVarInt(playerid, "NowaWybieralka")+1);
 
 		SetPlayerSkin(playerid, Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);

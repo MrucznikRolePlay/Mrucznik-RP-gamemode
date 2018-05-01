@@ -2,10 +2,6 @@
 
 //#pragma tabsize 0 // <------------------------------------------nope
 
-new Float:czitX;
-new Float:czitY;
-new Float:czitZ;
-
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
 
@@ -13,13 +9,8 @@ new Float:czitZ;
 
 #define         MAX_VEHICLE_ID_CHANGES          3
 
-new LastVehicleID[MAX_PLAYERS];
-new VehicleIDChanges[MAX_PLAYERS];
-new VehicleIDChangeTime[MAX_PLAYERS];
-
-new acstr[128];
-
 //Makra:
+#define PreloadAnimLib(%1,%2)   ApplyAnimation(%1,%2,"null",0.0,0,0,0,0,0)
 #define GetPlayerWeather(%1) GetPVarInt(%1, "Weather")
 #define Distance3D(%1,%2,%3,%4,%5,%6) (VectorSize(%1-%4,%2-%5,%3-%6))/100)
 #define Distance3D2(%1,%2,%3,%4,%5,%6) (VectorSize(%1-%4,%2-%5,%3-%6))*1000.0)
@@ -75,7 +66,7 @@ new acstr[128];
 #define CHECKPOINT_HOME 12
 #define MAX_3DTEXT 1024
 #define MAX_DOM 2000
-#define MAX_NrDOM 46
+#define MAX_NrDOM 47
 #define MAX_REMOVED_OBJECTS 100
 #define GasMax 100
 #define RunOutTime 15000

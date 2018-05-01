@@ -1,4 +1,28 @@
-//funkcje.pwn     AKTUALNA MAPA
+//funkcje.pwn
+
+
+stock SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
+{
+    SetPlayerPos(playerid,X,Y,Z);
+}
+
+stock PutPlayerInVehicleEx(playerid,vehicleid,seatid)
+{
+    PutPlayerInVehicle(playerid,vehicleid,seatid);
+}
+
+stock RemovePlayerFromVehicleEx(playerid)
+{
+    new veh = GetPlayerVehicleID(playerid);
+    new model = GetVehicleModel(veh);
+    if(model == 538 || model == 537 || model == 449)
+    {
+        new Float:x, Float:y, Float:z;
+        GetPlayerPos(playerid, x, y, z);
+        SetPlayerPosEx(playerid, x, y, z+0.7);
+    }
+    RemovePlayerFromVehicle(playerid);
+}
 
 public Lowienie(playerid)
 {
@@ -52,7 +76,7 @@ stock loadKamiPos(playerid)
 }
 
 
-stock saveKevlarPos(playerid)
+stock saveKevlarPos(playerid, recurention=1)
 {
 	new lStr[256];
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
@@ -67,7 +91,8 @@ stock saveKevlarPos(playerid)
 
 		db_free_result(db_query(db_handle, lStr));
 
-		saveKevlarPos(playerid);
+		if(recurention)
+			saveKevlarPos(playerid, 0);
 	}
 	else
 	{
@@ -956,6 +981,25 @@ zdarzylwpisac[playerid] = 0;
 return 1;
 }
 
+/*public UzyteKajdany(playerid,giveplayerid)
+{
+	if(PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
+	{
+		//uzytekajdanki[playerid] = 0;
+		format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(giveplayerid));
+		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+ 		format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", GetNick(playerid));
+		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+		zakuty[playerid] = 1;
+ 		TogglePlayerControllable(playerid, 0);
+  		uzytekajdanki[giveplayerid] = 1;
+   		SkutyGracz[PDkuje[playerid]] = playerid;
+		ClearAnimations(playerid);
+ 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
+  		SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+	}
+	return 1;
+}*/
 public UzyteKajdany(playerid){
 uzytekajdanki[playerid] = 0;
 return 1;
@@ -2074,19 +2118,7 @@ IsAFakeKonto(playerid)
 	}
 	return 0;
 }
-IsAFLD(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new nick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Matthew_McVinsley", false) == 0)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
+
 IsAPrzestepca(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -4134,6 +4166,12 @@ stock ActionLog(text[])
     Log(plik, text);
 }
 
+stock WeapLog(text[])
+{
+    new plik[32] = "logi/weap.log";
+    Log(plik, text);
+}
+
 stock AccountSaveLog(text[])
 {
     new y,m,d;
@@ -4597,7 +4635,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD2,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] Przestêpstwa:[%d] Czas Aresztu:[%d] Smierci bêd¹c Poszukiwanym:[%d]", fishes,bigfish,crimes,arrests,warrests );
 		SendClientMessage(playerid, COLOR_GRAD3,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s] ID Skina:[%d]",kills,deaths,costlevel,exp,expamount,wanted,f2text, skin);
+		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s] Skin ID:[%d]",kills,deaths,costlevel,exp,expamount,wanted,f2text, skin);
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
@@ -5656,7 +5694,11 @@ StworzDom(playerid, interior, oplata)
 		Dom[dld][hInt_Z] = IntInfo[interior][Int_Z];
 		Dom[dld][hInterior] = IntInfo[interior][Int];
 		//Dom[dld][hParcela] = dini_Int(string, "Parcela");//niet
-		Dom[dld][hVW] = dld;
+		
+		if(interior == 47)
+			Dom[dld][hVW] = 2001;
+		else
+			Dom[dld][hVW] = dld;
 		//format(GeT, sizeof(GeT), "%s", dini_Get(string, "Tekst_3D"));
 		//Dom[dld][h3D_txt] = GeT;
 		//hK_3D,
@@ -7004,13 +7046,13 @@ LadujInteriory()
     IntInfo[46][Pokoje] = 4;
     IntInfo[46][Cena] = 5000000;
 
-    IntInfo[47][Int_X] = 0;//dla shawna
-    IntInfo[47][Int_Y] = 0;
-    IntInfo[47][Int_Z] = 0;
+    IntInfo[47][Int_X] = 1284.1958;//WOŒP
+    IntInfo[47][Int_Y] = -810.7264;
+    IntInfo[47][Int_Z] = 109.1989;
     IntInfo[47][Int] = 0;
-    IntInfo[47][Kategoria] = 7;
-    IntInfo[47][Pokoje] = 10;
-    IntInfo[47][Cena] = 100000000;
+    IntInfo[47][Kategoria] = 5;
+    IntInfo[47][Pokoje] = 7;
+    IntInfo[47][Cena] = 40000000;
     return 1;
 }
 
@@ -11580,7 +11622,7 @@ stock EDIT_ShowRangNames(playerid, typ, uid, bool:edit=false)
 
 stock EDIT_SaveRangs(typ, uid)
 {
-    new lStr[256], query[512];
+    new lStr[256], lStr_escaped[256], query[512];
 
     for(new i=0;i<MAX_RANG;i++)
     {
@@ -11594,14 +11636,15 @@ stock EDIT_SaveRangs(typ, uid)
     format(query, 512, "SELECT `ID` FROM mru_nazwyrang WHERE `ID`='%d' AND `typ`='%d'", uid, typ+1);
     mysql_query(query);
     mysql_store_result();
+	mysql_real_escape_string(lStr, lStr_escaped);
     if(mysql_num_rows())
     {
         mysql_free_result();
-        format(query, 512, "UPDATE mru_nazwyrang SET rangi='%s' WHERE `ID`='%d' AND `typ`='%d'", lStr, uid, typ+1);
+        format(query, 512, "UPDATE mru_nazwyrang SET rangi='%s' WHERE `ID`='%d' AND `typ`='%d'", lStr_escaped, uid, typ+1);
     }
     else
     {
-        format(query, 512, "INSERT INTO mru_nazwyrang (rangi, ID, typ) VALUES ('%s', '%d', '%d')", lStr, uid, typ+1);
+        format(query, 512, "INSERT INTO mru_nazwyrang (rangi, ID, typ) VALUES ('%s', '%d', '%d')", lStr_escaped, uid, typ+1);
     }
     mysql_query(query);
     RANG_ApplyChanges[typ][uid] = false;

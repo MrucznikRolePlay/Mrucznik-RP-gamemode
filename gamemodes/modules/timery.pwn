@@ -62,7 +62,7 @@ forward AktywujPozar();
 public AktywujPozar()
 {
     SetTimer("UsunPozar", 3600000, false);
-    new losowy = random(10);
+    new losowy = random(15);
 	if(losowy == 1)
 	{
     	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");

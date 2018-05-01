@@ -444,7 +444,7 @@ new FractionNames[][40] = {
     "Los Santos Medical Center",
     "Ballanca Crime Family",
     "Yakuza",
-    "United States Secret Service",
+    "Government Security Agency",
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
