@@ -1,6 +1,6 @@
 [submodule "gamemodes/modules/obiekty"]
 	path = gamemodes/modules/obiekty
-	url = ssh://git@github.com:/Mrucznik/Mrucznik-RP-Obiekty
+	url = ssh://mrucznik@github.com/Mrucznik/Mrucznik-RP-Obiekty
 [submodule "include"]
 	path = include
-	url = ssh://git@github.com:/Mrucznik/Mrucznik-RP-Includes
+	url = ssh://mrucznik@github.com/Mrucznik/Mrucznik-RP-Includes
