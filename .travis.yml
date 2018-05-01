@@ -1,0 +1,30 @@
+language: c
+os: linux
+dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+    - libc6:i386
+    - libncurses5:i386
+    - libstdc++6:i386
+before_script:
+- chmod +x CI_scripts/*
+- CI_scripts/get_compiler.sh
+- cp -R include ~/compiler/
+script:
+- CI_scripts/compile.sh gamemodes/Mrucznik-RP.pwn
+before_deploy:
+- git config --local user.name "Mrucznik"
+- git config --local user.email "mrucznix@gmail.com"
+- git tag "$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' Mrucznik-RP.pwn) - $(date
+  +'%d.%m.%Y') - $(git log --format=%h -1)"
+  
+deploy:
+  provider: releases
+  api_key:
+    secure: DoP3DekUKQP6/aRrRg/rmQLFEdOSnRC/LOYaYOMdew24VieUKA9UZVFw8jgtVOQ2kitoif0m1PVXrCPpWKN+RgvIIt+dCzQDcAyFE6mSnP7/Lnp+HDcel61TbEz+yJY+HnmPhTZxiwM88g7p9QoQdl49lw2Jd873pOsdT9cXhd0fkVdW4X9dad+Z23mTZX4cpIQCGHVKo2bKd9SW4OqPxiP7uY/fXD/YVBAURCQrvrLQwsNeDJ8vN/jUIOGg+9AQ9OJkrF/V7VYrILC4lhdbdGJkyT5nEZ+7nQEl5zm92i3dl9h6p0OmSHiYhBaPXDUOj3nI5AP0igj5Up7MpUEI+1hAZJRx2JHWps8hnc8PxAM8eRgHmGhDqVe6eXygLrBZXJgZNNUhUmDCV48LMSGlHp8S09DF4VmY/Y+0GP0Awtuo4ApDqoteAYqxvVXnDG0rib3qiMqqbYRKfS30btKwF+cCFkJpsQuWtRFPdPwpOxFKWULzh3kAcDzGpkiV/mnG8vVpPW8+OIFKQWu7btqwx9l9LhgrbgwO1dB/OVL80wGlXrri/OraKGcO94BLRcO7rJN6MEnYRzZ/Zz4PlQs9dnJ9RAfTF8w7WVLe5lKFnC7e/PtvCE9qg7CwBOWiuQPbg4shZLC8p7Pw3I0E7j8xjMqMl4P+iWHVdWzXENj5VAA=
+  file: Mrucznik-RP.amx
+  on:
+    repo: Mrucznik/Mrucznik-RP-2.5
+    branch: master
