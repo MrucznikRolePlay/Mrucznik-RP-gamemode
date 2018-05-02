@@ -59,7 +59,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
 #include <timestamptodate>
-#define VERSION "v2.6"
+#define VERSION "v2.5.9"
 
 #define DEBUG 2
 
