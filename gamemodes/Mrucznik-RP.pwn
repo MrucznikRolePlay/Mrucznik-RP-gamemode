@@ -64,16 +64,16 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define DEBUG 2
 
 //Modu³y mapy
-#include "modules/definicje.pwn"
-#include "modules/new/niceczlowiek/definicje.pwn"
-#include "modules/kolory.pwn"
-#include "modules/forward.pwn"
-#include "modules/textdraw.pwn"
-#include "modules/enum.pwn"
-#include "modules/zmienne.pwn"
-#include "modules/new/niceczlowiek/general.pwn"
-#include "modules/new/niceczlowiek/dynamicgui.pwn"
-#include "modules/mru_mysql.pwn"
+#include "modules\definicje.pwn"
+#include "modules\new\niceczlowiek\definicje.pwn"
+#include "modules\kolory.pwn"
+#include "modules\forward.pwn"
+#include "modules\textdraw.pwn"
+#include "modules\enum.pwn"
+#include "modules\zmienne.pwn"
+#include "modules\new\niceczlowiek\general.pwn"
+#include "modules\new\niceczlowiek\dynamicgui.pwn"
+#include "modules\mru_mysql.pwn"
 
 //Nowe modu³y .def:
 #include "modules\new\bramy\bramy.def"
@@ -95,25 +95,25 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "modules\new\premium\premium_dialogs.pwn"
 
 //Inne:
-#include "modules/Inne/ibiza.inc"
-#include "modules/Inne/system_aut.pwn"
-#include "modules/Inne/system_kp.pwn"
-#include "modules/Inne/external.pwn"
+#include "modules\Inne\ibiza.inc"
+#include "modules\Inne\system_aut.pwn"
+#include "modules\Inne\system_kp.pwn"
+#include "modules\Inne\external.pwn"
 
 //Modu³y mapy c.d.
-#include "modules/funkcje.pwn"
-#include "modules/timery.pwn"
+#include "modules\funkcje.pwn"
+#include "modules\timery.pwn"
 
 //Obiekty:
-#include "modules/obiekty/stare_obiekty.pwn"
-#include "modules/obiekty/nowe_obiekty.pwn"
-#include "modules/pickupy.pwn" //Samochody/Pickupy/3DTexty:
+#include "modules\obiekty\stare_obiekty.pwn"
+#include "modules\obiekty\nowe_obiekty.pwn"
+#include "modules\pickupy.pwn" //Samochody/Pickupy/3DTexty:
 
 //Modu³y mapy c.d.
-#include "modules/komendy.pwn"
-#include "modules/new/niceczlowiek/cmd.pwn"
-#include "modules/new/niceczlowiek/noysi.pwn"
-#include "modules/new/niceczlowiek/wybieralka.pwn"
+#include "modules\komendy.pwn"
+#include "modules\new\niceczlowiek\cmd.pwn"
+#include "modules\new\niceczlowiek\noysi.pwn"
+#include "modules\new\niceczlowiek\wybieralka.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()
