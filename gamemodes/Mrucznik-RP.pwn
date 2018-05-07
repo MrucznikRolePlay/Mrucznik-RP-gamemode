@@ -107,7 +107,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "modules/timery.pwn"
 
 //Obiekty:
-#include "modules\obiekty\stare_obiekty.pwn"
+#include "modules/obiekty/stare_obiekty.pwn"
 #include "modules/obiekty/nowe_obiekty.pwn"
 #include "modules/pickupy.pwn" //Samochody/Pickupy/3DTexty:
 
