@@ -27,8 +27,7 @@ before_deploy:
 - echo "Before deploy"
 - git config --local user.name "Mrucznik"
 - git config --local user.email "mrucznix@gmail.com"
-- git tag "$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' Mrucznik-RP.pwn) - $(date
-  +'%d.%m.%Y') - $(git log --format=%h -1)"
+- git tag "$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' gamemodes/Mrucznik-RP.pwn)-$(date+'%d%m%Y')"
 
 deploy:
   - provider: releases
@@ -37,6 +36,7 @@ deploy:
     file: gamemodes/Mrucznik-RP.amx
     skip_cleanup: true
     prerelease: true
+    name: Mrucznik-RP v$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' gamemodes/Mrucznik-RP.pwn)-$(date+'%d.%m.%Y') - CI release
     on:
       repo: Mrucznik/Mrucznik-RP-2.5
       branch: CI
