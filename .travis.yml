@@ -28,7 +28,7 @@ before_deploy:
 - git config --local user.name "Mrucznik"
 - git config --local user.email "mrucznix@gmail.com"
 - export MRP_VERSION=$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' gamemodes/Mrucznik-RP.pwn)
-- git tag "MRP_VERSION-$(date +'%d%m%Y')"
+- git tag "$MRP_VERSION-$(date +'%d%m%Y')"
 
 deploy:
   - provider: releases
@@ -37,7 +37,7 @@ deploy:
     file: gamemodes/Mrucznik-RP.amx
     skip_cleanup: true
     prerelease: true
-    name: Mrucznik-RP MRP_VERSION - $(date +'%d.%m.%Y %T') - ${TRAVIS_BRANCH}
+    name: Mrucznik-RP $MRP_VERSION - $(date +'%d.%m.%Y %T') - ${TRAVIS_BRANCH}
     on:
       repo: Mrucznik/Mrucznik-RP-2.5
       branch: CI
