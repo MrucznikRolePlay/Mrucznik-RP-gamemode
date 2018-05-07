@@ -23,6 +23,8 @@ $RECYCLE.BIN/
 *.dll
 *.so
 *.pdb
+*.db
+*.db-journal
 
 #Scriptfiles and plugins igonre
 scriptfiles/**

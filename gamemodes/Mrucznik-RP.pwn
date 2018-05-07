@@ -30,6 +30,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 */
 //----------------------------------------------------*------------------------------------------------------//
 
+#pragma compress 0
+
 //-------------------------------------------<[ Includy ]>---------------------------------------------------//
 //-                                                                                                         -//
 #include <a_samp>
@@ -46,8 +48,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <ACSBM>
 #include <timestamp>
 #define AC_MAX_CONNECTS_FROM_IP		5
-#include "../pawno/include/nex-ac"    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include "../pawno/include/systempozarow"   //System Po¿arów v0.1 by PECET
+#include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include <systempozarow>   //System Po¿arów v0.1 by PECET
 
 //-------<[ Pluginy ]>-------
 #include <crashdetect>                  // By Zeex, 4.18.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
@@ -59,12 +61,13 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
 #include <timestamptodate>
-#define VERSION "v2.6"
+#define VERSION "v2.5.9"
 
 #define DEBUG 2
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
+#include "modules/new/niceczlowiek/definicje.pwn"
 #include "modules/kolory.pwn"
 #include "modules/forward.pwn"
 #include "modules/textdraw.pwn"
@@ -75,23 +78,23 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "modules/mru_mysql.pwn"
 
 //Nowe modu³y .def:
-#include "modules\new\bramy\bramy.def"
-#include "modules\new\wejscia\wejscia.def"
-#include "modules\new\budki\budki.def"
-#include "modules\new\premium\premium.def"
+#include "modules/new/bramy/bramy.def"
+#include "modules/new/wejscia/wejscia.def"
+#include "modules/new/budki/budki.def"
+#include "modules/new/premium/premium.def"
 
 //Nowe modu³y .hwn:
-#include "modules\new\bramy\bramy.hwn"
-#include "modules\new\wejscia\wejscia.hwn"
-#include "modules\new\budki\budki.hwn"
-#include "modules\new\premium\premium.hwn"
+#include "modules/new/bramy/bramy.hwn"
+#include "modules/new/wejscia/wejscia.hwn"
+#include "modules/new/budki/budki.hwn"
+#include "modules/new/premium/premium.hwn"
 
 //Nowe modu³y .pwn:
-#include "modules\new\bramy\bramy.pwn"
-#include "modules\new\wejscia\wejscia.pwn"
-#include "modules\new\budki\budki.pwn"
-#include "modules\new\premium\premium.pwn"
-#include "modules\new\premium\premium_dialogs.pwn"
+#include "modules/new/bramy/bramy.pwn"
+#include "modules/new/wejscia/wejscia.pwn"
+#include "modules/new/budki/budki.pwn"
+#include "modules/new/premium/premium.pwn"
+#include "modules/new/premium/premium_dialogs.pwn"
 
 //Inne:
 #include "modules/Inne/ibiza.inc"
