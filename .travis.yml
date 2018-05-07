@@ -16,10 +16,6 @@ addons:
     - libncurses5:i386
     - libstdc++6:i386
 
-before_install:
-- git config --local user.name "Mrucznik"
-- git config --local user.email "mrucznix@gmail.com"
-
 before_script:
 - chmod +x CI_scripts/*
 - CI_scripts/get_compiler.sh
@@ -28,9 +24,11 @@ script:
 - CI_scripts/compile.sh
 
 before_deploy:
+- echo "Before deploy"
+- git config --local user.name "Mrucznik"
+- git config --local user.email "mrucznix@gmail.com"
 - git tag "$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' Mrucznik-RP.pwn) - $(date
   +'%d.%m.%Y') - $(git log --format=%h -1)"
-- git push origin --tags 
 
 deploy:
   - provider: releases
