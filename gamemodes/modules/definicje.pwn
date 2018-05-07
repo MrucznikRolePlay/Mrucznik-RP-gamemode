@@ -123,7 +123,7 @@
 #define JOB_BODYGUARD   8
 #define JOB_GUNDEALER   9
 #define JOB_BUSDRIVER   10
-//#define JOB_UNKNOWN
+#define JOB_PIZZA       11
 #define JOB_BOXER       12
 //#define JOB_UNKNOWN
 //#define JOB_UNKNOWN

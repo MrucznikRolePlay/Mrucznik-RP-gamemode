@@ -1,5 +1,6 @@
 //komendy.pwn
 
+forward PizzaJobTimer01(playerid);
 forward Naprawa(playerid);//
 forward Lowienie(playerid);
 

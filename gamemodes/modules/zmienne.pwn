@@ -18,6 +18,9 @@ new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
 new bool:bramki_sasd_state[18];
 
+//PizzaJob
+new PizzaJob[MAX_PLAYERS] = 0;
+new Actor01;
 //FishGood
 new FishGood[MAX_PLAYERS];
 //WINDA

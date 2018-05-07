@@ -46,8 +46,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <ACSBM>
 #include <timestamp>
 #define AC_MAX_CONNECTS_FROM_IP		5
-#include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include <systempozarow>   //System Po¿arów v0.1 by PECET
+#include "../pawno/include/nex-ac"    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include "../pawno/include/systempozarow"   //System Po¿arów v0.1 by PECET
 
 //-------<[ Pluginy ]>-------
 #include <crashdetect>                  // By Zeex, 4.18.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
@@ -156,11 +156,11 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
 		return 0;
 	}
-    if(GetTickCount() - StaryCzas[playerid] < 100)//antyspam
+    /*if(GetTickCount() - StaryCzas[playerid] < 100)//antyspam
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
 		return 0;
-	}
+	}*/
     if(IsCommandBlocked(cmdtext))
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
@@ -2074,6 +2074,12 @@ public OnPlayerEnterCheckpoint(playerid)
     DisablePlayerCheckpoint(playerid);
 
 	//PADZIOCH
+	if(PizzaJob[playerid] != 0)
+	{
+	    SetTimerEx("PizzaJobTimer01", 4000, false, "i", playerid);
+	    GameTextForPlayer(playerid, "KLIENT ZABIERA PIZZE", 4000, 3);
+	    TogglePlayerControllable(playerid,0);
+	}
 	if(GetPVarInt(playerid,"roped") == 1)
     {
    		SetPVarInt(playerid,"roped",0);

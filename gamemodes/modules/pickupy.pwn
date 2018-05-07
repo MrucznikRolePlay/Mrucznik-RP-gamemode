@@ -119,6 +119,7 @@ Zaladuj3DTexty()
 	okienko[6] = CreateDynamic3DTextLabel("Urz¹d Miasta Los Santos\n{0080FF}Okienko 7 \n {FF0000}Nieczynne",COLOR_WHITE,1086.3070,1075.3777,-15.8397,9,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 50);
 	okienko[7] = CreateDynamic3DTextLabel("Urz¹d Miasta Los Santos\n{0080FF}Okienko 8 \n {FF0000}Nieczynne",COLOR_WHITE,1090.3898,1075.3777,-15.8397,9,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 50);
 	
+    CreateDynamic3DTextLabel("WeŸ zlecenie - PIZZA", 0xFFA500AA, 2103.8123,-1798.7085,13.6504,30.0);//PizzaJob
 	//nowe domy 3dtext biznesów
 	CreateDynamic3DTextLabel("Oczysczanie z zarzutow", 0x33CCFFAA, 246.3568,120.3933,1003.2682, 10.0); //Clear icon in Police Station
 	CreateDynamic3DTextLabel("Urz¹d Miasta", 0x9ACD32AA, 1481.1531,-1770.0277,18.7958, 50.0); //City Hall
