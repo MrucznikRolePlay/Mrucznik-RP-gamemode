@@ -64,8 +64,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define DEBUG 2
 
 //Modu³y mapy
-#include "modules\definicje.pwn"
-#include "modules\new\niceczlowiek\definicje.pwn"
+#include "modules/definicje.pwn"
+#include "modules/new/niceczlowiek/definicje.pwn"
 #include "modules\kolory.pwn"
 #include "modules\forward.pwn"
 #include "modules\textdraw.pwn"
