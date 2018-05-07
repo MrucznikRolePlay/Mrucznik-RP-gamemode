@@ -5,4 +5,5 @@ echo "KROPKA:"
 ls .
 echo "HOME:"
 ls ~
-~/compiler/bin/pawncc -iinclude -d3 "-;+" "-(+" gamemodes/Mrucznik-RP.pwn
+cd gamemodes
+~/compiler/bin/pawncc -iinclude -d3 "-;+" "-(+" Mrucznik-RP.pwn
