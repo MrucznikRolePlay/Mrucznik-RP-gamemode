@@ -6,4 +6,4 @@ ls .
 echo "HOME:"
 ls ~
 cd gamemodes
-~/compiler/bin/pawncc -iinclude -d3 "-;+" "-(+" Mrucznik-RP.pwn
+~/compiler/bin/pawncc -i../include -d3 "-;+" "-(+" Mrucznik-RP.pwn
