@@ -23,7 +23,6 @@ before_install:
 before_script:
 - chmod +x CI_scripts/*
 - CI_scripts/get_compiler.sh
-- cp -R include ~/compiler/
 
 script:
 - CI_scripts/compile.sh
