@@ -26,7 +26,7 @@ before_script:
 - cp -R include ~/compiler/
 
 script:
-- CI_scripts/compile.sh gamemodes/Mrucznik-RP.pwn
+- CI_scripts/compile.sh
 
 before_deploy:
 - git tag "$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' Mrucznik-RP.pwn) - $(date
