@@ -39,7 +39,6 @@ deploy:
     prerelease: true
     on:
       repo: Mrucznik/Mrucznik-RP-2.5
-      tags: true
       branch: CI
   - provider: releases
     api_key:
@@ -49,7 +48,6 @@ deploy:
     prerelease: false
     on:
       repo: Mrucznik/Mrucznik-RP-2.5
-      tags: true
       branch: master
   - provider: releases
     api_key:
@@ -59,5 +57,4 @@ deploy:
     prerelease: true
     on:
       repo: Mrucznik/Mrucznik-RP-2.5
-      tags: true
       branch: development
