@@ -159,11 +159,11 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
 		return 0;
 	}
-    if(GetTickCount() - StaryCzas[playerid] < 100)//antyspam
+    /*if(GetTickCount() - StaryCzas[playerid] < 100)//antyspam
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
 		return 0;
-	}
+	}*/
     if(IsCommandBlocked(cmdtext))
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
@@ -2077,6 +2077,12 @@ public OnPlayerEnterCheckpoint(playerid)
     DisablePlayerCheckpoint(playerid);
 
 	//PADZIOCH
+	if(PizzaJob[playerid] != 0)
+	{
+	    SetTimerEx("PizzaJobTimer01", 4000, false, "i", playerid);
+	    GameTextForPlayer(playerid, "KLIENT ZABIERA PIZZE", 4000, 3);
+	    TogglePlayerControllable(playerid,0);
+	}
 	if(GetPVarInt(playerid,"roped") == 1)
     {
    		SetPVarInt(playerid,"roped",0);

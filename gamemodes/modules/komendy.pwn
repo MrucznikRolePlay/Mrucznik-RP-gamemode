@@ -11932,7 +11932,43 @@ CMD:spoilery(playerid)
 	}
 	return 1;
 }
+//PizzaJob
+CMD:wezpizze(playerid, params[])
+{
+    if(PlayerInfo[playerid][pJob] == JOB_PIZZA)
+    {
+        new veh = GetPlayerVehicleID(playerid);
+        if(veh == 0) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");
+        if(Car_GetOwnerType(veh) != CAR_OWNER_JOB || Car_GetOwner(veh) != JOB_PIZZA) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");
+        if(!PlayerToPoint(5.0,playerid,2103.8123,-1798.7085,13.6504)) return sendTipMessage(playerid, "W tym miejscu nie mo¿esz wzi¹æ zlecenia.");
+		//if(GetVehicleModel(veh) != 578) return sendErrorMessage(playerid, " Tym pojazdem nie weŸmiesz zlecenia.");
 
+        if(PizzaJob[playerid] == 0)
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "Przyj¹³eœ zlecenie! Musisz dostarczyæ pizzê pod wskazany adres!");
+            SendClientMessage(playerid, COLOR_GREEN, "GPS: Na mapie wyœwietlono miejsce, do którego musisz siê udaæ!");
+            SendClientMessage(playerid, COLOR_WHITE, "Pospiesz siê! Im szybciej dostarczysz pizzê, tym wiêkszy napiwek dostaniesz! Masz 2 minuty!");
+			new randpizza = random(1);
+			if(randpizza == 0)
+			{
+				Actor01 = CreateActor(235,2151.0234,-1294.7612,23.9795,180.0);
+				SetPlayerCheckpoint(playerid, 2151.0444,-1298.7473,23.8281, 3.0);
+				randpizza = 1;
+				PizzaJob[playerid] = 1;
+			}
+			else if(randpizza == 1)
+			{
+				Actor01 = CreateActor(235,2151.0234,-1294.7612,23.9795,180.0);
+				SetPlayerCheckpoint(playerid, 2151.0444,-1298.7473,23.8281, 3.0);
+				randpizza = 1;
+				PizzaJob[playerid] = 1;
+			}
+        }
+        else return sendErrorMessage(playerid, "Masz ju¿ zlecenie.");
+        return 1;
+    }
+	return 1;
+}
 CMD:zlecenie(playerid, params[]) return cmd_wezzlecenie(playerid, params);
 CMD:wezzlecenie(playerid, params[])
 {
@@ -12094,7 +12130,7 @@ CMD:wezzlecenie(playerid, params[])
 	return 1;
 }
 /*
-CMD:poddajsie(playerid, params[])
+CMD:poddajsie2(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -12185,7 +12221,7 @@ CMD:poddajsie(playerid, params[])
 	return 1;
 }
 */
-CMD:poddajsie2(playerid, params[])
+CMD:poddajsie(playerid, params[])
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
@@ -24599,15 +24635,20 @@ CMD:gotosf(playerid)
 
 CMD:gotosalon(playerid)
 {
-	#if DEBUG == 1
-	if(PlayerInfo[playerid][pAdmin] < 5 && PlayerInfo[playerid][pNewAP] != 5)
-		return 1;
-	#endif
-
-    SetPlayerInterior(playerid, 0);
-    SetPlayerVirtualWorld(playerid, 0);
-    SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
-    sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
+    if(IsPlayerConnected(playerid))
+    {
+		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		{
+            	SetPlayerInterior(playerid, 0);
+    			SetPlayerVirtualWorld(playerid, 0);
+    			SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
+   				sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
     return 1;
 }
 
@@ -34433,7 +34474,6 @@ CMD:akceptuj(playerid, params[])
     }
     return 1;
 }
-
 CMD:refill(playerid, params[]) return cmd_tankowanie(playerid, params);
 CMD:tankowanie(playerid, params[])
 {

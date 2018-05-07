@@ -471,7 +471,7 @@ new JobNames[][20] = {
     "Ochroniarz",
     "Diler broni",
     "Kierowca autobusu",
-    "Brak",
+    "Rozwoziciel pizzy",//11
     "Brak",
     "Bokser",
     "Brak",
