@@ -159,7 +159,7 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
 		return 0;
 	}
-    /*if(GetTickCount() - StaryCzas[playerid] < 100)//antyspam
+    /*if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)//antyspam
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
 		return 0;
@@ -5373,7 +5373,7 @@ public OnPlayerUpdate(playerid)
     {
         if(vid != LastVehicleID[playerid])
         {
-            if(GetTickCount() - VehicleIDChangeTime[playerid] < 2000)
+            if(GetTickDiff(GetTickCount(), VehicleIDChangeTime[playerid]) < 2000)
             {
                 VehicleIDChanges[playerid]++;
                 if(VehicleIDChanges[playerid] > MAX_VEHICLE_ID_CHANGES)
@@ -5400,7 +5400,7 @@ public OnPlayerUpdate(playerid)
 		new keys,ud,lr;
 		GetPlayerKeys(playerid,keys,ud,lr);
 
-		if(noclipdata[playerid][mode] && (GetTickCount() - noclipdata[playerid][lastmove] > 100))
+		if(noclipdata[playerid][mode] && (GetTickDiff(GetTickCount(), noclipdata[playerid][lastmove]) > 100))
 		{
 		    // If the last move was > 100ms ago, process moving the object the players camera is attached to
 		    MoveCamera(playerid);
