@@ -1,5 +1,14 @@
 //funkcje.pwn
 
+stock GetTickDiff(newtick, oldtick)
+{
+	if (oldtick < 0 && newtick >= 0) {
+		return newtick - oldtick;
+	} else if (oldtick >= 0 && newtick < 0 || oldtick > newtick) {
+		return (cellmax - oldtick + 1) - (cellmin - newtick);
+	}
+	return newtick - oldtick;
+}
 
 stock SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
 {
@@ -10640,7 +10649,7 @@ stock Oil_UpdateRandomKeys(playerid)
 
 stock Oil_OnPlayerPress(playerid, keys)
 {
-    if(GetTickCount() - GetPVarInt(playerid, "oil_press") < 100) return 0;
+    if(GetTickDiff(GetTickCount(), GetPVarInt(playerid, "oil_press")) < 100) return 0;
     if((keys == KEY_UP) && PlayerOilKeys[playerid][2] == 3) Oil_PressedOK(playerid);
     else if((keys == KEY_DOWN) && PlayerOilKeys[playerid][2] == 4) Oil_PressedOK(playerid);
     else if((keys == KEY_LEFT*2) && PlayerOilKeys[playerid][2] == 1) Oil_PressedOK(playerid);
