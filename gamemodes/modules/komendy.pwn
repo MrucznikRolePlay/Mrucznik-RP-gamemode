@@ -2190,7 +2190,7 @@ CMD:kajdanki(playerid, params[])
 
 CMD:barierka(playerid, params[])
 {
-    if(!(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_BOR || GetPlayerOrg(playerid) == 12))
+    if(!(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_BOR || GetPlayerOrg(playerid) == 12 GetPlayerFraction(playerid) == FRAC_LSMC))
 		return 1;
 
     if(isnull(params))
@@ -20045,7 +20045,7 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
         }
 
-        /*else if (PlayerToPoint(5.0, playerid,725.4005,-1450.4960,17.695)) //restauracja taras
+        else if (PlayerToPoint(5.0, playerid,725.4005,-1450.4960,17.695)) //restauracja taras
         {
             if(!DoorInfo[FRAC_LCN][d_State]) return SendClientMessage(playerid, COLOR_GRAD1, "Te drzwi s¹ zamkniête.");
             SetPlayerPosEx(playerid,-794.97491455078, 489.89901733398, 1376.195312); //int restauracji
@@ -20070,7 +20070,7 @@ CMD:wejdz(playerid)
             SetPlayerInterior(playerid, 0);
             Wchodzenie(playerid);
             return 1;
-        }*/
+        }
         else if (PlayerToPoint(4.0, playerid,738.8545, -1428.7880, 13.5927)) //biura LCN
         {
             SetPlayerPosEx(playerid,738.5865, -1427.7610, 23.5927); //biura LCN wejœcie
@@ -20487,13 +20487,13 @@ CMD:wejdz(playerid)
             SetPlayerShopName(playerid,"FDCHICK");
             return 1;
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2104.4970703125,-1806.3927001953,13.5546875)) // Pizzeria
+        /*else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2104.4970703125,-1806.3927001953,13.5546875)) // Pizzeria
         {
             SetPlayerPosEx(playerid, 372.16430664063,-132.97666931152,1001.4921875); // Pizzeria
             SetPlayerInterior(playerid, 5);
             SetPlayerShopName(playerid,"FDPIZA");
             return 1;
-        }
+        }*/
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1833.1099853516,-1842.603515625,13.578125)) // Sklep 24/7
         {
             SetPlayerPosEx(playerid, -27.437898635864,-57.505893707275,1003.546875); // Sklep 24/7
@@ -21381,7 +21381,7 @@ CMD:wyjdz(playerid)
             GameTextForPlayer(playerid,  "~w~Witamy na tarasie", 5000, 1);
         }
 
-        /*else if (PlayerToPoint(5.0, playerid,-794.97491455078, 489.89901733398, 1376.1953125)) //restauracja na gorze
+        else if (PlayerToPoint(5.0, playerid,-794.97491455078, 489.89901733398, 1376.1953125)) //restauracja na gorze
         {
             SetPlayerPosEx(playerid,725.4005,-1450.4960,17.6953); //taras restauracji
             GameTextForPlayer(playerid, "~g~Witamy~w~ na ~r~tarasie.", 5000, 1);
@@ -21403,7 +21403,7 @@ CMD:wyjdz(playerid)
             SetPlayerVirtualWorld(playerid, 0);
 			SetPlayerInterior(playerid, 1);
             return 1;
-        }*/
+        }
 		else if (PlayerToPoint(4.0, playerid,738.5865, -1427.7610, 23.5927)) //biura LCN
         {
             SetPlayerPosEx(playerid,738.8545, -1428.7880, 13.5927); //biura LCN wejœcie
