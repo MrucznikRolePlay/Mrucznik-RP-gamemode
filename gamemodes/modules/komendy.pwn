@@ -26366,7 +26366,7 @@ CMD:admini(playerid)
         {
             if(PlayerInfo[i][pAdmin] == 5555 || PlayerInfo[i][pAdmin] == 7)
             {
-                if(PlayerInfo[playerid][pAdmin] != 5000) continue;
+                if(PlayerInfo[playerid][pAdmin] >= 5000) continue;
             }
             GetPlayerName(i, sendername, sizeof(sendername));
             if(PlayerInfo[playerid][pAdmin] >= 1)
@@ -38427,16 +38427,34 @@ CMD:setac(playerid, params[])
 
 CMD:adminduty(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1000) return 1;
-    if(GetPVarInt(playerid, "adminduty") == 0)
-    {
-        SetPlayerColor(playerid, 0xFF0000FF);
-        SetPVarInt(playerid, "adminduty", 1);
-    }
+    new string[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, string, sizeof(string));
+	if(PlayerInfo[playerid][pAdmin] >= 1)
+	{
+    	if(GetPVarInt(playerid, "adminduty") == 0)
+    	{
+    	    if((strfind(string, "Tom_Thompson", true) != -1))
+        	{
+            	SetPlayerName(playerid, "PECET");
+            	SetPlayerColor(playerid, 0xFF0000FF);
+        		SetPVarInt(playerid, "adminduty", 1);
+        		SendClientMessage(playerid, -1, "Wszed³eœ na s³u¿bê Admina!");
+			}
+    	}
+    	else
+    	{
+        	if((strfind(string, "PECET", true) != -1))
+        	{
+            	SetPlayerName(playerid, "Tom_Thompson");
+            	SetPlayerColor(playerid,TEAM_HIT_COLOR);
+        		SetPVarInt(playerid, "adminduty", 0);
+        		SendClientMessage(playerid, -1, "Zszed³eœ ze s³u¿by Admina!");
+			}
+    	}
+	}
     else
-    {
-        SetPlayerColor(playerid,TEAM_HIT_COLOR);
-        SetPVarInt(playerid, "adminduty", 0);
+	{
+        noAccessMessage(playerid);
     }
     return 1;
 }
