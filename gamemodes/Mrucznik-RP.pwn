@@ -5859,9 +5859,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+		//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
         Spectate[playerid] = INVALID_PLAYER_ID;
-        TogglePlayerSpectating(playerid, false);
+        GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+        SetTimerEx("SpecEndTimer", 500, false, "d", playerid);
+        //TogglePlayerSpectating(playerid, false);
         return 0;
     }
     //30.10
