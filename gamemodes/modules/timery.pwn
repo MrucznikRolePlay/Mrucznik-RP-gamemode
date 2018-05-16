@@ -1,7 +1,22 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
-
+public SpecEndTimer(playerid)
+{
+	if(TogglePlayerSpectating(playerid, true))
+	{
+		SendClientMessage(playerid, -1, "Pomyœlnie zszed³eœ z ADMIN-SPEC!");
+		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	    TogglePlayerSpectating(playerid, false);
+	}
+	else
+	{
+	    SendClientMessage(playerid, -1, "B³¹d, ale nie ban! Poczekaj kilka sekund! Ju¿ to naprawiam!");
+	    SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	    TogglePlayerSpectating(playerid, false);
+	}
+	return 1;
+}
 public SpecVehTimer(playerid,pid)
 {
 	if(TogglePlayerSpectating(playerid, true))

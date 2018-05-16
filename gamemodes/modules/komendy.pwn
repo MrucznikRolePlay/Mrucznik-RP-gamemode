@@ -9602,8 +9602,9 @@ CMD:spec(playerid, params[])
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, true);
-            if(IsPlayerInAnyVehicle(pid)) SetTimerEx("SpecVehTimer", 200, false, "dd", playerid,pid);
-            else SetTimerEx("SpecPlayerTimer", 200, false, "dd", playerid,pid);
+            GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+            if(IsPlayerInAnyVehicle(pid)) SetTimerEx("SpecVehTimer", 500, false, "dd", playerid,pid);
+            else SetTimerEx("SpecPlayerTimer", 500, false, "dd", playerid,pid);
         }
 	}
 	return 1;
