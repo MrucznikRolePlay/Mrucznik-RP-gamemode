@@ -1,5 +1,8 @@
 //komendy.pwn
 
+forward SpecEndTimer(playerid);
+forward SpecVehTimer(playerid,pid);
+forward SpecPlayerTimer(playerid,pid);
 forward PizzaJobTimer01(playerid);
 forward Naprawa(playerid);//
 forward Lowienie(playerid);
