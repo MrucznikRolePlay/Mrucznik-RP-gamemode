@@ -2,6 +2,34 @@
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
 
+public SpecVehTimer(playerid,pid)
+{
+	if(TogglePlayerSpectating(playerid, true))
+	{
+		PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL);
+		SetPVarInt(playerid, "spec-type", 2);
+	}
+	else
+	{
+	    SendClientMessage(playerid, COLOR_WHITE, "B³¹d, ale nie ban! Poczekaj kilka sekund! Ju¿ to naprawiam!");
+	    TogglePlayerSpectating(playerid, false);
+	}
+	return 1;
+}
+public SpecPlayerTimer(playerid,pid)
+{
+    if(TogglePlayerSpectating(playerid, true))
+	{
+		PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL);
+		SetPVarInt(playerid, "spec-type", 1);
+	}
+	else
+	{
+	    SendClientMessage(playerid, COLOR_WHITE, "B³¹d, ale nie ban! Poczekaj kilka sekund! Ju¿ to naprawiam!");
+	    TogglePlayerSpectating(playerid, false);
+	}
+	return 1;
+}
 //PizzaJob
 public PizzaJobTimer01(playerid)
 {

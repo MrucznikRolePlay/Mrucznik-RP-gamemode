@@ -9601,9 +9601,9 @@ CMD:spec(playerid, params[])
 			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | Jail/AJ - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailed] > 0) ? ("Tak") : ("Nie"));
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
-            TogglePlayerSpectating(playerid, 1);
-            if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
-            else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
+            TogglePlayerSpectating(playerid, true);
+            if(IsPlayerInAnyVehicle(pid)) SetTimerEx("SpecVehTimer", 200, false, "dd", playerid,pid);
+            else SetTimerEx("SpecPlayerTimer", 200, false, "dd", playerid,pid);
         }
 	}
 	return 1;
