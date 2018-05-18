@@ -31,6 +31,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //----------------------------------------------------*------------------------------------------------------//
 
 #pragma compress 0
+#define VERSION "v2.5.91"
+#define DEBUG 2 //1- DEBUG ON | 2- DEBUG OFF | 0- UNDEFINED BEHAVIOUR xD
 
 //-------------------------------------------<[ Includy ]>---------------------------------------------------//
 //-                                                                                                         -//
@@ -61,9 +63,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
 #include <timestamptodate>
-#define VERSION "v2.5.9"
-
-#define DEBUG 2
 
 //Modu³y mapy
 #include "modules/definicje.pwn"
