@@ -61,11 +61,15 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
 #include <timestamptodate>
-#define VERSION "v2.5.9"
 
-#define DEBUG 2
+//--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
+//-                                                                                                         -//
+#define VERSION "v2.5.91"
+#define DEBUG 2 //1- DEBUG ON | 2- DEBUG OFF | 0- UNDEFINED BEHAVIOUR xD
 
-//Modu³y mapy
+
+//-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
+//-                                                                                                         -//
 #include "modules/definicje.pwn"
 #include "modules/new/niceczlowiek/definicje.pwn"
 #include "modules/kolory.pwn"
@@ -5859,9 +5863,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+		//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
         Spectate[playerid] = INVALID_PLAYER_ID;
-        TogglePlayerSpectating(playerid, 0);
+        GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+        SetTimerEx("SpecEndTimer", 500, false, "d", playerid);
+        //TogglePlayerSpectating(playerid, false);
         return 0;
     }
     //30.10

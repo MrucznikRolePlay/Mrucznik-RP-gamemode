@@ -36,3 +36,6 @@ plugins/**
 #Log files
 *.log
 /*.txt
+
+#rsa key
+id_rsa
