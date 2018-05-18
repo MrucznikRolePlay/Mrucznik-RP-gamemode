@@ -9,7 +9,7 @@ eval "$(ssh-agent -s)" # Start ssh-agent cache
 chmod 600 id_rsa # Allow read access to the private key
 ssh-add id_rsa # Add the private key to SSH
 
-sftp -P $PORT $USER@$HOST <<END_SCRIPT
+sftp -o "StrictHostKeyChecking no" -P $PORT $USER@$HOST <<END_SCRIPT
 cd $PATH
 put $FILE
 quit
