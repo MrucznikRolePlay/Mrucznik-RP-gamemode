@@ -50,5 +50,3 @@ notifications:
 before_install:
 - openssl aes-256-cbc -K $encrypted_774d02843e4b_key -iv $encrypted_774d02843e4b_iv
   -in id_rsa.enc -out id_rsa -d
-- openssl aes-256-cbc -K $encrypted_57862d5f2400_key -iv $encrypted_57862d5f2400_iv
-  -in id_rsa.enc -out id_rsa -d
