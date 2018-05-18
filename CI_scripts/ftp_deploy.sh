@@ -1,0 +1,18 @@
+#!/bin/bash
+HOST=$1
+PORT=$2
+USER=$3
+PASSWORD=$4
+DIRECTORY=$5
+FILE=$6
+
+ftp -n $HOST $PORT <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWORD
+binary
+cd $DIRECTORY
+put $FILE
+quit
+END_SCRIPT
+
+exit 0
