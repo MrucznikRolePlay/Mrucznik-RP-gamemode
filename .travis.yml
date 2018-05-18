@@ -36,7 +36,7 @@ before_deploy:
 deploy:
 - provider: script
   script: CI_scripts/sftp_deploy.sh 5.133.9.55 2255 samp /home/samp/samp03/gamemodes
-    gamemodes/Mrucznik-RP.pwn
+    gamemodes/Mrucznik-RP.amx
   skip_cleanup: true
   on:
     repo: Mrucznik/Mrucznik-RP-2.5
