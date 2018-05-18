@@ -2,36 +2,31 @@ language: c
 os: linux
 dist: trusty
 sudo: required
-
 branches:
   only:
   - master
   - development
-
 addons:
   apt:
     packages:
     - libc6:i386
     - libncurses5:i386
     - libstdc++6:i386
-
 before_script:
 - chmod +x CI_scripts/*
 - CI_scripts/get_compiler.sh
-
 script:
 - CI_scripts/compile.sh
-
 before_deploy:
 - echo "Before deploy"
 - git config --local user.name "Mrucznik"
 - git config --local user.email "mrucznix@gmail.com"
 - export MRP_VERSION=$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' gamemodes/Mrucznik-RP.pwn)
 - git tag "$MRP_VERSION-${TRAVIS_BUILD_NUMBER}"
-
 deploy:
 - provider: script
-  script: CI_scripts/sftp_deploy.sh 5.133.9.55 2255 samp /home/samp/samp03/gamemodes gamemodes/Mrucznik-RP.pwn
+  script: CI_scripts/sftp_deploy.sh 5.133.9.55 2255 samp /home/samp/samp03/gamemodes
+    gamemodes/Mrucznik-RP.pwn
   on:
     repo: Mrucznik/Mrucznik-RP-2.5
     branch: development
@@ -45,7 +40,6 @@ deploy:
   on:
     repo: Mrucznik/Mrucznik-RP-2.5
     branch: master
-
 notifications:
   slack:
     rooms:
@@ -53,7 +47,8 @@ notifications:
     on_pull_requests: false
     on_failure: change
     on_success: always
-
 before_install:
+- openssl aes-256-cbc -K $encrypted_774d02843e4b_key -iv $encrypted_774d02843e4b_iv
+  -in id_rsa.enc -out id_rsa -d
 - openssl aes-256-cbc -K $encrypted_57862d5f2400_key -iv $encrypted_57862d5f2400_iv
   -in id_rsa.enc -out id_rsa -d
