@@ -26367,7 +26367,7 @@ CMD:admini(playerid)
         {
             if(PlayerInfo[i][pAdmin] == 5555 || PlayerInfo[i][pAdmin] == 7)
             {
-                if(PlayerInfo[playerid][pAdmin] >= 5000) continue;
+                if(PlayerInfo[playerid][pAdmin] != 5000 || PlayerInfo[playerid][pAdmin] != 5001) continue;
             }
             GetPlayerName(i, sendername, sizeof(sendername));
             if(PlayerInfo[playerid][pAdmin] >= 1)
