@@ -26,8 +26,15 @@ public SpecVehTimer(playerid,pid)
 	}
 	else
 	{
-	    SendClientMessage(playerid, COLOR_WHITE, "B≥πd, ale nie ban! Poczekaj kilka sekund! Juø to naprawiam!");
+	    SendClientMessage(playerid, COLOR_WHITE, "B≥πd, ale nie ban! Poczekaj kilka sekund i wejdü ponownie na /spec!");
 	    TogglePlayerSpectating(playerid, false);
+	    
+	    PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
+		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
+		SetPlayerToTeamColor(playerid);
+		MedicBill[playerid] = 0;
+		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+        Spectate[playerid] = INVALID_PLAYER_ID;
 	}
 	return 1;
 }
@@ -40,8 +47,15 @@ public SpecPlayerTimer(playerid,pid)
 	}
 	else
 	{
-	    SendClientMessage(playerid, COLOR_WHITE, "B≥πd, ale nie ban! Poczekaj kilka sekund! Juø to naprawiam!");
+	    SendClientMessage(playerid, COLOR_WHITE, "B≥πd, ale nie ban! Poczekaj kilka sekund i wejdü ponownie na /spec!");
 	    TogglePlayerSpectating(playerid, false);
+	    
+	    PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
+		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
+		SetPlayerToTeamColor(playerid);
+		MedicBill[playerid] = 0;
+		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+        Spectate[playerid] = INVALID_PLAYER_ID;
 	}
 	return 1;
 }
