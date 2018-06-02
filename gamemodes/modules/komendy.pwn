@@ -9590,6 +9590,22 @@ CMD:spec(playerid, params[])
                 Unspec[playerid][sPint] = GetPlayerInterior(playerid);
                 Unspec[playerid][sPvw] = GetPlayerVirtualWorld(playerid);
             }
+            if(Spectate[playerid] != INVALID_PLAYER_ID)
+            {
+                Spectate[playerid] = pid;
+				new Float:health;
+				GetPlayerHealth(pid, health);
+				GetPlayerName(pid, giveplayer, sizeof(giveplayer));
+				new cash =  GetPlayerMoney(pid);
+				SetPlayerInterior(playerid, GetPlayerInterior(pid));
+				SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
+				format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | Jail/AJ - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailed] > 0) ? ("Tak") : ("Nie"));
+				SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
+            	GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+            	if(IsPlayerInAnyVehicle(pid)) SetTimerEx("SpecVehTimer", 500, false, "dd", playerid,pid);
+            	else SetTimerEx("SpecPlayerTimer", 500, false, "dd", playerid,pid);
+                return 1;
+            }
 		   	Spectate[playerid] = pid;
 			new Float:health;
 			GetPlayerHealth(pid, health);
@@ -26367,7 +26383,7 @@ CMD:admini(playerid)
         {
             if(PlayerInfo[i][pAdmin] == 5555 || PlayerInfo[i][pAdmin] == 7)
             {
-                if(PlayerInfo[playerid][pAdmin] >= 5000) continue;
+                if(PlayerInfo[playerid][pAdmin] != 5000 || PlayerInfo[playerid][pAdmin] != 5001) continue;
             }
             GetPlayerName(i, sendername, sizeof(sendername));
             if(PlayerInfo[playerid][pAdmin] >= 1)
