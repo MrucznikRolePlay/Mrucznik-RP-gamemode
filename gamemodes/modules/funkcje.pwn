@@ -1,5 +1,14 @@
-h//funkcje.pwn
+//funkcje.pwn
 
+stock GetTickDiff(newtick, oldtick)
+{
+	if (oldtick < 0 && newtick >= 0) {
+		return newtick - oldtick;
+	} else if (oldtick >= 0 && newtick < 0 || oldtick > newtick) {
+		return (cellmax - oldtick + 1) - (cellmin - newtick);
+	}
+	return newtick - oldtick;
+}
 
 stock SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
 {
