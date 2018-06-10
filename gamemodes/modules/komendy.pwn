@@ -26918,11 +26918,11 @@ CMD:dl(playerid, params[])
 								        {
 									        GetPlayerName(playerid, sendername, sizeof(sendername));
 									        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-                                            format(string, sizeof(string), "* Da³eœ licencjê na auto graczowi %s. Koszt licencji (7 500$) zosta³ pobrany z twojego portfela.",giveplayer);
+                                            format(string, sizeof(string), "* Da³eœ licencjê na auto graczowi %s. Koszt licencji (14 000$) zosta³ pobrany z twojego portfela.",giveplayer);
 								            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 									        format(string, sizeof(string), "* Urzêdnik %s da³ tobie prawo jazdy.",sendername);
 									        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-									        format(string, sizeof(string), "* Urzêdnik %s da³ prawo jazdy %s. Urz¹d zarobi³ 7 500$.",sendername,giveplayer);
+									        format(string, sizeof(string), "* Urzêdnik %s da³ prawo jazdy %s. Urz¹d zarobi³ 14 000$.",sendername,giveplayer);
 									        SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 									        DajKase(playerid, -14000);
                                             Sejf_Add(FRAC_GOV, 14000);
@@ -26931,7 +26931,7 @@ CMD:dl(playerid, params[])
 									    }
 									    else
 									    {
-									        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 7 500$ a Ty tyle nie masz!");
+									        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 14 000$ a Ty tyle nie masz!");
 									    }
 							        }
 								}
@@ -26970,11 +26970,11 @@ CMD:dl(playerid, params[])
 							        {
 								        GetPlayerName(playerid, sendername, sizeof(sendername));
 								        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-							            format(string, sizeof(string), "* Da³eœ licencjê na latanie graczowi %s. Koszt licencji (5 100 000$) zosta³ pobrany z twojego portfela.",giveplayer);
+							            format(string, sizeof(string), "* Da³eœ licencjê na latanie graczowi %s. Koszt licencji (4 000 000$) zosta³ pobrany z twojego portfela.",giveplayer);
 								        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 								        format(string, sizeof(string), "* Urzêdnik %s da³ tobie licencjê na latanie.",sendername);
 								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-                                        format(string, sizeof(string), "* Urzêdnik %s da³ licencje na latanie %s. Urz¹d zarobi³ 5 100 000$.",sendername,giveplayer);
+                                        format(string, sizeof(string), "* Urzêdnik %s da³ licencje na latanie %s. Urz¹d zarobi³ 4 000 000$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 								        DajKase(playerid, -4000000);
                                         Sejf_Add(FRAC_GOV, 4000000);
@@ -26983,7 +26983,7 @@ CMD:dl(playerid, params[])
 	                                }
 								    else
 								    {
-								        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 5 100 000$ a ty tyle nie masz!");
+								        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 4 000 000$ a ty tyle nie masz!");
 								    }
 								}
 							}
@@ -27017,11 +27017,11 @@ CMD:dl(playerid, params[])
 							        {
 								        GetPlayerName(playerid, sendername, sizeof(sendername));
 								        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-							            format(string, sizeof(string), "* Da³eœ licencjê na p³ywanie ³odziami graczowi %s. Koszt licencji (70 000$) zosta³ pobrany z twojego portfela.",giveplayer);
+							            format(string, sizeof(string), "* Da³eœ licencjê na p³ywanie ³odziami graczowi %s. Koszt licencji (280 000$) zosta³ pobrany z twojego portfela.",giveplayer);
 								        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 								        format(string, sizeof(string), "* Urzêdnik %s da³ tobie licencjê na p³ywanie ³odziami.",sendername);
 								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-                                        format(string, sizeof(string), "* Urzêdnik %s da³ licencjê na p³ywanie %s. Urz¹d zarobi³ 70 000$.",sendername,giveplayer);
+                                        format(string, sizeof(string), "* Urzêdnik %s da³ licencjê na p³ywanie %s. Urz¹d zarobi³ 280 000$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 								        DajKase(playerid, -280000);
                                         Sejf_Add(FRAC_GOV, 280000);
@@ -27030,7 +27030,7 @@ CMD:dl(playerid, params[])
 							        }
 								    else
 								    {
-								        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 70 000$ a ty tyle nie masz!");
+								        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 280 000$ a ty tyle nie masz!");
 								    }
 								}
 							}
@@ -27062,11 +27062,11 @@ CMD:dl(playerid, params[])
 						        {
 							        GetPlayerName(playerid, sendername, sizeof(sendername));
 							        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-						            format(string, sizeof(string), "* Da³eœ kartê wêdkarsk¹ graczowi %s. Koszt licencji (1 500$) zosta³ pobrany z twojego portfela.",giveplayer);
+						            format(string, sizeof(string), "* Da³eœ kartê wêdkarsk¹ graczowi %s. Koszt licencji (5 000$) zosta³ pobrany z twojego portfela.",giveplayer);
 							        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							        format(string, sizeof(string), "* Urzêdnik %s da³ tobie kartê wêdkarsk¹.",sendername);
 							        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-                                    format(string, sizeof(string), "* Urzêdnik %s da³ kartê wêdkarsk¹ %s. Urz¹d zarobi³ 1 500$.",sendername,giveplayer);
+                                    format(string, sizeof(string), "* Urzêdnik %s da³ kartê wêdkarsk¹ %s. Urz¹d zarobi³ 5 000$.",sendername,giveplayer);
 									SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 							        DajKase(playerid, -5000);
                                     Sejf_Add(FRAC_GOV, 5000);
@@ -27075,7 +27075,7 @@ CMD:dl(playerid, params[])
 						        }
 							    else
 							    {
-							        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 1 500$ a ty tyle nie masz!");
+							        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 5 000$ a ty tyle nie masz!");
 							    }
 							}
 						}
@@ -27104,11 +27104,11 @@ CMD:dl(playerid, params[])
 							        {
 								        GetPlayerName(playerid, sendername, sizeof(sendername));
 								        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-							            format(string, sizeof(string), "* Da³eœ licencjê na broñ graczowi %s. Koszt licencji (22 500$) zosta³ pobrany z twojego portfela.",giveplayer);
+							            format(string, sizeof(string), "* Da³eœ licencjê na broñ graczowi %s. Koszt licencji (450 000$) zosta³ pobrany z twojego portfela.",giveplayer);
 								        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 								        format(string, sizeof(string), "* Urzêdnik %s da³ tobie licencjê na broñ.",sendername);
 								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-                                        format(string, sizeof(string), "* Urzêdnik %s da³ licencjê na broñ %s. Urz¹d zarobi³ 22 500$.",sendername,giveplayer);
+                                        format(string, sizeof(string), "* Urzêdnik %s da³ licencjê na broñ %s. Urz¹d zarobi³ 450 000$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 								        DajKase(playerid, -450000);
                                         Sejf_Add(FRAC_GOV, 450000);
@@ -27117,7 +27117,7 @@ CMD:dl(playerid, params[])
 							        }
 								    else
 								    {
-								        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 25 000$ a ty tyle nie masz!");
+								        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 450 000$ a ty tyle nie masz!");
 								    }
 								}
 							}
@@ -33369,7 +33369,7 @@ CMD:akceptuj(playerid, params[])
                             format(string, sizeof(string), "* %s akceptowa³ wymianê twojego %s, zarabiasz %d.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczWymieniajacy[playerid]))-400], CenaWymienianegoAuta[playerid]);
                             SendClientMessage(GraczWymieniajacy[playerid], COLOR_LIGHTBLUE, string);
 
-                            format(string, sizeof(string), "%s wymieni³ z %s auto marki %s (ID pliku auta:%d) za %s (ID pliku auta:%d) z dop³at¹ %d$", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczWymieniajacy[playerid]))-400], CarData[IDAuta[playerid]][c_UID], VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_UID], CenaDawanegoAuta[playerid]);
+                            format(string, sizeof(string), "%s wymieni³ z %s auto marki %s (ID pliku auta:%d) za %s (ID pliku auta:%d) z dop³at¹ %d$", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczWymieniajacy[playerid]))-400], CarData[IDAuta[playerid]][c_UID], VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_UID], CenaWymienianegoAuta[playerid]);
 
                             PayLog(string);
                             new loled2 = CenaWymienianegoAuta[playerid];
