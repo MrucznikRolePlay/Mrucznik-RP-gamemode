@@ -1,4 +1,4 @@
-//funkcje.pwn
+h//funkcje.pwn
 
 
 stock SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
@@ -2192,7 +2192,7 @@ IsADilerBroni(playerid)
 		{
 		    return 1;
 		}
-		else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14 || member==16)
+		else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14 || leader==16)
 		{
 		    return 1;
 		}
