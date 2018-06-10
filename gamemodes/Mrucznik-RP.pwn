@@ -64,7 +64,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
-#define VERSION "v2.5.91-1"
+#include "VERSION.pwn"
 #define DEBUG 2 //1- DEBUG ON | 2- DEBUG OFF | 0- UNDEFINED BEHAVIOUR xD
 
 
