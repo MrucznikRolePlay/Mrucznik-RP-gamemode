@@ -2197,11 +2197,11 @@ IsADilerBroni(playerid)
 	{
 	    new leader = PlayerInfo[playerid][pLider];
 	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==12 || member==13 || member==14)
+	    if(member==5 || member==6 || member==12 || member==13 || member==14 || member==16)
 		{
 		    return 1;
 		}
-		else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14)
+		else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14 || leader==16)
 		{
 		    return 1;
 		}
@@ -10649,7 +10649,7 @@ stock Oil_UpdateRandomKeys(playerid)
 
 stock Oil_OnPlayerPress(playerid, keys)
 {
-    if(GetTickDiff(GetTickCount(), GetPVarInt(playerid, "oil_press")) < 100) return 0;
+    if(GetTickCount() - GetPVarInt(playerid, "oil_press") < 100) return 0;
     if((keys == KEY_UP) && PlayerOilKeys[playerid][2] == 3) Oil_PressedOK(playerid);
     else if((keys == KEY_DOWN) && PlayerOilKeys[playerid][2] == 4) Oil_PressedOK(playerid);
     else if((keys == KEY_LEFT*2) && PlayerOilKeys[playerid][2] == 1) Oil_PressedOK(playerid);

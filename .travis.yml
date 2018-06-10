@@ -30,7 +30,7 @@ before_deploy:
 - echo "Before deploy"
 - git config --local user.name "Mrucznik"
 - git config --local user.email "mrucznix@gmail.com"
-- export MRP_VERSION=$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' gamemodes/Mrucznik-RP.pwn)
+- export MRP_VERSION=$(grep -oP '\#define\ \VERSION \"\K(.+)(?=\")' gamemodes/VERSION.pwn)
 - git tag "$MRP_VERSION-${TRAVIS_BUILD_NUMBER}"
 
 deploy:
