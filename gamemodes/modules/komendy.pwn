@@ -1348,13 +1348,13 @@ CMD:konsola(playerid, params[])
     return 1;
 }
 
-CMD:dajmats(playerid, params[]) return cmd_dajmaterialy(playerid, params);
-CMD:dajmaterialy(playerid, params[])
+CMD:sprzedajmats(playerid, params[]) return cmd_sprzedajmaterialy(playerid, params);
+CMD:sprzedajmaterialy(playerid, params[])
 {
 	new giveplayerid, moneys;
-	if(sscanf(params, "k<fix>d", giveplayerid, moneys))
+	if(sscanf(params, "k<fix>dd", giveplayerid, moneys, kasa))
 	{
-		sendTipMessage(playerid, "U¿yj /dajmats [playerid/CzêœæNicku] [iloœæ]");
+		sendTipMessage(playerid, "U¿yj /sprzedajmats [playerid/CzêœæNicku] [iloœæ] [cena]");
 		return 1;
 	}
 
@@ -1374,17 +1374,19 @@ CMD:dajmaterialy(playerid, params[])
 							{
 								return 1;
 							}
-							new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-							GetPlayerName(playerid, sendername, sizeof(sendername));
-                            format(string, sizeof(string), "   Dosta³eœ %d materia³ów od gracza %s", moneys, sendername);
-							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string), "   Da³eœ materia³y graczowi %s ( %d materia³ów).", giveplayer,moneys);
+							if(IsPlayerInAnyVehicle(giveplayerid) || IsPlayerInAnyVehicle(playerid)) return sendErrorMessage(playerid, "Jeden z was znajduje siê w pojeŸdzie!");
+                            if(GetPVarInt(giveplayerid, "OKupMats") == 1) return sendErrorMessage(playerid, "Gracz ma ju¿ ofertê!");
+                            if(GetPVarInt(playerid, "OSprzedajMats") == 1) return sendErrorMessage(playerid, "Oferujesz ju¿ komuœ sprzeda¿!");
+
+                            new string[128];
+							format(string, sizeof(string),"%s oferuje %d materia³ów za %d $.", GetNick(playerid), moneys, kasa);
+							ShowPlayerDialogEx(giveplayerid, 9520, DIALOG_STYLE_MSGBOX, "KUPNO MATERIA£ÓW", string, "Kup", "Odrzuæ");
+                            format(string, sizeof(string), "Zaoferowa³eœ %d materia³ów za %d graczowi %s.", moneys, kasa, GetNick(playerid));
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string),"%s da³ %s torbê z materia³ami.", playerid, giveplayer);
-							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							PlayerInfo[playerid][pMats] -= moneys;
-							PlayerInfo[giveplayerid][pMats] += moneys;
+							
+							SetPVarInt(giveplayerid, "OKupMats", 1);
+							SetPVarInt(playerid, "OSprzedajMats", 1);
+							
 						}
 						else
 						{
@@ -3149,7 +3151,7 @@ CMD:respawncar(playerid, params[])
 
 CMD:maska(playerid)
 {
-	if(IsAPrzestepca(playerid) || (IsATajniak(playerid) && PlayerInfo[playerid][pRank] >= 3))
+	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];
@@ -3181,7 +3183,7 @@ CMD:maska(playerid)
 
 CMD:bandana(playerid)
 {
-	if(IsAPrzestepca(playerid) || IsATajniak(playerid))
+	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];
@@ -3283,7 +3285,7 @@ CMD:yo(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch");
+					SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch.");
 					ApplyAnimation(playerid,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 					ApplyAnimation(playa,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 				}

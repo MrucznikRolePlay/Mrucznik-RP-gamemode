@@ -67,6 +67,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
 		}
 	}
+	else if(dialogid == 9520)
+	{
+		if(!response) return 1;
+		if(kaska[giveplayerid] < kasa) return sendErrorMessage(giveplayerid, "Nie masz tyle kasy!");
+		if(GetPVarInt(giveplayerid, "OKupMats") == 0) return sendErrorMessage(playerid, "Coœ posz³o nie tak! (kupno)");
+        if(GetPVarInt(playerid, "OSprzedajMats") == 0) return sendErrorMessage(playerid, "Coœ posz³o nie tak! (sprzeda¿)");
+		
+		format(string, sizeof(string), "   Dosta³eœ %d materia³ów od gracza %s za %d $.", moneys, GetNick(playerid), kasa);
+		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string), "   Da³eœ %d materia³ów graczowi %s za %d $.", moneys, GetNick(giveplayerid), kasa);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string),"%s da³ %s torbê z materia³ami.", playerid, giveplayer);
+		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		PlayerInfo[playerid][pMats] -= moneys;
+		PlayerInfo[giveplayerid][pMats] += moneys;
+		DajKase(playerid, kasa);
+		DajKase(giveplayerid, -kasa);
+		
+		SetPVarInt(giveplayerid, "OKupMats", 0);
+		SetPVarInt(playerid, "OSprzedajMats", 0);
+		format(string, sizeof(string), "%s kupil od %s maaterialy (ilosc %d) za %d$.", GetNick(giveplayerid), GetNick(playerid), moneys, kasa);
+		PayLog(string);
+	}
 	else if(dialogid == 9519)
 	{
 		if(!response) return 1;
