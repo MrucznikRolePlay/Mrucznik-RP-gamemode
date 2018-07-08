@@ -805,6 +805,16 @@ public OnPlayerDisconnect(playerid, reason)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerDisconnect - begin", GetNick(playerid), playerid);
 	#endif
+	new reason1[16];
+	switch(reason)
+    {
+    	case 0: reasonl = "timeout/crash";
+    	case 1: reasonl = "/q";
+    	case 2: reasonl = "kick/ban";
+    }
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+	format(string, sizeof(string)," %s wyszed³ z serwera ((%d)).", sendername, reason);
+	ProxDetector(20.0, playerid, string, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
@@ -1506,7 +1516,14 @@ public OnPlayerSpawn(playerid)
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
 
-    SetWeatherEx(ServerWeather);//Pogoda
+	if(GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0)
+	{
+    	SetPlayerWeatherEx(ServerWeather);//Pogoda
+	}
+	if(GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
+	{
+    	SetPlayerWeatherEx(3);//Pogoda
+	}
 	//Diler Broni
 	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
 	{
@@ -5857,17 +5874,15 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     }
 
     //11.06.2014
-    if(PRESSED(KEY_JUMP) && Spectate[playerid] != INVALID_PLAYER_ID)
+   	if(PRESSED(KEY_JUMP) && Spectate[playerid] != INVALID_PLAYER_ID)
     {
 		PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
-		//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
         Spectate[playerid] = INVALID_PLAYER_ID;
-        GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
-        SetTimerEx("SpecEndTimer", 500, false, "d", playerid);
-        //TogglePlayerSpectating(playerid, false);
+        TogglePlayerSpectating(playerid, 0);
         return 0;
     }
     //30.10
