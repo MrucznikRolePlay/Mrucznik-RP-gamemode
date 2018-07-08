@@ -1,64 +1,6 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerÛw (wszystkich) - optymalizacja Kubi
-public SpecEndTimer(playerid)
-{
-	if(TogglePlayerSpectating(playerid, true))
-	{
-		SendClientMessage(playerid, -1, "Pomyúlnie zszed≥eú z ADMIN-SPEC!");
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-	    TogglePlayerSpectating(playerid, false);
-	}
-	else
-	{
-	    SendClientMessage(playerid, -1, "B≥πd, ale nie ban! Poczekaj kilka sekund! Juø to naprawiam!");
-	    SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-	    TogglePlayerSpectating(playerid, false);
-	}
-	return 1;
-}
-public SpecVehTimer(playerid,pid)
-{
-	if(TogglePlayerSpectating(playerid, true))
-	{
-		PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL);
-		SetPVarInt(playerid, "spec-type", 2);
-	}
-	else
-	{
-	    SendClientMessage(playerid, COLOR_WHITE, "B≥πd, ale nie ban! Poczekaj kilka sekund i wejdü ponownie na /spec!");
-	    TogglePlayerSpectating(playerid, false);
-	    
-	    PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
-		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
-		SetPlayerToTeamColor(playerid);
-		MedicBill[playerid] = 0;
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-        Spectate[playerid] = INVALID_PLAYER_ID;
-	}
-	return 1;
-}
-public SpecPlayerTimer(playerid,pid)
-{
-    if(TogglePlayerSpectating(playerid, true))
-	{
-		PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL);
-		SetPVarInt(playerid, "spec-type", 1);
-	}
-	else
-	{
-	    SendClientMessage(playerid, COLOR_WHITE, "B≥πd, ale nie ban! Poczekaj kilka sekund i wejdü ponownie na /spec!");
-	    TogglePlayerSpectating(playerid, false);
-	    
-	    PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
-		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
-		SetPlayerToTeamColor(playerid);
-		MedicBill[playerid] = 0;
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-        Spectate[playerid] = INVALID_PLAYER_ID;
-	}
-	return 1;
-}
 //PizzaJob
 public PizzaJobTimer01(playerid)
 {

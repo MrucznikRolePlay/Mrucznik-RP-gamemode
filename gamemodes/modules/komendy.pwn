@@ -9591,22 +9591,6 @@ CMD:spec(playerid, params[])
                 Unspec[playerid][sPint] = GetPlayerInterior(playerid);
                 Unspec[playerid][sPvw] = GetPlayerVirtualWorld(playerid);
             }
-            if(Spectate[playerid] != INVALID_PLAYER_ID)
-            {
-                Spectate[playerid] = pid;
-				new Float:health;
-				GetPlayerHealth(pid, health);
-				GetPlayerName(pid, giveplayer, sizeof(giveplayer));
-				new cash =  GetPlayerMoney(pid);
-				SetPlayerInterior(playerid, GetPlayerInterior(pid));
-				SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
-				format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | Jail/AJ - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailed] > 0) ? ("Tak") : ("Nie"));
-				SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
-            	GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
-            	if(IsPlayerInAnyVehicle(pid)) SetTimerEx("SpecVehTimer", 500, false, "dd", playerid,pid);
-            	else SetTimerEx("SpecPlayerTimer", 500, false, "dd", playerid,pid);
-                return 1;
-            }
 		   	Spectate[playerid] = pid;
 			new Float:health;
 			GetPlayerHealth(pid, health);
@@ -9615,13 +9599,12 @@ CMD:spec(playerid, params[])
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
             SetPlayerColor(playerid,COLOR_SPEC);
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | Jail/AJ - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailed] > 0) ? ("Tak") : ("Nie"));
+			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"));
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
-            TogglePlayerSpectating(playerid, true);
-            GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
-            if(IsPlayerInAnyVehicle(pid)) SetTimerEx("SpecVehTimer", 500, false, "dd", playerid,pid);
-            else SetTimerEx("SpecPlayerTimer", 500, false, "dd", playerid,pid);
+            TogglePlayerSpectating(playerid, 1);
+            if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
+            else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
         }
 	}
 	return 1;
@@ -19615,7 +19598,7 @@ CMD:wejdz(playerid)
             GameTextForPlayer(playerid, "~r~Witamy w sadzie! ~n~ by abram01", 6000, 1);
             SetPlayerVirtualWorld ( playerid, 500 ) ;
 			
-            SetPlayerWeather(playerid, 3);//Pogoda
+            SetPlayerWeatherEx(playerid, 3);//Pogoda
             SetPlayerTime(playerid, 14, 0);//Czas
 			
             Wchodzenie(playerid);
@@ -19628,7 +19611,7 @@ CMD:wejdz(playerid)
                 GameTextForPlayer(playerid, "~r~Sala sadowa ~n~ by abram01", 6000, 1);
                 SetPlayerVirtualWorld ( playerid, 501 ) ;
                 Wchodzenie(playerid);
-                SetPlayerWeather(playerid, 3);//Pogoda
+                SetPlayerWeatherEx(playerid, 3);//Pogoda
             	SetPlayerTime(playerid, 14, 0);//Czas
             }
         }
@@ -21037,7 +21020,7 @@ CMD:wyjdz(playerid)
     		SetPlayerPosEx(playerid,1309.9658, -1367.2878, 13.7324);
     		GameTextForPlayer(playerid, "~r~Milego dnia! ~n~ by abram01", 6000, 1);
     		SetPlayerVirtualWorld ( playerid, 0 ) ;
-    		SetPlayerWeather(playerid, ServerWeather);
+    		SetPlayerWeatherEx(playerid, ServerWeather);
     		SetPlayerTime(playerid, ServerTime, 0);
     	}
     	else if(IsPlayerInRangeOfPoint(playerid,4,1315.1282, -1336.4583, 39.1618))
@@ -21047,7 +21030,7 @@ CMD:wyjdz(playerid)
         		SetPlayerPosEx(playerid,1333.5448, -1308.2383, 13.7718);
         		GameTextForPlayer(playerid, "~r~Stare przejscie jeszcze dziala! ~n~ by abram01", 6000, 1);
         		SetPlayerVirtualWorld ( playerid, 0 ) ;
-        		SetPlayerWeather(playerid, ServerWeather);
+        		SetPlayerWeatherEx(playerid, ServerWeather);
     			SetPlayerTime(playerid, ServerTime, 0);
             }
     	}
@@ -21057,7 +21040,7 @@ CMD:wyjdz(playerid)
             {
         		SetPlayerPosEx(playerid,1286.0413,-1329.2007,13.5515);
         		SetPlayerVirtualWorld ( playerid, 0 ) ;
-        		SetPlayerWeather(playerid, ServerWeather);
+        		SetPlayerWeatherEx(playerid, ServerWeather);
     			SetPlayerTime(playerid, ServerTime, 0);
             }
     	}

@@ -351,7 +351,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         }
 
         //FAST SPAWNER ANTI CHEAT
-        if(GetTickDiff(GetTickCount(), AC_StateCounter[playerid]) < 221)
+        if(GetTickCount() - AC_StateCounter[playerid] < 221)
         {
             if(!IsABoat(AC_Car[playerid]) && AC_AntiSpawner2)
             {
