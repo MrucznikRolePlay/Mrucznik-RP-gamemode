@@ -1,6 +1,33 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
+forward SpecToggle(playerid);
+public SpecToggle(playerid)
+{
+    Streamer_ToggleAllItems(playerid, STREAMER_TYPE_OBJECT, 1);
+    sendTipMessage(playerid, "Wczytywanie obiektów!");
+}
+public KomunikatTimer()
+{
+	CMDKomunikat = 0;
+}
+public SprzedajMatsTimer(playerid,giveplayerid)
+{
+	if(GetPVarInt(giveplayerid, "OKupMats") == 1)
+	{
+		SetPVarInt(giveplayerid, "OKupMats", 0);
+		SetPVarInt(giveplayerid, "Mats-id", 0);
+  		SetPVarInt(giveplayerid, "Mats-kasa", 0);
+    	SetPVarInt(giveplayerid, "Mats-mats", 0);
+    	sendErrorMessage(giveplayerid, "Sprzeda¿ mats zosta³a anulowana!");
+	}
+	if(GetPVarInt(playerid, "OSprzedajMats") == 1)
+	{
+		SetPVarInt(playerid, "OSprzedajMats", 0);
+		sendErrorMessage(playerid, "Sprzeda¿ mats zosta³a anulowana!");
+	}
+	return 1;
+}
 //PizzaJob
 public PizzaJobTimer01(playerid)
 {
