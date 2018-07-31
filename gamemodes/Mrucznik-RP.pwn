@@ -1609,7 +1609,6 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 	ABroadCast(0x9ACD32AA,string,1);
 	format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 	SendClientMessage(playerid, 0x9ACD32AA, string);
-	sendErrorMessage(playerid, "KICKI CHWILOWO W£¥CZONE.");
 	KickEx(playerid);
 	return 1;
 
