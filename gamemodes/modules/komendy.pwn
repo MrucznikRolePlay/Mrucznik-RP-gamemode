@@ -17908,14 +17908,35 @@ CMD:kurtka(playerid)
 	}
 	return 1;
 }
+CMD:podajpoz(playerid, params[])
+{
+	new string[64];
 
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+	{
+	    new giveplayerid;
+		if( sscanf(params, "k<fix>", giveplayerid))
+		{
+			sendTipMessage(playerid, "U¿yj /getposp [id gracza]");
+			return 1;
+		}
+
+		new Float:gx, Float:gy, Float:gz;
+		gx = GetPVarFloat(playerid,"xposspawn");
+		gy = GetPVarFloat(playerid,"yposspawn");
+		gz = GetPVarFloat(playerid,"zposspawn");
+		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
+		SendClientMessage(playerid, COLOR_WHITE, string);
+	}
+	return 1;
+}
 CMD:mundur(playerid) return cmd_fskin(playerid);
 CMD:uniform(playerid) return cmd_fskin(playerid);
 CMD:fskin(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (IsAtClothShop(playerid) || (GetPlayerOrg(playerid) == FAMILY_RSC && IsPlayerInRangeOfPoint(playerid, 4.0, 1636.9476,-1813.6195,13.5263)) )
+		if (IsAtClothShop(playerid) || (GetPlayerOrg(playerid) == FAMILY_RSC && IsPlayerInRangeOfPoint(playerid, 4.0, 1636.9476,-1813.6195,13.5263)) || IsPlayerInRangeOfPoint(playerid, 4.0, GetPVarFloat(playerid,"xposspawn"),GetPVarFloat(playerid,"yposspawn"),GetPVarFloat(playerid,"zposspawn")))
 		{
             //W³¹czenie trybu skinów
             if(GetPVarInt(playerid, "skin-select") != 0) return DestroySkinSelection(playerid);
@@ -17934,7 +17955,7 @@ CMD:fskin(playerid)
 		}
 		else
 		{
-			SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w sklepie z ubraniami !");
+			SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w sklepie z ubraniami lub na miejscu spawnu!");
 			return 1;
 		}
 	}
