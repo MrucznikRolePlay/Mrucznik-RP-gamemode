@@ -1,4 +1,4 @@
-//komendy.pwn  AKTUALNA MAPA 
+//komendy.pwn  AKTUALNA MAPA
 
 /* SSCANF FIX */
 SSCANF:fix(string[])
@@ -1348,13 +1348,13 @@ CMD:konsola(playerid, params[])
     return 1;
 }
 
-CMD:dajmats(playerid, params[]) return cmd_dajmaterialy(playerid, params);
-CMD:dajmaterialy(playerid, params[])
+CMD:sprzedajmats(playerid, params[]) return cmd_sprzedajmaterialy(playerid, params);
+CMD:sprzedajmaterialy(playerid, params[])
 {
-	new giveplayerid, moneys;
-	if(sscanf(params, "k<fix>d", giveplayerid, moneys))
+	new giveplayerid, moneys, kasa;
+	if(sscanf(params, "k<fix>dd", giveplayerid, moneys, kasa))
 	{
-		sendTipMessage(playerid, "U¿yj /dajmats [playerid/CzêœæNicku] [iloœæ]");
+		sendTipMessage(playerid, "U¿yj /sprzedajmats [playerid/CzêœæNicku] [iloœæ] [cena]");
 		return 1;
 	}
 
@@ -1364,7 +1364,7 @@ CMD:dajmaterialy(playerid, params[])
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-				if(PlayerInfo[playerid][pMats] > moneys+1)
+				if(PlayerInfo[playerid][pMats] >= moneys)
 				{
 					if(moneys <= 50000)
 					{
@@ -1372,19 +1372,31 @@ CMD:dajmaterialy(playerid, params[])
 						{
 							if(moneys > 50000 || moneys < 5000)
 							{
+							    sendErrorMessage(playerid, "Zakres od 5 000 do 50 000!");
 								return 1;
 							}
-							new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-							GetPlayerName(playerid, sendername, sizeof(sendername));
-                            format(string, sizeof(string), "   Dosta³eœ %d materia³ów od gracza %s", moneys, sendername);
-							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string), "   Da³eœ materia³y graczowi %s ( %d materia³ów).", giveplayer,moneys);
+							if(kasa > 1000000 || kasa < 1)
+							{
+							    sendErrorMessage(playerid, "Zakres od 1 do 1 000 000!");
+								return 1;
+							}
+							if(IsPlayerInAnyVehicle(giveplayerid) || IsPlayerInAnyVehicle(playerid)) return sendErrorMessage(playerid, "Jeden z was znajduje siê w pojeŸdzie!");
+                            if(GetPVarInt(giveplayerid, "OKupMats") == 1) return sendErrorMessage(playerid, "Gracz ma ju¿ ofertê!");
+                            if(GetPVarInt(playerid, "OSprzedajMats") == 1) return sendErrorMessage(playerid, "Oferujesz ju¿ komuœ sprzeda¿!");
+                            if(IsASklepZBronia(playerid) && !IsASklepZBronia(giveplayerid)) return sendErrorMessage(playerid, "Pracownik GunShopu mo¿e oferowaæ sprzeda¿ tylko innemu pracownikowi GunShopu!");
+
+                            new string[128];
+							format(string, sizeof(string),"%s oferuje %d materia³ów za %d $.", GetNick(playerid), moneys, kasa);
+							ShowPlayerDialogEx(giveplayerid, 9520, DIALOG_STYLE_MSGBOX, "KUPNO MATERIA£ÓW", string, "Kup", "Odrzuæ");
+                            format(string, sizeof(string), "Zaoferowa³eœ %d materia³ów za %d graczowi %s.", moneys, kasa, GetNick(giveplayerid));
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string),"%s da³ %s torbê z materia³ami.", playerid, giveplayer);
-							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							PlayerInfo[playerid][pMats] -= moneys;
-							PlayerInfo[giveplayerid][pMats] += moneys;
+							
+							SetPVarInt(giveplayerid, "OKupMats", 1);
+							SetPVarInt(playerid, "OSprzedajMats", 1);
+                            SetPVarInt(giveplayerid, "Mats-id", playerid);
+                            SetPVarInt(giveplayerid, "Mats-kasa", kasa);
+                            SetPVarInt(giveplayerid, "Mats-mats", moneys);
+                            SetTimerEx("SprzedajMatsTimer", 20000, false, "ii", playerid, giveplayerid);
 						}
 						else
 						{
@@ -1795,6 +1807,11 @@ CMD:namierz(playerid, params[])
 				sendErrorMessage(playerid, "Nie mo¿esz namierzyæ tego gracza.");
 				return 1;
 			}
+			if(PlayerInfo[playerid][pJob] == 1 && lowcaz[playerid] != giveplayerid)
+			{
+				sendErrorMessage(playerid, "Nie masz zlecenia na tego gracza!");
+				return 1;
+			}
 			new points, range;
 			new level = PlayerInfo[playerid][pDetSkill];
 			if(level >= 0 && level <= 50)
@@ -1907,7 +1924,7 @@ CMD:odznaka(playerid, params[])
 						}
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"Posiadacz tej odznaki ma uprawnienia do przeprowadzania");
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"kontroli osób wzbudzaj¹cych podejrzenia ³amania prawa. Prezydent");
-						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "|_____ Los Santos Police Departament _____|");
+						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "|_____ San Andreas Police Department _____|");
 					}
 					if(GetPlayerFraction(playerid) == FRAC_FBI)
 					{
@@ -3149,7 +3166,7 @@ CMD:respawncar(playerid, params[])
 
 CMD:maska(playerid)
 {
-	if(IsAPrzestepca(playerid) || (IsATajniak(playerid) && PlayerInfo[playerid][pRank] >= 3))
+	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];
@@ -3181,7 +3198,7 @@ CMD:maska(playerid)
 
 CMD:bandana(playerid)
 {
-	if(IsAPrzestepca(playerid) || IsATajniak(playerid))
+	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];
@@ -3283,7 +3300,7 @@ CMD:yo(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch");
+					SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch.");
 					ApplyAnimation(playerid,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 					ApplyAnimation(playa,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 				}
@@ -3862,6 +3879,93 @@ CMD:getposp(playerid, params[])
 		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
 		SendClientMessage(playerid, COLOR_WHITE, string);
 	}
+	return 1;
+}
+CMD:sprawdzinv(playerid, params[])
+{
+	new string[64];
+
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+	{
+	    new giveplayerid;
+		if( sscanf(params, "k<fix>", giveplayerid))
+		{
+			sendTipMessage(playerid, "U¿yj /sprawdzinv [id gracza]");
+			return 1;
+		}
+
+		new Float:gx, Float:gy, Float:gz;
+		GetPlayerPos(giveplayerid, gx, gy, gz);
+		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
+		SendClientMessage(playerid, COLOR_WHITE, string);
+		format(string, sizeof(string), "State %d .",GetPlayerState(giveplayerid));
+		SendClientMessage(playerid, COLOR_WHITE, string);
+	}
+	return 1;
+}
+CMD:sprawdzin(playerid, params[])
+{
+	new string[128];
+	new giveplayerid;
+	if( sscanf(params, "k<fix>", giveplayerid))
+	{
+		SendClientMessage(playerid, -1, "U¿yj /sprawdzin [playerid/CzêœæNicku]");
+		return 1;
+	}
+	if(GetPlayerState(giveplayerid) == PLAYER_STATE_NONE) // If the killer was in a vehicle
+    {
+		SendClientMessage(playerid, -1, "Gracz is none.");
+    	new Float:gx, Float:gy, Float:gz;
+		GetPlayerPos(giveplayerid, gx, gy, gz);
+		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
+		SendClientMessage(playerid, -1, string);
+		return 1;
+    }
+    if(GetPlayerState(giveplayerid) == PLAYER_STATE_ONFOOT) // If the killer was in a vehicle
+    {
+		SendClientMessage(playerid, -1, "Gracz is foot.");
+    	new Float:gx, Float:gy, Float:gz;
+		GetPlayerPos(giveplayerid, gx, gy, gz);
+		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
+		SendClientMessage(playerid, -1, string);
+		return 1;
+    }
+    if(GetPlayerState(giveplayerid) == PLAYER_STATE_DRIVER) // If the killer was in a vehicle
+    {
+		SendClientMessage(playerid, -1, "Gracz is driver.");
+    	new Float:gx, Float:gy, Float:gz;
+		GetPlayerPos(giveplayerid, gx, gy, gz);
+		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
+		SendClientMessage(playerid, -1, string);
+		return 1;
+    }
+    if(GetPlayerState(giveplayerid) == PLAYER_STATE_SPAWNED) // If the killer was in a vehicle
+    {
+		SendClientMessage(playerid, -1, "Gracz is spawn.");
+    	new Float:gx, Float:gy, Float:gz;
+		GetPlayerPos(giveplayerid, gx, gy, gz);
+		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
+		SendClientMessage(playerid, -1, string);
+		return 1;
+    }
+    if(GetPlayerState(giveplayerid) == PLAYER_STATE_SPECTATING) // If the killer was in a vehicle
+    {
+		SendClientMessage(playerid, -1, "Gracz is spec.");
+    	new Float:gx, Float:gy, Float:gz;
+		GetPlayerPos(giveplayerid, gx, gy, gz);
+		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
+		SendClientMessage(playerid, -1, string);
+		return 1;
+    }
+    if(GetPlayerState(giveplayerid) == PLAYER_STATE_PASSENGER) // If the killer was in a vehicle
+    {
+		SendClientMessage(playerid, -1, "Gracz is passenger.");
+    	new Float:gx, Float:gy, Float:gz;
+		GetPlayerPos(giveplayerid, gx, gy, gz);
+		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
+		SendClientMessage(playerid, -1, string);
+		return 1;
+    }
 	return 1;
 }
 
@@ -7730,7 +7834,16 @@ CMD:dajkm(playerid, params[])
 	}
 	return 1;
 }
-
+CMD:gokarty(playerid)
+{
+	if(PlayerToPoint(10.0, playerid, 2281.909179,-2364.279052,13.546895))//go karty
+	{
+		DajKase(playerid, -1000);
+		PlayerKarting[playerid] = 1;
+		sendTipMessageEx(playerid, TEAM_GROVE_COLOR, "Zapisa³eœ siê na wyœcigi gokartowe za 1000$, wybierz sobie pojazd.");
+	}
+	return 1;
+}
 CMD:zuzel(playerid)
 {
     if(GUIExit[playerid] == 0)
@@ -8634,6 +8747,7 @@ CMD:skinf(playerid)
     if(GetPlayerFraction(playerid) == 0) return sendErrorMessage(playerid, "Nie jesteœ we frakcji!");
     if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC || GetPlayerFraction(playerid) == FRAC_SN) return sendErrorMessage(playerid, "Twoja frakcja nie posiada tej komendy!");
 	if(GetPlayerVehicleID(playerid) != 0) return sendErrorMessage(playerid, "Nie mo¿esz znajdowaæ siê w pojeŸdzie!");
+	if(!IsAtClothShop(playerid)) return sendErrorMessage(playerid, "Nie znajdujesz siê w sklepie z ubraniami!");
     if(GetPVarInt(playerid, "skinF") == 0)
     {
         SetPVarInt(playerid, "skinF", 1);
@@ -9590,22 +9704,6 @@ CMD:spec(playerid, params[])
                 Unspec[playerid][sPint] = GetPlayerInterior(playerid);
                 Unspec[playerid][sPvw] = GetPlayerVirtualWorld(playerid);
             }
-            if(Spectate[playerid] != INVALID_PLAYER_ID)
-            {
-                Spectate[playerid] = pid;
-				new Float:health;
-				GetPlayerHealth(pid, health);
-				GetPlayerName(pid, giveplayer, sizeof(giveplayer));
-				new cash =  GetPlayerMoney(pid);
-				SetPlayerInterior(playerid, GetPlayerInterior(pid));
-				SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
-				format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | Jail/AJ - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailed] > 0) ? ("Tak") : ("Nie"));
-				SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
-            	GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
-            	if(IsPlayerInAnyVehicle(pid)) SetTimerEx("SpecVehTimer", 500, false, "dd", playerid,pid);
-            	else SetTimerEx("SpecPlayerTimer", 500, false, "dd", playerid,pid);
-                return 1;
-            }
 		   	Spectate[playerid] = pid;
 			new Float:health;
 			GetPlayerHealth(pid, health);
@@ -9614,13 +9712,14 @@ CMD:spec(playerid, params[])
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
             SetPlayerColor(playerid,COLOR_SPEC);
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | Jail/AJ - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailed] > 0) ? ("Tak") : ("Nie"));
+			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"));
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
-            TogglePlayerSpectating(playerid, true);
-            GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
-            if(IsPlayerInAnyVehicle(pid)) SetTimerEx("SpecVehTimer", 500, false, "dd", playerid,pid);
-            else SetTimerEx("SpecPlayerTimer", 500, false, "dd", playerid,pid);
+            TogglePlayerSpectating(playerid, 1);
+            Streamer_ToggleAllItems(playerid, STREAMER_TYPE_OBJECT, 0);
+            SetTimerEx("SpecToggle", 3000, false, "i", playerid);
+            if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
+            else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
         }
 	}
 	return 1;
@@ -13197,9 +13296,132 @@ CMD:pomocdom(playerid)
     }
 	return 1;
 }
+CMD:gotobiz(playerid, params[])
+{
+    if(IsPlayerConnected(playerid))
+    {
+		new plo;
+		if(sscanf(params, "d", plo)) return sendTipMessage(playerid, "U¿yj /gototbiz [ID biznesu]");
+		if(plo >= 1)
+		{
+		    if(plo <= 100)
+		    {
+				if(PlayerInfo[playerid][pAdmin] >= 1)
+				{
+				    if(BizData[plo][eBizWejX] == 0.0 && BizData[plo][eBizWejY] == 0.0 && BizData[plo][eBizWejZ] == 0.0) return _MruAdmin(playerid, sprintf("Nie mo¿na siê teleportowaæ. Biznes %s (ID %d) nie jest aktywny.", BizData[plo][eBizName], plo));
+					SetPlayerPosEx(playerid, BizData[plo][eBizWejX],BizData[plo][eBizWejY],BizData[plo][eBizWejZ]);
+					SetPlayerInterior(playerid, 0);
+					SetPlayerVirtualWorld(playerid, 0);
+  					_MruAdmin(playerid, sprintf("Teleportowa³eœ siê do biznesu %s (ID %d)", BizData[plo][eBizName], plo));
+				}
+				else
+				{
+					noAccessMessage(playerid);
+				}
+			}
+		}
+	}
+	return 1;
+}
+CMD:dajbiznes(playerid, params[])
+{
+	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
+	{
+		new gracz, wartosc;
+		if(sscanf(params, "k<fix>d", gracz, wartosc)) return sendTipMessage(playerid, "U¿yj /dajbiznes [playerid/CzêœæNicku] [ID Biznesu]");
+		if(IsPlayerConnected(gracz))
+		{
+			new string[128];
+			PlayerInfo[gracz][pPbiskey] = wartosc;
+			MruMySQL_SaveAccount(playerid);
+			format(string, sizeof(string),"AdmCmd: %s dal biznes %s (ID %d) graczowi %s.", GetNick(playerid), BizData[wartosc][eBizName], wartosc, GetNick(gracz));
+            BiznesLog(string);
+            _MruAdmin(playerid, sprintf("Da³eœ biznes %s (ID %d) graczowi %s [ID: %d]", BizData[wartosc][eBizName], wartosc, GetNick(gracz, true), gracz));
+            if(gracz != playerid) _MruAdmin(gracz, sprintf("Dosta³eœ biznes %s (ID %d) Admina %s [ID: %d]", BizData[wartosc][eBizName], wartosc, GetNick(playerid, true), playerid));
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Ten gracz jest offline!");
+		}
 
+	}
+	else
+	{
+		noAccessMessage(playerid);
+	}
+	return 1;
+}
+CMD:zabierzbiznes(playerid, params[])
+{
+	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
+	{
+		new gracz;
+		if(sscanf(params, "d", gracz)) return sendTipMessage(playerid, "U¿yj /zabierzbiznes [playerid/CzêœæNicku]");
+		if(IsPlayerConnected(gracz))
+		{
+			new string[128];
+			PlayerInfo[gracz][pPbiskey] = 255;
+			MruMySQL_SaveAccount(playerid);
+			format(string, sizeof(string),"AdmCmd: %s zabral biznes graczowi %s.", GetNick(playerid), GetNick(gracz));
+            BiznesLog(string);
+            _MruAdmin(playerid, sprintf("Zabra³eœ biznes graczowi %s [ID: %d]", GetNick(gracz, true), gracz));
+            if(gracz != playerid) _MruAdmin(gracz, sprintf("Biznes zosta³ zabrany przez Admina %s [ID: %d]", GetNick(playerid, true), playerid));
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Ten gracz jest offline!");
+		}
 
-
+	}
+	else
+	{
+		noAccessMessage(playerid);
+	}
+	return 1;
+}
+/*CMD:bizmoneydebug(playerid)
+{
+	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES && PlayerInfo[playerid][pAdmin] == 5000)
+	{
+	    new string[128];
+		new bizid = PlayerInfo[playerid][pPbiskey];
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
+		format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]);
+		SendClientMessage(playerid, COLOR_WHITE, string);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, "|________________________|");
+		DajKase(playerid, BizData[bizid][eBizMoney]);
+	}
+	return 1;
+}*/
+CMD:bizinfo(playerid)
+{
+    if(IsPlayerConnected(playerid))
+    {
+	    if(gPlayerLogged[playerid] == 1)
+	    {
+			new string[256];
+			for(new i=0;i<MAX_BIZNES;i++)
+		    {
+				if(IsPlayerInRangeOfPoint(playerid, 3.0, BizData[i][eBizWejX], BizData[i][eBizWejY], BizData[i][eBizWejZ]))
+				{
+				    new bizowner[64];
+					bizowner = Biz_Owner(i);
+        			if(strfind(bizowner, "mru_konta", true)>=0)
+					{
+					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\tBrak (biznes na sprzeda¿)\nPremia PayDay:\t%d$", i, BizData[i][eBizName],BizData[i][eBizMoney]);
+	        			ShowPlayerDialogEx(playerid, 9900, DIALOG_STYLE_MSGBOX, "Informacje o biznesie", string, "Zamknij", "");
+					}
+					else
+					{
+					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\t%s\nPremia PayDay:\t%d$", i, BizData[i][eBizName],bizowner,BizData[i][eBizMoney]);
+	        			ShowPlayerDialogEx(playerid, 9900, DIALOG_STYLE_MSGBOX, "Informacje o biznesie", string, "Zamknij", "");
+	 				}
+                }
+			}
+	    }
+	}
+	return 1;
+}
 CMD:dominfo(playerid) return cmd_houseinfo(playerid);
 CMD:dom_info(playerid) return cmd_houseinfo(playerid);
 CMD:houseinfo(playerid)
@@ -15818,6 +16040,30 @@ CMD:fbi(playerid, params[])
 	return 1;
 }
 
+CMD:komunikat(playerid, params[])
+{
+    new string[256], sendername[MAX_PLAYER_NAME];
+    GetPlayerName(playerid, sendername, sizeof(sendername));
+    if(!IsPlayerConnected(playerid)) return 1;
+    if(!GetPlayerOrg(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w ¿adnej rodzinie!");
+    if(PlayerInfo[playerid][pRank] < 5) return sendErrorMessage(playerid, "Musisz mieæ 5 range aby tego u¿ywaæ !");
+    if(isnull(params)) return sendErrorMessage(playerid, "U¿yj: /komunikat [tekst]");
+    if(CMDKomunikat == 1) return sendErrorMessage(playerid, "Komunikat by³ u¿yty przed chwil¹!");
+    if(IsAPrzestepca(playerid)) return sendErrorMessage(playerid, "Nie mo¿esz byæ w gangu/mafii!");
+    if(PlayerInfo[playerid][pBP])
+    {
+        format(string, sizeof(string), "   Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
+        SendClientMessage(playerid, TEAM_CYAN_COLOR, string);
+        return 1;
+    }
+    format(string, sizeof(string), "|___________ %s ___________|", OrgInfo[gPlayerOrg[playerid]][o_Name]);
+    SendClientMessageToAll(COLOR_WHITE, string);
+    format(string, sizeof(string), "%s: %s", sendername, params);
+    SendClientMessageToAll(COLOR_BLUE, string);
+    CMDKomunikat = 1;
+    SetTimer("KomunikatTimer", 60000, false);
+    return 1;
+}
 
 CMD:pd(playerid, params[]) return cmd_lspd(playerid, params);
 CMD:lspd(playerid, params[])
@@ -19542,14 +19788,6 @@ CMD:wejdz(playerid)
         {
             SetPlayerPosEx(playerid,1751.6058, -1118.3661, 46.8055);
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1970.8337,-1285.3256,28.4919)) // wejscie
-        {
-            SetPlayerPosEx(playerid, 1982.2196, -1302.0121, -8.9178); // glen park bar
-            SetPlayerVirtualWorld(playerid, 17);
-            GameTextForPlayer(playerid, "~w~Glen Bar", 5000, 1);
-            Wchodzenie(playerid);
-            return 1;
-        }
         else if(IsPlayerInRangeOfPoint(playerid, 5.0, 694.27490234375,-569.04272460938,-79.225189208984) || IsPlayerInRangeOfPoint(playerid, 3.0, 700.6748046875,-502.41955566406,23.515483856201) || IsPlayerInRangeOfPoint(playerid, 5.0, 707.06085205078,-508.38107299805,27.871946334839))//rada miasta dillimore (miasteczko) windy
         {
             ShowPlayerDialogEx(playerid, 121, DIALOG_STYLE_LIST, "Wybierz pomieszczenie", "Salka Konferencyjna\nBiura\nPiwnice", "Wybierz", "WyjdŸ");
@@ -19614,7 +19852,7 @@ CMD:wejdz(playerid)
             GameTextForPlayer(playerid, "~r~Witamy w sadzie! ~n~ by abram01", 6000, 1);
             SetPlayerVirtualWorld ( playerid, 500 ) ;
 			
-            SetPlayerWeather(playerid, 3);//Pogoda
+            SetPlayerWeatherEx(playerid, 3);//Pogoda
             SetPlayerTime(playerid, 14, 0);//Czas
 			
             Wchodzenie(playerid);
@@ -19627,7 +19865,7 @@ CMD:wejdz(playerid)
                 GameTextForPlayer(playerid, "~r~Sala sadowa ~n~ by abram01", 6000, 1);
                 SetPlayerVirtualWorld ( playerid, 501 ) ;
                 Wchodzenie(playerid);
-                SetPlayerWeather(playerid, 3);//Pogoda
+                SetPlayerWeatherEx(playerid, 3);//Pogoda
             	SetPlayerTime(playerid, 14, 0);//Czas
             }
         }
@@ -19834,12 +20072,6 @@ CMD:wejdz(playerid)
         }
 
         //KONIEC LS
-        else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1941.1919,-2115.6655,13.6953))//burdel wejscie
-        {
-            SetPlayerPosEx(playerid, 964.106994,-53.205497,1001.124572);//burdel srodek
-            GameTextForPlayer(playerid, "~r~Mrrrr...", 5000, 1);
-            SetPlayerInterior(playerid, 3);
-        }
         else if(PlayerToPoint(10.0, playerid, 1462.395751,-1012.391174,26.843799))//bank LS
         {
             SetPlayerPosEx(playerid,1462.2887,-1008.2450,27.1099);//bank LS œrodek
@@ -19858,13 +20090,6 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
             return 1;
         }
-        else if(PlayerToPoint(10.0, playerid, 1791.212036,-1164.631713,23.828100))//gunshop
-        {
-            SetPlayerInterior(playerid,1);
-            SetPlayerPosEx(playerid,286.15,-41.54,1003.57);//gun shop œrodek
-            //GameTextForPlayer(playerid, "~w~Witamy w ~r~GUN ~y~SHOP", 5000, 1);
-            return 1;
-        }
         /*else if(PlayerToPoint(10.0, playerid, 1310.126586,-1367.812255,13.540800))//pintball
         {
             DajKase(playerid, -1000);
@@ -19875,13 +20100,6 @@ CMD:wejdz(playerid)
             TogglePlayerControllable(playerid, 0);
             return 1;
         }*/
-        else if(PlayerToPoint(10.0, playerid, 2281.909179,-2364.279052,13.546895))//go karty
-        {
-            DajKase(playerid, -1000);
-            PlayerKarting[playerid] = 1;
-            sendTipMessageEx(playerid, TEAM_GROVE_COLOR, "Zapisa³eœ siê na wyœcigi gokartowe za 1000$, wybierz sobie pojazd.");
-            return 1;
-        }
         else if (PlayerToPoint(10.0, playerid,1479.9545,-1771.5039,15.3266))//Wejœcie do ratusza dmv srodek
         {
             if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
@@ -19939,100 +20157,11 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
             GameTextForPlayer(playerid, "~w~~b~Witamy w Urzedzie Miasta PC~n~ by abram01", 5000, 1);
         }
-        else if (PlayerToPoint(3.0, playerid,-50,-269,6.599999))//Wejœcie do bazy HA
-        {
-            if(PlayerInfo[playerid][pMember] == 8 || PlayerInfo[playerid][pLider] == 8)
-            {
-                SetPlayerInterior(playerid,2);
-                SetPlayerPosEx(playerid, 2532.0837,-1281.9919,1048.2891);//Baza HA
-                PlayerInfo[playerid][pLocal] = 242;
-                return 1;
-            }
-        }
-        else if (PlayerToPoint(3.0, playerid,2695.6235,-1704.6960,11.8438))//Wejœcie do 8-ball track
-        {
-            GameTextForPlayer(playerid, "~w~Witamy na torze 8ball", 5000, 1);
-            SetPlayerInterior(playerid,7);
-            SetPlayerPosEx(playerid,-1404.5299,-259.0602,1043.6563);//8 ball track
-            return 1;
-        }
         else if (PlayerToPoint(8.0, playerid,-2111.5686,-443.9720,38.7344))//Wejœcie do drift track
         {
             GameTextForPlayer(playerid, "~w~Witamy na Dirt Track", 5000, 1);
             SetPlayerInterior(playerid,4);
             SetPlayerPosEx(playerid,-1443.0554,-581.1879,1055.0472);//drift track
-            return 1;
-        }
-        else if (PlayerToPoint(8.0, playerid,2244.2336,-1665.2026,15.4766))//Wejœcie binco
-        {
-            GameTextForPlayer(playerid, "~w~Binco- ~g~Tanio i modnie!", 5000, 1);
-            SetPlayerInterior(playerid,15);
-            SetPlayerPosEx(playerid,207.5219,-109.7448,1005.1328);
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina- dostêpne komendy_______________|");
-            SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
-            SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty");
-            SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
-            /*SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Remanent - przepraszamy_______________|");
-            SendClientMessage(playerid,COLOR_WHITE,"Z powodu du¿ego zainteresowania nasz¹ oferta jesteœmu zmuszeni sprowadziæ nowy towar");
-            SendClientMessage(playerid,COLOR_WHITE,"Zapraszamy do innych placówek handlowych: Sub Urban (Jeffeson- ko³o salonu aut), ZIP (Downtown- przy banku), Victim i Pro Laps (Na Rodeo)");
-            SendClientMessage(playerid,COLOR_WHITE,"Jeszcze raz przepraszamy za trudnoœci, ale mamy nadziejê ¿e oczekiwania bêd¹ tego warte i nasz nowy towar spe³ni pañstwa wymagania.");
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");*/
-            return 1;
-        }
-        else if (PlayerToPoint(8.0, playerid,2112.7527,-1212.0103,23.9637))//Wejœcie sub urban
-        {
-            GameTextForPlayer(playerid, "~w~Sub Urban- ~p~Full gangsta", 5000, 1);
-            SetPlayerInterior(playerid,1);
-            SetPlayerPosEx(playerid,204.1174,-46.8047,1001.8047);//sub urban
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina- dostêpne komendy_______________|");
-            SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
-            SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty");
-            SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
-            return 1;
-        }
-        else if (PlayerToPoint(8.0, playerid,1456.7676,-1138.7638,23.9991))//Wejœcie ZIP
-        {
-            GameTextForPlayer(playerid, "~b~ZIP- ~w~Poczuj mode", 5000, 1);
-            SetPlayerInterior(playerid,18);
-            SetPlayerPosEx(playerid,161.4048,-94.2416,1001.8047);//ZIP
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina- dostêpne komendy_______________|");
-            SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
-            SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty");
-            SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
-            return 1;
-        }
-        else if (PlayerToPoint(8.0, playerid,459.5163,-1501.4186,31.0371))//Wejœcie Victim
-        {
-            GameTextForPlayer(playerid, "~w~To die for ~Victim~", 5000, 1);
-            SetPlayerInterior(playerid,5);
-            SetPlayerPosEx(playerid,225.0306,-9.1838,1002.218);//Victim
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina- dostêpne komendy_______________|");
-            SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
-            SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty");
-            SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
-            return 1;
-        }
-        else if (PlayerToPoint(8.0, playerid,500.1234,-1359.6345,16.2776))//Wejœcie pro laps
-        {
-            GameTextForPlayer(playerid, "~w~Pro Laps ~y~Trenuj ciezko", 5000, 1);
-            SetPlayerInterior(playerid,3);
-            SetPlayerPosEx(playerid,206.4627,-137.7076,1003.0938);//Pro laps
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina- dostêpne komendy_______________|");
-            SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
-            SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty");
-            SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
-            SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
-            return 1;
-        }
-        else if (PlayerToPoint(8.0, playerid,1087.7860,-922.7472,43.3906))//Wejœcie sex shop
-        {
-            GameTextForPlayer(playerid, "~r~ Sex sex sex", 5000, 1);
-            SetPlayerInterior(playerid,3);
-            SetPlayerPosEx(playerid,-100.2674,-22.9376,1000.7188);//sex shop
             return 1;
         }
         /*  JETTY LOUNGE */
@@ -20096,13 +20225,6 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
             return 1;
         }
-        else if (PlayerToPoint(5.0, playerid,1631.7883300781,-1171.4095458984,24.078125)) //wejœcie do zakladu bukmaherskiego
-        {
-            SetPlayerPosEx(playerid,-2158.3574,642.5895,1052.3750); //Zak³ad bukmaherski
-            GameTextForPlayer(playerid, "~w~Witamy w Zakladzie Bukmaherskim", 5000, 1);
-            SetPlayerInterior(playerid, 1);
-            return 1;
-        }
         else if (PlayerToPoint(2.0, playerid,-2170.0593,641.1239,1052.3817)) //Zak³ad bukmaherski WEJSCIE NA GORE
         {
             SetPlayerPosEx(playerid,-2168.7502,636.2642,1052.7642); 
@@ -20115,15 +20237,6 @@ CMD:wejdz(playerid)
             SetPlayerPosEx(playerid,2967.2785644531,-1056.5300292969,4505.6782226563); //Gabinet YKZ
             GameTextForPlayer(playerid, "~w~Konichiwa Oyabunie!", 5000, 1);
             SetPlayerInterior(playerid, 13);
-            TogglePlayerControllable(playerid, 0);
-            Wchodzenie(playerid);
-            return 1;
-        }
-        else if (PlayerToPoint(5.0, playerid,2793.9031,-1087.2518,30.7188)) //wejœcie baza YKZ
-        {
-            SetPlayerPosEx(playerid,388.86383056641,173.90196228027,1008.3828125); //Baza
-            GameTextForPlayer(playerid, "~w~Konichiwa", 5000, 1);
-            SetPlayerInterior(playerid, 3);
             TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
             return 1;
@@ -20158,32 +20271,6 @@ CMD:wejdz(playerid)
         {
             ShowPlayerDialogEx(playerid,WINDA_SAN,DIALOG_STYLE_LIST,"Winda - San News","[Pietro - 0]Parking\n[Pietro - 1]Recepcja\n[Pietro - 2]Studio Victim\n[Pietro - 3]Drukarnia & Studio Nagran\n[Pietro - 4]Sale Konferencyjne\n[Pietro - 5]Biura San News\n[Pietro - 6]Dach","Jedz","Anuluj");
         }
-        //STARE SAN NEWS
-        /*else if (PlayerToPoint(5.0, playerid,732.57818603516,-1337.0992431641,13.534688949585)) //wejœcie do biura San News zaplecze
-        {
-            if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
-            {
-                if(GUIExit[playerid] == 0)
-                {
-                    ShowPlayerDialogEx(playerid, 323, DIALOG_STYLE_LIST, "Budynek San Andreas Network", "Drukarnia\nStudio Victim\nStudio g³ówne\nStudio nagrañ\nGabinet red. naczelnego\nBiuro SAN", "Wybierz", "Anuluj");
-                    return 1;
-                }
-            }
-            else
-            {
-                SendClientMessage(playerid, COLOR_NEWS, "Nie jesteœ pracownikiem SAN! IdŸ do g³ównego wejœcia!");
-                return 1;
-            }
-        }
-        else if (PlayerToPoint(5.0, playerid,648.99755859375,-1357.4117431641,13.568710327148)) //wejœcie do biura San News g³ówne
-        {
-            if(GUIExit[playerid] == 0)
-            {
-                ShowPlayerDialogEx(playerid, 323, DIALOG_STYLE_LIST, "Budynek San Andreas Network", "Drukarnia\nStudio Victim\nStudio g³ówne\nStudio nagrañ\nGabinet red. naczelnego\nBiuro SAN", "Wybierz", "Anuluj");
-                return 1;
-            }
-        }*/
-        //stare komi (old komi) nowe komi
         else if (PlayerToPoint(5.0, playerid,2425.6000976563,117.69999694824,26.5)) //Wejœcie do komisariatu
         {
             SetPlayerPosEx(playerid,246.6659,108.0529,1003.2188); //Komisariat
@@ -20219,40 +20306,6 @@ CMD:wejdz(playerid)
                 SendClientMessage(playerid, COLOR_GRAD1, "Musisz mieæ pozwolenie prawnicze aby przejœæ");
 
         }
-        /*else if (PlayerToPoint(5.0, playerid,-1606.0139,818.9503,-29.4141)) //Wejœcie do wiêzienia stanowego
-        {
-            if(PlayerInfo[playerid][pLider] != 2 && PlayerInfo[playerid][pMember] != 2 && PlayerInfo[playerid][pMember] != 3 && PlayerInfo[playerid][pLider] != 3)
-            {
-                SetPlayerPosEx(playerid,211.7162,1811.4824,21.8594); //Wiêzienie Stanowe
-                GameTextForPlayer(playerid, "~w~Witamy w Fort DeMorgan.", 5000, 1);
-                SetPlayerInterior(playerid,0);
-                SetPlayerVirtualWorld(playerid,0);
-                PlayerInfo[playerid][pInt] = 0;
-                PlayerInfo[playerid][pLocal] = 255;
-                return 1;
-            }
-        }
-        else if(PlayerToPoint(5.0, playerid,2730.2300,-2451.1172,17.5937))
-        {
-            if(PlayerInfo[playerid][pLider] == 3 || PlayerInfo[playerid][pMember] == 3)
-            {
-                SetPlayerPosEx(playerid,211.7162,1811.4824,21.8594); //Wiêzienie Stanowe
-                GameTextForPlayer(playerid, "~w~Witamy w Fort DeMorgan.", 5000, 1);
-                SetPlayerInterior(playerid,0);
-                return 1;
-            }
-        }
-        else if(PlayerToPoint(5.0, playerid,633.6562,-1490.3883,90.6158))
-        {
-            if(PlayerInfo[playerid][pLider] == 2 || PlayerInfo[playerid][pMember] == 2)
-            {
-                SetPlayerPosEx(playerid,211.7162,1811.4824,21.8594); //Wiêzienie Stanowe
-                GameTextForPlayer(playerid, "~w~Witamy w ~r~Fort DeMorgan.", 5000, 1);
-                SetPlayerInterior(playerid,0);
-                SetPlayerVirtualWorld(playerid,0);
-                return 1;
-            }
-        }*/
         else if (PlayerToPoint(5.0, playerid,315.4501953125, -1501.822265625, 13.820824623108)) //wejœcie do kancelarii prawników
         {
             SetPlayerPosEx(playerid,319.72470092773, -1548.3374023438, 13.845289230347); //Kancelaria prawnicza
@@ -20284,20 +20337,6 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
             return 1;
         }
-        else if (PlayerToPoint(5.0, playerid,1038.1452636719, -1339.3377685547,13.72)) // P¹czkarnia
-        {
-            SetPlayerPosEx(playerid,377.12701416016, -192.7546081543, 1000.6401367188); // P¹czkarnia
-            SetPlayerInterior(playerid, 17);
-            GameTextForPlayer(playerid, "~w~Witamy w paczkarni.", 5000, 1);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2501.8083496094,-1494.3854980469,24.0)) //Carniceria Club
-        {
-            SetPlayerPosEx(playerid, 1212.019897,-28.663099,1000.953125); // Carniceria Club
-            GameTextForPlayer(playerid, "~w~Witamy w ~r~klubie ~y~Carniceria", 5000, 1);
-            SetPlayerInterior(playerid, 3);
-            return 1;
-        }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2289.8876953125,-1206.8327636719,-18.008888244629)) // Szpitsal
         {
             SetPlayerPosEx(playerid, 1163.1424560547,-1343.5803222656,26.667037963867 ); // Dach szpital
@@ -20305,12 +20344,6 @@ CMD:wejdz(playerid)
             return 1;
         }
         //jebane miasteczko
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 660.12963867188,-573.84887695313,16.3359375)) // Stacja benzynowa
-        {
-            SetPlayerPosEx(playerid, 662.87506103516,-573.34320068359,16.3359375 ); // Stacja benzynowa
-            GameTextForPlayer(playerid, "~w~Witamy w sklepie.", 5000, 1);
-            return 1;
-        }
         /*else if (IsPlayerInRangeOfPoint(playerid, 5.0, 682.03063964844,-473.62811279297,16.425407409668)) // Bar kurwa
         {
             SetPlayerPosEx(playerid, 681.5244140625,-451.8515625,-25.609762191772 ); // Bar kurwa
@@ -20325,34 +20358,6 @@ CMD:wejdz(playerid)
             TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 35);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 854.50817871094,-603.81109619141,18.421875)) // tirów
-        {
-            SetPlayerPosEx(playerid, 895.76916503906,-609.98095703125,-30.94962310791 ); // tirów
-            GameTextForPlayer(playerid, "~w~Witamy w bazie tirów.", 5000, 1);
-            TogglePlayerControllable(playerid, 0);
-            Wchodzenie(playerid);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 712.97113037109,-499.08493041992,16.3359375)) // KRWAWE GUNY
-        {
-            SetPlayerPosEx(playerid, 316.42535400391,-169.18501281738,999.59375 ); //RWAWE GUNY
-            GameTextForPlayer(playerid, "~w~Witamy w Krwawych gunach.", 5000, 1);
-            SetPlayerInterior(playerid, 6);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 701.93713378906,-520.00042724609,16.336055755615)) // tor rowerowy wejscie
-        {
-            SetPlayerPosEx(playerid, -1128.5498046875,1066.3195800781,1345.7429199219 ); // tor rowerowy wejscie
-            GameTextForPlayer(playerid, "~w~Witamy na torze stuntowym masakra.", 5000, 1);
-            SetPlayerInterior(playerid, 10);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 691.23492431641,-546.91967773438,16.3359375)) // zbugowane 24/7
-        {
-            SetPlayerPosEx(playerid, -25.132599,-139.066986,1003.549988 ); // zbugowane wyruchane 24/7
-            SetPlayerInterior(playerid, 16);
             return 1;
         }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 648.91735839844,-520.12847900391,16.359306335449)) // bank w miasteczku wejscie
@@ -20407,7 +20412,8 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
             return 1;
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1210.552734375,-1749.1850585938,13.593885421753)) // Basen wejœcie
+        //BIZNES 43
+        /*else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1210.552734375,-1749.1850585938,13.593885421753)) // Basen wejœcie
         {
             SetPlayerPosEx(playerid, 575.5542,-2048.8000,16.1670 ); // Basen œrodek (recepcja)
             GameTextForPlayer(playerid, "~w~Witamy w kasach ~g~Basenu Tsunami.", 5000, 1);
@@ -20416,7 +20422,7 @@ CMD:wejdz(playerid)
             TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
             return 1;
-        }
+        }*/
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 578.6193,-2195.7708,1.6288)) // trampolina wejœcie
         {
             ShowPlayerDialogEx(playerid, 325, DIALOG_STYLE_LIST, "Na któr¹ trampolinê chcesz wejœæ?", "Trampolina zwyk³a\nTrampolina wyczynowa", "Wybierz", "Anuluj");
@@ -20429,40 +20435,6 @@ CMD:wejdz(playerid)
                 ShowPlayerDialogEx(playerid, 324, DIALOG_STYLE_LIST, "Tory szkoleniowe", "Strzelnica w budynku\nStrzelnica w terenie\nSkoki spadochronowe\nTor szkoleniowy ' Porwanie w domu '\nTor szkoleniowy ' Terroryœci na statku '", "Wybierz", "Anuluj");
                 return 1;
             }
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1022.7183837891,-1122.4310302734,23.871517181396)) // kasyno
-        {
-            if(PlayerInfo[playerid][pLevel] < 3)
-            {
-                sendTipMessageEx(playerid, COLOR_GRAD1, "Tylko gracze z conajmniej 3 lvl mog¹ graæ w kasynie!");
-                return 1;
-            }
-            SetPlayerPosEx(playerid, 1025.2453613281,-1078.1614990234,-67.785308837891 ); // Kasnyo œrodek
-            GameTextForPlayer(playerid, "~w~Witamy w ~y~Bymber ~g~Casino.~n~Wysokie wygrane", 5000, 1);
-            SendClientMessage(playerid, COLOR_WHITE, "W naszym kasynie obowi¹zuj¹ nastêpuj¹ce stawki za rozpoczêcie gry:");
-            SendClientMessage(playerid, COLOR_GREEN, "Kostki - (0.5 proc. podatku) za rzut /kostka || Black Jack - 100$ za kartê /oczko");
-            SendClientMessage(playerid, COLOR_GREEN, "Ko³o fortuny - 5 000$ za obrót /kf || Ruletka - 10 000$ za zakrêcenie /ruletka");
-            /*SendClientMessage(playerid, COLOR_PANICRED, "Ostrze¿enie: Oszustwo w kasynie po z³o¿eniu skargi skutkuje natychmiastow¹ kasacj¹ konta!");
-            SendClientMessage(playerid, COLOR_GREEN, "");
-            SendClientMessage(playerid, COLOR_PANICRED, "!!!BACZNOŒÆ!!! - strze¿ siê oszustów!");
-            SendClientMessage(playerid, COLOR_WHITE, "Mo¿esz unikn¹æ oszustw stosuj¹æ siê do nastêpuj¹cych zasad:");
-            SendClientMessage(playerid, COLOR_GREEN, "1. Przed ka¿d¹ gr¹ sprawdzaj portfel przeciwnika komend¹ {FFFFFF}/sprawdzkase [ID]");
-            SendClientMessage(playerid, COLOR_GREEN, "2. NIGDY NIE GRAJ, gdy przeciwnik nie ma deklarowanej wartoœci w prortfelu!");
-            SendClientMessage(playerid, TEAM_BLUE_COLOR, "Je¿eli mimo to zostaniesz oszukany NATYCHMIAST zg³oœ ten fakt na /report - oszust otrzyma od razu blokadê konta");
-            SendClientMessage(playerid, TEAM_BLUE_COLOR, "Gdy taka osoba otrzyma blokadê ty masz 10min na napisanie na niego skargi");
-            SendClientMessage(playerid, TEAM_BLUE_COLOR, "W ten sposób mo¿esz odzyskaæ nawet 100%% wygranej!!");
-            TogglePlayerControllable(playerid, 0);
-            */
-            Wchodzenie(playerid);
-            SetPlayerInterior(playerid, 3);
-            SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
-            SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
-            SendClientMessage(playerid, COLOR_WHITE, "Okazuje siê, ¿e do kasyna nie mozna wnosiæ broni.");
-            SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ ochronie.");
-            SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
-            SetPVarInt(playerid, "mozeUsunacBronie", 1);
-            ResetPlayerWeapons(playerid);
-            return 1;
         }
         //rodzinne gówna
         else if (PlayerToPoint(5.0, playerid, 693.9794,-1645.8259,4.0938)) // Full wejœcie
@@ -20478,12 +20450,6 @@ CMD:wejdz(playerid)
             SetPlayerInterior(playerid, 3);
             return 1;
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2309.2565917969,-1644.1251220703,14.82704348022)) // Bar GS
-        {
-            SetPlayerPosEx(playerid, 502.08987426758,-68.221839904785,998.7578125); // Bar GS
-            SetPlayerInterior(playerid, 11);
-            return 1;
-        }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2165.9409179688,-1671.8609619141,15.074726104736)) // Melina
         {
             SetPlayerPosEx(playerid, 318.75366210938,1115.3836669922,1083.8828125); // Melina
@@ -20496,14 +20462,6 @@ CMD:wejdz(playerid)
             SetPlayerInterior(playerid, 5);
             return 1;
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2397.3500976563,-1898.1529541016,13.546875)) // Cluckin'Bell
-        {
-            SetPlayerPosEx(playerid, 365.00964355469,-10.975138664246,1001.8515625); // Cluckin'Bell
-            SetPlayerInterior(playerid, 9);
-            PlayerInfo[playerid][pLocal] = 1234;
-            SetPlayerShopName(playerid,"FDCHICK");
-            return 1;
-        }
         /*else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2104.4970703125,-1806.3927001953,13.5546875)) // Pizzeria
         {
             SetPlayerPosEx(playerid, 372.16430664063,-132.97666931152,1001.4921875); // Pizzeria
@@ -20511,36 +20469,10 @@ CMD:wejdz(playerid)
             SetPlayerShopName(playerid,"FDPIZA");
             return 1;
         }*/
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1833.1099853516,-1842.603515625,13.578125)) // Sklep 24/7
-        {
-            SetPlayerPosEx(playerid, -27.437898635864,-57.505893707275,1003.546875); // Sklep 24/7
-            SetPlayerInterior(playerid, 6);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2232.5,-1159.7940673828,25.890625)) // MotelJefferson
-        {
-            SetPlayerPosEx(playerid, 2215.04296875,-1150.6489257813,1025.796875); // MotelJefferson
-            SetPlayerInterior(playerid, 15);
-            return 1;
-        }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2351.8894042969,-1169.4614257813,28.001684188843)) // Dom na Las Collinas
         {
             SetPlayerPosEx(playerid, 2352.0139160156,-1180.8870849609,1027.9765625); // Dom na Las Collinas
             SetPlayerInterior(playerid, 5);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2421.0134277344,-1220.2153320313,25.500587463379)) // Pig Pen
-        {
-            SetPlayerPosEx(playerid, 1204.9055175781,-13.669394493103,1000.921875); // Pig Pen
-            SetPlayerInterior(playerid, 2);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 927.34912109375,-1352.9412841797,13.376730)) // Cluckin'Bell
-        {
-            SetPlayerPosEx(playerid, 365.00964355469,-10.975138664246,1001.8515625); // Cluckin'Bell
-            SetPlayerInterior(playerid, 9);
-            PlayerInfo[playerid][pLocal] = 4321;
-            SetPlayerShopName(playerid,"FDCHICK");
             return 1;
         }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 22420.5959472656,-1508.7227783203,23.992208480835)) // Cluckin'Bell
@@ -20555,35 +20487,6 @@ CMD:wejdz(playerid)
             SetPlayerInterior(playerid,3);
             SetPlayerPosEx(playerid,-2637.69,1404.24,906.46 );
             GameTextForPlayer(playerid, "~w~Exclusive w ~r~Fun", 5000, 1);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1315.1501464844,-898.62475585938,39.578125)) // Sklep spo¿ywczy
-        {
-            SetPlayerPosEx(playerid, -31.1389503479,-91.36499786377,1003.546875); // Sklep spo¿ywczy
-            SetPlayerInterior(playerid, 18);
-            PlayerInfo[playerid][pLocal] = 122;
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1198.8435058594,-919.0625,43.114803314209)) // Burger Shot
-        {
-            SetPlayerPosEx(playerid, 363.4129, -74.5786, 1001.5078); // Burger Shot
-            SetPlayerInterior(playerid, 10);
-            SetPlayerShopName(playerid,"FDBURG");
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 812.56213378906,-1616.4566650391,13.546875)) // Burger Shot 2
-        {
-            SetPlayerPosEx(playerid, 363.4129, -74.5786, 1001.5078); // Burger Shot 2
-            SetPlayerInterior(playerid, 10);
-            PlayerInfo[playerid][pLocal] = 1001;
-            SetPlayerShopName(playerid,"FDBURG");
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 999.41522216797,-920.31256103516,42.1796875)) // Sklepik przy stacji Xoomer
-        {
-            SetPlayerPosEx(playerid, -30.946699,-89.609596,1003.549988); // Sklepik przy stacji Xoomer
-            SetPlayerInterior(playerid, 18);
-            PlayerInfo[playerid][pLocal] = 123;
             return 1;
         }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1698.8944091797,-1667.6840820313,20.194225311279)) // Muzeum sztuki wspó³czesnej
@@ -20604,12 +20507,6 @@ CMD:wejdz(playerid)
             SetPlayerInterior(playerid, 0);
             TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
-            return 1;
-        }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1352.5844726563,-1758.1843261719,13.5078125)) // Sklep wielobran¿owy
-        {
-            SetPlayerPosEx(playerid, -25.884499,-185.868988,1003.549988); // Sklep wielobran¿owy
-            SetPlayerInterior(playerid, 17);
             return 1;
         }
         else if (IsPlayerInRangeOfPoint(playerid, 2.0, 1972.0,-1285.0,29.0)) // bar by K.Monari wejœcie
@@ -20682,15 +20579,6 @@ CMD:wejdz(playerid)
             GameTextForPlayer(playerid, "Witamy", 5000, 1);
             return 1;
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1975.9598388672,-2036.7775878906,13.546875)) // tatuaz stary wejscie
-        {
-            SetPlayerPosEx(playerid, -219.67665100098,-33.897037506104,1000.6240234375); //  tatuaz starysrdek
-            TogglePlayerControllable(playerid, 0);
-            SetPlayerInterior(playerid, 15);
-            GameTextForPlayer(playerid, "~r~Budynek grozi zawaleniem!", 5000, 1);
-            Wchodzenie(playerid);
-            return 1;
-        }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 276.32934570313,122.20029449463,1004.1166992188)) // Pokój przes³uchañ wejs
         {
             if(IsACop(playerid))
@@ -20715,16 +20603,17 @@ CMD:wejdz(playerid)
             SetPlayerVirtualWorld(playerid,5);
         }
         else if(IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) ||
-        IsPlayerInRangeOfPoint(playerid,2.0, 1167.2428,-1311.8409,31.6567) ||
-        IsPlayerInRangeOfPoint(playerid,2.0,1104.2808,-1291.9760,21.6958)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1135.2930,-1358.6663,25.5729)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1170.3951,-1296.2148,31.7773)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1155.3907,-1363.1615,26.9370)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1127.3309,-1344.8870,20.3422)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1174.5618,-1376.4209,24.2193)||
+        IsPlayerInRangeOfPoint(playerid,2.0, -2805.0967,2596.0566,-98.0829) ||
+        IsPlayerInRangeOfPoint(playerid,2.0,1134.0449,-1320.7128,68.3750)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1183.3129,-1333.5684,88.1627)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1168.2112,-1340.6785,100.3780)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1158.6868,-1339.4423,120.2738)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1167.7832,-1332.2727,134.7856)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1177.4791,-1320.7749,178.0699)||
+        IsPlayerInRangeOfPoint(playerid,2.0,1178.2081,-1330.6317,191.5315)||
         IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112))
         {
-            ShowPlayerDialogEx(playerid, D_ELEVATOR_LSMC, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba\n{660000}[2] {D2CFA6}Bufet oraz strefa pracowników LSMC\n{660000}[3] {D2CFA6}Sale operacyjne oraz pooperacyjne\n{660000}[4] {D2CFA6}Sale Specjalistyczne\n{660000}[5] {D2CFA6}Akademia Medyczna\n{660000}[6] {D2CFA6}Gabinety lekarskie\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, D_ELEVATOR_LSMC, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[-1] {D2CFA6}Kostnica i laboratorium\n{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba przyjêæ\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Sale operacyjne\n{660000}[4] {D2CFA6}Sale pooperacyjne\n{660000}[5] {D2CFA6}Sale specjalistyczne\n{660000}[6] {D2CFA6}Akademia medyczna\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
         }
         else if(IsPlayerInRangeOfPoint(playerid,5,1172.6564, -1323.4110, 15.6034))
         {
@@ -20757,8 +20646,9 @@ CMD:wejdz(playerid)
             IbizaWyjscie(playerid);
             return 1;
         }
+        //BIZNES IBIZA
         //Weejscie glowne lewe
-        else if(IsPlayerInRangeOfPoint(playerid, 2.0, 400.8845,-1805.9010,7.8281) && GetPlayerVirtualWorld(playerid) == 0 )
+        /*else if(IsPlayerInRangeOfPoint(playerid, 2.0, 400.8845,-1805.9010,7.8281) && GetPlayerVirtualWorld(playerid) == 0 )
         {
             if(IbizaZamek) return sendTipMessageEx(playerid, 0xB52E2BFF, "Klub jest w tej chwili zamkniêty");
             if(!GetPVarInt(playerid, "IbizaBilet") && GetPlayerOrg(playerid) != FAMILY_IBIZA) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie posiadasz biletu, kup go w kasie"); //RANGA
@@ -20775,7 +20665,7 @@ CMD:wejdz(playerid)
             SendClientMessage(playerid, 0x88aa62FF, "((UWAGA! W naszym klubie czêsto mo¿na siê spotkaæ z wiadomoœciami typu: Audio stream.. aby wy³¹czyæ ten komunikat wpisz /audiomsg))");
             GameTextForPlayer(playerid, "~y~Projekt by Macias & Sonix", 5000, 1);
             return 1;
-        }
+        }*/
         //Wejscie gflowne prawe
         else if(IsPlayerInRangeOfPoint(playerid, 2.0, 394.2784,-1805.9104,7.8302) && GetPlayerVirtualWorld(playerid) == 0 )
         {
@@ -20903,13 +20793,6 @@ CMD:wejdz(playerid)
             GameTextForPlayer(playerid, "~w~/wieza", 2000, 1);
             Wchodzenie(playerid);
         }
-        //VAGOS PUB
-        else if(IsPlayerInRangeOfPoint(playerid,2.0,2151.60083, -1013.74762, 62.23438))
-        {
-            SetPlayerPos(playerid,2138.90918, -1014.41779, 67.39430);
-            SetPlayerVirtualWorld ( playerid, 2 ) ;
-            Wchodzenie(playerid);
-        }
         else if (PlayerToPoint(5, playerid,1524.4829,-1677.7080,6.2188))//Wejœcie tajne LSPD
         {
             SetPlayerPos(playerid,1617.4417,-1789.3824,13.4900);
@@ -20936,6 +20819,14 @@ CMD:wejdz(playerid)
             Wejdz(playerid, -1716.1999511719,1018.200012207,17.60000038147, -1825.4000244141,1151.6999511719,6803.2998046875, 5.0);//WEJSCIE DO KRYJOWKI
             Wejdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
+            
+            //BIZNESY
+            for(new i=0;i<MAX_BIZNES;i++)
+			{
+            	WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], i);
+            	//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
+			}
+			//BIZNESY END
 
             for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
             {
@@ -21036,7 +20927,7 @@ CMD:wyjdz(playerid)
     		SetPlayerPosEx(playerid,1309.9658, -1367.2878, 13.7324);
     		GameTextForPlayer(playerid, "~r~Milego dnia! ~n~ by abram01", 6000, 1);
     		SetPlayerVirtualWorld ( playerid, 0 ) ;
-    		SetPlayerWeather(playerid, ServerWeather);
+    		SetPlayerWeatherEx(playerid, ServerWeather);
     		SetPlayerTime(playerid, ServerTime, 0);
     	}
     	else if(IsPlayerInRangeOfPoint(playerid,4,1315.1282, -1336.4583, 39.1618))
@@ -21046,7 +20937,7 @@ CMD:wyjdz(playerid)
         		SetPlayerPosEx(playerid,1333.5448, -1308.2383, 13.7718);
         		GameTextForPlayer(playerid, "~r~Stare przejscie jeszcze dziala! ~n~ by abram01", 6000, 1);
         		SetPlayerVirtualWorld ( playerid, 0 ) ;
-        		SetPlayerWeather(playerid, ServerWeather);
+        		SetPlayerWeatherEx(playerid, ServerWeather);
     			SetPlayerTime(playerid, ServerTime, 0);
             }
     	}
@@ -21056,7 +20947,7 @@ CMD:wyjdz(playerid)
             {
         		SetPlayerPosEx(playerid,1286.0413,-1329.2007,13.5515);
         		SetPlayerVirtualWorld ( playerid, 0 ) ;
-        		SetPlayerWeather(playerid, ServerWeather);
+        		SetPlayerWeatherEx(playerid, ServerWeather);
     			SetPlayerTime(playerid, ServerTime, 0);
             }
     	}
@@ -21266,11 +21157,6 @@ CMD:wyjdz(playerid)
 			PlayerInfo[playerid][pInt] = 0;
 			PlayerInfo[playerid][pLocal] = 255;
 		}*/
-		else if (PlayerToPoint(6.0, playerid,-1404.5299,-259.0602,1043.6563))
-		{
-		    SetPlayerInterior(playerid,0);
-			SetPlayerPosEx(playerid,2695.6235,-1704.6960,11.8438);
-		}
 		else if (PlayerToPoint(8.0, playerid,-1443.0554,-581.1879,1055.0472))
 		{
 		    SetPlayerInterior(playerid,0);
@@ -21280,48 +21166,6 @@ CMD:wyjdz(playerid)
 		{
 		    SetPlayerInterior(playerid,0);
 			SetPlayerPosEx(playerid,-2080.3079,-406.0309,38.7344);
-		}
-	    else if(IsPlayerInRangeOfPoint(playerid, 5.0, 964.106994,-53.205497,1001.124572 ))//burdel wejscie
-	    {
-	        SetPlayerPosEx(playerid, 1941.1919,-2115.6655,13.6953);//burdel srodek
-	        GameTextForPlayer(playerid, "~r~Dobrze sie bawiles?", 5000, 1);
-	        SetPlayerInterior(playerid, 0);
-	    }
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0,207.5219,-109.7448,1005.1328))//binco srodek
-		{
-		    SetPlayerPosEx(playerid, 2244.2336,-1665.2026,15.4766);//bino wejscie
-		    GameTextForPlayer(playerid, "~w~Wroc gdy zbiedniejesz", 5000, 1);
-            SetPlayerInterior(playerid, 0);
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0, 204.1174,-46.8047,1001.8047))//sub urban srodek
-		{
-		    SetPlayerPosEx(playerid, 2112.7527,-1212.0103,23.9637);//sub urban wejscie
-		    GameTextForPlayer(playerid, "~w~Yo men", 5000, 1);
-            SetPlayerInterior(playerid, 0);
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0, 225.0306,-9.1838,1002.218))//victim srodek
-		{
-		    SetPlayerPosEx(playerid, 459.5163,-1501.4186,31.0371);//victim wejscie
-		    GameTextForPlayer(playerid, "~w~Dziekujemy za wizyte", 5000, 1);
-            SetPlayerInterior(playerid, 0);
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0, 206.4627,-137.7076,1003.0938))//pro laps srodek
-		{
-		    SetPlayerPosEx(playerid,500.1234,-1359.6345,16.2776);//pro laps wejscie
-		    GameTextForPlayer(playerid, "~w~Wroc gdy przpakujesz", 5000, 1);
-            SetPlayerInterior(playerid, 0);
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0, 161.4048,-94.2416,1001.8047))//ZiP srodek
-		{
-		    SetPlayerPosEx(playerid, 1456.7676,-1138.7638,23.9991);//ZIP wejscie
-		    GameTextForPlayer(playerid, "~w~Zapraszamy ponownie", 5000, 1);
-            SetPlayerInterior(playerid, 0);
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0, -100.2674,-22.9376,1000.7188))//sex shop srodek
-		{
-		    SetPlayerPosEx(playerid, 1087.7860,-922.7472,43.3906);//sex shop wejscie
-		    GameTextForPlayer(playerid, "~w~Udanej zabawy!", 5000, 1);
-            SetPlayerInterior(playerid, 0);
 		}
 		else if(PlayerToPoint(10.0, playerid, 1462.2887,-1008.2450,27.1099))//bank LS œrodek
 	    {
@@ -21343,12 +21187,6 @@ CMD:wyjdz(playerid)
 		    GameTextForPlayer(playerid, "~w~Zapraszamy ponownie", 5000, 1);
 		    SetPlayerInterior(playerid,0);
 		}
-		else if(PlayerToPoint(10.0, playerid, 286.15,-41.54,1000.57))//gun shop
-		{
-		    SetPlayerPosEx(playerid, 1791.212036,-1164.631713,23.828100);
-		    SetPlayerInterior(playerid,0);
-		    GameTextForPlayer(playerid, "~g~Zapraszamy ~w~ponownie", 5000, 1);
-		}
 		else if (PlayerToPoint(10.0, playerid,1111.5897,1067.8755,-21.6241))//ratusz
 		{
 		    SetPlayerInterior(playerid,0);
@@ -21364,12 +21202,6 @@ CMD:wyjdz(playerid)
 		    SetPlayerPosEx(playerid,2269.6848, -75.5530, 27.1525);
 		    SetPlayerVirtualWorld(playerid, 0);
 			PlayerInfo[playerid][pLocal] = 255;
-		}
-		else if (PlayerToPoint(6.0, playerid,-1404.5299,-259.0602,1043.6563))//8 ball track
-		{
-		    SetPlayerInterior(playerid,0);
-			SetPlayerPosEx(playerid,2695.6235,-1704.6960,11.8438);// 8 ball track
-			return 1;
 		}
 		else if (PlayerToPoint(8.0, playerid,-1443.0554,-581.1879,1055.0472))//drift track
 		{
@@ -21428,13 +21260,6 @@ CMD:wyjdz(playerid)
             SetPlayerVirtualWorld(playerid, 0);
             return 1;
         }
-        else if (PlayerToPoint(5.0, playerid,388.86383056641,173.90196228027,1008.3828125)) //biuro Yakuzy
-        {
-            SetPlayerPosEx(playerid,2793.9031,-1087.2518,30.7188); //Wejœcie do biura yakuzy
-            GameTextForPlayer(playerid, "~w~Milego dnia.", 5000, 1);
-            SetPlayerInterior(playerid, 0);
-            return 1;
-		}
 		else if (PlayerToPoint(5.0, playerid,2967.2785644531,-1056.5300292969,4505.6782226563)) //gabinet  YKZ
         {
             SetPlayerPosEx(playerid,368.3667,193.8689,1008.3828); //wejœcie YKZ
@@ -21446,12 +21271,6 @@ CMD:wyjdz(playerid)
 		{
 		    SetPlayerPosEx(playerid, 371.9455,168.0409,1008.3828 ); // wejscie na dach YKZ
 		    SetPlayerInterior(playerid, 3);
-		}
-		
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -2158.9819,642.8188,1052.3750)) //zaklad bukmaherski srodek
-		{
-		    SetPlayerPosEx(playerid,1631.7883300781,-1171.4095458984,24.078125); // bukmaherka wyjscie
-		    SetPlayerInterior(playerid, 0);
 		}
         else if (PlayerToPoint(3.5, playerid,-2170.2500,638.5538,1052.3750)) //Zak³ad bukmaherski ZEJSCIE Z GORY
         {
@@ -21565,20 +21384,6 @@ CMD:wyjdz(playerid)
             SetPlayerInterior(playerid,0);
 			return 1;
 		}
-		else if (PlayerToPoint(5.0, playerid,377.12701416016, -192.7546081543, 1000.6401367188)) // P¹czkarnia
-		{
-		    SetPlayerPosEx(playerid,1038.1452636719, -1339.3377685547,13.72); // P¹czkarnia
-		    SetPlayerInterior(playerid, 0);
-		    GameTextForPlayer(playerid, "~w~Milego dnia.", 5000, 1);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1212.019897,-28.663099,1000.953125)) //Carniceria Club
-		{
-		    SetPlayerPosEx(playerid, 2501.8083496094,-1494.3854980469,24.0); // Carniceria Club
-		    GameTextForPlayer(playerid, "~w~Do zobaczenia!", 5000, 1);
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
 		else if (PlayerToPoint(5.0, playerid, 1526,-1451,64)) // baza bor srodek
 		{
 		    SetPlayerPosEx(playerid, 1797.99829, -1578.78772, 14.01125); // baza bor wejscie
@@ -21609,10 +21414,6 @@ CMD:wyjdz(playerid)
     	    SetPlayerVirtualWorld(playerid,0);
     	}
         //miasteczko
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 662.87506103516,-573.34320068359,16.3359375)) // Stacja benzynowa
-		{
-		    SetPlayerPosEx(playerid, 660.12963867188,-573.84887695313,16.3359375 ); // Stacja benzynowa
-		}
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 681.5244140625,-451.8515625,-25.609762191772)) // Bar
 		{
 		    SetPlayerPosEx(playerid, 682.03063964844,-473.62811279297,16.425407409668); // Bar
@@ -21622,25 +21423,6 @@ CMD:wyjdz(playerid)
 		{
 		    SetPlayerPosEx(playerid, 695.0287,-499.5582,16.3359); // rada srodek
 		    SetPlayerVirtualWorld(playerid, 0);
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 895.76916503906,-609.98095703125,-30.94962310791)) //  tirów
-		{
-		    SetPlayerPosEx(playerid, 854.50817871094,-603.81109619141,18.421875 ); //tirów
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 316.42535400391,-169.18501281738,999.59375)) // KRWAWE GUNY
-		{
-		    SetPlayerPosEx(playerid, 712.97113037109,-499.08493041992,16.3359375 ); //RWAWE GUNY
-		    SetPlayerInterior(playerid, 0);
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -1128.5498046875,1066.3195800781,1345.7429199219)) // tor rowerowy wejscie
-		{
-		    SetPlayerPosEx(playerid, 701.93713378906,-520.00042724609,16.336055755615); // tor rowerowy wejscie
-		    SetPlayerInterior(playerid, 0);
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -25.132599,-139.066986,1003.549988)) // miasteczko 24/7
-		{
-		    SetPlayerPosEx(playerid, 691.23492431641,-546.91967773438,16.3359375 ); // miasteczko 24/7
-		    SetPlayerInterior(playerid, 0);
 		}
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 833.66455078125,7.4092292785645,1004.1796875)) //  bank na œrodku miasteczko
 		{
@@ -21675,7 +21457,7 @@ CMD:wyjdz(playerid)
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
 		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 575.5542,-2048.8000,16.1670)) // basen recepcja
+		/*else if (IsPlayerInRangeOfPoint(playerid, 5.0, 575.5542,-2048.8000,16.1670)) // basen recepcja
 		{
 		    SetPlayerPosEx(playerid, 1210.552734375,-1749.1850585938,13.593885421753 ); // basen na zewnatrz
 		    if(PlayerInfo[playerid][pChar] > 0) { SetPlayerSkin(playerid, PlayerInfo[playerid][pChar]); }
@@ -21683,7 +21465,7 @@ CMD:wyjdz(playerid)
 			SetPlayerVirtualWorld(playerid, 0);
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
-		}
+		}*/
 		//Tory szkoleniowe
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -653.34765625,-5448.5634765625,13.368634223938) || // wybieralka fbi Strzelnica FBI œrodek
 				IsPlayerInRangeOfPoint(playerid, 5.0, 1703.9327392578,141.29598999023,30.903503417969) || // wybieralka fbi Strzelnica terenowa
@@ -21697,14 +21479,6 @@ CMD:wyjdz(playerid)
 			SetPlayerVirtualWorld(playerid,0);
 		}
 		//wybiera³a san
-		//kasyno
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1025.2453613281,-1078.1614990234,-67.785308837891)) // kasyno srodek
-		{
-            if(GetPVarInt(playerid, "kostka") == 1) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz wyjœæ z kasyna bêd¹c w trakcie gry!");
-		    SetPlayerPosEx(playerid, 1022.7183837891,-1122.4310302734,23.871517181396 ); //kasyno na zewnatrz
-		    SetPlayerInterior(playerid, 0);
-			PlayerPlaySound(playerid, 5454, 0.0, 0.0, 0.0);
-		}
 		//rodzinne gówna
 		else if (PlayerToPoint(5.0, playerid, 2317.8201,-1024.7500,1050.2109)) // Full baza
 		{
@@ -21716,12 +21490,6 @@ CMD:wyjdz(playerid)
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2495.9689941406,-1692.6496582031,1014.7421875)) // Dom na Groove Street
 		{
 		    SetPlayerPosEx(playerid, 2495.576171875,-1689.9849853516,14.765625); // Dom na Groove Street
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 502.08987426758,-68.221839904785,998.7578125)) // Bar GS
-		{
-		    SetPlayerPosEx(playerid, 2309.2565917969,-1644.1251220703,14.82704348022); // Bar GS
 		    SetPlayerInterior(playerid, 0);
 		    return 1;
 		}
@@ -21737,53 +21505,15 @@ CMD:wyjdz(playerid)
 		    SetPlayerInterior(playerid, 0);
 		    return 1;
 		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 365.00964355469,-10.975138664246,1001.8515625) && PlayerInfo[playerid][pLocal] == 1234) // Cluckin'Bell
-		{
-		    SetPlayerPosEx(playerid, 2397.3500976563,-1898.1529541016,13.546875); //
-		    PlayerInfo[playerid][pLocal] = 60;
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 365.00964355469,-10.975138664246,1001.8515625) && PlayerInfo[playerid][pLocal] == 4321) // Cluckin'Bell
-		{
-		    SetPlayerPosEx(playerid, 927.34912109375,-1352.9412841797,13.376730); //
-		    PlayerInfo[playerid][pLocal] = 60;
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 372.16430664063,-132.97666931152,1001.4921875)) // Pizzeria
 		{
 		    SetPlayerPosEx(playerid, 2104.4970703125,-1806.3927001953,13.5546875); // Pizzeria
 		    SetPlayerInterior(playerid, 0);
 		    return 1;
 		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -27.437898635864,-57.505893707275,1003.546875)) // Sklep 24/7
-		{
-		    SetPlayerPosEx(playerid, 1833.1099853516,-1842.603515625,13.578125); // Sklep 24/7
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2215.04296875,-1150.6489257813,1025.796875)) // MotelJefferson
-		{
-		    SetPlayerPosEx(playerid, 2232.5,-1159.7940673828,25.890625); // MotelJefferson
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2352.0139160156,-1180.8870849609,1027.9765625)) // Dom na Las Collinas
 		{
 		    SetPlayerPosEx(playerid, 2351.8894042969,-1169.4614257813,28.001684188843); // Dom na Las Collinas
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1204.9055175781,-13.669394493103,1000.921875)) // Pig Pen
-		{
-		    SetPlayerPosEx(playerid, 2421.0134277344,-1220.2153320313,25.500587463379); // Pig Pen
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2532.0837,-1281.9919,1048.2891)) // baza ha
-		{
-		    SetPlayerPosEx(playerid, -50,-269,6.599999); // baza HA
 		    SetPlayerInterior(playerid, 0);
 		    return 1;
 		}
@@ -21800,32 +21530,6 @@ CMD:wyjdz(playerid)
 	        GameTextForPlayer(playerid, "~w~Wroc do nas!", 5000, 1);
 	        return 1;
 	    }
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -31.1389503479,-91.36499786377,1003.546875) && PlayerInfo[playerid][pLocal] == 122) // Sklep spo¿ywczy
-		{
-		    SetPlayerPosEx(playerid, 1315.1501464844,-898.62475585938,39.578125); // Sklep spo¿ywczy
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 363.4129, -74.5786, 1001.5078) && PlayerInfo[playerid][pLocal] == 1001) // Burger Shot
-		{
-		    SetPlayerPosEx(playerid, 812.56213378906,-1616.4566650391,13.546875); // Burger Shot
-		    PlayerInfo[playerid][pLocal] = 60;
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 363.4129, -74.5786, 1001.5078)) // Burger Shot
-		{
-		    SetPlayerPosEx(playerid, 1198.8435058594,-919.0625,43.114803314209); // Burger Shot
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -30.946699,-89.609596,1003.549988) && PlayerInfo[playerid][pLocal] == 123) // Sklepik przy stacji Xoomer
-		{
-			SetPlayerPosEx(playerid, 999.41522216797,-920.31256103516,42.1796875); // Sklepik przy stacji Xoomer
-			SetPlayerInterior(playerid, 0);
-			PlayerInfo[playerid][pLocal] = 60;
-		    return 1;
-		}
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1701.4025878906,-1667.9442138672,20.21875)) // Muzeum sztuki wspó³czesnej
 		{
 		    SetPlayerPosEx(playerid, 1698.8944091797,-1667.6840820313,20.194225311279); // Muzeum sztuki wspó³czesnej
@@ -21838,29 +21542,11 @@ CMD:wyjdz(playerid)
 		    SetPlayerInterior(playerid, 0);
 		    return 1;
 		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -25.884499,-185.868988,1003.549988)) // Sklep wielobran¿owy
-		{
-		    SetPlayerPosEx(playerid, 1352.5844726563,-1758.1843261719,13.5078125); // Sklep wielobran¿owy
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1982.1672, -1302.0480, -9.2519)) // glen park bar
-		{
-		    SetPlayerPosEx(playerid, 1970.8337,-1285.3256,28.4919); // wyjscie
-		    SetPlayerVirtualWorld(playerid, 0);
-		    return 1;
-		}
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -204.0638885498,-9.17,1002.2734)) //  tatuaz new sro
 		{
 		    SetPlayerPosEx(playerid,2292.3088,-1723.3538,13.5469); //  tatuaz new wej
 		    SetPlayerInterior(playerid, 0);
 		    GameTextForPlayer(playerid, "Zapraszamy ponownie", 5000, 1);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -219.67665100098,-33.897037506104,1000.6240234375)) // tatuaz stary sro
-		{
-		    SetPlayerPosEx(playerid, 1975.9598388672,-2036.7775878906,13.546875  ); //  tatuaz wej
-		    SetPlayerInterior(playerid, 0);
 		    return 1;
 		}
 		//baza bor by abram01
@@ -22102,12 +21788,6 @@ CMD:wyjdz(playerid)
             INT_AirTowerLS_Exit(playerid, false, true);
             SetPlayerPosEx(playerid,1635.3210, -2286.5698, 13.4162);
         }
-        //VAGOS PUB
-        else if(IsPlayerInRangeOfPoint(playerid,2,2138.93188, -1013.58417, 66.33370))
-        {
-            SetPlayerPosEx(playerid,2151.60083, -1013.74762, 62.23438);
-            SetPlayerVirtualWorld ( playerid, 0 ) ;
-        }
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 1763.4243, -1128.0543, 224.1499))//Wyjœcie
 		{
         	SetPlayerPosEx(playerid, 1763.4033, -1129.7128, 24.0859);
@@ -22121,6 +21801,14 @@ CMD:wyjdz(playerid)
 		    Wyjdz(playerid, -1716.1999511719,1018.200012207,17.60000038147, -1825.4000244141,1151.6999511719,6803.2998046875, 5.0);//WEJSCIE DO KRYJOWKI
 		    Wyjdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
 			Wyjdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
+			
+			//BIZNESY
+            for(new i=0;i<MAX_BIZNES;i++)
+			{
+				WyjdzInt(playerid, BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], 3.0, 0, i);//biz 1
+			}
+			//WyjdzInt(playerid, BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], 3.0, 0);//biz 2
+            //BIZNESY END
 
 			for(new i; i<=MAX_NrDOM; i++)
 		    {
@@ -23708,8 +23396,8 @@ CMD:przyjmij(playerid, params[])
 				        else if(PlayerInfo[playerid][pLider] == 2) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; PlayerInfo[para1][pSkin] = 286; SetPlayerSkin(para1, 286); }
 				        else if(PlayerInfo[playerid][pLider] == 3) { PlayerInfo[para1][pTeam] = 2; gTeam[para1] = 2; PlayerInfo[para1][pSkin] = 71; SetPlayerSkin(para1, 287); }
 				        else if(PlayerInfo[playerid][pLider] == 4) { PlayerInfo[para1][pTeam] = 1; gTeam[para1] = 1; PlayerInfo[para1][pSkin] = 70; SetPlayerSkin(para1, 70); }
-				        else if(PlayerInfo[playerid][pLider] == 5) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 258; SetPlayerSkin(para1, 120); }
-				        else if(PlayerInfo[playerid][pLider] == 6) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 120; SetPlayerSkin(para1, 258); }
+				        else if(PlayerInfo[playerid][pLider] == 5) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 258; SetPlayerSkin(para1, 258); }
+				        else if(PlayerInfo[playerid][pLider] == 6) { PlayerInfo[para1][pTeam] = 5; gTeam[para1] = 5; PlayerInfo[para1][pSkin] = 117; SetPlayerSkin(para1, 117); }
 				        else if(PlayerInfo[playerid][pLider] == 7) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; PlayerInfo[para1][pSkin] = 59; SetPlayerSkin(para1, 59); }
 				        else if(PlayerInfo[playerid][pLider] == 8) { PlayerInfo[para1][pTeam] = 10; gTeam[para1] = 12; PlayerInfo[para1][pSkin] = 127; SetPlayerSkin(para1, 127); }
 				        else if(PlayerInfo[playerid][pLider] == 9) { PlayerInfo[para1][pTeam] = 12; gTeam[para1] = 12; PlayerInfo[para1][pSkin] = 148; SetPlayerSkin(para1, 148); }
@@ -24175,7 +23863,7 @@ CMD:makeleader(playerid, params[])
 					else if(level == 3) { PlayerInfo[para1][pSkin] = 287; } //National Guard
 					else if(level == 4) { PlayerInfo[para1][pSkin] = 228; } //Fire/Ambulance
 					else if(level == 5) { PlayerInfo[para1][pSkin] = 113; } //La Cosa Nostra
-					else if(level == 6) { PlayerInfo[para1][pSkin] = 120; } //Yakuza
+					else if(level == 6) { PlayerInfo[para1][pSkin] = 208; } //Yakuza
 					else if(level == 7) { PlayerInfo[para1][pSkin] = 57; } //BOR
 					else if(level == 8) { PlayerInfo[para1][pSkin] = 294; } //Hitmans
 					else if(level == 9) { PlayerInfo[para1][pSkin] = 227; } //News Reporters
@@ -26409,12 +26097,12 @@ CMD:admini(playerid)
             SendClientMessage(playerid, COLOR_GRAD3, string);
         }
     }
-    SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomóc lub nie odpowiada na twoje pytanie? Jest na to sposób!");
-    SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyæ listê Zaufanych Graczy. Oni te¿ pomog¹!");
+    //SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomóc lub nie odpowiada na twoje pytanie? Jest na to sposób!");
+    //SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyæ listê Zaufanych Graczy. Oni te¿ pomog¹!");
     return 1;
 }
 
-CMD:zaufani(playerid)
+/*CMD:zaufani(playerid)
 {
 	new string[64];
 	new sendername[MAX_PLAYER_NAME];
@@ -26487,7 +26175,7 @@ CMD:zaufani(playerid)
 		}
 	}
 	return 1;
-}
+}*/
 
 
 CMD:zasady(playerid)
@@ -26561,8 +26249,7 @@ CMD:biznespomoc(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	SendClientMessage(playerid, COLOR_WHITE,"*** BIZNES POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-	SendClientMessage(playerid, COLOR_GRAD3,"*** BIZNES *** /bizinfo /bizoplata /biznazwa /koszproduktu /wspolwlasciciel");
-	SendClientMessage(playerid, COLOR_GRAD4,"*** BIZNES *** /wejdz /wyjdz /otworz /sprzedajbiz /bizbank /bizwyplac");
+	SendClientMessage(playerid, COLOR_GRAD3,"*** BIZNES *** /bizinfo /wejdz /wyjdz | WKRÓTCE - /kupbiznes /sprzedajbiznes");
 	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /pomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
 	return 1;
 }
@@ -29617,7 +29304,7 @@ CMD:kurs(playerid, params[])
                 }
                 else if(GetVehicleModel(vehicleid) == 431 || GetVehicleModel(vehicleid) == 437)
                 {
-                    if(moneys < 25 || moneys > 2000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena biletu od $25 do $2000 !"); return 1; }
+                    if(moneys < 25 || moneys > 2500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena biletu od $25 do $2500 !"); return 1; }
 					BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 					GetPlayerName(playerid,sendername,sizeof(sendername));
 					format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: $%d.", sendername, TransportValue[playerid]);
@@ -29639,7 +29326,7 @@ CMD:kurs(playerid, params[])
                 }
                 else
                 {
-    				if(moneys < 150 || moneys > 900) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $150 do $900 !"); return 1; }
+    				if(moneys < 150 || moneys > 2000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $150 do $2000 !"); return 1; }
     				TaxiDrivers += 1; TransportDuty[playerid] = 1; TransportValue[playerid] = moneys;
     				GetPlayerName(playerid,sendername,sizeof(sendername));
     				format(string, sizeof(string), "Taksówkarz %s jest na s³u¿bie wpisz /wezwij taxi aby skorzystaæ z jego us³ug, koszt %d$", sendername, TransportValue[playerid]);
@@ -36484,16 +36171,16 @@ CMD:temat(playerid,cmdtext[])
 CMD:rezonans(playerid,cmdtext[])
 {
     if(!IsAMedyk(playerid)) return 1;
-	if(IsPlayerInRangeOfPoint(playerid,8,1161.9297, -1287.5546, 30.7001))
+	if(IsPlayerInRangeOfPoint(playerid,8,1157.257324, -1325.527221, 133.955657))
 	{
  		if(rezonansmove == 0)
 		{
-  			MoveDynamicObject(rezonans, 1161.9297, -1284.1246, 30.7001, 1,  0.00001, 0.00000, 0.00000);
+  			MoveDynamicObject(rezonans, 1157.257324, -1320.927124, 133.955657, 1);
   			rezonansmove = 1;
 		}
 		else
 		{
-  			MoveDynamicObject(rezonans, 1161.9297, -1287.5546, 30.7001, 1,  0.00000, 0.00000, 0.00000);
+  			MoveDynamicObject(rezonans, 1157.257324, -1325.527221, 133.955657, 1);
   			rezonansmove  = 0;
 		}
 		return 1;

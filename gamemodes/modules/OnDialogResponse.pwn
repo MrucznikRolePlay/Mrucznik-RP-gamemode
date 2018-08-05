@@ -1,5 +1,6 @@
 //OnDialogResponse.pwn
 
+//ID DIALOGÓW 9900+ BIZNESY.
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	#if DEBUG == 1
@@ -65,6 +66,52 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
+		}
+	}
+	else if(dialogid == 9520)
+	{
+	    new kasa = GetPVarInt(playerid, "Mats-kasa");
+        new giveplayerid = GetPVarInt(playerid, "Mats-id");
+        new moneys = GetPVarInt(playerid, "Mats-mats");
+        new string[128];
+		if(!response)
+		{
+		    SetPVarInt(playerid, "OKupMats", 0);
+			SetPVarInt(giveplayerid, "OSprzedajMats", 0);
+			SetPVarInt(playerid, "Mats-kasa", 0);
+        	SetPVarInt(playerid, "Mats-id", 0);
+        	SetPVarInt(playerid, "Mats-mats", 0);
+        	sendErrorMessage(playerid, "Sprzeda¿ zosta³a anulowana!");
+        	sendErrorMessage(giveplayerid, "Sprzeda¿ zosta³a anulowana!");
+			return 1;
+		}
+		if(kaska[playerid] < kasa) return sendErrorMessage(playerid, "Nie masz tyle kasy!");
+		if(GetPVarInt(playerid, "OKupMats") == 0) return sendErrorMessage(playerid, "Coœ posz³o nie tak! (kupno)");
+        //if(GetPVarInt(playerid, "OSprzedajMats") == 0) return sendErrorMessage(playerid, "Coœ posz³o nie tak! (sprzeda¿)");
+		if(GetPVarInt(giveplayerid, "OSprzedajMats") == 1)
+		{
+			format(string, sizeof(string), "   Dosta³eœ %d materia³ów od gracza %s za %d $.", moneys, GetNick(giveplayerid), kasa);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			format(string, sizeof(string), "   Da³eœ %d materia³ów graczowi %s za %d $.", moneys, GetNick(playerid), kasa);
+			SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+			format(string, sizeof(string),"%s da³ %s torbê z materia³ami.", GetNick(giveplayerid), GetNick(playerid));
+			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			PlayerInfo[giveplayerid][pMats] -= moneys;
+			PlayerInfo[playerid][pMats] += moneys;
+			DajKase(giveplayerid, kasa);
+			DajKase(playerid, -kasa);
+			
+			SetPVarInt(playerid, "OKupMats", 0);
+			SetPVarInt(giveplayerid, "OSprzedajMats", 0);
+			SetPVarInt(playerid, "Mats-kasa", 0);
+        	SetPVarInt(playerid, "Mats-id", 0);
+        	SetPVarInt(playerid, "Mats-mats", 0);
+			format(string, sizeof(string), "%s kupil od %s materialy (ilosc %d) za %d$.", GetNick(playerid), GetNick(giveplayerid), moneys, kasa);
+			PayLog(string);
+		}
+		else
+		{
+		    sendErrorMessage(playerid, "Coœ posz³o nie tak! (sprzeda¿)");
 		}
 	}
 	else if(dialogid == 9519)
@@ -1102,37 +1149,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
 			{
 			    case 0:
-			    	if(LSMCWindap0 == 0 || PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
-					{
-				    	ElevatorTravel(playerid, 1144.4740, -1333.2556, 13.8348, 0,90.0);
-					}
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika LSMC!");
-
+				    ElevatorTravel(playerid,-2805.0967,2596.0566,-98.0829, 90,0.0);//pkostnica
 				case 1:
-					ElevatorTravel(playerid, 1167.2428,-1311.8409,31.6567,90,180.0);
+					ElevatorTravel(playerid,1144.4740, -1333.2556, 13.8348, 0,90.0);//parking
 				case 2:
-					if(LSMCWindap2 == 0 || PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
-					{
-        				ElevatorTravel(playerid,1104.2808,-1291.9760,21.6958,94,180.0);
-					}
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika LSMC!");
-
+        			ElevatorTravel(playerid,1134.0449,-1320.7128,68.3750,90,270.0);//p1
 				case 3:
-				    ElevatorTravel(playerid,1135.2930,-1358.6663,25.5729,91,90.0);
+				    ElevatorTravel(playerid,1183.3129,-1333.5684,88.1627,90,90.0);//p2
 				case 4:
-					ElevatorTravel(playerid,1170.3951,-1296.2148,31.7773,95,90.0);
+					ElevatorTravel(playerid,1168.2112,-1340.6785,100.3780,90,90.0);//p3
 				case 5:
-				    ElevatorTravel(playerid,1155.3907,-1363.1615,26.9370,92,180.0);
+				    ElevatorTravel(playerid,1158.6868,-1339.4423,120.2738,90,90.0);//p4
 				case 6:
-				    ElevatorTravel(playerid,1127.3309,-1344.8870,20.3422,96,0.0);
+				    ElevatorTravel(playerid,1167.7832,-1332.2727,134.7856,90,90.0);//p5
     			case 7:
-				    ElevatorTravel(playerid,1174.5618,-1376.4209,24.2193,93,270.0);
+				    ElevatorTravel(playerid,1177.4791,-1320.7749,178.0699,90,90.0);//p6
 				case 8:
-                    if(LSMCWindap8 == 0 || PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
-					{
-            			ElevatorTravel(playerid, 1161.8228, -1337.0521, 31.6112,0,180.0);
-					}
-                    else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika LSMC!");
+            		ElevatorTravel(playerid,1178.2081,-1330.6317,191.5315,90,90.0);//p7
+                case 9:
+            		ElevatorTravel(playerid,1161.8228, -1337.0521, 31.6112,0,180.0);//dach
 			}
         }
 	}
@@ -4634,6 +4669,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        case 0:
 			        {
+			            if(PlayerInfo[playerid][pGun0] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 						PlayerInfo[playerid][pGun0] = 0;
 						PlayerInfo[playerid][pAmmo0] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój kastet zosta³ usuniêty");
@@ -4647,6 +4683,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 1:
 			        {
+			            if(PlayerInfo[playerid][pGun1] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun1] = 0;
 						PlayerInfo[playerid][pAmmo1] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja broñ bia³a zosta³a usniêta");
@@ -4659,6 +4696,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 2:
 			        {
+			            if(PlayerInfo[playerid][pGun2] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun2] = 0;
 						PlayerInfo[playerid][pAmmo2] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet zosta³ usuniêty");
@@ -4671,6 +4709,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 3:
 			        {
+			            if(PlayerInfo[playerid][pGun3] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 	                    PlayerInfo[playerid][pGun3] = 0;
 						PlayerInfo[playerid][pAmmo3] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja strzelba zosta³a usuniêta");
@@ -4683,6 +4722,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 4:
 			        {
+			            if(PlayerInfo[playerid][pGun4] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 	                    PlayerInfo[playerid][pGun4] = 0;
 						PlayerInfo[playerid][pAmmo4] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet maszynowy zosta³ usuniêty");
@@ -4695,6 +4735,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 5:
 			        {
+			            if(PlayerInfo[playerid][pGun5] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun5] = 0;
 						PlayerInfo[playerid][pAmmo5] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój karabin maszynowy zosta³ usuniêty");
@@ -4707,6 +4748,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 6:
 			        {
+			            if(PlayerInfo[playerid][pGun6] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun6] = 0;
 						PlayerInfo[playerid][pAmmo6] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja snajperka zosta³a usuniêta");
@@ -4719,6 +4761,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 7:
 			        {
+			            if(PlayerInfo[playerid][pGun7] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun7] = 0;
 						PlayerInfo[playerid][pAmmo7] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój ogniomiotacz zosta³ usuniêty");
@@ -4731,6 +4774,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 8:
 			        {
+			            if(PlayerInfo[playerid][pGun8] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun8] = 0;
 						PlayerInfo[playerid][pAmmo8] = 0;
 						PlayerInfo[playerid][pGun12] = 0;
@@ -4745,6 +4789,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 9:
 			        {
+			            if(PlayerInfo[playerid][pGun9] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun9] = 0;
 						PlayerInfo[playerid][pAmmo9] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój sprej/aparat/gaœnica zosta³ usuniêty");
@@ -4757,6 +4802,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 10:
 			        {
+			            if(PlayerInfo[playerid][pGun10] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun10] = 0;
 						PlayerInfo[playerid][pAmmo10] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje kwiaty/laska/dildo zosta³o usuniête");
@@ -4769,6 +4815,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 11:
 			        {
+			            if(PlayerInfo[playerid][pGun11] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun11] = 0;
 						PlayerInfo[playerid][pAmmo11] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój spadochron zosta³ usuniêty");
@@ -4781,6 +4828,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 12:
 			        {
+			            if(PlayerInfo[playerid][pGun12] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój detonator zosta³ usuniêty");
@@ -16073,6 +16121,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
    				TogglePlayerControllable(playerid, 1);
 				RemovePlayerFromVehicleEx(playerid);
 				HireCar[playerid] = 0;
+				return 0;
+			}
+			if(kaska[playerid] < 5000)
+   			{
+   				sendErrorMessage(playerid, "Nie masz tyle kasy!");
 				return 0;
 			}
     		CarData[VehicleUID[veh][vUID]][c_Rang] = (playerid+1);
