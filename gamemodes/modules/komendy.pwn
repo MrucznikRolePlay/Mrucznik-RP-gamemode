@@ -21022,7 +21022,7 @@ CMD:wyjdz(playerid)
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0, 627.1783, -1470.2279, 90.7054) && GetPlayerVirtualWorld(playerid, 10))//biura fbi srodek
+		else if(IsPlayerInRangeOfPoint(playerid, 10.0, 627.1783, -1470.2279, 90.7054) && GetPlayerVirtualWorld(playerid) == 10)//biura fbi srodek
 		{
 		    SetPlayerPosEx(playerid, 608.19793701172, -1458.9837646484, 14.387271881104);//biura fbi wejscie
 		    GameTextForPlayer(playerid, "~w~Zegnamy", 5000, 1);
