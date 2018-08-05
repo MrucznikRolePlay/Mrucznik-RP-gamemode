@@ -1,61 +1,30 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
-public SpecEndTimer(playerid)
+forward SpecToggle(playerid);
+public SpecToggle(playerid)
 {
-	if(TogglePlayerSpectating(playerid, true))
-	{
-		SendClientMessage(playerid, -1, "Pomyœlnie zszed³eœ z ADMIN-SPEC!");
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-	    TogglePlayerSpectating(playerid, false);
-	}
-	else
-	{
-	    SendClientMessage(playerid, -1, "B³¹d, ale nie ban! Poczekaj kilka sekund! Ju¿ to naprawiam!");
-	    SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-	    TogglePlayerSpectating(playerid, false);
-	}
-	return 1;
+    Streamer_ToggleAllItems(playerid, STREAMER_TYPE_OBJECT, 1);
+    sendTipMessage(playerid, "Wczytywanie obiektów!");
 }
-public SpecVehTimer(playerid,pid)
+public KomunikatTimer()
 {
-	if(TogglePlayerSpectating(playerid, true))
-	{
-		PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL);
-		SetPVarInt(playerid, "spec-type", 2);
-	}
-	else
-	{
-	    SendClientMessage(playerid, COLOR_WHITE, "B³¹d, ale nie ban! Poczekaj kilka sekund i wejdŸ ponownie na /spec!");
-	    TogglePlayerSpectating(playerid, false);
-	    
-	    PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
-		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
-		SetPlayerToTeamColor(playerid);
-		MedicBill[playerid] = 0;
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-        Spectate[playerid] = INVALID_PLAYER_ID;
-	}
-	return 1;
+	CMDKomunikat = 0;
 }
-public SpecPlayerTimer(playerid,pid)
+public SprzedajMatsTimer(playerid,giveplayerid)
 {
-    if(TogglePlayerSpectating(playerid, true))
+	if(GetPVarInt(giveplayerid, "OKupMats") == 1)
 	{
-		PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL);
-		SetPVarInt(playerid, "spec-type", 1);
+		SetPVarInt(giveplayerid, "OKupMats", 0);
+		SetPVarInt(giveplayerid, "Mats-id", 0);
+  		SetPVarInt(giveplayerid, "Mats-kasa", 0);
+    	SetPVarInt(giveplayerid, "Mats-mats", 0);
+    	sendErrorMessage(giveplayerid, "Sprzeda¿ mats zosta³a anulowana!");
 	}
-	else
+	if(GetPVarInt(playerid, "OSprzedajMats") == 1)
 	{
-	    SendClientMessage(playerid, COLOR_WHITE, "B³¹d, ale nie ban! Poczekaj kilka sekund i wejdŸ ponownie na /spec!");
-	    TogglePlayerSpectating(playerid, false);
-	    
-	    PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
-		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
-		SetPlayerToTeamColor(playerid);
-		MedicBill[playerid] = 0;
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-        Spectate[playerid] = INVALID_PLAYER_ID;
+		SetPVarInt(playerid, "OSprzedajMats", 0);
+		sendErrorMessage(playerid, "Sprzeda¿ mats zosta³a anulowana!");
 	}
 	return 1;
 }

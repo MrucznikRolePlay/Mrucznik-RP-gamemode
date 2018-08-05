@@ -142,47 +142,38 @@ Zaladuj3DTexty()
     CreateDynamic3DTextLabel("Paczka z zio³em\n/get drugs", 0xFFA500AA, -1022.34930420,-2158.46484375,33.91813278, 30.0);
 	CreateDynamic3DTextLabel("Helvetica Cargo Ltd.", 0xAA3333AA, 597.1277,-1248.6479,18.2734, 50.0);
 	CreateDynamic3DTextLabel("Fabryka Broni", 0xAA3333AA, -2119.5469,-178.5679,35.3203, 50.0); //Factory SF
-	CreateDynamic3DTextLabel("Baza HA", 0xAA3333AA, -50,-269,6.599999, 30.0); //Hitman Agency entrance
 	CreateDynamic3DTextLabel("Koœció³", COLOR_NEWS, 2254.8652,-1334.2078,23.9922, 30.0); //Koœció³
 	//CreateDynamic3DTextLabel("O³tarz", COLOR_NEWS, 1964.2332,-369.1353,1093.7289, 10.0); //Koœció³
 	CreateDynamic3DTextLabel("Kosció³ w Palomino Creek [/slub]", COLOR_NEWS, 2256.8000488281,-43.900001525879,26.5, 10.0); //Koœció³
 	CreateDynamic3DTextLabel("Baza Puro Cubano", COLOR_NEWS, -382.5024, -1426.3225, 26.1998, 20.0); //Baza Puro Cubano
 	CreateDynamic3DTextLabel("Witamy na torze ¿u¿lowym\nWpisz /zuzel aby zobaczyc komendy", 0x0080FFFF, -1150.0270,-990.5195,130.8855, 10.0); //Tor ¿u¿lowy
-	CreateDynamic3DTextLabel("P¹czkarnia u Alena", 0x0080FFFF, 1038.1452636719, -1339.3377685547,13.72, 20.0); //P¹czkarnia 26
-	CreateDynamic3DTextLabel("Basen 'Tsunami'", COLOR_BLUE, 1210.552734375,-1749.1850585938,13.593885421753, 50.0);
 	CreateDynamic3DTextLabel("Publiczne\nTory szkoleniowe FBI", COLOR_NEWS, 1271.0920,-1667.8794,19.7344, 10.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 60);
     CreateDynamic3DTextLabel("Wyjœcie z toru", COLOR_NEWS, 1630.513671875,5232.2626953125,2.6707870960236, 10.0);
     CreateDynamic3DTextLabel("Wyjœcie z toru", COLOR_NEWS, -433.55599975586,-3812.8073730469,176.7035064697, 10.0);
-    CreateDynamic3DTextLabel("$$ Bymber Casino $$", TEAM_GROVE_COLOR, 1022.7183837891,-1122.4310302734,23.871517181396, 50.0);
     CreateDynamic3DTextLabel("Przebieralnia", COLOR_NEWS, 988.94909667969,-3676.5551757813,1.2307510375977, 10.0);
     CreateDynamic3DTextLabel("Przebieralnia", COLOR_NEWS, 994.54052734375,-3676.474609375,1.2307510375977, 10.0);
     CreateDynamic3DTextLabel("Sala przes³uchañ", COLOR_NEWS, 276.32934570313,122.20029449463,1004.1166992188, 10.0);
     CreateDynamic3DTextLabel("SAN - g³ówne wejœcie", COLOR_NEWS, 646.9418,-1355.8645,13.5625, 30.0);
     CreateDynamic3DTextLabel("Dyrekcja", COLOR_BLUE, 1523.0439,-1466.9510,64.7786, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 32);
     CreateDynamic3DTextLabel("Sala posiedzeñ", COLOR_BLUE, -778.3271484375,496.4326171875,1368.5303955078, 5.0);
-    CreateDynamic3DTextLabel("Zaklad Bukmaherski", COLOR_BLUE, 1631.7883300781,-1171.4095458984,24.078125, 15.0);
     CreateDynamic3DTextLabel("Gabinet Oyabuna", COLOR_BLUE, 368.3667,193.8689,1008.3828, 5.0);
     CreateDynamic3DTextLabel("Studio tatua¿u", COLOR_BLUE, 2292.3088,-1723.3538,13.5469, 10.0);
-    CreateDynamic3DTextLabel("Stare studio tatua¿u", COLOR_BLUE, 1975.9598388672,-2036.7775878906,13.546875, 5.0);
     CreateDynamic3DTextLabel("Verte Bank\nOddzia³ Los Santos", COLOR_BLUE, 1462.395751,-1012.391174,26.843799, 10.0);
     CreateDynamic3DTextLabel("Verte Bank\nOddzia³ Palomino Creek", COLOR_BLUE, 2302.7798,-15.9637,26.4844, 10.0);
-    CreateDynamic3DTextLabel("Motel 'Dziki Tygrys'", 0xFF69B4, 1941.1919,-2115.6655,13.6953, 10.0);
     CreateDynamic3DTextLabel("Biuro\nKorporacji Transportowej", COLOR_BLUE, 2518.0, -2127.0, 13.5, 7.0);
     CreateDynamic3DTextLabel("Tylne wejœcie", COLOR_BLUE, 593.5989,-1489.5365,15.2650, 5.0);
 
 	//--------------[Moje Pickupy i 3D moje 3d texty]---------------- {9ACD32}
 
 	CreateDynamic3DTextLabel("Komisariat", 0x0080FFFF, 1553.3929,-1675.4796,16.1953, 40.0); //Wejœcie do komisariatu
-    CreateDynamic3DTextLabel("Szpital Wszystkich Swiêtych", 0xFF6347FF, 1173.3959,-1323.5605,15.3924, 25.0);
     CreateDynamic3DTextLabel("Jetty Lounge", 0x9ACD32AA, 725.7198,-1439.3527,13.5391, 30.0);
     CreateDynamic3DTextLabel("Taras", 0x9ACD32AA, 725.4005,-1450.4960,17.6953, 30.0);
-    CreateDynamic3DTextLabel("Agencja Ochrony braci Nakajima", 0xFF0000FF, 2793.9031,-1087.2518,30.7188, 30.0);
     new str2[512];
     str2 = "{FFA500}Dowód osobisty - {9ACD32}5000$ +akt urodz.\n{FFA500}Wydanie Prawa Jazdy - {9ACD32}20 000$ +zal. egz.\n {FFA500}Patent ¯eglarski - {9ACD32}350 000$\n {FFA500}Pozwolenie na bron - {9ACD32}500 000$\n {FFA500}Licencja Pilota - {9ACD32}5 000 000$\n {FFA500}Karta wêdkarska - {9ACD32}10 000$\n{9ACD32}Egzamin teoretyczny - 10 000${FFA500}\n{9ACD32}Egzamin praktyczny- {9ACD32} 15 000$";
     CreateDynamic3DTextLabel(str2, COLOR_NEWS, 1099.1101,1059.0592,-19.6241,12,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 50);//Cennik DMV
     str2 = "BACZNOŒÆ \n{7CFC00}By nie zostaæ oszukanym:\n {8B0000}1. NIGDY NIE GRAJ gdy ktoœ chce graæ o wiêcej ni¿ ma w {FFFFFF}/sprawdzkase [ID]\n{9ACD32}Je¿eli mimo to zostaniesz oszukany NATYCHMIAST zg³oœ ten fakt na {FFFFFF}/report{9ACD32} - oszust otrzyma od razu blocka\nGdy taka osoba otrzyma blokadê ty masz 10min na napisanie na niego skargi\nW ten sposób mo¿esz odzyskaæ nawet 100%% wygranej!!";
 	CreateDynamic3DTextLabel(str2, COLOR_PANICRED ,1032.8098,-1091.7827,-66.5729, 20.0);
-    CreateDynamic3DTextLabel("Los Santos Police Department\n{00FFCC}Zaœwiadczenia o niekaralnoœæi\nKoszt: {9ACD32}18 000${0080FF}", COLOR_BLUE ,252.3918,117.3390,1005.2188, 2.5);//36
+    CreateDynamic3DTextLabel("San Andreas Police Department\n{00FFCC}Zaœwiadczenia o niekaralnoœæi\nKoszt: {9ACD32}18 000${0080FF}", COLOR_BLUE ,252.3918,117.3390,1005.2188, 2.5);//36
 
     CreateDynamic3DTextLabel("Taras PD", COLOR_BLUE ,214.9873,121.0619,999.0156, 2.5);//36
 
@@ -209,11 +200,8 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("Ma³a Sala S¹dowa", COLOR_GREEN, -1779.0680,500.3323,-18.9341, 8.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 75);//36
 	CreateDynamic3DTextLabel("Adwokatura, Prokuratura\nGabinety Sêdziów", COLOR_GREEN, -1778.8135,528.1346,-18.9341, 8.0,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 75);//36
 
-	CreateDynamic3DTextLabel("Sex Shop", 0xFF00FFAA, 1087.7860,-922.7472,43.3906, 17.0);
 	CreateDynamic3DTextLabel("Aby rozpocz¹æ zakupy wpisz /kupdildo", 0xFF00FFAA, -105.0829,-10.6207,1000.7188, 5.0);
 	CreateDynamic3DTextLabel("Dystrybutor\nWpisz /tankuj", COLOR_BLUE ,-1130.3420,-1018.1770,129.2188, 10.0);
-	CreateDynamic3DTextLabel("Glen Park Bar", COLOR_BLUE ,1970.8337,-1285.3256,28.4919, 15.0);
-	CreateDynamic3DTextLabel("Mrucznikowy Gun Shop'", COLOR_BLUE ,1791.212036,-1164.631713,23.828100, 15.0);
 	
 	CreateDynamic3DTextLabel("{FFFFFF}{FF0000}J{FFFFFF}ack {FF0000}S{FFFFFF}imon\nNadwodny Arcymak Gubernatora", 0x008080FF, 1528.4802, -1458.5370, 67.3899, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 80);
  	CreateDynamic3DTextLabel("{FFFFFF}Biuro Dyrektora GPB", 0x008080FF, 1513.5140, -1467.9963, 69.3863, 5.0,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 80);
@@ -240,12 +228,6 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("Wejscie tylko dla personelu \n(wpisz /wyjdz aby wejsc)", COLOR_BLUE ,562.2107,-2029.9917,16.1670, 2.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 30);
 	CreateDynamic3DTextLabel("Trampoliny", COLOR_BLUE ,578.6193,-2195.7708,1.6288, 3.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 30);
 	CreateDynamic3DTextLabel("U¿yj: /kupkredyty", COLOR_BLUE ,570.63, -2031.03, 16.2, 3.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 30);
-//sklepy z ubraniami
-	CreateDynamic3DTextLabel("Sub Urban", COLOR_BLUE ,2112.7527,-1212.0103,23.9637, 20.0);
-	CreateDynamic3DTextLabel("ZIP", COLOR_BLUE ,1456.7676,-1138.7638,23.9991, 20.0);
-	CreateDynamic3DTextLabel("Victim", COLOR_BLUE ,459.5163,-1501.4186,31.0371, 20.0);
-	CreateDynamic3DTextLabel("Pro Laps", COLOR_BLUE ,500.1234,-1359.6345,16.2776, 20.0);
-	CreateDynamic3DTextLabel("Binco", COLOR_BLUE ,2244.2336,-1665.2026,15.4766, 20.0);
 
 //-------------------------------[Przystanki autobusowe]----------------------------------------
 
@@ -356,15 +338,10 @@ Zaladuj3DTexty()
 
 	//3d texty dynamicznych interioró
 	CreateDynamic3DTextLabel("Dom na Groove Street", COLOR_BLUE, 2495.576171875,-1689.9849853516,14.765625, 15.0);
-	CreateDynamic3DTextLabel("Bar", COLOR_BLUE, 2309.2565917969,-1644.1251220703,14.82704348022, 15.0);
 	CreateDynamic3DTextLabel("Melina", COLOR_BLUE, 2165.9409179688,-1671.8609619141,15.074726104736, 15.0);
 	CreateDynamic3DTextLabel("Szamboa Gym", COLOR_BLUE, 2229.2248535156,-1721.9586181641,13.567801475525, 15.0);
-	CreateDynamic3DTextLabel("Cluckin'Bell", COLOR_BLUE, 2397.3500976563,-1898.1529541016,13.546875, 15.0);
 	//CreateDynamic3DTextLabel("Pizzeria", COLOR_BLUE, 2104.4970703125,-1806.3927001953,13.5546875, 15.0);
-	CreateDynamic3DTextLabel("Sklep 24/7", COLOR_BLUE, 1833.1099853516,-1842.603515625,13.578125, 15.0);
-	CreateDynamic3DTextLabel("Motel Jefferson", COLOR_BLUE, 2232.5,-1159.7940673828,25.890625, 15.0);
 	CreateDynamic3DTextLabel("Dom na Las Collinas", COLOR_BLUE, 2351.8894042969,-1169.4614257813,28.001684188843, 15.0);
-	CreateDynamic3DTextLabel("Pig Pen", COLOR_BLUE, 2421.0134277344,-1220.2153320313,25.500587463379, 15.0);
 	CreateDynamic3DTextLabel("Cluckin'Bell", COLOR_BLUE, 22420.5959472656,-1508.7227783203,23.992208480835, 15.0);
 
 	CreateDynamic3DTextLabel("{FF00FF}V{FFFFFF}inyl {FF00FF}C{FFFFFF}lub", COLOR_BLUE, 816.0999,-1386.8,13.6, 10.0);//VIP VINYL club central
@@ -375,28 +352,16 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("{FFFFFF}Wejscie za Lade!",0xFFFFFF,495.5948,-1503.1011,41.3900,5,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
 	CreateDynamic3DTextLabel("{FFFFFF}Tu Rozpoczniesz impreze \n {FF0000}Wpisz /konsola \n {FFFFFF}a ukaze ci sie lista streamow !",0xFFFFFF,488.2908,-1492.8959,43.6700,5,INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
 	CreateDynamic3DTextLabel("{FF00FF}E{FFFFFF}xclusive {FF00FF}C{FFFFFF}lub", COLOR_BLUE, 931.09,919.29,42.59, 15.0);
-	CreateDynamic3DTextLabel("Sklep spo¿ywczy", COLOR_BLUE, 1315.1501464844,-898.62475585938,39.578125, 15.0);
-	CreateDynamic3DTextLabel("Burger Shot", COLOR_BLUE, 1198.8435058594,-919.0625,43.114803314209, 15.0);
-	CreateDynamic3DTextLabel("Sklepik przy stacji Xoomer", COLOR_BLUE, 999.41522216797,-920.31256103516,42.1796875, 15.0);
 	CreateDynamic3DTextLabel("Muzeum sztuki wspó³czesnej", COLOR_BLUE, 1698.8944091797,-1667.6840820313,20.194225311279, 15.0);
 	CreateDynamic3DTextLabel("Muzeum sztuki wspó³czesnej", COLOR_BLUE, 1727.1125488281,-1635.5847167969,20.216684341431, 15.0);
-	CreateDynamic3DTextLabel("Sklep wielobran¿owy", COLOR_BLUE, 1352.5844726563,-1758.1843261719,13.5078125, 15.0);
-	CreateDynamic3DTextLabel("Carniceria Club", COLOR_NEWS, 2501.8083496094,-1494.3854980469,24.0, 15.0);
-	CreateDynamic3DTextLabel("Burger Shot", COLOR_BLUE, 812.56213378906,-1616.4566650391,13.546875, 15.0);
-	CreateDynamic3DTextLabel("Cluckin'Bell", COLOR_BLUE, 927.34912109375,-1352.9412841797,13.376730, 15.0);//127
 	CreateDynamic3DTextLabel("Salon Aut", COLOR_BLUE, 2132.0371,-1149.7332,24.2372, 15.0);//128
 	CreateDynamic3DTextLabel("Stocznia", COLOR_BLUE, 857.3464,-2100.0881,9.8666, 15.0);//UHA
     CreateDynamic3DTextLabel("Fabryka pojazdów lataj¹cych", COLOR_BLUE, -1262.5095,40.3263,14.1392, 15.0);//UHA
 	CreateDynamic3DTextLabel("Naprawa ³odzi", COLOR_BLUE, 698.51708984375 , -2050.6135253906 , 1.4432492256165, 15.0);//129
 	CreateDynamic3DTextLabel("Wejœcie na dach", COLOR_BLUE, 2289.8876953125,-1206.8327636719,-18.008888244629, 15.0);//130
 //3d texty wejscia
-	CreateDynamic3DTextLabel("Stacja benzynowa", COLOR_BLUE, 660.12963867188,-573.84887695313,16.3359375, 15.0);//131
 	//CreateDynamic3DTextLabel("Cowboy Bar", COLOR_BLUE, 682.03063964844,-473.62811279297,16.425407409668, 15.0);//132
 	CreateDynamic3DTextLabel("Rada lokalna Dillimore", COLOR_BLUE, 695.07702636719,-499.34088134766,16.3359375, 15.0);//133
-	CreateDynamic3DTextLabel("Solarin Indrusties", COLOR_BLUE, 854.50817871094,-603.81109619141,18.421875, 15.0);//134
-	CreateDynamic3DTextLabel("Ammu-nation", COLOR_BLUE, 712.97113037109,-499.08493041992,16.3359375, 15.0);//135
-	CreateDynamic3DTextLabel("Tor rowerowy masakra", COLOR_BLUE, 701.93713378906,-520.00042724609,16.336055755615, 15.0);//136
-	CreateDynamic3DTextLabel("24/7", COLOR_BLUE, 691.23492431641,-546.91967773438,16.3359375, 15.0);//137
 	CreateDynamic3DTextLabel("Przejœcie do cel\n U¿yj: /wejdz", COLOR_GRAD1, -1674.5769,903.1641,-48.9141, 3.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);//138
 
 	CreateDynamic3DTextLabel("Wyjœcie", COLOR_PANICRED,  -1674.4122,917.7183,-52.4141, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);//nowe komi
@@ -454,8 +419,6 @@ Zaladuj3DTexty()
     CreateDynamic3DTextLabel("Wejœcie ewakuacyjne", COLOR_LIGHTBLUE, 1286.0413,-1329.2007,13.5515, 9.0);
     CreateDynamic3DTextLabel("Wyjœcie ewakuacyjne", COLOR_LIGHTBLUE, 1305.0424,-1291.6113,35.6751, 9.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 501);
     CreateDynamic3DTextLabel("Sala rozpraw", COLOR_LIGHTBLUE, 1297.2946,-1300.0739,37.9, 7.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 501);
-
-    CreateDynamic3DTextLabel("Pub\nel'pueblo", 0xE97900FF, 2151.60083, -1013.74762, 62.23438, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
     CreateDynamic3DTextLabel("Firma kurierska\n{FFFFFF}Praca dorywcza (/{929292}dolacz{FFFFFF})", 0x99311EFF, 1751.4445, -2054.9761, 14.5, 25.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
 
     //FD

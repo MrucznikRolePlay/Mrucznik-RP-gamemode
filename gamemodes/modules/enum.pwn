@@ -1,4 +1,15 @@
 //enum.pwn
+enum eBizData {
+    eBizName[32],
+    Float:eBizWejX,
+    Float:eBizWejY,
+    Float:eBizWejZ,
+    Float:eBizWyjX,
+    Float:eBizWyjY,
+    Float:eBizWyjZ,
+    eBizInt,
+    eBizMoney
+};
 enum hqZgloszenia {
     zgloszenie_kiedy[36], // kiedy nadane zgloszenie
     zgloszenie_nadal[MAX_PLAYER_NAME], // nick ktory nadal zgloszenie
@@ -438,7 +449,7 @@ new VehiclePrice[211] = {
 
 new FractionNames[][40] = {
     "Brak",
-    "Los Santos Police Department",
+    "San Andreas Police Department",
     "Federal Bureau of Investigation",
     "San Andreas Sherrifs Department",
     "Los Santos Medical Center",

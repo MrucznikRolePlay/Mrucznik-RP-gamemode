@@ -673,6 +673,37 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
+			case 14:
+			{
+				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Nowy interior LSMC.");
+				SendClientMessage(playerid,COLOR_WHITE,"Usuniête zbêdne obiekty (bank, parking przy LSMC).");
+				SendClientMessage(playerid,COLOR_WHITE,"Wróci³a stara baza mechów.");
+				SendClientMessage(playerid,COLOR_WHITE,"Zaktualizowano i zoptymalizowano obiekty.");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Modyfikacje komend   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Nowy /komunikat dla biznesów.");
+				SendClientMessage(playerid,COLOR_WHITE,"Maska od [2] rangi dla FBI.");
+				SendClientMessage(playerid,COLOR_WHITE,"System Nieruchomoœci - /biznespomoc.");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano /sprzedajmats.");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Personalizacja frakcji   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Zmiana skina dla YKZ.");
+				SendClientMessage(playerid,COLOR_WHITE,"Zmiana ceny kursu taksówek.");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Skryptowe   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawki AC.");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano znaczniki na mapê.");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano komunikat dla graczy przy roz³¹czaniu siê gracza w pobli¿u.");
+				if(PlayerInfo[playerid][pAdmin] >= 1)
+				{
+					SendClientMessage(playerid,COLOR_BLUE,"----------   Komendy i poprawki   ---------");
+					SendClientMessage(playerid,COLOR_WHITE,"Poprawki do /spec (mo¿e pomog¹).");
+					SendClientMessage(playerid,COLOR_WHITE,"Komenda /zbijwl nie wyrzuca komunikatu o policjancie w pobli¿u, gdy ten jest na specu.");
+					SendClientMessage(playerid,COLOR_WHITE,"Komenda /dajbiznes i /zabierzbiznes dla Adminów z 5000lvl i wy¿ej.");
+				}
+				SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.5.92 <<<_______________________|");
+
+				showChangeLog(playerid);
+			}
 		}
 	}
 	return 0;
@@ -697,6 +728,7 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.9\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.811\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.810", string);
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.92", string);
 		ShowPlayerDialogEx(playerid, 1962, DIALOG_STYLE_LIST, "Wybierz aktualizacjê", string, "Ok", "WyjdŸ");
 	}
 	return 1;

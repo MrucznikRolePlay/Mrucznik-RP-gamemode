@@ -5,6 +5,7 @@
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
 
+#include "modules/new/niceczlowiek/definicje.pwn"
 
 #define         MAX_VEHICLE_ID_CHANGES          3
 
@@ -24,7 +25,8 @@
 #define OSTATNIE_ZGLOSZENIA 10
 #define OSTATNIE_ZGLOSZENIASASP 10
 
-
+//BIZNESY
+#define MAX_BIZNES 71
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
 #define MRP_PREM_HOURS    15      //Ilosc godzin potrzebnych do przegrania

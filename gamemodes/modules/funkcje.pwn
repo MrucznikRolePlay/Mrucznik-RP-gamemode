@@ -1,5 +1,38 @@
 //funkcje.pwn
 
+stock IsVehicleEmpty(vehicleid)
+{
+  for(new i; i < MAX_PLAYERS; i++)
+  {
+    if(IsPlayerConnected(i) && IsPlayerInAnyVehicle(i) && GetPlayerVehicleID(i) == vehicleid) return 0;
+  }
+  return 1;
+}
+
+stock ZaladujBiznesy()
+{
+    for(new i=0;i<MAX_BIZNES;i++)
+	{
+		CreateDynamicPickup(19523, 1, BizData[i][eBizWejX], BizData[i][eBizWejY], BizData[i][eBizWejZ], -1, -1, -1, 125.0);
+    	CreateDynamic3DTextLabel(BizData[i][eBizName], 0x008080FF, BizData[i][eBizWejX], BizData[i][eBizWejY], BizData[i][eBizWejZ]+0.4, 10.0);
+	}
+	PickupSklep01 = CreateDynamicPickup(1239, 3, BizData[10][eBizWyjX], BizData[10][eBizWyjY], BizData[10][eBizWyjZ], -1, -1, -1, 10.0);//ZIP
+	return 1;
+}
+stock Biz_Owner(biz)
+{
+    new lStr[64];
+    format(lStr, 64, "SELECT `Nick` FROM mru_konta WHERE `Bizz`='%d'", biz);
+    mysql_query(lStr);
+    mysql_store_result();
+    if(mysql_num_rows())
+    {
+    	mysql_fetch_row_format(lStr, "|");
+		mysql_free_result();
+	}
+    return lStr;
+}
+
 stock GetTickDiff(newtick, oldtick)
 {
 	if (oldtick < 0 && newtick >= 0) {
@@ -2220,7 +2253,7 @@ IsASklepZBronia(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(GetPlayerOrg(playerid) == 21 && PlayerInfo[playerid][pRank] > 3 || GetPlayerOrg(playerid) == 22 && PlayerInfo[playerid][pRank] > 3 || GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] > 3)
+		if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
 		{
 		    return 1;
 		}
@@ -3777,7 +3810,84 @@ IsAAdministrator(playerid)
 		return 1;
 	return 0;
 }
-
+WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw)
+{
+    if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
+    {
+        if(x==x2 && y==y2 && z==z2) return sendErrorMessage(playerid, "Nie mo¿na tutaj wejœæ.");
+        if (vw == 55) // Bymber Casino 55
+        {
+            if(PlayerInfo[playerid][pLevel] < 3) return sendTipMessageEx(playerid, COLOR_GRAD1, "Tylko gracze z conajmniej 3 lvl mog¹ graæ w kasynie!");
+            SetPlayerPosEx(playerid, x2, y2, z2);
+            SendClientMessage(playerid, COLOR_GREEN, "Witamy w Bymber Casino.");
+            SendClientMessage(playerid, COLOR_WHITE, "W naszym kasynie obowi¹zuj¹ nastêpuj¹ce stawki za rozpoczêcie gry:");
+            SendClientMessage(playerid, COLOR_GREEN, "Kostki - (0.5 proc. podatku) za rzut /kostka || Black Jack - 100$ za kartê /oczko");
+            SendClientMessage(playerid, COLOR_GREEN, "Ko³o fortuny - 5 000$ za obrót /kf || Ruletka - 10 000$ za zakrêcenie /ruletka");
+            Wchodzenie(playerid);
+            //SetPlayerVirtualWorld(playerid, vw);
+            SetPlayerInterior(playerid, interior);
+            SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
+            SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
+            SendClientMessage(playerid, COLOR_WHITE, "Okazuje siê, ¿e do kasyna nie mozna wnosiæ broni.");
+            SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ ochronie.");
+            SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
+            SetPVarInt(playerid, "mozeUsunacBronie", 1);
+            ResetPlayerWeapons(playerid);
+            return 1;
+        }
+		else
+		{
+    		SetPlayerPosEx(playerid, x2, y2, z2);
+	 		SetPlayerVirtualWorld(playerid, vw);
+	 		SetPlayerInterior(playerid, interior);
+        	Wchodzenie(playerid);
+		}
+	}
+	return 1;
+}
+WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw)
+{
+    if(x==x2 && y==y2 && z==z2) return 0;
+    if(IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z) && vw == 55)// KASYNO 55
+	{
+    	if(GetPVarInt(playerid, "kostka") == 1) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz wyjœæ z kasyna bêd¹c w trakcie gry!");
+		PlayerPlaySound(playerid, 5454, 0.0, 0.0, 0.0);
+		SetPlayerPosEx(playerid, x2, y2, z2);
+		SetPlayerVirtualWorld(playerid, 0);
+		SetPlayerInterior(playerid, interior);
+		Wchodzenie(playerid);
+	}
+    else if(IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z) && GetPlayerVirtualWorld(playerid) == vw)
+    {
+        if(vw == 43)// BASEN 43
+        {
+        	if(PlayerInfo[playerid][pChar] > 0)
+			{
+				SetPlayerSkin(playerid, PlayerInfo[playerid][pChar]);
+				SetPlayerPosEx(playerid, x2, y2, z2);
+	 			SetPlayerVirtualWorld(playerid, 0);
+	 			SetPlayerInterior(playerid, interior);
+        		Wchodzenie(playerid);
+			}
+			else
+			{
+				SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+				SetPlayerPosEx(playerid, x2, y2, z2);
+	 			SetPlayerVirtualWorld(playerid, 0);
+	 			SetPlayerInterior(playerid, interior);
+        		Wchodzenie(playerid);
+			}
+		}
+		else
+		{
+	 		SetPlayerPosEx(playerid, x2, y2, z2);
+	 		SetPlayerVirtualWorld(playerid, 0);
+	 		SetPlayerInterior(playerid, interior);
+        	Wchodzenie(playerid);
+		}
+	}
+	return 1;
+}
 Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja)
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
@@ -4225,6 +4335,12 @@ stock KickLog(text[])
 stock BanLog(text[])
 {
     new plik[32] = "logi/ban.log";
+    Log(plik, text);
+}
+
+stock BiznesLog(text[])
+{
+    new plik[32] = "logi/biznesy.log";
     Log(plik, text);
 }
 
@@ -7545,7 +7661,7 @@ PolicjantWStrefie(Float:radi, playerid)
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
 	    	if(IsPlayerInRangeOfPoint(i, radi, rangex, rangey, rangez))
 	        {
-	            if(IsACop(i))
+	            if(IsACop(i) && Spectate[i] == INVALID_PLAYER_ID)
 	            {
 	            	return 1;
 	            }
@@ -8240,7 +8356,7 @@ public LSMCElevatorFree()
 
 stock ChangeLSMCElevatorState()
 {
-    for(new i=0;i<7;i++)
+    for(new i=0;i<8;i++)
     {
         if(ElevatorObject[i] == 0)  break;
         if(ElevatorDoorsState[i]) //close them
@@ -10649,7 +10765,7 @@ stock Oil_UpdateRandomKeys(playerid)
 
 stock Oil_OnPlayerPress(playerid, keys)
 {
-    if(GetTickCount() - GetPVarInt(playerid, "oil_press") < 100) return 0;
+    if(GetTickDiff(GetTickCount(), GetPVarInt(playerid, "oil_press")) < 100) return 0;
     if((keys == KEY_UP) && PlayerOilKeys[playerid][2] == 3) Oil_PressedOK(playerid);
     else if((keys == KEY_DOWN) && PlayerOilKeys[playerid][2] == 4) Oil_PressedOK(playerid);
     else if((keys == KEY_LEFT*2) && PlayerOilKeys[playerid][2] == 1) Oil_PressedOK(playerid);
