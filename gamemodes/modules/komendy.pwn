@@ -29304,7 +29304,7 @@ CMD:kurs(playerid, params[])
                 }
                 else if(GetVehicleModel(vehicleid) == 431 || GetVehicleModel(vehicleid) == 437)
                 {
-                    if(moneys < 25 || moneys > 2000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena biletu od $25 do $2000 !"); return 1; }
+                    if(moneys < 25 || moneys > 2500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena biletu od $25 do $2500 !"); return 1; }
 					BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 					GetPlayerName(playerid,sendername,sizeof(sendername));
 					format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: $%d.", sendername, TransportValue[playerid]);
@@ -29326,7 +29326,7 @@ CMD:kurs(playerid, params[])
                 }
                 else
                 {
-    				if(moneys < 150 || moneys > 900) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $150 do $900 !"); return 1; }
+    				if(moneys < 150 || moneys > 2000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $150 do $2000 !"); return 1; }
     				TaxiDrivers += 1; TransportDuty[playerid] = 1; TransportValue[playerid] = moneys;
     				GetPlayerName(playerid,sendername,sizeof(sendername));
     				format(string, sizeof(string), "Taksówkarz %s jest na s³u¿bie wpisz /wezwij taxi aby skorzystaæ z jego us³ug, koszt %d$", sendername, TransportValue[playerid]);
@@ -36171,16 +36171,16 @@ CMD:temat(playerid,cmdtext[])
 CMD:rezonans(playerid,cmdtext[])
 {
     if(!IsAMedyk(playerid)) return 1;
-	if(IsPlayerInRangeOfPoint(playerid,8,1161.9297, -1287.5546, 30.7001))
+	if(IsPlayerInRangeOfPoint(playerid,8,1157.257324, -1325.527221, 133.955657))
 	{
  		if(rezonansmove == 0)
 		{
-  			MoveDynamicObject(rezonans, 1161.9297, -1284.1246, 30.7001, 1,  0.00001, 0.00000, 0.00000);
+  			MoveDynamicObject(rezonans, 1157.257324, -1320.927124, 133.955657, 1);
   			rezonansmove = 1;
 		}
 		else
 		{
-  			MoveDynamicObject(rezonans, 1161.9297, -1287.5546, 30.7001, 1,  0.00000, 0.00000, 0.00000);
+  			MoveDynamicObject(rezonans, 1157.257324, -1325.527221, 133.955657, 1);
   			rezonansmove  = 0;
 		}
 		return 1;
