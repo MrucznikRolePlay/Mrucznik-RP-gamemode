@@ -19,11 +19,9 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_774d02843e4b_key -iv $encrypted_774d02843e4b_iv
   -in id_rsa.enc -out id_rsa -d
 
-before_script:
+script:
 - chmod +x CI_scripts/*
 - CI_scripts/get_compiler.sh
-
-script:
 - CI_scripts/compile.sh
 
 before_deploy:
