@@ -7661,7 +7661,7 @@ PolicjantWStrefie(Float:radi, playerid)
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
 	    	if(IsPlayerInRangeOfPoint(i, radi, rangex, rangey, rangez))
 	        {
-	            if(IsACop(i) && Spectate[i] != INVALID_PLAYER_ID)
+	            if(IsACop(i) && Spectate[i] == INVALID_PLAYER_ID)
 	            {
 	            	return 1;
 	            }
