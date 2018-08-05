@@ -896,7 +896,7 @@ public OnPlayerDisconnect(playerid, reason)
         "/q",
         "Kick/Ban"
     };
-    if(Spectate[playerid] != INVALID_PLAYER_ID)
+    if(Spectate[playerid] == INVALID_PLAYER_ID)
     {
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
