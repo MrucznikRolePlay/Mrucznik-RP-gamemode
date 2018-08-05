@@ -9712,7 +9712,7 @@ CMD:spec(playerid, params[])
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
             SetPlayerColor(playerid,COLOR_SPEC);
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"));
+			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"));
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);
@@ -21022,7 +21022,7 @@ CMD:wyjdz(playerid)
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0, 627.1783, -1470.2279, 90.7054))//biura fbi srodek
+		else if(IsPlayerInRangeOfPoint(playerid, 10.0, 627.1783, -1470.2279, 90.7054) && GetPlayerVirtualWorld(playerid) == 10)//biura fbi srodek
 		{
 		    SetPlayerPosEx(playerid, 608.19793701172, -1458.9837646484, 14.387271881104);//biura fbi wejscie
 		    GameTextForPlayer(playerid, "~w~Zegnamy", 5000, 1);
