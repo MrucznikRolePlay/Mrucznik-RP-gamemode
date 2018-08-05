@@ -1708,7 +1708,8 @@ public OnPlayerSpawn(playerid)
     {
         SetPVarInt(playerid, "scena-allow", 1);
     }
-
+    //Spawn Pos
+	SetTimerEx("SpawnPosInfo", 1000, false, "i", playerid);
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerSpawn - end", GetNick(playerid), playerid);
 	#endif
