@@ -17908,28 +17908,6 @@ CMD:kurtka(playerid)
 	}
 	return 1;
 }
-CMD:podajpoz(playerid, params[])
-{
-	new string[64];
-
-    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
-	{
-	    new giveplayerid;
-		if( sscanf(params, "k<fix>", giveplayerid))
-		{
-			sendTipMessage(playerid, "U¿yj /getposp [id gracza]");
-			return 1;
-		}
-
-		new Float:gx, Float:gy, Float:gz;
-		gx = GetPVarFloat(playerid,"xposspawn");
-		gy = GetPVarFloat(playerid,"yposspawn");
-		gz = GetPVarFloat(playerid,"zposspawn");
-		format(string, sizeof(string), "Pozycja: %.2f, %.2f, %.2f", gx, gy, gz);
-		SendClientMessage(playerid, COLOR_WHITE, string);
-	}
-	return 1;
-}
 CMD:mundur(playerid) return cmd_fskin(playerid);
 CMD:uniform(playerid) return cmd_fskin(playerid);
 CMD:fskin(playerid)
