@@ -5535,7 +5535,7 @@ CMD:brama(playerid)
 				}
 			}
 		}
-		if (GetPlayerFraction(playerid) == FRAC_NOA || PlayerInfo[playerid][pAdmin] >= 1000)
+		if (GetPlayerFraction(playerid) == FRAC_NOA || PlayerInfo[playerid][pAdmin] >= 1000 || GetPlayerOrg(playerid) == 16)//warsztat niebieski
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 20, 2313.5000000,-1217.6999512,24.7000008) || IsPlayerInRangeOfPoint(playerid, 12, 2313.5000000,-1217.6999512,24.7000008))
 			{
@@ -17908,14 +17908,13 @@ CMD:kurtka(playerid)
 	}
 	return 1;
 }
-
 CMD:mundur(playerid) return cmd_fskin(playerid);
 CMD:uniform(playerid) return cmd_fskin(playerid);
 CMD:fskin(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (IsAtClothShop(playerid) || (GetPlayerOrg(playerid) == FAMILY_RSC && IsPlayerInRangeOfPoint(playerid, 4.0, 1636.9476,-1813.6195,13.5263)) )
+		if (IsAtClothShop(playerid) || (GetPlayerOrg(playerid) == FAMILY_RSC && IsPlayerInRangeOfPoint(playerid, 4.0, 1636.9476,-1813.6195,13.5263)) || IsPlayerInRangeOfPoint(playerid, 4.0, GetPVarFloat(playerid,"xposspawn"),GetPVarFloat(playerid,"yposspawn"),GetPVarFloat(playerid,"zposspawn")))
 		{
             //W³¹czenie trybu skinów
             if(GetPVarInt(playerid, "skin-select") != 0) return DestroySkinSelection(playerid);
@@ -17934,7 +17933,7 @@ CMD:fskin(playerid)
 		}
 		else
 		{
-			SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w sklepie z ubraniami !");
+			SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w sklepie z ubraniami lub na miejscu spawnu!");
 			return 1;
 		}
 	}
