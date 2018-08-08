@@ -35,7 +35,7 @@ CMD:mruczniki(playerid, params[])
 		SetPlayerAttachedObject(playerid,1,1247,2,0.514999,-0.027999,0.044999,0.000000,-1.700000,-7.400016);
 		MrucznikiON[playerid] = 1;
 	}
-	else if(!strcmp(name, "Hikaru_Kyoudai", true) && MrucznikiON[playerid] == 0)//2
+	else if(!strcmp(name, "Kenyon_Carrington", true) && MrucznikiON[playerid] == 0)//2
 	{
 		PlayerLabel[playerid] = Create3DTextLabel("Najlepszy Administrator 2017 roku!", COLOR_RED, 0.0, 0.0, 0.0, 20.0, 0, 1);
 		Attach3DTextLabelToPlayer(PlayerLabel[playerid], playerid, 0.0, 0.0, 0.3);
