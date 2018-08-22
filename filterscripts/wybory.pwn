@@ -1,7 +1,7 @@
-//EXAMPLE_FILTERSCRIPT.pwn
+//wybory.pwn
 
 //-------------------------------------------<< Filterscript >>----------------------------------------------//
-//------------------------------------------[ Modu³: EXAMPLE_FILTERSCRIPT.pwn ]---------------------------------------------//
+//------------------------------------------[ Modu³: wybory.pwn ]---------------------------------------------//
 //Autor:
 /*
 	Mrucznik
@@ -43,6 +43,8 @@
 #define COLOR_GRAD2 		0xBFC0C2FF
 #define MAX_CANDIDATES 		20
 
+#define WYBORY_WYNIKI_PLIK "wyniki.txt"
+
 //-----------------<[ Zmienne: ]>-------------------
 new kandydaci[MAX_CANDIDATES][MAX_PLAYER_NAME];
 new wyniki[MAX_CANDIDATES];
@@ -71,6 +73,15 @@ public OnFilterScriptInit()
 		CreateTextdraws(i);
 	}
 	
+	if(!dini_Exists(WYBORY_WYNIKI_PLIK))
+	{
+		dini_Create(WYBORY_WYNIKI_PLIK);
+		for(new i=0; i<iloscKandydatow; i++)
+		{
+			wyniki[i] = dini_Int(WYBORY_WYNIKI_PLIK, kandydaci[i]);
+		}
+	}
+	
 	pickup = CreateDynamicPickup(1239, 2, 1250.2009,-1445.6368,13.5715 , -1);
 
 	print("\n--------------------------------------");
@@ -87,6 +98,11 @@ public OnFilterScriptExit()
 	}
 
 	DestroyDynamicPickup(pickup);
+	
+	for(new i=0; i<iloscKandydatow; i++)
+	{
+		printf("Wynik kandydata %s: %d", kandydaci[i], wyniki[i]);
+	}
 	
 	print("\n--------------------------------------");
 	print(" Fliterscript 'wybory' wylaczony");
@@ -108,7 +124,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 		format(string, sizeof(string), "Odda³eœ g³os na kandydata nr %d - %s\nDziêkujemy za udzia³ w wyborach!", wyborKandydata[playerid]+1, kandydaci[wyborKandydata[playerid]]);
 		SendClientMessage(playerid, 0xFFFFFFFF, string);
 		wyniki[wyborKandydata[playerid]]++;
-		dini_IntSet("wyniki.txt", kandydaci[wyborKandydata[playerid]], wyniki[wyborKandydata[playerid]]);
+		dini_IntSet(WYBORY_WYNIKI_PLIK, kandydaci[wyborKandydata[playerid]], wyniki[wyborKandydata[playerid]]);
 		
 		new nick[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, nick, sizeof(nick));
@@ -116,7 +132,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 		zaglosowali++;
 		
 		HideElectionTextdraws(playerid);
-		ShowPlayerDialog(playerid, 0, DIALOG_STYLE_MSGBOX, "G³osowanie", string, "OK", "");
+		ShowPlayerDialog(playerid, -1, DIALOG_STYLE_MSGBOX, "G³osowanie", string, "OK", "");
 		CancelSelectTextDraw(playerid);
 	}
 	else

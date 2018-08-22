@@ -38088,11 +38088,11 @@ CMD:setac(playerid, params[])
 	{
 		new string[128];
 		new ac_option;
-		new option;
+		new onoff;
 		
-		if(sscanf(params, "dD(-1)", ac_option, option)) 
+		if(sscanf(params, "dD(-1)", ac_option, onoff)) 
 		{
-			sendTipMessage(playerid, "U¿yj /setac [id opcji] (on = 1, off = 0)");
+			sendTipMessage(playerid, "U¿yj /setac [id opcji] (on = 1, off = 0, -1/nic - status)");
 			return 1; 
 		}
 		
@@ -38112,15 +38112,20 @@ CMD:setac(playerid, params[])
 		}
 		
 		//panel ac
-		if(option == -1)
+		if(onoff == -1)
 		{
 			format(string, sizeof(string), "AC set: %s = %s", nexac_ac_names[ac_option], (IsAntiCheatEnabled(ac_option)) ? "true" : "false");
 			SendClientMessage(playerid, -1, string);
-			EnableAntiCheat(ac_option, option);
+		}
+		else if(onoff == 0 || onoff == 1)
+		{
+			EnableAntiCheat(ac_option, onoff);
+			format(string, sizeof(string), "AC set: %s = %s", nexac_ac_names[ac_option], (IsAntiCheatEnabled(ac_option)) ? "true" : "false");
+			SendClientMessage(playerid, -1, string);
 		}
 		else
 		{
-			SendClientMessage(playerid, -1, "1 - on, 0 - off");
+			SendClientMessage(playerid, -1, "1 - on, 0 - off, -1 - status");
 			return 1; 
 		}
 	}
