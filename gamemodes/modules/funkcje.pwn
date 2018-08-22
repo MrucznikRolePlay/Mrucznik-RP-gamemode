@@ -1568,6 +1568,11 @@ stock GetNick(playerid, rp = false)
 	return nick;
 }
 
+stock GetNumber(playerid)
+{
+	return PlayerInfo[playerid][pPnumber];
+}
+
 stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
 {
     //Kilka sprawdzeñ
@@ -7485,35 +7490,24 @@ SendIRCMessage(channel, color, string[])
 	}
 }
 
-/*SendTeamBeepMessage(team, color, string[])
+SendSMSMessageToAll(senderNumber, message[])
 {
+	format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
 	foreach(Player, i)
 	{
-		if(IsPlayerConnected(i))
+		if(PlayerInfo[i][pPnumber] != 0)
 		{
-		    if(gTeam[i] == team)
-		    {
-				SendClientMessage(i, color, string);
-				RingTone[i] = 20;
-			}
-		}
-	}
-}*/
-
-SendEnemyMessage(color, string[])
-{
-	foreach(Player, i)
-	{
-		if(IsPlayerConnected(i))
-		{
-		    if(gTeam[i] >= 3)
-		    {
-				SendClientMessage(i, color, string);
-			}
+			SendSMSMessage(senderNumber, i, message);
 		}
 	}
 }
 
+SendSMSMessage(senderNumber, reciverid, message[])
+{
+	format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+	SendClientMessage(reciverid, COLOR_YELLOW, string);
+	PlayerPlaySound(reciverid, 6401, 0.0, 0.0, 0.0);
+}
 
 SendAdminMessage(color, string[])
 {

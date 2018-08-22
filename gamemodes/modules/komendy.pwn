@@ -19233,12 +19233,8 @@ CMD:sms(playerid, params[])
 		if ((strcmp("tak", result, true, strlen(result)) == 0) && (strlen(result) == strlen("tak")))
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "Wiadomoœæ dostarczona.");
-			if (gTeam[playerid] == 2 || gTeam[playerid] == 1)
-			{
-				SendClientMessage(playerid, COLOR_YELLOW, "SMS: Nie mam pojêcia o czym mówisz, Nadawca: Marcepan_Marks (555)");
-				RingTone[playerid] = 20;
-				return 1;
-			}
+			SendClientMessage(playerid, COLOR_YELLOW, "SMS: Nie mam pojêcia o czym mówisz, Nadawca: Marcepan_Marks (555)");
+			RingTone[playerid] = 20;
 			return 1;
 		}
 		else
@@ -22118,24 +22114,11 @@ CMD:mole(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /mole [mole text]");
 			return 1;
 		}
-		format(string, sizeof(string), "SMS: %s, Nadawca: Marcepan_Marks (555)",params);
-		if (gTeam[playerid] < 3){SendClientMessage(playerid, COLOR_YELLOW, string);}
-		SendEnemyMessage(COLOR_YELLOW, string);
-
-        format(string, sizeof(string), "CMD_Info: /mole u¿yte przez %s [%d] - %s", GetNick(playerid), playerid, string);
+		
+		SendSMSMessageToAll(555, params);
+		
+        format(string, sizeof(string), "CMD_Info: /mole u¿yte przez %s [%d] - %s", GetNick(playerid), playerid, params);
         CMDLog(string);
-
-		foreach(Player, i)
-		{
-			if(IsPlayerConnected(i))
-			{
-				if(gTeam[i] >= 3 && gPlayerSpawned[i])
-				{
-					RingTone[i] =20;
-				}
-			}
-		}
-		printf("Marcepan_Marks: %s", params);
 	}
 	return 1;
 }
