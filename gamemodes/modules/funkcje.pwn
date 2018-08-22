@@ -1573,6 +1573,16 @@ stock GetNumber(playerid)
 	return PlayerInfo[playerid][pPnumber];
 }
 
+stock FindPlayerByNumber(number)
+{
+	foreach(Player, i)
+	{
+		if(PlayerInfo[i][pPnumber] == number)
+			return i;
+	}
+	return 0;
+}
+
 stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
 {
     //Kilka sprawdzeñ
@@ -5154,6 +5164,28 @@ stock orgIsLeader(playerid)
     return gPlayerOrgLeader[playerid];
 }
 
+GetFractionMembersNumber(fractionid, bool:withOnDutyCheck)
+{
+	new membersNumber;
+	foreach(Player, i)
+	{
+		if(PlayerInfo[i][pMember] == fractionid || PlayerInfo[i][pLider] == fractionid)
+		{
+			if(withOnDutyCheck)
+			{
+				if(fractionid == FRAC_SN && SanDuty[i] == 0)
+					continue;
+				else if((fractionid == FRAC_LSPD || fractionid == FRAC_FBI || fractionid == FRAC_NG || fractionid == FRAC_BOR) && OnDuty[i] == 0)
+					continue;
+				else if( (fractionid == FRAC_LSMC || fractionid == FRAC_LSFD || fractionid == FRAC_GOV || fractionid == FRAC_KT) && JobDuty[i])
+					continue;
+			}
+			membersNumber++;
+		}
+	}
+	return membersNumber;
+}
+
 //--------------------------------------------------- SYTEM ORGANIZACJI --------------------------------------------
 //                                                        END
 
@@ -7492,6 +7524,7 @@ SendIRCMessage(channel, color, string[])
 
 SendSMSMessageToAll(senderNumber, message[])
 {
+	new string[256];
 	format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
 	foreach(Player, i)
 	{
@@ -7504,6 +7537,7 @@ SendSMSMessageToAll(senderNumber, message[])
 
 SendSMSMessage(senderNumber, reciverid, message[])
 {
+	new string[256];
 	format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
 	SendClientMessage(reciverid, COLOR_YELLOW, string);
 	PlayerPlaySound(reciverid, 6401, 0.0, 0.0, 0.0);

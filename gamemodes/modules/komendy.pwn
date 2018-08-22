@@ -19002,7 +19002,7 @@ CMD:call_live(playerid, params[])
 	        new phonenumb;
 			if( sscanf(params, "d", phonenumb))
 			{
-				sendTipMessage(playerid, "U¿yj /call-live [numertelefonu]");
+				sendTipMessage(playerid, "U¿yj /call-live [numerTelefonuOdbiorcy]");
 				return 1;
 			}
 			if(PlayerInfo[playerid][pPnumber] == 0)
@@ -19082,7 +19082,7 @@ CMD:dzwon(playerid, params[])
 		new phonenumb;
 		if( sscanf(params, "dS[128]", phonenumb))
 		{
-			sendTipMessage(playerid, "U¿yj /dzwon [numertelefonu]");
+			sendTipMessage(playerid, "U¿yj /dzwon [numerTelefonuOdbiorcy]");
 			return 1;
 		}
 		if(PlayerInfo[playerid][pPnumber] == 0)
@@ -19212,123 +19212,124 @@ CMD:sms(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, sendername, sizeof(sendername));
 
-	new phonenumb, result[128];
-	if( sscanf(params, "ds[128]", phonenumb, result))
+	new numerTelefonuOdbiorcy, wiadomosc[128];
+	if( sscanf(params, "ds[128]", numerTelefonuOdbiorcy, wiadomosc))
 	{
-		sendTipMessage(playerid, "U¿yj /(t)ext [numertelefonu] [tekst]");
+		sendTipMessage(playerid, "U¿yj /(t)ext [numerTelefonuOdbiorcy] [tekst]");
 		return 1;
 	}
 	if(PlayerInfo[playerid][pPnumber] == 0)
 	{
-		sendErrorMessage(playerid, "Nie posiadasz telefonu...");
+		sendErrorMessage(playerid, "Nie posiadasz telefonu.");
 		return 1;
 	}
-	GetPlayerName(playerid, sendername, sizeof(sendername));
-	format(string, sizeof(string), "* %s wyjmuje telefon.", sendername);
+	if(PhoneOnline[playerid] == 1)
+	{
+		sendErrorMessage(playerid, "Twój telefon jest wy³¹czony. Wpisz /togtel aby go w³¹czyæ.");
+		return 1;
+	}
+	if(numerTelefonuOdbiorcy <= 0)
+	{
+		sendErrorMessage(playerid, "Niepoprawny numer telefonu.");
+		return 1;
+	}
+	
+	new kosztSMS = txtcost;
+	new zarobekPracownikaSAN;
+	new reciverid;
+	if(numerTelefonuOdbiorcy >= 100 && numerTelefonuOdbiorcy <= 150) 
+	{
+		new numerLinii = numerTelefonuOdbiorcy-100;
+		new liczbaPracownikowSAN = GetFractionMembersNumber(FRAC_SN, true);
+		zarobekPracownikaSAN = kosztSMS/liczbaPracownikowSAN;
+		kosztSMS += numerLinii*100;
+		
+        if(gSNLockedLine[numerLinii] || liczbaPracownikowSAN == 0) 
+		{
+			GameTextForPlayer(playerid, "~r~Linia zamknieta", 5000, 1);
+			return 1;
+		}
+	}
+	//zwyk³y sms
+	else if(numerTelefonuOdbiorcy != 555) 
+	{
+		reciverid = FindPlayerByNumber(numerTelefonuOdbiorcy);
+		
+		if(reciverid == 0)
+		{
+			SendClientMessage(playerid, COLOR_GREY, "Nie uda³o siê wys³aæ wiadomoœci - gracz o takim numerze nie jest online!");
+			return 1;
+		}
+		
+		if(PhoneOnline[reciverid] == 1)
+		{
+			sendErrorMessage(playerid, "Nie uda³o siê wys³aæ wiadomoœci - gracz ma wy³¹czony telefon.");
+			return 1;
+		}
+	}
+	
+	if(kaska[playerid] < kosztSMS)
+	{
+		format(string, sizeof(string), "Koszt tego SMS wynosi: %d$, nie masz a¿ tylu pieniêdzy.", kosztSMS);
+		sendErrorMessage(playerid, string);
+		return 1;
+	}
+	
+	
+	//all ok - wysy³anie wiadomoœci
+	format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", sendername);
 	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-
-	if(phonenumb == 555)
-	{
-		if ((strcmp("tak", result, true, strlen(result)) == 0) && (strlen(result) == strlen("tak")))
+	
+	//wysy³anie do odbiorcy
+	if(numerTelefonuOdbiorcy >= 100 && numerTelefonuOdbiorcy <= 150) 
+	{//linia SAN 
+		format(string, sizeof(string), "Dodatkowy koszt p³atnego SMS: %d$", kosztSMS - txtcost);
+		SendClientMessage(playerid, COLOR_WHITE, string);
+		
+		//wysy³anie wiadomoœci + hajs dla SN
+		foreach(Player, i)
 		{
-			SendClientMessage(playerid, COLOR_WHITE, "Wiadomoœæ dostarczona.");
-			SendClientMessage(playerid, COLOR_YELLOW, "SMS: Nie mam pojêcia o czym mówisz, Nadawca: Marcepan_Marks (555)");
-			RingTone[playerid] = 20;
-			return 1;
-		}
-		else
-		{
-			SendClientMessage(playerid, COLOR_YELLOW, "SMS: To proste napisz tak, Nadawca: Marcepan_Marks (555)");
-			RingTone[playerid] = 20;
-			return 1;
-		}
-	}
-	if(phonenumb >= 100 && phonenumb <= 150)
-	{
-		new pnumb = phonenumb-100;
-        if(gSNLockedLine[pnumb]) return GameTextForPlayer(playerid, "~r~Linia zamknieta", 5000, 1);
-		new platny = pnumb*100;
-		new podzielone;
-		if(kaska[playerid] > platny)
-		{
-			foreach(Player, dzielenie)
+			if(GetPlayerFraction(i) == FRAC_SN)
 			{
-				if(IsPlayerConnected(dzielenie))
+				if(SanDuty[i] == 1)
 				{
-					if(PlayerInfo[dzielenie][pMember] == 9 || PlayerInfo[dzielenie][pLider] == 9)
-					{
-						if(SanDuty[dzielenie] == 1)
-						{
-							podzielone++;
-						}
-					}
-				}
-			}
-            if(podzielone == 0) return GameTextForPlayer(playerid, "~r~Linia zamknieta", 5000, 1);
-			new platny2 = platny/podzielone;
-			format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", result,sendername,PlayerInfo[playerid][pPnumber]);
-			SendClientMessage(playerid, COLOR_YELLOW, string);
-			format(string, sizeof(string), "~r~$-%d", platny+txtcost);
-			GameTextForPlayer(playerid, string, 5000, 1);
-			format(string, sizeof(string), "Dodatkowy koszt p³atnego SMS: %d$", platny);
-			SendClientMessage(playerid, COLOR_YELLOW, string);
-			PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-			ZabierzKase(playerid, platny);
-			//biz
-			if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
-			{
-			}
-			else
-			{
-				foreach(Player, i)
-				{
-					if(IsPlayerConnected(i))
-					{
-						if(PlayerInfo[i][pMember] == 9 || PlayerInfo[i][pLider] == 9)
-						{
-							if(SanDuty[i] == 1)
-							{
-								format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", result,sendername,PlayerInfo[playerid][pPnumber]);
-								SendClientMessage(i, COLOR_YELLOW, string);
-								format(string, sizeof(string), "P³atny SMS wygenerowa³: %d$, czyli %d$ dla ka¿dego", platny, platny2);
-								SendClientMessage(i, COLOR_YELLOW, string);
-								DajKase(i, platny2);
-							}
-						}
-					}
+					SendSMSMessage(PlayerInfo[playerid][pPnumber], i, wiadomosc);
+					format(string, sizeof(string), "P³atny SMS wygenerowa³: %d$, czyli %d$ dla ka¿dego", kosztSMS, zarobekPracownikaSAN);
+					SendClientMessage(i, COLOR_YELLOW, string);
+					DajKase(i, zarobekPracownikaSAN);
 				}
 			}
 		}
+	}
+	else
+	{//zwyk³y sms
+		SendSMSMessage(PlayerInfo[playerid][pPnumber], reciverid, wiadomosc);
+	}
+	
+	
+	//informacja zwrotna dla nadawcy
+	format(string, sizeof(string), "Wys³ano SMS: %s, Odbiorca: %d.", wiadomosc, numerTelefonuOdbiorcy);
+	SendClientMessage(playerid, COLOR_YELLOW, string);
+	
+	//pobór op³at
+	PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+	format(string, sizeof(string), "~r~$-%d", kosztSMS);
+	GameTextForPlayer(playerid, string, 5000, 1);
+	ZabierzKase(playerid, kosztSMS);
+	SendClientMessage(playerid, COLOR_WHITE, "Wiadomoœæ dostarczona.");
+	
+	//mole autoodpowiedŸ
+	if(PlayerInfo[playerid][pPnumber] == 555)
+	{
+		if(strcmp("tak", wiadomosc, true) == 0)
+		{
+			SendSMSMessage(555, playerid, "Nie mam pojêcia o czym mówisz");
+		}
 		else
 		{
-			format(string, sizeof(string), "Koszt tego SMS wynosi: %d$, nie masz a¿ tylu pieniêdzy.", platny);
-			sendErrorMessage(playerid, string);
-		}
-		return 1;
-	}
-	foreach(Player, i)
-	{
-		if(PlayerInfo[i][pPnumber] == phonenumb && phonenumb != 0)
-		{
-			Mobile[playerid] = i; //caller connecting
-			if(PhoneOnline[i] > 0)
-			{
-				SendClientMessage(playerid, COLOR_GREY, "Nie ma takiego gracza !");
-				return 1;
-			}
-			format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", result,sendername,PlayerInfo[playerid][pPnumber]);
-			GetPlayerName(i, sendername, sizeof(sendername));
-			RingTone[i] =20;
-			SendClientMessage(playerid, COLOR_WHITE, "Wiadomoœæ dostarczona");
-			SendClientMessage(i, COLOR_YELLOW, string);
-			SendClientMessage(playerid,  COLOR_YELLOW, string);
-			format(string, sizeof(string), "~r~$-%d", txtcost);
-			GameTextForPlayer(playerid, string, 5000, 1);
-			DajKase(playerid,-txtcost);
-			PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-			Mobile[playerid] = 1255;
-			return 1;
+			SendSMSMessage(555, playerid, "To proste napisz tak");
 		}
 	}
 	return 1;
@@ -22115,10 +22116,11 @@ CMD:mole(playerid, params[])
 			return 1;
 		}
 		
-		SendSMSMessageToAll(555, params);
-		
         format(string, sizeof(string), "CMD_Info: /mole u¿yte przez %s [%d] - %s", GetNick(playerid), playerid, params);
         CMDLog(string);
+		SendCommandLogMessage(string);
+		
+		SendSMSMessageToAll(555, params); //mole
 	}
 	return 1;
 }
@@ -23000,7 +23002,7 @@ CMD:setstat(playerid, params[])
 		{
 			sendTipMessage(playerid, "U¿yj /setstat [playerid/CzêœæNicku] [statcode] [amount]");
 			SendClientMessage(playerid, COLOR_GRAD4, "|1 Level |2 SpawnHealth |3 UpgradePoints |4 Skin ");
-			SendClientMessage(playerid, COLOR_GRAD3, "|5 KontoBankowe |6 NumerTelefonu |7 PunktyRespektu ");
+			SendClientMessage(playerid, COLOR_GRAD3, "|5 KontoBankowe |6 numerTelefonuOdbiorcy |7 PunktyRespektu ");
 			SendClientMessage(playerid, COLOR_GRAD2, "|8 KluczDomowy |9 KluczBiznesu |10 KontoPremium |11 FMember");
 			SendClientMessage(playerid, COLOR_GRAD2, "|12 £owca Nagród |13 Prawnik |14 Mechanik |15 Reporter |16 ZlodziejAut |17 Diler Zio³a");
             SendClientMessage(playerid, COLOR_GRAD2, "|18 Prostututka |19 Bokser |20 Diler Broni |21 Rybak |23 Truck |77 Praca |88 Czas Kontraktu");
