@@ -9201,6 +9201,7 @@ CMD:czyjtonumer(playerid, params[])
 	{
 		noAccessMessage(playerid);
   	}
+	return 1;
 }
 
 CMD:flip(playerid, params[])

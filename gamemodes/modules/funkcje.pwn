@@ -254,7 +254,7 @@ UnJailDeMorgan(playerid)
 	SetPlayerVirtualWorld(playerid, 10);
 	SetPlayerPosEx(playerid, 618.0215,-1452.7937,90.6158);
 	Wchodzenie(playerid);
-	GameTextForPlayer(playerid, "~w~Dostales sznase na bycie ~n~~r~lepszym obywatelem", 5000, 3);
+	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;
 	PlayerInfo[playerid][pJailed] = 0;
 	PlayerInfo[playerid][pJailTime] = 0;
