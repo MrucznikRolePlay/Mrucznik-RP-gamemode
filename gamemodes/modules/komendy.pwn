@@ -9169,6 +9169,40 @@ CMD:ip(playerid, params[])
 	return 1;
 }
 
+CMD:czyjtonumer(playerid, params[])
+{
+	if (PlayerInfo[playerid][pAdmin] >= 1)
+	{
+		new number, string[128];
+		if( sscanf(params, "d", number))
+		{
+			sendTipMessage(playerid, "U¿yj /czyjtonumer [numer]");
+			sendTipMessage(playerid, "FUNKCJA: Pokazuje do kogo nale¿y numer telefonu.");
+			return 1;
+		}
+		
+		if(number <= 0)
+		{
+			sendErrorMessage(playerid, "Numer telefonu musi byæ wiêkszy ni¿ 0!");
+			return 1;
+		}
+		
+		foreach(Player, i)
+		{
+			SendClientMessage(playerid, COLOR_WHITE, "Osoby z tym numerem:");
+			if(PlayerInfo[i][pPnumber] == number)
+			{
+				format(string, sizeof(string), "%s - %d", GetNick(i), number);
+				SendClientMessage(playerid, COLOR_WHITE, string);
+			}
+		}
+	}
+	else
+	{
+		noAccessMessage(playerid);
+  	}
+}
+
 CMD:flip(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
@@ -19308,7 +19342,6 @@ CMD:sms(playerid, params[])
 		SendSMSMessage(PlayerInfo[playerid][pPnumber], reciverid, wiadomosc);
 	}
 	
-	
 	//informacja zwrotna dla nadawcy
 	format(string, sizeof(string), "Wys³ano SMS: %s, Odbiorca: %d.", wiadomosc, numerTelefonuOdbiorcy);
 	SendClientMessage(playerid, COLOR_YELLOW, string);
@@ -26317,7 +26350,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /carjump /goto /up /getcar /gethere");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
-        SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint /naprawskin");
+        SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint /naprawskin /czyjtonumer");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
