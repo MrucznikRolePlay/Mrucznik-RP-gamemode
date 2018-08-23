@@ -1760,7 +1760,7 @@ new GunPrice[30][1] = {
 {150},//skin Urzêdnika 50
 {240},//skin Urzêdnika 51
 {57},//skin Urzêdnika 52
-//Groove Street Skiny:
+//Grove Street Skiny:
 {271},// - ryder 53
 {270},// - sweet 54
 {269},// - big smoke 55

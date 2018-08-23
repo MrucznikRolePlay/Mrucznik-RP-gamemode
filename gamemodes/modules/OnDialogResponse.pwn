@@ -221,7 +221,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			case 1:
 			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(2), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod Groove.", "105\nCz³onek Groove\n106\nCz³onek Groove\n107\nCz³onek Groove\n269\nCz³onek Groove\n270\nCz³onek Groove\n271\nCz³onek Groove", "Podszyj", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(2), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod Grove.", "105\nCz³onek Grove\n106\nCz³onek Grove\n107\nCz³onek Grove\n269\nCz³onek Grove\n270\nCz³onek Grove\n271\nCz³onek Grove", "Podszyj", "Anuluj");
 				return 1;
 			}
 			case 2:
@@ -314,7 +314,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -325,7 +325,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -336,7 +336,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -347,7 +347,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -358,7 +358,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -369,7 +369,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -8855,7 +8855,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:// Warunek wynajmu: odpowiednia frakcja
 		            {
-		                ShowPlayerDialogEx(playerid, 820, DIALOG_STYLE_LIST, "Warunek wynajmu - frakcja", "Policja\nFBI\nWojsko\nSAM-ERS\nLa Cosa Nostra\nYakuza\nHitman Agency\nSA News\nTaxi Corporation\nUrzêdnicy\nGroove Street\nPurpz\nLatin Kings", "Wybierz", "Wróæ");
+		                ShowPlayerDialogEx(playerid, 820, DIALOG_STYLE_LIST, "Warunek wynajmu - frakcja", "Policja\nFBI\nWojsko\nSAM-ERS\nLa Cosa Nostra\nYakuza\nHitman Agency\nSA News\nTaxi Corporation\nUrzêdnicy\nGrove Street\nPurpz\nLatin Kings", "Wybierz", "Wróæ");
 		            }
 		            case 1:// Warunek wynajmu: odpowiednia rodzina
 		            {
@@ -8975,7 +8975,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 10:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Groove bêd¹ mogli wynajmowaæ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Grove bêd¹ mogli wynajmowaæ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 12;

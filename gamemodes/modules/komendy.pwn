@@ -1006,7 +1006,7 @@ CMD:pomoc2(playerid)
     SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ukradnij"); }
     else if(PlayerInfo[playerid][pMember] == 9) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /napisz /gazety /wywiad /news [text] /reflektor /studia /glosnik /calllive /radiostacja");
-    SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** P³atny numer SMS - /sms [od 100 do 150], dostajesz tyle stówek ile jest po 1 (nr. 125 - 25 * 100 = 2500$)");
+    SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** P³atny numer SMS - /sms [od 100 do 150], dostajesz tyle stówek ile jest po 1 (nr. 125 to 25 * 100 = 2500$)");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /zamknijlinie /otworzlinie /linie"); }
     else if(PlayerInfo[playerid][pJob] == 7) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon"); }// /nitro /hydraulika /maluj /felga /zderzak");
@@ -12485,7 +12485,7 @@ CMD:poddajesie(playerid)
 			}
 			else
 			{
-				sendTipMessage(playerid, "Nie mo¿esz siê poddaæ, bo nie masz Wanted Level!", COLOR_LIGHTBLUE);
+				sendTipMessage(playerid, "Nie jesteœ poszukiwany - nie mo¿esz siê poddaæ!", COLOR_LIGHTBLUE);
 			}
 		}
 	}
@@ -12535,23 +12535,23 @@ CMD:oczyscmdc(playerid, params[])
 						}
 						else
 						{
-						    sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy ($300)");
+						    sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy ($300).");
 						}
                     }
 					else
 					{
-					    sendErrorMessage(playerid, "Gracz nie jest za daleko");
+					    sendErrorMessage(playerid, "Gracz jest za daleko.");
 					}
 				}
 				else
 				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza");
+				    sendErrorMessage(playerid, "Nie ma takiego gracza.");
 				}
 			}
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jesteœ prawnikiem");
+			sendErrorMessage(playerid, "Nie jesteœ prawnikiem.");
 		}
 	}
 	return 1;
@@ -12773,7 +12773,7 @@ CMD:podszyjsie(playerid, params[])
         if(GetPlayerFraction(playerid) != FRAC_FBI) return 1;
 		if(PlayerInfo[playerid][pRank] == 4 || PlayerInfo[playerid][pRank] == 5 || PlayerInfo[playerid][pRank] == 7 || PlayerInfo[playerid][pRank] == 8 || PlayerInfo[playerid][pRank] == 9)
 		{
-		    ShowPlayerDialogEx(playerid,DIALOGID_PODSZYJ,DIALOG_STYLE_LIST,"Podszyj siê.","FBI\n""Groove\n""Ballas\n""ICC\n""Yakuza\n""Latin Kings","Dalej",""); //zmieñ dialogid
+		    ShowPlayerDialogEx(playerid,DIALOGID_PODSZYJ,DIALOG_STYLE_LIST,"Podszyj siê.","FBI\n""Grove\n""Ballas\n""ICC\n""Yakuza\n""Latin Kings","Dalej",""); //zmieñ dialogid
 		}
 		else
 		{
@@ -13880,7 +13880,7 @@ CMD:rentroom(playerid)
 										        }
 										        if(Dom[i][hWW] == 12)
 										        {
-													frakcja = "Groove Street";
+													frakcja = "Grove Street";
 										        }
 										        if(Dom[i][hWW] == 13)
 										        {
@@ -20473,9 +20473,9 @@ CMD:wejdz(playerid)
             return 1;
         }
         // dynamiczne interiory
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2495.576171875,-1689.9849853516,14.765625)) // Dom na Groove Street
+        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2495.576171875,-1689.9849853516,14.765625)) // Dom na Grove Street
         {
-            SetPlayerPosEx(playerid, 2495.9689941406,-1692.6496582031,1014.7421875); // Dom na Groove Street
+            SetPlayerPosEx(playerid, 2495.9689941406,-1692.6496582031,1014.7421875); // Dom na Grove Street
             SetPlayerInterior(playerid, 3);
             return 1;
         }
@@ -21516,9 +21516,9 @@ CMD:wyjdz(playerid)
 		    return 1;
 		}
 		//dynamiczne interiory
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2495.9689941406,-1692.6496582031,1014.7421875)) // Dom na Groove Street
+		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2495.9689941406,-1692.6496582031,1014.7421875)) // Dom na Grove Street
 		{
-		    SetPlayerPosEx(playerid, 2495.576171875,-1689.9849853516,14.765625); // Dom na Groove Street
+		    SetPlayerPosEx(playerid, 2495.576171875,-1689.9849853516,14.765625); // Dom na Grove Street
 		    SetPlayerInterior(playerid, 0);
 		    return 1;
 		}

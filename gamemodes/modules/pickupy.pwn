@@ -34,7 +34,7 @@ ZaladujPickupy()
 	CreateDynamicPickup(1242, 2, 1527.5,-12.1,1002.0, -1); //binco armor
 	CreateDynamicPickup(371, 2, 98.635467529297, 1775.6868896484, 50.96265411377, -1); //Tor treningowy spadochron
 	CreateDynamicPickup(1239, 2, 608.19793701172, -1458.9837646484, 14.387271881104 , -1);//baza FBI
- 	/*CreateDynamicPickup(1239, 2, 2452.005859375,-1666.1260986328,13.477073669434 , -1); // Przystanek koñcowy: Ganton - Groove Street
+ 	/*CreateDynamicPickup(1239, 2, 2452.005859375,-1666.1260986328,13.477073669434 , -1); // Przystanek koñcowy: Ganton - Grove Street
 	CreateDynamicPickup(1239, 2, 2163.0180664063,-1758.4976806641,13.547880172729, -1); // Idlewood - Silownia
 	CreateDynamicPickup(1239, 2, 2179.3752441406,-1711.3572998047,13.526877403259, -1); // Idlewood - Silownia
 	CreateDynamicPickup(1239, 2, 1890.3483886719,-1744.2761230469,13.546875, -1); // Idlewood - Stacja benzynowa
@@ -231,8 +231,8 @@ Zaladuj3DTexty()
 
 //-------------------------------[Przystanki autobusowe]----------------------------------------
 
-	CreateDynamic3DTextLabel("Przystanek \n  Ganton - Groove Street \n Kursuje linia: {FF8C00}72" /*\n {808080} Wiêcej na /businfo*/, COLOR_BLUE ,2592.8000488281,-1723.5999755859,16 ,20.0); //most
-	CreateDynamic3DTextLabel("Przystanek \n  Ganton - Groove Street \n Kursuje linia: {FF8C00}72", COLOR_BLUE ,2474.3999023438,-1738.4000244141,16 ,20.0); //przy GS
+	CreateDynamic3DTextLabel("Przystanek \n  Ganton - Grove Street \n Kursuje linia: {FF8C00}72" /*\n {808080} Wiêcej na /businfo*/, COLOR_BLUE ,2592.8000488281,-1723.5999755859,16 ,20.0); //most
+	CreateDynamic3DTextLabel("Przystanek \n  Ganton - Grove Street \n Kursuje linia: {FF8C00}72", COLOR_BLUE ,2474.3999023438,-1738.4000244141,16 ,20.0); //przy GS
 	CreateDynamic3DTextLabel("Przystanek \n Idlewood - Silownia \n Kursuje linia: {FF8C00}72", COLOR_BLUE , 2163.0180664063,-1758.4976806641,16.147880172729, 20.0); // Idlewood - Silownia przy motelu
 
 	CreateDynamic3DTextLabel("Przystanek \n Idlewood - Silownia \n Kursuje linia: {FF8C00}72", COLOR_BLUE ,2179.3752441406,-1711.3572998047,16, 20.0); // Idlewood - Silownia przy melinie
@@ -337,7 +337,7 @@ Zaladuj3DTexty()
     CreateDynamic3DTextLabel("Lista nagród [/wanted]", COLOR_LIGHTGREEN, 325.0463,306.9240,999.1484, 5.0);
 
 	//3d texty dynamicznych interioró
-	CreateDynamic3DTextLabel("Dom na Groove Street", COLOR_BLUE, 2495.576171875,-1689.9849853516,14.765625, 15.0);
+	CreateDynamic3DTextLabel("Dom na Grove Street", COLOR_BLUE, 2495.576171875,-1689.9849853516,14.765625, 15.0);
 	CreateDynamic3DTextLabel("Melina", COLOR_BLUE, 2165.9409179688,-1671.8609619141,15.074726104736, 15.0);
 	CreateDynamic3DTextLabel("Szamboa Gym", COLOR_BLUE, 2229.2248535156,-1721.9586181641,13.567801475525, 15.0);
 	//CreateDynamic3DTextLabel("Pizzeria", COLOR_BLUE, 2104.4970703125,-1806.3927001953,13.5546875, 15.0);
