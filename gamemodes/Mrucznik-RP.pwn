@@ -880,6 +880,9 @@ public OnPlayerPause(playerid)
 
 public OnPlayerDisconnect(playerid, reason)
 {
+	if(playerid == INVALID_PLAYER_ID || playerid > MAX_PLAYERS)
+		return 0;
+
 	//Pobieranie starej pozycji:
 
 	#if DEBUG == 1
@@ -956,12 +959,30 @@ public OnPlayerDisconnect(playerid, reason)
             SetPVarInt(caller, "budka-used", 999);
         }
     }
+	
+	//koniec rozmowy telefonicznej
+	if(Mobile[playerid] != INVALID_PLAYER_ID)
+	{
+		if(Mobile[playerid] >= 0)
+		{
+			SendClientMessage(Mobile[playerid], COLOR_YELLOW, "Gracz, z którym prowadzi³eœ rozmowê telefoniczn¹, wyszed³ z gry.");
+		}
+		StopACall(playerid);
+	}
+    if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+    {
+		SendPlayerMessageToAll(COLOR_NEWS, "(( Wywiad zakoñczony - gracz wyszed³ z gry ))");
+        new talker = TalkingLive[playerid];
+        TalkingLive[playerid] = INVALID_PLAYER_ID;
+        TalkingLive[talker] = INVALID_PLAYER_ID;
+        return 0;
+    }
 
     if(GetPVarInt(playerid, "kostka"))
     {
         new id = GetPVarInt(playerid, "kostka-player");
         Kostka_Wygrana(id, playerid, GetPVarInt(id, "kostka-cash"), true);
-        SendClientMessage(id, COLOR_RED, "Wspó³zawodnik opusci³ serwer, otrzymujesz zwrot wp³aconej kwoty z podatkiem.");
+        SendClientMessage(id, COLOR_RED, "Wspó³zawodnik opuœci³ serwer, otrzymujesz zwrot wp³aconej kwoty wraz z podatkiem.");
         SetPVarInt(playerid, "kostka",0);
         SetPVarInt(playerid, "kostka-throw", 0);
         SetPVarInt(playerid, "kostka-suma", 0);
@@ -1042,17 +1063,6 @@ public OnPlayerDisconnect(playerid, reason)
         cmd_patrol(PatrolInfo[patrol][patroluje][1], "stop");
         sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
         sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
-    }
-    if(TalkingLive[playerid] != INVALID_PLAYER_ID)
-    {
-        new callin = Callin[playerid];
-        new talker = TalkingLive[playerid];
-        TalkingLive[playerid] = INVALID_PLAYER_ID;
-        TalkingLive[callin] = INVALID_PLAYER_ID;
-        TalkingLive[talker] = INVALID_PLAYER_ID;
-        Mobile[callin] = 1255;
-        Mobile[playerid] = 1255;
-        return 0;
     }
     //SetPVarInt(playerid, "patrol-id", pat);
     //SetPVarInt(playerid, "patrol", 1);
@@ -1534,20 +1544,23 @@ public OnPlayerDeath(playerid, killerid, reason)
 			DisablePlayerCheckpoint(playerid);
 			gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
 		}
-		new caller = Mobile[playerid];
-		if(caller != 255)
+		//koniec rozmowy telefonicznej
+		if(Mobile[playerid] != INVALID_PLAYER_ID)
 		{
-			if(caller < 255)
+			SendClientMessage(playerid, COLOR_YELLOW, "Umar³eœ - po³¹czenie zakoñczone.");
+			if(Mobile[playerid] >= 0)
 			{
-				SendClientMessage(caller,  COLOR_GRAD2, "Po³¹czenie zakoñczone....");
-				Callin[playerid] = 0;
-				Callin[caller] = 0;
-				CellTime[caller] = 0;
-				CellTime[playerid] = 0;
-				Mobile[caller] = 1255;
+				SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S³ychaæ nag³y trzask i po³¹czenie zostaje zakoñczone.");
 			}
-			Mobile[playerid] = 1255;
-			CellTime[playerid] = 0;
+			StopACall(playerid);
+		}
+		if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+		{
+			SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca umar³.");
+			new talker = TalkingLive[playerid];
+			TalkingLive[playerid] = INVALID_PLAYER_ID;
+			TalkingLive[talker] = INVALID_PLAYER_ID;
+			return 0;
 		}
 		if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 		{
@@ -3801,7 +3814,6 @@ public OnPlayerEnterCheckpoint(playerid)
 	}
 	else if(MissionCheckpoint[playerid] > 0 && PlayMission[kToggle] == 1)//Missions + Checkpoint on toggle
 	{
-        	RingTone[playerid] = 20;
 		    switch(MissionCheckpoint[playerid])
 		    {
 	        	case 1:
@@ -6448,8 +6460,8 @@ public OnPlayerText(playerid, text[])
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
-	new tmp[128];
-	new string[128];
+	new tmp[256];
+	new string[256];
 	new giveplayerid;
 	if(PlayerInfo[playerid][pMuted] == 1)
 	{
@@ -7113,148 +7125,82 @@ public OnPlayerText(playerid, text[])
 		}
 		return 0;
 	}
-	if(Mobile[playerid] != 1255)
+	if(Mobile[playerid] != INVALID_PLAYER_ID && Callin[playerid] != CALL_NONE)
 	{
-		new idx;
-		tmp = strtok(text, idx);
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		format(string, sizeof(string), "%s mówi (telefon): %s", sendername, text);
 		ProxDetector(20.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-
-		if(Mobile[playerid] == 914)
+		
+		if(Mobile[playerid] < EMERGENCY_NUMBERS)
 		{
-			if(!strlen(tmp))
+			new org = (Mobile[playerid] + EMERGENCY_NUMBERS) * -1; //wzór na wy³uskanie organizacji z numeru
+			if(Mobile[playerid] == POLICE_NUMBER || Mobile[playerid] == SHERIFF_NUMBER)
 			{
-				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Niestety, nie rozumiem");
-				return 0;
+				if(strlen(text) > 82) 
+				{
+					SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem. Proszê powtórzyæ ((max 75 znaków))");
+					return 0;
+				}
+				new id, message[128];
+				mysql_real_escape_string(text, message);
+				new Hour, Minute;
+				gettime(Hour, Minute);
+				new datapowod[160];
+				format(datapowod, sizeof(datapowod), "%02d:%02d",  Hour, Minute);
+				new pZone[MAX_ZONE_NAME];
+				GetPlayer2DZone(giveplayerid, pZone, MAX_ZONE_NAME);
+				
+				if(Mobile[playerid] == POLICE_NUMBER)
+				{
+					id = getWolneZgloszenie();
+				}
+				else //SHERIFF_NUMBER
+				{
+					id = getWolneZgloszenieSasp();
+				}
+				
+				strmid(Zgloszenie[id][zgloszenie_kiedy], datapowod, 0, sizeof(datapowod), 36);
+				format(Zgloszenie[id][zgloszenie_nadal], MAX_PLAYER_NAME, "%s", GetNick(playerid, true));
+				format(Zgloszenie[id][zgloszenie_lokacja], MAX_ZONE_NAME, "%s", pZone);
+				strmid(Zgloszenie[id][zgloszenie_tresc], message, 0, strlen(message) + 9, 128);
+				Zgloszenie[id][zgloszenie_status] = 0;
+				SendFamilyMessage(org, COLOR_DBLUE, "HQ: Do Wszystkich Jednostek: Otrzymano nowe zg³oszenie!");
 			}
-			new turner[MAX_PLAYER_NAME];
-			new wanted[128];
-			GetPlayerName(playerid, turner, sizeof(turner));
-			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg³osimy to wszystkim jednostkom w danym obszarze.");
-			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
-			format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek: Nadawca: %s",turner);
-			SendTeamMessage(4, COLOR_ALLDEPT, wanted);
-			format(wanted, sizeof(wanted), "Dyspozytor: Zg³oszono: %s",text);
-			SendTeamMessage(4, COLOR_ALLDEPT, wanted);
-			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
-			Mobile[playerid] = 1255;
-			return 0;
-		}
-        if(Mobile[playerid] == 916)
-		{
-			if(!strlen(tmp))
+			else
 			{
-				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Niestety, nie rozumiem");
-				return 0;
-			}
-			new turner[MAX_PLAYER_NAME];
-			new wanted[128];
-			GetPlayerName(playerid, turner, sizeof(turner));
-			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg³osimy to wszystkim jednostkom w danym obszarze.");
-			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
-			format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek: Nadawca: %s",turner);
-			SendTeamMessage(17, COLOR_ALLDEPT, wanted);
-			format(wanted, sizeof(wanted), "Dyspozytor: Zg³oszono: %s",text);
-			SendTeamMessage(17, COLOR_ALLDEPT, wanted);
-			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
-			Mobile[playerid] = 1255;
-			return 0;
-		}
-		if(Mobile[playerid] == 913)
-		{
-			if(!strlen(tmp))
-			{
-				SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem");
-				return 0;
-			}
-			else {
 				new turner[MAX_PLAYER_NAME];
 				new wanted[128];
 				GetPlayerName(playerid, turner, sizeof(turner));
-				SendClientMessage(playerid, COLOR_DBLUE, "Centrala: Ostrze¿emy wszystkie jednostki w danym obszarze.");
-				SendClientMessage(playerid, COLOR_DBLUE, "Dziêkujemy za zg³oszenie przestêpstwa");
-				format(wanted, sizeof(wanted), "HQ: Do Wszystkich Jednostek: Nadawca: %s",turner);
-				SendFamilyMessage(1, COLOR_DBLUE, wanted);
-				format(wanted, sizeof(wanted), "HQ: Przestepstwo: %s, Poszukiwany: Nieznany",PlayerCrime[playerid][pAccusing]);
-				SendFamilyMessage(1, COLOR_DBLUE, wanted);
-				SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
-				Mobile[playerid] = 1255;
-				return 0;
+				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg³osimy to wszystkim jednostkom w danym obszarze.");
+				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
+				format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek! Nadawca: %s", turner);
+				SendTeamMessage(org, COLOR_ALLDEPT, wanted);
+				format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie: %s", text);
+				SendTeamMessage(org, COLOR_ALLDEPT, wanted);
 			}
-		}
-		if(Mobile[playerid] == 912)
-		{
-			if(!strlen(tmp))
-			{
-				SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem");
-				return 0;
-			} else if(strlen(text) > 82) {
-                Mobile[playerid] = 912;
-                SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem. Proszê powtórzyæ ((max 75 znaków))");
-                return 0;
-            }
-            mysql_real_escape_string(text, text);
-			//strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
-			new id = getWolneZgloszenie();
-            new Hour, Minute;
-            gettime(Hour, Minute);
-            new datapowod[160];
-            format(datapowod, sizeof(datapowod), "%02d:%02d",  Hour, Minute);
-            new pZone[MAX_ZONE_NAME];
-            GetPlayer2DZone(giveplayerid, pZone, MAX_ZONE_NAME);
-            strmid(Zgloszenie[id][zgloszenie_kiedy], datapowod, 0, sizeof(datapowod), 36);
-            format(Zgloszenie[id][zgloszenie_nadal], MAX_PLAYER_NAME, "%s", GetNick(playerid, true));
-            format(Zgloszenie[id][zgloszenie_lokacja], MAX_ZONE_NAME, "%s", pZone);
-            strmid(Zgloszenie[id][zgloszenie_tresc], text, 0, strlen(text) + 9, 128);
-            Zgloszenie[id][zgloszenie_status] = 0;
-            SendFamilyMessage(1, COLOR_DBLUE, "HQ: Do Wszystkich Jednostek: Otrzymano nowe zg³oszenie!");
-            sendTipMessageEx(playerid, COLOR_GRAD2, "[Telefon] Rozmowa zakoñczona");
-            Mobile[playerid] = 1255;
-			return 0;
-		}
-        if(Mobile[playerid] == 928)
-        {
-            if(!strlen(tmp))
-            {
-                SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem");
-                return 0;
-            } else if(strlen(text) > 82) {
-                Mobile[playerid] = 928;
-                SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: Niestety, nie rozumiem. Proszê powtórzyæ ((max 75 znaków))");
-                return 0;
-            }
-            //strmid(PlayerCrime[playerid][pAccusing], text, 0, strlen(text), 255);
-            new id = getWolneZgloszenieSasp();
-            mysql_real_escape_string(text, text);
-            new Hour, Minute;
-            gettime(Hour, Minute);
-            new datapowod[160];
-            format(datapowod, sizeof(datapowod), "%02d:%02d",  Hour, Minute);
-            new pZone[MAX_ZONE_NAME];
-            GetPlayer2DZone(giveplayerid, pZone, MAX_ZONE_NAME);
-            strmid(ZgloszenieSasp[id][zgloszenie_kiedy], datapowod, 0, sizeof(datapowod), 36);
-            format(ZgloszenieSasp[id][zgloszenie_nadal], MAX_PLAYER_NAME, "%s", GetNick(playerid, true));
-            format(ZgloszenieSasp[id][zgloszenie_lokacja], MAX_ZONE_NAME, "%s", pZone);
-            strmid(ZgloszenieSasp[id][zgloszenie_tresc], text, 0, strlen(text) + 9, 128);
-            ZgloszenieSasp[id][zgloszenie_status] = 0;
-            SendFamilyMessage(3, COLOR_DBLUE, "HQ: Do Wszystkich Jednostek: Otrzymano nowe zg³oszenie!");
-            sendTipMessageEx(playerid, COLOR_GRAD2, "[Telefon] Rozmowa zakoñczona");
-            Mobile[playerid] = 1255;
-            return 0;
-        }
-
-		if(IsPlayerConnected(Mobile[playerid]))
-		{
-		    if(Mobile[Mobile[playerid]] == playerid)
-		    {
-				SendClientMessage(Mobile[playerid], COLOR_YELLOW,string);
-			}
+			
+			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
+			StopACall(playerid);
 		}
 		else
 		{
-			SendClientMessage(playerid, COLOR_YELLOW,"Nikt siê nie odzywa");
+			new reciverid = Mobile[playerid];
+			if(RingTone[reciverid] != 0)
+			{
+				sendErrorMessage(playerid, "Gracz jeszcze nie odebra³ telefonu!");
+			}
+			else if(IsPlayerConnected(Mobile[playerid]))
+			{
+				format(string, sizeof(string), "Telefon (nr %d): %s", PlayerInfo[playerid][pPnumber], text);
+				SendClientMessage(Mobile[playerid], COLOR_YELLOW, string);
+			}
+			else
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Nikt siê nie odzywa.");
+			}
 		}
+
+		
 		return 0;
 	}
 	if (realchat)

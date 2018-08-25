@@ -786,7 +786,6 @@ new Mobile[MAX_PLAYERS];
 new Callin[MAX_PLAYERS];
 new Kredyty[MAX_PLAYERS];
 new RingTone[MAX_PLAYERS];
-new CallCost[MAX_PLAYERS];
 new gPlayerAccount[MAX_PLAYERS];
 new gPlayerMission[MAX_PLAYERS];
 new vKickEx[MAX_PLAYERS];
@@ -1078,7 +1077,7 @@ new realtime = 1;
 new wtime = 15;
 new levelcost = 10000;
 //new deathcost = 500;
-new callcost = 10; //20 seconds
+new callcost = 5; //1 second
 new realchat = 1;
 new timeshift = -1;
 new shifthour;
@@ -1087,7 +1086,6 @@ new intrate = 1;
 new levelexp = 4;
 //new civnokill = 0;
 //new suecost = 2000;
-new cchargetime = 60;
 new txtcost = 25;
 //new pickups;
 //new CIV[] = {7,19,20,23,73,101,37};
@@ -1185,7 +1183,7 @@ ZerujZmienne(playerid)
 	TransportDuty[playerid] = 0; PlayerTied[playerid] = 0; weryfikacja[playerid] = 0;
 	BusCallTime[playerid] = 0; TaxiCallTime[playerid] = 0; MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;
 	FindTimePoints[playerid] = 0; FindTime[playerid] = 0; JobDuty[playerid] = 0; SanDuty[playerid] = 0; WarningDuty[playerid] = 175; NJDuty[playerid] = 0; DeathWarning[playerid] = 1;
-	Mobile[playerid] = 1255; Callin[playerid] = 999; Music[playerid] = 0; BoxOffer[playerid] = 999; PlayerBoxing[playerid] = 0;
+	Mobile[playerid] = INVALID_PLAYER_ID; Callin[playerid] = CALL_NONE; CellTime[playerid] = 0; Music[playerid] = 0; BoxOffer[playerid] = 999; PlayerBoxing[playerid] = 0;
 	Spectate[playerid] = INVALID_PLAYER_ID; PlayerDrunk[playerid] = 0; PlayerDrunkTime[playerid] = 0; WnetrzeWozu[playerid] = 0;
 	Unspec[playerid][sLocal] = 255; FishCount[playerid] = 0; ZapisSkinu[playerid] = 127;
     ConsumingMoney[playerid] = 0; AntySpawnBroni[playerid] = 0; AntyWlamSejf[playerid] = 0;

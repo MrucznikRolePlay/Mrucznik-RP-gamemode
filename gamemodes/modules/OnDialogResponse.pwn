@@ -2018,32 +2018,35 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    else if(dialogid == 112)
 	    {
             if(!response) return 1;
-            PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
             switch(listitem)
             {
                 case 0:
                 {
-    	            SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z policj¹, prosze czekaæ.");
-    				Mobile[playerid] = 912;
+    	            SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z policj¹, prosze czekaæ...");
     				SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Witam, prosze podaæ krótki opis przestêpstwa.");
+    				Mobile[playerid] = POLICE_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 1:
                 {
-                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z biurem szeryfa, prosze czekaæ.");
-    				Mobile[playerid] = 928;
+                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z biurem szeryfa, prosze czekaæ...");
     				SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Witam, prosze podaæ krótki opis przestêpstwa.");	
+    				Mobile[playerid] = SHERIFF_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 2:
                 {
-    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze szpitalem, prosze czekaæ.");
-    				Mobile[playerid] = 914;
+    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze szpitalem, prosze czekaæ...");
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Szpital: Witam, prosze podaæ krótki opis zdarzenia.");
+    				Mobile[playerid] = LSMC_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 3:
                 {
-    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z dyspozytorem, prosze czekaæ.");
-    				Mobile[playerid] = 916;
+    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z dyspozytorem, prosze czekaæ...");
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Stra¿: Witam, prosze podaæ krótki opis zdarzenia.");
+    				Mobile[playerid] = LSFD_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
                 }
 			}
 	    }

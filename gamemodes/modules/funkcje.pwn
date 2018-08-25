@@ -1580,7 +1580,7 @@ stock FindPlayerByNumber(number)
 		if(PlayerInfo[i][pPnumber] == number)
 			return i;
 	}
-	return 0;
+	return INVALID_PLAYER_ID;
 }
 
 stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
@@ -7541,6 +7541,51 @@ SendSMSMessage(senderNumber, reciverid, message[])
 	format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
 	SendClientMessage(reciverid, COLOR_YELLOW, string);
 	PlayerPlaySound(reciverid, 6401, 0.0, 0.0, 0.0);
+}
+
+StartACall(playerid, reciverid)
+{
+	Mobile[playerid] = reciverid;
+	Mobile[reciverid] = playerid;
+	
+	RingTone[reciverid] = 1;
+	CellTime[playerid] = 1;
+}
+
+StopACall(playerid)
+{
+	new reciverid = Mobile[playerid];
+	
+	Mobile[playerid] = INVALID_PLAYER_ID;
+	RingTone[playerid] = 0;
+	SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
+	
+	if(Callin[playerid] == CALL_LIVE)
+	{
+		TalkingLive[playerid] = INVALID_PLAYER_ID;
+		if(reciverid >= 0) TalkingLive[reciverid] = INVALID_PLAYER_ID;
+	}
+	
+	Callin[playerid] = CALL_NONE;
+	new payer = playerid;
+	if(reciverid >= 0)
+	{
+		Mobile[reciverid] = INVALID_PLAYER_ID;
+		RingTone[reciverid] = 0;
+		Callin[reciverid] = CALL_NONE;
+		SetPlayerSpecialAction(reciverid,SPECIAL_ACTION_NONE);
+		if(CellTime[reciverid] != 0) payer = reciverid;
+	}
+	
+	if(CellTime[payer] != 0)
+	{
+		new string[64];
+		new cost = CellTime[payer] * callcost;
+		ZabierzKase(payer, cost);
+		CellTime[payer] = 0;
+		format(string, sizeof(string), "~w~Koszt rozmowy: ~n~~r~$%d", cost);
+		GameTextForPlayer(payer, string, 5000, 1);
+	}
 }
 
 SendAdminMessage(color, string[])

@@ -906,11 +906,32 @@ public Spectator()
             }
         }
 
-        if(RingTone[i] == 10)
-        {
-            if(GetPVarInt(i, "sound-phone") == 0) PlayerPlaySound(i, 23000, 0.0, 0.0, 0.0), SetPVarInt(i, "sound-phone", 1);
-            else SetPVarInt(i, "sound-phone", 0);
-        }
+		//dzwonek telefonu
+		if(RingTone[i] > 0 && Mobile[i] >= 0)
+		{
+			RingTone[i]++;
+			if(RingTone[i]%3 == 0)
+			{
+				PlayerPlaySound(i, 23000, 0.0, 0.0, 0.0);
+			}
+			else if(RingTone[i]%12 == 0 || RingTone[i] == 1)
+			{
+				format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %d", PlayerInfo[Mobile[i]][pPnumber]);
+				SendClientMessage(i, COLOR_YELLOW, string);
+				format(string, sizeof(string), "* Telefon %s zaczyna dzwoniæ.", GetNick(i));
+				ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				PlayerPlaySound(i, 23000, 0.0, 0.0, 0.0);
+			}
+			else if(RingTone[i] >= 60)
+			{
+				StopACall(i);
+			}
+		}
+		if(CellTime[i] > 0)
+		{
+			CellTime[i]++;
+		}
+		
         //Vinyl audio check
         if(!GetPVarInt(i, "VINYL-stream"))
         {
@@ -2355,44 +2376,6 @@ public JednaSekundaTimer()
 					}
 				}
 			}
-		}
-
-
-        //budki telefoniczne//
-        if(GetPVarInt(i, "budka-used") != 999) {
-            new budkaid = GetPVarInt(i, "budka-used");
-            if(GetPlayerDistanceFromPoint(i, budki[budkaid][b_x], budki[budkaid][b_y], budki[budkaid][b_z]) > 3.5) {
-                sendTipMessage(i, "Oddali³eœ siê zbytnio od budki, po³¹czenie przerwane...", COLOR_PAPAYAWHIP);
-                new caller = GetPVarInt(i, "budka-Mobile");
-                SetPVarInt(i, "budka-Mobile", 999);
-                SetPVarInt(i, "budka-used", 999);
-                if(GetPVarInt(caller, "budka-Mobile") == i) {
-                    sendTipMessage(caller, "**biiip biiip** po³¹czenie zosta³o przerwane...", COLOR_PAPAYAWHIP);
-                    SetPVarInt(caller, "budka-Mobile", 999);
-                    SetPVarInt(caller, "budka-used", 999);
-                }
-            }
-        }
-
-
-  		if(CellTime[i] > 0 && Mobile[i] >= 0 && Mobile[i] < MAX_PLAYERS)
-		{
-			if (CellTime[i] == cchargetime)
-			{
-				CellTime[i] = 1;
-				if(Mobile[Mobile[i]] == i)
-				{
-					CallCost[i] = CallCost[i]+callcost;
-				}
-			}
-			CellTime[i] = CellTime[i] +1;
-		}
-		if(CellTime[i] == 0 && CallCost[i] > 0)
-		{
-			format(string, sizeof(string), "~w~Koszt rozmowy: ~n~~r~$%d",CallCost[i]);
-			DajKase(i, -CallCost[i]);//moneycheat
-			GameTextForPlayer(i, string, 5000, 1);
-			CallCost[i] = 0;
 		}
 		if((taxidriver = TransportDriver[i]) != 999) //Taxi
 		{

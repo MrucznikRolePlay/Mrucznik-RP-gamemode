@@ -454,6 +454,20 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 //23.12
 #define MAX_TICKETS     50
+
+//Telefon
+#define EMERGENCY_NUMBERS -900 
+#define POLICE_NUMBER -901 //old 912
+#define SHERIFF_NUMBER -917 //old 928
+#define LSMC_NUMBER -904 //old 914
+#define LSFD_NUMBER -903 //old 916
+
+#define CALL_NONE 0
+#define CALL_EMERGENCY 1
+#define CALL_PLAYER 2
+#define CALL_LIVE 3
+
+
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);
 public _SafeReturnCode_(dest[], src[], bytes)

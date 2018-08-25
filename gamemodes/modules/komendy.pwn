@@ -1005,7 +1005,7 @@ CMD:pomoc2(playerid)
     else if(PlayerInfo[playerid][pJob] == 5) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ukradnij"); }
     else if(PlayerInfo[playerid][pMember] == 9) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /napisz /gazety /wywiad /news [text] /reflektor /studia /glosnik /calllive /radiostacja");
+    SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /napisz /gazety /wywiad /news [text] /reflektor /studia /glosnik /radiostacja");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** P³atny numer SMS - /sms [od 100 do 150], dostajesz tyle stówek ile jest po 1 (nr. 125 to 25 * 100 = 2500$)");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /zamknijlinie /otworzlinie /linie"); }
     else if(PlayerInfo[playerid][pJob] == 7) {
@@ -9173,10 +9173,10 @@ CMD:czyjtonumer(playerid, params[])
 {
 	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{
-		new number, string[128];
-		if( sscanf(params, "d", number))
+		new number, offline, string[128];
+		if( sscanf(params, "dD(0)", number, offline))
 		{
-			sendTipMessage(playerid, "U¿yj /czyjtonumer [numer]");
+			sendTipMessage(playerid, "U¿yj /czyjtonumer [numer] (0 - gracze online, 1 - wszystkie konta)");
 			sendTipMessage(playerid, "FUNKCJA: Pokazuje do kogo nale¿y numer telefonu.");
 			return 1;
 		}
@@ -9187,13 +9187,41 @@ CMD:czyjtonumer(playerid, params[])
 			return 1;
 		}
 		
-		foreach(Player, i)
+		if(number == 555)
 		{
-			SendClientMessage(playerid, COLOR_WHITE, "Osoby z tym numerem:");
-			if(PlayerInfo[i][pPnumber] == number)
+			format(string, sizeof(string), "Osoby z numerem %d:", number);
+			SendClientMessage(playerid, COLOR_WHITE, string);
+			SendClientMessage(playerid, COLOR_WHITE, "Marcepan_Marks");
+			return 1;
+		}
+		
+		if(offline)
+		{
+			format(string, sizeof(string), "Osoby z numerem %d:", number);
+			SendClientMessage(playerid, COLOR_WHITE, string);
+			
+			format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `Number`='%d'", number);
+			mysql_query(string);
+			mysql_store_result();
+			if(mysql_num_rows())
 			{
-				format(string, sizeof(string), "%s - %d", GetNick(i), number);
-				SendClientMessage(playerid, COLOR_WHITE, string);
+				while(mysql_fetch_row_format(string, "|"))
+				{
+					new nick[MAX_PLAYER_NAME];
+					sscanf(string, "p<|>s[24]", nick);
+					SendClientMessage(playerid, COLOR_WHITE, nick);
+				}
+			}
+			mysql_free_result();
+		}
+		else
+		{
+			foreach(Player, i)
+			{
+				if(PlayerInfo[i][pPnumber] == number)
+				{
+					SendClientMessage(playerid, COLOR_WHITE, GetNick(i));
+				}
 			}
 		}
 	}
@@ -19020,163 +19048,100 @@ CMD:kup(playerid)
 	return 1;
 }
 
-CMD:calllive(playerid, params[]) return cmd_call_live(playerid, params);
-CMD:call_live(playerid, params[])
-{
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
-	{
-	    if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
-	    {
-		    if(gPlayerLogged[playerid] == 0)
-	        {
-	            return 1;
-	        }
-	        new phonenumb;
-			if( sscanf(params, "d", phonenumb))
-			{
-				sendTipMessage(playerid, "U¿yj /call-live [numerTelefonuOdbiorcy]");
-				return 1;
-			}
-			if(PlayerInfo[playerid][pPnumber] == 0)
-			{
-				sendErrorMessage(playerid, "Nie posiadasz telefonu !");
-				return 1;
-			}
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "* %s wyjmuje telefon.", sendername);
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-
-			if(phonenumb == PlayerInfo[playerid][pPnumber])
-			{
-				SendClientMessage(playerid, COLOR_GRAD2, "S³ychaæ g³uchy ton...");
-				return 1;
-			}
-			foreach(Player, i)
-			{
-				if(IsPlayerConnected(i))
-				{
-					if(PlayerInfo[i][pPnumber] == phonenumb && phonenumb != 0)
-					{
-						new giveplayerid = i;
-						Mobile[playerid] = giveplayerid; //caller connecting
-						if(IsPlayerConnected(giveplayerid))
-						{
-						    if(giveplayerid != INVALID_PLAYER_ID)
-						    {
-						        if(PhoneOnline[giveplayerid] > 0)
-						        {
-						            sendTipMessage(playerid, "Ten gracz ma zablokowany telefon !");
-						            return 1;
-						        }
-								if (Mobile[giveplayerid] == 1255)
-								{
-                                    PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
-									format(string, sizeof(string), "Dzwoni do ciebie dziennikarz SAN %s. Chce przeprowadziæ z tob¹ wywiad. Aby odebraæ wpisz /p", sendername);
-									SendClientMessage(giveplayerid, COLOR_YELLOW, string);
-									GetPlayerName(giveplayerid, sendername, sizeof(sendername));
-									RingTone[giveplayerid] = 10;
-									format(string, sizeof(string), "* telefon %s zaczyna dzwoniæ.", sendername);
-									SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: U¿yj T aby rozmawiaæ przez telefon i /Z aby sie roz³¹czyæ");
-									ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-									CellTime[playerid] = 1;
-									Callin[playerid] = 1000;
-									Callin[giveplayerid] = 1000;
-									return 1;
-								}
-							}
-						}
-					}
-				}
-			}
-			SendClientMessage(playerid, COLOR_GRAD2, "S³ychaæ g³uchy ton...");
-		}
-		else
-		{
-		    sendErrorMessage(playerid, "Nie jesteœ z SAN.");
-			return 1;
-		}
-	}
-	return 1;
-}
-
 
 CMD:call(playerid, params[]) return cmd_dzwon(playerid, params);
 CMD:dzwon(playerid, params[])
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
-    if(IsPlayerConnected(playerid))
+    if(!IsPlayerConnected(playerid))
 	{
-	    if(gPlayerLogged[playerid] == 0)
-        {
-            return 1;
-        }
-		new phonenumb;
-		if( sscanf(params, "dS[128]", phonenumb))
+		return 1;
+	}
+	
+	if(gPlayerLogged[playerid] == 0)
+	{
+		return 1;
+	}
+	
+	if(PlayerInfo[playerid][pPnumber] == 0)
+	{
+		sendErrorMessage(playerid, "Nie posiadasz telefonu !");
+		return 1;
+	}
+	
+	new numerTelefonuOdbiorcy;
+	new reciverid;
+	if( sscanf(params, "dS[128]", numerTelefonuOdbiorcy))
+	{
+		sendTipMessage(playerid, "U¿yj /dzwon [numer telefonu]");
+		return 1;
+	}
+	
+	if(numerTelefonuOdbiorcy == PlayerInfo[playerid][pPnumber])
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz zadzwoniæ sam do siebie.");
+		return 1;
+	}
+	
+	if(numerTelefonuOdbiorcy < 1)
+	{
+		sendErrorMessage(playerid, "Niepoprawny numer telefonu.");
+	}
+	
+	if(Mobile[playerid] != INVALID_PLAYER_ID)
+	{
+		sendErrorMessage(playerid, "Dzwonisz ju¿ do kogoœ.");
+		return 1;
+	}
+	
+	if(numerTelefonuOdbiorcy != 911)
+	{
+		reciverid = FindPlayerByNumber(numerTelefonuOdbiorcy);
+		if(reciverid == INVALID_PLAYER_ID)
 		{
-			sendTipMessage(playerid, "U¿yj /dzwon [numerTelefonuOdbiorcy]");
+			sendErrorMessage(playerid, "Gracz o takim numerze jest offline.");
 			return 1;
 		}
-		if(PlayerInfo[playerid][pPnumber] == 0)
+		
+		if(PhoneOnline[reciverid] == 1)
 		{
-			sendErrorMessage(playerid, "Nie posiadasz telefonu !");
+			sendErrorMessage(playerid, "Gracz ma wy³¹czony telefon.");
 			return 1;
 		}
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		format(string, sizeof(string), "* %s wyjmuje telefon.", sendername);
-		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		
+		if(Mobile[reciverid] != INVALID_PLAYER_ID)
+		{
+			sendErrorMessage(playerid, "Gracz ju¿ z kimœ rozmawia.");
+			return 1;
+		}
+	}
+	
+	//all ok, lecim
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+	format(string, sizeof(string), "* %s wyjmuje telefon, wybiera numer i wykonuje po³¹czenie.", sendername);
+	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	
+	SendClientMessage(playerid, COLOR_WHITE, "Trwa ³¹czenie, proszê czekaæ...");
+	SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: U¿yj chatu IC aby rozmawiaæ przez telefon i /z aby sie roz³¹czyæ.");
+	PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
+	SetPlayerSpecialAction(playerid,SPECIAL_ACTION_USECELLPHONE);
 
-		if(phonenumb == 911)
+	if(numerTelefonuOdbiorcy == 911)
+	{
+		if(GUIExit[playerid] == 0)
 		{
-		    if(GUIExit[playerid] == 0)
-	    	{
-			    ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nBiuro Szeryfa\nMedyk\nStra¿ po¿arna", "Wybierz", "Roz³¹cz siê");
-				return 1;
-			}
+			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nBiuro Szeryfa\nMedyk\nStra¿ po¿arna", "Wybierz", "Roz³¹cz siê");
 		}
-		if(phonenumb == PlayerInfo[playerid][pPnumber])
+		else
 		{
-			SendClientMessage(playerid, COLOR_GRAD2, "S³ychaæ g³uchy ton...");
-			return 1;
+			sendErrorMessage(playerid, "Masz ju¿ otwarte inne okienko GUI, zamknij je i spróbuj jeszcze raz.");
 		}
-		if(Mobile[playerid] != 1255 || GetPVarInt(playerid, "budka-Mobile") != 999)
-		{
-			SendClientMessage(playerid, COLOR_GRAD2, "Dzwonisz ju¿ do kogoœ...");
-			return 1;
-		}
-        if(phonenumb < 1) return SendClientMessage(playerid, COLOR_GRAD2, "S³ychaæ g³uchy ton...");
-		foreach(Player, i)
-		{
-			if(IsPlayerConnected(i))
-			{
-				if(PlayerInfo[i][pPnumber] == phonenumb)
-				{
-					Mobile[playerid] = i; //caller connecting
-			        if(PhoneOnline[i] > 0)
-			        {
-			            SendClientMessage(playerid, COLOR_GREY, "Nie ma takiego gracza !");
-			            return 1;
-			        }
-					if (Mobile[i] == 1255)
-					{
-                        PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
-						format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /P) dzwoni¹cy: %s", sendername);
-						SendClientMessage(i, COLOR_YELLOW, string);
-						GetPlayerName(i, sendername, sizeof(sendername));
-						RingTone[i] = 10;
-						format(string, sizeof(string), "* Telefon %s zaczyna dzwoniæ.", sendername);
-						SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: U¿yj T aby rozmawiaæ przez telefon i /Z aby sie roz³¹czyæ");
-						ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						CellTime[playerid] = 1;
-						return 1;
-					}
-				}
-			}
-		}
-		SendClientMessage(playerid, COLOR_GRAD2, "S³ychaæ g³uchy ton...");
+		return 1;
+	}
+	else
+	{
+		StartACall(playerid, reciverid);
 	}
 	return 1;
 }
@@ -19187,7 +19152,7 @@ CMD:zamknijlinie(playerid, p[])
     {
         new lLine;
         if(sscanf(p, "d", lLine)) return sendTipMessage(playerid, "Podaj numer lini, któr¹ chcesz zamkn¹æ np. 100 lub 150");
-        if(!(100 <= lLine <= 150)) return sendTipMessage(playerid, "Numer od 100 do 150.");
+        if(lLine < 100 || lLine > 150) return sendTipMessage(playerid, "Numer od 100 do 150.");
         new lStr[128];
         gSNLockedLine[lLine-100] = true;
         format(lStr, 128, "San-SMS: Linia %d zosta³a zamkniêta przez %s", lLine, GetNick(playerid));
@@ -19234,7 +19199,7 @@ CMD:otworzlinie(playerid, p[])
         if(!(100 <= lLine <= 150)) return sendTipMessage(playerid, "Numer od 100 do 150.");
         new lStr[128];
         gSNLockedLine[lLine-100] = false;
-        format(lStr, 128, "San-SMS: Linia %d zosta³a otwarta przez %s", lLine, GetNick(playerid));
+        format(lStr, 128, "San-SMS: Linia %d zosta³a otworzona przez %s", lLine, GetNick(playerid));
         SendFamilyMessage(FRAC_SN, COLOR_YELLOW, lStr);
     }
     else sendErrorMessage(playerid, "Nie jesteœ z SN.");
@@ -19252,7 +19217,7 @@ CMD:sms(playerid, params[])
 	new numerTelefonuOdbiorcy, wiadomosc[128];
 	if( sscanf(params, "ds[128]", numerTelefonuOdbiorcy, wiadomosc))
 	{
-		sendTipMessage(playerid, "U¿yj /(t)ext [numerTelefonuOdbiorcy] [tekst]");
+		sendTipMessage(playerid, "U¿yj /sms [numer telefonu] [wiadomoœæ]");
 		return 1;
 	}
 	if(PlayerInfo[playerid][pPnumber] == 0)
@@ -19278,8 +19243,8 @@ CMD:sms(playerid, params[])
 	{
 		new numerLinii = numerTelefonuOdbiorcy-100;
 		new liczbaPracownikowSAN = GetFractionMembersNumber(FRAC_SN, true);
-		zarobekPracownikaSAN = kosztSMS/liczbaPracownikowSAN;
 		kosztSMS += numerLinii*100;
+		zarobekPracownikaSAN = kosztSMS/liczbaPracownikowSAN;
 		
         if(gSNLockedLine[numerLinii] || liczbaPracownikowSAN == 0) 
 		{
@@ -19292,9 +19257,9 @@ CMD:sms(playerid, params[])
 	{
 		reciverid = FindPlayerByNumber(numerTelefonuOdbiorcy);
 		
-		if(reciverid == 0)
+		if(reciverid == INVALID_PLAYER_ID)
 		{
-			SendClientMessage(playerid, COLOR_GREY, "Nie uda³o siê wys³aæ wiadomoœci - gracz o takim numerze nie jest online!");
+			SendClientMessage(playerid, COLOR_GREY, "Nie uda³o siê wys³aæ wiadomoœci - gracz o takim numerze jest offline.");
 			return 1;
 		}
 		
@@ -19355,7 +19320,7 @@ CMD:sms(playerid, params[])
 	SendClientMessage(playerid, COLOR_WHITE, "Wiadomoœæ dostarczona.");
 	
 	//mole autoodpowiedŸ
-	if(PlayerInfo[playerid][pPnumber] == 555)
+	if(numerTelefonuOdbiorcy == 555)
 	{
 		if(strcmp("tak", wiadomosc, true) == 0)
 		{
@@ -19375,54 +19340,27 @@ CMD:p(playerid) return cmd_od(playerid);
 CMD:od(playerid)
 {
 	new string[64];
-	new sendername[MAX_PLAYER_NAME];
 
-    if(IsPlayerConnected(playerid))
+	if(Mobile[playerid] != INVALID_PLAYER_ID || RingTone[playerid] == 0)
 	{
-		if(Mobile[playerid] != 1255 || GetPVarInt(playerid, "budka-Mobile") != 999)
-		{
-			sendTipMessage(playerid, "Rozmawiasz ju¿ przez telefon...");
-			return 1;
-		}
-		foreach(Player, i)
-		{
-			if(IsPlayerConnected(i))
-			{
-				if(Mobile[i] == playerid)
-				{
-				    if(Callin[playerid] == 1000)
-					{
-					    sendTipMessageEx(i,  COLOR_LIGHTBLUE, "Wywiad rozpoczêty!");
-					    sendTipMessageEx(playerid,  COLOR_LIGHTBLUE, "Wywiad rozpoczêty!");
-					    TalkingLive[playerid] = i;
-						TalkingLive[i] = playerid;
-						Callin[i] = playerid;
-						Callin[playerid] = i;
-                        RingTone[i] = 0;
-                        RingTone[playerid] = 0;
-					}
-					else
-					{
-						Mobile[playerid] = i; //caller connecting
-						sendTipMessageEx(i,  COLOR_GRAD2, "Twój rozmówca odebra³ telefon.");
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						format(string, sizeof(string), "* %s odbiera telefon.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						RingTone[playerid] = 0;
-                        RingTone[i] = 0;
-						SetPlayerSpecialAction(playerid,SPECIAL_ACTION_USECELLPHONE);
-					}
-				} else if(GetPVarInt(i, "budka-Mobile") == playerid) {
-                    SetPVarInt(playerid, "budka-Mobile", i);
-                    sendTipMessageEx(i,  COLOR_GRAD2, "Twój rozmówca odebra³ telefon.");
-                    GetPlayerName(playerid, sendername, sizeof(sendername));
-                    budki[GetPVarInt(i, "budka-used")][isCurrentlyUsed] = 1;
-                    format(string, sizeof(string), "* %s odbiera telefon.", sendername);
-                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                }
-			}
-		}
+		sendErrorMessage(playerid, "Nikt do Ciebie nie dzwoni.");
 	}
+	
+	if(Callin[playerid] != CALL_NONE)
+	{
+		sendErrorMessage(playerid, "Ju¿ prowadzisz rozmowê.");
+	}
+	
+	new callerid = Mobile[playerid];
+	RingTone[playerid] = 0;
+	Callin[playerid] = CALL_PLAYER;
+	Callin[callerid] = CALL_PLAYER;
+	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_USECELLPHONE);
+	
+	sendTipMessageEx(callerid, COLOR_GRAD2, "Twój rozmówca odebra³ telefon.");
+	sendTipMessageEx(playerid, COLOR_GRAD2, "Odebra³eœ telefon.");
+	format(string, sizeof(string), "* %s odbiera telefon.", GetNick(playerid));
+	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	return 1;
 }
 
@@ -19432,42 +19370,14 @@ CMD:h(playerid) return cmd_z(playerid);
 CMD:zakoncz(playerid) return cmd_z(playerid);
 CMD:z(playerid)
 {
-    if(IsPlayerConnected(playerid))
+	if(Mobile[playerid] != INVALID_PLAYER_ID)
 	{
-		new caller = Mobile[playerid];
-		if(IsPlayerConnected(caller))
-		{
-		    if(caller != INVALID_PLAYER_ID)
-		    {
-				if(caller != 255)
-				{
-					if(caller < 255)
-					{
-						sendTipMessageEx(caller,  COLOR_GRAD2, "Rozmowa zakoñczona.");
-						CellTime[caller] = 0;
-						CellTime[playerid] = 0;
-						sendTipMessageEx(playerid,  COLOR_GRAD2, "Roz³¹czy³eœ siê.");
-						Mobile[caller] = 1255;
-						SetPlayerSpecialAction(playerid,SPECIAL_ACTION_STOPUSECELLPHONE);
-						SetPlayerSpecialAction(caller,SPECIAL_ACTION_STOPUSECELLPHONE);
-						if(Callin[playerid] != 1000 && Callin[playerid] != 999)
-						{
-						    TalkingLive[playerid] = INVALID_PLAYER_ID;
-							TalkingLive[Callin[playerid]] = INVALID_PLAYER_ID;
-						}
-                        RingTone[caller] = 0;
-						Callin[caller] = 999;
-						Callin[playerid] = 999;
-					}
-					Mobile[playerid] = 1255;
-					CellTime[playerid] = 0;
-					RingTone[playerid] = 0;
-					return 1;
-				}
-			}
-		}
-        sendTipMessage(playerid, "Twój telefon jest w kieszeni.");
+		sendErrorMessage(playerid, "Nikt do Ciebie nie dzwoni.");
 	}
+	
+	sendTipMessageEx(Mobile[playerid], COLOR_GRAD2, "Twój rozmówca odrzuci³ po³¹czenie.");
+	sendTipMessageEx(playerid, COLOR_GRAD2, "Zakoñczono rozmowê.");
+	StopACall(playerid);
 	return 1;
 }
 
@@ -23036,7 +22946,7 @@ CMD:setstat(playerid, params[])
 		{
 			sendTipMessage(playerid, "U¿yj /setstat [playerid/CzêœæNicku] [statcode] [amount]");
 			SendClientMessage(playerid, COLOR_GRAD4, "|1 Level |2 SpawnHealth |3 UpgradePoints |4 Skin ");
-			SendClientMessage(playerid, COLOR_GRAD3, "|5 KontoBankowe |6 numerTelefonuOdbiorcy |7 PunktyRespektu ");
+			SendClientMessage(playerid, COLOR_GRAD3, "|5 KontoBankowe |6 NumerTelefonu |7 PunktyRespektu ");
 			SendClientMessage(playerid, COLOR_GRAD2, "|8 KluczDomowy |9 KluczBiznesu |10 KontoPremium |11 FMember");
 			SendClientMessage(playerid, COLOR_GRAD2, "|12 £owca Nagród |13 Prawnik |14 Mechanik |15 Reporter |16 ZlodziejAut |17 Diler Zio³a");
             SendClientMessage(playerid, COLOR_GRAD2, "|18 Prostututka |19 Bokser |20 Diler Broni |21 Rybak |23 Truck |77 Praca |88 Czas Kontraktu");
@@ -33722,15 +33632,19 @@ CMD:akceptuj(playerid, params[])
             {
                 if(IsPlayerConnected(LiveOffer[playerid]))
                 {
-                    if (ProxDetectorS(5.0, playerid, LiveOffer[playerid]))
+                    if (ProxDetectorS(5.0, playerid, LiveOffer[playerid]) || (Mobile[playerid] == LiveOffer[playerid] && Callin[playerid] == CALL_PLAYER))
                     {
                         SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wywiad rozpoczêty, wszystko co teraz powiesz bêdzie na antenie.");
                         SendClientMessage(LiveOffer[playerid], COLOR_LIGHTBLUE, "* Rozpocz¹³eœ wywiad. Aby go zakoñczyæ ponownie wpisz /wywiad.");
                         TalkingLive[playerid] = LiveOffer[playerid];
                         TalkingLive[LiveOffer[playerid]] = playerid;
-                        HidePM[playerid] = 3;
-                        PhoneOnline[playerid] = 3;
                         LiveOffer[playerid] = 999;
+						
+						if(Mobile[playerid] == LiveOffer[playerid] && Callin[playerid] == CALL_PLAYER)
+						{
+							Callin[Mobile[playerid]] = CALL_LIVE;
+							Callin[playerid] = CALL_LIVE;
+						}
                         return 1;
                     }
                     else
@@ -34718,15 +34632,7 @@ CMD:nazywo(playerid, params[])
 		    {
 		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wywiad zakonczony.");
 		        SendClientMessage(TalkingLive[playerid], COLOR_LIGHTBLUE, "* Wywiad zakoñczony.");
-		        TogglePlayerControllable(playerid, 1);
-		        TogglePlayerControllable(TalkingLive[playerid], 1);
-		        HidePM[playerid] = 0;
-				PhoneOnline[playerid] = 0;
-				HidePM[TalkingLive[playerid]] = 0;
-				PhoneOnline[TalkingLive[playerid]] = 0;
 	            TalkingLive[TalkingLive[playerid]] = INVALID_PLAYER_ID;
-                Callin[playerid] = 999;
-                Callin[TalkingLive[playerid]] = 999;
                 TalkingLive[playerid] = INVALID_PLAYER_ID;
 		        return 1;
 		    }
@@ -34747,7 +34653,7 @@ CMD:nazywo(playerid, params[])
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-					if (ProxDetectorS(5.0, playerid, giveplayerid))
+					if (ProxDetectorS(5.0, playerid, giveplayerid) || Mobile[playerid] == giveplayerid)
 					{
 					    if(giveplayerid == playerid) { SendClientMessage(playerid, COLOR_GREY, "Nie mo¿esz robiæ wywiadu z samym sob¹!"); return 1; }
 					    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
@@ -34760,7 +34666,8 @@ CMD:nazywo(playerid, params[])
 					}
 					else
 					{
-					    sendTipMessageEx(playerid, COLOR_GREY, "Jesteœ za daleko od tego gracza !");
+					    sendTipMessageEx(playerid, COLOR_GREY, "Jesteœ za daleko od tego gracza.");
+					    sendTipMessageEx(playerid, COLOR_GREY, "Mo¿esz przeprowadziæ wywiad telefoniczny dzwoni¹c do gracza i oferuj¹c mu wywiad komend¹ /wywiad.");
 					    return 1;
 					}
 				}
