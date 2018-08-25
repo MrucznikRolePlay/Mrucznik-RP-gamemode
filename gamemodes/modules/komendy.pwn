@@ -9200,7 +9200,7 @@ CMD:czyjtonumer(playerid, params[])
 			format(string, sizeof(string), "Osoby z numerem %d:", number);
 			SendClientMessage(playerid, COLOR_WHITE, string);
 			
-			format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `Number`='%d'", number);
+			format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `PhoneNr`='%d'", number);
 			mysql_query(string);
 			mysql_store_result();
 			if(mysql_num_rows())
