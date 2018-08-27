@@ -14747,6 +14747,12 @@ CMD:dr(playerid)
 	{
         if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
         {
+			if(IsARower(GetPlayerVehicleID(playerid)))
+			{
+				sendErrorMessage(playerid, "Rower nie ma deski rozdzielczej!");
+				return 1;
+			}
+		
 			new veh = GetPlayerVehicleID(playerid);
 		    new engine,lights,alarm,doors,bonnet,boot,objective;
 
@@ -16629,14 +16635,14 @@ CMD:odpal(playerid)
         {
 			new engine, unused;
 			GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine , unused , unused, unused, unused, unused, unused);
-			if(engine == 1)
-			{
-				sendTipMessage(playerid, "Silnik jest ju¿ odpalony !");
-				return 1;
-			}
 			if(IsARower(GetPlayerVehicleID(playerid)))
 			{
 				sendErrorMessage(playerid, "Rower nie ma silnika!");
+				return 1;
+			}
+			if(engine == 1)
+			{
+				sendTipMessage(playerid, "Silnik jest ju¿ odpalony !");
 				return 1;
 			}
 			
