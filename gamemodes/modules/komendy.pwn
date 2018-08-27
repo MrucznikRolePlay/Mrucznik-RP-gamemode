@@ -2722,7 +2722,7 @@ CMD:apteczka(playerid, params[])
 			return 1;
 		}
 		
-		if(GetDistanceBetweenPlayers(playerid,playa) < 5)
+		if(GetDistanceBetweenPlayers(playerid,playa) < 5 && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 			if(health < 25 || health > 110)
 			{
@@ -2770,7 +2770,7 @@ CMD:zastrzyk(playerid, params[])
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-		if(GetDistanceBetweenPlayers(playerid,playa) < 5)
+		if(GetDistanceBetweenPlayers(playerid,playa) < 5 && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 			if(IsPlayerConnected(playa))
 			{
@@ -10126,7 +10126,7 @@ CMD:sprzedajalkohol(playerid, params[])
 				{
 				    if(giveplayerid != INVALID_PLAYER_ID)
 				    {
-				        if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
+				        if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5 && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 						{
 					        GetPlayerName(playerid, sendername, sizeof(sendername));
 					        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
@@ -31401,7 +31401,7 @@ CMD:sprzedajbron(playerid, params[])
                             SendClientMessage(playerid,COLOR_GREY,"   Z³a nazwa broni!");
                             return 1;
                         }
-                        if (ProxDetectorS(5.0, playerid, giveplayerid))
+                        if (ProxDetectorS(5.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
                         {
                             if(PlayerInfo[playerid][pMiserPerk] > 0)
                             {
@@ -32370,7 +32370,7 @@ CMD:ochrona(playerid, params[])
 	{
 	    if(giveplayerid != INVALID_PLAYER_ID)
 	    {
-	        if(ProxDetectorS(8.0, playerid, giveplayerid))
+	        if(ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 			{
                 if(gettime() < GetPVarInt(playerid, "armoryTimeLimit"))
                 {
@@ -34053,7 +34053,7 @@ CMD:tankowanie(playerid, params[])
 			{
 			    if(playa != INVALID_PLAYER_ID)
 			    {
-			        if(ProxDetectorS(8.0, playerid, playa)&& IsPlayerInAnyVehicle(playa))
+			        if(ProxDetectorS(8.0, playerid, playa) && IsPlayerInAnyVehicle(playa) && Spectate[playa] == INVALID_PLAYER_ID)
 					{
 					    if(SpamujeMechanik[playerid] == 0)
 					    {
@@ -34126,7 +34126,7 @@ CMD:napraw(playerid, params[])
             {
                 if(playa != INVALID_PLAYER_ID)
                 {
-                    if(ProxDetectorS(8.0, playerid, playa)&& IsPlayerInAnyVehicle(playa))
+                    if(ProxDetectorS(8.0, playerid, playa) && IsPlayerInAnyVehicle(playa) && Spectate[playa] == INVALID_PLAYER_ID)
                     {
                         if(SpamujeMechanik[playerid] == 0)
                         {
@@ -35612,7 +35612,7 @@ CMD:mandacik(playerid, params[])
 		{
   			if(giveplayerid != INVALID_PLAYER_ID)
 		    {
-		        if (ProxDetectorS(8.0, playerid, giveplayerid))
+		        if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 				{
 					new stawki = moneys;
 					moneys = (PlayerInfo[giveplayerid][pLevel] > 21) ? (stawki*3780) : (stawki*(PlayerInfo[giveplayerid][pLevel]*180));
