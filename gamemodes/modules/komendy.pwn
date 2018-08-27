@@ -337,7 +337,6 @@ CMD:panel(playerid, params[])
     	        mysql_query(str);
 
                 format(str, 128, "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
-                //SendPunishMessage(str);
                 ABroadCast(COLOR_YELLOW,str,1);
                 WarnLog(str);
             }
@@ -25638,7 +25637,7 @@ CMD:unwarn(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL))
 		{
 		    if(IsPlayerConnected(giveplayerid))
 		    {
@@ -25654,6 +25653,7 @@ CMD:unwarn(playerid, params[])
 					format(str, sizeof(str), "Dosta³eœ UN-warna od %s, powód: %s", sendername, (result));
 					SendClientMessage(giveplayerid, COLOR_LIGHTRED, str);
 					format(string, sizeof(string), "AdmCmd: %s zosta³ UN-warnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
+					ABroadCast(COLOR_YELLOW,string,1);
                     WarnLog(string);
 					return 1;
 				}
