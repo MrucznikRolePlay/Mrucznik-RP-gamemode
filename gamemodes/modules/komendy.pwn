@@ -338,6 +338,10 @@ CMD:panel(playerid, params[])
 
                 format(str, 128, "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
                 ABroadCast(COLOR_YELLOW,str,1);
+				if(!IsPlayerAdmin(playerid))
+				{
+					SendClientMessage(playerid, COLOR_YELLOW, str);
+				}
                 WarnLog(str);
             }
             else sendTipMessage(playerid, "Gracz nie posiada warnów");
@@ -22663,6 +22667,7 @@ CMD:demorgan(playerid, params[])
 				PoziomPoszukiwania[giveplayerid] = 0;
 				PlayerInfo[giveplayerid][pJailed] = 2;
 				PlayerInfo[giveplayerid][pJailTime] = 3600;
+				ResetPlayerWeapons(giveplayerid);
 				UsunBron(giveplayerid);
 
                 format(string, sizeof(string), "CMD_Info: /demorgan u¿yte przez %s [%d]", GetNick(playerid), playerid);
@@ -22954,7 +22959,7 @@ CMD:setstat(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD3, "|5 KontoBankowe |6 NumerTelefonu |7 PunktyRespektu ");
 			SendClientMessage(playerid, COLOR_GRAD2, "|8 KluczDomowy |9 KluczBiznesu |10 KontoPremium |11 FMember");
 			SendClientMessage(playerid, COLOR_GRAD2, "|12 £owca Nagród |13 Prawnik |14 Mechanik |15 Reporter |16 ZlodziejAut |17 Diler Zio³a");
-            SendClientMessage(playerid, COLOR_GRAD2, "|18 Prostututka |19 Bokser |20 Diler Broni |21 Rybak |23 Truck |77 Praca |88 Czas Kontraktu");
+            SendClientMessage(playerid, COLOR_GRAD2, "|18 Prostututka |19 Bokser |20 Diler Broni |21 Rybak |22 Busiarz |23 Truck |77 Praca |88 Czas Kontraktu");
 			return 1;
 		}
 
@@ -23082,7 +23087,7 @@ CMD:setstat(playerid, params[])
 						case 22:
 						{
 							PlayerInfo[giveplayerid][pCarSkill] = amount;
-							format(string, sizeof(string), "Skill Sprzedawcy aut gracza zmieniony na %d", amount);
+							format(string, sizeof(string), "Skill Busiarza gracza zmieniony na %d", amount);
 						}
                         case 23:
 						{
@@ -25654,6 +25659,10 @@ CMD:unwarn(playerid, params[])
 					SendClientMessage(giveplayerid, COLOR_LIGHTRED, str);
 					format(string, sizeof(string), "AdmCmd: %s zosta³ UN-warnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
 					ABroadCast(COLOR_YELLOW,string,1);
+					if(!IsPlayerAdmin(playerid))
+					{
+						SendClientMessage(playerid, COLOR_YELLOW, string);
+					}
                     WarnLog(string);
 					return 1;
 				}
