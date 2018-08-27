@@ -411,7 +411,6 @@ new lsmcex6move = 0;
 
 new DoorInfo[MAX_DOORS][eDoors];
 //09.06
-new Text3D:Opis[MAX_PLAYERS] = {Text3D:INVALID_3DTEXT_ID, ...};
 
 //nowe stanowe
 new bool:VAR_NGKeypad = false;
@@ -1373,7 +1372,6 @@ ZerujZmienne(playerid)
 	ClearMarriage(playerid);
 
 
-//    Opis[playerid] = Text3D:INVALID_3DTEXT_ID;
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
 	

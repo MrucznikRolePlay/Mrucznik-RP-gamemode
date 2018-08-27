@@ -322,9 +322,9 @@ CMD:panel(playerid, params[])
 			{
                 SendClientMessage(playerid, COLOR_RED, "Gracz jest online, u¿ywam komendy /unwarn");
 				
-				new params[64];
-				format(params, sizeof(params), "%d Panel /unwarn", id);
-				cmd_unwarn(playerid, params);
+				new txt[64];
+				format(txt, sizeof(txt), "%d Panel /unwarn", id);
+				cmd_unwarn(playerid, txt);
 				return 1;
 			}
 			

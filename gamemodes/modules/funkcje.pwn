@@ -351,7 +351,7 @@ public OznaczCzitera(playerid)
 	}
 }*/
 
-IsAValidURL(string[])
+stock IsAValidURL(string[])
 {
 	#if defined REGEX_ON
 	if(regex_exmatch(string, regexURL) >= 0 )
@@ -1355,35 +1355,6 @@ stock strreplace(string[], find, replace)
     }
 }
 
-
-_prawojazdy_unpolish(text[])
-{
-    new replacements[][] =
-    {
-        {'¹', 'a'},
-        {'ó', 'o'}
-    };
-
-    for(new i; i < strlen(text); i++)
-    {
-        new idx = -1;
-        for(new o; o < sizeof(replacements); o++)
-        {
-            if(text[i] == replacements[o][0])
-            {
-                idx = o;
-                break;
-            }
-        }
-
-        if(idx != -1)
-        {
-            text[i] = replacements[idx][1];
-        }
-    }
-
-    return text;
-}
 public CleanPlayaPointsPJ(playerid)
 {
 PlayerInfo[playerid][pPrawojazdypytania] = 0;
@@ -2460,7 +2431,7 @@ MozeMowicNaFamily(playerid)
 	return 0;
 }
 
-IsATajniak(playerid)
+stock IsATajniak(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -3831,12 +3802,13 @@ IsATrain(carid)
 	return 0;
 }
 
-IsAAdministrator(playerid)
+stock IsAAdministrator(playerid)
 {
 	if(PlayerInfo[playerid][pAdmin] > 0)
 		return 1;
 	return 0;
 }
+
 WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw)
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))

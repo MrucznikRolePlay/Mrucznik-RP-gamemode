@@ -25,7 +25,6 @@ stock highestAdminLevel()
 
 new FabrykaMats::Actor;
 new Text3D:FabrykaMats::ActorLabel;
-new FabrykaMats::Timer;
 
 new Float:FabrykaMats::ActorPos[][] =
 {
@@ -56,7 +55,7 @@ stock FabrykaMats::LoadLogic()
 
 	// Init Timers
 
-	FabrykaMats::Timer = SetTimer("FabrykaActor_ReCreate", 900000, true);
+	SetTimer("FabrykaActor_ReCreate", 900000, true);
 	return 1;
 }
 

@@ -5775,8 +5775,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	}
 	   	if(question_id != -1 && response)
 		{
-			if((strcmp(inputtext, correct_answers[question_id], true) == 0
-        	/*|| strcmp(inputtext, _prawojazdy_unpolish(correct_answers[question_id])) == 0*/)
+			if((strcmp(inputtext, correct_answers[question_id], true) == 0)
         	&& strlen(inputtext) > 1)
         	{
             	PlayerInfo[playerid][pPrawojazdydobreodp] += 1;
