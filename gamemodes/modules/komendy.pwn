@@ -318,7 +318,7 @@ CMD:panel(playerid, params[])
             }
 			
 			new id;
-			if(!sscanf(params, "k<fix>", id))
+			if(!sscanf(var, "k<fix>", id))
 			{
                 SendClientMessage(playerid, COLOR_RED, "Gracz jest online, u¿ywam komendy /unwarn");
 				
