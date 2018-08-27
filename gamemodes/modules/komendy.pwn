@@ -9456,7 +9456,7 @@ CMD:pwarn(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
