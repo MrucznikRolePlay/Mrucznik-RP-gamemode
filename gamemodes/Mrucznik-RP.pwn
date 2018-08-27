@@ -976,6 +976,12 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		StopACall(playerid);
 	}
+	
+	//kajdanki
+	if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
+	{
+		OdkujKajdanki(playerid);
+	}
 
     if(GetPVarInt(playerid, "kostka"))
     {
@@ -1522,7 +1528,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 					{
 						if(GoChase[killerid] == playerid)
 						{
-							ConsumingMoney[killerid] = 1;
 							DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
 							format(string,128,"<< Hitman %s wype³ni³ kontrakt na: %s i zarobi³ $%d >>",killername,playername,PlayerInfo[playerid][pHeadValue]);
 							SendFamilyMessage(8, COLOR_YELLOW, string);
@@ -1559,6 +1564,17 @@ public OnPlayerDeath(playerid, killerid, reason)
 				SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S³ychaæ nag³y trzask i po³¹czenie zostaje zakoñczone.");
 			}
 			StopACall(playerid);
+		}		
+		//kajdanki
+		if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
+		{
+			OdkujKajdanki(playerid);
+		}
+		if(SkutyGracz[playerid] != 0)
+		{
+			PDkuje[SkutyGracz[playerid]] = 0;
+			zakuty[SkutyGracz[playerid]] = 0;
+			SkutyGracz[playerid] = 0;
 		}
 		if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 		{
@@ -1569,12 +1585,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 			{
 				KoniecWyscigu(-1);
 			}
-		}
-		if(SkutyGracz[playerid] != 0)
-		{
-			PDkuje[SkutyGracz[playerid]] = 0;
-			zakuty[SkutyGracz[playerid]] = 0;
-			SkutyGracz[playerid] = 0;
 		}
 		if(lowcaz[playerid] == killerid)
 		{
@@ -2200,8 +2210,8 @@ SetPlayerSpawnSkin(playerid)
 			}
 			else
             {
-				SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                SetPVarInt(playerid, "skinF", 0);        
+				SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                SetPVarInt(playerid, "skinF", 1);        
             }
 		}
 		else if(GetPlayerOrg(playerid) != 0)
@@ -4546,7 +4556,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 							format(string, sizeof(string), "~w~Niebezpieczny przestepca~r~Zabity~n~Nagroda~g~$%d", price);
 							SendClientMessage(i, COLOR_LIGHTBLUE, "Jeœli chcesz wiêcej zarobiæ za z³apanego bandziora musisz go doprowadziæ ¿ywego do celi.");
 							GameTextForPlayer(i, string, 5000, 1);
-							ConsumingMoney[i] = 1;
 							DajKase(i, price);//moneycheat
 							PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 						}
@@ -4565,7 +4574,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 									GameTextForPlayer(i, string, 5000, 1);
 									PoziomPoszukiwania[i] = 0;
 									ClearCrime(i);
-									ConsumingMoney[i] = 1;
 									DajKase(i, price2);//moneycheat
 									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 									PlayerInfo[i][pDetSkill] ++;
@@ -4586,7 +4594,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 									GameTextForPlayer(i, string, 5000, 1);
 									PoziomPoszukiwania[i] = 0;
 									ClearCrime(i);
-									ConsumingMoney[i] = 1;
 									DajKase(i, price2);//moneycheat
 									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 									PlayerInfo[i][pDetSkill] ++;
@@ -4607,7 +4614,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 									GameTextForPlayer(i, string, 5000, 1);
 									PoziomPoszukiwania[i] = 0;
 									ClearCrime(i);
-									ConsumingMoney[i] = 1;
 									DajKase(i, price2);//moneycheat
 									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 									PlayerInfo[i][pDetSkill] ++;
@@ -4628,7 +4634,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 									GameTextForPlayer(i, string, 5000, 1);
 									PoziomPoszukiwania[i] = 0;
 									ClearCrime(i);
-									ConsumingMoney[i] = 1;
 									DajKase(i, price2);//moneycheat
 									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 									PlayerInfo[i][pDetSkill] ++;
@@ -4649,7 +4654,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 									GameTextForPlayer(i, string, 5000, 1);
 									PoziomPoszukiwania[i] = 0;
 									ClearCrime(i);
-									ConsumingMoney[i] = 1;
 									DajKase(i, price2);//moneycheat
 									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 									PlayerInfo[i][pDetSkill] ++;
@@ -5297,7 +5301,6 @@ PayDay()
 				    PlayerInfo[i][pAccount] -= TaxValue;
 					checks = PlayerInfo[i][pPayCheck];
 				    ebill = (PlayerInfo[i][pAccount]/10000)*(PlayerInfo[i][pLevel]);
-				    ConsumingMoney[i] = 1;
 				    DajKase(i, checks);
 				    if(PlayerInfo[i][pAccount] > 0)
 				    {

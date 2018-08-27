@@ -2197,7 +2197,6 @@ public JednaSekundaTimer()
 				}
 				if(RingTone[i]%12 == 0 || RingTone[i] == 1)
 				{
-					new string[128];
 					format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %d", PlayerInfo[Mobile[i]][pPnumber]);
 					SendClientMessage(i, COLOR_YELLOW, string);
 					format(string, sizeof(string), "* Telefon %s zaczyna dzwoniæ.", GetNick(i));

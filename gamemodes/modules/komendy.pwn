@@ -316,6 +316,18 @@ CMD:panel(playerid, params[])
                 SendClientMessage(playerid, COLOR_RED, "Niepoprawna d³ugosc!");
                 return 1;
             }
+			
+			new id;
+			if(!sscanf(params, "k<fix>", id))
+			{
+                SendClientMessage(playerid, COLOR_RED, "Gracz jest online, u¿ywam komendy /unwarn");
+				
+				new params[64];
+				format(params, sizeof(params), "%d Panel /unwarn", id);
+				cmd_unwarn(playerid, params);
+				return 1;
+			}
+			
             new warny = MruMySQL_GetAccInt("Warnings", var);
             if(warny > 0)
             {
@@ -3289,12 +3301,7 @@ CMD:yo(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /yo [ID gracza]");
 			return 1;
 		}
-        if(Spectate[playa] != INVALID_PLAYER_ID)
-		{
-			sendErrorMessage(playerid, "Ten gracz jest za daleko.");
-			return 1;
-		}
-		if (ProxDetectorS(5.0, playerid, playa))
+		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -3325,7 +3332,7 @@ CMD:yo3(playerid, params[])
 			return 1;
 		}
 
-		if (ProxDetectorS(5.0, playerid, playa))
+		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -3356,7 +3363,7 @@ CMD:yo2(playerid, params[])
 			return 1;
 		}
 
-		if (ProxDetectorS(5.0, playerid, playa))
+		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -3389,7 +3396,7 @@ CMD:yo4(playerid, params[])
 
 
 
-		if (ProxDetectorS(5.0, playerid, playa))
+		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -3422,7 +3429,7 @@ CMD:elo(playerid, params[])
 
 
 
-		if (ProxDetectorS(5.0, playerid, playa))
+		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -3460,7 +3467,7 @@ CMD:elo2(playerid, params[])
 
 
 
-		if (ProxDetectorS(5.0, playerid, playa))
+		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -3490,12 +3497,8 @@ CMD:witaj(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /witaj [ID gracza]");
 			return 1;
 		}
-        if(Spectate[playa] != INVALID_PLAYER_ID)
-		{
-			sendErrorMessage(playerid, "Ten gracz jest za daleko.");
-			return 1;
-		}
-		if (ProxDetectorS(5.0, playerid, playa))
+		
+		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -3528,17 +3531,12 @@ CMD:caluj(playerid, params[])
 			return 1;
 		}
 
-		if (ProxDetectorS(5.0, playerid, playa))
+		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-		            if(Spectate[playa] != INVALID_PLAYER_ID)
-					{
-						sendErrorMessage(playerid, "Jesteœ za daleko !");
-						return 1;
-					}
   					new nick[200];
 					new witany[MAX_PLAYER_NAME];
 					SendClientMessage(playa, COLOR_WHITE, "Calujesz siê");
@@ -4387,7 +4385,7 @@ CMD:pokazdowod(playerid, params[])
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-			    if (ProxDetectorS(8.0, playerid, giveplayerid))
+			    if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 				{
 
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
@@ -4909,7 +4907,7 @@ CMD:sprawdztest(playerid, params[])
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				return 1;
 			}
-			else if(PlayerInfo[giveplayerid][pCarLic] == 2)
+			else if(PlayerInfo[giveplayerid][pSprawdzczyzdalprawko] == 1 || PlayerInfo[giveplayerid][pCarLic] == 2)
 			{
 				format(string, sizeof(string), "Gracz %s ZDA£ egzamin teoretyczny i mo¿e rozpocz¹æ egzamin praktyczny", giveplayer);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -9991,7 +9989,7 @@ CMD:pobij(playerid, params[])
 		{
 			if(playa != INVALID_PLAYER_ID && playa != playerid)
 			{
-	    		if(GetDistanceBetweenPlayers(playerid,playa) < 5)
+	    		if(GetDistanceBetweenPlayers(playerid,playa) < 5 && Spectate[playa] == INVALID_PLAYER_ID)
  				{
  				    if(GetPlayerState(playerid) == 1)
  				    {
@@ -10016,11 +10014,6 @@ CMD:pobij(playerid, params[])
 					       			    sendTipMessage(playerid, "Nie mo¿esz pobiæ gracza z broni¹!");
 					       			    return 1;
 					       			}
-					       			if(Spectate[playa] != INVALID_PLAYER_ID)
-									{
-										sendTipMessage(playerid, "Ten gracz jest za daleko.");
-										return 1;
-									}
 					       			// {
 					       			new rand = random(15);
 			            			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
@@ -10093,7 +10086,7 @@ CMD:pobij(playerid, params[])
  				}
 				else
 				{
-					sendErrorMessage(playerid, "Ten gracz jest za daleko !");
+					sendErrorMessage(playerid, "Ten gracz jest za daleko!");
 					return 1;
 				}
 			}
@@ -15057,7 +15050,6 @@ CMD:plac(playerid, params[])
 						new playermoney = kaska[playerid];
 						if (moneys > 0 && playermoney >= moneys)
 						{
-						    ConsumingMoney[giveplayerid] = 1;
 							DajKase(playerid, (0 - moneys));
 							DajKase(giveplayerid, moneys);
 							format(string, sizeof(string), "   Da³eœ %s(gracz: %d), $%d.", giveplayer,giveplayerid, moneys);
@@ -15168,7 +15160,6 @@ CMD:teczka(playerid, params[])
 						new playermoney = kaska[playerid];
 						if (moneys > 0 && playermoney >= moneys)
 						{
-						    ConsumingMoney[giveplayerid] = 1;
 							DajKase(playerid, (0 - moneys));
 							DajKase(giveplayerid, moneys);
 							format(string, sizeof(string), "   Da³eœ %s(gracz: %d), $%d.", giveplayer,giveplayerid, moneys);
@@ -16706,6 +16697,12 @@ CMD:odpal(playerid)
 				sendTipMessage(playerid, "Silnik jest ju¿ odpalony !");
 				return 1;
 			}
+			if(IsARower(GetPlayerVehicleID(playerid)))
+			{
+				sendErrorMessage(playerid, "Rower nie ma silnika!");
+				return 1;
+			}
+			
             new Float:lHP;
             GetVehicleHealth(GetPlayerVehicleID(playerid), lHP);
             if(lHP <= 250.0) return sendErrorMessage(playerid, "Silnik jest zepsuty!"); //        8.12.2016 propozycja uid 30923
@@ -16765,6 +16762,12 @@ CMD:zgas(playerid)
 	        {
 	            return 1;
 	        }
+			
+			if(IsARower(GetPlayerVehicleID(playerid)))
+			{
+				sendErrorMessage(playerid, "Rower nie ma silnika!");
+				return 1;
+			}
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			format(string, sizeof(string), "* %s wyciaga kluczyk ze stacyjki i gasi auto.", sendername);
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -16774,7 +16777,7 @@ CMD:zgas(playerid)
 		}
 		else
 		{
-		    sendErrorMessage(playerid, "Nie jesteœ kierowc¹ !");
+		    sendErrorMessage(playerid, "Nie jesteœ kierowc¹!");
             return 1;
 		}
 	}
@@ -18473,7 +18476,6 @@ CMD:wyplac(playerid, params[])
 				sendTipMessage(playerid, "Nie masz tyle !");
 				return 1;
 			}
-		    ConsumingMoney[playerid] = 1;
 			DajKase(playerid,cashdeposit);
 			PlayerInfo[playerid][pAccount]=PlayerInfo[playerid][pAccount]-cashdeposit;
 			format(string, sizeof(string), "Wyp³aci³eœ $%d ze swojego konta, obecny stan to: $%d ", cashdeposit,PlayerInfo[playerid][pAccount]);
@@ -22662,6 +22664,7 @@ CMD:demorgan(playerid, params[])
 				PoziomPoszukiwania[giveplayerid] = 0;
 				PlayerInfo[giveplayerid][pJailed] = 2;
 				PlayerInfo[giveplayerid][pJailTime] = 3600;
+				UsunBron(giveplayerid);
 
                 format(string, sizeof(string), "CMD_Info: /demorgan u¿yte przez %s [%d]", GetNick(playerid), playerid);
                 SendCommandLogMessage(string);
@@ -25257,7 +25260,6 @@ CMD:kasa(playerid, params[])
 		        {
 					ResetujKase(playa);
 					PlayerInfo[playa][pCash] = 0;
-					ConsumingMoney[playa] = 1;
 					DajKase(playa, money);
 					new string[128];
 					format(string, sizeof(string), "%s dal %s: %d$ /money", GetNick(playerid), GetNick(playa), money);
@@ -25293,7 +25295,6 @@ CMD:dajkase(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-		            ConsumingMoney[playa] = 1;
 					DajKase(playa, money);
 					new string[128];
 					format(string, sizeof(string), "%s dal %s: %d$ /givemoney", GetNick(playerid), GetNick(playa), money);
@@ -30547,7 +30548,7 @@ CMD:pl(playerid, params[])
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-			    if (ProxDetectorS(8.0, playerid, giveplayerid))
+			    if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 				{
 				    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz pokazaæ licencji samemu sobie, u¿yj /licencje!"); return 1; }
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
@@ -31116,7 +31117,6 @@ CMD:sprzedajbron(playerid, params[])
                     {
                         if(giveplayerid != INVALID_PLAYER_ID)
                         {
-
                             if(!strlen(x_weapon))
                             {
                                 SendClientMessage(playerid, COLOR_GREEN, "________________________________________________");
@@ -31164,11 +31164,6 @@ CMD:sprzedajbron(playerid, params[])
                                 price[playerid] = 100;
                                 ammo[playerid] = 1;
                                 umiejetnosc = 1;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun1] = 8;
-                                    PlayerInfo[giveplayerid][pAmmo1] = 1;
-                                }*/
                                 slot = 2;
                             }
                             else
@@ -31186,11 +31181,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 114;
                                 umiejetnosc = 2;
                                 slot = 3;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun2] = 23;
-                                    PlayerInfo[giveplayerid][pAmmo2] = 114;
-                                }*/
                             }
                             else
                             {
@@ -31207,11 +31197,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 1;
                                 umiejetnosc = 4;
                                 slot = 2;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun1] = 9;
-                                    PlayerInfo[giveplayerid][pAmmo1] = 1;
-                                }*/
                             }
                             else
                             {
@@ -31228,11 +31213,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 200;
                                 umiejetnosc = 1;
                                 slot = 3;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun2] = 22;
-                                    PlayerInfo[giveplayerid][pAmmo2] = 200;
-                                }*/
                             }
                             else
                             {
@@ -31249,11 +31229,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 107;
                                 umiejetnosc = 2;
                                 slot = 3;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun2] = 24;
-                                    PlayerInfo[giveplayerid][pAmmo2] = 107;
-                                }*/
                             }
                             else
                             {
@@ -31270,11 +31245,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 700;
                                 umiejetnosc = 2;
                                 slot = 5;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun4] = 29;
-                                    PlayerInfo[giveplayerid][pAmmo4] = 700;
-                                }*/
                             }
                             else
                             {
@@ -31291,11 +31261,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 750;
                                 umiejetnosc = 4;
                                 slot = 5;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun4] = 28;
-                                    PlayerInfo[giveplayerid][pAmmo4] = 750;
-                                }*/
                             }
                             else
                             {
@@ -31312,11 +31277,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 50;
                                 umiejetnosc = 1;
                                 slot = 4;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun3] = 25;
-                                    PlayerInfo[giveplayerid][pAmmo3] = 50;
-                                }*/
                             }
                             else
                             {
@@ -31333,11 +31293,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 57;
                                 umiejetnosc = 4;
                                 slot = 4;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun3] = 27;
-                                    PlayerInfo[giveplayerid][pAmmo3] = 57;
-                                }*/
                             }
                             else
                             {
@@ -31354,11 +31309,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 550;
                                 umiejetnosc = 3;
                                 slot = 6;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun5] = 30;
-                                    PlayerInfo[giveplayerid][pAmmo5] = 550;
-                                }*/
                             }
                             else
                             {
@@ -31375,11 +31325,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 550;
                                 umiejetnosc = 3;
                                 slot = 6;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun5] = 31;
-                                    PlayerInfo[giveplayerid][pAmmo5] = 550;
-                                }*/
                             }
                             else
                             {
@@ -31396,11 +31341,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 51;
                                 umiejetnosc = 3;
                                 slot = 7;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun6] = 33;
-                                    PlayerInfo[giveplayerid][pAmmo6] = 51;
-                                }*/
                             }
                             else
                             {
@@ -31417,11 +31357,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 51;
                                 umiejetnosc = 4;
                                 slot = 7;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun6] = 34;
-                                    PlayerInfo[giveplayerid][pAmmo6] = 51;
-                                }*/
                             }
                             else
                             {
@@ -31438,14 +31373,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 10;
                                 umiejetnosc = 5;
                                 slot = 9;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    GivePlayerWeapon(giveplayerid, 40, 1);
-                                    PlayerInfo[giveplayerid][pGun8] = 39;
-                                    PlayerInfo[giveplayerid][pAmmo8] = 10;
-                                    PlayerInfo[giveplayerid][pGun12] = 40;
-                                    PlayerInfo[giveplayerid][pAmmo12] = 1;
-                                }*/
                             }
                             else
                             {
@@ -31462,11 +31389,6 @@ CMD:sprzedajbron(playerid, params[])
                                 ammo[playerid] = 200;
                                 umiejetnosc = 5;
                                 slot = 8;
-                                /*if(umiejetnosc <= skillz)
-                                {
-                                    PlayerInfo[giveplayerid][pGun7] = 37;
-                                    PlayerInfo[giveplayerid][pAmmo7] = 150;
-                                }*/
                             }
                             else
                             {
@@ -31572,7 +31494,6 @@ CMD:sprzedajbron(playerid, params[])
                                     PlayerInfo[giveplayerid][pGun1] = 8;
                                     PlayerInfo[giveplayerid][pAmmo1] = 1;
                                 }
-                                ConsumingMoney[playerid] = 1;
                                 GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
                                 GetPlayerName(playerid, sendername, sizeof(sendername));
                                 format(string, sizeof(string), "   Da³eœ %s, %s z %d nabojami, z %d materia³ów.", giveplayer,x_weapon, ammo[playerid], price[playerid]);
@@ -32389,8 +32310,9 @@ CMD:rozkuj(playerid, params[])
 							PlayerCuffed[giveplayerid] = 0;
 							zakuty[giveplayerid] = 0;
 							SkutyGracz[giveplayerid] = 0;
-							PDkuje[playerid] = 0;
+                            uzytekajdanki[giveplayerid] = 0;
                             uzytekajdanki[playerid] = 0;
+							PDkuje[playerid] = 0;
                             ClearAnimations(giveplayerid);
         					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
 							RemovePlayerAttachedObject(giveplayerid, 0);
@@ -33565,7 +33487,6 @@ CMD:akceptuj(playerid, params[])
                     {
                         GetPlayerName(RefillOffer[playerid], giveplayer, sizeof(giveplayer));
                         GetPlayerName(playerid, sendername, sizeof(sendername));
-                        new car = gLastCar[playerid];
                         new fuel;
                         new vehicleid = GetPlayerVehicleID(playerid);
                         if(RefillOffer[playerid] != playerid)
@@ -33607,10 +33528,6 @@ CMD:akceptuj(playerid, params[])
                         if(Gas[vehicleid] < 110)
                         {
                             Gas[vehicleid] += fuel;
-                        }
-                        if(Gas[car] < 110)
-                        {
-                            Gas[car] += fuel;
                         }
                         RefillOffer[playerid] = 999;
                         RefillPrice[playerid] = 0;
@@ -35892,6 +35809,7 @@ CMD:aresztuj(playerid, params[])
                                     new depo3 = floatround(((price/100) * 20), floatround_round);
                                     PoziomPoszukiwania[playa] = 0;
                                     zakuty[playa] = 0;//Kajdany
+                                    uzytekajdanki[playa] = 0;
                                     PDkuje[playerid] = 0;
                                     uzytekajdanki[playerid] = 0;
                                     DajKase(playerid, depo3);

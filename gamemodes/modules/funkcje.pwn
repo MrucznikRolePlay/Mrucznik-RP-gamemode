@@ -455,7 +455,7 @@ stock Taxi_FareEnd(playerid)
         Sejf_Add(FRAC_KT, TransportMoney[playerid]);
         //DajKase(playerid, TransportMoney[playerid]/2);
     }
-	ConsumingMoney[playerid] = 1; TransportValue[playerid] = 0; TransportMoney[playerid] = 0;
+	TransportValue[playerid] = 0; TransportMoney[playerid] = 0;
 }
 
 stock Taxi_Pay(playerid)
@@ -1045,6 +1045,18 @@ return 1;
 public UzyteKajdany(playerid){
 uzytekajdanki[playerid] = 0;
 return 1;
+}
+
+OdkujKajdanki(playerid)
+{
+	if(PDkuje[playerid] > 0)
+	{
+		new giveplayerid = PDkuje[playerid];
+		PDkuje[giveplayerid] = 0;
+		uzytekajdanki[giveplayerid] = 0;
+	}
+	PDkuje[playerid] = 0;
+	uzytekajdanki[playerid] = 0;
 }
 
 public spamujewl(playerid){
@@ -1828,8 +1840,8 @@ HandlePlayerItemSelection(playerid, selecteditem)
 
 stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 {
-	DestroyObject(Barier[frac][id]);
-	new oid = CreateObject(model, x, y, z, 0.0, 0.0, a);
+	DestroyDynamicObject(Barier[frac][id]);
+	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
 	if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
 	BarierState[frac][id] = true;
     return 1;
@@ -1837,7 +1849,7 @@ stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 
 stock BARIERKA_Remove(frakcja, id)
 {
-    SetObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
+    SetDynamicObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
     DestroyDynamic3DTextLabel(BarText[frakcja][id]);
     BarierState[frakcja][id] = false;
     return 1;
@@ -1845,25 +1857,25 @@ stock BARIERKA_Remove(frakcja, id)
 
 stock BARIERKA_Init()
 {
-    for(new j=1;j<=3;j++) //LSPD, FBI, NG
+    for(new j=0;j<=4;j++) //rodziny, LSPD, FBI, NG LSMC
     {
         for(new i=0;i<10;i++)
         {
-            Barier[j][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+            Barier[j][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
             BarierState[j][i] = false;
         }
     }
     for(new i=0;i<10;i++) //LSFD
     {
-        Barier[FRAC_LSFD][i] = CreateObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+        Barier[FRAC_LSFD][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
         BarierState[FRAC_LSFD][i] = false;
     }
+    for(new i=0;i<10;i++) //USSS
+    {
+        Barier[FRAC_BOR][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+        BarierState[FRAC_BOR][i] = false;
+    }
     return 1;
-}
-
-public EditObj(playerid, obj)
-{
-    EditObject(playerid, obj);
 }
 
 SetPlayerWeatherEx(playerid, id)
@@ -11299,7 +11311,7 @@ stock TJD_JobEnd(playerid, bool:quiter=false)
     SetVehicleHealth(veh, 1000.0);
     Gas[veh] = 100;
 
-    PlayerInfo[playerid][pTruckSkill]=clamp(PlayerInfo[playerid][pTruckSkill]+floatround(ile/5, floatround_floor), 0, 500);
+    PlayerInfo[playerid][pTruckSkill]+=PlayerInfo[playerid][pTruckSkill]+floatround(ile/5, floatround_floor);
 }
 
 stock TJD_CallCheckpoint(playerid, veh)
@@ -11621,7 +11633,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
         {
             format(str, 64, "+ %d skilla", lSkill);
             SendClientMessage(playerid, COLOR_GRAD2, str);
-            PlayerInfo[playerid][pTruckSkill]=clamp(PlayerInfo[playerid][pTruckSkill]+lSkill, 0, 500);
+            PlayerInfo[playerid][pTruckSkill]++;
         }
 
         if(ile != TransportJobData[idx][eTJDMoney]) SendClientMessage(playerid, 0x00FF00FF, "Pamiêtaj, ¿e im szybciej jedziesz, tym wiêcej gubisz towaru!");

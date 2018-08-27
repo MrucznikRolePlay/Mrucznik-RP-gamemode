@@ -686,7 +686,6 @@ new TicketOffer[MAX_PLAYERS];
 new TicketMoney[MAX_PLAYERS];
 new PlayerStoned[MAX_PLAYERS];
 new PlayerStonedStop[MAX_PLAYERS];
-new ConsumingMoney[MAX_PLAYERS];
 new AntySpawnBroni[MAX_PLAYERS];
 new AntyWlamSejf[MAX_PLAYERS];
 new FishCount[MAX_PLAYERS];
@@ -1186,7 +1185,7 @@ ZerujZmienne(playerid)
 	Mobile[playerid] = INVALID_PLAYER_ID; Callin[playerid] = CALL_NONE; CellTime[playerid] = 0; Music[playerid] = 0; BoxOffer[playerid] = 999; PlayerBoxing[playerid] = 0;
 	Spectate[playerid] = INVALID_PLAYER_ID; PlayerDrunk[playerid] = 0; PlayerDrunkTime[playerid] = 0; WnetrzeWozu[playerid] = 0;
 	Unspec[playerid][sLocal] = 255; FishCount[playerid] = 0; ZapisSkinu[playerid] = 127;
-    ConsumingMoney[playerid] = 0; AntySpawnBroni[playerid] = 0; AntyWlamSejf[playerid] = 0;
+    AntySpawnBroni[playerid] = 0; AntyWlamSejf[playerid] = 0;
     gLastCar[playerid] = 0; FirstSpawn[playerid] = 0; lowcaz[playerid] = 501;
 	gOoc[playerid] = 0; gNews[playerid] = 0; BigEar[playerid] = 0; gDice[playerid] = 0; gFam[playerid] = 0; gNewbie[playerid] = 0;
  	gGas[playerid] = 0; GUIExit[playerid] = 0; gMuteDepo[playerid] = 0;
