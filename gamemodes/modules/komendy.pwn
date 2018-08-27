@@ -9025,7 +9025,6 @@ CMD:qf(playerid)
 			PlayerInfo[playerid][pMember] = 0;
 			PlayerInfo[playerid][pRank] = 0;
 			PlayerInfo[playerid][pSkin] = 0;
-			UsunBron(playerid);
             orgUnInvitePlayer(playerid);
 			MedicBill[playerid] = 0;
 			SpawnPlayer(playerid);
@@ -25210,7 +25209,7 @@ CMD:pogodaall(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 4 || PlayerInfo[playerid][pZG] >= 7)
+        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] > 1 || PlayerInfo[playerid][pZG] >= 7)
 		{
 			new weather;
 			if( sscanf(params, "d", weather))
@@ -25547,7 +25546,7 @@ CMD:warn(playerid, params[])
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] > 1)
 		{
             if(AntySpam[playerid] == 1)
 		    {
@@ -36968,7 +36967,7 @@ CMD:setzonecontrol(playerid, p[])
 
 CMD:unbw(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] < 1) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
     new id;
     if(sscanf(p, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /unbw [ID]");
     if(PlayerInfo[id][pBW] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie ma BW.");
