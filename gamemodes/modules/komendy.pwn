@@ -25212,7 +25212,7 @@ CMD:pogodaall(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] > 1 || PlayerInfo[playerid][pZG] >= 7)
+        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 7)
 		{
 			new weather;
 			if( sscanf(params, "d", weather))
@@ -25547,7 +25547,7 @@ CMD:warn(playerid, params[])
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] > 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 		{
             if(AntySpam[playerid] == 1)
 		    {
@@ -36885,12 +36885,18 @@ CMD:setzonecontrol(playerid, p[])
 
 CMD:unbw(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
-    new id;
-    if(sscanf(p, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /unbw [ID]");
-    if(PlayerInfo[id][pBW] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie ma BW.");
-    PlayerInfo[id][pBW] = 2;
-    SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW");
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+	{
+		new id;
+		if(sscanf(p, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /unbw [ID]");
+		if(PlayerInfo[id][pBW] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie ma BW.");
+		PlayerInfo[id][pBW] = 2;
+		SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW");
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie masz uprawnieñ.");
+	}
     return 1;
 }
 
