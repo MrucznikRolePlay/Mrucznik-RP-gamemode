@@ -960,6 +960,13 @@ public OnPlayerDisconnect(playerid, reason)
         }
     }
 	
+    if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+    {
+		SendPlayerMessageToAll(COLOR_NEWS, "(( Wywiad zakoñczony - gracz wyszed³ z gry ))");
+        new talker = TalkingLive[playerid];
+        TalkingLive[playerid] = INVALID_PLAYER_ID;
+        TalkingLive[talker] = INVALID_PLAYER_ID;
+    }
 	//koniec rozmowy telefonicznej
 	if(Mobile[playerid] != INVALID_PLAYER_ID)
 	{
@@ -969,14 +976,6 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		StopACall(playerid);
 	}
-    if(TalkingLive[playerid] != INVALID_PLAYER_ID)
-    {
-		SendPlayerMessageToAll(COLOR_NEWS, "(( Wywiad zakoñczony - gracz wyszed³ z gry ))");
-        new talker = TalkingLive[playerid];
-        TalkingLive[playerid] = INVALID_PLAYER_ID;
-        TalkingLive[talker] = INVALID_PLAYER_ID;
-        return 0;
-    }
 
     if(GetPVarInt(playerid, "kostka"))
     {
@@ -1528,7 +1527,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 							format(string,128,"<< Hitman %s wype³ni³ kontrakt na: %s i zarobi³ $%d >>",killername,playername,PlayerInfo[playerid][pHeadValue]);
 							SendFamilyMessage(8, COLOR_YELLOW, string);
 							PayLog(string);
-							format(string,128,"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s . Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",playername);
+							format(string,128,"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s. Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",playername);
 							SendClientMessageToAll(COLOR_NEWS, string);
 							PlayerInfo[playerid][pHeadValue] = 0;
 							GotHit[playerid] = 0;
@@ -1544,6 +1543,13 @@ public OnPlayerDeath(playerid, killerid, reason)
 			DisablePlayerCheckpoint(playerid);
 			gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
 		}
+		if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+		{
+			SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca umar³.");
+			new talker = TalkingLive[playerid];
+			TalkingLive[playerid] = INVALID_PLAYER_ID;
+			TalkingLive[talker] = INVALID_PLAYER_ID;
+		}
 		//koniec rozmowy telefonicznej
 		if(Mobile[playerid] != INVALID_PLAYER_ID)
 		{
@@ -1553,14 +1559,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 				SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S³ychaæ nag³y trzask i po³¹czenie zostaje zakoñczone.");
 			}
 			StopACall(playerid);
-		}
-		if(TalkingLive[playerid] != INVALID_PLAYER_ID)
-		{
-			SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca umar³.");
-			new talker = TalkingLive[playerid];
-			TalkingLive[playerid] = INVALID_PLAYER_ID;
-			TalkingLive[talker] = INVALID_PLAYER_ID;
-			return 0;
 		}
 		if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 		{
@@ -7133,7 +7131,7 @@ public OnPlayerText(playerid, text[])
 		
 		if(Mobile[playerid] < EMERGENCY_NUMBERS)
 		{
-			new org = (Mobile[playerid] + EMERGENCY_NUMBERS) * -1; //wzór na wy³uskanie organizacji z numeru
+			new org = (Mobile[playerid] - EMERGENCY_NUMBERS) * -1; //wzór na wy³uskanie organizacji z numeru
 			if(Mobile[playerid] == POLICE_NUMBER || Mobile[playerid] == SHERIFF_NUMBER)
 			{
 				if(strlen(text) > 82) 
@@ -7164,21 +7162,18 @@ public OnPlayerText(playerid, text[])
 				format(Zgloszenie[id][zgloszenie_lokacja], MAX_ZONE_NAME, "%s", pZone);
 				strmid(Zgloszenie[id][zgloszenie_tresc], message, 0, strlen(message) + 9, 128);
 				Zgloszenie[id][zgloszenie_status] = 0;
-				SendFamilyMessage(org, COLOR_DBLUE, "HQ: Do Wszystkich Jednostek: Otrzymano nowe zg³oszenie!");
-			}
-			else
-			{
-				new turner[MAX_PLAYER_NAME];
-				new wanted[128];
-				GetPlayerName(playerid, turner, sizeof(turner));
-				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg³osimy to wszystkim jednostkom w danym obszarze.");
-				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
-				format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek! Nadawca: %s", turner);
-				SendTeamMessage(org, COLOR_ALLDEPT, wanted);
-				format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie: %s", text);
-				SendTeamMessage(org, COLOR_ALLDEPT, wanted);
 			}
 			
+			new turner[MAX_PLAYER_NAME];
+			new wanted[128];
+			GetPlayerName(playerid, turner, sizeof(turner));
+			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg³osimy to wszystkim jednostkom w danym obszarze.");
+			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
+			format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek! Nadawca: %s", turner);
+			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie: %s", text);
+			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+				
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
 			StopACall(playerid);
 		}

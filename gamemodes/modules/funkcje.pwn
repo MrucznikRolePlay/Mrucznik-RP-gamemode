@@ -7555,26 +7555,22 @@ StartACall(playerid, reciverid)
 StopACall(playerid)
 {
 	new reciverid = Mobile[playerid];
+	StopACallForPlayer(playerid);
 	
-	Mobile[playerid] = INVALID_PLAYER_ID;
-	RingTone[playerid] = 0;
-	SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
-	
-	if(Callin[playerid] == CALL_LIVE)
-	{
-		TalkingLive[playerid] = INVALID_PLAYER_ID;
-		if(reciverid >= 0) TalkingLive[reciverid] = INVALID_PLAYER_ID;
-	}
-	
-	Callin[playerid] = CALL_NONE;
 	new payer = playerid;
 	if(reciverid >= 0)
 	{
-		Mobile[reciverid] = INVALID_PLAYER_ID;
-		RingTone[reciverid] = 0;
-		Callin[reciverid] = CALL_NONE;
-		SetPlayerSpecialAction(reciverid,SPECIAL_ACTION_NONE);
-		if(CellTime[reciverid] != 0) payer = reciverid;
+		StopACallForPlayer(reciverid);
+		if(CellTime[reciverid] != 0) 
+		{
+			payer = reciverid;
+		}
+		
+		if(TalkingLive[playerid] == reciverid)
+		{
+			TalkingLive[playerid] = INVALID_PLAYER_ID;
+			TalkingLive[reciverid] = INVALID_PLAYER_ID;
+		}
 	}
 	
 	if(CellTime[payer] != 0)
@@ -7586,6 +7582,15 @@ StopACall(playerid)
 		format(string, sizeof(string), "~w~Koszt rozmowy: ~n~~r~$%d", cost);
 		GameTextForPlayer(payer, string, 5000, 1);
 	}
+	
+}
+
+StopACallForPlayer(playerid)
+{
+	Mobile[playerid] = INVALID_PLAYER_ID;
+	RingTone[playerid] = 0;
+	Callin[playerid] = CALL_NONE;
+	SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
 }
 
 SendAdminMessage(color, string[])

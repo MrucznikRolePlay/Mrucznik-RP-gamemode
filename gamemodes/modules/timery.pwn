@@ -905,32 +905,6 @@ public Spectator()
                 }
             }
         }
-
-		//dzwonek telefonu
-		if(RingTone[i] > 0 && Mobile[i] >= 0)
-		{
-			RingTone[i]++;
-			if(RingTone[i]%3 == 0)
-			{
-				PlayerPlaySound(i, 23000, 0.0, 0.0, 0.0);
-			}
-			else if(RingTone[i]%12 == 0 || RingTone[i] == 1)
-			{
-				format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %d", PlayerInfo[Mobile[i]][pPnumber]);
-				SendClientMessage(i, COLOR_YELLOW, string);
-				format(string, sizeof(string), "* Telefon %s zaczyna dzwoniæ.", GetNick(i));
-				ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				PlayerPlaySound(i, 23000, 0.0, 0.0, 0.0);
-			}
-			else if(RingTone[i] >= 60)
-			{
-				StopACall(i);
-			}
-		}
-		if(CellTime[i] > 0)
-		{
-			CellTime[i]++;
-		}
 		
         //Vinyl audio check
         if(!GetPVarInt(i, "VINYL-stream"))
@@ -2207,6 +2181,37 @@ public JednaSekundaTimer()
         GetPlayerPos(i, x, y, z);
 		GetPlayerArmour(i, pancerzyy);
         vehicleid = GetPlayerVehicleID(i);
+		
+		//dzwonek telefonu
+		if(RingTone[i] > 0 && Mobile[i] >= 0)
+		{
+			if(RingTone[i] >= 60)
+			{
+				StopACall(i);
+			}
+			else
+			{
+				if(RingTone[i]%3 == 0)
+				{
+					PlayerPlaySound(i, 23000, 0.0, 0.0, 0.0);
+				}
+				if(RingTone[i]%12 == 0 || RingTone[i] == 1)
+				{
+					new string[128];
+					format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %d", PlayerInfo[Mobile[i]][pPnumber]);
+					SendClientMessage(i, COLOR_YELLOW, string);
+					format(string, sizeof(string), "* Telefon %s zaczyna dzwoniæ.", GetNick(i));
+					ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					PlayerPlaySound(i, 23000, 0.0, 0.0, 0.0);
+				}
+				RingTone[i]++;
+			}
+		}
+		if(CellTime[i] > 0)
+		{
+			CellTime[i]++;
+		}
+		
 		if(State == PLAYER_STATE_DRIVER && !ToggleSpeedo[i])
 		{
 			VehicleModel = GetVehicleModel(vehicleid);

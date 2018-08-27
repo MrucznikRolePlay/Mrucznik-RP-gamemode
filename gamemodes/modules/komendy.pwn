@@ -19087,6 +19087,7 @@ CMD:dzwon(playerid, params[])
 	if(numerTelefonuOdbiorcy < 1)
 	{
 		sendErrorMessage(playerid, "Niepoprawny numer telefonu.");
+		return 1;
 	}
 	
 	if(Mobile[playerid] != INVALID_PLAYER_ID)
@@ -19303,7 +19304,7 @@ CMD:sms(playerid, params[])
 			}
 		}
 	}
-	else
+	else if(numerTelefonuOdbiorcy != 555) 
 	{//zwyk³y sms
 		SendSMSMessage(PlayerInfo[playerid][pPnumber], reciverid, wiadomosc);
 	}
@@ -19341,14 +19342,16 @@ CMD:od(playerid)
 {
 	new string[64];
 
-	if(Mobile[playerid] != INVALID_PLAYER_ID || RingTone[playerid] == 0)
+	if(Mobile[playerid] == INVALID_PLAYER_ID || RingTone[playerid] == 0)
 	{
 		sendErrorMessage(playerid, "Nikt do Ciebie nie dzwoni.");
+		return 1;
 	}
 	
 	if(Callin[playerid] != CALL_NONE)
 	{
 		sendErrorMessage(playerid, "Ju¿ prowadzisz rozmowê.");
+		return 1;
 	}
 	
 	new callerid = Mobile[playerid];
@@ -19370,9 +19373,10 @@ CMD:h(playerid) return cmd_z(playerid);
 CMD:zakoncz(playerid) return cmd_z(playerid);
 CMD:z(playerid)
 {
-	if(Mobile[playerid] != INVALID_PLAYER_ID)
+	if(Mobile[playerid] == INVALID_PLAYER_ID)
 	{
 		sendErrorMessage(playerid, "Nikt do Ciebie nie dzwoni.");
+		return 1;
 	}
 	
 	sendTipMessageEx(Mobile[playerid], COLOR_GRAD2, "Twój rozmówca odrzuci³ po³¹czenie.");
@@ -34636,11 +34640,7 @@ CMD:nazywo(playerid, params[])
                 TalkingLive[playerid] = INVALID_PLAYER_ID;
 		        return 1;
 		    }
-		    if(PlayerInfo[playerid][pNewsSkill] < 400)
-			{
-			    sendTipMessageEx(playerid, COLOR_GREY, "Twoje umiejêtnoœci reporterskie s¹ zbyt ma³e aby proawdziæ wywiady z ludŸmi!");
-			    return 1;
-			}
+			
 			new giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))
 			{
