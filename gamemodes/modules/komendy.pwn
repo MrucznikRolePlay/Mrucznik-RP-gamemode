@@ -14505,6 +14505,7 @@ CMD:dajklucze(playerid, params[])
 					{
 						PlayerInfo[playa][pKluczeAuta] = CarData[PlayerInfo[playerid][pCars][numerp]][c_UID];
                         CarData[PlayerInfo[playerid][pCars][numerp]][c_Keys] = PlayerInfo[playa][pUID];
+						Car_Save(PlayerInfo[playerid][pCars][numerp], CAR_SAVE_OWNER);
 				    }
 				    else
 				    {
@@ -14571,7 +14572,10 @@ CMD:wk(playerid)
     if(PlayerInfo[playerid][pKluczeAuta] != 0)
     {
         new uid = Car_GetIDXFromUID(PlayerInfo[playerid][pKluczeAuta]);
-        if(uid != -1) CarData[uid][c_Keys] = 0;
+        if(uid != -1) 
+		{
+			CarData[uid][c_Keys] = 0;
+		}
   		PlayerInfo[playerid][pKluczeAuta] = 0;
   		sendTipMessage(playerid, "Kluczyki wywalone (skrót komendy: /wk)", COLOR_LIGHTBLUE);
   	}
