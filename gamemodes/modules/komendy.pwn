@@ -30874,7 +30874,7 @@ CMD:materialy(playerid, params[])
 				    ZabierzKase(playerid, price);
 				    MatsHolding[playerid] = moneys;
 				    SetPlayerCheckpoint(playerid, 2218.6000976563,-2228,13.5, 30);
-				    SetTimerEx("Matsowanie", 1*70000 ,0,"d",playerid);
+				    SetTimerEx("Matsowanie", 1*51000 ,0,"d",playerid);
 				    MatsGood[playerid] = 1;
 				}
 				else

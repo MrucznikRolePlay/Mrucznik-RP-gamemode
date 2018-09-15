@@ -532,6 +532,11 @@ stock CarOpis_Usun(playerid, vehicleid, message=false)
     {
         DestroyDynamic3DTextLabel(Text3D:CarOpis[vehicleid]);
         CarOpis[vehicleid] = Text3D:INVALID_3DTEXT_ID;
+		
+		if(CarData[VehicleUID[vehicleid][vUID]][c_UID] > 0)
+		{
+			MruMySQL_DeleteOpis(CarData[VehicleUID[vehicleid][vUID]][c_UID], 2);
+		}
         if(message)
         {
             SendClientMessage(playerid, COLOR_YELLOW, "Opis: Usuniêto.");

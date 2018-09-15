@@ -705,6 +705,14 @@ stock MruMySQL_CheckOpis(uid, typ)
     return 0;
 }
 
+stock MruMySQL_DeleteOpis(uid, typ)
+{
+    new lStr[128];
+    format(lStr, sizeof(lStr), "DELETE FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
+    mysql_query(lStr);
+    return 0;
+}
+
 MruMySQL_LoadAccess(playerid)
 {
     if(!MYSQL_ON) return false;
