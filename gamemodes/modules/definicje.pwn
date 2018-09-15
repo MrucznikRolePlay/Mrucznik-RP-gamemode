@@ -2,6 +2,21 @@
 
 //#pragma tabsize 0 // <------------------------------------------nope
 
+//wy³¹czenie sampowych metod obiektów
+#define CreateObject(%0) ERROR_CREATE_OBJECT(%0)
+#define DestroyObject(%0) ERROR_OBJECT
+#define IsValidObject(%0) ERROR_OBJECT
+#define MoveObject(%0) ERROR_OBJECT
+#define StopObject(%0) ERROR_OBJECT
+#define SetObjectPos(%0) ERROR_OBJECT
+#define SetObjectRot(%0) ERROR_OBJECT
+#define GetObjectPos(%0) ERROR_OBJECT
+#define GetObjectRot(%0) ERROR_OBJECT
+#define AttachObjectToPlayer(%0) ERROR_OBJECT
+#define SetObjectMaterialText(%0) ERROR_OBJECT
+#define SetObjectMaterial(%0) ERROR_OBJECT
+
+
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
 

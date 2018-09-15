@@ -5584,7 +5584,7 @@ public OnPlayerUpdate(playerid)
 			if((noclipdata[playerid][udold] != 0 || noclipdata[playerid][lrold] != 0) && ud == 0 && lr == 0)
 			{   // All keys have been released, stop the object the camera is attached to and reset the acceleration multiplier
 				StopPlayerObject(playerid, noclipdata[playerid][flyobject]);
-                if(noclipdata[playerid][fireobject] != 0) StopObject(noclipdata[playerid][fireobject]);
+                if(noclipdata[playerid][fireobject] != 0) StopDynamicObject(noclipdata[playerid][fireobject]);
 				noclipdata[playerid][mode]      = 0;
 				noclipdata[playerid][accelmul]  = 0.0;
 			}
