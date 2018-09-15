@@ -1849,6 +1849,11 @@ stock BARIERKA_Init()
     return 1;
 }
 
+public EditObj(playerid, obj)
+{
+    EditDynamicObject(playerid, obj);
+}
+
 SetPlayerWeatherEx(playerid, id)
 {
     if(!(1 < id < 21)) return 1;
