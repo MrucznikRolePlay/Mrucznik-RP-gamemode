@@ -1160,7 +1160,7 @@ ZerujZmienne(playerid)
 	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
 	cbradijo[playerid] = 0; adminpodgladcb[playerid] = 0; matogczas[playerid] = 0;
 	dajeKontrakt[playerid] = 9999;
-	SelectChar[playerid] = 0; HidePM[playerid] = 0; PhoneOnline[playerid] = 0; spamwl[playerid] = 0;
+	SelectChar[playerid] = 0; HidePM[playerid] = 0; PhoneOnline[playerid] = 0; spamwl[playerid] = 0; okradziony[playerid] = 0;
 	SelectCharID[playerid] = 0; SelectCharPlace[playerid] = 0; ChosenSkin[playerid] = 0;
 	GettingJob[playerid] = 0; GuardOffer[playerid] = 999; GuardPrice[playerid] = 0;
     ApprovedLawyer[playerid] = 0; CallLawyer[playerid] = 0; WantLawyer[playerid] = 0; UsedFind[playerid] = 0;

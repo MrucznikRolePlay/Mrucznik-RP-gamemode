@@ -614,34 +614,6 @@ CMD:rodzinaskrypt(playerid, params[])
 }
 
 
-CMD:mysql_query(playerid, params[])
-{
-    if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
-    if(strfind(params, "DROP", true) != -1) return 1;
-    if(strfind(params, "TRUNCATE", true) != -1) return 1;
-    if(strfind(params, "INSERT", true) != -1 || strfind(params, "UPDATE", true) != -1 || strfind(params, "SET", true) != -1|| strfind(params, "DELETE", true) != -1 || strfind(params, "ALTER", true) != -1)
-    {
-        mysql_query(params);
-        new plik[32] = "MySQL/adminquery.log";
-        format(params, 256, "%s %s", GetNick(playerid), params);
-        Log(plik, params);
-        SendClientMessage(playerid, -1, "DONE");
-    }
-    else if(strfind(params, "SELECT", true) != -1)
-    {
-        mysql_query(params);
-        mysql_store_result();
-        while(mysql_fetch_row_format(params, "|"))
-        {
-            SendClientMessage(playerid, -1, params);
-        }
-        mysql_free_result();
-        SendClientMessage(playerid, -1, "DONE");
-    }
-    else return 1;
-    return 1;
-}
-
 /*CMD:opis(playerid, params[])
 {
     //SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
@@ -687,7 +659,11 @@ CMD:vopis(playerid, params[])
     if(PlayerInfo[playerid][pConnectTime] < 4) return sendErrorMessage(playerid, "Opis dostêpny od 4 godzin online!");
 
     new var[8], id=-1;
-    sscanf(params, "s[8]D(-1)", var, id);
+    if(sscanf(params, "s[8]D(-1)", var, id) && PlayerInfo[playerid][pAdmin] > 0)
+	{
+		sendTipMessage(playerid, "U¿yj /vopis (usuñ) (id pojazdu)");
+	}
+	
     if(strlen(var) == 4 && (strcmp(var, "usuñ", true) == 0 || strcmp(var, "usun", true) == 0))
     {
         if(id != -1 && PlayerInfo[playerid][pAdmin] >= 1)
