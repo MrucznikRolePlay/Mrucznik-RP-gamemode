@@ -20435,7 +20435,7 @@ CMD:wejdz(playerid)
                 SetPlayerPosEx(playerid, -2029.6999511719,-121.09999847412,35.200000762939); // Plac manewrowy œrodek
                 SetPlayerVirtualWorld(playerid, 0);
                 SetPlayerInterior(playerid, 0);
-                PlayerInfo[playerid][pLocal] = 0;
+                PlayerInfo[playerid][pLocal] = 255;
                 GameTextForPlayer(playerid, "~w~Powodzenia", 5000, 1);
                 return 1;
             }

@@ -891,6 +891,7 @@ public OnPlayerDisconnect(playerid, reason)
 	
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
+	PlayerInfo[playerid][pLocal] = GetPlayerVirtualWorld(playerid); //local u¿yty do przechowania virtual worldu
 	
 	new reString[128];
     new DisconnectReason[3][] =
@@ -1846,7 +1847,7 @@ SetPlayerSpawnPos(playerid)
 		{
 			SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
-			SetPlayerVirtualWorld(playerid, 0);
+			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pLocal]);
 			TogglePlayerControllable(playerid, 1);
 		}
 		else

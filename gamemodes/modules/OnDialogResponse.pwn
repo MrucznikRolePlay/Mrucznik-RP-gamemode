@@ -1671,6 +1671,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    GUIExit[playerid] = 0;
 				TogglePlayerSpectating(playerid, false);
 			    lowcap[playerid] = 0;
+				PlayerInfo[playerid][pLocal] = 255;
 			}
 	    }
 	    //OnDialogResposne OKNA DMV
