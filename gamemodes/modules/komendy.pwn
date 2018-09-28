@@ -35220,14 +35220,14 @@ CMD:kradnij(playerid)
                 return sendTipMessageEx(playerid, COLOR_GRAD2, "Tego pojazdu nie da siê ukraœæ, poniewa¿ jest z wypo¿yczalni!");
             }
 			
-			if(KradniecieWozu[playerid] > 0 && GetPlayerVehicleID(playerid) == KradniecieWozu[playerid])
-			{
-				sendErrorMessage(playerid, "Ju¿ ukrad³eœ ten wóz.");
-				return 1;
-			}
-			
 			if(NieSpamujKradnij[playerid] == 0)
 			{
+				if(KradniecieWozu[playerid] > 0 && GetPlayerVehicleID(playerid) == KradniecieWozu[playerid])
+				{
+					sendErrorMessage(playerid, "Ju¿ ukrad³eœ ten wóz.");
+					return 1;
+				}
+				
 				new skillz;
 				if(PlayerInfo[playerid][pJackSkill] < 50)
 				{
