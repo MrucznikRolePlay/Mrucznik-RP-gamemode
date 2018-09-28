@@ -678,9 +678,9 @@ CMD:vopis(playerid, params[])
 			}
 			
 			new str[64];
-			format(str, sizeof(str), "(OPIS) - Usun¹³eœ opis pojazdu gracza %s.", CarOpisCaller[id]);
+			format(str, sizeof(str), "(OPIS) - Usun¹³eœ opis pojazdu ustawiony przez gracza %s.", CarOpisCaller[id]);
 			SendClientMessage(playerid, COLOR_PURPLE, str);
-			format(str, sizeof(str), "%s usun¹³ opis %s - pojazd %d", GetNick(playerid), CarOpisCaller[id], id);
+			format(str, sizeof(str), "%s usun¹³ opis ustawiony przez gracza %s - pojazd %d", GetNick(playerid), CarOpisCaller[id], id);
 			StatsLog(str);
 			return 1;
         }
