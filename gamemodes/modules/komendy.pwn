@@ -35204,53 +35204,57 @@ CMD:kradnij(playerid)
             {
                 return sendTipMessageEx(playerid, COLOR_GRAD2, "Tego pojazdu nie da siê ukraœæ, poniewa¿ jest z wypo¿yczalni!");
             }
-   	        if(GetPlayerVehicleID(playerid) != 1)
-   	        {
-   	            if(NieSpamujKradnij[playerid] == 0)
-   	            {
-		   	        new skillz;
-		   	        if(PlayerInfo[playerid][pJackSkill] < 50)
-		   			{
-	   					skillz = 1;
-				    }
-				    else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
-				    {
-				    	skillz = 2;
-				    }
-				    else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
-				    {
-		       			skillz = 3;
-				    }
-				    else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
-				    {
-		        		skillz = 4;
-				    }
-				    else if(PlayerInfo[playerid][pJackSkill] >= 400)
-				    {
-		        		skillz = 5;
-				    }
-			        new kradnij = random(100);
-			        new mnoznik = skillz*19;
-			        GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string),"* %s wyci¹ga m³otek i rozwala os³onkê po czym wyjmuje 2 kabelki.", sendername);
-					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					NieSpamujKradnij[playerid] = 1;
-			        if(kradnij <= mnoznik)
-			        {
-            			SetTimerEx("udalo1",6000,0,"d",playerid);
-			            KradniecieWozu[playerid] = 1;
-			        }
-			        else
-			  		{
-			        	SetTimerEx("nieudalo1",6000,0,"d",playerid);
-			        	KradniecieWozu[playerid] = 1;
-			        }
+			
+			if(KradniecieWozu[playerid] > 0 && GetPlayerVehicleID(playerid) == KradniecieWozu[playerid])
+			{
+				sendErrorMessage(playerid, "Ju¿ ukrad³eœ ten wóz.");
+				return 1;
+			}
+			
+			if(NieSpamujKradnij[playerid] == 0)
+			{
+				new skillz;
+				if(PlayerInfo[playerid][pJackSkill] < 50)
+				{
+					skillz = 1;
+				}
+				else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
+				{
+					skillz = 2;
+				}
+				else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
+				{
+					skillz = 3;
+				}
+				else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
+				{
+					skillz = 4;
+				}
+				else if(PlayerInfo[playerid][pJackSkill] >= 400)
+				{
+					skillz = 5;
+				}
+				new kradnij = random(100);
+				new mnoznik = skillz*19;
+				GetPlayerName(playerid, sendername, sizeof(sendername));
+				format(string, sizeof(string),"* %s wyci¹ga m³otek i rozwala os³onkê po czym wyjmuje 2 kabelki.", sendername);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				NieSpamujKradnij[playerid] = 1;
+				if(kradnij <= mnoznik)
+				{
+					SetTimerEx("udalo1",6000,0,"d",playerid);
+					KradniecieWozu[playerid] = 1;
 				}
 				else
 				{
-				    sendTipMessageEx(playerid, COLOR_GREY, "Ju¿ próbujesz ukraœæ wóz !");
+					SetTimerEx("nieudalo1",6000,0,"d",playerid);
+					KradniecieWozu[playerid] = 1;
 				}
-		    }
+			}
+			else
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Ju¿ próbujesz ukraœæ wóz !");
+			}
 		}
 		else
 		{
