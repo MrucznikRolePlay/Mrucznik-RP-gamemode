@@ -4688,6 +4688,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				    SendClientMessage(playerid, COLOR_LIGHTRED, string);
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
 					PoziomPoszukiwania[playerid] = 0;
+                    poscig[playerid] = 0;
 					WantLawyer[playerid] = 1;
 					UsunBron(playerid);
 				}
@@ -4705,6 +4706,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					SendClientMessage(playerid, COLOR_LIGHTRED, string);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
 					PoziomPoszukiwania[playerid] = 0;
+                    poscig[playerid] = 0;
 					UsunBron(playerid);
 				}
 			}
