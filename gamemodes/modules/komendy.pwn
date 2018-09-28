@@ -3564,7 +3564,7 @@ CMD:bdaj(playerid, params[])
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
 		{
-			sendTipMessage(playerid, "U퓓j /bdaj [id graczcza] [id broni] [naboje]");
+			sendTipMessage(playerid, "U퓓j /bdaj [id gracza] [id broni] [naboje]");
 			return 1;
 		}
 
@@ -3585,7 +3585,7 @@ CMD:dajdzwiek(playerid, params[])
             new giveplayerid, level;
 			if( sscanf(params, "k<fix>d", giveplayerid, level))
 			{
-				sendTipMessage(playerid, "U퓓j /dajdzwiek [id graczcza] [id dzwieku]");
+				sendTipMessage(playerid, "U퓓j /dajdzwiek [id gracza] [id dzwieku]");
 				return 1;
 			}
 			PlayerPlaySound(giveplayerid, level, 0.0, 0.0, 0.0);
@@ -3603,7 +3603,7 @@ CMD:crimereport(playerid, params[])
             new giveplayerid, level;
 			if( sscanf(params, "k<fix>d", giveplayerid, level))
 			{
-				sendTipMessage(playerid, "U퓓j /crimereport [id graczcza] [id przestepstwa]");
+				sendTipMessage(playerid, "U퓓j /crimereport [id gracza] [id przestepstwa]");
 				return 1;
 			}
 			PlayCrimeReportForPlayer(playerid, giveplayerid, level);
@@ -3959,7 +3959,7 @@ CMD:fdaj(playerid, params[])
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
 		{
-			sendTipMessage(playerid, "U퓓j /fdaj [id graczcza] [id stylu]");
+			sendTipMessage(playerid, "U퓓j /fdaj [id gracza] [id stylu]");
 			return 1;
 		}
 
@@ -3978,7 +3978,7 @@ CMD:dajdowozu(playerid, params[])
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
 		{
-			sendTipMessage(playerid, "U퓓j /dajdowozu [id graczcza] [id wozu]");
+			sendTipMessage(playerid, "U퓓j /dajdowozu [id gracza] [id wozu]");
 			return 1;
 		}
 
@@ -4203,7 +4203,7 @@ CMD:dskill(playerid, params[])
 	    new giveplayerid, idskill, level;
 		if( sscanf(params, "k<fix>dd", giveplayerid, idskill, level))
 		{
-			sendTipMessage(playerid, "/dskill [id graczcza] [id skilla] [level]");
+			sendTipMessage(playerid, "/dskill [id gracza] [id skilla] [level]");
 			return 1;
 		}
 
@@ -4297,7 +4297,7 @@ CMD:dsus(playerid, params[])
 	    new giveplayerid, przestepca;
 		if( sscanf(params, "k<fix>d", giveplayerid, przestepca))
 		{
-			sendTipMessage(playerid, "U퓓j /dsus [id graczcza] [id wl]");
+			sendTipMessage(playerid, "U퓓j /dsus [id gracza] [id wl]");
 			return 1;
 		}
 		if(przestepca >= 3 && przestepca <= 22)
@@ -35613,7 +35613,7 @@ CMD:paka(playerid, params[])
 			new moneys, time, bail, bailprice;
 			if( sscanf(params, "dddd", moneys, time, bail, bailprice))
 			{
-				sendTipMessage(playerid, "U퓓j /paka [grzywna] [czas (minuty)] [kaucja (0=nie 1=tak)] [kosz kaucji]");
+				sendTipMessage(playerid, "U퓓j /paka [grzywna] [czas (minuty)] [kaucja (0=nie 1=tak)] [koszt kaucji]");
 				return 1;
 			}
 
