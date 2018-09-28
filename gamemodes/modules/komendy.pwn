@@ -20368,13 +20368,6 @@ CMD:wejdz(playerid)
             SetPlayerInterior(playerid, 5);
             return 1;
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 22420.5959472656,-1508.7227783203,23.992208480835)) // Cluckin'Bell
-        {
-            SetPlayerPosEx(playerid, 365.00964355469,-10.975138664246,1001.8515625); // Cluckin'Bell
-            SetPlayerInterior(playerid, 9);
-            SetPlayerShopName(playerid,"FDCHICK");
-            return 1;
-        }
         else if(PlayerToPoint(10.0, playerid, 931.09,919.29,42.59))//jizzy club
         {
             SetPlayerInterior(playerid,3);
