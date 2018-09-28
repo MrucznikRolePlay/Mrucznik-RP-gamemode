@@ -10004,7 +10004,7 @@ CMD:pobij(playerid, params[])
     							        sendTipMessage(playerid, "Musisz mieæ 3 lvl aby u¿ywaæ tej komendy!");
 					       			    return 1;
     							    }
-	     				    	    if(pobity[playa] == 1 || pobity[playerid] == 1 || PlayerCuffed[playerid] == 1 || zakuty[playerid] >= 1 || zakuty[playa] >= 1)
+	     				    	    if(pobity[playa] == 1 || zakuty[playa] >= 1 || pobity[playerid] == 1 || PlayerCuffed[playerid] == 1 || zakuty[playerid] >= 1 || PlayerInfo[playerid][pBW] != 0)
 					       			{
 					        			sendTipMessage(playerid, "Nie mo¿esz pobiæ pobitego gracza / jesteœ pobity, nie mo¿esz biæ innych.");
 						       			return 1;
@@ -12677,16 +12677,20 @@ CMD:kamera_wiezienie(playerid, params[])
 					return 1;
 				}
 
-				if(GetPlayerInterior(playerid) == 10) //czy gracz jest na /kameraw
+				if(number < 1 || number > 6) { sendTipMessage(playerid, "Numer kamery od 1 do 6 !"); return 1; }
+				
+				if(number >= 1 && number <= 5)
 				{
-					GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+					if(GetPlayerInterior(playerid) != 10) //czy gracz nie jest na /kameraw
+					{
+						GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+					}
+					TogglePlayerControllable(playerid, 0);
+					SetPlayerInterior(playerid, 10);
+					PlayerInfo[playerid][pMuted] = 1;
+					SetPlayerPosEx(playerid, 214.6996,121.2643,1008.2188);
 				}
 				
-				if(number < 1 || number > 6) { sendTipMessage(playerid, "Numer kamery od 1 do 6 !"); return 1; }
-				TogglePlayerControllable(playerid, 0);
-				SetPlayerInterior(playerid, 10);
-				PlayerInfo[playerid][pMuted] = 1;
-				SetPlayerPosEx(playerid, 214.6996,121.2643,1008.2188);
 				if(number == 1) { SetPlayerCameraPos(playerid, 214.8968,114.7074,999.0156); SetPlayerCameraLookAt(playerid, 215.8725,110.4934,999.0156); }
 				else if(number == 2) { SetPlayerCameraPos(playerid, 218.4975,114.4323,999.0156); SetPlayerCameraLookAt(playerid, 218.4825,110.1900,999.0156); }
 				else if(number == 3) { SetPlayerCameraPos(playerid, 222.6395,114.3951,999.0156); SetPlayerCameraLookAt(playerid, 223.1496,110.0053,999.0156); }
@@ -31716,7 +31720,7 @@ CMD:dolacz(playerid)
 			    if((PlayerInfo[playerid][pMember] >= 1 && PlayerInfo[playerid][pMember] <= 4) || (PlayerInfo[playerid][pMember] >= 9 && PlayerInfo[playerid][pMember] <= 11) 
 					|| (PlayerInfo[playerid][pLider] >= 1 && PlayerInfo[playerid][pLider] <= 4) || (PlayerInfo[playerid][pLider] >= 9 && PlayerInfo[playerid][pLider] <= 11))
 			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ cywilem albo cz³onkiem rodziny aby wzi¹æ t¹ pracê !");
+			        sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ cywilem albo cz³onkiem rodziny/mafii/gangu aby wzi¹æ t¹ pracê!");
 			        return 1;
 			    }
 			    if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,322.3034,317.0233,999.1484))
