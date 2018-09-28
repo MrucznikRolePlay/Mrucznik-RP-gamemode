@@ -279,7 +279,6 @@ DialogListaSkinow(frakcja)
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[frakcja][i], i);
 	}
 	strdel(skiny, strlen(skiny)-2, strlen(skiny));
-	printf(skiny);
 	safe_return skiny;
 }
 
