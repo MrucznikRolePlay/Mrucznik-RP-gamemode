@@ -31694,7 +31694,8 @@ CMD:dolacz(playerid)
 		{
 		    if(PlayerInfo[playerid][pJob] == 0 )
 			{
-			    if(PlayerInfo[playerid][pMember] >= 1 && PlayerInfo[playerid][pMember] <= 4 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pMember] == 11 || PlayerInfo[playerid][pLider] >= 1)
+			    if((PlayerInfo[playerid][pMember] >= 1 && PlayerInfo[playerid][pMember] <= 4) || (PlayerInfo[playerid][pMember] >= 9 && PlayerInfo[playerid][pMember] <= 11) 
+					|| PlayerInfo[playerid][pLider] >= 1 && PlayerInfo[playerid][pLider] <= 4) || (PlayerInfo[playerid][pLider] >= 9 && PlayerInfo[playerid][pLider] <= 11))
 			    {
 			        sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ cywilem albo cz³onkiem rodziny aby wzi¹æ t¹ pracê !");
 			        return 1;
@@ -31703,7 +31704,7 @@ CMD:dolacz(playerid)
 				{
 				    if(PlayerInfo[playerid][pGunLic] == 1)
 				    {
-					    if(PlayerInfo[playerid][pMember] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
+					    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
 					    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ £owcy¹ Nagród, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 					    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 					    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
@@ -31722,7 +31723,7 @@ CMD:dolacz(playerid)
 				}
 				else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,310.3626,-1503.3282,13.8096))
 				{
-				    if(PlayerInfo[playerid][pMember] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
+				    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Prawnikiem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
 				    SendClientMessage(playerid, COLOR_WHITE, "   Do twoich zadañ nale¿y wyci¹ganie ludzi z wiêzienia (za kaucj¹ lub bez), czyszczenia im kartotek i obni¿ania poziomów poszukiwania");
@@ -31775,7 +31776,7 @@ CMD:dolacz(playerid)
 				}
 				else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,-1932.3859,276.2117,41.0391) || PlayerToPoint(5.0, playerid,2769.8376,-1610.7819,10.9219))
 				{
-				    if(PlayerInfo[playerid][pMember] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ wzi¹c tej pracy!"); return 1; }
+				    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ wzi¹c tej pracy!"); return 1; }
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Mechanikiem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
@@ -31790,7 +31791,7 @@ CMD:dolacz(playerid)
 		  		}
 				else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,2226.1716,-1718.1792,13.5165))
 				{
-				    if(PlayerInfo[playerid][pMember] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
+				    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Ochroniarzem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
@@ -31818,7 +31819,7 @@ CMD:dolacz(playerid)
 		  		{
 		  		    if(PlayerInfo[playerid][pCarLic] == 1)
 				    {
-					    if(PlayerInfo[playerid][pMember] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
+					    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
 					    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Kierowc¹ Autobusu, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 					    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 	 				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
@@ -31837,7 +31838,7 @@ CMD:dolacz(playerid)
 		  		}
 		  		else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,766.0804,14.5133,1000.7004))
 		  		{
-		  		    if(PlayerInfo[playerid][pMember] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
+		  		    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
 		  		    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Bokserem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
@@ -31855,7 +31856,7 @@ CMD:dolacz(playerid)
 		  		{
                     if(PlayerInfo[playerid][pCarLic] != 1) return sendTipMessageEx(playerid, COLOR_WHITE, "Do tej pracy wymagane jest prawo jazdy");
 
-		  		    if(PlayerInfo[playerid][pMember] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Families cannot take on this Job !"); return 1; }
+		  		    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Families cannot take on this Job !"); return 1; }
 		  		    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Truckerem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
