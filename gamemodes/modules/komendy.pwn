@@ -2205,7 +2205,16 @@ CMD:kajdanki(playerid, params[])
 CMD:barierka(playerid, params[])
 {
     if(!(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_BOR || GetPlayerOrg(playerid) == 12 || GetPlayerFraction(playerid) == FRAC_LSMC))
+	{
+		sendErrorMessage(playerid, "Nie masz uprawnieñ do u¿ycia tej komendy.");
 		return 1;
+	}
+	
+	if(PlayerInfo[playerid][pJailed] != 0)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz stawiaæ barierek w wiêzieniu.");
+		return 1;
+	}
 
     if(isnull(params))
     {
