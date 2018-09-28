@@ -24210,7 +24210,14 @@ CMD:gotosalon(playerid)
 		{
             	SetPlayerInterior(playerid, 0);
     			SetPlayerVirtualWorld(playerid, 0);
-    			SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
+				if (GetPlayerState(playerid) == 2)
+				{
+					SetVehiclePos(GetPlayerVehicleID(playerid), 2129.2078,-1129.9963,25.5823);
+				}
+				else
+				{
+					SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
+				}
    				sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
 		}
 		else
@@ -37027,7 +37034,7 @@ CMD:gotoadmin(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     SetPlayerVirtualWorld(playerid, 5000);
-    SetPlayerPosEx(playerid,3524.550292, -236.021621, 35.619190);
+	SetPlayerPosEx(playerid, 3524.550292, -236.021621, 35.619190);
     Wchodzenie(playerid);
     return 1;
 }
