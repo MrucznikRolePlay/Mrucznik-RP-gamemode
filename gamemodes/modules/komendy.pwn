@@ -668,15 +668,21 @@ CMD:vopis(playerid, params[])
     {
         if(id != -1 && PlayerInfo[playerid][pAdmin] >= 1)
         {
-            if(Car_GetOwnerType(id) != CAR_OWNER_PLAYER) return SendClientMessage(playerid, COLOR_GRAD2, "Nie mo¿na usun¹æ opisu pojazdu systemowego.");
-            if(!CarOpis_Usun(playerid, id)) return SendClientMessage(playerid, -1, "Opis: Pojazd nie posiada opisu.");
-            else
-            {
-                new str[64];
-                format(str, 64, "(OPIS) - Usun¹³eœ opis pojazdu gracza %s.", CarOpisCaller[id]);
-                SendClientMessage(playerid, COLOR_PURPLE, str);
-                return 1;
-            }
+            if(Car_GetOwnerType(id) != CAR_OWNER_PLAYER && !Uprawnienia(playerid, ACCESS_EDITCAR)) 
+			{
+				return SendClientMessage(playerid, COLOR_GRAD2, "Nie mo¿na usun¹æ opisu pojazdu systemowego.");
+			}
+            if(!CarOpis_Usun(playerid, id)) 
+			{
+				return SendClientMessage(playerid, -1, "Opis: Pojazd nie posiada opisu.");
+			}
+			
+			new str[64];
+			format(str, sizeof(str), "(OPIS) - Usun¹³eœ opis pojazdu gracza %s.", CarOpisCaller[id]);
+			SendClientMessage(playerid, COLOR_PURPLE, str);
+			format(str, sizeof(str), "%s usun¹³ opis %s - pojazd %d", GetNick(playerid), CarOpisCaller[id], id);
+			StatsLog(string);
+			return 1;
         }
         else
         {
