@@ -124,7 +124,7 @@ Zaladuj3DTexty()
 	CreateDynamic3DTextLabel("Oczysczanie z zarzutow", 0x33CCFFAA, 246.3568,120.3933,1003.2682, 10.0); //Clear icon in Police Station
 	CreateDynamic3DTextLabel("Urz¹d Miasta", 0x9ACD32AA, 1481.1531,-1770.0277,18.7958, 50.0); //City Hall
 	CreateDynamic3DTextLabel("Urz¹d Miasta - zaplecze", 0x9ACD32AA, 1412.3348388672, -1790.5777587891, 15.370599746704, 10.0); //City Hall
-	CreateDynamic3DTextLabel("Praca £owcy Nagród", 0xFFA500AA, 322.3034,317.0233,999.1484, 30.0); //Detective Registration
+	CreateDynamic3DTextLabel("Praca £owcy Nagród", 0xFFA500AA, 322.3034,317.0233,999.1484, 30.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 5); //Detective Registration
 	CreateDynamic3DTextLabel("Praca Prawnika", 0xFFA500AA, 310.3626,-1503.3282,13.8096, 30.0); //Lawyer Registration
 	CreateDynamic3DTextLabel("Praca Dziwki", 0xFFA500AA, 1215.1304,-11.8431,1000.9219, 15.0); //Whore Registration
 	CreateDynamic3DTextLabel("Praca Dilera Dragow", 0xFFA500AA, 2166.3772,-1675.3829,15.0859, 30.0); //DrugDealer Registration

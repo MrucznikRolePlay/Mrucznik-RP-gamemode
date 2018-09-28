@@ -12675,6 +12675,8 @@ CMD:kamera_wiezienie(playerid, params[])
 					TogglePlayerControllable(playerid, 1);
 					SetCameraBehindPlayer(playerid);
 					PlayerInfo[playerid][pMuted] = 0;
+					SetPlayerPosEx(playerid, 319.72470092773, -1548.3374023438, 13.845289230347);
+					Wchodzenie(playerid);
 				}
 			}
 			else
@@ -15072,17 +15074,12 @@ CMD:teczka(playerid, params[])
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-			        if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
-					{
-						sendErrorMessage(playerid, "Ten gracz jest za daleko.");
-						return 1;
-					}
 			        if(PlayerInfo[giveplayerid][pLocal] == 106)
 					{
 						sendErrorMessage(playerid, "Komenda nie dzia³a w tym miejscuu");
 						return 1;
 					}
-					if (ProxDetectorS(5.0, playerid, giveplayerid))
+					if (ProxDetectorS(5.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 					{
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
