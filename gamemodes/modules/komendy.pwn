@@ -37035,6 +37035,7 @@ CMD:gotoadmin(playerid)
     if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     SetPlayerVirtualWorld(playerid, 5000);
 	SetPlayerPosEx(playerid, 3524.550292, -236.021621, 35.619190);
+	
     Wchodzenie(playerid);
     return 1;
 }
@@ -37042,7 +37043,15 @@ CMD:gotoadmin(playerid)
 CMD:gotomechy(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5) {
-        SetPlayerPosEx(playerid,2771.0842, -1628.4905, 12.98190);
+		
+		if (GetPlayerState(playerid) == 2)
+		{
+			SetVehiclePos(GetPlayerVehicleID(playerid), 2771.0842, -1628.4905, 12.98190);
+		}
+		else
+		{
+			SetPlayerPosEx(playerid,2771.0842, -1628.4905, 12.98190);
+		}
         SetPlayerVirtualWorld(playerid, 0);
     }
     return 1;
