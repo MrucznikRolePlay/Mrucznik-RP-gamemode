@@ -9972,6 +9972,7 @@ CMD:pobij(playerid, params[])
   			pobilem[playerid] = 2;
   			return 1;
 		}
+		
 		new playa;
 		if( sscanf(params, "k<fix>", playa))
 		{
@@ -10003,6 +10004,10 @@ CMD:pobij(playerid, params[])
 					        			sendTipMessage(playerid, "Nie mo¿esz pobiæ pobitego gracza / jesteœ pobity, nie mo¿esz biæ innych.");
 						       			return 1;
 					       			}
+									if(PlayerInfo[playa][pBW] == 1)
+									{
+										return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz dogorywa na BW. Nie kop le¿¹cego!");
+									}
 					       			if(GetPlayerWeapon(playa) >= 22)
 					       			{
 					       			    sendTipMessage(playerid, "Nie mo¿esz pobiæ gracza z broni¹!");
