@@ -35226,7 +35226,7 @@ CMD:kradnij(playerid)
 			
 			if(NieSpamujKradnij[playerid] == 0)
 			{
-				if(KradniecieWozu[playerid] > 0 && GetPlayerVehicleID(playerid) == KradniecieWozu[playerid])
+				if(KradniecieWozu[playerid] > 1 && GetPlayerVehicleID(playerid) == KradniecieWozu[playerid])
 				{
 					sendErrorMessage(playerid, "Ju¿ ukrad³eœ ten wóz.");
 					return 1;
