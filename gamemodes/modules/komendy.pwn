@@ -12673,7 +12673,7 @@ CMD:kamera_wiezienie(playerid, params[])
 				new number;
 				if( sscanf(params, "d", number))
 				{
-					sendTipMessage(playerid, "U¿yj /kamera-w [numer 1 - 6]  (6 = OFF)");
+					sendTipMessage(playerid, "U¿yj /kameraw [numer 1 - 6]  (6 = OFF)");
 					return 1;
 				}
 
@@ -37853,6 +37853,7 @@ CMD:addcar(playerid, p[])
     if(id == -1) return SendClientMessage(playerid, COLOR_GRAD2, "Brak wolnego miejsca?");
     new str[128];
     format(str, 128, "[CAR] Stworzono pojazd (UID: %d) model: %d przez %s", CarData[id][c_UID], model, GetNick(playerid));
+	sendNotification(playerid. str);
     ActionLog(str);
     return 1;
 }
@@ -37872,6 +37873,7 @@ CMD:removecar(playerid, p[])
     }
     new str[128];
     format(str, 128, "[CAR] Usuniêto pojazd (UID: %d) przez %s", CarData[uid][c_UID], GetNick(playerid));
+	sendNotification(playerid. str);
     ActionLog(str);
     Car_Destroy(uid);
 
