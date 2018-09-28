@@ -745,15 +745,15 @@ stock Car_PrintOwner(car)
         case INVALID_CAR_OWNER: lStr="Brak";
         case CAR_OWNER_FRACTION:
         {
-            format(lStr, 64, "%s", FractionNames[CarData[car][c_Owner]]);
+            format(lStr, sizeof(lStr), "%s", FractionNames[CarData[car][c_Owner]]);
         }
         case CAR_OWNER_FAMILY:
         {
-            format(lStr, 64, "%s", OrgInfo[orgID(CarData[car][c_Owner])][o_Name]);
+            format(lStr, sizeof(lStr), "%s", OrgInfo[orgID(CarData[car][c_Owner])][o_Name]);
         }
         case CAR_OWNER_PLAYER:
         {
-            format(lStr, 64, "SELECT `Nick` FROM mru_konta WHERE `UID`='%d'", CarData[car][c_Owner]);
+            format(lStr, sizeof(lStr), "SELECT `Nick` FROM mru_konta WHERE `UID`='%d'", CarData[car][c_Owner]);
             mysql_query(lStr);
             mysql_store_result();
             if(mysql_num_rows())
@@ -761,10 +761,14 @@ stock Car_PrintOwner(car)
                 mysql_fetch_row_format(lStr, "|");
                 mysql_free_result();
             }
+			else
+			{
+				format(lStr, sizeof(lStr), "Nieistniej¹cy");
+			}
         }
         case CAR_OWNER_JOB:
         {
-            format(lStr, 64, "%s", JobNames[CarData[car][c_Owner]]);
+            format(lStr, sizeof(lStr), "%s", JobNames[CarData[car][c_Owner]]);
         }
         case CAR_OWNER_SPECIAL:
         {
@@ -791,7 +795,7 @@ stock ShowCarEditDialog(playerid)
     if(CarData[car][c_ID] == 0) lHP = CarData[car][c_HP];
     else GetVehicleHealth(CarData[car][c_ID], lHP);
     new color1 = VehicleColoursTableRGBA[clamp(CarData[car][c_Color][0], 0, 255)], color2=VehicleColoursTableRGBA[clamp(CarData[car][c_Color][1], 0, 255)];
-    format(lStr, 512, "{FFFFFF}Model:\t\t{8FCB04}%d{FFFFFF}\t[ {8FCB04}%s {FFFFFF}]\nW³aœciciel:\t{8FCB04}%s{FFFFFF} » {8FCB04}%s{FFFFFF} (UID: {8FCB04}%d{FFFFFF})\nRanga:\t\t{8FCB04}%d{FFFFFF}\nStan:\t\t{8FCB04}%.1f{FFFFFF}\%\nZaparkuj tutaj\nUsuñ kluczyki\n{%06x}Kolor I\n{%06x}Kolor II", CarData[car][c_Model], VehicleNames[CarData[car][c_Model]-400], CarOwnerNames[CarData[car][c_OwnerType]], Car_PrintOwner(car), CarData[car][c_Owner], CarData[car][c_Rang], lHP/10, RGBAtoRGB(color1), RGBAtoRGB(color2));
+    format(lStr, sizeof(lStr), "{FFFFFF}Model:\t\t{8FCB04}%d{FFFFFF}\t[ {8FCB04}%s {FFFFFF}]\nW³aœciciel:\t{8FCB04}%s{FFFFFF} » {8FCB04}%s{FFFFFF} (UID: {8FCB04}%d{FFFFFF})\nRanga:\t\t{8FCB04}%d{FFFFFF}\nStan:\t\t{8FCB04}%.1f{FFFFFF}\%\nZaparkuj tutaj\nUsuñ kluczyki\n{%06x}Kolor I\n{%06x}Kolor II", CarData[car][c_Model], VehicleNames[CarData[car][c_Model]-400], CarOwnerNames[CarData[car][c_OwnerType]], Car_PrintOwner(car), CarData[car][c_Owner], CarData[car][c_Rang], lHP/10, RGBAtoRGB(color1), RGBAtoRGB(color2));
     ShowPlayerDialogEx(playerid, D_EDIT_CAR_MENU, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdów", lStr, "Wybierz", "Wróæ");
     return 1;
 }

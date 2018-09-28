@@ -12698,6 +12698,11 @@ CMD:kamera_wiezienie(playerid, params[])
 				else if(number == 5) { SetPlayerCameraPos(playerid, 217.9721,119.7951,999.0156); SetPlayerCameraLookAt(playerid, 215.8725,110.4934,999.0156); }
 				else if(number == 6)
 				{
+					if(GetPlayerInterior(playerid) != 10)
+					{
+						sendErrorMessage(playerid, "Nie ogl¹dasz kamer, wiêc nie potrzebujesz wy³¹czyæ widoku kamer.");
+						return 1;
+					}
 				    MedicBill[playerid] = 0;
 				    SetPlayerInterior(playerid, 0);
 					TogglePlayerControllable(playerid, 1);

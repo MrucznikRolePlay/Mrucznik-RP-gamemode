@@ -7422,6 +7422,7 @@ public OnVehicleRespray(playerid, vehicleid, color1, color2)
         ChangeVehicleColor(vehicleid, CarData[VehicleUID[vehicleid][vUID]][c_Color][0], CarData[VehicleUID[vehicleid][vUID]][c_Color][1]);
         return 0;
     }
+	
 	#if DEBUG == 1
 		printf("%s[%d] OnVehicleRespray - end", GetNick(playerid), playerid);
 	#endif
