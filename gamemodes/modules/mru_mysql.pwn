@@ -407,7 +407,7 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     if(!mysql_query(query)) fault=false;
 
     //Zapis MruCoinow
-    premium_saveMc(playerid);
+    //premium_saveMc(playerid);
 
     saveLegale(playerid);
 

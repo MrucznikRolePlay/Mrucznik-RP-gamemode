@@ -9239,6 +9239,11 @@ CMD:flip(playerid, params[])
 		}
 		else
 		{
+			if(!IsPlayerConnected(giveplayerid))
+			{
+				sendErrorMessage(playerid, "Nie ma takiego gracza");
+				return 1;
+			}
 	  		new VehicleID, Float:X, Float:Y, Float:Z;
 	  		GetPlayerPos(giveplayerid, X, Y, Z);
 	  		VehicleID = GetPlayerVehicleID(giveplayerid);
@@ -20850,7 +20855,7 @@ CMD:wyjdz(playerid)
 		}
 		//winda FBI
 		else if(IsPlayerInRangeOfPoint(playerid,5,618.0215,-1452.7937,90.6158)//przy recepcji
-		|| IsPlayerInRangeOfPoint(playerid,5,623.6523, -1485.1019, 90.7391)//przy sali przesluchan
+		|| IsPlayerInRangeOfPoint(playerid,3,623.6523, -1485.1019, 90.7391)//przy sali przesluchan
 		|| IsPlayerInRangeOfPoint(playerid,5,610.6687, -1454.7335, 73.9460)//biura
 		|| IsPlayerInRangeOfPoint(playerid,5,1906.8574, -1721.6230, 998.8511)//Tory Szkoleniowe oraz szatnie
 		|| IsPlayerInRangeOfPoint(playerid,5,564.9237, -1466.3726, 33.0378)//Szatnie Toalety, Zbrojownia
