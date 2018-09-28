@@ -31704,7 +31704,7 @@ CMD:dolacz(playerid)
 		    if(PlayerInfo[playerid][pJob] == 0 )
 			{
 			    if((PlayerInfo[playerid][pMember] >= 1 && PlayerInfo[playerid][pMember] <= 4) || (PlayerInfo[playerid][pMember] >= 9 && PlayerInfo[playerid][pMember] <= 11) 
-					|| PlayerInfo[playerid][pLider] >= 1 && PlayerInfo[playerid][pLider] <= 4) || (PlayerInfo[playerid][pLider] >= 9 && PlayerInfo[playerid][pLider] <= 11))
+					|| (PlayerInfo[playerid][pLider] >= 1 && PlayerInfo[playerid][pLider] <= 4) || (PlayerInfo[playerid][pLider] >= 9 && PlayerInfo[playerid][pLider] <= 11))
 			    {
 			        sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ cywilem albo cz³onkiem rodziny aby wzi¹æ t¹ pracê !");
 			        return 1;

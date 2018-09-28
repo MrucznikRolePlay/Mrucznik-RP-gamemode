@@ -12918,7 +12918,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         else if(dialogid == 669)
         {
             if(!response) return 1;
-            if(!GetPVarInt(playerid, "sanradio"))
+            if(GetPVarInt(playerid, "sanradio") == 0)
             {
                 switch(listitem)
                 {
@@ -12941,18 +12941,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     }
                 }
             }
-            else
+            else //sanradio == 1
             {
                 switch(listitem)
                 {
-                    case 0: format(RadioSANDos, sizeof(RadioSANDos), "http://s1.slotex.pl:7170");
-                    case 1: format(RadioSANDos, sizeof(RadioSANDos), "http://4stream.pl:18240");
-                    case 2: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_discopolo.pls");
-                    case 3: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_dance100.pls");
-                    case 4: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_mnt.pls");
-                    case 5: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_hiphop.pls");
-                    case 6: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 7: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
+                    case 0: format(RadioSANDos, sizeof(RadioSANDos), "http://4stream.pl:18240");
+                    case 1: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 2: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 3: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 4: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 5: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
                 }
                 foreach(Player, i)
                 {
