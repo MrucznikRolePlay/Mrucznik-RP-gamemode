@@ -19700,7 +19700,7 @@ CMD:wejdz(playerid)
         }
         //winda FBI
         else if(IsPlayerInRangeOfPoint(playerid,5,618.0215,-1452.7937,90.6158)//przy recepcji
-        || IsPlayerInRangeOfPoint(playerid,5,623.6523, -1485.1019, 90.7391)//przy sali przesluchan
+        || IsPlayerInRangeOfPoint(playerid,3,623.6523, -1485.1019, 90.7391)//przy sali przesluchan
         || IsPlayerInRangeOfPoint(playerid,5,610.6687, -1454.7335, 73.9460)//biura
         || IsPlayerInRangeOfPoint(playerid,5,1906.8574, -1721.6230, 998.8511)//Tory Szkoleniowe oraz szatnie
         || IsPlayerInRangeOfPoint(playerid,5,564.9237, -1466.3726, 33.0378)//Szatnie Toalety, Zbrojownia
@@ -22889,9 +22889,9 @@ CMD:setstat(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setstat [playerid/CzêœæNicku] [statcode] [amount]");
 			SendClientMessage(playerid, COLOR_GRAD4, "|1 Level |2 SpawnHealth |3 UpgradePoints |4 Skin ");
 			SendClientMessage(playerid, COLOR_GRAD3, "|5 KontoBankowe |6 NumerTelefonu |7 PunktyRespektu ");
-			SendClientMessage(playerid, COLOR_GRAD2, "|8 KluczDomowy |9 KluczBiznesu |10 KontoPremium |11 FMember");
+			SendClientMessage(playerid, COLOR_GRAD2, "|8 KluczDomowy |9 KluczBiznesu |10 KontoPremium |11 Rodzina");
 			SendClientMessage(playerid, COLOR_GRAD2, "|12 £owca Nagród |13 Prawnik |14 Mechanik |15 Reporter |16 ZlodziejAut |17 Diler Zio³a");
-            SendClientMessage(playerid, COLOR_GRAD2, "|18 Prostututka |19 Bokser |20 Diler Broni |21 Rybak |22 Busiarz |23 Truck |77 Praca |88 Czas Kontraktu");
+            SendClientMessage(playerid, COLOR_GRAD2, "|18 Prostututka |19 Bokser |20 Diler Broni |21 Rybak |22 Busiarz |23 Kurier | 24 Praca | 25 Czas Kontraktu");
 			return 1;
 		}
 
@@ -22964,7 +22964,7 @@ CMD:setstat(playerid, params[])
 						case 11:
 						{
                             orgInvitePlayer(giveplayerid, amount);
-							format(string, sizeof(string), "Family Member gracza zmieniono na %d", amount);
+							format(string, sizeof(string), "Rodzina gracza zmieniono na %d", amount);
 						}
 						case 12:
 						{
@@ -23024,19 +23024,19 @@ CMD:setstat(playerid, params[])
                         case 23:
 						{
 							PlayerInfo[giveplayerid][pTruckSkill] = amount;
-							format(string, sizeof(string), "Skill truckera gracza zmieniony na %d", amount);
+							format(string, sizeof(string), "Skill kuriera gracza zmieniony na %d", amount);
 						}
-						case 77:
+						case 24:
 						{
 							PlayerInfo[giveplayerid][pJob] = amount;
 							format(string, sizeof(string), "Praca gracza zmieniona na %d", amount);
 						}
-						case 88:
+						case 25:
 						{
 							PlayerInfo[giveplayerid][pContractTime] = amount;
 							format(string, sizeof(string), "Czas kontraktu gracza zmieniony na %d", amount);
 						}
-						case 99:
+						case 1337:
 						{
 							PlayerInfo[giveplayerid][pConnectTime] = amount;
 							format(string, sizeof(string), "Czas gry gracza zmieniony na %d", amount);
