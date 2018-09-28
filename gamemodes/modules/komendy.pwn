@@ -12677,6 +12677,11 @@ CMD:kamera_wiezienie(playerid, params[])
 					return 1;
 				}
 
+				if(GetPlayerInterior(playerid) == 10) //czy gracz jest na /kameraw
+				{
+					GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+				}
+				
 				if(number < 1 || number > 6) { sendTipMessage(playerid, "Numer kamery od 1 do 6 !"); return 1; }
 				TogglePlayerControllable(playerid, 0);
 				SetPlayerInterior(playerid, 10);
@@ -12694,7 +12699,7 @@ CMD:kamera_wiezienie(playerid, params[])
 					TogglePlayerControllable(playerid, 1);
 					SetCameraBehindPlayer(playerid);
 					PlayerInfo[playerid][pMuted] = 0;
-					SetPlayerPosEx(playerid, 319.72470092773, -1548.3374023438, 13.845289230347);
+					SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 					Wchodzenie(playerid);
 				}
 			}
