@@ -4721,8 +4721,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             if(KradniecieWozu[playerid] != newcar)
 		    {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij spróbowaæ to zrobiæ lub /wyjdz aby wyjœæ.");
-                KradniecieWozu[playerid] = newcar;
                 if(PlayerInfo[playerid][pCarLic] == 1) TogglePlayerControllable(playerid, 0);
+                KradniecieWozu[playerid] = 1;
 			}
         }
 		gLastCar[playerid] = newcar;
