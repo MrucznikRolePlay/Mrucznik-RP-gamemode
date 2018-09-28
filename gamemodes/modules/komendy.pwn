@@ -1934,17 +1934,17 @@ CMD:odznaka(playerid, params[])
 						{
 							SendClientMessage(giveplayerid,COLOR_WHITE,"Wydzia³: Œledczy");
 						}
-						else if(PlayerInfo[playerid][pRank] == 3 || PlayerInfo[playerid][pRank] == 5)
+						else if(PlayerInfo[playerid][pRank] >= 9)
 						{
-							SendClientMessage(giveplayerid,COLOR_WHITE,"Wydzia³: Walki z Przestêpczoœci¹ Zorganizowan¹");
+							SendClientMessage(giveplayerid,COLOR_WHITE,"Wydzia³: Kierowniczy");
 						}
-						else if(PlayerInfo[playerid][pRank] == 4)
+						else if(PlayerInfo[playerid][pRank] >= 7)
 						{
 							SendClientMessage(giveplayerid,COLOR_WHITE,"Wydzia³: Wywiadowczy");
 						}
-						else if(PlayerInfo[playerid][pRank] == 6)
+						else if(PlayerInfo[playerid][pRank] >= 3)
 						{
-							SendClientMessage(giveplayerid,COLOR_WHITE,"Wydzia³: Kierowniczy");
+							SendClientMessage(giveplayerid,COLOR_WHITE,"Wydzia³: Walki z Przestêpczoœci¹ Zorganizowan¹");
 						}
 						else
 						{
