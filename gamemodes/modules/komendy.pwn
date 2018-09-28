@@ -10009,7 +10009,7 @@ CMD:pobij(playerid, params[])
 					        			sendTipMessage(playerid, "Nie mo¿esz pobiæ pobitego gracza / jesteœ pobity, nie mo¿esz biæ innych.");
 						       			return 1;
 					       			}
-									if(PlayerInfo[playa][pBW] == 1)
+									if(PlayerInfo[playa][pBW] != 0)
 									{
 										return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz dogorywa na BW. Nie kop le¿¹cego!");
 									}
@@ -15131,7 +15131,7 @@ CMD:teczka(playerid, params[])
 					}
 					else
 					{
-						sendErrorMessage(playerid, "Jesteœ zadaleko od gracza.");
+						sendErrorMessage(playerid, "Jesteœ za daleko od gracza.");
 					}
 				}//invalid id
 			}
@@ -37062,7 +37062,7 @@ CMD:gotomechy(playerid)
 		
 		if (GetPlayerState(playerid) == 2)
 		{
-			SetVehiclePos(GetPlayerVehicleID(playerid), 2771.0842, -1628.4905, 12.98190);
+			SetVehiclePos(GetPlayerVehicleID(playerid), 2778.0833, -1612.0159, 10.9219);
 		}
 		else
 		{
