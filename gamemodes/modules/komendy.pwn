@@ -191,7 +191,7 @@ CMD:panel(playerid, params[])
         SetPVarInt(playerid, "panel-upr", kary);
         DeletePVar(playerid, "panel-kary-continue");
         DeletePVar(playerid, "panel-powod");
-        format(str, 256, "{FFFFFF}» PANEL KAR (%s{FFFFFF})\n{FFFFFF}» SprawdŸ konto gracza", (kary & 0b10) ? ("{00FF00}Uprawnienia") : ("{FF0000}Brak upr."));
+        format(str, sizeof(str), "{FFFFFF}» PANEL KAR (%s{FFFFFF})\n{FFFFFF}» SprawdŸ konto gracza", (kary & 0b10) ? ("{00FF00}Uprawnienia") : ("{FF0000}Brak upr."));
         ShowPlayerDialogEx(playerid, D_PANEL_ADMINA, DIALOG_STYLE_LIST, "M-RP » Panel administracyjny", str, "Wybierz", "WyjdŸ");
     }
     else
@@ -216,7 +216,7 @@ CMD:panel(playerid, params[])
                 return 1;
             }
 
-            format(str, 128, "ADM: %s - odblokowano nick: %s", GetNick(playerid), var);
+            format(str, sizeof(str), "ADM: %s - odblokowano nick: %s", GetNick(playerid), var);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
             BanLog(str);
             return 1;
@@ -250,7 +250,7 @@ CMD:panel(playerid, params[])
                 return 1;
             }
 
-            format(str, 128, "ADM: %s - odblokowano IP: %s", GetNick(playerid), var);
+            format(str, sizeof(str), "ADM: %s - odblokowano IP: %s", GetNick(playerid), var);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
             BanLog(str);
             return 1;
@@ -274,7 +274,7 @@ CMD:panel(playerid, params[])
             }
             MruMySQL_BanujOffline(var, powod, playerid);
 
-            format(str, 128, "ADM: %s - zablokowano nick: %s powód: %s", GetNick(playerid), var, powod);
+            format(str, sizeof(str), "ADM: %s - zablokowano nick: %s powód: %s", GetNick(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
             BanLog(str);
             return 1;
@@ -304,7 +304,7 @@ CMD:panel(playerid, params[])
             }
             MruMySQL_BanujOffline("Brak", powod, playerid, var);
 
-            format(str, 128, "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
+            format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
             BanLog(str);
             return 1;
@@ -333,10 +333,10 @@ CMD:panel(playerid, params[])
             {
 				new escaped_nick[MAX_PLAYER_NAME];
 				mysql_real_escape_string(var, escaped_nick);
-                format(str, 128, "UPDATE `mru_konta` SET `Warnings` = `Warnings`-1 WHERE `Nick` = '%s'", escaped_nick);
+                format(str, sizeof(str), "UPDATE `mru_konta` SET `Warnings` = `Warnings`-1 WHERE `Nick` = '%s'", escaped_nick);
     	        mysql_query(str);
 
-                format(str, 128, "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
+                format(str, sizeof(str), "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
                 ABroadCast(COLOR_YELLOW,str,1);
 				if(!IsPlayerAdmin(playerid))
 				{
@@ -37826,7 +37826,7 @@ CMD:ticketend(playerid)
 
 CMD:addcar(playerid, p[])
 {
-    if(!Uprawnienia(playerid, ACCESS_EDITCAR) || PlayerInfo[playerid][pAdmin] != 5000) return 1;
+    if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return 1;
     new model, color1, color2;
     if(sscanf(p, "ddd", model, color1, color2)) return sendTipMessage(playerid, "U¿yj /addcar [Model] [Kolor] [Kolor]");
     new Float:x, Float:y, Float:z, Float:a;
@@ -37845,7 +37845,7 @@ CMD:addcar(playerid, p[])
 
 CMD:removecar(playerid, p[])
 {
-    if(!Uprawnienia(playerid, ACCESS_EDITCAR) || PlayerInfo[playerid][pAdmin] != 5001) return 1;
+    if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return 1;
     new car;
     if(sscanf(p, "d", car)) return sendTipMessage(playerid, "U¿yj /removecar [Car UID]");
 

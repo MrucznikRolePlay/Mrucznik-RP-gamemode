@@ -15664,29 +15664,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
                 {
                     new lUID = Car_GetOwner(car);
-                    foreach(Player, i)
-                    {
-                        if(PlayerInfo[i][pUID] == lUID)
-                        {
-                            for(new j=0;j<MAX_CAR_SLOT;j++)
-                            {
-                                if(PlayerInfo[i][pCars][j] == car)
-                                {
-                                    PlayerInfo[i][pCars][j] = 0;
-                                    lSlot = j+1;
-                                    break;
-                                }
-                            }
+					if(lUID != 0)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pUID] == lUID)
+							{
+								for(new j=0;j<MAX_CAR_SLOT;j++)
+								{
+									if(PlayerInfo[i][pCars][j] == car)
+									{
+										PlayerInfo[i][pCars][j] = 0;
+										lSlot = j+1;
+										break;
+									}
+								}
 
-                            format(string, sizeof(string), " Usuni皻o pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
-    						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-    						format(string, sizeof(string), "%s usun像 pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-    						StatsLog(string);
+								format(string, sizeof(string), " Usuni皻o pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								format(string, sizeof(string), "%s usun像 pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
+								StatsLog(string);
 
-                            //Car_SortPlayerCars(i);
-                            break;
-                        }
-                    }
+								//Car_SortPlayerCars(i);
+								break;
+							}
+						}
+					}
                 }
                 CarData[car][c_OwnerType] = 0;
                 Car_Save(car, CAR_SAVE_OWNER);
@@ -15729,29 +15732,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
                 {
                     new lUID = Car_GetOwner(car);
-                    foreach(Player, i)
-                    {
-                        if(PlayerInfo[i][pUID] == lUID)
-                        {
-                            for(new j=0;j<MAX_CAR_SLOT;j++)
-                            {
-                                if(PlayerInfo[i][pCars][j] == car)
-                                {
-                                    PlayerInfo[i][pCars][j] = 0;
-                                    lSlot = j+1;
-                                    break;
-                                }
-                            }
+					if(lUID != 0)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pUID] == lUID)
+							{
+								for(new j=0;j<MAX_CAR_SLOT;j++)
+								{
+									if(PlayerInfo[i][pCars][j] == car)
+									{
+										PlayerInfo[i][pCars][j] = 0;
+										lSlot = j+1;
+										break;
+									}
+								}
 
-                            format(string, sizeof(string), " Usuni皻o pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
-    						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-    						format(string, sizeof(string), "%s usun像 pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-    						StatsLog(string);
+								format(string, sizeof(string), " Usuni皻o pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								format(string, sizeof(string), "%s usun像 pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
+								StatsLog(string);
 
-                            //Car_SortPlayerCars(i);
-                            break;
-                        }
-                    }
+								//Car_SortPlayerCars(i);
+								break;
+							}
+						}
+					}
                 }
                 CarData[car][c_OwnerType] = 6;
                 Car_Save(car, CAR_SAVE_OWNER);
@@ -15774,31 +15780,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
         {
             new lUID = Car_GetOwner(car);
-            foreach(Player, i)
-            {
-                if(PlayerInfo[i][pUID] == lUID)
-                {
-                    for(new j=0;j<MAX_CAR_SLOT;j++)
-                    {
-                        if(PlayerInfo[i][pCars][j] == car)
-                        {
-                            PlayerInfo[i][pCars][j] = 0;
-                            lSlot = j+1;
-                            break;
-                        }
-                    }
+			if(lUID != 0)
+			{
+				foreach(Player, i)
+				{
+					if(PlayerInfo[i][pUID] == lUID)
+					{
+						for(new j=0;j<MAX_CAR_SLOT;j++)
+						{
+							if(PlayerInfo[i][pCars][j] == car)
+							{
+								PlayerInfo[i][pCars][j] = 0;
+								lSlot = j+1;
+								break;
+							}
+						}
 
-                    format(string, sizeof(string), " Usuni皻o pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "%s usun像 pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-					StatsLog(string);
+						format(string, sizeof(string), " Usuni皻o pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+						format(string, sizeof(string), "%s usun像 pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
+						StatsLog(string);
 
-                    //Car_SortPlayerCars(i);
-                    break;
-                }
-            }
+						//Car_SortPlayerCars(i);
+						break;
+					}
+				}
+			}
         }
-        new bool:lFound=false;
+		
         if(typ == CAR_OWNER_PLAYER)
         {
             foreach(Player, i)
@@ -15806,20 +15815,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(PlayerInfo[i][pUID] == strval(inputtext))
                 {
                     Car_MakePlayerOwner(i, car);
-                    lFound = true;
                     break;
                 }
             }
         }
-        if(!lFound)
-        {
-            CarData[car][c_OwnerType] = typ;
-            CarData[car][c_Owner] = strval(inputtext);
-            Car_Save(car, CAR_SAVE_OWNER);
-        }
+		CarData[car][c_OwnerType] = typ;
+		CarData[car][c_Owner] = strval(inputtext);
 		
 		format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype %d owner %d - %s", car, typ, strval(inputtext), GetNick(playerid));
 		StatsLog(string);
+		Car_Save(car, CAR_SAVE_OWNER);
 		
         ShowCarEditDialog(playerid);
         return 1;
