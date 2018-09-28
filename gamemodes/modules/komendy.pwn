@@ -16787,11 +16787,6 @@ CMD:b(playerid, params[])
         {
             return 1;
         }
-        if(PlayerInfo[playerid][pMuted] == 1)
-		{
-			sendTipMessage(playerid, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony", TEAM_CYAN_COLOR);
-			return 1;
-		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
