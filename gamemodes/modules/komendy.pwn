@@ -17449,11 +17449,8 @@ CMD:sluzba(playerid)
                     SetPlayerArmour(playerid, 90);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 1;
-                    if(PlayerInfo[playerid][pRank] != 4)
-                    {
-                        SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-                        SetPlayerToTeamColor(playerid);
-                    }
+					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+					SetPlayerToTeamColor(playerid);
                 }
                 else if(OnDuty[playerid]==1)
                 {
@@ -17463,11 +17460,8 @@ CMD:sluzba(playerid)
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
                     PrzywrocBron(playerid);
-                    if(PlayerInfo[playerid][pRank] != 4)
-                    {
-                        SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                        SetPlayerToTeamColor(playerid);
-                    }
+					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+					SetPlayerToTeamColor(playerid);
                 }
             }
             else
@@ -21413,12 +21407,6 @@ CMD:wyjdz(playerid)
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2352.0139160156,-1180.8870849609,1027.9765625)) // Dom na Las Collinas
 		{
 		    SetPlayerPosEx(playerid, 2351.8894042969,-1169.4614257813,28.001684188843); // Dom na Las Collinas
-		    SetPlayerInterior(playerid, 0);
-		    return 1;
-		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 365.00964355469,-10.975138664246,1001.8515625)) // Cluckin'Bell
-		{
-		    SetPlayerPosEx(playerid, 22420.5959472656,-1508.7227783203,23.992208480835); // Cluckin'Bell
 		    SetPlayerInterior(playerid, 0);
 		    return 1;
 		}
