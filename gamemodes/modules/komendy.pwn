@@ -15226,21 +15226,6 @@ CMD:staty(playerid)
 	return 1;
 }
 
-CMD:staty2(playerid)
-{
-    if(IsPlayerConnected(playerid))
-    {
-        if (gPlayerLogged[playerid] != 0)
-        {
-            new string[120];
-            new sendername[MAX_PLAYER_NAME];
-            format(string, sizeof(string), "Twój nick: %s", sendername);
-            ShowPlayerDialog(playerid, 9987, DIALOG_STYLE_LIST, "Mrucznik-RP - Statystyki", string, "Zamknij", "");
-        }
-    }
-    return 1;
-}
-
 CMD:dn(playerid)
 {
     if(IsPlayerConnected(playerid))
