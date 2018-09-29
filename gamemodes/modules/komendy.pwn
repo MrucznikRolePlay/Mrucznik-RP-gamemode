@@ -37524,12 +37524,6 @@ CMD:lsmcelevator(playerid)
     return 1;
 }
 
-CMD:test(playerid)
-{
-
-    SendClientMessage(playerid, COLOR_PURPLE, "test");
-    return 1;
-}
 
 CMD:czysc(playerid)
 {
