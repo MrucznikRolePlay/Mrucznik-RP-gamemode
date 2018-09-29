@@ -2895,7 +2895,7 @@ CMD:szpital(playerid, params[])
                 sendErrorMessage(playerid, "Komenda dostêpna od 3 rangi!");
 			    return 1;
 			}
-			SendClientMessageToAll(COLOR_WHITE, "|___________ SAM-ERS ___________|");
+			SendClientMessageToAll(COLOR_WHITE, "|___________ Medical Center ___________|");
 			format(string, sizeof(string), "Lekarz %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 		}
