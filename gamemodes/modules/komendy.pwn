@@ -37524,6 +37524,13 @@ CMD:lsmcelevator(playerid)
     return 1;
 }
 
+CMD:test(playerid)
+{
+
+    SendClientMessage(playerid, COLOR_PURPLE, "test");
+    return 1;
+}
+
 CMD:czysc(playerid)
 {
     if(GetPlayerFraction(playerid) != FRAC_LSFD) return sendTipMessageEx(playerid, COLOR_GRAD2, "Dostêpne tylko dla frakcji stra¿aków.");
