@@ -12133,7 +12133,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Aby namierzyæ jego pozycje wpisz /znajdz. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 						    			}
 						    			else
 						    			{
@@ -12148,7 +12147,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 							    		}
 							    		else
 						    			{
@@ -12163,7 +12161,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 						    			}
 						    			else
 						    			{
@@ -12178,7 +12175,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 						    			}
 						    			else
 						    			{
@@ -12193,7 +12189,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 										}
 										else
 						    			{

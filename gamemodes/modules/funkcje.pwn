@@ -7618,7 +7618,7 @@ PobierzSlotKontaktuPoNumerze(playerid, numer)
 
 ListaKontaktowGracza(playerid)
 {
-	new string[700];
+	new string[50*MAX_KONTAKTY];
 	
 	for(new i; i<MAX_KONTAKTY; i++)
 	{
