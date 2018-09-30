@@ -7534,6 +7534,7 @@ SendSMSMessage(senderNumber, reciverid, message[])
 	format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
 	SendClientMessage(reciverid, COLOR_YELLOW, string);
 	PlayerPlaySound(reciverid, 6401, 0.0, 0.0, 0.0);
+	LastSMSNumber[reciverid] = senderNumber;
 }
 
 StartACall(playerid, reciverid)

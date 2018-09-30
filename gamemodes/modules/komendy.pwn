@@ -19161,6 +19161,24 @@ CMD:otworzlinie(playerid, p[])
     return 1;
 }
 
+CMD:res(playerid, params[]) return cmd_resms(playerid, params);
+CMD:resms(playerid, params[])
+{
+	new string[256];
+	if(LastSMSNumber[playerid] == 0)
+	{
+		sendErrorMessage(playerid, "Nikt nie wys³a³ Ci smsa");
+	}
+	
+	if(isnull(params))
+	{
+		sendTipMessage(playerid, "U¿yj /res [wiadomoœæ]");
+	}
+	
+	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
+	return cmd_sms(playerid, string);
+}
+
 CMD:txt(playerid, params[]) return cmd_sms(playerid, params);
 CMD:t(playerid, params[]) return cmd_sms(playerid, params);
 CMD:sms(playerid, params[])
@@ -26105,7 +26123,7 @@ CMD:telefonpomoc(playerid)
 	if (PlayerInfo[playerid][pPnumber] > 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-		SendClientMessage(playerid, COLOR_GRAD3,"*** TELEFON *** /dzwon | na policje:'/dzwon 911' | /sms (/p)odnies (/z)akoncz /numer");
+		SendClientMessage(playerid, COLOR_GRAD3,"*** TELEFON *** /dzwon | na policje:'/dzwon 911' | /sms /resms (/p)odnies (/z)akoncz /numer");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /pomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
 	}
 	else
