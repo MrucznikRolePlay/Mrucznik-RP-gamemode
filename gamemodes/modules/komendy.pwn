@@ -3301,7 +3301,16 @@ CMD:yo(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch.");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string),"* %s wita siê z %s.", nick, witany);
+                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    format(string, sizeof(string), "Witasz siê jak prawdziwy czarnuch z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê jak prawdziwy czarnuch z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch.");
 					ApplyAnimation(playerid,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 					ApplyAnimation(playa,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 				}
@@ -3332,7 +3341,14 @@ CMD:yo3(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkfa",4.1,0,1,1,1,1);//12
 					ApplyAnimation(playa,"GANGS","hndshkfa_swt",4.1,0,1,1,1,1);//13
 				}
@@ -3363,7 +3379,14 @@ CMD:yo2(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkba",4.1,0,1,1,1,1);//7
 					ApplyAnimation(playa,"GANGS","hndshkba",4.1,0,1,1,1,1);//7
 				}
@@ -3396,6 +3419,13 @@ CMD:yo4(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
 					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkea",4.1,0,1,1,1,1);//11
 					ApplyAnimation(playa,"GANGS","hndshkea",4.1,0,1,1,1,1);//11
@@ -3434,7 +3464,14 @@ CMD:elo(playerid, params[])
 						sendErrorMessage(playerid, "Ten gracz jest za daleko.");
 						return 1;
 					}
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkcb",4.1,0,1,1,1,1);//8
 					ApplyAnimation(playa,"GANGS","hndshkcb",4.1,0,1,1,1,1);//8
 				}
@@ -3467,7 +3504,14 @@ CMD:elo2(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkca",4.1,0,1,1,1,1);//9
 					ApplyAnimation(playa,"GANGS","hndshkca",4.1,0,1,1,1,1);//9
 				}
