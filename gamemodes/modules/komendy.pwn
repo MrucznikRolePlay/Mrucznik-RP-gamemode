@@ -3498,7 +3498,16 @@ CMD:witaj(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string),"* %s wita siê z %s.", nick, witany);
+                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid, "DEALER", "DEALER_DEAL", 4.0, 0, 0, 0, 0, 0);
 					ApplyAnimation(playa, "DEALER", "DEALER_DEAL", 4.0, 0, 0, 0, 0, 0);
 				}
