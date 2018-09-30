@@ -19387,9 +19387,9 @@ CMD:kontakty(playerid, params[])
 		}
 	
 		new nazwa[32], numer;
-		if(sscanf(params, "s[32]s[32]d", opcja, nazwa, numer))
+		if(sscanf(params, "s[32]ds[32]", opcja, numer, nazwa))
 		{
-			sendTipMessage(playerid, "U¿yj /kontakty dodaj [nazwa - max 32znaki] [numer]");
+			sendTipMessage(playerid, "U¿yj /kontakty dodaj [numer] [nazwa - max 32znaki]");
 			return 1;
 		}
 		
@@ -19425,6 +19425,42 @@ CMD:kontakty(playerid, params[])
 			ShowPlayerDialogEx(playerid, D_KONTAKTY_LISTA, DIALOG_STYLE_LIST, "Kontakty - lista", ListaKontaktowGracza(playerid), "Wyœwietl", "WyjdŸ");
 		}
 	}
+	return 1;
+}
+
+CMD:wizytowka(playerid, params[])
+{
+	new giveplayerid, nazwa[32], string[128];
+	format(string, sizeof(string), "k<fix>S[32](%s)", GetNick(playerid));
+	if(sscanf(params, string, giveplayerid, nazwa))
+	{
+		sendTipMessage(playerid, "U¿yj /wizytowka [ID/Nick Gracza] (nazwa - domyœlnie nick)");
+		return 1;
+	}
+	
+	if(IsPlayerConnected(giveplayerid))
+	{
+		sendErrorMessage(playerid, "Nie ma takiego gracza.");
+		return 1;
+	}
+	if(ProxDetectorS(10.0, playerid, giveplayerid))
+	{
+		sendErrorMessage(playerid, "Jesteœ za daleko od tego gracza.");
+		return 1;
+	}
+	
+	if(giveplayerid == playerid) 
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz daæ wizytówki samemu sobie!"); 
+		return 1;
+	}
+	
+	format(string, sizeof(string), "* Oferujesz %s wizytówkê.", GetNick(giveplayerid));
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+	format(string, sizeof(string), "* %s proponuje wizytówkê o treœci: %s, (wpisz /akceptuj wizytowka) aby akceptowaæ.", GetNick(playerid), nazwa);
+	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+	SetPVarString(giveplayerid, "wizytowka-nazwa", nazwa);
+	SetPVarInt(giveplayerid, "wizytowka", playerid);
 	return 1;
 }
 
@@ -32760,11 +32796,33 @@ CMD:akceptuj(playerid, params[])
             SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Gazeta, Mandat");
-            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem");
+            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka");
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
-        if(strcmp(x_job,"neon",true) == 0 || strcmp(x_job,"neony",true) == 0)
+		if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
+		{
+			new dawacz = GetPVarInt(playerid, "wizytowka");
+			new nazwa[32];
+			if(dawacz == 0)
+			{
+				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci wizytówki");
+				return 1;
+			}
+			
+			format(string, sizeof(string), "* Akceptowa³eœ wizytówkê od %s, dodano nowy kontakt.", GetNick(dawacz));
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			format(string, sizeof(string), "* %s przyj¹³ Twoj¹ wizytówkê.", GetNick(playerid));
+			
+            format(string, sizeof(string), "* %s wrêcza z uœmiechem wizytówkê %s, który chowa j¹ do kieszeni.", GetNick(dawacz), GetNick(playerid));
+            ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+			
+			GetPVarString(playerid, "wizytowka-nazwa", nazwa, sizeof(nazwa));
+			format(string, sizeof(string), "dodaj %d %s", dawacz, nazwa);
+			SetPVarInt(playerid, "wizytowka", 0);
+			cmd_kontakty(playerid, string);
+		}
+        else if(strcmp(x_job,"neon",true) == 0 || strcmp(x_job,"neony",true) == 0)
         {
             new dawacz = GraczDajacyNeon[playerid];
             if(dawacz < 999)
