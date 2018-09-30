@@ -19365,20 +19365,23 @@ CMD:kontakty(playerid, params[])
 {
 	if(PlayerInfo[playerid][pPnumber] == 0)
 	{
-		sendErrorMessage(playerid, "Nie masz telefonu, nie mo¿esz wpisaæ tam swoich kontaktów");
+		sendErrorMessage(playerid, "Nie masz telefonu, nie mo¿esz wpisaæ tam swoich kontaktów.");
+		return 1;
 	}
 
 	new opcja[32];
-	if(sscanf(params, "s[32]", opcja))
+	if(sscanf(params, "s[32] ", opcja))
 	{
 		sendTipMessage(playerid, "U¿yj /kontakty [dzwoñ/sms/dodaj/edytuj/usuñ/lista]");
 		return 1;
 	}
+	
 	if(strcmp(opcja, "dodaj", true) == 0)
 	{
 		if(!CzyMaWolnySlotNaKontakt(playerid))
 		{
 			sendErrorMessage(playerid, "Osi¹gn¹³eœ maksymaln¹ liczbê kontaktów.");
+			return 1;
 		}
 	
 		new nazwa[32], numer;
@@ -19425,6 +19428,12 @@ CMD:kontakty(playerid, params[])
 
 CMD:wizytowka(playerid, params[])
 {
+	if(PlayerInfo[playerid][pPnumber] == 0)
+	{
+		sendErrorMessage(playerid, "Nie masz telefonu, nie mo¿esz dawaæ graczom wizytówek.");
+		return 1;
+	}
+
 	new giveplayerid, nazwa[32], string[128];
 	format(string, sizeof(string), "k<fix>S[32](%s)", GetNick(playerid));
 	if(sscanf(params, string, giveplayerid, nazwa))
@@ -19433,14 +19442,21 @@ CMD:wizytowka(playerid, params[])
 		return 1;
 	}
 	
-	if(IsPlayerConnected(giveplayerid))
+	if(!IsPlayerConnected(giveplayerid))
 	{
 		sendErrorMessage(playerid, "Nie ma takiego gracza.");
 		return 1;
 	}
+	
 	if(ProxDetectorS(10.0, playerid, giveplayerid))
 	{
 		sendErrorMessage(playerid, "Jesteœ za daleko od tego gracza.");
+		return 1;
+	}
+	
+	if(PlayerInfo[giveplayerid][pPnumber] == 0)
+	{
+		sendErrorMessage(playerid, "Ten gracz nie ma telefonu, nie mo¿esz daæ mu wizytówki.");
 		return 1;
 	}
 	
@@ -26224,7 +26240,7 @@ CMD:telefonpomoc(playerid)
 	if (PlayerInfo[playerid][pPnumber] > 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-		SendClientMessage(playerid, COLOR_GRAD3,"*** TELEFON *** /dzwon | na policje:'/dzwon 911' | /sms /resms (/p)odnies (/z)akoncz /numer");
+		SendClientMessage(playerid, COLOR_GRAD3,"*** TELEFON *** /dzwon | na policje:'/dzwon 911' | /sms /resms (/p)odnies (/z)akoncz /numer /wizytowka /kontakty");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /pomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
 	}
 	else

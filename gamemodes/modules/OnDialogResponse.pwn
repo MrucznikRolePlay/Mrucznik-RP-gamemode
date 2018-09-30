@@ -2570,7 +2570,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /pomoc aby zobaczyæ komendy telefonu.");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
 							return 1;
 						}
 					}
