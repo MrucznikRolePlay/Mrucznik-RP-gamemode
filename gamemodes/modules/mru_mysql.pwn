@@ -1160,6 +1160,61 @@ stock MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 	return 0;
 }
 
+MruMySQL_LoadPhoneContacts(playerid)
+{
+	new string[128];
+	format(string, sizeof(string), "SELECT UID, Number, Name FROM mru_kontakty WHERE Owner='%d'", PlayerInfo[playerid][pUID]);
+	mysql_query(string);
+	mysql_store_result();
+	if(mysql_num_rows()>0)
+	{
+		new i;
+		while(mysql_fetch_row_format(string, "|"))
+		{
+			sscanf(string, "p<|>dds[32]", 
+				Kontakty[playerid][i][eUID], 
+				Kontakty[playerid][i][eNumer], 
+				Kontakty[playerid][i][eNazwa]
+			);
+			i++;
+			if(i == MAX_KONTAKTY) 
+				break;
+		}
+	}
+	mysql_free_result();
+	return 1;
+}
+
+MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
+{
+	new string[128], escapedName[32];
+	mysql_real_escape_string(nazwa, escapedName);
+	format(string, sizeof(string), "INSERT INTO mru_kontakty (Owner, Number, Name) VALUES ('%d', '%d', '%s'); SELECT LAST_INSERT_ID();", PlayerInfo[playerid][pUID], numer, escapedName);
+	mysql_query(string);
+	
+	mysql_store_result();
+	new uid = mysql_fetch_int();
+	mysql_free_result();
+	return uid;
+}
+
+MruMySQL_EditPhoneContact(uid, nazwa[])
+{
+	new string[128], escapedName[32];
+	mysql_real_escape_string(nazwa, escapedName);
+	format(string, sizeof(string), "UPDATE mru_kontakty SET Name='%s' WHERE UID='%d'", escapedName, uid);
+	mysql_query(string);
+	return 1;
+}
+
+MruMySQL_DeletePhoneContact(uid)
+{
+	new string[128];
+	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);
+	mysql_query(string);
+	return 1;
+}
+
 public MruMySQL_Error(error[])
 {
     new str[256];
@@ -1177,14 +1232,6 @@ public MruMySQL_Error(error[])
     return 1;
 }
 
-stock IsDialogProtected(dialogid)
-{
-    switch(dialogid)
-    {
-        case D_PANEL_KAR_NADAJ..D_PANEL_KAR_ZNAJDZ_INFO, D_PERM, D_CREATE_ORG_NAME, D_CREATE_ORG_UID, D_PANEL_CHECKPLAYER, D_EDIT_RANG_NAME, D_OPIS_UPDATE, D_VEHOPIS_UPDATE: return true;
-    }
-    return false; //dodac dialogi z mysql
-}
 new bool:MySQL_timeout=false;
 public MySQL_Refresh()
 {

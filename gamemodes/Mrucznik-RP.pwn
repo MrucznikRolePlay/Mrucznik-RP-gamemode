@@ -742,6 +742,7 @@ public OnPlayerConnect(playerid)
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
 	ZerujZmienne(playerid);
+	ZerujKontakty(playerid);
 
     ClearChat(playerid);	
 
@@ -5768,6 +5769,7 @@ OnPlayerLogin(playerid, password[])
 		gPlayerLogged[playerid] = 1;
 
         Car_LoadForPlayer(playerid); //System aut
+		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);

@@ -2197,7 +2197,16 @@ public JednaSekundaTimer()
 				}
 				if(RingTone[i]%12 == 0 || RingTone[i] == 1)
 				{
-					format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %d", PlayerInfo[Mobile[i]][pPnumber]);
+					
+					new slotKontaktu = PobierzSlotKontaktuPoNumerze(i, PlayerInfo[i][pPnumber]);
+					if(slotKontaktu >= 0)
+					{
+						format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %s (%d)", Kontakty[i][slotKontaktu][eNazwa], PlayerInfo[Mobile[i]][pPnumber]);
+					}
+					else
+					{
+						format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %d", PlayerInfo[Mobile[i]][pPnumber]);
+					}
 					SendClientMessage(i, COLOR_YELLOW, string);
 					format(string, sizeof(string), "* Telefon %s zaczyna dzwoniæ.", GetNick(i));
 					ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);

@@ -1,5 +1,15 @@
 //OnDialogResponse.pwn
 
+
+stock IsDialogProtected(dialogid)
+{
+    switch(dialogid)
+    {
+        case D_PANEL_KAR_NADAJ..D_PANEL_KAR_ZNAJDZ_INFO, D_PERM, D_CREATE_ORG_NAME, D_CREATE_ORG_UID, D_PANEL_CHECKPLAYER, D_EDIT_RANG_NAME, D_OPIS_UPDATE, D_VEHOPIS_UPDATE: return true;
+    }
+    return false; //dodac dialogi z mysql
+}
+
 //ID DIALOGÓW 9900+ BIZNESY.
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
@@ -16157,6 +16167,70 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			TogglePlayerControllable(playerid, 1);
 			RemovePlayerFromVehicleEx(playerid);
 			HireCar[playerid] = 0;
+		}
+	}
+	else if(dialogid == D_KONTAKTY_DZWON)
+	{
+		if(response)
+		{
+			new string[12];
+			format(string, sizeof(string), "%d", Kontakty[playerid][PobierzIdKontaktuZDialogu(playerid, listitem)][eNumer]);
+			cmd_dzwon(playerid, string);
+		}
+	}
+	else if(dialogid == D_KONTAKTY_SMS)
+	{
+		if(response)
+		{
+			SetPVarInt(playerid, "kontakty-dialog-slot", PobierzIdKontaktuZDialogu(playerid, listitem));
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_SMS_WIADOMOSC, DIALOG_STYLE_INPUT, "Kontakty - SMS", "WprowadŸ wiadomoœæ:", "Wyœlj SMS", "Zamknij");
+		}
+	}
+	else if(dialogid == D_KONTAKTY_SMS_WIADOMOSC)
+	{
+		if(response)
+		{
+			//todo numer
+			new string[256];
+			format(string, sizeof(string), "%d %s", Kontakty[playerid][GetPVarInt(playerid, "kontakty-dialog-slot")][eNumer], inputtext);
+			cmd_sms(playerid, string);
+		}
+	}
+	else if(dialogid == D_KONTAKTY_EDYTUJ)
+	{
+		if(response)
+		{
+			SetPVarInt(playerid, "kontakty-dialog-slot", PobierzIdKontaktuZDialogu(playerid, listitem));
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Wyœlj SMS", "Zamknij");
+		}
+	}
+	else if(dialogid == D_KONTAKTY_EDYTUJ_NOWA_NAZWA)
+	{
+		if(response)
+		{
+			if(strlen(inputtext) > 32)
+			{
+				sendErrorMessage(playerid, "Nazwa nie mo¿e byæ d³u¿sza ni¿ 32 znaki");
+				ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Wyœlj SMS", "Zamknij");
+			}
+		
+			EdytujKontakt(playerid, GetPVarInt(playerid, "kontakty-dialog-slot"), inputtext);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt edytowany.");
+		}
+	}
+	else if(dialogid == D_KONTAKTY_USUN)
+	{
+		if(response)
+		{
+			UsunKontakt(playerid, GetPVarInt(playerid, "kontakty-dialog-slot"));
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt usuniêty.");
+		}
+	}
+	else if(dialogid == D_KONTAKTY_LISTA)
+	{
+		if(response)
+		{
+			SendClientMessage(playerid, COLOR_WHITE, inputtext);
 		}
 	}
 	return 0;
