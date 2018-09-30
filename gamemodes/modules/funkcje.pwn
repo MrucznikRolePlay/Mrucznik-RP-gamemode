@@ -7517,8 +7517,6 @@ SendIRCMessage(channel, color, string[])
 
 SendSMSMessageToAll(senderNumber, message[])
 {
-	new string[256];
-	format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
 	foreach(Player, i)
 	{
 		if(PlayerInfo[i][pPnumber] != 0)
@@ -7531,9 +7529,19 @@ SendSMSMessageToAll(senderNumber, message[])
 SendSMSMessage(senderNumber, reciverid, message[])
 {
 	new string[256];
-	format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+	
+	new slotKontaktu = PobierzSlotKontaktuPoNumerze(reciverid, PlayerInfo[reciverid][pPnumber]);
+	if(slotKontaktu >= 0)
+	{
+		format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", message, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+	}
+	else
+	{
+		format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+	}
 	SendClientMessage(reciverid, COLOR_YELLOW, string);
 	PlayerPlaySound(reciverid, 6401, 0.0, 0.0, 0.0);
+	LastSMSNumber[reciverid] = senderNumber;
 }
 
 StartACall(playerid, reciverid)
@@ -7584,6 +7592,126 @@ StopACallForPlayer(playerid)
 	RingTone[playerid] = 0;
 	Callin[playerid] = CALL_NONE;
 	SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
+}
+
+bool:CzyGraczMaKontakty(playerid)
+{
+	return Kontakty[playerid][0][eNumer] != 0;
+}
+
+PobierzSlotKontaktuPoNumerze(playerid, numer)
+{
+	if(numer <= 0)
+	{
+		return -1;
+	}
+
+	for(new i; i<MAX_KONTAKTY; i++)
+	{
+		if(Kontakty[playerid][i][eNumer] == numer)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+ListaKontaktowGracza(playerid)
+{
+	new string[50*MAX_KONTAKTY];
+	
+	for(new i; i<MAX_KONTAKTY; i++)
+	{
+		if(Kontakty[playerid][i][eNumer] == 0)
+		{
+			continue;
+		}
+		
+		if(FindPlayerByNumber(playerid) != -1)
+		{
+			//aktywny
+			format(string, sizeof(string), INCOLOR_GREY"%s - %d\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+		}
+		else
+		{
+			//nieaktywny
+			format(string, sizeof(string), INCOLOR_WHITE"{}%s - %d\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+		}
+	}
+	
+	safe_return string;
+}
+
+
+PobierzWolnySlotNaKontakt(playerid)
+{
+	for(new i; i<MAX_KONTAKTY; i++)
+	{
+		if(Kontakty[playerid][i][eNumer] == 0)
+		{
+			return i;
+		}
+	}
+	return -1; //error
+}
+
+bool:CzyMaWolnySlotNaKontakt(playerid)
+{
+	return PobierzWolnySlotNaKontakt(playerid) != -1;
+}
+
+DodajKontakt(playerid, nazwa[], numer)
+{
+	new slot = PobierzWolnySlotNaKontakt(playerid);
+	if(slot == -1) return 0; //error
+	format(Kontakty[playerid][slot][eNazwa], 32, "%s", nazwa);
+	Kontakty[playerid][slot][eNumer] = numer;
+	Kontakty[playerid][slot][eUID] = MruMySQL_AddPhoneContact(playerid, nazwa, numer);
+	return 1;
+}
+
+EdytujKontakt(playerid, slot, nazwa[])
+{
+	format(Kontakty[playerid][slot][eNazwa], 32, "%s", nazwa);
+	MruMySQL_EditPhoneContact(Kontakty[playerid][slot][eUID], nazwa);
+	return 1;
+}
+
+UsunKontakt(playerid, slot)
+{
+	MruMySQL_DeletePhoneContact(Kontakty[playerid][slot][eUID]);
+	
+	Kontakty[playerid][slot][eUID] = 0;
+	format(Kontakty[playerid][slot][eNazwa], 32, "%s", "");
+	Kontakty[playerid][slot][eNumer] = 0;
+	return 1;
+}
+
+PobierzIdKontaktuZDialogu(playerid, listitem)
+{
+	new id = 0, l = listitem;
+	for(new i; i<MAX_KONTAKTY; i++)
+	{
+		if(l == 0)
+		{
+			return id;
+		}
+		id++;
+		if(Kontakty[playerid][i][eNumer] != 0)
+		{
+			l--;
+		}
+	}
+	return id;
+}
+
+ZerujKontakty(playerid)
+{
+	for(new i; i<MAX_KONTAKTY; i++)
+	{
+		Kontakty[playerid][i][eUID] = 0;
+		Kontakty[playerid][i][eNumer] = 0;
+	}
 }
 
 SendAdminMessage(color, string[])

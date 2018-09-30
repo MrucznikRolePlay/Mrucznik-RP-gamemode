@@ -742,6 +742,7 @@ public OnPlayerConnect(playerid)
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
 	ZerujZmienne(playerid);
+	ZerujKontakty(playerid);
 
     ClearChat(playerid);	
 
@@ -5768,6 +5769,7 @@ OnPlayerLogin(playerid, password[])
 		gPlayerLogged[playerid] = 1;
 
         Car_LoadForPlayer(playerid); //System aut
+		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);
@@ -7190,7 +7192,15 @@ public OnPlayerText(playerid, text[])
 			}
 			else if(IsPlayerConnected(Mobile[playerid]))
 			{
-				format(string, sizeof(string), "Telefon (nr %d): %s", PlayerInfo[playerid][pPnumber], text);
+				new slotKontaktu = PobierzSlotKontaktuPoNumerze(Mobile[playerid], PlayerInfo[playerid][pPnumber]);
+				if(slotKontaktu >= 0)
+				{
+					format(string, sizeof(string), "Telefon (nr %d): %s", PlayerInfo[playerid][pPnumber], text);
+				}
+				else
+				{
+					format(string, sizeof(string), "%s (nr %d): %s", Kontakty[Mobile[playerid]][slotKontaktu][eNazwa], PlayerInfo[playerid][pPnumber], text);
+				}
 				SendClientMessage(Mobile[playerid], COLOR_YELLOW, string);
 			}
 			else

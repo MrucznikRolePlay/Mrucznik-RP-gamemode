@@ -12186,7 +12186,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Aby namierzyæ jego pozycje wpisz /znajdz. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 						    			}
 						    			else
 						    			{
@@ -12201,7 +12200,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 							    		}
 							    		else
 						    			{
@@ -12216,7 +12214,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 						    			}
 						    			else
 						    			{
@@ -12231,7 +12228,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 						    			}
 						    			else
 						    			{
@@ -12246,7 +12242,6 @@ CMD:wezzlecenie(playerid, params[])
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        SendClientMessage(playa, COLOR_LIGHTBLUE, "Twoje listy goñcze trafi³y do biura ³owców g³ów, lepiej siê pilnuj!");
 										}
 										else
 						    			{
@@ -19214,6 +19209,24 @@ CMD:otworzlinie(playerid, p[])
     return 1;
 }
 
+CMD:res(playerid, params[]) return cmd_resms(playerid, params);
+CMD:resms(playerid, params[])
+{
+	new string[256];
+	if(LastSMSNumber[playerid] == 0)
+	{
+		sendErrorMessage(playerid, "Nikt nie wys³a³ Ci smsa");
+	}
+	
+	if(isnull(params))
+	{
+		sendTipMessage(playerid, "U¿yj /res [wiadomoœæ]");
+	}
+	
+	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
+	return cmd_sms(playerid, string);
+}
+
 CMD:txt(playerid, params[]) return cmd_sms(playerid, params);
 CMD:t(playerid, params[]) return cmd_sms(playerid, params);
 CMD:sms(playerid, params[])
@@ -19317,7 +19330,15 @@ CMD:sms(playerid, params[])
 	}
 	
 	//informacja zwrotna dla nadawcy
-	format(string, sizeof(string), "Wys³ano SMS: %s, Odbiorca: %d.", wiadomosc, numerTelefonuOdbiorcy);
+	new slotKontaktu = PobierzSlotKontaktuPoNumerze(playerid, numerTelefonuOdbiorcy);
+	if(slotKontaktu >= 0)
+	{
+		format(string, sizeof(string), "Wys³ano SMS: %s, Odbiorca: %s (%d).", wiadomosc, Kontakty[playerid][slotKontaktu][eNazwa], numerTelefonuOdbiorcy);
+	}
+	else
+	{
+		format(string, sizeof(string), "Wys³ano SMS: %s, Odbiorca: %d.", wiadomosc, numerTelefonuOdbiorcy);
+	}
 	SendClientMessage(playerid, COLOR_YELLOW, string);
 	
 	//pobór op³at
@@ -19392,6 +19413,120 @@ CMD:z(playerid)
 	return 1;
 }
 
+CMD:kontakt(playerid, params[]) return cmd_kontakty(playerid, params);
+CMD:kontakty(playerid, params[])
+{
+	if(PlayerInfo[playerid][pPnumber] == 0)
+	{
+		sendErrorMessage(playerid, "Nie masz telefonu, nie mo¿esz wpisaæ tam swoich kontaktów.");
+		return 1;
+	}
+
+	new opcja[32];
+	if(sscanf(params, "s[32] ", opcja))
+	{
+		sendTipMessage(playerid, "U¿yj /kontakty [dzwoñ/sms/dodaj/edytuj/usuñ/lista]");
+		return 1;
+	}
+	
+	if(strcmp(opcja, "dodaj", true) == 0)
+	{
+		if(!CzyMaWolnySlotNaKontakt(playerid))
+		{
+			sendErrorMessage(playerid, "Osi¹gn¹³eœ maksymaln¹ liczbê kontaktów.");
+			return 1;
+		}
+	
+		new nazwa[32], numer;
+		if(sscanf(params, "s[32]ds[32]", opcja, numer, nazwa))
+		{
+			sendTipMessage(playerid, "U¿yj /kontakty dodaj [numer] [nazwa - max 32znaki]");
+			return 1;
+		}
+		
+		DodajKontakt(playerid, nazwa, numer);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt dodany.");
+	}
+	else
+	{
+		if(!CzyGraczMaKontakty(playerid))
+		{
+			sendErrorMessage(playerid, "Nie posiadasz jeszcze ¿adnego kontaktu, wpisz /kontakty dodaj aby dodaæ kontakt.");
+			return 1;
+		}
+	
+		if(strcmp(opcja, "dzwon", true) == 0 || strcmp(opcja, "dzwoñ", true) == 0)
+		{
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_DZWON, DIALOG_STYLE_LIST, "Kontakty - dzwoñ", ListaKontaktowGracza(playerid), "Dzwoñ", "Zamknij");
+		}
+		else if(strcmp(opcja, "sms", true) == 0)
+		{
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_SMS, DIALOG_STYLE_LIST, "Kontakty - SMS", ListaKontaktowGracza(playerid), "Wyœlj SMS", "Zamknij");
+		}
+		else if(strcmp(opcja, "edytuj", true) == 0)
+		{
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ, DIALOG_STYLE_LIST, "Kontakty - edytuj", ListaKontaktowGracza(playerid), "Edytuj", "Zamknij");
+		}
+		else if(strcmp(opcja, "usun", true) == 0 || strcmp(opcja, "usuñ", true) == 0)
+		{
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_USUN, DIALOG_STYLE_LIST, "Kontakty - usuñ", ListaKontaktowGracza(playerid), "Usuñ", "Zamknij");
+		}
+		else if(strcmp(opcja, "lista", true) == 0)
+		{
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_LISTA, DIALOG_STYLE_LIST, "Kontakty - lista", ListaKontaktowGracza(playerid), "Wyœwietl", "WyjdŸ");
+		}
+	}
+	return 1;
+}
+
+CMD:wizytowka(playerid, params[])
+{
+	if(PlayerInfo[playerid][pPnumber] == 0)
+	{
+		sendErrorMessage(playerid, "Nie masz telefonu, nie mo¿esz dawaæ graczom wizytówek.");
+		return 1;
+	}
+
+	new giveplayerid, nazwa[32], string[128];
+	format(string, sizeof(string), "k<fix>S[32](%s)", GetNick(playerid));
+	if(sscanf(params, string, giveplayerid, nazwa))
+	{
+		sendTipMessage(playerid, "U¿yj /wizytowka [ID/Nick Gracza] (nazwa - domyœlnie nick)");
+		return 1;
+	}
+	
+	if(!IsPlayerConnected(giveplayerid))
+	{
+		sendErrorMessage(playerid, "Nie ma takiego gracza.");
+		return 1;
+	}
+	
+	if(ProxDetectorS(10.0, playerid, giveplayerid))
+	{
+		sendErrorMessage(playerid, "Jesteœ za daleko od tego gracza.");
+		return 1;
+	}
+	
+	if(PlayerInfo[giveplayerid][pPnumber] == 0)
+	{
+		sendErrorMessage(playerid, "Ten gracz nie ma telefonu, nie mo¿esz daæ mu wizytówki.");
+		return 1;
+	}
+	
+	if(giveplayerid == playerid) 
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz daæ wizytówki samemu sobie!"); 
+		return 1;
+	}
+	
+	format(string, sizeof(string), "* Oferujesz %s wizytówkê.", GetNick(giveplayerid));
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+	format(string, sizeof(string), "* %s proponuje wizytówkê o treœci: %s, (wpisz /akceptuj wizytowka) aby akceptowaæ.", GetNick(playerid), nazwa);
+	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+	SetPVarString(giveplayerid, "wizytowka-nazwa", nazwa);
+	SetPVarInt(giveplayerid, "wizytowka", playerid);
+	return 1;
+}
 
 CMD:fixr(playerid)
 {
@@ -26158,7 +26293,7 @@ CMD:telefonpomoc(playerid)
 	if (PlayerInfo[playerid][pPnumber] > 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-		SendClientMessage(playerid, COLOR_GRAD3,"*** TELEFON *** /dzwon | na policje:'/dzwon 911' | /sms (/p)odnies (/z)akoncz /numer");
+		SendClientMessage(playerid, COLOR_GRAD3,"*** TELEFON *** /dzwon | na policje:'/dzwon 911' | /sms /resms (/p)odnies (/z)akoncz /numer /wizytowka /kontakty");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /pomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
 	}
 	else
@@ -32725,11 +32860,44 @@ CMD:akceptuj(playerid, params[])
             SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Gazeta, Mandat");
-            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem");
+            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka");
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
-        if(strcmp(x_job,"neon",true) == 0 || strcmp(x_job,"neony",true) == 0)
+		if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
+		{
+			new dawacz = GetPVarInt(playerid, "wizytowka");
+			new nazwa[32];
+			if(dawacz == 0)
+			{
+				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci wizytówki.");
+				return 1;
+			}
+			
+			if(!IsPlayerConnected(dawacz))
+			{
+				sendErrorMessage(playerid, "Gracz, który oferowa³ Ci wizytówkê wyszed³.");
+				return 1;
+			}
+			
+			if(!CzyMaWolnySlotNaKontakt(playerid))
+			{
+				sendErrorMessage(playerid, "Osi¹gn¹³eœ maksymaln¹ liczbê kontaktów.");
+			}
+			
+			format(string, sizeof(string), "* Akceptowa³eœ wizytówkê od %s, dodano nowy kontakt.", GetNick(dawacz));
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			format(string, sizeof(string), "* %s przyj¹³ Twoj¹ wizytówkê.", GetNick(playerid));
+			
+            format(string, sizeof(string), "* %s wrêcza z uœmiechem wizytówkê %s, który chowa j¹ do kieszeni.", GetNick(dawacz), GetNick(playerid));
+            ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+			
+			GetPVarString(playerid, "wizytowka-nazwa", nazwa, sizeof(nazwa));
+			format(string, sizeof(string), "dodaj %d %s", dawacz, nazwa);
+			SetPVarInt(playerid, "wizytowka", 0);
+			cmd_kontakty(playerid, string);
+		}
+        else if(strcmp(x_job,"neon",true) == 0 || strcmp(x_job,"neony",true) == 0)
         {
             new dawacz = GraczDajacyNeon[playerid];
             if(dawacz < 999)
