@@ -19376,7 +19376,7 @@ CMD:kontakty(playerid, params[])
 	}
 	if(strcmp(opcja, "dodaj", true) == 0)
 	{
-		if(Kontakty[playerid][MAX_KONTAKTY-1][eNumer] != 0)
+		if(!CzyMaWolnySlotNaKontakt(playerid))
 		{
 			sendErrorMessage(playerid, "Osi¹gn¹³eœ maksymaln¹ liczbê kontaktów.");
 		}
@@ -32801,8 +32801,19 @@ CMD:akceptuj(playerid, params[])
 			new nazwa[32];
 			if(dawacz == 0)
 			{
-				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci wizytówki");
+				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci wizytówki.");
 				return 1;
+			}
+			
+			if(!IsPlayerConnected(dawacz))
+			{
+				sendErrorMessage(playerid, "Gracz, który oferowa³ Ci wizytówkê wyszed³.");
+				return 1;
+			}
+			
+			if(!CzyMaWolnySlotNaKontakt(playerid))
+			{
+				sendErrorMessage(playerid, "Osi¹gn¹³eœ maksymaln¹ liczbê kontaktów.");
 			}
 			
 			format(string, sizeof(string), "* Akceptowa³eœ wizytówkê od %s, dodano nowy kontakt.", GetNick(dawacz));

@@ -7655,6 +7655,11 @@ PobierzWolnySlotNaKontakt(playerid)
 	return -1; //error
 }
 
+bool:CzyMaWolnySlotNaKontakt(playerid)
+{
+	return PobierzWolnySlotNaKontakt(playerid) != -1;
+}
+
 DodajKontakt(playerid, nazwa[], numer)
 {
 	new slot = PobierzWolnySlotNaKontakt(playerid);
