@@ -536,7 +536,7 @@ new FractionNames[][40] = {
     "Federal Bureau of Investigation",
     "San Andreas Sherrifs Department",
     "Los Santos Medical Center",
-    "Ballanca Crime Family",
+    "SA Bahamas",
     "Yakuza",
     "Government Security Agency",
     "Hitman Agency",
