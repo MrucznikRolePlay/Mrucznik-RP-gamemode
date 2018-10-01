@@ -24565,6 +24565,7 @@ CMD:gotostad(playerid)
 			{
 				new tmpcar = GetPlayerVehicleID(playerid);
 				SetVehiclePos(tmpcar, -1435.75, -652.664, 1054.94);
+                LinkVehicleToInterior(tmpcar, 4);
 			}
 			else
 			{
@@ -37284,10 +37285,11 @@ CMD:gotomechy(playerid)
 		if (GetPlayerState(playerid) == 2)
 		{
 			SetVehiclePos(GetPlayerVehicleID(playerid), 2778.0833, -1612.0159, 10.9219);
+
 		}
 		else
 		{
-			SetPlayerPosEx(playerid,2771.0842, -1628.4905, 12.98190);
+			SetPlayerPosEx(playerid, 2778.0833,-1612.0159,10.9219);
 		}
         SetPlayerVirtualWorld(playerid, 0);
     }
