@@ -4720,7 +4720,7 @@ CMD:trasa(playerid)
 	{
 		if(IsPlayerConnected(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pJob] == 10)
+			if(PlayerInfo[playerid][pRank] >= 0 || PlayerInfo[playerid][pJob] == 10)
 			{
 				if(IS_KomunikacjaMiejsca(Veh))
 				{
