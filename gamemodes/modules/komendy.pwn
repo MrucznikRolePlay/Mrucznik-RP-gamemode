@@ -24565,16 +24565,13 @@ CMD:gotostad(playerid)
 			{
 				new tmpcar = GetPlayerVehicleID(playerid);
 				SetVehiclePos(tmpcar, -1435.75, -652.664, 1054.94);
-                LinkVehicleToInterior(tmpcar, 4);
 			}
 			else
 			{
 				SetPlayerPosEx(playerid, -1435.75, -652.664, 1054.94);
 			}
-			//SetPlayerInterior(playerid,4);
+			SetPlayerInterior(playerid,4);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
-            SetPlayerInterior(playerid, 4);
-            PlayerInfo[playerid][pInt] = 4;
 		}
 		else
 		{
@@ -37294,7 +37291,7 @@ CMD:gotomechy(playerid)
 			SetPlayerPosEx(playerid, 2778.0833,-1612.0159,10.9219);
 		}
         SetPlayerVirtualWorld(playerid, 0);
-        sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany na bazê mechaników, ³opata w d³oñ!");
+        sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany na bazê mechaników, ³opata w d³oñ! ");
         SetPlayerInterior(playerid,0);
         PlayerInfo[playerid][pInt] = 0;
     }
