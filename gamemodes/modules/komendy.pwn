@@ -24571,8 +24571,10 @@ CMD:gotostad(playerid)
 			{
 				SetPlayerPosEx(playerid, -1435.75, -652.664, 1054.94);
 			}
-			SetPlayerInterior(playerid,4);
+			//SetPlayerInterior(playerid,4);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
+            SetPlayerInterior(playerid, 4);
+            PlayerInfo[playerid][pInt] = 4;
 		}
 		else
 		{
