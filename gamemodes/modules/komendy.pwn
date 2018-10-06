@@ -32124,7 +32124,7 @@ CMD:fixfuel(playerid)
         if (PlayerInfo[playerid][pAdmin] >= 5) 
         {
             Gas[GetPlayerVehicleID(playerid)] = 100;
-            format(string, sizeof(string), "Zatankowa³eœ swój pojazd o ID: %d", GetPlayerVehicleID(playerid));
+            format(string, sizeof(string), "Zatankowano twój pojazd o ID: %d", GetPlayerVehicleID(playerid));
             SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         }    
 
