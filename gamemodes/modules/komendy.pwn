@@ -32126,7 +32126,7 @@ CMD:tankveh(playerid)
             if (PlayerInfo[playerid][pAdmin] >= 5)
             {
                 Gas[GetPlayerVehicleID(playerid)] = 100;
-                format(string, sizeof(string), " Twój pojazd o ID (%d) zosta³ dotankowany", GetPlayerVehicleID(playerid));
+                format(string, sizeof(string), " »» Twój pojazd o ID (%d) zosta³ dotankowany", GetPlayerVehicleID(playerid));
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
             }
             else
@@ -37321,6 +37321,50 @@ CMD:gotomechy(playerid)
         PlayerInfo[playerid][pInt] = 0;
     }
     return 1;
+}
+
+CMD:gotobank(playerid)
+{
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5) {
+        
+        if (GetPlayerState(playerid) == 2)
+        {
+            SetVehiclePos(GetPlayerVehicleID(playerid), 1464.0021,-1033.3855,23.6563);
+
+        }
+        else
+        {
+            SetPlayerPosEx(playerid, 1464.0021,-1033.3855,23.6563);
+        }
+        SetPlayerVirtualWorld(playerid, 0);
+        sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany ");
+        SetPlayerInterior(playerid, 0);
+        PlayerInfo[playerid][pInt] = 0;
+    }
+    return 1;
+
+}
+
+CMD:gotostacja(playerid)
+{
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5) {
+        
+        if (GetPlayerState(playerid) == 2)
+        {
+            SetVehiclePos(GetPlayerVehicleID(playerid), 1931.9171,-1807.5239,13.5728);
+
+        }
+        else
+        {
+            SetPlayerPosEx(playerid, 1931.9171,-1807.5239,13.5728);
+        }
+        SetPlayerVirtualWorld(playerid, 0);
+        sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany ");
+        SetPlayerInterior(playerid, 0);
+        PlayerInfo[playerid][pInt] = 0;
+    }
+    return 1;
+
 }
 
 CMD:kolejka(playerid)
