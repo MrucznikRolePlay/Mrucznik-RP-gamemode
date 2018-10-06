@@ -32122,11 +32122,15 @@ CMD:fixfuel(playerid)
     {
         if(IsPlayerInAnyVehicle(playerid)) {
             new string[128];
-            if (PlayerInfo[playerid][pAdmin] >= 5) return noAccessMessage(playerid);
+            if (PlayerInfo[playerid][pAdmin] >= 5)
             {
                 Gas[GetPlayerVehicleID(playerid)] = 100;
-                format(string, sizeof(string), "Zatankowano twój pojazd o ID: %d", GetPlayerVehicleID(playerid));
+                format(string, sizeof(string), " Zatankowano twój pojazd o ID: %d", GetPlayerVehicleID(playerid));
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
+            }
+            else
+            {
+                noAccessMessage(playerid);
             }
         }
     }
