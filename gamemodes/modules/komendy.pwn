@@ -32120,20 +32120,25 @@ CMD:fixfuel(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        new string[128];
-        if (PlayerInfo[playerid][pAdmin] >= 5) 
-        {
-            Gas[GetPlayerVehicleID(playerid)] = 100;
-            format(string, sizeof(string), "Zatankowano twój pojazd o ID: %d", GetPlayerVehicleID(playerid));
-            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-        }    
+        if(IsPlayerInAnyVehicle(playerid)) {
+            new string[128];
+            if (PlayerInfo[playerid][pAdmin] >= 5)
+            {
+                Gas[GetPlayerVehicleID(playerid)] = 100;
+                format(string, sizeof(string), "Zatankowano twój pojazd o ID: %d", GetPlayerVehicleID(playerid));
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
+            }
 
-        if(IsPlayerInAnyVehicle(playerid))
-        {
-            sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w pojeŸdzie!");
+            else
+            {
+                noAccessMessage(playerid);
+                return 1;
+            }
         }
     }
+    return 1;
 }
+
 
 CMD:fillcar(playerid) return cmd_kanister(playerid);
 CMD:kanister(playerid)
