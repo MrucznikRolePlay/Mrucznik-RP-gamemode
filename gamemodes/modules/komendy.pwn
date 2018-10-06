@@ -32128,6 +32128,10 @@ CMD:fixfuel(playerid)
             SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         }    
 
+        if(IsPlayerInAnyVehicle(playerid))
+        {
+            sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteú w pojeüdzie!");
+        }
     }
 }
 
