@@ -32116,16 +32116,17 @@ CMD:zatankuj(playerid)
 	return 1;
 }
 
-CMD:fixfuel(playerid)
+CMD:tankveh(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
+        if(!IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GREY, "»» Nie jesteœ w pojeŸdzie!");
         if(IsPlayerInAnyVehicle(playerid)) {
             new string[128];
             if (PlayerInfo[playerid][pAdmin] >= 5)
             {
                 Gas[GetPlayerVehicleID(playerid)] = 100;
-                format(string, sizeof(string), " Zatankowano twój pojazd o ID: %d", GetPlayerVehicleID(playerid));
+                format(string, sizeof(string), " Twój pojazd o ID (%d) zosta³ dotankowany", GetPlayerVehicleID(playerid));
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
             }
             else
