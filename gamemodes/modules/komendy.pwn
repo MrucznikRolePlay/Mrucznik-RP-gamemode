@@ -20192,7 +20192,7 @@ CMD:wejdz(playerid)
             {
                 if(wywalzdmv[playerid] == 0)
                 {
-                    SetPlayerPosEx(playerid,1111.5897,1067.8755,-21.6241);//Ratusz
+                    SetPlayerPosEx(playerid,1450.6495,-1772.9926,76.5013);//Ratusz
                     GameTextForPlayer(playerid, "~w~~b~Witamy w ratuszu~n~ by Dywan", 10000, 1);
                     SetPlayerInterior(playerid,5);
                     SetPlayerVirtualWorld(playerid,50);
@@ -21266,7 +21266,7 @@ CMD:wyjdz(playerid)
 		    GameTextForPlayer(playerid, "~w~Zapraszamy ponownie", 5000, 1);
 		    SetPlayerInterior(playerid,0);
 		}
-		else if (PlayerToPoint(10.0, playerid,1111.5897,1067.8755,-21.6241))//ratusz
+		else if (PlayerToPoint(10.0, playerid,1450.6495,-1772.9926,76.5013))//ratusz
 		{
 		    SetPlayerInterior(playerid,0);
 			SetPlayerPosEx(playerid,1481.1531,-1770.0277,18.7958);//wejscie do ratusza
