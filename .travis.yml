@@ -2,6 +2,8 @@ language: c
 os: linux
 dist: trusty
 sudo: required
+python:
+  - "3.6"
 
 branches:
   only:
@@ -19,8 +21,12 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_774d02843e4b_key -iv $encrypted_774d02843e4b_iv
   -in id_rsa.enc -out id_rsa -d
 
+install:
+  - pip install chardet
+
 script:
 - chmod +x CI_scripts/*
+- python check_encoding.py ../gamemodes
 - CI_scripts/get_compiler.sh
 - CI_scripts/compile.sh
 
