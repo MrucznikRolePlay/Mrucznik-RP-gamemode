@@ -27,7 +27,7 @@ install:
 
 script:
 - chmod +x CI_scripts/*
-- python3 CI_scripts/check_encoding.py ../gamemodes
+- python3 CI_scripts/check_encoding.py gamemodes
 - CI_scripts/get_compiler.sh
 - CI_scripts/compile.sh
 
