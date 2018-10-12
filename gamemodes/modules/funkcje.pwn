@@ -12062,6 +12062,35 @@ public MyItems_Load(playerid)
 
 //--------------------------------------------------
 
+
+ZaladujSamochody()
+{
+    new id;
+    new randa = random(sizeof(RandCars));
+	randa = random(sizeof(RandCars));carselect[0] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[1] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[2] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[3] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[4] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[5] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[6] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[7] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[8] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[9] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[10] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[11] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[12] = RandCars[randa][0];
+	randa = random(sizeof(RandCars));carselect[13] = RandCars[randa][0];
+
+    for(new i = 0; i < 165; i++)
+	{
+        id = AddCar(i);
+    }
+    CAR_End = id;
+    printf("Wczytano %d aut do kradzie¿y", CAR_End);
+	return 1;
+}
+
 stock Support_GetID()
 {
     for(new i=0;i<MAX_TICKETS;i++)

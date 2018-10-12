@@ -117,7 +117,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //Obiekty:
 #include "modules/obiekty/stare_obiekty.pwn"
 #include "modules/obiekty/nowe_obiekty.pwn"
-#include "modules/pickupy.pwn" //Samochody/Pickupy/3DTexty:
+#include "modules/obiekty/pickupy.pwn"
+#include "modules/obiekty/3dtexty.pwn"
+#include "modules/obiekty/ikony.pwn"
 
 //Modu³y mapy c.d.
 #include "modules/komendy.pwn"
