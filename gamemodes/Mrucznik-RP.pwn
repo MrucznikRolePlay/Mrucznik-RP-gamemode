@@ -1952,8 +1952,9 @@ SetPlayerSpawnPos(playerid)
 						{
 							if(PlayerInfo[playerid][pLider] == 11)
 							{
-							    SetPlayerPosEx(playerid, 1473.4933,-1804.0272,163.5459);
-							    SetPlayerVirtualWorld(playerid,60);
+							    SetPlayerPosEx(playerid, 1460.4297,-1853.9827,81.9475);
+							    SetPlayerVirtualWorld(playerid, 50);
+							    SetPlayerInterior(playerid, 5);
 								PlayerInfo[playerid][pLocal] = 108;
 			                    Wchodzenie(playerid);
 							}
