@@ -24984,6 +24984,10 @@ CMD:tankujauta(playerid)
 			{
 				Gas[c] = GasMax;
 			}
+			
+			new string[64];
+			format(string, sizeof(string), "AdmCmd: %s zatankowa³ wszstkie pojazdy.", GetNick(playerid));
+			SendPunishMessage(string, playerid);
 			SendClientMessage(playerid, COLOR_GREY, "Wszystkie pojazdy zatankowane ! ");
         }
         else
@@ -25288,9 +25292,15 @@ CMD:fixveh(playerid)
 		}
 		if(IsPlayerInAnyVehicle(playerid))
 		{
+			new vehicleid = GetPlayerVehicleID(playerid);
+			new vuid = VehicleUID[vehicleid][vUID];
 		    SetVehicleHealth(GetPlayerVehicleID(playerid), 1000.0);
 		    RepairVehicle(GetPlayerVehicleID(playerid));
-            CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
+            CarData[vuid][c_HP] = 1000.0;
+			
+			new string[128];
+			format(string, sizeof(string), "AdmCmd: %s naprawi³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
+			SendPunishMessage(string, playerid);
 		}
 	}
 	return 1;
@@ -32117,6 +32127,8 @@ CMD:zatankuj(playerid)
 	return 1;
 }
 
+CMD:fuelcar(playerid) return cmd_tankveh(playerid);
+CMD:tankujauto(playerid) return cmd_tankveh(playerid);
 CMD:tankveh(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -32126,9 +32138,14 @@ CMD:tankveh(playerid)
             new string[128];
             if (PlayerInfo[playerid][pAdmin] >= 5)
             {
-                Gas[GetPlayerVehicleID(playerid)] = 100;
-                format(string, sizeof(string), " »» Twój pojazd o ID (%d) zosta³ dotankowany", GetPlayerVehicleID(playerid));
+				new vehicleid = GetPlayerVehicleID(playerid);
+				new vuid = VehicleUID[vehicleid][vUID];
+                Gas[vehicleid] = 100;
+                format(string, sizeof(string), " »» Pojazd o ID (%d) zosta³ dotankowany", vehicleid);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
+				
+				format(string, sizeof(string), "AdmCmd: %s zatankowa³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
+				SendPunishMessage(string, playerid);
             }
             else
             {
