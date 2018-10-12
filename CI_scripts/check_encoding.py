@@ -17,6 +17,10 @@ for filename in glob.glob( path + '/**/*.pwn', recursive=True):
         if detector.done: break
     detector.close()
 
+    if(detector.result['encoding'] is None):
+        print("None encoding", filename)
+        continue
+
     if("utf-8" in detector.result['encoding'].lower()):
         print("Invalid file encoding: ", filename, detector.result['encoding'])
         detect = 1
