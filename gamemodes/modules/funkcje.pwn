@@ -6813,7 +6813,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 582)//sanvan
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 739.4379,-1365.5950,25.8281);
+	    SetPlayerPosEx(playerid, 739.4379, -1365.5950, 25.828); //Nowe kordy od Szymona (SanVan obni¿ony)
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Mikrofon w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -11083,10 +11083,10 @@ stock Oil_Destroy(lID)
         TextDrawHideForPlayer(i, OilTXD_BG[0]);
         TextDrawHideForPlayer(i, OilTXD_BG[1]);
         ApplyAnimation(i, "BOMBER", "BOM_Plant_Crouch_Out", 4.0, 0, 0, 0, 0, -1);
-        SendClientMessage(i, COLOR_WHITE, "[LSFD] Usun¹³eœ plamê oleju! Otrzymujesz 2 500$! [LSFD]");
-        DajKase(i, 2500);
-        SendFamilyMessage(17, COLOR_GREEN, "[LSFD] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 2 500$! [LSFD]");
-        Sejf_Add(17, 2500);
+        SendClientMessage(i, COLOR_WHITE, "[LSFD] Usun¹³eœ plamê oleju! Otrzymujesz 5 000$! [LSFD]");
+        DajKase(i, 5000);
+        SendFamilyMessage(17, COLOR_GREEN, "[LSFD] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 5 000$! [LSFD]");
+        Sejf_Add(17, 5000);
     }
 }
 

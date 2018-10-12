@@ -2895,7 +2895,7 @@ CMD:szpital(playerid, params[])
                 sendErrorMessage(playerid, "Komenda dostêpna od 3 rangi!");
 			    return 1;
 			}
-			SendClientMessageToAll(COLOR_WHITE, "|___________ SAM-ERS ___________|");
+			SendClientMessageToAll(COLOR_WHITE, "|___________ Medical Center ___________|");
 			format(string, sizeof(string), "Lekarz %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 		}
@@ -3301,7 +3301,16 @@ CMD:yo(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch.");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string),"* %s wita siê z %s.", nick, witany);
+                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    format(string, sizeof(string), "Witasz siê jak prawdziwy czarnuch z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê jak prawdziwy czarnuch z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch.");
 					ApplyAnimation(playerid,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 					ApplyAnimation(playa,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 				}
@@ -3332,7 +3341,14 @@ CMD:yo3(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkfa",4.1,0,1,1,1,1);//12
 					ApplyAnimation(playa,"GANGS","hndshkfa_swt",4.1,0,1,1,1,1);//13
 				}
@@ -3363,7 +3379,14 @@ CMD:yo2(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkba",4.1,0,1,1,1,1);//7
 					ApplyAnimation(playa,"GANGS","hndshkba",4.1,0,1,1,1,1);//7
 				}
@@ -3396,6 +3419,13 @@ CMD:yo4(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
 					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkea",4.1,0,1,1,1,1);//11
 					ApplyAnimation(playa,"GANGS","hndshkea",4.1,0,1,1,1,1);//11
@@ -3434,7 +3464,14 @@ CMD:elo(playerid, params[])
 						sendErrorMessage(playerid, "Ten gracz jest za daleko.");
 						return 1;
 					}
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkcb",4.1,0,1,1,1,1);//8
 					ApplyAnimation(playa,"GANGS","hndshkcb",4.1,0,1,1,1,1);//8
 				}
@@ -3467,7 +3504,14 @@ CMD:elo2(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkca",4.1,0,1,1,1,1);//9
 					ApplyAnimation(playa,"GANGS","hndshkca",4.1,0,1,1,1,1);//9
 				}
@@ -3498,7 +3542,16 @@ CMD:witaj(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
+                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
+                    GetPlayerName(playa, witany, sizeof(witany));
+                    GetPlayerName(playerid, nick, sizeof(nick));
+                    format(string, sizeof(string),"* %s wita siê z %s.", nick, witany);
+                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    format(string, sizeof(string), "Witasz siê z %s", witany);
+                    SendClientMessage(playerid, COLOR_WHITE, string);
+                    format(string, sizeof(string), "Witasz siê z %s", nick);
+                    SendClientMessage(playa, COLOR_WHITE, string);
+					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid, "DEALER", "DEALER_DEAL", 4.0, 0, 0, 0, 0, 0);
 					ApplyAnimation(playa, "DEALER", "DEALER_DEAL", 4.0, 0, 0, 0, 0, 0);
 				}
@@ -4667,7 +4720,7 @@ CMD:trasa(playerid)
 	{
 		if(IsPlayerConnected(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pJob] == 10)
+			if(PlayerInfo[playerid][pRank] >= 0 || PlayerInfo[playerid][pJob] == 10)
 			{
 				if(IS_KomunikacjaMiejsca(Veh))
 				{
@@ -24940,6 +24993,9 @@ CMD:tankujauta(playerid)
     }
     return 1;
 }
+
+
+
 //----------------------------------[GiveGun]------------------------------------------------
 
 CMD:givegun(playerid, params[])
@@ -32060,6 +32116,28 @@ CMD:zatankuj(playerid)
 	return 1;
 }
 
+CMD:tankveh(playerid)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(!IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GREY, "»» Nie jesteœ w pojeŸdzie!");
+        if(IsPlayerInAnyVehicle(playerid)) {
+            new string[128];
+            if (PlayerInfo[playerid][pAdmin] >= 5)
+            {
+                Gas[GetPlayerVehicleID(playerid)] = 100;
+                format(string, sizeof(string), " »» Twój pojazd o ID (%d) zosta³ dotankowany", GetPlayerVehicleID(playerid));
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
+            }
+            else
+            {
+                noAccessMessage(playerid);
+            }
+        }
+    }
+    return 1;
+}
+
 
 CMD:fillcar(playerid) return cmd_kanister(playerid);
 CMD:kanister(playerid)
@@ -37231,14 +37309,62 @@ CMD:gotomechy(playerid)
 		if (GetPlayerState(playerid) == 2)
 		{
 			SetVehiclePos(GetPlayerVehicleID(playerid), 2778.0833, -1612.0159, 10.9219);
+
 		}
 		else
 		{
-			SetPlayerPosEx(playerid,2771.0842, -1628.4905, 12.98190);
+			SetPlayerPosEx(playerid, 2778.0833,-1612.0159,10.9219);
 		}
         SetPlayerVirtualWorld(playerid, 0);
+        sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany na bazê mechaników, ³opata w d³oñ! ");
+        SetPlayerInterior(playerid,0);
+        PlayerInfo[playerid][pInt] = 0;
     }
     return 1;
+}
+
+CMD:gotobank(playerid)
+{
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5) {
+        
+        if (GetPlayerState(playerid) == 2)
+        {
+            SetVehiclePos(GetPlayerVehicleID(playerid), 1464.0021,-1033.3855,23.6563);
+
+        }
+        else
+        {
+            SetPlayerPosEx(playerid, 1464.0021,-1033.3855,23.6563);
+        }
+        SetPlayerVirtualWorld(playerid, 0);
+        sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany ");
+        SetPlayerInterior(playerid, 0);
+        PlayerInfo[playerid][pInt] = 0;
+    }
+    return 1;
+
+}
+
+CMD:gotostacja(playerid)
+{
+    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5) {
+        
+        if (GetPlayerState(playerid) == 2)
+        {
+            SetVehiclePos(GetPlayerVehicleID(playerid), 1931.9171,-1807.5239,13.5728);
+
+        }
+        else
+        {
+            SetPlayerPosEx(playerid, 1931.9171,-1807.5239,13.5728);
+        }
+        SetPlayerVirtualWorld(playerid, 0);
+        sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany ");
+        SetPlayerInterior(playerid, 0);
+        PlayerInfo[playerid][pInt] = 0;
+    }
+    return 1;
+
 }
 
 CMD:kolejka(playerid)
@@ -37691,6 +37817,7 @@ CMD:lsmcelevator(playerid)
     sendTipMessageEx(playerid, COLOR_GREEN, "OK.");
     return 1;
 }
+
 
 CMD:czysc(playerid)
 {
