@@ -20639,11 +20639,11 @@ CMD:wejdz(playerid)
                 return 1;
             }
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1062.5525,1083.0359,-17.6441)) // Plac manewrowy wejscie
+        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1442.0717,-1811.6309,77.9453)) // Plac manewrowy wejscie
         {
             if(TakingLesson[playerid] == 1 || IsAnInstructor(playerid))
             {
-                SetPlayerPosEx(playerid, -2029.6999511719,-121.09999847412,35.200000762939); // Plac manewrowy œrodek
+                SetPlayerPosEx(playerid, 1412.6382,-1800.7056,15.4356); // Plac manewrowy œrodek
                 SetPlayerVirtualWorld(playerid, 0);
                 SetPlayerInterior(playerid, 0);
                 PlayerInfo[playerid][pLocal] = 255;
@@ -21653,9 +21653,9 @@ CMD:wyjdz(playerid)
 		    GameTextForPlayer(playerid, "~b~Tajemnicza Budka", 5000, 1);
 		    return 1;
 		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, -2029.6999511719,-121.09999847412,35.2000007629390)) // Plac manewrowy srodek
+		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1412.6382,-1800.7056,15.43560)) // Plac manewrowy srodek
 		{
-		    SetPlayerPosEx(playerid, 1062.5525,1083.0359,-17.6441); // Plac manewrowy wyjscie
+		    SetPlayerPosEx(playerid, 1442.0717,-1811.6309,77.9453); // Plac manewrowy wyjscie
 			GameTextForPlayer(playerid, "~w~Witamy po egzaminie!", 5000, 1);
 			PlayerInfo[playerid][pLocal] = 108;
 			TogglePlayerControllable(playerid, 0);
