@@ -20196,7 +20196,7 @@ CMD:wejdz(playerid)
                 if(wywalzdmv[playerid] == 0)
                 {
                     SetPlayerPosEx(playerid,1450.6495,-1772.9926,76.5013);//Ratusz
-                    GameTextForPlayer(playerid, "~w~~b~Witamy w ratuszu~n~ by Dywan", 10000, 1);
+                    GameTextForPlayer(playerid, "~w~~b~Witamy w ratuszu", 10000, 1);
                     SetPlayerInterior(playerid,5);
                     SetPlayerVirtualWorld(playerid,50);
                     Wchodzenie(playerid);
