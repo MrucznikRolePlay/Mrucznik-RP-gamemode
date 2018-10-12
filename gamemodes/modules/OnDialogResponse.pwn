@@ -2294,7 +2294,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 1:
 			        {
-				        SetPlayerPosEx(playerid,1055.5900,1066.9911,-17.6441);//parter
+				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//parter
 				        SetPlayerVirtualWorld(playerid,50);
 				        SetPlayerInterior(playerid,5);
 	                    TogglePlayerControllable(playerid,0);
@@ -2308,39 +2308,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                      	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
                      	PlayerInfo[playerid][pLocal] = 108;
 			        }
-			        case 2:
-			        {
-			            SetPlayerPosEx(playerid,1479.5896, -1766.1951, 162.6680);//biura UM
-			            SetPlayerVirtualWorld(playerid,60);
-			            SetPlayerInterior(playerid,0);
-			            SetPlayerWeatherEx(playerid,11);
-			            TogglePlayerControllable(playerid,0);
-                        Wchodzenie(playerid);
-               			SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 1, Biura UM <<<<");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Sala Posiedzeñ");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Wydzia³ Planowania");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Wydzia³ Rejestracji Pojazdów");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Akademia DMV");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Sanepid");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Kancelaria Burmistrza");
-                     	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
-					}
-					case 3://s¹d
-					{
-			            SetPlayerPosEx(playerid,-1766.3430, 514.4331, -20.9245);
-			            SetPlayerVirtualWorld(playerid,75);
-			            SetPlayerInterior(playerid,8);
-			            TogglePlayerControllable(playerid,0);
-                        Wchodzenie(playerid);
-            			SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 2, S¹d <<<<");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Adwokatura");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Prokuratura");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Gabinety Sêdziów");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Salka Przes³uchañ/Konferencyjna");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Ma³a Sala Rozpraw");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Du¿a Sala Rozpraw");
-                     	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
-					}
 				}
 			}
 		}
