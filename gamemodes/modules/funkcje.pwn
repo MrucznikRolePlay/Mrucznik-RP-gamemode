@@ -3818,7 +3818,7 @@ stock IsAAdministrator(playerid)
 	return 0;
 }
 
-WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw)
+WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="")
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
@@ -3826,94 +3826,99 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
         if (vw == 55) // Bymber Casino 55
         {
             if(PlayerInfo[playerid][pLevel] < 3) return sendTipMessageEx(playerid, COLOR_GRAD1, "Tylko gracze z conajmniej 3 lvl mog¹ graæ w kasynie!");
-            SetPlayerPosEx(playerid, x2, y2, z2);
+			
             SendClientMessage(playerid, COLOR_GREEN, "Witamy w Bymber Casino.");
             SendClientMessage(playerid, COLOR_WHITE, "W naszym kasynie obowi¹zuj¹ nastêpuj¹ce stawki za rozpoczêcie gry:");
             SendClientMessage(playerid, COLOR_GREEN, "Kostki - (0.5 proc. podatku) za rzut /kostka || Black Jack - 100$ za kartê /oczko");
             SendClientMessage(playerid, COLOR_GREEN, "Ko³o fortuny - 5 000$ za obrót /kf || Ruletka - 10 000$ za zakrêcenie /ruletka");
-            Wchodzenie(playerid);
-            //SetPlayerVirtualWorld(playerid, vw);
-            SetPlayerInterior(playerid, interior);
             SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
             SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
             SendClientMessage(playerid, COLOR_WHITE, "Okazuje siê, ¿e do kasyna nie mozna wnosiæ broni.");
             SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ ochronie.");
             SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
+			
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
             ResetPlayerWeapons(playerid);
+            SetPlayerPosEx(playerid, x2, y2, z2);
+            SetPlayerInterior(playerid, interior);
+            Wchodzenie(playerid);
             return 1;
         }
-		else
+		
+		if(strlen(komunikat) > 0)
 		{
-    		SetPlayerPosEx(playerid, x2, y2, z2);
-	 		SetPlayerVirtualWorld(playerid, vw);
-	 		SetPlayerInterior(playerid, interior);
-        	Wchodzenie(playerid);
+			GameTextForPlayer(playerid, komunikat, 5000, 1);
 		}
-	}
-	return 1;
-}
-WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw)
-{
-    if(x==x2 && y==y2 && z==z2) return 0;
-    if(IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z) && vw == 55)// KASYNO 55
-	{
-    	if(GetPVarInt(playerid, "kostka") == 1) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz wyjœæ z kasyna bêd¹c w trakcie gry!");
-		PlayerPlaySound(playerid, 5454, 0.0, 0.0, 0.0);
+		
 		SetPlayerPosEx(playerid, x2, y2, z2);
-		SetPlayerVirtualWorld(playerid, 0);
+		SetPlayerVirtualWorld(playerid, vw);
 		SetPlayerInterior(playerid, interior);
 		Wchodzenie(playerid);
 	}
+	return 1;
+}
+WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="")
+{
+    if(x==x2 && y==y2 && z==z2) return 0;
     else if(IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z) && GetPlayerVirtualWorld(playerid) == vw)
     {
+		if(vw == 55)// KASYNO 55
+		{
+			if(GetPVarInt(playerid, "kostka") == 1) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz wyjœæ z kasyna bêd¹c w trakcie gry!");
+			PlayerPlaySound(playerid, 5454, 0.0, 0.0, 0.0);
+		}
         if(vw == 43)// BASEN 43
         {
         	if(PlayerInfo[playerid][pChar] > 0)
 			{
 				SetPlayerSkin(playerid, PlayerInfo[playerid][pChar]);
-				SetPlayerPosEx(playerid, x2, y2, z2);
-	 			SetPlayerVirtualWorld(playerid, 0);
-	 			SetPlayerInterior(playerid, interior);
-        		Wchodzenie(playerid);
 			}
 			else
 			{
 				SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-				SetPlayerPosEx(playerid, x2, y2, z2);
-	 			SetPlayerVirtualWorld(playerid, 0);
-	 			SetPlayerInterior(playerid, interior);
-        		Wchodzenie(playerid);
 			}
 		}
-		else
+		
+		if(strlen(komunikat) > 0)
 		{
-	 		SetPlayerPosEx(playerid, x2, y2, z2);
-	 		SetPlayerVirtualWorld(playerid, 0);
-	 		SetPlayerInterior(playerid, interior);
-        	Wchodzenie(playerid);
+			GameTextForPlayer(playerid, komunikat, 5000, 1);
 		}
+		
+		SetPlayerPosEx(playerid, x2, y2, z2);
+		SetPlayerVirtualWorld(playerid, vw);
+		SetPlayerInterior(playerid, interior);
+		Wchodzenie(playerid);
 	}
 	return 1;
 }
-Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja)
+Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, komunikat[]="")
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
     	SetPlayerPosEx(playerid, x2, y2, z2);
 	 	SetPlayerVirtualWorld(playerid, 235);
         Wchodzenie(playerid);
+		
+		if(strlen(komunikat) > 0)
+		{
+			GameTextForPlayer(playerid, komunikat, 5000, 1);
+		}
 	}
 	return 1;
 }
 
-Wyjdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja)
+Wyjdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, komunikat[]="")
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
     	SetPlayerPosEx(playerid, x2, y2, z2);
 	 	SetPlayerVirtualWorld(playerid, 0);
         Wchodzenie(playerid);
+		
+		if(strlen(komunikat) > 0)
+		{
+			GameTextForPlayer(playerid, komunikat, 5000, 1);
+		}
 	}
 	return 1;
 }
