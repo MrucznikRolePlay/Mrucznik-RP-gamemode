@@ -1714,7 +1714,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 
 						}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400))
 			        	{
 							if (IsAUrzednik(playerid))
 				        	{
@@ -1728,7 +1728,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Uniwersalne");
 							}
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400))
 			        	{
 			        		if (IsAUrzednik(playerid))
 				        	{
@@ -1742,7 +1742,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Uniwersalne");
 							}
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400))
 			        	{
 			        		if (IsAUrzednik(playerid))
 				        	{
@@ -1756,7 +1756,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Uniwersalne");
 							}
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400))
 			        	{
 			        		if (IsAUrzednik(playerid) || IsAMedyk(playerid) || IsACop(playerid))
 				        	{
@@ -1770,7 +1770,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Uniwersalne");
 							}
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400))
 			        	{
 			        		if (IsAUrzednik(playerid))
 				        	{
@@ -1784,7 +1784,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Uniwersalne");
 							}
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400))
 			        	{
 			        		if (IsAUrzednik(playerid))
 				        	{
@@ -1798,7 +1798,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Uniwersalne");
 							}
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
 			        	{
 			        		if (IsAUrzednik(playerid))
 				        	{
@@ -1819,31 +1819,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400))
 			        	{
 							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        	}
@@ -1854,31 +1854,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400))
 			        	{
 							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        	}
@@ -1889,31 +1889,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400))
 			        	{
 							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        	}
@@ -1924,31 +1924,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Rejestracja");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400))
 			        	{
 							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Rejestracja");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Rejestracja");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Rejestracja");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Rejestracja");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Rejestracja");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Rejestracja");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Rejestracja");
 			        	}
@@ -1959,31 +1959,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400))
 			        	{
 							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        	}
@@ -1994,31 +1994,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}Nieczynne");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400))
 			        	{
 							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 2 \n {FF0000}Nieczynne");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 3 \n {FF0000}Nieczynne");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 4 \n {FF0000}Nieczynne");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 5 \n {FF0000}Nieczynne");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 6 \n {FF0000}Nieczynne");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 7 \n {FF0000}Nieczynne");
 			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
+			        	if(IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
 			        	{
 			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 8 \n {FF0000}Nieczynne");
 			        	}

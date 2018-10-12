@@ -4837,9 +4837,15 @@ CMD:okienko(playerid)
 	{
 		if(IsPlayerConnected(playerid))
 		{
-			if(IsPlayerInRangeOfPoint(playerid,3, 1090.4359,1056.0813,-17.6441) ||	IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441 ) ||	IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441 ) ||
-			IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441) ||	IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441) ||	IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441) ||
-			IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441) ||	IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
+			if(
+				IsPlayerInRangeOfPoint(playerid,3, 1454.55847, -1792.14673, 79.56396) ||	
+				IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400 ) ||	
+				IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400 ) ||
+				IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400) ||	
+				IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400) ||	
+				IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400) ||
+				IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400) ||	
+				IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
 			{
 				ShowPlayerDialogEx(playerid,99,DIALOG_STYLE_LIST,"Któr¹ tablicê wywieszasz:","Dopasuj do rangi\nEgzaminy Praktyczne\nEgzaminy Teoretyczne\nKurs na prawo jazdy\nRejestracja\nInformacja\nZamkniête","Wywieœ","Zamknij");
 			}
