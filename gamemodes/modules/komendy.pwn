@@ -19872,10 +19872,6 @@ CMD:wejdz(playerid)
             GameTextForPlayer(playerid, "~w~Witamy w ~y~Pokoju ~g~Wypoczynkowym", 5000, 1);
             Wchodzenie(playerid);
         }
-        else if(IsPlayerInRangeOfPoint(playerid,1, 286.1271, -30.4991, 1001.52)) //Gunshop LS
-        {
-            SetPlayerPosEx(playerid,286.0633, -28.6249, 1001.52);
-        }
         else if(IsPlayerInRangeOfPoint(playerid,5,1711.3928, -1130.0851, 24.1741)) //LSFD dach
         {
             SetPlayerPosEx(playerid,1751.6058, -1118.3661, 46.8055);
@@ -21005,10 +21001,6 @@ CMD:wyjdz(playerid)
     		SetPlayerPosEx(playerid,1172.6564, -1323.4110, 15.6034);
     		SetPlayerVirtualWorld ( playerid, 0 ) ;
     	}
-    	else if(IsPlayerInRangeOfPoint(playerid,1, 286.0633, -28.6249, 1001.52)) //Gunshop LS
-        {
-            SetPlayerPosEx(playerid,286.1271, -30.4991, 1001.52);
-        }
         //SAD
         else if(IsPlayerInRangeOfPoint(playerid,4,1294.6930, -1324.6571, 39.1802))
     	{ //WYJŒCIE G£OWNE
