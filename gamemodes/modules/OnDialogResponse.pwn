@@ -15862,7 +15862,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			SetPVarInt(playerid, "kontakty-dialog-slot", PobierzIdKontaktuZDialogu(playerid, listitem));
-			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Wyœlj SMS", "Zamknij");
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Zmieñ", "Anuluj");
 		}
 	}
 	else if(dialogid == D_KONTAKTY_EDYTUJ_NOWA_NAZWA)
@@ -15872,7 +15872,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(strlen(inputtext) > 32)
 			{
 				sendErrorMessage(playerid, "Nazwa nie mo¿e byæ d³u¿sza ni¿ 32 znaki");
-				ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Wyœlj SMS", "Zamknij");
+				ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Zmieñ", "Anuluj");
 			}
 		
 			EdytujKontakt(playerid, GetPVarInt(playerid, "kontakty-dialog-slot"), inputtext);

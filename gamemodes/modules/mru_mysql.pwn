@@ -726,7 +726,6 @@ MruMySQL_LoadAccess(playerid)
     {
         ACCESS[playerid] = mysql_fetch_int();
         OLD_ACCESS[playerid] = ACCESS[playerid];
-        printf("(PERM) -> Player %d (%d) access flags: %b", playerid, PlayerInfo[playerid][pUID], ACCESS[playerid]);
     }
     mysql_free_result();
     return 1;
@@ -1082,7 +1081,7 @@ stock MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 MruMySQL_LoadPhoneContacts(playerid)
 {
 	new string[128];
-	format(string, sizeof(string), "SELECT UID, Number, Name FROM mru_kontakty WHERE Owner='%d'", PlayerInfo[playerid][pUID]);
+	format(string, sizeof(string), "SELECT UID, Number, Name FROM mru_kontakty WHERE Owner='%d' LIMIT 10", PlayerInfo[playerid][pUID]); //MAX_KONTAKTY
 	mysql_query(string);
 	mysql_store_result();
 	if(mysql_num_rows()>0)

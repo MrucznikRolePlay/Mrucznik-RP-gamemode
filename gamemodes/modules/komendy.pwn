@@ -19114,7 +19114,7 @@ CMD:dzwon(playerid, params[])
 	
 	new numerTelefonuOdbiorcy;
 	new reciverid;
-	if( sscanf(params, "dS[128]", numerTelefonuOdbiorcy))
+	if( sscanf(params, "d", numerTelefonuOdbiorcy))
 	{
 		sendTipMessage(playerid, "U¿yj /dzwon [numer telefonu]");
 		return 1;
@@ -19477,8 +19477,8 @@ CMD:kontakty(playerid, params[])
 			return 1;
 		}
 	
-		new nazwa[32], numer;
-		if(sscanf(params, "s[32]ds[32]", opcja, numer, nazwa))
+		new nazwa[33], numer;
+		if(sscanf(params, "s[32]ds[33]", opcja, numer, nazwa))
 		{
 			sendTipMessage(playerid, "U¿yj /kontakty dodaj [numer] [nazwa - max 32znaki]");
 			return 1;
@@ -19486,7 +19486,7 @@ CMD:kontakty(playerid, params[])
 		
 		if(strlen(nazwa) > 32)
 		{
-			sendErrorMessage(playerid, "Nazwa kontaktu musi mieæ maksymalnie 32 znaki!");
+			sendErrorMessage(playerid, "Nazwa kontaktu mo¿e mieæ maksymalnie 32 znaki!");
 			return 1;
 		}
 		
@@ -19534,7 +19534,7 @@ CMD:wizytowka(playerid, params[])
 	}
 
 	new giveplayerid, nazwa[32], string[128];
-	format(string, sizeof(string), "k<fix>S[32](%s)", GetNick(playerid));
+	format(string, sizeof(string), "k<fix>S(%s)[32]", GetNick(playerid));
 	if(sscanf(params, string, giveplayerid, nazwa))
 	{
 		sendTipMessage(playerid, "U¿yj /wizytowka [ID/Nick Gracza] (nazwa - domyœlnie nick)");
