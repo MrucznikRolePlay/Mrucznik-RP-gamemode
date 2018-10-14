@@ -66,6 +66,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
 #include <timestamptodate>
 
+//-------<[ Natives ]>-------
+native WP_Hash(buffer[], len, const str[]);
+
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
 #include "VERSION.pwn"
@@ -5645,99 +5648,29 @@ OnPlayerLogin(playerid, password[])
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerLogin - begin", GetNick(playerid), playerid);
 	#endif
-    new nick[MAX_PLAYER_NAME], string[256], oldpass[64];
+    new nick[MAX_PLAYER_NAME], string[256], accountPass[129], hashedPassword[129];
 	GetPlayerName(playerid, nick, sizeof(nick));
-    new pass[64];
-    format(pass, 64, "%s", MruMySQL_ReturnPassword(nick));
-    new bool:UseMYSQL=false, bool:UseDINI=false;
-
-    if(strlen(pass) > 5) UseMYSQL=true;
-    else
-    {
-        format(oldpass, 64, "%s", password);
-        Encrypt(oldpass);
-
-        new string2[128];
-    	new playername2[MAX_PLAYER_NAME];
-        GetPlayerName(playerid, playername2, sizeof(playername2));
-    	format(string2, sizeof(string2), "%s.ini", playername2);
-    	new File: UserFile = fopen(string2, io_read);
-    	if ( UserFile )
-    	{
-    	    new PassData[256];
-    	    new keytmp[256], valtmp[256];
-    	    fread( UserFile , PassData , sizeof( PassData ) );
-    	    keytmp = ini_GetKey( PassData );
-    	    if( strfind( keytmp , "Key" , true ) != -1 )
-    		{
-    			valtmp = ini_GetValue( PassData );
-                format(PlayerInfo[playerid][pKey], 32, "%s", valtmp);
-                strdel(PlayerInfo[playerid][pKey], strlen(PlayerInfo[playerid][pKey])-1, strlen(PlayerInfo[playerid][pKey]));
-                if(strcmp(PlayerInfo[playerid][pKey],oldpass, true ) == 0) UseDINI = true;
-    		}
-            fclose(UserFile);
-        }
-        //Koniec dini
-    }
-    if(UseDINI)
-    {
-        if(CheckAlfaNumeric(password))
-        {
-            format(string, 128, "Twoje has³o posiada³o nie-alfanumeryczne znaki - nowe has³o: %s", password);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, "Zalecamy zmieniæ has³o poprzez /zmienhaslo");
-        }
-
-        new escapepass[64];
-        format(escapepass, 64, "%s", password);
-        mysql_real_escape_string(password,escapepass);
-        if(strcmp(password,escapepass) != 0)  //Anty non-alpha
-        {
-            SendClientMessage(playerid, COLOR_RED, "UWAGA! Twoje has³o zosta³o zmienione, gdy¿ zawiera³o niepoprawne znaki!!");
-            format(string, 128, "Nowe has³o: %s", escapepass);
-            SendClientMessage(playerid, COLOR_RED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            SendClientMessage(playerid, COLOR_PANICRED, string);
-            format(password, 64, "%s", escapepass);
-            printf("Zmieniono has³o dla %s", GetNick(playerid));
-        }
-    }
-	if((UseMYSQL && strcmp(pass,MD5_Hash(password), true ) == 0) || UseDINI)
+    format(accountPass, sizeof(accountPass), "%s", MruMySQL_ReturnPassword(nick));
+	
+	WP_Hash(hashedPassword, sizeof(hashedPassword), password);
+	if(strlen(accountPass) == 32)
+	{
+		//konwersja hase³ MD5 na Whirlpool
+		if(strcmp(accountPass, MD5_Hash(password), true ) == 0)
+		{
+			format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", hashedPassword, GetNick(playerid));
+			mysql_query(string);
+			printf("Konwersja hasla konta %s na hash whirlpool", nick);
+		}
+	}
+	
+	if(strcmp(accountPass, hashedPassword, true ) == 0)
 	{//poprawne has³o
         MruMySQL_KonwertujBana(playerid);
         if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
-		//Konwertowanie kont:
-        format(PlayerInfo[playerid][pKey], 64, "%s",MD5_Hash(password));
-        new result = MruMySQL_ConvertAccount(playerid);
-		if( result == 1 )
-		{
-			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Twoje konto zosta³o pomyœlnie przekonwertowane. ¯yczymy mi³ej gry.");
-            format(string, 128, "UPDATE `mru_konta` SET `FMember`=0 WHERE `Nick`='%s'", GetNick(playerid));
-            mysql_query(string);
-        }
-        else if(result == -1)
-        {
-            //SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Twoje konto jest aktualne w MySQL.");
-        }
-        else if(result == -999)
-		{
-			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}SprawdŸ wielkosæ znaków, podobny nick istnieje.");
-			KickEx(playerid);
-			return 1;
-		}
-		else if(result == 0)
-		{
-			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}B³¹d przy konwersji konta! Zg³oœ okolicznoœci na forum.");
-			KickEx(playerid);
-			return 1;
-		}
-
+		
+        format(PlayerInfo[playerid][pKey], 129, hashedPassword);
+		
 		//----------------------------
 		//£adowanie konta i zmiennych:
 		//----------------------------

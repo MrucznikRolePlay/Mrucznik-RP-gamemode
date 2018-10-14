@@ -480,7 +480,7 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define CALL_LIVE 3
 
 //Okienka
-#define OKIENKO_DMV_RANGE 1.5
+#define OKIENKO_DMV_RANGE 3
 
 
 // Y_SAFERETURN ! ! !

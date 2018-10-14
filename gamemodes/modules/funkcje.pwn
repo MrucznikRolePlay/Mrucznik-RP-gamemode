@@ -2054,19 +2054,6 @@ DollahScoreUpdate()
 	return 1;
 }
 
-Encrypt(string[])
-{
-	for(new x=0; x < strlen(string); x++)
-	  {
-		  string[x] += (3^x) * (x % 15);
-		  if(string[x] > (0xff))
-		  {
-			  string[x] -= 256;
-		  }
-	  }
-	return 1;
-}
-
 stock right(source[], len)
 {
 	new retval[MAX_STRING2], srclen;
@@ -8849,17 +8836,6 @@ stock Sejf_Load()
         SafeLoaded = true;
     }
     mysql_free_result();
-}
-
-//Wysy³anie logów
-stock MASTER_StripNewLine(string[]) {
-    new len = strlen(string);
-    if (string[0]==0) return ;
-    if ((string[len - 1] == '\n') || (string[len - 1] == '\r')) {
-        string[len - 1] = 0;
-        if (string[0]==0) return ;
-        if ((string[len - 2] == '\n') || (string[len - 2] == '\r')) string[len - 2] = 0;
-    }
 }
 
 public HTTP_LogResponse(index, response_code, data[])

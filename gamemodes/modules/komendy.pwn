@@ -9907,7 +9907,7 @@ CMD:ann(playerid, params[])
 
 CMD:zmienhaslo(playerid, params[])
 {
-	new string[128];
+	new string[256];
 
     if(IsPlayerConnected(playerid))
     {
@@ -9916,7 +9916,7 @@ CMD:zmienhaslo(playerid, params[])
             sendErrorMessage(playerid, "Nie zalogowa³eœ siê!");
             return 1;
         }
-        new tmppass[64];
+        new tmppass[64], password[129];
 		if(sscanf(params, "s[64]", tmppass))
 		{
 			sendTipMessage(playerid, "U¿yj /zmienhaslo [nowehaslo]");
@@ -9934,7 +9934,9 @@ CMD:zmienhaslo(playerid, params[])
 		sendErrorMessage(playerid, "Nowe has³o:");
 		SendClientMessage(playerid, COLOR_PANICRED, tmppass);
 
-		format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", MD5_Hash(tmppass), GetNick(playerid));
+		
+		WP_Hash(password, sizeof(password), tmppass);
+		format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", password, GetNick(playerid));
 		mysql_query(string);
 	}
 	return 1;

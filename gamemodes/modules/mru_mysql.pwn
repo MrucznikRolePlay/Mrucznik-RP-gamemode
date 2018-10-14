@@ -72,8 +72,8 @@ MruMySQL_CreateAccount(playerid, pass[])
 	if(!MYSQL_ON) return 0;
 	
 	new query[256];
-    new password[64];
-    format(password, 64, "%s", MD5_Hash(pass));
+    new password[129];
+	WP_Hash(password, sizeof(password), pass);
 	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`) VALUES ('%s', '%s')", GetNick(playerid), password);
 	mysql_query(query);
 	return 1;
@@ -781,87 +781,6 @@ stock MruMySQL_ReturnPassword(nick[])
 	return key;
 }
 
-StripNewLine(string[])
-{
-  new len = strlen(string);
-  if (string[0]==0) return;
-  if ((string[len - 1] == '\n') || (string[len - 1] == '\r'))
-    {
-      string[len - 1] = 0;
-      if (string[0]==0) return ;
-      if ((string[len - 2] == '\n') || (string[len - 2] == '\r')) string[len - 2] = 0;
-    }
-}
-
-MruMySQL_ConvertAccount(playerid)
-{
-	if(!MYSQL_ON) return 0;
-
-	new string[128], nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-
-    new result = MruMySQL_DoesAccountExist(nick);
-    if(result == -1)
-	{
-		return -1;
-	}
-    else if(result == -999)
-    {
-        return -999;
-    }
-    else
-    {
-        format(string, sizeof(string), "%s.ini", nick);
-		new File: Profile = fopen(string, io_read);
-		if(Profile)
-		{
-			new key[256], val[256], Data[256], Query[1024];
-			
-			format(string, sizeof(string), "INSERT INTO `mru_konta` (`Nick`) VALUES ('%s')", nick);
-			mysql_query(string);
-			
-			format(Query, sizeof(Query), "UPDATE `mru_konta` SET");
-			while(fread(Profile, Data, sizeof(Data)))
-			{
-				key = ini_GetKey(Data);
-				val = ini_GetValue(Data);
-				StripNewLine(val);
-				if(strlen(key) > 1)
-                {
-    				if(strcmp("UID", key, true) != 0)
-    				{
-    					if(strcmp("Adjustable", key, true) == 0) format(Query, sizeof(Query), "%s `Block`='0',", Query);
-                        else if(strfind(key, "Key", true) != -1)
-                        {
-                            if(strcmp("Key", key, true) != 0) strdel(key, 0, 1); //dziwny znak na pocz¹tku fread.
-                            format(Query, sizeof(Query), "%s `Key`='%s',", Query, PlayerInfo[playerid][pKey]);
-                        }
-    					else format(Query, sizeof(Query), "%s `%s`='%s',", Query, key, val);
-    				}
-				}
-				if(strlen(Query) >= 768)
-				{
-                    strdel(Query, strlen(Query)-1, strlen(Query));
-					format(Query, sizeof(Query), "%s WHERE `Nick`='%s'", Query, nick);
-					mysql_query(Query);
-					format(Query, sizeof(Query), "UPDATE `mru_konta` SET ");
-				}
-			}
-			fclose(Profile);
-			
-            strdel(Query, strlen(Query)-1, strlen(Query));
-			format(Query, sizeof(Query), "%s WHERE `Nick`='%s'", Query, nick);
-			mysql_query(Query);
-				
-			printf("[MySQL] Konto gracza %s zostalo przeniesione do MYSQL!", nick);
-
-            format(string, sizeof(string), "%s.ini", nick);
-            dini_Remove(string);
-			return 1;
-		}
-	}
-	return 1;
-}
 
 //--------------------------------------------------------------<[ Kary ]>--------------------------------------------------------------
 

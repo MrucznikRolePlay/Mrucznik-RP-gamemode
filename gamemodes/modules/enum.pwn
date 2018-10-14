@@ -1330,7 +1330,7 @@ enum pInfo
 {
 	pUID,
 	pNick[24],
-	pKey[128],
+	pKey[129],
 	pLevel,
 	pAdmin,
 	pDonateRank,
