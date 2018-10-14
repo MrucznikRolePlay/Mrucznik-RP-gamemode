@@ -1693,50 +1693,65 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    //OnDialogResposne OKNA DMV
 		if(dialogid == 99)
 		{
-			if (!IsAUrzednik(playerid))
+			if(response)
 			{
-				return 1;
-			}
-			
-			if(response == 1)
-			{
+				new string[256];
 				new okienkoid = GetPVarInt(playerid, "okienko-edit");
+				
 			    switch(listitem)
 			    {
 			        case 0:
 			        {
 						if(PlayerInfo[playerid][pRank] == 0)
-							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
+						{
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne", okienkoid);
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
+						}
 						else if(PlayerInfo[playerid][pRank] == 1)
-							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
+						{
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ", okienkoid);
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
+						}
 						else if(PlayerInfo[playerid][pRank] == 2)
-							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
+						{
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie", okienkoid);
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
+						}
 						else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Uniwersalne");	
+						{
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Uniwersalne", okienkoid);
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);	
+						}
 			        }
 			        case 1:
 			        {
-						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby", okienkoid);
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 2:
 			        {
-						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu", okienkoid);
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 3:
 			        {
-						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid);
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 4:
 			        {
-			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Rejestracja");
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Rejestracja", okienkoid);
+			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 5:
 			        {
-			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Informacja\n Pomoc obywatelom");
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Informacja\n Pomoc obywatelom", okienkoid);
+			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 6:
 			        {
-						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}Nieczynne");
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Nieczynne", okienkoid);
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			    }
 			}
