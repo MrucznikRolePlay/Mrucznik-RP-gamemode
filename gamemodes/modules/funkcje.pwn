@@ -3856,7 +3856,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="")
 {
     if(x==x2 && y==y2 && z==z2) return 0;
-    else if(IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z) && GetPlayerVirtualWorld(playerid) == vw)
+    else if(GetPlayerVirtualWorld(playerid) == vw && GetPlayerInterior(playerid) == interior && IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
 		if(vw == 55)// KASYNO 55
 		{
@@ -3881,8 +3881,8 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		}
 		
 		SetPlayerPosEx(playerid, x2, y2, z2);
-		SetPlayerVirtualWorld(playerid, vw);
-		SetPlayerInterior(playerid, interior);
+		SetPlayerVirtualWorld(playerid, 0);
+		SetPlayerInterior(playerid, 0);
 		Wchodzenie(playerid);
 	}
 	return 1;
