@@ -24973,6 +24973,36 @@ CMD:mojeauta(playerid)
 }
 
 
+CMD:fuelcar(playerid) return cmd_tankveh(playerid);
+CMD:tankujauto(playerid) return cmd_tankveh(playerid);
+CMD:tankveh(playerid)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(!IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GREY, "»» Nie jesteœ w pojeŸdzie!");
+        if(IsPlayerInAnyVehicle(playerid)) {
+            new string[128];
+            if (PlayerInfo[playerid][pAdmin] >= 5)
+            {
+				new vehicleid = GetPlayerVehicleID(playerid);
+				new vuid = VehicleUID[vehicleid][vUID];
+                Gas[vehicleid] = 100;
+                format(string, sizeof(string), " »» Pojazd o ID (%d) zosta³ dotankowany", vehicleid);
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
+				
+				format(string, sizeof(string), "AdmCmd: %s zatankowa³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
+				SendPunishMessage(string, playerid);
+				KickLog(string);
+            }
+            else
+            {
+                noAccessMessage(playerid);
+            }
+        }
+    }
+    return 1;
+}
+
 CMD:fuelcars(playerid) return cmd_tankujauta(playerid);
 CMD:tankujauta(playerid)
 {
@@ -24986,8 +25016,9 @@ CMD:tankujauta(playerid)
 			}
 			
 			new string[64];
-			format(string, sizeof(string), "AdmCmd: %s zatankowa³ wszstkie pojazdy.", GetNick(playerid));
+			format(string, sizeof(string), "AdmCmd: %s zatankowa³ wszystkie pojazdy.", GetNick(playerid));
 			SendPunishMessage(string, playerid);
+			KickLog(string);
 			SendClientMessage(playerid, COLOR_GREY, "Wszystkie pojazdy zatankowane ! ");
         }
         else
@@ -25301,6 +25332,7 @@ CMD:fixveh(playerid)
 			new string[128];
 			format(string, sizeof(string), "AdmCmd: %s naprawi³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
 			SendPunishMessage(string, playerid);
+			KickLog(string);
 		}
 	}
 	return 1;
@@ -25327,6 +25359,7 @@ CMD:fixallveh(playerid)
         new string[128];
         format(string, sizeof(string), "Admin %s naprawi³ wszystkim graczom pojazdy", GetNick(playerid, true));
         SendClientMessageToAll(COLOR_LIGHTBLUE, string);
+		KickLog(string);
     }
     return 1;
 }
@@ -26424,7 +26457,7 @@ CMD:ah(playerid)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop /rapidfly");
+		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop /rapidfly /fuelcar");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /getposp /gotopos  /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom NEW: /anulujzp");
 	}
@@ -32125,35 +32158,6 @@ CMD:zatankuj(playerid)
 		}
 	}
 	return 1;
-}
-
-CMD:fuelcar(playerid) return cmd_tankveh(playerid);
-CMD:tankujauto(playerid) return cmd_tankveh(playerid);
-CMD:tankveh(playerid)
-{
-    if(IsPlayerConnected(playerid))
-    {
-        if(!IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GREY, "»» Nie jesteœ w pojeŸdzie!");
-        if(IsPlayerInAnyVehicle(playerid)) {
-            new string[128];
-            if (PlayerInfo[playerid][pAdmin] >= 5)
-            {
-				new vehicleid = GetPlayerVehicleID(playerid);
-				new vuid = VehicleUID[vehicleid][vUID];
-                Gas[vehicleid] = 100;
-                format(string, sizeof(string), " »» Pojazd o ID (%d) zosta³ dotankowany", vehicleid);
-                SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
-				
-				format(string, sizeof(string), "AdmCmd: %s zatankowa³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
-				SendPunishMessage(string, playerid);
-            }
-            else
-            {
-                noAccessMessage(playerid);
-            }
-        }
-    }
-    return 1;
 }
 
 
