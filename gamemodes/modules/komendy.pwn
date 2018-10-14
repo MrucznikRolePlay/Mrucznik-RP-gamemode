@@ -21912,9 +21912,8 @@ CMD:wyjdz(playerid)
 			//BIZNESY
             for(new i=0;i<MAX_BIZNES;i++)
 			{
-				WyjdzInt(playerid, BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], 3.0, 0, i);//biz 1
+				WyjdzInt(playerid, BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw]);//biz 1
 			}
-			//WyjdzInt(playerid, BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], 3.0, 0);//biz 2
             //BIZNESY END
 
 			for(new i; i<=MAX_NrDOM; i++)
