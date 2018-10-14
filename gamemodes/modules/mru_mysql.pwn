@@ -763,7 +763,7 @@ MruMySQL_DoesAccountExist(nick[])
 
 stock MruMySQL_ReturnPassword(nick[])
 {
-	new string[128], key[64];
+	new string[128], key[129];
 	
 	mysql_real_escape_string(nick, nick);
 	format(string, sizeof(string), "SELECT `Key` FROM `mru_konta` WHERE `Nick` = '%s'", nick);

