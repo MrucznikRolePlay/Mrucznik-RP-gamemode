@@ -1046,6 +1046,7 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-Mobile", 999);
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
+    SetPVarInt(playerid, "wizytowka", -1);
 
 
     premium_clearCache(playerid);
