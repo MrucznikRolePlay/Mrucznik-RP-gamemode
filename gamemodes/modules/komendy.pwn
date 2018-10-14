@@ -32940,7 +32940,7 @@ CMD:akceptuj(playerid, params[])
 		{
 			new dawacz = GetPVarInt(playerid, "wizytowka");
 			new nazwa[32];
-			if(dawacz == 0)
+			if(dawacz == -1)
 			{
 				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci wizytówki.");
 				return 1;
@@ -32967,7 +32967,7 @@ CMD:akceptuj(playerid, params[])
 			
 			GetPVarString(playerid, "wizytowka-nazwa", nazwa, sizeof(nazwa));
 			format(string, sizeof(string), "dodaj %d %s", dawacz, nazwa);
-			SetPVarInt(playerid, "wizytowka", 0);
+			SetPVarInt(playerid, "wizytowka", -1);
 			cmd_kontakty(playerid, string);
 		}
         else if(strcmp(x_job,"neon",true) == 0 || strcmp(x_job,"neony",true) == 0)
