@@ -934,7 +934,7 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
 
-    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+    UpdateDynamic3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
 
 	//AFK timer
 	if(afk_timer[playerid] != -1)
@@ -1652,7 +1652,6 @@ public OnPlayerSpawn(playerid)
 		printf("%s[%d] OnPlayerSpawn - begin", GetNick(playerid), playerid);
 	#endif
 	//Czyszczenie zmiennych
-    //Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
 	if(gPlayerLogged[playerid] != 1)
 	{
 		sendErrorMessage(playerid, "Zespawnowa³eœ siê, a nie jesteœ zalogowany! Zosta³eœ wyrzucony z serwera.");
@@ -5194,7 +5193,7 @@ public OnGameModeInit()
 
     for(new i;i<MAX_PLAYERS;i++)
     {
-        PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
+        PlayerInfo[i][pDescLabel] = CreateDynamic3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
     }
 
     pusteZgloszenia();
