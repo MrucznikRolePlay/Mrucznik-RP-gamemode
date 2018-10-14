@@ -1855,7 +1855,7 @@ SetPlayerSpawnPos(playerid)
 			SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
 			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pLocal]);
-			TogglePlayerControllable(playerid, 1);
+			Wchodzenie(playerid);
 		}
 		else
 		{
