@@ -26424,8 +26424,9 @@ CMD:ah(playerid)
     {
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /respawn /(a) dmin chat /setint /getint /setvw /getvw");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /goto /gotopos /gethere /respawnplayer");
-        SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /mark /gotomark /gotomechy /gotocar /getcar /getposp");
+        SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
+        SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotomechy /gotobank /gotostacja");
     }
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
@@ -26443,6 +26444,7 @@ CMD:ah(playerid)
 	{
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop /rapidfly /fuelcar");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /getposp /gotopos  /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
+        SendClientMessage(playerid, COLOR_GRAD1, "*5* ADMIN *** /gotomechy /gotobank /gotostacja");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom NEW: /anulujzp");
 	}
 	if (PlayerInfo[playerid][pAdmin] == 7)
@@ -37358,7 +37360,6 @@ CMD:gotostacja(playerid)
         if (GetPlayerState(playerid) == 2)
         {
             SetVehiclePos(GetPlayerVehicleID(playerid), 1931.9171,-1807.5239,13.5728);
-
         }
         else
         {
