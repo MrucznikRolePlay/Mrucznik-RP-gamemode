@@ -4837,18 +4837,49 @@ CMD:okienko(playerid)
 	{
 		if(IsPlayerConnected(playerid))
 		{
-			if(
-				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1454.55847, -1792.14673, 79.56396) ||	
-				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400 ) ||	
-				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400 ) ||
-				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400) ||	
-				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400) ||	
-				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400) ||
-				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400) ||	
-				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
+			new okienkoid;
+			if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1454.55847, -1792.14673, 79.56396))
 			{
-				ShowPlayerDialogEx(playerid,99,DIALOG_STYLE_LIST,"Któr¹ tablicê wywieszasz:","Dopasuj do rangi\nEgzaminy Praktyczne\nEgzaminy Teoretyczne\nKurs na prawo jazdy\nRejestracja\nInformacja\nZamkniête","Wywieœ","Zamknij");
+				okienkoid = 0;
 			}
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
+			{
+				okienkoid = 1;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
+			{
+				okienkoid = 2;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
+			{
+				okienkoid = 3;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
+			{
+				okienkoid = 4;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
+			{
+				okienkoid = 5;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
+			{
+				okienkoid = 6;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
+			{
+				okienkoid = 7;
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ przy ¿adnym z okienek!");
+				return 1;
+			}
+			
+			new string[32];
+			format(string, sizeof(string), "Edytujesz okienko nr: %d", okienkoid+1);
+			SetPVarInt(playerid, "okienko-edit", okienkoid);
+			ShowPlayerDialogEx(playerid,99,DIALOG_STYLE_LIST,"Któr¹ tablicê wywieszasz:","Dopasuj do rangi\nEgzaminy Praktyczne\nEgzaminy Teoretyczne\nKurs na prawo jazdy\nRejestracja\nInformacja\nZamkniête","Wywieœ","Zamknij");
 			return 1;
 		}
 	}

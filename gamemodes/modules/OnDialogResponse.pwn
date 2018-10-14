@@ -1693,341 +1693,50 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    //OnDialogResposne OKNA DMV
 		if(dialogid == 99)
 		{
+			if (!IsAUrzednik(playerid))
+			{
+				return 1;
+			}
+			
 			if(response == 1)
 			{
+				new okienkoid = GetPVarInt(playerid, "okienko-edit");
 			    switch(listitem)
 			    {
 			        case 0:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1090.4359,1056.0813,-17.6441))
-			        	{
-				        	if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Uniwersalne");
-							}
-
-						}
-			        	if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
-			        	{
-							if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
-			        	{
-			        		if (IsAUrzednik(playerid) || IsAMedyk(playerid) || IsACop(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC}Uniwersalne");
-							}
-			        	}
+						if(PlayerInfo[playerid][pRank] == 0)
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
+						else if(PlayerInfo[playerid][pRank] == 1)
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
+						else if(PlayerInfo[playerid][pRank] == 2)
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
+						else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Uniwersalne");	
 			        }
 			        case 1:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
 			        }
 			        case 2:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
 			        }
 			        case 3:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
 			        }
 			        case 4:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Rejestracja");
-			        	}
+			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Rejestracja");
 			        }
 			        case 5:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
+			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Informacja\n Pomoc obywatelom");
 			        }
 			        case 6:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 2 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 3 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 4 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 5 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 6 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 7 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid, OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 8 \n {FF0000}Nieczynne");
-			        	}
-			        	
-			        	/*else if(IsAMedyk(playerid))
-	        				UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n{00FFCC}Akty Urodzenia\n{008080}Koszt: {9ACD32}3000$\n{008080}Us³uga realizowana przez SAM-ERS");
-	        			else if(IsACop(playerid))
-	        				UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n{00FFCC}Zaœwiadczenia o niekaralnoœci\n{008080}Koszt: {9ACD32}18 000$\n{008080}Us³uga realizowana przez LSPD");
-	        				*/
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}Nieczynne");
 			        }
 			    }
 			}
