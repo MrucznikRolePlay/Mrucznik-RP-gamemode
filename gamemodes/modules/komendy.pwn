@@ -2421,7 +2421,7 @@ CMD:bp(playerid, params[])//blokada pisania
 					KickLog(string);
 					//opis
                     //Opis_Usun(giveplayerid);
-                    UpdateDynamic3DTextLabelText(PlayerInfo[giveplayerid][pDescLabel], 0xBBACCFFF, "");
+                    Update3DTextLabelText(PlayerInfo[giveplayerid][pDescLabel], 0xBBACCFFF, "");
                     PlayerInfo[giveplayerid][pDesc][0] = EOS;
 					return 1;
 				}
