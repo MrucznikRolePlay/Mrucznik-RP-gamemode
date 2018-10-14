@@ -479,6 +479,9 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define CALL_PLAYER 2
 #define CALL_LIVE 3
 
+//Okienka
+#define OKIENKO_DMV_RANGE 1.5
+
 
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);

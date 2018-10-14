@@ -4838,14 +4838,14 @@ CMD:okienko(playerid)
 		if(IsPlayerConnected(playerid))
 		{
 			if(
-				IsPlayerInRangeOfPoint(playerid,3, 1454.55847, -1792.14673, 79.56396) ||	
-				IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1795.38660, 79.56400 ) ||	
-				IsPlayerInRangeOfPoint(playerid,3,1454.59851, -1798.56665, 79.56400 ) ||
-				IsPlayerInRangeOfPoint(playerid,3,1454.59814, -1801.72668, 79.56400) ||	
-				IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1791.37695, 79.56400) ||	
-				IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1794.63696, 79.56400) ||
-				IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1797.8570, 79.56400) ||	
-				IsPlayerInRangeOfPoint(playerid,3,1446.32007, -1800.9770, 79.56400))
+				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1454.55847, -1792.14673, 79.56396) ||	
+				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400 ) ||	
+				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400 ) ||
+				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400) ||	
+				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400) ||	
+				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400) ||
+				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400) ||	
+				IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
 			{
 				ShowPlayerDialogEx(playerid,99,DIALOG_STYLE_LIST,"Któr¹ tablicê wywieszasz:","Dopasuj do rangi\nEgzaminy Praktyczne\nEgzaminy Teoretyczne\nKurs na prawo jazdy\nRejestracja\nInformacja\nZamkniête","Wywieœ","Zamknij");
 			}
