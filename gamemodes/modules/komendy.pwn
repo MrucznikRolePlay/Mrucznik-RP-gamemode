@@ -19565,6 +19565,12 @@ CMD:wizytowka(playerid, params[])
 		return 1;
 	}
 	
+	if(GetPVarInt(giveplayerid, "wizytowka") == playerid)
+	{
+		sendErrorMessage(playerid, "Ju¿ oferujesz temu graczowi swoj¹ wizytówkê."); 
+		return 1;
+	}
+	
 	format(string, sizeof(string), "* Oferujesz %s wizytówkê.", GetNick(giveplayerid));
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	format(string, sizeof(string), "* %s proponuje wizytówkê o treœci: %s, (wpisz /akceptuj wizytowka) aby akceptowaæ.", GetNick(playerid), nazwa);
