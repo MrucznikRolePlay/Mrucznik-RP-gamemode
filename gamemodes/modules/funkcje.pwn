@@ -3839,10 +3839,6 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 			
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
             ResetPlayerWeapons(playerid);
-            SetPlayerPosEx(playerid, x2, y2, z2);
-            SetPlayerInterior(playerid, interior);
-            Wchodzenie(playerid);
-            return 1;
         }
 		
 		if(strlen(komunikat) > 0)
