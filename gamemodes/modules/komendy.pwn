@@ -38199,40 +38199,6 @@ CMD:removecar(playerid, p[])
     return 1;
 }
 
-/*CMD:car_neon(playerid, p[])
-{
-    if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return 1;
-    new car, neon;
-    if(sscanf(p, "dd", car, neon)) return sendTipMessage(playerid, "U¿yj /car_neon [Car UID] [model]");
-
-    new uid = Car_GetIDXFromUID(car);
-    if(uid == -1)
-    {
-        sendTipMessageEx(playerid, COLOR_GRAD2, "Pojazd nie by³ wczytany do systemu, inicjalizacja ...");
-        uid = Car_LoadEx(car);
-        if(uid == -1) return sendTipMessageEx(playerid, COLOR_GRAD2, "... brak pojazdu w bazie.");
-    }
-    new str[128];
-    format(str, 128, "[CAR] Zmieniono neon pojazdu (UID: %d) na %d przez %s", CarData[uid][c_UID], neon,GetNick(playerid));
-    sendTipMessageEx(playerid, -1, str);
-    ActionLog(str);
-
-    CarData[uid][c_Neon] = neon;
-    Car_Save(uid, CAR_SAVE_TUNE);
-
-    new v = CarData[uid][c_ID];
-    if(v != 0)
-    {
-        if(VehicleUID[v][vNeon])
-       	{
-    		DestroyDynamicObject(VehicleUID[v][vNeonObject][0]);
-       		DestroyDynamicObject(VehicleUID[v][vNeonObject][1]);
-    		VehicleUID[v][vNeon] = false;
-    	}
-    }
-    return 1;
-} */
-
 CMD:setac(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1000)
