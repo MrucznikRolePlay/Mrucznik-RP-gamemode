@@ -19483,6 +19483,12 @@ CMD:kontakty(playerid, params[])
 			return 1;
 		}
 		
+		if(strlen(nazwa) > 32)
+		{
+			sendErrorMessage(playerid, "Nazwa kontaktu musi mieæ maksymalnie 32 znaki!");
+			return 1;
+		}
+		
 		DodajKontakt(playerid, nazwa, numer);
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt dodany.");
 	}

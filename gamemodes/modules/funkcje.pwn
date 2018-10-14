@@ -7614,7 +7614,7 @@ PobierzSlotKontaktuPoNumerze(playerid, numer)
 
 ListaKontaktowGracza(playerid)
 {
-	new string[50*MAX_KONTAKTY];
+	new string[58*MAX_KONTAKTY];
 	
 	for(new i; i<MAX_KONTAKTY; i++)
 	{
@@ -7626,12 +7626,12 @@ ListaKontaktowGracza(playerid)
 		if(FindPlayerByNumber(playerid) != -1)
 		{
 			//aktywny
-			format(string, sizeof(string), INCOLOR_GREY"%s - %d\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "%s"INCOLOR_GREY"%s - %d\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 		else
 		{
 			//nieaktywny
-			format(string, sizeof(string), INCOLOR_WHITE"{}%s - %d\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "%s"INCOLOR_WHITE"%s - %d\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 	}
 	
