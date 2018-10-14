@@ -4838,35 +4838,35 @@ CMD:okienko(playerid)
 		if(IsPlayerConnected(playerid))
 		{
 			new okienkoid;
-			if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1454.55847, -1792.14673, 79.56396))
+			if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1454.0215,-1792.1661,77.9453))
 			{
 				okienkoid = 0;
 			}
-			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1795.38660, 79.56400))
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1454.0216,-1795.3773,77.9453))
 			{
 				okienkoid = 1;
 			}
-			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59851, -1798.56665, 79.56400))
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1454.0219,-1798.5234,77.9453))
 			{
 				okienkoid = 2;
 			}
-			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1454.59814, -1801.72668, 79.56400))
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1454.0416,-1801.7599,77.9453))
 			{
 				okienkoid = 3;
 			}
-			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1791.37695, 79.56400))
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9729,-1800.9788,77.9453))
 			{
 				okienkoid = 4;
 			}
-			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1794.63696, 79.56400))
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9752,-1797.7997,77.9453))
 			{
 				okienkoid = 5;
 			}
-			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1797.8570, 79.56400))
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9757,-1794.6508,77.9453))
 			{
 				okienkoid = 6;
 			}
-			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE,1446.32007, -1800.9770, 79.56400))
+			else if(IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9628,-1791.4224,77.9453))
 			{
 				okienkoid = 7;
 			}
