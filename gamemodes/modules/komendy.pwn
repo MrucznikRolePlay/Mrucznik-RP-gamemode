@@ -19547,7 +19547,7 @@ CMD:wizytowka(playerid, params[])
 		return 1;
 	}
 	
-	if(ProxDetectorS(10.0, playerid, giveplayerid))
+	if(!ProxDetectorS(10.0, playerid, giveplayerid))
 	{
 		sendErrorMessage(playerid, "Jesteœ za daleko od tego gracza.");
 		return 1;
@@ -32955,6 +32955,7 @@ CMD:akceptuj(playerid, params[])
 			if(!CzyMaWolnySlotNaKontakt(playerid))
 			{
 				sendErrorMessage(playerid, "Osi¹gn¹³eœ maksymaln¹ liczbê kontaktów.");
+				return 1;
 			}
 			
 			format(string, sizeof(string), "* Akceptowa³eœ wizytówkê od %s, dodano nowy kontakt.", GetNick(dawacz));
