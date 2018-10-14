@@ -5660,6 +5660,7 @@ OnPlayerLogin(playerid, password[])
 		{
 			format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", hashedPassword, GetNick(playerid));
 			mysql_query(string);
+			format(accountPass, sizeof(accountPass), hashedPassword);
 			printf("Konwersja hasla konta %s na hash whirlpool", nick);
 		}
 	}
