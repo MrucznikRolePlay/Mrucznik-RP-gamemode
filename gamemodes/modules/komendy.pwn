@@ -24562,15 +24562,7 @@ CMD:gotostad(playerid)
     {
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 		{
-			if (GetPlayerState(playerid) == 2)
-			{
-				new tmpcar = GetPlayerVehicleID(playerid);
-				SetVehiclePos(tmpcar, -1435.75, -652.664, 1054.94);
-			}
-			else
-			{
-				SetPlayerPosEx(playerid, -1435.75, -652.664, 1054.94);
-			}
+			SetPlayerPosEx(playerid, -1435.75, -652.664, 1054.94);
 			SetPlayerInterior(playerid,4);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 		}
@@ -24588,15 +24580,7 @@ CMD:gotojet(playerid)
     {
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 		{
-			if (GetPlayerState(playerid) == 2)
-			{
-				new tmpcar = GetPlayerVehicleID(playerid);
-				SetVehiclePos(tmpcar, 1.71875, 30.4062, 1200.34);
-			}
-			else
-			{
-				SetPlayerPosEx(playerid, 1.71875, 30.4062, 1200.34);
-			}
+			SetPlayerPosEx(playerid, 1.71875, 30.4062, 1200.34);
 			SetPlayerInterior(playerid,1);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 		}
