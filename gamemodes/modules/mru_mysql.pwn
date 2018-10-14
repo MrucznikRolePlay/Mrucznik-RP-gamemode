@@ -1189,12 +1189,10 @@ MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
 {
 	new string[128], escapedName[32];
 	mysql_real_escape_string(nazwa, escapedName);
-	format(string, sizeof(string), "INSERT INTO mru_kontakty (Owner, Number, Name) VALUES ('%d', '%d', '%s'); SELECT LAST_INSERT_ID();", PlayerInfo[playerid][pUID], numer, escapedName);
+	format(string, sizeof(string), "INSERT INTO mru_kontakty (Owner, Number, Name) VALUES ('%d', '%d', '%s')", PlayerInfo[playerid][pUID], numer, escapedName);
 	mysql_query(string);
 	
-	mysql_store_result();
-	new uid = mysql_fetch_int();
-	mysql_free_result();
+	new uid = mysql_insert_id();
 	return uid;
 }
 

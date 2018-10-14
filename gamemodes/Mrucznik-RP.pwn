@@ -7215,8 +7215,6 @@ public OnPlayerText(playerid, text[])
 				SendClientMessage(playerid, COLOR_YELLOW, "Nikt siê nie odzywa.");
 			}
 		}
-
-		
 		return 0;
 	}
 	if (realchat)

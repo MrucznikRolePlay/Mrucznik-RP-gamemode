@@ -7597,7 +7597,14 @@ StopACallForPlayer(playerid)
 
 bool:CzyGraczMaKontakty(playerid)
 {
-	return Kontakty[playerid][0][eNumer] != 0;
+	for(new i; i<MAX_KONTAKTY; i++)
+	{
+		if(Kontakty[playerid][i][eNumer] != 0)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 PobierzSlotKontaktuPoNumerze(playerid, numer)
