@@ -194,7 +194,7 @@ public scanhp(playerid)
 			}
 			else if(kask[playerid] == 1)
 		    {
-		        if(WszedlDoPojazdu[playerid] == 0)
+		        if(WszedlDoPojazdu[playerid] == 0 && IsABike(vehicleid))
 		        {
 			        if(oldhealth[playerid] > (newhealth[playerid] + 120))
 					{

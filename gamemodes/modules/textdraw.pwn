@@ -40,7 +40,6 @@ new Text:MSGBOXtd_Kubi;
 /*----------------------------------------- MessageBox END ---------------------------------------------------*/
 
 new PlayerText:TextInformacyjny[MAX_PLAYERS];
-new PlayerText:TextAdminLog[MAX_PLAYERS];
 new PlayerText:TextOferta1[MAX_PLAYERS];
 
 //TXD   Taxi licznik

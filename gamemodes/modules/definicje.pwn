@@ -2,6 +2,21 @@
 
 //#pragma tabsize 0 // <------------------------------------------nope
 
+//wy³¹czenie sampowych metod obiektów
+#define CreateObject(%0) ERROR_CREATE_OBJECT(%0)
+#define DestroyObject(%0) ERROR_OBJECT
+#define IsValidObject(%0) ERROR_OBJECT
+#define MoveObject(%0) ERROR_OBJECT
+#define StopObject(%0) ERROR_OBJECT
+#define SetObjectPos(%0) ERROR_OBJECT
+#define SetObjectRot(%0) ERROR_OBJECT
+#define GetObjectPos(%0) ERROR_OBJECT
+#define GetObjectRot(%0) ERROR_OBJECT
+#define AttachObjectToPlayer(%0) ERROR_OBJECT
+#define SetObjectMaterialText(%0) ERROR_OBJECT
+#define SetObjectMaterial(%0) ERROR_OBJECT
+
+
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
 
@@ -227,6 +242,14 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define D_LOGIN     230
 #define D_REGISTER  231
 
+#define D_ELEVATOR_LSMC         180
+#define D_OPIS                  181
+#define D_OPIS_UPDATE           182
+#define D_VEHOPIS               183
+#define D_VEHOPIS_UPDATE        184
+#define WINDA_SAN               120
+#define WINDA_LSPD              300
+
 #define D_AUTO                  499
 #define D_AUTO_ACTION           500
 #define D_AUTO_RESPAWN          7780
@@ -292,27 +315,31 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define D_EDIT_CAR_COLOR    1320
 #define D_ASK_DODATKI       1321
 
-#define D_F_PANEL			5000+1
+#define DIALOG_LIDER01 3001
+#define DIALOG_LIDER02 3002
 
-#define D_TRANSPORT         5439
-#define D_TRANSPORT_FAST    5440
-#define D_TRANSPORT_LIST    5441
-#define D_TRANSPORT_ACCEPT  5442
+#define DIALOGID_PODSZYJ				3245
+#define DIALOGID_PODSZYJ_ZMIENID(%0)	3245+%0
+#define DIALOGID_MUZYKA		3240
+#define DIALOGID_MUZYKA_URL	3241
+
+#define DIALOG_HA_ZMIENSKIN(%0)			3345+%0
+#define DIALOGID_UNIFORM 3445
+
+#define D_F_PANEL			5000+1
 
 #define DIALOG_KONSOLA_VINYL    5230
 #define DIALOG_EOSWIETLENIE     5232
-#define WINDA_LSPD              300
-#define D_ELEVATOR_LSMC         180
-#define D_OPIS                  181
-#define D_OPIS_UPDATE           182
-#define D_VEHOPIS               183
-#define D_VEHOPIS_UPDATE        184
-#define WINDA_SAN               120
 #define DIALOG_ELEVATOR_SAD     5234
 #define DIALOG_PATROL           5236
 #define DIALOG_PATROL_NAME      5237
 #define DIALOG_PATROL_PARTNER   5238
 #define D_PRZEBIERZ_FDU         5241
+
+#define D_TRANSPORT         5439
+#define D_TRANSPORT_FAST    5440
+#define D_TRANSPORT_LIST    5441
+#define D_TRANSPORT_ACCEPT  5442
 
 #define SCENA_DIALOG_MAIN       5998
 #define SCENA_DIALOG_CREATE     5999
@@ -340,32 +367,14 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define D_P_CARS        10004
 #define D_KUBICWEL        10094 //dialog wybory
 
-//PADZIOCH
-#define DIALOGID_PODSZYJ				3245
-#define DIALOGID_PODSZYJ_ZMIENID(%0)	3245+%0
-#define DIALOGID_MUZYKA		3240
-#define DIALOGID_MUZYKA_URL	3241
+#define D_KONTAKTY_DZWON				10100
+#define D_KONTAKTY_SMS					10101
+#define D_KONTAKTY_SMS_WIADOMOSC		10102
+#define D_KONTAKTY_EDYTUJ				10103
+#define D_KONTAKTY_EDYTUJ_NOWA_NAZWA	10104
+#define D_KONTAKTY_USUN					10105
+#define D_KONTAKTY_LISTA				10106
 
-//2.5.2
-#define DIALOG_HA_ZMIENSKIN(%0)			3345+%0
-
-// niceczlowiek
-#define KARA_SPECJALNA "{800080}"
-#define KARA_BANICJI "{ff0000}"
-#define KARA_BARDZOCIEZKA "{ff0000}"
-#define KARA_CIEZKA "{ff8c00}"
-#define KARA_SREDNIA "{8b4513}"
-#define KARA_LEKKA "{008000}"
-#define KARA_NIEZNACZNA "{00ff00}"
-#define KARA_STRZALKA "{363F45}"
-#define KARA_TEKST2 "{33AA33}"
-#define KARA_TEKST "{f9f9f9}"    
-
-//uniformnew
-#define DIALOGID_UNIFORM 3445
-
-#define DIALOG_LIDER01 3001
-#define DIALOG_LIDER02 3002
 
 //------------------------------------------------------------------------------
 //                              INNE
@@ -375,6 +384,11 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 #define TEXT_D_PANEL_KARY "Nadaj karê\nZdejmij karê\nWyszukiwanie danych gracza"
 #define TEXT_D_PANEL_LOGOW "-------------[IC]-------------\nCK.log\nNICK.log\nPAY.log\n-------------[STATS]-------------\nSETSTATS.log\n-------------[ADMIN]-------------\nBAN.log\nCZIT.log\nKICK.log\nWARN.log\nWARNING.log\n-------------[Special]-------------\nMySQL"
+
+//bugozord
+#define MAX_KONTAKTY	10
+#define MAX_KONTAKT_NAME 32
+#define MAX_KONTAKT_NAME_1 33 //MAX_KONTAKT_NAME+1
 
 //22.06
 #define MAX_FRAC        20
@@ -454,6 +468,23 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 //23.12
 #define MAX_TICKETS     50
+
+//Telefon
+#define EMERGENCY_NUMBERS -900 
+#define POLICE_NUMBER -901 //old 912
+#define SHERIFF_NUMBER -917 //old 928
+#define LSMC_NUMBER -904 //old 914
+#define LSFD_NUMBER -903 //old 916
+
+#define CALL_NONE 0
+#define CALL_EMERGENCY 1
+#define CALL_PLAYER 2
+#define CALL_LIVE 3
+
+//Okienka
+#define OKIENKO_DMV_RANGE 2
+
+
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);
 public _SafeReturnCode_(dest[], src[], bytes)

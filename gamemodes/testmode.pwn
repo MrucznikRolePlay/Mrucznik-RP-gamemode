@@ -102,7 +102,7 @@ LadujInteriory()
     IntInfo[5][Kategoria] = 1;
     IntInfo[5][Pokoje] = 2;
     IntInfo[5][Cena] = 2000000;
-    IntInfo[6][Int_X] = 1207.6346435547;//dom 6 DOMEK Z MUZYCZKÄ„
+    IntInfo[6][Int_X] = 1207.6346435547;//dom 6 DOMEK Z MUZYCZK¥
     IntInfo[6][Int_Y] = -42.482707977295;
     IntInfo[6][Int_Z] = 1000.953125;
     IntInfo[6][Int] = 3;

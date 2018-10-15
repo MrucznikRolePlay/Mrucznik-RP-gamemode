@@ -2,14 +2,14 @@
 #define sprintf(%0,%1) (format(sprintfStr, 1000, %0, %1), sprintfStr)
 
 
-// Nowa fabryka materia≈Ç√≥w
+// Nowa fabryka materia≥Ûw
 #define FabrykaMats:: FabrykaMats_
 
-// Nowa wybiera≈Çka skin√≥w
+// Nowa wybiera≥ka skinÛw
 #define NowaWybieralka:: NowaWybieralka_
 
 //mega pseudo klasa gracza xD  cos z tym zrobie
 #define Player:: Player_
 
-//≈öwiat anty czita ≈ºeby daƒá porzƒÖdny desync graczowi aby ju≈º nic nie zjeba≈Ç :D
+//åwiat anty czita øeby da≥ porzπdny desync graczowi aby juø nic nie zjeba≥ :D
 #define AC_WORLD	50005

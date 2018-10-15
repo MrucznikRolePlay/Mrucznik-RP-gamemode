@@ -704,6 +704,80 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
+			case 15:
+			{
+				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Nowoœci   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Nowy system telefonów. Od teraz gdy ktoœ do nas zadzwoni to ju¿ nie wyœwietli siê jego nick z gry, lecz sam numer telefonu (autor: Mrucznik)");
+				SendClientMessage(playerid,COLOR_WHITE,"Nowa komenda /resms - odpowiada na ostatni¹ otrzyman¹ wiadomoœæ SMS");
+				SendClientMessage(playerid,COLOR_WHITE,"Nowa komenda /wizytówka - za pomoc¹ której mo¿esz wrêczyæ graczowi wizytówkê");
+				SendClientMessage(playerid,COLOR_WHITE,"Nowa komenda /kontakty - umo¿liwia zarz¹dzaniem kontaktami");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Urz¹d Miasta Los Santos (autor: Satius)");
+				SendClientMessage(playerid,COLOR_WHITE,"Ammu Nation Los Santos (autor: Beczka)");
+				SendClientMessage(playerid,COLOR_WHITE,"Pojazd San Van (autor: skLuke)");
+				SendClientMessage(playerid,COLOR_WHITE,"Ramirez Car Service (autor: Abstynent)");
+				SendClientMessage(playerid,COLOR_WHITE,"Hells Angels MC (autor: Charlie112)");
+				SendClientMessage(playerid,COLOR_WHITE,"Plac manewrowy (autor: Satius)");
+				SendClientMessage(playerid,COLOR_WHITE,"Dos Santos Car Service (autor: Abstynent)??");
+				SendClientMessage(playerid,COLOR_WHITE,"Przywrócenie starych doków (autor: Simeone)??");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawione literówki San Andres Network");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawione literówki USSS");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawione b³êdy Rockstara");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono interior nr. 11");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano barierki zagradzaj¹ce wjazd do banku");
+				SendClientMessage(playerid,COLOR_WHITE,"Object Pack dla skTom jako nagroda za pochwa³y od graczy.");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Poprawki b³êdów   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Darmowa broñ od dilera po œmierci - poprawiono");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono komendê dla DMV (/pjtest)");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono bug wywiadu (gdy reporter wychodzi z serwera wywiad automatycznie siê koñczy)");
+				SendClientMessage(playerid,COLOR_WHITE,"Skill pracy dorywczej busiarza dzia³a poprawnie");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawka panelu dla administracji");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono bug barierek dla frakcji USSS");
+				SendClientMessage(playerid,COLOR_WHITE,"Skill pracy dorywczej kuriera dzia³a poprawnie");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawki komend dla administracji");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodanie nowych komend dla administracji");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono bug /tankowanie");
+				SendClientMessage(playerid,COLOR_WHITE,"Nowe komendy dla pó³administratorów");
+				SendClientMessage(playerid,COLOR_WHITE,"Komenda /kajdanki zosta³a naprawiona");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono komendê /skinf dla frakcji");
+				SendClientMessage(playerid,COLOR_WHITE,"Gaszenie silniku tylko dla pojazdów, które maj¹ silnik");
+				SendClientMessage(playerid,COLOR_WHITE,"Usuniêto komunikat o kasku w aucie");
+				SendClientMessage(playerid,COLOR_WHITE,"W demorgan nie mo¿na mieæ ju¿ broni");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono bugi we frakcji FBI");
+				SendClientMessage(playerid,COLOR_WHITE,"Nowe komendy i naprawa panelu KO");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawienie œcie¿ek MP3");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono kamery w kancelarii prawniczej");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono bug z interiorem Cluckin'Bell");
+				SendClientMessage(playerid,COLOR_WHITE,"Odblokowanie czatu OOC podczas BW");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono wynagrodzenie za plamy i po¿ary dla LSFD");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono bug z rad¹ miasteczka Dillimore");
+				SendClientMessage(playerid,COLOR_WHITE,"Od teraz /trasa w KT jest od [0] rangi");
+				SendClientMessage(playerid,COLOR_WHITE,"Usuniêcie b³êdu zwi¹zanego z kradzie¿¹ auta");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodanie BW dla USSS.");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono drobne b³êdy jêzykowe");
+				if(PlayerInfo[playerid][pAdmin] >= 1)
+				{
+					SendClientMessage(playerid,COLOR_BLUE,"----------   Dla administracji   ---------");
+					SendClientMessage(playerid,COLOR_WHITE,"Stworzenie nowych komend: /tankveh, /gotobank, /gotostacja");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawiono komendy: /gotosalon, /gotomechy, /gotoadmin, /gotostad");
+					SendClientMessage(playerid,COLOR_WHITE,"Poprawa literówek w komendach administracyjnych");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawiono /spec");
+					SendClientMessage(playerid,COLOR_WHITE,"Usuniêcie komunikatu o /q na /spec");
+					SendClientMessage(playerid,COLOR_WHITE,"Nowe prace do wyboru pod komend¹ /setstat");
+					SendClientMessage(playerid,COLOR_WHITE,"Nowe komendy dla Pó³Administratorów: /pwarn, /warn, /unbw, /pogodaall");
+					SendClientMessage(playerid,COLOR_WHITE,"Nowa komenda /czyjtonumer(sprawdza do kogo nalezy dany numer telefonu)");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawa b³êdu zwi¹zanego z /dowod, /pl na specu");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawienie komendy /mole");
+					SendClientMessage(playerid,COLOR_WHITE,"Dodanie /addcar i /removecar dla KO");
+					SendClientMessage(playerid,COLOR_WHITE,"Dodanie komendy /usunopisveh dla panelu KO");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawa /panel unwarn gdy gracz jest online");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawa panelu KO");
+				}
+				SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.5.93 <<<_______________________|");
+
+				showChangeLog(playerid);
+			}
 		}
 	}
 	return 0;
@@ -728,7 +802,8 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.9\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.811\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.810\n", string);
-		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.92", string);
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.92\n", string);
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.93", string);
 		ShowPlayerDialogEx(playerid, 1962, DIALOG_STYLE_LIST, "Wybierz aktualizacjê", string, "Ok", "WyjdŸ");
 	}
 	return 1;

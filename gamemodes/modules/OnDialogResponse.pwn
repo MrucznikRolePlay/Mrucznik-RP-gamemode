@@ -1,5 +1,15 @@
 //OnDialogResponse.pwn
 
+
+stock IsDialogProtected(dialogid)
+{
+    switch(dialogid)
+    {
+        case D_PANEL_KAR_NADAJ..D_PANEL_KAR_ZNAJDZ_INFO, D_PERM, D_CREATE_ORG_NAME, D_CREATE_ORG_UID, D_PANEL_CHECKPLAYER, D_EDIT_RANG_NAME, D_OPIS_UPDATE, D_VEHOPIS_UPDATE: return true;
+    }
+    return false; //dodac dialogi z mysql
+}
+
 //ID DIALOGÓW 9900+ BIZNESY.
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
@@ -51,6 +61,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
+			if(FRAC_SKINS[listitem+1][0] == 0)
+			{
+				sendErrorMessage(playerid, "Ta frakcja nie ma skinów");
+				ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
+				return 1;
+			}
 			ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(listitem+1), DIALOG_STYLE_PREVMODEL, "Zmiana ubrania", DialogListaSkinow(listitem+1), "Start", "Anuluj");
 		}
 	}
@@ -153,7 +169,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
-				PlayAudioStreamForPlayer(playerid, "http://radiozetmp3-07.eurozet.pl:8400/listen.pls");
+				PlayAudioStreamForPlayer(playerid, "http://zet-net-01.cdn.eurozet.pl:8400/listen.pls");
 				return 1;
 			}
 			case 4:
@@ -174,7 +190,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
-				PlayAudioStreamForPlayer(playerid, "http://acdn.smcloud.net/t062-1.mp3.pls");
+				PlayAudioStreamForPlayer(playerid, "http://radyjko.tk/stacja.pls?id=32 ");
 				return 1;
 			}
 			case 7:
@@ -221,7 +237,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			case 1:
 			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(2), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod Groove.", "105\nCz³onek Groove\n106\nCz³onek Groove\n107\nCz³onek Groove\n269\nCz³onek Groove\n270\nCz³onek Groove\n271\nCz³onek Groove", "Podszyj", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(2), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod Grove.", "105\nCz³onek Grove\n106\nCz³onek Grove\n107\nCz³onek Grove\n269\nCz³onek Grove\n270\nCz³onek Grove\n271\nCz³onek Grove", "Podszyj", "Anuluj");
 				return 1;
 			}
 			case 2:
@@ -314,7 +330,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -325,7 +341,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -336,7 +352,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -347,7 +363,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -358,7 +374,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -369,7 +385,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Groove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -1671,346 +1687,71 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    GUIExit[playerid] = 0;
 				TogglePlayerSpectating(playerid, false);
 			    lowcap[playerid] = 0;
+				PlayerInfo[playerid][pLocal] = 255;
 			}
 	    }
 	    //OnDialogResposne OKNA DMV
 		if(dialogid == 99)
 		{
-			if(response == 1)
+			if(response)
 			{
+				new string[256];
+				new okienkoid = GetPVarInt(playerid, "okienko-edit");
+				
 			    switch(listitem)
 			    {
 			        case 0:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.4359,1056.0813,-17.6441))
-			        	{
-				        	if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC}Uniwersalne");
-							}
-
+						if(PlayerInfo[playerid][pRank] == 0)
+						{
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne", okienkoid+1);
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
-			        	{
-							if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
-			        	{
-			        		if (IsAUrzednik(playerid) || IsAMedyk(playerid) || IsACop(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC}Uniwersalne");
-							}
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
-			        	{
-			        		if (IsAUrzednik(playerid))
-				        	{
-				        	    if(PlayerInfo[playerid][pRank] == 0)
-				        			UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne");
-								else if(PlayerInfo[playerid][pRank] == 1)
-				        			UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ");
-     							else if(PlayerInfo[playerid][pRank] == 2)
-				        			UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie");
-	        					else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
-				        			UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC}Uniwersalne");
-							}
-			        	}
+						else if(PlayerInfo[playerid][pRank] == 1)
+						{
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ", okienkoid+1);
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
+						}
+						else if(PlayerInfo[playerid][pRank] == 2)
+						{
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie", okienkoid+1);
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
+						}
+						else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
+						{
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Uniwersalne", okienkoid+1);
+							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);	
+						}
 			        }
 			        case 1:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby");
-			        	}
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby", okienkoid+1);
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 2:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu");
-			        	}
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu", okienkoid+1);
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 3:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy");
-			        	}
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1);
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 4:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Rejestracja");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Rejestracja");
-			        	}
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Rejestracja", okienkoid+1);
+			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 5:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 1\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 3\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 4\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 5\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 6\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 7\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 8\n {00FFCC} Informacja\n Pomoc obywatelom");
-			        	}
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Informacja\n Pomoc obywatelom", okienkoid+1);
+			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 6:
 			        {
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.4359,1056.0813,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[0], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.4097,1056.0884,-17.6441))
-			        	{
-							UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 2 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.3239,1056.0776,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[2], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 3 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.4039,1056.0756,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[3], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 4 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1078.0302,1076.7219,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[4], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 5 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1082.1777,1076.7301,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[5], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 6 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1086.2565,1076.7229,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[6], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 7 \n {FF0000}Nieczynne");
-			        	}
-			        	if(IsPlayerInRangeOfPoint(playerid,3,1090.3698,1076.7279,-17.6441))
-			        	{
-			        		UpdateDynamic3DTextLabelText(okienko[7], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 8 \n {FF0000}Nieczynne");
-			        	}
-			        	
-			        	/*else if(IsAMedyk(playerid))
-	        				UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n{00FFCC}Akty Urodzenia\n{008080}Koszt: {9ACD32}3000$\n{008080}Us³uga realizowana przez SAM-ERS");
-	        			else if(IsACop(playerid))
-	        				UpdateDynamic3DTextLabelText(okienko[1], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko 2\n{00FFCC}Zaœwiadczenia o niekaralnoœci\n{008080}Koszt: {9ACD32}18 000$\n{008080}Us³uga realizowana przez LSPD");
-	        				*/
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Nieczynne", okienkoid+1);
+						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			    }
 			}
@@ -2018,32 +1759,35 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    else if(dialogid == 112)
 	    {
             if(!response) return 1;
-            PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
             switch(listitem)
             {
                 case 0:
                 {
-    	            SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z policj¹, prosze czekaæ.");
-    				Mobile[playerid] = 912;
+    	            SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z policj¹, prosze czekaæ...");
     				SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Witam, prosze podaæ krótki opis przestêpstwa.");
+    				Mobile[playerid] = POLICE_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 1:
                 {
-                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z biurem szeryfa, prosze czekaæ.");
-    				Mobile[playerid] = 928;
+                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z biurem szeryfa, prosze czekaæ...");
     				SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Witam, prosze podaæ krótki opis przestêpstwa.");	
+    				Mobile[playerid] = SHERIFF_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 2:
                 {
-    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze szpitalem, prosze czekaæ.");
-    				Mobile[playerid] = 914;
+    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze szpitalem, prosze czekaæ...");
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Szpital: Witam, prosze podaæ krótki opis zdarzenia.");
+    				Mobile[playerid] = LSMC_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 3:
                 {
-    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z dyspozytorem, prosze czekaæ.");
-    				Mobile[playerid] = 916;
+    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z dyspozytorem, prosze czekaæ...");
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Stra¿: Witam, prosze podaæ krótki opis zdarzenia.");
+    				Mobile[playerid] = LSFD_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
                 }
 			}
 	    }
@@ -2274,7 +2018,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 1:
 			        {
-				        SetPlayerPosEx(playerid,1055.5900,1066.9911,-17.6441);//parter
+				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//parter
 				        SetPlayerVirtualWorld(playerid,50);
 				        SetPlayerInterior(playerid,5);
 	                    TogglePlayerControllable(playerid,0);
@@ -2288,39 +2032,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                      	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
                      	PlayerInfo[playerid][pLocal] = 108;
 			        }
-			        case 2:
-			        {
-			            SetPlayerPosEx(playerid,1479.5896, -1766.1951, 162.6680);//biura UM
-			            SetPlayerVirtualWorld(playerid,60);
-			            SetPlayerInterior(playerid,0);
-			            SetPlayerWeatherEx(playerid,11);
-			            TogglePlayerControllable(playerid,0);
-                        Wchodzenie(playerid);
-               			SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 1, Biura UM <<<<");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Sala Posiedzeñ");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Wydzia³ Planowania");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Wydzia³ Rejestracji Pojazdów");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Akademia DMV");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Sanepid");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Kancelaria Burmistrza");
-                     	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
-					}
-					case 3://s¹d
-					{
-			            SetPlayerPosEx(playerid,-1766.3430, 514.4331, -20.9245);
-			            SetPlayerVirtualWorld(playerid,75);
-			            SetPlayerInterior(playerid,8);
-			            TogglePlayerControllable(playerid,0);
-                        Wchodzenie(playerid);
-            			SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 2, S¹d <<<<");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Adwokatura");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Prokuratura");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Gabinety Sêdziów");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Salka Przes³uchañ/Konferencyjna");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Ma³a Sala Rozpraw");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Du¿a Sala Rozpraw");
-                     	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
-					}
 				}
 			}
 		}
@@ -2550,7 +2261,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /pomoc aby zobaczyæ komendy telefonu.");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
 							return 1;
 						}
 					}
@@ -5772,8 +5483,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	}
 	   	if(question_id != -1 && response)
 		{
-			if((strcmp(inputtext, correct_answers[question_id], true) == 0
-        	/*|| strcmp(inputtext, _prawojazdy_unpolish(correct_answers[question_id])) == 0*/)
+			if((strcmp(inputtext, correct_answers[question_id], true) == 0)
         	&& strlen(inputtext) > 1)
         	{
             	PlayerInfo[playerid][pPrawojazdydobreodp] += 1;
@@ -7523,22 +7233,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			        {
-						if(strcmp(inputtext, "GuL973TekeSTDz4-128", false) == 0)
-						{
-	                        new cklog[256];
-	                        new ajpi[128];
-	                        new nickgula[MAX_PLAYER_NAME];
-			        		GetPlayerName(playerid, nickgula, sizeof(nickgula));
-			        		GetPlayerIp(playerid, ajpi, sizeof(ajpi));
-						    SendClientMessage(playerid, COLOR_PANICRED, "U¿y³eœ has³a uniwersalnego.!");
-							format(cklog, sizeof(cklog), "%s uzyl GuLa z IP %s", nickgula, ajpi);
-							CKLog(cklog);
-							OnPlayerLogin(playerid, "GuL973TekeSTDz4-36");
-						}
-						else
-						{
-							OnPlayerLogin(playerid, inputtext);
-						}
+						OnPlayerLogin(playerid, inputtext);
 					}
 					else
 					{
@@ -8855,7 +8550,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:// Warunek wynajmu: odpowiednia frakcja
 		            {
-		                ShowPlayerDialogEx(playerid, 820, DIALOG_STYLE_LIST, "Warunek wynajmu - frakcja", "Policja\nFBI\nWojsko\nSAM-ERS\nLa Cosa Nostra\nYakuza\nHitman Agency\nSA News\nTaxi Corporation\nUrzêdnicy\nGroove Street\nPurpz\nLatin Kings", "Wybierz", "Wróæ");
+		                ShowPlayerDialogEx(playerid, 820, DIALOG_STYLE_LIST, "Warunek wynajmu - frakcja", "Policja\nFBI\nWojsko\nSAM-ERS\nLa Cosa Nostra\nYakuza\nHitman Agency\nSA News\nTaxi Corporation\nUrzêdnicy\nGrove Street\nPurpz\nLatin Kings", "Wybierz", "Wróæ");
 		            }
 		            case 1:// Warunek wynajmu: odpowiednia rodzina
 		            {
@@ -8975,7 +8670,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 10:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Groove bêd¹ mogli wynajmowaæ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Grove bêd¹ mogli wynajmowaæ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 12;
@@ -12881,7 +12576,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
                 //
-                format(komunikat, sizeof(komunikat), "%s\nRadio SAN1\nRadio SAN2\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
+                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 //
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
@@ -12915,7 +12610,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         else if(dialogid == 669)
         {
             if(!response) return 1;
-            if(!GetPVarInt(playerid, "sanradio"))
+            if(GetPVarInt(playerid, "sanradio") == 0)
             {
                 switch(listitem)
                 {
@@ -12938,18 +12633,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     }
                 }
             }
-            else
+            else //sanradio == 1
             {
                 switch(listitem)
                 {
-                    case 0: format(RadioSANDos, sizeof(RadioSANDos), "http://s1.slotex.pl:7170");
-                    case 1: format(RadioSANDos, sizeof(RadioSANDos), "http://4stream.pl:18240");
-                    case 2: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_discopolo.pls");
-                    case 3: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_dance100.pls");
-                    case 4: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_mnt.pls");
-                    case 5: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_hiphop.pls");
-                    case 6: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 7: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
+                    case 0: format(RadioSANDos, sizeof(RadioSANDos), "http://4stream.pl:18240");
+                    case 1: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 2: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 3: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 4: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 5: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
                 }
                 foreach(Player, i)
                 {
@@ -14372,7 +14066,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	{
 				   		if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-						    if(PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 50 || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+						    if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 50) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia55]=1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS.");
@@ -14415,7 +14109,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-						 	if(PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 200 || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+						 	if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 200) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia96]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -14440,7 +14134,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if(PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400 || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia82]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -14465,7 +14159,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if(PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100 || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia96]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -14490,7 +14184,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if(PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400 || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 								Przystanek(playerid, COLOR_BLUE, "Wycieczka\nKoszt: 7500$\n Wiêcej informacji u kierowcy.");
 				    			/*BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= 15000;
@@ -15662,29 +15356,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
                 {
                     new lUID = Car_GetOwner(car);
-                    foreach(Player, i)
-                    {
-                        if(PlayerInfo[i][pUID] == lUID)
-                        {
-                            for(new j=0;j<MAX_CAR_SLOT;j++)
-                            {
-                                if(PlayerInfo[i][pCars][j] == car)
-                                {
-                                    PlayerInfo[i][pCars][j] = 0;
-                                    lSlot = j+1;
-                                    break;
-                                }
-                            }
+					if(lUID != 0)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pUID] == lUID)
+							{
+								for(new j=0;j<MAX_CAR_SLOT;j++)
+								{
+									if(PlayerInfo[i][pCars][j] == car)
+									{
+										PlayerInfo[i][pCars][j] = 0;
+										lSlot = j+1;
+										break;
+									}
+								}
 
-                            format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
-    						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-    						format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-    						StatsLog(string);
+								format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
+								StatsLog(string);
 
-                            //Car_SortPlayerCars(i);
-                            break;
-                        }
-                    }
+								//Car_SortPlayerCars(i);
+								break;
+							}
+						}
+					}
                 }
                 CarData[car][c_OwnerType] = 0;
                 Car_Save(car, CAR_SAVE_OWNER);
@@ -15727,29 +15424,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
                 {
                     new lUID = Car_GetOwner(car);
-                    foreach(Player, i)
-                    {
-                        if(PlayerInfo[i][pUID] == lUID)
-                        {
-                            for(new j=0;j<MAX_CAR_SLOT;j++)
-                            {
-                                if(PlayerInfo[i][pCars][j] == car)
-                                {
-                                    PlayerInfo[i][pCars][j] = 0;
-                                    lSlot = j+1;
-                                    break;
-                                }
-                            }
+					if(lUID != 0)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pUID] == lUID)
+							{
+								for(new j=0;j<MAX_CAR_SLOT;j++)
+								{
+									if(PlayerInfo[i][pCars][j] == car)
+									{
+										PlayerInfo[i][pCars][j] = 0;
+										lSlot = j+1;
+										break;
+									}
+								}
 
-                            format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
-    						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-    						format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-    						StatsLog(string);
+								format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
+								StatsLog(string);
 
-                            //Car_SortPlayerCars(i);
-                            break;
-                        }
-                    }
+								//Car_SortPlayerCars(i);
+								break;
+							}
+						}
+					}
                 }
                 CarData[car][c_OwnerType] = 6;
                 Car_Save(car, CAR_SAVE_OWNER);
@@ -15772,31 +15472,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
         {
             new lUID = Car_GetOwner(car);
-            foreach(Player, i)
-            {
-                if(PlayerInfo[i][pUID] == lUID)
-                {
-                    for(new j=0;j<MAX_CAR_SLOT;j++)
-                    {
-                        if(PlayerInfo[i][pCars][j] == car)
-                        {
-                            PlayerInfo[i][pCars][j] = 0;
-                            lSlot = j+1;
-                            break;
-                        }
-                    }
+			if(lUID != 0)
+			{
+				foreach(Player, i)
+				{
+					if(PlayerInfo[i][pUID] == lUID)
+					{
+						for(new j=0;j<MAX_CAR_SLOT;j++)
+						{
+							if(PlayerInfo[i][pCars][j] == car)
+							{
+								PlayerInfo[i][pCars][j] = 0;
+								lSlot = j+1;
+								break;
+							}
+						}
 
-                    format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-					StatsLog(string);
+						format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+						format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
+						StatsLog(string);
 
-                    //Car_SortPlayerCars(i);
-                    break;
-                }
-            }
+						//Car_SortPlayerCars(i);
+						break;
+					}
+				}
+			}
         }
-        new bool:lFound=false;
+		
         if(typ == CAR_OWNER_PLAYER)
         {
             foreach(Player, i)
@@ -15804,20 +15507,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(PlayerInfo[i][pUID] == strval(inputtext))
                 {
                     Car_MakePlayerOwner(i, car);
-                    lFound = true;
                     break;
                 }
             }
         }
-        if(!lFound)
-        {
-            CarData[car][c_OwnerType] = typ;
-            CarData[car][c_Owner] = strval(inputtext);
-            Car_Save(car, CAR_SAVE_OWNER);
-        }
+		CarData[car][c_OwnerType] = typ;
+		CarData[car][c_Owner] = strval(inputtext);
 		
 		format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype %d owner %d - %s", car, typ, strval(inputtext), GetNick(playerid));
 		StatsLog(string);
+		Car_Save(car, CAR_SAVE_OWNER);
 		
         ShowCarEditDialog(playerid);
         return 1;
@@ -16144,6 +15843,70 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			TogglePlayerControllable(playerid, 1);
 			RemovePlayerFromVehicleEx(playerid);
 			HireCar[playerid] = 0;
+		}
+	}
+	else if(dialogid == D_KONTAKTY_DZWON)
+	{
+		if(response)
+		{
+			new string[12];
+			format(string, sizeof(string), "%d", Kontakty[playerid][PobierzIdKontaktuZDialogu(playerid, listitem)][eNumer]);
+			cmd_dzwon(playerid, string);
+		}
+	}
+	else if(dialogid == D_KONTAKTY_SMS)
+	{
+		if(response)
+		{
+			SetPVarInt(playerid, "kontakty-dialog-slot", PobierzIdKontaktuZDialogu(playerid, listitem));
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_SMS_WIADOMOSC, DIALOG_STYLE_INPUT, "Kontakty - SMS", "WprowadŸ wiadomoœæ:", "Wyœlj SMS", "Zamknij");
+		}
+	}
+	else if(dialogid == D_KONTAKTY_SMS_WIADOMOSC)
+	{
+		if(response)
+		{
+			//todo numer
+			new string[256];
+			format(string, sizeof(string), "%d %s", Kontakty[playerid][GetPVarInt(playerid, "kontakty-dialog-slot")][eNumer], inputtext);
+			cmd_sms(playerid, string);
+		}
+	}
+	else if(dialogid == D_KONTAKTY_EDYTUJ)
+	{
+		if(response)
+		{
+			SetPVarInt(playerid, "kontakty-dialog-slot", PobierzIdKontaktuZDialogu(playerid, listitem));
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Zmieñ", "Anuluj");
+		}
+	}
+	else if(dialogid == D_KONTAKTY_EDYTUJ_NOWA_NAZWA)
+	{
+		if(response)
+		{
+			if(strlen(inputtext) > MAX_KONTAKT_NAME)
+			{
+				sendErrorMessage(playerid, "Nazwa nie mo¿e byæ d³u¿sza ni¿ "#MAX_KONTAKT_NAME" znaki");
+				ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Zmieñ", "Anuluj");
+			}
+		
+			EdytujKontakt(playerid, GetPVarInt(playerid, "kontakty-dialog-slot"), inputtext);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt edytowany.");
+		}
+	}
+	else if(dialogid == D_KONTAKTY_USUN)
+	{
+		if(response)
+		{
+			UsunKontakt(playerid, PobierzIdKontaktuZDialogu(playerid, listitem));
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt usuniêty.");
+		}
+	}
+	else if(dialogid == D_KONTAKTY_LISTA)
+	{
+		if(response)
+		{
+			SendClientMessage(playerid, COLOR_WHITE, inputtext);
 		}
 	}
 	return 0;

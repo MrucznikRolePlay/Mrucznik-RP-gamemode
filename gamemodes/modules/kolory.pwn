@@ -209,3 +209,16 @@
 //Inne:
 #define INDIALOG_COLOR 		"{A9C4E4}"
 #define INCOLOR_DIALOG 		"{A9C4E4}"
+
+
+// niceczlowiek
+#define KARA_SPECJALNA "{800080}"
+#define KARA_BANICJI "{ff0000}"
+#define KARA_BARDZOCIEZKA "{ff0000}"
+#define KARA_CIEZKA "{ff8c00}"
+#define KARA_SREDNIA "{8b4513}"
+#define KARA_LEKKA "{008000}"
+#define KARA_NIEZNACZNA "{00ff00}"
+#define KARA_STRZALKA "{363F45}"
+#define KARA_TEKST2 "{33AA33}"
+#define KARA_TEKST "{f9f9f9}"    

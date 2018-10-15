@@ -30,7 +30,7 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-premium_ConvertToNewSystem(playerid)
+stock premium_ConvertToNewSystem(playerid)
 {
 	if(PlayerInfo[playerid][pDonateRank] != 11 && PlayerInfo[playerid][pDonateRank] != 0)
 	{
@@ -58,7 +58,7 @@ premium_clearCache(playerid)
 	}
 }
 
-premium_loadForPlayer(playerid)
+stock premium_loadForPlayer(playerid)
 {
 
 	if(PlayerInfo[playerid][pDonateRank] != 11 && PlayerInfo[playerid][pDonateRank] != 0)
@@ -186,7 +186,7 @@ premium_printMcQuantity(playerid)
 	return _MruGracz(playerid, sprintf("Aktualnie na Twoim koncie znajduje siê %d MruCoins.", PremiumInfo[playerid][pMC]));
 }
 
-ZabierzKP(playerid)
+stock ZabierzKP(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -207,7 +207,7 @@ ZabierzKP(playerid)
 	}
 }
 
-DajKP(playerid, time, bool:msg=true)
+stock DajKP(playerid, time, bool:msg=true)
 {
 	//PremiumInfo[playerid][pKP] = 1;
 	if(IsPlayerConnected(playerid))
@@ -251,7 +251,7 @@ DajKP(playerid, time, bool:msg=true)
     }
 }
 
-DajMC(playerid, mc)
+stock DajMC(playerid, mc)
 {
 	if(mc <= 0)
 	{
@@ -463,21 +463,21 @@ KupNumerTelefonu(playerid, string:_numer[])
 }
 
 //---< Is >---
-IsPlayerSponsor(playerid)
+stock IsPlayerSponsor(playerid)
 {
 	if(PremiumInfo[playerid][pSponsor] == 1)
 		return 1;
 	return 0;
 }
 
-IsPlayerPremium(playerid)
+stock IsPlayerPremium(playerid)
 {
 	if(PremiumInfo[playerid][pKP] == 1)
 		return 1;
 	return 0;
 }
 
-IsAUnikat(modelid)
+stock IsAUnikat(modelid)
 {
 	for(new i; i<MAX_PREMIUM_VEHICLES; i++)
 		if(modelid == PojazdyPremium[i][Model])
@@ -504,7 +504,7 @@ CMD:dotacje(playerid, params[]) return cmd_premium(playerid, params);
 CMD:premium(playerid, params[])
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
-
+/*
     if(IsPlayerConnected(playerid) && gPlayerLogged[playerid] != 0)
     {
         DialogMenuDotacje(playerid);
@@ -513,14 +513,14 @@ CMD:premium(playerid, params[])
     {
         SendClientMessage(playerid, COLOR_GREY, "B³¹d!");
     }
-    return 1;
+    return 1;*/
 } 
 
 COMMAND:unikat(playerid, params[]) return cmd_premiumskin(playerid, params);
 COMMAND:premiumskin(playerid, params[])
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
-	
+/*	
 	if(isnull(params))
 		return sendTipMessage(playerid, "U¿yj /premiumskin [ID Skina]");
 
@@ -540,23 +540,23 @@ COMMAND:premiumskin(playerid, params[])
 
 	_MruAdmin(playerid, sprintf("Aktywowa³eœ swój unikatowy skin [ID: %d]", skin));
 
-	return 1;
+	return 1;*/
 }
 
 COMMAND:skiny(playerid, params[])
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
-	
+/*	
 	ListPlayerUniqueSkins(playerid);
 
-	return 1;
+	return 1;*/
 }
 
 //----- Admin -----
 CMD:setmc(playerid, params[])
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
-	
+/*	
 	if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
 		new giveplayerid, VARmcVal;
@@ -582,14 +582,14 @@ CMD:setmc(playerid, params[])
 		return 1;
 
 	}
-	else return noAccessMessage(playerid);
+	else return noAccessMessage(playerid);*/
 }
 
 
 CMD:dajkp(playerid, params[])
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
-	
+/*	
 	if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
 		new giveplayerid, givetime;
@@ -618,7 +618,7 @@ CMD:dajkp(playerid, params[])
 		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ KP od Admina %s [ID: %d]", GetNick(playerid, true), playerid));
 		return 1;
 	}
-	else return noAccessMessage(playerid);
+	else return noAccessMessage(playerid);*/
 }
 
 //end

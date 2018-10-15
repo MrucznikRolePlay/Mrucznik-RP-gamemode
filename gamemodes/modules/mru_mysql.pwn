@@ -72,8 +72,8 @@ MruMySQL_CreateAccount(playerid, pass[])
 	if(!MYSQL_ON) return 0;
 	
 	new query[256];
-    new password[64];
-    format(password, 64, "%s", MD5_Hash(pass));
+    new password[129];
+	WP_Hash(password, sizeof(password), pass);
 	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`) VALUES ('%s', '%s')", GetNick(playerid), password);
 	mysql_query(query);
 	return 1;
@@ -407,7 +407,7 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     if(!mysql_query(query)) fault=false;
 
     //Zapis MruCoinow
-    premium_saveMc(playerid);
+    //premium_saveMc(playerid);
 
     saveLegale(playerid);
 
@@ -705,6 +705,14 @@ stock MruMySQL_CheckOpis(uid, typ)
     return 0;
 }
 
+stock MruMySQL_DeleteOpis(uid, typ)
+{
+    new lStr[128];
+    format(lStr, sizeof(lStr), "DELETE FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
+    mysql_query(lStr);
+    return 0;
+}
+
 MruMySQL_LoadAccess(playerid)
 {
     if(!MYSQL_ON) return false;
@@ -718,7 +726,6 @@ MruMySQL_LoadAccess(playerid)
     {
         ACCESS[playerid] = mysql_fetch_int();
         OLD_ACCESS[playerid] = ACCESS[playerid];
-        printf("(PERM) -> Player %d (%d) access flags: %b", playerid, PlayerInfo[playerid][pUID], ACCESS[playerid]);
     }
     mysql_free_result();
     return 1;
@@ -755,7 +762,7 @@ MruMySQL_DoesAccountExist(nick[])
 
 stock MruMySQL_ReturnPassword(nick[])
 {
-	new string[128], key[64];
+	new string[128], key[129];
 	
 	mysql_real_escape_string(nick, nick);
 	format(string, sizeof(string), "SELECT `Key` FROM `mru_konta` WHERE `Nick` = '%s'", nick);
@@ -773,87 +780,6 @@ stock MruMySQL_ReturnPassword(nick[])
 	return key;
 }
 
-StripNewLine(string[])
-{
-  new len = strlen(string);
-  if (string[0]==0) return;
-  if ((string[len - 1] == '\n') || (string[len - 1] == '\r'))
-    {
-      string[len - 1] = 0;
-      if (string[0]==0) return ;
-      if ((string[len - 2] == '\n') || (string[len - 2] == '\r')) string[len - 2] = 0;
-    }
-}
-
-MruMySQL_ConvertAccount(playerid)
-{
-	if(!MYSQL_ON) return 0;
-
-	new string[128], nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-
-    new result = MruMySQL_DoesAccountExist(nick);
-    if(result == -1)
-	{
-		return -1;
-	}
-    else if(result == -999)
-    {
-        return -999;
-    }
-    else
-    {
-        format(string, sizeof(string), "%s.ini", nick);
-		new File: Profile = fopen(string, io_read);
-		if(Profile)
-		{
-			new key[256], val[256], Data[256], Query[1024];
-			
-			format(string, sizeof(string), "INSERT INTO `mru_konta` (`Nick`) VALUES ('%s')", nick);
-			mysql_query(string);
-			
-			format(Query, sizeof(Query), "UPDATE `mru_konta` SET");
-			while(fread(Profile, Data, sizeof(Data)))
-			{
-				key = ini_GetKey(Data);
-				val = ini_GetValue(Data);
-				StripNewLine(val);
-				if(strlen(key) > 1)
-                {
-    				if(strcmp("UID", key, true) != 0)
-    				{
-    					if(strcmp("Adjustable", key, true) == 0) format(Query, sizeof(Query), "%s `Block`='0',", Query);
-                        else if(strfind(key, "Key", true) != -1)
-                        {
-                            if(strcmp("Key", key, true) != 0) strdel(key, 0, 1); //dziwny znak na pocz¹tku fread.
-                            format(Query, sizeof(Query), "%s `Key`='%s',", Query, PlayerInfo[playerid][pKey]);
-                        }
-    					else format(Query, sizeof(Query), "%s `%s`='%s',", Query, key, val);
-    				}
-				}
-				if(strlen(Query) >= 768)
-				{
-                    strdel(Query, strlen(Query)-1, strlen(Query));
-					format(Query, sizeof(Query), "%s WHERE `Nick`='%s'", Query, nick);
-					mysql_query(Query);
-					format(Query, sizeof(Query), "UPDATE `mru_konta` SET ");
-				}
-			}
-			fclose(Profile);
-			
-            strdel(Query, strlen(Query)-1, strlen(Query));
-			format(Query, sizeof(Query), "%s WHERE `Nick`='%s'", Query, nick);
-			mysql_query(Query);
-				
-			printf("[MySQL] Konto gracza %s zostalo przeniesione do MYSQL!", nick);
-
-            format(string, sizeof(string), "%s.ini", nick);
-            dini_Remove(string);
-			return 1;
-		}
-	}
-	return 1;
-}
 
 //--------------------------------------------------------------<[ Kary ]>--------------------------------------------------------------
 
@@ -1152,6 +1078,59 @@ stock MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 	return 0;
 }
 
+MruMySQL_LoadPhoneContacts(playerid)
+{
+	new string[128];
+	format(string, sizeof(string), "SELECT UID, Number, Name FROM mru_kontakty WHERE Owner='%d' LIMIT 10", PlayerInfo[playerid][pUID]); //MAX_KONTAKTY
+	mysql_query(string);
+	mysql_store_result();
+	if(mysql_num_rows()>0)
+	{
+		new i;
+		while(mysql_fetch_row_format(string, "|"))
+		{
+			sscanf(string, "p<|>dds[32]", 
+				Kontakty[playerid][i][eUID], 
+				Kontakty[playerid][i][eNumer], 
+				Kontakty[playerid][i][eNazwa]
+			);
+			i++;
+			if(i == MAX_KONTAKTY) 
+				break;
+		}
+	}
+	mysql_free_result();
+	return 1;
+}
+
+MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
+{
+	new string[128], escapedName[32];
+	mysql_real_escape_string(nazwa, escapedName);
+	format(string, sizeof(string), "INSERT INTO mru_kontakty (Owner, Number, Name) VALUES ('%d', '%d', '%s')", PlayerInfo[playerid][pUID], numer, escapedName);
+	mysql_query(string);
+	
+	new uid = mysql_insert_id();
+	return uid;
+}
+
+MruMySQL_EditPhoneContact(uid, nazwa[])
+{
+	new string[128], escapedName[32];
+	mysql_real_escape_string(nazwa, escapedName);
+	format(string, sizeof(string), "UPDATE mru_kontakty SET Name='%s' WHERE UID='%d'", escapedName, uid);
+	mysql_query(string);
+	return 1;
+}
+
+MruMySQL_DeletePhoneContact(uid)
+{
+	new string[128];
+	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);
+	mysql_query(string);
+	return 1;
+}
+
 public MruMySQL_Error(error[])
 {
     new str[256];
@@ -1169,14 +1148,6 @@ public MruMySQL_Error(error[])
     return 1;
 }
 
-stock IsDialogProtected(dialogid)
-{
-    switch(dialogid)
-    {
-        case D_PANEL_KAR_NADAJ..D_PANEL_KAR_ZNAJDZ_INFO, D_PERM, D_CREATE_ORG_NAME, D_CREATE_ORG_UID, D_PANEL_CHECKPLAYER, D_EDIT_RANG_NAME, D_OPIS_UPDATE, D_VEHOPIS_UPDATE: return true;
-    }
-    return false; //dodac dialogi z mysql
-}
 new bool:MySQL_timeout=false;
 public MySQL_Refresh()
 {
