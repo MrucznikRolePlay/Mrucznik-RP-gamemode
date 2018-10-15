@@ -15898,7 +15898,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			UsunKontakt(playerid, GetPVarInt(playerid, "kontakty-dialog-slot"));
+			UsunKontakt(playerid, PobierzIdKontaktuZDialogu(playerid, listitem));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt usuniêty.");
 		}
 	}
