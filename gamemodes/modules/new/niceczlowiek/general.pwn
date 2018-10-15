@@ -85,7 +85,7 @@ public FabrykaActor_ReCreate()
 
 	new Float:labelZ = ActorZ + 1;
 
-	FabrykaMats::ActorLabel = CreateDynamic3DTextLabel("Handlarz materia³ami\nNaciœnij 'Y' aby pogadaæ", COLOR_GRAD1,ActorX, ActorY, labelZ, 7.5, 0, 1);
+	FabrykaMats::ActorLabel = CreateDynamic3DTextLabel("Handlarz materia³ami\nNaciœnij 'Y' aby pogadaæ", COLOR_GRAD1,ActorX, ActorY, labelZ, 7.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
 
 	return 1;
 }
