@@ -26495,8 +26495,8 @@ CMD:ah(playerid)
 	{
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /zawodnik /dajkm /zuzel_start /zuzel_stop /rapidfly /fuelcar");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /getposp /gotopos  /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
-        SendClientMessage(playerid, COLOR_GRAD1, "*5* ADMIN *** /gotomechy /gotobank /gotostacja");
-		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom NEW: /anulujzp");
+        SendClientMessage(playerid, COLOR_GRAD4, "*5* ADMIN *** /gotobank /gotostacja");
+		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /tod /gethere /dajdowozu /checkdom /anulujzp");
 	}
 	if (PlayerInfo[playerid][pAdmin] == 7)
 	{
@@ -32967,6 +32967,12 @@ CMD:akceptuj(playerid, params[])
 			if(!CzyMaWolnySlotNaKontakt(playerid))
 			{
 				sendErrorMessage(playerid, "Osi¹gn¹³eœ maksymaln¹ liczbê kontaktów.");
+				return 1;
+			}
+			
+			if(!ProxDetectorS(playerid, dawacz, 10.0))
+			{
+				sendErrorMessage(playerid, "Jesteœ za daleko od gracza, który oferowa³ Ci wizytówkê.");
 				return 1;
 			}
 			

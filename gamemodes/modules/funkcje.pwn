@@ -7515,7 +7515,7 @@ SendSMSMessage(senderNumber, reciverid, message[])
 {
 	new string[256];
 	
-	new slotKontaktu = PobierzSlotKontaktuPoNumerze(reciverid, PlayerInfo[reciverid][pPnumber]);
+	new slotKontaktu = PobierzSlotKontaktuPoNumerze(reciverid, senderNumber);
 	if(slotKontaktu >= 0)
 	{
 		format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", message, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
