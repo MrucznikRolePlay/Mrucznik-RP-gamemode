@@ -32971,7 +32971,7 @@ CMD:akceptuj(playerid, params[])
 				return 1;
 			}
 			
-			if(CzyKontaktIstnieje(playerid, numer))
+			if(CzyKontaktIstnieje(playerid, PlayerInfo[dawacz][pPnumber]))
 			{
 				sendErrorMessage(playerid, "Ten numer ju¿ istnieje w Twoich kontaktach.");
 				return 1;
