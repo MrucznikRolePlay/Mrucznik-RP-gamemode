@@ -387,6 +387,7 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 
 //bugozord
 #define MAX_KONTAKTY	10
+#define MAX_KONTAKT_NAME 32
 
 //22.06
 #define MAX_FRAC        20

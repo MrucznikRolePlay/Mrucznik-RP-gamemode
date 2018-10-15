@@ -3,7 +3,7 @@
 //bugozord 2.5.93
 enum eKontakty {
 	eUID,
-	eNazwa[32],
+	eNazwa[MAX_KONTAKT_NAME],
 	eNumer
 };
 new Kontakty[MAX_PLAYERS][MAX_KONTAKTY][eKontakty];

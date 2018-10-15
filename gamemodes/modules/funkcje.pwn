@@ -129,8 +129,6 @@ stock saveKevlarPos(playerid, recurention=1)
 	{
 		format(lStr, sizeof lStr, "INSERT INTO `mru_kevlar` (`pID`,`offsetX`, `offsetY`, `offsetZ`, `rotX`, `rotY`, `rotZ`, `scaleX`, `scaleY`, `scaleZ`) VALUES (%d, 0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2,1.0)", PlayerInfo[playerid][pUID]);
 
-		printf(lStr);
-
 		db_free_result(db_query(db_handle, lStr));
 
 		if(recurention)
@@ -139,8 +137,6 @@ stock saveKevlarPos(playerid, recurention=1)
 	else
 	{
 		format(lStr, sizeof lStr, "UPDATE mru_kevlar SET offsetX=%f, offsetY=%f, offsetZ=%f, rotX=%f, rotY=%f, rotZ=%f, scaleX=%f, scaleY=%f, scaleZ=%f WHERE pID = %d", GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"), PlayerInfo[playerid][pUID]);
-
-		printf(lStr);
 
 		db_free_result(db_query(db_handle, lStr));
 	}
@@ -7660,7 +7656,7 @@ DodajKontakt(playerid, nazwa[], numer)
 {
 	new slot = PobierzWolnySlotNaKontakt(playerid);
 	if(slot == -1) return 0; //error
-	format(Kontakty[playerid][slot][eNazwa], 32, "%s", nazwa);
+	format(Kontakty[playerid][slot][eNazwa], MAX_KONTAKT_NAME, "%s", nazwa);
 	Kontakty[playerid][slot][eNumer] = numer;
 	Kontakty[playerid][slot][eUID] = MruMySQL_AddPhoneContact(playerid, nazwa, numer);
 	return 1;
@@ -7668,7 +7664,7 @@ DodajKontakt(playerid, nazwa[], numer)
 
 EdytujKontakt(playerid, slot, nazwa[])
 {
-	format(Kontakty[playerid][slot][eNazwa], 32, "%s", nazwa);
+	format(Kontakty[playerid][slot][eNazwa], MAX_KONTAKT_NAME, "%s", nazwa);
 	MruMySQL_EditPhoneContact(Kontakty[playerid][slot][eUID], nazwa);
 	return 1;
 }
@@ -7678,27 +7674,26 @@ UsunKontakt(playerid, slot)
 	MruMySQL_DeletePhoneContact(Kontakty[playerid][slot][eUID]);
 	
 	Kontakty[playerid][slot][eUID] = 0;
-	format(Kontakty[playerid][slot][eNazwa], 32, "%s", "");
+	format(Kontakty[playerid][slot][eNazwa], MAX_KONTAKT_NAME, "%s", "");
 	Kontakty[playerid][slot][eNumer] = 0;
 	return 1;
 }
 
 PobierzIdKontaktuZDialogu(playerid, listitem)
 {
-	new id = 0, l = listitem;
+	new count = listitem+1;
 	for(new i; i<MAX_KONTAKTY; i++)
 	{
-		if(l == 0)
-		{
-			return id;
-		}
-		id++;
 		if(Kontakty[playerid][i][eNumer] != 0)
 		{
-			l--;
+			count--;
+		}
+		if(count == 0)
+		{
+			return i;
 		}
 	}
-	return id;
+	return -1;
 }
 
 ZerujKontakty(playerid)

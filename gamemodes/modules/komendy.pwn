@@ -19477,16 +19477,16 @@ CMD:kontakty(playerid, params[])
 			return 1;
 		}
 	
-		new nazwa[33], numer;
-		if(sscanf(params, "s[32]ds[33]", opcja, numer, nazwa))
+		new nazwa[MAX_KONTAKT_NAME+1], numer;
+		if(sscanf(params, "s[32]ds["#MAX_KONTAKT_NAME+1"]", opcja, numer, nazwa))
 		{
 			sendTipMessage(playerid, "U¿yj /kontakty dodaj [numer] [nazwa - max 32znaki]");
 			return 1;
 		}
 		
-		if(strlen(nazwa) > 32)
+		if(strlen(nazwa) > MAX_KONTAKT_NAME)
 		{
-			sendErrorMessage(playerid, "Nazwa kontaktu mo¿e mieæ maksymalnie 32 znaki!");
+			sendErrorMessage(playerid, "Nazwa kontaktu mo¿e mieæ maksymalnie "#MAX_KONTAKT_NAME" znaki!");
 			return 1;
 		}
 		
@@ -19533,8 +19533,8 @@ CMD:wizytowka(playerid, params[])
 		return 1;
 	}
 
-	new giveplayerid, nazwa[32], string[128];
-	format(string, sizeof(string), "k<fix>S(%s)[32]", GetNick(playerid));
+	new giveplayerid, nazwa[MAX_KONTAKT_NAME+1], string[128];
+	format(string, sizeof(string), "k<fix>S(%s)["#MAX_KONTAKT_NAME+1"]", GetNick(playerid));
 	if(sscanf(params, string, giveplayerid, nazwa))
 	{
 		sendTipMessage(playerid, "U¿yj /wizytowka [ID/Nick Gracza] (nazwa - domyœlnie nick)");
@@ -19568,6 +19568,12 @@ CMD:wizytowka(playerid, params[])
 	if(GetPVarInt(giveplayerid, "wizytowka") == playerid)
 	{
 		sendErrorMessage(playerid, "Ju¿ oferujesz temu graczowi swoj¹ wizytówkê."); 
+		return 1;
+	}
+	
+	if(strlen(nazwa) > MAX_KONTAKT_NAME)
+	{
+		sendErrorMessage(playerid, "Nazwa kontaktu mo¿e mieæ maksymalnie "#MAX_KONTAKT_NAME" znaki!");
 		return 1;
 	}
 	
@@ -32972,7 +32978,7 @@ CMD:akceptuj(playerid, params[])
             ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 			
 			GetPVarString(playerid, "wizytowka-nazwa", nazwa, sizeof(nazwa));
-			format(string, sizeof(string), "dodaj %d %s", dawacz, nazwa);
+			format(string, sizeof(string), "dodaj %d %s", PlayerInfo[dawacz][pPnumber], nazwa);
 			SetPVarInt(playerid, "wizytowka", -1);
 			cmd_kontakty(playerid, string);
 		}
