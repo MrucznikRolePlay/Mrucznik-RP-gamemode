@@ -371,9 +371,9 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define D_KONTAKTY_SMS					10101
 #define D_KONTAKTY_SMS_WIADOMOSC		10102
 #define D_KONTAKTY_EDYTUJ				10103
-#define D_KONTAKTY_EDYTUJ_NOWA_NAZWA	10103
-#define D_KONTAKTY_USUN					10104
-#define D_KONTAKTY_LISTA				10105
+#define D_KONTAKTY_EDYTUJ_NOWA_NAZWA	10104
+#define D_KONTAKTY_USUN					10105
+#define D_KONTAKTY_LISTA				10106
 
 
 //------------------------------------------------------------------------------
