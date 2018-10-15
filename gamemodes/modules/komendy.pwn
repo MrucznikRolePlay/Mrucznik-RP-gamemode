@@ -19490,6 +19490,12 @@ CMD:kontakty(playerid, params[])
 			return 1;
 		}
 		
+		if(CzyKontaktIstnieje(playerid, numer))
+		{
+			sendErrorMessage(playerid, "Ten numer ju¿ istnieje w Twoich kontaktach.");
+			return 1;
+		}
+		
 		DodajKontakt(playerid, nazwa, numer);
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt dodany.");
 	}

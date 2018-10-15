@@ -704,6 +704,24 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 
 				showChangeLog(playerid);
 			}
+			case 14:
+			{
+				SendClientMessage(playerid,COLOR_P@,"|_____________________________Lista zmian_____________________________|");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Nowoœci   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Obiekty   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Poprawki b³êdów   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"");
+				if(PlayerInfo[playerid][pAdmin] >= 1)
+				{
+					SendClientMessage(playerid,COLOR_BLUE,"----------   Komendy i poprawki   ---------");
+					SendClientMessage(playerid,COLOR_WHITE,"");
+				}
+				SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.5.93 <<<_______________________|");
+
+				showChangeLog(playerid);
+			}
 		}
 	}
 	return 0;
@@ -728,7 +746,8 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.9\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.811\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.810\n", string);
-		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.92", string);
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.92\n", string);
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.93", string);
 		ShowPlayerDialogEx(playerid, 1962, DIALOG_STYLE_LIST, "Wybierz aktualizacjê", string, "Ok", "WyjdŸ");
 	}
 	return 1;

@@ -7652,6 +7652,18 @@ bool:CzyMaWolnySlotNaKontakt(playerid)
 	return PobierzWolnySlotNaKontakt(playerid) != -1;
 }
 
+bool:CzyKontaktIstnieje(playerid, numer)
+{
+	for(new i; i<MAX_KONTAKTY; i++)
+	{
+		if(Kontakty[playerid][i][eNumer] == numer)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 DodajKontakt(playerid, nazwa[], numer)
 {
 	new slot = PobierzWolnySlotNaKontakt(playerid);
