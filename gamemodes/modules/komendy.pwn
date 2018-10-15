@@ -32976,7 +32976,7 @@ CMD:akceptuj(playerid, params[])
 				return 1;
 			}
 			
-			if(!ProxDetectorS(playerid, dawacz, 10.0))
+			if(!ProxDetectorS(10.0, playerid, dawacz))
 			{
 				sendErrorMessage(playerid, "Jesteœ za daleko od gracza, który oferowa³ Ci wizytówkê.");
 				return 1;
