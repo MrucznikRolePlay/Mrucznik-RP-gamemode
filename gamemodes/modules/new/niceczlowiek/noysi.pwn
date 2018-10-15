@@ -765,7 +765,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 					SendClientMessage(playerid,COLOR_WHITE,"Naprawiono /spec");
 					SendClientMessage(playerid,COLOR_WHITE,"Usuniêcie komunikatu o /q na /spec");
 					SendClientMessage(playerid,COLOR_WHITE,"Nowe prace do wyboru pod komend¹ /setstat");
-					SendClientMessage(playerid,COLOR_WHITE,"Nowe komendy dla Pó³Administratorów(/warn, /unbw, /pogodaall)");
+					SendClientMessage(playerid,COLOR_WHITE,"Nowe komendy dla Pó³Administratorów: /pwarn, /warn, /unbw, /pogodaall");
 					SendClientMessage(playerid,COLOR_WHITE,"Nowa komenda /czyjtonumer(sprawdza do kogo nalezy dany numer telefonu)");
 					SendClientMessage(playerid,COLOR_WHITE,"Naprawa b³êdu zwi¹zanego z /dowod, /pl na specu");
 					SendClientMessage(playerid,COLOR_WHITE,"Naprawienie komendy /mole");
