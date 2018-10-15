@@ -759,7 +759,20 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 				if(PlayerInfo[playerid][pAdmin] >= 1)
 				{
 					SendClientMessage(playerid,COLOR_BLUE,"----------   Dla administracji   ---------");
-					SendClientMessage(playerid,COLOR_WHITE,"Zostanie uzupe³nione wkrótce.");
+					SendClientMessage(playerid,COLOR_WHITE,"Stworzenie nowych komend: /tankveh, /gotobank, /gotostacja");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawiono komendy: /gotosalon, /gotomechy, /gotoadmin, /gotostad");
+					SendClientMessage(playerid,COLOR_WHITE,"Poprawa literówek w komendach administracyjnych");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawiono /spec");
+					SendClientMessage(playerid,COLOR_WHITE,"Usuniêcie komunikatu o /q na /spec");
+					SendClientMessage(playerid,COLOR_WHITE,"Nowe prace do wyboru pod komend¹ /setstat");
+					SendClientMessage(playerid,COLOR_WHITE,"Nowe komendy dla Pó³Administratorów(/warn, /unbw, /pogodaall)");
+					SendClientMessage(playerid,COLOR_WHITE,"Nowa komenda /czyjtonumer(sprawdza do kogo nalezy dany numer telefonu)");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawa b³êdu zwi¹zanego z /dowod, /pl na specu");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawienie komendy /mole");
+					SendClientMessage(playerid,COLOR_WHITE,"Dodanie /addcar i /removecar dla KO");
+					SendClientMessage(playerid,COLOR_WHITE,"Dodanie komendy /usunopisveh dla panelu KO");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawa /panel unwarn gdy gracz jest online");
+					SendClientMessage(playerid,COLOR_WHITE,"Naprawa panelu KO");
 				}
 				SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.5.93 <<<_______________________|");
 
