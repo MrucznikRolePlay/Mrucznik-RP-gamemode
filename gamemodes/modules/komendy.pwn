@@ -19477,22 +19477,22 @@ CMD:kontakty(playerid, params[])
 			return 1;
 		}
 	
-		new nazwa[MAX_KONTAKT_NAME+1], numer;
-		if(sscanf(params, "s[32]ds["#MAX_KONTAKT_NAME+1"]", opcja, numer, nazwa))
+		new nazwa[MAX_KONTAKT_NAME_1], numer;
+		if(sscanf(params, "s[32]ds["#MAX_KONTAKT_NAME_1"]", opcja, numer, nazwa))
 		{
 			sendTipMessage(playerid, "U¿yj /kontakty dodaj [numer] [nazwa - max 32znaki]");
-			return 1;
-		}
-		
-		if(strlen(nazwa) > MAX_KONTAKT_NAME)
-		{
-			sendErrorMessage(playerid, "Nazwa kontaktu mo¿e mieæ maksymalnie "#MAX_KONTAKT_NAME" znaki!");
 			return 1;
 		}
 		
 		if(CzyKontaktIstnieje(playerid, numer))
 		{
 			sendErrorMessage(playerid, "Ten numer ju¿ istnieje w Twoich kontaktach.");
+			return 1;
+		}
+		
+		if(strlen(nazwa) > MAX_KONTAKT_NAME)
+		{
+			sendErrorMessage(playerid, "Nazwa kontaktu mo¿e mieæ maksymalnie "#MAX_KONTAKT_NAME" znaki!");
 			return 1;
 		}
 		
@@ -19539,8 +19539,8 @@ CMD:wizytowka(playerid, params[])
 		return 1;
 	}
 
-	new giveplayerid, nazwa[MAX_KONTAKT_NAME+1], string[128];
-	format(string, sizeof(string), "k<fix>S(%s)["#MAX_KONTAKT_NAME+1"]", GetNick(playerid));
+	new giveplayerid, nazwa[MAX_KONTAKT_NAME_1], string[128];
+	format(string, sizeof(string), "k<fix>S(%s)["#MAX_KONTAKT_NAME_1"]", GetNick(playerid));
 	if(sscanf(params, string, giveplayerid, nazwa))
 	{
 		sendTipMessage(playerid, "U¿yj /wizytowka [ID/Nick Gracza] (nazwa - domyœlnie nick)");

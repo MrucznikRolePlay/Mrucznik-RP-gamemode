@@ -15884,9 +15884,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(strlen(inputtext) > 32)
+			if(strlen(inputtext) > MAX_KONTAKT_NAME)
 			{
-				sendErrorMessage(playerid, "Nazwa nie mo¿e byæ d³u¿sza ni¿ 32 znaki");
+				sendErrorMessage(playerid, "Nazwa nie mo¿e byæ d³u¿sza ni¿ "#MAX_KONTAKT_NAME" znaki");
 				ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Zmieñ", "Anuluj");
 			}
 		
