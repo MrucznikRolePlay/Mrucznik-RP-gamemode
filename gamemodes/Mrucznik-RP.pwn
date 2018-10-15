@@ -7135,11 +7135,11 @@ public OnPlayerText(playerid, text[])
 				new slotKontaktu = PobierzSlotKontaktuPoNumerze(Mobile[playerid], PlayerInfo[playerid][pPnumber]);
 				if(slotKontaktu >= 0)
 				{
-					format(string, sizeof(string), "Telefon (nr %d): %s", PlayerInfo[playerid][pPnumber], text);
+					format(string, sizeof(string), "%s (nr %d): %s", Kontakty[Mobile[playerid]][slotKontaktu][eNazwa], PlayerInfo[playerid][pPnumber], text);
 				}
 				else
 				{
-					format(string, sizeof(string), "%s (nr %d): %s", Kontakty[Mobile[playerid]][slotKontaktu][eNazwa], PlayerInfo[playerid][pPnumber], text);
+					format(string, sizeof(string), "Telefon (nr %d): %s", PlayerInfo[playerid][pPnumber], text);
 				}
 				SendClientMessage(Mobile[playerid], COLOR_YELLOW, string);
 			}
@@ -7156,21 +7156,6 @@ public OnPlayerText(playerid, text[])
 	    {
 	        return 0;
       	}
-		/*if(GetPlayerState(playerid) == 2 || GetPlayerState(playerid) == 3)
-      	{
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "%s mówi (w pojeŸdzie): %s", sendername, text);
-			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-			SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-		}
-		else
-		{
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-      		format(string, sizeof(string), "%s mówi: %s", sendername, text);
-			ProxDetector(20.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-			SetPlayerChatBubble(playerid,text,COLOR_FADE1,20.0,8000);
-    		ApplyAnimation(playerid,"PED","IDLE_CHAT",4.0,0,0,0,4,4);
-		} */
         if(strlen(text) < 78)
         {
             format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), text);
