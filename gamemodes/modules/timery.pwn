@@ -990,9 +990,11 @@ public Spectator()
 		{
 			if(playerState >= 1 && playerState <= 6)
 			{
-				if(WeaponAC(i))
+				new ac_val = WeaponAC(i);
+				if(ac_val)
 				{
-					SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+					format(string, sizeof(string), "Dosta³eœ kicka od systemu, powód: Spawn Broni [%d]", ac_val);
+					SendClientMessage(i, COLOR_PANICRED, string);
 					KickEx(i);
 				}
 				if(weaponID >= 2 && weaponID <= 45)

@@ -12183,7 +12183,7 @@ WeaponAC(playerid)
 		GetPlayerWeaponData(playerid, i, weapons[i][0], weapons[i][1]);
 		if(CheckWeaponAC(playerid, i, weapons[i][0]))
 		{
-			return true;
+			return i;
 		}
 	}
 	return false;
@@ -12191,20 +12191,19 @@ WeaponAC(playerid)
 
 CheckWeaponAC(playerid, slot, gun)
 {
-	if(slot == 0) return PlayerInfo[playerid][pGun0] != gun;
-	else if(slot == 1) return PlayerInfo[playerid][pGun1] != gun;
-	else if(slot == 2) return PlayerInfo[playerid][pGun2] != gun;
-	else if(slot == 3) return PlayerInfo[playerid][pGun3] != gun;
-	else if(slot == 4) return PlayerInfo[playerid][pGun4] != gun;
-	else if(slot == 5) return PlayerInfo[playerid][pGun5] != gun;
-	else if(slot == 6) return PlayerInfo[playerid][pGun6] != gun;
-	else if(slot == 7) return PlayerInfo[playerid][pGun7] != gun;
-	else if(slot == 8) return PlayerInfo[playerid][pGun8] != gun;
-	else if(slot == 9) return PlayerInfo[playerid][pGun9] != gun;
-	else if(slot == 10) return PlayerInfo[playerid][pGun10] != gun;
-	else if(slot == 11) return PlayerInfo[playerid][pGun11] != gun;
-	else if(slot == 12) return PlayerInfo[playerid][pGun12] != gun;
-	return false;
+	if(slot == 1 && PlayerInfo[playerid][pGun1] != gun) return slot;
+	if(slot == 2 && PlayerInfo[playerid][pGun2] != gun) return slot;
+	if(slot == 3 && PlayerInfo[playerid][pGun3] != gun) return slot;
+	if(slot == 4 && PlayerInfo[playerid][pGun4] != gun) return slot;
+	if(slot == 5 && PlayerInfo[playerid][pGun5] != gun) return slot;
+	if(slot == 6 && PlayerInfo[playerid][pGun6] != gun) return slot;
+	if(slot == 7 && PlayerInfo[playerid][pGun7] != gun) return slot;
+	if(slot == 8 && PlayerInfo[playerid][pGun8] != gun) return slot;
+	if(slot == 9 && PlayerInfo[playerid][pGun9] != gun) return slot;
+	if(slot == 10 && PlayerInfo[playerid][pGun10] != gun) return slot;
+	if(slot == 11 && PlayerInfo[playerid][pGun11] != gun) return slot;
+	if(slot == 12 && PlayerInfo[playerid][pGun12] != gun) return slot;
+	return 0;
 }
 
 //--------------------------------------------------
