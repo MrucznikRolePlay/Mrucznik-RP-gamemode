@@ -12202,7 +12202,6 @@ CheckWeaponAC(playerid, slot, gun)
 	if(slot == 9 && PlayerInfo[playerid][pGun9] != gun) return slot;
 	if(slot == 10 && PlayerInfo[playerid][pGun10] != gun) return slot;
 	if(slot == 11 && PlayerInfo[playerid][pGun11] != gun) return slot;
-	if(slot == 12 && PlayerInfo[playerid][pGun12] != gun) return slot;
 	return 0;
 }
 
