@@ -6275,12 +6275,6 @@ public OnVehicleDeath(vehicleid, killerid)
 	#if DEBUG == 1
 		printf("%s[%d] OnVehicleDeath pojazd %d - begin", GetNick(killerid), killerid, vehicleid);
 	#endif
-	if(IsVehicleEmpty(vehicleid))
-	{
-	    new string[128];
-	    format(string, sizeof string, "ACv2 [#2004]: %s mo¿e u¿ywaæ czita na niszczenie pojazdów.", GetNick(killerid, true));
-        SendCommandLogMessage(string);
-	}
 	if(GetVehicleModel(vehicleid) == 577)
 	{
         foreach(Player, i)

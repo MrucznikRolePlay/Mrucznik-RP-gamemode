@@ -15877,19 +15877,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			SetPVarInt(playerid, "kontakty-dialog-slot", PobierzIdKontaktuZDialogu(playerid, listitem));
-			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Zmieñ", "Anuluj");
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu.\nMaksymalnie "#MAX_KONTAKT_NAME" znaki", "Zmieñ", "Anuluj");
 		}
 	}
 	else if(dialogid == D_KONTAKTY_EDYTUJ_NOWA_NAZWA)
 	{
 		if(response)
 		{
-			if(strlen(inputtext) > MAX_KONTAKT_NAME)
-			{
-				sendErrorMessage(playerid, "Nazwa nie mo¿e byæ d³u¿sza ni¿ "#MAX_KONTAKT_NAME" znaki");
-				ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadŸ now¹ nazwê kontaktu:", "Zmieñ", "Anuluj");
-			}
-		
 			EdytujKontakt(playerid, GetPVarInt(playerid, "kontakty-dialog-slot"), inputtext);
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt edytowany.");
 		}

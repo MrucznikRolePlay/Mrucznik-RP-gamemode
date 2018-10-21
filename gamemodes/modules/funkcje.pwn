@@ -3814,6 +3814,10 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             SendClientMessage(playerid, COLOR_WHITE, "W naszym kasynie obowi¹zuj¹ nastêpuj¹ce stawki za rozpoczêcie gry:");
             SendClientMessage(playerid, COLOR_GREEN, "Kostki - (0.5 proc. podatku) za rzut /kostka || Black Jack - 100$ za kartê /oczko");
             SendClientMessage(playerid, COLOR_GREEN, "Ko³o fortuny - 5 000$ za obrót /kf || Ruletka - 10 000$ za zakrêcenie /ruletka");
+        }
+		
+		if(vw == 55)
+		{
             SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
             SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
             SendClientMessage(playerid, COLOR_WHITE, "Okazuje siê, ¿e do kasyna nie mozna wnosiæ broni.");
@@ -3822,7 +3826,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 			
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
             ResetPlayerWeapons(playerid);
-        }
+		}
 		
 		if(strlen(komunikat) > 0)
 		{
@@ -12169,6 +12173,40 @@ stock SetPlayerInteriorEx(playerid, int)
 	PlayerInfo[playerid][pInt] = int;
 	return 1;
 }
+
+WeaponAC(playerid)
+{	
+	new weapons[13][2];
+ 
+	for (new i = 0; i <= 12; i++)
+	{
+		GetPlayerWeaponData(playerid, i, weapons[i][0], weapons[i][1]);
+		if(CheckWeaponAC(playerid, i, weapons[i][0]))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+CheckWeaponAC(playerid, slot, gun)
+{
+	if(slot == 0) return PlayerInfo[playerid][pGun0] != gun;
+	else if(slot == 1) return PlayerInfo[playerid][pGun1] != gun;
+	else if(slot == 2) return PlayerInfo[playerid][pGun2] != gun;
+	else if(slot == 3) return PlayerInfo[playerid][pGun3] != gun;
+	else if(slot == 4) return PlayerInfo[playerid][pGun4] != gun;
+	else if(slot == 5) return PlayerInfo[playerid][pGun5] != gun;
+	else if(slot == 6) return PlayerInfo[playerid][pGun6] != gun;
+	else if(slot == 7) return PlayerInfo[playerid][pGun7] != gun;
+	else if(slot == 8) return PlayerInfo[playerid][pGun8] != gun;
+	else if(slot == 9) return PlayerInfo[playerid][pGun9] != gun;
+	else if(slot == 10) return PlayerInfo[playerid][pGun10] != gun;
+	else if(slot == 11) return PlayerInfo[playerid][pGun11] != gun;
+	else if(slot == 12) return PlayerInfo[playerid][pGun12] != gun;
+	return false;
+}
+
 //--------------------------------------------------
 
 public AddsOn()
