@@ -986,16 +986,15 @@ public Spectator()
         weaponID = GetPlayerWeapon(i);
         playerState = GetPlayerState(i);
 
-		if(WeaponAC(i))
-		{
-			SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-			KickEx(i);
-		}
 		if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
 		{
-			if(playerState == 1 || playerState == 2 || playerState == 3)
+			if(playerState >= 1 && playerState <= 6)
 			{
-				
+				if(WeaponAC(i))
+				{
+					SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
+					KickEx(i);
+				}
 				if(weaponID >= 2 && weaponID <= 45)
 				{
                     switch(weaponID)
