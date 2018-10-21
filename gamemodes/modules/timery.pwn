@@ -993,9 +993,16 @@ public Spectator()
 				new ac_val = WeaponAC(i);
 				if(ac_val)
 				{
-					format(string, sizeof(string), "Dosta³eœ kicka od systemu, powód: Spawn Broni [%d]", ac_val);
-					SendClientMessage(i, COLOR_PANICRED, string);
-					KickEx(i);
+					if(AntySpawnBroni[i] >= 1)
+					{
+						AntySpawnBroni[i] --;
+					}
+					else
+					{
+						format(string, sizeof(string), "Dosta³eœ kicka od systemu, powód: Spawn Broni [%d]", ac_val);
+						SendClientMessage(i, COLOR_PANICRED, string);
+						KickEx(i);
+					}
 				}
 				if(weaponID >= 2 && weaponID <= 45)
 				{
