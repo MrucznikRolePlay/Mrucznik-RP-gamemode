@@ -17148,6 +17148,18 @@ CMD:megafon(playerid, params[])
                 return sendTipMessage(playerid, "Jako sêdzia mo¿esz u¿ywaæ mikrofonu tylko na sali rozpraw!");
             }
         }
+        else if(GetPlayerOrg(playerid) == FRAC_GOV && PlayerInfo[playerid][pRank] > 2)
+        {
+            if(IsPlayerInRangeOfPoint(playerid, 5.0, 1471.2521,-1825.2295,78.3412)) //mikrofon na sali
+            {
+                format(string, sizeof(string), "[Wyk³adowca %s: %s]", sendername, params);
+                ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+            }
+            else
+            {
+                return sendTipMessage(playerid, "Jako urzêdnik mo¿esz u¿ywaæ mikrofonu tylko na sali wyk³adowczej! ");
+            }
+        }
 		else
 		{
 		    noAccessMessage(playerid);
