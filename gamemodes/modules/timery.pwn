@@ -2195,7 +2195,17 @@ public JednaSekundaTimer()
         GetPlayerPos(i, x, y, z);
 		GetPlayerArmour(i, pancerzyy);
         vehicleid = GetPlayerVehicleID(i);
-		
+        
+        new rpggun;
+        new rpgammo;
+        GetPlayerWeaponData(i, 7, rpggun, rpgammo);
+        if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][pAdmin] < 1)//rpg czit
+        {
+			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
+			format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i, true));
+			SendCommandLogMessage(string);
+			KickEx(i);
+		}
 		//dzwonek telefonu
 		if(RingTone[i] > 0 && Mobile[i] >= 0)
 		{
