@@ -17172,6 +17172,12 @@ CMD:megafon(playerid, params[])
 	return 1;
 }
 
+CMD:test(playerid) 
+{
+    SendClientMessage(playerid, -1, "Test pushowania.");
+    return 1;
+}
+
 
 CMD:radio(playerid, params[]) return cmd_r(playerid, params);
 CMD:r(playerid, params[])
