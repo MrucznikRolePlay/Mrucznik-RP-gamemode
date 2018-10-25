@@ -2199,10 +2199,10 @@ public JednaSekundaTimer()
         new rpggun;
         new rpgammo;
         GetPlayerWeaponData(i, 7, rpggun, rpgammo);
-        if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][pAdmin] < 1)//rpg czit
+        if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][pAdmin] < 1 && PlayerInfo[i][pGun7] != 35)//rpg czit
         {
 			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
-			format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i, true));
+			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i, true));
 			SendCommandLogMessage(string);
 			KickEx(i);
 		}
