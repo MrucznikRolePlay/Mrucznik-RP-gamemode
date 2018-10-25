@@ -4584,14 +4584,14 @@ CMD:dmv_info(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-		if(!IsAUrzednik(playerid) && !IsABOR(playerid))
+		if(!IsAUrzednik(playerid))
 		{
- 			sendErrorMessage(playerid, "Nie jesteœ urzêdnikiem / agentem GSA!");
+ 			sendErrorMessage(playerid, "Nie jesteœ urzêdnikiem!");
 		    return 1;
 		}
-		if(PlayerInfo[playerid][pRank] < 3)
+		if(PlayerInfo[playerid][pRank] < 2)
 		{
-		    sendErrorMessage(playerid, "Musisz mieæ 3 range aby tego u¿ywaæ!");
+		    sendErrorMessage(playerid, "Musisz mieæ 2 range aby tego u¿ywaæ!");
 		    return 1;
 		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
