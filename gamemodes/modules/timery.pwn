@@ -2175,7 +2175,7 @@ public RPGTimer()
 			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
 			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i, true));
 			SendCommandLogMessage(string);
-			KickEx(i);
+			Kick(i);
 		}
 	}
 	return 1;
