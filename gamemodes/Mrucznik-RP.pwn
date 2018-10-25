@@ -5133,6 +5133,7 @@ public OnGameModeInit()
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
+    SetTimer("RPGTimer", 100, true);
 
     for(new i=0;i<MAX_VEHICLES;i++)
     {
