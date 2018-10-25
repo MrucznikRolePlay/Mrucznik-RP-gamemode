@@ -4612,6 +4612,45 @@ CMD:dmv_info(playerid, params[])
 	}
 	return 1;
 }
+
+CMD:usss(playerid, params[]) return cmd_usss_info(playerid, params);
+CMD:usss_info(playerid, params[])
+{
+    new string[256];
+    new sendername[MAX_PLAYER_NAME];
+
+    if(IsPlayerConnected(playerid))
+    {
+        if(!IsABOR(playerid))
+        {
+            sendErrorMessage(playerid, "Nie jesteœ agentem USSS!");
+            return 1;
+        }
+        if(PlayerInfo[playerid][pRank] < 3)
+        {
+            sendErrorMessage(playerid, "Musisz mieæ 3 range aby tego u¿ywaæ!");
+            return 1;
+        }
+        GetPlayerName(playerid, sendername, sizeof(sendername));
+        if(isnull(params))
+        {
+            sendTipMessage(playerid, "U¿yj (/usss)-info [tekst]");
+            return 1;
+        }
+        if(PlayerInfo[playerid][pBP] >= 1)
+        {
+            format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
+            sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
+            return 1;
+        }
+        SendClientMessageToAll(COLOR_WHITE, "|___________ United States Secret Service ___________|");
+        format(string, sizeof(string), "Agent %s: %s", sendername, params);
+        SendClientMessageToAll(COLOR_PURPLE, string);
+    }
+    return 1;
+}
+
+
 CMD:armia(playerid, params[])
 {
 	new string[256];
@@ -17136,6 +17175,18 @@ CMD:megafon(playerid, params[])
 			format(string, sizeof(string), "[Stra¿ak %s:o< %s]", sendername, params);
 			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
+        else if((PlayerInfo[playerid][pMember] == 11 || PlayerInfo[playerid][pLider] == 11) && PlayerInfo[playerid][pRank] >= 5)
+        {
+            if(IsPlayerInRangeOfPoint(playerid, 5.0, 1471.2521,-1825.2295,78.3412))
+            {
+                format(string, sizeof(string), "[Wyk³adowca %s: %s]", sendername, params);
+                ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+            }
+            else
+            {
+                return sendTipMessage(playerid, "Jako wyk³adowca mo¿esz u¿ywaæ mikrofonu tylko na sali wyk³adowczej!");
+            }
+        }
         else if(GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
         {
             if(IsPlayerInRangeOfPoint(playerid, 5.0, 1310.2848,-1299.7623,36.9401))
@@ -17148,18 +17199,6 @@ CMD:megafon(playerid, params[])
                 return sendTipMessage(playerid, "Jako sêdzia mo¿esz u¿ywaæ mikrofonu tylko na sali rozpraw!");
             }
         }
-        else if(GetPlayerOrg(playerid) == FRAC_GOV && PlayerInfo[playerid][pRank] > 2)
-        {
-            if(IsPlayerInRangeOfPoint(playerid, 5.0, 1471.2521,-1825.2295,78.3412)) //DMV MIKRO
-            {
-                format(string, sizeof(string), "[Wyk³adowca %s: %s]", sendername, params);
-                ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-            }
-            else
-            {
-                return sendTipMessage(playerid, "Jako urzêdnik mo¿esz u¿ywaæ mikrofonu tylko na sali wyk³adowczej! ");
-            }
-        }
 		else
 		{
 		    noAccessMessage(playerid);
@@ -17170,12 +17209,6 @@ CMD:megafon(playerid, params[])
 		SetPlayerChatBubble(playerid,string,COLOR_YELLOW,30.0,8000);
 	}
 	return 1;
-}
-
-CMD:test(playerid) 
-{
-    SendClientMessage(playerid, -1, "Test pushowania.");
-    return 1;
 }
 
 
