@@ -2161,7 +2161,25 @@ public IdleKick()
 	}
 	return 1;
 }
-
+public RPGTimer()
+{
+	foreach(Player, i)
+	{
+	    if(!IsPlayerConnected(i)) continue;
+		new rpggun;
+        new rpgammo;
+        new string[128];
+        GetPlayerWeaponData(i, 7, rpggun, rpgammo);
+        if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][pAdmin] < 1)//rpg czit
+        {
+			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
+			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i, true));
+			SendCommandLogMessage(string);
+			KickEx(i);
+		}
+	}
+	return 1;
+}
 public JednaSekundaTimer()
 {
     //25.06.2014
@@ -2195,17 +2213,7 @@ public JednaSekundaTimer()
         GetPlayerPos(i, x, y, z);
 		GetPlayerArmour(i, pancerzyy);
         vehicleid = GetPlayerVehicleID(i);
-        
-        new rpggun;
-        new rpgammo;
-        GetPlayerWeaponData(i, 7, rpggun, rpgammo);
-        if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][pAdmin] < 1 && PlayerInfo[i][pGun7] != 35)//rpg czit
-        {
-			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
-			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i, true));
-			SendCommandLogMessage(string);
-			KickEx(i);
-		}
+
 		//dzwonek telefonu
 		if(RingTone[i] > 0 && Mobile[i] >= 0)
 		{
