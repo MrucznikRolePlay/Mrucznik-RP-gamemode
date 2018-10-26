@@ -1278,20 +1278,10 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		return 1;
 	}
 	
-    if(weaponid > 2 && weaponid < 39 && CheckWeaponAC(issuerid, GetWeaponSlot(weaponid), weaponid))
-    {
-		if(weaponid == 51 || weaponid == 37)
-		{
-		}
-		else
-		{
-			new string[128];
-			MruDialog(issuerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
-			format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack.", GetNick(issuerid, true));
-			SendCommandLogMessage(string);
-			KickEx(issuerid);
-		}
-    }
+    if(OnPlayerTakeDamageWeaponHack(issuerid, weaponid))
+	{
+		return 1;
+	}
 	
 	if(gPlayerLogged[issuerid] != 1)
 	{

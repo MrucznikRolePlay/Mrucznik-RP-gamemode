@@ -12193,16 +12193,48 @@ WeaponAC(playerid)
 CheckWeaponAC(playerid, slot, gun)
 {
 	if(slot == 1 && PlayerInfo[playerid][pGun1] != gun) return slot;
-	if(slot == 2 && PlayerInfo[playerid][pGun2] != gun) return slot;
-	if(slot == 3 && PlayerInfo[playerid][pGun3] != gun) return slot;
-	if(slot == 4 && PlayerInfo[playerid][pGun4] != gun) return slot;
-	if(slot == 5 && PlayerInfo[playerid][pGun5] != gun) return slot;
-	if(slot == 6 && PlayerInfo[playerid][pGun6] != gun) return slot;
-	if(slot == 7 && PlayerInfo[playerid][pGun7] != gun) return slot;
-	if(slot == 8 && PlayerInfo[playerid][pGun8] != gun) return slot;
-	if(slot == 9 && PlayerInfo[playerid][pGun9] != gun) return slot;
-	if(slot == 10 && PlayerInfo[playerid][pGun10] != gun) return slot;
-	if(slot == 11 && PlayerInfo[playerid][pGun11] != gun) return slot;
+	else if(slot == 2 && PlayerInfo[playerid][pGun2] != gun) return slot;
+	else if(slot == 3 && PlayerInfo[playerid][pGun3] != gun) return slot;
+	else if(slot == 4 && PlayerInfo[playerid][pGun4] != gun) return slot;
+	else if(slot == 5 && PlayerInfo[playerid][pGun5] != gun) return slot;
+	else if(slot == 6 && PlayerInfo[playerid][pGun6] != gun) return slot;
+	else if(slot == 7 && PlayerInfo[playerid][pGun7] != gun) return slot;
+	else if(slot == 8 && PlayerInfo[playerid][pGun8] != gun) return slot;
+	else if(slot == 9 && PlayerInfo[playerid][pGun9] != gun) return slot;
+	else if(slot == 10 && PlayerInfo[playerid][pGun10] != gun) return slot;
+	else if(slot == 11 && PlayerInfo[playerid][pGun11] != gun) return slot;
+	return 0;
+}
+
+OnPlayerTakeDamageWeaponHackCheck(issuerid, weaponid)
+{
+	if(weaponid == 37)
+	{
+		
+	}
+	else if(weaponid == 51)
+	{
+		
+	}
+    else if(weaponid > 2 && weaponid < 39)
+    {
+		return CheckWeaponAC(issuerid, GetWeaponSlot(weaponid), weaponid);
+    }
+	return false;
+}
+
+
+OnPlayerTakeDamageWeaponHack(playerid, weaponid)
+{
+	if(OnPlayerTakeDamageWeaponHackCheck(playerid, weaponid))
+	{
+		new string[128];
+		MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
+		format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack.", GetNick(playerid, true));
+		SendCommandLogMessage(string);
+		KickEx(playerid);
+		return 1;
+	}
 	return 0;
 }
 
