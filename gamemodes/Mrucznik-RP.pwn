@@ -1280,7 +1280,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	
     if(weaponid > 2 && weaponid < 39 && CheckWeaponAC(issuerid, GetWeaponSlot(weaponid), weaponid))
     {
-		if(weaponid == 51)
+		if(weaponid == 51 || weaponid == 37)
 		{
 		}
 		else
