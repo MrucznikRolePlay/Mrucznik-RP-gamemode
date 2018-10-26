@@ -12189,6 +12189,7 @@ WeaponAC(playerid)
 	return false;
 }
 
+//returns false if no cheat detected
 CheckWeaponAC(playerid, slot, gun)
 {
 	if(slot == 1 && PlayerInfo[playerid][pGun1] != gun) return slot;
