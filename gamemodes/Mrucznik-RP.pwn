@@ -1273,13 +1273,20 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
-    if(weaponid == 38 && PlayerInfo[issuerid][pGun7] != weaponid)
+    if(weaponid > 2 && weaponid < 39 && CheckWeaponAC(playerid, GetWeaponSlot(weaponid), weaponid))
     {
-        new string[128];
-	    MruDialog(issuerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack.", GetNick(issuerid, true));
-        SendCommandLogMessage(string);
-        KickEx(issuerid);
+		if( (weaponid == 37 && (CheckWeaponAC(playerid, GetWeaponSlot(37), 37) || CheckWeaponAC(playerid, GetWeaponSlot(18), 18)))
+			|| (weaponid == 51 && (CheckWeaponAC(playerid, GetWeaponSlot(35), 35) || CheckWeaponAC(playerid, GetWeaponSlot(36), 36) || CheckWeaponAC(playerid, GetWeaponSlot(16), 16))))
+		{
+		}
+		else
+		{
+			new string[128];
+			MruDialog(issuerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
+			format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack.", GetNick(issuerid, true));
+			SendCommandLogMessage(string);
+			KickEx(issuerid);
+		}
     }
 
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)
