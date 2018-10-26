@@ -12255,6 +12255,7 @@ stock GetWeaponSlot(weapon)
         case 45: slot = 11;
         case 46: slot = 11;
         case 40: slot = 12;
+		default: slot = 0;
     }
     return slot;
 }
