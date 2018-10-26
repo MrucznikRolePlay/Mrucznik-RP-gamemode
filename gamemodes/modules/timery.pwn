@@ -2213,7 +2213,7 @@ public JednaSekundaTimer()
         GetPlayerPos(i, x, y, z);
 		GetPlayerArmour(i, pancerzyy);
         vehicleid = GetPlayerVehicleID(i);
-
+		
 		//dzwonek telefonu
 		if(RingTone[i] > 0 && Mobile[i] >= 0)
 		{
