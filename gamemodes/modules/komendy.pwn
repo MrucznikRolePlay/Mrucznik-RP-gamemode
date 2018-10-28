@@ -28462,6 +28462,7 @@ CMD:zabierz(playerid, params[])
             }
             new x_nr[16];
 			new giveplayerid;
+            if(gettime() < GetPVarInt(playerid, "lic-timer")) return sendTipMessage(playerid, "Licencje mo¿esz zabieraæ co 30 sekund!");
 			if( sscanf(params, "s[16] d", x_nr, giveplayerid))
 			{
 				SendClientMessage(playerid, COLOR_WHITE, "|__________________ Zabieranie rzeczy __________________|");
@@ -28700,6 +28701,7 @@ CMD:zabierz(playerid, params[])
             return 1;
         }
     }
+    SetPVarInt(playerid, "lic-timer", gettime() + 30);
     return 1;
 }
 
