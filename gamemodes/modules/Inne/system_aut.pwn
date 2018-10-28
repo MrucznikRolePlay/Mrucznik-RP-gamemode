@@ -214,7 +214,7 @@ stock Car_Load()
         if(CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_GOV)
         {
             new elkaDMV;
-            if(CarData[i][c_Model] == 11)
+            if(CarData[i][c_Model] == 496)
             {
                 elkaDMV = CreateDynamicObject(2363,0.0,0.0,-1000.0,0.0,0.0,0.0,-1,-1,-1,300.0,300.0);
                 SetDynamicObjectMaterialText(elkaDMV, 0, "L", 90, "Ariel", 24, 1, -1, 255, 0);
