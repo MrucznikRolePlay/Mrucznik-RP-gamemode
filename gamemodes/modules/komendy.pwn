@@ -14861,7 +14861,7 @@ CMD:sprzedajauto(playerid, params[])
 	    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 
-        SetPVarInt(playerid, "offer-car", gettime() + 30);
+        SetPVarInt(playa, "offer-car", gettime() + 30);
 	    format(string, sizeof(string), "%s oferuje ci sprzeda¿ %s za %d$. Jeœli chcesz kupiæ to auto wpisz /akceptuj pojazd aby kupiæ.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], cena);
         SendClientMessage(playa, 0xFFC0CB, string);
         //TODO
