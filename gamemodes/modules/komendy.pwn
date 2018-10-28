@@ -14840,6 +14840,7 @@ CMD:sprzedajauto(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /dajauto [Nick/ID] [cena]");
 			return 1;
 		}
+        if(GetPVarInt(playa, "offer-car")) return sendErrorMessage(playerid, "Ten gracz otrzyma³ ju¿ ofertê kupna pojazdu! Zaczekaj 30 sekund");
         if(!IsPlayerConnected(playa)) return sendErrorMessage(playerid, "Brak takiego gracza.");
 		cena = FunkcjaK(string);
 		//
@@ -14860,6 +14861,7 @@ CMD:sprzedajauto(playerid, params[])
 	    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 
+        SetPVarInt(playerid, "offer-car", gettime() + 30);
 	    format(string, sizeof(string), "%s oferuje ci sprzeda¿ %s za %d$. Jeœli chcesz kupiæ to auto wpisz /akceptuj pojazd aby kupiæ.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], cena);
         SendClientMessage(playa, 0xFFC0CB, string);
         //TODO
@@ -28462,7 +28464,7 @@ CMD:zabierz(playerid, params[])
             }
             new x_nr[16];
 			new giveplayerid;
-            if(gettime() < GetPVarInt(playerid, "lic-timer")) return sendTipMessage(playerid, "Licencje mo¿esz zabieraæ co 30 sekund!");
+            if(gettime() < GetPVarInt(playerid, "lic-timer")) return sendTipMessage(playerid, "Licencje oraz rzeczy mo¿esz zabieraæ co 30 sekund!");
 			if( sscanf(params, "s[16] d", x_nr, giveplayerid))
 			{
 				SendClientMessage(playerid, COLOR_WHITE, "|__________________ Zabieranie rzeczy __________________|");
@@ -28704,6 +28706,7 @@ CMD:zabierz(playerid, params[])
     SetPVarInt(playerid, "lic-timer", gettime() + 30);
     return 1;
 }
+
 
 CMD:drink(playerid, params[]) return cmd_wypij(playerid, params);
 CMD:pij(playerid, params[]) return cmd_wypij(playerid, params);
