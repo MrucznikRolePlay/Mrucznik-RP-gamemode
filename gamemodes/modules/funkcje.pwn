@@ -12206,7 +12206,7 @@ CheckWeaponAC(playerid, slot, gun)
 	return 0;
 }
 
-OnPlayerTakeDamageWeaponHackCheck(issuerid, weaponid)
+WeaponHackCheck(issuerid, weaponid)
 {
 	if(weaponid == 37)
 	{
@@ -12226,7 +12226,7 @@ OnPlayerTakeDamageWeaponHackCheck(issuerid, weaponid)
 
 OnPlayerTakeDamageWeaponHack(playerid, weaponid)
 {
-	if(OnPlayerTakeDamageWeaponHackCheck(playerid, weaponid))
+	if(WeaponHackCheck(playerid, weaponid))
 	{
 		new string[128];
 		MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
