@@ -12208,11 +12208,7 @@ CheckWeaponAC(playerid, slot, gun)
 
 WeaponHackCheck(issuerid, weaponid)
 {
-	if(weaponid == 37)
-	{
-		
-	}
-	else if(weaponid == 51)
+	if(weaponid == 37 || weaponid == 51 || weapoinid == 46)
 	{
 		
 	}
