@@ -2161,6 +2161,8 @@ public IdleKick()
 	}
 	return 1;
 }
+
+forward RPGTimer();
 public RPGTimer()
 {
 	foreach(Player, i)
@@ -2213,7 +2215,7 @@ public JednaSekundaTimer()
         GetPlayerPos(i, x, y, z);
 		GetPlayerArmour(i, pancerzyy);
         vehicleid = GetPlayerVehicleID(i);
-
+		
 		//dzwonek telefonu
 		if(RingTone[i] > 0 && Mobile[i] >= 0)
 		{

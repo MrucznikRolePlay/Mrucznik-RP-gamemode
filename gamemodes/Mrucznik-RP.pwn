@@ -1273,16 +1273,12 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
-    if(weaponid == 38 && PlayerInfo[issuerid][pGun7] != weaponid)
-    {
-        new string[128];
-	    MruDialog(issuerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack.", GetNick(issuerid, true));
-        SendCommandLogMessage(string);
-        KickEx(issuerid);
-    }
-
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)
+	{
+		return 1;
+	}
+	
+    if(OnPlayerTakeDamageWeaponHack(issuerid, weaponid))
 	{
 		return 1;
 	}

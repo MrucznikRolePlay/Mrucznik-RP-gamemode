@@ -12189,20 +12189,103 @@ WeaponAC(playerid)
 	return false;
 }
 
+//returns false if no cheat detected
 CheckWeaponAC(playerid, slot, gun)
 {
 	if(slot == 1 && PlayerInfo[playerid][pGun1] != gun) return slot;
-	if(slot == 2 && PlayerInfo[playerid][pGun2] != gun) return slot;
-	if(slot == 3 && PlayerInfo[playerid][pGun3] != gun) return slot;
-	if(slot == 4 && PlayerInfo[playerid][pGun4] != gun) return slot;
-	if(slot == 5 && PlayerInfo[playerid][pGun5] != gun) return slot;
-	if(slot == 6 && PlayerInfo[playerid][pGun6] != gun) return slot;
-	if(slot == 7 && PlayerInfo[playerid][pGun7] != gun) return slot;
-	if(slot == 8 && PlayerInfo[playerid][pGun8] != gun) return slot;
-	if(slot == 9 && PlayerInfo[playerid][pGun9] != gun) return slot;
-	if(slot == 10 && PlayerInfo[playerid][pGun10] != gun) return slot;
-	if(slot == 11 && PlayerInfo[playerid][pGun11] != gun) return slot;
+	else if(slot == 2 && PlayerInfo[playerid][pGun2] != gun) return slot;
+	else if(slot == 3 && PlayerInfo[playerid][pGun3] != gun) return slot;
+	else if(slot == 4 && PlayerInfo[playerid][pGun4] != gun) return slot;
+	else if(slot == 5 && PlayerInfo[playerid][pGun5] != gun) return slot;
+	else if(slot == 6 && PlayerInfo[playerid][pGun6] != gun) return slot;
+	else if(slot == 7 && PlayerInfo[playerid][pGun7] != gun) return slot;
+	else if(slot == 8 && PlayerInfo[playerid][pGun8] != gun) return slot;
+	else if(slot == 9 && PlayerInfo[playerid][pGun9] != gun) return slot;
+	else if(slot == 10 && PlayerInfo[playerid][pGun10] != gun) return slot;
+	else if(slot == 11 && PlayerInfo[playerid][pGun11] != gun) return slot;
 	return 0;
+}
+
+WeaponHackCheck(issuerid, weaponid)
+{
+	if(weaponid == 37 || weaponid == 51 || weaponid == 46)
+	{
+		
+	}
+    else if(weaponid > 2 && weaponid < 39)
+    {
+		return CheckWeaponAC(issuerid, GetWeaponSlot(weaponid), weaponid);
+    }
+	return false;
+}
+
+
+OnPlayerTakeDamageWeaponHack(playerid, weaponid)
+{
+	if(WeaponHackCheck(playerid, weaponid))
+	{
+		new string[128];
+		MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
+		format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack.", GetNick(playerid, true));
+		SendCommandLogMessage(string);
+		KickEx(playerid);
+		return 1;
+	}
+	return 0;
+}
+
+stock GetWeaponSlot(weapon)
+{
+    new slot;
+    switch (weapon)
+    {
+        case 0: slot = 0;
+        case 1: slot = 0;
+        case 2: slot = 1;
+        case 3: slot = 1;
+        case 4: slot = 1;
+        case 5: slot = 1;
+        case 6: slot = 1;
+        case 7: slot = 1;
+        case 8: slot = 1;
+        case 9: slot = 1;
+        case 22: slot = 2;
+        case 23: slot = 2;
+        case 24: slot = 2;
+        case 25: slot = 3;
+        case 26: slot = 3;
+        case 27: slot = 3;
+        case 28: slot = 4;
+        case 29: slot = 4;
+        case 32: slot = 4;
+        case 30: slot = 5;
+        case 31: slot = 5;
+        case 33: slot = 6;
+        case 34: slot = 6;
+        case 35: slot = 7;
+        case 36: slot = 7;
+        case 37: slot = 7;
+        case 38: slot = 7;
+        case 16: slot = 8;
+        case 17: slot = 8;
+        case 18: slot = 8;
+        case 39: slot = 8;
+        case 41: slot = 9;
+        case 42: slot = 9;
+        case 43: slot = 9;
+        case 10: slot = 10;
+        case 11: slot = 10;
+        case 12: slot = 10;
+        case 13: slot = 10;
+        case 14: slot = 10;
+        case 15: slot = 10;
+        case 44: slot = 11;
+        case 45: slot = 11;
+        case 46: slot = 11;
+        case 40: slot = 12;
+		default: slot = 0;
+    }
+    return slot;
 }
 
 //--------------------------------------------------
