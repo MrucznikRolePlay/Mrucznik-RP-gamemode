@@ -25,7 +25,7 @@ SSCANF:fix(string[])
 	
 	return ret;
 }
-
+//
 
 /*CMD:marcepan(playerid, params[])
 {
