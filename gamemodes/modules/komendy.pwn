@@ -16830,7 +16830,31 @@ CMD:forum(playerid)
         if(PlayerInfo[playerid][pAdmin] >= 1)
         {
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "Adres forum: www.Mrucznik-RP.pl !! (%s)", sendername);
+			format(string, sizeof(string), "((**)) Adres naszego forum: Mrucznik-RP.pl !! (%s)", sendername);
+			SendClientMessageToAll(0xff00ff, string);
+		}
+		else
+		{
+		    noAccessMessage(playerid);
+		}
+	}
+	return 1;
+}
+CMD:teamspeak(playerid)
+{
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+
+    if(IsPlayerConnected(playerid))
+    {
+        if(gPlayerLogged[playerid] == 0)
+        {
+            return 1;
+        }
+        if(PlayerInfo[playerid][pAdmin] >= 1)
+        {
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			format(string, sizeof(string), "((**)) Adres naszego TeamSpeaka: Mrucznik-RP.pl !! (%s)", sendername);
 			SendClientMessageToAll(0xff00ff, string);
 		}
 		else
@@ -17755,7 +17779,7 @@ CMD:sluzba(playerid)
             {
                 if(OnDuty[playerid]==0)
                 {
-                    format(string, sizeof(string), "* Agent GSA %s wyci¹ga broñ i garnitur z szafy.", sendername);
+                    format(string, sizeof(string), "* Agent USSS %s wyci¹ga broñ i garnitur z szafy.", sendername);
                     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     OnDuty[playerid]= 1;
                     DajBronieFrakcyjne(playerid);
@@ -17766,7 +17790,7 @@ CMD:sluzba(playerid)
                 }
                 else if(OnDuty[playerid]==1)
                 {
-                    format(string, sizeof(string), "* Agent GSA %s chowa broñ i garnitur do szafy.", sendername);
+                    format(string, sizeof(string), "* Agent USSS %s chowa broñ i garnitur do szafy.", sendername);
                     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     SetPlayerArmour(playerid, 0);
                     SetPlayerHealth(playerid, 100);
@@ -17779,29 +17803,22 @@ CMD:sluzba(playerid)
         }
         else if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
         {
-            if (PlayerToPoint(4, playerid,2482.7566, -2105.6033, 32.2773))
+			if(JobDuty[playerid] == 1)
             {
-                if(JobDuty[playerid] == 1)
-                {
-
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie.");
-                    JobDuty[playerid] = 0;
-                    SetPlayerToTeamColor(playerid);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                }
-                else
-                {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ ju¿ na s³u¿bie. Kieruj siê do pojazdu.");
-                    JobDuty[playerid] = 1;
-                    SetPlayerToTeamColor(playerid);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-                }
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, "*Nie jesteœ ju¿ na s³u¿bie taksówkarza");
+				JobDuty[playerid] = 0;
+				SetPlayerToTeamColor(playerid);
+				SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
             }
             else
             {
-                sendTipMessage(playerid, "Nie jesteœ w biurze KT !");
-                return 1;
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wchodzisz na s³u¿bê, udaj siê do pojazdu!");
+                JobDuty[playerid] = 1;
+                SetPlayerToTeamColor(playerid);
+                SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
             }
+        }
+        
         }
         else if(PlayerInfo[playerid][pJob] == 7)
         {
