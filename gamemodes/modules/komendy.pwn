@@ -16119,7 +16119,7 @@ CMD:og(playerid, params[])
             new payout = strlen(params) * 25;
             if(kaska[playerid] < payout)
             {
-                format(string, sizeof(string), "* U¿y³eœ %d zanków i masz zap³aciæ $%d, nie posiadasz a¿ tyle.", strlen(params), payout);
+                format(string, sizeof(string), "* U¿y³eœ %d znaków i masz zap³aciæ $%d, nie posiadasz a¿ tyle.", strlen(params), payout);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                 return 1;
             }
