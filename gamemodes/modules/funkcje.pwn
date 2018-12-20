@@ -6860,6 +6860,11 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
 	}
+	else if(model == 538)//kt 
+	{
+		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		sendTipMessage(playerid, "Marcepan Marks mówi: Dziêkujemy za podró¿owanie naszymi liniami!");
+	}
 	else if(model == 582)//sanvan
 	{
 	    SetPlayerPosEx(playerid, vehx-1, vehy-1, vehz);
