@@ -19808,7 +19808,37 @@ CMD:czas(playerid)
 	}
 	return 1;
 }
-
+CMD:kbpo(playerid) return cmd_kupbiletpociag(playerid);
+CMD:kupbiletpociag(playerid);
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(biletpociag == 0)
+		{
+			if(IsPlayerInRangeOfPoint(playerid,3,1757.00513, -1943.20789, 13.26766) || IsPlayerInRangeOfPoint(playerid,3, 1746.97949, -1943.71838, 13.45185) || IsPlayerInRangeOfPoint(playerid,5.0,825.69000, -1354.49915, 13.11831))
+			{
+				ZabierzKase(playerid, 10000);
+				Sejf_Add(FRAC_KT, 10000);
+				biletpociag = 1;
+				sendTipMessage(playerid, "Zakupi³eœ bilet ogólny. Koszt biletu to 10.000$");
+				
+			
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
+			
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
+		}
+	
+	
+	}
+	return 1;
+}
 CMD:wyjdzw(playerid) return cmd_wejdzw(playerid);
 CMD:wejdzw(playerid)
 {
