@@ -4612,6 +4612,93 @@ CMD:dmv_info(playerid, params[])
 	}
 	return 1;
 }
+CMD:kamerau(playerid, params[])
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(!IsABOR(playerid))
+		{
+			sendErrorMessage(playerid, "Nie jesteœ agentem USSS!");
+			return 1;
+		}
+		if(PlayerInfo[playerid][pRank] < 2)
+		{
+			sendErrorMessage(playerid, "Musisz mieæ 2 rangê aby tego u¿yæ!");
+			return 1;
+		}
+		if(isnull(params))
+		{
+			sendErrorMessage(playerid, "Prawid³owa komenda to: /podgladu [1-4]");
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 2.0,1456.8341,-1782.3240,77.9453)
+		{
+			sendErrorMessage(playerid, "Nie jesteœ w pokoju ochrony // PodejdŸ do biurka!");
+			return 1;
+		}
+		new numerekkamer;
+		if(sscanf(params, "d", numerekkamer))
+		{
+			sendTipMessage(playerid, "U¿yj /kamerau [numer 1 - 4]");
+			return 1;
+		}
+		if(numerekkamer < 1 || numerekkamer > 5) 
+		{ 
+			sendTipMessage(playerid, "Numer kamery od 1 do 5! --> 5 to wy³¹czenie podgl¹du!"); 
+			return 1; 
+		}
+		/*
+		SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
+		SetPlayerCameraLookAt(playerid, 1448.0886, -1782.2822, 79.7908);
+		
+		SetPlayerCameraPos(playerid, 1448.9839, -1806.7433, 80.1729);
+		SetPlayerCameraLookAt(playerid, 1448.8718, -1805.7517, 79.8730);
+		
+		*/
+		if(numerekkamer == 1) 
+		{ 
+			SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
+			SetPlayerCameraLookAt(playerid, 1448.0886, -1782.2822, 79.7908);
+			sendTipMessage(playerid, "[KAMERA 1][Urz¹d Miasta Los Santos] Hol wejœciowy");
+			TogglePlayerControllable(playerid, 0);
+		}
+		else if(numerekkamer == 2) 
+		{ 
+			SetPlayerCameraPos(playerid, 1448.9839, -1806.7433, 80.1729);
+			SetPlayerCameraLookAt(playerid, 1448.8718, -1805.7517, 79.8730);
+			sendTipMessage(playerid, "[KAMERA 2][Urz¹d Miasta Los Santos] Okienka 5-8");
+			TogglePlayerControllable(playerid, 0);
+		}
+		else if(numerekkamer == 3) 
+		{ 
+			SetPlayerCameraPos(playerid, 1454.0310, -1806.6051, 80.1729);
+			SetPlayerCameraLookAt(playerid, 1453.9332, -1805.6119, 79.8480);
+			sendTipMessage(playerid, "[KAMERA 3][Urz¹d Miasta Los Santos] Okienka 1-4");
+			TogglePlayerControllable(playerid, 0);
+		}
+		else if(numerekkamer == 4) 
+		{ 
+			SetPlayerCameraPos(playerid, 1455.9574, -1821.9583, 83.3474);
+			SetPlayerCameraLookAt(playerid, 1455.3961, -1821.1326, 82.9175);
+			sendTipMessage(playerid, "[KAMERA 4][Urz¹d Miasta Los Santos] Okienka 1-4");
+			TogglePlayerControllable(playerid, 0);
+		}
+		else if(numerekkamer == 5) 
+		{ 
+		
+			TogglePlayerControllable(playerid, 1);
+			SetCameraBehindPlayer(playerid);
+			PlayerInfo[playerid][pMuted] = 0;
+			SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+			sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
+		
+		}
+		
+		
+	}
+	
+	return 1;
+}
 
 CMD:usss(playerid, params[]) return cmd_usss_info(playerid, params);
 CMD:usss_info(playerid, params[])
@@ -20326,25 +20413,27 @@ CMD:wejdz(playerid)
                     SetPlayerVirtualWorld(playerid,50);
                     Wchodzenie(playerid);
                     PlayerInfo[playerid][pLocal] = 108;
-                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Urz¹d Miasta Los Santos Wita! <<<<");
-                    SendClientMessage(playerid, COLOR_WHITE, "-> Cennik znajduje siê na niebieskiej tablicy na która patrzysz");
-                    SendClientMessage(playerid, COLOR_WHITE, "-> Winda na wy¿sze poziomy i toalety s¹ w korytarzu za drzwiami");
-                    SendClientMessage(playerid, COLOR_WHITE, "-> Okienka dla petentów znajduj¹ siê z lewej i prawej strony");
-                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencjê! <<<<");
+                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Urz¹d Miasta w Los Santos Wita! <<<<");
+                    SendClientMessage(playerid, COLOR_WHITE, "-> Cennik znajduje siê zaraz za rogiem, po prawej stronie.");
+                    SendClientMessage(playerid, COLOR_WHITE, "-> Znajdujesz siê na najwy¿szym poziomie, winda znajduje siê w holu g³ównym");
+                    SendClientMessage(playerid, COLOR_WHITE, "-> Okienka dla patentów znajduj¹ siê po lewej i prawej stronie w holu pierwszym");
+					SendClientMessage(playerid, COLOR_WHITE, "-> [Obecny interior urzêdu powsta³ w listopadzie 2018 roku, za inicjatyw¹ Satius & Arkam & Simeone]");
+                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencje! <<<<");
                     if(PlayerInfo[playerid][pMember] == 0 && PlayerInfo[playerid][pLider] == 0 && GetPlayerOrg(playerid) == 0)
                     {
                         SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
                         SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
-                        SendClientMessage(playerid, COLOR_WHITE, "Okazuje siê, ¿e do UM nie mozna wnosiæ broni.");
-                        SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ ochronie.");
-                        SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
+                        SendClientMessage(playerid, COLOR_WHITE, "Dopiero teraz dostrzegasz czerwon¹ tabliczkê informuj¹c¹ o zakazie");
+                        SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
+                        SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
                         SetPVarInt(playerid, "mozeUsunacBronie", 1);
                         ResetPlayerWeapons(playerid);
                     }
                 }
                 else
                 {
-                    SendClientMessage(playerid, COLOR_RED, "Zosta³eœ wywalony z Urzêdu na 10 minut, spróbuj póŸniej.");
+                    SendClientMessage(playerid, COLOR_RED, "Zosta³eœ wyrzucony z Urzêdu przez agentów USSS, spróbuj póŸniej.");
+					SendClientMessage(playerid, COLOR_WHITE, "[Czas wyrzucenia: 10 minut]");
                 }
             }
             else
@@ -20370,6 +20459,12 @@ CMD:wejdz(playerid)
             TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
             GameTextForPlayer(playerid, "~w~~b~Witamy w Urzedzie Miasta PC~n~ by abram01", 5000, 1);
+			SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Urz¹d Miasta w Palomino Creek Wita! <<<<");
+			SendClientMessage(playerid,COLOR_WHITE," ");
+			SendClientMessage(playerid,COLOR_WHITE,"-> Okienka znajduj¹ siê po twojej prawej i lewej stronie");
+			SendClientMessage(playerid,COLOR_WHITE,"-> Biura i przejœcie na plac znajduje siê za drzwiami na wprost od Ciebie.");
+			SendClientMessage(playerid,COLOR_WHITE," ");
+			SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencje! <<<<");
         }
         else if (PlayerToPoint(8.0, playerid,-2111.5686,-443.9720,38.7344))//Wejœcie do drift track
         {
@@ -32255,7 +32350,7 @@ CMD:zatankuj(playerid)
 		    {
                 new engine, niewazne;
                 GetVehicleParamsEx(GetPlayerVehicleID(playerid), engine, niewazne, niewazne, niewazne, niewazne, niewazne, niewazne); 
-                if(engine == 1) return SendClientMessage(playerid, COLOR_GREY, "Nie mo¿na tankowaæ, gdy silnik jest odpalony!");
+                if(engine == 1) return SendClientMessage(playerid, COLOR_GREY, "Nie mo¿esz tankowaæ, gdy silnik jest odpalony!");
                 //easter egg dla bugerow :D
                 if(OdpalanieSpam[playerid] == 1) return SendClientMessage(playerid, COLOR_GREY, "Nie próbuj bugowaæ bo przez Ciebie musze przy kodzie siedziec :D");
 			    GameTextForPlayer(playerid,"~w~~n~~n~~n~~n~~n~~n~~n~~n~~n~Tankowanie pojazdu, prosze czekac",2000,3);
