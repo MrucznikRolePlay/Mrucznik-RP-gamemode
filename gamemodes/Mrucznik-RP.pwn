@@ -108,7 +108,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/premium/premium_dialogs.pwn"
 
 //Inne:
-//#include "modules/Inne/ibiza.inc" --> Usuniêty przez Simeone 2.5.94
+#include "modules/Inne/ibiza.inc" 
 #include "modules/Inne/system_aut.pwn"
 #include "modules/Inne/system_kp.pwn"
 #include "modules/Inne/external.pwn"
