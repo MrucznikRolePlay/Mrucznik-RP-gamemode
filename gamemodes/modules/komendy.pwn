@@ -17905,8 +17905,6 @@ CMD:sluzba(playerid)
                 SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
             }
         }
-        
-        }
         else if(PlayerInfo[playerid][pJob] == 7)
         {
             if(AntySpam[playerid] == 0)
@@ -23317,7 +23315,25 @@ CMD:startlotto(playerid)
     }
 	return 1;
 }
-
+/*==================[Kupno unikatów pod GUI]===================
+CMD:kupunikata(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerInfo[playerid][pLevel] >= 5)
+		{
+			ShowPlayerDialogEx(playerid, 1064, DIALOG_STYLE_LIST, "Mrucznik Role Play >> Kupno unikatów", "Mrucznik > Dolary\nMrucznik > Coins", "Akceptuj", "Anuluj");
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Ta komenda jest od 5 poziomu!"); 
+		}
+	
+	}
+	
+	return 1;
+}
+*/
 CMD:setstat(playerid, params[])
 {
 	new string[128];
