@@ -19869,19 +19869,19 @@ CMD:kbpo(playerid)
 				Sejf_Add(FRAC_KT, 10000);
 				PlayerInfo[playerid][pBiletsamolotowy] = 1;
 				sendTipMessage(playerid, "Zakupi³eœ bilet ogólny. Koszt biletu to 10.000$");
-			
+				return 1;
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
+				return 1;
 			}
 		}
 		else
 		{
 			sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
+			return 1;
 		}
-	
-	
 	}
 	return 1;
 }
