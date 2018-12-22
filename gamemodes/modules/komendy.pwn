@@ -4647,14 +4647,6 @@ CMD:kamerau(playerid, params[])
 			sendTipMessage(playerid, "Numer kamery od 1 do 5! --> 5 to wy³¹czenie podgl¹du!"); 
 			return 1; 
 		}
-		/*
-		SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
-		SetPlayerCameraLookAt(playerid, 1448.0886, -1782.2822, 79.7908);
-		
-		SetPlayerCameraPos(playerid, 1448.9839, -1806.7433, 80.1729);
-		SetPlayerCameraLookAt(playerid, 1448.8718, -1805.7517, 79.8730);
-		
-		*/
 		if(numerekkamer == 1) 
 		{ 
 			SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
@@ -19806,8 +19798,7 @@ CMD:czas(playerid)
 	}
 	return 1;
 }
-CMD:kbpo(playerid) return cmd_kupbiletpociag(playerid);
-CMD:kupbiletpociag(playerid);
+CMD:kbpo(playerid) 
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -19819,13 +19810,11 @@ CMD:kupbiletpociag(playerid);
 				Sejf_Add(FRAC_KT, 10000);
 				biletpociag = 1;
 				sendTipMessage(playerid, "Zakupi³eœ bilet ogólny. Koszt biletu to 10.000$");
-				
 			
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
-			
 			}
 		}
 		else
