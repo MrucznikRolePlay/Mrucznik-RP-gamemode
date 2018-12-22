@@ -1037,8 +1037,7 @@ new Refueling[MAX_PLAYERS];
 new Naprawiasie[MAX_PLAYERS];
 
 new TiPJTGBKubi[MAX_PLAYERS];
-//Poci¹g
-new biletpociag = 0;
+
 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------

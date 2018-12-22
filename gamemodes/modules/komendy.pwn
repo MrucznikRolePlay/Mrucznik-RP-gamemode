@@ -4616,6 +4616,65 @@ CMD:kamerau(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{
+		if(IsABOR(playerid) || PlayerInfo[playerid][pRank] >= 2 )
+		{
+			new numerekkamer;
+			if(sscanf(params, "d", numerekkamer))
+			{
+				sendTipMessage(playerid, "U¿yj /kamerau [numer 1 - 4]");
+				return 1;
+			}
+			if(numerekkamer < 1 || numerekkamer > 5) 
+			{ 
+				sendTipMessage(playerid, "Numer kamery od 1 do 5! --> 5 to wy³¹czenie podgl¹du!"); 
+				return 1; 
+			}
+			if(numerekkamer == 1) 
+			{ 
+				SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
+				SetPlayerCameraLookAt(playerid, 1448.0886, -1782.2822, 79.7908);
+				sendTipMessage(playerid, "[KAMERA 1][Urz¹d Miasta Los Santos] Hol wejœciowy");
+				TogglePlayerControllable(playerid, 0);
+			}
+			else if(numerekkamer == 2) 
+			{ 
+				SetPlayerCameraPos(playerid, 1448.9839, -1806.7433, 80.1729);
+				SetPlayerCameraLookAt(playerid, 1448.8718, -1805.7517, 79.8730);
+				sendTipMessage(playerid, "[KAMERA 2][Urz¹d Miasta Los Santos] Okienka 5-8");
+				TogglePlayerControllable(playerid, 0);
+			}
+			else if(numerekkamer == 3) 
+			{ 
+				SetPlayerCameraPos(playerid, 1454.0310, -1806.6051, 80.1729);
+				SetPlayerCameraLookAt(playerid, 1453.9332, -1805.6119, 79.8480);
+				sendTipMessage(playerid, "[KAMERA 3][Urz¹d Miasta Los Santos] Okienka 1-4");
+				TogglePlayerControllable(playerid, 0);
+			}
+			else if(numerekkamer == 4) 
+			{ 
+				SetPlayerCameraPos(playerid, 1455.9574, -1821.9583, 83.3474);
+				SetPlayerCameraLookAt(playerid, 1455.3961, -1821.1326, 82.9175);
+				sendTipMessage(playerid, "[KAMERA 4][Urz¹d Miasta Los Santos] Okienka 1-4");
+				TogglePlayerControllable(playerid, 0);
+			}
+			else if(numerekkamer == 5) 
+			{ 
+			
+				TogglePlayerControllable(playerid, 1);
+				SetCameraBehindPlayer(playerid);
+				PlayerInfo[playerid][pMuted] = 0;
+				SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+				sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
+			
+			}
+		
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie posiadasz dostêpu do tej komendy!");
+		}
+	
+	/*
 		if(!IsABOR(playerid))
 		{
 			sendErrorMessage(playerid, "Nie jesteœ agentem USSS!");
@@ -4685,7 +4744,7 @@ CMD:kamerau(playerid, params[])
 			sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
 		
 		}
-		
+		*/
 		
 	}
 	
@@ -19802,13 +19861,13 @@ CMD:kbpo(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(biletpociag == 0)
+		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
 		{
 			if(IsPlayerInRangeOfPoint(playerid,3,1757.00513, -1943.20789, 13.26766) || IsPlayerInRangeOfPoint(playerid,3, 1746.97949, -1943.71838, 13.45185) || IsPlayerInRangeOfPoint(playerid,5.0,825.69000, -1354.49915, 13.11831))
 			{
 				ZabierzKase(playerid, 10000);
 				Sejf_Add(FRAC_KT, 10000);
-				biletpociag = 1;
+				PlayerInfo[playerid][pBiletsamolotowy] = 1;
 				sendTipMessage(playerid, "Zakupi³eœ bilet ogólny. Koszt biletu to 10.000$");
 			
 			}
