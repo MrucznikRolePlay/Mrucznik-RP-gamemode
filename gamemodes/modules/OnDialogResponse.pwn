@@ -15903,6 +15903,93 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SendClientMessage(playerid, COLOR_WHITE, inputtext);
 		}
 	}
+/* ==========================[Kupno unikatów pod GUI]=========================================
+	else if(dialogid == 1064)//Kupno skinów unikatowych
+	{//ShowPlayerDialogEx(playerid, 1064, DIALOG_STYLE_LIST, "Mrucznik Role Play --> Kupno unikatów", "Waluta -> Mrucznik\nWaluta -> Realna", "Akceptuj", "Anuluj");
+		if(response)
+        {
+            switch(listitem)
+            {
+                case 0://Pieni¹dze Mrucznikowe
+				{
+					ShowPlayerDialogEx(playerid, 1065, DIALOG_STYLE_LIST, "Mrucznik Role Play >> Kupno unikatów >> Wybierz co ..", "Skin\nPojazd\nZmienNick", "Akceptuj", "Anuluj");
+				}
+                case 1://Pieni¹dze Realne
+				{
+					sendTipMessage(playerid, "Pojawi siê ju¿ wkrótce!"); 
+				}
+            }
+        }
+		
+		
+	
+	
+	}
+	else if(dialogid == 1065)
+	{
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0://skin
+				{
+					ShowPlayerDialogEx(playerid, 1066, DIALOG_STYLE_INPUT, "Mrucznik Role Play >> Kupno unikatów >> Skin", "Wpisz numer skina, który chcia³byœ kupiæ!\nPamiêtaj, ta operacja kosztuje 40.000.000$!", "Zakup", "Anuluj");
+				}
+				case 1://pojazd
+				{
+					sendTipMessage(playerid, "Trwaj¹ prace nad tworzeniem komendy!!");
+				}
+				case 2://zmiennick
+				{
+					if(GetPlayerMoney(playerid) >= 30000000)
+					{
+						new zmnicku = PlayerInfo[playerid][pZmienilNick];
+						PlayerInfo[giveplayerid][pZmienilNick] = zmnicku+1;
+						ZabierzKase(playerid, 30000000);
+						sendTipMessage(playerid, "Gratulujemy kupna skina! Nie zapomnij zrobiæ screen'a z /stats + /czas - na wypadek straty");
+				
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Nie masz przy sobie wystarczaj¹cej gotówki! ZmienNick kosztuje 30 milionów!");
+					}
+				}
+			
+			}
+		
+		}
+	
+	}
+	else if(dialogid == 1066)
+	{
+		if(response)
+		{
+			if(inputtext >= 306 || inputtext == 300 || inputtext == 301 || inputtext ==  302 || inputtext ==  288 || inputtext == 287 || inputtext == 286 || inputtext == 285 || inputtext == 284 || inputtext == 283 || inputtext == 282 || inputtext == 281 || inputtext == 280 || inputtext == 279 || inputtext == 278 || inputtext == 277 || inputtext == 276 || inputtext == 277 || inputtext == 275 || inputtext == 274 || inputtext == 267 || inputtext == 266 || inputtext == 265 || inputtext == 255 || inputtext == 147 || inputtext == 86 || inputtext == 74 || inputtext == 70 || inputtext == 71 || inputtext == 59 || inputtext == 0)
+			{
+				sendErrorMessage(playerid, "Ten skin jest zabezpieczony! Nie mo¿esz go kupiæ!");
+			}
+			else
+			{
+				if(GetPlayerMoney(playerid) >= 40000000)
+				{
+					PlayerInfo[giveplayerid][pModel] = inputtext;
+					ZabierzKase(playerid, 40000000);
+					sendTipMessage(playerid, "Gratulujemy kupna skina! Nie zapomnij zrobiæ screen'a z /stats + /czas - na wypadek straty");
+				
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie masz przy sobie wystarczaj¹cej gotówki");
+				}
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Anulowa³eœ kupno skina!");
+		}
+	
+	}
+*/
 	return 0;
 }
 //ondialogresponse koniec

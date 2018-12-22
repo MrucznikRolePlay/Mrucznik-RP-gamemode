@@ -6799,6 +6799,25 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
+	else if(model == 538)//Poci¹g KT
+	{
+		if(biletpociag == 0)
+		{
+			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
+		}
+		else if(biletpociag == 1)
+		{
+			SetPlayerInterior(playerid, 1);
+			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
+			Wchodzenie(playerid);
+			TogglePlayerControllable(playerid, 0);
+			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+			sendTipMessage(playerid, ">>Pomyœlnie wszed³eœ do poci¹gu! Bilet zosta³ zu¿yty!");
+			sendTipMessage(playerid, ">>>Interior stworzony przez: Charlie112");
+			biletpociag = 0;
+		}
+	
+	}
 	else if(model == 582)//sanvan
 	{
 		SetPlayerInterior(playerid, 1);
@@ -6840,6 +6859,11 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	else if(model == 508)//journey
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+	}
+	else if(model == 538)//kt 
+	{
+		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		sendTipMessage(playerid, "Marcepan Marks mówi: Dziêkujemy za podró¿owanie naszymi liniami!");
 	}
 	else if(model == 582)//sanvan
 	{
