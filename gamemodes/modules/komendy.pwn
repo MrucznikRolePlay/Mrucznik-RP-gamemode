@@ -4620,9 +4620,8 @@ CMD:kamerau(playerid, params[])
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, 1456.8298,-1782.6688,77.9502))
 			{
-				new numerekkamer = params;
-				
-				if(numerekkamer == 1) 
+
+				if(params == 1) 
 				{ 
 					SetPlayerPos(playerid, 1453.1586,-1785.0184,82.3912);
 					SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
@@ -4630,7 +4629,7 @@ CMD:kamerau(playerid, params[])
 					sendTipMessage(playerid, "[KAMERA 1][Urz¹d Miasta Los Santos] Hol wejœciowy");
 					TogglePlayerControllable(playerid, 0);
 				}
-				else if(numerekkamer == 2) 
+				else if(params == 2) 
 				{ 
 					SetPlayerPos(playerid, 1449.4949,-1805.1057,82.3912);
 					SetPlayerCameraPos(playerid, 1448.9839, -1806.7433, 80.1729);
@@ -4639,7 +4638,7 @@ CMD:kamerau(playerid, params[])
 					TogglePlayerControllable(playerid, 0);
 					
 				}
-				else if(numerekkamer == 3) 
+				else if(params == 3) 
 				{ 
 					SetPlayerPos(playerid, 1449.4949,-1805.1057,82.3912);
 					SetPlayerCameraPos(playerid, 1454.0310, -1806.6051, 80.1729);
@@ -4647,7 +4646,7 @@ CMD:kamerau(playerid, params[])
 					sendTipMessage(playerid, "[KAMERA 3][Urz¹d Miasta Los Santos] Okienka 1-4");
 					TogglePlayerControllable(playerid, 0);
 				}
-				else if(numerekkamer == 4) 
+				else if(params == 4) 
 				{ 
 					SetPlayerPos(playerid, 1450.6265,-1818.7275,85.7253);
 					SetPlayerCameraPos(playerid, 1455.9574, -1821.9583, 83.3474);
@@ -4655,7 +4654,7 @@ CMD:kamerau(playerid, params[])
 					sendTipMessage(playerid, "[KAMERA 4][Urz¹d Miasta Los Santos] Du¿y hol");
 					TogglePlayerControllable(playerid, 0);
 				}
-				else if(numerekkamer == 5) 
+				else if(params == 5) 
 				{ 
 					SetPlayerPos(playerid, 1456.8298,-1782.6688,77.9502);
 					TogglePlayerControllable(playerid, 1);
@@ -4663,7 +4662,7 @@ CMD:kamerau(playerid, params[])
 					PlayerInfo[playerid][pMuted] = 0;
 					sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
 				}
-				if(sscanf(params, "d", numerekkamer))
+				if(sscanf(params, "d", params))
 				{
 					sendErrorMessage(playerid, "U¿yj /kamerau [numer 1 - 4]. Numer pi¹ty kamery to wy³¹czenie podgl¹du!");
 				}
@@ -6301,12 +6300,12 @@ CMD:brama(playerid)
 						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, 180.000000);
 						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, 0.000000);
 					}
-				}
 					return 1;
+				}
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
 			{
-				else if(PlayerInfo[playerid][pRank] >= 5)//Tylko dla dyrektorow
+				if(PlayerInfo[playerid][pRank] >= 5)//Tylko dla dyrektorow
 				{
 					if(urzadnewm2 == 0)
 					{
@@ -6320,8 +6319,9 @@ CMD:brama(playerid)
 						MoveDynamicObject(bramadyrektora2, 1449.049804, -1842.941528, 81.605247, 5, -0.100000, 0.000000, -0.800033);
 						urzadnewm2 = 0;
 					}
+					return 1;
 				}
-				return 1;
+				
 			}
 			else
 			{
