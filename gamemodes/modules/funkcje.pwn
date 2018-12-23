@@ -3750,7 +3750,7 @@ IsAnAmbulance(carid)
 IsAInteriorVehicle(model)
 {
 	//484- Jacht(Marquis), 519 - Shamal, 553 - Nevada, 409 - Stretch, 416 - Ambulance, 508 - Journey, 582 - Newsvan
-	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582);
+	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582 || model == 431 || model == 427 || model == 570);
 }
 
 stock IS_KomunikacjaMiejsca(carid)
@@ -6823,7 +6823,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		{
 			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
 		}
-		else if(PlayerInfo[playerid][pBiletsamolotowy] == 1)
+		else
 		{
 			SetPlayerInterior(playerid, 1);
 			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
@@ -6881,7 +6881,6 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	else if(model == 570)//kt 
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
-		sendTipMessage(playerid, "Marcepan Marks mówi: Dziêkujemy za podró¿owanie naszymi liniami!");
 	}
 	else if(model == 427)
 	{
