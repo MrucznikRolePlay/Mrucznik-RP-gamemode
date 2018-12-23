@@ -6808,6 +6808,15 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zapinaj Pasy - Jedziemy do piekla!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	
 	}
+	else if(model == 427)//Enforcer pd
+	{
+		SetPlayerInterior(playerid, 1);
+	    SetPlayerPosEx(playerid, 1479.1534,-1617.7773,-4.2809);
+        Wchodzenie(playerid);
+	    TogglePlayerControllable(playerid, 0);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Lap za bron!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	
+	}
 	else if(model == 570)//Wagony KT
 	{
 		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
@@ -6869,10 +6878,18 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
 	}
-	else if(model == 538)//kt 
+	else if(model == 570)//kt 
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
 		sendTipMessage(playerid, "Marcepan Marks mówi: Dziêkujemy za podró¿owanie naszymi liniami!");
+	}
+	else if(model == 427)
+	{
+		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+	}
+	else if(model == 431)
+	{
+		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
 	}
 	else if(model == 582)//sanvan
 	{
