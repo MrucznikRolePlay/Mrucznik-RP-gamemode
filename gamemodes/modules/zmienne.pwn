@@ -820,7 +820,7 @@ new BrFS[8];
 
 
 //nowe bramy
-new BramaWDol;
+//new BramaWDol;
 //new BramaWDolS = 1;
 //fbi
 new FBIdrzwi3;
