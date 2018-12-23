@@ -1527,11 +1527,11 @@ CMD:wywalcb(playerid)
 CMD:sejffp(playerid, params[])
 {
 
-	new fracg = GetPlayerFraction(playerid)
-	new odbiorca[MAX_PLAYER_NAME]
+	new fracg = GetPlayerFraction(playerid);
+	new odbiorca[MAX_PLAYER_NAME];
 	new kwotao;
 	new string[128];
-	new mojeimie[MAX_PLAYER_NAME]
+	new mojeimie[MAX_PLAYER_NAME];
 	if(sscanf(params, "k<fix>d", odbiorca, kwotao))
 	{
 		sendErrorMessage(playerid, "Poprawne u¿ycie komendy to: /sejffp [id gracza] [kwota]");
