@@ -235,12 +235,12 @@ JailDeMorgan(playerid)
 {
 	new losuj= random(sizeof(SpawnStanowe));
 	SetPlayerInterior(playerid, 0);
-	SetPlayerVirtualWorld(playerid, 11);
+	SetPlayerVirtualWorld(playerid, 1);
 	SetPlayerPosEx(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
 	SetCameraBehindPlayer(playerid);
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
-	GameTextForPlayer(playerid, "~w~Witamy w ~r~Sztumie", 5000, 1);
+	GameTextForPlayer(playerid, "~w~Lepiej szykuj ~r~korek w tylek", 5000, 1);
 	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
