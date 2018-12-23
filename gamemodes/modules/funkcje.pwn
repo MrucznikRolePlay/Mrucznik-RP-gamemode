@@ -3750,7 +3750,7 @@ IsAnAmbulance(carid)
 IsAInteriorVehicle(model)
 {
 	//484- Jacht(Marquis), 519 - Shamal, 553 - Nevada, 409 - Stretch, 416 - Ambulance, 508 - Journey, 582 - Newsvan
-	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582 || model == 431 || model == 427 || model == 570);
+	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582 || model == 431 || model == 427 || model == 538);
 }
 
 stock IS_KomunikacjaMiejsca(carid)
@@ -6878,7 +6878,7 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
 	}
-	else if(model == 570)//kt 
+	else if(model == 538)//kt 
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
 	}
