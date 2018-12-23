@@ -29738,7 +29738,7 @@ CMD:kurs(playerid, params[])
                 }
                 else if(IsAPlane(vehicleid))
                 {
-                    if(moneys < 150 || moneys > 1500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $150 do $1500 !"); return 1; }
+                    if(moneys < 900 || moneys > 5000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $900 do $5000!"); return 1; }
     				TaxiDrivers += 1; TransportDuty[playerid] = 1; TransportValue[playerid] = moneys;
     				GetPlayerName(playerid,sendername,sizeof(sendername));
     				format(string, sizeof(string), "Pilot %s jest na s³u¿bie wpisz /wezwij heli aby skorzystaæ z jego us³ug, koszt %d$", sendername, TransportValue[playerid]);
