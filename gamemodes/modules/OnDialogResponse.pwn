@@ -2101,10 +2101,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(IsACop(playerid))
 						{
-							SetPlayerVirtualWorld(playerid,0);
+							SetPlayerVirtualWorld(playerid,1);
 							SetPlayerPosEx(playerid,565.6246,-1485.8623,-8.8300);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
+							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
+							DajKase(playerid, 10);
 						}
 						else
 						{
@@ -2118,7 +2120,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerPosEx(playerid,596.5255, -1489.2544, 15.3587);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
-							GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+							GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
@@ -2130,10 +2132,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SetPlayerVirtualWorld(playerid,10);
-						SetPlayerPosEx(playerid,618.0215,-1452.7937,90.6158);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Recepcja || Dy¿urka");
-						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+						SetPlayerVirtualWorld(playerid,1);
+						SetPlayerPosEx(playerid,586.83704, -1473.89270, 89.30576);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Recepcja");
+						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 212;
 					}
 					case 3://szatnia
@@ -2142,11 +2144,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,14);
-							SetPlayerPosEx(playerid,564.9237, -1466.3726, 33.0378);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia || Zbrojownia ");
+							SetPlayerVirtualWorld(playerid,2);
+							SetPlayerPosEx(playerid,592.65466, -1486.76575, 82.10487);
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia");
 							PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-							GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+							GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
@@ -2161,11 +2163,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,13);
-							SetPlayerPosEx(playerid,1906.8574, -1721.6230, 998.8511);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Tory szkoleniowe");
+							SetPlayerVirtualWorld(playerid,3);
+							SetPlayerPosEx(playerid,591.37579, -1482.26672, 80.43560);
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3 - Zbrojownia");
 							PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-							GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+							GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
@@ -2179,10 +2181,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,15);
-							SetPlayerPosEx(playerid,599.7307, -1499.7308, 37.5980);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Sala Konferencyjna");
-							GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+							SetPlayerVirtualWorld(playerid,4);
+							SetPlayerPosEx(playerid,596.21857, -1477.92395, 84.06664);
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Biura Federalne");
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
@@ -2195,29 +2196,36 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SetPlayerVirtualWorld(playerid,11);
-						SetPlayerPosEx(playerid,623.6523, -1485.1019, 90.7391);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 5, Wiêzienie stanowe");
-						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+						SetPlayerVirtualWorld(playerid,5);
+						SetPlayerPosEx(playerid,589.23029, -1479.66357, 91.74274);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 5, Dyrektorat");
 						PlayerInfo[playerid][pLocal] = 212;
 					}
 					case 7://biura Federalne
 					{
-						SetPlayerPosEx(playerid,610.6687, -1454.7335, 73.9460);
+						SetPlayerPosEx(playerid,585.70782, -1479.54211, 99.01273);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SetPlayerVirtualWorld(playerid,12);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, Biura Federalne");
-						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+						SetPlayerVirtualWorld(playerid,6);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, CID/ERT");
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 8://dach
+					case: 8
+					{
+						SetPlayerPosEx(playerid, 590.42767, -1447.62939, 80.95732);
+						TogglePlayerControllable(playerid, 0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid, 7);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
+					
+					}
+					case 9://dach
 					{
 						if(IsACop(playerid))
 						{
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Dach");
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom X, Dach");
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
