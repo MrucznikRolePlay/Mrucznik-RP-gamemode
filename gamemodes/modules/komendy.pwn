@@ -6260,7 +6260,75 @@ CMD:brama(playerid)
 			}
 		}
 		//nowe komi bray koniec
-		//bramy Urzed Miasta PC by abram01
+		//==========================[NOWE BRAMY URZÊDU MIASTA!]=============================
+		//[23-12-2018] Dual Gate DMV
+		if(IsAUrzednik(playerid) || IsABOR(playerid))
+		{
+			if(PlayerInfo[playerid][pRank] >= 1)
+			{
+				if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
+				{
+					if(urzadnewm == 0)
+					{
+						MoveDynamicObject(dualgdmv1, 1450.117919, -1784.158203, 78.235244, 5, 0.000000, 0.000000, -87.95994);
+						MoveDynamicObject(dualgdmv2, 1453.097045, -1784.160522, 78.235260, 5, 0.000000, 0.000000, -92.16000);
+						urzadnewm = 1;
+					}
+					else
+					{
+						MoveDynamicObject(dualgdmv1, 1450.117919, -1784.158203, 78.235244, 5, 0.000000, 0.000000, 0.000000);
+						MoveDynamicObject(dualgdmv2, 1453.097045, -1784.160522, 78.235260, 5, 0.000000, 0.000000, -180.000000);
+						urzadnewm = 0;
+					}
+					
+					return 1;
+				}
+				if(IsPlayerInRangeOfPoint(playerid, 3.5, 1420.936035, -1815.156494, 78.095230))
+				{
+					if(urzadnewm3 == 0)
+					{
+						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, 90.000000);
+						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, -90.000000);
+						urzadnewm3 = 1;
+					}
+					else
+					{
+						urzadnewm3 = 0;
+						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, -90.000000);
+						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, 90.000000);
+					}
+				
+					return 1;
+				}
+			
+			
+			}
+			else if(PlayerInfo[playerid][pRank] >= 5)//Tylko dla dyrektorow
+			{
+				if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
+				{
+					if(urzadnewm2 == 0)
+					{
+						MoveDynamicObject(bramadyrektora1, 1452.035400, -1842.966674, 81.605247, 5, 0.000000, 0.000000, 265.9202);
+						MoveDynamicObject(bramadyrektora2, 1449.049804, -1842.941528, 81.605247, 5, -0.100000, 0.000000, -82.2801);
+						urzadnewm2 = 1;
+					}
+					else
+					{
+						MoveDynamicObject(bramadyrektora1, 1452.035400, -1842.966674, 81.605247, 5, 0.000000, 0.000000, 180.000000);
+						MoveDynamicObject(bramadyrektora2, 1449.049804, -1842.941528, 81.605247, 5, -0.100000, 0.000000, -0.800033);
+						urzadnewm2 = 0;
+					}
+					return 1;
+				}
+			
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie posiadasz odpowiedniego stopnia aby otworzyæ te drzwi!"); 
+			}
+		
+		}//kawalek starych bram
 		if(IsAUrzednik(playerid) || IsABOR(playerid))
 		{
 			if(IsPlayerInRangeOfPoint(playerid,3,2312.2449, -72.0261, 38.1870))
@@ -6335,6 +6403,8 @@ CMD:brama(playerid)
 			}
 
 		}
+		//==============================[KONIEC]====================================================
+		//..
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] > 1/*PlayerInfo[playerid][pJob] == 14*/)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 10.0, -1113.25769043,-1008.68634033,128.90229797))

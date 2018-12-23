@@ -900,11 +900,35 @@ new bramadom1;
 new bramadom1State = 1;//brama NoA
 //new DzwiDMV;
 //new DzwiDMVs = 1;
-//urzad miasta by abram01
+//urzad miasta by abram01 - SIMEONE EDIT
 new urzad;
 new urzad1;
 new urzad2;
 new urzad3;
+
+
+new urzadnewm = 0;
+new urzadnewm2 = 0;
+new urzadnewm3 = 0;
+new dualgdmv1 = CreateDynamicObject(3089, 1450.117919, -1784.158203, 78.235244, 0.000000, 0.000000, 0.000000, 50, -1, -1, 400.00, 400.00); 
+SetDynamicObjectMaterial(dualgdmv1, 0, 1649, "wglass", "carshowwin2", 0x00000000);
+SetDynamicObjectMaterial(dualgdmv1, 1, 18646, "matcolours", "grey-90-percent", 0x00000000);
+SetDynamicObjectMaterial(dualgdmv1, 2, 14581, "ab_mafiasuitea", "cof_wood2", 0x00000000);
+new dualgdmv2 =CreateDynamicObject(3089, 1453.097045, -1784.160522, 78.235260, 0.000000, 0.000000, -180.000000, 50, -1, -1, 400.00, 400.00);
+SetDynamicObjectMaterial(dualgdmv2, 0, 1649, "wglass", "carshowwin2", 0x00000000);
+SetDynamicObjectMaterial(dualgdmv2, 1, 18646, "matcolours", "grey-90-percent", 0x00000000);
+SetDynamicObjectMaterial(dualgdmv2, 2, 14581, "ab_mafiasuitea", "cof_wood2", 0x00000000);
+new bramadyrektora1 = CreateDynamicObject(3089, 1452.035400, -1842.966674, 81.605247, 0.000000, 0.000000, 180.000000, 50, -1, -1, 400.00, 400.00);
+new bramadyrektora2 = CreateDynamicObject(3089, 1449.049804, -1842.941528, 81.605247, -0.100000, 0.000000, -0.800033, 50, -1, -1, 400.00, 400.00);
+new dudmv3 = CreateDynamicObject(3089, 1420.936035, -1815.156494, 78.095230, 0.000000, 0.000000, -90.000000, 50, -1, -1, 400.00, 400.00);
+SetDynamicObjectMaterial(dudmv3, 0, 1649, "wglass", "carshowwin2", 0x00000000);
+SetDynamicObjectMaterial(dudmv3, 1, 18646, "matcolours", "grey-90-percent", 0x00000000);
+SetDynamicObjectMaterial(dudmv3, 2, 14581, "ab_mafiasuitea", "cof_wood2", 0x00000000);
+new dudmv4 = CreateDynamicObject(3089, 1420.932739, -1818.127075, 78.095237, 0.000000, 0.000000, 90.000000, 50, -1, -1, 400.00, 400.00);
+SetDynamicObjectMaterial(dudmv4, 0, 1649, "wglass", "carshowwin2", 0x00000000);
+SetDynamicObjectMaterial(dudmv4, 1, 18646, "matcolours", "grey-90-percent", 0x00000000);
+SetDynamicObjectMaterial(dudmv4, 2, 14581, "ab_mafiasuitea", "cof_wood2", 0x00000000);
+
 new urzadmove = 0;
 new urzadmove1 = 0;
 new urzadmove2 = 0;
