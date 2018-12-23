@@ -1524,7 +1524,32 @@ CMD:wywalcb(playerid)
 	}
 	return 1;
 }
+CMD:sejffp(playerid, params[])
+{
 
+	new fracg = GetPlayerFraction(playerid)
+	new odbiorca, kwotao;
+	new string[128];
+	new mojeimie = GetPlayerName(playerid);
+	if(sscanf(params, "k<fix>d", giveplayerid, kwotao))
+	{
+		sendErrorMessage(playerid, "Poprawne u¿ycie komendy to: /sejffp [id gracza] [kwota]");
+		return 1;
+	}
+	if(PlayerInfo[playerid][pLider] >= 1)
+	{
+		Sejf_Add(fracg, -kwotao);
+		DajKase(odbiorca, kwotao);
+		format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s , z konta urzêdu! Kwota %s",mojeimie,odbiorca,kwotao);
+		SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz wykonywaæ przelewu frakcji, gdy¿ nie jesteœ liderem!");
+	}
+	
+	return 1;
+}
 CMD:sejff(playerid) return cmd_sejffrakcja(playerid);
 CMD:sejffrakcja(playerid)
 {
