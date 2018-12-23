@@ -28166,7 +28166,7 @@ CMD:stanowe(playerid, params[])
         {
             if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))//nowe stanowe
 			{
-			    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy celach FBI (Poziom 5 w biurowcu FBI)");
+			    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy celach FBI");
 			    return 1;
 			}
 			new giveplayerid;
