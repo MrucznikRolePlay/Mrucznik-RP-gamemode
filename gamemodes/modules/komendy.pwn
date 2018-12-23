@@ -4664,7 +4664,7 @@ CMD:kamerau(playerid, params[])
 				}
 				if(sscanf(params, "d", numerekkamer))
 				{
-					sendErrorMessageMessage(playerid, "U¿yj /kamerau [numer 1 - 4]. Numer pi¹ty kamery to wy³¹czenie podgl¹du!");
+					sendErrorMessage(playerid, "U¿yj /kamerau [numer 1 - 4]. Numer pi¹ty kamery to wy³¹czenie podgl¹du!");
 				}
 			}
 			else
@@ -20198,7 +20198,7 @@ CMD:wejdz(playerid)
             ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking podziemny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
         }
         //winda FBI
-       else if(IsPlayerInRangeOfPoint(playerid,5,586.83704, -1473.89270, 89.30576)//przy recepcji
+		else if(IsPlayerInRangeOfPoint(playerid,5,586.83704, -1473.89270, 89.30576)//przy recepcji
 		|| IsPlayerInRangeOfPoint(playerid,3,592.65466, -1486.76575, 82.10487)//szatnia
 		|| IsPlayerInRangeOfPoint(playerid,5,591.37579, -1482.26672, 80.43560)//zbrojownia
 		|| IsPlayerInRangeOfPoint(playerid,5,596.21857, -1477.92395, 84.06664)//biura federalne
@@ -20239,10 +20239,9 @@ CMD:wejdz(playerid)
         }
 		else if(IsPlayerInRangeOfPoint(playerid, 3.0, 2327.0959,-74.9949,39.2946))//plac manewrowy w pc
 		{
-			SetPlayerPosEx(playerid, 2251.5554,-89.0488,26.4844)
+			SetPlayerPosEx(playerid, 2251.5554,-89.0488,26.4844);
 			SetPlayerVirtualWorld(playerid, 0);
 			GameTextForPlayer(playerid, "~r~Magik z Ciebie", 6000, 1);
-		
 		}
         else if(IsPlayerInRangeOfPoint(playerid,2,1286.0413,-1329.2007,13.5515))
         { //WEJŒCIE DLA S£U¯B PORZ¥DKOWYCH!!! PODPI¥C TYLKO POD GSA PD FBI NG EW. RZ¥D

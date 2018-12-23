@@ -2210,7 +2210,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, CID/ERT");
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case: 8
+					case 8://sale treningowe
 					{
 						SetPlayerPosEx(playerid, 590.42767, -1447.62939, 80.95732);
 						TogglePlayerControllable(playerid, 0);
