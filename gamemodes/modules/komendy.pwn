@@ -4618,13 +4618,9 @@ CMD:kamerau(playerid, params[])
 	{
 		if(IsABOR(playerid) || PlayerInfo[playerid][pRank] >= 2 )
 		{
-			if(IsPlayerInRangeOfPoint(playerid, 3.0, 1456.8298,-1782.6688,77.9502)
+			if(IsPlayerInRangeOfPoint(playerid, 3.0, 1456.8298,-1782.6688,77.9502))
 			{
 				new numerekkamer;
-				if(sscanf(params, "d", numerekkamer))
-				{
-					sendErrorMessageMessage(playerid, "U¿yj /kamerau [numer 1 - 4]. Numer pi¹ty kamery to wy³¹czenie podgl¹du!");
-				}
 				if(numerekkamer == 1) 
 				{ 
 					SetPlayerPos(playerid, 1453.1586,-1785.0184,82.3912);
@@ -4660,12 +4656,15 @@ CMD:kamerau(playerid, params[])
 				}
 				else if(numerekkamer == 5) 
 				{ 
-					SetPlayerPos(playertid, 1456.8298,-1782.6688,77.9502);
+					SetPlayerPos(playerid, 1456.8298,-1782.6688,77.9502);
 					TogglePlayerControllable(playerid, 1);
 					SetCameraBehindPlayer(playerid);
 					PlayerInfo[playerid][pMuted] = 0;
 					sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
-				
+				}
+				if(sscanf(params, "d", numerekkamer))
+				{
+					sendErrorMessageMessage(playerid, "U¿yj /kamerau [numer 1 - 4]. Numer pi¹ty kamery to wy³¹czenie podgl¹du!");
 				}
 			}
 			else
@@ -38955,7 +38954,7 @@ CMD:wyjedz(playerid)
 	}//==============================[KOMENDA DLA LSPD]====================================
 	else if(GetPlayerFraction(playerid) == FRAC_LSPD)
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 3.0, 1588.0006,-1633.5677,13.1671);
+		if(IsPlayerInRangeOfPoint(playerid, 3.0, 1588.0006,-1633.5677,13.1671))
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
@@ -38982,7 +38981,7 @@ CMD:wyjedz(playerid)
 			}
 		
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 3.0, 1588.9865,-1642.7157,12.4604);
+		else if(IsPlayerInRangeOfPoint(playerid, 3.0, 1588.9865,-1642.7157,12.4604))
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
