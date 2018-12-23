@@ -6613,7 +6613,7 @@ CMD:brama(playerid)
 				}
 			}
 		}
-		if(IsAFBI(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		/*if(IsAFBI(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 		    if(IsPlayerInRangeOfPoint(playerid, 20.0, 615.2236328125, -1509.96484375, 16.714672088623))
 			{
@@ -6628,7 +6628,7 @@ CMD:brama(playerid)
 					BramaWDolS = 1;
 			    }
 			}
-		}
+		} */
 		if(IsAMedyk(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)//POCZ?TEK
 		{
             if(IsPlayerInRangeOfPoint(playerid,3,1158.82922, -1325.31738, 31.39840))
