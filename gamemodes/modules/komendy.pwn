@@ -4620,7 +4620,8 @@ CMD:kamerau(playerid, params[])
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, 1456.8298,-1782.6688,77.9502))
 			{
-				new numerekkamer;
+				new numerekkamer = params;
+				
 				if(numerekkamer == 1) 
 				{ 
 					SetPlayerPos(playerid, 1453.1586,-1785.0184,82.3912);
@@ -6263,9 +6264,10 @@ CMD:brama(playerid)
 		//[23-12-2018] Dual Gate DMV
 		if(IsAUrzednik(playerid) || IsABOR(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 1)
+	
+			if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
+				if(PlayerInfo[playerid][pRank] >= 1)
 				{
 					if(urzadnewm == 0)
 					{
@@ -6282,7 +6284,10 @@ CMD:brama(playerid)
 					
 					return 1;
 				}
-				if(IsPlayerInRangeOfPoint(playerid, 3.5, 1420.936035, -1815.156494, 78.095230))
+			}
+			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1420.936035, -1815.156494, 78.095230))
+			{
+				if(PlayerInfo[playerid][pRank] >= 1)
 				{
 					if(urzadnewm3 == 0)
 					{
@@ -6293,18 +6298,15 @@ CMD:brama(playerid)
 					else
 					{
 						urzadnewm3 = 0;
-						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, -90.000000);
-						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, 90.000000);
+						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, 180.000000);
+						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, 0.000000);
 					}
-				
-					return 1;
 				}
-			
-			
+					return 1;
 			}
-			else if(PlayerInfo[playerid][pRank] >= 5)//Tylko dla dyrektorow
+			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
+				else if(PlayerInfo[playerid][pRank] >= 5)//Tylko dla dyrektorow
 				{
 					if(urzadnewm2 == 0)
 					{
@@ -6318,9 +6320,8 @@ CMD:brama(playerid)
 						MoveDynamicObject(bramadyrektora2, 1449.049804, -1842.941528, 81.605247, 5, -0.100000, 0.000000, -0.800033);
 						urzadnewm2 = 0;
 					}
-					return 1;
 				}
-			
+				return 1;
 			}
 			else
 			{

@@ -2101,7 +2101,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(IsACop(playerid))
 						{
-							SetPlayerVirtualWorld(playerid,1);
+							SetPlayerVirtualWorld(playerid,2);
 							SetPlayerPosEx(playerid,565.6246,-1485.8623,-8.8300);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;

@@ -247,13 +247,14 @@ JailDeMorgan(playerid)
 // WYPUSZCZANIE z DEMORGAN
 UnJailDeMorgan(playerid)
 {
-	SetPlayerVirtualWorld(playerid, 10);
-	SetPlayerPosEx(playerid, 618.0215,-1452.7937,90.6158);
+	SetPlayerVirtualWorld(playerid, 1);
+	SetPlayerPosEx(playerid, 593.1899,-1494.0863,82.1648);
 	Wchodzenie(playerid);
 	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;
 	PlayerInfo[playerid][pJailed] = 0;
 	PlayerInfo[playerid][pJailTime] = 0;
+	SendClientMessage(playerid, -1, "Ciesz siê ¿yciem, póki mo¿esz");
 }
 
 DialogListaFrakcji()
@@ -6817,7 +6818,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Lap za bron!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	
 	}
-	else if(model == 570)//Wagony KT
+	else if(model == 538)//Wagony KT
 	{
 		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
 		{
