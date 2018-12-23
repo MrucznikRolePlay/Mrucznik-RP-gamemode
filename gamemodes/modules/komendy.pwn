@@ -20485,7 +20485,7 @@ CMD:wejdz(playerid)
                 {
                     SetPlayerPosEx(playerid,1450.6495,-1772.9926,76.5013);//Ratusz
                     GameTextForPlayer(playerid, "~w~~b~Witamy w ratuszu~n~ By Satius", 10000, 1);
-                    SetPlayerInterior(playerid,5);
+                    SetPlayerInterior(playerid,0);
                     SetPlayerVirtualWorld(playerid,50);
                     Wchodzenie(playerid);
                     PlayerInfo[playerid][pLocal] = 108;
