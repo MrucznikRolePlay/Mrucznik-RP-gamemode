@@ -6799,7 +6799,16 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
-	else if(model == 538)//Poci¹g KT
+	else if(model == 431)//autobus
+	{
+		SetPlayerInterior(playerid, 1);
+	    SetPlayerPosEx(playerid, 1450.3420,-1779.3888,3.6388);
+        Wchodzenie(playerid);
+	    TogglePlayerControllable(playerid, 0);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zapinaj Pasy - Jedziemy do piekla!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	
+	}
+	else if(model == 570)//Wagony KT
 	{
 		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
 		{
