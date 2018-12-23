@@ -3512,11 +3512,11 @@ IsAtGasStation(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		if(PlayerToPoint(6.0,playerid,1004.0070,-939.3102,42.1797) || PlayerToPoint(6.0,playerid,1944.3260,-1772.9254,13.3906))
+		if(PlayerToPoint(10.0,playerid,1004.0070,-939.3102,42.1797) || PlayerToPoint(10.0,playerid,1944.3260,-1772.9254,13.3906))
 		{//LS
 		    return 1;
 		}
-		else if(PlayerToPoint(6.0,playerid,-90.5515,-1169.4578,2.4079) || PlayerToPoint(6.0,playerid,-1609.7958,-2718.2048,48.5391))
+		else if(PlayerToPoint(10.0,playerid,-90.5515,-1169.4578,2.4079) || PlayerToPoint(10.0,playerid,-1609.7958,-2718.2048,48.5391))
 		{//LS
 		    return 1;
 		}
@@ -3560,11 +3560,11 @@ IsAtGasStation(playerid)
 		{//Montgomery
 			return 1;
 		}
-		else if(PlayerToPoint(5.0,playerid,-2086.8000488281,-108.19999694824,35.599998474121))
+		else if(PlayerToPoint(15.0,playerid,1362.5422,-1819.4730,13.5639))
 		{
 		    return 1;
 		}//Plac manewrowy
-		else if(PlayerToPoint(6.0,playerid,1011.7135,-1352.0660,13.5839) || PlayerToPoint(6.0,playerid,1011.8489,-1356.9026,13.5839))
+		else if(PlayerToPoint(10.0,playerid,2471.2898,-2105.1948,14.1259) || PlayerToPoint(6.0,playerid,1011.8489,-1356.9026,13.5839))
 		{//Stacja pod p¹czkiem LS
 		    return 1;
 		}
@@ -6820,21 +6820,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	}
 	else if(model == 538)//Wagony KT
 	{
-		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
-		{
-			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
-		}
-		else
-		{
-			SetPlayerInterior(playerid, 1);
-			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
-			Wchodzenie(playerid);
-			TogglePlayerControllable(playerid, 0);
-			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
-			sendTipMessage(playerid, ">>Pomyœlnie wszed³eœ do poci¹gu! Bilet zosta³ zu¿yty!");
-			sendTipMessage(playerid, ">>>Interior stworzony przez: Charlie112");
-			PlayerInfo[playerid][pBiletsamolotowy]  = 0;
-		}
+		SetPlayerPosEx(playerid, vehx, vehy+3, vehz);
 	
 	}
 	else if(model == 582)//sanvan
@@ -6881,7 +6867,22 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	}
 	else if(model == 538)//kt 
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		
+		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
+		{
+			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
+		}
+		else if(PlayerInfo[playerid][pBiletsamolotowy] == 1)
+		{
+			SetPlayerInterior(playerid, 1);
+			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
+			Wchodzenie(playerid);
+			TogglePlayerControllable(playerid, 0);
+			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+			sendTipMessage(playerid, ">>Pomyœlnie wszed³eœ do poci¹gu! Bilet zosta³ zu¿yty!");
+			sendTipMessage(playerid, ">>>Interior stworzony przez: Charlie112");
+			PlayerInfo[playerid][pBiletsamolotowy]  = 0;
+		}
 	}
 	else if(model == 427)
 	{
