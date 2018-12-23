@@ -20168,6 +20168,13 @@ CMD:wejdz(playerid)
 			
             Wchodzenie(playerid);
         }
+		else if(IsPlayerInRangeOfPoint(playerid, 3.0, 2327.0959,-74.9949,39.2946))//plac manewrowy w pc
+		{
+			SetPlayerPosEx(playerid, 2251.5554,-89.0488,26.4844)
+			SetPlayerVirtualWorld(playerid, 0);
+			GameTextForPlayer(playerid, "~r~Magik z Ciebie", 6000, 1);
+		
+		}
         else if(IsPlayerInRangeOfPoint(playerid,2,1286.0413,-1329.2007,13.5515))
         { //WEJŒCIE DLA S£U¯B PORZ¥DKOWYCH!!! PODPI¥C TYLKO POD GSA PD FBI NG EW. RZ¥D
             if(GetPlayerFraction(playerid) == FRAC_BOR || IsACop(playerid) || GetPlayerOrg(playerid) == FAMILY_SAD)
