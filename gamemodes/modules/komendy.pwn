@@ -20129,17 +20129,18 @@ CMD:wejdz(playerid)
             ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking podziemny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
         }
         //winda FBI
-        else if(IsPlayerInRangeOfPoint(playerid,5,618.0215,-1452.7937,90.6158)//przy recepcji
-        || IsPlayerInRangeOfPoint(playerid,3,623.6523, -1485.1019, 90.7391)//przy sali przesluchan
-        || IsPlayerInRangeOfPoint(playerid,5,610.6687, -1454.7335, 73.9460)//biura
-        || IsPlayerInRangeOfPoint(playerid,5,1906.8574, -1721.6230, 998.8511)//Tory Szkoleniowe oraz szatnie
-        || IsPlayerInRangeOfPoint(playerid,5,564.9237, -1466.3726, 33.0378)//Szatnie Toalety, Zbrojownia
-        || IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//Dach
-        || IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
+       else if(IsPlayerInRangeOfPoint(playerid,5,586.83704, -1473.89270, 89.30576)//przy recepcji
+		|| IsPlayerInRangeOfPoint(playerid,3,592.65466, -1486.76575, 82.10487)//szatnia
+		|| IsPlayerInRangeOfPoint(playerid,5,591.37579, -1482.26672, 80.43560)//zbrojownia
+		|| IsPlayerInRangeOfPoint(playerid,5,596.21857, -1477.92395, 84.06664)//biura federalne
+		|| IsPlayerInRangeOfPoint(playerid,5,589.23029, -1479.66357, 91.74274)//Dyrektorat
+		|| IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//DACH
+		|| IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
 		|| IsPlayerInRangeOfPoint(playerid,5,1059.91748, 1553.65698, 7.59697)//Parking podziemny
-        || IsPlayerInRangeOfPoint(playerid,5,599.7307, -1499.7308, 37.5980))//Sale Konferencyjne
-        {
-            ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia i Toalety\n[Poziom 3]Centrum szkoleniowe\n[Poziom 4]Sala Konferencyjna\n[Poziom 5]Wiêzienie stanowe\n[Poziom 6]Biura Federalne\n[Poziom 7]Dach FBI","Jedz","Anuluj");
+		|| IsPlayerInRangeOfPoint(playerid,5,585.70782, -1479.54211, 99.01273)//CID/ERT
+		|| IsPlayerInRangeOfPoint(playerid,5,590.42767, -1447.62939, 80.95732))//Sale Treningowe
+		{
+			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
         }
         else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1142.2214355469, -1337.7125244141, 419.69830322266))//wyklady wejscie
         {
@@ -20238,13 +20239,21 @@ CMD:wejdz(playerid)
         }
         else if(IsPlayerInRangeOfPoint(playerid,5,608.19793701172, -1458.9837646484, 14.387271881104))//fbi wejscie
         {
-            SetPlayerPosEx(playerid,627.1783, -1470.2279, 90.7054);//fbi srodek
-            GameTextForPlayer(playerid, "~w~Witamy w~y~ Biurach ~b~FBI~n~~r~by Dywan", 5000, 1);
+            SetPlayerPosEx(playerid,592.71991, -1487.62439, 89.30576);//fbi srodek
+            GameTextForPlayer(playerid, "~w~Witamy w~y~ Biurach ~b~FBI~n~~r~by UbunteQ & Iwan", 5000, 1);
             TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
-            SetPlayerVirtualWorld(playerid,10);
+            SetPlayerVirtualWorld(playerid,1);
             PlayerInfo[playerid][pLocal] = 212;
         }
+		else if(IsPlayerInRangeOfPoint(playerid, 5, 592.71991, -1487.62439, 89.30576))
+		{
+			SetPlayerPosEx(playerid,608.19793701172, -1458.9837646484, 14.387271881104);
+			TogglePlayerControllable(playerid, 0);
+			Wchodzenie(playerid);
+			SetPlayerVirtualWorld(playerid, 0);
+			
+		}
         else if(IsPlayerInRangeOfPoint(playerid, 5.0, 213.57328796387, 1811.1787109375, 21.8671875))//pkokj widzen wejscie
         {
             SetPlayerPosEx(playerid, 156.85940551758, 1829.7415771484, 17.693145751953);//pokoj widzen srodek
@@ -21237,6 +21246,14 @@ CMD:wyjdz(playerid)
     		SetPlayerWeatherEx(playerid, ServerWeather);
     		SetPlayerTime(playerid, ServerTime, 0);
     	}
+		else if(IsPlayerInRangeOfPoint(playerid, 5, 592.71991, -1487.62439, 89.30576))
+		{
+			SetPlayerPosEx(playerid,608.19793701172, -1458.9837646484, 14.387271881104);
+			TogglePlayerControllable(playerid, 0);
+			Wchodzenie(playerid);
+			SetPlayerVirtualWorld(playerid, 0);
+			
+		}
     	else if(IsPlayerInRangeOfPoint(playerid,4,1315.1282, -1336.4583, 39.1618))
     	{ //WYJŒCIE EWAKUACYJNE DLA GSA I RZ¥D!!!
             if(GetPlayerFraction(playerid) == FRAC_BOR || GetPlayerOrg(playerid) == FAMILY_SAD)
@@ -21276,17 +21293,18 @@ CMD:wyjdz(playerid)
 			ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking wewnêtrzny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
 		}
 		//winda FBI
-		else if(IsPlayerInRangeOfPoint(playerid,5,618.0215,-1452.7937,90.6158)//przy recepcji
-		|| IsPlayerInRangeOfPoint(playerid,3,623.6523, -1485.1019, 90.7391)//przy sali przesluchan
-		|| IsPlayerInRangeOfPoint(playerid,5,610.6687, -1454.7335, 73.9460)//biura
-		|| IsPlayerInRangeOfPoint(playerid,5,1906.8574, -1721.6230, 998.8511)//Tory Szkoleniowe oraz szatnie
-		|| IsPlayerInRangeOfPoint(playerid,5,564.9237, -1466.3726, 33.0378)//Szatnie Toalety, Zbrojownia
-		|| IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//Dach
+		else if(IsPlayerInRangeOfPoint(playerid,5,586.83704, -1473.89270, 89.30576)//przy recepcji
+		|| IsPlayerInRangeOfPoint(playerid,3,592.65466, -1486.76575, 82.10487)//szatnia
+		|| IsPlayerInRangeOfPoint(playerid,5,591.37579, -1482.26672, 80.43560)//zbrojownia
+		|| IsPlayerInRangeOfPoint(playerid,5,596.21857, -1477.92395, 84.06664)//biura federalne
+		|| IsPlayerInRangeOfPoint(playerid,5,589.23029, -1479.66357, 91.74274)//Dyrektorat
+		|| IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//DACH
 		|| IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
 		|| IsPlayerInRangeOfPoint(playerid,5,1059.91748, 1553.65698, 7.59697)//Parking podziemny
-		|| IsPlayerInRangeOfPoint(playerid,5,599.7307, -1499.7308, 37.5980))//Sale Konferencyjne
+		|| IsPlayerInRangeOfPoint(playerid,5,585.70782, -1479.54211, 99.01273)//CID/ERT
+		|| IsPlayerInRangeOfPoint(playerid,5,590.42767, -1447.62939, 80.95732))//Sale Treningowe
 		{
-			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia i Toalety\n[Poziom 3]Centrum szkoleniowe\n[Poziom 4]Sala Konferencyjna\n[Poziom 5]Wiêzienie stanowe\n[Poziom 6]Biura Federalne\n[Poziom 7]Dach FBI","Jedz","Anuluj");
+			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
         }
 		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1144.0762939453, -1324.9822998047, 419.69830322266))//wypoczynek srodek
 		{
