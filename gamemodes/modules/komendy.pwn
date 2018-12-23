@@ -4625,7 +4625,7 @@ CMD:kamerau(playerid, params[])
 				sendTipMessage(playerid, "[5] = Wy³¹czenie podgl¹du");
 				return 1;
 			}
-			if(IsPlayerInRangeOfPoint(playerid, 3.0, 1456.8298,-1782.6688,77.9502))
+			if(IsPlayerInRangeOfPoint(playerid, 3.0, 1456.8298,-1782.6688,77.9502) || IsPlayerInRangeOfPoint(playerid, 3.0, 1453.1586,-1785.0184,82.3912) || IsPlayerInRangeOfPoint(playerid, 3.0, 1449.4949,-1805.1057,82.3912) || IsPlayerInRangeOfPoint(playerid, 3.0, 1450.6265,-1818.7275,85.7253))
 			{
 
 				if(kamid == 1) 
@@ -6287,6 +6287,11 @@ CMD:brama(playerid)
 					
 					return 1;
 				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie posiadasz odpowiedniego stopnia identyfikatora aby to otworzyæ!");
+				}
+				
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1420.936035, -1815.156494, 78.095230))
 			{
@@ -6306,10 +6311,14 @@ CMD:brama(playerid)
 					}
 					return 1;
 				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie posiadasz odpowiedniego stopnia identyfikatora aby to otworzyæ!");
+				}
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
 			{
-				if(PlayerInfo[playerid][pRank] >= 5)//Tylko dla dyrektorow
+				if(PlayerInfo[playerid][pLider] == 11)//Tylko dla dyrektorow
 				{
 					if(urzadnewm2 == 0)
 					{
@@ -6325,11 +6334,15 @@ CMD:brama(playerid)
 					}
 					return 1;
 				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie posiadasz odpowiedniego stopnia identyfikatora aby to otworzyæ!");
+				}
 				
 			}
 			else
 			{
-				sendErrorMessage(playerid, "Nie posiadasz odpowiedniego stopnia aby otworzyæ te drzwi!"); 
+				sendErrorMessage(playerid, "Nie jesteœ w miejscu, w którym jest brama!"); 
 			}
 		
 		}//kawalek starych bram
