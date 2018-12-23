@@ -4618,133 +4618,66 @@ CMD:kamerau(playerid, params[])
 	{
 		if(IsABOR(playerid) || PlayerInfo[playerid][pRank] >= 2 )
 		{
-			new numerekkamer;
-			if(sscanf(params, "d", numerekkamer))
+			if(IsPlayerInRangeOfPoint(playerid, 3.0, 1456.8298,-1782.6688,77.9502)
 			{
-				sendTipMessage(playerid, "U¿yj /kamerau [numer 1 - 4]");
-				return 1;
+				new numerekkamer;
+				if(sscanf(params, "d", numerekkamer))
+				{
+					sendErrorMessageMessage(playerid, "U¿yj /kamerau [numer 1 - 4]. Numer pi¹ty kamery to wy³¹czenie podgl¹du!");
+				}
+				if(numerekkamer == 1) 
+				{ 
+					SetPlayerPos(playerid, 1453.1586,-1785.0184,82.3912);
+					SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
+					SetPlayerCameraLookAt(playerid, 1448.0886, -1782.2822, 79.7908);
+					sendTipMessage(playerid, "[KAMERA 1][Urz¹d Miasta Los Santos] Hol wejœciowy");
+					TogglePlayerControllable(playerid, 0);
+				}
+				else if(numerekkamer == 2) 
+				{ 
+					SetPlayerPos(playerid, 1449.4949,-1805.1057,82.3912);
+					SetPlayerCameraPos(playerid, 1448.9839, -1806.7433, 80.1729);
+					SetPlayerCameraLookAt(playerid, 1448.8718, -1805.7517, 79.8730);
+					sendTipMessage(playerid, "[KAMERA 2][Urz¹d Miasta Los Santos] Okienka 5-8");
+					TogglePlayerControllable(playerid, 0);
+					
+				}
+				else if(numerekkamer == 3) 
+				{ 
+					SetPlayerPos(playerid, 1449.4949,-1805.1057,82.3912);
+					SetPlayerCameraPos(playerid, 1454.0310, -1806.6051, 80.1729);
+					SetPlayerCameraLookAt(playerid, 1453.9332, -1805.6119, 79.8480);
+					sendTipMessage(playerid, "[KAMERA 3][Urz¹d Miasta Los Santos] Okienka 1-4");
+					TogglePlayerControllable(playerid, 0);
+				}
+				else if(numerekkamer == 4) 
+				{ 
+					SetPlayerPos(playerid, 1450.6265,-1818.7275,85.7253);
+					SetPlayerCameraPos(playerid, 1455.9574, -1821.9583, 83.3474);
+					SetPlayerCameraLookAt(playerid, 1455.3961, -1821.1326, 82.9175);
+					sendTipMessage(playerid, "[KAMERA 4][Urz¹d Miasta Los Santos] Du¿y hol");
+					TogglePlayerControllable(playerid, 0);
+				}
+				else if(numerekkamer == 5) 
+				{ 
+					SetPlayerPos(playertid, 1456.8298,-1782.6688,77.9502);
+					TogglePlayerControllable(playerid, 1);
+					SetCameraBehindPlayer(playerid);
+					PlayerInfo[playerid][pMuted] = 0;
+					sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
+				
+				}
 			}
-			if(numerekkamer < 1 || numerekkamer > 5) 
-			{ 
-				sendTipMessage(playerid, "Numer kamery od 1 do 5! --> 5 to wy³¹czenie podgl¹du!"); 
-				return 1; 
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ w odpowiednim miejscu!");
 			}
-			if(numerekkamer == 1) 
-			{ 
-				SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
-				SetPlayerCameraLookAt(playerid, 1448.0886, -1782.2822, 79.7908);
-				sendTipMessage(playerid, "[KAMERA 1][Urz¹d Miasta Los Santos] Hol wejœciowy");
-				TogglePlayerControllable(playerid, 0);
-			}
-			else if(numerekkamer == 2) 
-			{ 
-				SetPlayerCameraPos(playerid, 1448.9839, -1806.7433, 80.1729);
-				SetPlayerCameraLookAt(playerid, 1448.8718, -1805.7517, 79.8730);
-				sendTipMessage(playerid, "[KAMERA 2][Urz¹d Miasta Los Santos] Okienka 5-8");
-				TogglePlayerControllable(playerid, 0);
-			}
-			else if(numerekkamer == 3) 
-			{ 
-				SetPlayerCameraPos(playerid, 1454.0310, -1806.6051, 80.1729);
-				SetPlayerCameraLookAt(playerid, 1453.9332, -1805.6119, 79.8480);
-				sendTipMessage(playerid, "[KAMERA 3][Urz¹d Miasta Los Santos] Okienka 1-4");
-				TogglePlayerControllable(playerid, 0);
-			}
-			else if(numerekkamer == 4) 
-			{ 
-				SetPlayerCameraPos(playerid, 1455.9574, -1821.9583, 83.3474);
-				SetPlayerCameraLookAt(playerid, 1455.3961, -1821.1326, 82.9175);
-				sendTipMessage(playerid, "[KAMERA 4][Urz¹d Miasta Los Santos] Okienka 1-4");
-				TogglePlayerControllable(playerid, 0);
-			}
-			else if(numerekkamer == 5) 
-			{ 
-			
-				TogglePlayerControllable(playerid, 1);
-				SetCameraBehindPlayer(playerid);
-				PlayerInfo[playerid][pMuted] = 0;
-				SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-				sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
-			
-			}
-		
 		}
 		else
 		{
 			sendErrorMessage(playerid, "Nie posiadasz dostêpu do tej komendy!");
 		}
 	
-	/*
-		if(!IsABOR(playerid))
-		{
-			sendErrorMessage(playerid, "Nie jesteœ agentem USSS!");
-			return 1;
-		}
-		if(PlayerInfo[playerid][pRank] < 2)
-		{
-			sendErrorMessage(playerid, "Musisz mieæ 2 rangê aby tego u¿yæ!");
-			return 1;
-		}
-		if(isnull(params))
-		{
-			sendErrorMessage(playerid, "Prawid³owa komenda to: /podgladu [1-4]");
-			return 1;
-		}
-		if(IsPlayerInRangeOfPoint(playerid, 2.0,1456.8341,-1782.3240,77.9453)
-		{
-			sendErrorMessage(playerid, "Nie jesteœ w pokoju ochrony // PodejdŸ do biurka!");
-			return 1;
-		}
-		new numerekkamer;
-		if(sscanf(params, "d", numerekkamer))
-		{
-			sendTipMessage(playerid, "U¿yj /kamerau [numer 1 - 4]");
-			return 1;
-		}
-		if(numerekkamer < 1 || numerekkamer > 5) 
-		{ 
-			sendTipMessage(playerid, "Numer kamery od 1 do 5! --> 5 to wy³¹czenie podgl¹du!"); 
-			return 1; 
-		}
-		if(numerekkamer == 1) 
-		{ 
-			SetPlayerCameraPos(playerid, 1447.6902, -1783.1970, 80.2107);
-			SetPlayerCameraLookAt(playerid, 1448.0886, -1782.2822, 79.7908);
-			sendTipMessage(playerid, "[KAMERA 1][Urz¹d Miasta Los Santos] Hol wejœciowy");
-			TogglePlayerControllable(playerid, 0);
-		}
-		else if(numerekkamer == 2) 
-		{ 
-			SetPlayerCameraPos(playerid, 1448.9839, -1806.7433, 80.1729);
-			SetPlayerCameraLookAt(playerid, 1448.8718, -1805.7517, 79.8730);
-			sendTipMessage(playerid, "[KAMERA 2][Urz¹d Miasta Los Santos] Okienka 5-8");
-			TogglePlayerControllable(playerid, 0);
-		}
-		else if(numerekkamer == 3) 
-		{ 
-			SetPlayerCameraPos(playerid, 1454.0310, -1806.6051, 80.1729);
-			SetPlayerCameraLookAt(playerid, 1453.9332, -1805.6119, 79.8480);
-			sendTipMessage(playerid, "[KAMERA 3][Urz¹d Miasta Los Santos] Okienka 1-4");
-			TogglePlayerControllable(playerid, 0);
-		}
-		else if(numerekkamer == 4) 
-		{ 
-			SetPlayerCameraPos(playerid, 1455.9574, -1821.9583, 83.3474);
-			SetPlayerCameraLookAt(playerid, 1455.3961, -1821.1326, 82.9175);
-			sendTipMessage(playerid, "[KAMERA 4][Urz¹d Miasta Los Santos] Okienka 1-4");
-			TogglePlayerControllable(playerid, 0);
-		}
-		else if(numerekkamer == 5) 
-		{ 
-		
-			TogglePlayerControllable(playerid, 1);
-			SetCameraBehindPlayer(playerid);
-			PlayerInfo[playerid][pMuted] = 0;
-			SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-			sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
-		
-		}
-		*/
 		
 	}
 	
