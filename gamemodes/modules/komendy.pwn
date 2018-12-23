@@ -38742,418 +38742,259 @@ if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania poz
 CMD:wjedz(playerid) return cmd_wyjedz(playerid);
 CMD:wyjedz(playerid)
 {
+//====================[DLA USSS]======================================
 	if(GetPlayerFraction(playerid) == FRAC_BOR)
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 1825.18274, -1538.21204, 13.11075))//WJAZD OD PRZODU --> PARKING G£ÓWNY
+		if(IsPlayerInRangeOfPoint(playerid, 3.0, 1825.18274, -1538.21204, 13.11075))//Wjazdowa pozycja
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1818.77222, -1536.09314, 13.11075); 
-				SetVehicleVirtualWorld(pVehID, 0);
-				PutPlayerInVehicle(playerid, pVehID, 1); 
-				//for(new i=0; i<500; i++)
-				foreach(new i : Player)
-				{
-					if(!IsPlayerInVehicle(i, pVehID))
-					{
-						new iseat = GetPlayerVehicleSeat(i);
-						SetPlayerVirtualWorld(i, 0);
-						PutPlayerInVehicle(i, pVehID, iseat);
-					}
-				}
-			
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Nie jesteœ w ¿adnym pojeŸdzie!");
-			}
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1818.77222, -1536.09314, 13.11075))//WYJAZD OD PRZODU --> PARKING G£ÓWNY
-		{
-			if(IsPlayerInAnyVehicle(playerid))
-			{
-				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1825.18274, -1538.21204, 13.11075); 
-				SetVehicleVirtualWorld(pVehID, 0);
-				PutPlayerInVehicle(playerid, pVehID, 1); 
-				//for(new i=0; i<500; i++)
-				foreach(new i : Player)
-				{
-					if(!IsPlayerInVehicle(i, pVehID))
-					{
-						new iseat = GetPlayerVehicleSeat(i);
-						SetPlayerVirtualWorld(i, 0);
-						PutPlayerInVehicle(i, pVehID, iseat);
-					}
-				}
-			
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Nie jesteœ w ¿adnym pojeŸdzie!");
-			}
-		
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1750.55762, -1537.86279, 9.51801))//WJAZD DO PARKINGU WEWNÊTRZNEGO NA VW 2
-		{
-			if(IsPlayerInAnyVehicle(playerid))
-			{
-				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, -2089.55835, -414.24173, 36.32352); 
+				SetVehiclePos(pVehID, 1818.77222, -1536.09314, 13.11075);
 				SetVehicleVirtualWorld(pVehID, 2);
-				PutPlayerInVehicle(playerid, pVehID, 1); 
-				SendClientMessage(playerid, -1, "Agent Marcepan Marks mówi: Wjecha³eœ na parking podziemny!");
-				//for(new i=0; i<500; i++)
-				foreach(new i : Player)
+				SetPlayerVirtualWorld(playerid, 2);
+				PutPlayerInVehicle(playerid, pVehID, 1);
+				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
 					if(!IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 2);
 						PutPlayerInVehicle(i, pVehID, iseat);
-						SendClientMessage(i, -1, "Agent Marcepan Marks mówi: Wjecha³eœ na parking podziemny!");
 					}
 				}
 			
 			}
-			else
+			else//Jeœli gracz jest sam, nie w pojeŸdzie
 			{
-				sendErrorMessage(playerid, "Nie jesteœ w ¿adnym pojeŸdzie!");
+				SetPlayerVirtualWorld(playerid, 2);
+				SetPlayerPos(playerid, 1818.77222, -1536.09314, 13.11075);
 			}
 		
+		
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 5.0, -2089.55835, -414.24173, 36.32352))//WYJAZD OD PARKINGU WEWNÊTRZNEGO NA VW 2
+		else if(IsPlayerInRangeOfPoint(playerid, 3.0, 1818.77222, -1536.09314, 13.11075))//Wyjazdowa pozycja
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1750.55762, -1537.86279, 9.51801); 
+				SetVehiclePos(pVehID, 1825.18274, -1538.21204, 13.11075);
 				SetVehicleVirtualWorld(pVehID, 0);
+				SetPlayerVirtualWorld(playerid, 0);
 				PutPlayerInVehicle(playerid, pVehID, 1);
-				SendClientMessage(playerid, -1, "Agent Marcepan Marks mówi: Wyjecha³eœ z parkingu podziemnego!");
-				//for(new i=0; i<500; i++)
-				foreach(new i : Player)
+				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
 					if(!IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 0);
 						PutPlayerInVehicle(i, pVehID, iseat);
-						SendClientMessage(i, -1, "Agent Marcepan Marks mówi: Wyjecha³eœ z parkingu podziemnego!");
 					}
 				}
 			
 			}
-			else
+			else//Jeœli gracz jest sam, nie w pojeŸdzie
 			{
-				sendErrorMessage(playerid, "Nie jesteœ w ¿adnym pojeŸdzie!");
+				SetPlayerVirtualWorld(playerid, 0);
+				SetPlayerPos(playerid, 1825.18274, -1538.21204, 13.11075);
+			}
+		
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1750.55762, -1537.86279, 9.51801))//WJAZD NA PARKING PODZIEMNY
+		{
+			if(IsPlayerInAnyVehicle(playerid))
+			{
+				new pVehID = GetPlayerVehicleID(playerid);
+				SetVehiclePos(pVehID, -2089.55835, -414.24173, 36.32352);
+				SetVehicleVirtualWorld(pVehID, 2);
+				SetPlayerVirtualWorld(playerid, 2);
+				PutPlayerInVehicle(playerid, pVehID, 1);
+				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
+				{
+					if(!IsPlayerInVehicle(i, pVehID))
+					{
+						new iseat = GetPlayerVehicleSeat(i);
+						SetPlayerVirtualWorld(i, 2);
+						PutPlayerInVehicle(i, pVehID, iseat);
+					}
+				}
+			
+			}
+			else//Jeœli gracz jest sam, nie w pojeŸdzie
+			{
+				SetPlayerVirtualWorld(playerid, 2);
+				SetPlayerPos(playerid, -2089.55835, -414.24173, 36.32352);
+			}
+		
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 5.0, -2089.55835, -414.24173, 36.32352))//WYJAZD Z PARKINGU PODZIEMNEGO
+		{
+			if(IsPlayerInAnyVehicle(playerid))
+			{
+				new pVehID = GetPlayerVehicleID(playerid);
+				SetVehiclePos(pVehID, 1750.55762, -1537.86279, 9.51801);
+				SetVehicleVirtualWorld(pVehID, 0);
+				SetPlayerVirtualWorld(playerid, 0);
+				PutPlayerInVehicle(playerid, pVehID, 1);
+				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
+				{
+					if(!IsPlayerInVehicle(i, pVehID))
+					{
+						new iseat = GetPlayerVehicleSeat(i);
+						SetPlayerVirtualWorld(i, 0);
+						PutPlayerInVehicle(i, pVehID, iseat);
+					}
+				}
+			
+			}
+			else//Jeœli gracz jest sam, nie w pojeŸdzie
+			{
+				SetPlayerVirtualWorld(playerid, 0);
+				SetPlayerPos(playerid, 1750.55762, -1537.86279, 9.51801);
 			}
 		
 		}
 		else
 		{
-			sendErrorMessage(playerid, ">>Nie jesteœ w miejscu, w którym mo¿esz u¿yæ takiej komendy!");
+			sendErrorMessage(playerid, "Nie jesteœ w odpowiednim miejscu!"); 
 		}
-		
-		
-	}//==============================[KOMENDA DLA FBI]====================================
+	
+	}
+	//===================[KOMENDA DLA FBI]=====================================
 	else if(GetPlayerFraction(playerid) == FRAC_FBI)
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 593.47217, -1509.27258, 15.75509))//Wjazd na podziemny
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 593.47217, -1509.27258, 15.75509))//Wjazdowa pozycja
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1059.91748, 1553.65698, 7.59697); 
+				SetVehiclePos(pVehID, 1059.91748, 1553.65698, 7.59697);
 				SetVehicleVirtualWorld(pVehID, 2);
-				PutPlayerInVehicle(playerid, pVehID, 1); 
-				SendClientMessage(playerid, -1, "Tajny agent Marcepan Marks mówi: Wjecha³eœ na parking podziemny!");
-				//for(new i=0; i<500; i++)
-				foreach(new i : Player)
+				SetPlayerVirtualWorld(playerid, 2);
+				PutPlayerInVehicle(playerid, pVehID, 1);
+				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
 					if(!IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 2);
 						PutPlayerInVehicle(i, pVehID, iseat);
-						SendClientMessage(i, -1, "Tajny agent Marcepan Marks mówi: Wjecha³eœ na parking podziemny!");
 					}
 				}
 			
 			}
-			else
+			else//Jeœli gracz jest sam, nie w pojeŸdzie
 			{
-				sendErrorMessage(playerid, "Nie jesteœ w ¿adnym pojeŸdzie!");
+				SetPlayerVirtualWorld(playerid, 2);
+				SetPlayerPos(playerid, 1059.91748, 1553.65698, 7.59697);
 			}
 		
+		
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1059.91748, 1553.65698, 7.59697))//Wyjazd z podziemnego
+		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1059.91748, 1553.65698, 7.59697))//Pozycja wyjazdowa
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID,  593.47217, -1509.27258, 15.75509); 
+				SetVehiclePos(pVehID, 593.47217, -1509.27258, 15.75509);
 				SetVehicleVirtualWorld(pVehID, 0);
-				PutPlayerInVehicle(playerid, pVehID, 1); 
-				SendClientMessage(playerid, -1, "Tajny agent Marcepan Marks mówi: Wjecha³eœ na parking podziemny!");
-				//for(new i=0; i<500; i++)
-				foreach(new i : Player)
+				SetPlayerVirtualWorld(playerid, 0);
+				PutPlayerInVehicle(playerid, pVehID, 1);
+				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
 					if(!IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 0);
 						PutPlayerInVehicle(i, pVehID, iseat);
-						SendClientMessage(i, -1, "Tajny agent Marcepan Marks mówi: Wjecha³eœ na parking podziemny!");
 					}
 				}
 			
 			}
-			else
+			else//Jeœli gracz jest sam, nie w pojeŸdzie
 			{
-				sendErrorMessage(playerid, "Nie jesteœ w ¿adnym pojeŸdzie!");
+				SetPlayerVirtualWorld(playerid, 0);
+				SetPlayerPos(playerid, 593.47217, -1509.27258, 15.75509);
 			}
+		
 		}
 		else
 		{
-			sendErrorMessage(playerid, ">>Nie jesteœ w miejscu, w którym mo¿esz u¿yæ tej komendy!");
+			sendErrorMessage(playerid, "Nie jesteœ w odpowiednim miejscu!"); 
 		}
+	
 	
 	}//==============================[KOMENDA DLA LSPD]====================================
 	else if(GetPlayerFraction(playerid) == FRAC_LSPD)
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 1588.0006,-1633.5677,13.1671))//Wjazd na podziemny
+		if(IsPlayerInRangeOfPoint(playerid, 3.0, 1588.0006,-1633.5677,13.1671);
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1588.9865,-1642.7157,12.4604); 
+				SetVehiclePos(pVehID, 1588.9865,-1642.7157,12.4604);
 				SetVehicleVirtualWorld(pVehID, 2);
-				PutPlayerInVehicle(playerid, pVehID, 1); 
-				SendClientMessage(playerid, -1, "Oficer Marcepan Marks mówi: Wjecha³eœ na parking podziemny!");
-				//for(new i=0; i<500; i++)
-				foreach (new i : Player)
+				SetPlayerVirtualWorld(playerid, 2);
+				PutPlayerInVehicle(playerid, pVehID, 1);
+				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
 					if(!IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 2);
 						PutPlayerInVehicle(i, pVehID, iseat);
-						SendClientMessage(i, -1, "Oficer Marcepan Marks mówi: Wjecha³eœ na parking podziemny!");
 					}
 				}
 			
 			}
-			else
+			else//Jeœli gracz jest sam, nie w pojeŸdzie
 			{
-				sendErrorMessage(playerid, "Nie jesteœ w ¿adnym pojeŸdzie!");
+				SetPlayerVirtualWorld(playerid, 2);
+				SetPlayerPos(playerid, 1588.9865,-1642.7157,12.4604);
 			}
+		
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1588.9865,-1642.7157,12.4604))//Wyjazd z podziemnego
+		else if(IsPlayerInRangeOfPoint(playerid, 3.0, 1588.9865,-1642.7157,12.4604);
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1588.0006,-1633.5677,13.1671); 
+				SetVehiclePos(pVehID, 1588.0006,-1633.5677,13.1671);
 				SetVehicleVirtualWorld(pVehID, 0);
-				PutPlayerInVehicle(playerid, pVehID, 1); 
-				SendClientMessage(playerid, -1, "Oficer Marcepan Marks mówi: Wyjecha³eœ z parkingu podziemnego!");
-				//for(new i=0; i<500; i++)
-				foreach (new i : Player)
+				SetPlayerVirtualWorld(playerid, 0);
+				PutPlayerInVehicle(playerid, pVehID, 1);
+				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
 					if(!IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 0);
 						PutPlayerInVehicle(i, pVehID, iseat);
-						SendClientMessage(i, -1, "Oficer Marcepan Marks mówi: Wyjecha³eœ z parkingu podziemnego!");
 					}
 				}
 			
 			}
-			else
+			else//Jeœli gracz jest sam, nie w pojeŸdzie
 			{
-				sendErrorMessage(playerid, "Nie jesteœ w ¿adnym pojeŸdzie!");
+				SetPlayerVirtualWorld(playerid, 0);
+				SetPlayerPos(playerid, 1588.0006,-1633.5677,13.1671);
 			}
 		}
 		else
 		{
-			sendErrorMessage(playerid, ">>Nie jesteœ w miejscu, w którym mo¿esz u¿yæ tej komendy!");
+			sendErrorMessage(playerid, "Nie jesteœ w odpowiednim miejscu pauo!"); 
 		}
+	
 	
 	}
 	else
 	{
-		sendErrorMessage(playerid, ">>Nie posiadasz dostêpu do tej komendy!");
+		sendErrorMessage(playerid, "Nie jesteœ w organizacji, która ma parking podziemny!");
 	}
-	
 
-	return 1; 
-}
-
-/*
-//noweobiekty 2.5.7 aktualizacja szym3k wjedz wyjedz gsa 
-CMD:wjedz(playerid)
-{
-	if(IsPlayerInRangeOfPoint(playerid, 5.0, 384.2610,-1825.6091,7.9316) && PlayerInfo[playerid][pRank] >=6 && GetPlayerVirtualWorld(playerid) == 0 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
-	{
-		if(IbizaZamek) return sendTipMessageEx(playerid, 0xB52E2BFF, "Klub jest w tej chwili zamkniêty");
-		if(!IsPlayerInAnyVehicle(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ w pojeŸdzie");
-		if(IbizaWjazd) return sendTipMessageEx(playerid, 0xB52E2BFF, "Przejazd jest w tej chwili u¿ywany, spróbuj póŸniej.");
-		new veh = GetPlayerVehicleID(playerid);
-		if(GetPlayerVehicleSeat(playerid) != 0 ) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ kierowc¹");
-		IbizaWjazd = true;
-
-		TogglePlayerControllable(playerid, false);
-		SetTimerEx("FreezeVeh", 50, false, "ddd", veh, playerid, 0);
-		SetVehiclePos(veh, 1952.7168,-2466.7805,18.6352);
-		SetVehicleZAngle(veh, 234.9069);
-		SetVehicleVirtualWorld(veh, 1);
-		for(new i=0; i<MAX_PLAYERS; i++)
-		{
-			if(!IsPlayerInVehicle(i, veh) ) continue;
-			SetPlayerVirtualWorld(i, 1);
-			SetPVarInt(i, "IbizaWejdz", 1);
-			PlayAudioStreamForPlayer(i, IbizaStream[IbizaStreamID]);
-			if(IbizaSwiatla) WlaczSwiatlaP(i);
-			else WylaczSwiatlaP(i);
-		}
-	}
-	//GSA
-	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1825.18274, -1538.21204, 13.11075))
-	{
-		if (IsPlayerInAnyVehicle (playerid))
-		{
-			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 1818.77222, -1536.09314, 13.11075);
-		}
-		else
-		{
-			SetPlayerPos (playerid, 1818.77222, -1536.09314, 13.11075);
-		}
-	}
-	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1750.55762, -1537.86279, 9.51801))//wew
-	{
-		if (IsPlayerInAnyVehicle (playerid))
-		{
-			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, -2089.55835, -414.24173, 36.32352);
-
-		}
-		else
-		{
-			SetPlayerPos (playerid, -2089.55835, -414.24173, 36.32352);
-		}
-	}
-	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1754.29529, -1593.04077, 13.51426))
-	{
-		if (IsPlayerInAnyVehicle (playerid))
-		{
-			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 1753.16077, -1587.40088, 13.51426);
-		}
-		else
-		{
-			SetPlayerPos (playerid, 1753.16077, -1587.40088, 13.51426);
-		}
-	}
-	//FBI
-	else if (IsPlayerInRangeOfPoint(playerid, 10.0, 593.47217, -1509.27258, 15.75509))
-	{
-		if (IsPlayerInAnyVehicle (playerid))
-		{
-			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 1059.91748, 1553.65698, 7.59697);
-			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Aby wyjechaæ wpisz /wyjedz");
-		}
-		else
-		{
-			SetPlayerPos (playerid, 1059.91748, 1553.65698, 7.59697);
-			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Aby wjechaæ wpisz /wyjedz");
-		}
-
-	}
 	return 1;
 }
 
-
-CMD:wyjedz(playerid)
-{
-	if(IsPlayerInRangeOfPoint(playerid, 5.0, 1952.7168,-2466.7805,15.6352) && PlayerInfo[playerid][pRank] >= 6 && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
-	{
-		if(!IsPlayerInAnyVehicle(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ w pojeŸdzie");
-		new veh = GetPlayerVehicleID(playerid);
-		if(GetPlayerVehicleSeat(playerid) != 0 ) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ kierowc¹");
-		if(IbizaWjazd) return sendTipMessageEx(playerid, 0xB52E2BFF, "Przejazd jest w tej chwili u¿ywany, spróbuj póŸniej.");
-		SetVehiclePos(veh, 384.2610,-1825.6091,7.9316);
-		SetVehicleZAngle(veh, 69.6582);
-		SetVehicleVirtualWorld(veh, 0);
-		for(new i=0; i<MAX_PLAYERS; i++)
-		{
-			if(!IsPlayerInVehicle(i, veh) ) continue;
-			SetPlayerVirtualWorld(i, 0);
-			SetPVarInt(i, "IbizaWejdz", 0);
-			StopAudioStreamForPlayer(i);
-			IbizaWyjscie(playerid);
-		}
-	}
-	//GSA
-	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1818.77222, -1536.09314, 13.11075))
-	{
-		if (IsPlayerInAnyVehicle (playerid))
-		{
-			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 1828.2227,-1538.9498,13.2345);
-		}
-		else
-		{
-			SetPlayerPos (playerid, 1825.18274, -1538.21204, 13.11075);
-		}
-	}
-	else if (IsPlayerInRangeOfPoint(playerid, 5.0, -2089.55835, -414.24173, 36.32352))
-	{
-		if (IsPlayerInAnyVehicle (playerid))
-		{
-			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 1753.65845, -1537.63806, 9.45862);
-		}
-		else
-		{
-			SetPlayerPos (playerid, 1753.65845, -1537.63806, 9.45862);
-		}
-	}
-	else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1753.16077, -1587.40088, 13.51426))
-	{
-		if (IsPlayerInAnyVehicle (playerid))
-		{
-			new vehicleid = GetPlayerVehicleID (playerid);
-			SetVehiclePos (vehicleid, 1752.72913, -1596.25830, 13.35654);
-		}
-		else
-		{
-			SetPlayerPos (playerid, 1752.72913, -1596.25830, 13.35654);
-		}
-	}
-	//FBI
-
-	else if (IsPlayerInRangeOfPoint(playerid, 15.0, 1059.91748, 1553.65698, 7.59697))
-	{
-		if (IsPlayerInAnyVehicle (playerid))
-		{
-			new vehicleid = GetPlayerVehicleID (playerid); 
-			SetVehiclePos (vehicleid, 593.47217, -1509.27258, 15.75509);
-			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Opuœci³eœ parking wewnêtrzny! Aby ponownie wjechaæ wpisz /wjedz");
-		}
-		else
-		{
-			SetPlayerPos (playerid,  593.47217, -1509.27258, 15.75509);
-			SendClientMessage(playerid, -1, "Marcepan Marks [OOC]: Opuœci³eœ parking wewnêtrzny! Aby ponownie wjechaæ wpisz /wjedz");
-		}
-	}
-	return 1;
-}
-*/
 CMD:gotoczit(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] > 1 || PlayerInfo[playerid][pNewAP] == 5)
