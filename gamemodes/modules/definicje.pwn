@@ -122,10 +122,10 @@
 #define NG_BOUNDS_minY -2714.9104
 #define NG_BOUNDS_maxX 2809.2007
 #define NG_BOUNDS_maxY -2330.6167
-
-#define NG_JAIL_X 638.3803
-#define NG_JAIL_Y -1484.3823
-#define NG_JAIL_Z 90.6158
+//Stanowe wiêzienie
+#define NG_JAIL_X 593.1502,
+#define NG_JAIL_Y -1495.5145
+#define NG_JAIL_Z 82.1648
 
 #define MAX_DOORS   20 //tymczasowe
 
