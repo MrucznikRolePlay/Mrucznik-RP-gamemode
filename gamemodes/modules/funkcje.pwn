@@ -6755,6 +6755,8 @@ KupowanieDodatkow(playerid, dom)
 
 Do_WnetrzaWozu(playerid, vehicleid, model)
 {
+	new Float:vehx, Float:vehy, Float:vehz, model;
+	GetVehiclePos(vehicleid, vehx, vehy, vehz);
 	if(model == 484)//jacht
 	{
 		SetPlayerInterior(playerid, 9);
