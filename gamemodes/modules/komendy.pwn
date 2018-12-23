@@ -27338,6 +27338,7 @@ CMD:zatrzymajlekcje(playerid, params[])
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
+	new Float:px, Float:py, Float:pz;
 
     if(IsPlayerConnected(playerid))
     {
@@ -27367,6 +27368,8 @@ CMD:zatrzymajlekcje(playerid, params[])
 			        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 			        TakingLesson[giveplayerid] = 0;
 			        PlayerInfo[giveplayerid][pCarLic] = 2;
+					GetPlayerPos(giveplayerid, px, py, pz); 
+					SetPlayerPos(giveplayerid, px, py, pz+3);
 			    }
 			}
 			else
