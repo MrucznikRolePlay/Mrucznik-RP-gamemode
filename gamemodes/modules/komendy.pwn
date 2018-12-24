@@ -6359,7 +6359,7 @@ CMD:brama(playerid)
 					sendErrorMessage(playerid, "Nie posiadasz odpowiedniego stopnia identyfikatora aby to otworzyæ!");
 				}
 			}
-			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
+			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.3826,-1844.5345,81.4612))
 			{
 				if(PlayerInfo[playerid][pLider] == 11)//Tylko dla dyrektorow
 				{
