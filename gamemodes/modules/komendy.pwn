@@ -1531,8 +1531,11 @@ CMD:sejffp(playerid, params[])
 	new odbiorca;
 	new kwotao;
 	new string[128];
+	new string2[128];
 	new mojeimie[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
+	new nazwafrakcji;
+	new ftext = PlayerInfo[playerid][pLider];
 	
 	if(sscanf(params, "k<fix>d", odbiorca, kwotao))
 	{
@@ -1547,8 +1550,10 @@ CMD:sejffp(playerid, params[])
 		{
 			Sejf_Add(fracg, -kwotao);
 			DajKase(odbiorca, kwotao);
-			format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s, z konta frakcji! Kwota %d",mojeimie,giveplayer,kwotao);
+			format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s, z konta frakcji! Kwota %d$",mojeimie,giveplayer,kwotao);
 			SendLeaderRadioMessage(fracg, COLOR_LIGHTGREEN, string);
+			format(string2, sizeof(string2), "* Otrzyma³eœ przelew od lidera %s --> %s. Na kwotê %d$", FractionNames[ftext], mojeimie, kwotao);
+			SendClientMessage(odbiorca, COLOR_LIGHTGREEN, string2);
 			Sejf_Save(fracg);
 		}
 		else
