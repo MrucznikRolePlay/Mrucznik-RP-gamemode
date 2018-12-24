@@ -2100,7 +2100,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				switch(listitem)
+				switch(listitem)//Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
 				{
 					case 0://parking podziemny
 					{
@@ -2133,7 +2133,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
 						}
 					}
-					case 2://recepcja
+					case 2://stanowe
+					{
+						SetPlayerVirtualWorld(playerid, 1);
+						SetPlayerPosEx(playerid, 594.05334, -1476.27490, 81.82840);
+						GameTextForPlayer(playerid, "~p~Stanowiec", 5000, 1);
+						PlayerInfo[playerid][pLocal] = 255;
+					
+					}
+					case 3://recepcja
 					{
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2143,7 +2151,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 3://szatnia
+					case 4://szatnia
 					{
 						if(IsAFBI(playerid))
 						{
@@ -2162,7 +2170,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					
 					}
-					case 4://centrum szkol.
+					case 5://centrum szkol.
 					{
 						if(IsACop(playerid))
 						{
@@ -2180,7 +2188,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
 						}
 					}
-					case 5://Sala Konferencyjna
+					case 6://Sala Konferencyjna
 					{
 						if(IsACop(playerid))
 						{
@@ -2196,7 +2204,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
 						}
 					}
-					case 6://Sale przesluchan
+					case 7://Sale przesluchan
 					{
 
 						TogglePlayerControllable(playerid,0);
@@ -2206,7 +2214,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 5, Dyrektorat");
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 7://biura Federalne
+					case 8://biura Federalne
 					{
 						SetPlayerPosEx(playerid,585.70782, -1479.54211, 99.01273);
 						TogglePlayerControllable(playerid,0);
@@ -2215,7 +2223,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, CID/ERT");
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 8://sale treningowe
+					case 9://sale treningowe
 					{
 						SetPlayerPosEx(playerid, 590.42767, -1447.62939, 80.95732);
 						TogglePlayerControllable(playerid, 0);
@@ -2224,7 +2232,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
 					
 					}
-					case 9://dach
+					case 10://dach
 					{
 						if(IsACop(playerid))
 						{
@@ -2235,7 +2243,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu ptaszku!");
 						}
 					}
 				}
