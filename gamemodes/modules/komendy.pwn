@@ -1528,22 +1528,24 @@ CMD:sejffp(playerid, params[])
 {
 
 	new fracg = GetPlayerFraction(playerid);
-	new odbiorca[MAX_PLAYER_NAME];
+	new odbiorca;
 	new kwotao;
 	new string[128];
 	new mojeimie[MAX_PLAYER_NAME];
+	new giveplayer[MAX_PLAYER_NAME];
+	
 	if(sscanf(params, "k<fix>d", odbiorca, kwotao))
 	{
 		sendErrorMessage(playerid, "Poprawne u¿ycie komendy to: /sejffp [id gracza] [kwota]");
 		return 1;
 	}
+	GetPlayerName(odbiorca, giveplayer, sizeof(giveplayer));
+	GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
 	if(PlayerInfo[playerid][pLider] >= 1)
 	{
 		Sejf_Add(fracg, -kwotao);
 		DajKase(odbiorca, kwotao);
-		GetPlayerName(odbiorca, odbiorca, sizeof(odbiorca));
-		GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
-		format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s , z konta urzêdu! Kwota %s",mojeimie,odbiorca,kwotao);
+		format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s , z konta urzêdu! Kwota %s",mojeimie,giveplayer,kwotao);
 		SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
 	}
 	else
