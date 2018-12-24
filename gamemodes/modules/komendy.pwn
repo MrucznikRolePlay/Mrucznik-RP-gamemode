@@ -1543,12 +1543,13 @@ CMD:sejffp(playerid, params[])
 	GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
 	if(PlayerInfo[playerid][pLider] >= 1)
 	{
-		if(kasa <= Sejf_Frakcji[frac])
+		if(kwotao <= Sejf_Frakcji[frac])
 		{
 			Sejf_Add(fracg, -kwotao);
 			DajKase(odbiorca, kwotao);
 			format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s, z konta frakcji! Kwota %d",mojeimie,giveplayer,kwotao);
 			SendLeaderRadioMessage(fracg, COLOR_LIGHTGREEN, string);
+			Sejf_Save(fracg);
 		}
 		else
 		{
