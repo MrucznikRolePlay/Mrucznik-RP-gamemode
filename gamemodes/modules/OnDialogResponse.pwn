@@ -1697,6 +1697,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new string[256];
 				new okienkoid = GetPVarInt(playerid, "okienko-edit");
+				new mojeimie[MAX_PLAYER_NAME];
 				
 			    switch(listitem)
 			    {
@@ -1704,7 +1705,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
 						if(PlayerInfo[playerid][pRank] == 0)
 						{
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne", okienkoid+1);
+							GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n[%s][%d] {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne", okienkoid+1,mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
 						else if(PlayerInfo[playerid][pRank] == 1)
