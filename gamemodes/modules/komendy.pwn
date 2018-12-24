@@ -1532,6 +1532,7 @@ CMD:sejffp(playerid, params[])
 	new kwotao;
 	new string[128];
 	new string2[128];
+	new string3[128];
 	new mojeimie[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
 	new nazwafrakcji;
@@ -1555,6 +1556,12 @@ CMD:sejffp(playerid, params[])
 			format(string2, sizeof(string2), "* Otrzyma³eœ przelew od lidera %s --> %s. Na kwotê %d$", FractionNames[ftext], mojeimie, kwotao);
 			SendClientMessage(odbiorca, COLOR_LIGHTGREEN, string2);
 			Sejf_Save(fracg);
+			format(string3, sizeof(string3), "%s przelal dla gracza %s $%d z konta %s", mojeimie, giveplayer, kwotao, FractionNames[ftext]);
+			PayLog(string3);
+			if(kwotao >= 5000000)//Wiadomosc dla adminow
+			{
+				SendAdminMessage(COLOR_YELLOW, string3);
+			}
 		}
 		else
 		{
