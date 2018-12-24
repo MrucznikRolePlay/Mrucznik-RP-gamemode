@@ -8474,7 +8474,7 @@ CMD:zmienwl(playerid, params[])
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PoziomPoszukiwania[para1] = level;
-					printf("AdmCmd: %s zmieni³ wanted level gracza %s na %d.", sendername, giveplayer, level);
+					printf("AdmCmd: %s zmieni³ wanted level gracza %s na wartoœæ %d.", sendername, giveplayer, level);
 					format(string, sizeof(string), "   Twój Poziom Poszukiwania zosta³ zmieniony na %d przez admina %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "   Zmieni³eœ poziom poszukiwania %s na %d.", giveplayer,level);
@@ -17815,7 +17815,7 @@ CMD:sluzba(playerid)
         }
         else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
         {
-            if (PlayerToPoint(3, playerid, 571.9957,-1453.4821,32.9522) //nowe FBI by Dywan
+            if (PlayerToPoint(3, playerid, 594.2701,-1476.5219,81.8788) //nowe FBI by Dywan
             || PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
             || PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ))//nowe domy /duty w domu
             {
@@ -17972,6 +17972,8 @@ CMD:sluzba(playerid)
                 JobDuty[playerid] = 0;
                 SetPlayerToTeamColor(playerid);
                 SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+				format(string, sizeof(string), "* Urzêdas przyczepia plakietke i poprawia garniturek.", sendername);//a
+                ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
             }
             else
             {
@@ -18097,7 +18099,7 @@ CMD:swat(playerid)
 			|| PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 )
 			|| PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
 			|| PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141)//nowe komi by dywan
-			|| PlayerToPoint(3.5, playerid, 579.7598,-1467.8156,32.9522))//nowe FBI by dywan
+			|| PlayerToPoint(3.5, playerid, 594.5551,-1473.6921,80.4357))//nowe FBI by ubunteq
 			{
 				if(OnDuty[playerid] == 1)
 				{
@@ -18157,7 +18159,7 @@ CMD:kamizelka(playerid)
             || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
             || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
             || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
-			|| PlayerToPoint(3, playerid, 571.9957,-1453.4821,32.9522) //nowe FBI by Dywan
+			|| PlayerToPoint(3, playerid, 594.5551,-1473.6921,80.4357) //nowe FBI by Ubunteq
             || PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
             || PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ) //nowe komi by dywan)
 			|| IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) 
@@ -18211,7 +18213,7 @@ CMD:szturmowy(playerid)
 			|| PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 )
 			|| PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
 			|| PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141)//nowe komi by dywan
-			|| PlayerToPoint(3.5, playerid, 579.7598,-1467.8156,32.9522))//nowe FBI by dywan
+			|| PlayerToPoint(3.5, playerid, 594.5551,-1473.6921,80.4357))//nowe FBI by ubunteq
 			{
 				if(OnDuty[playerid] == 1 && DodatkiPD[playerid] == 0)
 				{
@@ -18260,18 +18262,18 @@ CMD:kurtka(playerid)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(IsAFBI(playerid))
 		{
-			if (PlayerToPoint(3.5, playerid, 571.9957,-1453.4821,32.9522))//nowe fbi by dywan
+			if (PlayerToPoint(3.5, playerid, 594.5551,-1473.6921,80.4357))//nowe fbi by ubunteq
 			{
 				if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 1)
 				{
-					format(string, sizeof(string), "* %s zak³ada kurtkê agenta FBI.", sendername);
+					format(string, sizeof(string), "* %s zak³ada kurtkê z naszywkami FBI.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	    		    SetPlayerSkin(playerid, 286);
 					SetPlayerColor(playerid, COLOR_FBI); // czarny
 				}
 				else if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 2)
 				{
-					format(string, sizeof(string), "* %s zak³ada strój agentki FBI.", sendername);
+					format(string, sizeof(string), "* %s zak³ada luŸny strój agentki FBI.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	    		    SetPlayerSkin(playerid, 141);
 					SetPlayerColor(playerid, COLOR_FBI); // czarny
@@ -20275,9 +20277,10 @@ CMD:wejdz(playerid)
 		|| IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
 		|| IsPlayerInRangeOfPoint(playerid,5,1059.91748, 1553.65698, 7.59697)//Parking podziemny
 		|| IsPlayerInRangeOfPoint(playerid,5,585.70782, -1479.54211, 99.01273)//CID/ERT
+		|| IsPlayerInRangeOfPoint(playerid,5,594.05334, -1476.27490, 81.82840)//stanowe
 		|| IsPlayerInRangeOfPoint(playerid,5,590.42767, -1447.62939, 80.95732))//Sale Treningowe
 		{
-			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
+			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5] Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
         }
         else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1142.2214355469, -1337.7125244141, 419.69830322266))//wyklady wejscie
         {
@@ -21445,9 +21448,10 @@ CMD:wyjdz(playerid)
 		|| IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
 		|| IsPlayerInRangeOfPoint(playerid,5,1059.91748, 1553.65698, 7.59697)//Parking podziemny
 		|| IsPlayerInRangeOfPoint(playerid,5,585.70782, -1479.54211, 99.01273)//CID/ERT
+		|| IsPlayerInRangeOfPoint(playerid,5,594.05334, -1476.27490, 81.82840)//stanowe
 		|| IsPlayerInRangeOfPoint(playerid,5,590.42767, -1447.62939, 80.95732))//Sale Treningowe
 		{
-			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking \n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
+			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
         }
 		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1144.0762939453, -1324.9822998047, 419.69830322266))//wypoczynek srodek
 		{
@@ -33078,10 +33082,9 @@ CMD:wypusc(playerid, params[])
         return 1;
     }
 	new giveplayerid;
-	new kwotap;
-	if( sscanf(params, "k<fix>d", giveplayerid, kwotap))
+	if( sscanf(params, "k<fix>", giveplayerid))
 	{
-		sendTipMessage(playerid, "U¿yj /uwolnij [playerid/CzêœæNicku] [Kwota]");
+		sendTipMessage(playerid, "U¿yj /uwolnij [playerid/CzêœæNicku]");
 		return 1;
 	}
 
@@ -33094,17 +33097,28 @@ CMD:wypusc(playerid, params[])
 			{
 				if(ProxDetectorS(10.0, playerid, giveplayerid))
 				{
-					if(kwotap < 100 || kwotap > 100000) 
-					{ 
-						sendTipMessageEx(playerid, COLOR_GREY, "Cena od 100 do 100 000!"); 
-						return 1; 
-					}
-					else
-					{
-						otrzymaloferte[giveplayerid] = playerid;
-
-					}
-					
+					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia.", giveplayer);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s.", sendername);
+					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+					ApprovedLawyer[playerid] = 0;
+					WantLawyer[giveplayerid] = 0;
+					CallLawyer[giveplayerid] = 0;
+					JailPrice[giveplayerid] = 0;
+					PlayerInfo[giveplayerid][pJailTime] = 1;
+					PlayerInfo[playerid][pLawSkill] +=2;
+					SendClientMessage(playerid, COLOR_GRAD2, "Skill +2");
+					//SetPlayerWorldBounds(playerid,20000.0000,-20000.0000,20000.0000,-20000.0000); //Reset world to player
+					if(PlayerInfo[playerid][pLawSkill] == 50)
+					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
+					else if(PlayerInfo[playerid][pLawSkill] == 100)
+					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 3, Mo¿esz taniej zbijaæ WL."); }
+					else if(PlayerInfo[playerid][pLawSkill] == 200)
+					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
+					else if(PlayerInfo[playerid][pLawSkill] == 400)
+					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
 				}
 				else
 				{
@@ -33294,7 +33308,7 @@ CMD:akceptuj(playerid, params[])
             SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Gazeta, Mandat");
-            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka uwolnienie");
+            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka");
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
@@ -34649,50 +34663,6 @@ CMD:akceptuj(playerid, params[])
                 }
             }
         }
-		else if(strcmp(x_job, "uwolnienie", true) == 0)
-		{
-			if(otrzymaloferte[playerid] < 999)
-            {
-                if(kaska[playerid] > ofertacena[playerid] && ofertacena[playerid] > 0)
-                {
-                    
-                    if(IsPlayerConnected(otrzymaloferte[playerid]))
-                    {
-						GetPlayerName(otrzymaloferte[playerid], giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						
-
-					
-						format(string, sizeof(string), "* Zosta³eœ uwolniony za %d przez prawnika %s",ofertacena[playerid],giveplayer);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,ofertacena[playerid]);
-						SendClientMessage(otrzymaloferte[playerid], COLOR_LIGHTBLUE, string);
-						ApprovedLawyer[playerid] = 0;
-						WantLawyer[giveplayerid] = 0;
-						CallLawyer[giveplayerid] = 0;
-						JailPrice[giveplayerid] = 0;
-						PlayerInfo[giveplayerid][pJailTime] = 1;
-						PlayerInfo[playerid][pLawSkill] +=2;
-						SendClientMessage(playerid, COLOR_GRAD2, "Skill +2");
-						//SetPlayerWorldBounds(playerid,20000.0000,-20000.0000,20000.0000,-20000.0000); //Reset world to player
-						if(PlayerInfo[playerid][pLawSkill] == 50)
-						{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
-						else if(PlayerInfo[playerid][pLawSkill] == 100)
-						{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 3, Mo¿esz taniej zbijaæ WL."); }
-						else if(PlayerInfo[playerid][pLawSkill] == 200)
-						{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
-						else if(PlayerInfo[playerid][pLawSkill] == 400)
-						{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
-				
-                        return 1;
-                    }
-                    return 1;
-                }
-                return 1;
-            }
-		
-		
-		}
     }
     return 1;
 }
@@ -38879,15 +38849,15 @@ CMD:wyjedz(playerid)
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
 				SetVehiclePos(pVehID, 1818.77222, -1536.09314, 13.11075);
-				SetVehicleVirtualWorld(pVehID, 2);
-				SetPlayerVirtualWorld(playerid, 2);
+				SetVehicleVirtualWorld(pVehID, 0);
+				SetPlayerVirtualWorld(playerid, 0);
 				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
 					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
-						SetPlayerVirtualWorld(i, 2);
+						SetPlayerVirtualWorld(i, 0);
 						PutPlayerInVehicle(i, pVehID, iseat);
 					}
 				}
@@ -38895,8 +38865,9 @@ CMD:wyjedz(playerid)
 			}
 			else//Jeœli gracz jest sam, nie w pojeŸdzie
 			{
-				SetPlayerVirtualWorld(playerid, 2);
+				SetPlayerVirtualWorld(playerid, 0);
 				SetPlayerPos(playerid, 1818.77222, -1536.09314, 13.11075);
+				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Borowiku! Nie umiesz wchodzic drzwiami?", 4000, 3);
 			}
 		
 		
@@ -38925,6 +38896,7 @@ CMD:wyjedz(playerid)
 			{
 				SetPlayerVirtualWorld(playerid, 0);
 				SetPlayerPos(playerid, 1825.18274, -1538.21204, 13.11075);
+				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Borowiku! Nie umiesz wchodzic drzwiami?", 4000, 3);
 			}
 		
 		}
@@ -38952,6 +38924,7 @@ CMD:wyjedz(playerid)
 			{
 				SetPlayerVirtualWorld(playerid, 2);
 				SetPlayerPos(playerid, -2089.55835, -414.24173, 36.32352);
+				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Jak krecik, drzwi nie masz?", 4000, 3);
 			}
 		
 		}
@@ -38979,6 +38952,7 @@ CMD:wyjedz(playerid)
 			{
 				SetPlayerVirtualWorld(playerid, 0);
 				SetPlayerPos(playerid, 1750.55762, -1537.86279, 9.51801);
+				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Jak krecik, drzwi nie masz?", 4000, 3);
 			}
 		
 		}
