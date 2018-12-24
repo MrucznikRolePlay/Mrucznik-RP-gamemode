@@ -2942,7 +2942,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    if(IsPlayerConnected(i))
 				    {
-				        if(IsACop(i))
+				        if(IsACop(i) || IsABOR(i))
 						{
 						    if(GetDistanceBetweenPlayers(playerid,i) < 5)
 	     					{
