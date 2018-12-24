@@ -1543,7 +1543,7 @@ CMD:sejffp(playerid, params[])
 	GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
 	if(PlayerInfo[playerid][pLider] >= 1)
 	{
-		if(kwotao <= Sejf_Frakcji[frac])
+		if(kwotao <= Sejf_Frakcji[fracg])
 		{
 			Sejf_Add(fracg, -kwotao);
 			DajKase(odbiorca, kwotao);
