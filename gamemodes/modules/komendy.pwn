@@ -38840,10 +38840,10 @@ CMD:wyjedz(playerid)
 				SetVehiclePos(pVehID, 1818.77222, -1536.09314, 13.11075);
 				SetVehicleVirtualWorld(pVehID, 2);
 				SetPlayerVirtualWorld(playerid, 2);
-				PutPlayerInVehicle(playerid, pVehID, 1);
+				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
-					if(!IsPlayerInVehicle(i, pVehID))
+					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 2);
@@ -38868,10 +38868,10 @@ CMD:wyjedz(playerid)
 				SetVehiclePos(pVehID, 1825.18274, -1538.21204, 13.11075);
 				SetVehicleVirtualWorld(pVehID, 0);
 				SetPlayerVirtualWorld(playerid, 0);
-				PutPlayerInVehicle(playerid, pVehID, 1);
+				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
-					if(!IsPlayerInVehicle(i, pVehID))
+					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 0);
@@ -38895,10 +38895,10 @@ CMD:wyjedz(playerid)
 				SetVehiclePos(pVehID, -2089.55835, -414.24173, 36.32352);
 				SetVehicleVirtualWorld(pVehID, 2);
 				SetPlayerVirtualWorld(playerid, 2);
-				PutPlayerInVehicle(playerid, pVehID, 1);
+				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
-					if(!IsPlayerInVehicle(i, pVehID))
+					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 2);
@@ -38922,10 +38922,10 @@ CMD:wyjedz(playerid)
 				SetVehiclePos(pVehID, 1750.55762, -1537.86279, 9.51801);
 				SetVehicleVirtualWorld(pVehID, 0);
 				SetPlayerVirtualWorld(playerid, 0);
-				PutPlayerInVehicle(playerid, pVehID, 1);
+				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
-					if(!IsPlayerInVehicle(i, pVehID))
+					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 0);
@@ -38958,10 +38958,10 @@ CMD:wyjedz(playerid)
 				SetVehiclePos(pVehID, 1059.91748, 1553.65698, 7.59697);
 				SetVehicleVirtualWorld(pVehID, 2);
 				SetPlayerVirtualWorld(playerid, 2);
-				PutPlayerInVehicle(playerid, pVehID, 1);
+				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
-					if(!IsPlayerInVehicle(i, pVehID))
+					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 2);
@@ -38986,10 +38986,10 @@ CMD:wyjedz(playerid)
 				SetVehiclePos(pVehID, 593.47217, -1509.27258, 15.75509);
 				SetVehicleVirtualWorld(pVehID, 0);
 				SetPlayerVirtualWorld(playerid, 0);
-				PutPlayerInVehicle(playerid, pVehID, 1);
+				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
-					if(!IsPlayerInVehicle(i, pVehID))
+					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 0);
@@ -39022,10 +39022,10 @@ CMD:wyjedz(playerid)
 				SetVehiclePos(pVehID, 1588.9865,-1642.7157,12.4604);
 				SetVehicleVirtualWorld(pVehID, 2);
 				SetPlayerVirtualWorld(playerid, 2);
-				PutPlayerInVehicle(playerid, pVehID, 1);
+				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
-					if(!IsPlayerInVehicle(i, pVehID))
+					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 2);
@@ -39049,10 +39049,10 @@ CMD:wyjedz(playerid)
 				SetVehiclePos(pVehID, 1588.0006,-1633.5677,13.1671);
 				SetVehicleVirtualWorld(pVehID, 0);
 				SetPlayerVirtualWorld(playerid, 0);
-				PutPlayerInVehicle(playerid, pVehID, 1);
+				PutPlayerInVehicle(playerid, pVehID, 0);
 				foreach(new i : Player)//Sprawdza czy z graczem s¹ inni gracze
 				{
-					if(!IsPlayerInVehicle(i, pVehID))
+					if(IsPlayerInVehicle(i, pVehID))
 					{
 						new iseat = GetPlayerVehicleSeat(i);
 						SetPlayerVirtualWorld(i, 0);
