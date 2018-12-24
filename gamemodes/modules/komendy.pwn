@@ -1543,10 +1543,17 @@ CMD:sejffp(playerid, params[])
 	GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
 	if(PlayerInfo[playerid][pLider] >= 1)
 	{
-		Sejf_Add(fracg, -kwotao);
-		DajKase(odbiorca, kwotao);
-		format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s , z konta urzêdu! Kwota %s",mojeimie,giveplayer,kwotao);
-		SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
+		if(kasa <= Sejf_Frakcji[frac])
+		{
+			Sejf_Add(fracg, -kwotao);
+			DajKase(odbiorca, kwotao);
+			format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s, z konta frakcji! Kwota %d",mojeimie,giveplayer,kwotao);
+			SendLeaderRadioMessage(fracg, COLOR_LIGHTGREEN, string);
+		}
+		else
+		{
+			sendErrorMessage(playerid, "W sejfie nie ma takiej gotówki!");
+		}
 	}
 	else
 	{
