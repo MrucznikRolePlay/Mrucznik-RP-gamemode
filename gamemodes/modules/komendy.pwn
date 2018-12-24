@@ -8465,7 +8465,7 @@ CMD:zmienwl(playerid, params[])
 		{
 		    if(IsPlayerConnected(para1))
 		    {
-		        if(level > 11 || level < 0)
+		        if(level > 10 || level < 0)
 				{
 					sendTipMessage(playerid, "Numer WL od 0 do 10!"); return 1;
 				}
@@ -8475,7 +8475,7 @@ CMD:zmienwl(playerid, params[])
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PoziomPoszukiwania[para1] = level;
 					printf("AdmCmd: %s zmieni³ wanted level gracza %s na %d.", sendername, giveplayer, level);
-					format(string, sizeof(string), "   Twój Poziom Poszukiwania zosta³ zmieniony na %d przez %s", level, sendername);
+					format(string, sizeof(string), "   Twój Poziom Poszukiwania zosta³ zmieniony na %d przez admina %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "   Zmieni³eœ poziom poszukiwania %s na %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -33078,9 +33078,10 @@ CMD:wypusc(playerid, params[])
         return 1;
     }
 	new giveplayerid;
-	if( sscanf(params, "k<fix>", giveplayerid))
+	new kwotap;
+	if( sscanf(params, "k<fix>d", giveplayerid, kwotap))
 	{
-		sendTipMessage(playerid, "U¿yj /uwolnij [playerid/CzêœæNicku]");
+		sendTipMessage(playerid, "U¿yj /uwolnij [playerid/CzêœæNicku] [Kwota]");
 		return 1;
 	}
 
@@ -33093,28 +33094,16 @@ CMD:wypusc(playerid, params[])
 			{
 				if(ProxDetectorS(10.0, playerid, giveplayerid))
 				{
-					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia.", giveplayer);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s.", sendername);
-					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					ApprovedLawyer[playerid] = 0;
-					WantLawyer[giveplayerid] = 0;
-					CallLawyer[giveplayerid] = 0;
-					JailPrice[giveplayerid] = 0;
-					PlayerInfo[giveplayerid][pJailTime] = 1;
-					PlayerInfo[playerid][pLawSkill] +=2;
-					SendClientMessage(playerid, COLOR_GRAD2, "Skill +2");
-					//SetPlayerWorldBounds(playerid,20000.0000,-20000.0000,20000.0000,-20000.0000); //Reset world to player
-					if(PlayerInfo[playerid][pLawSkill] == 50)
-					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
-					else if(PlayerInfo[playerid][pLawSkill] == 100)
-					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 3, Mo¿esz taniej zbijaæ WL."); }
-					else if(PlayerInfo[playerid][pLawSkill] == 200)
-					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
-					else if(PlayerInfo[playerid][pLawSkill] == 400)
-					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
+					if(kwotap >= 125 000 || kwotap <= 40000)
+					{
+						otrzymaloferte[giveplayerid] = playerid;
+						
+					
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Kwota od 40.000$ do 125.000$!");
+					}
 				}
 				else
 				{
@@ -33304,7 +33293,7 @@ CMD:akceptuj(playerid, params[])
             SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Gazeta, Mandat");
-            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka");
+            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka uwolnienie");
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
@@ -34659,6 +34648,50 @@ CMD:akceptuj(playerid, params[])
                 }
             }
         }
+		else if(strcmp(x_job, "uwolnienie", true) == 0)
+		{
+			if(otrzymaloferte[playerid] < 999)
+            {
+                if(kaska[playerid] > ofertacena[playerid] && ofertacena[playerid] > 0)
+                {
+                    
+                    if(IsPlayerConnected(otrzymaloferte[playerid]))
+                    {
+						GetPlayerName(otrzymaloferte[playerid], giveplayer, sizeof(giveplayer));
+						GetPlayerName(playerid, sendername, sizeof(sendername));
+						
+
+					
+						format(string, sizeof(string), "* Zosta³eœ uwolniony za %d przez prawnika %s",ofertacena[playerid],giveplayer);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+						format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,ofertacena[playerid]);
+						SendClientMessage(otrzymaloferte[playerid], COLOR_LIGHTBLUE, string);
+						ApprovedLawyer[playerid] = 0;
+						WantLawyer[giveplayerid] = 0;
+						CallLawyer[giveplayerid] = 0;
+						JailPrice[giveplayerid] = 0;
+						PlayerInfo[giveplayerid][pJailTime] = 1;
+						PlayerInfo[playerid][pLawSkill] +=2;
+						SendClientMessage(playerid, COLOR_GRAD2, "Skill +2");
+						//SetPlayerWorldBounds(playerid,20000.0000,-20000.0000,20000.0000,-20000.0000); //Reset world to player
+						if(PlayerInfo[playerid][pLawSkill] == 50)
+						{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
+						else if(PlayerInfo[playerid][pLawSkill] == 100)
+						{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 3, Mo¿esz taniej zbijaæ WL."); }
+						else if(PlayerInfo[playerid][pLawSkill] == 200)
+						{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
+						else if(PlayerInfo[playerid][pLawSkill] == 400)
+						{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
+				
+                        return 1;
+                    }
+                    return 1;
+                }
+                return 1;
+            }
+		
+		
+		}
     }
     return 1;
 }
