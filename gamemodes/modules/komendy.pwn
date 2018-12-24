@@ -33094,16 +33094,17 @@ CMD:wypusc(playerid, params[])
 			{
 				if(ProxDetectorS(10.0, playerid, giveplayerid))
 				{
-					if(kwotap >= 125 000 || kwotap <= 40000)
-					{
-						otrzymaloferte[giveplayerid] = playerid;
-						
-					
+					if(kwotap < 100 || kwotap > 100000) 
+					{ 
+						sendTipMessageEx(playerid, COLOR_GREY, "Cena od 100 do 100 000!"); 
+						return 1; 
 					}
 					else
 					{
-						sendErrorMessage(playerid, "Kwota od 40.000$ do 125.000$!");
+						otrzymaloferte[giveplayerid] = playerid;
+
 					}
+					
 				}
 				else
 				{
