@@ -15846,13 +15846,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 	    {
 			new string[128];
-			new string2[256];
+			
     
 			if(gPlayerLogged[playerid] == 1)
 			{
+				new string2[256];
 				format(string2, sizeof(string2), "%d",inputtext);
-				string2 = FunkcjaK(string);
-					
+			//	string2 = FunkcjaK(string);--Funkcja wp³acania na k
 				if (string2 > kaska[playerid] || string2 < 1)
 				{
 					sendTipMessage(playerid, "Nie masz tyle");
@@ -15869,9 +15869,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
 				format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
-			}
-				
-				return 1;
+			}	
+			return 1;
 		}
 	}
 	
