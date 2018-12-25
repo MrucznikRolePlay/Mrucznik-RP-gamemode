@@ -15966,50 +15966,54 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	else if(dialogid == 1072)//Przelew
 	{
-		if(response)
+		if(!response)
 	    {
-			if(gPlayerLogged[playerid] == 1)
+			sendErrorMessage(playerid, "Odrzucono akcje przelewu!");
+		}
+		else
+		{
+			new string[128];
+			new sendername[MAX_PLAYER_NAME];
+			new wpisal = strval(inputtext);
+			if (IsPlayerConnected(wpisal) || wpisal != playerid)
 			{
-				new string[128];
-				new sendername[MAX_PLAYER_NAME];
-				new wpisal = strval(inputtext);
-				if (IsPlayerConnected(wpisal) || wpisal != playerid)
-				{
-					wpisal = odbiorcaid[playerid];
-					GetPlayerName(wpisal, sendername, sizeof(sendername));
-					format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", sendername);
-					ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, "", string, "Wykonaj", "Odrzuæ");
+				wpisal = odbiorcaid[playerid];
+				GetPlayerName(wpisal, sendername, sizeof(sendername));
+				format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", sendername);
+				ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "Odrzuæ");
 					
-				}
-				else
-				{
-					sendErrorMessage(playerid, "B³êdne ID || Nie mo¿esz wys³aæ przelewu samemu sobie!"); 
-				}
-			}	
+			}
+			else
+			{
+				sendErrorMessage(playerid, "B³êdne ID || Nie mo¿esz wys³aæ przelewu samemu sobie!"); 
+			}
 		}
 	
 	
 	}
 	else if(dialogid == 1073)
 	{
-		new string[128];
-		new sendername[MAX_PLAYER_NAME];
-		new giveplayer[MAX_PLAYER_NAME];
-		new wpisal = strval(inputtext);
-		GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-		GetPlayerName(odbiorcaid[playerid], sendername, sizeof(sendername));
-		if(wpisal >= 1)
-		{
-			ZabierzKase(playerid, wpisal);
-			DajKase(odbiorcaid[playerid], wpisal);
-			format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", wpisal, giveplayer);
-			SendClientMessage(odbiorcaid[playerid], COLOR_RED, string);
-			format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$", sendername, wpisal);
-			SendClientMessage(playerid, COLOR_RED, string); 
-			if(wpisal >= 5000000)//Wiadomosc dla adminow
+		if(response)
+	    {
+			new string[128];
+			new sendername[MAX_PLAYER_NAME];
+			new giveplayer[MAX_PLAYER_NAME];
+			new wpisal = strval(inputtext);
+			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+			GetPlayerName(odbiorcaid[playerid], sendername, sizeof(sendername));
+			if(wpisal >= 1)
 			{
-				format(string, sizeof(string), "%s wys³a³ przelew do %s w wysokoœci %d$ - Podejrzane!", giveplayer, sendername, wpisal);
-				SendAdminMessage(COLOR_YELLOW, string);
+				ZabierzKase(playerid, wpisal);
+				DajKase(odbiorcaid[playerid], wpisal);
+				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", wpisal, giveplayer);
+				SendClientMessage(odbiorcaid[playerid], COLOR_RED, string);
+				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$", sendername, wpisal);
+				SendClientMessage(playerid, COLOR_RED, string); 
+				if(wpisal >= 5000000)//Wiadomosc dla adminow
+				{
+					format(string, sizeof(string), "%s wys³a³ przelew do %s w wysokoœci %d$ - Podejrzane!", giveplayer, sendername, wpisal);
+					SendAdminMessage(COLOR_YELLOW, string);
+				}
 			}
 		}
 		
