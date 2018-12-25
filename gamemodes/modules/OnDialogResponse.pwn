@@ -15798,6 +15798,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         return 1;
     }
+//====================[KONTO BANKOWE]========================================
+//By Simeone 25-12-2018
 	else if(dialogid == 1067)//Okno dialogowe zarz¹dzania swoim kontem bankowym
 	{
 		if(response)//Stan konta\n\nWp³aæ\nWyp³aæ\nPPrzelew do osoby\nPrzelew do Frakcji\nPrzelew z konta frakcji na osoby\nPrzelew z konta frakcji na frakcje
@@ -15813,7 +15815,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
                 case 1://Wp³aæ
 				{
-					sendErrorMessage(playerid, "Ju¿ wkrótce!");
+					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "Wpisz poni¿ej kwotê, któr¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ");
 				}
                 case 2://Wyp³aæ
 				{
@@ -15839,6 +15841,44 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 	
 	}
+	else if(dialogid == 1068)
+	{
+		if(response)
+	    {
+			new string[128];
+
+    
+			if(gPlayerLogged[playerid] == 1)
+			{
+				inputtext = FunkcjaK(string);
+
+				if (inputtext > kaska[playerid] || inputtext < 1)
+				{
+					sendTipMessage(playerid, "Nie masz tyle");
+					return 1;
+				}
+				DajKase(playerid,-inputtext);
+				new curfunds = PlayerInfo[playerid][pAccount];
+				SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
+				format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);
+				SendClientMessage(playerid, COLOR_GRAD2, string);
+				PlayerInfo[playerid][pAccount]=inputtext+PlayerInfo[playerid][pAccount];
+				format(string, sizeof(string), "  Depozyt: $%d", inputtext);
+				SendClientMessage(playerid, COLOR_GRAD4, string);
+				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
+				format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][pAccount]);
+				SendClientMessage(playerid, COLOR_WHITE, string);
+				
+				return 1;
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie wpisa³eœ ¿adnej kwoty");
+		}
+	}
+
+//=================[KONIEC]========================
     else if(dialogid == 7079)
 	{
 		if(response)
