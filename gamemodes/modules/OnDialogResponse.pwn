@@ -1740,7 +1740,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 3:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d____\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 4:
@@ -2013,7 +2013,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        SetPlayerVirtualWorld(playerid,0);
 					        SetPlayerInterior(playerid,0);
 					        PlayerInfo[playerid][pLocal] = 255;
-					        SendClientMessage(playerid, COLOR_LIGHTGREEN, " *DING* Poziom -1, Zaplecze");
+					        SendClientMessage(playerid, COLOR_LIGHTGREEN, " *DING* Poziom 0, Zaplecze");
 						}
 						else
 						{
@@ -2023,17 +2023,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 1:
 			        {
-				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//parter
+				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//g³ówna sala urzêdu
 				        SetPlayerVirtualWorld(playerid,50);
 				        SetPlayerInterior(playerid,5);
 	                    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 0, Parter <<<<");
+	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 9 - G³ówna sala urzêdu <<<<");
 	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Okienka dla interesantów");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Plac manewrowy");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Toalety");
-                     	SendClientMessage(playerid, COLOR_WHITE, "  --> Pomieszczenia socjalne");
-                     	SendClientMessage(playerid, COLOR_WHITE, "  --> Izolatka");
+	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Wyjœcie na plac manewrowy");
+	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Toalety na ka¿dym skrzydle");
+                     	SendClientMessage(playerid, COLOR_WHITE, "  --> Biura & Sale konferencyjne & Senat & Burmistrz & Akademia");
+                     	SendClientMessage(playerid, COLOR_WHITE, "  --> Biuro ochrony - biuro kamer");
                      	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
                      	PlayerInfo[playerid][pLocal] = 108;
 			        }
