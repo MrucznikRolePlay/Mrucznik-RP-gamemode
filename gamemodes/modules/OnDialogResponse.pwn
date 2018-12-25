@@ -15996,8 +15996,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 	    {
-			
-			
+			sendErrorMessage(playerid, "Nie uzupe³ni³eœ iloœci kwoty!"); 
 		}
 		else
 		{
@@ -16019,11 +16018,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					format(string, sizeof(string), "%s wys³a³ przelew do %s w wysokoœci %d$ - Podejrzane!", giveplayer, sendername, wpisal);
 					SendAdminMessage(COLOR_YELLOW, string);
+					return 1;
 				}
 			}
 			else
 			{
 				sendErrorMessage(playerid, "B³êdna kwota || Nie masz takiej iloœci gotówki na swoim koncie!"); 
+				return 1;
 			}
 		}
 		
