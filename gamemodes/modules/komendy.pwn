@@ -1628,7 +1628,7 @@ CMD:kb(playerid)
 				{
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
-					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne", "Wybierz", "Wyjdü");
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\nPrzelew\n>>Frakcyjne", "Wybierz", "Wyjdü");
 				}
 				else
 				{
