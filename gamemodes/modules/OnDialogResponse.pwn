@@ -15986,7 +15986,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendErrorMessage(playerid, "B³êdne ID || Nie mo¿esz wys³aæ przelewu samemu sobie!"); 
 				}
 			}	
-			return 1;
 		}
 	
 	
