@@ -15857,14 +15857,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				DajKase(playerid,-wpisal);
 				new curfunds = PlayerInfo[playerid][pAccount];
-				SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
-				format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);
+				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
+				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", curfunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
 				PlayerInfo[playerid][pAccount]=wpisal+PlayerInfo[playerid][pAccount];
-				format(string, sizeof(string), "  Depozyt: $%d", inputtext);
+				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", inputtext);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
-				format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][pAccount]);
+				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
 			}	
 			return 1;
