@@ -15806,6 +15806,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             switch(listitem)
             {
+				new string[128];
+				new giveplayer[MAX_PLAYER_NAME];
                 case 0://Stan konta
 				{
 					new string[64];
@@ -15825,17 +15827,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					sendErrorMessage(playerid, "Juø wkrÛtce!");
 				}
-				case 4://przelew do frakcji
+				case 4://>>Konto frakcji
 				{
-					sendErrorMessage(playerid, "Juø wkrÛtce!");
-				}
-				case 5://przelew z konta frakcji na osobe
-				{
-					sendErrorMessage(playerid, "Juø wkrÛtce!");
-				}
-				case 6://przelew z konta frakcji na frakcje
-				{
-					sendErrorMessage(playerid, "Juø wkrÛtce!");
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					new frakcjagracza = GetPlayerFraction(playerid);
+					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto %s", giveplayer, frakcjagracza);
+					ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto", "Wybierz", "Wyjdü");
 				}
             }
         }
@@ -15868,6 +15865,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_WHITE, string);
 			}	
 			return 1;
+		}
+	}
+	else if(dialogid == 1069)
+	{
+		if(response)//Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto
+        {
+            switch(listitem)
+            {
+				new giveplayer[MAX_PLAYER_NAME];
+				new string[128];
+				case 0://Sprawdü stan konta organizacji
+				{
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					new frakcjagracza = GetPlayerFraction(playerid);
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyúlnie zalogowano na konto lidera:{800080}%s{C0C0C0},\nObecny stan konta:{80FF00}%d$", giveplayer,frakcjagracza,Sejf_Frakcji[GetPlayerFraction(playerid)]);
+					ShowPlayerDialog(playerid, 1070, DIALOG_STYLE_MSGBOX, "Stan Konta", "Info\n\tInfo", "Okej", "");
+				}
+				case 1:
+				{
+				
+				
+				}
+				case 2:
+				{
+				
+				
+				}
+				case 3:
+				{
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne", "Wybierz", "Wyjdü");
+				
+				}
+			
+			
+			}
 		}
 	}
 	
