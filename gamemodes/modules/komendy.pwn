@@ -1620,11 +1620,15 @@ CMD:kb(playerid)
     {
         if(gPlayerLogged[playerid] == 1)
         {
+			new giveplayer[MAX_PLAYER_NAME];
+			new string[128];
 			if(PlayerInfo[playerid][pLevel] >= 3)
 			{
 				if(PlayerInfo[playerid][pLocal] == 103)
 				{
-					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, "Konto Bankowe", "Stan konta\n\nWp³aæ\nWyp³aæ\nPPrzelew do osoby\nPrzelew do Frakcji\nPrzelew z konta frakcji na osoby\nPrzelew z konta frakcji na frakcje", "Wybierz", "WyjdŸ");
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp³aæ\nWyp³aæ\nPPrzelew do osoby\nPrzelew do Frakcji\nPrzelew z konta frakcji na osoby\nPrzelew z konta frakcji na frakcje", "Wybierz", "WyjdŸ");
 				}
 				else
 				{
