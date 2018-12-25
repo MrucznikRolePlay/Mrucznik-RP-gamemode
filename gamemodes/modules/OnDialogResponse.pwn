@@ -15810,18 +15810,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new giveplayer[MAX_PLAYER_NAME];
                 case 0://Stan konta
 				{
-					new string[64];
-			 		
 					format(string, sizeof(string), "Na twoim koncie bankowym jest aktualnie %d$",PlayerInfo[playerid][pAccount]);
 					sendTipMessageEx(playerid, COLOR_YELLOW, string);
 				}
                 case 1://Wp³aæ
 				{
-					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "Wpisz poni¿ej kwotê, któr¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ");
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					format(string, sizeof(string), "Konto Bankowe >> %s >> Wp³ata", giveplayer);
+					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ");
 				}
                 case 2://Wyp³aæ
 				{
-					sendErrorMessage(playerid, "Ju¿ wkrótce!");
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					format(string, sizeof(string), "Konto Bankowe >> %s >> Wyp³ata", giveplayer);
+					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ");
 				}
                 case 3://Przelew do osoby
 				{
