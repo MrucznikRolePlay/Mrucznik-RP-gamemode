@@ -2136,8 +2136,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 2://stanowe
 					{
 						SetPlayerVirtualWorld(playerid, 1);
-						SetPlayerPosEx(playerid, 594.05334, -1476.27490, 81.82840);
-						GameTextForPlayer(playerid, "~p~Stanowiec", 5000, 1);
+						SetPlayerPosEx(playerid, 594.05334, -1476.27490, 81.82840+0.5);
+						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
 					
 					}
@@ -2170,7 +2170,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					
 					}
-					case 5://centrum szkol.
+					case 5://Zbrojownia
 					{
 						if(IsACop(playerid))
 						{
@@ -2188,7 +2188,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
 						}
 					}
-					case 6://Sala Konferencyjna
+					case 6://Biura federalne
 					{
 						if(IsACop(playerid))
 						{
@@ -2204,7 +2204,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
 						}
 					}
-					case 7://Sale przesluchan
+					case 7://Dyrektorat
 					{
 
 						TogglePlayerControllable(playerid,0);
@@ -2214,7 +2214,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 5, Dyrektorat");
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 8://biura Federalne
+					case 8://CID ERT
 					{
 						SetPlayerPosEx(playerid,585.70782, -1479.54211, 99.01273);
 						TogglePlayerControllable(playerid,0);

@@ -240,7 +240,7 @@ JailDeMorgan(playerid)
 	SetCameraBehindPlayer(playerid);
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
-	GameTextForPlayer(playerid, "~w~Lepiej szykuj ~r~korek w tylek", 5000, 1);
+	GameTextForPlayer(playerid, "~w~Witamy ~r~w sztumie!", 5000, 1);
 	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
@@ -254,7 +254,6 @@ UnJailDeMorgan(playerid)
 	PoziomPoszukiwania[playerid] = 0;
 	PlayerInfo[playerid][pJailed] = 0;
 	PlayerInfo[playerid][pJailTime] = 0;
-	SendClientMessage(playerid, -1, "Ciesz siê ¿yciem, póki mo¿esz");
 }
 
 DialogListaFrakcji()
@@ -6755,8 +6754,6 @@ KupowanieDodatkow(playerid, dom)
 
 Do_WnetrzaWozu(playerid, vehicleid, model)
 {
-	new Float:vehx, Float:vehy, Float:vehz, model;
-	GetVehiclePos(vehicleid, vehx, vehy, vehz);
 	if(model == 484)//jacht
 	{
 		SetPlayerInterior(playerid, 9);
@@ -6822,7 +6819,21 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	}
 	else if(model == 538)//Wagony KT
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+3, vehz);
+		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
+		{
+			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
+		}
+		else if(PlayerInfo[playerid][pBiletsamolotowy] == 1)
+		{
+			SetPlayerInterior(playerid, 1);
+			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
+			Wchodzenie(playerid);
+			TogglePlayerControllable(playerid, 0);
+			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+			sendTipMessage(playerid, ">>Pomyœlnie wszed³eœ do poci¹gu! Bilet zosta³ zu¿yty!");
+			sendTipMessage(playerid, ">>>Interior stworzony przez: Charlie112");
+			PlayerInfo[playerid][pBiletsamolotowy]  = 0;
+		}
 	
 	}
 	else if(model == 582)//sanvan
@@ -6869,22 +6880,8 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	}
 	else if(model == 538)//kt 
 	{
-		
-		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
-		{
-			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
-		}
-		else if(PlayerInfo[playerid][pBiletsamolotowy] == 1)
-		{
-			SetPlayerInterior(playerid, 1);
-			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
-			Wchodzenie(playerid);
-			TogglePlayerControllable(playerid, 0);
-			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
-			sendTipMessage(playerid, ">>Pomyœlnie wszed³eœ do poci¹gu! Bilet zosta³ zu¿yty!");
-			sendTipMessage(playerid, ">>>Interior stworzony przez: Charlie112");
-			PlayerInfo[playerid][pBiletsamolotowy]  = 0;
-		}
+		SetPlayerPosEx(playerid, vehx, vehy+3, vehz);
+	
 	}
 	else if(model == 427)
 	{
