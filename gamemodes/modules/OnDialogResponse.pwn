@@ -15806,21 +15806,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             switch(listitem)
             {
-				new string[128];
-				new giveplayer[MAX_PLAYER_NAME];
                 case 0://Stan konta
 				{
-					format(string, sizeof(string), "Na twoim koncie bankowym jest aktualnie %d$",PlayerInfo[playerid][pAccount]);
+					new string[128];
+					new giveplayer[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					format(string, sizeof(string), "%s, na twoim koncie bankowym jest aktualnie %d$",giveplayer, PlayerInfo[playerid][pAccount]);
 					sendTipMessageEx(playerid, COLOR_YELLOW, string);
 				}
                 case 1://Wp≥aÊ
 				{
+					new string[128];
+					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s >> Wp≥ata", giveplayer);
 					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, string, "Wpisz poniøej kwotÍ, ktÛrπ chcesz wp≥aciÊ", "Wykonaj", "OdrzuÊ");
 				}
                 case 2://Wyp≥aÊ
 				{
+					new string[128];
+					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s >> Wyp≥ata", giveplayer);
 					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poniøej kwotÍ, ktÛrπ chcesz wp≥aciÊ", "Wykonaj", "OdrzuÊ");
@@ -15830,7 +15835,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendErrorMessage(playerid, "Juø wkrÛtce!");
 				}
 				case 4://>>Konto frakcji
-				{
+				{	new string[128];
+					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new frakcjagracza = GetPlayerFraction(playerid);
 					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto %s", giveplayer, frakcjagracza);
@@ -15844,10 +15850,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 	    {
-			new string[128];
 			if(gPlayerLogged[playerid] == 1)
 			{
-				 new wpisal = strval(inputtext);
+				new string[128];
+				new wpisal = strval(inputtext);
 				// = FunkcjaK(string);--Funkcja wp≥acania na k
 				if (wpisal > kaska[playerid] || wpisal < 1)
 				{
@@ -15875,10 +15881,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             switch(listitem)
             {
-				new giveplayer[MAX_PLAYER_NAME];
-				new string[128];
 				case 0://Sprawdü stan konta organizacji
 				{
+					new string[128];
+					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new frakcjagracza = GetPlayerFraction(playerid);
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyúlnie zalogowano na konto lidera:{800080}%s{C0C0C0},\nObecny stan konta:{80FF00}%d$", giveplayer,frakcjagracza,Sejf_Frakcji[GetPlayerFraction(playerid)]);
@@ -15895,7 +15901,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				}
 				case 3:
-				{
+				{	
+					new string[128];
+					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
 					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne", "Wybierz", "Wyjdü");
