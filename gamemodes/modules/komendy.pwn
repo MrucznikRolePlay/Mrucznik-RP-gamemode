@@ -38918,7 +38918,7 @@ CMD:wyjedz(playerid)
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1452.4473,-1806.2717,100.0939);
+				SetVehiclePos(pVehID, 1765.0277,-1544.6396,-8.5308);
 				SetVehicleVirtualWorld(pVehID, 2);
 				SetPlayerVirtualWorld(playerid, 2);
 				PutPlayerInVehicle(playerid, pVehID, 0);
@@ -38936,12 +38936,12 @@ CMD:wyjedz(playerid)
 			else//Jeúli gracz jest sam, nie w pojeüdzie
 			{
 				SetPlayerVirtualWorld(playerid, 2);
-				SetPlayerPos(playerid, -2089.55835, -414.24173, 36.32352);
+				SetPlayerPos(playerid, 1765.0277,-1544.6396,-8.5308);
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Jak krecik, drzwi nie masz?", 4000, 3);
 			}
 		
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 5.0, -2089.55835, -414.24173, 36.32352))//WYJAZD Z PARKINGU PODZIEMNEGO
+		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1765.0277,-1544.6396,-8.5308))//WYJAZD Z PARKINGU PODZIEMNEGO
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
