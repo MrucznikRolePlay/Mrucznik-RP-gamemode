@@ -15923,6 +15923,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mówi: Do zobaczenia!");
         }
+		else
+		{
+			SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mówi: Do zobaczenia!");
+		}
        
 	
 	}
@@ -15935,9 +15939,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[128];
 				new wpisal = strval(inputtext);
 				// = FunkcjaK(string);--Funkcja wp³acania na k
-				if (wpisal > kaska[playerid] || wpisal < 1)
+				if (wpisal > PlayerInfo[playerid][pAccount] || wpisal < 1)
 				{
-					sendTipMessage(playerid, "Nie masz tyle");
+					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota");
 					return 1;
 				}
 				DajKase(playerid,wpisal);
@@ -15945,7 +15949,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
 				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", curfunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
-				PlayerInfo[playerid][pAccount]=wpisal-PlayerInfo[playerid][pAccount];
+				PlayerInfo[playerid][pAccount]=PlayerInfo[playerid][pAccount]-wpisal;
 				format(string, sizeof(string), "  Depozyt: {80FF00}$-%d", wpisal);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
