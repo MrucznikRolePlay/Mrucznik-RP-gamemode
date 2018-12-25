@@ -15850,20 +15850,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     
 			if(gPlayerLogged[playerid] == 1)
 			{
-				new string2[256];
-				format(string2, sizeof(string2), "%d",inputtext);
-			//	string2 = FunkcjaK(string);--Funkcja wp³acania na k
-				if (string2 > kaska[playerid] || string2 < 1)
+
+				// = FunkcjaK(string);--Funkcja wp³acania na k
+				if (inputtext > kaska[playerid] || inputtext < 1)
 				{
 					sendTipMessage(playerid, "Nie masz tyle");
 					return 1;
 				}
-				DajKase(playerid,-string2);
+				DajKase(playerid,-inputtext);
 				new curfunds = PlayerInfo[playerid][pAccount];
 				SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
 				format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
-				PlayerInfo[playerid][pAccount]=string2+PlayerInfo[playerid][pAccount];
+				PlayerInfo[playerid][pAccount]=inputtext+PlayerInfo[playerid][pAccount];
 				format(string, sizeof(string), "  Depozyt: $%d", inputtext);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
