@@ -1616,8 +1616,6 @@ CMD:przelew(playerid, params[])
 CMD:kontobankowe(playerid)return cmd_kb(playerid);
 CMD:kb(playerid)
 {
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 	if(IsPlayerConnected(playerid))
     {
         if(gPlayerLogged[playerid] == 1)

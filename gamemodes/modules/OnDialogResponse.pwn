@@ -15850,34 +15850,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     
 			if(gPlayerLogged[playerid] == 1)
 			{
-					format(string2, sizeof(string2), "%d",inputtext);
-					string2 = FunkcjaK(string);
+				format(string2, sizeof(string2), "%d",inputtext);
+				string2 = FunkcjaK(string);
 					
-					if (string2 > kaska[playerid] || string2 < 1)
-					{
-						sendTipMessage(playerid, "Nie masz tyle");
-						return 1;
-					}
-					DajKase(playerid,-string2);
-					new curfunds = PlayerInfo[playerid][pAccount];
-					SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
-					format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);
-					SendClientMessage(playerid, COLOR_GRAD2, string);
-					PlayerInfo[playerid][pAccount]=string2+PlayerInfo[playerid][pAccount];
-					format(string, sizeof(string), "  Depozyt: $%d", string2);
-					SendClientMessage(playerid, COLOR_GRAD4, string);
-					SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
-					format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][pAccount]);
-					SendClientMessage(playerid, COLOR_WHITE, string);
-				}
-				else
+				if (string2 > kaska[playerid] || string2 < 1)
 				{
-				
+					sendTipMessage(playerid, "Nie masz tyle");
+					return 1;
 				}
-				return 1;
+				DajKase(playerid,-string2);
+				new curfunds = PlayerInfo[playerid][pAccount];
+				SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
+				format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);
+				SendClientMessage(playerid, COLOR_GRAD2, string);
+				PlayerInfo[playerid][pAccount]=string2+PlayerInfo[playerid][pAccount];
+				format(string, sizeof(string), "  Depozyt: $%d", string2);
+				SendClientMessage(playerid, COLOR_GRAD4, string);
+				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
+				format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][pAccount]);
+				SendClientMessage(playerid, COLOR_WHITE, string);
 			}
+				
+				return 1;
 		}
 	}
+	
 
 //=================[KONIEC]========================
     else if(dialogid == 7079)
