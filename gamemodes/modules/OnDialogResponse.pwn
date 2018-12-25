@@ -15867,7 +15867,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", curfunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
 				PlayerInfo[playerid][pAccount]=wpisal+PlayerInfo[playerid][pAccount];
-				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", inputtext);
+				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", wpisal);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
 				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
@@ -15946,7 +15946,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", curfunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
 				PlayerInfo[playerid][pAccount]=wpisal-PlayerInfo[playerid][pAccount];
-				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", inputtext);
+				format(string, sizeof(string), "  Depozyt: {80FF00}$-%d", wpisal);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
 				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
