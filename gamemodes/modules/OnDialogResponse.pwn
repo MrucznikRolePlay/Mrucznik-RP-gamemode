@@ -15819,7 +15819,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new string[128];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					format(string, sizeof(string), "Konto Bankowe >> %s >> Wp³ata", giveplayer);
+					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
 					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ");
 				}
                 case 2://Wyp³aæ
@@ -15827,7 +15827,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new string[128];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					format(string, sizeof(string), "Konto Bankowe >> %s >> Wyp³ata", giveplayer);
+					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
 					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ");
 				}
                 case 3://Przelew do osoby
@@ -15835,7 +15835,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendErrorMessage(playerid, "Ju¿ wkrótce!");
 				}
 				case 4://>>Konto frakcji
-				{	new string[128];
+				{	
+					new string[128];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new frakcjagracza = GetPlayerFraction(playerid);
