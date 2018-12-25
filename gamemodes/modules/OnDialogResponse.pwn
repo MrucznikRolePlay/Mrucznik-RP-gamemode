@@ -15811,8 +15811,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new string[128];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					format(string, sizeof(string), "%s, na twoim koncie bankowym jest aktualnie %d$",giveplayer, PlayerInfo[playerid][pAccount]);
-					sendTipMessageEx(playerid, COLOR_YELLOW, string);
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta:{80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
+					ShowPlayerDialog(playerid, 1070, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
                 case 1://Wp³aæ
 				{
@@ -15840,7 +15840,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto %s", giveplayer, FractionNames[ftext]);
+					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto [..]\n[..] %s", giveplayer, FractionNames[ftext]);
 					ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto", "Wybierz", "WyjdŸ");
 				}
             }
@@ -15883,17 +15883,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             switch(listitem)
             {
 				case 0://SprawdŸ stan konta organizacji
+				{	
+					new stan[128];
+					format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Frakcji[GetPlayerFraction(playerid)]);
+					ShowPlayerDialogEx(playerid, 491, DIALOG_STYLE_LIST, "Sejf frakcyjny - stan", stan, "Wróæ", "");
+				}
+				case 1:
 				{
 					new string[128];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					new frakcjagracza = GetPlayerFraction(playerid);
-					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyœlnie zalogowano na konto lidera:{800080}%s{C0C0C0},\nObecny stan konta:{80FF00}%d$", giveplayer,frakcjagracza,Sejf_Frakcji[GetPlayerFraction(playerid)]);
-					ShowPlayerDialog(playerid, 1070, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
-				}
-				case 1:
-				{
-					sendErrorMessage(playerid, "Ju¿ wkrótce!");
+					new ftext = PlayerInfo[playerid][pLider];
+					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto [..]\n[..] %s", giveplayer, FractionNames[ftext]);
+					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID gracza, do którego chcesz przelaæ sumê", "Wykonaj", "Odrzuæ");
 				}
 				case 2:
 				{
@@ -15913,6 +15915,46 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			
 			}
 		}
+		
+	}
+	else if(dialogid == 1070)//Dialog informacyjny
+	{
+		if(response)
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mówi: Do zobaczenia!");
+        }
+       
+	
+	}
+	else if(dialogid == 1071)//Wp³ata na swoje konto
+	{
+		if(response)
+	    {
+			if(gPlayerLogged[playerid] == 1)
+			{
+				new string[128];
+				new wpisal = strval(inputtext);
+				// = FunkcjaK(string);--Funkcja wp³acania na k
+				if (wpisal > kaska[playerid] || wpisal < 1)
+				{
+					sendTipMessage(playerid, "Nie masz tyle");
+					return 1;
+				}
+				DajKase(playerid,wpisal);
+				new curfunds = PlayerInfo[playerid][pAccount];
+				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
+				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", curfunds);
+				SendClientMessage(playerid, COLOR_GRAD2, string);
+				PlayerInfo[playerid][pAccount]=wpisal-PlayerInfo[playerid][pAccount];
+				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", inputtext);
+				SendClientMessage(playerid, COLOR_GRAD4, string);
+				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
+				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
+				SendClientMessage(playerid, COLOR_WHITE, string);
+			}	
+			return 1;
+		}
+	
 	}
 	
 
