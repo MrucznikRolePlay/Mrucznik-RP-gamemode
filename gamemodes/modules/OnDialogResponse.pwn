@@ -15828,11 +15828,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
-					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ");
+					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz wyp³aciæ", "Wykonaj", "Odrzuæ");
 				}
                 case 3://Przelew do osoby
 				{
-					sendErrorMessage(playerid, "Ju¿ wkrótce!");
+					new string[128];
+					new giveplayer[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", giveplayer);
+					ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz przelaæ", "Wykonaj", "Odrzuæ");
 				}
 				case 4://>>Konto frakcji
 				{	
@@ -15840,7 +15844,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto [..]\n[..] %s", giveplayer, FractionNames[ftext]);
+					format(string, sizeof(string), ">> %s >> [..]\n[..] %s", giveplayer, FractionNames[ftext]);
 					ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto", "Wybierz", "WyjdŸ");
 				}
             }
@@ -15895,7 +15899,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new ftext = PlayerInfo[playerid][pLider];
 					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto [..]\n[..] %s", giveplayer, FractionNames[ftext]);
-					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID gracza, do którego chcesz przelaæ sumê", "Wykonaj", "Odrzuæ");
+					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
 				}
 				case 2:
 				{
@@ -15958,6 +15962,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}	
 			return 1;
 		}
+	
+	}
+	else if(dialogid == 1072)//Przelew
+	{
+		if(response)
+	    {
+			if(gPlayerLogged[playerid] == 1)
+			{
+				new string[128];
+				new sendername[MAX_PLAYER_NAME];
+				new wpisal = strval(inputtext);
+				wpisal = odbiorcaid[playerid];
+				GetPlayerName(wpisal, sendername, sizeof(sendername));
+				format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", sendername);
+				ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, "", string, "Wykonaj", "Odrzuæ");
+			}	
+			return 1;
+		}
+	
 	
 	}
 	
