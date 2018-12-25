@@ -15892,12 +15892,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-				
-				
+					sendErrorMessage(playerid, "Ju¿ wkrótce!");
 				}
 				case 2:
 				{
-				
+					sendErrorMessage(playerid, "Ju¿ wkrótce!");
 				
 				}
 				case 3:
