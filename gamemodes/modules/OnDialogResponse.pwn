@@ -16017,7 +16017,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(wpisal >= 1 && wpisal <= PlayerInfo[playerid][pAccount])
 			{
 				PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-wpisal;
-				PlayerInfo[odbiorcaid][pAccount] = PlayerInfo[odbiorcaid][pAccount]+wpisal;
+				PlayerInfo[odbiorcaid[playerid]][pAccount] = PlayerInfo[odbiorcaid[playerid]][pAccount]+wpisal;
 				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", wpisal, giveplayer);
 				SendClientMessage(odbiorcaid[playerid], COLOR_RED, string);
 				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", sendername, wpisal);
