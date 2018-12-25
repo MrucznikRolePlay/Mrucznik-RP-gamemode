@@ -15975,17 +15975,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new sendername[MAX_PLAYER_NAME];
 			new wpisal = strval(inputtext);
-			if (IsPlayerConnected(wpisal) || wpisal != playerid)
+			if (!IsPlayerConnected(wpisal) || wpisal == playerid)
+			{
+				sendErrorMessage(playerid, "B³êdne ID");	
+			}
+			else
 			{
 				wpisal = odbiorcaid[playerid];
 				GetPlayerName(wpisal, sendername, sizeof(sendername));
 				format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", sendername);
 				ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "Odrzuæ");
-					
-			}
-			else
-			{
-				sendErrorMessage(playerid, "B³êdne ID || Nie mo¿esz wys³aæ przelewu samemu sobie!"); 
 				return 1;
 			}
 		}
@@ -16005,14 +16004,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new giveplayer[MAX_PLAYER_NAME];
 			new wpisal = strval(inputtext);
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-			GetPlayerName(odbiorcaid[], sendername, sizeof(sendername));
+			GetPlayerName(odbiorcaid[playerid], sendername, sizeof(sendername));
 			if(wpisal >= 1 && wpisal <= PlayerInfo[playerid][pAccount])
 			{
-				ZabierzKase(playerid, wpisal);
+				PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-wpisal;
 				DajKase(odbiorcaid[], wpisal);
 				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", wpisal, giveplayer);
 				SendClientMessage(odbiorcaid[playerid], COLOR_RED, string);
-				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$", sendername, wpisal);
+				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", sendername, wpisal);
 				SendClientMessage(playerid, COLOR_RED, string); 
 				if(wpisal >= 5000000)//Wiadomosc dla adminow
 				{
