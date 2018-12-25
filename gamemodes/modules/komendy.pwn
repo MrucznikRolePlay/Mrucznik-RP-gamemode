@@ -1524,10 +1524,132 @@ CMD:wywalcb(playerid)
 	}
 	return 1;
 }
-CMD:sejffp(playerid, params[])
+CMD:transfer(playerid, params[]) return cmd_przelew(playerid, params);
+CMD:wiretransfer(playerid, params[]) return cmd_przelew(playerid, params);
+CMD:przelej(playerid, params[]) return cmd_przelew(playerid, params);
+CMD:przelew(playerid, params[])
+{
+	new string[128];
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
+
+    if(IsPlayerConnected(playerid))
+    {
+        if(gPlayerLogged[playerid] == 1)
+        {
+			if(PlayerInfo[playerid][pLevel] < 3)
+			{
+				sendTipMessage(playerid, "Musisz mieæ 3 level!");
+				return 1;
+			}
+			if(PlayerInfo[playerid][pLocal] != 103)
+	        {
+	            sendErrorMessage(playerid, "Nie jesteœ w Banku!");
+	            return 1;
+	        }
+			new giveplayerid, moneys;
+			if( sscanf(params, "k<fix>s[32]", giveplayerid, string))
+			{
+				sendTipMessage(playerid, "U¿yj /przelew [playerid/CzêœæNicku] [kwota]");
+				return 1;
+			}
+			moneys = FunkcjaK(string);
+
+			if (IsPlayerConnected(giveplayerid) && giveplayerid != playerid)
+			{
+			    if(giveplayerid != INVALID_PLAYER_ID)
+			    {
+					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					new playermoney = PlayerInfo[playerid][pAccount] ;
+					if (moneys > 0 && playermoney >= moneys)
+					{
+					    if(PlayerInfo[playerid][pConnectTime] >= 1)
+					    {
+							PlayerInfo[playerid][pAccount] -= moneys;
+							PlayerInfo[giveplayerid][pAccount] += moneys;
+							format(string, sizeof(string), "Dokona³eœ przelewu $%d na konto %s", moneys, giveplayer,giveplayerid);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							SendClientMessage(playerid, COLOR_GRAD1, string);
+							format(string, sizeof(string), "Otrzyma³eœ przelew $%d od %s", moneys, sendername, playerid);
+							SendClientMessage(giveplayerid, COLOR_GRAD1, string);
+							format(string, sizeof(string), "%s przela³ $%d do %s", sendername, moneys, giveplayer);
+			                if(moneys >= 50000)
+							{
+								ABroadCast(COLOR_YELLOW,string,1);
+							}
+							printf("%s", string);
+							PayLog(string);
+							PlayerPlaySound(giveplayerid, 1052, 0.0, 0.0, 0.0);
+						}
+						else
+						{
+						    PlayerInfo[playerid][pAccount] -= moneys;
+							format(string, sizeof(string), "Dokona³eœ przelewu $%d na konto %s", moneys, giveplayer,giveplayerid);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							SendClientMessage(playerid, COLOR_GRAD1, string);
+							format(string, sizeof(string), "%s przela³ $%d do %s (fikcyjny)", sendername, moneys, giveplayer);
+			                if(moneys >= 50000)
+							{
+								ABroadCast(COLOR_YELLOW,string,1);
+							}
+							printf("%s", string);
+							PayLog(string);
+						}
+					}
+					else
+					{
+						sendTipMessage(playerid, "Nieprawid³owa kwota transakcji.");
+					}
+				}
+			}
+			else
+			{
+				format(string, sizeof(string), "Gracz o ID %d nie istnieje.", giveplayerid);
+				sendErrorMessage(playerid, string);
+			}
+		}
+	}
+	return 1;
+}
+
+CMD:kontobankowe(playerid)return cmd_kb(playerid);
+CMD:kb(playerid)
+{
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
+	if(IsPlayerConnected(playerid))
+    {
+        if(gPlayerLogged[playerid] == 1)
+        {
+			if(PlayerInfo[playerid][pLevel] >= 3)
+			{
+				if(PlayerInfo[playerid][pLocal] == 103)
+				{
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, "Konto Bankowe", "Stan konta\n\nWp³aæ\nWyp³aæ\nPPrzelew do osoby\nPrzelew do Frakcji\nPrzelew z konta frakcji na osoby\nPrzelew z konta frakcji na frakcje", "Wybierz", "WyjdŸ");
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie jesteœ w banku!");
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Aby móc zarz¹dzaæ swoim kontem bankowym i dokonywaæ przelewów musisz osi¹gn¹æ 3 lvl");
+			}
+		}
+	}
+	
+
+
+	return 1;
+}
+/*
+CMD:przelewfrakcji(playerid, params[]) return pf(playerid, params[])
+CMD:pf(playerid, params[])
 {
 
-	new fracg = GetPlayerFraction(playerid);
+	new fracg = GetPlayerFraction(playerid); //Frakcja Gracza
 	new odbiorca;
 	new kwotao;
 	new string[128];
@@ -1539,14 +1661,14 @@ CMD:sejffp(playerid, params[])
 	
 	if(sscanf(params, "k<fix>d", odbiorca, kwotao))
 	{
-		sendErrorMessage(playerid, "Poprawne u¿ycie komendy to: /sejffp [id gracza] [kwota]");
+		sendErrorMessage(playerid, "Poprawne u¿ycie komendy to: /przelewfrakcji [id gracza] [kwota]");
 		return 1;
 	}
 	GetPlayerName(odbiorca, giveplayer, sizeof(giveplayer));
 	GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
 	if(PlayerInfo[playerid][pLider] >= 1)
 	{
-		if(kwotao <= Sejf_Frakcji[fracg])
+		if(kwotao <= Sejf_Frakcji[fracg] && kwotao >= 0)
 		{
 			Sejf_Add(fracg, -kwotao);
 			DajKase(odbiorca, kwotao);
@@ -1564,7 +1686,7 @@ CMD:sejffp(playerid, params[])
 		}
 		else
 		{
-			sendErrorMessage(playerid, "W sejfie nie ma takiej gotówki!");
+			sendErrorMessage(playerid, "B³êdna kwota // W sejfie nie ma takiej iloœci gotówki!");
 		}
 	}
 	else
@@ -1573,7 +1695,7 @@ CMD:sejffp(playerid, params[])
 	}
 	
 	return 1;
-}
+}*/
 CMD:sejff(playerid) return cmd_sejffrakcja(playerid);
 CMD:sejffrakcja(playerid)
 {
@@ -19274,94 +19396,7 @@ CMD:kolo(playerid)
 }
 
 
-CMD:transfer(playerid, params[]) return cmd_przelew(playerid, params);
-CMD:wiretransfer(playerid, params[]) return cmd_przelew(playerid, params);
-CMD:przelej(playerid, params[]) return cmd_przelew(playerid, params);
-CMD:przelew(playerid, params[])
-{
-	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
-    if(IsPlayerConnected(playerid))
-    {
-        if(gPlayerLogged[playerid] == 1)
-        {
-			if(PlayerInfo[playerid][pLevel] < 3)
-			{
-				sendTipMessage(playerid, "Musisz mieæ 3 level!");
-				return 1;
-			}
-			if(PlayerInfo[playerid][pLocal] != 103)
-	        {
-	            sendErrorMessage(playerid, "Nie jesteœ w Banku!");
-	            return 1;
-	        }
-			new giveplayerid, moneys;
-			if( sscanf(params, "k<fix>s[32]", giveplayerid, string))
-			{
-				sendTipMessage(playerid, "U¿yj /przelew [playerid/CzêœæNicku] [kwota]");
-				return 1;
-			}
-			moneys = FunkcjaK(string);
-
-			if (IsPlayerConnected(giveplayerid) && giveplayerid != playerid)
-			{
-			    if(giveplayerid != INVALID_PLAYER_ID)
-			    {
-					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					new playermoney = PlayerInfo[playerid][pAccount] ;
-					if (moneys > 0 && playermoney >= moneys)
-					{
-					    if(PlayerInfo[playerid][pConnectTime] >= 1)
-					    {
-							PlayerInfo[playerid][pAccount] -= moneys;
-							PlayerInfo[giveplayerid][pAccount] += moneys;
-							format(string, sizeof(string), "Dokona³eœ przelewu $%d na konto %s", moneys, giveplayer,giveplayerid);
-							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendClientMessage(playerid, COLOR_GRAD1, string);
-							format(string, sizeof(string), "Otrzyma³eœ przelew $%d od %s", moneys, sendername, playerid);
-							SendClientMessage(giveplayerid, COLOR_GRAD1, string);
-							format(string, sizeof(string), "%s przela³ $%d do %s", sendername, moneys, giveplayer);
-			                if(moneys >= 50000)
-							{
-								ABroadCast(COLOR_YELLOW,string,1);
-							}
-							printf("%s", string);
-							PayLog(string);
-							PlayerPlaySound(giveplayerid, 1052, 0.0, 0.0, 0.0);
-						}
-						else
-						{
-						    PlayerInfo[playerid][pAccount] -= moneys;
-							format(string, sizeof(string), "Dokona³eœ przelewu $%d na konto %s", moneys, giveplayer,giveplayerid);
-							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendClientMessage(playerid, COLOR_GRAD1, string);
-							format(string, sizeof(string), "%s przela³ $%d do %s (fikcyjny)", sendername, moneys, giveplayer);
-			                if(moneys >= 50000)
-							{
-								ABroadCast(COLOR_YELLOW,string,1);
-							}
-							printf("%s", string);
-							PayLog(string);
-						}
-					}
-					else
-					{
-						sendTipMessage(playerid, "Nieprawid³owa kwota transakcji.");
-					}
-				}
-			}
-			else
-			{
-				format(string, sizeof(string), "Gracz o ID %d nie istnieje.", giveplayerid);
-				sendErrorMessage(playerid, string);
-			}
-		}
-	}
-	return 1;
-}
 
 
 CMD:buy(playerid) return cmd_kup(playerid);
@@ -23474,25 +23509,6 @@ CMD:startlotto(playerid)
     }
 	return 1;
 }
-/*==================[Kupno unikatów pod GUI]===================
-CMD:kupunikata(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		if(PlayerInfo[playerid][pLevel] >= 5)
-		{
-			ShowPlayerDialogEx(playerid, 1064, DIALOG_STYLE_LIST, "Mrucznik Role Play >> Kupno unikatów", "Mrucznik > Dolary\nMrucznik > Coins", "Akceptuj", "Anuluj");
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Ta komenda jest od 5 poziomu!"); 
-		}
-	
-	}
-	
-	return 1;
-}
-*/
 CMD:setstat(playerid, params[])
 {
 	new string[128];
