@@ -38856,7 +38856,7 @@ CMD:wyjedz(playerid)
 //====================[DLA USSS]======================================
 	if(GetPlayerFraction(playerid) == FRAC_BOR)
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 3.0, 1825.18274, -1538.21204, 13.11075))//Wjazdowa pozycja
+		if(IsPlayerInRangeOfPoint(playerid, 3.0, 1827.0527,-1539.3645,13.2089))//Wjazdowa pozycja
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
@@ -38890,7 +38890,7 @@ CMD:wyjedz(playerid)
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1825.18274, -1538.21204, 13.11075);
+				SetVehiclePos(pVehID, 1827.0527,-1539.3645,13.2089);
 				SetVehicleVirtualWorld(pVehID, 0);
 				SetPlayerVirtualWorld(playerid, 0);
 				PutPlayerInVehicle(playerid, pVehID, 0);
@@ -38918,7 +38918,7 @@ CMD:wyjedz(playerid)
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, -2089.55835, -414.24173, 36.32352);
+				SetVehiclePos(pVehID, 1452.4473,-1806.2717,100.0939);
 				SetVehicleVirtualWorld(pVehID, 2);
 				SetPlayerVirtualWorld(playerid, 2);
 				PutPlayerInVehicle(playerid, pVehID, 0);
