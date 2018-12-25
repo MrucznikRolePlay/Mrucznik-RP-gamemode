@@ -20272,7 +20272,7 @@ CMD:wejdz(playerid)
             ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
         }
         //else if(IsPlayerInRangeOfPoint(playerid,3,-2089.55835, -414.24173, 36.32352)//Podziemia BOR
-        else if((IsPlayerInRangeOfPoint(playerid,3,-2089.55835, -414.24173, 36.32352) && IsABOR(playerid))//Podziemia BOR
+        else if((IsPlayerInRangeOfPoint(playerid,3,1498.9341,-1537.0797,67.3069) && IsABOR(playerid))//Podziemia BOR
         || IsPlayerInRangeOfPoint(playerid,3,1772.1613,-1547.9675,9.9067)
         || IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
         || IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
@@ -38918,7 +38918,7 @@ CMD:wyjedz(playerid)
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1765.0277,-1544.6396,-8.5308);
+				SetVehiclePos(pVehID, 1481.5889,-1519.8298,66.9969);
 				SetVehicleVirtualWorld(pVehID, 2);
 				SetPlayerVirtualWorld(playerid, 2);
 				PutPlayerInVehicle(playerid, pVehID, 0);
@@ -38936,12 +38936,12 @@ CMD:wyjedz(playerid)
 			else//Jeœli gracz jest sam, nie w pojeŸdzie
 			{
 				SetPlayerVirtualWorld(playerid, 2);
-				SetPlayerPos(playerid, 1765.0277,-1544.6396,-8.5308);
+				SetPlayerPos(playerid, 1481.5889,-1519.8298,66.9969);
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Jak krecik, drzwi nie masz?", 4000, 3);
 			}
 		
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1765.0277,-1544.6396,-8.5308))//WYJAZD Z PARKINGU PODZIEMNEGO
+		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1481.5889,-1519.8298,66.9969))//WYJAZD Z PARKINGU PODZIEMNEGO
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{

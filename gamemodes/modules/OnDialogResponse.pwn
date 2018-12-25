@@ -2049,8 +2049,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 0:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, -2089.55835, -414.24173, 36.32352);
-						SetPlayerVirtualWorld (playerid, 0);
+						SetPlayerPosEx(playerid, 1498.9341,-1537.0797,67.3069);
+						SetPlayerVirtualWorld (playerid, 2);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
