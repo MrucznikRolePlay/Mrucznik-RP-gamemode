@@ -17814,32 +17814,39 @@ CMD:sluzba(playerid)
         }
         else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
         {
-            if (PlayerToPoint(3, playerid, 594.2701,-1476.5219,81.8788) //nowe FBI by Dywan
+            if (PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736) //nowe FBI by Ubunteq
             || PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
             || PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ))//nowe domy /duty w domu
             {
-                if(OnDuty[playerid]==0)
-                {
-                    format(string, sizeof(string), "* Agent FBI %s bierze odznakê i broñ ze swojej szafki.", sendername);
-                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    DajBronieFrakcyjne(playerid);
-                    SetPlayerArmour(playerid, 90);
-                    SetPlayerHealth(playerid, 100);
-                    OnDuty[playerid] = 1;
-					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-					SetPlayerToTeamColor(playerid);
-                }
-                else if(OnDuty[playerid]==1)
-                {
-                    format(string, sizeof(string), "* Agent FBI %s odk³ada odznakê i broñ do swojej szafki.", sendername);
-                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    SetPlayerArmour(playerid, 0.0);
-                    SetPlayerHealth(playerid, 100);
-                    OnDuty[playerid] = 0;
-                    PrzywrocBron(playerid);
-					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-					SetPlayerToTeamColor(playerid);
-                }
+				if(GetPlayerVirtualWorld(playerid) == 2)
+				{
+					if(OnDuty[playerid]==0)
+					{
+						format(string, sizeof(string), "* Agent FBI %s bierze odznakê i broñ ze swojej szafki.", sendername);
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						DajBronieFrakcyjne(playerid);
+						SetPlayerArmour(playerid, 90);
+						SetPlayerHealth(playerid, 100);
+						OnDuty[playerid] = 1;
+						SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+						SetPlayerToTeamColor(playerid);
+					}
+					else if(OnDuty[playerid]==1)
+					{
+						format(string, sizeof(string), "* Agent FBI %s odk³ada odznakê i broñ do swojej szafki.", sendername);
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						SetPlayerArmour(playerid, 0.0);
+						SetPlayerHealth(playerid, 100);
+						OnDuty[playerid] = 0;
+						PrzywrocBron(playerid);
+						SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+						SetPlayerToTeamColor(playerid);
+					}
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie jesteœ w szatni!"); 
+				}
             }
             else
             {
@@ -18098,7 +18105,7 @@ CMD:swat(playerid)
 			|| PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 )
 			|| PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
 			|| PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141)//nowe komi by dywan
-			|| PlayerToPoint(3.5, playerid, 594.5551,-1473.6921,80.4357))//nowe FBI by ubunteq
+			|| PlayerToPoint(3.8, playerid, 597.1039,-1474.2688,80.4357))//nowe FBI by ubunteq
 			{
 				if(OnDuty[playerid] == 1)
 				{
@@ -18158,7 +18165,7 @@ CMD:kamizelka(playerid)
             || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
             || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
             || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
-			|| PlayerToPoint(3, playerid, 594.5551,-1473.6921,80.4357) //nowe FBI by Ubunteq
+			|| PlayerToPoint(3.5, playerid, 592.5598,-1477.5116,82.4736) //nowe FBI by Ubunteq
             || PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
             || PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ) //nowe komi by dywan)
 			|| IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) 
@@ -18212,7 +18219,7 @@ CMD:szturmowy(playerid)
 			|| PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 )
 			|| PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
 			|| PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141)//nowe komi by dywan
-			|| PlayerToPoint(3.5, playerid, 594.5551,-1473.6921,80.4357))//nowe FBI by ubunteq
+			|| PlayerToPoint(3.5, playerid, 597.1039,-1474.2688,80.4357))//nowe FBI by ubunteq
 			{
 				if(OnDuty[playerid] == 1 && DodatkiPD[playerid] == 0)
 				{
@@ -18261,25 +18268,32 @@ CMD:kurtka(playerid)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(IsAFBI(playerid))
 		{
-			if (PlayerToPoint(3.5, playerid, 594.5551,-1473.6921,80.4357))//nowe fbi by ubunteq
+			if (PlayerToPoint(3.5, playerid, 592.5598,-1477.5116,82.4736))//nowe fbi by ubunteq
 			{
-				if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 1)
+				if(GetPlayerVirtualWorld(playerid) == 2)
 				{
-					format(string, sizeof(string), "* %s zak³ada kurtkê z naszywkami FBI.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	    		    SetPlayerSkin(playerid, 286);
-					SetPlayerColor(playerid, COLOR_FBI); // czarny
-				}
-				else if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 2)
-				{
-					format(string, sizeof(string), "* %s zak³ada luŸny strój agentki FBI.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	    		    SetPlayerSkin(playerid, 141);
-					SetPlayerColor(playerid, COLOR_FBI); // czarny
+					if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 1)
+					{
+						format(string, sizeof(string), "* %s zak³ada kurtkê z naszywkami FBI.", sendername);
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						SetPlayerSkin(playerid, 286);
+						SetPlayerColor(playerid, COLOR_FBI); // czarny
+					}
+					else if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 2)
+					{
+						format(string, sizeof(string), "* %s zak³ada luŸny strój agentki FBI.", sendername);
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						SetPlayerSkin(playerid, 141);
+						SetPlayerColor(playerid, COLOR_FBI); // czarny
+					}
+					else
+					{
+						sendTipMessage(playerid, "Nie jesteœ na s³u¿bie!");
+					}
 				}
 				else
 				{
-				    sendTipMessage(playerid, "Nie jesteœ na s³u¿bie!");
+					sendErrorMessage(playerid, "Nie jesteœ w szatni!"); 
 				}
 			}
 			else
@@ -20267,17 +20281,17 @@ CMD:wejdz(playerid)
             ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking podziemny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
         }
         //winda FBI
-		else if(IsPlayerInRangeOfPoint(playerid,3,586.83704, -1473.89270, 89.30576)//przy recepcji
-		|| IsPlayerInRangeOfPoint(playerid,3,592.65466, -1486.76575, 82.10487)//szatnia
-		|| IsPlayerInRangeOfPoint(playerid,5,591.37579, -1482.26672, 80.43560)//zbrojownia
-		|| IsPlayerInRangeOfPoint(playerid,5,596.21857, -1477.92395, 84.06664)//biura federalne
-		|| IsPlayerInRangeOfPoint(playerid,5,589.23029, -1479.66357, 91.74274)//Dyrektorat
-		|| IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//DACH
-		|| IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
-		|| IsPlayerInRangeOfPoint(playerid,5,1059.91748, 1553.65698, 7.59697)//Parking podziemny
-		|| IsPlayerInRangeOfPoint(playerid,5,585.70782, -1479.54211, 99.01273)//CID/ERT
-		|| IsPlayerInRangeOfPoint(playerid,3,594.05334, -1476.27490, 81.82840)//stanowe
-		|| IsPlayerInRangeOfPoint(playerid,5,590.42767, -1447.62939, 80.95732))//Sale Treningowe
+		else if(IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
+		|| IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
+		|| IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
+		|| IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
+		|| IsPlayerInRangeOfPoint(playerid,2,589.23029, -1479.66357, 91.74274)//Dyrektorat
+		|| IsPlayerInRangeOfPoint(playerid,2,613.4404,-1471.9745,73.8816)//DACH
+		|| IsPlayerInRangeOfPoint(playerid,2,596.5255, -1489.2544, 15.3587)//Parking
+		|| IsPlayerInRangeOfPoint(playerid,2,1059.91748, 1553.65698, 7.59697)//Parking podziemny
+		|| IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
+		|| IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
+		|| IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732))//Sale Treningowe
 		{
 			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5] Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
         }
@@ -21438,17 +21452,17 @@ CMD:wyjdz(playerid)
 			ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking wewnêtrzny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
 		}
 		//winda FBI
-		else if(IsPlayerInRangeOfPoint(playerid,3,586.83704, -1473.89270, 89.30576)//przy recepcji
-		|| IsPlayerInRangeOfPoint(playerid,3,592.65466, -1486.76575, 82.10487)//szatnia
-		|| IsPlayerInRangeOfPoint(playerid,5,591.37579, -1482.26672, 80.43560)//zbrojownia
-		|| IsPlayerInRangeOfPoint(playerid,5,596.21857, -1477.92395, 84.06664)//biura federalne
-		|| IsPlayerInRangeOfPoint(playerid,5,589.23029, -1479.66357, 91.74274)//Dyrektorat
-		|| IsPlayerInRangeOfPoint(playerid,5,613.4404,-1471.9745,73.8816)//DACH
-		|| IsPlayerInRangeOfPoint(playerid,5,596.5255, -1489.2544, 15.3587)//Parking
-		|| IsPlayerInRangeOfPoint(playerid,5,1059.91748, 1553.65698, 7.59697)//Parking podziemny
-		|| IsPlayerInRangeOfPoint(playerid,5,585.70782, -1479.54211, 99.01273)//CID/ERT
-		|| IsPlayerInRangeOfPoint(playerid,3,594.05334, -1476.27490, 81.82840)//stanowe
-		|| IsPlayerInRangeOfPoint(playerid,5,590.42767, -1447.62939, 80.95732))//Sale Treningowe
+		else if(IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
+		|| IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
+		|| IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
+		|| IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
+		|| IsPlayerInRangeOfPoint(playerid,2,589.23029, -1479.66357, 91.74274)//Dyrektorat
+		|| IsPlayerInRangeOfPoint(playerid,2,613.4404,-1471.9745,73.8816)//DACH
+		|| IsPlayerInRangeOfPoint(playerid,2,596.5255, -1489.2544, 15.3587)//Parking
+		|| IsPlayerInRangeOfPoint(playerid,2,1059.91748, 1553.65698, 7.59697)//Parking podziemny
+		|| IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
+		|| IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
+		|| IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732))//Sale Treningowe
 		{
 			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
         }
