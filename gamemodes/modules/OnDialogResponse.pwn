@@ -15802,7 +15802,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 //By Simeone 25-12-2018
 	else if(dialogid == 1067)//Okno dialogowe zarz¹dzania swoim kontem bankowym
 	{
-		if(response)//Stan konta\n\nWp³aæ\nWyp³aæ\nPPrzelew do osoby\nPrzelew do Frakcji\nPrzelew z konta frakcji na osoby\nPrzelew z konta frakcji na frakcje
+		if(response)
         {
             switch(listitem)
             {
@@ -15839,15 +15839,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new string[128];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					new frakcjagracza = GetPlayerFraction(playerid);
-					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto %s", giveplayer, frakcjagracza);
+					new ftext = PlayerInfo[playerid][pLider];
+					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto %s", giveplayer, FractionNames[ftext]);
 					ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto", "Wybierz", "WyjdŸ");
 				}
             }
         }
 	
 	}
-	else if(dialogid == 1068)
+	else if(dialogid == 1068)//Wp³ata
 	{
 		if(response)
 	    {
@@ -15876,9 +15876,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
-	else if(dialogid == 1069)
+	else if(dialogid == 1069)//Konto frakcji
 	{
-		if(response)//Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto
+		if(response)
         {
             switch(listitem)
             {
@@ -15889,7 +15889,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new frakcjagracza = GetPlayerFraction(playerid);
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyœlnie zalogowano na konto lidera:{800080}%s{C0C0C0},\nObecny stan konta:{80FF00}%d$", giveplayer,frakcjagracza,Sejf_Frakcji[GetPlayerFraction(playerid)]);
-					ShowPlayerDialog(playerid, 1070, DIALOG_STYLE_MSGBOX, "Stan Konta", "Info\n\tInfo", "Okej", "");
+					ShowPlayerDialog(playerid, 1070, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
 				case 1:
 				{
