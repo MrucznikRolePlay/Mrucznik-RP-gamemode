@@ -15846,24 +15846,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 	    {
 			new string[128];
-
+			new wpisal[128];
     
 			if(gPlayerLogged[playerid] == 1)
 			{
-				inputtext = FunkcjaK(string);
-
-				if (inputtext > kaska[playerid] || inputtext < 1)
+				format(wpisal, sizeof(wpisal), "%s",inputtext);
+				wpisal = FunkcjaK(string);
+				
+				if (wpisal > kaska[playerid] || wpisal < 1)
 				{
 					sendTipMessage(playerid, "Nie masz tyle");
 					return 1;
 				}
-				DajKase(playerid,-inputtext);
+				DajKase(playerid,-wpisal);
 				new curfunds = PlayerInfo[playerid][pAccount];
 				SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
 				format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
-				PlayerInfo[playerid][pAccount]=inputtext+PlayerInfo[playerid][pAccount];
-				format(string, sizeof(string), "  Depozyt: $%d", inputtext);
+				PlayerInfo[playerid][pAccount]=wpisal+PlayerInfo[playerid][pAccount];
+				format(string, sizeof(string), "  Depozyt: $%d", wpisal);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
 				format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][pAccount]);
