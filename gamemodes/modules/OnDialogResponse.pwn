@@ -15975,18 +15975,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new sendername[MAX_PLAYER_NAME];
 			new wpisal = strval(inputtext);
-			if (!IsPlayerConnected(wpisal) || wpisal == playerid)
+			if (!IsPlayerConnected(wpisal))
 			{
-				sendErrorMessage(playerid, "B³êdne ID");	
+				if(wpisal != playerid)
+				{
+					wpisal = odbiorcaid[playerid];
+					GetPlayerName(wpisal, sendername, sizeof(sendername));
+					format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", sendername);
+					ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "Odrzuæ");
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie mo¿esz przelaæ gotówki samemu sobie!");
+					return 1;
+				}
 			}
 			else
 			{
-				wpisal = odbiorcaid[playerid];
-				GetPlayerName(wpisal, sendername, sizeof(sendername));
-				format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", sendername);
-				ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "Odrzuæ");
+				sendErrorMessage(playerid, "Nie ma takiego gracza!"); 
 				return 1;
 			}
+			
 		}
 	
 	
@@ -16008,7 +16017,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(wpisal >= 1 && wpisal <= PlayerInfo[playerid][pAccount])
 			{
 				PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-wpisal;
-				DajKase(odbiorcaid[playerid], wpisal);
+				PlayerInfo[odbiorcaid][pAccount] = PlayerInfo[odbiorcaid][pAccount]+wpisal;
 				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", wpisal, giveplayer);
 				SendClientMessage(odbiorcaid[playerid], COLOR_RED, string);
 				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", sendername, wpisal);
