@@ -15864,7 +15864,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
 				PlayerInfo[playerid][pAccount]=string2+PlayerInfo[playerid][pAccount];
-				format(string, sizeof(string), "  Depozyt: $%d", string2);
+				format(string, sizeof(string), "  Depozyt: $%d", inputtext);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
 				format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][pAccount]);
