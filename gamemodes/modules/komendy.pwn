@@ -20552,6 +20552,10 @@ CMD:wejdz(playerid)
         {
             SetPlayerPosEx(playerid,1462.2887,-1008.2450,27.1099);//bank LS œrodek
             GameTextForPlayer(playerid, "~w~Witamy w ~y~Verte ~g~Bank ~b~Los Santos", 5000, 1);
+			sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
+			sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
+			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
+			sendTipMessage(playerid, "* Sejf znajduje siê pod 10m pod ziemi¹ --> Bezpieczna lokata!");
             PlayerInfo[playerid][pLocal] = 103;
             SetPlayerVirtualWorld(playerid, 2);
             Wchodzenie(playerid);
