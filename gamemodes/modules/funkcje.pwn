@@ -3506,7 +3506,22 @@ IsAtClothShop(playerid)
 	}
 	return 0;
 }
+IsAtTicketMachine(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerToPoint(5.0, playerid, 1757.00513, -1943.20789, 13.26766) || PlayerToPoint(5.0, playerid,  1746.97949, -1943.71838, 13.45185) || PlayerToPoint(5.0, playerid, 825.69000, -1354.49915, 13.11831))
+		{
+		
+			return 1;
+		}
+	
+	
+	
+	}
+	return 0;
 
+}
 IsAtGasStation(playerid)
 {
     if(IsPlayerConnected(playerid))

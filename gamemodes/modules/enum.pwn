@@ -1487,6 +1487,7 @@ enum pInfo
 	pLinia85,
 	pLinia96,
 	pBiletsamolotowy,
+	pBiletpociag,
  	pWsamolocieLS,
   	pWlociej,
    	pMozeskakacAT,
@@ -1499,6 +1500,11 @@ enum pInfo
     pHat,
     Text3D:pDescLabel,
     pDesc[128]
+};
+enum StringData
+{
+    ID,
+    Kwota,
 };
 
 new PlayerInfo[MAX_PLAYERS][pInfo];

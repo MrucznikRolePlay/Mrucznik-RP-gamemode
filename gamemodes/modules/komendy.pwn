@@ -19979,18 +19979,27 @@ CMD:czas(playerid)
 	}
 	return 1;
 }
-CMD:kbpo(playerid) 
+CMD:kbpo(playerid) return kupbiletpociag(playerid)
+CMD:kpociag(playerid) return kupbiletpociag(playerid)
+CMD:kupbiletpociag(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
 		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
 		{
-			if(IsPlayerInRangeOfPoint(playerid,3,1757.00513, -1943.20789, 13.26766) || IsPlayerInRangeOfPoint(playerid,3, 1746.97949, -1943.71838, 13.45185) || IsPlayerInRangeOfPoint(playerid,5.0,825.69000, -1354.49915, 13.11831))
+			if(IsAtTicketMachine(playerid))
 			{
-				ZabierzKase(playerid, 10000);
-				Sejf_Add(FRAC_KT, 10000);
-				PlayerInfo[playerid][pBiletsamolotowy] = 1;
-				sendTipMessage(playerid, "Zakupi³eœ bilet ogólny. Koszt biletu to 10.000$");
+				if(kaska[playerid] >= 10000):
+				{
+					ZabierzKase(playerid, 10000);
+					Sejf_Add(FRAC_KT, 10000);
+					PlayerInfo[playerid][pBiletsamolotowy] = 1;
+					sendTipMessage(playerid, "Zakupi³eœ bilet ogólny. Koszt biletu to 10.000$");
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+				}
 				return 1;
 			}
 			else
