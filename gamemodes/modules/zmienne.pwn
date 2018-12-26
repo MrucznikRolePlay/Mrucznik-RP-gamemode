@@ -1104,8 +1104,8 @@ ZerujZmienne(playerid)
     lastMsg[playerid] = 0;
 
 	//z conecta
-	String[playerid][ID] = 0;
-    String[playerid][Kwota] = 0;
+	string2[playerid][ID] = 0;
+    string2[playerid][Kwota] = 0;
 	TogPodglad[playerid] = 0;
 	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
 	cbradijo[playerid] = 0; adminpodgladcb[playerid] = 0; matogczas[playerid] = 0;
