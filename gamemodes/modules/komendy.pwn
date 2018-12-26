@@ -6465,10 +6465,6 @@ CMD:brama(playerid)
 				}
 				
 			}
-			else
-			{
-				sendErrorMessage(playerid, "Nie jesteœ w miejscu, w którym jest brama!"); 
-			}
 		
 		}//kawalek starych bram
 		if(IsAUrzednik(playerid) || IsABOR(playerid))
@@ -9483,7 +9479,7 @@ CMD:killall(playerid)
     {
         if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
-            format(string, 128, "Administrator %s [ID: %d] zabi³ wszystkich graczy.", GetNick(playerid, true));
+            format(string, 128, "Administrator %s [ID: %d] zabi³ wszystkich graczy.", sendername, playerid);
             foreach(Player, i)
 			{
 			    if(IsPlayerConnected(i))
@@ -20555,7 +20551,7 @@ CMD:wejdz(playerid)
 			sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
 			sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
-			sendTipMessage(playerid, "* Sejf znajduje siê pod 10m pod ziemi¹ --> Bezpieczna lokata!");
+			sendTipMessage(playerid, "* Sejf znajduje siê  10m pod ziemi¹ --> Bezpieczna lokata!");
             PlayerInfo[playerid][pLocal] = 103;
             SetPlayerVirtualWorld(playerid, 2);
             Wchodzenie(playerid);
@@ -20568,6 +20564,10 @@ CMD:wejdz(playerid)
             PlayerInfo[playerid][pLocal] = 103;
             SetPlayerVirtualWorld(playerid, 2);
             Wchodzenie(playerid);
+			sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
+			sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
+			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
+			sendTipMessage(playerid, "* Sejf znajduje siê  10m pod ziemi¹ --> Bezpieczna lokata!");
             return 1;
         }
         /*else if(PlayerToPoint(10.0, playerid, 1310.126586,-1367.812255,13.540800))//pintball
