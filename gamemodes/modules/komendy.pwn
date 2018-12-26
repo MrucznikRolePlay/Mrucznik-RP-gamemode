@@ -19989,7 +19989,7 @@ CMD:kupbiletpociag(playerid)
 		{
 			if(IsAtTicketMachine(playerid))
 			{
-				if(kaska[playerid] >= 10000);
+				if(kaska[playerid] >= 10000)				        
 				{
 					ZabierzKase(playerid, 10000);
 					Sejf_Add(FRAC_KT, 10000);
