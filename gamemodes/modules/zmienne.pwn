@@ -1101,8 +1101,7 @@ ZerujZmienne(playerid)
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	string15[playerid][Kwota] = 0;
-	string15[playerid][ID] = 0;
+	
 	
     lastMsg[playerid] = 0;
 
@@ -1317,8 +1316,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	string15[playerid][ID] = 0;
-    string15[playerid][Kwota] = 0;
+	
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);
