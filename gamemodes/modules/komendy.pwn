@@ -19935,6 +19935,7 @@ CMD:ustawcene(playerid, params[])
 		if( sscanf(params, "d", moneys))
 		{
 			new sendername[MAX_PLAYER_NAME];
+			new string[128];
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			if(GetPlayerFraction(playerid) == 10)
 			{
