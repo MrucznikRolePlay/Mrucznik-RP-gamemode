@@ -19934,25 +19934,22 @@ CMD:ustawcene(playerid, params[])
 		new moneys; 
 		if( sscanf(params, "d", moneys))
 		{
-			new sendername[MAX_PLAYER_NAME];
-			new string[128];
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			if(GetPlayerFraction(playerid) == 10)
-			{
-				format(string, sizeof(string), "Maszynista %s ustawi³ cenê podró¿y poci¹giem na %d$", sendername, moneys);
-				OOCNews(TEAM_GROVE_COLOR,string);
-				TransportValue[playerid] = moneys;
-				
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Nie jesteœ z KT!"); 
-				return 1;
-			}
+			sendErrorMessage(playerid, "U¿yj /ustawcene [CENA]"); 
+			return 1;
+		}
+		
+		new sendername[MAX_PLAYER_NAME];
+		new string[128];
+		GetPlayerName(playerid, sendername, sizeof(sendername));
+		if(GetPlayerFraction(playerid) == 10)
+		{
+			format(string, sizeof(string), "Maszynista %s ustawi³ cenê podró¿y poci¹giem na %d$", sendername, moneys);
+			OOCNews(TEAM_GROVE_COLOR,string);
+			TransportValue[playerid] = moneys;				
 		}
 		else
 		{
-			sendErrorMessage(playerid, "U¿yj /ustawcene [CENA]"); 
+			sendErrorMessage(playerid, "Nie jesteœ z KT!"); 
 			return 1;
 		}
 	
@@ -19974,7 +19971,9 @@ CMD:kupbiletpociag(playerid)
 					ZabierzKase(playerid, TransportValue[playerid]);
 					Sejf_Add(FRAC_KT, TransportValue[playerid]);
 					PlayerInfo[playerid][pBiletsamolotowy] = 1;
-					sendTipMessage(playerid, "Zakupi³eœ bilet ogólny. Koszt biletu to 10.000$");
+					new string[128]; 
+					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", TransportValue[playerid]); 
+					sendTipMessage(playerid, string);
 				}
 				else
 				{
