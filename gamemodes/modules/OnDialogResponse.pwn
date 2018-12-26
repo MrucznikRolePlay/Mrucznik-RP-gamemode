@@ -12130,8 +12130,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-		//Sejfy frakcyjne
-		if(dialogid == 490)
+		//Sejfy frakcyjne ============ UKRYTE NA RZECZ NOWEGO SYSTEMU KONT BANKOWYCH - SIMEONE 26-12-2018
+		/*if(dialogid == 490)
 		{
 		    if(response)
 		    {
@@ -12264,7 +12264,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
 		    }
-		}
+		}*/
 		if(dialogid == 495)
 		{
 		    if(response)

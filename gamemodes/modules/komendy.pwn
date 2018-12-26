@@ -1641,63 +1641,10 @@ CMD:kb(playerid)
 			}
 		}
 	}
-	
-
-
 	return 1;
 }
-/*
-CMD:przelewfrakcji(playerid, params[]) return pf(playerid, params[])
-CMD:pf(playerid, params[])
-{
-
-	new fracg = GetPlayerFraction(playerid); //Frakcja Gracza
-	new odbiorca;
-	new kwotao;
-	new string[128];
-	new string2[128];
-	new string3[128];
-	new mojeimie[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
-	new ftext = PlayerInfo[playerid][pLider];
-	
-	if(sscanf(params, "k<fix>d", odbiorca, kwotao))
-	{
-		sendErrorMessage(playerid, "Poprawne u¿ycie komendy to: /przelewfrakcji [id gracza] [kwota]");
-		return 1;
-	}
-	GetPlayerName(odbiorca, giveplayer, sizeof(giveplayer));
-	GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
-	if(PlayerInfo[playerid][pLider] >= 1)
-	{
-		if(kwotao <= Sejf_Frakcji[fracg] && kwotao >= 0)
-		{
-			Sejf_Add(fracg, -kwotao);
-			DajKase(odbiorca, kwotao);
-			format(string, sizeof(string), "* Lider %s dokona³ przelewu dla %s, z konta frakcji! Kwota %d$",mojeimie,giveplayer,kwotao);
-			SendLeaderRadioMessage(fracg, COLOR_LIGHTGREEN, string);
-			format(string2, sizeof(string2), "* Otrzyma³eœ przelew od lidera %s --> %s. Na kwotê %d$", FractionNames[ftext], mojeimie, kwotao);
-			SendClientMessage(odbiorca, COLOR_LIGHTGREEN, string2);
-			Sejf_Save(fracg);
-			format(string3, sizeof(string3), "%s przelal dla gracza %s $%d z konta %s", mojeimie, giveplayer, kwotao, FractionNames[ftext]);
-			PayLog(string3);
-			if(kwotao >= 5000000)//Wiadomosc dla adminow
-			{
-				SendAdminMessage(COLOR_YELLOW, string3);
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "B³êdna kwota // W sejfie nie ma takiej iloœci gotówki!");
-		}
-	}
-	else
-	{
-		sendErrorMessage(playerid, "Nie mo¿esz wykonywaæ przelewu frakcji, gdy¿ nie jesteœ liderem!");
-	}
-	
-	return 1;
-}*/
+/* ======================>> Ukryte na rzecz systemu Kont bankowych, mo¿e siê jeszcze kiedyœ przydaæ - jakby te konta nie wypali³y :D 
+=========> Simeone 26-12-2018
 CMD:sejff(playerid) return cmd_sejffrakcja(playerid);
 CMD:sejffrakcja(playerid)
 {
@@ -1707,8 +1654,13 @@ CMD:sejffrakcja(playerid)
     }
     else return noAccessMessage(playerid);
 	return 1;
+}*/
+CMD:sejff(playerid) return cmd_sejffrakcja(playerid);
+CMD:sejffrakcja(playerid)
+{
+	sendErrorMessage(playerid, "U¿yj /kontobankowe"); 
+	return 1;
 }
-
 CMD:sejfr(playerid) return cmd_sejfrodzina(playerid);
 CMD:sejfrodzina(playerid)
 {
