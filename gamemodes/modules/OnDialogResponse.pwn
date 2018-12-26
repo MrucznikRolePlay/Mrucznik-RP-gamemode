@@ -15858,7 +15858,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}	}
 					else
 					{
-						sendErrorMessage(playerid, "Nie jesteœ we frakcji!" 
+						sendErrorMessage(playerid, "Nie jesteœ we frakcji!");
 						return 1;
 					}
 					
