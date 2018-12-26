@@ -15991,7 +15991,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			new string[128];
-			new string15[MAX_PLAYERS][StringData];
 			new sendername[MAX_PLAYER_NAME];
 			string15[playerid][ID] = strval(inputtext);
 			if (IsPlayerConnected(string15[playerid][ID]))
@@ -16029,7 +16028,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new sendername[MAX_PLAYER_NAME];
 			new giveplayer[MAX_PLAYER_NAME];
-			new string15[MAX_PLAYERS][StringData];
 			string15[playerid][Kwota] = strval(inputtext);
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 			GetPlayerName(string15[playerid][ID], sendername, sizeof(sendername));
@@ -16081,7 +16079,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	
 	
 	}
-	else if(dialogid == 1075)
+	else if(dialogid == 1075)//Pobieranie ID odbiorcy - przelew z konta frakcji
 	{
 		if(!response)
 	    {
@@ -16089,7 +16087,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			
+			new string[128];
+			new ftext = PlayerInfo[playerid][pLider];
+			string222[playerid][ID] = strval(inputtext);
+			format(string, sizeof(string), ">> %s", ftext);
+			ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy przelewu"); 
 		}
 	}
 	
