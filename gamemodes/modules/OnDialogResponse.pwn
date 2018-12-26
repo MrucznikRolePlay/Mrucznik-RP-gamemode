@@ -16096,6 +16096,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, string, string4); 
 		}
 	}
+	else if(dialogid == 1076)
+	{
+	
+		if(response)
+		{
+		
+			sendErrorMessage(playerid, "dalej to pisze"); 
+			return 1;
+		}
+	}
 	
 
 //=================[KONIEC]========================
