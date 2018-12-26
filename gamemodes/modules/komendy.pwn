@@ -19979,8 +19979,8 @@ CMD:czas(playerid)
 	}
 	return 1;
 }
-CMD:kbpo(playerid) return kupbiletpociag(playerid)
-CMD:kpociag(playerid) return kupbiletpociag(playerid)
+CMD:kbpo(playerid) return CMD_kupbiletpociag(playerid)
+CMD:kpociag(playerid) return CMD_kupbiletpociag(playerid)
 CMD:kupbiletpociag(playerid)
 {
 	if(IsPlayerConnected(playerid))

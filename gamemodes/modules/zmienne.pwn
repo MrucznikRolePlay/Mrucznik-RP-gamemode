@@ -10,7 +10,7 @@ new sprintfStr[500];
 new LastVehicleID[MAX_PLAYERS];
 new VehicleIDChanges[MAX_PLAYERS];
 new VehicleIDChangeTime[MAX_PLAYERS];
-new string2[MAX_PLAYERS][StringData];//do dialogów z kontem bankowym
+new string15[MAX_PLAYERS][StringData];//do dialogów z kontem bankowym
 
 new acstr[128];
 
@@ -1101,8 +1101,8 @@ ZerujZmienne(playerid)
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	string2[playerid][Kwota] = 0;
-	string2[playerid][ID] = 0;
+	string15[playerid][Kwota] = 0;
+	string15[playerid][ID] = 0;
 	
     lastMsg[playerid] = 0;
 
@@ -1317,8 +1317,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	string2[playerid][ID] = 0;
-    string2[playerid][Kwota] = 0;
+	string15[playerid][ID] = 0;
+    string15[playerid][Kwota] = 0;
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);

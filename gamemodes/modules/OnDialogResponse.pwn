@@ -15973,14 +15973,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			new string[128];
-			new string2[MAX_PLAYERS][StringData];
+			new string15[MAX_PLAYERS][StringData];
 			new sendername[MAX_PLAYER_NAME];
-			string2[playerid][ID] = strval(inputtext);
-			if (!IsPlayerConnected(string2[playerid][ID]))
+			string15[playerid][ID] = strval(inputtext);
+			if (!IsPlayerConnected(string15[playerid][ID]))
 			{
-				if(string2[playerid][ID] != playerid)
+				if(string15[playerid][ID] != playerid)
 				{
-					GetPlayerName(string2[playerid][ID], sendername, sizeof(sendername));
+					GetPlayerName(string15[playerid][ID], sendername, sizeof(sendername));
 					format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", sendername);
 					ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "Odrzuæ");
 				}
@@ -16011,21 +16011,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new sendername[MAX_PLAYER_NAME];
 			new giveplayer[MAX_PLAYER_NAME];
-			new string2[MAX_PLAYERS][StringData];
-			string2[playerid][Kwota] = strval(inputtext);
+			new string15[MAX_PLAYERS][StringData];
+			string15[playerid][Kwota] = strval(inputtext);
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-			GetPlayerName(string2[playerid][ID], sendername, sizeof(sendername));
-			if(string2[playerid][Kwota] >= 1 && string2[playerid][Kwota] <= PlayerInfo[playerid][pAccount])
+			GetPlayerName(string15[playerid][ID], sendername, sizeof(sendername));
+			if(string15[playerid][Kwota] >= 1 && string15[playerid][Kwota] <= PlayerInfo[playerid][pAccount])
 			{
-				PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-string2[playerid][Kwota];
-				PlayerInfo[string2[playerid][ID]][pAccount] = PlayerInfo[string2[playerid][ID]][pAccount]+string2[playerid][Kwota];
-				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", string2[playerid][ID], giveplayer);
-				SendClientMessage(string2[playerid][ID], COLOR_RED, string);
-				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", sendername, string2[playerid][Kwota]);
+				PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-string15[playerid][Kwota];
+				PlayerInfo[string15[playerid][ID]][pAccount] = PlayerInfo[string15[playerid][ID]][pAccount]+string15[playerid][Kwota];
+				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", string15[playerid][ID], giveplayer);
+				SendClientMessage(string15[playerid][ID], COLOR_RED, string);
+				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", sendername, string15[playerid][Kwota]);
 				SendClientMessage(playerid, COLOR_RED, string); 
-				if(string2[playerid][Kwota] >= 5000000)//Wiadomosc dla adminow
+				if(string15[playerid][Kwota] >= 5000000)//Wiadomosc dla adminow
 				{
-					format(string, sizeof(string), "%s wys³a³ przelew do %s w wysokoœci %d$ - Podejrzane!", giveplayer, sendername, string2[playerid][Kwota]);
+					format(string, sizeof(string), "%s wys³a³ przelew do %s w wysokoœci %d$ - Podejrzane!", giveplayer, sendername, string15[playerid][Kwota]);
 					SendAdminMessage(COLOR_YELLOW, string);
 					return 1;
 				}
