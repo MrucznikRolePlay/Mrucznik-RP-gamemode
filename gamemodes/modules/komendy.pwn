@@ -19997,7 +19997,7 @@ CMD:wejdzw(playerid)
                             }
                             return 1;
                         }
-	          		    if(VehicleUID[v][vIntLock] == 1 || GetVehicleModel(v) == 538)
+	          		    if(VehicleUID[v][vIntLock] == 1 || GetVehicleModel(v) == 570)
 	          		    {
 							Do_WnetrzaWozu(playerid, v, model);
 							return 1;
