@@ -1052,7 +1052,6 @@ new Refueling[MAX_PLAYERS];
 new Naprawiasie[MAX_PLAYERS];
 
 new TiPJTGBKubi[MAX_PLAYERS];
-new odbiorcaid[MAX_PLAYERS];
 
 
 //-----------------------------------------------
@@ -1100,11 +1099,13 @@ ZerujZmienne(playerid)
 	podczasbicia[playerid] = 0;
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
+	PlayerInfo[playerid][pBiletpociag] = 0;
 	
     lastMsg[playerid] = 0;
 
 	//z conecta
-	odbiorcaid[playerid] = 0;
+	String[playerid][ID] = 0;
+    String[playerid][Kwota] = 0;
 	TogPodglad[playerid] = 0;
 	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
 	cbradijo[playerid] = 0; adminpodgladcb[playerid] = 0; matogczas[playerid] = 0;
@@ -1313,6 +1314,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pLodz] = 0;
 	PlayerInfo[playerid][pSamolot] = 0;
 	PlayerInfo[playerid][pGaraz] = 0;
+	//Bilet poci¹gu
+	PlayerInfo[playerid][pBiletpociag] = 0;
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);

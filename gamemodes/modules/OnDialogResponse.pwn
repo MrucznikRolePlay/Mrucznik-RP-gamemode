@@ -15839,12 +15839,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poniøej ID odbiorcy", "Wykonaj", "OdrzuÊ");
 				}
 				case 4://>>Konto frakcji
-				{	
+				{
 					new string[128];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), ">> %s >> [..]\n[..] %s", giveplayer, FractionNames[ftext]);
+					format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
 					ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto", "Wybierz", "Wyjdü");
 				}
             }
@@ -15890,7 +15890,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{	
 					new stan[128];
 					format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Frakcji[GetPlayerFraction(playerid)]);
-					ShowPlayerDialogEx(playerid, 491, DIALOG_STYLE_LIST, "Sejf frakcyjny - stan", stan, "WrÛÊ", "");
+					ShowPlayerDialogEx(playerid, 1074, DIALOG_STYLE_LIST, "Sejf frakcyjny - stan", stan, "WrÛÊ", "");
 				}
 				case 1:
 				{
@@ -15898,8 +15898,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), "Konto Bankowe >> %s >> Konto [..]\n[..] %s", giveplayer, FractionNames[ftext]);
-					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poniøej ID odbiorcy", "Wykonaj", "OdrzuÊ");
+					format(string, sizeof(string), "Konto Bankowe >> %s >> %s", giveplayer, FractionNames[ftext]);
+					ShowPlayerDialogEx(playerid, 1075, DIALOG_STYLE_INPUT, string, "Wpisz poniøej ID odbiorcy", "Wykonaj", "OdrzuÊ");
 				}
 				case 2:
 				{
@@ -15934,7 +15934,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
        
 	
 	}
-	else if(dialogid == 1071)//Wp≥ata na swoje konto
+	else if(dialogid == 1071)//wyp≥ata z swojego konta
 	{
 		if(response)
 	    {
@@ -15973,14 +15973,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			new string[128];
+			new string2[MAX_PLAYERS][StringData];
 			new sendername[MAX_PLAYER_NAME];
-			new wpisal = strval(inputtext);
-			if (!IsPlayerConnected(wpisal))
+			string2[playerid][ID] = strval(inputtext);
+			if (!IsPlayerConnected(string2[playerid][ID]))
 			{
-				if(wpisal != playerid)
+				if(string2[playerid][ID] != playerid)
 				{
-					wpisal = odbiorcaid[playerid];
-					GetPlayerName(wpisal, sendername, sizeof(sendername));
+					GetPlayerName(string2[playerid][ID], sendername, sizeof(sendername));
 					format(string, sizeof(string), "Wpisz poniøej sumÍ, ktorπ chcesz przelaÊ do %s", sendername);
 					ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "OdrzuÊ");
 				}
@@ -16011,20 +16011,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new sendername[MAX_PLAYER_NAME];
 			new giveplayer[MAX_PLAYER_NAME];
-			new wpisal = strval(inputtext);
+			new string2[MAX_PLAYERS][StringData];
+			string2[playerid][Kwota] = strval(inputtext);
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-			GetPlayerName(odbiorcaid[playerid], sendername, sizeof(sendername));
-			if(wpisal >= 1 && wpisal <= PlayerInfo[playerid][pAccount])
+			GetPlayerName(string2[playerid][ID], sendername, sizeof(sendername));
+			if(string2[playerid][Kwota] >= 1 && string2[playerid][Kwota] <= PlayerInfo[playerid][pAccount])
 			{
-				PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-wpisal;
-				PlayerInfo[odbiorcaid[playerid]][pAccount] = PlayerInfo[odbiorcaid[playerid]][pAccount]+wpisal;
-				format(string, sizeof(string), "Otrzyma≥eú przelew w wysokoúci %d$ od %s", wpisal, giveplayer);
-				SendClientMessage(odbiorcaid[playerid], COLOR_RED, string);
-				format(string, sizeof(string), "Wys≥a≥eú przelew dla %s w wysokoúci %d$. Pieniπdze zosta≥y pobrane z twojego konta bankowego", sendername, wpisal);
+				PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-string2[playerid][Kwota];
+				PlayerInfo[string2[playerid][ID]][pAccount] = PlayerInfo[string2[playerid][ID]][pAccount]+string2[playerid][Kwota];
+				format(string, sizeof(string), "Otrzyma≥eú przelew w wysokoúci %d$ od %s", string2[playerid][ID], giveplayer);
+				SendClientMessage(string2[playerid][ID], COLOR_RED, string);
+				format(string, sizeof(string), "Wys≥a≥eú przelew dla %s w wysokoúci %d$. Pieniπdze zosta≥y pobrane z twojego konta bankowego", sendername, string2[playerid][Kwota]);
 				SendClientMessage(playerid, COLOR_RED, string); 
-				if(wpisal >= 5000000)//Wiadomosc dla adminow
+				if(string2[playerid][Kwota] >= 5000000)//Wiadomosc dla adminow
 				{
-					format(string, sizeof(string), "%s wys≥a≥ przelew do %s w wysokoúci %d$ - Podejrzane!", giveplayer, sendername, wpisal);
+					format(string, sizeof(string), "%s wys≥a≥ przelew do %s w wysokoúci %d$ - Podejrzane!", giveplayer, sendername, string2[playerid][Kwota]);
 					SendAdminMessage(COLOR_YELLOW, string);
 					return 1;
 				}
@@ -16038,6 +16039,40 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		
 	
 	
+	}
+	else if(dialogid == 1074)
+	{
+		if(response)
+		{
+			new string[128];
+			new giveplayer[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+			new ftext = PlayerInfo[playerid][pLider];
+			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
+			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto", "Wybierz", "Wyjdü");
+		}
+		else
+		{
+			new string[128];
+			new giveplayer[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+			format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
+			ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne", "Wybierz", "Wyjdü");
+		}
+	
+	
+	
+	}
+	else if(dialogid == 1075)
+	{
+		if(!response)
+	    {
+			sendErrorMessage(playerid, "Nie uzupe≥ni≥eú ID odbiorcy!"); 
+		}
+		else
+		{
+			
+		}
 	}
 	
 
