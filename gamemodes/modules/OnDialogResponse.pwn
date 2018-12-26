@@ -15812,7 +15812,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta: {80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
-					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej");
+					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "Okej");
 				}
                 case 1://Wp³aæ
 				{
