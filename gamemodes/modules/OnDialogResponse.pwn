@@ -16121,6 +16121,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			else
 			{
 				new string[128];//String
+				new bugstring[128];//zmienna potrzebna do odbugowania formatu(?) 
 				new fracgracza = GetPlayerFraction(playerid);//Pobiera nazwê frakcji gracza
 				new sendername[MAX_PLAYER_NAME];//Nadawca
 				new giveplayer[MAX_PLAYER_NAME];//Odbiorca
@@ -16131,7 +16132,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				Sejf_Save(fracgracza);
 				format(string, sizeof(string), ">>>Otrzyma³eœ przelew w wysokoœci %d$, od lidera %s ->  %s", string222[playerid][Kwota], fracgracza, sendername); 
 				SendClientMessage(string222[playerid][ID], COLOR_RED, string);
-				format(string, sizeof(string), ">>>Wys³a³eœ przelew w wysokoœci %d$, na konto %s, z konta %s", string222[playerid][Kwota], giveplayer, fracgracza); 
+				format(bugstring, sizeof(bugstring), ">>>Wys³a³eœ przelew w wysokoœci %d$, na konto %s, z konta %s", string222[playerid][Kwota], giveplayer, fracgracza); 
 				SendClientMessage(playerid, COLOR_RED, string);
 				format(string, sizeof(string), ">>>Lider %s[%d] wys³a³ %d$ na konto %s[%d]", sendername, playerid, string222[playerid][Kwota], giveplayer, string222[playerid][ID]);
 				SendLeaderRadioMessage(fracgracza, COLOR_LIGHTGREEN, string);
@@ -16140,9 +16141,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|"); 
 					format(string, sizeof(string), "%s[%d] wykona³ przelew %d$ na konto %s[%d]", sendername, playerid, string222[playerid][Kwota], giveplayer, string222[playerid][ID]); 
 					SendAdminMessage(COLOR_WHITE, string); 
-					format(string, sizeof(string), "Frakcja gracza(z sejfu): %s", fracgracza);
+					format(bugstring, sizeof(bugstring), "Frakcja gracza(z sejfu): %s", fracgracza);
 					SendAdminMessage(COLOR_WHITE, string);
-				
+					SendAdminMessage(COLOR_WHITE, " "); 
 				}
 			}
 		
