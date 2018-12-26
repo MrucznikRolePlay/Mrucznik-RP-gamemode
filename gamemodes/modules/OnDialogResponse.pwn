@@ -15906,7 +15906,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 0://Sprawdü stan konta organizacji
 				{	
 					new fracgracza = PlayerInfo[playerid][pLider];
-					new string[128];
+					new string[256];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyúlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$", giveplayer, FractionNames[fracgracza],Sejf_Frakcji[GetPlayerFraction(playerid)]);
