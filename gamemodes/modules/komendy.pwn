@@ -19979,8 +19979,8 @@ CMD:czas(playerid)
 	}
 	return 1;
 }
-CMD:kbpo(playerid) return CMD_kupbiletpociag(playerid);
-CMD:kpociag(playerid) return CMD_kupbiletpociag(playerid);
+CMD:kbpo(playerid) return cmd_kupbiletpociag(playerid);
+CMD:kpociag(playerid) return cmd_kupbiletpociag(playerid);
 CMD:kupbiletpociag(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -19989,7 +19989,7 @@ CMD:kupbiletpociag(playerid)
 		{
 			if(IsAtTicketMachine(playerid))
 			{
-				if(kaska[playerid] >= 10000):
+				if(kaska[playerid] >= 10000);
 				{
 					ZabierzKase(playerid, 10000);
 					Sejf_Add(FRAC_KT, 10000);
@@ -38940,7 +38940,7 @@ CMD:wyjedz(playerid)
 			}
 		
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1750.55762, -1537.86279, 9.51801))//WJAZD NA PARKING PODZIEMNY
+		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1753.2124,-1538.7153,9.1894))//WJAZD NA PARKING PODZIEMNY
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
@@ -38973,7 +38973,7 @@ CMD:wyjedz(playerid)
 			if(IsPlayerInAnyVehicle(playerid))
 			{
 				new pVehID = GetPlayerVehicleID(playerid);
-				SetVehiclePos(pVehID, 1750.55762, -1537.86279, 9.51801);
+				SetVehiclePos(pVehID, 1753.2124,-1538.7153,9.1894);
 				SetVehicleVirtualWorld(pVehID, 0);
 				SetPlayerVirtualWorld(playerid, 0);
 				PutPlayerInVehicle(playerid, pVehID, 0);
@@ -38991,7 +38991,7 @@ CMD:wyjedz(playerid)
 			else//Jeúli gracz jest sam, nie w pojeüdzie
 			{
 				SetPlayerVirtualWorld(playerid, 0);
-				SetPlayerPos(playerid, 1750.55762, -1537.86279, 9.51801);
+				SetPlayerPos(playerid, 1753.2124,-1538.7153,9.1894);
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Jak krecik, drzwi nie masz?", 4000, 3);
 			}
 		
