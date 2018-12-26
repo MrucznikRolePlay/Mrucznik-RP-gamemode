@@ -15840,13 +15840,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 4://>>Konto frakcji
 				{
-					new string[128];
-					new giveplayer[MAX_PLAYER_NAME];
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
-					ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto", "Wybierz", "WyjdŸ");
-				}
+					if(GetPlayerFraction(playerid) == 0)
+					{
+						if(PlayerInfo[playerid][pLider] == 0)
+						{
+							new string[128];
+							new giveplayer[MAX_PLAYER_NAME];
+							GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+							new ftext = PlayerInfo[playerid][pLider];
+							format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
+							ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\n<< Twoje konto", "Wybierz", "WyjdŸ");
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Nie jesteœ liderem frakcji!"); 
+							return 1;
+						}
+					{
+						sendErrorMessage(playerid, "Nie jesteœ we frakcji!" 
+						return 1;
+					}
+					
+				}	
             }
         }
 	
@@ -15976,7 +15991,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string15[MAX_PLAYERS][StringData];
 			new sendername[MAX_PLAYER_NAME];
 			string15[playerid][ID] = strval(inputtext);
-			if (!IsPlayerConnected(string15[playerid][ID]))
+			if (IsPlayerConnected(string15[playerid][ID]))
 			{
 				if(string15[playerid][ID] != playerid)
 				{
@@ -16004,7 +16019,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 	    {
-			sendErrorMessage(playerid, "Nie uzupe³ni³eœ iloœci kwoty!"); 
+			sendErrorMessage(playerid, "Odrzucono akcje przelewu!"); 
 		}
 		else
 		{
