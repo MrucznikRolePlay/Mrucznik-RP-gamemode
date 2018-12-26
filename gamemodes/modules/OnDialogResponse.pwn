@@ -15811,7 +15811,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new string[128];
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta:{80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta: {80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
 					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej");
 				}
                 case 1://Wp³aæ
@@ -16052,11 +16052,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(string15[playerid][ID], COLOR_RED, string);
 				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", sendername, string15[playerid][Kwota]);
 				SendClientMessage(playerid, COLOR_RED, string); 
+				format(string, sizeof(string), "%s wys³a³ przelew do %s w wysokoœci %d$ - Podejrzane!", giveplayer, sendername, string15[playerid][Kwota]);
+				PayLog(string);//Zapis do paylogów
 				if(string15[playerid][Kwota] >= 5000000)//Wiadomosc dla adminow
 				{
-					format(string, sizeof(string), "%s wys³a³ przelew do %s w wysokoœci %d$ - Podejrzane!", giveplayer, sendername, string15[playerid][Kwota]);
 					SendAdminMessage(COLOR_YELLOW, string);
-					PayLog(string);//Zapis do paylogów
 					return 1;
 				}
 			}
@@ -16233,13 +16233,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					DajKase(playerid, kwotaa); 
 					format(string, sizeof(string), "Lider %s wyp³aci³ %d$ z konta organizacji", sendername, kwotaa); 
 					SendLeaderRadioMessage(fracgracza, COLOR_LIGHTGREEN, string); 
+					format(string, sizeof(string), "Lider %s[ID: %d] wyp³aci³ %d$ z konta %s", sendername, playerid, kwotaa, FractionNames[fracgracza]); 
+					PayLog(string);//Zapis do paylogów
 					if(kwotaa >= 2000000)
 					{
-						format(string, sizeof(string), "Lider %s[ID: %d] wyp³aci³ %d$ z konta %s", sendername, playerid, kwotaa, FractionNames[fracgracza]); 
+						
 						SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|");
 						SendAdminMessage(COLOR_WHITE, string);
 						SendAdminMessage(COLOR_YELLOW, "|=========================|");
-						PayLog(string);//Zapis do paylogów
+						
 					
 					}
 				}
