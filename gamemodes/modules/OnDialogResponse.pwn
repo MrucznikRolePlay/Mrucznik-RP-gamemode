@@ -16153,7 +16153,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[128];//String
 				new bugstring[128];//zmienna potrzebna do odbugowania formatu(?) 
 				new bugstring2[256];
-				new fracgracza = GetPlayerFraction(playerid);//Pobiera nazwê frakcji gracza
 				new sendername[MAX_PLAYER_NAME];//Nadawca
 				new giveplayer[MAX_PLAYER_NAME];//Odbiorca
 				GetPlayerName(playerid, sendername, sizeof(sendername));
