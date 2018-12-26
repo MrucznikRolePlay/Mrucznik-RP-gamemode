@@ -15914,7 +15914,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), "Konto Bankowe >> %s >> %s", giveplayer, FractionNames[ftext]);
+					format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
 					ShowPlayerDialogEx(playerid, 1075, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
 				}
 				case 2:
@@ -16035,7 +16035,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-string15[playerid][Kwota];
 				PlayerInfo[string15[playerid][ID]][pAccount] = PlayerInfo[string15[playerid][ID]][pAccount]+string15[playerid][Kwota];
-				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", string15[playerid][ID], giveplayer);
+				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s", string15[playerid][Kwota], giveplayer);
 				SendClientMessage(string15[playerid][ID], COLOR_RED, string);
 				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", sendername, string15[playerid][Kwota]);
 				SendClientMessage(playerid, COLOR_RED, string); 
@@ -16088,10 +16088,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			new string[128];
+			new string4[128];
 			new ftext = PlayerInfo[playerid][pLider];
 			string222[playerid][ID] = strval(inputtext);
 			format(string, sizeof(string), ">> %s", ftext);
-			ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy przelewu"); 
+			format(string4, sizeof(string4), "{F8F8FF}Odbiorca: {FFFFFF}%s", string222[playerid][ID]); 
+			ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, string, string4); 
 		}
 	}
 	
