@@ -19927,6 +19927,36 @@ CMD:czas(playerid)
 	}
 	return 1;
 }
+CMD:ustawcene(playerid, params[])
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if( sscanf(params, "d", moneys))
+		{
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(GetPlayerFraction(playerid) == 10)
+			{
+				format(string, sizeof(string), "Maszynista %s ustawi³ cenê podró¿y poci¹giem na %d$", sendername, moneys);
+				OOCNews(TEAM_GROVE_COLOR,string);
+				TransportValue[playerid] = moneys;
+				
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ z KT!"); 
+				return 1;
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "U¿yj /ustawcene [CENA]"); 
+			return 1;
+		}
+	
+	}
+	return 1;
+}
 CMD:kbpo(playerid) return cmd_kupbiletpociag(playerid);
 CMD:kpociag(playerid) return cmd_kupbiletpociag(playerid);
 CMD:kupbiletpociag(playerid)
@@ -19937,10 +19967,10 @@ CMD:kupbiletpociag(playerid)
 		{
 			if(IsAtTicketMachine(playerid))
 			{
-				if(kaska[playerid] >= 10000)				        
+				if(kaska[playerid] >= TransportValue[playerid])				        
 				{
-					ZabierzKase(playerid, 10000);
-					Sejf_Add(FRAC_KT, 10000);
+					ZabierzKase(playerid, TransportValue[playerid]);
+					Sejf_Add(FRAC_KT, TransportValue[playerid]);
 					PlayerInfo[playerid][pBiletsamolotowy] = 1;
 					sendTipMessage(playerid, "Zakupi³eœ bilet ogólny. Koszt biletu to 10.000$");
 				}

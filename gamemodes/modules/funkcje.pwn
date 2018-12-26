@@ -6837,6 +6837,8 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
 		{
 			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
+			SetPlayerVirtualWorld(playerid, 0);
+			SetPlayerInterior(playerid, 0); 
 		}
 		else if(PlayerInfo[playerid][pBiletsamolotowy] == 1)
 		{
