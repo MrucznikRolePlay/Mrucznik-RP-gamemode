@@ -15879,7 +15879,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				// = FunkcjaK(string);--Funkcja wp³acania na k
 				if (wpisal > kaska[playerid] || wpisal < 1)
 				{
-					sendTipMessage(playerid, "Nie masz tyle");
+					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota!");
 					return 1;
 				}
 				DajKase(playerid,-wpisal);
@@ -15905,9 +15905,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
 				case 0://SprawdŸ stan konta organizacji
 				{	
-					new stan[128];
-					format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Frakcji[GetPlayerFraction(playerid)]);
-					ShowPlayerDialogEx(playerid, 1074, DIALOG_STYLE_LIST, "Sejf frakcyjny - stan", stan, "Wróæ", "");
+					new fracgracza = PlayerInfo[playerid][pLider];
+					new string[128];
+					new giveplayer[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyœlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$", giveplayer, FractionNames[fracgracza],Sejf_Frakcji[GetPlayerFraction(playerid)]);
+					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "Okej");
 				}
 				case 1://Przelew z konta frakcji na konto gracza
 				{
@@ -15931,9 +15934,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 4://Wyp³aæ z konta frakcji
 				{
 					new string[128]; 
+					new strigol[128];//drugi string specjalnie do stanu konta frakcji
+					new stan = Sejf_Frakcji[GetPlayerFraction(playerid)];
 					new ftext = PlayerInfo[playerid][pLider];
 					format(string, sizeof(string), "%s", FractionNames[ftext]);
-					ShowPlayerDialogEx(playerid, 1078, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, jak¹ chcesz wyp³aciæ", "Wykonaj", "Odrzuæ"); 
+					format(strigol, sizeof(strigol), "Stan konta: {80FF00}%d\n{C0C0C0}Wpisz poni¿ej kwotê jak¹ chcesz wyp³aciæ", stan);
+					ShowPlayerDialogEx(playerid, 1078, DIALOG_STYLE_INPUT, string, strigol, "Wykonaj", "Odrzuæ"); 
 				}
 				case 5://Powrót do g³ównego panelu
 				{	
@@ -16144,8 +16150,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new fracgracza = GetPlayerFraction(playerid);//Pobiera nazwê frakcji gracza
 				new sendername[MAX_PLAYER_NAME];//Nadawca
 				new giveplayer[MAX_PLAYER_NAME];//Odbiorca
-				new giveplayerid;
-				string222[playerid][ID] = giveplayerid;
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				GetPlayerName(string222[playerid][ID], giveplayer, sizeof(giveplayer));
 				PlayerInfo[string222[playerid][ID]][pAccount] = PlayerInfo[string222[playerid][ID]][pAccount]+string222[playerid][Kwota];
@@ -16153,7 +16157,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				Sejf_Save(fracgracza);
 				
 				format(string, sizeof(string), ">>>Otrzyma³eœ przelew w wysokoœci %d$, od lidera %s ->  %s", string222[playerid][Kwota], FractionNames[fracgracza], sendername); 
-				SendClientMessage(giveplayerid, COLOR_RED, string);
+				SendClientMessage(string222[playerid][ID], COLOR_RED, string);
 				
 				format(bugstring, sizeof(bugstring), ">>>Wys³a³eœ przelew w wysokoœci %d$, na konto %s, z konta %s", string222[playerid][Kwota], giveplayer, fracgracza); 
 				SendClientMessage(playerid, COLOR_RED, string);
@@ -16190,18 +16194,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new fracgracza = GetPlayerFraction(playerid);
 			new sendername[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			if(kwotaa >= 1 || kwotaa <= kaska[playerid])
+			if(kwotaa >= 1)
 			{
-				new string[128];
-				Sejf_Add(fracgracza, kwotaa);
-				Sejf_Save(fracgracza);
-				format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, kwotaa); 
-				SendLeaderRadioMessage(fracgracza, COLOR_LIGHTGREEN, string); 
+				if(kwotaa <= kaska[playerid])
+				{
+					new string[128];
+					Sejf_Add(fracgracza, kwotaa);
+					Sejf_Save(fracgracza);
+					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, kwotaa); 
+					SendLeaderRadioMessage(fracgracza, COLOR_LIGHTGREEN, string); 
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie masz tyle!"); 
+					return 1;
+				}
 			
 			}
 			else
 			{
-				sendErrorMessage(playerid, "B³êdna kwota transakcji // Nie masz tyle!");
+				sendErrorMessage(playerid, "B³êdna kwota transakcji");
 				return 1;
 			}
 		
