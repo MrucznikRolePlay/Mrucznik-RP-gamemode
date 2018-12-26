@@ -16180,7 +16180,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new fracgracza = GetPlayerFraction(playerid);
 			new sendername[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			if(kwotaa >= 1)
+			if(kwotaa >= 1 || kwotaa <= kaska[playerid])
 			{
 				new string[128];
 				Sejf_Add(fracgracza, kwotaa);
@@ -16191,7 +16191,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				sendErrorMessage(playerid, "B³êdna kwota transakcji!");
+				sendErrorMessage(playerid, "B³êdna kwota transakcji // Nie masz tyle!");
 				return 1;
 			}
 		
