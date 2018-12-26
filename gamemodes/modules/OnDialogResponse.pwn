@@ -16103,10 +16103,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new string[128];
 			new fracgracza = PlayerInfo[playerid][pLider];
+			new giveplayer[MAX_PLAYER_NAME];
 			string222[playerid][ID] = strval(inputtext);
+			GetPlayerName(string222[playerid][ID], giveplayer, sizeof(giveplayer));
 			if(IsPlayerConnected(string222[playerid][ID]))
 			{
-				format(string, sizeof(string), "Odbiorca: %s\nWysy³aj¹cy: %s\nWpisz poni¿ej kwotê, która ma zostaæ przelana na jego konto.", string222[playerid][ID], FractionNames[fracgracza]); 
+				format(string, sizeof(string), "Odbiorca: %s\nWysy³aj¹cy: %s\nWpisz poni¿ej kwotê, która ma zostaæ przelana na jego konto.", giveplayer, FractionNames[fracgracza]); 
 				ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, "Przelewy frakcji >> ID >> Kwota", string, "Wykonaj", "Odrzuæ"); 
 				
 			}
@@ -16141,17 +16143,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new fracgracza = GetPlayerFraction(playerid);//Pobiera nazwê frakcji gracza
 				new sendername[MAX_PLAYER_NAME];//Nadawca
 				new giveplayer[MAX_PLAYER_NAME];//Odbiorca
+				new giveplayerid;
+				new string222[playerid][ID] = giveplayerid;
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				GetPlayerName(string222[playerid][ID], giveplayer, sizeof(giveplayer));
 				PlayerInfo[string222[playerid][ID]][pAccount] = PlayerInfo[string222[playerid][ID]][pAccount]+string222[playerid][Kwota];
 				Sejf_Add(fracgracza, -string222[playerid][Kwota]);
 				Sejf_Save(fracgracza);
+				
 				format(string, sizeof(string), ">>>Otrzyma³eœ przelew w wysokoœci %d$, od lidera %s ->  %s", string222[playerid][Kwota], FractionNames[fracgracza], sendername); 
-				SendClientMessage(string222[playerid][ID], COLOR_RED, string);
+				SendClientMessage(giveplayerid, COLOR_RED, string);
+				
 				format(bugstring, sizeof(bugstring), ">>>Wys³a³eœ przelew w wysokoœci %d$, na konto %s, z konta %s", string222[playerid][Kwota], giveplayer, fracgracza); 
 				SendClientMessage(playerid, COLOR_RED, string);
+				
 				format(string, sizeof(string), ">>>Lider %s[%d] wys³a³ %d$ na konto %s[%d]", sendername, playerid, string222[playerid][Kwota], giveplayer, string222[playerid][ID]);
 				SendLeaderRadioMessage(fracgracza, COLOR_LIGHTGREEN, string);
+				
 				format(bugstring, sizeof(bugstring), "%s wykona³ przelew z konta %s na konto %s - wysokoœæ przelewu %d$", sendername, FractionNames[fracgracza], giveplayer, string222[playerid][Kwota]);
 				PayLog(bugstring);//Zapis do paylogów
 				if(string222[playerid][Kwota] >= 2500000)//Warning dla adminów, gdy gracz przekroczy 2.5kk 
@@ -16161,6 +16169,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendAdminMessage(COLOR_WHITE, string); 
 					format(bugstring, sizeof(bugstring), "Frakcja gracza(z sejfu): %s", FractionNames[fracgracza]);
 					SendAdminMessage(COLOR_WHITE, bugstring);
+					SendAdminMessage(COLOR_YELLOW, "|=========================|");
 				}
 			}
 		
@@ -16228,6 +16237,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						format(string, sizeof(string), "Lider %s[ID: %d] wyp³aci³ %d$ z konta %s", sendername, playerid, kwotaa, FractionNames[fracgracza]); 
 						SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|");
 						SendAdminMessage(COLOR_WHITE, string);
+						SendAdminMessage(COLOR_YELLOW, "|=========================|");
 						PayLog(string);//Zapis do paylogów
 					
 					}
