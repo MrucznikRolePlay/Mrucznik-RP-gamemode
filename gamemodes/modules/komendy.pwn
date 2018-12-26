@@ -20551,7 +20551,7 @@ CMD:wejdz(playerid)
 			sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
 			sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
-			sendTipMessage(playerid, "* Sejf znajduje siê  10m pod ziemi¹ --> Bezpieczna lokata!");
+			sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
             PlayerInfo[playerid][pLocal] = 103;
             SetPlayerVirtualWorld(playerid, 2);
             Wchodzenie(playerid);
@@ -20567,7 +20567,7 @@ CMD:wejdz(playerid)
 			sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
 			sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
-			sendTipMessage(playerid, "* Sejf znajduje siê  10m pod ziemi¹ --> Bezpieczna lokata!");
+			sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");
             return 1;
         }
         /*else if(PlayerToPoint(10.0, playerid, 1310.126586,-1367.812255,13.540800))//pintball
