@@ -15812,7 +15812,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta:{80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
-					ShowPlayerDialog(playerid, 1070, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
+					ShowPlayerDialog(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
                 case 1://Wp³aæ
 				{
@@ -15840,9 +15840,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 4://>>Konto frakcji
 				{
-					if(GetPlayerFraction(playerid) == 0)
+					if(GetPlayerFraction(playerid) != 0)
 					{
-						if(PlayerInfo[playerid][pLider] == 0)
+						if(PlayerInfo[playerid][pLider] != 0)
 						{
 							new string[128];
 							new giveplayer[MAX_PLAYER_NAME];
@@ -15937,15 +15937,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		
 	}
-	else if(dialogid == 1070)//Dialog informacyjny
+	else if(dialogid == 1080)//Dialog informacyjny
 	{
 		if(response)
         {
             SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mówi: Do zobaczenia!");
+			return 1;
         }
 		else
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mówi: Do zobaczenia!");
+			return 1;
 		}
        
 	
