@@ -19931,6 +19931,7 @@ CMD:ustawcene(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{
+		new moneys; 
 		if( sscanf(params, "d", moneys))
 		{
 			new sendername[MAX_PLAYER_NAME];
