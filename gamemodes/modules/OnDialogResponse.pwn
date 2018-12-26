@@ -15849,7 +15849,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 							new ftext = PlayerInfo[playerid][pLider];
 							format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
-							ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ<< Twoje konto", "Wybierz", "WyjdŸ");
+							ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
 						}
 						else
 						{
@@ -16213,21 +16213,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new fracgracza = GetPlayerFraction(playerid); 
 			new sendername[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			if(kwotaa >= 1 || kwotaa <= Sejf_Frakcji[fracgracza])
+			if(kwotaa >= 1)
 			{
-				new string[128];
-				Sejf_Add(fracgracza, -kwotaa);
-				Sejf_Save(fracgracza);
-				DajKase(playerid, kwotaa); 
-				format(string, sizeof(string), "Lider %s wyp³aci³ %d$ z konta organizacji", sendername, kwotaa); 
-				SendLeaderRadioMessage(fracgracza, COLOR_LIGHTGREEN, string); 
-				if(kwotaa >= 2000000)
+				if(kwotaa <= Sejf_Frakcji[fracgracza])
 				{
-					format(string, sizeof(string), "Lider %s[ID: %d] wyp³aci³ %d$ z konta %s", sendername, playerid, kwotaa, FractionNames[fracgracza]); 
-					SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|");
-					SendAdminMessage(COLOR_WHITE, string);
-					PayLog(string);//Zapis do paylogów
-				
+					new string[128];
+					Sejf_Add(fracgracza, -kwotaa);
+					Sejf_Save(fracgracza);
+					DajKase(playerid, kwotaa); 
+					format(string, sizeof(string), "Lider %s wyp³aci³ %d$ z konta organizacji", sendername, kwotaa); 
+					SendLeaderRadioMessage(fracgracza, COLOR_LIGHTGREEN, string); 
+					if(kwotaa >= 2000000)
+					{
+						format(string, sizeof(string), "Lider %s[ID: %d] wyp³aci³ %d$ z konta %s", sendername, playerid, kwotaa, FractionNames[fracgracza]); 
+						SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|");
+						SendAdminMessage(COLOR_WHITE, string);
+						PayLog(string);//Zapis do paylogów
+					
+					}
+				}
+				else
+				{
+					sendErrorMessage(playerid, "W sejfie twojej organizacji nie ma takiej kwoty!"); 
+					return 1;
 				}
 			
 			}
