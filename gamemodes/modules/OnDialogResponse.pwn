@@ -15855,7 +15855,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							sendErrorMessage(playerid, "Nie jesteœ liderem frakcji!"); 
 							return 1;
-					}	}
+						}
+					}	
 					else
 					{
 						sendErrorMessage(playerid, "Nie jesteœ we frakcji!");
