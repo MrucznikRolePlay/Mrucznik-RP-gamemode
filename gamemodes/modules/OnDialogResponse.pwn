@@ -16145,7 +16145,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new sendername[MAX_PLAYER_NAME];//Nadawca
 				new giveplayer[MAX_PLAYER_NAME];//Odbiorca
 				new giveplayerid;
-				new string222[playerid][ID] = giveplayerid;
+				string222[playerid][ID] = giveplayerid;
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				GetPlayerName(string222[playerid][ID], giveplayer, sizeof(giveplayer));
 				PlayerInfo[string222[playerid][ID]][pAccount] = PlayerInfo[string222[playerid][ID]][pAccount]+string222[playerid][Kwota];
