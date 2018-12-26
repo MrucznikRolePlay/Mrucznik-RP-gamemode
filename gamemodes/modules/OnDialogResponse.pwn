@@ -16202,6 +16202,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new string[128];
 					Sejf_Add(fracgracza, kwotaa);
 					Sejf_Save(fracgracza);
+					ZabierzKase(playerid, kwotaa); 
 					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, kwotaa); 
 					SendLeaderRadioMessage(fracgracza, COLOR_LIGHTGREEN, string); 
 				}
