@@ -16147,7 +16147,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new string[128];//String
 				new bugstring[128];//zmienna potrzebna do odbugowania formatu(?) 
-				new bugstring2[128];
+				new bugstring2[256];
 				new fracgracza = GetPlayerFraction(playerid);//Pobiera nazwê frakcji gracza
 				new sendername[MAX_PLAYER_NAME];//Nadawca
 				new giveplayer[MAX_PLAYER_NAME];//Odbiorca
@@ -16160,7 +16160,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(bugstring2, sizeof(bugstring2), ">>>Otrzyma³eœ przelew w wysokoœci %d$, od lidera %s ->  %s", string222[playerid][Kwota], FractionNames[fracgracza], sendername); 
 				SendClientMessage(string222[playerid][ID], COLOR_RED, bugstring2);
 				
-				format(bugstring, sizeof(bugstring), ">>>Wys³a³eœ przelew w wysokoœci %d$, na konto %s, z konta %s", string222[playerid][Kwota], giveplayer, fracgracza); 
+				format(bugstring, sizeof(bugstring), ">>>Wys³a³eœ przelew w wysokoœci %d$, na konto %s , z konta %s", string222[playerid][Kwota], giveplayer, FractionNames[fracgracza]); 
 				SendClientMessage(playerid, COLOR_RED, bugstring);
 				
 				format(string, sizeof(string), ">>>Lider %s[%d] wys³a³ %d$ na konto %s[%d]", sendername, playerid, string222[playerid][Kwota], giveplayer, string222[playerid][ID]);
