@@ -2107,7 +2107,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(IsACop(playerid))
 						{
 							SetPlayerVirtualWorld(playerid,2);
-							SetPlayerPosEx(playerid,565.6246,-1485.8623,-8.8300);
+							SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
 							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
@@ -2115,7 +2115,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
 						}
 					}
 					case 1://parking
@@ -2130,7 +2131,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
 						}
 					}
 					case 2://stanowe
@@ -2166,7 +2168,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
 						}
 					
 					}
@@ -2185,7 +2188,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
+							
 						}
 					}
 					case 6://Biura federalne
@@ -2201,7 +2206,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
 						}
 					}
 					case 7://Dyrektorat
@@ -2238,12 +2244,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom X, Dach");
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu ptaszku!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom");
+							return 1;
 						}
 					}
 				}
