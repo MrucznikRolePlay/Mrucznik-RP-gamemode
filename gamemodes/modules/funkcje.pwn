@@ -3510,7 +3510,7 @@ IsAtTicketMachine(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerToPoint(5.0, playerid, 1757.00513, -1943.20789, 13.26766) || PlayerToPoint(5.0, playerid,  1746.97949, -1943.71838, 13.45185) || PlayerToPoint(5.0, playerid, 825.69000, -1354.49915, 13.11831))
+		if(PlayerToPoint(5.0, playerid, 1757.00513, -1943.20789, 13.26766) || PlayerToPoint(5.0, playerid,  1746.97949, -1943.71838, 13.45185) || PlayerToPoint(5.0, playerid, 825.69000, -1354.49915, 13.11831) || PlayerToPoint(5.0, playerid, 2293.0547,-1175.9962,26.0441))
 		{
 		
 			return 1;
@@ -6839,6 +6839,9 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
 			SetPlayerVirtualWorld(playerid, 0);
 			SetPlayerInterior(playerid, 0); 
+			WnetrzeWozu[playerid] = 0;
+			Wchodzenie(playerid);
+			TogglePlayerControllable(playerid, 0);
 		}
 		else if(PlayerInfo[playerid][pBiletsamolotowy] == 1)
 		{
