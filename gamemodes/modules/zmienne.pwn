@@ -1054,6 +1054,7 @@ new Refueling[MAX_PLAYERS];
 new Naprawiasie[MAX_PLAYERS];
 
 new TiPJTGBKubi[MAX_PLAYERS];
+new cenabiletupociagu = 10000;
 
 
 //-----------------------------------------------

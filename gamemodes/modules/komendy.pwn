@@ -19947,7 +19947,7 @@ CMD:ustawcene(playerid, params[])
 			{
 				format(string, sizeof(string), "Maszynista %s ustawi³ cenê podró¿y poci¹giem na %d$", sendername, moneys);
 				OOCNews(TEAM_GROVE_COLOR,string);
-				TransportValue[playerid] = moneys;				
+				cenabiletupociagu = moneys;				
 			}
 			else
 			{
@@ -19976,15 +19976,15 @@ CMD:kupbiletpociag(playerid)
 			{
 				new sendername[MAX_PLAYER_NAME];
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-				if(kaska[playerid] >= TransportValue[playerid])				        
+				if(kaska[playerid] >= cenabiletupociagu)				        
 				{
-					ZabierzKase(playerid, TransportValue[playerid]);
+					ZabierzKase(playerid, cenabiletupociagu);
 					Sejf_Add(FRAC_KT, TransportValue[playerid]);
 					PlayerInfo[playerid][pBiletsamolotowy] = 1;
 					new string[128]; 
-					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", TransportValue[playerid]); 
+					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
 					sendTipMessage(playerid, string);
-					format(string, sizeof(string), "%s zakupi³ bilet za %d$", sendername, TransportValue[playerid]); 
+					format(string, sizeof(string), "%s zakupi³ bilet za %d$", sendername, cenabiletupociagu); 
 					SendLeaderRadioMessage(10, COLOR_LIGHTGREEN, string);
 				}
 				else
@@ -20027,7 +20027,7 @@ CMD:wejdzw(playerid)
 				{
 	   				new Float:vehx, Float:vehy, Float:vehz;
 	          		GetVehiclePos(v, vehx, vehy, vehz);
-	          		if(IsPlayerInRangeOfPoint(playerid, 10.0, vehx, vehy, vehz))
+	          		if(IsPlayerInRangeOfPoint(playerid, 15.0, vehx, vehy, vehz))
 	          		{
                         if(PlayerInfo[playerid][pJailed] != 0)
                         {
