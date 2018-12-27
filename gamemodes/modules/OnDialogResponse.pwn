@@ -16286,7 +16286,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
         {
-            sendErrorMessage(playerid, "Odrzucono kupno biletu!"); 
+			new string[128];
+            format(string, sizeof(string), "* %s jest strasznie rozstargniony i zdecydowa³ odejœæ od maszyny bez biletu", GetNick(playerid, true));//Ciekawostka - niezdecydowany
+			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 			return 1;
         }
 		else
@@ -16325,7 +16327,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
+				new string[128];
 				sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
+				format(string, sizeof(string), "* %s mruczny (jak Mrucznik) na bilet, który ju¿ posiada.", GetNick(playerid, true));//ciekawostka - mrucznik
+				ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 				return 1;
 			}
 			
