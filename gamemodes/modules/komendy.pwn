@@ -19980,7 +19980,7 @@ CMD:kupbiletpociag(playerid)
 				{
 					ZabierzKase(playerid, cenabiletupociagu);
 					Sejf_Add(FRAC_KT, TransportValue[playerid]);
-					PlayerInfo[playerid][pBiletsamolotowy] = 1;
+					PlayerInfo[playerid][pBiletpociag] = 1;
 					new string[128]; 
 					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
 					sendTipMessage(playerid, string);
