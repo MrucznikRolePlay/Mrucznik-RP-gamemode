@@ -6459,8 +6459,8 @@ CMD:brama(playerid)
 				{
 					if(urzadnewm3 == 0)
 					{
-						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, 90.000000);
-						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, -90.000000);
+						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, 190.000000);
+						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, -190.000000);
 						urzadnewm3 = 1;
 					}
 					else
@@ -6559,7 +6559,7 @@ CMD:brama(playerid)
 					urzadmove3  = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,30,-2044.9952, -110.9055, 35.7106))
+		/*	if(IsPlayerInRangeOfPoint(playerid,30,-2044.9952, -110.9055, 35.7106))
 			{
 				if(plac1move == 0)
 				{
@@ -6575,7 +6575,7 @@ CMD:brama(playerid)
 				}
 			}
 
-		}
+		}*/
 		//==============================[KONIEC]====================================================
 		//..
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] > 1/*PlayerInfo[playerid][pJob] == 14*/)
