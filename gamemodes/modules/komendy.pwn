@@ -1179,7 +1179,7 @@ CMD:koxubankot(playerid, params[])
 	}
 	return 1;
 }
-
+//Nadawanie admina na development - usun¹æ przy wgrywaniu
 CMD:tajemnakomendadawaniaadmina(playerid, params[])
 {
 	new string[128];
@@ -20013,7 +20013,7 @@ CMD:kupbiletpociag(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pBiletpociag] == 0)
+		if(PlayerInfo[playerid][pBiletpociag] == 1)
 		{
 			new string[128];
 			sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
@@ -20021,7 +20021,7 @@ CMD:kupbiletpociag(playerid)
 			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 			return 1;
 		}
-		else if(PlayerInfo[playerid][pBiletpociag] == 1)
+		else if(PlayerInfo[playerid][pBiletpociag] == 0)
 		{
 			new fracgracza = GetPlayerFraction(playerid);
 			new string[256];
