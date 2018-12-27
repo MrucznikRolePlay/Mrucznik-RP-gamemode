@@ -15812,7 +15812,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta: {80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
-					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "Okej");
+					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
                 case 1://Wp³aæ
 				{
@@ -15915,7 +15915,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyœlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$", giveplayer, FractionNames[fracgracza],Sejf_Frakcji[GetPlayerFraction(playerid)]);
-					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "Okej");
+					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
 				case 1://Przelew z konta frakcji na konto gracza
 				{
@@ -16282,6 +16282,57 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	
 	}
 //=================[KONIEC]========================
+	else if(dialogid == 1090)
+	{
+		if(!response)
+        {
+            sendErrorMessage(playerid, "Odrzucono kupno biletu!"); 
+			return 1;
+        }
+		else
+		{
+			if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
+			{
+				if(IsAtTicketMachine(playerid))
+				{
+					new sendername[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					if(kaska[playerid] >= cenabiletupociagu)				        
+					{
+						ZabierzKase(playerid, cenabiletupociagu);
+						Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
+						PlayerInfo[playerid][pBiletpociag] = 1;
+						new string[128]; 
+						format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
+						sendTipMessage(playerid, string);
+						format(string, sizeof(string), "%s zakupi³ bilet za %d$", sendername, cenabiletupociagu); 
+						SendLeaderRadioMessage(10, COLOR_LIGHTGREEN, string);
+						
+						format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), cenabiletupociagu);
+						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+					}
+					return 1;
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
+					return 1;
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
+				return 1;
+			}
+			
+		}
+	
+	
+	}
     else if(dialogid == 7079)
 	{
 		if(response)
