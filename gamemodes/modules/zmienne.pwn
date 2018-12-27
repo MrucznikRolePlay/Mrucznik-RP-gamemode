@@ -440,9 +440,9 @@ new grajacy[MAX_PLAYERS] = 0;
 //---------------------------------------------//
 
 //abram01
-//new plac1;
+new plac1;
 //new plac2;
-//new plac1move;
+new plac1move;
 new bor;
 new bor1;
 new bormove;
