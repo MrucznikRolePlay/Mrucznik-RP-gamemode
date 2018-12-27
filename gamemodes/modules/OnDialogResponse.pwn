@@ -15991,7 +15991,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new string[128];
 				new wpisal = strval(inputtext);
-				// = FunkcjaK(string);--Funkcja wp³acania na k
+				wpisal = FunkcjaK(wpisal);//--Funkcja wp³acania na k
 				if (wpisal > PlayerInfo[playerid][pAccount] || wpisal < 1)
 				{
 					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota");
