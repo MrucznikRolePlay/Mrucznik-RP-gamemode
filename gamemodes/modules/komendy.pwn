@@ -19982,9 +19982,9 @@ CMD:kupbiletpociag(playerid)
 		new string[256];
 		new giveplayer[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-		format(string, sizeof(string), "Bilet ogólny\nCena:{00FF00}%d$\nImiê_Nazwisko: %s\n{FFFFFF}Twoja organizacja: {AA3333}%s\n{FFFFFF}Zni¿ka dla twojej organizacji: {00FF00}0$\n{FFFFFF}Ulga: {00FF00}0$", cenabiletupociagu, giveplayer, FractionNames[fracgracza]);//Skrypt na zni¿ki i ulgi w trakcie pisania, celowo ie ma tutaj wartoœci
-		ShowPlayerDialogEx(playerid, 1090, DIALOG_STYLE_MSGBOX, "Maszyna do biletów", string, "Okej", "");
-		format(string, sizeof(string), "* %s wstukuje w maszynê kod z dowodu osobistego", GetNick(playerid, true));
+		format(string, sizeof(string), "Bilet ogólny\nCena:{00FF00}%d$\n{FFFFFF}Imiê_Nazwisko: {00FF00}%s\n{FFFFFF}Twoja organizacja: {AA3333}%s\n{FFFFFF}Zni¿ka dla twojej organizacji: {00FF00}0$\n{FFFFFF}Ulga: {00FF00}0$", cenabiletupociagu, giveplayer, FractionNames[fracgracza]);//Skrypt na zni¿ki i ulgi w trakcie pisania, celowo ie ma tutaj wartoœci
+		ShowPlayerDialogEx(playerid, 1090, DIALOG_STYLE_MSGBOX, "Maszyna do biletów", string, "Zakup", "OdejdŸ");
+		format(string, sizeof(string), "* %s wstukuje w maszynê UID dowodu osobistego, wybiera trasê i ulgê.", GetNick(playerid, true));
         ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 	}
 	return 1;
