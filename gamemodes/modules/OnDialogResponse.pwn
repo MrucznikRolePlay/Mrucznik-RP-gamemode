@@ -15888,7 +15888,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new string[128];
 				new wpisal = strval(inputtext);
-				wpisal = FunkcjaK(string);//--Funkcja wp³acania na k
+				wpisal = FunkcjaK(inputtext);//--Funkcja wp³acania na k
 				if (wpisal > kaska[playerid] || wpisal < 1)
 				{
 					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota!");
@@ -16060,6 +16060,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new sendername[MAX_PLAYER_NAME];
 			new giveplayer[MAX_PLAYER_NAME];
 			string15[playerid][Kwota] = strval(inputtext);
+			string15[playerid][Kwota] = FunkcjaK(inputtext);
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 			GetPlayerName(string15[playerid][ID], sendername, sizeof(sendername));
 			if(string15[playerid][Kwota] >= 1 && string15[playerid][Kwota] <= PlayerInfo[playerid][pAccount])
@@ -16151,6 +16152,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			string222[playerid][Kwota] = strval(inputtext);//Przypisuje wartoœæ dla string kwota
 			new fracgracza = GetPlayerFraction(playerid);//Pobiera nazwê frakcji gracza
+			string222[playerid][Kwota] = FunkcjaK(inputtext);
 			if(string222[playerid][Kwota] <= 0 || string222[playerid][Kwota] > Sejf_Frakcji[fracgracza])
 			{
 				sendErrorMessage(playerid, "Nieprawid³owa kwota przelewu!"); 
