@@ -19943,21 +19943,29 @@ CMD:ustawcene(playerid, params[])
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(moneys >= 1000)
 		{
-			if(GetPlayerFraction(playerid) == 10)
+			if(moneys <= 200000)
 			{
-				format(string, sizeof(string), "Maszynista %s ustawi³ cenê podró¿y poci¹giem na %d$", sendername, moneys);
-				OOCNews(TEAM_GROVE_COLOR,string);
-				cenabiletupociagu = moneys;				
+				if(GetPlayerFraction(playerid) == 10)
+				{
+					format(string, sizeof(string), "Maszynista %s ustawi³ cenê podró¿y poci¹giem na %d$.", sendername, moneys);
+					OOCNews(TEAM_GROVE_COLOR,string);
+					cenabiletupociagu = moneys;				
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie jesteœ z KT!"); 
+					return 1;
+				}
 			}
 			else
 			{
-				sendErrorMessage(playerid, "Nie jesteœ z KT!"); 
+				sendErrorMessage(playerid, "Maksymalna kwota jak¹ mo¿esz ustaliæ to 200.000$");
 				return 1;
 			}
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Cena od 1.000$!"); 
+			sendErrorMessage(playerid, "Cena od 1.000$ do 200.000$!"); 
 			return 1;
 		}
 	
@@ -19979,7 +19987,7 @@ CMD:kupbiletpociag(playerid)
 				if(kaska[playerid] >= cenabiletupociagu)				        
 				{
 					ZabierzKase(playerid, cenabiletupociagu);
-					Sejf_Add(FRAC_KT, TransportValue[playerid]);
+					Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
 					PlayerInfo[playerid][pBiletpociag] = 1;
 					new string[128]; 
 					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
