@@ -19978,40 +19978,14 @@ CMD:kupbiletpociag(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
-		{
-			if(IsAtTicketMachine(playerid))
-			{
-				new sendername[MAX_PLAYER_NAME];
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				if(kaska[playerid] >= cenabiletupociagu)				        
-				{
-					ZabierzKase(playerid, cenabiletupociagu);
-					Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
-					PlayerInfo[playerid][pBiletpociag] = 1;
-					new string[128]; 
-					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
-					sendTipMessage(playerid, string);
-					format(string, sizeof(string), "%s zakupi³ bilet za %d$", sendername, cenabiletupociagu); 
-					SendLeaderRadioMessage(10, COLOR_LIGHTGREEN, string);
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-				}
-				return 1;
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
-				return 1;
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
-			return 1;
-		}
+		new fracgracza = GetPlayerFraction(playerid);
+		new string[256];
+		new giveplayer[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+		format(string, sizeof(string), "Bilet ogólny\nCena:{00FF00}%d$\nImiê_Nazwisko: %s\n{FFFFFF}Twoja organizacja: {AA3333}%s\n{FFFFFF}Zni¿ka dla twojej organizacji: {00FF00}0$\n{FFFFFF}Ulga: {00FF00}0$", cenabiletupociagu, giveplayer, FractionNames[fracgracza]);//Skrypt na zni¿ki i ulgi w trakcie pisania, celowo ie ma tutaj wartoœci
+		ShowPlayerDialogEx(playerid, 1090, DIALOG_STYLE_MSGBOX, "Maszyna do biletów", string, "Okej", "");
+		format(string, sizeof(string), "* %s wstukuje w maszynê kod z dowodu osobistego", GetNick(playerid, true));
+        ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 	}
 	return 1;
 }
