@@ -6834,12 +6834,12 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	}
 	else if(model == 570)//Wagony KT
 	{
-		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
+		if(PlayerInfo[playerid][pBiletpociag] == 0)
 		{
 			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kupbiletpociag(/kbpo)");
 			Z_WnetrzaWozu(playerid, WnetrzeWozu[playerid]);
 		}
-		else if(PlayerInfo[playerid][pBiletsamolotowy] == 1)
+		else if(PlayerInfo[playerid][pBiletpociag] == 1)
 		{
 			SetPlayerInterior(playerid, 1);
 			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
@@ -6848,7 +6848,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 			sendTipMessage(playerid, ">>Pomyœlnie wszed³eœ do poci¹gu! Bilet zosta³ zu¿yty!");
 			sendTipMessage(playerid, ">>>Interior stworzony przez: Charlie112");
-			PlayerInfo[playerid][pBiletsamolotowy]  = 0;
+			PlayerInfo[playerid][pBiletpociag] = 0;
 		}
 	
 	}
