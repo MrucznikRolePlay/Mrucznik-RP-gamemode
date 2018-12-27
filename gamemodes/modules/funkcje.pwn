@@ -4332,6 +4332,12 @@ stock PayLog(text[])
     new plik[32] = "logi/pay.log";
     Log(plik, text);
 }
+stock BankomatLog(text[])
+{
+
+	new plik[32] = "logi/bankomat.log";
+	Log(plik, text);
+}
 stock PremiumLog(text[])
 {
     new plik[32] = "logi/premium.log";

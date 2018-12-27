@@ -18919,6 +18919,8 @@ CMD:wyplac(playerid, params[])
 			PlayerInfo[playerid][pAccount]=PlayerInfo[playerid][pAccount]-cashdeposit;
 			format(string, sizeof(string), "Wyp³aci³eœ $%d ze swojego konta, obecny stan to: $%d ", cashdeposit,PlayerInfo[playerid][pAccount]);
 			SendClientMessage(playerid, COLOR_YELLOW, string);
+			format(string, sizeof(string), "%s wyp³aci³ ze swojego konta %d$. Nowy stan: %d$", GetNick(playerid), cashdeposit, PlayerInfo[playerid][pAccount]);
+			BankomatLog(string);
 			return 1;
 		}
 		else
@@ -18972,6 +18974,8 @@ CMD:wplac(playerid, params[])
             if(GraczBankomat(playerid)) {
                 format(string, sizeof(string), "Wp³aci³eœ $%d na swoje konto, obecny stan to: $%d ", cashdeposit-depo2,PlayerInfo[playerid][pAccount]);
                 SendClientMessage(playerid, COLOR_YELLOW, string);
+				format(string, sizeof(string), "%s wp³aci³ na swoje konto %d$. Nowy stan: %d$", GetNick(playerid), cashdeposit-depo2, PlayerInfo[playerid][pAccount]);
+				BankomatLog(string);
             } else {
                 SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
                 format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);

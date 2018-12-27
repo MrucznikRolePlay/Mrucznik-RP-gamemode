@@ -16205,6 +16205,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			new kwotaa = strval(inputtext);
+			kwotaa = FunkcjaK(inputtext);
 			new fracgracza = GetPlayerFraction(playerid);
 			new sendername[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -16247,6 +16248,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			new kwotaa = strval(inputtext); 
+			kwotaa = FunkcjaK(inputtext);
 			new fracgracza = GetPlayerFraction(playerid); 
 			new sendername[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, sendername, sizeof(sendername));
