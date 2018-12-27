@@ -19941,15 +19941,23 @@ CMD:ustawcene(playerid, params[])
 		new sendername[MAX_PLAYER_NAME];
 		new string[128];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(GetPlayerFraction(playerid) == 10)
+		if(moneys >= 1000)
 		{
-			format(string, sizeof(string), "Maszynista %s ustawi³ cenê podró¿y poci¹giem na %d$", sendername, moneys);
-			OOCNews(TEAM_GROVE_COLOR,string);
-			TransportValue[playerid] = moneys;				
+			if(GetPlayerFraction(playerid) == 10)
+			{
+				format(string, sizeof(string), "Maszynista %s ustawi³ cenê podró¿y poci¹giem na %d$", sendername, moneys);
+				OOCNews(TEAM_GROVE_COLOR,string);
+				TransportValue[playerid] = moneys;				
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ z KT!"); 
+				return 1;
+			}
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jesteœ z KT!"); 
+			sendErrorMessage(playerid, "Cena od 1.000$!"); 
 			return 1;
 		}
 	
@@ -19966,6 +19974,8 @@ CMD:kupbiletpociag(playerid)
 		{
 			if(IsAtTicketMachine(playerid))
 			{
+				new sendername[MAX_PLAYER_NAME];
+				GetPlayerName(playerid, sendername, sizeof(sendername));
 				if(kaska[playerid] >= TransportValue[playerid])				        
 				{
 					ZabierzKase(playerid, TransportValue[playerid]);
@@ -19974,6 +19984,8 @@ CMD:kupbiletpociag(playerid)
 					new string[128]; 
 					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", TransportValue[playerid]); 
 					sendTipMessage(playerid, string);
+					format(string, sizeof(string), "%s zakupi³ bilet za %d$", sendername, TransportValue[playerid]); 
+					SendLeaderRadioMessage(10, COLOR_LIGHTGREEN, string);
 				}
 				else
 				{
