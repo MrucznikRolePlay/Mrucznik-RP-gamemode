@@ -20042,7 +20042,20 @@ CMD:wejdzw(playerid)
                         }
 	          		    if(VehicleUID[v][vIntLock] == 1 || GetVehicleModel(v) == 570)
 	          		    {
-							Do_WnetrzaWozu(playerid, v, model);
+							if(GetVehicleModel(v) == 570 && PlayerInfo[playerid][pBiletpociag] == 1)
+							{
+								Do_WnetrzaWozu(playerid, v, model);
+							}
+							else if(GetVehicleModel(v) == 570 && PlayerInfo[playerid][pBiletpociag] == 0)
+							{
+								sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ /kupbiletpoci¹g(/kbpo)");
+								return 1;
+							}
+							else
+							{
+								Do_WnetrzaWozu(playerid, v, model);
+							}
+							
 							return 1;
 						}
 						else
