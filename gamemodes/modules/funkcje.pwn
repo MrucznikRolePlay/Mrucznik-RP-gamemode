@@ -6836,12 +6836,8 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	{
 		if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
 		{
-			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kbpo");
-			SetPlayerVirtualWorld(playerid, 0);
-			SetPlayerInterior(playerid, 0); 
-			WnetrzeWozu[playerid] = 0;
-			Wchodzenie(playerid);
-			TogglePlayerControllable(playerid, 0);
+			sendErrorMessage(playerid, "Nie posiadasz biletu! Kup go na dworcu za pomoc¹ komendy /kupbiletpociag(/kbpo)");
+			Z_WnetrzaWozu(playerid, WnetrzeWozu[playerid]);
 		}
 		else if(PlayerInfo[playerid][pBiletsamolotowy] == 1)
 		{
