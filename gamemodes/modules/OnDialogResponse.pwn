@@ -16282,12 +16282,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	
 	}
 //=================[KONIEC]========================
-	else if(dialogid == 1090)
+	else if(dialogid == 1090)//Dialog do kupna biletów KT --> Poci¹g
 	{
 		if(!response)
         {
 			new string[128];
-            format(string, sizeof(string), "* %s jest strasznie rozstargniony i zdecydowa³ odejœæ od maszyny bez biletu", GetNick(playerid, true));//Ciekawostka - niezdecydowany
+            format(string, sizeof(string), "* %s jest strasznie rozstargniony i zdecydowa³ odejœæ od maszyny bez biletu.", GetNick(playerid, true));//Ciekawostka - niezdecydowany
 			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 			return 1;
         }
@@ -16305,8 +16305,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new string[128]; 
 						format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
 						sendTipMessage(playerid, string);
-						format(string, sizeof(string), "%s zakupi³ bilet za %d$", sendername, cenabiletupociagu); 
-						SendLeaderRadioMessage(10, COLOR_LIGHTGREEN, string);
+						format(string, sizeof(string), "%s[ID: %d] zakupi³ bilet za %d$", sendername, playerid, cenabiletupociagu); 
+						SendLeaderRadioMessage(FRAC_KT, COLOR_LIGHTGREEN, string);
 							
 						format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), cenabiletupociagu);
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -16323,10 +16323,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 		}
-
-		
-	
-	
 	}
     else if(dialogid == 7079)
 	{
