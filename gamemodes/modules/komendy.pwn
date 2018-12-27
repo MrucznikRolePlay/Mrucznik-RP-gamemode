@@ -19905,22 +19905,22 @@ CMD:czas(playerid)
 		{
 			if (PlayerInfo[playerid][pJailTime] > 0)
 			{
-				format(string, sizeof(string), "~y~%d %s~n~~g~|~w~%d:0%d~g~|~n~~w~Czas Aresztu: %d sek", day, mtext, hour, minuite, PlayerInfo[playerid][pJailTime]-10);
+				format(string, sizeof(string), "~y~%d %s %d ~n~~g~|~w~%d:0%d~g~|~n~~w~Czas Aresztu: %d sek", day, mtext, year, hour, minuite, PlayerInfo[playerid][pJailTime]-10);
 			}
 			else
 			{
-				format(string, sizeof(string), "~y~%d %s~n~~g~|~w~%d:0%d~g~|", day, mtext, hour, minuite);
+				format(string, sizeof(string), "~y~%d %s %d ~n~~g~|~w~%d:0%d~g~|", day, mtext, year, hour, minuite);
 			}
 		}
 		else
 		{
 			if (PlayerInfo[playerid][pJailTime] > 0)
 			{
-				format(string, sizeof(string), "~y~%d %s~n~~g~|~w~%d:%d~g~|~n~~w~Czas Aresztu: %d sec", day, mtext, hour, minuite, PlayerInfo[playerid][pJailTime]-10);
+				format(string, sizeof(string), "~y~%d %s %d~n~~g~|~w~%d:%d~g~|~n~~w~Czas Aresztu: %d sec", day, mtext, year, hour, minuite, PlayerInfo[playerid][pJailTime]-10);
 			}
 			else
 			{
-				format(string, sizeof(string), "~y~%d %s~n~~g~|~w~%d:%d~g~|", day, mtext, hour, minuite);
+				format(string, sizeof(string), "~y~%d %s %d~n~~g~|~w~%d:%d~g~|", day, mtext, year, hour, minuite);
 			}
 		}
 		GameTextForPlayer(playerid, string, 5000, 1);
