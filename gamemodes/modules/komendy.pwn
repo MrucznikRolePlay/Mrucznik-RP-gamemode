@@ -6559,7 +6559,7 @@ CMD:brama(playerid)
 					urzadmove3  = 0;
 				}
 			}
-		/*	if(IsPlayerInRangeOfPoint(playerid,30,-2044.9952, -110.9055, 35.7106))
+			if(IsPlayerInRangeOfPoint(playerid,30,-2044.9952, -110.9055, 35.7106))
 			{
 				if(plac1move == 0)
 				{
@@ -6575,7 +6575,7 @@ CMD:brama(playerid)
 				}
 			}
 
-		}*/
+		}
 		//==============================[KONIEC]====================================================
 		//..
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] > 1/*PlayerInfo[playerid][pJob] == 14*/)
