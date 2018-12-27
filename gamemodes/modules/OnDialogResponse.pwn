@@ -16293,48 +16293,37 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 		else
 		{
-			if(PlayerInfo[playerid][pBiletsamolotowy] == 0)
+		if(IsAtTicketMachine(playerid))
+		{
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(kaska[playerid] >= cenabiletupociagu)				        
 			{
-				if(IsAtTicketMachine(playerid))
-				{
-					new sendername[MAX_PLAYER_NAME];
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					if(kaska[playerid] >= cenabiletupociagu)				        
-					{
-						ZabierzKase(playerid, cenabiletupociagu);
-						Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
-						PlayerInfo[playerid][pBiletpociag] = 1;
-						new string[128]; 
-						format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
-						sendTipMessage(playerid, string);
-						format(string, sizeof(string), "%s zakupi³ bilet za %d$", sendername, cenabiletupociagu); 
-						SendLeaderRadioMessage(10, COLOR_LIGHTGREEN, string);
+					ZabierzKase(playerid, cenabiletupociagu);
+					Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
+					PlayerInfo[playerid][pBiletpociag] = 1;
+					new string[128]; 
+					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
+					sendTipMessage(playerid, string);
+					format(string, sizeof(string), "%s zakupi³ bilet za %d$", sendername, cenabiletupociagu); 
+					SendLeaderRadioMessage(10, COLOR_LIGHTGREEN, string);
 						
-						format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), cenabiletupociagu);
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-					}
-					return 1;
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
-					return 1;
-				}
+					format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), cenabiletupociagu);
+					ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 			}
 			else
 			{
-				new string[128];
-				sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
-				format(string, sizeof(string), "* %s mruczny (jak Mrucznik) na bilet, który ju¿ posiada.", GetNick(playerid, true));//ciekawostka - mrucznik
-				ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+				sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
 				return 1;
 			}
-			
 		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
+			return 1;
+		}
+
+		
 	
 	
 	}
