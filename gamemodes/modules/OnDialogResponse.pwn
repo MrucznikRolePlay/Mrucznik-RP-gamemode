@@ -15854,8 +15854,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							new string[128];
 							new giveplayer[MAX_PLAYER_NAME];
 							GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-							new ftext = PlayerInfo[playerid][pLider];
-							format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
+							new fracgracza = PlayerInfo[playerid][pLider];
+							format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[fracgracza]);
 							ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
 						}
 						else
@@ -15895,9 +15895,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					return 1;
 				}
 				DajKase(playerid,-wpisal);
-				new curfunds = PlayerInfo[playerid][pAccount];
+				new currentFunds = PlayerInfo[playerid][pAccount];
 				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
-				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", curfunds);
+				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", currentFunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
 				PlayerInfo[playerid][pAccount]=wpisal+PlayerInfo[playerid][pAccount];
 				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", wpisal);
@@ -15927,8 +15927,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 1://Przelew z konta frakcji na konto gracza
 				{
 					new string[128];
-					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), ">> %s", FractionNames[ftext]);
+					new fracgracza = PlayerInfo[playerid][pLider];
+					format(string, sizeof(string), ">> %s", FractionNames[fracgracza]);
 					ShowPlayerDialogEx(playerid, 1075, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
 				}
 				case 2://Przelew z konta frakcji na konto frakcji 
@@ -15939,8 +15939,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 3://Wp³aæ na konto frakcji
 				{
 					new string[128];
-					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), "%s", FractionNames[ftext]); 
+					new fracgracza = PlayerInfo[playerid][pLider];
+					format(string, sizeof(string), "%s", FractionNames[fracgracza]); 
 					ShowPlayerDialogEx(playerid, 1077, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, jak¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ"); 
 				}
 				case 4://Wyp³aæ z konta frakcji
@@ -15948,8 +15948,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new string[128]; 
 					new strigol[128];//drugi string specjalnie do stanu konta frakcji
 					new stan = Sejf_Frakcji[GetPlayerFraction(playerid)];
-					new ftext = PlayerInfo[playerid][pLider];
-					format(string, sizeof(string), "%s", FractionNames[ftext]);
+					new fracgracza = PlayerInfo[playerid][pLider];
+					format(string, sizeof(string), "%s", FractionNames[fracgracza]);
 					format(strigol, sizeof(strigol), "Stan konta: {80FF00}%d\n{C0C0C0}Wpisz poni¿ej kwotê jak¹ chcesz wyp³aciæ", stan);
 					ShowPlayerDialogEx(playerid, 1078, DIALOG_STYLE_INPUT, string, strigol, "Wykonaj", "Odrzuæ"); 
 				}
@@ -15998,9 +15998,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					return 1;
 				}
 				DajKase(playerid,wpisal);
-				new curfunds = PlayerInfo[playerid][pAccount];
+				new currentFunds = PlayerInfo[playerid][pAccount];
 				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
-				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", curfunds);
+				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", currentFunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
 				PlayerInfo[playerid][pAccount]=PlayerInfo[playerid][pAccount]-wpisal;
 				format(string, sizeof(string), "  Depozyt: {80FF00}$-%d", wpisal);
@@ -16096,8 +16096,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new giveplayer[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-			new ftext = PlayerInfo[playerid][pLider];
-			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
+			new fracgracza = PlayerInfo[playerid][pLider];
+			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[fracgracza]);
 			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
 		}
 		else
@@ -16105,8 +16105,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new giveplayer[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-			new ftext = PlayerInfo[playerid][pLider];
-			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[ftext]);
+			new fracgracza = PlayerInfo[playerid][pLider];
+			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[fracgracza]);
 			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
 		}
 	
@@ -16161,7 +16161,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new string[128];//String
 				new bugstring[128];//zmienna potrzebna do odbugowania formatu(?) 
-				new bugstring2[256];
+				new bugstring2[256];//zmienna potrzebna do odbugowania formatu(?) 
 				new sendername[MAX_PLAYER_NAME];//Nadawca
 				new giveplayer[MAX_PLAYER_NAME];//Odbiorca
 				GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -16308,18 +16308,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new sendername[MAX_PLAYER_NAME];
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-				if(kaska[playerid] >= cenabiletupociagu)				        
+				if(kaska[playerid] >= CenaBiletuPociag)				        
 				{
-						ZabierzKase(playerid, cenabiletupociagu);
+						ZabierzKase(playerid, CenaBiletuPociag);
 						Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
 						PlayerInfo[playerid][pBiletpociag] = 1;
 						new string[128]; 
-						format(string, sizeof(string), "Zakupi³eœ bilet za %d$", cenabiletupociagu); 
+						format(string, sizeof(string), "Zakupi³eœ bilet za %d$", CenaBiletuPociag); 
 						sendTipMessage(playerid, string);
-						format(string, sizeof(string), "%s[ID: %d] zakupi³ bilet za %d$", sendername, playerid, cenabiletupociagu); 
+						format(string, sizeof(string), "%s[ID: %d] zakupi³ bilet za %d$", sendername, playerid, CenaBiletuPociag); 
 						SendLeaderRadioMessage(FRAC_KT, COLOR_LIGHTGREEN, string);
 							
-						format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), cenabiletupociagu);
+						format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), CenaBiletuPociag);
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 				}
 				else
