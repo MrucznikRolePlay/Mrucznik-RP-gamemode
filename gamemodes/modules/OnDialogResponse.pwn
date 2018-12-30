@@ -16055,7 +16055,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				sendErrorMessage(playerid, "Nie ma takiego gracza!"); 
 				return 1;
 			}
-			
+			return 1;
 		}
 	
 	
@@ -16105,6 +16105,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				sendErrorMessage(playerid, "B³êdna kwota || Nie masz takiej iloœci gotówki na swoim koncie!"); 
 				return 1;
 			}
+			return 1;
 		}
 		
 	
@@ -16113,24 +16114,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	//=================[DIALOG ZWROTNY --> Zwraca nas do "Twoje Konto"]=================
 	else if(dialogid == 1074)
 	{
-		new string[128];
-		new giveplayer[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-		new FracGracza = PlayerInfo[playerid][pLider];
-		format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
-		
 		if(response)//Je¿eli TAK
 		{
+			new string[128];
+			new giveplayer[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+			new FracGracza = PlayerInfo[playerid][pLider];
+			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
 			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
+			return 1;
 		}
-		else//JE¯ELI NIE
-		{
-			
-			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
-		}
-	
-	
-	
+
 	}
 	else if(dialogid == 1075)//Pobieranie ID odbiorcy - przelew z konta frakcji
 	{
@@ -16156,6 +16150,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				sendErrorMessage(playerid, "Nie ma na serwerze takiego gracza!"); 
 				return 1;
 			}
+			return 1;
 		}
 	}
 	else if(dialogid == 1076)//Wpisywanie kwoty i ca³oœæ funkcji - przelew z konta organizacji na gracza
@@ -16210,7 +16205,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendAdminMessage(COLOR_YELLOW, "|=========================|");
 				}
 			}
-		
+			return 1;
 		}
 	}
 	//=================[WP£ATA NA KONTO ORGANIZACJI]=================
@@ -16253,7 +16248,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 		
-		
+			return 1;
 		}
 	
 	
@@ -16308,7 +16303,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 		
-		
+			return 1;
 		}
 	
 	
