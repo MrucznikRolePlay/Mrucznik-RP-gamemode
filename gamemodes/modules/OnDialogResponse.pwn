@@ -16209,7 +16209,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 	}
 	//=================[WP£ATA NA KONTO ORGANIZACJI]=================
-	else if(dialogid == 1077)/
+	else if(dialogid == 1077)
 	{
 		if(!response)
 		{
