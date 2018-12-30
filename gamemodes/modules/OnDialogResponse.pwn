@@ -15814,45 +15814,37 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             switch(listitem)
             {
+				//Zmienne uøyte do dzia≥ania dialogu
+				new string[128];
+				new giveplayer[MAX_PLAYER_NAME];
+				GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+				new FracGracza = PlayerInfo[playerid][pLider];
+				
 				//dzia≥anie dialogu
                 case 0://Stan konta
 				{
-					new string[128];
-					new giveplayer[MAX_PLAYER_NAME];
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta: {80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
 					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
                 case 1://Wp≥aÊ
 				{
-					new string[128];
-					new giveplayer[MAX_PLAYER_NAME];
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
 					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, string, "Wpisz poniøej kwotÍ, ktÛrπ chcesz wp≥aciÊ", "Wykonaj", "OdrzuÊ");
 				}
                 case 2://Wyp≥aÊ
 				{
-					new string[128];
-					new giveplayer[MAX_PLAYER_NAME];
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
 					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poniøej kwotÍ, ktÛrπ chcesz wyp≥aciÊ", "Wykonaj", "OdrzuÊ");
 				}
                 case 3://Przelew do osoby
 				{
-					new string[128];
-					new giveplayer[MAX_PLAYER_NAME];
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+					
 					format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", giveplayer);
 					ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poniøej ID odbiorcy", "Wykonaj", "OdrzuÊ");
 				}
 				case 4://>>Konto frakcji
 				{
-					new string[128];
-					new giveplayer[MAX_PLAYER_NAME];
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					new FracGracza = PlayerInfo[playerid][pLider];
 					if(GetPlayerFraction(playerid) != 0)
 					{
 						if(PlayerInfo[playerid][pLider] != 0)
@@ -15920,24 +15912,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             switch(listitem)
             {
 				//Zmienne i funkcje
-				
+				new FracGracza = PlayerInfo[playerid][pLider];//Nazwa frakcji gracza
+				new string[256];
+				new StanSejfuFrac[128];//drugi string specjalnie do stanu konta frakcji
 				new stan = Sejf_Frakcji[GetPlayerFraction(playerid)];//Stan sejfu frakcji
+				new giveplayer[MAX_PLAYER_NAME];//Gracz odbierajπcy
+				GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 				
 				//Case'y i dzia≥anie kodu
 				
 				case 0://=======================>>Sprawdü stan konta organizacji
 				{	
-					new FracGracza = PlayerInfo[playerid][pLider];//Nazwa frakcji gracza
-					new string[256];
-					new giveplayer[MAX_PLAYER_NAME];//Gracz odbierajπcy
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyúlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$", giveplayer, FractionNames[FracGracza],Sejf_Frakcji[GetPlayerFraction(playerid)]);
 					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
 				case 1://=======================>>Przelew z konta frakcji na konto gracza
 				{
-					new FracGracza = PlayerInfo[playerid][pLider];//Nazwa frakcji gracza
-					new string[256];
+					
 					format(string, sizeof(string), ">> %s", FractionNames[FracGracza]);
 					ShowPlayerDialogEx(playerid, 1075, DIALOG_STYLE_INPUT, string, "Wpisz poniøej ID odbiorcy", "Wykonaj", "OdrzuÊ");
 				}
@@ -15948,16 +15939,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3://=======================>>Wp≥aÊ na konto frakcji
 				{
-					new FracGracza = PlayerInfo[playerid][pLider];//Nazwa frakcji gracza
-					new string[256];
 					format(string, sizeof(string), "%s", FractionNames[FracGracza]); 
 					ShowPlayerDialogEx(playerid, 1077, DIALOG_STYLE_INPUT, string, "Wpisz poniøej kwotÍ, jakπ chcesz wp≥aciÊ", "Wykonaj", "OdrzuÊ"); 
 				}
 				case 4://=======================>>Wyp≥aÊ z konta frakcji
 				{
-					new FracGracza = PlayerInfo[playerid][pLider];//Nazwa frakcji gracza
-					new string[256];
-					new StanSejfuFrac[128];//drugi string specjalnie do stanu konta frakcji
+					
+					
 					format(string, sizeof(string), "%s", FractionNames[FracGracza]);
 					format(StanSejfuFrac, sizeof(StanSejfuFrac), "Stan konta: {80FF00}%d\n{C0C0C0}Wpisz poniøej kwotÍ jakπ chcesz wyp≥aciÊ", stan);
 					ShowPlayerDialogEx(playerid, 1078, DIALOG_STYLE_INPUT, string, StanSejfuFrac, "Wykonaj", "OdrzuÊ"); 
@@ -15965,9 +15953,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 5://=======================>>PowrÛt do g≥Ûwnego panelu
 				{	
 					
-					new string[256];
-					new giveplayer[MAX_PLAYER_NAME];//Gracz odbierajπcy
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
 					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne\n>>Rodzinne", "Wybierz", "Wyjdü");
 				
