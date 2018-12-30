@@ -10,8 +10,8 @@ new sprintfStr[500];
 new LastVehicleID[MAX_PLAYERS];
 new VehicleIDChanges[MAX_PLAYERS];
 new VehicleIDChangeTime[MAX_PLAYERS];
-new string15[MAX_PLAYERS][StringData];//do dialogów z kontem bankowym
-new string222[MAX_PLAYERS][StringData];//do dialogów z kontem bankowym
+new CashAndID[MAX_PLAYERS][StringData];//do dialogów z kontem bankowym
+new CashAndID2[MAX_PLAYERS][StringData];//do dialogów z kontem bankowym
 
 new acstr[128];
 
