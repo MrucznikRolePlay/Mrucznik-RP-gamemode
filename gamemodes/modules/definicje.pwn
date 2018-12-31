@@ -16,6 +16,11 @@
 #define SetObjectMaterialText(%0) ERROR_OBJECT
 #define SetObjectMaterial(%0) ERROR_OBJECT
 
+//------------------------------------------------------------------------------
+//                              PVARS
+//------------------------------------------------------------------------------
+#define PVAR_PRZELEW_ID "przelej_id"
+
 
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
