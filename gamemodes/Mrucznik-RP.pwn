@@ -108,7 +108,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/premium/premium_dialogs.pwn"
 
 //Inne:
-#include "modules/Inne/ibiza.inc"
+#include "modules/Inne/ibiza.inc" 
 #include "modules/Inne/system_aut.pwn"
 #include "modules/Inne/system_kp.pwn"
 #include "modules/Inne/external.pwn"
@@ -1962,7 +1962,7 @@ SetPlayerSpawnPos(playerid)
 							{
 							    SetPlayerPosEx(playerid, 1460.4297,-1853.9827,81.9475);
 							    SetPlayerVirtualWorld(playerid, 50);
-							    SetPlayerInterior(playerid, 5);
+							    SetPlayerInterior(playerid, 0);
 								PlayerInfo[playerid][pLocal] = 108;
 			                    Wchodzenie(playerid);
 							}

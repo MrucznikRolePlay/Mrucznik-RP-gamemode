@@ -1697,6 +1697,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new string[256];
 				new okienkoid = GetPVarInt(playerid, "okienko-edit");
+				new mojeimie[MAX_PLAYER_NAME];
+				GetPlayerName(playerid, mojeimie, sizeof(mojeimie));
 				
 			    switch(listitem)
 			    {
@@ -1704,48 +1706,51 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
 						if(PlayerInfo[playerid][pRank] == 0)
 						{
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne", okienkoid+1);
+							
+							
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
 						else if(PlayerInfo[playerid][pRank] == 1)
 						{
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ", okienkoid+1);
+	
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
 						else if(PlayerInfo[playerid][pRank] == 2)
 						{
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie", okienkoid+1);
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
 						else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
 						{
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC}Uniwersalne", okienkoid+1);
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Uniwersalne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);	
 						}
 			        }
 			        case 1:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby", okienkoid+1);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 2:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu", okienkoid+1);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 3:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 4:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Rejestracja", okienkoid+1);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Rejestracja", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 5:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}Okienko %d\n {00FFCC} Informacja\n Pomoc obywatelom", okienkoid+1);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Informacja\n Pomoc obywatelom", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 6:
@@ -2008,7 +2013,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        SetPlayerVirtualWorld(playerid,0);
 					        SetPlayerInterior(playerid,0);
 					        PlayerInfo[playerid][pLocal] = 255;
-					        SendClientMessage(playerid, COLOR_LIGHTGREEN, " *DING* Poziom -1, Zaplecze");
+					        SendClientMessage(playerid, COLOR_LIGHTGREEN, " *DING* Poziom 0, Zaplecze");
 						}
 						else
 						{
@@ -2018,17 +2023,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 1:
 			        {
-				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//parter
+				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//g³ówna sala urzêdu
 				        SetPlayerVirtualWorld(playerid,50);
 				        SetPlayerInterior(playerid,5);
 	                    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 0, Parter <<<<");
+	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 9 - G³ówna sala urzêdu <<<<");
 	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Okienka dla interesantów");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Plac manewrowy");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Toalety");
-                     	SendClientMessage(playerid, COLOR_WHITE, "  --> Pomieszczenia socjalne");
-                     	SendClientMessage(playerid, COLOR_WHITE, "  --> Izolatka");
+	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Wyjœcie na plac manewrowy");
+	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Toalety na ka¿dym skrzydle");
+                     	SendClientMessage(playerid, COLOR_WHITE, "  --> Biura & Sale konferencyjne & Senat & Burmistrz & Akademia");
+                     	SendClientMessage(playerid, COLOR_WHITE, "  --> Biuro ochrony - biuro kamer");
                      	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
                      	PlayerInfo[playerid][pLocal] = 108;
 			        }
@@ -2044,8 +2049,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 0:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, -2089.55835, -414.24173, 36.32352);
-						SetPlayerVirtualWorld (playerid, 0);
+						SetPlayerPosEx(playerid, 1498.9341,-1537.0797,67.3069);
+						SetPlayerVirtualWorld (playerid, 2);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
@@ -2095,20 +2100,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				switch(listitem)
+				switch(listitem)//Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
 				{
 					case 0://parking podziemny
 					{
 						if(IsACop(playerid))
 						{
-							SetPlayerVirtualWorld(playerid,0);
-							SetPlayerPosEx(playerid,565.6246,-1485.8623,-8.8300);
+							SetPlayerVirtualWorld(playerid,2);
+							SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
+							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
+							DajKase(playerid, 10);
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
 						}
 					}
 					case 1://parking
@@ -2118,111 +2126,131 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerPosEx(playerid,596.5255, -1489.2544, 15.3587);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
-							GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+							GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
 						}
 					}
-					case 2://recepcja
+					case 2://stanowe
+					{
+						SetPlayerVirtualWorld(playerid, 1);
+						SetPlayerPosEx(playerid, 594.05334, -1476.27490, 81.82840+0.5);
+						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
+						PlayerInfo[playerid][pLocal] = 255;
+					
+					}
+					case 3://recepcja
 					{
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SetPlayerVirtualWorld(playerid,10);
-						SetPlayerPosEx(playerid,618.0215,-1452.7937,90.6158);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Recepcja || Dy¿urka");
-						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+						SetPlayerVirtualWorld(playerid,1);
+						SetPlayerPosEx(playerid,586.83704, -1473.89270, 89.30576);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Recepcja");
+						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 3://szatnia
+					case 4://szatnia
 					{
 						if(IsAFBI(playerid))
 						{
 							TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,14);
-							SetPlayerPosEx(playerid,564.9237, -1466.3726, 33.0378);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia || Zbrojownia ");
+							SetPlayerVirtualWorld(playerid,2);
+							SetPlayerPosEx(playerid,592.65466, -1486.76575, 82.10487);
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia");
 							PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-							GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+							GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
 						}
 					
 					}
-					case 4://centrum szkol.
+					case 5://Zbrojownia
 					{
 						if(IsACop(playerid))
 						{
 							TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,13);
-							SetPlayerPosEx(playerid,1906.8574, -1721.6230, 998.8511);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Tory szkoleniowe");
+							SetPlayerVirtualWorld(playerid,3);
+							SetPlayerPosEx(playerid,591.37579, -1482.26672, 80.43560);
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3 - Zbrojownia");
 							PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-							GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+							GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
+							
 						}
 					}
-					case 5://Sala Konferencyjna
+					case 6://Biura federalne
 					{
 						if(IsACop(playerid))
 						{
 							TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,15);
-							SetPlayerPosEx(playerid,599.7307, -1499.7308, 37.5980);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Sala Konferencyjna");
-							GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+							SetPlayerVirtualWorld(playerid,4);
+							SetPlayerPosEx(playerid,596.21857, -1477.92395, 84.06664);
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Biura Federalne");
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							return 1;
 						}
 					}
-					case 6://Sale przesluchan
+					case 7://Dyrektorat
 					{
 
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SetPlayerVirtualWorld(playerid,11);
-						SetPlayerPosEx(playerid,623.6523, -1485.1019, 90.7391);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 5, Wiêzienie stanowe");
-						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+						SetPlayerVirtualWorld(playerid,5);
+						SetPlayerPosEx(playerid,589.23029, -1479.66357, 91.74274);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 5, Dyrektorat");
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 7://biura Federalne
+					case 8://CID ERT
 					{
-						SetPlayerPosEx(playerid,610.6687, -1454.7335, 73.9460);
+						SetPlayerPosEx(playerid,585.70782, -1479.54211, 99.01273);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SetPlayerVirtualWorld(playerid,12);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, Biura Federalne");
-						GameTextForPlayer(playerid, "~p~by Dywan", 5000, 1);
+						SetPlayerVirtualWorld(playerid,6);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, CID/ERT");
 						PlayerInfo[playerid][pLocal] = 212;
 					}
-					case 8://dach
+					case 9://sale treningowe
+					{
+						SetPlayerPosEx(playerid, 590.42767, -1447.62939, 80.95732);
+						TogglePlayerControllable(playerid, 0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid, 7);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
+					
+					}
+					case 10://dach
 					{
 						if(IsACop(playerid))
 						{
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Dach");
+							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
 							PlayerInfo[playerid][pLocal] = 255;
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD1, "Brak dostêpu!");
+							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom");
+							return 1;
 						}
 					}
 				}
@@ -2934,7 +2962,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    if(IsPlayerConnected(i))
 				    {
-				        if(IsACop(i))
+				        if(IsACop(i) || IsABOR(i))
 						{
 						    if(GetDistanceBetweenPlayers(playerid,i) < 5)
 	     					{
@@ -12109,8 +12137,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-		//Sejfy frakcyjne
-		if(dialogid == 490)
+		//Sejfy frakcyjne ============ UKRYTE NA RZECZ NOWEGO SYSTEMU KONT BANKOWYCH - SIMEONE 26-12-2018
+		/*if(dialogid == 490)
 		{
 		    if(response)
 		    {
@@ -12243,7 +12271,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
 		    }
-		}
+		}*/
 		if(dialogid == 495)
 		{
 		    if(response)
@@ -15777,6 +15805,582 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         return 1;
     }
+//====================[KONTO BANKOWE]========================================
+//By Simeone 25-12-2018
+	//==================[G£ÓWNE OKNO DIALOGOWE]=======================================
+	else if(dialogid == 1067)
+	{
+		if(response)
+        {
+			//Zmienne u¿yte do dzia³ania dialogu
+			new string[128];
+			new giveplayer[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+			new FracGracza = PlayerInfo[playerid][pLider];
+		
+            switch(listitem)
+            {
+				
+				
+				//dzia³anie dialogu
+                case 0://Stan konta
+				{
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta: {80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
+					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
+				}
+                case 1://Wp³aæ
+				{
+					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
+					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ");
+				}
+                case 2://Wyp³aæ
+				{
+					
+					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
+					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, któr¹ chcesz wyp³aciæ", "Wykonaj", "Odrzuæ");
+				}
+                case 3://Przelew do osoby
+				{
+					
+					format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", giveplayer);
+					ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
+				}
+				case 4://>>Konto frakcji
+				{
+					if(GetPlayerFraction(playerid) != 0)
+					{
+						if(PlayerInfo[playerid][pLider] != 0)
+						{
+							format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
+							ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Nie jesteœ liderem frakcji!"); 
+							return 1;
+						}
+					}	
+					else
+					{
+						sendErrorMessage(playerid, "Nie jesteœ we frakcji!");
+						return 1;
+					}
+					
+				}
+				case 5://Konto rodziny
+				{
+					sendErrorMessage(playerid, "Ju¿ wkrótce!"); 
+				}
+				
+            }
+			return 1;
+        }
+	
+	}
+	//===============[WP£ATA NA SWOJE KONTO]=========================
+	else if(dialogid == 1068)
+	{
+		if(response)
+	    {
+			if(gPlayerLogged[playerid] == 1)
+			{
+				new string[128];
+				new money = strval(inputtext);
+				money = FunkcjaK(inputtext);//--Funkcja wp³acania na k
+				if (money > kaska[playerid] || money < 1)
+				{
+					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota!");
+					return 1;
+				}
+				if(PlayerInfo[playerid][pAccount] + money > 2_000_000_000)
+				{
+					sendTipMessage(playerid, "Konto bankowe przepe³nione, mo¿emy przechowywaæ nie wiêcej ni¿ 2 miliardy!");
+					return 1;
+				}
+				ZabierzKase(playerid, money);
+				new currentFunds = PlayerInfo[playerid][pAccount];
+				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
+				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", currentFunds);
+				SendClientMessage(playerid, COLOR_GRAD2, string);
+				PlayerInfo[playerid][pAccount] = money + PlayerInfo[playerid][pAccount];
+				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", money);
+				SendClientMessage(playerid, COLOR_GRAD4, string);
+				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
+				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
+				SendClientMessage(playerid, COLOR_WHITE, string);
+				
+				format(string, sizeof(string), "Gracz UID: %d, Nick: %s wplacil na swoje konto %d$, nowy stan: %d$", PlayerInfo[playerid][pUID], GetNick(playerid), money, PlayerInfo[playerid][pAccount]);
+				PayLog(string);
+			}	
+			return 1;
+		}
+	}
+	//====================[DIALOG === KONTO FRAKCJI]==============================
+	else if(dialogid == 1069)
+	{
+		if(response)
+        {
+		
+			//Zmienne i funkcje
+			new FracGracza = PlayerInfo[playerid][pLider];//Nazwa frakcji gracza
+			new string[256];
+			new StanSejfuFrac[128];//drugi string specjalnie do stanu konta frakcji
+			new stan = Sejf_Frakcji[GetPlayerFraction(playerid)];//Stan sejfu frakcji
+			new giveplayer[MAX_PLAYER_NAME];//Gracz odbieraj¹cy
+			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+            switch(listitem)
+            {
+				
+				
+				//Case'y i dzia³anie kodu
+				
+				case 0://=======================>>SprawdŸ stan konta organizacji
+				{	
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyœlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$", giveplayer, FractionNames[FracGracza],Sejf_Frakcji[GetPlayerFraction(playerid)]);
+					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
+				}
+				case 1://=======================>>Przelew z konta frakcji na konto gracza
+				{
+					
+					format(string, sizeof(string), ">> %s", FractionNames[FracGracza]);
+					ShowPlayerDialogEx(playerid, 1075, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
+				}
+				case 2://=======================>>Przelew z konta frakcji na konto frakcji 
+				{
+					sendErrorMessage(playerid, "Ju¿ wkrótce!");
+				
+				}
+				case 3://=======================>>Wp³aæ na konto frakcji
+				{
+					format(string, sizeof(string), "%s", FractionNames[FracGracza]); 
+					ShowPlayerDialogEx(playerid, 1077, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej kwotê, jak¹ chcesz wp³aciæ", "Wykonaj", "Odrzuæ"); 
+				}
+				case 4://=======================>>Wyp³aæ z konta frakcji
+				{
+					
+					
+					format(string, sizeof(string), "%s", FractionNames[FracGracza]);
+					format(StanSejfuFrac, sizeof(StanSejfuFrac), "Stan konta: {80FF00}%d\n{C0C0C0}Wpisz poni¿ej kwotê jak¹ chcesz wyp³aciæ", stan);
+					ShowPlayerDialogEx(playerid, 1078, DIALOG_STYLE_INPUT, string, StanSejfuFrac, "Wykonaj", "Odrzuæ"); 
+				}
+				case 5://=======================>>Powrót do g³ównego panelu
+				{	
+					
+					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp³aæ\nWyp³aæ\n>>Frakcyjne\n>>Rodzinne", "Wybierz", "WyjdŸ");
+				
+				}
+			
+			
+			}
+			return 1;
+		}
+		
+	}
+	//============[DIALOG INFORMACYJNY (INFO) -> Zwrot Marcepana]============
+	else if(dialogid == 1080)
+	{
+		if(response)
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mówi: Do zobaczenia!");
+			return 1;
+        }
+		else
+		{
+			SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mówi: Do zobaczenia! Zapraszamy ponownie do Verte Bank");
+			return 1;
+		}
+       
+	
+	}
+	else if(dialogid == 1071)//wyp³ata z swojego konta
+	{
+		if(response)
+	    {
+			if(gPlayerLogged[playerid] == 1)
+			{
+				new string[128];
+				new money = strval(inputtext);
+				money = FunkcjaK(inputtext);//--Funkcja wp³acania na k
+				
+				if (money > PlayerInfo[playerid][pAccount] || money < 1)//Zabezpieczenie
+				{
+					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota");
+					return 1;
+				}
+				
+				//Komunikaty:
+				new currentFunds = PlayerInfo[playerid][pAccount];
+				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
+				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", currentFunds);
+				SendClientMessage(playerid, COLOR_GRAD2, string);
+				format(string, sizeof(string), "  Depozyt: {80FF00}$-%d", money);
+				SendClientMessage(playerid, COLOR_GRAD4, string);
+				//Czynnoœci:
+				DajKase(playerid, money);
+				PlayerInfo[playerid][pAccount] -= money;
+				//Komunikaty:
+				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
+				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
+				SendClientMessage(playerid, COLOR_WHITE, string);
+				
+				format(string, sizeof(string), "Gracz UID: %d, Nick: %s wyplacil ze swojego konta %d$, nowy stan: %d$", PlayerInfo[playerid][pUID], GetNick(playerid), money, PlayerInfo[playerid][pAccount]);
+				PayLog(string);
+			}	
+			return 1;
+		}
+	
+	}
+	//============[PRZELEWY OD GRACZA DO GRACZA = ID ODBIORCY]===================================
+	else if(dialogid == 1072)//Przelew
+	{
+		if(!response)
+	    {
+			sendErrorMessage(playerid, "Odrzucono akcje przelewu!");
+		}
+		else//Jeœli przejdzie dalej
+		{
+			new string[128];
+			new giveplayerid = strval(inputtext);
+			
+			if (IsPlayerConnected(giveplayerid) && gPlayerLogged[giveplayerid])
+			{
+				if(giveplayerid != playerid)
+				{
+					SetPVarInt(playerid, PVAR_PRZELEW_ID, giveplayerid);
+					format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", GetNick(giveplayerid));
+					ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "Odrzuæ");
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie mo¿esz przelaæ gotówki samemu sobie!");
+					return 1;
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie ma takiego gracza!"); 
+				return 1;
+			}
+			return 1;
+		}
+	
+	
+	}
+	//================[PRZELEWY DO GRACZA OD GRACZA = Czynnoœci + Kwota przelewu]========================
+	else if(dialogid == 1073)
+	{
+		if(!response)
+	    {
+			sendErrorMessage(playerid, "Odrzucono akcje przelewu!"); 
+		}
+		else//Jeœli kliknie "TAK"
+		{
+			new string[128];
+			new sendername[MAX_PLAYER_NAME];
+			new giveplayer[MAX_PLAYER_NAME];
+			new giveplayerid = GetPVarInt(playerid, PVAR_PRZELEW_ID);
+			new money = FunkcjaK(inputtext);//Zbugowany string 
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+			
+			if(money >= 1 && money <= PlayerInfo[playerid][pAccount])//Zabezpieczenie 
+			{
+				//Czynnoœci:
+				PlayerInfo[playerid][pAccount] -= money;
+				PlayerInfo[giveplayerid][pAccount] += money;
+				
+				//komunikaty:
+				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s . Pieni¹dze znajduj¹ siê na twoim koncie.", money, sendername);
+				SendClientMessage(giveplayerid, COLOR_RED, string);
+				
+				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", giveplayer, money);
+				SendClientMessage(playerid, COLOR_RED, string); 
+				
+				format(string, sizeof(string), "Gracz UID: %d, Nick: %s dokonal przelewu %d$ dla gracza %s uid: %d, nowy stan: %d$", 
+					PlayerInfo[playerid][pUID], 
+					sendername, 
+					money, 
+					giveplayer, 
+					PlayerInfo[giveplayerid][pUID], 
+					PlayerInfo[playerid][pAccount]);
+				PayLog(string);
+				
+				if(money >= 5_000_000)//Wiadomosc dla adminow
+				{
+					SendAdminMessage(COLOR_YELLOW, string);
+					return 1;
+				}
+			}
+			else//Jeœli próbuje oszukaæ (brak gotówki, b³êdnie wpisana kwota)
+			{
+				sendErrorMessage(playerid, "B³êdna kwota || Nie masz takiej iloœci gotówki na swoim koncie!"); 
+				return 1;
+			}
+			return 1;
+		}
+		
+	
+	
+	}
+	//=================[DIALOG ZWROTNY --> Zwraca nas do "Twoje Konto"]=================
+	else if(dialogid == 1074)
+	{
+		if(response)//Je¿eli TAK
+		{
+			new string[128];
+			new giveplayer[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+			new frakcja = PlayerInfo[playerid][pLider];
+			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[frakcja]);
+			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
+			return 1;
+		}
+
+	}
+	else if(dialogid == 1075)//Pobieranie ID odbiorcy - przelew z konta frakcji
+	{
+		if(!response)
+	    {
+			sendErrorMessage(playerid, "Nie uzupe³ni³eœ ID odbiorcy!"); 
+		}
+		else
+		{
+			new string[128];
+			new frakcja = PlayerInfo[playerid][pLider];
+			new giveplayerid = strval(inputtext);
+			if(IsPlayerConnected(giveplayerid) && gPlayerLogged[giveplayerid])
+			{
+				SetPVarInt(playerid, PVAR_PRZELEW_ID, giveplayerid);
+				format(string, sizeof(string), "Odbiorca: %s\nWysy³aj¹cy: %s\nWpisz poni¿ej kwotê, która ma zostaæ przelana na jego konto.", GetNick(giveplayerid), FractionNames[frakcja]); 
+				ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, "Przelewy frakcji >> ID >> Kwota", string, "Wykonaj", "Odrzuæ"); 
+				
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie ma na serwerze takiego gracza!"); 
+				return 1;
+			}
+			return 1;
+		}
+	}
+	else if(dialogid == 1076)//Wpisywanie kwoty i ca³oœæ funkcji - przelew z konta organizacji na gracza
+	{
+		if(!response)
+		{
+		
+			sendErrorMessage(playerid, "Odrzucono akcjê przelewu"); 
+			return 1;
+		}
+		else
+		{
+			new string[256];
+			new sendername[MAX_PLAYER_NAME];//Nadawca
+			new giveplayer[MAX_PLAYER_NAME];//Odbiorca
+			new giveplayerid = GetPVarInt(playerid, PVAR_PRZELEW_ID);
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid);
+			
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+			
+			if(money <= 0 || money > Sejf_Frakcji[frakcja])
+			{
+				sendErrorMessage(playerid, "Nieprawid³owa kwota przelewu!"); 
+				return 1;
+			}
+			
+			PlayerInfo[giveplayerid][pAccount] += money;
+			Sejf_Add(frakcja, -money);
+			Sejf_Save(frakcja);
+			
+			format(string, sizeof(string), ">>>Otrzyma³eœ przelew w wysokoœci %d$, od lidera %s -> %s", money, FractionNames[frakcja], sendername); 
+			SendClientMessage(giveplayerid, COLOR_RED, string);
+			
+			format(string, sizeof(string), ">>>Wys³a³eœ przelew w wysokoœci %d$, na konto %s, z konta %s", money, giveplayer, FractionNames[frakcja]); 
+			SendClientMessage(playerid, COLOR_RED, string);
+			
+			format(string, sizeof(string), ">>>Lider %s[%d] wys³a³ %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid);
+			SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string);
+			
+			format(string, sizeof(string), "Gracz UID: %d, Nick: %s dokonal przelewu frakcyjnego (frakcja %d) %d$ dla gracza %s uid: %d, nowy stan: %d$", 
+					PlayerInfo[playerid][pUID], 
+					sendername, 
+					frakcja,
+					money, 
+					giveplayer, 
+					PlayerInfo[giveplayerid][pUID], 
+					Sejf_Frakcji[frakcja]);
+			PayLog(string);
+				
+			if(money >= 2500000)//Warning dla adminów, gdy gracz przekroczy 2.5kk 
+			{
+				SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|"); 
+				format(string, sizeof(string), "%s[%d] wykona³ przelew %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid); 
+				SendAdminMessage(COLOR_WHITE, string); 
+				format(string, sizeof(string), "Frakcja gracza(z sejfu): %s", FractionNames[frakcja]);
+				SendAdminMessage(COLOR_WHITE, string);
+				SendAdminMessage(COLOR_YELLOW, "|=========================|");
+			}
+			return 1;
+		}
+	}
+	//=================[WP£ATA NA KONTO ORGANIZACJI]=================
+	else if(dialogid == 1077)
+	{
+		if(!response)
+		{
+		
+			sendErrorMessage(playerid, "Odrzucono akcjê wp³aty"); 
+			return 1;
+		}
+		else
+		{
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid);
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(money >= 1)
+			{
+				if(money <= kaska[playerid])
+				{
+					new string[128];
+					Sejf_Add(frakcja, money);
+					Sejf_Save(frakcja);
+					ZabierzKase(playerid, money); 
+					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, money); 
+					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
+					
+					format(string, sizeof(string), "Gracz UID: %d, Nick: %s wplacil na konto frakcyjne (frakcja %d) %d$, nowy stan: %d$", 
+						PlayerInfo[playerid][pUID], 
+						sendername, 
+						frakcja,
+						money,
+						Sejf_Frakcji[frakcja]);
+					PayLog(string);
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie masz tyle!"); 
+					return 1;
+				}
+			
+			}
+			else
+			{
+				sendErrorMessage(playerid, "B³êdna kwota transakcji");
+				return 1;
+			}
+		
+			return 1;
+		}
+	
+	
+	}
+	//=================[WyP£ATA Z KONTA ORGANIZACJI]=================
+	else if(dialogid == 1078)
+	{
+		if(!response)
+		{
+			sendErrorMessage(playerid, "Odrzucono akcjê wyp³aty"); 
+			return 1;
+		}
+		else
+		{
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid); 
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(money >= 1)
+			{
+				if(money <= Sejf_Frakcji[frakcja])
+				{
+					new string[128];
+					Sejf_Add(frakcja, -money);
+					Sejf_Save(frakcja);
+					DajKase(playerid, money); 
+					format(string, sizeof(string), "Lider %s wyp³aci³ %d$ z konta organizacji", sendername, money); 
+					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
+					
+					format(string, sizeof(string), "Gracz UID: %d, Nick: %s wyplacil z konta frakcyjnego (frakcja %d) %d$, nowy stan: %d$", 
+						PlayerInfo[playerid][pUID], 
+						sendername, 
+						frakcja,
+						money,
+						Sejf_Frakcji[frakcja]);
+					PayLog(string);
+					
+					if(money >= 2000000)
+					{
+						
+						SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|");
+						SendAdminMessage(COLOR_WHITE, string);
+						SendAdminMessage(COLOR_YELLOW, "|=========================|");
+						
+					
+					}
+				}
+				else
+				{
+					sendErrorMessage(playerid, "W sejfie twojej organizacji nie ma takiej kwoty!"); 
+					return 1;
+				}
+			
+			}
+			else
+			{
+				sendErrorMessage(playerid, "B³êdna kwota transakcji!");
+				return 1;
+			}
+		
+			return 1;
+		}
+	
+	
+	}
+//=================[KONIEC]========================
+	else if(dialogid == 1090)//Dialog do kupna biletów KT --> Poci¹g
+	{
+		if(!response)
+        {
+			new string[128];
+            format(string, sizeof(string), "* %s jest strasznie rozstargniony i zdecydowa³ odejœæ od maszyny bez biletu.", GetNick(playerid, true));//Ciekawostka - niezdecydowany
+			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+			return 1;
+        }
+		else
+		{
+			if(IsAtTicketMachine(playerid))
+			{
+				new sendername[MAX_PLAYER_NAME];
+				GetPlayerName(playerid, sendername, sizeof(sendername));
+				if(kaska[playerid] >= CenaBiletuPociag)				        
+				{
+					ZabierzKase(playerid, CenaBiletuPociag);
+					Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
+					PlayerInfo[playerid][pBiletpociag] = 1;
+					new string[128]; 
+					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", CenaBiletuPociag); 
+					sendTipMessage(playerid, string);
+					format(string, sizeof(string), "%s[ID: %d] zakupi³ bilet za %d$", sendername, playerid, CenaBiletuPociag); 
+					SendLeaderRadioMessage(FRAC_KT, COLOR_LIGHTGREEN, string);
+						
+					format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), CenaBiletuPociag);
+					ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+					return 1;
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
+				return 1;
+			}
+		}
+	}
     else if(dialogid == 7079)
 	{
 		if(response)
