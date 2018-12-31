@@ -17095,7 +17095,7 @@ CMD:odpal(playerid)
 	return 1;
 }
 
-CMD:forum(playerid)
+CMD:informacje(playerid)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
@@ -17109,7 +17109,7 @@ CMD:forum(playerid)
         if(PlayerInfo[playerid][pAdmin] >= 1)
         {
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "((**)) Adres naszego forum: Mrucznik-RP.pl !! (%s)", sendername);
+			format(string, sizeof(string), "Adres naszego forum i Team Speak to: ''Mrucznik-rp.pl'' (%s)", sendername);
 			SendClientMessageToAll(0xff00ff, string);
 		}
 		else
@@ -17119,30 +17119,7 @@ CMD:forum(playerid)
 	}
 	return 1;
 }
-CMD:teamspeak(playerid)
-{
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
 
-    if(IsPlayerConnected(playerid))
-    {
-        if(gPlayerLogged[playerid] == 0)
-        {
-            return 1;
-        }
-        if(PlayerInfo[playerid][pAdmin] >= 1)
-        {
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "((**)) Adres naszego TeamSpeaka: Mrucznik-RP.pl !! (%s)", sendername);
-			SendClientMessageToAll(0xff00ff, string);
-		}
-		else
-		{
-		    noAccessMessage(playerid);
-		}
-	}
-	return 1;
-}
 
 CMD:zgas(playerid)
 {
