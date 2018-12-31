@@ -108,7 +108,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/premium/premium_dialogs.pwn"
 
 //Inne:
-#include "modules/Inne/ibiza.inc"
+#include "modules/Inne/ibiza.inc" 
 #include "modules/Inne/system_aut.pwn"
 #include "modules/Inne/system_kp.pwn"
 #include "modules/Inne/external.pwn"
@@ -1601,7 +1601,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 
 		//-------<[     WL      ]>---------
-		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
+		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
 		{
 			if(!IsACop(killerid) && lowcaz[killerid] != playerid )
 			{
@@ -1628,6 +1628,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	#endif
 	return 1;
 }
+
 forward OnCheatDetected(playerid, ip_address[], type, code);
 public OnCheatDetected(playerid, ip_address[], type, code)
 {
@@ -1637,7 +1638,14 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 	ABroadCast(0x9ACD32AA,string,1);
 	format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 	SendClientMessage(playerid, 0x9ACD32AA, string);
-	KickEx(playerid);
+	if(code == 50 || code == 28)
+	{
+		Kick(playerid);
+	}
+	else 
+	{
+		KickEx(playerid);
+	}
 	return 1;
 
 }
@@ -1954,7 +1962,7 @@ SetPlayerSpawnPos(playerid)
 							{
 							    SetPlayerPosEx(playerid, 1460.4297,-1853.9827,81.9475);
 							    SetPlayerVirtualWorld(playerid, 50);
-							    SetPlayerInterior(playerid, 5);
+							    SetPlayerInterior(playerid, 0);
 								PlayerInfo[playerid][pLocal] = 108;
 			                    Wchodzenie(playerid);
 							}
