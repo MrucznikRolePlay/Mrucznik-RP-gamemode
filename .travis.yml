@@ -10,6 +10,7 @@ branches:
   - master
   - development
   - pecet
+  - lukesqly
   - simeone
 
 addons:
@@ -50,6 +51,7 @@ deploy:
     branch: 
       - development
       - pecet
+      - lukesqly
       - simeone
 - provider: releases
   api_key:
