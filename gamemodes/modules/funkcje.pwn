@@ -12282,7 +12282,7 @@ WeaponHackCheck(issuerid, weaponid)
 	return false;
 }
 
-forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
+forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {
 	if(WeaponHackCheck(playerid, weaponid) && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid))

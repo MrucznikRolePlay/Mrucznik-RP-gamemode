@@ -1351,6 +1351,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 	new playername[MAX_PLAYER_NAME];
 	new killername[MAX_PLAYER_NAME];
 	new string[128];
+	
+	if(gPlayerLogged[playerid] != 1 || gPlayerLogged[killerid] != 1) //nie przetwarzaj dla niezalogowanych osób
+	{
+		return 1;
+	}
 
     GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 
