@@ -26508,12 +26508,11 @@ CMD:banip(playerid, params[])
     {
     	new var[32];
     	new powod[32];
-		if(sscanf(params, "s[32]s[32]" var, powod))
+    	if(sscanf(params, "s[32]s[32]", var, powod))
 		{
 			sendTipMessage(playerid, "U¿yj /banip [ip] [powod]");
 			return 1;
 		}
-
 	    if(AntySpam[playerid] == 1)
 	    {
 	        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
