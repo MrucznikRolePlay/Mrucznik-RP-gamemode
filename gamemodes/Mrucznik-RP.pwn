@@ -1278,7 +1278,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		return 1;
 	}
 	
-    if(SetTimerEx("OnPlayerTakeDamageWeaponHack", 500, false, "iii", issuerid, weaponid, playerid))
+    if(OnPlayerTakeDamageWeaponHack(issuerid, weaponid))
 	{
 		return 1;
 	}
@@ -1360,7 +1360,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         BoomBoxData[bbxid][BBD_Standby] = false;
         BBD_Putdown(playerid, bbxid);
     }
-    if(reason == 38 && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
+    if(reason == 38 && PlayerInfo[killerid][pGun7] != reason)
     {
 	    MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
 		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNick(killerid, true));
@@ -1638,7 +1638,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 	ABroadCast(0x9ACD32AA,string,1);
 	format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 	SendClientMessage(playerid, 0x9ACD32AA, string);
-	if(code == 50 || code == 28 || code == 27)
+	if(code == 50 || code == 28)
 	{
 		Kick(playerid);
 	}
