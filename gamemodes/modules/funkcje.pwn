@@ -235,20 +235,20 @@ JailDeMorgan(playerid)
 {
 	new losuj= random(sizeof(SpawnStanowe));
 	SetPlayerInterior(playerid, 0);
-	SetPlayerVirtualWorld(playerid, 11);
+	SetPlayerVirtualWorld(playerid, 1);
 	SetPlayerPosEx(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
 	SetCameraBehindPlayer(playerid);
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
-	GameTextForPlayer(playerid, "~w~Witamy w ~r~Sztumie", 5000, 1);
+	GameTextForPlayer(playerid, "~w~Witamy ~r~w sztumie!", 5000, 1);
 	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
 // WYPUSZCZANIE z DEMORGAN
 UnJailDeMorgan(playerid)
 {
-	SetPlayerVirtualWorld(playerid, 10);
-	SetPlayerPosEx(playerid, 618.0215,-1452.7937,90.6158);
+	SetPlayerVirtualWorld(playerid, 1);
+	SetPlayerPosEx(playerid, 593.1899,-1494.0863,82.1648);
 	Wchodzenie(playerid);
 	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;
@@ -3506,16 +3506,31 @@ IsAtClothShop(playerid)
 	}
 	return 0;
 }
+IsAtTicketMachine(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerToPoint(5.0, playerid, 1757.00513, -1943.20789, 13.26766) || PlayerToPoint(5.0, playerid,  1746.97949, -1943.71838, 13.45185) || PlayerToPoint(5.0, playerid, 825.69000, -1354.49915, 13.11831) || PlayerToPoint(5.0, playerid, 2293.0547,-1175.9962,26.0441))
+		{
+		
+			return 1;
+		}
+	
+	
+	
+	}
+	return 0;
 
+}
 IsAtGasStation(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		if(PlayerToPoint(6.0,playerid,1004.0070,-939.3102,42.1797) || PlayerToPoint(6.0,playerid,1944.3260,-1772.9254,13.3906))
+		if(PlayerToPoint(10.0,playerid,1004.0070,-939.3102,42.1797) || PlayerToPoint(10.0,playerid,1944.3260,-1772.9254,13.3906))
 		{//LS
 		    return 1;
 		}
-		else if(PlayerToPoint(6.0,playerid,-90.5515,-1169.4578,2.4079) || PlayerToPoint(6.0,playerid,-1609.7958,-2718.2048,48.5391))
+		else if(PlayerToPoint(10.0,playerid,-90.5515,-1169.4578,2.4079) || PlayerToPoint(10.0,playerid,-1609.7958,-2718.2048,48.5391))
 		{//LS
 		    return 1;
 		}
@@ -3559,11 +3574,11 @@ IsAtGasStation(playerid)
 		{//Montgomery
 			return 1;
 		}
-		else if(PlayerToPoint(5.0,playerid,-2086.8000488281,-108.19999694824,35.599998474121))
+		else if(PlayerToPoint(15.0,playerid,1362.5422,-1819.4730,13.5639))
 		{
 		    return 1;
 		}//Plac manewrowy
-		else if(PlayerToPoint(6.0,playerid,1011.7135,-1352.0660,13.5839) || PlayerToPoint(6.0,playerid,1011.8489,-1356.9026,13.5839))
+		else if(PlayerToPoint(10.0,playerid,2471.2898,-2105.1948,14.1259) || PlayerToPoint(6.0,playerid,1011.8489,-1356.9026,13.5839))
 		{//Stacja pod p¹czkiem LS
 		    return 1;
 		}
@@ -3750,7 +3765,7 @@ IsAnAmbulance(carid)
 IsAInteriorVehicle(model)
 {
 	//484- Jacht(Marquis), 519 - Shamal, 553 - Nevada, 409 - Stretch, 416 - Ambulance, 508 - Journey, 582 - Newsvan
-	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582);
+	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582 || model == 431 || model == 427 || model == 570);
 }
 
 stock IS_KomunikacjaMiejsca(carid)
@@ -4316,6 +4331,12 @@ stock PayLog(text[])
 {
     new plik[32] = "logi/pay.log";
     Log(plik, text);
+}
+stock BankomatLog(text[])
+{
+
+	new plik[32] = "logi/bankomat.log";
+	Log(plik, text);
 }
 stock PremiumLog(text[])
 {
@@ -6799,6 +6820,35 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
+	else if(model == 431)//autobus
+	{
+		SetPlayerInterior(playerid, 1);
+	    SetPlayerPosEx(playerid, 1450.3420,-1779.3888,3.6388);
+        Wchodzenie(playerid);
+	    TogglePlayerControllable(playerid, 0);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zapinaj Pasy - Jedziemy do piekla!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	
+	}
+	else if(model == 427)//Enforcer pd
+	{
+		SetPlayerInterior(playerid, 1);
+	    SetPlayerPosEx(playerid, 1479.1534,-1617.7773,-4.2809);
+        Wchodzenie(playerid);
+	    TogglePlayerControllable(playerid, 0);
+	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Lap za bron!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+	
+	}
+	else if(model == 570)//Wagony KT
+	{
+			SetPlayerInterior(playerid, 1);
+			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
+			Wchodzenie(playerid);
+			TogglePlayerControllable(playerid, 0);
+			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
+			sendTipMessage(playerid, ">>Pomyœlnie wszed³eœ do poci¹gu! Bilet zosta³ zu¿yty!");
+			sendTipMessage(playerid, ">>>Interior stworzony przez: Charlie112");
+			PlayerInfo[playerid][pBiletpociag] = 0;
+	}
 	else if(model == 582)//sanvan
 	{
 		SetPlayerInterior(playerid, 1);
@@ -6838,6 +6888,19 @@ Z_WnetrzaWozu(playerid, vehicleid)
 		SetPlayerPosEx(playerid, vehx-1, vehy-1, vehz);
 	}
 	else if(model == 508)//journey
+	{
+		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+	}
+	else if(model == 570)//kt 
+	{
+		SetPlayerPosEx(playerid, vehx, vehy+3, vehz);
+	
+	}
+	else if(model == 427)
+	{
+		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+	}
+	else if(model == 431)
 	{
 		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
 	}
@@ -12219,10 +12282,10 @@ WeaponHackCheck(issuerid, weaponid)
 	return false;
 }
 
-
-OnPlayerTakeDamageWeaponHack(playerid, weaponid)
+forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
+public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {
-	if(WeaponHackCheck(playerid, weaponid))
+	if(WeaponHackCheck(playerid, weaponid) && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid))
 	{
 		new string[128];
 		MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");

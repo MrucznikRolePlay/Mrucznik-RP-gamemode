@@ -662,6 +662,8 @@ new Condom[MAX_PLAYERS];
 new STDPlayer[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
+
+//---------------
 new RepairOffer[MAX_PLAYERS];
 new RepairPrice[MAX_PLAYERS];
 new RefillOffer[MAX_PLAYERS];
@@ -820,8 +822,8 @@ new BrFS[8];
 
 
 //nowe bramy
-new BramaWDol;
-new BramaWDolS = 1;
+
+//new BramaWDolS = 1;
 //fbi
 new FBIdrzwi3;
 new FBIdrzwi4;
@@ -900,11 +902,24 @@ new bramadom1;
 new bramadom1State = 1;//brama NoA
 //new DzwiDMV;
 //new DzwiDMVs = 1;
-//urzad miasta by abram01
+//urzad miasta by abram01 - SIMEONE EDIT
 new urzad;
 new urzad1;
 new urzad2;
 new urzad3;
+
+
+new urzadnewm = 0;
+new urzadnewm2 = 0;
+new urzadnewm3 = 0;
+new dualgdmv1;
+new dualgdmv2;
+new bramadyrektora1;
+new bramadyrektora2;
+new dudmv3;
+new dudmv4;
+
+
 new urzadmove = 0;
 new urzadmove1 = 0;
 new urzadmove2 = 0;
@@ -1037,6 +1052,8 @@ new Refueling[MAX_PLAYERS];
 new Naprawiasie[MAX_PLAYERS];
 
 new TiPJTGBKubi[MAX_PLAYERS];
+new CenaBiletuPociag = 10000;
+
 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
@@ -1083,6 +1100,8 @@ ZerujZmienne(playerid)
 	podczasbicia[playerid] = 0;
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
+	PlayerInfo[playerid][pBiletpociag] = 0;
+	
 	
     lastMsg[playerid] = 0;
 
@@ -1098,7 +1117,7 @@ ZerujZmienne(playerid)
 	CP[playerid] = 0; Robbed[playerid] = 0; ScigaSie[playerid] = 666;
 	CarOffer[playerid] = 999; CarPrice[playerid] = 0; CarID[playerid] = 0; CarCalls[playerid] = 0; GraczDajacy[playerid] = 999; GraczDajacyNeon[playerid] = 999;
 	RobbedTime[playerid] = 0; MoneyMessage[playerid] = 0; Condom[playerid] = 0; GraczDajacyLodz[playerid] = 999; IDAuta[playerid] = 0; //JaKupuje[playerid] = 0; JaWymieniam[playerid] = 0;
-	STDPlayer[playerid] = 0; SexOffer[playerid] = 999; SexPrice[playerid] = 0; GraczDajacySamolot[playerid] = 999; IDLodzi[playerid] = 0; IDSamolotu[playerid] = 0;
+	STDPlayer[playerid] = 0;  SexOffer[playerid] = 999; SexPrice[playerid] = 0; GraczDajacySamolot[playerid] = 999; IDLodzi[playerid] = 0; IDSamolotu[playerid] = 0;
 	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; WynajemOffer[playerid] = 999; DomOffer[playerid] = 999; DomCena[playerid] = 0;
 	TalkingLive[playerid] = INVALID_PLAYER_ID; LiveOffer[playerid] = 999; TakingLesson[playerid] = 0; CenaDawanegoSamolot[playerid] = 999;
 	RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; MapIconsShown[playerid] = 0; CenaDawanegoAuta[playerid] = 999; AntySpam[playerid] = 0; poscig[playerid] = 0;
@@ -1295,6 +1314,9 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pLodz] = 0;
 	PlayerInfo[playerid][pSamolot] = 0;
 	PlayerInfo[playerid][pGaraz] = 0;
+	//Bilet poci¹gu
+	PlayerInfo[playerid][pBiletpociag] = 0;
+	
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);
