@@ -12237,6 +12237,18 @@ stock SetPlayerInteriorEx(playerid, int)
 	return 1;
 }
 
+IsProblematicCode(code)
+{
+	if(code == 15 || code == 40 || code == 50 || code == 52 || code == 11 || code == 5)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
 WeaponAC(playerid)
 {	
 	new weapons[13][2];
