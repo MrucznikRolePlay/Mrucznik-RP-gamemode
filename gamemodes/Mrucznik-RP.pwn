@@ -108,7 +108,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/premium/premium_dialogs.pwn"
 
 //Inne:
-#include "modules/Inne/ibiza.inc" 
+#include "modules/Inne/ibiza.inc"
 #include "modules/Inne/system_aut.pwn"
 #include "modules/Inne/system_kp.pwn"
 #include "modules/Inne/external.pwn"
@@ -1273,12 +1273,23 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+    if(weaponid > 2 && weaponid < 39 && CheckWeaponAC(playerid, GetWeaponSlot(weaponid), weaponid))
+    {
+		if( (weaponid == 37 && (CheckWeaponAC(playerid, GetWeaponSlot(37), 37) || CheckWeaponAC(playerid, GetWeaponSlot(18), 18)))
+			|| (weaponid == 51 && (CheckWeaponAC(playerid, GetWeaponSlot(35), 35) || CheckWeaponAC(playerid, GetWeaponSlot(36), 36) || CheckWeaponAC(playerid, GetWeaponSlot(16), 16))))
+		{
+		}
+		else
+		{
+			new string[128];
+			MruDialog(issuerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
+			format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack.", GetNick(issuerid, true));
+			SendCommandLogMessage(string);
+			KickEx(issuerid);
+		}
+    }
+
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)
-	{
-		return 1;
-	}
-	
-    if(OnPlayerTakeDamageWeaponHack(issuerid, weaponid))
 	{
 		return 1;
 	}
@@ -1601,7 +1612,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 
 		//-------<[     WL      ]>---------
-		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
+		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 		{
 			if(!IsACop(killerid) && lowcaz[killerid] != playerid )
 			{
@@ -1628,7 +1639,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 	#endif
 	return 1;
 }
-
 forward OnCheatDetected(playerid, ip_address[], type, code);
 public OnCheatDetected(playerid, ip_address[], type, code)
 {
@@ -1638,14 +1648,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 	ABroadCast(0x9ACD32AA,string,1);
 	format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 	SendClientMessage(playerid, 0x9ACD32AA, string);
-	if(code == 50 || code == 28)
-	{
-		Kick(playerid);
-	}
-	else 
-	{
-		KickEx(playerid);
-	}
+	KickEx(playerid);
 	return 1;
 
 }
@@ -1962,7 +1965,7 @@ SetPlayerSpawnPos(playerid)
 							{
 							    SetPlayerPosEx(playerid, 1460.4297,-1853.9827,81.9475);
 							    SetPlayerVirtualWorld(playerid, 50);
-							    SetPlayerInterior(playerid, 0);
+							    SetPlayerInterior(playerid, 5);
 								PlayerInfo[playerid][pLocal] = 108;
 			                    Wchodzenie(playerid);
 							}
@@ -5137,7 +5140,6 @@ public OnGameModeInit()
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
-    SetTimer("RPGTimer", 100, true);
 
     for(new i=0;i<MAX_VEHICLES;i++)
     {
