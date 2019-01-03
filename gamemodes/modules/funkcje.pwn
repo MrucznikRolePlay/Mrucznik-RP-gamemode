@@ -12285,7 +12285,7 @@ WeaponHackCheck(issuerid, weaponid)
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {
-	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid))
+	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][pLevel] > 1)
 	{
 		new string[128];
 		MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
