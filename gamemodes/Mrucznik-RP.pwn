@@ -51,7 +51,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <fadescreen>
 #include <ACSBM>
 #include <timestamp>
-#define AC_MAX_CONNECTS_FROM_IP		1
+#define AC_MAX_CONNECTS_FROM_IP		2
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
 
@@ -1634,19 +1634,44 @@ public OnPlayerDeath(playerid, killerid, reason)
 forward OnCheatDetected(playerid, ip_address[], type, code);
 public OnCheatDetected(playerid, ip_address[], type, code)
 {
-	new string[128];
-	if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pAdmin] > 0) return 0;
-	format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] dosta³ kicka. | Kod: %d .", GetNick(playerid), playerid, code);
-	ABroadCast(0x9ACD32AA,string,1);
-	format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
-	SendClientMessage(playerid, 0x9ACD32AA, string);
-	if(code == 50 || code == 28 || code == 27)
+	new string[144];
+	if(type == 0) //Type of cheating (when 0 it returns the ID, when 1 - IP)
 	{
-		Kick(playerid);
+		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNick(playerid), playerid, ip_address);
+		
+		if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pAdmin] > 0) 
+		{
+			//disable all codes for admins
+			return 1;
+		}
+		
+		if(IsProblematicCode(code) && PlayerInfo[playerid][pLevel] > 1)
+		{
+			//disable problematic codes for trusted players
+			return 1;
+		}
+		
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNick(playerid), playerid, ip_address, code);
+		ABroadCast(0x9ACD32AA, string, 1);
+		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
+		SendClientMessage(playerid, 0x9ACD32AA, string);
+		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
+		
+		if(code == 50 || code == 28 || code == 27)
+		{
+			Kick(playerid);
+		}
+		else 
+		{
+			KickEx(playerid);
+		}
 	}
-	else 
+	else //type with ip
 	{
-		KickEx(playerid);
+		printf("Cheats detected (code: %d) ip: %s", code, ip_address);
+		new ac_strtmp[32];
+		format(ac_strtmp, sizeof ac_strtmp, "banip %s", ip_address);
+		SendRconCommand(ac_strtmp);
 	}
 	return 1;
 
