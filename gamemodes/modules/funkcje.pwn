@@ -12289,7 +12289,7 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	{
 		new string[128];
 		MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack.", GetNick(playerid, true));
+		format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack. | Mo¿liwy fakekill: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
 		SendCommandLogMessage(string);
 		KickEx(playerid);
 		return 1;
