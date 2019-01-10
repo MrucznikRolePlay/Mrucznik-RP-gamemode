@@ -19602,12 +19602,15 @@ CMD:sms(playerid, params[])
 		new numerLinii = numerTelefonuOdbiorcy-100;
 		new liczbaPracownikowSAN = GetFractionMembersNumber(FRAC_SN, true);
 		kosztSMS += numerLinii*100;
-		zarobekPracownikaSAN = kosztSMS/liczbaPracownikowSAN;
 		
         if(gSNLockedLine[numerLinii] || liczbaPracownikowSAN == 0) 
 		{
 			GameTextForPlayer(playerid, "~r~Linia zamknieta", 5000, 1);
 			return 1;
+		}
+		else
+		{
+			zarobekPracownikaSAN = kosztSMS/liczbaPracownikowSAN;
 		}
 	}
 	//zwyk³y sms
