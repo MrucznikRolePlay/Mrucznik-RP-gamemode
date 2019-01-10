@@ -12246,7 +12246,7 @@ WeaponAC(playerid)
 		GetPlayerWeaponData(playerid, i, weapons[i][0], weapons[i][1]);
 		if(weapons[i][0] != 0 && CheckWeaponAC(playerid, i, weapons[i][0]))
 		{
-		    if(wapons[i][0] == 46) return false;
+		    if(weapons[i][0] == 46) return false;
 			else return i;
 		}
 	}
