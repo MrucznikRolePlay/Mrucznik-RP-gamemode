@@ -2111,7 +2111,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
 							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
-							DajKase(playerid, 10);
 						}
 						else
 						{
