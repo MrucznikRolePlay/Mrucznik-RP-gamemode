@@ -15289,7 +15289,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 4:
             {
 				new VW; 
-				GetPlayerVirtualWorld(playerid) = VW;
+				VW = GetPlayerVirtualWorld(playerid);
                 new veh = CarData[car][c_ID];
                 new Float:X, Float:Y, Float:Z, Float:A;
                 GetVehiclePos(veh, X, Y, Z);
