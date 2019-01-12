@@ -4267,6 +4267,12 @@ Lotto(number)
 
 //------------[Logi:]----------------------
 
+stock AntiCheatLog(text[])
+{
+	new plik[32] = "logi/anticheatlog.log";
+	Log(plik, text);
+}
+
 stock VehicleErrorLog(text[])
 {
 	new plik[32] = "logi/vehicleerror.log";
