@@ -2017,7 +2017,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla pracowników UM");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla pracowników UM/USSS");
 							return 1;
 						}
 			        }
@@ -2025,7 +2025,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
 				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//g³ówna sala urzêdu
 				        SetPlayerVirtualWorld(playerid,50);
-				        SetPlayerInterior(playerid,5);
+				        SetPlayerInterior(playerid,0);
 	                    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
 	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 9 - G³ówna sala urzêdu <<<<");
@@ -2110,8 +2110,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
-							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
-							DajKase(playerid, 10);
+							GameTextForPlayer(playerid, "~p~by Rockstar", 5000, 1);
 						}
 						else
 						{
