@@ -5472,7 +5472,12 @@ return 0;
 }
 public OnPlayerConnect(playerid)
 {
+<<<<<<< HEAD
 //SendClientMessage(playerid,COLOR_YELLOW,">Anim System by [VLA]Wooz1e Loaded(www.vla-team.com)Write /animhelp");
 SendClientMessage(playerid, COLOR_YELLOW, " ");
 return 1;
+=======
+	SendClientMessage(playerid,COLOR_YELLOW,">Anim System by [VLA]Wooz1e za³adowany. Wpisz /animhelp aby wyœwietliæ listê dostêpnych animacji.");
+	return 1;
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 }

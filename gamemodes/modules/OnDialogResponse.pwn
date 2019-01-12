@@ -2110,7 +2110,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
+<<<<<<< HEAD
 							GameTextForPlayer(playerid, "~p~by Rockstar", 5000, 1);
+=======
+							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
+							DajKase(playerid, 10);
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 						}
 						else
 						{
@@ -15884,24 +15889,50 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(gPlayerLogged[playerid] == 1)
 			{
 				new string[128];
+<<<<<<< HEAD
 				new TypedPlayer = strval(inputtext);
 				TypedPlayer = FunkcjaK(inputtext);//--Funkcja wp³acania na k
 				if (TypedPlayer > kaska[playerid] || TypedPlayer < 1)
+=======
+				new money = strval(inputtext);
+				money = FunkcjaK(inputtext);//--Funkcja wp³acania na k
+				if (money > kaska[playerid] || money < 1)
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				{
 					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota!");
 					return 1;
 				}
+<<<<<<< HEAD
 				DajKase(playerid,-TypedPlayer);
+=======
+				if(PlayerInfo[playerid][pAccount] + money > 2_000_000_000)
+				{
+					sendTipMessage(playerid, "Konto bankowe przepe³nione, mo¿emy przechowywaæ nie wiêcej ni¿ 2 miliardy!");
+					return 1;
+				}
+				ZabierzKase(playerid, money);
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				new currentFunds = PlayerInfo[playerid][pAccount];
 				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
 				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", currentFunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
+<<<<<<< HEAD
 				PlayerInfo[playerid][pAccount]=TypedPlayer+PlayerInfo[playerid][pAccount];
 				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", TypedPlayer);
+=======
+				PlayerInfo[playerid][pAccount] = money + PlayerInfo[playerid][pAccount];
+				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", money);
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
 				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
+<<<<<<< HEAD
+=======
+				
+				format(string, sizeof(string), "Gracz UID: %d, Nick: %s wplacil na swoje konto %d$, nowy stan: %d$", PlayerInfo[playerid][pUID], GetNick(playerid), money, PlayerInfo[playerid][pAccount]);
+				PayLog(string);
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 			}	
 			return 1;
 		}
@@ -15991,10 +16022,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(gPlayerLogged[playerid] == 1)
 			{
 				new string[128];
+<<<<<<< HEAD
 				new TypedPlayer = strval(inputtext);
 				TypedPlayer = FunkcjaK(inputtext);//--Funkcja wp³acania na k
 				
 				if (TypedPlayer > PlayerInfo[playerid][pAccount] || TypedPlayer < 1)//Zabezpieczenie
+=======
+				new money = strval(inputtext);
+				money = FunkcjaK(inputtext);//--Funkcja wp³acania na k
+				
+				if (money > PlayerInfo[playerid][pAccount] || money < 1)//Zabezpieczenie
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				{
 					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota");
 					return 1;
@@ -16005,15 +16043,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
 				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", currentFunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
+<<<<<<< HEAD
 				format(string, sizeof(string), "  Depozyt: {80FF00}$-%d", TypedPlayer);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				//Czynnoœci:
 				DajKase(playerid,TypedPlayer);
 				PlayerInfo[playerid][pAccount]=PlayerInfo[playerid][pAccount]-TypedPlayer;
+=======
+				format(string, sizeof(string), "  Depozyt: {80FF00}$-%d", money);
+				SendClientMessage(playerid, COLOR_GRAD4, string);
+				//Czynnoœci:
+				DajKase(playerid, money);
+				PlayerInfo[playerid][pAccount] -= money;
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				//Komunikaty:
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
 				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
+<<<<<<< HEAD
+=======
+				
+				format(string, sizeof(string), "Gracz UID: %d, Nick: %s wyplacil ze swojego konta %d$, nowy stan: %d$", PlayerInfo[playerid][pUID], GetNick(playerid), money, PlayerInfo[playerid][pAccount]);
+				PayLog(string);
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 			}	
 			return 1;
 		}
@@ -16029,6 +16081,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else//Jeœli przejdzie dalej
 		{
 			new string[128];
+<<<<<<< HEAD
 			new sendername[MAX_PLAYER_NAME];
 			CashAndID[playerid][ID] = strval(inputtext);
 			
@@ -16041,6 +16094,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", sendername);
 					
 					//czynnoœci:
+=======
+			new giveplayerid = strval(inputtext);
+			
+			if (IsPlayerConnected(giveplayerid) && gPlayerLogged[giveplayerid])
+			{
+				if(giveplayerid != playerid)
+				{
+					SetPVarInt(playerid, PVAR_PRZELEW_ID, giveplayerid);
+					format(string, sizeof(string), "Wpisz poni¿ej sumê, ktor¹ chcesz przelaæ do %s", GetNick(giveplayerid));
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 					ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "Odrzuæ");
 				}
 				else
@@ -16071,6 +16134,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new sendername[MAX_PLAYER_NAME];
 			new giveplayer[MAX_PLAYER_NAME];
+<<<<<<< HEAD
 			CashAndID[playerid][Kwota] = strval(inputtext);
 			CashAndID[playerid][Kwota] = FunkcjaK(inputtext);//Zbugowany string 
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
@@ -16094,6 +16158,36 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PayLog(string);//Zapis do paylogów
 				
 				if(CashAndID[playerid][Kwota] >= 5000000)//Wiadomosc dla adminow
+=======
+			new giveplayerid = GetPVarInt(playerid, PVAR_PRZELEW_ID);
+			new money = FunkcjaK(inputtext);//Zbugowany string 
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+			
+			if(money >= 1 && money <= PlayerInfo[playerid][pAccount])//Zabezpieczenie 
+			{
+				//Czynnoœci:
+				PlayerInfo[playerid][pAccount] -= money;
+				PlayerInfo[giveplayerid][pAccount] += money;
+				
+				//komunikaty:
+				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s . Pieni¹dze znajduj¹ siê na twoim koncie.", money, sendername);
+				SendClientMessage(giveplayerid, COLOR_RED, string);
+				
+				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", giveplayer, money);
+				SendClientMessage(playerid, COLOR_RED, string); 
+				
+				format(string, sizeof(string), "Gracz UID: %d, Nick: %s dokonal przelewu %d$ dla gracza %s uid: %d, nowy stan: %d$", 
+					PlayerInfo[playerid][pUID], 
+					sendername, 
+					money, 
+					giveplayer, 
+					PlayerInfo[giveplayerid][pUID], 
+					PlayerInfo[playerid][pAccount]);
+				PayLog(string);
+				
+				if(money >= 5_000_000)//Wiadomosc dla adminow
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				{
 					SendAdminMessage(COLOR_YELLOW, string);
 					return 1;
@@ -16118,8 +16212,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			new giveplayer[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+<<<<<<< HEAD
 			new FracGracza = PlayerInfo[playerid][pLider];
 			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
+=======
+			new frakcja = PlayerInfo[playerid][pLider];
+			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[frakcja]);
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
 			return 1;
 		}
@@ -16134,6 +16233,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			new string[128];
+<<<<<<< HEAD
 			new FracGracza = PlayerInfo[playerid][pLider];
 			new giveplayer[MAX_PLAYER_NAME];
 			CashAndID2[playerid][ID] = strval(inputtext);
@@ -16141,6 +16241,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(IsPlayerConnected(CashAndID2[playerid][ID]))
 			{
 				format(string, sizeof(string), "Odbiorca: %s\nWysy³aj¹cy: %s\nWpisz poni¿ej kwotê, która ma zostaæ przelana na jego konto.", giveplayer, FractionNames[FracGracza]); 
+=======
+			new frakcja = PlayerInfo[playerid][pLider];
+			new giveplayerid = strval(inputtext);
+			if(IsPlayerConnected(giveplayerid) && gPlayerLogged[giveplayerid])
+			{
+				SetPVarInt(playerid, PVAR_PRZELEW_ID, giveplayerid);
+				format(string, sizeof(string), "Odbiorca: %s\nWysy³aj¹cy: %s\nWpisz poni¿ej kwotê, która ma zostaæ przelana na jego konto.", GetNick(giveplayerid), FractionNames[frakcja]); 
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, "Przelewy frakcji >> ID >> Kwota", string, "Wykonaj", "Odrzuæ"); 
 				
 			}
@@ -16154,7 +16262,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	else if(dialogid == 1076)//Wpisywanie kwoty i ca³oœæ funkcji - przelew z konta organizacji na gracza
 	{
+<<<<<<< HEAD
 	
+=======
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 		if(!response)
 		{
 		
@@ -16163,6 +16274,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
+<<<<<<< HEAD
 			CashAndID2[playerid][Kwota] = strval(inputtext);//Przypisuje wartoœæ dla string kwota
 			new FracGracza = GetPlayerFraction(playerid);//Pobiera nazwê frakcji gracza
 			CashAndID2[playerid][Kwota] = FunkcjaK(inputtext);
@@ -16203,6 +16315,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendAdminMessage(COLOR_WHITE, bugstring);
 					SendAdminMessage(COLOR_YELLOW, "|=========================|");
 				}
+=======
+			new string[256];
+			new sendername[MAX_PLAYER_NAME];//Nadawca
+			new giveplayer[MAX_PLAYER_NAME];//Odbiorca
+			new giveplayerid = GetPVarInt(playerid, PVAR_PRZELEW_ID);
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid);
+			
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+			
+			if(money <= 0 || money > Sejf_Frakcji[frakcja])
+			{
+				sendErrorMessage(playerid, "Nieprawid³owa kwota przelewu!"); 
+				return 1;
+			}
+			
+			PlayerInfo[giveplayerid][pAccount] += money;
+			Sejf_Add(frakcja, -money);
+			Sejf_Save(frakcja);
+			
+			format(string, sizeof(string), ">>>Otrzyma³eœ przelew w wysokoœci %d$, od lidera %s -> %s", money, FractionNames[frakcja], sendername); 
+			SendClientMessage(giveplayerid, COLOR_RED, string);
+			
+			format(string, sizeof(string), ">>>Wys³a³eœ przelew w wysokoœci %d$, na konto %s, z konta %s", money, giveplayer, FractionNames[frakcja]); 
+			SendClientMessage(playerid, COLOR_RED, string);
+			
+			format(string, sizeof(string), ">>>Lider %s[%d] wys³a³ %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid);
+			SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string);
+			
+			format(string, sizeof(string), "Gracz UID: %d, Nick: %s dokonal przelewu frakcyjnego (frakcja %d) %d$ dla gracza %s uid: %d, nowy stan: %d$", 
+					PlayerInfo[playerid][pUID], 
+					sendername, 
+					frakcja,
+					money, 
+					giveplayer, 
+					PlayerInfo[giveplayerid][pUID], 
+					Sejf_Frakcji[frakcja]);
+			PayLog(string);
+				
+			if(money >= 2500000)//Warning dla adminów, gdy gracz przekroczy 2.5kk 
+			{
+				SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|"); 
+				format(string, sizeof(string), "%s[%d] wykona³ przelew %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid); 
+				SendAdminMessage(COLOR_WHITE, string); 
+				format(string, sizeof(string), "Frakcja gracza(z sejfu): %s", FractionNames[frakcja]);
+				SendAdminMessage(COLOR_WHITE, string);
+				SendAdminMessage(COLOR_YELLOW, "|=========================|");
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 			}
 			return 1;
 		}
@@ -16218,6 +16379,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
+<<<<<<< HEAD
 			new kwotaa = strval(inputtext);
 			kwotaa = FunkcjaK(inputtext);
 			new FracGracza = GetPlayerFraction(playerid);
@@ -16233,6 +16395,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ZabierzKase(playerid, kwotaa); 
 					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, kwotaa); 
 					SendLeaderRadioMessage(FracGracza, COLOR_LIGHTGREEN, string); 
+=======
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid);
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(money >= 1)
+			{
+				if(money <= kaska[playerid])
+				{
+					new string[128];
+					Sejf_Add(frakcja, money);
+					Sejf_Save(frakcja);
+					ZabierzKase(playerid, money); 
+					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, money); 
+					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
+					
+					format(string, sizeof(string), "Gracz UID: %d, Nick: %s wplacil na konto frakcyjne (frakcja %d) %d$, nowy stan: %d$", 
+						PlayerInfo[playerid][pUID], 
+						sendername, 
+						frakcja,
+						money,
+						Sejf_Frakcji[frakcja]);
+					PayLog(string);
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				}
 				else
 				{
@@ -16262,6 +16448,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
+<<<<<<< HEAD
 			new kwotaa = strval(inputtext); 
 			kwotaa = FunkcjaK(inputtext);
 			new FracGracza = GetPlayerFraction(playerid); 
@@ -16280,6 +16467,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s[ID: %d] wyp³aci³ %d$ z konta %s", sendername, playerid, kwotaa, FractionNames[FracGracza]); 
 					PayLog(string);//Zapis do paylogów
 					if(kwotaa >= 2000000)
+=======
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid); 
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(money >= 1)
+			{
+				if(money <= Sejf_Frakcji[frakcja])
+				{
+					new string[128];
+					Sejf_Add(frakcja, -money);
+					Sejf_Save(frakcja);
+					DajKase(playerid, money); 
+					format(string, sizeof(string), "Lider %s wyp³aci³ %d$ z konta organizacji", sendername, money); 
+					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
+					
+					format(string, sizeof(string), "Gracz UID: %d, Nick: %s wyplacil z konta frakcyjnego (frakcja %d) %d$, nowy stan: %d$", 
+						PlayerInfo[playerid][pUID], 
+						sendername, 
+						frakcja,
+						money,
+						Sejf_Frakcji[frakcja]);
+					PayLog(string);
+					
+					if(money >= 2000000)
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 					{
 						
 						SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|");
@@ -16325,6 +16538,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				if(kaska[playerid] >= CenaBiletuPociag)				        
 				{
+<<<<<<< HEAD
 						ZabierzKase(playerid, CenaBiletuPociag);
 						Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
 						PlayerInfo[playerid][pBiletpociag] = 1;
@@ -16336,6 +16550,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							
 						format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), CenaBiletuPociag);
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+=======
+					ZabierzKase(playerid, CenaBiletuPociag);
+					Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnêtrzne Sejf_Save
+					PlayerInfo[playerid][pBiletpociag] = 1;
+					new string[128]; 
+					format(string, sizeof(string), "Zakupi³eœ bilet za %d$", CenaBiletuPociag); 
+					sendTipMessage(playerid, string);
+					format(string, sizeof(string), "%s[ID: %d] zakupi³ bilet za %d$", sendername, playerid, CenaBiletuPociag); 
+					SendLeaderRadioMessage(FRAC_KT, COLOR_LIGHTGREEN, string);
+						
+					format(string, sizeof(string), "* %s zakupi³ bilet do poci¹gu za %d$, schowa³ go do kieszeni.", GetNick(playerid, true), CenaBiletuPociag);
+					ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+>>>>>>> b3315e421aaf675ed29194cc3f08f1087e0c21d5
 				}
 				else
 				{

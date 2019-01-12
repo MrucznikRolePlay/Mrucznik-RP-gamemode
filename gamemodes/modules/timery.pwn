@@ -2466,7 +2466,7 @@ public JednaSekundaTimer()
 		// serce zapisu broni
 		if(State >= 1 && State <= 6)
 		{
-			if(PlayerInfo[i][pGun2] >= 2)
+			if(MaZapisanaBron(i))//if(PlayerInfo[i][pGun2] >= 2) - dziwne, ¿e wczeœniej nikt tego b³êdu nie zauwa¿y³.
 			{
                 weaponID = GetPlayerWeapon(i);
                 ammo = GetPlayerAmmo(i);
