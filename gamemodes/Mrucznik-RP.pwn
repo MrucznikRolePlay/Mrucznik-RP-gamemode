@@ -1364,10 +1364,13 @@ public OnPlayerDeath(playerid, killerid, reason)
     }
     if(reason == 38 && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
     {
-	    MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNick(killerid, true));
+	    //MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
+		//format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNick(killerid, true));
+        //SendCommandLogMessage(string);
+        //KickEx(killerid);
+        format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNick(playerid, true), playerid);
         SendCommandLogMessage(string);
-        KickEx(killerid);
+        SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
     }
 
     if(ZoneAttacker[playerid])
