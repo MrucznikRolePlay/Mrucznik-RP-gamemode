@@ -5,7 +5,7 @@ forward CheckCode2003(killerid, playerid);
 public CheckCode2003(killerid, playerid)
 {
     new string[256];
-    if(IsPlayerConnected(playerid)
+    if(IsPlayerConnected(playerid))
 	{
     	MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
 		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNick(killerid, true));
