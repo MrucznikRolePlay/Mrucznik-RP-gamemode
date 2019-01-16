@@ -8118,7 +8118,7 @@ FunkcjaK(string[])
 		{
 			strdel(string, strlen(string)-ilosc_k, strlen(string));
 			x=floatstr(string);
-			return floatround((ilosc_k==1) ? (x*1000) : ((ilosc_k==2) ? (x*1000000) : (x*1000000000)), floatround_tozero); //zbugowane potêgi: x*(1000^ilosc_k)
+			return floatround((ilosc_k==1) ? (x*1000) : ((ilosc_k==2) ? (x*1000000) : (x*1000000000)), floatround_tozero); //zbugowane potêgi: x*(1000^ilosc_k) 
 		}
 	}
 	return strval(string);
