@@ -17097,7 +17097,7 @@ CMD:odpal(playerid)
 	return 1;
 }
 
-CMD:informacje(playerid)
+CMD:forum(playerid)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
@@ -17111,7 +17111,7 @@ CMD:informacje(playerid)
         if(PlayerInfo[playerid][pAdmin] >= 1)
         {
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "Adres naszego forum i Team Speak to: ''Mrucznik-rp.pl'' (%s)", sendername);
+			format(string, sizeof(string), "Adres forum: www.Mrucznik-RP.pl !! (%s)", sendername);
 			SendClientMessageToAll(0xff00ff, string);
 		}
 		else
@@ -19563,12 +19563,15 @@ CMD:sms(playerid, params[])
 		new numerLinii = numerTelefonuOdbiorcy-100;
 		new liczbaPracownikowSAN = GetFractionMembersNumber(FRAC_SN, true);
 		kosztSMS += numerLinii*100;
-		zarobekPracownikaSAN = kosztSMS/liczbaPracownikowSAN;
 		
         if(gSNLockedLine[numerLinii] || liczbaPracownikowSAN == 0) 
 		{
 			GameTextForPlayer(playerid, "~r~Linia zamknieta", 5000, 1);
 			return 1;
+		}
+		else
+		{
+			zarobekPracownikaSAN = kosztSMS/liczbaPracownikowSAN;
 		}
 	}
 	//zwyk³y sms
@@ -26512,7 +26515,55 @@ CMD:ban(playerid, params[])
 	}
 	return 1;
 }
-
+CMD:banip(playerid, params[])
+{
+    if(IsPlayerConnected(playerid))
+    {
+    	new var[32];
+    	new powod[32];
+    	if(sscanf(params, "s[32]s[32]", var, powod))
+		{
+			sendTipMessage(playerid, "U¿yj /banip [ip] [powod]");
+			return 1;
+		}
+	    if(AntySpam[playerid] == 1)
+	    {
+	        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
+	        return 1;
+	    }
+		new str[128];
+	    if(PlayerInfo[playerid][pAdmin] >= 1)
+        {
+            if(strlen(var) < 7 || strlen(var) > 16)
+            {
+                sendErrorMessage(playerid, "Niepoprawna d³ugosc IP!");
+                return 1;
+            }
+            new count, cpos;
+            while((cpos = strfind(var, ".", false, cpos)) != -1)
+            {
+                count++;
+                cpos++;
+            }
+            if(count != 3)
+            {
+                sendErrorMessage(playerid, "Niepoprawny adres IP (dots)!");
+                return 1;
+            }
+            format(str, sizeof(str), "ADM: %s - zablokowal IP: %s powód: %s", GetNick(playerid), var, powod);
+            SendCommandLogMessage(str);
+            MruMySQL_BanujOffline("Brak", powod, playerid, var);
+            format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
+            SendClientMessage(playerid, COLOR_LIGHTRED, str);
+            BanLog(str);
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
+	return 1;
+}
 CMD:freeze(playerid, params[]) return cmd_zamroz(playerid, params);
 CMD:zamroz(playerid, params[])
   {

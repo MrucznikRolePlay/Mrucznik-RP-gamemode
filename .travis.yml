@@ -9,6 +9,7 @@ branches:
   only:
   - master
   - development
+  - pecet
   - lukesqly
   - simeone
 
@@ -49,6 +50,7 @@ deploy:
     repo: Mrucznik/Mrucznik-RP-2.5
     branch: 
       - development
+      - pecet
       - lukesqly
       - simeone
 - provider: releases
