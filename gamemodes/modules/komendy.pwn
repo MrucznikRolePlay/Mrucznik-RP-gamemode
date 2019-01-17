@@ -14881,7 +14881,7 @@ CMD:zaparkuj(playerid)
                 CarData[VehicleUID[lVeh][vUID]][c_Pos][0] = X;
                 CarData[VehicleUID[lVeh][vUID]][c_Pos][1] = Y;
                 CarData[VehicleUID[lVeh][vUID]][c_Pos][2] = Z;
-				CarData[VehicleUID][lVeh][vUID][c_VW] = VW; 
+				CarData[VehicleUID[lVeh][vUID]][c_VW] = VW; 
                 CarData[VehicleUID[lVeh][vUID]][c_Rot] = A;
                 Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE);
 
