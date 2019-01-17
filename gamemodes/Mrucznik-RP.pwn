@@ -1668,7 +1668,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
         AntiCheatLog(string);
-        
+		
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
 			Kick(playerid);
