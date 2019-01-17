@@ -15288,6 +15288,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case 4:
             {
+				new VW = GetPlayerVirtualWorld(playerid);
                 new veh = CarData[car][c_ID];
                 new Float:X, Float:Y, Float:Z, Float:A;
                 GetVehiclePos(veh, X, Y, Z);
@@ -15295,6 +15296,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_Pos][0] = X;
                 CarData[car][c_Pos][1] = Y;
                 CarData[car][c_Pos][2] = Z;
+				CarData[car][c_VW] = VW; //Zapisywanie VirtualWorldu
                 CarData[car][c_Rot] = A;
                 Car_Save(car, CAR_SAVE_STATE);
                 Car_Unspawn(veh);
