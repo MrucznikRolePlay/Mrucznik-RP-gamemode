@@ -3246,47 +3246,6 @@ CMD:respawn(playerid)
 	return 1;
 }
 
-CMD:malyrespawn(playerid)
-{
-	new string[128];
-	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
-	{
-		format(string, sizeof(string), "Admin %s zrespawnowa³ auta obok siebie!", GetNick(playerid, true), playerid);
-		BroadCast(COLOR_PANICRED, string);
-		
-		new bool:used[CAR_AMOUNT] = {false, ... };
-		foreach(Player, p)
-		{
-			if(IsPlayerInAnyVehicle(p))
-			{
-				new veh = GetPlayerVehicleID(p);
-				used[veh] = true;
-			}
-		}
-		for(new v; v < MAX_VEHICLES; v++)
-		{
-			if(!used[v])
-			{
-				new Float:vx, Float:vy, Float:vz;
-				GetVehiclePos(v, vx, vy, vz);
-				if(IsPlayerInRangeOfPoint(playerid, 100.0, vx, vy, vz))
-				{
-					SetVehicleToRespawn(v);
-					if(Car_GetOwnerType(v) == CAR_OWNER_PLAYER)
-					{
-						Car_Unspawn(v);
-					}
-				}
-			}
-		}
-	}
-	else
-	{
-		sendErrorMessage(playerid, "Poczekaj a¿ skoñczy siê to odliczanie!!!");
-	}
-	return 1;
-}
-
 CMD:respp(playerid, params[]) return cmd_respawnplayer(playerid, params);
 CMD:respawnplayer(playerid, params[])
 {
@@ -17136,7 +17095,7 @@ CMD:odpal(playerid)
 	return 1;
 }
 
-CMD:informacje(playerid)
+CMD:forum(playerid)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
@@ -17150,7 +17109,7 @@ CMD:informacje(playerid)
         if(PlayerInfo[playerid][pAdmin] >= 1)
         {
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "Adres naszego forum i Team Speak to: ''Mrucznik-rp.pl'' (%s)", sendername);
+			format(string, sizeof(string), "Adres forum: www.Mrucznik-RP.pl !! (%s)", sendername);
 			SendClientMessageToAll(0xff00ff, string);
 		}
 		else
@@ -26966,7 +26925,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setint /getint /setvw /getvw /wybieralka /clearwlall");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /mordinfo /gotomechy /podglad /gotocar /ip");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /check /pojazdygracza /checkprawko /sb /pokazcb");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /malyrespawn /carjump /goto /up /getcar /gethere");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /carjump /goto /up /getcar /gethere");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint /naprawskin /czyjtonumer");

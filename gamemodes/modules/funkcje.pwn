@@ -4267,6 +4267,12 @@ Lotto(number)
 
 //------------[Logi:]----------------------
 
+stock AntiCheatLog(text[])
+{
+	new plik[32] = "logi/anticheatlog.log";
+	Log(plik, text);
+}
+
 stock VehicleErrorLog(text[])
 {
 	new plik[32] = "logi/vehicleerror.log";
@@ -12255,7 +12261,7 @@ IsProblematicCode(code)
 	|| code == 40 //40 Protection from the sandbox
 	|| code == 49 //49 Anti-flood callback functions
 	|| code == 50 //50 Anti-flood change seat
-	|| code == 52 //52 Anti-NOP's 
+	|| code == 52 //52 Anti-NOP's
 	)
 	{
 		return 1;
@@ -12275,7 +12281,8 @@ WeaponAC(playerid)
 		GetPlayerWeaponData(playerid, i, weapons[i][0], weapons[i][1]);
 		if(weapons[i][0] != 0 && CheckWeaponAC(playerid, i, weapons[i][0]))
 		{
-			return i;
+		    if(weapons[i][0] == 46) return false;
+			else return i;
 		}
 	}
 	return false;
@@ -12317,10 +12324,12 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][pLevel] > 1)
 	{
 		new string[128];
-		MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack. | Mo¿liwy fakekill: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
+		//MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
+		//format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack. | Mo¿liwy fakekill: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
+		//SendCommandLogMessage(string);
+		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
 		SendCommandLogMessage(string);
-		KickEx(playerid);
+		//KickEx(playerid);
 		return 1;
 	}
 	return 0;
