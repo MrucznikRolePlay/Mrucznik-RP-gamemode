@@ -2110,7 +2110,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
-							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
+							GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
 						}
 						else
 						{
