@@ -2025,7 +2025,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
 				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//g³ówna sala urzêdu
 				        SetPlayerVirtualWorld(playerid,50);
-				        SetPlayerInterior(playerid,5);
+				        SetPlayerInterior(playerid,0);
 	                    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
 	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 9 - G³ówna sala urzêdu <<<<");

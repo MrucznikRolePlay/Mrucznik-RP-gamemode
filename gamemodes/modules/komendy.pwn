@@ -22107,7 +22107,7 @@ CMD:wyjdz(playerid)
 			PlayerInfo[playerid][pLocal] = 108;
 			TogglePlayerControllable(playerid, 0);
 			SetPlayerInterior(playerid,5);
-			SetPlayerVirtualWorld(playerid,50);
+			SetPlayerVirtualWorld(playerid,0);
             Wchodzenie(playerid);
 		    return 1;
 		}
