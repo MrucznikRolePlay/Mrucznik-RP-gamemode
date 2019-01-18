@@ -17111,7 +17111,7 @@ CMD:forum(playerid)
         if(PlayerInfo[playerid][pAdmin] >= 1)
         {
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "Adres forum: www.Mrucznik-RP.pl !! (%s)", sendername);
+			format(string, sizeof(string), "Adres forum: Mrucznik-RP.pl !! ((%s))", sendername);
 			SendClientMessageToAll(0xff00ff, string);
 		}
 		else
