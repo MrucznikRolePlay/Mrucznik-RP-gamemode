@@ -14874,12 +14874,14 @@ CMD:zaparkuj(playerid)
 			{
                 new Float:X, Float:Y, Float:Z;
 				new Float:A;
+				new VW = GetPlayerVirtualWorld(playerid); 
 				GetVehicleZAngle(lVeh, A);
 				GetPlayerPos(playerid, X,Y,Z);
 
                 CarData[VehicleUID[lVeh][vUID]][c_Pos][0] = X;
                 CarData[VehicleUID[lVeh][vUID]][c_Pos][1] = Y;
                 CarData[VehicleUID[lVeh][vUID]][c_Pos][2] = Z;
+				CarData[VehicleUID[lVeh][vUID]][c_VW] = VW; 
                 CarData[VehicleUID[lVeh][vUID]][c_Rot] = A;
                 Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE);
 
@@ -17109,7 +17111,7 @@ CMD:forum(playerid)
         if(PlayerInfo[playerid][pAdmin] >= 1)
         {
 			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "Adres forum: www.Mrucznik-RP.pl !! (%s)", sendername);
+			format(string, sizeof(string), "Adres forum: Mrucznik-RP.pl !! ((%s))", sendername);
 			SendClientMessageToAll(0xff00ff, string);
 		}
 		else
@@ -19961,29 +19963,37 @@ CMD:kupbiletpociag(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pBiletpociag] == 1)
+		if(IsAtTicketMachine(playerid))
 		{
-			//zmienne:
-			new string[128];
-			//Komunikaty:
-			sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
-			format(string, sizeof(string), "* %s mruczy (jak Mrucznik) na bilet, który ju¿ posiada.", GetNick(playerid, true));//ciekawostka - mrucznik
-			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-			return 1;
+			if(PlayerInfo[playerid][pBiletpociag] == 1)
+			{
+				//zmienne:
+				new string[128];
+				//Komunikaty:
+				sendErrorMessage(playerid, "Posiadasz ju¿ bilet do poci¹gu!");
+				format(string, sizeof(string), "* %s mruczy (jak Mrucznik) na bilet, który ju¿ posiada.", GetNick(playerid, true));//ciekawostka - mrucznik
+				ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+				return 1;
+			}
+			else if(PlayerInfo[playerid][pBiletpociag] == 0)
+			{
+				//zmienne
+				new fracgracza = GetPlayerFraction(playerid);
+				new string[256];
+				new giveplayer[MAX_PLAYER_NAME];
+				GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+				//czynnoœci:
+				format(string, sizeof(string), "{FFFF00}Korporacja Transportowa\n{FFFFFF}Cena: {00FF00}%d$\n{FFFFFF}Imiê_Nazwisko: {00FF00}%s\n{FFFFFF}Twoja organizacja: {AA3333}%s\n{FFFFFF}Zni¿ka dla twojej organizacji: {00FF00}0$\n{FFFFFF}Ulga: {00FF00}0$", CenaBiletuPociag, giveplayer, FractionNames[fracgracza]);//Skrypt na zni¿ki i ulgi w trakcie pisania, celowo ie ma tutaj wartoœci
+				ShowPlayerDialogEx(playerid, 1090, DIALOG_STYLE_MSGBOX, "Maszyna do biletów", string, "Zakup", "OdejdŸ");
+				//komunikaty:
+				format(string, sizeof(string), "* %s wstukuje w maszynê UID dowodu osobistego, wybiera trasê i ulgê.", GetNick(playerid, true));
+				ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+			}
 		}
-		else if(PlayerInfo[playerid][pBiletpociag] == 0)
+		else
 		{
-			//zmienne
-			new fracgracza = GetPlayerFraction(playerid);
-			new string[256];
-			new giveplayer[MAX_PLAYER_NAME];
-			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-			//czynnoœci:
-			format(string, sizeof(string), "{FFFF00}Korporacja Transportowa\n{FFFFFF}Cena: {00FF00}%d$\n{FFFFFF}Imiê_Nazwisko: {00FF00}%s\n{FFFFFF}Twoja organizacja: {AA3333}%s\n{FFFFFF}Zni¿ka dla twojej organizacji: {00FF00}0$\n{FFFFFF}Ulga: {00FF00}0$", CenaBiletuPociag, giveplayer, FractionNames[fracgracza]);//Skrypt na zni¿ki i ulgi w trakcie pisania, celowo ie ma tutaj wartoœci
-			ShowPlayerDialogEx(playerid, 1090, DIALOG_STYLE_MSGBOX, "Maszyna do biletów", string, "Zakup", "OdejdŸ");
-			//komunikaty:
-			format(string, sizeof(string), "* %s wstukuje w maszynê UID dowodu osobistego, wybiera trasê i ulgê.", GetNick(playerid, true));
-			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+			sendErrorMessage(playerid, "Nie jesteœ przy maszynie do kupna biletów!"); 
+			return 1;
 		}
 	}
 	return 1;
@@ -21503,7 +21513,7 @@ CMD:wyjdz(playerid)
 		|| IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
 		|| IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732))//Sale Treningowe
 		{
-			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
+			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5] Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
         }
 		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1144.0762939453, -1324.9822998047, 419.69830322266))//wypoczynek srodek
 		{
@@ -22104,7 +22114,7 @@ CMD:wyjdz(playerid)
 			GameTextForPlayer(playerid, "~w~Witamy po egzaminie!", 5000, 1);
 			PlayerInfo[playerid][pLocal] = 108;
 			TogglePlayerControllable(playerid, 0);
-			SetPlayerInterior(playerid,5);
+			SetPlayerInterior(playerid,0);
 			SetPlayerVirtualWorld(playerid,50);
             Wchodzenie(playerid);
 		    return 1;

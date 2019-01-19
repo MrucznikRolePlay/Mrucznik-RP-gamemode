@@ -2025,7 +2025,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
 				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//g³ówna sala urzêdu
 				        SetPlayerVirtualWorld(playerid,50);
-				        SetPlayerInterior(playerid,5);
+				        SetPlayerInterior(playerid,0);
 	                    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
 	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 9 - G³ówna sala urzêdu <<<<");
@@ -2110,7 +2110,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
-							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
+							GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
 						}
 						else
 						{
@@ -15288,6 +15288,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case 4:
             {
+				new VW = GetPlayerVirtualWorld(playerid);
                 new veh = CarData[car][c_ID];
                 new Float:X, Float:Y, Float:Z, Float:A;
                 GetVehiclePos(veh, X, Y, Z);
@@ -15295,6 +15296,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_Pos][0] = X;
                 CarData[car][c_Pos][1] = Y;
                 CarData[car][c_Pos][2] = Z;
+				CarData[car][c_VW] = VW; //Zapisywanie VirtualWorldu
                 CarData[car][c_Rot] = A;
                 Car_Save(car, CAR_SAVE_STATE);
                 Car_Unspawn(veh);
