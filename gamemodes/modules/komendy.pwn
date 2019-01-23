@@ -10066,6 +10066,46 @@ CMD:setname(playerid, params[])
 	}
 	return 1;
 }
+CMD:adminduty(playerid, params[])
+{
+	if(PlayerInfo[playerid][pAdmin] >= 1 )
+	{
+		new string[MAX_PLAYER_NAME];
+		new NickAdmin = params;
+		new OldNick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, OldNick, OldNick);
+		OldNick = PlayerInfo[playerid][pAdminDutyNickOff];
+		if(PlayerInfo[playerid][pAdminDuty] == 0)
+		{
+			if(isnull(params))
+			{
+				sendTipMessage(playerid, "U¿yj /adminduty [NICK 4UM]");
+				return 1;
+			}
+			else
+			{
+			format(string, string, "Administrator %s wszed³ na s³u¿bê administratora! [/report]", NickAdmin);
+			SendClientMessageToAll(COLOR_RED, string); 
+			format(string, string, "%s",  NickAdmin); 
+			SetPlayerName(playerid, string);
+			}
+		}
+		else if(PlayerInfo[playerid][pAdminDuty] == 1))
+		{
+			format(string, string, "%s", PlayerInfo[playerid][pAdminDutyNickOff]);
+			SetPlayerName(playerid, string); 
+			format(string, string, "Administrator %s zszed³ z s³u¿by administratora!", Nickadmin); 
+			SendClientMessageToAll(COLOR_RED, string);
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie jesteœ administratorem, wiêc nie mo¿esz tego u¿yæ!"); 
+		return 1; 
+	}
+
+	return 1; 
+}
 
 CMD:zmiennick(playerid, params[])
 {
@@ -38737,6 +38777,7 @@ CMD:setac(playerid, params[])
 	return 1;
 }
 
+/*
 
 CMD:adminduty(playerid)
 {
@@ -38771,7 +38812,7 @@ CMD:adminduty(playerid)
     }
     return 1;
 }
-
+*/
 CMD:togname(playerid)
 {
     if(GetPVarInt(playerid, "tognick") == 1)

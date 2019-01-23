@@ -1102,6 +1102,9 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
 	
+	PlayerInfo[playerid][pAdminDuty] = 0;
+	PlayerInfo[playerid][pAdminDutyNickOff] = 0; 
+	
 	
     lastMsg[playerid] = 0;
 
@@ -1316,6 +1319,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	PlayerInfo[playerid][pBiletpociag] = 0;
+	PlayerInfo[playerid][pAdminDuty] = 0;
+	PlayerInfo[playerid][pAdminDutyNickOff] = 0; 
 	
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
