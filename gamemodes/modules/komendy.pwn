@@ -10082,19 +10082,19 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-			format(string, string, "Administrator %s wszed³ na s³u¿bê administratora! [/report]", NickAdmin);
+			format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", NickAdmin);
 			SendClientMessageToAll(COLOR_RED, string); 
 		
-			format(string, string, "%s",  NickAdmin); 
+			format(string, sizeof(string), "%s",  NickAdmin); 
 			SetPlayerName(playerid, string);
 			}
 		}
 		else if(PlayerInfo[playerid][pAdminDuty] == 1))
 		{
-			format(string, string, "%s", PlayerInfo[playerid][pAdminDutyNickOff]);
+			format(string, sizeof(string), "%s", PlayerInfo[playerid][pAdminDutyNickOff]);
 			SetPlayerName(playerid, string); 
 			
-			format(string, string, "Administrator %s zszed³ z s³u¿by administratora!", Nickadmin); 
+			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", Nickadmin); 
 			SendClientMessageToAll(COLOR_RED, string);
 		}
 	}
