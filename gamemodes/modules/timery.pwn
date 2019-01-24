@@ -1,6 +1,12 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
+forward AntiSpamCMD(playerid);
+public AntiSpamCMD(playerid)
+{
+    SetPVarInt(playerid, "PlayerSpamCMD", 0);
+    SetPVarInt(playerid, "PlayerSpamWarning", 0);
+}
 forward CheckCode2003(killerid, playerid);
 public CheckCode2003(killerid, playerid)
 {
