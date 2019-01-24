@@ -158,7 +158,7 @@ public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
     if(success == 1)
     {
-    	SetTimerEx("AntiSpamCMD", 10000, false, "i", playerid);
+    	SetTimerEx("AntiSpamCMD", 100, false, "i", playerid);
 		SetPVarInt(playerid, "PlayerSpamCMD", 1);
 	}
 
@@ -204,7 +204,7 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 		}
         return 0;
     }
-    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") >= 5)// && PlayerInfo[playerid][pAdmin] < 1)
+    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") >= 5 && PlayerInfo[playerid][pAdmin] < 1)
     {
         new string[128];
         MruDialog(playerid, "ACv2: Kod #2006", "Zosta³eœ wyciszony na 30s za SPAM.");
