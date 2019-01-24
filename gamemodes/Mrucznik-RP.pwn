@@ -158,7 +158,7 @@ public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
     if(success == 1)
     {
-    	SetTimerEx("AntiSpamCMD", 1000, false, "i", playerid);
+    	SetTimerEx("AntiSpamCMD", 10000, false, "i", playerid);
 		SetPVarInt(playerid, "PlayerSpamCMD", 1);
 	}
 
@@ -191,24 +191,11 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
     if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") <= 4)
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie próbuj spamowaæ.");
-        if(GetPVarInt(playerid, "PlayerSpamWarning") == 1)
+        if(GetPVarInt(playerid, "PlayerSpamWarning") >= 1)
         {
-        	SetPVarInt(playerid, "PlayerSpamWarning", 2);
-        	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
-		}
-		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 2)
-		{
-        	SetPVarInt(playerid, "PlayerSpamWarning", 3);
-        	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
-		}
-		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 3)
-		{
-        	SetPVarInt(playerid, "PlayerSpamWarning", 4);
-        	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
-		}
-		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 4)
-		{
-        	SetPVarInt(playerid, "PlayerSpamWarning", 5);
+            new oldwarning = GetPVarInt(playerid, "PlayerSpamWarning");
+            new newwarning = oldwarning + 1;
+        	SetPVarInt(playerid, "PlayerSpamWarning", newwarning);
         	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
 		}
 		else
