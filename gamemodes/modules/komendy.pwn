@@ -10072,9 +10072,9 @@ CMD:adminduty(playerid, params[])
 	{
 		new string[MAX_PLAYER_NAME];
 		new NickAdmin = strval(params);
-		new OldNick;
-		GetPlayerName(playerid, OldNick, sizeof(OldNick));
+		new OldNick[MAX_PLAYER_NAME];
 		OldNick = PlayerInfo[playerid][pAdminDutyNickOff];
+		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(PlayerInfo[playerid][pAdminDuty] == 0)
 		{
 			if(isnull(params))
@@ -10089,6 +10089,7 @@ CMD:adminduty(playerid, params[])
 		
 			format(string, sizeof(string), "%s",  NickAdmin); 
 			SetPlayerName(playerid, string);
+			PlayerInfo[playerid][pAdminDuty] == 1;
 			}
 		}
 		else if(PlayerInfo[playerid][pAdminDuty] == 1))
@@ -10098,6 +10099,7 @@ CMD:adminduty(playerid, params[])
 			
 			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", Nickadmin); 
 			SendClientMessageToAll(COLOR_RED, string);
+			PlayerInfo[playerid][pAdminDuty] == 0;
 		}
 	}
 	else
