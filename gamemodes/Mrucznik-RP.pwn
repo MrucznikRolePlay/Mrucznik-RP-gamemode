@@ -156,6 +156,9 @@ main()
 
 public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
+    if(success == 1)
+        return SetTimerEx("AntiSpamCMD", 100, false, "i", playerid); SetPVarInt(playerid, "PlayerSpamCMD", 1);
+
 	#if DEBUG == 1
 		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
 	#endif
@@ -180,6 +183,21 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
     if(IsCommandBlocked(cmdtext))
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
+        return 0;
+    }
+    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") < 4)
+    {
+        SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie próbuj spamowaæ.");
+        SetPVarInt(playerid, "PlayerSpamWarning") ++;
+        return 0;
+    }
+    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") >= 4 && PlayerInfo[playerid][pAdmin] < 1)
+    {
+        new string[128];
+        MruDialog(playerid, "ACv2: Kod #2006", "Zosta³eœ wyrzucony za SPAM.");
+		format(string, sizeof string, "ACv2 [#2006]: %s zosta³ wyrzucony za SPAM.", GetNick(playerid, true));
+		SendCommandLogMessage(string);
+		KickEx(playerid);
         return 0;
     }
 	StaryCzas[playerid] = GetTickCount();
@@ -1668,7 +1686,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
         AntiCheatLog(string);
-		
+        
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
 			Kick(playerid);
