@@ -158,7 +158,7 @@ public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
     if(success == 1)
     {
-    	SetTimerEx("AntiSpamCMD", 100, false, "i", playerid);
+    	SetTimerEx("AntiSpamCMD", 1000, false, "i", playerid);
 		SetPVarInt(playerid, "PlayerSpamCMD", 1);
 	}
 
@@ -191,16 +191,40 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
     if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") <= 4)
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie próbuj spamowaæ.");
-        SetPVarInt(playerid, "PlayerSpamWarning") ++;
+        if(GetPVarInt(playerid, "PlayerSpamWarning") == 1)
+        {
+        	SetPVarInt(playerid, "PlayerSpamWarning") == 2;
+        	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
+		}
+		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 2)
+		{
+        	SetPVarInt(playerid, "PlayerSpamWarning") == 3;
+        	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
+		}
+		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 3)
+		{
+        	SetPVarInt(playerid, "PlayerSpamWarning") == 4;
+        	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
+		}
+		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 4)
+		{
+        	SetPVarInt(playerid, "PlayerSpamWarning") == 5;
+        	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
+		}
+		else
+		{
+		    SetPVarInt(playerid, "PlayerSpamWarning") == 1;
+		}
         return 0;
     }
-    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") >= 4 && PlayerInfo[playerid][pAdmin] < 1)
+    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") >= 5 && PlayerInfo[playerid][pAdmin] < 1)
     {
         new string[128];
-        MruDialog(playerid, "ACv2: Kod #2006", "Zosta³eœ wyrzucony za SPAM.");
-		format(string, sizeof string, "ACv2 [#2006]: %s zosta³ wyrzucony za SPAM.", GetNick(playerid, true));
+        MruDialog(playerid, "ACv2: Kod #2006", "Zosta³eœ wyciszony na 30s za SPAM.");
+		format(string, sizeof string, "ACv2 [#2006]: %s zostal wyciszony na 30s za SPAM.", GetNick(playerid, true));
 		SendCommandLogMessage(string);
-		KickEx(playerid);
+		PlayerInfo[playerid][pMuted] = 1;
+		SetTimerEx("AntiSpamMute", 30000, false, "i", playerid);
         return 0;
     }
 	StaryCzas[playerid] = GetTickCount();
