@@ -157,7 +157,10 @@ main()
 public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
     if(success == 1)
-        return SetTimerEx("AntiSpamCMD", 100, false, "i", playerid); SetPVarInt(playerid, "PlayerSpamCMD", 1);
+    {
+    	SetTimerEx("AntiSpamCMD", 100, false, "i", playerid);
+		SetPVarInt(playerid, "PlayerSpamCMD", 1);
+	}
 
 	#if DEBUG == 1
 		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
@@ -185,7 +188,7 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
         return 0;
     }
-    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") < 4)
+    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") <= 4)
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie próbuj spamowaæ.");
         SetPVarInt(playerid, "PlayerSpamWarning") ++;
