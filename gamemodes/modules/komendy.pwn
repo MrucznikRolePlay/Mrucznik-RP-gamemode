@@ -10074,7 +10074,7 @@ CMD:adminduty(playerid, params[])
 		new NickAdmin = strval(params);
 		new OldNick[MAX_PLAYER_NAME];
 		OldNick = PlayerInfo[playerid][pAdminDutyNickOff];
-		GetPlayerName(playerid, sendername, sizeof(sendername));
+		GetPlayerName(playerid, OldNick, sizeof(OldNick));
 		if(PlayerInfo[playerid][pAdminDuty] == 0)
 		{
 			if(isnull(params))
@@ -10092,7 +10092,7 @@ CMD:adminduty(playerid, params[])
 			PlayerInfo[playerid][pAdminDuty] == 1;
 			}
 		}
-		else if(PlayerInfo[playerid][pAdminDuty] == 1))
+		else if(PlayerInfo[playerid][pAdminDuty] == 1)
 		{
 			format(string, sizeof(string), "%s", OldNick);
 			SetPlayerName(playerid, string); 
