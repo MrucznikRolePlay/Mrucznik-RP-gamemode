@@ -1,6 +1,12 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
+forward AntiSpamMute(playerid);
+public AntiSpamMute(playerid)
+{
+    PlayerInfo[playerid][pMuted] = 0;
+    MruDialog(playerid, "ACv2: Kod #2006", "Min¹³ czas wyciszenia. Nie spamuj!");
+}
 forward AntiSpamCMD(playerid);
 public AntiSpamCMD(playerid)
 {
