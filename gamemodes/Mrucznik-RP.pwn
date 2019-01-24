@@ -193,31 +193,31 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie próbuj spamowaæ.");
         if(GetPVarInt(playerid, "PlayerSpamWarning") == 1)
         {
-        	SetPVarInt(playerid, "PlayerSpamWarning") == 2;
+        	SetPVarInt(playerid, "PlayerSpamWarning", 2);
         	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
 		}
 		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 2)
 		{
-        	SetPVarInt(playerid, "PlayerSpamWarning") == 3;
+        	SetPVarInt(playerid, "PlayerSpamWarning", 3);
         	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
 		}
 		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 3)
 		{
-        	SetPVarInt(playerid, "PlayerSpamWarning") == 4;
+        	SetPVarInt(playerid, "PlayerSpamWarning", 4);
         	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
 		}
 		else if(GetPVarInt(playerid, "PlayerSpamWarning") == 4)
 		{
-        	SetPVarInt(playerid, "PlayerSpamWarning") == 5;
+        	SetPVarInt(playerid, "PlayerSpamWarning", 5);
         	SendClientMessage(playerid, COLOR_YELLOW, "WARNING: NIE SPAMUJ!");
 		}
 		else
 		{
-		    SetPVarInt(playerid, "PlayerSpamWarning") == 1;
+		    SetPVarInt(playerid, "PlayerSpamWarning", 1);
 		}
         return 0;
     }
-    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") >= 5 && PlayerInfo[playerid][pAdmin] < 1)
+    if(GetPVarInt(playerid, "PlayerSpamCMD") == 1 && GetPVarInt(playerid, "PlayerSpamWarning") >= 5)// && PlayerInfo[playerid][pAdmin] < 1)
     {
         new string[128];
         MruDialog(playerid, "ACv2: Kod #2006", "Zosta³eœ wyciszony na 30s za SPAM.");
