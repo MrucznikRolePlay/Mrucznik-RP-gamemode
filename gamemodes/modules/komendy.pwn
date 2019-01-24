@@ -10074,6 +10074,7 @@ CMD:adminduty(playerid, params[])
 		new OldNick[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, OldNick, sizeof(OldNick));
 		PlayerInfo[playerid][pAdminDutyNickOff] = strval(OldNick);//Debilizm
+		PlayerInfo[playerid][pAdminDutyNickOn] = strval(params);
 		if(PlayerInfo[playerid][pAdminDuty] == 0)
 		{
 			if(isnull(params))
@@ -10083,10 +10084,10 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", params);
+				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", PlayerInfo[playerid][pAdminDutyNickOn]);
 				SendClientMessageToAll(COLOR_RED, string); 
 			
-				format(string, sizeof(string), "%s", params); 
+				format(string, sizeof(string), "%s", PlayerInfo[playerid][pAdminDutyNickOn]); 
 				SetPlayerName(playerid, string);
 				PlayerInfo[playerid][pAdminDuty] = 1;
             	SetPlayerColor(playerid, 0xFF0000FF);
@@ -10096,10 +10097,10 @@ CMD:adminduty(playerid, params[])
 		}
 		else if(PlayerInfo[playerid][pAdminDuty] == 1)
 		{
-			format(string, sizeof(string), "%s", OldNick);
+			format(string, sizeof(string), "%s", PlayerInfo[playerid][pAdminDutyNickOff]);
 			SetPlayerName(playerid, string); 
 			
-			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", params); 
+			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", PlayerInfo[playerid][pAdminDutyNickOn]); 
 			SendClientMessageToAll(COLOR_RED, string);
 			PlayerInfo[playerid][pAdminDuty] = 0;
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
