@@ -1500,6 +1500,7 @@ enum pInfo
     pCarSlots,
 	pAdminDuty,
 	pAdminDutyNickOff,
+	pAdminDutyNickOn,
     pHat,
     Text3D:pDescLabel,
     pDesc[128]

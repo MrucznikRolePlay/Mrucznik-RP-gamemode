@@ -1104,6 +1104,7 @@ ZerujZmienne(playerid)
 	
 	PlayerInfo[playerid][pAdminDuty] = 0;
 	PlayerInfo[playerid][pAdminDutyNickOff] = 0; 
+	PlayerInfo[playerid][pAdminDutyNickOn] = 0; 
 	
 	
     lastMsg[playerid] = 0;
@@ -1321,6 +1322,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pBiletpociag] = 0;
 	PlayerInfo[playerid][pAdminDuty] = 0;
 	PlayerInfo[playerid][pAdminDutyNickOff] = 0; 
+	PlayerInfo[playerid][pAdminDutyNickOn] = 0;
 	
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
