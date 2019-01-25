@@ -10071,11 +10071,8 @@ CMD:adminduty(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
 		new string[256];
-		new OldNick[MAX_PLAYER_NAME];
 		new nickadmina[MAX_PLAYER_NAME];
 		new nickadminaIC[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, OldNick, sizeof(OldNick));
-		SetPVarString(playerid, "pAdminDutyNickOff", OldNick);
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC, sizeof(nickadminaIC)); 
@@ -10096,10 +10093,10 @@ CMD:adminduty(playerid, params[])
 				SetPlayerName(playerid, string);
 				SetPVarInt(playerid, "adminduty", 1);
             	SetPlayerColor(playerid, 0xFF0000FF);
-				return 1;
+				
 			}
 		}
-		else if(GetPVarInt(playerid, "adminduty") == 1)
+		else
 		{
 			format(string, sizeof(string), "%s", nickadminaIC);
 			SetPlayerName(playerid, string); 
