@@ -42,6 +42,11 @@ new LSMCWindap8 = 0;//Winda LSMC
 new ServerTime = 14;//Czas
 new ServerWeather = 3;//Pogoda
 
+//admduty
+new OldNick[MAX_PLAYER_NAME];
+GetPlayerName(playerid, OldNick, sizeof(OldNick));
+SetPVarString(playerid, "pAdminDutyNickOff", OldNick);
+SetPVarInt(playerid, "adminduty", 0); 
 
 //legal
 new DB:db_handle;

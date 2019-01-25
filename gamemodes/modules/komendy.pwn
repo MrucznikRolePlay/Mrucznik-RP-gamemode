@@ -10076,7 +10076,6 @@ CMD:adminduty(playerid, params[])
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC, sizeof(nickadminaIC)); 
-		SetPVarInt(playerid, "adminduty", 0); 
 		if(GetPVarInt(playerid, "adminduty") == 0)
 		{
 			if(isnull(params))
@@ -16408,6 +16407,11 @@ CMD:og(playerid, params[])
             SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
             return 1;
         }
+		if(GetPVarInt(playerid, "adminduty") == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz pisaæ og³oszeñ podczas s³u¿by administratora!"); 
+			return 1;
+		}
         if(PlayerInfo[playerid][pPnumber] == 0)
         {
             SendClientMessage(playerid, COLOR_GREY, "Nie masz telefonu. Kup go w 24/7 !");
