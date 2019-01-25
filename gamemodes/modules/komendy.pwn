@@ -10072,7 +10072,6 @@ CMD:adminduty(playerid, params[])
 	{
 		new string[256];
 		new nickadmina[MAX_PLAYER_NAME];
-		new nickadminaIC[MAX_PLAYER_NAME];
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC, sizeof(nickadminaIC)); 
