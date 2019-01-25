@@ -762,6 +762,7 @@ public OnPlayerConnect(playerid)
 	LoadTextDraws(playerid);
     LoadingShow(playerid);
     LoadingHide(playerid);
+	
 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
@@ -776,6 +777,8 @@ public OnPlayerConnect(playerid)
 		return 1;
     }
 	SetRPName(playerid);
+	GetPlayerName(playerid, nickadminaIC, sizeof(nickadminaIC));
+	SetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC);
 
 	//Pocz¹tkowe ustawienia:
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
