@@ -10095,8 +10095,9 @@ CMD:adminduty(playerid, params[])
             	SetPlayerColor(playerid, 0xFF0000FF);
 				
 			}
+			return 1;
 		}
-		else
+		else if(GetPVarInt(playerid, "adminduty") == 1)
 		{
 			format(string, sizeof(string), "%s", nickadminaIC);
 			SetPlayerName(playerid, string); 
