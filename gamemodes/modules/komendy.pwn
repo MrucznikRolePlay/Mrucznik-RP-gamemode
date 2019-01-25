@@ -10081,7 +10081,6 @@ CMD:adminduty(playerid, params[])
 			if(isnull(params))
 			{
 				sendTipMessage(playerid, "U¿yj /adminduty [NICK 4UM]");
-				return 1;
 			}
 			else
 			{
@@ -10092,9 +10091,8 @@ CMD:adminduty(playerid, params[])
 				SetPlayerName(playerid, string);
 				SetPVarInt(playerid, "adminduty", 1);
             	SetPlayerColor(playerid, 0xFF0000FF);
-				
+				return 1;	
 			}
-			return 1;
 		}
 		else if(GetPVarInt(playerid, "adminduty") == 1)
 		{
