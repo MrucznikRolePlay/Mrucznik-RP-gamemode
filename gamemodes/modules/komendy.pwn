@@ -10075,6 +10075,7 @@ CMD:adminduty(playerid, params[])
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		//GetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC, sizeof(nickadminaIC)); 
+		SetPVarString(playerid, "pAdminDutyNickOff", GetPlayerName(playerid, nickadminaIC, sizeof(nickadminaIC)));
 		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
 			if(isnull(params))
