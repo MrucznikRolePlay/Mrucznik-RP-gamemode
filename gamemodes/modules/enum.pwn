@@ -1498,9 +1498,6 @@ enum pInfo
     pPK,
     pCars[MAX_CAR_SLOT],
     pCarSlots,
-	pAdminDuty,
-	pAdminDutyNickOff,
-	pAdminDutyNickOn,
     pHat,
     Text3D:pDescLabel,
     pDesc[128]

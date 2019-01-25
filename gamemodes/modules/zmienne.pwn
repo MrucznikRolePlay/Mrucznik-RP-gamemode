@@ -42,6 +42,10 @@ new LSMCWindap8 = 0;//Winda LSMC
 new ServerTime = 14;//Czas
 new ServerWeather = 3;//Pogoda
 
+//admduty
+new OldNick[MAX_PLAYER_NAME];
+SetPVarString(playerid, "pAdminDutyNickOff", GetPlayerName(playerid, OldNick, sizeof(OldNick)));
+SetPVarInt(playerid, "dutyadmin", 0); 
 
 //legal
 new DB:db_handle;
@@ -1102,9 +1106,6 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
 	
-	PlayerInfo[playerid][pAdminDuty] = 0;
-	PlayerInfo[playerid][pAdminDutyNickOff] = 0; 
-	PlayerInfo[playerid][pAdminDutyNickOn] = 0; 
 	
 	
     lastMsg[playerid] = 0;
@@ -1320,9 +1321,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	PlayerInfo[playerid][pAdminDuty] = 0;
-	PlayerInfo[playerid][pAdminDutyNickOff] = 0; 
-	PlayerInfo[playerid][pAdminDutyNickOn] = 0;
+
 	
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;

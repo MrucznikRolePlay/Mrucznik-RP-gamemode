@@ -10071,40 +10071,38 @@ CMD:adminduty(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
 		new string[256];
-		new OldNick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, OldNick, sizeof(OldNick));
-		PlayerInfo[playerid][pAdminDutyNickOff] = strval(OldNick);//Debilizm
-		PlayerInfo[playerid][pAdminDutyNickOn] = strval(params);
-		if(PlayerInfo[playerid][pAdminDuty] == 0)
+		new nickadmina[MAX_PLAYER_NAME];
+		new nickadminaIC[MAX_PLAYER_NAME];
+		SetPVarString(playerid, "pAdminDutyNickOn", params);
+		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
+		GetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC, sizeof(nickadminaIC)); 
+		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
 			if(isnull(params))
 			{
 				sendTipMessage(playerid, "U¿yj /adminduty [NICK 4UM]");
-				return 1;
 			}
 			else
 			{
-				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", PlayerInfo[playerid][pAdminDutyNickOn]);
+				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
 				SendClientMessageToAll(COLOR_RED, string); 
 			
-				format(string, sizeof(string), "%s", PlayerInfo[playerid][pAdminDutyNickOn]); 
+				format(string, sizeof(string), "%s", nickadmina); 
 				SetPlayerName(playerid, string);
-				PlayerInfo[playerid][pAdminDuty] = 1;
+				SetPVarInt(playerid, "dutyadmin", 1);
             	SetPlayerColor(playerid, 0xFF0000FF);
-        		SetPVarInt(playerid, "adminduty", 1);
-				return 1;
+				return 1;	
 			}
 		}
-		else if(PlayerInfo[playerid][pAdminDuty] == 1)
+		else if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
-			format(string, sizeof(string), "%s", PlayerInfo[playerid][pAdminDutyNickOff]);
+			format(string, sizeof(string), "%s", nickadminaIC);
 			SetPlayerName(playerid, string); 
 			
-			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", PlayerInfo[playerid][pAdminDutyNickOn]); 
+			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", nickadmina); 
 			SendClientMessageToAll(COLOR_RED, string);
-			PlayerInfo[playerid][pAdminDuty] = 0;
+			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
-        	SetPVarInt(playerid, "adminduty", 0);
 			return 1;
 		}
 	}
@@ -16407,6 +16405,11 @@ CMD:og(playerid, params[])
             SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
             return 1;
         }
+		if(GetPVarInt(playerid, "adminduty") == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz pisaæ og³oszeñ podczas s³u¿by administratora!"); 
+			return 1;
+		}
         if(PlayerInfo[playerid][pPnumber] == 0)
         {
             SendClientMessage(playerid, COLOR_GREY, "Nie masz telefonu. Kup go w 24/7 !");
