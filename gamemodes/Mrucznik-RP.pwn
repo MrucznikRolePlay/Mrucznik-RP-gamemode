@@ -26,6 +26,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 		Akil - chyba nic nie zrobi³ koniec koñców
 		Niceczlowiek - okry³ siê hañb¹ publikuj¹c mapê
 		PECET - dobry skrypter
+		LukeSqly - Niby coœ zacz¹³, ale wysz³o jak zwykle
 
 */
 //----------------------------------------------------*------------------------------------------------------//
@@ -762,6 +763,7 @@ public OnPlayerConnect(playerid)
 	LoadTextDraws(playerid);
     LoadingShow(playerid);
     LoadingHide(playerid);
+	
 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
@@ -776,6 +778,8 @@ public OnPlayerConnect(playerid)
 		return 1;
     }
 	SetRPName(playerid);
+	GetPlayerName(playerid, nickadminaIC, sizeof(nickadminaIC));
+	SetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC);
 
 	//Pocz¹tkowe ustawienia:
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);

@@ -43,9 +43,8 @@ new ServerTime = 14;//Czas
 new ServerWeather = 3;//Pogoda
 
 //admduty
-new OldNick[MAX_PLAYER_NAME];
-SetPVarString(playerid, "pAdminDutyNickOff", GetPlayerName(playerid, OldNick, sizeof(OldNick)));
-SetPVarInt(playerid, "dutyadmin", 0); 
+new nickadminaIC[MAX_PLAYER_NAME];
+//SetPVarInt(playerid, "dutyadmin", 0); 
 
 //legal
 new DB:db_handle;

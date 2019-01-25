@@ -10071,19 +10071,28 @@ CMD:adminduty(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
 		new string[256];
+		new stringlog[325];
 		new nickadmina[MAX_PLAYER_NAME];
-		new nickadminaIC[MAX_PLAYER_NAME];
+		new FirstNickname[MAX_PLAYER_NAME];
+		new h1,m1,s1,h2,m2,s2;//Godziny wejœæ
+		new y1,mi1,d1;//Data
+		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
-		GetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC, sizeof(nickadminaIC)); 
+		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
 			if(isnull(params))
 			{
 				sendTipMessage(playerid, "U¿yj /adminduty [NICK 4UM]");
+				return 1;
 			}
 			else
 			{
+				gettime(h1, m1, s1); 
+				SetPVarInt(playerid, "ADutyGodzina", h1);
+				SetPVarInt(playerid, "ADutyMinuta", m1);
+				SetPVarInt(playerid, "ADutySekunda", s1);
 				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
 				SendClientMessageToAll(COLOR_RED, string); 
 			
@@ -10096,13 +10105,18 @@ CMD:adminduty(playerid, params[])
 		}
 		else if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
-			format(string, sizeof(string), "%s", nickadminaIC);
+			GetPVarInt(playerid, "ADutyGodzina"); 
+			GetPVarInt(playerid, "ADutyMinuta");
+			GetPVarInt(playerid, "ADutySekunda"); 
+			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
+			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
-			
-			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", nickadmina); 
-			SendClientMessageToAll(COLOR_RED, string);
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
+			gettime(h2,m2,s2);
+			getdate(y1, mi1, d1); 
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s wszed³ na s³u¿bê o %d:%d i zszed³ o %d:%d", d1, mi1, y1, nickadmina, y1, m1, h2,m2); 
+			AdminDutyLog(stringlog); 
 			return 1;
 		}
 	}
@@ -13582,61 +13596,68 @@ CMD:kupowaniedomu(playerid)
 
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pDom] == 0)
-	    {
-	        if(PlayerInfo[playerid][pWynajem] == 0)
-	    	{
-		        for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
-			    {
-					if(IsPlayerInRangeOfPoint(playerid, 5.0, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]))
+		if(GetPVarInt(playerid, "dutyadmin") == 0)
+		{
+			if(PlayerInfo[playerid][pDom] == 0)
+			{
+				if(PlayerInfo[playerid][pWynajem] == 0)
+				{
+					for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
 					{
-					    if(Dom[i][hKupiony] == 0)
-			        	{
-				            if(GUIExit[playerid] == 0)
-		  		    		{
-								/*new doplata = Dom[i][hOplata];
-								new interior = IntInfo[Dom[i][hDomNr]][Cena];
-								new mnoznik;
-								new pZone[MAX_ZONE_NAME];
-								GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
-								//
-								mnoznik = Mnoznik(pZone);
-								new cenadomu = ((interior*mnoznik)/10)+doplata;//cena domu*/
-			        	        if(PlayerInfo[playerid][pLevel] < 3)
-			        	        {
-			        	            sendTipMessage(playerid, "Aby kupiæ dom musisz mieæ powy¿ej 3 lvl");
-			        	            return 1;
-	    						}
-								new cenadomu = Dom[i][hCena];
-								if(cenadomu < kaska[playerid] || cenadomu < PlayerInfo[playerid][pAccount])
+						if(IsPlayerInRangeOfPoint(playerid, 5.0, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]))
+						{
+							if(Dom[i][hKupiony] == 0)
+							{
+								if(GUIExit[playerid] == 0)
 								{
-								    IDDomu[playerid] = i;
-								    format(string, sizeof(string), "Czy na pewno chcesz kupiæ ten dom za %d$?\nAby kupiæ wciœnij 'Tak', aby anulowaæ naciœnij 'Nie'", cenadomu);
-									ShowPlayerDialogEx(playerid, 85, DIALOG_STYLE_MSGBOX, "Kupowanie domu - pytanie", string, "Tak", "Nie");
-								}
-								else
-								{
-								    format(string, sizeof(string), "Nie staæ ciê na zakup tego domu, potrzebujesz %d", cenadomu);
-								    sendErrorMessage(playerid, string);
+									/*new doplata = Dom[i][hOplata];
+									new interior = IntInfo[Dom[i][hDomNr]][Cena];
+									new mnoznik;
+									new pZone[MAX_ZONE_NAME];
+									GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
+									//
+									mnoznik = Mnoznik(pZone);
+									new cenadomu = ((interior*mnoznik)/10)+doplata;//cena domu*/
+									if(PlayerInfo[playerid][pLevel] < 3)
+									{
+										sendTipMessage(playerid, "Aby kupiæ dom musisz mieæ powy¿ej 3 lvl");
+										return 1;
+									}
+									new cenadomu = Dom[i][hCena];
+									if(cenadomu < kaska[playerid] || cenadomu < PlayerInfo[playerid][pAccount])
+									{
+										IDDomu[playerid] = i;
+										format(string, sizeof(string), "Czy na pewno chcesz kupiæ ten dom za %d$?\nAby kupiæ wciœnij 'Tak', aby anulowaæ naciœnij 'Nie'", cenadomu);
+										ShowPlayerDialogEx(playerid, 85, DIALOG_STYLE_MSGBOX, "Kupowanie domu - pytanie", string, "Tak", "Nie");
+									}
+									else
+									{
+										format(string, sizeof(string), "Nie staæ ciê na zakup tego domu, potrzebujesz %d", cenadomu);
+										sendErrorMessage(playerid, string);
+									}
 								}
 							}
-						}
-						else
-						{
-						    sendErrorMessage(playerid, "Ten dom ju¿ jest kupiony");
+							else
+							{
+								sendErrorMessage(playerid, "Ten dom ju¿ jest kupiony");
+							}
 						}
 					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Aby kupiæ dom nie mo¿esz wynajmowaæ domu. Wpisz /unrent.");
 				}
 			}
 			else
 			{
-			    sendTipMessage(playerid, "Aby kupiæ dom nie mo¿esz wynajmowaæ domu. Wpisz /unrent.");
+				sendTipMessage(playerid, "Posiadasz ju¿ 1 dom, nie mo¿esz kupiæ drugiego.");
 			}
-  		}
-  		else
-  		{
-  		    sendTipMessage(playerid, "Posiadasz ju¿ 1 dom, nie mo¿esz kupiæ drugiego.");
-  		}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie kupiæ domu podczas s³u¿by administratora!"); 
+		}
   	}
 	return 1;
 }
@@ -16405,7 +16426,7 @@ CMD:og(playerid, params[])
             SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
             return 1;
         }
-		if(GetPVarInt(playerid, "adminduty") == 1)
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			sendErrorMessage(playerid, "Nie mo¿esz pisaæ og³oszeñ podczas s³u¿by administratora!"); 
 			return 1;
@@ -17292,7 +17313,7 @@ CMD:b(playerid, params[])
 		//Text 3 D
         if(strlen(params) < 78)
         {
-            format(string, sizeof(string), "%s [%d] Czat OOC: (( %s ))", GetNick(playerid, true), playerid, params);
+            format(string, sizeof(string), "%s [%d] Czat OOC: (( %s ))", sendername, playerid, params);
             ProxDetector(25.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
         }
         else
@@ -26721,38 +26742,45 @@ CMD:admini(playerid)
 {
     new string[64];
     new sendername[MAX_PLAYER_NAME];
-    SendClientMessage(playerid, COLOR_GRAD1, "Lista administratorów:");
+    SendClientMessage(playerid, COLOR_GRAD1, "Lista administratorów:");//By³a tu - poziomka
     foreach(Player, i)
     {
-        if(PlayerInfo[i][pAdmin] >= 1)
-        {
-            if(PlayerInfo[i][pAdmin] == 5555 || PlayerInfo[i][pAdmin] == 7)
-            {
-                if(PlayerInfo[playerid][pAdmin] != 5000 || PlayerInfo[playerid][pAdmin] != 5001) continue;
-            }
-            GetPlayerName(i, sendername, sizeof(sendername));
-            if(PlayerInfo[playerid][pAdmin] >= 1)
-            {
-                format(string, sizeof(string), "Admin: %s (ID: %d) lvl %d", sendername, i, PlayerInfo[i][pAdmin]);
-            }
-            else
-            {
-                format(string, sizeof(string), "Admin: %s (ID: %d)", sendername, i);
-            }
-            SendClientMessage(playerid, COLOR_GRAD1, string);
-        }
-        else if(PlayerInfo[i][pNewAP] >=1 && PlayerInfo[i][pNewAP] <= 3)
-        {
-            GetPlayerName(i, sendername, sizeof(sendername));
-            format(string, sizeof(string), "Pó³Admin: %s (ID: %d)", sendername, i);
-            SendClientMessage(playerid, COLOR_GRAD2, string);
-        }
-        else if(PlayerInfo[i][pNewAP] == 5)
-        {
-            GetPlayerName(i, sendername, sizeof(sendername));
-            format(string, sizeof(string), "Skrypter: %s (ID: %d)", sendername, i);
-            SendClientMessage(playerid, COLOR_GRAD3, string);
-        }
+        if(GetPVarInt(i, "dutyadmin") == 1) 
+		{
+			if(PlayerInfo[i][pAdmin] >= 1)
+			{
+				if(PlayerInfo[i][pAdmin] == 5555 || PlayerInfo[i][pAdmin] == 7)
+				{
+					if(PlayerInfo[playerid][pAdmin] != 5000 || PlayerInfo[playerid][pAdmin] != 5001) continue;
+				}
+				GetPlayerName(i, sendername, sizeof(sendername));
+				if(PlayerInfo[playerid][pAdmin] >= 1)
+				{
+					format(string, sizeof(string), "Admin: %s (ID: %d) lvl %d", sendername, i, PlayerInfo[i][pAdmin]);
+				}
+				else
+				{
+					format(string, sizeof(string), "Admin: %s (ID: %d)", sendername, i);
+				}
+				SendClientMessage(playerid, COLOR_GRAD1, string);
+			}
+			else if(PlayerInfo[i][pNewAP] >=1 && PlayerInfo[i][pNewAP] <= 3)
+			{
+				GetPlayerName(i, sendername, sizeof(sendername));
+				format(string, sizeof(string), "Pó³Admin: %s (ID: %d)", sendername, i);
+				SendClientMessage(playerid, COLOR_GRAD2, string);
+			}
+			else if(PlayerInfo[i][pNewAP] == 5)
+			{
+				GetPlayerName(i, sendername, sizeof(sendername));
+				format(string, sizeof(string), "Skrypter: %s (ID: %d)", sendername, i);
+				SendClientMessage(playerid, COLOR_GRAD3, string);
+			}
+		}
+		else
+		{
+			sendTipMessage(playerid, "Aktualnie nie ma administratorów! Przykro nam :("); 
+		}
     }
     //SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomóc lub nie odpowiada na twoje pytanie? Jest na to sposób!");
     //SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyæ listê Zaufanych Graczy. Oni te¿ pomog¹!");
