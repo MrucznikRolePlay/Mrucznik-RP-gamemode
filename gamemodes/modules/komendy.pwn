@@ -10076,7 +10076,7 @@ CMD:adminduty(playerid, params[])
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC, sizeof(nickadminaIC)); 
-		if(GetPVarInt(playerid, "adminduty") == 0)
+		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
 			if(isnull(params))
 			{
@@ -10089,19 +10089,19 @@ CMD:adminduty(playerid, params[])
 			
 				format(string, sizeof(string), "%s", nickadmina); 
 				SetPlayerName(playerid, string);
-				SetPVarInt(playerid, "adminduty", 1);
+				SetPVarInt(playerid, "dutyadmin", 1);
             	SetPlayerColor(playerid, 0xFF0000FF);
 				return 1;	
 			}
 		}
-		else if(GetPVarInt(playerid, "adminduty") == 1)
+		else if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			format(string, sizeof(string), "%s", nickadminaIC);
 			SetPlayerName(playerid, string); 
 			
 			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", nickadmina); 
 			SendClientMessageToAll(COLOR_RED, string);
-			SetPVarInt(playerid, "adminduty", 0); 
+			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
 			return 1;
 		}

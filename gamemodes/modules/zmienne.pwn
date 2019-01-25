@@ -45,7 +45,7 @@ new ServerWeather = 3;//Pogoda
 //admduty
 new OldNick[MAX_PLAYER_NAME];
 SetPVarString(playerid, "pAdminDutyNickOff", GetPlayerName(playerid, OldNick, sizeof(OldNick)));
-SetPVarInt(playerid, "adminduty", 0); 
+SetPVarInt(playerid, "dutyadmin", 0); 
 
 //legal
 new DB:db_handle;
