@@ -10081,6 +10081,7 @@ CMD:adminduty(playerid, params[])
 			if(isnull(params))
 			{
 				sendTipMessage(playerid, "U¿yj /adminduty [NICK 4UM]");
+				return 1;
 			}
 			else
 			{
@@ -10098,9 +10099,6 @@ CMD:adminduty(playerid, params[])
 		{
 			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
-			
-			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", nickadmina); 
-			SendClientMessageToAll(COLOR_RED, string);
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
 			return 1;
@@ -13582,61 +13580,69 @@ CMD:kupowaniedomu(playerid)
 
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pDom] == 0)
-	    {
-	        if(PlayerInfo[playerid][pWynajem] == 0)
-	    	{
-		        for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
-			    {
-					if(IsPlayerInRangeOfPoint(playerid, 5.0, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]))
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+		
+			if(PlayerInfo[playerid][pDom] == 0)
+			{
+				if(PlayerInfo[playerid][pWynajem] == 0)
+				{
+					for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
 					{
-					    if(Dom[i][hKupiony] == 0)
-			        	{
-				            if(GUIExit[playerid] == 0)
-		  		    		{
-								/*new doplata = Dom[i][hOplata];
-								new interior = IntInfo[Dom[i][hDomNr]][Cena];
-								new mnoznik;
-								new pZone[MAX_ZONE_NAME];
-								GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
-								//
-								mnoznik = Mnoznik(pZone);
-								new cenadomu = ((interior*mnoznik)/10)+doplata;//cena domu*/
-			        	        if(PlayerInfo[playerid][pLevel] < 3)
-			        	        {
-			        	            sendTipMessage(playerid, "Aby kupiæ dom musisz mieæ powy¿ej 3 lvl");
-			        	            return 1;
-	    						}
-								new cenadomu = Dom[i][hCena];
-								if(cenadomu < kaska[playerid] || cenadomu < PlayerInfo[playerid][pAccount])
+						if(IsPlayerInRangeOfPoint(playerid, 5.0, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]))
+						{
+							if(Dom[i][hKupiony] == 0)
+							{
+								if(GUIExit[playerid] == 0)
 								{
-								    IDDomu[playerid] = i;
-								    format(string, sizeof(string), "Czy na pewno chcesz kupiæ ten dom za %d$?\nAby kupiæ wciœnij 'Tak', aby anulowaæ naciœnij 'Nie'", cenadomu);
-									ShowPlayerDialogEx(playerid, 85, DIALOG_STYLE_MSGBOX, "Kupowanie domu - pytanie", string, "Tak", "Nie");
-								}
-								else
-								{
-								    format(string, sizeof(string), "Nie staæ ciê na zakup tego domu, potrzebujesz %d", cenadomu);
-								    sendErrorMessage(playerid, string);
+									/*new doplata = Dom[i][hOplata];
+									new interior = IntInfo[Dom[i][hDomNr]][Cena];
+									new mnoznik;
+									new pZone[MAX_ZONE_NAME];
+									GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
+									//
+									mnoznik = Mnoznik(pZone);
+									new cenadomu = ((interior*mnoznik)/10)+doplata;//cena domu*/
+									if(PlayerInfo[playerid][pLevel] < 3)
+									{
+										sendTipMessage(playerid, "Aby kupiæ dom musisz mieæ powy¿ej 3 lvl");
+										return 1;
+									}
+									new cenadomu = Dom[i][hCena];
+									if(cenadomu < kaska[playerid] || cenadomu < PlayerInfo[playerid][pAccount])
+									{
+										IDDomu[playerid] = i;
+										format(string, sizeof(string), "Czy na pewno chcesz kupiæ ten dom za %d$?\nAby kupiæ wciœnij 'Tak', aby anulowaæ naciœnij 'Nie'", cenadomu);
+										ShowPlayerDialogEx(playerid, 85, DIALOG_STYLE_MSGBOX, "Kupowanie domu - pytanie", string, "Tak", "Nie");
+									}
+									else
+									{
+										format(string, sizeof(string), "Nie staæ ciê na zakup tego domu, potrzebujesz %d", cenadomu);
+										sendErrorMessage(playerid, string);
+									}
 								}
 							}
-						}
-						else
-						{
-						    sendErrorMessage(playerid, "Ten dom ju¿ jest kupiony");
+							else
+							{
+								sendErrorMessage(playerid, "Ten dom ju¿ jest kupiony");
+							}
 						}
 					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Aby kupiæ dom nie mo¿esz wynajmowaæ domu. Wpisz /unrent.");
 				}
 			}
 			else
 			{
-			    sendTipMessage(playerid, "Aby kupiæ dom nie mo¿esz wynajmowaæ domu. Wpisz /unrent.");
+				sendTipMessage(playerid, "Posiadasz ju¿ 1 dom, nie mo¿esz kupiæ drugiego.");
 			}
-  		}
-  		else
-  		{
-  		    sendTipMessage(playerid, "Posiadasz ju¿ 1 dom, nie mo¿esz kupiæ drugiego.");
-  		}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie kupiæ domu podczas s³u¿by administratora!"); 
+		}
   	}
 	return 1;
 }
@@ -16405,7 +16411,7 @@ CMD:og(playerid, params[])
             SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
             return 1;
         }
-		if(GetPVarInt(playerid, "adminduty") == 1)
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			sendErrorMessage(playerid, "Nie mo¿esz pisaæ og³oszeñ podczas s³u¿by administratora!"); 
 			return 1;
@@ -17292,7 +17298,7 @@ CMD:b(playerid, params[])
 		//Text 3 D
         if(strlen(params) < 78)
         {
-            format(string, sizeof(string), "%s [%d] Czat OOC: (( %s ))", GetNick(playerid, true), playerid, params);
+            format(string, sizeof(string), "%s [%d] Czat OOC: (( %s ))", sendername, playerid, params);
             ProxDetector(25.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
         }
         else
