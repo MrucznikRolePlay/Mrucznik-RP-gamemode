@@ -10097,6 +10097,7 @@ CMD:adminduty(playerid, params[])
 		}
 		else if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
+			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
 			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
@@ -13580,9 +13581,8 @@ CMD:kupowaniedomu(playerid)
 
     if(gPlayerLogged[playerid] == 1)
     {
-		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
-		
 			if(PlayerInfo[playerid][pDom] == 0)
 			{
 				if(PlayerInfo[playerid][pWynajem] == 0)
