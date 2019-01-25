@@ -10072,11 +10072,15 @@ CMD:adminduty(playerid, params[])
 	{
 		new string[256];
 		new OldNick[MAX_PLAYER_NAME];
+		new nickadmina[MAX_PLAYER_NAME];
+		new nickadminaIC[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, OldNick, sizeof(OldNick));
 		SetPVarString(playerid, "pAdminDutyNickOff", OldNick);
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
-		
-		if(PlayerInfo[playerid][pAdminDuty] == 0)
+		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
+		GetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC, sizeof(nickadminaIC)); 
+		SetPVarInt(playerid, "adminduty", 0); 
+		if(GetPVarInt(playerid, "adminduty") == 0)
 		{
 			if(isnull(params))
 			{
@@ -10085,24 +10089,24 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", pAdminDutyNickOn);
+				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
 				SendClientMessageToAll(COLOR_RED, string); 
 			
-				format(string, sizeof(string), "%s", pAdminDutyNickOn); 
+				format(string, sizeof(string), "%s", nickadmina); 
 				SetPlayerName(playerid, string);
-				PlayerInfo[playerid][pAdminDuty] = 1;
+				SetPVarInt(playerid, "adminduty", 1);
             	SetPlayerColor(playerid, 0xFF0000FF);
 				return 1;
 			}
 		}
-		else if(PlayerInfo[playerid][pAdminDuty] == 1)
+		else if(GetPVarInt(playerid, "adminduty") == 1)
 		{
-			format(string, sizeof(string), "%s", pAdminDutyNickOff);
+			format(string, sizeof(string), "%s", nickadminaIC);
 			SetPlayerName(playerid, string); 
 			
-			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", pAdminDutyNickOn); 
+			format(string, sizeof(string), "Administrator %s zszed³ z s³u¿by administratora!", nickadmina); 
 			SendClientMessageToAll(COLOR_RED, string);
-			PlayerInfo[playerid][pAdminDuty] = 0;
+			SetPVarInt(playerid, "adminduty", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
 			return 1;
 		}
