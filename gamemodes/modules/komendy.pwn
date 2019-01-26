@@ -10081,6 +10081,7 @@ CMD:adminduty(playerid, params[])
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+		
 		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
 			if(isnull(params))
@@ -10092,7 +10093,8 @@ CMD:adminduty(playerid, params[])
 			{
 				foreach(Player, i)
 				{
-					if(GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName)) != params)
+					GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName))
+					if(GetPlayerName(i, CheckAdminName != nickadmina)
 					{
 					gettime(h1, m1, s1); 
 					SetPVarInt(playerid, "ADutyGodzina", h1);
