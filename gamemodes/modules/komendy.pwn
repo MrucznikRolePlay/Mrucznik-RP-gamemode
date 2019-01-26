@@ -2289,7 +2289,7 @@ CMD:kajdanki(playerid, params[])
 												zakuty[giveplayerid] = 1;
 												TogglePlayerControllable(giveplayerid, 0);
 												uzytekajdanki[PDkuje[playerid]] = 1;
-												SkutyGracz[PDkuje[giveplayerid]] = giveplayerid;
+												SkutyGracz[PDkuje[giveplayerid]] = playerid;
 												ClearAnimations(giveplayerid);
 												SetPlayerSpecialAction(giveplayerid, SPECIAL_ACTION_CUFFED);
 												SetPlayerAttachedObject(giveplayerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
