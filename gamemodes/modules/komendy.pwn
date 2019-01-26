@@ -5137,7 +5137,7 @@ CMD:okienko(playerid)
 			format(string, sizeof(string), "Edytujesz okienko nr: %d", okienkoid+1);
 			SendClientMessage(playerid, COLOR_WHITE, string);
 			SetPVarInt(playerid, "okienko-edit", okienkoid);
-			ShowPlayerDialogEx(playerid,99,DIALOG_STYLE_LIST,"Któr¹ tablicê wywieszasz:","Dopasuj do rangi\nEgzaminy Praktyczne\nEgzaminy Teoretyczne\nKurs na prawo jazdy\nRejestracja\nInformacja\nZamkniête","Wywieœ","Zamknij");
+			ShowPlayerDialogEx(playerid,99,DIALOG_STYLE_LIST,"Któr¹ tablicê wywieszasz:","Dopasuj do rangi\nEgzaminy Praktyczne\nEgzaminy Teoretyczne\nKurs na prawo jazdy\nRejestracja\nZ/W\nZamkniête","Wywieœ","Zamknij");
 			return 1;
 		}
 	}
