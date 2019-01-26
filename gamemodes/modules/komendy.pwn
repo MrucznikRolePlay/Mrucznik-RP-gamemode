@@ -17664,11 +17664,12 @@ CMD:r(playerid, params[])
 			format(string, sizeof(string), "Radio: %s", params);
 			SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
         }
-        else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie
+        else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie+DMV
         {
             member = GetPlayerOrg(playerid);
             format(string, sizeof(string), "** %s %s: %s **", FamRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
+			SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             format(string, sizeof(string), "%s mówi przez radio: %s", sendername, params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
@@ -17707,12 +17708,13 @@ CMD:rooc(playerid, params[])
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
             printf("%s", string);
         }
-        else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie
+        else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie + DMV
         {
             member = GetPlayerOrg(playerid);
-            format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNick(playerid, true), params);
+            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNick(playerid, true), params);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
+			SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
             printf("%s", string);
         }
 		else
@@ -35155,15 +35157,21 @@ CMD:rodzinny(playerid, params[])
 			printf("%s", string);
 			return 1;
 		}
-        else if(GetPlayerFraction(playerid) == FRAC_GOV) //DMV i BOR po³aczenie
+        else if(GetPlayerFraction(playerid) == FRAC_GOV || GetPlayerFraction(playerid) == FRAC_BOR|| GetPlayerOrg(playerid) == 1) //DMV i BOR po³aczenie + S¹d
         {
             new member = GetPlayerFraction(playerid);
             format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],sendername, params);
     		SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
+			SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             printf("%s", string);
+			
+			format(string, sizeof(string), "%s mówi przez radio: %s", sendername, params);
+			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+			format(string, sizeof(string), "%s mówi przez radio: %s", sendername, params);
+			SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
         }
-        else if(GetPlayerFraction(playerid) == FRAC_BOR)
+      /*  else if(GetPlayerFraction(playerid) == FRAC_BOR)
         {
             new member = GetPlayerFraction(playerid);
             format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],sendername, params);
@@ -35171,7 +35179,7 @@ CMD:rodzinny(playerid, params[])
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             printf("%s", string);
-        }
+        }*/
 		else
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jesteœ we frakcji!");
@@ -35257,15 +35265,16 @@ CMD:fooc(playerid, params[])
 			printf("%s", string);
 			return 1;
 		}
-        else if(GetPlayerFraction(playerid) == FRAC_GOV) //DMV i BOR po³aczenie
+        else if(GetPlayerFraction(playerid) == FRAC_GOV || GetPlayerFraction(playerid) == FRAC_BOR|| GetPlayerOrg(playerid) == 1) //DMV i BOR po³aczenie
         {
             new member = GetPlayerFraction(playerid);
-            format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
     		SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
+			SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             printf("%s", string);
         }
-        else if(GetPlayerFraction(playerid) == FRAC_BOR) //DMV i BOR po³aczenie
+       /* else if(GetPlayerFraction(playerid) == FRAC_BOR) //DMV i BOR po³aczenie
         {
             new member = GetPlayerFraction(playerid);
             format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
@@ -35273,7 +35282,7 @@ CMD:fooc(playerid, params[])
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             printf("%s", string);
-        }
+        }*/
 		else
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jesteœ we frakcji!");
