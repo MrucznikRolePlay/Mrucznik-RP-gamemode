@@ -10074,12 +10074,14 @@ CMD:adminduty(playerid, params[])
 		new stringlog[325];
 		new nickadmina[MAX_PLAYER_NAME];
 		new FirstNickname[MAX_PLAYER_NAME];
+		new CheckAdminName[MAX_PLAYER_NAME];
 		new h1,m1,s1,h2,m2,s2;//Godziny wejœæ
 		new y1,mi1,d1;//Data
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+		
 		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
 			if(isnull(params))
@@ -10089,17 +10091,37 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-				gettime(h1, m1, s1); 
-				SetPVarInt(playerid, "ADutyGodzina", h1);
-				SetPVarInt(playerid, "ADutyMinuta", m1);
-				SetPVarInt(playerid, "ADutySekunda", s1);
-				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
-				SendClientMessageToAll(COLOR_RED, string); 
-			
-				format(string, sizeof(string), "%s", nickadmina); 
-				SetPlayerName(playerid, string);
-				SetPVarInt(playerid, "dutyadmin", 1);
-            	SetPlayerColor(playerid, 0xFF0000FF);
+				if(strlen(nickadmina) < 32 || strlen(nickadmina) >= 3)
+				{
+					foreach(Player, i)
+					{
+						GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
+						if(CheckAdminName[MAX_PLAYER_NAME+1] != nickadmina)
+						{
+							gettime(h1, m1, s1); 
+							SetPVarInt(playerid, "ADutyGodzina", h1);
+							SetPVarInt(playerid, "ADutyMinuta", m1);
+							SetPVarInt(playerid, "ADutySekunda", s1);
+							format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
+							SendClientMessageToAll(COLOR_RED, string); 
+						
+							format(string, sizeof(string), "%s", nickadmina); 
+							SetPlayerName(playerid, string);
+							SetPVarInt(playerid, "dutyadmin", 1);
+							SetPlayerColor(playerid, 0xFF0000FF);
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
+						}
+					}
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nieprawid³owa d³ugoœæ nicku!"); 
+				}
+				
+				
 				return 1;	
 			}
 		}
@@ -26784,11 +26806,8 @@ CMD:admini(playerid)
 				SendClientMessage(playerid, COLOR_GRAD3, string);
 			}
 		}
-		else
-		{
-			sendTipMessage(playerid, "Aktualnie nie ma administratorów! Przykro nam :("); 
-		}
     }
+	sendTipMessage(playerid, "Aktualnie nie ma administratorów! Przykro nam :(");
     //SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomóc lub nie odpowiada na twoje pytanie? Jest na to sposób!");
     //SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyæ listê Zaufanych Graczy. Oni te¿ pomog¹!");
     return 1;
