@@ -10114,18 +10114,16 @@ CMD:adminduty(playerid, params[])
 				{
 					if(strlen(params) >= 3) 
 					{
-						if(strfind(params, "%") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
+						if(strfind(params, "%") == -1 && strfind(params, " ") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
 						{
 							foreach(Player, i)
 							{
 								GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-								if(strlen(CheckAdminName) == strlen(params))
+								new testowa1[MAX_PLAYER_NAME] = strlen(CheckAdminName);
+								new testowa2[MAX_PLAYER_NAME] = strlen(params);
+								if(testowa1 != testowa2)
 								{
-									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
-									return 1;
-								}
-								else
-								{
+				
 									gettime(h1, m1, s1); 
 									SetPVarInt(playerid, "ADutyGodzina", h1);
 									SetPVarInt(playerid, "ADutyMinuta", m1);
@@ -10137,8 +10135,13 @@ CMD:adminduty(playerid, params[])
 									SetPlayerName(playerid, string);
 									SetPVarInt(playerid, "dutyadmin", 1);
 									SetPlayerColor(playerid, 0xFF0000FF);
+									return 1;
 								}
-								return 1;
+								else
+								{
+									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
+									return 1;
+								}
 							}
 						}
 						else
