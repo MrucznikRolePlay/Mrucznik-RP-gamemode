@@ -10091,28 +10091,37 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-				foreach(Player, i)
+				if(strlen(nickadmina) < 32 || strlen(nickadmina) >= 3)
 				{
-					GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-					if(CheckAdminName != nickadmina)
+					foreach(Player, i)
 					{
-					gettime(h1, m1, s1); 
-					SetPVarInt(playerid, "ADutyGodzina", h1);
-					SetPVarInt(playerid, "ADutyMinuta", m1);
-					SetPVarInt(playerid, "ADutySekunda", s1);
-					format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
-					SendClientMessageToAll(COLOR_RED, string); 
-				
-					format(string, sizeof(string), "%s", nickadmina); 
-					SetPlayerName(playerid, string);
-					SetPVarInt(playerid, "dutyadmin", 1);
-					SetPlayerColor(playerid, 0xFF0000FF);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Ten nick jest juz u¿ywany!"); 
+						GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
+						if(CheckAdminName != nickadmina)
+						{
+							gettime(h1, m1, s1); 
+							SetPVarInt(playerid, "ADutyGodzina", h1);
+							SetPVarInt(playerid, "ADutyMinuta", m1);
+							SetPVarInt(playerid, "ADutySekunda", s1);
+							format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
+							SendClientMessageToAll(COLOR_RED, string); 
+						
+							format(string, sizeof(string), "%s", nickadmina); 
+							SetPlayerName(playerid, string);
+							SetPVarInt(playerid, "dutyadmin", 1);
+							SetPlayerColor(playerid, 0xFF0000FF);
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Ten nick jest juz u¿ywany!"); 
+						}
 					}
 				}
+				else
+				{
+					sendErrorMessage(playerid, "Nieprawid³owa d³ugoœæ nicku!"); 
+				}
+				
+				
 				return 1;	
 			}
 		}
