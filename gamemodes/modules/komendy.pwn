@@ -10091,34 +10091,53 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-				if(strlen(nickadmina) < 32 || strlen(nickadmina) >= 3)
+				if(strlen(nickadmina) < 32)
 				{
-					foreach(Player, i)
+					if(strlen(nickadmina) >= 3) 
 					{
-						GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-						if(CheckAdminName[MAX_PLAYER_NAME+1] != nickadmina)
+						if(strfind(params, "%") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
 						{
-							gettime(h1, m1, s1); 
-							SetPVarInt(playerid, "ADutyGodzina", h1);
-							SetPVarInt(playerid, "ADutyMinuta", m1);
-							SetPVarInt(playerid, "ADutySekunda", s1);
-							format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
-							SendClientMessageToAll(COLOR_RED, string); 
-						
-							format(string, sizeof(string), "%s", nickadmina); 
-							SetPlayerName(playerid, string);
-							SetPVarInt(playerid, "dutyadmin", 1);
-							SetPlayerColor(playerid, 0xFF0000FF);
+							foreach(Player, i)
+							{
+								GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
+								if(strlen(CheckAdminName) == strlen(nickadmina))
+								{
+									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
+									return 1;
+								}
+								else
+								{
+									gettime(h1, m1, s1); 
+									SetPVarInt(playerid, "ADutyGodzina", h1);
+									SetPVarInt(playerid, "ADutyMinuta", m1);
+									SetPVarInt(playerid, "ADutySekunda", s1);
+									format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
+									SendClientMessageToAll(COLOR_RED, string); 
+								
+									format(string, sizeof(string), "%s", nickadmina); 
+									SetPlayerName(playerid, string);
+									SetPVarInt(playerid, "dutyadmin", 1);
+									SetPlayerColor(playerid, 0xFF0000FF);
+								}
+							}
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
+							sendErrorMessage(playerid, "Nie mo¿esz u¿yæ:  procenta, _, -, !, ?, @,#,$,^,&,*"); 
+							return 1;
 						}
 					}
+					else
+					{
+						sendErrorMessage(playerid, "Minimalna d³ugoœæ nicku to 3 znaki!"); 
+						return 1;
+					}
+					
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Nieprawid³owa d³ugoœæ nicku!"); 
+					sendErrorMessage(playerid, "Maksymalna d³ugoœæ nicku to 32 znaki!"); 
+					return 1;
 				}
 				
 				
@@ -26807,7 +26826,7 @@ CMD:admini(playerid)
 			}
 		}
     }
-	sendTipMessage(playerid, "Aktualnie nie ma administratorów! Przykro nam :(");
+	//sendTipMessage(playerid, "Aktualnie nie ma administratorów! Przykro nam :(");
     //SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomóc lub nie odpowiada na twoje pytanie? Jest na to sposób!");
     //SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyæ listê Zaufanych Graczy. Oni te¿ pomog¹!");
     return 1;
