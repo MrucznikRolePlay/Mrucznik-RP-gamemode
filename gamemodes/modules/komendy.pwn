@@ -10119,8 +10119,10 @@ CMD:adminduty(playerid, params[])
 							foreach(Player, i)
 							{
 								GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-								new testowa1[MAX_PLAYER_NAME] = strlen(CheckAdminName);
-								new testowa2[MAX_PLAYER_NAME] = strlen(params);
+								new testowa1[MAX_PLAYER_NAME];
+								testowa1 = strlen(CheckAdminName);
+								new testowa2[MAX_PLAYER_NAME];
+								testowa2= strlen(params);
 								if(testowa1 != testowa2)
 								{
 				
