@@ -10098,7 +10098,7 @@ CMD:adminduty(playerid, params[])
 						foreach(Player, i)
 						{
 							GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-							if(strlen(CheckAdminName) != nickadmina)
+							if(strlen(CheckAdminName) != strlen(nickadmina))
 							{
 								gettime(h1, m1, s1); 
 								SetPVarInt(playerid, "ADutyGodzina", h1);
