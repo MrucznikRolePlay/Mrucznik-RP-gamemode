@@ -10090,10 +10090,10 @@ CMD:adminduty(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
 		new string[256];
-		new stringlog[325];
-		new nickadmina[MAX_PLAYER_NAME];
-		new FirstNickname[MAX_PLAYER_NAME];
-		new CheckAdminName[MAX_PLAYER_NAME];
+		new stringlog[325];//String do logu
+		new nickadmina[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
+		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
+		new CheckAdminName[MAX_PLAYER_NAME];//Porównywanie do pêtli - Czy nie ma ju¿ takiego nicku admina
 		new h1,m1,s1,h2,m2,s2;//Godziny wejœæ
 		new y1,mi1,d1;//Data
 		
@@ -10110,22 +10110,18 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-				if(strlen(nickadmina) < 32)
+				if(strlen(params) < 32)//Maksymalnie 32 znaki nicku
 				{
-					if(strlen(nickadmina) >= 3) 
+					if(strlen(params) >= 3)//Minimalnie 3 znaki
 					{
-						if(strfind(params, "%") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
+						if(strfind(params, "%") == -1 && strfind(params, " ") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
 						{
 							foreach(Player, i)
 							{
 								GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-								if(strlen(CheckAdminName) == strlen(nickadmina))
+								if(strlen(CheckAdminName); != strlen(params);)//zabezpieczenie, gdy admin próbuje ustawiæ nick admina
 								{
-									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
-									return 1;
-								}
-								else
-								{
+				
 									gettime(h1, m1, s1); 
 									SetPVarInt(playerid, "ADutyGodzina", h1);
 									SetPVarInt(playerid, "ADutyMinuta", m1);
@@ -10137,6 +10133,12 @@ CMD:adminduty(playerid, params[])
 									SetPlayerName(playerid, string);
 									SetPVarInt(playerid, "dutyadmin", 1);
 									SetPlayerColor(playerid, 0xFF0000FF);
+									return 1;
+								}
+								else
+								{
+									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
+									return 1;
 								}
 							}
 						}
@@ -10175,8 +10177,8 @@ CMD:adminduty(playerid, params[])
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
 			gettime(h2,m2,s2);
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zmieni³ nick na %s - wszed³ na s³u¿bê o %d:%d i zszed³ o %d:%d", d1, mi1, y1, nickadmina, FirstNickname, y1, m1, h2,m2); 
-			AdminDutyLog(stringlog); 
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zmieni³ nick na %s - wszed³ na s³u¿bê o %d:%d i zszed³ o %d:%d", d1, mi1, y1, nickadmina, FirstNickname, y1, m1, h2,m2); //GENERATE LOG
+			AdminDutyLog(stringlog); //Create LOG
 			return 1;
 		}
 	}
