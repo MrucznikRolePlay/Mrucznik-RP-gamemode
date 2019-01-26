@@ -1775,8 +1775,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 1:
                 {
-                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z biurem szeryfa, prosze czekaæ...");
-    				SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Witam, prosze podaæ krótki opis przestêpstwa.");	
+                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze stra¿¹ po¿arn¹, prosze czekaæ...");
+    				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaæ krótki opis zdarzenia.");	
     				Mobile[playerid] = SHERIFF_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
@@ -1790,7 +1790,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 case 3:
                 {
     			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z dyspozytorem, prosze czekaæ...");
-    				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Stra¿: Witam, prosze podaæ krótki opis zdarzenia.");
+    				SendClientMessage(playerid, TEAM_CYAN_COLOR, "SheriffDep: Witam, prosze podaæ krótki opis przestêpstwa.");
     				Mobile[playerid] = LSFD_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
