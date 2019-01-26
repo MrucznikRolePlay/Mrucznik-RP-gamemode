@@ -10096,7 +10096,7 @@ CMD:adminduty(playerid, params[])
 					foreach(Player, i)
 					{
 						GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-						if(CheckAdminName != nickadmina)
+						if(CheckAdminName[MAX_PLAYER_NAME+1] != nickadmina)
 						{
 							gettime(h1, m1, s1); 
 							SetPVarInt(playerid, "ADutyGodzina", h1);
@@ -10112,7 +10112,7 @@ CMD:adminduty(playerid, params[])
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Ten nick jest juz u¿ywany!"); 
+							sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
 						}
 					}
 				}
