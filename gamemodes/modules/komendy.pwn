@@ -10092,7 +10092,7 @@ CMD:adminduty(playerid, params[])
 				gettime(h1, m1, s1); 
 				SetPVarInt(playerid, "ADutyGodzina", h1);
 				SetPVarInt(playerid, "ADutyMinuta", m1);
-				SetPVarInt(playerid, "ADutySekunda", s1)
+				SetPVarInt(playerid, "ADutySekunda", s1);
 				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
 				SendClientMessageToAll(COLOR_RED, string); 
 			
