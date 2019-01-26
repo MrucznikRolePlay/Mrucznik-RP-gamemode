@@ -10074,7 +10074,7 @@ CMD:adminduty(playerid, params[])
 		new stringlog[325];
 		new nickadmina[MAX_PLAYER_NAME];
 		new FirstNickname[MAX_PLAYER_NAME];
-		new CheckAdminName[32];
+		new CheckAdminName[MAX_PLAYER_NAME];
 		new h1,m1,s1,h2,m2,s2;//Godziny wejœæ
 		new y1,mi1,d1;//Data
 		
@@ -10098,7 +10098,7 @@ CMD:adminduty(playerid, params[])
 						foreach(Player, i)
 						{
 							GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-							if(CheckAdminName[32] != nickadmina)
+							if(strlen(CheckAdminName) != nickadmina)
 							{
 								gettime(h1, m1, s1); 
 								SetPVarInt(playerid, "ADutyGodzina", h1);
