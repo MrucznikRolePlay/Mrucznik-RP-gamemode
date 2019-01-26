@@ -19575,7 +19575,7 @@ CMD:dzwon(playerid, params[])
 	{
 		if(GUIExit[playerid] == 0)
 		{
-			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nBiuro Szeryfa\nMedyk\nStra¿ po¿arna", "Wybierz", "Roz³¹cz siê");
+			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nStra¿ Po¿arna\nMedyk\nSheriff", "Wybierz", "Roz³¹cz siê");
 		}
 		else
 		{
