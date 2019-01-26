@@ -10115,7 +10115,7 @@ CMD:adminduty(playerid, params[])
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
 			gettime(h2,m2,s2);
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s wszed³ na s³u¿bê o %d:%d i zszed³ o %d:%d", d1, mi1, y1, nickadmina, y1, m1, h2,m2); 
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zmieni³ nick na %s - wszed³ na s³u¿bê o %d:%d i zszed³ o %d:%d", d1, mi1, y1, nickadmina, FirstNickname, y1, m1, h2,m2); 
 			AdminDutyLog(stringlog); 
 			return 1;
 		}
@@ -13961,56 +13961,63 @@ CMD:house(playerid)
 
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(IsPlayerConnected(playerid))
-	    {
-	        if(GUIExit[playerid] == 0)
-	    	{
-		        if(PlayerInfo[playerid][pDom] != 0)
-		        {
-					NaprawSpojnoscWlascicielaDomu(playerid);
-		            format(string, sizeof(string), "Domy/Dom%d.ini", PlayerInfo[playerid][pDom]);
-					if(dini_Exists(string))
-					{
-						Dom[PlayerInfo[playerid][pDom]][hData_DD] = 0;
-						if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
-						{
-							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwórz\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
-						}
-						else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
-						{
-							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
-						}
-					}
-					else
-					{
-					    sendErrorMessage(playerid,"Twój dom nie istnieje");
-					}
-				}
-				else if(PlayerInfo[playerid][pWynajem] != 0)
+		if(GetPVarInt(playerid, "dutyadmin") == 0)
+		{
+			if(IsPlayerConnected(playerid))
+			{
+				if(GUIExit[playerid] == 0)
 				{
-				    format(string, sizeof(string), "Domy/Dom%d.ini", PlayerInfo[playerid][pDom]);
-					if(!dini_Exists(string))
+					if(PlayerInfo[playerid][pDom] != 0)
 					{
-					    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
-					    {
-							ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nOtwórz\nSpawn\nPomoc", "Wybierz", "Anuluj");
-						}
-						else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
+						NaprawSpojnoscWlascicielaDomu(playerid);
+						format(string, sizeof(string), "Domy/Dom%d.ini", PlayerInfo[playerid][pDom]);
+						if(dini_Exists(string))
 						{
-						    ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nZamknij\nSpawn\nPomoc", "Wybierz", "Anuluj");
+							Dom[PlayerInfo[playerid][pDom]][hData_DD] = 0;
+							if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
+							{
+								ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwórz\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							}
+							else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
+							{
+								ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							}
+						}
+						else
+						{
+							sendErrorMessage(playerid,"Twój dom nie istnieje");
+						}
+					}
+					else if(PlayerInfo[playerid][pWynajem] != 0)
+					{
+						format(string, sizeof(string), "Domy/Dom%d.ini", PlayerInfo[playerid][pDom]);
+						if(!dini_Exists(string))
+						{
+							if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
+							{
+								ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nOtwórz\nSpawn\nPomoc", "Wybierz", "Anuluj");
+							}
+							else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
+							{
+								ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nZamknij\nSpawn\nPomoc", "Wybierz", "Anuluj");
+							}
+						}
+						else
+						{
+							sendErrorMessage(playerid,"Wynajmowany dom nie istnieje");
 						}
 					}
 					else
 					{
-					    sendErrorMessage(playerid,"Wynajmowany dom nie istnieje");
+						sendErrorMessage(playerid,"Nie posiadasz w³asnego domu.");
 					}
 				}
-		        else
-		        {
-                    sendErrorMessage(playerid,"Nie posiadasz w³asnego domu.");
-		        }
-		    }
-	    }
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Najpierw zejdŸ ze s³u¿by administratora!"); 
+		}
 	}
 	return 1;
 }
