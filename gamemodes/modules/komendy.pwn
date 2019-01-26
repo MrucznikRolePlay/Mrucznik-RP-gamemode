@@ -10119,7 +10119,7 @@ CMD:adminduty(playerid, params[])
 							foreach(Player, i)
 							{
 								GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-								if(strlen(CheckAdminName); != strlen(params);)//zabezpieczenie, gdy admin próbuje ustawiæ nick admina
+								if(strlen(CheckAdminName) != strlen(params))//zabezpieczenie, gdy admin próbuje ustawiæ nick admina
 								{
 				
 									gettime(h1, m1, s1); 
