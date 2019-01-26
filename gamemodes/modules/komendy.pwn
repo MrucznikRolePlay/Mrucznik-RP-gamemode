@@ -10100,7 +10100,12 @@ CMD:adminduty(playerid, params[])
 							foreach(Player, i)
 							{
 								GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-								if(strlen(CheckAdminName) != strlen(nickadmina))
+								if(strlen(CheckAdminName) == strlen(nickadmina))
+								{
+									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
+									return 1;
+								}
+								else
 								{
 									gettime(h1, m1, s1); 
 									SetPVarInt(playerid, "ADutyGodzina", h1);
@@ -10114,26 +10119,25 @@ CMD:adminduty(playerid, params[])
 									SetPVarInt(playerid, "dutyadmin", 1);
 									SetPlayerColor(playerid, 0xFF0000FF);
 								}
-								else
-								{
-									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
-								}
 							}
 						}
 						else
 						{
 							sendErrorMessage(playerid, "Nie mo¿esz u¿yæ:  procenta, _, -, !, ?, @,#,$,^,&,*"); 
+							return 1;
 						}
 					}
 					else
 					{
 						sendErrorMessage(playerid, "Minimalna d³ugoœæ nicku to 3 znaki!"); 
+						return 1;
 					}
 					
 				}
 				else
 				{
 					sendErrorMessage(playerid, "Maksymalna d³ugoœæ nicku to 32 znaki!"); 
+					return 1;
 				}
 				
 				
@@ -26822,7 +26826,7 @@ CMD:admini(playerid)
 			}
 		}
     }
-	sendTipMessage(playerid, "Aktualnie nie ma administratorów! Przykro nam :(");
+	//sendTipMessage(playerid, "Aktualnie nie ma administratorów! Przykro nam :(");
     //SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomóc lub nie odpowiada na twoje pytanie? Jest na to sposób!");
     //SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyæ listê Zaufanych Graczy. Oni te¿ pomog¹!");
     return 1;
