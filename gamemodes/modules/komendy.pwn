@@ -10071,8 +10071,12 @@ CMD:adminduty(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
 		new string[256];
+		new stringlog[325];
 		new nickadmina[MAX_PLAYER_NAME];
 		new FirstNickname[MAX_PLAYER_NAME];
+		new h1,m1,s1,h2,m2,s2;//Godziny wejœæ
+		new y1,mi1,d1;//Data
+		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
@@ -10085,6 +10089,10 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
+				gettime(h1, m1, s1); 
+				SetPVarInt(playerid, "ADutyGodzina", h1);
+				SetPVarInt(playerid, "ADutyMinuta", m1);
+				SetPVarInt(playerid, "ADutySekunda", s1)
 				format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
 				SendClientMessageToAll(COLOR_RED, string); 
 			
@@ -10097,11 +10105,18 @@ CMD:adminduty(playerid, params[])
 		}
 		else if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
+			GetPVarInt(playerid, "ADutyGodzina"); 
+			GetPVarInt(playerid, "ADutyMinuta");
+			GetPVarInt(playerid, "ADutySekunda"); 
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
 			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
+			gettime(h2,m2,s2);
+			getdate(y1, mi1, d1); 
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s wszed³ na s³u¿bê o %d:%d i zszed³ o %d:%d", d1, mi1, y1, nickadmina, y1, m1, h2,m2); 
+			AdminDutyLog(stringlog); 
 			return 1;
 		}
 	}
@@ -26727,38 +26742,45 @@ CMD:admini(playerid)
 {
     new string[64];
     new sendername[MAX_PLAYER_NAME];
-    SendClientMessage(playerid, COLOR_GRAD1, "Lista administratorów:");
+    SendClientMessage(playerid, COLOR_GRAD1, "Lista administratorów:");//By³a tu - poziomka
     foreach(Player, i)
     {
-        if(PlayerInfo[i][pAdmin] >= 1)
-        {
-            if(PlayerInfo[i][pAdmin] == 5555 || PlayerInfo[i][pAdmin] == 7)
-            {
-                if(PlayerInfo[playerid][pAdmin] != 5000 || PlayerInfo[playerid][pAdmin] != 5001) continue;
-            }
-            GetPlayerName(i, sendername, sizeof(sendername));
-            if(PlayerInfo[playerid][pAdmin] >= 1)
-            {
-                format(string, sizeof(string), "Admin: %s (ID: %d) lvl %d", sendername, i, PlayerInfo[i][pAdmin]);
-            }
-            else
-            {
-                format(string, sizeof(string), "Admin: %s (ID: %d)", sendername, i);
-            }
-            SendClientMessage(playerid, COLOR_GRAD1, string);
-        }
-        else if(PlayerInfo[i][pNewAP] >=1 && PlayerInfo[i][pNewAP] <= 3)
-        {
-            GetPlayerName(i, sendername, sizeof(sendername));
-            format(string, sizeof(string), "Pó³Admin: %s (ID: %d)", sendername, i);
-            SendClientMessage(playerid, COLOR_GRAD2, string);
-        }
-        else if(PlayerInfo[i][pNewAP] == 5)
-        {
-            GetPlayerName(i, sendername, sizeof(sendername));
-            format(string, sizeof(string), "Skrypter: %s (ID: %d)", sendername, i);
-            SendClientMessage(playerid, COLOR_GRAD3, string);
-        }
+        if(GetPVarInt(i, "dutyadmin") == 1) 
+		{
+			if(PlayerInfo[i][pAdmin] >= 1)
+			{
+				if(PlayerInfo[i][pAdmin] == 5555 || PlayerInfo[i][pAdmin] == 7)
+				{
+					if(PlayerInfo[playerid][pAdmin] != 5000 || PlayerInfo[playerid][pAdmin] != 5001) continue;
+				}
+				GetPlayerName(i, sendername, sizeof(sendername));
+				if(PlayerInfo[playerid][pAdmin] >= 1)
+				{
+					format(string, sizeof(string), "Admin: %s (ID: %d) lvl %d", sendername, i, PlayerInfo[i][pAdmin]);
+				}
+				else
+				{
+					format(string, sizeof(string), "Admin: %s (ID: %d)", sendername, i);
+				}
+				SendClientMessage(playerid, COLOR_GRAD1, string);
+			}
+			else if(PlayerInfo[i][pNewAP] >=1 && PlayerInfo[i][pNewAP] <= 3)
+			{
+				GetPlayerName(i, sendername, sizeof(sendername));
+				format(string, sizeof(string), "Pó³Admin: %s (ID: %d)", sendername, i);
+				SendClientMessage(playerid, COLOR_GRAD2, string);
+			}
+			else if(PlayerInfo[i][pNewAP] == 5)
+			{
+				GetPlayerName(i, sendername, sizeof(sendername));
+				format(string, sizeof(string), "Skrypter: %s (ID: %d)", sendername, i);
+				SendClientMessage(playerid, COLOR_GRAD3, string);
+			}
+		}
+		else
+		{
+			sendTipMessage(playerid, "Aktualnie nie ma administratorów! Przykro nam :("); 
+		}
     }
     //SendClientMessage(playerid, COLOR_YELLOW, "Administrator nie ma czasu pomóc lub nie odpowiada na twoje pytanie? Jest na to sposób!");
     //SendClientMessage(playerid, COLOR_P@, "Wpisz /zaufani aby zobaczyæ listê Zaufanych Graczy. Oni te¿ pomog¹!");

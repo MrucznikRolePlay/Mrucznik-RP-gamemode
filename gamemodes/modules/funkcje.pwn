@@ -4361,6 +4361,11 @@ stock BanLog(text[])
     new plik[32] = "logi/ban.log";
     Log(plik, text);
 }
+stock AdminDutyLog(text[])
+{
+	new plik[32] = "logi/admindutylogs";
+	Log(plik, text);
+}
 
 stock BiznesLog(text[])
 {
