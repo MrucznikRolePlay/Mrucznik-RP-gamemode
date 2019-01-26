@@ -2280,17 +2280,19 @@ CMD:kajdanki(playerid, params[])
 											}
 											if(PlayerInfo[giveplayerid][pBW] >= 1)
 											{
-												format(string, sizeof(string), "* %s jest nieprzytomny wiêc daje siê aresztowaæ - %s.", sendername, giveplayer);
+												GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+												GetPlayerName(playerid, sendername, sizeof(sendername));
+												format(string, sizeof(string), "* %s sku³  %s.", giveplayer, sendername);
 												ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 												format(string, sizeof(string), "Sku³eœ %s.", sendername);
 												SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-												zakuty[playerid] = 1;
-												TogglePlayerControllable(playerid, 0);
+												zakuty[giveplayerid] = 1;
+												TogglePlayerControllable(giveplayerid, 0);
 												uzytekajdanki[PDkuje[playerid]] = 1;
-												SkutyGracz[PDkuje[playerid]] = playerid;
-												ClearAnimations(playerid);
-												SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-												SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+												SkutyGracz[PDkuje[giveplayerid]] = giveplayerid;
+												ClearAnimations(giveplayerid);
+												SetPlayerSpecialAction(giveplayerid, SPECIAL_ACTION_CUFFED);
+												SetPlayerAttachedObject(giveplayerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 											}
 											else
 											{
