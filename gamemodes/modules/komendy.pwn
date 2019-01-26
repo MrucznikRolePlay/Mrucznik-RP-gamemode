@@ -10110,16 +10110,16 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-				if(strlen(nickadmina) < 32)
+				if(strlen(params) < 32)
 				{
-					if(strlen(nickadmina) >= 3) 
+					if(strlen(params) >= 3) 
 					{
 						if(strfind(params, "%") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
 						{
 							foreach(Player, i)
 							{
 								GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-								if(strlen(CheckAdminName) == strlen(nickadmina))
+								if(strlen(CheckAdminName) == strlen(params))
 								{
 									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
 									return 1;
@@ -10138,6 +10138,7 @@ CMD:adminduty(playerid, params[])
 									SetPVarInt(playerid, "dutyadmin", 1);
 									SetPlayerColor(playerid, 0xFF0000FF);
 								}
+								return 1;
 							}
 						}
 						else
