@@ -17669,7 +17669,7 @@ CMD:r(playerid, params[])
             member = GetPlayerOrg(playerid);
             format(string, sizeof(string), "** %s %s: %s **", FamRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
-			SendFamilyMessage(FRAC_DMV, TEAM_AZTECAS_COLOR, string); 
+			SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             format(string, sizeof(string), "%s mówi przez radio: %s", sendername, params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
@@ -17714,7 +17714,7 @@ CMD:rooc(playerid, params[])
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNick(playerid, true), params);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
-			SendFamilyMessage(FRAC_DMV, TEAM_AZTECAS_COLOR, string); 
+			SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
             printf("%s", string);
         }
 		else
