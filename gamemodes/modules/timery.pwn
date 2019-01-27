@@ -54,6 +54,7 @@ public SprzedajMatsTimer(playerid,giveplayerid)
 	}
 	return 1;
 }
+
 //PizzaJob
 public PizzaJobTimer01(playerid)
 {
@@ -128,6 +129,19 @@ public UsunPozar()
 {
     DeleteAllFire();
     return 1;
+}
+//Adminduty
+forward AdminDutyCzas(playerid);
+public AdminDutyCzas(playerid)
+{
+	AdminDutyMinuty[playerid]++;
+	if(AdminDutyMinuty[playerid] == 60)
+	{
+		AdminDutyGodziny[playerid]++;
+		AdminDutyMinuty[playerid] = 0;
+	
+	}
+	return 1;
 }
 forward AktywujPozar();
 public AktywujPozar()

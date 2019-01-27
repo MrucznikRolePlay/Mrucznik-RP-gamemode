@@ -991,6 +991,31 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		StopACall(playerid);
 	}
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		new stringlog[325];//String do logu
+		new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
+		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
+		new y1,mi1,d1;//Data
+		
+		//String-Get
+		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+	
+		//LOG
+		getdate(y1, mi1, d1); 
+		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszed³ poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
+		AdminDutyLog(stringlog); //Create LOG
+		
+		//Zerowanie zmiennych 
+		iloscKick[playerid] = 0;
+		iloscWarn[playerid] = 0;
+		iloscBan[playerid] = 0;
+		iloscInne[playerid] = 0;
+		
+		//Kill timer 
+		KillTimer(AdminDutyTimer[playerid]);
+	}
 
 	//kajdanki
 	if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
@@ -1783,7 +1808,11 @@ public OnPlayerSpawn(playerid)
 
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
-
+	//AdminDuty
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		SetPlayerColor(playerid, 0xFF0000FF);
+	}
     if(PlayerInfo[playerid][pLider] == FRAC_SN)
     {
         SetPVarInt(playerid, "scena-allow", 1);
@@ -7200,29 +7229,62 @@ public OnPlayerText(playerid, text[])
 	    {
 	        return 0;
       	}
-        if(strlen(text) < 78)
-        {
-            format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), text);
-            ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-            SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-        }
-        else
-        {
-            new pos = strfind(text, " ", true, strlen(text) / 2);
-            if(pos != -1)
-            {
-                new text2[64];
+		if(GetPVarInt(playerid, "dutyadmin") == 0)
+		{
+			if(strlen(text) < 78)
+			{
+				format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), text);
+				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
+			}
+			else
+			{
+				new pos = strfind(text, " ", true, strlen(text) / 2);
+				if(pos != -1)
+				{
+					new text2[64];
 
-                strmid(text2, text, pos + 1, strlen(text));
-                strdel(text, pos, strlen(text));
+					strmid(text2, text, pos + 1, strlen(text));
+					strdel(text, pos, strlen(text));
 
-                format(string, sizeof(string), "%s mówi: %s [.]", GetNick(playerid, true), text);
-                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+					format(string, sizeof(string), "%s mówi: %s [.]", GetNick(playerid, true), text);
+					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
-                format(string, sizeof(string), "[.] %s", text2);
-                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-            }
-        }
+					format(string, sizeof(string), "[.] %s", text2);
+					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+				}
+			}
+		}
+		else//Je¿eli jest na admin duty
+		{
+			new AdminName[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, AdminName, sizeof(AdminName));
+			if(strlen(text) < 78)
+			{
+				
+				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s ))", AdminName, playerid, text);
+				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
+			}
+			else
+			{
+				new pos = strfind(text, " ", true, strlen(text) / 2);
+				if(pos != -1)
+				{
+					new text2[64];
+
+					strmid(text2, text, pos + 1, strlen(text));
+					strdel(text, pos, strlen(text));
+
+					format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", AdminName, text);
+					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+
+					format(string, sizeof(string), "{C0C0C0}>>(([..] %s ))", text2);
+					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+				}
+			}
+			
+		}
 		return 0;
 	}
 	#if DEBUG == 1
