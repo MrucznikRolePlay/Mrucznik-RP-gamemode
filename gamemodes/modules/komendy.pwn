@@ -1457,6 +1457,11 @@ CMD:cbradio(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /cb [text]");
 			return 1;
 		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /b [treœæ]");
+			return 1;
+		}
 		new string[128];
 		if(PlayerInfo[playerid][pBP] >= 1)
 		{
@@ -3014,6 +3019,11 @@ CMD:szpital(playerid, params[])
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj (/szpital)-info [tekst]");
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
 			return 1;
 		}
 
@@ -4738,6 +4748,11 @@ CMD:dmv_info(playerid, params[])
 		    sendErrorMessage(playerid, "Musisz mieæ 2 range aby tego u¿ywaæ!");
 		    return 1;
 		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
+			return 1;
+		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
@@ -4920,6 +4935,11 @@ CMD:sad(playerid, params[])
 		{
 		    sendErrorMessage(playerid, "Musisz mieæ 3 range aby tego u¿ywaæ !");
 		    return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
+			return 1;
 		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
@@ -10114,7 +10134,7 @@ CMD:adminduty(playerid, params[])
 				{
 					if(strlen(params) >= 3)//Minimalnie 3 znaki
 					{
-						if(strfind(params, "%") == -1 && strfind(params, " ") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
+						if(strfind(params, "%") == -1 && strfind(params, " ") == -1 && strfind(params, ".") == -1 && strfind(params, "/") == -1 && strfind(params, "\") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1 && strfind(params, "|") == -1)
 						{
 							foreach(Player, i)
 							{
@@ -15259,6 +15279,11 @@ CMD:sprzedajauto(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /dajauto [Nick/ID] [cena]");
 			return 1;
 		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+			return 1;
+		}
         if(GetPVarInt(playa, "offer-car")) return sendErrorMessage(playerid, "Ten gracz otrzyma³ ju¿ ofertê kupna pojazdu! Zaczekaj 30 sekund");
         if(!IsPlayerConnected(playa)) return sendErrorMessage(playerid, "Brak takiego gracza.");
 		cena = FunkcjaK(string);
@@ -16657,6 +16682,11 @@ CMD:lspd(playerid, params[])
 				sendTipMessage(playerid, "U¿yj /pd [text]");
 				return 1;
 			}
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
+				return 1;
+			}
 			if(PlayerInfo[playerid][pBP] >= 1)
 			{
 			    format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
@@ -16798,6 +16828,11 @@ CMD:noa(playerid, params[])
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj /FDU [tresc]");
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
 			return 1;
 		}
 		SendClientMessageToAll(0xA400A4C8,"|____________[WIADOMOSC FDU]____________|");
@@ -17121,6 +17156,11 @@ CMD:ja(playerid, params[])
 		sendTipMessage(playerid, "U¿yj /me [akcja]");
 		return 1;
 	}
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿yæ tego podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+		return 1;
+	}
     new string[256];
     params[0] = tolower(params[0]);
     
@@ -17156,6 +17196,11 @@ CMD:do(playerid, params[])
         sendTipMessage(playerid, "U¿yj /do [opis sytuacji]");
         return 1;
     }
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿yæ tego podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+		return 1;
+	}
     new string[256];
     
     if(strlen(params) < 78)
@@ -17320,6 +17365,11 @@ CMD:say(playerid, params[])
 			sendTipMessage(playerid, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony", TEAM_CYAN_COLOR);
 			return 1;
 		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! U¿yj /b [treœæ]");
+			return 1;
+		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
@@ -17430,6 +17480,11 @@ CMD:szept(playerid, params[])
 			sendTipMessage(playerid, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony", TEAM_CYAN_COLOR);
 			return 1;
 		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /b [treœæ]");
+			return 1;
+		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
@@ -17484,6 +17539,11 @@ CMD:k(playerid, params[])
         if(PlayerInfo[playerid][pMuted] == 1)
 		{
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /b [treœæ]");
 			return 1;
 		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -17553,6 +17613,11 @@ CMD:megafon(playerid, params[])
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj (/m)egafon [tekst]");
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /b [treœæ]");
 			return 1;
 		}
 		if(PlayerInfo[playerid][pMember] == 1||PlayerInfo[playerid][pLider] == 1)
@@ -17651,6 +17716,11 @@ CMD:r(playerid, params[])
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj (/r)adio [tekst]");
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /ro [treœæ]");
 			return 1;
 		}
         new member = GetPlayerFraction(playerid);
@@ -17789,6 +17859,11 @@ CMD:dutymoto(playerid)
             sendTipMessage(playerid, "Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
             return 1;
         }
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+			return 1;
+		}
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby wzi¹æ s³u¿be musisz byæ pieszo!");
 
         if(OnDuty[playerid]==1 && OnDutyCD[playerid] == 0) return sendTipMessage(playerid, "U¿yj /duty !");
@@ -17850,6 +17925,11 @@ CMD:dutycd(playerid)
 		if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
 		{
 			sendTipMessage(playerid, "Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
 			return 1;
 		}
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby wzi¹æ s³u¿be musisz byæ pieszo!");
@@ -17965,6 +18045,12 @@ CMD:sluzba(playerid)
             sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /dutycd lub /dutysbi !");
             return 1;
         }
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+			return 1;
+		}
+		
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby wzi¹æ s³u¿be musisz byæ pieszo!");
         GetPlayerName(playerid, sendername, sizeof(sendername));
         if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
@@ -18467,6 +18553,11 @@ CMD:kurtka(playerid)
 			{
 				if(GetPlayerVirtualWorld(playerid) == 2)
 				{
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+						return 1;
+					}
 					if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 1)
 					{
 						format(string, sizeof(string), "* %s zak³ada kurtkê z naszywkami FBI.", sendername);
@@ -18506,6 +18597,11 @@ CMD:fskin(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+			return 1;
+		}
 		if (IsAtClothShop(playerid) || (GetPlayerOrg(playerid) == FAMILY_RSC && IsPlayerInRangeOfPoint(playerid, 4.0, 1636.9476,-1813.6195,13.5263)) || IsPlayerInRangeOfPoint(playerid, 4.0, GetPVarFloat(playerid,"xposspawn"),GetPVarFloat(playerid,"yposspawn"),GetPVarFloat(playerid,"zposspawn")))
 		{
             //W³¹czenie trybu skinów
@@ -18548,6 +18644,11 @@ CMD:departament(playerid, params[])
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: (/d)epartament [tekst]");
                 return 1;
             }
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /depo [treœæ]");
+				return 1;
+			}
             new member = GetPlayerFraction(playerid);
 			
             if(0 < member <= 4 || member == 17)// || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
@@ -35089,6 +35190,11 @@ CMD:rodzinny(playerid, params[])
 	    if(PlayerInfo[playerid][pMuted] == 1)
 		{
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /fo [treœæ]");
 			return 1;
 		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
