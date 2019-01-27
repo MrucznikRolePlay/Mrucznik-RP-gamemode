@@ -10134,7 +10134,7 @@ CMD:adminduty(playerid, params[])
 				{
 					if(strlen(params) >= 3)//Minimalnie 3 znaki
 					{
-						if(strfind(params, "%") == -1 && strfind(params, " ") == -1 && strfind(params, ".") == -1 && strfind(params, "/") == -1 && strfind(params, "_") == -1 && strfind(params, "!") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
+						if(strfind(params, "%") == -1 && strfind(params, " ") == -1 && strfind(params, ".") == -1 && strfind(params, "/") == -1 && strfind(params, "_") == -1 && strfind(params, "\") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1 && strfind(params, "|"))
 						{
 							foreach(Player, i)
 							{
