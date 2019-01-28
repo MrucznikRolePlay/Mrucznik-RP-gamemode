@@ -10247,7 +10247,8 @@ CMD:admintime(playerid)
 	new AdminName[MAX_PLAYER_NAME];
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
-		new h2, m2, s2, h3, m3, s3;
+		new h2, m2, s2, h3, m3, s3, h1,m1,s1;
+		new string[128];
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			GetPVarInt(playerid, "ADutyGodzina"); 
