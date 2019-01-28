@@ -10262,12 +10262,12 @@ CMD:admintime(playerid)
 			h2 = timeshift;
 			//__OBLICZANIE CZASU___
 			h3 = h2 - h1;//Obliczanie czasu (godziny)
-			m3 = h3*60+m2;//Wyci¹gamy z godzin minuty i dodajemy minuty pobrane z "gettime"
+			m3 = h3*60+m2-m1;//Wyci¹gamy z godzin minuty i dodajemy minuty pobrane z "gettime"
 			m3 = m3%60;//Dzielimy pierwszy nadpis m3 przez 60 i reszta z dzielenia jest naszym m3
 			
 			
 			GetPlayerName(playerid, AdminName, sizeof(AdminName));
-			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, h3,m3); 
+			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, h2,m2); 
 			sendTipMessage(playerid, string);
 			
 		
