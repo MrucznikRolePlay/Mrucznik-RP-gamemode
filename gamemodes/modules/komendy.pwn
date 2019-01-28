@@ -10247,19 +10247,17 @@ CMD:admintime(playerid)
 	new AdminName[MAX_PLAYER_NAME];
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
-		new h2, m2, s2, h3, m3, s3, h1,m1,s1;
+		new h2, m2, s2, h3, m3, h1,m1;
 		new string[128];
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			GetPVarInt(playerid, "ADutyGodzina"); 
 			GetPVarInt(playerid, "ADutyMinuta");
-			GetPVarInt(playerid, "ADutySekunda"); 
 			gettime(h2, m2, s2); 
-			h3=h2-h1;
-			m3=m2-m1;
-			s3=s2-s1;
+			h3=h1-h2;
+			m3=m1-m2;
 			GetPlayerName(playerid, AdminName, sizeof(AdminName));
-			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut %s sekund", AdminName, h3,m3,s3); 
+			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, h3,m3); 
 			sendTipMessage(playerid, string);
 		
 		}
