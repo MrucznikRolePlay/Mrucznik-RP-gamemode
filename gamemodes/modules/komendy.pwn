@@ -10165,6 +10165,8 @@ CMD:adminduty(playerid, params[])
 								{
 				
 									gettime(h1, m1, s1); 
+									FixHour(h1);
+									h1 = timeshift;
 									SetPVarInt(playerid, "ADutyGodzina", h1);
 									SetPVarInt(playerid, "ADutyMinuta", m1);
 									SetPVarInt(playerid, "ADutySekunda", s1);
@@ -10220,6 +10222,8 @@ CMD:adminduty(playerid, params[])
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
 			gettime(h2,m2,s2);
+			FixHour(h2);
+			h2 = timeshift;
 			h3 = h2-h1;
 			m3 = m2-m1;
 			getdate(y1, mi1, d1); 
@@ -10254,6 +10258,8 @@ CMD:admintime(playerid)
 			GetPVarInt(playerid, "ADutyGodzina"); 
 			GetPVarInt(playerid, "ADutyMinuta");
 			gettime(h2, m2, s2); 
+			FixHour(h2);
+			h2 = timeshift;
 			h3=h1-h2;
 			m3=m1-m2;
 			GetPlayerName(playerid, AdminName, sizeof(AdminName));
