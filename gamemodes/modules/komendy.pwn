@@ -10242,7 +10242,40 @@ CMD:adminduty(playerid, params[])
 
 	return 1; 
 }
+CMD:admintime(playerid)
+{
+	new AdminName[MAX_PLAYER_NAME];
+	if(PlayerInfo[playerid][pAdmin] >= 1 )
+	{
+		new h2, m2, s2, h3, m3, s3;
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			GetPVarInt(playerid, "ADutyGodzina"); 
+			GetPVarInt(playerid, "ADutyMinuta");
+			GetPVarInt(playerid, "ADutySekunda"); 
+			gettime(h2, m2, s2); 
+			h3=h2-h;
+			m3=m2-m;
+			s3=s2-s;
+			GetPlayerName(playerid, AdminName, sizeof(AdminName));
+			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut %s sekund", AdminName, h3,m3,s3); 
+			sendTipMessage(playerid, string);
+		
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie jesteœ podczas s³u¿by administratora!"); 
+		}
+	
+	
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie jesteœ administratorem!"); 
 
+	}
+	return 1;
+}
 CMD:zmiennick(playerid, params[])
 {
 	new string[128];
