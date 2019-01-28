@@ -10259,6 +10259,7 @@ CMD:admintime(playerid)
 			GetPVarInt(playerid, "ADutyMinuta");
 			gettime(h2, m2, s2); 
 			FixHour(h2);
+			hour=h2;
 			h2 = timeshift;
 			h3=h1-h2;
 			m3=m1-m2;
