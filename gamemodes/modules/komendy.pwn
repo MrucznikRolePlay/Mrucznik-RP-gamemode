@@ -26390,8 +26390,9 @@ CMD:kick(playerid, params[])
 						SetPVarInt(playerid, "KickQuantity", IloscKick+1);
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
-							format(string, sizeof(string), "@DUTY: %s wykona³eœ ju¿ %d kicków!", sendername, IloscKick); 
-							sendTipMessage(playerid, string); 
+							GetPVarInt(playerid, "KickQuanity"); 
+							format(string, sizeof(string), "@DUTY: %s wykona³eœ ju¿ %d kicków podczas s³u¿by!", sendername, IloscKick); 
+							sendErrorMessage(playerid, string); 
 						}
 						//adminowe logi
 						if (PlayerInfo[playerid][pZG] >= 1)
