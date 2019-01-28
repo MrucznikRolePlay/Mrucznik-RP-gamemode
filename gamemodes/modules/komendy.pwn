@@ -10129,7 +10129,7 @@ CMD:adminduty(playerid, params[])
 				sendTipMessage(playerid, "U¿yj /adminduty [NICK 4UM]");
 				return 1;
 			}
-			if(OnDuty[playerid] == 1 || JobDuty[playerid] == 1 || SanDuty[playerid] == 1)//Zabezpieczenie przed duty 
+			if(OnDuty[playerid] == 1 || JobDuty[playerid] == 1 || SanDuty[playerid] == 1)//Zabezpieczenie przed duty - odkryte w doœæ ciekawy sposób, dlatego traktujemy jako easter egg
 			{
 				sendErrorMessage(playerid, "Najpierw zejdŸ z duty! Powodujesz bugi, które muszê naprawiaæ! ");
 				return 1;
@@ -10213,7 +10213,8 @@ CMD:adminduty(playerid, params[])
 			GetPVarInt(playerid, "ADutyMinuta");
 			GetPVarInt(playerid, "ADutySekunda"); 
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
-			GetPVarInt(playerid, "KickQuantity"); 
+			GetPVarInt(playerid, "KickQuantity");
+			GetPVarInt(playerid, "WarnQuanity");
 			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
@@ -10222,8 +10223,14 @@ CMD:adminduty(playerid, params[])
 			h3 = h2-h1;
 			m3 = m2-m1;
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê wykona³ w czasie %d:%d [B0/W0/K%d/I0]", d1, mi1, y1, FirstNickname, nickadmina, h3, m3, IloscKick); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê wykona³ w czasie %d:%d [B0/W%d/K%d/I0]", d1, mi1, y1, FirstNickname, nickadmina, h3, m3, IloscWarn,IloscKick); //GENERATE LOG
 			AdminDutyLog(stringlog); //Create LOG
+			
+			//Zerowanie zmiennych - po zejœciu z duty admina :) 
+			IloscKick = 0;
+			IloscWarn = 0;
+			SetPVarInt(playerid, "KickQuantity", IloscKick);
+			SetPVarInt(playerid, "WarnQuantity", IloscWarn);
 			return 1;
 		}
 	}
@@ -26387,13 +26394,14 @@ CMD:kick(playerid, params[])
 						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
                         SendPunishMessage(string, giveplayerid);
 						//adminduty
-						SetPVarInt(playerid, "KickQuantity", IloscKick);
+						SetPVarInt(playerid, "KickQuantity", IloscKick);//Generuje zmienn¹
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
-							IloscKick= IloscKick+1;
-							GetPVarInt(playerid, "KickQuanity"); 
+							IloscKick= IloscKick+1;//Dzia³anie matematyczne
+							GetPVarInt(playerid, "KickQuanity"); //Pobiera pierwotn¹ zmienn¹
 							format(string, sizeof(string), "@DUTY: %s wykona³eœ ju¿ %d kicków podczas s³u¿by!", sendername, IloscKick); 
 							sendErrorMessage(playerid, string); 
+							SetPVarInt(playerid, "KickQuantity", IloscKick);//Ponownie ustala na zmienn¹ iloœæ kick
 						}
 						//adminowe logi
 						if (PlayerInfo[playerid][pZG] >= 1)
@@ -26497,6 +26505,16 @@ CMD:warn(playerid, params[])
 					/*format(str,sizeof(str),"~p~Warn Info (Ban):~n~~r~Osoba zwarnowana: ~w~%s~n~~r~Powod: ~w~%s ~n~~r~Nalozyl: ~w~%s", giveplayer ,(result), sendername);
 				    NapisText(str); */
 					WarnLog(string);
+					//adminduty
+					SetPVarInt(playerid, "WarnQuantity", IloscWarn);//Generuje zmienn¹
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						IloscWarn= IloscWarn+1;//Dzia³anie matematyczne
+						GetPVarInt(playerid, "WarnQuanity"); //Pobiera pierwotn¹ zmienn¹
+						format(string, sizeof(string), "@DUTY: %s wykona³eœ ju¿ %d warnów podczas s³u¿by!", sendername, IloscWarn); 
+						sendErrorMessage(playerid, string); 
+						SetPVarInt(playerid, "WarnQuantity", IloscWarn);//Ponownie ustala na zmienn¹ iloœæ kick
+					}
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 	    			AntySpam[playerid] = 1;
 	    			KickEx(giveplayerid);
