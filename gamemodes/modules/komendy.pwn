@@ -26387,9 +26387,10 @@ CMD:kick(playerid, params[])
 						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
                         SendPunishMessage(string, giveplayerid);
 						//adminduty
-						SetPVarInt(playerid, "KickQuantity", IloscKick+1);
+						SetPVarInt(playerid, "KickQuantity", IloscKick);
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
+							IloscKick= IloscKick+1;
 							GetPVarInt(playerid, "KickQuanity"); 
 							format(string, sizeof(string), "@DUTY: %s wykona³eœ ju¿ %d kicków podczas s³u¿by!", sendername, IloscKick); 
 							sendErrorMessage(playerid, string); 
