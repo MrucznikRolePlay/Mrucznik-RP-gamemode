@@ -10254,9 +10254,9 @@ CMD:admintime(playerid)
 			GetPVarInt(playerid, "ADutyMinuta");
 			GetPVarInt(playerid, "ADutySekunda"); 
 			gettime(h2, m2, s2); 
-			h3=h2-h;
-			m3=m2-m;
-			s3=s2-s;
+			h3=h2-h1;
+			m3=m2-m1;
+			s3=s2-s1;
 			GetPlayerName(playerid, AdminName, sizeof(AdminName));
 			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut %s sekund", AdminName, h3,m3,s3); 
 			sendTipMessage(playerid, string);
