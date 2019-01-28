@@ -26388,6 +26388,11 @@ CMD:kick(playerid, params[])
                         SendPunishMessage(string, giveplayerid);
 						//adminduty
 						SetPVarInt(playerid, "KickQuantity", IloscKick+1);
+						if(GetPVarInt(playerid, "dutyadmin") == 1)
+						{
+							format(string, sizeof(string), "@DUTY: %s wykona³eœ ju¿ %d kicków!", sendername, IloscKick); 
+							sendTipMessage(playerid, string); 
+						}
 						//adminowe logi
 						if (PlayerInfo[playerid][pZG] >= 1)
 					    {
