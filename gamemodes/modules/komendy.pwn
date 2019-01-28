@@ -10128,7 +10128,7 @@ CMD:adminduty(playerid, params[])
 				sendTipMessage(playerid, "U¿yj /adminduty [NICK 4UM]");
 				return 1;
 			}
-			if(OnDuty[playerid] == 1)
+			if(OnDuty[playerid] == 1 || JobDuty[playerid] == 1 || SanDuty[playerid] == 1)//Zabezpieczenie przed duty 
 			{
 				sendErrorMessage(playerid, "Najpierw zejdŸ z duty! Powodujesz bugi, które muszê naprawiaæ! ");
 				return 1;
