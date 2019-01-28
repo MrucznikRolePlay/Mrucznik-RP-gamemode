@@ -10105,7 +10105,7 @@ CMD:setname(playerid, params[])
 	}
 	return 1;
 }
-CMD:adminduty(playerid, params[]) 
+CMD:adminduty(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
@@ -10130,7 +10130,7 @@ CMD:adminduty(playerid, params[])
 			}
 			if(OnDuty[playerid] == 1)
 			{
-				sendErrorMessage(playerid, "Najpierw zejdŸ z duty! Powodujesz bugi, które muszê naprawiaæ! :( "); 
+				sendErrorMessage(playerid, "Najpierw zejdŸ z duty! Powodujesz bugi, które muszê naprawiaæ! ");
 				return 1;
 			}
 			else
@@ -10139,7 +10139,7 @@ CMD:adminduty(playerid, params[])
 				{
 					if(strlen(params) >= 3)//Minimalnie 3 znaki
 					{
-						if(strfind(params, "%") == -1 && strfind(params, "\") == -1 && strfind(params, "{") == -1 && strfind(params, "}") == -1 && strfind(params, "[") == -1 && strfind(params, " ") == -1 && strfind(params, ".") == -1 && strfind(params, "/") == -1 && strfind(params, "_") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "]") == -1 && strfind(params, "<") == -1 && strfind(params, ">") == -1 && strfind(params, ";") == -1 &&  strfind(params, ":") == -1 && strfind(params, "'") == -1 && strfind(params, "~") == -1 && strfind(params, "=") == -1 &&   strfind(params, "#") == -1)
+						if(strfind(params, "%") == -1 && strfind(params, "\") == -1 && strfind(params, "{") == -1 && strfind(params, "}") == -1 && strfind(params, "[") == -1 && strfind(params, " ") == -1 && strfind(params, ".") == -1 && strfind(params, "/") == -1 && strfind(params, "_") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "]") == -1 && strfind(params, "<") == -1 && strfind(params, ">") == -1 && strfind(params, ";") == -1 &&  strfind(params, ":") == -1 && strfind(params, "'") == -1 && strfind(params, "~") == -1 && strfind(params, "=") == -1 &&  strfind(params, "'") == -1 &&  strfind(params, "#") == -1)
 						{
 							foreach(Player, i)
 							{
