@@ -10105,7 +10105,7 @@ CMD:setname(playerid, params[])
 	}
 	return 1;
 }
-CMD:adminduty(playerid, params[])
+CMD:adminduty(playerid, params[]) 
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
@@ -10128,13 +10128,18 @@ CMD:adminduty(playerid, params[])
 				sendTipMessage(playerid, "U¿yj /adminduty [NICK 4UM]");
 				return 1;
 			}
+			if(OnDuty[playerid] == 1)
+			{
+				sendErrorMessage(playerid, "Najpierw zejdŸ z duty! Powodujesz bugi, które muszê naprawiaæ! :( "); 
+				return 1;
+			}
 			else
 			{
 				if(strlen(params) < 32)//Maksymalnie 32 znaki nicku
 				{
 					if(strlen(params) >= 3)//Minimalnie 3 znaki
 					{
-						if(strfind(params, "%") == -1 && strfind(params, " ") == -1 && strfind(params, ".") == -1 && strfind(params, "/") == -1 && strfind(params, "_") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "#") == -1)
+						if(strfind(params, "%") == -1 && strfind(params, "\") == -1 && strfind(params, "{") == -1 && strfind(params, "}") == -1 && strfind(params, "[") == -1 && strfind(params, " ") == -1 && strfind(params, ".") == -1 && strfind(params, "/") == -1 && strfind(params, "_") == -1 && strfind(params, "@") == -1 && strfind(params, "!") == -1 && strfind(params, "?") == -1 && strfind(params, "-") == -1 && strfind(params, "$") == -1 && strfind(params, "^") == -1 && strfind(params, "]") == -1 && strfind(params, "<") == -1 && strfind(params, ">") == -1 && strfind(params, ";") == -1 &&  strfind(params, ":") == -1 && strfind(params, "'") == -1 && strfind(params, "~") == -1 && strfind(params, "=") == -1 &&   strfind(params, "#") == -1)
 						{
 							foreach(Player, i)
 							{
