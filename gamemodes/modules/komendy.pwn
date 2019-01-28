@@ -13738,7 +13738,7 @@ CMD:kupowaniedomu(playerid)
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie kupiæ domu podczas s³u¿by administratora!"); 
+			sendErrorMessage(playerid, "Nie mo¿esz kupiæ domu podczas s³u¿by administratora!"); 
 		}
   	}
 	return 1;
