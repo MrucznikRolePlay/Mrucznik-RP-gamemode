@@ -10257,7 +10257,7 @@ CMD:admintime(playerid)
 			h3=h1-h2;
 			m3=m1-m2;
 			GetPlayerName(playerid, AdminName, sizeof(AdminName));
-			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, h3,m3); 
+			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, h2,m2); 
 			sendTipMessage(playerid, string);
 		
 		}
