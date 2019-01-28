@@ -10105,8 +10105,7 @@ CMD:setname(playerid, params[])
 	}
 	return 1;
 }
-CMD:adminduty(playerid, params[]) return cmd_aduty(playerid, params[])
-CMD:aduty(playerid, params[])
+CMD:adminduty(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
