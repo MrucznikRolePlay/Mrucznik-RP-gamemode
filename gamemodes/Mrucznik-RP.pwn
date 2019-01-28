@@ -1783,7 +1783,11 @@ public OnPlayerSpawn(playerid)
 
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
-
+	//AdminDuty
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		SetPlayerColor(playerid, 0xFF0000FF);
+	}
     if(PlayerInfo[playerid][pLider] == FRAC_SN)
     {
         SetPVarInt(playerid, "scena-allow", 1);
