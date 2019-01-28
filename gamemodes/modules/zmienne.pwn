@@ -44,7 +44,8 @@ new ServerWeather = 3;//Pogoda
 
 //admduty
 new nickadminaIC[MAX_PLAYER_NAME];
-//SetPVarInt(playerid, "dutyadmin", 0); 
+new IloscKick = 0;
+
 
 //legal
 new DB:db_handle;

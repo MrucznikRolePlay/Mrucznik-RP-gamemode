@@ -10105,7 +10105,8 @@ CMD:setname(playerid, params[])
 	}
 	return 1;
 }
-CMD:adminduty(playerid, params[])
+CMD:adminduty(playerid, params[]) return cmd_aduty(playerid, params[]);
+CMD:aduty(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
@@ -10116,6 +10117,7 @@ CMD:adminduty(playerid, params[])
 		new CheckAdminName[MAX_PLAYER_NAME];//Porównywanie do pêtli - Czy nie ma ju¿ takiego nicku admina
 		new h1,m1,s1,h2,m2,s2;//Godziny wejœæ
 		new y1,mi1,d1;//Data
+		new h3,m3;//Dzia³anie matematyczne
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
@@ -10212,13 +10214,16 @@ CMD:adminduty(playerid, params[])
 			GetPVarInt(playerid, "ADutyMinuta");
 			GetPVarInt(playerid, "ADutySekunda"); 
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
+			GetPVarInt(playerid, "KickQuantity"); 
 			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
 			gettime(h2,m2,s2);
+			h3 = h2-h1;
+			m3 = m2-m1;
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zmieni³ nick na %s - wszed³ na s³u¿bê o %d:%d i zszed³ o %d:%d", d1, mi1, y1, nickadmina, FirstNickname, y1, m1, h2,m2); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê wykona³ w czasie %d:%d [B0/W0/K%d/I0]", d1, mi1, y1, FirstNickname, nickadmina, h3, m3, IloscKick); //GENERATE LOG
 			AdminDutyLog(stringlog); //Create LOG
 			return 1;
 		}
@@ -26382,6 +26387,8 @@ CMD:kick(playerid, params[])
 						KickLog(string);
 						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
                         SendPunishMessage(string, giveplayerid);
+						//adminduty
+						SetPVarInt(playerid, "KickQuantity", IloscKick+1);
 						//adminowe logi
 						if (PlayerInfo[playerid][pZG] >= 1)
 					    {
