@@ -10105,6 +10105,13 @@ CMD:setname(playerid, params[])
 	}
 	return 1;
 }
+/*
+======================================[SYSTEM ADMIN DUTY]==============================================
+--> 25-01-2019
+--> by Simeone
+--> All cred. i. 2.5.95
+System wykorzystuje: zmienne.pwn || OnDialogResponse || timery.pwn || Mrucznik-RP Gamemode || Kolory.pwn
+*/
 CMD:adminduty(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
@@ -10211,6 +10218,8 @@ CMD:adminduty(playerid, params[])
 			GetPVarInt(playerid, "WarnQuanity");
 			GetPVarInt(playerid, "BanQuantity");
 			GetPVarInt(playerid, "InneQuantity"); 
+			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+			GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
@@ -10277,6 +10286,69 @@ CMD:adminstats(playerid)
 	}
 	return 1;
 }
+
+CMD:checkadminstats(playerid, params[])
+{
+	new SenderAdminName[MAX_PLAYER_NAME];
+	new FirstSenderAdminName[MAX_PLAYER_NAME];
+	new string[325];
+	new giveplayerid;
+	if(sscanf(params, "k<fix>", giveplayerid))
+	{
+		sendTipMessage(playerid, "U¿yj /checkadminstats [ID]");
+		return 1;
+	}
+	if(PlayerInfo[playerid][pAdmin] >= 1000) 
+	{
+		if(giveplayerid != INVALID_PLAYER_ID)
+		{
+			if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1)
+			{
+				if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
+				{
+					GetPVarInt(giveplayerid, "KickQuantity");
+					GetPVarInt(giveplayerid, "WarnQuanity");
+					GetPVarInt(giveplayerid, "BanQuanity");
+					GetPVarInt(giveplayerid, "InneQuanity");
+					GetPVarString(giveplayerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+					GetPVarString(giveplayerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+					format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", AdminName, FirstNickname,IloscBan,IloscWarn,IloscKick,IloscInne,AdminDutyGodziny[playerid], AdminDutyMinuty[playerid]);
+					ShowPlayerDialogEx(playerid, 1091, DIALOG_STYLE_MSGBOX, "System @DUTY", string, "Okej", "");
+					
+				
+				}
+				else
+				{
+					format(string, sizeof(string), "Gracz %s nie jest podczas s³u¿by!", GetNick(giveplayerid));
+					sendErrorMessage(playerid, string); 
+					return 1;
+				}
+			}
+			else
+			{
+				format(string, sizeof(string), "Gracz %s nie jest administratorem!", GetNick(giveplayerid));
+				sendErrorMessage(playerid, string); 
+				return 1;
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie ma takiego gracza!"); 
+			return 1;
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie masz uprawnieñ aby tego u¿yæ"); 
+		return 1;
+	}
+
+	return 1;
+}
+
+/*
+===========================================[KONIEC SYSTEMU ADMIN DUTY]=================================================
+*/
 CMD:zmiennick(playerid, params[])
 {
 	new string[128];
@@ -26519,7 +26591,7 @@ CMD:kick(playerid, params[])
 				return 1;
 			}
 		}
-		if (!IsPlayerConnected(giveplayerid) && giveplayerid == INVALID_PLAYER_ID)
+		if(!IsPlayerConnected(giveplayerid))
 		{
 			sendErrorMessage(playerid, "B³êdne ID gracza!"); 
 			return 1;
