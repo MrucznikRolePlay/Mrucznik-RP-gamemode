@@ -10173,6 +10173,7 @@ CMD:adminduty(playerid, params[])
 									AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
 									format(string, sizeof(string), "Administrator wszed³ %s [%s] na s³u¿bê administratora!", AdminName,FirstNickname);
 									SendAdminMessage(COLOR_RED, string); 
+									MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);
 								
 									format(string, sizeof(string), "%s", AdminName); 
 									SetPlayerName(playerid, string);
@@ -10224,8 +10225,9 @@ CMD:adminduty(playerid, params[])
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
-			format(string, sizeof(string), "@DUTY: %s wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", AdminName, IloscBan,IloscWarn,IloscKick, IloscInne); 
+			format(string, sizeof(string), "@DUTY: Wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", IloscBan,IloscWarn,IloscKick, IloscInne); 
 			sendErrorMessage(playerid, string); 
+			MSGBOX_Show(playerid, "Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
 			
 			//LOG
 			getdate(y1, mi1, d1); 
@@ -10314,8 +10316,7 @@ CMD:checkadminstats(playerid, params[])
 					GetPVarString(giveplayerid, "pAdminDutyNickOff", FirstSenderAdminName, sizeof(FirstSenderAdminName)); 
 					format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", SenderAdminName, FirstSenderAdminName,IloscBan,IloscWarn,IloscKick,IloscInne,AdminDutyGodziny[giveplayerid], AdminDutyMinuty[giveplayerid]);
 					ShowPlayerDialogEx(playerid, 1091, DIALOG_STYLE_MSGBOX, "System @DUTY", string, "Okej", "");
-					
-				
+					return 1;
 				}
 				else
 				{
@@ -15349,6 +15350,11 @@ CMD:wymiana(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /wymiana [Nick/ID] [cena]");
 			return 1;
 		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ podczas @Duty");
+			return 1;
+		}
         if(!IsPlayerConnected(playa)) return sendErrorMessage(playerid, "Brak takiego gracza.");
         if(!IsPlayerInAnyVehicle(playa)) return sendTipMessage(playerid, "Gracz musi byæ w pojeŸdzie.");
 		cena = FunkcjaK(string);
@@ -16738,6 +16744,11 @@ CMD:fbi(playerid, params[])
 			    sendErrorMessage(playerid, "Musisz mieæ 2 range aby u¿ywaæ tej komendy!");
 			    return 1;
 			}
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				sendErrorMessage(playerid, "Nie mo¿esz u¿yæ tego podczas @Duty"); 
+				return 1;
+			}
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			if(isnull(params))
 			{
@@ -17273,6 +17284,11 @@ CMD:zablokujtel(playerid)
 CMD:sprobuj(playerid, params[])
 {
 	if(isnull(params)) return sendTipMessage(playerid, "U¿yj /sprobuj [Akcja] np. trafiæ do kosza");
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿yæ tej komendy podczas s³u¿by administratora!"); 
+		return 1;
+	}
     new string[256];
 	//switch(random(4)+1) 
 	new rand = random(2);
@@ -19777,6 +19793,16 @@ CMD:dzwon(playerid, params[])
 	if(Mobile[playerid] != INVALID_PLAYER_ID)
 	{
 		sendErrorMessage(playerid, "Dzwonisz ju¿ do kogoœ.");
+		return 1;
+	}
+	if(GetPVarInt(reciverid, "dutyadmin") == 1)
+	{
+		sendErrorMessage(playerid, "Osoba do której próbujesz zadzwoniæ jest nieosi¹galna!"); 
+		return 1;
+	}
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas s³u¿by administratora!"); 
 		return 1;
 	}
 	
@@ -35717,6 +35743,11 @@ CMD:news(playerid, params[])
 	        if(PlayerInfo[playerid][pMuted] == 1)
 			{
 				sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ poniewa¿ zosta³eœ wyciszony");
+				return 1;
+			}
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ /news podczas s³u¿by administratora!"); 
 				return 1;
 			}
 
