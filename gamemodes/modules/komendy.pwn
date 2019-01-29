@@ -10107,17 +10107,17 @@ CMD:setname(playerid, params[])
 }
 CMD:adminduty(playerid, params[])
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1 )
+	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[para1][pNewAP] >= 1)
 	{
 		new string[256];
 		new stringlog[325];//String do logu
-		new nickadmina[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
+		new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
 		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
 		new CheckAdminName[MAX_PLAYER_NAME];//Porównywanie do pêtli - Czy nie ma ju¿ takiego nicku admina
 		new y1,mi1,d1;//Data
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
-		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
+		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 		SetPVarInt(playerid, "InneQuantity", IloscInne);//Do zapisu na kilka komend
 		
@@ -10164,10 +10164,10 @@ CMD:adminduty(playerid, params[])
 								{
 				
 									SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-									format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
-									SendClientMessageToAll(COLOR_RED, string); 
+									format(string, sizeof(string), "Administrator wszed³ %s [%s] na s³u¿bê administratora!", AdminName,FirstNickname);
+									SendAdminMessage(COLOR_RED, string); 
 								
-									format(string, sizeof(string), "%s", nickadmina); 
+									format(string, sizeof(string), "%s", AdminName); 
 									SetPlayerName(playerid, string);
 									SetPVarInt(playerid, "dutyadmin", 1);
 									SetPlayerColor(playerid, 0xFF0000FF);
@@ -10213,12 +10213,12 @@ CMD:adminduty(playerid, params[])
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
-			format(string, sizeof(string), "@DUTY: %s wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", nickadmina, IloscBan,IloscWarn,IloscKick, IloscInne); 
+			format(string, sizeof(string), "@DUTY: %s wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", AdminName, IloscBan,IloscWarn,IloscKick, IloscInne); 
 			sendErrorMessage(playerid, string); 
 			
 			//LOG
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d]", d1, mi1, y1, FirstNickname, nickadmina, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],IloscBan,IloscWarn,IloscKick,IloscInne); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d]", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],IloscBan,IloscWarn,IloscKick,IloscInne); //GENERATE LOG
 			AdminDutyLog(stringlog); //Create LOG
 			
 			//Zerowanie zmiennych - po zejœciu z duty admina :) 
@@ -23692,6 +23692,12 @@ CMD:adminajail(playerid, params[])
 					SendPunishMessage(string, playa);
 					poscig[playa] = 0;
 					KickLog(string);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 					//adminowe logi
 					format(string, sizeof(string), "Admini/%s.ini", sendername);
 					dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
@@ -23795,6 +23801,12 @@ CMD:tod(playerid, params[])
             format(string, sizeof(string), "CMD_Info: /tod u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
             CMDLog(string);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				GetPVarInt(playerid, "InneQuantity");
+				IloscInne = IloscInne+1;
+				SetPVarInt(playerid, "InneQuantity", IloscInne);
+			}
 		}
 		else
 		{
@@ -24029,6 +24041,12 @@ CMD:clearwlall(playerid)
 			}
 			format(string, sizeof(string), "Admin %s wyczyœci³ wszystkim wanted level", GetNick(playerid));
 			SendClientMessageToAll(COLOR_LIGHTBLUE, string);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				GetPVarInt(playerid, "InneQuantity");
+				IloscInne = IloscInne+1;
+				SetPVarInt(playerid, "InneQuantity", IloscInne);
+			}
 		}
 		else
 		{
@@ -24065,6 +24083,12 @@ CMD:setint(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD1, string);
 			format(string, sizeof(string), "Admin %s ustawi³ ci interior nr %d.", GetNick(playerid), intid);
 			SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				GetPVarInt(playerid, "InneQuantity");
+				IloscInne = IloscInne+1;
+				SetPVarInt(playerid, "InneQuantity", IloscInne);
+			}
 		}
 		else
 		{
@@ -24100,6 +24124,12 @@ CMD:setvw(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD1, string);
 			format(string, sizeof(string), "Admin %s ustawi³ ci virtualworld nr %d.", GetNick(playerid), intid);
 			SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				GetPVarInt(playerid, "InneQuantity");
+				IloscInne = IloscInne+1;
+				SetPVarInt(playerid, "InneQuantity", IloscInne);
+			}
 		}
 		else
 		{

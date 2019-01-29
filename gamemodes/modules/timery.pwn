@@ -37,17 +37,6 @@ public KomunikatTimer()
 {
 	CMDKomunikat = 0;
 }
-public AdminDutyCzas(playerid)
-{
-	AdminDutyMinuty[playerid]++;
-	if(AdminDutyMinuty[playerid] == 60)
-	{
-		AdminDutyGodziny[playerid]++;
-		AdminDutyMinuty[playerid] = 0;
-	
-	}
-	return 1;
-}
 public SprzedajMatsTimer(playerid,giveplayerid)
 {
 	if(GetPVarInt(giveplayerid, "OKupMats") == 1)
@@ -62,6 +51,18 @@ public SprzedajMatsTimer(playerid,giveplayerid)
 	{
 		SetPVarInt(playerid, "OSprzedajMats", 0);
 		sendErrorMessage(playerid, "Sprzeda¿ mats zosta³a anulowana!");
+	}
+	return 1;
+}
+//Adminduty
+public AdminDutyCzas(playerid)
+{
+	AdminDutyMinuty[playerid]++;
+	if(AdminDutyMinuty[playerid] == 60)
+	{
+		AdminDutyGodziny[playerid]++;
+		AdminDutyMinuty[playerid] = 0;
+	
 	}
 	return 1;
 }
