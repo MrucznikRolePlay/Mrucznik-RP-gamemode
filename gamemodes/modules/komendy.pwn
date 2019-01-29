@@ -10230,7 +10230,7 @@ CMD:adminduty(playerid, params[])
 			SetPVarInt(playerid, "WarnQuantity", IloscWarn);
 			SetPVarInt(playerid, "BanQuantity", IloscBan); 
 			SetPVarInt(playerid, "InneQuantity", IloscInne);
-			KillTimer(AdminDutyCzas);
+			KillTimer(0);
 			return 1;
 		}
 	}
