@@ -50,7 +50,6 @@ new IloscBan = 0;
 new IloscInne = 0; 
 new AdminDutyMinuty[MAX_PLAYERS] = 0;
 new AdminDutyGodziny[MAX_PLAYERS] = 0;
-SetPVarInt(playerid, "InneQuantity", IloscInne);
 
 
 //legal

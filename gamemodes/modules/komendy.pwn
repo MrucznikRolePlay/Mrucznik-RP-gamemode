@@ -10114,13 +10114,12 @@ CMD:adminduty(playerid, params[])
 		new nickadmina[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
 		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
 		new CheckAdminName[MAX_PLAYER_NAME];//Porównywanie do pêtli - Czy nie ma ju¿ takiego nicku admina
-		new h1,m1,s1,h2,m2,s2;//Godziny wejœæ
 		new y1,mi1,d1;//Data
-		new h3,m3;//Dzia³anie matematyczne
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", nickadmina, sizeof(nickadmina)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+		SetPVarInt(playerid, "InneQuantity", IloscInne);//Do zapisu na kilka komend
 		
 		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
@@ -10214,7 +10213,7 @@ CMD:adminduty(playerid, params[])
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
-			format(string, sizeof(string), "@DUTY: %s wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", sendername, IloscBan,IloscWarn,IloscKick, IloscInne); 
+			format(string, sizeof(string), "@DUTY: %s wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", nickadmina, IloscBan,IloscWarn,IloscKick, IloscInne); 
 			sendErrorMessage(playerid, string); 
 			
 			//LOG
