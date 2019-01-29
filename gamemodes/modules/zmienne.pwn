@@ -46,6 +46,8 @@ new ServerWeather = 3;//Pogoda
 new nickadminaIC[MAX_PLAYER_NAME];
 new IloscKick = 0;
 new IloscWarn = 0;
+new AdminDutyMinuty[MAX_PLAYERS] = 0;
+new AdminDutyGodziny[MAX_PLAYERS] = 0;
 
 
 //legal

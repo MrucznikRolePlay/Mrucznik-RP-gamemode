@@ -10164,12 +10164,7 @@ CMD:adminduty(playerid, params[])
 								if(strlen(CheckAdminName) != strlen(params))//zabezpieczenie, gdy admin próbuje ustawiæ nick admina
 								{
 				
-									gettime(h1, m1, s1); 
-									FixHour(h1);
-									h1 = timeshift;
-									SetPVarInt(playerid, "ADutyGodzina", h1);
-									SetPVarInt(playerid, "ADutyMinuta", m1);
-									SetPVarInt(playerid, "ADutySekunda", s1);
+									SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
 									format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora! [/report]", nickadmina);
 									SendClientMessageToAll(COLOR_RED, string); 
 								
@@ -10211,9 +10206,7 @@ CMD:adminduty(playerid, params[])
 		}
 		else if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
-			GetPVarInt(playerid, "ADutyGodzina"); 
-			GetPVarInt(playerid, "ADutyMinuta");
-			GetPVarInt(playerid, "ADutySekunda"); 
+			
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
 			GetPVarInt(playerid, "KickQuantity");
 			GetPVarInt(playerid, "WarnQuanity");
@@ -10221,13 +10214,10 @@ CMD:adminduty(playerid, params[])
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
-			gettime(h2,m2,s2);
-			FixHour(h2);
-			h2 = timeshift;
-			h3 = h2-h1;
-			m3 = m2-m1;
+			
+			//LOG
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê wykona³ w czasie %d:%d [B0/W%d/K%d/I0]", d1, mi1, y1, FirstNickname, nickadmina, h3, m3, IloscWarn,IloscKick); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê wykona³ w czasie %d:%d [B0/W%d/K%d/I0]", d1, mi1, y1, FirstNickname, nickadmina, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], IloscWarn,IloscKick); //GENERATE LOG
 			AdminDutyLog(stringlog); //Create LOG
 			
 			//Zerowanie zmiennych - po zejœciu z duty admina :) 
@@ -10251,23 +10241,11 @@ CMD:admintime(playerid)
 	new AdminName[MAX_PLAYER_NAME];
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
-		new h2, m2, s2, h3, m3, h1,m1;
 		new string[128];
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
-			GetPVarInt(playerid, "ADutyGodzina"); 
-			GetPVarInt(playerid, "ADutyMinuta");
-			gettime(h2, m2, s2); 
-			FixHour(h2);
-			h2 = timeshift;
-			//__OBLICZANIE CZASU___
-			h3 = h2 - h1;//Obliczanie czasu (godziny)
-			m3 = h3*60+m2-m1;//Wyci¹gamy z godzin minuty i dodajemy minuty pobrane z "gettime"
-			m3 = m3%60;//Dzielimy pierwszy nadpis m3 przez 60 i reszta z dzielenia jest naszym m3
-			
-			
 			GetPlayerName(playerid, AdminName, sizeof(AdminName));
-			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, h2,m2); 
+			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, AdminDutyGodziny[playerid],AdminDutyMinuty[playerid]); 
 			sendTipMessage(playerid, string);
 			
 		
