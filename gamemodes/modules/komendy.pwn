@@ -26519,6 +26519,11 @@ CMD:kick(playerid, params[])
 				return 1;
 			}
 		}
+		if (!IsPlayerConnected(giveplayerid) && giveplayerid == INVALID_PLAYER_ID)
+		{
+			sendErrorMessage(playerid, "B³êdne ID gracza!"); 
+			return 1;
+		}
 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 1)
 		{
