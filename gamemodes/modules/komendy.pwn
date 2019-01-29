@@ -10267,7 +10267,7 @@ CMD:adminstats(playerid)
 			GetPVarInt(playerid, "KickQuantity");
 			GetPVarInt(playerid, "WarnQuanity");
 			GetPVarInt(playerid, "BanQuanity");
-			GetPVarInt(playerid, "InneQuanity");
+			IloscInne = GetPVarInt(playerid, "InneQuanity");
 			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 			GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 			format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", AdminName, FirstNickname,IloscBan,IloscWarn,IloscKick,IloscInne,AdminDutyGodziny[playerid], AdminDutyMinuty[playerid]);
@@ -10311,7 +10311,7 @@ CMD:checkadminstats(playerid, params[])
 					GetPVarInt(giveplayerid, "KickQuantity");
 					GetPVarInt(giveplayerid, "WarnQuanity");
 					GetPVarInt(giveplayerid, "BanQuanity");
-					GetPVarInt(giveplayerid, "InneQuanity");
+					IloscInne = GetPVarInt(giveplayerid, "InneQuanity");
 					GetPVarString(giveplayerid, "pAdminDutyNickOn", SenderAdminName, sizeof(SenderAdminName)); 
 					GetPVarString(giveplayerid, "pAdminDutyNickOff", FirstSenderAdminName, sizeof(FirstSenderAdminName)); 
 					format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", SenderAdminName, FirstSenderAdminName,IloscBan,IloscWarn,IloscKick,IloscInne,AdminDutyGodziny[giveplayerid], AdminDutyMinuty[giveplayerid]);
