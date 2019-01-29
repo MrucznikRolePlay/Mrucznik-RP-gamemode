@@ -10107,7 +10107,7 @@ CMD:setname(playerid, params[])
 }
 CMD:adminduty(playerid, params[])
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[para1][pNewAP] >= 1)
+	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{
 		new string[256];
 		new stringlog[325];//String do logu
