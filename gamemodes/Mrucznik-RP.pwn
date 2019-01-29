@@ -7204,29 +7204,62 @@ public OnPlayerText(playerid, text[])
 	    {
 	        return 0;
       	}
-        if(strlen(text) < 78)
-        {
-            format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), text);
-            ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-            SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-        }
-        else
-        {
-            new pos = strfind(text, " ", true, strlen(text) / 2);
-            if(pos != -1)
-            {
-                new text2[64];
+		if(GetPVarInt(playerid, "dutyadmin") == 0)
+		{
+			if(strlen(text) < 78)
+			{
+				format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), text);
+				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
+			}
+			else
+			{
+				new pos = strfind(text, " ", true, strlen(text) / 2);
+				if(pos != -1)
+				{
+					new text2[64];
 
-                strmid(text2, text, pos + 1, strlen(text));
-                strdel(text, pos, strlen(text));
+					strmid(text2, text, pos + 1, strlen(text));
+					strdel(text, pos, strlen(text));
 
-                format(string, sizeof(string), "%s mówi: %s [.]", GetNick(playerid, true), text);
-                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+					format(string, sizeof(string), "%s mówi: %s [.]", GetNick(playerid, true), text);
+					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
-                format(string, sizeof(string), "[.] %s", text2);
-                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-            }
-        }
+					format(string, sizeof(string), "[.] %s", text2);
+					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+				}
+			}
+		}
+		else
+		{
+			new AdminName[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, AdminName, sizeof(AdminName));
+			if(strlen(text) < 78)
+			{
+				
+				format(string, sizeof(string), "((Chat OOC: [%s]: %s))", AdminName, text);
+				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
+			}
+			else
+			{
+				new pos = strfind(text, " ", true, strlen(text) / 2);
+				if(pos != -1)
+				{
+					new text2[64];
+
+					strmid(text2, text, pos + 1, strlen(text));
+					strdel(text, pos, strlen(text));
+
+					format(string, sizeof(string), "((Chat OOC: [%s]: %s [..]))", AdminName, text);
+					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+
+					format(string, sizeof(string), "(([..] %s ))", text2);
+					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+				}
+			}
+			
+		}
 		return 0;
 	}
 	#if DEBUG == 1
