@@ -10163,7 +10163,7 @@ CMD:adminduty(playerid, params[])
 								if(strlen(CheckAdminName) != strlen(params))//zabezpieczenie, gdy admin próbuje ustawiæ nick admina
 								{
 				
-									SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
+									AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
 									format(string, sizeof(string), "Administrator wszed³ %s [%s] na s³u¿bê administratora!", AdminName,FirstNickname);
 									SendAdminMessage(COLOR_RED, string); 
 								
@@ -10230,7 +10230,7 @@ CMD:adminduty(playerid, params[])
 			SetPVarInt(playerid, "WarnQuantity", IloscWarn);
 			SetPVarInt(playerid, "BanQuantity", IloscBan); 
 			SetPVarInt(playerid, "InneQuantity", IloscInne);
-			KillTimer(0);
+			KillTimer(AdminDutyTimer[playerid]);
 			return 1;
 		}
 	}

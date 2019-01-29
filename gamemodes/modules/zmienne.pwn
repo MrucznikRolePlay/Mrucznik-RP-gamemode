@@ -50,6 +50,7 @@ new IloscBan = 0;
 new IloscInne = 0; 
 new AdminDutyMinuty[MAX_PLAYERS] = 0;
 new AdminDutyGodziny[MAX_PLAYERS] = 0;
+new AdminDutyTimer[MAX_PLAYERS];
 
 
 //legal
