@@ -131,6 +131,7 @@ public UsunPozar()
     return 1;
 }
 //Adminduty
+forward AdminDutyCzas(playerid);
 public AdminDutyCzas(playerid)
 {
 	AdminDutyMinuty[playerid]++;

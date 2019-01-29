@@ -1002,14 +1002,14 @@ public OnPlayerDisconnect(playerid, reason)
 		GetPVarInt(playerid, "KickQuantity");
 		GetPVarInt(playerid, "WarnQuanity");
 		GetPVarInt(playerid, "BanQuantity");
-			GetPVarInt(playerid, "InneQuantity"); 
+		GetPVarInt(playerid, "InneQuantity"); 
 		
 		//LOG
 		getdate(y1, mi1, d1); 
 		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszed³ poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],IloscBan,IloscWarn,IloscKick,IloscInne); //GENERATE LOG
 		AdminDutyLog(stringlog); //Create LOG
-			
-			//Zerowanie zmiennych - po zejœciu z duty admina :) 
+		
+		//Zerowanie zmiennych - po zejœciu z duty admina :) 
 		IloscKick = 0;
 		IloscWarn = 0;
 		IloscBan = 0;
@@ -7259,14 +7259,14 @@ public OnPlayerText(playerid, text[])
 				}
 			}
 		}
-		else
+		else//Je¿eli jest na admin duty
 		{
 			new AdminName[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, AdminName, sizeof(AdminName));
 			if(strlen(text) < 78)
 			{
 				
-				format(string, sizeof(string), "((Chat OOC: [%s]: %s))", AdminName, text);
+				format(string, sizeof(string), "{C0C0C0}((Chat OOC [{FF6A6A}%s{C0C0C0}]: %s))", AdminName, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
 			}
@@ -7280,10 +7280,10 @@ public OnPlayerText(playerid, text[])
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
 
-					format(string, sizeof(string), "((Chat OOC: [%s]: %s [..]))", AdminName, text);
+					format(string, sizeof(string), "{C0C0C0}((Chat OOC [{FF6A6A}%s{C0C0C0}]: %s [..]))", AdminName, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
-					format(string, sizeof(string), "(([..] %s ))", text2);
+					format(string, sizeof(string), "{C0C0C0}(([..] %s ))", text2);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				}
 			}
