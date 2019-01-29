@@ -991,6 +991,35 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		StopACall(playerid);
 	}
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		new stringlog[325];//String do logu
+		new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
+		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
+		new y1,mi1,d1;//Data
+		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+		GetPVarInt(playerid, "KickQuantity");
+		GetPVarInt(playerid, "WarnQuanity");
+		GetPVarInt(playerid, "BanQuantity");
+			GetPVarInt(playerid, "InneQuantity"); 
+		
+		//LOG
+		getdate(y1, mi1, d1); 
+		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszed³ poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],IloscBan,IloscWarn,IloscKick,IloscInne); //GENERATE LOG
+		AdminDutyLog(stringlog); //Create LOG
+			
+			//Zerowanie zmiennych - po zejœciu z duty admina :) 
+		IloscKick = 0;
+		IloscWarn = 0;
+		IloscBan = 0;
+		IloscInne = 0;
+		SetPVarInt(playerid, "KickQuantity", IloscKick);
+		SetPVarInt(playerid, "WarnQuantity", IloscWarn);
+		SetPVarInt(playerid, "BanQuantity", IloscBan); 
+		SetPVarInt(playerid, "InneQuantity", IloscInne);
+		KillTimer(AdminDutyTimer[playerid]);
+	}
 
 	//kajdanki
 	if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)

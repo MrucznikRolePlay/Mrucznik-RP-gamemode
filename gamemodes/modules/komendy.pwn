@@ -10209,6 +10209,8 @@ CMD:adminduty(playerid, params[])
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
 			GetPVarInt(playerid, "KickQuantity");
 			GetPVarInt(playerid, "WarnQuanity");
+			GetPVarInt(playerid, "BanQuantity");
+			GetPVarInt(playerid, "InneQuantity"); 
 			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
@@ -10255,7 +10257,9 @@ CMD:admintime(playerid)
 			sendTipMessage(playerid, string);
 			GetPVarInt(playerid, "KickQuantity");
 			GetPVarInt(playerid, "WarnQuanity");
-			format(string, sizeof(string), "@DUTY: %s nada³eœ ju¿ 0 banów | %d warnów | %d kicków | 0 innych akcji!", AdminName, IloscWarn, IloscKick);
+			GetPVarInt(playerid, "BanQuanity");
+			GetPVarInt(playerid, "InneQuanity");
+			format(string, sizeof(string), "@DUTY: %s nada³eœ ju¿ 0 banów | %d warnów | %d kicków | 0 innych akcji!", AdminName, IloscBan,IloscWarn,IloscKick, IloscInne);
 			sendTipMessage(playerid, string);
 			
 		
