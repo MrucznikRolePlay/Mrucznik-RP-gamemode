@@ -10214,17 +10214,23 @@ CMD:adminduty(playerid, params[])
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
+			format(string, sizeof(string), "@DUTY: %s wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", sendername, IloscBan,IloscWarn,IloscKick, IloscInne); 
+			sendErrorMessage(playerid, string); 
 			
 			//LOG
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê wykona³ w czasie %d:%d [B0/W%d/K%d/I0]", d1, mi1, y1, FirstNickname, nickadmina, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], IloscWarn,IloscKick); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d]", d1, mi1, y1, FirstNickname, nickadmina, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],IloscBan,IloscWarn,IloscKick,IloscInne); //GENERATE LOG
 			AdminDutyLog(stringlog); //Create LOG
 			
 			//Zerowanie zmiennych - po zejœciu z duty admina :) 
 			IloscKick = 0;
 			IloscWarn = 0;
+			IloscBan = 0;
+			IloscInne = 0;
 			SetPVarInt(playerid, "KickQuantity", IloscKick);
 			SetPVarInt(playerid, "WarnQuantity", IloscWarn);
+			SetPVarInt(playerid, "BanQuantity", IloscBan); 
+			SetPVarInt(playerid, "InneQuantity", IloscInne);
 			return 1;
 		}
 	}
@@ -10247,6 +10253,10 @@ CMD:admintime(playerid)
 			GetPlayerName(playerid, AdminName, sizeof(AdminName));
 			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, AdminDutyGodziny[playerid],AdminDutyMinuty[playerid]); 
 			sendTipMessage(playerid, string);
+			GetPVarInt(playerid, "KickQuantity");
+			GetPVarInt(playerid, "WarnQuanity");
+			format(string, sizeof(string), "@DUTY: %s nada³eœ ju¿ 0 banów | %d warnów | %d kicków | 0 innych akcji!", AdminName, IloscWarn, IloscKick);
+			sendTipMessage(playerid, string);
 			
 		
 		}
@@ -10254,7 +10264,6 @@ CMD:admintime(playerid)
 		{
 			sendErrorMessage(playerid, "Nie jesteœ podczas s³u¿by administratora!"); 
 		}
-	
 	
 	}
 	else
@@ -24671,6 +24680,12 @@ CMD:makeleader(playerid, params[])
 					//logi
 					format(string, sizeof(string), "%s dal kontrole nad frakcja numer %d graczowi %s", sendername, level, giveplayer);
 					ActionLog(string);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
 					else if(level == 1) { PlayerInfo[para1][pSkin] = 288; } //Police Force
@@ -24750,6 +24765,12 @@ CMD:makewomanleader(playerid, params[])
 					//logi
 					format(string, sizeof(string), "%s dal kontrole nad frakcja numer %d graczowi %s", sendername, level, giveplayer);
 					ActionLog(string);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
 					else if(level == 1) { PlayerInfo[para1][pSkin] = 93; } //Police Force
@@ -24823,6 +24844,12 @@ CMD:makemember(playerid, params[])
 					//logi
 					format(string, sizeof(string), "%s mianowal na czlonka frakcji numer %d gracza %s", sendername, level, giveplayer);
 					ActionLog(string);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
 					else if(level == 1) { PlayerInfo[para1][pSkin] = 280; } //Police Force
@@ -25400,6 +25427,12 @@ CMD:tp(playerid, params[])
 					SendClientMessage(plo, COLOR_GRAD1, string);
 					format(string, sizeof(string), "Teleportowano %s (ID: %d) do %s (ID: %d).", giveplayer01, plo1, giveplayer02, plo);
 					SendClientMessage(playerid, COLOR_GRAD1, string);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 					if(PlayerInfo[plo][pInt] > 0)
 					{
 						PlayerInfo[plo1][pInt] = PlayerInfo[plo][pInt];
@@ -25604,6 +25637,12 @@ CMD:gethere(playerid, params[])
                     SetPlayerInterior(plo, GetPlayerInterior(playerid));
 					SetPlayerVirtualWorld(plo, GetPlayerVirtualWorld(playerid));
 					sendTipMessageEx(plo, COLOR_GRAD1, "Zosta³eœ teleportowany");
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 				}
 				else
 				{
@@ -25638,6 +25677,12 @@ CMD:getcar(playerid, params[])
 			GetPlayerPos(playerid, plocx, plocy, plocz);
 			SetVehiclePos(plo,plocx,plocy+4, plocz);
             SetVehicleVirtualWorld(plo, GetPlayerVirtualWorld(playerid));
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				GetPVarInt(playerid, "InneQuantity");
+				IloscInne = IloscInne+1;
+				SetPVarInt(playerid, "InneQuantity", IloscInne);
+			}
 		}
 		else
 		{
@@ -25728,6 +25773,12 @@ CMD:tankveh(playerid)
 				format(string, sizeof(string), "AdmCmd: %s zatankowa³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
 				SendPunishMessage(string, playerid);
 				KickLog(string);
+				if(GetPVarInt(playerid, "dutyadmin") == 1)
+				{
+					GetPVarInt(playerid, "InneQuantity");
+					IloscInne = IloscInne+1;
+					SetPVarInt(playerid, "InneQuantity", IloscInne);
+				}
             }
             else
             {
@@ -25755,6 +25806,12 @@ CMD:tankujauta(playerid)
 			SendPunishMessage(string, playerid);
 			KickLog(string);
 			SendClientMessage(playerid, COLOR_GREY, "Wszystkie pojazdy zatankowane ! ");
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				GetPVarInt(playerid, "InneQuantity");
+				IloscInne = IloscInne+1;
+				SetPVarInt(playerid, "InneQuantity", IloscInne);
+			}
         }
         else
         {
@@ -25965,6 +26022,12 @@ CMD:zmienhp(playerid, params[])
 						printf("SETHP: AdmCmd: %s da³ %d hp %s", sendername, health,  giveplayer);
 					    SetVehicleHealth(GetPlayerVehicleID(playa), health);
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
+						if(GetPVarInt(playerid, "dutyadmin") == 1)
+						{
+							GetPVarInt(playerid, "InneQuantity");
+							IloscInne = IloscInne+1;
+							SetPVarInt(playerid, "InneQuantity", IloscInne);
+						}
 					}
 				}
 			}
@@ -26003,6 +26066,12 @@ CMD:setarmor(playerid, params[])
 					format(string, sizeof(string), "AdmCmd: %s da³ $d armora %s", sendername, health,  giveplayer);
 					StatsLog(string);
 					SetPlayerArmour(playa, health);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 				}
 			}
 		}
@@ -26068,6 +26137,12 @@ CMD:fixveh(playerid)
 			format(string, sizeof(string), "AdmCmd: %s naprawi³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
 			SendPunishMessage(string, playerid);
 			KickLog(string);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				GetPVarInt(playerid, "InneQuantity");
+				IloscInne = IloscInne+1;
+				SetPVarInt(playerid, "InneQuantity", IloscInne);
+			}
 		}
 	}
 	return 1;
@@ -26147,6 +26222,12 @@ CMD:pogodaall(playerid, params[])
             format(string, 128, "CMD_Info: /pogodaall u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
             CMDLog(string);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				GetPVarInt(playerid, "InneQuantity");
+				IloscInne = IloscInne+1;
+				SetPVarInt(playerid, "InneQuantity", IloscInne);
+			}
 		}
 		else
 		{
@@ -26301,6 +26382,12 @@ CMD:slap(playerid, params[])
 					ABroadCast(COLOR_LIGHTRED,string,1);
 					format(string, sizeof(string), "Dosta³eœ klapsa w dupsko od administratora %s, widocznie zrobi³eœ coœ z³ego :)", sendername);
 					SendClientMessage(playa, COLOR_PANICRED, string);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 				}
 			}
 		}
@@ -26357,6 +26444,12 @@ CMD:ucisz(playerid, params[])
 						ABroadCast(COLOR_LIGHTRED,string,1);
 						format(string, sizeof(string), "Zosta³eœ odciszony przez administratora %s, popraw siê :)", sendername);
 						SendClientMessage(playa, COLOR_PANICRED, string);
+					}
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
 					}
 				}
 			}
@@ -26418,10 +26511,9 @@ CMD:kick(playerid, params[])
 						SetPVarInt(playerid, "KickQuantity", IloscKick);//Generuje zmienn¹
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
-							IloscKick= IloscKick+1;//Dzia³anie matematyczne
 							GetPVarInt(playerid, "KickQuanity"); //Pobiera pierwotn¹ zmienn¹
-							format(string, sizeof(string), "@DUTY: %s wykona³eœ ju¿ %d kicków podczas s³u¿by!", sendername, IloscKick); 
-							sendErrorMessage(playerid, string); 
+							IloscKick= IloscKick+1;//Dzia³anie matematyczne
+					
 							SetPVarInt(playerid, "KickQuantity", IloscKick);//Ponownie ustala na zmienn¹ iloœæ kick
 						}
 						//adminowe logi
@@ -26530,11 +26622,14 @@ CMD:warn(playerid, params[])
 					SetPVarInt(playerid, "WarnQuantity", IloscWarn);//Generuje zmienn¹
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						IloscWarn= IloscWarn+1;//Dzia³anie matematyczne
 						GetPVarInt(playerid, "WarnQuanity"); //Pobiera pierwotn¹ zmienn¹
-						format(string, sizeof(string), "@DUTY: %s wykona³eœ ju¿ %d warnów podczas s³u¿by!", sendername, IloscWarn); 
-						sendErrorMessage(playerid, string); 
+						IloscWarn= IloscWarn+1;//Dzia³anie matematyczne
+				
 						SetPVarInt(playerid, "WarnQuantity", IloscWarn);//Ponownie ustala na zmienn¹ iloœæ kick
+					}
+					else if(GetPVarInt(playerid, "dutyadmin") == 0)
+					{
+						sendErrorMessage(playerid, "Nie jesteœ podczas s³u¿by administratora, Warn nie zostaje zaliczony!"); 
 					}
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 	    			AntySpam[playerid] = 1;
@@ -26783,6 +26878,13 @@ CMD:ban(playerid, params[])
 						format(str, sizeof(str), "%s zostal zbanowany za zbanowanie admina /ban",sendername);
 						BanLog(str);
 					    KickEx(playerid);
+						//adminduty
+						SetPVarInt(playerid, "BanQuantity", IloscBan);//Generuje zmienn¹
+						if(GetPVarInt(playerid, "dutyadmin") == 1)
+						{
+							IloscBan = IloscBan+1;
+							SetPVarInt(playerid, "BanQuantity", IloscBan);
+						}
 					}
 					else
 					{
@@ -26913,6 +27015,12 @@ CMD:zamroz(playerid, params[])
 					printf("%s",string);
 					format(string, sizeof(string), "AdmCmd: %s zosta³ zamro¿ony przez %s",giveplayer ,sendername);
 					ABroadCast(COLOR_LIGHTRED,string,1);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 				}
 			}
 		}
@@ -26954,6 +27062,12 @@ CMD:odmroz(playerid, params[])
 					printf("%s",string);
 					format(string, sizeof(string), "AdmCmd: %s Zosta³ odmro¿ony przez %s",giveplayer ,sendername);
 					ABroadCast(COLOR_LIGHTRED,string,1);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						GetPVarInt(playerid, "InneQuantity");
+						IloscInne = IloscInne+1;
+						SetPVarInt(playerid, "InneQuantity", IloscInne);
+					}
 				}
 			}
 		}
