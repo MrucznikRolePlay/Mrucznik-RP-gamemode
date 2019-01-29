@@ -10203,7 +10203,7 @@ CMD:adminduty(playerid, params[])
 				return 1;	
 			}
 		}
-		else if(GetPVarInt(playerid, "dutyadmin") == 1)
+		else if(GetPVarInt(playerid, "dutyadmin") == 1)//Wykonuje zejœcie z duty
 		{
 			
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
@@ -10244,23 +10244,23 @@ CMD:adminduty(playerid, params[])
 
 	return 1; 
 }
-CMD:admintime(playerid)
+CMD:adminstats(playerid)
 {
 	new AdminName[MAX_PLAYER_NAME];
+	new FirstNickname[MAX_PLAYER_NAME];
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
-		new string[128];
+		new string[256];
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
-			GetPlayerName(playerid, AdminName, sizeof(AdminName));
-			format(string, sizeof(string), "@DUTY: %s adminujesz ju¿ %d godzin %d minut", AdminName, AdminDutyGodziny[playerid],AdminDutyMinuty[playerid]); 
-			sendTipMessage(playerid, string);
 			GetPVarInt(playerid, "KickQuantity");
 			GetPVarInt(playerid, "WarnQuanity");
 			GetPVarInt(playerid, "BanQuanity");
 			GetPVarInt(playerid, "InneQuanity");
-			format(string, sizeof(string), "@DUTY: %s nada³eœ ju¿ 0 banów | %d warnów | %d kicków | 0 innych akcji!", AdminName, IloscBan,IloscWarn,IloscKick, IloscInne);
-			sendTipMessage(playerid, string);
+			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+			GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+			format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\nNick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n{C2A2DA}na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", AdminName, FirstNickname,IloscBan,IloscWarn,IloscKick,IloscInne,AdminDutyGodziny[playerid], AdminDutyMinuty[playerid]);
+			ShowPlayerDialogEx(playerid, 1091, DIALOG_STYLE_MSGBOX, "System @DUTY", string, "Okej", "");
 			
 		
 		}

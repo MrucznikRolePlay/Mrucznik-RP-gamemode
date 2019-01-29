@@ -16382,6 +16382,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
+	else if(dialogid == 1091)
+	{
+		if(!response)
+        {
+			sendErrorMessage(playerid, "Aby zejœæ ze s³u¿by wpisz /adminduty"); 
+			return 1;
+        }
+	
+	}
     else if(dialogid == 7079)
 	{
 		if(response)
