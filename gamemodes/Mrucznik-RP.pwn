@@ -5111,8 +5111,8 @@ public OnGameModeInit()
     //noYsi
     LoadPrzewinienia();
 
-		//discordconnect
-		DiscordConnectInit();
+	//discordconnect
+	DiscordConnectInit();
 
     new string[MAX_PLAYER_NAME];
     new string1[MAX_PLAYER_NAME];
