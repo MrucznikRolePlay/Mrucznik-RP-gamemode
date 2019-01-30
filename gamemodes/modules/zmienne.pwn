@@ -44,10 +44,10 @@ new ServerWeather = 3;//Pogoda
 
 //admduty
 new nickadminaIC[MAX_PLAYER_NAME];
-new IloscKick[MAX_PLAYERS] = 0;
-new IloscWarn[MAX_PLAYERS] = 0;
-new IloscBan[MAX_PLAYERS] = 0; 
-new IloscInne[MAX_PLAYERS] = 0; 
+new IloscKick[MAX_PLAYERS];
+new IloscWarn[MAX_PLAYERS];
+new IloscBan[MAX_PLAYERS]; 
+new IloscInne[MAX_PLAYERS]; 
 new AdminDutyMinuty[MAX_PLAYERS] = 0;
 new AdminDutyGodziny[MAX_PLAYERS] = 0;
 new AdminDutyTimer[MAX_PLAYERS];
