@@ -9790,6 +9790,12 @@ CMD:blok(playerid, params[])
 	    			AntySpam[playerid] = 1;
 
                     MruMySQL_Blockuj(giveplayer, playerid, result);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
+						iloscBan[playerid] +=1;//Dzia³anie matematyczne
+						SetPVarInt(playerid, "BanQuantity", iloscBan[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
+					}
 		            return 1;
 	            }
    			}
@@ -9846,6 +9852,12 @@ CMD:pblok(playerid, params[])
 			MruMySQL_Blockuj(nick, playerid, result);
 			SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 			AntySpam[playerid] = 1;
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
+				iloscBan[playerid] +=1;//Dzia³anie matematyczne
+				SetPVarInt(playerid, "BanQuantity", iloscBan[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
+			}
 		}
 	}
 	return 1;
@@ -9891,6 +9903,12 @@ CMD:pban(playerid, params[])
             MruMySQL_BanujOffline(nick, result, playerid);
 			SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 			AntySpam[playerid] = 1;
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
+				iloscBan[playerid] +=1;//Dzia³anie matematyczne
+				SetPVarInt(playerid, "BanQuantity", iloscBan[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
+			}
 		}
     }
 	return 1;
@@ -10039,6 +10057,12 @@ CMD:sblok(playerid, params[])
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 	    			AntySpam[playerid] = 1;
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
+						iloscBan[playerid] +=1;//Dzia³anie matematyczne
+						SetPVarInt(playerid, "BanQuantity", iloscBan[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
+					}
 		            return 1;
 	            }
    			}
@@ -10126,7 +10150,7 @@ CMD:adminduty(playerid, params[])
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
-		SetPVarInt(playerid, "InneQuantity", IloscInne);//Do zapisu na kilka komend
+		SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);//Do zapisu na kilka komend
 		
 		if(GetPVarInt(playerid, "dutyadmin") == 0)
 		{
@@ -10215,34 +10239,34 @@ CMD:adminduty(playerid, params[])
 		{
 			
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
-			GetPVarInt(playerid, "KickQuantity");
-			GetPVarInt(playerid, "WarnQuanity");
-			GetPVarInt(playerid, "BanQuantity");
-			GetPVarInt(playerid, "InneQuantity"); 
+			iloscKick[playerid] = GetPVarInt(playerid, "KickQuantity");
+			iloscWarn[playerid] = GetPVarInt(playerid, "WarnQuanity");
+			iloscBan[playerid] = GetPVarInt(playerid, "BanQuantity");
+			iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity"); 
 			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 			GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 			format(string, sizeof(string), "%s", FirstNickname);
 			SetPlayerName(playerid, string); 
 			SetPVarInt(playerid, "dutyadmin", 0); 
 			SetPlayerColor(playerid,TEAM_HIT_COLOR);
-			format(string, sizeof(string), "@DUTY: Wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", IloscBan,IloscWarn,IloscKick, IloscInne); 
+			format(string, sizeof(string), "@DUTY: Wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid], iloscInne[playerid]); 
 			sendErrorMessage(playerid, string); 
 			MSGBOX_Show(playerid, "Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
 			
 			//LOG
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d]", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],IloscBan,IloscWarn,IloscKick,IloscInne); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d]", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
 			AdminDutyLog(stringlog); //Create LOG
 			
 			//Zerowanie zmiennych - po zejœciu z duty admina :) 
-			IloscKick = 0;
-			IloscWarn = 0;
-			IloscBan = 0;
-			IloscInne = 0;
-			SetPVarInt(playerid, "KickQuantity", IloscKick);
-			SetPVarInt(playerid, "WarnQuantity", IloscWarn);
-			SetPVarInt(playerid, "BanQuantity", IloscBan); 
-			SetPVarInt(playerid, "InneQuantity", IloscInne);
+			iloscKick[playerid] = 0;
+			iloscWarn[playerid] = 0;
+			iloscBan[playerid] = 0;
+			iloscInne[playerid] = 0;
+			SetPVarInt(playerid, "KickQuantity", iloscKick[playerid]);
+			SetPVarInt(playerid, "WarnQuantity", iloscWarn[playerid]);
+			SetPVarInt(playerid, "BanQuantity", iloscBan[playerid]); 
+			SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			KillTimer(AdminDutyTimer[playerid]);
 			return 1;
 		}
@@ -10264,13 +10288,13 @@ CMD:adminstats(playerid)
 		new string[325];
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
-			GetPVarInt(playerid, "KickQuantity");
-			GetPVarInt(playerid, "WarnQuanity");
-			GetPVarInt(playerid, "BanQuanity");
-			IloscInne = GetPVarInt(playerid, "InneQuanity");
+			iloscKick[playerid] = GetPVarInt(playerid, "KickQuantity");
+			iloscWarn[playerid] = GetPVarInt(playerid, "WarnQuanity");
+			iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity");
+			IloscInne[playerid]  = GetPVarInt(playerid, "InneQuanity");
 			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 			GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
-			format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", AdminName, FirstNickname,IloscBan,IloscWarn,IloscKick,IloscInne,AdminDutyGodziny[playerid], AdminDutyMinuty[playerid]);
+			format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", AdminName, FirstNickname,iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid],AdminDutyGodziny[playerid], AdminDutyMinuty[playerid]);
 			ShowPlayerDialogEx(playerid, 1091, DIALOG_STYLE_MSGBOX, "System @DUTY", string, "Okej", "");
 			
 		
@@ -10308,16 +10332,16 @@ CMD:checkadminstats(playerid, params[])
 			{
 				if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
 				{
-					IloscKick = GetPVarInt(giveplayerid, "KickQuantity");
-					IloscWarn = GetPVarInt(giveplayerid, "WarnQuanity");
-					IloscBan = GetPVarInt(giveplayerid, "BanQuanity");
-					new IloscInneTest = GetPVarInt(giveplayerid, "InneQuanity");
+					iloscKick[giveplayerid] = GetPVarInt(giveplayerid, "KickQuantity");
+					iloscWarn[giveplayerid] = GetPVarInt(giveplayerid, "WarnQuanity");
+					iloscBan[giveplayerid] = GetPVarInt(giveplayerid, "BanQuanity");
+					iloscInne[giveplayerid] = GetPVarInt(giveplayerid, "InneQuanity");
 					
 					
 					GetPVarString(giveplayerid, "pAdminDutyNickOn", SenderAdminName, sizeof(SenderAdminName)); 
 					GetPVarString(giveplayerid, "pAdminDutyNickOff", FirstSenderAdminName, sizeof(FirstSenderAdminName)); 
 					
-					format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", SenderAdminName, FirstSenderAdminName,IloscBan,IloscWarn,IloscKick,IloscInneTest,AdminDutyGodziny[giveplayerid], AdminDutyMinuty[giveplayerid]);
+					format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", SenderAdminName, FirstSenderAdminName,iloscBan[giveplayerid],iloscWarn[giveplayerid],iloscKick[giveplayerid],iloscInne[giveplayerid],AdminDutyGodziny[giveplayerid], AdminDutyMinuty[giveplayerid]);
 					ShowPlayerDialogEx(playerid, 1091, DIALOG_STYLE_MSGBOX, "System @DUTY", string, "Okej", "");
 					return 1;
 				}
@@ -23800,9 +23824,9 @@ CMD:adminajail(playerid, params[])
 					KickLog(string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 					//adminowe logi
 					format(string, sizeof(string), "Admini/%s.ini", sendername);
@@ -23909,9 +23933,9 @@ CMD:tod(playerid, params[])
             CMDLog(string);
 			if(GetPVarInt(playerid, "dutyadmin") == 1)
 			{
-				GetPVarInt(playerid, "InneQuantity");
-				IloscInne = IloscInne+1;
-				SetPVarInt(playerid, "InneQuantity", IloscInne);
+				iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+				iloscInne[playerid] +=1;
+				SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			}
 		}
 		else
@@ -24149,9 +24173,9 @@ CMD:clearwlall(playerid)
 			SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 			if(GetPVarInt(playerid, "dutyadmin") == 1)
 			{
-				GetPVarInt(playerid, "InneQuantity");
-				IloscInne = IloscInne+1;
-				SetPVarInt(playerid, "InneQuantity", IloscInne);
+				iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+				iloscInne[playerid] +=1;
+				SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			}
 		}
 		else
@@ -24191,9 +24215,9 @@ CMD:setint(playerid, params[])
 			SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
 			if(GetPVarInt(playerid, "dutyadmin") == 1)
 			{
-				GetPVarInt(playerid, "InneQuantity");
-				IloscInne = IloscInne+1;
-				SetPVarInt(playerid, "InneQuantity", IloscInne);
+				iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+				iloscInne[playerid] +=1;
+				SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			}
 		}
 		else
@@ -24232,9 +24256,9 @@ CMD:setvw(playerid, params[])
 			SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
 			if(GetPVarInt(playerid, "dutyadmin") == 1)
 			{
-				GetPVarInt(playerid, "InneQuantity");
-				IloscInne = IloscInne+1;
-				SetPVarInt(playerid, "InneQuantity", IloscInne);
+				iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+				iloscInne[playerid] +=1;
+				SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			}
 		}
 		else
@@ -24817,9 +24841,9 @@ CMD:makeleader(playerid, params[])
 					ActionLog(string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
@@ -24902,9 +24926,9 @@ CMD:makewomanleader(playerid, params[])
 					ActionLog(string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
@@ -24981,9 +25005,9 @@ CMD:makemember(playerid, params[])
 					ActionLog(string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 					
 					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
@@ -25564,9 +25588,9 @@ CMD:tp(playerid, params[])
 					SendClientMessage(playerid, COLOR_GRAD1, string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 					if(PlayerInfo[plo][pInt] > 0)
 					{
@@ -25774,9 +25798,9 @@ CMD:gethere(playerid, params[])
 					sendTipMessageEx(plo, COLOR_GRAD1, "Zosta³eœ teleportowany");
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 				}
 				else
@@ -25814,9 +25838,9 @@ CMD:getcar(playerid, params[])
             SetVehicleVirtualWorld(plo, GetPlayerVirtualWorld(playerid));
 			if(GetPVarInt(playerid, "dutyadmin") == 1)
 			{
-				GetPVarInt(playerid, "InneQuantity");
-				IloscInne = IloscInne+1;
-				SetPVarInt(playerid, "InneQuantity", IloscInne);
+				iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+				iloscInne[playerid] +=1;
+				SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			}
 		}
 		else
@@ -25910,9 +25934,9 @@ CMD:tankveh(playerid)
 				KickLog(string);
 				if(GetPVarInt(playerid, "dutyadmin") == 1)
 				{
-					GetPVarInt(playerid, "InneQuantity");
-					IloscInne = IloscInne+1;
-					SetPVarInt(playerid, "InneQuantity", IloscInne);
+					iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+					iloscInne[playerid] +=1;
+					SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 				}
             }
             else
@@ -25943,9 +25967,9 @@ CMD:tankujauta(playerid)
 			SendClientMessage(playerid, COLOR_GREY, "Wszystkie pojazdy zatankowane ! ");
 			if(GetPVarInt(playerid, "dutyadmin") == 1)
 			{
-				GetPVarInt(playerid, "InneQuantity");
-				IloscInne = IloscInne+1;
-				SetPVarInt(playerid, "InneQuantity", IloscInne);
+				iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+				iloscInne[playerid] +=1;
+				SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			}
         }
         else
@@ -26159,9 +26183,9 @@ CMD:zmienhp(playerid, params[])
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
-							GetPVarInt(playerid, "InneQuantity");
-							IloscInne = IloscInne+1;
-							SetPVarInt(playerid, "InneQuantity", IloscInne);
+							iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+							iloscInne[playerid] +=1;
+							SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 						}
 					}
 				}
@@ -26203,9 +26227,9 @@ CMD:setarmor(playerid, params[])
 					SetPlayerArmour(playa, health);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 				}
 			}
@@ -26274,9 +26298,9 @@ CMD:fixveh(playerid)
 			KickLog(string);
 			if(GetPVarInt(playerid, "dutyadmin") == 1)
 			{
-				GetPVarInt(playerid, "InneQuantity");
-				IloscInne = IloscInne+1;
-				SetPVarInt(playerid, "InneQuantity", IloscInne);
+				iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+				iloscInne[playerid] +=1;
+				SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			}
 		}
 	}
@@ -26359,9 +26383,9 @@ CMD:pogodaall(playerid, params[])
             CMDLog(string);
 			if(GetPVarInt(playerid, "dutyadmin") == 1)
 			{
-				GetPVarInt(playerid, "InneQuantity");
-				IloscInne = IloscInne+1;
-				SetPVarInt(playerid, "InneQuantity", IloscInne);
+				iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+				iloscInne[playerid] +=1;
+				SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 			}
 		}
 		else
@@ -26519,9 +26543,9 @@ CMD:slap(playerid, params[])
 					SendClientMessage(playa, COLOR_PANICRED, string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						IloscInne = GetPVarInt(playerid, "InneQuantity");
-						IloscInne +=1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 				}
 			}
@@ -26582,9 +26606,9 @@ CMD:ucisz(playerid, params[])
 					}
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 				}
 			}
@@ -26599,7 +26623,7 @@ CMD:ucisz(playerid, params[])
 
 
 
-(playerid, params[])
+CMD:kick(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
@@ -26649,12 +26673,12 @@ CMD:ucisz(playerid, params[])
 						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
                         SendPunishMessage(string, giveplayerid);
 						//adminduty
-						SetPVarInt(playerid, "KickQuantity", IloscKick);//Generuje zmienn¹
+						SetPVarInt(playerid, "KickQuantity", iloscKick[playerid]);//Generuje zmienn¹
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
-							IloscKick = GetPVarInt(playerid, "KickQuanity"); //Pobiera pierwotn¹ zmienn¹
-							IloscKick +=1;//Dzia³anie matematyczne
-							SetPVarInt(playerid, "KickQuantity", IloscKick);//Ponownie ustala na zmienn¹ iloœæ kick
+							iloscKick[playerid] = GetPVarInt(playerid, "KickQuanity"); //Pobiera pierwotn¹ zmienn¹
+							iloscKick[playerid] +=1;//Dzia³anie matematyczne
+							SetPVarInt(playerid, "KickQuantity", iloscKick[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
 						}
 						//adminowe logi
 						if (PlayerInfo[playerid][pZG] >= 1)
@@ -26759,13 +26783,12 @@ CMD:warn(playerid, params[])
 				    NapisText(str); */
 					WarnLog(string);
 					//adminduty
-					SetPVarInt(playerid, "WarnQuantity", IloscWarn);//Generuje zmienn¹
+					SetPVarInt(playerid, "WarnQuantity", IloscWarn[playerid]);//Generuje zmienn¹
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "WarnQuanity"); //Pobiera pierwotn¹ zmienn¹
-						IloscWarn= IloscWarn+1;//Dzia³anie matematyczne
-				
-						SetPVarInt(playerid, "WarnQuantity", IloscWarn);//Ponownie ustala na zmienn¹ iloœæ kick
+						iloscWarn[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
+						iloscWarn[playerid] +=1;//Dzia³anie matematyczne
+						SetPVarInt(playerid, "BanQuantity", iloscWarn[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
 					}
 					else if(GetPVarInt(playerid, "dutyadmin") == 0)
 					{
@@ -26833,6 +26856,12 @@ CMD:unwarn(playerid, params[])
 						SendClientMessage(playerid, COLOR_YELLOW, string);
 					}
                     WarnLog(string);
+					if(GetPVarInt(playerid, "dutyadmin") == 1)
+					{
+						iloscWarn[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
+						iloscWarn[playerid] +=1;//Dzia³anie matematyczne
+						SetPVarInt(playerid, "BanQuantity", iloscWarn[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
+					}
 					return 1;
 				}
 			}//not connected
@@ -27022,8 +27051,9 @@ CMD:ban(playerid, params[])
 						SetPVarInt(playerid, "BanQuantity", IloscBan);//Generuje zmienn¹
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
-							IloscBan = IloscBan+1;
-							SetPVarInt(playerid, "BanQuantity", IloscBan);
+							iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
+							iloscBan[playerid] +=1;//Dzia³anie matematyczne
+							SetPVarInt(playerid, "BanQuantity", iloscBan[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
 						}
 					}
 					else
@@ -27157,9 +27187,9 @@ CMD:zamroz(playerid, params[])
 					ABroadCast(COLOR_LIGHTRED,string,1);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 				}
 			}
@@ -27204,9 +27234,9 @@ CMD:odmroz(playerid, params[])
 					ABroadCast(COLOR_LIGHTRED,string,1);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
-						SetPVarInt(playerid, "InneQuantity", IloscInne);
+						iloscInne[playerid] = GetPVarInt(playerid, "InneQuantity");
+						iloscInne[playerid] +=1;
+						SetPVarInt(playerid, "InneQuantity", iloscInne[playerid]);
 					}
 				}
 			}
