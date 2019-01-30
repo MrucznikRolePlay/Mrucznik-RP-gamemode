@@ -10313,6 +10313,7 @@ CMD:checkadminstats(playerid, params[])
 					IloscBan = GetPVarInt(giveplayerid, "BanQuanity");
 					new IloscInneTest = GetPVarInt(giveplayerid, "InneQuanity");
 					
+					
 					GetPVarString(giveplayerid, "pAdminDutyNickOn", SenderAdminName, sizeof(SenderAdminName)); 
 					GetPVarString(giveplayerid, "pAdminDutyNickOff", FirstSenderAdminName, sizeof(FirstSenderAdminName)); 
 					
@@ -26518,8 +26519,8 @@ CMD:slap(playerid, params[])
 					SendClientMessage(playa, COLOR_PANICRED, string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						GetPVarInt(playerid, "InneQuantity");
-						IloscInne = IloscInne+1;
+						IloscInne = GetPVarInt(playerid, "InneQuantity");
+						IloscInne +=1;
 						SetPVarInt(playerid, "InneQuantity", IloscInne);
 					}
 				}
@@ -26597,7 +26598,8 @@ CMD:ucisz(playerid, params[])
 }
 
 
-CMD:kick(playerid, params[])
+
+(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
@@ -26650,9 +26652,8 @@ CMD:kick(playerid, params[])
 						SetPVarInt(playerid, "KickQuantity", IloscKick);//Generuje zmienn¹
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
-							GetPVarInt(playerid, "KickQuanity"); //Pobiera pierwotn¹ zmienn¹
-							IloscKick= IloscKick+1;//Dzia³anie matematyczne
-					
+							IloscKick = GetPVarInt(playerid, "KickQuanity"); //Pobiera pierwotn¹ zmienn¹
+							IloscKick +=1;//Dzia³anie matematyczne
 							SetPVarInt(playerid, "KickQuantity", IloscKick);//Ponownie ustala na zmienn¹ iloœæ kick
 						}
 						//adminowe logi
