@@ -23933,11 +23933,11 @@ CMD:adminajail(playerid, params[])
 					    OnDuty[playa] = 0;
 					    OnDutyCD[playa] = 0;
 					}
-					if(strfind(result, "DM2") == 1)
+					if(strfind(result, "DM2") == -1)
 					{
 						ResetPlayerWeapons(playa);
 						UsunBron(playa);
-						sendTipMessage(playerid, "Za DM2 zosta³y Ci odebrane bronie ~ Pozdrawiam Marcepan Marks");
+						sendTipMessage(playa, "Za DM2 zosta³y Ci odebrane bronie ~ Pozdrawiam Marcepan Marks");
 					}
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
