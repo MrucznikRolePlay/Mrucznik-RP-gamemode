@@ -10211,6 +10211,7 @@ CMD:adminduty(playerid, params[])
 				{
 					if(strlen(params) >= 3)//Minimalnie 3 znaki
 					{
+						//Symbole i znaki specjalne
 						if(strfind(params, "%") == -1 
 						&& strfind(params, "_") == -1 
 						&& strfind(params, " ") == -1
@@ -10233,6 +10234,26 @@ CMD:adminduty(playerid, params[])
 						&& strfind(params, "(") == -1
 						&& strfind(params, "]") == -1
 						&& strfind(params, "[") == -1
+						&& strfind(params, "XD") == -1
+						&& strfind(params, "}") == -1
+						&& strfind(params, "{") == -1
+						&& strfind(params, ":") == -1 
+						&& strfind(params, "`") == -1 
+						//Wulgarne
+						&& strfind(params, "kurwa") == -1
+						&& strfind(params, "jebaæ") == -1
+						&& strfind(params, "chuj") == -1
+						&& strfind(params, "69") == -1
+						//polskie znaki
+						&& strfind(params, "¹") == -1
+						&& strfind(params, "œ") == -1
+						&& strfind(params, "¿") == -1
+						&& strfind(params, "Ÿ") == -1
+						&& strfind(params, "æ") == -1
+						&& strfind(params, "ê") == -1
+						&& strfind(params, "ñ") == -1
+						&& strfind(params, "ó") == -1
+						//Plus
 						&& strfind(params, "+") == -1)
 						{
 							foreach(Player, i)
