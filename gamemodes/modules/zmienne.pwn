@@ -44,10 +44,10 @@ new ServerWeather = 3;//Pogoda
 
 //admduty
 new nickadminaIC[MAX_PLAYER_NAME];//NickAdministratora IC
-new IloscKick[MAX_PLAYERS]=0;//Iloœæ kicków nadanych przez @
-new IloscWarn[MAX_PLAYERS]=0;//Iloœæ warnów nadanych przez @
-new IloscBan[MAX_PLAYERS]=0; //Iloœc banów/unbanów/warnów/unwarnów/sbanów [etc] nadanych przez @
-new IloscInne[MAX_PLAYERS]=0; //Inne kary/akcje administracyjne, które w jakiœ sposób ingeruj¹ z innym graczem
+new iloscKick[MAX_PLAYERS]=0;//Iloœæ kicków nadanych przez @
+new iloscWarn[MAX_PLAYERS]=0;//Iloœæ warnów nadanych przez @
+new iloscBan[MAX_PLAYERS]=0; //Iloœc banów/unbanów/warnów/unwarnów/sbanów [etc] nadanych przez @
+new iloscInne[MAX_PLAYERS]=0; //Inne kary/akcje administracyjne, które w jakiœ sposób ingeruj¹ z innym graczem
 new AdminDutyMinuty[MAX_PLAYERS] = 0;//Czas s³u¿by - Minuty
 new AdminDutyGodziny[MAX_PLAYERS] = 0;//Czas s³u¿by - Godziny
 new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
