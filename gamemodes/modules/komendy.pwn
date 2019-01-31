@@ -8540,9 +8540,9 @@ CMD:naprawskin(playerid, params[])
 					SetPlayerSkin(para1, level);
 					PlayerInfo[para1][pSkin] = level;
 
-					_MruAdmin(playerid, sprintf("Naprawi³eœ skin graczowi %s [%d] za pomoc¹ komendy.", GetNick(para1, true), para1));
-                    _MruAdmin(para1, sprintf("Twój skin zosta³ naprawiony przez %s [%d].", GetNick(playerid, true), playerid));
-					SendCommandLogMessage(sprintf("Admin %s [%d] naprawi³ skin graczowi %s [%d].", GetNick(playerid, true), playerid, GetNick(para1, true), para1));
+					_MruAdmin(playerid, sprintf("Naprawi³eœ skin graczowi %s [%d] za pomoc¹ komendy.", GetNick(para1), para1));
+                    _MruAdmin(para1, sprintf("Twój skin zosta³ naprawiony przez %s [%d].", GetNick(playerid), playerid));
+					SendCommandLogMessage(sprintf("Admin %s [%d] naprawi³ skin graczowi %s [%d].", GetNick(playerid), playerid, GetNick(para1), para1));
 				}
 			}
 		}
@@ -34490,7 +34490,7 @@ CMD:akceptuj(playerid, params[])
                                     SendClientMessage(playerid, COLOR_RED, string);
                                     //86400 - jeden dzien
                                     PlayerInfo[playerid][pPK] = 0;
-                                    PlayerInfo[playerid][pCarLic] = 0
+                                    PlayerInfo[playerid][pCarLic] = 0;
                                     format(string, sizeof(string), "* %s straci³ prawo jazdy z powodu przekroczenia limitu 24 PK", sendername);
                                     SendClientMessage(TicketOffer[playerid], COLOR_RED, string);
                                 }
