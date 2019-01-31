@@ -10202,7 +10202,7 @@ CMD:adminduty(playerid, params[])
 			}
 			if(OnDuty[playerid] == 1 || JobDuty[playerid] == 1 || SanDuty[playerid] == 1)//Zabezpieczenie przed duty - odkryte w doœæ ciekawy sposób, dlatego traktujemy jako easter egg
 			{
-				sendErrorMessage(playerid, "Najpierw zejdŸ z duty! Powodujesz bugi, które muszê naprawiaæ! ");
+				sendTipMessage(playerid, "Najpierw zejdŸ z duty! Powodujesz bugi, które muszê naprawiaæ! ");
 				return 1;
 			}
 			else
@@ -10227,6 +10227,12 @@ CMD:adminduty(playerid, params[])
 						&& strfind(params, "?") == -1
 						&& strfind(params, ",") == -1
 						&& strfind(params, ".") == -1
+						&& strfind(params, "<") == -1
+						&& strfind(params, ">") == -1
+						&& strfind(params, ")") == -1
+						&& strfind(params, "(") == -1
+						&& strfind(params, "]") == -1
+						&& strfind(params, "[") == -1
 						&& strfind(params, "+") == -1)
 						{
 							foreach(Player, i)
