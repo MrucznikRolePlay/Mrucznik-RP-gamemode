@@ -9792,7 +9792,7 @@ CMD:blok(playerid, params[])
                     MruMySQL_Blockuj(giveplayer, playerid, result);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
+						//iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); 
 						iloscBan[playerid] +=1;//Dzia³anie matematyczne
 						SetPVarInt(playerid, "BanQuantity", iloscBan[playerid]);//Ponownie ustala na zmienn¹ iloœæ kick
 					}
