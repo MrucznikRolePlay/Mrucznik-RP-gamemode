@@ -3071,6 +3071,11 @@ CMD:straz(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /straz [tekst]");
 			return 1;
 		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
+			return 1;
+		}
         if(PlayerInfo[playerid][pRank] < 2) return sendErrorMessage(playerid, "Potrzebujesz conajmniej 2 rangi.");
 		new string[128], sendername[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -3258,6 +3263,7 @@ CMD:respawn(playerid)
 {
 	new string[128];
 	new AdminName[MAX_PLAYER_NAME];
+	
 	if(Count >= 20)
 	{
 		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
@@ -4879,6 +4885,11 @@ CMD:usss_info(playerid, params[])
             sendErrorMessage(playerid, "Musisz mieæ 3 range aby tego u¿ywaæ!");
             return 1;
         }
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
+			return 1;
+		}
         GetPlayerName(playerid, sendername, sizeof(sendername));
         if(isnull(params))
         {
@@ -4991,6 +5002,11 @@ CMD:kt(playerid, params[])
 		{
 		    format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
 			sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
 			return 1;
 		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -16926,6 +16942,11 @@ CMD:sasd(playerid, params[])
 				sendTipMessage(playerid, "U¿yj /sasd [text]");
 				return 1;
 			}
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
+				return 1;
+			}
 			if(PlayerInfo[playerid][pBP] >= 1)
 			{
 			    format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
@@ -17957,8 +17978,8 @@ CMD:ro(playerid, params[]) return cmd_rooc(playerid, params);
 CMD:rooc(playerid, params[])
 {
 	new string[256];
-
-
+	new AdminName[MAX_PLAYER_NAME];
+	GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
     if(IsPlayerConnected(playerid))
     {
 		if(isnull(params))
@@ -17969,18 +17990,43 @@ CMD:rooc(playerid, params[])
         new member = GetPlayerFraction(playerid);
 	    if(0 < member <= 4 || member == 11 || member == 7 || member == 17)
 	    {
-            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
-            SendRadioMessage(member, TEAM_BLUE_COLOR, string);
-            printf("%s", string);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],AdminName, params);
+				SendRadioMessage(member, TEAM_BLUE_COLOR, string);
+				printf("%s", string);
+				
+			}
+			else
+			{
+				format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
+				SendRadioMessage(member, TEAM_BLUE_COLOR, string);
+				printf("%s", string);
+			
+			}
         }
         else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie + DMV
         {
-            member = GetPlayerOrg(playerid);
-            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNick(playerid, true), params);
-            SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
-            SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
-			SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
-            printf("%s", string);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				member = GetPlayerOrg(playerid);
+				format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], AdminName, params);
+				SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
+				SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
+				SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
+				printf("%s", string);
+				
+			}
+			else
+			{
+				member = GetPlayerOrg(playerid);
+				format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNick(playerid, true), params);
+				SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
+				SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
+				SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
+				printf("%s", string);
+			
+			}
         }
 		else
 		{
@@ -18915,15 +18961,33 @@ CMD:depo(playerid, params[])
         new member = GetPlayerFraction(playerid);
         if(0 < member <= 4 || member == 17)// || GetPlayerOrg(playerid) == 12)
         {
-            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
-            SendTeamMessage(17, COLOR_ALLDEPT, string, 1);
-            SendTeamMessage(4, COLOR_ALLDEPT, string, 1);
-            SendTeamMessage(3, COLOR_ALLDEPT, string, 1);
-            SendTeamMessage(2, COLOR_ALLDEPT, string, 1);
-            SendTeamMessage(1, COLOR_ALLDEPT, string, 1);
-            SendTeamMessage(18, COLOR_ALLDEPT, string, 1);
-            printf("%s", string);
-        }
+			new AdminName[MAX_PLAYER_NAME];
+			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],AdminName, params);
+				SendTeamMessage(17, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(4, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(3, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(2, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(1, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(18, COLOR_ALLDEPT, string, 1);
+				printf("%s", string);
+			}
+			else
+			{
+				format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
+				SendTeamMessage(17, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(4, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(3, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(2, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(1, COLOR_ALLDEPT, string, 1);
+				SendTeamMessage(18, COLOR_ALLDEPT, string, 1);
+				printf("%s", string);
+			
+			
+			}
+		}
         else
         {
             noAccessMessage(playerid);
@@ -35885,6 +35949,16 @@ CMD:nazywo(playerid, params[])
 			if( sscanf(params, "k<fix>", giveplayerid))
 			{
 				sendTipMessage(playerid, "U¿yj /wywiad [playerid/CzêœæNicku]");
+				return 1;
+			}
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				sendErrorMessage(playerid, "Nie mo¿esz dawaæ wywiadu podczas @Duty!");
+				return 1;
+			}
+			if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
+			{
+				sendErrorMessage(playerid, "Ta osoba jest podczas s³u¿by administratora!");
 				return 1;
 			}
 
