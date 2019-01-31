@@ -8540,9 +8540,9 @@ CMD:naprawskin(playerid, params[])
 					SetPlayerSkin(para1, level);
 					PlayerInfo[para1][pSkin] = level;
 
-					_MruAdmin(playerid, sprintf("Naprawi³eœ skin graczowi %s [%d] za pomoc¹ komendy.", GetNick(para1, true), para1));
-                    _MruAdmin(para1, sprintf("Twój skin zosta³ naprawiony przez %s [%d].", GetNick(playerid, true), playerid));
-					SendCommandLogMessage(sprintf("Admin %s [%d] naprawi³ skin graczowi %s [%d].", GetNick(playerid, true), playerid, GetNick(para1, true), para1));
+					_MruAdmin(playerid, sprintf("Naprawi³eœ skin graczowi %s [%d] za pomoc¹ komendy.", GetNick(para1), para1));
+                    _MruAdmin(para1, sprintf("Twój skin zosta³ naprawiony przez %s [%d].", GetNick(playerid), playerid));
+					SendCommandLogMessage(sprintf("Admin %s [%d] naprawi³ skin graczowi %s [%d].", GetNick(playerid), playerid, GetNick(para1), para1));
 				}
 			}
 		}
@@ -9375,7 +9375,7 @@ CMD:podglad(playerid, params[])
 		            GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 		            if(PlayerInfo[para1][pPodPW] == 0)
 					{
-                        SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ podgl¹d dla %s [%d]", GetNick(playerid, true), playerid, GetNick(para1, true), para1));
+                        SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ podgl¹d dla %s [%d]", GetNick(playerid), playerid, GetNick(para1), para1));
 
 						PlayerInfo[para1][pPodPW] = 1;
 
@@ -9384,7 +9384,7 @@ CMD:podglad(playerid, params[])
 					}
 					else
 					{
-                        SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ podgl¹d dla %s [%d]", GetNick(playerid, true), playerid, GetNick(para1, true), para1));
+                        SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ podgl¹d dla %s [%d]", GetNick(playerid), playerid, GetNick(para1), para1));
 						PlayerInfo[para1][pPodPW] = 0;
 					}
 				}
@@ -10323,7 +10323,7 @@ CMD:adminduty(playerid, params[])
 			
 			//LOG
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d]", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - gra dalej", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
 			AdminDutyLog(stringlog); //Create LOG
 			
 			//Zerowanie zmiennych - po zejœciu z duty admina :) 
@@ -10427,7 +10427,6 @@ CMD:checkadminstats(playerid, params[])
 	else
 	{
 		sendErrorMessage(playerid, "Nie masz uprawnieñ aby tego u¿yæ"); 
-		return 1;
 	}
 
 	return 1;
@@ -34484,12 +34483,13 @@ CMD:akceptuj(playerid, params[])
                                 format(string, sizeof(string), "* Dosta³eœ te¿ %d PK", karne);
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 PlayerInfo[playerid][pPK] += karne;
-                                if(PlayerInfo[playerid][pPK] > 24) {
-                                    format(string, sizeof(string), "* Przekroczy³eœ limit 24 PK. Tracisz prawo jazdy na 1 DZIEÑ");
+                                if(PlayerInfo[playerid][pPK] > 24) 
+								{
+                                    format(string, sizeof(string), "* Przekroczy³eœ limit 24 PK. Tracisz prawo jazdy");
                                     SendClientMessage(playerid, COLOR_RED, string);
-                                    //86400
+                                    //86400 - jeden dzien
                                     PlayerInfo[playerid][pPK] = 0;
-                                    PlayerInfo[playerid][pCarLic] = gettime()+86400;
+                                    PlayerInfo[playerid][pCarLic] = 0;
                                     format(string, sizeof(string), "* %s straci³ prawo jazdy z powodu przekroczenia limitu 24 PK", sendername);
                                     SendClientMessage(TicketOffer[playerid], COLOR_RED, string);
                                 }
@@ -37049,7 +37049,7 @@ CMD:mandacik(playerid, params[])
 		        if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 				{
 					new stawki = moneys;
-					moneys = (PlayerInfo[giveplayerid][pLevel] > 21) ? (stawki*3780) : (stawki*(PlayerInfo[giveplayerid][pLevel]*180));
+					moneys = (PlayerInfo[giveplayerid][pLevel] > 21) ? (stawki*15080) : (stawki*(PlayerInfo[giveplayerid][pLevel]*180));
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Da³eœ %s mandat $%d (%dSD), %d PK, powód: %s", giveplayer, moneys, stawki, karne, (result));

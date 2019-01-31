@@ -1004,7 +1004,7 @@ public OnPlayerDisconnect(playerid, reason)
 	
 		//LOG
 		getdate(y1, mi1, d1); 
-		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakoñczy³ s³u¿bê - wykona³ w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszed³ poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
+		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
 		AdminDutyLog(stringlog); //Create LOG
 		
 		//Zerowanie zmiennych 
