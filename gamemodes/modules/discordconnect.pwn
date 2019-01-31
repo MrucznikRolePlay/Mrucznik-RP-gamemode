@@ -10,7 +10,7 @@ stock SendDiscordMessage(channel, message[])
 {
 switch(channel)
 	{
-	// #ig-san-news
+	// #ig-san-newsxd
 	case 0:
 	{
     DCC_SendChannelMessage(g_SanNewsChannelId, message);
