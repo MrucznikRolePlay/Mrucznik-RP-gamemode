@@ -19306,14 +19306,29 @@ CMD:wiadomosc(playerid, params[])
         //new isplayerafk;
         //format(string, sizeof(string), "« Wiadomoœæ wys³ana do %s (ID: %d)%s: %s", giveplayer, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (" [AFK] "),tekst); //IS PLAYER AFK
         //SendClientMessage(playerid,  COLOR_YELLOW, string);
-
+		new AdminName[MAX_PLAYER_NAME];
         if(strlen(params) < 78)
         {
-            format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
-            SendClientMessage(playerid, COLOR_YELLOW, string);
-            
-            format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid, true), playerid, text);
-            SendClientMessage(giveplayerid, COLOR_NEWS, string);
+			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+			
+			if(GetPVarInt(playerid, "dutyadmin") == 0)
+			{
+				format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+				SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+				format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid, true), playerid, text);
+				SendClientMessage(giveplayerid, COLOR_NEWS, string);
+			}
+			else
+			{
+				format(string, sizeof(string), "«« %s (%d%s): %s", AdminName, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+				SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+				format(string, sizeof(string), "»» %s (%d): %s", AdminName, playerid, text);
+				SendClientMessage(giveplayerid, COLOR_NEWS, string);
+			
+			
+			}
         } else {
             new pos = strfind(params, " ", true, strlen(params) / 2);
             if(pos != -1)
