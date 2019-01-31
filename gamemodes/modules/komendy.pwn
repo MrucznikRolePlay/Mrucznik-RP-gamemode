@@ -10239,11 +10239,17 @@ CMD:adminduty(playerid, params[])
 						&& strfind(params, "{") == -1
 						&& strfind(params, ":") == -1 
 						&& strfind(params, "`") == -1 
+						&& strfind(params, "/") == -1
+						&& strfind(params, "|") == -1
 						//Wulgarne
 						&& strfind(params, "kurwa") == -1
 						&& strfind(params, "jebaæ") == -1
+						&& strfind(params, "jebac") == -1
+						&& strfind(params, "huj") == -1
+						&& strfind(params, "cipa") == -1
+						&& strfind(params, "kutas") == -1
 						&& strfind(params, "chuj") == -1
-						&& strfind(params, "69") == -1
+						&& strfind(params, "69") == -1//Zabezpieczenie Anty-Jupik
 						//polskie znaki
 						&& strfind(params, "¹") == -1
 						&& strfind(params, "œ") == -1
@@ -10283,6 +10289,7 @@ CMD:adminduty(playerid, params[])
 						else
 						{
 							sendErrorMessage(playerid, "U¿y³eœ nieprawid³owych znaków!"); 
+							MSGBOX_Show(playerid, "Zle znaki!", MSGBOX_ICON_TYPE_ERROR);
 							return 1;
 						}
 					}
@@ -10318,7 +10325,7 @@ CMD:adminduty(playerid, params[])
 			//Komunikaty
 			format(string, sizeof(string), "@DUTY: Wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid], iloscInne[playerid]); 
 			sendErrorMessage(playerid, string); 
-			MSGBOX_Show(playerid, "~g~Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
+			MSGBOX_Show(playerid, "Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
 			
 			//LOG
@@ -10342,6 +10349,7 @@ CMD:adminduty(playerid, params[])
 	else
 	{
 		sendErrorMessage(playerid, "Nie jesteœ administratorem, wiêc nie mo¿esz tego u¿yæ!"); 
+		MSGBOX_Show(playerid, "Nie masz uprawnien!", MSGBOX_ICON_TYPE_ERROR);
 		return 1; 
 	}
 
@@ -19306,14 +19314,29 @@ CMD:wiadomosc(playerid, params[])
         //new isplayerafk;
         //format(string, sizeof(string), "« Wiadomoœæ wys³ana do %s (ID: %d)%s: %s", giveplayer, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (" [AFK] "),tekst); //IS PLAYER AFK
         //SendClientMessage(playerid,  COLOR_YELLOW, string);
-
+		new AdminName[MAX_PLAYER_NAME];
         if(strlen(params) < 78)
         {
-            format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
-            SendClientMessage(playerid, COLOR_YELLOW, string);
-            
-            format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid, true), playerid, text);
-            SendClientMessage(giveplayerid, COLOR_NEWS, string);
+			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+			
+			if(GetPVarInt(playerid, "dutyadmin") == 0)
+			{
+				format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+				SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+				format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid, true), playerid, text);
+				SendClientMessage(giveplayerid, COLOR_NEWS, string);
+			}
+			else
+			{
+				format(string, sizeof(string), "«« %s (%d%s): %s", AdminName, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+				SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+				format(string, sizeof(string), "»» %s (%d): %s", AdminName, playerid, text);
+				SendClientMessage(giveplayerid, COLOR_NEWS, string);
+			
+			
+			}
         } else {
             new pos = strfind(params, " ", true, strlen(params) / 2);
             if(pos != -1)
@@ -23910,12 +23933,19 @@ CMD:adminajail(playerid, params[])
 					    OnDuty[playa] = 0;
 					    OnDutyCD[playa] = 0;
 					}
+					if(strfind(result, "DM2") == 1)
+					{
+						ResetPlayerWeapons(playa);
+						UsunBron(playa);
+						sendTipMessage(playerid, "Za DM2 zosta³y Ci odebrane bronie ~ Pozdrawiam Marcepan Marks");
+					}
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
 					SendClientMessage(playerid, COLOR_LIGHTRED, string);
 					format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
 					SendClientMessage(playa, COLOR_LIGHTRED, string);
+					
 					ResetPlayerWeapons(playa);
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;
