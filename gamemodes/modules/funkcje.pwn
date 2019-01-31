@@ -3483,6 +3483,48 @@ GraczBankomat(playerid)
 	{
 		return 1;
 	}
+	//Nowe 2.6
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 2024.5298,997.9246,10.8203))//Four Dragons LV
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 222.7831,-63.5663,1.5781))//Blueberry
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 1036.0112,-1025.2030,32.1016))//trans LS
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 1380.6733,-1766.1440,13.5469))//za DMV
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 1319.7610,339.2741,19.5547))//Montgomery
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, 421.4708,2533.3391,16.5737))//Lotnisko Verdant
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, -1504.4927,2617.1204,55.8359))//miasteczko na pustyni LV
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, -2446.6143,2321.3167,4.9766))//BaySide 
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, -2278.0667,936.9093,66.6484))//San Fierro
+	{
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.5, -1690.4055,864.8093,24.8906))//San Fierro 2
+	{
+		return 1;
+	}
+	
 	return 0;
 }
 
@@ -4363,7 +4405,7 @@ stock BanLog(text[])
 }
 stock AdminDutyLog(text[])
 {
-	new plik[32] = "logi/admindutylogs";
+	new plik[32] = "logi/adminduty.log";
 	Log(plik, text);
 }
 

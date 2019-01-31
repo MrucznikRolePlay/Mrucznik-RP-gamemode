@@ -10318,7 +10318,7 @@ CMD:adminduty(playerid, params[])
 			//Komunikaty
 			format(string, sizeof(string), "@DUTY: Wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid], iloscInne[playerid]); 
 			sendErrorMessage(playerid, string); 
-			MSGBOX_Show(playerid, "Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
+			MSGBOX_Show(playerid, "~g~Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
 			
 			//LOG
@@ -10334,6 +10334,8 @@ CMD:adminduty(playerid, params[])
 			
 			//Timer's kill
 			KillTimer(AdminDutyTimer[playerid]);
+			AdminDutyGodziny[playerid] = 0;
+			AdminDutyMinuty[playerid] = 0;
 			return 1;
 		}
 	}
