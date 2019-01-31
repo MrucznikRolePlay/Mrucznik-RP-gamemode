@@ -3257,15 +3257,30 @@ CMD:wypisz(playerid, params[])
 CMD:respawn(playerid)
 {
 	new string[128];
+	new AdminName[MAX_PLAYER_NAME];
 	if(Count >= 20)
 	{
 		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
 		{
-			SendClientMessage(playerid,COLOR_YELLOW, "Odliczanie rozpoczête");
-			BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
-			format(string, sizeof(string), "AdmCmd: %s [ID: %d] rozpocz¹³ odliczanie do Respawnu Aut !", GetNick(playerid, true), playerid);
-			ABroadCast(COLOR_PANICRED,string,1);
-			CountDown();
+			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+		
+			if(GetPVarInt(playerid, "dutyadmin") == 0)
+			{
+				SendClientMessage(playerid,COLOR_YELLOW, "Odliczanie rozpoczête");
+				BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
+				format(string, sizeof(string), "AdmCmd: %s [ID: %d] rozpocz¹³ odliczanie do Respawnu Aut !", GetNick(playerid, true), playerid);
+				ABroadCast(COLOR_PANICRED,string,1);
+				CountDown();
+			}
+			else
+			{
+				SendClientMessage(playerid,COLOR_YELLOW, "Odliczanie rozpoczête");
+				BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
+				format(string, sizeof(string), "AdmCmd: %s [ID: %d] rozpocz¹³ odliczanie do Respawnu Aut !", AdminName, playerid);
+				ABroadCast(COLOR_PANICRED,string,1);
+				CountDown();
+			
+			}
 		}
 		else
 		{
@@ -9264,6 +9279,7 @@ CMD:kill(playerid, params[])
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
+	new AdminName[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -9280,16 +9296,34 @@ CMD:kill(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-		    	    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					SetPlayerHealth(playa, 0);
-					format(string, sizeof(string), "AdmCmd: %s Zabi³ adminem %s",sendername,  giveplayer);
-					printf("%s",string);
+					GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+		
+					if(GetPVarInt(playerid, "dutyadmin") == 0)
+					{
+						GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+						GetPlayerName(playerid, sendername, sizeof(sendername));
+						SetPlayerHealth(playa, 0);
+						format(string, sizeof(string), "AdmCmd: %s Zabi³ adminem %s",sendername,  giveplayer);
+						printf("%s",string);
 
-                    _MruAdmin(playerid, sprintf("Zabi³eœ gracza %s [%d] za pomoc¹ komendy", GetNick(playa, true), playa));
-                    if(playerid != playa) _MruAdmin(playa, sprintf("Zosta³eœ zabity przez admina %s [%d]", GetNick(playerid, true), playerid));
+						_MruAdmin(playerid, sprintf("Zabi³eœ gracza %s [%d] za pomoc¹ komendy", GetNick(playa, true), playa));
+						if(playerid != playa) _MruAdmin(playa, sprintf("Zosta³eœ zabity przez admina %s [%d]", GetNick(playerid, true), playerid));
 
-                    SendCommandLogMessage(sprintf("Admin %s [%d] da³ /kill graczowi %s [%d]", GetNick(playerid, true), playerid, GetNick(playa, true), playa));
+						SendCommandLogMessage(sprintf("Admin %s [%d] da³ /kill graczowi %s [%d]", GetNick(playerid, true), playerid, GetNick(playa, true), playa));
+					}
+					else
+					{
+						GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+						SetPlayerHealth(playa, 0);
+						format(string, sizeof(string), "AdmCmd: %s Zabi³ adminem %s",AdminName,  giveplayer);
+						printf("%s",string);
+
+						_MruAdmin(playerid, sprintf("Zabi³eœ gracza %s [%d] za pomoc¹ komendy", GetNick(playa, true), playa));
+						if(playerid != playa) _MruAdmin(playa, sprintf("Zosta³eœ zabity przez admina %s [%d]", AdminName, playerid));
+
+						SendCommandLogMessage(sprintf("Admin %s [%d] da³ /kill graczowi %s [%d]", AdminName, playerid, GetNick(playa, true), playa));
+					
+					}
 				}
 			}
 		}
