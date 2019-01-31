@@ -10427,7 +10427,6 @@ CMD:checkadminstats(playerid, params[])
 	else
 	{
 		sendErrorMessage(playerid, "Nie masz uprawnieñ aby tego u¿yæ"); 
-		return 1;
 	}
 
 	return 1;
