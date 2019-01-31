@@ -1015,6 +1015,8 @@ public OnPlayerDisconnect(playerid, reason)
 		
 		//Kill timer 
 		KillTimer(AdminDutyTimer[playerid]);
+		AdminDutyGodziny[playerid] = 0;
+		AdminDutyMinuty[playerid] = 0;
 	}
 
 	//kajdanki

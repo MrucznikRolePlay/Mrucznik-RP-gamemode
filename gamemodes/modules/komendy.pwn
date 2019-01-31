@@ -10239,11 +10239,18 @@ CMD:adminduty(playerid, params[])
 						&& strfind(params, "{") == -1
 						&& strfind(params, ":") == -1 
 						&& strfind(params, "`") == -1 
+						&& strfind(params, "/") == -1
+						&& strfind(params, "\") == -1
+						&& strfind(params, "|") == -1
 						//Wulgarne
 						&& strfind(params, "kurwa") == -1
 						&& strfind(params, "jebaæ") == -1
+						&& strfind(params, "jebac") == -1
+						&& strfind(params, "huj") == -1
+						&& strfind(params, "cipa") == -1
+						&& strfind(params, "kutas") == -1
 						&& strfind(params, "chuj") == -1
-						&& strfind(params, "69") == -1
+						&& strfind(params, "69") == -1//Zabezpieczenie Anty-Jupik
 						//polskie znaki
 						&& strfind(params, "¹") == -1
 						&& strfind(params, "œ") == -1
@@ -10283,6 +10290,7 @@ CMD:adminduty(playerid, params[])
 						else
 						{
 							sendErrorMessage(playerid, "U¿y³eœ nieprawid³owych znaków!"); 
+							MSGBOX_Show(playerid, "Zle znaki!", MSGBOX_ICON_TYPE_ERROR);
 							return 1;
 						}
 					}
@@ -10318,7 +10326,7 @@ CMD:adminduty(playerid, params[])
 			//Komunikaty
 			format(string, sizeof(string), "@DUTY: Wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid], iloscInne[playerid]); 
 			sendErrorMessage(playerid, string); 
-			MSGBOX_Show(playerid, "~g~Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
+			MSGBOX_Show(playerid, "Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
 			sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
 			
 			//LOG
@@ -10342,6 +10350,7 @@ CMD:adminduty(playerid, params[])
 	else
 	{
 		sendErrorMessage(playerid, "Nie jesteœ administratorem, wiêc nie mo¿esz tego u¿yæ!"); 
+		MSGBOX_Show(playerid, "Nie masz uprawnien!", MSGBOX_ICON_TYPE_ERROR);
 		return 1; 
 	}
 
