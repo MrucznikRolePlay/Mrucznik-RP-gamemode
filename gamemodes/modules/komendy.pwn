@@ -10240,7 +10240,6 @@ CMD:adminduty(playerid, params[])
 						&& strfind(params, ":") == -1 
 						&& strfind(params, "`") == -1 
 						&& strfind(params, "/") == -1
-						&& strfind(params, "\") == -1
 						&& strfind(params, "|") == -1
 						//Wulgarne
 						&& strfind(params, "kurwa") == -1
@@ -23934,12 +23933,19 @@ CMD:adminajail(playerid, params[])
 					    OnDuty[playa] = 0;
 					    OnDutyCD[playa] = 0;
 					}
+					if(strfind(result, "DM2") == 1)
+					{
+						ResetPlayerWeapons(playa);
+						UsunBron(playa);
+						sendTipMessage(playerid, "Za DM2 zosta³y Ci odebrane bronie ~ Pozdrawiam Marcepan Marks");
+					}
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
 					SendClientMessage(playerid, COLOR_LIGHTRED, string);
 					format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
 					SendClientMessage(playa, COLOR_LIGHTRED, string);
+					
 					ResetPlayerWeapons(playa);
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;
