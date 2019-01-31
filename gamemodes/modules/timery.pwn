@@ -696,12 +696,25 @@ public PlayerAFK(playerid, afktime, breaktime)
 
 		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
-			if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
+			if(GetPVarInt(playerid, "dutyadmin") == 0)
 			{
-				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
-				SetTimerEx("KickEx", 500, false, "i", playerid);
+				if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
+				{
+					SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
+					SetTimerEx("KickEx", 500, false, "i", playerid);
+				}
+				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+				
 			}
-			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+			else
+			{
+				if(afktime > 600 && PlayerInfo[playerid][pAdmin] != 5000)
+				{
+					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas wejœcia na @Duty! Otrzymujesz Kicka (10min)");
+					SetTimerEx("KickEx", 500, false, "i", playerid);
+				}
+				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+			}
 		}
 		else if(afktime > 600 && PlayerInfo[playerid][pDonateRank] >= 1)
 		{
