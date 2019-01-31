@@ -27325,9 +27325,11 @@ CMD:admini(playerid)
 {
     new string[64];
     new sendername[MAX_PLAYER_NAME];
+	new FirstNickname[MAX_PLAYER_NAME];
     SendClientMessage(playerid, COLOR_GRAD1, "Lista administratorów na s³u¿bie:");//By³a tu - poziomka
     foreach(Player, i)
     {
+		GetPVarString(i, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
         if(GetPVarInt(i, "dutyadmin") == 1) 
 		{
 			if(PlayerInfo[i][pAdmin] >= 1)
@@ -27339,24 +27341,25 @@ CMD:admini(playerid)
 				GetPlayerName(i, sendername, sizeof(sendername));
 				if(PlayerInfo[playerid][pAdmin] >= 1)
 				{
-					format(string, sizeof(string), "Admin: %s [ID: %d][LVL: %d][FN: %s]", sendername, i, PlayerInfo[i][pAdmin], GetNick(i));
+					
+					format(string, sizeof(string), "Admin: %s [ID: %d][LVL: %d][FN: %s]", sendername, i, PlayerInfo[i][pAdmin], FirstNickname);
 				}
 				else
 				{
-					format(string, sizeof(string), "Admin: %s [ID: %d][FN: %s]", sendername, i, GetNick(i));
+					format(string, sizeof(string), "Admin: %s [ID: %d][FN: %s]", sendername, i, FirstNickname);
 				}
 				SendClientMessage(playerid, COLOR_GRAD1, string);
 			}
 			else if(PlayerInfo[i][pNewAP] >=1 && PlayerInfo[i][pNewAP] <= 3)
 			{
 				GetPlayerName(i, sendername, sizeof(sendername));
-				format(string, sizeof(string), "Pó³Admin: %s [ID: %d][FN: %s]", sendername, i, GetNick(i));
+				format(string, sizeof(string), "Pó³Admin: %s [ID: %d][FN: %s]", sendername, i, FirstNickname);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
 			}
 			else if(PlayerInfo[i][pNewAP] == 5)
 			{
 				GetPlayerName(i, sendername, sizeof(sendername));
-				format(string, sizeof(string), "Skrypter: %s [ID: %d][FN: %s]", sendername, i, GetNick(i));
+				format(string, sizeof(string), "Skrypter: %s [ID: %d][FN: %s]", sendername, i, FirstNickname);
 				SendClientMessage(playerid, COLOR_GRAD3, string);
 			}
 		}
