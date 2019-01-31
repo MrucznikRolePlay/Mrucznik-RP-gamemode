@@ -27048,7 +27048,7 @@ CMD:ban(playerid, params[])
 						BanLog(str);
 					    KickEx(playerid);
 						//adminduty
-						SetPVarInt(playerid, "BanQuantity", iloscBan);//Generuje zmienn¹
+						SetPVarInt(playerid, "BanQuantity", iloscBan[playerid]);//Generuje zmienn¹
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
 							iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
@@ -27522,8 +27522,11 @@ CMD:ah(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
     if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pAdmin] > 0)
-        SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /supportduty /tickets");
+	{
+		SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /supportduty /tickets");
 		SendClientMessage(playerid, COLOR_GRAD1, "{FF6A6A}* System @DUTY *** {C0C0C0}/adminduty {[NICK OOC] || /adminstats");
+		
+	}
 	if (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /kick");
