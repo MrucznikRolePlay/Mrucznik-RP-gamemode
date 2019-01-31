@@ -4405,7 +4405,7 @@ stock BanLog(text[])
 }
 stock AdminDutyLog(text[])
 {
-	new plik[32] = "logi/admindutylogs";
+	new plik[32] = "logi/adminduty.log";
 	Log(plik, text);
 }
 

@@ -10334,6 +10334,8 @@ CMD:adminduty(playerid, params[])
 			
 			//Timer's kill
 			KillTimer(AdminDutyTimer[playerid]);
+			AdminDutyGodziny[playerid] = 0;
+			AdminDutyMinuty[playerid] = 0;
 			return 1;
 		}
 	}
