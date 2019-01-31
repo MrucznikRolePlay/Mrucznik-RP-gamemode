@@ -26783,7 +26783,7 @@ CMD:warn(playerid, params[])
 				    NapisText(str); */
 					WarnLog(string);
 					//adminduty
-					SetPVarInt(playerid, "WarnQuantity", IloscWarn[playerid]);//Generuje zmienn¹
+					SetPVarInt(playerid, "WarnQuantity", iloscWarn[playerid]);//Generuje zmienn¹
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
 						iloscWarn[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
@@ -27048,7 +27048,7 @@ CMD:ban(playerid, params[])
 						BanLog(str);
 					    KickEx(playerid);
 						//adminduty
-						SetPVarInt(playerid, "BanQuantity", IloscBan);//Generuje zmienn¹
+						SetPVarInt(playerid, "BanQuantity", iloscBan);//Generuje zmienn¹
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
 							iloscBan[playerid] = GetPVarInt(playerid, "BanQuanity"); //Pobiera pierwotn¹ zmienn¹
