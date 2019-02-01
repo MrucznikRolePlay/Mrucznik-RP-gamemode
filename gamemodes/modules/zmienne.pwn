@@ -42,15 +42,23 @@ new LSMCWindap8 = 0;//Winda LSMC
 new ServerTime = 14;//Czas
 new ServerWeather = 3;//Pogoda
 
-//admduty
+//=================[ADMIN DUTY]============================
 new nickadminaIC[MAX_PLAYER_NAME];//NickAdministratora IC
-new iloscKick[MAX_PLAYERS]=0;//Iloœæ kicków nadanych przez @
-new iloscWarn[MAX_PLAYERS]=0;//Iloœæ warnów nadanych przez @
-new iloscBan[MAX_PLAYERS]=0; //Iloœc banów/unbanów/warnów/unwarnów/sbanów [etc] nadanych przez @
-new iloscInne[MAX_PLAYERS]=0; //Inne kary/akcje administracyjne, które w jakiœ sposób ingeruj¹ z innym graczem
+
+//Statystyki:
+new iloscKick[MAX_PLAYERS]=0;//Iloœæ kicków nadanych przez @ -----------------------> [/kick]
+new iloscWarn[MAX_PLAYERS]=0;//Iloœæ warnów nadanych przez @ -----------------------> [/warn /unwarn]
+new iloscBan[MAX_PLAYERS]=0; //Iloœc banów/unbanów/warnów/unwarnów/sbanów ----------> [/ban /block /unban /unblock /pban /pblock]
+new iloscAJ[MAX_PLAYERS]=0;//Iloœæ rozdanych przez admina AJ -----------------------> [/aj; /unaj]
+new iloscInWiadomosci[MAX_PLAYERS]=0;//Iloœæ wchodz¹cych wiadomoœci ----------------> [/w]
+new iloscOutWiadomosci[MAX_PLAYERS]=0;//Iloœæ wuchodz¹cych wiadomoœci --------------> [/w]
+new iloscZapytaj[MAX_PLAYERS]=0;//Iloœæ reakcji na /zapytaj -------------------------> [/tickets]
+new iloscInne[MAX_PLAYERS]=0; //Inne kary/akcje administracyjne ---------------------> [/slap, /gethere, /tp, /getcar, /pogodaall]
 new AdminDutyMinuty[MAX_PLAYERS] = 0;//Czas s³u¿by - Minuty
 new AdminDutyGodziny[MAX_PLAYERS] = 0;//Czas s³u¿by - Godziny
 new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
+
+//========================================================
 
 
 //legal

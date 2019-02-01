@@ -4408,6 +4408,11 @@ stock AdminDutyLog(text[])
 	new plik[32] = "logi/adminduty.log";
 	Log(plik, text);
 }
+stock AdminDutyMaszLog(text[])
+{
+	new plik[32] = "logi/admindutymasz.log";
+	Log(plik, text);
+}
 
 stock BiznesLog(text[])
 {

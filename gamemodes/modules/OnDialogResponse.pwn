@@ -15803,6 +15803,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         SendClientMessage(pid, COLOR_YELLOW, str);
         format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wróciæ do poprzedniej pozycji wpisz /ticketend", GetNick(pid));
         SendClientMessage(playerid, COLOR_YELLOW, str);
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			iloscZapytaj[playerid] = iloscZapytaj[playerid]+1;
+		}
 
         return 1;
     }
