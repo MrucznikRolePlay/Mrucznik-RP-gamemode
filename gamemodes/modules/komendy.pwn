@@ -10048,6 +10048,11 @@ CMD:paj(playerid, params[])
             //ABroadCast(COLOR_LIGHTRED,string,1);
             SendPunishMessage(string);
             //PlayerInfo[giveplayerid][pCK] = 2;
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				iloscAJ[playerid] = iloscAJ[playerid]+1;
+			
+			}
 
 			MruMySQL_SetAccInt("Jailed", nick, 3);
 			MruMySQL_SetAccInt("JailTime", nick, czas*60);
@@ -10241,6 +10246,7 @@ CMD:adminduty(playerid, params[])
 						&& strfind(params, "`") == -1 
 						&& strfind(params, "/") == -1
 						&& strfind(params, "|") == -1
+						//&& strfind(params, "\") == -1
 						//Wulgarne
 						&& strfind(params, "kurwa") == -1
 						&& strfind(params, "jebaæ") == -1
@@ -10333,11 +10339,19 @@ CMD:adminduty(playerid, params[])
 			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - gra dalej", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
 			AdminDutyLog(stringlog); //Create LOG
 			
+			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
+			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d /AdminDuty(2x)", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
+			AdminDutyMaszLog(stringlog);
+			
 			//Zerowanie zmiennych - po zejœciu z duty admina :) 
 			iloscKick[playerid] = 0;
 			iloscWarn[playerid] = 0;
 			iloscBan[playerid] = 0;
 			iloscInne[playerid] = 0;
+			iloscAJ[playerid] = 0;
+			iloscInWiadomosci[playerid] = 0;
+			iloscOutWiadomosci[playerid] = 0;
+			iloscZapytaj[playerid] = 0;
 			
 			//Timer's kill
 			KillTimer(AdminDutyTimer[playerid]);
@@ -15252,6 +15266,7 @@ CMD:parkuj(playerid) return cmd_zaparkuj(playerid);
 CMD:zaparkuj(playerid)
 {
 	new string[256];
+	new VW = GetPlayerVirtualWorld(playerid); 
 	if(IsPlayerInAnyVehicle(playerid))
 	{
         new lVeh = GetPlayerVehicleID(playerid);
@@ -15264,7 +15279,6 @@ CMD:zaparkuj(playerid)
 			{
                 new Float:X, Float:Y, Float:Z;
 				new Float:A;
-				new VW = GetPlayerVirtualWorld(playerid); 
 				GetVehicleZAngle(lVeh, A);
 				GetPlayerPos(playerid, X,Y,Z);
 
@@ -15302,6 +15316,7 @@ CMD:zaparkuj(playerid)
             CarData[VehicleUID[lVeh][vUID]][c_Pos][1] = Y;
             CarData[VehicleUID[lVeh][vUID]][c_Pos][2] = Z;
             CarData[VehicleUID[lVeh][vUID]][c_Rot] = A;
+			CarData[VehicleUID[lVeh][vUID]][c_VW] = VW; 
             Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE);
 
 			format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(lVeh)-400]);
@@ -19326,6 +19341,11 @@ CMD:wiadomosc(playerid, params[])
 				
 				format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid, true), playerid, text);
 				SendClientMessage(giveplayerid, COLOR_NEWS, string);
+				if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
+				{
+					iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+				}
+				
 			}
 			else
 			{
@@ -19334,7 +19354,11 @@ CMD:wiadomosc(playerid, params[])
 				
 				format(string, sizeof(string), "»» %s (%d): %s", AdminName, playerid, text);
 				SendClientMessage(giveplayerid, COLOR_NEWS, string);
-			
+				iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
+				if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
+				{
+					iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+				}
 			
 			}
         } else {
@@ -19342,22 +19366,53 @@ CMD:wiadomosc(playerid, params[])
             if(pos != -1)
             {
                 new text2[64];
+				if(GetPVarInt(playerid, "dutyadmin") == 0)
+				{
+					strmid(text2, text, pos, strlen(text));
+					strdel(text, pos, strlen(text));
 
-                strmid(text2, text, pos, strlen(text));
-                strdel(text, pos, strlen(text));
+					format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+					SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+					format(string, sizeof(string), "[.] %s", text2);
+					SendClientMessage(playerid, COLOR_YELLOW, string);
+					
+					
+					format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid, true), playerid, text);
+					SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					
+					format(string, sizeof(string), "[.] %s", text2);
+					SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
+					{
+						iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+					}
+				}
+				else
+				{
+					strmid(text2, text, pos, strlen(text));
+					strdel(text, pos, strlen(text));
 
-                format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
-                SendClientMessage(playerid, COLOR_YELLOW, string);
-            
-                format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(playerid, COLOR_YELLOW, string);
-                
-                
-                format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid, true), playerid, text);
-                SendClientMessage(giveplayerid, COLOR_NEWS, string);
-                
-                format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+					SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+					format(string, sizeof(string), "[.] %s", text2);
+					SendClientMessage(playerid, COLOR_YELLOW, string);
+					
+					
+					format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid), playerid, text);
+					SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					
+					format(string, sizeof(string), "[.] %s", text2);
+					SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
+					if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
+					{
+						iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+					}
+				
+				
+				}
             }
         }
 
@@ -23874,6 +23929,10 @@ CMD:unjail(playerid, params[])
                         Wchodzenie(playa);
 						PlayerPlaySound(playa, 0, 0.0, 0.0, 0.0);
 						StopAudioStreamForPlayer(playa);
+						if(GetPVarInt(playerid, "dutyadmin") == 1)
+						{
+							iloscAJ[playerid] = iloscAJ[playerid]+1;
+						}
 					}
 					else
 					{
@@ -23933,12 +23992,7 @@ CMD:adminajail(playerid, params[])
 					    OnDuty[playa] = 0;
 					    OnDutyCD[playa] = 0;
 					}
-					if(strfind(result, "DM2") == -1)
-					{
-						ResetPlayerWeapons(playa);
-						UsunBron(playa);
-						sendTipMessage(playa, "Za DM2 zosta³y Ci odebrane bronie ~ Pozdrawiam Marcepan Marks");
-					}
+					
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
@@ -23946,7 +24000,6 @@ CMD:adminajail(playerid, params[])
 					format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
 					SendClientMessage(playa, COLOR_LIGHTRED, string);
 					
-					ResetPlayerWeapons(playa);
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;
 					SetPlayerVirtualWorld(playa, 1000+playa);
@@ -23960,7 +24013,13 @@ CMD:adminajail(playerid, params[])
 					KickLog(string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
-						iloscInne[playerid] = iloscInne[playerid]+1;
+						iloscAJ[playerid] = iloscAJ[playerid]+1;
+					}
+					if(strfind(result, "DM2") == -1)
+					{
+						ResetPlayerWeapons(playa);
+						UsunBron(playa);
+						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
 					}
 					//adminowe logi
 					format(string, sizeof(string), "Admini/%s.ini", sendername);
@@ -26429,6 +26488,10 @@ CMD:fixallveh(playerid)
                 CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
             }
         }
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			iloscInne[playerid] = iloscInne[playerid]+1;
+		}
         new string[128];
         format(string, sizeof(string), "Admin %s naprawi³ wszystkim graczom pojazdy", GetNick(playerid, true));
         SendClientMessageToAll(COLOR_LIGHTBLUE, string);
@@ -27235,6 +27298,11 @@ CMD:banip(playerid, params[])
             MruMySQL_BanujOffline("Brak", powod, playerid, var);
             format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				iloscBan[playerid] = iloscBan[playerid]+1;
+				
+			}
             BanLog(str);
 		}
 		else
@@ -37079,7 +37147,7 @@ CMD:mandacik(playerid, params[])
 		        if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 				{
 					new stawki = moneys;
-					moneys = (PlayerInfo[giveplayerid][pLevel] > 21) ? (stawki*15080) : (stawki*(PlayerInfo[giveplayerid][pLevel]*180));
+					moneys = (PlayerInfo[giveplayerid][pLevel] > 21) ? (stawki*3080) : (stawki*(PlayerInfo[giveplayerid][pLevel]*180));
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Da³eœ %s mandat $%d (%dSD), %d PK, powód: %s", giveplayer, moneys, stawki, karne, (result));

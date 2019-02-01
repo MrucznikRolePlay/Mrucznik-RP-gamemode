@@ -15298,11 +15298,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_Pos][2] = Z;
 				CarData[car][c_VW] = VW; //Zapisywanie VirtualWorldu
                 CarData[car][c_Rot] = A;
-                Car_Save(car, CAR_SAVE_STATE);
+                Car_Save(CarData[car][c_ID], CAR_SAVE_STATE);
                 Car_Unspawn(veh);
                 Car_Spawn(car);
                 new string[128];
-				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d UID: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID]);
+				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d] [UID: %d] [VW: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID], CarData[car][c_VW]);
 				SendClientMessage(playerid, 0xFFC0CB, string);
             }
             case 5:
@@ -15803,6 +15803,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         SendClientMessage(pid, COLOR_YELLOW, str);
         format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wróciæ do poprzedniej pozycji wpisz /ticketend", GetNick(pid));
         SendClientMessage(playerid, COLOR_YELLOW, str);
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			iloscZapytaj[playerid] = iloscZapytaj[playerid]+1;
+		}
 
         return 1;
     }
