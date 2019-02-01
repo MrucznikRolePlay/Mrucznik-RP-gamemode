@@ -10334,7 +10334,7 @@ CMD:adminduty(playerid, params[])
 			AdminDutyLog(stringlog); //Create LOG
 			
 			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d /AdminDuty(2x)", PlayerInfo[playerid][pUID], y1,m1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
+			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d /AdminDuty(2x)", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
 			AdminDutyMaszLog(stringlog);
 			
 			//Zerowanie zmiennych - po zejœciu z duty admina :) 
@@ -19333,7 +19333,7 @@ CMD:wiadomosc(playerid, params[])
 				SendClientMessage(giveplayerid, COLOR_NEWS, string);
 				if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
 				{
-					iloscInWiadomosci[giveplayer] = iloscInWiadomosci[giveplayerid]+1;
+					iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
 				}
 				
 			}
@@ -19347,7 +19347,7 @@ CMD:wiadomosc(playerid, params[])
 				iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
 				if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
 				{
-					iloscInWiadomosci[giveplayer] = iloscInWiadomosci[giveplayerid]+1;
+					iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
 				}
 			
 			}
@@ -19375,7 +19375,7 @@ CMD:wiadomosc(playerid, params[])
 					SendClientMessage(giveplayerid, COLOR_NEWS, string);
 					if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
 					{
-						iloscInWiadomosci[giveplayer] = iloscInWiadomosci[giveplayerid]+1;
+						iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
 					}
 				}
 				else
@@ -19398,7 +19398,7 @@ CMD:wiadomosc(playerid, params[])
 					iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
 					if(GetPVarInt(giveplayerid, "dutyadmin") == 1)
 					{
-						iloscInWiadomosci[giveplayer] = iloscInWiadomosci[giveplayerid]+1;
+						iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
 					}
 				
 				
