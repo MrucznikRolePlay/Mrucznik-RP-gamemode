@@ -15302,7 +15302,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 Car_Unspawn(veh);
                 Car_Spawn(car);
                 new string[128];
-				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d UID: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID]);
+				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d] [UID: %d] [VW: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID], CarData[car][c_VW]);
 				SendClientMessage(playerid, 0xFFC0CB, string);
             }
             case 5:

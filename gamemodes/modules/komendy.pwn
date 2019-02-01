@@ -10246,7 +10246,7 @@ CMD:adminduty(playerid, params[])
 						&& strfind(params, "`") == -1 
 						&& strfind(params, "/") == -1
 						&& strfind(params, "|") == -1
-						&& strfind(params, "\") == -1
+						//&& strfind(params, "\") == -1
 						//Wulgarne
 						&& strfind(params, "kurwa") == -1
 						&& strfind(params, "jebaæ") == -1
