@@ -1007,11 +1007,19 @@ public OnPlayerDisconnect(playerid, reason)
 		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
 		AdminDutyLog(stringlog); //Create LOG
 		
+		//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
+		format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d /q", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
+		AdminDutyMaszLog(stringlog);
+		
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;
 		iloscBan[playerid] = 0;
 		iloscInne[playerid] = 0;
+		iloscAJ[playerid] = 0;
+		iloscInWiadomosci[playerid] = 0;
+		iloscOutWiadomosci[playerid] = 0;
+		iloscZapytaj[playerid] = 0;
 		
 		//Kill timer 
 		KillTimer(AdminDutyTimer[playerid]);

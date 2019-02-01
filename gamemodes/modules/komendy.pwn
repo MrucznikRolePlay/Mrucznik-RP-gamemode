@@ -10048,6 +10048,11 @@ CMD:paj(playerid, params[])
             //ABroadCast(COLOR_LIGHTRED,string,1);
             SendPunishMessage(string);
             //PlayerInfo[giveplayerid][pCK] = 2;
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				iloscAJ[playerid] = iloscAJ[playerid]+1;
+			
+			}
 
 			MruMySQL_SetAccInt("Jailed", nick, 3);
 			MruMySQL_SetAccInt("JailTime", nick, czas*60);
@@ -10241,6 +10246,7 @@ CMD:adminduty(playerid, params[])
 						&& strfind(params, "`") == -1 
 						&& strfind(params, "/") == -1
 						&& strfind(params, "|") == -1
+						&& strfind(params, "\") == -1
 						//Wulgarne
 						&& strfind(params, "kurwa") == -1
 						&& strfind(params, "jebaæ") == -1
@@ -10342,6 +10348,10 @@ CMD:adminduty(playerid, params[])
 			iloscWarn[playerid] = 0;
 			iloscBan[playerid] = 0;
 			iloscInne[playerid] = 0;
+			iloscAJ[playerid] = 0;
+			iloscInWiadomosci[playerid] = 0;
+			iloscOutWiadomosci[playerid] = 0;
+			iloscZapytaj[playerid] = 0;
 			
 			//Timer's kill
 			KillTimer(AdminDutyTimer[playerid]);
@@ -26478,6 +26488,10 @@ CMD:fixallveh(playerid)
                 CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
             }
         }
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			iloscInne[playerid] = iloscInne[playerid]+1;
+		}
         new string[128];
         format(string, sizeof(string), "Admin %s naprawi³ wszystkim graczom pojazdy", GetNick(playerid, true));
         SendClientMessageToAll(COLOR_LIGHTBLUE, string);
@@ -27284,6 +27298,11 @@ CMD:banip(playerid, params[])
             MruMySQL_BanujOffline("Brak", powod, playerid, var);
             format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				iloscBan[playerid] = iloscBan[playerid]+1;
+				
+			}
             BanLog(str);
 		}
 		else
