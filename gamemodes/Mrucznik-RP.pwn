@@ -1694,12 +1694,12 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1;
 		}
 
-		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNick(playerid), playerid, plrIP, code);
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dostal kicka. | Kod: %d | Zalogowany(nie: 0|tak: 1): %d.", GetNick(playerid), playerid, plrIP, code, gPlayerLogged[playerid]);
 		ABroadCast(0x9ACD32AA, string, 1);
+		AntiCheatLog(string);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
-        AntiCheatLog(string);
         
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
