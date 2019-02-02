@@ -1003,7 +1003,7 @@ public OnPlayerDisconnect(playerid, reason)
 		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 	
 		//LOG
-		if(IsPlayerPaused(playerid))
+		if(!IsPlayerPaused(playerid))
 		{
 			getdate(y1, mi1, d1); 
 			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
