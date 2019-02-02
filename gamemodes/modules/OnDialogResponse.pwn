@@ -16440,7 +16440,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				HireCar[playerid] = 0;
 				return 0;
 			}
-			if(kaska[playerid] < 5000)
+			if(kaska[playerid] < 30000)
    			{
    				sendErrorMessage(playerid, "Nie masz tyle kasy!");
 				return 0;
@@ -16449,9 +16449,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
     		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 15*60*1000, 0, "ii", playerid, veh));
 
-    		sendTipMessageEx(playerid, COLOR_YELLOW, "Wypo퓓czy쿮s pojazd na 15 minut za 5000$.");
+    		sendTipMessageEx(playerid, COLOR_YELLOW, "Wypo퓓czy쿮s pojazd na 15 minut za 30.000$.");
     		TogglePlayerControllable(playerid, 1);
-    		DajKase(playerid, -5000);
+    		DajKase(playerid, -30000);
     		HireCar[playerid] = veh;
     		SetPVarInt(playerid, "rentCar", veh);
 		}

@@ -4467,7 +4467,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					{
 		    			TogglePlayerControllable(playerid, 0);
 						HireCar[playerid] = vehicleid;
-						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", "Mo¿esz wypo¿yczyæ ten pojazd!\nCena: 5000$ za 15 minut.", "Wynajmij", "WyjdŸ");
+						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", "Mo¿esz wypo¿yczyæ ten pojazd!\nCena: 30.000$ za 15 minut.", "Wynajmij", "WyjdŸ");
 					}
 				}
 			}
