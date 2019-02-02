@@ -4269,7 +4269,7 @@ Lotto(number)
 
 stock AntiCheatLog(text[])
 {
-	new plik[32] = "logi/anticheatlog.log";
+	new plik[32] = "logi/anticheat.log";
 	Log(plik, text);
 }
 
