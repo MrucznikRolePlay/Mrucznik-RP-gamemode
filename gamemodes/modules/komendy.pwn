@@ -30603,14 +30603,14 @@ CMD:zwiaz(playerid, params[])
 }
 CMD:restart(playerid)
 {
-	new string[128];
-	new PlayerName[MAX_PLAYER_NAME];
 	if(IsPlayerConnected(playerid))
 	{
 		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
-			GetPlayerName(playerid, PlayerName, sizeof(PlayerName));
-			format(string, sizeof(string), "%s zarz¹dzi³ restart serwera! Trwa próba ponownego po³¹czenia", PlayerName);
+			new string[128]
+			new playerNick[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, playerNick, sizeof(playerNick));
+			format(string, sizeof(string), "%s zarz¹dzi³ restart serwera! Trwa próba ponownego po³¹czenia", playerNick);
 			foreach(Player, i)
 			{
 				sendErrorMessage(i, string);
@@ -38660,7 +38660,7 @@ CMD:alarm(playerid,cmdtext[]) //TODO
 						MoveDynamicObject(bramaAlarmu[3], 1449.86377, -1807.49780, 79.68960, 5,   0.00000, 90.00000, 90.00000);
 						//Inne
 						DMV_ALARM = 1;
-						foreach(player, i)
+						foreach(Player, i)
 						{
 							if(GetPlayerVirtualWorld(playerid) == 50)
 							{
