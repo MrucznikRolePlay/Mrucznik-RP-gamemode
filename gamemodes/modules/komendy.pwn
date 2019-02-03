@@ -30607,7 +30607,7 @@ CMD:restart(playerid)
 	{
 		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
-			new string[128]
+			new string[128];
 			new playerNick[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, playerNick, sizeof(playerNick));
 			format(string, sizeof(string), "%s zarz¹dzi³ restart serwera! Trwa próba ponownego po³¹czenia", playerNick);
@@ -38763,7 +38763,7 @@ CMD:zrobkolejke(playerid)
 
 CMD:gotoadmin(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1 || !IsATechnik(playerid)) return 1;
     SetPlayerVirtualWorld(playerid, 5000);
 	SetPlayerPosEx(playerid, 3524.550292, -236.021621, 35.619190);
 	
