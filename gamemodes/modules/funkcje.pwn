@@ -3403,6 +3403,61 @@ PrzyczepKogut(playerid, veh)
     AttachDynamicObjectToVehicle(VehicleUID[veh][vSiren], veh, x,y,z, 0.0, 0.0, 0.0);
 	return 1;
 }
+IsAtTheDMVWindows(playerid)
+{
+	if(IsPlayerInRangeOfPoint(playerid, 2.0, 1455.7228,-1792.1116,77.9502))//okienko 1
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1455.7327,-1795.6041,77.9612))//okienko 2
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1455.7328,-1798.7909,77.9612))//okienko 3
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1455.7350,-1802.1936,77.9502))//okienko 4
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1445.2709,-1791.4561,77.9502))//okienko 5
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1445.3060,-1794.1992,77.9612))//okienko 6
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1445.3192,-1797.6259,77.9612))//okienko 7
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1445.3387,-1800.7615,77.9612))//okienko 8
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1450.0565,-1854.4873,81.4670))//biuro burmistrza
+	{
+	
+		return 1;
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1454.3301,-1782.8667,77.9502))//kamery bor
+	{
+	
+		return 1;
+	}
+
+	return 0;
+}
 
 GraczBankomat(playerid)
 {

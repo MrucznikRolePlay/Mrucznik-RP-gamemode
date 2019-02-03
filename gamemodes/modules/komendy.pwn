@@ -38586,6 +38586,68 @@ CMD:alarm(playerid,cmdtext[]) //TODO
             }
     	}
     }
+	else if(GetPlayerFraction(playerid) == FRAC_GOV && PlayerInfo[playerid][pRank] > 0 || GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2)
+	{
+		new string [128];
+		if(GetPVarInt(playerid, "dutyadmin") == 0)
+		{
+			if(IsAtTheDMVWindows(playerid))
+			{
+				if(GetPlayerVirtualWorld(playerid) == 50)
+				{
+					if(DMV_ALARM == 0)
+					{
+						//POWIADOMIENIE DLA BOR I DMV
+						format(string, sizeof(string), "[S³uchawka bluetooth] Uwaga! %s aktywowa³ alarm w Urzêdzie - rzucaj wszystko i ruszaj tam!", GetNick(playerid, true));
+						SendFamilyMessage(FRAC_BOR, 0xFFFF0000, string);
+						format(string, sizeof(string), "[RADIO] Uwaga! Kryj siê! %s aktywowa³ alarm w Urzedzie.", GetNick(playerid, true));
+						SendFamilyMessage(FRAC_GOV, 0xFFFF0000, string);
+						
+						//AKCJA 
+						format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i w³¹cza alarm.",GetNick(playerid, true));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//MOVE OBJECTS:
+						MoveDynamicObject(bramaAlarmu[0], 1458.55872, -1781.09436, 84.14751, 20, 0.00000, 0.00000, 0.00000 );
+						MoveDynamicObject(bramaAlarmu[1], 1453.65222, -1822.41931, 87.62315,  20,  0.00000, 0.00000, 0.00000);
+						MoveDynamicObject(bramaAlarmu[2],1453.60974, -1822.42871, 87.69519, 20, 0.00000, 0.00000, 180.00000);
+						MoveDynamicObject(bramaAlarmu[3], 1449.86377, -1807.49780, 79.68960, 5,   0.00000, 90.00000, 90.00000);
+
+					
+						//INNE
+						DMV_ALARM = 1;
+					
+					}
+					else
+					{
+						//POWIADOMIENIE DLA BOR I DMV
+						format(string, sizeof(string), "[S³uchawka bluetooth] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid, true));
+						SendFamilyMessage(FRAC_BOR, 0xFFFF0000, string);
+						format(string, sizeof(string), "[RADIO] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid, true));
+						SendFamilyMessage(FRAC_GOV, 0xFFFF0000, string);
+						
+						//AKCJA 
+						format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i wy³¹cza alarm.",GetNick(playerid, true));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//MOVE OBJECTS:
+						
+						MoveDynamicObject(bramaAlarmu[0], 1458.55872, -1781.09436, 20,  78.6217, 0.00000, 0.00000, 0.00000);
+						MoveDynamicObject(bramaAlarmu[1], 1453.65222, -1822.41931, 82.1589,  20,  0.00000, 0.00000, 0.00000);
+						MoveDynamicObject(bramaAlarmu[2],1453.60974, -1822.42871, 82.1589, 20, 0.00000, 0.00000, 180.00000);
+						MoveDynamicObject(bramaAlarmu[3], 1449.86377, -1807.49780, 79.68960, 5,   0.00000, 90.00000, 90.00000);
+						
+						DMV_ALARM = 0;
+					
+					}
+				}
+			}
+	
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Adminujesz? To Adminuj!"); 
+			return 1;
+		}
+	}
     return 1;
 }
 
