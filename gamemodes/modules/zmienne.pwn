@@ -62,6 +62,7 @@ new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
 
 //ALARM DMV:
 new DMV_ALARM = 0;
+new bramaAlarmu[4];
 
 
 //legal
