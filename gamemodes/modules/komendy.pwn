@@ -23677,13 +23677,13 @@ CMD:newbie(playerid, params[])
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, sendername, params);
 			}
 			OOCNewbie(nobchat);
-			format(nobchat, sizeof(nobchat), "((N-Chat: %s [%d]: %s ))", sendername, PlayerInfo[playerid][pLevel], params);
-			printf(nobchat);
-			if(PlayerInfo[playerid][pNewAP] != 5 || PlayerInfo[playerid][pAdmin] != 1)
+			if(PlayerInfo[playerid][pNewAP] != 5 && PlayerInfo[playerid][pAdmin] == 0)
 			{
 				AntySpam[playerid] = 1;
 				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
 			}
+			format(nobchat, sizeof(nobchat), "((N-Chat: %s [%d]: %s ))", sendername, PlayerInfo[playerid][pLevel], params);
+			printf(nobchat);
 			new admin = 0;
 			foreach(Player, i)
 			{
