@@ -38603,7 +38603,7 @@ CMD:alarm(playerid,cmdtext[]) //TODO
 					
 					//AKCJA 
 					format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i w³¹cza alarm.",GetNick(playerid));
-					ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//MOVE OBJECTS:
 					
 
@@ -38622,7 +38622,7 @@ CMD:alarm(playerid,cmdtext[]) //TODO
 					
 					//AKCJA 
 					format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i wy³¹cza alarm.",GetNick(playerid));
-					ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//MOVE OBJECTS:
 				
 					DMV_ALARM = 0;
