@@ -13692,7 +13692,7 @@ CMD:stworzdom(playerid, params[])
 
 CMD:domint(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 || || IsATechnik(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 	{
 		new dld, interior;
 		if( sscanf(params, "dd", dld, interior))
