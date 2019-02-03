@@ -23533,7 +23533,7 @@ CMD:newbie(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if(newbie == 1 && PlayerInfo[playerid][pAdmin] == 0)
+        if(newbie == 1 && PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] != 5)
         {
             sendTipMessageEx(playerid, COLOR_GRAD2, "Chat newbie jest wy³¹czony!");
 			return 1;
@@ -23679,8 +23679,11 @@ CMD:newbie(playerid, params[])
 			OOCNewbie(nobchat);
 			format(nobchat, sizeof(nobchat), "((N-Chat: %s [%d]: %s ))", sendername, PlayerInfo[playerid][pLevel], params);
 			printf(nobchat);
-			AntySpam[playerid] = 1;
-			SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
+			if(PlayerInfo[playerid][pNewAP] != 5 || PlayerInfo[playerid][pAdmin] != 1)
+			{
+				AntySpam[playerid] = 1;
+				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
+			}
 			new admin = 0;
 			foreach(Player, i)
 			{
