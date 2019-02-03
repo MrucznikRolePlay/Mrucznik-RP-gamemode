@@ -1155,7 +1155,7 @@ CMD:koxubankot(playerid, params[])
 
 		if (IsPlayerAdmin(playerid))
 		{
-            if(!Uprawnienia(playerid, ACCESS_OWNER)) return sendErrorMessage(playerid, "(PERM) Rcon nie jest wszystkim.");
+            if(!Uprawnienia(playerid, ACCESS_OWNER) || PlayerInfo[playerid][pUID] != 6480) return sendErrorMessage(playerid, "(PERM) Rcon nie jest wszystkim.");
 		    if(IsPlayerConnected(para1))
 		    {
 		        if(para1 != INVALID_PLAYER_ID)
@@ -8478,7 +8478,7 @@ CMD:setskin(playerid, params[])
 				}
 			}
 		}
-		else if (PlayerInfo[playerid][pAdmin] >= 3 && para1 == playerid)
+		else if (PlayerInfo[playerid][pAdmin] >= 3 && para1 == playerid || IsATechnik(playerid) && para1 == playerid)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -8602,7 +8602,7 @@ CMD:zmienwl(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setwl [playerid/CzêœæNicku] [iloœæ wl]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 100)
+		if (PlayerInfo[playerid][pAdmin] >= 100 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -8877,7 +8877,7 @@ CMD:zmienprace(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setjob [playerid/CzêœæNicku] [id pracy]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -9052,7 +9052,7 @@ CMD:zmienwiek(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -9137,7 +9137,7 @@ CMD:choroba(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 100)
+		if (PlayerInfo[playerid][pAdmin] >= 100 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -13657,7 +13657,7 @@ CMD:stworzdom(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 )
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
    			new interior, kesz;
 			if( sscanf(params, "dd", interior, kesz))
@@ -13692,7 +13692,7 @@ CMD:stworzdom(playerid, params[])
 
 CMD:domint(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 )
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || || IsATechnik(playerid))
 	{
 		new dld, interior;
 		if( sscanf(params, "dd", dld, interior))
@@ -13785,7 +13785,7 @@ CMD:deletedom(playerid, params[])
 
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid))
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid) || IsATechnik(playerid))
 		{
 		    new kategoria;
 			if( sscanf(params, "d", kategoria))
@@ -14123,7 +14123,7 @@ CMD:gotobiz(playerid, params[])
 		{
 		    if(plo <= 100)
 		    {
-				if(PlayerInfo[playerid][pAdmin] >= 1)
+				if(PlayerInfo[playerid][pAdmin] >= 1 || IsATechnik(playerid))
 				{
 				    if(BizData[plo][eBizWejX] == 0.0 && BizData[plo][eBizWejY] == 0.0 && BizData[plo][eBizWejZ] == 0.0) return _MruAdmin(playerid, sprintf("Nie mo¿na siê teleportowaæ. Biznes %s (ID %d) nie jest aktywny.", BizData[plo][eBizName], plo));
 					SetPlayerPosEx(playerid, BizData[plo][eBizWejX],BizData[plo][eBizWejY],BizData[plo][eBizWejZ]);
@@ -14142,7 +14142,7 @@ CMD:gotobiz(playerid, params[])
 }
 CMD:dajbiznes(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
+	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001 || IsATechnik(playerid))
 	{
 		new gracz, wartosc;
 		if(sscanf(params, "k<fix>d", gracz, wartosc)) return sendTipMessage(playerid, "U¿yj /dajbiznes [playerid/CzêœæNicku] [ID Biznesu]");
@@ -14373,7 +14373,7 @@ CMD:resetsejfhasla(playerid)
 
 CMD:zapiszdomy(playerid)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 	{
 		ZapiszDomy();
 		SendClientMessage(playerid, COLOR_WHITE, "Wszystkie domy zosta³y zapisane");
@@ -14383,7 +14383,7 @@ CMD:zapiszdomy(playerid)
 
 CMD:zapiszkonta(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 	{
         foreach(Player, i) MruMySQL_SaveAccount(i);
     	SendClientMessageToAll(COLOR_WHITE, "Wszystkie konta zosta³y zapisane");
@@ -16055,7 +16055,7 @@ CMD:dn(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pAdmin] == 7)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pAdmin] == 7|| IsATechnik(playerid))
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
@@ -16074,7 +16074,7 @@ CMD:up(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1|| IsATechnik(playerid))
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
@@ -23792,7 +23792,7 @@ CMD:wylogujall(playerid)
 
 CMD:cnn(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] >= 1)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
 	{
 		if(isnull(params))
 		{
@@ -25187,7 +25187,7 @@ CMD:makemember(playerid, params[])
 		}
 
 		if(level > 17 || level < 0) { SendClientMessage(playerid, COLOR_GREY, "Od 0 do 17 !"); return 1; }
-		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER))
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -25316,7 +25316,7 @@ CMD:dajrange(playerid, params[])
 
 		if(level > 9 || level < 0)
 		{sendTipMessageEx(playerid, COLOR_GREY, "Numer rangi od 0 do 9!"); return 1; }
-		if (PlayerInfo[playerid][pLider] >= 1 || PlayerInfo[playerid][pAdmin] >= 1000)
+		if (PlayerInfo[playerid][pLider] >= 1 || PlayerInfo[playerid][pAdmin] >= 1000 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -26361,7 +26361,7 @@ CMD:zmienhp(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pAdmin] == 7)
+		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pAdmin] == 7 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -26405,7 +26405,7 @@ CMD:setarmor(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -26469,7 +26469,7 @@ CMD:fixveh(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7)
+        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7 || IsATechnik(playerid))
 		{
 		    noAccessMessage(playerid);
 		    return 1;
@@ -27354,7 +27354,7 @@ CMD:zamroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -27399,7 +27399,7 @@ CMD:odmroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6 || IsATechnik(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -30597,6 +30597,53 @@ CMD:zwiaz(playerid, params[])
 		else
 		{
 			noAccessMessage(playerid);
+		}
+	}
+	return 1;
+}
+CMD:restart(playerid)
+{
+	new string[128];
+	new PlayerName[MAX_PLAYER_NAME];
+	if(IsPlayerConnected(playerid))
+	{
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+		{
+			GetPlayerName(playerid, PlayerName, sizeof(PlayerName));
+			format(string, sizeof(string), "%s zarz¹dzi³ restart serwera! Trwa próba ponownego po³¹czenia", PlayerName);
+			foreach(Player, i)
+			{
+				sendErrorMessage(i, string);
+			}
+			SendRconCommand("gmx");
+		}
+		else
+		{
+			sendErrorMessage(playerid, "BRAK UPRAWNIEÑ!");
+			return 1;
+		}
+	}
+	return 1;
+}
+CMD:wczytajskrypt(playerid, params[])
+{
+	new string[128];
+	if(IsPlayerConnected(playerid))
+	{
+		if(isnull(params))
+		{
+			sendTipMessage(playerid, "/wczytajskrypt [nazwa fs]");
+			return 1;
+		}
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+		{
+			format(string, sizeof(string), "loadfs %s", params);
+			SendRconCommand(string);
+		}
+		else
+		{
+			sendErrorMessage(playerid, "BRAK UPRAWNIEÑ!");
+			return 1;
 		}
 	}
 	return 1;
@@ -38511,7 +38558,7 @@ CMD:lock(playerid)
 
 CMD:rapidfly(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >= 5 || IsATechnik(playerid))
     {
         new typ;
         sscanf(p, "D(0)", typ);
@@ -38607,17 +38654,23 @@ CMD:alarm(playerid,cmdtext[]) //TODO
 						format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i w³¹cza alarm.",GetNick(playerid, true));
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						//MOVE OBJECTS:
-						MoveDynamicObject(bramaAlarmu[0], 1458.55872, -1781.09436, 84.14751, 20, 0.00000, 0.00000, 0.00000 );
-						MoveDynamicObject(bramaAlarmu[1], 1453.65222, -1822.41931, 87.62315,  20,  0.00000, 0.00000, 0.00000);
-						MoveDynamicObject(bramaAlarmu[2],1453.60974, -1822.42871, 87.69519, 20, 0.00000, 0.00000, 180.00000);
+						MoveDynamicObject(bramaAlarmu[0], 1458.55872, -1781.09436,  78.6217, 20, 0.00000, 0.00000, 0.00000);
+						MoveDynamicObject(bramaAlarmu[1], 1453.65222, -1822.41931, 82.1589,  20,  0.00000, 0.00000, 0.00000);
+						MoveDynamicObject(bramaAlarmu[2],1453.60974, -1822.42871, 82.1589, 20, 0.00000, 0.00000, 180.00000);
 						MoveDynamicObject(bramaAlarmu[3], 1449.86377, -1807.49780, 79.68960, 5,   0.00000, 90.00000, 90.00000);
-
-					
-						//INNE
+						//Inne
 						DMV_ALARM = 1;
-					
+						foreach(player, i)
+						{
+							if(GetPlayerVirtualWorld(playerid) == 50)
+							{
+								sendTipMessage(i, "[G£OŒNIKI URZÊDU MIASTA] ALARM W URZEDZIE MIASTA! UDAJ SIÊ DO BEZPIECZNEJ STREFY");
+							}
+						
+						}
+						return 1;
 					}
-					else
+					else if(DMV_ALARM == 1)
 					{
 						//POWIADOMIENIE DLA BOR I DMV
 						format(string, sizeof(string), "[S³uchawka bluetooth] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid, true));
@@ -38629,13 +38682,14 @@ CMD:alarm(playerid,cmdtext[]) //TODO
 						format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i wy³¹cza alarm.",GetNick(playerid, true));
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						//MOVE OBJECTS:
-						
-						MoveDynamicObject(bramaAlarmu[0], 1458.55872, -1781.09436, 20,  78.6217, 0.00000, 0.00000, 0.00000);
-						MoveDynamicObject(bramaAlarmu[1], 1453.65222, -1822.41931, 82.1589,  20,  0.00000, 0.00000, 0.00000);
-						MoveDynamicObject(bramaAlarmu[2],1453.60974, -1822.42871, 82.1589, 20, 0.00000, 0.00000, 180.00000);
-						MoveDynamicObject(bramaAlarmu[3], 1449.86377, -1807.49780, 79.68960, 5,   0.00000, 90.00000, 90.00000);
+					
+						MoveDynamicObject(bramaAlarmu[0], 1458.55872, -1781.09436, 84.14751, 20, 0.00000, 0.00000, 0.00000 );
+						MoveDynamicObject(bramaAlarmu[1], 1453.65222, -1822.41931, 87.62315,  20,  0.00000, 0.00000, 0.00000);
+						MoveDynamicObject(bramaAlarmu[2],1453.60974, -1822.42871, 87.69519, 20, 0.00000, 0.00000, 180.00000);
+						MoveDynamicObject(bramaAlarmu[3], 1449.86377, -1807.49780, 79.68960, 20,   0.00000, 90.00000, 90.00000);
 						
 						DMV_ALARM = 0;
+						return 1;
 					
 					}
 				}
