@@ -38586,6 +38586,52 @@ CMD:alarm(playerid,cmdtext[]) //TODO
             }
     	}
     }
+	else if(GetPlayerFraction(playerid) == FRAC_GOV && PlayerInfo[playerid][pRank] > 0 || GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2)
+	{
+		new string [128];
+		if(IsAtTheDMVWindows(playerid))
+		{
+			if(GetPlayerVirtualWorld(playerid) == 50)
+			{
+				if(DMV_ALARM == 0)
+				{
+					//POWIADOMIENIE DLA BOR I DMV
+					format(string, sizeof(string), "[S³uchawka bluetooth] Uwaga! %s aktywowa³ alarm w Urzêdzie - rzucaj wszystko i ruszaj tam!", GetNick(playerid))
+					SendFamilyMessage(FRAC_BOR, 0xFFFF0000, string);
+					format(string, sizeof(string), "[RADIO] Uwaga! Kryj siê! %s aktywowa³ alarm w Urzedzie.", GetNick(playerid))
+					SendFamilyMessage(FRAC_GOV, 0xFFFF0000, string);
+					
+					//AKCJA 
+					format(akcja,sizeof(akcja),"* %s wciska czerwony guzik pod biurkiem i w³¹cza alarm.",GetNick(playerid));
+					ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//MOVE OBJECTS:
+					
+
+                
+					//INNE
+					DMV_ALARM = 1;
+				
+				}
+				else
+				{
+					//POWIADOMIENIE DLA BOR I DMV
+					format(string, sizeof(string), "[S³uchawka bluetooth] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid))
+					SendFamilyMessage(FRAC_BOR, 0xFFFF0000, string);
+					format(string, sizeof(string), "[Radio] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid))
+					SendFamilyMessage(FRAC_GOV, 0xFFFF0000, string);
+					
+					//AKCJA 
+					format(akcja,sizeof(akcja),"* %s wciska czerwony guzik pod biurkiem i wy³¹cza alarm.",GetNick(playerid));
+					ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//MOVE OBJECTS:
+				
+					DMV_ALARM = 0;
+				
+				}
+			}
+		}
+	
+	}
     return 1;
 }
 
