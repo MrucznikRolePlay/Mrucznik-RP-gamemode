@@ -38596,9 +38596,9 @@ CMD:alarm(playerid,cmdtext[]) //TODO
 				if(DMV_ALARM == 0)
 				{
 					//POWIADOMIENIE DLA BOR I DMV
-					format(string, sizeof(string), "[S³uchawka bluetooth] Uwaga! %s aktywowa³ alarm w Urzêdzie - rzucaj wszystko i ruszaj tam!", GetNick(playerid))
+					format(string, sizeof(string), "[S³uchawka bluetooth] Uwaga! %s aktywowa³ alarm w Urzêdzie - rzucaj wszystko i ruszaj tam!", GetNick(playerid));
 					SendFamilyMessage(FRAC_BOR, 0xFFFF0000, string);
-					format(string, sizeof(string), "[RADIO] Uwaga! Kryj siê! %s aktywowa³ alarm w Urzedzie.", GetNick(playerid))
+					format(string, sizeof(string), "[RADIO] Uwaga! Kryj siê! %s aktywowa³ alarm w Urzedzie.", GetNick(playerid));
 					SendFamilyMessage(FRAC_GOV, 0xFFFF0000, string);
 					
 					//AKCJA 
@@ -38615,9 +38615,9 @@ CMD:alarm(playerid,cmdtext[]) //TODO
 				else
 				{
 					//POWIADOMIENIE DLA BOR I DMV
-					format(string, sizeof(string), "[S³uchawka bluetooth] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid))
+					format(string, sizeof(string), "[S³uchawka bluetooth] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid));
 					SendFamilyMessage(FRAC_BOR, 0xFFFF0000, string);
-					format(string, sizeof(string), "[Radio] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid))
+					format(string, sizeof(string), "[Radio] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid));
 					SendFamilyMessage(FRAC_GOV, 0xFFFF0000, string);
 					
 					//AKCJA 
