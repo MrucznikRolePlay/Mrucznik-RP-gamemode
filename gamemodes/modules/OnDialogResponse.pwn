@@ -711,7 +711,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 12: ACCESS[id] ^= ACCESS_EDITRANG;
             case 13: ACCESS[id] ^= ACCESS_GIVEBIZ;
 			case 14: ACCESS[id] ^= ACCESS_TAKEBIZ;
-			case 15: ACCESS[id] ^= ACCESS_TECHNIK
+			case 15: ACCESS[id] ^= ACCESS_TECHNIK;
 			case 16: ACCESS[id] ^= ACCESS_CREATEHOUSE;
 			case 17: ACCESS[id] ^= ACCESS_DELHOUSE;
 			case 18: ACCESS[id] ^= ACCESS_EDITHOUSE;
