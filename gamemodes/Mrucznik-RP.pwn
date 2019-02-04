@@ -4604,7 +4604,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 						SendClientMessage(i, COLOR_LIGHTBLUE, string);
                         if(PlayerInfo[playerid][pLevel] < 3)
                         {
-                            ZabierzKase(playerid, floatround(TransportValue[i]/2));//moneycheat
+                            ZabierzKase(playerid, floatround(TransportValue[i]/4));//moneycheat
                             sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jesteœ nowym graczem, obowi¹zuje Cie rabat 50 procent na taksówkê.");
                         }
                         else
