@@ -2105,7 +2105,7 @@ IsATechnik(playerid)//Funkcja stworzona na proœbê 0Verte (dla Simeone || dla PEC
 	{
 		return 1;
 	}
-	if(PlayerInfo[playerid][pUID] == 99052) //Pecet
+	if(PlayerInfo[playerid][pUID] == 24080) //Pecet
 	{
 		return 1;
 	}
