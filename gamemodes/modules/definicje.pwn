@@ -223,6 +223,14 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define ACCESS_GIVEHALF     0b100000000000
 #define ACCESS_DELETEORG    0b1000000000000 //13 bit
 
+//New Access
+#define ACCESS_GIVEBIZ		0b110//Daj biznes
+#define ACCESS_TAKEBIZ		0b1100//Zabierz biznes
+#define ACCESS_DELHOUSE		0b11000//Usuñ dom
+#define ACCESS_CREATEHOUSE	0b110000//Stwórz dom
+#define ACCESS_EDITHOUSE	0b1100000//Zmieñ interior
+#define ACCESS_TECHNIK		0b11000000//Techniczny (/loadfs /gmx)
+
 #define ACCESS_OWNER        0b1111111111111
 
 //------------------------------------------------------------------------------
