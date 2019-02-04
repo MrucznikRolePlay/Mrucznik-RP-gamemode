@@ -369,16 +369,7 @@ CMD:uprawnienia(playerid, params[])
 
     if(Uprawnienia(playerid, ACCESS_EDITCAR)) strcat(str, "{00FF00}+{FFFFFF} Edycja pojazdów\n");
     if(Uprawnienia(playerid, ACCESS_EDITRANG)) strcat(str, "{00FF00}+{FFFFFF} Edycja rang\n");
-	if(Uprawnienia(playerid, ACCESS_EDITCAR)) strcat(str, "{00FF00}+{FFFFFF} Edycja pojazdów\n");
-	
-	if(Uprawnienia(playerid, ACCESS_GIVEBIZ)) strcat(str, "{00FF00}+{FFFFFF} Daj biznes\n");
-	if(Uprawnienia(playerid, ACCESS_TAKEBIZ)) strcat(str, "{00FF00}+{FFFFFF} Zabierz biznes\n");
-	if(Uprawnienia(playerid, ACCESS_TECHNIK)) strcat(str, "{00FF00}+{FFFFFF} TECHNIK SERWERA\n");
-	if(Uprawnienia(playerid, ACCESS_CREATEHOUSE)) strcat(str, "{00FF00}+{FFFFFF} Stworz dom\n");
-	if(Uprawnienia(playerid, ACCESS_DELHOUSE)) strcat(str, "{00FF00}+{FFFFFF} Usun Dom\n");
-	if(Uprawnienia(playerid, ACCESS_EDITHOUSE)) strcat(str, "{00FF00}+{FFFFFF} Edytuj Dom\n");
     if(Uprawnienia(playerid, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ");
-	
     if(strlen(str) < 20) strcat(str, "{FF0000}Brak jakichkolwiek uprawnieñ!");
     ShowPlayerDialogEx(playerid, D_INFO, DIALOG_STYLE_LIST, "Twoje uprawnienia", str, "OK", "");
     return 1;
@@ -418,20 +409,6 @@ CMD:edytujupr(playerid, params[])
     else strcat(str, "{FF0000}-{FFFFFF} Edycja pojazdów\n");
     if(Uprawnienia(id, ACCESS_EDITRANG)) strcat(str, "{00FF00}+{FFFFFF} Edycja rang\n");
     else strcat(str, "{FF0000}-{FFFFFF} Edycja rang\n");
-	
-	if(Uprawnienia(playerid, ACCESS_GIVEBIZ)) strcat(str, "{00FF00}+{FFFFFF} Daj biznes\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Daj Biznes\n");
-	if(Uprawnienia(playerid, ACCESS_TAKEBIZ)) strcat(str, "{00FF00}+{FFFFFF} Zabierz biznes\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Zabierz Biznes\n");
-	if(Uprawnienia(playerid, ACCESS_TECHNIK)) strcat(str, "{00FF00}+{FFFFFF} TECHNIK SERWERA\n");
-    else strcat(str, "{FF0000}-{FFFFFF} TECHNIK SERWERA\n");
-	if(Uprawnienia(playerid, ACCESS_CREATEHOUSE)) strcat(str, "{00FF00}+{FFFFFF} Stworz dom\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Stworz Dom\n");
-	if(Uprawnienia(playerid, ACCESS_DELHOUSE)) strcat(str, "{00FF00}+{FFFFFF} Usun Dom\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Usun Dom\n");
-	if(Uprawnienia(playerid, ACCESS_EDITHOUSE)) strcat(str, "{00FF00}+{FFFFFF} Edytuj Dom\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Edytuj dom\n");
-	
     if(Uprawnienia(id, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ\n");
     else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
     if(Uprawnienia(id, ACCESS_OWNER)) strcat(str, "{00FF00}OWNER RIGHT'S");
@@ -13680,7 +13657,7 @@ CMD:stworzdom(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_CREATEHOUSE))
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
    			new interior, kesz;
 			if( sscanf(params, "dd", interior, kesz))
@@ -13715,7 +13692,7 @@ CMD:stworzdom(playerid, params[])
 
 CMD:domint(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_EDITHOUSE))
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 	{
 		new dld, interior;
 		if( sscanf(params, "dd", dld, interior))
@@ -13808,7 +13785,7 @@ CMD:deletedom(playerid, params[])
 
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid) || Uprawnienia(playerid, ACCESS_DELHOUSE))
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid) || IsATechnik(playerid))
 		{
 		    new kategoria;
 			if( sscanf(params, "d", kategoria))
@@ -14165,7 +14142,7 @@ CMD:gotobiz(playerid, params[])
 }
 CMD:dajbiznes(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001 || Uprawnienia(playerid, ACCESS_GIVEBIZ))
+	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001 || IsATechnik(playerid))
 	{
 		new gracz, wartosc;
 		if(sscanf(params, "k<fix>d", gracz, wartosc)) return sendTipMessage(playerid, "U¿yj /dajbiznes [playerid/CzêœæNicku] [ID Biznesu]");
@@ -14193,7 +14170,7 @@ CMD:dajbiznes(playerid, params[])
 }
 CMD:zabierzbiznes(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001 || Uprawnienia(playerid, ACCESS_TAKEBIZ))
+	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
 	{
 		new gracz;
 		if(sscanf(params, "d", gracz)) return sendTipMessage(playerid, "U¿yj /zabierzbiznes [playerid/CzêœæNicku]");
@@ -30628,7 +30605,7 @@ CMD:restart(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_TECHNIK))
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
 			new string[128];
 			new playerNick[MAX_PLAYER_NAME];
@@ -30658,7 +30635,7 @@ CMD:wczytajskrypt(playerid, params[])
 			sendTipMessage(playerid, "/wczytajskrypt [nazwa fs]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_TECHNIK))
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
 		{
 			format(string, sizeof(string), "loadfs %s", params);
 			SendRconCommand(string);
