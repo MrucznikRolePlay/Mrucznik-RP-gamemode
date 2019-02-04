@@ -30413,13 +30413,25 @@ CMD:wezwij(playerid, params[])
 		        {
 		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnych taksówkarzy !");
 		        }
-		        GetPlayerName(playerid, sendername, sizeof(sendername));
-			    format(string, sizeof(string), "** %s potrzebuje transportu. (wpisz /akceptuj taxi aby zaaceptowaæ zg³oszenie)", sendername);
-		    	SendFamilyMessage(10, 0xE88A2DFF, string);
-		    	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po taksówkê, czekaj na akceptacje.");
-		    	TaxiCall = playerid;
-		    	AntySpam[playerid] = 1;
-				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
+				GetPlayerName(playerid, sendername, sizeof(sendername));
+				if(PlayerInfo[playerid][pLevel] <= 3)
+				{
+					format(string, sizeof(string), "**[NEW_PLAYER] %s potrzebuje transportu. (wpisz /akceptuj taxi aby zaaceptowaæ zg³oszenie)", sendername);
+					SendFamilyMessage(10, 0xE88A2DFF, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po taksówkê, czekaj na akceptacje.");
+					TaxiCall = playerid;
+					AntySpam[playerid] = 1;
+					SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
+				}
+				else
+				{
+					format(string, sizeof(string), "** %s potrzebuje transportu. (wpisz /akceptuj taxi aby zaaceptowaæ zg³oszenie)", sendername);
+					SendFamilyMessage(10, 0xE88A2DFF, string);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po taksówkê, czekaj na akceptacje.");
+					TaxiCall = playerid;
+					AntySpam[playerid] = 1;
+					SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
+				}
 		    	return 1;
 			}
 			else if(strcmp(x_nr,"heli",true) == 0)
