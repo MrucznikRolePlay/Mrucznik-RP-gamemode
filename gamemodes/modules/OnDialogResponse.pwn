@@ -709,13 +709,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 10: ACCESS[id] ^= ACCESS_DELETEORG;
             case 11: ACCESS[id] ^= ACCESS_EDITCAR;
             case 12: ACCESS[id] ^= ACCESS_EDITRANG;
-            case 13: ACCESS[id] ^= ACCESS_GIVEBIZ;
-			case 14: ACCESS[id] ^= ACCESS_TAKEBIZ;
-			case 15: ACCESS[id] ^= ACCESS_TECHNIK;
-			case 16: ACCESS[id] ^= ACCESS_CREATEHOUSE;
-			case 17: ACCESS[id] ^= ACCESS_DELHOUSE;
-			case 18: ACCESS[id] ^= ACCESS_EDITHOUSE;
-			case 19: ACCESS[id] ^= ACCESS_EDITPERM;
+			case 13: ACCESS[id] ^= ACCESS_EDITPERM;
+            case 14: ACCESS[id] = ACCESS_GIVEBIZ;
+			case 15: ACCESS[id] = ACCESS_TAKEBIZ;
+			case 16: ACCESS[id] = ACCESS_TECHNIK;
+			case 17: ACCESS[id] = ACCESS_CREATEHOUSE;
+			case 18: ACCESS[id] = ACCESS_DELHOUSE;
+			case 19: ACCESS[id] = ACCESS_EDITHOUSE;
+			
         }
         format(str, 128, "(PERM) %s edytowa³ Twoje uprawnienia (/uprawnienia)", GetNick(playerid));
         SendClientMessage(id, 0x05CA8CFF, str);
