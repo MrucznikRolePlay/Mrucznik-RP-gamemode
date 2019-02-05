@@ -16428,28 +16428,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(!response)
 		{
 			new string[128];
-			if(PlayerInfo[playerid][pSex] == 0)//facet
+			if(PlayerInfo[playerid][pSex] == 1)//facet
 			{
-				if(PlayerInfo[kissPlayerOffer[playerid]][pSex] == 1)//Z kobiet¹
+				if(PlayerInfo[kissPlayerOffer[playerid]][pSex] == 2)//Z kobiet¹
 				{
 					format(string, sizeof(string), "* %s spojrza³ na %s i stwierdzi³, ¿e nie chce jej poca³owaæ!", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					return 1;
 				}
-				else//z facetem
+				else if(PlayerInfo[kissPlayerOffer[playerid]][pSex] == 1)//z facetem
 				{
 					format(string, sizeof(string), "* %s i %s spojrzeli na siebie - stwierdzili, ¿e nie chc¹ siê ca³owaæ/", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					return 1;
 				}
 			}
-			else//Kobieta
+			else if(PlayerInfo[playerid][pSex] == 2)//Kobieta
 			{
-				if(PlayerInfo[kissPlayerOffer[playerid]][pSex] == 0)//Z facetem
+				if(PlayerInfo[kissPlayerOffer[playerid]][pSex] == 1)//Z facetem
 				{
 					format(string, sizeof(string), "* %s spojrza³a na %s i stwierdzi³a, ¿e nie chce go poca³owaæ!", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					return 1;
 				}
-				else//Z kobiet¹
+				else if(PlayerInfo[kissPlayerOffer[playerid]][pSex] == 2)//Z kobiet¹
 				{
 					format(string, sizeof(string), "* %s i %s spojrzeli na siebie - stwierdzili, ¿e nie chc¹ siê ca³owaæ/", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
