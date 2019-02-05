@@ -3781,19 +3781,10 @@ CMD:caluj(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-  					new nick[200];
-					new witany[MAX_PLAYER_NAME];
-					SendClientMessage(playa, COLOR_WHITE, "Calujesz siê");
-					GetPlayerName(playa, witany, sizeof(witany));
-					GetPlayerName(playerid, nick, sizeof(nick));
-					format(string, sizeof(string),"* %s caluje siê z %s.", nick, witany);
-					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					format(string, sizeof(string), "%s mówi: Kocham ciê.", witany);
-					ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-                    format(string, sizeof(string), "%s mówi: Ja ciebie te¿.", nick);
-					ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-					ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
-					ApplyAnimation(playa, "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
+					format(string, sizeof(string), "%s chce siê z tob¹ poca³owaæ - jeœli go kochasz kliknij ''Ca³uj''!", GetNick(playerid, true));
+  					ShowPlayerDialogEx(playa, YOUR_DIALOGID, DIALOG_STYLE_INPUT, "Mrucznik Role Play -> /caluj", string, "Ca³uj", "Odrzuæ");
+					
+					kissPlayerOffer[giveplayerid] = playerid;
 				}
 			}
 		}
