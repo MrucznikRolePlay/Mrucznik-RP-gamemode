@@ -16423,7 +16423,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 	
 	}
-	else if(dialogid = 1092)//Ca³uj - komenda - potwierdzenie
+	else if(dialogid = 1094)//Ca³uj - komenda - potwierdzenie
 	{
 		if(!response)
 		{

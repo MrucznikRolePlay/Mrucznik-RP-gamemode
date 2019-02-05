@@ -1131,7 +1131,7 @@ ZerujZmienne(playerid)
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	kissPlayerOffer[playerid] = 0;
+	
 	
 	
 	
