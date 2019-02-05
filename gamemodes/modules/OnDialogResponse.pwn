@@ -16423,12 +16423,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 	
 	}
-	else if(dialogid == 1094)//Ca³uj - komenda - potwierdzenie
+	else if(dialogid == 1120)//Ca³uj - komenda - potwierdzenie
 	{
 		if(!response)
 		{
 			new string[128];
-	
 			format(string, sizeof(string), "* %s spojrza³(a) na %s i stwierdzi³(a), ¿e nie chce siê ca³owaæ!", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
 			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		
