@@ -34058,7 +34058,9 @@ CMD:wypusc(playerid, params[])
 				{
 					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj prawnik]", GetNick(playerid, true), money);
 					SendClientMessage(giveplayerid, COLOR_BLUE, string);
-				
+					LawyerOffer[giveplayerid] = 1;
+					SetPVarInt(playerid, "KwotaUwolnienia", money);
+					SetPVarInt(playerid, "idPrawnika", playerid);
 				
 				}
 				else
@@ -35222,7 +35224,45 @@ CMD:akceptuj(playerid, params[])
         }
         else if(strcmp(x_job,"lawyer",true) == 0 || strcmp(x_job,"prawnik",true) == 0 || strcmp(x_job,"prawnika",true) == 0)
         {
-
+			new money = GetPVarInt(giveplayerid, "KwotaUwolnienia");
+			//SetPVarInt(playerid, "idPrawnika", playerid);
+			if(GetPlayerMoney(playerid) <= money)
+			{
+				//Test
+				GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+				GetPlayerName(playerid, sendername, sizeof(sendername));
+				format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+				
+				//Zerowanie zmiennych
+				LawyerOffer[playerid] = 0;
+				ApprovedLawyer[playerid] = 0;
+				WantLawyer[playerid] = 0;
+				CallLawyer[playerid] = 0;
+				JailPrice[playerid] = 0;
+				PlayerInfo[playerid][pJailTime] = 1;
+				
+				//skill
+				PlayerInfo[giveplayerid][pLawSkill] +=2;
+				SendClientMessage(giveplayerid, COLOR_GRAD2, "Skill +2");
+				if(PlayerInfo[giveplayerid][pLawSkill] == 50)
+				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[giveplayerid][pLawSkill] == 100)
+				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 3, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[giveplayerid][pLawSkill] == 200)
+				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[giveplayerid][pLawSkill] == 400)
+				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
+				
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz takiej kwoty!"); 
+				return 1;
+			}
+			
            /* if(giveplayerid == -1)
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /akceptuj prawnik");
