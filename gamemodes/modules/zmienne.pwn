@@ -66,7 +66,7 @@ new OfferPlayer[MAX_PLAYERS];
 new OfferPrice[MAX_PLAYERS] = 0;
 
 //Caluj - oferta
-new kissPlayerOffer[MAX_PLAYERS];
+new kissPlayerOffer[MAX_PLAYERS] = -1;
 
 //ALARM DMV:
 new DMV_ALARM = 0;
