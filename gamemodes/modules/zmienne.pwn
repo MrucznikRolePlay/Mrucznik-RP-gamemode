@@ -62,6 +62,8 @@ new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
 
 //Prawnik - oferta
 new LawyerOffer[MAX_PLAYERS] = 0;
+new OfferPlayer[MAX_PLAYERS] = 0;
+new OfferPrice[MAX_PLAYERS] = 0;
 
 //ALARM DMV:
 new DMV_ALARM = 0;

@@ -34081,8 +34081,8 @@ CMD:wypusc(playerid, params[])
 					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj prawnik]", GetNick(playerid, true), money);
 					SendClientMessage(giveplayerid, COLOR_BLUE, string);
 					LawyerOffer[giveplayerid] = 1;
-					SetPVarInt(playerid, "KwotaUwolnienia", money);
-					SetPVarInt(playerid, "idPrawnika", playerid);
+					OfferPlayer[giveplayerid] = playerid;
+					OfferPrice[giveplayerid] = money;
 				
 				}
 				else
@@ -34095,7 +34095,7 @@ CMD:wypusc(playerid, params[])
 			}
 			else
 			{
-				sendErrorMessage(playerid, "Nie jesteœ prawniekiem || Osoba nie jest w wiêzieniu");
+				sendErrorMessage(playerid, "Nie jesteœ prawniekiem || Osoba nie jest w wiêzieniu || Nie masz pozwolenia");
 				return 1;
 			}
 		
@@ -34334,7 +34334,7 @@ CMD:akceptuj(playerid, params[])
             SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Gazeta, Mandat");
-            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka");
+            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka, Uwolnienie");
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
@@ -35245,47 +35245,8 @@ CMD:akceptuj(playerid, params[])
             }
         }
         else if(strcmp(x_job,"lawyer",true) == 0 || strcmp(x_job,"prawnik",true) == 0 || strcmp(x_job,"prawnika",true) == 0)
-        {
-			new money = GetPVarInt(giveplayerid, "KwotaUwolnienia");
-			//SetPVarInt(playerid, "idPrawnika", playerid);
-			if(GetPlayerMoney(playerid) <= money)
-			{
-				//Test
-				GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia.", giveplayer);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-				format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s.", sendername);
-				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-				
-				//Zerowanie zmiennych
-				LawyerOffer[playerid] = 0;
-				ApprovedLawyer[playerid] = 0;
-				WantLawyer[playerid] = 0;
-				CallLawyer[playerid] = 0;
-				JailPrice[playerid] = 0;
-				PlayerInfo[playerid][pJailTime] = 1;
-				
-				//skill
-				PlayerInfo[giveplayerid][pLawSkill] +=2;
-				SendClientMessage(giveplayerid, COLOR_GRAD2, "Skill +2");
-				if(PlayerInfo[giveplayerid][pLawSkill] == 50)
-				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
-				else if(PlayerInfo[giveplayerid][pLawSkill] == 100)
-				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 3, Mo¿esz taniej zbijaæ WL."); }
-				else if(PlayerInfo[giveplayerid][pLawSkill] == 200)
-				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
-				else if(PlayerInfo[giveplayerid][pLawSkill] == 400)
-				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
-				
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Nie masz takiej kwoty!"); 
-				return 1;
-			}
-			
-           /* if(giveplayerid == -1)
+		{
+		        /* if(giveplayerid == -1)
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /akceptuj prawnik");
                 sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Pamiêtaj, ze pieni¹dze ($10 000) zostan¹ pobrane z Twojego portfela!");
@@ -35325,6 +35286,53 @@ CMD:akceptuj(playerid, params[])
                 SendClientMessage(playerid, COLOR_GREY, "B³¹d! (Nie jesteœ policjantem / Gracz nie jest prawnikiem / Z³e ID)");
                 return 1;
             } */
+		
+		
+		}
+		else if(strcmp(x_job, "uwolnienie", true) == 0)
+        {
+			money = OfferPrice[playerid];
+			//SetPVarInt(playerid, "idPrawnika", playerid);
+			if(GetPlayerMoney(playerid) < money)
+			{
+				//Test
+				GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));
+				format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia za kwotê %d$", GetNick(playerid, true), money);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s za kwotê %d$", sendername, money);
+				SendClientMessage(OfferPlayer[playerid], COLOR_LIGHTBLUE, string);
+				
+				//Zerowanie zmiennych
+				LawyerOffer[playerid] = 0;
+				ApprovedLawyer[playerid] = 0;
+				WantLawyer[playerid] = 0;
+				CallLawyer[playerid] = 0;
+				JailPrice[playerid] = 0;
+				
+				//Czynnoœci
+				PlayerInfo[playerid][pJailTime] = 1;
+				ZabierzKase(playerid, money);
+				DajKase(OfferPlayer[playerid], money);
+				
+				//skill
+				PlayerInfo[OfferPlayer[playerid]][pLawSkill] +=2;
+				SendClientMessage(OfferPlayer[playerid], COLOR_GRAD2, "Skill +2");
+				if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 50)
+				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 100)
+				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 3, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 200)
+				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 400)
+				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
+				
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz takiej kwoty!"); 
+				return 1;
+			}
+			
         }
         else if(strcmp(x_job,"bodyguard",true) == 0 || strcmp(x_job,"ochrona",true) == 0)
         {
