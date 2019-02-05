@@ -16456,7 +16456,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			return 1;
 		}
-
+		new string[128];
 		format(string, sizeof(string),"* %s kocha %s, wiêc ca³uj¹ siê.", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
 		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		format(string, sizeof(string), "%s mówi: Kocham ciê.", GetNick(kissPlayerOffer[playerid], true));
@@ -16468,7 +16468,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		
 		//zerowanie zmiennych:
 		kissPlayerOffer[playerid] = 0;
-	
 	
 	}
     else if(dialogid == 7079)
