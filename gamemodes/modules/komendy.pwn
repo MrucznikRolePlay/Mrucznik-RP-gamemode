@@ -34059,7 +34059,7 @@ CMD:wypusc(playerid, params[])
 		sendTipMessageEx(playerid, COLOR_GREY, "Minimalna kwota uwolnienia to 40.000$"); 
 		return 1;
 	}
-	if(ApprovedLawyer[playerid] = 0)
+	if(ApprovedLawyer[playerid] == 0)
 	{
 		sendErrorMessage(playerid, "Nie masz pozwolenia prawniczego!"); 
 		return 1;
