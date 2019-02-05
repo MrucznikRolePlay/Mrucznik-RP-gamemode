@@ -15277,7 +15277,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_RANG, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "WprowadŸ rangê (dla frakcji/org) lub skill dla pracy:", "Ustaw", "Wróæ");
             }
-            case 3:
+			case 3:
+			{
+				ShowPlayerDialogEx(playerid, 1089, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}opisu", "WprowadŸ nowy opis dla pojazdu:", "Ustaw", "Wróæ");
+			}
+            case 4:
             {
                 CarData[car][c_HP] = 1000.0;
                 if(CarData[car][c_ID] != 0)
@@ -15286,7 +15290,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 Car_Save(car, CAR_SAVE_STATE);
             }
-            case 4:
+            case 5:
             {
 				new VW = GetPlayerVirtualWorld(playerid);
                 new veh = CarData[car][c_ID];
@@ -15305,17 +15309,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d] [UID: %d] [VW: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID], CarData[car][c_VW]);
 				SendClientMessage(playerid, 0xFFC0CB, string);
             }
-            case 5:
+            case 6:
             {
                 CarData[car][c_Keys] = 0;
                 Car_Save(car, CAR_SAVE_OWNER);
             }
-            case 6:
+            case 7:
             {
                 SetPVarInt(playerid, "car_edit_color", 1);
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_COLOR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj nowy kolor (od 0 do 255).", "Ustaw", "Wróæ");
             }
-            case 7:
+            case 8:
             {
                 SetPVarInt(playerid, "car_edit_color", 2);
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_COLOR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj nowy kolor (od 0 do 255).", "Ustaw", "Wróæ");
@@ -15323,6 +15327,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         return 1;
     }
+	else if(dialogid == 1089)
+	{
+		if(!response) return ShowCarEditDialog(playerid);
+		if(strval(inputtext) < 0)
+		{
+			sendErrorMessage(playerid, "Nieprawid³owy opis");
+			return 1;
+		}
+		if(strfind(inputtext, "%"))
+		{
+			sendErrorMessage(playerid, "Nieprawid³owy opis"); 
+			return 1;
+		}
+		new car = GetPVarInt(playerid, "edit-car");
+		CarOpis_Usun(playerid, car);
+		new opis[128];
+		strunpack(opis, CarDesc[car]);
+		new str[128];
+		WordWrap(opis, true, str);
+		CarOpis[car] = CreateDynamic3DTextLabel(str, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, car);
+	
+	
+		return 1;
+	}
     else if(dialogid == D_EDIT_CAR_MODEL)
     {
         if(!response) return ShowCarEditDialog(playerid);
