@@ -974,6 +974,10 @@ public OnPlayerDisconnect(playerid, reason)
             SetPVarInt(caller, "budka-used", 999);
         }
     }
+	//lawyer
+	OfferPrice[playerid] = 0;
+	LawyerOffer[playerid] = 0;
+	OfferPlayer[playerid] = 0;
 
     if(TalkingLive[playerid] != INVALID_PLAYER_ID)
     {

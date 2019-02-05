@@ -35293,7 +35293,7 @@ CMD:akceptuj(playerid, params[])
 		
 		
 		}
-		else if(strcmp(x_job, "uwolnienie", true) == 0)
+		else if(strcmp(x_job, "uwolnienie", true) == 0 || strcmp(x_job, "wolnosc", true) == 0)
         {
 			new money = OfferPrice[playerid];
 			//SetPVarInt(playerid, "idPrawnika", playerid);
@@ -35329,6 +35329,12 @@ CMD:akceptuj(playerid, params[])
 				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
 				else if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 400)
 				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
+				
+				//zerowanie zmiennych 2
+				OfferPrice[playerid] = 0;
+				LawyerOffer[playerid] = 0;
+				OfferPlayer[playerid] = 0;
+				
 				
 			}
 			else
