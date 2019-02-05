@@ -3764,7 +3764,7 @@ CMD:witaj(playerid, params[])
 
 CMD:caluj(playerid, params[])
 {
-	new string[64];
+	new string[128];
 
     if(IsPlayerConnected(playerid))
     {
@@ -3774,26 +3774,17 @@ CMD:caluj(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /caluj [ID gracza]");
 			return 1;
 		}
-
 		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-  					new nick[200];
-					new witany[MAX_PLAYER_NAME];
-					SendClientMessage(playa, COLOR_WHITE, "Calujesz siê");
-					GetPlayerName(playa, witany, sizeof(witany));
-					GetPlayerName(playerid, nick, sizeof(nick));
-					format(string, sizeof(string),"* %s caluje siê z %s.", nick, witany);
-					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					format(string, sizeof(string), "%s mówi: Kocham ciê.", witany);
-					ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-                    format(string, sizeof(string), "%s mówi: Ja ciebie te¿.", nick);
-					ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-					ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
-					ApplyAnimation(playa, "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
+					format(string, sizeof(string), "%s chce siê z tob¹ poca³owaæ - jeœli go kochasz kliknij ''Ca³uj''!", GetNick(playerid, true));
+  					ShowPlayerDialogEx(playa, 1092, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play - poca³unek", string, "Ca³uj", "Odrzuæ");
+					format(string, sizeof(string), "Zaoferowa³eœ poca³unek %s - oczekuj na reakcje!", GetNick(playa, true));
+					sendTipMessage(playerid, string);
+					kissPlayerOffer[playa] = playerid;
 				}
 			}
 		}
@@ -34067,6 +34058,11 @@ CMD:wypusc(playerid, params[])
 	if(money < 40000)
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Minimalna kwota uwolnienia to 40.000$"); 
+		return 1;
+	}
+	if(ApprovedLawyer[playerid] == 0)
+	{
+		sendErrorMessage(playerid, "Nie masz pozwolenia prawniczego!"); 
 		return 1;
 	}
 	

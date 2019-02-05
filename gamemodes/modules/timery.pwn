@@ -1589,7 +1589,7 @@ public Spectator()
 			{
 				if(playerState == 1 || playerState == 2 || playerState == 3)
 				{
-					if(GetPVarInt(playerid, "dutyadmin") == 0)
+					if(GetPVarInt(i, "dutyadmin") == 0)
 					{
 						GetPlayerName(i, specNAME, sizeof(specNAME));
 						switch(weaponID)

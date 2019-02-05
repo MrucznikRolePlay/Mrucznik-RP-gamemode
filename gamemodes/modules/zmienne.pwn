@@ -65,6 +65,9 @@ new LawyerOffer[MAX_PLAYERS] = 0;
 new OfferPlayer[MAX_PLAYERS] = 0;
 new OfferPrice[MAX_PLAYERS] = 0;
 
+//Caluj - oferta
+new kissPlayerOffer[MAX_PLAYERS] = 0;
+
 //ALARM DMV:
 new DMV_ALARM = 0;
 new bramaAlarmu[4];
@@ -1128,6 +1131,7 @@ ZerujZmienne(playerid)
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
+	
 	
 	
 	

@@ -978,6 +978,8 @@ public OnPlayerDisconnect(playerid, reason)
 	OfferPrice[playerid] = 0;
 	LawyerOffer[playerid] = 0;
 	OfferPlayer[playerid] = 0;
+	//caluj
+	kissPlayerOffer[playerid] = 0;
 
     if(TalkingLive[playerid] != INVALID_PLAYER_ID)
     {
