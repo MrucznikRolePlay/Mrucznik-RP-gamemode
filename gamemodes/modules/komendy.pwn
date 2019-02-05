@@ -35291,7 +35291,7 @@ CMD:akceptuj(playerid, params[])
 		}
 		else if(strcmp(x_job, "uwolnienie", true) == 0)
         {
-			money = OfferPrice[playerid];
+			new money = OfferPrice[playerid];
 			//SetPVarInt(playerid, "idPrawnika", playerid);
 			if(GetPlayerMoney(playerid) < money)
 			{
