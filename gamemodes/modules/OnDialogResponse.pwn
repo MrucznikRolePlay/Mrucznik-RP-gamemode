@@ -15330,11 +15330,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	else if(dialogid == 1089)
 	{
 		if(!response) return ShowCarEditDialog(playerid);
-		if(strval(inputtext) < 0)
-		{
-			sendErrorMessage(playerid, "Nieprawid³owy opis");
-			return 1;
-		}
 		if(strfind(inputtext, "%"))
 		{
 			sendErrorMessage(playerid, "Nieprawid³owy opis"); 
