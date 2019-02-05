@@ -3784,7 +3784,7 @@ CMD:caluj(playerid, params[])
 					format(string, sizeof(string), "%s chce siê z tob¹ poca³owaæ - jeœli go kochasz kliknij ''Ca³uj''!", GetNick(playerid, true));
   					ShowPlayerDialogEx(playa, 1092, DIALOG_STYLE_INPUT, "Mrucznik Role Play -> /caluj", string, "Ca³uj", "Odrzuæ");
 					
-					kissPlayerOffer[giveplayerid] = playerid;
+					kissPlayerOffer[playa] = playerid;
 				}
 			}
 		}

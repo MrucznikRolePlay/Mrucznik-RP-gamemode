@@ -16439,6 +16439,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					format(string, sizeof(string), "* %s i %s spojrzeli na siebie - stwierdzili, ¿e nie chc¹ siê ca³owaæ/", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					return 1;
 				}
 			}
 			else//Kobieta
@@ -16452,22 +16453,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					format(string, sizeof(string), "* %s i %s spojrzeli na siebie - stwierdzili, ¿e nie chc¹ siê ca³owaæ/", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					return 1;
 				}
 			}
+
+		}
+		else
+		{
+			new string[128];
+			format(string, sizeof(string),"* %s kocha %s, wiêc ca³uj¹ siê.", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
+			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			format(string, sizeof(string), "%s mówi: Kocham ciê.", GetNick(kissPlayerOffer[playerid], true));
+			ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
+			format(string, sizeof(string), "%s mówi: Ja ciebie te¿.", GetNick(playerid, true));
+			ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
+			ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
+			ApplyAnimation(kissPlayerOffer[playerid], "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
+			
+			//zerowanie zmiennych:
+			kissPlayerOffer[playerid] = 0;
 			return 1;
 		}
-		new string[128];
-		format(string, sizeof(string),"* %s kocha %s, wiêc ca³uj¹ siê.", GetNick(playerid, true), GetNick(kissPlayerOffer[playerid], true));
-		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		format(string, sizeof(string), "%s mówi: Kocham ciê.", GetNick(kissPlayerOffer[playerid], true));
-		ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-        format(string, sizeof(string), "%s mówi: Ja ciebie te¿.", GetNick(playerid, true));
-		ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-		ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
-		ApplyAnimation(kissPlayerOffer[playerid], "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
-		
-		//zerowanie zmiennych:
-		kissPlayerOffer[playerid] = 0;
 	
 	}
     else if(dialogid == 7079)
