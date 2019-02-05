@@ -62,11 +62,11 @@ new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
 
 //Prawnik - oferta
 new LawyerOffer[MAX_PLAYERS] = 0;
-new OfferPlayer[MAX_PLAYERS] = 0;
+new OfferPlayer[MAX_PLAYERS];
 new OfferPrice[MAX_PLAYERS] = 0;
 
 //Caluj - oferta
-new kissPlayerOffer[MAX_PLAYERS] = 0;
+new kissPlayerOffer[MAX_PLAYERS];
 
 //ALARM DMV:
 new DMV_ALARM = 0;
