@@ -34025,8 +34025,6 @@ CMD:uwolnij(playerid, params[]) return cmd_wypusc(playerid, params);
 CMD:wypusc(playerid, params[])
 {
 	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(PlayerInfo[playerid][pJob] != 2)
     {
@@ -34056,9 +34054,9 @@ CMD:wypusc(playerid, params[])
 		{
 			if(PlayerInfo[giveplayerid][pJailed] == 1  && ApprovedLawyer[playerid] == 1 || PlayerInfo[giveplayerid][pJailed] == 2 && ApprovedLawyer[playerid] == 1)
 			{
-				if(ProxDetector(10.5, playerid, giveplayerid))
+				if(ProxDetectorS(10.5, playerid, giveplayerid))
 				{
-					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj prawnik]", GetNick(playerid, true), money)
+					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj prawnik]", GetNick(playerid, true), money);
 					SendClientMessage(giveplayerid, COLOR_BLUE, string);
 				
 				
