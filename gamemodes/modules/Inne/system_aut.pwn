@@ -818,7 +818,7 @@ stock ShowCarEditDialog(playerid)
     if(CarData[car][c_ID] == 0) lHP = CarData[car][c_HP];
     else GetVehicleHealth(CarData[car][c_ID], lHP);
     new color1 = VehicleColoursTableRGBA[clamp(CarData[car][c_Color][0], 0, 255)], color2=VehicleColoursTableRGBA[clamp(CarData[car][c_Color][1], 0, 255)];
-    format(lStr, sizeof(lStr), "{FFFFFF}Model:\t\t{8FCB04}%d{FFFFFF}\t[ {8FCB04}%s {FFFFFF}]\nW³aœciciel:\t{8FCB04}%s{FFFFFF} » {8FCB04}%s{FFFFFF} (UID: {8FCB04}%d{FFFFFF})\nRanga:\t\t{8FCB04}%d{FFFFFF}\nStan:\t\t{8FCB04}%.1f{FFFFFF}\%\nZaparkuj tutaj\nUsuñ kluczyki\n{%06x}Kolor I\n{%06x}Kolor II", CarData[car][c_Model], VehicleNames[CarData[car][c_Model]-400], CarOwnerNames[CarData[car][c_OwnerType]], Car_PrintOwner(car), CarData[car][c_Owner], CarData[car][c_Rang], lHP/10, RGBAtoRGB(color1), RGBAtoRGB(color2));
+    format(lStr, sizeof(lStr), "{FFFFFF}Model:\t\t{8FCB04}%d{FFFFFF}\t[ {8FCB04}%s {FFFFFF}]\nW³aœciciel:\t{8FCB04}%s{FFFFFF} » {8FCB04}%s{FFFFFF} (UID: {8FCB04}%d{FFFFFF})\nRanga:\t\t{8FCB04}%d{FFFFFF}\nOpis Pojazdu\nStan:\t\t{8FCB04}%.1f{FFFFFF}\%\nZaparkuj tutaj\nUsuñ kluczyki\n{%06x}Kolor I\n{%06x}Kolor II", CarData[car][c_Model], VehicleNames[CarData[car][c_Model]-400], CarOwnerNames[CarData[car][c_OwnerType]], Car_PrintOwner(car), CarData[car][c_Owner], CarData[car][c_Rang], lHP/10, RGBAtoRGB(color1), RGBAtoRGB(color2));
     ShowPlayerDialogEx(playerid, D_EDIT_CAR_MENU, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdów", lStr, "Wybierz", "Wróæ");
     return 1;
 }
