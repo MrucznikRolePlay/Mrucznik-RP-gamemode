@@ -3764,7 +3764,7 @@ CMD:witaj(playerid, params[])
 
 CMD:caluj(playerid, params[])
 {
-	new string[64];
+	new string[128];
 
     if(IsPlayerConnected(playerid))
     {
@@ -3774,7 +3774,6 @@ CMD:caluj(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /caluj [ID gracza]");
 			return 1;
 		}
-
 		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
@@ -3782,8 +3781,8 @@ CMD:caluj(playerid, params[])
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 					format(string, sizeof(string), "%s chce siê z tob¹ poca³owaæ - jeœli go kochasz kliknij ''Ca³uj''!", GetNick(playerid, true));
-  					ShowPlayerDialogEx(playa, 1094, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play -> /caluj", string, "Ca³uj", "Odrzuæ");
-					
+			
+  					ShowPlayerDialogEx(playa, 1120, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play - poca³unek", string, "Ca³uj", "Odrzuæ");
 					kissPlayerOffer[playa] = playerid;
 				}
 			}
