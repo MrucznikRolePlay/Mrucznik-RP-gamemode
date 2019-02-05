@@ -34078,8 +34078,12 @@ CMD:wypusc(playerid, params[])
 			{
 				if(ProxDetectorS(10.5, playerid, giveplayerid))
 				{
-					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj prawnik]", GetNick(playerid, true), money);
+					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj uwolnienie]", GetNick(playerid, true), money);
 					SendClientMessage(giveplayerid, COLOR_BLUE, string);
+					
+					format(string, sizeof(string), "Zaoferowa³eœ uwolnienie %s z wiêzienia za kwotê %d$ - oczekuj na akceptacjê!", GetNick(giveplayerid, true), money); 
+					SendClientMessage(playerid, COLOR_BLUE, string);
+					
 					LawyerOffer[giveplayerid] = 1;
 					OfferPlayer[giveplayerid] = playerid;
 					OfferPrice[giveplayerid] = money;
@@ -35289,11 +35293,11 @@ CMD:akceptuj(playerid, params[])
 		
 		
 		}
-		else if(strcmp(x_job, "uwolnienie", true) == 0)
+		else if(strcmp(x_job, "uwolnienie", true) == 0 || strcmp(x_job, "wolnosc", true) == 0)
         {
-			money = OfferPrice[playerid];
+			new money = OfferPrice[playerid];
 			//SetPVarInt(playerid, "idPrawnika", playerid);
-			if(GetPlayerMoney(playerid) < money)
+			if(GetPlayerMoney(playerid) >= money)
 			{
 				//Test
 				GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));
@@ -35325,6 +35329,12 @@ CMD:akceptuj(playerid, params[])
 				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
 				else if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 400)
 				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
+				
+				//zerowanie zmiennych 2
+				OfferPrice[playerid] = 0;
+				LawyerOffer[playerid] = 0;
+				OfferPlayer[playerid] = 0;
+				
 				
 			}
 			else
