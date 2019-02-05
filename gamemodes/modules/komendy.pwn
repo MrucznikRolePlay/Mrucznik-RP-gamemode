@@ -35245,7 +35245,7 @@ CMD:akceptuj(playerid, params[])
 				PlayerInfo[playerid][pJailTime] = 1;
 				
 				//skill
-				PlayerInfo[giveplayer][pLawSkill] +=2;
+				PlayerInfo[giveplayerid][pLawSkill] +=2;
 				SendClientMessage(giveplayerid, COLOR_GRAD2, "Skill +2");
 				if(PlayerInfo[giveplayerid][pLawSkill] == 50)
 				{ SendClientMessage(giveplayerid, COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
