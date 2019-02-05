@@ -34039,6 +34039,16 @@ CMD:wypusc(playerid, params[])
 		sendTipMessage(playerid, "U¿yj /uwolnij [playerid/CzêœæNicku] [Kwota]");
 		return 1;
 	}
+	if(money > 250000)
+	{
+		sendTipMessageEx(playerid, COLOR_GREY, "Nie przesadzasz troszkê? Maksymalna kwota uwolnienia to 250.000$");
+		return 1;
+	}
+	if(money < 40000)
+	{
+		sendTipMessageEx(playerid, COLOR_GREY, "Minimalna kwota uwolnienia to 40.000$"); 
+		return 1;
+	}
 	
 	if(IsPlayerConnected(giveplayerid))
 	{
@@ -34049,7 +34059,7 @@ CMD:wypusc(playerid, params[])
 				if(ProxDetector(10.5, playerid, giveplayerid))
 				{
 					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj prawnik]", GetNick(playerid, true), money)
-					SendClientMessage(playerid, COLOR_BLUE, string);
+					SendClientMessage(giveplayerid, COLOR_BLUE, string);
 				
 				
 				}
@@ -34063,7 +34073,7 @@ CMD:wypusc(playerid, params[])
 			}
 			else
 			{
-			
+				sendErrorMessage(playerid, "Nie jesteœ prawniekiem || Osoba nie jest w wiêzieniu");
 				return 1;
 			}
 		
