@@ -21092,7 +21092,7 @@ CMD:wejdz(playerid)
             SetPlayerVirtualWorld(playerid,1);
             PlayerInfo[playerid][pLocal] = 212;
         }
-		else if(IsPlayerInRangeOfPoint(playerid, 5, 592.71991, -1487.62439, 89.30576))
+		else if(IsPlayerInRangeOfPoint(playerid, 5, 592.71991, -1487.62439, 89.30576))//stary interior FBI
 		{
 			SetPlayerPosEx(playerid,608.19793701172, -1458.9837646484, 14.387271881104);
 			TogglePlayerControllable(playerid, 0);
@@ -21518,14 +21518,14 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
             return 1;
         }
+		/*
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2289.8876953125,-1206.8327636719,-18.008888244629)) // Szpitsal
         {
             SetPlayerPosEx(playerid, 1163.1424560547,-1343.5803222656,26.667037963867 ); // Dach szpital
             GameTextForPlayer(playerid, "~w~Dach.", 5000, 1);
             return 1;
         }
-        //jebane miasteczko
-        /*else if (IsPlayerInRangeOfPoint(playerid, 5.0, 682.03063964844,-473.62811279297,16.425407409668)) // Bar kurwa
+        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 682.03063964844,-473.62811279297,16.425407409668)) // Bar kurwa
         {
             SetPlayerPosEx(playerid, 681.5244140625,-451.8515625,-25.609762191772 ); // Bar kurwa
             GameTextForPlayer(playerid, "~w~Witamy w Barze.", 5000, 1);
@@ -21618,7 +21618,7 @@ CMD:wejdz(playerid)
             }
         }
         //rodzinne gówna
-        else if (PlayerToPoint(5.0, playerid, 693.9794,-1645.8259,4.0938)) // Full wejœcie
+        else if (PlayerToPoint(5.0, playerid, 693.9794,-1645.8259,4.0938)) // Full wejœcie -> Jakiœ pierdolony domek, dziêki kubi
         {
             SetPlayerPosEx(playerid, 2317.8201,-1024.7500,1050.2109); // Full baza
             SetPlayerInterior(playerid, 0);
@@ -21683,7 +21683,7 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
             return 1;
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 2.0, 1972.0,-1285.0,29.0)) // bar by K.Monari wejœcie
+        else if (IsPlayerInRangeOfPoint(playerid, 2.0, 1972.0,-1285.0,29.0)) // bar by K.Monari wejœcie (u kacpra)
         {
             SetPlayerPosEx(playerid, 1985.9202,-1292.6693,5619); // œrodek
             SetPlayerInterior(playerid, 19);
@@ -21692,6 +21692,7 @@ CMD:wejdz(playerid)
             return 1;
         }
         //baza bor by abram01
+		/*
         else if(IsPlayerInRangeOfPoint(playerid,3,1481.3147, -1534.9988, 69.8184))
         {
             SetPlayerPosEx(playerid,1448.5902, -1556.4595, 67.4875);
@@ -21733,7 +21734,7 @@ CMD:wejdz(playerid)
                 SendClientMessage(playerid, COLOR_GREY, "Tylko dla agentów GSA");
                 return 1;
             }
-        }
+        }*/
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1442.0717,-1811.6309,77.9453)) // Plac manewrowy wejscie
         {
             if(TakingLesson[playerid] == 1 || IsAnInstructor(playerid))
