@@ -1750,7 +1750,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 5:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Zaraz Wracam", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {FA9C1A} Zaraz Wracam", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 6:
