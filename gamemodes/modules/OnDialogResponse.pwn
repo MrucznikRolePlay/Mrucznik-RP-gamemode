@@ -15330,7 +15330,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	else if(dialogid == 1089)
 	{
 		if(!response) return ShowCarEditDialog(playerid);
-		text = strval(params);
+		new text = strval(inputtext);
 		new car = GetPVarInt(playerid, "edit-car");
 		CarOpis_Usun(playerid, car);
 		new string[128];
