@@ -34033,13 +34033,55 @@ CMD:wypusc(playerid, params[])
         sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ prawnikiem!");
         return 1;
     }
-	new giveplayerid;
-	if( sscanf(params, "k<fix>", giveplayerid))
+	new giveplayerid, money;
+	if( sscanf(params, "k<fix>d", giveplayerid, money))
 	{
-		sendTipMessage(playerid, "U¿yj /uwolnij [playerid/CzêœæNicku]");
+		sendTipMessage(playerid, "U¿yj /uwolnij [playerid/CzêœæNicku] [Kwota]");
 		return 1;
 	}
-
+	
+	if(IsPlayerConnected(giveplayerid))
+	{
+		if(giveplayerid != INVALID_PLAYER_ID)
+		{
+			if(PlayerInfo[giveplayerid][pJailed] == 1  && ApprovedLawyer[playerid] == 1 || PlayerInfo[giveplayerid][pJailed] == 2 && ApprovedLawyer[playerid] == 1)
+			{
+				if(ProxDetector(10.5, playerid, giveplayerid))
+				{
+					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj prawnik]", GetNick(playerid, true), money)
+					SendClientMessage(playerid, COLOR_BLUE, string);
+				
+				
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie mo¿esz uwolniæ gracza, który nie jest przy tobie!"); 
+					return 1;
+				}
+			
+			
+			}
+			else
+			{
+			
+				return 1;
+			}
+		
+		
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz uwolniæ samego siebie"); 
+			return 1;
+		}
+	
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Na serwerze nie ma takiego gracza!"); 
+		return 1;
+	}
+/*
     if(IsPlayerConnected(giveplayerid))
     {
         if(giveplayerid != INVALID_PLAYER_ID)
@@ -34086,7 +34128,7 @@ CMD:wypusc(playerid, params[])
 	else
 	{
 	    sendErrorMessage(playerid, "Nie ma takiego gracza!");
-	}//not connected
+	}//not connected */
 	return 1;
 }
 
