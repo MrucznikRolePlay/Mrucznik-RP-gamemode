@@ -35226,7 +35226,7 @@ CMD:akceptuj(playerid, params[])
         {
 			new money = GetPVarInt(giveplayerid, "KwotaUwolnienia");
 			//SetPVarInt(playerid, "idPrawnika", playerid);
-			if(GetPlayerMoney(playerid) !> money)
+			if(GetPlayerMoney(playerid) <= money)
 			{
 				//Test
 				GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
