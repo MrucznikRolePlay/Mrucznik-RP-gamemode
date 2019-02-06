@@ -15330,18 +15330,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	else if(dialogid == 1089)
 	{
 		if(!response) return ShowCarEditDialog(playerid);
-		new text = strval(inputtext);
-		new car = GetPVarInt(playerid, "edit-car");
-		CarOpis_Usun(playerid, car, true);
-		new string[128];
-		format(string, sizeof(string), "%s", text);
-		new text2[128];
-		WordWrap(text2, true, string);
-		
-		CarOpis[car] = CreateDynamic3DTextLabel(text2, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, CarData[car][c_ID]);
-		strdel(CarDesc[car], 0, 128 char);
-        strpack(CarDesc[car], inputtext);
-        MruMySQL_UpdateOpis(car, CarData[VehicleUID[car][vUID]][c_UID], 2);
+		sendTipMessage(playerid, "Trwaj¹ prace!"); 
 	
 		return 1;
 	}
