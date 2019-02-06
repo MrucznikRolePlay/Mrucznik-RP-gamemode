@@ -24057,18 +24057,24 @@ CMD:adminajail(playerid, params[])
 					{
 						iloscAJ[playerid] = iloscAJ[playerid]+1;
 					}
-					if(strfind(result, "DM2") == -1)
-					{
-						ResetPlayerWeapons(playa);
-						UsunBron(playa);
-						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
-					}
+					
 					//adminowe logi
 					format(string, sizeof(string), "Admini/%s.ini", sendername);
 					dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
 					SendClientMessage(playa, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 					Wchodzenie(playa);
+					
+					//inne
 					PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
+					if(strfind(result, "DM2") == -1
+					&& strfind(result, "Death Match 2") == -1
+					&& strfind(result, "dm2") == -1)
+					{
+						ResetPlayerWeapons(playa);
+						UsunBron(playa);
+						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
+						return 1;
+					}
 				}
 				else
 				{
