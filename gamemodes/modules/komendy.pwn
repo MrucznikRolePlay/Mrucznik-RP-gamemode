@@ -18020,6 +18020,11 @@ CMD:r(playerid, params[])
 			sendTipMessage(playerid, "U¿yj (/r)adio [tekst]");
 			return 1;
 		}
+		if(PlayerInfo[playerid][pMuted] == 1)
+		{
+			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
+			return 1;
+		}
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /ro [treœæ]");
