@@ -1969,6 +1969,20 @@ SetPlayerSpawnPos(playerid)
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
 			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pLocal]);
 			Wchodzenie(playerid);
+			if(PlayerInfo[playerid][pLocal] == 103)
+	        {
+				sendTipMessage(playerid, "W banku nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
+				SetPVarInt(playerid, "mozeUsunacBronie", 1);
+                ResetPlayerWeapons(playerid);
+				return 1;
+			}
+			if(PlayerInfo[playerid][pLocal] == 108)
+			{
+				sendTipMessage(playerid, "W urzêdzie miasta nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
+				SetPVarInt(playerid, "mozeUsunacBronie", 1);
+                ResetPlayerWeapons(playerid);
+				return 1;
+			}
 		}
 		else
 		{
