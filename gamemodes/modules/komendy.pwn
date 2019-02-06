@@ -24063,8 +24063,12 @@ CMD:adminajail(playerid, params[])
 					dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
 					SendClientMessage(playa, COLOR_NEWS, "Sprawdü czy otrzymana kara jest zgodna z listπ kar i zasad, znajdziesz jπ na www.Mrucznik-RP.pl");
 					Wchodzenie(playa);
+					
+					//inne
 					PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
-					if(strfind(result, "DM2") == -1)
+					if(strfind(result, "DM2") == -1
+					&& strfind(result, "Death Match 2") == -1
+					&& strfind(result, "dm2") == -1)
 					{
 						ResetPlayerWeapons(playa);
 						UsunBron(playa);
