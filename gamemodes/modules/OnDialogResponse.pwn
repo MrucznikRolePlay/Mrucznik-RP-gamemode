@@ -15335,6 +15335,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		CarOpis_Usun(playerid, car);
 		new string[128];
 		format(string, sizeof(string), "%s", text);
+		
+        strdel(CarDesc[car], 0, 128 char);
+        strpack(CarDesc[car], inputtext);
+        MruMySQL_UpdateOpis(car, CarData[VehicleUID[car][vUID]][c_UID], 2);
+        cmd_vopis(playerid, "");
+		
 		CarOpis[car] = CreateDynamic3DTextLabel(string, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, car);
 	
 	
