@@ -13072,14 +13072,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
 							{
-								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls"  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls",  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
 								SetPVarInt(i, "SluchaBasenu", 1);
 								musicPoolStatus =1;
 								return 1;
 							}
 							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
 							{
-								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls"  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls",  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
 								SetPVarInt(i, "SluchaBasenu", 1);
 								musicPoolStatus =1;
 								return 1;
