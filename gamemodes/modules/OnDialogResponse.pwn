@@ -12885,6 +12885,77 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        }
 		    }
 		}
+		else if(dialogid == 1093)//panel lidera basenu
+		{
+			if(response)
+			{
+				new string[128];
+				switch(listitem)
+				{
+					case 0://Otwórz/zamknij basen
+					{
+						if(poolStatus == 0)
+						{
+							poolStatus = 1;
+							sendTipMessage(playerid, "Otworzy³eœ basen Tsunami");
+							format(string, sizeof(string), "%s otworzy³ basen.", GetNick(playerid, true));
+							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
+						}
+						else
+						{
+							poolStatus = 0;
+							sendTipMessage(playerid, "Zamkn¹³eœ basen Tsunami");
+							format(string, sizeof(string), "%s zamkn¹³ basen - Koniec p³ywania!", GetNick(playerid, true));
+							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
+						
+						}
+					}
+					case 1://Zmieñ cenê kredytu
+					{
+						sendTipMessage(playerid, "Ju¿ wkrótce"); 
+					}
+					case 2://Ustal muzykê
+					{
+						if(musicPoolStatus == 0)
+						{
+							ShowPlayerDialogEx(playerid, 1094, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", "WprowadŸ link do radiostacji (.pls lub .m3u)", "Ustal", "Wróæ"); 
+						}
+						else
+						{
+							sendErrorMessage(playerid, "tworze to"); 
+						}
+					}
+					case 3://Wyœlij wiadomoœæ
+					{
+						format(string, sizeof(string), "%s u¿y³ komunikatu basenu", GetNick(playerid, true));
+						SendAdminMessage(string); 
+						SendClientMessageToAll(COLOR_WHITE, "|___________ Basen Tsunami ___________|");
+						format(string, sizeof(string), "Plusk Plusk - Basen Tsunami otwarty! Zapraszamy do najlepszego obiektu rekreacyjnego w mieœcie!");
+						SendClientMessageToAll(COLOR_BLUE, string);
+					}
+				}
+			}
+		}
+		else if(dialogid == 1094)
+		{
+			if(response)
+			{
+				if(strlen(inputtext) > 1)
+				{
+					format(string, sizeof(string), "%s", inputtext);
+					PlayAudioStreamForPlayer(playerid, string,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox 
+					PlayAudioStreamForPlayer(playerid, string,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+					PlayAudioStreamForPlayer(playerid, string,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+					PlayAudioStreamForPlayer(playerid, string,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_GREY, "B³êdna d³ugoœæ stream");
+					return 1;
+				}
+			}
+		
+		}
 		else if(dialogid == 1402)//rupxnup
 		{
             if(response || !response)
