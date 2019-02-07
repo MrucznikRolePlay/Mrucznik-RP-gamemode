@@ -2405,27 +2405,28 @@ public JednaSekundaTimer()
 		//audio Basen Tsunami
 		if(GetPVarInt(i, "SluchaBasenu") == 0 && musicPoolStatus == 1)
 		{
+			new muzykaBasen = GetPVarString(i, "StreamBasenu" string,sizeof(string));
 			if(IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
 			{
-				PlayAudioStreamForPlayer(i, string,  567.79181, -2032.12927, 16.44948, 5, 1);//Pani janina boombox 
+				PlayAudioStreamForPlayer(i, muzykaBasen,  567.79181, -2032.12927, 16.44948, 5, 1);//Pani janina boombox 
 				SetPVarInt(i, "SluchaBasenu", 1);
 				return 1;
 			}
 			if(IsPlayerInRangeOfPoint(i, 10, 526.61487, -2080.96948, 19.32169)) 
 			{
-				PlayAudioStreamForPlayer(i, string,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+				PlayAudioStreamForPlayer(i, muzykaBasen,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
 				SetPVarInt(i, "SluchaBasenu", 1);
 				return 1;
 			}
 			if(IsPlayerInRangeOfPoint(i, 30, 591.52649, -2167.07251, 2.21702))
 			{
-				PlayAudioStreamForPlayer(i, string,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+				PlayAudioStreamForPlayer(i, muzykaBasen,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
 				SetPVarInt(i, "SluchaBasenu", 1);
 				return 1;
 			}
 			if(IsPlayerInRangeOfPoint(i, 18, 1211.61536, -1750.63733, 15.85863))
 			{
-				PlayAudioStreamForPlayer(i, string,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+				PlayAudioStreamForPlayer(i, muzykaBasen,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
 				SetPVarInt(i, "SluchaBasenu", 1);
 				return 1;
 			
@@ -2435,6 +2436,35 @@ public JednaSekundaTimer()
 		{
 			StopAudioStreamForPlayer(i);
 			SetPVarInt(i, "SluchaBasenu", 0);
+		}
+		else if(GetPVarInt(i, "SluchaBasenu") == 1)
+		{
+			if(!IsPlayerInRangeOfPoint(i, 18, 1211.61536, -1750.63733, 15.85863))
+			{
+				StopAudioStreamForPlayer(i);
+				SetPVarInt(i, "SluchaBasenu", 0);
+				return 1;
+			}
+			if(!IsPlayerInRangeOfPoint(i, 30, 591.52649, -2167.07251, 2.21702))
+			{
+				StopAudioStreamForPlayer(i);
+				SetPVarInt(i, "SluchaBasenu", 0);
+				return 1;
+			}
+			if(!IsPlayerInRangeOfPoint(i, 10, 526.61487, -2080.96948, 19.32169)) 
+			{
+				StopAudioStreamForPlayer(i);
+				SetPVarInt(i, "SluchaBasenu", 0);
+				return 1;
+			}
+			if(!IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
+			{
+				StopAudioStreamForPlayer(i);
+				SetPVarInt(i, "SluchaBasenu", 0);
+				return 1;
+			}
+		
+		
 		}
 		if(State == PLAYER_STATE_DRIVER)
 		{
