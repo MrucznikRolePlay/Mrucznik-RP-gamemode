@@ -75,6 +75,16 @@ new bramaAlarmu[4];
 //Basen Tsunami
 new poolStatus = 0;// 0 = zamkniêty; 1 = otwarty;
 new musicPoolStatus = 0;
+new wybralStacje=0;
+new onePoolPrice = 50000;
+new twoPoolPrice = 120000;
+new threePoolPrice = 170000;
+new fourPoolPrice = 250000;
+new poolCashStats =0;
+new poolCreditStatus=0;
+new poolSaunaStats=0;
+new poolStats=0;
+new poolTrampolineStats=0;
 
 
 //legal

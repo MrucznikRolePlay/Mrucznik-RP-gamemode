@@ -12855,48 +12855,71 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
+					
 		            case 0:
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 50 kredytów za jedyne 50 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
+						new string[128];
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
+						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 50;
-                        DajKase(playerid, -50000);
+                        DajKase(playerid, -onePoolPrice);
+						SejfR_Add(43, onePoolPrice);
+						SejfR_Save(43);
+						poolCashStats = poolCashStats+onePoolPrice;
+						poolCreditStatus = poolCreditStatus+50;
 		            }
 		            case 1:
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 100 kredytów za jedyne 80 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
+						new string[128];
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
+						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 100;
-                        DajKase(playerid, -80000);
+                        DajKase(playerid, -twoPoolPrice);
+						SejfR_Add(43, twoPoolPrice);
+						SejfR_Save(43);
+						poolCreditStatus = poolCreditStatus+100;
+						poolCashStats = poolCashStats+twoPoolPrice;
 		            }
 		            case 2://Zielony
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 250 kredytów za jedyne 100 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
+						new string[128];
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
+						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 250;
-                        DajKase(playerid, -100000);
+                        DajKase(playerid, -threePoolPrice);
+						SejfR_Add(43, threePoolPrice);
+						SejfR_Save(43);
+						poolCreditStatus = poolCreditStatus+250;
+						poolCashStats = poolCashStats+threePoolPrice;
 		            }
 		            case 3://Niebieski
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 500 kredytów za jedyne 350 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
+						new string[128];
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", fourPoolPrice);
+						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 500;
-                        DajKase(playerid, -350000);
+                        DajKase(playerid, -fourPoolPrice);
+						SejfR_Add(43, fourPoolPrice);
+						SejfR_Save(43);
+						poolCreditStatus = poolCreditStatus+500;
+						poolCashStats = poolCashStats+fourPoolPrice;
 		            }
 		        }
+				return 1;
 		    }
 		}
 		else if(dialogid == 1093)//panel lidera basenu
 		{
 			if(response)
 			{
-				new string[128];
+				
 				switch(listitem)
 				{
 					case 0://Otwórz/zamknij basen
 					{
 						if(poolStatus == 0)
 						{
+							new string[128];
 							poolStatus = 1;
 							sendTipMessage(playerid, "Otworzy³eœ basen Tsunami");
 							format(string, sizeof(string), "%s otworzy³ basen.", GetNick(playerid, true));
@@ -12904,6 +12927,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
+							new string[128];
 							poolStatus = 0;
 							sendTipMessage(playerid, "Zamkn¹³eœ basen Tsunami");
 							format(string, sizeof(string), "%s zamkn¹³ basen - Koniec p³ywania!", GetNick(playerid, true));
@@ -12913,13 +12937,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1://Zmieñ cenê kredytu
 					{
-						sendTipMessage(playerid, "Ju¿ wkrótce"); 
+						ShowPlayerDialogEx(playerid, 1096, DIALOG_STYLE_LIST, "Mrucznik Role Play - Basen Tsunami", "1. Dzieciêcy\n2. Podstawowy\n3.Zaawansowany\n4.Premium", "Akceptuj", "Wróæ"); 
 					}
 					case 2://Ustal muzykê
 					{
 						if(musicPoolStatus == 0)
 						{
-							ShowPlayerDialogEx(playerid, 1094, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", "WprowadŸ link do radiostacji (.pls lub .m3u)", "Ustal", "Wróæ"); 
+							ShowPlayerDialogEx(playerid, 1094, DIALOG_STYLE_TABLIST, "Mrucznik Role Play - Basen Tsunami", "SAN 1\nSAN 2\nRadioParty\nRMF MAXXX", "Ustal", "Wróæ"); 
 						}
 						if(musicPoolStatus == 1)
 						{
@@ -12940,58 +12964,254 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 3://Wyœlij wiadomoœæ
 					{
+						new string[128];
 						format(string, sizeof(string), "%s u¿y³ komunikatu basenu", GetNick(playerid, true));
-						SendAdminMessage(COLOR_RED, string); 
+						SendAdminMessage(COLOR_RED, string); //Wiadomoœæ dla @
 						SendClientMessageToAll(COLOR_WHITE, "|___________ Basen Tsunami ___________|");
 						format(string, sizeof(string), "Plusk Plusk - Basen Tsunami otwarty! Zapraszamy do najlepszego obiektu rekreacyjnego w mieœcie!");
 						SendClientMessageToAll(COLOR_BLUE, string);
 					}
 				}
+				return 1;
 			}
 		}
 		else if(dialogid == 1094)
 		{
 			if(response)
 			{
-				new string[128];
-				format(string, sizeof(string), "%s", strval(inputtext));
-				if(strlen(inputtext) > 1)
+				switch(listitem)
 				{
-					sendTipMessage(playerid, string);
-					foreach(Player, i)
+				
+					case 0://SAN 1
 					{
-						SetPVarString(i, "streamZBasenu", string);
-						if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+						foreach(Player, i)
 						{
-							PlayAudioStreamForPlayer(i, string,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
-							SetPVarInt(i, "SluchaBasenu", 1);
-							musicPoolStatus =1;
-							return 1;
+							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANUno,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANUno,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANUno,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANUno,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							
 						}
-						if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+						SetPVarInt(playerid, "SluchaBasenu", 1);
+						wybralStacje = 0;
+					}
+					case 1://SAN 2
+					{
+						foreach(Player, i)
 						{
-							PlayAudioStreamForPlayer(i, string,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
-							SetPVarInt(i, "SluchaBasenu", 1);
-							musicPoolStatus =1;
-							return 1;
+							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANDos,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANDos,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANDos,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANDos,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
 						}
-						if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+						SetPVarInt(playerid, "SluchaBasenu", 1);
+						wybralStacje = 1;
+					}
+					case 2:
+					{
+						foreach(Player, i)
 						{
-							PlayAudioStreamForPlayer(i, string,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
-							SetPVarInt(i, "SluchaBasenu", 1);
-							musicPoolStatus =1;
-							return 1;
+							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+							{
+								PlayAudioStreamForPlayer(i, "brak streama",  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+							{
+								PlayAudioStreamForPlayer(i, "brak streama",  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+							{
+								PlayAudioStreamForPlayer(i, "brak streama",   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+							{
+								PlayAudioStreamForPlayer(i, "brak streama",  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
 						}
-						if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+						SetPVarInt(playerid, "SluchaBasenu", 1);
+						wybralStacje = 2;
+					
+					}
+					case 3:
+					{
+						foreach(Player, i)
 						{
-							PlayAudioStreamForPlayer(i, string,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
-							SetPVarInt(i, "SluchaBasenu", 1);
-							musicPoolStatus =1;
-							return 1;
+							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+							{
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls",  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+							{
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls",  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+							{
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls",   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+							{
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls",  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
 						}
+						SetPVarInt(playerid, "SluchaBasenu", 1);
+						wybralStacje = 3;
+					
+					}
+					
+				}
+				return 1;
+			}
+		
+		}
+		else if(dialogid == 1095)//pusty dialog basenu - statystyk
+		{
+			if(response)
+			{
+				sendTipMessage(playerid, "Podoba³y siê statystki!?");
+				return 1;
+			}
+		}
+		else if(dialogid == 1096)
+		{
+			if(response)
+			{
+				
+				switch(listitem)
+				{
+					case 0:
+					{
+						new string[128];
+						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", onePoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
+						SetPVarInt(playerid, "wyborPoziomuKredytow", 1);
+					}
+					case 1:
+					{	
+						new string[128];
+						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", twoPoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
+						SetPVarInt(playerid, "wyborPoziomuKredytow", 2);
+					}
+					case 2:
+					{
+						new string[128];
+						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", threePoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
+						SetPVarInt(playerid, "wyborPoziomuKredytow", 3);
+					}
+					case 3:
+					{
+						new string[128];
+						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", fourPoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
+						SetPVarInt(playerid, "wyborPoziomuKredytow", 4);
 					}
 				}
+				return 1;
+			}
+		}
+		else if(dialogid == 1097)
+		{
+			if(response)
+			{
+				new pricePool = FunkcjaK(inputtext);
+				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 1)
+				{
+					onePoolPrice = pricePool;
+					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					return 1;
 				
+				}
+				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 2)
+				{
+					twoPoolPrice = pricePool;
+					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					return 1;
+				}
+				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 3)
+				{
+					threePoolPrice = pricePool;
+					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					return 1;
+				}
+				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 4)
+				{
+					fourPoolPrice = pricePool;
+					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					return 1;
+				}
 			}
 		
 		}
