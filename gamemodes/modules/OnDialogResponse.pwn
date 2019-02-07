@@ -205,6 +205,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
 				PlayerFixRadio(playerid);
 				StopAudioStreamForPlayer(playerid);
+				SetPVarInt(playerid, "SluchaBasenu", 0);
 				return 1;
 			}
 		}
@@ -12920,15 +12921,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							ShowPlayerDialogEx(playerid, 1094, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", "WprowadŸ link do radiostacji (.pls lub .m3u)", "Ustal", "Wróæ"); 
 						}
-						else
+						if(musicPoolStatus == 1)
 						{
-							sendErrorMessage(playerid, "tworze to"); 
+							foreach(Player, i)
+							{
+								if(GetPVarInt(i, "SluchaBasenu") == 1)
+								{
+									StopAudioStreamForPlayer(i);
+									SetPVarInt(i, "SluchaBasenu", 0);
+									
+
+								}
+							}
+							musicPoolStatus=0;
+							return 1;
 						}
+
 					}
 					case 3://Wyœlij wiadomoœæ
 					{
 						format(string, sizeof(string), "%s u¿y³ komunikatu basenu", GetNick(playerid, true));
-						SendAdminMessage(string); 
+						SendAdminMessage(COLOR_RED, string); 
 						SendClientMessageToAll(COLOR_WHITE, "|___________ Basen Tsunami ___________|");
 						format(string, sizeof(string), "Plusk Plusk - Basen Tsunami otwarty! Zapraszamy do najlepszego obiektu rekreacyjnego w mieœcie!");
 						SendClientMessageToAll(COLOR_BLUE, string);
@@ -12940,19 +12953,45 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
+				new string[128];
+				format(string, sizeof(string), "%s", strval(inputtext));
 				if(strlen(inputtext) > 1)
 				{
-					format(string, sizeof(string), "%s", inputtext);
-					PlayAudioStreamForPlayer(playerid, string,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox 
-					PlayAudioStreamForPlayer(playerid, string,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
-					PlayAudioStreamForPlayer(playerid, string,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
-					PlayAudioStreamForPlayer(playerid, string,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+					sendTipMessage(playerid, string);
+					foreach(Player, i)
+					{
+						SetPVarString(i, "streamZBasenu", string);
+						if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+						{
+							PlayAudioStreamForPlayer(i, string,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+							SetPVarInt(i, "SluchaBasenu", 1);
+							musicPoolStatus =1;
+							return 1;
+						}
+						if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+						{
+							PlayAudioStreamForPlayer(i, string,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+							SetPVarInt(i, "SluchaBasenu", 1);
+							musicPoolStatus =1;
+							return 1;
+						}
+						if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+						{
+							PlayAudioStreamForPlayer(i, string,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+							SetPVarInt(i, "SluchaBasenu", 1);
+							musicPoolStatus =1;
+							return 1;
+						}
+						if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+						{
+							PlayAudioStreamForPlayer(i, string,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+							SetPVarInt(i, "SluchaBasenu", 1);
+							musicPoolStatus =1;
+							return 1;
+						}
+					}
 				}
-				else
-				{
-					SendClientMessage(playerid, COLOR_GREY, "B³êdna d³ugoœæ stream");
-					return 1;
-				}
+				
 			}
 		
 		}
