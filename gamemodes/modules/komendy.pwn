@@ -12281,7 +12281,7 @@ CMD:kupkredyty(playerid)
     	{
     	    if(IsPlayerInRangeOfPoint(playerid, 5.0, 570.63, -2031.03, 16.2))
     	    {
-  				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_LIST, "Kup Kredyty", "{FFFFFF}Pakiet 50 kredytów - 1 000$\nPakiet 100 kredytów - 2 000$\nPakiet 250 kredytów - 4 000$\nPakiet 500 kredytów - 8 000$", "Kup", "Anuluj");
+  				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_LIST, "Kup Kredyty", "{FFFFFF}Pakiet 50 kredytów - 15 000$\nPakiet 100 kredytów - 80 000$\nPakiet 250 kredytów - 100 000$\nPakiet 500 kredytów - 350 000$", "Kup", "Anuluj");
     	    }
     	    else
     	    {
