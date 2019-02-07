@@ -12856,31 +12856,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 50 kredytów za jedyne 1 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 50 kredytów za jedyne 50 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
                         Kredyty[playerid] += 50;
-                        DajKase(playerid, -1000);
+                        DajKase(playerid, -50000);
 		            }
 		            case 1:
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 100 kredytów za jedyne 2 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 100 kredytów za jedyne 80 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
                         Kredyty[playerid] += 100;
-                        DajKase(playerid, -2000);
+                        DajKase(playerid, -80000);
 		            }
 		            case 2://Zielony
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 250 kredytów za jedyne 4 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 250 kredytów za jedyne 100 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
                         Kredyty[playerid] += 250;
-                        DajKase(playerid, -4000);
+                        DajKase(playerid, -100000);
 		            }
 		            case 3://Niebieski
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 500 kredytów za jedyne 8 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 500 kredytów za jedyne 350 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
                         Kredyty[playerid] += 500;
-                        DajKase(playerid, -8000);
+                        DajKase(playerid, -350000);
 		            }
 		        }
 		    }

@@ -12281,7 +12281,7 @@ CMD:kupkredyty(playerid)
     	{
     	    if(IsPlayerInRangeOfPoint(playerid, 5.0, 570.63, -2031.03, 16.2))
     	    {
-  				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_LIST, "Kup Kredyty", "{FFFFFF}Pakiet 50 kredytów - 1 000$\nPakiet 100 kredytów - 2 000$\nPakiet 250 kredytów - 4 000$\nPakiet 500 kredytów - 8 000$", "Kup", "Anuluj");
+  				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_LIST, "Kup Kredyty", "{FFFFFF}Pakiet 50 kredytów - 50 000$\nPakiet 100 kredytów - 80 000$\nPakiet 250 kredytów - 100 000$\nPakiet 500 kredytów - 350 000$", "Kup", "Anuluj");
     	    }
     	    else
     	    {
@@ -21573,10 +21573,16 @@ CMD:wejdz(playerid)
                 SetPlayerPosEx(playerid, 566.7726,-2087.6841,2.7300); // basen œrodek
                 GameTextForPlayer(playerid, "~w~Witamy na ~b~Basenie", 5000, 1);
                 sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Aby siê przebraæ podejdŸ do szafek i wpisz /przebierz");
-                SetPlayerVirtualWorld(playerid, 30);
+                SetPlayerVirtualWorld(playerid, 43);
                 TogglePlayerControllable(playerid, 0);
                 Wchodzenie(playerid);
                 Kredyty[playerid] -= 200;
+				ResetPlayerWeapons(playerid);
+				SetPVarInt(playerid, "mozeUsunacBronie", 1);
+				
+				new string[128];
+				format(string, sizeof(string), "Pozosta³o Ci %d kredytów", Kredyty[playerid]);
+				sendTipMessage(playerid, string);
                 return 1;
             }
             else
@@ -21590,11 +21596,15 @@ CMD:wejdz(playerid)
             if(Kredyty[playerid] >= 75)
             {
                 SetPlayerPosEx(playerid, 527.8544,-2082.4460,17.2253); // sauny œrodek
-                GameTextForPlayer(playerid, "~w~Witamy w ~r~Saunie", 5000, 1);
-                SetPlayerVirtualWorld(playerid, 30);
+                GameTextForPlayer(playerid, "~w~Wypoc swoje ~r~Problemy", 5000, 1);
+                SetPlayerVirtualWorld(playerid, 43);
                 TogglePlayerControllable(playerid, 0);
                 Wchodzenie(playerid);
                 Kredyty[playerid] -=75;
+				
+				new string[128];
+				format(string, sizeof(string), "Pozosta³o Ci %d kredytów", Kredyty[playerid]);
+				sendTipMessage(playerid, string);
                 return 1;
             }
             else
@@ -22652,7 +22662,7 @@ CMD:wyjdz(playerid)
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 528.8655,-2082.5376,17.2253)) // sauna srodek
 		{
 		    SetPlayerPosEx(playerid, 570.5168,-2095.3618,2.6152 ); // sauna wejscie
-    		SetPlayerVirtualWorld(playerid, 30);
+    		SetPlayerVirtualWorld(playerid, 43);
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
 		}
@@ -29494,7 +29504,11 @@ CMD:przebierz(playerid)
 					SetPlayerSkin(playerid, 92);
 				}
 		    }
-		    Kredyty[playerid] -= 5;
+			new string[128];
+		    Kredyty[playerid] -= 50;
+			sendTipMessage(playerid, "Pobrano 50 kredytów za szafkê!"); 
+			format(string, sizeof(string), "Aktualny stan kredytów to %d", Kredyty[playerid]);
+			sendTipMessage(playerid, string);
 		}
 		else
 		{
