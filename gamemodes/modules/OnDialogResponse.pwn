@@ -12963,7 +12963,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendTipMessage(playerid, string);
 					foreach(Player, i)
 					{
-						SetPVarString(i, "streamZBasenu", audioStream);
+						SetPVarString(i, "streamZBasenu", string);
 						if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
 						{
 							PlayAudioStreamForPlayer(i, string,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
