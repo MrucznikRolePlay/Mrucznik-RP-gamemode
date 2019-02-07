@@ -12919,7 +12919,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(musicPoolStatus == 0)
 						{
-							ShowPlayerDialogEx(playerid, 1094, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", "WprowadŸ link do radiostacji (.pls lub .m3u)", "Ustal", "Wróæ"); 
+							ShowPlayerDialogEx(playerid, 1094, DIALOG_STYLE_TABLIST, "Mrucznik Role Play - Basen Tsunami", "SAN 1\nSAN 2\nRadioParty\nRMF MAXXX", "Ustal", "Wróæ"); 
 						}
 						if(musicPoolStatus == 1)
 						{
@@ -12953,45 +12953,158 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				new string[128];
-				format(string, sizeof(string), "%s", strval(inputtext));
-				if(strlen(inputtext) > 1)
+				switch(listitem)
 				{
-					sendTipMessage(playerid, string);
-					foreach(Player, i)
-					{
-						SetPVarString(i, "streamZBasenu", string);
-						if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
-						{
-							PlayAudioStreamForPlayer(i, string,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
-							SetPVarInt(i, "SluchaBasenu", 1);
-							musicPoolStatus =1;
-							return 1;
-						}
-						if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
-						{
-							PlayAudioStreamForPlayer(i, string,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
-							SetPVarInt(i, "SluchaBasenu", 1);
-							musicPoolStatus =1;
-							return 1;
-						}
-						if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
-						{
-							PlayAudioStreamForPlayer(i, string,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
-							SetPVarInt(i, "SluchaBasenu", 1);
-							musicPoolStatus =1;
-							return 1;
-						}
-						if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
-						{
-							PlayAudioStreamForPlayer(i, string,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
-							SetPVarInt(i, "SluchaBasenu", 1);
-							musicPoolStatus =1;
-							return 1;
-						}
-					}
-				}
 				
+					case 0://SAN 1
+					{
+						foreach(Player, i)
+						{
+							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANUno,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANUno,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANUno,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANUno,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							
+						}
+						SetPVarInt(playerid, "SluchaBasenu", 1);
+						wybralStacje = 0;
+					}
+					case 1://SAN 2
+					{
+						foreach(Player, i)
+						{
+							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANDos,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANDos,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANDos,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+							{
+								PlayAudioStreamForPlayer(i, RadioSANDos,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+						}
+						SetPVarInt(playerid, "SluchaBasenu", 1);
+						wybralStacje = 1;
+					}
+					case 2:
+					{
+						foreach(Player, i)
+						{
+							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+							{
+								PlayAudioStreamForPlayer(i, "brak streama",  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+							{
+								PlayAudioStreamForPlayer(i, "brak streama",  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+							{
+								PlayAudioStreamForPlayer(i, "brak streama",   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+							{
+								PlayAudioStreamForPlayer(i, "brak streama",  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+						}
+						SetPVarInt(playerid, "SluchaBasenu", 1);
+						wybralStacje = 2;
+					
+					}
+					case 3:
+					{
+						foreach(Player, i)
+						{
+							if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
+							{
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls"  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
+							{
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls"  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
+							{
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls",   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+							if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+							{
+								PlayAudioStreamForPlayer(i, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls",  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+								SetPVarInt(i, "SluchaBasenu", 1);
+								musicPoolStatus =1;
+								return 1;
+							}
+						}
+						SetPVarInt(playerid, "SluchaBasenu", 1);
+						wybralStacje = 3;
+					
+					}
+				
+				}
 			}
 		
 		}
