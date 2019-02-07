@@ -12956,35 +12956,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				if(strlen(inputtext) > 1)
 				{
-					new audioStream = strval(inputtext);
-					sendTipMessage(playerid, audioStream);
+					sendTipMessage(playerid, strval(inputtext));
 					foreach(Player, i)
 					{
-						SetPVarString(i, "streamZBasenu", audioStream);
+						SetPVarString(i, "streamZBasenu", strval(inputtext));
 						if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
 						{
-							PlayAudioStreamForPlayer(i, audioStream,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
+							PlayAudioStreamForPlayer(i, strval(inputtext),  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
 							SetPVarInt(i, "SluchaBasenu", 1);
 							musicPoolStatus =1;
 							return 1;
 						}
 						if(IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169))
 						{
-							PlayAudioStreamForPlayer(i, audioStream,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+							PlayAudioStreamForPlayer(i, strval(inputtext),  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
 							SetPVarInt(i, "SluchaBasenu", 1);
 							musicPoolStatus =1;
 							return 1;
 						}
 						if(IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702))
 						{
-							PlayAudioStreamForPlayer(i, audioStream,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+							PlayAudioStreamForPlayer(i, strval(inputtext),   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
 							SetPVarInt(i, "SluchaBasenu", 1);
 							musicPoolStatus =1;
 							return 1;
 						}
 						if(IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
 						{
-							PlayAudioStreamForPlayer(i, audioStream,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
+							PlayAudioStreamForPlayer(i, strval(inputtext),  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
 							SetPVarInt(i, "SluchaBasenu", 1);
 							musicPoolStatus =1;
 							return 1;

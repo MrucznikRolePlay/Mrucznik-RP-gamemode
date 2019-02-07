@@ -75,7 +75,6 @@ new bramaAlarmu[4];
 //Basen Tsunami
 new poolStatus = 0;// 0 = zamkniêty; 1 = otwarty;
 new musicPoolStatus = 0;
-new muzykaBasen;
 
 
 //legal
