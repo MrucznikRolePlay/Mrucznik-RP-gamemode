@@ -72,6 +72,9 @@ new kissPlayerOffer[MAX_PLAYERS] = 0;
 new DMV_ALARM = 0;
 new bramaAlarmu[4];
 
+//Basen Tsunami
+new poolStatus = 0;// 0 = zamkniêty; 1 = otwarty;
+
 
 //legal
 new DB:db_handle;

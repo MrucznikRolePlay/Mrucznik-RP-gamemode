@@ -18063,6 +18063,53 @@ CMD:r(playerid, params[])
 	return 1;
 }
 
+CMD:panelbasenu(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(GetPlayerOrg(playerid) == 43)
+		{
+			if(gPlayerOrgLeader[playerid])
+			{
+				if(IsPlayerInRangeOfPoint(playerid, 4.0, 577.32819, -2039.02173, 15.05740);
+				{
+					new string[128];
+					if(poolStatus == 0)
+					{
+						format(string, sizeof(string), "Otwórz Basen\nZmieñ cenê kredytów\nUstal muzykê\nWyœlij og³oszenie"); 
+						ShowPlayerDialogEx(playerid, 1093, DIALOG_STYLE_TABLIST, "Laptop Lidera", string, "Wybierz", "Odrzuæ");
+					}
+					else
+					{
+						format(string, sizeof(string), "Zamknij Basen\nZmieñ cenê kredytów\nUstal muzykê\nWyœlij og³oszenie"); 
+						ShowPlayerDialogEx(playerid, 1093, DIALOG_STYLE_TABLIST, "Laptop Lidera", string, "Wybierz", "Odrzuæ");
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie jesteœ przy laptopie lidera"); 
+					return 1;
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ liderem basenu tsunami!"); 
+				return 1;
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie jesteœ pracownikiem basenu!"); 
+			return 1;
+		}
+	
+	
+	}
+
+
+	return 1;
+}
+
 
 CMD:radioooc(playerid, params[]) return cmd_rooc(playerid, params);
 CMD:ro(playerid, params[]) return cmd_rooc(playerid, params);
@@ -20929,6 +20976,20 @@ CMD:windalock(playerid, params[])
 	}
 	return 1;
 }
+CMD:trampolina(playerid)
+{
+	if (IsPlayerInRangeOfPoint(playerid, 5.0, 578.6193,-2195.7708,1.6288)) // trampolina wejœcie
+	{
+		ShowPlayerDialogEx(playerid, 325, DIALOG_STYLE_LIST, "Na któr¹ trampolinê chcesz wejœæ?", "Trampolina zwyk³a\nTrampolina wyczynowa", "Wybierz", "Anuluj");
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie jesteœ przy trampolinach basenu tsunami!"); 	
+	}
+
+
+	return 1;
+}
 CMD:enter(playerid) return cmd_wejdz(playerid);
 CMD:wejdz(playerid)
 {
@@ -21568,28 +21629,36 @@ CMD:wejdz(playerid)
         }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 560.8828,-2033.8701,16.1670)) // basen wejœcie
         {
-            if(Kredyty[playerid] >= 200)
-            {
-                SetPlayerPosEx(playerid, 566.7726,-2087.6841,2.7300); // basen œrodek
-                GameTextForPlayer(playerid, "~w~Witamy na ~b~Basenie", 5000, 1);
-                sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Aby siê przebraæ podejdŸ do szafek i wpisz /przebierz");
-                SetPlayerVirtualWorld(playerid, 43);
-                TogglePlayerControllable(playerid, 0);
-                Wchodzenie(playerid);
-                Kredyty[playerid] -= 200;
-				ResetPlayerWeapons(playerid);
-				SetPVarInt(playerid, "mozeUsunacBronie", 1);
-				
-				new string[128];
-				format(string, sizeof(string), "Pozosta³o Ci %d kredytów", Kredyty[playerid]);
-				sendTipMessage(playerid, string);
-                return 1;
-            }
-            else
-            {
-                sendTipMessageEx(playerid, COLOR_GREY, "Nie masz wystarczaj¹cej iloœci kredytów.");
-                return 1;
-            }
+			if(poolStatus == 1)
+			{
+				if(Kredyty[playerid] >= 200)
+				{
+					SetPlayerPosEx(playerid, 566.7726,-2087.6841,2.7300); // basen œrodek
+					GameTextForPlayer(playerid, "~w~Witamy na ~b~Basenie", 5000, 1);
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Aby siê przebraæ podejdŸ do szafek i wpisz /przebierz");
+					SetPlayerVirtualWorld(playerid, 43);
+					TogglePlayerControllable(playerid, 0);
+					Wchodzenie(playerid);
+					Kredyty[playerid] -= 200;
+					ResetPlayerWeapons(playerid);
+					SetPVarInt(playerid, "mozeUsunacBronie", 1);
+					
+					new string[128];
+					format(string, sizeof(string), "Pozosta³o Ci %d kredytów", Kredyty[playerid]);
+					sendTipMessage(playerid, string);
+					return 1;
+				}
+				else
+				{
+					sendTipMessageEx(playerid, COLOR_GREY, "Nie masz wystarczaj¹cej iloœci kredytów.");
+					return 1;
+				}
+			}
+			else
+			{
+				SendClientMessage(playerid, -1, "Pani Janina mówi: Przykro mi! Szef jeszcze nie otworzy³, przyjdŸ póŸniej.");
+				return 1;
+			}
         }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 570.5168,-2095.3618,2.6152)) // sauny wejœcie
         {
@@ -21632,11 +21701,6 @@ CMD:wejdz(playerid)
             Wchodzenie(playerid);
             return 1;
         }*/
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 578.6193,-2195.7708,1.6288)) // trampolina wejœcie
-        {
-            ShowPlayerDialogEx(playerid, 325, DIALOG_STYLE_LIST, "Na któr¹ trampolinê chcesz wejœæ?", "Trampolina zwyk³a\nTrampolina wyczynowa", "Wybierz", "Anuluj");
-            return 1;
-        }
         else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1271.0920,-1667.8794,19.7344)) // strzelnica wejœcie
         {
             if(GUIExit[playerid] == 0)

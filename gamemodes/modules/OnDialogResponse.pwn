@@ -12885,6 +12885,46 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        }
 		    }
 		}
+		else if(dialogid == 1093)//panel lidera basenu
+		{
+			if(response)
+			{
+				new string[128];
+				switch(listitem)
+				{
+					case 0:
+					{
+						if(poolStatus == 0)
+						{
+							poolStatus = 1;
+							sendTipMessage(playerid, "Otworzy³eœ basen Tsunami");
+							format(string, sizeof(string), "%s otworzy³ basen.", GetNick(playerid, true));
+							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
+						}
+						else
+						{
+							poolStatus = 0;
+							sendTipMessage(playerid, "Zamkn¹³eœ basen Tsunami");
+							format(string, sizeof(string), "%s zamkn¹³ basen - Koniec p³ywania!", GetNick(playerid, true));
+							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
+						
+						}
+					}
+					case 1:
+					{
+						sendTipMessage(playerid, "Ju¿ wkrótce"); 
+					}
+					case 2:
+					{
+						sendTipMessage(playerid, "Ju¿ wkrótce"); 
+					}
+					case 3:
+					{
+						sendTipMessage(playerid, "Ju¿ wkrótce"); 
+					}
+				}
+			}
+		}
 		else if(dialogid == 1402)//rupxnup
 		{
             if(response || !response)
