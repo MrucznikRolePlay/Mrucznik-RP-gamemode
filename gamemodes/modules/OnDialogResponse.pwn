@@ -12941,7 +12941,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 3://Wyœlij wiadomoœæ
 					{
 						format(string, sizeof(string), "%s u¿y³ komunikatu basenu", GetNick(playerid, true));
-						SendAdminMessage(string); 
+						SendAdminMessage(COLOR_RED, string); 
 						SendClientMessageToAll(COLOR_WHITE, "|___________ Basen Tsunami ___________|");
 						format(string, sizeof(string), "Plusk Plusk - Basen Tsunami otwarty! Zapraszamy do najlepszego obiektu rekreacyjnego w mieœcie!");
 						SendClientMessageToAll(COLOR_BLUE, string);
@@ -12953,8 +12953,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
+				
 				if(strlen(inputtext) > 1)
 				{
+					new string[128];
 					format(string, sizeof(string), "%s", inputtext);
 					foreach(Player, i)
 					{
