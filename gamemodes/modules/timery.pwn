@@ -2407,7 +2407,7 @@ public JednaSekundaTimer()
 		{
 			if(IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
 			{
-				PlayAudioStreamForPlayer(i, muzykaBasen,  567.79181, -2032.12927, 16.44948, 5, 1);//Pani janina boombox 
+				PlayAudioStreamForPlayer(i, strlen(muzykaBasen),  567.79181, -2032.12927, 16.44948, 5, 1);//Pani janina boombox 
 				SetPVarInt(i, "SluchaBasenu", 1);
 				return 1;
 			}
