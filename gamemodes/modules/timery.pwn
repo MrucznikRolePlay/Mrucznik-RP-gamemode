@@ -2406,8 +2406,8 @@ public JednaSekundaTimer()
 		if(GetPVarInt(i, "SluchaBasenu") == 0 && musicPoolStatus == 1)
 		{
 			new muzykab[128];
-			format(muzykab, sizeof(muzykab), "%s", muzykaBasen);
 			GetPVarString(i, "streamZBasenu", muzykab, sizeof(muzykab));
+			
 			if(IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
 			{
 				PlayAudioStreamForPlayer(i, muzykab,  567.79181, -2032.12927, 16.44948, 5, 1);//Pani janina boombox 
