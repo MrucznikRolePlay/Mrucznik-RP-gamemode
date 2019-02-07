@@ -18071,7 +18071,7 @@ CMD:panelbasenu(playerid)
 		{
 			if(gPlayerOrgLeader[playerid])
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 4.0, 577.32819, -2039.02173, 15.05740);
+				if(IsPlayerInRangeOfPoint(playerid, 4.0, 577.32819, -2039.02173, 15.05740)
 				{
 					new string[128];
 					if(poolStatus == 0)
