@@ -2520,32 +2520,29 @@ public JednaSekundaTimer()
 			}
 			
 		}
-		else if(GetPVarInt(i, "SluchaBasenu") == 1 && musicPoolStatus == 0)
+		if(GetPVarInt(i, "SluchaBasenu") == 1 && musicPoolStatus == 0)
 		{
 			StopAudioStreamForPlayer(i);
 			SetPVarInt(i, "SluchaBasenu", 0);
 		}
-		else if(GetPVarInt(i, "SluchaBasenu") == 1)
+		if(GetPVarInt(i, "SluchaBasenu") == 1)
 		{
 			if(!IsPlayerInRangeOfPoint(i, 18, 1211.61536, -1750.63733, 15.85863))
 			{
 				StopAudioStreamForPlayer(i);
 				SetPVarInt(i, "SluchaBasenu", 0);
-				return 1;
 			}
-			if(!IsPlayerInRangeOfPoint(i, 30, 591.52649, -2167.07251, 2.21702))
+			else if(!IsPlayerInRangeOfPoint(i, 30, 591.52649, -2167.07251, 2.21702))
 			{
 				StopAudioStreamForPlayer(i);
 				SetPVarInt(i, "SluchaBasenu", 0);
-				return 1;
 			}
-			if(!IsPlayerInRangeOfPoint(i, 10, 526.61487, -2080.96948, 19.32169)) 
+			else if(!IsPlayerInRangeOfPoint(i, 10, 526.61487, -2080.96948, 19.32169)) 
 			{
 				StopAudioStreamForPlayer(i);
 				SetPVarInt(i, "SluchaBasenu", 0);
-				return 1;
 			}
-			if(!IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
+			else if(!IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
 			{
 				StopAudioStreamForPlayer(i);
 				SetPVarInt(i, "SluchaBasenu", 0);
