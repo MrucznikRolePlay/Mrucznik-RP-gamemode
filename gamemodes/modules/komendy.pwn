@@ -21573,7 +21573,7 @@ CMD:wejdz(playerid)
                 SetPlayerPosEx(playerid, 566.7726,-2087.6841,2.7300); // basen œrodek
                 GameTextForPlayer(playerid, "~w~Witamy na ~b~Basenie", 5000, 1);
                 sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Aby siê przebraæ podejdŸ do szafek i wpisz /przebierz");
-                SetPlayerVirtualWorld(playerid, 30);
+                SetPlayerVirtualWorld(playerid, 43);
                 TogglePlayerControllable(playerid, 0);
                 Wchodzenie(playerid);
                 Kredyty[playerid] -= 200;
@@ -21590,8 +21590,8 @@ CMD:wejdz(playerid)
             if(Kredyty[playerid] >= 75)
             {
                 SetPlayerPosEx(playerid, 527.8544,-2082.4460,17.2253); // sauny œrodek
-                GameTextForPlayer(playerid, "~w~Witamy w ~r~Saunie", 5000, 1);
-                SetPlayerVirtualWorld(playerid, 30);
+                GameTextForPlayer(playerid, "~w~Wypoc swoje ~r~Problemy", 5000, 1);
+                SetPlayerVirtualWorld(playerid, 43);
                 TogglePlayerControllable(playerid, 0);
                 Wchodzenie(playerid);
                 Kredyty[playerid] -=75;
