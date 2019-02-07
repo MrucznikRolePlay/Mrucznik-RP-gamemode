@@ -2405,13 +2405,29 @@ public JednaSekundaTimer()
 		//audio Basen Tsunami
 		if(GetPVarInt(i, "SluchaBasenu") == 0 && musicPoolStatus == 1)
 		{
-			if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948) || IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169) || IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702) || IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
+			if(IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
 			{
 				PlayAudioStreamForPlayer(i, string,  567.79181, -2032.12927, 16.44948, 5, 1);//Pani janina boombox 
+				SetPVarInt(i, "SluchaBasenu", 1);
+				return 1;
+			}
+			if(IsPlayerInRangeOfPoint(i, 10, 526.61487, -2080.96948, 19.32169)) 
+			{
 				PlayAudioStreamForPlayer(i, string,  526.61487, -2080.96948, 19.32169, 10, 1);//Sauna
+				SetPVarInt(i, "SluchaBasenu", 1);
+				return 1;
+			}
+			if(IsPlayerInRangeOfPoint(i, 30, 591.52649, -2167.07251, 2.21702))
+			{
 				PlayAudioStreamForPlayer(i, string,   591.52649, -2167.07251, 2.21702, 35, 1);//Basen
+				SetPVarInt(i, "SluchaBasenu", 1);
+				return 1;
+			}
+			if(IsPlayerInRangeOfPoint(i, 18, 1211.61536, -1750.63733, 15.85863))
+			{
 				PlayAudioStreamForPlayer(i, string,  1211.61536, -1750.63733, 15.85863, 20, 1);//Przed basenem
 				SetPVarInt(i, "SluchaBasenu", 1);
+				return 1;
 			
 			}
 		}
@@ -2420,8 +2436,6 @@ public JednaSekundaTimer()
 			StopAudioStreamForPlayer(i);
 			SetPVarInt(i, "SluchaBasenu", 0);
 		}
-	
-
 		if(State == PLAYER_STATE_DRIVER)
 		{
 			if(IsPlayerInRangeOfPoint(i, 7.0, 2064.0703,-1831.3167,13.3853) || IsPlayerInRangeOfPoint(i, 7.0, 1024.8514,-1022.2302,31.9395) || IsPlayerInRangeOfPoint(i, 7.0, 486.9398,-1742.4130,10.9594) || IsPlayerInRangeOfPoint(i, 7.0, -1904.2325,285.3743,40.8843)  || IsPlayerInRangeOfPoint(i, 7.0, 720.0876,-458.3574,16.3359) || IsPlayerInRangeOfPoint(i, 7.0, -2425.9668,1023.2122,50.1248) || IsPlayerInRangeOfPoint(i, 7.0, 1972.6704,2163.9829,10.7942) || IsPlayerInRangeOfPoint(i, 7.0, -100.3769,1115.7079,19.4688) || IsPlayerInRangeOfPoint(i, 7.0, -1420.5669,2584.1997,55.5703))
