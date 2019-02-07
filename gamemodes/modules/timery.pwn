@@ -2405,7 +2405,8 @@ public JednaSekundaTimer()
 		//audio Basen Tsunami
 		if(GetPVarInt(i, "SluchaBasenu") == 0 && musicPoolStatus == 1)
 		{
-			new muzykaBasen = GetPVarString(i, "StreamBasenu" string,sizeof(string));
+			new muzykaBasen[128];
+			GetPVarString(i, "StreamBasenu" muzykaBasen,sizeof(muzykaBasen));
 			if(IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
 			{
 				PlayAudioStreamForPlayer(i, muzykaBasen,  567.79181, -2032.12927, 16.44948, 5, 1);//Pani janina boombox 
