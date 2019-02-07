@@ -12920,20 +12920,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							ShowPlayerDialogEx(playerid, 1094, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", "WprowadŸ link do radiostacji (.pls lub .m3u)", "Ustal", "Wróæ"); 
 						}
-						else
+						if(musicPoolStatus == 1)
 						{
 							foreach(Player, i)
 							{
 								if(GetPVarInt(i, "SluchaBasenu") == 1)
 								{
-									if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948) || IsPlayerInRangeOfPoint(i, 35, 526.61487, -2080.96948, 19.32169) || IsPlayerInRangeOfPoint(i, 35, 591.52649, -2167.07251, 2.21702) || IsPlayerInRangeOfPoint(i, 35, 1211.61536, -1750.63733, 15.85863))
-									{
-										StopAudioStreamForPlayer(i);
-										SetPVarInt(i, "SluchaBasenu", 1);
+									StopAudioStreamForPlayer(i);
+									SetPVarInt(i, "SluchaBasenu", 0);
 									
-									}
+
 								}
 							}
+							musicPoolStatus=0;
 							return 1;
 						}
 
@@ -12970,12 +12969,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							musicPoolStatus =1;
 						}
 					}
-				}
-				else
-				{
-					SendClientMessage(playerid, COLOR_GREY, "B³êdna d³ugoœæ stream");
 					return 1;
 				}
+				
 			}
 		
 		}
