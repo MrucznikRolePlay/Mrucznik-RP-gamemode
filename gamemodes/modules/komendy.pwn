@@ -35389,6 +35389,7 @@ CMD:akceptuj(playerid, params[])
 				GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));
 				format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia za kwotê %d$", GetNick(playerid, true), money);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				
 				format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s za kwotê %d$", sendername, money);
 				SendClientMessage(OfferPlayer[playerid], COLOR_LIGHTBLUE, string);
 				
