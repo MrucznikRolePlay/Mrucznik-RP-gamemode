@@ -12856,10 +12856,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 50 kredytów za jedyne 15 000$.");
+						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 50 kredytów za jedyne 50 000$.");
 						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
                         Kredyty[playerid] += 50;
-                        DajKase(playerid, -15000);
+                        DajKase(playerid, -50000);
 		            }
 		            case 1:
 		            {
