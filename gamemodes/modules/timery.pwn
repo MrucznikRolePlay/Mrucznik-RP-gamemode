@@ -2405,7 +2405,7 @@ public JednaSekundaTimer()
 		//audio Basen Tsunami
 		if(GetPVarInt(i, "SluchaBasenu") == 0 && musicPoolStatus == 1)
 		{
-			muzykab[128];
+			new muzykab[128];
 			format(muzykab, sizeof(muzykab), "%s", muzykaBasen);
 			if(IsPlayerInRangeOfPoint(i, 7, 567.79181, -2032.12927, 16.44948))
 			{
