@@ -12956,10 +12956,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(strlen(inputtext) > 1)
 				{
 					new string[128];
+					muzykaBasen = strlen(inputtext);
 					format(string, sizeof(string), "%s", inputtext);
 					foreach(Player, i)
 					{
-						SetPVarString(i, "StreamBasenu", string);
 						if(IsPlayerInRangeOfPoint(i, 35, 567.79181, -2032.12927, 16.44948))
 						{
 							PlayAudioStreamForPlayer(i, string,  567.79181, -2032.12927, 16.44948, 15, 1);//Pani janina boombox
