@@ -205,7 +205,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
 				PlayerFixRadio(playerid);
 				StopAudioStreamForPlayer(playerid);
-				SetPVarInt(i, "SluchaBasenu", 0);
+				SetPVarInt(playerid, "SluchaBasenu", 0);
 				return 1;
 			}
 		}
