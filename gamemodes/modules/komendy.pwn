@@ -18071,7 +18071,7 @@ CMD:panelbasenu(playerid)
 		{
 			if(gPlayerOrgLeader[playerid])
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 4.0, 577.32819, -2039.02173, 15.05740)
+				if(IsPlayerInRangeOfPoint(playerid, 4.0, 577.32819, -2039.02173, 15.05740))
 				{
 					new string[128];
 					if(poolStatus == 0)
@@ -18083,6 +18083,7 @@ CMD:panelbasenu(playerid)
 					{
 						format(string, sizeof(string), "Zamknij Basen\nZmieñ cenê kredytów\nUstal muzykê\nWyœlij og³oszenie"); 
 						ShowPlayerDialogEx(playerid, 1093, DIALOG_STYLE_TABLIST, "Laptop Lidera", string, "Wybierz", "Odrzuæ");
+
 					}
 				}
 				else
