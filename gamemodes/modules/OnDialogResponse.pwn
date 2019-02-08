@@ -12855,9 +12855,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-					new string[128];
+					
 		            case 0:
 		            {
+						new string[128];
 						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 50;
@@ -12869,6 +12870,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 1:
 		            {
+						new string[128];
 						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 100;
@@ -12880,6 +12882,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 2://Zielony
 		            {
+						new string[128];
 						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 250;
@@ -12891,6 +12894,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 3://Niebieski
 		            {
+						new string[128];
 						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", fourPoolPrice);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 500;
@@ -12908,13 +12912,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				new string[128];
+				
 				switch(listitem)
 				{
 					case 0://Otwórz/zamknij basen
 					{
 						if(poolStatus == 0)
 						{
+							new string[128];
 							poolStatus = 1;
 							sendTipMessage(playerid, "Otworzy³eœ basen Tsunami");
 							format(string, sizeof(string), "%s otworzy³ basen.", GetNick(playerid, true));
@@ -12922,6 +12927,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
+							new string[128];
 							poolStatus = 0;
 							sendTipMessage(playerid, "Zamkn¹³eœ basen Tsunami");
 							format(string, sizeof(string), "%s zamkn¹³ basen - Koniec p³ywania!", GetNick(playerid, true));
@@ -12958,6 +12964,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 3://Wyœlij wiadomoœæ
 					{
+						new string[128];
 						format(string, sizeof(string), "%s u¿y³ komunikatu basenu", GetNick(playerid, true));
 						SendAdminMessage(COLOR_RED, string); //Wiadomoœæ dla @
 						SendClientMessageToAll(COLOR_WHITE, "|___________ Basen Tsunami ___________|");
@@ -13122,8 +13129,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						wybralStacje = 3;
 					
 					}
-				
+					
 				}
+				return 1;
 			}
 		
 		}
@@ -13139,29 +13147,33 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				new string[128];
+				
 				switch(listitem)
 				{
 					case 0:
 					{
+						new string[128];
 						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", onePoolPrice);
 						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 1);
 					}
 					case 1:
-					{
+					{	
+						new string[128];
 						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", twoPoolPrice);
 						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 2);
 					}
 					case 2:
 					{
+						new string[128];
 						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", threePoolPrice);
 						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 3);
 					}
 					case 3:
 					{
+						new string[128];
 						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", fourPoolPrice);
 						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 4);
