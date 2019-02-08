@@ -12858,51 +12858,83 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					
 		            case 0:
 		            {
-						new string[128];
-						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
-						SendClientMessage(playerid, COLOR_WHITE, string);
-                        Kredyty[playerid] += 50;
-                        DajKase(playerid, -onePoolPrice);
-						SejfR_Add(43, onePoolPrice);
-						SejfR_Save(43);
-						poolCashStats = poolCashStats+onePoolPrice;
-						poolCreditStatus = poolCreditStatus+50;
+						if(GetPlayerMoney(playerid) >= onePoolPrice)
+						{
+							new string[128];
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
+							SendClientMessage(playerid, COLOR_WHITE, string);
+							Kredyty[playerid] += 50;
+							DajKase(playerid, -onePoolPrice);
+							SejfR_Add(43, onePoolPrice);
+							SejfR_Save(43);
+							poolCashStats = poolCashStats+onePoolPrice;
+							poolCreditStatus = poolCreditStatus+50;
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+							return 1;
+						}
 		            }
 		            case 1:
 		            {
-						new string[128];
-						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
-						SendClientMessage(playerid, COLOR_WHITE, string);
-                        Kredyty[playerid] += 100;
-                        DajKase(playerid, -twoPoolPrice);
-						SejfR_Add(43, twoPoolPrice);
-						SejfR_Save(43);
-						poolCreditStatus = poolCreditStatus+100;
-						poolCashStats = poolCashStats+twoPoolPrice;
+						if(GetPlayerMoney(playerid) >= twoPoolPrice)
+						{
+							new string[128];
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
+							SendClientMessage(playerid, COLOR_WHITE, string);
+							Kredyty[playerid] += 100;
+							DajKase(playerid, -twoPoolPrice);
+							SejfR_Add(43, twoPoolPrice);
+							SejfR_Save(43);
+							poolCreditStatus = poolCreditStatus+100;
+							poolCashStats = poolCashStats+twoPoolPrice;
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+							return 1;
+						}
 		            }
 		            case 2://Zielony
 		            {
-						new string[128];
-						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
-						SendClientMessage(playerid, COLOR_WHITE, string);
-                        Kredyty[playerid] += 250;
-                        DajKase(playerid, -threePoolPrice);
-						SejfR_Add(43, threePoolPrice);
-						SejfR_Save(43);
-						poolCreditStatus = poolCreditStatus+250;
-						poolCashStats = poolCashStats+threePoolPrice;
+						if(GetPlayerMoney(playerid) >= threePoolPrice)
+						{
+							new string[128];
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
+							SendClientMessage(playerid, COLOR_WHITE, string);
+							Kredyty[playerid] += 250;
+							DajKase(playerid, -threePoolPrice);
+							SejfR_Add(43, threePoolPrice);
+							SejfR_Save(43);
+							poolCreditStatus = poolCreditStatus+250;
+							poolCashStats = poolCashStats+threePoolPrice;
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+							return 1;
+						}
 		            }
 		            case 3://Niebieski
 		            {
-						new string[128];
-						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", fourPoolPrice);
-						SendClientMessage(playerid, COLOR_WHITE, string);
-                        Kredyty[playerid] += 500;
-                        DajKase(playerid, -fourPoolPrice);
-						SejfR_Add(43, fourPoolPrice);
-						SejfR_Save(43);
-						poolCreditStatus = poolCreditStatus+500;
-						poolCashStats = poolCashStats+fourPoolPrice;
+						if(GetPlayerMoney(playerid) >= fourPoolPrice)
+						{
+							new string[128];
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", fourPoolPrice);
+							SendClientMessage(playerid, COLOR_WHITE, string);
+							Kredyty[playerid] += 500;
+							DajKase(playerid, -fourPoolPrice);
+							SejfR_Add(43, fourPoolPrice);
+							SejfR_Save(43);
+							poolCreditStatus = poolCreditStatus+500;
+							poolCashStats = poolCashStats+fourPoolPrice;
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+							return 1;
+						}
 		            }
 		        }
 				return 1;
@@ -13189,27 +13221,87 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new pricePool = FunkcjaK(inputtext);
 				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 1)
 				{
-					onePoolPrice = pricePool;
-					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					if(pricePool <= 300000)
+					{
+						if(pricePool > 1)
+						{
+							onePoolPrice = pricePool;
+							sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Cena musi byæ wiêksza ni¿ 1 dolar!"); 
+							return 1;
+						}
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Przekroczy³eœ maksymaln¹ kwotê!"); 
+					}
 					return 1;
 				
 				}
 				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 2)
 				{
-					twoPoolPrice = pricePool;
-					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					if(pricePool <= 450000)
+					{
+						if(pricePool > 1)
+						{
+							twoPoolPrice = pricePool;
+							sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Kwota musi byæ wiêksza ni¿ 1 dolar!");
+							return 1;
+						}
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Przekroczy³eœ maksymaln¹ kwotê!"); 
+					}
 					return 1;
 				}
 				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 3)
 				{
-					threePoolPrice = pricePool;
-					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					if(pricePool <= 600000)
+					{
+						if(pricePool > 1)
+						{
+							threePoolPrice = pricePool;
+							sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Kwota musi byæ wiêksza ni¿ 1 dolar!"); 
+							return 1;
+						}
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Przekroczy³eœ maksymaln¹ kwotê!"); 
+					}		
 					return 1;
 				}
 				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 4)
 				{
-					fourPoolPrice = pricePool;
-					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					if(pricePool <= 1000000)
+					{
+						if(pricePool > 1)
+						{
+							fourPoolPrice = pricePool;
+							sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Kwota musi byæ wiêksza ni¿ 1 dolar!"); 
+							return 1;
+						}
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Przekroczy³es maksymaln¹ kwotê!"); 
+					}
 					return 1;
 				}
 			}

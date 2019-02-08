@@ -130,6 +130,20 @@ public UsunPozar()
     DeleteAllFire();
     return 1;
 }
+forward spam30sekund(playerid);
+public spam30sekund(playerid)
+{
+
+	if(spamujeCaluj[playerid] == 1)
+	{
+		odliczanie[playerid]++;
+		if(odliczanie[playerid] == 1)
+		{
+			spamujeCaluj[playerid] =0;
+		}
+	}
+	return 1;
+}
 //Adminduty
 forward AdminDutyCzas(playerid);
 public AdminDutyCzas(playerid)
