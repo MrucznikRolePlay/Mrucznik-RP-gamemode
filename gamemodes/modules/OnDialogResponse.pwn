@@ -12901,6 +12901,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						poolCashStats = poolCashStats+fourPoolPrice;
 		            }
 		        }
+				return 1;
 		    }
 		}
 		else if(dialogid == 1093)//panel lidera basenu
