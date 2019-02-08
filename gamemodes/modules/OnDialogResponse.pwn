@@ -12895,7 +12895,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 3://Niebieski
 		            {
 						new string[128];
-						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", fourPoolPrice);
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", fourPoolPrice);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 500;
                         DajKase(playerid, -fourPoolPrice);
