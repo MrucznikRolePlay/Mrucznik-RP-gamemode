@@ -13127,7 +13127,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else if(dialogid == 1095)//pusty dialog basenu - statystyk
 		{
-			if(!response)
+			if(response)
 			{
 				sendTipMessage(playerid, "Podoba³y siê statystki!?");
 				return 1;
@@ -13172,7 +13172,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				new pricePool = strval(inputtext);
+				new pricePool = FunkcjaK(inputtext);
 				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 1)
 				{
 					onePoolPrice = pricePool;
@@ -13198,8 +13198,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
 					return 1;
 				}
-			
-			
 			}
 		
 		}

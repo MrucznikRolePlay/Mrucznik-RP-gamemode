@@ -12305,6 +12305,7 @@ CMD:basenstats(playerid);
 	else
 	{
 		sendErrorMessage(playerid, "Nie jesteœ z basenu Tsunami!"); 
+		return 1;
 	}
 
 
