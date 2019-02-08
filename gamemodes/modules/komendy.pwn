@@ -12277,11 +12277,12 @@ CMD:kupkredyty(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		new string[256];
+		
         if(GUIExit[playerid] == 0)
     	{
     	    if(IsPlayerInRangeOfPoint(playerid, 5.0, 570.63, -2031.03, 16.2))
     	    {
+				new string[256];
 				format(string, sizeof(string), "{FFFFFF}Pakiet\tIloœæ\tCena\n\{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
   				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_TABLIST_HEADERS, "Kup Kredyty",  string, "Kup", "Anuluj");
     	    }
@@ -12293,7 +12294,7 @@ CMD:kupkredyty(playerid)
     }
 	return 1;
 }
-CMD:basenstats(playerid);
+CMD:basenstats(playerid)
 {
 	if(GetPlayerOrg(playerid) == 43)
 	{
@@ -12305,10 +12306,7 @@ CMD:basenstats(playerid);
 	else
 	{
 		sendErrorMessage(playerid, "Nie jesteœ z basenu Tsunami!"); 
-		return 1;
 	}
-
-
 	return 1;
 }
 CMD:kupneon(playerid) return cmd_kupneony(playerid);
