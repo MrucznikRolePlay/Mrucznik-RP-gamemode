@@ -32501,6 +32501,31 @@ CMD:dajbron(playerid, params[])
             format(string, sizeof(string), "Gracz %s (GunShop: %s) sprzedal bron (ID:[%d][%s], AMMO:[%d]) graczowi %s.", GetNick(playerid), familytext, weaponid, weaponname, ammo, GetNick(giveplayerid));
 			WeapICLog(string);
 		}
+		if(weaponid == 5 && skill >= 2)//[ID: 5] MP5 | Ammo: 700 | Mats: 600 | Cena: 60k
+		{
+			price = 60000;
+			mats = 600;
+			ammo = 700;
+			weapon = 29;
+			format(weaponname, sizeof(weaponname), "MP5");
+	   		if(PlayerInfo[playerid][pMats] < mats) return sendErrorMessage(playerid, "Masz za ma³o mats!");
+	   		if(kaska[playerid] < price) return sendErrorMessage(playerid, "Masz za ma³o pieniêdzy!");
+	    	PlayerInfo[playerid][pMats] -= mats;
+	    	PlayerInfo[giveplayerid][pGun4] = weapon;
+        	PlayerInfo[giveplayerid][pAmmo4] = ammo;
+        	playerWeapons[giveplayerid][weaponLegal4] = 1;
+        	DajKase(playerid, -price);
+        	//
+        	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
+            SendClientMessage(playerid, COLOR_GRAD1, string);
+            format(string, sizeof(string), "Otrzyma³eœ od gracza %s broñ %s z ammo %d.",GetNick(playerid), weaponname, ammo);
+            SendClientMessage(giveplayerid, COLOR_GRAD1, string);
+            format(string, sizeof(string), "* %s wyci¹gn¹³ zza lady %s i da³ %s.", GetNick(playerid), weaponname, GetNick(giveplayerid));
+            ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+            GivePlayerWeapon(giveplayerid,weapon,ammo);
+            format(string, sizeof(string), "Gracz %s (GunShop: %s) sprzedal bron (ID:[%d][%s], AMMO:[%d]) graczowi %s.", GetNick(playerid), familytext, weaponid, weaponname, ammo, GetNick(giveplayerid));
+			WeapICLog(string);
+		}
 	
 	}
 	else
