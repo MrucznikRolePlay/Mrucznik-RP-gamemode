@@ -13165,7 +13165,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 4);
 					}
 				}
-			
+				return 1;
 			}
 		}
 		else if(dialogid == 1097)
