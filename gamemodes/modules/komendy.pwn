@@ -12286,9 +12286,9 @@ CMD:kupkredyty(playerid)
 				//format(string, sizeof(string), "Pakiet\tIloœæ\tCena\n\{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
 				//format(string, sizeof(string), "test\ttest\test\n\au\taut\aute");
 				format(string, sizeof(string), "Pakiet\tIloœæ\tCena\n\
-												{C0C0C0}Dzieciêcy\t{FF0000}50\t%d$\n\
-												{C0C0C0}Normalny\t{FF0000}100\%d$\n\
-												{C0C0C0}Zaawansowany\t{FF0000}250\n%d$\n\
+												{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\
+												{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\
+												{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\
 												{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
 				ShowPlayerDialogEx(playerid, 1403,  DIALOG_STYLE_TABLIST_HEADERS, "Kup Kredyty",  string, "Kup", "Anuluj");
     	    }
