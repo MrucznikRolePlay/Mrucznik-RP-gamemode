@@ -12937,7 +12937,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1://Zmieñ cenê kredytu
 					{
-						ShowPlayerDialogEx(playerid, 1096, DIALOG_STYLE_LIST, "Mrucznik Role Play - Basen Tsunami", "1. Dzieciêcy\n2. Podstawowy\n3.Zaawansowany\n4.Premium", "Akceptuj" "Wróæ"); 
+						ShowPlayerDialogEx(playerid, 1096, DIALOG_STYLE_LIST, "Mrucznik Role Play - Basen Tsunami", "1. Dzieciêcy\n2. Podstawowy\n3.Zaawansowany\n4.Premium", "Akceptuj", "Wróæ"); 
 					}
 					case 2://Ustal muzykê
 					{
@@ -13143,7 +13143,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 		}
-		else if(dialoigd == 1096)
+		else if(dialogid == 1096)
 		{
 			if(response)
 			{
