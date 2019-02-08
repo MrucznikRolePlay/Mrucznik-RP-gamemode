@@ -12277,11 +12277,13 @@ CMD:kupkredyty(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
+		new string[256];
         if(GUIExit[playerid] == 0)
     	{
     	    if(IsPlayerInRangeOfPoint(playerid, 5.0, 570.63, -2031.03, 16.2))
     	    {
-  				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_LIST, "Kup Kredyty", "{FFFFFF}Pakiet 50 kredytów - 50 000$\nPakiet 100 kredytów - 80 000$\nPakiet 250 kredytów - 100 000$\nPakiet 500 kredytów - 350 000$", "Kup", "Anuluj");
+				format(string, sizeof(string), "{FFFFFF}Pakiet\tIloœæ\tCena\n\{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
+  				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_TABLIST_HEADERS, "Kup Kredyty",  string, "Kup", "Anuluj");
     	    }
     	    else
     	    {
@@ -12289,6 +12291,23 @@ CMD:kupkredyty(playerid)
     	    }
     	}
     }
+	return 1;
+}
+CMD:basenstats(playerid);
+{
+	if(GetPlayerOrg(playerid) == 43)
+	{
+		new string[128];
+		format(string, sizeof(string), "Zarobiona kasa: %d$\nSprzedane kredyty: %d\nOdwiedzin Sauny: %d\nWejœæ na basen: %d\nKorzystania z trampoliny: %d", poolCashStats, poolCreditStatus, poolSaunaStats, poolStats, poolTrampineStats);
+		ShowPlayerDialogEx(playerid, 1095, DIALOG_STYLE_MSGBOX, "Statystyki", string, "Akceptuj", " ");
+	
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie jesteœ z basenu Tsunami!"); 
+	}
+
+
 	return 1;
 }
 CMD:kupneon(playerid) return cmd_kupneony(playerid);
@@ -20982,6 +21001,7 @@ CMD:trampolina(playerid)
 	if (IsPlayerInRangeOfPoint(playerid, 5.0, 578.6193,-2195.7708,1.6288)) // trampolina wejœcie
 	{
 		ShowPlayerDialogEx(playerid, 325, DIALOG_STYLE_LIST, "Na któr¹ trampolinê chcesz wejœæ?", "Trampolina zwyk³a\nTrampolina wyczynowa", "Wybierz", "Anuluj");
+		poolTrampineStats = poolTrampineStats+1;
 	}
 	else
 	{
@@ -21647,6 +21667,7 @@ CMD:wejdz(playerid)
 					new string[128];
 					format(string, sizeof(string), "Pozosta³o Ci %d kredytów", Kredyty[playerid]);
 					sendTipMessage(playerid, string);
+					poolStats = poolStats+1;
 					return 1;
 				}
 				else
@@ -21675,6 +21696,7 @@ CMD:wejdz(playerid)
 				new string[128];
 				format(string, sizeof(string), "Pozosta³o Ci %d kredytów", Kredyty[playerid]);
 				sendTipMessage(playerid, string);
+				poolSaunaStats = poolSaunaStats+1;
                 return 1;
             }
             else
@@ -21687,7 +21709,7 @@ CMD:wejdz(playerid)
         {
             SetPlayerPosEx(playerid, 564.1958,-2029.4149,16.1670); // recepcja
             TogglePlayerControllable(playerid, 0);
-            SetPlayerVirtualWorld(playerid, 30);
+            SetPlayerVirtualWorld(playerid, 43);
             Wchodzenie(playerid);
             return 1;
         }
@@ -22712,7 +22734,7 @@ CMD:wyjdz(playerid)
 		}
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 562.2107,-2029.9917,16.167)) // basen tylko dla personelu
 		{
-		    if(GetPlayerOrg(playerid) == 19)
+		    if(GetPlayerOrg(playerid) == 43)
 		    {
 			    SetPlayerPosEx(playerid, 598.6794,-2204.8613,1.8190); // bar basenowy
 			    TogglePlayerControllable(playerid, 10);

@@ -12855,33 +12855,50 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
+					new string[128];
 		            case 0:
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 50 kredytów za jedyne 50 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
+						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 50;
-                        DajKase(playerid, -50000);
+                        DajKase(playerid, -onePoolPrice);
+						SejfR_Add(43, onePoolPrice);
+						SejfR_Save(43);
+						poolCashStats = poolCashStats+onePoolPrice;
+						poolCreditStatus = poolCreditStatus+50;
 		            }
 		            case 1:
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 100 kredytów za jedyne 80 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
+						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 100;
-                        DajKase(playerid, -80000);
+                        DajKase(playerid, -twoPoolPrice);
+						SejfR_Add(43, twoPoolPrice);
+						SejfR_Save(43);
+						poolCreditStatus = poolCreditStatus+100;
+						poolCashStats = poolCashStats+twoPoolPrice;
 		            }
 		            case 2://Zielony
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 250 kredytów za jedyne 100 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
+						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 250;
-                        DajKase(playerid, -100000);
+                        DajKase(playerid, -threePoolPrice);
+						SejfR_Add(43, threePoolPrice);
+						SejfR_Save(43);
+						poolCreditStatus = poolCreditStatus+250;
+						poolCashStats = poolCashStats+threePoolPrice;
 		            }
 		            case 3://Niebieski
 		            {
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Oto pakiet 500 kredytów za jedyne 350 000$.");
-						SendClientMessage(playerid, COLOR_WHITE, "Pani_Janina mówi: Zapraszam ponownie do basenu Tsunami!");
+						format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", fourPoolPrice);
+						SendClientMessage(playerid, COLOR_WHITE, string);
                         Kredyty[playerid] += 500;
-                        DajKase(playerid, -350000);
+                        DajKase(playerid, -fourPoolPrice);
+						SejfR_Add(43, fourPoolPrice);
+						SejfR_Save(43);
+						poolCreditStatus = poolCreditStatus+500;
+						poolCashStats = poolCashStats+fourPoolPrice;
 		            }
 		        }
 		    }
@@ -12913,7 +12930,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1://Zmieñ cenê kredytu
 					{
-						sendTipMessage(playerid, "Ju¿ wkrótce"); 
+						ShowPlayerDialogEx(playerid, 1096, DIALOG_STYLE_LIST, "Mrucznik Role Play - Basen Tsunami", "1. Dzieciêcy\n2. Podstawowy\n3.Zaawansowany\n4.Premium", "Akceptuj" "Wróæ"); 
 					}
 					case 2://Ustal muzykê
 					{
@@ -13105,6 +13122,84 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				
 				}
+			}
+		
+		}
+		else if(dialogid == 1095)//pusty dialog basenu - statystyk
+		{
+			if(!response)
+			{
+				sendTipMessage(playerid, "Podoba³y siê statystki!?");
+				return 1;
+			}
+		}
+		else if(dialoigd == 1096)
+		{
+			if(response)
+			{
+				new string[128];
+				switch(listitem)
+				{
+					case 0:
+					{
+						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", onePoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
+						SetPVarInt(playerid, "wyborPoziomuKredytow", 1);
+					}
+					case 1:
+					{
+						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", twoPoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
+						SetPVarInt(playerid, "wyborPoziomuKredytow", 2);
+					}
+					case 2:
+					{
+						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", threePoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
+						SetPVarInt(playerid, "wyborPoziomuKredytow", 3);
+					}
+					case 3:
+					{
+						format(string, sizeof(string), "{C0C0C0}Wpisz poni¿ej now¹ kwotê dla pakietu {00FFFF}dzieciêcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", fourPoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "Odrzuæ"); 
+						SetPVarInt(playerid, "wyborPoziomuKredytow", 4);
+					}
+				}
+			
+			}
+		}
+		else if(dialogid == 1097)
+		{
+			if(response)
+			{
+				new pricePool = strval(inputtext);
+				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 1)
+				{
+					onePoolPrice = pricePool;
+					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					return 1;
+				
+				}
+				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 2)
+				{
+					twoPoolPrice = pricePool;
+					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					return 1;
+				}
+				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 3)
+				{
+					threePoolPrice = pricePool;
+					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					return 1;
+				}
+				if(GetPVarInt(playerid, "wyborPoziomuKredytow") == 4)
+				{
+					fourPoolPrice = pricePool;
+					sendTipMessage(playerid, "Ustali³eœ now¹ cenê!");
+					return 1;
+				}
+			
+			
 			}
 		
 		}
