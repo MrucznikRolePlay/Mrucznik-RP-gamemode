@@ -12964,6 +12964,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessageToAll(COLOR_BLUE, string);
 					}
 				}
+				return 1;
 			}
 		}
 		else if(dialogid == 1094)
