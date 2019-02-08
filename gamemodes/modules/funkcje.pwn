@@ -1064,6 +1064,7 @@ spamwl[playerid] = 0;
 return 1;
 }
 
+
 public AntySpamMechanik(playerid){
 SpamujeMechanik[playerid] = 0;
 return 1;
