@@ -5084,8 +5084,8 @@ public OnGameModeInit()
 
     //Streamer_SetTickRate(40);
 
-    PaniJanina = CreateActor(88, 570.63, -2031.03, 16.2, 180.0);//basen
-	SetActorVirtualWorld(PaniJanina, 30);
+    PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 180.0);//basen
+	SetActorVirtualWorld(PaniJanina, 43);
 	//AFK timer
 	for(new i; i<MAX_PLAYERS; i++)
 	{
