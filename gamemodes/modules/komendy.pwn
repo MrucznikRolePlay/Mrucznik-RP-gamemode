@@ -12290,8 +12290,6 @@ CMD:kupkredyty(playerid)
     	    if(IsPlayerInRangeOfPoint(playerid, 4.0, 1197.0911,-1772.3119,13.7282))
     	    {
 				new string[300];
-				//format(string, sizeof(string), "Pakiet\tIloœæ\tCena\n\{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
-				//format(string, sizeof(string), "test\ttest\test\n\au\taut\aute");
 				format(string, sizeof(string), "Pakiet\tIloœæ\tCena\n\
 												{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\
 												{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\
@@ -12314,7 +12312,7 @@ CMD:basenstats(playerid)
 	{
 		new string[128];
 		format(string, sizeof(string), "Zarobiona kasa: %d$\nSprzedane kredyty: %d\nOdwiedzin Sauny: %d\nWejœæ na basen: %d\nKorzystania z trampoliny: %d", poolCashStats, poolCreditStatus, poolSaunaStats, poolStats, poolTrampolineStats);
-		ShowPlayerDialogEx(playerid, 1095, DIALOG_STYLE_MSGBOX, "Statystyki", string, "Akceptuj", " ");
+		ShowPlayerDialogEx(playerid, 1095, DIALOG_STYLE_MSGBOX, "Statystyki", string, "Akceptuj", "");
 	
 	}
 	else
