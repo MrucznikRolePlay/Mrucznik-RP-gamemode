@@ -2243,7 +2243,15 @@ IsASklepZBronia(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
+		if(GetPlayerOrg(playerid) == 21)
+		{
+		    return 1;
+		}
+		if(GetPlayerOrg(playerid) == 22 && IsPlayerInRangeOfPoint(playerid, 10, 707.3535,-503.1105,6.3217))
+		{
+		    return 1;
+		}
+		if(GetPlayerOrg(playerid) == 23 && IsPlayerInRangeOfPoint(playerid, 10, 1800.8372,-1160.9199,1023.8218))
 		{
 		    return 1;
 		}
