@@ -12280,7 +12280,7 @@ CMD:kupkredyty(playerid)
 		
         if(GUIExit[playerid] == 0)
     	{
-    	    if(IsPlayerInRangeOfPoint(playerid, 5.0, 570.63, -2031.03, 16.2))
+    	    if(IsPlayerInRangeOfPoint(playerid, 4.0, 1197.0911,-1772.3119,13.7282))
     	    {
 				new string[300];
 				//format(string, sizeof(string), "Pakiet\tIloœæ\tCena\n\{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
@@ -18096,7 +18096,7 @@ CMD:panelbasenu(playerid)
 		{
 			if(gPlayerOrgLeader[playerid])
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 4.0, 577.32819, -2039.02173, 15.05740))
+				if(IsPlayerInRangeOfPoint(playerid, 3.0, 1203.39294, -1772.58777, 13.71199))
 				{
 					new string[128];
 					if(poolStatus == 0)
@@ -21654,7 +21654,7 @@ CMD:wejdz(playerid)
             SetPlayerInterior(playerid, 3);
             return 1;
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 560.8828,-2033.8701,16.1670)) // basen wejœcie
+        else if (IsPlayerInRangeOfPoint(playerid, 5.0,  1205.45874, -1765.66833, 13.54815)) // basen wejœcie
         {
 			if(poolStatus == 1)
 			{
@@ -21692,7 +21692,7 @@ CMD:wejdz(playerid)
         {
             if(Kredyty[playerid] >= 75)
             {
-                SetPlayerPosEx(playerid, 527.8544,-2082.4460,17.2253); // sauny œrodek
+                SetPlayerPosEx(playerid, 1274.3020,-1756.0800,48.5812); // sauny œrodek
                 GameTextForPlayer(playerid, "~w~Wypoc swoje ~r~Problemy", 5000, 1);
                 SetPlayerVirtualWorld(playerid, 43);
                 TogglePlayerControllable(playerid, 0);
@@ -21713,7 +21713,7 @@ CMD:wejdz(playerid)
         }
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 598.6794,-2204.8613,1.8190)) // tylko dla personelu bar
         {
-            SetPlayerPosEx(playerid, 564.1958,-2029.4149,16.1670); // recepcja
+            SetPlayerPosEx(playerid, 1193.2720,-1774.8802,13.7282); // recepcja
             TogglePlayerControllable(playerid, 0);
             SetPlayerVirtualWorld(playerid, 43);
             Wchodzenie(playerid);
@@ -22734,11 +22734,11 @@ CMD:wyjdz(playerid)
 		//micha³owe syfy
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 566.7726,-2087.6841,2.7300)) // basen (g³ówny )wyjœcie
 		{
-		    SetPlayerPosEx(playerid, 560.6104,-2033.9307,16.1670); // basen (g³ówny )recepcja
+		    SetPlayerPosEx(playerid, 1205.2277,-1765.7360,13.7262); // basen (g³ówny )recepcja
 		    TogglePlayerControllable(playerid, 10);
             Wchodzenie(playerid);
 		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 562.2107,-2029.9917,16.167)) // basen tylko dla personelu
+		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1193.2720,-1774.8802,13.7282)) // basen tylko dla personelu
 		{
 		    if(GetPlayerOrg(playerid) == 43)
 		    {
@@ -22752,7 +22752,7 @@ CMD:wyjdz(playerid)
 			    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ upowa¿niony do korzystania z wejœcia dla personelu");
 			}
 		}
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 528.8655,-2082.5376,17.2253)) // sauna srodek
+		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1274.3020,-1756.0800,48.5812)) // sauna srodek
 		{
 		    SetPlayerPosEx(playerid, 570.5168,-2095.3618,2.6152 ); // sauna wejscie
     		SetPlayerVirtualWorld(playerid, 43);
