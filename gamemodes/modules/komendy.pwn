@@ -12282,13 +12282,14 @@ CMD:kupkredyty(playerid)
     	{
     	    if(IsPlayerInRangeOfPoint(playerid, 5.0, 570.63, -2031.03, 16.2))
     	    {
-				new string[256];
-				format(string, sizeof(string), "{FFFFFF}Pakiet\tIloœæ\tCena\n\{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
+				new string[128];
+				format(string, sizeof(string), "Pakiet\tIloœæ\tCena\n\{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
   				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_TABLIST_HEADERS, "Kup Kredyty",  string, "Kup", "Anuluj");
     	    }
     	    else
     	    {
    				sendErrorMessage(playerid, "Nie jesteœ na basenie Tsunami!");
+				return 1;
     	    }
     	}
     }
@@ -12299,7 +12300,7 @@ CMD:basenstats(playerid)
 	if(GetPlayerOrg(playerid) == 43)
 	{
 		new string[128];
-		format(string, sizeof(string), "Zarobiona kasa: %d$\nSprzedane kredyty: %d\nOdwiedzin Sauny: %d\nWejœæ na basen: %d\nKorzystania z trampoliny: %d", poolCashStats, poolCreditStatus, poolSaunaStats, poolStats, poolTrampineStats);
+		format(string, sizeof(string), "Zarobiona kasa: %d$\nSprzedane kredyty: %d\nOdwiedzin Sauny: %d\nWejœæ na basen: %d\nKorzystania z trampoliny: %d", poolCashStats, poolCreditStatus, poolSaunaStats, poolStats, poolTrampolineStats);
 		ShowPlayerDialogEx(playerid, 1095, DIALOG_STYLE_MSGBOX, "Statystyki", string, "Akceptuj", " ");
 	
 	}
@@ -21000,7 +21001,7 @@ CMD:trampolina(playerid)
 	if (IsPlayerInRangeOfPoint(playerid, 5.0, 578.6193,-2195.7708,1.6288)) // trampolina wejœcie
 	{
 		ShowPlayerDialogEx(playerid, 325, DIALOG_STYLE_LIST, "Na któr¹ trampolinê chcesz wejœæ?", "Trampolina zwyk³a\nTrampolina wyczynowa", "Wybierz", "Anuluj");
-		poolTrampineStats = poolTrampineStats+1;
+		poolTrampolineStats = poolTrampolineStats+1;
 	}
 	else
 	{
