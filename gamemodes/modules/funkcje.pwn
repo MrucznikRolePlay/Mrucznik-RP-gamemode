@@ -4316,6 +4316,11 @@ stock WeapLog(text[])
     new plik[32] = "logi/weap.log";
     Log(plik, text);
 }
+stock WeapICLog(text[])
+{
+    new plik[32] = "logi/gunshopIC.log";
+    Log(plik, text);
+}
 
 stock AccountSaveLog(text[])
 {
