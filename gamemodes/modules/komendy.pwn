@@ -369,10 +369,10 @@ CMD:uprawnienia(playerid, params[])
 
     if(Uprawnienia(playerid, ACCESS_EDITCAR)) strcat(str, "{00FF00}+{FFFFFF} Edycja pojazdów\n");
     if(Uprawnienia(playerid, ACCESS_EDITRANG)) strcat(str, "{00FF00}+{FFFFFF} Edycja rang\n");
-    if(Uprawnienia(playerid, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ");
+    if(Uprawnienia(playerid, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ\n");
     
-    if(Uprawnienia(playerid, ACCESS_BIZ)) strcat(str, "{00FF00}+{FFFFFF} Edycja biznesów");
-    if(Uprawnienia(playerid, ACCESS_HOUSE)) strcat(str, "{00FF00}+{FFFFFF} Edycja domów");
+    if(Uprawnienia(playerid, ACCESS_BIZ)) strcat(str, "{00FF00}+{FFFFFF} Edycja biznesów\n");
+    if(Uprawnienia(playerid, ACCESS_HOUSE)) strcat(str, "{00FF00}+{FFFFFF} Edycja domów\n");
     if(Uprawnienia(playerid, ACCESS_TECHNIK)) strcat(str, "{00FF00}+{FFFFFF} Uprawnienia technika");
     if(strlen(str) < 20) strcat(str, "{FF0000}Brak jakichkolwiek uprawnieñ!");
     ShowPlayerDialogEx(playerid, D_INFO, DIALOG_STYLE_LIST, "Twoje uprawnienia", str, "OK", "");
