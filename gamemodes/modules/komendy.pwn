@@ -32442,7 +32442,7 @@ CMD:listabroni(playerid, params[])
 	sendTipMessage(playerid, "Bronie 5 Skill:");
 	sendTipMessage(playerid, "[ID: 13] C4 | Ammo: 10 | Mats: 6000 | Koszt: 200k");
 	sendTipMessage(playerid, "[ID: 14] Ogniomiotacz | Ammo: 200 | Mats: 10500 | Koszt: 400k");
-	sendTipMessage(playerid, "[ID: 15] Pa³ka policyjna | Ammo: 1 | Mats: 100 | Koszt: 5k")
+	sendTipMessage(playerid, "[ID: 15] Pa³ka policyjna | Ammo: 1 | Mats: 100 | Koszt: 5k");
 	sendTipMessage(playerid, "{FF0000}UWAGA! 10 procent od kosztów trafia do sejfu rodziny!");
 	return 1;
 }
