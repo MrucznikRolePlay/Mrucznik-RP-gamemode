@@ -2317,13 +2317,14 @@ CMD:kajdanki(playerid, params[])
 												format(string, sizeof(string), "* %s docisn¹³ do ziemi nieprzytomnego %s i sku³ go.", GetNick(playerid, true), GetNick(giveplayerid, true));
 												ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 												format(string, sizeof(string), "Dziêki szybkiej interwencji uda³o Ci siê skuæ %s.", GetNick(giveplayerid, true));
-												SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-												sendTipMessageEx(playerid, COLOR_BLUE, "Jesteœ nieprzytomny - policjant sku³ ciê bez wiêkszego wysi³ku."); 
+												SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+												sendTipMessageEx(giveplayerid, COLOR_BLUE, "Jesteœ nieprzytomny - policjant sku³ ciê bez wiêkszego wysi³ku."); 
 												
 												//czynnoœci
 												zakuty[giveplayerid] = 1;
 												TogglePlayerControllable(giveplayerid, 0);
 												uzytekajdanki[playerid] = 1;
+												SkutyGracz[playerid] = giveplayerid;
 												ClearAnimations(giveplayerid);
 												SetPlayerSpecialAction(giveplayerid, SPECIAL_ACTION_CUFFED);
 												SetPlayerAttachedObject(giveplayerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
