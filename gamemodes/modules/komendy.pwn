@@ -350,7 +350,52 @@ CMD:panel(playerid, params[])
     }
     return 1;
 }
-
+CMD:restart(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_TECHNIK))
+		{
+			new string[128];
+			format(string, sizeof(string), "%s zarz¹dzi³ restart serwera! Trwa próba ponownego po³¹czenia.", GetNick(playerid));
+			SendClientMessageToAll(COLOR_RED, string);
+			format(string, sizeof(string), "CMD_Info: /restart u¿yte przez %s [%d]", GetNick(playerid), playerid);
+        	SendCommandLogMessage(string);
+			SendRconCommand("gmx");
+		}
+		else
+		{
+			sendErrorMessage(playerid, "BRAK UPRAWNIEÑ!");
+			return 1;
+		}
+	}
+	return 1;
+}
+CMD:wczytajskrypt(playerid, params[])
+{
+	new string[128];
+	if(IsPlayerConnected(playerid))
+	{
+		if(isnull(params))
+		{
+			sendTipMessage(playerid, "/wczytajskrypt [nazwa fs]");
+			return 1;
+		}
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_TECHNIK))
+		{
+			format(string, sizeof(string), "loadfs %s", params);
+			SendRconCommand(string);
+			format(string, sizeof(string), "CMD_Info: /wczytajskrypt [%s] u¿yte przez %s [%d]", params, GetNick(playerid), playerid);
+        	SendCommandLogMessage(string);
+		}
+		else
+		{
+			sendErrorMessage(playerid, "BRAK UPRAWNIEÑ!");
+			return 1;
+		}
+	}
+	return 1;
+}
 CMD:uprawnienia(playerid, params[])
 {
     new str[1024];
@@ -8554,7 +8599,7 @@ CMD:zmienwl(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setwl [playerid/CzêœæNicku] [iloœæ wl]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 100)
+		if (PlayerInfo[playerid][pAdmin] >= 100 || Uprawnienia(playerid, ACCESS_TECHNIK))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -8829,7 +8874,7 @@ CMD:zmienprace(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setjob [playerid/CzêœæNicku] [id pracy]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_TECHNIK))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -9004,7 +9049,7 @@ CMD:zmienwiek(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_TECHNIK))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -9070,8 +9115,6 @@ CMD:sprawdzdom(playerid, params[])
 	return 1;
 }
 
-
-
 CMD:setstd(playerid, params[]) return cmd_choroba(playerid, params);
 CMD:zaraz(playerid, params[]) return cmd_choroba(playerid, params);
 CMD:choroba(playerid, params[])
@@ -9089,7 +9132,7 @@ CMD:choroba(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 100)
+		if (PlayerInfo[playerid][pAdmin] >= 100 || Uprawnienia(playerid, ACCESS_TECHNIK))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -13289,7 +13332,7 @@ CMD:stworzdom(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 )
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 		{
    			new interior, kesz;
 			if( sscanf(params, "dd", interior, kesz))
@@ -13324,7 +13367,7 @@ CMD:stworzdom(playerid, params[])
 
 CMD:domint(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 )
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 	{
 		new dld, interior;
 		if( sscanf(params, "dd", dld, interior))
@@ -13346,7 +13389,7 @@ CMD:domint(playerid, params[])
 
 CMD:houseowner(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 )
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 	{
 		new dld, id;
 		if( sscanf(params, "dd", dld, id))
@@ -13378,7 +13421,7 @@ CMD:losowostworzdom(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 )
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 		{
    			new kategoria, kesz;
 			if( sscanf(params, "dd", kategoria, kesz))
@@ -13417,7 +13460,7 @@ CMD:deletedom(playerid, params[])
 
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid))
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 		{
 		    new kategoria;
 			if( sscanf(params, "d", kategoria))
@@ -13673,9 +13716,9 @@ CMD:opuscdom(playerid)
 
 
 
-CMD:blokujdom(playerid, params[]) return cmd_blokujsprzedarz(playerid, params);
-CMD:blokadadomu(playerid, params[]) return cmd_blokujsprzedarz(playerid, params);
-CMD:blokujsprzedarz(playerid, params[])
+CMD:blokujdom(playerid, params[]) return cmd_blokujsprzedaz(playerid, params);
+CMD:blokadadomu(playerid, params[]) return cmd_blokujsprzedaz(playerid, params);
+CMD:blokujsprzedaz(playerid, params[])
 {
 	new string[64];
 
@@ -13683,7 +13726,7 @@ CMD:blokujsprzedarz(playerid, params[])
     {
 	    if(IsPlayerConnected(playerid))
 	    {
-	        if(PlayerInfo[playerid][pAdmin] >= 5000)
+	        if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 			{
 			    new dom;
 				if( sscanf(params, "d", dom))
@@ -13748,7 +13791,7 @@ CMD:gotobiz(playerid, params[])
 		{
 		    if(plo <= 100)
 		    {
-				if(PlayerInfo[playerid][pAdmin] >= 1)
+				if(PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_BIZ))
 				{
 				    if(BizData[plo][eBizWejX] == 0.0 && BizData[plo][eBizWejY] == 0.0 && BizData[plo][eBizWejZ] == 0.0) return _MruAdmin(playerid, sprintf("Nie mo¿na siê teleportowaæ. Biznes %s (ID %d) nie jest aktywny.", BizData[plo][eBizName], plo));
 					SetPlayerPosEx(playerid, BizData[plo][eBizWejX],BizData[plo][eBizWejY],BizData[plo][eBizWejZ]);
@@ -13767,7 +13810,7 @@ CMD:gotobiz(playerid, params[])
 }
 CMD:dajbiznes(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001 || Uprawnienia(playerid, ACCESS_BIZ))
+	if (PlayerInfo[playerid][pAdmin] == 5000 || Uprawnienia(playerid, ACCESS_BIZ))
 	{
 		new gracz, wartosc;
 		if(sscanf(params, "k<fix>d", gracz, wartosc)) return sendTipMessage(playerid, "U¿yj /dajbiznes [playerid/CzêœæNicku] [ID Biznesu]");
@@ -13795,7 +13838,7 @@ CMD:dajbiznes(playerid, params[])
 }
 CMD:zabierzbiznes(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
+	if (PlayerInfo[playerid][pAdmin] == 5000 || Uprawnienia(playerid, ACCESS_BIZ))
 	{
 		new gracz;
 		if(sscanf(params, "d", gracz)) return sendTipMessage(playerid, "U¿yj /zabierzbiznes [playerid/CzêœæNicku]");
@@ -13991,7 +14034,7 @@ CMD:resetsejfhasla(playerid)
 
 CMD:zapiszdomy(playerid)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 	{
 		ZapiszDomy();
 		SendClientMessage(playerid, COLOR_WHITE, "Wszystkie domy zosta³y zapisane");
@@ -14001,7 +14044,7 @@ CMD:zapiszdomy(playerid)
 
 CMD:zapiszkonta(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_TECHNIK))
 	{
         foreach(Player, i) MruMySQL_SaveAccount(i);
     	SendClientMessageToAll(COLOR_WHITE, "Wszystkie konta zosta³y zapisane");

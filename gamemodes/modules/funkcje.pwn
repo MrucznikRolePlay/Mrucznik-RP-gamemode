@@ -2125,7 +2125,7 @@ IsACop(playerid)
 	return 0;
 }
 
-IsASkuban(playerid)
+/*IsASkuban(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -2137,7 +2137,7 @@ IsASkuban(playerid)
 		}
 	}
 	return 0;
-}
+}*/
 
 IsAFakeKonto(playerid)
 {
