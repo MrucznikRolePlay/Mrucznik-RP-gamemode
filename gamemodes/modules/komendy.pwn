@@ -2311,7 +2311,7 @@ CMD:kajdanki(playerid, params[])
 												sendTipMessage(playerid,"Chyba nie chcesz aresztowaæ niewinnego cz³owieka?");
 												return 1;
 											}
-											if(PlayerInfo[giveplayerid][pBW] == 1)
+											if(PlayerInfo[giveplayerid][pBW] >= 1)
 											{
 												//Wiadomoœci
 												format(string, sizeof(string), "* %s docisn¹³ do ziemi nieprzytomnego %s i sku³ go.", GetNick(playerid, true), GetNick(giveplayerid, true));
