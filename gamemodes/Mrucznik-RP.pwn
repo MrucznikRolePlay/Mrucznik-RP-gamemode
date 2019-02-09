@@ -5139,6 +5139,9 @@ public OnGameModeInit()
 
     //noYsi
     LoadPrzewinienia();
+    
+    //3dTextLoad
+    Load3DText();
 
     new string[MAX_PLAYER_NAME];
     new string1[MAX_PLAYER_NAME];
