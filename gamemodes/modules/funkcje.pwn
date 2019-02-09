@@ -2098,20 +2098,6 @@ IsAMember(playerid)
 	}
 	return 0;
 }
-IsATechnik(playerid)//Funkcja stworzona na proœbê 0Verte (dla Simeone || dla PECET) 
-//Uprawnia do u¿ycia: /zrobdom; /usundom; /domint; /gotobiz; /dajbiznes; /zabierzbiznes (do wydzia³u planowania -daj i zabierz biz) /zapiszdomy; /zapiszkonta; /setwiek; /setchoroba;/dn;/sn; /rapidfly; /setskin (tylkosobie) 
-// /setwl; /giverank; /makemember; /setjob; /sethp; /setarmor; /freeze; /wczytajskrypt; /restart;
-{
-	if(PlayerInfo[playerid][pUID] == 99051)//Simeone
-	{
-		return 1;
-	}
-	if(PlayerInfo[playerid][pUID] == 24080) //Pecet
-	{
-		return 1;
-	}
-	return 0;
-}
 
 IsACop(playerid)
 {
