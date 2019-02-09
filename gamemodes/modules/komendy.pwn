@@ -1559,7 +1559,7 @@ CMD:przelew(playerid, params[])
 
 	if(IsPlayerConnected(playerid))
 	{
-		sendTipMessage(playerid, "U¿yj /kontobankowe [Skrót: /kb]"
+		sendTipMessage(playerid, "U¿yj /kontobankowe [Skrót: /kb]");
 	}
 /*=============[BLOKADA - WYKORZYSTANE W /KB]==============
 	new string[128];
