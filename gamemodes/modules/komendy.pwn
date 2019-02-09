@@ -32490,9 +32490,9 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
-        	new Float:ffamilyprice = (1/10) * 100.0;
-			new familyprice = ffamilyprice*price;
-        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
+        	//new Float:ffamilyprice = (1/10) * 100.0;
+			//new familyprice = ffamilyprice*price;
+        	SejfR_Add(GetPlayerOrg(playerid), 1000);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
