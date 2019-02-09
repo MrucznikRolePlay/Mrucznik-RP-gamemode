@@ -31566,9 +31566,6 @@ CMD:laptop(playerid)
 	}
     return 1;
 }
-
-
-
 CMD:materials(playerid, params[]) return cmd_materialy(playerid, params);
 CMD:mats(playerid, params[]) return cmd_materialy(playerid, params);
 CMD:materialy(playerid, params[])
@@ -31593,50 +31590,6 @@ CMD:materialy(playerid, params[])
 		}
 		if(strcmp(x_nr,"get",true) == 0 || strcmp(x_nr,"wez",true) == 0)
 		{
-		    if(PlayerToPoint(3.0,playerid,249.5962,-157.1357,1.5703) && IsASklepZBronia(playerid))
-		    {
-		        if(MatsHolding[playerid] >= 10)
-		        {
-		            sendTipMessageEx(playerid, COLOR_GREY, "Nie masz miejsca na wiêcej paczek!");
-			        return 1;
-		        }
-
-		        if(moneys == 0)
-				{
-					sendTipMessage(playerid, "U¿yj /mats wez [iloœæ]");
-					return 1;
-				}
-
-				if(moneys < 1 || moneys > 10) { sendTipMessageEx(playerid, COLOR_GREY, "Iloœæ paczek od 1 do 10 !"); return 1; }
-				new price = moneys * 500;
-				if(kaska[playerid] > price)
-				{
-				    format(string, sizeof(string), "* Kupi³eœ %d paczek materia³ów za $%d jedŸ do fabryki materia³ów. Dok³adn¹ lokalizacjê musisz ustaliæ sam.", moneys, price);
-				    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-				    ZabierzKase(playerid, price);
-				    MatsHolding[playerid] = moneys;
-				    if(GetPlayerOrg(playerid) == 22)
-				    {
-				    	SetPlayerCheckpoint(playerid, 702.3633,-491.9083, 30);
-					}
-					if(GetPlayerOrg(playerid) == 23)
-				    {
-				    	SetPlayerCheckpoint(playerid, 1796.3542,-1146.5486, 30);
-					}
-				    SetTimerEx("Matsowanie", 1*51000 ,0,"d",playerid);
-				    MatsGood[playerid] = 1;
-				}
-				else
-				{
-				    format(string, sizeof(string), "Nie masz $%d!", price);
-				    sendTipMessageEx(playerid, COLOR_GREY, string);
-				}
-		    }
-		    else
-		    {
-		        sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w fabryce materia³ów w Bay Side!");
-		        return 1;
-		    }
 		    if(PlayerToPoint(3.0,playerid,597.1277,-1248.6479,18.2734) && !IsASklepZBronia(playerid))
 		    {
 		        if(MatsHolding[playerid] >= 10)
@@ -31679,46 +31632,6 @@ CMD:materialy(playerid, params[])
 		{
 		    new Float:ActorX, Float:ActorY, Float:ActorZ;
             GetActorPos(FabrykaMats::Actor, ActorX, ActorY, ActorZ);
-            if(IsPlayerInCheckpoint(playerid) && IsASklepZBronia(playerid))
-		    {
-		        if(MatsHolding[playerid] > 0)
-		        {
-		            if(MatsGood[playerid] != 1)
-		            {
-			            new payout = (50)*(MatsHolding[playerid]);
-			            format(string, sizeof(string), "Dostarczy³eœ materia³y do sklepu! Otrzymujesz %d materia³ów z %d przewiezionych paczek.", payout, MatsHolding[playerid]);
-					    sendTipMessage(playerid, string);
-                        if(PlayerInfo[playerid][pMiserPerk] > 0) {
-                            new poziom = PlayerInfo[playerid][pMiserPerk];
-                            PlayerInfo[playerid][pMats] += poziom*30;
-                            format(string, sizeof(string), "Dziêki ulepszeniu MATSIARZ otrzymujesz dodatkowo %d materia³ów.", poziom*30);
-                            sendTipMessage(playerid, string);
-                        }
-			            PlayerInfo[playerid][pMats] += payout;
-			            MatsHolding[playerid] = 0;
-			            DisablePlayerCheckpoint(playerid);
-			        }
-			        else
-			        {
-			            GetPlayerName(playerid, sendername, sizeof(sendername));
-					    format(string, sizeof(string), "AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport", sendername);
-                        SendPunishMessage(string, playerid);
-						KickLog(string);
-			        	KickEx(playerid);
-			        	return 1;
-		        	}
-		        }
-		        else
-		        {
-		            sendTipMessageEx(playerid, COLOR_GREY, "Nie posiadasz paczek z materia³ami!");
-			        return 1;
-		        }
-		    }
-		    else
-		    {
-		        sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy sklepie z broni¹!");
-		        return 1;
-		    }
             if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ) && !IsASklepZBronia(playerid))
 		    {
 		        if(MatsHolding[playerid] > 0)
@@ -32405,10 +32318,90 @@ CMD:sprzedajbron(playerid, params[])
     }
     return 1;
 }
-
+CMD:kupmats(playerid, params[])
+{
+	if(PlayerInfo[playerid][pJob] != 9) return sendErrorMessage(playerid, "Nie masz pracy dilera broni!");
+	if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu/w GunShopie/w pojeŸdzie opancerzonym!");
+    if(IsPlayerConnected(playerid))
+    {
+		if(PlayerToPoint(3.0,playerid,249.5962,-157.1357,1.5703) && IsASklepZBronia(playerid))
+  		{
+	        if(MatsHolding[playerid] >= 10) return sendTipMessageEx(playerid, COLOR_GREY, "W aucie nie ma miejsca na wiêcej paczek!");
+			if(kaska[playerid] < 5000) return sendTipMessageEx(playerid, COLOR_GREY, "Potrzebujesz 5000$!");
+   			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zabra³eœ 10 paczek materia³ów za 5000$! By otrzymaæ materia³y, musisz je dostarczyæ do sklepu.");
+			ZabierzKase(playerid, 5000);
+			MatsHolding[playerid] = 10;
+		    if(GetPlayerOrg(playerid) == 22)
+		    {
+		    	SetPlayerCheckpoint(playerid, 702.3633,-491.9083, 30);
+			}
+			if(GetPlayerOrg(playerid) == 23)
+		    {
+		    	SetPlayerCheckpoint(playerid, 1796.3542,-1146.5486, 30);
+			}
+		    SetTimerEx("Matsowanie", 1*51000 ,0,"d",playerid);
+		    MatsGood[playerid] = 1;
+	    }
+	    else
+	    {
+	        sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w fabryce materia³ów w Bay Side!");
+	        return 1;
+	    }
+	}
+	return 1;
+}
+CMD:dostarczmats(playerid, params[])
+{
+	new string[128];
+	if(PlayerInfo[playerid][pJob] != 9) return sendErrorMessage(playerid, "Nie masz pracy dilera broni!");
+	if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu/w GunShopie/w pojeŸdzie opancerzonym!");
+    if(IsPlayerConnected(playerid))
+    {
+		if(IsPlayerInCheckpoint(playerid) && IsASklepZBronia(playerid))
+	    {
+	        if(MatsHolding[playerid] > 0)
+	        {
+	            if(MatsGood[playerid] != 1)
+	            {
+		            new payout = (50)*(MatsHolding[playerid]);
+		            format(string, sizeof(string), "Dostarczy³eœ materia³y do sklepu! Otrzymujesz %d materia³ów z %d przewiezionych paczek.", payout, MatsHolding[playerid]);
+				    sendTipMessage(playerid, string);
+                    if(PlayerInfo[playerid][pMiserPerk] > 0) {
+                        new poziom = PlayerInfo[playerid][pMiserPerk];
+                        PlayerInfo[playerid][pMats] += poziom*30;
+                        format(string, sizeof(string), "Dziêki ulepszeniu MATSIARZ otrzymujesz dodatkowo %d materia³ów.", poziom*30);
+                        sendTipMessage(playerid, string);
+                    }
+		            PlayerInfo[playerid][pMats] += payout;
+		            MatsHolding[playerid] = 0;
+		            DisablePlayerCheckpoint(playerid);
+		        }
+		        else
+		        {
+				    format(string, sizeof(string), "AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport", GetNick(playerid));
+                    SendPunishMessage(string, playerid);
+					KickLog(string);
+		        	KickEx(playerid);
+		        	return 1;
+	        	}
+	        }
+	        else
+	        {
+	            sendTipMessageEx(playerid, COLOR_GREY, "Nie posiadasz paczek z materia³ami!");
+		        return 1;
+	        }
+	    }
+	    else
+	    {
+	        sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy sklepie z broni¹!");
+	        return 1;
+	    }
+	}
+	return 1;
+}
 CMD:listabroni(playerid, params[])
 {
-    if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu lub nie jesteœ w sklepie z broni¹!");
+    if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu/w GunShopie/w pojeŸdzie opancerzonym!");
     sendTipMessage(playerid, "{00FF00}[LISTA BRONI DLA GUNSHOPÓW]");
 	sendTipMessage(playerid, "Bronie 1 Skill:");
    	sendTipMessage(playerid, "[ID: 1] 9mm | Ammo: 200 | Mats: 250 | Koszt: 10k");
@@ -32437,7 +32430,7 @@ CMD:dajbron(playerid, params[])
 	
     if(!IsPlayerConnected(playerid)) return 0;
 	if(PlayerInfo[playerid][pJob] != 9) return sendErrorMessage(playerid, "Nie masz pracy dilera broni!");
-	if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu lub nie jesteœ w sklepie z broni¹!");
+	if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu/w GunShopie/w pojeŸdzie opancerzonym!");
 	new string[128];
 	new skill;
 	new weapon;

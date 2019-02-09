@@ -2,10 +2,10 @@
 
 stock Load3DText()
 {
-    CreateDynamic3DTextLabel("[FABRYKA MATERIAＳW BAY SIDE]\nU퓓j: /mats wez", 0x1ebb14FF, 249.5962,-157.1357,1.5703+0.5, 10.0);
+    CreateDynamic3DTextLabel("[FABRYKA MATERIAＳW BAY SIDE]\nU퓓j: /kupmats", 0x1ebb14FF, 249.5962,-157.1357,1.5703+0.5, 10.0);
     CreateDynamicPickup(1279, 3, 249.5962,-157.1357,1.5703, -1, -1, -1, 30.0);
-    CreateDynamic3DTextLabel("[GunShop Dillimore - dostawa]\nU퓓j: /mats dostarcz", 0x1ebb14FF, 702.3633,-491.9083,16.3359+0.5, 10.0);
-    CreateDynamic3DTextLabel("[GunShop Los Santos - dostawa]\nU퓓j: /mats dostarcz", 0x1ebb14FF, 1796.3542,-1146.5486,23.8765+0.5, 10.0);
+    CreateDynamic3DTextLabel("[GunShop Dillimore - dostawa]\nU퓓j: /dostarczmats", 0x1ebb14FF, 702.3633,-491.9083,16.3359+0.5, 10.0);
+    CreateDynamic3DTextLabel("[GunShop Los Santos - dostawa]\nU퓓j: /dostarczmats", 0x1ebb14FF, 1796.3542,-1146.5486,23.8765+0.5, 10.0);
 	return 1;
 }
 
@@ -2256,11 +2256,11 @@ IsASklepZBronia(playerid)
 		{
 		    return 1;
 		}
-		if(GetPlayerOrg(playerid) == 22 && IsPlayerInRangeOfPoint(playerid, 10, 707.3535,-503.1105,6.3217))
+		if(GetPlayerOrg(playerid) == 22 && (IsPlayerInRangeOfPoint(playerid, 10, 707.3535,-503.1105,6.3217) || GetVehicleModel(GetPlayerVehicleID(playerid)) == 428))
 		{
 		    return 1;
 		}
-		if(GetPlayerOrg(playerid) == 23 && IsPlayerInRangeOfPoint(playerid, 10, 1800.8372,-1160.9199,1023.8218))
+		if(GetPlayerOrg(playerid) == 23 && (IsPlayerInRangeOfPoint(playerid, 10, 1800.8372,-1160.9199,1023.8218) || GetVehicleModel(GetPlayerVehicleID(playerid)) == 428))
 		{
 		    return 1;
 		}
