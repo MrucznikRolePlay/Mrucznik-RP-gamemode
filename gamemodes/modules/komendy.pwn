@@ -31580,6 +31580,7 @@ CMD:materialy(playerid, params[])
 		    sendTipMessageEx(playerid,COLOR_GREY,"Nie jesteœ dilerem broni !");
 		    return 1;
 		}
+		if(IsASklepZBronia(playerid)) return sendTipMessageEx(playerid,COLOR_GREY,"Nie jesteœ dilerem broni w mafii/gangu!");
 		new x_nr[16];
 		new moneys=0;
 		if( sscanf(params, "s[16]D(10)", x_nr, moneys))
@@ -32312,7 +32313,7 @@ CMD:sprzedajbron(playerid, params[])
         }
         else
         {
-            SendClientMessage(playerid,COLOR_GREY,"   Nie jesteœ dilerem broni !");
+            SendClientMessage(playerid,COLOR_GREY,"   Nie jesteœ dilerem broni w mafii/gangu!");
             return 1;
         }
     }
@@ -32436,7 +32437,6 @@ CMD:dajbron(playerid, params[])
 	new weapon;
 	new ammo;
 	new price;
-	new familyprice;
 	new mats;
 	new giveplayerid;
 	new weaponid;
@@ -32483,7 +32483,6 @@ CMD:dajbron(playerid, params[])
 			mats = 250;
 			ammo = 200;
 			weapon = 22;
-			familyprice = price/10;
 			format(weaponname, sizeof(weaponname), "9mm");
 	   		if(PlayerInfo[playerid][pMats] < mats) return sendErrorMessage(playerid, "Masz za ma³o mats!");
 	   		if(kaska[playerid] < price) return sendErrorMessage(playerid, "Masz za ma³o pieniêdzy!");
@@ -32492,8 +32491,6 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
-        	//new Float:ffamilyprice = (1/10) * 100.0;
-			//new familyprice = ffamilyprice*price;
         	SejfR_Add(GetPlayerOrg(playerid), (price/10));
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
@@ -32512,7 +32509,6 @@ CMD:dajbron(playerid, params[])
 			mats = 300;
 			ammo = 50;
 			weapon = 25;
-			familyprice = price/10;
 			format(weaponname, sizeof(weaponname), "Shotgun");
 	   		if(PlayerInfo[playerid][pMats] < mats) return sendErrorMessage(playerid, "Masz za ma³o mats!");
 	   		if(kaska[playerid] < price) return sendErrorMessage(playerid, "Masz za ma³o pieniêdzy!");
@@ -32521,7 +32517,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo3] = ammo;
         	playerWeapons[giveplayerid][weaponLegal3] = 1;
         	DajKase(playerid, -price);
-        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
+			SejfR_Add(GetPlayerOrg(playerid), (price/10));
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -32548,8 +32544,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = (1/10)*price;
-        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
+        	SejfR_Add(GetPlayerOrg(playerid), (price/10));
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -32575,8 +32570,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = (1/10)*price;
-        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
+        	SejfR_Add(GetPlayerOrg(playerid), (price/10));
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -32602,8 +32596,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo4] = ammo;
         	playerWeapons[giveplayerid][weaponLegal4] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = (1/10)*price;
-        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
+        	SejfR_Add(GetPlayerOrg(playerid), (price/10));
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
