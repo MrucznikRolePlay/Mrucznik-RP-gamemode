@@ -2,10 +2,10 @@
 
 stock Load3DText()
 {
-    CreateDynamic3DTextLabel("[FABRYKA MATERIAＳW BAY SIDE]\nU퓓j: /kupmats", 0x1ebb14FF, -2286.8384,2284.0085,4.9726+0.5, 10.0);
+    CreateDynamic3DTextLabel("[FABRYKA MATERIAＳW BAY SIDE]\nU퓓j: /kupmats", 0x1ebb14FF, -2286.8384,2284.0085,4.9726+0.5, 30.0);
     CreateDynamicPickup(1279, 3, -2286.8384,2284.0085,4.9726, -1, -1, -1, 30.0);
-    CreateDynamic3DTextLabel("[GunShop Dillimore - dostawa]\nU퓓j: /dostarczmats", 0x1ebb14FF, 702.3633,-491.9083,16.3359+0.5, 10.0);
-    CreateDynamic3DTextLabel("[GunShop Los Santos - dostawa]\nU퓓j: /dostarczmats", 0x1ebb14FF, 1796.3542,-1146.5486,23.8765+0.5, 10.0);
+    CreateDynamic3DTextLabel("[GunShop Dillimore - dostawa]\nU퓓j: /dostarczmats", 0x1ebb14FF, 702.3633,-491.9083,16.3359+0.5, 30.0);
+    CreateDynamic3DTextLabel("[GunShop Los Santos - dostawa]\nU퓓j: /dostarczmats", 0x1ebb14FF, 1796.3542,-1146.5486,23.8765+0.5, 30.0);
 	return 1;
 }
 
