@@ -31593,7 +31593,51 @@ CMD:materialy(playerid, params[])
 		}
 		if(strcmp(x_nr,"get",true) == 0 || strcmp(x_nr,"wez",true) == 0)
 		{
-		    if(PlayerToPoint(3.0,playerid,597.1277,-1248.6479,18.2734))
+		    if(PlayerToPoint(3.0,playerid,249.5962,-157.1357,1.5703) && IsASklepZBronia(playerid))
+		    {
+		        if(MatsHolding[playerid] >= 10)
+		        {
+		            sendTipMessageEx(playerid, COLOR_GREY, "Nie masz miejsca na wiêcej paczek!");
+			        return 1;
+		        }
+
+		        if(moneys == 0)
+				{
+					sendTipMessage(playerid, "U¿yj /mats wez [iloœæ]");
+					return 1;
+				}
+
+				if(moneys < 1 || moneys > 10) { sendTipMessageEx(playerid, COLOR_GREY, "Iloœæ paczek od 1 do 10 !"); return 1; }
+				new price = moneys * 500;
+				if(kaska[playerid] > price)
+				{
+				    format(string, sizeof(string), "* Kupi³eœ %d paczek materia³ów za $%d jedŸ do fabryki materia³ów. Dok³adn¹ lokalizacjê musisz ustaliæ sam.", moneys, price);
+				    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				    ZabierzKase(playerid, price);
+				    MatsHolding[playerid] = moneys;
+				    if(GetPlayerOrg(playerid) == 22)
+				    {
+				    	SetPlayerCheckpoint(playerid, 702.3633,-491.9083, 30);
+					}
+					if(GetPlayerOrg(playerid) == 23)
+				    {
+				    	SetPlayerCheckpoint(playerid, 1796.3542,-1146.5486, 30);
+					}
+				    SetTimerEx("Matsowanie", 1*51000 ,0,"d",playerid);
+				    MatsGood[playerid] = 1;
+				}
+				else
+				{
+				    format(string, sizeof(string), "Nie masz $%d!", price);
+				    sendTipMessageEx(playerid, COLOR_GREY, string);
+				}
+		    }
+		    else
+		    {
+		        sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w fabryce materia³ów w Bay Side!");
+		        return 1;
+		    }
+		    if(PlayerToPoint(3.0,playerid,597.1277,-1248.6479,18.2734) && !IsASklepZBronia(playerid))
 		    {
 		        if(MatsHolding[playerid] >= 10)
 		        {
@@ -31635,8 +31679,47 @@ CMD:materialy(playerid, params[])
 		{
 		    new Float:ActorX, Float:ActorY, Float:ActorZ;
             GetActorPos(FabrykaMats::Actor, ActorX, ActorY, ActorZ);
-
-            if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ)) 
+            if(IsPlayerInCheckpoint(playerid) && IsASklepZBronia(playerid))
+		    {
+		        if(MatsHolding[playerid] > 0)
+		        {
+		            if(MatsGood[playerid] != 1)
+		            {
+			            new payout = (50)*(MatsHolding[playerid]);
+			            format(string, sizeof(string), "Dostarczy³eœ materia³y do sklepu! Otrzymujesz %d materia³ów z %d przewiezionych paczek.", payout, MatsHolding[playerid]);
+					    sendTipMessage(playerid, string);
+                        if(PlayerInfo[playerid][pMiserPerk] > 0) {
+                            new poziom = PlayerInfo[playerid][pMiserPerk];
+                            PlayerInfo[playerid][pMats] += poziom*30;
+                            format(string, sizeof(string), "Dziêki ulepszeniu MATSIARZ otrzymujesz dodatkowo %d materia³ów.", poziom*30);
+                            sendTipMessage(playerid, string);
+                        }
+			            PlayerInfo[playerid][pMats] += payout;
+			            MatsHolding[playerid] = 0;
+			            DisablePlayerCheckpoint(playerid);
+			        }
+			        else
+			        {
+			            GetPlayerName(playerid, sendername, sizeof(sendername));
+					    format(string, sizeof(string), "AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport", sendername);
+                        SendPunishMessage(string, playerid);
+						KickLog(string);
+			        	KickEx(playerid);
+			        	return 1;
+		        	}
+		        }
+		        else
+		        {
+		            sendTipMessageEx(playerid, COLOR_GREY, "Nie posiadasz paczek z materia³ami!");
+			        return 1;
+		        }
+		    }
+		    else
+		    {
+		        sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy sklepie z broni¹!");
+		        return 1;
+		    }
+            if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ) && !IsASklepZBronia(playerid))
 		    {
 		        if(MatsHolding[playerid] > 0)
 		        {
@@ -32328,24 +32411,24 @@ CMD:listabroni(playerid, params[])
     if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu lub nie jesteœ w sklepie z broni¹!");
     sendTipMessage(playerid, "{00FF00}[LISTA BRONI DLA GUNSHOPÓW]");
 	sendTipMessage(playerid, "Bronie 1 Skill:");
-   	sendTipMessage(playerid, "[ID: 1] 9mm | Ammo: 200 | Mats: 250 | Cena: 15k");
-   	sendTipMessage(playerid, "[ID: 2] Shotgun - ID: 2 | Ammo: 50 | Mats: 300 | Cena: 35k");
+   	sendTipMessage(playerid, "[ID: 1] 9mm | Ammo: 200 | Mats: 250 | Koszt: 10k");
+   	sendTipMessage(playerid, "[ID: 2] Shotgun - ID: 2 | Ammo: 50 | Mats: 300 | Koszt: 20k");
 	sendTipMessage(playerid, "Bronie 2 Skill:");
-	sendTipMessage(playerid, "[ID: 3] Silenced 9mm | Ammo: 100  | Mats: 350 | Cena: 20k");
-	sendTipMessage(playerid, "[ID: 4] Desert Eagle | Ammo: 100 | Mats: 500 | Cena: 40k");
-	sendTipMessage(playerid, "[ID: 5] MP5 | Ammo: 700 | Mats: 600 | Cena: 60k");
+	sendTipMessage(playerid, "[ID: 3] Silenced 9mm | Ammo: 100  | Mats: 350 | Koszt: 10k");
+	sendTipMessage(playerid, "[ID: 4] Desert Eagle | Ammo: 100 | Mats: 500 | Koszt: 25k");
+	sendTipMessage(playerid, "[ID: 5] MP5 | Ammo: 700 | Mats: 600 | Koszt: 30k");
 	sendTipMessage(playerid, "Bronie 3 Skill:");
-	sendTipMessage(playerid, "[ID: 6] AK-47 | Ammo: 550 | Mats: 850 | Cena: 180k");
-	sendTipMessage(playerid, "[ID: 7] M4 | Ammo: 550 | Mats: 1000 | Cena: 200k");
-	sendTipMessage(playerid, "[ID: 8] Rifle | Ammo: 50 | Mats: 850 | Cena: 100k");
+	sendTipMessage(playerid, "[ID: 6] AK-47 | Ammo: 550 | Mats: 850 | Koszt: 115k");
+	sendTipMessage(playerid, "[ID: 7] M4 | Ammo: 550 | Mats: 1000 | Koszt: 125k");
+	sendTipMessage(playerid, "[ID: 8] Rifle | Ammo: 50 | Mats: 850 | Koszt: 60k");
 	sendTipMessage(playerid, "Bronie 4 Skill:");
-	sendTipMessage(playerid, "[ID: 9] SPAS | Ammo: 100 | Mats: 1800 | Cena: 250k");
-	sendTipMessage(playerid, "[ID: 10] UZI | Ammo: 750 | Mats: 2000 | Cena: 200k");
-	sendTipMessage(playerid, "[ID: 11] Sniper | Ammo: 50 | Mats: 2500 | Cena: 280k");
-	sendTipMessage(playerid, "[ID: 12] Pi³a | Ammo: 1 | Mats: 2000 | Cena: 100k");
+	sendTipMessage(playerid, "[ID: 9] SPAS | Ammo: 100 | Mats: 1800 | Koszt: 150k");
+	sendTipMessage(playerid, "[ID: 10] UZI | Ammo: 750 | Mats: 2000 | Koszt: 125k");
+	sendTipMessage(playerid, "[ID: 11] Sniper | Ammo: 50 | Mats: 2500 | Koszt: 150k");
+	sendTipMessage(playerid, "[ID: 12] Pi³a | Ammo: 1 | Mats: 2000 | Koszt: 75k");
 	sendTipMessage(playerid, "Bronie 5 Skill:");
-	sendTipMessage(playerid, "[ID: 13] C4 | Ammo: 10 | Mats: 6000 | Cena: 350k");
-	sendTipMessage(playerid, "[ID: 14] Ogniomiotacz | Ammo: 200 | Mats: 10500 | Cena: 750k");
+	sendTipMessage(playerid, "[ID: 13] C4 | Ammo: 10 | Mats: 6000 | Koszt: 200k");
+	sendTipMessage(playerid, "[ID: 14] Ogniomiotacz | Ammo: 200 | Mats: 10500 | Koszt: 400k");
 	sendTipMessage(playerid, "{FF0000}UWAGA! 10 procent od ceny trafia do sejfu rodziny!");
 	return 1;
 }
@@ -32400,9 +32483,9 @@ CMD:dajbron(playerid, params[])
     if(PlayerInfo[giveplayerid][pGunLic] != 1) return sendErrorMessage(playerid, "Gracz nie posiada licencji na broñ!");
   	if(ProxDetectorS(5.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 	{
-		if(weaponid == 1 && skill >= 1)//[ID: 1] 9mm | Ammo: 200 | Mats: 250 | Cena: 15k
+		if(weaponid == 1 && skill >= 1)//[ID: 1] 9mm | Ammo: 200 | Mats: 250 | Koszt: 10k
 		{
-			price = 15000;
+			price = 10000;
 			mats = 250;
 			ammo = 200;
 			weapon = 22;
@@ -32414,6 +32497,8 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
+        	new familyprice = 0.1*price;
+        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -32425,9 +32510,9 @@ CMD:dajbron(playerid, params[])
             format(string, sizeof(string), "Gracz %s (GunShop: %s) sprzedal bron (ID:[%d][%s], AMMO:[%d]) graczowi %s.", GetNick(playerid), familytext, weaponid, weaponname, ammo, GetNick(giveplayerid));
 			WeapICLog(string);
 		}
-		if(weaponid == 2 && skill >= 1)//[ID: 2] Shotgun - ID: 2 | Ammo: 50 | Mats: 300 | Cena: 35k
+		if(weaponid == 2 && skill >= 1)//[ID: 2] Shotgun - ID: 2 | Ammo: 50 | Mats: 300 | Koszt: 20k
 		{
-			price = 35000;
+			price = 20000;
 			mats = 300;
 			ammo = 50;
 			weapon = 25;
@@ -32439,6 +32524,8 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo3] = ammo;
         	playerWeapons[giveplayerid][weaponLegal3] = 1;
         	DajKase(playerid, -price);
+        	new familyprice = 0.1*price;
+        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -32451,9 +32538,9 @@ CMD:dajbron(playerid, params[])
 			WeapICLog(string);
 		}
 		//2 Skill
-		if(weaponid == 3 && skill >= 2)//[ID: 3] Silenced 9mm | Ammo: 100  | Mats: 350 | Cena: 20k
+		if(weaponid == 3 && skill >= 2)//[ID: 3] Silenced 9mm | Ammo: 100  | Mats: 350 | Koszt: 10k
 		{
-			price = 20000;
+			price = 10000;
 			mats = 350;
 			ammo = 100;
 			weapon = 23;
@@ -32465,6 +32552,8 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
+        	new familyprice = 0.1*price;
+        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -32476,9 +32565,9 @@ CMD:dajbron(playerid, params[])
             format(string, sizeof(string), "Gracz %s (GunShop: %s) sprzedal bron (ID:[%d][%s], AMMO:[%d]) graczowi %s.", GetNick(playerid), familytext, weaponid, weaponname, ammo, GetNick(giveplayerid));
 			WeapICLog(string);
 		}
-		if(weaponid == 4 && skill >= 2)//[ID: 4] Desert Eagle | Ammo: 100 | Mats: 500 | Cena: 40k
+		if(weaponid == 4 && skill >= 2)//[ID: 4] Desert Eagle | Ammo: 100 | Mats: 500 | Koszt: 25k
 		{
-			price = 40000;
+			price = 25000;
 			mats = 500;
 			ammo = 100;
 			weapon = 24;
@@ -32490,6 +32579,8 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
+        	new familyprice = 0.1*price;
+        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -32501,9 +32592,9 @@ CMD:dajbron(playerid, params[])
             format(string, sizeof(string), "Gracz %s (GunShop: %s) sprzedal bron (ID:[%d][%s], AMMO:[%d]) graczowi %s.", GetNick(playerid), familytext, weaponid, weaponname, ammo, GetNick(giveplayerid));
 			WeapICLog(string);
 		}
-		if(weaponid == 5 && skill >= 2)//[ID: 5] MP5 | Ammo: 700 | Mats: 600 | Cena: 60k
+		if(weaponid == 5 && skill >= 2)//[ID: 5] MP5 | Ammo: 700 | Mats: 600 | Koszt: 30k
 		{
-			price = 60000;
+			price = 30000;
 			mats = 600;
 			ammo = 700;
 			weapon = 29;
@@ -32515,6 +32606,8 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo4] = ammo;
         	playerWeapons[giveplayerid][weaponLegal4] = 1;
         	DajKase(playerid, -price);
+        	new familyprice = 0.1*price;
+        	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
