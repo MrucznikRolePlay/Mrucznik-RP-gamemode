@@ -8504,7 +8504,7 @@ CMD:setskin(playerid, params[])
 				}
 			}
 		}
-		else if (PlayerInfo[playerid][pAdmin] >= 3 && para1 == playerid || IsATechnik(playerid) && para1 == playerid)
+		else if (PlayerInfo[playerid][pAdmin] >= 3 && para1 == playerid)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -8628,7 +8628,7 @@ CMD:zmienwl(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setwl [playerid/CzêœæNicku] [iloœæ wl]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 100 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 100)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -8903,7 +8903,7 @@ CMD:zmienprace(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setjob [playerid/CzêœæNicku] [id pracy]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5000)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -9078,7 +9078,7 @@ CMD:zmienwiek(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5000)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -9163,7 +9163,7 @@ CMD:choroba(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 100 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 100)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -13706,7 +13706,7 @@ CMD:stworzdom(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+	    if(PlayerInfo[playerid][pAdmin] >= 5000)
 		{
    			new interior, kesz;
 			if( sscanf(params, "dd", interior, kesz))
@@ -13741,7 +13741,7 @@ CMD:stworzdom(playerid, params[])
 
 CMD:domint(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{
 		new dld, interior;
 		if( sscanf(params, "dd", dld, interior))
@@ -13834,7 +13834,7 @@ CMD:deletedom(playerid, params[])
 
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid) || IsATechnik(playerid))
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid))
 		{
 		    new kategoria;
 			if( sscanf(params, "d", kategoria))
@@ -14172,7 +14172,7 @@ CMD:gotobiz(playerid, params[])
 		{
 		    if(plo <= 100)
 		    {
-				if(PlayerInfo[playerid][pAdmin] >= 1 || IsATechnik(playerid))
+				if(PlayerInfo[playerid][pAdmin] >= 1)
 				{
 				    if(BizData[plo][eBizWejX] == 0.0 && BizData[plo][eBizWejY] == 0.0 && BizData[plo][eBizWejZ] == 0.0) return _MruAdmin(playerid, sprintf("Nie mo¿na siê teleportowaæ. Biznes %s (ID %d) nie jest aktywny.", BizData[plo][eBizName], plo));
 					SetPlayerPosEx(playerid, BizData[plo][eBizWejX],BizData[plo][eBizWejY],BizData[plo][eBizWejZ]);
@@ -14191,7 +14191,7 @@ CMD:gotobiz(playerid, params[])
 }
 CMD:dajbiznes(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001 || IsATechnik(playerid))
+	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
 	{
 		new gracz, wartosc;
 		if(sscanf(params, "k<fix>d", gracz, wartosc)) return sendTipMessage(playerid, "U¿yj /dajbiznes [playerid/CzêœæNicku] [ID Biznesu]");
@@ -14422,7 +14422,7 @@ CMD:resetsejfhasla(playerid)
 
 CMD:zapiszdomy(playerid)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+	if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{
 		ZapiszDomy();
 		SendClientMessage(playerid, COLOR_WHITE, "Wszystkie domy zosta³y zapisane");
@@ -14432,7 +14432,7 @@ CMD:zapiszdomy(playerid)
 
 CMD:zapiszkonta(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{
         foreach(Player, i) MruMySQL_SaveAccount(i);
     	SendClientMessageToAll(COLOR_WHITE, "Wszystkie konta zosta³y zapisane");
@@ -16104,7 +16104,7 @@ CMD:dn(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pAdmin] == 7|| IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pAdmin] == 7)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
@@ -16123,7 +16123,7 @@ CMD:up(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1|| IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
@@ -25339,7 +25339,7 @@ CMD:makemember(playerid, params[])
 		}
 
 		if(level > 17 || level < 0) { SendClientMessage(playerid, COLOR_GREY, "Od 0 do 17 !"); return 1; }
-		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -25468,7 +25468,7 @@ CMD:dajrange(playerid, params[])
 
 		if(level > 9 || level < 0)
 		{sendTipMessageEx(playerid, COLOR_GREY, "Numer rangi od 0 do 9!"); return 1; }
-		if (PlayerInfo[playerid][pLider] >= 1 || PlayerInfo[playerid][pAdmin] >= 1000 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pLider] >= 1 || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -26513,7 +26513,7 @@ CMD:zmienhp(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pAdmin] == 7 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pAdmin] == 7)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -26557,7 +26557,7 @@ CMD:setarmor(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5000)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -26621,7 +26621,7 @@ CMD:fixveh(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7 || IsATechnik(playerid))
+        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7)
 		{
 		    noAccessMessage(playerid);
 		    return 1;
@@ -27506,7 +27506,7 @@ CMD:zamroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -27551,7 +27551,7 @@ CMD:odmroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -30773,7 +30773,7 @@ CMD:restart(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5000)
 		{
 			new string[128];
 			new playerNick[MAX_PLAYER_NAME];
@@ -30803,7 +30803,7 @@ CMD:wczytajskrypt(playerid, params[])
 			sendTipMessage(playerid, "/wczytajskrypt [nazwa fs]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsATechnik(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5000)
 		{
 			format(string, sizeof(string), "loadfs %s", params);
 			SendRconCommand(string);
@@ -38848,7 +38848,7 @@ CMD:lock(playerid)
 
 CMD:rapidfly(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5 || IsATechnik(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 5)
     {
         new typ;
         sscanf(p, "D(0)", typ);
@@ -39053,7 +39053,7 @@ CMD:zrobkolejke(playerid)
 
 CMD:gotoadmin(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1 || !IsATechnik(playerid)) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     SetPlayerVirtualWorld(playerid, 5000);
 	SetPlayerPosEx(playerid, 3524.550292, -236.021621, 35.619190);
 	
