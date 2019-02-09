@@ -16515,6 +16515,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			
 			if(money >= 1 && money <= PlayerInfo[playerid][pAccount])//Zabezpieczenie 
 			{
+				if(PlayerInfo[giveplayerid][pAccount]+money >=100000000)//Zabezpieczenie
+				{
+					sendTipMessage(playerid, "Osoba do której próbujesz przelaæ pieni¹dze ma pe³ne konto!"); 
+					return 1;
+				}
 				//Czynnoœci:
 				PlayerInfo[playerid][pAccount] -= money;
 				PlayerInfo[giveplayerid][pAccount] += money;

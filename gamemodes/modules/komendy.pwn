@@ -1556,6 +1556,12 @@ CMD:wiretransfer(playerid, params[]) return cmd_przelew(playerid, params);
 CMD:przelej(playerid, params[]) return cmd_przelew(playerid, params);
 CMD:przelew(playerid, params[])
 {
+
+	if(IsPlayerConnected(playerid))
+	{
+		sendTipMessage(playerid, "U¿yj /kontobankowe [Skrót: /kb]");
+	}
+/*=============[BLOKADA - WYKORZYSTANE W /KB]==============
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
@@ -1636,7 +1642,7 @@ CMD:przelew(playerid, params[])
 				sendErrorMessage(playerid, string);
 			}
 		}
-	}
+	}*/
 	return 1;
 }
 
@@ -19638,6 +19644,11 @@ CMD:wplac(playerid, params[])
 				sendTipMessage(playerid, "Nie masz tyle");
 				return 1;
 			}
+			if(PlayerInfo[playerid][pAccount]+cashdeposit >=100000000)
+			{
+				sendTipMessage(playerid, "Maksymalnie w banku mo¿esz trzymaæ 100 milionów!"); 
+				return 1;
+			}
 			DajKase(playerid,-cashdeposit);
             //new poprowizji = $l * (1-$p*.01);
 			new curfunds = PlayerInfo[playerid][pAccount];
@@ -19669,6 +19680,7 @@ CMD:balance(playerid) return cmd_balans(playerid);
 CMD:stan(playerid) return cmd_balans(playerid);
 CMD:balans(playerid)
 {
+/*
 	new string[64];
 
     if(IsPlayerConnected(playerid))
@@ -19683,6 +19695,10 @@ CMD:balans(playerid)
 			sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie !");
             return 1;
         }
+	}*/
+	if(IsPlayerConnected(playerid))
+	{
+		sendTipMessage(playerid, "U¿yj /kontobankowe (W skrócie /kb)"); 
 	}
 	return 1;
 }
