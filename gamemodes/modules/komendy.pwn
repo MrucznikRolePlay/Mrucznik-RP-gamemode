@@ -21681,8 +21681,8 @@ CMD:wejdz(playerid)
 			{
 				if(Kredyty[playerid] >= 200)
 				{
-					SetPlayerPosEx(playerid, 566.7726,-2087.6841,2.7300); // basen œrodek
-					GameTextForPlayer(playerid, "~w~Witamy na ~b~Basenie", 5000, 1);
+					SetPlayerPosEx(playerid, 1213.3364,-1807.0619,70.0682); // basen œrodek
+					GameTextForPlayer(playerid, "~w~Szatnie~n~ ~r~by Simeone & Sergio", 5000, 1);
 					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Aby siê przebraæ podejdŸ do szafek i wpisz /przebierz");
 					SetPlayerVirtualWorld(playerid, 43);
 					TogglePlayerControllable(playerid, 0);
@@ -21709,7 +21709,7 @@ CMD:wejdz(playerid)
 				return 1;
 			}
         }
-        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 570.5168,-2095.3618,2.6152)) // sauny wejœcie
+        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1213.28540, -1790.80505, 70.25735)) // sauny wejœcie
         {
             if(Kredyty[playerid] >= 75)
             {
@@ -22753,7 +22753,7 @@ CMD:wyjdz(playerid)
 		    SetPlayerInterior(playerid, 0);
 		}
 		//micha³owe syfy
-		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 566.7726,-2087.6841,2.7300)) // basen (g³ówny )wyjœcie
+		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1213.3364,-1807.0619,70.0682)) // Szatnie --> Recepcja
 		{
 		    SetPlayerPosEx(playerid, 1205.2277,-1765.7360,13.7262); // basen (g³ówny )recepcja
 		    TogglePlayerControllable(playerid, 10);
@@ -22775,7 +22775,7 @@ CMD:wyjdz(playerid)
 		}
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1274.3020,-1756.0800,48.5812)) // sauna srodek
 		{
-		    SetPlayerPosEx(playerid, 570.5168,-2095.3618,2.6152 ); // sauna wejscie
+		    SetPlayerPosEx(playerid, 1213.28540, -1790.80505, 70.25735); // sauna wejscie
     		SetPlayerVirtualWorld(playerid, 43);
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
@@ -29562,7 +29562,7 @@ CMD:reflektor(playerid)
 
 CMD:przebierz(playerid)
 {
-    if(IsPlayerInRangeOfPoint(playerid, 1.5, 572.6487,-2079.5613,2.8515) || IsPlayerInRangeOfPoint(playerid, 1.5, 578.3765,-2077.0974,2.8884) || IsPlayerInRangeOfPoint(playerid, 1.5, 578.8330,-2082.5828,2.8064))
+    if(IsPlayerInRangeOfPoint(playerid, 2.5, 1212.3590,-1796.6627,70.0682) || IsPlayerInRangeOfPoint(playerid, 2.5, 1211.8776,-1803.4086,70.0682) || IsPlayerInRangeOfPoint(playerid, 2.5, 1222.4368,-1803.4390,70.0682))
     {
         if(Kredyty[playerid] >= 5)
         {
