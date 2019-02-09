@@ -32324,7 +32324,7 @@ CMD:kupmats(playerid, params[])
 	if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu/w GunShopie/w pojeŸdzie opancerzonym!");
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerToPoint(3.0,playerid,249.5962,-157.1357,1.5703) && IsASklepZBronia(playerid))
+		if(PlayerToPoint(3.0,playerid,-2286.8384,2284.0085,4.9726))
   		{
 	        if(MatsHolding[playerid] >= 10) return sendTipMessageEx(playerid, COLOR_GREY, "W aucie nie ma miejsca na wiêcej paczek!");
 			if(kaska[playerid] < 5000) return sendTipMessageEx(playerid, COLOR_GREY, "Potrzebujesz 5000$!");
@@ -32333,11 +32333,11 @@ CMD:kupmats(playerid, params[])
 			MatsHolding[playerid] = 10;
 		    if(GetPlayerOrg(playerid) == 22)
 		    {
-		    	SetPlayerCheckpoint(playerid, 702.3633,-491.9083,16.3359, 30);
+		    	SetPlayerCheckpoint(playerid, 702.3633,-491.9083,16.3359, 10);
 			}
 			if(GetPlayerOrg(playerid) == 23)
 		    {
-		    	SetPlayerCheckpoint(playerid, 1796.3542,-1146.5486,23.8765, 30);
+		    	SetPlayerCheckpoint(playerid, 1796.3542,-1146.5486,23.8765, 10);
 			}
 		    SetTimerEx("Matsowanie", 1*51000 ,0,"d",playerid);
 		    MatsGood[playerid] = 1;
@@ -32357,7 +32357,7 @@ CMD:dostarczmats(playerid, params[])
 	if(!IsASklepZBronia(playerid)) return sendErrorMessage(playerid, "Nie jesteœ pracownikiem GunShopu/w GunShopie/w pojeŸdzie opancerzonym!");
     if(IsPlayerConnected(playerid))
     {
-		if(IsPlayerInCheckpoint(playerid) && IsASklepZBronia(playerid))
+		if((PlayerToPoint(5.0,playerid,702.3633,-491.9083,16.3359) && GetPlayerOrg(playerid) == 22) || (PlayerToPoint(5.0,playerid,1796.3542,-1146.5486,23.8765) && GetPlayerOrg(playerid) == 22))
 	    {
 	        if(MatsHolding[playerid] > 0)
 	        {
