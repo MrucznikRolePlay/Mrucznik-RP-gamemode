@@ -32333,11 +32333,11 @@ CMD:kupmats(playerid, params[])
 			MatsHolding[playerid] = 10;
 		    if(GetPlayerOrg(playerid) == 22)
 		    {
-		    	SetPlayerCheckpoint(playerid, 702.3633,-491.9083, 30);
+		    	SetPlayerCheckpoint(playerid, 702.3633,-491.9083,16.3359, 30);
 			}
 			if(GetPlayerOrg(playerid) == 23)
 		    {
-		    	SetPlayerCheckpoint(playerid, 1796.3542,-1146.5486, 30);
+		    	SetPlayerCheckpoint(playerid, 1796.3542,-1146.5486,23.8765, 30);
 			}
 		    SetTimerEx("Matsowanie", 1*51000 ,0,"d",playerid);
 		    MatsGood[playerid] = 1;
@@ -32490,7 +32490,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = 0.1*price;
+        	new familyprice = (1/10)*price;
         	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
@@ -32517,7 +32517,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo3] = ammo;
         	playerWeapons[giveplayerid][weaponLegal3] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = 0.1*price;
+        	new familyprice = (1/10)*price;
         	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
@@ -32545,7 +32545,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = 0.1*price;
+        	new familyprice = (1/10)*price;
         	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
@@ -32572,7 +32572,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo2] = ammo;
         	playerWeapons[giveplayerid][weaponLegal2] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = 0.1*price;
+        	new familyprice = (1/10)*price;
         	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
@@ -32599,7 +32599,7 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo4] = ammo;
         	playerWeapons[giveplayerid][weaponLegal4] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = 0.1*price;
+        	new familyprice = (1/10)*price;
         	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
