@@ -411,6 +411,14 @@ CMD:edytujupr(playerid, params[])
     else strcat(str, "{FF0000}-{FFFFFF} Edycja rang\n");
     if(Uprawnienia(id, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ\n");
     else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    //
+	if(Uprawnienia(id, ACCESS_BIZ)) strcat(str, "{00FF00}+{FFFFFF} Edycja biznesów\n");
+    else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    if(Uprawnienia(id, ACCESS_HOUSE)) strcat(str, "{00FF00}+{FFFFFF} Edycja domów\n");
+    else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    if(Uprawnienia(id, ACCESS_TECHNIK)) strcat(str, "{00FF00}+{FFFFFF} Uprawnienia technika\n");
+    else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    //
     if(Uprawnienia(id, ACCESS_OWNER)) strcat(str, "{00FF00}OWNER RIGHT'S");
     valstr(params, id);
     SetPVarString(playerid, "perm-id", params);
@@ -13755,7 +13763,7 @@ CMD:gotobiz(playerid, params[])
 }
 CMD:dajbiznes(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
+	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001 || Uprawnienia(playerid, ACCESS_BIZ))
 	{
 		new gracz, wartosc;
 		if(sscanf(params, "k<fix>d", gracz, wartosc)) return sendTipMessage(playerid, "U¿yj /dajbiznes [playerid/CzêœæNicku] [ID Biznesu]");
@@ -31783,6 +31791,7 @@ CMD:sprzedajbron(playerid, params[])
                 SendClientMessage(playerid,COLOR_GREY,"   Poczekaj 10 sekund zanim sprzedasz temu graczowi nastêpn¹ broñ !");
                 return 1;
             }
+            if(IsACop(giveplayerid) || IsABOR(giveplayerid)) return sendErrorMessage(playerid, "Nie mo¿esz sprzedaæ broni s³u¿bom porz¹dkowym.");
             if (IsPlayerConnected(giveplayerid))
             {
                 if(PlayerInfo[giveplayerid][pLevel] >= 2)

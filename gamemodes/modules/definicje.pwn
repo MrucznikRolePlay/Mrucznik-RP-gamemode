@@ -222,8 +222,10 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define ACCESS_EDITRANG     0b10000000000
 #define ACCESS_GIVEHALF     0b100000000000
 #define ACCESS_DELETEORG    0b1000000000000 //13 bit
-
-#define ACCESS_OWNER        0b1111111111111
+#define ACCESS_BIZ          0b10000000000000
+#define ACCESS_HOUSE        0b100000000000000
+#define ACCESS_TECHNIK      0b1000000000000000//16
+#define ACCESS_OWNER        0b1111111111111111
 
 //------------------------------------------------------------------------------
 //                              DIALOGI

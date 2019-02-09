@@ -710,6 +710,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 11: ACCESS[id] ^= ACCESS_EDITCAR;
             case 12: ACCESS[id] ^= ACCESS_EDITRANG;
             case 13: ACCESS[id] ^= ACCESS_EDITPERM;
+            case 14: ACCESS[id] ^= ACCESS_BIZ;
+            case 15: ACCESS[id] ^= ACCESS_HOUSE;
+            case 16: ACCESS[id] ^= ACCESS_TECHNIK;
         }
         format(str, 128, "(PERM) %s edytowa³ Twoje uprawnienia (/uprawnienia)", GetNick(playerid));
         SendClientMessage(id, 0x05CA8CFF, str);
@@ -2111,6 +2114,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 							PlayerInfo[playerid][pLocal] = 255;
 							GameTextForPlayer(playerid, "~p~by Kotek Mrucznika", 5000, 1);
+							DajKase(playerid, 10);
 						}
 						else
 						{
