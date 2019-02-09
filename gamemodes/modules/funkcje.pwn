@@ -5138,6 +5138,7 @@ stock orgInvitePlayer(playerid, orguid)
 stock orgUnInvitePlayer(playerid)
 {
     new orgid = gPlayerOrg[playerid];
+    if(gPlayerOrg[playerid] == 22 || gPlayerOrg[playerid] == 23) return PlayerInfo[playerid][pMats] = 0;
     PlayerInfo[playerid][pOrg] = 0;
     PlayerInfo[playerid][pSkin] = 0;
     gPlayerOrg[playerid] = 0xFFFF;
