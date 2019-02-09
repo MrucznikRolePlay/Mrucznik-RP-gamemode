@@ -31745,7 +31745,7 @@ CMD:sprzedajbron(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pJob] == 9)
+        if(PlayerInfo[playerid][pJob] == 9 && !IsASklepZBronia(playerid))
         {
             new umiejetnosc;
             new skillz;
@@ -31776,7 +31776,7 @@ CMD:sprzedajbron(playerid, params[])
             {
                 if(PlayerInfo[giveplayerid][pLevel] >= 2)
                 {
-                    if(PlayerInfo[giveplayerid][pGunLic] == 1 || IsAPrzestepca(giveplayerid) || IsACop(giveplayerid) || IsABOR(giveplayerid) || strcmp(x_weapon,"pistolety",true) == 0)
+                    if(PlayerInfo[giveplayerid][pGunLic] == 1 || IsAPrzestepca(giveplayerid)/* || IsACop(giveplayerid) || IsABOR(giveplayerid)*/ || strcmp(x_weapon,"pistolety",true) == 0)
                     {
                         if(giveplayerid != INVALID_PLAYER_ID)
                         {
@@ -31786,15 +31786,15 @@ CMD:sprzedajbron(playerid, params[])
                                 SendClientMessage(playerid, COLOR_WHITE, "*** Sprzedaj broñ ***");
                                 SendClientMessage(playerid, COLOR_GRAD1, "U¿yj: /sprzedajbron [ID gracza] [nazwa broni]");
                                 SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - GANG]----");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150)");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400)");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: UZI(1750)");
-                                SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - MAFIA / SKLEP Z BRONI¥]----");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(150) shotgun(250)");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(250) eagle(400) mp5(450)");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 3 Skill: ak47(650) m4(700) rifle(650)");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: spas12(1500) UZI(1750) sniper(2000) pila(1000)");
-                                SendClientMessage(playerid, COLOR_GREY, "Bronie 5 Skill: c4(5000) ogniomiotacz(10000)");
+                                SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(250)");
+                                SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(350) eagle(500)");
+                                SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: UZI(2000)");
+                                SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - MAFIA]----");
+                                SendClientMessage(playerid, COLOR_GREY, "Bronie 1 Skill: pistolety(250) shotgun(300) katana(100)");
+                                SendClientMessage(playerid, COLOR_GREY, "Bronie 2 Skill: sdpistol(350) eagle(500) mp5(600)");
+                                SendClientMessage(playerid, COLOR_GREY, "Bronie 3 Skill: ak47(850) m4(1000) rifle(850)");
+                                SendClientMessage(playerid, COLOR_GREY, "Bronie 4 Skill: spas12(1800) UZI(2000) sniper(2500) pila(2000)");
+                                SendClientMessage(playerid, COLOR_GREY, "Bronie 5 Skill: c4(6000) ogniomiotacz(10500)");
                                 return 1;
                             }
                         }
@@ -31821,7 +31821,7 @@ CMD:sprzedajbron(playerid, params[])
                         new slot;
                         if(strcmp(x_weapon,"katana",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 99 && IsASklepZBronia(playerid))
+                            if(PlayerInfo[playerid][pMats] > 99 && IsAMafia(playerid))
                             {
                                 weapon[playerid] = 8;
                                 price[playerid] = 100;
@@ -31837,10 +31837,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"sdpistol",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 249)
+                            if(PlayerInfo[playerid][pMats] > 349)
                             {
                                 weapon[playerid] = 23;
-                                price[playerid] = 250;
+                                price[playerid] = 350;
                                 ammo[playerid] = 114;
                                 umiejetnosc = 2;
                                 slot = 3;
@@ -31853,10 +31853,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"pila",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 1999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 9;
-                                price[playerid] = 1000;
+                                price[playerid] = 2000;
                                 ammo[playerid] = 1;
                                 umiejetnosc = 4;
                                 slot = 2;
@@ -31869,10 +31869,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"pistolety",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 149)
+                            if(PlayerInfo[playerid][pMats] > 249)
                             {
                                 weapon[playerid] = 22;
-                                price[playerid] = 150;
+                                price[playerid] = 250;
                                 ammo[playerid] = 200;
                                 umiejetnosc = 1;
                                 slot = 3;
@@ -31885,10 +31885,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"eagle",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 399)
+                            if(PlayerInfo[playerid][pMats] > 499)
                             {
                                 weapon[playerid] = 24;
-                                price[playerid] = 400;
+                                price[playerid] = 500;
                                 ammo[playerid] = 107;
                                 umiejetnosc = 2;
                                 slot = 3;
@@ -31901,10 +31901,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"mp5",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 449 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 599 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 29;
-                                price[playerid] = 450;
+                                price[playerid] = 600;
                                 ammo[playerid] = 700;
                                 umiejetnosc = 2;
                                 slot = 5;
@@ -31917,10 +31917,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"uzi",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 1749 && (IsAGang(playerid) || IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 1999 && (IsAGang(playerid) || IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 28;
-                                price[playerid] = 1750;
+                                price[playerid] = 2000;
                                 ammo[playerid] = 750;
                                 umiejetnosc = 4;
                                 slot = 5;
@@ -31933,10 +31933,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"shotgun",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 249 && (IsASklepZBronia(playerid) || IsAMafia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 299 && (IsASklepZBronia(playerid) || IsAMafia(playerid)))
                             {
                                 weapon[playerid] = 25;
-                                price[playerid] = 250;
+                                price[playerid] = 300;
                                 ammo[playerid] = 50;
                                 umiejetnosc = 1;
                                 slot = 4;
@@ -31949,10 +31949,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"spas12",true) == 0)//
                         {
-                            if(PlayerInfo[playerid][pMats] > 1499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 1799 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 27;
-                                price[playerid] = 1500;
+                                price[playerid] = 1800;
                                 ammo[playerid] = 57;
                                 umiejetnosc = 4;
                                 slot = 4;
@@ -31965,10 +31965,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"ak47",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 649 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 849 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 30;
-                                price[playerid] = 650;
+                                price[playerid] = 850;
                                 ammo[playerid] = 550;
                                 umiejetnosc = 3;
                                 slot = 6;
@@ -31981,10 +31981,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"m4",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 699 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 31;
-                                price[playerid] = 700;
+                                price[playerid] = 1000;
                                 ammo[playerid] = 550;
                                 umiejetnosc = 3;
                                 slot = 6;
@@ -31997,10 +31997,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"rifle",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 649 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 849 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 33;
-                                price[playerid] = 650;
+                                price[playerid] = 850;
                                 ammo[playerid] = 51;
                                 umiejetnosc = 3;
                                 slot = 7;
@@ -32013,10 +32013,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"sniper",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 1999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 2499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 34;
-                                price[playerid] = 2000;
+                                price[playerid] = 2500;
                                 ammo[playerid] = 51;
                                 umiejetnosc = 4;
                                 slot = 7;
@@ -32029,10 +32029,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"c4",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 2499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 5999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 39;
-                                price[playerid] = 2500;
+                                price[playerid] = 6000;
                                 ammo[playerid] = 10;
                                 umiejetnosc = 5;
                                 slot = 9;
@@ -32045,10 +32045,10 @@ CMD:sprzedajbron(playerid, params[])
                         }
                         else if(strcmp(x_weapon,"ogniomiotacz",true) == 0)
                         {
-                            if(PlayerInfo[playerid][pMats] > 9999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
+                            if(PlayerInfo[playerid][pMats] > 10499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 37;
-                                price[playerid] = 10000;
+                                price[playerid] = 10500;
                                 ammo[playerid] = 200;
                                 umiejetnosc = 5;
                                 slot = 8;
@@ -32176,7 +32176,7 @@ CMD:sprzedajbron(playerid, params[])
                                 {
                                     GetPlayerWeaponData(giveplayerid, i, weapons[i][0], weapons[i][1]);
                                 }
-                                if(IsAMafia(playerid)) {
+                                if(!IsASklepZBronia(playerid)) {
                                     switch(slot) {
                                         case 2: {
                                             //if(weapons[slot-1][0] == 0) {
@@ -32436,6 +32436,7 @@ CMD:dajbron(playerid, params[])
 	new weapon;
 	new ammo;
 	new price;
+	new familyprice;
 	new mats;
 	new giveplayerid;
 	new weaponid;
@@ -32482,6 +32483,7 @@ CMD:dajbron(playerid, params[])
 			mats = 250;
 			ammo = 200;
 			weapon = 22;
+			familyprice = price/10;
 			format(weaponname, sizeof(weaponname), "9mm");
 	   		if(PlayerInfo[playerid][pMats] < mats) return sendErrorMessage(playerid, "Masz za ma³o mats!");
 	   		if(kaska[playerid] < price) return sendErrorMessage(playerid, "Masz za ma³o pieniêdzy!");
@@ -32492,7 +32494,7 @@ CMD:dajbron(playerid, params[])
         	DajKase(playerid, -price);
         	//new Float:ffamilyprice = (1/10) * 100.0;
 			//new familyprice = ffamilyprice*price;
-        	SejfR_Add(GetPlayerOrg(playerid), 1000);
+        	SejfR_Add(GetPlayerOrg(playerid), (price/10));
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
             SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -32510,6 +32512,7 @@ CMD:dajbron(playerid, params[])
 			mats = 300;
 			ammo = 50;
 			weapon = 25;
+			familyprice = price/10;
 			format(weaponname, sizeof(weaponname), "Shotgun");
 	   		if(PlayerInfo[playerid][pMats] < mats) return sendErrorMessage(playerid, "Masz za ma³o mats!");
 	   		if(kaska[playerid] < price) return sendErrorMessage(playerid, "Masz za ma³o pieniêdzy!");
@@ -32518,7 +32521,6 @@ CMD:dajbron(playerid, params[])
         	PlayerInfo[giveplayerid][pAmmo3] = ammo;
         	playerWeapons[giveplayerid][weaponLegal3] = 1;
         	DajKase(playerid, -price);
-        	new familyprice = (1/10)*price;
         	SejfR_Add(GetPlayerOrg(playerid), familyprice);
         	//
         	format(string, sizeof(string), "Gracz %s otrzyma³: %s z ammo: %d | Koszt: %d mats i %d $.", GetNick(giveplayerid), weaponname,ammo,mats,price);
