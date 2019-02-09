@@ -8957,7 +8957,7 @@ CMD:zmiendom(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -9003,7 +9003,7 @@ CMD:zmiendomk(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || Uprawnienia(playerid, ACCESS_HOUSE))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -9092,7 +9092,7 @@ CMD:sprawdzdom(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 5 || IsASkuban(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5 || Uprawnienia(playerid, ACCESS_HOUSE))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
