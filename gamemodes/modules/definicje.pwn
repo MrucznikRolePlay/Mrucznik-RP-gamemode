@@ -46,7 +46,7 @@
 #define OSTATNIE_ZGLOSZENIASASP 10
 
 //BIZNESY
-#define MAX_BIZNES 74
+#define MAX_BIZNES 75
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
 #define MRP_PREM_HOURS    15      //Ilosc godzin potrzebnych do przegrania
