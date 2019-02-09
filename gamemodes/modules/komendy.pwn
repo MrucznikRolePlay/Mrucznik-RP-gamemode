@@ -2268,7 +2268,7 @@ CMD:kajdanki(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(IsACop(playerid) || (IsABOR(playerid) && PlayerInfo[playerid][pRank] > 0))
+		if(IsACop(playerid) || (IsABOR(playerid) && PlayerInfo[playerid][pRank] >= 2))
 		{
 			if(uzytekajdanki[playerid] != 1)
 			{
@@ -2300,7 +2300,7 @@ CMD:kajdanki(playerid, params[])
 									{
 										if(GUIExit[playerid] == 0 && GUIExit[giveplayerid] == 0)
 										{
-											new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
+											new string[128];
 											if(IsACop(giveplayerid) && OnDuty[giveplayerid] == 1)
 											{
 												sendErrorMessage(playerid, "Nie mo¿esz skuæ policjanta na s³u¿bie!");
@@ -2313,25 +2313,25 @@ CMD:kajdanki(playerid, params[])
 											}
 											if(PlayerInfo[giveplayerid][pBW] >= 1)
 											{
-												GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-												GetPlayerName(playerid, sendername, sizeof(sendername));
-												format(string, sizeof(string), "* %s sku³  %s.", giveplayer, sendername);
+												//Wiadomoœci
+												format(string, sizeof(string), "* %s docisn¹³ do ziemi nieprzytomnego %s i sku³ go.", GetNick(playerid, true), GetNick(giveplayerid, true));
 												ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-												format(string, sizeof(string), "Sku³eœ %s.", sendername);
+												format(string, sizeof(string), "Dziêki szybkiej interwencji uda³o Ci siê skuæ %s.", GetNick(giveplayerid, true));
 												SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
+												sendTipMessageEx(playerid, COLOR_BLUE, "Jesteœ nieprzytomny - policjant sku³ ciê bez wiêkszego wysi³ku."); 
+												
+												//czynnoœci
 												zakuty[giveplayerid] = 1;
 												TogglePlayerControllable(giveplayerid, 0);
-												uzytekajdanki[PDkuje[playerid]] = 1;
-												SkutyGracz[PDkuje[giveplayerid]] = playerid;
+												uzytekajdanki[playerid] = 1;
 												ClearAnimations(giveplayerid);
 												SetPlayerSpecialAction(giveplayerid, SPECIAL_ACTION_CUFFED);
 												SetPlayerAttachedObject(giveplayerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+												return 1;
 											}
-											else
+											if(PlayerInfo[giveplayerid][pBW] == 0)
 											{
-												GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-												GetPlayerName(playerid, sendername, sizeof(sendername));
-												format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", sendername ,giveplayer);
+												format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", GetNick(playerid, true),GetNick(giveplayerid, true));
 												ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 												ShowPlayerDialogEx(giveplayerid, 98, DIALOG_STYLE_MSGBOX, "Aresztowanie", "Policjant chce za³o¿yæ ci kajdanki, jeœli osacza ciê niedu¿a liczba policjantów mo¿esz spróbowaæ siê wyrwaæ\nJednak pamiêtaj jeœli siê wyrwiesz i jesteœ uzbrojony policjant ma prawo ciê zabiæ. \nMo¿esz tak¿e dobrowolnie poddaæ siê policjantom.", "Poddaj siê", "Wyrwij siê");
 												PDkuje[giveplayerid] = playerid;
@@ -2373,7 +2373,7 @@ CMD:kajdanki(playerid, params[])
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jesteœ policjantem lub GSA z rang¹ 2");
+			sendErrorMessage(playerid, "Nie jesteœ policjantem lub USSS z rang¹ 2[+]");
 		}
 	}
 	return 1;
