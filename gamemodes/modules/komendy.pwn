@@ -370,6 +370,9 @@ CMD:uprawnienia(playerid, params[])
     if(Uprawnienia(playerid, ACCESS_EDITCAR)) strcat(str, "{00FF00}+{FFFFFF} Edycja pojazdów\n");
     if(Uprawnienia(playerid, ACCESS_EDITRANG)) strcat(str, "{00FF00}+{FFFFFF} Edycja rang\n");
     if(Uprawnienia(playerid, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ");
+    if(Uprawnienia(playerid, ACCESS_BIZ)) strcat(str, "{00FF00}+{FFFFFF} Edycja biznesów");
+    if(Uprawnienia(playerid, ACCESS_HOUSE)) strcat(str, "{00FF00}+{FFFFFF} Edycja domów");
+    if(Uprawnienia(playerid, ACCESS_TECHNIK)) strcat(str, "{00FF00}+{FFFFFF} Uprawnienia technika");
     if(strlen(str) < 20) strcat(str, "{FF0000}Brak jakichkolwiek uprawnieñ!");
     ShowPlayerDialogEx(playerid, D_INFO, DIALOG_STYLE_LIST, "Twoje uprawnienia", str, "OK", "");
     return 1;
@@ -380,7 +383,7 @@ CMD:edytujupr(playerid, params[])
     if(!(Uprawnienia(playerid, ACCESS_EDITPERM) && IsPlayerAdmin(playerid))) return SendClientMessage(playerid, -1, "(PERM) - Nie posiadasz pe³nych praw.");
     new id;
     if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(PERM) - Podaj Nick lub ID gracza.");
-    new str[512];
+    new str[1024];
     format(str, sizeof(str), "\t\tUPRAWNIENIA %s\n", GetNick(id, true));
     if(Uprawnienia(id, ACCESS_PANEL)) strcat(str, "{00FF00}+{FFFFFF} Panel administracyjny\n");
     else strcat(str, "{FF0000}-{FFFFFF} Panel administracyjny\n");
@@ -413,11 +416,11 @@ CMD:edytujupr(playerid, params[])
     else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
     //
 	if(Uprawnienia(id, ACCESS_BIZ)) strcat(str, "{00FF00}+{FFFFFF} Edycja biznesów\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    else strcat(str, "{FF0000}-{FFFFFF} Edycja biznesów\n");
     if(Uprawnienia(id, ACCESS_HOUSE)) strcat(str, "{00FF00}+{FFFFFF} Edycja domów\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    else strcat(str, "{FF0000}-{FFFFFF} Edycja domów\n");
     if(Uprawnienia(id, ACCESS_TECHNIK)) strcat(str, "{00FF00}+{FFFFFF} Uprawnienia technika\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    else strcat(str, "{FF0000}-{FFFFFF} Uprawnienia technika\n");
     //
     if(Uprawnienia(id, ACCESS_OWNER)) strcat(str, "{00FF00}OWNER RIGHT'S");
     valstr(params, id);
