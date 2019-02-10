@@ -2318,7 +2318,8 @@ CMD:kajdanki(playerid, params[])
 												ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 												format(string, sizeof(string), "Dziêki szybkiej interwencji uda³o Ci siê skuæ %s.", GetNick(giveplayerid, true));
 												SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-												sendTipMessageEx(giveplayerid, COLOR_BLUE, "Jesteœ nieprzytomny - policjant sku³ ciê bez wiêkszego wysi³ku."); 
+												sendTipMessageEx(giveplayerid, COLOR_BLUE, "Jesteœ nieprzytomny - policjant sku³ ciê bez wiêkszego wysi³ku.");
+												PlayerInfo[giveplayerid][pBW] = 0;
 												
 												//czynnoœci
 												zakuty[giveplayerid] = 1;
