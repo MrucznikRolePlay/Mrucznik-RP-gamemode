@@ -2329,6 +2329,7 @@ CMD:kajdanki(playerid, params[])
 												ClearAnimations(giveplayerid);
 												SetPlayerSpecialAction(giveplayerid, SPECIAL_ACTION_CUFFED);
 												SetPlayerAttachedObject(giveplayerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+												SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
 												return 1;
 											}
 											if(PlayerInfo[giveplayerid][pBW] == 0)
