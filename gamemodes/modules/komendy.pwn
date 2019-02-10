@@ -25837,11 +25837,11 @@ CMD:fixallveh(playerid)
         }
         foreach(Player, i)
         {
-            if(IsPlayerInAnyVehicle(playerid))
+            if(IsPlayerInAnyVehicle(i))
             {
-                SetVehicleHealth(GetPlayerVehicleID(playerid), 1000.0);
-                RepairVehicle(GetPlayerVehicleID(playerid));
-                CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
+                SetVehicleHealth(GetPlayerVehicleID(i), 1000.0);
+                RepairVehicle(GetPlayerVehicleID(i));
+                CarData[VehicleUID[GetPlayerVehicleID(i)][vUID]][c_HP] = 1000.0;
             }
         }
         new string[128];
