@@ -2319,9 +2319,10 @@ CMD:kajdanki(playerid, params[])
 												format(string, sizeof(string), "Dziêki szybkiej interwencji uda³o Ci siê skuæ %s.", GetNick(giveplayerid, true));
 												SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 												sendTipMessageEx(giveplayerid, COLOR_BLUE, "Jesteœ nieprzytomny - policjant sku³ ciê bez wiêkszego wysi³ku.");
-												PlayerInfo[giveplayerid][pBW] = 0;
+												
 												
 												//czynnoœci
+												PlayerInfo[giveplayerid][pBW] = 0;
 												zakuty[giveplayerid] = 1;
 												TogglePlayerControllable(giveplayerid, 0);
 												uzytekajdanki[playerid] = 1;
@@ -34010,6 +34011,7 @@ CMD:rozkuj(playerid, params[])
                             uzytekajdanki[giveplayerid] = 0;
                             uzytekajdanki[playerid] = 0;
 							PDkuje[playerid] = 0;
+							PDkuje[giveplayerid]=0;
                             ClearAnimations(giveplayerid);
         					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
 							RemovePlayerAttachedObject(giveplayerid, 0);

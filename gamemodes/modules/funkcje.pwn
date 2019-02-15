@@ -4493,7 +4493,11 @@ stock CKLog(text[])
     new plik[32] = "logi/ck.log";
     Log(plik, text);
 }
-
+stock DomyLog(text[])
+{
+	new plik[32] = "logi/domy.log";
+	Log(plik, text);
+}
 stock WarnLog(text[])
 {
     new plik[32] = "logi/warn.log";
@@ -6460,6 +6464,11 @@ KupowanieDomu(playerid, dom, platnosc)
         format(str2, sizeof(str2), "%s kupil dom (id %d) za %d$", GeT, dom, cenadomu);
 		PayLog(str2);
 	    //
+		//nowe logi - domy
+		new day, month, year;
+		getdate(year, month, day);
+		format(str2, sizeof(str2), "[%d:%d:%d] %s [UID: %d]  kupi³ dom [%d] za %d$", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, cenadomu);
+		DomyLog(str2);
 		ZapiszDom(dom);
 	}
 	return 1;
