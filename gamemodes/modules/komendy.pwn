@@ -17562,6 +17562,7 @@ CMD:rooc(playerid, params[])
 	    {
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
+			SendDiscordFracMessage(member, string);
             printf("%s", string);
         }
         else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie
@@ -28560,7 +28561,7 @@ CMD:innyspawn(playerid)
 CMD:report(playerid, params[]) return cmd_raport(playerid, params);
 CMD:raport(playerid, params[])
 {
-	new string[128];
+	new string[128], discordstring[128];
 	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
@@ -28582,7 +28583,8 @@ CMD:raport(playerid, params[])
 			}
 			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
 			ABroadCast(COLOR_YELLOW,string,1);
-			SendDiscordMessage(2, string);
+			format(discordstring, sizeof(discordstring), "» Report od %s [%d]: %s", sendername, playerid, params);
+			SendDiscordMessage(2, discordstring);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "Je¿eli Administracja nie reaguje na Twój report, oznacza to, ¿e...");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "...jest on Ÿle sformu³owany i Administracja nie rozpatrzy tego zg³oszenia.");//By: Dawid
@@ -35066,6 +35068,7 @@ CMD:fooc(playerid, params[])
             {
                 format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
     			SendFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendDiscordFracMessage(member, string);
                 //Tajniacy
                 if(member == 5) SendTajniakMessage(3, TEAM_AZTECAS_COLOR, string);
                 else if(member == 6) SendTajniakMessage(4, TEAM_AZTECAS_COLOR, string);
@@ -35110,6 +35113,7 @@ CMD:fooc(playerid, params[])
                 //Rangi podstawowe
                 else format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
                 SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendDiscordOrgMessage(member, string);
 			}
 			printf("%s", string);
 			return 1;

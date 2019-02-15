@@ -54,6 +54,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_MAX_CONNECTS_FROM_IP		2
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
+#include <strlib>
 
 //-------<[ Pluginy ]>-------
 #include <crashdetect>                  // By Zeex, 4.18.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
@@ -7107,11 +7108,13 @@ public OnPlayerText(playerid, text[])
 		{
 		    format(string, sizeof(string), "Reporter %s: %s", sendername, text);
 			OOCNews(COLOR_LIGHTGREEN, string);
+			SendDiscordMessage(0, string);
 		}
 		else
 		{
 		    format(string, sizeof(string), "Goœæ wywiadu %s: %s", sendername, text);
 			OOCNews(COLOR_LIGHTGREEN, string);
+			SendDiscordMessage(0, string);
 		}
 		return 0;
 	}

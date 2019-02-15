@@ -1344,7 +1344,7 @@ KoniecWyscigu(playerid)
 	return 1;
 }
 
-stock strreplace(string[], find, replace)
+stock strreplace2(string[], find, replace)
 {
     for(new i=0; string[i]; i++)
     {
@@ -11287,7 +11287,7 @@ stock SetRPName(playerid)
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, sizeof(nick));
 	format(nickRP[playerid], MAX_PLAYER_NAME, "%s", nick);
-	strreplace(nickRP[playerid], '_', ' ');
+	strreplace2(nickRP[playerid], '_', ' ');
 }
 
 public VendCheck(playerid)

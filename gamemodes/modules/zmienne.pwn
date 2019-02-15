@@ -1055,6 +1055,8 @@ new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
 
 new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_ReportChannelId; //discordconnect
+new DCC_Channel:g_FracChannel[MAX_FRAC];
+new DCC_Channel:g_OrgChannel[MAX_ORG];
 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
