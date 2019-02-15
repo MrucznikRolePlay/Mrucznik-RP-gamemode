@@ -2089,15 +2089,21 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{
-							    if(SchoolSpawn[playerid] == 0)
+							    if(PlayerInfo[playerid][pRank] >= 1)
 								{
-								    SetPlayerPosEx(playerid, 1407.7435,-1788.1862,13.5469);
+								    SetPlayerPosEx(playerid, 1445.3516,-1827.1736,81.4602);
 									SetPlayerFacingAngle(playerid, 0.0);
+									SetPlayerVirtualWorld(playerid, 50);
+									SetPlayerInterior(playerid, 0);
+									PlayerInfo[playerid][pLocal] = 108;
 								}
 								else
 								{
-								    SetPlayerPosEx(playerid, 414.4144,2531.9580,19.1565);
+								    SetPlayerPosEx(playerid, 1471.8883,-1811.8147,77.9612);
 									SetPlayerFacingAngle(playerid, 4.6505);
+									SetPlayerVirtualWorld(playerid, 50);
+									SetPlayerInterior(playerid, 0);
+									PlayerInfo[playerid][pLocal] = 108;
 								}
 	   						}
 						}
