@@ -9277,6 +9277,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						DialogZbrojowni(playerid);
 						
 						new day, month, year;
+						new str3[256];
 						getdate(day, month, year);
 						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - Zbrojownie", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom);
 						DomyLog(str3);
