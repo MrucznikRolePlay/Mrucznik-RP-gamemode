@@ -2109,7 +2109,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_GROOVE: //12
 						{
-          					SetPlayerPosEx(playerid, 2495.2163,-1687.2322,13.5150);
+          					SetPlayerPosEx(playerid, 2777.9751,-1945.4319,13.5469);
 						}
 						case FRAC_BALLAS: //13
 						{
