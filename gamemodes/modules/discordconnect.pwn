@@ -101,7 +101,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		new user_name[32 + 1],str[128];
 		DCC_GetUserName(author, user_name);
 		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
-		SendFamilyMessage(i, TEAM_AZTECAS_COLOR, str);
+		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, str);
 	}
 
 	return 1;
