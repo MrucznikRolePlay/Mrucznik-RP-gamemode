@@ -9419,7 +9419,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Dom[dom][hKami] ++;
 						PlayerInfo[playerid][pWino] --;
 						//Dom[dom][hMagazyn] --;
-						new str3[256];
 				    	format(str3, sizeof(str3), "Kupi³eœ %d level Pancerza za %d$ i wino. Aby jej u¿yæ wpisz /pancerz", Dom[dom][hKami], 100000*(Dom[dom][hKami]+1));
 						SendClientMessage(playerid, COLOR_P@, str3);
 						KupowanieDodatkow(playerid, dom);
@@ -9484,6 +9483,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						KupowanieDodatkow(playerid, dom);
 						//log
 						new day, month, year;
+						new str3[256];
 						getdate(day, month, year);
 						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - Ladowisko [Aktualny LVL: %d]", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hLadowisko]);
 						DomyLog(str3);
