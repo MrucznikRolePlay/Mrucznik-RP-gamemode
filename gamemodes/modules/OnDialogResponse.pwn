@@ -9379,6 +9379,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ Apteczkê za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej u¿yæ wpisz /ulecz");
 						KupowanieDodatkow(playerid, dom);
 						//log
+						new str3[256];
 						new day, month, year;
 						getdate(day, month, year);
 						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - apteczka [Aktualny LVL: %d]", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hApteczka]);
@@ -9410,6 +9411,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				GetPlayerArmour(playerid, ARMOR);
 			    if(PlayerInfo[playerid][pWino] >= 1 && ARMOR >= 50 && Dom[dom][hApteczka] != 0 && PlayerInfo[playerid][pGun5] == 31 && PlayerInfo[playerid][pDetSkill] >= 101 )
 	   			{
+					new str3[256];
 		 			if(kaska[playerid] != 0 && kaska[playerid] >= 100000*(Dom[dom][hKami]+1))
 		    		{
 				      	new dmdm = 100000*(Dom[dom][hKami]+1);
@@ -9429,7 +9431,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else
 					{
-			    		new str3[256];
+			    		
 			    		format(str3, sizeof(str3), "%d level pancerza kosztuje %d$ a ty tyle nie masz!", Dom[dom][hKami]+1, 100000*(Dom[dom][hKami]+1));
 						SendClientMessage(playerid, COLOR_P@, str3);
 						KupowanieDodatkow(playerid, dom);
@@ -9460,6 +9462,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ L¹dowisko za 10 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy 20 metrów od domu");
 						KupowanieDodatkow(playerid, dom);
 						//log
+						new str3[256];
 						new day, month, year;
 						getdate(day, month, year);
 						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - Ladowisko [Aktualny LVL: %d]", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hLadowisko]);
