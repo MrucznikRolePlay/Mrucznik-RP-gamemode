@@ -24199,9 +24199,9 @@ CMD:adminajail(playerid, params[])
 					
 					//inne
 					PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
-					if(!strfind((result), "DM2") == -1
-					&& !strfind((result), "Death Match 2") == -1
-					&& !strfind((result), "dm2") == -1)
+					if(strfind((result), "DM2") == -1
+					&& strfind((result), "Death Match 2") == -1
+					&& strfind((result), "dm2") == -1)
 					{
 						ResetPlayerWeapons(playa);
 						UsunBron(playa);
