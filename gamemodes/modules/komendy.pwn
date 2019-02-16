@@ -4818,7 +4818,7 @@ CMD:dmv_info(playerid, params[])
 			return 1;
 		}
 		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
-		if(strcmp(content, params, false) == 0)
+		if(strcmp(content, params, true) == 0)
 		{
 			if(spamujeKomunikatami[playerid] == 1)
 			{
