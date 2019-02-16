@@ -92,7 +92,6 @@ new poolTrampolineStats=0;
 new spamujeKomunikatami[MAX_PLAYERS]=0;
 new komunikatTime[MAX_PLAYERS];
 new komunikatMinuty[MAX_PLAYERS]=0;
-SetPVarString(playerid, "trescOgloszenia", "null"); 
 
 
 
@@ -1117,6 +1116,8 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	
+	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
 
     premium_clearCache(playerid);
