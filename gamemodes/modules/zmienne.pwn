@@ -88,6 +88,14 @@ new poolSaunaStats=0;
 new poolStats=0;
 new poolTrampolineStats=0;
 
+//Spamowanie /dmv /lspd etc
+new spamujeKomunikatami[MAX_PLAYERS]=0;
+new komunikatTime[MAX_PLAYERS];
+new komunikatMinuty[MAX_PLAYERS]=0;
+new komunikatTimeZerowanie[MAX_PLAYERS];
+new komunikatMinutyZerowanie[MAX_PLAYERS]=0;
+
+
 
 //legal
 new DB:db_handle;
@@ -1110,6 +1118,8 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	
+	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
 
     premium_clearCache(playerid);

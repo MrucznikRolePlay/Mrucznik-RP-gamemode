@@ -157,6 +157,39 @@ public AdminDutyCzas(playerid)
 	}
 	return 1;
 }
+//Anty-Komunikat-Timer
+forward KomunikatCzas(playerid);
+public KomunikatCzas(playerid)
+{
+	komunikatMinuty[playerid]++;
+	if(komunikatMinuty[playerid] == 15)
+	{
+		new string[128];
+		format(string, sizeof(string), "null");
+		spamujeKomunikatami[playerid] = 0;
+		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponownie wys³aæ komunikat frakcyjny"); 
+		SetPVarString(playerid, "trescOgloszenia", string);
+		KillTimer(komunikatTime[playerid]);
+	}
+	return 1;
+}
+forward KomunikatCzasZerowanie(playerid);
+public KomunikatCzasZerowanie(playerid)
+{
+	komunikatMinutyZerowanie[playerid]++;
+	if(komunikatMinutyZerowanie[playerid] == 5)
+	{
+		new string[128];
+		format(string, sizeof(string), "null"); 
+		spamujeKomunikatami[playerid] = 0;
+		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponowie wys³aæ komunikat frakcyjny"); 
+		SetPVarString(playerid, "trescOgloszenia", string);
+		KillTimer(komunikatTimeZerowanie[playerid]); 
+	}
+
+	return 1;
+}
+//End komunikatów
 forward AktywujPozar();
 public AktywujPozar()
 {
