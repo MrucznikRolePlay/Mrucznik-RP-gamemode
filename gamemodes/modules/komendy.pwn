@@ -4826,7 +4826,7 @@ CMD:dmv_info(playerid, params[])
 			sendTipMessage(playerid, string);
 			return 1;
 		}
-		if(strcmp(content, params) == 0)
+		if(!strcmp(content, params, false))
 		{
 			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
 			spamujeKomunikatami[playerid] = 1;
