@@ -169,6 +169,7 @@ public KomunikatCzas(playerid)
 		spamujeKomunikatami[playerid] = 0;
 		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponownie wys³aæ komunikat frakcyjny"); 
 		SetPVarString(playerid, "trescOgloszenia", string);
+		KillTimer(komunikatTime[playerid]);
 	}
 	return 1;
 }

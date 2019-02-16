@@ -4817,18 +4817,17 @@ CMD:dmv_info(playerid, params[])
 			sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
 			return 1;
 		}
-		if(spamujeKomunikatami[playerid] == 1)
+		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+		if(strcmp(content, params, false) == 0)
 		{
-			GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
-			if(strlen(content) == strlen(params))
+			if(spamujeKomunikatami[playerid] == 1)
 			{
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Nie mo¿esz wys³aæ og³oszenia o tej samej treœci. Odczekaj 15 minut!"); 
+				GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Wy³a³eœ og³oszenie o tej samej treœci. Odczekaj 15 minut przed wys³aniem nastêpnego!"); 
 				format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
 				sendTipMessage(playerid, string);
-				KillTimer(komunikatTime[playerid]);
-				return 1;
 			}
-		
+			return 1;
 		}
 		format(content, sizeof(content), "%s", params);
 		SetPVarString(playerid, "trescOgloszenia", content);
