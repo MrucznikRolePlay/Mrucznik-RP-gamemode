@@ -88,6 +88,12 @@ new poolSaunaStats=0;
 new poolStats=0;
 new poolTrampolineStats=0;
 
+//Spamowanie /dmv /lspd etc
+new spamujeKomunikatami[MAX_PLAYERS]=0;
+new komunikatTime[MAX_PLAYERS];
+new komunikatMinuty=0;
+
+
 
 //legal
 new DB:db_handle;

@@ -4786,6 +4786,7 @@ CMD:dmv_info(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
+	new content[256];
 
     if(IsPlayerConnected(playerid))
     {
@@ -4816,9 +4817,25 @@ CMD:dmv_info(playerid, params[])
 			sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
 			return 1;
 		}
+		if(spamujeKomunikatami == 1)
+		{
+			GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+			if(content == params)
+			{
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Nie mo¿esz wys³aæ og³oszenia o tej samej treœci. Odczekaj 15 minut!"); 
+				format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+				sendTipMessage(playerid, string);
+				KillTimer(KomunikatTime[playerid]);
+				return 1;
+			}
+		
+		}
+		SetPVarString(playerid, "trescOgloszenia", params);
 		SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
 		format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
 		SendClientMessageToAll(COLOR_YELLOW, string);
+		spamujeKomunikatami = 1;
+		KomunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);
 	}
 	return 1;
 }
