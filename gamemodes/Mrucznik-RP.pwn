@@ -980,6 +980,10 @@ public OnPlayerDisconnect(playerid, reason)
 	OfferPlayer[playerid] = 0;
 	//caluj
 	kissPlayerOffer[playerid] = 0;
+	//komunikaty frakcyjne
+	spamujeKomunikatami[playerid]=0;
+	komunikatMinuty[playerid]=0;
+	komunikatMinutyZerowanie[playerid]=0;
 
     if(TalkingLive[playerid] != INVALID_PLAYER_ID)
     {

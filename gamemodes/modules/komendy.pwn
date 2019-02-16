@@ -3059,7 +3059,7 @@ CMD:szpital(playerid, params[])
 			return 1;
 		}
 
-		new string[128], sendername[MAX_PLAYER_NAME] content[256];
+		new string[128], sendername[MAX_PLAYER_NAME], content[256];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if (strfind(params , "ip:" , true)>=0 ||strfind(params , "www." , true)>=0 || strfind(params , ".pl" , true)>=0 || strfind(params , ",pl" , true)>=0  || strfind(params , " ip" , true)>=0 || strfind(params , ":7" , true)>=0 || strfind(params , "795" , true)>=0 || strfind(params , ":3" , true)>=0 || strfind(params , ":4" , true)>=0 || strfind(params , ":5" , true)>=0 || strfind(params , ":6" , true)>=0 || strfind(params , ":8" , true)>=0)
 		{
