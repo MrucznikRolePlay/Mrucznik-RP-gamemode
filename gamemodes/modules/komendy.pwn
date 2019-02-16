@@ -24167,49 +24167,33 @@ CMD:adminajail(playerid, params[])
 					    OnDuty[playa] = 0;
 					    OnDutyCD[playa] = 0;
 					}
-					if(!strfind((result), "DM2") == -1
-					&& !strfind((result), "Death Match 2") == -1
-					&& !strfind((result), "dm2") == -1)
+					if(strfind((result), "DM2") == -1
+					&& strfind((result), "Death Match 2") == -1
+					&& strfind((result), "dm2") == -1)
 					{
-						//KOMUNIKATY
-						if(GetPVarInt(playerid, "AdminDuty") == 1)
-						{
-							sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ na czas nieokreœlony");
-							format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", GetNick(playa, true), (result), money);
-							sendTipMessageEx(playerid, COLOR_LIGHTRED, string);
-							format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(playerid), money, (result));
-							sendTipMessageEx(playa, COLOR_LIGHTRED, string);
-							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
-							SendPunishMessage(string, playa);
-						}
-						else
-						{
-							sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
-							format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", GetNick(playa, true), (result), money);
-							sendTipMessageEx(playerid, COLOR_LIGHTRED, string);
-							format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(playerid, true), money, (result));
-							sendTipMessageEx(playa, COLOR_LIGHTRED, string);
-							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid,true), money, (result));
-							SendPunishMessage(string, playa);
-						
-						}
-						
-						//CZYNNOŒCI
-						ResetPlayerWeapons(playa);
-						UsunBron(playa);
+						GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+						GetPlayerName(playerid, sendername, sizeof(sendername));
+						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
+						SendClientMessage(playerid, COLOR_LIGHTRED, string);
+						format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
+						SendClientMessage(playa, COLOR_LIGHTRED, string);
+							
 						PlayerInfo[playa][pJailed] = 3;
 						PlayerInfo[playa][pJailTime] = money*60;
 						SetPlayerVirtualWorld(playa, 1000+playa);
 						PlayerInfo[playa][pMuted] = 1;
 						SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
+						format(string, sizeof(string), "Zosta³eœ ukarany na %d minut. Powod: %s", money, (result));		
+						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
+						SendPunishMessage(string, playa);
 						poscig[playa] = 0;
 						KickLog(string);
-						//Admin stats - /adminduty
 						if(GetPVarInt(playerid, "dutyadmin") == 1)
 						{
 							iloscAJ[playerid] = iloscAJ[playerid]+1;
 						}
-						
+							
 						//adminowe logi
 						format(string, sizeof(string), "Admini/%s.ini", sendername);
 						dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
@@ -24220,30 +24204,47 @@ CMD:adminajail(playerid, params[])
 						PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
 						return 1;
 					}
+				
 					
-					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
-					SendClientMessage(playerid, COLOR_LIGHTRED, string);
-					format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
-					SendClientMessage(playa, COLOR_LIGHTRED, string);
-						
+					//KOMUNIKATY
+					if(GetPVarInt(playerid, "AdminDuty") == 1)
+					{
+						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ na czas nieokreœlony");
+						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", GetNick(playa, true), (result), money);
+						sendTipMessageEx(playerid, COLOR_LIGHTRED, string);
+						format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(playerid), money, (result));
+						sendTipMessageEx(playa, COLOR_LIGHTRED, string);
+						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
+						SendPunishMessage(string, playa);
+					}
+					else
+					{
+						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
+						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", GetNick(playa, true), (result), money);
+						sendTipMessageEx(playerid, COLOR_LIGHTRED, string);
+						format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(playerid, true), money, (result));
+						sendTipMessageEx(playa, COLOR_LIGHTRED, string);
+						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid,true), money, (result));
+						SendPunishMessage(string, playa);
+					
+					}
+					
+					//CZYNNOŒCI
+					ResetPlayerWeapons(playa);
+					UsunBron(playa);
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;
 					SetPlayerVirtualWorld(playa, 1000+playa);
 					PlayerInfo[playa][pMuted] = 1;
 					SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
-					format(string, sizeof(string), "Zosta³eœ ukarany na %d minut. Powod: %s", money, (result));		
-					SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
-					SendPunishMessage(string, playa);
 					poscig[playa] = 0;
 					KickLog(string);
+					//Admin stats - /adminduty
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
 						iloscAJ[playerid] = iloscAJ[playerid]+1;
 					}
-						
+					
 					//adminowe logi
 					format(string, sizeof(string), "Admini/%s.ini", sendername);
 					dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
