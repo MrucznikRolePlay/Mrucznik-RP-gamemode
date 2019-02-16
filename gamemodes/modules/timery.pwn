@@ -173,6 +173,23 @@ public KomunikatCzas(playerid)
 	}
 	return 1;
 }
+forward KomunikatCzasZerowanie(playerid);
+public KomunikatCzasZerowanie(playerid)
+{
+	komunikatMinutyZerowanie[playerid]++;
+	if(komunikatMinutyZerowanie[playerid] == 5)
+	{
+		new string[128];
+		format(string, sizeof(string), "null"); 
+		spamujeKomunikatami[playerid] = 0;
+		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponowie wys³aæ komunikat frakcyjny"); 
+		SetPVarString(playerid, "trescOgloszenia", string);
+		KillTimer(komunikatTimeZerowanie[playerid]); 
+	}
+
+	return 1;
+}
+//End komunikatów
 forward AktywujPozar();
 public AktywujPozar()
 {

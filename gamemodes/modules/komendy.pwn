@@ -3059,7 +3059,7 @@ CMD:szpital(playerid, params[])
 			return 1;
 		}
 
-		new string[128], sendername[MAX_PLAYER_NAME];
+		new string[128], sendername[MAX_PLAYER_NAME] content[256];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if (strfind(params , "ip:" , true)>=0 ||strfind(params , "www." , true)>=0 || strfind(params , ".pl" , true)>=0 || strfind(params , ",pl" , true)>=0  || strfind(params , " ip" , true)>=0 || strfind(params , ":7" , true)>=0 || strfind(params , "795" , true)>=0 || strfind(params , ":3" , true)>=0 || strfind(params , ":4" , true)>=0 || strfind(params , ":5" , true)>=0 || strfind(params , ":6" , true)>=0 || strfind(params , ":8" , true)>=0)
 		{
@@ -3070,6 +3070,17 @@ CMD:szpital(playerid, params[])
 		}
 		else
 		{
+			GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+			if(spamujeKomunikatami[playerid] == 1)
+			{
+				new ammountTime;
+				ammountTime = 15-komunikatMinuty[playerid];
+				format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+				format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+				sendTipMessage(playerid, string);
+				return 1;
+			}
 			if(PlayerInfo[playerid][pBP] >= 1)
 			{
 				format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
@@ -3081,9 +3092,20 @@ CMD:szpital(playerid, params[])
                 sendErrorMessage(playerid, "Komenda dostêpna od 3 rangi!");
 			    return 1;
 			}
-			SendClientMessageToAll(COLOR_WHITE, "|___________ Medical Center ___________|");
-			format(string, sizeof(string), "Lekarz %s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_LIGHTBLUE, string);
+			if(!strcmp(params, content, false))
+			{
+				sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+				spamujeKomunikatami[playerid] = 1;
+				komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+			}
+			else
+			{
+				SendClientMessageToAll(COLOR_WHITE, "|___________ Medical Center ___________|");
+				format(string, sizeof(string), "Lekarz %s: %s", sendername, params);
+				SendClientMessageToAll(COLOR_LIGHTBLUE, string);
+				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+			}
 		}
 	}
 	return 1;
@@ -3109,7 +3131,7 @@ CMD:straz(playerid, params[])
 			return 1;
 		}
         if(PlayerInfo[playerid][pRank] < 2) return sendErrorMessage(playerid, "Potrzebujesz conajmniej 2 rangi.");
-		new string[128], sendername[MAX_PLAYER_NAME];
+		new string[128], sendername[MAX_PLAYER_NAME], content[256];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if (strfind(params , "ip:" , true)>=0 ||strfind(params , "www." , true)>=0 || strfind(params , ".pl" , true)>=0 || strfind(params , ",pl" , true)>=0  || strfind(params , " ip" , true)>=0 || strfind(params , ":7" , true)>=0 || strfind(params , "795" , true)>=0 || strfind(params , ":3" , true)>=0 || strfind(params , ":4" , true)>=0 || strfind(params , ":5" , true)>=0 || strfind(params , ":6" , true)>=0 || strfind(params , ":8" , true)>=0)
 		{
@@ -3126,9 +3148,31 @@ CMD:straz(playerid, params[])
 				sendTipMessage(playerid, string);
 				return 1;
 			}
-			SendClientMessageToAll(COLOR_WHITE, "|___________ Fire Department ___________|");
-			format(string, sizeof(string), "Stra¿ak %s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_LIGHTRED, string);
+			GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+			if(spamujeKomunikatami[playerid] == 1)
+			{
+				new ammountTime;
+				ammountTime = 15-komunikatMinuty[playerid];
+				format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+				format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+				sendTipMessage(playerid, string);
+				return 1;
+			}
+			if(!strcmp(params, content, false))
+			{
+				sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+				spamujeKomunikatami[playerid] = 1;
+				komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+			}
+			else
+			{
+				SendClientMessageToAll(COLOR_WHITE, "|___________ Fire Department ___________|");
+				format(string, sizeof(string), "Stra¿ak %s: %s", sendername, params);
+				SendClientMessageToAll(COLOR_LIGHTRED, string);
+				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+			}
 		}
 	}
 	return 1;
@@ -4820,7 +4864,9 @@ CMD:dmv_info(playerid, params[])
 		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
 		if(spamujeKomunikatami[playerid] == 1)
 		{
-			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", komunikatMinuty[playerid]-15);
+			new ammountTime;
+			ammountTime = 15-komunikatMinuty[playerid];
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
 			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
 			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
 			sendTipMessage(playerid, string);
@@ -4828,7 +4874,7 @@ CMD:dmv_info(playerid, params[])
 		}
 		if(!strcmp(params, content, false))
 		{
-			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci w czasie mniejszym jak 5 minut! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
 			spamujeKomunikatami[playerid] = 1;
 			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
 		}
@@ -4838,6 +4884,8 @@ CMD:dmv_info(playerid, params[])
 			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
 			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
+			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+			
 			
 		}
 	}
@@ -4923,6 +4971,7 @@ CMD:usss_info(playerid, params[])
 {
     new string[256];
     new sendername[MAX_PLAYER_NAME];
+	new content[256];
 
     if(IsPlayerConnected(playerid))
     {
@@ -4953,9 +5002,31 @@ CMD:usss_info(playerid, params[])
             sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
             return 1;
         }
-        SendClientMessageToAll(COLOR_WHITE, "|___________ United States Secret Service ___________|");
-        format(string, sizeof(string), "Agent %s: %s", sendername, params);
-        SendClientMessageToAll(COLOR_PURPLE, string);
+		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+		if(spamujeKomunikatami[playerid] == 1)
+		{
+			new ammountTime;
+			ammountTime = 15-komunikatMinuty[playerid];
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+			sendTipMessage(playerid, string);
+			return 1;
+		}
+		if(!strcmp(params, content, false))
+		{
+			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+			spamujeKomunikatami[playerid] = 1;
+			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+		}
+		else
+		{
+			SendClientMessageToAll(COLOR_WHITE, "|___________ United States Secret Service ___________|");
+			format(string, sizeof(string), "Agent %s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_PURPLE, string);
+			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+		}
     }
     return 1;
 }
@@ -4965,6 +5036,7 @@ CMD:armia(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
+	new content[256];
 
     if(IsPlayerConnected(playerid))
     {
@@ -4990,9 +5062,31 @@ CMD:armia(playerid, params[])
 			sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
 			return 1;
 		}
-		SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ - Wojsko ___________|");
-		format(string, sizeof(string), "Genera³ %s: %s", sendername, params);
-		SendClientMessageToAll(COLOR_GREEN, string);
+		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+		if(spamujeKomunikatami[playerid] == 1)
+		{
+			new ammountTime;
+			ammountTime = 15-komunikatMinuty[playerid];
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+			sendTipMessage(playerid, string);
+			return 1;
+		}
+		if(!strcmp(params, content, false))
+		{
+			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+			spamujeKomunikatami[playerid] = 1;
+			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+		}
+		else
+		{
+			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ - Wojsko ___________|");
+			format(string, sizeof(string), "Genera³ %s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_GREEN, string);
+			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+		}
 	}
 	return 1;
 }
@@ -5000,6 +5094,7 @@ CMD:sad(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
+	new content[256];
 
     if(IsPlayerConnected(playerid))
     {
@@ -5030,9 +5125,31 @@ CMD:sad(playerid, params[])
 			sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
 			return 1;
 		}
-		SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ S¹du ___________|");
-		format(string, sizeof(string), "Sêdzia %s: %s", sendername, params);
-		SendClientMessageToAll(COLOR_LIGHTGREEN, string);
+		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+		if(spamujeKomunikatami[playerid] == 1)
+		{
+			new ammountTime;
+			ammountTime = 15-komunikatMinuty[playerid];
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+			sendTipMessage(playerid, string);
+			return 1;
+		}
+		if(!strcmp(params, content, false))
+		{
+			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+			spamujeKomunikatami[playerid] = 1;
+			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+		}
+		else
+		{
+			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ S¹du ___________|");
+			format(string, sizeof(string), "Sêdzia %s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_LIGHTGREEN, string);
+			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+		}
 	}
 	return 1;
 }
@@ -5060,10 +5177,32 @@ CMD:kt(playerid, params[])
 			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
 			return 1;
 		}
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		SendClientMessageToAll(COLOR_YELLOW, "|___________ Korporacja Transportowa ___________|");
-		format(string, sizeof(string), " %s: {FFFFFF}%s", sendername, params);
-		SendClientMessageToAll(COLOR_YELLOW, string);
+		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+		if(spamujeKomunikatami[playerid] == 1)
+		{
+			new ammountTime;
+			ammountTime = 15-komunikatMinuty[playerid];
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+			sendTipMessage(playerid, string);
+			return 1;
+		}
+		if(!strcmp(params, content, false))
+		{
+			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+			spamujeKomunikatami[playerid] = 1;
+			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+		}
+		else
+		{
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			SendClientMessageToAll(COLOR_YELLOW, "|___________ Korporacja Transportowa ___________|");
+			format(string, sizeof(string), " %s: {FFFFFF}%s", sendername, params);
+			SendClientMessageToAll(COLOR_YELLOW, string);
+			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+		}
 	}
 	else
 	{
@@ -16916,6 +17055,7 @@ CMD:fbi(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
+	new content[256];
 
     if(IsPlayerConnected(playerid))
     {
@@ -16952,9 +17092,31 @@ CMD:fbi(playerid, params[])
 			}
 			else
 			{
-				SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat FBI ___________|");
-				format(string, sizeof(string), "Agent FBI %s: %s", sendername, params);
-				SendClientMessageToAll(COLOR_LFBI, string);
+				GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+				if(spamujeKomunikatami[playerid] == 1)
+				{
+					new ammountTime;
+					ammountTime = 15-komunikatMinuty[playerid];
+					format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+					format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+					sendTipMessage(playerid, string);
+					return 1;
+				}
+				if(!strcmp(params, content, false))
+				{
+					sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+					spamujeKomunikatami[playerid] = 1;
+					komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+				}
+				else
+				{
+					SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat FBI ___________|");
+					format(string, sizeof(string), "Agent FBI %s: %s", sendername, params);
+					SendClientMessageToAll(COLOR_LFBI, string);
+					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+				}
 			}
 		}
 		else
@@ -16996,6 +17158,7 @@ CMD:lspd(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
+	new content[256];
 
     if(IsPlayerConnected(playerid))
     {
@@ -17033,9 +17196,31 @@ CMD:lspd(playerid, params[])
 			}
 			else
 			{
-				SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat LSPD ___________|");
-				format(string, sizeof(string), "Oficer %s: %s", GetNick(playerid, true), params);
-				SendClientMessageToAll(COLOR_LIGHTBLUE, string);
+				GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+				if(spamujeKomunikatami[playerid] == 1)
+				{
+					new ammountTime;
+					ammountTime = 15-komunikatMinuty[playerid];
+					format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+					format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+					sendTipMessage(playerid, string);
+					return 1;
+				}
+				if(!strcmp(params, content, false))
+				{
+					sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+					spamujeKomunikatami[playerid] = 1;
+					komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+				}
+				else
+				{
+					SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat LSPD ___________|");
+					format(string, sizeof(string), "Oficer %s: %s", GetNick(playerid, true), params);
+					SendClientMessageToAll(COLOR_LIGHTBLUE, string);
+					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+				}
 			}
 		}
 		else
@@ -17046,7 +17231,7 @@ CMD:lspd(playerid, params[])
 	}
 	return 1;
 }
-
+/*
 CMD:sasd(playerid, params[])
 {
 	new string[256];
@@ -17099,7 +17284,7 @@ CMD:sasd(playerid, params[])
 		}
 	}
 	return 1;
-}
+}*/
 
 CMD:owarsztat(playerid)
 {
@@ -17157,6 +17342,7 @@ CMD:noa(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
+	new content[256];
 
 	if(IsANoA(playerid) && PlayerInfo[playerid][pRank] >= 6)
 	{
@@ -17171,10 +17357,32 @@ CMD:noa(playerid, params[])
 			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Napisz to poprzez /o treœæ");
 			return 1;
 		}
-		SendClientMessageToAll(0xA400A4C8,"|____________[WIADOMOSC FDU]____________|");
-		format(string, sizeof(string), "%s: %s", sendername, params);
-		SendClientMessageToAll(COLOR_GREY, string);
-		printf("%s", string);
+		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
+		if(spamujeKomunikatami[playerid] == 1)
+		{
+			new ammountTime;
+			ammountTime = 15-komunikatMinuty[playerid];
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+			sendTipMessage(playerid, string);
+			return 1;
+		}
+		if(!strcmp(params, content, false))
+		{
+			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+			spamujeKomunikatami[playerid] = 1;
+			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
+		}
+		else
+		{
+			SendClientMessageToAll(0xA400A4C8,"|____________[WIADOMOSC FDU]____________|");
+			format(string, sizeof(string), "%s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_GREY, string);
+			printf("%s", string);
+			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+		}
 	}
 	else
 	{
