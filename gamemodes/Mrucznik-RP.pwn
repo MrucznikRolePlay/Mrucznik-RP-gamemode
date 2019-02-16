@@ -6308,6 +6308,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))//id 131072
 	{
+		if(NieSpamujKradnij[playerid] == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
+			return 1;
+		}
 		new engine, unused;
 		GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine , unused , unused, unused, unused, unused, unused);
 		if(engine == 1)

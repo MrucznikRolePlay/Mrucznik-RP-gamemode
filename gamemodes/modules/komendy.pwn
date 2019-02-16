@@ -17569,6 +17569,11 @@ CMD:odpal(playerid)
             sendTipMessage(playerid, "Odpalasz ju¿ wóz!");
             return 1;
         }
+		if(NieSpamujKradnij[playerid] == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
+			return 1;
+		}
 
         if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
         {
@@ -24209,13 +24214,13 @@ CMD:adminajail(playerid, params[])
 					//KOMUNIKATY
 					if(GetPVarInt(playerid, "AdminDuty") == 1)
 					{
-						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ na czas nieokreœlony");
 						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", GetNick(playa, true), (result), money);
 						sendTipMessageEx(playerid, COLOR_LIGHTRED, string);
 						format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(playerid), money, (result));
 						sendTipMessageEx(playa, COLOR_LIGHTRED, string);
 						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
 						SendPunishMessage(string, playa);
+						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ na czas nieokreœlony");
 					}
 					else
 					{
