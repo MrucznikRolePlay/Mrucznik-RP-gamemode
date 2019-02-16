@@ -4818,16 +4818,19 @@ CMD:dmv_info(playerid, params[])
 			return 1;
 		}
 		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
-		if(strcmp(content, params, true))
+		if(spamujeKomunikatami[playerid] == 1)
 		{
-			if(spamujeKomunikatami[playerid] == 1)
-			{
-				GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Wy³a³eœ og³oszenie o tej samej treœci. Odczekaj 15 minut przed wys³aniem nastêpnego!"); 
-				format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
-				sendTipMessage(playerid, string);
-			}
-			
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", komunikatMinuty[playerid]-15);
+			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
+			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
+			sendTipMessage(playerid, string);
+			return 1;
+		}
+		if(strcmp(content, params, true) == 0)
+		{
+			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+			spamujeKomunikatami[playerid] = 1;
+			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
 		}
 		else
 		{
@@ -4836,9 +4839,7 @@ CMD:dmv_info(playerid, params[])
 			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
 			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
-		
-			spamujeKomunikatami[playerid] = 1;
-			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);
+			
 		}
 	}
 	return 1;
