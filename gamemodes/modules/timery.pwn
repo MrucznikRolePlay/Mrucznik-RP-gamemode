@@ -164,7 +164,7 @@ public KomunikatCzas(playerid)
 	komunikatMinuty[playerid]++;
 	if(komunikatMinuty[playerid] == 15)
 	{
-		spamujeKomunikatami = 1;
+		spamujeKomunikatami[playerid] = 1;
 		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponownie wys³aæ komunikat frakcyjny"); 
 	}
 	return 1;

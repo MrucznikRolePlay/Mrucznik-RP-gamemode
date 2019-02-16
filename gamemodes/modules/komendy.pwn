@@ -4817,7 +4817,7 @@ CMD:dmv_info(playerid, params[])
 			sendTipMessage(playerid, string, TEAM_CYAN_COLOR);
 			return 1;
 		}
-		if(spamujeKomunikatami == 1)
+		if(spamujeKomunikatami[playerid] == 1)
 		{
 			GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
 			if(content == params)
@@ -4834,7 +4834,7 @@ CMD:dmv_info(playerid, params[])
 		SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
 		format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
 		SendClientMessageToAll(COLOR_YELLOW, string);
-		spamujeKomunikatami = 1;
+		spamujeKomunikatami[playerid] = 1;
 		KomunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);
 	}
 	return 1;
