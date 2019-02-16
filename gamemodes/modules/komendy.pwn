@@ -4818,7 +4818,7 @@ CMD:dmv_info(playerid, params[])
 			return 1;
 		}
 		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
-		if(strcmp(content, params, true) == 0)
+		if(strcmp(content, params, true))
 		{
 			if(spamujeKomunikatami[playerid] == 1)
 			{
@@ -4827,16 +4827,19 @@ CMD:dmv_info(playerid, params[])
 				format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
 				sendTipMessage(playerid, string);
 			}
-			return 1;
+			
 		}
-		format(content, sizeof(content), "%s", params);
-		SetPVarString(playerid, "trescOgloszenia", content);
-		SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-		format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
-		SendClientMessageToAll(COLOR_YELLOW, string);
+		else
+		{
+			format(content, sizeof(content), "%s", params);
+			SetPVarString(playerid, "trescOgloszenia", content);
+			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
+			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_YELLOW, string);
 		
-		spamujeKomunikatami[playerid] = 1;
-		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);
+			spamujeKomunikatami[playerid] = 1;
+			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);
+		}
 	}
 	return 1;
 }
