@@ -4820,7 +4820,7 @@ CMD:dmv_info(playerid, params[])
 		if(spamujeKomunikatami[playerid] == 1)
 		{
 			GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
-			if(content == params)
+			if(strlen(content) == strlen(params))
 			{
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Nie mo¿esz wys³aæ og³oszenia o tej samej treœci. Odczekaj 15 minut!"); 
 				format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
