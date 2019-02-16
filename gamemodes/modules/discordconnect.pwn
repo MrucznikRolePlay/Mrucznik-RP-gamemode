@@ -75,6 +75,16 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		//format(str, sizeof(str), "%s", Odpolszcz(str));
 		//utf8decode(dest, str);
 		SendAdminMessage(0xFFC0CB, str);
+		
+		return 1;
+	}
+	if(channel == g_OrgChannel[1] && IsBot == false)
+	{
+		new user_name[32 + 1],str[128];
+		DCC_GetUserName(author, user_name);
+		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
+		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, str);
+		return 1;
 	}
 	for(new i=0;i<MAX_ORG;i++)
 	{
@@ -91,18 +101,12 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		}
 		else SendFamilyMessage(i, TEAM_AZTECAS_COLOR, str);
 		
-		break;
+		return 1;
 	}
 	
 	}
-	//tu bedzie kiedys petla taka jak wyzej (jak reszta organizacji bedzie chciala)
-	if(channel == g_OrgChannel[1] && IsBot == false)
-	{
-		new user_name[32 + 1],str[128];
-		DCC_GetUserName(author, user_name);
-		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
-		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, str);
-	}
+	
+
 
 	return 1;
 }
