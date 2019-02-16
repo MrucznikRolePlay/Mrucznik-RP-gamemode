@@ -24167,9 +24167,9 @@ CMD:adminajail(playerid, params[])
 					    OnDuty[playa] = 0;
 					    OnDutyCD[playa] = 0;
 					}
-					if(strfind((result), "DM2") == -1
-					&& strfind((result), "Death Match 2") == -1
-					&& strfind((result), "dm2") == -1)
+					if(!strfind((result), "DM2") == -1
+					&& !strfind((result), "Death Match 2") == -1
+					&& !strfind((result), "dm2") == -1)
 					{
 						//KOMUNIKATY
 						if(GetPVarInt(playerid, "AdminDuty") == 1)
