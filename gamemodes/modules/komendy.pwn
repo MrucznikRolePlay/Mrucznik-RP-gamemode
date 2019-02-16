@@ -5158,6 +5158,7 @@ CMD:kt(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];
+	new content[256];
 
     if(IsPlayerConnected(playerid) && PlayerInfo[playerid][pMember] == 10  && PlayerInfo[playerid][pRank] >= 4 || PlayerInfo[playerid][pLider] == 10)
 	{
