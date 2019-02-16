@@ -4825,17 +4825,19 @@ CMD:dmv_info(playerid, params[])
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Nie mo¿esz wys³aæ og³oszenia o tej samej treœci. Odczekaj 15 minut!"); 
 				format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
 				sendTipMessage(playerid, string);
-				KillTimer(KomunikatTime[playerid]);
+				KillTimer(komunikatTime[playerid]);
 				return 1;
 			}
 		
 		}
-		SetPVarString(playerid, "trescOgloszenia", params);
+		format(content, sizeof(content), "%s", params);
+		SetPVarString(playerid, "trescOgloszenia", content);
 		SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
 		format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
 		SendClientMessageToAll(COLOR_YELLOW, string);
+		
 		spamujeKomunikatami[playerid] = 1;
-		KomunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);
+		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);
 	}
 	return 1;
 }
