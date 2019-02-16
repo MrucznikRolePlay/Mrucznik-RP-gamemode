@@ -3105,6 +3105,7 @@ CMD:szpital(playerid, params[])
 				SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+				SetPVarString(playerid, "trescOgloszenia", params);
 			}
 		}
 	}
@@ -3172,6 +3173,7 @@ CMD:straz(playerid, params[])
 				SendClientMessageToAll(COLOR_LIGHTRED, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+				SetPVarString(playerid, "trescOgloszenia", params);
 			}
 		}
 	}
@@ -4885,6 +4887,7 @@ CMD:dmv_info(playerid, params[])
 			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
+			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			
 			
 		}
@@ -5025,7 +5028,8 @@ CMD:usss_info(playerid, params[])
 			format(string, sizeof(string), "Agent %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_PURPLE, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
-			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci");
+			SetPVarString(playerid, "trescOgloszenia", params);			
 		}
     }
     return 1;
@@ -5086,6 +5090,7 @@ CMD:armia(playerid, params[])
 			SendClientMessageToAll(COLOR_GREEN, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+			SetPVarString(playerid, "trescOgloszenia", params);
 		}
 	}
 	return 1;
@@ -5149,6 +5154,7 @@ CMD:sad(playerid, params[])
 			SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+			SetPVarString(playerid, "trescOgloszenia", params);
 		}
 	}
 	return 1;
@@ -5203,6 +5209,7 @@ CMD:kt(playerid, params[])
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+			SetPVarString(playerid, "trescOgloszenia", params);
 		}
 	}
 	else
@@ -17117,6 +17124,7 @@ CMD:fbi(playerid, params[])
 					SendClientMessageToAll(COLOR_LFBI, string);
 					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+					SetPVarString(playerid, "trescOgloszenia", params);
 				}
 			}
 		}
@@ -17221,6 +17229,7 @@ CMD:lspd(playerid, params[])
 					SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+					SetPVarString(playerid, "trescOgloszenia", params);
 				}
 			}
 		}
@@ -17383,6 +17392,7 @@ CMD:noa(playerid, params[])
 			printf("%s", string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
+			SetPVarString(playerid, "trescOgloszenia", params);
 		}
 	}
 	else
