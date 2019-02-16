@@ -92,6 +92,7 @@ new poolTrampolineStats=0;
 new spamujeKomunikatami[MAX_PLAYERS]=0;
 new komunikatTime[MAX_PLAYERS];
 new komunikatMinuty[MAX_PLAYERS]=0;
+SetPVarString(playerid, "trescOgloszenia", "null"); 
 
 
 

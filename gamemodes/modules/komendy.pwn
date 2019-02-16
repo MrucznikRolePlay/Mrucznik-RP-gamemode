@@ -4826,7 +4826,7 @@ CMD:dmv_info(playerid, params[])
 			sendTipMessage(playerid, string);
 			return 1;
 		}
-		if(!strcmp(content, params, false))
+		if(!strcmp(params, content, false))
 		{
 			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
 			spamujeKomunikatami[playerid] = 1;
@@ -4834,8 +4834,7 @@ CMD:dmv_info(playerid, params[])
 		}
 		else
 		{
-			format(content, sizeof(content), "%s", params);
-			SetPVarString(playerid, "trescOgloszenia", content);
+			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
 			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
