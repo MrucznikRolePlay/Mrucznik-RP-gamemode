@@ -179,13 +179,17 @@ forward KomunikatCzas(playerid);
 public KomunikatCzas(playerid)
 {
 	komunikatMinuty[playerid]++;
+	new obliczenia=15;
+	obliczenia = obliczenia-komunikatMinuty[playerid];
+	PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = obliczenia;
 	if(komunikatMinuty[playerid] == 15)
 	{
 		new string[128];
 		format(string, sizeof(string), "null");
-		spamujeKomunikatami[playerid] = 0;
 		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponownie wys³aæ komunikat frakcyjny"); 
 		SetPVarString(playerid, "trescOgloszenia", string);
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 0;
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 0;
 		KillTimer(komunikatTime[playerid]);
 	}
 	return 1;
@@ -198,7 +202,7 @@ public KomunikatCzasZerowanie(playerid)
 	{
 		new string[128];
 		format(string, sizeof(string), "null"); 
-		spamujeKomunikatami[playerid] = 0;
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 0;
 		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponowie wys³aæ komunikat frakcyjny"); 
 		SetPVarString(playerid, "trescOgloszenia", string);
 		KillTimer(komunikatTimeZerowanie[playerid]); 

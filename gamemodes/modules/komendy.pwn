@@ -4865,11 +4865,9 @@ CMD:dmv_info(playerid, params[])
 			return 1;
 		}
 		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
-		if(spamujeKomunikatami[playerid] == 1)
+		if(PlayerInfo[playerid][pBlokadaPisaniaFrakcja] == 1)
 		{
-			new ammountTime;
-			ammountTime = 15-komunikatMinuty[playerid];
-			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas]);
 			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
 			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
 			sendTipMessage(playerid, string);
@@ -4886,8 +4884,8 @@ CMD:dmv_info(playerid, params[])
 			return 1;
 		}
 		sendTipMessageEx(playerid, COLOR_WHITE, "Wys³a³eœ og³oszenie o tej samej treœci w czasie mniejszym jak 5 minut! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
-		spamujeKomunikatami[playerid] = 1;
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 		
 	}
 	return 1;
@@ -10465,22 +10463,25 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								if(strfind(GetNick(i), AdminName, true) != -1)
+								if(strfind(GetNick(i), AdminName) == -1)
+								{
+									AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
+									format(string, sizeof(string), "Administrator %s [%s] wszed³  na s³u¿bê administratora!", AdminName,FirstNickname);
+									SendAdminMessage(COLOR_RED, string); 
+									MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
+									format(string, sizeof(string), "%s", AdminName); 
+									SetPlayerName(playerid, string);
+									SetPVarInt(playerid, "dutyadmin", 1);
+									SetPlayerColor(playerid, 0xFF0000FF);
+								}	
+								else
 								{
 									format(string, sizeof(string), "%s [%d] ma taki sam nick jak ty!", GetNick(i), i);
 									sendTipMessageEx(playerid, COLOR_RED, string);
 									return 1;
-								}	
-								
+								}
 							}
-							AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-							format(string, sizeof(string), "Administrator %s [%s] wszed³  na s³u¿bê administratora!", AdminName,FirstNickname);
-							SendAdminMessage(COLOR_RED, string); 
-							MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
-							format(string, sizeof(string), "%s", AdminName); 
-							SetPlayerName(playerid, string);
-							SetPVarInt(playerid, "dutyadmin", 1);
-							SetPlayerColor(playerid, 0xFF0000FF);
+							
 						}
 						else
 						{
@@ -27792,7 +27793,7 @@ CMD:zamroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 7)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -27837,7 +27838,7 @@ CMD:odmroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 6)
 		{
 		    if(IsPlayerConnected(playa))
 		    {

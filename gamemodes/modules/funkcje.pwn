@@ -8693,15 +8693,16 @@ public NG_OpenGateWithKey(playerid)
 stock OddajZycie(playerid, Float:timevalue, const tekst[],  tekstwyswietl = false)
 {
 	new Float:health,timeobl;
-	
+	new string[128];
 	timeobl = timevalue*1000;
 	GetPlayerHealth(playerid, health);
 	SetPVarInt(playerid, "odnowaZyciaAdmin", health); 
 	TimerOddaniaZycia[playerid] = SetTimerEx("OddajZycieTimer", timeobl, true, "i", playerid);
 	SetPVarInt(playerid, "StatusZycia", timeobl);
+	format(string, sizeof(string), "%s", tekst); 
 	if(tekstwyswietl == true)
 	{
-		sendTipMessage(playerid, tekst); 
+		sendTipMessage(playerid, string); 
 	}
 	return 1;
 }
