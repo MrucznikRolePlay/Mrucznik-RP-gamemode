@@ -4625,7 +4625,7 @@ CMD:jump(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {
-		OddajZycie(playerid);
+		OddajZycie(playerid, 5);
 	    new Float:x,Float:y,Float:z;
 	    GetPlayerVelocity(playerid,x,y,z);
 		SetPlayerVelocity(playerid,1.2,1.2,10.9); //Forces the player to jump
