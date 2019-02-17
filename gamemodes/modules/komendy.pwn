@@ -10469,14 +10469,12 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								if(GetPVarInt(i, "dutyadmin") == 1)
+						
+								if(strfind(GetNick(i), AdminName, true) != -1)
 								{
-									GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-								}
-								if(!strcmp(AdminName, CheckAdminName, false))
-								{
-									format(string, sizeof(string), "%s ma taki sam nick jak ty!", CheckAdminName);
+									format(string, sizeof(string), "%s [%d] ma taki sam nick jak ty!", GetNick(i), i);
 									sendTipMessageEx(playerid, COLOR_RED, string);
+								
 								}
 								else
 								{
