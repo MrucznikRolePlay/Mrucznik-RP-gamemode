@@ -3832,7 +3832,7 @@ CMD:caluj(playerid, params[])
 		}
 		if(spamujeCaluj[playerid] == 1)
 		{
-			sendErrorMessage(playerid, "Odczekaj 30 sekund!"); 
+			sendErrorMessage(playerid, "Odczekaj minutê!"); 
 			return 1;
 		}
 		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
@@ -3847,7 +3847,7 @@ CMD:caluj(playerid, params[])
 					sendTipMessage(playerid, string);
 					kissPlayerOffer[playa] = playerid;
 					spamujeCaluj[playerid] = 1;
-					SetTimerEx("spamujeCalowaniem",6000,0,"d",playerid);
+					timerCaluj[playerid] = SetTimerEx("SpamujeCalowaniem",60000,0,"i",playerid);
 				}
 			}
 		}
