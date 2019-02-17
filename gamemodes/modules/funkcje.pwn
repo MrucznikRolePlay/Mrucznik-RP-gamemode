@@ -6898,16 +6898,13 @@ KupowanieDodatkow(playerid, dom)
 
 OddajZycie(playerid, timevalue)
 {
-	new Float:health;
-	new string[128];
-	new obl;
+	new Float:health,Float:timeobl;
 	
-	obl = timevalue*1000;
-	format(string, sizeof(string), "%d", obl);
+	timeobl = timevalue*1000;
 	GetPlayerHealth(playerid, health);
 	SetPVarInt(playerid, "odnowaZyciaAdmin", health); 
-	TimerOddaniaZycia[playerid] = SetTimerEx("OddajZycieTimer", string, true, "i", playerid);
-	SetPVarInt(playerid, "StatusZycia", string);
+	TimerOddaniaZycia[playerid] = SetTimerEx("OddajZycieTimer", timeobl, true, "i", playerid);
+	SetPVarInt(playerid, "StatusZycia", timeobl);
 	return 1;
 }
 Do_WnetrzaWozu(playerid, vehicleid, model)
