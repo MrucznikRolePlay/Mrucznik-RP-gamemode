@@ -4875,13 +4875,7 @@ CMD:dmv_info(playerid, params[])
 			sendTipMessage(playerid, string);
 			return 1;
 		}
-		if(!strcmp(params, content, false))
-		{
-			sendTipMessageEx(playerid, COLOR_WHITE, "Marcepan Marks mówi: Wys³a³eœ og³oszenie o tej samej treœci w czasie mniejszym jak 5 minut! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
-			spamujeKomunikatami[playerid] = 1;
-			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);	
-		}
-		else
+		if(strfind(params, content, false) == -1)
 		{
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
@@ -4889,9 +4883,12 @@ CMD:dmv_info(playerid, params[])
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
-			
-			
+			return 1;
 		}
+		sendTipMessageEx(playerid, COLOR_WHITE, "Wys³a³eœ og³oszenie o tej samej treœci w czasie mniejszym jak 5 minut! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+		spamujeKomunikatami[playerid] = 1;
+		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
+		
 	}
 	return 1;
 }
