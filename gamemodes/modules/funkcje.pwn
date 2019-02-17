@@ -6898,7 +6898,7 @@ KupowanieDodatkow(playerid, dom)
 
 public OddajZycie(playerid, timevalue)
 {
-	new health,timeobl;
+	new Float:health,timeobl;
 	
 	timeobl = timevalue*1000;
 	GetPlayerHealth(playerid, health);
