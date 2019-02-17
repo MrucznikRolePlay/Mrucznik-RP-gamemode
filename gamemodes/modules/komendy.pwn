@@ -10390,7 +10390,6 @@ CMD:adminduty(playerid, params[])
 		new stringlog[325];//String do logu
 		new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
 		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
-		new CheckAdminName[MAX_PLAYER_NAME];//Porównywanie do pêtli - Czy nie ma ju¿ takiego nicku admina
 		new y1,mi1,d1;//Data
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
@@ -10469,27 +10468,25 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								if(i != playerid)
+								if(strfind(GetNick(i), AdminName, true) != -1)
 								{
-									if(strfind(GetNick(i), AdminName, true) != -1)
-									{
-										format(string, sizeof(string), "%s [%d] ma taki sam nick jak ty!", GetNick(i), i);
-										sendTipMessageEx(playerid, COLOR_RED, string);
-									}
-									else
-									{
-										AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-										format(string, sizeof(string), "Administrator wszed³ %s [%s] na s³u¿bê administratora!", AdminName,FirstNickname);
-										SendAdminMessage(COLOR_RED, string); 
-										MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);
-									
-										format(string, sizeof(string), "%s", AdminName); 
-										SetPlayerName(playerid, string);
-										SetPVarInt(playerid, "dutyadmin", 1);
-										SetPlayerColor(playerid, 0xFF0000FF);
-										return 1;
-									}
+									format(string, sizeof(string), "%s [%d] ma taki sam nick jak ty!", GetNick(i), i);
+									sendTipMessageEx(playerid, COLOR_RED, string);
 								}
+								else
+								{
+									AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
+									format(string, sizeof(string), "Administrator wszed³ %s [%s] na s³u¿bê administratora!", AdminName,FirstNickname);
+									SendAdminMessage(COLOR_RED, string); 
+									MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);
+									
+									format(string, sizeof(string), "%s", AdminName); 
+									SetPlayerName(playerid, string);
+									SetPVarInt(playerid, "dutyadmin", 1);
+									SetPlayerColor(playerid, 0xFF0000FF);
+									return 1;
+								}
+								
 							}
 						}
 						else
@@ -10589,7 +10586,6 @@ CMD:adminstats(playerid)
 		{
 			sendErrorMessage(playerid, "Nie jesteœ podczas s³u¿by administratora!"); 
 		}
-	
 	}
 	else
 	{
