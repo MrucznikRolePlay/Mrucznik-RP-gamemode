@@ -10463,22 +10463,25 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								if(strfind(GetNick(i), AdminName, true) != -1)
+								if(strfind(GetNick(i), AdminName) == -1)
+								{
+									AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
+									format(string, sizeof(string), "Administrator %s [%s] wszed³  na s³u¿bê administratora!", AdminName,FirstNickname);
+									SendAdminMessage(COLOR_RED, string); 
+									MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
+									format(string, sizeof(string), "%s", AdminName); 
+									SetPlayerName(playerid, string);
+									SetPVarInt(playerid, "dutyadmin", 1);
+									SetPlayerColor(playerid, 0xFF0000FF);
+								}	
+								else
 								{
 									format(string, sizeof(string), "%s [%d] ma taki sam nick jak ty!", GetNick(i), i);
 									sendTipMessageEx(playerid, COLOR_RED, string);
-									
-								}	
-								return 1;
+									return 1;
+								}
 							}
-							AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-							format(string, sizeof(string), "Administrator %s [%s] wszed³  na s³u¿bê administratora!", AdminName,FirstNickname);
-							SendAdminMessage(COLOR_RED, string); 
-							MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
-							format(string, sizeof(string), "%s", AdminName); 
-							SetPlayerName(playerid, string);
-							SetPVarInt(playerid, "dutyadmin", 1);
-							SetPlayerColor(playerid, 0xFF0000FF);
+							
 						}
 						else
 						{
@@ -27790,7 +27793,7 @@ CMD:zamroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || PlayerInfo[playerid][pZG] >= 7)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || (PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 7)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -27835,7 +27838,7 @@ CMD:odmroz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 6)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 6)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
