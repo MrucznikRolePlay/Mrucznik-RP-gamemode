@@ -6895,21 +6895,7 @@ KupowanieDodatkow(playerid, dom)
     ShowPlayerDialogEx(playerid, 826, DIALOG_STYLE_LIST, "Kupowanie dodatków", strALL, "Wybierz", "WyjdŸ");
     return 1;
 }
-stock OddajZycie(playerid, timevalue, tekst[],  tekstwyswietl = false)
-{
-	new Float:health,timeobl;
-	
-	timeobl = timevalue*1000;
-	GetPlayerHealth(playerid, health);
-	SetPVarInt(playerid, "odnowaZyciaAdmin", health); 
-	TimerOddaniaZycia[playerid] = SetTimerEx("OddajZycieTimer", timeobl, true, "i", playerid);
-	SetPVarInt(playerid, "StatusZycia", timeobl);
-	if(tekstwyswietl == true)
-	{
-		sendTipMessage(playerid, tekst); 
-	}
-	return 1;
-}
+
 Do_WnetrzaWozu(playerid, vehicleid, model)
 {
 	if(model == 484)//jacht
@@ -8704,7 +8690,21 @@ public NG_OpenGateWithKey(playerid)
     DeletePVar(playerid, "ng-key");
 	return 1;
 }
-
+stock OddajZycie(playerid, Float:timevalue, const tekst[],  tekstwyswietl = false)
+{
+	new Float:health,timeobl;
+	
+	timeobl = timevalue*1000;
+	GetPlayerHealth(playerid, health);
+	SetPVarInt(playerid, "odnowaZyciaAdmin", health); 
+	TimerOddaniaZycia[playerid] = SetTimerEx("OddajZycieTimer", timeobl, true, "i", playerid);
+	SetPVarInt(playerid, "StatusZycia", timeobl);
+	if(tekstwyswietl == true)
+	{
+		sendTipMessage(playerid, tekst); 
+	}
+	return 1;
+}
 //      Aktualizacja    09.06.2014  KUBI  fix 09.07
 stock ElevatorTravel(playerid, Float:x, Float:y, Float:z, vw, Float:face)
 {
