@@ -179,6 +179,7 @@ forward KomunikatCzas(playerid);
 public KomunikatCzas(playerid)
 {
 	komunikatMinuty[playerid]++;
+	PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15-komunikatMinuty[playerid];
 	if(komunikatMinuty[playerid] == 15)
 	{
 		new string[128];
@@ -186,6 +187,8 @@ public KomunikatCzas(playerid)
 		spamujeKomunikatami[playerid] = 0;
 		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponownie wys³aæ komunikat frakcyjny"); 
 		SetPVarString(playerid, "trescOgloszenia", string);
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 0;
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 0;
 		KillTimer(komunikatTime[playerid]);
 	}
 	return 1;

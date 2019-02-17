@@ -4865,11 +4865,9 @@ CMD:dmv_info(playerid, params[])
 			return 1;
 		}
 		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
-		if(spamujeKomunikatami[playerid] == 1)
+		if(PlayerInfo[playerid][pBlokadaPisaniaFrakcja] == 1)
 		{
-			new ammountTime;
-			ammountTime = 15-komunikatMinuty[playerid];
-			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", ammountTime);
+			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas]);
 			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
 			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
 			sendTipMessage(playerid, string);
