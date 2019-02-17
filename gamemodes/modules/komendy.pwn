@@ -3847,7 +3847,7 @@ CMD:caluj(playerid, params[])
 					sendTipMessage(playerid, string);
 					kissPlayerOffer[playa] = playerid;
 					spamujeCaluj[playerid] = 1;
-					SetTimerEx("spamujeCalowaniem",6000,0,"d",playerid);
+					timerCaluj[playerid] = SetTimerEx("SpamujeCalowaniem",6000,0,"d",playerid);
 				}
 			}
 		}

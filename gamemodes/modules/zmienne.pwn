@@ -69,6 +69,7 @@ new OfferPrice[MAX_PLAYERS] = 0;
 new kissPlayerOffer[MAX_PLAYERS] = 0;
 new spamujeCaluj[MAX_PLAYERS] = 0;
 new odliczanie[MAX_PLAYERS]=0;
+new timerCaluj[MAX_PLAYERS];
 
 //ALARM DMV:
 new DMV_ALARM = 0;

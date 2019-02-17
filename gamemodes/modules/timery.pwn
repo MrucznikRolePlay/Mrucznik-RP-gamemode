@@ -130,8 +130,8 @@ public UsunPozar()
     DeleteAllFire();
     return 1;
 }
-forward spam30sekund(playerid);
-public spam30sekund(playerid)
+forward SpamujeCalowaniem(playerid);
+public SpamujeCalowaniem(playerid)
 {
 
 	if(spamujeCaluj[playerid] == 1)
