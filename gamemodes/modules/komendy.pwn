@@ -4885,7 +4885,7 @@ CMD:dmv_info(playerid, params[])
 		}
 		sendTipMessageEx(playerid, COLOR_WHITE, "Wys³a³eœ og³oszenie o tej samej treœci w czasie mniejszym jak 5 minut! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
-		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] == 1;
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 		
 	}
 	return 1;
@@ -10463,7 +10463,7 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								if(!strfind(GetNick(i), AdminName, true) == -1)
+								if(strfind(GetNick(i), AdminName, true) != -1)
 								{
 									format(string, sizeof(string), "%s [%d] ma taki sam nick jak ty!", GetNick(i), i);
 									sendTipMessageEx(playerid, COLOR_RED, string);
