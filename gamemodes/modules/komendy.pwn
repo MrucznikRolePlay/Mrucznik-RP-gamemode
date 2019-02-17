@@ -10468,10 +10468,17 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
-								if(strlen(CheckAdminName) != strlen(params))//zabezpieczenie, gdy admin próbuje ustawiæ nick admina
+								if(GetPVarInt(i, "dutyadmin") == 1)
 								{
-				
+									GetPlayerName(i, CheckAdminName, sizeof(CheckAdminName));
+								}
+								if(!strcmp(AdminName, CheckAdminName, false))
+								{
+									format(string, sizeof(string), "%s ma taki sam nick jak ty!", CheckAdminName);
+									sendTipMessageEx(playerid, COLOR_RED, string);
+								}
+								else
+								{
 									AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
 									format(string, sizeof(string), "Administrator wszed³ %s [%s] na s³u¿bê administratora!", AdminName,FirstNickname);
 									SendAdminMessage(COLOR_RED, string); 
@@ -10481,11 +10488,6 @@ CMD:adminduty(playerid, params[])
 									SetPlayerName(playerid, string);
 									SetPVarInt(playerid, "dutyadmin", 1);
 									SetPlayerColor(playerid, 0xFF0000FF);
-									return 1;
-								}
-								else
-								{
-									sendErrorMessage(playerid, "Ten nick jest juz u¿ywany! Wpisz inny."); 
 									return 1;
 								}
 							}
