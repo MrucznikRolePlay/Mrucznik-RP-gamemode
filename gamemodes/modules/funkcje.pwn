@@ -6895,8 +6895,7 @@ KupowanieDodatkow(playerid, dom)
     ShowPlayerDialogEx(playerid, 826, DIALOG_STYLE_LIST, "Kupowanie dodatków", strALL, "Wybierz", "WyjdŸ");
     return 1;
 }
-
-public OddajZycie(playerid, timevalue)
+stock OddajZycie(playerid, timevalue, tekst[],  tekstwyswietl = false)
 {
 	new Float:health,timeobl;
 	
@@ -6905,6 +6904,10 @@ public OddajZycie(playerid, timevalue)
 	SetPVarInt(playerid, "odnowaZyciaAdmin", health); 
 	TimerOddaniaZycia[playerid] = SetTimerEx("OddajZycieTimer", timeobl, true, "i", playerid);
 	SetPVarInt(playerid, "StatusZycia", timeobl);
+	if(tekstwyswietl == true)
+	{
+		sendTipMessage(playerid, tekst); 
+	}
 	return 1;
 }
 Do_WnetrzaWozu(playerid, vehicleid, model)

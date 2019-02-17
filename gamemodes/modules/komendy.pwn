@@ -4625,7 +4625,7 @@ CMD:jump(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {
-		OddajZycie(playerid, 5);
+		OddajZycie(playerid, 5, "Oddano Ci ¿ycie", true);
 	    new Float:x,Float:y,Float:z;
 	    GetPlayerVelocity(playerid,x,y,z);
 		SetPlayerVelocity(playerid,1.2,1.2,10.9); //Forces the player to jump
@@ -10470,19 +10470,17 @@ CMD:adminduty(playerid, params[])
 									format(string, sizeof(string), "%s [%d] ma taki sam nick jak ty!", GetNick(i), i);
 									sendTipMessageEx(playerid, COLOR_RED, string);
 									return 1;
-								}
-								
-								AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-								format(string, sizeof(string), "Administrator wszed³ %s [%s] na s³u¿bê administratora!", AdminName,FirstNickname);
-								SendAdminMessage(COLOR_RED, string); 
-								MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
-								format(string, sizeof(string), "%s", AdminName); 
-								SetPlayerName(playerid, string);
-								SetPVarInt(playerid, "dutyadmin", 1);
-								SetPlayerColor(playerid, 0xFF0000FF);
-								
+								}	
 								
 							}
+							AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
+							format(string, sizeof(string), "Administrator %s [%s] wszed³  na s³u¿bê administratora!", AdminName,FirstNickname);
+							SendAdminMessage(COLOR_RED, string); 
+							MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
+							format(string, sizeof(string), "%s", AdminName); 
+							SetPlayerName(playerid, string);
+							SetPVarInt(playerid, "dutyadmin", 1);
+							SetPlayerColor(playerid, 0xFF0000FF);
 						}
 						else
 						{
