@@ -6896,13 +6896,13 @@ KupowanieDodatkow(playerid, dom)
     return 1;
 }
 
-OddajZycie(playerid, timeValue)
+OddajZycie(playerid, timevalue)
 {
-	new health;
+	new Float:health;
 	new string[128];
 	new obl;
 	
-	obl = timeValue*1000;
+	obl = timevalue*1000;
 	format(string, sizeof(string), "%d", obl);
 	GetPlayerHealth(playerid, health);
 	SetPVarInt(playerid, "odnowaZyciaAdmin", health); 
