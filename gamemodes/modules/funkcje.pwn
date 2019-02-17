@@ -6896,6 +6896,14 @@ KupowanieDodatkow(playerid, dom)
     return 1;
 }
 
+OddajZycie(playerid)
+{
+	new health;
+	GetPlayerHealth(playerid, health);
+	SetPVarInt(playerid, "odnowaZyciaAdmin", health); 
+	TimerOddaniaZycia[playerid] = SetTimerEx("OddajZycieTimer", 50000, true, "i", playerid);
+	return 1;
+}
 Do_WnetrzaWozu(playerid, vehicleid, model)
 {
 	if(model == 484)//jacht

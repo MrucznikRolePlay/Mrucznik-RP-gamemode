@@ -1993,7 +1993,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                {
 						SetPlayerPosEx(playerid, 694.27490234375,-569.04272460938,-79.225189208984);//piwnica
 				        GameTextForPlayer(playerid, "~w~Mroczne piwnice i stare biura", 5000, 1);
-				        SetPlayerVirtualWorld(playerid, 0);
+				        SetPlayerVirtualWorld(playerid, 35);
 				        TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
 	                }

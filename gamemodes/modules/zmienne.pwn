@@ -97,7 +97,9 @@ new komunikatTimeZerowanie[MAX_PLAYERS];
 new komunikatMinutyZerowanie[MAX_PLAYERS]=0;
 
 
-
+//Admin Adds
+new TimerOddaniaZycia[MAX_PLAYERS];
+new dajHPSekunda[MAX_PLAYERS]=0;
 //legal
 new DB:db_handle;
 enum eLegalWpns {

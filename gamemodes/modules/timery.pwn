@@ -130,6 +130,21 @@ public UsunPozar()
     DeleteAllFire();
     return 1;
 }
+//Komendy Admina - Timer na oddanie HP
+forward OddajZycieTimer(playerid);
+public OddajZycieTimer(playerid)
+{
+	dajHPSekunda[playerid]++;
+	if(dajHPSekunda[playerid] == 1)
+	{
+		new ammoutHP;
+		ammoutHP = GetPVarInt(playerid, "odnowaZyciaAdmin");
+		SetPlayerHealth(playerid, ammoutHP);
+		KillTimer(TimerOddaniaZycia[playerid]);
+	}
+	return 1;
+}
+//Ca³owanie - anty spam
 forward SpamujeCalowaniem(playerid);
 public SpamujeCalowaniem(playerid)
 {
