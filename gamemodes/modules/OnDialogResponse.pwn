@@ -5797,7 +5797,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    }
 				    case 3:
 				    {
-				        ShowPlayerDialogEx(playerid, 453, DIALOG_STYLE_LIST, "Samochody terenowe", "Rancher 600tys\nHuntley 350tys\nLandstalker 200tys\nMesa 700tys\nBF Injection 800tys\nSandking 4mln\nHummer 7mln", "Wybierz", "Wróæ");
+				        ShowPlayerDialogEx(playerid, 453, DIALOG_STYLE_LIST, "Samochody terenowe", "Rancher 600tys\nHuntley 350tys\nLandstalker 200tys\nMesa 700tys\nBF Injection 800tys\nHummer 7mln", "Wybierz", "Wróæ");
 				    }
 				    case 4:
 				    {
@@ -6219,13 +6219,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    pojazdid[playerid] = 424;
 	                    CenaPojazdu[playerid] = 800000;
 					}
+					/*=========[ZABLOKOWANO Z POWODU NADU¯YÆ POJAZDU - 18-02-2019]=============
 					case 5:
 					{
 					    ShowPlayerDialogEx(playerid, 4304, DIALOG_STYLE_MSGBOX, "Kupowanie Sandkinga", "Sandking\n\nCena: 4.000.000$\nPrêdkoœæ Maksymalna: 180km/h\nIloœæ miejsc: 2\nOpis: Sportowy wóz terenowy, kolory raczej ciemne.\nPrzejedzie przez ka¿d¹ przeszkodê!", "Kup!", "Wróæ");
 	                    pojazdid[playerid] = 495;
 	                    CenaPojazdu[playerid] = 4000000;
-					}
-					case 6:
+					}*/
+					case 5:
 					{
 					    ShowPlayerDialogEx(playerid, 4304, DIALOG_STYLE_MSGBOX, "Kupowanie Hummera", "Hummer\n\nCena: 7.000.000$\nPrêdkoœæ Maksymalna: 180km/h\nIloœæ miejsc: 2\nOpis: Wojskowy wóz terenowy, tylko jeden kolor.", "Kup!", "Wróæ");
 	                    pojazdid[playerid] = 470;

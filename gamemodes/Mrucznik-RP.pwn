@@ -6320,7 +6320,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	{
 		if(GetPlayerVehicleID(playerid) <= CAR_End) //do kradziezy
         {
-            if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid);)
+            if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid))
 		    {
 				sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
 			}
