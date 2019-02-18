@@ -1398,6 +1398,7 @@ enum pInfo
 	Float:pHealth,
 	Float:pSHealth,
 	pInt,
+	pVW,
 	pDomWKJ,
 	pDomT,
 	//pDomW,

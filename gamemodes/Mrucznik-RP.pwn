@@ -911,7 +911,7 @@ public OnPlayerDisconnect(playerid, reason)
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
-	PlayerInfo[playerid][pLocal] = GetPlayerVirtualWorld(playerid); //local u¿yty do przechowania virtual worldu
+	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //local u¿yty do przechowania virtual worldu
 
 	new reString[128];
     new DisconnectReason[3][] =
@@ -1977,7 +1977,7 @@ SetPlayerSpawnPos(playerid)
 		{
 			SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
-			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pLocal]);
+			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			Wchodzenie(playerid);
 			if(PlayerInfo[playerid][pLocal] == 103)
 	        {
