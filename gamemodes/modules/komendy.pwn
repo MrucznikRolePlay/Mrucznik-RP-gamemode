@@ -3085,7 +3085,7 @@ CMD:szpital(playerid, params[])
 				SetPVarString(playerid, "trescOgloszenia", params);
 				SendClientMessageToAll(COLOR_WHITE, "|___________ Medical Center ___________|");
 				format(string, sizeof(string), "Lekarz %s: %s", sendername, params);
-				SendClientMessageToAll(COLOR_LIGHTBLUE, string);;
+				SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 				return 1;
