@@ -179,9 +179,6 @@ forward KomunikatCzas(playerid);
 public KomunikatCzas(playerid)
 {
 	komunikatMinuty[playerid]++;
-	new obliczenia=15;
-	obliczenia = obliczenia-komunikatMinuty[playerid];
-	PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = obliczenia;
 	if(komunikatMinuty[playerid] == 15)
 	{
 		new string[128];
