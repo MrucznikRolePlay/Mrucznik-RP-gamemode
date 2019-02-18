@@ -3861,6 +3861,11 @@ CMD:caluj(playerid, params[])
 			sendErrorMessage(playerid, "Odczekaj 2 minuty!"); 
 			return 1;
 		}
+		if(playa == playerid)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz poca³owaæ samego siebie!"); 
+			return 1;
+		}
 		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
@@ -4664,6 +4669,7 @@ CMD:sh(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {
+		OddajZycie(playerid, 3, "Zresetowano HP", true);
 	    new Float:x,Float:y,Float:z;
 	    GetPlayerVelocity(playerid,x,y,z);
 		SetPlayerVelocity(playerid,1.2,1.2,-0.5); //Forces the player to sink
@@ -17863,9 +17869,12 @@ CMD:odpal(playerid)
             sendTipMessage(playerid, "Odpalasz ju¿ wóz!");
             return 1;
         }
-		if(NieSpamujKradnij[playerid] == 1)
-		{
-			sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
+		if(GetPlayerVehicleID(playerid) <= CAR_End) //do kradziezy
+        {
+            if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid))
+		    {
+				sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
+			}
 			return 1;
 		}
 
@@ -18205,8 +18214,11 @@ CMD:k(playerid, params[])
         format(string, sizeof(string), "%s Krzyczy: %s!!", GetNick(playerid), params);
         printf("%s", string);
 		//SetPlayerChatBubble(playerid,string,COLOR_WHITE,30.0,8000);
-        ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
-		ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+		if(!IsPlayerInAnyVehicle(playerid))
+		{
+			ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+			ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+		}
 		}
 	}
 	return 1;
