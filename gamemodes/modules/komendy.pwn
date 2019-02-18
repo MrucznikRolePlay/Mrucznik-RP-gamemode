@@ -3085,7 +3085,7 @@ CMD:szpital(playerid, params[])
 				SetPVarString(playerid, "trescOgloszenia", params);
 				SendClientMessageToAll(COLOR_WHITE, "|___________ Medical Center ___________|");
 				format(string, sizeof(string), "Lekarz %s: %s", sendername, params);
-				SendClientMessageToAll(COLOR_YELLOW, string);
+				SendClientMessageToAll(COLOR_LIGHTBLUE, string);;
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 				return 1;
@@ -3153,7 +3153,7 @@ CMD:straz(playerid, params[])
 				SetPVarString(playerid, "trescOgloszenia", params);
 				SendClientMessageToAll(COLOR_WHITE, "|___________ Fire Department ___________|");
 				format(string, sizeof(string), "Stra¿ak %s: %s", sendername, params);
-				SendClientMessageToAll(COLOR_YELLOW, string);
+				SendClientMessageToAll(COLOR_LIGHTRED, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 				return 1;
@@ -5024,7 +5024,7 @@ CMD:usss_info(playerid, params[])
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_WHITE, "|___________ United States Secret Service ___________|");
 			format(string, sizeof(string), "Agent %s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_YELLOW, string);
+			SendClientMessageToAll(COLOR_PURPLE, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
@@ -5085,7 +5085,7 @@ CMD:armia(playerid, params[])
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Armii ___________|");
 			format(string, sizeof(string), "Genera³ %s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_YELLOW, string);
+			SendClientMessageToAll(COLOR_GREEN, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
@@ -5149,7 +5149,7 @@ CMD:sad(playerid, params[])
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ S¹du ___________|");
 			format(string, sizeof(string), "Sêdzia %s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_YELLOW, string);
+			SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
@@ -10471,7 +10471,7 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								if(strfind(GetNick(i), AdminName) != -1)
+								if(strfind(GetNick(i), AdminName, true) != -1)
 								{
 									adminMaWolnyNick = 1;
 								}
@@ -17117,7 +17117,7 @@ CMD:fbi(playerid, params[])
 					SetPVarString(playerid, "trescOgloszenia", params);
 					SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat FBI ___________|");
 					format(string, sizeof(string), "Agent FBI %s: %s", sendername, params);
-					SendClientMessageToAll(COLOR_YELLOW, string);
+					SendClientMessageToAll(COLOR_LFBI, string);
 					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 					return 1;
@@ -17222,7 +17222,7 @@ CMD:lspd(playerid, params[])
 					SetPVarString(playerid, "trescOgloszenia", params);
 					SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat LSPD ___________|");
 					format(string, sizeof(string), "Oficer %s: %s", GetNick(playerid, true), params);
-					SendClientMessageToAll(COLOR_YELLOW, string);
+					SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 					return 1;
@@ -17384,7 +17384,7 @@ CMD:noa(playerid, params[])
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(0xA400A4C8,"|____________[WIADOMOSC FDU]____________|");
 			format(string, sizeof(string), "%s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_YELLOW, string);
+			SendClientMessageToAll(COLOR_GREY, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
