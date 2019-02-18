@@ -15840,7 +15840,7 @@ CMD:sprzedajauto(playerid, params[])
 
         IDAuta[playa] = VehicleUID[lVeh][vUID];
 
- 		if(!ProxDetectorS(10.0, playerid, playa)) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
+ 		if(!ProxDetectorS(10.0, playerid, playa) && Spectate[giveplayerid] != INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 		if(!(cena > 0 && cena < 900000001)) return sendErrorMessage(playerid, "Cena od 1 do 900 000 000$ !");
 
         if(lVeh <= CAR_End) return sendErrorMessage(playerid, "Tego pojazdu nie mo¿na sprzedaæ");
