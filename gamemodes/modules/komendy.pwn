@@ -4867,6 +4867,7 @@ CMD:dmv_info(playerid, params[])
 		GetPVarString(playerid, "trescOgloszenia", content, sizeof(content));
 		if(PlayerInfo[playerid][pBlokadaPisaniaFrakcja] == 1)
 		{
+			PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15-komunikatMinuty[playerid];
 			format(string, sizeof(string), "Wys³a³eœ og³oszenie o tej samej treœci, odczekaj jeszcze %d minut", PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas]);
 			sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string); 
 			format(string, sizeof(string), "{A0522D}Ostatnie og³oszenie: {FFFFFF}%s", content);
@@ -4883,9 +4884,10 @@ CMD:dmv_info(playerid, params[])
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
 		}
-		sendTipMessageEx(playerid, COLOR_WHITE, "Wys³a³eœ og³oszenie o tej samej treœci w czasie mniejszym jak 5 minut! Zostajesz ukarany kar¹ Anty-Spam na 15 minut");
+		sendTipMessageEx(playerid, COLOR_WHITE, "Wys³a³eœ og³oszenie o tej samej treœci w czasie mniejszym jak {AC3737}5 minut! {C0C0C0}Zostajesz ukarany kar¹ Anty-Spam na {AC3737}15 minut");
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
 		
 	}
 	return 1;
