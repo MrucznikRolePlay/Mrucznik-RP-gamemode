@@ -8690,7 +8690,7 @@ public NG_OpenGateWithKey(playerid)
     DeletePVar(playerid, "ng-key");
 	return 1;
 }
-stock OddajZycie(playerid, Float:timevalue, const tekst[],  tekstwyswietl = false)
+stock OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
 {
 	new Float:health,timeobl;
 	new string[128];
