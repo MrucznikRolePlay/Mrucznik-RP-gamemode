@@ -10471,7 +10471,7 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								if(strfind(GetNick(i), AdminName) == -1)
+								if(strfind(GetNick(i), AdminName) != -1)
 								{
 									adminMaWolnyNick = 1;
 								}
