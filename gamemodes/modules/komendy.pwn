@@ -3211,7 +3211,7 @@ CMD:reklama(playerid)
 	}
 	return 1;
 }
-CMD:zdejmijbpkomunikat(playerid, params[]) return cmd_zdejmijbpk(playerid, params[]);
+
 CMD:zdejmijbpk(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
@@ -3222,24 +3222,22 @@ CMD:zdejmijbpk(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /zdejmijbpk [ID GRACZA]"); 
 			return 1;
 		}
-		if(IsPlayerConnected(giveplayerid))
-		{
-			new string[128];
-			format(string, sizeof(string), "null");
-			SetPVarString(giveplayerid, "trescOgloszenia", string);
-			PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcjaCzas] = 0;
-			PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcja] = 0;
-			KillTimer(komunikatTime[giveplayerid]);
-			format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania na komunikatach frakcyjnych", GetNick(playerid));
-			sendTipMessageEx(playerid, COLOR_P@, string);
-			format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s. Mo¿e on teraz swobodnie pisaæ komunikat frakcyjny", GetNick(playerid), GetNick(giveplayerid));
-			SendAdminMessage(COLOR_RED, string);
-		}
-		else
+		if(!IsPlayerConnected(giveplayerid))
 		{
 			sendErrorMessage(playerid, "Nie ma takiego gracza"); 
 			return 1;
 		}
+		new string[128];
+		format(string, sizeof(string), "null");
+		SetPVarString(giveplayerid, "trescOgloszenia", string);			
+		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcjaCzas] = 0;
+		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcja] = 0;
+		KillTimer(komunikatTime[giveplayerid]);
+		format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania na komunikatach frakcyjnych", GetNick(playerid));
+		sendTipMessageEx(playerid, COLOR_P@, string);
+		format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s. Mo¿e on teraz swobodnie pisaæ komunikat frakcyjny", GetNick(playerid), GetNick(giveplayerid));
+		SendAdminMessage(COLOR_RED, string);
+		
 	}
 	else
 	{
@@ -28215,12 +28213,12 @@ CMD:ah(playerid)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /kick");
         SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo /czyjtonumer");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /zdejmijbpk"
+		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /zdejmijbpk");
     }
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
-		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /zdejmijbpk"
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /zdejmijbpk");
 	}
     if (PlayerInfo[playerid][pNewAP] == 5)
     {
@@ -28229,7 +28227,7 @@ CMD:ah(playerid)
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotomechy /gotobank /gotostacja");
-		SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /zdejmijbpk"
+		SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /zdejmijbpk");
     }
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
@@ -28242,7 +28240,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint /naprawskin /czyjtonumer");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk"
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
