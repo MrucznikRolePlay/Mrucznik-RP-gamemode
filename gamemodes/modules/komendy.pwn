@@ -3096,6 +3096,8 @@ CMD:szpital(playerid, params[])
 			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 			PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 			PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+			format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+			SendAdminMessage(COLOR_BLUE, string);
 		}
 	}
 	return 1;
@@ -3164,6 +3166,8 @@ CMD:straz(playerid, params[])
 			komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 			PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 			PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+			format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+			SendAdminMessage(COLOR_BLUE, string);
 		}
 	}
 	return 1;
@@ -3207,7 +3211,33 @@ CMD:reklama(playerid)
 	}
 	return 1;
 }
-
+CMD:zdejmijbpkomunikat(playerid, params[]) return cmd_zdejmijbpk(playerid, params[]);
+CMD:zdejmijbpk(playerid, params[])
+{
+	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+	{
+		if(sscanf(params, "k<fix>", giveplayerid))
+		{
+			sendTipMessage(playerid, "U¿yj /zdejmijbpk [ID GRACZA]"); 
+			return 1;
+		}
+		new string[128];
+		format(string, sizeof(string), "null");
+		SetPVarString(giveplayerid, "trescOgloszenia", string);
+		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcjaCzas] = 0;
+		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcja] = 0;
+		KillTimer(komunikatTime[giveplayerid]);
+		format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania na komunikatach frakcyjnych", GetNick(playerid));
+		sendTipMessageEx(playerid, COLOR_P@, string);
+		format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s. Mo¿e on teraz swobodnie pisaæ komunikat frakcyjny", GetNick(playerid), GetNick(giveplayerid));
+		SendAdminMessage(COLOR_RED, string);
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Brak uprawnieñ"); 
+	}
+	return 1;
+}
 CMD:alkomat(playerid, params[])
 {
 	new giveplayerid;
@@ -4894,6 +4924,8 @@ CMD:dmv_info(playerid, params[])
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+		format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+		SendAdminMessage(COLOR_BLUE, string);
 		
 	}
 	return 1;
@@ -5035,6 +5067,8 @@ CMD:usss_info(playerid, params[])
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+		format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+		SendAdminMessage(COLOR_BLUE, string);
     }
     return 1;
 }
@@ -5096,6 +5130,8 @@ CMD:armia(playerid, params[])
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+		format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+		SendAdminMessage(COLOR_BLUE, string);
 	}
 	return 1;
 }
@@ -5160,6 +5196,8 @@ CMD:sad(playerid, params[])
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+		format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+		SendAdminMessage(COLOR_BLUE, string);
 	}
 	return 1;
 }
@@ -5214,6 +5252,8 @@ CMD:kt(playerid, params[])
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+		format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+		SendAdminMessage(COLOR_BLUE, string);
 	}
 	else
 	{
@@ -17128,6 +17168,8 @@ CMD:fbi(playerid, params[])
 				komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 				PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 				PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+				format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+				SendAdminMessage(COLOR_BLUE, string);
 			}
 		}
 		else
@@ -17233,6 +17275,8 @@ CMD:lspd(playerid, params[])
 				komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 				PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 				PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+				format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+				SendAdminMessage(COLOR_BLUE, string);
 			}
 		}
 		else
@@ -17395,6 +17439,8 @@ CMD:noa(playerid, params[])
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 1;
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
+		format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+		SendAdminMessage(COLOR_BLUE, string);
 	}
 	else
 	{
@@ -28160,10 +28206,12 @@ CMD:ah(playerid)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /kick");
         SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo /czyjtonumer");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PÓ£ADMIN *** /zdejmijbpk"
     }
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /zdejmijbpk"
 	}
     if (PlayerInfo[playerid][pNewAP] == 5)
     {
@@ -28172,6 +28220,7 @@ CMD:ah(playerid)
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotomechy /gotobank /gotostacja");
+		SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /zdejmijbpk"
     }
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
@@ -28184,6 +28233,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint /naprawskin /czyjtonumer");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk"
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
