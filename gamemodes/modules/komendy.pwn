@@ -3085,7 +3085,7 @@ CMD:szpital(playerid, params[])
 				SetPVarString(playerid, "trescOgloszenia", params);
 				SendClientMessageToAll(COLOR_WHITE, "|___________ Medical Center ___________|");
 				format(string, sizeof(string), "Lekarz %s: %s", sendername, params);
-				SendClientMessageToAll(COLOR_YELLOW, string);
+				SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 				return 1;
@@ -3153,7 +3153,7 @@ CMD:straz(playerid, params[])
 				SetPVarString(playerid, "trescOgloszenia", params);
 				SendClientMessageToAll(COLOR_WHITE, "|___________ Fire Department ___________|");
 				format(string, sizeof(string), "Stra¿ak %s: %s", sendername, params);
-				SendClientMessageToAll(COLOR_YELLOW, string);
+				SendClientMessageToAll(COLOR_LIGHTRED, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 				return 1;
@@ -5024,7 +5024,7 @@ CMD:usss_info(playerid, params[])
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_WHITE, "|___________ United States Secret Service ___________|");
 			format(string, sizeof(string), "Agent %s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_YELLOW, string);
+			SendClientMessageToAll(COLOR_PURPLE, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
@@ -5085,7 +5085,7 @@ CMD:armia(playerid, params[])
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Armii ___________|");
 			format(string, sizeof(string), "Genera³ %s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_YELLOW, string);
+			SendClientMessageToAll(COLOR_GREEN, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
@@ -5149,7 +5149,7 @@ CMD:sad(playerid, params[])
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ S¹du ___________|");
 			format(string, sizeof(string), "Sêdzia %s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_YELLOW, string);
+			SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
@@ -10393,6 +10393,7 @@ CMD:adminduty(playerid, params[])
 		new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
 		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
 		new y1,mi1,d1;//Data
+		new adminMaWolnyNick = 0;
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
 		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
@@ -10412,105 +10413,109 @@ CMD:adminduty(playerid, params[])
 			}
 			else
 			{
-				foreach(Player, i)
+				if(strlen(params) < 32)//Maksymalnie 32 znaki nicku
 				{
-					if(strlen(params) < 32)//Maksymalnie 32 znaki nicku
+					if(strlen(params) >= 3)//Minimalnie 3 znaki
 					{
-						if(strlen(params) >= 3)//Minimalnie 3 znaki
+						//Symbole i znaki specjalne
+						if(strfind(params, "%") == -1 
+						&& strfind(params, "_") == -1 
+						&& strfind(params, " ") == -1
+						&& strfind(params, "!") == -1
+						&& strfind(params, "@") == -1
+						&& strfind(params, "#") == -1
+						&& strfind(params, "$") == -1
+						&& strfind(params, "^") == -1
+						&& strfind(params, "&") == -1
+						&& strfind(params, "*") == -1
+						&& strfind(params, "-") == -1
+						&& strfind(params, "~") == -1
+						&& strfind(params, "=") == -1
+						&& strfind(params, "?") == -1
+						&& strfind(params, ",") == -1
+						&& strfind(params, ".") == -1
+						&& strfind(params, "<") == -1
+						&& strfind(params, ">") == -1
+						&& strfind(params, ")") == -1
+						&& strfind(params, "(") == -1
+						&& strfind(params, "]") == -1
+						&& strfind(params, "[") == -1
+						&& strfind(params, "XD") == -1
+						&& strfind(params, "}") == -1
+						&& strfind(params, "{") == -1
+						&& strfind(params, ":") == -1 
+						&& strfind(params, "`") == -1 
+						&& strfind(params, "/") == -1
+						&& strfind(params, "|") == -1
+						//&& strfind(params, "\") == -1
+						//Wulgarne
+						&& strfind(params, "kurwa") == -1
+						&& strfind(params, "jebaæ") == -1
+						&& strfind(params, "jebac") == -1
+						&& strfind(params, "huj") == -1
+						&& strfind(params, "cipa") == -1
+						&& strfind(params, "kutas") == -1
+						&& strfind(params, "chuj") == -1
+						&& strfind(params, "69") == -1//Zabezpieczenie Anty-Jupik
+						//polskie znaki
+						&& strfind(params, "¹") == -1
+						&& strfind(params, "œ") == -1
+						&& strfind(params, "¿") == -1
+						&& strfind(params, "Ÿ") == -1
+						&& strfind(params, "æ") == -1
+						&& strfind(params, "ê") == -1
+						&& strfind(params, "ñ") == -1
+						&& strfind(params, "ó") == -1
+						//Plus
+						&& strfind(params, "+") == -1)
 						{
-							//Symbole i znaki specjalne
-							if(strfind(params, "%") == -1 
-							&& strfind(params, "_") == -1 
-							&& strfind(params, " ") == -1
-							&& strfind(params, "!") == -1
-							&& strfind(params, "@") == -1
-							&& strfind(params, "#") == -1
-							&& strfind(params, "$") == -1
-							&& strfind(params, "^") == -1
-							&& strfind(params, "&") == -1
-							&& strfind(params, "*") == -1
-							&& strfind(params, "-") == -1
-							&& strfind(params, "~") == -1
-							&& strfind(params, "=") == -1
-							&& strfind(params, "?") == -1
-							&& strfind(params, ",") == -1
-							&& strfind(params, ".") == -1
-							&& strfind(params, "<") == -1
-							&& strfind(params, ">") == -1
-							&& strfind(params, ")") == -1
-							&& strfind(params, "(") == -1
-							&& strfind(params, "]") == -1
-							&& strfind(params, "[") == -1
-							&& strfind(params, "XD") == -1
-							&& strfind(params, "}") == -1
-							&& strfind(params, "{") == -1
-							&& strfind(params, ":") == -1 
-							&& strfind(params, "`") == -1 
-							&& strfind(params, "/") == -1
-							&& strfind(params, "|") == -1
-							//&& strfind(params, "\") == -1
-							//Wulgarne
-							&& strfind(params, "kurwa") == -1
-							&& strfind(params, "jebaæ") == -1
-							&& strfind(params, "jebac") == -1
-							&& strfind(params, "huj") == -1
-							&& strfind(params, "cipa") == -1
-							&& strfind(params, "kutas") == -1
-							&& strfind(params, "chuj") == -1
-							&& strfind(params, "69") == -1//Zabezpieczenie Anty-Jupik
-							//polskie znaki
-							&& strfind(params, "¹") == -1
-							&& strfind(params, "œ") == -1
-							&& strfind(params, "¿") == -1
-							&& strfind(params, "Ÿ") == -1
-							&& strfind(params, "æ") == -1
-							&& strfind(params, "ê") == -1
-							&& strfind(params, "ñ") == -1
-							&& strfind(params, "ó") == -1
-							//Plus
-							&& strfind(params, "+") == -1)
+							foreach(Player, i)
 							{
-								if(strfind(GetNick(i), AdminName) == -1)
+								if(strfind(GetNick(i), AdminName, true) != -1)
 								{
-									AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-									format(string, sizeof(string), "Administrator %s [%s] wszed³  na s³u¿bê administratora!", AdminName,FirstNickname);
-									SendAdminMessage(COLOR_RED, string); 
-									MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
-									format(string, sizeof(string), "%s", AdminName); 
-									SetPlayerName(playerid, string);
-									SetPVarInt(playerid, "dutyadmin", 1);
-									SetPlayerColor(playerid, 0xFF0000FF);
-								}	
-								else
-								{
-									format(string, sizeof(string), "%s [%d] ma taki sam nick jak ty!", GetNick(i), i);
-									sendTipMessageEx(playerid, COLOR_RED, string);
-									return 1;
-								}	
+									adminMaWolnyNick = 1;
+								}
+							}
+							if(adminMaWolnyNick == 0)
+							{
+								AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
+								format(string, sizeof(string), "Administrator %s [%s] wszed³  na s³u¿bê administratora!", AdminName,FirstNickname);
+								SendAdminMessage(COLOR_RED, string); 
+								MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
+								format(string, sizeof(string), "%s", AdminName); 
+								SetPlayerName(playerid, string);
+								SetPVarInt(playerid, "dutyadmin", 1);
+								SetPlayerColor(playerid, 0xFF0000FF);
 							}
 							else
 							{
-								sendErrorMessage(playerid, "U¿y³eœ nieprawid³owych znaków!"); 
-								MSGBOX_Show(playerid, "Zle znaki!", MSGBOX_ICON_TYPE_ERROR);
+								sendErrorMessage(playerid, "Ten nick jest ju¿ zajêty!");
 								return 1;
 							}
-						}
+							
+						}	
 						else
 						{
-							sendErrorMessage(playerid, "Minimalna d³ugoœæ nicku to 3 znaki!"); 
+							sendErrorMessage(playerid, "U¿y³eœ nieprawid³owych znaków!"); 
+							MSGBOX_Show(playerid, "Zle znaki!", MSGBOX_ICON_TYPE_ERROR);
 							return 1;
 						}
-						
-					}
+					}	
 					else
 					{
-						sendErrorMessage(playerid, "Maksymalna d³ugoœæ nicku to 32 znaki!"); 
+						sendErrorMessage(playerid, "Minimalna d³ugoœæ nicku to 3 znaki!"); 
 						return 1;
 					}
+						
 				}
-				
-				return 1;	
+				else
+				{
+					sendErrorMessage(playerid, "Maksymalna d³ugoœæ nicku to 32 znaki!"); 
+					return 1;
+				}
 			}
+				
+			return 1;	
 		}
 		else if(GetPVarInt(playerid, "dutyadmin") == 1)//Wykonuje zejœcie z duty
 		{
@@ -17112,7 +17117,7 @@ CMD:fbi(playerid, params[])
 					SetPVarString(playerid, "trescOgloszenia", params);
 					SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat FBI ___________|");
 					format(string, sizeof(string), "Agent FBI %s: %s", sendername, params);
-					SendClientMessageToAll(COLOR_YELLOW, string);
+					SendClientMessageToAll(COLOR_LFBI, string);
 					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 					return 1;
@@ -17217,7 +17222,7 @@ CMD:lspd(playerid, params[])
 					SetPVarString(playerid, "trescOgloszenia", params);
 					SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat LSPD ___________|");
 					format(string, sizeof(string), "Oficer %s: %s", GetNick(playerid, true), params);
-					SendClientMessageToAll(COLOR_YELLOW, string);
+					SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 					return 1;
@@ -17379,7 +17384,7 @@ CMD:noa(playerid, params[])
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(0xA400A4C8,"|____________[WIADOMOSC FDU]____________|");
 			format(string, sizeof(string), "%s: %s", sendername, params);
-			SendClientMessageToAll(COLOR_YELLOW, string);
+			SendClientMessageToAll(COLOR_GREY, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
