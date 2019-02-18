@@ -4651,7 +4651,7 @@ CMD:jump(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {
-		OddajZycie(playerid, 5, "Oddano Ci ¿ycie", true);
+		OddajZycie(playerid, 3, "Oddano Ci ¿ycie", true);
 	    new Float:x,Float:y,Float:z;
 	    GetPlayerVelocity(playerid,x,y,z);
 		SetPlayerVelocity(playerid,1.2,1.2,10.9); //Forces the player to jump
@@ -28199,7 +28199,7 @@ CMD:rybypomoc(playerid)
 
 
 
-elp(playerid) return cmd_ah(playerid);
+CMD:adminhelp(playerid) return cmd_ah(playerid);
 CMD:ah(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
