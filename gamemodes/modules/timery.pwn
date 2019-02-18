@@ -137,9 +137,10 @@ public OddajZycieTimer(playerid)
 	new stathptime = GetPVarInt(playerid, "statusZycia");
 	new obl = stathptime/1000;
 	dajHPSekunda[playerid]++;
-	if(dajHPSekunda[playerid] == obl)
+	if(dajHPSekunda[playerid] == 2)
 	{
 		new ammoutHP;
+		SetPlayerHealth(playerid, 1);
 		ammoutHP = GetPVarInt(playerid, "odnowaZyciaAdmin");
 		SetPlayerHealth(playerid, ammoutHP);
 		KillTimer(TimerOddaniaZycia[playerid]);
