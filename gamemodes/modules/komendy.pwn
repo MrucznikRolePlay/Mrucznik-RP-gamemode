@@ -3152,7 +3152,7 @@ CMD:straz(playerid, params[])
 			{
 				SetPVarString(playerid, "trescOgloszenia", params);
 				SendClientMessageToAll(COLOR_WHITE, "|___________ Fire Department ___________|");
-			format(string, sizeof(string), "Stra¿ak %s: %s", sendername, params);
+				format(string, sizeof(string), "Stra¿ak %s: %s", sendername, params);
 				SendClientMessageToAll(COLOR_YELLOW, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -5202,7 +5202,7 @@ CMD:kt(playerid, params[])
 		{
 			SetPVarString(playerid, "trescOgloszenia", params);
 			SendClientMessageToAll(COLOR_YELLOW, "|___________ Korporacja Transportowa ___________|");
-			format(string, sizeof(string), " %s: {FFFFFF}%s", sendername, params);;
+			format(string, sizeof(string), "Agent %s: {FFFFFF}%s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
