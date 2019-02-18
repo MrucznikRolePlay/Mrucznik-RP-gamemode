@@ -150,14 +150,11 @@ public OddajZycieTimer(playerid)
 forward SpamujeCalowaniem(playerid);
 public SpamujeCalowaniem(playerid)
 {
-
-	if(spamujeCaluj[playerid] == 1)
+	odliczanie[playerid]++;
+	if(odliczanie[playerid] == 2)
 	{
-		odliczanie[playerid]++;
-		if(odliczanie[playerid] == 1)
-		{
-			spamujeCaluj[playerid] =0;
-		}
+		spamujeCaluj[playerid] =0;
+		KillTimer(timerCaluj[playerid]);
 	}
 	return 1;
 }

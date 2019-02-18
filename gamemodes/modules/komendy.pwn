@@ -3083,8 +3083,8 @@ CMD:szpital(playerid, params[])
 			if(strfind(params, content, false) == -1)
 			{
 				SetPVarString(playerid, "trescOgloszenia", params);
-				SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-				format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+				SendClientMessageToAll(COLOR_WHITE, "|___________ Medical Center ___________|");
+				format(string, sizeof(string), "Lekarz %s: %s", sendername, params);
 				SendClientMessageToAll(COLOR_YELLOW, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -3151,8 +3151,8 @@ CMD:straz(playerid, params[])
 			if(strfind(params, content, false) == -1)
 			{
 				SetPVarString(playerid, "trescOgloszenia", params);
-				SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-				format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+				SendClientMessageToAll(COLOR_WHITE, "|___________ Fire Department ___________|");
+			format(string, sizeof(string), "Stra¿ak %s: %s", sendername, params);
 				SendClientMessageToAll(COLOR_YELLOW, string);
 				komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 				sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -3821,7 +3821,7 @@ CMD:caluj(playerid, params[])
 		}
 		if(spamujeCaluj[playerid] == 1)
 		{
-			sendErrorMessage(playerid, "Odczekaj minutê!"); 
+			sendErrorMessage(playerid, "Odczekaj 2 minuty!"); 
 			return 1;
 		}
 		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
@@ -4784,10 +4784,18 @@ CMD:odmv(playerid)
 
 	if((IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 1))
 	{
-	    GetPlayerName(playerid, sendername, sizeof(sendername));
-		format(string, sizeof(string), "|____________Urz¹d Miasta otwarty przez %s_____________|", sendername);
-		SendClientMessageToAll(COLOR_LIGHTGREEN, string);
-		dmv = 1;
+		if(dmv == 0)
+		{
+		
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			format(string, sizeof(string), "|____________Urz¹d Miasta otwarty przez %s_____________|", sendername);
+			SendClientMessageToAll(COLOR_LIGHTGREEN, string);
+			dmv = 1;
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Urz¹d jest otwarty!"); 
+		}
 	}
 	else
 	{
@@ -4805,10 +4813,17 @@ CMD:zdmv(playerid)
 
 	if((IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 1))
 	{
-        GetPlayerName(playerid, sendername, sizeof(sendername));
-		format(string, sizeof(string), "|____________Urz¹d miasta zamkniêty przez %s____________|", sendername);
-		SendClientMessageToAll(COLOR_LIGHTGREEN, string);
-		dmv = 0;
+		if(dmv == 1)
+		{
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			format(string, sizeof(string), "|____________Urz¹d miasta zamkniêty przez %s____________|", sendername);
+			SendClientMessageToAll(COLOR_LIGHTGREEN, string);
+			dmv = 0;
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Urz¹d jest zamkniêty!"); 
+		}
 	}
 	else
 	{
@@ -5007,8 +5022,8 @@ CMD:usss_info(playerid, params[])
 		if(strfind(params, content, false) == -1)
 		{
 			SetPVarString(playerid, "trescOgloszenia", params);
-			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_WHITE, "|___________ United States Secret Service ___________|");
+			format(string, sizeof(string), "Agent %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -5068,8 +5083,8 @@ CMD:armia(playerid, params[])
 		if(strfind(params, content, false) == -1)
 		{
 			SetPVarString(playerid, "trescOgloszenia", params);
-			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Armii ___________|");
+			format(string, sizeof(string), "Genera³ %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -5132,8 +5147,8 @@ CMD:sad(playerid, params[])
 		if(strfind(params, content, false) == -1)
 		{
 			SetPVarString(playerid, "trescOgloszenia", params);
-			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ S¹du ___________|");
+			format(string, sizeof(string), "Sêdzia %s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -5186,8 +5201,8 @@ CMD:kt(playerid, params[])
 		if(strfind(params, content, false) == -1)
 		{
 			SetPVarString(playerid, "trescOgloszenia", params);
-			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+			SendClientMessageToAll(COLOR_YELLOW, "|___________ Korporacja Transportowa ___________|");
+			format(string, sizeof(string), " %s: {FFFFFF}%s", sendername, params);;
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -17095,8 +17110,8 @@ CMD:fbi(playerid, params[])
 				if(strfind(params, content, false) == -1)
 				{
 					SetPVarString(playerid, "trescOgloszenia", params);
-					SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-					format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+					SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat FBI ___________|");
+					format(string, sizeof(string), "Agent FBI %s: %s", sendername, params);
 					SendClientMessageToAll(COLOR_YELLOW, string);
 					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -17200,8 +17215,8 @@ CMD:lspd(playerid, params[])
 				if(strfind(params, content, false) == -1)
 				{
 					SetPVarString(playerid, "trescOgloszenia", params);
-					SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-					format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+					SendClientMessageToAll(COLOR_WHITE, "|___________ Komunikat LSPD ___________|");
+					format(string, sizeof(string), "Oficer %s: %s", GetNick(playerid, true), params);
 					SendClientMessageToAll(COLOR_YELLOW, string);
 					komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 					sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
@@ -17362,8 +17377,8 @@ CMD:noa(playerid, params[])
 		if(strfind(params, content, false) == -1)
 		{
 			SetPVarString(playerid, "trescOgloszenia", params);
-			SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
-			format(string, sizeof(string), "Urzêdnik %s: %s", sendername, params);
+			SendClientMessageToAll(0xA400A4C8,"|____________[WIADOMOSC FDU]____________|");
+			format(string, sizeof(string), "%s: %s", sendername, params);
 			SendClientMessageToAll(COLOR_YELLOW, string);
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
