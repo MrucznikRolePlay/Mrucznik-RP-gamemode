@@ -706,9 +706,9 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		{
 			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
 		}
-		else if(GetPlayerVehicleID(playerid) <= CAR_End)
+		else
 		{
-			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - po udanej kradziezy odpala pojazd", MSGBOX_ICON_TYPE_OK);
+			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - po udanej kradziezy~n~ odpala pojazd", MSGBOX_ICON_TYPE_OK);
 		}
 		
     }
@@ -6327,8 +6327,8 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
             if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid))
 		    {
 				sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
+				return 1;
 			}
-			return 1;
 		}
 		new engine, unused;
 		GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine , unused , unused, unused, unused, unused, unused);
