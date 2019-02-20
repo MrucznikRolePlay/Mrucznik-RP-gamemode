@@ -338,10 +338,10 @@ CMD:panel(playerid, params[])
 
                 format(str, sizeof(str), "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
                 ABroadCast(COLOR_YELLOW,str,1);
-				if(!IsPlayerAdmin(playerid))
+			/*	if(!IsPlayerAdmin(playerid))
 				{
 					SendClientMessage(playerid, COLOR_YELLOW, str);
-				}
+				}*/
                 WarnLog(str);
             }
             else sendTipMessage(playerid, "Gracz nie posiada warnów");
