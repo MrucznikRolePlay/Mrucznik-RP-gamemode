@@ -17880,8 +17880,8 @@ CMD:odpal(playerid)
             if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid))
 		    {
 				sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
+				return 1;
 			}
-			return 1;
 		}
 
         if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
@@ -27551,10 +27551,10 @@ CMD:unwarn(playerid, params[])
 					SendClientMessage(giveplayerid, COLOR_LIGHTRED, str);
 					format(string, sizeof(string), "AdmCmd: %s zosta³ UN-warnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
 					ABroadCast(COLOR_YELLOW,string,1);
-					if(!IsPlayerAdmin(playerid))
+					/*if(!IsPlayerAdmin(playerid))
 					{
 						SendClientMessage(playerid, COLOR_YELLOW, string);
-					}
+					}*/
                     WarnLog(string);
 					if(GetPVarInt(playerid, "dutyadmin") == 1)
 					{
@@ -29721,7 +29721,7 @@ CMD:stanowe(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsACop(playerid) && PlayerInfo[playerid][pRank] >= 1)
+        if(IsACop(playerid) && PlayerInfo[playerid][pRank] >= 0)
         {
             if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))//nowe stanowe
 			{
