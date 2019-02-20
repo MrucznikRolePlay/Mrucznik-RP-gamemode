@@ -16566,6 +16566,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendTipMessage(playerid, "Osoba do której próbujesz przelaæ pieni¹dze ma pe³ne konto!"); 
 					return 1;
 				}
+				if(!IsPlayerConnected(giveplayerid))
+				{
+					sendErrorMessage(playerid, "Gracz, do którego próbowa³eœ przelaæ gotówkê wyszed³ z serwera!"); 
+					return 1;
+				}
 				//Czynnoœci:
 				PlayerInfo[playerid][pAccount] -= money;
 				PlayerInfo[giveplayerid][pAccount] += money;
