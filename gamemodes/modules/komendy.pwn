@@ -23188,7 +23188,7 @@ CMD:wyjdz(playerid)
 		    return 1;
 		}
 		//baza bor by abram01
-		else if(IsPlayerInRangeOfPoint(playerid,3,1448.5902, -1556.4595, 67.4875))
+		/*else if(IsPlayerInRangeOfPoint(playerid,3,1448.5902, -1556.4595, 67.4875))
 		{
 			SetPlayerPosEx(playerid,1481.3147, -1534.9988, 69.8184);
 			SetPlayerVirtualWorld ( playerid, 80);
@@ -23217,7 +23217,7 @@ CMD:wyjdz(playerid)
 		    SetPlayerPosEx(playerid, 1517.80004,-1480.5,9.5); // TUNEL - bor
 		    GameTextForPlayer(playerid, "~b~Tajemnicza Budka", 5000, 1);
 		    return 1;
-		}
+		}*/
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1412.6382,-1800.7056,15.43560)) // Plac manewrowy srodek
 		{
 		    SetPlayerPosEx(playerid, 1442.0717,-1811.6309,77.9453); // Plac manewrowy wyjscie
