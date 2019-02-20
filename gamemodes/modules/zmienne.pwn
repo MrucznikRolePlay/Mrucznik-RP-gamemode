@@ -94,7 +94,6 @@ new komunikatTime[MAX_PLAYERS];
 new komunikatMinuty[MAX_PLAYERS]=0;
 new komunikatTimeZerowanie[MAX_PLAYERS];
 new komunikatMinutyZerowanie[MAX_PLAYERS]=0;
-new spamujeKomunikatami[MAX_PLAYERS] = 0;
 
 
 //Admin Adds
@@ -1378,8 +1377,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	PlayerInfo[playerid][pBlokadaPisaniaFrakcja] = 0;
-	PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 0;
+
 
 	
 
