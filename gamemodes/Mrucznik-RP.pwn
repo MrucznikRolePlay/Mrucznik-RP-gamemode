@@ -699,15 +699,18 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 	    SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
 	}
-	else
+	
+    if(!ispassenger && !engine)
 	{
-        if(!ispassenger && !engine)
+		if(GetPlayerVehicleID(playerid) >= CAR_End) //do kradziezy
 		{
-			if(GetPlayerVehicleID(playerid) >= CAR_End) //do kradziezy
-			{
-				MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
-			}
+			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
 		}
+		else if(GetPlayerVehicleID(playerid) <= CAR_End)
+		{
+			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - po udanej kradziezy odpala pojazd", MSGBOX_ICON_TYPE_OK);
+		}
+		
     }
 
 	if (IsACopCar(vehicleid) && !ispassenger)

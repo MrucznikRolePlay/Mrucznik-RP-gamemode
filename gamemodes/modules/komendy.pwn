@@ -17880,8 +17880,8 @@ CMD:odpal(playerid)
             if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid))
 		    {
 				sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
+				return 1;
 			}
-			return 1;
 		}
 
         if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
