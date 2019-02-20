@@ -8128,7 +8128,7 @@ VehicleToPoint(Float:radi, vehicleid, Float:x, Float:y, Float:z)
 		}
 		return 0;
 }
-
+//stock DodajWjedz(playerid, Float:x, Float:y, Float:z, Float:xX, Float:xY, Float:xZ, Float:x2, Float:y2, Float:z2, Float:xX2, Float:xY2, Float:xZ2, VW, INT, VW2, INT2, const tekst[], const tekst2[], wyswietlajtekst = false, wyswietlajtekst2 = false)
 stock IsVehicleInUse(vehicleid)
 {
 	new temp;

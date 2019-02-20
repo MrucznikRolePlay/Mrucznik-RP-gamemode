@@ -1510,7 +1510,6 @@ enum pInfo
     pCars[MAX_CAR_SLOT],
     pCarSlots,
     pHat,
-	pBlokadaPisaniaFrakcja,
 	pBlokadaPisaniaFrakcjaCzas,
     Text3D:pDescLabel,
     pDesc[128]

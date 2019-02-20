@@ -16513,7 +16513,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new string[128];
 			new giveplayerid = strval(inputtext);
-			
+			if(GetPlayerVirtualWorld(giveplayerid) == 1488)
+			{
+				sendErrorMessage(playerid, "Ten gracz jest w trakcie logowania!"); 
+				return 1;
+			}
 			if (IsPlayerConnected(giveplayerid) && gPlayerLogged[giveplayerid])
 			{
 				if(giveplayerid != playerid)

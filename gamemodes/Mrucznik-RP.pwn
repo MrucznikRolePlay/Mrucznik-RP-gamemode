@@ -911,7 +911,7 @@ public OnPlayerDisconnect(playerid, reason)
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
-	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //local u¿yty do przechowania virtual worldu
+	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //l
 
 	new reString[128];
     new DisconnectReason[3][] =
@@ -986,9 +986,10 @@ public OnPlayerDisconnect(playerid, reason)
 	OfferPlayer[playerid] = 0;
 	//caluj
 	kissPlayerOffer[playerid] = 0;
+	odliczanie[playerid]=0;
 	//komunikaty frakcyjne
-	spamujeKomunikatami[playerid]=0;
-	komunikatMinuty[playerid]=0;
+	komunikatMinutyZerowanie[playerid]=0;
+	
 	komunikatMinutyZerowanie[playerid]=0;
 
     if(TalkingLive[playerid] != INVALID_PLAYER_ID)

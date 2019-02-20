@@ -94,7 +94,6 @@ new komunikatTime[MAX_PLAYERS];
 new komunikatMinuty[MAX_PLAYERS]=0;
 new komunikatTimeZerowanie[MAX_PLAYERS];
 new komunikatMinutyZerowanie[MAX_PLAYERS]=0;
-new spamujeKomunikatami[MAX_PLAYERS] = 0;
 
 
 //Admin Adds
