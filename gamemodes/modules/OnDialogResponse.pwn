@@ -16419,7 +16419,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 2://=======================>>Przelew z konta frakcji na konto frakcji 
 				{
 					format(string, sizeof(string), ">> %s", FractionNames[FracGracza]);
-					ShowPlayerDialogEx(playerid, 1098, DIALOG_STYLE_LIST, string, "LSPD\nFBI\nLSFD\nLSMC\nDMV\nUSSS\nSA Bahamas\nYakuza\nWPS\nFirma Sprz¹taj¹ca\nSN\nKT\nGrove\n187NPARK\nVagos\nNOA"
+					ShowPlayerDialogEx(playerid, 1098, DIALOG_STYLE_LIST, string, "LSPD\nFBI\nLSFD\nLSMC\nDMV\nUSSS\nSA Bahamas\nYakuza\nWPS\nFirma Sprz¹taj¹ca\nSN\nKT\nGrove\n187NPARK\nVagos\nNOA", "Dalej", "Powrót"); 
 				
 				}
 				case 3://=======================>>Wp³aæ na konto frakcji
@@ -16567,7 +16567,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new bigstring[256];
 			new money = FunkcjaK(inputtext);
 			new frakcja = GetPlayerFraction(playerid);
-			new sendername[MAX_PLAYER_NAME];
 			new frac = GetPVarInt(playerid, "PrzelewFrakcjaFrakcja");
 			if(money > 0)
 			{
