@@ -905,7 +905,7 @@ new VehicleNames[215][] = {
    "Elegant", "Kamping", "Rower", "Rower Gorski", "Beagle", "Cropdust", "Stunt",
    "Tanker", "RoadTrain", "Nebula", "Majestic", "Buccaneer", "Shamal",  "Hydra",
    "FCR-900","NRG-500","HPV1000","Cement Truck","Tow Truck","Fortune","Cadrona",
-   "Armatka Wodna", "Willard", "Forklift","Traktor","Combine","Feltzer","Remington",
+   "Pancernik", "Willard", "Forklift","Traktor","Combine","Feltzer","Remington",
    "Slamvan", "Blade", "Freight", "Streak","Vortex","Vincent","Bullet","Clover",
    "Sadler",  "Straz", "Hustler", "Intruder", "Primo", "Cargobob",  "Tampa",
    "Sunrise", "Merit",  "Utility Truck",  "Nevada", "Yosemite", "Windsor",  "Monster",
@@ -915,7 +915,7 @@ new VehicleNames[215][] = {
    "Stafford", "BF-400", "SANvan","Tug","Trailer","Emperor","Wayfarer","Euros",
    "Hotdog", "Club", "Trailer", "Trailer","Andromada","Dodo","RC Cam", "Launch",
    "Radiowoz (LSPD)", "Radiowoz (SFPD)","Radiowoz (LVPD)","Policyjny Jeep",
-   "Picador",   "Pancernik FBI",  "Alpha",   "Phoenix",   "Glendale",   "Sadler",
+   "Picador",   "Opancerzona Armatka",  "Alpha",   "Phoenix",   "Glendale",   "Sadler",
    "Luggage Trailer","Luggage Trailer","Stair Trailer", "Boxville", "Kombajn",
    "Utility Trailer", "Brak pojazdu", "Brak ³odzi", "Brak samolotu"
 };
