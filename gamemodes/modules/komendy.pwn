@@ -15449,7 +15449,7 @@ CMD:kupauto(playerid) return cmd_kuppojazd(playerid);
 CMD:buycar(playerid) return cmd_kuppojazd(playerid);
 CMD:kuppojazd(playerid)
 {
-	if(IsPlayerInAnyVehicle(playerid)
+	if(IsPlayerInAnyVehicle(playerid))
 	{
 		sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
 		return 1;
@@ -15473,7 +15473,7 @@ CMD:kuplodzie(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666))
     {
-		if(IsPlayerInAnyVehicle(playerid)
+		if(IsPlayerInAnyVehicle(playerid))
 		{
 			sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
 			return 1;
@@ -15507,7 +15507,7 @@ CMD:kupsamoloty(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392))//kupowanie samolotu
     {
-		if(IsPlayerInAnyVehicle(playerid)
+		if(IsPlayerInAnyVehicle(playerid))
 		{
 			sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
 			return 1;
@@ -15541,7 +15541,7 @@ CMD:kuphelikopter(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392))//kupowanie heli
     {
-		if(IsPlayerInAnyVehicle(playerid)
+		if(IsPlayerInAnyVehicle(playerid))
 		{
 			sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
 			return 1;
