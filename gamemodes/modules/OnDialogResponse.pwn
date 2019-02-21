@@ -16612,7 +16612,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				FractionNames[frakcja], 
 				GetNick(playerid, true),
 				PlayerInfo[playerid][pUID],
-				FractionNames[frac], money]);
+				FractionNames[frac], money);
 				PayLog(bigstring);
 				
 				//Powiadomienie dla adminów
@@ -16637,11 +16637,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				sendTipMessage(playerid, "B³êdna kwota"); 
-				return 1;
+				sendTipMessage(playerid, "B³êdna kwota");
 			}
-		
-			
 		}
 		else
 		{
