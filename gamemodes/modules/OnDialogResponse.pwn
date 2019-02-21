@@ -16418,7 +16418,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2://=======================>>Przelew z konta frakcji na konto frakcji 
 				{
-					sendErrorMessage(playerid, "Ju¿ wkrótce!");
+					format(string, sizeof(string), ">> %s", FractionNames[FracGracza]);
+					ShowPlayerDialogEx(playerid, 1098, DIALOG_STYLE_LIST, string, "LSPD\nFBI\nLSFD\nLSMC\nDMV\nUSSS\nSA Bahamas\nYakuza\nWPS\nFirma Sprz¹taj¹ca\nSN\nKT\nGrove\n187NPARK\nVagos\nNOA"
 				
 				}
 				case 3://=======================>>Wp³aæ na konto frakcji
@@ -16447,6 +16448,207 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 		
+	}
+	//============[DIALOG - WYBIERZ DO KOGO PRZELAÆ KASE]===================
+	//"LSPD\nFBI\nLSFD\nLSMC\nDMV\nUSSS\nSA Bahamas\nYakuza\nWPS\nFirma Sprz¹taj¹ca\nSN\nKT\nGrove\n187NPARK\nVagos\nNOA"
+	else if(dialogid == 1098)
+	{
+		if(response)
+        {
+			new string[128];
+			switch(listitem)
+			{
+				case 0:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 1);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: LSPD");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSPD", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 1:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 2);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: FBI");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do FBI", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 2:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 17);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: LSFD");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSFD", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 3:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 4);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: LSMC");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSMC", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 4:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 11);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: DMV");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do DMV", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 5:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 7);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: USSS");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do USSS", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 6:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 5);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: SA BAHAMAS");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do SAB", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 7:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 6);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: Yakuza");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do YAKUZA", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 8:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 16);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: WPS");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do WPS", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 9:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 8);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: HA");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do HA", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 10:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 9);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: SN");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do SN", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 11:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 10);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: KT");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do KT", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 12:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 12);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: Grove");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do Grove", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 13:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 13);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: 187NPARK");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do 187NPARK", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 14:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 14);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: Vagos");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do Latynosów", string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 15:
+				{
+					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 15);
+					format(string, sizeof(string), "Wpisz w poni¿szym polu kwotê,\nktór¹ masz zamiar przelaæ.\n\nWykonujesz przelew do frakcji: NOA");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do NOA", string, "Wykonaj", "Odrzuæ"); 
+				}
+			
+			}
+			return 1;
+		}
+	}
+	else if(dialogid == 1099)
+	{
+		if(response)
+		{
+			new string[128];
+			new bigstring[256];
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid);
+			new sendername[MAX_PLAYER_NAME];
+			new frac = GetPVarInt(playerid, "PrzelewFrakcjaFrakcja");
+			if(money > 0)
+			{
+				if(frac == frakcja)
+				{
+					sendErrorMessage(playerid, "Nie mo¿esz przelaæ gotówki do w³asnej frakcji!"); 
+					return 1;
+				}
+				if(Sejf_Frakcji[frakcja] > money)
+				{
+					sendErrorMessage(playerid, "W sejfie twojej frakcji nie ma a¿ takiej iloœci gotówki!"); 
+					return 1;
+				}
+				if(Sejf_Frakcji[frac] >= 1_500_000_000)
+				{
+					format(string, sizeof(string), "Sejf %s wylewa siê! Kwota 1,5kkk przekroczona", FractionNames[frac]);
+					sendErrorMessage(playerid, string);
+					return 1;
+				}
+				//KOMUNIKATY:
+				format(string, sizeof(string), "Dokona³eœ przelewu na konto frakcji %s w wysokoœci %d", FractionNames[frac], money);
+				sendTipMessage(playerid, string);
+				
+				
+				format(bigstring, sizeof(bigstring), "%s dokona³ przelewu na konto %s z konta %s w wysokoœci %d",
+				GetNick(playerid, true),
+				FractionNames[frac], 
+				FractionNames[frakcja], money);
+				
+				SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, bigstring);
+				
+				format(bigstring, sizeof(bigstring), "Twoja frakcja otrzyma³a przelew od lidera %s [%s] w wysokoœci %d", 
+				FractionNames[frakcja],
+				GetNick(playerid, true), money);
+				
+				SendLeaderRadioMessage(frac, COLOR_RED, "===================================");
+				SendLeaderRadioMessage(frac, COLOR_LIGHTGREEN, bigstring);
+				SendLeaderRadioMessage(frac, COLOR_RED, "==================================="); 
+				
+				//LOG
+				format(bigstring, sizeof(bigstring), "Lider %s - %s [UID: %d] dokona³ przelewu na konto %s w wysokoœci %d", 
+				FractionNames[frakcja], 
+				GetNick(playerid, true),
+				PlayerInfo[playerid][pUID],
+				FractionNames[frac], money]);
+				PayLog(bigstring);
+				
+				//Powiadomienie dla adminów
+				if(money >= 2_500_000)
+				{
+					SendAdminMessage(COLOR_GREEN, "================================");
+					format(string, sizeof(string), "Przelewaj¹cy: %s [%d]", GetNick(playerid, true), playerid);
+					SendAdminMessage(COLOR_WHITE, string);
+					format(string, sizeof(string), "Z konta: %s", FractionNames[frakcja]);
+					SendAdminMessage(COLOR_WHITE, string);
+					format(string, sizeof(string), "Na konto: %s", FractionNames[frac]);
+					SendAdminMessage(COLOR_WHITE, string);
+					format(string, sizeof(string), "Kwota: %d" money);
+					SendAdminMessage(COLOR_WHITE, string);
+					SendAdminMessage(COLOR_GREEN, "================================");
+				}
+				//czynnoœci
+				Sejf_Add(frac, money);
+				Sejf_Add(frakcja, -money);
+				Sejf_Save(frac);
+				Sejf_Save(frakcja);
+			}
+			else
+			{
+				sendTipMessage(playerid, "B³êdna kwota"); 
+				return 1;
+			}
+		
+			
+		}
+		else
+		{
+			sendTipMessage(playerid, "Odrzucono akcjê przelewu"); 
+			return 1;
+		}
+	
 	}
 	//============[DIALOG INFORMACYJNY (INFO) -> Zwrot Marcepana]============
 	else if(dialogid == 1080)
