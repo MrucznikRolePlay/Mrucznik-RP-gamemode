@@ -2238,7 +2238,7 @@ CMD:odznaka(playerid, params[])
 						{
 							SendClientMessage(giveplayerid,COLOR_RED,"TA OSOBA NIE POSIADA IMMUNITETU!");
 						}
-						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|______________ Legitymacja SCoSA _____________|");
+						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|_____________ Podpis: Dykrektor Urzêdu __________|");
 					}
 					if (GetPlayerFraction(playerid) == FRAC_SN)
 					{
@@ -22592,10 +22592,6 @@ CMD:wyjdz(playerid)
         		SetPlayerWeatherEx(playerid, ServerWeather);
     			SetPlayerTime(playerid, ServerTime, 0);
             }
-    	}
-        else if(IsPlayerInRangeOfPoint(playerid,5,1751.6058, -1118.3661, 46.8055))   //Dach LSFD
-        {
-    		SetPlayerPosEx(playerid,1711.3928, -1130.0851, 24.1741);
     	}
 	    else if(IsPlayerInRangeOfPoint(playerid, 5.0, 694.27490234375,-569.04272460938,-79.225189208984) || IsPlayerInRangeOfPoint(playerid, 3.0, 700.6748046875,-502.41955566406,23.515483856201) || IsPlayerInRangeOfPoint(playerid, 5.0, 707.06085205078,-508.38107299805,27.871946334839))//rada miasta dillimore (miasteczko) windy
 	    {
