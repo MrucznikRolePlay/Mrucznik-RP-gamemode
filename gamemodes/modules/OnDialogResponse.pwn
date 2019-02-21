@@ -16595,7 +16595,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				GetNick(playerid, true),
 				FractionNames[frac], 
 				FractionNames[frakcja], money);
-				
 				SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, bigstring);
 				
 				format(bigstring, sizeof(bigstring), "Twoja frakcja otrzyma³a przelew od lidera %s [%s] w wysokoœci %d", 
@@ -16617,7 +16616,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				//Powiadomienie dla adminów
 				if(money >= 2_500_000)
 				{
-					SendAdminMessage(COLOR_GREEN, "================================");
+					SendAdminMessage(COLOR_GREEN, "============[ADM-LOG]===========");
 					format(string, sizeof(string), "Przelewaj¹cy: %s [%d]", GetNick(playerid, true), playerid);
 					SendAdminMessage(COLOR_WHITE, string);
 					format(string, sizeof(string), "Z konta: %s", FractionNames[frakcja]);
