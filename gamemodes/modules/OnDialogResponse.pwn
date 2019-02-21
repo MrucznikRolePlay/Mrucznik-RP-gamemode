@@ -16625,7 +16625,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendAdminMessage(COLOR_WHITE, string);
 					format(string, sizeof(string), "Na konto: %s", FractionNames[frac]);
 					SendAdminMessage(COLOR_WHITE, string);
-					format(string, sizeof(string), "Kwota: %d" money);
+					format(string, sizeof(string), "Kwota: %d", money);
 					SendAdminMessage(COLOR_WHITE, string);
 					SendAdminMessage(COLOR_GREEN, "================================");
 				}
