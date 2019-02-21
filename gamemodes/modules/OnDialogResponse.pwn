@@ -16575,7 +16575,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendErrorMessage(playerid, "Nie mo¿esz przelaæ gotówki do w³asnej frakcji!"); 
 					return 1;
 				}
-				if(Sejf_Frakcji[frakcja] > money)
+				if(Sejf_Frakcji[frakcja] < money)
 				{
 					sendErrorMessage(playerid, "W sejfie twojej frakcji nie ma a¿ takiej iloœci gotówki!"); 
 					return 1;
