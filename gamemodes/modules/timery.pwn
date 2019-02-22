@@ -134,10 +134,9 @@ public UsunPozar()
 forward OddajZycieTimer(playerid);
 public OddajZycieTimer(playerid)
 {
-	new stathptime = GetPVarInt(playerid, "statusZycia");
-	new obl = stathptime/1000;
+	new stathptime = (GetPVarInt(playerid, "statusZycia")/1000);
 	dajHPSekunda[playerid]++;
-	if(dajHPSekunda[playerid] == 2)
+	if(dajHPSekunda[playerid] == stathptime)
 	{
 		new ammoutHP;
 		SetPlayerHealth(playerid, 1);
