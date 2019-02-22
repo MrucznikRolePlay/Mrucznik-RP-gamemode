@@ -203,6 +203,25 @@ public KomunikatCzasZerowanie(playerid)
 
 	return 1;
 }
+//Zabieranie broni po 2 minutach, jeœli gracz dosta³ AJ z DM2
+forward BronieAJDM2(playerid);
+public BronieAJDM2(playerid)
+{
+	
+	minutyZabierzDM[playerid]++;
+	if(minutyZabierzDM[playerid] == 2)
+	{
+		new string[128];
+		format(string, sizeof(string), "Graczowi %s zosta³y odebrane bronie podczas pobytu w AJ - za DM2", GetNick(playerid, true));
+		SendAdminMessage(COLOR_PANICRED, string);
+		sendTipMessage(playerid, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
+		ResetPlayerWeapons(playerid);
+		UsunBron(playerid);
+		KillTimer(zabierzBronieAJ[playerid]);
+	}
+
+	return 1;
+}
 //End komunikatów
 forward AktywujPozar();
 public AktywujPozar()
