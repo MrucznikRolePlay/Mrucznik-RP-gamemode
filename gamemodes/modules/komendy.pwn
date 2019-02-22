@@ -23767,9 +23767,11 @@ CMD:domulecz(playerid)
 	{
 		new dom = PlayerInfo[playerid][pDom];
 		new string[128];
+		new Float:zycie;
+		GetPlayerHealth(playerid, zycie);
 		if(Dom[dom][hApteczka] > 0)
 		{
-			if(GetPlayerHealth(playerid) < 90)
+			if(zycie < 90)
 			{
 				if(Dom[dom][hUL_D] == 0)
 				{
