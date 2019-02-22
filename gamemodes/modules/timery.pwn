@@ -211,8 +211,9 @@ public BronieAJDM2(playerid)
 	minutyZabierzDM[playerid]++;
 	if(minutyZabierzDM[playerid] == 2)
 	{
+		new nadajacyAJ = GetPVarInt(playerid, "IDnadajacego"); 
 		new string[128];
-		format(string, sizeof(string), "Graczowi %s zosta³y odebrane bronie podczas pobytu w AJ - za DM2", GetNick(playerid, true));
+		format(string, sizeof(string), "Graczowi %s zosta³y odebrane bronie poprzez admina %s [AJ == DM2]", GetNick(playerid), GetNick(nadajcyAJ));
 		SendAdminMessage(COLOR_PANICRED, string);
 		sendTipMessage(playerid, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
 		ResetPlayerWeapons(playerid);

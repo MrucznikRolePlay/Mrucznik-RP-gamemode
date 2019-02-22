@@ -24495,11 +24495,11 @@ CMD:unjail(playerid, params[])
 						{
 							iloscAJ[playerid] = iloscAJ[playerid]+1;
 						}
-						if(minutyZabierzDM[playa] < 2)
+						if(minutyZabierzDM[playa] < 2 && minutyZabierzDM[playa] != 0)
 						{
 							sendTipMessage(playa, "Marcepan Marks mówi: Tym razem Ci siê pofarci³o! Ktoœ uwolni³ Ciê z mojej budki - zostawiam Ci broñ"); 
-							KillTimer(zabierzBronieAJ[playerid]);
-							format(string, sizeof(string), "Graczowi %s pozostan¹ bronie, poniewa¿ admin uwolni³ go z AJ w ci¹gu 2 minut", GetNick(playerid, true));
+							KillTimer(zabierzBronieAJ[playa]);
+							format(string, sizeof(string), "Graczowi %s pozostan¹ bronie, poniewa¿ admin uwolni³ go z AJ w ci¹gu 2 minut", GetNick(playa, true));
 							SendAdminMessage(COLOR_RED, string); 
 						}
 					}
@@ -24623,6 +24623,8 @@ CMD:adminajail(playerid, params[])
 					
 					//CZYNNOŒCI
 					zabierzBronieAJ[playa] = SetTimerEx("BronieAJDM2", 60000, true, "i", playa);
+					SendClientMessage(playerid, -1, "Graczowi zostan¹ zabrane bronie w przeci¹gu 5 minut"); 
+					SetPVarInt(playa, "IDnadajacego", playerid);
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;
 					SetPlayerVirtualWorld(playa, 1000+playa);
