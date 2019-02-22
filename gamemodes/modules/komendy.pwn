@@ -10535,7 +10535,10 @@ CMD:adminduty(playerid, params[])
 							{
 								if(strfind(GetNick(i), AdminName, true) != -1)
 								{
-									adminMaWolnyNick = 1;
+									if(GetPVarInt(i, "dutyadmin") == 1)
+									{
+										adminMaWolnyNick = 1;
+									}
 								}
 							}
 							if(adminMaWolnyNick == 0)
