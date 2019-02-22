@@ -99,6 +99,8 @@ new komunikatMinutyZerowanie[MAX_PLAYERS]=0;
 //Admin Adds
 new TimerOddaniaZycia[MAX_PLAYERS];
 new dajHPSekunda[MAX_PLAYERS]=0;
+new minutyZabierzDM[MAX_PLAYERS]=0;
+new zabierzBronieAJ[MAX_PLAYERS];
 //legal
 new DB:db_handle;
 enum eLegalWpns {
@@ -1160,6 +1162,7 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
 	spamujeCaluj[playerid] =0;
+	minutyZabierzDM[playerid]=0;
 	
 	
 	

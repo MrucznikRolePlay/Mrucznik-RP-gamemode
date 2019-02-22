@@ -24495,6 +24495,13 @@ CMD:unjail(playerid, params[])
 						{
 							iloscAJ[playerid] = iloscAJ[playerid]+1;
 						}
+						if(minutyZabierzDM[playa] < 2 && minutyZabierzDM[playa] != 0)
+						{
+							sendTipMessage(playa, "Marcepan Marks mówi: Tym razem Ci siê pofarci³o! Ktoœ uwolni³ Ciê z mojej budki - zostawiam Ci broñ"); 
+							KillTimer(zabierzBronieAJ[playa]);
+							format(string, sizeof(string), "Graczowi %s pozostan¹ bronie, poniewa¿ admin uwolni³ go z AJ w ci¹gu 2 minut", GetNick(playa, true));
+							SendAdminMessage(COLOR_RED, string); 
+						}
 					}
 					else
 					{
@@ -24602,11 +24609,9 @@ CMD:adminajail(playerid, params[])
 						sendTipMessageEx(playa, COLOR_LIGHTRED, string);
 						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
 						SendPunishMessage(string, playa);
-						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ na czas nieokreœlony");
 					}
 					else
 					{
-						sendTipMessage(playa, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
 						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", GetNick(playa, true), (result), money);
 						sendTipMessageEx(playerid, COLOR_LIGHTRED, string);
 						format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(playerid, true), money, (result));
@@ -24617,8 +24622,9 @@ CMD:adminajail(playerid, params[])
 					}
 					
 					//CZYNNOŒCI
-					ResetPlayerWeapons(playa);
-					UsunBron(playa);
+					zabierzBronieAJ[playa] = SetTimerEx("BronieAJDM2", 60000, true, "i", playa);
+					SendClientMessage(playerid, -1, "Graczowi zostan¹ zabrane bronie w przeci¹gu 5 minut"); 
+					SetPVarInt(playa, "IDnadajacego", playerid);
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;
 					SetPlayerVirtualWorld(playa, 1000+playa);
