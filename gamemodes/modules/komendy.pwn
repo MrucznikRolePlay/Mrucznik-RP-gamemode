@@ -15661,6 +15661,78 @@ CMD:kupdodatki(playerid)
 
 	return 1;
 }
+CMD:setdodatki(playerid, params[])
+{
+	new giveplayerid, idobject, slot;
+	if( sscanf(params, "k<fix>dd", giveplayerid, idobject, slot))
+	{
+		sendTipMessage(playerid, "U¿yj /dajkluczyki [Nick/ID] [ID obiektu] [SLOT]");
+		return 1;
+	}
+	if(!IsPlayerConnected(giveplayerid)
+	{
+		sendErrorMessage(playerid, "Nie ma takiego gracza"); 
+		return 1;
+	}
+	if(idobject != 18961 || idobject != 18974)
+	{
+		sendTipMessage(playerid, "B³êdne id obiektu"); 
+		return 1;
+	}
+	if(slot < 1 || slot > 10)
+	{
+		sendErrorMessage(playerid, "B³êdne id slotu"); 
+		return 1;
+	}
+	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5)
+	{
+		if(slot == 1)
+		{
+			PlayerAdds[giveplayerid][pSlot1] = idobject;
+		}
+		if(slot == 2)
+		{
+			PlayerAdds[giveplayerid][pSlot2] = idobject;
+		}
+		if(slot == 3)
+		{
+			PlayerAdds[giveplayerid][pSlot3] = idobject;
+		}
+		if(slot == 4)
+		{
+			PlayerAdds[giveplayerid][pSlot4] = idobject;
+		}
+		if(slot == 5)
+		{
+			PlayerAdds[giveplayerid][pSlot5] = idobject;
+		}
+		if(slot == 6)
+		{
+			PlayerAdds[giveplayerid][pSlot6] = idobject;
+		}
+		if(slot == 7)
+		{
+			PlayerAdds[giveplayerid][pSlot7] = idobject;
+		}
+		if(slot == 8)
+		{
+			PlayerAdds[giveplayerid][pSlot8] = idobject;
+		}
+		if(slot == 9)
+		{
+			PlayerAdds[giveplayerid][pSlot9] = idobject;
+		}
+		if(slot == 10)
+		{
+			PlayerAdds[giveplayerid][pSlot10] = idobject;
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Brak uprawnieñ"); 
+	}
+	return 1;
+}
 //---------------------------------------[System aut]-------------------------------------------------------------------------------------------
 
 
