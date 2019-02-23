@@ -17185,106 +17185,175 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
-					SetPVarInt(playerid, "PlayerWearSlot1", 1);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 1))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
+						SetPlayerAttachedObject(playerid, 1, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
 				}
 				case 1:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot2]);
-					SetPVarInt(playerid, "PlayerWearSlot2", 1);
-					SetPlayerAttachedObject(playerid, 1002, PlayerAdds[playerid][pSlot2], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot2]);
+						SetPlayerAttachedObject(playerid, 2, PlayerAdds[playerid][pSlot2], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
 				
 				}
 				case 2:
 				{
-				//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot3]);
-					SetPVarInt(playerid, "PlayerWearSlot3", 1);
-					SetPlayerAttachedObject(playerid, 1003, PlayerAdds[playerid][pSlot3], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot3]);
+						SetPlayerAttachedObject(playerid, 3, PlayerAdds[playerid][pSlot3], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
 				
 				}
 				case 3:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot4]);
-					SetPVarInt(playerid, "PlayerWearSlot4", 1);
-					SetPlayerAttachedObject(playerid, 1004, PlayerAdds[playerid][pSlot4], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot4]);
+						SetPlayerAttachedObject(playerid, 4, PlayerAdds[playerid][pSlot4], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
 				}
 				case 4:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot5]);
-					SetPVarInt(playerid, "PlayerWearSlot5", 1);
-					SetPlayerAttachedObject(playerid, 1005, PlayerAdds[playerid][pSlot5], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot5]);
+						SetPlayerAttachedObject(playerid, 5, PlayerAdds[playerid][pSlot5], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
 				}
 				case 5:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot6]);
-					SetPVarInt(playerid, "PlayerWearSlot6", 1);
-					SetPlayerAttachedObject(playerid, 1006, PlayerAdds[playerid][pSlot6], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot6]);
+						SetPlayerAttachedObject(playerid, 6, PlayerAdds[playerid][pSlot6], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota!"); 
+						return 1;
+					}
 				}
 				case 6:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot7]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot7]);
-					SetPVarInt(playerid, "PlayerWearSlot7", 1);
-					SetPlayerAttachedObject(playerid, 1007, PlayerAdds[playerid][pSlot7], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot7]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot7]);
+						SetPlayerAttachedObject(playerid, 7, PlayerAdds[playerid][pSlot7], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
 				}
 				case 7:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot8]);
-					SetPVarInt(playerid, "PlayerWearSlot8", 1);
-					SetPlayerAttachedObject(playerid, 1008, PlayerAdds[playerid][pSlot8], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot8]);
+						SetPlayerAttachedObject(playerid, 8, PlayerAdds[playerid][pSlot8], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
 				}
 				case 8:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot9]);
-					SetPVarInt(playerid, "PlayerWearSlot9", 1);
-					SetPlayerAttachedObject(playerid, 1009, PlayerAdds[playerid][pSlot9], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
-				
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot9]);
+						SetPlayerAttachedObject(playerid, 9, PlayerAdds[playerid][pSlot9], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+					
 				}
 				case 9:
 				{
-					//komunikaty
-					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					//czynnoœci
-					GetObjectBone(playerid, PlayerAdds[playerid][pSlot10]);
-					SetPVarInt(playerid, "PlayerWearSlot10", 1);
-					SetPlayerAttachedObject(playerid, 1010, PlayerAdds[playerid][pSlot10], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot10]);
+						SetPlayerAttachedObject(playerid, 10, PlayerAdds[playerid][pSlot10], boneIDzmienna[playerid]);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota!");
+						return 1;
+					}
 				}
 			}
 			return 1;

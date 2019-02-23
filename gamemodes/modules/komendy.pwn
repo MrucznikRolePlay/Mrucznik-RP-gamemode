@@ -15673,7 +15673,7 @@ CMD:kupdodatki(playerid)
 }
 CMD:ustawdodatek(playerid, params[])
 {
-	new giveplayerid, slot;
+	new slot;
 	if(sscanf(params, "k<fix>",  slot))
 	{
 		sendTipMessage(playerid, "U¿yj /ustawdodatek [slot]");
@@ -15681,9 +15681,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	if(slot == 1)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot1") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 1))
 		{
-			EditAttachedObject(playerid, 1001);
+			EditAttachedObject(playerid, 1);
 		}
 		else
 		{
@@ -15693,9 +15693,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 2)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot2") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
 		{
-			EditAttachedObject(playerid, 1002);
+			EditAttachedObject(playerid, 2);
 		}
 		else
 		{
@@ -15705,9 +15705,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 3)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot3") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 3))
 		{
-			EditAttachedObject(playerid, 1003);
+			EditAttachedObject(playerid, 3);
 		}
 		else
 		{
@@ -15717,9 +15717,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 4)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot4") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 4))
 		{
-			EditAttachedObject(playerid, 1004);
+			EditAttachedObject(playerid, 4);
 		}
 		else
 		{
@@ -15729,9 +15729,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 5)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot5") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 5))
 		{
-			EditAttachedObject(playerid, 1005);
+			EditAttachedObject(playerid, 5);
 		}
 		else
 		{
@@ -15741,9 +15741,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 6)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot6") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 6))
 		{
-			EditAttachedObject(playerid, 1006);
+			EditAttachedObject(playerid, 6);
 		}
 		else
 		{
@@ -15753,9 +15753,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 7)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot7") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 7))
 		{
-			EditAttachedObject(playerid, 1007);
+			EditAttachedObject(playerid, 7);
 		}
 		else
 		{
@@ -15765,9 +15765,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 8)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot8") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 8))
 		{
-			EditAttachedObject(playerid, 1008);
+			EditAttachedObject(playerid, 8);
 		}
 		else
 		{
@@ -15777,9 +15777,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 9)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot9") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 9))
 		{
-			EditAttachedObject(playerid, 1009);
+			EditAttachedObject(playerid, 9);
 		}
 		else
 		{
@@ -15789,9 +15789,9 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 10)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot10") == 1)
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 10))
 		{
-			EditAttachedObject(playerid, 1010);
+			EditAttachedObject(playerid, 10);
 		}
 		else
 		{
@@ -15900,7 +15900,7 @@ CMD:wyrzucdodatki(playerid, params[])
 			sendErrorMessage(playerid, "Najpierw zejdŸ ze s³u¿by administratora!"); 
 			return 1;
 		}
-		if(slot > 10)
+		if(slot >= 11)
 		{
 			sendErrorMessage(playerid, "ID slotu nie mo¿e byæ wiêksze jak 10"); 
 			return 1;
