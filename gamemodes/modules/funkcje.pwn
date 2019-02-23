@@ -1600,20 +1600,20 @@ stock GetObjectBone(playerid, objectid)
 	}
 	return boneIDzmienna[playerid];
 }
-stock ZmniejszDodatki(playerid, value)
+stock ZmniejszDodatki(playerid, coGraczUsunal)
 {
-	if(value == 9)
+	if(coGraczUsunal == 9)
 	{
 		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
 		PlayerAdds[playerid][pSlot10] = 0;
 	}
-	if(value == 8)
+	if(coGraczUsunal == 8)
 	{
 		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
 		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
 		PlayerAdds[playerid][pSlot10] = 0;
 	}
-	if(value == 7)
+	if(coGraczUsunal == 7)
 	{
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
 		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
@@ -1621,7 +1621,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot10] = 0;
 	
 	}
-	if(value == 6)
+	if(coGraczUsunal == 6)
 	{
 		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
@@ -1629,7 +1629,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
 		PlayerAdds[playerid][pSlot10] = 0;
 	}
-	if(value == 5)
+	if(coGraczUsunal == 5)
 	{
 		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
 		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
@@ -1638,7 +1638,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
 		PlayerAdds[playerid][pSlot10] = 0;
 	}
-	if(value == 4)
+	if(coGraczUsunal == 4)
 	{
 		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
 		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
@@ -1648,7 +1648,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot9 = PlayerAdds[playerid][pSlot10];
 		PlayerAdds[playerid][pSlot10] = 0;
 	}
-	if(value == 3)
+	if(coGraczUsunal == 3)
 	{
 		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
 		PlayerAdds[playerid][pSlot4] =PlayerAdds[playerid][pSlot5];
@@ -1660,7 +1660,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot10] = 0;
 	
 	}
-	if(value == 2)
+	if(coGraczUsunal == 2)
 	{
 		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
 		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
@@ -1673,7 +1673,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot10] = 0;
 	
 	}
-	if(value == 1)
+	if(coGraczUsunal == 1)
 	{
 		PlayerAdds[playerid][pSlot1] = PlayerAdds[playerid][pSlot2];
 		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];

@@ -15689,7 +15689,7 @@ CMD:setdodatki(playerid, params[])
 	&& idobject != 18974 
 	&& idobject != 19559 
 	&& idobject != 19528 
-	&& objectid != 18962)
+	&& idobject != 18962)
 	{
 		sendErrorMessage(playerid, "B³êdne ID obiektu"); 
 		sendTipMessage(playerid, "Aby zobaczyæ listê mo¿liwych obiektów wpisz /listadodatki"); 
