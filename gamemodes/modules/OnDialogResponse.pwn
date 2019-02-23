@@ -17190,6 +17190,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
+					SetPVarInt(playerid, "PlayerWearSlot1", 1);
 					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 1:
@@ -17199,7 +17200,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot2]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot2], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot2", 1);
+					SetPlayerAttachedObject(playerid, 1002, PlayerAdds[playerid][pSlot2], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				
 				}
 				case 2:
@@ -17209,7 +17211,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot3]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot3], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot3", 1);
+					SetPlayerAttachedObject(playerid, 1003, PlayerAdds[playerid][pSlot3], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				
 				}
 				case 3:
@@ -17219,7 +17222,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot4]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot4], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot4", 1);
+					SetPlayerAttachedObject(playerid, 1004, PlayerAdds[playerid][pSlot4], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 4:
 				{
@@ -17228,7 +17232,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot5]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot5], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot5", 1);
+					SetPlayerAttachedObject(playerid, 1005, PlayerAdds[playerid][pSlot5], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 5:
 				{
@@ -17237,7 +17242,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot6]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot6], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot6", 1);
+					SetPlayerAttachedObject(playerid, 1006, PlayerAdds[playerid][pSlot6], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 6:
 				{
@@ -17246,7 +17252,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot7]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot7], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot7", 1);
+					SetPlayerAttachedObject(playerid, 1007, PlayerAdds[playerid][pSlot7], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 7:
 				{
@@ -17255,7 +17262,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot8]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot8], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot8", 1);
+					SetPlayerAttachedObject(playerid, 1008, PlayerAdds[playerid][pSlot8], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 8:
 				{
@@ -17264,7 +17272,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot9]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot9], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot9", 1);
+					SetPlayerAttachedObject(playerid, 1009, PlayerAdds[playerid][pSlot9], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				
 				}
 				case 9:
@@ -17274,7 +17283,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot10]);
-					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot10], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+					SetPVarInt(playerid, "PlayerWearSlot10", 1);
+					SetPlayerAttachedObject(playerid, 1010, PlayerAdds[playerid][pSlot10], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 			}
 			return 1;

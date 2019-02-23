@@ -1645,7 +1645,7 @@ stock ZmniejszDodatki(playerid, coGraczUsunal)
 		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
 		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9 = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
 		PlayerAdds[playerid][pSlot10] = 0;
 	}
 	if(coGraczUsunal == 3)
