@@ -15645,7 +15645,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] < 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s", GetObjectName(PlayerAdds[playerid][pSlot1])); //Ma 2 dodatków
+		format(string, sizeof(string), "[1] %s", GetObjectName(PlayerAdds[playerid][pSlot1])); //Ma 2 dodatków
 	}
 
 	ShowPlayerDialogEx(playerid, 1010, DIALOG_STYLE_LIST, "Mrucznik-RP: Dodatki", string, "Ubierz", "Wróæ");
@@ -15741,6 +15741,175 @@ CMD:setdodatki(playerid, params[])
 	{
 		sendErrorMessage(playerid, "Brak uprawnieñ"); 
 	}
+	return 1;
+}
+CMD:wyrzucdodatki(playerid, params[])
+{
+	if(IsPlayerConnected(playerid)
+	{
+		new slot;
+		new string[128];
+		if(sscanf(params, "k<fix>", slot))
+		{
+			sendTipMessage(playerid, "U¿yj /wyrzucdodatki [SLOT z /dodatki]");
+			return 1;
+		}
+		if(GetPVarInt(playerid, "dutyadmin") == 1)
+		{
+			sendErrorMessage(playerid, "Najpierw zejdŸ ze s³u¿by administratora!"); 
+			return 1;
+		}
+		if(slot > 10 || slot < 1)
+		{
+			sendErrorMessage(playerid, "B³êdne id slotu!"); 
+			return 1;
+		}
+		if(slot == 1)
+		{
+			if(PlayerAdds[playerid][pSlot1] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot1]), PlayerAdds[giveplayerid][pSlot9]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot1]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie pierwszym"); 
+				return 1;
+			}
+		}
+		else if(slot == 2)
+		{
+			if(PlayerAdds[playerid][pSlot2] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot2]), PlayerAdds[giveplayerid][pSlot2]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot2]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie drugim");
+				return 1;
+			}
+		}
+		else if(slot == 3)
+		{
+			if(PlayerAdds[playerid][pSlot3] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot3]), PlayerAdds[giveplayerid][pSlot3]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot3]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie trzecim"); 
+				return 1;
+			}
+		}
+		else if(slot == 4)
+		{
+			if(PlayerAdds[playerid][pSlot4] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot4]), PlayerAdds[giveplayerid][pSlot4]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot4]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie czwartym");
+				return 1;
+			}
+		}
+		else if(slot == 5)
+		{
+			if(PlayerAdds[playerid][pSlot5] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot5]), PlayerAdds[giveplayerid][pSlot5]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot5]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie pi¹tym");
+				return 1;
+			}
+		}
+		else if(slot == 6)
+		{
+			if(PlayerAdds[playerid][pSlot6] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot6]), PlayerAdds[giveplayerid][pSlot6]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot6]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie szóstym");
+				return 1;
+			}
+		}
+		else if(slot == 7)
+		{
+			if(PlayerAdds[playerid][pSlot7] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot7]), PlayerAdds[giveplayerid][pSlot7]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot7]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie siódmym");
+				return 1;
+			}
+		}
+		else if(slot == 8)
+		{
+			if(PlayerAdds[playerid][pSlot8] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot8]), PlayerAdds[giveplayerid][pSlot8]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot8]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie ósmym");
+				return 1;
+			}
+		}
+		else if(slot == 9)
+		{
+			if(PlayerAdds[playerid][pSlot9] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot9]), PlayerAdds[giveplayerid][pSlot9]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot9]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie dziewi¹tym");
+				return 1;
+			}
+		}
+		else if(slot == 10)
+		{
+			if(PlayerAdds[playerid][pSlot10] > 1)
+			{
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot10]), PlayerAdds[giveplayerid][pSlot10]);
+				sendTipMessage(playerid, string);
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot10]));
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz nic na slocie dziesi¹tym");
+				return 1;
+			}
+		}
+		
+		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		
+	
+	}
+
 	return 1;
 }
 //---------------------------------------[System aut]-------------------------------------------------------------------------------------------
