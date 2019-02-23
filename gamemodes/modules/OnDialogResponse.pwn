@@ -17176,6 +17176,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			HireCar[playerid] = 0;
 		}
 	}
+	else if(dialogid == 1010)
+	{
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					AttachDynamicObjectToPlayer(PlayerAdds[playerid][pSlot1], playerid, 0, 0, 0, 0, 0, 0);
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+				}
+		
+		
+			}
+			return 1;
+		}
+	}
 	else if(dialogid == D_KONTAKTY_DZWON)
 	{
 		if(response)

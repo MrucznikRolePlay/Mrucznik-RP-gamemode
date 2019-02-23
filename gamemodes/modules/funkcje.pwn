@@ -1564,6 +1564,18 @@ stock GetObjectName(objectid)
 	}
 	return name;
 }
+stock GetObjectBone(playerid, objectid)
+{
+	if(objectid == 18961)
+	{
+		boneIDzmienna[playerid] = 2;
+	}
+	if(objectid == 1874)
+	{
+		boneIDzmienna[playerid] = 2;
+	}
+	return boneIDzmienna[playerid];
+}
 stock GetNumber(playerid)
 {
 	return PlayerInfo[playerid][pPnumber];
