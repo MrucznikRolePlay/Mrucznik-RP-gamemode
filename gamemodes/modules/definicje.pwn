@@ -458,7 +458,20 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define CAR_OWNER_SPECIAL   5
 #define CAR_OWNER_PUBLIC    6
 
+//Czêœci cia³a
+#define BONE_HEAD 2
+#define BONE_RIGHT_ARM 4
+#define BONE_LEFT_ARM 3
+#define BONE_LEFT_HAND 5
+#define BONE_RIGHT_HAND 6
+#define BONE_SPINE 1
+#define BONE_NECK 17
+#define BONE_LEFT_FOREARM 13
+#define BONE_RIGHT_FOREARM 14
 
+#define SetPlayerHoldingObject(%1,%2,%3,%4,%5,%6,%7,%8,%9) SetPlayerAttachedObject(%1,MAX_PLAYER_ATTACHED_OBJECTS-1,%2,%3,%4,%5,%6,%7,%8,%9) 
+#define StopPlayerHoldingObject(%1) RemovePlayerAttachedObject(%1,MAX_PLAYER_ATTACHED_OBJECTS-1) 
+#define IsPlayerHoldingObject(%1) IsPlayerAttachedObjectSlotUsed(%1,MAX_PLAYER_ATTACHED_OBJECTS-1)  
 
 
 //Auta specjalne

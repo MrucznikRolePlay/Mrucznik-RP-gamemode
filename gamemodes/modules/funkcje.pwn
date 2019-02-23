@@ -1551,7 +1551,143 @@ stock GetNick(playerid, rp = false)
 	}
 	return nick;
 }
-
+stock GetObjectName(objectid)
+{
+	new name[128];
+	if(objectid == 18974)
+	{
+		format(name, sizeof(name), "Zorro Mask");
+	}
+	if(objectid == 18961)
+	{
+		format(name, sizeof(name), "Bobby Hat"); 
+	}
+	if(objectid == 18962)
+	{
+		format(name, sizeof(name), "Kapelusz"); 
+	}
+	if(objectid == 19528)
+	{
+		format(name, sizeof(name), "Czapka Wiedümy"); 
+	}
+	if(objectid == 19559)
+	{
+		format(name, sizeof(name), "Plecak turystyczny"); 
+	}
+	return name;
+}
+stock GetObjectBone(playerid, objectid)
+{
+	if(objectid == 18961)
+	{
+		boneIDzmienna[playerid] = 2;
+	}
+	if(objectid == 18974)
+	{
+		boneIDzmienna[playerid] = 2;
+	}
+	if(objectid == 18962) 
+	{
+		boneIDzmienna[playerid] = 2;
+	}
+	if(objectid == 19528)
+	{
+		boneIDzmienna[playerid] = 2;
+	}
+	if(objectid == 19559)
+	{
+		boneIDzmienna[playerid] = 1;
+	}
+	return boneIDzmienna[playerid];
+}
+stock ZmniejszDodatki(playerid, coGraczUsunal)
+{
+	if(coGraczUsunal == 9)
+	{
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(coGraczUsunal == 8)
+	{
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(coGraczUsunal == 7)
+	{
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	
+	}
+	if(coGraczUsunal == 6)
+	{
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(coGraczUsunal == 5)
+	{
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(coGraczUsunal == 4)
+	{
+		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(coGraczUsunal == 3)
+	{
+		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
+		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	
+	}
+	if(coGraczUsunal == 2)
+	{
+		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
+		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
+		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	
+	}
+	if(coGraczUsunal == 1)
+	{
+		PlayerAdds[playerid][pSlot1] = PlayerAdds[playerid][pSlot2];
+		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
+		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
+		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	return 0;
+}
 stock GetNumber(playerid)
 {
 	return PlayerInfo[playerid][pPnumber];
@@ -8690,6 +8826,7 @@ public NG_OpenGateWithKey(playerid)
     DeletePVar(playerid, "ng-key");
 	return 1;
 }
+
 stock OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
 {
 	new Float:health,timeobl;

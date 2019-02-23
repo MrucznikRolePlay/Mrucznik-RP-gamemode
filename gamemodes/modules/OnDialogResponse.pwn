@@ -17176,6 +17176,206 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			HireCar[playerid] = 0;
 		}
 	}
+	else if(dialogid == 1010)
+	{
+		if(response)
+		{
+			new string[128];
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 1))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
+						SetPlayerAttachedObject(playerid, 0, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 0); 
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+				}
+				case 1:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 2))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot2]);
+						SetPlayerAttachedObject(playerid, 2, PlayerAdds[playerid][pSlot2], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 2);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+				
+				}
+				case 2:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 3))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot3]);
+						SetPlayerAttachedObject(playerid, 3, PlayerAdds[playerid][pSlot3], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 3);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+				
+				}
+				case 3:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 4))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot4]);
+						SetPlayerAttachedObject(playerid, 4, PlayerAdds[playerid][pSlot4], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 4);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+				}
+				case 4:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 5))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot5]);
+						SetPlayerAttachedObject(playerid, 5, PlayerAdds[playerid][pSlot5], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 5);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+				}
+				case 5:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 6))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot6]);
+						SetPlayerAttachedObject(playerid, 6, PlayerAdds[playerid][pSlot6], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 6);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota!"); 
+						return 1;
+					}
+				}
+				case 6:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 7))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot7]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot7]);
+						SetPlayerAttachedObject(playerid, 7, PlayerAdds[playerid][pSlot7], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 7);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+				}
+				case 7:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 8))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot8]);
+						SetPlayerAttachedObject(playerid, 8, PlayerAdds[playerid][pSlot8], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 8);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+				}
+				case 8:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 9))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot9]);
+						SetPlayerAttachedObject(playerid, 9, PlayerAdds[playerid][pSlot9], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 9);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
+						return 1;
+					}
+					
+				}
+				case 9:
+				{
+					if(!IsPlayerAttachedObjectSlotUsed(playerid, 10))
+					{
+						//komunikaty
+						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						//czynnoœci
+						GetObjectBone(playerid, PlayerAdds[playerid][pSlot10]);
+						SetPlayerAttachedObject(playerid, 10, PlayerAdds[playerid][pSlot10], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 10);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota!");
+						return 1;
+					}
+				}
+			}
+			return 1;
+		}
+		if(!response)
+		{
+			sendTipMessage(playerid, "Wy³¹czy³eœ dialog ubioru"); 
+			return 1;
+		}
+		
+	}
 	else if(dialogid == D_KONTAKTY_DZWON)
 	{
 		if(response)

@@ -1522,6 +1522,21 @@ enum StringData
 
 new PlayerInfo[MAX_PLAYERS][pInfo];
 
+enum pDodatek
+{
+	pSlot1,
+	pSlot2,
+	pSlot3,
+	pSlot4,
+	pSlot5,
+	pSlot6,
+	pSlot7,
+	pSlot8,
+	pSlot9,
+	pSlot10
+
+};
+new PlayerAdds[MAX_PLAYERS][pDodatek];
 enum pHaul
 {
 	pCapasity,
