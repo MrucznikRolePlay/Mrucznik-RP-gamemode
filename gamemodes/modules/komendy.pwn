@@ -15653,7 +15653,12 @@ CMD:dodatki(playerid)
 }
 CMD:dodatkihelp(playerid)
 {
-
+	sendTipMessageEx(playerid, COLOR_GREEN, "===========[POMOC /DODATKI]===========");
+	sendTipMessage(playerid, "/dodatki - pokazuje twoje dodatki"); 
+	sendTipMessage(playerid, "/kupdodatki - pozwala Ci kupiæ dodatki (tylko w sklepie z ubraniami)");
+	sendTipMessage(playerid, "/ustawdodatek [slot] - pozwala Ci dostosowaæ twój strój"); 
+	sendTipMessage(playerid, "/wyrzucdodatek [slot] - pozwala Ci wyrzuciæ dodatek - nieodwracalnie!"); 
+	sendTipMessageEx(playerid, COLOR_GREEN, "======================================="); 
 	return 1;
 }
 CMD:kupdodatki(playerid)
