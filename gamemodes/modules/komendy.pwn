@@ -15745,7 +15745,7 @@ CMD:setdodatki(playerid, params[])
 }
 CMD:wyrzucdodatki(playerid, params[])
 {
-	if(IsPlayerConnected(playerid)
+	if(IsPlayerConnected(playerid))
 	{
 		new slot;
 		new string[128];
