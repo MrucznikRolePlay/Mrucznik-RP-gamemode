@@ -15735,7 +15735,7 @@ CMD:setdodatki(playerid, params[])
 		format(string, sizeof(string), "Administrator %s ustawi³ Ci dodatek na slot %d", GetNick(playerid), slot);
 		sendTipMessageEx(giveplayerid, COLOR_RED, string);
 		format(string, sizeof(string), "Ustawi³eœ dodatek %s [%d] dla %s [%d]", GetObjectName(idobject), idobject, GetNick(giveplayerid), giveplayerid);
-		sendTipMessage(playerid, COLOR_BLUE, string);
+		sendTipMessageEx(playerid, COLOR_BLUE, string);
 	}
 	else
 	{
