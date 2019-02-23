@@ -17307,6 +17307,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 7:
 				{
 					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -17358,6 +17359,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			return 1;
 		}
+		if(!response)
+		{
+			sendTipMessage(playerid, "Wy³¹czy³eœ dialog ubioru"); 
+			return 1;
+		}
+		
 	}
 	else if(dialogid == D_KONTAKTY_DZWON)
 	{
