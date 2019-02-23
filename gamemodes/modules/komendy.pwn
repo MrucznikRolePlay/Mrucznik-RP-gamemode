@@ -15674,6 +15674,7 @@ CMD:kupdodatki(playerid)
 CMD:setdodatki(playerid, params[])
 {
 	new giveplayerid, idobject, slot;
+	new string[128];
 	if(sscanf(params, "k<fix>dd", giveplayerid, idobject, slot))
 	{
 		sendTipMessage(playerid, "U¿yj /setdodatki [Nick/ID] [ID obiektu] [SLOT]");
