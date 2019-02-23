@@ -15685,6 +15685,12 @@ CMD:setdodatki(playerid, params[])
 		sendErrorMessage(playerid, "Nie ma takiego gracza"); 
 		return 1;
 	}
+	if(idobject != 18961 && idobject != 18974)
+	{
+		sendErrorMessage(playerid, "B³êdne ID obiektu"); 
+		sendTipMessage(playerid, "Aby zobaczyæ listê mo¿liwych obiektów wpisz /listadodatki"); 
+		return 1;
+	}
 	if(slot < 1 || slot > 10)
 	{
 		sendErrorMessage(playerid, "B³êdne id slotu"); 
@@ -15759,9 +15765,14 @@ CMD:wyrzucdodatki(playerid, params[])
 			sendErrorMessage(playerid, "Najpierw zejdŸ ze s³u¿by administratora!"); 
 			return 1;
 		}
-		if(slot > 10 || slot < 1)
+		if(slot > 10)
 		{
-			sendErrorMessage(playerid, "B³êdne id slotu!"); 
+			sendErrorMessage(playerid, "ID slotu nie mo¿e byæ wiêksze jak 10"); 
+			return 1;
+		}
+		if(slot <= 0)
+		{
+			sendErrorMessage(playerid, "ID slotu nie mo¿e byæ mniejsze jak 1"); 
 			return 1;
 		}
 		if(slot == 1)
