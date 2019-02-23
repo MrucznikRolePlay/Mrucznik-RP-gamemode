@@ -15685,7 +15685,11 @@ CMD:setdodatki(playerid, params[])
 		sendErrorMessage(playerid, "Nie ma takiego gracza"); 
 		return 1;
 	}
-	if(idobject != 18961 && idobject != 18974)
+	if(idobject != 18961 
+	&& idobject != 18974 
+	&& idobject != 19559 
+	&& idobject != 19528 
+	&& objectid != 18962)
 	{
 		sendErrorMessage(playerid, "B³êdne ID obiektu"); 
 		sendTipMessage(playerid, "Aby zobaczyæ listê mo¿liwych obiektów wpisz /listadodatki"); 
@@ -15779,7 +15783,7 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot1] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot1]), PlayerAdds[playerid][pSlot9]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot1]), PlayerAdds[playerid][pSlot1]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
 				PlayerAdds[playerid][pSlot1] = 0;

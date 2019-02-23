@@ -17188,50 +17188,94 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					//komunikaty
 					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
 					GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
 					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 1:
 				{
-				
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot2]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot2], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				
 				}
 				case 2:
 				{
-				
+				//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot3]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot3], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				
 				}
 				case 3:
 				{
-				
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot4]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot4], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 4:
 				{
-				
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot5]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot5], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 5:
 				{
-				
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot6]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot6], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 6:
 				{
-				
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot7]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot7]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot7], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 7:
 				{
-				
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot8]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot8], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
 				case 8:
 				{
-				
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot9]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot9], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				
 				}
 				case 9:
 				{
-				
+					//komunikaty
+					format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					//czynnoœci
+					GetObjectBone(playerid, PlayerAdds[playerid][pSlot10]);
+					SetPlayerAttachedObject(playerid, 1001, PlayerAdds[playerid][pSlot10], boneIDzmienna[playerid], GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 				}
-		
-		
 			}
 			return 1;
 		}

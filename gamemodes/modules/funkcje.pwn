@@ -1562,6 +1562,18 @@ stock GetObjectName(objectid)
 	{
 		format(name, sizeof(name), "Bobby Hat"); 
 	}
+	if(objectid == 18962)
+	{
+		format(name, sizeof(name), "Kapelusz"); 
+	}
+	if(objectid == 19528)
+	{
+		format(name, sizeof(name), "Czapka Wiedümy"); 
+	}
+	if(objectid == 19559)
+	{
+		format(name, sizeof(name), "Plecak turystyczny"); 
+	}
 	return name;
 }
 stock GetObjectBone(playerid, objectid)
@@ -1570,9 +1582,21 @@ stock GetObjectBone(playerid, objectid)
 	{
 		boneIDzmienna[playerid] = 2;
 	}
-	if(objectid == 1874)
+	if(objectid == 18974)
 	{
 		boneIDzmienna[playerid] = 2;
+	}
+	if(objectid == 18962)
+	{
+		boneIDzmienna[playerid] = 2;
+	}
+	if(objectid == 19528)
+	{
+		boneIDzmienna[playerid] = 2;
+	}
+	if(objectid == 19559)
+	{
+		boneIDzmienna[playerid] = 1;
 	}
 	return boneIDzmienna[playerid];
 }
