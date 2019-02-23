@@ -15768,9 +15768,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot1] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot1]), PlayerAdds[giveplayerid][pSlot9]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot1]), PlayerAdds[playerid][pSlot9]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot1]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
+				PlayerAdds[playerid][pSlot1] = 0;
 			}
 			else
 			{
@@ -15782,9 +15783,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot2] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot2]), PlayerAdds[giveplayerid][pSlot2]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot2]), PlayerAdds[playerid][pSlot2]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot2]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
+				PlayerAdds[playerid][pSlot2] = 0;
 			}
 			else
 			{
@@ -15796,9 +15798,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot3] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot3]), PlayerAdds[giveplayerid][pSlot3]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot3]), PlayerAdds[playerid][pSlot3]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot3]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
+				PlayerAdds[playerid][pSlot3] = 0;
 			}
 			else
 			{
@@ -15810,9 +15813,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot4] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot4]), PlayerAdds[giveplayerid][pSlot4]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot4]), PlayerAdds[playerid][pSlot4]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot4]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
+				PlayerAdds[playerid][pSlot4] = 0;
 			}
 			else
 			{
@@ -15824,9 +15828,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot5] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot5]), PlayerAdds[giveplayerid][pSlot5]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot5]), PlayerAdds[playerid][pSlot5]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot5]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
+				PlayerAdds[playerid][pSlot5] = 0;
 			}
 			else
 			{
@@ -15838,9 +15843,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot6] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot6]), PlayerAdds[giveplayerid][pSlot6]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot6]), PlayerAdds[playerid][pSlot6]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot6]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
+				PlayerAdds[playerid][pSlot6] = 0;
 			}
 			else
 			{
@@ -15852,9 +15858,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot7] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot7]), PlayerAdds[giveplayerid][pSlot7]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot7]), PlayerAdds[playerid][pSlot7]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot7]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot7]));
+				PlayerAdds[playerid][pSlot7] = 0;
 			}
 			else
 			{
@@ -15866,9 +15873,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot8] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot8]), PlayerAdds[giveplayerid][pSlot8]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot8]), PlayerAdds[playerid][pSlot8]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot8]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
+				PlayerAdds[playerid][pSlot8] = 0;
 			}
 			else
 			{
@@ -15880,9 +15888,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot9] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot9]), PlayerAdds[giveplayerid][pSlot9]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot9]), PlayerAdds[playerid][pSlot9]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot9]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
+				PlayerAdds[playerid][pSlot9] = 0;
 			}
 			else
 			{
@@ -15894,9 +15903,10 @@ CMD:wyrzucdodatki(playerid, params[])
 		{
 			if(PlayerAdds[playerid][pSlot10] > 1)
 			{
-				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[giveplayerid][pSlot10]), PlayerAdds[giveplayerid][pSlot10]);
+				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot10]), PlayerAdds[playerid][pSlot10]);
 				sendTipMessage(playerid, string);
-				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[giveplayerid][pSlot10]));
+				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
+				PlayerAdds[playerid][pSlot10] = 0;
 			}
 			else
 			{
