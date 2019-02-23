@@ -1657,7 +1657,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
 		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
 		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0
+		PlayerAdds[playerid][pSlot10] = 0;
 	
 	}
 	if(value == 2)
@@ -1670,7 +1670,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
 		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
 		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0
+		PlayerAdds[playerid][pSlot10] = 0;
 	
 	}
 	if(value == 1)
@@ -1684,7 +1684,7 @@ stock ZmniejszDodatki(playerid, value)
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
 		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
 		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0
+		PlayerAdds[playerid][pSlot10] = 0;
 	}
 	return 1;
 }
