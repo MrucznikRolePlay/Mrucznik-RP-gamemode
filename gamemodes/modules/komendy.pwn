@@ -15657,6 +15657,7 @@ CMD:dodatkihelp(playerid)
 	sendTipMessage(playerid, "/dodatki - pokazuje twoje dodatki"); 
 	sendTipMessage(playerid, "/kupdodatki - pozwala Ci kupiæ dodatki (tylko w sklepie z ubraniami)");
 	sendTipMessage(playerid, "/ustawdodatek [slot] - pozwala Ci dostosowaæ twój strój"); 
+	sendTipMessage(playerid, "/zdejmijdodatki [slot] - zdejmuje i chowa dodatki"); 
 	sendTipMessage(playerid, "/wyrzucdodatek [slot] - pozwala Ci wyrzuciæ dodatek - nieodwracalnie!"); 
 	if(PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
 	{
@@ -15675,20 +15676,74 @@ CMD:zdejmijdodatki(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{
-		new slot;
-		if(sscanf(params, "k<fix>d", slot))
+		new pos;
+		new string[128];
+		new stringTwo[128];
+		if(sscanf(params, "k<fix>d", pos))
 		{
 			sendTipMessage(playerid, "U¿yj /zdejmijdodatki [slot]"); 
 			return 1;
 		}
-		if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+		if(!IsPlayerAttachedObjectSlotUsed(playerid, pos))
 		{
-			RemovePlayerAttachedObject(playerid, slot);
+			sendTipMessage(playerid, "Nie masz nic na tym slocie"); 
+			return 1;
 		}
-		else
+		RemovePlayerAttachedObject(playerid, pos);
+		if(pos == 1)
 		{
-			sendTipMessage(playerid, "Nic nie nosisz na tym slocie"); 
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot1]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
 		}
+		if(pos == 2)
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot2]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
+		}
+		if(pos == 3)
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot3]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
+		}
+		if(pos == 4)
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot4]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
+		}
+		if(pos == 5)
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot5]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
+		}
+		if(pos == 6)
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot6]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
+		}
+		if(pos == 7)
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot7]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot7]));
+		}
+		if(pos == 8)
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot8]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
+		}
+		if(pos == 9)
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot9]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
+		}
+		if(pos == 10)		
+		{
+			format(string, sizeof(string), "Usuniêto obiekt %s", GetObjectName(PlayerAdds[playerid][pSlot10]));
+			format(stringTwo, sizeof(stringTwo), "%s zdejmuje z siebie %s i chowa.", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
+		}
+		sendTipMessage(playerid, string);
+		ProxDetector(15.0, playerid, stringTwo, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		
+		
 	}
 	return 1;
 }
@@ -15704,6 +15759,7 @@ CMD:ustawdodatek(playerid, params[])
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 1))
 		{
+			SetPlayerAttachedObject(playerid, 1, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]));
 			EditAttachedObject(playerid, 1);
 		}
 		else

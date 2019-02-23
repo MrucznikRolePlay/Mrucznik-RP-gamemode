@@ -1586,7 +1586,7 @@ stock GetObjectBone(playerid, objectid)
 	{
 		boneIDzmienna[playerid] = 2;
 	}
-	if(objectid == 18962)
+	if(objectid == 18962) 
 	{
 		boneIDzmienna[playerid] = 2;
 	}

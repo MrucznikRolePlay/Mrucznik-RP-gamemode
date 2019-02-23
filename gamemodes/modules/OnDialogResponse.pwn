@@ -17211,6 +17211,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot2]);
 						SetPlayerAttachedObject(playerid, 2, PlayerAdds[playerid][pSlot2], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 2);
 					}
 					else
 					{
@@ -17229,6 +17230,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot3]);
 						SetPlayerAttachedObject(playerid, 3, PlayerAdds[playerid][pSlot3], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 3);
 					}
 					else
 					{
@@ -17247,6 +17249,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot4]);
 						SetPlayerAttachedObject(playerid, 4, PlayerAdds[playerid][pSlot4], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 4);
 					}
 					else
 					{
@@ -17264,6 +17267,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot5]);
 						SetPlayerAttachedObject(playerid, 5, PlayerAdds[playerid][pSlot5], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 5);
 					}
 					else
 					{
@@ -17281,6 +17285,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot6]);
 						SetPlayerAttachedObject(playerid, 6, PlayerAdds[playerid][pSlot6], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 6);
 					}
 					else
 					{
@@ -17298,6 +17303,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot7]);
 						SetPlayerAttachedObject(playerid, 7, PlayerAdds[playerid][pSlot7], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 7);
 					}
 					else
 					{
@@ -17315,6 +17321,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot8]);
 						SetPlayerAttachedObject(playerid, 8, PlayerAdds[playerid][pSlot8], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 8);
 					}
 					else
 					{
@@ -17332,6 +17339,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot9]);
 						SetPlayerAttachedObject(playerid, 9, PlayerAdds[playerid][pSlot9], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 9);
 					}
 					else
 					{
@@ -17350,6 +17358,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot10]);
 						SetPlayerAttachedObject(playerid, 10, PlayerAdds[playerid][pSlot10], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 10);
 					}
 					else
 					{
