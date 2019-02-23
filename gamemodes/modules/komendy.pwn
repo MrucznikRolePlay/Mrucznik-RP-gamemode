@@ -15494,7 +15494,7 @@ CMD:dodatki(playerid)
 		GetObjectName(PlayerAdds[playerid][pSlot9]),
 		GetObjectName(PlayerAdds[playerid][pSlot10]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
 	&& PlayerAdds[playerid][pSlot3] > 1 
 	&& PlayerAdds[playerid][pSlot4] > 1 
@@ -15515,7 +15515,7 @@ CMD:dodatki(playerid)
 		GetObjectName(PlayerAdds[playerid][pSlot8]),
 		GetObjectName(PlayerAdds[playerid][pSlot9]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
 	&& PlayerAdds[playerid][pSlot3] > 1 
 	&& PlayerAdds[playerid][pSlot4] > 1 
@@ -15535,7 +15535,7 @@ CMD:dodatki(playerid)
 		GetObjectName(PlayerAdds[playerid][pSlot7]), 
 		GetObjectName(PlayerAdds[playerid][pSlot8]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
 	&& PlayerAdds[playerid][pSlot3] > 1 
 	&& PlayerAdds[playerid][pSlot4] > 1 
@@ -15554,7 +15554,7 @@ CMD:dodatki(playerid)
 		GetObjectName(PlayerAdds[playerid][pSlot6]), 
 		GetObjectName(PlayerAdds[playerid][pSlot7]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
 	&& PlayerAdds[playerid][pSlot3] > 1 
 	&& PlayerAdds[playerid][pSlot4] > 1  
@@ -15572,7 +15572,7 @@ CMD:dodatki(playerid)
 		GetObjectName(PlayerAdds[playerid][pSlot5]),
 		GetObjectName(PlayerAdds[playerid][pSlot6]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
 	&& PlayerAdds[playerid][pSlot3] > 1 
 	&& PlayerAdds[playerid][pSlot4] > 1  
@@ -15589,7 +15589,7 @@ CMD:dodatki(playerid)
 		GetObjectName(PlayerAdds[playerid][pSlot4]), 
 		GetObjectName(PlayerAdds[playerid][pSlot5]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
 	&& PlayerAdds[playerid][pSlot3] > 1 
 	&& PlayerAdds[playerid][pSlot4] > 1 
@@ -15605,7 +15605,7 @@ CMD:dodatki(playerid)
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
 		GetObjectName(PlayerAdds[playerid][pSlot4]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
 	&& PlayerAdds[playerid][pSlot3] > 1 
 	&& PlayerAdds[playerid][pSlot4] < 1 
@@ -15620,7 +15620,7 @@ CMD:dodatki(playerid)
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
 	&& PlayerAdds[playerid][pSlot3] < 1 
 	&& PlayerAdds[playerid][pSlot4] < 1 
@@ -15634,7 +15634,7 @@ CMD:dodatki(playerid)
 		format(string, sizeof(string), "[1] %s\n[2] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 2 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]));
 	}
-	else if(PlayerAdds[playerid][pSlot1] > 1 
+	if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] < 1 
 	&& PlayerAdds[playerid][pSlot3] < 1 
 	&& PlayerAdds[playerid][pSlot4] < 1 
@@ -15755,116 +15755,52 @@ CMD:ustawdodatek(playerid, params[])
 		sendTipMessage(playerid, "U¿yj /ustawdodatek [slot]");
 		return 1;
 	}
+	if(!IsPlayerAttachedObjectSlotUsed(playerid, slot))
+	{
+		sendTipMessage(playerid, "Nie masz tego za³o¿onego!"); 
+		return 1;
+	}
 	if(slot == 1)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 1))
-		{
-			SetPlayerAttachedObject(playerid, 1, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]));
-			EditAttachedObject(playerid, 1);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		RemovePlayerAttachedObject(playerid, 1);
+		SetPlayerAttachedObject(playerid, 1, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]));
+		EditAttachedObject(playerid, 1);
 	}
 	if(slot == 2)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
-		{
-			EditAttachedObject(playerid, 2);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		EditAttachedObject(playerid, 2);
 	}
 	if(slot == 3)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 3))
-		{
-			EditAttachedObject(playerid, 3);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		EditAttachedObject(playerid, 3);
 	}
 	if(slot == 4)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 4))
-		{
-			EditAttachedObject(playerid, 4);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		EditAttachedObject(playerid, 4);
 	}
 	if(slot == 5)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 5))
-		{
-			EditAttachedObject(playerid, 5);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		EditAttachedObject(playerid, 5);
 	}
 	if(slot == 6)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 6))
-		{
-			EditAttachedObject(playerid, 6);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		EditAttachedObject(playerid, 6);
 	}
 	if(slot == 7)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 7))
-		{
-			EditAttachedObject(playerid, 7);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		EditAttachedObject(playerid, 7);
 	}
 	if(slot == 8)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 8))
-		{
-			EditAttachedObject(playerid, 8);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		EditAttachedObject(playerid, 8);
 	}
 	if(slot == 9)
 	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 9))
-		{
-			EditAttachedObject(playerid, 9);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+		EditAttachedObject(playerid, 9);
 	}
 	if(slot == 10)
-	{
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 10))
-		{
-			EditAttachedObject(playerid, 10);
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-		}
+	{	
+		EditAttachedObject(playerid, 10);
 	}
 
 	return 1;

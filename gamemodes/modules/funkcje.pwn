@@ -1556,7 +1556,7 @@ stock GetObjectName(objectid)
 	new name[128];
 	if(objectid == 18974)
 	{
-		format(name, sizeof(name), "Sexi maska");
+		format(name, sizeof(name), "Zorro Mask");
 	}
 	if(objectid == 18961)
 	{
@@ -1651,7 +1651,7 @@ stock ZmniejszDodatki(playerid, coGraczUsunal)
 	if(coGraczUsunal == 3)
 	{
 		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] =PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
 		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
 		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
@@ -1664,7 +1664,7 @@ stock ZmniejszDodatki(playerid, coGraczUsunal)
 	{
 		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
 		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] =PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
 		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
 		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
@@ -1678,7 +1678,7 @@ stock ZmniejszDodatki(playerid, coGraczUsunal)
 		PlayerAdds[playerid][pSlot1] = PlayerAdds[playerid][pSlot2];
 		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
 		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] =PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
 		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
 		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
 		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
