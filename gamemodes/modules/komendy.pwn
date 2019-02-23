@@ -15483,7 +15483,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] > 1 
 	&& PlayerAdds[playerid][pSlot10] > 1)
 	{
-		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 10 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s\n[3] %s\n[4] %s\n[5] %s\n[6] %s\n[7] %s\n[8] %s\n[9] %s\n[10] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 10 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
 		GetObjectName(PlayerAdds[playerid][pSlot4]), 
@@ -15505,7 +15505,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] > 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 9 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s\n[3] %s\n[4] %s\n[5] %s\n[6] %s\n[7] %s\n[8] %s\n[9] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 9 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
 		GetObjectName(PlayerAdds[playerid][pSlot4]), 
@@ -15526,7 +15526,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] < 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 8 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s\n[3] %s\n[4] %s\n[5] %s\n[6] %s\n[7] %s\n[8] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 8 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
 		GetObjectName(PlayerAdds[playerid][pSlot4]), 
@@ -15546,7 +15546,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] < 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 7 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s\n[3] %s\n[4] %s\n[5] %s\n[6] %s\n[7] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 7 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
 		GetObjectName(PlayerAdds[playerid][pSlot4]), 
@@ -15565,7 +15565,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] < 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 6 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s\n[3] %s\n[4] %s\n[5] %s\n[6] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 6 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
 		GetObjectName(PlayerAdds[playerid][pSlot4]), 
@@ -15583,7 +15583,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] < 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 5 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s\n[3] %s\n[4] %s\n[5] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 5 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
 		GetObjectName(PlayerAdds[playerid][pSlot4]), 
@@ -15600,7 +15600,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] < 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 4 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s\n[3] %s\n[4] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 4 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
 		GetObjectName(PlayerAdds[playerid][pSlot4]));
@@ -15616,7 +15616,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] < 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 3 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s\n[3] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 3 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]));
 	}
@@ -15631,7 +15631,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot9] < 1 
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
-		format(string, sizeof(string), "%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 2 dodatków
+		format(string, sizeof(string), "[1] %s\n[2] %s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 2 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]));
 	}
 	else if(PlayerAdds[playerid][pSlot1] > 1 
@@ -15658,6 +15658,11 @@ CMD:dodatkihelp(playerid)
 	sendTipMessage(playerid, "/kupdodatki - pozwala Ci kupiæ dodatki (tylko w sklepie z ubraniami)");
 	sendTipMessage(playerid, "/ustawdodatek [slot] - pozwala Ci dostosowaæ twój strój"); 
 	sendTipMessage(playerid, "/wyrzucdodatek [slot] - pozwala Ci wyrzuciæ dodatek - nieodwracalnie!"); 
+	if(PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
+	{
+		sendTipMessage(playerid, "{FFB76F}**5000** {C0C0C0}/setdodatki [id] [id_obiektu] [slot]"); 
+	}
+	
 	sendTipMessageEx(playerid, COLOR_GREEN, "======================================="); 
 	return 1;
 }
@@ -15669,12 +15674,12 @@ CMD:kupdodatki(playerid)
 CMD:setdodatki(playerid, params[])
 {
 	new giveplayerid, idobject, slot;
-	if( sscanf(params, "k<fix>dd", giveplayerid, idobject, slot))
+	if(sscanf(params, "k<fix>dd", giveplayerid, idobject, slot))
 	{
 		sendTipMessage(playerid, "U¿yj /dajkluczyki [Nick/ID] [ID obiektu] [SLOT]");
 		return 1;
 	}
-	if(!IsPlayerConnected(giveplayerid)
+	if(!IsPlayerConnected(giveplayerid))
 	{
 		sendErrorMessage(playerid, "Nie ma takiego gracza"); 
 		return 1;
