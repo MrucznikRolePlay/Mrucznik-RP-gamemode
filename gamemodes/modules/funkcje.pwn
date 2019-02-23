@@ -1551,7 +1551,19 @@ stock GetNick(playerid, rp = false)
 	}
 	return nick;
 }
-
+stock GetObjectName(objectid)
+{
+	new name[128];
+	if(objectid == 18974)
+	{
+		format(name, sizeof(name), "Sexi maska");
+	}
+	if(objectid == 18961)
+	{
+		format(name, sizeof(name), "Bobby Hat"); 
+	}
+	return name;
+}
 stock GetNumber(playerid)
 {
 	return PlayerInfo[playerid][pPnumber];
@@ -8690,6 +8702,7 @@ public NG_OpenGateWithKey(playerid)
     DeletePVar(playerid, "ng-key");
 	return 1;
 }
+
 stock OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
 {
 	new Float:health,timeobl;

@@ -15440,7 +15440,227 @@ CMD:selldom(playerid, params[])
 	}
 	return 1;
 }
+//========================[DODATKI]==========================
+CMD:dodatki(playerid)
+{
+	//Zmienne
+	new string[256];
+	//Zabezpieczenia
+	if(IsPlayerInAnyVehicle(playerid))
+	{
+		sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu");
+		return 1;
+	}
+	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	{
+		sendErrorMessage(playerid, "Aby tego u¿yæ musisz zejœæ z @Duty"); 
+		return 1;
+	}
+	if(PlayerAdds[playerid][pSlot1] < 1 
+	|| PlayerAdds[playerid][pSlot2] < 1 
+	|| PlayerAdds[playerid][pSlot3] < 1 
+	|| PlayerAdds[playerid][pSlot4] < 1 
+	|| PlayerAdds[playerid][pSlot5] < 1 
+	|| PlayerAdds[playerid][pSlot5] < 1 
+	|| PlayerAdds[playerid][pSlot6] < 1 
+	|| PlayerAdds[playerid][pSlot7] < 1 
+	|| PlayerAdds[playerid][pSlot8] < 1 
+	|| PlayerAdds[playerid][pSlot9] < 1 
+	|| PlayerAdds[playerid][pSlot10] < 1)
+	{
+		sendTipMessage(playerid, "Nie posiadasz ¿adnych dodatków postaci, kup je w sklepie z ubraniami"); 
+		return 1;
+	}
+	//Czynnoœci
+	if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] > 1 
+	&& PlayerAdds[playerid][pSlot4] > 1 
+	&& PlayerAdds[playerid][pSlot5] > 1 
+	&& PlayerAdds[playerid][pSlot6] > 1 
+	&& PlayerAdds[playerid][pSlot7] > 1 
+	&& PlayerAdds[playerid][pSlot8] > 1 
+	&& PlayerAdds[playerid][pSlot9] > 1 
+	&& PlayerAdds[playerid][pSlot10] > 1)
+	{
+		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 10 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]),
+		GetObjectName(PlayerAdds[playerid][pSlot3]),
+		GetObjectName(PlayerAdds[playerid][pSlot4]), 
+		GetObjectName(PlayerAdds[playerid][pSlot5]),
+		GetObjectName(PlayerAdds[playerid][pSlot6]), 
+		GetObjectName(PlayerAdds[playerid][pSlot7]), 
+		GetObjectName(PlayerAdds[playerid][pSlot8]),
+		GetObjectName(PlayerAdds[playerid][pSlot9]),
+		GetObjectName(PlayerAdds[playerid][pSlot10]));
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] > 1 
+	&& PlayerAdds[playerid][pSlot4] > 1 
+	&& PlayerAdds[playerid][pSlot5] > 1 
+	&& PlayerAdds[playerid][pSlot6] > 1 
+	&& PlayerAdds[playerid][pSlot7] > 1 
+	&& PlayerAdds[playerid][pSlot8] > 1 
+	&& PlayerAdds[playerid][pSlot9] > 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 9 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]),
+		GetObjectName(PlayerAdds[playerid][pSlot3]),
+		GetObjectName(PlayerAdds[playerid][pSlot4]), 
+		GetObjectName(PlayerAdds[playerid][pSlot5]),
+		GetObjectName(PlayerAdds[playerid][pSlot6]), 
+		GetObjectName(PlayerAdds[playerid][pSlot7]), 
+		GetObjectName(PlayerAdds[playerid][pSlot8]),
+		GetObjectName(PlayerAdds[playerid][pSlot9]));
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] > 1 
+	&& PlayerAdds[playerid][pSlot4] > 1 
+	&& PlayerAdds[playerid][pSlot5] > 1 
+	&& PlayerAdds[playerid][pSlot6] > 1 
+	&& PlayerAdds[playerid][pSlot7] > 1 
+	&& PlayerAdds[playerid][pSlot8] > 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 8 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]),
+		GetObjectName(PlayerAdds[playerid][pSlot3]),
+		GetObjectName(PlayerAdds[playerid][pSlot4]), 
+		GetObjectName(PlayerAdds[playerid][pSlot5]),
+		GetObjectName(PlayerAdds[playerid][pSlot6]), 
+		GetObjectName(PlayerAdds[playerid][pSlot7]), 
+		GetObjectName(PlayerAdds[playerid][pSlot8]));
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] > 1 
+	&& PlayerAdds[playerid][pSlot4] > 1 
+	&& PlayerAdds[playerid][pSlot5] > 1 
+	&& PlayerAdds[playerid][pSlot6] > 1 
+	&& PlayerAdds[playerid][pSlot7] > 1 
+	&& PlayerAdds[playerid][pSlot8] < 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 7 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]),
+		GetObjectName(PlayerAdds[playerid][pSlot3]),
+		GetObjectName(PlayerAdds[playerid][pSlot4]), 
+		GetObjectName(PlayerAdds[playerid][pSlot5]),
+		GetObjectName(PlayerAdds[playerid][pSlot6]), 
+		GetObjectName(PlayerAdds[playerid][pSlot7]));
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] > 1 
+	&& PlayerAdds[playerid][pSlot4] > 1  
+	&& PlayerAdds[playerid][pSlot5] > 1 
+	&& PlayerAdds[playerid][pSlot6] > 1 
+	&& PlayerAdds[playerid][pSlot7] < 1 
+	&& PlayerAdds[playerid][pSlot8] < 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 6 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]),
+		GetObjectName(PlayerAdds[playerid][pSlot3]),
+		GetObjectName(PlayerAdds[playerid][pSlot4]), 
+		GetObjectName(PlayerAdds[playerid][pSlot5]),
+		GetObjectName(PlayerAdds[playerid][pSlot6]));
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] > 1 
+	&& PlayerAdds[playerid][pSlot4] > 1  
+	&& PlayerAdds[playerid][pSlot5] > 1 
+	&& PlayerAdds[playerid][pSlot6] < 1 
+	&& PlayerAdds[playerid][pSlot7] < 1 
+	&& PlayerAdds[playerid][pSlot8] < 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s\n%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 5 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]),
+		GetObjectName(PlayerAdds[playerid][pSlot3]),
+		GetObjectName(PlayerAdds[playerid][pSlot4]), 
+		GetObjectName(PlayerAdds[playerid][pSlot5]));
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] > 1 
+	&& PlayerAdds[playerid][pSlot4] > 1 
+	&& PlayerAdds[playerid][pSlot5] < 1 
+	&& PlayerAdds[playerid][pSlot6] < 1 
+	&& PlayerAdds[playerid][pSlot7] < 1 
+	&& PlayerAdds[playerid][pSlot8] < 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 4 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]),
+		GetObjectName(PlayerAdds[playerid][pSlot3]),
+		GetObjectName(PlayerAdds[playerid][pSlot4]);
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] > 1 
+	&& PlayerAdds[playerid][pSlot4] < 1 
+	&& PlayerAdds[playerid][pSlot5] < 1 
+	&& PlayerAdds[playerid][pSlot6] < 1 
+	&& PlayerAdds[playerid][pSlot7] < 1 
+	&& PlayerAdds[playerid][pSlot8] < 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 3 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]),
+		GetObjectName(PlayerAdds[playerid][pSlot3]);
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] > 1 
+	&& PlayerAdds[playerid][pSlot3] < 1 
+	&& PlayerAdds[playerid][pSlot4] < 1 
+	&& PlayerAdds[playerid][pSlot5] < 1 
+	&& PlayerAdds[playerid][pSlot6] < 1 
+	&& PlayerAdds[playerid][pSlot7] < 1 
+	&& PlayerAdds[playerid][pSlot8] < 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 2 dodatków
+		GetObjectName(PlayerAdds[playerid][pSlot2]);
+	}
+	else if(PlayerAdds[playerid][pSlot1] > 1 
+	&& PlayerAdds[playerid][pSlot2] < 1 
+	&& PlayerAdds[playerid][pSlot3] < 1 
+	&& PlayerAdds[playerid][pSlot4] < 1 
+	&& PlayerAdds[playerid][pSlot5] < 1 
+	&& PlayerAdds[playerid][pSlot6] < 1 
+	&& PlayerAdds[playerid][pSlot7] < 1 
+	&& PlayerAdds[playerid][pSlot8] < 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
+	{
+		format(string, sizeof(string), "%s", GetObjectName(PlayerAdds[playerid][pSlot1])); //Ma 2 dodatków
+	}
 
+	ShowPlayerDialogEx(playerid, 1010, DIALOG_STYLE_LIST, "Mrucznik-RP: Dodatki", string, "Ubierz", "Wróæ");
+	return 1;
+}
+CMD:dodatkihelp(playerid)
+{
+
+	return 1;
+}
+CMD:kupdodatki(playerid)
+{
+
+	return 1;
+}
 //---------------------------------------[System aut]-------------------------------------------------------------------------------------------
 
 
@@ -23773,11 +23993,11 @@ CMD:domulecz(playerid)
 		{
 			if(zycie < 90)
 			{
-				if(Dom[dom][hUL_D] == 0)
+				/*if(Dom[dom][hUL_D] == 0)
 				{
 					sendTipMessage(playerid, "W³aœciciel domu zabroni³ Ci korzystaæ z dodatków!"); 
 					return 1;
-				}
+				}*/
 				if(PlayerInfo[playerid][pWynajem] != 0)
 				{
 					SetPlayerHealth(playerid, 100);
