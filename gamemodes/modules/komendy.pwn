@@ -15892,22 +15892,12 @@ CMD:wyrzucdodatki(playerid, params[])
 		new string[128];
 		if(sscanf(params, "k<fix>", slot))
 		{
-			sendTipMessage(playerid, "U¿yj /wyrzucdodatki [SLOT z /dodatki]");
+			sendTipMessage(playerid, "U¿yj /wyrzucdodatki [SLOT 1-10]");
 			return 1;
 		}
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			sendErrorMessage(playerid, "Najpierw zejdŸ ze s³u¿by administratora!"); 
-			return 1;
-		}
-		if(slot >= 11)
-		{
-			sendErrorMessage(playerid, "ID slotu nie mo¿e byæ wiêksze jak 10"); 
-			return 1;
-		}
-		if(slot <= 0)
-		{
-			sendErrorMessage(playerid, "ID slotu nie mo¿e byæ mniejsze jak 1"); 
 			return 1;
 		}
 		if(slot == 1)
