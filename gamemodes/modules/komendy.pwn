@@ -15676,17 +15676,12 @@ CMD:setdodatki(playerid, params[])
 	new giveplayerid, idobject, slot;
 	if(sscanf(params, "k<fix>dd", giveplayerid, idobject, slot))
 	{
-		sendTipMessage(playerid, "U¿yj /dajkluczyki [Nick/ID] [ID obiektu] [SLOT]");
+		sendTipMessage(playerid, "U¿yj /setdodatki [Nick/ID] [ID obiektu] [SLOT]");
 		return 1;
 	}
 	if(!IsPlayerConnected(giveplayerid))
 	{
 		sendErrorMessage(playerid, "Nie ma takiego gracza"); 
-		return 1;
-	}
-	if(idobject != 18961 || idobject != 18974)
-	{
-		sendTipMessage(playerid, "B³êdne id obiektu"); 
 		return 1;
 	}
 	if(slot < 1 || slot > 10)
@@ -15736,6 +15731,10 @@ CMD:setdodatki(playerid, params[])
 		{
 			PlayerAdds[giveplayerid][pSlot10] = idobject;
 		}
+		format(string, sizeof(string), "Administrator %s ustawi³ Ci dodatek na slot %d", GetNick(playerid), slot);
+		sendTipMessage(giveplayerid, string);
+		format(string, sizeof(string), "Ustawi³eœ dodatek %s [%d] dla %s [%d]", GetObjectName(idobject), idobject, GetNick(giveplayerid), giveplayerid);
+		sendTipMessage(playerid, string);
 	}
 	else
 	{
