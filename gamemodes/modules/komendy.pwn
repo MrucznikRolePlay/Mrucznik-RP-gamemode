@@ -15681,7 +15681,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	if(slot == 1)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot1") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot1") == 1)
 		{
 			EditAttachedObject(playerid, 1001);
 		}
@@ -15693,7 +15693,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 2)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot2") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot2") == 1)
 		{
 			EditAttachedObject(playerid, 1002);
 		}
@@ -15705,7 +15705,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 3)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot3") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot3") == 1)
 		{
 			EditAttachedObject(playerid, 1003);
 		}
@@ -15717,7 +15717,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 4)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot4") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot4") == 1)
 		{
 			EditAttachedObject(playerid, 1004);
 		}
@@ -15729,7 +15729,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 5)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot5") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot5") == 1)
 		{
 			EditAttachedObject(playerid, 1005);
 		}
@@ -15741,7 +15741,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 6)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot6") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot6") == 1)
 		{
 			EditAttachedObject(playerid, 1006);
 		}
@@ -15753,7 +15753,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 7)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot7") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot7") == 1)
 		{
 			EditAttachedObject(playerid, 1007);
 		}
@@ -15765,7 +15765,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 8)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot8") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot8") == 1)
 		{
 			EditAttachedObject(playerid, 1008);
 		}
@@ -15777,7 +15777,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 9)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot9") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot9") == 1)
 		{
 			EditAttachedObject(playerid, 1009);
 		}
@@ -15789,7 +15789,7 @@ CMD:ustawdodatek(playerid, params[])
 	}
 	else if(slot == 10)
 	{
-		if(GetPVarInt(playerid, "PlayerWearSlot10") == 1);
+		if(GetPVarInt(playerid, "PlayerWearSlot10") == 1)
 		{
 			EditAttachedObject(playerid, 1010);
 		}
