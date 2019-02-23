@@ -17202,7 +17202,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
@@ -17220,7 +17220,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 3))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
@@ -17238,7 +17238,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 4))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
@@ -17255,7 +17255,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 4:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 5))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
@@ -17272,7 +17272,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 5:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 6))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
@@ -17289,7 +17289,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 6:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 7))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot7]));
@@ -17306,7 +17306,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 7:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 8))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
@@ -17323,7 +17323,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 8:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 9))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
@@ -17341,7 +17341,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 9:
 				{
-					if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+					if(IsPlayerAttachedObjectSlotUsed(playerid, 10))
 					{
 						//komunikaty
 						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
