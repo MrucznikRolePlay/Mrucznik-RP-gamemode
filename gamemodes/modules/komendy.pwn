@@ -15603,7 +15603,7 @@ CMD:dodatki(playerid)
 		format(string, sizeof(string), "%s\n%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 4 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
 		GetObjectName(PlayerAdds[playerid][pSlot3]),
-		GetObjectName(PlayerAdds[playerid][pSlot4]);
+		GetObjectName(PlayerAdds[playerid][pSlot4]));
 	}
 	else if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
@@ -15618,7 +15618,7 @@ CMD:dodatki(playerid)
 	{
 		format(string, sizeof(string), "%s\n%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 3 dodatków
 		GetObjectName(PlayerAdds[playerid][pSlot2]),
-		GetObjectName(PlayerAdds[playerid][pSlot3]);
+		GetObjectName(PlayerAdds[playerid][pSlot3]));
 	}
 	else if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] > 1 
@@ -15632,7 +15632,7 @@ CMD:dodatki(playerid)
 	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
 		format(string, sizeof(string), "%s\n%s", GetObjectName(PlayerAdds[playerid][pSlot1]), //Ma 2 dodatków
-		GetObjectName(PlayerAdds[playerid][pSlot2]);
+		GetObjectName(PlayerAdds[playerid][pSlot2]));
 	}
 	else if(PlayerAdds[playerid][pSlot1] > 1 
 	&& PlayerAdds[playerid][pSlot2] < 1 
