@@ -971,7 +971,17 @@ public OnPlayerDisconnect(playerid, reason)
     		DestroyDynamicObject(r0pes[playerid][i]);
       	}
 	}
-
+	//dodatki 
+	RemovePlayerAttachedObject(playerid,1);
+	RemovePlayerAttachedObject(playerid,2);
+	RemovePlayerAttachedObject(playerid,3);
+	RemovePlayerAttachedObject(playerid,4);
+	RemovePlayerAttachedObject(playerid,5);
+	RemovePlayerAttachedObject(playerid,6);
+	RemovePlayerAttachedObject(playerid,7);
+	RemovePlayerAttachedObject(playerid,8);
+	RemovePlayerAttachedObject(playerid,9);
+	RemovePlayerAttachedObject(playerid,10);
     //budki telefoniczne
     if(GetPVarInt(playerid, "budka-Mobile") != 999) {
         new caller = GetPVarInt(playerid, "budka-Mobile");
