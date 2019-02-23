@@ -1382,6 +1382,18 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	PlayerInfo[playerid][pBiletpociag] = 0;
+	
+	//chwilowe
+	PlayerAdds[playerid][pSlot1] = 0;
+	PlayerAdds[playerid][pSlot2] = 0;
+	PlayerAdds[playerid][pSlot3] = 0;
+	PlayerAdds[playerid][pSlot4] = 0;
+	PlayerAdds[playerid][pSlot5] = 0;
+	PlayerAdds[playerid][pSlot6] = 0;
+	PlayerAdds[playerid][pSlot7] = 0;
+	PlayerAdds[playerid][pSlot8] = 0;
+	PlayerAdds[playerid][pSlot9] = 0;
+	PlayerAdds[playerid][pSlot10] = 0;
 
 
 	

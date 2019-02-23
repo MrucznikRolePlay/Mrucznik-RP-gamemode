@@ -17193,6 +17193,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
 						SetPlayerAttachedObject(playerid, 1, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 1); 
 					}
 					else
 					{
