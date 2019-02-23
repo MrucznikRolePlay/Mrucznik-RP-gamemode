@@ -15457,16 +15457,16 @@ CMD:dodatki(playerid)
 		return 1;
 	}
 	if(PlayerAdds[playerid][pSlot1] < 1 
-	|| PlayerAdds[playerid][pSlot2] < 1 
-	|| PlayerAdds[playerid][pSlot3] < 1 
-	|| PlayerAdds[playerid][pSlot4] < 1 
-	|| PlayerAdds[playerid][pSlot5] < 1 
-	|| PlayerAdds[playerid][pSlot5] < 1 
-	|| PlayerAdds[playerid][pSlot6] < 1 
-	|| PlayerAdds[playerid][pSlot7] < 1 
-	|| PlayerAdds[playerid][pSlot8] < 1 
-	|| PlayerAdds[playerid][pSlot9] < 1 
-	|| PlayerAdds[playerid][pSlot10] < 1)
+	&& PlayerAdds[playerid][pSlot2] < 1 
+	&& PlayerAdds[playerid][pSlot3] < 1 
+	&& PlayerAdds[playerid][pSlot4] < 1 
+	&& PlayerAdds[playerid][pSlot5] < 1 
+	&& PlayerAdds[playerid][pSlot5] < 1 
+	&& PlayerAdds[playerid][pSlot6] < 1 
+	&& PlayerAdds[playerid][pSlot7] < 1 
+	&& PlayerAdds[playerid][pSlot8] < 1 
+	&& PlayerAdds[playerid][pSlot9] < 1 
+	&& PlayerAdds[playerid][pSlot10] < 1)
 	{
 		sendTipMessage(playerid, "Nie posiadasz ¿adnych dodatków postaci, kup je w sklepie z ubraniami"); 
 		return 1;
@@ -15733,9 +15733,9 @@ CMD:setdodatki(playerid, params[])
 			PlayerAdds[giveplayerid][pSlot10] = idobject;
 		}
 		format(string, sizeof(string), "Administrator %s ustawi³ Ci dodatek na slot %d", GetNick(playerid), slot);
-		sendTipMessage(giveplayerid, string);
+		sendTipMessageEx(giveplayerid, COLOR_RED, string);
 		format(string, sizeof(string), "Ustawi³eœ dodatek %s [%d] dla %s [%d]", GetObjectName(idobject), idobject, GetNick(giveplayerid), giveplayerid);
-		sendTipMessage(playerid, string);
+		sendTipMessage(playerid, COLOR_BLUE, string);
 	}
 	else
 	{
