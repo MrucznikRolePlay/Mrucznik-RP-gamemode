@@ -1600,6 +1600,94 @@ stock GetObjectBone(playerid, objectid)
 	}
 	return boneIDzmienna[playerid];
 }
+stock ZmniejszDodatki(playerid, value)
+{
+	if(value == 9)
+	{
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(value == 8)
+	{
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(value == 7)
+	{
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	
+	}
+	if(value == 6)
+	{
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(value == 5)
+	{
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(value == 4)
+	{
+		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9 = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0;
+	}
+	if(value == 3)
+	{
+		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
+		PlayerAdds[playerid][pSlot4] =PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0
+	
+	}
+	if(value == 2)
+	{
+		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
+		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
+		PlayerAdds[playerid][pSlot4] =PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0
+	
+	}
+	if(value == 1)
+	{
+		PlayerAdds[playerid][pSlot1] = PlayerAdds[playerid][pSlot2];
+		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
+		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
+		PlayerAdds[playerid][pSlot4] =PlayerAdds[playerid][pSlot5];
+		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
+		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
+		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
+		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
+		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
+		PlayerAdds[playerid][pSlot10] = 0
+	}
+	return 1;
+}
 stock GetNumber(playerid)
 {
 	return PlayerInfo[playerid][pPnumber];
