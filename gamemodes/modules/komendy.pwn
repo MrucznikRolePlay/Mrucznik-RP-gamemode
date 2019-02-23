@@ -15671,6 +15671,27 @@ CMD:kupdodatki(playerid)
 
 	return 1;
 }
+CMD:zdejmijdodatki(playerid, params[])
+{
+	if(IsPlayerConnected(playerid))
+	{
+		new slot;
+		if(sscanf(params, "k<fix>d", slot))
+		{
+			sendTipMessage(playerid, "U¿yj /zdejmijdodatki [slot]"); 
+			return 1;
+		}
+		if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+		{
+			RemovePlayerAttachedObject(playerid, slot);
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nic nie nosisz na tym slocie"); 
+		}
+	}
+	return 1;
+}
 CMD:ustawdodatek(playerid, params[])
 {
 	new slot;
@@ -15907,13 +15928,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot1]), PlayerAdds[playerid][pSlot1]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
-				SetPVarInt(playerid, "PlayerWearSlot1", 0);
 				ZmniejszDodatki(playerid, 1);
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie pierwszym"); 
-				return 1;
 			}
 		}
 		else if(slot == 2)
@@ -15923,13 +15942,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot2]), PlayerAdds[playerid][pSlot2]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
-				SetPVarInt(playerid, "PlayerWearSlot2", 0);
 				ZmniejszDodatki(playerid, 2);
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie drugim");
-				return 1;
 			}
 		}
 		else if(slot == 3)
@@ -15939,13 +15956,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot3]), PlayerAdds[playerid][pSlot3]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
-				SetPVarInt(playerid, "PlayerWearSlot3", 0);
 				ZmniejszDodatki(playerid, 3);
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie trzecim"); 
-				return 1;
 			}
 		}
 		else if(slot == 4)
@@ -15955,13 +15970,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot4]), PlayerAdds[playerid][pSlot4]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
-				SetPVarInt(playerid, "PlayerWearSlot4", 0);
 				ZmniejszDodatki(playerid, 4);
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie czwartym");
-				return 1;
 			}
 		}
 		else if(slot == 5)
@@ -15971,13 +15984,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot5]), PlayerAdds[playerid][pSlot5]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
-				SetPVarInt(playerid, "PlayerWearSlot5", 0);
 				ZmniejszDodatki(playerid, 5);
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie pi¹tym");
-				return 1;
 			}
 		}
 		else if(slot == 6)
@@ -15987,13 +15998,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot6]), PlayerAdds[playerid][pSlot6]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
-				SetPVarInt(playerid, "PlayerWearSlot6", 0);
 				ZmniejszDodatki(playerid, 6);
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie szóstym");
-				return 1;
 			}
 		}
 		else if(slot == 7)
@@ -16009,7 +16018,6 @@ CMD:wyrzucdodatki(playerid, params[])
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie siódmym");
-				return 1;
 			}
 		}
 		else if(slot == 8)
@@ -16019,13 +16027,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot8]), PlayerAdds[playerid][pSlot8]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
-				SetPVarInt(playerid, "PlayerWearSlot8", 0);
 				ZmniejszDodatki(playerid, 8);
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie ósmym");
-				return 1;
 			}
 		}
 		else if(slot == 9)
@@ -16035,13 +16041,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot9]), PlayerAdds[playerid][pSlot9]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
-				SetPVarInt(playerid, "PlayerWearSlot9", 0);
 				ZmniejszDodatki(playerid, 9);
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie dziewi¹tym");
-				return 1;
 			}
 		}
 		else if(slot == 10)
@@ -16051,13 +16055,11 @@ CMD:wyrzucdodatki(playerid, params[])
 				format(string, sizeof(string), "Wywali³eœ dodatek %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot10]), PlayerAdds[playerid][pSlot10]);
 				sendTipMessage(playerid, string);
 				format(string, sizeof(string), "%s wyrzuca za siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
-				SetPVarInt(playerid, "PlayerWearSlot10", 0);
 				PlayerAdds[playerid][pSlot10] = 0;
 			}
 			else
 			{
 				sendErrorMessage(playerid, "Nie masz nic na slocie dziesi¹tym");
-				return 1;
 			}
 		}
 		
