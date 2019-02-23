@@ -1686,7 +1686,7 @@ stock ZmniejszDodatki(playerid, coGraczUsunal)
 		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
 		PlayerAdds[playerid][pSlot10] = 0;
 	}
-	return 1;
+	return 0;
 }
 stock GetNumber(playerid)
 {

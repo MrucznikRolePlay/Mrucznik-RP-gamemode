@@ -15709,10 +15709,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 2)
+	if(slot == 2)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
 		{
@@ -15721,10 +15720,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 3)
+	if(slot == 3)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 3))
 		{
@@ -15733,10 +15731,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 4)
+	if(slot == 4)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 4))
 		{
@@ -15745,10 +15742,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 5)
+	if(slot == 5)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 5))
 		{
@@ -15757,10 +15753,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 6)
+	if(slot == 6)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 6))
 		{
@@ -15769,10 +15764,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 7)
+	if(slot == 7)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 7))
 		{
@@ -15781,10 +15775,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 8)
+	if(slot == 8)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 8))
 		{
@@ -15793,10 +15786,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 9)
+	if(slot == 9)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 9))
 		{
@@ -15805,10 +15797,9 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
-	else if(slot == 10)
+	if(slot == 10)
 	{
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 10))
 		{
@@ -15817,7 +15808,6 @@ CMD:ustawdodatek(playerid, params[])
 		else
 		{
 			sendErrorMessage(playerid, "Nic nie nosisz na tym slocie"); 
-			return 1;
 		}
 	}
 
@@ -15935,7 +15925,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie pierwszym"); 
 			}
 		}
-		else if(slot == 2)
+		if(slot == 2)
 		{
 			if(PlayerAdds[playerid][pSlot2] > 1)
 			{
@@ -15949,7 +15939,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie drugim");
 			}
 		}
-		else if(slot == 3)
+		if(slot == 3)
 		{
 			if(PlayerAdds[playerid][pSlot3] > 1)
 			{
@@ -15963,7 +15953,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie trzecim"); 
 			}
 		}
-		else if(slot == 4)
+		if(slot == 4)
 		{
 			if(PlayerAdds[playerid][pSlot4] > 1)
 			{
@@ -15977,7 +15967,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie czwartym");
 			}
 		}
-		else if(slot == 5)
+		if(slot == 5)
 		{
 			if(PlayerAdds[playerid][pSlot5] > 1)
 			{
@@ -15991,7 +15981,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie pi¹tym");
 			}
 		}
-		else if(slot == 6)
+		if(slot == 6)
 		{
 			if(PlayerAdds[playerid][pSlot6] > 1)
 			{
@@ -16005,7 +15995,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie szóstym");
 			}
 		}
-		else if(slot == 7)
+		if(slot == 7)
 		{
 			if(PlayerAdds[playerid][pSlot7] > 1)
 			{
@@ -16020,7 +16010,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie siódmym");
 			}
 		}
-		else if(slot == 8)
+		if(slot == 8)
 		{
 			if(PlayerAdds[playerid][pSlot8] > 1)
 			{
@@ -16034,7 +16024,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie ósmym");
 			}
 		}
-		else if(slot == 9)
+		if(slot == 9)
 		{
 			if(PlayerAdds[playerid][pSlot9] > 1)
 			{
@@ -16048,7 +16038,7 @@ CMD:wyrzucdodatki(playerid, params[])
 				sendErrorMessage(playerid, "Nie masz nic na slocie dziewi¹tym");
 			}
 		}
-		else if(slot == 10)
+		if(slot == 10)
 		{
 			if(PlayerAdds[playerid][pSlot10] > 1)
 			{
