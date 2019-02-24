@@ -1578,28 +1578,27 @@ stock GetObjectName(objectid)
 }
 stock GetObjectBone(playerid, objectid)
 {
-	new bone[24];
 	if(objectid == 18961)
 	{
-		format(bone, sizeof(bone), "2");
+		boneIDzmienna[playerid] = 2;
 	}
 	if(objectid == 18974)
 	{
-		format(bone, sizeof(bone), "2");
+		boneIDzmienna[playerid] = 2;
 	}
 	if(objectid == 18962) 
 	{
-		format(bone, sizeof(bone), "2");
+		boneIDzmienna[playerid] = 2;
 	}
 	if(objectid == 19528)
 	{
-		format(bone, sizeof(bone), "2");
+		boneIDzmienna[playerid] = 2;
 	}
 	if(objectid == 19559)
 	{
-		format(bone, sizeof(bone), "1");
+		boneIDzmienna[playerid] = 1;
 	}
-	return bone;
+	return boneIDzmienna[playerid];
 }
 stock ZmniejszDodatki(playerid, coGraczUsunal)
 {
