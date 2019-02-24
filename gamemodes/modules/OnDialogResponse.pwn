@@ -17192,8 +17192,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						//czynnoœci
 						GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
-						SetPlayerAttachedObject(playerid, 1, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 1); 
+						SetPlayerAttachedObject(playerid, 0, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid]);
+						EditAttachedObject(playerid, 0); 
 					}
 					else
 					{

@@ -15684,7 +15684,7 @@ CMD:zdejmijdodatki(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /zdejmijdodatki [slot]"); 
 			return 1;
 		}
-		if(!IsPlayerAttachedObjectSlotUsed(playerid, pos))
+		if(IsPlayerAttachedObjectSlotUsed(playerid, pos))
 		{
 			sendTipMessage(playerid, "Nie masz nic na tym slocie"); 
 			return 1;
@@ -15755,16 +15755,16 @@ CMD:ustawdodatek(playerid, params[])
 		sendTipMessage(playerid, "U¿yj /ustawdodatek [slot]");
 		return 1;
 	}
-	if(!IsPlayerAttachedObjectSlotUsed(playerid, slot))
+	if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
 	{
 		sendTipMessage(playerid, "Nie masz tego za³o¿onego!"); 
 		return 1;
 	}
 	if(slot == 1)
 	{
-		RemovePlayerAttachedObject(playerid, 1);
-		SetPlayerAttachedObject(playerid, 1, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]));
-		EditAttachedObject(playerid, 1);
+		RemovePlayerAttachedObject(playerid, 0);
+		SetPlayerAttachedObject(playerid, 0, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]));
+		EditAttachedObject(playerid, 0);
 	}
 	if(slot == 2)
 	{
@@ -16051,6 +16051,40 @@ CMD:wyrzucdodatki(playerid, params[])
 	}
 
 	return 1;
+}
+//testowe
+CMD:testzwrotu1(playerid)
+{
+	string[128];
+	format(string, sizeof(string), "Zwrócono: %s", GetObjectName(PlayerAdds[playerid][pSlot1]));
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Zwrócono bone %s", GetObjectBone(PlayerAdds[playerid][pSlot1]));
+	SendClientMessage(playerid, -1, string);
+	SendClientMessage(playerid, -1, "Po zmniejszeniu dodatków:");
+	ZmniejszDodatki(playerid, 1);
+	format(string, sizeof(string), "Wartoœæ na slocie 1: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot1]), PlayerAdds[playerid][pSlot1]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 2: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot2]), PlayerAdds[playerid][pSlot2]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 3: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot3]), PlayerAdds[playerid][pSlot3]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 4: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot4]), PlayerAdds[playerid][pSlot4]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 5: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot5]), PlayerAdds[playerid][pSlot5]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 6: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot6]), PlayerAdds[playerid][pSlot6]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 7: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot7]), PlayerAdds[playerid][pSlot7]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 8: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot8]), PlayerAdds[playerid][pSlot8]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 9: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot9]), PlayerAdds[playerid][pSlot9]);
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Wartoœæ na slocie 10: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot10]), PlayerAdds[playerid][pSlot10]);
+	SendClientMessage(playerid, -1, string);
+	SendClientMessage(playerid, "=====END===="); 
+	return 1;
+
 }
 //---------------------------------------[System aut]-------------------------------------------------------------------------------------------
 
