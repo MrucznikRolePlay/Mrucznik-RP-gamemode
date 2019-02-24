@@ -15755,59 +15755,60 @@ CMD:ustawdodatek(playerid, params[])
 		sendTipMessage(playerid, "U¿yj /ustawdodatek [slot]");
 		return 1;
 	}
-	if(IsPlayerAttachedObjectSlotUsed(playerid, slot))
+	if(!IsPlayerAttachedObjectSlotUsed(playerid, slot))
 	{
 		sendTipMessage(playerid, "Nie masz tego za³o¿onego!"); 
 		return 1;
 	}
-	if(slot >= 11 || slot < 1)
+	if(slot >= 1 && slot <= 10)
+	{
+		if(slot == 1)
+		{
+			RemovePlayerAttachedObject(playerid, 0);
+			SetPlayerAttachedObject(playerid, 0, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]));
+			EditAttachedObject(playerid, 0);
+		}
+		if(slot == 2)
+		{
+			EditAttachedObject(playerid, 2);
+		}
+		if(slot == 3)
+		{
+			EditAttachedObject(playerid, 3);
+		}
+		if(slot == 4)
+		{
+			EditAttachedObject(playerid, 4);
+		}
+		if(slot == 5)
+		{
+			EditAttachedObject(playerid, 5);
+		}
+		if(slot == 6)
+		{
+			EditAttachedObject(playerid, 6);
+		}
+		if(slot == 7)
+		{
+			EditAttachedObject(playerid, 7);
+		}
+		if(slot == 8)
+		{
+			EditAttachedObject(playerid, 8);
+		}
+		if(slot == 9)
+		{
+			EditAttachedObject(playerid, 9);
+		}
+		if(slot == 10)
+		{	
+			EditAttachedObject(playerid, 10);
+		}
+	}
+	else
 	{
 		sendErrorMessage(playerid, "Slot od 1-10"); 
-		return 1;
 	}
-	if(slot == 1)
-	{
-		RemovePlayerAttachedObject(playerid, 0);
-		SetPlayerAttachedObject(playerid, 0, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]));
-		EditAttachedObject(playerid, 0);
-	}
-	if(slot == 2)
-	{
-		EditAttachedObject(playerid, 2);
-	}
-	if(slot == 3)
-	{
-		EditAttachedObject(playerid, 3);
-	}
-	if(slot == 4)
-	{
-		EditAttachedObject(playerid, 4);
-	}
-	if(slot == 5)
-	{
-		EditAttachedObject(playerid, 5);
-	}
-	if(slot == 6)
-	{
-		EditAttachedObject(playerid, 6);
-	}
-	if(slot == 7)
-	{
-		EditAttachedObject(playerid, 7);
-	}
-	if(slot == 8)
-	{
-		EditAttachedObject(playerid, 8);
-	}
-	if(slot == 9)
-	{
-		EditAttachedObject(playerid, 9);
-	}
-	if(slot == 10)
-	{	
-		EditAttachedObject(playerid, 10);
-	}
-
 	return 1;
 }
 CMD:setdodatki(playerid, params[])
