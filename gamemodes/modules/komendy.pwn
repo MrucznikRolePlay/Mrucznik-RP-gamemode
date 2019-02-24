@@ -16082,7 +16082,7 @@ CMD:testzwrotu1(playerid)
 	SendClientMessage(playerid, -1, string);
 	format(string, sizeof(string), "Wartoœæ na slocie 10: %s [%d]", GetObjectName(PlayerAdds[playerid][pSlot10]), PlayerAdds[playerid][pSlot10]);
 	SendClientMessage(playerid, -1, string);
-	SendClientMessage(playerid, "=====END===="); 
+	SendClientMessage(playerid, -1,  "=====END===="); 
 	return 1;
 
 }
