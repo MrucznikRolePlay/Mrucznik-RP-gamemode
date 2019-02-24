@@ -131,11 +131,13 @@ stock showTimedMsgBox(playerid, delay, text[]) {
 
 public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
-	if(modelid == 19142) //By niceCzlowiek
+	if(response)
 	{
-		//SetPlayerAttachedObject(playerid, index, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY = 0.0, Float:fOffsetZ = 0.0, Float:fRotX = 0.0, Float:fRotY = 0.0, Float:fRotZ = 0.0, Float:fScaleX = 1.0, Float:fScaleY = 1.0, Float:fScaleZ = 1.0, materialcolor1 = 0, materialcolor2 = 0)
-		//playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2
-		
+		if(modelid == 19142) //By niceCzlowiek
+		{
+			//SetPlayerAttachedObject(playerid, index, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY = 0.0, Float:fOffsetZ = 0.0, Float:fRotX = 0.0, Float:fRotY = 0.0, Float:fRotZ = 0.0, Float:fScaleX = 1.0, Float:fScaleY = 1.0, Float:fScaleZ = 1.0, materialcolor1 = 0, materialcolor2 = 0)
+			//playerid,7,19142,1,0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2
+			
 			if(fScaleX > 1.6 || fScaleY > 1.96 || fScaleZ > 1.96 || fScaleX < 0.7 || fScaleY < 0.7 || fScaleZ < 0.7) {
 				RemovePlayerAttachedObject(playerid, 7);
 				SetPlayerAttachedObject(playerid, 7, 19142, 1, GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
@@ -149,95 +151,36 @@ public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Fl
 			SetPVarFloat(playerid, "k_offsetX", fOffsetX);
 			SetPVarFloat(playerid, "k_offsetY", fOffsetY);
 			SetPVarFloat(playerid, "k_offsetZ", fOffsetZ);
-		etPVarFloat(playerid, "k_rotX", fRotX);
-		SetPVarFloat(playerid, "k_rotY", fRotY);
-		SetPVarFloat(playerid, "k_rotZ", fRotZ);
-		SetPVarFloat(playerid, "k_scaleX", fScaleX);
-		SetPVarFloat(playerid, "k_scaleY", fScaleY);
-		SetPVarFloat(playerid, "k_scaleZ", fScaleZ);
-		
-	}
-	
-		if(response)//Simeone
-		{
-			if(fOffsetX > 0.95 || fOffsetY > 0.95 || fOffsetZ > 0.95 || fOffsetX < -0.95 || fOffsetY < -0.95 || fOffsetZ < -0.95) 
-			{
-				RemovePlayerAttachedObject(playerid, index);
-				SetPlayerAttachedObject(playerid, index, modelid, boneid, GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
-				return sendErrorMessage(playerid, "Zmiany nie zosta³y zapisane, dodatek by³ zbyt oddalony od gracza!");
-			}
-			sendTipMessage(playerid, "Zapisano pozycje edycji"); 
-			//chwilowe rozwi¹zanie (póki nie poszerzê tablicy) - tak aby gracz nie musia³ edytowaæ za ka¿dym razem
-			SetPVarFloat(playerid, "d_offsetX", fOffsetX);
-			SetPVarFloat(playerid, "d_offsetY", fOffsetY);
-			SetPVarFloat(playerid, "d_offsetZ", fOffsetZ);
-			SetPVarFloat(playerid, "d_rotX", fRotX);
-			SetPVarFloat(playerid, "d_rotY", fRotY);
-			SetPVarFloat(playerid, "d_rotZ", fRotZ);
-			SetPVarFloat(playerid, "d_scaleX", fScaleX);
-			SetPVarFloat(playerid, "d_scaleY", fScaleY);
-			SetPVarFloat(playerid, "d_scaleZ", fScaleZ);
-			if(idex == 0)
-			{
-				RemovePlayerAttachedObject(playerid, 0);
-				SetPlayerAttachedObject(playerid, 0, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 1)
-			{
-				RemovePlayerAttachedObject(playerid, 1);
-				SetPlayerAttachedObject(playerid, 1, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 2)
-			{
-				RemovePlayerAttachedObject(playerid, 2);
-				SetPlayerAttachedObject(playerid, 2, PlayerAdds[playerid][pSlot2], GetObjectBone(playerid, PlayerAdds[playerid][pSlot2]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 3)
-			{
-				RemovePlayerAttachedObject(playerid, 3);
-				SetPlayerAttachedObject(playerid, 3, PlayerAdds[playerid][pSlot3], GetObjectBone(playerid, PlayerAdds[playerid][pSlot3]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 4)
-			{
-				RemovePlayerAttachedObject(playerid, 4);
-				SetPlayerAttachedObject(playerid, 4, PlayerAdds[playerid][pSlot4], GetObjectBone(playerid, PlayerAdds[playerid][pSlot4]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 5)
-			{
-				RemovePlayerAttachedObject(playerid, 5);
-				SetPlayerAttachedObject(playerid, 5, PlayerAdds[playerid][pSlot5], GetObjectBone(playerid, PlayerAdds[playerid][pSlot5]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 6)
-			{
-				RemovePlayerAttachedObject(playerid, 6);
-				SetPlayerAttachedObject(playerid, 6, PlayerAdds[playerid][pSlot6], GetObjectBone(playerid, PlayerAdds[playerid][pSlot6]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 7)
-			{
-				RemovePlayerAttachedObject(playerid, 7);
-				SetPlayerAttachedObject(playerid, 7, PlayerAdds[playerid][pSlot7], GetObjectBone(playerid, PlayerAdds[playerid][pSlot7]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 8)
-			{
-				RemovePlayerAttachedObject(playerid, 8);
-				SetPlayerAttachedObject(playerid, 8, PlayerAdds[playerid][pSlot8], GetObjectBone(playerid, PlayerAdds[playerid][pSlot8]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 9)
-			{
-				RemovePlayerAttachedObject(playerid, 9);
-				SetPlayerAttachedObject(playerid, 9, PlayerAdds[playerid][pSlot1], GetObjectBone(playerid, PlayerAdds[playerid][pSlot9]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-			if(index == 10)
-			{
-				RemovePlayerAttachedObject(playerid, 10);
-				SetPlayerAttachedObject(playerid, 10, PlayerAdds[playerid][pSlot10], GetObjectBone(playerid, PlayerAdds[playerid][pSlot10]), GetPVarFloat(playerid, "d_offsetX"), GetPVarFloat(playerid, "d_offsetY"), GetPVarFloat(playerid, "d_offsetZ"), GetPVarFloat(playerid, "d_rotX"), GetPVarFloat(playerid, "d_rotY"), GetPVarFloat(playerid, "d_rotZ"), GetPVarFloat(playerid, "d_scaleX"), GetPVarFloat(playerid, "d_scaleY"), GetPVarFloat(playerid, "d_scaleZ"));
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Odrzucono zapis"); 
+			SetPVarFloat(playerid, "k_rotX", fRotX);
+			SetPVarFloat(playerid, "k_rotY", fRotY);
+			SetPVarFloat(playerid, "k_rotZ", fRotZ);
+			SetPVarFloat(playerid, "k_scaleX", fScaleX);
+			SetPVarFloat(playerid, "k_scaleY", fScaleY);
+			SetPVarFloat(playerid, "k_scaleZ", fScaleZ);
 			return 1;
+			
 		}
+		if(fOffsetX > 0.95 || fOffsetY > 0.95 || fOffsetZ > 0.95 || fOffsetX < -0.95 || fOffsetY < -0.95 || fOffsetZ < -0.95) 
+		{
+			RemovePlayerAttachedObject(playerid, index);
+			SetPlayerAttachedObject(playerid, index, modelid, boneid, GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
+			return sendErrorMessage(playerid, "Zmiany nie zosta³y zapisane, dodatek by³ zbyt oddalony od gracza!");
+		}
+		sendTipMessage(playerid, "Zapisano pozycje edycji"); 
+		//chwilowe rozwi¹zanie (póki nie poszerzê tablicy) - tak aby gracz nie musia³ edytowaæ za ka¿dym razem
+		SetPVarFloat(playerid, "d_offsetX", fOffsetX);
+		SetPVarFloat(playerid, "d_offsetY", fOffsetY);
+		SetPVarFloat(playerid, "d_offsetZ", fOffsetZ);
+		SetPVarFloat(playerid, "d_rotX", fRotX);
+		SetPVarFloat(playerid, "d_rotY", fRotY);
+		SetPVarFloat(playerid, "d_rotZ", fRotZ);
+		SetPVarFloat(playerid, "d_scaleX", fScaleX);
+		SetPVarFloat(playerid, "d_scaleY", fScaleY);
+		SetPVarFloat(playerid, "d_scaleZ", fScaleZ);
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Odrzucono zapis obiektu"); 
 	}
 	
     return 1;

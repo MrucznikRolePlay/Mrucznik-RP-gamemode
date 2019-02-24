@@ -15760,6 +15760,11 @@ CMD:ustawdodatek(playerid, params[])
 		sendTipMessage(playerid, "Nie masz tego za³o¿onego!"); 
 		return 1;
 	}
+	if(slot >= 11 || slot < 1)
+	{
+		sendErrorMessage(playerid, "Slot od 1-10"); 
+		return 1;
+	}
 	if(slot == 1)
 	{
 		RemovePlayerAttachedObject(playerid, 0);
