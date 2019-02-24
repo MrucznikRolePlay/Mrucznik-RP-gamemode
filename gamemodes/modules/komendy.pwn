@@ -16055,7 +16055,7 @@ CMD:wyrzucdodatki(playerid, params[])
 //testowe
 CMD:testzwrotu1(playerid)
 {
-	string[128];
+	new string[128];
 	format(string, sizeof(string), "Zwrócono: %s", GetObjectName(PlayerAdds[playerid][pSlot1]));
 	SendClientMessage(playerid, -1, string);
 	format(string, sizeof(string), "Zwrócono bone %s", GetObjectBone(PlayerAdds[playerid][pSlot1]));
