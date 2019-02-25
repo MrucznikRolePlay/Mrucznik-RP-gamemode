@@ -146,6 +146,61 @@ public OddajZycieTimer(playerid)
 	}
 	return 1;
 }
+forward BazaCheckPoint(playerid);
+public BazaCheckPoint(playerid)
+{
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 1);
+		return KillTimer(bazaCheck[playerid]);
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 2);
+		return KillTimer(bazaCheck[playerid]);
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 3);
+		return KillTimer(bazaCheck[playerid]);
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 4);
+		return KillTimer(bazaCheck[playerid]);
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 5);
+		return KillTimer(bazaCheck[playerid]);
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 6);
+		return KillTimer(bazaCheck[playerid]);
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 7);
+	}
+	KillTimer(bazaCheck[playerid]);
+
+	return 1;
+}
+forward EfektNarkotyku(playerid);
+public EfektNarkotyku(playerid)
+{
+	new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+	efektNarkotykuMinuta[playerid]++; 
+	if(efektNarkotykuMinuta[playerid] == TIME_OF_DRUG_ACTIVITY)
+	{
+		SetStrong(playerid, FirstValue);
+		sendTipMessage(playerid, "Wartoœæ twojej si³y wróci³a do normy"); 
+		KillTimer(TimerEfektNarkotyku[playerid]);
+	}
+
+	return 1;
+}
 //Ca³owanie - anty spam
 forward SpamujeCalowaniem(playerid);
 public SpamujeCalowaniem(playerid)

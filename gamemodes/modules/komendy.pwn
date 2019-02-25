@@ -1891,7 +1891,7 @@ CMD:gps(playerid)
 			{
 				foreach(Player, i)
 				{
-					if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
+					if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
 						DisablePlayerCheckpoint(i);
 				}
 			}
@@ -16394,10 +16394,15 @@ CMD:setstrong(playerid, params[])
 		sendTipMessage(playerid, "U¿yj /setstrong [ID] [Wartoœæ] ");
 		return 1;
 	}
-	
+	if(valueStrong >= MAX_STRONG_VALUE)
+	{
+		format(string, sizeof(string), "Nie mo¿esz ustaliæ wartoœci wiêkszej jak %d", MAX_STRONG_VALUE);
+		sendTipMessage(playerid, string); 
+		return 1;
+	}
 	if(IsPlayerConnected(playerid) && IsPlayerConnected(giveplayerid))
 	{
-		if(PlayerInfo[giveplayerid][pStrong] != 1000)
+		if(PlayerInfo[giveplayerid][pStrong] != MAX_STRONG_VALUE)
 		{
 			if(PlayerInfo[playerid][pAdmin] >= 3500 || PlayerInfo[playerid][pNewAP] == 5)
 			{
@@ -16423,6 +16428,87 @@ CMD:setstrong(playerid, params[])
 	else
 	{
 		sendTipMessage(playerid, "Gracz nie jest pod³¹czony"); 
+	}
+	return 1;
+}
+CMD:biegnij(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerInfo[playerid][pAdmin] >= 2000)//chwilowa blokada
+		{
+			if(PlayerInfo[playerid][pStrong] <= 980)
+			{
+				if(!IsPlayerInAnyVehicle(playerid))
+				{
+					if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
+					{
+						sendErrorMessage(playerid, "Rozpocz¹³eœ ju¿ bieg! Najpierw go ukoñcz"); 
+						return 1;
+					}
+					if(PlayerRunStat[playerid] == 3)
+					{
+						sendTipMessage(playerid, "Wykona³eœ dziœ 3 biegi! Mo¿e wystarczy?");
+						return 1;
+					}
+					if(IsPlayerInRangeOfPoint(playerid, 10, 2005.9244,-1442.3917,13.5631))//Od szpitala Jeff do Placu
+					{
+						SetPVarInt(playerid, "ZaliczylBaze", 0);
+						SetPVarInt(playerid, "WybralBieg", 1);
+						SetPVarInt(playerid, "RozpoczalBieg", 1);
+						if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
+						{
+							SetPlayerCheckpoint(playerid, 1861.5981,-1453.0206,13.5625, 5);
+							sendTipMessage(playerid, "Rozpoczynasz bieg, zdob¹dŸ pierwszy checkpoint!");
+							sendTipMessageEx(playerid, COLOR_NEWS, "Cel: Plac Manewrowy Los Santos"); 
+						}
+					}
+					else if(IsPlayerInRangeOfPoint(playerid, 10, 806.4952,-1334.9512,13.5469))//Od dworca Market do Pos¹gu ILOVELS
+					{
+						SetPVarInt(playerid, "ZaliczylBaze", 0);
+						SetPVarInt(playerid, "WybralBieg", 2);
+						SetPVarInt(playerid, "RozpoczalBieg", 1);
+						if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
+						{
+							sendTipMessage(playerid, "Rozpoczynasz bieg, zdob¹dŸ pierwszy checkpoint!");
+							sendTipMessageEx(playerid, COLOR_NEWS, "Cel: Pos¹g I_LOVE_LS"); 
+							SetPlayerCheckpoint(playerid, 645.5999,-1327.7279,13.5522, 3);
+						}
+					}
+					else
+					{
+						sendTipMessage(playerid, "Nie jesteœ na jednym z mo¿liwych torów biegu"); 
+						return 1;
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Najpierw wyjdŸ z pojazdu"); 
+				}
+			}
+			else
+			{
+				sendTipMessage(playerid, "Jesteœ ju¿ maksymalnie wysportowany! Bieg Ci nic nie da"); 
+			}
+		}
+	}
+	return 1;
+}
+CMD:stopbieg(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
+		{
+			SetPVarInt(playerid, "RozpoczalBieg", 0);
+			SetPVarInt(playerid, "ZaliczylBaze", 0);
+			DisablePlayerCheckpoint(playerid);
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nie rozpocz¹³eœ biegu");
+		}
+	
 	}
 	return 1;
 }
@@ -27474,6 +27560,7 @@ CMD:ucisz(playerid, params[])
 	}
 	return 1;
 }
+//=========================[PLOCAL]==========================
 CMD:setplocal(playerid, params[])
 {
 	new giveplayerid, wartosc, string[128];
@@ -37137,6 +37224,42 @@ CMD:wezdragi(playerid)
 		    PlayerInfo[playerid][pDrugs] -= 2;
 		    //SetPlayerDrunkLevel(playerid, 8000);
 		    //SetPlayerWeather(playerid, -66);
+			
+			//System si³y
+			if(GetPVarInt(playerid, "ZjadlDragi") == 0)
+			{
+				if(PlayerInfo[playerid][pStrong] < MAX_STRONG_VALUE/2)
+				{
+					SetPVarInt(playerid, "ZjadlDragi", 1);
+					sendTipMessageEx(playerid, COLOR_P@, "Za¿y³eœ narkotyki, twoja si³a wzros³a dwukrotnie na jakiœ czas"); 
+					format(string, sizeof(string), "Mia³eœ %d , po za¿yciu 2 gram masz %d si³y.", PlayerInfo[playerid][pStrong], PlayerInfo[playerid][pStrong]*2);
+					sendTipMessage(playerid, string);
+					SetPVarInt(playerid, "FirstValueStrong", PlayerInfo[playerid][pStrong]);
+					SetStrong(playerid, PlayerInfo[playerid][pStrong]*2);
+					TimerEfektNarkotyku[playerid] = SetTimerEx("EfektNarkotyku", 60000, false, "i", playerid);
+				}
+				else
+				{
+					sendTipMessage(playerid, "Masz zbyt du¿¹ wartoœæ si³y, aby dragi Ci coœ da³y!"); 
+				}
+			
+			}
+			else
+			{
+				if(PlayerInfo[playerid][pStrong] >= 15)
+				{
+					sendTipMessage(playerid, "Æpun, przez twój na³óg spada Ci wartoœæ si³y!");
+					MSGBOX_Show(playerid, "Sila -15", MSGBOX_ICON_TYPE_EXPLODE, 3);
+					TakeStrong(playerid, 15);
+					new StrongValue = GetPVarInt(playerid, "FirstValueStrong"); 
+					SetPVarInt(playerid, "FirstValueStrong", StrongValue-15);
+				}
+				else
+				{
+					sendTipMessage(playerid, "Æpun, przez twój na³óg spada Ci wartoœæ si³y!");
+					MSGBOX_Show(playerid, "Sila -15", MSGBOX_ICON_TYPE_EXPLODE, 3);
+				}
+			}
 		    
 		    
 		    if(STDPlayer[playerid]==1)
