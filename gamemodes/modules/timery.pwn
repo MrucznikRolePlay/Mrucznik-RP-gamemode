@@ -152,32 +152,32 @@ public BazaCheckPoint(playerid)
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
 	{
 		SetPVarInt(playerid, "ZaliczylBaze", 1);
-	
+		return KillTimer(bazaCheck[playerid]);
 	}
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
 	{
 		SetPVarInt(playerid, "ZaliczylBaze", 2);
-	
+		return 1;
 	}
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
 	{
 		SetPVarInt(playerid, "ZaliczylBaze", 3);
-	
+		return 1;
 	}
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
 	{
 		SetPVarInt(playerid, "ZaliczylBaze", 4);
-	
+		return 1;
 	}
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
 	{
 		SetPVarInt(playerid, "ZaliczylBaze", 5);
-	
+		return 1;
 	}
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
 	{
 		SetPVarInt(playerid, "ZaliczylBaze", 6);
-	
+		return 1;
 	}
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
 	{
