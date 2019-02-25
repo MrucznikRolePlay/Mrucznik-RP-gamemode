@@ -146,6 +146,20 @@ public OddajZycieTimer(playerid)
 	}
 	return 1;
 }
+forward EfektNarkotyku(playerid);
+public EfektNarkotyku(playerid)
+{
+	new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+	efektNarkotykuMinuta[playerid]++; 
+	if(efektNarkotykuMinuta[playerid] == TIME_OF_DRUG_ACTIVITY)
+	{
+		SetStrong(playerid, FirstValue);
+		sendTipMessage(playerid, "Wartoœæ twojej si³y wróci³a do normy"); 
+		KillTimer(TimerEfektNarkotyku[playerid]);
+	}
+
+	return 1;
+}
 //Ca³owanie - anty spam
 forward SpamujeCalowaniem(playerid);
 public SpamujeCalowaniem(playerid)

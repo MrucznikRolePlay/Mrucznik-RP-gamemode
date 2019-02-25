@@ -103,6 +103,8 @@ new minutyZabierzDM[MAX_PLAYERS]=0;
 new zabierzBronieAJ[MAX_PLAYERS];
 //DODATKI
 new boneIDzmienna[MAX_PLAYERS];
+new TimerEfektNarkotyku[MAX_PLAYERS];
+new efektNarkotykuMinuta[MAX_PLAYERS] = 0;
 //legal
 new DB:db_handle;
 enum eLegalWpns {

@@ -16397,10 +16397,16 @@ CMD:setstrong(playerid, params[])
 	
 	if(IsPlayerConnected(playerid) && IsPlayerConnected(giveplayerid))
 	{
-		if(PlayerInfo[giveplayerid][pStrong] != 1000)
+		if(PlayerInfo[giveplayerid][pStrong] != MAX_STRONG_VALUE)
 		{
 			if(PlayerInfo[playerid][pAdmin] >= 3500 || PlayerInfo[playerid][pNewAP] == 5)
 			{
+				if(valueStrong == MAX_STRONG_VALUE)
+				{
+					format(string, sizeof(string), "Nie mo¿esz ustaliæ wartoœci wiêkszej jak %d", MAX_STRONG_VALUE);
+					sendTipMessage(playerid, string); 
+					return 1;
+				}
 				format(string, sizeof(string), "Administrator %s ustali³ Ci wartoœæ si³y na %d [Poprzednia wartoœæ %d]", GetNick(playerid), valueStrong, PlayerInfo[giveplayerid][pStrong]);
 				sendTipMessageEx(giveplayerid, COLOR_P@, string);
 				format(string, sizeof(string), "Ustali³eœ wartoœæ si³y %s na %d - jego poprzednia wartoœæ to %d", GetNick(giveplayerid), valueStrong, PlayerInfo[giveplayerid][pStrong]); 
@@ -27474,6 +27480,7 @@ CMD:ucisz(playerid, params[])
 	}
 	return 1;
 }
+//=========================[PLOCAL]==========================
 CMD:setplocal(playerid, params[])
 {
 	new giveplayerid, wartosc, string[128];
@@ -37137,6 +37144,40 @@ CMD:wezdragi(playerid)
 		    PlayerInfo[playerid][pDrugs] -= 2;
 		    //SetPlayerDrunkLevel(playerid, 8000);
 		    //SetPlayerWeather(playerid, -66);
+			
+			//System si³y
+			if(GetPVarInt(playerid, "ZjadlDragi") == 0)
+			{
+				if(PlayerInfo[playerid][pStrong] < MAX_STRONG_VALUE/2)
+				{
+					SetPVarInt(playerid, "ZjadlDragi", 1);
+					sendTipMessageEx(playerid, COLOR_P@, "Za¿y³eœ narkotyki, twoja si³a wzros³a dwukrotnie na jakiœ czas"); 
+					format(string, sizeof(string), "Mia³eœ %d , po za¿yciu 2 gram masz %d si³y.", PlayerInfo[playerid][pStrong], PlayerInfo[playerid][pStrong]*2);
+					sendTipMessage(playerid, string);
+					SetPVarInt(playerid, "FirstValueStrong", PlayerInfo[playerid][pStrong]);
+					SetStrong(playerid, PlayerInfo[playerid][pStrong]*2);
+					TimerEfektNarkotyku[playerid] = SetTimerEx("EfektNarkotyku", 60000, false, "i", playerid);
+				}
+				else
+				{
+					sendTipMessage(playerid, "Masz zbyt du¿¹ wartoœæ si³y, aby dragi Ci coœ da³y!"); 
+				}
+			
+			}
+			else
+			{
+				if(PlayerInfo[playerid][pStrong] >= 15)
+				{
+					sendTipMessage(playerid, "Æpun, przez twój na³óg spada Ci wartoœæ si³y!");
+					MSGBOX_Show(playerid, "Sila -15", MSGBOX_ICON_TYPE_EXPLODE, 3);
+					TakeStrong(playerid, 15);
+				}
+				else
+				{
+					sendTipMessage(playerid, "Æpun, przez twój na³óg spada Ci wartoœæ si³y!");
+					MSGBOX_Show(playerid, "Sila -15", MSGBOX_ICON_TYPE_EXPLODE, 3);
+				}
+			}
 		    
 		    
 		    if(STDPlayer[playerid]==1)

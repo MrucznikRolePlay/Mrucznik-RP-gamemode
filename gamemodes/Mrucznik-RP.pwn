@@ -955,6 +955,12 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "Mats-mats", 0);
         sendErrorMessage(giveplayerid, "Sprzeda¿ zosta³a anulowana!");
     }
+	if(GetPVarInt(playerid, "ZjadlDragi") == 1)
+		{
+			new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+			KillTimer(TimerEfektNarkotyku[playerid]);
+			SetStrong(playerid, FirstValue);
+		}
 
     if(GetPVarInt(playerid, "kolejka") == 1)
     {
@@ -1706,7 +1712,14 @@ public OnPlayerDeath(playerid, killerid, reason)
 			lowcaz[playerid] = 501;
 			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta³o anulowane - nie mo¿esz wzi¹æ teraz zlecenia na tego samego gracza!");
 		}
-
+		if(GetPVarInt(playerid, "ZjadlDragi") == 1)
+		{
+			new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+			SetPVarInt(playerid, "ZjadlDragi", 0);
+			sendTipMessage(playerid, "Z powodu œmierci twój boost (dragów) zosta³ wy³¹czony, za¿yj kolejn¹ dawkê!"); 
+			KillTimer(TimerEfektNarkotyku[playerid]);
+			SetStrong(playerid, FirstValue);
+		}
 
 		//-------<[     WL      ]>---------
 		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])

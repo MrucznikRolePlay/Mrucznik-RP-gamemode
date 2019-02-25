@@ -12604,7 +12604,40 @@ stock GetPLocal(playerid)
 	wartoscLocalu = PlayerInfo[playerid][pLocal];
 	return wartosLocalu;
 }
+stock AddStrong(playerid, wartosc)
+{
+	if(PlayerInfo[playerid][pStrong]+wartosc <= MAX_STRONG_VALUE)
+	{
+		PlayerInfo[playerid][pStrong] = PlayerInfo[playerid][pStrong]+wartosc; 
+	}
+	else
+	{
+		sendTipMessage(playerid, "Error: Nie uda³o siê zabraæ wartoœci Si³y - przekroczy 5k");
+	}
 
+	return 1;
+}	
+stock TakeStrong(playerid, wartosc)
+{
+	if(PlayerInfo[playerid][pStrong] >= wartosc)
+	{
+		PlayerInfo[playerid][pStrong] = PlayerInfo[playerid][pStrong]-wartosc; 
+	}
+	else
+	{
+		sendTipMessage(playerid, "Error: Nie uda³o siê zabraæ wartoœci Si³y");
+	}
+
+	return 1;
+}
+stock SetStrong(playerid, wartosc)
+{
+	if(wartosc <= MAX_STRONG_VALUE)
+	{
+		PlayerInfo[playerid][pStrong] = wartosc;
+	}
+	return 1;
+}
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {
