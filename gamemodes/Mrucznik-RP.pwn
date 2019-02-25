@@ -796,7 +796,7 @@ public OnPlayerConnect(playerid)
 	&& strfind(nick, "matka") != -1
 	&& strfind(nick, "stara") != -1)
 	{
-		SendClientMessage(playerid, COLOR_NEW, "SERWER: Twój nick zawiera wulgaryzmy/niedozwolone s³owa - zmieñ go!"); 
+		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick zawiera wulgaryzmy/niedozwolone s³owa - zmieñ go!"); 
 		KickEx(playerid);
 		#if DEBUG == 1
 			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
