@@ -16387,8 +16387,9 @@ CMD:staty(playerid)
 }
 CMD:setstrong(playerid, params[])
 {
-	new value, giveplayerid;
-	if( sscanf(params, "k<fix>d", giveplayerid, value))
+	new valueStrong, giveplayerid;
+	new string[128];
+	if( sscanf(params, "k<fix>d", giveplayerid, valueStrong))
 	{
 		sendTipMessage(playerid, "U¿yj /setstrong [ID] [Wartoœæ] ");
 		return 1;
@@ -16400,11 +16401,11 @@ CMD:setstrong(playerid, params[])
 		{
 			if(PlayerInfo[playerid][pAdmin] >= 3500 || PlayerInfo[playerid][pNewAP] == 5)
 			{
-				format(string, sizeof(string), "Administrator %s ustali³ Ci wartoœæ si³y na %d [Poprzednia wartoœæ %d]", GetNick(playerid), value, PlayerInfo[giveplayerid][pStrong]);
+				format(string, sizeof(string), "Administrator %s ustali³ Ci wartoœæ si³y na %d [Poprzednia wartoœæ %d]", GetNick(playerid), valueStrong, PlayerInfo[giveplayerid][pStrong]);
 				sendTipMessageEx(giveplayerid, COLOR_P@, string);
-				format(string, sizeof(string), "Ustali³eœ wartoœæ si³y %s na %d - jego poprzednia wartoœæ to %d", GetNick(giveplayerid), value, PlayerInfo[giveplayerid][pStrong]); 
+				format(string, sizeof(string), "Ustali³eœ wartoœæ si³y %s na %d - jego poprzednia wartoœæ to %d", GetNick(giveplayerid), valueStrong, PlayerInfo[giveplayerid][pStrong]); 
 				sendTipMessageEx(playerid, COLOR_P@, string); 
-				PlayerInfo[giveplayerid][pStrong] = value;
+				PlayerInfo[giveplayerid][pStrong] = valueStrong;
 			}
 			else
 			{

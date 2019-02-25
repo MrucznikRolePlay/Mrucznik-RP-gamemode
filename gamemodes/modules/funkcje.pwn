@@ -5040,7 +5040,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordstring, sizeof(coordsstring), "Strong:[%d]", PlayerInfo[playerid][pStrong]);
+		format(coordsstring, sizeof(coordsstring), "Strong:[%d]", PlayerInfo[playerid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
