@@ -2476,7 +2476,7 @@ public OnPlayerEnterCheckpoint(playerid)
 				DisablePlayerCheckpoint(playerid);
 				sendTipMessage(playerid, "Zaliczy³eœ pi¹ty przystanek, natêpny jest ju¿ oznaczony!");
 				SetPlayerCheckpoint(playerid, 1322.6306,-1724.9469,13.5469, 3);
-				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);;
+				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
 			{
