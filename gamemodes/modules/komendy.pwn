@@ -1891,7 +1891,7 @@ CMD:gps(playerid)
 			{
 				foreach(Player, i)
 				{
-					if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
+					if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
 						DisablePlayerCheckpoint(i);
 				}
 			}
@@ -16429,6 +16429,39 @@ CMD:setstrong(playerid, params[])
 	else
 	{
 		sendTipMessage(playerid, "Gracz nie jest pod³¹czony"); 
+	}
+	return 1;
+}
+CMD:biegnij(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerInfo[playerid][pAdmin] >= 2000)//chwilowa blokada
+		{
+			if(PlayerInfo[playerid][pStrong] <= 980)
+			{
+				if(IsPlayerInRangeOfPoint(playerid, 10, 2005.9244,-1442.3917,13.5631))
+				{
+					SetPVarInt(playerid, "ZaliczylBaze", 0);
+					SetPVarInt(playerid, "WybralBieg", 1);
+					SetPVarInt(playerid, "RozpoczalBieg", 1);
+					if(GetPVarFloat(playerid, "ZaliczylBaze") == 0)
+					{
+						SetPlayerCheckpoint(playerid, 1861.5981,-1453.0206,13.5625, 5);
+						sendTipMessage(playerid, "Rozpoczynasz bieg, zdob¹dŸ pierwszy checkpoint!"); 
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie jesteœ na jednym z mo¿liwych torów biegu"); 
+					return 1;
+				}
+			}
+			else
+			{
+				sendTipMessage(playerid, "Jesteœ ju¿ maksymalnie wysportowany! Bieg Ci nic nie da"); 
+			}
+		}
 	}
 	return 1;
 }
@@ -37171,6 +37204,8 @@ CMD:wezdragi(playerid)
 					sendTipMessage(playerid, "Æpun, przez twój na³óg spada Ci wartoœæ si³y!");
 					MSGBOX_Show(playerid, "Sila -15", MSGBOX_ICON_TYPE_EXPLODE, 3);
 					TakeStrong(playerid, 15);
+					new StrongValue = GetPVarInt(playerid, "FirstValueStrong"); 
+					SetPVarInt(playerid, "FirstValueStrong", StrongValue-15);
 				}
 				else
 				{

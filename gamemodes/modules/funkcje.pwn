@@ -12609,6 +12609,9 @@ stock AddStrong(playerid, wartosc)
 	if(PlayerInfo[playerid][pStrong]+wartosc <= MAX_STRONG_VALUE)
 	{
 		PlayerInfo[playerid][pStrong] = PlayerInfo[playerid][pStrong]+wartosc; 
+		new tekststring[128];
+		format(tekststring, sizeof(tekststring), "Sila +%d", wartosc);
+		MSGBOX_Show(playerid, tekststring, MSGBOX_ICON_TYPE_EXPLODE, 3);
 	}
 	else
 	{
@@ -12622,6 +12625,9 @@ stock TakeStrong(playerid, wartosc)
 	if(PlayerInfo[playerid][pStrong] >= wartosc)
 	{
 		PlayerInfo[playerid][pStrong] = PlayerInfo[playerid][pStrong]-wartosc; 
+		new tekststring[128];
+		format(tekststring, sizeof(tekststring), "Sila -%d", wartosc);
+		MSGBOX_Show(playerid, tekststring, MSGBOX_ICON_TYPE_EXPLODE, 3);
 	}
 	else
 	{
