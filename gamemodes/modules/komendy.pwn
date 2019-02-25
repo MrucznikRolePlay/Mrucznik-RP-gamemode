@@ -15441,23 +15441,33 @@ CMD:selldom(playerid, params[])
 	return 1;
 }
 //========================================[DODATKI]===================================================
-/*
+
 CMD:dodatki(playerid) return cmd_adds(playerid);
 CMD:adds(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(CountPlayerAdds(playerid) > 0)
+		if(PlayerInfo[playerid][pLevel] >= 3)
 		{
-		
+			sendTipMessage(playerid, "W trakcie prac"); 
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie masz ¿adnych przedmiotów"); 
+			sendErrorMessage(playerid, "Dodatki s¹ dostêpne od 3 lvl'a"); 
 		}
 	}
 	return 1;
-}*/
+}
+CMD:dodatkihelp(playerid) return cmd_addshelp(playerid);
+CMD:dodatkipomoc(playerid) return cmd_addshelp(playerid);
+CMD:addshelp(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		ShowPlayerDialogEx(playerid, 1011, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play {747b41}Pomoc", "{FFB76F}/kupdodatki {C0C0C0}- pozwala zakupiæ dodatki\n{FFB76F}/dodatki {C0C0C0}- pozwala przejrzeæ listê zakupionych dodatków\n{FFB76F}/zdejmijdodatki {C0C0C0}- pozwala zdj¹c z cia³a dodatek\n{FFB76F}/wyrzucdodatki {C0C0C0}- pozwala wyrzuciæ posiadany dodatek\n\n", "Akceptuj", " "); 
+	}
+	return 1;
+}
 //---------------------------------------[System aut]-------------------------------------------------------------------------------------------
 
 
@@ -25638,7 +25648,7 @@ CMD:makeleader(playerid, params[])
 		}
 
 		if(level > 17 || level < 0) { sendTipMessageEx(playerid, COLOR_GREY, "Numer lidera od 1 do 17!"); return 1; }
-		if(Uprawnienia(playerid, ACCESS_MAKELEADER))
+		if(Uprawnienia(playerid, ACCESS_MAKELEADER) || PlayerInfo[playerid][pNewAP] == 5)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
