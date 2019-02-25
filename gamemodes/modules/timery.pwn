@@ -146,6 +146,47 @@ public OddajZycieTimer(playerid)
 	}
 	return 1;
 }
+forward BazaCheckPoint(playerid);
+public BazaCheckPoint(playerid)
+{
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 1);
+	
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 2);
+	
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 3);
+	
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 4);
+	
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 5);
+	
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 6);
+	
+	}
+	if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
+	{
+		SetPVarInt(playerid, "ZaliczylBaze", 7);
+	}
+	KillTimer(bazaCheck[playerid]);
+
+	return 1;
+}
 forward EfektNarkotyku(playerid);
 public EfektNarkotyku(playerid)
 {

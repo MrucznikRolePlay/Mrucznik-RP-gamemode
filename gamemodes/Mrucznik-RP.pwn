@@ -2447,21 +2447,21 @@ public OnPlayerEnterCheckpoint(playerid)
 				DisablePlayerCheckpoint(playerid);
 				sendTipMessage(playerid, "Zaliczy³eœ pierwszy przystanek, natêpny jest ju¿ oznaczony!");
 				SetPlayerCheckpoint(playerid, 1709.3523,-1461.3938,13.5469, 3);
-				SetPVarInt(playerid, "ZaliczylBaze", 1);
+				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
 			{
 				DisablePlayerCheckpoint(playerid);
 				sendTipMessage(playerid, "Zaliczy³eœ drugi przystanek, natêpny jest ju¿ oznaczony!");
 				SetPlayerCheckpoint(playerid, 1707.8762,-1584.3118,13.5453, 3);
-				SetPVarInt(playerid, "ZaliczylBaze", 2);
+				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
 			{
 				DisablePlayerCheckpoint(playerid);
 				sendTipMessage(playerid, "Zaliczy³eœ trzeci przystanek, natêpny jest ju¿ oznaczony!");
 				SetPlayerCheckpoint(playerid, 1625.7415,-1608.9004,13.7188, 3);
-				SetPVarInt(playerid, "ZaliczylBaze", 3);
+				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
 				AddStrong(playerid, 5);
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
@@ -2469,28 +2469,28 @@ public OnPlayerEnterCheckpoint(playerid)
 				DisablePlayerCheckpoint(playerid);
 				sendTipMessage(playerid, "Zaliczy³eœ czwarty przystanek, natêpny jest ju¿ oznaczony!");
 				SetPlayerCheckpoint(playerid, 1538.9513,-1724.1267,13.5469, 3);
-				SetPVarInt(playerid, "ZaliczylBaze", 4);
+				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
 			{
 				DisablePlayerCheckpoint(playerid);
 				sendTipMessage(playerid, "Zaliczy³eœ pi¹ty przystanek, natêpny jest ju¿ oznaczony!");
 				SetPlayerCheckpoint(playerid, 1322.6306,-1724.9469,13.5469, 3);
-				SetPVarInt(playerid, "ZaliczylBaze", 5);
+				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);;
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
 			{
 				DisablePlayerCheckpoint(playerid);
 				sendTipMessage(playerid, "Zaliczy³eœ szósty przystanek, natêpny jest ju¿ oznaczony!");
 				SetPlayerCheckpoint(playerid, 1318.4052,-1841.7726,13.5469, 3);
-				SetPVarInt(playerid, "ZaliczylBaze", 6);
+				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
 			{
 				DisablePlayerCheckpoint(playerid);
 				sendTipMessage(playerid, "Zaliczy³eœ pi¹ty przystanek, natêpny jest ju¿ oznaczony!");
 				SetPlayerCheckpoint(playerid, 1382.2340,-1811.7761,13.5469, 3);
-				SetPVarInt(playerid, "ZaliczylBaze", 7);
+				bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
 			{
