@@ -12644,6 +12644,27 @@ stock SetStrong(playerid, wartosc)
 	}
 	return 1;
 }
+stock EndRunPlayer(playerid, bool:givestrong=false, bool:wartosc=0, bool:text=false)
+{
+
+	DisablePlayerCheckpoint(playerid);
+	if(text == true)
+	{
+		sendTipMessage(playerid, "Gratulacje! Ukoñczy³eœ ca³y bieg.");
+	}
+	SetPVarInt(playerid, "ZaliczylBaze", 0);
+	SetPVarInt(playerid, "WybralBieg", 0);
+	SetPVarInt(playerid, "RozpoczalBieg", 0);
+	PlayerRunStat[playerid]++;
+	new string[128];
+	format(string, sizeof(string), "To twój %d bieg dziœ", PlayerRunStat[playerid]);
+	sendTipMessage(playerid, string);
+	if(givestrong == true)
+	{
+		AddStrong(playerid, wartosc);
+	}
+	return 1;
+}
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {

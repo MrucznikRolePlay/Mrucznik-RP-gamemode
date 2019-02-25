@@ -16394,19 +16394,18 @@ CMD:setstrong(playerid, params[])
 		sendTipMessage(playerid, "U¿yj /setstrong [ID] [Wartoœæ] ");
 		return 1;
 	}
-	
+	if(valueStrong >= MAX_STRONG_VALUE)
+	{
+		format(string, sizeof(string), "Nie mo¿esz ustaliæ wartoœci wiêkszej jak %d", MAX_STRONG_VALUE);
+		sendTipMessage(playerid, string); 
+		return 1;
+	}
 	if(IsPlayerConnected(playerid) && IsPlayerConnected(giveplayerid))
 	{
 		if(PlayerInfo[giveplayerid][pStrong] != MAX_STRONG_VALUE)
 		{
 			if(PlayerInfo[playerid][pAdmin] >= 3500 || PlayerInfo[playerid][pNewAP] == 5)
 			{
-				if(valueStrong == MAX_STRONG_VALUE)
-				{
-					format(string, sizeof(string), "Nie mo¿esz ustaliæ wartoœci wiêkszej jak %d", MAX_STRONG_VALUE);
-					sendTipMessage(playerid, string); 
-					return 1;
-				}
 				format(string, sizeof(string), "Administrator %s ustali³ Ci wartoœæ si³y na %d [Poprzednia wartoœæ %d]", GetNick(playerid), valueStrong, PlayerInfo[giveplayerid][pStrong]);
 				sendTipMessageEx(giveplayerid, COLOR_P@, string);
 				format(string, sizeof(string), "Ustali³eœ wartoœæ si³y %s na %d - jego poprzednia wartoœæ to %d", GetNick(giveplayerid), valueStrong, PlayerInfo[giveplayerid][pStrong]); 
@@ -16440,21 +16439,51 @@ CMD:biegnij(playerid)
 		{
 			if(PlayerInfo[playerid][pStrong] <= 980)
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 10, 2005.9244,-1442.3917,13.5631))
+				if(!IsPlayerInAnyVehicle(playerid))
 				{
-					SetPVarInt(playerid, "ZaliczylBaze", 0);
-					SetPVarInt(playerid, "WybralBieg", 1);
-					SetPVarInt(playerid, "RozpoczalBieg", 1);
-					if(GetPVarFloat(playerid, "ZaliczylBaze") == 0)
+					if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
 					{
-						SetPlayerCheckpoint(playerid, 1861.5981,-1453.0206,13.5625, 5);
-						sendTipMessage(playerid, "Rozpoczynasz bieg, zdob¹dŸ pierwszy checkpoint!"); 
+						sendErrorMessage(playerid, "Rozpocz¹³eœ ju¿ bieg! Najpierw go ukoñcz"); 
+						return 1;
+					}
+					if(PlayerRunStat[playerid] == 3)
+					{
+						sendTipMessage(playerid, "Wykona³eœ dziœ 3 biegi! Mo¿e wystarczy?");
+						return 1;
+					}
+					if(IsPlayerInRangeOfPoint(playerid, 10, 2005.9244,-1442.3917,13.5631))//Od szpitala Jeff do Placu
+					{
+						SetPVarInt(playerid, "ZaliczylBaze", 0);
+						SetPVarInt(playerid, "WybralBieg", 1);
+						SetPVarInt(playerid, "RozpoczalBieg", 1);
+						if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
+						{
+							SetPlayerCheckpoint(playerid, 1861.5981,-1453.0206,13.5625, 5);
+							sendTipMessage(playerid, "Rozpoczynasz bieg, zdob¹dŸ pierwszy checkpoint!");
+							sendTipMessageEx(playerid, COLOR_NEWS, "Cel: Plac Manewrowy Los Santos"); 
+						}
+					}
+					else if(IsPlayerInRangeOfPoint(playerid, 10, 806.4952,-1334.9512,13.5469))//Od dworca Market do Pos¹gu ILOVELS
+					{
+						SetPVarInt(playerid, "ZaliczylBaze", 0);
+						SetPVarInt(playerid, "WybralBieg", 2);
+						SetPVarInt(playerid, "RozpoczalBieg", 1);
+						if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
+						{
+							sendTipMessage(playerid, "Rozpoczynasz bieg, zdob¹dŸ pierwszy checkpoint!");
+							sendTipMessageEx(playerid, COLOR_NEWS, "Cel: Pos¹g I_LOVE_LS"); 
+							SetPlayerCheckpoint(playerid, 645.5999,-1327.7279,13.5522, 3);
+						}
+					}
+					else
+					{
+						sendTipMessage(playerid, "Nie jesteœ na jednym z mo¿liwych torów biegu"); 
+						return 1;
 					}
 				}
 				else
 				{
-					sendTipMessage(playerid, "Nie jesteœ na jednym z mo¿liwych torów biegu"); 
-					return 1;
+					sendTipMessage(playerid, "Najpierw wyjdŸ z pojazdu"); 
 				}
 			}
 			else
@@ -16462,6 +16491,24 @@ CMD:biegnij(playerid)
 				sendTipMessage(playerid, "Jesteœ ju¿ maksymalnie wysportowany! Bieg Ci nic nie da"); 
 			}
 		}
+	}
+	return 1;
+}
+CMD:stopbieg(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
+		{
+			SetPVarInt(playerid, "RozpoczalBieg", 0);
+			SetPVarInt(playerid, "ZaliczylBaze", 0);
+			DisablePlayerCheckpoint(playerid);
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nie rozpocz¹³eœ biegu");
+		}
+	
 	}
 	return 1;
 }
