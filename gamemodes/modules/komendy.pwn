@@ -15447,9 +15447,9 @@ CMD:adds(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pLVL] >= 3)
+		if(PlayerInfo[playerid][pLevel] >= 3)
 		{
-			sendNotification(playerid, "W trakcie prac"); 
+			sendTipMessage(playerid, "W trakcie prac"); 
 		}
 		else
 		{
