@@ -673,7 +673,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	//Sila
 	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
 	{
-		new Float:px,Float:py,Float:pz;
+		new Float:pX,Float:pY,Float:pZ;
 		sendTipMessage(playerid, "Nie mo¿esz wejœæ do pojazdu podczas biegu!"); 
 		GetPlayerPos(playerid, pX,pY,pZ);
 		SetPlayerPos(playerid, pX,pY,pZ+2);

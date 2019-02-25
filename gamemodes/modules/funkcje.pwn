@@ -12644,7 +12644,7 @@ stock SetStrong(playerid, wartosc)
 	}
 	return 1;
 }
-stock EndRunPlayer(playerid, bool:givestrong=false, bool:wartosc=0, bool:text=false)
+stock EndRunPlayer(playerid, givestrong=false, wartosc=0, text=false)
 {
 
 	DisablePlayerCheckpoint(playerid);
