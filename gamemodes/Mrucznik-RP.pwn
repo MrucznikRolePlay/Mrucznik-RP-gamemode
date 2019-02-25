@@ -786,6 +786,23 @@ public OnPlayerConnect(playerid)
 		#endif
 		return 1;
     }
+	//Nick bez wulgaryzmów
+	if(strfind(nick, "kurwa") != -1
+	&& strfind(nick, "chuj") != -1
+	&& strfind(nick, "cipa") != -1
+	&& strfind(nick, "fiut") != -1
+	&& strfind(nick, "zjeb") != -1
+	&& strfind(nick, "dick") != -1
+	&& strfind(nick, "matka") != -1
+	&& strfind(nick, "stara") != -1)
+	{
+		SendClientMessage(playerid, COLOR_NEW, "SERWER: Twój nick zawiera wulgaryzmy/niedozwolone s³owa - zmieñ go!"); 
+		KickEx(playerid);
+		#if DEBUG == 1
+			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
+		#endif
+		return 1;
+	}
 	SetRPName(playerid);
 	GetPlayerName(playerid, nickadminaIC, sizeof(nickadminaIC));
 	SetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC);

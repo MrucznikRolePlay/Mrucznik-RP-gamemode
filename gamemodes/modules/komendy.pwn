@@ -16385,7 +16385,46 @@ CMD:staty(playerid)
 	}
 	return 1;
 }
-
+CMD:setstrong(playerid, params[])
+{
+	new value, giveplayerid;
+	if( sscanf(params, "k<fix>d", giveplayerid, value))
+	{
+		sendTipMessage(playerid, "U¿yj /setstrong [ID] [Wartoœæ] ");
+		return 1;
+	}
+	
+	if(IsPlayerConnected(playerid) && IsPlayerConnected(giveplayerid))
+	{
+		if(PlayerInfo[giveplayerid][pStrong] != 1000)
+		{
+			if(PlayerInfo[playerid][pAdmin] >= 3500 || PlayerInfo[playerid][pNewAP] == 5)
+			{
+				format(string, sizeof(string), "Administrator %s ustali³ Ci wartoœæ si³y na %d [Poprzednia wartoœæ %d]", GetNick(playerid), value, PlayerInfo[giveplayerid][pStrong]);
+				sendTipMessageEx(giveplayerid, COLOR_P@, string);
+				format(string, sizeof(string), "Ustali³eœ wartoœæ si³y %s na %d - jego poprzednia wartoœæ to %d", GetNick(giveplayerid), value, PlayerInfo[giveplayerid][pStrong]); 
+				sendTipMessageEx(playerid, COLOR_P@, string); 
+				PlayerInfo[giveplayerid][pStrong] = value;
+			}
+			else
+			{
+				sendTipMessage(playerid, "Brak wystarczaj¹cych uprawnieñ"); 
+				return 1;
+			}
+		}
+		else
+		{
+			sendTipMessage(playerid, "Ten gracz ma ju¿ maksymaln¹ wartoœæ si³y!"); 
+			return 1;
+		}
+	
+	}
+	else
+	{
+		sendTipMessage(playerid, "Gracz nie jest pod³¹czony"); 
+	}
+	return 1;
+}
 CMD:dn(playerid)
 {
     if(IsPlayerConnected(playerid))
