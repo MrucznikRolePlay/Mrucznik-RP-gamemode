@@ -11728,7 +11728,6 @@ stock TJD_UpdateLabel()
     format(lStr, 64, "Liczba materia³ów\n{99311E}%d\n{646464}(/zlecenie)", TJD_Materials);
     UpdateDynamic3DTextLabelText(TJD_Label, -1, lStr);
 }
-
 stock TJD_JobEnd(playerid, bool:quiter=false)
 {
     SetPVarInt(playerid, "TJDend", 0);
@@ -11824,6 +11823,7 @@ stock TJD_CallCheckpoint(playerid, veh)
     }
     return 1;
 }
+
 
 stock TJD_CallRaceCheckpoint(playerid)
 {
@@ -12591,6 +12591,18 @@ WeaponHackCheck(issuerid, weaponid)
 		return CheckWeaponAC(issuerid, GetWeaponSlot(weaponid), weaponid);
     }
 	return false;
+}
+stock SetPLocal(playerid, wartosc)
+{
+	PlayerInfo[playerid][pLocal] = wartosc;
+	
+	return 1;
+}
+stock GetPLocal(playerid)
+{
+	new wartoscLocalu; 
+	wartoscLocalu = PlayerInfo[playerid][pLocal];
+	return wartosLocalu;
 }
 
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
