@@ -12644,14 +12644,13 @@ stock SetStrong(playerid, wartosc)
 	}
 	return 1;
 }
-stock EndRunPlayer(playerid, givestrong=false, wartosc=0, text=false)
+stock EndRunPlayer(playerid, wartosc)
 {
 
 	DisablePlayerCheckpoint(playerid);
-	if(text == true)
-	{
-		sendTipMessage(playerid, "Gratulacje! Ukoñczy³eœ ca³y bieg.");
-	}
+
+	sendTipMessage(playerid, "Gratulacje! Ukoñczy³eœ ca³y bieg.");
+	
 	SetPVarInt(playerid, "ZaliczylBaze", 0);
 	SetPVarInt(playerid, "WybralBieg", 0);
 	SetPVarInt(playerid, "RozpoczalBieg", 0);
@@ -12659,10 +12658,8 @@ stock EndRunPlayer(playerid, givestrong=false, wartosc=0, text=false)
 	new string[128];
 	format(string, sizeof(string), "To twój %d bieg dziœ", PlayerRunStat[playerid]);
 	sendTipMessage(playerid, string);
-	if(givestrong == true)
-	{
-		AddStrong(playerid, wartosc);
-	}
+	AddStrong(playerid, wartosc);
+	
 	return 1;
 }
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);

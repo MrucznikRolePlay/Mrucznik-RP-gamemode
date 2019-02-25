@@ -2501,7 +2501,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
 			{
-				EndRunPlayer(playerid, true, 10, true);
+				EndRunPlayer(playerid, 10);
 			}
 			
 		}
@@ -2560,7 +2560,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
 			{
-				EndRunPlayer(playerid, true, 20, true);
+				EndRunPlayer(playerid, 20);
 			}
 		}
 	}
