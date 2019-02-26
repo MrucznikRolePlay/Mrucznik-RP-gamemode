@@ -7,7 +7,15 @@ enum eKontakty {
 	eNumer
 };
 new Kontakty[MAX_PLAYERS][MAX_KONTAKTY][eKontakty];
-
+enum muzykaURLData{
+	muzykaString[64],
+	Float:muzykaX,
+	Float:muzykaY,
+	Float:muzykaZ,
+};
+new muzykaURL[MAX_FRAC][muzykaURLData] = {
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0}
+};
 enum eBizData {
     eBizName[32],
     Float:eBizWejX,

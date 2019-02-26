@@ -4087,7 +4087,13 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		}
 	
 		PlayerInfo[playerid][pLocal] = local;
-
+		if(GetPLocal(playerid) == PLOCAL_FRAC_DMV)
+		{
+			if(muzykaON[11] == 1)
+			{
+				PlayAudioStreamForPlayer(playerid, muzykaURL[11][muzykaString]);
+			}
+		}
 		SetPlayerPosEx(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, vw);
 		SetPlayerInterior(playerid, interior);
