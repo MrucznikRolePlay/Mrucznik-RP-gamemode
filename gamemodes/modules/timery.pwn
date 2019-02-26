@@ -2501,14 +2501,14 @@ public JednaSekundaTimer()
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
-					if(GetPVarInt(playerid, "DostalDM2") == 1)
+					if(GetPVarInt(i, "DostalDM2") == 1)
 					{
-						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]" GetNick(playerid, true));
+						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]" GetNick(i, true));
 						SendAdminMessage(COLOR_PANICRED, string);
-						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(playerid, true));
-						sendTipMessage(playerid, string);
-						ResetPlayerWeapons(playerid);
-						UsunBron(playerid);
+						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i, true));
+						sendTipMessage(i, string);
+						ResetPlayerWeapons(i);
+						UsunBron(i);
 					}
 				}
 				PlayerInfo[i][pJailed] = 0;

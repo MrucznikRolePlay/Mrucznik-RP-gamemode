@@ -223,6 +223,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 //======[INNE]=============
 #define PLOCAL_INNE_BANK 103
+#define PLOCAL_DEFAULT 255
 //------------------------------------------------------------------------------
 //                              UPRAWNIENIA
 //------------------------------------------------------------------------------
