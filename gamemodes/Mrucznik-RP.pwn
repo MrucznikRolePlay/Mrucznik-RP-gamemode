@@ -2461,7 +2461,7 @@ public OnPlayerEnterCheckpoint(playerid)
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
 				{
-					CreateNewRunCheckPoint(playerid, 1625.7415,-1608.9004,13.7188, 3, "Zaliczy³eœ trzeci przystanek, kolejny jest ju¿ oznaczony!", 5); 
+					CreateNewRunCheckPoint(playerid, 1625.7415,-1608.9004,13.7188, 3, "Zaliczy³eœ trzeci przystanek, kolejny jest ju¿ oznaczony!", 5,true); 
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
 				{
@@ -2505,7 +2505,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
 			{
-				CreateNewRunCheckPoint(playerid,  317.4830,-1632.8326,33.3125, 2, "Zaliczy³eœ trzeci checkpoint! Nastêpny zosta³ oznaczony, a ty siê nie poddajesz!", 5); 
+				CreateNewRunCheckPoint(playerid,  317.4830,-1632.8326,33.3125, 2, "Zaliczy³eœ trzeci checkpoint! Nastêpny zosta³ oznaczony, a ty siê nie poddajesz!", 5, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
 			{
@@ -2513,7 +2513,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
 			{
-				CreateNewRunCheckPoint(playerid,  664.4612,-1859.3246,5.4609, 2, "Zaliczy³eœ Pi¹ty checkpoint! Zosta³y jeszcze dwa!", 5); 
+				CreateNewRunCheckPoint(playerid,  664.4612,-1859.3246,5.4609, 2, "Zaliczy³eœ Pi¹ty checkpoint! Zosta³y jeszcze dwa!", 5, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
 			{
@@ -2522,7 +2522,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
 			{
-				CreateNewRunCheckPoint(playerid,  1000.8669,-1857.4419,12.8146, 2, "Zaliczy³eœ siódmy checkpoint! Ju¿ widaæ ostatni", 5); 
+				CreateNewRunCheckPoint(playerid,  1000.8669,-1857.4419,12.8146, 2, "Zaliczy³eœ siódmy checkpoint! Ju¿ widaæ ostatni", 5, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
 			{

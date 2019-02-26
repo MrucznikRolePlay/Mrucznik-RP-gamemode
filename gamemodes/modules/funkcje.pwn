@@ -12663,7 +12663,7 @@ stock EndRunPlayer(playerid, wartosc)
 	
 	return 1;
 }
-stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], bool:strongadd=0, bool:sendTip=true)
+stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], strongValue, bool:strongadd=false, bool:sendTip=true)
 {
 	DisablePlayerCheckpoint(playerid);
 
@@ -12677,9 +12677,9 @@ stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, t
 	SetPlayerCheckpoint(playerid, x,y,z, range);
 	bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
 	OszukujewBiegu[playerid] = 1;
-	if(strongadd > 0)
+	if(strongadd == true)
 	{
-		AddStrong(playerid, strongadd);
+		AddStrong(playerid, strongValue);
 	}
 
 	return 1;
