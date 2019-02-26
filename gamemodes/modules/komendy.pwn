@@ -24740,13 +24740,7 @@ CMD:unjail(playerid, params[])
 						{
 							iloscAJ[playerid] = iloscAJ[playerid]+1;
 						}
-						if(minutyZabierzDM[playa] < 2 && minutyZabierzDM[playa] != 0)
-						{
-							sendTipMessage(playa, "Marcepan Marks mówi: Tym razem Ci siê pofarci³o! Ktoœ uwolni³ Ciê z mojej budki - zostawiam Ci broñ"); 
-							KillTimer(zabierzBronieAJ[playa]);
-							format(string, sizeof(string), "Graczowi %s pozostan¹ bronie, poniewa¿ admin uwolni³ go z AJ w ci¹gu 2 minut", GetNick(playa, true));
-							SendAdminMessage(COLOR_RED, string); 
-						}
+
 					}
 					else
 					{
