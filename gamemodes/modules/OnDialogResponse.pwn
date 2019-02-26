@@ -17417,6 +17417,105 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
+	else if(dialogid == 1013)
+	{
+		if(response)
+		{
+			new string[128];
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerInfo[playerid][pMember] == 11)
+					{
+						if(dmv == 0)
+						{
+							dmv =1;
+							format(string, sizeof(string), "|____________Urz¹d Miasta otwarty przez %s_____________|", GetNick(playerid, true));
+							SendClientMessageToAll(COLOR_LIGHTGREEN, string)
+						}
+						else
+						{
+							dmv=0;
+							format(string, sizeof(string), "|____________Urz¹d Miasta zamkniêty przez %s_____________|", GetNick(playerid, true));
+							SendClientMessageToAll(COLOR_LIGHTGREEN, string)
+						}
+					
+					}
+				}
+				case 1:
+				{
+					ShowPlayerDialogEx(playerid, 1014, DIALOG_STYLE_INPUT, "Mrucznik RP", "WprowadŸ poni¿ej tekst, który ma zostaæ pokazany na megafonie", "Akceptuj" "WyjdŸ"); 
+				}
+				case 2:
+				{
+					ShowPlayerDialogEx(playerid, 1015, DIALOG_STYLE_INPUT, "Mrucznik RP", "WprowadŸ poni¿ej link do stream'a .pls", "Akceptuj", "Odrzuæ"); 
+				}
+				case 3:
+				{
+					if(PlayerInfo[playerid][pMember] == 11)
+					{
+						if(muzykaON[11] == 1)
+						{
+							foreach(Player, i)
+							{
+								if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
+								{
+									StopAudioStreamForPlayer(i);
+								}
+							}
+							sendTipMessage(playerid, "Wy³¹czy³eœ muzykê");
+						}
+						else
+						{
+							format(string, sizeof(string), "%s", muzykaURL[11]);
+							foreach(Player, i)
+							{
+								PlayAudioStreamForPlayer(i, string);
+							}
+							sendTipMessage(playerid, "w³¹czy³eœ muzykê"); 
+						}
+					}
+				}
+				case 4:
+				{
+					if(PlayerInfo[playerid][pMember] == FRAC_GOV)
+					{
+						SendClientMessageToAll(COLOR_WHITE, "|___________ Wiadomoœæ Rz¹dowa ___________|");
+						format(string, sizeof(string), "%s: Urz¹d Miasta Los Santos otwarty! Zapraszamy po dowody osobiste i licencje", GetNick(playerid, true));
+						SendClientMessageToAll(COLOR_YELLOW, string);
+					
+					}
+					else
+					{
+						sendTipMessage(playerid, "Twoja organizacja nie ma tej funkcji");
+					}
+				}
+			}
+			return 1;
+		}
+	}
+	else if(dialogid == 1014)
+	{
+		if(response)
+		{
+			new string[128];
+			if(PlayerInfo[playerid][pMember] == 11)
+			{
+				format(string, sizeof(string), "%s mówi przez g³oœniki urzêdu", GetNick(playerid, true));
+				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				format(string, sizeof(string), "**G³oœniki Urzêdu [%s]** %s", GetNick(playerid, true), inputtext);
+				foreach(Player, i)
+				{
+					if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
+					{
+						sendTipMessageEx(playerid, COLOR_NEWS, string);
+					}
+				}
+			}
+			return 1;
+		}
+	}
 	else if(dialogid == D_KONTAKTY_DZWON)
 	{
 		if(response)
