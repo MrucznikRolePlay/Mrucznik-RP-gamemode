@@ -14,6 +14,25 @@ enum muzykaURLData{
 	Float:muzykaZ,
 };
 new muzykaURL[MAX_FRAC][muzykaURLData] = {
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
 	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0}
 };
 enum eBizData {

@@ -12613,7 +12613,7 @@ stock GetPLocal(playerid)
 {
 	new wartoscLocalu; 
 	wartoscLocalu = PlayerInfo[playerid][pLocal];
-	return wartosLocalu;
+	return wartoscLocalu;
 }
 stock AddStrong(playerid, wartosc)
 {
