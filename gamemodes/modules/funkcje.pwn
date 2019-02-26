@@ -4054,7 +4054,7 @@ stock IsAAdministrator(playerid)
 	return 0;
 }
 
-WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", bool:local=0)
+WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", bool:local)
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
@@ -4085,7 +4085,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		{
 			GameTextForPlayer(playerid, komunikat, 5000, 1);
 		}
-		if(local >=1)
+		if(local)
 		{
 			PlayerInfo[playerid][pLocal] = local;
 		}
@@ -4097,7 +4097,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 	return 1;
 }
 
-WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", bool:local=0)
+WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", bool:local)
 {
     if(x==x2 && y==y2 && z==z2) return 0;
     if(GetPlayerVirtualWorld(playerid) == vw && GetPlayerInterior(playerid) == interior && IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
@@ -4123,7 +4123,7 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		{
 			GameTextForPlayer(playerid, komunikat, 5000, 1);
 		}
-		if(local >= 1)
+		if(local)
 		{
 			PlayerInfo[playerid][pLocal] = local;
 		}

@@ -21966,7 +21966,7 @@ CMD:wejdz(playerid)
                     SendClientMessage(playerid, COLOR_WHITE, "-> Okienka dla patentów znajduj¹ siê po lewej i prawej stronie w holu pierwszym");
 					SendClientMessage(playerid, COLOR_WHITE, "-> [Obecny interior urzêdu powsta³ w listopadzie 2018 roku, za inicjatyw¹ Satius & Arkam & Simeone]");
                     SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencje! <<<<");
-					if(muzykaON[11] = 1)
+					if(muzykaON[11] == 1)
 					{
 						new string[128];
 						format(string, sizeof(string), "%s", muzykaURL[11]); 
