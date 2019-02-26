@@ -125,9 +125,6 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/obiekty/3dtexty.pwn"
 #include "modules/obiekty/ikony.pwn"
 
-//definicje z obiektów
-#include "modules/obiekty/locale.def"
-
 //Modu³y mapy c.d.
 #include "modules/komendy.pwn"
 #include "modules/new/niceczlowiek/cmd.pwn"

@@ -406,7 +406,6 @@ new lsmcex6move = 0;
 new DoorInfo[MAX_DOORS][eDoors];
 //09.06
 new muzykaON[MAX_FRAC]=0;
-new muzykaURL[MAX_FRAC][] = "http://www.miastomuzyki.pl/n/rmfmaxxx.pls";
 //nowe stanowe
 new bool:VAR_NGKeypad = false;
 //Barierki kubi
