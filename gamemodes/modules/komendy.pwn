@@ -24695,6 +24695,7 @@ CMD:unjail(playerid, params[])
 						PlayerInfo[playa][pJailTime] = 0;
 						PlayerInfo[playa][pMuted] = 0;
 						SetPlayerInterior(playa, 0);
+						SetPVarInt(playerid, "DostalDM2", 0);
 						SetPlayerPosEx(playa,-1677.0605,917.2449,-52.4141);
 						SetPlayerVirtualWorld(playa, 1);
                         Wchodzenie(playa);
@@ -24830,10 +24831,9 @@ CMD:adminajail(playerid, params[])
 					
 					}
 					
-					//CZYNNOŒCI
-					zabierzBronieAJ[playa] = SetTimerEx("BronieAJDM2", 60000, true, "i", playa);
-					SendClientMessage(playerid, -1, "Graczowi zostan¹ zabrane bronie w przeci¹gu 5 minut"); 
-					SetPVarInt(playa, "IDnadajacego", playerid);
+					//CZYNNOŒCI - GDY NADA£ Dm2
+					SetPVarInt(playerid, "DostalDM2", 1);
+					sendTipMessage(playa, "Marcepan Marks mówi: Otrzyma³eœ AJ'ota z powodem DM2, za karê zabiorê twoj¹ broñ!"); 
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;
 					SetPlayerVirtualWorld(playa, 1000+playa);

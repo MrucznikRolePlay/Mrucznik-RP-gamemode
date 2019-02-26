@@ -269,26 +269,6 @@ public KomunikatCzasZerowanie(playerid)
 
 	return 1;
 }
-//Zabieranie broni po 2 minutach, jeœli gracz dosta³ AJ z DM2
-forward BronieAJDM2(playerid);
-public BronieAJDM2(playerid)
-{
-	
-	minutyZabierzDM[playerid]++;
-	if(minutyZabierzDM[playerid] == 2)
-	{
-		new nadajacyAJ = GetPVarInt(playerid, "IDnadajacego"); 
-		new string[128];
-		format(string, sizeof(string), "Graczowi %s zosta³y odebrane bronie poprzez admina %s [AJ == DM2]", GetNick(playerid), GetNick(nadajacyAJ));
-		SendAdminMessage(COLOR_PANICRED, string);
-		sendTipMessage(playerid, "Marcepan Marks mówi: Nie ³adnie jest strzelaæ do przyjació³ bez powodu! Odbieram Ci broñ.");
-		ResetPlayerWeapons(playerid);
-		UsunBron(playerid);
-		KillTimer(zabierzBronieAJ[playerid]);
-	}
-
-	return 1;
-}
 //End komunikatów
 forward AktywujPozar();
 public AktywujPozar()
@@ -2521,6 +2501,15 @@ public JednaSekundaTimer()
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
+					if(GetPVarInt(playerid, "DostalDM2") == 1)
+					{
+						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]" GetNick(playerid, true));
+						SendAdminMessage(COLOR_PANICRED, string);
+						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(playerid, true));
+						sendTipMessage(playerid, string);
+						ResetPlayerWeapons(playerid);
+						UsunBron(playerid);
+					}
 				}
 				PlayerInfo[i][pJailed] = 0;
 				SendClientMessage(i, COLOR_GRAD1,"   Wolnoœæ! Odsiedzia³eœ karê, mamy nadzieje ¿e to ciê czegoœ nauczy³o.");
