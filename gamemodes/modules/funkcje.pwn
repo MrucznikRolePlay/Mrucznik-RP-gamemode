@@ -4087,13 +4087,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		}
 	
 		PlayerInfo[playerid][pLocal] = local;
-		if(GetPLocal(playerid) == PLOCAL_FRAC_DMV)
-		{
-			if(muzykaON[11] == 1)
-			{
-				PlayAudioStreamForPlayer(playerid, muzykaURL[11][muzykaString]);
-			}
-		}
+		SprawdzMuzyke(playerid);
 		SetPlayerPosEx(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, vw);
 		SetPlayerInterior(playerid, interior);
@@ -5348,7 +5342,14 @@ stock orgIsValid(orgid)
     if(OrgInfo[orgid][o_UID] == 0) return 0;
     return 1;
 }
-
+stock SprawdzMuzyke(playerid) 
+{
+	if(muzykaON[11] == 1 && GetPLocal(playerid) == PLOCAL_FRAC_DMV)
+	{
+		PlayAudioStreamForPlayer(playerid, muzykaURL[11][muzykaString]);
+	}
+	return 1;
+}
 stock orgGetFreeSlot()
 {
     for(new i=0;i<MAX_ORG;i++)
