@@ -2517,7 +2517,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
 			{
-				CreateNewRunCheckPoint(playerid,  966.9481,-1834.9043,12.6000, 2); 
+				CreateNewRunCheckPoint(playerid,  966.9481,-1834.9043,12.6000, 2, "Szósty przystanek zaliczony! Biegnij do kolejnego"); 
 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 6)

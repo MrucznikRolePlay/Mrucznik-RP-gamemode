@@ -12663,13 +12663,16 @@ stock EndRunPlayer(playerid, wartosc)
 	
 	return 1;
 }
-stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, bool:text[], bool:strongadd)
+stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], bool:strongadd=0, bool:sendTip=true)
 {
 	DisablePlayerCheckpoint(playerid);
 
 	if(strlen(text) >= 2)
 	{
-		sendTipMessage(playerid, text);
+		if(sendTip == true)
+		{
+			sendTipMessage(playerid, text);
+		}
 	}
 	SetPlayerCheckpoint(playerid, x,y,z, range);
 	bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);

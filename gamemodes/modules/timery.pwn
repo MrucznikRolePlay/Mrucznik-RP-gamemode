@@ -153,7 +153,7 @@ public BazaCheckPoint(playerid)
 	timeSec[playerid]++;
 	if(timeSec[playerid] == 2)
 	{
-		OszukujewBiegu[playerid] == 0;
+		OszukujewBiegu[playerid] = 0;
 	}
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
 	{
