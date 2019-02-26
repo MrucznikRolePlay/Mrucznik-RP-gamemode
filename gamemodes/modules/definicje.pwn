@@ -207,23 +207,6 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define ORG_TYPE_RACE       3
 #define ORG_TYPE_BIZNES     4
 #define ORG_TYPE_CLUB       5
-//-----------------------------------------------------------------------------
-//                              PLOCAL
-//-----------------------------------------------------------------------------
-//Spis wszystkich pLocali.
-
-//=======[FRAKCJE]===========
-#define PLOCAL_FRAC_DMV 108
-#define PLOCAL_FRAC_FBI 255
-#define PLOCAL_FRAC_LSPD 254
-#define PLOCAL_FRAC_LSMC 253
-
-//======[RODZINNE]==========
-
-
-//======[INNE]=============
-#define PLOCAL_INNE_BANK 103
-#define PLOCAL_DEFAULT 255
 //------------------------------------------------------------------------------
 //                              UPRAWNIENIA
 //------------------------------------------------------------------------------
