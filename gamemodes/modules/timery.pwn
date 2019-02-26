@@ -149,6 +149,12 @@ public OddajZycieTimer(playerid)
 forward BazaCheckPoint(playerid);
 public BazaCheckPoint(playerid)
 {
+	new timeSec[MAX_PLAYERS];
+	timeSec[playerid]++;
+	if(timeSec[playerid] == 2)
+	{
+		OszukujewBiegu[playerid] == 0;
+	}
 	if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
 	{
 		SetPVarInt(playerid, "ZaliczylBaze", 1);

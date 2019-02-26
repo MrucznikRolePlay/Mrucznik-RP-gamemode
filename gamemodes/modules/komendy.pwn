@@ -16441,7 +16441,7 @@ CMD:trasybiegu(playerid)
 			sendTipMessage(playerid, "Aktualnie jesteœ podczas biegu, ukoñcz go!"); 
 			return 1;
 		}
-		ShowPlayerDialogEx(playerid, 1012, DIALOG_STYLE_TABLIST, "Mrucznik Role Play","Numer Trasy:\tMinimalny LVL:\tBieg doda:\n\
+		ShowPlayerDialogEx(playerid, 1012, DIALOG_STYLE_TABLIST_HEADERS, "Mrucznik Role Play","Numer Trasy:\tMinimalny LVL:\tBieg doda:\n\
 		Trasa [1]\t[0V_LVL]\t[+15V]\n\
 		Trasa [2]\t[0V_LVL]\t[+20V]\n\
 		Trasa [3]\t[100V_LVL]\t[+25V]\n\
