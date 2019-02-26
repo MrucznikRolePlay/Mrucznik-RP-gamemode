@@ -146,6 +146,18 @@ public OddajZycieTimer(playerid)
 	}
 	return 1;
 }
+forward BazaCheckOszust(playerid);
+public BazaCheckOszust(playerid)
+{
+	new timeSec[MAX_PLAYERS];
+	timeSec[playerid]++;
+	if(timeSec[playerid] == 2)
+	{
+		OszukujewBiegu[playerid] = 0;
+		KillTimer(bazaOszust[playerid] );
+	}
+	return 1;
+}
 forward BazaCheckPoint(playerid);
 public BazaCheckPoint(playerid)
 {

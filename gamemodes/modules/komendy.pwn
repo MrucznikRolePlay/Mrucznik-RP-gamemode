@@ -16385,6 +16385,31 @@ CMD:staty(playerid)
 	}
 	return 1;
 }
+//=============================================================================================
+//==================================[POCZ¥TEK SYSTEMU SI£Y]====================================
+//=============================================================================================
+//Odnosi siê do plików: Mrucznik-RP gamemode, enum, timery, funkcje, zmienne, OnDialogResponse, definicje, komendy, general;
+//Odnosi siê do komend: /wezdragi;
+//Autor: Simeone
+//Data: 26-02-2019
+//Opis: 
+/*
+System si³y to rewolucja na serwerze Mrucznik Role_Play. Dziêki sile mo¿emy realnie prze³o¿yæ akcje na postaæ.
+Przyk³adowo: Gracz X (200V) i policjant Y (25V) - policjant próbuje aresztowaæ gracza, gracz wyrywa siê bez wiêkszego problemu.
+RE: Ta sama sytuacja, z tym, ¿e policjant ma ju¿ 1/2 wartoœci si³y gracza - wtedy gracz ma zaledwie 25% na ucieczkê, które maleje z ka¿dym policjantem obok.
+Wnioski? Dziêki temu systemowi, gracze bêd¹ mieli realne szanse uciec z aresztowania i /przetrwaæ/, a dla PD bêdzie wyzwaniem z³apaæ 140 kilowego sku*wysyna.
+
+Przyk³ad drugi: Gracz X (350V) chce pobiæ gracza Y (50V) - dochodzi do pobicia bez wiêkszego oporu. Jednak, jeœli gracz Y ma o drobinê wiêksz¹ wartoœæ (ni¿ 1/7 gracza X), 
+wtedy system odpala mo¿liwoœæ /szansy/ i oblicza procentowo udzia³. 
+
+Si³ê mo¿emy zdobyæ poprzez 4 mo¿liwe sposoby (mo¿liwe, ¿e w przysz³oœci zwiêkszy siê ich liczba):
+>Admin mo¿e j¹ nadaæ komend¹ /setstrong
+>Biegaj¹c (skryptem do biegu)
+>Æwicz¹c na si³owni
+>P³ywaj¹c na basenie Tsunami
+
+Dodatkowo za¿ywanie narkotyków daje boosta (2x si³y) na okres 5 minut. Jednak, jeœli bêdziemy tego nadu¿ywaæ, skrypt odbierze nam -15V si³y :D 
+*/
 CMD:setstrong(playerid, params[])
 {
 	new valueStrong, giveplayerid;
@@ -16441,7 +16466,7 @@ CMD:trasybiegu(playerid)
 			sendTipMessage(playerid, "Aktualnie jesteœ podczas biegu, ukoñcz go!"); 
 			return 1;
 		}
-		ShowPlayerDialogEx(playerid, 1012, DIALOG_STYLE_TABLIST, "Mrucznik Role Play","Numer Trasy:\tMinimalny LVL:\tBieg doda:\n\
+		ShowPlayerDialogEx(playerid, 1012, DIALOG_STYLE_TABLIST_HEADERS, "Mrucznik Role Play","Numer Trasy:\tMinimalny LVL:\tBieg doda:\n\
 		Trasa [1]\t[0V_LVL]\t[+15V]\n\
 		Trasa [2]\t[0V_LVL]\t[+20V]\n\
 		Trasa [3]\t[100V_LVL]\t[+25V]\n\
@@ -16534,6 +16559,9 @@ CMD:stopbieg(playerid)
 	}
 	return 1;
 }
+//=============================================================================================
+//==================================[KONIEC SYSTEMU SI£Y]======================================
+//=============================================================================================
 CMD:dn(playerid)
 {
     if(IsPlayerConnected(playerid))

@@ -12659,7 +12659,30 @@ stock EndRunPlayer(playerid, wartosc)
 	format(string, sizeof(string), "To twój %d bieg dziœ", PlayerRunStat[playerid]);
 	sendTipMessage(playerid, string);
 	AddStrong(playerid, wartosc);
+	OszukujewBiegu[playerid] = 0;
 	
+	return 1;
+}
+stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], strongValue, bool:strongadd=false, bool:sendTip=true)
+{
+	DisablePlayerCheckpoint(playerid);
+
+	if(strlen(text) >= 2)
+	{
+		if(sendTip == true)
+		{
+			sendTipMessage(playerid, text);
+		}
+	}
+	SetPlayerCheckpoint(playerid, x,y,z, range);
+	bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
+	bazaOszust[playerid] = SetTimerEx("BazaCheckOszust", 5000, 0, "d", playerid);
+	OszukujewBiegu[playerid] = 1;
+	if(strongadd == true)
+	{
+		AddStrong(playerid, strongValue);
+	}
+
 	return 1;
 }
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);

@@ -17409,7 +17409,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					sendTipMessage(playerid, "Aktualnie trwaj¹ prace nad t¹ tras¹!"); 
 				}
-		
+				case 5:
+				{
+					sendTipMessage(playerid, "Aktualnie trwaj¹ prace nad t¹ tras¹!"); 
+				}
 			}
 			return 1;
 		}
