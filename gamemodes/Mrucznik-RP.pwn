@@ -641,6 +641,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerEnterVehicle - begin", GetNick(playerid), playerid);
 	#endif
+	new Float:pX,Float:pY,Float:pZ;
     if(vehicleid > MAX_VEHICLES || vehicleid < 0)
     {
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Exceed vehicle limit");
@@ -671,10 +672,15 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         return 0;
  	}
 	//Sila
-	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
+	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)//Zabezpieczenie, jeœli jest podczas biegu
 	{
-		new Float:pX,Float:pY,Float:pZ;
 		sendTipMessage(playerid, "Nie mo¿esz wejœæ do pojazdu podczas biegu!"); 
+		GetPlayerPos(playerid, pX,pY,pZ);
+		SetPlayerPos(playerid, pX,pY,pZ+2);
+	}
+	if(GetPlayerPing(playerid) >= 180 && !ispassenger)//Zabezpieczenie, jeœli ma za du¿y ping
+	{
+		sendTipMessage(playerid, "Twój ping jest stanowczo za wysoki! Odczekaj chwilê, zanim wsi¹dziesz do pojazdu"); 
 		GetPlayerPos(playerid, pX,pY,pZ);
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
@@ -963,12 +969,18 @@ public OnPlayerDisconnect(playerid, reason)
         sendErrorMessage(giveplayerid, "Sprzeda¿ zosta³a anulowana!");
     }
 	if(GetPVarInt(playerid, "ZjadlDragi") == 1)
-		{
-			new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
-			KillTimer(TimerEfektNarkotyku[playerid]);
-			SetStrong(playerid, FirstValue);
-		}
-
+	{
+		new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+		KillTimer(TimerEfektNarkotyku[playerid]);
+		SetStrong(playerid, FirstValue);
+	}
+	if(GetPVarInt(playerid, "DostalDM2") == 1)
+	{
+		format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [da³ /q podczas AJ DM2]", GetNick(playerid, true));
+		SendAdminMessage(COLOR_PANICRED, string);
+		ResetPlayerWeapons(playerid);
+		UsunBron(playerid);
+	}
     if(GetPVarInt(playerid, "kolejka") == 1)
     {
         PlayerInfo[playerid][pPos_x] = GetPVarFloat(playerid, "kolejka-x");
@@ -5108,7 +5120,6 @@ public OnPlayerRequestSpawn(playerid)
 	}
     return 0;
 }
-
 public OnPlayerRequestClass(playerid, classid)
 {
 	#if DEBUG == 1

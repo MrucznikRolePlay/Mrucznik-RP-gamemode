@@ -99,8 +99,6 @@ new komunikatMinutyZerowanie[MAX_PLAYERS]=0;
 //Admin Adds
 new TimerOddaniaZycia[MAX_PLAYERS];
 new dajHPSekunda[MAX_PLAYERS]=0;
-new minutyZabierzDM[MAX_PLAYERS]=0;
-new zabierzBronieAJ[MAX_PLAYERS];
 //DODATKI
 new boneIDzmienna[MAX_PLAYERS];
 new TimerEfektNarkotyku[MAX_PLAYERS];
@@ -1171,7 +1169,6 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
 	spamujeCaluj[playerid] =0;
-	minutyZabierzDM[playerid]=0;
 	
 	
 	
