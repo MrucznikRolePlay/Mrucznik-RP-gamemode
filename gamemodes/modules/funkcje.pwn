@@ -12663,7 +12663,7 @@ stock EndRunPlayer(playerid, wartosc)
 	
 	return 1;
 }
-stock CreateNewRunCheckPoint(playerid, x, y, z, range, bool:text[], bool:strongadd)
+stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, bool:text[], bool:strongadd)
 {
 	DisablePlayerCheckpoint(playerid);
 
