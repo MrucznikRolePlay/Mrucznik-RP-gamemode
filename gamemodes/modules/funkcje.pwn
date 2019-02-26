@@ -12676,6 +12676,7 @@ stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, t
 	}
 	SetPlayerCheckpoint(playerid, x,y,z, range);
 	bazaCheck[playerid] = SetTimerEx("BazaCheckPoint",5000,0,"d",playerid);
+	bazaOszust[playerid] = SetTimerEx("BazaCheckOszust", 5000, 0, "d", playerid);
 	OszukujewBiegu[playerid] = 1;
 	if(strongadd == true)
 	{

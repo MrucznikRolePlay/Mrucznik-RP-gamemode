@@ -108,6 +108,7 @@ new efektNarkotykuMinuta[MAX_PLAYERS] = 0;
 new bazaCheck[MAX_PLAYERS];
 new PlayerRunStat[MAX_PLAYERS]=0;
 new OszukujewBiegu[MAX_PLAYERS]=0;
+new bazaOszust[MAX_PLAYERS]=0; 
 
 //legal
 new DB:db_handle;

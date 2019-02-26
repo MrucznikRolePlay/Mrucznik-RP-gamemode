@@ -715,7 +715,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		}
 		else
 		{
-			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - po udanej kradziezy~n~ odpala pojazd", MSGBOX_ICON_TYPE_OK);
+			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
 		}
 		
     }
@@ -2533,6 +2533,7 @@ public OnPlayerEnterCheckpoint(playerid)
 		{
 			DisablePlayerCheckpoint(playerid);
 			sendTipMessageEx(playerid, COLOR_P@, "Aby rozpocz¹æ bieg wpisz w tym miejscu [/biegnij]"); 
+			SetPVarInt(playerid, "RozpoczalBieg", 0);
 		}
 	}
 	if(PizzaJob[playerid] != 0)
