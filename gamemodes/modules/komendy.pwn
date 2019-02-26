@@ -21966,6 +21966,12 @@ CMD:wejdz(playerid)
                     SendClientMessage(playerid, COLOR_WHITE, "-> Okienka dla patentów znajduj¹ siê po lewej i prawej stronie w holu pierwszym");
 					SendClientMessage(playerid, COLOR_WHITE, "-> [Obecny interior urzêdu powsta³ w listopadzie 2018 roku, za inicjatyw¹ Satius & Arkam & Simeone]");
                     SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencje! <<<<");
+					if(muzykaON[11] = 1)
+					{
+						new string[128];
+						format(string, sizeof(string), "%s", muzykaURL[11]); 
+						PlayAudioStreamForPlayer(playerid, string, 0, 0, 0); 
+					}
                     if(PlayerInfo[playerid][pMember] == 0 && PlayerInfo[playerid][pLider] == 0 && GetPlayerOrg(playerid) == 0)
                     {
                         SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
@@ -22752,7 +22758,36 @@ CMD:wejdz(playerid)
     }
     return 1;
 }
-
+CMD:drzwi(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerInfo[playerid][pLevel] >= 3)
+		{
+			if(PlayerInfo[playerid][pMember] == 11 && PlayerInfo[playerid][pRank] > 3)
+			{
+				if(dmv == 0)
+				{
+					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Otwórz Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
+				}
+				else
+				{
+					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Otwórz Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
+				}
+			}
+			else
+			{
+				sendTipMessage(playerid, "Twoja frakcja nie ma systemu drzwi"); 
+				return 1;
+			}
+		}
+		else
+		{
+			sendTipMessage(playerid, "Komenda dostêpna od trzeciego LVL'a"); 
+		}
+	}
+	return 1;
+}
 CMD:exit(playerid) return cmd_wyjdz(playerid);
 CMD:wyjdz(playerid)
 {

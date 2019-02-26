@@ -2503,7 +2503,7 @@ public JednaSekundaTimer()
 					StopAudioStreamForPlayer(i);
 					if(GetPVarInt(i, "DostalDM2") == 1)
 					{
-						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]" GetNick(i, true));
+						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]", GetNick(i, true));
 						SendAdminMessage(COLOR_PANICRED, string);
 						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i, true));
 						sendTipMessage(i, string);
