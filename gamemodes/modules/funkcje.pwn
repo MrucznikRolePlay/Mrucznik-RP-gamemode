@@ -4076,7 +4076,6 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             SendClientMessage(playerid, COLOR_WHITE, "Okazuje siê, ¿e do kasyna nie mozna wnosiæ broni.");
             SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ ochronie.");
             SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
-			
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
             ResetPlayerWeapons(playerid);
 		}
