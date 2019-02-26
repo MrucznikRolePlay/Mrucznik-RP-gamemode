@@ -2563,6 +2563,11 @@ public OnPlayerEnterCheckpoint(playerid)
 				EndRunPlayer(playerid, 20);
 			}
 		}
+		else//Jeœli wybra³ dialog do pokazania punktu startowego trasy
+		{
+			DisablePlayerCheckpoint(playerid);
+			sendTipMessageEx(playerid, COLOR_P@, "Aby rozpocz¹æ bieg wpisz w tym miejscu [/biegnij]"); 
+		}
 	}
 	if(PizzaJob[playerid] != 0)
 	{

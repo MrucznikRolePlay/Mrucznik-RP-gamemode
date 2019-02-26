@@ -16431,6 +16431,29 @@ CMD:setstrong(playerid, params[])
 	}
 	return 1;
 }
+//=================> Zdobywanie punktów si³y poprzez bieg
+CMD:trasybiegu(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
+		{
+			sendTipMessage(playerid, "Aktualnie jesteœ podczas biegu, ukoñcz go!"); 
+			return 1;
+		}
+		ShowPlayerDialogEx(playerid, 1012, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", "
+		Numer Trasy:\tMinimalny LVL:\tBieg doda:\n\
+		Trasa [1]\t[0V_LVL]\[+15V]\n\
+		Trasa [2]\t[0V_LVL]\t[+20V]\n\
+		Trasa [3]\t[100V_LVL]\t[+25V]\n\
+		Trasa [4]\t[100V_LVL]\t[+25V]\n\
+		Trasa [5]\t[400V_LVL]\t[+30V]",
+		"ProwadŸ", "Odrzuæ");
+	
+		return 1;
+	}
+	return 1;
+}
 CMD:biegnij(playerid)
 {
 	if(IsPlayerConnected(playerid))

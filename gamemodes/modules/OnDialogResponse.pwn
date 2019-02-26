@@ -17376,6 +17376,44 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		
 	}
+	else if(dialogid == 1012)
+	{
+		if(!response)
+		{
+			sendTipMessage(playerid, "Wy³¹czy³eœ dialog tras"); 
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					SetPlayerCheckpoint(playerid, 2005.9244,-1442.3917,13.5631, 3);
+					sendTipMessage(playerid, "Trasa rozpoczyna siê spod szpitala, udaj siê tam!");
+					sendTipMessage(playerid, "Aby anulowaæ wpisz /stopbieg"); 
+					SetPVarInt(playerid, "RozpoczalBieg", 1);
+				}
+				case 1:
+				{
+					SetPlayerCheckpoint(playerid, 806.4952,-1334.9512,13.5469, 3);
+					sendTipMessage(playerid, "Trasa rozpoczyna siê spod metra udaj siê tam!");
+					sendTipMessage(playerid, "Aby anulowaæ wpisz /stopbieg"); 
+					SetPVarInt(playerid, "RozpoczalBieg", 1);
+				}
+				case 3:
+				{
+					sendTipMessage(playerid, "Aktualnie trwaj¹ prace nad t¹ tras¹!"); 
+				}
+				case 4:
+				{
+					sendTipMessage(playerid, "Aktualnie trwaj¹ prace nad t¹ tras¹!"); 
+				}
+		
+			}
+			return 1;
+		}
+	}
 	else if(dialogid == D_KONTAKTY_DZWON)
 	{
 		if(response)
