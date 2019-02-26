@@ -17432,20 +17432,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							dmv =1;
 							format(string, sizeof(string), "|____________Urz¹d Miasta otwarty przez %s_____________|", GetNick(playerid, true));
-							SendClientMessageToAll(COLOR_LIGHTGREEN, string)
+							SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 						}
 						else
 						{
 							dmv=0;
 							format(string, sizeof(string), "|____________Urz¹d Miasta zamkniêty przez %s_____________|", GetNick(playerid, true));
-							SendClientMessageToAll(COLOR_LIGHTGREEN, string)
+							SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 						}
 					
 					}
 				}
 				case 1:
 				{
-					ShowPlayerDialogEx(playerid, 1014, DIALOG_STYLE_INPUT, "Mrucznik RP", "WprowadŸ poni¿ej tekst, który ma zostaæ pokazany na megafonie", "Akceptuj" "WyjdŸ"); 
+					ShowPlayerDialogEx(playerid, 1014, DIALOG_STYLE_INPUT, "Mrucznik RP", "WprowadŸ poni¿ej tekst, który ma zostaæ pokazany na megafonie", "Akceptuj", "WyjdŸ"); 
 				}
 				case 2:
 				{

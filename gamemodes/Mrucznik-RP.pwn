@@ -976,6 +976,7 @@ public OnPlayerDisconnect(playerid, reason)
 	}
 	if(GetPVarInt(playerid, "DostalDM2") == 1)
 	{
+		new string[128];
 		format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [da³ /q podczas AJ DM2]", GetNick(playerid, true));
 		SendAdminMessage(COLOR_PANICRED, string);
 		ResetPlayerWeapons(playerid);
