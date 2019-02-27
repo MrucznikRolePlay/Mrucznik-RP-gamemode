@@ -5031,6 +5031,7 @@ ShowStats(playerid,targetid)
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
 		new coordsstring[256];
+		new bizid = PlayerInfo[playerid][pPbiskey];
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
@@ -5044,7 +5045,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Strong:[%d]", PlayerInfo[playerid][pStrong]);
+		format(coordsstring, sizeof(coordsstring), "Si³a:[%d] Biznes:[%s] MaxDochódBiz[%d]", PlayerInfo[playerid][pStrong], BizData[bizid][eBizName], BizData[bizid][eBizMoney]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
@@ -5341,14 +5342,6 @@ stock orgIsValid(orgid)
     if(orgid < 0 || orgid > MAX_ORG-1) return 0;
     if(OrgInfo[orgid][o_UID] == 0) return 0;
     return 1;
-}
-stock SprawdzMuzyke(playerid) 
-{
-	if(muzykaON[11] == 1 && GetPLocal(playerid) == PLOCAL_FRAC_DMV)
-	{
-		PlayAudioStreamForPlayer(playerid, muzykaURL[11][muzykaString]);
-	}
-	return 1;
 }
 stock orgGetFreeSlot()
 {
@@ -12672,6 +12665,14 @@ stock EndRunPlayer(playerid, wartosc)
 	AddStrong(playerid, wartosc);
 	OszukujewBiegu[playerid] = 0;
 	
+	return 1;
+}
+stock SprawdzMuzyke(playerid) 
+{
+	if(muzykaON[11] == 1 && GetPLocal(playerid) == PLOCAL_FRAC_DMV)
+	{
+		PlayAudioStreamForPlayer(playerid, muzykaURL[11][muzykaString]);
+	}
 	return 1;
 }
 stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], strongValue, bool:strongadd=false, bool:sendTip=true)

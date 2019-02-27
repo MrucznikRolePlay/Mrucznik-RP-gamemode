@@ -5655,12 +5655,56 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD5, string);
 					if(PlayerInfo[i][pPbiskey] >= 0 && PlayerInfo[i][pPbiskey] <= MAX_BIZNES)
 					{
-					    new bizid = PlayerInfo[i][pPbiskey];
-					    SendClientMessage(i, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
-					    format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]);
-						SendClientMessage(i, COLOR_WHITE, string);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
-						DajKase(i, BizData[bizid][eBizMoney]);
+						new losuj = random(10);
+						new bizid = PlayerInfo[i][pPbiskey];
+						if(losuj == 1 || losuj == 2 || losuj == 3)//Max kwota
+						{
+							SendClientMessage(i, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
+							format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
+							SendClientMessage(i, COLOR_WHITE, string); 
+							format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]);
+							SendClientMessage(i, COLOR_WHITE, string);
+							SendClientMessage(i, COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ maksimum"); 
+							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
+							DajKase(i, BizData[bizid][eBizMoney]);
+						}
+						if(losuj == 4 || losuj == 5 || losuj == 6 || losuj == 7)//Po³owiczny zysk
+						{
+							SendClientMessage(i, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
+							format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
+							SendClientMessage(i, COLOR_WHITE, string); 
+							format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]/2);
+							SendClientMessage(i, COLOR_WHITE, string);
+							SendClientMessage(i, COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ po³owê"); 
+							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
+							DajKase(i, BizData[bizid][eBizMoney]/2);
+						}
+						if(losuj == 8 || losuj == 9)//minimalna strata
+						{
+							new kwotaStraty = 0-(BizData[bizid][eBizMoney]/2);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
+							format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
+							SendClientMessage(i, COLOR_WHITE, string); 
+							format(string, sizeof(string), "  Strata z biznesu: $%d", kwotaStraty);
+							SendClientMessage(i, COLOR_WHITE, string);
+							SendClientMessage(i, COLOR_WHITE, "Twój biznes przyniós³ {FF0000}minimalne straty"); 
+							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
+							DajKase(i, -kwotaStraty);
+						
+						}
+						if(losuj == 10)//Du¿a strata
+						{
+							new kwotaStraty = 0-BizData[bizid][eBizMoney];
+							SendClientMessage(i, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
+							format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
+							SendClientMessage(i, COLOR_WHITE, string); 
+							format(string, sizeof(string), "  Strata z biznesu: $%d", kwotaStraty);
+							SendClientMessage(i, COLOR_WHITE, string);
+							SendClientMessage(i, COLOR_WHITE, "Twój biznes przyniós³ {FF0000}du¿e straty"); 
+							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
+							DajKase(i, -kwotaStraty);
+						
+						}
 					}
 					format(string, sizeof(string), "~y~Wyplata");
 					GameTextForPlayer(i, string, 5000, 1);
