@@ -5031,6 +5031,7 @@ ShowStats(playerid,targetid)
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
 		new coordsstring[256];
+		new bizid = PlayerInfo[i][pPbiskey]
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
@@ -5341,14 +5342,6 @@ stock orgIsValid(orgid)
     if(orgid < 0 || orgid > MAX_ORG-1) return 0;
     if(OrgInfo[orgid][o_UID] == 0) return 0;
     return 1;
-}
-stock SprawdzMuzyke(playerid) 
-{
-	if(muzykaON[11] == 1 && GetPLocal(playerid) == PLOCAL_FRAC_DMV)
-	{
-		PlayAudioStreamForPlayer(playerid, muzykaURL[11][muzykaString]);
-	}
-	return 1;
 }
 stock orgGetFreeSlot()
 {
@@ -12672,6 +12665,14 @@ stock EndRunPlayer(playerid, wartosc)
 	AddStrong(playerid, wartosc);
 	OszukujewBiegu[playerid] = 0;
 	
+	return 1;
+}
+stock SprawdzMuzyke(playerid) 
+{
+	if(muzykaON[11] == 1 && GetPLocal(playerid) == PLOCAL_FRAC_DMV)
+	{
+		PlayAudioStreamForPlayer(playerid, muzykaURL[11][muzykaString]);
+	}
 	return 1;
 }
 stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], strongValue, bool:strongadd=false, bool:sendTip=true)
