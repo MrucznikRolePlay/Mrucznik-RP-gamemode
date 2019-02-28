@@ -14489,7 +14489,8 @@ CMD:bizlock(playerid)
 {
 	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES)
 	{
-		new bizid = PlayerInfo[i][pPbiskey];
+		new bizid = PlayerInfo[playerid][pPbiskey];
+		new string[128];
 		if(BizData[bizid][eBizLock] == true)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 5.0, BizData[bizid][eBizWejX], BizData[bizid][eBizWejY], BizData[bizid][eBizWejZ]))
