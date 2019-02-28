@@ -5718,7 +5718,7 @@ PayDay()
 							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
 							if(GetPlayerMoney(i) >= BizData[bizid][eBizMoney])
 							{
-								Zabierzkase(i, BizData[bizid][eBizMoney]);
+								ZabierzKase(i, BizData[bizid][eBizMoney]);
 							}
 							else
 							{
