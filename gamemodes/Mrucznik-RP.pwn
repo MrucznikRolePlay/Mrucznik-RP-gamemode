@@ -5701,7 +5701,7 @@ PayDay()
 								}
 								else
 								{
-									sendTipMessageEx(playerid, COLOR_RED, "Twoje d³ugi rosn¹! Twój biznes przynosi kolejne straty"); 
+									sendTipMessageEx(i, COLOR_RED, "Twoje d³ugi rosn¹! Twój biznes przynosi kolejne straty"); 
 								}
 							}
 						
