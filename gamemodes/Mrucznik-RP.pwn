@@ -5691,7 +5691,7 @@ PayDay()
 							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
 							if(GetPlayerMoney(i) >= kwotaStraty)
 							{
-								DajKase(i, -kwotaStraty);
+								ZabierzKase(i, kwotaStraty);
 							}
 							else
 							{
@@ -5718,7 +5718,7 @@ PayDay()
 							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
 							if(GetPlayerMoney(i) >= BizData[bizid][eBizMoney])
 							{
-								DajKase(i, -BizData[bizid][eBizMoney]);
+								ZabierzKase(i, BizData[bizid][eBizMoney]);
 							}
 							else
 							{

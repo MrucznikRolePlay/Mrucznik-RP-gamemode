@@ -14489,14 +14489,15 @@ CMD:bizlock(playerid)
 {
 	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES)
 	{
-		new bizid = PlayerInfo[i][pPbiskey];
-		if(BizData[bizid][eBizLock] == true)
+		new bizid = PlayerInfo[playerid][pPbiskey];
+		new string[128];
+		if(BizData[bizid][eBizLock] == 0)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 5.0, BizData[bizid][eBizWejX], BizData[bizid][eBizWejY], BizData[bizid][eBizWejZ]))
 			{
 				format(string, sizeof(string), "%s otwiera biznes %s", GetNick(playerid, true), BizData[bizid][eBizName]);
 				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				BizData[bizid][eBizLock] = false;
+				BizData[bizid][eBizLock] = 1;
 			}
 			else
 			{
@@ -14509,7 +14510,7 @@ CMD:bizlock(playerid)
 			{
 				format(string, sizeof(string), "%s zamyka biznes %s", GetNick(playerid, true), BizData[bizid][eBizName]);
 				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				BizData[bizid][eBizLock] = true;
+				BizData[bizid][eBizLock] = 0;
 			}
 			else
 			{
@@ -14526,6 +14527,7 @@ CMD:bizlock(playerid)
 }
 CMD:bizmoneydebug(playerid)
 {
+	new string[128];
 	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES && PlayerInfo[playerid][pAdmin] == 5000)
 	{
 	/*    new string[128];
@@ -14571,7 +14573,7 @@ CMD:bizmoneydebug(playerid)
 			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 			if(GetPlayerMoney(playerid) >= kwotaStraty)
 			{
-				DajKase(playerid,-kwotaStraty);
+				ZabierzKase(playerid,kwotaStraty);
 			}
 			else
 			{
@@ -14598,7 +14600,7 @@ CMD:bizmoneydebug(playerid)
 			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 			if(GetPlayerMoney(playerid) >= BizData[bizid][eBizMoney])
 			{
-				DajKase(playerid,-BizData[bizid][eBizMoney]);
+				ZabierzKase(playerid,BizData[bizid][eBizMoney]);
 			}
 			else
 			{
@@ -22326,7 +22328,7 @@ CMD:wejdz(playerid)
             //BIZNESY
             for(new i=0;i<MAX_BIZNES;i++)
 			{
-				if(BizData[i][eBizLock] == false)
+				if(BizData[i][eBizLock] == 1)
 				{
 					WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"",BizData[i][epLocal]);
 					//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
@@ -28139,6 +28141,7 @@ CMD:biznespomoc(playerid)
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	SendClientMessage(playerid, COLOR_WHITE,"*** BIZNES POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
 	SendClientMessage(playerid, COLOR_GRAD3,"*** BIZNES *** /bizinfo /wejdz /wyjdz | WKRÓTCE - /kupbiznes /sprzedajbiznes");
+	SendClientMessage(playerid, COLOR_GRAD3, "*** BIZNES *** /bizlock");
 	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /pomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
 	return 1;
 }
