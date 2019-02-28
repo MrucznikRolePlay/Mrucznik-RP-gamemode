@@ -5689,20 +5689,48 @@ PayDay()
 							SendClientMessage(i, COLOR_WHITE, string);
 							SendClientMessage(i, COLOR_WHITE, "Twój biznes przyniós³ {FF0000}minimalne straty"); 
 							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
-							DajKase(i, -kwotaStraty);
+							if(GetPlayerMoney(i) >= kwotaStraty)
+							{
+								DajKase(i, -kwotaStraty);
+							}
+							else
+							{
+								if(PlayerInfo[i][pAccount] >= kwotaStraty)
+								{
+									PlayerInfo[i][pAccount] = PlayerInfo[i][pAccount]-kwotaStraty;
+								}
+								else
+								{
+									sendTipMessageEx(i, COLOR_RED, "Twoje d³ugi rosn¹! Twój biznes przynosi kolejne straty"); 
+								}
+							}
 						
 						}
 						if(losuj == 10)//Du¿a strata
 						{
-							new kwotaStraty = 0-BizData[bizid][eBizMoney];
+							
 							SendClientMessage(i, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
 							format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
 							SendClientMessage(i, COLOR_WHITE, string); 
-							format(string, sizeof(string), "  Strata z biznesu: $%d", kwotaStraty);
+							format(string, sizeof(string), "  Strata z biznesu: $%d", BizData[bizid][eBizMoney]);
 							SendClientMessage(i, COLOR_WHITE, string);
 							SendClientMessage(i, COLOR_WHITE, "Twój biznes przyniós³ {FF0000}du¿e straty"); 
 							SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
-							DajKase(i, -kwotaStraty);
+							if(GetPlayerMoney(i) >= BizData[bizid][eBizMoney])
+							{
+								DajKase(i, -BizData[bizid][eBizMoney]);
+							}
+							else
+							{
+								if(PlayerInfo[i][pAccount] >= BizData[bizid][eBizMoney])
+								{
+									PlayerInfo[i][pAccount] = PlayerInfo[i][pAccount]-BizData[bizid][eBizMoney];
+								}
+								else
+								{
+									sendTipMessageEx(i, COLOR_RED, "Twoje d³ugi rosn¹! Twój biznes przynosi kolejne straty"); 
+								}
+							}
 						
 						}
 					}
