@@ -22328,7 +22328,7 @@ CMD:wejdz(playerid)
             //BIZNESY
             for(new i=0;i<MAX_BIZNES;i++)
 			{
-				if(BizData[i][eBizLock] == 0)
+				if(BizData[i][eBizLock] == 1)
 				{
 					WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"",BizData[i][epLocal]);
 					//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
