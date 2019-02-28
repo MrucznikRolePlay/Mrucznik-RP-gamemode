@@ -14491,13 +14491,13 @@ CMD:bizlock(playerid)
 	{
 		new bizid = PlayerInfo[playerid][pPbiskey];
 		new string[128];
-		if(BizData[bizid][eBizLock] == true)
+		if(BizData[bizid][eBizLock] == 0)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 5.0, BizData[bizid][eBizWejX], BizData[bizid][eBizWejY], BizData[bizid][eBizWejZ]))
 			{
 				format(string, sizeof(string), "%s otwiera biznes %s", GetNick(playerid, true), BizData[bizid][eBizName]);
 				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				BizData[bizid][eBizLock] = false;
+				BizData[bizid][eBizLock] = 1;
 			}
 			else
 			{
@@ -14510,7 +14510,7 @@ CMD:bizlock(playerid)
 			{
 				format(string, sizeof(string), "%s zamyka biznes %s", GetNick(playerid, true), BizData[bizid][eBizName]);
 				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				BizData[bizid][eBizLock] = true;
+				BizData[bizid][eBizLock] = 0;
 			}
 			else
 			{
@@ -22328,7 +22328,7 @@ CMD:wejdz(playerid)
             //BIZNESY
             for(new i=0;i<MAX_BIZNES;i++)
 			{
-				if(BizData[i][eBizLock] == false)
+				if(BizData[i][eBizLock] == 0)
 				{
 					WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"",BizData[i][epLocal]);
 					//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
