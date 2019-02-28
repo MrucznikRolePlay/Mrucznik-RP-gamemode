@@ -4054,7 +4054,7 @@ stock IsAAdministrator(playerid)
 	return 0;
 }
 
-WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", local)
+WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", local, gametext[]="")
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
@@ -4080,12 +4080,87 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
             ResetPlayerWeapons(playerid);
 		}
+		if(local == PLOCAL_ORG_BONEHEAD)
+		{
+			new muzik[128];
+            GetSVarString("muzyka_bonehead", muzik, 128);
+            PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
+		}
+		if(local == PLOCAL_INNE_BANK && x == 1462.395751)//DLA BANKU LS
+		{
+			sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
+			sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
+			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
+			sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
 		
+		}
+		if(local == PLOCAL_INNE_BANK && x == 2302.7798)//DLA BANKU W PC
+		{
+			sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
+			sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
+			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
+			sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");
+		}
+		if(local == PLOCAL_FRAC_DMV && x == 1479.9545)
+		{
+			if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
+            {
+                if(wywalzdmv[playerid] == 0)
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Urz¹d Miasta w Los Santos Wita! <<<<");
+                    SendClientMessage(playerid, COLOR_WHITE, "-> Cennik znajduje siê zaraz za rogiem, po prawej stronie.");
+                    SendClientMessage(playerid, COLOR_WHITE, "-> Znajdujesz siê na najwy¿szym poziomie, winda znajduje siê w holu g³ównym");
+                    SendClientMessage(playerid, COLOR_WHITE, "-> Okienka dla patentów znajduj¹ siê po lewej i prawej stronie w holu pierwszym");
+					SendClientMessage(playerid, COLOR_WHITE, "-> [Obecny interior urzêdu powsta³ w listopadzie 2018 roku, za inicjatyw¹ Satius & Arkam & Simeone]");
+                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencje! <<<<");
+					
+					
+                    if(PlayerInfo[playerid][pMember] != FRAC_LSPD // Nie jest PD
+					&& PlayerInfo[playerid][pMember] != FRAC_FBI // Nie jest FBI
+					&& PlayerInfo[playerid][pMember] != FRAC_BOR
+					&& PlayerInfo[playerid][pLider] == 0 // Nie jest liderem
+					&& GetPlayerOrg(playerid) == 0)//Nie jest cz³onkiem ORG
+                    {
+                        SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
+                        SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
+                        SendClientMessage(playerid, COLOR_WHITE, "Dopiero teraz dostrzegasz czerwon¹ tabliczkê informuj¹c¹ o zakazie");
+                        SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
+                        SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
+                        SetPVarInt(playerid, "mozeUsunacBronie", 1);
+                        ResetPlayerWeapons(playerid);
+                    }
+                }
+                else
+                {
+                    SendClientMessage(playerid, COLOR_RED, "Zosta³eœ wyrzucony z Urzêdu przez agentów USSS, spróbuj póŸniej.");
+					SendClientMessage(playerid, COLOR_WHITE, "[Czas wyrzucenia: 10 minut]");
+                }
+            }
+            else
+            {
+
+				SendClientMessage(playerid,COLOR_RED,"|_________________Godziny pracy Urzêdu_________________|");
+				SendClientMessage(playerid,COLOR_WHITE,"                   {ADFF2F}§Poniedzia³ek - Pi¹tek:");
+				SendClientMessage(playerid,COLOR_WHITE,"                          Od 18:00 do 19:00");
+				SendClientMessage(playerid,COLOR_WHITE,"");
+				SendClientMessage(playerid,COLOR_RED,"             **********************************************");
+				SendClientMessage(playerid,COLOR_WHITE,"                  {DDA0DD}§Sobota- Niedziela");
+				SendClientMessage(playerid,COLOR_WHITE,"                          Od 15:00 do 16:00");
+				SendClientMessage(playerid,COLOR_WHITE,"");
+				SendClientMessage(playerid,COLOR_RED,"|____________>>> Urz¹d Miasta Los Santos <<<____________|");
+            }
+		
+		}
+		
+		//Komunikaty funkcji:
 		if(strlen(komunikat) > 0)
 		{
-			GameTextForPlayer(playerid, komunikat, 5000, 1);
+			SendClientMessage(playerid, -1, komunikat);
 		}
-	
+		if(strlen(gametext) > 0)
+		{
+			GameTextForPlayer(playerid, gametext, 5000, 1);
+		}
 		PlayerInfo[playerid][pLocal] = local;
 		SprawdzMuzyke(playerid);
 		SetPlayerPosEx(playerid, x2, y2, z2);
@@ -12669,9 +12744,14 @@ stock EndRunPlayer(playerid, wartosc)
 }
 stock SprawdzMuzyke(playerid) 
 {
-	if(muzykaON[11] == 1 && GetPLocal(playerid) == PLOCAL_FRAC_DMV)
+	if(muzykaON[11] == 1 && PlayerInfo[playerid][pLocal] == PLOCAL_FRAC_DMV)
 	{
 		PlayAudioStreamForPlayer(playerid, muzykaURL[11][muzykaString]);
+	}
+	if(muzykaON[2] == 1 && PlayerInfo[playerid][pLocal] == PLOCAL_FRAC_FBI)
+	{
+	
+	
 	}
 	return 1;
 }

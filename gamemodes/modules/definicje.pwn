@@ -46,7 +46,7 @@
 #define OSTATNIE_ZGLOSZENIASASP 10
 
 //BIZNESY
-#define MAX_BIZNES 84
+#define MAX_BIZNES 87
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
 #define MRP_PREM_HOURS    15      //Ilosc godzin potrzebnych do przegrania
@@ -214,12 +214,12 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 //=======[FRAKCJE]===========
 #define PLOCAL_FRAC_DMV 108
-#define PLOCAL_FRAC_FBI 255
-#define PLOCAL_FRAC_LSPD 254
+#define PLOCAL_FRAC_FBI 212
+#define PLOCAL_FRAC_LSPD 210
 #define PLOCAL_FRAC_LSMC 253
 
 //======[RODZINNE]==========
-
+#define PLOCAL_ORG_BONEHEAD 240
 
 //======[INNE]=============
 #define PLOCAL_INNE_BANK 103

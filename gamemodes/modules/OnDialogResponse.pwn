@@ -17457,6 +17457,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(muzykaON[11] == 1)
 						{
+							muzykaON[11] =0;
 							foreach(Player, i)
 							{
 								if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
@@ -17469,11 +17470,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						else
 						{
 							format(string, sizeof(string), "%s", muzykaURL[11]);
+							muzykaON[11] = 1;
 							foreach(Player, i)
 							{
 								PlayAudioStreamForPlayer(i, string);
 							}
-							sendTipMessage(playerid, "w³¹czy³eœ muzykê"); 
+							sendTipMessage(playerid, "W³¹czy³eœ muzykê"); 
 						}
 					}
 				}
