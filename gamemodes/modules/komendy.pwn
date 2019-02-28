@@ -21615,7 +21615,7 @@ CMD:wejdz(playerid)
 		WejdzInt(playerid, -2111.5686,-443.9720,38.7344, -1443.0554,-581.1879,1055.0472, 3.5, 0, 4, "Witamy na Dirt Truck!", PLOCAL_DEFAULT, "");//Dirt Truck 
 		WejdzInt(playerid, 1555.0505, -1675.6409, 16.2821, -1693.1406,890.4065,-52.3141, 3.5, 0, 1, "", PLOCAL_FRAC_LSPD, "~w~Witamy na Komisariacie");//Komisariat w Los Santos
 		WejdzInt(playerid, 292.85711669922, -1530.8516845703, 13.818398475647, 322.0553894043, 303.41961669922, 999.1484375, 5.0, 5, 0, "", PLOCAL_DEFAULT, "~w~Witamy w biurze Lowcow Nagrod");//Biuro ³owców
-		WejdzInt(playerid, 315.4501953125, -1501.822265625, 13.820824623108, ,319.72470092773, -1548.3374023438, 13.845289230347, 5.0, 0,0, "", PLOCAL_DEFAULT, "~w~Witamy w Kancelarii Prawniczej");//Kancelaria Prawnicza (Mrucznik Tower)
+		WejdzInt(playerid, 315.4501953125, -1501.822265625, 13.820824623108, 319.72470092773, -1548.3374023438, 13.845289230347, 5.0, 0, 0, "", PLOCAL_DEFAULT, "~w~Witamy w Kancelarii Prawniczej");//Kancelaria Prawnicza (Mrucznik Tower)
 		WejdzInt(playerid, 330.6893,-1513.0613,35.8672, 301.29656982422, -1515.7513427734, 13.809589385986, 5.0, 0, 0, "", PLOCAL_DEFAULT, "~w~Witamy w Biurowcu.");//Wejœcie do Mrucznik Tower
 		WejdzInt(playerid, 2254.8652,-1334.2078,23.9922, 1964.1326904297, -350.83026123047, 1092.9454345703, 5.0, 3, 0, "", PLOCAL_DEFAULT, "~w~Szczesc boze");//Koœció³ LS
 		WejdzInt(playerid, 695.07702636719,-499.34088134766,16.3359375, 703.78033447266,-497.16967773438,23.36548614502, 5.0, 0, 35, "Poziom -1 chwilowo zablokowany! Przepraszamy za utrudnienia", PLOCAL_DEFAULT, "~w~Witamy w Radzie Miasteczka Dillimore");//Rada miasta Dillimore
