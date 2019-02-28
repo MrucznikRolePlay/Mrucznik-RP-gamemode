@@ -14526,6 +14526,7 @@ CMD:bizlock(playerid)
 }
 CMD:bizmoneydebug(playerid)
 {
+	new string[128];
 	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES && PlayerInfo[playerid][pAdmin] == 5000)
 	{
 	/*    new string[128];
