@@ -47,7 +47,7 @@ enum eBizData {
     eBizVw,
     eBizMoney,
 	epLocal,
-	bool:eBizLock=true
+	//bool:eBizLock=true
 };
 //"NAZWA BIZNESU" X,Y,Z XW, YW, ZW, INT, VW, Pieni¹¿ki jakie zarabiamy
 new BizData[MAX_BIZNES][eBizData] = {
