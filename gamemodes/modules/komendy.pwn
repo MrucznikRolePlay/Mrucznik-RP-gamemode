@@ -22338,7 +22338,7 @@ CMD:drzwi(playerid)
 				}
 				else
 				{
-					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Otwórz Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
+					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Zamknij Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
 				}
 			}
 			else

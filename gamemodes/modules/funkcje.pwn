@@ -4101,6 +4101,26 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 			sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");
 		}
+		if(local == PLOCAL_FRAC_FBI)
+		{
+			if(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pMember] != 2)
+			{
+				if(doorFBIStatus == 1)
+				{
+					SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
+					return 1;
+				}
+				if(doorFBIStatus == 0)
+				{
+					SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Biurowiec FBI w Los Santos Wita! <<<<");
+					SendClientMessage(playerid, COLOR_WHITE, "-> Recepcja znajduje siê po twojej lewej stronie");
+					SendClientMessage(playerid, COLOR_WHITE, "-> Wejœcie do wiêzienia stanowego na wprost"); 
+					SendClientMessage(playerid, COLOR_WHITE, "-> Winda znajduje siê za recepcj¹" 
+					SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Federal Bureau of Investigation <<<<");
+				}
+			
+			}
+		}
 		if(local == PLOCAL_FRAC_DMV && x == 1479.9545)
 		{
 			if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
@@ -4134,6 +4154,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
                 {
                     SendClientMessage(playerid, COLOR_RED, "Zosta³eœ wyrzucony z Urzêdu przez agentów USSS, spróbuj póŸniej.");
 					SendClientMessage(playerid, COLOR_WHITE, "[Czas wyrzucenia: 10 minut]");
+					return 1;
                 }
             }
             else
@@ -4148,6 +4169,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 				SendClientMessage(playerid,COLOR_WHITE,"                          Od 15:00 do 16:00");
 				SendClientMessage(playerid,COLOR_WHITE,"");
 				SendClientMessage(playerid,COLOR_RED,"|____________>>> Urz¹d Miasta Los Santos <<<____________|");
+				return 1;
             }
 		
 		}

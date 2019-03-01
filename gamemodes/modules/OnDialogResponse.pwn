@@ -17247,7 +17247,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					if(PlayerInfo[playerid][pMember] == 11)
+					if(PlayerInfo[playerid][pMember] == FRAC_GOV)
 					{
 						if(dmv == 0)
 						{
@@ -17263,6 +17263,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					
 					}
+					if(PlayerInfo[playerid][pMember] == FRAC_FBI)
+					{
+						if(doorFBIStatus == 0)
+						{
+							doorFBIStatus = 1;
+							format(string, sizeof(string), "|____________Biurowiec FBI otwarty przez %s_____________|", GetNick(playerid, true));
+							SendClientMessageToAll(COLOR_FBI, string);
+						
+						}
+						else
+						{
+							doorFBIStatus = 0;
+							format(string, sizeof(string), "|____________Biurowiec FBI otwarty przez %s_____________|", GetNick(playerid, true));
+							SendClientMessageToAll(COLOR_FBI, string);
+						}
+					}
+					
 				}
 				case 1:
 				{
@@ -17270,7 +17287,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					ShowPlayerDialogEx(playerid, 1015, DIALOG_STYLE_INPUT, "Mrucznik RP", "WprowadŸ poni¿ej link do stream'a .pls", "Akceptuj", "Odrzuæ"); 
+					//ShowPlayerDialogEx(playerid, 1015, DIALOG_STYLE_INPUT, "Mrucznik RP", "WprowadŸ poni¿ej link do stream'a .pls", "Akceptuj", "Odrzuæ");
+					SendClientMessage(playerid, COLOR_RED, "Ta funkcja dostêpna bêdzie ju¿ niebawem!"); 
 				}
 				case 3:
 				{
@@ -17333,6 +17351,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
 					{
 						sendTipMessageEx(playerid, COLOR_NEWS, string);
+						return 1;
 					}
 				}
 			}
