@@ -22250,15 +22250,18 @@ CMD:wejdz(playerid)
 			//BIZNESY
             for(new i=0;i<MAX_BIZNES;i++)
 			{
-				if(BizOpenStatus[i] == 1)
+				if(IsPlayerInRangeOfPoint(playerid, 5.0, BizData[i][eBizWejX], BizData[i][eBizWejY], BizData[i][eBizWejZ]))
 				{
-					WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"",BizData[i][epLocal]);
-					//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
-				}
-				else
-				{
-					sendTipMessage(playerid, "Ten biznes jest zamkniêty! Nie mo¿esz do niego // Nie masz wytrycha"); 
-					return 1;
+					if(BizOpenStatus[i] == 1)
+					{
+						WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"",BizData[i][epLocal]);
+						//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
+					}
+					else
+					{
+						sendTipMessage(playerid, "Ten biznes jest zamkniêty! Nie mo¿esz do niego // Nie masz wytrycha"); 
+						return 1;
+					}
 				}
 			}
 
