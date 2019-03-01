@@ -12,6 +12,7 @@ new VehicleIDChanges[MAX_PLAYERS];
 new VehicleIDChangeTime[MAX_PLAYERS];
 
 new acstr[128];
+new BizOpenStatus[MAX_BIZNES] = 0;
 
 new Float:czitX;
 new Float:czitY;
@@ -77,8 +78,6 @@ new bramaAlarmu[4];
 
 //Basen Tsunami
 new poolStatus = 0;// 0 = zamkniêty; 1 = otwarty;
-new musicPoolStatus = 0;
-new wybralStacje=0;
 new onePoolPrice = 50000;
 new twoPoolPrice = 75000;
 new threePoolPrice = 100000;
