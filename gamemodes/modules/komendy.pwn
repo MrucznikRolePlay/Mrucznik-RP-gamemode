@@ -14491,13 +14491,13 @@ CMD:bizlock(playerid)
 	{
 		new bizid = PlayerInfo[playerid][pPbiskey];
 		new string[128];
-		if(BizData[bizid][eBizLock] == 0)
+		if(BizOpenStatus[bizid] == 0)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 5.0, BizData[bizid][eBizWejX], BizData[bizid][eBizWejY], BizData[bizid][eBizWejZ]))
 			{
-				format(string, sizeof(string), "%s otwiera biznes %s", GetNick(playerid, true), BizData[bizid][eBizName]);
+				format(string, sizeof(string), "%s przekrêca kluczyk i otwiera biznes %s", GetNick(playerid, true), BizData[bizid][eBizName]);
 				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				BizData[bizid][eBizLock] = 1;
+				BizOpenStatus[bizid] = 1;
 			}
 			else
 			{
@@ -14508,9 +14508,9 @@ CMD:bizlock(playerid)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 5.0, BizData[bizid][eBizWejX], BizData[bizid][eBizWejY], BizData[bizid][eBizWejZ]))
 			{
-				format(string, sizeof(string), "%s zamyka biznes %s", GetNick(playerid, true), BizData[bizid][eBizName]);
+				format(string, sizeof(string), "%s przekrêca kluczyk i zamyka biznes %s", GetNick(playerid, true), BizData[bizid][eBizName]);
 				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				BizData[bizid][eBizLock] = 0;
+				BizOpenStatus[bizid] = 0;
 			}
 			else
 			{
@@ -14521,15 +14521,13 @@ CMD:bizlock(playerid)
 	}
 	else
 	{
-		sendErrorMessage(playerid, "Nie masz w³asnego biznesu!"); 
+		sendErrorMessage(playerid, "Nie masz w³asnego biznesu! ~ Zakup go w Wydziale Planowania."); 
 	}
 	return 1;
 }
 CMD:bizmoneydebug(playerid)
 {
-	new string[128];
-	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES && PlayerInfo[playerid][pAdmin] == 5000)
-	{
+	
 	/*    new string[128];
 		new bizid = PlayerInfo[playerid][pPbiskey];
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
@@ -14537,84 +14535,9 @@ CMD:bizmoneydebug(playerid)
 		SendClientMessage(playerid, COLOR_WHITE, string);
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "|________________________|");
 		DajKase(playerid, BizData[bizid][eBizMoney]);*/
-		new losuj = random(10);
-		new bizid = PlayerInfo[playerid][pPbiskey];
-		if(losuj == 1 || losuj == 2 || losuj == 3)//Max kwota
-		{
-			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
-			format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
-			SendClientMessage(playerid,COLOR_WHITE, string); 
-			format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]);
-			SendClientMessage(playerid,COLOR_WHITE, string);
-			SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ maksimum"); 
-			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-			DajKase(playerid,BizData[bizid][eBizMoney]);
-		}
-		if(losuj == 4 || losuj == 5 || losuj == 6 || losuj == 7)//Po³owiczny zysk
-		{
-			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
-			format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
-			SendClientMessage(playerid,COLOR_WHITE, string); 
-			format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]/2);
-			SendClientMessage(playerid,COLOR_WHITE, string);
-			SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ po³owê"); 
-			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-			DajKase(playerid,BizData[bizid][eBizMoney]/2);
-		}
-		if(losuj == 8 || losuj == 9)//minimalna strata
-		{
-			new kwotaStraty = 0-(BizData[bizid][eBizMoney]/2);
-			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
-			format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
-			SendClientMessage(playerid,COLOR_WHITE, string); 
-			format(string, sizeof(string), "  Strata z biznesu: $%d", kwotaStraty);
-			SendClientMessage(playerid,COLOR_WHITE, string);
-			SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}minimalne straty"); 
-			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-			if(GetPlayerMoney(playerid) >= kwotaStraty)
-			{
-				ZabierzKase(playerid,kwotaStraty);
-			}
-			else
-			{
-				if(PlayerInfo[playerid][pAccount] >= kwotaStraty)
-				{
-					PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-kwotaStraty;
-				}
-				else
-				{
-					sendTipMessageEx(playerid,COLOR_RED, "Twoje d³ugi rosn¹! Twój biznes przynosi kolejne straty"); 
-				}
-			}
-		
-		}
-		if(losuj == 10)//Du¿a strata
-		{
-			
-			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
-			format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
-			SendClientMessage(playerid,COLOR_WHITE, string); 
-			format(string, sizeof(string), "  Strata z biznesu: $%d", BizData[bizid][eBizMoney]);
-			SendClientMessage(playerid,COLOR_WHITE, string);
-			SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}du¿e straty"); 
-			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-			if(GetPlayerMoney(playerid) >= BizData[bizid][eBizMoney])
-			{
-				ZabierzKase(playerid,BizData[bizid][eBizMoney]);
-			}
-			else
-			{
-				if(PlayerInfo[playerid][pAccount] >= BizData[bizid][eBizMoney])
-				{
-					PlayerInfo[playerid][pAccount] = PlayerInfo[playerid][pAccount]-BizData[bizid][eBizMoney];
-				}
-				else
-				{
-					sendTipMessageEx(playerid,COLOR_RED, "Twoje d³ugi rosn¹! Twój biznes przynosi kolejne straty"); 
-				}
-			}
-		
-		}
+	if(PlayerInfo[playerid][pAdmin] > 5000)
+	{
+		GiveRandomMoneyBiz(playerid);	
 	}
 	return 1;
 }
@@ -22325,21 +22248,20 @@ CMD:wejdz(playerid)
             Wejdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
             
-            //BIZNESY
+			//BIZNESY
             for(new i=0;i<MAX_BIZNES;i++)
 			{
-				if(BizData[i][eBizLock] == 1)
+				if(BizOpenStatus[i] == 1)
 				{
 					WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"",BizData[i][epLocal]);
 					//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
 				}
 				else
 				{
-					sendTipMessageEx(playerid, COLOR_P@, "Ten biznes jest zamkniêty!");
-					sendTipMessage(playerid, "Je¿eli jesteœ w³aœcicielem wpisz /bizlock");
+					sendTipMessage(playerid, "Ten biznes jest zamkniêty! Nie mo¿esz do niego // Nie masz wytrycha"); 
+					return 1;
 				}
 			}
-			//BIZNESY END
 
             for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
             {
