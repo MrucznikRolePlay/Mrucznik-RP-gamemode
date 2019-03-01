@@ -4115,7 +4115,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 					SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Biurowiec FBI w Los Santos Wita! <<<<");
 					SendClientMessage(playerid, COLOR_WHITE, "-> Recepcja znajduje siê po twojej lewej stronie");
 					SendClientMessage(playerid, COLOR_WHITE, "-> Wejœcie do wiêzienia stanowego na wprost"); 
-					SendClientMessage(playerid, COLOR_WHITE, "-> Winda znajduje siê za recepcj¹" 
+					SendClientMessage(playerid, COLOR_WHITE, "-> Winda znajduje siê za recepcj¹");
 					SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Federal Bureau of Investigation <<<<");
 				}
 			
