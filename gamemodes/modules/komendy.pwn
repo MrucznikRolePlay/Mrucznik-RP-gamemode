@@ -21653,7 +21653,7 @@ CMD:wejdz(playerid)
 		WejdzInt(playerid, 1585.2,-2286.6,13.7, 1573.5999755859,-2286.3999023438,-75, 3.5, 0,0, "", PLOCAL_DEFAULT, "Bezpieczne loty!"); //Lotnisko LS - Wejsæie g³ówne
 		WejdzInt(playerid, 1462.395751,-1012.391174,26.843799, 1462.2887,-1008.2450,27.1099, 3.5, 0, 2, "", PLOCAL_INNE_BANK, "~w~Witamy w ~y~Verte ~g~Bank ~b~Los Santos");//Bank 0Verte
 		WejdzInt(playerid, 2302.7798,-15.9637,26.4844, 2305.688964,-16.088100,26.749599, 3.5, 0, 2, "", PLOCAL_INNE_BANK, "~w~Witamy w ~y~Verte ~g~Bank ~b~Palomino Creek");//Bank PC
-		WejdzInt(playerid, 1479.9545,-1771.5039,15.3266, 1450.6495,-1772.9926,76.5013, 3.5, 0, 50, "", PLOCAL_FRAC_DMV, "w~~b~Witamy w ratuszu~n~ By Satius");//Urz¹d Miasta LS 
+		WejdzInt(playerid, 1479.9545,-1771.5039,15.3266, 1450.6495,-1772.9926,76.5013, 5.5, 0, 50, "", PLOCAL_FRAC_DMV, "~w~Witamy w ratuszu~n~ By ~r~Satius");//Urz¹d Miasta LS 
 		WejdzInt(playerid, 2269.6848, -75.5530, 27.1525, 2318.7566, -85.3065, 41.7866, 3.5, 0, 1, "", PLOCAL_FRAC_DMV, "~w~~b~Witamy w Urzedzie Miasta PC~n~ by abram01");//Urz¹d Miasta PC
 		WejdzInt(playerid, -2111.5686,-443.9720,38.7344, -1443.0554,-581.1879,1055.0472, 3.5, 0, 4, "Witamy na Dirt Truck!", PLOCAL_DEFAULT, "");//Dirt Truck 
 		WejdzInt(playerid, 1555.0505, -1675.6409, 16.2821, -1693.1406,890.4065,-52.3141, 3.5, 0, 1, "", PLOCAL_FRAC_LSPD, "~w~Witamy na Komisariacie");//Komisariat w Los Santos
@@ -22340,6 +22340,10 @@ CMD:drzwi(playerid)
 				{
 					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Zamknij Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
 				}
+			}
+			else if(PlayerInfo[playerid][pMember] == FRAC_FBI && PlayerInfo[playerid][pRank] >= 4)
+			{
+				ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "[Otwórz/Zamknij] Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
 			}
 			else
 			{
@@ -34002,7 +34006,7 @@ CMD:wywaldmv(playerid, params[])
 					    {
                             GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
-							format(string, sizeof(string), "* %s wywala z dmv %s.", sendername, giveplayer);
+							format(string, sizeof(string), "* %s szybkim ruchem ³apie %s i chwytem transportowym wywala go.", sendername, giveplayer);
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							format(string, sizeof(string), "* Zosta³eœ wywalony z DMV przez %s na 10 minut.", sendername);
 							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
@@ -34026,7 +34030,7 @@ CMD:wywaldmv(playerid, params[])
 	    }
 	    else
 	    {
-	        sendErrorMessage(playerid, "Nie jesteœ z GSA !");
+	        sendErrorMessage(playerid, "Nie jesteœ z USSS !");
 	    }
 	}
 	return 1;
@@ -34067,7 +34071,7 @@ CMD:tazer(playerid, params[])
 		}
 		else
 		{
-			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z LSPD/FBI/SASD/GSA lub nie jesteœ na s³u¿bie!");
+			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z LSPD/FBI/SASD/USSS lub nie jesteœ na s³u¿bie!");
 			return 1;
 		}
 	}

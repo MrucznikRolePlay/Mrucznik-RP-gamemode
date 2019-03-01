@@ -17317,6 +17317,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessage(playerid, "W³¹czy³eœ muzykê"); 
 						}
 					}
+					if(PlayerInfo[playerid][pMember] == FRAC_FBI)
+					{
+						if(muzykaON[FRAC_FBI] == 1)
+						{
+							muzykaON[FRAC_FBI] = 0;
+							foreach(Player, i)
+							{
+								if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_FBI)
+								{
+									StopAudioStreamForPlayer(i);
+								}
+							}
+						}
+						else
+						{
+							format(string, sizeof(string), "%s", muzykaURL[FRAC_FBI]);
+							muzykaON[FRAC_FBI] = 1;
+							foreach(Player, i)
+							{
+								PlayAudioStreamForPlayer(i, string);
+							}
+							sendTipMessage(playerid, "Muzyka zosta³a w³¹czona w biurowcu");
+						}
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Twoja organizacja nie ma tej funkcji"); 
+					}
 				}
 				case 4:
 				{
@@ -17326,6 +17354,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						format(string, sizeof(string), "%s: Urz¹d Miasta Los Santos otwarty! Zapraszamy po dowody osobiste i licencje", GetNick(playerid, true));
 						SendClientMessageToAll(COLOR_YELLOW, string);
 					
+					}
+					if(PlayerInfo[playerid][pMember] == FRAC_FBI)
+					{
+						SendClientMessageToAll(COLOR_WHITE, "|_________ Wiadomoœæ Federal Bureau of Invastigation _________|");
+						format(string, sizeof(string), "%s: Biurowiec FBI otwarty! Zapraszamy wszelkich interesantów po informacje.", GetNick(playerid, true));
+						SendClientMessageToAll(COLOR_FBI, string);
 					}
 					else
 					{
@@ -17341,7 +17375,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[128];
-			if(PlayerInfo[playerid][pMember] == 11)
+			if(PlayerInfo[playerid][pMember] == FRAC_GOV)
 			{
 				format(string, sizeof(string), "%s mówi przez g³oœniki urzêdu", GetNick(playerid, true));
 				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -17350,10 +17384,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
 					{
-						sendTipMessageEx(playerid, COLOR_NEWS, string);
+						sendTipMessageEx(i, COLOR_NEWS, string);
 						return 1;
 					}
 				}
+			}
+			if(PlayerInfo[playerid][pMember] == FRAC_FBI)
+			{
+				format(string, sizeof(string), "%s mówi przez g³oœniki biurowca.", GetNick(playerid, true));
+				ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				format(string, sizeof(string), "**G³oœniki biurowca [%s]** %s", GetNick(playerid, true), inputtext);
+				foreach(Player, i)
+				{
+					if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
+					{
+						sendTipMessageEx(i, COLOR_NEWS, string);
+						return 1;
+					}
+				}
+			
 			}
 			return 1;
 		}

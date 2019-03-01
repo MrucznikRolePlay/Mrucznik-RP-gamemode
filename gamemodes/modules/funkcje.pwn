@@ -4105,12 +4105,12 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		{
 			if(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pMember] != 2)
 			{
-				if(doorFBIStatus == 1)
+				if(doorFBIStatus == 0)
 				{
 					SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
 					return 1;
 				}
-				if(doorFBIStatus == 0)
+				if(doorFBIStatus == 1)
 				{
 					SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Biurowiec FBI w Los Santos Wita! <<<<");
 					SendClientMessage(playerid, COLOR_WHITE, "-> Recepcja znajduje siê po twojej lewej stronie");
