@@ -12780,10 +12780,10 @@ stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, t
 stock GiveRandomMoneyBiz(playerid)
 {
 	new string[128];
+	new losuj = random(10);
+	new bizid = PlayerInfo[playerid][pPbiskey];
 	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES)
 	{
-		new losuj = random(10);
-		new bizid = PlayerInfo[playerid][pPbiskey];
 		if(PlayerInfo[playerid][pDonateRank] > 2)
 		{
 			if(losuj == 1 || losuj == 2 || losuj == 3)//Max kwota
@@ -12953,7 +12953,7 @@ stock GiveRandomMoneyBiz(playerid)
 	else
 	{
 		SendClientMessage(playerid,COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
-		format(string, sizeof(string), "Brak posiadanego biznesu!", BizData[bizid][eBizName]);
+		format(string, sizeof(string), "Brak posiadanego biznesu!");
 		SendClientMessage(playerid, COLOR_WHITE, string); 
 		SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 	}
