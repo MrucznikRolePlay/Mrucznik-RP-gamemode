@@ -14554,7 +14554,8 @@ CMD:bizinfo(playerid)
 				{
 				    new bizowner[64];
 					bizowner = Biz_Owner(i);
-					new bizLocation[64] = CheckBizLocation(i);
+					new bizLocation[64];
+					CheckBizLocation(i);
         			if(strfind(bizowner, "mru_konta", true)>=0)
 					{
 					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\tBrak (biznes na sprzeda¿)\nPremia PayDay:\t%d$\n Lokalizacja: %s", i, BizData[i][eBizName],BizData[i][eBizMoney], bizLocation);
