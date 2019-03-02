@@ -4227,7 +4227,7 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 
 		PlayerInfo[playerid][pLocal] = local;
 		SetPlayerTime(playerid, ServerTime, 0); 
-		SetPlayerWeather(playerdi, 2);
+		SetPlayerWeather(playerid, 2);
 		SetPlayerPosEx(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, 0);
 		SetPlayerInterior(playerid, 0);
@@ -12811,45 +12811,41 @@ stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, t
 stock CheckBizLocation(bizid)
 {
 	new bizLocation[64];
-	for(new i=0;i<MAX_BIZNES;i++)
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_LS)
 	{
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_LS)
-		{
-			format(bizLocation, sizeof(bizLocation), "Los Santos");
-		}
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_DILL)
-		{
-			format(bizLocation, sizeof(bizLocation), "Dillimore");
-		}
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_PC)
-		{
-			format(bizLocation, sizeof(bizLocation), "Palomino Creek");
-		}
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_MONT)
-		{
-			format(bizLocation, sizeof(bizLocation), "Montgomery");
-		}
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_BB)
-		{
-			format(bizLocation, sizeof(bizLocation), "Blueberry");
-		}
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_LV)
-		{
-			format(bizLocation, sizeof(bizLocation), "Las Venturas");
-		}
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_SF)
-		{
-			format(bizLocation, sizeof(bizLocation), "San Fierro");
-		}
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_BS)
-		{
-			format(bizLocation, sizeof(bizLocation), "Bay Side");
-		}
-		if(BizData[i][eBizLocation] == BIZ_LOCATION_UNKNOW)
-		{
-			format(bizLocation, sizeof(bizLocation), "Nie znane");
-		}
-		
+		format(bizLocation, sizeof(bizLocation), "Los Santos");
+	}
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_DILL)
+	{
+		format(bizLocation, sizeof(bizLocation), "Dillimore");
+	}
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_PC)
+	{
+		format(bizLocation, sizeof(bizLocation), "Palomino Creek");
+	}
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_MONT)
+	{
+		format(bizLocation, sizeof(bizLocation), "Montgomery");
+	}
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_BB)
+	{
+		format(bizLocation, sizeof(bizLocation), "Blueberry");
+	}
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_LV)
+	{
+		format(bizLocation, sizeof(bizLocation), "Las Venturas");
+	}
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_SF)
+	{
+		format(bizLocation, sizeof(bizLocation), "San Fierro");
+	}
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_BS)
+	{
+		format(bizLocation, sizeof(bizLocation), "Bay Side");
+	}
+	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_UNKNOW)
+	{
+		format(bizLocation, sizeof(bizLocation), "Nie znane");
 	}
 	return bizLocation;
 }

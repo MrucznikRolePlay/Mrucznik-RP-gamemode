@@ -50,7 +50,6 @@ enum eBizData {
 	eBizLock,
 	eBizLocation
 };
-//"NAZWA BIZNESU" X,Y,Z XW, YW, ZW, INT, VW, Pieni¹¿ki jakie zarabiamy
 new BizData[MAX_BIZNES][eBizData] = {
     {"BIZNES TESTOWY", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0, 255, 0, BIZ_LOCATION_UNKNOW},//0
     {"Roboi's Temple Food Mart", 1315.2620,-898.5724,39.5781, -31.1390,-91.3650,1003.5469, 18, 0, 3000,255, 0, BIZ_LOCATION_LS},//1
