@@ -89,7 +89,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    new kasa = GetPVarInt(playerid, "Mats-kasa");
         new giveplayerid = GetPVarInt(playerid, "Mats-id");
         new moneys = GetPVarInt(playerid, "Mats-mats");
-        new string[128];
+		new firstValue = PlayerInfo[playerid][pMats];
+        new string[256];
 		if(!response)
 		{
 		    SetPVarInt(playerid, "OKupMats", 0);
@@ -122,7 +123,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SetPVarInt(playerid, "Mats-kasa", 0);
         	SetPVarInt(playerid, "Mats-id", 0);
         	SetPVarInt(playerid, "Mats-mats", 0);
-			format(string, sizeof(string), "%s kupil od %s materialy (ilosc %d) za %d$.", GetNick(playerid), GetNick(giveplayerid), moneys, kasa);
+			format(string, sizeof(string), "%s kupil od %s materialy (Kupil: %d || Poprzednio: %d || Cena: %d)", GetNick(playerid), GetNick(giveplayerid), moneys, firstValue, kasa);
 			PayLog(string);
 		}
 		else
@@ -9840,16 +9841,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
 		        new string[256];
+				new firstValue = Dom[dom][hS_mats];
 		        if(strval(inputtext) >= 1 && strval(inputtext) <= Dom[dom][hS_mats])
 		        {
 		            Dom[dom][hS_mats] -= strval(inputtext);
+					new newValue = Dom[dom][hS_mats];
 					dini_IntSet(string, "S_mats", Dom[dom][hS_mats]);
 		            PlayerInfo[playerid][pMats] += strval(inputtext);
 		            format(string, sizeof(string), "Wyj¹³eœ z sejfu %d materia³ów. Jest w nim teraz %d materia³ów.", strval(inputtext), Dom[dom][hS_mats]);
 		            SendClientMessage(playerid, COLOR_P@, string);
 		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 		            ZapiszDom(PlayerInfo[playerid][pDom]);
-					format(string, sizeof(string), "Gracz %s wyjal %d mats z sejfu, poprzedni stan %d, nowy stan: ", GetNick(playerid), strval(inputtext));
+					format(string, sizeof(string), "Gracz %s wyjal %d mats z sejfu, poprzedni stan %d, nowy stan: ", GetNick(playerid), strval(inputtext), firstValue, newValue);
 					PayLog(string);
 		        }
 		        else
@@ -17269,14 +17272,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							doorFBIStatus = 1;
 							format(string, sizeof(string), "|____________Biurowiec FBI otwarty przez %s_____________|", GetNick(playerid, true));
-							SendClientMessageToAll(COLOR_FBI, string);
+							SendClientMessageToAll(COLOR_LFBI, string);
 						
 						}
 						else
 						{
 							doorFBIStatus = 0;
-							format(string, sizeof(string), "|____________Biurowiec FBI otwarty przez %s_____________|", GetNick(playerid, true));
-							SendClientMessageToAll(COLOR_FBI, string);
+							format(string, sizeof(string), "|____________Biurowiec FBI zamkniêty przez %s_____________|", GetNick(playerid, true));
+							SendClientMessageToAll(COLOR_LFBI, string);
 						}
 					}
 					
@@ -17336,7 +17339,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							muzykaON[FRAC_FBI] = 1;
 							foreach(Player, i)
 							{
-								PlayAudioStreamForPlayer(i, string);
+								if(PlayerInfo[i][pLocal] ==PLOCAL_FRAC_FBI)
+								{
+									PlayAudioStreamForPlayer(i, string);
+								}
 							}
 							sendTipMessage(playerid, "Muzyka zosta³a w³¹czona w biurowcu");
 						}
@@ -17344,6 +17350,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					else
 					{
 						sendErrorMessage(playerid, "Twoja organizacja nie ma tej funkcji"); 
+						return 1;
 					}
 				}
 				case 4:
@@ -17357,13 +17364,56 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					if(PlayerInfo[playerid][pMember] == FRAC_FBI)
 					{
-						SendClientMessageToAll(COLOR_WHITE, "|_________ Wiadomoœæ Federal Bureau of Invastigation _________|");
+						SendClientMessageToAll(COLOR_WHITE, "|_________ Wiadomoœæ Federal Bureau of Investigation _________|");
 						format(string, sizeof(string), "%s: Biurowiec FBI otwarty! Zapraszamy wszelkich interesantów po informacje.", GetNick(playerid, true));
-						SendClientMessageToAll(COLOR_FBI, string);
+						SendClientMessageToAll(COLOR_LFBI, string);
 					}
 					else
 					{
 						sendTipMessage(playerid, "Twoja organizacja nie ma tej funkcji");
+						return 1;
+					}
+				}
+				case 5:
+				{
+					if(PlayerInfo[playerid][pMember] == FRAC_FBI || PlayerInfo[playerid][pMember] == FRAC_GOV)
+					{
+						ShowPlayerDialogEx(playerid, 1015, DIALOG_STYLE_LIST, "Mrucznik RP", "Poranek\nDzieñ\nPó³mrok\nNoc", "Akceptuj", "Odrzuæ");
+					}
+					else
+					{
+						sendErrorMessage(playerid, "twoja organizacja nie ma tej funkcji"); 
+						return 1;
+					}
+				}
+				case 6:
+				{
+					if(PlayerInfo[playerid][pMember] == FRAC_GOV)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == FRAC_GOV)
+							{
+								SetPlayerWeather(i, 3);
+							}
+						}
+						sendTipMessage(playerid, "Zresetowano pogodê"); 
+					}
+					if(PlayerInfo[playerid][pMember] == FRAC_GOV)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == FRAC_GOV)
+							{
+								SetPlayerWeather(i, 3);
+							}
+						}
+						sendTipMessage(playerid, "Zresetowano pogodê"); 
+					}
+					else
+					{
+						sendTipMessage(playerid, "Twoja organizacja nie ma tej funkcji!"); 
+						return 1;
 					}
 				}
 			}
@@ -17384,7 +17434,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
 					{
-						sendTipMessageEx(i, COLOR_NEWS, string);
+						sendTipMessageEx(i, COLOR_P@, string);
 						return 1;
 					}
 				}
@@ -17396,13 +17446,124 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "**G³oœniki biurowca [%s]** %s", GetNick(playerid, true), inputtext);
 				foreach(Player, i)
 				{
-					if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
+					if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_FBI)
 					{
-						sendTipMessageEx(i, COLOR_NEWS, string);
+						sendTipMessageEx(i, COLOR_P@, string);
 						return 1;
 					}
 				}
 			
+			}
+			return 1;
+		}
+	}
+	else if(dialogid == 1015)
+	{
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerInfo[playerid][pMember] == FRAC_GOV)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
+							{
+								SetPlayerTime(i, 6, 0);
+							}
+						}
+						CzaswIntku[FRAC_GOV] = 6;
+					}
+					if(PlayerInfo[playerid][pMember] == FRAC_FBI)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_FBI)
+							{
+								SetPlayerTime(i, 6, 0);
+							}
+						}
+						CzaswIntku[FRAC_FBI] = 6;
+					}
+				}
+				case 1:
+				{
+					if(PlayerInfo[playerid][pMember] == FRAC_GOV)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
+							{
+								SetPlayerTime(i, 9, 0);
+							}
+						}
+						CzaswIntku[FRAC_GOV] = 9;
+					}
+					if(PlayerInfo[playerid][pMember] == FRAC_FBI)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_FBI)
+							{
+								SetPlayerTime(i, 9, 0);
+							}
+						}
+						CzaswIntku[FRAC_FBI] = 9;
+					}
+				
+				}
+				case 2:
+				{
+					if(PlayerInfo[playerid][pMember] == FRAC_GOV)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
+							{
+								SetPlayerTime(i, 20, 0);
+							}
+						}
+						CzaswIntku[FRAC_GOV] = 20;
+					}
+					if(PlayerInfo[playerid][pMember] == FRAC_FBI)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_FBI)
+							{
+								SetPlayerTime(i, 20, 0);
+							}
+						}
+						CzaswIntku[FRAC_FBI] = 20;
+					}
+				}
+				case 3:
+				{
+					if(PlayerInfo[playerid][pMember] == FRAC_GOV)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_DMV)
+							{
+								SetPlayerTime(i, 0, 0);
+							}
+						}
+						CzaswIntku[FRAC_GOV] = 0;
+					}
+					if(PlayerInfo[playerid][pMember] == FRAC_FBI)
+					{
+						foreach(Player, i)
+						{
+							if(PlayerInfo[i][pLocal] == PLOCAL_FRAC_FBI)
+							{
+								SetPlayerTime(i, 0, 0);
+							}
+						}
+						CzaswIntku[FRAC_FBI] = 0;
+					}
+				}
 			}
 			return 1;
 		}

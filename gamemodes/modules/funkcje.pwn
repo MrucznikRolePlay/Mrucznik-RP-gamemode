@@ -4101,25 +4101,21 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 			sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 			sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");
 		}
-		if(local == PLOCAL_FRAC_FBI)
-		{
-			if(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pMember] != 2)
+		if(local == PLOCAL_FRAC_FBI && PlayerInfo[playerid][pMember] >=3)
+		{	
+			if(doorFBIStatus == 0)
 			{
-				if(doorFBIStatus == 0)
-				{
-					SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
-					return 1;
-				}
-				if(doorFBIStatus == 1)
-				{
-					SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Biurowiec FBI w Los Santos Wita! <<<<");
-					SendClientMessage(playerid, COLOR_WHITE, "-> Recepcja znajduje siê po twojej lewej stronie");
-					SendClientMessage(playerid, COLOR_WHITE, "-> Wejœcie do wiêzienia stanowego na wprost"); 
-					SendClientMessage(playerid, COLOR_WHITE, "-> Winda znajduje siê za recepcj¹");
-					SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Federal Bureau of Investigation <<<<");
-				}
-			
+				SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
+				return 1;
 			}
+			if(doorFBIStatus == 1)
+			{
+				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Biurowiec FBI w Los Santos Wita! <<<<");
+				SendClientMessage(playerid, COLOR_WHITE, "-> Recepcja znajduje siê po twojej lewej stronie");
+				SendClientMessage(playerid, COLOR_WHITE, "-> Wejœcie do wiêzienia stanowego na wprost"); 
+				SendClientMessage(playerid, COLOR_WHITE, "-> Winda znajduje siê za recepcj¹");
+				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Federal Bureau of Investigation <<<<");
+			}	
 		}
 		if(local == PLOCAL_FRAC_DMV && x == 1479.9545)
 		{
@@ -4173,6 +4169,14 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             }
 		
 		}
+		if(local == PLOCAL_FRAC_DMV)
+		{
+			SetPlayerTime(playerid, CzaswIntku[FRAC_GOV], 0);
+		}
+		if(local == PLOCAL_FRAC_FBI)
+		{
+			SetPlayerTime(playerid, CzaswIntku[FRAC_FBI], 0);
+		}
 		
 		//Komunikaty funkcji:
 		if(strlen(komunikat) > 0)
@@ -4187,6 +4191,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		SprawdzMuzyke(playerid);
 		SetPlayerPosEx(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, vw);
+		SetPlayerWeather(playerid, 3);
 		SetPlayerInterior(playerid, interior);
 		Wchodzenie(playerid);
 	}
@@ -4221,7 +4226,8 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		}
 
 		PlayerInfo[playerid][pLocal] = local;
-		
+		SetPlayerTime(playerid, ServerTime, 0); 
+		SetPlayerWeather(playerdi, 2);
 		SetPlayerPosEx(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, 0);
 		SetPlayerInterior(playerid, 0);
@@ -5128,7 +5134,6 @@ ShowStats(playerid,targetid)
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
 		new coordsstring[256];
-		new bizid = PlayerInfo[targetid][pPbiskey];
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
@@ -5140,10 +5145,14 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD3,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s] Skin ID:[%d]",kills,deaths,costlevel,exp,expamount,wanted,f2text, skin);
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
+		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Si³a:[%d] Biznes:[%s] MaxDochódBiz[%d]", PlayerInfo[playerid][pStrong], BizData[bizid][eBizName], BizData[bizid][eBizMoney]);
-		SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
+		if(PlayerInfo[targetid][pPbiskey] >= 0 && PlayerInfo[targetid][pPbiskey] <= MAX_BIZNES)
+		{
+			new bizid = PlayerInfo[targetid][pPbiskey];
+			format(coordsstring, sizeof(coordsstring), "Si³a:[%d] Biznes:[%s] MaxDochódBiz[%d]", BizData[bizid][eBizName], BizData[bizid][eBizMoney]);
+			SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
+		}
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
 			format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
@@ -12799,6 +12808,51 @@ stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, t
 
 	return 1;
 }
+stock CheckBizLocation(bizid)
+{
+	new bizLocation[64];
+	for(new i=0;i<MAX_BIZNES;i++)
+	{
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_LS)
+		{
+			format(bizLocation, sizeof(bizLocation), "Los Santos");
+		}
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_DILL)
+		{
+			format(bizLocation, sizeof(bizLocation), "Dillimore");
+		}
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_PC)
+		{
+			format(bizLocation, sizeof(bizLocation), "Palomino Creek");
+		}
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_MONT)
+		{
+			format(bizLocation, sizeof(bizLocation), "Montgomery");
+		}
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_BB)
+		{
+			format(bizLocation, sizeof(bizLocation), "Blueberry");
+		}
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_LV)
+		{
+			format(bizLocation, sizeof(bizLocation), "Las Venturas");
+		}
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_SF)
+		{
+			format(bizLocation, sizeof(bizLocation), "San Fierro");
+		}
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_BS)
+		{
+			format(bizLocation, sizeof(bizLocation), "Bay Side");
+		}
+		if(BizData[i][eBizLocation] == BIZ_LOCATION_UNKNOW)
+		{
+			format(bizLocation, sizeof(bizLocation), "Nie znane");
+		}
+		
+	}
+	return bizLocation;
+}
 stock GiveRandomMoneyBiz(playerid)
 {
 	new string[128];
@@ -12898,7 +12952,6 @@ stock GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid,COLOR_WHITE, string); 
 				format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]);
 				SendClientMessage(playerid,COLOR_WHITE, string);
-				SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
 				SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ maksimum"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 				DajKase(playerid,BizData[bizid][eBizMoney]);
@@ -12910,7 +12963,6 @@ stock GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid,COLOR_WHITE, string); 
 				format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]/2);
 				SendClientMessage(playerid,COLOR_WHITE, string);
-				SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
 				SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ po³owê"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 				DajKase(playerid,BizData[bizid][eBizMoney]/2);
@@ -12923,7 +12975,6 @@ stock GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid,COLOR_WHITE, string); 
 				format(string, sizeof(string), "  Strata z biznesu: $%d", kwotaStraty);
 				SendClientMessage(playerid,COLOR_WHITE, string);
-				SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}minimalne straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 				if(GetPlayerMoney(playerid) >= kwotaStraty)
@@ -12951,7 +13002,6 @@ stock GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid,COLOR_WHITE, string); 
 				format(string, sizeof(string), "  Strata z biznesu: $%d", BizData[bizid][eBizMoney]);
 				SendClientMessage(playerid,COLOR_WHITE, string);
-				SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}du¿e straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 				if(GetPlayerMoney(playerid) >= BizData[bizid][eBizMoney])

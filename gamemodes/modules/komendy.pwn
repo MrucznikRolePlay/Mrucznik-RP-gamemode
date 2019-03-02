@@ -14554,14 +14554,15 @@ CMD:bizinfo(playerid)
 				{
 				    new bizowner[64];
 					bizowner = Biz_Owner(i);
+					CheckLocationBiz(i);
         			if(strfind(bizowner, "mru_konta", true)>=0)
 					{
-					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\tBrak (biznes na sprzeda¿)\nPremia PayDay:\t%d$", i, BizData[i][eBizName],BizData[i][eBizMoney]);
+					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\tBrak (biznes na sprzeda¿)\nPremia PayDay:\t%d$\n Lokalizacja: %s", i, BizData[i][eBizName],BizData[i][eBizMoney], bizLocation);
 	        			ShowPlayerDialogEx(playerid, 9900, DIALOG_STYLE_MSGBOX, "Informacje o biznesie", string, "Zamknij", "");
 					}
 					else
 					{
-					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\t%s\nPremia PayDay:\t%d$", i, BizData[i][eBizName],bizowner,BizData[i][eBizMoney]);
+					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\t%s\nPremia PayDay:\t%d$\nLokalizacja: %s", i, BizData[i][eBizName],bizowner,BizData[i][eBizMoney], bizLocation);
 	        			ShowPlayerDialogEx(playerid, 9900, DIALOG_STYLE_MSGBOX, "Informacje o biznesie", string, "Zamknij", "");
 	 				}
                 }
@@ -15924,7 +15925,6 @@ CMD:sprzedajauto(playerid, params[])
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedawaæ pojazdu bo masz 1 lvl");
 
         IDAuta[playa] = VehicleUID[lVeh][vUID];
-
  		if(!ProxDetectorS(10.0, playerid, playa) && Spectate[playa] != INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 		if(!(cena > 0 && cena < 900000001)) return sendErrorMessage(playerid, "Cena od 1 do 900 000 000$ !");
 
@@ -22334,16 +22334,16 @@ CMD:drzwi(playerid)
 			{
 				if(dmv == 0)
 				{
-					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Otwórz Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
+					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Otwórz Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat\nUstaw godzinê\nReset pogody", "Akceptuj", "Odrzuæ"); 
 				}
 				else
 				{
-					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Zamknij Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
+					ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "Zamknij Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat\nUstaw godzinê\nReset pogody", "Akceptuj", "Odrzuæ"); 
 				}
 			}
 			else if(PlayerInfo[playerid][pMember] == FRAC_FBI && PlayerInfo[playerid][pRank] >= 4)
 			{
-				ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "[Otwórz/Zamknij] Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat", "Akceptuj", "Odrzuæ"); 
+				ShowPlayerDialogEx(playerid, 1013, DIALOG_STYLE_LIST, "MRP - System Drzwi", "[Otwórz/Zamknij] Urz¹d\nG³oœniki\nAudioStream\n[ON/OFF] Muzyka\nWyœlij Komunikat\nUstaw godzinê\nReset pogody", "Akceptuj", "Odrzuæ"); 
 			}
 			else
 			{
