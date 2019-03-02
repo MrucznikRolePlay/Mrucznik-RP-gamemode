@@ -14554,15 +14554,15 @@ CMD:bizinfo(playerid)
 				{
 				    new bizowner[64];
 					bizowner = Biz_Owner(i);
-					new bizNameLocation[64] = CheckBizLocation(i);
+					CheckBizLocation(i);
         			if(strfind(bizowner, "mru_konta", true)>=0)
 					{
-					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\tBrak (biznes na sprzeda¿)\nPremia PayDay:\t%d$\n Lokalizacja: %s", i, BizData[i][eBizName],BizData[i][eBizMoney], bizNameLocation);
+					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\tBrak (biznes na sprzeda¿)\nPremia PayDay:\t%d$\n Lokalizacja: %s", i, BizData[i][eBizName],BizData[i][eBizMoney], bizLocation);
 	        			ShowPlayerDialogEx(playerid, 9900, DIALOG_STYLE_MSGBOX, "Informacje o biznesie", string, "Zamknij", "");
 					}
 					else
 					{
-					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\t%s\nPremia PayDay:\t%d$\nLokalizacja: %s", i, BizData[i][eBizName],bizowner,BizData[i][eBizMoney], bizNameLocation);
+					    format(string, sizeof(string), "{ff704d}NIERUCHOMOŒÆ [0%d]\n{fbfe00}[%s]\n\n{ffffff}W³aœciciel:\t%s\nPremia PayDay:\t%d$\nLokalizacja: %s", i, BizData[i][eBizName],bizowner,BizData[i][eBizMoney], bizLocation);
 	        			ShowPlayerDialogEx(playerid, 9900, DIALOG_STYLE_MSGBOX, "Informacje o biznesie", string, "Zamknij", "");
 	 				}
                 }
