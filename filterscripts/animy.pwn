@@ -4941,9 +4941,11 @@ ApplyAnimation(playerid,"PED","DAM_stomach_frmLT",4.1,0,1,1,1,1,1); //edited by 
 }else if(animationplayed == 90) {
 ApplyAnimation(playerid,"PED","DAM_stomach_frmRT",4.1,0,1,1,1,1,1); //edited by erik019
 }else if(animationplayed == 91) {
-ApplyAnimation(playerid,"PED","DOOR_LHinge_O",4.1,0,1,1,1,1,1); //edited by erik019
+//ApplyAnimation(playerid,"PED","DOOR_LHinge_O",4.1,0,1,1,1,1,1); 
+SendClientMessage(playerid, -1, "Ta animacja jest zablokowana!"); 
 }else if(animationplayed == 92) {
-ApplyAnimation(playerid,"PED","DOOR_RHinge_O",4.1,0,1,1,1,1,1); //edited by erik019
+//ApplyAnimation(playerid,"PED","DOOR_RHinge_O",4.1,0,1,1,1,1,1);
+SendClientMessage(playerid, -1, "Ta animacja jest zablokowana!");  
 }else if(animationplayed == 93) {
 ApplyAnimation(playerid,"PED","DrivebyL_L",4.1,0,1,1,1,1,1); //edited by erik019
 }else if(animationplayed == 94) {
