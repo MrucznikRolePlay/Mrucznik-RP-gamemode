@@ -24,7 +24,7 @@ stock DiscordConnectInit()
 stock SendDiscordMessage(channel, message[])
 {
 new dest[128];
-utf8encode(dest, Odpolszcz(message));
+utf8encode(dest, message);
 
 switch(channel)
 	{
@@ -50,7 +50,7 @@ return 1;
 stock SendDiscordFracMessage(fractionid, message[])
 {
 new dest[128];
-utf8encode(dest, Odpolszcz(message));
+utf8encode(dest, message);
 DCC_SendChannelMessage(g_FracChannel[fractionid], dest);
 
 return 1;
@@ -58,7 +58,7 @@ return 1;
 stock SendDiscordOrgMessage(orgid, message[])
 {
 new dest[128];
-utf8encode(dest, Odpolszcz(message));
+utf8encode(dest, message);
 DCC_SendChannelMessage(g_OrgChannel[orgid], dest);
 
 return 1;
@@ -69,37 +69,36 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 	DCC_IsUserBot(author, IsBot);
 	if(channel == g_AdminChannelId && IsBot == false)
 	{
-		new user_name[32 + 1],str[128];
+		new user_name[32 + 1],str[128], dest[128];
 		DCC_GetUserName(author, user_name);
 		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
-		//format(str, sizeof(str), "%s", Odpolszcz(str));
-		//utf8decode(dest, str);
-		SendAdminMessage(0xFFC0CB, str);
+		utf8decode(dest, str);
+		SendAdminMessage(0xFFC0CB, dest);
 		
 		return 1;
 	}
 	if(channel == g_OrgChannel[1] && IsBot == false)
 	{
-		new user_name[32 + 1],str[128];
+		new user_name[32 + 1],str[128], dest[128];
 		DCC_GetUserName(author, user_name);
 		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
-		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, str);
+		utf8decode(dest, str);
+		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, dest);
 		return 1;
 	}
 	for(new i=0;i<MAX_ORG;i++)
 	{
 	if(channel == g_FracChannel[i] && IsBot == false) 
 	{
-		new user_name[32 + 1],str[128];
+		new user_name[32 + 1],str[128],dest[128];
 		DCC_GetUserName(author, user_name);
 		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
-		//format(str, sizeof(str), "%s", Odpolszcz(str));
-		//utf8decode(dest, str);
+		utf8decode(dest, str);
 		if(0 < i <= 4 || i == 11 || i == 7 || i == 17)
 		{
-		SendRadioMessage(i, TEAM_BLUE_COLOR, str);
+		SendRadioMessage(i, TEAM_BLUE_COLOR, dest);
 		}
-		else SendFamilyMessage(i, TEAM_AZTECAS_COLOR, str);
+		else SendFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
 		
 		return 1;
 	}
