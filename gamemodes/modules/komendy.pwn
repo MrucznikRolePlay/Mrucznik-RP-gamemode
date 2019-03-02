@@ -14554,7 +14554,6 @@ CMD:bizinfo(playerid)
 				{
 				    new bizowner[64];
 					bizowner = Biz_Owner(i);
-					new bizLocation[64];
 					CheckBizLocation(i);
         			if(strfind(bizowner, "mru_konta", true)>=0)
 					{
@@ -23466,20 +23465,12 @@ CMD:ulecz(playerid, params[])
 				{
 					if(Dom[dom][hApteczka] != 0)
 					{
-						new Float:HP;
-						GetPlayerHealth(playerid, HP);
-						if(HP >= 100.0)
-						{
-						    sendTipMessageEx(playerid, COLOR_GRAD2, "Nie potrzebujesz apteczki.");
-						    return 1;
-						}
-						else
-						{
-						    SetPlayerHealth(playerid, 100.0);
-						    //Dom[dom][hMagazyn]--;
-                            sendTipMessageEx(playerid, COLOR_GRAD2, "Skorzysta³eœ z domowej apteczki.");
-                            return 1;
-						}
+						SetPlayerHealth(playerid, 100);
+						format(string, sizeof(string), "%s wyci¹ga apteczkê domow¹, banda¿uje rany, za¿ywa mru-apap. Czuje siê lepiej.", GetNick(playerid, true));
+						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+						format(string, sizeof(string), "---[%s u¿y³ apteczki domowej]---", GetNick(playerid, true));
+						SendAdminMessage(COLOR_GREEN, string);
+						GameTextForPlayer(playerid, "~r~Czujesz sie lepiej ~n~ dzieki mrupap", 6000, 1);	
 					}
 					else
 					{
@@ -23571,62 +23562,8 @@ CMD:ulecz(playerid, params[])
 	}
 	return 1;
 }
-CMD:domulecz(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		new dom = PlayerInfo[playerid][pDom];
-		new string[128];
-		new Float:zycie;
-		GetPlayerHealth(playerid, zycie);
-		if(Dom[dom][hApteczka] > 0)
-		{
-			if(zycie < 90)
-			{
-				/*if(Dom[dom][hUL_D] == 0)
-				{
-					sendTipMessage(playerid, "W³aœciciel domu zabroni³ Ci korzystaæ z dodatków!"); 
-					return 1;
-				}*/
-				if(PlayerInfo[playerid][pWynajem] != 0)
-				{
-					SetPlayerHealth(playerid, 100);
-					format(string, sizeof(string), "%s wyci¹ga apteczkê domow¹, banda¿uje rany, za¿ywa mru-apap. Czuje siê lepiej.", GetNick(playerid, true));
-					ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-					format(string, sizeof(string), "---[%s u¿y³ apteczki domowej]---", GetNick(playerid, true));
-					SendAdminMessage(COLOR_GREEN, string);
-					GameTextForPlayer(playerid, "~r~Czujesz sie lepiej ~n~ dzieki mrupap", 6000, 1);	
-				}
-				else if(PlayerInfo[playerid][pDom] != 0)
-				{
-					SetPlayerHealth(playerid, 100);
-					format(string, sizeof(string), "%s wyci¹ga apteczkê domow¹, banda¿uje rany, za¿ywa mru-apap. Czuje siê lepiej.", GetNick(playerid, true));
-					ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-					format(string, sizeof(string), "---[%s u¿y³ apteczki domowej]---", GetNick(playerid, true));
-					SendAdminMessage(COLOR_GREEN, string);
-					GameTextForPlayer(playerid, "~r~Czujesz sie lepiej ~n~ dzieki mrupap", 6000, 1);
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie posiadasz w³asnego domu"); 
-					return 1;
-				}
-			}
-			else
-			{
-				sendTipMessage(playerid, "Wygl¹dasz dobrze, po co Ci apteczka?"); 
-				return 1;
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "W tym domu nie ma apteczki!"); 
-			return 1;
-		}
-	}
 
-	return 1;
-}
+
 
 CMD:mole(playerid, params[])
 {
