@@ -2375,6 +2375,7 @@ ApplyAnimation(playerid,"CRIB","PED_Console_Win",4.1,0,1,1,1,1,1); //edited by e
 return 1;
 }
 if(strcmp(cmd, "/animjump", true) == 0) {
+/*
 tmp = strtok(cmdtext, idx);
 if(!strlen(tmp)) {
 SendClientMessage(playerid,0xFF0000FF,">Write /animjump [1-5]");
@@ -2382,9 +2383,10 @@ return 1;
 }
 animationplayed = strval(tmp);
 if(animationplayed < 1 || animationplayed > 5) {
-SendClientMessage(playerid,0xFF0000FF,">Write /animjump [1-5]");
+SendClientMessage(playerid,0xFF0000FF,">Write /animjump [1-5]");*/
+SendClientMessage(playerid, 0xFF0000FF, "Te animacje zostaly zablokowane"); 
 return 1;
-}
+}/*
 if(animationplayed == 1) {
 ApplyAnimation(playerid,"DAM_JUMP","DAM_Dive_Loop",4.1,0,1,1,1,1,1); //edited by erik019
 } else if(animationplayed == 2) {
@@ -2397,7 +2399,7 @@ ApplyAnimation(playerid,"DAM_JUMP","Jump_Roll",4.1,0,1,1,1,1,1); //edited by eri
 ApplyAnimation(playerid,"DAM_JUMP","SF_JumpWall",4.1,0,1,1,1,1,1); //edited by erik019
 }
 return 1;
-}
+}*/
 if(strcmp(cmd, "/animdance", true) == 0) {
 tmp = strtok(cmdtext, idx);
 if(!strlen(tmp)) {
@@ -4261,12 +4263,18 @@ ApplyAnimation(playerid,"SUNBATHE","SitnWait_out_W",4.1,0,1,1,1,1,1); //edited b
 }
 return 1;
 }
+/*
 if(strcmp(cmd, "/animswat", true) == 0) {
 tmp = strtok(cmdtext, idx);
 if(!strlen(tmp)) {
 SendClientMessage(playerid,0xFF0000FF,">Write /animswat [1-24]");
 return 1;
+}*/
+if(strcmp(cmd, "/animswat", true == 0) {
+SendClientMessage(playerid, 0xFF0000FF, "Te animacje zostaly zablokowane!"); 
+return 1;
 }
+/*
 animationplayed = strval(tmp);
 if(animationplayed < 1 || animationplayed > 24) {
 SendClientMessage(playerid,0xFF0000FF,">Write /animswat [1-24]");
@@ -4322,7 +4330,7 @@ ApplyAnimation(playerid,"SWAT","swt_wllshoot_out_L",4.1,0,1,1,1,1,1); //edited b
 ApplyAnimation(playerid,"SWAT","swt_wllshoot_out_R",4.1,0,1,1,1,1,1); //edited by erik019
 }
 return 1;
-}
+}*/
 if(strcmp(cmd, "/animsweet", true) == 0) {
 tmp = strtok(cmdtext, idx);
 if(!strlen(tmp)) {
@@ -4933,9 +4941,11 @@ ApplyAnimation(playerid,"PED","DAM_stomach_frmLT",4.1,0,1,1,1,1,1); //edited by 
 }else if(animationplayed == 90) {
 ApplyAnimation(playerid,"PED","DAM_stomach_frmRT",4.1,0,1,1,1,1,1); //edited by erik019
 }else if(animationplayed == 91) {
-ApplyAnimation(playerid,"PED","DOOR_LHinge_O",4.1,0,1,1,1,1,1); //edited by erik019
+//ApplyAnimation(playerid,"PED","DOOR_LHinge_O",4.1,0,1,1,1,1,1); 
+SendClientMessage(playerid, -1, "Ta animacja jest zablokowana!"); 
 }else if(animationplayed == 92) {
-ApplyAnimation(playerid,"PED","DOOR_RHinge_O",4.1,0,1,1,1,1,1); //edited by erik019
+//ApplyAnimation(playerid,"PED","DOOR_RHinge_O",4.1,0,1,1,1,1,1);
+SendClientMessage(playerid, -1, "Ta animacja jest zablokowana!");  
 }else if(animationplayed == 93) {
 ApplyAnimation(playerid,"PED","DrivebyL_L",4.1,0,1,1,1,1,1); //edited by erik019
 }else if(animationplayed == 94) {

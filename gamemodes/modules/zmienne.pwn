@@ -789,6 +789,7 @@ new noooc = 1;
 new adds = 1;
 new dmv;
 new doorFBIStatus=0;
+new CzaswIntku[MAX_FRAC] = 14;
 new drukarnia;
 new studiovic;
 new studiog;
