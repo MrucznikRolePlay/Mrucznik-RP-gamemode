@@ -12810,7 +12810,6 @@ stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, t
 }
 stock CheckBizLocation(bizid)
 {
-	new bizLocation[64];
 	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_LS)
 	{
 		format(bizLocation, sizeof(bizLocation), "Los Santos");
