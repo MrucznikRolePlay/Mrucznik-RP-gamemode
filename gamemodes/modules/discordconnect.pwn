@@ -23,7 +23,7 @@ stock DiscordConnectInit()
 }
 stock SendDiscordMessage(channel, message[])
 {
-new dest[128];
+new dest[512];
 utf8encode(dest, message);
 
 switch(channel)
@@ -49,7 +49,7 @@ return 1;
 
 stock SendDiscordFracMessage(fractionid, message[])
 {
-new dest[128];
+new dest[512];
 utf8encode(dest, message);
 DCC_SendChannelMessage(g_FracChannel[fractionid], dest);
 
@@ -57,7 +57,7 @@ return 1;
 }
 stock SendDiscordOrgMessage(orgid, message[])
 {
-new dest[128];
+new dest[512];
 utf8encode(dest, message);
 DCC_SendChannelMessage(g_OrgChannel[orgid], dest);
 
@@ -77,7 +77,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		
 		return 1;
 	}
-	if(channel == g_OrgChannel[1] && IsBot == false)
+	else if(channel == g_OrgChannel[1] && IsBot == false)
 	{
 		new user_name[32 + 1],str[128], dest[128];
 		DCC_GetUserName(author, user_name);
@@ -107,6 +107,6 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 	
 
 
-	return 1;
+	return 0;
 }
 
