@@ -13065,7 +13065,159 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	}
 	return 0;
 }
-
+stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0)
+{
+	if(!IsPlayerInAnyVehicle(playerid))
+	{
+		sendTipMessage(playerid, "Nie jesteœ w pojeŸdzie!"); 
+		return 1;
+	}
+	new pVehID = GetPlayerVehicleID(playerid);
+	new pSeatID = GetPlayerVehicleSeat(playerid);
+	if(IsPlayerInRangeOfPoint(playerid, RangePoint, wjedzX, wjedzY, wjedzZ))
+	{	
+		if(FracOwner == 0 && OrgOwner == 0)
+		{
+			if(strlen(MessageIN) >= 1)
+			{
+				sendTipMessage(playerid, MessageIN);
+			}
+			SetVehiclePos(pVehID, wyjedzX, wyjedzY, wyjedzZ);
+			SetVehicleVirtualWorld(pVehID, VW);
+			SetPlayerVirtualWorld(playerid, VW);
+			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			foreach(Player, i)
+			{
+				pSeatID = GetPlayerVehicleSeat(i);
+				if(IsPlayerInVehicle(i, pVehID)
+				{
+					SetPlayerVirtualWorld(i, VW);
+					PutPlayerInVehicle(i, pVehID, pSeatID);
+				}
+			}
+			return 1;
+		}
+		if(GetPlayerFraction(playerid) == FracOwner)
+		{
+			if(strlen(MessageIN) >= 1)
+			{
+				sendTipMessage(playerid, MessageIN);
+			}
+			SetVehiclePos(pVehID, wyjedzX, wyjedzY, wyjedzZ);
+			SetVehicleVirtualWorld(pVehID, VW);
+			SetPlayerVirtualWorld(playerid, VW);
+			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			foreach(Player, i)
+			{
+				pSeatID = GetPlayerVehicleSeat(i);
+				if(IsPlayerInVehicle(i, pVehID)
+				{
+					SetPlayerVirtualWorld(i, VW);
+					PutPlayerInVehicle(i, pVehID, pSeatID);
+				}
+			}
+		}
+		if(GetPlayerOrg(playerid) == OrgOwner)
+		{
+			if(strlen(MessageIN) >= 1)
+			{
+				sendTipMessage(playerid, MessageIN);
+			}
+			SetVehiclePos(pVehID, wyjedzX, wyjedzY, wyjedzZ);
+			SetVehicleVirtualWorld(pVehID, VW);
+			SetPlayerVirtualWorld(playerid, VW);
+			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			foreach(Player, i)
+			{
+				pSeatID = GetPlayerVehicleSeat(i);
+				if(IsPlayerInVehicle(i, pVehID)
+				{
+					SetPlayerVirtualWorld(i, VW);
+					PutPlayerInVehicle(i, pVehID, pSeatID);
+				}
+			}
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ!"); 
+			return 1;
+		}
+	}
+	else if(IsPlayerInRangeOfPoint(playerid, RangePoint, wyjedzX, wyjedzY, wyjedzZ))
+	{
+		if(FracOwner == 0 && OrgOwner == 0)
+		{
+			if(strlen(MessageOut) >= 1)
+			{
+				sendTipMessage(playerid, MessageOut);
+			}
+			SetVehiclePos(pVehID, wjedzX, wjedzY, wjedzZ);
+			SetVehicleVirtualWorld(pVehID, 0);
+			SetPlayerVirtualWorld(playerid, 0);
+			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			foreach(Player, i)
+			{
+				pSeatID = GetPlayerVehicleSeat(i);
+				if(IsPlayerInVehicle(i, pVehID)
+				{
+					SetPlayerVirtualWorld(i, 0);
+					PutPlayerInVehicle(i, pVehID, pSeatID);
+				}
+			}
+			return 1;
+		}
+		if(GetPlayerFraction(playerid) == FracOwner)
+		{
+			if(strlen(MessageOut) >= 1)
+			{
+				sendTipMessage(playerid, MessageOut);
+			}
+			SetVehiclePos(pVehID, wjedzX, wjedzY, wjedzZ);
+			SetVehicleVirtualWorld(pVehID, 0);
+			SetPlayerVirtualWorld(playerid, 0);
+			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			foreach(Player, i)
+			{
+				pSeatID = GetPlayerVehicleSeat(i);
+				if(IsPlayerInVehicle(i, pVehID)
+				{
+					SetPlayerVirtualWorld(i, 0);
+					PutPlayerInVehicle(i, pVehID, pSeatID);
+				}
+			}
+		}
+		if(GetPlayerOrg(playerid) == OrgOwner)
+		{
+			if(strlen(MessageOut) >= 1)
+			{
+				sendTipMessage(playerid, MessageOut);
+			}
+			SetVehiclePos(pVehID, wjedzX, wjedzY, wjedzZ);
+			SetVehicleVirtualWorld(pVehID, 0);
+			SetPlayerVirtualWorld(playerid, 0);
+			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			foreach(Player, i)
+			{
+				pSeatID = GetPlayerVehicleSeat(i);
+				if(IsPlayerInVehicle(i, pVehID)
+				{
+					SetPlayerVirtualWorld(i, 0);
+					PutPlayerInVehicle(i, pVehID, pSeatID);
+				}
+			}
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ!");
+			return 1;
+		}
+	}
+	else
+	{
+		sendTipMessageEx(playerid, COLOR_RED, "Nie jesteœ w miejscu, w którym mo¿na to wpisaæ"); 
+	}
+	return 1;
+}
 stock GetWeaponSlot(weapon)
 {
     new slot;

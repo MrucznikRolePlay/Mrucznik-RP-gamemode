@@ -40419,8 +40419,12 @@ if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania poz
 CMD:wjedz(playerid) return cmd_wyjedz(playerid);
 CMD:wyjedz(playerid)
 {
+	if(IsPlayerInAnyVehicle(playerid)
+	{
+		StworzWjedz(playerid, 1827.0527,-1539.3645,13.2089,1818.77222, -1536.09314, 13.11075, 3.0, 0, "Witamy w gara¿u!", "Wyjecha³eœ z gara¿u!", 7, 0)
+	}
 //====================[DLA USSS]======================================
-	if(GetPlayerFraction(playerid) == FRAC_BOR)
+	/*if(GetPlayerFraction(playerid) == FRAC_BOR)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, 3.0, 1827.0527,-1539.3645,13.2089))//Wjazdowa pozycja
 		{
@@ -40478,7 +40482,7 @@ CMD:wyjedz(playerid)
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Borowiku! Nie umiesz wchodzic drzwiami?", 4000, 3);
 			}
 		
-		}
+		}*/
 		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1753.2124,-1538.7153,9.1894))//WJAZD NA PARKING PODZIEMNY
 		{
 			if(IsPlayerInAnyVehicle(playerid))
