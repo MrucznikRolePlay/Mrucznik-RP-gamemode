@@ -13089,7 +13089,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, playerVehicleID)
+				if(IsPlayerInVehicle(i, playerVehicleID))
 				{
 					SetPlayerVirtualWorld(i, VW);
 					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
@@ -13110,7 +13110,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, playerVehicleID)
+				if(IsPlayerInVehicle(i, playerVehicleID))
 				{
 					SetPlayerVirtualWorld(i, VW);
 					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
@@ -13130,7 +13130,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, playerVehicleID)
+				if(IsPlayerInVehicle(i, playerVehicleID))
 				{
 					SetPlayerVirtualWorld(i, VW);
 					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
@@ -13158,7 +13158,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, playerVehicleID)
+				if(IsPlayerInVehicle(i, playerVehicleID))
 				{
 					SetPlayerVirtualWorld(i, 0);
 					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
@@ -13179,7 +13179,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, playerVehicleID)
+				if(IsPlayerInVehicle(i, playerVehicleID))
 				{
 					SetPlayerVirtualWorld(i, 0);
 					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
@@ -13199,7 +13199,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, playerVehicleID)
+				if(IsPlayerInVehicle(i, playerVehicleID))
 				{
 					SetPlayerVirtualWorld(i, 0);
 					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
