@@ -146,6 +146,18 @@ public OddajZycieTimer(playerid)
 	}
 	return 1;
 }
+forward JedzenieCooldown(playerid);
+public JedzenieCooldown(playerid)
+{
+	new timeSec[MAX_PLAYERS];
+	timeSec[playerid]++;
+	if(timeSec[playerid] == 2)
+	{
+		TimerJedzenie[playerid] = 0;
+		KillTimer(ZarcieCooldown[playerid]);
+	}
+	return 1;
+}
 forward BazaCheckOszust(playerid);
 public BazaCheckOszust(playerid)
 {

@@ -3601,22 +3601,22 @@ IsAtTheDMVWindows(playerid)
 }
 IsAtPlaceGetHP(playerid)
 {
-	if(IsPlayerInRangeOfPoint(playerid, 2.0, 1483.4926,-1816.1971,77.9512))//DMV
+	if(IsPlayerInRangeOfPoint(playerid, 0.5, 1483.4926,-1816.1971,77.9512))//DMV
 	{
 	
 		return 1;
 	}
-	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 2130.9885,-1787.2729,13.6544))//Pizza idle
+	else if(IsPlayerInRangeOfPoint(playerid, 0.5, 2130.9885,-1787.2729,13.6544))//Pizza idle
 	{
 	
 		return 1;
 	}
-	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 783.4033,-1020.2896,26.3594))//Red house hotel
+	else if(IsPlayerInRangeOfPoint(playerid, 0.5, 783.4033,-1020.2896,26.3594))//Red house hotel
 	{
 	
 		return 1;
 	}
-	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 737.7260,-1467.0419,22.5948))//Jetty
+	else if(IsPlayerInRangeOfPoint(playerid, 0.5, 737.7260,-1467.0419,22.5948))//Jetty
 	{
 	
 		return 1;

@@ -6492,13 +6492,21 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			{
 				if(GetPlayerHealth(playerid, health) <= 70)
 				{
-					
-					SetPlayerHealth(playerid, health+10);
-					ZabierzKase(playerid, 1000);
-					sendTipMessageEx(playerid, COLOR_RED, "Kupi³eœ jedzenie"); 
-					ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
-					GameTextForPlayer(playerid, "Om nom om", 5000, 1);
-					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
+					if(TimerJedzenie[playerid] == 0)
+					{
+						SetPlayerHealth(playerid, health+20);
+						ZabierzKase(playerid, 1000);
+						sendTipMessageEx(playerid, COLOR_RED, "Kupi³eœ jedzenie"); 
+						ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
+						GameTextForPlayer(playerid, "Om nom om", 5000, 1);
+						//SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
+						TimerJedzenie[playerid] = 1;
+						ZarcieCooldown[playerid] = SetTimerEx("JedzenieCooldown", 2500, true, "i", playerid);
+					}
+					else
+					{
+						sendTipMessage(playerid, "Odczekaj chwilê!"); 
+					}
 				}
 			}
 		}

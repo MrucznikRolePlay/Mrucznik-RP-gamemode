@@ -886,7 +886,8 @@ new BramaHA;
 new BramaHAS = 1;
 new BrF[8];
 new BrFS[8];
-
+new TimerJedzenie[MAX_PLAYERS];
+new ZarcieCooldown[MAX_PLAYERS] = 0;
 
 //nowe bramy
 
