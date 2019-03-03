@@ -6491,6 +6491,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			{
 				if(GetPlayerHealth(playerid, health) <= 70)
 				{
+					new Float:health;
 					SetPlayerHealth(playerid, health+10)
 					ZabierzKase(playerid, 1000);
 					sendTipMessageEx(playerid, COLOR_RED, "Kupi³eœ jedzenie"); 
