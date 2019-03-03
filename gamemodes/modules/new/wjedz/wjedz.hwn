@@ -22,24 +22,24 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-enum eWejscia
+enum eWjedz
 {
-	Float:w_x1,
-	Float:w_y1,
-	Float:w_z1,
-	Float:w_x2,
-	Float:w_y2,
-	Float:w_z2,
-	w_int1,
-	w_vw1,
-	w_int2,
-	w_vw2,
-	w_pLocal
+	Float:wj_X,
+	Float:wj_Y,
+	Float:wj_Z,
+	Float:wy_X,
+	Float:wy_Y,
+	Float:wy_Z,
+	wj_VW,
+	wj_PLOCAL,
+	pFracOwn,
+	pOrgOwn,
+	Float:RangeofPoint,
 };
-new	Float:wejscia[MAX_WEJSC][eWejscia];
+new	Float:wjazdy[MAX_WJEDZ][eWjedz];
 
 //-----------------<[ Zmienne: ]>-------------------
-new iloscwejsc;
+new valueWjedz;
 
 //------------------<[ Forwardy: ]>--------------------
 

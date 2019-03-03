@@ -36,6 +36,7 @@ new PlayerText:MSGBOXtd_Icon[MAX_PLAYERS];
 new Text:MSGBOXtd_Sign;
 new Text:MSGBOXtd_Ver;
 new Text:MSGBOXtd_Kubi;
+new PlayerText:textwjedz[MAX_PLAYERS];
 
 /*----------------------------------------- MessageBox END ---------------------------------------------------*/
 
@@ -293,6 +294,15 @@ LoadTextDraws(playerid)
     PlayerTextDrawUseBox(playerid, TextOferta1[playerid], 1);
     PlayerTextDrawBoxColor(playerid, TextOferta1[playerid], 926365495);
     PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
+	
+	textwjedz[playerid] = CreatePlayerTextDraw(playerid, 200.0, 250.0, "Odczekaj chwile\nPojazd przechodzi przez brame"); 
+	PlayerTextDrawFont(playerid, textwjedz[playerid], 1);
+	PlayerTextDrawColor(playerid, TextOferta1[playerid], -1);
+	PlayerTextDrawUseBox(playerid, textwjedz[playerid], 1);
+	PlayerTextDrawBoxColor(playerid, textwjedz[playerid], 926365495);
+	PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
+	
+	
     
 	return 1;
 }
