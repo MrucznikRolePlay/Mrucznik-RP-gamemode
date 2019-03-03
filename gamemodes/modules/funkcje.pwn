@@ -13072,7 +13072,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 		sendTipMessage(playerid, "Nie jesteú w pojeüdzie!"); 
 		return 1;
 	}
-	new pVehID = GetPlayerVehicleID(playerid);
+	new playerVehicleID = GetPlayerVehicleID(playerid);
 	new pSeatID = GetPlayerVehicleSeat(playerid);
 	if(IsPlayerInRangeOfPoint(playerid, RangePoint, wjedzX, wjedzY, wjedzZ))
 	{	
@@ -13082,17 +13082,17 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			{
 				sendTipMessage(playerid, MessageIN);
 			}
-			SetVehiclePos(pVehID, wyjedzX, wyjedzY, wyjedzZ);
-			SetVehicleVirtualWorld(pVehID, VW);
+			SetVehiclePos(playerVehicleID, wyjedzX, wyjedzY, wyjedzZ);
+			SetVehicleVirtualWorld(playerVehicleID, VW);
 			SetPlayerVirtualWorld(playerid, VW);
-			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, pVehID)
+				if(IsPlayerInVehicle(i, playerVehicleID)
 				{
 					SetPlayerVirtualWorld(i, VW);
-					PutPlayerInVehicle(i, pVehID, pSeatID);
+					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
 				}
 			}
 			return 1;
@@ -13103,17 +13103,17 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			{
 				sendTipMessage(playerid, MessageIN);
 			}
-			SetVehiclePos(pVehID, wyjedzX, wyjedzY, wyjedzZ);
-			SetVehicleVirtualWorld(pVehID, VW);
+			SetVehiclePos(playerVehicleID, wyjedzX, wyjedzY, wyjedzZ);
+			SetVehicleVirtualWorld(playerVehicleID, VW);
 			SetPlayerVirtualWorld(playerid, VW);
-			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, pVehID)
+				if(IsPlayerInVehicle(i, playerVehicleID)
 				{
 					SetPlayerVirtualWorld(i, VW);
-					PutPlayerInVehicle(i, pVehID, pSeatID);
+					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
 				}
 			}
 		}
@@ -13123,17 +13123,17 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			{
 				sendTipMessage(playerid, MessageIN);
 			}
-			SetVehiclePos(pVehID, wyjedzX, wyjedzY, wyjedzZ);
-			SetVehicleVirtualWorld(pVehID, VW);
+			SetVehiclePos(playerVehicleID, wyjedzX, wyjedzY, wyjedzZ);
+			SetVehicleVirtualWorld(playerVehicleID, VW);
 			SetPlayerVirtualWorld(playerid, VW);
-			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, pVehID)
+				if(IsPlayerInVehicle(i, playerVehicleID)
 				{
 					SetPlayerVirtualWorld(i, VW);
-					PutPlayerInVehicle(i, pVehID, pSeatID);
+					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
 				}
 			}
 		}
@@ -13151,17 +13151,17 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			{
 				sendTipMessage(playerid, MessageOut);
 			}
-			SetVehiclePos(pVehID, wjedzX, wjedzY, wjedzZ);
-			SetVehicleVirtualWorld(pVehID, 0);
+			SetVehiclePos(playerVehicleID, wjedzX, wjedzY, wjedzZ);
+			SetVehicleVirtualWorld(playerVehicleID, 0);
 			SetPlayerVirtualWorld(playerid, 0);
-			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, pVehID)
+				if(IsPlayerInVehicle(i, playerVehicleID)
 				{
 					SetPlayerVirtualWorld(i, 0);
-					PutPlayerInVehicle(i, pVehID, pSeatID);
+					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
 				}
 			}
 			return 1;
@@ -13172,17 +13172,17 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			{
 				sendTipMessage(playerid, MessageOut);
 			}
-			SetVehiclePos(pVehID, wjedzX, wjedzY, wjedzZ);
-			SetVehicleVirtualWorld(pVehID, 0);
+			SetVehiclePos(playerVehicleID, wjedzX, wjedzY, wjedzZ);
+			SetVehicleVirtualWorld(playerVehicleID, 0);
 			SetPlayerVirtualWorld(playerid, 0);
-			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, pVehID)
+				if(IsPlayerInVehicle(i, playerVehicleID)
 				{
 					SetPlayerVirtualWorld(i, 0);
-					PutPlayerInVehicle(i, pVehID, pSeatID);
+					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
 				}
 			}
 		}
@@ -13192,17 +13192,17 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 			{
 				sendTipMessage(playerid, MessageOut);
 			}
-			SetVehiclePos(pVehID, wjedzX, wjedzY, wjedzZ);
-			SetVehicleVirtualWorld(pVehID, 0);
+			SetVehiclePos(playerVehicleID, wjedzX, wjedzY, wjedzZ);
+			SetVehicleVirtualWorld(playerVehicleID, 0);
 			SetPlayerVirtualWorld(playerid, 0);
-			PutPlayerInVehicle(playerid, pVehID, pSeatID);
+			PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
 			foreach(Player, i)
 			{
 				pSeatID = GetPlayerVehicleSeat(i);
-				if(IsPlayerInVehicle(i, pVehID)
+				if(IsPlayerInVehicle(i, playerVehicleID)
 				{
 					SetPlayerVirtualWorld(i, 0);
-					PutPlayerInVehicle(i, pVehID, pSeatID);
+					PutPlayerInVehicle(i, playerVehicleID, pSeatID);
 				}
 			}
 		}

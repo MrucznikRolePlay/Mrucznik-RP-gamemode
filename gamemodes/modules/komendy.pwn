@@ -40482,7 +40482,7 @@ CMD:wyjedz(playerid)
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Borowiku! Nie umiesz wchodzic drzwiami?", 4000, 3);
 			}
 		
-		}*/
+		}
 		else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1753.2124,-1538.7153,9.1894))//WJAZD NA PARKING PODZIEMNY
 		{
 			if(IsPlayerInAnyVehicle(playerid))
@@ -40676,7 +40676,7 @@ CMD:wyjedz(playerid)
 	{
 		sendErrorMessage(playerid, "Nie jesteœ w organizacji, która ma parking podziemny!");
 	}
-
+*/
 	return 1;
 }
 
