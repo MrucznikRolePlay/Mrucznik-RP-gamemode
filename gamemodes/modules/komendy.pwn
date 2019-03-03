@@ -40419,9 +40419,9 @@ if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania poz
 CMD:wjedz(playerid) return cmd_wyjedz(playerid);
 CMD:wyjedz(playerid)
 {
-	if(IsPlayerInAnyVehicle(playerid)
+	if(IsPlayerInAnyVehicle(playerid))
 	{
-		StworzWjedz(playerid, 1827.0527,-1539.3645,13.2089,1818.77222, -1536.09314, 13.11075, 3.0, 0, "Witamy w gara¿u!", "Wyjecha³eœ z gara¿u!", 7, 0)
+		StworzWjedz(playerid, 1827.0527,-1539.3645,13.2089,1818.77222, -1536.09314, 13.11075, 3.0, 0, "Witamy w gara¿u!", "Wyjecha³eœ z gara¿u!", 7, 0);
 	}
 //====================[DLA USSS]======================================
 	/*if(GetPlayerFraction(playerid) == FRAC_BOR)
