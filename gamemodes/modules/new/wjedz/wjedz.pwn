@@ -233,12 +233,7 @@ stock SprawdzWjazdy(playerid)
 				SetPlayerPos(playerid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 				return 1;
 			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Jesteœ w nieodpowiednim miejscu!"); 
-		}
-		
+		}	
 	}
 	return 0;
 }
