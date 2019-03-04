@@ -2,11 +2,11 @@
 
 //----------------------------------------------<< Source >>-------------------------------------------------//
 //---------------------------------------[ Modu³: MODULE_NAME.pwn ]------------------------------------------//
-//Opis:
+//Opis: Nowa funkcja, pozwalaj¹ca dodawaæ wjazdy praktycznie jedn¹ linijk¹! Stworzona w oparciu o bramy/wejscia Mrucznika
 /*
 
 */
-//Adnotacje:
+//Adnotacje: by Simeone 04-03-2019
 /*
 
 */
@@ -196,7 +196,7 @@ stock SprawdzWjazdy(playerid)
 						{
 							pSeatID = GetPlayerVehicleSeat(i2);
 							SetPlayerVirtualWorld(i2, 0);
-							SetVehicleVirtualWorld(playerVehicleID, 0]);
+							SetVehicleVirtualWorld(playerVehicleID, 0);
 							SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 							PutPlayerInVehicle(i2, playerVehicleID, pSeatID);
 							PlayerInfo[i2][pLocal] = 255;
