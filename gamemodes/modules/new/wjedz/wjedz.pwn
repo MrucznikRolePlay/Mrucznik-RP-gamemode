@@ -87,7 +87,7 @@ stock SprawdzWjazdy(playerid)
 					PlayerInfo[playerid][pLocal] = wjazdy[i][wj_PLOCAL];
 					foreach(Player, i2)
 					{
-						if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) != 1)
+						if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) > 0)
 						{
 							pSeatID = GetPlayerVehicleSeat(i2);
 							SetPlayerVirtualWorld(i2, wjazdy[i][wj_VW]);
@@ -110,7 +110,7 @@ stock SprawdzWjazdy(playerid)
 						PlayerInfo[playerid][pLocal] = wjazdy[i][wj_PLOCAL];
 						foreach(Player, i2)
 						{
-							if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) != 1)
+							if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) > 0)
 							{
 								pSeatID = GetPlayerVehicleSeat(i2);
 								SetPlayerVirtualWorld(i2, wjazdy[i][wj_VW]);
@@ -138,7 +138,7 @@ stock SprawdzWjazdy(playerid)
 						PlayerInfo[playerid][pLocal] = wjazdy[i][wj_PLOCAL];
 						foreach(Player, i2)
 						{
-							if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) != 1)
+							if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) > 0)
 							{
 								pSeatID = GetPlayerVehicleSeat(i2);
 								SetPlayerVirtualWorld(i2, wjazdy[i][wj_VW]);
@@ -166,7 +166,7 @@ stock SprawdzWjazdy(playerid)
 						PlayerInfo[playerid][pLocal] = wjazdy[i][wj_PLOCAL];
 						foreach(Player, i2)
 						{
-							if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) != 1)
+							if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) > 0)
 							{
 								pSeatID = GetPlayerVehicleSeat(i2);
 								SetPlayerVirtualWorld(i2, wjazdy[i][wj_VW]);
@@ -207,7 +207,7 @@ stock SprawdzWjazdy(playerid)
 					PlayerInfo[playerid][pLocal] = 255;
 					foreach(Player, i2)
 					{
-						if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) != 1)
+						if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) > 0)
 						{
 							pSeatID = GetPlayerVehicleSeat(i2);
 							SetPlayerVirtualWorld(i2, 0);
@@ -229,7 +229,7 @@ stock SprawdzWjazdy(playerid)
 					PlayerInfo[playerid][pLocal] = 255;
 					foreach(Player, i2)
 					{
-						if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) != 1)
+						if(IsPlayerInVehicle(i2, playerVehicleID) && GetPlayerVehicleSeat(i2) > 0)
 						{
 							pSeatID = GetPlayerVehicleSeat(i2);
 							SetPlayerVirtualWorld(i2, 0);
