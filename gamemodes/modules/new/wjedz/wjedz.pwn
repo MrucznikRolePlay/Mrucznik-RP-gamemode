@@ -43,6 +43,8 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 	wjazdy[valueWjedz][pFracOwn] = FracOwner;
 	wjazdy[valueWjedz][pOrgOwn] = OrgOwner;
 	wjazdy[valueWjedz][RangeofPoint] = RangePoint;
+	wjazdy[valueWjedz][MessIN] = MessageIN;
+	wjazdy[valueWjedz][MessOut] = MessageOut;
 
 	CreateDynamicPickup(1239, 2, wjedzX, wjedzY, wjedzZ, 0, 0);
 	CreateDynamicPickup(1239, 2, wyjedzX, wyjedzY, wyjedzZ, VW, 0);
@@ -63,10 +65,10 @@ stock SprawdzWjazdy(playerid)
 			{
 				if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
 				{
-				/*	if(strlen(MessageIN) >= 1)
+					if(strlen(wjazdy[i][MessIN] > 1))
 					{
-						sendTipMessage(playerid, MessageIN);
-					}*/
+						sendTipMessage(playerid, wjazdy[i][MessIN]);
+					}
 					SetVehiclePos(playerVehicleID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
 					SetVehicleVirtualWorld(playerVehicleID, wjazdy[i][wj_VW]);
 					SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
@@ -90,6 +92,10 @@ stock SprawdzWjazdy(playerid)
 				{
 					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn])
 					{
+						if(strlen(wjazdy[i][MessIN] > 1))
+						{
+							sendTipMessage(playerid, wjazdy[i][MessIN]);
+						}
 						SetVehiclePos(playerVehicleID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
 						SetVehicleVirtualWorld(playerVehicleID, wjazdy[i][wj_VW]);
 						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
@@ -114,6 +120,10 @@ stock SprawdzWjazdy(playerid)
 				{
 					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn])
 					{
+						if(strlen(wjazdy[i][MessIN] > 1))
+						{
+							sendTipMessage(playerid, wjazdy[i][MessIN]);
+						}
 						SetVehiclePos(playerVehicleID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
 						SetVehicleVirtualWorld(playerVehicleID, wjazdy[i][wj_VW]);
 						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
@@ -139,6 +149,10 @@ stock SprawdzWjazdy(playerid)
 				{
 					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
 					{
+						if(strlen(wjazdy[i][MessIN] > 1))
+						{
+							sendTipMessage(playerid, wjazdy[i][MessIN]);
+						}
 						SetVehiclePos(playerVehicleID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
 						SetVehicleVirtualWorld(playerVehicleID, wjazdy[i][wj_VW]);
 						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
@@ -167,6 +181,10 @@ stock SprawdzWjazdy(playerid)
 				{
 					if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
 					{
+						if(strlen(wjazdy[i][MessOut] > 1))
+						{
+							sendTipMessage(playerid, wjazdy[i][MessOut]);
+						}
 						pSeatID = GetPlayerVehicleSeat(playerid);
 						SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 						SetVehicleVirtualWorld(playerVehicleID, 0);
@@ -186,6 +204,10 @@ stock SprawdzWjazdy(playerid)
 					}
 					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
 					{
+						if(strlen(wjazdy[i][MessOut] > 1))
+						{
+							sendTipMessage(playerid, wjazdy[i][MessOut]);
+						}
 						pSeatID = GetPlayerVehicleSeat(playerid);
 						SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 						SetVehicleVirtualWorld(playerVehicleID, 0);
