@@ -237,7 +237,6 @@ stock SprawdzWjazdy(playerid)
 		else
 		{
 			sendErrorMessage(playerid, "Jesteœ w nieodpowiednim miejscu!"); 
-			return 1;
 		}
 		
 	}
