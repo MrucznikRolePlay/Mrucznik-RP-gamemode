@@ -30,7 +30,7 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
+stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
 {
 	wjazdy[valueWjedz][wj_X] = wjedzX;
 	wjazdy[valueWjedz][wj_Y] = wjedzY;
@@ -49,7 +49,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 	
 	
 	
-	return iloscwjedz++;
+	return valueWjedz++;
 }
 stock SprawdzWjazdy(playerid)
 {
