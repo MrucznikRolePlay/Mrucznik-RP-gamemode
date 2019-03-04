@@ -13065,6 +13065,7 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	}
 	return 0;
 }
+/*
 stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0)
 {
 	if(!IsPlayerInAnyVehicle(playerid))
@@ -13217,7 +13218,7 @@ stock StworzWjedz(playerid, Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyje
 		sendTipMessageEx(playerid, COLOR_RED, "Nie jesteœ w miejscu, w którym mo¿na to wpisaæ"); 
 	}
 	return 1;
-}
+}*/
 stock GetWeaponSlot(weapon)
 {
     new slot;
