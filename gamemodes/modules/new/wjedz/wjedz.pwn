@@ -55,7 +55,7 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 	}
 	else  
 	{
-		CreateDynamic3DTextLabel(MessageIN, COLOR_PURPLE, wjedzX, wjedzY, wjedzZ, RangePoint, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 0);
+		CreateDynamic3DTextLabel(MessageIN, COLOR_RED, wjedzX, wjedzY, wjedzZ, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 0);
 	}
 	if(isnull(MessageOut)) 
 	{
@@ -63,7 +63,7 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 	}
 	else 
 	{
-		CreateDynamic3DTextLabel(MessageOut, COLOR_PURPLE, wyjedzX, wyjedzY, wyjedzZ, RangePoint, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, VW, 0);
+		CreateDynamic3DTextLabel(MessageOut, COLOR_RED, wyjedzX, wyjedzY, wyjedzZ, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, VW, 0);
 	}
 	
 	return valueWjedz++;
@@ -174,50 +174,51 @@ stock SprawdzWjazdy(playerid)
 				}
 				return 1;
 			}
-			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))
+		}
+		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))
+		{
+			if(IsPlayerInAnyVehicle(playerid))
 			{
-				if(IsPlayerInAnyVehicle(playerid))
+				if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
 				{
-					if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
+					pSeatID = GetPlayerVehicleSeat(playerid);
+					SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+					SetVehicleVirtualWorld(playerVehicleID, 0);
+					SetPlayerVirtualWorld(playerid, 0);
+					PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
+					PlayerInfo[playerid][pLocal] = 255;
+					foreach(Player, i2)
 					{
-						pSeatID = GetPlayerVehicleSeat(playerid);
-						SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+						pSeatID = GetPlayerVehicleSeat(i2);
+						SetPlayerVirtualWorld(i2, 0);
 						SetVehicleVirtualWorld(playerVehicleID, 0);
-						SetPlayerVirtualWorld(playerid, 0);
-						PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
-						PlayerInfo[playerid][pLocal] = 255;
-						foreach(Player, i2)
-						{
-							pSeatID = GetPlayerVehicleSeat(i2);
-							SetPlayerVirtualWorld(i2, 0);
-							SetVehicleVirtualWorld(playerVehicleID, 0);
-							SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
-							PutPlayerInVehicle(i2, playerVehicleID, pSeatID);
-							PlayerInfo[i2][pLocal] = 255;
-						}
-						return 1;
+						SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+						PutPlayerInVehicle(i2, playerVehicleID, pSeatID);
+						PlayerInfo[i2][pLocal] = 255;
 					}
-					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
+					return 1;
+				}
+				if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
+				{
+					pSeatID = GetPlayerVehicleSeat(playerid);
+					SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+					SetVehicleVirtualWorld(playerVehicleID, 0);
+					SetPlayerVirtualWorld(playerid, 0);
+					PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
+					PlayerInfo[playerid][pLocal] = 255;
+					foreach(Player, i2)
 					{
-						pSeatID = GetPlayerVehicleSeat(playerid);
-						SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+						pSeatID = GetPlayerVehicleSeat(i2);
+						SetPlayerVirtualWorld(i2, 0);
 						SetVehicleVirtualWorld(playerVehicleID, 0);
-						SetPlayerVirtualWorld(playerid, 0);
-						PutPlayerInVehicle(playerid, playerVehicleID, pSeatID);
-						PlayerInfo[playerid][pLocal] = 255;
-						foreach(Player, i2)
-						{
-							pSeatID = GetPlayerVehicleSeat(i2);
-							SetPlayerVirtualWorld(i2, 0);
-							SetVehicleVirtualWorld(playerVehicleID, 0);
-							SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
-							PutPlayerInVehicle(i2, playerVehicleID, pSeatID);
-							PlayerInfo[i2][pLocal] = 255;
-						}
+						SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+						PutPlayerInVehicle(i2, playerVehicleID, pSeatID);
+						PlayerInfo[i2][pLocal] = 255;
 					}
 				}
 			}
 		}
+		
 	}
 	return 0;
 }
