@@ -43,8 +43,8 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 	wjazdy[valueWjedz][pFracOwn] = FracOwner;
 	wjazdy[valueWjedz][pOrgOwn] = OrgOwner;
 	wjazdy[valueWjedz][RangeofPoint] = RangePoint;
-	wjazdy[valueWjedz][MessIN] = MessageIN;
-	wjazdy[valueWjedz][MessOut] = MessageOut;
+	wjazdy[valueWjedz][MessIN[]] = MessageIN;
+	wjazdy[valueWjedz][MessOut[]] = MessageOut;
 
 	CreateDynamicPickup(1239, 2, wjedzX, wjedzY, wjedzZ, 0, 0);
 	CreateDynamicPickup(1239, 2, wyjedzX, wyjedzY, wyjedzZ, VW, 0);
