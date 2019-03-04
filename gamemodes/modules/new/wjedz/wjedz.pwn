@@ -59,7 +59,7 @@ stock SprawdzWjazdy(playerid)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))
 		{
-			if(IsPlayerInAnyVehicle(playerid)
+			if(IsPlayerInAnyVehicle(playerid))
 			{
 				if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
 				{
@@ -163,7 +163,7 @@ stock SprawdzWjazdy(playerid)
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))
 			{
-				if(IsPlayerInAnyVehicle(playerid)
+				if(IsPlayerInAnyVehicle(playerid))
 				{
 					if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
 					{
@@ -177,7 +177,7 @@ stock SprawdzWjazdy(playerid)
 						{
 							pSeatID = GetPlayerVehicleSeat(i2);
 							SetPlayerVirtualWorld(i2, 0);
-							SetVehicleVirtualWorld(playerVehicleID, 0]);
+							SetVehicleVirtualWorld(playerVehicleID, 0);
 							SetVehiclePos(playerVehicleID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 							PutPlayerInVehicle(i2, playerVehicleID, pSeatID);
 							PlayerInfo[i2][pLocal] = 255;
