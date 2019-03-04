@@ -40333,6 +40333,9 @@ CMD:bwtime(playerid, params[]) {
         if(sscanf(params, "d", ust)) return sendTipMessage(playerid, "U¿yj /bwtime [Czas BW w Sekundach]");
         dini_IntSet("Settings.ini", "Time", ust);
         SetSVarInt("BW_Time", ust);
+		new string[70];
+		format(string, sizeof(string), "Od teraz BW trwaæ bêdzie %ds", ust);
+		sendTipMessage(playerid, string);
     } else {
         return noAccessMessage(playerid);
     }
