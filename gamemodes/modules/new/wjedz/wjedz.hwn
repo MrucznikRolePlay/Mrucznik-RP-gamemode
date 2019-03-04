@@ -35,8 +35,8 @@ enum eWjedz
 	pFracOwn,
 	pOrgOwn,
 	Float:RangeofPoint,
-	MessIN[128],
-	MessOut[128]
+	MessIN[]=" ",
+	MessOut[]=" "
 };
 new	Float:wjazdy[MAX_WJEDZ][eWjedz];
 

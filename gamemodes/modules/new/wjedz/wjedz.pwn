@@ -65,7 +65,7 @@ stock SprawdzWjazdy(playerid)
 			{
 				if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
 				{
-					if(strlen(wjazdy[i][MessIN] > 1))
+					if(strlen(wjazdy[i][MessIN]) > 1)
 					{
 						sendTipMessage(playerid, wjazdy[i][MessIN]);
 					}
@@ -92,7 +92,7 @@ stock SprawdzWjazdy(playerid)
 				{
 					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn])
 					{
-						if(strlen(wjazdy[i][MessIN] > 1))
+						if(strlen(wjazdy[i][MessIN]) > 1)
 						{
 							sendTipMessage(playerid, wjazdy[i][MessIN]);
 						}
@@ -120,7 +120,7 @@ stock SprawdzWjazdy(playerid)
 				{
 					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn])
 					{
-						if(strlen(wjazdy[i][MessIN] > 1))
+						if(strlen(wjazdy[i][MessIN]) > 1)
 						{
 							sendTipMessage(playerid, wjazdy[i][MessIN]);
 						}
@@ -149,7 +149,7 @@ stock SprawdzWjazdy(playerid)
 				{
 					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
 					{
-						if(strlen(wjazdy[i][MessIN] > 1))
+						if(strlen(wjazdy[i][MessIN]) > 1)
 						{
 							sendTipMessage(playerid, wjazdy[i][MessIN]);
 						}
@@ -181,7 +181,7 @@ stock SprawdzWjazdy(playerid)
 				{
 					if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
 					{
-						if(strlen(wjazdy[i][MessOut] > 1))
+						if(strlen(wjazdy[i][MessOut]) > 1)
 						{
 							sendTipMessage(playerid, wjazdy[i][MessOut]);
 						}
@@ -204,7 +204,7 @@ stock SprawdzWjazdy(playerid)
 					}
 					if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
 					{
-						if(strlen(wjazdy[i][MessOut] > 1))
+						if(strlen(wjazdy[i][MessOut]) > 1)
 						{
 							sendTipMessage(playerid, wjazdy[i][MessOut]);
 						}
