@@ -94,12 +94,14 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/wejscia/wejscia.def"
 #include "modules/new/budki/budki.def"
 #include "modules/new/premium/premium.def"
+#include "modules/new/wjedz/wjedz.def"
 
 //Nowe modu³y .hwn:
 #include "modules/new/bramy/bramy.hwn"
 #include "modules/new/wejscia/wejscia.hwn"
 #include "modules/new/budki/budki.hwn"
 #include "modules/new/premium/premium.hwn"
+#include "modules/new/wjedz/wjedz.hwn"
 
 //Nowe modu³y .pwn:
 #include "modules/new/bramy/bramy.pwn"
@@ -107,6 +109,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/budki/budki.pwn"
 #include "modules/new/premium/premium.pwn"
 #include "modules/new/premium/premium_dialogs.pwn"
+#include "modules/new/wjedz/wjedz.pwn"
 
 //Inne:
 #include "modules/Inne/ibiza.inc"
