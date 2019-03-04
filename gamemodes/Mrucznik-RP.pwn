@@ -784,6 +784,12 @@ public OnPlayerConnect(playerid)
     // Wy³¹czone na testy
     Usun_Obiekty(playerid); //stare obiekty
     obiekty_OnPlayerConnect(playerid);//nowe obiekty
+	
+	//=====================================[WJAZDY]=============================
+	StworzWjedz(1753.2124,-1538.7153,9.1894, 1481.5889,-1519.8298,66.9969, 5.0, 2, "Parking podziemny", "Wyjazd z parkingu podziemnego", FRAC_BOR, 0, 255);//USSS - parking podziemny
+	StworzWjedz(593.47217, -1509.27258, 15.75509, 1059.91748, 1553.65698, 7.59697, 5.0, 2, "Parking wewnêtrzny FBI", "Wyjazd z parkingu wewnêtrznego", FRAC_FBI, 0, 255);//FBI podziemny
+	StworzWjedz(1588.0006,-1633.5677,13.1671, 1588.9865,-1642.7157,12.4604, 5.0, 2, "Parking wewnêtrzny Los Santos Police Department", "Wyjazd z parkingu", FRAC_LSPD, 0, 255);//Podziemny LSPD
+	
 
 	LoadTextDraws(playerid);
     LoadingShow(playerid);

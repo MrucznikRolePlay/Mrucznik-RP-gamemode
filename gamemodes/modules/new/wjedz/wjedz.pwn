@@ -174,6 +174,14 @@ stock SprawdzWjazdy(playerid)
 				}
 				return 1;
 			}
+			else
+			{
+				sendTipMessage(playerid, "Mariusz_Cieæ mówi: Po co wchodzisz przez bramê? Drzwi nie masz?"); 
+				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+				PlayerInfo[playerid][pLocal] = wjazdy[i][wj_PLOCAL];
+				SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+				return 1;
+			}
 		}
 		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))
 		{
@@ -217,6 +225,19 @@ stock SprawdzWjazdy(playerid)
 					}
 				}
 			}
+			else
+			{
+				sendTipMessage(playerid, "Mariusz_Cieæ mówi: Po co wchodzisz przez bramê? Drzwi nie masz?"); 
+				SetPlayerVirtualWorld(playerid, 0);
+				PlayerInfo[playerid][pLocal] = 255;
+				SetPlayerPos(playerid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+				return 1;
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Jesteœ w nieodpowiednim miejscu!"); 
+			return 1;
 		}
 		
 	}
