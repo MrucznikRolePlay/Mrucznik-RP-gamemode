@@ -40438,7 +40438,7 @@ CMD:wyjedz(playerid)
 {
 	if(SprawdzWjazdy(playerid))
 	{
-		return 1;
+	
 	}
 	else
 	{
@@ -40446,24 +40446,7 @@ CMD:wyjedz(playerid)
 	}
 	return 1;
 }
-CMD:wjedzdebug(playerid)
-{
-	if(PlayerInfo[playerid][pAdmin] > 1 || PlayerInfo[playerid][pNewAP] == 5)
-    {
-		if(IsPlayerInAnyVehicle(playerid))
-		{
-			if(GetPlayerVirtualWorld(playerid) != 2)
-			{
-				TogglePlayerControllable(playerid, 0);
-				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-				TextDrawShowForPlayer(playerid, textwjedz[playerid]);
-				
-			}
-		}
-		
-	}
-	return 1;
-}
+
 
 CMD:gotoczit(playerid)
 {
