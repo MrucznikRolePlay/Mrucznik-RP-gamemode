@@ -903,6 +903,7 @@ new Celaki[3];
 
 new Text:textwjedz[MAX_PLAYERS];
 new WjedzTimer[MAX_PLAYERS];
+new timeSecWjedz[MAX_PLAYERS];
 
 //koniecfbi
 //brama baysie by micha³

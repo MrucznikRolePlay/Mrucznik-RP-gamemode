@@ -151,9 +151,8 @@ public WjedzTimerDebug(playerid)
 {
 	new Float:x,Float:y,Float:z;
 	GetPlayerPos(playerid, x,y,z);
-	new timeSecWjedz[MAX_PLAYERS];
 	new pVehAcID = GetPlayerVehicleID(playerid);
-	timeSecWjedz++; 
+	timeSecWjedz[playerid]++; 
 	if(timeSecWjedz[playerid] == 2)
 	{
 		SetPlayerVirtualWorld(playerid, 2);
