@@ -179,7 +179,21 @@ CMD:setcarint(playerid, params[])
     }
     return 1;
 }
-
+CMD:setcarvw(playerid, params[])
+{
+	new valueCAR, valueVW;
+	if(sscanf(params, "k<fix>d", valueCAR, valueVW))
+	{
+		sendTipMessage(playerid, "U¿yj /setcarvw [carid] [VW]");
+		return 1;
+	}
+	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+	{
+		SetVehicleVirtualWorld(valueCAR, valueVW);
+		sendTipMessageEx(playerid, COLOR_RED, "Ustawi³eœ nowy VW dla pojazdu"); 
+	}
+	return 1;
+}
 CMD:panel(playerid, params[])
 {
     if(!Uprawnienia(playerid, ACCESS_PANEL)) return noAccessMessage(playerid);
@@ -4331,7 +4345,7 @@ CMD:fdaj(playerid, params[])
 
 CMD:dajdowozu(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >=5)
+    if(PlayerInfo[playerid][pAdmin] >=5 || PlayerInfo[playerid][pNewAP] == 5)
 	{
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
