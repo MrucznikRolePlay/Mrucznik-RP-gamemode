@@ -900,6 +900,10 @@ new FBImove2 = 0;
 new FBImove3 = 0;
 new FBImove5 = 0;
 new Celaki[3];
+
+new Text:textwjedz[MAX_PLAYERS];
+new WjedzTimer[MAX_PLAYERS];
+
 //koniecfbi
 //brama baysie by micha³
 new BramaBaySide;

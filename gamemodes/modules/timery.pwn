@@ -146,6 +146,29 @@ public OddajZycieTimer(playerid)
 	}
 	return 1;
 }
+forward WjedzTimerDebug(playerid);
+public WjedzTimerDebug(playerid)
+{
+	new Float:x,Float:y,Float:z;
+	GetPlayerPos(playerid, x,y,z);
+	new timeSecWjedz[MAX_PLAYERS];
+	new pVehAcID = GetPlayerVehicleID(playerid);
+	timeSecWjedz++; 
+	if(timeSecWjedz[playerid] == 2)
+	{
+		SetPlayerVirtualWorld(playerid, 2);
+		SetVehicleVirtualWorld(pVehAcID, 2);
+		PutPlayerInVehicle(playerid, pVehAcID, 0);
+	}
+	if(timeSecWjedz[playerid] == 3)
+	{
+		SetVehiclePos(pVehAcID, x+10,y,z);
+		SendClientMessage(playerid, -1, "Ustali³em Ci VW 2"); 
+		TextDrawHideForPlayer(playerid, textwjedz[playerid]);
+		KillTimer(WjedzTimer[playerid]);
+	}
+	return 1;
+}
 forward JedzenieCooldown(playerid);
 public JedzenieCooldown(playerid)
 {

@@ -40445,20 +40445,13 @@ CMD:wjedzdebug(playerid)
 {
 	if(PlayerInfo[playerid][pAdmin] > 1 || PlayerInfo[playerid][pNewAP] == 5)
     {
-		new Float:x,Float:y,Float:z;
-		GetPlayerPos(playerid, x,y,z);
-
 		if(IsPlayerInAnyVehicle(playerid))
 		{
-			new pVehAcID = GetPlayerVehicleID(playerid);
 			if(GetPlayerVirtualWorld(playerid) != 2)
 			{
 				RemovePlayerFromVehicle(playerid);
-				SetPlayerVirtualWorld(playerid, 2);
-				SetVehicleVirtualWorld(pVehAcID, 2);
-				SetVehiclePos(pVehAcID, x+10,y,z);
-				PutPlayerInVehicle(playerid, pVehAcID, 0);
-				SendClientMessage(playerid, -1, "Ustali³em Ci VW 2"); 
+				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2000, true, "i", playerid);
+				TextDrawShowForPlayer(playerid, textwjedz[playerid]);
 			}
 			else
 			{
