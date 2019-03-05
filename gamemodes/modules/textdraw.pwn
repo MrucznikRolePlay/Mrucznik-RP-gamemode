@@ -299,8 +299,8 @@ LoadTextDraws(playerid)
 	PlayerTextDrawFont(playerid, textwjedz[playerid], 1);
 	PlayerTextDrawColor(playerid, TextOferta1[playerid], -1);
 	PlayerTextDrawUseBox(playerid, textwjedz[playerid], 1);
-	PlayerTextDrawBoxColor(playerid, textwjedz[playerid], 926365495);
-	PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
+	PlayerTextDrawBoxColor(playerid, textwjedz[playerid], 0xFF0000FF);
+	//PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
 	
 	
     
