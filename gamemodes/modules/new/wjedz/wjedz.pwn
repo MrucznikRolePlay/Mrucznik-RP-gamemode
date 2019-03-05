@@ -121,6 +121,7 @@ public WjedzTimerDebug(playerid)
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);
+				sendTipMessageEx(playerid, COLOR_RED, "==========[Wjedz]=========="); 
 				sendTipMessage(playerid, "Ustalanie VW --> Udane"); 
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
@@ -151,7 +152,9 @@ public WjedzTimerDebug(playerid)
 		PlayerTextDrawHide(playerid, textwjedz[playerid]);
 		TogglePlayerControllable(playerid, 1);
 		KillTimer(WjedzTimer[playerid]);
-		sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd"); 
+		sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd");
+		sendTipMessageEx(playerid, COLOR_RED, "==========[Success]=========="
+		timeSecWjedz[playerid] = 0;
 		
 	}
 	return 1;
