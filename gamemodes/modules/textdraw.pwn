@@ -36,7 +36,7 @@ new PlayerText:MSGBOXtd_Icon[MAX_PLAYERS];
 new Text:MSGBOXtd_Sign;
 new Text:MSGBOXtd_Ver;
 new Text:MSGBOXtd_Kubi;
-new Text:textwjedz[MAX_PLAYERS];
+new PlayerText:textwjedz[MAX_PLAYERS];
 
 /*----------------------------------------- MessageBox END ---------------------------------------------------*/
 
@@ -86,7 +86,7 @@ new Text:PatrolMarker[MAX_PATROLS];
 new Text:SkinSelectionAccept,Text:SkinSelectionDenied, Text:SkinSelectionMy;
 
 //Oil 16.09
-new PlayerText:OilTXD_BG[2];
+new Text:OilTXD_BG[2];
 new PlayerText:OilPTXD_Arrow[5][MAX_PLAYERS];
 //01.10
 new Text:TXD_Info;
