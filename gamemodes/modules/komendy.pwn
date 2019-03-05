@@ -40453,11 +40453,6 @@ CMD:wjedzdebug(playerid)
 				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 5000, true, "i", playerid);
 				TextDrawShowForPlayer(playerid, textwjedz[playerid]);
 			}
-			else
-			{
-				SetVehicleVirtualWorld(pVehAcID, 0);
-				SendClientMessage(playerid, -1, "Ustali³em Ci VW na 0");
-			}
 		}
 		
 	}
