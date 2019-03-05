@@ -40437,8 +40437,13 @@ CMD:wjedz(playerid) return cmd_wyjedz(playerid);
 CMD:wyjedz(playerid)
 {
 	if(SprawdzWjazdy(playerid))
-			return 1;
-			
+	{
+		return 1;
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
+	}
 	return 1;
 }
 CMD:wjedzdebug(playerid)

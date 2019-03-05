@@ -68,6 +68,94 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 	
 	return valueWjedz++;
 }
+//new 
+stock SprawdzWjazdy(playerid)
+{
+	new playerVehicleID = GetPlayerVehicleID(playerid);
+	new pSeatID = GetPlayerVehicleSeat(playerid);
+	for(new i; i<valueWjedz; i++)
+	{
+		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
+		{
+			if(IsPlayerInAnyVehicle(playerid))
+			{
+				TogglePlayerControllable(playerid, 0);
+				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
+				TextDrawShowForPlayer(playerid, textwjedz[playerid]);
+			}
+			else
+			{
+				SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+			}
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], jazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
+		{
+			if(IsPlayerInAnyVehicle(playerid))
+			{
+				TogglePlayerControllable(playerid, 0);
+				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
+				TextDrawShowForPlayer(playerid, textwjedz[playerid]);
+			}
+			else
+			{
+				SetPlayerPos(playerid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+				SetPlayerVirtualWorld(playerid, 0);
+			}
+			return 1;
+		}
+		
+	}
+	return 0;
+}
+forward WjedzTimerDebug(playerid);
+public WjedzTimerDebug(playerid)
+{
+	new pVehAcID = GetPlayerVehicleID(playerid);
+	timeSecWjedz[playerid]++; 
+	if(timeSecWjedz[playerid] == 3)
+	{
+		for(new i; i<valueWjedz; i++)
+		{
+			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
+			{
+				RemovePlayerFromVehicle(playerid);
+				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);
+			}
+			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
+			{
+				RemovePlayerFromVehicle(playerid);
+				SetPlayerVirtualWorld(playerid, 0);
+				SetVehicleVirtualWorld(pVehAcID, 0);
+			}
+		}
+		PutPlayerInVehicle(playerid, pVehAcID, 0);
+	}
+	if(timeSecWjedz[playerid] == 5)
+	{
+		for(new i; i<valueWjedz; i++)
+		{
+			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
+			{
+				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+			}
+			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
+			{
+				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+			}
+		}
+	//	SendClientMessage(playerid, -1, "Ustali³em Ci VW 2"); 
+		TextDrawHideForPlayer(playerid, textwjedz[playerid]);
+		TogglePlayerControllable(playerid, 1);
+		KillTimer(WjedzTimer[playerid]);
+		
+	}
+	return 1;
+}
+/*
+============================[OLD]==============================
 stock SprawdzWjazdy(playerid)
 {
 	new playerVehicleID = GetPlayerVehicleID(playerid);
@@ -254,7 +342,7 @@ stock SprawdzWjazdy(playerid)
 	}
 	return 0;
 }
-
+*/ 
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
 
