@@ -75,16 +75,84 @@ stock SprawdzWjazdy(playerid)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
 		{
-			if(IsPlayerInAnyVehicle(playerid))
+			if(wjazdy[i][pFracOwn] > 0 && wjazdy[i][pOrgOwn] > 0)
 			{
-				TogglePlayerControllable(playerid, 0);
-				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-				PlayerTextDrawShow(playerid, textwjedz[playerid]);
+				if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
+				{
+					if(IsPlayerInAnyVehicle(playerid))
+					{
+						TogglePlayerControllable(playerid, 0);
+						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
+						PlayerTextDrawShow(playerid, textwjedz[playerid]);
+					}
+					else
+					{
+						SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ"); 
+				}
 			}
-			else
+			else if(wjazdy[i][pFracOwn] > 0  && wjazdy[i][pOrgOwn] == 0)
 			{
-				SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+				if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn])
+				{
+					if(IsPlayerInAnyVehicle(playerid))
+					{
+						TogglePlayerControllable(playerid, 0);
+						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
+						PlayerTextDrawShow(playerid, textwjedz[playerid]);
+					}
+					else
+					{
+						SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ"); 
+				}
+			
+			}
+			else if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] > 0)
+			{
+				if(GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
+				{
+					if(IsPlayerInAnyVehicle(playerid))
+					{
+						TogglePlayerControllable(playerid, 0);
+						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
+						PlayerTextDrawShow(playerid, textwjedz[playerid]);
+					}
+					else
+					{
+						SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ"); 
+				}
+			
+			}
+			else if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
+			{
+				if(IsPlayerInAnyVehicle(playerid))
+				{
+					TogglePlayerControllable(playerid, 0);
+					WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
+					PlayerTextDrawShow(playerid, textwjedz[playerid]);
+				}
+				else
+				{
+					SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+					SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+				}
 			}
 			return 1;
 		}
@@ -112,7 +180,7 @@ public WjedzTimerDebug(playerid)
 {
 	new pVehAcID = GetPlayerVehicleID(playerid);
 	timeSecWjedz[playerid]++; 
-	if(timeSecWjedz[playerid] == 3)
+	if(timeSecWjedz[playerid] == 2)
 	{
 		for(new i; i<valueWjedz; i++)
 		{
@@ -121,6 +189,7 @@ public WjedzTimerDebug(playerid)
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);
+				sendTipMessageEx(playerid, COLOR_RED, "==========[Wjedz]=========="); 
 				sendTipMessage(playerid, "Ustalanie VW --> Udane"); 
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
@@ -133,7 +202,7 @@ public WjedzTimerDebug(playerid)
 		}
 		PutPlayerInVehicle(playerid, pVehAcID, 0);
 	}
-	if(timeSecWjedz[playerid] == 5)
+	if(timeSecWjedz[playerid] == 4)
 	{
 		for(new i; i<valueWjedz; i++)
 		{
@@ -150,9 +219,10 @@ public WjedzTimerDebug(playerid)
 		}
 		PlayerTextDrawHide(playerid, textwjedz[playerid]);
 		TogglePlayerControllable(playerid, 1);
+		sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd");
+		sendTipMessageEx(playerid, COLOR_RED, "==========[Success]==========");
+		timeSecWjedz[playerid] = 0;
 		KillTimer(WjedzTimer[playerid]);
-		sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd"); 
-		
 	}
 	return 1;
 }
