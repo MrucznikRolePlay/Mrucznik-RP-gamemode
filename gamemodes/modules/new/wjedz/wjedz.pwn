@@ -79,7 +79,7 @@ stock SprawdzWjazdy(playerid)
 			{
 				TogglePlayerControllable(playerid, 0);
 				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-				TextDrawShowForPlayer(playerid, textwjedz[playerid]);
+				PlayerTextDrawShow(playerid, textwjedz[playerid]);
 			}
 			else
 			{
@@ -94,7 +94,7 @@ stock SprawdzWjazdy(playerid)
 			{
 				TogglePlayerControllable(playerid, 0);
 				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-				TextDrawShowForPlayer(playerid, textwjedz[playerid]);
+				PlayerTextDrawShow(playerid, textwjedz[playerid]);
 			}
 			else
 			{
@@ -144,8 +144,8 @@ public WjedzTimerDebug(playerid)
 				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 			}
 		}
-	//	SendClientMessage(playerid, -1, "Ustali³em Ci VW 2"); 
-		TextDrawHideForPlayer(playerid, textwjedz[playerid]);
+	//	SendClientMessage(playerid, -1, "Ustali³em Ci VW 2");
+		PlayerTextDrawHide(playerid, textwjedz[playerid]);
 		TogglePlayerControllable(playerid, 1);
 		KillTimer(WjedzTimer[playerid]);
 		
