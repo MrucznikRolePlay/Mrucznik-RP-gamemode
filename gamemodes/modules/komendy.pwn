@@ -40451,10 +40451,13 @@ CMD:wjedzdebug(playerid)
 		if(IsPlayerInAnyVehicle(playerid))
 		{
 			new pVehAcID = GetPlayerVehicleID(playerid);
-			SetVehiclePos(pVehAcID, x+10,y,z);
 			if(GetPlayerVirtualWorld(playerid) != 2)
 			{
+				RemovePlayerFromVehicle(playerid);
+				SetPlayerVirtualWorld(playerid, 2);
 				SetVehicleVirtualWorld(pVehAcID, 2);
+				SetVehiclePos(pVehAcID, x+10,y,z);
+				PutPlayerInVehicle(playerid, pVehAcID, 0);
 				SendClientMessage(playerid, -1, "Ustali³em Ci VW 2"); 
 			}
 			else
