@@ -153,13 +153,13 @@ public WjedzTimerDebug(playerid)
 	GetPlayerPos(playerid, x,y,z);
 	new pVehAcID = GetPlayerVehicleID(playerid);
 	timeSecWjedz[playerid]++; 
-	if(timeSecWjedz[playerid] == 2)
+	if(timeSecWjedz[playerid] == 3)
 	{
 		SetPlayerVirtualWorld(playerid, 2);
 		SetVehicleVirtualWorld(pVehAcID, 2);
 		PutPlayerInVehicle(playerid, pVehAcID, 0);
 	}
-	if(timeSecWjedz[playerid] == 3)
+	if(timeSecWjedz[playerid] == 5)
 	{
 		SetVehiclePos(pVehAcID, x+10,y,z);
 		SendClientMessage(playerid, -1, "Ustali³em Ci VW 2"); 
