@@ -823,6 +823,7 @@ public OnPlayerConnect(playerid)
 	SetRPName(playerid);
 	GetPlayerName(playerid, nickadminaIC, sizeof(nickadminaIC));
 	SetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC);
+	timeSecWjedz[playerid] = 0;
 
 	//Pocz¹tkowe ustawienia:
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);

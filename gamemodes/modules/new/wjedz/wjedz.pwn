@@ -121,12 +121,14 @@ public WjedzTimerDebug(playerid)
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);
+				sendTipMessage(playerid, "Ustalanie VW --> Udane"); 
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
 			{
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, 0);
 				SetVehicleVirtualWorld(pVehAcID, 0);
+				sendTipMessage(playerid, "Ustalanie zerowego VW --> Udane"); 
 			}
 		}
 		PutPlayerInVehicle(playerid, pVehAcID, 0);
@@ -138,16 +140,18 @@ public WjedzTimerDebug(playerid)
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
 			{
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+				sendTipMessage(playerid, "Ustalanie pozycji wjazdowej --> Udane"); 
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
 			{
 				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+				sendTipMessage(playerid, "Ustalanie pozycji wyjazdowej --> Udane"); 
 			}
 		}
-	//	SendClientMessage(playerid, -1, "Ustali³em Ci VW 2");
 		PlayerTextDrawHide(playerid, textwjedz[playerid]);
 		TogglePlayerControllable(playerid, 1);
 		KillTimer(WjedzTimer[playerid]);
+		sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd"); 
 		
 	}
 	return 1;
