@@ -63,7 +63,7 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 	}
 	else 
 	{
-		CreateDynamic3DTextLabel(MessageOut, COLOR_RED, wyjedzX, wyjedzY, wyjedzZ, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, VW, 0);
+		CreateDynamic3DTextLabel(MessageOut, COLOR_RED, wyjedzX, wyjedzY, wyjedzZ, 9.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, VW, 0);
 	}
 	
 	return valueWjedz++;
@@ -184,6 +184,8 @@ public WjedzTimerDebug(playerid)
 	{
 		for(new i; i<valueWjedz; i++)
 		{
+			
+			new pSeat;
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
 			{
 				RemovePlayerFromVehicle(playerid);
@@ -191,6 +193,16 @@ public WjedzTimerDebug(playerid)
 				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);
 				sendTipMessageEx(playerid, COLOR_RED, "==========[Wjedz]=========="); 
 				sendTipMessage(playerid, "Ustalanie VW --> Udane"); 
+				foreach(Player, i2)
+				{
+					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) > 0)
+					{
+						pSeat = GetPlayerVehicleSeat(i2);
+						SetPlayerVirtualWorld(i2, wjazdy[i][wj_VW]);
+						PutPlayerInVehicle(i2, pVehAcID, pSeat);
+					}
+				}
+				
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
 			{
@@ -198,7 +210,17 @@ public WjedzTimerDebug(playerid)
 				SetPlayerVirtualWorld(playerid, 0);
 				SetVehicleVirtualWorld(pVehAcID, 0);
 				sendTipMessage(playerid, "Ustalanie zerowego VW --> Udane"); 
+				foreach(Player, i2)
+				{
+					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) > 0)
+					{
+						pSeat = GetPlayerVehicleSeat(i2);
+						SetPlayerVirtualWorld(i2, 0);
+						PutPlayerInVehicle(i2, pVehAcID, pSeat);
+					}
+				}
 			}
+			
 		}
 		PutPlayerInVehicle(playerid, pVehAcID, 0);
 	}
@@ -209,7 +231,7 @@ public WjedzTimerDebug(playerid)
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
 			{
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-				sendTipMessage(playerid, "Ustalanie pozycji wjazdowej --> Udane"); 
+				sendTipMessage(playerid, "Ustalanie pozycji wjazdowej --> Udane"); 	
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
 			{
