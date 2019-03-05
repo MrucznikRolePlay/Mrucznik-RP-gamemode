@@ -40427,6 +40427,33 @@ CMD:wyjedz(playerid)
 			
 	return 1;
 }
+CMD:wjedzdebug(playerid)
+{
+	if(PlayerInfo[playerid][pAdmin] > 1 || PlayerInfo[playerid][pNewAP] == 5)
+    {
+		new Float:x,y,z;
+		GetPlayerPos(playerid, x,y,z);
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, x,y,z))
+		{
+			if(IsPlayerInAnyVehicle(playerid))
+			{
+				new pVehAcID = GetPlayerVehicleID(playerid);
+				SetVehiclePos(pVehAcID, x+10,y,z);
+				if(GetPlayerVirtualWorld(playerid) != 2)
+				{
+					SetVehicleVirtualWorld(pVehAcID, 2);
+					SendClientMessage(playerid, -1, "Ustali³em Ci VW 2"); 
+				}
+				else
+				{
+					SetVehicleVirtualWorld(pVehAcID, 0);
+					SendClientMessage(playerid, -1, "Ustali³em Ci VW na 0");
+				}
+			}
+		}
+	}
+	return 1;
+}
 
 CMD:gotoczit(playerid)
 {
