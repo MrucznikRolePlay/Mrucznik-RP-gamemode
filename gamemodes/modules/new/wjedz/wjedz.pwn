@@ -71,8 +71,6 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 //new 
 stock SprawdzWjazdy(playerid)
 {
-	new playerVehicleID = GetPlayerVehicleID(playerid);
-	new pSeatID = GetPlayerVehicleSeat(playerid);
 	for(new i; i<valueWjedz; i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
@@ -90,7 +88,7 @@ stock SprawdzWjazdy(playerid)
 			}
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
+		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
