@@ -153,7 +153,7 @@ public WjedzTimerDebug(playerid)
 		TogglePlayerControllable(playerid, 1);
 		KillTimer(WjedzTimer[playerid]);
 		sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd");
-		sendTipMessageEx(playerid, COLOR_RED, "==========[Success]=========="
+		sendTipMessageEx(playerid, COLOR_RED, "==========[Success]==========");
 		timeSecWjedz[playerid] = 0;
 		
 	}
