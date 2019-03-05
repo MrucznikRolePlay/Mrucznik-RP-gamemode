@@ -90,7 +90,7 @@ stock SprawdzWjazdy(playerid)
 			}
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], jazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
+		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{

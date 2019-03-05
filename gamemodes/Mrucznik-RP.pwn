@@ -794,7 +794,6 @@ public OnPlayerConnect(playerid)
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-	textwjedz[playerid] = TextDrawCreate(200.0, 250.0, "Trwa wjezdzanie!");
     if(!IsNickCorrect(nick))
     {
         SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
