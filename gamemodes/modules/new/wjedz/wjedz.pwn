@@ -195,7 +195,7 @@ public WjedzTimerDebug(playerid)
 				sendTipMessage(playerid, "Ustalanie VW --> Udane"); 
 				foreach(Player, i2)
 				{
-					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) > 0)
+					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
 					{
 						pSeat = GetPlayerVehicleSeat(i2);
 						SetPlayerVirtualWorld(i2, wjazdy[i][wj_VW]);
@@ -212,7 +212,7 @@ public WjedzTimerDebug(playerid)
 				sendTipMessage(playerid, "Ustalanie zerowego VW --> Udane"); 
 				foreach(Player, i2)
 				{
-					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) > 0)
+					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
 					{
 						pSeat = GetPlayerVehicleSeat(i2);
 						SetPlayerVirtualWorld(i2, 0);
