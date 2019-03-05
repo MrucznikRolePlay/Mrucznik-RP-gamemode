@@ -155,6 +155,7 @@ public WjedzTimerDebug(playerid)
 	timeSecWjedz[playerid]++; 
 	if(timeSecWjedz[playerid] == 3)
 	{
+		RemovePlayerFromVehicle(playerid);
 		SetPlayerVirtualWorld(playerid, 2);
 		SetVehicleVirtualWorld(pVehAcID, 2);
 		PutPlayerInVehicle(playerid, pVehAcID, 0);
@@ -164,7 +165,9 @@ public WjedzTimerDebug(playerid)
 		SetVehiclePos(pVehAcID, x+10,y,z);
 		SendClientMessage(playerid, -1, "Ustali³em Ci VW 2"); 
 		TextDrawHideForPlayer(playerid, textwjedz[playerid]);
+		TogglePlayerControllable(playerid, 1);
 		KillTimer(WjedzTimer[playerid]);
+		
 	}
 	return 1;
 }

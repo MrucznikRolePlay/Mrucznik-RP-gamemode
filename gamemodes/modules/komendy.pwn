@@ -40449,9 +40449,10 @@ CMD:wjedzdebug(playerid)
 		{
 			if(GetPlayerVirtualWorld(playerid) != 2)
 			{
-				RemovePlayerFromVehicle(playerid);
-				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 5000, true, "i", playerid);
+				TogglePlayerControllable(playerid, 0);
+				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 				TextDrawShowForPlayer(playerid, textwjedz[playerid]);
+				
 			}
 		}
 		
