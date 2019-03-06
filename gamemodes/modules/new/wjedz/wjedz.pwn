@@ -71,6 +71,11 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 //new 
 stock SprawdzWjazdy(playerid)
 {
+	if(GetPlayerVehicleSeat(playerid) != 0)
+	{
+		sendErrorMessage(playerid, "Nie jesteœ kierowc¹"); 
+		return 1;
+	}
 	for(new i; i<valueWjedz; i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
@@ -84,6 +89,7 @@ stock SprawdzWjazdy(playerid)
 						TogglePlayerControllable(playerid, 0);
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
+						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
 					}
 					else
 					{
@@ -105,6 +111,7 @@ stock SprawdzWjazdy(playerid)
 						TogglePlayerControllable(playerid, 0);
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
+						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
 					}
 					else
 					{
@@ -127,6 +134,7 @@ stock SprawdzWjazdy(playerid)
 						TogglePlayerControllable(playerid, 0);
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
+						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
 					}
 					else
 					{
@@ -147,6 +155,7 @@ stock SprawdzWjazdy(playerid)
 					TogglePlayerControllable(playerid, 0);
 					WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 					PlayerTextDrawShow(playerid, textwjedz[playerid]);
+					SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
 				}
 				else
 				{
@@ -163,6 +172,7 @@ stock SprawdzWjazdy(playerid)
 				TogglePlayerControllable(playerid, 0);
 				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 				PlayerTextDrawShow(playerid, textwjedz[playerid]);
+				SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
 			}
 			else
 			{
@@ -233,7 +243,7 @@ public WjedzTimerDebug(playerid)
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
 				sendTipMessage(playerid, "Ustalanie pozycji wjazdowej --> Udane"); 	
 			}
-			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
+			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
 			{
 				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 				sendTipMessage(playerid, "Ustalanie pozycji wyjazdowej --> Udane"); 
@@ -244,6 +254,7 @@ public WjedzTimerDebug(playerid)
 		sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd");
 		sendTipMessageEx(playerid, COLOR_RED, "==========[Success]==========");
 		timeSecWjedz[playerid] = 0;
+		SetPVarInt(playerid, "JestPodczasWjezdzania", 0);
 		KillTimer(WjedzTimer[playerid]);
 	}
 	return 1;

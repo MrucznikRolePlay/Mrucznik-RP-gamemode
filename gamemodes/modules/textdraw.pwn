@@ -295,7 +295,7 @@ LoadTextDraws(playerid)
     PlayerTextDrawBoxColor(playerid, TextOferta1[playerid], 926365495);
     PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
 	
-	textwjedz[playerid] = CreatePlayerTextDraw(playerid, 200.0, 250.0, "Odczekaj chwile\nPojazd przechodzi przez brame"); 
+	textwjedz[playerid] = CreatePlayerTextDraw(playerid, 230.0, 250.0, "Trwa przejazd"); 
 	PlayerTextDrawFont(playerid, textwjedz[playerid], 1);
 	PlayerTextDrawColor(playerid, TextOferta1[playerid], 0x80FF00FF);
 	//PlayerTextDrawUseBox(playerid, textwjedz[playerid], 1);
