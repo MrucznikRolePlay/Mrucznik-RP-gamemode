@@ -8973,7 +8973,7 @@ stock OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false
 	new string[128];
 	timeobl = timevalue*1000;
 	GetPlayerHealth(playerid, health);
-	SetPVarInt(playerid, "odnowaZyciaAdmin", health); 
+	SetPVarFloat(playerid, "odnowaZyciaAdmin", health); 
 	TimerOddaniaZycia[playerid] = SetTimerEx("OddajZycieTimer", timeobl, true, "i", playerid);
 	SetPVarInt(playerid, "StatusZycia", timeobl);
 	format(string, sizeof(string), "%s", tekst); 

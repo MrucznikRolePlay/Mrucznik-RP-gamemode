@@ -138,9 +138,9 @@ public OddajZycieTimer(playerid)
 	dajHPSekunda[playerid]++;
 	if(dajHPSekunda[playerid] == stathptime)
 	{
-		new ammoutHP;
+		new Float:ammoutHP;
 		SetPlayerHealth(playerid, 1);
-		ammoutHP = GetPVarInt(playerid, "odnowaZyciaAdmin");
+		ammoutHP = GetPVarFloat(playerid, "odnowaZyciaAdmin");
 		SetPlayerHealth(playerid, ammoutHP);
 		KillTimer(TimerOddaniaZycia[playerid]);
 	}
