@@ -8968,7 +8968,8 @@ public NG_OpenGateWithKey(playerid)
 
 stock OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
 {
-	new Float:health,timeobl;
+	new health;
+	new timeobl;
 	new string[128];
 	timeobl = timevalue*1000;
 	GetPlayerHealth(playerid, health);
