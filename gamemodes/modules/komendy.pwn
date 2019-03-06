@@ -40436,6 +40436,11 @@ if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania poz
 CMD:wjedz(playerid) return cmd_wyjedz(playerid);
 CMD:wyjedz(playerid)
 {
+	if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
+	{
+		sendTipMessage(playerid, "Jesteœ podczas wje¿d¿ania!"); 
+		return 1;
+	}
 	if(SprawdzWjazdy(playerid))
 	{
 	
