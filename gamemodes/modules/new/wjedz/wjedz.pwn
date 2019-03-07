@@ -212,7 +212,6 @@ public WjedzTimerDebug(playerid)
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 				return 1;
 			}
-			new pSeat;
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
 			{
 				RemovePlayerFromVehicle(playerid);

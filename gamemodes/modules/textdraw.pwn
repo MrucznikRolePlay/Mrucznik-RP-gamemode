@@ -298,7 +298,7 @@ LoadTextDraws(playerid)
 	
 	textwjedz[playerid] = CreatePlayerTextDraw(playerid, 230.0, 250.0, "~r~Trwa przejazd"); 
 	PlayerTextDrawFont(playerid, textwjedz[playerid], 1);
-	PlayerTextDrawSetShadow
+	//PlayerTextDrawSetShadow
 	PlayerTextDrawColor(playerid, TextOferta1[playerid], 0x80FF00FF);
 	//PlayerTextDrawUseBox(playerid, textwjedz[playerid], 1);
 	//PlayerTextDrawBoxColor(playerid, textwjedz[playerid], 0xFFFFFFFF);
