@@ -82,6 +82,7 @@ new Text:PatrolGammaSq;
 new Text:PatrolDeltaSq;
 new Text:PatrolLabel;
 new Text:PatrolMarker[MAX_PATROLS];
+new Text:textDrawPhone[20];
 
 new Text:SkinSelectionAccept,Text:SkinSelectionDenied, Text:SkinSelectionMy;
 
@@ -295,8 +296,9 @@ LoadTextDraws(playerid)
     PlayerTextDrawBoxColor(playerid, TextOferta1[playerid], 926365495);
     PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
 	
-	textwjedz[playerid] = CreatePlayerTextDraw(playerid, 230.0, 250.0, "Trwa przejazd"); 
+	textwjedz[playerid] = CreatePlayerTextDraw(playerid, 230.0, 250.0, "~r~Trwa przejazd"); 
 	PlayerTextDrawFont(playerid, textwjedz[playerid], 1);
+	//PlayerTextDrawSetShadow
 	PlayerTextDrawColor(playerid, TextOferta1[playerid], 0x80FF00FF);
 	//PlayerTextDrawUseBox(playerid, textwjedz[playerid], 1);
 	//PlayerTextDrawBoxColor(playerid, textwjedz[playerid], 0xFFFFFFFF);
