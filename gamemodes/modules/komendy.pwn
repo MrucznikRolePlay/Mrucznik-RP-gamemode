@@ -20696,7 +20696,69 @@ CMD:kup(playerid)
 	}
 	return 1;
 }
-
+CMD:telefon(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerInfo[playerid][pPnumber] == 0)
+		{
+			sendTipMessage(playerid, "Nie posiadasz telefonu"); 
+			return 1;
+		}
+		if(GetPVarInt(playerid, "OdpalilTelefon") == 0)
+		{
+			TextDrawShowForPlayer(playerid, textDrawPhone[0]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[1]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[2]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[3]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[4]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[5]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[6]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[7]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[8]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[9]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[10]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[11]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[12]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[13]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[14]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[15]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[16]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[17]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[18]);
+			TextDrawShowForPlayer(playerid, textDrawPhone[19]);
+			SetPVarInt(playerid, "OdpalilTelefon", 1);
+			sendTipMessage(playerid, "Wyci¹gasz telefon"); 
+			
+		}
+		else
+		{
+			TextDrawHideForPlayer(playerid, textDrawPhone[0]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[1]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[2]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[3]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[4]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[5]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[6]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[7]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[8]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[9]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[10]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[11]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[12]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[13]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[14]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[15]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[16]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[17]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[18]);
+			TextDrawHideForPlayer(playerid, textDrawPhone[19]);
+			SetPVarInt(playerid, "OdpalilTelefon", 0);
+			sendTipMessage(playerid, "Schowa³eœ telefon"); 
+		}
+	}
+	return 1;
+}	
 
 CMD:call(playerid, params[]) return cmd_dzwon(playerid, params);
 CMD:dzwon(playerid, params[])
@@ -28000,8 +28062,6 @@ CMD:telefonpomoc(playerid)
 	}
 	return 1;
 }
-
-
 CMD:renthelp(playerid) return cmd_wynajempomoc(playerid);
 CMD:wynajempomoc(playerid)
 {
