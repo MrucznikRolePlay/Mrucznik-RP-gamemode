@@ -298,7 +298,16 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		#endif
         return 1;
     }
-
+	if(GetPVarInt(playerid, "OdpalilTelefon") == 1)
+	{
+		//Klawisze
+		if(clickedid == textDrawPhone[4])
+		{
+			sendTipMessage(playerid, "Testujemy"); 
+		}
+	
+		return 1;
+	}
     //IBIZA
     if(clickedid==Text:INVALID_TEXT_DRAW && GetPVarInt(playerid, "IbizaKamery")) //ESC
 	{
@@ -789,6 +798,300 @@ public OnPlayerConnect(playerid)
 	LoadTextDraws(playerid);
     LoadingShow(playerid);
     LoadingHide(playerid);
+		//TELEFON START
+	//STRONA G£ÓWNA
+	
+	textDrawPhone[0] = TextDrawCreate(570.000000, 178.000000, "_");
+	TextDrawFont(textDrawPhone[0], 1);
+	TextDrawLetterSize(textDrawPhone[0], 0.600000, 15.550023);
+	TextDrawTextSize(textDrawPhone[0], 315.000000, 90.500000);
+	TextDrawSetOutline(textDrawPhone[0], 1);
+	TextDrawSetShadow(textDrawPhone[0], 0);
+	TextDrawAlignment(textDrawPhone[0], 2);
+	TextDrawColor(textDrawPhone[0], -1);
+	TextDrawBackgroundColor(textDrawPhone[0], 255);
+	TextDrawBoxColor(textDrawPhone[0], 237);
+	TextDrawUseBox(textDrawPhone[0], 1);
+	TextDrawSetProportional(textDrawPhone[0], 1);
+	TextDrawSetSelectable(textDrawPhone[0], 0);
+
+	textDrawPhone[1] = TextDrawCreate(571.000000, 169.000000, "_");
+	TextDrawFont(textDrawPhone[1], 1);
+	TextDrawLetterSize(textDrawPhone[1], 0.575000, 18.599985);
+	TextDrawTextSize(textDrawPhone[1], 288.500000, 111.500000);
+	TextDrawSetOutline(textDrawPhone[1], 1);
+	TextDrawSetShadow(textDrawPhone[1], 0);
+	TextDrawAlignment(textDrawPhone[1], 2);
+	TextDrawColor(textDrawPhone[1], -1);
+	TextDrawBackgroundColor(textDrawPhone[1], 255);
+	TextDrawBoxColor(textDrawPhone[1], 1296911871);
+	TextDrawUseBox(textDrawPhone[1], 1);
+	TextDrawSetProportional(textDrawPhone[1], 1);
+	TextDrawSetSelectable(textDrawPhone[1], 0);
+
+	textDrawPhone[2] = TextDrawCreate(546.000000, 299.000000, "M-RP");
+	TextDrawFont(textDrawPhone[2], 1);
+	TextDrawLetterSize(textDrawPhone[2], 0.600000, 2.000000);
+	TextDrawTextSize(textDrawPhone[2], 400.000000, 17.000000);
+	TextDrawSetOutline(textDrawPhone[2], 1);
+	TextDrawSetShadow(textDrawPhone[2], 0);
+	TextDrawAlignment(textDrawPhone[2], 1);
+	TextDrawColor(textDrawPhone[2], -1);
+	TextDrawBackgroundColor(textDrawPhone[2], 255);
+	TextDrawBoxColor(textDrawPhone[2], 50);
+	TextDrawUseBox(textDrawPhone[2], 0);
+	TextDrawSetProportional(textDrawPhone[2], 1);
+	TextDrawSetSelectable(textDrawPhone[2], 0);
+
+	textDrawPhone[3] = TextDrawCreate(528.000000, 178.000000, "LTE");
+	TextDrawFont(textDrawPhone[3], 1);
+	TextDrawLetterSize(textDrawPhone[3], 0.600000, 1.050000);
+	TextDrawTextSize(textDrawPhone[3], 395.000000, -5.500000);
+	TextDrawSetOutline(textDrawPhone[3], 1);
+	TextDrawSetShadow(textDrawPhone[3], 0);
+	TextDrawAlignment(textDrawPhone[3], 1);
+	TextDrawColor(textDrawPhone[3], -1);
+	TextDrawBackgroundColor(textDrawPhone[3], 255);
+	TextDrawBoxColor(textDrawPhone[3], 50);
+	TextDrawUseBox(textDrawPhone[3], 0);
+	TextDrawSetProportional(textDrawPhone[3], 1);
+	TextDrawSetSelectable(textDrawPhone[3], 0);
+
+	textDrawPhone[4] = TextDrawCreate(524.000000, 185.000000, "------------");
+	TextDrawFont(textDrawPhone[4], 0);
+	TextDrawLetterSize(textDrawPhone[4], 0.600000, 1.400000);
+	TextDrawTextSize(textDrawPhone[4], 414.000000, -22.000000);
+	TextDrawSetOutline(textDrawPhone[4], 1);
+	TextDrawSetShadow(textDrawPhone[4], 0);
+	TextDrawAlignment(textDrawPhone[4], 1);
+	TextDrawColor(textDrawPhone[4], -1);
+	TextDrawBackgroundColor(textDrawPhone[4], 255);
+	TextDrawBoxColor(textDrawPhone[4], 50);
+	TextDrawUseBox(textDrawPhone[4], 0);
+	TextDrawSetProportional(textDrawPhone[4], 1);
+	TextDrawSetSelectable(textDrawPhone[4], 0);
+
+	textDrawPhone[5] = TextDrawCreate(573.000000, 174.000000, "l");
+	TextDrawFont(textDrawPhone[5], 1);
+	TextDrawLetterSize(textDrawPhone[5], 0.600000, 2.000000);
+	TextDrawTextSize(textDrawPhone[5], 400.000000, 17.000000);
+	TextDrawSetOutline(textDrawPhone[5], 1);
+	TextDrawSetShadow(textDrawPhone[5], 0);
+	TextDrawAlignment(textDrawPhone[5], 1);
+	TextDrawColor(textDrawPhone[5], 16711935);
+	TextDrawBackgroundColor(textDrawPhone[5], 255);
+	TextDrawBoxColor(textDrawPhone[5], 50);
+	TextDrawUseBox(textDrawPhone[5], 0);
+	TextDrawSetProportional(textDrawPhone[5], 1);
+	TextDrawSetSelectable(textDrawPhone[5], 0);
+
+	textDrawPhone[6] = TextDrawCreate(578.000000, 177.000000, "l");
+	TextDrawFont(textDrawPhone[6], 1);
+	TextDrawLetterSize(textDrawPhone[6], 0.600000, 1.600000);
+	TextDrawTextSize(textDrawPhone[6], 400.000000, 17.000000);
+	TextDrawSetOutline(textDrawPhone[6], 1);
+	TextDrawSetShadow(textDrawPhone[6], 0);
+	TextDrawAlignment(textDrawPhone[6], 1);
+	TextDrawColor(textDrawPhone[6], 16711935);
+	TextDrawBackgroundColor(textDrawPhone[6], 255);
+	TextDrawBoxColor(textDrawPhone[6], 50);
+	TextDrawUseBox(textDrawPhone[6], 0);
+	TextDrawSetProportional(textDrawPhone[6], 1);
+	TextDrawSetSelectable(textDrawPhone[6], 0);
+
+	textDrawPhone[7] = TextDrawCreate(583.000000, 181.000000, "l");
+	TextDrawFont(textDrawPhone[7], 1);
+	TextDrawLetterSize(textDrawPhone[7], 0.600000, 1.000000);
+	TextDrawTextSize(textDrawPhone[7], 400.000000, 17.000000);
+	TextDrawSetOutline(textDrawPhone[7], 1);
+	TextDrawSetShadow(textDrawPhone[7], 0);
+	TextDrawAlignment(textDrawPhone[7], 1);
+	TextDrawColor(textDrawPhone[7], 16711935);
+	TextDrawBackgroundColor(textDrawPhone[7], 255);
+	TextDrawBoxColor(textDrawPhone[7], 50);
+	TextDrawUseBox(textDrawPhone[7], 0);
+	TextDrawSetProportional(textDrawPhone[7], 1);
+	TextDrawSetSelectable(textDrawPhone[7], 0);
+
+	textDrawPhone[8] = TextDrawCreate(547.000000, 210.000000, "_");
+	TextDrawFont(textDrawPhone[8], 1);
+	TextDrawLetterSize(textDrawPhone[8], 0.600000, 3.749979);
+	TextDrawTextSize(textDrawPhone[8], 296.500000, 34.000000);
+	TextDrawSetOutline(textDrawPhone[8], 1);
+	TextDrawSetShadow(textDrawPhone[8], 0);
+	TextDrawAlignment(textDrawPhone[8], 2);
+	TextDrawColor(textDrawPhone[8], -1);
+	TextDrawBackgroundColor(textDrawPhone[8], 255);
+	TextDrawBoxColor(textDrawPhone[8], 1296911751);
+	TextDrawUseBox(textDrawPhone[8], 1);
+	TextDrawSetProportional(textDrawPhone[8], 1);
+	TextDrawSetSelectable(textDrawPhone[8], 1);
+
+	textDrawPhone[9] = TextDrawCreate(594.000000, 210.000000, "_");
+	TextDrawFont(textDrawPhone[9], 1);
+	TextDrawLetterSize(textDrawPhone[9], 0.600000, 3.749979);
+	TextDrawTextSize(textDrawPhone[9], 296.500000, 34.000000);
+	TextDrawSetOutline(textDrawPhone[9], 1);
+	TextDrawSetShadow(textDrawPhone[9], 0);
+	TextDrawAlignment(textDrawPhone[9], 2);
+	TextDrawColor(textDrawPhone[9], -1);
+	TextDrawBackgroundColor(textDrawPhone[9], 255);
+	TextDrawBoxColor(textDrawPhone[9], 1296911751);
+	TextDrawUseBox(textDrawPhone[9], 1);
+	TextDrawSetProportional(textDrawPhone[9], 1);
+	TextDrawSetSelectable(textDrawPhone[9], 1);
+
+	textDrawPhone[10] = TextDrawCreate(547.000000, 258.000000, "_");
+	TextDrawFont(textDrawPhone[10], 1);
+	TextDrawLetterSize(textDrawPhone[10], 0.600000, 3.749979);
+	TextDrawTextSize(textDrawPhone[10], 296.500000, 34.000000);
+	TextDrawSetOutline(textDrawPhone[10], 1);
+	TextDrawSetShadow(textDrawPhone[10], 0);
+	TextDrawAlignment(textDrawPhone[10], 2);
+	TextDrawColor(textDrawPhone[10], -1);
+	TextDrawBackgroundColor(textDrawPhone[10], 255);
+	TextDrawBoxColor(textDrawPhone[10], 1296911751);
+	TextDrawUseBox(textDrawPhone[10], 1);
+	TextDrawSetProportional(textDrawPhone[10], 1);
+	TextDrawSetSelectable(textDrawPhone[10], 0);
+
+	textDrawPhone[11] = TextDrawCreate(594.000000, 258.000000, "_");
+	TextDrawFont(textDrawPhone[11], 1);
+	TextDrawLetterSize(textDrawPhone[11], 0.600000, 3.749979);
+	TextDrawTextSize(textDrawPhone[11], 296.500000, 34.000000);
+	TextDrawSetOutline(textDrawPhone[11], 1);
+	TextDrawSetShadow(textDrawPhone[11], 0);
+	TextDrawAlignment(textDrawPhone[11], 2);
+	TextDrawColor(textDrawPhone[11], -1);
+	TextDrawBackgroundColor(textDrawPhone[11], 255);
+	TextDrawBoxColor(textDrawPhone[11], 1296911751);
+	TextDrawUseBox(textDrawPhone[11], 1);
+	TextDrawSetProportional(textDrawPhone[11], 1);
+	TextDrawSetSelectable(textDrawPhone[11], 0);
+
+	textDrawPhone[12] = TextDrawCreate(565.000000, 320.000000, "|");
+	TextDrawFont(textDrawPhone[12], 1);
+	TextDrawLetterSize(textDrawPhone[12], 0.600000, 3.899998);
+	TextDrawTextSize(textDrawPhone[12], 425.000000, 11.000000);
+	TextDrawSetOutline(textDrawPhone[12], 1);
+	TextDrawSetShadow(textDrawPhone[12], 0);
+	TextDrawAlignment(textDrawPhone[12], 1);
+	TextDrawColor(textDrawPhone[12], -1);
+	TextDrawBackgroundColor(textDrawPhone[12], 255);
+	TextDrawBoxColor(textDrawPhone[12], 50);
+	TextDrawUseBox(textDrawPhone[12], 0);
+	TextDrawSetProportional(textDrawPhone[12], 1);
+	TextDrawSetSelectable(textDrawPhone[12], 0);
+
+	textDrawPhone[13] = TextDrawCreate(519.000000, 319.000000, "<<");
+	TextDrawFont(textDrawPhone[13], 1);
+	TextDrawLetterSize(textDrawPhone[13], 0.600000, 2.449999);
+	TextDrawTextSize(textDrawPhone[13], 433.000000, -2.000000);
+	TextDrawSetOutline(textDrawPhone[13], 1);
+	TextDrawSetShadow(textDrawPhone[13], 0);
+	TextDrawAlignment(textDrawPhone[13], 1);
+	TextDrawColor(textDrawPhone[13], -1);
+	TextDrawBackgroundColor(textDrawPhone[13], 255);
+	TextDrawBoxColor(textDrawPhone[13], 50);
+	TextDrawUseBox(textDrawPhone[13], 0);
+	TextDrawSetProportional(textDrawPhone[13], 1);
+	TextDrawSetSelectable(textDrawPhone[13], 0);
+
+	textDrawPhone[14] = TextDrawCreate(590.000000, 319.000000, ">>");
+	TextDrawFont(textDrawPhone[14], 1);
+	TextDrawLetterSize(textDrawPhone[14], 0.600000, 2.449999);
+	TextDrawTextSize(textDrawPhone[14], 433.000000, -2.000000);
+	TextDrawSetOutline(textDrawPhone[14], 1);
+	TextDrawSetShadow(textDrawPhone[14], 0);
+	TextDrawAlignment(textDrawPhone[14], 1);
+	TextDrawColor(textDrawPhone[14], -1);
+	TextDrawBackgroundColor(textDrawPhone[14], 255);
+	TextDrawBoxColor(textDrawPhone[14], 50);
+	TextDrawUseBox(textDrawPhone[14], 0);
+	TextDrawSetProportional(textDrawPhone[14], 1);
+	TextDrawSetSelectable(textDrawPhone[14], 1);
+
+	textDrawPhone[15] = TextDrawCreate(563.000000, 254.000000, "Nowy_TextDraw");
+	TextDrawFont(textDrawPhone[15], 5);
+	TextDrawLetterSize(textDrawPhone[15], 0.600000, 2.000000);
+	TextDrawTextSize(textDrawPhone[15], 60.500000, 42.000000);
+	TextDrawSetOutline(textDrawPhone[15], 1);
+	TextDrawSetShadow(textDrawPhone[15], 0);
+	TextDrawAlignment(textDrawPhone[15], 1);
+	TextDrawColor(textDrawPhone[15], -1);
+	TextDrawBackgroundColor(textDrawPhone[15], 0);
+	TextDrawBoxColor(textDrawPhone[15], 0);
+	TextDrawUseBox(textDrawPhone[15], 0);
+	TextDrawSetProportional(textDrawPhone[15], 1);
+	TextDrawSetSelectable(textDrawPhone[15], 0);
+	TextDrawSetPreviewModel(textDrawPhone[15], 0);
+	TextDrawSetPreviewRot(textDrawPhone[15], -10.000000, 0.000000, -20.000000, 1.000000);
+	TextDrawSetPreviewVehCol(textDrawPhone[15], 1, 1);
+
+	textDrawPhone[16] = TextDrawCreate(521.000000, 252.000000, "Nowy_TextDraw");
+	TextDrawFont(textDrawPhone[16], 5);
+	TextDrawLetterSize(textDrawPhone[16], 0.600000, 2.000000);
+	TextDrawTextSize(textDrawPhone[16], 60.500000, 42.000000);
+	TextDrawSetOutline(textDrawPhone[16], 1);
+	TextDrawSetShadow(textDrawPhone[16], 0);
+	TextDrawAlignment(textDrawPhone[16], 1);
+	TextDrawColor(textDrawPhone[16], -1);
+	TextDrawBackgroundColor(textDrawPhone[16], 0);
+	TextDrawBoxColor(textDrawPhone[16], 0);
+	TextDrawUseBox(textDrawPhone[16], 0);
+	TextDrawSetProportional(textDrawPhone[16], 1);
+	TextDrawSetSelectable(textDrawPhone[16], 0);
+	TextDrawSetPreviewModel(textDrawPhone[16], 11705);
+	TextDrawSetPreviewRot(textDrawPhone[16], -17.000000, 0.000000, 199.000000, 1.000000);
+	TextDrawSetPreviewVehCol(textDrawPhone[16], 1, 1);
+
+	textDrawPhone[17] = TextDrawCreate(581.000000, 211.000000, "Nowy_TextDraw");
+	TextDrawFont(textDrawPhone[17], 5);
+	TextDrawLetterSize(textDrawPhone[17], 0.600000, 2.000000);
+	TextDrawTextSize(textDrawPhone[17], 48.000000, 30.000000);
+	TextDrawSetOutline(textDrawPhone[17], 1);
+	TextDrawSetShadow(textDrawPhone[17], 0);
+	TextDrawAlignment(textDrawPhone[17], 1);
+	TextDrawColor(textDrawPhone[17], -1);
+	TextDrawBackgroundColor(textDrawPhone[17], 0);
+	TextDrawBoxColor(textDrawPhone[17], 0);
+	TextDrawUseBox(textDrawPhone[17], 0);
+	TextDrawSetProportional(textDrawPhone[17], 1);
+	TextDrawSetSelectable(textDrawPhone[17], 0);
+	TextDrawSetPreviewModel(textDrawPhone[17], 2231);
+	TextDrawSetPreviewRot(textDrawPhone[17], -1.000000, 0.000000, 220.000000, 1.000000);
+	TextDrawSetPreviewVehCol(textDrawPhone[17], 1, 1);
+
+	textDrawPhone[18] = TextDrawCreate(518.000000, 201.000000, "Nowy_TextDraw");
+	TextDrawFont(textDrawPhone[18], 5);
+	TextDrawLetterSize(textDrawPhone[18], 0.600000, 2.000000);
+	TextDrawTextSize(textDrawPhone[18], 51.000000, 57.500000);
+	TextDrawSetOutline(textDrawPhone[18], 1);
+	TextDrawSetShadow(textDrawPhone[18], 0);
+	TextDrawAlignment(textDrawPhone[18], 1);
+	TextDrawColor(textDrawPhone[18], -1);
+	TextDrawBackgroundColor(textDrawPhone[18], 0);
+	TextDrawBoxColor(textDrawPhone[18], 0);
+	TextDrawUseBox(textDrawPhone[18], 0);
+	TextDrawSetProportional(textDrawPhone[18], 1);
+	TextDrawSetSelectable(textDrawPhone[18], 0);
+	TextDrawSetPreviewModel(textDrawPhone[18], 420);
+	TextDrawSetPreviewRot(textDrawPhone[18], -16.000000, 0.000000, 30.000000, 1.000000);
+	TextDrawSetPreviewVehCol(textDrawPhone[18], 228, 1);
+
+	textDrawPhone[19] = TextDrawCreate(591.000000, 178.000000, "50%");
+	TextDrawFont(textDrawPhone[19], 1);
+	TextDrawLetterSize(textDrawPhone[19], 0.287500, 1.300000);
+	TextDrawTextSize(textDrawPhone[19], 395.000000, -5.500000);
+	TextDrawSetOutline(textDrawPhone[19], 1);
+	TextDrawSetShadow(textDrawPhone[19], 0);
+	TextDrawAlignment(textDrawPhone[19], 1);
+	TextDrawColor(textDrawPhone[19], -1);
+	TextDrawBackgroundColor(textDrawPhone[19], 255);
+	TextDrawBoxColor(textDrawPhone[19], 50);
+	TextDrawUseBox(textDrawPhone[19], 0);
+	TextDrawSetProportional(textDrawPhone[19], 1);
+	TextDrawSetSelectable(textDrawPhone[19], 0);
 	
 
 	//Poprawny nick:

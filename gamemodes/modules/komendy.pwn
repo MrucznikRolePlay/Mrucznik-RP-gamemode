@@ -20727,6 +20727,7 @@ CMD:telefon(playerid)
 			TextDrawShowForPlayer(playerid, textDrawPhone[17]);
 			TextDrawShowForPlayer(playerid, textDrawPhone[18]);
 			TextDrawShowForPlayer(playerid, textDrawPhone[19]);
+			SelectTextDraw(playerid, 0xFF0000FF);
 			SetPVarInt(playerid, "OdpalilTelefon", 1);
 			sendTipMessage(playerid, "Wyci¹gasz telefon"); 
 			
