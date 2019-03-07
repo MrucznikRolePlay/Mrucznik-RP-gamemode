@@ -82,7 +82,7 @@ new Text:PatrolGammaSq;
 new Text:PatrolDeltaSq;
 new Text:PatrolLabel;
 new Text:PatrolMarker[MAX_PATROLS];
-new Text:textDrawPhone[19];
+new Text:textDrawPhone[20];
 
 new Text:SkinSelectionAccept,Text:SkinSelectionDenied, Text:SkinSelectionMy;
 
