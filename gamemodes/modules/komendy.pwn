@@ -1973,7 +1973,7 @@ CMD:namierz(playerid, params[])
 			}
 			if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
 			{
-				sendErrorMessage(playerid, "Nie mo¿esz namierzyæ tego gracza.");
+				sendErrorMessage(playerid, "Nie uda³o siê namierzyæ telefonu...");
 				return 1;
 			}
 			if(PlayerInfo[playerid][pJob] == 1 && lowcaz[playerid] != giveplayerid)
@@ -2294,7 +2294,113 @@ CMD:odznaka(playerid, params[])
 	}
 	return 1;
 }
-
+CMD:kajdanki(playerid, params[])
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(IsACop(playerid) || (IsABOR(playerid) && PlayerInfo[playerid][pRank] >= 2))
+		{
+			if(uzytekajdanki[playerid] != 1)
+			{
+				new giveplayerid;
+				if(sscanf(params, "k<fix>", giveplayerid))
+				{
+					sendTipMessage(playerid, "U¿yj /kajdanki [ID_GRACZA]");
+					return 1;
+				}
+				if(IsACop(playerid))
+				{
+					if(OnDuty[playerid] == 0)
+					{
+						sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie!"); 
+						return 1;
+					}
+				}
+				if(!IsPlayerConnected(giveplayerid))
+				{
+					sendTipMessage(playerid, "Nie ma takiego gracza"); 
+					return 1;
+				}
+				if(IsACop(giveplayerid) && OnDuty[giveplayerid] == 1)
+				{
+					sendErrorMessage(playerid, "Nie mo¿esz skuæ policjanta na s³u¿bie!");
+					return 1;
+				}
+				if(PoziomPoszukiwania[giveplayerid] == 0)
+				{
+					sendTipMessage(playerid,"Chyba nie chcesz aresztowaæ niewinnego cz³owieka?");
+					return 1;
+				}
+				if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
+				{
+					if(GetPlayerState(playerid) == 1 && GetPlayerState(giveplayerid) == 1)
+					{
+						if(zakuty[giveplayerid] == 0)
+						{
+							new string[128];
+							if(PlayerInfo[giveplayerid][pBW] >= 1)
+							{
+								
+								//Wiadomoœci
+								format(string, sizeof(string), "* %s docisn¹³ do ziemi nieprzytomnego %s i sku³ go.", GetNick(playerid, true), GetNick(giveplayerid, true));
+								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								format(string, sizeof(string), "Dziêki szybkiej interwencji uda³o Ci siê skuæ %s.", GetNick(giveplayerid, true));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								sendTipMessageEx(giveplayerid, COLOR_BLUE, "Jesteœ nieprzytomny - policjant sku³ ciê bez wiêkszego wysi³ku.");
+								
+								
+								//czynnoœci
+								PlayerInfo[giveplayerid][pBW] = 0;
+								zakuty[giveplayerid] = 1;
+								TogglePlayerControllable(giveplayerid, 0);
+								uzytekajdanki[playerid] = 1;
+								SkutyGracz[playerid] = giveplayerid;
+								ClearAnimations(giveplayerid);
+								SetPlayerSpecialAction(giveplayerid, SPECIAL_ACTION_CUFFED);
+								SetPlayerAttachedObject(giveplayerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+								SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
+								return 1;
+							}
+							if(PlayerInfo[giveplayerid][pBW] == 0)
+							{
+								format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", GetNick(playerid, true),GetNick(giveplayerid, true));
+								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								ShowPlayerDialogEx(giveplayerid, 98, DIALOG_STYLE_MSGBOX, "Aresztowanie", "Policjant chce za³o¿yæ ci kajdanki, jeœli osacza ciê niedu¿a liczba policjantów mo¿esz spróbowaæ siê wyrwaæ\nJednak pamiêtaj jeœli siê wyrwiesz i jesteœ uzbrojony policjant ma prawo ciê zabiæ. \nMo¿esz tak¿e dobrowolnie poddaæ siê policjantom.", "Poddaj siê", "Wyrwij siê");
+								PDkuje[giveplayerid] = playerid;
+								//uzytekajdanki[giveplayerid] = 1;
+								SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
+								return 1;
+							}
+						}
+						else
+						{
+							sendErrorMessage(playerid, "Ten gracz ma ju¿ na sobie kajdanki"); 
+						}
+					}
+					else
+					{
+						sendErrorMessage(playerid, "¯aden z was nie mo¿e byæ w wozie!"); 
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza"); 
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "U¿ywasz ju¿ swoje kajdanki"); 
+				return 1;
+			}
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nie posiadasz kajdanek"); 
+		}
+	}
+	return 1;
+}
+/*
 CMD:kajdanki(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
@@ -2413,7 +2519,7 @@ CMD:kajdanki(playerid, params[])
 	}
 	return 1;
 }
-
+*/
 CMD:barierka(playerid, params[])
 {
     if(!(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_BOR || GetPlayerOrg(playerid) == 12 || GetPlayerFraction(playerid) == FRAC_LSMC))
@@ -3025,7 +3131,8 @@ CMD:zmienplec(playerid, params[])
 			{
 				if(playa != INVALID_PLAYER_ID)
 				{
-					if(GetPlayerVirtualWorld(playerid) > 90 && IsPlayerInRangeOfPoint(playerid, 100.0, 1103.4714,-1298.0918,21.552))
+					//if(GetPlayerVirtualWorld(playerid) > 90 && IsPlayerInRangeOfPoint(playerid, 100.0, 1103.4714,-1298.0918,21.552))
+					if(PlayerInfo[playerid][pLocal] == PLOCAL_FRAC_LSMC)
 					{
                         if(kaska[playerid] < 50000) return sendErrorMessage(playerid, "Nie masz 50 000$ na operacjê.");
 						format(string, sizeof(string),"Przeprowadzi³eœ operacje zmiany p³ci na %s. Koszt: 50 000$", giveplayer);
@@ -20707,26 +20814,26 @@ CMD:telefon(playerid)
 		}
 		if(GetPVarInt(playerid, "OdpalilTelefon") == 0)
 		{
-			TextDrawShowForPlayer(playerid, textDrawPhone[0]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[1]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[2]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[3]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[4]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[5]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[6]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[7]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[8]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[9]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[10]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[11]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[12]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[13]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[14]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[15]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[16]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[17]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[18]);
-			TextDrawShowForPlayer(playerid, textDrawPhone[19]);
+			PlayerTextDrawShow(playerid, textDrawPhone[0]);
+			PlayerTextDrawShow(playerid, textDrawPhone[1]);
+			PlayerTextDrawShow(playerid, textDrawPhone[2]);
+			PlayerTextDrawShow(playerid, textDrawPhone[3]);
+			PlayerTextDrawShow(playerid, textDrawPhone[4]);
+			PlayerTextDrawShow(playerid, textDrawPhone[5]);
+			PlayerTextDrawShow(playerid, textDrawPhone[6]);
+			PlayerTextDrawShow(playerid, textDrawPhone[7]);
+			PlayerTextDrawShow(playerid, textDrawPhone[8]);
+			PlayerTextDrawShow(playerid, textDrawPhone[9]);
+			PlayerTextDrawShow(playerid, textDrawPhone[10]);
+			PlayerTextDrawShow(playerid, textDrawPhone[11]);
+			PlayerTextDrawShow(playerid, textDrawPhone[12]);
+			PlayerTextDrawShow(playerid, textDrawPhone[13]);
+			PlayerTextDrawShow(playerid, textDrawPhone[14]);
+			PlayerTextDrawShow(playerid, textDrawPhone[15]);
+			PlayerTextDrawShow(playerid, textDrawPhone[16]);
+			PlayerTextDrawShow(playerid, textDrawPhone[17]);
+			PlayerTextDrawShow(playerid, textDrawPhone[18]);
+			PlayerTextDrawShow(playerid, textDrawPhone[19]);
 			SelectTextDraw(playerid, 0xFF0000FF);
 			SetPVarInt(playerid, "OdpalilTelefon", 1);
 			sendTipMessage(playerid, "Wyci¹gasz telefon"); 
@@ -20734,26 +20841,26 @@ CMD:telefon(playerid)
 		}
 		else
 		{
-			TextDrawHideForPlayer(playerid, textDrawPhone[0]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[1]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[2]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[3]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[4]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[5]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[6]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[7]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[8]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[9]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[10]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[11]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[12]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[13]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[14]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[15]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[16]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[17]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[18]);
-			TextDrawHideForPlayer(playerid, textDrawPhone[19]);
+			PlayerTextDrawHide(playerid, textDrawPhone[0]);
+			PlayerTextDrawHide(playerid, textDrawPhone[1]);
+			PlayerTextDrawHide(playerid, textDrawPhone[2]);
+			PlayerTextDrawHide(playerid, textDrawPhone[3]);
+			PlayerTextDrawHide(playerid, textDrawPhone[4]);
+			PlayerTextDrawHide(playerid, textDrawPhone[5]);
+			PlayerTextDrawHide(playerid, textDrawPhone[6]);
+			PlayerTextDrawHide(playerid, textDrawPhone[7]);
+			PlayerTextDrawHide(playerid, textDrawPhone[8]);
+			PlayerTextDrawHide(playerid, textDrawPhone[9]);
+			PlayerTextDrawHide(playerid, textDrawPhone[10]);
+			PlayerTextDrawHide(playerid, textDrawPhone[11]);
+			PlayerTextDrawHide(playerid, textDrawPhone[12]);
+			PlayerTextDrawHide(playerid, textDrawPhone[13]);
+			PlayerTextDrawHide(playerid, textDrawPhone[14]);
+			PlayerTextDrawHide(playerid, textDrawPhone[15]);
+			PlayerTextDrawHide(playerid, textDrawPhone[16]);
+			PlayerTextDrawHide(playerid, textDrawPhone[17]);
+			PlayerTextDrawHide(playerid, textDrawPhone[18]);
+			PlayerTextDrawHide(playerid, textDrawPhone[19]);
 			SetPVarInt(playerid, "OdpalilTelefon", 0);
 			sendTipMessage(playerid, "Schowa³eœ telefon"); 
 		}
@@ -21744,7 +21851,7 @@ CMD:wejdz(playerid)
 		WejdzInt(playerid, 2351.8894042969,-1169.4614257813,28.001684188843,  2352.0139160156,-1180.8870849609,1027.9765625, 5.0, 5, 0, "", PLOCAL_DEFAULT, "");//Dom Na Las Collinas
 		WejdzInt(playerid, 1698.8944091797,-1667.6840820313,20.194225311279, 1701.4025878906,-1667.9442138672,20.21875, 5.0, 0, 18, "", PLOCAL_DEFAULT, "Fascynujace");//Muzeum Sztuki
 		WejdzInt(playerid, 1727.1125488281,-1635.5847167969,20.216684341431, 1727.076171875,-1638.8159179688,20.223419189453, 5.0, 0, 18, "", PLOCAL_DEFAULT, "Fascynujace");//Muzeum Sztuki 2
-		WejdzInt(playerid, 1172.6564, -1323.4110, 15.6034, 1171.9703, -1322.4764, 31.6913, 5.0, 0, 90, "Szpital im. Wszystkich Œwiêtych", PLOCAL_DEFAULT, "~w~By ~r~Sergio ~w~& ~r~ Deduir");//Wejœcie do szpitala
+		WejdzInt(playerid, 1172.6564, -1323.4110, 15.6034, 1171.9703, -1322.4764, 31.6913, 5.0, 0, 90, "Szpital im. Wszystkich Œwiêtych", PLOCAL_FRAC_LSMC, "~w~By ~r~Sergio ~w~& ~r~ Deduir");//Wejœcie do szpitala
 		WejdzInt(playerid, 1763.4033,-1129.7128,24.0859, 1763.4243,-1128.0543,224.1499, 5.0, 0, 22, "Remiza im. Œwiêtego Krzysztofa", PLOCAL_DEFAULT, "~w~Witamy w remizie!");//Remiza wejœcie
 
 		if(DoorInfo[FRAC_LCN][d_State])
