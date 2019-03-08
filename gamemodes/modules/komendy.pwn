@@ -20707,7 +20707,7 @@ CMD:telefon(playerid)
 		}
 		if(GetPVarInt(playerid, "OdpalilTelefon") == 0)
 		{
-			TextDrawShowForPlayer(playerid, textDrawPhone[0]);
+			PlayerTextDrawShow(playerid, textDrawPhone[0]);
 			TextDrawShowForPlayer(playerid, textDrawPhone[1]);
 			TextDrawShowForPlayer(playerid, textDrawPhone[2]);
 			TextDrawShowForPlayer(playerid, textDrawPhone[3]);
@@ -20734,7 +20734,7 @@ CMD:telefon(playerid)
 		}
 		else
 		{
-			TextDrawHideForPlayer(playerid, textDrawPhone[0]);
+			PlayerTextDrawHide(playerid, textDrawPhone[0]);
 			TextDrawHideForPlayer(playerid, textDrawPhone[1]);
 			TextDrawHideForPlayer(playerid, textDrawPhone[2]);
 			TextDrawHideForPlayer(playerid, textDrawPhone[3]);
