@@ -6499,6 +6499,23 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     {
         FabrykaMats::ActorTalk(playerid);
     }
+	if(newkeys & KEY_YES && KEY_FIRE && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
+	{
+		if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
+		{
+			sendTipMessage(playerid, "Jesteœ podczas wje¿d¿ania!"); 
+			return 1;
+		}
+		if(SprawdzWjazdy(playerid))
+		{
+		
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
+		}
+	
+	}
 	if(newkeys & KEY_SECONDARY_ATTACK)
 	{
 		if(!IsPlayerInAnyVehicle(playerid))

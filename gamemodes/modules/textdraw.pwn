@@ -364,7 +364,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[3], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[3], 0);
 	
-	textDrawPhone[4] = TextDrawCreate(524.000000, 185.000000, "------------");
+	textDrawPhone[4] = CreatePlayerTextDraw(playerid, 524.000000, 185.000000, "------------");
 	PlayerTextDrawFont(playerid, textDrawPhone[4], 0);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[4], 0.600000, 1.400000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[4], 414.000000, -22.000000);
@@ -378,7 +378,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[4], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[4], 0);
 
-	textDrawPhone[5] = TextDrawCreate(573.000000, 174.000000, "l");
+	textDrawPhone[5] = CreatePlayerTextDraw(playerid, 573.000000, 174.000000, "l");
 	PlayerTextDrawFont(playerid, textDrawPhone[5], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[5], 0.600000, 2.000000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[5], 400.000000, 17.000000);
@@ -392,7 +392,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[5], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[5], 0);
 
-	textDrawPhone[6] = TextDrawCreate(578.000000, 177.000000, "l");
+	textDrawPhone[6] = CreatePlayerTextDraw(playerid, 578.000000, 177.000000, "l");
 	PlayerTextDrawFont(playerid, textDrawPhone[6], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[6], 0.600000, 1.600000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[6], 400.000000, 17.000000);
@@ -406,7 +406,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[6], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[6], 0);
 
-	textDrawPhone[7] = TextDrawCreate(583.000000, 181.000000, "l");
+	textDrawPhone[7] = CreatePlayerTextDraw(playerid, 583.000000, 181.000000, "l");
 	PlayerTextDrawFont(playerid, textDrawPhone[7], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[7], 0.600000, 1.000000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[7], 400.000000, 17.000000);
@@ -420,7 +420,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[7], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[7], 0);
 
-	textDrawPhone[8] = TextDrawCreate(547.000000, 210.000000, "_");
+	textDrawPhone[8] = CreatePlayerTextDraw(playerid, 547.000000, 210.000000, "_");
 	PlayerTextDrawFont(playerid, textDrawPhone[8], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[8], 0.600000, 3.749979);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[8], 296.500000, 34.000000);
@@ -434,7 +434,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[8], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[8], 1);
 
-	textDrawPhone[9] = TextDrawCreate(594.000000, 210.000000, "_");
+	textDrawPhone[9] = CreatePlayerTextDraw(playerid, 594.000000, 210.000000, "_");
 	PlayerTextDrawFont(playerid, textDrawPhone[9], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[9], 0.600000, 3.749979);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[9], 296.500000, 34.000000);
@@ -448,7 +448,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[9], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[9], 1);
 
-	textDrawPhone[10] = TextDrawCreate(547.000000, 258.000000, "_");
+	textDrawPhone[10] = CreatePlayerTextDraw(playerid, 547.000000, 258.000000, "_");
 	PlayerTextDrawFont(playerid, textDrawPhone[10], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[10], 0.600000, 3.749979);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[10], 296.500000, 34.000000);
@@ -462,7 +462,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[10], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[10], 0);
 
-	textDrawPhone[11] = TextDrawCreate(594.000000, 258.000000, "_");
+	textDrawPhone[11] = CreatePlayerTextDraw(playerid, 594.000000, 258.000000, "_");
 	PlayerTextDrawFont(playerid, textDrawPhone[11], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[11], 0.600000, 3.749979);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[11], 296.500000, 34.000000);
@@ -476,7 +476,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[11], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[11], 0);
 
-	textDrawPhone[12] = TextDrawCreate(565.000000, 320.000000, "|");
+	textDrawPhone[12] = CreatePlayerTextDraw(playerid, 565.000000, 320.000000, "|");
 	PlayerTextDrawFont(playerid, textDrawPhone[12], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[12], 0.600000, 3.899998);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[12], 425.000000, 11.000000);
@@ -490,7 +490,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[12], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[12], 0);
 
-	textDrawPhone[13] = TextDrawCreate(519.000000, 319.000000, "<<");
+	textDrawPhone[13] = CreatePlayerTextDraw(playerid, 519.000000, 319.000000, "<<");
 	PlayerTextDrawFont(playerid, textDrawPhone[13], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[13], 0.600000, 2.449999);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[13], 433.000000, -2.000000);
@@ -504,7 +504,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[13], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[13], 0);
 
-	textDrawPhone[14] = TextDrawCreate(590.000000, 319.000000, ">>");
+	textDrawPhone[14] = CreatePlayerTextDraw(playerid, 590.000000, 319.000000, ">>");
 	PlayerTextDrawFont(playerid, textDrawPhone[14], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[14], 0.600000, 2.449999);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[14], 433.000000, -2.000000);
@@ -518,7 +518,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[14], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[14], 1);
 
-	textDrawPhone[15] = TextDrawCreate(563.000000, 254.000000, "Nowy_TextDraw");
+	textDrawPhone[15] = CreatePlayerTextDraw(playerid, 563.000000, 254.000000, "Nowy_TextDraw");
 	PlayerTextDrawFont(playerid, textDrawPhone[15], 5);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[15], 0.600000, 2.000000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[15], 60.500000, 42.000000);
@@ -535,7 +535,7 @@ LoadTextDraws(playerid)
 	TextDrawSetPreviewRot(textDrawPhone[15], -10.000000, 0.000000, -20.000000, 1.000000);
 	TextDrawSetPreviewVehCol(textDrawPhone[15], 1, 1);
 
-	textDrawPhone[16] = TextDrawCreate(521.000000, 252.000000, "Nowy_TextDraw");
+	textDrawPhone[16] = CreatePlayerTextDraw(playerid, 521.000000, 252.000000, "Nowy_TextDraw");
 	PlayerTextDrawFont(playerid, textDrawPhone[16], 5);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[16], 0.600000, 2.000000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[16], 60.500000, 42.000000);
@@ -552,7 +552,7 @@ LoadTextDraws(playerid)
 	TextDrawSetPreviewRot(textDrawPhone[16], -17.000000, 0.000000, 199.000000, 1.000000);
 	TextDrawSetPreviewVehCol(textDrawPhone[16], 1, 1);
 
-	textDrawPhone[17] = TextDrawCreate(581.000000, 211.000000, "Nowy_TextDraw");
+	textDrawPhone[17] = CreatePlayerTextDraw(playerid, 581.000000, 211.000000, "Nowy_TextDraw");
 	PlayerTextDrawFont(playerid, textDrawPhone[17], 5);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[17], 0.600000, 2.000000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[17], 48.000000, 30.000000);
@@ -569,7 +569,7 @@ LoadTextDraws(playerid)
 	TextDrawSetPreviewRot(textDrawPhone[17], -1.000000, 0.000000, 220.000000, 1.000000);
 	TextDrawSetPreviewVehCol(textDrawPhone[17], 1, 1);
 
-	textDrawPhone[18] = TextDrawCreate(518.000000, 201.000000, "Nowy_TextDraw");
+	textDrawPhone[18] = CreatePlayerTextDraw(playerid, 518.000000, 201.000000, "Nowy_TextDraw");
 	PlayerTextDrawFont(playerid, textDrawPhone[18], 5);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[18], 0.600000, 2.000000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[18], 51.000000, 57.500000);
@@ -586,7 +586,7 @@ LoadTextDraws(playerid)
 	TextDrawSetPreviewRot(textDrawPhone[18], -16.000000, 0.000000, 30.000000, 1.000000);
 	TextDrawSetPreviewVehCol(textDrawPhone[18], 228, 1);
 
-	textDrawPhone[19] = TextDrawCreate(591.000000, 178.000000, "50%");
+	textDrawPhone[19] = CreatePlayerTextDraw(playerid, 591.000000, 178.000000, "50%");
 	PlayerTextDrawFont(playerid, textDrawPhone[19], 1);
 	PlayerTextDrawLetterSize(playerid, textDrawPhone[19], 0.287500, 1.300000);
 	PlayerTextDrawTextSize(playerid, textDrawPhone[19], 395.000000, -5.500000);
