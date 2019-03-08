@@ -298,16 +298,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		#endif
         return 1;
     }
-	if(GetPVarInt(playerid, "OdpalilTelefon") == 1)
-	{
-		//Klawisze
-		if(clickedid == textDrawPhone[4])
-		{
-			sendTipMessage(playerid, "Testujemy"); 
-		}
-	
-		return 1;
-	}
     //IBIZA
     if(clickedid==Text:INVALID_TEXT_DRAW && GetPVarInt(playerid, "IbizaKamery")) //ESC
 	{
@@ -6499,7 +6489,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     {
         FabrykaMats::ActorTalk(playerid);
     }
-	if(newkeys & KEY_YES && KEY_FIRE && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
+	if((newkeys & KEY_HANDBRAKE) && (newkeys & KEY_CROUCH) && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
 	{
 		if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
 		{
@@ -6514,7 +6504,18 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		{
 			sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
 		}
+	}
+	if((newkeys & KEY_HANDBRAKE) && (newkeys & KEY_CROUCH))
+	{
 	
+		if(SprawdzBramy(playerid))
+		{
+		
+		}
+		else
+		{
+			sendTipMessage(playerid, "W systemie nie znaleziono podanej bramy"); 
+		}
 	}
 	if(newkeys & KEY_SECONDARY_ATTACK)
 	{
