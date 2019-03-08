@@ -2337,8 +2337,10 @@ CMD:kajdanki(playerid, params[])
 					{
 						if(zakuty[giveplayerid] == 0)
 						{
+							new string[128];
 							if(PlayerInfo[giveplayerid][pBW] >= 1)
 							{
+								
 								//Wiadomoœci
 								format(string, sizeof(string), "* %s docisn¹³ do ziemi nieprzytomnego %s i sku³ go.", GetNick(playerid, true), GetNick(giveplayerid, true));
 								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
