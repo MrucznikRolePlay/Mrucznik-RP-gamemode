@@ -3131,7 +3131,8 @@ CMD:zmienplec(playerid, params[])
 			{
 				if(playa != INVALID_PLAYER_ID)
 				{
-					if(GetPlayerVirtualWorld(playerid) > 90 && IsPlayerInRangeOfPoint(playerid, 100.0, 1103.4714,-1298.0918,21.552))
+					//if(GetPlayerVirtualWorld(playerid) > 90 && IsPlayerInRangeOfPoint(playerid, 100.0, 1103.4714,-1298.0918,21.552))
+					if(PlayerInfo[playerid][pLocal] == PLOCAL_FRAC_LSMC)
 					{
                         if(kaska[playerid] < 50000) return sendErrorMessage(playerid, "Nie masz 50 000$ na operacjê.");
 						format(string, sizeof(string),"Przeprowadzi³eœ operacje zmiany p³ci na %s. Koszt: 50 000$", giveplayer);
@@ -21850,7 +21851,7 @@ CMD:wejdz(playerid)
 		WejdzInt(playerid, 2351.8894042969,-1169.4614257813,28.001684188843,  2352.0139160156,-1180.8870849609,1027.9765625, 5.0, 5, 0, "", PLOCAL_DEFAULT, "");//Dom Na Las Collinas
 		WejdzInt(playerid, 1698.8944091797,-1667.6840820313,20.194225311279, 1701.4025878906,-1667.9442138672,20.21875, 5.0, 0, 18, "", PLOCAL_DEFAULT, "Fascynujace");//Muzeum Sztuki
 		WejdzInt(playerid, 1727.1125488281,-1635.5847167969,20.216684341431, 1727.076171875,-1638.8159179688,20.223419189453, 5.0, 0, 18, "", PLOCAL_DEFAULT, "Fascynujace");//Muzeum Sztuki 2
-		WejdzInt(playerid, 1172.6564, -1323.4110, 15.6034, 1171.9703, -1322.4764, 31.6913, 5.0, 0, 90, "Szpital im. Wszystkich Œwiêtych", PLOCAL_DEFAULT, "~w~By ~r~Sergio ~w~& ~r~ Deduir");//Wejœcie do szpitala
+		WejdzInt(playerid, 1172.6564, -1323.4110, 15.6034, 1171.9703, -1322.4764, 31.6913, 5.0, 0, 90, "Szpital im. Wszystkich Œwiêtych", PLOCAL_FRAC_LSMC, "~w~By ~r~Sergio ~w~& ~r~ Deduir");//Wejœcie do szpitala
 		WejdzInt(playerid, 1763.4033,-1129.7128,24.0859, 1763.4243,-1128.0543,224.1499, 5.0, 0, 22, "Remiza im. Œwiêtego Krzysztofa", PLOCAL_DEFAULT, "~w~Witamy w remizie!");//Remiza wejœcie
 
 		if(DoorInfo[FRAC_LCN][d_State])

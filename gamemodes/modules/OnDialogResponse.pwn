@@ -1167,25 +1167,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
 			{
 			    case 0:
+				{
 				    ElevatorTravel(playerid,-2805.0967,2596.0566,-98.0829, 90,0.0);//pkostnica
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
 				case 1:
+				{
 					ElevatorTravel(playerid,1144.4740, -1333.2556, 13.8348, 0,90.0);//parking
+					PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
+				}
 				case 2:
+				{
         			ElevatorTravel(playerid,1134.0449,-1320.7128,68.3750,90,270.0);//p1
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
 				case 3:
-				    ElevatorTravel(playerid,1183.3129,-1333.5684,88.1627,90,90.0);//p2
+				{
+					ElevatorTravel(playerid,1183.3129,-1333.5684,88.1627,90,90.0);//p2
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
 				case 4:
+				{
 					ElevatorTravel(playerid,1168.2112,-1340.6785,100.3780,90,90.0);//p3
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
 				case 5:
-				    ElevatorTravel(playerid,1158.6868,-1339.4423,120.2738,90,90.0);//p4
+				{
+					ElevatorTravel(playerid,1158.6868,-1339.4423,120.2738,90,90.0);//p
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
 				case 6:
-				    ElevatorTravel(playerid,1167.7832,-1332.2727,134.7856,90,90.0);//p5
+				{
+					ElevatorTravel(playerid,1167.7832,-1332.2727,134.7856,90,90.0);//p5
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
     			case 7:
-				    ElevatorTravel(playerid,1177.4791,-1320.7749,178.0699,90,90.0);//p6
+				{
+					ElevatorTravel(playerid,1177.4791,-1320.7749,178.0699,90,90.0);//p6
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
 				case 8:
-            		ElevatorTravel(playerid,1178.2081,-1330.6317,191.5315,90,90.0);//p7
+            	{
+					ElevatorTravel(playerid,1178.2081,-1330.6317,191.5315,90,90.0);//p7
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
                 case 9:
+				{
             		ElevatorTravel(playerid,1161.8228, -1337.0521, 31.6112,0,180.0);//dach
+					PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
+				}
 			}
         }
 	}
