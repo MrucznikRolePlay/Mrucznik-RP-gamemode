@@ -112,7 +112,7 @@ stock SprawdzWejscia(playerid)
 			}
 			
 		}
-		if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z])
+		if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]))
 		{
 			SetPlayerVirtualWorld(playerid, 0);
 			SetPLocal(playerid, PLOCAL_DEFAULT);
