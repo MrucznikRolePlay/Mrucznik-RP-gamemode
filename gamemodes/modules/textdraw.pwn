@@ -531,9 +531,9 @@ LoadTextDraws(playerid)
 	PlayerTextDrawUseBox(playerid, textDrawPhone[15], 0);
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[15], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[15], 0);
-	TextDrawSetPreviewModel(textDrawPhone[15], 0);
-	TextDrawSetPreviewRot(textDrawPhone[15], -10.000000, 0.000000, -20.000000, 1.000000);
-	TextDrawSetPreviewVehCol(textDrawPhone[15], 1, 1);
+	PlayerTextDrawSetPreviewModel(playerid, textDrawPhone[15], 0);
+	PlayerTextDrawSetPreviewRot(playerid, textDrawPhone[15], -10.000000, 0.000000, -20.000000, 1.000000);
+	PlayerTextDrawSetPreviewVehCol(playerid, textDrawPhone[15], 1, 1);
 
 	textDrawPhone[16] = CreatePlayerTextDraw(playerid, 521.000000, 252.000000, "Nowy_TextDraw");
 	PlayerTextDrawFont(playerid, textDrawPhone[16], 5);
@@ -548,9 +548,9 @@ LoadTextDraws(playerid)
 	PlayerTextDrawUseBox(playerid, textDrawPhone[16], 0);
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[16], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[16], 0);
-	TextDrawSetPreviewModel(textDrawPhone[16], 11705);
-	TextDrawSetPreviewRot(textDrawPhone[16], -17.000000, 0.000000, 199.000000, 1.000000);
-	TextDrawSetPreviewVehCol(textDrawPhone[16], 1, 1);
+	PlayerTextDrawSetPreviewModel(playerid, textDrawPhone[16], 11705);
+	PlayerTextDrawSetPreviewRot(playerid, textDrawPhone[16], -17.000000, 0.000000, 199.000000, 1.000000);
+	PlayerTextDrawSetPreviewVehCol(playerid, textDrawPhone[16], 1, 1);
 
 	textDrawPhone[17] = CreatePlayerTextDraw(playerid, 581.000000, 211.000000, "Nowy_TextDraw");
 	PlayerTextDrawFont(playerid, textDrawPhone[17], 5);
@@ -565,9 +565,9 @@ LoadTextDraws(playerid)
 	PlayerTextDrawUseBox(playerid, textDrawPhone[17], 0);
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[17], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[17], 0);
-	TextDrawSetPreviewModel(textDrawPhone[17], 2231);
-	TextDrawSetPreviewRot(textDrawPhone[17], -1.000000, 0.000000, 220.000000, 1.000000);
-	TextDrawSetPreviewVehCol(textDrawPhone[17], 1, 1);
+	PlayerTextDrawSetPreviewModel(playerid, textDrawPhone[17], 2231);
+	PlayerTextDrawSetPreviewRot(playerid, textDrawPhone[17], -1.000000, 0.000000, 220.000000, 1.000000);
+	PlayerTextDrawSetPreviewVehCol(playerid, textDrawPhone[17], 1, 1);
 
 	textDrawPhone[18] = CreatePlayerTextDraw(playerid, 518.000000, 201.000000, "Nowy_TextDraw");
 	PlayerTextDrawFont(playerid, textDrawPhone[18], 5);
@@ -582,9 +582,9 @@ LoadTextDraws(playerid)
 	PlayerTextDrawUseBox(playerid, textDrawPhone[18], 0);
 	PlayerTextDrawSetProportional(playerid, textDrawPhone[18], 1);
 	PlayerTextDrawSetSelectable(playerid, textDrawPhone[18], 0);
-	TextDrawSetPreviewModel(textDrawPhone[18], 420);
-	TextDrawSetPreviewRot(textDrawPhone[18], -16.000000, 0.000000, 30.000000, 1.000000);
-	TextDrawSetPreviewVehCol(textDrawPhone[18], 228, 1);
+	PlayerTextDrawSetPreviewModel(playerid, textDrawPhone[18], 420);
+	PlayerTextDrawSetPreviewRot(playerid, textDrawPhone[18], -16.000000, 0.000000, 30.000000, 1.000000);
+	PlayerTextDrawSetPreviewVehCol(playerid, textDrawPhone[18], 228, 1);
 
 	textDrawPhone[19] = CreatePlayerTextDraw(playerid, 591.000000, 178.000000, "50%");
 	PlayerTextDrawFont(playerid, textDrawPhone[19], 1);
