@@ -6505,10 +6505,13 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
 		}
 	}
-	if((newkeys & KEY_HANDBRAKE) && (newkeys & KEY_CROUCH) && (GetPlayerState(playerid)==PLAYER_STATE_ONFOOT))
+	if((newkeys & KEY_SPRINT))
 	{
-	
 		if(SprawdzBramy(playerid))
+		{
+		
+		}
+		else if(SprawdzWejscia(playerid))
 		{
 		
 		}
