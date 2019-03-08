@@ -94,8 +94,8 @@ stock SprawdzWjazdy(playerid)
 					}
 					else
 					{
-						SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+						sendTipMessage(playerid, "U퓓j /wejdz"); 
+						return 1;
 					}
 				}
 				else
@@ -116,8 +116,8 @@ stock SprawdzWjazdy(playerid)
 					}
 					else
 					{
-						SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+						sendTipMessage(playerid, "U퓓j /wejdz");
+						return 1;
 					}
 				}
 				else
@@ -139,8 +139,8 @@ stock SprawdzWjazdy(playerid)
 					}
 					else
 					{
-						SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-						SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+						sendTipMessage(playerid, "* U퓓j /wejdz"); 
+						return 1;
 					}
 				}
 				else
@@ -160,8 +160,8 @@ stock SprawdzWjazdy(playerid)
 				}
 				else
 				{
-					SetPlayerPos(playerid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-					SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+					sendTipMessage(playerid, "U퓓j /wejdz"); 
+					return 1;
 				}
 			}
 			foreach(Player, i2)
@@ -187,8 +187,8 @@ stock SprawdzWjazdy(playerid)
 			}
 			else
 			{
-				SetPlayerPos(playerid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
-				SetPlayerVirtualWorld(playerid, 0);
+				sendTipMessage(playerid, "U퓓j /wejdz"); 
+				return 1;
 			}
 			foreach(Player, i2)
 			{
