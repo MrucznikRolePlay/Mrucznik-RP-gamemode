@@ -16272,6 +16272,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2://=======================>>Przelew z konta frakcji na konto frakcji 
 				{
+					if(IsAPrzestepca(playerid))
+					{
+						sendTipMessage(playerid, "Organizacje przestêpcze musz¹ znaleŸæ lepszy (cichszy) sposób na przelew"); 
+						return 1;
+					}
 					format(string, sizeof(string), ">> %s", FractionNames[FracGracza]);
 					ShowPlayerDialogEx(playerid, 1098, DIALOG_STYLE_LIST, string, "LSPD\nFBI\nLSFD\nLSMC\nDMV\nUSSS\nSN\nKT\nNOA", "Dalej", "Powrót"); 
 				
