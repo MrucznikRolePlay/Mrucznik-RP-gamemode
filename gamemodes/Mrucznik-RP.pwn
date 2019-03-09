@@ -6505,7 +6505,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
 		}
 	}
-	if((newkeys & KEY_SPRINT))
+	if((newkeys & KEY_SPRINT) && newkeys & KEY_JUMP)
 	{
 		if(SprawdzBramy(playerid))
 		{
@@ -6514,10 +6514,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		else if(SprawdzWejscia(playerid))
 		{
 		
-		}
-		else
-		{
-			sendTipMessage(playerid, "W systemie nie znaleziono podanej bramy"); 
 		}
 	}
 	if(newkeys & KEY_SECONDARY_ATTACK)

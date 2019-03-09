@@ -220,36 +220,29 @@ public WjedzTimerDebug(playerid)
 			{
 				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
 				{
-					sendTipMessageEx(playerid, COLOR_RED, "==========[Wjedz]=========="); 
-					sendTipMessage(playerid, "Ustalanie VW --> Udane"); 
 					SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 					return 1;
 				}
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
-				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);
-				sendTipMessageEx(playerid, COLOR_RED, "==========[Wjedz]=========="); 
-				sendTipMessage(playerid, "Ustalanie VW --> Udane"); 		
+				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);		
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
 			{
 				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
 				{
-					sendTipMessageEx(playerid, COLOR_RED, "==========[Wjedz]=========="); 
-					sendTipMessage(playerid, "Ustalanie VW --> Udane"); 
 					SetPlayerVirtualWorld(playerid, 0);
 					return 1;
 				}
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, 0);
 				SetVehicleVirtualWorld(pVehAcID, 0);
-				sendTipMessage(playerid, "Ustalanie zerowego VW --> Udane"); 
 			}
 			
 		}
 		PutPlayerInVehicle(playerid, pVehAcID, 0);
 	}
-	if(timeSecWjedz[playerid] == 4)
+	if(timeSecWjedz[playerid] == 3)
 	{
 		for(new i; i<valueWjedz; i++)
 		{
@@ -258,9 +251,6 @@ public WjedzTimerDebug(playerid)
 				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
 				{
 					new pSeat = GetPVarInt(playerid, "pSeatIDE"); 
-					sendTipMessage(playerid, "Ustalanie pozycji wyjazdowej --> Udane"); 
-					sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd");
-					sendTipMessageEx(playerid, COLOR_RED, "==========[Success]==========");
 					PutPlayerInVehicle(playerid, pVehAcID, pSeat);
 					KillTimer(WjedzTimer[playerid]);
 					TogglePlayerControllable(playerid, 1);
@@ -268,16 +258,12 @@ public WjedzTimerDebug(playerid)
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-				sendTipMessage(playerid, "Ustalanie pozycji wjazdowej --> Udane"); 	
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
 			{
 				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
 				{
 					new pSeat = GetPVarInt(playerid, "pSeatIDE"); 
-					sendTipMessage(playerid, "Ustalanie pozycji wyjazdowej --> Udane"); 
-					sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd");
-					sendTipMessageEx(playerid, COLOR_RED, "==========[Success]==========");
 					PutPlayerInVehicle(playerid, pVehAcID, pSeat);
 					KillTimer(WjedzTimer[playerid]);
 					TogglePlayerControllable(playerid, 1);
@@ -285,13 +271,10 @@ public WjedzTimerDebug(playerid)
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
-				sendTipMessage(playerid, "Ustalanie pozycji wyjazdowej --> Udane"); 
 			}
 		}
 		PlayerTextDrawHide(playerid, textwjedz[playerid]);
 		TogglePlayerControllable(playerid, 1);
-		sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wykonano wjazd/wyjazd");
-		sendTipMessageEx(playerid, COLOR_RED, "==========[Success]==========");
 		timeSecWjedz[playerid] = 0;
 		SetPVarInt(playerid, "JestPodczasWjezdzania", 0);
 		KillTimer(WjedzTimer[playerid]);
