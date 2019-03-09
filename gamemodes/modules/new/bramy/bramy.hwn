@@ -61,6 +61,7 @@ new bramy[MAX_BRAM][eBramy];
 
 //-----------------<[ Zmienne: ]>-------------------
 new iloscbram;
+new iloscbramDual;
 
 //------------------<[ Forwardy: ]>--------------------
 
