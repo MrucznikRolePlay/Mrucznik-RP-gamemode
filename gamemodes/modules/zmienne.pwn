@@ -983,9 +983,6 @@ new urzad3;
 
 new urzadnewm = 0;
 new urzadnewm2 = 0;
-new urzadnewm3 = 0;
-new dualgdmv1;
-new dualgdmv2;
 new bramadyrektora1;
 new bramadyrektora2;
 new dudmv3;
