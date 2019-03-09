@@ -88,7 +88,7 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 	fuprtyp1=0, //Uprawnienia do bram
 	fuprval1=0, //Value (wartoœæ) uprawnieñ
 	accessCard = 0, //Karta dostêpu
-	bool:flg=false{ 
+	bool:flg=false){ 
 		bramy[iloscbramDual][b_x1] = fx1;
 		bramy[iloscbramDual][b_y1] = fy1;
 		bramy[iloscbramDual][b_z1] = fz1;
@@ -148,30 +148,30 @@ stock SprawdzBramy(playerid)
 			}
 		}
 	}
-	for(new i2, i2<iloscbramDual; i2++)
+	for(new iduo, iduo<iloscbramDual; iduo++)
 	{
-		if(IsPlayerInRangeOfPoint(playerid, bramy[i2][b_range], bramy[i2][duo_x1], bramy[i2][duo_y1], bramy[i2][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i2][b_range], bramy[i2][duo_x2], bramy[i2][duo_y2], bramy[i2][duo_z2]))
+		if(IsPlayerInRangeOfPoint(playerid, bramy[iduo][b_range], bramy[iduo][duo_x1], bramy[iduo][duo_y1], bramy[iduo][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[iduo][b_range], bramy[iduo][duo_x2], bramy[iduo][duo_y2], bramy[iduo][duo_z2]))
 		{
-			if((bramy[i2][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i2][b_uprval]) || (bramy[i2][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i2][b_uprval]) || bramy[i2][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+			if((bramy[iduo][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[iduo][b_uprval]) || (bramy[iduo][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[iduo][b_uprval]) || bramy[iduo][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
 			{
-				if(bramy[i2][pAccessCard] > 0)
+				if(bramy[iduo][pAccessCard] > 0)
 				{
-					if(PlayerInfo[playerid][pAccessCard] != bramy[i2][pAccessCard])
+					if(PlayerInfo[playerid][pCard] != bramy[iduo][pAccessCard])
 					{
 						SendClientMessage(playerid, -1, "Nie masz uprawnieñ do otwierania tych drzwi");
 						return 1;
 					}
 				}
-				if(brama[i2][b_flaga])//Je¿eli ma zamkn¹æ
+				if(bramy[iduo][b_flaga])//Je¿eli ma zamkn¹æ
 				{
-					MoveDynamicObject(bramy[i2][b_obiekt], bramy[i2][b_x1], bramy[i2][b_y1], bramy[i2][b_z1], bramy[i2][b_speed], bramy[i2][b_rx1], bramy[i2][b_ry1], bramy[i2][b_rz1]);
-					MoveDynamicObject(bramy[i2][duo_obiekt], bramy[i2][duo_x1], bramy[i2][duo_y1], bramy[i2][duo_z1], bramy[i2][b_speed], bramy[i2][duo_rx1], bramy[i2][duo_ry1], bramy[i2][duo_rz1]); 	
+					MoveDynamicObject(bramy[iduo][b_obiekt], bramy[iduo][b_x1], bramy[iduo][b_y1], bramy[iduo][b_z1], bramy[iduo][b_speed], bramy[iduo][b_rx1], bramy[iduo][b_ry1], bramy[iduo][b_rz1]);
+					MoveDynamicObject(bramy[iduo][duo_obiekt], bramy[iduo][duo_x1], bramy[iduo][duo_y1], bramy[iduo][duo_z1], bramy[iduo][b_speed], bramy[iduo][duo_rx1], bramy[iduo][duo_ry1], bramy[iduo][duo_rz1]); 	
 				}
 				else//otwiera
 				{
-					MoveDynamicObject(bramy[i2][b_obiekt], bramy[i2][b_x2], bramy[i2][b_y2], bramy[i2][b_z2], bramy[i2][b_speed], bramy[i2][b_rx2], bramy[i2][b_ry2], bramy[i2][b_rz2]);
-					MoveDynamicObject(bramy[i2][duo_obiekt], bramy[i2][duo_x2], bramy[i2][duo_y2], bramy[i2][duo_z2], bramy[i2][b_speed], bramy[i2][duo_rx2], bramy[i2][duo_ry2], bramy[i2][duo_rz2]); 
-					bramy[i2][b_flaga]=~bramy[i2][b_flaga];
+					MoveDynamicObject(bramy[iduo][b_obiekt], bramy[iduo][b_x2], bramy[iduo][b_y2], bramy[iduo][b_z2], bramy[iduo][b_speed], bramy[iduo][b_rx2], bramy[iduo][b_ry2], bramy[iduo][b_rz2]);
+					MoveDynamicObject(bramy[iduo][duo_obiekt], bramy[iduo][duo_x2], bramy[iduo][duo_y2], bramy[iduo][duo_z2], bramy[iduo][b_speed], bramy[iduo][duo_rx2], bramy[iduo][duo_ry2], bramy[iduo][duo_rz2]); 
+					bramy[iduo][b_flaga]=~bramy[iduo][b_flaga];
 					return 1;
 				}
 			}
