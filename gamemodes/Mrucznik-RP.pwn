@@ -4767,6 +4767,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) // TAXI & BUSSES
 	{
+		SetPVarInt(playerid, "IsAGetInTheCar", 0);
 	    if(GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 27 || GetPlayerWeapon(playerid) == 23)
 	    {
 	        SetPlayerArmedWeapon(playerid,0);
@@ -6513,7 +6514,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
 		}
 	}
-	if((newkeys & KEY_SPRINT) && newkeys & KEY_JUMP)
+	if((newkeys & KEY_SPRINT) && newkeys & KEY_WALK)
 	{
 		if(SprawdzBramy(playerid))
 		{

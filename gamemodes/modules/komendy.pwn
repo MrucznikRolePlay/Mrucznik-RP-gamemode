@@ -6844,10 +6844,10 @@ CMD:brama(playerid)
 		//nowe komi bray koniec
 		//==========================[NOWE BRAMY URZÊDU MIASTA!]=============================
 		//[23-12-2018] Dual Gate DMV
-		if(IsAUrzednik(playerid) || IsABOR(playerid))
-		{
+		//if(IsAUrzednik(playerid) || IsABOR(playerid))
+		//{
 	
-			if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
+			/*if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
 			{
 				if(PlayerInfo[playerid][pRank] >= 1)
 				{
@@ -6871,31 +6871,8 @@ CMD:brama(playerid)
 					sendErrorMessage(playerid, "Nie posiadasz odpowiedniego stopnia identyfikatora aby to otworzyæ!");
 				}
 				
-			}
-			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1420.936035, -1815.156494, 78.095230))
-			{
-				if(PlayerInfo[playerid][pRank] >= 1)
-				{
-					if(urzadnewm3 == 0)
-					{
-						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, 190.000000);
-						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, -190.000000);
-						urzadnewm3 = 1;
-					}
-					else
-					{
-						urzadnewm3 = 0;
-						MoveDynamicObject(dudmv3, 1420.936035, -1815.156494, 78.095230, 5, 0.000000, 0.000000, -90.000000);
-						MoveDynamicObject(dudmv4, 1420.932739, -1818.127075, 78.095237, 5, 0.000000, 0.000000, 90.000000);
-					}
-					return 1;
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie posiadasz odpowiedniego stopnia identyfikatora aby to otworzyæ!");
-				}
-			}
-			else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.3826,-1844.5345,81.4612))
+			}*/
+			/*else if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.3826,-1844.5345,81.4612))
 			{
 				if(PlayerInfo[playerid][pLider] == 11)//Tylko dla dyrektorow
 				{
@@ -6920,81 +6897,7 @@ CMD:brama(playerid)
 				
 			}
 		
-		}//kawalek starych bram
-		if(IsAUrzednik(playerid) || IsABOR(playerid))
-		{
-			if(IsPlayerInRangeOfPoint(playerid,3,2312.2449, -72.0261, 38.1870))
-			{
-				if(urzadmove == 0)
-				{
-					MoveDynamicObject(urzad, 2310.7449, -72.0261, 38.1870, 1,  0.00000, 00.00000, 0.00000);
-					urzadmove = 1;
-				}
-				else
-				{
-					MoveDynamicObject(urzad, 2312.2449, -72.0261, 38.1870, 1,  0.00000, 0.00000, 0.00000);
-					urzadmove  = 0;
-				}
-				return 1;
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,2312.2427, -78.0717, 38.1870))
-			{
-				if(urzadmove1 == 0)
-				{
-					MoveDynamicObject(urzad1, 2310.7627, -78.0717, 38.1870, 1,  0.00000, 00.00000, 0.00000);
-					urzadmove1 = 1;
-				}
-				else
-				{
-					MoveDynamicObject(urzad1, 2312.2427, -78.0717, 38.1870, 1,  0.00000, 0.00000, 0.00000);
-					urzadmove1  = 0;
-				}
-				return 1;
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,2310.1812, -75.8415, 38.1870))
-			{
-				if(urzadmove2 == 0)
-				{
-					MoveDynamicObject(urzad2, 2310.1812, -77.3215, 38.1870, 1,  0.00000, 00.00000, 90.00000);
-					urzadmove2 = 1;
-				}
-				else
-				{
-					MoveDynamicObject(urzad2, 2310.1812, -75.8415, 38.1870, 1,  0.00000, 0.00000, 90.00000);
-					urzadmove2  = 0;
-				}
-				return 1;
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,2325.5393, -77.9897, 38.1870))
-			{
-				if(urzadmove3 == 0)
-				{
-					MoveDynamicObject(urzad3, 2327.0193, -77.9897, 38.1870, 1,  0.00000, 00.00000, 180.00000);
-					urzadmove3 = 1;
-				}
-				else
-				{
-					MoveDynamicObject(urzad3, 2325.5393, -77.9897, 38.1870, 1,  0.00000, 0.00000, 180.00000);
-					urzadmove3  = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,30,-2044.9952, -110.9055, 35.7106))
-			{
-				if(plac1move == 0)
-				{
-					MoveDynamicObject(plac1, -2062.0275, -102.7601, 36.9340, 5,  0.00000, 00.00000, 180.00000);
-					//MoveDynamicObject(plac2, -2032.2177, -102.7601, 36.9340, 5,  0.00000, 00.00000, 0.00000);
-					plac1move = 1;
-				}
-				else
-				{
-					MoveDynamicObject(plac1, -2053.29150, -102.76010, 36.93400, 5,  0.00000, 00.00000, 180.00000);
-					//MoveDynamicObject(plac2, -2041.7727, -102.7601, 36.9340, 5,  0.00000, 00.00000, 0.00000);
-					plac1move  = 0;
-				}
-			}
-
-		}
+		}*/ 
 		//==============================[KONIEC]====================================================
 		//..
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] > 1/*PlayerInfo[playerid][pJob] == 14*/)
@@ -26999,7 +26902,7 @@ CMD:fixveh(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7)
+        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7 || PlayerInfo[playerid][pNewAP] != 5)
 		{
 		    noAccessMessage(playerid);
 		    return 1;
