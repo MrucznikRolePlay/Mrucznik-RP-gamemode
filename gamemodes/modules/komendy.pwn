@@ -26999,7 +26999,7 @@ CMD:fixveh(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7)
+        if(PlayerInfo[playerid][pAdmin] < 10 &&  PlayerInfo[playerid][pAdmin] != 7 || PlayerInfo[playerid][pNewAP] != 5)
 		{
 		    noAccessMessage(playerid);
 		    return 1;

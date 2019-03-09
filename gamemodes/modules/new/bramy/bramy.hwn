@@ -41,7 +41,21 @@ enum eBramy
 	Float:b_speed,
 	Float:b_range,
 	b_uprtyp,
-	b_uprval
+	b_uprval,
+	duo_obiekt,
+	Float:duo_x1,
+	Float:duo_y1,
+	Float:duo_z1,
+	Float:duo_rx1,
+	Float:duo_ry1,
+	Float:duo_rz1,
+	Float:duo_x2,
+	Float:duo_y2,
+	Float:duo_z2,
+	Float:duo_rx2,
+	Float:duo_ry2,
+	Float:duo_rz2,
+	pCard;
 };
 new bramy[MAX_BRAM][eBramy];
 

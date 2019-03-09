@@ -1564,7 +1564,8 @@ enum pInfo
 	pBlokadaPisaniaFrakcjaCzas,
     Text3D:pDescLabel,
     pDesc[128],
-	pStrong
+	pStrong,
+	pCard
 };
 enum StringData
 {
