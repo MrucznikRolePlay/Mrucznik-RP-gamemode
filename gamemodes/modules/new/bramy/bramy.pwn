@@ -88,7 +88,8 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 	fuprtyp1=0, //Uprawnienia do bram
 	fuprval1=0, //Value (wartoœæ) uprawnieñ
 	accessCard = 0, //Karta dostêpu
-	bool:flg=false){ 
+	bool:flg=false)
+	{ 
 		bramy[iloscbramDual][b_x1] = fx1;
 		bramy[iloscbramDual][b_y1] = fy1;
 		bramy[iloscbramDual][b_z1] = fz1;
@@ -148,7 +149,7 @@ stock SprawdzBramy(playerid)
 			}
 		}
 	}
-	for(new iduo, iduo<iloscbramDual; iduo++)
+	for(new iduo; iduo<iloscbramDual; iduo++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, bramy[iduo][b_range], bramy[iduo][duo_x1], bramy[iduo][duo_y1], bramy[iduo][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[iduo][b_range], bramy[iduo][duo_x2], bramy[iduo][duo_y2], bramy[iduo][duo_z2]))
 		{
