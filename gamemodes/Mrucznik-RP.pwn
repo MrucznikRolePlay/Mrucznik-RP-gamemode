@@ -643,6 +643,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerEnterVehicle - begin", GetNick(playerid), playerid);
 	#endif
+	SetPVarInt(playerid, "IsAGetInTheCar", 1);
 	new Float:pX,Float:pY,Float:pZ;
     if(vehicleid > MAX_VEHICLES || vehicleid < 0)
     {
@@ -4668,6 +4669,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					}
 				}
 			}
+			SetPVarInt(playerid, "IsAGetInTheCar", 0); 
 		}
         if(!ToggleSpeedo[playerid])
         {
@@ -4761,6 +4763,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    PlayerInKart[playerid] = 0;
 		    KartingPlayers --;
 		}
+		SetPVarInt(playerid, "IsAGetInTheCar", 0); 
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) // TAXI & BUSSES
 	{
@@ -6496,6 +6499,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			sendTipMessage(playerid, "Jesteœ podczas wje¿d¿ania!"); 
 			return 1;
 		}
+		if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
+		{
+			sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile"
+			return 1;
+		}	
 		if(SprawdzWjazdy(playerid))
 		{
 		

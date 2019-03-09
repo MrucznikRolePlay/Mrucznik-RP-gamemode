@@ -19162,6 +19162,11 @@ CMD:sluzba(playerid)
 
     if(IsPlayerConnected(playerid))
     {
+		if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
+		{
+			sendErrorMessage(playerid, "Podczas wsiadania nie mo¿esz tego u¿yæ"); 
+			return 1;
+		}
         if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
         {
             sendTipMessage(playerid, "Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
@@ -40609,6 +40614,11 @@ CMD:wyjedz(playerid)
 		sendTipMessage(playerid, "Jesteœ podczas wje¿d¿ania!"); 
 		return 1;
 	}
+	if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
+	{
+		sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile"
+		return 1;
+	}	
 	if(SprawdzWjazdy(playerid))
 	{
 	
