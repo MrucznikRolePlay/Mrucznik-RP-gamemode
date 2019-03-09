@@ -90,35 +90,38 @@ stock SprawdzWejscia(playerid)
 			return 1;
 		}
 	}
-	for(new iduo; iduo<valueWjedz; iduo++)
+	if(!IsPlayerInAnyVehicle(playerid))
 	{
-		if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wj_X], wjazdy[iduo][wj_Y], wjazdy[iduo][wj_Z]))//Wejœcie
+		for(new iduo; iduo<valueWjedz; iduo++)
 		{
-			if(wjazdy[iduo][pFracOwn] == 0 && wjazdy[iduo][pOrgOwn] == 0)
+			if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wj_X], wjazdy[iduo][wj_Y], wjazdy[iduo][wj_Z]))//Wejœcie
 			{
-				SetPlayerVirtualWorld(playerid, wjazdy[iduo][wj_VW]);
-				SetPLocal(playerid, wjazdy[iduo][wj_PLOCAL]);
-				SetPlayerPos(playerid, wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]);
-				return 1;
-			}
-			if(wjazdy[iduo][pFracOwn] > 0 || wjazdy[iduo][pOrgOwn] > 0)
-			{
-				if(GetPlayerFraction(playerid) == wjazdy[iduo][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[iduo][pOrgOwn])
+				if(wjazdy[iduo][pFracOwn] == 0 && wjazdy[iduo][pOrgOwn] == 0)
 				{
 					SetPlayerVirtualWorld(playerid, wjazdy[iduo][wj_VW]);
 					SetPLocal(playerid, wjazdy[iduo][wj_PLOCAL]);
 					SetPlayerPos(playerid, wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]);
+					return 1;
 				}
+				if(wjazdy[iduo][pFracOwn] > 0 || wjazdy[iduo][pOrgOwn] > 0)
+				{
+					if(GetPlayerFraction(playerid) == wjazdy[iduo][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[iduo][pOrgOwn])
+					{
+						SetPlayerVirtualWorld(playerid, wjazdy[iduo][wj_VW]);
+						SetPLocal(playerid, wjazdy[iduo][wj_PLOCAL]);
+						SetPlayerPos(playerid, wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]);
+					}
+				}
+				
 			}
-			
+			if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]))
+			{
+				SetPlayerVirtualWorld(playerid, 0);
+				SetPLocal(playerid, PLOCAL_DEFAULT);
+				SetPlayerPos(playerid, wjazdy[iduo][wj_X], wjazdy[iduo][wj_Y], wjazdy[iduo][wj_Z]);
+			}
+		
 		}
-		if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]))
-		{
-			SetPlayerVirtualWorld(playerid, 0);
-			SetPLocal(playerid, PLOCAL_DEFAULT);
-			SetPlayerPos(playerid, wjazdy[iduo][wj_X], wjazdy[iduo][wj_Y], wjazdy[iduo][wj_Z]);
-		}
-	
 	}
 	return 0;
 }
