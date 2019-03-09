@@ -136,28 +136,28 @@ stock SprawdzBramy(playerid)
 {
 	for(new i; i<iloscbram; i++)
 	{	
-		if(IsPlayerInRangeOfPoint(playerid, bramy[iduo][b_range], bramy[iduo][duo_x1], bramy[iduo][duo_y1], bramy[iduo][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[iduo][b_range], bramy[iduo][duo_x2], bramy[iduo][duo_y2], bramy[iduo][duo_z2]))
+		if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2]))
 		{
-			if((bramy[iduo][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[iduo][b_uprval]) || (bramy[iduo][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[iduo][b_uprval]) || bramy[iduo][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+			if((bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
 			{
-				if(bramy[iduo][pAccessCard] > 0)
+				if(bramy[i][pAccessCard] > 0)
 				{
-					if(PlayerInfo[playerid][pCard] != bramy[iduo][pAccessCard])
+					if(PlayerInfo[playerid][pCard] != bramy[i][pAccessCard])
 					{
 						SendClientMessage(playerid, -1, "Nie masz uprawnieñ do otwierania tych drzwi");
 						return 1;
 					}
 				}
-				if(bramy[iduo][b_flaga])//Je¿eli ma zamkn¹æ
+				if(bramy[i][b_flaga])//Je¿eli ma zamkn¹æ
 				{
-					MoveDynamicObject(bramy[iduo][b_obiekt], bramy[iduo][b_x1], bramy[iduo][b_y1], bramy[iduo][b_z1], bramy[iduo][b_speed], bramy[iduo][b_rx1], bramy[iduo][b_ry1], bramy[iduo][b_rz1]);
-					MoveDynamicObject(bramy[iduo][duo_obiekt], bramy[iduo][duo_x1], bramy[iduo][duo_y1], bramy[iduo][duo_z1], bramy[iduo][b_speed], bramy[iduo][duo_rx1], bramy[iduo][duo_ry1], bramy[iduo][duo_rz1]); 	
+					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1], bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1], bramy[i][b_ry1], bramy[i][b_rz1]);
+					MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1], bramy[i][b_speed], bramy[i][duo_rx1], bramy[i][duo_ry1], bramy[i][duo_rz1]); 	
 				}
 				else//otwiera
 				{
-					MoveDynamicObject(bramy[iduo][b_obiekt], bramy[iduo][b_x2], bramy[iduo][b_y2], bramy[iduo][b_z2], bramy[iduo][b_speed], bramy[iduo][b_rx2], bramy[iduo][b_ry2], bramy[iduo][b_rz2]);
-					MoveDynamicObject(bramy[iduo][duo_obiekt], bramy[iduo][duo_x2], bramy[iduo][duo_y2], bramy[iduo][duo_z2], bramy[iduo][b_speed], bramy[iduo][duo_rx2], bramy[iduo][duo_ry2], bramy[iduo][duo_rz2]); 
-					bramy[iduo][b_flaga]=~bramy[iduo][b_flaga];
+					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2], bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2], bramy[i][b_ry2], bramy[i][b_rz2]);
+					MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2], bramy[i][b_speed], bramy[i][duo_rx2], bramy[i][duo_ry2], bramy[i][duo_rz2]); 
+					bramy[i][b_flaga]=~bramy[i][b_flaga];
 					return 1;
 				}
 			}
