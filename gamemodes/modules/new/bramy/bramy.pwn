@@ -87,7 +87,7 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 	Float:frange, // brama range
 	fuprtyp1=0, //Uprawnienia do bram
 	fuprval1=0, //Value (wartość) uprawnień)
-	pCard = 0, //Karta dostępu
+	accessCard = 0, //Karta dostępu
 	bool:flg=false{ 
 		bramy[iloscbram][b_x1] = fx1;
 		bramy[iloscbram][b_y1] = fy1;
@@ -118,16 +118,18 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 		bramy[iloscbram][b_range] = frange;
 		bramy[iloscbram][b_uprtyp] = fuprtyp;
 		bramy[iloscbram][b_uprval] = fuprval;
-		bramy[iloscbram][pCard] = pCard;
-		if(flg==false) {
+		bramy[iloscbram][pAccessCard] = accessCard;
+		if(flg==false) 
+		{
 		bramy[iloscbram][b_flaga] = false;
 		}
 		else {
 			bramy[iloscbram][b_flaga] = true;
 		}
-	
-		return iloscbram++; 
 	}
+	
+	return iloscbram++; 
+}
 
 stock SprawdzBramy(playerid)
 {
@@ -137,9 +139,9 @@ stock SprawdzBramy(playerid)
 		{
 			if((bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
 			{
-				if(bramy[i][pCard] > 0)
+				if(bramy[i][pAccessCard] > 0)
 				{
-					if(PlayerInfo[playerid][pCard] != bramy[i][pCard])
+					if(PlayerInfo[playerid][pAccessCard] != bramy[i][pAccessCard])
 					{
 						SendClientMessage(playerid, -1, "Nie masz uprawnień do otwierania tych drzwi");
 						return 1;

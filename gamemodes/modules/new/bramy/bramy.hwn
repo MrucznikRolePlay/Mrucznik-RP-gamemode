@@ -55,7 +55,7 @@ enum eBramy
 	Float:duo_rx2,
 	Float:duo_ry2,
 	Float:duo_rz2,
-	pCard;
+	pAccessCard;
 };
 new bramy[MAX_BRAM][eBramy];
 
