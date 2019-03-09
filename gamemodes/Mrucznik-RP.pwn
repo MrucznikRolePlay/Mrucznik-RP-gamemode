@@ -4767,6 +4767,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) // TAXI & BUSSES
 	{
+		SetPVarInt(playerid, "IsAGetInTheCar", 0);
 	    if(GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 27 || GetPlayerWeapon(playerid) == 23)
 	    {
 	        SetPlayerArmedWeapon(playerid,0);

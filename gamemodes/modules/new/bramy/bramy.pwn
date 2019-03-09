@@ -55,7 +55,6 @@ stock DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry
 	bramy[iloscbram][b_range] = frange;
 	bramy[iloscbram][b_uprtyp] = fuprtyp;
 	bramy[iloscbram][b_uprval] = fuprval;
-	bramy[iloscbram][pCard] = pCard;
 	return iloscbram++;
 }
 stock DualGateAdd(object1,//Obiekt pierwszej bramy
@@ -89,7 +88,7 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 	fuprtyp1=0, //Uprawnienia do bram
 	fuprval1=0, //Value (wartość) uprawnień)
 	pCard = 0, //Karta dostępu
-	bool:flag=false{ 
+	bool:flg=false{ 
 		bramy[iloscbram][b_x1] = fx1;
 		bramy[iloscbram][b_y1] = fy1;
 		bramy[iloscbram][b_z1] = fz1;
@@ -120,7 +119,7 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 		bramy[iloscbram][b_uprtyp] = fuprtyp;
 		bramy[iloscbram][b_uprval] = fuprval;
 		bramy[iloscbram][pCard] = pCard;
-		if(flag==false) {
+		if(flg==false) {
 		bramy[iloscbram][b_flaga] = false;
 		}
 		else {
@@ -156,6 +155,7 @@ stock SprawdzBramy(playerid)
 					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2], bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2], bramy[i][b_ry2], bramy[i][b_rz2]);
 					MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2], bramy[i][b_speed], bramy[i][duo_rx2], bramy[i][duo_ry2], bramy[i][duo_rz2]); 
 					bramy[i][b_flaga]=~bramy[i][b_flaga];
+					return 1;
 				}
 			}
 		}
