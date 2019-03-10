@@ -502,9 +502,7 @@ new grajacy[MAX_PLAYERS] = 0;
 //---------------------------------------------//
 
 //abram01
-new plac1;
 //new plac2;
-new plac1move;
 new bor;
 new bor1;
 new bormove;
@@ -980,19 +978,9 @@ new urzad1;
 new urzad2;
 new urzad3;
 
-
-new urzadnewm = 0;
-new urzadnewm2 = 0;
-new bramadyrektora1;
-new bramadyrektora2;
 new dudmv3;
 new dudmv4;
 
-
-new urzadmove = 0;
-new urzadmove1 = 0;
-new urzadmove2 = 0;
-new urzadmove3 = 0;
 new BramaKomiCela;  //stary komisariat (old komi)
 new BramaKomiCelaS = 1;
 //koniec ruchome obiekty
