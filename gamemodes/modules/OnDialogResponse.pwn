@@ -16688,6 +16688,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				sendErrorMessage(playerid, "Nieprawid³owa kwota przelewu!"); 
 				return 1;
 			}
+			if(!IsPlayerConnected(giveplayerid))
+			{
+				sendErrorMessage(playerid, "Gracz, do którego próbowa³eœ przelaæ gotówkê wyszed³ z serwera!"); 
+				return 1;
+			}
 			
 			PlayerInfo[giveplayerid][pAccount] += money;
 			Sejf_Add(frakcja, -money);
