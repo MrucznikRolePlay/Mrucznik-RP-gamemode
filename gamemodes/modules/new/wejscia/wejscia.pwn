@@ -73,7 +73,7 @@ stock SprawdzWejscia(playerid)
 	for(new i; i<iloscwejsc; i++)
 	{
 		//WEJŒCIA NA UID:
-		if(wejdz[i][w_UID] == 1)//DMV
+		if(wejscia[i][w_UID] == 1)//DMV
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 			{
