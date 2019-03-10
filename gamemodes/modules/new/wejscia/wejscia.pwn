@@ -91,6 +91,7 @@ stock SprawdzWejscia(playerid)
 						SetPlayerInterior(playerid, wejscia[i][w_int2]);
 						SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 						PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
+						GameTextForPlayer(playerid, "~n~~g~By Satius", 5000, 1);
 						Wchodzenie(playerid);
 						
 						

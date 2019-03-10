@@ -22755,16 +22755,6 @@ CMD:wyjdz(playerid)
 		    GameTextForPlayer(playerid, "~w~Zapraszamy ponownie", 5000, 1);
 		    SetPlayerInterior(playerid,0);
 		}
-		else if (PlayerToPoint(10.0, playerid,1450.6495,-1772.9926,76.5013))//ratusz
-		{
-		    SetPlayerInterior(playerid,0);
-			SetPlayerPosEx(playerid,1481.1531,-1770.0277,18.7958);//wejscie do ratusza
-			PlayerInfo[playerid][pInt] = 0;
-			PlayerInfo[playerid][pLocal] = 255;
-			SetPlayerInterior(playerid,0);
-			SetPlayerVirtualWorld(playerid,0);
-			return 1;
-		}
 		else if(IsPlayerInRangeOfPoint(playerid,5,2318.7566, -85.3065, 39.7866))
 		{
 		    SetPlayerPosEx(playerid,2269.6848, -75.5530, 27.1525);
