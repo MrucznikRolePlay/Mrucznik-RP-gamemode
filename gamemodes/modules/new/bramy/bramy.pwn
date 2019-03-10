@@ -90,6 +90,7 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 	accessCard = 0, //Karta dostêpu
 	bool:flg=false)
 { 
+	bramy[iloscbram][b_obiekt] = object1;
 	bramy[iloscbram][b_x1] = fx1;
 	bramy[iloscbram][b_y1] = fy1;
 	bramy[iloscbram][b_z1] = fz1;
@@ -117,8 +118,8 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 	bramy[iloscbram][duo_rz2] = f2rz2;
 	bramy[iloscbram][b_speed] = fspeed;
 	bramy[iloscbram][b_range] = frange;
-	bramy[iloscbram][b_uprtyp] = fuprtyp;
-	bramy[iloscbram][b_uprval] = fuprval;
+	bramy[iloscbram][b_uprtyp] = fuprtyp1;
+	bramy[iloscbram][b_uprval] = fuprval1;
 	bramy[iloscbram][pAccessCard] = accessCard;
 	if(flg==false) 
 	{
