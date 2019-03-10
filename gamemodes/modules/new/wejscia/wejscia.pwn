@@ -83,7 +83,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerPosEx(playerid, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]); 
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 				SetPlayerInterior(playerid, wejscia[i][w_int2]);
-				SetPLocal(playerid, wejscia[i][pLocal]); 
+				SetPLocal(playerid, wejscia[i][w_pLocal]); 
 				Wchodzenie(playerid);
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw2])
@@ -196,7 +196,7 @@ stock SprawdzWejscia(playerid)
 				{
 					if(wywalzdmv[playerid] == 1)
 					{
-						SendErrorMessage(playerid, "Zosta³eœ wyrzucony z Urzêdu Miasta"); 
+						sendErrorMessage(playerid, "Zosta³eœ wyrzucony z Urzêdu Miasta"); 
 						return 1;
 					}
 					SendClientMessage(playerid, COLOR_WHITE, "Witamy ponownie"); 
