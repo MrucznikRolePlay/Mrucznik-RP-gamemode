@@ -2006,7 +2006,10 @@ SetWeatherEx(id)
 	ServerWeather = id;
 	foreach(Player, i)
 	{
-    	SetPVarInt(i, "Weather", id);
+		if(GetPlayerVirtualWorld(i) == 0 && GetPlayerInterior(i) == 0)
+		{
+			SetPVarInt(i, "Weather", id);
+		}
 	}
 	return 1;
 }
@@ -4158,6 +4161,19 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		SetPlayerInterior(playerid, 0);
 		Wchodzenie(playerid);
 	}
+	return 1;
+}
+
+SetServerWeatherAndTime(playerid)
+{
+	SetPlayerWeatherEx(playerid, ServerWeather);
+	SetPlayerTime(playerid, ServerTime, 0);
+	return 1;
+}
+SetInteriorTimeAndWeather(playerid)
+{
+	SetPlayerWeatherEx(playerid, 2);
+	SetPlayerTime(playerid, 14, 0);
 	return 1;
 }
 Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, komunikat[]="")

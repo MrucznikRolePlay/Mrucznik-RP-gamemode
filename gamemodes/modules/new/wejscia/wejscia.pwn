@@ -84,6 +84,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 				SetPlayerInterior(playerid, wejscia[i][w_int2]);
 				SetPLocal(playerid, wejscia[i][w_pLocal]); 
+				SetInteriorTimeAndWeather(playerid);
 				Wchodzenie(playerid);
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw2])
@@ -93,6 +94,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerInterior(playerid, wejscia[i][w_int1]);
 				StopAudioStreamForPlayer(playerid);
 				SetPLocal(playerid, 255);
+				SetServerWeatherAndTime(playerid);
 				Wchodzenie(playerid);
 			}
 			return 1;
@@ -104,6 +106,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerPosEx(playerid, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]); 
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 				SetPlayerInterior(playerid, wejscia[i][w_int2]);
+				SetInteriorTimeAndWeather(playerid);
 				sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
 				sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 				sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
@@ -116,6 +119,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerPosEx(playerid, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]); 
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 				SetPlayerInterior(playerid, wejscia[i][w_int1]);
+				SetServerWeatherAndTime(playerid);
 				Wchodzenie(playerid);
 				SetPLocal(playerid, 255); 
 			}
@@ -128,6 +132,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerPosEx(playerid, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]); 
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 				SetPlayerInterior(playerid, wejscia[i][w_int2]);
+				SetInteriorTimeAndWeather(playerid);
 				sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
 				sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 				sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
@@ -140,6 +145,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerPosEx(playerid, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]); 
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 				SetPlayerInterior(playerid, wejscia[i][w_int1]);
+				SetServerWeatherAndTime(playerid);
 				Wchodzenie(playerid);
 				SetPLocal(playerid, 255); 
 			}
@@ -157,6 +163,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerPosEx(playerid, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]); 
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 				SetPlayerInterior(playerid, wejscia[i][w_int2]);
+				SetInteriorTimeAndWeather(playerid);
 				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Biurowiec FBI w Los Santos Wita! <<<<");
 				SendClientMessage(playerid, COLOR_WHITE, "-> Recepcja znajduje siê po twojej lewej stronie");
 				SendClientMessage(playerid, COLOR_WHITE, "-> Wejœcie do wiêzienia stanowego na wprost"); 
@@ -173,6 +180,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 				SetPlayerInterior(playerid, wejscia[i][w_int1]);
 				GameTextForPlayer(playerid, "~w~Miasto ~g~Los Santos", 5000, 1); 
+				SetServerWeatherAndTime(playerid);
 				Wchodzenie(playerid);
 				SetPLocal(playerid, PLOCAL_DEFAULT);
 			}
@@ -188,6 +196,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 				SetPlayerInterior(playerid, wejscia[i][w_int2]);
 				GameTextForPlayer(playerid, "~n~~r~Powodzenia", 5000, 1); 
+				SetServerWeatherAndTime(playerid);
 				Wchodzenie(playerid);
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw2])
@@ -203,6 +212,7 @@ stock SprawdzWejscia(playerid)
 					SetPlayerPosEx(playerid, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]);
 					SetPlayerInterior(playerid, wejscia[i][w_int1]);
 					SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
+					SetInteriorTimeAndWeather(playerid);
 					SetPLocal(playerid, PLOCAL_FRAC_DMV);
 					GameTextForPlayer(playerid, "~n~~g~By Satius", 5000, 1);
 					SetPlayerTime(playerid, CzaswIntku[FRAC_GOV], 0);
@@ -256,6 +266,7 @@ stock SprawdzWejscia(playerid)
 						SetPlayerPosEx(playerid, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]);
 						SetPlayerInterior(playerid, wejscia[i][w_int2]);
 						SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
+						SetInteriorTimeAndWeather(playerid);
 						SetPlayerTime(playerid, CzaswIntku[FRAC_GOV], 0);
 						PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
 						GameTextForPlayer(playerid, "~n~~g~By Satius", 5000, 1);
@@ -305,6 +316,7 @@ stock SprawdzWejscia(playerid)
 				SetPlayerInterior(playerid, wejscia[i][w_int1]);
 				SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 				PlayerInfo[playerid][pLocal] = 255;
+				SetServerWeatherAndTime(playerid);
 				Wchodzenie(playerid);
 			}
 			return 1;
@@ -319,6 +331,7 @@ stock SprawdzWejscia(playerid)
 			SetPlayerInterior(playerid, wejscia[i][w_int2]);
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
+			SetInteriorTimeAndWeather(playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}
@@ -328,6 +341,7 @@ stock SprawdzWejscia(playerid)
 			SetPlayerInterior(playerid, wejscia[i][w_int1]);
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 			PlayerInfo[playerid][pLocal] = 255;
+			SetServerWeatherAndTime(playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}

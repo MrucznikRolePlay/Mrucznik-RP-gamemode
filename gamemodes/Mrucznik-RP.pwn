@@ -5690,6 +5690,10 @@ PayDay()
 					        PlayerInfo[i][pPayDayHad] = 0;
 					    }
 					}
+					if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
+					{
+						SetInteriorTimeAndWeather(i);
+					}
      				if(PoziomPoszukiwania[i] >= 10)
 					{
 						PoziomPoszukiwania[i] = 9;
