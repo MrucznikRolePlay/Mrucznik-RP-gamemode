@@ -4173,7 +4173,7 @@ SetServerWeatherAndTime(playerid)
 SetInteriorTimeAndWeather(playerid)
 {
 	SetPlayerWeatherEx(playerid, 2);
-	SetPlayerTime(playerid, 14, 0;
+	SetPlayerTime(playerid, 14, 0);
 	return 1;
 }
 Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, komunikat[]="")
