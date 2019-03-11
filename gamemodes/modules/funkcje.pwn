@@ -4167,13 +4167,13 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 SetServerWeatherAndTime(playerid)
 {
 	SetPlayerWeatherEx(playerid, ServerWeather);
-	SetPlayerTime(playerid, ServerTime);
+	SetPlayerTime(playerid, ServerTime, 0);
 	return 1;
 }
 SetInteriorTimeAndWeather(playerid)
 {
 	SetPlayerWeatherEx(playerid, 2);
-	SetPlayerTime(playerid, 14);
+	SetPlayerTime(playerid, 14, 0;
 	return 1;
 }
 Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, komunikat[]="")
