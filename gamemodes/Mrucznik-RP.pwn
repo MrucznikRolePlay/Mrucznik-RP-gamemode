@@ -5725,6 +5725,10 @@ PayDay()
 	new rand = random(80);
 	gettime(hour,minuite,second);
     FixHour(hour);
+	if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
+	{
+		SetInteriorTimeAndWeather(i);
+	}
 	if(10 <= shifthour <= 22)
 	{
 	 	if(rand == 0) rand = 1;
