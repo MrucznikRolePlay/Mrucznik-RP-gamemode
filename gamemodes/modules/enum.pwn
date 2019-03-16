@@ -595,22 +595,22 @@ new VehiclePrice[211] = {
 
 new FractionNames[][40] = {
     "Brak",
-    "San Andreas Police Department",
+    "Los Santos Police Department",
     "Federal Bureau of Investigation",
     "San Andreas Sherrifs Department",
     "Los Santos Medical Center",
     "SA Bahamas",
     "Yakuza",
-    "Government Security Agency",
+    "United States Secret Service",
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
-    "Rz¹d Stanu San Andreas",//11
+    "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
     "187 North Park Avenue",
     "Hillside Nortenos 14",
     "Nightmare of Adrenalin",
-    "Hammerskins Nation",
+    "IV Saint Reich",
     "Los Santos Fire Department",
     "Brak",
     "Brak"
