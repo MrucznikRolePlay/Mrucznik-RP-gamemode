@@ -27251,8 +27251,10 @@ CMD:glosowanie(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{
-		new timeValue, result[128], string[256];
-		if(sscanf(params, "k<fix>s[128]", timeValue, result))
+		new timeValue;
+		new result[128];
+		new string[256];
+		if(sscanf(params, "ds[128]", timeValue, result))
 		{
 			sendTipMessage(playerid, "U¿yj /glosowanie [czas_trwania_w_minutach] [temat]");
 			return 1;
@@ -27283,8 +27285,9 @@ CMD:glosowanie(playerid, params[])
 			glosowanie_admina_status = 1;
 			glosowanie_admina_tak = 0;
 			glosowanie_admina_nie = 0;
-			timeValue = timeValue*60000;//Wychodzi wynik w milisekundach
-			SetTimer("glosuj_admin_ankieta", timeValue, false);
+			format(string, sizeof(string), "Zmienna po przeliczeniu to %d", (timeValue*60000));
+			sendTipMessage(playerid, string); 
+			SetTimer("glosuj_admin_ankieta", (timeValue*60000), false);
 			foreach(Player, i)
 			{
 				SetPVarInt(i, "glosowal_w_ankiecie", 0);
