@@ -1372,7 +1372,7 @@ CMD:dajbilet(playerid, params[])
 
 CMD:konsola(playerid, params[])
 {
-    if(GetPlayerOrg(playerid) == FAMILY_VINYL)
+    if(GetPlayerOrg(playerid) == FAMILY_VINYL || GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pRank] >= 4)
     {
         if(!IsPlayerInRangeOfPoint(playerid, 4.0, 819.6357,-1351.2813,25.3)) return 1;
         if(PlayerInfo[playerid][pRank] < 1) return sendErrorMessage(playerid, "Potrzebujesz rangi wiêkszej od 1!");
@@ -22284,35 +22284,41 @@ CMD:wejdz(playerid)
             SetPlayerPosEx(playerid, 808.3142, -1381.9436, 23.6518);
             SetPlayerVirtualWorld(playerid, 255);
             GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);
+			SetPLocal(playerid, PLOCAL_ORG_SN);
             Wchodzenie(playerid);
         }
         else if (IsPlayerInRangeOfPoint(playerid,3.0,815.4965, -1377.1671, 23.6518))
         {
-            if(GetPVarInt(playerid, "Vinyl-bilet") || GetPlayerOrg(playerid) == FAMILY_VINYL)
+            if(GetPVarInt(playerid, "Vinyl-bilet") || GetPlayerOrg(playerid) == FAMILY_VINYL || GetPlayerFraction(playerid) == FRAC_SN)
             {
                 SetPlayerPosEx(playerid, 816.4282, -1376.2659, 23.6518);
                 SetPlayerVirtualWorld(playerid, 255);
                 GameTextForPlayer(playerid, "~w~Udanej Zabawy", 5000, 1);
+				SetPLocal(playerid, PLOCAL_ORG_SN);
                 Wchodzenie(playerid);
             }
             else GameTextForPlayer(playerid, "~w~Brak biletu", 5000, 1);
         }
         else if (IsPlayerInRangeOfPoint(playerid,2.0,830.4240, -1376.2208, 27.8467))
         {
-            if(GetPVarInt(playerid, "Vinyl-bilet") == 2 || GetPlayerOrg(playerid) == FAMILY_VINYL)
+            if(GetPVarInt(playerid, "Vinyl-bilet") == 2 || GetPlayerOrg(playerid) == FAMILY_VINYL 
+			|| GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pRank] >= 2)
             {
                 SetPlayerPosEx(playerid, 830.5424, -1375.1467, 27.8467);
                 SetPlayerVirtualWorld(playerid, 255);
                 GameTextForPlayer(playerid, "~w~Strefa VIP", 5000, 1);
+				SetPLocal(playerid, PLOCAL_ORG_SN);
                 Wchodzenie(playerid);
             }
             else GameTextForPlayer(playerid, "~w~Tylko VIP", 5000, 1);
         }
-        else if (IsPlayerInRangeOfPoint(playerid,3.0,813.2293, -1349.5438, 23.6597) && GetPlayerOrg(playerid) == FAMILY_VINYL)
+        else if (IsPlayerInRangeOfPoint(playerid,3.0,813.2293, -1349.5438, 23.6597) && GetPlayerOrg(playerid) == FAMILY_VINYL 
+		|| IsPlayerInRangeOfPoint(playerid,3.0,813.2293, -1349.5438, 23.6597) && GetPlayerFraction(playerid) == FRAC_SN)
         {
             SetPlayerPosEx(playerid, 823.3508, -1349.5614, 24.7971);
             SetPlayerVirtualWorld(playerid, 255);
             GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
+			SetPLocal(playerid, PLOCAL_ORG_SN);
             Wchodzenie(playerid);
         }
         else
@@ -23295,6 +23301,7 @@ CMD:wyjdz(playerid)
             SetPlayerVirtualWorld(playerid, 0);
             GameTextForPlayer(playerid, "~w~Pijany? Wezwij taryfe", 5000, 1);
             SetPVarInt(playerid, "VINYL-stream", 0);
+			SetPLocal(playerid, PLOCAL_DEFAULT);
             StopAudioStreamForPlayer(playerid);
         }
         else if (IsPlayerInRangeOfPoint(playerid,3.0,816.4282, -1376.2659, 23.6518))
@@ -27277,9 +27284,9 @@ CMD:glosowanie(playerid, params[])
 			{
 				iloscInne[playerid]++; 
 			}
-			format(string, sizeof(string), "Admin %s rozpocz¹³ ankietê na temat %s", GetNick(playerid), result);
+			format(string, sizeof(string), "Admin %s rozpocz¹³ ankietê na temat:{C0C0C0}%s", GetNick(playerid), result);
 			SendClientMessageToAll(COLOR_RED, string);
-			SendClientMessageToAll(COLOR_WHITE,  "Aby zag³osowaæ wpisz /glosuja [TAK/NIE]");
+			SendClientMessageToAll(COLOR_WHITE,  "Aby zag³osowaæ wpisz /glosuja");
 			format(string, sizeof(string), "G³osowanie potrwa %d minut", timeValue); 
 			SendClientMessageToAll(COLOR_WHITE, string);
 			glosowanie_admina_status = 1;
@@ -30882,11 +30889,7 @@ CMD:glosnik(playerid)
 
 CMD:radiostacja(playerid)
 {
-    if(IsPlayerInRangeOfPoint(playerid,20,651.4651,-1367.8018,28.5072) ||
-        IsPlayerInRangeOfPoint(playerid,20,652.9285,-1383.2341,28.4672) ||
-        IsPlayerInRangeOfPoint(playerid,20,669.9277,-1380.8677,28.4672) ||
-        IsPlayerInRangeOfPoint(playerid,20,648.9404,-1379.7324,28.4672) ||
-        IsPlayerInRangeOfPoint(playerid,20,651.7086,-1367.8019,28.5072))
+    if(GetPlocal(playerid) == PLOCAL_ORG_SN)
     {
         if(IsPlayerInFraction(playerid, FRAC_SN))
 	    {
@@ -30897,7 +30900,7 @@ CMD:radiostacja(playerid)
 	}
 	else
 	{
-		sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w Studiu nagrañ albo drukarni!");
+		sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w San News");
 	}
 
 	return 1;
@@ -36769,6 +36772,45 @@ CMD:news(playerid, params[])
                     SetTimerEx("AntySpamTimer",3000,0,"d",playerid);
 	    			AntySpam[playerid] = 1;
 				}
+			}
+			else if(GetPlocal(playerid) == PLOCAL_ORG_SN)
+			{
+				GetPlayerName(playerid, sendername, sizeof(sendername));
+				if(isnull(params))
+				{
+					sendTipMessage(playerid, "U¿yj /news [newstext]");
+					return 1;
+				}
+				if (strfind(params , "ip:" , true)>=0 ||strfind(params , "www." , true)>=0 || strfind(params , ".pl" , true)>=0 || strfind(params , ",pl" , true)>=0  || strfind(params , " ip" , true)>=0 || strfind(params , ":7" , true)>=0 || strfind(params , "795" , true)>=0 || strfind(params , ":3" , true)>=0 || strfind(params , ":4" , true)>=0 || strfind(params , ":5" , true)>=0 || strfind(params , ":6" , true)>=0 || strfind(params , ":8" , true)>=0)
+				{
+					SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
+					format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
+					ABroadCast(COLOR_LIGHTRED,string,1);
+					CzitLog(string);
+				}
+				else
+				{
+				    if(AntySpam[playerid] == 1)
+				    {
+				        SendClientMessage(playerid, COLOR_GREY, "Odczekaj 3 sekund");
+				        return 1;
+				    }
+					format(string, sizeof(string), "NR %s: %s", sendername, params);
+					//OOCNews(COLOR_NEWS,string);
+                    OOCNews(0xBB5D00FF, string);
+					PlayerInfo[playerid][pNewsSkill] ++;
+					if(PlayerInfo[playerid][pNewsSkill] == 50)
+					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }
+					else if(PlayerInfo[playerid][pNewsSkill] == 100)
+					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 3, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }
+					else if(PlayerInfo[playerid][pNewsSkill] == 200)
+					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 4, mo¿esz teraz lataæ helikopterem."); }
+					else if(PlayerInfo[playerid][pNewsSkill] == 400)
+					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 5, mo¿esz teraz prowadziæ wywiady na ¿ywo z kim chcesz."); }
+                    SetTimerEx("AntySpamTimer",3000,0,"d",playerid);
+	    			AntySpam[playerid] = 1;
+				}
+			
 			}
 			else
 			{

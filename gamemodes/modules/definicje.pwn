@@ -229,6 +229,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 //======[RODZINNE]==========
 #define PLOCAL_ORG_BONEHEAD 240
+#define PLOCAL_ORG_SN 241
 
 //======[INNE]=============
 #define PLOCAL_INNE_BANK 103
