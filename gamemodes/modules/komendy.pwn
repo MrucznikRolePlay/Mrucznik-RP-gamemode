@@ -27259,11 +27259,6 @@ CMD:glosowanie(playerid, params[])
 		}
 		if(PlayerInfo[playerid][pAdmin] >= 200 || PlayerInfo[playerid][pNewAP] == 5)
 		{
-			if(timeValue > 10)
-			{
-				sendErrorMessage(playerid, "Czas nie mo¿e byæ d³u¿szy jak 10 minut!"); 
-				return 1;
-			}
 			if(strlen(result) > 120)
 			{
 				sendErrorMessage(playerid, "Za d³ugi temat"); 
