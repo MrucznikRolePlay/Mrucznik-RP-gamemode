@@ -30889,7 +30889,7 @@ CMD:glosnik(playerid)
 
 CMD:radiostacja(playerid)
 {
-    if(GetPlocal(playerid) == PLOCAL_ORG_SN)
+    if(GetPLocal(playerid) == PLOCAL_ORG_SN)
     {
         if(IsPlayerInFraction(playerid, FRAC_SN))
 	    {
@@ -36773,7 +36773,7 @@ CMD:news(playerid, params[])
 	    			AntySpam[playerid] = 1;
 				}
 			}
-			else if(GetPlocal(playerid) == PLOCAL_ORG_SN)
+			else if(GetPLocal(playerid) == PLOCAL_ORG_SN)
 			{
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				if(isnull(params))
