@@ -27246,6 +27246,80 @@ CMD:setplocal(playerid, params[])
 	}
 	return 1;
 }
+
+CMD:glosowanie(playerid, params[])
+{
+	if(IsPlayerConnected(playerid))
+	{
+		new timeValue;
+		new result[128];
+		new string[256];
+		if(sscanf(params, "ds[128]", timeValue, result))
+		{
+			sendTipMessage(playerid, "U¿yj /glosowanie [czas_trwania_w_minutach] [temat]");
+			return 1;
+		}
+		if(PlayerInfo[playerid][pAdmin] >= 200 || PlayerInfo[playerid][pNewAP] == 5)
+		{
+			if(strlen(result) > 120)
+			{
+				sendErrorMessage(playerid, "Za d³ugi temat"); 
+				return 1;
+			}
+			if(glosowanie_admina_status == 1)
+			{
+				sendTipMessage(playerid, "Aktualnie trwa g³osowanie"); 
+				return 1;
+			}	
+			//_____WYKONUJEMY KOD____
+			
+			if(GetPVarInt(playerid, "dutyadmin") == 1)
+			{
+				iloscInne[playerid]++; 
+			}
+			format(string, sizeof(string), "Admin %s rozpocz¹³ ankietê na temat %s", GetNick(playerid), result);
+			SendClientMessageToAll(COLOR_RED, string);
+			SendClientMessageToAll(COLOR_WHITE,  "Aby zag³osowaæ wpisz /glosuja [TAK/NIE]");
+			format(string, sizeof(string), "G³osowanie potrwa %d minut", timeValue); 
+			SendClientMessageToAll(COLOR_WHITE, string);
+			glosowanie_admina_status = 1;
+			glosowanie_admina_tak = 0;
+			glosowanie_admina_nie = 0;
+			format(string, sizeof(string), "Zmienna po przeliczeniu to %d", (timeValue*60000));
+			sendTipMessage(playerid, string); 
+			SetTimer("glosuj_admin_ankieta", (timeValue*60000), false);
+			foreach(Player, i)
+			{
+				SetPVarInt(i, "glosowal_w_ankiecie", 0);
+			}
+		}
+		else
+		{
+			noAccessMessage(playerid);
+			return 1;
+		}
+	}
+	return 1;
+}
+CMD:glosuja(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+		if(GetPVarInt(playerid, "glosowal_w_ankiecie") == 1)
+		{
+			sendErrorMessage(playerid, "G³osowa³eœ ju¿ w tej ankiecie"); 
+			return 1;
+		}
+		if(glosowanie_admina_status == 0)
+		{
+			sendErrorMessage(playerid, "Aktualnie nie ma ¿adnej ankiety!"); 
+			return 1;
+		}
+		ShowPlayerDialogEx(playerid, 9666, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "G³osowanie\nKliknij poni¿ej przycisk wed³ug w³asnego uznania\nPamiêtaj! Mo¿esz oddaæ tylko jeden g³os!\n", "Tak", "Nie");
+	
+	}
+	return 1;
+}
 CMD:kick(playerid, params[])
 {
 	new string[256];
