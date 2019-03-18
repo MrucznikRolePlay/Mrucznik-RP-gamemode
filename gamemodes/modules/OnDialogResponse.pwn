@@ -17566,6 +17566,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
+	else if(dialogid == 9666)//dialog tak/nie admina
+	{
+		if(response)
+		{
+			sendTipMessage(playerid, "Zag³osowa³eœ na TAK!"); 
+			glosowanie_admina_tak++;
+			SetPVarInt(playerid, "glosowal_w_ankiecie", 1);
+			return 1;
+		}
+		if(!response)
+		{
+			sendTipMessage(playerid, "Zag³osowa³eœ na NIE!"); 
+			glosowanie_admina_nie++;
+			SetPVarInt(playerid, "glosowal_w_ankiecie", 1); 
+			return 1;
+		}
+	}
 	else if(dialogid == D_KONTAKTY_DZWON)
 	{
 		if(response)

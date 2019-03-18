@@ -43,6 +43,10 @@ new LSMCWindap8 = 0;//Winda LSMC
 new ServerTime = 14;//Czas
 new ServerWeather = 3;//Pogoda
 
+new glosowanie_admina_status = 0;
+new glosowanie_admina_tak = 0;
+new glosowanie_admina_nie = 0;
+
 //=================[ADMIN DUTY]============================
 new nickadminaIC[MAX_PLAYER_NAME];//NickAdministratora IC
 

@@ -123,6 +123,19 @@ public Naprawa(playerid)
     return 1;
 }
 
+forward glosuj_admin_ankieta();
+public glosuj_admin_ankieta()
+{
+	new string[128];
+	glosowanie_admina_status = 0;
+	SendAdminMessage(COLOR_RED, "=====[WYNIKI G£OSOWANIA]======"); 
+	format(string, sizeof(string), "U¿ytkownicy, którzy g³osowali na TAK: %d", glosowanie_admina_tak);
+	SendAdminMessage(COLOR_P@, string);
+	format(string, sizeof(string), "U¿ytkownicy, którzy g³osowali na NIE: %d", glosowanie_admina_nie);
+	SendAdminMessage(COLOR_P@, string);
+	
+	return 1;
+}
 //System Po¿arów v0.1
 forward UsunPozar();
 public UsunPozar()
