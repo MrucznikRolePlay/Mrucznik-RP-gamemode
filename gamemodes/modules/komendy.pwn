@@ -27288,7 +27288,7 @@ CMD:glosowanie(playerid, params[])
 			glosowanie_admina_status = 1;
 			glosowanie_admina_tak = 0;
 			glosowanie_admina_nie = 0;
-			timeValue = timeValue*60000//Wychodzi wynik w milisekundach
+			timeValue = timeValue*60000;//Wychodzi wynik w milisekundach
 			SetTimer("glosuj_admin_ankieta", timeValue, false);
 			foreach(Player, i)
 			{
@@ -27317,7 +27317,7 @@ CMD:glosuja(playerid)
 			sendErrorMessage(playerid, "Aktualnie nie ma ¿adnej ankiety!"); 
 			return 1;
 		}
-		ShowPlayerDialogEx(playerid, 9666 DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "G³osowanie\nKliknij poni¿ej przycisk wed³ug w³asnego uznania\nPamiêtaj! Mo¿esz oddaæ tylko jeden g³os!\n", "Tak", "Nie");
+		ShowPlayerDialogEx(playerid, 9666, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "G³osowanie\nKliknij poni¿ej przycisk wed³ug w³asnego uznania\nPamiêtaj! Mo¿esz oddaæ tylko jeden g³os!\n", "Tak", "Nie");
 	
 	}
 	return 1;
