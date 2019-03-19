@@ -78,12 +78,12 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
-#include "modules/definicje.pwn"
+#include "system/definicje.pwn"
 #include "modules/new/niceczlowiek/definicje.pwn"
-#include "modules/kolory.pwn"
-#include "modules/forward.pwn"
+#include "system/kolory.pwn"
+#include "system/forward.pwn"
 #include "modules/textdraw.pwn"
-#include "modules/enum.pwn"
+#include "system/enum.pwn"
 #include "modules/zmienne.pwn"
 #include "modules/new/niceczlowiek/general.pwn"
 #include "modules/new/niceczlowiek/dynamicgui.pwn"
@@ -131,8 +131,8 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/Inne/external.pwn"
 
 //Modu³y mapy c.d.
-#include "modules/funkcje.pwn"
-#include "modules/timery.pwn"
+#include "system/funkcje.pwn"
+#include "system/timery.pwn"
 
 //Obiekty:
 #include "modules/obiekty/stare_obiekty.pwn"
@@ -142,7 +142,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/obiekty/ikony.pwn"
 
 //Modu³y mapy c.d.
-#include "modules/komendy.pwn"
+#include "system/komendy.pwn"
 #include "modules/new/niceczlowiek/cmd.pwn"
 #include "modules/new/niceczlowiek/noysi.pwn"
 #include "modules/new/niceczlowiek/wybieralka.pwn"

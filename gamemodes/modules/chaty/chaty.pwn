@@ -48,6 +48,45 @@ chaty_Init()
 	chaty_LoadCommands();
 }
 
+//CHWILOWO PRZENIESIONE DO DZIA£ANIA KODU
+new PlayerARGBinds[MAX_PLAYERS][10][256]; //1.28mb
+stock ZamienZnalezioneBindy(playerid, text[])
+{
+	new bufor[512], znajdz;
+	strcat(bufor, text, sizeof(bufor));
+	while (znajdz != -1)
+	{
+		znajdz = strfind(bufor, "#", false, znajdz);
+		if(bufor[znajdz+1] >= '0' && bufor[znajdz+1] <= '9')
+		{
+			new numer = bufor[znajdz+1]-'0';
+			strdel(bufor, znajdz, znajdz+2);
+			strins(bufor, PlayerARGBinds[playerid][numer], znajdz);
+			
+			znajdz = znajdz-2+strlen(PlayerARGBinds[playerid][numer]);
+		}
+		else if(bufor[znajdz+1]=='G')
+		{
+			new nick[MAX_PLAYER_NAME];
+			new giveplayerid = GetClosestPlayer(playerid);
+			if(giveplayerid != INVALID_PLAYER_ID)
+			{
+				GetPlayerName(giveplayerid, nick, sizeof(nick));
+				strdel(bufor, znajdz, znajdz+2);
+				strins(bufor, nick, znajdz);
+			
+				znajdz = znajdz-2+strlen(nick);
+			}
+			else
+			{
+				znajdz+=2;
+			}
+		}
+	}
+	return bufor;
+}
+
+
 stock ChatICAdditions(playerid, text[])
 {
 	new string[256];
@@ -99,7 +138,7 @@ stock WykonajEmotki(playerid, text[])
 
 timer WyswietlMeEmotki[0](playerid, emotka)
 {
-	new emotki[7][] = {
+	emotki[7][] = {
 		"uœmiecha siê.",
 		"puszcza oczko.",
 		"zasmuci³ siê.",
@@ -150,7 +189,7 @@ stock Chat(playerid, text[])
 		RangeMessageGradient(playerid, string, CHAT_RANGE, COLOR_FADE1, COLOR_FADE5);
 		ApplyAnimation(playerid,"PED","IDLE_CHAT",4.0,0,0,0,4,4); //animacja mowy
 	}
-	Log(ChatLog, INFO, text);
+	//Log(ChatLog, INFO, text);
 	return 1;
 }
 
@@ -174,7 +213,7 @@ stock Krzyk(playerid, text[])
 		RangeMessageGradient(playerid, string, KRZYK_RANGE, COLOR_WHITE,COLOR_FADE2);
 		//ApplyAnimation(playerid,"PED","IDLE_CHAT",4.0,0,0,0,4,4);
 	}
-	Log(ChatLog, INFO, text);
+	//Log(ChatLog, INFO, text);
 	return 1;
 }
 
@@ -198,7 +237,7 @@ stock Szept(playerid, text[])
 		RangeMessageGradient(playerid, string, SZEPT_RANGE, COLOR_FADE1, COLOR_FADE5);
 		//ApplyAnimation(playerid,"PED","IDLE_CHAT",4.0,0,0,0,4,4);
 	}
-	Log(ChatLog, INFO, text);
+	//Log(ChatLog, INFO, text);
 	return 1;
 }
 
@@ -209,7 +248,7 @@ stock ChatOOC(playerid, text[])
 	SetPlayerChatBubble(playerid,string, COLOR_FADE1, CHAT_RANGE, CHATBUBBLE_TIME);
 	format(string, sizeof(string), "%s [%d] Czat OOC: %s", GetNick(playerid), playerid, string);
     RangeMessageGradient(playerid, string, CHAT_RANGE, COLOR_FADE1, COLOR_FADE5);
-	Log(ChatLog, INFO, string);
+	//Log(ChatLog, INFO, string);
 	return 1;
 }
 
@@ -217,7 +256,7 @@ stock GlobalOOC(playerid, text[])
 {
 	format(string, sizeof(string), "(( %s [%d]: %s ))", GetNick(playerid), playerid, text);
     MruMessageToAll(playerid, COLOR_WHITE, string);
-	Log(ChatLog, INFO, string);
+	//Log(ChatLog, INFO, string);
 	return 1;
 }
 
@@ -229,7 +268,7 @@ stock Me(playerid, text[], Float:zasieg=ME_RANGE)
     format(string, sizeof(string), "* %s %s", GetNick(playerid), text);
     RangeMessage(playerid, COLOR_PURPLE, string, zasieg);
 	format(string, sizeof(string), "%s [/me:] %s", GetNick(playerid), text);
-	Log(ChatLog, INFO, string);
+	//Log(ChatLog, INFO, string);
 	return 1;
 }
 
@@ -241,7 +280,7 @@ stock Do(playerid, text[], Float:zasieg=ME_RANGE)
     format(string, sizeof(string), "* %s ((%s))", text, GetNick(playerid));
     RangeMessage(playerid, COLOR_PURPLE, string, zasieg);
 	format(string, sizeof(string), "%s [/do:] %s", GetNick(playerid), text);
-	Log(ChatLog, INFO, string);
+	//Log(ChatLog, INFO, string);
 	return 1;
 }
 
@@ -256,7 +295,7 @@ stock CBRadio(playerid, text[])
 			MruMessage(i, COLOR_GREEN, string);
 		}
 	}
-	Log(ChatLog, INFO, string);
+	//Log(ChatLog, INFO, string);
 }
 
 stock PrywatnaWiadomosc(playerid, giveplayerid, text[])
@@ -267,7 +306,7 @@ stock PrywatnaWiadomosc(playerid, giveplayerid, text[])
 	PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
 	PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);
 	
-	Log(ChatLog, INFO, "Gracz %s wys³a³ prywatn¹ wiadomoœæ do %s o treœci: %s", GetNick(playerid), GetNick(giveplayerid), text);
+	//Log(ChatLog, INFO, "Gracz %s wys³a³ prywatn¹ wiadomoœæ do %s o treœci: %s", GetNick(playerid), GetNick(giveplayerid), text);
 	return 1;
 }
 
