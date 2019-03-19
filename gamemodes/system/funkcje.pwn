@@ -1,5 +1,168 @@
 //funkcje.pwn
+//FUNKCJE DLA CA£EGO SERWERA
+stock RangeMessage(playerid, kolor, text[], Float:zasieg=30.0)
+{ //wiadomoœæ wyœwietlana w okreœlonym zasiêgu
+	new Float: x, Float:y, Float:z;
+	GetPlayerPos(playerid, x,y,z);
+	if (zasieg > STREAM_DISTANCE)
+	{
+		foreach(Player, i )
+		{
+			if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
+			{
+				if(IsPlayerInRangeOfPoint(i, zasieg, x, y, z))
+				{
+					MruMessage(i, kolor, text);
+				}
+			}
+		}
+	}
+	else
+	{
+		MruMessage(playerid, kolor, text);
+		foreach(Player, i)
+		{
+			if(IsPlayerInRangeOfPoint(i, zasieg, x, y, z))
+			{
+				MruMessage(i, kolor, text);
+			}
+		}
+	}
+	return 1;
+}
+stock MruMessage(playerid, kolor, text[])
+{
+	new lenght = strlen(text);
+	if(lenght > MAX_MESSAGE_LENGHT)
+	{
+		new bufor[MAX_MESSAGE_LENGHT], spacja;
+		for(spacja=MAX_MESSAGE_LENGHT-5; spacja>MAX_MESSAGE_LENGHT*0.75; spacja--)
+			if(text[spacja] == ' ') break;
+		
+		strmid(bufor, text, 0, spacja);
+		strcat(bufor, "...");
+		SendClientMessage(playerid, kolor, bufor);
+		strmid(bufor, text, spacja+1, lenght);
+		strins(bufor, "...", 0);
+		SendClientMessage(playerid, kolor, bufor);
+		return 1;
+	}
+	else
+	{
+		return SendClientMessage(playerid, kolor, text);
+	}
+}
+stock MruMessageToAll(kolor, text[])
+{
+	new lenght = strlen(text);
+	if(lenght > MAX_MESSAGE_LENGHT)
+	{
+		new bufor[MAX_MESSAGE_LENGHT], spacja;
+		for(spacja=MAX_MESSAGE_LENGHT-5; spacja>MAX_MESSAGE_LENGHT*0.75; spacja--)
+			if(text[spacja] == ' ') break;
+		
+		strmid(bufor, text, 0, spacja);
+		strcat(bufor, "...");
+		SendClientMessageToAll(kolor, bufor);
+		strmid(bufor, text, spacja+1, lenght);
+		strins(bufor, "...", 0);
+		SendClientMessageToAll(kolor, bufor);
+	}
+	else
+	{
+		return SendClientMessageToAll(kolor, text);
+	}
+	return 1;
+}
+stock MruMessageF(playerid, color, fstring[], {Float, _}:...) //by Y_Less edited by Mrucznik
+{
+    static const STATIC_ARGS = 3;
+    new n = (numargs() - STATIC_ARGS) * BYTES_PER_CELL;
+    if(n)
+    {
+        new message[256],arg_start,arg_end;
+        #emit CONST.alt        fstring
+        #emit LCTRL          5
+        #emit ADD
+        #emit STOR.S.pri        arg_start
 
+        #emit LOAD.S.alt        n
+        #emit ADD
+        #emit STOR.S.pri        arg_end
+        do
+        {
+            #emit LOAD.I
+            #emit PUSH.pri
+            arg_end -= BYTES_PER_CELL;
+            #emit LOAD.S.pri      arg_end
+        }
+        while(arg_end > arg_start);
+
+        #emit PUSH.S          fstring
+        #emit PUSH.C          256
+        #emit PUSH.ADR         message
+
+        n += BYTES_PER_CELL * 3;
+        #emit PUSH.S          n
+        #emit SYSREQ.C         format
+
+        n += BYTES_PER_CELL;
+        #emit LCTRL          4
+        #emit LOAD.S.alt        n
+        #emit ADD
+        #emit SCTRL          4
+
+        if(playerid == INVALID_PLAYER_ID)
+        {
+            #pragma unused playerid
+            return MruMessageToAll(color, message);
+        } else {
+            return MruMessage(playerid, color, message);
+        }
+    } else {
+        if(playerid == INVALID_PLAYER_ID)
+        {
+            #pragma unused playerid
+            return MruMessageToAll(color, fstring);
+        } else {
+            return MruMessage(playerid, color, fstring);
+        }
+    }
+}
+stock RangeMessageGradient(playerid, text[], Float:zasieg, kolormin, kolormax)
+{ //wiadomoœæ wyœwietlana w okreœlonym zasiêgu kolorowana w zale¿noœci od odleg³oœci
+	new Float: x, Float:y, Float:z;
+	GetPlayerPos(playerid, x,y,z);
+	if (zasieg > STREAM_DISTANCE)
+	{
+		foreach(Player, i )
+		{
+			if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
+			{
+				new Float:distance = GetPlayerDistanceFromPoint(i, x, y, z);
+				if(distance <= zasieg)
+				{
+					MruMessage(i, GenerateGradient(kolormin, kolormax, floatround(zasieg), floatround(distance)), text);
+				}
+			}
+		}
+	}
+	else
+	{
+		MruMessage(playerid, kolormin, text);
+		foreach(Player, i )
+		{
+			new Float:distance = GetPlayerDistanceFromPoint(i, x, y, z);
+			if(distance <= zasieg)
+			{
+				MruMessage(i, GenerateGradient(kolormin, kolormax, floatround(zasieg), floatround(distance)), text);
+			}
+		}
+	}
+	return 1;
+}
+
+//====================================[STARY KOD I RESZTA]=====================
 stock IsVehicleEmpty(vehicleid)
 {
   for(new i; i < MAX_PLAYERS; i++)
