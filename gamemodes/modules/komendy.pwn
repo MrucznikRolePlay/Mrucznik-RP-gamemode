@@ -22213,14 +22213,14 @@ CMD:fbidrzwi(playerid)
 	{
 		if(GetPlayerFraction(playerid) == FRAC_FBI)
 		{
-			if(doorFbiStatus == 0)
+			if(doorFBIStatus == 0)
 			{
-				doorFbiStatus = 1;
+				doorFBIStatus = 1;
 				sendTipMessage(playerid, "Otworzy³eœ biurowiec FBI"); 
 			}
 			else
 			{
-				doorFbiStatus = 0; 
+				doorFBIStatus = 0; 
 				sendTipMessage(playerid, "Zamykasz biurowiec FBI"); 
 			}
 		
