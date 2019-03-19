@@ -6767,7 +6767,7 @@ public OnVehicleSpawn(vehicleid)
 
 public OnPlayerText(playerid, text[])
 {
-	#if DEBUG_MODE > 0
+	/*#if DEBUG_MODE > 0
 	if(IsPlayerNPC(playerid))
 	{
 		if(text[0] == '#')
@@ -6790,8 +6790,8 @@ public OnPlayerText(playerid, text[])
         return 0;
     }
 	Chat(playerid, ChatICAdditions(playerid, text));
-	
-	/*new giver[MAX_PLAYER_NAME];
+	*/
+	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
 	new tmp[256];
@@ -7606,7 +7606,7 @@ public OnPlayerText(playerid, text[])
 	}
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerText - end", GetNick(playerid), playerid);
-	#endif*/
+	#endif
 	return 1;
 }//OnPlayerText
 
