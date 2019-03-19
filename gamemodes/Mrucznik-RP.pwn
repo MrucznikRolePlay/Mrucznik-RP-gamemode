@@ -82,7 +82,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/niceczlowiek/definicje.pwn"
 #include "system/kolory.pwn"
 #include "system/forward.pwn"
-#include "modules/textdraw.pwn"
+#include "system/textdraw.pwn"
 #include "system/enum.pwn"
 #include "modules/zmienne.pwn"
 #include "modules/new/niceczlowiek/general.pwn"
