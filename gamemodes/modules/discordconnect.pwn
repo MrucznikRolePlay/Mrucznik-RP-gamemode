@@ -13,6 +13,7 @@ stock DiscordConnectInit()
 	g_FracChannel[10]=DCC_FindChannelById("545622580246347776");
 	g_FracChannel[11]=DCC_FindChannelById("545622546939117569");
 	g_FracChannel[12]=DCC_FindChannelById("545642957106053123");
+	g_FracChannel[13]=DCC_FindChannelById("557567568198631441");
 	g_FracChannel[15]=DCC_FindChannelById("545643012437311491");
 	g_FracChannel[16]=DCC_FindChannelById("545643300736991235");
 	g_FracChannel[17]=DCC_FindChannelById("545619305832775700");
