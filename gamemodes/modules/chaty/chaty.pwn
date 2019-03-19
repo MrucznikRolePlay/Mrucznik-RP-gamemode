@@ -278,38 +278,38 @@ stock PrywatnaWiadomosc(playerid, giveplayerid, text[])
 //-----------------<[ Komendy: ]>-------------------
 chaty_LoadCommands()
 {
-	Command_AddAlt(YCMD:l, "local");
-	Command_AddAlt(YCMD:l, "say");
-	Command_AddAlt(YCMD:l, "powiedz");
-	Group_SetCommand(LoggedPlayers, YCMD:l, true);
+	Command_AddAlt(CMD:l, "local");
+	Command_AddAlt(CMD:l, "say");
+	Command_AddAlt(CMD:l, "powiedz");
+	Group_SetCommand(LoggedPlayers, CMD:l, true);
 	
-	Command_AddAlt(YCMD:k, "shout");
-	Command_AddAlt(YCMD:k, "krzyk");
-	Command_AddAlt(YCMD:k, "krzycz");
-	Group_SetCommand(LoggedPlayers, YCMD:k, true);
+	Command_AddAlt(CMD:k, "shout");
+	Command_AddAlt(CMD:k, "krzyk");
+	Command_AddAlt(CMD:k, "krzycz");
+	Group_SetCommand(LoggedPlayers, CMD:k, true);
 	
-	Command_AddAlt(YCMD:s, "szept");
-	Command_AddAlt(YCMD:s, "szepcz");
-	Group_SetCommand(LoggedPlayers, YCMD:s, true);
+	Command_AddAlt(CMD:s, "szept");
+	Command_AddAlt(CMD:s, "szepcz");
+	Group_SetCommand(LoggedPlayers, CMD:s, true);
 	
-	Command_AddAlt(YCMD:me, "ja");
-	Group_SetCommand(LoggedPlayers, YCMD:me, true);
+	Command_AddAlt(CMD:me, "ja");
+	Group_SetCommand(LoggedPlayers, CMD:me, true);
 	
-	Command_AddAlt(YCMD:do, "akcja");
-	Group_SetCommand(LoggedPlayers, YCMD:do, true);
+	Command_AddAlt(CMD:do, "akcja");
+	Group_SetCommand(LoggedPlayers, CMD:do, true);
 	
-	Group_SetCommand(LoggedPlayers, YCMD:b, true);
+	Group_SetCommand(LoggedPlayers, CMD:b, true);
 	
-	Command_AddAlt(YCMD:cb, "cbradio");
-	Group_SetCommand(LoggedPlayers, YCMD:cb, true);
+	Command_AddAlt(CMD:cb, "cbradio");
+	Group_SetCommand(LoggedPlayers, CMD:cb, true);
 	
-	Command_AddAlt(YCMD:w, "pm");
-	Command_AddAlt(YCMD:w, "wiadomosc");
-	Command_AddAlt(YCMD:w, "whisper");
-	Group_SetCommand(LoggedPlayers, YCMD:w, true);
+	Command_AddAlt(CMD:w, "pm");
+	Command_AddAlt(CMD:w, "wiadomosc");
+	Command_AddAlt(CMD:w, "whisper");
+	Group_SetCommand(LoggedPlayers, CMD:w, true);
 }
 
-YCMD:l(playerid, params[], help)
+CMD:l(playerid, params[], help)
 { //chat
     if ( help ) return CMDHelp(playerid, "Podstawowy czat IC (mowa postaci).");
 	
@@ -319,7 +319,7 @@ YCMD:l(playerid, params[], help)
     return 1;
 }
 
-YCMD:k(playerid, params[], help)
+CMD:k(playerid, params[], help)
 { //krzyk
     if ( help ) return CMDHelp(playerid, "Podstawowy czat IC (krzyk postaci).");
 	
@@ -329,7 +329,7 @@ YCMD:k(playerid, params[], help)
     return 1;
 }
 
-YCMD:s(playerid, params[], help)
+CMD:s(playerid, params[], help)
 { //szept
     if ( help ) return CMDHelp(playerid, "Podstawowy czat IC (szept postaci).");
 	
@@ -339,7 +339,7 @@ YCMD:s(playerid, params[], help)
     return 1;
 }
 
-YCMD:b(playerid, params[], help)
+CMD:b(playerid, params[], help)
 { //szept
     if ( help ) return CMDHelp(playerid, "Podstawowy czat OOC (wiadomoœæ do graczy woko³o).");
 	
@@ -349,7 +349,7 @@ YCMD:b(playerid, params[], help)
     return 1;
 }
 
-YCMD:o(playerid, params[], help)
+CMD:o(playerid, params[], help)
 { //szept
     if ( help ) return CMDHelp(playerid, "Globalny czat OOC (widoczny dla wszystkich graczy na serwerze).");
 	
@@ -359,7 +359,7 @@ YCMD:o(playerid, params[], help)
     return 1;
 }
 
-YCMD:me(playerid, params[], help)
+CMD:me(playerid, params[], help)
 { //ja
     if ( help ) return CMDHelp(playerid, "S³u¿y do opisu czynnoœci które wykonuje postaæ.");
 	
@@ -369,7 +369,7 @@ YCMD:me(playerid, params[], help)
     return 1;
 }
 
-YCMD:do(playerid, params[], help)
+CMD:do(playerid, params[], help)
 { //do
     if ( help ) return CMDHelp(playerid, "S³u¿y do opisu otoczenia, wygl¹du czy sytuacji w jakiej znalaz³a siê nasza postaæ.");
 	
@@ -379,7 +379,7 @@ YCMD:do(playerid, params[], help)
     return 1;
 }
 
-YCMD:cb(playerid, params[], help)
+CMD:cb(playerid, params[], help)
 { //chat
     if ( help ) return CMDHelp(playerid, "CB radio pozwala siê komunikowaæ z graczami, którzy s¹ w samochodzie z zakupionym CB-radiem.");
 	
@@ -389,7 +389,7 @@ YCMD:cb(playerid, params[], help)
     return 1;
 }
 
-YCMD:w(playerid, params[], help)
+CMD:w(playerid, params[], help)
 { //chat
     if ( help ) return CMDHelp(playerid, "Wysy³a prywatn¹ wiadomoœæ do drugiego gracza.");
 	

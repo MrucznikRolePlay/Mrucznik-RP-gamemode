@@ -18388,7 +18388,7 @@ CMD:b(playerid, params[])
 	}
 	return 1;
 }
-
+/*
 CMD:cicho(playerid, params[]) return cmd_szept(playerid, params);
 CMD:s(playerid, params[]) return cmd_szept(playerid, params);
 CMD:szept(playerid, params[])
@@ -18420,7 +18420,7 @@ CMD:szept(playerid, params[])
 		}
 		/*format(string, sizeof(string), "%s Szepcze: %s", sendername, params);
 		ProxDetector(5.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-		printf("%s", string); */
+		printf("%s", string); 
         if(strlen(params) < 78)
         {
             format(string, sizeof(string), "%s szepcze: %s", GetNick(playerid, true), params);
@@ -18450,7 +18450,7 @@ CMD:szept(playerid, params[])
 	}
 	return 1;
 }
-
+*/
 CMD:krzyk(playerid, params[]) return cmd_k(playerid, params);
 CMD:k(playerid, params[])
 {
