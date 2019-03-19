@@ -7108,13 +7108,13 @@ public OnPlayerText(playerid, text[])
 		{
 		    format(string, sizeof(string), "Reporter %s: %s", sendername, text);
 			OOCNews(COLOR_LIGHTGREEN, string);
-			SendDiscordMessage(0, string);
+			SendDiscordMessage(DISCORD_SAN_NEWS, string);
 		}
 		else
 		{
 		    format(string, sizeof(string), "Goœæ wywiadu %s: %s", sendername, text);
 			OOCNews(COLOR_LIGHTGREEN, string);
-			SendDiscordMessage(0, string);
+			SendDiscordMessage(DISCORD_SAN_NEWS, string);
 		}
 		return 0;
 	}

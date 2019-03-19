@@ -22761,7 +22761,7 @@ CMD:a(playerid, params[])
 			if (PlayerInfo[playerid][pAdmin] >= 1)
 			{
 				SendAdminMessage(0xFFC0CB, string);
-				SendDiscordMessage(1, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 			}
 			printf("Admin %s: %s", sendername, params);
 		}
@@ -22771,7 +22771,7 @@ CMD:a(playerid, params[])
 			if (PlayerInfo[playerid][pNewAP] >= 1)
 			{
 				SendAdminMessage(0xFFC0CB, string);
-				SendDiscordMessage(1, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 			}
 			printf("PolAdmin %s: %s", sendername, params);
 		}
@@ -22781,7 +22781,7 @@ CMD:a(playerid, params[])
             if (PlayerInfo[playerid][pNewAP] >= 1)
             {
                 SendAdminMessage(0xFFC0CB, string);
-				SendDiscordMessage(1, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
             }
             printf("Skrypter %s: %s", sendername, params);
         }
@@ -28584,7 +28584,7 @@ CMD:raport(playerid, params[])
 			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
 			ABroadCast(COLOR_YELLOW,string,1);
 			format(discordstring, sizeof(discordstring), "» Report od %s [%d]: %s", sendername, playerid, params);
-			SendDiscordMessage(2, discordstring);
+			SendDiscordMessage(DISCORD_REPORT, discordstring);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "Je¿eli Administracja nie reaguje na Twój report, oznacza to, ¿e...");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "...jest on Ÿle sformu³owany i Administracja nie rozpatrzy tego zg³oszenia.");//By: Dawid
@@ -35204,7 +35204,7 @@ CMD:news(playerid, params[])
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					OOCNews(COLOR_NEWS,string);
-					SendDiscordMessage(0, string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
                     //OOCNews(0xFF8C55FF, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
@@ -35244,7 +35244,7 @@ CMD:news(playerid, params[])
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					//OOCNews(COLOR_NEWS,string);
                     OOCNews(0xBB5D00FF, string);
-					SendDiscordMessage(0, string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
 					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }

@@ -23,45 +23,41 @@ stock DiscordConnectInit()
 }
 stock SendDiscordMessage(channel, message[])
 {
-new dest[512];
-utf8encode(dest, message);
-
-switch(channel)
+	new dest[512];
+	utf8encode(dest, message);
+	switch(channel)
 	{
-	// #ig-san-newsxd
 	case 0:
-	{
-    DCC_SendChannelMessage(g_SanNewsChannelId, dest);
-	}
-	// #ig-admin-chat
+		{
+			DCC_SendChannelMessage(g_SanNewsChannelId, dest); // #ig-san-newsxd
+		}
 	case 1:
-	{
-    DCC_SendChannelMessage(g_AdminChannelId, dest);
-	}
-	// #ig-report
+		{
+			DCC_SendChannelMessage(g_AdminChannelId, dest); // #ig-admin-chat
+		}
 	case 2:
-	{
-    DCC_SendChannelMessage(g_ReportChannelId, dest);
+		{
+			DCC_SendChannelMessage(g_ReportChannelId, dest); // #ig-report
+		}
 	}
-	}
-return 1;
+	return 1;
 }
 
 stock SendDiscordFracMessage(fractionid, message[])
 {
-new dest[512];
-utf8encode(dest, message);
-DCC_SendChannelMessage(g_FracChannel[fractionid], dest);
+	new dest[512];
+	utf8encode(dest, message);
+	DCC_SendChannelMessage(g_FracChannel[fractionid], dest);
 
-return 1;
+	return 1;
 }
 stock SendDiscordOrgMessage(orgid, message[])
 {
-new dest[512];
-utf8encode(dest, message);
-DCC_SendChannelMessage(g_OrgChannel[orgid], dest);
+	new dest[512];
+	utf8encode(dest, message);
+	DCC_SendChannelMessage(g_OrgChannel[orgid], dest);
 
-return 1;
+	return 1;
 }
 public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[])
 {
@@ -88,21 +84,21 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 	}
 	for(new i=0;i<MAX_ORG;i++)
 	{
-	if(channel == g_FracChannel[i] && IsBot == false) 
-	{
-		new user_name[32 + 1],str[128],dest[128];
-		DCC_GetUserName(author, user_name);
-		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
-		utf8decode(dest, str);
-		if(0 < i <= 4 || i == 11 || i == 7 || i == 17)
+		if(channel == g_FracChannel[i] && IsBot == false) 
 		{
-		SendRadioMessage(i, TEAM_BLUE_COLOR, dest);
+			new user_name[32 + 1],str[128],dest[128];
+			DCC_GetUserName(author, user_name);
+			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
+			utf8decode(dest, str);
+			if(0 < i <= 4 || i == 11 || i == 7 || i == 17)
+			{
+				SendRadioMessage(i, TEAM_BLUE_COLOR, dest);
+			}
+			else SendFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
+			
+			return 1;
 		}
-		else SendFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
 		
-		return 1;
-	}
-	
 	}
 	
 
