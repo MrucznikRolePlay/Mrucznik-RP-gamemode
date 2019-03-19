@@ -52,6 +52,7 @@
 #define SPAM_PROTECTION_VALUE 		3 			//iloœæ dzia³añ które mo¿na wykonaæ przed w³¹czeniem ochrony antyspamowej 
 #define COLOR_STRING_LENGTH			6			//d³ugoœæ ci¹gu znaków odpowiedzialna za kolor
 #define NOT_FOUND					-1			//u¿ywane do strfind
+#define STREAM_DISTANCE 300.0
 
 //BIZNESY
 #define MAX_BIZNES 103

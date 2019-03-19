@@ -6,7 +6,7 @@ stock RangeMessage(playerid, kolor, text[], Float:zasieg=30.0)
 	GetPlayerPos(playerid, x,y,z);
 	if (zasieg > STREAM_DISTANCE)
 	{
-		foreach(new i : GroupMember(LoggedPlayers))
+		foreach(Player, i )
 		{
 			if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
 			{
@@ -20,7 +20,7 @@ stock RangeMessage(playerid, kolor, text[], Float:zasieg=30.0)
 	else
 	{
 		MruMessage(playerid, kolor, text);
-		foreach(new i : StreamedPlayers[playerid])
+		foreach(Player, i)
 		{
 			if(IsPlayerInRangeOfPoint(i, zasieg, x, y, z))
 			{
