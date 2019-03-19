@@ -97,7 +97,6 @@ stock SprawdzWejscia(playerid)
 				SetServerWeatherAndTime(playerid);
 				Wchodzenie(playerid);
 			}
-			return 1;
 		}
 		if(wejscia[i][w_UID] == 4)
 		{
@@ -123,7 +122,6 @@ stock SprawdzWejscia(playerid)
 				Wchodzenie(playerid);
 				SetPLocal(playerid, 255); 
 			}
-			return 1;
 		}
 		if(wejscia[i][w_UID] == 5) 
 		{
@@ -149,7 +147,6 @@ stock SprawdzWejscia(playerid)
 				Wchodzenie(playerid);
 				SetPLocal(playerid, 255); 
 			}
-			return 1;
 		}
 		if(wejscia[i][w_UID] == 3)
 		{
@@ -184,8 +181,6 @@ stock SprawdzWejscia(playerid)
 				Wchodzenie(playerid);
 				SetPLocal(playerid, PLOCAL_DEFAULT);
 			}
-		
-			return 1;
 		}
 		if(wejscia[i][w_UID] == 2)
 		{
@@ -247,7 +242,6 @@ stock SprawdzWejscia(playerid)
 				}
 			
 			}
-			return 1;
 		}	
 		if(wejscia[i][w_UID] == 1)//DMV
 		{
@@ -319,13 +313,10 @@ stock SprawdzWejscia(playerid)
 				SetServerWeatherAndTime(playerid);
 				Wchodzenie(playerid);
 			}
-			return 1;
 		}
 		
-		
-		
 		//WYKONANIE RESZTY
-		if(GetPlayerInterior(playerid) == wejscia[i][w_int1] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw1] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]))
+		else if(GetPlayerInterior(playerid) == wejscia[i][w_int1] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw1] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]))
 		{
 			SetPlayerPosEx(playerid,  wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]);
 			SetPlayerInterior(playerid, wejscia[i][w_int2]);
