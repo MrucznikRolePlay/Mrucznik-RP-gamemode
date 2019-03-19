@@ -91,11 +91,11 @@ native WP_Hash(buffer[], len, const str[]);
 //______MODU£Y PRZENIESIONE Z MAPY 3.0___________
 
 //.def
-//#include "modules/chaty/chaty.def"
+#include "modules/chaty/chaty.def"
 //.hwn
-//#include "modules/chaty/chaty.hwn"
+#include "modules/chaty/chaty.hwn"
 //.pwn
-//#include "modules/chaty/chaty.pwn"
+#include "modules/chaty/chaty.pwn"
 
 
 //_______________________________________________
