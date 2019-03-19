@@ -91,7 +91,7 @@ stock ChatICAdditions(playerid, text[])
 {
 	new string[256];
 	strcat(string, ZamienZnalezioneBindy(playerid, text));
-	format(string, sizeof(string), "%s", WykonajEmotki(playerid, string));
+	//format(string, sizeof(string), "%s", WykonajEmotki(playerid, string));
 	format(string, sizeof(string), "%s", KolorujWstawkiMe(string));
 	return string;
 }
@@ -102,7 +102,7 @@ stock ChatOOCAdditions(playerid, text[])
 	strcat(string, ZamienZnalezioneBindy(playerid, text));
 	return string;
 }
-
+/*
 stock WykonajEmotki(playerid, text[])
 {
 	new string[256];
@@ -126,7 +126,7 @@ stock WykonajEmotki(playerid, text[])
 			new pozycjaEmotki = strfind(string, emotki[i]);
 			if(pozycjaEmotki != -1)
 			{
-				defer WyswietlMeEmotki(playerid, i);
+				WyswietlMeEmotki(playerid, i);
 				strdel(string, pozycjaEmotki, pozycjaEmotki+strlen(emotki[i]));
 				brakZamian = true;
 			}
@@ -149,7 +149,7 @@ timer WyswietlMeEmotki[0](playerid, emotka)
 	};
 	Me(playerid, emotki[emotka]);
 }
-
+*/
 stock KolorujWstawkiMe(text[])
 {
 	new string[256];
@@ -288,7 +288,7 @@ stock CBRadio(playerid, text[])
 {
 	new string[256];
 	format(string, sizeof(string), "%s mówi przez CB-Radio: %s", GetNick(playerid), text);
-	foreach( new i : GroupMember(LoggedPlayers))
+	foreach(Player, i )
 	{
 		if(IsPlayerInAnyVehicle(i))
 		{
