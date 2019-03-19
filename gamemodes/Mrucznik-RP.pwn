@@ -88,6 +88,19 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/niceczlowiek/general.pwn"
 #include "modules/new/niceczlowiek/dynamicgui.pwn"
 #include "modules/mru_mysql.pwn"
+//______MODU£Y PRZENIESIONE Z MAPY 3.0___________
+
+//.def
+#include "modules/chaty/chaty.def"
+//.hwn
+#include "modules/chaty/chaty.hwn"
+//.pwn
+#include "modules/chaty/chaty.pwn"
+
+
+//_______________________________________________
+
+
 
 //Nowe modu³y .def:
 #include "modules/new/bramy/bramy.def"
@@ -6754,8 +6767,20 @@ public OnVehicleSpawn(vehicleid)
 
 public OnPlayerText(playerid, text[])
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerText - begin", GetNick(playerid), playerid);
+	/*#if DEBUG_MODE > 0
+	if(IsPlayerNPC(playerid))
+	{
+		if(text[0] == '#')
+		{
+			return 1;
+		}
+		printf("[Bot %s:] %s", GetNick(playerid), text);
+		return 0;
+	}
+	else if(text[0] == 'b' && text[1] == 'o' && text[2] == 't')
+	{
+		return 1;
+	}
 	#endif
     if(text[0] == '@') //animacja
     {
@@ -6764,7 +6789,8 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
-
+	Chat(playerid, ChatICAdditions(playerid, text));
+	*/
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
