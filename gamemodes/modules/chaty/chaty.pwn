@@ -62,13 +62,15 @@ stock KolorujWstawkiMe(text[])
 	new string[256];
 	strcat(string, text);
 	new stars = strfind(string, "**");
+	new starsText[128];
 	if(stars != -1)
 	{
 		new nextStars = strfind(string, "**", true, stars+2);
 		if(nextStars != -1)
 		{
-			strdel(string, nextStars+2, strlen(string));
-			strins(string, INCOLOR_PURPLE, stars);
+			//strdel(string, nextStars+2, strlen(string));
+			strins(string, INCOLOR_PURPLE, stars, nextStars+2);
+			strins(string, INCOLOR_WHITE, nextStars+2); 
 		}
 	}
 	return string;
