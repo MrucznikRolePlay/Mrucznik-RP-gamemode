@@ -1344,7 +1344,7 @@ KoniecWyscigu(playerid)
 	return 1;
 }
 
-stock strreplace(string[], find, replace)
+stock strreplace2(string[], find, replace)
 {
     for(new i=0; string[i]; i++)
     {
@@ -5457,7 +5457,7 @@ ZaladujDomy()
 	        if(dini_Exists(string))
 	        {
 	            new GeT[MAX_PLAYER_NAME];
-	            new DM[128];
+	            new message[128];
 	            new SEJF[20];
 	            format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
     			Dom[i][hID] = i;
@@ -5467,8 +5467,8 @@ ZaladujDomy()
 				Dom[i][hKupiony] = dini_Int(string, "Kupiony");
 				Dom[i][hBlokada] = dini_Int(string, "Blokada");
 				Dom[i][hOplata] = dini_Int(string, "Dodatkowa_Oplata");
-				format(DM, sizeof(DM), "%s", dini_Get(string, "Komunikat_Wynajmu"));
-				Dom[i][hKomunikatWynajmu] = DM;
+				format(message, sizeof(message), "%s", dini_Get(string, "Komunikat_Wynajmu"));
+				Dom[i][hKomunikatWynajmu] = message;
 				Dom[i][hCena] = dini_Int(string, "Cena");
 				Dom[i][hUID_W] = dini_Int(string, "UID_Wlascicela");
 				Dom[i][hData_DD] = dini_Int(string, "Data");
@@ -5840,7 +5840,7 @@ StworzDom(playerid, interior, oplata)
 	else
 	{
 	    new GeT[MAX_PLAYER_NAME];
-	    new DM[128];
+	    new message[128];
 	    new Float:Wej_X, Float: Wej_Y, Float: Wej_Z;
      	GetPlayerPos(playerid, Wej_X, Wej_Y, Wej_Z);
 	 	dini_Create(string);
@@ -5853,8 +5853,8 @@ StworzDom(playerid, interior, oplata)
 		Dom[dld][hKupiony] = 0;
 		Dom[dld][hBlokada] = 0;
 		Dom[dld][hOplata] = oplata;
-		format(DM, sizeof(DM), "Wynajmujesz dom");
-		Dom[dld][hKomunikatWynajmu] = DM;
+		format(message, sizeof(message), "Wynajmujesz dom");
+		Dom[dld][hKomunikatWynajmu] = message;
 		Dom[dld][hUID_W] = 0;
 		Dom[dld][hData_DD] = 0;
 		Dom[dld][hWej_X] = Wej_X;
@@ -6060,7 +6060,7 @@ L_StworzDom(playerid, kategoria, oplata)
 	else
 	{
 	    new GeT[MAX_PLAYER_NAME];
-	    new DM[128];
+	    new message[128];
 	    new Float:Wej_X, Float: Wej_Y, Float: Wej_Z;
      	GetPlayerPos(playerid, Wej_X, Wej_Y, Wej_Z);
 	 	dini_Create(string);
@@ -6071,8 +6071,8 @@ L_StworzDom(playerid, kategoria, oplata)
 		Dom[dld][hZamek] = 0;
 		Dom[dld][hKupiony] = 0;
 		Dom[dld][hOplata] = oplata;
-		format(DM, sizeof(DM), "Wynajmujesz dom");
-		Dom[dld][hKomunikatWynajmu] = DM;
+		format(message, sizeof(message), "Wynajmujesz dom");
+		Dom[dld][hKomunikatWynajmu] = message;
 		Dom[dld][hUID_W] = 0;
 		Dom[dld][hData_DD] = 0;
 		Dom[dld][hWej_X] = Wej_X;
@@ -11287,7 +11287,7 @@ stock SetRPName(playerid)
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, sizeof(nick));
 	format(nickRP[playerid], MAX_PLAYER_NAME, "%s", nick);
-	strreplace(nickRP[playerid], '_', ' ');
+	strreplace2(nickRP[playerid], '_', ' ');
 }
 
 public VendCheck(playerid)

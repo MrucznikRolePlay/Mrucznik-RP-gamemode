@@ -54,6 +54,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_MAX_CONNECTS_FROM_IP		2
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
+#include <strlib>
 #include <true_random>
 
 //-------<[ Pluginy ]>-------
@@ -66,6 +67,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
 #include <timestamptodate>
+#include <discord-connector>
 
 //-------<[ Natives ]>-------
 native WP_Hash(buffer[], len, const str[]);
@@ -130,6 +132,8 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/niceczlowiek/cmd.pwn"
 #include "modules/new/niceczlowiek/noysi.pwn"
 #include "modules/new/niceczlowiek/wybieralka.pwn"
+//sktomdiscordconnect
+#include "modules/discord.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()
@@ -1656,7 +1660,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//disable problematic codes for trusted players
 			return 1;
 		}
-		
+
 		if(GetPVarInt(playerid, "CheatDetected") == 1)
 		{
 			//kod wy³¹czony, jeœli wykryto (zapobiega dublowaniu komunikatów o wykryciu kodu nim gracz zostanie skickowany).
@@ -1669,7 +1673,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
         AntiCheatLog(string);
-		
+
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
 			Kick(playerid);
@@ -5109,6 +5113,9 @@ public OnGameModeInit()
     //noYsi
     LoadPrzewinienia();
 
+	//discordconnect
+	DiscordConnectInit();
+
     new string[MAX_PLAYER_NAME];
     new string1[MAX_PLAYER_NAME];
 	for(new c=0;c<CAR_AMOUNT;c++)
@@ -7102,11 +7109,13 @@ public OnPlayerText(playerid, text[])
 		{
 		    format(string, sizeof(string), "Reporter %s: %s", sendername, text);
 			OOCNews(COLOR_LIGHTGREEN, string);
+			SendDiscordMessage(DISCORD_SAN_NEWS, string);
 		}
 		else
 		{
 		    format(string, sizeof(string), "Goœæ wywiadu %s: %s", sendername, text);
 			OOCNews(COLOR_LIGHTGREEN, string);
+			SendDiscordMessage(DISCORD_SAN_NEWS, string);
 		}
 		return 0;
 	}
