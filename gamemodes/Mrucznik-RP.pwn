@@ -133,7 +133,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/niceczlowiek/noysi.pwn"
 #include "modules/new/niceczlowiek/wybieralka.pwn"
 //sktomdiscordconnect
-#include "modules/discordconnect.pwn"
+#include "modules/discord.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()

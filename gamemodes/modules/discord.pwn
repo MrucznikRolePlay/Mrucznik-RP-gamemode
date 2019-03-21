@@ -28,15 +28,15 @@ stock SendDiscordMessage(channel, message[])
 	utf8encode(dest, message);
 	switch(channel)
 	{
-	case 0:
+		case 0:
 		{
 			DCC_SendChannelMessage(g_SanNewsChannelId, dest); // #ig-san-newsxd
 		}
-	case 1:
+		case 1:
 		{
 			DCC_SendChannelMessage(g_AdminChannelId, dest); // #ig-admin-chat
 		}
-	case 2:
+		case 2:
 		{
 			DCC_SendChannelMessage(g_ReportChannelId, dest); // #ig-report
 		}
@@ -95,15 +95,13 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 			{
 				SendRadioMessage(i, TEAM_BLUE_COLOR, dest);
 			}
-			else SendFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
-			
+			else 
+			{
+				SendFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
+			}
 			return 1;
 		}
-		
 	}
-	
-
-
 	return 0;
 }
 
