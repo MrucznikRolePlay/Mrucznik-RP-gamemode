@@ -18968,7 +18968,7 @@ CMD:kostka2(playerid)
 
     if(IsPlayerConnected(playerid))
     {
-		new dice = random(6)+1;
+		new dice = true_random(6)+1;
 		if (gDice[playerid] == 1)
 		{
 			GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -19050,7 +19050,7 @@ CMD:kostka(playerid, params[])
 
             new ile;
 
-            ile = 1+random(6);
+            ile = 1+true_random(6);
 
             format(str, 64, "* %s wyrzuca %d oczek.", nick, ile);
             ProxDetector(12.0, playerid, str, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -19193,7 +19193,7 @@ CMD:ruleta(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, 1038.22924805,-1090.59741211,-67.52223969))
         {
-			new ruletka = random(36);
+			new ruletka = true_random(36);
 			if(ruletka == 0)
 			{
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -19235,7 +19235,7 @@ CMD:blackjack(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 3.0, 1032.69775391,-1092.17980957,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1032.90014648,-1088.91455078,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1023.03601074,-1092.15148926,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1022.98620605,-1088.74023438,-67.58734131))
         {
-            new oczko = random(13)+2;
+            new oczko = true_random(13)+2;
             GetPlayerName(playerid, sendername, sizeof(sendername));
             if(oczko >= 2 && oczko <= 10)
             {
@@ -19285,7 +19285,7 @@ CMD:kolo(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, 1016.93560791,-1101.91369629,-67.59101868))
         {
-            new kolo = random(61);
+            new kolo = true_random(61);
             GetPlayerName(playerid, sendername, sizeof(sendername));
             if(kolo >= 1 && kolo <= 30)//1
             {
@@ -23511,7 +23511,7 @@ CMD:startlotto(playerid)
         {
             format(string, sizeof(string), "Nowoœci lotto: Losowanie rozpoczête.");
             OOCOff(COLOR_WHITE, string);
-            new rand = random(80);
+            new rand = true_random(80);
             if(rand < 77) { rand += 3; }
             Lotto(rand);
 
