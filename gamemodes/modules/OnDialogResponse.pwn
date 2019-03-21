@@ -9011,10 +9011,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        new dom = PlayerInfo[playerid][pDom];
 		        if(strlen(inputtext) >= 1 || strlen(inputtext) <= 128)
 		        {
-		            new DM[128];
-	                format(DM, sizeof(DM), "%s", inputtext);
-	                mysql_real_escape_string(DM, DM);
-		            Dom[dom][hKomunikatWynajmu] = DM;
+		            new message[128];
+	                format(message, sizeof(message), "%s", inputtext);
+	                mysql_real_escape_string(message, message);
+		            Dom[dom][hKomunikatWynajmu] = message;
 				    ZapiszDom(dom);
 				    SendClientMessage(playerid, COLOR_P@, "Komunikat wynajmu to teraz:");
 				    SendClientMessage(playerid, COLOR_WHITE, inputtext);

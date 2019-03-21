@@ -17562,6 +17562,7 @@ CMD:rooc(playerid, params[])
 	    {
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
+			SendDiscordFracMessage(member, string);
             printf("%s", string);
         }
         else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie
@@ -22760,6 +22761,7 @@ CMD:a(playerid, params[])
 			if (PlayerInfo[playerid][pAdmin] >= 1)
 			{
 				SendAdminMessage(0xFFC0CB, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 			}
 			printf("Admin %s: %s", sendername, params);
 		}
@@ -22769,6 +22771,7 @@ CMD:a(playerid, params[])
 			if (PlayerInfo[playerid][pNewAP] >= 1)
 			{
 				SendAdminMessage(0xFFC0CB, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 			}
 			printf("PolAdmin %s: %s", sendername, params);
 		}
@@ -22778,6 +22781,7 @@ CMD:a(playerid, params[])
             if (PlayerInfo[playerid][pNewAP] >= 1)
             {
                 SendAdminMessage(0xFFC0CB, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
             }
             printf("Skrypter %s: %s", sendername, params);
         }
@@ -28557,7 +28561,7 @@ CMD:innyspawn(playerid)
 CMD:report(playerid, params[]) return cmd_raport(playerid, params);
 CMD:raport(playerid, params[])
 {
-	new string[128];
+	new string[128], discordstring[128];
 	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
@@ -28579,6 +28583,8 @@ CMD:raport(playerid, params[])
 			}
 			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
 			ABroadCast(COLOR_YELLOW,string,1);
+			format(discordstring, sizeof(discordstring), "» Report od %s [%d]: %s", sendername, playerid, params);
+			SendDiscordMessage(DISCORD_REPORT, discordstring);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "Je¿eli Administracja nie reaguje na Twój report, oznacza to, ¿e...");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "...jest on Ÿle sformu³owany i Administracja nie rozpatrzy tego zg³oszenia.");//By: Dawid
@@ -35062,6 +35068,7 @@ CMD:fooc(playerid, params[])
             {
                 format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
     			SendFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendDiscordFracMessage(member, string);
                 //Tajniacy
                 if(member == 5) SendTajniakMessage(3, TEAM_AZTECAS_COLOR, string);
                 else if(member == 6) SendTajniakMessage(4, TEAM_AZTECAS_COLOR, string);
@@ -35106,6 +35113,7 @@ CMD:fooc(playerid, params[])
                 //Rangi podstawowe
                 else format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
                 SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendDiscordOrgMessage(member, string);
 			}
 			printf("%s", string);
 			return 1;
@@ -35196,6 +35204,7 @@ CMD:news(playerid, params[])
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					OOCNews(COLOR_NEWS,string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
                     //OOCNews(0xFF8C55FF, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
@@ -35235,6 +35244,7 @@ CMD:news(playerid, params[])
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					//OOCNews(COLOR_NEWS,string);
                     OOCNews(0xBB5D00FF, string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
 					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }
