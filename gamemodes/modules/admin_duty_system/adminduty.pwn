@@ -99,6 +99,9 @@ stock AdminDutyPlayer(playerid, status)
 	new string[128];
 	GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 	GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+	new stringlog[325];//String do logu
+	new y1,mi1,d1;//Data
+	
 	if(status == 1)//Je¿eli ma wejœæ
 	{
 		AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
@@ -169,8 +172,6 @@ CMD:adminduty(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{
 		new string[256];
-		new stringlog[325];//String do logu
-		new y1,mi1,d1;//Data
 		new adminMaWolnyNick = 0;
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
