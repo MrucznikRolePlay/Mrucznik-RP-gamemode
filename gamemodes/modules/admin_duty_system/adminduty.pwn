@@ -97,6 +97,8 @@ stock GetPlayerAdminDutyStatus(playerid)
 stock AdminDutyPlayer(playerid, status)
 {
 	new string[128];
+	GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+	GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 	if(status == 1)//Je¿eli ma wejœæ
 	{
 		AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
@@ -168,8 +170,6 @@ CMD:adminduty(playerid, params[])
 	{
 		new string[256];
 		new stringlog[325];//String do logu
-		new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
-		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
 		new y1,mi1,d1;//Data
 		new adminMaWolnyNick = 0;
 		

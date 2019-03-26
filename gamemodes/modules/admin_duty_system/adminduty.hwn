@@ -36,5 +36,7 @@ new iloscInne[MAX_PLAYERS]=0; //Inne kary/akcje administracyjne ----------------
 new AdminDutyMinuty[MAX_PLAYERS] = 0;//Czas s³u¿by - Minuty
 new AdminDutyGodziny[MAX_PLAYERS] = 0;//Czas s³u¿by - Godziny
 new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
+new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
+new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
 
 //end
