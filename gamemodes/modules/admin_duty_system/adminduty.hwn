@@ -1,0 +1,40 @@
+//chaty.hwn
+
+//----------------------------------------------<< Header >>-------------------------------------------------//
+//------------------------------------------[ Modu³: chaty.hwn ]---------------------------------------------//
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+
+//
+
+//-----------------<[ Zmienne: ]>-------------------
+new nickadminaIC[MAX_PLAYER_NAME];//NickAdministratora IC
+
+//Statystyki:
+new iloscKick[MAX_PLAYERS]=0;//Iloœæ kicków nadanych przez @ -----------------------> [/kick]
+new iloscWarn[MAX_PLAYERS]=0;//Iloœæ warnów nadanych przez @ -----------------------> [/warn /unwarn]
+new iloscBan[MAX_PLAYERS]=0; //Iloœc banów/unbanów/warnów/unwarnów/sbanów ----------> [/ban /block /unban /unblock /pban /pblock, /banip, /sblock ]
+new iloscAJ[MAX_PLAYERS]=0;//Iloœæ rozdanych przez admina AJ -----------------------> [/aj; /unaj; /pAJ]
+new iloscInWiadomosci[MAX_PLAYERS]=0;//Iloœæ wchodz¹cych wiadomoœci ----------------> [/w]
+new iloscOutWiadomosci[MAX_PLAYERS]=0;//Iloœæ wuchodz¹cych wiadomoœci --------------> [/w]
+new iloscZapytaj[MAX_PLAYERS]=0;//Iloœæ reakcji na /zapytaj -------------------------> [/tickets]
+new iloscInne[MAX_PLAYERS]=0; //Inne kary/akcje administracyjne ---------------------> [/slap, /gethere, /tp, /getcar, /pogodaall, /fuelcar, /fixveh, /fuelcars, /sethp, /setarmor, /fixallveh, /mute, /freeze, /unfreeze, ]
+new AdminDutyMinuty[MAX_PLAYERS] = 0;//Czas s³u¿by - Minuty
+new AdminDutyGodziny[MAX_PLAYERS] = 0;//Czas s³u¿by - Godziny
+new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
+
+//end

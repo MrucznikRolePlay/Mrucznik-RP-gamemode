@@ -88,14 +88,17 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/niceczlowiek/general.pwn"
 #include "modules/new/niceczlowiek/dynamicgui.pwn"
 #include "modules/mru_mysql.pwn"
-//______MODU£Y PRZENIESIONE Z MAPY 3.0___________
+//______MODU£Y ALA MAPA 3.0___________
 
 //.def
 #include "modules/chaty/chaty.def"
+#include "modules/admin_duty_system/adminduty.def"
 //.hwn
 #include "modules/chaty/chaty.hwn"
+#include "modules/admin_duty_system/adminduty.hwn"
 //.pwn
 #include "modules/chaty/chaty.pwn"
+#include "modules/admin_duty_system/adminduty.pwn"
 
 
 //_______________________________________________
@@ -1084,7 +1087,7 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		StopACall(playerid);
 	}
-	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		new stringlog[325];//String do logu
 		new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
@@ -1936,7 +1939,7 @@ public OnPlayerSpawn(playerid)
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
 	//AdminDuty
-	if(GetPVarInt(playerid, "dutyadmin") == 1)
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		SetPlayerColor(playerid, 0xFF0000FF);
 	}
@@ -7546,7 +7549,7 @@ public OnPlayerText(playerid, text[])
 	    {
 	        return 0;
       	}
-		if(GetPVarInt(playerid, "dutyadmin") == 0)
+		if(GetPlayerAdminDutyStatus(playerid) == 0)
 		{
 			if(strlen(text) < 78)
 			{			
