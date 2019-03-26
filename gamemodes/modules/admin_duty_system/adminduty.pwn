@@ -33,73 +33,70 @@
 
 //-----------------<[ Funkcje: ]>-------------------
 
-stock SprawdzZnaki(string)
+stock SprawdzZnaki(text[])
 {
-	if(strfind(params, "%") == -1 
-	&& strfind(params, "_") == -1 
-	&& strfind(params, " ") == -1
-	&& strfind(params, "!") == -1
-	&& strfind(params, "@") == -1
-	&& strfind(params, "#") == -1
-	&& strfind(params, "$") == -1
-	&& strfind(params, "^") == -1
-	&& strfind(params, "&") == -1
-	&& strfind(params, "*") == -1
-	&& strfind(params, "-") == -1
-	&& strfind(params, "~") == -1
-	&& strfind(params, "=") == -1
-	&& strfind(params, "?") == -1
-	&& strfind(params, ",") == -1
-	&& strfind(params, ".") == -1
-	&& strfind(params, "<") == -1
-	&& strfind(params, ">") == -1
-	&& strfind(params, ")") == -1
-	&& strfind(params, "(") == -1
-	&& strfind(params, "]") == -1
-	&& strfind(params, "[") == -1
-	&& strfind(params, "XD") == -1
-	&& strfind(params, "}") == -1
-	&& strfind(params, "{") == -1
-	&& strfind(params, ":") == -1 
-	&& strfind(params, "`") == -1 
-	&& strfind(params, "/") == -1
-	&& strfind(params, "|") == -1
+	if(strfind(text, "%") == -1 
+	&& strfind(text, "_") == -1 
+	&& strfind(text, " ") == -1
+	&& strfind(text, "!") == -1
+	&& strfind(text, "@") == -1
+	&& strfind(text, "#") == -1
+	&& strfind(text, "$") == -1
+	&& strfind(text, "^") == -1
+	&& strfind(text, "&") == -1
+	&& strfind(text, "*") == -1
+	&& strfind(text, "-") == -1
+	&& strfind(text, "~") == -1
+	&& strfind(text, "=") == -1
+	&& strfind(text, "?") == -1
+	&& strfind(text, ",") == -1
+	&& strfind(text, ".") == -1
+	&& strfind(text, "<") == -1
+	&& strfind(text, ">") == -1
+	&& strfind(text, ")") == -1
+	&& strfind(text, "(") == -1
+	&& strfind(text, "]") == -1
+	&& strfind(text, "[") == -1
+	&& strfind(text, "XD") == -1
+	&& strfind(text, "}") == -1
+	&& strfind(text, "{") == -1
+	&& strfind(text, ":") == -1 
+	&& strfind(text, "`") == -1 
+	&& strfind(text, "/") == -1
+	&& strfind(text, "|") == -1
 
-	&& strfind(params, "kurwa") == -1
-	&& strfind(params, "jebaæ") == -1
-	&& strfind(params, "jebac") == -1
-	&& strfind(params, "huj") == -1
-	&& strfind(params, "cipa") == -1
-	&& strfind(params, "kutas") == -1
-	&& strfind(params, "chuj") == -1
-	&& strfind(params, "69") == -1//Zabezpieczenie Anty-Jupik
-	&& strfind(params, "¹") == -1
-	&& strfind(params, "œ") == -1
-	&& strfind(params, "¿") == -1
-	&& strfind(params, "Ÿ") == -1
-	&& strfind(params, "æ") == -1
-	&& strfind(params, "ê") == -1
-	&& strfind(params, "ñ") == -1
-	&& strfind(params, "ó") == -1
-	&& strfind(params, "+") == -1)
+	&& strfind(text, "kurwa") == -1
+	&& strfind(text, "jebaæ") == -1
+	&& strfind(text, "jebac") == -1
+	&& strfind(text, "huj") == -1
+	&& strfind(text, "cipa") == -1
+	&& strfind(text, "kutas") == -1
+	&& strfind(text, "chuj") == -1
+	&& strfind(text, "69") == -1//Zabezpieczenie Anty-Jupik
+	&& strfind(text, "¹") == -1
+	&& strfind(text, "œ") == -1
+	&& strfind(text, "¿") == -1
+	&& strfind(text, "Ÿ") == -1
+	&& strfind(text, "æ") == -1
+	&& strfind(text, "ê") == -1
+	&& strfind(text, "ñ") == -1
+	&& strfind(text, "ó") == -1
+	&& strfind(text, "+") == -1)
 	{
 		return true; 
 	}
-	else
-	{
-		return false;
-	}
 
-	return 0; 
+	return false; 
 }
 
 stock GetPlayerAdminDutyStatus(playerid)
 {
-	new valueAdminStatus = GetPVarInt(giveplayerid, "dutyadmin");
+	new valueAdminStatus = GetPVarInt(playerid, "dutyadmin");
 	return valueAdminStatus; 
 }
 stock AdminDutyPlayer(playerid, status)
 {
+	new string[128];
 	if(status == 1)//Je¿eli ma wejœæ
 	{
 		AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
