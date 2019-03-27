@@ -162,13 +162,6 @@ stock AdminDutyPlayer(playerid, status)
 }
 
 
-
-//
-
-
-
-
-
 //-----------------<[ Komendy: ]>-------------------
 CMD:adminduty(playerid, params[])
 {
