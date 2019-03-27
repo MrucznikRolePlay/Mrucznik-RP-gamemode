@@ -35,6 +35,7 @@
 
 stock SprawdzZnaki(text[])
 {
+	new checkAdminNameValue;
 	if(strfind(text, "%") == -1 
 	&& strfind(text, "_") == -1 
 	&& strfind(text, " ") == -1

@@ -26569,7 +26569,7 @@ CMD:admini(playerid)
 {
     new string[64];
     new sendername[MAX_PLAYER_NAME];
-	new FirstNickname[MAX_PLAYER_NAME];
+//	new FirstNickname[MAX_PLAYER_NAME];
     SendClientMessage(playerid, COLOR_GRAD1, "Lista administratorów na s³u¿bie:");//By³a tu - poziomka
     foreach(Player, i)
     {
