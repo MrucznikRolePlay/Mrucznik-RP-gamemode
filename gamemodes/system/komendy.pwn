@@ -3499,7 +3499,7 @@ CMD:wypisz(playerid, params[])
 CMD:respawn(playerid)
 {
 	new string[128];
-	new AdminName[MAX_PLAYER_NAME];
+	
 	
 	if(Count >= 20)
 	{
@@ -9580,7 +9580,7 @@ CMD:kill(playerid, params[])
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
-	new AdminName[MAX_PLAYER_NAME];
+	
 
     if(IsPlayerConnected(playerid))
     {
@@ -18159,7 +18159,7 @@ CMD:ro(playerid, params[]) return cmd_rooc(playerid, params);
 CMD:rooc(playerid, params[])
 {
 	new string[256];
-	new AdminName[MAX_PLAYER_NAME];
+	
 	GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
     if(IsPlayerConnected(playerid))
     {
@@ -19147,7 +19147,7 @@ CMD:depo(playerid, params[])
         new member = GetPlayerFraction(playerid);
         if(0 < member <= 4 || member == 17)// || GetPlayerOrg(playerid) == 12)
         {
-			new AdminName[MAX_PLAYER_NAME];
+			
 			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{
@@ -19464,7 +19464,7 @@ CMD:wiadomosc(playerid, params[])
         //new isplayerafk;
         //format(string, sizeof(string), "« Wiadomoœæ wys³ana do %s (ID: %d)%s: %s", giveplayer, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (" [AFK] "),tekst); //IS PLAYER AFK
         //SendClientMessage(playerid,  COLOR_YELLOW, string);
-		new AdminName[MAX_PLAYER_NAME];
+		
         if(strlen(params) < 78)
         {
 			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 

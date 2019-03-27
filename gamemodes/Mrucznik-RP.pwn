@@ -1090,8 +1090,8 @@ public OnPlayerDisconnect(playerid, reason)
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		new stringlog[325];//String do logu
-		new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
-		new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
+		
+		
 		new y1,mi1,d1;//Data
 		
 		//String-Get
@@ -7577,12 +7577,10 @@ public OnPlayerText(playerid, text[])
 		}
 		else//Je¿eli jest na admin duty
 		{
-			new AdminName[MAX_PLAYER_NAME];
-			GetPlayerName(playerid, AdminName, sizeof(AdminName));
 			if(strlen(text) < 78)
 			{
 				
-				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s ))", AdminName, playerid, text);
+				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s ))", GetNick(playerid), playerid, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
 			}
@@ -7596,7 +7594,7 @@ public OnPlayerText(playerid, text[])
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
 
-					format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", AdminName, text);
+					format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", GetNick(playerid), text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 					format(string, sizeof(string), "{C0C0C0}>>(([..] %s ))", text2);

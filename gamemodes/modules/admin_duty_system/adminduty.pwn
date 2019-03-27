@@ -83,10 +83,13 @@ stock SprawdzZnaki(text[])
 	&& strfind(text, "ó") == -1
 	&& strfind(text, "+") == -1)
 	{
-		return true; 
+		checkAdminNameValue = 0;
 	}
-
-	return false; 
+	else
+	{
+		checkAdminNameValue = 1;
+	}
+	return checkAdminNameValue; 
 }
 
 stock GetPlayerAdminDutyStatus(playerid)
@@ -160,7 +163,7 @@ stock AdminDutyPlayer(playerid, status)
 
 
 
-
+//
 
 
 
@@ -171,12 +174,12 @@ CMD:adminduty(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{
-		new string[256];
+	
 		new adminMaWolnyNick = 0;
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
-		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
-		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+
+		
 		
 		if(GetPlayerAdminDutyStatus(playerid) == 0)
 		{
@@ -197,7 +200,7 @@ CMD:adminduty(playerid, params[])
 					if(strlen(params) >= MIN_ADMIN_NAME)//Minimalnie 3 znaki
 					{
 						//Symbole i znaki specjalne
-						if(SprawdzZnaki(params) == true)
+						if(SprawdzZnaki(params) ==  0)
 						{
 							foreach(Player, i)
 							{
@@ -261,8 +264,6 @@ CMD:adminduty(playerid, params[])
 
 CMD:adminstats(playerid)
 {
-	new AdminName[MAX_PLAYER_NAME];
-	new FirstNickname[MAX_PLAYER_NAME];
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
 		new string[325];
