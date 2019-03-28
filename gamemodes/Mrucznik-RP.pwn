@@ -93,12 +93,15 @@ native WP_Hash(buffer[], len, const str[]);
 //.def
 #include "modules/chaty/chaty.def"
 #include "modules/admin_duty_system/adminduty.def"
+#include "modules/admin/admin.def"
 //.hwn
 #include "modules/chaty/chaty.hwn"
 #include "modules/admin_duty_system/adminduty.hwn"
+#include "modules/admin/admin.hwn"
 //.pwn
 #include "modules/chaty/chaty.pwn"
 #include "modules/admin_duty_system/adminduty.pwn"
+#include "modules/admin/admin.pwn"
 
 
 //_______________________________________________
