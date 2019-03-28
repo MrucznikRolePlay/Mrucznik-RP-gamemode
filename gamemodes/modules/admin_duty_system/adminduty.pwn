@@ -172,7 +172,8 @@ CMD:adminduty(playerid, params[])
 		new adminMaWolnyNick = 0;
 		
 		SetPVarString(playerid, "pAdminDutyNickOn", params);
-
+		new adminNameDuo[MAX_PLAYER_NAME];
+		GetPVarString(playerid, "pAdminDutyNickOn", adminNameDuo, sizeof(adminNameDuo)); 
 		
 		
 		if(GetPlayerAdminDutyStatus(playerid) == 0)
@@ -198,12 +199,14 @@ CMD:adminduty(playerid, params[])
 						{
 							foreach(Player, i)
 							{
-								if(strfind(GetNick(i), AdminName, true) != -1)
+								//if(strfind(GetNick(i), AdminName, true) != -1)
+								if(strfind(GetNick(i), adminNameDuo) == -1)
 								{
-									if(GetPVarInt(i, "dutyadmin") == 1)
-									{
-										adminMaWolnyNick = 1;
-									}
+									adminMaWolnyNick = 0;	
+								}
+								else
+								{
+									adminMaWolnyNick = 1;
 								}
 							}
 							if(adminMaWolnyNick == 0)
