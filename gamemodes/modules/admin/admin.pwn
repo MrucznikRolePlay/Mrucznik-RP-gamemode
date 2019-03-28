@@ -7034,8 +7034,6 @@ CMD:odmroz(playerid, params[])
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-		    	    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
 					TogglePlayerControllable(playa, 1);
 					format(string, sizeof(string), "AdmCmd: %s odmrozi³ %s", GetNick(playerid),  GetNick(playa));
 					printf("%s",string);
