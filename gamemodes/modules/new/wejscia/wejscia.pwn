@@ -77,15 +77,15 @@ stock SprawdzWejscia(playerid)
 		{
 			if(!DoorInfo[FRAC_LCN][d_State]) return SendClientMessage(playerid, COLOR_GRAD1, "Te drzwi s¹ zamkniête.");
 		}
-		if(wejscia[i][w_UID] == 11)
+		else if(wejscia[i][w_UID] == 11)
 		{
 			GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
 		}
-		if(wejscia[i][w_UID] == 10)
+		else if(wejscia[i][w_UID] == 10)
 		{
 			GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
 		}
-		if(wejscia[i][w_UID] == 9)
+		else if(wejscia[i][w_UID] == 9)
 		{
 			if(GetPlayerFraction(playerid) != FRAC_SN)
 			{
@@ -94,7 +94,7 @@ stock SprawdzWejscia(playerid)
 			}
 			GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
 		}
-		if(wejscia[i][w_UID] == 8)
+		else if(wejscia[i][w_UID] == 8)
 		{
 			if(GetPVarInt(playerid, "Vinyl-bilet") != 2)
 			{
@@ -102,7 +102,7 @@ stock SprawdzWejscia(playerid)
 				return 1;
 			}
 		}
-		if(wejscia[i][w_UID] == 7)
+		else if(wejscia[i][w_UID] == 7)
 		{
 			if(GetPVarInt(playerid, "Vinyl-bilet") == 0 || GetPlayerOrg(playerid) != FAMILY_VINYL || GetPlayerFraction(playerid) != FRAC_SN)
             {
@@ -110,7 +110,7 @@ stock SprawdzWejscia(playerid)
 				return 1;
 			}
 		}
-		if(wejscia[i][w_UID] == 6)
+		else if(wejscia[i][w_UID] == 6)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 			{
@@ -123,7 +123,7 @@ stock SprawdzWejscia(playerid)
 				StopAudioStreamForPlayer(playerid);
 			}
 		}
-		if(wejscia[i][w_UID] == 4)
+		else if(wejscia[i][w_UID] == 4)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 			{
@@ -133,7 +133,7 @@ stock SprawdzWejscia(playerid)
 				sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
 			}
 		}
-		if(wejscia[i][w_UID] == 5) 
+		else if(wejscia[i][w_UID] == 5) 
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 			{
@@ -143,7 +143,7 @@ stock SprawdzWejscia(playerid)
 				sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");
 			}
 		}
-		if(wejscia[i][w_UID] == 3)
+		else if(wejscia[i][w_UID] == 3)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 			{
@@ -164,7 +164,7 @@ stock SprawdzWejscia(playerid)
 				GameTextForPlayer(playerid, "~w~Miasto ~g~Los Santos", 5000, 1); 
 			}
 		}
-		if(wejscia[i][w_UID] == 2)
+		else if(wejscia[i][w_UID] == 2)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 			{
@@ -214,7 +214,7 @@ stock SprawdzWejscia(playerid)
 			
 			}
 		}	
-		if(wejscia[i][w_UID] == 1)//DMV
+		else if(wejscia[i][w_UID] == 1)//DMV
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 			{
@@ -269,9 +269,8 @@ stock SprawdzWejscia(playerid)
 				}	
 			}
 		}
-		
 		//WYKONANIE RESZTY
-		else if(GetPlayerInterior(playerid) == wejscia[i][w_int1] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw1] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]))
+		if(GetPlayerInterior(playerid) == wejscia[i][w_int1] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw1] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]))
 		{
 			SetPlayerPosEx(playerid,  wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]);
 			SetPlayerInterior(playerid, wejscia[i][w_int2]);
@@ -281,7 +280,7 @@ stock SprawdzWejscia(playerid)
 			Wchodzenie(playerid);
 			return 1;
 		}
-		else if(GetPlayerInterior(playerid) == wejscia[i][w_int2] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw2] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]))
+		if(GetPlayerInterior(playerid) == wejscia[i][w_int2] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw2] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]))
 		{
 			SetPlayerPosEx(playerid,  wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]);
 			SetPlayerInterior(playerid, wejscia[i][w_int1]);
