@@ -118,8 +118,8 @@ stock sendFractionMessageToAll(playerid, text[])
 }
 
 //-----------------<[ Komendy: ]>-------------------
-CMD:frakcjainfo(playerid, params[]) return cmd_fi(playerid, params[]);
-CMD:fi(playerid, params[])
+//CMD:frakcjainfo(playerid, params[]) return cmd_fi(playerid, params[]);
+CMD:finfo(playerid, params[])
 {
 	new string[256];
 	new content[256];
@@ -170,7 +170,7 @@ CMD:fi(playerid, params[])
 		if(strfind(params, content, false) == -1)
 		{
 			SetPVarString(playerid, "trescOgloszenia", params);
-			sendFractionMessageToAll(playerid, GetPlayerFraction(playerid), params); 
+			sendFractionMessageToAll(playerid, params); 
 			komunikatTimeZerowanie[playerid] = SetTimerEx("KomunikatCzasZerowaie", 60000, true, "i", playerid);
 			sendTipMessage(playerid, "Odczekaj 5 minut przed wys³aniem ponownego komunikatu o {AC3737}tej samej treœci"); 
 			return 1;
