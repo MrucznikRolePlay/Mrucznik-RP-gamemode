@@ -2552,7 +2552,7 @@ public JednaSekundaTimer()
 		}
 		if(State == PLAYER_STATE_DRIVER)
 		{
-			if(IsPlayerInRangeOfPoint(i, 7.0, 2064.0703,-1831.3167,13.3853) || IsPlayerInRaceCheckpoint(i, 5.0, 1351.0012,-1818.5981,13.3031) || IsPlayerInRangeOfPoint(i, 7.0, 1024.8514,-1022.2302,31.9395) || IsPlayerInRangeOfPoint(i, 7.0, 486.9398,-1742.4130,10.9594) || IsPlayerInRangeOfPoint(i, 7.0, -1904.2325,285.3743,40.8843)  || IsPlayerInRangeOfPoint(i, 7.0, 720.0876,-458.3574,16.3359) || IsPlayerInRangeOfPoint(i, 7.0, -2425.9668,1023.2122,50.1248) || IsPlayerInRangeOfPoint(i, 7.0, 1972.6704,2163.9829,10.7942) || IsPlayerInRangeOfPoint(i, 7.0, -100.3769,1115.7079,19.4688) || IsPlayerInRangeOfPoint(i, 7.0, -1420.5669,2584.1997,55.5703))
+			if(IsPlayerInRangeOfPoint(i, 7.0, 2064.0703,-1831.3167,13.3853) || IsPlayerInRangeOfPoint(i, 5.0, 1351.0012,-1818.5981,13.3031) || IsPlayerInRangeOfPoint(i, 7.0, 1024.8514,-1022.2302,31.9395) || IsPlayerInRangeOfPoint(i, 7.0, 486.9398,-1742.4130,10.9594) || IsPlayerInRangeOfPoint(i, 7.0, -1904.2325,285.3743,40.8843)  || IsPlayerInRangeOfPoint(i, 7.0, 720.0876,-458.3574,16.3359) || IsPlayerInRangeOfPoint(i, 7.0, -2425.9668,1023.2122,50.1248) || IsPlayerInRangeOfPoint(i, 7.0, 1972.6704,2163.9829,10.7942) || IsPlayerInRangeOfPoint(i, 7.0, -100.3769,1115.7079,19.4688) || IsPlayerInRangeOfPoint(i, 7.0, -1420.5669,2584.1997,55.5703))
 			{
 				if(naprawiony[i] == 0)
 				{

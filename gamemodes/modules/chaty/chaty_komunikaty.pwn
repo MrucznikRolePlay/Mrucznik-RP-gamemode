@@ -106,10 +106,10 @@ stock GetFractionColor(fraction)
 	}
 	return fracColor;
 }
-stock sendFractionMessageToAll(playerid, fraction, text[])
+stock sendFractionMessageToAll(playerid, text[])
 {
 	new sContent[256];
-	format(sContent, sizeof(sContent), "|___________ %s ___________|", GetFractionName(GetPlayerFraction(playerid))); 
+	format(sContent, sizeof(sContent), "|___________ %s ___________|", FractionNames[GetPlayerFraction(playerid)]); 
 	SendClientMessageToAll(COLOR_WHITE, sContent); 
 	format(sContent, sizeof(sContent), "%s %s: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]], GetNick(playerid, true), text);
 	SendClientMessageToAll(GetFractionColor(PlayerInfo[playerid][pMember]), sContent);
@@ -118,8 +118,8 @@ stock sendFractionMessageToAll(playerid, fraction, text[])
 }
 
 //-----------------<[ Komendy: ]>-------------------
-CMD:komunikatfrakcji(playerid, params[]) return cmd_komunikatf(playerid, params[]);
-CMD:komunikatf(playerid, params[])
+CMD:frakcjainfo(playerid, params[]) return cmd_fi(playerid, params[]);
+CMD:fi(playerid, params[])
 {
 	new string[256];
 	new content[256];
@@ -148,7 +148,7 @@ CMD:komunikatf(playerid, params[])
 		}
 		if(isnull(params))
 		{
-			sendTipMessage(playerid, "U¿yj /komunikatfrakcji (/kf) [tekst]"); 
+			sendTipMessage(playerid, "U¿yj /frakcjainfo (/fi) [tekst]"); 
 			return 1;
 		}
 		if(PlayerInfo[playerid][pBP] >= 1)
