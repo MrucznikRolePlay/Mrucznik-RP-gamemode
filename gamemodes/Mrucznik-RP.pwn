@@ -100,8 +100,10 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/admin/admin.hwn"
 //.pwn
 #include "modules/chaty/chaty.pwn"
+#include "modules/chaty/chaty_komunikaty.pwn"
 #include "modules/admin_duty_system/adminduty.pwn"
 #include "modules/admin/admin.pwn"
+
 
 
 //_______________________________________________

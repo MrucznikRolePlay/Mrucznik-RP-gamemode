@@ -70,7 +70,7 @@ stock KolorujWstawkiMe(text[])
 		{
 			//strdel(string, nextStars+2, strlen(string));
 			strins(string, INCOLOR_PURPLE, stars, nextStars+2);
-			strins(string, INCOLOR_WHITE, nextStars+2); 
+			//strins(string, INCOLOR_WHITE, nextStars+2); 
 		}
 	}
 	return string;
