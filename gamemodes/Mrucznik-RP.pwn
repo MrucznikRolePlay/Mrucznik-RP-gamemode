@@ -4700,7 +4700,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(newstate == PLAYER_STATE_DRIVER)
         {
             new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1)
+            if(!Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
+			|| !Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pNewAP] != 5)
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
 

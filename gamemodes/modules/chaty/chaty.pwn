@@ -73,7 +73,7 @@ stock CheckStars(const text[])
         new nextStars = strfind(Message, "**", true, Stars+2);
         if (nextStars != -1)
         {
-            strins(Message, "{C2A2DA}", Stars, nextStars+2);
+            strins(Message, "{C2A2DA}", Stars);
             strins(Message, "{FFFFFF}", nextStars+10);
         }
     }
