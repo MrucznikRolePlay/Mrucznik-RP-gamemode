@@ -79,6 +79,54 @@ stock CheckStars(const text[])
     }
     return Message;
 }
+stock CheckEmoji(const text[])
+{
+	new emojiMess[256];
+	strcat(emojiMess, text);
+	if(strfind(emojiMess, ":D", false) != -1)
+	{
+		new pos = strfind(emojiMess, ":D"); 
+		strdel(emojiMess, pos, pos+2);
+		strins(emojiMess, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", pos);
+	}
+	else if(strfind(emojiMess, ":P", false) != -1)
+	{
+		new pos = strfind(emojiMess, ":P"); 
+		strdel(emojiMess, pos, pos+2);
+		strins(emojiMess, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", pos);
+	}
+	else if(strfind(emojiMess, ";)", false) != -1)
+	{
+		new pos = strfind(emojiMess, ";)"); 
+		strdel(emojiMess, pos, pos+2);
+		strins(emojiMess, "{C2A2DA}**Puszcza oczko**{FFFFFF}", pos);
+	}
+	else if(strfind(emojiMess, ";D", false) != -1)
+	{
+		new pos = strfind(emojiMess, ";D"); 
+		strdel(emojiMess, pos, pos+2);
+		strins(emojiMess, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}", pos);
+	}
+	else if(strfind(emojiMess, "xD", false) != -1)
+	{
+		new pos = strfind(emojiMess, "xD"); 
+		strdel(emojiMess, pos, pos+2);
+		strins(emojiMess, "{C2A2DA}**Robi g³upi¹ mine**{FFFFFF}", pos);
+	}
+	else if(strfind(emojiMess, "o_O", false) != -1)
+	{
+		new pos = strfind(emojiMess, ":D"); 
+		strdel(emojiMess, pos, pos+3);
+		strins(emojiMess, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", pos);
+	}
+	return emojiMess;
+}
+stock CorrectICForm(const text[])
+{
+	new correctForm[256];
+	format(correctForm, sizeof(correctForm), "%s", CheckEmoji(CheckStars(text)));
+	return correctForm;
+}
 stock sprawdzReklame(text[], playerid)
 {
 	new valueAdd;
@@ -200,7 +248,7 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 	if(strlen(text) < 78)
 	{
 		format(string, sizeof(string), "%s %s: %s", GetNick(playerid, true), jakMowi, text);
-		ProxDetector(rangeTalk, playerid, CheckStars(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+		ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
 	{
@@ -213,10 +261,10 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 			strdel(text, pos, strlen(text));
 
 			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid, true), jakMowi, text);
-			ProxDetector(rangeTalk, playerid, CheckStars(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 			format(string, sizeof(string), "[.] %s", text2);
-			ProxDetector(rangeTalk, playerid, CheckStars(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 		}
 	}
 	if(chatBooble == true)
