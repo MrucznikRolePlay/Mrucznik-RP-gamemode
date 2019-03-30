@@ -262,7 +262,18 @@ stock PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 }
 
 //-----------------<[ Komendy: ]>-------------------
-
+CMD:sprawdzgwiazdki(playerid, params[])
+{
+	if(isnull(params))
+	{
+		sendTipMessage(playerid, "U¿yj /sprawdzgwiazdki [text]");
+		return 1;
+	}
+	new string[256];
+	format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), params);
+	SendClientMessage(playerid, -1, CheckStars(string));
+	return 1;
+}
 CMD:news(playerid, params[])
 {
 	new string[128];

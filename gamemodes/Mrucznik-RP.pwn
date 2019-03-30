@@ -4669,7 +4669,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					{
 						new stringDialog[128];
 						new costBike = BIKE_COST;
-						format(stringDialog, format(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 15 minut", costBike);
+						format(stringDialog, sizeof(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 15 minut", costBike);
 		    			TogglePlayerControllable(playerid, 0);
 						HireCar[playerid] = vehicleid;
 						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", stringDialog, "Wynajmij", "WyjdŸ");

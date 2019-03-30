@@ -28187,8 +28187,6 @@ CMD:szukani(playerid)
 	return 1;
 }
 
-
-
 CMD:dropcar(playerid) return cmd_ukradnij(playerid);
 CMD:kradnijauto(playerid) return cmd_ukradnij(playerid);
 CMD:ukradnij(playerid)
