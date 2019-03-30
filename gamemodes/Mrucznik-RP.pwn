@@ -4668,7 +4668,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					if (CarData[lcarid][c_Rang]-1 != playerid)
 					{
 						new stringDialog[128];
-						format(stringDialog, format(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 15 minut", BIKE_COST);
+						new costBike = BIKE_COST;
+						format(stringDialog, format(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 15 minut", costBike);
 		    			TogglePlayerControllable(playerid, 0);
 						HireCar[playerid] = vehicleid;
 						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", stringDialog, "Wynajmij", "WyjdŸ");
@@ -7539,60 +7540,7 @@ public OnPlayerText(playerid, text[])
 	    {
 	        return 0;
       	}
-		if(GetPlayerAdminDutyStatus(playerid) == 0)
-		{
-			if(strlen(text) < 78)
-			{			
-				format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), text);	
-				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-			}
-			else
-			{
-				new pos = strfind(text, " ", true, strlen(text) / 2);
-				if(pos != -1)
-				{
-					new text2[64];
-
-					strmid(text2, text, pos + 1, strlen(text));
-					strdel(text, pos, strlen(text));
-
-					format(string, sizeof(string), "%s mówi: %s [.]", GetNick(playerid, true), text);
-					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-
-					format(string, sizeof(string), "[.] %s", text2);
-					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-				}
-			}
-		}
-		else//Je¿eli jest na admin duty
-		{
-			if(strlen(text) < 78)
-			{
-				
-				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s ))", GetNick(playerid), playerid, text);
-				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-			}
-			else
-			{
-				new pos = strfind(text, " ", true, strlen(text) / 2);
-				if(pos != -1)
-				{
-					new text2[64];
-
-					strmid(text2, text, pos + 1, strlen(text));
-					strdel(text, pos, strlen(text));
-
-					format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", GetNick(playerid), text);
-					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-
-					format(string, sizeof(string), "{C0C0C0}>>(([..] %s ))", text2);
-					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-				}
-			}
-			
-		}
+		PlayerTalkIC(playerid, text, "mówi", 15.0);
 		return 0;
 	}
 	#if DEBUG == 1

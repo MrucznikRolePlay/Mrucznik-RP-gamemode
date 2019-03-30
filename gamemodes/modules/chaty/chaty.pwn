@@ -169,12 +169,38 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 		sendErrorMessage(playerid, "B³¹d! Zbyt krótka wartoœæ 'jakMowi'"); 
 		return 1;
 	}
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	{
+		if(strlen(text) < 78)
+		{
+			
+			format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s ))", GetNick(playerid), playerid, text);
+			ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
+		}
+		else
+		{
+			new pos = strfind(text, " ", true, strlen(text) / 2);
+			if(pos != -1)
+			{
+				new text2[64];
 
+				strmid(text2, text, pos + 1, strlen(text));
+				strdel(text, pos, strlen(text));
+
+				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", GetNick(playerid), text);
+				ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+
+				format(string, sizeof(string), "{C0C0C0}>>(([..] %s ))", text2);
+				ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			}
+		}
+		return 1;
+	}
 	if(strlen(text) < 78)
 	{
 		format(string, sizeof(string), "%s %s: %s", GetNick(playerid, true), jakMowi, text);
-		CheckStars(string);
-		ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+		ProxDetector(rangeTalk, playerid, CheckStars(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
 	{
@@ -187,11 +213,10 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 			strdel(text, pos, strlen(text));
 
 			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid, true), jakMowi, text);
-			CheckStars(string);
-			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, CheckStars(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 			format(string, sizeof(string), "[.] %s", text2);
-			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, CheckStars(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 		}
 	}
 	if(chatBooble == true)
