@@ -62,27 +62,23 @@ stock WykonajEmotki(playerid, text[])
 	}
 	return string;
 }
-
-
-stock KolorujWstawkiMe(text[])
-{
-	new string[256];
-	strcat(string, text);
-	new stars = strfind(string, "**");
-	new starsText[128];
-	if(stars != -1)
-	{
-		new nextStars = strfind(string, "**", true, stars+2);
-		if(nextStars != -1)
-		{
-			//strdel(string, nextStars+2, strlen(string));
-			strins(string, INCOLOR_PURPLE, stars, nextStars+2);
-			//strins(string, INCOLOR_WHITE, nextStars+2); 
-		}
-	}
-	return string;
-}
 */
+stock CheckStars(const text[])
+{
+    new Message[256];
+    strcat(Message, text);
+    new Stars = strfind(Message, "**");
+    if (Stars != -1)
+    {
+        new nextStars = strfind(Message, "**", true, Stars+2);
+        if (nextStars != -1)
+        {
+            strins(Message, "{C2A2DA}", Stars, nextStars+2);
+            strins(Message, "{FFFFFF}", nextStars+10);
+        }
+    }
+    return Message;
+}
 stock sprawdzReklame(text[], playerid)
 {
 	new valueAdd;
@@ -177,7 +173,8 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 	if(strlen(text) < 78)
 	{
 		format(string, sizeof(string), "%s %s: %s", GetNick(playerid, true), jakMowi, text);
-		ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+		CheckStars(string);
+		ProxDetector(rangeTalk, playerid, Message, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
 	{
@@ -190,7 +187,8 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 			strdel(text, pos, strlen(text));
 
 			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid, true), jakMowi, text);
-			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			CheckStars(string);
+			ProxDetector(rangeTalk, playerid, Message, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 			format(string, sizeof(string), "[.] %s", text2);
 			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
