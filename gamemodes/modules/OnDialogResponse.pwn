@@ -12939,7 +12939,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 50;
-							DajKase(playerid, -onePoolPrice);
+							ZabierzKase(playerid, onePoolPrice);;
 							SejfR_Add(43, onePoolPrice);
 							SejfR_Save(43);
 							poolCashStats = poolCashStats+onePoolPrice;
@@ -12958,7 +12958,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 100;
-							DajKase(playerid, -twoPoolPrice);
+							ZabierzKase(playerid, twoPoolPrice); 
 							SejfR_Add(43, twoPoolPrice);
 							SejfR_Save(43);
 							poolCreditStatus = poolCreditStatus+100;
@@ -12977,7 +12977,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 250;
-							DajKase(playerid, -threePoolPrice);
+							ZabierzKase(playerid, threePoolPrice);
 							SejfR_Add(43, threePoolPrice);
 							SejfR_Save(43);
 							poolCreditStatus = poolCreditStatus+250;
@@ -12996,7 +12996,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", fourPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 500;
-							DajKase(playerid, -fourPoolPrice);
+							ZabierzKase(playerid, fourPoolPrice);
 							SejfR_Add(43, fourPoolPrice);
 							SejfR_Save(43);
 							poolCreditStatus = poolCreditStatus+500;
@@ -16975,7 +16975,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				HireCar[playerid] = 0;
 				return 0;
 			}
-			if(kaska[playerid] < 30000)
+			if(kaska[playerid] < BIKE_COST)
    			{
    				sendErrorMessage(playerid, "Nie masz tyle kasy!");
 				return 0;
@@ -16984,9 +16984,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
     		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 15*60*1000, 0, "ii", playerid, veh));
 
-    		sendTipMessageEx(playerid, COLOR_YELLOW, "Wypo¿yczy³es pojazd na 15 minut za 30.000$.");
     		TogglePlayerControllable(playerid, 1);
-    		DajKase(playerid, -30000);
+    		ZabierzKase(playerid, BIKE_COST); 
     		HireCar[playerid] = veh;
     		SetPVarInt(playerid, "rentCar", veh);
 		}

@@ -117,18 +117,6 @@ stock getStringFromUnknown(hex) {
 }
 
 
-
-
-//Tu wpisz~n~~n~~r~tekst~n~~n~~y~~h~wincyj teksta
-stock showTimedMsgBox(playerid, delay, text[]) {
-	CzasInformacyjnego[playerid] = delay;
-	PlayerTextDrawHide(playerid, TextInformacyjny[playerid]);
-	PlayerTextDrawSetString(playerid, TextInformacyjny[playerid], text);
-	PlayerTextDrawShow(playerid, TextInformacyjny[playerid]);
-	return true;
-}
-
-
 public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
 	if(response)

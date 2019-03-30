@@ -11608,7 +11608,23 @@ stock ChangePlayerName(playerid, name[])
     MruMySQL_SaveAccount(playerid);
     return 1;
 }
+stock CheckVulgarityString(text[])
+{
+	if(strfind(text, "kurwa") != -1
+	&& strfind(text, "chuj") != -1
+	&& strfind(text, "cipa") != -1
+	&& strfind(text, "fiut") != -1
+	&& strfind(text, "zjeb") != -1
+	&& strfind(text, "dick") != -1)
+	{	
+		return true;
+	}
+	else 
+	{
+		return false; 
+	}
 
+}
 stock SetRPName(playerid)
 {
 	new nick[MAX_PLAYER_NAME];

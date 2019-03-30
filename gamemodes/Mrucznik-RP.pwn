@@ -101,6 +101,7 @@ native WP_Hash(buffer[], len, const str[]);
 //.pwn
 #include "modules/chaty/chaty.pwn"
 #include "modules/chaty/chaty_komunikaty.pwn"
+#include "modules/chaty/komunikaty.pwn"
 #include "modules/admin_duty_system/adminduty.pwn"
 #include "modules/admin/admin.pwn"
 
@@ -827,14 +828,7 @@ public OnPlayerConnect(playerid)
 		return 1;
     }
 	//Nick bez wulgaryzmów
-	if(strfind(nick, "kurwa") != -1
-	&& strfind(nick, "chuj") != -1
-	&& strfind(nick, "cipa") != -1
-	&& strfind(nick, "fiut") != -1
-	&& strfind(nick, "zjeb") != -1
-	&& strfind(nick, "dick") != -1
-	&& strfind(nick, "matka") != -1
-	&& strfind(nick, "stara") != -1)
+	if(CheckVulgarityString(nick) == true)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick zawiera wulgaryzmy/niedozwolone s³owa - zmieñ go!"); 
 		KickEx(playerid);
@@ -1042,17 +1036,6 @@ public OnPlayerDisconnect(playerid, reason)
     		DestroyDynamicObject(r0pes[playerid][i]);
       	}
 	}
-	//dodatki 
-	RemovePlayerAttachedObject(playerid,1);
-	RemovePlayerAttachedObject(playerid,2);
-	RemovePlayerAttachedObject(playerid,3);
-	RemovePlayerAttachedObject(playerid,4);
-	RemovePlayerAttachedObject(playerid,5);
-	RemovePlayerAttachedObject(playerid,6);
-	RemovePlayerAttachedObject(playerid,7);
-	RemovePlayerAttachedObject(playerid,8);
-	RemovePlayerAttachedObject(playerid,9);
-	RemovePlayerAttachedObject(playerid,10);
     //budki telefoniczne
     if(GetPVarInt(playerid, "budka-Mobile") != 999) {
         new caller = GetPVarInt(playerid, "budka-Mobile");
@@ -4684,9 +4667,11 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     			{
 					if (CarData[lcarid][c_Rang]-1 != playerid)
 					{
+						new stringDialog[128];
+						format(stringDialog, format(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 15 minut", BIKE_COST);
 		    			TogglePlayerControllable(playerid, 0);
 						HireCar[playerid] = vehicleid;
-						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", "Mo¿esz wypo¿yczyæ ten pojazd!\nCena: 30.000$ za 15 minut.", "Wynajmij", "WyjdŸ");
+						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", stringDialog, "Wynajmij", "WyjdŸ");
 					}
 				}
 			}
@@ -4827,7 +4812,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                         if(PlayerInfo[playerid][pLevel] < 3)
                         {
                             ZabierzKase(playerid, floatround(TransportValue[i]/4));//moneycheat
-                            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jesteœ nowym graczem, obowi¹zuje Cie rabat 50 procent na taksówkê.");
+                            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jesteœ nowym graczem, obowi¹zuje Cie rabat 75 procent na taksówkê.");
                         }
                         else
                         {

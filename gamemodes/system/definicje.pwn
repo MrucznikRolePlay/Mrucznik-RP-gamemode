@@ -54,6 +54,7 @@
 #define NOT_FOUND					-1			//u¿ywane do strfind
 #define STREAM_DISTANCE 300.0
 
+#define BIKE_COST 30000
 //BIZNESY
 #define MAX_BIZNES 103
 #define BIZ_LOCATION_LS 0

@@ -126,7 +126,9 @@ stock sprawdzReklame(text[], playerid)
 stock sprawdzWulgaryzmy(text[], playerid)
 {
 	new valueWulgaryzmy;
-	if(strfind(text , "jeb" , true)>=0 
+	new stringReturn[256];
+
+	if(strfind(text, "jeb", true)>=0 
 	||strfind(text , "huj" , true)>=0 
 	|| strfind(text , "pizda" , true)>=0 
 	|| strfind(text , "pizdy" , true)>=0 
@@ -146,15 +148,15 @@ stock sprawdzWulgaryzmy(text[], playerid)
 		{
 		
 			SendClientMessage(playerid, COLOR_GRAD2, "Zosta³eœ ukarany grzywn¹ za wulgaryzmy! Kara: (20.000$)");
-			format(string, sizeof(string), "AdmWarning: [%d] %s u¿ycie wulgaryzmów (kara -10 000$): %s.",playerid,GetNick(playerid),text);
+			format(stringReturn, sizeof(stringReturn), "AdmWarning: [%d] %s u¿ycie wulgaryzmów (kara -10 000$): %s.",playerid,GetNick(playerid),text);
 			DajKase(playerid, -20000);
 		}
 		else
 		{
-			format(string, sizeof(string), "AdmWarning: %s - pojawi³y siê wulgaryzmy");
+			format(stringReturn, sizeof(stringReturn), "AdmWarning: %s - pojawi³y siê wulgaryzmy");
 		}
-		ABroadCast(COLOR_LIGHTRED,string,1000);
-		WarningLog(string);
+		ABroadCast(COLOR_LIGHTRED,stringReturn,1000);
+		WarningLog(stringReturn);
 		valueWulgaryzmy = 1;
 	}
 	else
