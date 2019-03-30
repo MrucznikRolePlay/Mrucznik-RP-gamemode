@@ -83,7 +83,7 @@ stock KolorujWstawkiMe(text[])
 	return string;
 }
 */
-stock sprawdzReklame(text[] bool:playerid=666)
+stock sprawdzReklame(text[], playerid)
 {
 	new valueAdd;
 	if(strfind(text , "ip:" , true)>=0 
@@ -123,7 +123,7 @@ stock sprawdzReklame(text[] bool:playerid=666)
 	}
    return valueAdd;
 }
-stock sprawdzWulgaryzmy(text[], bool:playerid=666)
+stock sprawdzWulgaryzmy(text[], playerid)
 {
 	new valueWulgaryzmy;
 	if(strfind(text , "jeb" , true)>=0 
