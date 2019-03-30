@@ -174,7 +174,7 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 	{
 		format(string, sizeof(string), "%s %s: %s", GetNick(playerid, true), jakMowi, text);
 		CheckStars(string);
-		ProxDetector(rangeTalk, playerid, Message, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+		ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
 	{
@@ -188,7 +188,7 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 
 			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid, true), jakMowi, text);
 			CheckStars(string);
-			ProxDetector(rangeTalk, playerid, Message, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 			format(string, sizeof(string), "[.] %s", text2);
 			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
@@ -228,7 +228,7 @@ stock PlayerTalkOOC(playerid, text[], Float:rangeTalk)
                 ProxDetector(rangeTalk, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
             }
         }
-	    format(string, sizeof(string), "(( %s Napisa³: %s ))", GetNick(playerid), params);
+	    format(string, sizeof(string), "(( %s Napisa³: %s ))", GetNick(playerid), text);
         printf("%s", string);
 		SetPlayerChatBubble(playerid,string,COLOR_FADE1,25.0,8000);
 	
@@ -869,23 +869,23 @@ CMD:og(playerid, params[])
 			SendClientMessage(playerid, COLOR_GRAD2, string);
 			return 1;
 		}
-            new payout = strlen(params) * 25;
-            if(kaska[playerid] < payout)
-            {
-                format(string, sizeof(string), "* U¿y³eœ %d znaków i masz zap³aciæ $%d, nie posiadasz a¿ tyle.", strlen(params), payout);
-                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                return 1;
-            }
-            DajKase(playerid, - payout);
-            format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d",  params, GetNick(playerid, true), PlayerInfo[playerid][pPnumber]);
-            OOCNews(TEAM_GROVE_COLOR,string);
-            format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
-            GameTextForPlayer(playerid, string, 5000, 5);
-            if (PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pDonateRank] < 2)
-            {
-                SetTimer("AddsOn", addtimer, 0);adds = 0;
-            }
-        }
+		new payout = strlen(params) * 25;
+		if(kaska[playerid] < payout)
+		{
+			format(string, sizeof(string), "* U¿y³eœ %d znaków i masz zap³aciæ $%d, nie posiadasz a¿ tyle.", strlen(params), payout);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			return 1;
+		}
+		DajKase(playerid, - payout);
+		format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d",  params, GetNick(playerid, true), PlayerInfo[playerid][pPnumber]);
+		OOCNews(TEAM_GROVE_COLOR,string);
+		format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
+		GameTextForPlayer(playerid, string, 5000, 5);
+		if (PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pDonateRank] < 2)
+		{
+			SetTimer("AddsOn", addtimer, 0);adds = 0;
+		}
+        
     }
     return 1;
 }

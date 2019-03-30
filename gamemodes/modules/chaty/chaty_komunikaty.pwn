@@ -108,12 +108,12 @@ stock GetFractionColor(fraction)
 }
 stock sendFractionMessageToAll(playerid, text[])
 {
+	new sContent[256];
 	foreach(Player, i) 
 	{
 		if(GetPVarInt(i, "TOG_frakcja_info") == 0)
 		{
 			fractionMessageRange++; 
-			new sContent[256];
 			format(sContent, sizeof(sContent), "|___________ %s ___________|", FractionNames[GetPlayerFraction(playerid)]); 
 			SendClientMessage(i, COLOR_WHITE, sContent); 
 			format(sContent, sizeof(sContent), "%s %s: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]], GetNick(playerid, true), text);
