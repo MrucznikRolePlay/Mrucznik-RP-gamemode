@@ -848,11 +848,11 @@ CMD:og(playerid, params[])
             SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: (/og)loszenie [tekst og³oszenia]");
             return 1;
         }
-		if(sprawdzReklame(params) == 1)
+		if(sprawdzReklame(params, playerid) == 1)
 		{
 			return 1;
 		}
-		if(sprawdzWulgaryzmy(params) == 1)
+		if(sprawdzWulgaryzmy(params, playerid) == 1)
 		{
 		
 			return 1;
