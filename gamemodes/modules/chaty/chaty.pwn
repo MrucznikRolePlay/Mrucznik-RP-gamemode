@@ -121,7 +121,7 @@ stock sprawdzReklame(text[], playerid)
 	{
 		valueAdd=0;
 	}
-   return valueAdd;
+	return valueAdd;
 }
 stock sprawdzWulgaryzmy(text[], playerid)
 {
@@ -205,6 +205,7 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 }
 stock PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 {
+	new string[256];
 	if(IsPlayerConnected(playerid))
 	{
 		if(strlen(text) < 78)
