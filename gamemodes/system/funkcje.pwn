@@ -11610,6 +11610,7 @@ stock ChangePlayerName(playerid, name[])
 }
 stock CheckVulgarityString(text[])
 {
+	new valueVulgarity;
 	if(strfind(text, "kurwa") != -1
 	&& strfind(text, "chuj") != -1
 	&& strfind(text, "cipa") != -1
@@ -11617,13 +11618,13 @@ stock CheckVulgarityString(text[])
 	&& strfind(text, "zjeb") != -1
 	&& strfind(text, "dick") != -1)
 	{	
-		return true;
+		valueVulgarity = 1;
 	}
 	else 
 	{
-		return false; 
+		valueVulgarity = 0;
 	}
-
+	return valueVulgarity;
 }
 stock SetRPName(playerid)
 {

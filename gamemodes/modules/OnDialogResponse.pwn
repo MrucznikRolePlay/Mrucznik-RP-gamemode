@@ -12939,7 +12939,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 50;
-							ZabierzKase(playerid, onePoolPrice);;
+							ZabierzKase(playerid, onePoolPrice);
 							SejfR_Add(43, onePoolPrice);
 							SejfR_Save(43);
 							poolCashStats = poolCashStats+onePoolPrice;
