@@ -108,16 +108,39 @@ stock GetFractionColor(fraction)
 }
 stock sendFractionMessageToAll(playerid, text[])
 {
-	new sContent[256];
-	format(sContent, sizeof(sContent), "|___________ %s ___________|", FractionNames[GetPlayerFraction(playerid)]); 
-	SendClientMessageToAll(COLOR_WHITE, sContent); 
-	format(sContent, sizeof(sContent), "%s %s: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]], GetNick(playerid, true), text);
-	SendClientMessageToAll(GetFractionColor(PlayerInfo[playerid][pMember]), sContent);
-
+	foreach(Player, i) 
+	{
+		if(GetPVarInt(i, "TOG_frakcja_info") == 0)
+		{
+			fractionMessageRange++; 
+			new sContent[256];
+			format(sContent, sizeof(sContent), "|___________ %s ___________|", FractionNames[GetPlayerFraction(playerid)]); 
+			SendClientMessage(i, COLOR_WHITE, sContent); 
+			format(sContent, sizeof(sContent), "%s %s: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]], GetNick(playerid, true), text);
+			SendClientMessage(i, GetFractionColor(PlayerInfo[playerid][pMember]), sContent); 
+		}
+	}
+	format(sContent, sizeof(sContent), "Wiadomoœæ dotar³a do %d graczy", fractionMessageRange); 
+	sendTipMessage(playerid, sContent); 
+	fractionMessageRange = 0; 
 	return 1;
 }
 
 //-----------------<[ Komendy: ]>-------------------
+CMD:togfinfo(playerid)
+{
+	if(GetPVarInt(playerid, "TOG_frakcja_info") == 0)
+	{
+		SetPVarInt(playerid, "TOG_frakcja_info", 1); 
+		MSGBOX_Show(playerid, "Komunikaty_Frakcji_~r~OFF", MSGBOX_ICON_TYPE_WARNING);
+	}
+	else
+	{
+		SetPVarInt(playerid, "TOG_frakcja_info", 0); 
+		MSGBOX_Show(playerid, "Komunikaty_Frakcji_~g~ON", MSGBOX_ICON_TYPE_WARNING);
+	}
+	return 1;
+}
 //CMD:frakcjainfo(playerid, params[]) return cmd_fi(playerid, params[]);
 CMD:finfo(playerid, params[])
 {
@@ -148,7 +171,7 @@ CMD:finfo(playerid, params[])
 		}
 		if(isnull(params))
 		{
-			sendTipMessage(playerid, "U¿yj /frakcjainfo (/fi) [tekst]"); 
+			sendTipMessage(playerid, "U¿yj /frakcjainfo (/finfo) [tekst]"); 
 			return 1;
 		}
 		if(PlayerInfo[playerid][pBP] >= 1)
