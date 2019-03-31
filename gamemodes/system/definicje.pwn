@@ -115,9 +115,6 @@
 #define ILOSC_AUT 483
 #define MAX_CHECKPOINTS 51
 
-//sila
-#define MAX_STRONG_VALUE 1000
-#define TIME_OF_DRUG_ACTIVITY 5//w minutach
 
 //Kary:
 #define KARA_BAN 1
