@@ -94,19 +94,19 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/chaty/chaty.def"
 #include "modules/admin_duty_system/adminduty.def"
 #include "modules/admin/admin.def"
-#include "modules/sila/sila.def"
+#include "modules/Sila/sila.def"
 //.hwn
 #include "modules/chaty/chaty.hwn"
 #include "modules/admin_duty_system/adminduty.hwn"
 #include "modules/admin/admin.hwn"
-#include "modules/sila/sila.hwn"
+#include "modules/Sila/sila.hwn"
 //.pwn
 #include "modules/chaty/chaty.pwn"
 #include "modules/chaty/chaty_komunikaty.pwn"
 #include "modules/chaty/komunikaty.pwn"
 #include "modules/admin_duty_system/adminduty.pwn"
 #include "modules/admin/admin.pwn"
-#include "modules/sila/sila.pwn"
+#include "modules/Sila/sila.pwn"
 
 
 
