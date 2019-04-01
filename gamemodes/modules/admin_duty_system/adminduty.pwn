@@ -82,6 +82,7 @@ stock SprawdzZnaki(text[])
 	&& strfind(text, "ê") == -1
 	&& strfind(text, "ñ") == -1
 	&& strfind(text, "ó") == -1
+	&& strfind(text, "§") == -1
 	&& strfind(text, "+") == -1)
 	{
 		checkAdminNameValue = 0;
