@@ -69,7 +69,7 @@ stock DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:
 }
 stock Sprawdz_w_cord(playerid, id)
 {
-	new status;//0 - nigdzie, 1 - na /wejdz, 2 - na /wyjdz
+	new playerPos;//0 - nigdzie, 1 - na /wejdz, 2 - na /wyjdz
 	
 	if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw1]
 	&& GetPlayerInterior(playerid) == wejscia[id][w_int1]
@@ -89,9 +89,9 @@ stock Sprawdz_w_cord(playerid, id)
 	}
 	return playerPos;
 }
-stock Sprawdz_Interior_UID_Wchodzenie(playerid, id)
+stock Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 {
-	if(wejscia[id][w_UID] == 1)
+	if(Check_ID == 1)
 	{
 		if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
 		{
@@ -143,12 +143,12 @@ stock Sprawdz_Interior_UID_Wchodzenie(playerid, id)
 			return 1;
 		}	
 	}
-	else if(wejscia[id][w_UID] == 2)
+	else if(Check_ID == 2)
 	{
 		SendClientMessage(playerid, -1, "Powodzenia podczas egzaminu praktycznego!"); 
 		GameTextForPlayer(playerid, "~n~~r~Powodzenia", 5000, 1); 	
 	}	
-	else if(wejscia[id][w_UID] == 3)
+	else if(Check_ID == 3)
 	{
 		if(doorFBIStatus == 0 || GetPlayerFraction(playerid) != FRAC_FBI)
 		{
@@ -165,27 +165,27 @@ stock Sprawdz_Interior_UID_Wchodzenie(playerid, id)
 			GameTextForPlayer(playerid, "~w~Witamy w~y~ Biurowcu ~b~FBI~n~~r~by UbunteQ & Iwan", 5000, 1);
 		}
 	}
-	else if(wejscia[id][w_UID] == 4)
+	else if(Check_ID == 4)
 	{
 		sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 		sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
 	}
-	else if(wejscia[id][w_UID] == 5) 
+	else if(Check_ID == 5) 
 	{
 		sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 		sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");	
 	}
-	else if(wejscia[id][w_UID] == 6)
+	else if(Check_ID == 6)
 	{
 		new muzik[128];
 		GetSVarString("muzyka_bonehead", muzik, 128);
 		PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
 	}
-	else if(wejscia[id][w_UID] == 7)
+	else if(Check_ID == 7)
 	{
 		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 || GetPlayerOrg(playerid) != FAMILY_VINYL || GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -193,7 +193,7 @@ stock Sprawdz_Interior_UID_Wchodzenie(playerid, id)
 			return 1;
 		}
 	}
-	else if(wejscia[id][w_UID] == 8)
+	else if(Check_ID == 8)
 	{
 		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 || GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -201,7 +201,7 @@ stock Sprawdz_Interior_UID_Wchodzenie(playerid, id)
 			return 1;
 		}
 	}
-	else if(wejscia[id][w_UID] == 9)
+	else if(Check_ID == 9)
 	{
 		if(GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -213,15 +213,15 @@ stock Sprawdz_Interior_UID_Wchodzenie(playerid, id)
 			GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
 		}
 	}
-	else if(wejscia[id][w_UID] == 10)
+	else if(Check_ID == 10)
 	{
 		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
 	}
-	else if(wejscia[id][w_UID] == 11)
+	else if(Check_ID == 11)
 	{
 		GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
 	}
-	else if(wejscia[id][w_UID] == 12)//Do to poprawy
+	else if(Check_ID == 12)//Do to poprawy
 	{
 		if(!DoorInfo[FRAC_LCN][d_State])
 		{
@@ -235,13 +235,13 @@ stock Sprawdz_Interior_UID_Wchodzenie(playerid, id)
 	}
 	return 0; 
 }
-stock Sprawdz_Interior_UID_Wychodzenie(playerid, id)
+stock Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 {
-	if(wejscia[id][w_UID] == 6)
+	if(Check_ID == 6)
 	{
 		StopAudioStreamForPlayer(playerid);	
 	}
-	else if(wejscia[id][w_UID] == 2)
+	else if(Check_ID == 2)
 	{
 		if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
 		{
@@ -296,7 +296,7 @@ stock SprawdzWejscia(playerid)
 	{
 		if(Sprawdz_w_cord(playerid, i) == OUT_INTERIOR)
 		{
-			Sprawdz_Interior_UID_Wchodzenie(playerid, wejscia[i][w_UID]);
+			Sprawdz_UID_Wchodzenie(playerid, wejscia[i][w_UID]);
 			SetPlayerPosEx(playerid,  wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]);
 			SetPlayerInterior(playerid, wejscia[i][w_int2]);
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
@@ -307,7 +307,7 @@ stock SprawdzWejscia(playerid)
 		}
 		if(Sprawdz_w_cord(playerid, i) == IN_INTERIOR)
 		{
-			Sprawdz_Interior_UID_Wychodzenie(playerid, wejscia[i][w_UID]);
+			Sprawdz_UID_Wychodzenie(playerid, wejscia[i][w_UID]);
 			SetPlayerPosEx(playerid,  wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]);
 			SetPlayerInterior(playerid, wejscia[i][w_int1]);
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
