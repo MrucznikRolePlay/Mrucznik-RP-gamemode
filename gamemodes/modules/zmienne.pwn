@@ -12,7 +12,6 @@ new VehicleIDChanges[MAX_PLAYERS];
 new VehicleIDChangeTime[MAX_PLAYERS];
 
 new acstr[128];
-new BizOpenStatus[MAX_BIZNES] = 0;
 
 new Float:czitX;
 new Float:czitY;

@@ -23,7 +23,7 @@
 
 //-----------------<[ Zmienne: ]>-------------------
 
-
+new BizOpenStatus[MAX_BIZNES] = 0;
 
 //-----------------<[ Enumy: ]>-------------------
 enum eBizData {
