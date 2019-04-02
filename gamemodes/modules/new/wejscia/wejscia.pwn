@@ -94,7 +94,11 @@ stock Sprawdz_w_UID(playerid, id)
 	//WEJŒCIA NA UID:
 	if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 12)//Do to poprawy
 	{
-		if(!DoorInfo[FRAC_LCN][d_State]) return SendClientMessage(playerid, COLOR_GRAD1, "Te drzwi s¹ zamkniête.");
+		if(!DoorInfo[FRAC_LCN][d_State])
+		{
+			sendErrorMessage(playerid, "Te drzwi s¹ zamkniête"); 
+			return 1;
+		}
 	}
 	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 11)
 	{
@@ -267,6 +271,7 @@ stock Sprawdz_w_UID(playerid, id)
 			return 1;
 		}	
 	}
+	else (Sprawdz_w_cord(playerid, id, 1) || Sprawdz_w_cord(playerid, id, 0));
 	return 0;
 }
 stock SprawdzWejscia(playerid)
