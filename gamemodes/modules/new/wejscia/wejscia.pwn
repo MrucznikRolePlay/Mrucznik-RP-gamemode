@@ -99,12 +99,12 @@ stock SprawdzWejscia(playerid)
 		}
 		else if(wejscia[i][w_UID] == 11)
 		{
-			GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
+			return GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
 		}
 		else if(wejscia[i][w_UID] == 10 
 		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 		{
-			GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
+			return GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
 		}
 		else if(wejscia[i][w_UID] == 9
 		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
@@ -114,7 +114,7 @@ stock SprawdzWejscia(playerid)
 				sendTipMessage(playerid, "Ups! Wygl¹da na to, ¿e drzwi s¹ zamkniête"); 
 				return 1;
 			}
-			GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
+			return GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
 		}
 		else if(wejscia[i][w_UID] == 8
 		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
@@ -122,8 +122,8 @@ stock SprawdzWejscia(playerid)
 			if(GetPVarInt(playerid, "Vinyl-bilet") != 2 && GetPlayerFraction(playerid) != FRAC_SN)
 			{
 				sendErrorMessage(playerid, "Brak dostêpu do strefy V.I.P"); 
-				return 1;
 			}
+			return 1;
 		}
 		else if(wejscia[i][w_UID] == 7 
 		&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
@@ -131,8 +131,8 @@ stock SprawdzWejscia(playerid)
 			if(GetPVarInt(playerid, "Vinyl-bilet") == 0 || GetPlayerOrg(playerid) != FAMILY_VINYL || GetPlayerFraction(playerid) != FRAC_SN)
             {
 				sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
-				return 1;
 			}
+			return 1;
 		}
 		else if(wejscia[i][w_UID] == 6)
 		{
@@ -146,6 +146,7 @@ stock SprawdzWejscia(playerid)
 			{
 				StopAudioStreamForPlayer(playerid);
 			}
+			return 1;
 		}
 		else if(wejscia[i][w_UID] == 4)
 		{
@@ -156,6 +157,7 @@ stock SprawdzWejscia(playerid)
 				sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 				sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
 			}
+			return 1;
 		}
 		else if(wejscia[i][w_UID] == 5) 
 		{
@@ -166,6 +168,7 @@ stock SprawdzWejscia(playerid)
 				sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 				sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");
 			}
+			return 1;
 		}
 		else if(wejscia[i][w_UID] == 3)
 		{
@@ -187,6 +190,7 @@ stock SprawdzWejscia(playerid)
 			{
 				GameTextForPlayer(playerid, "~w~Miasto ~g~Los Santos", 5000, 1); 
 			}
+			return 1;
 		}
 		else if(wejscia[i][w_UID] == 2)
 		{
@@ -237,6 +241,7 @@ stock SprawdzWejscia(playerid)
 				}
 			
 			}
+			return 1;
 		}	
 		else if(wejscia[i][w_UID] == 1)//DMV
 		{
@@ -292,6 +297,7 @@ stock SprawdzWejscia(playerid)
 					return 1;
 				}	
 			}
+			return 1;
 		}
 	}
 	if(!IsPlayerInAnyVehicle(playerid))

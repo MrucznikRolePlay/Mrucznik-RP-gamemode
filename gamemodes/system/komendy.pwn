@@ -25669,10 +25669,11 @@ CMD:akceptuj(playerid, params[])
 					MruMySQL_SaveAccount(GetPVarInt(playerid, "Oferujacy_ID")); 
 					
 					format(string, sizeof(string),"CMD: %s [UID: %s] dal %s [UID: %d] biznes [ID: %d] za cene %d$",
-					GetNick(playerid, true), 
-					PlayerInfo[playerid][pUID], 
-					GetNick(GetPVarInt(playerid, "Oferujacy_ID")), 
-					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pUID], 
+					GetNick(playerid, true), //Daj¹cy
+					PlayerInfo[playerid][pUID], //Daj¹cy UID
+					GetNick(GetPVarInt(playerid, "Oferujacy_ID")),//Otrzymuj¹cy 
+					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pUID], //otrzymuj¹cy UID
+					PlayerInfo[playerid][pPbiskey],
 					GetPVarInt(playerid, "Oferujacy_Cena"));
 					BiznesLog(string);
 					ResetBizOffer(playerid); 
