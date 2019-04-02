@@ -295,6 +295,7 @@ stock SprawdzWejscia(playerid)
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
 			SetInteriorTimeAndWeather(playerid);
 			Wchodzenie(playerid);
+			return 1;
 		}
 	//	else if(Sprawdz_w_UID(playerid, i, 2))
 		if(Sprawdz_w_cord(playerid, i, 0)
@@ -305,6 +306,7 @@ stock SprawdzWejscia(playerid)
 			PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 			SetServerWeatherAndTime(playerid);
 			Wchodzenie(playerid);
+			return 1;
 		}
 	}
 	/*
