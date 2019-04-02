@@ -56,16 +56,7 @@
 
 #define BIKE_COST 30000
 //BIZNESY
-#define MAX_BIZNES 103
-#define BIZ_LOCATION_LS 0
-#define BIZ_LOCATION_DILL 1
-#define BIZ_LOCATION_PC 2
-#define BIZ_LOCATION_MONT 3
-#define BIZ_LOCATION_BB 4
-#define BIZ_LOCATION_LV 5
-#define BIZ_LOCATION_SF 6
-#define BIZ_LOCATION_BS 7
-#define BIZ_LOCATION_UNKNOW 8
+
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
 #define MRP_PREM_HOURS    15      //Ilosc godzin potrzebnych do przegrania

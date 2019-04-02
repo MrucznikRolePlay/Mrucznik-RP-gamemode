@@ -81,7 +81,8 @@ stock SprawdzWejscia(playerid)
 		{
 			GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
 		}
-		else if(wejscia[i][w_UID] == 10)
+		else if(wejscia[i][w_UID] == 10 
+		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 		{
 			GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
 		}
@@ -102,7 +103,8 @@ stock SprawdzWejscia(playerid)
 				return 1;
 			}
 		}
-		else if(wejscia[i][w_UID] == 7)
+		else if(wejscia[i][w_UID] == 7 
+		&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 		{
 			if(GetPVarInt(playerid, "Vinyl-bilet") == 0 || GetPlayerOrg(playerid) != FAMILY_VINYL || GetPlayerFraction(playerid) != FRAC_SN)
             {

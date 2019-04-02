@@ -95,11 +95,13 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/admin_duty_system/adminduty.def"
 #include "modules/admin/admin.def"
 #include "modules/Sila/sila.def"
+#include "modules/biznes/biznes.def"
 //.hwn
 #include "modules/chaty/chaty.hwn"
 #include "modules/admin_duty_system/adminduty.hwn"
 #include "modules/admin/admin.hwn"
 #include "modules/Sila/sila.hwn"
+#include "modules/biznes/biznes/hwn"
 //.pwn
 #include "modules/chaty/chaty.pwn"
 #include "modules/chaty/chaty_komunikaty.pwn"
@@ -107,6 +109,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/admin_duty_system/adminduty.pwn"
 #include "modules/admin/admin.pwn"
 #include "modules/Sila/sila.pwn"
+#include "modules/biznes/biznes.pwn"
 
 
 
@@ -120,6 +123,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/budki/budki.def"
 #include "modules/new/premium/premium.def"
 #include "modules/new/wjedz/wjedz.def"
+
 
 //Nowe modu³y .hwn:
 #include "modules/new/bramy/bramy.hwn"
