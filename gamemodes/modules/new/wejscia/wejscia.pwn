@@ -283,7 +283,7 @@ stock SprawdzWejscia(playerid)
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
 			SetInteriorTimeAndWeather(playerid);
 			Wchodzenie(playerid);
-			return 1
+			return 1;
 		}
 		if(Sprawdz_w_UID(playerid, i))
 		{
