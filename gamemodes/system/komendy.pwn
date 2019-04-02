@@ -25644,7 +25644,7 @@ CMD:akceptuj(playerid, params[])
 				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
 				return 1;
 			}
-			if(PlayerInfo[playerid][pPbiskey] != 0)
+			if(PlayerInfo[playerid][pPbiskey] < MAX_BIZNES || PlayerInfo[playerid][pPbiskey] < MAX_BIZNES)
 			{
 				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
 				return 1;

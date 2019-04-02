@@ -95,9 +95,10 @@ stock SprawdzWejscia(playerid)
 			}
 			GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
 		}
-		else if(wejscia[i][w_UID] == 8)
+		else if(wejscia[i][w_UID] == 8
+		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 		{
-			if(GetPVarInt(playerid, "Vinyl-bilet") != 2)
+			if(GetPVarInt(playerid, "Vinyl-bilet") != 2 && GetPlayerFraction(playerid) != FRAC_SN)
 			{
 				sendErrorMessage(playerid, "Brak dostêpu do strefy V.I.P"); 
 				return 1;
