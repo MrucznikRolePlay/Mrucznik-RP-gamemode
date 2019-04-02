@@ -223,7 +223,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 IsAHeadAdmin(playerid)
 {
-	if(PlayerInfo[playerid][pAdmin] != 5000
+	if(!IsAHeadAdmin(playerid))
 	{
 		return 1;
 	}
@@ -480,7 +480,7 @@ CMD:resetsejfhasla(playerid)
 {
 	new string[64];
 
-	if(PlayerInfo[playerid][pAdmin] == 5000)
+	if(IsAHeadAdmin(playerid))
 	{
 	    new xxx[20];
         for(new i; i <= dini_Int("Domy/NRD.ini", "NrDomow"); i++)
@@ -1316,7 +1316,7 @@ CMD:antybh(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
+		if (IsAHeadAdmin(playerid) || IsAScripter(playerid))
 		{
 	 		if(bh == 0 || bh == 1)
  			{
@@ -2490,7 +2490,7 @@ CMD:getposp(playerid, params[])
 }
 CMD:zniszczobiekty(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {
         DestroyAllDynamicObjects();
 	    SendClientMessage(playerid, COLOR_PANICRED, "Wszystkie obiekty zniszczone!");
@@ -2504,7 +2504,7 @@ CMD:zniszczobiekty(playerid)
 
 CMD:stworzobiekty(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {
         Stworz_Obiekty();
 	    SendClientMessage(playerid, COLOR_PANICRED, "Wszystkie obiekty stworzone!");
@@ -2757,7 +2757,7 @@ CMD:bp(playerid, params[])//blokada pisania
 
 CMD:KickEx_all(playerid)
 {
-	if(PlayerInfo[playerid][pAdmin] == 5000)
+	if(IsAHeadAdmin(playerid))
 	{
 		new string[64], sendername[MAX_PLAYER_NAME];
 		GetPlayerName(playerid,sendername,sizeof(sendername));
@@ -2775,7 +2775,7 @@ CMD:KickEx_all(playerid)
 }
 CMD:setmats(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000)
+	if (IsAHeadAdmin(playerid))
 	{
 		new gracz, wartosc;
 		if(sscanf(params, "k<fix>d", gracz, wartosc))
@@ -3102,7 +3102,7 @@ CMD:panel(playerid, params[])
 }
 CMD:msgbox(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {
         new forplayer=-1, title[64], icon, time;
         if(sscanf(params, "ds[64]dd", forplayer, title, icon, time))
@@ -3405,7 +3405,7 @@ CMD:scenadisallow(playerid, p[])
 }
 CMD:delete3dtext(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
+    if(!IsAHeadAdmin(playerid)) return 1;
 
     new typ, Text3D:data, extra;
     if(sscanf(p, "ddD(0)", typ, _:data, extra))
@@ -3476,7 +3476,7 @@ CMD:delete3dtext(playerid, p[])
 
 CMD:deleteobject(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
+    if(!IsAHeadAdmin(playerid)) return 1;
     new typ, data, extra;
     if(sscanf(p, "ddD(0)", typ, data, extra))
     {
@@ -3679,7 +3679,7 @@ CMD:gotostacja(playerid)
 }
 CMD:removeganglimit(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U퓓j /removeganglimit [ID frakcji]");
         ZoneGangLimit[id] = true;
@@ -3690,7 +3690,7 @@ CMD:removeganglimit(playerid, p[])
 
 CMD:removezoneprotect(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U퓓j /removezoneprotect [ID strefy]");
         ZoneProtect[id] = false;
@@ -3701,7 +3701,7 @@ CMD:removezoneprotect(playerid, p[])
 
 CMD:gangzone(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U퓓j /gangzone [0/1]");
         if(id < 0 || id > 1) return 1;
@@ -3717,7 +3717,7 @@ CMD:gangzone(playerid, p[])
 
 CMD:zonedelay(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
         new str[64];
         if(sscanf(p, "d", id)) {
@@ -3738,7 +3738,7 @@ CMD:zonedelay(playerid, p[])
 
 CMD:clearzone(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U퓓j /clearzone [ID]");
         if(id < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
@@ -3759,7 +3759,7 @@ CMD:clearzone(playerid, p[])
 
 CMD:setzonecontrol(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id, frac;
         if(sscanf(p, "dd", id, frac)) return sendTipMessage(playerid, "U퓓j /setzonecontrol [ZoneID] [Owner]");
         if(id < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
@@ -4191,7 +4191,7 @@ CMD:wylogujall(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] == 5000)
+		if (IsAHeadAdmin(playerid))
 		{
             new str[128];
             format(str, 128, "* Admin %s wylogowa� WSZYSTKICH!!", GetNick(playerid));
@@ -4708,7 +4708,7 @@ CMD:setstat(playerid, params[])
 						}
 						case 5:
 						{
-						    if(PlayerInfo[playerid][pAdmin] == 5000)
+						    if(IsAHeadAdmin(playerid))
 						    {
 								PlayerInfo[giveplayerid][pAccount] = amount;
 								format(string, sizeof(string), "Kwota w Koncie Bankowym gracza zmieniona na $%d", amount);
@@ -6718,7 +6718,7 @@ CMD:kasa(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] == 5000)
+		if (IsAHeadAdmin(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -6752,7 +6752,7 @@ CMD:dajkase(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] == 5000)
+		if (IsAHeadAdmin(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

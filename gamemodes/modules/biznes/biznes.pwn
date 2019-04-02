@@ -477,7 +477,7 @@ CMD:bizmoneydebug(playerid)
 	}
 	else
 	{
-		return NoAccessMessage(playerid); 
+		return noAccessMessage(playerid); 
 	}
 	return 1;
 }

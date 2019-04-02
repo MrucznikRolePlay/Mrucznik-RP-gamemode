@@ -3331,7 +3331,7 @@ CMD:animacje(playerid)
 
 CMD:bdaj(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000)
+    if(IsAHeadAdmin(playerid))
 	{
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
@@ -18706,7 +18706,7 @@ CMD:dodajweryfikacje(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (IsPlayerAdmin(playerid) && PlayerInfo[playerid][pAdmin] == 5000)
+		if (IsPlayerAdmin(playerid) && IsAHeadAdmin(playerid))
 		{
 			ShowPlayerDialogEx(playerid, 1888, DIALOG_STYLE_INPUT, "Tworzenie weryfikacji", "Wpisz nick administratora któremu chcesz stworzyc weryfikacje", "Next", "Anuluj");
 		}
@@ -18921,7 +18921,7 @@ CMD:endround(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-  		if (PlayerInfo[playerid][pAdmin] == 5000)
+  		if (IsAHeadAdmin(playerid))
 		{
             SendClientMessage(playerid, COLOR_GRAD1, "(usuniêto)");
 			//GameModeInitExitFunc();
@@ -19241,7 +19241,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zrobdom /lzrobdom /usundom /blokujdom /resetsejfhasla /zapiszdomy /zapiszkonta");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /rodzinalider /scena /houseowner /domint NEW: /dajskryptera /bwtime");
 	}
-	if (PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
+	if (IsAHeadAdmin(playerid) || IsAScripter(playerid))
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** Jesteœ koxem przez X ***");
         SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zonedelay /gangzone /removezoneprotect /removeganglimit /clearzone /setzonecontrol");
