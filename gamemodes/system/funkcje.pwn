@@ -12686,7 +12686,14 @@ stock SprawdzMuzyke(playerid)
 	}
 	return 1;
 }
-
+stock ResetBizOffer(playerid)
+{
+	SetPVarInt(playerid, "Oferujacy_ID", 0);
+	SetPVarInt(playerid, "Oferujacy_Cena", 0); 
+	SetPVarInt(playerid, "Oferujacy_biz_ID",0);
+	SetPVarInt(playerid, "wpisal_sprzedaj_biz", 0)
+	return 1;
+}
 stock CheckBizLocation(bizid)
 {
 	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_LS)

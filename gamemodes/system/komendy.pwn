@@ -11186,7 +11186,88 @@ CMD:dajbiznes(playerid, params[])
 	}
 	return 1;
 }
-
+CMD:sprzedajbiznes(playerid, params[])
+{
+	if(IsPlayerConnected(playerid))
+	{
+		new giveplayerid, value;
+		new string[256];
+		if(sscanf(params, "k<fix>d", giveplayerid, value))
+		{
+			return sendTipMessage(playerid, "U¿yj /sprzedajbiznes [ID_GRACZA] [Cena]"); 
+		}
+		if(IsPlayerConnected(giveplayerid))
+		{
+			if(giveplayerid == playerid)
+			{
+				sendTipMessage(playerid, "Nie mo¿esz zaoferowaæ sprzeda¿y samemu sobie"); 
+				return 1;
+			}
+			if(ProxDetectorS(8.0, playerid, giveplayerid))
+			{
+				if(IsPlayerInRangeOfPoint(playerid, 
+				5.0, 
+				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejX], 
+				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejY],
+				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejZ]))
+				{
+				
+					if(value >= 30_000_000 && PlayerInfo[playerid][pAdmin] != 5000)
+					{
+						if(GetPlayerMoney(giveplayerid) >= value)
+						{
+							if(GetPVarInt(playerid, "wpisal_sprzedaj_biz") == 0)
+							{
+								sendTipMessage(playerid, "Pamiêtaj, ¿e Wydzia³ Planowania otr¹ci podatek w wysokoœci 1/5 podanej kwoty."); 
+								sendTipMessage(playerid, "Je¿eli akceptujesz podane warunki wpisz ponownie komendê"); 
+								SetPVarInt(playerid, "wpisal_sprzedaj_biz", 1); 
+							}
+							else
+							{
+								format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d", GetNick(giveplayerid, true), PlayerInfo[playerid][pPbiskey], value);
+								sendTipMessage(playerid, string);
+								sendTipMessage(playerid, "Oczekuj na akceptacje"); 
+								
+								
+								//do giveplayerid
+								format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), PlayerInfo[playerid][pPbiskey], value); 
+								sendTipMessage(playerid, string); 
+								SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
+								SetPVarInt(giveplayerid, "Oferujacy_Cena", value); 
+								SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]); 
+							}
+						}
+						else
+						{
+							sendTipMessage(playerid, "Ten gracz nie ma przy sobie takiej kwoty"); 
+							return 1;
+						}
+					}
+					else
+					{
+						sendTipMessage(playerid, "Przy sprzeda¿y biznesu za wiêksz¹ cene wymagana jest obecnoœæ cz³onka Wydzia³u Planowania"); 
+						return 1;
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie znajdujesz siê pod swoim biznesem"); 
+					return 1;
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Ten gracz nie znajduje siê obok Ciebie!"); 
+				return 1;
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie ma takiego gracza"); 
+		}
+	}
+	return 1;
+}
 CMD:zabierzbiznes(playerid, params[])
 {
 	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
@@ -25773,11 +25854,71 @@ CMD:akceptuj(playerid, params[])
             SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Gazeta, Mandat");
-            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka, Uwolnienie");
+            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka, Uwolnienie, biznes");
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
-		if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
+		if(strcmp(x_job, "biznes", false) == 0)
+		{
+			/*SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
+			SetPVarInt(giveplayerid, "Oferujacy_Cena", value); 
+			SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]);*/
+			if(GetPVarInt(playerid, "Oferujacy_ID") == 0)
+			{
+				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
+				return 1;
+			}
+			if(PlayerInfo[playerid][pPbiskey] != 0)
+			{
+				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!"); 
+			}
+			if(IsPlayerConnected(GetPVarInt(playerid, "Oferujacy_ID"))
+			{
+				if(GetPlayerMoney(playerid) >= GetPVarInt(playerid, "Oferujacy_Cena"))
+				{
+					new kwotaSprzedazy = GetPVarInt(playerid, GetPVarInt(playerid, "Oferujacy_Cena"));
+					ZabierzKase(playerid, kwotaSprzedazy);
+					DajKase(GetPVarInt(playerid, "Oferujacy_ID"), (kwotaSprzedazy-(kwotaSprzedazy/5))); 
+					Sejf_Add(FRAC_DMV, (kwotaSprzedazy/4)); 
+					Sejf_Save(FRAC_DMV); 
+					format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", GetNick(playerid, true), playerid, PlayerInfo[playerid][pPbiskey], GetNick(GetPVarInt(playerid, "Oferujacy_ID"), true), GetPVarInt(playerid, "Oferujacy_ID"), kwotaSprzedazy);
+					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string);
+					SendAdminMessage(COLOR_P@, string); 
+					
+					//Wykonanie czynnoœci
+					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pPbiskey] = 0;
+					PlayerInfo[playerid][pPbiskey] = GetPVarInt(playerid, "Oferujacy_biz_ID"); 
+					MruMySQL_SaveAccount(playerid);
+					new dayB, monthB, yearB,
+					getdate(yearB, monthB, dayB);
+					format(string, sizeof(string),"CMD: [%d/%d/%d] %s [UID: %s] dal %s [UID: %d] biznes [ID: %d] za cene %d$",
+					dayB,
+					monthB,
+					yearB, 
+					GetNick(playerid, true), 
+					PlayerInfo[playerid][pUID], 
+					GetNick(GetPVarInt(playerid, "Oferujacy_ID")), 
+					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pUID], 
+					GetPVarInt(playerid, "Oferujacy_Cena"));
+					BiznesLog(string);
+					ResetBizOffer(playerid); 
+					ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie masz takiej kwoty"); 
+					return ResetBizOffer(playerid);
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Gracz, który oferowa³ Ci biznes wyszed³ z serwera"); 
+				ResetBizOffer(playerid);
+				return 1;
+			}
+		
+		}
+		else if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
 		{
 			new dawacz = GetPVarInt(playerid, "wizytowka");
 			new nazwa[32];
