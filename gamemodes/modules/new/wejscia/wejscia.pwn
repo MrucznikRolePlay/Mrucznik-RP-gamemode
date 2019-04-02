@@ -237,7 +237,7 @@ stock Sprawdz_w_UID(playerid, id, posWejscia)
 	}
 	else if(posWejscia == 2)
 	{
-		else if(Sprawdz_w_cord(playerid, id, 0) && wejscia[id][w_UID] == 6)
+		if(Sprawdz_w_cord(playerid, id, 0) && wejscia[id][w_UID] == 6)
 		{
 			StopAudioStreamForPlayer(playerid);	
 		}
