@@ -67,32 +67,44 @@ stock DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:
 	
 	return iloscwejsc++;
 }
-stock Sprawdz_w_cord(playerid, id, Float:X, Float:Y, Float:Z, VW1, INT1)
+stock Sprawdz_w_cord(playerid, id, stat)
 {
-	if(GetPlayerVirtualWorld(playerid) != wejscia[id][vw1]
-	&& GetPlayerInterior(playerid) != wejscia[id][int1]
-	&& !IsPlayerInRangeOfPoint(playerid, 3.0, X,Y,Z))
+	if(stat == 1)//wchodzenie
 	{
-		return 1;
+		if(GetPlayerVirtualWorld(playerid) != wejscia[id][w_vw1]
+		&& GetPlayerInterior(playerid) != wejscia[id][w_int1]
+		&& !IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x1],wejscia[id][w_y1],wejscia[id][w_z1]))
+		{
+			return 1;
+		}
+	}
+	if(stat == 0)//wychodzenie
+	{
+		if(GetPlayerVirtualWorld(playerid) != wejscia[id][w_vw2]
+		&& GetPlayerInterior(playerid) != wejscia[id][w_int2]
+		&& !IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x2],wejscia[id][w_y2],wejscia[id][w_z2]))
+		{
+			return 1;
+		}
 	}
 	return 0;
 }
 stock Sprawdz_w_UID(playerid, id)
 {
 	//WEJŒCIA NA UID:
-	if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 12)//Do to poprawy
+	if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 12)//Do to poprawy
 	{
 		if(!DoorInfo[FRAC_LCN][d_State]) return SendClientMessage(playerid, COLOR_GRAD1, "Te drzwi s¹ zamkniête.");
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 11)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 11)
 	{
 		GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 10)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 10)
 	{
 		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 9)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 9)
 	{
 		if(GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -104,7 +116,7 @@ stock Sprawdz_w_UID(playerid, id)
 			GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 8)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 8)
 	{
 		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 || GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -112,7 +124,7 @@ stock Sprawdz_w_UID(playerid, id)
 			return 1;
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 7)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 7)
 	{
 		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 || GetPlayerOrg(playerid) != FAMILY_VINYL || GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -120,31 +132,31 @@ stock Sprawdz_w_UID(playerid, id)
 			return 1;
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 6)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 6)
 	{
 		new muzik[128];
 		GetSVarString("muzyka_bonehead", muzik, 128);
 		PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x2], wejscia[id][w_y2], wejscia[id][w_z2], wejscia[id][vw2], wejscia[id][int2]) && wejscia[id][w_UID] == 6)
+	else if(Sprawdz_w_cord(playerid, id, 0)) && wejscia[id][w_UID] == 6)
 	{
 		StopAudioStreamForPlayer(playerid);	
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 4)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 4)
 	{
 		sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 		sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 5) 
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 5) 
 	{
 		sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 		sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");	
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 3)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 3)
 	{
 		if(doorFBIStatus == 0 || GetPlayerFraction(playerid) != FRAC_FBI)
 		{
@@ -161,13 +173,13 @@ stock Sprawdz_w_UID(playerid, id)
 			GameTextForPlayer(playerid, "~w~Witamy w~y~ Biurowcu ~b~FBI~n~~r~by UbunteQ & Iwan", 5000, 1);
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 2)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 2)
 	{
 		SendClientMessage(playerid, -1, "Powodzenia podczas egzaminu praktycznego!"); 
 		GameTextForPlayer(playerid, "~n~~r~Powodzenia", 5000, 1); 	
 		return 1;
 	}	
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x2], wejscia[id][w_y2], wejscia[id][w_z2], wejscia[id][vw2], wejscia[id][int2]) && wejscia[id][w_UID] == 2)
+	else if(Sprawdz_w_cord(playerid, id, 0)) && wejscia[id][w_UID] == 2)
 	{
 		if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
 		{
@@ -204,7 +216,7 @@ stock Sprawdz_w_UID(playerid, id)
 			return 1;
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 1)
+	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 1)
 	{
 		if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
 		{
@@ -256,11 +268,6 @@ stock Sprawdz_w_UID(playerid, id)
 			return 1;
 		}	
 	}
-	if(!Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]))
-	{
-		sendErrorMessage(playerid, "Tu nie ma ¿adnych drzwi"); 
-		return 1;
-	}
 	return 0;
 }
 stock SprawdzWejscia(playerid)
@@ -278,7 +285,7 @@ stock SprawdzWejscia(playerid)
 			Wchodzenie(playerid);
 			return 1
 		}
-		if(GetPlayerInterior(playerid) == wejscia[i][w_int2] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw2] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]))
+		if(Sprawdz_w_UID(playerid, i))
 		{
 			SetPlayerPosEx(playerid,  wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]);
 			SetPlayerInterior(playerid, wejscia[i][w_int1]);
