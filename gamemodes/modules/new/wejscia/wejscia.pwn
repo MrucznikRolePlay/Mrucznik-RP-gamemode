@@ -286,8 +286,8 @@ stock SprawdzWejscia(playerid)
 {
 	for(new i; i<iloscwejsc; i++)
 	{
-		//if(GetPlayerInterior(playerid) == wejscia[i][w_int1] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw1] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]))
-		if(Sprawdz_w_UID(playerid, i, 1))
+		//if(Sprawdz_w_UID(playerid, i, 1))
+		if(Sprawdz_w_cord(playerid, i, 1); 
 		{
 			SetPlayerPosEx(playerid,  wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]);
 			SetPlayerInterior(playerid, wejscia[i][w_int2]);
@@ -296,7 +296,8 @@ stock SprawdzWejscia(playerid)
 			SetInteriorTimeAndWeather(playerid);
 			Wchodzenie(playerid);
 		}
-		else if(Sprawdz_w_UID(playerid, i, 2))
+	//	else if(Sprawdz_w_UID(playerid, i, 2))
+		if(Sprawdz_w_cord(playerid, i, 0); 
 		{
 			SetPlayerPosEx(playerid,  wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]);
 			SetPlayerInterior(playerid, wejscia[i][w_int1]);
@@ -306,6 +307,7 @@ stock SprawdzWejscia(playerid)
 			Wchodzenie(playerid);
 		}
 	}
+	/*
 	if(!IsPlayerInAnyVehicle(playerid))
 	{
 		for(new iduo; iduo<valueWjedz; iduo++)
@@ -338,7 +340,7 @@ stock SprawdzWejscia(playerid)
 			}
 		
 		}
-	}
+	}*/
 	return 0;
 }
 
