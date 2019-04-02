@@ -11212,7 +11212,7 @@ CMD:sprzedajbiznes(playerid, params[])
 				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejZ]))
 				{
 				
-					if(valueCost >= 30000000)
+					if(valueCost <= 30000000)
 					{
 						if(GetPlayerMoney(giveplayerid) >= valueCost)
 						{
@@ -11231,7 +11231,7 @@ CMD:sprzedajbiznes(playerid, params[])
 								
 								//do giveplayerid
 								format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), PlayerInfo[playerid][pPbiskey], valueCost); 
-								sendTipMessage(playerid, string); 
+								sendTipMessage(giveplayerid, string); 
 								SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
 								SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 
 								SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]); 
@@ -25863,7 +25863,7 @@ CMD:akceptuj(playerid, params[])
 			/*SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
 			SetPVarInt(giveplayerid, "Oferujacy_Cena", value); 
 			SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]);*/
-			if(GetPVarInt(playerid, "Oferujacy_ID") == 0)
+			if(GetPVarInt(playerid, "Oferujacy_ID") == INVALID_PLAYER_ID)
 			{
 				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
 				return 1;

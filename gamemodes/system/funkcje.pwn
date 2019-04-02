@@ -5091,7 +5091,7 @@ ShowStats(playerid,targetid)
 		if(PlayerInfo[targetid][pPbiskey] >= 0 && PlayerInfo[targetid][pPbiskey] <= MAX_BIZNES)
 		{
 			new bizid = PlayerInfo[targetid][pPbiskey];
-			format(coordsstring, sizeof(coordsstring), "Biznes:[%s] MaxDochódBiz[%d]", BizData[bizid][eBizName], BizData[bizid][eBizMoney]);
+			format(coordsstring, sizeof(coordsstring), "Biznes:[%s] MaxDochódBiz[%d] BizID [%d]", BizData[bizid][eBizName], BizData[bizid][eBizMoney], bizid);
 			SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
 		}
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
@@ -12688,7 +12688,7 @@ stock SprawdzMuzyke(playerid)
 }
 stock ResetBizOffer(playerid)
 {
-	SetPVarInt(playerid, "Oferujacy_ID", 0);
+	SetPVarInt(playerid, "Oferujacy_ID", -1);
 	SetPVarInt(playerid, "Oferujacy_Cena", 0); 
 	SetPVarInt(playerid, "Oferujacy_biz_ID",0);
 	SetPVarInt(playerid, "wpisal_sprzedaj_biz", 0);
