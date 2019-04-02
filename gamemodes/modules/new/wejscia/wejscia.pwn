@@ -96,15 +96,15 @@ stock Sprawdz_w_UID(playerid, id)
 	{
 		if(!DoorInfo[FRAC_LCN][d_State]) return SendClientMessage(playerid, COLOR_GRAD1, "Te drzwi s¹ zamkniête.");
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 11)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 11)
 	{
 		GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 10)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 10)
 	{
 		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 9)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 9)
 	{
 		if(GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -116,7 +116,7 @@ stock Sprawdz_w_UID(playerid, id)
 			GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 8)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 8)
 	{
 		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 || GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -124,7 +124,7 @@ stock Sprawdz_w_UID(playerid, id)
 			return 1;
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 7)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 7)
 	{
 		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 || GetPlayerOrg(playerid) != FAMILY_VINYL || GetPlayerFraction(playerid) != FRAC_SN)
 		{
@@ -132,31 +132,31 @@ stock Sprawdz_w_UID(playerid, id)
 			return 1;
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 6)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 6)
 	{
 		new muzik[128];
 		GetSVarString("muzyka_bonehead", muzik, 128);
 		PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
 	}
-	else if(Sprawdz_w_cord(playerid, id, 0)) && wejscia[id][w_UID] == 6)
+	else if(Sprawdz_w_cord(playerid, id, 0) && wejscia[id][w_UID] == 6)
 	{
 		StopAudioStreamForPlayer(playerid);	
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 4)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 4)
 	{
 		sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 		sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 5) 
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 5) 
 	{
 		sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 		sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");	
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 3)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 3)
 	{
 		if(doorFBIStatus == 0 || GetPlayerFraction(playerid) != FRAC_FBI)
 		{
@@ -173,13 +173,13 @@ stock Sprawdz_w_UID(playerid, id)
 			GameTextForPlayer(playerid, "~w~Witamy w~y~ Biurowcu ~b~FBI~n~~r~by UbunteQ & Iwan", 5000, 1);
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 2)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 2)
 	{
 		SendClientMessage(playerid, -1, "Powodzenia podczas egzaminu praktycznego!"); 
 		GameTextForPlayer(playerid, "~n~~r~Powodzenia", 5000, 1); 	
 		return 1;
 	}	
-	else if(Sprawdz_w_cord(playerid, id, 0)) && wejscia[id][w_UID] == 2)
+	else if(Sprawdz_w_cord(playerid, id, 0) && wejscia[id][w_UID] == 2)
 	{
 		if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
 		{
@@ -216,7 +216,7 @@ stock Sprawdz_w_UID(playerid, id)
 			return 1;
 		}
 	}
-	else if(Sprawdz_w_cord(playerid, id, 1)) && wejscia[id][w_UID] == 1)
+	else if(Sprawdz_w_cord(playerid, id, 1) && wejscia[id][w_UID] == 1)
 	{
 		if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
 		{
