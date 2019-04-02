@@ -11212,7 +11212,7 @@ CMD:sprzedajbiznes(playerid, params[])
 				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejZ]))
 				{
 				
-					if(value >= 30000000 && PlayerInfo[playerid][pAdmin] != 5000)
+					if(valueCost >= 30000000)
 					{
 						if(GetPlayerMoney(giveplayerid) >= valueCost)
 						{
@@ -25873,7 +25873,7 @@ CMD:akceptuj(playerid, params[])
 				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
 				return 1;
 			}
-			if(IsPlayerConnected(GetPVarInt(playerid, "Oferujacy_ID"))
+			if(IsPlayerConnected(GetPVarInt(playerid, "Oferujacy_ID")))
 			{
 				if(GetPlayerMoney(playerid) >= GetPVarInt(playerid, "Oferujacy_Cena"))
 				{
