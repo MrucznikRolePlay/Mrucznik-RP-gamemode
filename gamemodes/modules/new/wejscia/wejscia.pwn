@@ -78,7 +78,7 @@ stock Sprawdz_w_cord(playerid, id, stat)
 			return 1;
 		}
 	}
-	if(stat == 0)//wychodzenie
+	else if(stat == 0)//wychodzenie
 	{
 		if(GetPlayerVirtualWorld(playerid) != wejscia[id][w_vw2]
 		&& GetPlayerInterior(playerid) != wejscia[id][w_int2]
@@ -177,7 +177,6 @@ stock Sprawdz_w_UID(playerid, id)
 	{
 		SendClientMessage(playerid, -1, "Powodzenia podczas egzaminu praktycznego!"); 
 		GameTextForPlayer(playerid, "~n~~r~Powodzenia", 5000, 1); 	
-		return 1;
 	}	
 	else if(Sprawdz_w_cord(playerid, id, 0) && wejscia[id][w_UID] == 2)
 	{
