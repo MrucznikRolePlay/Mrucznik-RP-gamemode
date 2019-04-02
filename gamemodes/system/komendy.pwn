@@ -11190,9 +11190,9 @@ CMD:sprzedajbiznes(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{
-		new giveplayerid, value;
+		new giveplayerid, valueCost;
 		new string[256];
-		if(sscanf(params, "k<fix>d", giveplayerid, value))
+		if(sscanf(params, "k<fix>d", giveplayerid, valueCost))
 		{
 			return sendTipMessage(playerid, "U¿yj /sprzedajbiznes [ID_GRACZA] [Cena]"); 
 		}
@@ -11212,9 +11212,9 @@ CMD:sprzedajbiznes(playerid, params[])
 				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejZ]))
 				{
 				
-					if(value >= 30_000_000 && PlayerInfo[playerid][pAdmin] != 5000)
+					if(value >= 30000000 && PlayerInfo[playerid][pAdmin] != 5000)
 					{
-						if(GetPlayerMoney(giveplayerid) >= value)
+						if(GetPlayerMoney(giveplayerid) >= valueCost)
 						{
 							if(GetPVarInt(playerid, "wpisal_sprzedaj_biz") == 0)
 							{
@@ -11224,16 +11224,16 @@ CMD:sprzedajbiznes(playerid, params[])
 							}
 							else
 							{
-								format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d", GetNick(giveplayerid, true), PlayerInfo[playerid][pPbiskey], value);
+								format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d", GetNick(giveplayerid, true), PlayerInfo[playerid][pPbiskey], valueCost);
 								sendTipMessage(playerid, string);
 								sendTipMessage(playerid, "Oczekuj na akceptacje"); 
 								
 								
 								//do giveplayerid
-								format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), PlayerInfo[playerid][pPbiskey], value); 
+								format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), PlayerInfo[playerid][pPbiskey], valueCost); 
 								sendTipMessage(playerid, string); 
 								SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
-								SetPVarInt(giveplayerid, "Oferujacy_Cena", value); 
+								SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 
 								SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]); 
 							}
 						}
@@ -25870,31 +25870,27 @@ CMD:akceptuj(playerid, params[])
 			}
 			if(PlayerInfo[playerid][pPbiskey] != 0)
 			{
-				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!"); 
+				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
+				return 1;
 			}
 			if(IsPlayerConnected(GetPVarInt(playerid, "Oferujacy_ID"))
 			{
 				if(GetPlayerMoney(playerid) >= GetPVarInt(playerid, "Oferujacy_Cena"))
 				{
-					new kwotaSprzedazy = GetPVarInt(playerid, GetPVarInt(playerid, "Oferujacy_Cena"));
+					new kwotaSprzedazy =  GetPVarInt(playerid, "Oferujacy_Cena");
 					ZabierzKase(playerid, kwotaSprzedazy);
 					DajKase(GetPVarInt(playerid, "Oferujacy_ID"), (kwotaSprzedazy-(kwotaSprzedazy/5))); 
-					Sejf_Add(FRAC_DMV, (kwotaSprzedazy/4)); 
-					Sejf_Save(FRAC_DMV); 
+					Sejf_Add(FRAC_GOV, (kwotaSprzedazy/4)); 
+					Sejf_Save(FRAC_GOV); 
 					format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", GetNick(playerid, true), playerid, PlayerInfo[playerid][pPbiskey], GetNick(GetPVarInt(playerid, "Oferujacy_ID"), true), GetPVarInt(playerid, "Oferujacy_ID"), kwotaSprzedazy);
-					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string);
+					SendLeaderRadioMessage(FRAC_GOV, COLOR_LIGHTGREEN, string);
 					SendAdminMessage(COLOR_P@, string); 
 					
 					//Wykonanie czynnoœci
 					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pPbiskey] = 0;
 					PlayerInfo[playerid][pPbiskey] = GetPVarInt(playerid, "Oferujacy_biz_ID"); 
 					MruMySQL_SaveAccount(playerid);
-					new dayB, monthB, yearB,
-					getdate(yearB, monthB, dayB);
-					format(string, sizeof(string),"CMD: [%d/%d/%d] %s [UID: %s] dal %s [UID: %d] biznes [ID: %d] za cene %d$",
-					dayB,
-					monthB,
-					yearB, 
+					format(string, sizeof(string),"CMD: %s [UID: %s] dal %s [UID: %d] biznes [ID: %d] za cene %d$",
 					GetNick(playerid, true), 
 					PlayerInfo[playerid][pUID], 
 					GetNick(GetPVarInt(playerid, "Oferujacy_ID")), 
