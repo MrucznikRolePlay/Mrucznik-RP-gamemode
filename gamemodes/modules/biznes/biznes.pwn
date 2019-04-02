@@ -337,7 +337,7 @@ CMD:sprzedajbiznes(playerid, params[])
 				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejZ]))
 				{
 				
-					if(valueCost <= 30000000)
+					if(valueCost <= BIZ_SELL_MONEY_LIMIT)
 					{
 						if(GetPlayerMoney(giveplayerid) >= valueCost)
 						{

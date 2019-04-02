@@ -2173,7 +2173,6 @@ stock right(source[], len)
 	strmid(retval, source, srclen - len, srclen, MAX_STRING2);
 	return retval;
 }
-
 IsAnInstructor(playerid)
 {
 	if(IsPlayerConnected(playerid))

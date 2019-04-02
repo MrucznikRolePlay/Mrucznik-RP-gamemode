@@ -101,7 +101,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/admin_duty_system/adminduty.hwn"
 #include "modules/admin/admin.hwn"
 #include "modules/Sila/sila.hwn"
-#include "modules/biznes/biznes/hwn"
+#include "modules/biznes/biznes.hwn"
 //.pwn
 #include "modules/chaty/chaty.pwn"
 #include "modules/chaty/chaty_komunikaty.pwn"

@@ -35,4 +35,6 @@
 #define BIZ_LOCATION_BS 7
 #define BIZ_LOCATION_UNKNOW 8
 
+#define BIZ_SELL_MONEY_LIMIT 30000000
+
 //end

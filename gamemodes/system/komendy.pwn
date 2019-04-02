@@ -30,7 +30,7 @@ SSCANF:fix(string[])
 /*CMD:marcepan(playerid, params[])
 {
 	//komenda tymczasowo wy³¹czona
-    if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
     {
         new id;
         if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(MARCEPAN) - Podaj Nick lub ID gracza.");
@@ -7462,7 +7462,7 @@ CMD:unfrakcja(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER) || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -18361,7 +18361,7 @@ CMD:a(playerid, params[])
 			}
 			printf("PolAdmin %s: %s", sendername, params);
 		}
-        if(PlayerInfo[playerid][pNewAP] == 5 && PlayerInfo[playerid][pAdmin] == 0)
+        if(IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0)
         {
             format(string, sizeof(string), "* Skrypter %s: %s", sendername, params);
             if (PlayerInfo[playerid][pNewAP] >= 1)
@@ -18384,7 +18384,7 @@ CMD:newbie(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if(newbie == 1 && PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] != 5)
+        if(newbie == 1 && PlayerInfo[playerid][pAdmin] == 0 && !IsAScripter(playerid))
         {
             sendTipMessageEx(playerid, COLOR_GRAD2, "Chat newbie jest wy³¹czony!");
 			return 1;
@@ -18443,7 +18443,7 @@ CMD:newbie(playerid, params[])
 		    {
 				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], sendername, params);
 			}
-            else if(PlayerInfo[playerid][pNewAP] == 5)
+            else if(IsAScripter(playerid))
             {
                 format(nobchat, sizeof(nobchat), "(({DAFC10} Skrypter [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], sendername, params);
             }
@@ -18528,7 +18528,7 @@ CMD:newbie(playerid, params[])
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, sendername, params);
 			}
 			OOCNewbie(nobchat);
-			if(PlayerInfo[playerid][pNewAP] != 5 && PlayerInfo[playerid][pAdmin] == 0)
+			if(!IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0)
 			{
 				AntySpam[playerid] = 1;
 				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
@@ -19160,7 +19160,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PÓ£ADMIN *** /zdejmijbpk");
 	}
-    if (PlayerInfo[playerid][pNewAP] == 5)
+    if (IsAScripter(playerid))
     {
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /respawn /(a) dmin chat /setint /getint /setvw /getvw");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /goto /gotopos /gethere /respawnplayer");
@@ -19241,7 +19241,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zrobdom /lzrobdom /usundom /blokujdom /resetsejfhasla /zapiszdomy /zapiszkonta");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /rodzinalider /scena /houseowner /domint NEW: /dajskryptera /bwtime");
 	}
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** Jesteœ koxem przez X ***");
         SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zonedelay /gangzone /removezoneprotect /removeganglimit /clearzone /setzonecontrol");
@@ -30145,7 +30145,7 @@ CMD:togname(playerid)
 
 
 CMD:bonehead(playerid, params[]) {
-    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 25 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 25 || IsAScripter(playerid)) {
         new ust[128];
         if(sscanf(params, "s[128]", ust)) return sendTipMessage(playerid, "U¿yj /bonehead [URL do linku muzyki]");
         //dini_IntSet("BWSettings.ini", "Time", ust);

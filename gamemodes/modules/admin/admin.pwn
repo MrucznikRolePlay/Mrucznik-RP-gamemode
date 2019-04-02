@@ -196,6 +196,10 @@
 	Timery:
 		> Brak
 		
+	Funkcje
+		>IsAHeadAdmin
+		>IsAScripter
+		
 */
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
@@ -217,7 +221,22 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-
+IsAHeadAdmin(playerid)
+{
+	if(PlayerInfo[playerid][pAdmin] != 5000
+	{
+		return 1;
+	}
+	return 0;
+}
+IsAScripter(playerid)
+{
+	if(PlayerInfo[playerid][pNewAP] != 5)
+	{
+		return 1;
+	}
+	return 0;
+}
 
 
 
@@ -264,7 +283,7 @@ CMD:nonewbie(playerid)
     if(IsPlayerConnected(playerid))
     {
         new string[128];
-		if (PlayerInfo[playerid][pAdmin] >= 5 && (!newbie) || PlayerInfo[playerid][pNewAP] == 5 && (!newbie))
+		if (PlayerInfo[playerid][pAdmin] >= 5 && (!newbie) || IsAScripter(playerid) && (!newbie))
 		{
 			newbie = 1;
 			BroadCast(COLOR_GRAD2, "Czat newbie zosta³ zablokowany przez Administratora!");
@@ -272,7 +291,7 @@ CMD:nonewbie(playerid)
             SendCommandLogMessage(string);
             CMDLog(string);
 		}
-		else if (PlayerInfo[playerid][pAdmin] >= 5 && (newbie) || PlayerInfo[playerid][pNewAP] == 5 && (newbie))
+		else if (PlayerInfo[playerid][pAdmin] >= 5 && (newbie) || IsAScripter(playerid) && (newbie))
 		{
 			newbie = 0;
 			SendClientMessageToAll(COLOR_P@,"|_________________________Rada dnia: czat /n(ewbie)_________________________|");
@@ -369,7 +388,7 @@ CMD:up(playerid)
 }
 CMD:usunpozar(playerid)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
 	{
 	    DeleteAllFire();
 	    sendTipMessage(playerid, "Usun¹³eœ aktywne po¿ary!");
@@ -388,7 +407,7 @@ CMD:usunpozar(playerid)
 }
 CMD:losowypozar(playerid)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
 	{
 	    DeleteAllFire();
 	    AktywujPozar();
@@ -669,7 +688,7 @@ CMD:blok(playerid, params[])
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -789,7 +808,7 @@ CMD:pblok(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1  || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1  || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -838,7 +857,7 @@ CMD:pban(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+        if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -936,7 +955,7 @@ CMD:paj(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+        if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -1157,7 +1176,7 @@ CMD:cca(playerid)
 	new string[64];
 	new sendername[MAX_PLAYER_NAME];
 
-	if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+	if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 	{
 		for(new i = 0; i<200; i++)
 			SendClientMessageToAll(COLOR_GREY," ");
@@ -1297,7 +1316,7 @@ CMD:antybh(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
 		{
 	 		if(bh == 0 || bh == 1)
  			{
@@ -1340,7 +1359,7 @@ CMD:undemorgan(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 35 || PlayerInfo[playerid][pNewAP] == 5)
+        if(PlayerInfo[playerid][pAdmin] < 35 || IsAScripter(playerid))
         {
             noAccessMessage(playerid);
             return 1;
@@ -1495,7 +1514,7 @@ CMD:zmienwiek(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -1535,7 +1554,7 @@ CMD:zmienprace(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setjob [playerid/CzêœæNicku] [id pracy]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -1574,7 +1593,7 @@ CMD:setslot(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /setslot [playerid/CzêœæNicku] [liczba slotów]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -1843,7 +1862,7 @@ CMD:rozwiedz(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -1982,7 +2001,7 @@ CMD:naprawskin(playerid, params[])
 }
 CMD:dnobiekt(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 	{
 	    new Float:oX;
 	    new Float:oY;
@@ -2324,7 +2343,7 @@ CMD:ksam(playerid, params[])
 }
 CMD:fdaj(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >=10 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >=10 || IsAScripter(playerid))
 	{
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
@@ -2343,7 +2362,7 @@ CMD:fdaj(playerid, params[])
 
 CMD:dajdowozu(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >=5 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >=5 || IsAScripter(playerid))
 	{
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
@@ -2366,7 +2385,7 @@ CMD:sprawdzinv(playerid, params[])
 {
 	new string[64];
 
-    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 	{
 	    new giveplayerid;
 		if( sscanf(params, "k<fix>", giveplayerid))
@@ -2453,7 +2472,7 @@ CMD:getposp(playerid, params[])
 {
 	new string[64];
 
-    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 	{
 	    new giveplayerid;
 		if( sscanf(params, "k<fix>", giveplayerid))
@@ -2471,7 +2490,7 @@ CMD:getposp(playerid, params[])
 }
 CMD:zniszczobiekty(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
     {
         DestroyAllDynamicObjects();
 	    SendClientMessage(playerid, COLOR_PANICRED, "Wszystkie obiekty zniszczone!");
@@ -2485,7 +2504,7 @@ CMD:zniszczobiekty(playerid)
 
 CMD:stworzobiekty(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
     {
         Stworz_Obiekty();
 	    SendClientMessage(playerid, COLOR_PANICRED, "Wszystkie obiekty stworzone!");
@@ -2538,7 +2557,7 @@ CMD:respawn(playerid)
 	
 	if(Count >= 20)
 	{
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || IsAScripter(playerid))
 		{
 			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 		
@@ -2695,7 +2714,7 @@ CMD:bp(playerid, params[])//blokada pisania
 		sendTipMessage(playerid, "U¿yj /bp [ID gracza] [czas (w gozinach)] [nazwa chatu]");
 		return 1;
 	}
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		if(IsPlayerConnected(giveplayerid))
 		{
@@ -2878,7 +2897,7 @@ CMD:setcarint(playerid, params[])
             sendTipMessage(playerid, "U¿yj /setcarint [carid]");
             return 1;
         }
-        if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid) || PlayerInfo[playerid][pNewAP] == 5)
+        if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid) || IsAScripter(playerid))
         {
             LinkVehicleToInterior(plo, GetPlayerInterior(playerid));
 
@@ -2904,7 +2923,7 @@ CMD:setcarvw(playerid, params[])
 		sendTipMessage(playerid, "U¿yj /setcarvw [carid] [VW]");
 		return 1;
 	}
-	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+	if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		SetVehicleVirtualWorld(valueCAR, valueVW);
 		sendTipMessageEx(playerid, COLOR_RED, "Ustawi³eœ nowy VW dla pojazdu"); 
@@ -3083,7 +3102,7 @@ CMD:panel(playerid, params[])
 }
 CMD:msgbox(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
     {
         new forplayer=-1, title[64], icon, time;
         if(sscanf(params, "ds[64]dd", forplayer, title, icon, time))
@@ -3113,7 +3132,7 @@ CMD:msgbox(playerid, params[])
 }
 CMD:gotoczit(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] > 1 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] > 1 || IsAScripter(playerid))
     {
         SetPlayerPos(playerid, czitX, czitY, czitZ);
         SetPlayerVirtualWorld(playerid, 0);
@@ -3153,7 +3172,7 @@ CMD:anulujzp(playerid, params[])
 }
 
 CMD:bwsettings(playerid, params[]) {
-    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid)) {
         new ust = GetSVarInt("BW_OnlyGangZones");
         SetSVarInt("BW_OnlyGangZones", !ust);
         dini_IntSet("Settings.ini", "OnlyGangZones", !ust);
@@ -3166,7 +3185,7 @@ CMD:bwsettings(playerid, params[]) {
     return 1;
 }
 CMD:bwtime(playerid, params[]) {
-    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid)) {
         new ust;
         if(sscanf(params, "d", ust)) return sendTipMessage(playerid, "U¿yj /bwtime [Czas BW w Sekundach]");
         dini_IntSet("Settings.ini", "Time", ust);
@@ -3181,7 +3200,7 @@ CMD:bwtime(playerid, params[]) {
 }
 CMD:setac(playerid, params[])
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1000 || PlayerInfo[playerid][pNewAP] == 5)
+	if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))
 	{
 		new string[128];
 		new ac_option;
@@ -3521,7 +3540,7 @@ CMD:deleteobject(playerid, p[])
 }
 CMD:rapidfly(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
     {
         new typ;
         sscanf(p, "D(0)", typ);
@@ -3597,7 +3616,7 @@ CMD:gotoadmin(playerid)
 
 CMD:gotomechy(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid)) {
 		
 		if (GetPlayerState(playerid) == 2)
 		{
@@ -3618,7 +3637,7 @@ CMD:gotomechy(playerid)
 
 CMD:gotobank(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) {
         
         if (GetPlayerState(playerid) == 2)
         {
@@ -3640,7 +3659,7 @@ CMD:gotobank(playerid)
 
 CMD:gotostacja(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) {
         
         if (GetPlayerState(playerid) == 2)
         {
@@ -3660,7 +3679,7 @@ CMD:gotostacja(playerid)
 }
 CMD:removeganglimit(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
         new id;
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /removeganglimit [ID frakcji]");
         ZoneGangLimit[id] = true;
@@ -3671,7 +3690,7 @@ CMD:removeganglimit(playerid, p[])
 
 CMD:removezoneprotect(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
         new id;
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /removezoneprotect [ID strefy]");
         ZoneProtect[id] = false;
@@ -3682,7 +3701,7 @@ CMD:removezoneprotect(playerid, p[])
 
 CMD:gangzone(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
         new id;
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /gangzone [0/1]");
         if(id < 0 || id > 1) return 1;
@@ -3698,7 +3717,7 @@ CMD:gangzone(playerid, p[])
 
 CMD:zonedelay(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
         new id;
         new str[64];
         if(sscanf(p, "d", id)) {
@@ -3719,7 +3738,7 @@ CMD:zonedelay(playerid, p[])
 
 CMD:clearzone(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
         new id;
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /clearzone [ID]");
         if(id < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
@@ -3740,7 +3759,7 @@ CMD:clearzone(playerid, p[])
 
 CMD:setzonecontrol(playerid, p[])
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid)) {
         new id, frac;
         if(sscanf(p, "dd", id, frac)) return sendTipMessage(playerid, "U¿yj /setzonecontrol [ZoneID] [Owner]");
         if(id < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
@@ -3900,7 +3919,7 @@ CMD:restart(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 			new string[128];
 			new playerNick[MAX_PLAYER_NAME];
@@ -3930,7 +3949,7 @@ CMD:wczytajskrypt(playerid, params[])
 			sendTipMessage(playerid, "/wczytajskrypt [nazwa fs]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 			format(string, sizeof(string), "loadfs %s", params);
 			SendRconCommand(string);
@@ -3994,7 +4013,7 @@ CMD:togadminmess(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			sendTipMessage(playerid, "Nie s³yszysz ju¿ nic! Nie widzisz ju¿ nic! Taki z ciebie admin"); 
 			DeathWarning[playerid] = 0;
@@ -4197,7 +4216,7 @@ CMD:wylogujall(playerid)
 }
 CMD:cnn(playerid, params[])
 {
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		if(isnull(params))
 		{
@@ -4329,7 +4348,7 @@ CMD:unjail(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -4398,7 +4417,7 @@ CMD:adminajail(playerid, params[])
 		{
 			if (PlayerInfo[playa][pJailed] == 0)
 			{
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pNewAP] == 5)
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || IsAScripter(playerid))
 				{
 					if (PlayerInfo[playerid][pZG] >= 6 && PlayerInfo[playerid][pZG] < 8 && money > 7)
 					{
@@ -4591,7 +4610,7 @@ CMD:tod(playerid, params[])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
             SetWorldTime(hour);
             ServerTime = hour;
@@ -4871,7 +4890,7 @@ CMD:setint(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(gracz,intid);
 			PlayerInfo[gracz][pInt] = intid;
@@ -4911,7 +4930,7 @@ CMD:setvw(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerVirtualWorld(gracz, intid);
 			format(string, sizeof(string), "Ustawi³eœ %s virtualworld nr %d.", GetNick(gracz), intid);
@@ -4946,7 +4965,7 @@ CMD:getint(playerid, params[])
 		return 1;
 	}
 
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		format(string, sizeof(string), "Interior gracza %s to %d.", GetNick(gracz), GetPlayerInterior(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -4973,7 +4992,7 @@ CMD:getvw(playerid, params[])
 		return 1;
 	}
 
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		format(string, sizeof(string), "VirutalWorld gracza %s to %d.", GetNick(gracz), GetPlayerVirtualWorld(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -5353,7 +5372,7 @@ CMD:makeleader(playerid, params[])
 		}
 
 		if(level > 17 || level < 0) { sendTipMessageEx(playerid, COLOR_GREY, "Numer lidera od 1 do 17!"); return 1; }
-		if(Uprawnienia(playerid, ACCESS_MAKELEADER) || PlayerInfo[playerid][pNewAP] == 5)
+		if(Uprawnienia(playerid, ACCESS_MAKELEADER) || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -5518,7 +5537,7 @@ CMD:makemember(playerid, params[])
 		}
 
 		if(level > 17 || level < 0) { SendClientMessage(playerid, COLOR_GREY, "Od 0 do 17 !"); return 1; }
-		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER || PlayerInfo[playerid][pNewAP] == 5))
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER || IsAScripter(playerid)))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -5628,7 +5647,7 @@ CMD:gotopos(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
 		    new Float:x, Float:y, Float:z;
 			if( sscanf(params, "fff", x,y,z))
@@ -5662,7 +5681,7 @@ CMD:gotols(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -5691,7 +5710,7 @@ CMD:gotoszpital(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -5720,7 +5739,7 @@ CMD:gotolv(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -5749,7 +5768,7 @@ CMD:gotosf(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -5778,7 +5797,7 @@ CMD:gotosalon(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
             	SetPlayerInterior(playerid, 0);
     			SetPlayerVirtualWorld(playerid, 0);
@@ -5810,7 +5829,7 @@ CMD:entercar(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
 		{
 			PutPlayerInVehicleEx(playerid, testcar, 1);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
@@ -5833,7 +5852,7 @@ CMD:gotocar(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAKO(playerid) || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAKO(playerid) || IsAScripter(playerid))
 		{
 			new Float:cwx2,Float:cwy2,Float:cwz2;
 			GetVehiclePos(testcar, cwx2, cwy2, cwz2);
@@ -5861,7 +5880,7 @@ CMD:mark(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			GetPlayerPos(playerid, TeleportDest[playerid][0],TeleportDest[playerid][1],TeleportDest[playerid][2]);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Miejsce teleportu zmienione");
@@ -5877,7 +5896,7 @@ CMD:gotomark(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -5903,7 +5922,7 @@ CMD:gotoin(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			if (GetPlayerState(playerid) == 2)
 			{
@@ -5929,7 +5948,7 @@ CMD:gotostad(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerPosEx(playerid, -1435.75, -652.664, 1054.94);
 			SetPlayerInterior(playerid,4);
@@ -5947,7 +5966,7 @@ CMD:gotojet(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerPosEx(playerid, 1.71875, 30.4062, 1200.34);
 			SetPlayerInterior(playerid,1);
@@ -6076,7 +6095,7 @@ CMD:goto(playerid, params[])
 		    if(plo != INVALID_PLAYER_ID)
 		    {
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid) || PlayerInfo[playerid][pNewAP] == 5)
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid) || IsAScripter(playerid))
 				{
 					//SZUKANIE ADMINOW I P@ na serwerze
 
@@ -6194,7 +6213,7 @@ CMD:gethere(playerid, params[])
 		{
 		    if(plo != INVALID_PLAYER_ID)
 		    {
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5)
+				if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 				{
 					GetPlayerPos(playerid, plocx, plocy, plocz);
 					if(PlayerInfo[playerid][pInt] > 0)
@@ -6257,7 +6276,7 @@ CMD:getcar(playerid, params[])
 		new Float:plocx,Float:plocy,Float:plocz;
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid) || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAKO(playerid) || IsAScripter(playerid))
 		{
 			GetPlayerPos(playerid, plocx, plocy, plocz);
 			SetVehiclePos(plo,plocx,plocy+4, plocz);
@@ -6521,7 +6540,7 @@ CMD:zmienhp(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pAdmin] == 7 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -6565,7 +6584,7 @@ CMD:setarmor(playerid, params[])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -6595,7 +6614,7 @@ CMD:fixveh(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 10 ||  PlayerInfo[playerid][pAdmin] == 7 || PlayerInfo[playerid][pNewAP] == 5)
+        if(PlayerInfo[playerid][pAdmin] < 10 ||  PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
@@ -6808,7 +6827,7 @@ CMD:slap(playerid, params[])
 		new Float:slx, Float:sly, Float:slz;
 
 		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2
-            || PlayerInfo[playerid][pNewAP] == 5)
+            || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -6913,7 +6932,7 @@ CMD:setplocal(playerid, params[])
 			sendTipMessage(playerid, "Nie ma takiego gracza"); 
 			return 1;
 		}
-		if(PlayerInfo[playerid][pNewAP] != 5 || PlayerInfo[playerid][pAdmin] <= 200)
+		if(!IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] <= 200)
 		{
 			sendTipMessage(playerid, "Brak uprawnieñ"); 
 			return 1;
@@ -6936,7 +6955,7 @@ CMD:glosowanie(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /glosowanie [czas_trwania_w_minutach] [temat]");
 			return 1;
 		}
-		if(PlayerInfo[playerid][pAdmin] >= 200 || PlayerInfo[playerid][pNewAP] == 5)
+		if(PlayerInfo[playerid][pAdmin] >= 200 || IsAScripter(playerid))
 		{
 			if(strlen(result) > 120)
 			{
@@ -7344,7 +7363,7 @@ CMD:ban(playerid, params[])
 	            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				new str[128];
-	            if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] == 5)
+	            if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid))
 	            {
 					if(IsPlayerAdmin(giveplayerid) || Uprawnienia(giveplayerid, ACCESS_OWNER))
 					{
