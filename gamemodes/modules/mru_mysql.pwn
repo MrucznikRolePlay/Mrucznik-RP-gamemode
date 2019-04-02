@@ -229,7 +229,8 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     `TruckSkill`='%d', \
 	`pSHealth`='%f', \
 	`pHealth`='%f', \
-	`Int`='%d',", PlayerInfo[playerid][pDetSkill],
+	`Int`='%d',
+	`Vw`='%d'", PlayerInfo[playerid][pDetSkill],
 	PlayerInfo[playerid][pSexSkill],
 	PlayerInfo[playerid][pBoxSkill],
 	PlayerInfo[playerid][pLawSkill],
@@ -244,7 +245,8 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     PlayerInfo[playerid][pTruckSkill],
 	PlayerInfo[playerid][pSHealth],
 	PlayerInfo[playerid][pHealth],
-	PlayerInfo[playerid][pInt]);
+	PlayerInfo[playerid][pInt],
+	PlayerInfo[playerid][pVW]);
 
     format(query, sizeof(query), "%s \
     `Local`='%d', \

@@ -471,9 +471,13 @@ CMD:bizmoneydebug(playerid)
 		SendClientMessage(playerid, COLOR_WHITE, string);
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "|________________________|");
 		DajKase(playerid, BizData[bizid][eBizMoney]);*/
-	if(PlayerInfo[playerid][pAdmin] > 5000)
+	if(IsAHeadAdmin(playerid))
 	{
 		GiveRandomMoneyBiz(playerid);	
+	}
+	else
+	{
+		return NoAccessMessage(playerid); 
 	}
 	return 1;
 }

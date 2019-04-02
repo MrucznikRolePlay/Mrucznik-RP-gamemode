@@ -25663,9 +25663,11 @@ CMD:akceptuj(playerid, params[])
 					SendAdminMessage(COLOR_P@, string); 
 					
 					//Wykonanie czynnoœci
-					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pPbiskey] = 0;
+					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pPbiskey] = -1;
 					PlayerInfo[playerid][pPbiskey] = GetPVarInt(playerid, "Oferujacy_biz_ID"); 
 					MruMySQL_SaveAccount(playerid);
+					MruMySQL_SaveAccount(GetPVarInt(playerid, "Oferujacy_ID")); 
+					
 					format(string, sizeof(string),"CMD: %s [UID: %s] dal %s [UID: %d] biznes [ID: %d] za cene %d$",
 					GetNick(playerid, true), 
 					PlayerInfo[playerid][pUID], 

@@ -86,7 +86,8 @@ stock SprawdzWejscia(playerid)
 		{
 			GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
 		}
-		else if(wejscia[i][w_UID] == 9)
+		else if(wejscia[i][w_UID] == 9
+		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
 		{
 			if(GetPlayerFraction(playerid) != FRAC_SN)
 			{
