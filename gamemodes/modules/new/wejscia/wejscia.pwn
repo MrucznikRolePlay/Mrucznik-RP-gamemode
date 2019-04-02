@@ -67,12 +67,208 @@ stock DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:
 	
 	return iloscwejsc++;
 }
+stock Sprawdz_w_cord(playerid, id, Float:X, Float:Y, Float:Z, VW1, INT1)
+{
+	if(GetPlayerVirtualWorld(playerid) != wejscia[id][vw1]
+	&& GetPlayerInterior(playerid) != wejscia[id][int1]
+	&& !IsPlayerInRangeOfPoint(playerid, 3.0, X,Y,Z))
+	{
+		return 1;
+	}
+	return 0;
+}
+stock Sprawdz_w_UID(playerid, id)
+{
+	//WEJŒCIA NA UID:
+	if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 12)//Do to poprawy
+	{
+		if(!DoorInfo[FRAC_LCN][d_State]) return SendClientMessage(playerid, COLOR_GRAD1, "Te drzwi s¹ zamkniête.");
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 11)
+	{
+		GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 10)
+	{
+		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 9)
+	{
+		if(GetPlayerFraction(playerid) != FRAC_SN)
+		{
+			sendTipMessage(playerid, "Ups! Wygl¹da na to, ¿e drzwi s¹ zamkniête"); 
+			return 1;
+		}
+		else
+		{
+			GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
+		}
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 8)
+	{
+		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 || GetPlayerFraction(playerid) != FRAC_SN)
+		{
+			sendErrorMessage(playerid, "Brak dostêpu do strefy V.I.P"); 
+			return 1;
+		}
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 7)
+	{
+		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 || GetPlayerOrg(playerid) != FAMILY_VINYL || GetPlayerFraction(playerid) != FRAC_SN)
+		{
+			sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
+			return 1;
+		}
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 6)
+	{
+		new muzik[128];
+		GetSVarString("muzyka_bonehead", muzik, 128);
+		PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x2], wejscia[id][w_y2], wejscia[id][w_z2], wejscia[id][vw2], wejscia[id][int2]) && wejscia[id][w_UID] == 6)
+	{
+		StopAudioStreamForPlayer(playerid);	
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 4)
+	{
+		sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
+		sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
+		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
+		sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 5) 
+	{
+		sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
+		sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
+		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
+		sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");	
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 3)
+	{
+		if(doorFBIStatus == 0 || GetPlayerFraction(playerid) != FRAC_FBI)
+		{
+			SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
+			return 1;
+		}
+		else
+		{
+			SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Biurowiec FBI w Los Santos Wita! <<<<");
+			SendClientMessage(playerid, COLOR_WHITE, "-> Recepcja znajduje siê po twojej lewej stronie");
+			SendClientMessage(playerid, COLOR_WHITE, "-> Wejœcie do wiêzienia stanowego na wprost"); 
+			SendClientMessage(playerid, COLOR_WHITE, "-> Winda znajduje siê za recepcj¹");
+			SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Federal Bureau of Investigation <<<<");
+			GameTextForPlayer(playerid, "~w~Witamy w~y~ Biurowcu ~b~FBI~n~~r~by UbunteQ & Iwan", 5000, 1);
+		}
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 2)
+	{
+		SendClientMessage(playerid, -1, "Powodzenia podczas egzaminu praktycznego!"); 
+		GameTextForPlayer(playerid, "~n~~r~Powodzenia", 5000, 1); 	
+		return 1;
+	}	
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x2], wejscia[id][w_y2], wejscia[id][w_z2], wejscia[id][vw2], wejscia[id][int2]) && wejscia[id][w_UID] == 2)
+	{
+		if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
+		{
+			if(wywalzdmv[playerid] == 0)
+			{
+				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Urz¹d Miasta w Los Santos Wita! <<<<");
+				SendClientMessage(playerid, COLOR_WHITE, "-> Cennik znajduje siê zaraz za rogiem, po prawej stronie.");
+				SendClientMessage(playerid, COLOR_WHITE, "-> Znajdujesz siê na najwy¿szym poziomie, winda znajduje siê w holu g³ównym");
+				SendClientMessage(playerid, COLOR_WHITE, "-> Okienka dla patentów znajduj¹ siê po lewej i prawej stronie w holu pierwszym");
+				SendClientMessage(playerid, COLOR_WHITE, "-> [Obecny interior urzêdu powsta³ w listopadzie 2018 roku, za inicjatyw¹ Satius & Arkam & Simeone]");
+				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencje! <<<<");
+				GameTextForPlayer(playerid, "~n~~g~By Satius", 5000, 1);
+				
+				
+				if(PlayerInfo[playerid][pMember] != FRAC_LSPD // Nie jest PD
+				&& PlayerInfo[playerid][pMember] != FRAC_FBI // Nie jest FBI
+				&& PlayerInfo[playerid][pMember] != FRAC_BOR
+				&& PlayerInfo[playerid][pLider] == 0 // Nie jest liderem
+				&& GetPlayerOrg(playerid) == 0)//Nie jest cz³onkiem ORG
+				{
+					SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
+					SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
+					SendClientMessage(playerid, COLOR_WHITE, "Dopiero teraz dostrzegasz czerwon¹ tabliczkê informuj¹c¹ o zakazie");
+					SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
+					SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
+					SetPVarInt(playerid, "mozeUsunacBronie", 1);
+					ResetPlayerWeapons(playerid);
+				}
+			}
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Brak dostêpu do tego wejœcia"); 
+			return 1;
+		}
+	}
+	else if(Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]) && wejscia[id][w_UID] == 1)
+	{
+		if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
+		{
+			if(wywalzdmv[playerid] == 0)
+			{
+				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Urz¹d Miasta w Los Santos Wita! <<<<");
+				SendClientMessage(playerid, COLOR_WHITE, "-> Cennik znajduje siê zaraz za rogiem, po prawej stronie.");
+				SendClientMessage(playerid, COLOR_WHITE, "-> Znajdujesz siê na najwy¿szym poziomie, winda znajduje siê w holu g³ównym");
+				SendClientMessage(playerid, COLOR_WHITE, "-> Okienka dla patentów znajduj¹ siê po lewej i prawej stronie w holu pierwszym");
+				SendClientMessage(playerid, COLOR_WHITE, "-> [Obecny interior urzêdu powsta³ w listopadzie 2018 roku, za inicjatyw¹ Satius & Arkam & Simeone]");
+				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencje! <<<<");
+				GameTextForPlayer(playerid, "~n~~g~By Satius", 5000, 1);
+				
+				
+				if(PlayerInfo[playerid][pMember] != FRAC_LSPD // Nie jest PD
+				&& PlayerInfo[playerid][pMember] != FRAC_FBI // Nie jest FBI
+				&& PlayerInfo[playerid][pMember] != FRAC_BOR
+				&& PlayerInfo[playerid][pLider] == 0 // Nie jest liderem
+				&& GetPlayerOrg(playerid) == 0)//Nie jest cz³onkiem ORG
+				{
+					SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
+					SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
+					SendClientMessage(playerid, COLOR_WHITE, "Dopiero teraz dostrzegasz czerwon¹ tabliczkê informuj¹c¹ o zakazie");
+					SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
+					SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
+					SetPVarInt(playerid, "mozeUsunacBronie", 1);
+					ResetPlayerWeapons(playerid);
+				}
+			}
+			else
+			{
+				SendClientMessage(playerid, COLOR_RED, "Zosta³eœ wyrzucony z Urzêdu przez agentów USSS, spróbuj póŸniej.");
+				SendClientMessage(playerid, COLOR_WHITE, "[Czas wyrzucenia: 10 minut]");
+				return 1;
+			}
+		}
+		else
+		{
 
+			SendClientMessage(playerid,COLOR_RED,"|_________________Godziny pracy Urzêdu_________________|");
+			SendClientMessage(playerid,COLOR_WHITE,"                   {ADFF2F}§Poniedzia³ek - Pi¹tek:");
+			SendClientMessage(playerid,COLOR_WHITE,"                          Od 18:00 do 19:00");
+			SendClientMessage(playerid,COLOR_WHITE,"");
+			SendClientMessage(playerid,COLOR_RED,"             **********************************************");
+			SendClientMessage(playerid,COLOR_WHITE,"                  {DDA0DD}§Sobota- Niedziela");
+			SendClientMessage(playerid,COLOR_WHITE,"                          Od 15:00 do 16:00");
+			SendClientMessage(playerid,COLOR_WHITE,"");
+			SendClientMessage(playerid,COLOR_RED,"|____________>>> Urz¹d Miasta Los Santos <<<____________|");
+			return 1;
+		}	
+	}
+	if(!Sprawdz_w_cord(playerid, id, wejscia[id][w_x1], wejscia[id][w_y1], wejscia[id][w_z1], wejscia[id][vw1], wejscia[id][int1]))
+	{
+		sendErrorMessage(playerid, "Tu nie ma ¿adnych drzwi"); 
+		return 1;
+	}
+	return 0;
+}
 stock SprawdzWejscia(playerid)
 {
 	for(new i; i<iloscwejsc; i++)
 	{
-		if(GetPlayerInterior(playerid) == wejscia[i][w_int1] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw1] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]))
+		//if(GetPlayerInterior(playerid) == wejscia[i][w_int1] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw1] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]))
+		if(Sprawdz_w_UID(playerid, i))
 		{
 			SetPlayerPosEx(playerid,  wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]);
 			SetPlayerInterior(playerid, wejscia[i][w_int2]);
@@ -80,7 +276,7 @@ stock SprawdzWejscia(playerid)
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
 			SetInteriorTimeAndWeather(playerid);
 			Wchodzenie(playerid);
-			//return 1;
+			return 1
 		}
 		if(GetPlayerInterior(playerid) == wejscia[i][w_int2] && GetPlayerVirtualWorld(playerid) == wejscia[i][w_vw2] && IsPlayerInRangeOfPoint(playerid, 2.0, wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]))
 		{
@@ -90,213 +286,6 @@ stock SprawdzWejscia(playerid)
 			PlayerInfo[playerid][pLocal] = 255;
 			SetServerWeatherAndTime(playerid);
 			Wchodzenie(playerid);
-			//return 1;
-		}
-		//WEJŒCIA NA UID:
-		if(wejscia[i][w_UID] == 12)
-		{
-			if(!DoorInfo[FRAC_LCN][d_State]) return SendClientMessage(playerid, COLOR_GRAD1, "Te drzwi s¹ zamkniête.");
-		}
-		else if(wejscia[i][w_UID] == 11)
-		{
-			return GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
-		}
-		else if(wejscia[i][w_UID] == 10 
-		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-		{
-			return GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
-		}
-		else if(wejscia[i][w_UID] == 9
-		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-		{
-			if(GetPlayerFraction(playerid) != FRAC_SN)
-			{
-				sendTipMessage(playerid, "Ups! Wygl¹da na to, ¿e drzwi s¹ zamkniête"); 
-				return 1;
-			}
-			return GameTextForPlayer(playerid, "~w~Scena DJ", 5000, 1);
-		}
-		else if(wejscia[i][w_UID] == 8
-		&&IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-		{
-			if(GetPVarInt(playerid, "Vinyl-bilet") != 2 && GetPlayerFraction(playerid) != FRAC_SN)
-			{
-				sendErrorMessage(playerid, "Brak dostêpu do strefy V.I.P"); 
-			}
-			return 1;
-		}
-		else if(wejscia[i][w_UID] == 7 
-		&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-		{
-			if(GetPVarInt(playerid, "Vinyl-bilet") == 0 || GetPlayerOrg(playerid) != FAMILY_VINYL || GetPlayerFraction(playerid) != FRAC_SN)
-            {
-				sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
-			}
-			return 1;
-		}
-		else if(wejscia[i][w_UID] == 6)
-		{
-			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-			{
-				new muzik[128];
-				GetSVarString("muzyka_bonehead", muzik, 128);
-				PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
-			}
-			else if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw2])
-			{
-				StopAudioStreamForPlayer(playerid);
-			}
-			return 1;
-		}
-		else if(wejscia[i][w_UID] == 4)
-		{
-			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-			{
-				sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Los Santos=====");
-				sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
-				sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
-				sendTipMessage(playerid, "* Sejf znajduje siê 10m pod ziemi¹ --> Bezpieczna lokata!");
-			}
-			return 1;
-		}
-		else if(wejscia[i][w_UID] == 5) 
-		{
-			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-			{
-				sendTipMessageEx(playerid, COLOR_RED, "=====Verte Bank Palomino Creek=====");
-				sendTipMessage(playerid, "* Aby zarz¹dzaæ swoim kontem wpisz /kontobankowe (/kb)");
-				sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
-				sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");
-			}
-			return 1;
-		}
-		else if(wejscia[i][w_UID] == 3)
-		{
-			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-			{
-				if(doorFBIStatus == 0 && GetPlayerFraction(playerid) != FRAC_FBI)
-				{
-					SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
-					return 1;
-				}
-				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Biurowiec FBI w Los Santos Wita! <<<<");
-				SendClientMessage(playerid, COLOR_WHITE, "-> Recepcja znajduje siê po twojej lewej stronie");
-				SendClientMessage(playerid, COLOR_WHITE, "-> Wejœcie do wiêzienia stanowego na wprost"); 
-				SendClientMessage(playerid, COLOR_WHITE, "-> Winda znajduje siê za recepcj¹");
-				SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Federal Bureau of Investigation <<<<");
-				GameTextForPlayer(playerid, "~w~Witamy w~y~ Biurowcu ~b~FBI~n~~r~by UbunteQ & Iwan", 5000, 1);
-			}
-			else if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw2])
-			{
-				GameTextForPlayer(playerid, "~w~Miasto ~g~Los Santos", 5000, 1); 
-			}
-			return 1;
-		}
-		else if(wejscia[i][w_UID] == 2)
-		{
-			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-			{
-				SendClientMessage(playerid, -1, "Powodzenia podczas egzaminu praktycznego!"); 
-				GameTextForPlayer(playerid, "~n~~r~Powodzenia", 5000, 1); 
-			}
-			else if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x2], wejscia[i][w_y2], wejscia[i][w_z2]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw2])
-			{
-				if(dmv == 1 || IsAnInstructor(playerid) || TakingLesson[playerid] == 1)
-				{
-					if(wywalzdmv[playerid] == 1)
-					{
-						sendErrorMessage(playerid, "Zosta³eœ wyrzucony z Urzêdu Miasta"); 
-						return 1;
-					}
-					SendClientMessage(playerid, COLOR_WHITE, "Witamy ponownie"); 
-					GameTextForPlayer(playerid, "~n~~g~By Satius", 5000, 1);
-					if(PlayerInfo[playerid][pMember] != FRAC_LSPD // Nie jest PD
-					&& PlayerInfo[playerid][pMember] != FRAC_FBI // Nie jest FBI
-					&& PlayerInfo[playerid][pMember] != FRAC_BOR
-					&& PlayerInfo[playerid][pLider] == 0 // Nie jest liderem
-					&& GetPlayerOrg(playerid) == 0)//Nie jest cz³onkiem ORG
-					{
-						SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
-						SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
-						SendClientMessage(playerid, COLOR_WHITE, "Dopiero teraz dostrzegasz czerwon¹ tabliczkê informuj¹c¹ o zakazie");
-						SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
-						SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
-						SetPVarInt(playerid, "mozeUsunacBronie", 1);
-						ResetPlayerWeapons(playerid);
-					}
-				}
-				else
-				{
-					
-					SendClientMessage(playerid,COLOR_RED,"|_________________Godziny pracy Urzêdu_________________|");
-					SendClientMessage(playerid,COLOR_WHITE,"                   {ADFF2F}§Poniedzia³ek - Pi¹tek:");
-					SendClientMessage(playerid,COLOR_WHITE,"                          Od 18:00 do 19:00");
-					SendClientMessage(playerid,COLOR_WHITE,"");
-					SendClientMessage(playerid,COLOR_RED,"             **********************************************");
-					SendClientMessage(playerid,COLOR_WHITE,"                  {DDA0DD}§Sobota- Niedziela");
-					SendClientMessage(playerid,COLOR_WHITE,"                          Od 15:00 do 16:00");
-					SendClientMessage(playerid,COLOR_WHITE,"");
-					SendClientMessage(playerid,COLOR_RED,"|____________>>> Urz¹d Miasta Los Santos <<<____________|");
-					return 1;
-				}
-			
-			}
-			return 1;
-		}	
-		else if(wejscia[i][w_UID] == 1)//DMV
-		{
-			if(IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[i][w_x1], wejscia[i][w_y1], wejscia[i][w_z1]) && GetPlayerVirtualWorld(playerid) ==  wejscia[i][w_vw1])
-			{
-				if(dmv == 1 || IsAnInstructor(playerid) || IsABOR(playerid))
-				{
-					if(wywalzdmv[playerid] == 0)
-					{
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Urz¹d Miasta w Los Santos Wita! <<<<");
-						SendClientMessage(playerid, COLOR_WHITE, "-> Cennik znajduje siê zaraz za rogiem, po prawej stronie.");
-						SendClientMessage(playerid, COLOR_WHITE, "-> Znajdujesz siê na najwy¿szym poziomie, winda znajduje siê w holu g³ównym");
-						SendClientMessage(playerid, COLOR_WHITE, "-> Okienka dla patentów znajduj¹ siê po lewej i prawej stronie w holu pierwszym");
-						SendClientMessage(playerid, COLOR_WHITE, "-> [Obecny interior urzêdu powsta³ w listopadzie 2018 roku, za inicjatyw¹ Satius & Arkam & Simeone]");
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ¯yczymy przyjemnego czekania na licencje! <<<<");
-						GameTextForPlayer(playerid, "~n~~g~By Satius", 5000, 1);
-						
-						
-						if(PlayerInfo[playerid][pMember] != FRAC_LSPD // Nie jest PD
-						&& PlayerInfo[playerid][pMember] != FRAC_FBI // Nie jest FBI
-						&& PlayerInfo[playerid][pMember] != FRAC_BOR
-						&& PlayerInfo[playerid][pLider] == 0 // Nie jest liderem
-						&& GetPlayerOrg(playerid) == 0)//Nie jest cz³onkiem ORG
-						{
-							SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
-							SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
-							SendClientMessage(playerid, COLOR_WHITE, "Dopiero teraz dostrzegasz czerwon¹ tabliczkê informuj¹c¹ o zakazie");
-							SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
-							SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
-							SetPVarInt(playerid, "mozeUsunacBronie", 1);
-							ResetPlayerWeapons(playerid);
-						}
-					}
-					else
-					{
-						SendClientMessage(playerid, COLOR_RED, "Zosta³eœ wyrzucony z Urzêdu przez agentów USSS, spróbuj póŸniej.");
-						SendClientMessage(playerid, COLOR_WHITE, "[Czas wyrzucenia: 10 minut]");
-						return 1;
-					}
-				}
-				else
-				{
-
-					SendClientMessage(playerid,COLOR_RED,"|_________________Godziny pracy Urzêdu_________________|");
-					SendClientMessage(playerid,COLOR_WHITE,"                   {ADFF2F}§Poniedzia³ek - Pi¹tek:");
-					SendClientMessage(playerid,COLOR_WHITE,"                          Od 18:00 do 19:00");
-					SendClientMessage(playerid,COLOR_WHITE,"");
-					SendClientMessage(playerid,COLOR_RED,"             **********************************************");
-					SendClientMessage(playerid,COLOR_WHITE,"                  {DDA0DD}§Sobota- Niedziela");
-					SendClientMessage(playerid,COLOR_WHITE,"                          Od 15:00 do 16:00");
-					SendClientMessage(playerid,COLOR_WHITE,"");
-					SendClientMessage(playerid,COLOR_RED,"|____________>>> Urz¹d Miasta Los Santos <<<____________|");
-					return 1;
-				}	
-			}
 			return 1;
 		}
 	}
