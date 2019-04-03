@@ -79,89 +79,61 @@ stock CheckStars(const text[])
     }
     return Message;
 }
-CheckSpamEmoji(text[], akcjaEmoji[], pos)
+CheckSpamEmoji(text[], akcjaEmoji[], szukanaEmoji[], bool:ignorecase=true)
 {
 	new emojiMessFix[256];
+	if(strfind(text, szukanaEmoji, ignorecase) == -1)
+	{
+		return 1;
+	}
+	new pos = strfind(text, szukanaEmoji, ignorecase); 
 	if(strfind(text, " ", true, pos+2) != -1) //Witam xD
 	{
 		strdel(text, pos, pos+2);
 		strins(text, akcjaEmoji, pos, strlen(text));
 	}
-	else //Witam xDDDD
+	else if(strfind(text, " ", true, pos+2) == -1) //Witam xDDDD
 	{
-	//	new posA = strfind(text, " ", true, pos-1);
-		new posB = strfind(text, " ", true, pos+2); 
+		new posB = strfind(text, " ", true, pos); 
 		strdel(text, pos, posB);
 		strins(text, akcjaEmoji, pos, strlen(text)); 
 	}
-	format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
+	strcat(emojiMessFix, text); 
 	return emojiMessFix; 
 }
 stock CheckEmoji(const text[])
 {
 	new emojiMess[256];
-	new emojiMessFix[256];
 	strcat(emojiMess, text);
-	if(strfind(emojiMess, ":D", false) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strfind(emojiMess, ":D"));
-	}
-	else if(strfind(emojiMess, ":P", true) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", strfind(emojiMess, ":P", true));
-	}
-	else if(strfind(emojiMess, ";)", false) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Puszcza oczko**{FFFFFF}", strfind(emojiMess, ";)"));
-	}
-	else if(strfind(emojiMess, ";D", false) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}", strfind(emojiMess, ";D", false));
-	}
-	else if(strfind(emojiMess, ";d", false) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Wystawia jêzyk i puszcza oczko**{FFFFFF}", strfind(emojiMess, ";d"));
-	}
-	else if(strfind(emojiMess, "xD", true) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi g³upi¹ minê**{FFFFFF}", strfind(emojiMess, "xD"));
-	}
-	else if(strfind(emojiMess, "o_O", true) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", strfind(emojiMess, "o_O", true));
-	}
-	else if(strfind(emojiMess, ":)", false) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strfind(emojiMess, ":)"));
-	}
-	else if(strfind(emojiMess, ":(", false) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Smuci siê**{FFFFFF}", strfind(emojiMess, ":("));
-	}
-	else if(strfind(emojiMess, ":O", true) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Otwiera usta szeroko**{FFFFFF}", strfind(emojiMess, ":O", true));
-	}
-	else if(strfind(emojiMess, ":*", true) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi buŸkê**{FFFFFF}", strfind(emojiMess, ":*", true));
-	}
-	else if(strfind(emojiMess, ":v", true) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**K³apie dziobem**{FFFFFF}", strfind(emojiMess, ":v", true));
-	}
-	else if(strfind(emojiMess, ":s", true) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Krzywi siê**{FFFFFF}", strfind(emojiMess, ":s", true));
-	}
-	else if(strfind(emojiMess, ":3", false) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi minê ala funia**{FFFFFF}", strfind(emojiMess, ":3"));
-	}
-	else if(strfind(emojiMess, "o.o", true) != -1)
-	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}", strfind(emojiMess, "o.o", true));
-	}
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", ":D", false);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", ":P", true);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Puszcza oczko**{FFFFFF}", ";)", false);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}",  ";D", false);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Wystawia jêzyk i puszcza oczko**{FFFFFF}", ";d", false);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi g³upi¹ minê**{FFFFFF}", "xD", true);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", "o_O", true));
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", ":)", false);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Smuci siê**{FFFFFF}",  ":(", false);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Otwiera usta szeroko**{FFFFFF}", ":O", true);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi buŸkê**{FFFFFF}",  ":*", true);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**K³apie dziobem**{FFFFFF}", ":v", true);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Krzywi siê**{FFFFFF}", ":s", true);
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi minê ala funia**{FFFFFF}", ":3");
+	
+	CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}",  "o.o", true);
 	return emojiMessFix;
 }
 stock CorrectICForm(const text[])
