@@ -79,20 +79,20 @@ stock CheckStars(const text[])
     }
     return Message;
 }
-CheckSpamEmoji(text[], const akcjaEmoji[], pos)
+CheckSpamEmoji(text[], akcjaEmoji[], pos)
 {
 	new emojiMessFix[256];
-	if(strfind(text, " ", true, pos+2) != -1) 
+	if(strfind(text, " ", true, pos+2) != -1) //Witam xD
 	{
 		strdel(text, pos, pos+2);
-		strins(text, akcjaEmoji, pos, 256);
+		strins(text, akcjaEmoji, pos);
 	}
-	else 
+	else //Witam xDDDD
 	{
-		new posA = strfind(text, " ", true, pos-1);
+	//	new posA = strfind(text, " ", true, pos-1);
 		new posB = strfind(text, " ", true, pos+2); 
-		strdel(text, posA, posB);
-		strins(text, akcjaEmoji, pos, 256); 
+		strdel(text, pos, posB);
+		strins(text, akcjaEmoji, pos); 
 	}
 	format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
 	return emojiMessFix; 
