@@ -85,14 +85,14 @@ CheckSpamEmoji(text[], const akcjaEmoji[], pos)
 	if(strfind(text, " ", true, pos+2) != -1) 
 	{
 		strdel(text, pos, pos+2);
-		strins(text, akcjaEmoji, pos);
+		strins(text, akcjaEmoji, pos, 256);
 	}
 	else 
 	{
 		new posA = strfind(text, " ", true, pos-1);
 		new posB = strfind(text, " ", true, pos+2); 
 		strdel(text, posA, posB);
-		strins(text, akcjaEmoji, pos); 
+		strins(text, akcjaEmoji, pos, 256); 
 	}
 	format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
 	return emojiMessFix; 
