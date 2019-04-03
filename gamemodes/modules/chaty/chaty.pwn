@@ -91,13 +91,13 @@ CheckSpamEmoji(text[], akcjaEmoji[], szukanaEmoji[], bool:ignorecase=true)
 	if(strfind(text, " ", true, pos+2) != -1) //Witam xD
 	{
 		strdel(text, pos, pos+2);
-		strins(text, akcjaEmoji, pos, strlen(text));
+		strins(text, akcjaEmoji, pos);
 	}
 	else if(strfind(text, " ", true, pos+2) == -1) //Witam xDDDD
 	{
 		new posB = strfind(text, " ", true, pos); 
 		strdel(text, pos, posB);
-		strins(text, akcjaEmoji, pos, strlen(text)); 
+		strins(text, akcjaEmoji, pos); 
 	}
 	format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
 	return emojiMessFix; 
