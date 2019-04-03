@@ -79,7 +79,7 @@ stock CheckStars(const text[])
     }
     return Message;
 }
-CheckSpamEmoji(text[], akcjaEmoji[], szukanaEmoji[], bool:ignorecase=true)
+CheckSpamEmoji(text[], const akcjaEmoji[], szukanaEmoji[],  bool:ignorecase=true, bool:lenghtStr=2)
 {
 	new emojiMessFix[256];
 	if(strfind(text, szukanaEmoji, ignorecase) == -1)
@@ -88,17 +88,22 @@ CheckSpamEmoji(text[], akcjaEmoji[], szukanaEmoji[], bool:ignorecase=true)
 		return emojiMessFix;
 	}
 	new pos = strfind(text, szukanaEmoji, ignorecase); 
-	if(strfind(text, " ", true, pos+2) != -1) //Witam xD
+	new posA = strfind(text, " ", false, pos);
+
+	//Je¿eli emotka jest wed³ug strfind - np. xD
+	if(strfind(text, " ", false, pos) == -1)
 	{
-		strdel(text, pos, pos+2);
-		strins(text, akcjaEmoji, pos);
-	}
-	else if(strfind(text, " ", true, pos+2) == -1) //Witam xDDDD
-	{
-		new posB = strfind(text, " ", true, pos); 
-		strdel(text, pos, posB);
+		strdel(text, pos, pos+lenghtStr);
 		strins(text, akcjaEmoji, pos); 
+		format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
+		return emojiMessFix;
 	}
+	
+	///Je¿eli emotka jest d³u¿sza - np XDDDD
+	strdel(text, pos, posA);
+	strins(text, akcjaEmoji, pos);
+	
+	
 	format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
 	return emojiMessFix; 
 }
