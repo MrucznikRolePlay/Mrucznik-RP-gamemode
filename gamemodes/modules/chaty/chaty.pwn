@@ -103,7 +103,7 @@ CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr
 	strins(emojiMessFix, akcjaEmoji, pos);
 	return emojiMessFix; 
 }
-stock CheckEmoji(text[])
+stock CheckEmoji(const text[])
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text); 
