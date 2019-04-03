@@ -79,67 +79,63 @@ stock CheckStars(const text[])
     }
     return Message;
 }
-CheckSpamEmoji(text[], const akcjaEmoji[], szukanaEmoji[],  bool:ignorecase=true, bool:lenghtStr=2)
+CheckSpamEmoji(text[], const akcjaEmoji[], szukanaEmoji[], lenghtStr=2, bool:ignorecase=true)
 {
 	new emojiMessFix[256];
-	if(strfind(text, szukanaEmoji, ignorecase) == -1)
+	strcat(emojiMessFix, text);
+	if(strfind(emojiMessFix, szukanaEmoji, ignorecase) == -1)
 	{
-		format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
 		return emojiMessFix;
 	}
-	new pos = strfind(text, szukanaEmoji, ignorecase); 
-	new posA = strfind(text, " ", false, pos);
+	new pos = strfind(emojiMessFix, szukanaEmoji, ignorecase); 
+	new posA = strfind(emojiMessFix, " ", false, pos);
 
 	//Je¿eli emotka jest wed³ug strfind - np. xD
-	if(strfind(text, " ", false, pos) == -1)
+	if(strfind(emojiMessFix, " ", false, pos) == -1)
 	{
-		strdel(text, pos, pos+lenghtStr);
-		strins(text, akcjaEmoji, pos); 
-		format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
+		strdel(emojiMessFix, pos, pos+lenghtStr);
+		strins(emojiMessFix, akcjaEmoji, pos); 
 		return emojiMessFix;
 	}
 	
 	///Je¿eli emotka jest d³u¿sza - np XDDDD
 	strdel(text, pos, posA);
 	strins(text, akcjaEmoji, pos);
-	
-	
-	format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
 	return emojiMessFix; 
 }
 stock CheckEmoji(text[])
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text); 
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", ":D", false);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", ":D", 2, false);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", ":P", true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", ":P", 2,  true);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Puszcza oczko**{FFFFFF}", ";)", false);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Puszcza oczko**{FFFFFF}", ";)", 2, false);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}",  ";D", false);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}",  ";D", 2, false);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk i puszcza oczko**{FFFFFF}", ";d", false);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk i puszcza oczko**{FFFFFF}", ";d", 2, false);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi g³upi¹ minê**{FFFFFF}", "xD", true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi g³upi¹ minê**{FFFFFF}", "xD", 2,  true);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", "o_O", true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", "o_O", 3, true);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", ":)", false);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", ":)", 2, false);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Smuci siê**{FFFFFF}",  ":(", false);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Smuci siê**{FFFFFF}",  ":(", 2, false);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Otwiera usta szeroko**{FFFFFF}", ":O", true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Otwiera usta szeroko**{FFFFFF}", ":O", 2,  true);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi buŸkê**{FFFFFF}",  ":*", true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi buŸkê**{FFFFFF}",  ":*", 2, true);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**K³apie dziobem**{FFFFFF}", ":v", true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**K³apie dziobem**{FFFFFF}", ":v", 2,  true);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Krzywi siê**{FFFFFF}", ":s", true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Krzywi siê**{FFFFFF}", ":s", 2, true);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi minê ala funia**{FFFFFF}", ":3");
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi minê ala funia**{FFFFFF}", ":3", 2);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}",  "o.o", true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}",  "o.o", 3, true);
 	
 	return emojiMessFix;
 }
