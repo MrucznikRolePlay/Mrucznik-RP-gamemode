@@ -4625,6 +4625,13 @@ CMD:tod(playerid, params[])
 			{
 				iloscInne[playerid] = iloscInne[playerid]+1;
 			}
+			foreach(Player, i)//Je¿eli gracze s¹ w intkach 
+			{
+				if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
+				{
+					SetInteriorTimeAndWeather(i);
+				}
+			}
 		}
 		else
 		{
@@ -6696,6 +6703,13 @@ CMD:pogodaall(playerid, params[])
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{
 				iloscInne[playerid] = iloscInne[playerid]+1;
+			}
+			foreach(Player, i)//Je¿eli gracze s¹ w intkach 
+			{
+				if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
+				{
+					SetInteriorTimeAndWeather(i);
+				}
 			}
 		}
 		else

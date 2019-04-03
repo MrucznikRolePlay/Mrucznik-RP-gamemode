@@ -79,45 +79,85 @@ stock CheckStars(const text[])
     }
     return Message;
 }
+CheckSpamEmoji(const text[], const akcjaEmoji[], pos)
+{
+	if(strfind(text, " ", true, pos+2) != -1) 
+	{
+		strdel(text, pos, pos+2);
+		strins(text, akcjaEmoji, pos);
+	}
+	else 
+	{
+		new posA = strfind(text, " ", true, pos-1);
+		new posB = strfind(text, " ", true, pos+2); 
+		strdel(text, posA, posB);
+		strins(text, akcjaEmoji, pos); 
+	}
+	return 1; 
+}
 stock CheckEmoji(const text[])
 {
 	new emojiMess[256];
 	strcat(emojiMess, text);
 	if(strfind(emojiMess, ":D", false) != -1)
 	{
-		new pos = strfind(emojiMess, ":D"); 
-		strdel(emojiMess, pos, pos+2);
-		strins(emojiMess, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", pos);
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strfind(emojiMess, ":D"));
 	}
-	else if(strfind(emojiMess, ":P", false) != -1)
+	else if(strfind(emojiMess, ":P", true) != -1)
 	{
-		new pos = strfind(emojiMess, ":P"); 
-		strdel(emojiMess, pos, pos+2);
-		strins(emojiMess, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", pos);
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", strfind(emojiMess, ":P", true));
 	}
 	else if(strfind(emojiMess, ";)", false) != -1)
 	{
-		new pos = strfind(emojiMess, ";)"); 
-		strdel(emojiMess, pos, pos+2);
-		strins(emojiMess, "{C2A2DA}**Puszcza oczko**{FFFFFF}", pos);
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Puszcza oczko**{FFFFFF}", strfind(emojiMess, ";)"));
 	}
 	else if(strfind(emojiMess, ";D", false) != -1)
 	{
-		new pos = strfind(emojiMess, ";D"); 
-		strdel(emojiMess, pos, pos+2);
-		strins(emojiMess, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}", pos);
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}", strfind(emojiMess, ";D"), false);
 	}
-	else if(strfind(emojiMess, "xD", false) != -1)
+	else if(strfind(emojiMess, ";d", false) != -1)
 	{
-		new pos = strfind(emojiMess, "xD"); 
-		strdel(emojiMess, pos, pos+2);
-		strins(emojiMess, "{C2A2DA}**Robi g³upi¹ mine**{FFFFFF}", pos);
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Wystawia jêzyk i puszcza oczko**{FFFFFF}", strfind(emojiMess, ";d"));
 	}
-	else if(strfind(emojiMess, "o_O", false) != -1)
+	else if(strfind(emojiMess, "xD", true) != -1)
 	{
-		new pos = strfind(emojiMess, ":D"); 
-		strdel(emojiMess, pos, pos+3);
-		strins(emojiMess, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", pos);
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi g³upi¹ minê**{FFFFFF}", strfind(emojiMess, "xD"));
+	}
+	else if(strfind(emojiMess, "o_O", true) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", strfind(emojiMess, "o_O"), true);
+	}
+	else if(strfind(emojiMess, ":)", false) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strfind(emojiMess, ":)"));
+	}
+	else if(strfind(emojiMess, ":(", false) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Smuci siê**{FFFFFF}", strfind(emojiMess, ":("));
+	}
+	else if(strfind(emojiMess, ":O", true) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Otwiera usta szeroko**{FFFFFF}", strfind(emojiMess, ":O", true));
+	}
+	else if(strfind(emojiMess, ":*", true) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi buŸkê**{FFFFFF}", strfind(emojiMess, ":*", true));
+	}
+	else if(strfind(emojiMess, ":v", true) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**K³apie dziobem**{FFFFFF}", strfind(emojiMess, ":v", true));
+	}
+	else if(strfind(emojiMess, ":s", true) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Krzywi siê**{FFFFFF}", strfind(emojiMess, ":s", true));
+	}
+	else if(strfind(emojiMess, ":3", false) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi minê ala funia**{FFFFFF}", strfind(emojiMess, ":3"));
+	}
+	else if(strfind(emojiMess, "o.o", true) != -1)
+	{
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}", strfind(emojiMess, "o.o", true));
 	}
 	return emojiMess;
 }
