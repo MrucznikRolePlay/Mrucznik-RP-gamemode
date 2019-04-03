@@ -79,8 +79,10 @@ stock CheckStars(const text[])
     }
     return Message;
 }
-CheckSpamEmoji(const text[], const akcjaEmoji[], pos)
+CheckSpamEmoji(text[], const akcjaEmoji[], pos)
 {
+	new emojiMessFix[256];
+	new strcat(emojiMessFix, text);
 	if(strfind(text, " ", true, pos+2) != -1) 
 	{
 		strdel(text, pos, pos+2);
@@ -93,7 +95,8 @@ CheckSpamEmoji(const text[], const akcjaEmoji[], pos)
 		strdel(text, posA, posB);
 		strins(text, akcjaEmoji, pos); 
 	}
-	return 1; 
+	format(emojiMessFix, sizeof(emojiMessFix), "%s", text); 
+	return emojiMessFix; 
 }
 stock CheckEmoji(const text[])
 {
@@ -113,7 +116,7 @@ stock CheckEmoji(const text[])
 	}
 	else if(strfind(emojiMess, ";D", false) != -1)
 	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}", strfind(emojiMess, ";D"), false);
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}", strfind(emojiMess, ";D", false));
 	}
 	else if(strfind(emojiMess, ";d", false) != -1)
 	{
@@ -125,7 +128,7 @@ stock CheckEmoji(const text[])
 	}
 	else if(strfind(emojiMess, "o_O", true) != -1)
 	{
-		CheckSpamEmoji(emojiMess, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", strfind(emojiMess, "o_O"), true);
+		CheckSpamEmoji(emojiMess, "{C2A2DA}**Unosi jedn¹ brew do góry**{FFFFFF}", strfind(emojiMess, "o_O", true));
 	}
 	else if(strfind(emojiMess, ":)", false) != -1)
 	{
@@ -159,7 +162,7 @@ stock CheckEmoji(const text[])
 	{
 		CheckSpamEmoji(emojiMess, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}", strfind(emojiMess, "o.o", true));
 	}
-	return emojiMess;
+	return emojiMessFix;
 }
 stock CorrectICForm(const text[])
 {
