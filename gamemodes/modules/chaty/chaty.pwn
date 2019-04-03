@@ -82,7 +82,6 @@ stock CheckStars(const text[])
 CheckSpamEmoji(text[], const akcjaEmoji[], pos)
 {
 	new emojiMessFix[256];
-	new strcat(emojiMessFix, text);
 	if(strfind(text, " ", true, pos+2) != -1) 
 	{
 		strdel(text, pos, pos+2);
@@ -101,6 +100,7 @@ CheckSpamEmoji(text[], const akcjaEmoji[], pos)
 stock CheckEmoji(const text[])
 {
 	new emojiMess[256];
+	new emojiMessFix[256];
 	strcat(emojiMess, text);
 	if(strfind(emojiMess, ":D", false) != -1)
 	{
