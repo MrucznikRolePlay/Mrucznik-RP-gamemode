@@ -99,8 +99,8 @@ CheckSpamEmoji(text[], const akcjaEmoji[], szukanaEmoji[], lenghtStr=2, bool:ign
 	}
 	
 	///Je¿eli emotka jest d³u¿sza - np XDDDD
-	strdel(text, pos, posA);
-	strins(text, akcjaEmoji, pos);
+	strdel(emojiMessFix, pos, posA);
+	strins(emojiMessFix, akcjaEmoji, pos);
 	return emojiMessFix; 
 }
 stock CheckEmoji(text[])
