@@ -79,7 +79,7 @@ stock CheckStars(const text[])
     }
     return Message;
 }
-CheckSpamEmoji(text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr=2, bool:ignorecase=true)
+CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr=2, bool:ignorecase=true)
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text);
