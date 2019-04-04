@@ -7667,8 +7667,6 @@ CMD:kick(playerid, params[])
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
                     if(PlayerInfo[giveplayerid][pAdmin] >= 1) return sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ Admina !");
-				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
   					if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 1)
   					{
       					GiveKickForPlayer(giveplayerid, playerid, (result));
