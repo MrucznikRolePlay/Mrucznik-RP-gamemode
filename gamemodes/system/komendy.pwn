@@ -1220,7 +1220,7 @@ CMD:przelew(playerid, params[])
 	
 	if(IsPlayerConnected(playerid))
 	{
-		format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", giveplayer);
+		format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", GetNick(playerid, true));
 		ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
 	}
 /*=============[BLOKADA - WYKORZYSTANE W /KB]==============
