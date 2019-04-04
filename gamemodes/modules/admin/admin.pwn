@@ -356,7 +356,7 @@ CMD:karytxd(playerid, params[])
 	}
 	return 1;
 }
-CMD:togADMTXD(playerid)
+CMD:togtxda(playerid)
 {
 	if(togADMTXD[playerid] == 0)
 	{
