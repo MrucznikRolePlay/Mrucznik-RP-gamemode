@@ -83,24 +83,23 @@ CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text);
-	if(strfind(emojiMessFix, szukanaEmoji, ignorecase) == -1)
+	if(strfind(emojiMessFix, szukanaEmoji, ignorecase) != -1)
 	{
-		return emojiMessFix;
-	}
-	new pos = strfind(emojiMessFix, szukanaEmoji, ignorecase); 
-	new posA = strfind(emojiMessFix, " ", false, pos);
+		new pos = strfind(emojiMessFix, szukanaEmoji, ignorecase); 
+		new posA = strfind(emojiMessFix, " ", false, pos);
 
-	//Je¿eli emotka jest wed³ug strfind - np. xD
-	if(strfind(emojiMessFix, " ", false, pos) == -1)
-	{
-		strdel(emojiMessFix, pos, pos+lenghtStr);
-		strins(emojiMessFix, akcjaEmoji, pos); 
-		return emojiMessFix;
+		//Je¿eli emotka jest wed³ug strfind - np. xD
+		if(strfind(emojiMessFix, " ", false, pos) == -1)
+		{
+			strdel(emojiMessFix, pos, pos+lenghtStr);
+			strins(emojiMessFix, akcjaEmoji, pos); 
+			return emojiMessFix;
+		}
+		
+		///Je¿eli emotka jest d³u¿sza - np XDDDD
+		strdel(emojiMessFix, pos, posA);
+		strins(emojiMessFix, akcjaEmoji, pos);
 	}
-	
-	///Je¿eli emotka jest d³u¿sza - np XDDDD
-	strdel(emojiMessFix, pos, posA);
-	strins(emojiMessFix, akcjaEmoji, pos);
 	return emojiMessFix; 
 }
 stock CheckEmoji(const text[])
