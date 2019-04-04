@@ -22,7 +22,7 @@
 //
 
 //-----------------<[ Zmienne: ]>-------------------
-new kary_TXD_Status = 0;
+new kary_TXD_Status = 1;
 new togADMTXD[MAX_PLAYERS] = 0;
 new karaTimer;
 //end

@@ -324,25 +324,21 @@ stock BlockPlayerTXD(playerid, adminid, reason[])
 
 
 //-----------------<[ Komendy: ]>-------------------
-CMD:showkary(playerid, params[])
+CMD:showkary(playerid)
 {
-	if(IsAScripter(playerid) || IsAHeadAdmin(playerid))
+	if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] > 4500)
 	{
-		new enterValue;
-		if(sscanf(params, "k<fix>", enterValue))
-		{
-			sendTipMessage(playerid, "WprowadŸ wartoœæ: 1 = ON 0 = OFF"); 
-			return 1;
-		}
-		if(enterValue == 1)
+		if(kary_TXD_Status == 0)
 		{
 			sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
-			kary_TXD_Status = enterValue;
+			kary_TXD_Status = 1;
+			return 1;
 		}
-		if(enterValue == 0)
+		if(kary_TXD_Status == 1)
 		{
 			sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
-			kary_TXD_Status = enterValue;
+			kary_TXD_Status = 0;
+			return 1;
 		}
 	}
 	else
