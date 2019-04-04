@@ -238,15 +238,87 @@ IsAScripter(playerid)
 	}
 	return 0;
 }
-stock KickPlayer(playerid, adminname[], reason[])
+stock KickPlayerTXD(playerid, adminid, reason[])
 {
     //PlayerLogged[playerid]=0;
     new str[128];
-    format(str, sizeof(str), "~r~Kick~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetName(playerid), adminname, reason);
+    format(str, sizeof(str), "~r~Kick~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	new karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
     return 1;
+}
+stock AJPlayerTXD(playerid, adminid, reason[])
+{
+	new str[128];
+    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	new karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+	return 1;
+}
+stock BanPlayerTXD(playerid, adminid, reason[])
+{
+	new str[128];
+    format(str, sizeof(str), "~r~Ban~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	new karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+
+	return 1;
+}
+stock WarnPlayerTXD(playerid, adminid, reason[])
+{
+	new str[128];
+    format(str, sizeof(str), "~r~Warn~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	new karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+	return 1;
+}
+stock BlockPlayerTXD(playerid, adminid, reason[])
+{
+	new str[128];
+    format(str, sizeof(str), "~r~Block~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	new karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+	return 1;
 }
 
 
@@ -754,7 +826,15 @@ CMD:blok(playerid, params[])
 	                GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "AdmCmd: Konto gracza %s zostalo zablokowane przez %s, Powod: %s", giveplayer, sendername, (result));
                     BanLog(string);
-                    SendPunishMessage(string, giveplayerid);
+					if(kary_TXD_Status == 0)
+					{
+						SendPunishMessage(string, giveplayerid);
+					}
+					if(kary_TXD_Status == 1)
+					{
+						BlockPlayerTXD(giveplayerid, playerid, result);
+					}
+                    
 		            PlayerInfo[giveplayerid][pBlock] = 1;
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
@@ -4493,8 +4573,15 @@ CMD:adminajail(playerid, params[])
 						SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
 						format(string, sizeof(string), "Zosta³eœ ukarany na %d minut. Powod: %s", money, (result));		
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
-						SendPunishMessage(string, playa);
+						if(kary_TXD_Status == 0)
+						{
+							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
+							SendPunishMessage(string, playa);
+						}
+						if(kary_TXD_Status == 1)
+						{
+							AJPlayerTXD(playa, playerid, result);
+						}
 						poscig[playa] = 0;
 						KickLog(string);
 						if(GetPlayerAdminDutyStatus(playerid) == 1)
@@ -7191,8 +7278,15 @@ CMD:warn(playerid, params[])
 					SendClientMessage(playerid, COLOR_LIGHTRED, str);
 					format(str, sizeof(str), "Dosta³eœ warna od %s, powód: %s", sendername, (result));
 					SendClientMessage(giveplayerid, COLOR_LIGHTRED, str);
-					format(string, sizeof(string), "AdmCmd: %s zostal zwarnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
-                    SendPunishMessage(string, giveplayerid);
+					if(kary_TXD_Status == 0)
+					{
+						format(string, sizeof(string), "AdmCmd: %s zostal zwarnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
+						SendPunishMessage(string, giveplayerid);
+					}
+					if(kary_TXD_Status == 1)
+					{
+						WarnPlayerTXD(giveplayerid, playerid, result); 
+					}
 					/*format(str,sizeof(str),"~p~Warn Info (Ban):~n~~r~Osoba zwarnowana: ~w~%s~n~~r~Powod: ~w~%s ~n~~r~Nalozyl: ~w~%s", giveplayer ,(result), sendername);
 				    NapisText(str); */
 					WarnLog(string);
@@ -7443,8 +7537,15 @@ CMD:ban(playerid, params[])
 					SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
 					format(string, sizeof(string), "AdmCmd: Admin %s zbanowal %s, powód: %s",  sendername, giveplayer, result);
 					BanLog(string);
-					format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, result);
-                    SendPunishMessage(string, giveplayerid);
+					if(kary_TXD_Status == 0)
+					{
+						format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, result);
+						SendPunishMessage(string, giveplayerid);
+					}
+					if(kary_TXD_Status == 1)
+					{
+						BanPlayerTXD(giveplayerid, playerid, result);
+					}
 					//adminowe logi
 			        format(str, sizeof(str), "Admini/%s.ini", sendername);
 			        dini_IntSet(str, "Ilosc_Banow", dini_Int(str, "Ilosc_Banow")+1 );
@@ -7569,7 +7670,7 @@ CMD:kick(playerid, params[])
 						}
 						if(kary_TXD_Status == 1)
 						{
-						
+							KickPlayerTXD(giveplayerid, playerid, result); 
 						}
 						//adminduty
 						if(GetPlayerAdminDutyStatus(playerid) == 1)
