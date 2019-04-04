@@ -245,7 +245,7 @@ stock KickPlayerTXD(playerid, adminid, reason[])
     format(str, sizeof(str), "~r~Kick~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
-	new karaTimer = SetTimer("StopDraw", 15000, false);
+	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(Player, i)
 	{
 		if(togADMTXD[i] == 1)
@@ -261,7 +261,7 @@ stock AJPlayerTXD(playerid, adminid, reason[])
     format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
-	new karaTimer = SetTimer("StopDraw", 15000, false);
+	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(Player, i)
 	{
 		if(togADMTXD[i] == 1)
@@ -277,7 +277,7 @@ stock BanPlayerTXD(playerid, adminid, reason[])
     format(str, sizeof(str), "~r~Ban~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
-	new karaTimer = SetTimer("StopDraw", 15000, false);
+	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(Player, i)
 	{
 		if(togADMTXD[i] == 1)
@@ -294,7 +294,7 @@ stock WarnPlayerTXD(playerid, adminid, reason[])
     format(str, sizeof(str), "~r~Warn~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
-	new karaTimer = SetTimer("StopDraw", 15000, false);
+	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(Player, i)
 	{
 		if(togADMTXD[i] == 1)
@@ -310,7 +310,7 @@ stock BlockPlayerTXD(playerid, adminid, reason[])
     format(str, sizeof(str), "~r~Block~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
-	new karaTimer = SetTimer("StopDraw", 15000, false);
+	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(Player, i)
 	{
 		if(togADMTXD[i] == 1)
@@ -328,20 +328,26 @@ CMD:karytxd(playerid, params[])
 {
 	if(IsAScripter(playerid) || IsAHeadAdmin)
 	{
-		if(isnull(params))
+		new value;
+		if(sscanf(params, "d", value))
 		{
-			sendErrorMessage(playerid, "Uzupe³nij liczbê. 1 = ON || 0 = OFF"); 
+			sendTipMessage(playerid, "WprowadŸ wartoœæ: 1 = ON 0 = OFF"); 
 			return 1;
 		}
-		if(params == 1)
+		if(value > 1 || value < 0)
+		{
+			sendErrorMessage(playerid, "Niepoprawna wartoœæ"); 
+			return 1;
+		}
+		if(value == 1)
 		{
 			sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
-			kary_TXD_Status = 1;
+			kary_TXD_Status = value;
 		}
-		if(params == 0)
+		if(value == 0)
 		{
 			sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
-			kary_TXD_Status = 0;
+			kary_TXD_Status = value;
 		}
 	}
 	else
