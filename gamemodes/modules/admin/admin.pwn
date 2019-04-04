@@ -347,12 +347,26 @@ CMD:karytxd(playerid, params[])
 		else if(enterValue == 0)
 		{
 			sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
-			kary_TXD_Status = enterValuealue;
+			kary_TXD_Status = enterValue;
 		}
 	}
 	else
 	{
 		noAccessMessage(playerid); 
+	}
+	return 1;
+}
+CMD:togADMTXD(playerid)
+{
+	if(togADMTXD[playerid] == 0)
+	{
+		togADMTXD[playerid] =1;
+		sendTipMessage(playerid, "TOG: Wy³¹czy³eœ Text'Drawy z karami"); 
+	}
+	else if(togADMTXD[playerid] == 1)
+	{
+		togADMTXD[playerid] = 0; 
+		sendTipMessage(playerid, "TOG: W³¹czy³eœ Text'Drawy z karami"); 
 	}
 	return 1;
 }
