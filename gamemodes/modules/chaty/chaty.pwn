@@ -111,7 +111,7 @@ stock CheckEmoji(const text[])
 	new strEmoji[256];
 
 
-	regex_replace(emojiMessFix, regex_set(":{1}D{1,}"), "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strEmoji, MATCH_DEFAULT, sizeof(strEmoji));
+	regex_replace(emojiMessFix, ":{1}D{1,}", "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strEmoji, MATCH_DEFAULT, sizeof(strEmoji));
 	
 	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", ":P", 2,  true);
 	/*
