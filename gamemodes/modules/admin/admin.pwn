@@ -388,13 +388,15 @@ stock GiveKickForPlayer(playerid, adminid, result[])
 stock GiveBlockForPlayer(playerid, adminid, result[])
 {
 	new string[256];
+	new nickDoBlocka[MAX_PLAYER_NAME];
+	strcat(nickDoBlocka, GetNick(playerid)); 
 	format(string, sizeof(string), "AdmCmd: Konto gracza %s zostalo zablokowane przez %s, Powod: %s", GetNick(playerid), GetNick(adminid), (result));
 	BanLog(string);
 	PlayerInfo[playerid][pBlock] = 1;
 	KickEx(playerid);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
-	MruMySQL_Blockuj(playerid, adminid, (result));
+	MruMySQL_Blockuj(nickDoBlocka, adminid, (result));
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
 		iloscBan[adminid] = iloscBan[adminid]+1;
@@ -404,9 +406,11 @@ stock GiveBlockForPlayer(playerid, adminid, result[])
 stock GivePBlockForPlayer(player[], adminid, result[])
 {
 	new string[256];
+	new nickDoBlocka[MAX_PLAYER_NAME];
+	strcat(nickDoBlocka, player); 
 	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zablokowane przez %s, Powod: %s", player, GetNick(adminid), (result));
 	BanLog(string);
-	MruMySQL_Blockuj(player, GetNick(adminid), (result));
+	MruMySQL_Blockuj(nickDoBlocka, GetNick(adminid), (result));
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
