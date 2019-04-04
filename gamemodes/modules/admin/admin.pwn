@@ -352,6 +352,7 @@ stock SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 }
 stock GiveKickForPlayer(playerid, adminid, result)
 {
+	new string[256];
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 	format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", GetNick(adminid), GetNick(playerid), (result));
 	KickLog(string);
