@@ -83,7 +83,7 @@ CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text);
-	if(strfind(emojiMessFix, szukanaEmoji, ignorecase) != -1)
+	/*if(strfind(emojiMessFix, szukanaEmoji, ignorecase) != -1)
 	{
 		new pos = strfind(emojiMessFix, szukanaEmoji, ignorecase); 
 		new posA = strfind(emojiMessFix, " ", false, pos);
@@ -99,15 +99,16 @@ CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr
 		///Je¿eli emotka jest d³u¿sza - np XDDDD
 		strdel(emojiMessFix, pos, posA);
 		strins(emojiMessFix, akcjaEmoji, pos);
-	}
+	}*/
 	return emojiMessFix; 
 }
 stock CheckEmoji(const text[])
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text); 
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Uœmiecha siê**{FFFFFF}", ":D", 2, false);
-	
+	new strEmoji[256];
+	Regex_Replace(emojiMessFix, ':{1}D{1,}', "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strEmoji, MATCH_DEFAULT, sizeof(strEmoji));
+	/*
 	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", ":P", 2,  true);
 	
 	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Puszcza oczko**{FFFFFF}", ";)", 2, false);
@@ -134,9 +135,9 @@ stock CheckEmoji(const text[])
 	
 	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi minê ala funia**{FFFFFF}", ":3", 2);
 	
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}",  "o.o", 3, true);
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}",  "o.o", 3, true);*/
 	
-	return emojiMessFix;
+	return strEmoji;
 }
 stock CorrectICForm(const text[])
 {
