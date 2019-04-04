@@ -4593,7 +4593,7 @@ CMD:adminajail(playerid, params[])
 						SetPlayerAdminJail(playa, playerid, money, result);
 						if(kary_TXD_Status == 1)
 						{
-							AJPlayerTXD(playa, playerid, reason); 
+							AJPlayerTXD(playa, playerid, (result)); 
 						}
 						else if(kary_TXD_Status == 0)
 						{
@@ -4621,7 +4621,7 @@ CMD:adminajail(playerid, params[])
 					}
 					if(kary_TXD_Status == 1)
 					{
-						AJPlayerTXD(playa, playerid, reason); 
+						AJPlayerTXD(playa, playerid, (result)); 
 					}
 					else if(kary_TXD_Status == 0)
 					{
