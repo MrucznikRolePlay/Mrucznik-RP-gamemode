@@ -118,13 +118,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			DajKase(giveplayerid, kasa);
 			DajKase(playerid, -kasa);
 			
+			format(string, sizeof(string), "%s kupil od %s materialy (Kupil: %d || Poprzednio: %d || Cena: %d)", GetNick(playerid), GetNick(giveplayerid), moneys, firstValue, kasa);
+			PayLog(string);
 			SetPVarInt(playerid, "OKupMats", 0);
 			SetPVarInt(giveplayerid, "OSprzedajMats", 0);
 			SetPVarInt(playerid, "Mats-kasa", 0);
         	SetPVarInt(playerid, "Mats-id", 0);
         	SetPVarInt(playerid, "Mats-mats", 0);
-			format(string, sizeof(string), "%s kupil od %s materialy (Kupil: %d || Poprzednio: %d || Cena: %d)", GetNick(playerid), GetNick(giveplayerid), moneys, firstValue, kasa);
-			PayLog(string);
+			
 		}
 		else
 		{
@@ -12212,141 +12213,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-		//Sejfy frakcyjne ============ UKRYTE NA RZECZ NOWEGO SYSTEMU KONT BANKOWYCH - SIMEONE 26-12-2018
-		/*if(dialogid == 490)
-		{
-		    if(response)
-		    {
-                new stan[128];
-                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Frakcji[GetPlayerFraction(playerid)]);
-		        switch(listitem)
-		        {
-		            case 0:
-		            {
-		                ShowPlayerDialogEx(playerid, 491, DIALOG_STYLE_LIST, "Sejf frakcyjny - stan", stan, "Wróæ", "");
-		            }
-		            case 1:
-		            {
-						ShowPlayerDialogEx(playerid, 492, DIALOG_STYLE_INPUT, "Sejf frakcyjny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-		            }
-		            case 2:
-		            {
-						ShowPlayerDialogEx(playerid, 493, DIALOG_STYLE_INPUT, "Sejf frakcyjny - wp³acanie", stan, "Wp³aæ", "Wróæ");
-		            }
-		        }
-		    }
-		}
-		if(dialogid == 491)
-		{
-            ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-		}
-		if(dialogid == 492)
-		{
-		    if(response)
-		    {
-                new frac=GetPlayerFraction(playerid);
-                if(!IsNumeric(inputtext))
-                {
-                    SendClientMessage(playerid, -1, "To nie jest liczba!");
-                    ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-                    return 1;
-                }
-                new kasa = strval(inputtext);
-		        if((strlen(inputtext) >= 1 && strlen(inputtext) <= 9) && kasa > 0)
-		        {
-		            if(kasa <= Sejf_Frakcji[frac])
-		            {
-		                new nick[MAX_PLAYER_NAME];
-		                GetPlayerName(playerid, nick, sizeof(nick));
-
-		                Sejf_Add(frac, -kasa);
-
-						PlayerInfo[playerid][pAccount] += kasa;
-
-			            new komunikat[256];
-			            format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu frakcyjnego. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Frakcji[frac]);
-			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            format(komunikat, sizeof(komunikat), "Gracz %s wyplacil %d$ z sejfu frakcji nr %d. Jest w nim teraz %d$", nick, kasa, PlayerInfo[playerid][pLider], Sejf_Frakcji[frac]);
-			            PayLog(komunikat);
-                        Sejf_Save(frac);
-						ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-					}
-					else
-					{
-	    				SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
-					    new stan[256];
-		             	format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Frakcji[frac]);
-						ShowPlayerDialogEx(playerid, 492, DIALOG_STYLE_INPUT, "Sejf frakcyjny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-					}
-				}
-		        else
-		        {
-		            new stan[256];
-	             	format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Frakcji[frac]);
-					ShowPlayerDialogEx(playerid, 492, DIALOG_STYLE_INPUT, "Sejf frakcyjny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-		        }
-		    }
-		    if(!response)
-		    {
-		        ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-		    }
-		}
-		if(dialogid == 493)
-		{
-		    if(response)
-		    {
-                new frac=GetPlayerFraction(playerid);
-                if(!IsNumeric(inputtext))
-                {
-                    SendClientMessage(playerid, -1, "To nie jest liczba!");
-                    ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-                    return 1;
-                }
-                new kasa = strval(inputtext);
-		        if((strlen(inputtext) >= 1 && strlen(inputtext) <= 9) && kasa > 0 )
-		        {
-		            if(kaska[playerid] >= kasa)
-		            {
-                        if(Sejf_Frakcji[frac] + kasa > 1_000_000_000)
-                        {
-                            SendClientMessage(playerid, -1, "Sejf siê przepe³ni!");
-                            return 1;
-                        }
-		                new nick[MAX_PLAYER_NAME];
-		                GetPlayerName(playerid, nick, sizeof(nick));
-		                ZabierzKase(playerid, kasa);
-
-                        Sejf_Add(frac, kasa);
-
-			            new komunikat[256];
-			            format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d$ do sejfu frakcyjnego. Jest w nim teraz %d$.", kasa, Sejf_Frakcji[frac]);
-			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            format(komunikat, sizeof(komunikat), "Gracz %s wplacil %d$ do sejfu frakcji nr %d. Jest w nim teraz %d$", nick, kasa, PlayerInfo[playerid][pLider], Sejf_Frakcji[frac]);
-			            PayLog(komunikat);
-
-                        Sejf_Save(frac);
-			            ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-					}
-					else
-					{
-					    SendClientMessage(playerid, COLOR_P@, "Nie masz a¿ tyle przy sobie !");
-					    new stan[256];
-		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Frakcji[frac]);
-						ShowPlayerDialogEx(playerid, 493, DIALOG_STYLE_INPUT, "Sejf frakcyjny - wp³acanie", stan, "Wp³aæ", "Wróæ");
-					}
-				}
-		        else
-		        {
-		            new stan[256];
-	                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Frakcji[frac]);
-					ShowPlayerDialogEx(playerid, 493, DIALOG_STYLE_INPUT, "Sejf frakcyjny - wp³acanie", stan, "Wp³aæ", "Wróæ");
-		        }
-		    }
-		    if(!response)
-		    {
-		        ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-		    }
-		}*/
 		if(dialogid == 495)
 		{
 		    if(response)
@@ -16575,9 +16441,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			
 			if(money >= 1 && money <= PlayerInfo[playerid][pAccount])//Zabezpieczenie 
 			{
-				if(PlayerInfo[giveplayerid][pAccount]+money >=100000000)//Zabezpieczenie
+				if(PlayerInfo[giveplayerid][pAccount]+money > MAX_MONEY_IN_BANK)
 				{
-					sendTipMessage(playerid, "Osoba do której próbujesz przelaæ pieni¹dze ma pe³ne konto!"); 
+					sendErrorMessage(playerid, "Gracz do którego próbowa³eœ przelaæ gotówkê - ma zbyt du¿o pieniêdzy na koncie."); 
 					return 1;
 				}
 				if(!IsPlayerConnected(giveplayerid))
@@ -16691,6 +16557,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(!IsPlayerConnected(giveplayerid))
 			{
 				sendErrorMessage(playerid, "Gracz, do którego próbowa³eœ przelaæ gotówkê wyszed³ z serwera!"); 
+				return 1;
+			}
+			if(PlayerInfo[giveplayerid][pAccount]+money > MAX_MONEY_IN_BANK)
+			{
+				sendErrorMessage(playerid, "Gracz do którego próbowa³eœ przelaæ gotówkê - ma zbyt du¿o pieniêdzy na koncie."); 
 				return 1;
 			}
 			

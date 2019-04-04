@@ -1216,10 +1216,12 @@ CMD:wiretransfer(playerid, params[]) return cmd_przelew(playerid, params);
 CMD:przelej(playerid, params[]) return cmd_przelew(playerid, params);
 CMD:przelew(playerid, params[])
 {
-
+	new string[128];
+	
 	if(IsPlayerConnected(playerid))
 	{
-		sendTipMessage(playerid, "U¿yj /kontobankowe [Skrót: /kb]");
+		format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", giveplayer);
+		ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
 	}
 /*=============[BLOKADA - WYKORZYSTANE W /KB]==============
 	new string[128];
@@ -1336,18 +1338,6 @@ CMD:kb(playerid)
 	}
 	return 1;
 }
-/* ======================>> Ukryte na rzecz systemu Kont bankowych, mo¿e siê jeszcze kiedyœ przydaæ - jakby te konta nie wypali³y :D 
-=========> Simeone 26-12-2018
-CMD:sejff(playerid) return cmd_sejffrakcja(playerid);
-CMD:sejffrakcja(playerid)
-{
-	if(PlayerInfo[playerid][pLider] >= 1)
-    {
-        ShowPlayerDialogEx(playerid, 490, DIALOG_STYLE_LIST, "Sejf frakcyjny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-    }
-    else return noAccessMessage(playerid);
-	return 1;
-}*/
 CMD:sejff(playerid) return cmd_sejffrakcja(playerid);
 CMD:sejffrakcja(playerid)
 {
