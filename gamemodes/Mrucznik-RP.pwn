@@ -5276,7 +5276,7 @@ public OnGameModeInit()
 
     FabrykaMats::LoadLogic();
     NowaWybieralka::Init();
-
+	KaryTXDLoad(); 
     //Streamer_SetTickRate(40);
 
     PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
