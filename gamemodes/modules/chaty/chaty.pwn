@@ -100,18 +100,13 @@ stock CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], len
 		strdel(emojiMessFix, pos, posA);
 		strins(emojiMessFix, akcjaEmoji, pos);
 	}
-	new strEmoji[256];
-	strcat(strEmoji, emojiMessFix);
-	return strEmoji; 
+	return emojiMessFix; 
 }
 stock CheckEmoji(const text[])
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text); 
-	new strEmoji[256];
-
-
-	regex_replace(emojiMessFix, ":{1}D{1,}", "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strEmoji, MATCH_DEFAULT, sizeof(strEmoji));
+	regex_replace(emojiMessFix, ":{1}D{1,}", "{C2A2DA}**Uœmiecha siê**{FFFFFF}");
 	
 	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", ":P", 2,  true);
 	/*
@@ -141,7 +136,7 @@ stock CheckEmoji(const text[])
 	
 	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Robi okularki z d³oni**{FFFFFF}",  "o.o", 3, true);*/
 	
-	return strEmoji;
+	return emojiMessFix;
 }
 stock CorrectICForm(const text[])
 {
