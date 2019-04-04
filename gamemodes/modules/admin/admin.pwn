@@ -9,7 +9,12 @@
 	oczekuje dalej na przepisanie. Póki co zosta³a oddzielona od komendy.pwn i otrzyma³a swój w³asny plik.
 	
 	Funkcje:
-		> kary w tXD
+		> AJPlayerTXD - TXD show za AJ
+		> BanPlayerTXD - TXD show za Bana
+		> KickPlayerTXD - TXD show za kica
+		> WarnPlayerTXD - TXD show za warna
+		> BlockPlayerTXD - TXD show za blocka
+		>
 	
 	Komendy:
 		> Admins - lista administratorów na s³u¿bie
@@ -345,7 +350,24 @@ stock SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	Wchodzenie(playerid);		
 	return 1;
 }
+stock GiveKickForPlayer(playerid, adminid, result)
+{
+	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
+	format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", GetNick(adminid), GetNick(playerid), (result));
+	KickLog(string);
+	//adminduty
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	{
+		iloscKick[playerid] = iloscKick[playerid]+1;
+	}
 
+	format(string, sizeof(string), "Admini/%s.ini", GetNick(adminid));
+	dini_IntSet(string, "Ilosc_Kickow", dini_Int(string, "Ilosc_Kickow")+1 );
+	KickEx(playerid);
+	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
+	AntySpam[adminid] = 1;
+	return 1;
+}
 //-----------------<[ Komendy: ]>-------------------
 CMD:showkary(playerid)
 {
@@ -7609,8 +7631,6 @@ CMD:ban(playerid, params[])
 CMD:kick(playerid, params[])
 {
 	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -7650,37 +7670,16 @@ CMD:kick(playerid, params[])
 					GetPlayerName(playerid, sendername, sizeof(sendername));
   					if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 1)
   					{
-      					SendClientMessage(giveplayerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
-						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
-						KickLog(string);
-						if(kary_TXD_Status == 0)
-						{
-							format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
-							SendPunishMessage(string, giveplayerid);
-						}
+      					GiveKickForPlayer(giveplayerid, playerid, (result));
 						if(kary_TXD_Status == 1)
 						{
-							KickPlayerTXD(giveplayerid, playerid, result); 
+							KickPlayerTXD(giveplayerid, playerid, (result));
 						}
-						//adminduty
-						if(GetPlayerAdminDutyStatus(playerid) == 1)
+						else if(kary_TXD_Status == 0)
 						{
-							iloscKick[playerid] = iloscKick[playerid]+1;
+							format(string, sizeof(string), "Admin %s zkickowa³ %s. Powód: %s", GetNick(playerid), GetNick(giveplayerid), (result));
+							SendPunishMessage(string, giveplayerid); 
 						}
-						//adminowe logi
-						if (PlayerInfo[playerid][pZG] >= 1)
-					    {
-					        format(string, sizeof(string), "Zaufani/%s.ini", sendername);
-					        dini_IntSet(string, "Ilosc_Kickow", dini_Int(string, "Ilosc_Kickow")+1 );
-					    }
-					    else
-					    {
-							format(string, sizeof(string), "Admini/%s.ini", sendername);
-					     	dini_IntSet(string, "Ilosc_Kickow", dini_Int(string, "Ilosc_Kickow")+1 );
-						}
-						KickEx(giveplayerid);
-						SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-	    				AntySpam[playerid] = 1;
 						return 1;
 					}
 				}

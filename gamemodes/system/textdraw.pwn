@@ -94,7 +94,7 @@ new Text:TXD_Info;
 KaryTXDLoad()
 {
 	Kary  = TextDrawCreate(7.481735, 272.249847, "_");
-	TextDrawLetterSize(Kary, 0.200876, 4.004995);
+	TextDrawLetterSize(Kary, 0.200876, 2.004995);
 	TextDrawAlignment(Kary, 1);
 	TextDrawColor(Kary, -1);
 	TextDrawSetShadow(Kary, 0);
