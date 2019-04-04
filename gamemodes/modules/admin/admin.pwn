@@ -321,7 +321,30 @@ stock BlockPlayerTXD(playerid, adminid, reason[])
 	return 1;
 }
 
-
+stock SetPlayerAdminJail(playerid, adminid, timeVal, result[])
+{
+	new string[256];
+	format(string, sizeof(string), "* Zosta≥eú uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(adminid), timeVal, (result));
+	SendClientMessage(playerid, COLOR_LIGHTRED, string);
+	PlayerInfo[playerid][pJailed] = 3;
+	PlayerInfo[playerid][pJailTime] = timeVal*60;
+	SetPlayerVirtualWorld(playerid, 1000+playerid);
+	PlayerInfo[playerid][pMuted] = 1;
+	SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
+	poscig[playerid] = 0;
+	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNick(adminid), timeVal, (result)); 
+	KickLog(string);
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	{
+		iloscAJ[playerid] = iloscAJ[playerid]+1;
+	}
+	//adminowe logi
+	format(string, sizeof(string), "Admini/%s.ini", GetNick(adminid));
+	dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
+	SendClientMessage(playerid, COLOR_NEWS, "Sprawdü czy otrzymana kara jest zgodna z listπ kar i zasad, znajdziesz jπ na www.Mrucznik-RP.pl");
+	Wchodzenie(playerid);		
+	return 1;
+}
 
 //-----------------<[ Komendy: ]>-------------------
 CMD:showkary(playerid)
@@ -4528,8 +4551,6 @@ CMD:aj(playerid, params[]) return cmd_adminajail(playerid, params);
 CMD:adminajail(playerid, params[])
 {
 	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -4539,7 +4560,6 @@ CMD:adminajail(playerid, params[])
 			sendTipMessage(playerid, "Uøyj /aj [id/nick] [czas(w minutach)] [powod]");
 			return 1;
 		}
-
 		if(IsPlayerConnected(playa) && playa != INVALID_PLAYER_ID)
 		{
 			if (PlayerInfo[playa][pJailed] == 0)
@@ -4566,72 +4586,23 @@ CMD:adminajail(playerid, params[])
 					    OnDuty[playa] = 0;
 					    OnDutyCD[playa] = 0;
 					}
-					if(strfind((result), "DM2") == -1
-					&& strfind((result), "Death Match 2") == -1
-					&& strfind((result), "dm2") == -1)
+					//Wykonanie:
+					if(strfind((result), "DM2", true) == -1
+					&& strfind((result), "Death Match 2", true) == -1)
 					{
-						GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", giveplayer, (result), money);
-						SendClientMessage(playerid, COLOR_LIGHTRED, string);
-						format(string, sizeof(string), "* Zosta≥eú uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", sendername, money, (result));
-						SendClientMessage(playa, COLOR_LIGHTRED, string);
-							
-						PlayerInfo[playa][pJailed] = 3;
-						PlayerInfo[playa][pJailTime] = money*60;
-						SetPlayerVirtualWorld(playa, 1000+playa);
-						PlayerInfo[playa][pMuted] = 1;
-						SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
-						format(string, sizeof(string), "Zosta≥eú ukarany na %d minut. Powod: %s", money, (result));		
-						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-						poscig[playa] = 0;
-						KickLog(string);
-						if(GetPlayerAdminDutyStatus(playerid) == 1)
+						SetPlayerAdminJail(playa, playerid, money, result);
+						if(kary_TXD_Status == 1)
 						{
-							iloscAJ[playerid] = iloscAJ[playerid]+1;
+							AJPlayerTXD(playa, playerid, reason); 
 						}
-							
-						//adminowe logi
-						format(string, sizeof(string), "Admini/%s.ini", sendername);
-						dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
-						SendClientMessage(playa, COLOR_NEWS, "Sprawdü czy otrzymana kara jest zgodna z listπ kar i zasad, znajdziesz jπ na www.Mrucznik-RP.pl");
-						Wchodzenie(playa);
-						if(kary_TXD_Status == 0)
+						else if(kary_TXD_Status == 0)
 						{
-							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
+							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
 							SendPunishMessage(string, playa);
 						}
-						else if(kary_TXD_Status == 1)
-						
-							AJPlayerTXD(playa, playerid, result);
-						}
-						
-						//inne
-						PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
 						return 1;
 					}
-				
-					
-					//KOMUNIKATY
-					if(GetPVarInt(playerid, "AdminDuty") == 1)
-					{
-						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", GetNick(playa, true), (result), money);
-						sendTipMessageEx(playerid, COLOR_LIGHTRED, string);
-						format(string, sizeof(string), "* Zosta≥eú uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(playerid), money, (result));
-						sendTipMessageEx(playa, COLOR_LIGHTRED, string);
-						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
-						SendPunishMessage(string, playa);
-					}
-					else
-					{
-						format(string, sizeof(string), "* Dales Admin Jaila %s. Powod: %s. Czas: %d min.", GetNick(playa, true), (result), money);
-						sendTipMessageEx(playerid, COLOR_LIGHTRED, string);
-						format(string, sizeof(string), "* Zosta≥eú uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(playerid, true), money, (result));
-						sendTipMessageEx(playa, COLOR_LIGHTRED, string);
-						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid,true), money, (result));
-						SendPunishMessage(string, playa);
-					
-					}
+			
 					
 					//CZYNNOåCI - GDY NADA£ Dm2
 					SetPVarInt(playerid, "DostalDM2", 1);
@@ -4648,9 +4619,17 @@ CMD:adminajail(playerid, params[])
 					{
 						iloscAJ[playerid] = iloscAJ[playerid]+1;
 					}
-					
+					if(kary_TXD_Status == 1)
+					{
+						AJPlayerTXD(playa, playerid, reason); 
+					}
+					else if(kary_TXD_Status == 0)
+					{
+						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
+						SendPunishMessage(string, playa);
+					}
 					//adminowe logi
-					format(string, sizeof(string), "Admini/%s.ini", sendername);
+					format(string, sizeof(string), "Admini/%s.ini", GetNick(playerid));
 					dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
 					SendClientMessage(playa, COLOR_NEWS, "Sprawdü czy otrzymana kara jest zgodna z listπ kar i zasad, znajdziesz jπ na www.Mrucznik-RP.pl");
 					Wchodzenie(playa);
