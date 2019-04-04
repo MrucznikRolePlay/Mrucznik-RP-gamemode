@@ -324,7 +324,7 @@ stock BlockPlayerTXD(playerid, adminid, reason[])
 
 
 //-----------------<[ Komendy: ]>-------------------
-CMD:karytxd(playerid, params[])
+CMD:showkary(playerid, params[])
 {
 	if(IsAScripter(playerid) || IsAHeadAdmin(playerid))
 	{
@@ -334,17 +334,12 @@ CMD:karytxd(playerid, params[])
 			sendTipMessage(playerid, "WprowadŸ wartoœæ: 1 = ON 0 = OFF"); 
 			return 1;
 		}
-		if(enterValue > 1 || enterValue < 0)
-		{
-			sendErrorMessage(playerid, "Niepoprawna wartoœæ"); 
-			return 1;
-		}
 		if(enterValue == 1)
 		{
 			sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
 			kary_TXD_Status = enterValue;
 		}
-		else if(enterValue == 0)
+		if(enterValue == 0)
 		{
 			sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
 			kary_TXD_Status = enterValue;
