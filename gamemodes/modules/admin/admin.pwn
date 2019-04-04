@@ -325,6 +325,22 @@ stock BlockPlayerTXD(playerid, adminid, reason[])
 	}
 	return 1;
 }
+stock PBlockPlayerTXD(player[], adminid, reason[])
+{
+	new str[128];
+    format(str, sizeof(str), "~r~Block Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", player, GetNick(adminid), reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+	return 1;
+}
 
 stock SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 {
@@ -350,7 +366,7 @@ stock SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	Wchodzenie(playerid);		
 	return 1;
 }
-stock GiveKickForPlayer(playerid, adminid, result)
+stock GiveKickForPlayer(playerid, adminid, result[])
 {
 	new string[256];
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
@@ -367,6 +383,37 @@ stock GiveKickForPlayer(playerid, adminid, result)
 	KickEx(playerid);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
+	return 1;
+}
+stock GiveBlockForPlayer(playerid, adminid, result[])
+{
+	new string[256];
+	format(string, sizeof(string), "AdmCmd: Konto gracza %s zostalo zablokowane przez %s, Powod: %s", GetNick(playerid), GetNick(adminid), (result));
+	BanLog(string);
+	PlayerInfo[playerid][pBlock] = 1;
+	KickEx(playerid);
+	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
+	AntySpam[adminid] = 1;
+	MruMySQL_Blockuj(playerid, adminid, (result));
+	if(GetPlayerAdminDutyStatus(adminid) == 1)
+	{
+		iloscBan[adminid] = iloscBan[adminid]+1;
+	}
+	return 1;
+}
+stock GivePBlockForPlayer(player[], adminid, result[])
+{
+	new string[256];
+	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zablokowane przez %s, Powod: %s", player, GetNick(adminid), (result));
+	BanLog(string);
+	MruMySQL_Blockuj(player, GetNick(adminid), (result));
+	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
+	AntySpam[adminid] = 1;
+	if(GetPlayerAdminDutyStatus(adminid) == 1)
+	{
+		iloscBan[adminid] = iloscBan[adminid]+1;
+	}
+
 	return 1;
 }
 //-----------------<[ Komendy: ]>-------------------
@@ -841,9 +888,6 @@ CMD:block(playerid, params[]) return cmd_blok(playerid, params);
 CMD:blok(playerid, params[])
 {
 	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
         new giveplayerid, result[128];
@@ -879,29 +923,17 @@ CMD:blok(playerid, params[])
 		                sendErrorMessage(playerid, "Nie mozesz zablokowaæ gracza z lvl wiekszym niz 1!");
 		                return 1;
 		            }
-	                GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-	                GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "AdmCmd: Konto gracza %s zostalo zablokowane przez %s, Powod: %s", giveplayer, sendername, (result));
-                    BanLog(string);
+					GiveBlockForPlayer(giveplayerid, playerid, (result));
 					if(kary_TXD_Status == 0)
 					{
+						format(string, sizeof(string), "Admin %s zablokowa³ konto gracza %s. Powód: %s", GetNick(playerid), GetNick(giveplayerid), (result)); 
 						SendPunishMessage(string, giveplayerid);
 					}
-					if(kary_TXD_Status == 1)
+					else if(kary_TXD_Status == 1)
 					{
-						BlockPlayerTXD(giveplayerid, playerid, result);
+						BlockPlayerTXD(giveplayerid, playerid, (result));
 					}
-                    
-		            PlayerInfo[giveplayerid][pBlock] = 1;
-					KickEx(giveplayerid);
-					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-	    			AntySpam[playerid] = 1;
-
-                    MruMySQL_Blockuj(giveplayer, playerid, result);
-					if(GetPlayerAdminDutyStatus(playerid) == 1)
-					{
-						iloscBan[playerid] = iloscBan[playerid]+1;
-					}
+	              
 		            return 1;
 	            }
    			}
@@ -977,7 +1009,6 @@ CMD:pblock(playerid, params[]) return cmd_pblok(playerid, params);
 CMD:pblok(playerid, params[])
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -1008,16 +1039,15 @@ CMD:pblok(playerid, params[])
 				sendErrorMessage(playerid, "Brak gracza w bazie, nie mo¿na zablokowaæ (konto nie istnieje).");
 				return 1;
 			}
-            GetPlayerName(playerid, sendername, sizeof(sendername));
-            format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zablokowane przez %s, Powod: %s", nick, sendername, (result));
-       		BanLog(string);
-            SendPunishMessage(string);
-			MruMySQL_Blockuj(nick, playerid, result);
-			SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-			AntySpam[playerid] = 1;
-			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			GivePBlockForPlayer((nick), playerid, (result));
+			if(kary_TXD_Status == 1)
 			{
-				iloscBan[playerid] = iloscBan[playerid]+1;
+				PBlockPlayerTXD((nick), playerid, (result));
+            }
+			else if(kary_TXD_Status == 0)
+			{
+				format(string, sizeof(string), "Admin %s zablokowa³ (offline) konto gracza %s. Powód: %s", GetNick(playerid), nick, result);
+				SendPunishMessage(string, playerid); 
 			}
 		}
 	}
