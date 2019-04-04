@@ -257,7 +257,7 @@ stock KickPlayerTXD(playerid, adminid, reason[])
 }
 stock AJPlayerTXD(playerid, adminid, reason[])
 {
-	new str[128];
+	new str[256];
     format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
@@ -4584,15 +4584,6 @@ CMD:adminajail(playerid, params[])
 						SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
 						format(string, sizeof(string), "Zosta≥eú ukarany na %d minut. Powod: %s", money, (result));		
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-						if(kary_TXD_Status == 0)
-						{
-							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
-							SendPunishMessage(string, playa);
-						}
-						if(kary_TXD_Status == 1)
-						{
-							AJPlayerTXD(playa, playerid, result);
-						}
 						poscig[playa] = 0;
 						KickLog(string);
 						if(GetPlayerAdminDutyStatus(playerid) == 1)
@@ -4605,6 +4596,15 @@ CMD:adminajail(playerid, params[])
 						dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
 						SendClientMessage(playa, COLOR_NEWS, "Sprawdü czy otrzymana kara jest zgodna z listπ kar i zasad, znajdziesz jπ na www.Mrucznik-RP.pl");
 						Wchodzenie(playa);
+						if(kary_TXD_Status == 0)
+						{
+							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", giveplayer, sendername, money, (result));
+							SendPunishMessage(string, playa);
+						}
+						else if(kary_TXD_Status == 1)
+						
+							AJPlayerTXD(playa, playerid, result);
+						}
 						
 						//inne
 						PlayerPlaySound(playa, 1076, 0.0, 0.0, 0.0);
