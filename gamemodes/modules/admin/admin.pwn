@@ -329,7 +329,7 @@ CMD:karytxd(playerid, params[])
 	if(IsAScripter(playerid) || IsAHeadAdmin(playerid))
 	{
 		new enterValue;
-		if(sscanf(params, "d", enterValue))
+		if(sscanf(params, "k<fix>", enterValue))
 		{
 			sendTipMessage(playerid, "WprowadŸ wartoœæ: 1 = ON 0 = OFF"); 
 			return 1;
