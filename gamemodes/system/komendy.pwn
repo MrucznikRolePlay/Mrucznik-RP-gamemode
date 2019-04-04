@@ -18389,6 +18389,11 @@ CMD:newbie(playerid, params[])
 			sendTipMessage(playerid, "U¿yj (/n)ewbie [tekst]");
 			return 1;
 		}
+		if(strlen(params) > 78)
+		{
+			sendErrorMessage(playerid, "Twoja wiadomoœæ by³a zbyt d³uga, skróæ j¹!"); 
+			return 1;
+		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if (strfind(params , "ip:" , true)>=0 ||strfind(params , "-roleplay" , true)>=0 || strfind(params , "Nicolson" , true)>=0 || strfind(params , "roleplay." , true)>=0  || strfind(params , " ip" , true)>=0 || strfind(params , "794" , true)>=0 || strfind(params , "772" , true)>=0 || strfind(params , "797" , true)>=0 || strfind(params , "795" , true)>=0 || strfind(params , "775" , true)>=0 || strfind(params , "91." , true)>=0 || strfind(params , "91," , true)>=0)
 		{
