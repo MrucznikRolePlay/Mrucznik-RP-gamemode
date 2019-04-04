@@ -9,10 +9,11 @@
 	oczekuje dalej na przepisanie. Póki co zosta³a oddzielona od komendy.pwn i otrzyma³a swój w³asny plik.
 	
 	Funkcje:
-		> Brak
+		> kary w tXD
 	
 	Komendy:
 		> Admins - lista administratorów na s³u¿bie
+		> karytxd - kary w txd
 		> check - sprawdza statystyki gracza (showstats) 
 		> nonewbie - odpala/gasi chat newbie
 		> dn & up - teleportuje gracza w górê/dó³
@@ -237,11 +238,46 @@ IsAScripter(playerid)
 	}
 	return 0;
 }
+stock KickPlayer(playerid, adminname[], reason[])
+{
+    //PlayerLogged[playerid]=0;
+    new str[128];
+    format(str, sizeof(str), "~r~Kick~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetName(playerid), adminname, reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	new karaTimer = SetTimer("StopDraw", 15000, false);
+    return 1;
+}
 
 
 
 //-----------------<[ Komendy: ]>-------------------
-
+CMD:karytxd(playerid, params[])
+{
+	if(IsAScripter(playerid) || IsAHeadAdmin)
+	{
+		if(isnull(params))
+		{
+			sendErrorMessage(playerid, "Uzupe³nij liczbê. 1 = ON || 0 = OFF"); 
+			return 1;
+		}
+		if(params == 1)
+		{
+			sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
+			kary_TXD_Status = 1;
+		}
+		if(params == 0)
+		{
+			sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie kar w Text Draw'ach"); 
+			kary_TXD_Status = 0;
+		}
+	}
+	else
+	{
+		noAccessMessage(playerid); 
+	}
+	return 1;
+}
 CMD:admins(playerid) return cmd_admini(playerid);
 CMD:admini(playerid)
 {
@@ -7526,8 +7562,15 @@ CMD:kick(playerid, params[])
       					SendClientMessage(giveplayerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
 						KickLog(string);
-						format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
-                        SendPunishMessage(string, giveplayerid);
+						if(kary_TXD_Status == 0)
+						{
+							format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", sendername, giveplayer, (result));
+							SendPunishMessage(string, giveplayerid);
+						}
+						if(kary_TXD_Status == 1)
+						{
+						
+						}
 						//adminduty
 						if(GetPlayerAdminDutyStatus(playerid) == 1)
 						{
@@ -7621,5 +7664,12 @@ CMD:banip(playerid, params[])
 
 //-----------------<[ Timery: ]>-------------------
 
+forward StopDraw();
+public StopDraw()
+{
+	TextDrawHideForAll(Kary); 
+	KillTimer(karaTimer);
+	return 1;
+}
 
 //end
