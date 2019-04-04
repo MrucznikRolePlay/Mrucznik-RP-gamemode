@@ -410,7 +410,7 @@ stock GivePBlockForPlayer(player[], adminid, result[])
 	strcat(nickDoBlocka, player); 
 	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zablokowane przez %s, Powod: %s", player, GetNick(adminid), (result));
 	BanLog(string);
-	MruMySQL_Blockuj(nickDoBlocka, GetNick(adminid), (result));
+	MruMySQL_Blockuj(nickDoBlocka, adminid, (result));
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
