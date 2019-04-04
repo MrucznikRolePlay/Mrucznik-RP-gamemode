@@ -79,11 +79,11 @@ stock CheckStars(const text[])
     }
     return Message;
 }
-CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr=2, bool:ignorecase=true)
+stock CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr=2, bool:ignorecase=true)
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text);
-	/*if(strfind(emojiMessFix, szukanaEmoji, ignorecase) != -1)
+	if(strfind(emojiMessFix, szukanaEmoji, ignorecase) != -1)
 	{
 		new pos = strfind(emojiMessFix, szukanaEmoji, ignorecase); 
 		new posA = strfind(emojiMessFix, " ", false, pos);
@@ -99,8 +99,10 @@ CheckSpamEmoji(const text[], const akcjaEmoji[], const szukanaEmoji[], lenghtStr
 		///Je¿eli emotka jest d³u¿sza - np XDDDD
 		strdel(emojiMessFix, pos, posA);
 		strins(emojiMessFix, akcjaEmoji, pos);
-	}*/
-	return emojiMessFix; 
+	}
+	new strEmoji[256];
+	strcat(strEmoji, emojiMessFix);
+	return strEmoji; 
 }
 stock CheckEmoji(const text[])
 {
@@ -110,9 +112,9 @@ stock CheckEmoji(const text[])
 
 
 	regex_replace(emojiMessFix, Regex_New(":{1}D{1,}"), "{C2A2DA}**Uœmiecha siê**{FFFFFF}", strEmoji, MATCH_DEFAULT, sizeof(strEmoji));
-	/*
-	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", ":P", 2,  true);
 	
+	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Wystawia jêzyk**{FFFFFF}", ":P", 2,  true);
+	/*
 	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Puszcza oczko**{FFFFFF}", ";)", 2, false);
 	
 	CheckSpamEmoji(emojiMessFix, "{C2A2DA}**Uœmiecha siê i puszcza oczko**{FFFFFF}",  ";D", 2, false);
