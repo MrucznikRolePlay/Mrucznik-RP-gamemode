@@ -276,6 +276,22 @@ stock AJPlayerTXD(playerid, adminid, reason[])
 	}
 	return 1;
 }
+stock BPPlayerTXD(playerid, adminid, timeVal, reason[])
+{
+	new str[256];
+    format(str, sizeof(str), "~r~Blokada Pisania~w~~n~Dla: %s~n~Od: %s~n~Na: %d godzin~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+	return 1;
+}
 stock BanPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
@@ -510,6 +526,19 @@ stock GiveKickForPlayer(playerid, adminid, result[])
 	KickEx(playerid);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
+	return 1;
+}
+stock GiveBPForPlayer(playerid, adminid, timeVal, result[])
+{
+	new string[256], 
+	PlayerInfo[playerid][pBP] = czas;
+	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
+	format(string, sizeof(string), "AdmCmd: %s dostal BP od %s na %d godzin, z powodem %s", GetNick(playerid), GetNick(adminid), timeVal, result);
+	KickLog(string);
+	//opis
+	//Opis_Usun(giveplayerid);
+	Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+	PlayerInfo[playerid][pDesc][0] = EOS;
 	return 1;
 }
 stock GiveBlockForPlayer(playerid, adminid, result[])
@@ -3046,7 +3075,7 @@ CMD:dpa(playerid, params[])
 }
 CMD:bp(playerid, params[])//blokada pisania
 {
-	new giveplayerid, czas, text[32];
+	new giveplayerid, czas, text[32], string[256];
 	if(sscanf(params, "k<fix>ds[32]", giveplayerid, czas, text))
 	{
 		sendTipMessage(playerid, "U¿yj /bp [ID gracza] [czas (w gozinach)] [nazwa chatu]");
@@ -3060,21 +3089,16 @@ CMD:bp(playerid, params[])//blokada pisania
 			{
 				if(czas <= 8 && czas >= 0)
 				{
-					new string[256], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
-					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					PlayerInfo[giveplayerid][pBP] = czas;
-					format(string, sizeof(string), "AdmCmd: %s otrzyma³ zakaz pisania od administratora %s. Czas: %d godzin. Powod: Z³e u¿ycie globalnego chatu %s", giveplayer, sendername, czas, text);
-                    SendPunishMessage(string, giveplayerid);
-					format(string, sizeof(string), "Zosta³eœ ukarany blokad¹ pisania na globalnych czatach na %d godzin.", czas);
-					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					SendClientMessage(giveplayerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
-					format(string, sizeof(string), "AdmCmd: %s dostal BP od %s na %d godzin, z powodem %s", giveplayer, sendername, czas, text);
-					KickLog(string);
-					//opis
-                    //Opis_Usun(giveplayerid);
-                    Update3DTextLabelText(PlayerInfo[giveplayerid][pDescLabel], 0xBBACCFFF, "");
-                    PlayerInfo[giveplayerid][pDesc][0] = EOS;
+					GiveBPForPlayer(giveplayerid, playerid, czas, text);
+					if(kary_TXD_Status == 1)
+					{
+						BPPlayerTXD(giveplayerid, playerid, czas, text);
+					}
+					else if(kary_TXD_Status == 0)
+					{
+						format(string, sizeof(string), "AdmCmd: %s dosta³ Blokadê Pisania od %s na %d minut. Powód: %s", GetNick(giveplayerid), GetNick(adminid), czas, text);
+						SendPunishMessage(string, playerid);
+					}
 					return 1;
 				}
 				else
