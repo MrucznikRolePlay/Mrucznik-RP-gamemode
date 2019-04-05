@@ -247,7 +247,7 @@ stock KickPlayerTXD(playerid, adminid, reason[])
 {
     //PlayerLogged[playerid]=0;
     new str[128];
-    format(str, sizeof(str), "~r~Kick~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Kick~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -263,7 +263,7 @@ stock KickPlayerTXD(playerid, adminid, reason[])
 stock AJPlayerTXD(playerid, adminid, reason[])
 {
 	new str[256];
-    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -279,7 +279,7 @@ stock AJPlayerTXD(playerid, adminid, reason[])
 stock BanPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Ban~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Ban~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -296,7 +296,7 @@ stock BanPlayerTXD(playerid, adminid, reason[])
 stock WarnPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Warn~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Warn~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -312,7 +312,7 @@ stock WarnPlayerTXD(playerid, adminid, reason[])
 stock BlockPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Block~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Block~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -330,7 +330,7 @@ stock PWarnPlayerTXD(player[], adminid, result[])
 	new str[128];
 	new nickDoWarna[MAX_PLAYER_NAME]; 
 	strcat(nickDoWarna, player); 
-    format(str, sizeof(str), "~r~Warn Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", nickDoWarna, GetNick(adminid), result);
+    format(str, sizeof(str), "~r~Warn Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickDoWarna, GetNick(adminid), result);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);

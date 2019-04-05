@@ -18,6 +18,7 @@ public CheckCode2003(killerid, playerid)
     	SendCommandLogMessage(string);
 	}
 }
+
 forward SpecToggle(playerid);
 public SpecToggle(playerid)
 {
