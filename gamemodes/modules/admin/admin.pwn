@@ -7390,9 +7390,6 @@ CMD:odmroz(playerid, params[])
 CMD:warn(playerid, params[])
 {
 	new string[256];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
     	new giveplayerid, result[64];
@@ -7421,7 +7418,6 @@ CMD:warn(playerid, params[])
 		    {
 		        if(giveplayerid != INVALID_PLAYER_ID)
 		        {
-					new str[128];
 		            if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 		            {
 		                sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zwarnowaæ Admina !");
