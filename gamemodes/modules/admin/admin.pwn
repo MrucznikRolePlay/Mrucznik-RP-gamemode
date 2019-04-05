@@ -330,7 +330,7 @@ stock PWarnPlayerTXD(player[], adminid, result[])
 	new str[128];
 	new nickDoWarna[MAX_PLAYER_NAME]; 
 	strcat(nickDoWarna, player); 
-    format(str, sizeof(str), "~r~Warn Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", nickDoWarna, GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Warn Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", nickDoWarna, GetNick(adminid), result);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -347,6 +347,7 @@ stock GivePWarnForPlayer(player[], adminid, result[])
 {
 	new nickDoWarna[MAX_PLAYER_NAME];
 	strcat(nickDoWarna, player); 
+	new string[256];
 	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zwarnowane przez %s, Powod: %s", nickDoWarna, GetNick(adminid), (result));
 	WarnLog(string);
 	MruMySQL_SetAccInt("Warnings", nickDoWarna, MruMySQL_GetAccInt("Warnings", nickDoWarna)+1);
