@@ -15063,7 +15063,7 @@ CMD:wymiana(playerid, params[])
 		if(PlayerInfo[playa][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ siê z tym graczem, poniewa¿ ma 1 lvl");
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ pojazdu, poniewa¿ masz 1 lvl");
 
-        IDAuta[playa] = VehicleUID[lVeh][vUID];
+		new vehid = VehicleUID[lVeh][vUID];
 
  		if(!ProxDetectorS(10.0, playerid, playa)) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 		if(!(cena >= 0 && cena < 900000001)) return sendTipMessage(playerid, "Cena od 0 do 900 000 000$ !");
@@ -15081,14 +15081,14 @@ CMD:wymiana(playerid, params[])
         //TODO
         if(PlayerInfo[playa][pDonateRank] == 0)
         {
-            if(CarData[IDAuta[playa]][c_Neon] != 18652 && CarData[IDAuta[playa]][c_Neon] != 0)
+            if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
             {
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
         }
         if(PlayerInfo[playerid][pDonateRank] == 0)
         {
-            if(CarData[IDAuta[playerid]][c_Neon] != 18652 && CarData[IDAuta[playerid]][c_Neon] != 0)
+            if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
             {
                 SendClientMessage(playerid, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
@@ -15098,6 +15098,7 @@ CMD:wymiana(playerid, params[])
         GraczWymieniajacy[playa] = playerid;
 		CenaWymienianegoAuta[playa] = cena;
 		IDWymienianegoAuta[playa] = GetPlayerVehicleID(playa);
+        IDAuta[playa] = vehid;
 	}
  	else
  	{
@@ -15130,7 +15131,7 @@ CMD:sprzedajauto(playerid, params[])
 		if(PlayerInfo[playa][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedaæ temu graczowi pojazdu poniewa¿ ma 1lvl");
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedawaæ pojazdu bo masz 1 lvl");
 
-        IDAuta[playa] = VehicleUID[lVeh][vUID];
+		new vehid = VehicleUID[lVeh][vUID];
 
  		if(!ProxDetectorS(10.0, playerid, playa)) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 		if(!(cena > 0 && cena < 900000001)) return sendErrorMessage(playerid, "Cena od 1 do 900 000 000$ !");
@@ -15148,7 +15149,7 @@ CMD:sprzedajauto(playerid, params[])
         //TODO
         if(PlayerInfo[playa][pDonateRank] == 0)
         {
-            if(CarData[IDAuta[playa]][c_Neon] != 18652 && CarData[IDAuta[playa]][c_Neon] != 0)
+            if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
             {
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
@@ -15157,6 +15158,7 @@ CMD:sprzedajauto(playerid, params[])
         SendClientMessage(playerid, 0xFFC0CB, string);
         GraczDajacy[playa] = playerid;
 		CenaDawanegoAuta[playa] = cena;
+        IDAuta[playa] = vehid;
 	}
  	else
  	{
@@ -17562,6 +17564,7 @@ CMD:rooc(playerid, params[])
 	    {
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
+			SendDiscordFracMessage(member, string);
             printf("%s", string);
         }
         else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie
@@ -22760,6 +22763,7 @@ CMD:a(playerid, params[])
 			if (PlayerInfo[playerid][pAdmin] >= 1)
 			{
 				SendAdminMessage(0xFFC0CB, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 			}
 			printf("Admin %s: %s", sendername, params);
 		}
@@ -22769,6 +22773,7 @@ CMD:a(playerid, params[])
 			if (PlayerInfo[playerid][pNewAP] >= 1)
 			{
 				SendAdminMessage(0xFFC0CB, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 			}
 			printf("PolAdmin %s: %s", sendername, params);
 		}
@@ -22778,6 +22783,7 @@ CMD:a(playerid, params[])
             if (PlayerInfo[playerid][pNewAP] >= 1)
             {
                 SendAdminMessage(0xFFC0CB, string);
+				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
             }
             printf("Skrypter %s: %s", sendername, params);
         }
@@ -28557,7 +28563,7 @@ CMD:innyspawn(playerid)
 CMD:report(playerid, params[]) return cmd_raport(playerid, params);
 CMD:raport(playerid, params[])
 {
-	new string[128];
+	new string[128], discordstring[128];
 	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
@@ -28579,6 +28585,8 @@ CMD:raport(playerid, params[])
 			}
 			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
 			ABroadCast(COLOR_YELLOW,string,1);
+			format(discordstring, sizeof(discordstring), "» Report od %s [%d]: %s", sendername, playerid, params);
+			SendDiscordMessage(DISCORD_REPORT, discordstring);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "Je¿eli Administracja nie reaguje na Twój report, oznacza to, ¿e...");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "...jest on Ÿle sformu³owany i Administracja nie rozpatrzy tego zg³oszenia.");//By: Dawid
@@ -33602,14 +33610,6 @@ CMD:akceptuj(playerid, params[])
                             }
                             GetPlayerName(playerid, sendername, sizeof(sendername));
 
-                            /*if(CountPlayerCars(playerid) >= PlayerInfo[playerid][pCarSlots])
-                            {
-                                SendClientMessage(GraczWymieniajacy[playerid], COLOR_GREY, " Gracz nie posiada wolnego slota.");
-                                GraczWymieniajacy[playerid] = 0;
-                                CenaWymienianegoAuta[playerid] = 0;
-                                SendClientMessage(playerid, COLOR_GREY, " Nie posiadasz wolnego slota.");
-                                return 1;
-                            }*/
                             if(!ProxDetectorS(10.0, playerid, GraczWymieniajacy[playerid])) return SendClientMessage(playerid, 0xFFC0CB, "Ten gracz jest za daleko !");
                             if(!IsPlayerInAnyVehicle(playerid))
                             {
@@ -33623,11 +33623,11 @@ CMD:akceptuj(playerid, params[])
                                 CenaWymienianegoAuta[playerid] = 0;
                                 return 1;
                             }
-                            Car_MakePlayerOwner(playerid, IDAuta[playerid]);
                             Car_RemovePlayerOwner(GraczWymieniajacy[playerid], IDAuta[playerid]);
-
-                            Car_MakePlayerOwner(GraczWymieniajacy[playerid], VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
                             Car_RemovePlayerOwner(playerid, VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
+							
+                            Car_MakePlayerOwner(playerid, IDAuta[playerid]);
+                            Car_MakePlayerOwner(GraczWymieniajacy[playerid], VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
 
                             GetPlayerName(GraczWymieniajacy[playerid], giveplayer, sizeof(giveplayer));
                             GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -35062,6 +35062,7 @@ CMD:fooc(playerid, params[])
             {
                 format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
     			SendFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendDiscordFracMessage(member, string);
                 //Tajniacy
                 if(member == 5) SendTajniakMessage(3, TEAM_AZTECAS_COLOR, string);
                 else if(member == 6) SendTajniakMessage(4, TEAM_AZTECAS_COLOR, string);
@@ -35106,6 +35107,7 @@ CMD:fooc(playerid, params[])
                 //Rangi podstawowe
                 else format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
                 SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendDiscordOrgMessage(member, string);
 			}
 			printf("%s", string);
 			return 1;
@@ -35196,6 +35198,7 @@ CMD:news(playerid, params[])
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					OOCNews(COLOR_NEWS,string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
                     //OOCNews(0xFF8C55FF, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
@@ -35235,6 +35238,7 @@ CMD:news(playerid, params[])
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					//OOCNews(COLOR_NEWS,string);
                     OOCNews(0xBB5D00FF, string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
 					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }

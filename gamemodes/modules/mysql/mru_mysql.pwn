@@ -656,6 +656,13 @@ public MruMySQL_LoadAcocount(playerid)
 	return true;
 }
 
+stock MruMySQL_ConvertPassword(playerid, hashedPassword[])
+{
+	new string[256];
+	format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", hashedPassword, GetNick(playerid));
+	mysql_query(string);
+}
+
 stock MruMySQL_WczytajOpis(handle, uid, typ)
 {
     new lStr[128], lText[128];
