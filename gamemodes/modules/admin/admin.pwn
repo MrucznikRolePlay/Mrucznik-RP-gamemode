@@ -534,6 +534,7 @@ stock GivePBanForPlayer(player[], adminid, result[])
 {
 	new nickDoBlocka[MAX_PLAYER_NAME];
 	strcat(nickDoBlocka, player);
+	new string[256];
 	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zbanowane przez %s, Powod: %s ", nickDoBlocka, GetNick(adminid), (result));
 	BanLog(string);
 	MruMySQL_BanujOffline(nickDoBlocka, result, adminid);
