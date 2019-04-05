@@ -325,10 +325,12 @@ stock BlockPlayerTXD(playerid, adminid, reason[])
 	}
 	return 1;
 }
-stock PBlockPlayerTXD(player[], adminid, reason[])
+stock PWarnPlayerTXD(player[], adminid, result[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Block Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", player, GetNick(adminid), reason);
+	new nickDoWarna[MAX_PLAYER_NAME]; 
+	strcat(nickDoWarna, player); 
+    format(str, sizeof(str), "~r~Warn Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod:~w~%s", nickDoWarna, GetNick(adminid), reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -341,7 +343,132 @@ stock PBlockPlayerTXD(player[], adminid, reason[])
 	}
 	return 1;
 }
-
+stock GivePWarnForPlayer(player[], adminid, result[]) 
+{
+	new nickDoWarna[MAX_PLAYER_NAME];
+	strcat(nickDoWarna, player); 
+	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zwarnowane przez %s, Powod: %s", nickDoWarna, GetNick(adminid), (result));
+	WarnLog(string);
+	MruMySQL_SetAccInt("Warnings", nickDoWarna, MruMySQL_GetAccInt("Warnings", nickDoWarna)+1);
+	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
+	AntySpam[adminid] = 1;
+	if(GetPlayerAdminDutyStatus(adminid) == 1)
+	{
+		iloscWarn[adminid] = iloscWarn[adminid]+1;
+	}
+	else if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		sendErrorMessage(adminid, "Nie jesteœ podczas s³u¿by administratora, Warn nie zostaje zaliczony!"); 
+	}
+	return 1;
+}
+stock GiveWarnForPlayer(playerid, adminid, result[])
+{
+	new str[256];
+	new string[256];
+	PlayerInfo[playerid][pWarns] += 1;
+	if(PlayerInfo[playerid][pWarns] >= 3)
+	{
+		SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
+		format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez Admina %s (3 warny), powód: %s", GetNick(playerid), GetNick(adminid), (result));
+		BanLog(string);
+		if(GetPlayerAdminDutyStatus(adminid) == 1)
+		{
+			iloscBan[adminid]++; 
+		}
+		//adminowe logi
+		format(str, sizeof(str), "Admini/%s.ini", GetNick(adminid));
+		dini_IntSet(str, "Ilosc_Warnow", dini_Int(str, "Ilosc_Warnow")+1 );
+		MruMySQL_Banuj(playerid, result, adminid);
+		KickEx(playerid);
+		return 1;	
+	}
+	format(str, sizeof(str), "Dosta³eœ warna od %s, powód: %s", GetNick(adminid), (result));
+	SendClientMessage(playerid, COLOR_LIGHTRED, str);
+	format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez Admina %s, powód: %s", GetNick(playerid), GetNick(adminid), (result));
+	WarnLog(string);
+	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
+	AntySpam[adminid] = 1;
+	KickEx(playerid);
+	if(GetPlayerAdminDutyStatus(adminid) == 1)
+	{
+		iloscWarn[adminid] = iloscWarn[adminid]+1;
+	}
+	return 1;
+}
+stock PBlockPlayerTXD(player[], adminid, reason[])
+{
+	new str[128];
+	new nickOdbieracza[MAX_PLAYER_NAME];
+	strcat(nickOdbieracza, player); 
+    format(str, sizeof(str), "~r~Block Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+	return 1;
+}
+stock PBanPlayerTXD(player[], adminid, reason[])
+{
+	new str[128];
+	new nickOdbieracza[MAX_PLAYER_NAME];
+	strcat(nickOdbieracza, player); 
+    format(str, sizeof(str), "~r~Ban Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+	return 1;
+}
+stock PAJPlayerTXD(player[], adminid, timeVal, reason[])
+{
+	new nickOdbieracza[MAX_PLAYER_NAME];
+	strcat(nickOdbieracza, player); 
+	new str[128];
+	new nickOdbieracza[MAX_PLAYER_NAME];
+	strcat(nickOdbieracza, player); 
+    format(str, sizeof(str), "~r~AJ Offline~w~~n~Dla: %s~n~Od: %s~n~Na %d~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), timeVal, reason);
+    TextDrawSetString(Kary, str);
+    TextDrawShowForAll(Kary);
+	karaTimer = SetTimer("StopDraw", 15000, false);
+	foreach(Player, i)
+	{
+		if(togADMTXD[i] == 1)
+		{
+			TextDrawHideForPlayer(i, Kary); 
+		}
+	}
+	return 1;
+}
+stock SetPlayerPAdminJail(player[], adminid, timeVal, result[])
+{
+	new nickOdbieracza[MAX_PLAYER_NAME];
+	strcat(nickOdbieracza, player); 
+	format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nickOdbieracza, timeVal, GetNick(adminid), (result));
+	KickLog(string);
+	if(GetPlayerAdminDutyStatus(adminid) == 1)
+	{
+		iloscAJ[adminid] = iloscAJ[adminid]+1;
+	
+	}
+	MruMySQL_SetAccInt("Jailed", nickOdbieracza, 3);
+	MruMySQL_SetAccInt("JailTime", nickOdbieracza, timeVal*60);
+	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
+	AntySpam[adminid] = 1;
+	return 1;
+}
 stock SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 {
 	new string[256];
@@ -403,6 +530,21 @@ stock GiveBlockForPlayer(playerid, adminid, result[])
 	}
 	return 1;
 }
+stock GivePBanForPlayer(player[], adminid, result[])
+{
+	new nickDoBlocka[MAX_PLAYER_NAME];
+	strcat(nickDoBlocka, player);
+	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zbanowane przez %s, Powod: %s ", nickDoBlocka, GetNick(adminid), (result));
+	BanLog(string);
+	MruMySQL_BanujOffline(nickDoBlocka, result, adminid);
+	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
+	AntySpam[adminid] = 1;
+	if(GetPlayerAdminDutyStatus(adminid) == 1)
+	{
+		iloscBan[adminid] = iloscBan[adminid]+1;
+	}
+	return 1;
+}	
 stock GivePBlockForPlayer(player[], adminid, result[])
 {
 	new string[256];
@@ -1060,8 +1202,6 @@ CMD:pblok(playerid, params[])
 CMD:pban(playerid, params[])
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
         if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
@@ -1090,16 +1230,15 @@ CMD:pban(playerid, params[])
 				sendErrorMessage(playerid, "Brak pliku gracza, nie mo¿na zbanowaæ (konto nie istnieje).");
 				return 1;
 			}
-            GetPlayerName(playerid, sendername, sizeof(sendername));
-            format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zbanowane przez %s, Powod: %s ", nick, sendername, (result));
-       		BanLog(string);
-            SendPunishMessage(string);
-            MruMySQL_BanujOffline(nick, result, playerid);
-			SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-			AntySpam[playerid] = 1;
-			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			GivePBanForPlayer(nick, playerid, result);
+			if(kary_TXD_Status == 1)
 			{
-				iloscBan[playerid] = iloscBan[playerid]+1;
+				PBanPlayerTXD(nick, playerid, result);
+            }
+			else if(kary_TXD_Status == 0)
+			{
+				format(string, sizeof(string), "Admin %s zablokowa³ %s (Offline). Powód: %s", GetNick(playerid), nick, result);
+				SendPunishMessage(string, playerid); 
 			}
 		}
     }
@@ -1109,8 +1248,6 @@ CMD:pban(playerid, params[])
 CMD:pwarn(playerid, params[])
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
         if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
@@ -1140,16 +1277,17 @@ CMD:pwarn(playerid, params[])
 				sendErrorMessage(playerid, "Brak pliku gracza, nie mo¿na zwarnowaæ (konto nie istnieje).");
 				return 1;
 			}
-
-            GetPlayerName(playerid, sendername, sizeof(sendername));
-            format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zwarnowane przez %s, Powod: %s", nick, sendername, (result));
-            SendPunishMessage(string);
-       		WarnLog(string);
-			format(string, sizeof(string), "AdmCmd: Konto gracza offline %s zostalo zwarnowane przez %s, Powod: %s", nick, sendername, (result));
-            //ABroadCast(COLOR_LIGHTRED,string,1);
-            MruMySQL_SetAccInt("Warnings", nick, MruMySQL_GetAccInt("Warnings", nick)+1);
-			SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-			AntySpam[playerid] = 1;
+			GivePWarnForPlayer(nick, playerid, result);
+			if(kary_TXD_Status == 1)
+			{
+				PWarnPlayerTXD(nick, playerid, result);
+			}
+			else if(kary_TXD_Status == 0)
+			{
+				format(string, sizeof(string), "Admin %s nada³ warna (offline) dla %s. Powód: %s", GetNick(playerid), nick, result);
+				SendPunishMessage(string, playerid);
+			}
+        
 		}
     }
 	return 1;
@@ -1189,23 +1327,17 @@ CMD:paj(playerid, params[])
 				sendErrorMessage(playerid, "Brak pliku gracza, nie mo¿na zAJotowaæ (konto nie istnieje).");
 				return 1;
 			}
-
-            GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nick, czas, sendername, (result));
-			KickLog(string);
-            //ABroadCast(COLOR_LIGHTRED,string,1);
-            SendPunishMessage(string);
-            //PlayerInfo[giveplayerid][pCK] = 2;
-			if(GetPlayerAdminDutyStatus(playerid) == 1)
-			{
-				iloscAJ[playerid] = iloscAJ[playerid]+1;
+			SetPlayerPAdminJail(nick, playerid, czas, result);
 			
+			if(kary_TXD_Status == 1)
+			{
+				PAJPlayerTXD(nick, playerid, czas, result); 
 			}
-
-			MruMySQL_SetAccInt("Jailed", nick, 3);
-			MruMySQL_SetAccInt("JailTime", nick, czas*60);
-			SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-			AntySpam[playerid] = 1;
+			else if(kary_TXD_Status == 0)
+			{
+				format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nick, czas, GetNick(playerid), (result));
+				SendPunishMessage(string, playerid);
+			}
 		}
     }
 	return 1;
@@ -7301,55 +7433,32 @@ CMD:warn(playerid, params[])
                         sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany, u¿yj kicka.");
 						return 1;
                     }
-				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					PlayerInfo[giveplayerid][pWarns] += 1;
-					if(PlayerInfo[giveplayerid][pWarns] >= 3)
-					{
-					    if(gPlayerLogged[giveplayerid] != 0)
-						{
-						    SendClientMessage(giveplayerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
-							format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez Admina %s (3 warny), powód: %s", giveplayer, sendername, (result));
-							BanLog(string);
-							format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez Admina %s (3 Ostrze¿enia), powód: %s", giveplayer, sendername, (result));
-                            SendPunishMessage(string, giveplayerid);
-							//adminowe logi
-					        format(str, sizeof(str), "Admini/%s.ini", sendername);
-					        dini_IntSet(str, "Ilosc_Warnow", dini_Int(str, "Ilosc_Warnow")+1 );
-							MruMySQL_Banuj(giveplayerid, result, playerid);
-							KickEx(giveplayerid);
-							return 1;
-						}
-					}
-					format(str, sizeof(str), "Da³eœ warna %s, powód: %s", giveplayer, (result));
-					SendClientMessage(playerid, COLOR_LIGHTRED, str);
-					format(str, sizeof(str), "Dosta³eœ warna od %s, powód: %s", sendername, (result));
-					SendClientMessage(giveplayerid, COLOR_LIGHTRED, str);
-					if(kary_TXD_Status == 0)
-					{
-						format(string, sizeof(string), "AdmCmd: %s zostal zwarnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
-						SendPunishMessage(string, giveplayerid);
-					}
+					GiveWarnForPlayer(giveplayerid, playerid, result);
 					if(kary_TXD_Status == 1)
 					{
-						WarnPlayerTXD(giveplayerid, playerid, result); 
+						if(PlayerInfo[giveplayerid][pWarns] >= 3)
+						{
+							format(string, sizeof(string), "%s (3 Warny)" result);
+							BanPlayerTXD(giveplayerid, playerid, string); 
+						}
+						else 
+						{
+							WarnPlayerTXD(giveplayerid, playerid, result);
+						}
 					}
-					/*format(str,sizeof(str),"~p~Warn Info (Ban):~n~~r~Osoba zwarnowana: ~w~%s~n~~r~Powod: ~w~%s ~n~~r~Nalozyl: ~w~%s", giveplayer ,(result), sendername);
-				    NapisText(str); */
-					WarnLog(string);
-					//adminduty
-					
-					if(GetPlayerAdminDutyStatus(playerid) == 1)
+					else if(kary_TXD_Status == 0)
 					{
-						iloscWarn[playerid] = iloscWarn[playerid]+1;
+						if(PlayerInfo[giveplayerid][pWarns] >= 3)
+						{
+							format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNick(giveplayerid), GetNick(playerid), result); 
+						}
+						else 
+						{
+							format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNick(giveplayerid), GetNick(playerid), result);
+						}
+						SendPunishMessage(string, playerid); 
 					}
-					else if(GetPlayerAdminDutyStatus(playerid) == 0)
-					{
-						sendErrorMessage(playerid, "Nie jesteœ podczas s³u¿by administratora, Warn nie zostaje zaliczony!"); 
-					}
-					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-	    			AntySpam[playerid] = 1;
-	    			KickEx(giveplayerid);
+				  
 					return 1;
 				}
 			}//not connected
