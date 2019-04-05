@@ -438,8 +438,6 @@ stock PAJPlayerTXD(player[], adminid, timeVal, reason[])
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
 	new str[128];
-	new nickOdbieracza[MAX_PLAYER_NAME];
-	strcat(nickOdbieracza, player); 
     format(str, sizeof(str), "~r~AJ Offline~w~~n~Dla: %s~n~Od: %s~n~Na %d~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), timeVal, reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
@@ -457,6 +455,7 @@ stock SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 {
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
+	new string[256];
 	format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nickOdbieracza, timeVal, GetNick(adminid), (result));
 	KickLog(string);
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
