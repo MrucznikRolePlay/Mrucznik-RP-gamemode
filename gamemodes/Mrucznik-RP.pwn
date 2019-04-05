@@ -2061,7 +2061,7 @@ SetPlayerSpawnPos(playerid)
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
 			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			Wchodzenie(playerid);
-			if(GetPlayerPLocal(playerid) == PLOCAL_INNE_BANK || GetPlayerPLocal(playerid) == PLOCAL_FRAC_DMV)
+			if(GetPLocal(playerid) == PLOCAL_INNE_BANK || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
 	        {
 				sendTipMessage(playerid, "W banku nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
 				SetPVarInt(playerid, "mozeUsunacBronie", 1);
