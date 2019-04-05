@@ -74,14 +74,6 @@ stock SprawdzZnaki(text[])
 	&& strfind(text, "kutas") == -1
 	&& strfind(text, "chuj") == -1
 	&& strfind(text, "69") == -1//Zabezpieczenie Anty-Jupik
-	&& strfind(text, "¹") == -1
-	&& strfind(text, "œ") == -1
-	&& strfind(text, "¿") == -1
-	&& strfind(text, "Ÿ") == -1
-	&& strfind(text, "æ") == -1
-	&& strfind(text, "ê") == -1
-	&& strfind(text, "ñ") == -1
-	&& strfind(text, "ó") == -1
 	&& strfind(text, "§") == -1
 	&& strfind(text, "+") == -1)
 	{
@@ -114,7 +106,7 @@ stock AdminDutyPlayer(playerid, status)
 		SendAdminMessage(COLOR_RED, string); 
 		MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
 		format(string, sizeof(string), "%s", AdminName); 
-		SetPlayerName(playerid, string);
+		SetPlayerName(playerid, Odpolszcz(string));
 		SetPVarInt(playerid, "dutyadmin", 1);
 		SetPlayerColor(playerid, 0xFF0000FF);
 	

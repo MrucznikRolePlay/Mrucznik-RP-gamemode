@@ -1880,7 +1880,7 @@ CMD:odznaka(playerid, params[])
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
                         format(string, sizeof(string), "Stopieñ: %s", FamRang[FAMILY_SAD][PlayerInfo[playerid][pRank]]);
 						SendClientMessage(giveplayerid,COLOR_WHITE,string);
-						if(PlayerInfo[playerid][pRank] > 5)
+						if(PlayerInfo[playerid][pRank] > 7)
 						{
 							SendClientMessage(giveplayerid,COLOR_GREEN,"TA OSOBA POSIADA IMMUNITET!");
 						}
@@ -1888,7 +1888,7 @@ CMD:odznaka(playerid, params[])
 						{
 							SendClientMessage(giveplayerid,COLOR_RED,"TA OSOBA NIE POSIADA IMMUNITETU!");
 						}
-						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|_____________ Podpis: Dykrektor Urzêdu __________|");
+						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|_____________ Podpis: Burmistrz & Posiadacz __________|");
 					}
 					if (GetPlayerFraction(playerid) == FRAC_SN)
 					{
@@ -25161,6 +25161,7 @@ CMD:rozkuj(playerid, params[])
                             uzytekajdanki[playerid] = 0;
 							PDkuje[playerid] = 0;
 							PDkuje[giveplayerid]=0;
+							PlayerInfo[giveplayerid][pMuted] = 0;
                             ClearAnimations(giveplayerid);
         					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
 							RemovePlayerAttachedObject(giveplayerid, 0);
