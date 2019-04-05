@@ -1297,8 +1297,6 @@ CMD:pwarn(playerid, params[])
 CMD:paj(playerid, params[])
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
         if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
@@ -7439,13 +7437,12 @@ CMD:warn(playerid, params[])
 					{
 						if(PlayerInfo[giveplayerid][pWarns] >= 3)
 						{
-							format(string, sizeof(string), "%s (3 Warny)" result);
+							format(string, sizeof(string), "%s (3 Warny)", result);
 							BanPlayerTXD(giveplayerid, playerid, string); 
+							return 1;
 						}
-						else 
-						{
-							WarnPlayerTXD(giveplayerid, playerid, result);
-						}
+						WarnPlayerTXD(giveplayerid, playerid, result);
+						
 					}
 					else if(kary_TXD_Status == 0)
 					{
