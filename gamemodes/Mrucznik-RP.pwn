@@ -113,7 +113,7 @@ native WP_Hash(buffer[], len, const str[]);
 
 
 //KOMENDY:
-#include "commands/LOAD_COMMANDS.pwn"
+#include "/modules/commands/LOAD_COMMANDS.pwn"
 
 
 
