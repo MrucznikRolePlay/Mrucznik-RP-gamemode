@@ -153,74 +153,6 @@ CMD:skille(playerid)
 
 
 
-
-CMD:uprawnienia(playerid, params[])
-{
-    new str[512];
-    strcat(str, "\t\t\tUPRAWNIENIA\n");
-    if(Uprawnienia(playerid, ACCESS_PANEL)) strcat(str, "{00FF00}+{FFFFFF} Panel administracyjny\n");
-    if(Uprawnienia(playerid, ACCESS_KARY)) strcat(str, "{00FF00}+{FFFFFF} Panel kar\n");
-    if(Uprawnienia(playerid, ACCESS_KARY_ZNAJDZ)) strcat(str, "\t» Wyszukiwanie kar\n");
-    if(Uprawnienia(playerid, ACCESS_KARY_BAN)) strcat(str, "\t» Nadawanie kar\n");
-    if(Uprawnienia(playerid, ACCESS_KARY_UNBAN)) strcat(str, "\t» Zdejmowanie kar\n");
-    if(Uprawnienia(playerid, ACCESS_ZG)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie ZG\n");
-    if(Uprawnienia(playerid, ACCESS_MAKELEADER)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie paneli\n");
-    if(Uprawnienia(playerid, ACCESS_GIVEHALF)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie P@\n");
-
-    if(Uprawnienia(playerid, ACCESS_MAKEFAMILY)) strcat(str, "{00FF00}+{FFFFFF} Tworzenie organizacji\n");
-    if(Uprawnienia(playerid, ACCESS_DELETEORG)) strcat(str, "{00FF00}+{FFFFFF} Usuwanie organizacji\n");
-
-    if(Uprawnienia(playerid, ACCESS_EDITCAR)) strcat(str, "{00FF00}+{FFFFFF} Edycja pojazdów\n");
-    if(Uprawnienia(playerid, ACCESS_EDITRANG)) strcat(str, "{00FF00}+{FFFFFF} Edycja rang\n");
-    if(Uprawnienia(playerid, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ");
-    if(strlen(str) < 20) strcat(str, "{FF0000}Brak jakichkolwiek uprawnieñ!");
-    ShowPlayerDialogEx(playerid, D_INFO, DIALOG_STYLE_LIST, "Twoje uprawnienia", str, "OK", "");
-    return 1;
-}
-
-CMD:edytujupr(playerid, params[])
-{
-    if(!(Uprawnienia(playerid, ACCESS_EDITPERM) && IsPlayerAdmin(playerid))) return SendClientMessage(playerid, -1, "(PERM) - Nie posiadasz pe³nych praw.");
-    new id;
-    if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(PERM) - Podaj Nick lub ID gracza.");
-    new str[512];
-    format(str, sizeof(str), "\t\tUPRAWNIENIA %s\n", GetNick(id, true));
-    if(Uprawnienia(id, ACCESS_PANEL)) strcat(str, "{00FF00}+{FFFFFF} Panel administracyjny\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Panel administracyjny\n");
-    if(Uprawnienia(id, ACCESS_KARY)) strcat(str, "{00FF00}+{FFFFFF} Panel kar\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Panel kar\n");
-    if(Uprawnienia(id, ACCESS_KARY_ZNAJDZ)) strcat(str, "\t» Wyszukiwanie kar\n");
-    else strcat(str, "{FF0000}\t» Wyszukiwanie kar\n");
-    if(Uprawnienia(id, ACCESS_KARY_BAN)) strcat(str, "\t» Nadawanie kar\n");
-    else strcat(str, "{FF0000}\t» Nadawanie kar\n");
-    if(Uprawnienia(id, ACCESS_KARY_UNBAN)) strcat(str, "\t» Zdejmowanie kar\n");
-    else strcat(str, "{FF0000}\t» Zdejmowanie kar\n");
-
-    if(Uprawnienia(id, ACCESS_ZG)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie ZG\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Nadawanie ZG\n");
-    if(Uprawnienia(id, ACCESS_GIVEHALF)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie P@\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Nadawanie P@\n");
-    if(Uprawnienia(id, ACCESS_MAKELEADER)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie paneli\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Nadawanie paneli\n");
-
-    if(Uprawnienia(id, ACCESS_MAKEFAMILY)) strcat(str, "{00FF00}+{FFFFFF} Tworzenie organizacji\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Tworzenie organizacji\n");
-    if(Uprawnienia(id, ACCESS_DELETEORG)) strcat(str, "{00FF00}+{FFFFFF} Usuwanie organizacji\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Usuwanie organizacji\n");
-
-    if(Uprawnienia(id, ACCESS_EDITCAR)) strcat(str, "{00FF00}+{FFFFFF} Edycja pojazdów\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Edycja pojazdów\n");
-    if(Uprawnienia(id, ACCESS_EDITRANG)) strcat(str, "{00FF00}+{FFFFFF} Edycja rang\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Edycja rang\n");
-    if(Uprawnienia(id, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ\n");
-    else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
-    if(Uprawnienia(id, ACCESS_OWNER)) strcat(str, "{00FF00}OWNER RIGHT'S");
-    valstr(params, id);
-    SetPVarString(playerid, "perm-id", params);
-    ShowPlayerDialogEx(playerid, D_PERM, DIALOG_STYLE_LIST, "Edycja uprawnieñ", str, "Zmieñ", "WyjdŸ");
-    return 1;
-}
-
 CMD:streamer(playerid, params[])
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
@@ -514,28 +446,6 @@ CMD:vopispomoc(playerid)
 	return 1;
 }
 
-CMD:pracownicy(playerid)
-{
-    new frac = GetPlayerFraction(playerid);
-	if(frac > 0 && PlayerInfo[playerid][pRank] >= 4)
-	{
-	    new string[64];
-	    SendClientMessage(playerid, COLOR_GREEN, "Pracownicy Online:");
-		foreach(Player, i)
-		{
-		    if(frac == GetPlayerFraction(i))
-		    {
-		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i, true), i, PlayerInfo[i][pRank]);
-		        SendClientMessage(playerid, COLOR_GRAD1, string);
-		    }
-		}
-	}
-	else
-	{
-	    sendErrorMessage(playerid, "Nie jesteœ liderem lub osob¹ z 4 rang¹!");
-	}
-	return 1;
-}
 
 
 /*
@@ -824,72 +734,6 @@ CMD:pomoc2(playerid)
     return 1;
 }
 
-CMD:id(playerid, params[])
-{
-	if(isnull(params))
-	{
-		sendTipMessage(playerid, "U¿yj /id [playerid/czêœæ nicku]");
-		return 1;
-	}
-
-	new string[333];
-	if(IsNumeric(params))
-	{
-		new giveplayerid = strval(params);
-
-		if(!IsPlayerConnected(giveplayerid))
-		{
-			sendTipMessage(playerid, "Obecnie na serwerze nie ma gracza o tym ID.");
-			return 1;
-		}
-
-  		SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
-		format(string, sizeof(string), "Gracz (ID: %d) %s.", giveplayerid, GetNick(giveplayerid, true));
-		SendClientMessage(playerid, COLOR_GRAD1, string);
-
-		return 1;
-	}
-	else
-	{
-		if(strlen(params) < 3)
-		{
-			sendErrorMessage(playerid, "Za krótka fraza.");
-			return 1;
-		}
-
-		SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
-
-		new c = 0;
-		new nick[MAX_PLAYER_NAME];
-
-		foreach(Player, i)
-		{
-			if(c >= 10) break;
-
-			GetPlayerName(i, nick, sizeof(nick));
-
-			if(strfind(nick, params, true) != -1)
-			{
-				format(string, sizeof(string), "ID: (%d) %s",i,nick);
-				SendClientMessage(playerid, COLOR_GRAD1, string);
-				c++;
-			}
-		}
-
-		if(c >= 10)
-		{
-			sendErrorMessage(playerid, "Zbyt du¿o wyników, zmieñ kryteria.");
-			return 1;
-		}
-
-		if(c == 0)
-		{
-			sendErrorMessage(playerid, "Nie znaleziono takiego nicku.");
-			return 1;
-		}
-	}
-	return 1;
-}
 
 #if DEBUG == 1
 CMD:funiadajadmina(playerid, params[]) {
@@ -898,47 +742,6 @@ CMD:funiadajadmina(playerid, params[]) {
 }
 #endif
 
-
-
-
-CMD:wd(playerid) return cmd_wywaldragi(playerid);
-CMD:wyrzucdragi(playerid) return cmd_wywaldragi(playerid);
-CMD:wywaldragi(playerid)
-{
-    if(PlayerInfo[playerid][pDrugs] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie narkotyków");
-	new nick[MAX_PLAYER_NAME], string[128];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	format(string, sizeof(string),"%s wyrzuci³ torebeczkê z bia³ym proszkiem na ziemie.", nick);
-	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	format(string, sizeof(string), "* s³ychaæ dŸwiêk upuszczonej torebeczki ((%s))", nick);
-	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	PlayerInfo[playerid][pDrugs] = 0;
-	return 1;
-}
-
-CMD:wyrzucmaterialy(playerid) return cmd_wm(playerid);
-CMD:wywalmaterialy(playerid) return cmd_wm(playerid);
-CMD:wm(playerid)
-{
-    if(PlayerInfo[playerid][pMats] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie materia³ów");
-	new nick[MAX_PLAYER_NAME], string[128];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	format(string, sizeof(string),"%s wyrzuci³ torbê z materia³ami na ziemie.", nick);
-	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	format(string, sizeof(string), "* s³ychaæ dŸwiêk upuszczonej torby ((%s))", nick);
-	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	PlayerInfo[playerid][pMats] = 0;
-	return 1;
-}
-
-
-CMD:sprawdzkredyty(playerid)
-{
-	new string[64];
-	format(string, sizeof(string), "Masz %d kredytów", Kredyty[playerid]);
-	SendClientMessage(playerid, COLOR_WHITE, string);
-	return 1;
-}
 
 CMD:dajbilet(playerid, params[])
 {

@@ -531,7 +531,7 @@ stock GiveKickForPlayer(playerid, adminid, result[])
 stock GiveBPForPlayer(playerid, adminid, timeVal, result[])
 {
 	new string[256], 
-	PlayerInfo[playerid][pBP] = czas;
+	PlayerInfo[playerid][pBP] = timeVal;
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 	format(string, sizeof(string), "AdmCmd: %s dostal BP od %s na %d godzin, z powodem %s", GetNick(playerid), GetNick(adminid), timeVal, result);
 	KickLog(string);
@@ -3096,7 +3096,7 @@ CMD:bp(playerid, params[])//blokada pisania
 					}
 					else if(kary_TXD_Status == 0)
 					{
-						format(string, sizeof(string), "AdmCmd: %s dosta³ Blokadê Pisania od %s na %d minut. Powód: %s", GetNick(giveplayerid), GetNick(adminid), czas, text);
+						format(string, sizeof(string), "AdmCmd: %s dosta³ Blokadê Pisania od %s na %d godzin. Powód: %s", GetNick(giveplayerid), GetNick(adminid), czas, text);
 						SendPunishMessage(string, playerid);
 					}
 					return 1;
@@ -3110,7 +3110,6 @@ CMD:bp(playerid, params[])//blokada pisania
 	}
 	else
 	{
-		new string[64];
 		format(string, sizeof(string), "%d jest nieaktywny.", giveplayerid);
 		sendErrorMessage(playerid, string);
 	}

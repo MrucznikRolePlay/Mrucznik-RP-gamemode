@@ -112,6 +112,10 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/biznes/biznes.pwn"
 
 
+//KOMENDY:
+#include "commands/LOAD_COMMANDS.pwn"
+
+
 
 //_______________________________________________
 
