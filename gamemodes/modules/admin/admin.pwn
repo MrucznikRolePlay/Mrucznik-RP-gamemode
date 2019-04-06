@@ -3100,7 +3100,7 @@ CMD:bp(playerid, params[])//blokada pisania
 					}
 					else if(kary_TXD_Status == 0)
 					{
-						format(string, sizeof(string), "AdmCmd: %s dosta³ Blokadê Pisania od %s na %d godzin. Powód: %s", GetNick(giveplayerid), GetNick(adminid), czas, text);
+						format(string, sizeof(string), "AdmCmd: %s dosta³ Blokadê Pisania od %s na %d godzin. Powód: %s", GetNick(giveplayerid), GetNick(playerid), czas, text);
 						SendPunishMessage(string, playerid);
 					}
 					return 1;
