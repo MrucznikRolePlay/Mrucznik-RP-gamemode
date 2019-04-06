@@ -530,7 +530,7 @@ stock GiveKickForPlayer(playerid, adminid, result[])
 }
 stock GiveBPForPlayer(playerid, adminid, timeVal, result[])
 {
-	new string[256], 
+	new string[256];
 	PlayerInfo[playerid][pBP] = timeVal;
 	SendClientMessage(playerid, COLOR_NEWS, "Sprawdü czy otrzymana kara jest zgodna z listπ kar i zasad, znajdziesz jπ na www.Mrucznik-RP.pl");
 	format(string, sizeof(string), "AdmCmd: %s dostal BP od %s na %d godzin, z powodem %s", GetNick(playerid), GetNick(adminid), timeVal, result);
