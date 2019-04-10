@@ -80,3 +80,9 @@ CMD:dajrange(playerid, params[])
 	return 1;
 }
 
+
+
+
+
+
+

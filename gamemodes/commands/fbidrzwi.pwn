@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ domint ]------------------------------------------------//
+//------------------------------------------------[ fbidrzwi ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,25 +28,24 @@
 	
 */
 
-CMD:domint(playerid, params[])
+CMD:fbidrzwi(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if(IsPlayerConnected(playerid))
 	{
-		new dld, interior;
-		if( sscanf(params, "dd", dld, interior))
+		if(GetPlayerFraction(playerid) == FRAC_FBI)
 		{
-			sendTipMessage(playerid, "U¿yj /domint [dom ID] [interior] ");
-			return 1;
-		}
-		if(interior >= 1 && interior <= MAX_NrDOM)
-		{
-            Dom_ChangeInt(playerid, dld, interior);
-		}
-		else
-		{
-		    sendTipMessage(playerid, "Interior od 1 do 46");
+			if(doorFBIStatus == 0)
+			{
+				doorFBIStatus = 1;
+				sendTipMessage(playerid, "Otworzy³eœ biurowiec FBI"); 
+			}
+			else
+			{
+				doorFBIStatus = 0; 
+				sendTipMessage(playerid, "Zamykasz biurowiec FBI"); 
+			}
+		
 		}
 	}
 	return 1;
 }
-

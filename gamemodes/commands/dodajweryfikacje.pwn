@@ -32,7 +32,7 @@ CMD:dodajweryfikacje(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (IsPlayerAdmin(playerid) && PlayerInfo[playerid][pAdmin] == 5000)
+		if (IsPlayerAdmin(playerid) && IsAHeadAdmin(playerid))
 		{
 			ShowPlayerDialogEx(playerid, 1888, DIALOG_STYLE_INPUT, "Tworzenie weryfikacji", "Wpisz nick administratora któremu chcesz stworzyc weryfikacje", "Next", "Anuluj");
 		}
@@ -43,4 +43,5 @@ CMD:dodajweryfikacje(playerid)
 	}
 	return 1;
 }
+
 

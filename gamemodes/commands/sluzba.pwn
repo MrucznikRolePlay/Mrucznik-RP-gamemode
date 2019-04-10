@@ -36,6 +36,11 @@ CMD:sluzba(playerid)
 
     if(IsPlayerConnected(playerid))
     {
+		if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
+		{
+			sendErrorMessage(playerid, "Podczas wsiadania nie mo¿esz tego u¿yæ"); 
+			return 1;
+		}
         if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
         {
             sendTipMessage(playerid, "Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
@@ -46,6 +51,12 @@ CMD:sluzba(playerid)
             sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /dutycd lub /dutysbi !");
             return 1;
         }
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+			return 1;
+		}
+		
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby wzi¹æ s³u¿be musisz byæ pieszo!");
         GetPlayerName(playerid, sendername, sizeof(sendername));
         if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)

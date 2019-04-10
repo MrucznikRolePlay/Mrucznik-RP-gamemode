@@ -67,3 +67,4 @@ CMD:reklama(playerid)
 	return 1;
 }
 
+

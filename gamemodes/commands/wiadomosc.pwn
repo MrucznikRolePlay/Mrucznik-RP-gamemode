@@ -98,35 +98,90 @@ CMD:wiadomosc(playerid, params[])
         //new isplayerafk;
         //format(string, sizeof(string), "« Wiadomoœæ wys³ana do %s (ID: %d)%s: %s", giveplayer, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (" [AFK] "),tekst); //IS PLAYER AFK
         //SendClientMessage(playerid,  COLOR_YELLOW, string);
-
+		
         if(strlen(params) < 78)
         {
-            format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
-            SendClientMessage(playerid, COLOR_YELLOW, string);
-            
-            format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid, true), playerid, text);
-            SendClientMessage(giveplayerid, COLOR_NEWS, string);
+			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+			
+			if(GetPlayerAdminDutyStatus(playerid) == 0)
+			{
+				format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+				SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+				format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid, true), playerid, text);
+				SendClientMessage(giveplayerid, COLOR_NEWS, string);
+				if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
+				{
+					iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+				}
+				
+			}
+			else
+			{
+				format(string, sizeof(string), "«« %s (%d%s): %s", AdminName, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+				SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+				format(string, sizeof(string), "»» %s (%d): %s", AdminName, playerid, text);
+				SendClientMessage(giveplayerid, COLOR_NEWS, string);
+				iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
+				if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
+				{
+					iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+				}
+			
+			}
         } else {
             new pos = strfind(params, " ", true, strlen(params) / 2);
             if(pos != -1)
             {
                 new text2[64];
+				if(GetPlayerAdminDutyStatus(playerid) == 0)
+				{
+					strmid(text2, text, pos, strlen(text));
+					strdel(text, pos, strlen(text));
 
-                strmid(text2, text, pos, strlen(text));
-                strdel(text, pos, strlen(text));
+					format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+					SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+					format(string, sizeof(string), "[.] %s", text2);
+					SendClientMessage(playerid, COLOR_YELLOW, string);
+					
+					
+					format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid, true), playerid, text);
+					SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					
+					format(string, sizeof(string), "[.] %s", text2);
+					SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
+					{
+						iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+					}
+				}
+				else
+				{
+					strmid(text2, text, pos, strlen(text));
+					strdel(text, pos, strlen(text));
 
-                format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
-                SendClientMessage(playerid, COLOR_YELLOW, string);
-            
-                format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(playerid, COLOR_YELLOW, string);
-                
-                
-                format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid, true), playerid, text);
-                SendClientMessage(giveplayerid, COLOR_NEWS, string);
-                
-                format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+					SendClientMessage(playerid, COLOR_YELLOW, string);
+				
+					format(string, sizeof(string), "[.] %s", text2);
+					SendClientMessage(playerid, COLOR_YELLOW, string);
+					
+					
+					format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid), playerid, text);
+					SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					
+					format(string, sizeof(string), "[.] %s", text2);
+					SendClientMessage(giveplayerid, COLOR_NEWS, string);
+					iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
+					if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
+					{
+						iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+					}
+				
+				
+				}
             }
         }
 

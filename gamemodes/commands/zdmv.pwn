@@ -36,10 +36,17 @@ CMD:zdmv(playerid)
 
 	if((IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 1))
 	{
-        GetPlayerName(playerid, sendername, sizeof(sendername));
-		format(string, sizeof(string), "|____________Urz¹d miasta zamkniêty przez %s____________|", sendername);
-		SendClientMessageToAll(COLOR_LIGHTGREEN, string);
-		dmv = 0;
+		if(dmv == 1)
+		{
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			format(string, sizeof(string), "|____________Urz¹d miasta zamkniêty przez %s____________|", sendername);
+			SendClientMessageToAll(COLOR_LIGHTGREEN, string);
+			dmv = 0;
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Urz¹d jest zamkniêty!"); 
+		}
 	}
 	else
 	{
@@ -47,4 +54,3 @@ CMD:zdmv(playerid)
 	}
 	return 1;
 }
-

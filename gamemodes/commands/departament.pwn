@@ -44,6 +44,11 @@ CMD:departament(playerid, params[])
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: (/d)epartament [tekst]");
                 return 1;
             }
+			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			{
+				sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /depo [treœæ]");
+				return 1;
+			}
             new member = GetPlayerFraction(playerid);
 			
             if(0 < member <= 4 || member == 17)// || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)

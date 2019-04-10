@@ -42,6 +42,11 @@ CMD:kurtka(playerid)
 			{
 				if(GetPlayerVirtualWorld(playerid) == 2)
 				{
+					if(GetPlayerAdminDutyStatus(playerid) == 1)
+					{
+						sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+						return 1;
+					}
 					if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 1)
 					{
 						format(string, sizeof(string), "* %s zak³ada kurtkê z naszywkami FBI.", sendername);

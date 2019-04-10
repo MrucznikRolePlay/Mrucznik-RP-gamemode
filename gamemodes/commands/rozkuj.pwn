@@ -69,6 +69,8 @@ CMD:rozkuj(playerid, params[])
                             uzytekajdanki[giveplayerid] = 0;
                             uzytekajdanki[playerid] = 0;
 							PDkuje[playerid] = 0;
+							PDkuje[giveplayerid]=0;
+							PlayerInfo[giveplayerid][pMuted] = 0;
                             ClearAnimations(giveplayerid);
         					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
 							RemovePlayerAttachedObject(giveplayerid, 0);

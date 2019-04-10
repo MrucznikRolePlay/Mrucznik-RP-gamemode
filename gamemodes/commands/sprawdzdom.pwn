@@ -69,4 +69,3 @@ CMD:sprawdzdom(playerid, params[])
 }
 
 
-

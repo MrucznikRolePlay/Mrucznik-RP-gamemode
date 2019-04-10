@@ -64,7 +64,7 @@ CMD:tazer(playerid, params[])
 		}
 		else
 		{
-			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z LSPD/FBI/SASD/GSA lub nie jesteœ na s³u¿bie!");
+			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z LSPD/FBI/SASD/USSS lub nie jesteœ na s³u¿bie!");
 			return 1;
 		}
 	}

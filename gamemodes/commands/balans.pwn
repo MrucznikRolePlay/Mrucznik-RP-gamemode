@@ -32,6 +32,7 @@ CMD:balance(playerid) return cmd_balans(playerid);
 CMD:stan(playerid) return cmd_balans(playerid);
 CMD:balans(playerid)
 {
+/*
 	new string[64];
 
     if(IsPlayerConnected(playerid))
@@ -46,6 +47,10 @@ CMD:balans(playerid)
 			sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie !");
             return 1;
         }
+	}*/
+	if(IsPlayerConnected(playerid))
+	{
+		sendTipMessage(playerid, "U¿yj /kontobankowe (W skrócie /kb)"); 
 	}
 	return 1;
 }

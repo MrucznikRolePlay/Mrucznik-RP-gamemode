@@ -58,5 +58,3 @@ CMD:kb(playerid)
 	}
 	return 1;
 }
-/* ======================>> Ukryte na rzecz systemu Kont bankowych, mo¿e siê jeszcze kiedyœ przydaæ - jakby te konta nie wypali³y :D 
-=========> Simeone 26-12-2018

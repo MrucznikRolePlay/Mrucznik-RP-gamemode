@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ domint ]------------------------------------------------//
+//--------------------------------------------------[ adds ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,25 +28,19 @@
 	
 */
 
-CMD:domint(playerid, params[])
+CMD:dodatki(playerid) return cmd_adds(playerid);
+CMD:adds(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if(IsPlayerConnected(playerid))
 	{
-		new dld, interior;
-		if( sscanf(params, "dd", dld, interior))
+		if(PlayerInfo[playerid][pLevel] >= 3)
 		{
-			sendTipMessage(playerid, "U¿yj /domint [dom ID] [interior] ");
-			return 1;
-		}
-		if(interior >= 1 && interior <= MAX_NrDOM)
-		{
-            Dom_ChangeInt(playerid, dld, interior);
+			sendTipMessage(playerid, "W trakcie prac"); 
 		}
 		else
 		{
-		    sendTipMessage(playerid, "Interior od 1 do 46");
+			sendErrorMessage(playerid, "Dodatki s¹ dostêpne od 3 lvl'a"); 
 		}
 	}
 	return 1;
 }
-

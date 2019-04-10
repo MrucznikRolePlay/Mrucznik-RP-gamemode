@@ -44,5 +44,3 @@ CMD:telefonpomoc(playerid)
 	}
 	return 1;
 }
-
-

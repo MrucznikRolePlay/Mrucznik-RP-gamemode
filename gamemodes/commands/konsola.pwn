@@ -30,7 +30,7 @@
 
 CMD:konsola(playerid, params[])
 {
-    if(GetPlayerOrg(playerid) == FAMILY_VINYL)
+    if(GetPlayerOrg(playerid) == FAMILY_VINYL || GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pRank] >= 4)
     {
         if(!IsPlayerInRangeOfPoint(playerid, 4.0, 819.6357,-1351.2813,25.3)) return 1;
         if(PlayerInfo[playerid][pRank] < 1) return sendErrorMessage(playerid, "Potrzebujesz rangi wiêkszej od 1!");

@@ -30,7 +30,7 @@
 
 CMD:przebierz(playerid)
 {
-    if(IsPlayerInRangeOfPoint(playerid, 1.5, 572.6487,-2079.5613,2.8515) || IsPlayerInRangeOfPoint(playerid, 1.5, 578.3765,-2077.0974,2.8884) || IsPlayerInRangeOfPoint(playerid, 1.5, 578.8330,-2082.5828,2.8064))
+    if(IsPlayerInRangeOfPoint(playerid, 2.5, 1212.3590,-1796.6627,70.0682) || IsPlayerInRangeOfPoint(playerid, 2.5, 1211.8776,-1803.4086,70.0682) || IsPlayerInRangeOfPoint(playerid, 2.5, 1222.4368,-1803.4390,70.0682))
     {
         if(Kredyty[playerid] >= 5)
         {
@@ -86,7 +86,11 @@ CMD:przebierz(playerid)
 					SetPlayerSkin(playerid, 92);
 				}
 		    }
-		    Kredyty[playerid] -= 5;
+			new string[128];
+		    Kredyty[playerid] -= 50;
+			sendTipMessage(playerid, "Pobrano 50 kredytów za szafkê!"); 
+			format(string, sizeof(string), "Aktualny stan kredytów to %d", Kredyty[playerid]);
+			sendTipMessage(playerid, string);
 		}
 		else
 		{

@@ -38,7 +38,7 @@ CMD:ruleta(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, 1038.22924805,-1090.59741211,-67.52223969))
         {
-			new ruletka = true_random(36);
+			new ruletka = random(36);
 			if(ruletka == 0)
 			{
 			    GetPlayerName(playerid, sendername, sizeof(sendername));

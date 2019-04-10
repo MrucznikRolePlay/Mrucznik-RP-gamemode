@@ -28,28 +28,35 @@
 	
 */
 
-CMD:ahelp(playerid) return cmd_ah(playerid);
+CMD:adminhelp(playerid) return cmd_ah(playerid);
 CMD:ah(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
     if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pAdmin] > 0)
-        SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /supportduty /tickets");
+	{
+		SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /supportduty /tickets");
+		SendClientMessage(playerid, COLOR_GRAD1, "{FF6A6A}* System @DUTY *** {C0C0C0}/adminduty {[NICK OOC] || /adminstats");
+		
+	}
 	if (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /kick");
         SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo /czyjtonumer");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /zdejmijbpk");
     }
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /zdejmijbpk");
 	}
-    if (PlayerInfo[playerid][pNewAP] == 5)
+    if (IsAScripter(playerid))
     {
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /respawn /(a) dmin chat /setint /getint /setvw /getvw");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /goto /gotopos /gethere /respawnplayer");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
         SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotomechy /gotobank /gotostacja");
+		SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /zdejmijbpk");
     }
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
@@ -62,6 +69,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** NEW: /setcarint /naprawskin /czyjtonumer");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
@@ -108,6 +116,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /weather /weatherall /makeadmin /makeleader /tod /savemission /loadmission /startlotto");
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /pacholek /usunpach /barierka /usunbarier /kolczatka /usunkol /wydaj /cela /sprzedaja");
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /unfrakcja /makeircadmin /makemember /unmember /giverank /checkcars NEW: /bwsettings");
+		SendClientMessage(playerid, COLOR_GRAD1, "{FF6A6A}* System @DUTY *** {C0C0C0}/checkadminstats [ID]");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 2000)
 	{
@@ -121,7 +130,7 @@ CMD:ah(playerid)
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zrobdom /lzrobdom /usundom /blokujdom /resetsejfhasla /zapiszdomy /zapiszkonta");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /rodzinalider /scena /houseowner /domint NEW: /dajskryptera /bwtime");
 	}
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pNewAP] == 5)
+	if (IsAHeadAdmin(playerid) || IsAScripter(playerid))
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** Jeste� koxem przez X ***");
         SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zonedelay /gangzone /removezoneprotect /removeganglimit /clearzone /setzonecontrol");

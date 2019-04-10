@@ -48,20 +48,12 @@ CMD:ulecz(playerid, params[])
 				{
 					if(Dom[dom][hApteczka] != 0)
 					{
-						new Float:HP;
-						GetPlayerHealth(playerid, HP);
-						if(HP >= 100.0)
-						{
-						    sendTipMessageEx(playerid, COLOR_GRAD2, "Nie potrzebujesz apteczki.");
-						    return 1;
-						}
-						else
-						{
-						    SetPlayerHealth(playerid, 100.0);
-						    //Dom[dom][hMagazyn]--;
-                            sendTipMessageEx(playerid, COLOR_GRAD2, "Skorzysta³eœ z domowej apteczki.");
-                            return 1;
-						}
+						SetPlayerHealth(playerid, 100);
+						format(string, sizeof(string), "%s wyci¹ga apteczkê domow¹, banda¿uje rany, za¿ywa mru-apap. Czuje siê lepiej.", GetNick(playerid, true));
+						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+						format(string, sizeof(string), "---[%s u¿y³ apteczki domowej]---", GetNick(playerid, true));
+						SendAdminMessage(COLOR_GREEN, string);
+						GameTextForPlayer(playerid, "~r~Czujesz sie lepiej ~n~ dzieki mrupap", 6000, 1);	
 					}
 					else
 					{
@@ -153,4 +145,29 @@ CMD:ulecz(playerid, params[])
 	}
 	return 1;
 }
+
+
+
+
+
+/*CMD:hq(playerid, params[])
+{
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+
+    if(PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pLider] == 2 || PlayerInfo[playerid][pLider] == 3)
+    {
+		GetPlayerName(playerid, sendername, sizeof(sendername));
+		if(isnull(params))
+		{
+			//sendTipMessage(playerid, "U¿yj /hq [hq text]");
+			return 1;
+		}
+		format(string, sizeof(string), "HQ: %s, bez odbioru", params);
+		if (gTeam[playerid] != 2 ){SendClientMessage(playerid, COLOR_DBLUE, string);}
+		SendTeamBeepMessage(2, COLOR_DBLUE, string);
+		printf("HQ: %s", params);
+	}
+	return 1;
+}*/
 

@@ -35,10 +35,18 @@ CMD:odmv(playerid)
 
 	if((IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 1))
 	{
-	    GetPlayerName(playerid, sendername, sizeof(sendername));
-		format(string, sizeof(string), "|____________Urz¹d Miasta otwarty przez %s_____________|", sendername);
-		SendClientMessageToAll(COLOR_LIGHTGREEN, string);
-		dmv = 1;
+		if(dmv == 0)
+		{
+		
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			format(string, sizeof(string), "|____________Urz¹d Miasta otwarty przez %s_____________|", sendername);
+			SendClientMessageToAll(COLOR_LIGHTGREEN, string);
+			dmv = 1;
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Urz¹d jest otwarty!"); 
+		}
 	}
 	else
 	{

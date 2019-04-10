@@ -38,7 +38,7 @@ CMD:blackjack(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 3.0, 1032.69775391,-1092.17980957,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1032.90014648,-1088.91455078,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1023.03601074,-1092.15148926,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1022.98620605,-1088.74023438,-67.58734131))
         {
-            new oczko = true_random(13)+2;
+            new oczko = random(13)+2;
             GetPlayerName(playerid, sendername, sizeof(sendername));
             if(oczko >= 2 && oczko <= 10)
             {

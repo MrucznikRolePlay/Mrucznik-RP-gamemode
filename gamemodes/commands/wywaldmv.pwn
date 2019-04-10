@@ -61,7 +61,7 @@ CMD:wywaldmv(playerid, params[])
 					    {
                             GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
-							format(string, sizeof(string), "* %s wywala z dmv %s.", sendername, giveplayer);
+							format(string, sizeof(string), "* %s szybkim ruchem ³apie %s i chwytem transportowym wywala go.", sendername, giveplayer);
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							format(string, sizeof(string), "* Zosta³eœ wywalony z DMV przez %s na 10 minut.", sendername);
 							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
@@ -85,7 +85,7 @@ CMD:wywaldmv(playerid, params[])
 	    }
 	    else
 	    {
-	        sendErrorMessage(playerid, "Nie jesteœ z GSA !");
+	        sendErrorMessage(playerid, "Nie jesteœ z USSS !");
 	    }
 	}
 	return 1;

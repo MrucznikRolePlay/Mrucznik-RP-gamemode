@@ -34,6 +34,14 @@ CMD:przelej(playerid, params[]) return cmd_przelew(playerid, params);
 CMD:przelew(playerid, params[])
 {
 	new string[128];
+	
+	if(IsPlayerConnected(playerid))
+	{
+		format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", GetNick(playerid, true));
+		ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
+	}
+/*=============[BLOKADA - WYKORZYSTANE W /KB]==============
+	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
@@ -113,7 +121,7 @@ CMD:przelew(playerid, params[])
 				sendErrorMessage(playerid, string);
 			}
 		}
-	}
+	}*/
 	return 1;
 }
 

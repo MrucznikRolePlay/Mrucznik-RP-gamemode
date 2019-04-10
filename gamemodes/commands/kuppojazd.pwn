@@ -33,6 +33,11 @@ CMD:kupauto(playerid) return cmd_kuppojazd(playerid);
 CMD:buycar(playerid) return cmd_kuppojazd(playerid);
 CMD:kuppojazd(playerid)
 {
+	if(IsPlayerInAnyVehicle(playerid))
+	{
+		sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
+		return 1;
+	}
     if(PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
     {
         if(IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GRAD2, "WyjdŸ z pojazdu.");

@@ -35,6 +35,11 @@ CMD:kuplodzie(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666))
     {
+		if(IsPlayerInAnyVehicle(playerid))
+		{
+			sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
+			return 1;
+		}
         if(PlayerInfo[playerid][pLodz] == 0)
 	    {
 	        if(GUIExit[playerid] == 0)

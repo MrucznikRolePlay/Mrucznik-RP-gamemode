@@ -53,4 +53,3 @@ CMD:pogoda(playerid, params[])
 	return 1;
 }
 
-

@@ -39,7 +39,7 @@ CMD:kolo(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, 1016.93560791,-1101.91369629,-67.59101868))
         {
-            new kolo = true_random(61);
+            new kolo = random(61);
             GetPlayerName(playerid, sendername, sizeof(sendername));
             if(kolo >= 1 && kolo <= 30)//1
             {

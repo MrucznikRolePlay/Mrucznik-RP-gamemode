@@ -103,3 +103,4 @@ CMD:kamerau(playerid, params[])
 	return 1;
 }
 
+

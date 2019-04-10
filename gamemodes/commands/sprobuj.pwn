@@ -31,6 +31,11 @@
 CMD:sprobuj(playerid, params[])
 {
 	if(isnull(params)) return sendTipMessage(playerid, "U¿yj /sprobuj [Akcja] np. trafiæ do kosza");
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿yæ tej komendy podczas s³u¿by administratora!"); 
+		return 1;
+	}
     new string[256];
 	//switch(random(4)+1) 
 	new rand = random(2);

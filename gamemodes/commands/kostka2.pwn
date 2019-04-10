@@ -36,7 +36,7 @@ CMD:kostka2(playerid)
 
     if(IsPlayerConnected(playerid))
     {
-		new dice = true_random(6)+1;
+		new dice = random(6)+1;
 		if (gDice[playerid] == 1)
 		{
 			GetPlayerName(playerid, sendername, sizeof(sendername));

@@ -78,4 +78,3 @@ CMD:zmiennick(playerid, params[])
   	}
 	return 1;
 }
-

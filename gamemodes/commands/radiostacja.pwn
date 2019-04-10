@@ -30,11 +30,7 @@
 
 CMD:radiostacja(playerid)
 {
-    if(IsPlayerInRangeOfPoint(playerid,20,651.4651,-1367.8018,28.5072) ||
-        IsPlayerInRangeOfPoint(playerid,20,652.9285,-1383.2341,28.4672) ||
-        IsPlayerInRangeOfPoint(playerid,20,669.9277,-1380.8677,28.4672) ||
-        IsPlayerInRangeOfPoint(playerid,20,648.9404,-1379.7324,28.4672) ||
-        IsPlayerInRangeOfPoint(playerid,20,651.7086,-1367.8019,28.5072))
+    if(GetPLocal(playerid) == PLOCAL_ORG_SN)
     {
         if(IsPlayerInFraction(playerid, FRAC_SN))
 	    {
@@ -45,7 +41,7 @@ CMD:radiostacja(playerid)
 	}
 	else
 	{
-		sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w Studiu nagrañ albo drukarni!");
+		sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w San News");
 	}
 
 	return 1;

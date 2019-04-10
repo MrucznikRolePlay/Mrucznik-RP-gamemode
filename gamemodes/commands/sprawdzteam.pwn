@@ -68,3 +68,4 @@ CMD:sprawdzteam(playerid, params[])
 	return 1;
 }
 
+

@@ -45,4 +45,3 @@ CMD:kup(playerid)
 	return 1;
 }
 
-

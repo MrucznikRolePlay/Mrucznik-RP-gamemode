@@ -77,3 +77,5 @@ CMD:wypisz(playerid, params[])
     return 1;
 }
 
+
+

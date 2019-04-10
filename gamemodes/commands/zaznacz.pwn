@@ -34,3 +34,5 @@ CMD:zaznacz(playerid, p[])
     return 1;
 }
 
+
+

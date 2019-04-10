@@ -39,3 +39,4 @@ CMD:uwb(playerid)//usuñ wszystkie bronie
 	return 1;
 }
 
+

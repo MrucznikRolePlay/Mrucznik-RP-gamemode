@@ -65,3 +65,5 @@ CMD:kolejka(playerid)
     return 1;
 }
 
+
+

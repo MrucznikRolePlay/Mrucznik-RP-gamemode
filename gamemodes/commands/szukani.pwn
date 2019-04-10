@@ -334,5 +334,3 @@ CMD:szukani(playerid)
 	return 1;
 }
 
-
-

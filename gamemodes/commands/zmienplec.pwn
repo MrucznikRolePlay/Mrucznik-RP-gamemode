@@ -48,7 +48,8 @@ CMD:zmienplec(playerid, params[])
 			{
 				if(playa != INVALID_PLAYER_ID)
 				{
-					if(GetPlayerVirtualWorld(playerid) > 90 && IsPlayerInRangeOfPoint(playerid, 100.0, 1103.4714,-1298.0918,21.552))
+					//if(GetPlayerVirtualWorld(playerid) > 90 && IsPlayerInRangeOfPoint(playerid, 100.0, 1103.4714,-1298.0918,21.552))
+					if(PlayerInfo[playerid][pLocal] == PLOCAL_FRAC_LSMC)
 					{
                         if(kaska[playerid] < 50000) return sendErrorMessage(playerid, "Nie masz 50 000$ na operacjê.");
 						format(string, sizeof(string),"Przeprowadzi³eœ operacje zmiany p³ci na %s. Koszt: 50 000$", giveplayer);

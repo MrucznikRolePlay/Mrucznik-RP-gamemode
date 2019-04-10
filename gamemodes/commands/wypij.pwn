@@ -68,7 +68,13 @@ CMD:wypij(playerid, params[])
 					if(PlayerDrunk[playerid] >= 5) { GameTextForPlayer(playerid, "~w~Jestes~n~~p~Pijany", 3500, 1); }
 					if(health < 100.0)
 					{
-					    if(PlayerInfo[playerid][pAlcoholPerk] > 0) { PlayerDrunk[playerid] += 1; new hp = 2 * PlayerInfo[playerid][pAlcoholPerk]; hp += 15; SetPlayerHealth(playerid, health + hp); }
+					    if(PlayerInfo[playerid][pAlcoholPerk] > 0) 
+						{ 
+						PlayerDrunk[playerid] += 1; 
+						new hp = 2 * PlayerInfo[playerid][pAlcoholPerk];
+						hp += 15; 
+						SetPlayerHealth(playerid, health + hp);
+						}
 						else { SetPlayerHealth(playerid, health + 15.0); }
 					}
 				}
@@ -245,4 +251,7 @@ CMD:wypij(playerid, params[])
     }
     return 1;
 }
+
+
+
 

@@ -35,3 +35,5 @@ CMD:funiadajadmina(playerid, params[]) {
 #endif
 
 
+
+

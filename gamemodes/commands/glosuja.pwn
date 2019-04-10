@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ domint ]------------------------------------------------//
+//------------------------------------------------[ glosuja ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,24 +28,22 @@
 	
 */
 
-CMD:domint(playerid, params[])
+CMD:glosuja(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if(IsPlayerConnected(playerid))
 	{
-		new dld, interior;
-		if( sscanf(params, "dd", dld, interior))
+		if(GetPVarInt(playerid, "glosowal_w_ankiecie") == 1)
 		{
-			sendTipMessage(playerid, "U¿yj /domint [dom ID] [interior] ");
+			sendErrorMessage(playerid, "G³osowa³eœ ju¿ w tej ankiecie"); 
 			return 1;
 		}
-		if(interior >= 1 && interior <= MAX_NrDOM)
+		if(glosowanie_admina_status == 0)
 		{
-            Dom_ChangeInt(playerid, dld, interior);
+			sendErrorMessage(playerid, "Aktualnie nie ma ¿adnej ankiety!"); 
+			return 1;
 		}
-		else
-		{
-		    sendTipMessage(playerid, "Interior od 1 do 46");
-		}
+		ShowPlayerDialogEx(playerid, 9666, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "G³osowanie\nKliknij poni¿ej przycisk wed³ug w³asnego uznania\nPamiêtaj! Mo¿esz oddaæ tylko jeden g³os!\n", "Tak", "Nie");
+	
 	}
 	return 1;
 }

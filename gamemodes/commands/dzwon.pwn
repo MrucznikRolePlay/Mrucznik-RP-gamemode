@@ -74,6 +74,16 @@ CMD:dzwon(playerid, params[])
 		sendErrorMessage(playerid, "Dzwonisz ju¿ do kogoœ.");
 		return 1;
 	}
+	if(GetPVarInt(reciverid, "dutyadmin") == 1)
+	{
+		sendErrorMessage(playerid, "Osoba do której próbujesz zadzwoniæ jest nieosi¹galna!"); 
+		return 1;
+	}
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas s³u¿by administratora!"); 
+		return 1;
+	}
 	
 	if(numerTelefonuOdbiorcy != 911)
 	{
@@ -111,7 +121,7 @@ CMD:dzwon(playerid, params[])
 	{
 		if(GUIExit[playerid] == 0)
 		{
-			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nBiuro Szeryfa\nMedyk\nStra¿ po¿arna", "Wybierz", "Roz³¹cz siê");
+			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nStra¿ Po¿arna\nMedyk\nSheriff", "Wybierz", "Roz³¹cz siê");
 		}
 		else
 		{

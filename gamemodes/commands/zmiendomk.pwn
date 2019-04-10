@@ -71,6 +71,3 @@ CMD:zmiendomk(playerid, params[])
 	}
 	return 1;
 }
-
-
-

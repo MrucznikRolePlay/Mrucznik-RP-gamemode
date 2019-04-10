@@ -34,6 +34,11 @@ CMD:fskin(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+			return 1;
+		}
 		if (IsAtClothShop(playerid) || (GetPlayerOrg(playerid) == FAMILY_RSC && IsPlayerInRangeOfPoint(playerid, 4.0, 1636.9476,-1813.6195,13.5263)) || IsPlayerInRangeOfPoint(playerid, 4.0, GetPVarFloat(playerid,"xposspawn"),GetPVarFloat(playerid,"yposspawn"),GetPVarFloat(playerid,"zposspawn")))
 		{
             //W³¹czenie trybu skinów

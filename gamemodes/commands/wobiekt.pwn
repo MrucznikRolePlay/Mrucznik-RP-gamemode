@@ -36,3 +36,7 @@ CMD:wobiekt(playerid, params[])
 	return 1;
 }
 
+
+
+
+

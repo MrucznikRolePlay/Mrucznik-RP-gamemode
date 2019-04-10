@@ -49,6 +49,33 @@ CMD:megafon(playerid, params[])
 			sendTipMessage(playerid, "U¿yj (/m)egafon [tekst]");
 			return 1;
 		}
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /b [treœæ]");
+			return 1;
+		}
+		//=========================[DLA S¥DU]======================================
+		if(IsPlayerInRangeOfPoint(playerid, 2.2, 1306.3802,-1305.0647,36.7236))//Oskar¿ony
+		{
+			format(string, sizeof(string), "[Oskar¿ony %s: %s]", sendername, params);
+			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 2.2, 1305.8812,-1294.8978,36.7216))//Oskar¿yciel
+		{
+			format(string, sizeof(string), "[Oskar¿yciel %s: %s]", sendername, params);
+			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 2.2, 1304.4594,-1300.0845,35.6941))//Swiadek
+		{
+			format(string, sizeof(string), "[Œwiadek %s: %s]", sendername, params);
+			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		//=======================[KONIEC]==================================================
+		//=======================[DLA ORGANIZACJI:]========================================
+		
 		if(PlayerInfo[playerid][pMember] == 1||PlayerInfo[playerid][pLider] == 1)
 		{
 			format(string, sizeof(string), "[Oficer %s:o< %s]", sendername, params);
@@ -110,7 +137,7 @@ CMD:megafon(playerid, params[])
         }
         else if(GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
         {
-            if(IsPlayerInRangeOfPoint(playerid, 5.0, 1310.2848,-1299.7623,36.9401))
+            if(IsPlayerInRangeOfPoint(playerid, 3.0, 1310.2848,-1299.7623,36.9401))
             {
                 format(string, sizeof(string), "[Sêdzia %s: %s]", sendername, params);
 			    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);

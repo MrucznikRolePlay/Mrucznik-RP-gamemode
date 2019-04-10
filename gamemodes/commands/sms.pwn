@@ -107,6 +107,7 @@ CMD:sms(playerid, params[])
 	format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", sendername);
 	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	
+	
 	//wysy³anie do odbiorcy
 	if(numerTelefonuOdbiorcy >= 100 && numerTelefonuOdbiorcy <= 150) 
 	{//linia SAN 
@@ -131,6 +132,8 @@ CMD:sms(playerid, params[])
 	else if(numerTelefonuOdbiorcy != 555) 
 	{//zwyk³y sms
 		SendSMSMessage(PlayerInfo[playerid][pPnumber], reciverid, wiadomosc);
+		format(string, sizeof(string), "* %s - wibruje mu telefon - przyszed³ SMS", GetNick(reciverid, true));
+		ProxDetector(30.0, reciverid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	}
 	
 	//informacja zwrotna dla nadawcy

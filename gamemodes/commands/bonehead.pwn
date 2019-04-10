@@ -29,7 +29,7 @@
 */
 
 CMD:bonehead(playerid, params[]) {
-    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 25 || PlayerInfo[playerid][pNewAP] == 5) {
+    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 25 || IsAScripter(playerid)) {
         new ust[128];
         if(sscanf(params, "s[128]", ust)) return sendTipMessage(playerid, "U¿yj /bonehead [URL do linku muzyki]");
         //dini_IntSet("BWSettings.ini", "Time", ust);

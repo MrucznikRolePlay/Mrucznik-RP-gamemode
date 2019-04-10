@@ -45,4 +45,3 @@ CMD:bigears(playerid)
 	}
 	return 1;
 }
-

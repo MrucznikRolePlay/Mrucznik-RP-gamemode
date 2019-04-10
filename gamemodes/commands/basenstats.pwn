@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ domint ]------------------------------------------------//
+//-----------------------------------------------[ basenstats ]----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,25 +28,18 @@
 	
 */
 
-CMD:domint(playerid, params[])
+CMD:basenstats(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if(GetPlayerOrg(playerid) == 43)
 	{
-		new dld, interior;
-		if( sscanf(params, "dd", dld, interior))
-		{
-			sendTipMessage(playerid, "U¿yj /domint [dom ID] [interior] ");
-			return 1;
-		}
-		if(interior >= 1 && interior <= MAX_NrDOM)
-		{
-            Dom_ChangeInt(playerid, dld, interior);
-		}
-		else
-		{
-		    sendTipMessage(playerid, "Interior od 1 do 46");
-		}
+		new string[128];
+		format(string, sizeof(string), "Zarobiona kasa: %d$\nSprzedane kredyty: %d\nOdwiedzin Sauny: %d\nWejœæ na basen: %d\nKorzystania z trampoliny: %d", poolCashStats, poolCreditStatus, poolSaunaStats, poolStats, poolTrampolineStats);
+		ShowPlayerDialogEx(playerid, 1095, DIALOG_STYLE_MSGBOX, "Statystyki", string, "Akceptuj", "");
+	
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie jesteœ z basenu Tsunami!"); 
 	}
 	return 1;
 }
-

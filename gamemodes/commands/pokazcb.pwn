@@ -49,4 +49,3 @@ CMD:pokazcb(playerid)
 		return 1;
 	}
 }
-

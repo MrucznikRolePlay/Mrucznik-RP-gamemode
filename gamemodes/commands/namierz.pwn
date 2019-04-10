@@ -68,7 +68,7 @@ CMD:namierz(playerid, params[])
 			}
 			if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
 			{
-				sendErrorMessage(playerid, "Nie mo¿esz namierzyæ tego gracza.");
+				sendErrorMessage(playerid, "Nie uda³o siê namierzyæ telefonu...");
 				return 1;
 			}
 			if(PlayerInfo[playerid][pJob] == 1 && lowcaz[playerid] != giveplayerid)

@@ -48,6 +48,14 @@ CMD:odpal(playerid)
             sendTipMessage(playerid, "Odpalasz ju¿ wóz!");
             return 1;
         }
+		if(GetPlayerVehicleID(playerid) <= CAR_End) //do kradziezy
+        {
+            if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid))
+		    {
+				sendErrorMessage(playerid, "Nie mo¿esz odpaliæ wozu podczas kradniêcia");
+				return 1;
+			}
+		}
 
         if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
         {

@@ -45,11 +45,70 @@ CMD:akceptuj(playerid, params[])
             SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Gazeta, Mandat");
-            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka");
+            SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka, Uwolnienie, biznes");
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
-		if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
+		if(strcmp(x_job, "biznes", false) == 0)
+		{
+			/*SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
+			SetPVarInt(giveplayerid, "Oferujacy_Cena", value); 
+			SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]);*/
+			if(GetPVarInt(playerid, "Oferujacy_ID") == INVALID_PLAYER_ID)
+			{
+				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
+				return 1;
+			}
+			if(PlayerInfo[playerid][pPbiskey] < MAX_BIZNES || PlayerInfo[playerid][pPbiskey] < MAX_BIZNES)
+			{
+				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
+				return 1;
+			}
+			if(IsPlayerConnected(GetPVarInt(playerid, "Oferujacy_ID")))
+			{
+				if(GetPlayerMoney(playerid) >= GetPVarInt(playerid, "Oferujacy_Cena"))
+				{
+					new kwotaSprzedazy =  GetPVarInt(playerid, "Oferujacy_Cena");
+					ZabierzKase(playerid, kwotaSprzedazy);
+					DajKase(GetPVarInt(playerid, "Oferujacy_ID"), (kwotaSprzedazy-(kwotaSprzedazy/5))); 
+					Sejf_Add(FRAC_GOV, (kwotaSprzedazy/4)); 
+					Sejf_Save(FRAC_GOV); 
+					format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", GetNick(playerid, true), playerid, PlayerInfo[playerid][pPbiskey], GetNick(GetPVarInt(playerid, "Oferujacy_ID"), true), GetPVarInt(playerid, "Oferujacy_ID"), kwotaSprzedazy);
+					SendLeaderRadioMessage(FRAC_GOV, COLOR_LIGHTGREEN, string);
+					SendAdminMessage(COLOR_P@, string); 
+					
+					//Wykonanie czynnoœci
+					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pPbiskey] = -1;
+					PlayerInfo[playerid][pPbiskey] = GetPVarInt(playerid, "Oferujacy_biz_ID"); 
+					MruMySQL_SaveAccount(playerid);
+					MruMySQL_SaveAccount(GetPVarInt(playerid, "Oferujacy_ID")); 
+					
+					format(string, sizeof(string),"CMD: %s [UID: %s] dal %s [UID: %d] biznes [ID: %d] za cene %d$",
+					GetNick(playerid, true), //Daj¹cy
+					PlayerInfo[playerid][pUID], //Daj¹cy UID
+					GetNick(GetPVarInt(playerid, "Oferujacy_ID")),//Otrzymuj¹cy 
+					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pUID], //otrzymuj¹cy UID
+					PlayerInfo[playerid][pPbiskey],
+					GetPVarInt(playerid, "Oferujacy_Cena"));
+					BiznesLog(string);
+					ResetBizOffer(playerid); 
+					ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie masz takiej kwoty"); 
+					return ResetBizOffer(playerid);
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Gracz, który oferowa³ Ci biznes wyszed³ z serwera"); 
+				ResetBizOffer(playerid);
+				return 1;
+			}
+		
+		}
+		else if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
 		{
 			new dawacz = GetPVarInt(playerid, "wizytowka");
 			new nazwa[32];
@@ -248,6 +307,14 @@ CMD:akceptuj(playerid, params[])
                             }
                             GetPlayerName(playerid, sendername, sizeof(sendername));
 
+                            /*if(CountPlayerCars(playerid) >= PlayerInfo[playerid][pCarSlots])
+                            {
+                                SendClientMessage(GraczWymieniajacy[playerid], COLOR_GREY, " Gracz nie posiada wolnego slota.");
+                                GraczWymieniajacy[playerid] = 0;
+                                CenaWymienianegoAuta[playerid] = 0;
+                                SendClientMessage(playerid, COLOR_GREY, " Nie posiadasz wolnego slota.");
+                                return 1;
+                            }*/
                             if(!ProxDetectorS(10.0, playerid, GraczWymieniajacy[playerid])) return SendClientMessage(playerid, 0xFFC0CB, "Ten gracz jest za daleko !");
                             if(!IsPlayerInAnyVehicle(playerid))
                             {
@@ -261,11 +328,11 @@ CMD:akceptuj(playerid, params[])
                                 CenaWymienianegoAuta[playerid] = 0;
                                 return 1;
                             }
-                            Car_RemovePlayerOwner(GraczWymieniajacy[playerid], IDAuta[playerid]);
-                            Car_RemovePlayerOwner(playerid, VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
-							
                             Car_MakePlayerOwner(playerid, IDAuta[playerid]);
+                            Car_RemovePlayerOwner(GraczWymieniajacy[playerid], IDAuta[playerid]);
+
                             Car_MakePlayerOwner(GraczWymieniajacy[playerid], VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
+                            Car_RemovePlayerOwner(playerid, VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
 
                             GetPlayerName(GraczWymieniajacy[playerid], giveplayer, sizeof(giveplayer));
                             GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -446,12 +513,13 @@ CMD:akceptuj(playerid, params[])
                                 format(string, sizeof(string), "* Dosta³eœ te¿ %d PK", karne);
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 PlayerInfo[playerid][pPK] += karne;
-                                if(PlayerInfo[playerid][pPK] > 24) {
-                                    format(string, sizeof(string), "* Przekroczy³eœ limit 24 PK. Tracisz prawo jazdy na 1 DZIEÑ");
+                                if(PlayerInfo[playerid][pPK] > 24) 
+								{
+                                    format(string, sizeof(string), "* Przekroczy³eœ limit 24 PK. Tracisz prawo jazdy");
                                     SendClientMessage(playerid, COLOR_RED, string);
-                                    //86400
+                                    //86400 - jeden dzien
                                     PlayerInfo[playerid][pPK] = 0;
-                                    PlayerInfo[playerid][pCarLic] = gettime()+86400;
+                                    PlayerInfo[playerid][pCarLic] = 0;
                                     format(string, sizeof(string), "* %s straci³ prawo jazdy z powodu przekroczenia limitu 24 PK", sendername);
                                     SendClientMessage(TicketOffer[playerid], COLOR_RED, string);
                                 }
@@ -947,9 +1015,8 @@ CMD:akceptuj(playerid, params[])
             }
         }
         else if(strcmp(x_job,"lawyer",true) == 0 || strcmp(x_job,"prawnik",true) == 0 || strcmp(x_job,"prawnika",true) == 0)
-        {
-
-           /* if(giveplayerid == -1)
+		{
+		        /* if(giveplayerid == -1)
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /akceptuj prawnik");
                 sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Pamiêtaj, ze pieni¹dze ($10 000) zostan¹ pobrane z Twojego portfela!");
@@ -989,6 +1056,60 @@ CMD:akceptuj(playerid, params[])
                 SendClientMessage(playerid, COLOR_GREY, "B³¹d! (Nie jesteœ policjantem / Gracz nie jest prawnikiem / Z³e ID)");
                 return 1;
             } */
+		
+		
+		}
+		else if(strcmp(x_job, "uwolnienie", true) == 0 || strcmp(x_job, "wolnosc", true) == 0)
+        {
+			new money = OfferPrice[playerid];
+			//SetPVarInt(playerid, "idPrawnika", playerid);
+			if(GetPlayerMoney(playerid) >= money)
+			{
+				//Test
+				GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));
+				format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia za kwotê %d$", GetNick(playerid, true), money);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				
+				format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s za kwotê %d$", sendername, money);
+				SendClientMessage(OfferPlayer[playerid], COLOR_LIGHTBLUE, string);
+				
+				//Zerowanie zmiennych
+				LawyerOffer[playerid] = 0;
+				ApprovedLawyer[playerid] = 0;
+				WantLawyer[playerid] = 0;
+				CallLawyer[playerid] = 0;
+				JailPrice[playerid] = 0;
+				
+				//Czynnoœci
+				PlayerInfo[playerid][pJailTime] = 1;
+				ZabierzKase(playerid, money);
+				DajKase(OfferPlayer[playerid], money);
+				
+				//skill
+				PlayerInfo[OfferPlayer[playerid]][pLawSkill] +=2;
+				SendClientMessage(OfferPlayer[playerid], COLOR_GRAD2, "Skill +2");
+				if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 50)
+				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 2, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 100)
+				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 3, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 200)
+				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 4, Mo¿esz taniej zbijaæ WL."); }
+				else if(PlayerInfo[OfferPlayer[playerid]][pLawSkill] == 400)
+				{ SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
+				
+				//zerowanie zmiennych 2
+				OfferPrice[playerid] = 0;
+				LawyerOffer[playerid] = 0;
+				OfferPlayer[playerid] = 0;
+				
+				
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie masz takiej kwoty!"); 
+				return 1;
+			}
+			
         }
         else if(strcmp(x_job,"bodyguard",true) == 0 || strcmp(x_job,"ochrona",true) == 0)
         {
@@ -1229,38 +1350,46 @@ CMD:akceptuj(playerid, params[])
                     {
                         if(IsPlayerConnected(RepairOffer[playerid]))
                         {
-                            GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
-                            GetPlayerName(playerid, sendername, sizeof(sendername));
-                            RepairCar[playerid] = GetPlayerVehicleID(playerid);
-                            SetVehicleHealth(RepairCar[playerid], 1000.0);
-                            RepairVehicle(RepairCar[playerid]);
+							if(ProxDetectorS(10.5, playerid, giveplayerid))
+							{
+								GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
+								GetPlayerName(playerid, sendername, sizeof(sendername));
+								RepairCar[playerid] = GetPlayerVehicleID(playerid);
+								SetVehicleHealth(RepairCar[playerid], 1000.0);
+								RepairVehicle(RepairCar[playerid]);
 
-                            CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
-                            CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
+								CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
+								CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
 
-                            PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
-                            PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
-                            format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,RepairPrice[playerid]);
-                            SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia oraz naprawia %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
-                            ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                            format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
-                            ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                            PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
-                            if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            ZabierzKase(playerid, RepairPrice[playerid]);
-                            DajKase(RepairOffer[playerid], RepairPrice[playerid]);
-                            RepairOffer[playerid] = 999;
-                            RepairPrice[playerid] = 0;
+								PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
+								PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
+								format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,RepairPrice[playerid]);
+								SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
+								format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia oraz naprawia %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
+								ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
+								ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
+								if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
+								{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+								else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
+								{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+								else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
+								{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+								else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
+								{ SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+								ZabierzKase(playerid, RepairPrice[playerid]);
+								DajKase(RepairOffer[playerid], RepairPrice[playerid]);
+								RepairOffer[playerid] = 999;
+								RepairPrice[playerid] = 0;
+							}
+							else
+							{
+								sendErrorMessage(playerid, "Mechanik musi byæ obok Ciebie!");
+								return 1;
+							}
                             return 1;
                         }
                         return 1;

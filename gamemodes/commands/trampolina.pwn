@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ domint ]------------------------------------------------//
+//-----------------------------------------------[ trampolina ]----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,25 +28,19 @@
 	
 */
 
-CMD:domint(playerid, params[])
+CMD:trampolina(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if (IsPlayerInRangeOfPoint(playerid, 5.0, 578.6193,-2195.7708,1.6288)) // trampolina wejœcie
 	{
-		new dld, interior;
-		if( sscanf(params, "dd", dld, interior))
-		{
-			sendTipMessage(playerid, "U¿yj /domint [dom ID] [interior] ");
-			return 1;
-		}
-		if(interior >= 1 && interior <= MAX_NrDOM)
-		{
-            Dom_ChangeInt(playerid, dld, interior);
-		}
-		else
-		{
-		    sendTipMessage(playerid, "Interior od 1 do 46");
-		}
+		ShowPlayerDialogEx(playerid, 325, DIALOG_STYLE_LIST, "Na któr¹ trampolinê chcesz wejœæ?", "Trampolina zwyk³a\nTrampolina wyczynowa", "Wybierz", "Anuluj");
+		poolTrampolineStats = poolTrampolineStats+1;
 	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie jesteœ przy trampolinach basenu tsunami!"); 	
+	}
+
+
 	return 1;
 }
 

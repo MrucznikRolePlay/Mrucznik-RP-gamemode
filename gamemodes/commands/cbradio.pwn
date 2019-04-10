@@ -44,6 +44,11 @@ CMD:cbradio(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /cb [text]");
 			return 1;
 		}
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /b [treœæ]");
+			return 1;
+		}
 		new string[128];
 		if(PlayerInfo[playerid][pBP] >= 1)
 		{
@@ -72,4 +77,3 @@ CMD:cbradio(playerid, params[])
 	}
 	return 1;
 }
-

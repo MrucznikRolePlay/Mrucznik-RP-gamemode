@@ -44,6 +44,11 @@ CMD:sprzedajauto(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /dajauto [Nick/ID] [cena]");
 			return 1;
 		}
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
+			return 1;
+		}
         if(GetPVarInt(playa, "offer-car")) return sendErrorMessage(playerid, "Ten gracz otrzyma³ ju¿ ofertê kupna pojazdu! Zaczekaj 30 sekund");
         if(!IsPlayerConnected(playa)) return sendErrorMessage(playerid, "Brak takiego gracza.");
 		cena = FunkcjaK(string);
@@ -53,9 +58,8 @@ CMD:sprzedajauto(playerid, params[])
 		if(PlayerInfo[playa][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedaæ temu graczowi pojazdu poniewa¿ ma 1lvl");
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedawaæ pojazdu bo masz 1 lvl");
 
-		new vehid = VehicleUID[lVeh][vUID];
-
- 		if(!ProxDetectorS(10.0, playerid, playa)) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
+        IDAuta[playa] = VehicleUID[lVeh][vUID];
+ 		if(!ProxDetectorS(10.0, playerid, playa) && Spectate[playa] != INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 		if(!(cena > 0 && cena < 900000001)) return sendErrorMessage(playerid, "Cena od 1 do 900 000 000$ !");
 
         if(lVeh <= CAR_End) return sendErrorMessage(playerid, "Tego pojazdu nie mo¿na sprzedaæ");
@@ -71,7 +75,7 @@ CMD:sprzedajauto(playerid, params[])
         //TODO
         if(PlayerInfo[playa][pDonateRank] == 0)
         {
-            if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
+            if(CarData[IDAuta[playa]][c_Neon] != 18652 && CarData[IDAuta[playa]][c_Neon] != 0)
             {
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
@@ -80,7 +84,6 @@ CMD:sprzedajauto(playerid, params[])
         SendClientMessage(playerid, 0xFFC0CB, string);
         GraczDajacy[playa] = playerid;
 		CenaDawanegoAuta[playa] = cena;
-        IDAuta[playa] = vehid;
 	}
  	else
  	{

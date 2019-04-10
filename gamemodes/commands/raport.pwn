@@ -31,7 +31,7 @@
 CMD:report(playerid, params[]) return cmd_raport(playerid, params);
 CMD:raport(playerid, params[])
 {
-	new string[128], discordstring[128];
+	new string[128];
 	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
@@ -53,8 +53,6 @@ CMD:raport(playerid, params[])
 			}
 			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
 			ABroadCast(COLOR_YELLOW,string,1);
-			format(discordstring, sizeof(discordstring), "» Report od %s [%d]: %s", sendername, playerid, params);
-			SendDiscordMessage(DISCORD_REPORT, discordstring);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "Je¿eli Administracja nie reaguje na Twój report, oznacza to, ¿e...");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "...jest on Ÿle sformu³owany i Administracja nie rozpatrzy tego zg³oszenia.");//By: Dawid

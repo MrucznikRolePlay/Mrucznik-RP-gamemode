@@ -36,7 +36,7 @@ CMD:stanowe(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsACop(playerid) && PlayerInfo[playerid][pRank] >= 1)
+        if(IsACop(playerid) && PlayerInfo[playerid][pRank] >= 0)
         {
             if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))//nowe stanowe
 			{

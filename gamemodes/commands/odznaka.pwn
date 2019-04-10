@@ -42,7 +42,7 @@ CMD:odznaka(playerid, params[])
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-				if (ProxDetectorS(8.0, playerid, giveplayerid))
+				if (ProxDetectorS(5.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 				{
 					new string[64], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
@@ -226,6 +226,23 @@ CMD:odznaka(playerid, params[])
 						}
 						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|______________ Legitymacja SCoSA _____________|");
 					}
+					if (GetPlayerFraction(playerid) == FRAC_GOV)
+					{
+						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|___________ Legitymacja Urzêdu Miasta __________|");
+						format(string, sizeof(string), "Imiê i nazwisko: %s.", sendername);
+						SendClientMessage(giveplayerid, COLOR_WHITE, string);
+                        format(string, sizeof(string), "Stopieñ: %s", FamRang[FAMILY_SAD][PlayerInfo[playerid][pRank]]);
+						SendClientMessage(giveplayerid,COLOR_WHITE,string);
+						if(PlayerInfo[playerid][pRank] > 7)
+						{
+							SendClientMessage(giveplayerid,COLOR_GREEN,"TA OSOBA POSIADA IMMUNITET!");
+						}
+						else
+						{
+							SendClientMessage(giveplayerid,COLOR_RED,"TA OSOBA NIE POSIADA IMMUNITETU!");
+						}
+						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|_____________ Podpis: Burmistrz & Posiadacz __________|");
+					}
 					if (GetPlayerFraction(playerid) == FRAC_SN)
 					{
 						SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Identyfikator SAN _____________|");
@@ -266,4 +283,3 @@ CMD:odznaka(playerid, params[])
 	}
 	return 1;
 }
-

@@ -36,7 +36,7 @@ CMD:newbie(playerid, params[])
 
     if(IsPlayerConnected(playerid))
     {
-        if(newbie == 1 && PlayerInfo[playerid][pAdmin] == 0)
+        if(newbie == 1 && PlayerInfo[playerid][pAdmin] == 0 && !IsAScripter(playerid))
         {
             sendTipMessageEx(playerid, COLOR_GRAD2, "Chat newbie jest wy³¹czony!");
 			return 1;
@@ -49,6 +49,11 @@ CMD:newbie(playerid, params[])
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj (/n)ewbie [tekst]");
+			return 1;
+		}
+		if(strlen(params) > 78)
+		{
+			sendErrorMessage(playerid, "Twoja wiadomoœæ by³a zbyt d³uga, skróæ j¹!"); 
 			return 1;
 		}
 		GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -95,7 +100,7 @@ CMD:newbie(playerid, params[])
 		    {
 				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], sendername, params);
 			}
-            else if(PlayerInfo[playerid][pNewAP] == 5)
+            else if(IsAScripter(playerid))
             {
                 format(nobchat, sizeof(nobchat), "(({DAFC10} Skrypter [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], sendername, params);
             }
@@ -180,10 +185,13 @@ CMD:newbie(playerid, params[])
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, sendername, params);
 			}
 			OOCNewbie(nobchat);
+			if(!IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0)
+			{
+				AntySpam[playerid] = 1;
+				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
+			}
 			format(nobchat, sizeof(nobchat), "((N-Chat: %s [%d]: %s ))", sendername, PlayerInfo[playerid][pLevel], params);
 			printf(nobchat);
-			AntySpam[playerid] = 1;
-			SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
 			new admin = 0;
 			foreach(Player, i)
 			{
@@ -203,4 +211,5 @@ CMD:newbie(playerid, params[])
 	}
 	return 1;
 }
+
 

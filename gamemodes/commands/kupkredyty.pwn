@@ -32,15 +32,23 @@ CMD:kupkredyty(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
+		
         if(GUIExit[playerid] == 0)
     	{
-    	    if(IsPlayerInRangeOfPoint(playerid, 5.0, 570.63, -2031.03, 16.2))
+    	    if(IsPlayerInRangeOfPoint(playerid, 4.0, 1197.0911,-1772.3119,13.7282))
     	    {
-  				ShowPlayerDialogEx(playerid, 1403, DIALOG_STYLE_LIST, "Kup Kredyty", "{FFFFFF}Pakiet 50 kredytów - 1 000$\nPakiet 100 kredytów - 2 000$\nPakiet 250 kredytów - 4 000$\nPakiet 500 kredytów - 8 000$", "Kup", "Anuluj");
+				new string[300];
+				format(string, sizeof(string), "Pakiet\tIloœæ\tCena\n\
+												{C0C0C0}Dzieciêcy\t{FF0000}50\t{37AC45}%d$\n\
+												{C0C0C0}Normalny\t{FF0000}100\t{37AC45}%d$\n\
+												{C0C0C0}Zaawansowany\t{FF0000}250\t{37AC45}%d$\n\
+												{FFFF00}Premium\t{FF0000}500\t{37AC45}%d$", onePoolPrice, twoPoolPrice, threePoolPrice, fourPoolPrice);
+				ShowPlayerDialogEx(playerid, 1403,  DIALOG_STYLE_TABLIST_HEADERS, "Kup Kredyty",  string, "Kup", "Anuluj");
     	    }
     	    else
     	    {
    				sendErrorMessage(playerid, "Nie jesteœ na basenie Tsunami!");
+				return 1;
     	    }
     	}
     }

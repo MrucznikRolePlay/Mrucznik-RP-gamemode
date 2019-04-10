@@ -51,3 +51,5 @@ CMD:pracownicy(playerid)
 	return 1;
 }
 
+
+/*

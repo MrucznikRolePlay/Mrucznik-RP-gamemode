@@ -60,7 +60,7 @@ SSCANF:fix(string[])
 /*CMD:marcepan(playerid, params[])
 {
 	//komenda tymczasowo wy³¹czona
-    if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] == 5)
+    if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
     {
         new id;
         if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(MARCEPAN) - Podaj Nick lub ID gracza.");

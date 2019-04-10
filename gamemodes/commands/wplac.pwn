@@ -61,6 +61,11 @@ CMD:wplac(playerid, params[])
 				sendTipMessage(playerid, "Nie masz tyle");
 				return 1;
 			}
+			if(PlayerInfo[playerid][pAccount]+cashdeposit >=100000000)
+			{
+				sendTipMessage(playerid, "Maksymalnie w banku mo¿esz trzymaæ 100 milionów!"); 
+				return 1;
+			}
 			DajKase(playerid,-cashdeposit);
             //new poprowizji = $l * (1-$p*.01);
 			new curfunds = PlayerInfo[playerid][pAccount];

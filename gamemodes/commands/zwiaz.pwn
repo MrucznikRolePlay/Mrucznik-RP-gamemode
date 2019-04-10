@@ -107,3 +107,4 @@ CMD:zwiaz(playerid, params[])
 	return 1;
 }
 
+

@@ -76,3 +76,6 @@ CMD:skille(playerid)
 	return 1;
 }*/
 
+
+
+

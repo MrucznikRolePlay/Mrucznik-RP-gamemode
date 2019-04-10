@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ domint ]------------------------------------------------//
+//------------------------------------------------[ addshelp ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,25 +28,19 @@
 	
 */
 
-CMD:domint(playerid, params[])
+CMD:dodatkihelp(playerid) return cmd_addshelp(playerid);
+CMD:dodatkipomoc(playerid) return cmd_addshelp(playerid);
+CMD:addshelp(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if(IsPlayerConnected(playerid))
 	{
-		new dld, interior;
-		if( sscanf(params, "dd", dld, interior))
-		{
-			sendTipMessage(playerid, "U¿yj /domint [dom ID] [interior] ");
-			return 1;
-		}
-		if(interior >= 1 && interior <= MAX_NrDOM)
-		{
-            Dom_ChangeInt(playerid, dld, interior);
-		}
-		else
-		{
-		    sendTipMessage(playerid, "Interior od 1 do 46");
-		}
+		ShowPlayerDialogEx(playerid, 1011, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play {747b41}Pomoc", "{FFB76F}/kupdodatki {C0C0C0}- pozwala zakupiæ dodatki\n{FFB76F}/dodatki {C0C0C0}- pozwala przejrzeæ listê zakupionych dodatków\n{FFB76F}/zdejmijdodatki {C0C0C0}- pozwala zdj¹c z cia³a dodatek\n{FFB76F}/wyrzucdodatki {C0C0C0}- pozwala wyrzuciæ posiadany dodatek\n\n", "Akceptuj", " "); 
 	}
 	return 1;
 }
+//---------------------------------------[System aut]-------------------------------------------------------------------------------------------
+
+
+
+
 

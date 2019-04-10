@@ -65,6 +65,42 @@ CMD:wezdragi(playerid)
 		    PlayerInfo[playerid][pDrugs] -= 2;
 		    //SetPlayerDrunkLevel(playerid, 8000);
 		    //SetPlayerWeather(playerid, -66);
+			
+			//System si³y
+			if(GetPVarInt(playerid, "ZjadlDragi") == 0)
+			{
+				if(PlayerInfo[playerid][pStrong] < MAX_STRONG_VALUE/2)
+				{
+					SetPVarInt(playerid, "ZjadlDragi", 1);
+					sendTipMessageEx(playerid, COLOR_P@, "Za¿y³eœ narkotyki, twoja si³a wzros³a dwukrotnie na jakiœ czas"); 
+					format(string, sizeof(string), "Mia³eœ %d , po za¿yciu 2 gram masz %d si³y.", PlayerInfo[playerid][pStrong], PlayerInfo[playerid][pStrong]*2);
+					sendTipMessage(playerid, string);
+					SetPVarInt(playerid, "FirstValueStrong", PlayerInfo[playerid][pStrong]);
+					SetStrong(playerid, PlayerInfo[playerid][pStrong]*2);
+					TimerEfektNarkotyku[playerid] = SetTimerEx("EfektNarkotyku", 60000, false, "i", playerid);
+				}
+				else
+				{
+					sendTipMessage(playerid, "Masz zbyt du¿¹ wartoœæ si³y, aby dragi Ci coœ da³y!"); 
+				}
+			
+			}
+			else
+			{
+				if(PlayerInfo[playerid][pStrong] >= 15)
+				{
+					sendTipMessage(playerid, "Æpun, przez twój na³óg spada Ci wartoœæ si³y!");
+					MSGBOX_Show(playerid, "Sila -15", MSGBOX_ICON_TYPE_EXPLODE, 3);
+					TakeStrong(playerid, 15);
+					new StrongValue = GetPVarInt(playerid, "FirstValueStrong"); 
+					SetPVarInt(playerid, "FirstValueStrong", StrongValue-15);
+				}
+				else
+				{
+					sendTipMessage(playerid, "Æpun, przez twój na³óg spada Ci wartoœæ si³y!");
+					MSGBOX_Show(playerid, "Sila -15", MSGBOX_ICON_TYPE_EXPLODE, 3);
+				}
+			}
 		    
 		    
 		    if(STDPlayer[playerid]==1)

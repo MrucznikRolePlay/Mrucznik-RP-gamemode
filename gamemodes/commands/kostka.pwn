@@ -90,7 +90,7 @@ CMD:kostka(playerid, params[])
 
             new ile;
 
-            ile = 1+true_random(6);
+            ile = 1+random(6);
 
             format(str, 64, "* %s wyrzuca %d oczek.", nick, ile);
             ProxDetector(12.0, playerid, str, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);

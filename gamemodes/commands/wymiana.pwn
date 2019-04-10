@@ -42,6 +42,11 @@ CMD:wymiana(playerid, params[])
 			sendTipMessage(playerid, "U¿yj /wymiana [Nick/ID] [cena]");
 			return 1;
 		}
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ podczas @Duty");
+			return 1;
+		}
         if(!IsPlayerConnected(playa)) return sendErrorMessage(playerid, "Brak takiego gracza.");
         if(!IsPlayerInAnyVehicle(playa)) return sendTipMessage(playerid, "Gracz musi byæ w pojeŸdzie.");
 		cena = FunkcjaK(string);
@@ -52,7 +57,7 @@ CMD:wymiana(playerid, params[])
 		if(PlayerInfo[playa][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ siê z tym graczem, poniewa¿ ma 1 lvl");
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ pojazdu, poniewa¿ masz 1 lvl");
 
-		new vehid = VehicleUID[lVeh][vUID];
+        IDAuta[playa] = VehicleUID[lVeh][vUID];
 
  		if(!ProxDetectorS(10.0, playerid, playa)) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 		if(!(cena >= 0 && cena < 900000001)) return sendTipMessage(playerid, "Cena od 0 do 900 000 000$ !");
@@ -70,14 +75,14 @@ CMD:wymiana(playerid, params[])
         //TODO
         if(PlayerInfo[playa][pDonateRank] == 0)
         {
-            if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
+            if(CarData[IDAuta[playa]][c_Neon] != 18652 && CarData[IDAuta[playa]][c_Neon] != 0)
             {
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
         }
         if(PlayerInfo[playerid][pDonateRank] == 0)
         {
-            if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
+            if(CarData[IDAuta[playerid]][c_Neon] != 18652 && CarData[IDAuta[playerid]][c_Neon] != 0)
             {
                 SendClientMessage(playerid, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
@@ -87,7 +92,6 @@ CMD:wymiana(playerid, params[])
         GraczWymieniajacy[playa] = playerid;
 		CenaWymienianegoAuta[playa] = cena;
 		IDWymienianegoAuta[playa] = GetPlayerVehicleID(playa);
-        IDAuta[playa] = vehid;
 	}
  	else
  	{

@@ -80,3 +80,5 @@ CMD:degraduj(playerid, params[])
 	return 1;
 }
 
+
+

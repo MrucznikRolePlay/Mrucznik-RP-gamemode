@@ -54,3 +54,5 @@ CMD:czysc(playerid)
     return 1;
 }
 
+
+

@@ -32,6 +32,7 @@ CMD:parkuj(playerid) return cmd_zaparkuj(playerid);
 CMD:zaparkuj(playerid)
 {
 	new string[256];
+	new VW = GetPlayerVirtualWorld(playerid); 
 	if(IsPlayerInAnyVehicle(playerid))
 	{
         new lVeh = GetPlayerVehicleID(playerid);
@@ -44,7 +45,6 @@ CMD:zaparkuj(playerid)
 			{
                 new Float:X, Float:Y, Float:Z;
 				new Float:A;
-				new VW = GetPlayerVirtualWorld(playerid); 
 				GetVehicleZAngle(lVeh, A);
 				GetPlayerPos(playerid, X,Y,Z);
 
@@ -82,6 +82,7 @@ CMD:zaparkuj(playerid)
             CarData[VehicleUID[lVeh][vUID]][c_Pos][1] = Y;
             CarData[VehicleUID[lVeh][vUID]][c_Pos][2] = Z;
             CarData[VehicleUID[lVeh][vUID]][c_Rot] = A;
+			CarData[VehicleUID[lVeh][vUID]][c_VW] = VW; 
             Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE);
 
 			format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(lVeh)-400]);

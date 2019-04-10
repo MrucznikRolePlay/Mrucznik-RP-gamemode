@@ -48,7 +48,6 @@ CMD:a(playerid, params[])
 			if (PlayerInfo[playerid][pAdmin] >= 1)
 			{
 				SendAdminMessage(0xFFC0CB, string);
-				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 			}
 			printf("Admin %s: %s", sendername, params);
 		}
@@ -58,21 +57,21 @@ CMD:a(playerid, params[])
 			if (PlayerInfo[playerid][pNewAP] >= 1)
 			{
 				SendAdminMessage(0xFFC0CB, string);
-				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 			}
 			printf("PolAdmin %s: %s", sendername, params);
 		}
-        if(PlayerInfo[playerid][pNewAP] == 5 && PlayerInfo[playerid][pAdmin] == 0)
+        if(IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0)
         {
             format(string, sizeof(string), "* Skrypter %s: %s", sendername, params);
             if (PlayerInfo[playerid][pNewAP] >= 1)
             {
                 SendAdminMessage(0xFFC0CB, string);
-				SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
             }
             printf("Skrypter %s: %s", sendername, params);
         }
 	}
 	return 1;
 }
+
+
 
