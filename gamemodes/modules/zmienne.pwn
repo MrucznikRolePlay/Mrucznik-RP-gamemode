@@ -1091,6 +1091,9 @@ new Naprawiasie[MAX_PLAYERS];
 new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
 
+new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_ReportChannelId; //discordconnect
+new DCC_Channel:g_FracChannel[MAX_FRAC];
+new DCC_Channel:g_OrgChannel[MAX_ORG];
 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
@@ -1141,10 +1144,6 @@ ZerujZmienne(playerid)
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
 	spamujeCaluj[playerid] =0;
-	
-	
-	
-	
     lastMsg[playerid] = 0;
 
 	//z conecta
@@ -1372,8 +1371,6 @@ ZerujZmienne(playerid)
 	PlayerAdds[playerid][pSlot10] = 0;
 
 
-	
-
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);
 	ClearCooking(playerid);
@@ -1383,7 +1380,7 @@ ZerujZmienne(playerid)
 
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
-	
+
 	if(tworzenietrasy[playerid] != 666)
 	{
 	    format(Wyscig[tworzenietrasy[playerid]][wOpis], 50, "");
