@@ -1,0 +1,108 @@
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ makemember ]----------------------------------------------//
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+
+// Opis:
+/*
+	
+*/
+
+
+// Notatki skryptera:
+/*
+	
+*/
+
+CMD:makemember(playerid, params[])
+{
+	new string[128];
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
+
+    if(IsPlayerConnected(playerid))
+    {
+		new para1, level;
+		if( sscanf(params, "k<fix>d", para1, level))
+		{
+			sendTipMessage(playerid, "U¿yj /makemember [ID gracza] [Numer (1-17)]");
+			return 1;
+		}
+
+		if(level > 17 || level < 0) { SendClientMessage(playerid, COLOR_GREY, "Od 0 do 17 !"); return 1; }
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER))
+		{
+		    if(IsPlayerConnected(para1))
+		    {
+		        if(para1 != INVALID_PLAYER_ID)
+		        {
+		            if(GetPlayerFraction(para1) > 0 || GetPlayerOrg(para1) != 0)
+		            {
+		                sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz ma ju¿ prace !");
+		                return 1;
+		            }
+					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					PlayerInfo[para1][pMember] = level;
+					format(string, sizeof(string), "Zosta³eœ mianowany pracownikiem frakcji numer %d przez Administratora: %s", level,sendername);
+					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+					format(string, sizeof(string), "Da³eœ membera graczowi %s nad frakcj¹ numer %d.", giveplayer,level);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					
+					//logi
+					format(string, sizeof(string), "%s mianowal na czlonka frakcji numer %d gracza %s", sendername, level, giveplayer);
+					ActionLog(string);
+					
+					if(level == 0) { PlayerInfo[para1][pSkin] = 0; }
+					else if(level == 1) { PlayerInfo[para1][pSkin] = 280; } //Police Force
+					else if(level == 2) { PlayerInfo[para1][pSkin] = 285; } //FBI/ATF
+					else if(level == 3) { PlayerInfo[para1][pSkin] = 287; } //National Guard
+					else if(level == 4) { PlayerInfo[para1][pSkin] = 70; } //Fire/Ambulance
+					else if(level == 5) { PlayerInfo[para1][pSkin] = 258; } //La Cosa Nostra
+					else if(level == 6) { PlayerInfo[para1][pSkin] = 120; } //Yakuza
+					else if(level == 7) { PlayerInfo[para1][pSkin] = 240; } //Mayor
+					else if(level == 8) { PlayerInfo[para1][pSkin] = 127; } //Hitman Agency
+					else if(level == 9) { PlayerInfo[para1][pSkin] = 148; } //News Reporters
+					else if(level == 10) { PlayerInfo[para1][pSkin] = 255; } //Taxi Cab Company
+					else if(level == 11) { PlayerInfo[para1][pSkin] = 59; } //Driving/Flying School
+					else if(level == 12) { PlayerInfo[para1][pSkin] = 270; } //Grove Street
+					else if(level == 13) { PlayerInfo[para1][pSkin] = 103; } //Ballas
+					else if(level == 14) { PlayerInfo[para1][pSkin] = 108; } //Vagos
+					else if(level == 15) { PlayerInfo[para1][pSkin] = 8; } //NoA
+                    else if(level == 17) PlayerInfo[para1][pSkin] = 277; //NoA
+				    gTeam[para1] = 19;
+				    PlayerInfo[para1][pTeam] = 19;
+
+                    MruMySQL_SetAccInt("Member", giveplayer, level);
+                    MruMySQL_SetAccInt("Rank", giveplayer, 0);
+
+                    PlayerInfo[para1][pRank] = 0;
+
+				    if(PlayerInfo[para1][pSkin] != 0) SetPlayerSkin(para1, PlayerInfo[para1][pSkin]);
+                    else SetPlayerSkin(para1, PlayerInfo[para1][pModel]);
+				}
+			}//not connected
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
+	return 1;
+}
+
+
