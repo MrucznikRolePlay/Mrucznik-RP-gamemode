@@ -18,6 +18,7 @@ public CheckCode2003(killerid, playerid)
     	SendCommandLogMessage(string);
 	}
 }
+
 forward SpecToggle(playerid);
 public SpecToggle(playerid)
 {
@@ -54,6 +55,7 @@ public SprzedajMatsTimer(playerid,giveplayerid)
 	}
 	return 1;
 }
+
 //PizzaJob
 public PizzaJobTimer01(playerid)
 {
@@ -122,6 +124,19 @@ public Naprawa(playerid)
     return 1;
 }
 
+forward glosuj_admin_ankieta();
+public glosuj_admin_ankieta()
+{
+	new string[128];
+	glosowanie_admina_status = 0;
+	SendAdminMessage(COLOR_RED, "=====[WYNIKI G£OSOWANIA]======"); 
+	format(string, sizeof(string), "U¿ytkownicy, którzy g³osowali na TAK: %d", glosowanie_admina_tak);
+	SendAdminMessage(COLOR_P@, string);
+	format(string, sizeof(string), "U¿ytkownicy, którzy g³osowali na NIE: %d", glosowanie_admina_nie);
+	SendAdminMessage(COLOR_P@, string);
+	
+	return 1;
+}
 //System Po¿arów v0.1
 forward UsunPozar();
 public UsunPozar()
@@ -129,6 +144,78 @@ public UsunPozar()
     DeleteAllFire();
     return 1;
 }
+//Komendy Admina - Timer na oddanie HP
+forward OddajZycieTimer(playerid);
+public OddajZycieTimer(playerid)
+{
+	new stathptime = (GetPVarInt(playerid, "statusZycia")/1000);
+	dajHPSekunda[playerid]++;
+	if(dajHPSekunda[playerid] == stathptime)
+	{
+		new Float:ammoutHP;
+		SetPlayerHealth(playerid, 1);
+		ammoutHP = GetPVarFloat(playerid, "odnowaZyciaAdmin");
+		SetPlayerHealth(playerid, ammoutHP);
+		KillTimer(TimerOddaniaZycia[playerid]);
+	}
+	return 1;
+}
+forward JedzenieCooldown(playerid);
+public JedzenieCooldown(playerid)
+{
+	new timeSec[MAX_PLAYERS];
+	timeSec[playerid]++;
+	if(timeSec[playerid] == 2)
+	{
+		TimerJedzenie[playerid] = 0;
+		KillTimer(ZarcieCooldown[playerid]);
+	}
+	return 1;
+}
+//Ca³owanie - anty spam
+forward SpamujeCalowaniem(playerid);
+public SpamujeCalowaniem(playerid)
+{
+	odliczanie[playerid]++;
+	if(odliczanie[playerid] == 2)
+	{
+		spamujeCaluj[playerid] =0;
+		KillTimer(timerCaluj[playerid]);
+	}
+	return 1;
+}
+//Anty-Komunikat-Timer
+forward KomunikatCzas(playerid);
+public KomunikatCzas(playerid)
+{
+	komunikatMinuty[playerid]++;
+	if(komunikatMinuty[playerid] == 15)
+	{
+		new string[128];
+		format(string, sizeof(string), "null");
+		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponownie wys³aæ komunikat frakcyjny"); 
+		SetPVarString(playerid, "trescOgloszenia", string);
+		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 0;
+		KillTimer(komunikatTime[playerid]);
+	}
+	return 1;
+}
+forward KomunikatCzasZerowanie(playerid);
+public KomunikatCzasZerowanie(playerid)
+{
+	komunikatMinutyZerowanie[playerid]++;
+	if(komunikatMinutyZerowanie[playerid] == 5)
+	{
+		new string[128];
+		format(string, sizeof(string), "null"); 
+		sendTipMessage(playerid, "Zakoñczono odliczanie - Mo¿esz ponowie wys³aæ komunikat frakcyjny"); 
+		SetPVarString(playerid, "trescOgloszenia", string);
+		KillTimer(komunikatTimeZerowanie[playerid]); 
+	}
+
+	return 1;
+}
+//End komunikatów
 forward AktywujPozar();
 public AktywujPozar()
 {
@@ -682,12 +769,25 @@ public PlayerAFK(playerid, afktime, breaktime)
 
 		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
-			if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
+			if(GetPVarInt(playerid, "dutyadmin") == 0)
 			{
-				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
-				SetTimerEx("KickEx", 500, false, "i", playerid);
+				if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
+				{
+					SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
+					SetTimerEx("KickEx", 500, false, "i", playerid);
+				}
+				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+				
 			}
-			SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+			else
+			{
+				if(afktime > 600 && PlayerInfo[playerid][pAdmin] != 5000)
+				{
+					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas wejœcia na @Duty! Otrzymujesz Kicka (10min)");
+					SetTimerEx("KickEx", 500, false, "i", playerid);
+				}
+				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
+			}
 		}
 		else if(afktime > 600 && PlayerInfo[playerid][pDonateRank] >= 1)
 		{
@@ -1562,264 +1662,267 @@ public Spectator()
 			{
 				if(playerState == 1 || playerState == 2 || playerState == 3)
 				{
-					GetPlayerName(i, specNAME, sizeof(specNAME));
-                    switch(weaponID)
-                    {
-    					case 0:
-    					{
-    						format(string, sizeof(string), "* %s chowa Broñ.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 1:
-    					{
-    						format(string, sizeof(string), "* %s chowa Broñ.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 2:
-    					{
-    						format(string, sizeof(string), "* %swyci¹ga Kij Golfowy.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 3:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Pa³kê Policyjn¹.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 4:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Nó¿.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 5:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Bejzbol.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 6:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga £opatê.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 7:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Kij Bilardowy.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 8:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Katane.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 9:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Pi³ê Mechaniczn¹.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 14:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Kwiaty.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 15:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Dêbow¹ Laskê.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 16:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Granat.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 17:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Gaz £zawi¹cy.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 18:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Koktajl Mo³otova.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					//bron 19 20 i 21 nie istnieje
-
-    					case 22:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga z kieszeni Pistolety 9mm.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 23:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Pistolet z T³umikiem.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 24:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Pistolet Deagle.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 25:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli Shotgun'a.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 26:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga z rzeŸni Obrzyny.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 27:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli Spas-12.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 28:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga z kabury UZI.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 29:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli MP5.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 30:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli AK47.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 31:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli M4.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 32:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga z kabury TEC-9.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 33:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli Strzelbê.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 34:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza koszuli Snajperkê.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 35:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga zza ucha RPG.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 36:
-    					{
-    						format(string, sizeof(string), "* %s wyczarowuje Rakietnice.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 37:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga z ognia Miotacz Ognia.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 38:
-    					{
-    						format(string, sizeof(string), "* %s wysrywa miniguna.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 39:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga z torby C4.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 40:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga detonator.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 41:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Gaz Pieprzowy / Spray.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 42:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Gaœnicê.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 43:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga Aparat Fotograficzny.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-
-    					case 44:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga noktowizor", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    						ResetPlayerWeapons(i);
-    					}
-
-    					case 45:
-    					{
-    						format(string, sizeof(string), "* %s wyci¹ga termowizor.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    						ResetPlayerWeapons(i);
-    					}
-
-    					case 46:
-    					{
-    						format(string, sizeof(string), "* %s zak³ada Spadochron na plecy.", specNAME);
-    						ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    					}
-                    }
-					if(weaponID >= 22 && weaponID <= 38)
+					if(GetPVarInt(i, "dutyadmin") == 0)
 					{
-                        if(GetPVarInt(i, "tazer") == 1)
-                        {
-							format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", specNAME);
-							ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							RemovePlayerAttachedObject(i, 9);
-                            SetPVarInt(i, "tazer", 0);
+						GetPlayerName(i, specNAME, sizeof(specNAME));
+						switch(weaponID)
+						{
+							case 0:
+							{
+								format(string, sizeof(string), "* %s chowa Broñ.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 1:
+							{
+								format(string, sizeof(string), "* %s chowa Broñ.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 2:
+							{
+								format(string, sizeof(string), "* %swyci¹ga Kij Golfowy.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 3:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Pa³kê Policyjn¹.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 4:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Nó¿.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 5:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Bejzbol.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 6:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga £opatê.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 7:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Kij Bilardowy.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 8:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Katane.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 9:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Pi³ê Mechaniczn¹.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 14:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Kwiaty.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 15:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Dêbow¹ Laskê.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 16:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Granat.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 17:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Gaz £zawi¹cy.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 18:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Koktajl Mo³otova.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							//bron 19 20 i 21 nie istnieje
+
+							case 22:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga z kieszeni Pistolety 9mm.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 23:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Pistolet z T³umikiem.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 24:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Pistolet Deagle.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 25:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga zza koszuli Shotgun'a.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 26:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga z rzeŸni Obrzyny.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 27:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga zza koszuli Spas-12.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 28:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga z kabury UZI.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 29:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga zza koszuli MP5.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 30:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga zza koszuli AK47.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 31:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga zza koszuli M4.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 32:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga z kabury TEC-9.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 33:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga zza koszuli Strzelbê.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 34:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga zza koszuli Snajperkê.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 35:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga zza ucha RPG.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 36:
+							{
+								format(string, sizeof(string), "* %s wyczarowuje Rakietnice.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 37:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga z ognia Miotacz Ognia.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 38:
+							{
+								format(string, sizeof(string), "* %s wysrywa miniguna.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 39:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga z torby C4.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 40:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga detonator.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 41:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Gaz Pieprzowy / Spray.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 42:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Gaœnicê.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 43:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga Aparat Fotograficzny.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
+
+							case 44:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga noktowizor", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								ResetPlayerWeapons(i);
+							}
+
+							case 45:
+							{
+								format(string, sizeof(string), "* %s wyci¹ga termowizor.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								ResetPlayerWeapons(i);
+							}
+
+							case 46:
+							{
+								format(string, sizeof(string), "* %s zak³ada Spadochron na plecy.", specNAME);
+								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							}
 						}
+						if(weaponID >= 22 && weaponID <= 38)
+						{
+							if(GetPVarInt(i, "tazer") == 1)
+							{
+								format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", specNAME);
+								ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								RemovePlayerAttachedObject(i, 9);
+								SetPVarInt(i, "tazer", 0);
+							}
+						}
+						starabron[i]=weaponID;
 					}
-					starabron[i]=weaponID;
 				}
 			}
 			else
@@ -2344,6 +2447,15 @@ public JednaSekundaTimer()
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
+					if(GetPVarInt(i, "DostalDM2") == 1)
+					{
+						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]", GetNick(i, true));
+						SendAdminMessage(COLOR_PANICRED, string);
+						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i, true));
+						sendTipMessage(i, string);
+						ResetPlayerWeapons(i);
+						UsunBron(i);
+					}
 				}
 				PlayerInfo[i][pJailed] = 0;
 				SendClientMessage(i, COLOR_GRAD1,"   Wolnoœæ! Odsiedzia³eœ karê, mamy nadzieje ¿e to ciê czegoœ nauczy³o.");
@@ -2372,10 +2484,9 @@ public JednaSekundaTimer()
 				StopAudioStreamForPlayer(i);
 			}
 		}
-
 		if(State == PLAYER_STATE_DRIVER)
 		{
-			if(IsPlayerInRangeOfPoint(i, 7.0, 2064.0703,-1831.3167,13.3853) || IsPlayerInRangeOfPoint(i, 7.0, 1024.8514,-1022.2302,31.9395) || IsPlayerInRangeOfPoint(i, 7.0, 486.9398,-1742.4130,10.9594) || IsPlayerInRangeOfPoint(i, 7.0, -1904.2325,285.3743,40.8843)  || IsPlayerInRangeOfPoint(i, 7.0, 720.0876,-458.3574,16.3359))
+			if(IsPlayerInRangeOfPoint(i, 7.0, 2064.0703,-1831.3167,13.3853) || IsPlayerInRangeOfPoint(i, 5.0, 1351.0012,-1818.5981,13.3031) || IsPlayerInRangeOfPoint(i, 7.0, 1024.8514,-1022.2302,31.9395) || IsPlayerInRangeOfPoint(i, 7.0, 486.9398,-1742.4130,10.9594) || IsPlayerInRangeOfPoint(i, 7.0, -1904.2325,285.3743,40.8843)  || IsPlayerInRangeOfPoint(i, 7.0, 720.0876,-458.3574,16.3359) || IsPlayerInRangeOfPoint(i, 7.0, -2425.9668,1023.2122,50.1248) || IsPlayerInRangeOfPoint(i, 7.0, 1972.6704,2163.9829,10.7942) || IsPlayerInRangeOfPoint(i, 7.0, -100.3769,1115.7079,19.4688) || IsPlayerInRangeOfPoint(i, 7.0, -1420.5669,2584.1997,55.5703))
 			{
 				if(naprawiony[i] == 0)
 				{

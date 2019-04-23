@@ -1,7 +1,7 @@
-//bramy.hwn
+//chaty.hwn
 
 //----------------------------------------------<< Header >>-------------------------------------------------//
-//---------------------------------------[ Modu≈Ç: bramy.hwn ]------------------------------------------//
+//------------------------------------------[ Modu≥: chaty.hwn ]---------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -21,47 +21,22 @@
 
 //
 
-//------------------<[ Enumy: ]>--------------------
-enum eBramy
-{
-	b_obiekt,
-	bool:b_flaga,
-	Float:b_x1,
-	Float:b_y1,
-	Float:b_z1,
-	Float:b_rx1,
-	Float:b_ry1,
-	Float:b_rz1,
-	Float:b_x2,
-	Float:b_y2,
-	Float:b_z2,
-	Float:b_rx2,
-	Float:b_ry2,
-	Float:b_rz2,
-	Float:b_speed,
-	Float:b_range,
-	b_uprtyp,
-	b_uprval,
-	duo_obiekt,
-	Float:duo_x1,
-	Float:duo_y1,
-	Float:duo_z1,
-	Float:duo_rx1,
-	Float:duo_ry1,
-	Float:duo_rz1,
-	Float:duo_x2,
-	Float:duo_y2,
-	Float:duo_z2,
-	Float:duo_rx2,
-	Float:duo_ry2,
-	Float:duo_rz2,
-	pAccessCard
-};
-new bramy[MAX_BRAM][eBramy];
-
 //-----------------<[ Zmienne: ]>-------------------
-new iloscbram;
+new nickadminaIC[MAX_PLAYER_NAME];//NickAdministratora IC
 
-//------------------<[ Forwardy: ]>--------------------
+//Statystyki:
+new iloscKick[MAX_PLAYERS]=0;//IloúÊ kickÛw nadanych przez @ -----------------------> [/kick]
+new iloscWarn[MAX_PLAYERS]=0;//IloúÊ warnÛw nadanych przez @ -----------------------> [/warn /unwarn]
+new iloscBan[MAX_PLAYERS]=0; //Iloúc banÛw/unbanÛw/warnÛw/unwarnÛw/sbanÛw ----------> [/ban /block /unban /unblock /pban /pblock, /banip, /sblock ]
+new iloscAJ[MAX_PLAYERS]=0;//IloúÊ rozdanych przez admina AJ -----------------------> [/aj; /unaj; /pAJ]
+new iloscInWiadomosci[MAX_PLAYERS]=0;//IloúÊ wchodzπcych wiadomoúci ----------------> [/w]
+new iloscOutWiadomosci[MAX_PLAYERS]=0;//IloúÊ wuchodzπcych wiadomoúci --------------> [/w]
+new iloscZapytaj[MAX_PLAYERS]=0;//IloúÊ reakcji na /zapytaj -------------------------> [/tickets]
+new iloscInne[MAX_PLAYERS]=0; //Inne kary/akcje administracyjne ---------------------> [/slap, /gethere, /tp, /getcar, /pogodaall, /fuelcar, /fixveh, /fuelcars, /sethp, /setarmor, /fixallveh, /mute, /freeze, /unfreeze, ]
+new AdminDutyMinuty[MAX_PLAYERS] = 0;//Czas s≥uøby - Minuty
+new AdminDutyGodziny[MAX_PLAYERS] = 0;//Czas s≥uøby - Godziny
+new AdminDutyTimer[MAX_PLAYERS];//Czas s≥uøby - Timer
+new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
+new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
 
 //end

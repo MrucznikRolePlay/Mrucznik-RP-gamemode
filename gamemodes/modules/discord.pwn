@@ -3,7 +3,7 @@ stock DiscordConnectInit()
 	g_SanNewsChannelId=DCC_FindChannelById("538403089263362098");
 	g_AdminChannelId=DCC_FindChannelById("538403269077106725");
 	g_ReportChannelId=DCC_FindChannelById("538403303550091264");
-	
+
 	g_FracChannel[1]=DCC_FindChannelById("545045344652886056");
 	g_FracChannel[2]=DCC_FindChannelById("545620322423144459");
 	g_FracChannel[4]=DCC_FindChannelById("545619975151288321");
@@ -18,8 +18,8 @@ stock DiscordConnectInit()
 	g_FracChannel[16]=DCC_FindChannelById("545643300736991235");
 	g_FracChannel[17]=DCC_FindChannelById("545619305832775700");
 	g_OrgChannel[1]=DCC_FindChannelById("545643431112867841");
-	
-	
+
+
 	return 1;
 }
 stock SendDiscordMessage(channel, message[])
@@ -72,7 +72,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		utf8decode(dest, str);
 		strreplace(dest,"%","#");
 		SendAdminMessage(0xFFC0CB, dest);
-		
+
 		return 1;
 	}
 	else if(channel == g_OrgChannel[1] && IsBot == false)
@@ -107,4 +107,3 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 	}
 	return 0;
 }
-

@@ -1,7 +1,7 @@
-//bramy.hwn
+//MODULE_NAME.hwn
 
 //----------------------------------------------<< Header >>-------------------------------------------------//
-//---------------------------------------[ Modu≈Ç: bramy.hwn ]------------------------------------------//
+//---------------------------------------[ Modu≥: MODULE_NAME.hwn ]------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -22,45 +22,24 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-enum eBramy
+enum eWjedz
 {
-	b_obiekt,
-	bool:b_flaga,
-	Float:b_x1,
-	Float:b_y1,
-	Float:b_z1,
-	Float:b_rx1,
-	Float:b_ry1,
-	Float:b_rz1,
-	Float:b_x2,
-	Float:b_y2,
-	Float:b_z2,
-	Float:b_rx2,
-	Float:b_ry2,
-	Float:b_rz2,
-	Float:b_speed,
-	Float:b_range,
-	b_uprtyp,
-	b_uprval,
-	duo_obiekt,
-	Float:duo_x1,
-	Float:duo_y1,
-	Float:duo_z1,
-	Float:duo_rx1,
-	Float:duo_ry1,
-	Float:duo_rz1,
-	Float:duo_x2,
-	Float:duo_y2,
-	Float:duo_z2,
-	Float:duo_rx2,
-	Float:duo_ry2,
-	Float:duo_rz2,
-	pAccessCard
+	Float:wj_X,
+	Float:wj_Y,
+	Float:wj_Z,
+	Float:wy_X,
+	Float:wy_Y,
+	Float:wy_Z,
+	wj_VW,
+	wj_PLOCAL,
+	pFracOwn,
+	pOrgOwn,
+	Float:RangeofPoint,
 };
-new bramy[MAX_BRAM][eBramy];
+new	Float:wjazdy[MAX_WJEDZ][eWjedz];
 
 //-----------------<[ Zmienne: ]>-------------------
-new iloscbram;
+new valueWjedz;
 
 //------------------<[ Forwardy: ]>--------------------
 

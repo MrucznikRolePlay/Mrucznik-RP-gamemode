@@ -1,7 +1,3 @@
-//bramy.hwn
-
-//----------------------------------------------<< Header >>-------------------------------------------------//
-//---------------------------------------[ Modu≈Ç: bramy.hwn ]------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -19,49 +15,21 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 
-//
 
-//------------------<[ Enumy: ]>--------------------
-enum eBramy
-{
-	b_obiekt,
-	bool:b_flaga,
-	Float:b_x1,
-	Float:b_y1,
-	Float:b_z1,
-	Float:b_rx1,
-	Float:b_ry1,
-	Float:b_rz1,
-	Float:b_x2,
-	Float:b_y2,
-	Float:b_z2,
-	Float:b_rx2,
-	Float:b_ry2,
-	Float:b_rz2,
-	Float:b_speed,
-	Float:b_range,
-	b_uprtyp,
-	b_uprval,
-	duo_obiekt,
-	Float:duo_x1,
-	Float:duo_y1,
-	Float:duo_z1,
-	Float:duo_rx1,
-	Float:duo_ry1,
-	Float:duo_rz1,
-	Float:duo_x2,
-	Float:duo_y2,
-	Float:duo_z2,
-	Float:duo_rx2,
-	Float:duo_ry2,
-	Float:duo_rz2,
-	pAccessCard
-};
-new bramy[MAX_BRAM][eBramy];
 
-//-----------------<[ Zmienne: ]>-------------------
-new iloscbram;
+//NO_FRACTION
+//Nie wymagajπce frakcji // Nie dla frakcji
+//Administracyjne [..]
 
-//------------------<[ Forwardy: ]>--------------------
+#include "modules/commands/No_Fraction/CMD_edytujupr.pwn"
+#include "modules/commands/No_Fraction/CMD_uprawnienia.pwn"
+#include "modules/commands/No_Fraction/CMD_id.pwn"
+#include "modules/commands/No_Fraction/CMD_sprawdzkredyty.pwn"
+#include "modules/commands/No_Fraction/CMD_wyrzucdragi.pwn"
+#include "modules/commands/No_Fraction/CMD_wyrzucmats.pwn"
 
-//end
+
+//Frac --> Dla frakcji.
+//Komendy frakcyjne i biznesowe (rodzinne). 
+
+#include "modules/commands/Frakcyjne/CMD_pracownicy.pwn"

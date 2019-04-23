@@ -1,7 +1,5 @@
-//bramy.hwn
-
-//----------------------------------------------<< Header >>-------------------------------------------------//
-//---------------------------------------[ Modu≈Ç: bramy.hwn ]------------------------------------------//
+//----------------------------------------------<< Source >>-------------------------------------------------//
+//------------------------------------------[ Modu≥: komenda/....pwn ]---------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -21,47 +19,36 @@
 
 //
 
-//------------------<[ Enumy: ]>--------------------
-enum eBramy
+//-----------------<[ Funkcje: ]>-------------------
+
+
+//-----------------<[ Komendy: ]>-------------------
+
+CMD:pracownicy(playerid)
 {
-	b_obiekt,
-	bool:b_flaga,
-	Float:b_x1,
-	Float:b_y1,
-	Float:b_z1,
-	Float:b_rx1,
-	Float:b_ry1,
-	Float:b_rz1,
-	Float:b_x2,
-	Float:b_y2,
-	Float:b_z2,
-	Float:b_rx2,
-	Float:b_ry2,
-	Float:b_rz2,
-	Float:b_speed,
-	Float:b_range,
-	b_uprtyp,
-	b_uprval,
-	duo_obiekt,
-	Float:duo_x1,
-	Float:duo_y1,
-	Float:duo_z1,
-	Float:duo_rx1,
-	Float:duo_ry1,
-	Float:duo_rz1,
-	Float:duo_x2,
-	Float:duo_y2,
-	Float:duo_z2,
-	Float:duo_rx2,
-	Float:duo_ry2,
-	Float:duo_rz2,
-	pAccessCard
-};
-new bramy[MAX_BRAM][eBramy];
+    new frac = GetPlayerFraction(playerid);
+	if(frac > 0 && PlayerInfo[playerid][pRank] >= 4)
+	{
+	    new string[64];
+	    SendClientMessage(playerid, COLOR_GREEN, "Pracownicy Online:");
+		foreach(Player, i)
+		{
+		    if(frac == GetPlayerFraction(i))
+		    {
+		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i, true), i, PlayerInfo[i][pRank]);
+		        SendClientMessage(playerid, COLOR_GRAD1, string);
+		    }
+		}
+	}
+	else
+	{
+	    sendErrorMessage(playerid, "Nie jesteú liderem lub osobπ z 4 rangπ!");
+	}
+	return 1;
+}
 
-//-----------------<[ Zmienne: ]>-------------------
-new iloscbram;
 
-//------------------<[ Forwardy: ]>--------------------
+//-----------------<[ Timery: ]>-------------------
+
 
 //end

@@ -7,92 +7,33 @@ enum eKontakty {
 	eNumer
 };
 new Kontakty[MAX_PLAYERS][MAX_KONTAKTY][eKontakty];
-
-enum eBizData {
-    eBizName[32],
-    Float:eBizWejX,
-    Float:eBizWejY,
-    Float:eBizWejZ,
-    Float:eBizWyjX,
-    Float:eBizWyjY,
-    Float:eBizWyjZ,
-    eBizInt,
-    eBizVw,
-    eBizMoney
+enum muzykaURLData{
+	muzykaString[64],
+	Float:muzykaX,
+	Float:muzykaY,
+	Float:muzykaZ,
 };
-//"NAZWA BIZNESU" X,Y,Z XW, YW, ZW, INT, VW, Pieni¹¿ki jakie zarabiamy
-new BizData[MAX_BIZNES][eBizData] = {
-    {"BIZNES TESTOWY", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0},//0
-    {"Roboi's Temple Food Mart", 1315.2620,-898.5724,39.5781, -31.1390,-91.3650,1003.5469, 18, 0, 3000},//1
-	{"Roboi's Food Mart Commerce",1352.5167,-1758.1649,13.5078,-25.8845,-185.8690,1003.5469,17, 0,5000},//2
-	{"69 centów Unity Station",1832.8691,-1842.5802,13.5781,-27.4379,-57.5059,1003.5469,6, 0,3500},//3
-	{"24/7 Dillimore",691.4969,-546.8142,16.3359,-25.1326,-139.0670,1003.5469,16, 0,2000},//4
-	{"24/7 BaySide",-2478.9751,2318.0315,4.9844,-2478.9751,2318.0315,4.9844,0, 0,1000},//5
-	{"24/7 Palomino Creek",2334.3179,14.5263,26.4843,2334.3179,14.5263,26.4843,0, 0,1000},//6
-	{"Monopolowy Dillimore",660.0414,-609.5191,16.3359,660.0414,-609.5191,16.3359,0, 0, 1000},//7
-	{"Monopolowy Las Collinas",2743.1772,-1103.7740,69.5781,2743.1772,-1103.7740,69.5781,0, 0, 1000},//8
-	{"Monopolowy Blueberry",254.4521,-62.2356,1.5781,254.4521,-62.2356,1.5781,0, 0, 1000},//9
-	{"ZIP Los Santos",1457.1046,-1138.5221,24.0009,161.4048,-94.2416,1001.8047,18, 0, 7000},//10 ODZIE¯OWY1
-	{"Binco Los Santos",2244.4863,-1664.9347,15.4766,207.5219,-109.7448,1005.1328,15, 0, 7000},//11 ODZIE¯OWY2
-	{"Sub Urban Los Santos",2112.8367,-1212.6146,23.9646,204.0579,-47.1918,1001.8047,1, 0, 7000},//12 ODZIE¯OWY3
-	{"Victim Los Santos",460.0446,-1501.0822,31.0557,225.0306,-9.1838,1002.2180,5, 0, 7000},//13 ODZIE¯OWY4
-	{"Pro Laps Los Santos",499.9644,-1359.8195,16.2959,206.4627,-137.7076,1003.0938,3, 0, 7000},//14 ODZIE¯OWY5
-	{"Warsztat Dillimore", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0},//639.4783,-494.3264,16.3359,639.4783,-494.3264,16.3359,0,4000},//15
-	{"Verona Mall",1128.7841,-1424.2539,15.7981,1128.7841,-1424.2539,15.7981,0, 0, 10000},//16
-	{"Centrum Handlowe Willofield",2485.3513,-1958.7478,13.5810,2485.3513,-1958.7478,13.5810,0, 0, 3000},//17
-	{"SexShop",1087.7655,-923.0282,43.3906,-100.2674,-22.9376,1000.7188,3, 0, 3000},//18
-	{"Xoomer Vinewood",999.8008,-919.9717,42.3281,-30.9467,-89.6096,1003.5469,18, 0, 5000},//19
-	{"Going Idlewood", 1929.6050,-1776.3704,13.5469, 1929.6050,-1776.3704,13.5469, 0, 0, 10000},//20
-	{"Xoomer Flint Country", -79.2933,-1169.5717,2.1592, -79.2933,-1169.5717,2.1592, 0, 0, 3000},//21
-	{"Gasso Dillimore", 660.6975,-573.4732,16.3359, 663.8751,-573.3432,16.3359, 0, 0, 5000},//22
-	{"Tosser Palomino Creek", 2579.3860,53.4918,26.5547, 2579.3860,53.4918,26.5547, 0, 0, 2000},//23
-	{"Tosser Market", 1017.7505,-1353.3330,13.3825, 1017.7505,-1353.3330,13.3825, 0, 0, 2500},//24
-	{"Studio tatua¿u", 2069.3047,-1779.8129,13.5593, 2069.3047,-1779.8129,13.5593, 0, 0, 1000},//25
-	{"Studio tatua¿u El Corona", 1975.8943,-2036.6990,13.5469, -219.6767,-33.8970,1000.7897, 15, 0, 2000},//26
-	{"Cluckin' Bell Market", 927.6956,-1352.9508,13.3438, 365.0096,-10.9751,1001.8516, 9, 0, 5000},//27 SetPlayerShopName(playerid,"FDCHICK");
-	{"Cluckin' Bell Willofield", 2397.3484,-1898.3069,13.5469, 365.0096,-10.9751,1001.8516, 9, 0, 4000},//28 SetPlayerShopName(playerid,"FDCHICK");
-	{"Cluckin' Bell East LS", 2420.2419,-1509.0365,24.0000, 365.0096,-10.9751,1001.8516, 9, 0, 3500},//29 SetPlayerShopName(playerid,"FDCHICK");
-	{"Burger Shot Vinewood", 1199.3140,-918.6473,43.1190, 363.4129,-74.5786,1001.5078, 10, 0, 6000},//30 SetPlayerShopName(playerid,"FDBURG");
-	{"Burger Shot Marina", 811.3132,-1616.3217,13.5469, 363.4129,-74.5786,1001.5078, 10, 0, 5500},//31 SetPlayerShopName(playerid,"FDBURG");
-	{"The Well Stacked Pizza Co.", 2104.2793,-1806.4833,13.6504, 2097.9895,-1803.0883,-54.9997, 1, 0, 7500},//32
-	{"Jetty Lounge", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0},//33
-	{"P¹czkarnia", 1038.1914,-1339.1770,13.7266, 377.1270,-192.7546,1000.6401, 17, 0, 5000},//34
-	{"Ten Green Bottles", 2309.5596,-1643.8256,14.8270, 502.0899,-68.2218,998.7578, 11, 0, 4000},//35
-	{"U Kacpra", 1970.8470,-1285.2260,28.4919, 1982.2196,-1302.0121,-8.8488, 17, 0, 4500},//36 ballas.pwn
-	{"Carniceria El Pueblo", 2151.8572,-1013.4380,62.8028, 2138.9092,-1014.4178,67.3345, 0, 0, 3000},//37 vagos.pwn
-	{"Russian Bar PC", 2323.2117,7.6547,26.5648, 2323.2117,7.6547,26.5648, 0, 0, 1000},//38
-	{"Cowboy Bar", 681.4850,-473.8164,16.5363, -227.0279,1401.2299,27.7656, 18, 0, 2500},//39
-	{"PigPen", 2421.2334,-1220.4700,25.4835, 1204.9055,-13.6694,1000.9219, 2, 0, 9000},//40
-	{"Ibiza Club", 394.1421,-1805.9238,7.8302, 394.1421,-1805.9238,7.8302, 0, 0, 10000},//41 zakreskowane /wejdz
-	{"Carniceria Pub", 2501.7891,-1494.8105,24.0000, 1212.0199,-28.6631,1000.9531, 3, 0, 2500},//42
-	{"Basen Tsunami", 1210.7668,-1749.0038,13.5939, 575.5542,-2048.8000,16.1670, 0, 0, 6500},//43 basen.pwn
-	{"Tor rowerowy Masakra", 701.7825,-519.4822,16.3321, -1128.5498,1066.3196,1345.7429, 10, 0, 3000},//44
-	{"Tor ¿u¿lowy", -1150.0575,-991.7955,129.2188, -1150.0575,-991.7955,129.2188, 0, 0, 3500},//45
-	{"Wynajem gokartów", 2281.1272,-2365.0391,13.5469, 2281.1272,-2365.0391,13.5469, 0, 0, 2000},//46
-	{"Stadion", 2695.7224,-1704.7034,11.8438, -1404.5299,-259.0602,1043.6563, 7, 0, 5000},//47
-	{"Motel Dziki Tygrys", 1940.7742,-2115.9946,13.6953, 964.1070,-53.2055,1001.1246, 3, 0, 2500},//48
-	{"Motel Jefferson", 2232.5334,-1159.7618,25.8906, 2215.0430,-1150.6489,1025.7969, 15, 0, 3000},//49
-	{"Magazyn Solaries Industries", 854.50244, -605.01929, 18.50988, 856.45038, -615.48877, -6.18033, 0, 1, 5000},//50
-	{"Tartak", -548.2637,-194.2666,78.4063, -548.2637,-194.2666,78.4063, 0, 0, 1000},//51
-	{"Hilltop Farm", 1052.0734,-345.5268,73.9922, 1052.0734,-345.5268,73.9922, 0, 0, 1000},//52
-	{"Browary FleishBerg", -50.0422,-269.3628,6.6332, 2532.2400,-1281.7943,1048.2891, 2, 0, 0},//53 PlayerInfo[playerid][pLocal] = 242; BAZA HA
-	{"Skate Park", 1881.1133,-1393.2026,13.5703, 1881.1133,-1393.2026,13.5703, 0, 0, 1000},//54
-	{"Bymber Casino", 1022.1578,-1121.8109,23.8713, 1025.2454,-1078.1615,-67.5729, 3,  55, 8000},//55
-	{"Zak³ad Bukmacherski", 1631.9749,-1172.3724,24.0843, -2158.3574,642.5895,1052.3750, 1, 0, 2500},//56
-	{"Biurowiec Orientalny", 2792.8267,-1087.5370,30.7188, 388.8638,173.9020,1008.3828, 3, 0, 0},//57
-	{"Warsztat Niebieski", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0},//2312.2769,-1222.9790,24.1231,2312.2769,-1222.9790,24.1231, 0, 3000},//58
-	{"Warsztat Czerwony", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0},//1760.5095,-1695.9948,13.4278, 1760.5095,-1695.9948,13.4278, 0, 3000},//59
-	{"Serwis samochodowy", 2494.1680,-1464.7139,24.0255, 2494.1680,-1464.7139,24.0255, 0, 0, 3000},//60
-	{"Ammu Nation Dillimore", 712.1412,-498.9127,16.3359,709.9700,-498.6446,6.3217, 0, 2, 3000},//61
-	{"Magazyny Market", 919.4679,-1252.1499,16.2109, 919.4679,-1252.1499,16.2109, 0, 0, 1000},//62
-	{"Bonehead Club", 0.0,0.0,0.0,0.0,0.0,0.0, 0, 0, 0},//63 {"Bonehead Club", 2447.8098,-1963.0193,13.5469, 2455.1021,-1958.0905,120.8159, 0, 2000},
-	{"Vinyl Club", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0},//64 {"Vinyl Club", 816.0736,-1386.5637,13.6064, 808.4433,-1381.7662,23.6475, 0, 10000},
-	{"Warsztat na Ganton", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0},//2468.4087,-1784.5830,13.5593, 2468.4087,-1784.5830,13.5593, 0, 3000},//65
-	{"Tosser Montgomery", 1383.2181,465.3977,20.1937, 1383.2181,465.3977,20.1937, 0, 0, 2000},//66
-	{"Gara¿e Commerce", 1607.8698,-1559.5728,14.1792, 1607.8698,-1559.5728,14.1792, 0, 0, 0},//67
-	{"XXXX - Pusty - XXXX", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0},//68
-	{"Lotnisko Verdant Meadows", 411.0128,2533.4470,19.1484, 411.0128,2533.4470,19.1484, 0, 0, 8000},//69
-	{"Los Santos Civilian Defence", 1709.2217,-1500.6047,13.5469, 315.7057,-142.9870,999.6016, 7, 3, 30000}//70
+new muzykaURL[MAX_FRAC][muzykaURLData] = {
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0},
+	{"http://www.miastomuzyki.pl/n/rmfmaxxx.pls", 0.0, 0.0, 0.0}
 };
 
 enum hqZgloszenia {
@@ -534,22 +475,22 @@ new VehiclePrice[211] = {
 
 new FractionNames[][40] = {
     "Brak",
-    "San Andreas Police Department",
+    "Los Santos Police Department",
     "Federal Bureau of Investigation",
     "San Andreas Sherrifs Department",
     "Los Santos Medical Center",
     "SA Bahamas",
     "Yakuza",
-    "Government Security Agency",
+    "United States Secret Service",
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
-    "Rz¹d Stanu San Andreas",//11
+    "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
     "187 North Park Avenue",
     "Hillside Nortenos 14",
     "Nightmare of Adrenalin",
-    "Hammerskins Nation",
+    "IV Saint Reich",
     "Los Santos Fire Department",
     "Brak",
     "Brak"
@@ -895,7 +836,7 @@ new VehicleNames[215][] = {
    "Elegant", "Kamping", "Rower", "Rower Gorski", "Beagle", "Cropdust", "Stunt",
    "Tanker", "RoadTrain", "Nebula", "Majestic", "Buccaneer", "Shamal",  "Hydra",
    "FCR-900","NRG-500","HPV1000","Cement Truck","Tow Truck","Fortune","Cadrona",
-   "Armatka Wodna", "Willard", "Forklift","Traktor","Combine","Feltzer","Remington",
+   "Pancernik", "Willard", "Forklift","Traktor","Combine","Feltzer","Remington",
    "Slamvan", "Blade", "Freight", "Streak","Vortex","Vincent","Bullet","Clover",
    "Sadler",  "Straz", "Hustler", "Intruder", "Primo", "Cargobob",  "Tampa",
    "Sunrise", "Merit",  "Utility Truck",  "Nevada", "Yosemite", "Windsor",  "Monster",
@@ -905,7 +846,7 @@ new VehicleNames[215][] = {
    "Stafford", "BF-400", "SANvan","Tug","Trailer","Emperor","Wayfarer","Euros",
    "Hotdog", "Club", "Trailer", "Trailer","Andromada","Dodo","RC Cam", "Launch",
    "Radiowoz (LSPD)", "Radiowoz (SFPD)","Radiowoz (LVPD)","Policyjny Jeep",
-   "Picador",   "Pancernik FBI",  "Alpha",   "Phoenix",   "Glendale",   "Sadler",
+   "Picador",   "Opancerzona Armatka",  "Alpha",   "Phoenix",   "Glendale",   "Sadler",
    "Luggage Trailer","Luggage Trailer","Stair Trailer", "Boxville", "Kombajn",
    "Utility Trailer", "Brak pojazdu", "Brak ³odzi", "Brak samolotu"
 };
@@ -1388,6 +1329,7 @@ enum pInfo
 	Float:pHealth,
 	Float:pSHealth,
 	pInt,
+	pVW,
 	pDomWKJ,
 	pDomT,
 	//pDomW,
@@ -1499,8 +1441,11 @@ enum pInfo
     pCars[MAX_CAR_SLOT],
     pCarSlots,
     pHat,
+	pBlokadaPisaniaFrakcjaCzas,
     Text3D:pDescLabel,
-    pDesc[128]
+    pDesc[128],
+	pStrong,
+	pCard
 };
 enum StringData
 {
@@ -1510,6 +1455,21 @@ enum StringData
 
 new PlayerInfo[MAX_PLAYERS][pInfo];
 
+enum pDodatek
+{
+	pSlot1,
+	pSlot2,
+	pSlot3,
+	pSlot4,
+	pSlot5,
+	pSlot6,
+	pSlot7,
+	pSlot8,
+	pSlot9,
+	pSlot10
+
+};
+new PlayerAdds[MAX_PLAYERS][pDodatek];
 enum pHaul
 {
 	pCapasity,

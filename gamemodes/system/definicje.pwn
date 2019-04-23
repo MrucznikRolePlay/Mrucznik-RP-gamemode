@@ -45,8 +45,19 @@
 #define OSTATNIE_ZGLOSZENIA 10
 #define OSTATNIE_ZGLOSZENIASASP 10
 
-//BIZNESY
-#define MAX_BIZNES 71
+
+#define MAX_MESSAGE_LENGHT 			144 		//maksymalna liczba znaków jaka mo¿e zostaæ wyœwietlona na ekranie
+#define MAX_STREAM_LENGTH 			128			//maksymalna d³ugoœæ linku dla PlayAudioStreamForPlayer
+#define BYTES_PER_CELL 				4 			//u¿ywane w SendClientMessageF
+#define SPAM_PROTECTION_VALUE 		3 			//iloœæ dzia³añ które mo¿na wykonaæ przed w³¹czeniem ochrony antyspamowej 
+#define COLOR_STRING_LENGTH			6			//d³ugoœæ ci¹gu znaków odpowiedzialna za kolor
+#define NOT_FOUND					-1			//u¿ywane do strfind
+#define STREAM_DISTANCE 300.0
+
+#define BIKE_COST 30000
+//KB
+#define MAX_MONEY_IN_BANK 100000000
+
 //SKLEP
 #define MRP_PREMIUM_TIME  2592000 // 30 dni
 #define MRP_PREM_HOURS    15      //Ilosc godzin potrzebnych do przegrania
@@ -95,6 +106,7 @@
 #define CAR_AMOUNT 2000 //Maksymalna iloœæ wozów
 #define ILOSC_AUT 483
 #define MAX_CHECKPOINTS 51
+
 
 //Kary:
 #define KARA_BAN 1
@@ -176,7 +188,7 @@
 #define NITRO_D 500000
 #define HYDRA_D 250000
 
-new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
+new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
     FAMILY_FDU = -1;
 
 //2015.09.12
@@ -203,7 +215,24 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define ORG_TYPE_RACE       3
 #define ORG_TYPE_BIZNES     4
 #define ORG_TYPE_CLUB       5
+//-----------------------------------------------------------------------------
+//                              PLOCAL
+//-----------------------------------------------------------------------------
+//Spis wszystkich pLocali.
 
+//=======[FRAKCJE]===========
+#define PLOCAL_FRAC_DMV 108
+#define PLOCAL_FRAC_FBI 212
+#define PLOCAL_FRAC_LSPD 210
+#define PLOCAL_FRAC_LSMC 253
+
+//======[RODZINNE]==========
+#define PLOCAL_ORG_BONEHEAD 240
+#define PLOCAL_ORG_SN 241
+
+//======[INNE]=============
+#define PLOCAL_INNE_BANK 103
+#define PLOCAL_DEFAULT 255
 //------------------------------------------------------------------------------
 //                              UPRAWNIENIA
 //------------------------------------------------------------------------------
@@ -458,7 +487,20 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define CAR_OWNER_SPECIAL   5
 #define CAR_OWNER_PUBLIC    6
 
+//Czêœci cia³a
+#define BONE_HEAD 2
+#define BONE_RIGHT_ARM 4
+#define BONE_LEFT_ARM 3
+#define BONE_LEFT_HAND 5
+#define BONE_RIGHT_HAND 6
+#define BONE_SPINE 1
+#define BONE_NECK 17
+#define BONE_LEFT_FOREARM 13
+#define BONE_RIGHT_FOREARM 14
 
+#define SetPlayerHoldingObject(%1,%2,%3,%4,%5,%6,%7,%8,%9) SetPlayerAttachedObject(%1,MAX_PLAYER_ATTACHED_OBJECTS-1,%2,%3,%4,%5,%6,%7,%8,%9) 
+#define StopPlayerHoldingObject(%1) RemovePlayerAttachedObject(%1,MAX_PLAYER_ATTACHED_OBJECTS-1) 
+#define IsPlayerHoldingObject(%1) IsPlayerAttachedObjectSlotUsed(%1,MAX_PLAYER_ATTACHED_OBJECTS-1)  
 
 
 //Auta specjalne
@@ -493,7 +535,6 @@ new FAMILY_SAD = -1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, F
 #define DISCORD_SAN_NEWS	0
 #define DISCORD_ADMIN_CHAT	1
 #define DISCORD_REPORT	2
-
 
 
 // Y_SAFERETURN ! ! !

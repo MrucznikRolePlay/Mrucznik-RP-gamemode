@@ -229,7 +229,7 @@ stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = fal
     `TruckSkill`='%d', \
 	`pSHealth`='%f', \
 	`pHealth`='%f', \
-	`Int`='%d',", PlayerInfo[playerid][pDetSkill],
+	`Int`='%d'", PlayerInfo[playerid][pDetSkill],
 	PlayerInfo[playerid][pSexSkill],
 	PlayerInfo[playerid][pBoxSkill],
 	PlayerInfo[playerid][pLawSkill],

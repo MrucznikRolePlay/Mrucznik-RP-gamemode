@@ -36,6 +36,7 @@ new PlayerText:MSGBOXtd_Icon[MAX_PLAYERS];
 new Text:MSGBOXtd_Sign;
 new Text:MSGBOXtd_Ver;
 new Text:MSGBOXtd_Kubi;
+new PlayerText:textwjedz[MAX_PLAYERS];
 
 /*----------------------------------------- MessageBox END ---------------------------------------------------*/
 
@@ -81,15 +82,28 @@ new Text:PatrolGammaSq;
 new Text:PatrolDeltaSq;
 new Text:PatrolLabel;
 new Text:PatrolMarker[MAX_PATROLS];
-
 new Text:SkinSelectionAccept,Text:SkinSelectionDenied, Text:SkinSelectionMy;
+new Text:Kary;
+
 
 //Oil 16.09
 new Text:OilTXD_BG[2];
 new PlayerText:OilPTXD_Arrow[5][MAX_PLAYERS];
 //01.10
 new Text:TXD_Info;
-
+KaryTXDLoad()
+{
+	Kary  = TextDrawCreate(7.481735, 272.249847, "_");
+	TextDrawLetterSize(Kary, 0.200876, 2.004995);
+	TextDrawAlignment(Kary, 1);
+	TextDrawColor(Kary, -1);
+	TextDrawSetShadow(Kary, 0);
+	TextDrawSetOutline(Kary, 1);
+	TextDrawBackgroundColor(Kary, 83);
+	TextDrawFont(Kary, 1);
+	TextDrawSetProportional(Kary, 1);
+	TextDrawSetShadow(Kary, 0);
+}
 LoadTXD()
 {
     //Debug dla peirwszego TXD
@@ -293,6 +307,15 @@ LoadTextDraws(playerid)
     PlayerTextDrawUseBox(playerid, TextOferta1[playerid], 1);
     PlayerTextDrawBoxColor(playerid, TextOferta1[playerid], 926365495);
     PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
+	
+	textwjedz[playerid] = CreatePlayerTextDraw(playerid, 230.0, 250.0, "~r~Trwa przejazd"); 
+	PlayerTextDrawFont(playerid, textwjedz[playerid], 1);
+	//PlayerTextDrawSetShadow
+	PlayerTextDrawColor(playerid, TextOferta1[playerid], 0x80FF00FF);
+	//PlayerTextDrawUseBox(playerid, textwjedz[playerid], 1);
+	//PlayerTextDrawBoxColor(playerid, textwjedz[playerid], 0xFFFFFFFF);
+	//PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
+	
     
 	return 1;
 }

@@ -42,6 +42,51 @@ new LSMCWindap8 = 0;//Winda LSMC
 new ServerTime = 14;//Czas
 new ServerWeather = 3;//Pogoda
 
+new glosowanie_admina_status = 0;
+new glosowanie_admina_tak = 0;
+new glosowanie_admina_nie = 0;
+
+
+//Prawnik - oferta
+new LawyerOffer[MAX_PLAYERS] = 0;
+new OfferPlayer[MAX_PLAYERS] = 0;
+new OfferPrice[MAX_PLAYERS] = 0;
+
+//Caluj - oferta
+new kissPlayerOffer[MAX_PLAYERS] = 0;
+new spamujeCaluj[MAX_PLAYERS] = 0;
+new odliczanie[MAX_PLAYERS]=0;
+new timerCaluj[MAX_PLAYERS];
+
+//ALARM DMV:
+new DMV_ALARM = 0;
+new bramaAlarmu[4];
+
+//Basen Tsunami
+new poolStatus = 0;// 0 = zamkniêty; 1 = otwarty;
+new onePoolPrice = 50000;
+new twoPoolPrice = 75000;
+new threePoolPrice = 100000;
+new fourPoolPrice = 150000;
+new poolCashStats =0;
+new poolCreditStatus=0;
+new poolSaunaStats=0;
+new poolStats=0;
+new poolTrampolineStats=0;
+
+//Spamowanie /dmv /lspd etc
+new komunikatTime[MAX_PLAYERS];
+new komunikatMinuty[MAX_PLAYERS]=0;
+new komunikatTimeZerowanie[MAX_PLAYERS];
+new komunikatMinutyZerowanie[MAX_PLAYERS]=0;
+
+
+//Admin Adds
+new TimerOddaniaZycia[MAX_PLAYERS];
+new dajHPSekunda[MAX_PLAYERS]=0;
+//DODATKI
+new boneIDzmienna[MAX_PLAYERS];
+
 
 //legal
 new DB:db_handle;
@@ -340,7 +385,7 @@ new lsmcex6move = 0;
 
 new DoorInfo[MAX_DOORS][eDoors];
 //09.06
-
+new muzykaON[MAX_FRAC]=0;
 //nowe stanowe
 new bool:VAR_NGKeypad = false;
 //Barierki kubi
@@ -438,9 +483,7 @@ new grajacy[MAX_PLAYERS] = 0;
 //---------------------------------------------//
 
 //abram01
-new plac1;
 //new plac2;
-new plac1move;
 new bor;
 new bor1;
 new bormove;
@@ -724,6 +767,8 @@ new newbie = 1;
 new noooc = 1;
 new adds = 1;
 new dmv;
+new doorFBIStatus=0;
+new bizLocation[64];
 new drukarnia;
 new studiovic;
 new studiog;
@@ -819,7 +864,8 @@ new BramaHA;
 new BramaHAS = 1;
 new BrF[8];
 new BrFS[8];
-
+new TimerJedzenie[MAX_PLAYERS];
+new ZarcieCooldown[MAX_PLAYERS] = 0;
 
 //nowe bramy
 
@@ -832,6 +878,10 @@ new FBImove2 = 0;
 new FBImove3 = 0;
 new FBImove5 = 0;
 new Celaki[3];
+
+new WjedzTimer[MAX_PLAYERS];
+new timeSecWjedz[MAX_PLAYERS];
+
 //koniecfbi
 //brama baysie by micha³
 new BramaBaySide;
@@ -908,22 +958,9 @@ new urzad1;
 new urzad2;
 new urzad3;
 
-
-new urzadnewm = 0;
-new urzadnewm2 = 0;
-new urzadnewm3 = 0;
-new dualgdmv1;
-new dualgdmv2;
-new bramadyrektora1;
-new bramadyrektora2;
 new dudmv3;
 new dudmv4;
 
-
-new urzadmove = 0;
-new urzadmove1 = 0;
-new urzadmove2 = 0;
-new urzadmove3 = 0;
 new BramaKomiCela;  //stary komisariat (old komi)
 new BramaKomiCelaS = 1;
 //koniec ruchome obiekty
@@ -1067,6 +1104,8 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	
+	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
 
     premium_clearCache(playerid);
@@ -1104,8 +1143,11 @@ ZerujZmienne(playerid)
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
-
-
+	spamujeCaluj[playerid] =0;
+	
+	
+	
+	
     lastMsg[playerid] = 0;
 
 	//z conecta
@@ -1319,7 +1361,21 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	PlayerInfo[playerid][pBiletpociag] = 0;
+	
+	//chwilowe
+	PlayerAdds[playerid][pSlot1] = 0;
+	PlayerAdds[playerid][pSlot2] = 0;
+	PlayerAdds[playerid][pSlot3] = 0;
+	PlayerAdds[playerid][pSlot4] = 0;
+	PlayerAdds[playerid][pSlot5] = 0;
+	PlayerAdds[playerid][pSlot6] = 0;
+	PlayerAdds[playerid][pSlot7] = 0;
+	PlayerAdds[playerid][pSlot8] = 0;
+	PlayerAdds[playerid][pSlot9] = 0;
+	PlayerAdds[playerid][pSlot10] = 0;
 
+
+	
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);
@@ -1330,7 +1386,7 @@ ZerujZmienne(playerid)
 
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
-
+	
 	if(tworzenietrasy[playerid] != 666)
 	{
 	    format(Wyscig[tworzenietrasy[playerid]][wOpis], 50, "");

@@ -26,6 +26,7 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik
 		Akil - chyba nic nie zrobi≥ koniec koÒcÛw
 		Niceczlowiek - okry≥ siÍ haÒbπ publikujπc mapÍ
 		PECET - dobry skrypter
+		LukeSqly - Niby coú zaczπ≥, ale wysz≥o jak zwykle
 
 */
 //----------------------------------------------------*------------------------------------------------------//
@@ -80,39 +81,67 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-----------------------------------------<[ Modu≥y mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
-#include "modules/definicje.pwn"
+#include "system/definicje.pwn"
 #include "modules/new/niceczlowiek/definicje.pwn"
-#include "modules/kolory.pwn"
-#include "modules/forward.pwn"
-#include "modules/textdraw.pwn"
-#include "modules/enum.pwn"
+#include "system/kolory.pwn"
+#include "system/forward.pwn"
+#include "system/textdraw.pwn"
+#include "system/enum.pwn"
 #include "modules/zmienne.pwn"
 #include "modules/new/niceczlowiek/general.pwn"
 #include "modules/new/niceczlowiek/dynamicgui.pwn"
 
 //MySQL:
 #include "modules/mysql/mru_mysql.pwn"
-#include "modules/mysql/mysql_external.pwn"
-#include "modules/mysql/mysql_funkcje.pwn"
-#include "modules/mysql/mysql_ibiza.pwn"
-#include "modules/mysql/mysql_komendy.pwn"
-#include "modules/mysql/mysql_noysi.pwn"
-#include "modules/mysql/mysql_OnDialogResponse.pwn"
-#include "modules/mysql/mysql_premium.pwn"
-#include "modules/mysql/mysql_system_aut.pwn"
-#include "modules/mysql/mysql_system_kp.pwn"
+
+
+//______MODU£Y ALA MAPA 3.0___________
+
+//.def
+#include "modules/chaty/chaty.def"
+#include "modules/admin_duty_system/adminduty.def"
+#include "modules/admin/admin.def"
+#include "modules/Sila/sila.def"
+#include "modules/biznes/biznes.def"
+//.hwn
+#include "modules/chaty/chaty.hwn"
+#include "modules/admin_duty_system/adminduty.hwn"
+#include "modules/admin/admin.hwn"
+#include "modules/Sila/sila.hwn"
+#include "modules/biznes/biznes.hwn"
+//.pwn
+#include "modules/chaty/chaty.pwn"
+#include "modules/chaty/chaty_komunikaty.pwn"
+#include "modules/chaty/komunikaty.pwn"
+#include "modules/admin_duty_system/adminduty.pwn"
+#include "modules/admin/admin.pwn"
+#include "modules/Sila/sila.pwn"
+#include "modules/biznes/biznes.pwn"
+
+
+//KOMENDY:
+#include "modules/commands/LOAD_COMMANDS.pwn"
+
+
+
+//_______________________________________________
+
+
 
 //Nowe modu≥y .def:
 #include "modules/new/bramy/bramy.def"
 #include "modules/new/wejscia/wejscia.def"
 #include "modules/new/budki/budki.def"
 #include "modules/new/premium/premium.def"
+#include "modules/new/wjedz/wjedz.def"
+
 
 //Nowe modu≥y .hwn:
 #include "modules/new/bramy/bramy.hwn"
 #include "modules/new/wejscia/wejscia.hwn"
 #include "modules/new/budki/budki.hwn"
 #include "modules/new/premium/premium.hwn"
+#include "modules/new/wjedz/wjedz.hwn"
 
 //Nowe modu≥y .pwn:
 #include "modules/new/bramy/bramy.pwn"
@@ -120,6 +149,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/budki/budki.pwn"
 #include "modules/new/premium/premium.pwn"
 #include "modules/new/premium/premium_dialogs.pwn"
+#include "modules/new/wjedz/wjedz.pwn"
 
 //Inne:
 #include "modules/Inne/ibiza.inc"
@@ -128,8 +158,8 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/Inne/external.pwn"
 
 //Modu≥y mapy c.d.
-#include "modules/funkcje.pwn"
-#include "modules/timery.pwn"
+#include "system/funkcje.pwn"
+#include "system/timery.pwn"
 
 //Obiekty:
 #include "modules/obiekty/stare_obiekty.pwn"
@@ -139,10 +169,11 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/obiekty/ikony.pwn"
 
 //Modu≥y mapy c.d.
-#include "modules/komendy.pwn"
+#include "system/komendy.pwn"
 #include "modules/new/niceczlowiek/cmd.pwn"
 #include "modules/new/niceczlowiek/noysi.pwn"
 #include "modules/new/niceczlowiek/wybieralka.pwn"
+
 //sktomdiscordconnect
 #include "modules/discord.pwn"
 
@@ -310,7 +341,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		#endif
         return 1;
     }
-
     //IBIZA
     if(clickedid==Text:INVALID_TEXT_DRAW && GetPVarInt(playerid, "IbizaKamery")) //ESC
 	{
@@ -656,6 +686,8 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerEnterVehicle - begin", GetNick(playerid), playerid);
 	#endif
+	SetPVarInt(playerid, "IsAGetInTheCar", 1);
+	new Float:pX,Float:pY,Float:pZ;
     if(vehicleid > MAX_VEHICLES || vehicleid < 0)
     {
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Exceed vehicle limit");
@@ -685,7 +717,19 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		#endif
         return 0;
  	}
-
+	//Sila
+	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)//Zabezpieczenie, jeúli jest podczas biegu
+	{
+		sendTipMessage(playerid, "Nie moøesz wejúÊ do pojazdu podczas biegu!"); 
+		GetPlayerPos(playerid, pX,pY,pZ);
+		SetPlayerPos(playerid, pX,pY,pZ+2);
+	}
+	if(GetPlayerPing(playerid) >= 180 && !ispassenger)//Zabezpieczenie, jeúli ma za duøy ping
+	{
+		sendTipMessage(playerid, "TwÛj ping jest stanowczo za wysoki! Odczekaj chwilÍ, zanim wsiπdziesz do pojazdu"); 
+		GetPlayerPos(playerid, pX,pY,pZ);
+		SetPlayerPos(playerid, pX,pY,pZ+2);
+	}
 	//PAèDZIOCH
 	if(IsAHeliModel(GetVehicleModel(vehicleid)) && ispassenger)
  	{
@@ -714,9 +758,18 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 	    SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
 	}
-	else
+	
+    if(!ispassenger && !engine)
 	{
-        if(!ispassenger && !engine) MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
+		if(GetPlayerVehicleID(playerid) >= CAR_End) //do kradziezy
+		{
+			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
+		}
+		else
+		{
+			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
+		}
+		
     }
 
 	if (IsACopCar(vehicleid) && !ispassenger)
@@ -774,10 +827,14 @@ public OnPlayerConnect(playerid)
     // Wy≥πczone na testy
     Usun_Obiekty(playerid); //stare obiekty
     obiekty_OnPlayerConnect(playerid);//nowe obiekty
+	
 
 	LoadTextDraws(playerid);
     LoadingShow(playerid);
     LoadingHide(playerid);
+	
+	
+	
 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
@@ -791,7 +848,20 @@ public OnPlayerConnect(playerid)
 		#endif
 		return 1;
     }
+	//Nick bez wulgaryzmÛw
+	if(CheckVulgarityString(nick) == 1)
+	{
+		SendClientMessage(playerid, COLOR_NEWS, "SERWER: TwÛj nick zawiera wulgaryzmy/niedozwolone s≥owa - zmieÒ go!"); 
+		KickEx(playerid);
+		#if DEBUG == 1
+			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
+		#endif
+		return 1;
+	}
 	SetRPName(playerid);
+	GetPlayerName(playerid, nickadminaIC, sizeof(nickadminaIC));
+	SetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC);
+	timeSecWjedz[playerid] = 0;
 
 	//Poczπtkowe ustawienia:
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
@@ -917,7 +987,7 @@ public OnPlayerDisconnect(playerid, reason)
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
-	PlayerInfo[playerid][pLocal] = GetPlayerVirtualWorld(playerid); //local uøyty do przechowania virtual worldu
+	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //l
 
 	new reString[128];
     new DisconnectReason[3][] =
@@ -941,7 +1011,20 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "Mats-mats", 0);
         sendErrorMessage(giveplayerid, "Sprzedaø zosta≥a anulowana!");
     }
-
+	if(GetPVarInt(playerid, "ZjadlDragi") == 1)
+	{
+		new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+		KillTimer(TimerEfektNarkotyku[playerid]);
+		SetStrong(playerid, FirstValue);
+	}
+	if(GetPVarInt(playerid, "DostalDM2") == 1)
+	{
+		new string[128];
+		format(string, sizeof(string), "[Marcepan Marks] Zabra≥em graczu %s broÒ [da≥ /q podczas AJ DM2]", GetNick(playerid, true));
+		SendAdminMessage(COLOR_PANICRED, string);
+		ResetPlayerWeapons(playerid);
+		UsunBron(playerid);
+	}
     if(GetPVarInt(playerid, "kolejka") == 1)
     {
         PlayerInfo[playerid][pPos_x] = GetPVarFloat(playerid, "kolejka-x");
@@ -974,7 +1057,6 @@ public OnPlayerDisconnect(playerid, reason)
     		DestroyDynamicObject(r0pes[playerid][i]);
       	}
 	}
-
     //budki telefoniczne
     if(GetPVarInt(playerid, "budka-Mobile") != 999) {
         new caller = GetPVarInt(playerid, "budka-Mobile");
@@ -986,6 +1068,17 @@ public OnPlayerDisconnect(playerid, reason)
             SetPVarInt(caller, "budka-used", 999);
         }
     }
+	//lawyer
+	OfferPrice[playerid] = 0;
+	LawyerOffer[playerid] = 0;
+	OfferPlayer[playerid] = 0;
+	//caluj
+	kissPlayerOffer[playerid] = 0;
+	odliczanie[playerid]=0;
+	//komunikaty frakcyjne
+	komunikatMinutyZerowanie[playerid]=0;
+	
+	komunikatMinutyZerowanie[playerid]=0;
 
     if(TalkingLive[playerid] != INVALID_PLAYER_ID)
     {
@@ -1002,6 +1095,58 @@ public OnPlayerDisconnect(playerid, reason)
 			SendClientMessage(Mobile[playerid], COLOR_YELLOW, "Gracz, z ktÛrym prowadzi≥eú rozmowÍ telefonicznπ, wyszed≥ z gry.");
 		}
 		StopACall(playerid);
+	}
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	{
+		new stringlog[325];//String do logu
+		
+		
+		new y1,mi1,d1;//Data
+		
+		//String-Get
+		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
+		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
+	
+		//LOG
+		if(!IsPlayerPaused(playerid))
+		{
+			getdate(y1, mi1, d1); 
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
+			AdminDutyLog(stringlog); //Create LOG
+				
+			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoÒczenia s≥uøby]
+			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d /q", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
+			AdminDutyMaszLog(stringlog);
+		}
+		else
+		{
+			getdate(y1, mi1, d1); 
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez AFK", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
+			AdminDutyLog(stringlog); //Create LOG
+				
+			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoÒczenia s≥uøby]
+			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d AFK", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
+			AdminDutyMaszLog(stringlog);
+		
+		
+		
+		}
+		
+		//Zerowanie zmiennych 
+		iloscKick[playerid] = 0;
+		iloscWarn[playerid] = 0;
+		iloscBan[playerid] = 0;
+		iloscInne[playerid] = 0;
+		iloscAJ[playerid] = 0;
+		iloscInWiadomosci[playerid] = 0;
+		iloscOutWiadomosci[playerid] = 0;
+		iloscZapytaj[playerid] = 0;
+		
+		//Kill timer 
+		KillTimer(AdminDutyTimer[playerid]);
+		AdminDutyGodziny[playerid] = 0;
+		AdminDutyMinuty[playerid] = 0;
+		
 	}
 
 	//kajdanki
@@ -1619,7 +1764,14 @@ public OnPlayerDeath(playerid, killerid, reason)
 			lowcaz[playerid] = 501;
 			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta≥o anulowane - nie moøesz wziπÊ teraz zlecenia na tego samego gracza!");
 		}
-
+		if(GetPVarInt(playerid, "ZjadlDragi") == 1)
+		{
+			new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+			SetPVarInt(playerid, "ZjadlDragi", 0);
+			sendTipMessage(playerid, "Z powodu úmierci twÛj boost (dragÛw) zosta≥ wy≥πczony, zaøyj kolejnπ dawkÍ!"); 
+			KillTimer(TimerEfektNarkotyku[playerid]);
+			SetStrong(playerid, FirstValue);
+		}
 
 		//-------<[     WL      ]>---------
 		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
@@ -1671,7 +1823,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//disable problematic codes for trusted players
 			return 1;
 		}
-
+		
 		if(GetPVarInt(playerid, "CheatDetected") == 1)
 		{
 			//kod wy≥πczony, jeúli wykryto (zapobiega dublowaniu komunikatÛw o wykryciu kodu nim gracz zostanie skickowany).
@@ -1684,7 +1836,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Jeøeli uwaøasz, øe antycheat zadzia≥a≥ nieprawid≥owo, zg≥oú to administracji, podajπc kod z jakim otrzyma≥eú kicka.");
         AntiCheatLog(string);
-
+		
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
 			Kick(playerid);
@@ -1795,7 +1947,11 @@ public OnPlayerSpawn(playerid)
 
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
-
+	//AdminDuty
+	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	{
+		SetPlayerColor(playerid, 0xFF0000FF);
+	}
     if(PlayerInfo[playerid][pLider] == FRAC_SN)
     {
         SetPVarInt(playerid, "scena-allow", 1);
@@ -1917,8 +2073,16 @@ SetPlayerSpawnPos(playerid)
 		{
 			SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
-			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pLocal]);
+			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			Wchodzenie(playerid);
+			if(GetPLocal(playerid) == PLOCAL_INNE_BANK || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
+	        {
+				sendTipMessage(playerid, "W banku nie wolno mieÊ broni! Zostanie Ci ona przywrÛcona po úmierci.");
+				SetPVarInt(playerid, "mozeUsunacBronie", 1);
+                ResetPlayerWeapons(playerid);
+				return 1;
+			}
+
 		}
 		else
 		{
@@ -2025,21 +2189,27 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{
-							    if(SchoolSpawn[playerid] == 0)
+							    if(PlayerInfo[playerid][pRank] >= 1)
 								{
-								    SetPlayerPosEx(playerid, 1407.7435,-1788.1862,13.5469);
+								    SetPlayerPosEx(playerid, 1445.3516,-1827.1736,81.4602);
 									SetPlayerFacingAngle(playerid, 0.0);
+									SetPlayerVirtualWorld(playerid, 50);
+									SetPlayerInterior(playerid, 0);
+									PlayerInfo[playerid][pLocal] = 108;
 								}
 								else
 								{
-								    SetPlayerPosEx(playerid, 414.4144,2531.9580,19.1565);
+								    SetPlayerPosEx(playerid, 1471.8883,-1811.8147,77.9612);
 									SetPlayerFacingAngle(playerid, 4.6505);
+									SetPlayerVirtualWorld(playerid, 50);
+									SetPlayerInterior(playerid, 0);
+									PlayerInfo[playerid][pLocal] = 108;
 								}
 	   						}
 						}
 						case FRAC_GROOVE: //12
 						{
-          					SetPlayerPosEx(playerid, 2495.2163,-1687.2322,13.5150);
+          					SetPlayerPosEx(playerid, 2777.9751,-1945.4319,13.5469);
 						}
 						case FRAC_BALLAS: //13
 						{
@@ -2314,6 +2484,97 @@ public OnPlayerEnterCheckpoint(playerid)
     DisablePlayerCheckpoint(playerid);
 
 	//PAèDZIOCH
+	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
+	{
+		if(GetPVarInt(playerid, "WybralBieg") == 1)
+		{
+			if(OszukujewBiegu[playerid] == 0)
+			{
+				if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
+				{
+					CreateNewRunCheckPoint(playerid, 1709.3523,-1461.3938,13.5469, 3, "Zaliczy≥eú pierwszy przystanek, kolejny jest juø oznaczony!", 0, true);
+				}
+				if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
+				{
+					CreateNewRunCheckPoint(playerid, 1707.8762,-1584.3118,13.5453, 3, "Zaliczy≥eú drugi przystanek, kolejny jest juø oznaczony!", 0, true); 
+				}
+				if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
+				{
+					CreateNewRunCheckPoint(playerid, 1625.7415,-1608.9004,13.7188, 3, "Zaliczy≥eú trzeci przystanek, kolejny jest juø oznaczony!", 5,true); 
+				}
+				if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
+				{
+					CreateNewRunCheckPoint(playerid, 1538.9513,-1724.1267,13.5469, 3, "Zaliczy≥eú czwarty przystanek, kolejny jest juø oznaczony!", 0, true); 
+				}
+				if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
+				{
+					CreateNewRunCheckPoint(playerid, 1322.6306,-1724.9469,13.5469, 3, "Zaliczy≥eú piπty przystanek, kolejny jest juø oznaczony!", 0, true); 
+				}
+				if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
+				{
+					CreateNewRunCheckPoint(playerid, 1318.4052,-1841.7726,13.5469, 3, "Zaliczy≥eú szÛsty przystanek, kolejny jest juø oznaczony!", 0, true); 
+				}
+				if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
+				{
+					CreateNewRunCheckPoint(playerid,  1382.2340,-1811.7761,13.5469, 3, "Zaliczy≥eú siÛdmy (przedostatni) przystanek, kolejny jest juø oznaczony!", 0, true); 
+				}
+				if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
+				{
+					EndRunPlayer(playerid, 10);
+				}
+			}
+			else
+			{
+				sendTipMessageEx(playerid, COLOR_RED, "WYKRYTO OSZUSTWO! TW”J BIEG ZOSTAJE PRZERWANY"); 
+				DisablePlayerCheckpoint(playerid);
+				SetPVarInt(playerid, "ZaliczylBaze", 0);
+				SetPVarInt(playerid, "WybralBieg", 0);
+				SetPVarInt(playerid, "RozpoczalBieg", 0);
+			}
+		}
+		else if(GetPVarInt(playerid, "WybralBieg") == 2)
+		{
+			if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
+			{
+				CreateNewRunCheckPoint(playerid,  535.0668,-1364.9790,15.8432, 2, "Zaliczy≥eú pierwszy checkpoint! NastÍpny zosta≥ juø oznaczony", 0, true); 
+			}
+			if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
+			{
+				CreateNewRunCheckPoint(playerid,  339.2540,-1526.9476,33.3757, 2, "Zaliczy≥eú drugi checkpoint! NastÍpny zosta≥ oznaczony", 0, true); 
+			}
+			if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
+			{
+				CreateNewRunCheckPoint(playerid,  317.4830,-1632.8326,33.3125, 2, "Zaliczy≥eú trzeci checkpoint! NastÍpny zosta≥ oznaczony, a ty siÍ nie poddajesz!", 5, true); 
+			}
+			if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
+			{
+				CreateNewRunCheckPoint(playerid,  364.1078,-1805.8809,7.8380, 2, "Zaliczy≥eú czwarty checkpoint! Piπty jest juø oznaczony!", 0, true); 
+			}
+			if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
+			{
+				CreateNewRunCheckPoint(playerid,  664.4612,-1859.3246,5.4609, 2, "Zaliczy≥eú Piπty checkpoint! Zosta≥y jeszcze dwa!", 5, true); 
+			}
+			if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
+			{
+				CreateNewRunCheckPoint(playerid,  966.9481,-1834.9043,12.6000, 2, "SzÛsty przystanek zaliczony! Biegnij do kolejnego", 0, true); 
+
+			}
+			if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
+			{
+				CreateNewRunCheckPoint(playerid,  1000.8669,-1857.4419,12.8146, 2, "Zaliczy≥eú siÛdmy checkpoint! Juø widaÊ ostatni", 5, true); 
+			}
+			if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
+			{
+				EndRunPlayer(playerid, 5);
+			}
+		}
+		else//Jeúli wybra≥ dialog do pokazania punktu startowego trasy
+		{
+			DisablePlayerCheckpoint(playerid);
+			sendTipMessageEx(playerid, COLOR_P@, "Aby rozpoczπÊ bieg wpisz w tym miejscu [/biegnij]"); 
+			SetPVarInt(playerid, "RozpoczalBieg", 0);
+		}
+	}
 	if(PizzaJob[playerid] != 0)
 	{
 	    SetTimerEx("PizzaJobTimer01", 4000, false, "i", playerid);
@@ -4421,12 +4682,16 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     			{
 					if (CarData[lcarid][c_Rang]-1 != playerid)
 					{
+						new stringDialog[128];
+						new costBike = BIKE_COST;
+						format(stringDialog, sizeof(stringDialog), "Moøesz wypoøyczyÊ ten pojazd\nCena: %d$ za 15 minut", costBike);
 		    			TogglePlayerControllable(playerid, 0);
 						HireCar[playerid] = vehicleid;
-						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypoøyczalnia pojazdÛw", "Moøesz wypoøyczyÊ ten pojazd!\nCena: 5000$ za 15 minut.", "Wynajmij", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypoøyczalnia pojazdÛw", stringDialog, "Wynajmij", "Wyjdü");
 					}
 				}
 			}
+			SetPVarInt(playerid, "IsAGetInTheCar", 0); 
 		}
         if(!ToggleSpeedo[playerid])
         {
@@ -4450,7 +4715,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(newstate == PLAYER_STATE_DRIVER)
         {
             new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1)
+            if(!Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
+			|| !Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pNewAP] != 5)
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
 
@@ -4520,9 +4786,11 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    PlayerInKart[playerid] = 0;
 		    KartingPlayers --;
 		}
+		SetPVarInt(playerid, "IsAGetInTheCar", 0); 
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) // TAXI & BUSSES
 	{
+		SetPVarInt(playerid, "IsAGetInTheCar", 0);
 	    if(GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 27 || GetPlayerWeapon(playerid) == 23)
 	    {
 	        SetPlayerArmedWeapon(playerid,0);
@@ -4560,8 +4828,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 						SendClientMessage(i, COLOR_LIGHTBLUE, string);
                         if(PlayerInfo[playerid][pLevel] < 3)
                         {
-                            ZabierzKase(playerid, floatround(TransportValue[i]/2));//moneycheat
-                            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jesteú nowym graczem, obowiπzuje Cie rabat 50 procent na taksÛwkÍ.");
+                            ZabierzKase(playerid, floatround(TransportValue[i]/4));//moneycheat
+                            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jesteú nowym graczem, obowiπzuje Cie rabat 75 procent na taksÛwkÍ.");
                         }
                         else
                         {
@@ -4886,7 +5154,6 @@ public OnPlayerRequestSpawn(playerid)
 	}
     return 0;
 }
-
 public OnPlayerRequestClass(playerid, classid)
 {
 	#if DEBUG == 1
@@ -5017,11 +5284,11 @@ public OnGameModeInit()
 
     FabrykaMats::LoadLogic();
     NowaWybieralka::Init();
-
+	KaryTXDLoad(); 
     //Streamer_SetTickRate(40);
 
-    PaniJanina = CreateActor(88, 570.63, -2031.03, 16.2, 180.0);//basen
-	SetActorVirtualWorld(PaniJanina, 30);
+    PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
+	SetActorVirtualWorld(PaniJanina, 43);
 	//AFK timer
 	for(new i; i<MAX_PLAYERS; i++)
 	{
@@ -5123,7 +5390,7 @@ public OnGameModeInit()
 
     //noYsi
     LoadPrzewinienia();
-
+	
 	//discordconnect
 	DiscordConnectInit();
 
@@ -5422,15 +5689,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD5, string);
 					format(string, sizeof(string), "  Wynajem: -$%d", Dom[PlayerInfo[i][pWynajem]][hCenaWynajmu]);
 					SendClientMessage(i, COLOR_GRAD5, string);
-					if(PlayerInfo[i][pPbiskey] >= 0 && PlayerInfo[i][pPbiskey] <= MAX_BIZNES)
-					{
-					    new bizid = PlayerInfo[i][pPbiskey];
-					    SendClientMessage(i, COLOR_LIGHTBLUE, "|___ DOCH”D Z BIZNESU ___|");
-					    format(string, sizeof(string), "  DochÛd z biznesu: $%d", BizData[bizid][eBizMoney]);
-						SendClientMessage(i, COLOR_WHITE, string);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "|_________________________|");
-						DajKase(i, BizData[bizid][eBizMoney]);
-					}
+					GiveRandomMoneyBiz(i);
 					format(string, sizeof(string), "~y~Wyplata");
 					GameTextForPlayer(i, string, 5000, 1);
 					PlayerInfo[i][pPayDay] = 0;
@@ -5456,6 +5715,10 @@ PayDay()
 					        PlayerInfo[i][pExp]++;
 					        PlayerInfo[i][pPayDayHad] = 0;
 					    }
+					}
+					if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
+					{
+						SetInteriorTimeAndWeather(i);
 					}
      				if(PoziomPoszukiwania[i] >= 10)
 					{
@@ -6240,6 +6503,14 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))//id 131072
 	{
+		if(GetPlayerVehicleID(playerid) <= CAR_End) //do kradziezy
+        {
+            if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid))
+		    {
+				sendErrorMessage(playerid, "Nie moøesz odpaliÊ wozu podczas kradniÍcia");
+				return 1;
+			}
+		}
 		new engine, unused;
 		GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine , unused , unused, unused, unused, unused, unused);
 		if(engine == 1)
@@ -6251,6 +6522,66 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     {
         FabrykaMats::ActorTalk(playerid);
     }
+	if((newkeys & KEY_HANDBRAKE) && (newkeys & KEY_CROUCH) && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
+	{
+		if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
+		{
+			sendTipMessage(playerid, "Jesteú podczas wjeødøania!"); 
+			return 1;
+		}
+		if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
+		{
+			sendErrorMessage(playerid, "Jesteú podczas wsiadania - odczekaj chwile");
+			return 1;
+		}	
+		if(SprawdzWjazdy(playerid))
+		{
+		
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie jesteú w obszarze, w ktÛrym moøna wjechaÊ"); 
+		}
+	}
+	if((newkeys & KEY_SPRINT) && newkeys & KEY_WALK)
+	{
+		if(SprawdzBramy(playerid))
+		{
+		
+		}
+		else if(SprawdzWejscia(playerid))
+		{
+		
+		}
+	}
+	if(newkeys & KEY_SECONDARY_ATTACK)
+	{
+		if(!IsPlayerInAnyVehicle(playerid))
+		{
+			new Float:health;
+			if(IsAtPlaceGetHP(playerid))
+			{
+				if(GetPlayerHealth(playerid, health) <= 70)
+				{
+					if(TimerJedzenie[playerid] == 0)
+					{
+						SetPlayerHealth(playerid, health+20);
+						ZabierzKase(playerid, 1000);
+						sendTipMessageEx(playerid, COLOR_RED, "Kupi≥eú jedzenie"); 
+						ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
+						GameTextForPlayer(playerid, "Om nom om", 5000, 1);
+						//SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
+						TimerJedzenie[playerid] = 1;
+						ZarcieCooldown[playerid] = SetTimerEx("JedzenieCooldown", 2500, true, "i", playerid);
+					}
+					else
+					{
+						sendTipMessage(playerid, "Odczekaj chwilÍ!"); 
+					}
+				}
+			}
+		}
+	}
 	if(PRESSED(KEY_JUMP))//AntyBH
 	{
 		if(!IsPlayerInAnyVehicle(playerid))
@@ -6448,8 +6779,20 @@ public OnVehicleSpawn(vehicleid)
 
 public OnPlayerText(playerid, text[])
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerText - begin", GetNick(playerid), playerid);
+	/*#if DEBUG_MODE > 0
+	if(IsPlayerNPC(playerid))
+	{
+		if(text[0] == '#')
+		{
+			return 1;
+		}
+		printf("[Bot %s:] %s", GetNick(playerid), text);
+		return 0;
+	}
+	else if(text[0] == 'b' && text[1] == 'o' && text[2] == 't')
+	{
+		return 1;
+	}
 	#endif
     if(text[0] == '@') //animacja
     {
@@ -6458,7 +6801,8 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
-
+	Chat(playerid, ChatICAdditions(playerid, text));
+	*/
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
@@ -7216,29 +7560,7 @@ public OnPlayerText(playerid, text[])
 	    {
 	        return 0;
       	}
-        if(strlen(text) < 78)
-        {
-            format(string, sizeof(string), "%s mÛwi: %s", GetNick(playerid, true), text);
-            ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-            SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-        }
-        else
-        {
-            new pos = strfind(text, " ", true, strlen(text) / 2);
-            if(pos != -1)
-            {
-                new text2[64];
-
-                strmid(text2, text, pos + 1, strlen(text));
-                strdel(text, pos, strlen(text));
-
-                format(string, sizeof(string), "%s mÛwi: %s [.]", GetNick(playerid, true), text);
-                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-
-                format(string, sizeof(string), "[.] %s", text2);
-                ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-            }
-        }
+		PlayerTalkIC(playerid, text, "mÛwi", 15.0);
 		return 0;
 	}
 	#if DEBUG == 1
