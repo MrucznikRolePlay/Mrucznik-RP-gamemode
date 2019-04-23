@@ -92,7 +92,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/niceczlowiek/dynamicgui.pwn"
 
 //MySQL:
-#include "modules/mru_mysql.pwn"
+#include "modules/mysql/mru_mysql.pwn"
 
 
 //______MODU£Y ALA MAPA 3.0___________

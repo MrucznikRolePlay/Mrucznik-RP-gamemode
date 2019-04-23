@@ -49,7 +49,7 @@ deploy:
   skip_cleanup: true
   on:
     repo: Mrucznik/Mrucznik-RP-2.5
-    branch: 
+    branch:
       - development
       - pecet
       - lukesqly
