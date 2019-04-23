@@ -12193,8 +12193,8 @@ CMD:wymiana(playerid, params[])
 		if(!IsCarOwner(playa, GetPlayerVehicleID(playa))) return sendTipMessage(playerid, "Gracz nie jest w³aœcicielem pojazdu.");
 		if(PlayerInfo[playa][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ siê z tym graczem, poniewa¿ ma 1 lvl");
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ pojazdu, poniewa¿ masz 1 lvl");
-
-        IDAuta[playa] = VehicleUID[lVeh][vUID];
+		
+		new vehid = VehicleUID[lVeh][vUID];
 
  		if(!ProxDetectorS(10.0, playerid, playa)) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 		if(!(cena >= 0 && cena < 900000001)) return sendTipMessage(playerid, "Cena od 0 do 900 000 000$ !");
@@ -12209,10 +12209,10 @@ CMD:wymiana(playerid, params[])
 
 	    format(string, sizeof(string), "%s oferuje ci wymianê %s za %s z twoj¹ dop³at¹ %d$. Jeœli siê zgadzasz, wpisz /akceptuj wymiana.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], VehicleNames[GetVehicleModel(GetPlayerVehicleID(playa))-400], cena);
         SendClientMessage(playa, 0xFFC0CB, string);
-        //TODO
+
         if(PlayerInfo[playa][pDonateRank] == 0)
         {
-            if(CarData[IDAuta[playa]][c_Neon] != 18652 && CarData[IDAuta[playa]][c_Neon] != 0)
+            if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
             {
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
@@ -12229,6 +12229,7 @@ CMD:wymiana(playerid, params[])
         GraczWymieniajacy[playa] = playerid;
 		CenaWymienianegoAuta[playa] = cena;
 		IDWymienianegoAuta[playa] = GetPlayerVehicleID(playa);
+		IDAuta[playa] = vehid;
 	}
  	else
  	{
@@ -12266,7 +12267,7 @@ CMD:sprzedajauto(playerid, params[])
 		if(PlayerInfo[playa][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedaæ temu graczowi pojazdu poniewa¿ ma 1lvl");
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedawaæ pojazdu bo masz 1 lvl");
 
-        IDAuta[playa] = VehicleUID[lVeh][vUID];
+        new vehid = VehicleUID[lVeh][vUID];
  		if(!ProxDetectorS(10.0, playerid, playa) && Spectate[playa] != INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
 		if(!(cena > 0 && cena < 900000001)) return sendErrorMessage(playerid, "Cena od 1 do 900 000 000$ !");
 
@@ -12283,7 +12284,7 @@ CMD:sprzedajauto(playerid, params[])
         //TODO
         if(PlayerInfo[playa][pDonateRank] == 0)
         {
-            if(CarData[IDAuta[playa]][c_Neon] != 18652 && CarData[IDAuta[playa]][c_Neon] != 0)
+            if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
             {
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
@@ -12292,6 +12293,7 @@ CMD:sprzedajauto(playerid, params[])
         SendClientMessage(playerid, 0xFFC0CB, string);
         GraczDajacy[playa] = playerid;
 		CenaDawanegoAuta[playa] = cena;
+		IDAuta[playa] = vehid;
 	}
  	else
  	{
@@ -15518,7 +15520,7 @@ CMD:kostka2(playerid)
 
     if(IsPlayerConnected(playerid))
     {
-		new dice = random(6)+1;
+		new dice = true_random(6)+1;
 		if (gDice[playerid] == 1)
 		{
 			GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -15599,8 +15601,7 @@ CMD:kostka(playerid, params[])
             rzuty--;
 
             new ile;
-
-            ile = 1+random(6);
+            ile = 1+true_random(6);
 
             format(str, 64, "* %s wyrzuca %d oczek.", nick, ile);
             ProxDetector(12.0, playerid, str, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -15743,7 +15744,7 @@ CMD:ruleta(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, 1038.22924805,-1090.59741211,-67.52223969))
         {
-			new ruletka = random(36);
+			new ruletka = true_random(36);
 			if(ruletka == 0)
 			{
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -15785,7 +15786,7 @@ CMD:blackjack(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 3.0, 1032.69775391,-1092.17980957,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1032.90014648,-1088.91455078,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1023.03601074,-1092.15148926,-67.58734131) || IsPlayerInRangeOfPoint(playerid, 3.0, 1022.98620605,-1088.74023438,-67.58734131))
         {
-            new oczko = random(13)+2;
+            new oczko = true_random(13)+2;
             GetPlayerName(playerid, sendername, sizeof(sendername));
             if(oczko >= 2 && oczko <= 10)
             {
@@ -15835,7 +15836,7 @@ CMD:kolo(playerid)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, 1016.93560791,-1101.91369629,-67.59101868))
         {
-            new kolo = random(61);
+            new kolo = true_random(61);
             GetPlayerName(playerid, sendername, sizeof(sendername));
             if(kolo >= 1 && kolo <= 30)//1
             {
@@ -18127,7 +18128,7 @@ CMD:cmdinfo(playerid)
 CMD:admin(playerid, params[]) return cmd_a(playerid, params);
 CMD:a(playerid, params[])
 {
-	new string[128];
+	new string[144];
 	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
@@ -18135,36 +18136,32 @@ CMD:a(playerid, params[])
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
-			sendTipMessage(playerid, "U¿yj (/a)dmin [admin chat]");
+			sendTipMessage(playerid, "U?yj (/a)dmin [admin chat]");
 			return 1;
 		}
-		if(PlayerInfo[playerid][pAdmin] >= 1)
+		
+		new rankname[10];
+		if(PlayerInfo[playerid][pAdmin] >= 1) 
 		{
-			format(string, sizeof(string), "*%d Admin %s: %s", PlayerInfo[playerid][pAdmin], sendername, params);
-			if (PlayerInfo[playerid][pAdmin] >= 1)
-			{
-				SendAdminMessage(0xFFC0CB, string);
-			}
-			printf("Admin %s: %s", sendername, params);
+			format(rankname, sizeof(rankname), "%d Admin", PlayerInfo[playerid][pAdmin]);
 		}
-		if((PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 4) && PlayerInfo[playerid][pAdmin] == 0)
+		else if(PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 4)
 		{
-			format(string, sizeof(string), "*%d Pó³Admin %s: %s", PlayerInfo[playerid][pNewAP], sendername, params);
-			if (PlayerInfo[playerid][pNewAP] >= 1)
-			{
-				SendAdminMessage(0xFFC0CB, string);
-			}
-			printf("PolAdmin %s: %s", sendername, params);
+			format(rankname, sizeof(rankname), "%d Pó³Admin", PlayerInfo[playerid][pNewAP]);
 		}
-        if(IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0)
-        {
-            format(string, sizeof(string), "* Skrypter %s: %s", sendername, params);
-            if (PlayerInfo[playerid][pNewAP] >= 1)
-            {
-                SendAdminMessage(0xFFC0CB, string);
-            }
-            printf("Skrypter %s: %s", sendername, params);
-        }
+		else if(IsAScripter(playerid))
+		{
+			format(rankname, sizeof(rankname), "Skrypter");
+		}
+		else 
+		{
+			noAccessMessage(playerid);
+			return 1;
+		}
+		
+		format(string, sizeof(string), "*%s %s: %s", rankname, sendername, params);
+		SendAdminMessage(0xFFC0CB, string);
+		SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 	}
 	return 1;
 }
@@ -20622,6 +20619,8 @@ CMD:raport(playerid, params[])
 			}
 			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
 			ABroadCast(COLOR_YELLOW,string,1);
+			format(string, sizeof(string), "? Report od %s [%d]: %s", sendername, playerid, params);
+			SendDiscordMessage(DISCORD_REPORT, string);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "Je¿eli Administracja nie reaguje na Twój report, oznacza to, ¿e...");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "...jest on Ÿle sformu³owany i Administracja nie rozpatrzy tego zg³oszenia.");//By: Dawid
@@ -25693,14 +25692,7 @@ CMD:akceptuj(playerid, params[])
                             }
                             GetPlayerName(playerid, sendername, sizeof(sendername));
 
-                            /*if(CountPlayerCars(playerid) >= PlayerInfo[playerid][pCarSlots])
-                            {
-                                SendClientMessage(GraczWymieniajacy[playerid], COLOR_GREY, " Gracz nie posiada wolnego slota.");
-                                GraczWymieniajacy[playerid] = 0;
-                                CenaWymienianegoAuta[playerid] = 0;
-                                SendClientMessage(playerid, COLOR_GREY, " Nie posiadasz wolnego slota.");
-                                return 1;
-                            }*/
+                            
                             if(!ProxDetectorS(10.0, playerid, GraczWymieniajacy[playerid])) return SendClientMessage(playerid, 0xFFC0CB, "Ten gracz jest za daleko !");
                             if(!IsPlayerInAnyVehicle(playerid))
                             {
@@ -25714,11 +25706,12 @@ CMD:akceptuj(playerid, params[])
                                 CenaWymienianegoAuta[playerid] = 0;
                                 return 1;
                             }
+							
+							Car_RemovePlayerOwner(GraczWymieniajacy[playerid], IDAuta[playerid]);
+							Car_RemovePlayerOwner(playerid, VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
+							
                             Car_MakePlayerOwner(playerid, IDAuta[playerid]);
-                            Car_RemovePlayerOwner(GraczWymieniajacy[playerid], IDAuta[playerid]);
-
                             Car_MakePlayerOwner(GraczWymieniajacy[playerid], VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
-                            Car_RemovePlayerOwner(playerid, VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
 
                             GetPlayerName(GraczWymieniajacy[playerid], giveplayer, sizeof(giveplayer));
                             GetPlayerName(playerid, sendername, sizeof(sendername));

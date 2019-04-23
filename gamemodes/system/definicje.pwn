@@ -531,6 +531,11 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 //Okienka
 #define OKIENKO_DMV_RANGE 2
 
+//Discord connect
+#define DISCORD_SAN_NEWS	0
+#define DISCORD_ADMIN_CHAT	1
+#define DISCORD_REPORT	2
+
 
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);

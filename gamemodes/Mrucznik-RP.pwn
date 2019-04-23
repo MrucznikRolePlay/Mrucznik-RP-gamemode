@@ -55,6 +55,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_MAX_CONNECTS_FROM_IP		2
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
+#include <strlib>
+#include <true_random>
 
 //-------<[ Pluginy ]>-------
 #include <crashdetect>                  // By Zeex, 4.18.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
@@ -66,6 +68,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
 #include <timestamptodate>
+#include <discord-connector>
 
 //-------<[ Natives ]>-------
 native WP_Hash(buffer[], len, const str[]);
@@ -87,7 +90,11 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/zmienne.pwn"
 #include "modules/new/niceczlowiek/general.pwn"
 #include "modules/new/niceczlowiek/dynamicgui.pwn"
+
+//MySQL:
 #include "modules/mru_mysql.pwn"
+
+
 //______MODU£Y ALA MAPA 3.0___________
 
 //.def
@@ -166,6 +173,9 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/new/niceczlowiek/cmd.pwn"
 #include "modules/new/niceczlowiek/noysi.pwn"
 #include "modules/new/niceczlowiek/wybieralka.pwn"
+
+//sktomdiscordconnect
+#include "modules/discord.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()
@@ -5380,6 +5390,9 @@ public OnGameModeInit()
 
     //noYsi
     LoadPrzewinienia();
+	
+	//discordconnect
+	DiscordConnectInit();
 
     new string[MAX_PLAYER_NAME];
     new string1[MAX_PLAYER_NAME];
@@ -5972,8 +5985,7 @@ OnPlayerLogin(playerid, password[])
 		//konwersja hase³ MD5 na Whirlpool
 		if(strcmp(accountPass, MD5_Hash(password), true ) == 0)
 		{
-			format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", hashedPassword, GetNick(playerid));
-			mysql_query(string);
+			MruMySQL_ConvertPassword(playerid, hashedPassword);
 			format(accountPass, sizeof(accountPass), hashedPassword);
 			printf("Konwersja hasla konta %s na hash whirlpool", nick);
 		}
@@ -7451,11 +7463,13 @@ public OnPlayerText(playerid, text[])
 		{
 		    format(string, sizeof(string), "Reporter %s: %s", sendername, text);
 			OOCNews(COLOR_LIGHTGREEN, string);
+			SendDiscordMessage(DISCORD_SAN_NEWS, string);
 		}
 		else
 		{
 		    format(string, sizeof(string), "Goœæ wywiadu %s: %s", sendername, text);
 			OOCNews(COLOR_LIGHTGREEN, string);
+			SendDiscordMessage(DISCORD_SAN_NEWS, string);
 		}
 		return 0;
 	}

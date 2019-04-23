@@ -4979,7 +4979,7 @@ CMD:startlotto(playerid)
         {
             format(string, sizeof(string), "Nowoœci lotto: Losowanie rozpoczête.");
             OOCOff(COLOR_WHITE, string);
-            new rand = random(80);
+            new rand = true_random(80);
             if(rand < 77) { rand += 3; }
             Lotto(rand);
 

@@ -367,6 +367,7 @@ CMD:news(playerid, params[])
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					OOCNews(COLOR_NEWS,string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
                     //OOCNews(0xFF8C55FF, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
@@ -406,6 +407,7 @@ CMD:news(playerid, params[])
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					//OOCNews(COLOR_NEWS,string);
                     OOCNews(COLOR_NEWS, string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
 					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }
@@ -444,6 +446,7 @@ CMD:news(playerid, params[])
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					//OOCNews(COLOR_NEWS,string);
                     OOCNews(COLOR_NEWS, string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
 					{ SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci Reportera wynosz¹ teraz 2, Nied³ugo bêdziesz móg³ lataæ helikopterem i prowadziæ wywiady."); }
@@ -693,6 +696,7 @@ CMD:fooc(playerid, params[])
             {
                 format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
     			SendFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendDiscordFracMessage(member, string);
                 //Tajniacy
                 if(member == 5) SendTajniakMessage(3, TEAM_AZTECAS_COLOR, string);
                 else if(member == 6) SendTajniakMessage(4, TEAM_AZTECAS_COLOR, string);
@@ -737,6 +741,7 @@ CMD:fooc(playerid, params[])
                 //Rangi podstawowe
                 else format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
                 SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendDiscordOrgMessage(member, string);
 			}
 			printf("%s", string);
 			return 1;
@@ -794,6 +799,7 @@ CMD:r(playerid, params[])
 	    {
             format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
+			SendDiscordFracMessage(member, string);
             format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid, true), params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
             printf("%s", string);
