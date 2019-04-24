@@ -1,10 +1,10 @@
 {
 	"user": "Mrucznik",
 	"repo": "Mrucznik-RP-2.5",
-	"entry": "gamemodes\\Mrucznik-RP.pwn",
-	"output": "gamemodes\\Mrucznik-RP.amx",
+	"entry": "gamemodes/Mrucznik-RP.pwn",
+	"output": "gamemodes/Mrucznik-RP.amx",
 	"build": {
-		"args": ["-d3", "-;+", "-(+", "-Z-", "-i..\\include"]
+		"args": ["-d3", "-;+", "-(+", "-Z-", "-i../include"]
 	  },
 	"dependencies": [
 		  "sampctl/samp-stdlib",
