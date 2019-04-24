@@ -1,6 +1,6 @@
 language: cpp
 os: linux
-dist: trusty
+dist: xenial
 sudo: enabled
 python:
   - "3.6.3"
