@@ -8,6 +8,7 @@ python:
 cache:
     directories:
       - /home/travis/build/Mrucznik/Mrucznik-RP-2.5/dependencies
+      - /home/travis/.samp
 
 branches:
   only:
