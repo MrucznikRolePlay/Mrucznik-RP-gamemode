@@ -10,7 +10,6 @@ branches:
   - master
   - development
   - pecet
-  - lukesqly
   - simeone
   - sktom
 
@@ -53,7 +52,6 @@ deploy:
     branch:
       - development
       - pecet
-      - lukesqly
       - simeone
       - sktom
 - provider: releases
