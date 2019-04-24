@@ -29,8 +29,6 @@ before_install:
 install:
   - pip3 install chardet
   - curl https://raw.githubusercontent.com/Southclaws/sampctl/master/install-deb.sh | sh # sampctl installation
-  - sudo dpkg --add-architecture i386
-  - sudo apt update && sudo apt install -y g++-multilib
 
 script:
 - chmod +x CI_scripts/*
