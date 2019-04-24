@@ -9,7 +9,7 @@
 	"dependencies": [
 		  "sampctl/samp-stdlib",
 		  "pawn-lang/YSI-Includes",
-		  "samp-incognito/samp-streamer-plugin",
+		  "samp-incognito/samp-streamer-plugin:2.9.4",
 		  "zeex/samp-plugin-crashdetect",
 		  "Open-GTO/sa-mp-fixes",
 		  "emmet-jones/New-SA-MP-callbacks",
