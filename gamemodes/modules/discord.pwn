@@ -70,6 +70,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		DCC_GetUserName(author, user_name);
 		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
 		utf8decode(dest, str);
+		strreplace(dest,"%","#");
 		SendAdminMessage(0xFFC0CB, dest);
 		
 		return 1;
@@ -80,6 +81,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		DCC_GetUserName(author, user_name);
 		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
 		utf8decode(dest, str);
+		strreplace(dest,"%","#");
 		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, dest);
 		return 1;
 	}
@@ -91,6 +93,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 			DCC_GetUserName(author, user_name);
 			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
 			utf8decode(dest, str);
+			strreplace(dest,"%","#");
 			if(0 < i <= 4 || i == 11 || i == 7 || i == 17)
 			{
 				SendRadioMessage(i, TEAM_BLUE_COLOR, dest);
