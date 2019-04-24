@@ -28,12 +28,12 @@ before_install:
 
 install:
   - pip3 install chardet
+  - curl https://raw.githubusercontent.com/Southclaws/sampctl/master/install-deb.sh | sh # sampctl installation
 
 script:
 - chmod +x CI_scripts/*
 - python3 CI_scripts/check_encoding.py gamemodes
-- CI_scripts/get_compiler.sh
-- CI_scripts/compile.sh
+- sampctl package build 
 
 before_deploy:
 - echo "Before deploy"
