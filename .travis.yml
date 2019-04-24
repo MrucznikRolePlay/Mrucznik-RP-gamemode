@@ -5,6 +5,10 @@ sudo: enabled
 python:
   - "3.6.3"
 
+cache:
+    directories:
+      - /home/travis/build/Mrucznik/Mrucznik-RP-2.5/dependencies
+
 branches:
   only:
   - master
