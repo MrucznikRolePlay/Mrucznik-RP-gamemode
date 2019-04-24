@@ -3,14 +3,24 @@
 	"repo": "Mrucznik-RP-2.5",
 	"entry": "gamemodes\\Mrucznik-RP.pwn",
 	"output": "gamemodes\\Mrucznik-RP.amx",
+	"build": {
+		"args": ["-d3", "-;+", "-(+", "-Z-"]
+	  },
 	"dependencies": [
-		"sampctl/samp-stdlib",
-		"pawn-lang/YSI-Includes",
-		"samp-incognito/samp-streamer-plugin",
-		"zeex/samp-plugin-crashdetect",
-		"Open-GTO/sa-mp-fixes",
-		"emmet-jones/New-SA-MP-callbacks"
-	],
+		  "sampctl/samp-stdlib",
+		  "pawn-lang/YSI-Includes",
+		  "samp-incognito/samp-streamer-plugin",
+		  "zeex/samp-plugin-crashdetect",
+		  "Open-GTO/sa-mp-fixes",
+		  "emmet-jones/New-SA-MP-callbacks",
+		  "maddinat0r/sscanf",
+		  "maddinat0r/samp-log",
+		  "YashasSamaga/I-ZCMD",
+		  "NexiusTailer/Nex-AC",
+		  "oscar-broman/strlib",
+		  "maddinat0r/samp-discord-connector",
+		  "git@github.com:Mrucznik/Mrucznik-RP-Includes"
+	  ],
 	"runtime": {
 		"version": "0.3.7",
 		"mode": "server",
@@ -21,7 +31,7 @@
 		"maxplayers": 1000,
 		"language": "PL",
 		"mapname": "San Andreas",
-		"weburl": "www.sa-mp.com",
+		"weburl": "www.Mrucznik-RP.pl",
 		"gamemodetext": "Unknown",
 		"announce": true,
 		"lanmode": false,

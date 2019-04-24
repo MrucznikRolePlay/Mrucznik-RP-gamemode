@@ -27,12 +27,6 @@ stock BreakLines(string[], delimiter[], limit)
 	return _:string2;
 }
 
-stock strcopy(dest[], src[], sz=sizeof(dest))
-{
-  dest[0] = 0;
-  return strcat(dest,src,sz); //Notice that I have used strcat instead of writing my own loops
-}
-
 #define DLG_NO_ACTION		1
 #define DG_DESC_DELETE 		2
 #define DG_DESC_ADD 		3

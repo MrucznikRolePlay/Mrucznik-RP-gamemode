@@ -41,11 +41,13 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-                                                                                                         -//
 #include <a_samp>
 #include <fixes>
-#include <callbacks>
 #include <a_http>
+#include <strlib>
+#include <callbacks>
 #include <utils>
-#include <foreach>
-#include <zcmd>
+#include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include <YSI\y_iterate>
+#include <izcmd>
 #include <md5>
 #include <double-o-files2>
 #include <dialogs>
@@ -53,9 +55,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <ACSBM>
 #include <timestamp>
 #define AC_MAX_CONNECTS_FROM_IP		2
-#include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
-#include <strlib>
 #include <true_random>
 
 //-------<[ Pluginy ]>-------

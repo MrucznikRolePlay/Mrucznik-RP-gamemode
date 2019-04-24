@@ -13,8 +13,8 @@
 #define GetObjectPos(%0) ERROR_OBJECT
 #define GetObjectRot(%0) ERROR_OBJECT
 #define AttachObjectToPlayer(%0) ERROR_OBJECT
-#define SetObjectMaterialText(%0) ERROR_OBJECT
-#define SetObjectMaterial(%0) ERROR_OBJECT
+//#define SetObjectMaterialText(%0) ERROR_OBJECT
+//#define SetObjectMaterial(%0) ERROR_OBJECT
 
 //------------------------------------------------------------------------------
 //                              PVARS
@@ -31,7 +31,6 @@
 
 //Makra:
 #define PreloadAnimLib(%1,%2)   ApplyAnimation(%1,%2,"null",0.0,0,0,0,0,0)
-#define GetPlayerWeather(%1) GetPVarInt(%1, "Weather")
 #define Distance3D(%1,%2,%3,%4,%5,%6) (VectorSize(%1-%4,%2-%5,%3-%6))/100)
 #define Distance3D2(%1,%2,%3,%4,%5,%6) (VectorSize(%1-%4,%2-%5,%3-%6))*1000.0)
 #define PRESSED(%0) \
