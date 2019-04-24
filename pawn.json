@@ -4,7 +4,7 @@
 	"entry": "gamemodes\\Mrucznik-RP.pwn",
 	"output": "gamemodes\\Mrucznik-RP.amx",
 	"build": {
-		"args": ["-d3", "-;+", "-(+", "-Z-"]
+		"args": ["-d3", "-;+", "-(+", "-Z-", "-i..\\include"]
 	  },
 	"dependencies": [
 		  "sampctl/samp-stdlib",
@@ -18,8 +18,7 @@
 		  "YashasSamaga/I-ZCMD",
 		  "NexiusTailer/Nex-AC",
 		  "oscar-broman/strlib",
-		  "maddinat0r/samp-discord-connector",
-		  "git@github.com:Mrucznik/Mrucznik-RP-Includes"
+		  "maddinat0r/samp-discord-connector"
 	  ],
 	"runtime": {
 		"version": "0.3.7",
