@@ -3,7 +3,7 @@ os: linux
 dist: xenial
 sudo: enabled
 python:
-  - "3.6.3"
+  - "3.7.1"
 
 cache:
     directories:
