@@ -5,8 +5,6 @@ new PickupSklep01;//ZIP
 
 new CMDKomunikat;
 
-new sprintfStr[500];
-
 new LastVehicleID[MAX_PLAYERS];
 new VehicleIDChanges[MAX_PLAYERS];
 new VehicleIDChangeTime[MAX_PLAYERS];

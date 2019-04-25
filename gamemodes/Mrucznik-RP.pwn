@@ -40,6 +40,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-------------------------------------------<[ Includy ]>---------------------------------------------------//
 //-                                                                                                         -//
 #include <a_samp>
+#define FIX_ispacked 0 
 #include <fixes>
 #include <a_http>
 #include <strlib>
