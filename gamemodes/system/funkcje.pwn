@@ -2083,7 +2083,7 @@ SearchingHit(playerid)
 			        searchhit = 1;
 			        hitfound = 1;
 			        hitmanid = i;
-			        foreach(Player, k)
+			        foreach(new k : Player)
 					{
 						if(IsPlayerConnected(k))
 						{

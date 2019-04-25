@@ -7,7 +7,7 @@
 		"args": ["-d3", "-;+", "-(+", "-Z-", "-i../include"]
 	  },
 	"dependencies": [
-		  "sampctl/samp-stdlib",
+		  "sampctl/samp-stdlib:0.3.7-R2-2-1",
 		  "pawn-lang/YSI-Includes@5.x",
 		  "Open-GTO/sa-mp-fixes",
 		  "emmet-jones/New-SA-MP-callbacks",
