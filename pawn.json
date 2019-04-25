@@ -24,7 +24,8 @@
 			"-;+",
 			"-(+",
 			"-Z-",
-			"-i../include"
+			"-i../include",
+			"-i../include/YSI-Includes"
 		]
 	},
 	"runtime": {
