@@ -15,7 +15,7 @@
 		"maddinat0r/sscanf:v2.8.3",
 		"maddinat0r/samp-log:v0.4",
 		"maddinat0r/samp-discord-connector:v0.2.4",
-		"Zeex/amx_assembly"
+		"pawn-lang/YSI-Includes@4.x"
 	],
 	"build": {
 		"name": "",
@@ -24,8 +24,7 @@
 			"-;+",
 			"-(+",
 			"-Z-",
-			"-i../include",
-			"-i../include/YSI-Includes"
+			"-i../include"
 		]
 	},
 	"runtime": {
