@@ -41,12 +41,12 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-                                                                                                         -//
 #include <a_samp>
 #include <fixes>
-#include <YSI_Data\y_iterate>
 #include <a_http>
 #include <strlib>
 #include <callbacks>
 #include <utils>
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
+#include <YSI_Data\y_iterate>
 #include <izcmd>
 #include <md5>
 #include <double-o-files2>
@@ -81,46 +81,46 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
-#include "system/definicje.pwn"
-#include "modules/new/niceczlowiek/definicje.pwn"
-#include "system/kolory.pwn"
-#include "system/forward.pwn"
-#include "system/textdraw.pwn"
-#include "system/enum.pwn"
-#include "modules/zmienne.pwn"
-#include "modules/new/niceczlowiek/general.pwn"
-#include "modules/new/niceczlowiek/dynamicgui.pwn"
+#include "system\definicje.pwn"
+#include "modules\new\niceczlowiek\definicje.pwn"
+#include "system\kolory.pwn"
+#include "system\forward.pwn"
+#include "system\textdraw.pwn"
+#include "system\enum.pwn"
+#include "modules\zmienne.pwn"
+#include "modules\new\niceczlowiek\general.pwn"
+#include "modules\new\niceczlowiek\dynamicgui.pwn"
 
 //MySQL:
-#include "modules/mysql/mru_mysql.pwn"
+#include "modules\mysql\mru_mysql.pwn"
 
 
 //______MODU£Y ALA MAPA 3.0___________
 
 //.def
-#include "modules/chaty/chaty.def"
-#include "modules/admin_duty_system/adminduty.def"
-#include "modules/admin/admin.def"
-#include "modules/Sila/sila.def"
-#include "modules/biznes/biznes.def"
+#include "modules\chaty\chaty.def"
+#include "modules\admin_duty_system\adminduty.def"
+#include "modules\admin\admin.def"
+#include "modules\Sila\sila.def"
+#include "modules\biznes\biznes.def"
 //.hwn
-#include "modules/chaty/chaty.hwn"
-#include "modules/admin_duty_system/adminduty.hwn"
-#include "modules/admin/admin.hwn"
-#include "modules/Sila/sila.hwn"
-#include "modules/biznes/biznes.hwn"
+#include "modules\chaty\chaty.hwn"
+#include "modules\admin_duty_system\adminduty.hwn"
+#include "modules\admin\admin.hwn"
+#include "modules\Sila\sila.hwn"
+#include "modules\biznes\biznes.hwn"
 //.pwn
-#include "modules/chaty/chaty.pwn"
-#include "modules/chaty/chaty_komunikaty.pwn"
-#include "modules/chaty/komunikaty.pwn"
-#include "modules/admin_duty_system/adminduty.pwn"
-#include "modules/admin/admin.pwn"
-#include "modules/Sila/sila.pwn"
-#include "modules/biznes/biznes.pwn"
+#include "modules\admin_duty_system\adminduty.pwn"
+#include "modules\admin\admin.pwn"
+#include "modules\chaty\chaty.pwn"
+#include "modules\chaty\chaty_komunikaty.pwn"
+#include "modules\chaty\komunikaty.pwn"
+#include "modules\Sila\sila.pwn"
+#include "modules\biznes\biznes.pwn"
 
 
 //KOMENDY:
-#include "modules/commands/LOAD_COMMANDS.pwn"
+#include "modules\commands\LOAD_COMMANDS.pwn"
 
 
 
@@ -129,53 +129,53 @@ native WP_Hash(buffer[], len, const str[]);
 
 
 //Nowe modu³y .def:
-#include "modules/new/bramy/bramy.def"
-#include "modules/new/wejscia/wejscia.def"
-#include "modules/new/budki/budki.def"
-#include "modules/new/premium/premium.def"
-#include "modules/new/wjedz/wjedz.def"
+#include "modules\new\bramy\bramy.def"
+#include "modules\new\wejscia\wejscia.def"
+#include "modules\new\budki\budki.def"
+#include "modules\new\premium\premium.def"
+#include "modules\new\wjedz\wjedz.def"
 
 
 //Nowe modu³y .hwn:
-#include "modules/new/bramy/bramy.hwn"
-#include "modules/new/wejscia/wejscia.hwn"
-#include "modules/new/budki/budki.hwn"
-#include "modules/new/premium/premium.hwn"
-#include "modules/new/wjedz/wjedz.hwn"
+#include "modules\new\bramy\bramy.hwn"
+#include "modules\new\wejscia\wejscia.hwn"
+#include "modules\new\budki\budki.hwn"
+#include "modules\new\premium\premium.hwn"
+#include "modules\new\wjedz\wjedz.hwn"
 
 //Nowe modu³y .pwn:
-#include "modules/new/bramy/bramy.pwn"
-#include "modules/new/wejscia/wejscia.pwn"
-#include "modules/new/budki/budki.pwn"
-#include "modules/new/premium/premium.pwn"
-#include "modules/new/premium/premium_dialogs.pwn"
-#include "modules/new/wjedz/wjedz.pwn"
+#include "modules\new\bramy\bramy.pwn"
+#include "modules\new\wejscia\wejscia.pwn"
+#include "modules\new\budki\budki.pwn"
+#include "modules\new\premium\premium.pwn"
+#include "modules\new\premium\premium_dialogs.pwn"
+#include "modules\new\wjedz\wjedz.pwn"
 
 //Inne:
-#include "modules/Inne/ibiza.inc"
-#include "modules/Inne/system_aut.pwn"
-#include "modules/Inne/system_kp.pwn"
-#include "modules/Inne/external.pwn"
+#include "modules\Inne\ibiza.inc"
+#include "modules\Inne\system_aut.pwn"
+#include "modules\Inne\system_kp.pwn"
+#include "modules\Inne\external.pwn"
 
 //Modu³y mapy c.d.
-#include "system/funkcje.pwn"
-#include "system/timery.pwn"
+#include "system\funkcje.pwn"
+#include "system\timery.pwn"
 
 //Obiekty:
-#include "modules/obiekty/stare_obiekty.pwn"
-#include "modules/obiekty/nowe_obiekty.pwn"
-#include "modules/obiekty/pickupy.pwn"
-#include "modules/obiekty/3dtexty.pwn"
-#include "modules/obiekty/ikony.pwn"
+#include "modules\obiekty\stare_obiekty.pwn"
+#include "modules\obiekty\nowe_obiekty.pwn"
+#include "modules\obiekty\pickupy.pwn"
+#include "modules\obiekty\3dtexty.pwn"
+#include "modules\obiekty\ikony.pwn"
 
 //Modu³y mapy c.d.
-#include "system/komendy.pwn"
-#include "modules/new/niceczlowiek/cmd.pwn"
-#include "modules/new/niceczlowiek/noysi.pwn"
-#include "modules/new/niceczlowiek/wybieralka.pwn"
+#include "system\komendy.pwn"
+#include "modules\new\niceczlowiek\cmd.pwn"
+#include "modules\new\niceczlowiek\noysi.pwn"
+#include "modules\new\niceczlowiek\wybieralka.pwn"
 
 //sktomdiscordconnect
-#include "modules/discord.pwn"
+#include "modules\discord.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()
@@ -234,7 +234,7 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 }
 
 //public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
-#include "modules/OnDialogResponse.pwn"
+#include "modules\OnDialogResponse.pwn"
 
 public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 {
@@ -289,7 +289,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		printf("%s[%d] OnPlayerClickTextDraw - begin", GetNick(playerid), playerid);
 	#endif
 
-    NowaWybieralka::ClickedTxd(playerid, clickedid);
+    NowaWybieralka_ClickedTxd(playerid, clickedid);
 
     new str[128];
     if(clickedid == Text:INVALID_TEXT_DRAW)
@@ -751,8 +751,8 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
     if(!ispassenger)
 	{
-        if(!Player::CanUseCar(playerid, vehicleid))
-        	return Player::RemoveFromVeh(playerid);
+        if(!Player_CanUseCar(playerid, vehicleid))
+        	return Player_RemoveFromVeh(playerid);
     }
 	if(IsARower(vehicleid))
 	{
@@ -792,12 +792,12 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		if(IsAMedyk(playerid) && JobDuty[playerid] == 0 )
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem na s³u¿bie!");
-            Player::RemoveFromVeh(playerid);
+            Player_RemoveFromVeh(playerid);
 		}
 		else if(!IsAMedyk(playerid))
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
-            Player::RemoveFromVeh(playerid);
+            Player_RemoveFromVeh(playerid);
 		}
 	}
 	if (GetVehicleModel(vehicleid) == 525)
@@ -4715,8 +4715,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(newstate == PLAYER_STATE_DRIVER)
         {
             new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
-			|| !Player::CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pNewAP] != 5)
+            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
+			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pNewAP] != 5)
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
 
@@ -5282,8 +5282,8 @@ public OnGameModeInit()
     Streamer_SetVisibleItems(0, 900);
     Streamer_SetTickRate(50);
 
-    FabrykaMats::LoadLogic();
-    NowaWybieralka::Init();
+    FabrykaMats_LoadLogic();
+    NowaWybieralka_Init();
 	KaryTXDLoad(); 
     //Streamer_SetTickRate(40);
 
@@ -6520,7 +6520,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
     if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_ONFOOT))
     {
-        FabrykaMats::ActorTalk(playerid);
+        FabrykaMats_ActorTalk(playerid);
     }
 	if((newkeys & KEY_HANDBRAKE) && (newkeys & KEY_CROUCH) && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
 	{

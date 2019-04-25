@@ -7339,7 +7339,7 @@ CMD:wybieralka(playerid, params[])
 		        {
 					if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby wrzuciæ gracza do wybiera³ki gracz musi byæ pieszo!");
 
-					NowaWybieralka::Setup(para1);
+					NowaWybieralka_Setup(para1);
 
 					_MruAdmin(playerid, sprintf("Wys³a³eœ gracza %s [%d] do wybiera³ki skinów.", GetNick(para1, true), para1));
                     _MruAdmin(para1, sprintf("Zosta³eœ wys³any do wybiera³ki skinów przez Admina %s [%d].", GetNick(playerid, true), playerid));
@@ -7360,7 +7360,7 @@ CMD:ubranie(playerid)
 	{
 	    if(IsAtClothShop(playerid))
 	    {
-            NowaWybieralka::Setup(playerid);
+            NowaWybieralka_Setup(playerid);
 		}
 		else
 		{
@@ -23615,7 +23615,7 @@ CMD:materialy(playerid, params[])
 		else if(strcmp(x_nr,"deliver",true) == 0 || strcmp(x_nr,"dostarcz",true) == 0)
 		{
 		    new Float:ActorX, Float:ActorY, Float:ActorZ;
-            GetActorPos(FabrykaMats::Actor, ActorX, ActorY, ActorZ);
+            GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
 
             if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ)) 
 		    {

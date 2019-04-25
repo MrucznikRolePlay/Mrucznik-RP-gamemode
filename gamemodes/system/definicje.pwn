@@ -25,7 +25,7 @@
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
 
-#include "modules/new/niceczlowiek/definicje.pwn"
+#include "modules\new\niceczlowiek\definicje.pwn"
 
 #define         MAX_VEHICLE_ID_CHANGES          3
 
@@ -39,6 +39,11 @@
 	(((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
+
+#define sprintf(%0,%1) (format(sprintfStr, 1000, %0, %1), sprintfStr)
+
+//Œwiat anty czita ¿eby da³ porz¹dny desync graczowi aby ju¿ nic nie zjeba³ :D
+#define AC_WORLD	50005
 
 
 #define OSTATNIE_ZGLOSZENIA 10

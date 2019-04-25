@@ -2909,7 +2909,7 @@ public JednaSekundaTimer()
 				
 				SendClientMessage(i, COLOR_NEWS, "A teraz wybierz, jak ma wygl¹daæ twoja postaæ.");
 				SetPVarInt(i, "wyborPierwszego", 1);
-				NowaWybieralka::Setup(i);
+				NowaWybieralka_Setup(i);
 			}
 		}
 		if(PlayerTazeTime[i] >= 1)

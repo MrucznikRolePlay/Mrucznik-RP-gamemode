@@ -5601,7 +5601,7 @@ CMD:forceskin(playerid, params[])
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* Wymusi³eœ zmiane skinu na %s.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					NowaWybieralka::Setup(para1);
+					NowaWybieralka_Setup(para1);
 				}
 			}
 		}

@@ -75,7 +75,6 @@ new bool:IbizaSwiatla = true;
 new bool:IbizaBarierki = true;
 new IbizaBarierkiObiekty[3];
 new bool:IbizaZamek = true;
-new bool:IbizaWjazd = false;
 new IbizaKanciapaObiekt;
 new bool:IbizaKanciapa = false;
 
@@ -281,7 +280,6 @@ public FreezeVeh(vehicleid, ddriver, repeat)
 	if(repeat < 100) SetTimerEx("FreezeVeh", 50, false, "ddd", vehicleid, ddriver, repeat+1);
 	else
 	{
-		IbizaWjazd = false;
 		TogglePlayerControllable(ddriver, true);
 	}
 	return 1;

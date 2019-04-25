@@ -23,17 +23,17 @@ stock highestAdminLevel()
 	return playa;
 }
 
-new FabrykaMats::Actor;
-new Text3D:FabrykaMats::ActorLabel;
+new FabrykaMats_Actor;
+new Text3D:FabrykaMats_ActorLabel;
 
-new Float:FabrykaMats::ActorPos[][] =
+new Float:FabrykaMats_ActorPos[][] =
 {
 	{2239.1765,-2258.2468,14.7647,208.8479},
 	{2201.0283,-2198.6238,13.5547,170.1143},
 	{2129.9502,-2276.1985,14.7836,145.9646}
 };
 
-new FabrykaMats::ActorSkins[] =
+new FabrykaMats_ActorSkins[] =
 {
 	6,
 	22,
@@ -43,7 +43,7 @@ new FabrykaMats::ActorSkins[] =
 
 forward FabrykaActor_ReCreate();
 
-stock FabrykaMats::LoadLogic()
+stock FabrykaMats_LoadLogic()
 {
 	// Init Actors
 
@@ -65,35 +65,35 @@ public FabrykaActor_ReCreate()
 
 	new Float:ActorX, Float:ActorY, Float:ActorZ;
 
-	new rand = random(sizeof(FabrykaMats::ActorPos));
+	new rand = random(sizeof(FabrykaMats_ActorPos));
 
-	ActorX = FabrykaMats::ActorPos[rand][0];
-	ActorY = FabrykaMats::ActorPos[rand][1];
-	ActorZ = FabrykaMats::ActorPos[rand][2];
+	ActorX = FabrykaMats_ActorPos[rand][0];
+	ActorY = FabrykaMats_ActorPos[rand][1];
+	ActorZ = FabrykaMats_ActorPos[rand][2];
 
-	if(FabrykaMats::Actor != INVALID_ACTOR_ID)
+	if(FabrykaMats_Actor != INVALID_ACTOR_ID)
 	{
-		DestroyActor(FabrykaMats::Actor);	
+		DestroyActor(FabrykaMats_Actor);	
 	}
 
-	FabrykaMats::Actor = CreateActor(FabrykaMats::ActorSkins[random(sizeof(FabrykaMats::ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats::ActorPos[rand][3]);
+	FabrykaMats_Actor = CreateActor(FabrykaMats_ActorSkins[random(sizeof(FabrykaMats_ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats_ActorPos[rand][3]);
 
-	if(FabrykaMats::ActorLabel != Text3D:INVALID_3DTEXT_ID)
+	if(FabrykaMats_ActorLabel != Text3D:INVALID_3DTEXT_ID)
 	{
-		Delete3DTextLabel(FabrykaMats::ActorLabel);
+		Delete3DTextLabel(FabrykaMats_ActorLabel);
 	}
 
 	new Float:labelZ = ActorZ + 1;
 
-	FabrykaMats::ActorLabel = CreateDynamic3DTextLabel("Handlarz materia³ami\nNaciœnij 'Y' aby pogadaæ", COLOR_GRAD1,ActorX, ActorY, labelZ, 7.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
+	FabrykaMats_ActorLabel = CreateDynamic3DTextLabel("Handlarz materia³ami\nNaciœnij 'Y' aby pogadaæ", COLOR_GRAD1,ActorX, ActorY, labelZ, 7.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
 
 	return 1;
 }
 
-stock FabrykaMats::ActorTalk(playerid)
+stock FabrykaMats_ActorTalk(playerid)
 {
 	new Float:ActorX, Float:ActorY, Float:ActorZ;
-	GetActorPos(FabrykaMats::Actor, ActorX, ActorY, ActorZ);
+	GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
 
 	if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ))
 	{
@@ -175,7 +175,7 @@ public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Fl
 }
 
 
-Player::RemoveFromVeh(playerid)
+Player_RemoveFromVeh(playerid)
 {
 	new Float:slx, Float:sly, Float:slz;
 	GetPlayerPos(playerid, slx, sly, slz);
@@ -186,7 +186,7 @@ Player::RemoveFromVeh(playerid)
 }
 
 
-Player::CanUseCar(playerid, newcar)
+Player_CanUseCar(playerid, newcar)
 {
 	new string[128];
 

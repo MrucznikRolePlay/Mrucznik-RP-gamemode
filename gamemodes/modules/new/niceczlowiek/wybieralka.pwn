@@ -1,6 +1,6 @@
-new Text:NowaWybieralka::Select;
-new Text:NowaWybieralka::Left;
-new Text:NowaWybieralka::Right;
+new Text:NowaWybieralka_Select;
+new Text:NowaWybieralka_Left;
+new Text:NowaWybieralka_Right;
 
 
 //COMMAND:ubranie(playerid)
@@ -11,10 +11,10 @@ new Text:NowaWybieralka::Right;
 		return sendErrorMessage(playerid, "Bêd¹c na s³u¿bie nie mo¿esz wybraæ skina cywilnego.");
 	}
 
-	NowaWybieralka::Setup(playerid);
+	NowaWybieralka_Setup(playerid);
 } */
 
-stock NowaWybieralka::Setup(playerid)
+stock NowaWybieralka_Setup(playerid)
 {
 
 	if(GetPVarInt(playerid, "wyborPierwszego") == 0)
@@ -33,9 +33,9 @@ stock NowaWybieralka::Setup(playerid)
 	SetPlayerCameraPos(playerid, 206.288314, -38.114028, 1002.229675);
 	SetPlayerCameraLookAt(playerid, 208.775955, -34.981678, 1001.929687);
 
-	TextDrawShowForPlayer(playerid, NowaWybieralka::Select);
-	TextDrawShowForPlayer(playerid, NowaWybieralka::Left);
-	TextDrawShowForPlayer(playerid, NowaWybieralka::Right);
+	TextDrawShowForPlayer(playerid, NowaWybieralka_Select);
+	TextDrawShowForPlayer(playerid, NowaWybieralka_Left);
+	TextDrawShowForPlayer(playerid, NowaWybieralka_Right);
 
 	SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
 
@@ -48,73 +48,73 @@ stock NowaWybieralka::Setup(playerid)
 	SetPlayerCameraLookAt(playerid, 208.775955, -34.981678, 1001.929687);
 }
 
-stock NowaWybieralka::Init()
+stock NowaWybieralka_Init()
 {
-	NowaWybieralka::CreateTxd();
+	NowaWybieralka_CreateTxd();
 
 	return 1;
 }
 
 
-stock NowaWybieralka::InitPlayer(playerid)
+stock NowaWybieralka_InitPlayer(playerid)
 {
 
 	return 1;
 }
 
 
-stock NowaWybieralka::CreateTxd()
+stock NowaWybieralka_CreateTxd()
 {
 
-	NowaWybieralka::Left = TextDrawCreate(250.154693, 383.833343, "<<<");
-    TextDrawLetterSize(NowaWybieralka::Left, 0.449999, 1.600000);
-    TextDrawTextSize(NowaWybieralka::Left, 18.000000, 47.833335);
-    TextDrawAlignment(NowaWybieralka::Left, 2);
-    TextDrawColor(NowaWybieralka::Left, -1378294017);
-    //TextDrawUseBox(NowaWybieralka::Left, true);
-    TextDrawBoxColor(NowaWybieralka::Left, 1717986918);
-    TextDrawSetShadow(NowaWybieralka::Left, 0);
-    TextDrawSetOutline(NowaWybieralka::Left, 1);
-    //TextDrawBackgroundColor(NowaWybieralka::Left, 255);
-    TextDrawFont(NowaWybieralka::Left, 2);
-    TextDrawSetProportional(NowaWybieralka::Left, 1);
-    TextDrawSetSelectable(NowaWybieralka::Left, true);
+	NowaWybieralka_Left = TextDrawCreate(250.154693, 383.833343, "<<<");
+    TextDrawLetterSize(NowaWybieralka_Left, 0.449999, 1.600000);
+    TextDrawTextSize(NowaWybieralka_Left, 18.000000, 47.833335);
+    TextDrawAlignment(NowaWybieralka_Left, 2);
+    TextDrawColor(NowaWybieralka_Left, -1378294017);
+    //TextDrawUseBox(NowaWybieralka_Left, true);
+    TextDrawBoxColor(NowaWybieralka_Left, 1717986918);
+    TextDrawSetShadow(NowaWybieralka_Left, 0);
+    TextDrawSetOutline(NowaWybieralka_Left, 1);
+    //TextDrawBackgroundColor(NowaWybieralka_Left, 255);
+    TextDrawFont(NowaWybieralka_Left, 2);
+    TextDrawSetProportional(NowaWybieralka_Left, 1);
+    TextDrawSetSelectable(NowaWybieralka_Left, true);
 
-    NowaWybieralka::Select = TextDrawCreate(312.503204, 363.833465, ">OK<");
-    TextDrawLetterSize(NowaWybieralka::Select, 0.449999, 1.600000);
-    TextDrawTextSize(NowaWybieralka::Select, 18.000000, 51.916660);
-    TextDrawAlignment(NowaWybieralka::Select, 2);
-    TextDrawColor(NowaWybieralka::Select, -1378294017);
-    //TextDrawUseBox(NowaWybieralka::Select, true);
-    TextDrawBoxColor(NowaWybieralka::Select, 1717986918);
-    TextDrawSetShadow(NowaWybieralka::Select, 0);
-    TextDrawSetOutline(NowaWybieralka::Select, 1);
-    //TextDrawBackgroundColor(NowaWybieralka::Select, 255);
-    TextDrawFont(NowaWybieralka::Select, 2);
-    TextDrawSetProportional(NowaWybieralka::Select, 1);
-    TextDrawSetSelectable(NowaWybieralka::Select, true);
+    NowaWybieralka_Select = TextDrawCreate(312.503204, 363.833465, ">OK<");
+    TextDrawLetterSize(NowaWybieralka_Select, 0.449999, 1.600000);
+    TextDrawTextSize(NowaWybieralka_Select, 18.000000, 51.916660);
+    TextDrawAlignment(NowaWybieralka_Select, 2);
+    TextDrawColor(NowaWybieralka_Select, -1378294017);
+    //TextDrawUseBox(NowaWybieralka_Select, true);
+    TextDrawBoxColor(NowaWybieralka_Select, 1717986918);
+    TextDrawSetShadow(NowaWybieralka_Select, 0);
+    TextDrawSetOutline(NowaWybieralka_Select, 1);
+    //TextDrawBackgroundColor(NowaWybieralka_Select, 255);
+    TextDrawFont(NowaWybieralka_Select, 2);
+    TextDrawSetProportional(NowaWybieralka_Select, 1);
+    TextDrawSetSelectable(NowaWybieralka_Select, true);
 
-    NowaWybieralka::Right = TextDrawCreate(373.914733, 383.833343, ">>>");
-    TextDrawLetterSize(NowaWybieralka::Right, 0.449999, 1.600000);
-    TextDrawTextSize(NowaWybieralka::Right, 18.000000, 46.083316);
-    TextDrawAlignment(NowaWybieralka::Right, 2);
-    TextDrawColor(NowaWybieralka::Right, -1378294017);
-    //TextDrawUseBox(NowaWybieralka::Right, true);
-    TextDrawBoxColor(NowaWybieralka::Right, 1717986918);
-    TextDrawSetShadow(NowaWybieralka::Right, 0);
-    TextDrawSetOutline(NowaWybieralka::Right, 1);
-    //TextDrawBackgroundColor(NowaWybieralka::Right, 255);
-    TextDrawFont(NowaWybieralka::Right, 2);
-    TextDrawSetProportional(NowaWybieralka::Right, 1);
-    TextDrawSetSelectable(NowaWybieralka::Right, true);
+    NowaWybieralka_Right = TextDrawCreate(373.914733, 383.833343, ">>>");
+    TextDrawLetterSize(NowaWybieralka_Right, 0.449999, 1.600000);
+    TextDrawTextSize(NowaWybieralka_Right, 18.000000, 46.083316);
+    TextDrawAlignment(NowaWybieralka_Right, 2);
+    TextDrawColor(NowaWybieralka_Right, -1378294017);
+    //TextDrawUseBox(NowaWybieralka_Right, true);
+    TextDrawBoxColor(NowaWybieralka_Right, 1717986918);
+    TextDrawSetShadow(NowaWybieralka_Right, 0);
+    TextDrawSetOutline(NowaWybieralka_Right, 1);
+    //TextDrawBackgroundColor(NowaWybieralka_Right, 255);
+    TextDrawFont(NowaWybieralka_Right, 2);
+    TextDrawSetProportional(NowaWybieralka_Right, 1);
+    TextDrawSetSelectable(NowaWybieralka_Right, true);
 
 	return 1;
 }
 
-stock NowaWybieralka::ClickedTxd(playerid, Text:clickedid)
+stock NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 {
 	//Przebierz
-	if(clickedid == NowaWybieralka::Left)
+	if(clickedid == NowaWybieralka_Left)
 	{
 
 		if(GetPVarInt(playerid, "NowaWybieralka") <= 0) SetPVarInt(playerid, "NowaWybieralka", sizeof(Przebierz)-1);
@@ -125,7 +125,7 @@ stock NowaWybieralka::ClickedTxd(playerid, Text:clickedid)
 		SetPVarInt(playerid, "NowaWybieralkaSelect", Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);
 		return 1;
 	}
-	if(clickedid == NowaWybieralka::Right)
+	if(clickedid == NowaWybieralka_Right)
 	{
 		if(GetPVarInt(playerid, "NowaWybieralka") >= sizeof(Przebierz)-1) SetPVarInt(playerid, "NowaWybieralka", 0);
 		else SetPVarInt(playerid, "NowaWybieralka", GetPVarInt(playerid, "NowaWybieralka")+1);
@@ -136,12 +136,12 @@ stock NowaWybieralka::ClickedTxd(playerid, Text:clickedid)
 
 		return 1;
 	}
-	if(clickedid == NowaWybieralka::Select)
+	if(clickedid == NowaWybieralka_Select)
 	{
 		CancelSelectTextDraw(playerid);
-		TextDrawHideForPlayer(playerid,NowaWybieralka::Left);
-		TextDrawHideForPlayer(playerid,NowaWybieralka::Right);
-		TextDrawHideForPlayer(playerid,NowaWybieralka::Select);
+		TextDrawHideForPlayer(playerid,NowaWybieralka_Left);
+		TextDrawHideForPlayer(playerid,NowaWybieralka_Right);
+		TextDrawHideForPlayer(playerid,NowaWybieralka_Select);
 
 		PlayerInfo[playerid][pModel] = GetPVarInt(playerid, "NowaWybieralkaSelect");
 
