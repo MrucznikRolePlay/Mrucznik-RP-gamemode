@@ -8,7 +8,7 @@
 	  },
 	"dependencies": [
 		  "sampctl/samp-stdlib:0.3.7-R2-2-1",
-		  "pawn-lang/YSI-Includes@5.x",
+		  "pawn-lang/YSI-Includes@4.x",
 		  "Open-GTO/sa-mp-fixes",
 		  "emmet-jones/New-SA-MP-callbacks",
 		  "YashasSamaga/I-ZCMD",
