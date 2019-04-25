@@ -1225,7 +1225,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(!response) return 1;
         if(strlen(inputtext) < 10) return 1;
 
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3],VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && GetPlayerVirtualWorld(i) == floatround(VinylAudioPos[4]))
             {
@@ -2910,7 +2910,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        foreach(Player, i)
+		        foreach(new i : Player)
 				{
 				    if(IsPlayerConnected(i))
 				    {
@@ -2992,7 +2992,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        foreach(Player, i)
+		        foreach(new i : Player)
 				{
 				    if(IsPlayerConnected(i))
 				    {
@@ -12447,7 +12447,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
 					if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 					{
-						foreach(Player, i)
+						foreach(new i : Player)
 						{
 							if(IsPlayerInVehicle(i, veh))
 							{
@@ -12466,7 +12466,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                             //new veh;
 							veh = GetPlayerVehicleID(playerid);
 
-                            foreach(Player, i)
+                            foreach(new i : Player)
                             {
                                 if(IsPlayerInVehicle(i, veh))
                                 {
@@ -12483,7 +12483,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     {
                         if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
                         {
-                            foreach(Player, i)
+                            foreach(new i : Player)
                             {
                                 if(IsPlayerInVehicle(i, veh))
                                 {
@@ -12506,7 +12506,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
                     {
-                        foreach(Player, i)
+                        foreach(new i : Player)
                         {
                             if(IsPlayerInVehicle(i, veh))
                             {
@@ -12557,7 +12557,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				//if(IsAValidURL(inputtext))
 				//{
 				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
-					foreach(Player, i) {
+					foreach(new i : Player) {
 						if(IsPlayerInVehicle(i, veh)) {
 							PlayAudioStreamForPlayer(i, inputtext);
 						}
@@ -12591,7 +12591,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     case 5: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_party.pls");
                     case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
                 }
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(IsPlayerInAnyVehicle(i))
                     {
@@ -12614,7 +12614,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     case 5: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_party.pls");
                     case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
                 }
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(IsPlayerInAnyVehicle(i))
                     {
@@ -12634,7 +12634,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(!radio)
             {
                 format(RadioSANUno, 128, "%s", inputtext);
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(IsPlayerInAnyVehicle(i))
                     {
@@ -12649,7 +12649,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             else
             {
                 format(RadioSANDos, 128, "%s", inputtext);
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(IsPlayerInAnyVehicle(i))
                     {
@@ -12704,7 +12704,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				SendClientMessage(playerid, COLOR_NEWS, "Ustawi³eœ g³oœnik SAN. Aby go wy³¹czyæ wpisz /glosnik");
                 //
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(IsPlayerConnected(i))
                     {
@@ -15367,7 +15367,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         format(lStr, 128, "Usuniêto organizacjê %s.", OrgInfo[id][o_Name]);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
         format(lStr, 128, "Organizacja usuniêta przez %s.", GetNick(playerid));
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(GetPlayerOrg(i) == OrgInfo[id][o_UID])
             {
@@ -15573,7 +15573,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     new lUID = Car_GetOwner(car);
 					if(lUID != 0)
 					{
-						foreach(Player, i)
+						foreach(new i : Player)
 						{
 							if(PlayerInfo[i][pUID] == lUID)
 							{
@@ -15641,7 +15641,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     new lUID = Car_GetOwner(car);
 					if(lUID != 0)
 					{
-						foreach(Player, i)
+						foreach(new i : Player)
 						{
 							if(PlayerInfo[i][pUID] == lUID)
 							{
@@ -15689,7 +15689,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             new lUID = Car_GetOwner(car);
 			if(lUID != 0)
 			{
-				foreach(Player, i)
+				foreach(new i : Player)
 				{
 					if(PlayerInfo[i][pUID] == lUID)
 					{
@@ -15717,7 +15717,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		
         if(typ == CAR_OWNER_PLAYER)
         {
-            foreach(Player, i)
+            foreach(new i : Player)
             {
                 if(PlayerInfo[i][pUID] == strval(inputtext))
                 {

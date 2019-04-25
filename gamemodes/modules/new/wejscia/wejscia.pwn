@@ -85,7 +85,7 @@ stock Sprawdz_w_cord(playerid, id)
 	}
 	else
 	{
-		playerPos = NOT_IN_RANGE;
+		playerPos = NOT_IN_ENTER_RANGE;
 	}
 	return playerPos;
 }

@@ -31,7 +31,7 @@ CMD:pracownicy(playerid)
 	{
 	    new string[64];
 	    SendClientMessage(playerid, COLOR_GREEN, "Pracownicy Online:");
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 		    if(frac == GetPlayerFraction(i))
 		    {

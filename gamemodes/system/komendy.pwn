@@ -13,7 +13,7 @@ SSCANF:fix(string[])
 	}
 	else 
 	{
-		foreach(Player, p)
+		foreach(new p : Player)
 		{
 			if(strfind(GetNick(p), string, true) != -1)
 			{
@@ -955,7 +955,7 @@ CMD:cbradio(playerid, params[])
 			sendTipMessage(playerid, string);
 			return 1;
 		}
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(GetPlayerVehicleID(i) || adminpodgladcb[i] == 1)
 			{
@@ -1342,7 +1342,7 @@ CMD:gps(playerid)
 
 			if(PDGPS == playerid)
 			{
-				foreach(Player, i)
+				foreach(new i : Player)
 				{
 					if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
 						DisablePlayerCheckpoint(i);
@@ -1394,7 +1394,7 @@ CMD:namierz(playerid, params[])
 				return 1;
 			}
             if(givenumber <= 0) return sendTipMessage(playerid, "Niepoprawny numer telefonu!");
-            foreach(Player, i)
+            foreach(new i : Player)
             {
                 if(PlayerInfo[i][pPnumber] == givenumber)
                 {
@@ -2533,7 +2533,7 @@ CMD:reklama(playerid)
 		SendClientMessageToAll(COLOR_LIGHTBLUE, "Chcesz pozbyæ siê jakiegoœ œmiecia? Skorzystaj z us³ug ciecia! ((/kontrakt))");
         format(string, sizeof(string), "CMD_Info: /ha u¿yte przez %s [%d]", GetNick(playerid), playerid);
         SendCommandLogMessage(string);
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(PlayerInfo[i][pMember] == 8 || PlayerInfo[i][pLider] == 8 )
 			{
@@ -6964,7 +6964,7 @@ CMD:zawodnicy(playerid)
     if(IsPlayerConnected(playerid))
     {
         SendClientMessage(playerid, COLOR_LIGHTGREEN, "Zawodnicy ¿u¿lowi:");
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 		    if(zawodnik[i] == 1)
 		    {
@@ -6985,7 +6985,7 @@ CMD:wyniki(playerid)
     if(IsPlayerConnected(playerid))
     {
         SendClientMessage(playerid, COLOR_LIGHTGREEN, "Tabela wyników:");
-        foreach(Player, i)
+        foreach(new i : Player)
 		{
 		    if(zawodnik[i] == 1)
 		    {
@@ -9272,7 +9272,7 @@ CMD:wyscig_start(playerid)
 	            	owyscig[playerid] = 666;
 	            	Scigamy = ScigaSie[playerid];
 	            	SetTimerEx("Odlicz",5000,0,"d",Scigamy);
-	            	foreach(Player, i)
+	            	foreach(new i : Player)
 	            	{
 	            	    if(ScigaSie[i] == Scigamy)
 	            	    {
@@ -16173,7 +16173,7 @@ CMD:sms(playerid, params[])
 		SendClientMessage(playerid, COLOR_WHITE, string);
 		
 		//wysy³anie wiadomoœci + hajs dla SN
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(GetPlayerFraction(i) == FRAC_SN)
 			{
@@ -16981,7 +16981,7 @@ CMD:wejdz(playerid)
                     break;
                 }
             }
-            foreach(Player, i)
+            foreach(new i : Player)
             {
                 if(GetPlayerVehicleID(i) == lVeh)
                 {
@@ -18333,7 +18333,7 @@ CMD:newbie(playerid, params[])
 			format(nobchat, sizeof(nobchat), "((N-Chat: %s [%d]: %s ))", sendername, PlayerInfo[playerid][pLevel], params);
 			printf(nobchat);
 			new admin = 0;
-			foreach(Player, i)
+			foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))
 				{
@@ -18739,7 +18739,7 @@ CMD:endround(playerid)
 	new sendername[MAX_PLAYER_NAME];
 
 	SendClientMessage(playerid, COLOR_GRAD1, "Lista ZG:");
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -19685,7 +19685,7 @@ CMD:organizacje(playerid, p[])
     if(!orgIsValid(orgID(lID))) return 1;
     format(lStr, 128, "|| Cz³onkowie ONLINE w %s ||", OrgInfo[orgID(lID)][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
-    foreach(Player, i)
+    foreach(new i : Player)
     {
         if(GetPlayerOrg(i) == lID)
         {
@@ -20394,7 +20394,7 @@ CMD:dajpodatek(playerid)
 			return 1;
 		}
 		new Cops = 0;
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 		    if(IsPlayerConnected(i))
 		    {
@@ -20408,7 +20408,7 @@ CMD:dajpodatek(playerid)
 		{
 		    new valuex = Tax / 2;
 		    new price = valuex / Cops;
-		    foreach(Player, i)
+		    foreach(new i : Player)
 			{
 			    if(IsPlayerConnected(i))
 			    {
@@ -21537,7 +21537,7 @@ CMD:glosnik(playerid)
 		    DestroyDynamicObject(SANradio);
 			DestroyDynamic3DTextLabel(SAN3d);
 		    SANradio = 0;
-		    foreach(Player, i)
+		    foreach(new i : Player)
 	        {
 	            if(IsPlayerConnected(i))
 	            {
@@ -21686,7 +21686,7 @@ CMD:wezwij(playerid, params[])
 		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma lekarzy na s³u¿bie, spróbuj potem !");
 		            return 1;
 		        }
-		        foreach(Player, i)
+		        foreach(new i : Player)
 				{
 				    if(JobDuty[i] >= 1 && IsAMedyk(i))
 				    {
@@ -21709,7 +21709,7 @@ CMD:wezwij(playerid, params[])
 		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma mechaników na s³u¿bie, spróbuj potem !");
 		            return 1;
 		        }
-		        foreach(Player, i)
+		        foreach(new i : Player)
 				{
 				    if(JobDuty[i] >= 1 && PlayerInfo[i][pJob] == 7)
 				    {
@@ -25305,7 +25305,7 @@ CMD:anuluj(playerid, params[])
 	        else
 	        {
 				if(IsPlayerConnected(TaxiCall)) { if(TaxiCall == playerid) { TaxiCall = 999; } }
-				foreach(Player, i)
+				foreach(new i : Player)
 				{
 				    if(IsPlayerConnected(i))
 				    {
@@ -25345,7 +25345,7 @@ CMD:anuluj(playerid, params[])
                  else
                  {
                  	if(IsPlayerConnected(TaxiCall)) { if(TaxiCall == playerid) { TaxiCall = 999; } }
-                  	foreach(Player, i)
+                  	foreach(new i : Player)
                    	{
                     	if(IsPlayerConnected(i))
                      	{
@@ -25385,7 +25385,7 @@ CMD:anuluj(playerid, params[])
 	        else
 	        {
 				if(IsPlayerConnected(BusCall)) { if(BusCall == playerid) { BusCall = 999; } }
-				foreach(Player, i)
+				foreach(new i : Player)
 				{
 				    if(IsPlayerConnected(i))
 				    {
@@ -27427,7 +27427,7 @@ CMD:szukani(playerid)
 		{
 			new x;
 			SendClientMessage(playerid, COLOR_GREEN, "Lista Poszukiwanych:");
-		    foreach(Player, i)
+		    foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))
 				{
@@ -27455,7 +27455,7 @@ CMD:szukani(playerid)
 		{
 			new x;
 			SendClientMessage(playerid, COLOR_GREEN, "Lista Poszukiwanych:");
-		    foreach(Player, i)
+		    foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))
 				{
@@ -27488,7 +27488,7 @@ CMD:szukani(playerid)
 			    {
 			        new x;
 					SendClientMessage(playerid, COLOR_GREEN, "Poszukiwani ¯ywi lub Martwi:");
-				    foreach(Player, i)
+				    foreach(new i : Player)
 					{
 					    if(IsPlayerConnected(i))
 						{
@@ -27522,7 +27522,7 @@ CMD:szukani(playerid)
 			    {
 			        new x;
 					SendClientMessage(playerid, COLOR_GREEN, "Poszukiwani ¯ywi lub Martwi:");
-				    foreach(Player, i)
+				    foreach(new i : Player)
 					{
 					    if(IsPlayerConnected(i))
 						{
@@ -27556,7 +27556,7 @@ CMD:szukani(playerid)
 			    {
 			        new x;
 					SendClientMessage(playerid, COLOR_GREEN, "Poszukiwani ¯ywi lub Martwi:");
-				    foreach(Player, i)
+				    foreach(new i : Player)
 					{
 					    if(IsPlayerConnected(i))
 						{
@@ -27590,7 +27590,7 @@ CMD:szukani(playerid)
 			    {
 			        new x;
 					SendClientMessage(playerid, COLOR_GREEN, "Poszukiwani ¯ywi lub Martwi:");
-				    foreach(Player, i)
+				    foreach(new i : Player)
 					{
 					    if(IsPlayerConnected(i))
 						{
@@ -27624,7 +27624,7 @@ CMD:szukani(playerid)
 			    {
 			        new x;
 					SendClientMessage(playerid, COLOR_GREEN, "Poszukiwani ¯ywi lub Martwi:");
-				    foreach(Player, i)
+				    foreach(new i : Player)
 					{
 					    if(IsPlayerConnected(i))
 						{
@@ -27664,7 +27664,7 @@ CMD:szukani(playerid)
 		{
 			new x;
 			SendClientMessage(playerid, COLOR_GREEN, "Lista potencjalnych klientów:");
-		    foreach(Player, i)
+		    foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))
 				{
@@ -27692,7 +27692,7 @@ CMD:szukani(playerid)
 		{
 		   	new x;
 			SendClientMessage(playerid, COLOR_GREEN, "Najbardziej poszukiwani przestêpcy:");
-		    foreach(Player, i)
+		    foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))
 				{
@@ -28661,7 +28661,7 @@ CMD:wieza(playerid, params[])
                 {
                     format(string, 128, "Samolot %d-%s: %s", playerid, VehicleNames[GetVehicleModel(veh)-400], sub);
                     SendClientMessage(playerid, 0x3ABD91FF, string);
-                    foreach(Player, i)
+                    foreach(new i : Player)
                     {
                         if(IsPlayerInRangeOfPoint(i, 10.0, 1627.2760,-2295.9417,79.2242))
                         {
@@ -28720,7 +28720,7 @@ CMD:wieza(playerid, params[])
             if(id < 0 ) return 1;
             if(!IsAPlane(id)) return sendTipMessageEx(playerid, COLOR_GRAD1, "Brak takiego samolotu");
             new pid=-1;
-            foreach(Player, i)
+            foreach(new i : Player)
             {
                 if(GetPlayerVehicleID(i) == id && GetPlayerVehicleSeat(i) == 0)
                 {
@@ -28830,7 +28830,7 @@ CMD:lot(playerid, params[])
        			if(IsPlayerInRangeOfPoint(playerid, 10,1941.0000,-2294.5068,13.4720) || IsPlayerInRangeOfPoint(playerid, 10, -1344.1194,-229.2785,14.0624) || IsPlayerInRangeOfPoint(playerid, 10, 1565.5919,1448.4813,10.7384))
     	        {
     	    		GetPlayerName(playerid, sendername, sizeof(sendername));
-    	    	    foreach(Player, i)
+    	    	    foreach(new i : Player)
 	    	        {
 	    	            if(PlayerInfo[i][pWsamolocieLS]==1)
    		 				{
@@ -28864,7 +28864,7 @@ CMD:lot(playerid, params[])
     	    	if(IsPlayerInRangeOfPoint(playerid, 10,1941.0000,-2294.5068,13.4720) || IsPlayerInRangeOfPoint(playerid, 10, -1344.1194,-229.2785,14.0624) || IsPlayerInRangeOfPoint(playerid, 10, 1565.5919,1448.4813,10.7384))
     	        {
     	    		GetPlayerName(playerid, sendername, sizeof(sendername));
-    	    	    foreach(Player, i)
+    	    	    foreach(new i : Player)
 	    	        {
 	    	            if(PlayerInfo[i][pWsamolocieLS]==1)
    		 				{
@@ -28951,7 +28951,7 @@ CMD:lot(playerid, params[])
     	{
     	    if(GetVehicleModel(GetPlayerVehicleID(playerid)) == 577)
     	    {
-        		foreach(Player, i)
+        		foreach(new i : Player)
     	        {
     	            if(PlayerInfo[i][pWsamolocieLS]==1)
      				{
@@ -28973,7 +28973,7 @@ CMD:lot(playerid, params[])
     	    	GetPlayerName(playerid, sendername, sizeof(sendername));
                 new result[128];
                 if(sscanf(sub, "s[128]", result)) return sendTipMessageEx(playerid, COLOR_GRAD2, "U¿yj /lot (/k)omunikat [tekst]");
-    			foreach(Player, i)
+    			foreach(new i : Player)
     	        {
     	            if(PlayerInfo[i][pWsamolocieLS]==1)
      				{
@@ -29365,7 +29365,7 @@ CMD:alarm(playerid,cmdtext[]) //TODO
 						MoveDynamicObject(bramaAlarmu[3], 1449.86377, -1807.49780, 79.68960, 5,   0.00000, 90.00000, 90.00000);
 						//Inne
 						DMV_ALARM = 1;
-						foreach(Player, i)
+						foreach(new i : Player)
 						{
 							if(GetPlayerVirtualWorld(playerid) == 50)
 							{
@@ -29906,7 +29906,7 @@ CMD:zapytaj(playerid, p[])
         sendTipMessageEx(playerid, COLOR_YELLOW, "Wys³ano zapytanie do pomocy. Proszê czekaæ cierpliwie na odpowiedŸ :)");
         SetPVarInt(playerid, "active_ticket", id+1);
 
-        foreach(Player, i)
+        foreach(new i : Player)
             if(GetPVarInt(i, "support_duty") == 1)
                 SendClientMessage(i, COLOR_GREEN, "SUPPORT: {FFFFFF}Nowe zg³oszenie o pomoc.");
     }
@@ -29923,7 +29923,7 @@ CMD:togname(playerid)
 
         MSGBOX_Show(playerid, "Imiona ~g~ON", MSGBOX_ICON_TYPE_OK);
 
-        foreach(Player, i)
+        foreach(new i : Player)
             ShowPlayerNameTagForPlayer(playerid, i, 1);
     }
     else
@@ -29932,7 +29932,7 @@ CMD:togname(playerid)
 
         MSGBOX_Show(playerid, "Imiona ~r~OFF", MSGBOX_ICON_TYPE_OK);
 
-        foreach(Player, i)
+        foreach(new i : Player)
             ShowPlayerNameTagForPlayer(playerid, i, 0);
 
     }

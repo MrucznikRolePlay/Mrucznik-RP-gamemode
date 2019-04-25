@@ -673,7 +673,7 @@ stock Car_Unspawn(v, bool:playercall=false)
     {
         new lOwner = CarData[VehicleUID[v][vUID]][c_Owner], bool:lExist=false;
         new keys = CarData[VehicleUID[v][vUID]][c_Keys];
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(PlayerInfo[i][pUID] == 0) continue;
             if(PlayerInfo[i][pUID] == lOwner || PlayerInfo[i][pUID] == keys)

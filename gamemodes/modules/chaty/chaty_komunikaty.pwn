@@ -109,7 +109,7 @@ stock GetFractionColor(fraction)
 stock sendFractionMessageToAll(playerid, text[])
 {
 	new sContent[256];
-	foreach(Player, i) 
+	foreach(new i : Player) 
 	{
 		if(GetPVarInt(i, "TOG_frakcja_info") == 0)
 		{

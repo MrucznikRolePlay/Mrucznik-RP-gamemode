@@ -251,7 +251,7 @@ stock KickPlayerTXD(playerid, adminid, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -267,7 +267,7 @@ stock AJPlayerTXD(playerid, adminid, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -283,7 +283,7 @@ stock BPPlayerTXD(playerid, adminid, timeVal, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -299,7 +299,7 @@ stock BanPlayerTXD(playerid, adminid, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -316,7 +316,7 @@ stock WarnPlayerTXD(playerid, adminid, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -332,7 +332,7 @@ stock BlockPlayerTXD(playerid, adminid, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -350,7 +350,7 @@ stock PWarnPlayerTXD(player[], adminid, result[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -422,7 +422,7 @@ stock PBlockPlayerTXD(player[], adminid, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -440,7 +440,7 @@ stock PBanPlayerTXD(player[], adminid, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -458,7 +458,7 @@ stock PAJPlayerTXD(player[], adminid, timeVal, reason[])
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(togADMTXD[i] == 1)
 		{
@@ -638,7 +638,7 @@ CMD:admini(playerid)
 		new string[128]; 
 		SendClientMessage(playerid, -1, "Lista administratorów na s³u¿bie:"); 
 		SendClientMessage(playerid, -1, " "); 
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(GetPlayerAdminDutyStatus(i) == 1)
 			{
@@ -899,7 +899,7 @@ CMD:zapiszkonta(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{
-        foreach(Player, i) MruMySQL_SaveAccount(i);
+        foreach(new i : Player) MruMySQL_SaveAccount(i);
     	SendClientMessageToAll(COLOR_WHITE, "Wszystkie konta zosta³y zapisane");
 	}
 	return 1;
@@ -1489,7 +1489,7 @@ CMD:czyjtonumer(playerid, params[])
 		}
 		else
 		{
-			foreach(Player, i)
+			foreach(new i : Player)
 			{
 				if(PlayerInfo[i][pPnumber] == number)
 				{
@@ -1579,7 +1579,7 @@ CMD:hpall(playerid)
         {
         	format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", sendername);
     		SendClientMessageToAll(COLOR_LIGHTGREEN, string);
-            foreach(Player, i)
+            foreach(new i : Player)
 			{
 			    if(IsPlayerConnected(i))
 			    {
@@ -1607,7 +1607,7 @@ CMD:killall(playerid)
         if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
             format(string, 128, "Administrator %s [ID: %d] zabi³ wszystkich graczy.", sendername, playerid);
-            foreach(Player, i)
+            foreach(new i : Player)
 			{
 			    if(IsPlayerConnected(i))
 			    {
@@ -2986,7 +2986,7 @@ CMD:respawncar(playerid, params[])
     if(!(0 < v < MAX_VEHICLES)) return 1;
     if(GetVehicleModel(v) == 0) return sendErrorMessage(playerid, "Niepoprawne ID pojazdu.");
     new bool:used=false;
-    foreach(Player, p)
+    foreach(new p : Player)
 	{
 		if(GetPlayerVehicleID(p) == v)
 		{
@@ -3130,7 +3130,7 @@ CMD:KickEx_all(playerid)
 		SendClientMessageToAll(COLOR_RED, string);
 		printf(string);
 
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			SendClientMessage(playerid, COLOR_WHITE,"*$AdmCmd$*: zkickowales wszystkich graczy!");
 			KickEx(i);
@@ -3489,7 +3489,7 @@ CMD:msgbox(playerid, params[])
         if(!(0 < time < 60)) return SendClientMessage(playerid, COLOR_GRAD1, " Czas od 1 do 60s");
         if(forplayer == -1)
         {
-            foreach(Player, i) MSGBOX_Show(i, title, icon, time, true);
+            foreach(new i : Player) MSGBOX_Show(i, title, icon, time, true);
         }
         else MSGBOX_Show(forplayer, title, icon, time, true);
     }
@@ -4112,7 +4112,7 @@ CMD:clearzone(playerid, p[])
         new str[64];
         format(str, 64, "UPDATE `mru_strefy` SET `gang`='0' WHERE `id`='%d'", id);
         mysql_query(str);
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             GangZoneHideForPlayer(i, id);
             GangZoneShowForPlayer(i, id, 0xC6E2F144);
@@ -4136,7 +4136,7 @@ CMD:setzonecontrol(playerid, p[])
         new org;
         if(frac > 100) org = orgID(frac-100);
 
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(frac == FRAC_GROOVE)
             {
@@ -4197,7 +4197,7 @@ CMD:cziterzy(playerid, params[])
     {
     	new str[128];
     	SendClientMessage(playerid, -1, "Potencjalna lista cziterów:");
-    	foreach(Player, i)
+    	foreach(new i : Player)
     	{
         	if(GetPVarInt(i, "AC-warn") > 1)
         	{
@@ -4214,7 +4214,7 @@ CMD:cziterzy(playerid, params[])
     new czity = 0;
     new string[1500];
     if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1) {
-        foreach(Player, i) {
+        foreach(new i : Player) {
             if(GetPVarInt(i, "AC-warn") > 1) {
                 format(string, sizeof(string), "%s[AC] %s (ID: %d)\n", string, GetNick(i), i);
                 czity++;
@@ -4290,7 +4290,7 @@ CMD:restart(playerid)
 			new playerNick[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, playerNick, sizeof(playerNick));
 			format(string, sizeof(string), "%s zarz¹dzi³ restart serwera! Trwa próba ponownego po³¹czenia", playerNick);
-			foreach(Player, i)
+			foreach(new i : Player)
 			{
 				sendErrorMessage(i, string);
 			}
@@ -4561,7 +4561,7 @@ CMD:wylogujall(playerid)
             new str[128];
             format(str, 128, "* Admin %s wylogowa³ WSZYSTKICH!!", GetNick(playerid));
             StatsLog(str);
-            foreach(Player, i)
+            foreach(new i : Player)
             {
     			if(IsPlayerConnected(i))
     			{
@@ -4594,7 +4594,7 @@ CMD:cnn(playerid, params[])
 		//
 		format(string, sizeof(string), "~b~%s: ~w~%s",sendername,params);
         if(!issafefortextdraw(string)) return sendErrorMessage(playerid, "Niekompletny tekst (tyldy etc)");
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(IsPlayerConnected(i))
 			{
@@ -4630,7 +4630,7 @@ CMD:cnnn(playerid, params[])
 		new string[128];
 		format(string, sizeof(string), "~w~%s",result);
         if(!issafefortextdraw(string)) return sendErrorMessage(playerid, "Niekompletny tekst (tyldy etc)");
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(IsPlayerConnected(i) == 1)
 			{
@@ -4953,7 +4953,7 @@ CMD:tod(playerid, params[])
 			{
 				iloscInne[playerid] = iloscInne[playerid]+1;
 			}
-			foreach(Player, i)//Je¿eli gracze s¹ w intkach 
+			foreach(new i : Player)//Je¿eli gracze s¹ w intkach 
 			{
 				if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
 				{
@@ -5187,7 +5187,7 @@ CMD:clearwlall(playerid)
     {
 		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
-			foreach(Player, i)
+			foreach(new i : Player)
 			{
 				PoziomPoszukiwania[i] = 0;
 				PlayerInfo[i][pWL] = 0;
@@ -6342,7 +6342,7 @@ CMD:tp(playerid, params[])
 				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL))
 				{
 					new bool:liczydelko=false;
-					foreach(Player, i)
+					foreach(new i : Player)
 					{
 						if(IsPlayerConnected(i))
 						{
@@ -6435,7 +6435,7 @@ CMD:goto(playerid, params[])
 					//SZUKANIE ADMINOW I P@ na serwerze
 
 					new bool:liczydelko=false;
-					foreach(Player, i)
+					foreach(new i : Player)
 					{
 						if(IsPlayerConnected(i))
 						{
@@ -6986,7 +6986,7 @@ CMD:fixallveh(playerid)
             noAccessMessage(playerid);
             return 1;
         }
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(IsPlayerInAnyVehicle(playerid))
             {
@@ -7032,7 +7032,7 @@ CMD:pogodaall(playerid, params[])
 			{
 				iloscInne[playerid] = iloscInne[playerid]+1;
 			}
-			foreach(Player, i)//Je¿eli gracze s¹ w intkach 
+			foreach(new i : Player)//Je¿eli gracze s¹ w intkach 
 			{
 				if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
 				{
@@ -7326,7 +7326,7 @@ CMD:glosowanie(playerid, params[])
 			format(string, sizeof(string), "Zmienna po przeliczeniu to %d", (timeValue*60000));
 			sendTipMessage(playerid, string); 
 			SetTimer("glosuj_admin_ankieta", (timeValue*60000), false);
-			foreach(Player, i)
+			foreach(new i : Player)
 			{
 				SetPVarInt(i, "glosowal_w_ankiecie", 0);
 			}

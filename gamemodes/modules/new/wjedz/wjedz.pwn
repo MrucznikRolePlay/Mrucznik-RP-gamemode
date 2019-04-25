@@ -164,7 +164,7 @@ stock SprawdzWjazdy(playerid)
 					return 1;
 				}
 			}
-			foreach(Player, i2)
+			foreach(new i2 : Player)
 			{
 				if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
 				{
@@ -190,7 +190,7 @@ stock SprawdzWjazdy(playerid)
 				sendTipMessage(playerid, "U¿yj /wejdz"); 
 				return 1;
 			}
-			foreach(Player, i2)
+			foreach(new i2 : Player)
 			{
 				if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
 				{

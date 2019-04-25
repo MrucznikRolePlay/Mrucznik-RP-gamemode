@@ -190,7 +190,7 @@ CMD:adminduty(playerid, params[])
 						//Symbole i znaki specjalne
 						if(SprawdzZnaki(params) ==  0)
 						{
-							foreach(Player, i)
+							foreach(new i : Player)
 							{
 								//if(strfind(GetNick(i), AdminName, true) != -1)
 								if(strfind(GetNick(i), adminNameDuo) == -1)

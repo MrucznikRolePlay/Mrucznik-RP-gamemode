@@ -63,7 +63,7 @@ CMD:id(playerid, params[])
 		new c = 0;
 		new nick[MAX_PLAYER_NAME];
 
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(c >= 10) break;
 

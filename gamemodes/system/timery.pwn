@@ -992,14 +992,14 @@ public Spectator()
 	{
         new Float:x, Float:y, Float:z;
 		GetPlayerPos(PDGPS, x, y, z);
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
 				SetPlayerCheckpoint(i, x, y, z, 4.0);
 		}
 	}
 
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
         if(!IsPlayerConnected(i)) continue;
 
@@ -1980,7 +1980,7 @@ public SyncTime()
 
 public SaveAccounts()
 {
-    foreach(Player, i)
+    foreach(new i : Player)
 	{
 		if(PlayerInfo[i][pJob] > 0)
 		{
@@ -1995,7 +1995,7 @@ public SaveAccounts()
 
 public Production()
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(PlayerInfo[i][pFishes] >= 5) { if(FishCount[i] >= 3) { PlayerInfo[i][pFishes] = 0; } else { FishCount[i] += 1; } }
 		if(PlayerDrunk[i] > 0) { PlayerDrunkTime[i] = 0; GameTextForPlayer(i, "~p~Jestes mniej pijany~n~~r~Pijaku", 3500, 1); }
@@ -2010,7 +2010,7 @@ public Production()
 public CustomPickups()
 {
 	new mystate;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
         mystate = GetPlayerState(i);
 		if (IsPlayerInRangeOfPoint(i, 2.0, 1173.2563,-1323.3102,15.3943))
@@ -2265,7 +2265,7 @@ public CustomPickups()
 
 public IdleKick()
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(PlayerInfo[i][pAdmin] < 1 || PlayerInfo[i][pNewAP] < 1)
 		{
@@ -2285,7 +2285,7 @@ public IdleKick()
 forward RPGTimer();
 public RPGTimer()
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 	    if(!IsPlayerConnected(i)) continue;
 		new rpggun;
@@ -2328,7 +2328,7 @@ public JednaSekundaTimer()
 	    EndingKartRound = 1;
 	}
 
-    foreach(Player, i)
+    foreach(new i : Player)
 	{
         if(!IsPlayerConnected(i)) continue;
         State = GetPlayerState(i);
@@ -3318,7 +3318,7 @@ public JednaSekundaTimer()
 public CheckGas()
 {
 	new string[128], vehicle, engine,lights,alarm,doors,bonnet,boot,objective;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(GetPlayerState(i) == PLAYER_STATE_DRIVER)
 		{
@@ -3356,7 +3356,7 @@ public CheckGas()
 public Fillup()
 {
     new VID, FillUp, string[128];
-	foreach(Player, i)
+	foreach(new i : Player)
    	{
 		VID = GetPlayerVehicleID(i);
 		if(Gas[VID] <= 100) FillUp = GasMax - Gas[VID];
@@ -3387,7 +3387,7 @@ public Fillup()
 public CarCheck()
 {
 	new string[128], lTime = gettime();
-	foreach(Player, j)
+	foreach(new j : Player)
 	{
         if(kaska[j] < 0)
 		{
@@ -3434,7 +3434,7 @@ public CarCheck()
 public GangZone_Process()
 {
     new Float:x, Float:y, Float:z;
-    foreach(Player, i)
+    foreach(new i : Player)
     {
         GetPlayerPos(i, x, y, z);
         for(new g=0;g<MAX_ZONES;g++) //zone loop
@@ -3462,7 +3462,7 @@ public GangZone_Process()
 forward GangZone_ShowInfoToParticipants();
 public GangZone_ShowInfoToParticipants() {
     new string[60];
-    foreach(Player, i) {
+    foreach(new i : Player) {
         new frac = GetPlayerFraction(i);
         if(frac == 0) frac = GetPlayerOrg(i);
         new pzone = GetPVarInt(i, "zoneid");

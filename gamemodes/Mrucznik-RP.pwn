@@ -1277,7 +1277,7 @@ public OnPlayerDisconnect(playerid, reason)
 
     if(PDGPS == playerid)
     {
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
             {
@@ -1292,7 +1292,7 @@ public OnPlayerDisconnect(playerid, reason)
 	    new sendername[MAX_PLAYER_NAME];
 	    GetPlayerName(playerid, sendername, sizeof(sendername));
 	    format(string, sizeof(string), "Wyœcig: {FFFFFF}%s wyszed³ z gry", sendername);
-    	foreach(Player, i)
+    	foreach(new i : Player)
     	{
 	    	if(ScigaSie[i] == Scigamy)
  	    	{
@@ -1328,7 +1328,7 @@ public OnPlayerDisconnect(playerid, reason)
     TextDrawHideForPlayer(playerid, TXD_Info);
 
 	//Komunikaty dla graczy na serwerze:
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 	    if(IsPlayerConnected(i) && i != playerid)
 	    {
@@ -1676,7 +1676,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 				{
 					PaintballWinner = killerid;
 					PaintballWinnerKills = PlayerPaintballKills[killerid];
-					foreach(Player, i)
+					foreach(new i : Player)
 					{
 						if(IsPlayerConnected(i))
 						{
@@ -4107,7 +4107,7 @@ public OnPlayerEnterCheckpoint(playerid)
 	    if(FirstKartWinner == 999)
 	    {
 	        FirstKartWinner = playerid;
-	        foreach(Player, i)
+	        foreach(new i : Player)
 	        {
 	            if(IsPlayerConnected(i))
 	            {
@@ -4122,7 +4122,7 @@ public OnPlayerEnterCheckpoint(playerid)
 	    else if(SecondKartWinner == 999)
 	    {
 	        SecondKartWinner = playerid;
-	        foreach(Player, i)
+	        foreach(new i : Player)
 	        {
 	            if(IsPlayerConnected(i))
 	            {
@@ -4137,7 +4137,7 @@ public OnPlayerEnterCheckpoint(playerid)
 	    else if(ThirdKartWinner == 999)
 	    {
 	        ThirdKartWinner = playerid;
-	        foreach(Player, i)
+	        foreach(new i : Player)
 	        {
 	            if(IsPlayerConnected(i))
 	            {
@@ -4413,7 +4413,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 		        else
 		        {
 		        	format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s wygra³ wyœcig %s", GetNick(playerid, true), Wyscig[Scigamy][wNazwa]);
-		        	foreach(Player, i)
+		        	foreach(new i : Player)
 		        	{
 		        	    if(ScigaSie[i] == Scigamy && i != playerid)
 		        	    {
@@ -4808,7 +4808,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	    new name[MAX_PLAYER_NAME];
 	    GetPlayerName(playerid, name, sizeof(name));
 	    new vehicleid = GetPlayerVehicleID(playerid);
-	    foreach(Player, i)
+	    foreach(new i : Player)
 	    {
 			if(IsPlayerInVehicle(i, vehicleid) && GetPlayerState(i) == 2 && TransportDuty[i] > 0)
 			{
@@ -4864,7 +4864,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    new price = PoziomPoszukiwania[playerid] * 500;
 		    new price2 = PoziomPoszukiwania[playerid] * 1000;
 			new count;
-			foreach(Player, i)
+			foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))
 				{
@@ -5582,7 +5582,7 @@ public OnGameModeExit()
 
         INT_AirTowerLS_Exit(i, true, true);
     }
-    foreach(Player, i)
+    foreach(new i : Player)
     {
         if(noclipdata[i][cameramode] == CAMERA_MODE_FLY) CancelFlyMode(i);
         MruMySQL_SaveAccount(i, true, true);
@@ -5603,7 +5603,7 @@ PayDay()
 	new string[128], account,interest,playername2[MAX_PLAYER_NAME],
         tmpintrate, checks, ebill;
 
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -5786,7 +5786,7 @@ PayDay()
 	}
 	else if(shifthour == 4)
 	{
-	    foreach(Player, i)
+	    foreach(new i : Player)
 		{
 			Kick(i);
 		}
@@ -6355,7 +6355,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
             TRAIN_HornTimer=0;
             SetPVarInt(playerid, "horn", 0);
 
-			foreach(Player, i)
+			foreach(new i : Player)
             {
                 if(GetPVarInt(i, "train-horn") == 1)
                 {
@@ -6672,7 +6672,7 @@ public OnVehicleDeath(vehicleid, killerid)
 	#endif
 	if(GetVehicleModel(vehicleid) == 577)
 	{
-        foreach(Player, i)
+        foreach(new i : Player)
 		{
 			if(PlayerInfo[i][pWsamolocieLS]==1)
 			{
@@ -7223,7 +7223,7 @@ public OnPlayerText(playerid, text[])
 		else if ((strcmp("Ranks", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("Ranks")) || (strcmp("Rangi", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("Rangi")))
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "|__________________ Rangi Hitmanów __________________|");
-		    foreach(Player, i)
+		    foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))
 				{

@@ -312,7 +312,7 @@ public OznaczCzitera(playerid)
 {
 	new string[32];
 	SendClientMessage(playerid, COLOR_RED, "Lista cziterów u których wykryto s0beita:");
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(GetPVarInt(i, "AC_oznaczony") == 1)
 		{
@@ -335,7 +335,7 @@ stock IsAValidURL(string[])
 stock GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerInVehicle(i,vehicleid))
 		{
@@ -674,7 +674,7 @@ public StartPaintball()
 	StartingPaintballRound = 0;
 	PaintballWinner = 999;
 	PaintballWinnerKills = 0;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 	    if(IsPlayerConnected(i))
 	    {
@@ -696,7 +696,7 @@ public StartPaintball()
 
 public PreparePaintball()
 {
-    foreach(Player, i)
+    foreach(new i : Player)
 	{
 		if(PlayerPaintballing[i] != 0)
 		{
@@ -750,7 +750,7 @@ stock MruTitle(text[])
 
 public PlayerFixRadio2()
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(Fixr[i])
 		{
@@ -775,7 +775,7 @@ public CountDown()
 		SendClientMessageToAll(COLOR_PANICRED, "|___Nast¹pi³ respawn nieu¿ywanych pojazdów___|");
 		Count = 20;
 		new bool:used[CAR_AMOUNT] = {false, ... };
-		foreach(Player, p)
+		foreach(new p : Player)
 		{
 			if(IsPlayerInAnyVehicle(p))
 			{
@@ -1261,7 +1261,7 @@ return 1;
 public Odlicz(wyscig){
 if(Wodliczanie == 3)
 {
-    foreach(Player, i)
+    foreach(new i : Player)
    	{
     	if(ScigaSie[i] == wyscig)
 	    {
@@ -1277,7 +1277,7 @@ if(Wodliczanie == 3)
 else
 {
     new string[12];
-    foreach(Player, i)
+    foreach(new i : Player)
    	{
     	if(ScigaSie[i] == wyscig)
 	    {
@@ -1305,7 +1305,7 @@ KoniecWyscigu(playerid)
 
 	WyscigMessage(COLOR_YELLOW, string);
 
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(ScigaSie[i] != 666)
 		{
@@ -1412,12 +1412,12 @@ return 1;
 
 public TablicaWynikow(playerid)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerInRangeOfPoint(i, 500, -1106.9854, -966.4719, 129.1807))
 		{
 			SendClientMessage(i, COLOR_LIGHTGREEN, "Tabela wyników:");
-            foreach(Player, di)
+            foreach(new di : Player)
 			{
 			    if(zawodnik[di] == 1)
 			    {
@@ -1671,7 +1671,7 @@ stock GetNumber(playerid)
 
 stock FindPlayerByNumber(number)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(PlayerInfo[i][pPnumber] == number)
 			return i;
@@ -1980,7 +1980,7 @@ SetWeatherEx(id)
     if(!(1 < id < 21) || id == 11 || id == 19) return 1;
 	SetWeather(id);
 	ServerWeather = id;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(GetPlayerVirtualWorld(i) == 0 && GetPlayerInterior(i) == 0)
 		{
@@ -2071,7 +2071,7 @@ SearchingHit(playerid)
 	new string[256];
 	new giveplayer[MAX_PLAYER_NAME];
 	new searchhit = 0;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -2114,7 +2114,7 @@ public PaintballEnded()//nowe domy biznes wa¿ne
 {
 	new string[256];
 	new name[MAX_PLAYER_NAME];
-    foreach(Player, i)
+    foreach(new i : Player)
 	{
 	    if(IsPlayerConnected(i))
 	    {
@@ -2140,7 +2140,7 @@ public PaintballEnded()//nowe domy biznes wa¿ne
 
 StartZuzling()
 {
-    foreach(Player, i)
+    foreach(new i : Player)
 	{
 	    if(IsPlayerConnected(i))
 	    {
@@ -2158,7 +2158,7 @@ StartZuzling()
 DollahScoreUpdate()
 {
 	new LevScore;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		LevScore = PlayerInfo[i][pLevel];
 		SetPlayerScore(i, LevScore);
@@ -2432,7 +2432,7 @@ IsANoA(playerid)
 
 IsAWyscigOrganizowany()
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(owyscig[i] != 666)
 		{
@@ -2444,7 +2444,7 @@ IsAWyscigOrganizowany()
 
 IsAWyscigTworzony()
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(tworzenietrasy[i] != 666)
 		{
@@ -4481,7 +4481,7 @@ Lotto(number)
 	new winner[MAX_PLAYER_NAME];
 	format(string, sizeof(string), "Totolotek: Wygra³a liczba: %d.", number);
     OOCOff(COLOR_WHITE, string);
-    foreach(Player, i)
+    foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -4708,7 +4708,7 @@ stock Log(plik[], text[])
 
 stock SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		SetPlayerCheckpoint(i,allx,ally,allz, radi);
 		if (num != 255)
@@ -4721,7 +4721,7 @@ stock SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num
 
 stock SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(gTeam[i] == 2)
 		{
@@ -4733,7 +4733,7 @@ stock SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
 
 stock LockCar(carid)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		SetVehicleParamsForPlayer(carid,i,0,1);
 	}
@@ -4741,7 +4741,7 @@ stock LockCar(carid)
 
 stock UnLockCar(carid)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		SetVehicleParamsForPlayer(carid,i,0,0);
 	}
@@ -4874,7 +4874,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			{
 				format(wantedmes, sizeof(wantedmes), "Posiadany Wanted Level: %d", PoziomPoszukiwania[playerid]);
 				SendClientMessage(playerid, COLOR_YELLOW, wantedmes);
-				foreach(Player, i)
+				foreach(new i : Player)
 				{
 					if(IsPlayerConnected(i))
 					{
@@ -5456,7 +5456,7 @@ stock orgIsLeader(playerid)
 GetFractionMembersNumber(fractionid, bool:withOnDutyCheck)
 {
 	new membersNumber;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(PlayerInfo[i][pMember] == fractionid || PlayerInfo[i][pLider] == fractionid)
 		{
@@ -7564,7 +7564,7 @@ BroadCast(color,const string[])
 
 stock enjoter(color,const string[], level)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7590,7 +7590,7 @@ stock enjoter(color,const string[], level)
 
 DeWu(const string[], level)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7608,7 +7608,7 @@ DeWu(const string[], level)
 
 ABroadCast(color,const string[],level)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7632,7 +7632,7 @@ ABroadCast(color,const string[],level)
 
 ABroadCast2(color,const string[],level)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7656,7 +7656,7 @@ ABroadCast2(color,const string[],level)
 
 OOCOff(color,const string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7670,7 +7670,7 @@ OOCOff(color,const string[])
 
 OOCNewbie(const string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7684,7 +7684,7 @@ OOCNewbie(const string[])
 
 /*OOCOgloszenie(color,const string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7698,7 +7698,7 @@ OOCNewbie(const string[])
 
 OOCNews(color,const string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7713,7 +7713,7 @@ OOCNews(color,const string[])
 
 SendTeamMessage(team, color, string[], isDepo = 0)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7735,7 +7735,7 @@ SendTeamMessage(team, color, string[], isDepo = 0)
 
 SendRadioMessage(member, color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7759,7 +7759,7 @@ SendRadioMessage(member, color, string[])
 
 SendLeaderRadioMessage(member, color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7773,7 +7773,7 @@ SendLeaderRadioMessage(member, color, string[])
 
 SendJobMessage(job, color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7787,7 +7787,7 @@ SendJobMessage(job, color, string[])
 
 SendNewFamilyMessage(family, color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(GetPlayerOrg(i) == family)
 		{
@@ -7801,7 +7801,7 @@ SendNewFamilyMessage(family, color, string[])
 
 WyscigMessage(color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(ScigaSie[i] != 666)
 		{
@@ -7812,7 +7812,7 @@ WyscigMessage(color, string[])
 
 SendFamilyMessage(family, color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7829,7 +7829,7 @@ SendFamilyMessage(family, color, string[])
 
 SendTajniakMessage(family, color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7846,7 +7846,7 @@ SendTajniakMessage(family, color, string[])
 
 SendIRCMessage(channel, color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -7860,7 +7860,7 @@ SendIRCMessage(channel, color, string[])
 
 SendSMSMessageToAll(senderNumber, message[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(PlayerInfo[i][pPnumber] != 0)
 		{
@@ -8077,7 +8077,7 @@ ZerujKontakty(playerid)
 
 SendAdminMessage(color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -8091,7 +8091,7 @@ SendAdminMessage(color, string[])
 
 SendCommandLogMessage(string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 	    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1)
 	    {
@@ -8102,7 +8102,7 @@ SendCommandLogMessage(string[])
 
 SendPunishMessage(string[], playerid=INVALID_PLAYER_ID)
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(GetPVarInt(i, "togadmincmd") == 0) SendClientMessage(i, COLOR_LIGHTRED, string);
         else if(playerid == i) SendClientMessage(i, COLOR_LIGHTRED, string);
@@ -8111,7 +8111,7 @@ SendPunishMessage(string[], playerid=INVALID_PLAYER_ID)
 
 SendZGMessage(color, string[])
 {
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -8147,7 +8147,7 @@ ProxDetector(Float:radi, playerid, string[],col1,col2,col3,col4,col5)
 		new Float:tempposx, Float:tempposy, Float:tempposz;
 		GetPlayerPos(playerid, oldposx, oldposy, oldposz);
 		//radi = 2.0; //Trigger Radius
-		foreach(Player, i)
+		foreach(new i : Player)
 		{
 			if(IsPlayerConnected(i))
 			{
@@ -8215,7 +8215,7 @@ PolicjantWStrefie(Float:radi, playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    foreach(Player, i)
+	    foreach(new i : Player)
 		{
 		    new Float:rangex, Float:rangey, Float:rangez;
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
@@ -8257,7 +8257,7 @@ ProxDetectorW(Float:radi, Float:Pozy_X, Float:Pozy_Y, Float:Pozy_Z, ColorW, Wiad
 {
 	new Float:Pozycja_Xx, Float:Pozycja_Yy, Float:Pozycja_Zz;
 	new Float:tempposx, Float:tempposy, Float:tempposz;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
         GetPlayerPos(i, Pozycja_Xx, Pozycja_Yy, Pozycja_Zz);
         tempposx = (Pozycja_Xx - Pozy_X);
@@ -8300,7 +8300,7 @@ VehicleToPoint(Float:radi, vehicleid, Float:x, Float:y, Float:z)
 stock IsVehicleInUse(vehicleid)
 {
 	new temp;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(GetPlayerVehicleID(i)==vehicleid)
 		{
@@ -8889,7 +8889,7 @@ stock ElevatorTravel(playerid, Float:x, Float:y, Float:z, vw, Float:face)
 
     if(!ElevatorVar) ElevatorVar=true;
 
-    foreach(Player, i)
+    foreach(new i : Player)
     {
         if(pvw == GetPlayerVirtualWorld(i) && IsPlayerInRangeOfPoint(i, 2.0, px, py, pz))
         {
@@ -8990,7 +8990,7 @@ stock LoadServerInfo()
             strins(ServerInfo, "\t", lPos);
             lPos++;
         }
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(gPlayerLogged[i] == 1) TextDrawShowForPlayer(i, TXD_Info);
         }
@@ -9831,7 +9831,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
     {
         if(defender > 100) //gang-gang
         {
-            foreach(Player, i)
+            foreach(new i : Player)
             {
                 if(GetPlayerOrg(i) == attacker-100)
                 {
@@ -9850,7 +9850,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
         }
         else
         {
-            foreach(Player, i) //gang-frac
+            foreach(new i : Player) //gang-frac
             {
                 if(GetPlayerOrg(i) == attacker-100)
                 {
@@ -9872,7 +9872,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
     {
         if(defender > 100) //frac - gang
         {
-            foreach(Player, i)
+            foreach(new i : Player)
             {
                 if(GetPlayerFraction(i) == attacker)
                 {
@@ -9891,7 +9891,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
         }
         else
         {
-            foreach(Player, i) //frac - frac
+            foreach(new i : Player) //frac - frac
             {
                 if(GetPlayerFraction(i) == attacker)
                 {
@@ -9969,7 +9969,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
 
         ZoneControl[zoneid] = attacker;
         new thisorg = orgID(ZoneControl[zoneid]-100);
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(ZoneControl[zoneid] == FRAC_GROOVE)
             {
@@ -10002,7 +10002,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
         {
             if(defender > 100) //gang-gang
             {
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(GetPlayerOrg(i) == attacker-100)
                     {
@@ -10016,7 +10016,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
             }
             else
             {
-                foreach(Player, i) //gang-frac
+                foreach(new i : Player) //gang-frac
                 {
                     if(GetPlayerOrg(i) == attacker-100)
                     {
@@ -10033,7 +10033,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
         {
             if(defender > 100) //frac - gang
             {
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(GetPlayerFraction(i) == attacker)
                     {
@@ -10047,7 +10047,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
             }
             else
             {
-                foreach(Player, i) //frac - frac
+                foreach(new i : Player) //frac - frac
                 {
                     if(GetPlayerFraction(i) == attacker)
                     {
@@ -10068,7 +10068,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
         {
             if(defender > 100) //gang-gang
             {
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(GetPlayerOrg(i) == attacker-100)
                     {
@@ -10082,7 +10082,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
             }
             else
             {
-                foreach(Player, i) //gang-frac
+                foreach(new i : Player) //gang-frac
                 {
                     if(GetPlayerOrg(i) == attacker-100)
                     {
@@ -10099,7 +10099,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
         {
             if(defender > 100) //frac - gang
             {
-                foreach(Player, i)
+                foreach(new i : Player)
                 {
                     if(GetPlayerFraction(i) == attacker)
                     {
@@ -10113,7 +10113,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
             }
             else
             {
-                foreach(Player, i) //frac - frac
+                foreach(new i : Player) //frac - frac
                 {
                     if(GetPlayerFraction(i) == attacker)
                     {
@@ -10230,7 +10230,7 @@ stock Zone_CheckPossToAttack(playerid, zoneid)
     if(ZoneControl[zoneid] == 0) //neutralne
     {
         new org = GetPlayerFraction(playerid);
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(GetPVarInt(i, "zoneid") == zoneid)
             {
@@ -10264,7 +10264,7 @@ stock Zone_CheckPossToAttack(playerid, zoneid)
         if(zonec == org || zonec-100 == fam) return false;
         new Float:x, Float:y, Float:z;
         GetPlayerPos(playerid, x, y, z);
-        foreach(Player, i)
+        foreach(new i : Player)
         {
             if(zonec > 100)
             {
@@ -11440,7 +11440,7 @@ stock Oil_Destroy(lID)
     DestroyDynamicObject(OilData[lID][oilObject]);
     DestroyDynamicArea(OilData[lID][oilArea]);
 
-    foreach(Player, i)
+    foreach(new i : Player)
     {
         if(GetPVarInt(i, "oil_clear") != 1) continue;
         if(GetPVarInt(i, "oil_id") != lID) continue;
@@ -11460,7 +11460,7 @@ stock Oil_Destroy(lID)
 stock areThereAnyAdminsOrPolAdmins()
 {
 	new bool:liczydelko=false;
-	foreach(Player, i)
+	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
@@ -12505,7 +12505,7 @@ stock Support_ClearTicket(id)
     TICKET[id][suppValid] = false;
     SetPVarInt(TICKET[id][suppCaller], "active_ticket", 0);
 
-    foreach(Player, i)
+    foreach(new i : Player)
         if(GetPVarInt(i, "support_dialog") == 1)
             Support_ShowTickets(i);
     return 1;

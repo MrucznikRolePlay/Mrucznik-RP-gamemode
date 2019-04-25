@@ -65,18 +65,18 @@ public FabrykaActor_ReCreate()
 
 	new Float:ActorX, Float:ActorY, Float:ActorZ;
 
-	new Random = random(sizeof(FabrykaMats::ActorPos));
+	new rand = random(sizeof(FabrykaMats::ActorPos));
 
-	ActorX = FabrykaMats::ActorPos[Random][0];
-	ActorY = FabrykaMats::ActorPos[Random][1];
-	ActorZ = FabrykaMats::ActorPos[Random][2];
+	ActorX = FabrykaMats::ActorPos[rand][0];
+	ActorY = FabrykaMats::ActorPos[rand][1];
+	ActorZ = FabrykaMats::ActorPos[rand][2];
 
 	if(FabrykaMats::Actor != INVALID_ACTOR_ID)
 	{
 		DestroyActor(FabrykaMats::Actor);	
 	}
 
-	FabrykaMats::Actor = CreateActor(FabrykaMats::ActorSkins[random(sizeof(FabrykaMats::ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats::ActorPos[Random][3]);
+	FabrykaMats::Actor = CreateActor(FabrykaMats::ActorSkins[random(sizeof(FabrykaMats::ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats::ActorPos[rand][3]);
 
 	if(FabrykaMats::ActorLabel != Text3D:INVALID_3DTEXT_ID)
 	{
