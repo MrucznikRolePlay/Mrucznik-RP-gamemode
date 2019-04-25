@@ -46,7 +46,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <callbacks>
 #include <utils>
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include <YSI-Includes\YSI_Data\y_iterate>
+#include <YSI-Includes/YSI_Data\y_iterate>
 #include <izcmd>
 #include <md5>
 #include <double-o-files2>

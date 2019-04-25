@@ -37,8 +37,8 @@ install:
 script:
 - chmod +x CI_scripts/*
 - python3 CI_scripts/check_encoding.py gamemodes
-- sampctl package ensure --platform=linux 
-- sampctl package build --platform=linux 
+- sampctl package ensure 
+- sampctl package build 
 
 before_deploy:
 - echo "Before deploy"
