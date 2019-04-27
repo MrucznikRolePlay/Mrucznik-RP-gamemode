@@ -26,8 +26,6 @@
 #define DEF_ACDIST          70.0
 #define DEF_AC_PACKETPERCENT    6.0
 
-//TODO: Anty FlyHack w aucie
-
 //=================================[Variable]=================================//
 
 new bool:AC_AntiAB=true,

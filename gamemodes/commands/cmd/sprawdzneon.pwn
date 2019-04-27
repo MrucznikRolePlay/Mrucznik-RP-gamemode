@@ -48,7 +48,7 @@ YCMD:sprawdzneon(playerid, params[], help)
         if(GetDistanceBetweenPlayers(playerid,pid) > 5) return sendErrorMessage(playerid, "Jesteœcie od siebie zbyt daleko");
         new veh_id = GetPlayerVehicleID(pid);
         new cNeon = CarData[VehicleUID[veh_id][vUID]][c_Neon];
-        //TODO: cmd_me(playerid, "zagl¹da pod podwozie w poszukiwaniu neonów");
+        RunCommand(playerid, "/me", "zagl¹da pod podwozie w poszukiwaniu neonów");
         if(cNeon != 0)
         {
             if(cNeon == 18652)
