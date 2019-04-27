@@ -676,15 +676,15 @@ RunCommand(playerid, command[], params[])
 	return Command_ReProcess(playerid, sprintf("%s %s", command, params), false);
 }
 
-/*public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
 	#if DEBUG == 1
 		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
 	#endif
-	return 1;
+	return success;
 }
 
-public OnPlayerCommandReceived(playerid, cmdtext[])
+public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
 	#if DEBUG == 1
 		printf("%s wpisal komende %s", GetNick(playerid), cmdtext);
@@ -692,7 +692,7 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
-		return 0;
+		return COMMAND_DENIED;
 	}
     //if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)//antyspam
 	//{
@@ -702,8 +702,8 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
     if(IsCommandBlocked(cmdtext))
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
-        return 0;
+        return COMMAND_DISABLED;
     }
 	StaryCzas[playerid] = GetTickCount();
-	return 1;
-}*/
+	return success;
+}

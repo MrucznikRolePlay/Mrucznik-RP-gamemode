@@ -71,7 +71,7 @@ stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	if(dialogid==4193)
 	{
-		if( response == 0 ) return cmd_opis(playerid, "");
+		if( response == 0 ) return RunCommand(playerid, "/opis",  "");
 
 		if(strlen(inputtext) > 110) return sendTipMessage(playerid, "Zbyt d³uga wiadomoœæ");
 
@@ -224,7 +224,7 @@ COMMAND:usunopis(playerid, params[])
 
 #define CHANGELOG_MAIN		1
 
-COMMAND:zmiany(playerid, params[]) return cmd_changelog(playerid, params);
+COMMAND:zmiany(playerid, params[]) return RunCommand(playerid, "/changelog",  params);
 COMMAND:changelog(playerid, params[])
 {
 	showChangeLog(playerid);
@@ -1126,7 +1126,7 @@ stock noYsi_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 			case 5: ShowPodrecznik(playerid, HELP_WHATISRP);
 			case 6: ShowPodrecznik(playerid, HELP_PROFITYFORO);
 			case 7: ShowPodrecznik(playerid, HELP_MOREHELP);
-			case 9: cmd_pomoc2(playerid);
+			case 9: RunCommand(playerid, "/pomoc2", "");
 			default: ShowPodrecznik(playerid);
 		}
 	}
@@ -1241,8 +1241,8 @@ stock ShowPodrecznik(playerid, page=HELP_MAIN)
 }
 
 
-COMMAND:lkiz(playerid, params[]) return cmd_podrecznik(playerid, params);
-COMMAND:pomoc(playerid, params[]) return cmd_podrecznik(playerid, params);
+COMMAND:lkiz(playerid, params[]) return RunCommand(playerid, "/podrecznik",  params);
+COMMAND:pomoc(playerid, params[]) return RunCommand(playerid, "/podrecznik",  params);
 COMMAND:podrecznik(playerid, params[])
 {
 	ShowPodrecznik(playerid, HELP_MAIN);

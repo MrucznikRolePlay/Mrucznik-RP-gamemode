@@ -2194,7 +2194,7 @@ DollahScoreUpdate()
 	return 1;
 }
 
-stock right(source[], len)
+stock rightStr(source[], len)
 {
 	new retval[MAX_STRING2], srclen;
 	srclen = strlen(source);

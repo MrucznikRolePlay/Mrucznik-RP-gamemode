@@ -34,7 +34,7 @@ CMD:re(playerid, params[]) {
         if(!IsPlayerConnected(lastMsg[playerid])) return sendErrorMessage(playerid, "Tego gracza nie ma na serwerze!");
         new buf[177];
         format(buf, sizeof(buf), "%d %s", lastMsg[playerid], params);
-        return cmd_wiadomosc(playerid, buf);
+        return RunCommand(playerid, "/wiadomosc",  buf);
     }
     return 1;
 }

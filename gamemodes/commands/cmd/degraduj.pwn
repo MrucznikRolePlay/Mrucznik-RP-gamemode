@@ -52,7 +52,7 @@ CMD:degraduj(playerid, params[])
 
                         new str[32];
                         valstr(str, para1);
-                        cmd_zwolnij(playerid, str);
+                        RunCommand(playerid, "/zwolnij",  str);
 					}
 					else
 					{

@@ -61,7 +61,7 @@ CMD:kamizelka(playerid, params[])
                     sendTipMessageEx(playerid, COLOR_P@, "Zap³aci³eœ $10000 za kamizelkê - wpisz /dopasuj aby dopasowaæ."); 
                     format(string, sizeof(string), "* %s wyci¹ga z szafki i ubiera kamizelkê.", sendername);
                     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    cmd_dopasuj(playerid, "kamizelke");
+                    RunCommand(playerid, "/dopasuj",  "kamizelke");
                     SetPlayerArmour(playerid, 90);
                 }
                 else

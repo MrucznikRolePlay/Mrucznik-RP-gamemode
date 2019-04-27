@@ -172,7 +172,7 @@ CMD:panel(playerid, params[])
 				
 				new txt[64];
 				format(txt, sizeof(txt), "%d Panel /unwarn", id);
-				cmd_unwarn(playerid, txt);
+				RunCommand(playerid, "/unwarn",  txt);
 				return 1;
 			}
 			

@@ -97,7 +97,7 @@ stock FabrykaMats_ActorTalk(playerid)
 
 	if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ))
 	{
-		return cmd_materialy(playerid, "dostarcz");
+		return RunCommand(playerid, "/materialy",  "dostarcz");
 	}
 
 	return 1;

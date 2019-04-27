@@ -156,7 +156,7 @@ CMD:skill(playerid, params[])
 	}
 	else
 	{
-        return cmd_skill(playerid, "");
+        return RunCommand(playerid, "/skill",  "");
 	}
     return 1;
 }

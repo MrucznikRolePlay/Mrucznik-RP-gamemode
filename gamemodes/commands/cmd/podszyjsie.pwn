@@ -29,7 +29,7 @@
 */
 
 /*
-CMD:podszyj(playerid, params[]) return cmd_podszyjsie(playerid, params);
+CMD:podszyj(playerid, params[]) return RunCommand(playerid, "/podszyjsie",  params);
 CMD:podszyjsie(playerid, params[])
 {
     if(IsPlayerConnected(playerid))

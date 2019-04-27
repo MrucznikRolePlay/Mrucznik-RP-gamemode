@@ -43,6 +43,6 @@ CMD:resms(playerid, params[])
 	}
 	
 	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
-	return cmd_sms(playerid, string);
+	return RunCommand(playerid, "/sms",  string);
 }
 

@@ -151,7 +151,7 @@ CMD:akceptuj(playerid, params[])
 			GetPVarString(playerid, "wizytowka-nazwa", nazwa, sizeof(nazwa));
 			format(string, sizeof(string), "dodaj %d %s", PlayerInfo[dawacz][pPnumber], nazwa);
 			SetPVarInt(playerid, "wizytowka", -1);
-			cmd_kontakty(playerid, string);
+			RunCommand(playerid, "/kontakty",  string);
 		}
         else if(strcmp(x_job,"neon",true) == 0 || strcmp(x_job,"neony",true) == 0)
         {

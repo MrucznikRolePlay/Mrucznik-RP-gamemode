@@ -221,7 +221,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new param[4];
 			valstr(param,skin);
 
-			return cmd_premiumskin(playerid, param); 
+			return RunCommand(playerid, "/premiumskin",  param); 
 		}
 		else
 		{

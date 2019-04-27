@@ -737,7 +737,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     //Strefy
     if(clickedid == ZoneTXD[3])
     {
-        cmd_atakuj(playerid, "");
+        RunCommand(playerid, "/atakuj",  "");
     }
 
     if(GetPVarInt(playerid, "patrol-map") == 1 && GetPVarInt(playerid, "patrolmap") == 1)
@@ -1549,8 +1549,8 @@ public OnPlayerDisconnect(playerid, reason)
 
     if(GetPVarInt(playerid, "patrol") != 0) {
         new patrol = GetPVarInt(playerid, "patrol-id");
-        cmd_patrol(PatrolInfo[patrol][patroluje][0], "stop");
-        cmd_patrol(PatrolInfo[patrol][patroluje][1], "stop");
+        RunCommand(PatrolInfo[patrol][patroluje][0], "/patrol", "stop");
+        RunCommand(PatrolInfo[patrol][patroluje][1], "/patrol", "stop");
         sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
         sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
     }
@@ -6475,9 +6475,9 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		new engine, unused;
 		GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine , unused , unused, unused, unused, unused, unused);
 		if(engine == 1)
-			cmd_zgas(playerid, "");
+			RunCommand(playerid, "/zgas",  "");
 		else
-			cmd_odpal(playerid, "");
+			RunCommand(playerid, "/odpal",  "");
 	}
     if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_ONFOOT))
     {
@@ -6944,7 +6944,7 @@ public OnPlayerText(playerid, text[])
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "Za krótki tekst newsa !"); return 0; }
-						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd1], string, 0, strlen(string));
+						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd1], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact1], string, 0, strlen(string));
 						News[hTaken1] = 1; PlacedNews[playerid] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
@@ -6964,7 +6964,7 @@ public OnPlayerText(playerid, text[])
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krótki !"); return 0; }
-						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd2], string, 0, strlen(string));
+						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd2], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact2], string, 0, strlen(string));
 						News[hTaken2] = 1; PlacedNews[playerid] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
@@ -6984,7 +6984,7 @@ public OnPlayerText(playerid, text[])
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krótki !"); return 0; }
-						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd3], string, 0, strlen(string));
+						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd3], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact3], string, 0, strlen(string));
 						News[hTaken3] = 1; PlacedNews[playerid] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
@@ -7004,7 +7004,7 @@ public OnPlayerText(playerid, text[])
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krótki !"); return 0; }
-						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd4], string, 0, strlen(string));
+						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd4], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact4], string, 0, strlen(string));
 						News[hTaken4] = 1; PlacedNews[playerid] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
@@ -7024,7 +7024,7 @@ public OnPlayerText(playerid, text[])
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krótki !"); return 0; }
-						format(string, sizeof(string), "%s",right(text,strlen(text)-7)); strmid(News[hAdd5], string, 0, strlen(string));
+						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd5], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact5], string, 0, strlen(string));
 						News[hTaken5] = 1; PlacedNews[playerid] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
