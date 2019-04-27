@@ -415,6 +415,13 @@
 #include "commands\wyjedz.pwn"
 #include "commands\sprawdzneon.pwn"
 #include "commands\marcepan.pwn"
+#include "commands\edytujupr.pwn"
+#include "commands\uprawnienia.pwn"
+#include "commands\sprawdzkredyty.pwn"
+#include "commands\id.pwn"
+#include "commands\wywaldragi.pwn"
+#include "commands\wywalmaterialy.pwn"
+#include "commands\pracownicy.pwn"
 
 
 /* SSCANF FIX */

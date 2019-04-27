@@ -120,15 +120,6 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\biznes\biznes.pwn"
 
 
-//KOMENDY:
-#include "modules\commands\LOAD_COMMANDS.pwn"
-
-
-
-//_______________________________________________
-
-
-
 //Nowe modu³y .def:
 #include "modules\new\bramy\bramy.def"
 #include "modules\new\wejscia\wejscia.def"
