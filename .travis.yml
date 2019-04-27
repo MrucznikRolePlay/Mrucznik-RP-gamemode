@@ -24,7 +24,6 @@ addons:
     - libc6:i386
     - libncurses5:i386
     - libstdc++6:i386
-    - g++-multilib:i386
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_774d02843e4b_key -iv $encrypted_774d02843e4b_iv
@@ -34,6 +33,8 @@ before_install:
 install:
   - pip3 install chardet
   - sudo dpkg -i CI_scripts/sampctl_1.8.38_linux_amd64.deb # sampctl installation
+  - sudo dpkg --add-architecture i386
+  - sudo apt update && sudo apt install -y g++-multilib
 
 script:
 - chmod +x CI_scripts/*
