@@ -1,5 +1,33 @@
 //funkcje.pwn
 //FUNKCJE DLA CA£EGO SERWERA
+
+
+/* SSCANF FIX */
+SSCANF:fix(string[])
+{
+	new ret = INVALID_PLAYER_ID;
+	
+	if(IsNumeric(string))
+	{
+		new p = strval(string);
+		if(IsPlayerConnected(p))
+			ret = p;
+	}
+	else 
+	{
+		foreach(new p : Player)
+		{
+			if(strfind(GetNick(p), string, true) != -1)
+			{
+				ret = p;
+				break;
+			}
+		}
+	}
+	
+	return ret;
+}
+
 stock IsVehicleEmpty(vehicleid)
 {
   for(new i; i < MAX_PLAYERS; i++)

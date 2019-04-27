@@ -77,7 +77,7 @@ native WP_Hash(buffer[], len, const str[]);
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
 #include "VERSION.pwn"
-#define DEBUG 2 //1- DEBUG ON | 2- DEBUG OFF | 0- UNDEFINED BEHAVIOUR xD
+#define DEBUG 0 //1- DEBUG ON | 0- DEBUG OFF
 
 
 //-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
@@ -168,7 +168,7 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\discord.pwn"
 
 //komendy
-#include "include_commands.pwn"
+#include "commands\commands.pwn"
 
 //dialogi
 #include "modules\OnDialogResponse.pwn"
@@ -198,35 +198,357 @@ main()
 
 //---------------------------<[  Callbacks   ]>--------------------------------------------------
 
-public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+
+public OnGameModeInit()
 {
 	#if DEBUG == 1
-		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
+		printf("OnGameModeInit - begin");
+	#endif
+	AntiDeAMX(); // Can't touch this
+	WasteDeAMXersTime(); //Hammer Time
+	#if defined REGEX_ON
+	regex_syntax(SYNTAX_PERL); //regex
+	regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
+	#endif
+
+	#if DEBUG == 1
+	if(dini_Exists("production.info"))
+	{
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		SendRconCommand("exit");
+		return 0;
+	}
+	#endif
+	SSCANF_Option(OLD_DEFAULT_NAME, 1);
+    Streamer_SetVisibleItems(0, 900);
+    Streamer_SetTickRate(50);
+
+    FabrykaMats_LoadLogic();
+    NowaWybieralka_Init();
+	KaryTXDLoad(); 
+	InitCommands();
+    //Streamer_SetTickRate(40);
+
+    PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
+	SetActorVirtualWorld(PaniJanina, 43);
+	//AFK timer
+	for(new i; i<MAX_PLAYERS; i++)
+	{
+		afk_timer[i] = -1;
+	}
+	//Wybory:
+	if(dini_Exists("wybory.ini"))
+	{
+		for(new i; i<2; i++)
+		{
+			new string[12];
+			format(string,sizeof(string), "kandydat%d", i);
+			wybory[i] = dini_Int("wybory.ini", string);
+		}
+	}
+	else
+	{
+		dini_Create("wybory.ini");
+		for(new i; i<2; i++)
+		{
+			new string[12];
+			format(string,sizeof(string), "kandydat%d", i);
+			wybory[i] = dini_IntSet("wybory.ini", string, 0);
+		}
+	}
+    //Ustawienia BW
+    if(dini_Exists("Settings.ini"))
+    {
+        new ust = dini_Int("Settings.ini", "OnlyGangZones");
+        SetSVarInt("BW_OnlyGangZones", ust);
+        ust = dini_Int("Settings.ini", "Time");
+        SetSVarInt("BW_Time", ust);
+        //dini_Get("Settings.ini", "muzyka_bonehead");
+        SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
+    }
+    else
+    {
+        dini_Create("Settings.ini");
+        dini_IntSet("Settings.ini", "OnlyGangZones", 0);
+        dini_IntSet("Settings.ini", "Time", 180);
+        //dini_S("Settings.ini", "muzyka_bonehead");
+        dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
+        SetSVarInt("BW_OnlyGangZones", 0);
+        SetSVarInt("BW_Time", 180);
+    }
+
+    systempozarow_init();//System Po¿arów v0.1
+	//Mrucznik:
+	Ac_OnGameModeInit();//Antyczit
+	MruMySQL_Connect();//mysql
+
+    //22.06
+    LoadConfig();
+    WczytajRangi();
+    WczytajSkiny();
+    //Konfiguracja ID skryptu dla rodzin  - daj -1 w bazie aby wy³¹czyæ korzystanie ze skryptu dla slotu
+    Config_FamilyScript();
+    //
+    BARIERKA_Init(); //Przed limitem obiektów
+
+    Stworz_Obiekty();//obiekty
+	obiekty_OnGameModeInit();//nowe obiekty
+
+    ZaladujDomy();//System Domów
+    ZaladujBiznesy();
+    orgLoad();
+    Zone_Load();
+
+    ZaladujTrasy();//System wyœcigów
+	ZaladujPickupy();
+	ZaladujSamochody(); //Auta do kradziezy
+	Zaladuj3DTexty();
+	ZaladujIkony();
+
+	//GF:
+	LoadBoxer();
+	LoadStuff();
+	LoadIRC();
+	LadujInteriory();
+
+    //Sejfy mysql
+    Sejf_Load();
+
+    //Ibiza
+    IBIZA_Reszta();
+
+    //Patrol Data
+    Patrol_Init();
+    LoadServerInfo(); //Informacja dla graczy np. o wylaczeniu czegos
+    LoadDisallowedCommands();
+
+	SetGameModeText("Mrucznik-RP "VERSION);
+
+    //13.06
+    LoadTXD();
+    //30.10
+    TJD_Load();
+    Car_Load(); //Wszystkie pojazdy MySQL
+
+    //noYsi
+    LoadPrzewinienia();
+	
+	//discordconnect
+	DiscordConnectInit();
+
+    new string[MAX_PLAYER_NAME];
+    new string1[MAX_PLAYER_NAME];
+	for(new c=0;c<CAR_AMOUNT;c++)
+	{
+		Gas[c] = GasMax;
+        SetVehicleParamsEx(c, 0, 0, 0, 0, 0, 0, 0);
+	}
+	IRCInfo[0][iPlayers] = 0; IRCInfo[1][iPlayers] = 0; IRCInfo[2][iPlayers] = 0;
+	IRCInfo[3][iPlayers] = 0; IRCInfo[4][iPlayers] = 0; IRCInfo[5][iPlayers] = 0;
+	IRCInfo[6][iPlayers] = 0; IRCInfo[7][iPlayers] = 0; IRCInfo[8][iPlayers] = 0;
+	IRCInfo[9][iPlayers] = 0;
+	News[hTaken1] = 0; News[hTaken2] = 0; News[hTaken3] = 0; News[hTaken4] = 0; News[hTaken5] = 0;
+	format(string, sizeof(string), "Nothing");
+	strmid(News[hAdd1], string, 0, strlen(string), 255);
+	strmid(News[hAdd2], string, 0, strlen(string), 255);
+	strmid(News[hAdd3], string, 0, strlen(string), 255);
+	strmid(News[hAdd4], string, 0, strlen(string), 255);
+	strmid(News[hAdd5], string, 0, strlen(string), 255);
+	format(string1, sizeof(string1), "Nie Ma");
+	strmid(News[hContact1], string1, 0, strlen(string1), 255);
+	strmid(News[hContact2], string1, 0, strlen(string1), 255);
+	strmid(News[hContact3], string1, 0, strlen(string1), 255);
+	strmid(News[hContact4], string1, 0, strlen(string1), 255);
+	strmid(News[hContact5], string1, 0, strlen(string1), 255);
+	PlayerHaul[78][pCapasity] = 100;
+	PlayerHaul[79][pCapasity] = 100;
+	PlayerHaul[80][pCapasity] = 50;
+	PlayerHaul[81][pCapasity] = 50;
+	PlayerHaul[128][pCapasity] = 300;
+	PlayerHaul[129][pCapasity] = 300;
+	PlayerHaul[130][pCapasity] = 300;
+
+	format(motd, sizeof(motd), "Witaj na serwerze Mrucznik Role Play.");
+	gettime(ghour, gminute, gsecond);
+    GLOB_LastHour=ghour;
+	FixHour(ghour);
+	ghour = shifthour;
+	if(!realtime)
+	{
+		SetWorldTime(wtime);
+		ServerTime = wtime;
+	}
+    SetWeatherEx(3);
+	AllowInteriorWeapons(1);
+	ShowPlayerMarkers(0);
+	DisableInteriorEnterExits();
+	EnableStuntBonusForAll(0);
+	ManualVehicleEngineAndLights();
+	// CreatedCars check
+	for(new i = 0; i < sizeof(CreatedCars); i++)
+	{
+	    CreatedCars[i] = 0;
+	}
+
+	// Skiny graczy (wybieralka)
+	for(new i = 0; i <= sizeof(Peds)-1; i++)
+	{
+		AddPlayerClass(Peds[i][0],1958.3783,1343.1572,1100.3746,269.1425,-1,-1,-1,-1,-1,-1);
+	}
+
+	if (realtime)
+	{
+		new tmphour, tmpminute, tmpsecond;
+		gettime(tmphour, tmpminute, tmpsecond);
+		SetWorldTime(tmphour);
+		ServerTime = tmphour;
+	}
+	//timery
+	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
+    SetTimer("MainTimer", 1000, true);
+    SetTimer("RPGTimer", 100, true);
+
+    for(new i=0;i<MAX_VEHICLES;i++)
+    {
+        Blink[i][0] = -1;
+        Blink[i][1] = -1;
+        Blink[i][2] = -1;
+        Blink[i][3] = -1;
+    }
+    SetTimer("B_TrailerCheck", 1000, 1);
+
+    for(new v = 0; v < CAR_End+1; v++)
+	{
+		VehicleUID[v][vDist] = 500.000;
+		VehicleUID[v][vUID] = 0;
+		SetVehicleNumberPlate(v, "{1F9F06}M-RP");
+	}
+
+
+    //LEGAL
+    /*
+    CREATE TABLE mru_legal (
+        pID integer,
+        weapon1 integer not null,
+        weapon2 integer not null,
+        weapon3 integer not null,
+        weapon4 integer not null,
+        weapon5 integer not null,
+        weapon6 integer not null,
+        weapon7 integer not null,
+        weapon8 integer not null,
+        weapon9 integer not null,
+        weapon10 integer not null,
+        weapon11 integer not null,
+        weapon12 integer not null,
+        weapon13 integer not null,
+        unique (pID)
+    );
+    */
+
+    if((db_handle = db_open("mru.db")) == DB:0)
+    {
+        // Error
+        print("Failed to open a connection to \"mru.db\".");
+        print("Wylaczam serwer.... Powod: brak mru.db");
+        SendRconCommand("exit");
+    }
+    else
+    {
+        // Success
+        print("Successfully created a connection to \"mru.db\".");
+    }
+
+    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_legal (pID integer,weapon1 integer not null,weapon2 integer not null,weapon3 integer not null,weapon4 integer not null,weapon5 integer not null,weapon6 integer not null,weapon7 integer not null,weapon8 integer not null,weapon9 integer not null,weapon10 integer not null,weapon11 integer not null,weapon12 integer not null,weapon13 integer not null,unique (pID));"));
+
+    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_opisy(uid INTEGER PRIMARY KEY AUTOINCREMENT, text VARCHAR, owner INT, last_used INT);"));
+
+    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_kevlar(pID integer, offsetX FLOAT, offsetY FLOAT, offsetZ FLOAT, rotX FLOAT, rotY FLOAT, rotZ FLOAT, scaleX FLOAT, scaleY FLOAT, scaleZ FLOAT);"));
+
+    for(new i;i<MAX_PLAYERS;i++)
+    {
+        PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
+    }
+
+    pusteZgloszenia();
+    print("GameMode init - done!");
+    //SendRconCommand("reloadfs MRP/mrpshop");
+    //SendRconCommand("reloadfs MRP/mrpattach");
+	#if DEBUG == 1
+		printf("OnGameModeInit - end");
 	#endif
 	return 1;
 }
 
-public OnPlayerCommandReceived(playerid, cmdtext[])
+public OnGameModeExit()
 {
 	#if DEBUG == 1
-		printf("%s wpisal komende %s", GetNick(playerid), cmdtext);
+		printf("OnGameModeExit - begin");
 	#endif
-	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
+	//AFK timer
+	for(new i; i<MAX_PLAYERS; i++)
 	{
-		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
-		return 0;
+		if(afk_timer[i] != -1)
+			KillTimer(afk_timer[i]);
 	}
-    /*if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)//antyspam
-	{
-		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
-		return 0;
-	}*/
-    if(IsCommandBlocked(cmdtext))
+    for(new i=0;i<MAX_ORG;i++)
     {
-        SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
-        return 0;
+        orgSave(i, ORG_SAVE_TYPE_BASIC);
+        orgSave(i, ORG_SAVE_TYPE_DESC);
     }
-	StaryCzas[playerid] = GetTickCount();
+    for(new i=0;i<MAX_FRAC;i++)
+    {
+        Sejf_Save(i);
+        if(RANG_ApplyChanges[0][i]) EDIT_SaveRangs(0, i);
+    }
+    for(new i=0;i<MAX_ORG;i++)
+    {
+        SejfR_Save(i);
+        if(RANG_ApplyChanges[1][i]) EDIT_SaveRangs(1, i);
+    }
+    UnloadTXD();
+    Patrol_Unload();
+    TJD_Exit();
+    for(new i=Zone_Points[0];i<=Zone_Points[1];i++)
+    {
+        GangZoneDestroy(i);
+    }
+    for(new i=0;i<MAX_VEHICLES;i++) DisableCarBlinking(i);
+	for(new i = 0; i < MAX_PLAYERS; i++)
+    {
+        PlayerTextDrawDestroy(i, gCurrentPageTextDrawId[i]);
+        PlayerTextDrawDestroy(i, gHeaderTextDrawId[i]);
+        PlayerTextDrawDestroy(i, gBackgroundTextDrawId[i]);
+        PlayerTextDrawDestroy(i, gNextButtonTextDrawId[i]);
+        PlayerTextDrawDestroy(i, gPrevButtonTextDrawId[i]);
+
+        INT_AirTowerLS_Exit(i, true, true);
+    }
+    foreach(new i : Player)
+    {
+        if(noclipdata[i][cameramode] == CAMERA_MODE_FLY) CancelFlyMode(i);
+        MruMySQL_SaveAccount(i, true, true);
+    }
+
+	DOF2_Exit();
+
+    GLOBAL_EXIT = true;
+    print("Serwer zostaje wy³¹czony.");
+	#if DEBUG == 1
+		printf("OnGameModeExit - end");
+	#endif
 	return 1;
 }
 
@@ -5238,358 +5560,6 @@ public OnPlayerRequestClass(playerid, classid)
 		printf("%s[%d] OnPlayerRequestClass - end", GetNick(playerid), playerid);
 	#endif
 	return 0;
-}
-
-public OnGameModeInit()
-{
-	#if DEBUG == 1
-		printf("OnGameModeInit - begin");
-	#endif
-	AntiDeAMX(); // Can't touch this
-	WasteDeAMXersTime(); //Hammer Time
-	#if defined REGEX_ON
-	regex_syntax(SYNTAX_PERL); //regex
-	regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
-	#endif
-
-	#if DEBUG == 1
-	if(dini_Exists("production.info"))
-	{
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		SendRconCommand("exit");
-		return 0;
-	}
-	#endif
-	SSCANF_Option(OLD_DEFAULT_NAME, 1);
-    Streamer_SetVisibleItems(0, 900);
-    Streamer_SetTickRate(50);
-
-    FabrykaMats_LoadLogic();
-    NowaWybieralka_Init();
-	KaryTXDLoad(); 
-    //Streamer_SetTickRate(40);
-
-    PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
-	SetActorVirtualWorld(PaniJanina, 43);
-	//AFK timer
-	for(new i; i<MAX_PLAYERS; i++)
-	{
-		afk_timer[i] = -1;
-	}
-	//Wybory:
-	if(dini_Exists("wybory.ini"))
-	{
-		for(new i; i<2; i++)
-		{
-			new string[12];
-			format(string,sizeof(string), "kandydat%d", i);
-			wybory[i] = dini_Int("wybory.ini", string);
-		}
-	}
-	else
-	{
-		dini_Create("wybory.ini");
-		for(new i; i<2; i++)
-		{
-			new string[12];
-			format(string,sizeof(string), "kandydat%d", i);
-			wybory[i] = dini_IntSet("wybory.ini", string, 0);
-		}
-	}
-    //Ustawienia BW
-    if(dini_Exists("Settings.ini"))
-    {
-        new ust = dini_Int("Settings.ini", "OnlyGangZones");
-        SetSVarInt("BW_OnlyGangZones", ust);
-        ust = dini_Int("Settings.ini", "Time");
-        SetSVarInt("BW_Time", ust);
-        //dini_Get("Settings.ini", "muzyka_bonehead");
-        SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
-    }
-    else
-    {
-        dini_Create("Settings.ini");
-        dini_IntSet("Settings.ini", "OnlyGangZones", 0);
-        dini_IntSet("Settings.ini", "Time", 180);
-        //dini_S("Settings.ini", "muzyka_bonehead");
-        dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
-        SetSVarInt("BW_OnlyGangZones", 0);
-        SetSVarInt("BW_Time", 180);
-    }
-
-    systempozarow_init();//System Po¿arów v0.1
-	//Mrucznik:
-	Ac_OnGameModeInit();//Antyczit
-	MruMySQL_Connect();//mysql
-
-    //22.06
-    LoadConfig();
-    WczytajRangi();
-    WczytajSkiny();
-    //Konfiguracja ID skryptu dla rodzin  - daj -1 w bazie aby wy³¹czyæ korzystanie ze skryptu dla slotu
-    Config_FamilyScript();
-    //
-    BARIERKA_Init(); //Przed limitem obiektów
-
-    Stworz_Obiekty();//obiekty
-	obiekty_OnGameModeInit();//nowe obiekty
-
-    ZaladujDomy();//System Domów
-    ZaladujBiznesy();
-    orgLoad();
-    Zone_Load();
-
-    ZaladujTrasy();//System wyœcigów
-	ZaladujPickupy();
-	ZaladujSamochody(); //Auta do kradziezy
-	Zaladuj3DTexty();
-	ZaladujIkony();
-
-	//GF:
-	LoadBoxer();
-	LoadStuff();
-	LoadIRC();
-	LadujInteriory();
-
-    //Sejfy mysql
-    Sejf_Load();
-
-    //Ibiza
-    IBIZA_Reszta();
-
-    //Patrol Data
-    Patrol_Init();
-    LoadServerInfo(); //Informacja dla graczy np. o wylaczeniu czegos
-    LoadDisallowedCommands();
-
-	SetGameModeText("Mrucznik-RP "VERSION);
-
-    //13.06
-    LoadTXD();
-    //30.10
-    TJD_Load();
-    Car_Load(); //Wszystkie pojazdy MySQL
-
-    //noYsi
-    LoadPrzewinienia();
-	
-	//discordconnect
-	DiscordConnectInit();
-
-    new string[MAX_PLAYER_NAME];
-    new string1[MAX_PLAYER_NAME];
-	for(new c=0;c<CAR_AMOUNT;c++)
-	{
-		Gas[c] = GasMax;
-        SetVehicleParamsEx(c, 0, 0, 0, 0, 0, 0, 0);
-	}
-	IRCInfo[0][iPlayers] = 0; IRCInfo[1][iPlayers] = 0; IRCInfo[2][iPlayers] = 0;
-	IRCInfo[3][iPlayers] = 0; IRCInfo[4][iPlayers] = 0; IRCInfo[5][iPlayers] = 0;
-	IRCInfo[6][iPlayers] = 0; IRCInfo[7][iPlayers] = 0; IRCInfo[8][iPlayers] = 0;
-	IRCInfo[9][iPlayers] = 0;
-	News[hTaken1] = 0; News[hTaken2] = 0; News[hTaken3] = 0; News[hTaken4] = 0; News[hTaken5] = 0;
-	format(string, sizeof(string), "Nothing");
-	strmid(News[hAdd1], string, 0, strlen(string), 255);
-	strmid(News[hAdd2], string, 0, strlen(string), 255);
-	strmid(News[hAdd3], string, 0, strlen(string), 255);
-	strmid(News[hAdd4], string, 0, strlen(string), 255);
-	strmid(News[hAdd5], string, 0, strlen(string), 255);
-	format(string1, sizeof(string1), "Nie Ma");
-	strmid(News[hContact1], string1, 0, strlen(string1), 255);
-	strmid(News[hContact2], string1, 0, strlen(string1), 255);
-	strmid(News[hContact3], string1, 0, strlen(string1), 255);
-	strmid(News[hContact4], string1, 0, strlen(string1), 255);
-	strmid(News[hContact5], string1, 0, strlen(string1), 255);
-	PlayerHaul[78][pCapasity] = 100;
-	PlayerHaul[79][pCapasity] = 100;
-	PlayerHaul[80][pCapasity] = 50;
-	PlayerHaul[81][pCapasity] = 50;
-	PlayerHaul[128][pCapasity] = 300;
-	PlayerHaul[129][pCapasity] = 300;
-	PlayerHaul[130][pCapasity] = 300;
-
-	format(motd, sizeof(motd), "Witaj na serwerze Mrucznik Role Play.");
-	gettime(ghour, gminute, gsecond);
-    GLOB_LastHour=ghour;
-	FixHour(ghour);
-	ghour = shifthour;
-	if(!realtime)
-	{
-		SetWorldTime(wtime);
-		ServerTime = wtime;
-	}
-    SetWeatherEx(3);
-	AllowInteriorWeapons(1);
-	ShowPlayerMarkers(0);
-	DisableInteriorEnterExits();
-	EnableStuntBonusForAll(0);
-	ManualVehicleEngineAndLights();
-	// CreatedCars check
-	for(new i = 0; i < sizeof(CreatedCars); i++)
-	{
-	    CreatedCars[i] = 0;
-	}
-
-	// Skiny graczy (wybieralka)
-	for(new i = 0; i <= sizeof(Peds)-1; i++)
-	{
-		AddPlayerClass(Peds[i][0],1958.3783,1343.1572,1100.3746,269.1425,-1,-1,-1,-1,-1,-1);
-	}
-
-	if (realtime)
-	{
-		new tmphour, tmpminute, tmpsecond;
-		gettime(tmphour, tmpminute, tmpsecond);
-		SetWorldTime(tmphour);
-		ServerTime = tmphour;
-	}
-	//timery
-	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
-    SetTimer("MainTimer", 1000, true);
-    SetTimer("RPGTimer", 100, true);
-
-    for(new i=0;i<MAX_VEHICLES;i++)
-    {
-        Blink[i][0] = -1;
-        Blink[i][1] = -1;
-        Blink[i][2] = -1;
-        Blink[i][3] = -1;
-    }
-    SetTimer("B_TrailerCheck", 1000, 1);
-
-    for(new v = 0; v < CAR_End+1; v++)
-	{
-		VehicleUID[v][vDist] = 500.000;
-		VehicleUID[v][vUID] = 0;
-		SetVehicleNumberPlate(v, "{1F9F06}M-RP");
-	}
-
-
-    //LEGAL
-    /*
-    CREATE TABLE mru_legal (
-        pID integer,
-        weapon1 integer not null,
-        weapon2 integer not null,
-        weapon3 integer not null,
-        weapon4 integer not null,
-        weapon5 integer not null,
-        weapon6 integer not null,
-        weapon7 integer not null,
-        weapon8 integer not null,
-        weapon9 integer not null,
-        weapon10 integer not null,
-        weapon11 integer not null,
-        weapon12 integer not null,
-        weapon13 integer not null,
-        unique (pID)
-    );
-    */
-
-    if((db_handle = db_open("mru.db")) == DB:0)
-    {
-        // Error
-        print("Failed to open a connection to \"mru.db\".");
-        print("Wylaczam serwer.... Powod: brak mru.db");
-        SendRconCommand("exit");
-    }
-    else
-    {
-        // Success
-        print("Successfully created a connection to \"mru.db\".");
-    }
-
-    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_legal (pID integer,weapon1 integer not null,weapon2 integer not null,weapon3 integer not null,weapon4 integer not null,weapon5 integer not null,weapon6 integer not null,weapon7 integer not null,weapon8 integer not null,weapon9 integer not null,weapon10 integer not null,weapon11 integer not null,weapon12 integer not null,weapon13 integer not null,unique (pID));"));
-
-    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_opisy(uid INTEGER PRIMARY KEY AUTOINCREMENT, text VARCHAR, owner INT, last_used INT);"));
-
-    db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_kevlar(pID integer, offsetX FLOAT, offsetY FLOAT, offsetZ FLOAT, rotX FLOAT, rotY FLOAT, rotZ FLOAT, scaleX FLOAT, scaleY FLOAT, scaleZ FLOAT);"));
-
-    for(new i;i<MAX_PLAYERS;i++)
-    {
-        PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
-    }
-
-    pusteZgloszenia();
-    print("GameMode init - done!");
-    //SendRconCommand("reloadfs MRP/mrpshop");
-    //SendRconCommand("reloadfs MRP/mrpattach");
-	#if DEBUG == 1
-		printf("OnGameModeInit - end");
-	#endif
-	return 1;
-}
-
-public OnGameModeExit()
-{
-	#if DEBUG == 1
-		printf("OnGameModeExit - begin");
-	#endif
-	//AFK timer
-	for(new i; i<MAX_PLAYERS; i++)
-	{
-		if(afk_timer[i] != -1)
-			KillTimer(afk_timer[i]);
-	}
-    for(new i=0;i<MAX_ORG;i++)
-    {
-        orgSave(i, ORG_SAVE_TYPE_BASIC);
-        orgSave(i, ORG_SAVE_TYPE_DESC);
-    }
-    for(new i=0;i<MAX_FRAC;i++)
-    {
-        Sejf_Save(i);
-        if(RANG_ApplyChanges[0][i]) EDIT_SaveRangs(0, i);
-    }
-    for(new i=0;i<MAX_ORG;i++)
-    {
-        SejfR_Save(i);
-        if(RANG_ApplyChanges[1][i]) EDIT_SaveRangs(1, i);
-    }
-    UnloadTXD();
-    Patrol_Unload();
-    TJD_Exit();
-    for(new i=Zone_Points[0];i<=Zone_Points[1];i++)
-    {
-        GangZoneDestroy(i);
-    }
-    for(new i=0;i<MAX_VEHICLES;i++) DisableCarBlinking(i);
-	for(new i = 0; i < MAX_PLAYERS; i++)
-    {
-        PlayerTextDrawDestroy(i, gCurrentPageTextDrawId[i]);
-        PlayerTextDrawDestroy(i, gHeaderTextDrawId[i]);
-        PlayerTextDrawDestroy(i, gBackgroundTextDrawId[i]);
-        PlayerTextDrawDestroy(i, gNextButtonTextDrawId[i]);
-        PlayerTextDrawDestroy(i, gPrevButtonTextDrawId[i]);
-
-        INT_AirTowerLS_Exit(i, true, true);
-    }
-    foreach(new i : Player)
-    {
-        if(noclipdata[i][cameramode] == CAMERA_MODE_FLY) CancelFlyMode(i);
-        MruMySQL_SaveAccount(i, true, true);
-    }
-
-	DOF2_Exit();
-
-    GLOBAL_EXIT = true;
-    print("Serwer zostaje wy³¹czony.");
-	#if DEBUG == 1
-		printf("OnGameModeExit - end");
-	#endif
-	return 1;
 }
 
 PayDay()
