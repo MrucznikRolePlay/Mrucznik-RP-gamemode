@@ -24,6 +24,7 @@ addons:
     - libc6:i386
     - libncurses5:i386
     - libstdc++6:i386
+    - g++-multilib:i386
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_774d02843e4b_key -iv $encrypted_774d02843e4b_iv
