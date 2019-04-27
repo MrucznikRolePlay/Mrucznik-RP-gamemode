@@ -28,7 +28,7 @@
 	
 */
 
-CMD:yo2(playerid, params[])
+YCMD:yo2(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:piwo(playerid, params[])
+YCMD:piwo(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pPiwo] >= 1)
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zastrzyk(playerid, params[])
+YCMD:zastrzyk(playerid, params[], help)
 {
 	new playa;
 	if(sscanf(params, "k<fix>", playa))

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:mole(playerid, params[])
+YCMD:mole(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

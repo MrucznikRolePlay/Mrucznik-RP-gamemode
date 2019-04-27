@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togfam(playerid, params[])
+YCMD:togfam(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

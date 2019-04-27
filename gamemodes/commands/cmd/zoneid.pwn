@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zoneid(playerid, params[])
+YCMD:zoneid(playerid, params[], help)
 {
     if(GetPVarInt(playerid, "zoneid") != -1)
     {

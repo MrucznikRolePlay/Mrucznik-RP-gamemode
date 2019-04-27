@@ -30,7 +30,7 @@
 
 
 
-CMD:sprzedajalkohol(playerid, params[])
+YCMD:sprzedajalkohol(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprzedajbiznes(playerid, params[])
+YCMD:sprzedajbiznes(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

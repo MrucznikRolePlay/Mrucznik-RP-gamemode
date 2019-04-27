@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sh(playerid, params[])
+YCMD:sh(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {

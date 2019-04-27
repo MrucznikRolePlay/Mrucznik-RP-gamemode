@@ -29,7 +29,7 @@
 */
 
 
-CMD:kupskin(playerid, params[])
+YCMD:kupskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

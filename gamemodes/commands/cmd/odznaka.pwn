@@ -28,7 +28,7 @@
 	
 */
 
-CMD:odznaka(playerid, params[])
+YCMD:odznaka(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

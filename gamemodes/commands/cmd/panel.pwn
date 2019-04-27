@@ -28,7 +28,7 @@
 	
 */
 
-CMD:panel(playerid, params[])
+YCMD:panel(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_PANEL)) return noAccessMessage(playerid);
     new str[256];

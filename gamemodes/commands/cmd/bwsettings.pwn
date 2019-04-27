@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bwsettings(playerid, params[]) {
+YCMD:bwsettings(playerid, params[], help) {
     if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid)) {
         new ust = GetSVarInt("BW_OnlyGangZones");
         SetSVarInt("BW_OnlyGangZones", !ust);

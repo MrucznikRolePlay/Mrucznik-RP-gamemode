@@ -28,7 +28,7 @@
 	
 */
 
-CMD:windalock(playerid, params[])
+YCMD:windalock(playerid, params[], help)
 {
 	new string[128];
 	new nick[MAX_PLAYER_NAME];

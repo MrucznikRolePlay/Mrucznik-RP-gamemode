@@ -28,7 +28,7 @@
 	
 */
 
-CMD:skret(playerid, params[])
+YCMD:skret(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pCygaro] >= 1)
     {

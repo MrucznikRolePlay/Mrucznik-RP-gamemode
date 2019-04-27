@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ann(playerid, params[])
+YCMD:ann(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pAdmin] > 5)
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setzonecontrol(playerid, p[])
+YCMD:setzonecontrol(playerid, p[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id, frac;

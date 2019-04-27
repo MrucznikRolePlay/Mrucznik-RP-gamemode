@@ -29,7 +29,7 @@
 */
 
 
-CMD:r(playerid, params[])
+YCMD:r(playerid, params[], help)
 {
 	new string[256];
 

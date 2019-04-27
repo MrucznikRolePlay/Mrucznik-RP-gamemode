@@ -29,7 +29,7 @@
 */
 
 
-CMD:reklama(playerid, params[])
+YCMD:reklama(playerid, params[], help)
 {
 	if(!IsAHA(playerid))
 	{

@@ -29,7 +29,7 @@
 */
 
 
-CMD:przyjmij(playerid, params[])
+YCMD:przyjmij(playerid, params[], help)
 {
 	new string[160];
 	new giveplayer[MAX_PLAYER_NAME];

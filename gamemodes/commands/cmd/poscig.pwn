@@ -28,7 +28,7 @@
 	
 */
 
-CMD:poscig(playerid, params[])
+YCMD:poscig(playerid, params[], help)
 {
 	if(IsACop(playerid))
 	{

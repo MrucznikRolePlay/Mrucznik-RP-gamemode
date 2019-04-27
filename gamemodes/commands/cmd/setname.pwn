@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setname(playerid, params[])
+YCMD:setname(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

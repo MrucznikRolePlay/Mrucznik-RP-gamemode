@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pozwolenie(playerid, params[]) {
+YCMD:pozwolenie(playerid, params[], help) {
     if(!IsACop(playerid)) return sendErrorMessage(playerid, "Nie jesteœ policjantem!");
     new komu;
     if(sscanf(params, "k<fix>", komu)) return sendTipMessage(playerid, "U¿yj /pozwolenie [id gracza / czêœæ nazwy]");

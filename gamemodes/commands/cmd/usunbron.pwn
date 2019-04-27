@@ -29,7 +29,7 @@
 */
 
 
-CMD:usunbron(playerid, params[])
+YCMD:usunbron(playerid, params[], help)
 {
 
     if(GetPVarInt(playerid, "mozeUsunacBronie") == 1) return sendErrorMessage(playerid, "Nie mo¿esz usun¹æ broni do czasu zrespienia siê, u¿y³eœ /wb");

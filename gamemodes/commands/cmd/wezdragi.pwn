@@ -30,7 +30,7 @@
 
 
 
-CMD:wezdragi(playerid, params[])
+YCMD:wezdragi(playerid, params[], help)
 {
 	new string[128];
 

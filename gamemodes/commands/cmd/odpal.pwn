@@ -28,7 +28,7 @@
 	
 */
 
-CMD:odpal(playerid, params[])
+YCMD:odpal(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

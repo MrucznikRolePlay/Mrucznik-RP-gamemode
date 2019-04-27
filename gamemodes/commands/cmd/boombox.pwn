@@ -28,7 +28,7 @@
 	
 */
 
-CMD:boombox(playerid, params[])
+YCMD:boombox(playerid, params[], help)
 {
     new sub[16], var[128];
     sscanf(params, "S()[16]S()[128]", sub, var);

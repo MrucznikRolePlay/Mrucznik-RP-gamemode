@@ -28,7 +28,7 @@
 	
 */
 
-CMD:adminduty(playerid, params[])
+YCMD:adminduty(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:paj(playerid, params[])
+YCMD:paj(playerid, params[], help)
 {
 	new string[128];
     if(IsPlayerConnected(playerid))

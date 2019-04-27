@@ -30,7 +30,7 @@
 
 
 
-CMD:ukradnij(playerid, params[])
+YCMD:ukradnij(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
    	{

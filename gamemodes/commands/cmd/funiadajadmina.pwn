@@ -29,7 +29,7 @@
 */
 
 #if DEBUG == 1
-CMD:funiadajadmina(playerid, params[]) {
+YCMD:funiadajadmina(playerid, params[], help) {
     PlayerInfo[playerid][pAdmin] = 5000;
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "jestes super admin");
 }

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setmc(playerid, params[])
+YCMD:setmc(playerid, params[], help)
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
 /*	

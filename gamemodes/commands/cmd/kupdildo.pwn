@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kupdildo(playerid, params[])
+YCMD:kupdildo(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

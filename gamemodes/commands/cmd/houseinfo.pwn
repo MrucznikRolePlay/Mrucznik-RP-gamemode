@@ -30,7 +30,7 @@
 
 
 
-CMD:houseinfo(playerid, params[])
+YCMD:houseinfo(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

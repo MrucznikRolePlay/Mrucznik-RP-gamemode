@@ -28,7 +28,7 @@
 	
 */
 
-CMD:degraduj(playerid, params[])
+YCMD:degraduj(playerid, params[], help)
 {
 	new para1;
 	if(sscanf(params, "k<fix>", para1))

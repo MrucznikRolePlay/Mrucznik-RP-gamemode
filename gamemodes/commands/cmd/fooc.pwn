@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fooc(playerid, params[])
+YCMD:fooc(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

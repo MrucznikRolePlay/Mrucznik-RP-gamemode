@@ -28,7 +28,7 @@
 	
 */
 
-CMD:domint(playerid, params[])
+YCMD:domint(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{

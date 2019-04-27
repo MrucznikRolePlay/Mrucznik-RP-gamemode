@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kradnij(playerid, params[])
+YCMD:kradnij(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

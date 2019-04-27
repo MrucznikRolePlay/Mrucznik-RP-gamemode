@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tazer(playerid, params[])
+YCMD:tazer(playerid, params[], help)
 {
     new string[128];
 	new sendername[MAX_PLAYER_NAME];

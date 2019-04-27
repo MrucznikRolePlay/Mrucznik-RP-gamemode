@@ -29,7 +29,7 @@
 */
 
 
-CMD:sprzedajbron(playerid, params[])
+YCMD:sprzedajbron(playerid, params[], help)
 {
     new string[128];
     new sendername[MAX_PLAYER_NAME];

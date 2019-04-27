@@ -28,7 +28,7 @@
 	
 */
 
-CMD:removezoneprotect(playerid, p[])
+YCMD:removezoneprotect(playerid, p[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;

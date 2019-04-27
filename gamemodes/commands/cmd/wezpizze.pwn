@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wezpizze(playerid, params[])
+YCMD:wezpizze(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pJob] == JOB_PIZZA)
     {

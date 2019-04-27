@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cnnn(playerid, params[])
+YCMD:cnnn(playerid, params[], help)
 {
 	if (PlayerInfo[playerid][pAdmin] >= 5000)
 	{

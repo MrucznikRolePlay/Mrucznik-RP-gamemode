@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wyscig_start(playerid, params[])
+YCMD:wyscig_start(playerid, params[], help)
 {
     if(IsANoA(playerid))
     {

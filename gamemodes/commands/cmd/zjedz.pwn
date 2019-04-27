@@ -30,7 +30,7 @@
 
 
 
-CMD:zjedz(playerid, params[])
+YCMD:zjedz(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

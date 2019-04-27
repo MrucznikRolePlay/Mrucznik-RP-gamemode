@@ -29,7 +29,7 @@
 */
 
 
-CMD:finisz(playerid, params[])
+YCMD:finisz(playerid, params[], help)
 {
 	new string[128];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:brama(playerid, params[])
+YCMD:brama(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

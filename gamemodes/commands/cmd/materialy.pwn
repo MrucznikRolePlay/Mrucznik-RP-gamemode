@@ -30,7 +30,7 @@
 
 
 
-CMD:materialy(playerid, params[])
+YCMD:materialy(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

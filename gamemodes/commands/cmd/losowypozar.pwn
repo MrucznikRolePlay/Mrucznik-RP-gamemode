@@ -28,7 +28,7 @@
 	
 */
 
-CMD:losowypozar(playerid, params[])
+YCMD:losowypozar(playerid, params[], help)
 {
 	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
 	{

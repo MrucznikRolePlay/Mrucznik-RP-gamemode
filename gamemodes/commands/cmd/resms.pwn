@@ -29,7 +29,7 @@
 */
 
 
-CMD:resms(playerid, params[])
+YCMD:resms(playerid, params[], help)
 {
 	new string[256];
 	if(LastSMSNumber[playerid] == 0)

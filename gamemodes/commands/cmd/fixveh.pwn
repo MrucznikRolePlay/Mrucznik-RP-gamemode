@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fixveh(playerid, params[])
+YCMD:fixveh(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

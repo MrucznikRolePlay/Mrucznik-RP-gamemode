@@ -30,7 +30,7 @@
 
 
 
-CMD:unrentroom(playerid, params[])
+YCMD:unrentroom(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

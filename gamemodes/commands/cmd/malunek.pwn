@@ -29,7 +29,7 @@
 */
 
 
-CMD:malunek(playerid, params[])
+YCMD:malunek(playerid, params[], help)
 {
     new string[256];
     new sendername[MAX_PLAYER_NAME];

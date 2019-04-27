@@ -29,7 +29,7 @@
 */
 
 
-CMD:felga(playerid, params[])
+YCMD:felga(playerid, params[], help)
 {
     new string[256];
     new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:removecar(playerid, p[])
+YCMD:removecar(playerid, p[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return 1;
     new car;

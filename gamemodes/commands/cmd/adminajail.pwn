@@ -28,7 +28,7 @@
 	
 */
 
-CMD:adminajail(playerid, params[])
+YCMD:adminajail(playerid, params[], help)
 {
 	new string[128];
 

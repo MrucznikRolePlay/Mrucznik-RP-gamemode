@@ -31,7 +31,7 @@
 
 
 
-CMD:przelew(playerid, params[])
+YCMD:przelew(playerid, params[], help)
 {
 	new string[128];
 	

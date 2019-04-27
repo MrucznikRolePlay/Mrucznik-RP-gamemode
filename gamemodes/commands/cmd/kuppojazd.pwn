@@ -31,7 +31,7 @@
 
 
 
-CMD:kuppojazd(playerid, params[])
+YCMD:kuppojazd(playerid, params[], help)
 {
 	if(IsPlayerInAnyVehicle(playerid))
 	{

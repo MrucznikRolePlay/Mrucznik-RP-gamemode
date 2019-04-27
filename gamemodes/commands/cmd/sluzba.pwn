@@ -29,7 +29,7 @@
 */
 
 
-CMD:sluzba(playerid, params[])
+YCMD:sluzba(playerid, params[], help)
 {
     new string[128];
     new sendername[MAX_PLAYER_NAME];

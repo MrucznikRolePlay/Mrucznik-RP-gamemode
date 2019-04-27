@@ -29,7 +29,7 @@
 */
 
 
-CMD:newbie(playerid, params[])
+YCMD:newbie(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

@@ -29,7 +29,7 @@
 */
 
 
-CMD:ircpomoc(playerid, params[])
+YCMD:ircpomoc(playerid, params[], help)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	SendClientMessage(playerid, COLOR_WHITE,"*** IRC POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");

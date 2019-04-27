@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cca(playerid, params[])
+YCMD:cca(playerid, params[], help)
 {
 	new string[64];
 	new sendername[MAX_PLAYER_NAME];

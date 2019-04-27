@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togpodglad(playerid, params[])
+YCMD:togpodglad(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

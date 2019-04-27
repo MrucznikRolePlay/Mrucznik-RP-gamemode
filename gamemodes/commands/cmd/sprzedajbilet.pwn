@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprzedajbilet(playerid, params[])
+YCMD:sprzedajbilet(playerid, params[], help)
 {
 	if(GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
 	{

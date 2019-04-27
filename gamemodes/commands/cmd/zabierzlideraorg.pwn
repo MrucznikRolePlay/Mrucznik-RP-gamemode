@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zabierzlideraorg(playerid, params[])
+YCMD:zabierzlideraorg(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return 1;
     new id=-1;

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setvw(playerid, params[])
+YCMD:setvw(playerid, params[], help)
 {
 	new string[128];
 

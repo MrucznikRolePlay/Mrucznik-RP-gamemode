@@ -30,7 +30,7 @@
 
 
 
-CMD:cp_usun(playerid, params[])
+YCMD:cp_usun(playerid, params[], help)
 {
 	new string[128];
 

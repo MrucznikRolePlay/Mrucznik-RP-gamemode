@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dopasuj(playerid, params[])
+YCMD:dopasuj(playerid, params[], help)
 {
 	new type[24];
     if(sscanf(params, "s[24]", type)) {

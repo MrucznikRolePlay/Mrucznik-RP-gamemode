@@ -28,7 +28,7 @@
 	
 */
 
-CMD:armia(playerid, params[])
+YCMD:armia(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

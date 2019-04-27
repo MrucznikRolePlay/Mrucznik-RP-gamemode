@@ -30,7 +30,7 @@
 
 
 
-CMD:paliwo(playerid, params[])
+YCMD:paliwo(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

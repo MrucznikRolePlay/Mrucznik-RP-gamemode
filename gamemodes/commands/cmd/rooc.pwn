@@ -30,7 +30,7 @@
 
 
 
-CMD:rooc(playerid, params[])
+YCMD:rooc(playerid, params[], help)
 {
 	new string[256];
 	

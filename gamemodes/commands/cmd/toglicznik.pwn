@@ -30,7 +30,7 @@
 
 
 
-CMD:toglicznik(playerid, params[])
+YCMD:toglicznik(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dpa(playerid, params[])
+YCMD:dpa(playerid, params[], help)
 {
 	new para1;
 	if(sscanf(params, "k<fix>", para1))

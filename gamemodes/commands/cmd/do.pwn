@@ -28,7 +28,7 @@
 	
 */
 
-CMD:do(playerid, params[])
+YCMD:do(playerid, params[], help)
 {
     if(isnull(params))
     {

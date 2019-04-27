@@ -29,7 +29,7 @@
 */
 
 
-CMD:departament(playerid, params[])
+YCMD:departament(playerid, params[], help)
 {
     new string[128];
     new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:removeganglimit(playerid, p[])
+YCMD:removeganglimit(playerid, p[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;

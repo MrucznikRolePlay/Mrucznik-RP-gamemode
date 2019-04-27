@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setac(playerid, params[])
+YCMD:setac(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))
 	{

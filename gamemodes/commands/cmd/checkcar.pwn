@@ -28,7 +28,7 @@
 	
 */
 
-CMD:checkcar(playerid, params[])
+YCMD:checkcar(playerid, params[], help)
 {
 	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL)  || PlayerInfo[playerid][pAdmin] == 7 || IsAKO(playerid))
 	{

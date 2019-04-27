@@ -28,7 +28,7 @@
 	
 */
 
-CMD:podglad(playerid, params[])
+YCMD:podglad(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

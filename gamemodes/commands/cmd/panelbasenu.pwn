@@ -28,7 +28,7 @@
 	
 */
 
-CMD:panelbasenu(playerid, params[])
+YCMD:panelbasenu(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

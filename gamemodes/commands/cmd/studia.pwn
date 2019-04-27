@@ -28,7 +28,7 @@
 	
 */
 
-CMD:studia(playerid, params[])
+YCMD:studia(playerid, params[], help)
 {
 	new string[128];
 

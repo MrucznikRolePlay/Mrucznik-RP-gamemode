@@ -28,7 +28,7 @@
 	
 */
 
-CMD:biznespomoc(playerid, params[])
+YCMD:biznespomoc(playerid, params[], help)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	SendClientMessage(playerid, COLOR_WHITE,"*** BIZNES POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");

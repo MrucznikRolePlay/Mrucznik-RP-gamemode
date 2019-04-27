@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprunk(playerid, params[])
+YCMD:sprunk(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pSprunk] >= 1)
     {

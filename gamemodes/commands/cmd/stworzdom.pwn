@@ -29,7 +29,7 @@
 */
 
 
-CMD:stworzdom(playerid, params[])
+YCMD:stworzdom(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)
     {

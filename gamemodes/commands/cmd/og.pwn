@@ -31,7 +31,7 @@
 
 
 
-CMD:og(playerid, params[])
+YCMD:og(playerid, params[], help)
 {
     new string[256];
     if(IsPlayerConnected(playerid))

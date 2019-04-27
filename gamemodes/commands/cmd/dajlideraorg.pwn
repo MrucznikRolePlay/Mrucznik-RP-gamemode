@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dajlideraorg(playerid, params[])
+YCMD:dajlideraorg(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_MAKELEADER)) return 1;
     new id=-1, family;

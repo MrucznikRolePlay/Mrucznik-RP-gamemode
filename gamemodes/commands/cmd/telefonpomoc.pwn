@@ -29,7 +29,7 @@
 */
 
 
-CMD:telefonpomoc(playerid, params[])
+YCMD:telefonpomoc(playerid, params[], help)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	if (PlayerInfo[playerid][pPnumber] > 0)

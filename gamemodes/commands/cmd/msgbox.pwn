@@ -28,7 +28,7 @@
 	
 */
 
-CMD:msgbox(playerid, params[])
+YCMD:msgbox(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {

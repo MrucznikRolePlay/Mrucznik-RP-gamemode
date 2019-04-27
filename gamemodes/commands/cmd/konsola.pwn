@@ -28,7 +28,7 @@
 	
 */
 
-CMD:konsola(playerid, params[])
+YCMD:konsola(playerid, params[], help)
 {
     if(GetPlayerOrg(playerid) == FAMILY_VINYL || GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pRank] >= 4)
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:blackjack(playerid, params[])
+YCMD:blackjack(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

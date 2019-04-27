@@ -28,7 +28,7 @@
 	
 */
 
-CMD:vopis(playerid, params[])
+YCMD:vopis(playerid, params[], help)
 {
     //SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
     if(PlayerInfo[playerid][pConnectTime] < 4) return sendErrorMessage(playerid, "Opis dostêpny od 4 godzin online!");

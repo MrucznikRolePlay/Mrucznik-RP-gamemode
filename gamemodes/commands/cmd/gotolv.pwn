@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotolv(playerid, params[])
+YCMD:gotolv(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

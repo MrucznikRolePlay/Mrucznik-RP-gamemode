@@ -30,7 +30,7 @@
 
 
 
-CMD:megafon(playerid, params[])
+YCMD:megafon(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:noooc(playerid, params[])
+YCMD:noooc(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

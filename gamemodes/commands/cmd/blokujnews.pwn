@@ -28,7 +28,7 @@
 	
 */
 
-CMD:blokujnews(playerid, params[])
+YCMD:blokujnews(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

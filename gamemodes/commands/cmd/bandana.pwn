@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bandana(playerid, params[])
+YCMD:bandana(playerid, params[], help)
 {
 	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{

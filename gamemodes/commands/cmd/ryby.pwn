@@ -29,7 +29,7 @@
 */
 
 
-CMD:ryby(playerid, params[])
+YCMD:ryby(playerid, params[], help)
 {
 	new string[128];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:c(playerid, params[])
+YCMD:c(playerid, params[], help)
 {
     new var[64];
     if(sscanf(params, "s[64]", var)) return sendTipMessage(playerid, "U¿j /c [KOD RADIOWY]");

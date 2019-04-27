@@ -28,7 +28,7 @@
 	
 */
 
-CMD:alarm(playerid,cmdtext[]) //TODO
+YCMD:alarm(playerid,cmdtext[], help) //TODO
 {
     if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2 || GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
 	{

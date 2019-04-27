@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kolejka(playerid, params[])
+YCMD:kolejka(playerid, params[], help)
 {
     if(VAR_Kolejka)
     {

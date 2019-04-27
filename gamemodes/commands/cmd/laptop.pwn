@@ -29,7 +29,7 @@
 */
 
 
-CMD:laptop(playerid, params[])
+YCMD:laptop(playerid, params[], help)
 {
 	new sendername[MAX_PLAYER_NAME];
 

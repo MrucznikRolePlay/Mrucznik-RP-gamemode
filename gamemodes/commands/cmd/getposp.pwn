@@ -28,7 +28,7 @@
 	
 */
 
-CMD:getposp(playerid, params[])
+YCMD:getposp(playerid, params[], help)
 {
 	new string[64];
 

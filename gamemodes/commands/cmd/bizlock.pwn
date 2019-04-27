@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bizlock(playerid, params[])
+YCMD:bizlock(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES)
 	{

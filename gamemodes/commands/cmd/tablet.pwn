@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tablet(playerid, params[])
+YCMD:tablet(playerid, params[], help)
 {
 	new string[512];
 	new sendername[MAX_PLAYER_NAME];

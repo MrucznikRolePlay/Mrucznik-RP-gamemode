@@ -28,7 +28,7 @@
 	
 */
 
-CMD:radiostacja(playerid, params[])
+YCMD:radiostacja(playerid, params[], help)
 {
     if(GetPLocal(playerid) == PLOCAL_ORG_SN)
     {

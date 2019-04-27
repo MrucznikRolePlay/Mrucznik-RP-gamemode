@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pblok(playerid, params[])
+YCMD:pblok(playerid, params[], help)
 {
 	new string[128];
 

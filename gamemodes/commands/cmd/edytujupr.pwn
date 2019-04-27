@@ -28,7 +28,7 @@
 	
 */
 
-CMD:edytujupr(playerid, params[])
+YCMD:edytujupr(playerid, params[], help)
 {
     if(!(Uprawnienia(playerid, ACCESS_EDITPERM) && IsPlayerAdmin(playerid))) return SendClientMessage(playerid, -1, "(PERM) - Nie posiadasz pe³nych praw.");
     new id;

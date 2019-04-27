@@ -28,7 +28,7 @@
 	
 */
 
-CMD:atakuj(playerid, p[])
+YCMD:atakuj(playerid, p[], help)
 {
     if(ZONE_DISABLED == 1)
     {

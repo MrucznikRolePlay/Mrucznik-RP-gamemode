@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dsus(playerid, params[])
+YCMD:dsus(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >=100)
 	{

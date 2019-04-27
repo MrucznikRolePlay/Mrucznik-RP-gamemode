@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zmienprace(playerid, params[])
+YCMD:zmienprace(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

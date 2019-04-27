@@ -30,7 +30,7 @@
 
 
 
-CMD:zdejmijkevlar(playerid, params[])
+YCMD:zdejmijkevlar(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

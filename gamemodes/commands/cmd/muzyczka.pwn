@@ -28,7 +28,7 @@
 	
 */
 
-CMD:muzyczka(playerid, params[])
+YCMD:muzyczka(playerid, params[], help)
 {
 	new muzyczka;
 	if(sscanf(params, "d", muzyczka))

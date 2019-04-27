@@ -29,7 +29,7 @@
 */
 
 
-CMD:uleczmnie(playerid, params[])
+YCMD:uleczmnie(playerid, params[], help)
 {
 	new string[128];
 

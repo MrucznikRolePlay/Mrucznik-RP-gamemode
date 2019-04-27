@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zmienhp(playerid, params[])
+YCMD:zmienhp(playerid, params[], help)
 {
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];

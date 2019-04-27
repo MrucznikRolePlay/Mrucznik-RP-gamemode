@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setveh(playerid, params[])
+YCMD:setveh(playerid, params[], help)
 {
 	new string[256];
 

@@ -31,7 +31,7 @@
 
 
 
-CMD:mi(playerid, params[])
+YCMD:mi(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

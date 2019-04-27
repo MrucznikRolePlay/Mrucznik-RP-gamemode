@@ -28,7 +28,7 @@
 	
 */
 
-CMD:placmedyk(playerid, params[])
+YCMD:placmedyk(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

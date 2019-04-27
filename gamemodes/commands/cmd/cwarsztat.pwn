@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cwarsztat(playerid, params[])
+YCMD:cwarsztat(playerid, params[], help)
 {
 	if(IsANoA(playerid))
 	{

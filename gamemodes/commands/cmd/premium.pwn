@@ -30,7 +30,7 @@
 
 
 
-CMD:premium(playerid, params[])
+YCMD:premium(playerid, params[], help)
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
 /*

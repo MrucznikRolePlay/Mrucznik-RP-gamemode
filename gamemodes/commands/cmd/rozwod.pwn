@@ -28,7 +28,7 @@
 	
 */
 
-CMD:rozwod(playerid, params[])
+YCMD:rozwod(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

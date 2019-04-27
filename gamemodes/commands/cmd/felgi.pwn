@@ -28,7 +28,7 @@
 	
 */
 
-CMD:felgi(playerid, params[])
+YCMD:felgi(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

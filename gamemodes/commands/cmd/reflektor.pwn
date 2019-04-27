@@ -28,7 +28,7 @@
 	
 */
 
-CMD:reflektor(playerid, params[])
+YCMD:reflektor(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
     {

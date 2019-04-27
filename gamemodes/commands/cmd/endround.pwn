@@ -28,7 +28,7 @@
 	
 */
 
-CMD:endround(playerid, params[])
+YCMD:endround(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

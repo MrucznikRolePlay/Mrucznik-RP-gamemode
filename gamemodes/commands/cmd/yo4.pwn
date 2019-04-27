@@ -28,7 +28,7 @@
 	
 */
 
-CMD:yo4(playerid, params[])
+YCMD:yo4(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

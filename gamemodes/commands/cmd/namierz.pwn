@@ -31,7 +31,7 @@
 
 
 
-CMD:namierz(playerid, params[])
+YCMD:namierz(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:respawn(playerid, params[])
+YCMD:respawn(playerid, params[], help)
 {
 	new string[128];
 	

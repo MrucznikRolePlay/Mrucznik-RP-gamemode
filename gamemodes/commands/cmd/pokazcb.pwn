@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pokazcb(playerid, params[])
+YCMD:pokazcb(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1)
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fixr(playerid, params[])
+YCMD:fixr(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
 	{

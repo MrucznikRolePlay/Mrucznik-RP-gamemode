@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pjtest(playerid, params[])
+YCMD:pjtest(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

@@ -29,7 +29,7 @@
 */
 
 
-CMD:qf(playerid, params[])
+YCMD:qf(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

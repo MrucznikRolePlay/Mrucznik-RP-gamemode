@@ -28,7 +28,7 @@
 	
 */
 
-CMD:getvw(playerid, params[])
+YCMD:getvw(playerid, params[], help)
 {
 	new gracz, string[64];
 	if( sscanf(params, "k<fix>", gracz))

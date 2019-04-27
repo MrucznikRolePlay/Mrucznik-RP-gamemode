@@ -28,7 +28,7 @@
 	
 */
 
-CMD:skydive(playerid, params[])
+YCMD:skydive(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

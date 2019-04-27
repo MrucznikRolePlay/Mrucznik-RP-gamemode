@@ -30,7 +30,7 @@
 
 
 
-CMD:selldom(playerid, params[])
+YCMD:selldom(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

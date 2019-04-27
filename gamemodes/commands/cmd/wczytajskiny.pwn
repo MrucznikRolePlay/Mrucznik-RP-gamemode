@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wczytajskiny(playerid, params[])
+YCMD:wczytajskiny(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     SendClientMessage(playerid, -1, "Wczytujê skiny.");

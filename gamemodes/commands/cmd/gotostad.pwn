@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotostad(playerid, params[])
+YCMD:gotostad(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

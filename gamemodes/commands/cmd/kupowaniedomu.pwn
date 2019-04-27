@@ -30,7 +30,7 @@
 
 
 
-CMD:kupowaniedomu(playerid, params[])
+YCMD:kupowaniedomu(playerid, params[], help)
 {
 	new string[128];
 

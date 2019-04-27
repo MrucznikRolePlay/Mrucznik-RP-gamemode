@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dajkp(playerid, params[])
+YCMD:dajkp(playerid, params[], help)
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
 /*	

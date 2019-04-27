@@ -28,7 +28,7 @@
 	
 */
 
-CMD:scenaallow(playerid, p[])
+YCMD:scenaallow(playerid, p[], help)
 {
     if(PlayerInfo[playerid][pAdmin] < 200 || IsAKO(playerid)) return 1;
     new id;

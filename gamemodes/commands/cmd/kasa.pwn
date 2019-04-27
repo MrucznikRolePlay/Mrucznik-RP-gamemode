@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kasa(playerid, params[])
+YCMD:kasa(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

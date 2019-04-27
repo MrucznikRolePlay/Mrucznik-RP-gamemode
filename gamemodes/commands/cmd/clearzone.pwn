@@ -28,7 +28,7 @@
 	
 */
 
-CMD:clearzone(playerid, p[])
+YCMD:clearzone(playerid, p[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;

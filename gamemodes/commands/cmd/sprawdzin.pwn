@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprawdzin(playerid, params[])
+YCMD:sprawdzin(playerid, params[], help)
 {
 	new string[128];
 	new giveplayerid;

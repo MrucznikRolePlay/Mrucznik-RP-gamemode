@@ -29,7 +29,7 @@
 */
 
 
-CMD:lockint(playerid, params[])
+YCMD:lockint(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
 	{

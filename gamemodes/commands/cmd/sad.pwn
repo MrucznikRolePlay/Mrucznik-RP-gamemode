@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sad(playerid, params[])
+YCMD:sad(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

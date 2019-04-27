@@ -28,7 +28,7 @@
 	
 */
 
-CMD:witaj(playerid, params[])
+YCMD:witaj(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:odmroz(playerid, params[])
+YCMD:odmroz(playerid, params[], help)
 {
 	new string[128];
     if(IsPlayerConnected(playerid))

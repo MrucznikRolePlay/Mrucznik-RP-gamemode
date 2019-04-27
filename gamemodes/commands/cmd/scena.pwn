@@ -28,7 +28,7 @@
 	
 */
 
-CMD:scena(playerid, params[])
+YCMD:scena(playerid, params[], help)
 {
     if(GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pAdmin] < 200)
     {

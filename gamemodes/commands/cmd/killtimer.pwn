@@ -29,7 +29,7 @@
 */
 
 /*
-CMD:killtimer(playerid, params[])
+YCMD:killtimer(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
     {

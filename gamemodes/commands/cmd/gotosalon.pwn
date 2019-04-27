@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotosalon(playerid, params[])
+YCMD:gotosalon(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:blokujnoba(playerid, params[])
+YCMD:blokujnoba(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

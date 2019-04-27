@@ -31,7 +31,7 @@
 
 
 
-CMD:dl(playerid, params[])
+YCMD:dl(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

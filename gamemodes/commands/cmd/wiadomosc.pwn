@@ -29,7 +29,7 @@
 */
 
 
-CMD:wiadomosc(playerid, params[])
+YCMD:wiadomosc(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 0)
     {

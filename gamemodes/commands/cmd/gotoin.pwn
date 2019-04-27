@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotoin(playerid, params[])
+YCMD:gotoin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

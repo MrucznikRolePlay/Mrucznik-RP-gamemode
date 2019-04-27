@@ -30,7 +30,7 @@
 
 
 
-CMD:rodzinny(playerid, params[])
+YCMD:rodzinny(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wyprowadz(playerid, params[])
+YCMD:wyprowadz(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pRank] >= 2 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
 	{

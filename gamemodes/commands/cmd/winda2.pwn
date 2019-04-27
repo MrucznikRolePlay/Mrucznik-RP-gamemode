@@ -28,7 +28,7 @@
 	
 */
 
-CMD:winda2(playerid, params[])
+YCMD:winda2(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

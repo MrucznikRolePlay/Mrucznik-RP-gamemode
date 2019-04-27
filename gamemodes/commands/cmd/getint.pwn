@@ -28,7 +28,7 @@
 	
 */
 
-CMD:getint(playerid, params[])
+YCMD:getint(playerid, params[], help)
 {
 	new gracz, string[64];
 	if( sscanf(params, "k<fix>", gracz))

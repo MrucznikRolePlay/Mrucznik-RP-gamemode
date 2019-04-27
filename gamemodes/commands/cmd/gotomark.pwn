@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotomark(playerid, params[])
+YCMD:gotomark(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

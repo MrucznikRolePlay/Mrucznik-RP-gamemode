@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dutymoto(playerid, params[]) 
+YCMD:dutymoto(playerid, params[], help) 
 {
     new string[128];
     new sendername[MAX_PLAYER_NAME];

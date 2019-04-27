@@ -30,7 +30,7 @@
 
 
 
-CMD:szept(playerid, params[])
+YCMD:szept(playerid, params[], help)
 {
 	
 	if(IsPlayerConnected(playerid))

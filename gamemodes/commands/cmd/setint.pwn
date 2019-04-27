@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setint(playerid, params[])
+YCMD:setint(playerid, params[], help)
 {
 	new string[128];
 

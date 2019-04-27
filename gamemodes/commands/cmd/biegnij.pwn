@@ -28,7 +28,7 @@
 	
 */
 
-CMD:biegnij(playerid, params[])
+YCMD:biegnij(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

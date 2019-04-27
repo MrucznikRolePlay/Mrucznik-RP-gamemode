@@ -28,7 +28,7 @@
 	
 */
 
-CMD:uniform2(playerid, params[])
+YCMD:uniform2(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid) && IsAtClothShop(playerid) && PlayerInfo[playerid][pMember] != 0)
     {

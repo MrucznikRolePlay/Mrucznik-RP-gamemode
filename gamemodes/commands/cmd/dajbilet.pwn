@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dajbilet(playerid, params[])
+YCMD:dajbilet(playerid, params[], help)
 {
 	if(GetPlayerOrg(playerid) == FAMILY_ALHAMBRA && PlayerInfo[playerid][pRank] >= 1)
 	{

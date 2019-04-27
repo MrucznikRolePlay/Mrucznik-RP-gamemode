@@ -28,7 +28,7 @@
 	
 */
 
-CMD:blok(playerid, params[])
+YCMD:blok(playerid, params[], help)
 {
 	new string[128];
     if(IsPlayerConnected(playerid))

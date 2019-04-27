@@ -33,7 +33,7 @@
 
 
 
-CMD:kamera_wiezienie(playerid, params[])
+YCMD:kamera_wiezienie(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:teczka(playerid, params[])
+YCMD:teczka(playerid, params[], help)
 {
 	new string[64];
 	new giveplayer[MAX_PLAYER_NAME];

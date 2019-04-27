@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bwtime(playerid, params[]) {
+YCMD:bwtime(playerid, params[], help) {
     if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid)) {
         new ust;
         if(sscanf(params, "d", ust)) return sendTipMessage(playerid, "U¿yj /bwtime [Czas BW w Sekundach]");

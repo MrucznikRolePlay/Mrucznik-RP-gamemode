@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setcarint(playerid, params[])
+YCMD:setcarint(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

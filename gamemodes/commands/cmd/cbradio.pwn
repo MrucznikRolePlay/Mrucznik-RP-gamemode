@@ -30,7 +30,7 @@
 
 
 
-CMD:cbradio(playerid, params[])
+YCMD:cbradio(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pCB] == 0)
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tankujauta(playerid, params[])
+YCMD:tankujauta(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

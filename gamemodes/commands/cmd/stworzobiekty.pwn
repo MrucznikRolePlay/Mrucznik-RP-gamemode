@@ -28,7 +28,7 @@
 	
 */
 
-CMD:stworzobiekty(playerid, params[])
+YCMD:stworzobiekty(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {

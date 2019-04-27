@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ubranie(playerid, params[])
+YCMD:ubranie(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
 	{

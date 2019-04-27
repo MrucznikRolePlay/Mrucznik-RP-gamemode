@@ -28,7 +28,7 @@
 	
 */
 
-CMD:loadconfig(playerid, params[])
+YCMD:loadconfig(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     SendClientMessage(playerid, -1, "Wczytujê konfiguracjê serwera.");

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ban(playerid, params[])
+YCMD:ban(playerid, params[], help)
 {
 	new string[256];
 	new giveplayer[MAX_PLAYER_NAME];

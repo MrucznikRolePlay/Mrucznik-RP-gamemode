@@ -29,7 +29,7 @@
 */
 
 
-CMD:kontakty(playerid, params[])
+YCMD:kontakty(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pPnumber] == 0)
 	{

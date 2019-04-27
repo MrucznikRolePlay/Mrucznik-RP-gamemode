@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprzedajrybe(playerid, params[])
+YCMD:sprzedajrybe(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

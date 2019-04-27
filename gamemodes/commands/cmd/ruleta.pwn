@@ -29,7 +29,7 @@
 */
 
 
-CMD:ruleta(playerid, params[])
+YCMD:ruleta(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

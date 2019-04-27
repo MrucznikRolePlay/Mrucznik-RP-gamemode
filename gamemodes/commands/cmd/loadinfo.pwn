@@ -28,7 +28,7 @@
 	
 */
 
-CMD:loadinfo(playerid, params[])
+YCMD:loadinfo(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     SendClientMessage(playerid, -1, "Wczytujê informacje...");

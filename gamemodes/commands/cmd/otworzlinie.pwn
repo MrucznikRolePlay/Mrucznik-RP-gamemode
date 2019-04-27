@@ -28,7 +28,7 @@
 	
 */
 
-CMD:otworzlinie(playerid, p[])
+YCMD:otworzlinie(playerid, p[], help)
 {
     if(IsPlayerInFraction(playerid, FRAC_SN, 1000))
     {

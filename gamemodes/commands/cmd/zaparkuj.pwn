@@ -29,7 +29,7 @@
 */
 
 
-CMD:zaparkuj(playerid, params[])
+YCMD:zaparkuj(playerid, params[], help)
 {
 	new string[256];
 	new VW = GetPlayerVirtualWorld(playerid); 

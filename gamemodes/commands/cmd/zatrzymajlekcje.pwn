@@ -32,7 +32,7 @@
 
 
 
-CMD:zatrzymajlekcje(playerid, params[])
+YCMD:zatrzymajlekcje(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

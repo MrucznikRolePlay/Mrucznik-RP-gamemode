@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bp(playerid, params[])//blokada pisania
+YCMD:bp(playerid, params[], help)//blokada pisania
 {
 	new giveplayerid, czas, text[32], string[256];
 	if(sscanf(params, "k<fix>ds[32]", giveplayerid, czas, text))

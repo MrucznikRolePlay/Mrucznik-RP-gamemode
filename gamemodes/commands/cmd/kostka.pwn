@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kostka(playerid, params[])
+YCMD:kostka(playerid, params[], help)
 {
     if(!IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969)) return sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "Tylko w kasynie!");
     if(strcmp(params, "akceptuj", true) == 0 || strcmp(params, "a", true) == 0)

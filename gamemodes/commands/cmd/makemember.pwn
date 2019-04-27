@@ -28,7 +28,7 @@
 	
 */
 
-CMD:makemember(playerid, params[])
+YCMD:makemember(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

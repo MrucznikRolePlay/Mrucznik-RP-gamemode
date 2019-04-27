@@ -29,7 +29,7 @@
 */
 
 
-CMD:stopanim(playerid, params[])
+YCMD:stopanim(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kamerau(playerid, params[])
+YCMD:kamerau(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

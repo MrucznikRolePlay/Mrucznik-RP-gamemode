@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wymiana(playerid, params[])
+YCMD:wymiana(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ustawcena(playerid, params[])
+YCMD:ustawcena(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

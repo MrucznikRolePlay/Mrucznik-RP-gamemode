@@ -28,7 +28,7 @@
 	
 */
 
-CMD:editobject(playerid, params[])
+YCMD:editobject(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
     SetPVarInt(playerid, "Allow-edit", 1);

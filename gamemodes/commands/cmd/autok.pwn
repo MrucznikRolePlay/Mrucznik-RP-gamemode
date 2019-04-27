@@ -28,7 +28,7 @@
 	
 */
 
-CMD:autok(playerid, params[])
+YCMD:autok(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pKluczeAuta] > 0)
 	{

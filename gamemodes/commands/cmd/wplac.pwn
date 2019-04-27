@@ -30,7 +30,7 @@
 
 
 
-CMD:wplac(playerid, params[])
+YCMD:wplac(playerid, params[], help)
 {
 	new string[128];
 

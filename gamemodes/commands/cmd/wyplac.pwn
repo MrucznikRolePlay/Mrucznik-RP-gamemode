@@ -29,7 +29,7 @@
 */
 
 
-CMD:wyplac(playerid, params[])
+YCMD:wyplac(playerid, params[], help)
 {
 	new string[128];
 

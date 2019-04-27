@@ -32,7 +32,7 @@
 
 
 
-CMD:ksiazkatel(playerid, params[])
+YCMD:ksiazkatel(playerid, params[], help)
 {
 	new string[64];
 	new sendername[MAX_PLAYER_NAME];

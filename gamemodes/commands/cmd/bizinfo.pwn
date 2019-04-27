@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bizinfo(playerid, params[])
+YCMD:bizinfo(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

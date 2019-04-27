@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kolory(playerid, params[])
+YCMD:kolory(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

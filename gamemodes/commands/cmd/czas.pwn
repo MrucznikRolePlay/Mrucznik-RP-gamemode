@@ -29,7 +29,7 @@
 */
 
 
-CMD:czas(playerid, params[])
+YCMD:czas(playerid, params[], help)
 {
 	new string[128];
 

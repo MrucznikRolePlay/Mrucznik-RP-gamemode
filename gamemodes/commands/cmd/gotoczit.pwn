@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotoczit(playerid, params[])
+YCMD:gotoczit(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] > 1 || IsAScripter(playerid))
     {

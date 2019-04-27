@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kurtka(playerid, params[])
+YCMD:kurtka(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

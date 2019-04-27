@@ -29,7 +29,7 @@
 */
 
 
-CMD:stworztrase(playerid, params[])
+YCMD:stworztrase(playerid, params[], help)
 {
 	new string[128];
 

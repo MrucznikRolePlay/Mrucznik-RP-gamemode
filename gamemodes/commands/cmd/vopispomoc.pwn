@@ -28,7 +28,7 @@
 	
 */
 
-CMD:vopispomoc(playerid, params[])
+YCMD:vopispomoc(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotobank(playerid, params[])
+YCMD:gotobank(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) {
         

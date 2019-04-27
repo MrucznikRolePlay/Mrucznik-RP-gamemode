@@ -28,7 +28,7 @@
 	
 */
 
-CMD:rapidfly(playerid, p[])
+YCMD:rapidfly(playerid, p[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
     {

@@ -30,7 +30,7 @@
 
 
 
-CMD:say(playerid, params[])
+YCMD:say(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

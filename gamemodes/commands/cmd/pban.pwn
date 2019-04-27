@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pban(playerid, params[])
+YCMD:pban(playerid, params[], help)
 {
 	new string[128];
     if(IsPlayerConnected(playerid))

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wezportfel(playerid, params[])
+YCMD:wezportfel(playerid, params[], help)
 {
 	if(IsAMember(playerid))
 	{

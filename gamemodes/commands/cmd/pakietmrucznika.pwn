@@ -29,7 +29,7 @@
 */
 
 #if DEBUG == 1
-CMD:pakietmrucznika(playerid, params[])
+YCMD:pakietmrucznika(playerid, params[], help)
 {
 
     if(gettime() < GetPVarInt(playerid, "pakietl")) return sendTipMessage(playerid, "{dafc10}Mo¿esz u¿ywaæ tego co 60s");

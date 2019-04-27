@@ -30,7 +30,7 @@
 
 
 
-CMD:pl(playerid, params[])
+YCMD:pl(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

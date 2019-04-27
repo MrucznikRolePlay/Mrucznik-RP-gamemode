@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setstat(playerid, params[])
+YCMD:setstat(playerid, params[], help)
 {
 	new string[128];
 

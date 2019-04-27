@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sex(playerid, params[])
+YCMD:sex(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

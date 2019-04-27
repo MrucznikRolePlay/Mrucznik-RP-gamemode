@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wylogujgracz(playerid, params[])
+YCMD:wylogujgracz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

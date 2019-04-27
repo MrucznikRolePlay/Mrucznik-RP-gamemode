@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotoint(playerid, params[])
+YCMD:gotoint(playerid, params[], help)
 {
 	new string[128];
 

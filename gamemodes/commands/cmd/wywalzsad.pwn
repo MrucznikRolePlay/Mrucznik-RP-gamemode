@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wywalzsad(playerid,params[]) //GSA
+YCMD:wywalzsad(playerid,params[], help) //GSA
 {
     if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2 || GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 3)
 	{

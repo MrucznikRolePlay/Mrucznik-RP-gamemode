@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kajdanki(playerid, params[])
+YCMD:kajdanki(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

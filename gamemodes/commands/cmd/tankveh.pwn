@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tankveh(playerid, params[])
+YCMD:tankveh(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:lsmcelevator(playerid, params[])
+YCMD:lsmcelevator(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] < 20) return 1;
     ChangeLSMCElevatorState();

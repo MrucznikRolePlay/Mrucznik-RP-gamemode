@@ -28,7 +28,7 @@
 	
 */
 
-CMD:admini(playerid, params[])
+YCMD:admini(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

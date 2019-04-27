@@ -28,7 +28,7 @@
 	
 */
 
-CMD:przejazd(playerid, params[]) {
+YCMD:przejazd(playerid, params[], help) {
 	if(!gPlayerLogged[playerid]) return sendErrorMessage(playerid, "Nope!");
 	if(GetPVarInt(playerid, "wybramkowany") == 1) return sendErrorMessage(playerid, "Poczekaj na zamkniêcie siê poprzedniej bramki!");
 	for(new i; i < sizeof(bramki_sasd); i++)

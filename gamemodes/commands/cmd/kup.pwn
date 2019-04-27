@@ -29,7 +29,7 @@
 */
 
 
-CMD:kup(playerid, params[])
+YCMD:kup(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

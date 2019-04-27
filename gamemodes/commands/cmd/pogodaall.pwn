@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pogodaall(playerid, params[])
+YCMD:pogodaall(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

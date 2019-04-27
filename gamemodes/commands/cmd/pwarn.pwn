@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pwarn(playerid, params[])
+YCMD:pwarn(playerid, params[], help)
 {
 	new string[128];
     if(IsPlayerConnected(playerid))

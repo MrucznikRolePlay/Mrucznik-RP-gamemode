@@ -30,7 +30,7 @@
 
 
 
-CMD:togwl(playerid, params[])
+YCMD:togwl(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

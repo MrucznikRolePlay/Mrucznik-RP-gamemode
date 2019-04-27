@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setcarvw(playerid, params[])
+YCMD:setcarvw(playerid, params[], help)
 {
 	new valueCAR, valueVW;
 	if(sscanf(params, "k<fix>d", valueCAR, valueVW))

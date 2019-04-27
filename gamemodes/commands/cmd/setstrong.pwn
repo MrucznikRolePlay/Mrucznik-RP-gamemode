@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setstrong(playerid, params[])
+YCMD:setstrong(playerid, params[], help)
 {
 	new valueStrong, giveplayerid;
 	new string[128];

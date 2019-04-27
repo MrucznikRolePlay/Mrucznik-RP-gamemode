@@ -28,7 +28,7 @@
 	
 */
 
-CMD:givegun(playerid, params[])
+YCMD:givegun(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

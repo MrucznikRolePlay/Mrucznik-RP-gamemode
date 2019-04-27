@@ -28,7 +28,7 @@
 	
 */
 
-CMD:elo2(playerid, params[])
+YCMD:elo2(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

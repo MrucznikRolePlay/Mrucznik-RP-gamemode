@@ -28,7 +28,7 @@
 	
 */
 
-CMD:awans(playerid, params[])
+YCMD:awans(playerid, params[], help)
 {
 	new para1;
 	if(sscanf(params, "k<fix>", para1))

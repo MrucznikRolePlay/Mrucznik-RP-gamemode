@@ -28,7 +28,7 @@
 	
 */
 
-CMD:choroba(playerid, params[])
+YCMD:choroba(playerid, params[], help)
 {
 	new string[64];
 	new sendername[MAX_PLAYER_NAME];

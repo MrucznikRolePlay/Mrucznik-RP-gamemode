@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zamknijlinie(playerid, p[])
+YCMD:zamknijlinie(playerid, p[], help)
 {
     if(IsPlayerInFraction(playerid, FRAC_SN, 1000))
     {

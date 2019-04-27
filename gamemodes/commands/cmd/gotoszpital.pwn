@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotoszpital(playerid, params[])
+YCMD:gotoszpital(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

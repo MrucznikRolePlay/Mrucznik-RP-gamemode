@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dajzaufanego(playerid, params[])
+YCMD:dajzaufanego(playerid, params[], help)
 {
     if(Uprawnienia(playerid, ACCESS_ZG))
     {

@@ -31,7 +31,7 @@
 
 
 
-CMD:kuplodzie(playerid, params[])
+YCMD:kuplodzie(playerid, params[], help)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666))
     {

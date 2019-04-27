@@ -28,7 +28,7 @@
 	
 */
 
-CMD:carjump(playerid, params[])
+YCMD:carjump(playerid, params[], help)
 {
 	if(IsPlayerInAnyVehicle(playerid))
 	{

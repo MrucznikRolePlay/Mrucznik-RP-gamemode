@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotostacja(playerid, params[])
+YCMD:gotostacja(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) {
         

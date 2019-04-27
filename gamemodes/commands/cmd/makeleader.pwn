@@ -28,7 +28,7 @@
 	
 */
 
-CMD:makeleader(playerid, params[])
+YCMD:makeleader(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

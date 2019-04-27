@@ -30,7 +30,7 @@
 
 
 
-CMD:od(playerid, params[])
+YCMD:od(playerid, params[], help)
 {
 	new string[64];
 

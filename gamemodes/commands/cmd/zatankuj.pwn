@@ -30,7 +30,7 @@
 
 
 
-CMD:zatankuj(playerid, params[])
+YCMD:zatankuj(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

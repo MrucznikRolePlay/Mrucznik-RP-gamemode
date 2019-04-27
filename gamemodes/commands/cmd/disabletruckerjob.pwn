@@ -28,7 +28,7 @@
 	
 */
 
-CMD:disabletruckerjob(playerid, params[])
+YCMD:disabletruckerjob(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
     if(!GLOBAL_DISABLETRUCKER) GLOBAL_DISABLETRUCKER = true;

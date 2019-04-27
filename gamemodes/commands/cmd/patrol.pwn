@@ -28,7 +28,7 @@
 	
 */
 
-CMD:patrol(playerid, params[])
+YCMD:patrol(playerid, params[], help)
 {
     new var[32];
 	if(!IsPlayerConnected(playerid)) return 1;

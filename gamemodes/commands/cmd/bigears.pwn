@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bigears(playerid, params[])
+YCMD:bigears(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] > 200)
     {

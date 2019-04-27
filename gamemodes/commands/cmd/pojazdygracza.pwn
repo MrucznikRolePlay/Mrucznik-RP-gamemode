@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pojazdygracza(playerid, params[])
+YCMD:pojazdygracza(playerid, params[], help)
 {
 	new string[256];
     if(IsPlayerConnected(playerid))

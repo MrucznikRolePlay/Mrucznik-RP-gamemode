@@ -29,7 +29,7 @@
 */
 
 
-CMD:napraw(playerid, params[])
+YCMD:napraw(playerid, params[], help)
 {
     new string[128];
     new sendername[MAX_PLAYER_NAME];

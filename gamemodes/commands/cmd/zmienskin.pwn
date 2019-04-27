@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zmienskin(playerid, params[])
+YCMD:zmienskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -29,7 +29,7 @@
 */
 
 
-CMD:bus(playerid, params[])
+YCMD:bus(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

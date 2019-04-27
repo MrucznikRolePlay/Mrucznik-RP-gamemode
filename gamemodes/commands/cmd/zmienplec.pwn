@@ -29,7 +29,7 @@
 */
 
 
-CMD:zmienplec(playerid, params[])
+YCMD:zmienplec(playerid, params[], help)
 {
 	new playa;
 	if(sscanf(params, "k<fix>", playa))

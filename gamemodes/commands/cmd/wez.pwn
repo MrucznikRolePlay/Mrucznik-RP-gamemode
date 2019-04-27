@@ -29,7 +29,7 @@
 */
 
 
-CMD:wez(playerid, params[])
+YCMD:wez(playerid, params[], help)
 {
 	new string[128];
 

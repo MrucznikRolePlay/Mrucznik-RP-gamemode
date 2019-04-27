@@ -28,7 +28,7 @@
 	
 */
 
-CMD:unspec(playerid, params[])
+YCMD:unspec(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
     {

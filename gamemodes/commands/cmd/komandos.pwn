@@ -29,7 +29,7 @@
 */
 
 
-CMD:komandos(playerid, params[])
+YCMD:komandos(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pWino] >= 1)
     {

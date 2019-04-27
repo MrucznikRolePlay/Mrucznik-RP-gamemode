@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dodajweryfikacje(playerid, params[])
+YCMD:dodajweryfikacje(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

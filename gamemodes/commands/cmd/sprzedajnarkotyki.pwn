@@ -31,7 +31,7 @@
 
 
 
-CMD:sprzedajnarkotyki(playerid, params[])
+YCMD:sprzedajnarkotyki(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

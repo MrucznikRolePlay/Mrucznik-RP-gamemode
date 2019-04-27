@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wybieralka(playerid, params[])
+YCMD:wybieralka(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

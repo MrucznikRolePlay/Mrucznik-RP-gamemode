@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wobiekt(playerid, params[])
+YCMD:wobiekt(playerid, params[], help)
 {
 	new player, slot;
 	if (sscanf(params, "k<fix>d", player, slot)) return 1;

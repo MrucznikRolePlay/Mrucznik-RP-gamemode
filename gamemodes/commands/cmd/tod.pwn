@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tod(playerid, params[])
+YCMD:tod(playerid, params[], help)
 {
 	new string[128];
 

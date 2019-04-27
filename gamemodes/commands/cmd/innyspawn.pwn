@@ -31,7 +31,7 @@
 
 
 
-CMD:innyspawn(playerid, params[])
+YCMD:innyspawn(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:autoranny(playerid, params[])
+YCMD:autoranny(playerid, params[], help)
 {
 	new string[128];
 	ApplyAnimation(playerid,"PED","CAR_dead_LHS",4.1,0,1,1,1,1);

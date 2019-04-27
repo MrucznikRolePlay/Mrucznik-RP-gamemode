@@ -30,7 +30,7 @@
 
 
 
-CMD:mp3(playerid, params[])
+YCMD:mp3(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

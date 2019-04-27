@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tjdcp1(playerid, params[])
+YCMD:tjdcp1(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] < 5) return 1;
     new idx;

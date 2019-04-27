@@ -28,7 +28,7 @@
 	
 */
 
-CMD:glosowanie(playerid, params[])
+YCMD:glosowanie(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

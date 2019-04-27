@@ -28,7 +28,7 @@
 	
 */
 
-CMD:maska(playerid, params[])
+YCMD:maska(playerid, params[], help)
 {
 	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{

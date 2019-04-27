@@ -28,7 +28,7 @@
 	
 */
 
-CMD:owarsztat(playerid, params[])
+YCMD:owarsztat(playerid, params[], help)
 {
 	if(IsANoA(playerid))
 	{

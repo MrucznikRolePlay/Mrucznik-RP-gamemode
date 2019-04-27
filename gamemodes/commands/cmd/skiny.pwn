@@ -30,7 +30,7 @@
 	
 */
 
-CMD:skiny(playerid, params[])
+YCMD:skiny(playerid, params[], help)
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
 /*	

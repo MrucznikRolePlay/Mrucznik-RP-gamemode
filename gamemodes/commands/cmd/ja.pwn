@@ -29,7 +29,7 @@
 */
 
 
-CMD:ja(playerid, params[])
+YCMD:ja(playerid, params[], help)
 {
 	if(isnull(params))
 	{

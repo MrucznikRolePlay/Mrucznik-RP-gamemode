@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ticketend(playerid, params[])
+YCMD:ticketend(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
     if(GetPVarInt(playerid, "validticket") != 1) return 1;

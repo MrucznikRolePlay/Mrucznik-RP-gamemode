@@ -28,7 +28,7 @@
 	
 */
 
-CMD:balans(playerid, params[])
+YCMD:balans(playerid, params[], help)
 {
 /*
 	new string[64];

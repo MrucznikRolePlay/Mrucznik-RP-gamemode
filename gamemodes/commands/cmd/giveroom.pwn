@@ -30,7 +30,7 @@
 
 
 
-CMD:giveroom(playerid, params[])
+YCMD:giveroom(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

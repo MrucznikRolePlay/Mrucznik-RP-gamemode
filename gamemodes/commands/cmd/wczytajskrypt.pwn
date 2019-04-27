@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wczytajskrypt(playerid, params[])
+YCMD:wczytajskrypt(playerid, params[], help)
 {
 	new string[128];
 	if(IsPlayerConnected(playerid))

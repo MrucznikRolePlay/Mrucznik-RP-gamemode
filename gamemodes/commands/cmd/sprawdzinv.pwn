@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprawdzinv(playerid, params[])
+YCMD:sprawdzinv(playerid, params[], help)
 {
 	new string[64];
 

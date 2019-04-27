@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bonehead(playerid, params[]) {
+YCMD:bonehead(playerid, params[], help) {
     if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 25 || IsAScripter(playerid)) {
         new ust[128];
         if(sscanf(params, "s[128]", ust)) return sendTipMessage(playerid, "U¿yj /bonehead [URL do linku muzyki]");

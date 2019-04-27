@@ -29,7 +29,7 @@
 */
 
 
-CMD:podatek(playerid, params[])
+YCMD:podatek(playerid, params[], help)
 {
 	new string[64];
 

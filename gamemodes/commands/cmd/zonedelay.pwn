@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zonedelay(playerid, p[])
+YCMD:zonedelay(playerid, p[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;

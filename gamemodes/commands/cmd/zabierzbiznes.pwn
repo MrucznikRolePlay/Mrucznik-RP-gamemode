@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zabierzbiznes(playerid, params[])
+YCMD:zabierzbiznes(playerid, params[], help)
 {
 	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zamroz(playerid, params[])
+YCMD:zamroz(playerid, params[], help)
 {
 	new string[128];
     if(IsPlayerConnected(playerid))

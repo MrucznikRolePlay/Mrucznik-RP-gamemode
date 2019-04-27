@@ -28,7 +28,7 @@
 	
 */
 
-CMD:newcar(playerid, params[])
+YCMD:newcar(playerid, params[], help)
 {
 	new string[64];
 

@@ -30,7 +30,7 @@
 
 
 
-CMD:cp(playerid, params[])
+YCMD:cp(playerid, params[], help)
 {
 	new string[128];
 

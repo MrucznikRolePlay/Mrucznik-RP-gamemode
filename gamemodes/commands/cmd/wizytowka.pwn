@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wizytowka(playerid, params[])
+YCMD:wizytowka(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pPnumber] == 0)
 	{

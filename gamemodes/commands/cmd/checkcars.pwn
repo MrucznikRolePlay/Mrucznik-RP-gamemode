@@ -28,7 +28,7 @@
 	
 */
 
-CMD:checkcars(playerid, params[])
+YCMD:checkcars(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wylogujall(playerid, params[])
+YCMD:wylogujall(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

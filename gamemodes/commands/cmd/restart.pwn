@@ -28,7 +28,7 @@
 	
 */
 
-CMD:restart(playerid, params[])
+YCMD:restart(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

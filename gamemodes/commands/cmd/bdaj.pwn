@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bdaj(playerid, params[])
+YCMD:bdaj(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid))
 	{

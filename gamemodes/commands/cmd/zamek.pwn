@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zamek(playerid, params[])
+YCMD:zamek(playerid, params[], help)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 725.7198,-1439.3527,13.5391) ||
 	IsPlayerInRangeOfPoint(playerid, 5.0, 734.0619, -1451.6720, 22.5920) ||

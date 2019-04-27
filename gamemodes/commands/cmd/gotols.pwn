@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotols(playerid, params[])
+YCMD:gotols(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

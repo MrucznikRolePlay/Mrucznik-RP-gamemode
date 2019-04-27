@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cziterzy(playerid, params[])
+YCMD:cziterzy(playerid, params[], help)
 {
     /*if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)//if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     {

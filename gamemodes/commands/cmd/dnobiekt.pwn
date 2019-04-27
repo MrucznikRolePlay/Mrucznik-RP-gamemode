@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dnobiekt(playerid, params[])
+YCMD:dnobiekt(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 	{

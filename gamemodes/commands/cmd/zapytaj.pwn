@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zapytaj(playerid, p[])
+YCMD:zapytaj(playerid, p[], help)
 {
     if(GetPVarInt(playerid, "active_ticket") != 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Twoje wczesniejsze zg≥oszenie nadal jest aktywne. Poczekaj na odpowiedü!");
     new desc[64];

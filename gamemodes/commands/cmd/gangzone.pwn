@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gangzone(playerid, p[])
+YCMD:gangzone(playerid, p[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;

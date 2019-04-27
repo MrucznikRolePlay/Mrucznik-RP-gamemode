@@ -28,7 +28,7 @@
 	
 */
 
-CMD:spec(playerid, params[])
+YCMD:spec(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME+1];

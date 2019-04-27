@@ -28,7 +28,7 @@
 	
 */
 
-CMD:respawnplayer(playerid, params[])
+YCMD:respawnplayer(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
     new v;

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setarmor(playerid, params[])
+YCMD:setarmor(playerid, params[], help)
 {
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];

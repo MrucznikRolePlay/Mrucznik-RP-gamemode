@@ -29,7 +29,7 @@
 */
 
 
-CMD:dajpodatek(playerid, params[])
+YCMD:dajpodatek(playerid, params[], help)
 {
 	new string[128];
 

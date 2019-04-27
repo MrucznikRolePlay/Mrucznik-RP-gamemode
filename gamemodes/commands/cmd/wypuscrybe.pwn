@@ -30,7 +30,7 @@
 
 
 
-CMD:wypuscrybe(playerid, params[])
+YCMD:wypuscrybe(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setskin(playerid, params[])
+YCMD:setskin(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

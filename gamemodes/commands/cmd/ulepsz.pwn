@@ -30,7 +30,7 @@
 
 
 
-CMD:ulepsz(playerid, params[])
+YCMD:ulepsz(playerid, params[], help)
 {
 	new string[128];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togname(playerid, params[])
+YCMD:togname(playerid, params[], help)
 {
     if(GetPVarInt(playerid, "tognick") == 1)
     {

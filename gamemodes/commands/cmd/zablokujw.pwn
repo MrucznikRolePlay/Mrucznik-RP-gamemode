@@ -30,7 +30,7 @@
 
 
 
-CMD:zablokujw(playerid, params[])
+YCMD:zablokujw(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

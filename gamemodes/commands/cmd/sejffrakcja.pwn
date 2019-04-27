@@ -29,7 +29,7 @@
 */
 
 
-CMD:sejffrakcja(playerid, params[])
+YCMD:sejffrakcja(playerid, params[], help)
 {
 	sendErrorMessage(playerid, "U¿yj /kontobankowe"); 
 	return 1;

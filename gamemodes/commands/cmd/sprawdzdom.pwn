@@ -29,7 +29,7 @@
 */
 
 
-CMD:sprawdzdom(playerid, params[])
+YCMD:sprawdzdom(playerid, params[], help)
 {
 	new string[64];
 	new sendername[MAX_PLAYER_NAME];

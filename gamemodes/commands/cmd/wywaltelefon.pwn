@@ -29,7 +29,7 @@
 */
 
 
-CMD:wywaltelefon(playerid, params[]) {
+YCMD:wywaltelefon(playerid, params[], help) {
     if(!IsPlayerConnected(playerid)) return 1;
     PlayerInfo[playerid][pPnumber] = 0;
     MSGBOX_Show(playerid, "Telefon ~g~Wywalony", MSGBOX_ICON_TYPE_OK);

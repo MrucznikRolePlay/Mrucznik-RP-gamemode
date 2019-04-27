@@ -31,7 +31,7 @@
 */
 
 
-CMD:premiumskin(playerid, params[])
+YCMD:premiumskin(playerid, params[], help)
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
 /*	

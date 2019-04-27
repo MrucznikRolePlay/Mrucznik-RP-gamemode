@@ -29,7 +29,7 @@
 */
 
 
-CMD:house(playerid, params[])
+YCMD:house(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

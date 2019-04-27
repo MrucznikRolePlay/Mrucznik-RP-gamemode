@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprawdzgwiazdki(playerid, params[])
+YCMD:sprawdzgwiazdki(playerid, params[], help)
 {
 	if(isnull(params))
 	{

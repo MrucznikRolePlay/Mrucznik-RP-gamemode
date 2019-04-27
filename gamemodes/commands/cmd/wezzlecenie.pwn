@@ -29,7 +29,7 @@
 */
 
 
-CMD:wezzlecenie(playerid, params[])
+YCMD:wezzlecenie(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pJob] == JOB_TRUCKER)
     {

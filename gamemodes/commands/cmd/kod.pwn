@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kod(playerid,params[])
+YCMD:kod(playerid,params[], help)
 {
     if(PlayerInfo[playerid][pLider] == FRAC_NG)
     {

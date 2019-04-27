@@ -28,7 +28,7 @@
 	
 */
 
-CMD:veh(playerid, params[])
+YCMD:veh(playerid, params[], help)
 {
 	new string[64];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dr(playerid, params[])
+YCMD:dr(playerid, params[], help)
 {
 	if(IsPlayerInAnyVehicle(playerid))
 	{

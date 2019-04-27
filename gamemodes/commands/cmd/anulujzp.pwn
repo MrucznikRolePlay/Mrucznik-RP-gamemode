@@ -28,7 +28,7 @@
 	
 */
 
-CMD:anulujzp(playerid, params[]) 
+YCMD:anulujzp(playerid, params[], help) 
 {
     if(PlayerInfo[playerid][pAdmin] >= 5) 
 	{

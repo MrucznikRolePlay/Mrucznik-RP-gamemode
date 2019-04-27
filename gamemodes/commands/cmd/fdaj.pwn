@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fdaj(playerid, params[])
+YCMD:fdaj(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >=10 || IsAScripter(playerid))
 	{

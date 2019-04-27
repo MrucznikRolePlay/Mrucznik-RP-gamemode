@@ -31,7 +31,7 @@
 
 
 
-CMD:carhelp(playerid, params[])
+YCMD:carhelp(playerid, params[], help)
 {
     if(GUIExit[playerid] == 0)
     {

@@ -29,8 +29,8 @@
 */
 
 /*
-CMD:podszyj(playerid, params[]) return RunCommand(playerid, "/podszyjsie",  params);
-CMD:podszyjsie(playerid, params[])
+YCMD:podszyj(playerid, params[]) return RunCommand(playerid, "/podszyjsie",  params, help);
+YCMD:podszyjsie(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

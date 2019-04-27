@@ -28,7 +28,7 @@
 	
 */
 
-CMD:goto(playerid, params[])
+YCMD:goto(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

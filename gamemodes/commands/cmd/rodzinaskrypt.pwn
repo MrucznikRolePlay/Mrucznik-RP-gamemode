@@ -28,7 +28,7 @@
 	
 */
 
-CMD:rodzinaskrypt(playerid, params[])
+YCMD:rodzinaskrypt(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return 1;
     new id, nazwa[32];

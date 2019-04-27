@@ -28,7 +28,7 @@
 	
 */
 
-CMD:roleta(playerid,params[])
+YCMD:roleta(playerid,params[], help)
 {
 	if(open == 0)
 	{

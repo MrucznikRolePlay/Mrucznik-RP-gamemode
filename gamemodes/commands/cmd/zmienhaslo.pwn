@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zmienhaslo(playerid, params[])
+YCMD:zmienhaslo(playerid, params[], help)
 {
 	new string[256];
 

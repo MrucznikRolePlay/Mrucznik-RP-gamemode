@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotobiz(playerid, params[])
+YCMD:gotobiz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -30,7 +30,7 @@
 
 
 
-CMD:wywalmaterialy(playerid, params[])
+YCMD:wywalmaterialy(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pMats] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie materia³ów");
 	new nick[MAX_PLAYER_NAME], string[128];

@@ -30,7 +30,7 @@
 
 
 
-CMD:sms(playerid, params[])
+YCMD:sms(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

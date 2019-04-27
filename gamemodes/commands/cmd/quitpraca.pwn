@@ -30,7 +30,7 @@
 
 
 
-CMD:quitpraca(playerid, params[])
+YCMD:quitpraca(playerid, params[], help)
 {
 	new string[128];
 

@@ -30,7 +30,7 @@
 
 
 
-CMD:zk(playerid, params[])
+YCMD:zk(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)
 	{

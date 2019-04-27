@@ -29,7 +29,7 @@
 */
 
 
-CMD:dolacz(playerid, params[])
+YCMD:dolacz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

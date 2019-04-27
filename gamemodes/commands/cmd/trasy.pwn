@@ -29,7 +29,7 @@
 */
 
 
-CMD:trasy(playerid, params[])
+YCMD:trasy(playerid, params[], help)
 {
 	if(GUIExit[playerid] == 0)
 	{

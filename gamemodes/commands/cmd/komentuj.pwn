@@ -29,7 +29,7 @@
 */
 
 
-CMD:komentuj(playerid, params[])
+YCMD:komentuj(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:rozwiedz(playerid, params[])
+YCMD:rozwiedz(playerid, params[], help)
 {
 	new string[64];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:teleturniej(playerid,params[])
+YCMD:teleturniej(playerid,params[], help)
 {
     if(!(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)) return 1;
 	new Zawodnik1,Zawodnik2,Zawodnik3;

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:stopbieg(playerid, params[])
+YCMD:stopbieg(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

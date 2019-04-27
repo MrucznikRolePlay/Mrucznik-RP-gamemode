@@ -28,7 +28,7 @@
 	
 */
 
-CMD:alkomat(playerid, params[])
+YCMD:alkomat(playerid, params[], help)
 {
 	new giveplayerid;
 	if(sscanf(params, "k<fix>", giveplayerid))

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:addcar(playerid, p[])
+YCMD:addcar(playerid, p[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return 1;
     new model, color1, color2;

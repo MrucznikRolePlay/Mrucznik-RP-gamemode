@@ -29,7 +29,7 @@
 */
 
 
-CMD:wejdzw(playerid, params[])
+YCMD:wejdzw(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
 	{

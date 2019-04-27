@@ -28,7 +28,7 @@
 	
 */
 
-CMD:czyjtonumer(playerid, params[])
+YCMD:czyjtonumer(playerid, params[], help)
 {
 	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{

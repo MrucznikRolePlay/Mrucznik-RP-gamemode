@@ -30,7 +30,7 @@
 
 
 
-CMD:icons(playerid, params[])
+YCMD:icons(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

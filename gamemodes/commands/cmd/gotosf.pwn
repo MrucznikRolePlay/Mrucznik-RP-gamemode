@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotosf(playerid, params[])
+YCMD:gotosf(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

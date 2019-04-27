@@ -28,7 +28,7 @@
 	
 */
 
-CMD:lot(playerid, params[])
+YCMD:lot(playerid, params[], help)
 {
     new data[32], sub[128];
     if(sscanf(params, "s[32]S()[128]", data, sub))

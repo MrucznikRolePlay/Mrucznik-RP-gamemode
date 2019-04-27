@@ -29,7 +29,7 @@
 */
 
 
-CMD:licencje(playerid, params[])
+YCMD:licencje(playerid, params[], help)
 {
 	new string[128];
 

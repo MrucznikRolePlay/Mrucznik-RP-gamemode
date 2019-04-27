@@ -30,7 +30,7 @@
 
 
 
-CMD:sejfpomoc(playerid, params[])
+YCMD:sejfpomoc(playerid, params[], help)
 {
 	//SendClientMessage(playerid, COLOR_PANICRED, "Sejf wy³¹czony na czas naprawy. Przepraszamy za uniedogodnienia.");
     if(IsPlayerConnected(playerid))

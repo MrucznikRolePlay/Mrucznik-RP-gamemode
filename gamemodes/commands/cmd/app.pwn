@@ -28,7 +28,7 @@
 	
 */
 
-CMD:app(playerid, params[]) {
+YCMD:app(playerid, params[], help) {
     if(GetPVarInt(playerid, "pozwolenie-oferuje") == 999) return sendErrorMessage(playerid, "Nikt nie oferowa³ Ci pozwolenia prawniczego!");
     new ofertaod = GetPVarInt(playerid, "pozwolenie-oferuje");
     if(!IsPlayerConnected(ofertaod)) return sendErrorMessage(playerid, "Osoba, która oferowa³a Ci pozwolenie wysz³a z serwera!");

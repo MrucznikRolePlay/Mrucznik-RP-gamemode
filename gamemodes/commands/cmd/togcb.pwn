@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togcb(playerid, params[])
+YCMD:togcb(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pCB] == 1)
 	{

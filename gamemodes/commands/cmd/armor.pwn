@@ -28,7 +28,7 @@
 	
 */
 
-CMD:armor(playerid, params[])
+YCMD:armor(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
 	{

@@ -30,7 +30,7 @@
 
 
 
-CMD:deletedom(playerid, params[])
+YCMD:deletedom(playerid, params[], help)
 {
 	new string[64];
 

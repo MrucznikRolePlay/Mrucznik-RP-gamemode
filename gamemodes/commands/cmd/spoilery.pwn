@@ -29,7 +29,7 @@
 */
 
 
-CMD:spoilery(playerid, params[])
+YCMD:spoilery(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

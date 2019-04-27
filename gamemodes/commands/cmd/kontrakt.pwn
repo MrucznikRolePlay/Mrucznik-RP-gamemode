@@ -29,7 +29,7 @@
 */
 
 
-CMD:kontrakt(playerid, params[])
+YCMD:kontrakt(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

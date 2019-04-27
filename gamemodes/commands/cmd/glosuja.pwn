@@ -28,7 +28,7 @@
 	
 */
 
-CMD:glosuja(playerid, params[])
+YCMD:glosuja(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

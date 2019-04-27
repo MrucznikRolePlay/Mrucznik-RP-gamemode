@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fbidrzwi(playerid, params[])
+YCMD:fbidrzwi(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

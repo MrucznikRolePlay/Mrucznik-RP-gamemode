@@ -29,7 +29,7 @@
 */
 
 
-CMD:kaucja(playerid, params[])
+YCMD:kaucja(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

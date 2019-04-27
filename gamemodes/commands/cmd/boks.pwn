@@ -28,7 +28,7 @@
 	
 */
 
-CMD:boks(playerid, params[])
+YCMD:boks(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

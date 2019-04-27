@@ -29,7 +29,7 @@
 */
 
 /*
-CMD:cela2(playerid, params[])
+YCMD:cela2(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

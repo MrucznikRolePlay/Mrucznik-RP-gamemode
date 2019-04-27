@@ -28,7 +28,7 @@
 	
 */
 
-CMD:crimereport(playerid, params[])
+YCMD:crimereport(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

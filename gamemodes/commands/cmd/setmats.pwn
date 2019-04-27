@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setmats(playerid, params[])
+YCMD:setmats(playerid, params[], help)
 {
 	if (IsAHeadAdmin(playerid))
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zawodnicy(playerid, params[])
+YCMD:zawodnicy(playerid, params[], help)
 {
 	new string[32];
 

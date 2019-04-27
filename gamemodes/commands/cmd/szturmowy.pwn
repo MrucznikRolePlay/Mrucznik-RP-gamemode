@@ -28,7 +28,7 @@
 	
 */
 
-CMD:szturmowy(playerid, params[])
+YCMD:szturmowy(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

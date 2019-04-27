@@ -28,7 +28,7 @@
 	
 */
 
-CMD:mojskin(playerid, params[])
+YCMD:mojskin(playerid, params[], help)
 {
     new str[32];
     format(str, 32, "ID Twojego skina: %d", GetPlayerSkin(playerid));

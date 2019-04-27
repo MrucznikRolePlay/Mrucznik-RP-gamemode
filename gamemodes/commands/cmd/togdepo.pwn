@@ -29,7 +29,7 @@
 */
 
 
-CMD:togdepo(playerid, params[])
+YCMD:togdepo(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

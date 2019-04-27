@@ -28,7 +28,7 @@
 	
 */
 
-CMD:snn(playerid, params[])
+YCMD:snn(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] < 25)
 	{

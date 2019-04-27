@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zuzel_start(playerid, params[])
+YCMD:zuzel_start(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

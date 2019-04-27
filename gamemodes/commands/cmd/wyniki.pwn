@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wyniki(playerid, params[])
+YCMD:wyniki(playerid, params[], help)
 {
 	new string[64];
 

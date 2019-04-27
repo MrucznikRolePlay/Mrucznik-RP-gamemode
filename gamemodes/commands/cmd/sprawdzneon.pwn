@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprawdzneon(playerid, params[])
+YCMD:sprawdzneon(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pJob] == 7)
     {

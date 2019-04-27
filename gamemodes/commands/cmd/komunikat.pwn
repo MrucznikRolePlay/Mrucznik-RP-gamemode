@@ -28,7 +28,7 @@
 	
 */
 
-CMD:komunikat(playerid, params[])
+YCMD:komunikat(playerid, params[], help)
 {
     new string[256], sendername[MAX_PLAYER_NAME];
     GetPlayerName(playerid, sendername, sizeof(sendername));

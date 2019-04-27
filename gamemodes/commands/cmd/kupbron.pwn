@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kupbron(playerid, params[])
+YCMD:kupbron(playerid, params[], help)
 {
 	sendErrorMessage(playerid, "Sprzeda¿ broni zosta³a zakazana!");
 	/*if(PlayerInfo[playerid][pConnectTime] >= 4)

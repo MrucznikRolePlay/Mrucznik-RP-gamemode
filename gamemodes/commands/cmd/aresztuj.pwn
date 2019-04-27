@@ -28,7 +28,7 @@
 	
 */
 
-CMD:aresztuj(playerid, params[])
+YCMD:aresztuj(playerid, params[], help)
 {
 	new string[135];
 	new giveplayer[MAX_PLAYER_NAME];

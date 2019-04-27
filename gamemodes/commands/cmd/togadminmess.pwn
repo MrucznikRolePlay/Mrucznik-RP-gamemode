@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togadminmess(playerid, params[])
+YCMD:togadminmess(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:polej(playerid, params[])
+YCMD:polej(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pRank] >=3 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
 	{

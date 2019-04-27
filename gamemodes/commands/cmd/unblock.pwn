@@ -28,7 +28,7 @@
 	
 */
 
-CMD:unblock(playerid, params[])
+YCMD:unblock(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

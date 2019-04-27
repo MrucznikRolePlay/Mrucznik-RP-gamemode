@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zniszczobiekty(playerid, params[])
+YCMD:zniszczobiekty(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {

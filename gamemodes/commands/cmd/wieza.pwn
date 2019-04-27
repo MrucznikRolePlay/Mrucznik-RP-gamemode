@@ -29,7 +29,7 @@
 */
 
 
-CMD:wieza(playerid, params[])
+YCMD:wieza(playerid, params[], help)
 {
     new data[32], sub[128];
     if(isnull(params))

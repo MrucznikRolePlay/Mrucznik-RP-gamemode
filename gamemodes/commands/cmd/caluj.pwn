@@ -28,7 +28,7 @@
 	
 */
 
-CMD:caluj(playerid, params[])
+YCMD:caluj(playerid, params[], help)
 {
 	new string[128];
 

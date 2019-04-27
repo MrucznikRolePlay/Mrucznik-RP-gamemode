@@ -28,7 +28,7 @@
 	
 */
 
-CMD:flip(playerid, params[])
+YCMD:flip(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

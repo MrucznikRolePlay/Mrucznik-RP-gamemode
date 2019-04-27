@@ -28,7 +28,7 @@
 	
 */
 
-CMD:resetsejfhasla(playerid, params[])
+YCMD:resetsejfhasla(playerid, params[], help)
 {
 	new string[64];
 

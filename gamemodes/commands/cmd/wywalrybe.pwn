@@ -29,7 +29,7 @@
 */
 
 
-CMD:wywalrybe(playerid, params[])
+YCMD:wywalrybe(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:clearwlall(playerid, params[])
+YCMD:clearwlall(playerid, params[], help)
 {
 	new string[128];
 

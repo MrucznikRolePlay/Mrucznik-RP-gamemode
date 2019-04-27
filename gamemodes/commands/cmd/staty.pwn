@@ -30,7 +30,7 @@
 
 
 
-CMD:staty(playerid, params[])
+YCMD:staty(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

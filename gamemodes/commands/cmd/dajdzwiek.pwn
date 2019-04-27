@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dajdzwiek(playerid, params[])
+YCMD:dajdzwiek(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

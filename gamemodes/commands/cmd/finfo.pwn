@@ -28,7 +28,7 @@
 	
 */
 
-CMD:finfo(playerid, params[])
+YCMD:finfo(playerid, params[], help)
 {
 	new string[256];
 	new content[256];

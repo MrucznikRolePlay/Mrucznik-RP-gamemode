@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotomechy(playerid, params[])
+YCMD:gotomechy(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid)) {
 		

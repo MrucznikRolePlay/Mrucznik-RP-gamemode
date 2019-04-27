@@ -28,7 +28,7 @@
 	
 */
 
-CMD:apteczka(playerid, params[])
+YCMD:apteczka(playerid, params[], help)
 {
 	new playa, health;
 	if(sscanf(params, "k<fix>d", playa, health))

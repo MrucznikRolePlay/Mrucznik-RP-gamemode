@@ -28,7 +28,7 @@
 	
 */
 
-CMD:trasybiegu(playerid, params[])
+YCMD:trasybiegu(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

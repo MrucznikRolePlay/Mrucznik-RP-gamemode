@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dajdowozu(playerid, params[])
+YCMD:dajdowozu(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >=5 || IsAScripter(playerid))
 	{

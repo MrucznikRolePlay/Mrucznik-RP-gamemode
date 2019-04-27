@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cnn(playerid, params[])
+YCMD:cnn(playerid, params[], help)
 {
 	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{

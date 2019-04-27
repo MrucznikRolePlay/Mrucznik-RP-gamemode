@@ -30,7 +30,7 @@
 
 
 
-CMD:gotowane(playerid, params[])
+YCMD:gotowane(playerid, params[], help)
 {
 	new string[128];
 

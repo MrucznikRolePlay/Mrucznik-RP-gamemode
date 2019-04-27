@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kick(playerid, params[])
+YCMD:kick(playerid, params[], help)
 {
 	new string[256];
 

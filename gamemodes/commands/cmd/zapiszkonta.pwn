@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zapiszkonta(playerid, params[])
+YCMD:zapiszkonta(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{

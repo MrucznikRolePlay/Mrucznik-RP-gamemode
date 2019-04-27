@@ -28,7 +28,7 @@
 	
 */
 
-CMD:lotto(playerid, params[])
+YCMD:lotto(playerid, params[], help)
 {
 	new string[64];
 

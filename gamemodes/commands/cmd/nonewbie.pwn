@@ -28,7 +28,7 @@
 	
 */
 
-CMD:nonewbie(playerid, params[])
+YCMD:nonewbie(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

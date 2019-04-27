@@ -28,7 +28,7 @@
 	
 */
 
-CMD:makeircadmin(playerid, params[])
+YCMD:makeircadmin(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

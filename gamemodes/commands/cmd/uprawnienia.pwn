@@ -28,7 +28,7 @@
 	
 */
 
-CMD:uprawnienia(playerid, params[])
+YCMD:uprawnienia(playerid, params[], help)
 {
     new str[512];
     strcat(str, "\t\t\tUPRAWNIENIA\n");

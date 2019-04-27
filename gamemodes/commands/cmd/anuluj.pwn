@@ -28,7 +28,7 @@
 	
 */
 
-CMD:anuluj(playerid, params[])
+YCMD:anuluj(playerid, params[], help)
 {
 	new x_job[16];
 	if( sscanf(params, "s[16]", x_job))

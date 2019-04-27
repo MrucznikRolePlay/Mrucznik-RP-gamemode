@@ -28,7 +28,7 @@
 	
 */
 
-CMD:trasa(playerid, params[])
+YCMD:trasa(playerid, params[], help)
 {
 	new Veh = GetPlayerVehicleID(playerid);
 	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][pJob] == 10)

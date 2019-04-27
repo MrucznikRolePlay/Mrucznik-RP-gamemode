@@ -32,7 +32,7 @@
 
 
 
-CMD:wk(playerid, params[])
+YCMD:wk(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pKluczeAuta] != 0)
     {

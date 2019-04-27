@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ksam(playerid, params[])
+YCMD:ksam(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >=10)
 	{

@@ -32,7 +32,7 @@
 
 
 
-CMD:reset_ulepszen(playerid, params[])
+YCMD:reset_ulepszen(playerid, params[], help)
 {
 	new string[128];
 

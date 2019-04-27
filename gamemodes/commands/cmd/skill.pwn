@@ -28,7 +28,7 @@
 	
 */
 
-CMD:skill(playerid, params[])
+YCMD:skill(playerid, params[], help)
 {
 	new string[128];
 	new level;

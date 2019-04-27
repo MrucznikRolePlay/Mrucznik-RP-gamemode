@@ -30,7 +30,7 @@
 
 
 
-CMD:wypusc(playerid, params[])
+YCMD:wypusc(playerid, params[], help)
 {
 	new string[128];
 

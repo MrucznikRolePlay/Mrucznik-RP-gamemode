@@ -28,7 +28,7 @@
 	
 */
 
-CMD:antybh(playerid, params[])
+YCMD:antybh(playerid, params[], help)
 {
 	new string[64];
 

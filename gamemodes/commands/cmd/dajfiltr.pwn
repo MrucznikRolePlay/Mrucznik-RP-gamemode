@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dajfiltr(playerid, params[])
+YCMD:dajfiltr(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

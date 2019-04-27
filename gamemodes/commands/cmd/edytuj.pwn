@@ -28,7 +28,7 @@
 	
 */
 
-CMD:edytuj(playerid, params[])
+YCMD:edytuj(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_PANEL)) return 1;
     ShowPlayerDialogEx(playerid, D_EDIT, DIALOG_STYLE_LIST, "Panel Boga", "Wybierz co chcesz edytowaæ:\n1.\tOrganizacja\n2.\tPojazd\n3.\tNazwy rang", "Wybierz", "WyjdŸ");

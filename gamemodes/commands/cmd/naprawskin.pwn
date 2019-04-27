@@ -28,7 +28,7 @@
 	
 */
 
-CMD:naprawskin(playerid, params[])
+YCMD:naprawskin(playerid, params[], help)
 {
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];

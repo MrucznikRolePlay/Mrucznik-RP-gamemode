@@ -28,7 +28,7 @@
 	
 */
 
-CMD:delete3dtext(playerid, p[])
+YCMD:delete3dtext(playerid, p[], help)
 {
     if(!IsAHeadAdmin(playerid)) return 1;
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprobuj(playerid, params[])
+YCMD:sprobuj(playerid, params[], help)
 {
 	if(isnull(params)) return sendTipMessage(playerid, "U¿yj /sprobuj [Akcja] np. trafiæ do kosza");
 	if(GetPlayerAdminDutyStatus(playerid) == 1)

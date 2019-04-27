@@ -28,7 +28,7 @@
 	
 */
 
-CMD:skick(playerid, params[])
+YCMD:skick(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:jump(playerid, params[])
+YCMD:jump(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {

@@ -29,7 +29,7 @@
 */
 
 
-CMD:rybypomoc(playerid, params[])
+YCMD:rybypomoc(playerid, params[], help)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	SendClientMessage(playerid, COLOR_WHITE,"*** RYBY POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");

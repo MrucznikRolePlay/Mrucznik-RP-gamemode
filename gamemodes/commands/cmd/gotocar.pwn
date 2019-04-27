@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotocar(playerid, params[])
+YCMD:gotocar(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

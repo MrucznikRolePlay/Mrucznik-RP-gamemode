@@ -30,7 +30,7 @@
 
 
 
-CMD:opuscdom(playerid, params[])
+YCMD:opuscdom(playerid, params[], help)
 {
 	new string[128];
 

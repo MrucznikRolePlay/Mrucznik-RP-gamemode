@@ -28,7 +28,7 @@
 	
 */
 
-CMD:basenstats(playerid, params[])
+YCMD:basenstats(playerid, params[], help)
 {
 	if(GetPlayerOrg(playerid) == 43)
 	{

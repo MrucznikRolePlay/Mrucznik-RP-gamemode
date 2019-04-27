@@ -28,7 +28,7 @@
 	
 */
 
-CMD:streamer(playerid, params[])
+YCMD:streamer(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     new var[32], p1[32], p2[32];

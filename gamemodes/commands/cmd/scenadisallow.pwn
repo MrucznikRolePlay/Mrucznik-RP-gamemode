@@ -28,7 +28,7 @@
 	
 */
 
-CMD:scenadisallow(playerid, p[])
+YCMD:scenadisallow(playerid, p[], help)
 {
     if(PlayerInfo[playerid][pAdmin] < 200 ) return 1;
     new id;

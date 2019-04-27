@@ -28,7 +28,7 @@
 	
 */
 
-CMD:reloadbans(playerid, params[])
+YCMD:reloadbans(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pAdmin] >= 100)
 	{

@@ -29,7 +29,7 @@
 */
 
 
-CMD:sprzedajmaterialy(playerid, params[])
+YCMD:sprzedajmaterialy(playerid, params[], help)
 {
 	new giveplayerid, moneys, kasa;
 	if(sscanf(params, "k<fix>dd", giveplayerid, moneys, kasa))

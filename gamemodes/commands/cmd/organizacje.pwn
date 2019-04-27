@@ -30,7 +30,7 @@
 
 
 
-CMD:organizacje(playerid, p[])
+YCMD:organizacje(playerid, p[], help)
 {
     new lStr[128];
     if(isnull(p))

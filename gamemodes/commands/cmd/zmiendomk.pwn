@@ -30,7 +30,7 @@
 
 
 
-CMD:zmiendomk(playerid, params[])
+YCMD:zmiendomk(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

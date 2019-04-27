@@ -29,7 +29,7 @@
 */
 
 
-CMD:obezwladnij(playerid, params[])
+YCMD:obezwladnij(playerid, params[], help)
 {
 	if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) || PlayerInfo[playerid][pJob] == 1 && PlayerInfo[playerid][pDetSkill] >= 4 || GetPlayerOrg(playerid) == 12)
 	{

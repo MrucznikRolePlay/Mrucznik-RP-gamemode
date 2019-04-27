@@ -29,7 +29,7 @@
 */
 
 #if DEBUG == 1
-CMD:skille(playerid, params[])
+YCMD:skille(playerid, params[], help)
 {
     PlayerInfo[playerid][pDetSkill] = 5000;
     PlayerInfo[playerid][pLawSkill] = 5000;

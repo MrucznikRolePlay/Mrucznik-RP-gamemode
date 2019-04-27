@@ -33,7 +33,7 @@
 
 
 
-CMD:losowostworzdom(playerid, params[])
+YCMD:losowostworzdom(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)
     {

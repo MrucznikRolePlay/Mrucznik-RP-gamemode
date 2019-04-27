@@ -28,7 +28,7 @@
 	
 */
 
-CMD:houseowner(playerid, params[])
+YCMD:houseowner(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000 )
 	{

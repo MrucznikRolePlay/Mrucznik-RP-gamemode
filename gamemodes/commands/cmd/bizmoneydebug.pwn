@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bizmoneydebug(playerid, params[])
+YCMD:bizmoneydebug(playerid, params[], help)
 {
 	
 	/*    new string[128];

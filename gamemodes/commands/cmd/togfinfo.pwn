@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togfinfo(playerid, params[])
+YCMD:togfinfo(playerid, params[], help)
 {
 	if(GetPVarInt(playerid, "TOG_frakcja_info") == 0)
 	{

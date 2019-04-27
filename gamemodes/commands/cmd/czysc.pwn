@@ -28,7 +28,7 @@
 	
 */
 
-CMD:czysc(playerid, params[])
+YCMD:czysc(playerid, params[], help)
 {
     if(GetPlayerFraction(playerid) != FRAC_LSFD) return sendTipMessageEx(playerid, COLOR_GRAD2, "Dostêpne tylko dla frakcji stra¿aków.");
     if(JobDuty[playerid] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes na s³u¿bie.");

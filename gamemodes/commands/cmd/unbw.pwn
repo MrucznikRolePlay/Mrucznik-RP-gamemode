@@ -28,7 +28,7 @@
 	
 */
 
-CMD:unbw(playerid, p[])
+YCMD:unbw(playerid, p[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{

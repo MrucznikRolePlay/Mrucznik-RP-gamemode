@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotopos(playerid, params[])
+YCMD:gotopos(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

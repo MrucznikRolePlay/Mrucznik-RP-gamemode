@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gethere(playerid, params[])
+YCMD:gethere(playerid, params[], help)
 {
 	new string[128];
 

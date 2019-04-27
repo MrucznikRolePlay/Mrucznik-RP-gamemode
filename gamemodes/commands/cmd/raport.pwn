@@ -29,7 +29,7 @@
 */
 
 
-CMD:raport(playerid, params[])
+YCMD:raport(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ustawmistrz(playerid, params[])
+YCMD:ustawmistrz(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dskill(playerid, params[])
+YCMD:dskill(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >=100)
 	{

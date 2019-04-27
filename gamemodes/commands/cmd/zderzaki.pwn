@@ -29,7 +29,7 @@
 */
 
 
-CMD:zderzaki(playerid, params[])
+YCMD:zderzaki(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -29,7 +29,7 @@
 */
 
 
-CMD:dutycd(playerid, params[])
+YCMD:dutycd(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

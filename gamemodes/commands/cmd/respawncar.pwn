@@ -28,7 +28,7 @@
 	
 */
 
-CMD:respawncar(playerid, params[])
+YCMD:respawncar(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
     new v;

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:startlotto(playerid, params[])
+YCMD:startlotto(playerid, params[], help)
 {
 	new string[128];
 

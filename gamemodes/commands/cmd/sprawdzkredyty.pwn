@@ -29,7 +29,7 @@
 */
 
 
-CMD:sprawdzkredyty(playerid, params[])
+YCMD:sprawdzkredyty(playerid, params[], help)
 {
 	new string[64];
 	format(string, sizeof(string), "Masz %d kredytów", Kredyty[playerid]);

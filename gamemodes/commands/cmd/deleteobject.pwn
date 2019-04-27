@@ -28,7 +28,7 @@
 	
 */
 
-CMD:deleteobject(playerid, p[])
+YCMD:deleteobject(playerid, p[], help)
 {
     if(!IsAHeadAdmin(playerid)) return 1;
     new typ, data, extra;

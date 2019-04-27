@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wywaz(playerid, params[])
+YCMD:wywaz(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

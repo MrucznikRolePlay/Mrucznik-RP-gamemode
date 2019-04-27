@@ -33,7 +33,7 @@
 
 
 
-CMD:zlap(playerid, params[])
+YCMD:zlap(playerid, params[], help)
 {
 	new string[128];
 

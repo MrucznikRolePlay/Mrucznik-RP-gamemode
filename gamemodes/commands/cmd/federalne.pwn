@@ -29,7 +29,7 @@
 */
 
 
-CMD:federalne(playerid, params[])
+YCMD:federalne(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

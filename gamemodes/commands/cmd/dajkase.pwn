@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dajkase(playerid, params[])
+YCMD:dajkase(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

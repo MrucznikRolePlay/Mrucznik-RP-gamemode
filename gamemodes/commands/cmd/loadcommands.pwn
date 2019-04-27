@@ -28,7 +28,7 @@
 	
 */
 
-CMD:loadcommands(playerid, params[])
+YCMD:loadcommands(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     SendClientMessage(playerid, -1, "Wczytujê wy³¹czone komendy...");

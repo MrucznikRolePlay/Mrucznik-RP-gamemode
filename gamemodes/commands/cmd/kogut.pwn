@@ -30,7 +30,7 @@
 
 
 
-CMD:kogut(playerid, params[])
+YCMD:kogut(playerid, params[], help)
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

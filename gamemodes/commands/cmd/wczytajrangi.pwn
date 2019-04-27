@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wczytajrangi(playerid, params[])
+YCMD:wczytajrangi(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     SendClientMessage(playerid, -1, "Wczytujê rangi.");

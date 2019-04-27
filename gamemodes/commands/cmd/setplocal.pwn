@@ -28,7 +28,7 @@
 	
 */
 
-CMD:setplocal(playerid, params[])
+YCMD:setplocal(playerid, params[], help)
 {
 	new giveplayerid, wartosc, string[128];
 	if(IsPlayerConnected(playerid))

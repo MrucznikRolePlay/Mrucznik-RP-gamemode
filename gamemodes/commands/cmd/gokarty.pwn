@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gokarty(playerid, params[])
+YCMD:gokarty(playerid, params[], help)
 {
 	if(PlayerToPoint(10.0, playerid, 2281.909179,-2364.279052,13.546895))//go karty
 	{

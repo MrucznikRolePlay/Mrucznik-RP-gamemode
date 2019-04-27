@@ -28,7 +28,7 @@
 	
 */
 
-CMD:banip(playerid, params[])
+YCMD:banip(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

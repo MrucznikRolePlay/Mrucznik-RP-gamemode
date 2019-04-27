@@ -28,7 +28,7 @@
 	
 */
 
-CMD:checkadminstats(playerid, params[])
+YCMD:checkadminstats(playerid, params[], help)
 {
 	new SenderAdminName[MAX_PLAYER_NAME];
 	new FirstSenderAdminName[MAX_PLAYER_NAME];

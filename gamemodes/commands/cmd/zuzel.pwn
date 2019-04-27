@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zuzel(playerid, params[])
+YCMD:zuzel(playerid, params[], help)
 {
     if(GUIExit[playerid] == 0)
     {

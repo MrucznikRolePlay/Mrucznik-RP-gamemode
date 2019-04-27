@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cygaro(playerid, params[])
+YCMD:cygaro(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pCygaro] >= 1)
     {

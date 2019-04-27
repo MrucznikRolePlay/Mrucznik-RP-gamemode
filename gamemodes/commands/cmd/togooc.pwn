@@ -29,7 +29,7 @@
 */
 
 
-CMD:togooc(playerid, params[])
+YCMD:togooc(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

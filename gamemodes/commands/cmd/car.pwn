@@ -31,7 +31,7 @@
 
 
 
-CMD:car(playerid, params[])
+YCMD:car(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

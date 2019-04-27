@@ -28,7 +28,7 @@
 	
 */
 
-CMD:adminstats(playerid, params[])
+YCMD:adminstats(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{
