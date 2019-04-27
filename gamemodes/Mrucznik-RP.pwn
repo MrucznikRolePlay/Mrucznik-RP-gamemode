@@ -83,14 +83,14 @@ native WP_Hash(buffer[], len, const str[]);
 //-----------------------------------------<[ Modu造 mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
 #include "system\definicje.pwn"
-#include "modules\new\niceczlowiek\definicje.pwn"
+#include "modules\niceczlowiek\definicje.pwn"
 #include "system\kolory.pwn"
 #include "system\forward.pwn"
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "modules\zmienne.pwn"
-#include "modules\new\niceczlowiek\general.pwn"
-#include "modules\new\niceczlowiek\dynamicgui.pwn"
+#include "modules\niceczlowiek\general.pwn"
+#include "modules\niceczlowiek\dynamicgui.pwn"
 
 //MySQL:
 #include "modules\mysql\mru_mysql.pwn"
@@ -102,13 +102,13 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\chaty\chaty.def"
 #include "modules\admin_duty_system\adminduty.def"
 #include "modules\admin\admin.def"
-#include "modules\Sila\sila.def"
+#include "modules\sila\sila.def"
 #include "modules\biznes\biznes.def"
 //.hwn
 #include "modules\chaty\chaty.hwn"
 #include "modules\admin_duty_system\adminduty.hwn"
 #include "modules\admin\admin.hwn"
-#include "modules\Sila\sila.hwn"
+#include "modules\sila\sila.hwn"
 #include "modules\biznes\biznes.hwn"
 //.pwn
 #include "modules\admin_duty_system\adminduty.pwn"
@@ -116,31 +116,31 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\chaty\chaty.pwn"
 #include "modules\chaty\chaty_komunikaty.pwn"
 #include "modules\chaty\komunikaty.pwn"
-#include "modules\Sila\sila.pwn"
+#include "modules\sila\sila.pwn"
 #include "modules\biznes\biznes.pwn"
 
 
 //Nowe modu造 .def:
-#include "modules\new\bramy\bramy.def"
-#include "modules\new\wejscia\wejscia.def"
-#include "modules\new\budki\budki.def"
-#include "modules\new\premium\premium.def"
-#include "modules\new\wjedz\wjedz.def"
+#include "modules\bramy\bramy.def"
+#include "modules\wejscia\wejscia.def"
+#include "modules\budki\budki.def"
+#include "modules\premium\premium.def"
+#include "modules\wjedz\wjedz.def"
 
 
 //Nowe modu造 .hwn:
-#include "modules\new\bramy\bramy.hwn"
-#include "modules\new\wejscia\wejscia.hwn"
-#include "modules\new\budki\budki.hwn"
-#include "modules\new\premium\premium.hwn"
-#include "modules\new\wjedz\wjedz.hwn"
+#include "modules\bramy\bramy.hwn"
+#include "modules\wejscia\wejscia.hwn"
+#include "modules\budki\budki.hwn"
+#include "modules\premium\premium.hwn"
+#include "modules\wjedz\wjedz.hwn"
 
 //Nowe modu造 .pwn:
-#include "modules\new\bramy\bramy.pwn"
-#include "modules\new\wejscia\wejscia.pwn"
-#include "modules\new\budki\budki.pwn"
-#include "modules\new\premium\premium.pwn"
-#include "modules\new\wjedz\wjedz.pwn"
+#include "modules\bramy\bramy.pwn"
+#include "modules\wejscia\wejscia.pwn"
+#include "modules\budki\budki.pwn"
+#include "modules\premium\premium.pwn"
+#include "modules\wjedz\wjedz.pwn"
 
 //Inne:
 #include "modules\Inne\ibiza.inc"
@@ -160,9 +160,8 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\obiekty\ikony.pwn"
 
 //Modu造 mapy c.d.
-#include "modules\new\niceczlowiek\cmd.pwn"
-#include "modules\new\niceczlowiek\noysi.pwn"
-#include "modules\new\niceczlowiek\wybieralka.pwn"
+#include "modules\niceczlowiek\noysi.pwn"
+#include "modules\niceczlowiek\wybieralka.pwn"
 
 //sktomdiscordconnect
 #include "modules\discord.pwn"
@@ -172,7 +171,7 @@ native WP_Hash(buffer[], len, const str[]);
 
 //dialogi
 #include "modules\OnDialogResponse.pwn"
-#include "modules\new\premium\premium_dialogs.pwn"
+#include "modules\premium\premium_dialogs.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()
