@@ -81,4 +81,3 @@ YCMD:wyscig(playerid, params[], help)
 	}
 	return 1;
 }
-

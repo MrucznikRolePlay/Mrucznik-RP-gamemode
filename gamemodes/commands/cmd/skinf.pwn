@@ -56,4 +56,3 @@ YCMD:skinf(playerid, params[], help)
         return 1;
     }
 }
-

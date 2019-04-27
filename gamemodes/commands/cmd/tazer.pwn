@@ -70,4 +70,3 @@ YCMD:tazer(playerid, params[], help)
 	}
     return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:datek(playerid, params[], help)
 {
 	new string[128];
@@ -75,4 +74,3 @@ YCMD:datek(playerid, params[], help)
 	}
 	return 1;
 }
-

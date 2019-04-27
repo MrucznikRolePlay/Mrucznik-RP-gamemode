@@ -71,4 +71,3 @@ YCMD:zmienhp(playerid, params[], help)
 	}
 	return 1;
 }
-

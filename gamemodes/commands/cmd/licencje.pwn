@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:licencje(playerid, params[], help)
 {
 	new string[128];
@@ -72,6 +71,3 @@ YCMD:licencje(playerid, params[], help)
 	}
     return 1;
 }
-
-
-

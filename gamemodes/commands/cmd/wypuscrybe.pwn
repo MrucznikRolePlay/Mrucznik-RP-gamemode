@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:wypuscrybe(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))

@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:say(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))

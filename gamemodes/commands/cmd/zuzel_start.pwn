@@ -50,4 +50,3 @@ YCMD:zuzel_start(playerid, params[], help)
 	}
 	return 1;
 }
-

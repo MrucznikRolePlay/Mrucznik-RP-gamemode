@@ -28,11 +28,6 @@
 	
 */
 
-
-
-
-
-
 YCMD:zlap(playerid, params[], help)
 {
 	new string[128];
@@ -235,5 +230,3 @@ YCMD:zlap(playerid, params[], help)
     }
     return 1;
 }
-
-

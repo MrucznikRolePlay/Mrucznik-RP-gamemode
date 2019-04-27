@@ -112,4 +112,3 @@ YCMD:goto(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -30,14 +30,6 @@
 
 YCMD:bizmoneydebug(playerid, params[], help)
 {
-	
-	/*    new string[128];
-		new bizid = PlayerInfo[playerid][pPbiskey];
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
-		format(string, sizeof(string), "  Dochód z biznesu: $%d", BizData[bizid][eBizMoney]);
-		SendClientMessage(playerid, COLOR_WHITE, string);
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, "|________________________|");
-		DajKase(playerid, BizData[bizid][eBizMoney]);*/
 	if(IsAHeadAdmin(playerid))
 	{
 		GiveRandomMoneyBiz(playerid);	

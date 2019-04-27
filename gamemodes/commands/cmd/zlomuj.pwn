@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:zlomuj(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -39,4 +36,3 @@ YCMD:zlomuj(playerid, params[], help)
 	}
 	return 1;
 }
-

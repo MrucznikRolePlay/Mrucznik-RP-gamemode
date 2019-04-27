@@ -54,4 +54,3 @@ YCMD:temat(playerid,cmdtext[], help)
     }
     return 1;
 }
-

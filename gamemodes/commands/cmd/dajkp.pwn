@@ -62,6 +62,3 @@ YCMD:dajkp(playerid, params[], help)
 	}
 	else return noAccessMessage(playerid);*/
 }
-
-//end
-//end

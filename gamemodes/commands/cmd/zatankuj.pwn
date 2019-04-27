@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:zatankuj(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -55,5 +53,3 @@ YCMD:zatankuj(playerid, params[], help)
 	}
 	return 1;
 }
-
-

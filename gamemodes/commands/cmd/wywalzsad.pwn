@@ -53,4 +53,3 @@ YCMD:wywalzsad(playerid,params[], help) //GSA
     }
 	return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kostka2(playerid, params[], help)
 {
 	new string[64];
@@ -55,4 +54,3 @@ YCMD:kostka2(playerid, params[], help)
 	}
 	return 1;
 }
-//kostka skryptowa by Kubi

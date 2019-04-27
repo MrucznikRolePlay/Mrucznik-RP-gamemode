@@ -34,4 +34,3 @@ YCMD:tickets(playerid, params[], help)
     Support_ShowTickets(playerid);
     return 1;
 }
-

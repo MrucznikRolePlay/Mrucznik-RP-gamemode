@@ -19,19 +19,19 @@
 
 // Opis:
 /*
-	
-*/
+
+ */
 
 
 // Notatki skryptera:
 /*
-	
-*/
+
+ */
 
 YCMD:hpall(playerid, params[], help)
 {
-	new string[64];
-	new sendername[MAX_PLAYER_NAME];
+    new string[64];
+    new sendername[MAX_PLAYER_NAME];
 
     GetPlayerName(playerid, sendername, sizeof(sendername));
 
@@ -39,21 +39,20 @@ YCMD:hpall(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
-        	format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", sendername);
-    		SendClientMessageToAll(COLOR_LIGHTGREEN, string);
+            format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", sendername);
+            SendClientMessageToAll(COLOR_LIGHTGREEN, string);
             foreach(new i : Player)
-			{
-			    if(IsPlayerConnected(i))
-			    {
-				    SetPlayerHealth(i, 100);
-				}
-			}
-		}
+            {
+                if(IsPlayerConnected(i))
+                {
+                    SetPlayerHealth(i, 100);
+                }
+            }
+        } 
 		else
-		{
-		    noAccessMessage(playerid);
-		}
-	}
-	return 1;
+        {
+            noAccessMessage(playerid);
+        }
+    }
+    return 1;
 }
-

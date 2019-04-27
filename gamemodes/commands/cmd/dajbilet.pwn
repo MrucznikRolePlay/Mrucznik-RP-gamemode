@@ -105,4 +105,3 @@ YCMD:dajbilet(playerid, params[], help)
     }
 	return 1;
 }
-

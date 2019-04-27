@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wezzlecenie(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pJob] == JOB_TRUCKER)
@@ -183,4 +182,3 @@ YCMD:wezzlecenie(playerid, params[], help)
     }
 	return 1;
 }
-/*

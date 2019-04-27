@@ -70,4 +70,3 @@ YCMD:bp(playerid, params[], help)//blokada pisania
 	}
 	return 1;
 }
-

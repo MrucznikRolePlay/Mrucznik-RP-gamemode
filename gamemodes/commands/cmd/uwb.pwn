@@ -38,5 +38,3 @@ YCMD:uwb(playerid, params[], help)//usuñ wszystkie bronie
 	}
 	return 1;
 }
-
-

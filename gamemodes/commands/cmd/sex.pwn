@@ -95,6 +95,4 @@ YCMD:sex(playerid, params[], help)
 		}
 	}//not connected
 	return 1;
-	}
-
-
+}

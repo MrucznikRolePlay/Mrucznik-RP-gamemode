@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:kupbiletpociag(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))

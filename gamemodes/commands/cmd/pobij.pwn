@@ -175,4 +175,3 @@ YCMD:pobij(playerid, params[], help)
 	} 
 	return 1;
 }
-

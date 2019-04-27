@@ -111,5 +111,3 @@ YCMD:mdc(playerid, params[], help)
 	}
 	return 1;
 }
-
-

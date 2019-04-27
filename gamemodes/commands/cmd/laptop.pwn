@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:laptop(playerid, params[], help)
 {
 	new sendername[MAX_PLAYER_NAME];
@@ -64,6 +63,3 @@ YCMD:laptop(playerid, params[], help)
 	}
     return 1;
 }
-
-
-

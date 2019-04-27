@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:z(playerid, params[], help)
 {
 	if(Mobile[playerid] == INVALID_PLAYER_ID)
@@ -44,4 +41,3 @@ YCMD:z(playerid, params[], help)
 	StopACall(playerid);
 	return 1;
 }
-

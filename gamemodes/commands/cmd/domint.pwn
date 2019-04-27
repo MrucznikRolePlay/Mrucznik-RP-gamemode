@@ -49,4 +49,3 @@ YCMD:domint(playerid, params[], help)
 	}
 	return 1;
 }
-

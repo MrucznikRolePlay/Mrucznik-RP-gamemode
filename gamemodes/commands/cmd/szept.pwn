@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:szept(playerid, params[], help)
 {
 	

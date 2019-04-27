@@ -57,4 +57,3 @@ YCMD:anulujzp(playerid, params[], help)
     }
     return 1;
 }
-

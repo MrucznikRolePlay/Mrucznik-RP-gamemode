@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wywalrybe(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -47,5 +46,3 @@ YCMD:wywalrybe(playerid, params[], help)
     }
     return 1;
 }
-
-

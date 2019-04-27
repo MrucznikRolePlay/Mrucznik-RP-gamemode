@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:lockint(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -67,4 +66,3 @@ YCMD:lockint(playerid, params[], help)
 	}
 	return 1;
 }
-

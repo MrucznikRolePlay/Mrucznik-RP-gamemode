@@ -46,4 +46,3 @@ YCMD:fdaj(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -61,5 +61,3 @@ YCMD:veh(playerid, params[], help)
 	}
 	return 1;
 }
-
-

@@ -19,37 +19,33 @@
 
 // Opis:
 /*
-	
-*/
+
+ */
 
 
 // Notatki skryptera:
 /*
-	
-*/
 
-
+ */
 
 YCMD:icons(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
-		{
-  		 	if(Dom[i][hKupiony] == 0)
-			{
-			    Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], 31, 1, -1, -1, playerid, 125.0);
-			}
-			else
-			{
-			    if(Dom[i][hWynajem] != 0)
-				{
-					Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], 32, 1, -1, -1, playerid, 125.0);
-				}
-			}
-		}
+        for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
+        {
+            if(Dom[i][hKupiony] == 0)
+            {
+                Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], 31, 1, -1, -1, playerid, 125.0);
+            } else
+            {
+                if(Dom[i][hWynajem] != 0)
+                {
+                    Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], 32, 1, -1, -1, playerid, 125.0);
+                }
+            }
+        }
         MSGBOX_Show(playerid, "Ikony wlaczone!", MSGBOX_ICON_TYPE_OK);
-	}
-	return 1;
+    }
+    return 1;
 }
-

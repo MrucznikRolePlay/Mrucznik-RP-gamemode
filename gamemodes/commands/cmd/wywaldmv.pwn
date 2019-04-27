@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wywaldmv(playerid, params[], help)
 {
 	new string[128];

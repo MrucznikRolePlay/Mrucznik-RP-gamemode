@@ -35,4 +35,3 @@ YCMD:mojskin(playerid, params[], help)
     sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, str);
     return 1;
 }
-

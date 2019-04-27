@@ -43,7 +43,3 @@ YCMD:ubranie(playerid, params[], help)
 	}
 	return 1;
 }
-
-//---------------------------------[QuitFaction]-------------------------------------
-
-

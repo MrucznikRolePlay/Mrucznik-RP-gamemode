@@ -127,4 +127,3 @@ YCMD:makeircadmin(playerid, params[], help)
 	}
 	return 1;
 }
-

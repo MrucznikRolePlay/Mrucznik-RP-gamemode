@@ -69,4 +69,3 @@ YCMD:zastrzyk(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -64,4 +64,3 @@ YCMD:kupbron(playerid, params[], help)
 	}*/
 	return 1;
 }
-

@@ -130,4 +130,3 @@ YCMD:stanowe(playerid, params[], help)
 	}
 	return 1;
 }
-

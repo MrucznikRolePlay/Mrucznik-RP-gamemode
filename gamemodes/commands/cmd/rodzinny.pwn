@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:rodzinny(playerid, params[], help)
 {
 	new string[256];

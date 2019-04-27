@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:stopanim(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -47,4 +46,3 @@ YCMD:stopanim(playerid, params[], help)
     }
     return 1;
 }
-

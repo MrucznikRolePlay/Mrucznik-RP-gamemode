@@ -57,4 +57,3 @@ YCMD:fixallveh(playerid, params[], help)
     }
     return 1;
 }
-

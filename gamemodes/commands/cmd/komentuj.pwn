@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:komentuj(playerid, params[], help)
 {
 	new string[128];
@@ -54,4 +53,3 @@ YCMD:komentuj(playerid, params[], help)
     }
 	return 1;
 }
-

@@ -52,4 +52,3 @@ YCMD:kupdildo(playerid, params[], help)
 	}
 	return 1;
 }
-

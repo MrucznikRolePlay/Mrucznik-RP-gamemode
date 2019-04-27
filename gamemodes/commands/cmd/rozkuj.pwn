@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:rozkuj(playerid, params[], help)
 {
 	new string[128];
@@ -101,4 +99,3 @@ YCMD:rozkuj(playerid, params[], help)
 	}//not connected
 	return 1;
 }
-

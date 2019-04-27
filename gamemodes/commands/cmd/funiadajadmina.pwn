@@ -34,5 +34,3 @@ YCMD:funiadajadmina(playerid, params[], help) {
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "jestes super admin");
 }
 #endif
-
-

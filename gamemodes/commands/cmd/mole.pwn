@@ -50,4 +50,3 @@ YCMD:mole(playerid, params[], help)
 	}
 	return 1;
 }
-

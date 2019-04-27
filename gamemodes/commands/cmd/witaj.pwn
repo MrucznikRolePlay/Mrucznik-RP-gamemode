@@ -67,4 +67,3 @@ YCMD:witaj(playerid, params[], help)
 	}
 	return 1;
 }
-

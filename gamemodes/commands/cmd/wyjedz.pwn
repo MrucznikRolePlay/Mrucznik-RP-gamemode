@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wyjedz(playerid, params[], help)
 {
 	if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
@@ -51,7 +50,3 @@ YCMD:wyjedz(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-
-

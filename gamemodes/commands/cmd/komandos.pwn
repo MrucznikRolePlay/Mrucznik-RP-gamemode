@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:komandos(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pWino] >= 1)
@@ -42,5 +41,3 @@ YCMD:komandos(playerid, params[], help)
 	}
 	return 1;
 }
-
-

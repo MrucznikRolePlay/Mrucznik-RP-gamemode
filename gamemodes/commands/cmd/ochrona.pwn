@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:ochrona(playerid, params[], help)
 {
 	new string[128];

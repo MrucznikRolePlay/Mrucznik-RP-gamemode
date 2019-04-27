@@ -96,8 +96,3 @@ YCMD:sprawdzneon(playerid, params[], help)
     }
     return 1;
 }
-
-
-//eof
-
-

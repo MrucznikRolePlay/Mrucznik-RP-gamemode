@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:zabierz(playerid, params[], help)
 {
 	new string[128];
@@ -288,5 +287,3 @@ YCMD:zabierz(playerid, params[], help)
     SetPVarInt(playerid, "lic-timer", gettime() + 30);
     return 1;
 }
-
-

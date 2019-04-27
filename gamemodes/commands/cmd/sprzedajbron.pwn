@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:sprzedajbron(playerid, params[], help)
 {
     new string[128];
@@ -610,6 +609,3 @@ YCMD:sprzedajbron(playerid, params[], help)
     }
     return 1;
 }
-
-
-

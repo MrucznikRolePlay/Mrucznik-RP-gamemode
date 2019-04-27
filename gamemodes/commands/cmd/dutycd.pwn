@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:dutycd(playerid, params[], help)
 {
 	new string[128];

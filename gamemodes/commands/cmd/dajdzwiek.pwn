@@ -45,4 +45,3 @@ YCMD:dajdzwiek(playerid, params[], help)
     }
 	return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kontrakt(playerid, params[], help)
 {
 	new string[128];
@@ -117,5 +116,3 @@ YCMD:kontrakt(playerid, params[], help)
 	}
 	return 1;
 }
-
-//09.06.2014 LSMC

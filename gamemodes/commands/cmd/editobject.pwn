@@ -60,4 +60,3 @@ YCMD:editobject(playerid, params[], help)
     }
     return 1;
 }
-

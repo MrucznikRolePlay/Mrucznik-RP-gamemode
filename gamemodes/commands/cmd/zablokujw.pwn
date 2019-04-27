@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:zablokujw(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -56,4 +54,3 @@ YCMD:zablokujw(playerid, params[], help)
 	}
 	return 1;
 }
-

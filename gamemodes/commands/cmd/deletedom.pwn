@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:deletedom(playerid, params[], help)
 {
 	new string[64];
@@ -164,6 +162,3 @@ YCMD:deletedom(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

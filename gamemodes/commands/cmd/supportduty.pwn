@@ -43,4 +43,3 @@ YCMD:supportduty(playerid, params[], help)
     }
     return 1;
 }
-

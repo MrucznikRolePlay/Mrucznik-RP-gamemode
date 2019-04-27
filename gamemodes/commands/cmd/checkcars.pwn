@@ -51,6 +51,3 @@ YCMD:checkcars(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

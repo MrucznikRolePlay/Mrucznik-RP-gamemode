@@ -35,8 +35,3 @@ YCMD:wobiekt(playerid, params[], help)
 	RemovePlayerAttachedObject(player, slot);
 	return 1;
 }
-
-
-
-
-

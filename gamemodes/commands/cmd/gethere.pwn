@@ -96,4 +96,3 @@ YCMD:gethere(playerid, params[], help)
 	}
 	return 1;
 }
-

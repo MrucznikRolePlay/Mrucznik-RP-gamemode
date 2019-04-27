@@ -43,5 +43,3 @@ YCMD:dodajweryfikacje(playerid, params[], help)
 	}
 	return 1;
 }
-
-

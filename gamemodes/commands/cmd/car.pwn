@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:car(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -46,4 +43,3 @@ YCMD:car(playerid, params[], help)
 	}
 	return 1;
 }
-

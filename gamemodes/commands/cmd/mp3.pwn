@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:mp3(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -45,4 +43,3 @@ YCMD:mp3(playerid, params[], help)
     }
     return 1;
 }
-

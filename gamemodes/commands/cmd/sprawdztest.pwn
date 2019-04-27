@@ -94,4 +94,3 @@ YCMD:sprawdztest(playerid, params[], help)
     }
     else return sendErrorMessage(playerid, "* Nie jesteœ Urzêdnikiem!");
 }
-

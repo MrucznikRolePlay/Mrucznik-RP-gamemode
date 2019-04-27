@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:spoiler(playerid, params[], help)
 {
     new string[256];
@@ -356,5 +355,3 @@ YCMD:spoiler(playerid, params[], help)
     }
     return 1;
 }
-
-

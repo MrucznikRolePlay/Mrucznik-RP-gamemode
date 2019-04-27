@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:zk(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)
@@ -51,5 +49,3 @@ YCMD:zk(playerid, params[], help)
 	}
 	return 1;
 }
-
-

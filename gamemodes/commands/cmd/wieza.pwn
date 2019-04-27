@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wieza(playerid, params[], help)
 {
     new data[32], sub[128];
@@ -206,4 +205,3 @@ YCMD:wieza(playerid, params[], help)
     }
     return 1;
 }
-

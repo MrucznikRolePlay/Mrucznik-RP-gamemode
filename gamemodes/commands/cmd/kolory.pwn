@@ -39,4 +39,3 @@ YCMD:kolory(playerid, params[], help)
 	}
 	return 1;
 }
-

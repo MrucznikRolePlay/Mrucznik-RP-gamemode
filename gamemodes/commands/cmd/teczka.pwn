@@ -122,4 +122,3 @@ YCMD:teczka(playerid, params[], help)
 	}
 	return 1;
 }
-

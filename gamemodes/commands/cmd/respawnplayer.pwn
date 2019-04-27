@@ -45,5 +45,3 @@ YCMD:respawnplayer(playerid, params[], help)
     SpawnPlayer(v);
     return 1;
 }
-
-

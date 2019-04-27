@@ -48,4 +48,3 @@ YCMD:sprobuj(playerid, params[], help)
 	printf("%s", string);
 	return 1;
 }
-

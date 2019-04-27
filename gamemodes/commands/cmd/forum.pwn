@@ -52,5 +52,3 @@ YCMD:forum(playerid, params[], help)
 	}
 	return 1;
 }
-
-

@@ -35,5 +35,3 @@ YCMD:lsmcelevator(playerid, params[], help)
     sendTipMessageEx(playerid, COLOR_GREEN, "OK.");
     return 1;
 }
-
-

@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:dajneony(playerid, params[], help)
 {
     new string[256];
@@ -102,4 +99,3 @@ YCMD:dajneony(playerid, params[], help)
     //rup
     return 1;
 }
-

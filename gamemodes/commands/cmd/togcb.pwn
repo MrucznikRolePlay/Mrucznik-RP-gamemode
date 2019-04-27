@@ -52,4 +52,3 @@ YCMD:togcb(playerid, params[], help)
 	}
 	return 1;
 }
-

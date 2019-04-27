@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:selldom(playerid, params[], help)
 {
 	new string[128];
@@ -124,5 +122,3 @@ YCMD:selldom(playerid, params[], help)
 	}
 	return 1;
 }
-//========================================[DODATKI]===================================================
-

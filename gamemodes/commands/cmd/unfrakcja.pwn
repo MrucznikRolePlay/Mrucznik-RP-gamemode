@@ -77,4 +77,3 @@ YCMD:unfrakcja(playerid, params[], help)
 	}
 	return 1;
 }
-

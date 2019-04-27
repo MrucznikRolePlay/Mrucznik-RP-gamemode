@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:ruleta(playerid, params[], help)
 {
 	new string[128];
@@ -68,5 +67,3 @@ YCMD:ruleta(playerid, params[], help)
 	}
 	return 1;
 }
-
-

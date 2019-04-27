@@ -67,5 +67,3 @@ YCMD:gps(playerid, params[], help)
 	}
 	return 1;
 }
-
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wyrzucbronie(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
@@ -59,4 +58,3 @@ YCMD:wyrzucbronie(playerid, params[], help)
 	}
 	return 1;
 }
-

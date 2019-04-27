@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:pomoc2(playerid, params[], help)
 {
     SendClientMessage(playerid, COLOR_GRAD1,"*** KONTO *** /zasady /stats /nextlevel /ulepszenia");
@@ -109,6 +108,3 @@ YCMD:pomoc2(playerid, params[], help)
     SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** Pomoc od supportu: {FFFFFF}/zapytaj");
     return 1;
 }
-
-
-#if DEBUG == 1

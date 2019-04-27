@@ -53,6 +53,3 @@ YCMD:czysc(playerid, params[], help)
     }
     return 1;
 }
-
-
-

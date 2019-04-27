@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:dajpodatek(playerid, params[], help)
 {
 	new string[128];
@@ -83,4 +82,3 @@ YCMD:dajpodatek(playerid, params[], help)
 	}
 	return 1;
 }
-

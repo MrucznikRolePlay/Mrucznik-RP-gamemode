@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:zakuj(playerid, params[], help)
 {
 	new string[128];
@@ -106,4 +104,3 @@ YCMD:zakuj(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -43,4 +43,3 @@ YCMD:zasady(playerid, params[], help)
 	SendClientMessage(playerid,COLOR_P@,"|_______________________>>> $Bymber Casino$ <<<_______________________|");
 	return 1;
 }
-

@@ -92,4 +92,3 @@ YCMD:wyscig_start(playerid, params[], help)
 	//rup
 	return 1;
 }
-

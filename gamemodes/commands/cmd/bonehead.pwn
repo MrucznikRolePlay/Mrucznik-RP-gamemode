@@ -41,7 +41,3 @@ YCMD:bonehead(playerid, params[], help) {
     }
     return 1;
 }
-
-
-//new depo2 = floatround(((TicketMoney[playerid]/100) * 50), floatround_round);
-

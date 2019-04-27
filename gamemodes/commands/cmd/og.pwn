@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:og(playerid, params[], help)
 {
     new string[256];

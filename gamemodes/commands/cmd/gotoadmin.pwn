@@ -37,4 +37,3 @@ YCMD:gotoadmin(playerid, params[], help)
     Wchodzenie(playerid);
     return 1;
 }
-

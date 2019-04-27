@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:togwl(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -50,4 +48,3 @@ YCMD:togwl(playerid, params[], help)
 	}
 	return 1;
 }
-

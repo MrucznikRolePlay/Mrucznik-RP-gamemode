@@ -65,4 +65,3 @@ YCMD:yo2(playerid, params[], help)
 	}
 	return 1;
 }
-

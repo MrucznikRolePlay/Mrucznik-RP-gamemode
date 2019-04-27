@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:wrzuc(playerid, params[], help)
 {
 	new string[128];

@@ -44,4 +44,3 @@ YCMD:autok(playerid, params[], help)
 	}
 	return 1;
 }
-

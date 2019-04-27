@@ -106,13 +106,6 @@ YCMD:warn(playerid, params[], help)
         else {
             return noAccessMessage(playerid);
         }
-		/*else
-		{
-			format(string, sizeof(string), "   Gracz o ID %d nie istnieje.", giveplayerid);
-			SendClientMessage(playerid, COLOR_GRAD1, string);
-		}*/
 	}
 	return 1;
 } 
-
-

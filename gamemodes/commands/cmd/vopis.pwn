@@ -86,4 +86,3 @@ YCMD:vopis(playerid, params[], help)
     }
     return 1;
 }
-

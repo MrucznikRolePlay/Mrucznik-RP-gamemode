@@ -48,4 +48,3 @@ YCMD:gotomechy(playerid, params[], help)
     }
     return 1;
 }
-

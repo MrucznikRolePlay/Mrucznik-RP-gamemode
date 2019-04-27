@@ -125,4 +125,3 @@ YCMD:graj(playerid, params[], help)
 	}
 	return 1;
 }
-

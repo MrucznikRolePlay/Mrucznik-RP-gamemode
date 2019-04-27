@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:sluzba(playerid, params[], help)
 {
     new string[128];
@@ -374,4 +373,3 @@ YCMD:sluzba(playerid, params[], help)
     }
     return 1;
 }
-

@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:sprzedajauto(playerid, params[], help)
 {
 	new string[256];
@@ -92,4 +90,3 @@ YCMD:sprzedajauto(playerid, params[], help)
     }
 	return 1;
 }
-

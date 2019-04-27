@@ -38,5 +38,3 @@ YCMD:fixr(playerid, params[], help)
 	}
 	return 1;
 }
-
-

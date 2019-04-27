@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:telefonpomoc(playerid, params[], help)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");

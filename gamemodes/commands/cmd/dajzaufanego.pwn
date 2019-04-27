@@ -64,5 +64,3 @@ YCMD:dajzaufanego(playerid, params[], help)
 	}
 	return 1;
 }
-
-

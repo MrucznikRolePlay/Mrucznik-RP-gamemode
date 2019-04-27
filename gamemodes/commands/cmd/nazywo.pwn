@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:nazywo(playerid, params[], help)
 {
 	new string[128];

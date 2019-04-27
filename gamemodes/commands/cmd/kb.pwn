@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kb(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))

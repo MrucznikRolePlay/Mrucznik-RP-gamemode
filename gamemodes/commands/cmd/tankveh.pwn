@@ -59,5 +59,3 @@ YCMD:tankveh(playerid, params[], help)
     }
     return 1;
 }
-
-

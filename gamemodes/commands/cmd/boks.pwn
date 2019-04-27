@@ -93,4 +93,3 @@ YCMD:boks(playerid, params[], help)
     }
     return 1;
 }
-

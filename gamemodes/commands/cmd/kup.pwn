@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kup(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -44,4 +43,3 @@ YCMD:kup(playerid, params[], help)
 	}
 	return 1;
 }
-

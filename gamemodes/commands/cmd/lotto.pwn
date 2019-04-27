@@ -59,4 +59,3 @@ YCMD:lotto(playerid, params[], help)
     }
     return 1;
 }
-

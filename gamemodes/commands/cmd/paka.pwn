@@ -138,5 +138,3 @@ YCMD:paka(playerid, params[], help)
 	}//not connected
 	return 1;
 }
-
-

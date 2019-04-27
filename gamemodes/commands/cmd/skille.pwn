@@ -51,6 +51,3 @@ YCMD:skille(playerid, params[], help)
     return 1;
 }
 #endif
-
-
-

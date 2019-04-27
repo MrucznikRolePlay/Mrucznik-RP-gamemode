@@ -47,4 +47,3 @@ YCMD:dnobiekt(playerid, params[], help)
 	}
 	return 1;
 }
-

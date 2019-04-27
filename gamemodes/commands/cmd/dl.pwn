@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:dl(playerid, params[], help)
 {
 	new string[128];
@@ -306,4 +303,3 @@ YCMD:dl(playerid, params[], help)
     }
     return 1;
 }
-

@@ -55,4 +55,3 @@ YCMD:wyscig_stop(playerid, params[], help)
 	}
 	return 1;
 }
-

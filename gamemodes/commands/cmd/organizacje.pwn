@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:organizacje(playerid, p[], help)
 {
     new lStr[128];
@@ -58,4 +56,3 @@ YCMD:organizacje(playerid, p[], help)
     }
     return 1;
 }
-

@@ -61,4 +61,3 @@ YCMD:kasa(playerid, params[], help)
 	}
 	return 1;
 }
-

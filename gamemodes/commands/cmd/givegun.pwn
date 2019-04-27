@@ -192,4 +192,3 @@ YCMD:givegun(playerid, params[], help)
 	}
 	return 1;
 }
-

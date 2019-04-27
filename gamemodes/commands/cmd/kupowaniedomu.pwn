@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:kupowaniedomu(playerid, params[], help)
 {
 	new string[128];
@@ -101,6 +99,3 @@ YCMD:kupowaniedomu(playerid, params[], help)
   	}
 	return 1;
 }
-
-
-

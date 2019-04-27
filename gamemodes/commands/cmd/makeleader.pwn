@@ -113,4 +113,3 @@ YCMD:makeleader(playerid, params[], help)
 	}
 	return 1;
 }
-

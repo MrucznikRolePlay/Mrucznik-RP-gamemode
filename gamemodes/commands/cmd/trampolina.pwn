@@ -43,4 +43,3 @@ YCMD:trampolina(playerid, params[], help)
 
 	return 1;
 }
-

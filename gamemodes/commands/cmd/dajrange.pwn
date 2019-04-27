@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:dajrange(playerid, params[], help)
 {
 	new string[128];
@@ -79,10 +78,3 @@ YCMD:dajrange(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-
-
-
-
-

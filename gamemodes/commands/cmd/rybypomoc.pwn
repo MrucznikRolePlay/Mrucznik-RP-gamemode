@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:rybypomoc(playerid, params[], help)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
@@ -40,10 +39,3 @@ YCMD:rybypomoc(playerid, params[], help)
 	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /pomoc /gotowaniepomoc /ircpomoc");
 	return 1;
 }
-
-
-
-
-
-
-

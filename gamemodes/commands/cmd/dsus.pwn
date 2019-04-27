@@ -45,4 +45,3 @@ YCMD:dsus(playerid, params[], help)
     }
 	return 1;
 }
-

@@ -42,4 +42,3 @@ YCMD:scenaallow(playerid, p[], help)
     SetPVarInt(id, "scena-allow", 1);
     return 1;
 }
-

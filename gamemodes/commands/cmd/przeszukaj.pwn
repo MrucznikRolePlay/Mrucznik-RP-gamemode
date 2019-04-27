@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:przeszukaj(playerid, params[], help)
 {
 	new string[128];
@@ -97,6 +96,3 @@ YCMD:przeszukaj(playerid, params[], help)
 	}
     return 1;
 }
-
-
-

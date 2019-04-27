@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:sejffrakcja(playerid, params[], help)
 {
 	sendErrorMessage(playerid, "U¿yj /kontobankowe"); 

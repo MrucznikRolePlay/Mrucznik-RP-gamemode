@@ -79,4 +79,3 @@ YCMD:demorgan(playerid, params[], help)
     }
     return 1;
 }
-

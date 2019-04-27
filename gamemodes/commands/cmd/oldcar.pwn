@@ -39,4 +39,3 @@ YCMD:oldcar(playerid, params[], help)
     }
     return 1;
 }
-

@@ -38,4 +38,3 @@ YCMD:removezoneprotect(playerid, p[], help)
     }
     return 1;
 }
-

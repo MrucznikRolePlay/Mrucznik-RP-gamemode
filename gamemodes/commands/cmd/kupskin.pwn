@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kupskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -78,4 +77,3 @@ YCMD:kupskin(playerid, params[], help)
     }
 	return 1;
 }
-

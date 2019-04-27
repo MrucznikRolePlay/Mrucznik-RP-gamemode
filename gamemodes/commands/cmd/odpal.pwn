@@ -91,4 +91,3 @@ YCMD:odpal(playerid, params[], help)
 	}
 	return 1;
 }
-

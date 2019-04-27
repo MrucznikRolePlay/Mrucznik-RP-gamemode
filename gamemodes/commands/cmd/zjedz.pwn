@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:zjedz(playerid, params[], help)
 {
 	new string[128];
@@ -143,4 +141,3 @@ YCMD:zjedz(playerid, params[], help)
     }
     return 1;
 }
-

@@ -36,4 +36,3 @@ YCMD:loadcommands(playerid, params[], help)
     SendClientMessage(playerid, -1, "OK");
     return 1;
 }
-

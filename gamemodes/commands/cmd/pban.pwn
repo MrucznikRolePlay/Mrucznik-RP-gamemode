@@ -73,4 +73,3 @@ YCMD:pban(playerid, params[], help)
     }
 	return 1;
 }
-

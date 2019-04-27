@@ -59,4 +59,3 @@ YCMD:trasa(playerid, params[], help)
 	}
 	return 1;
 }
-

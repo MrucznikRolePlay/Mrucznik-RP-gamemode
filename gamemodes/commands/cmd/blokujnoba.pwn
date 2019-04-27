@@ -45,4 +45,3 @@ YCMD:blokujnoba(playerid, params[], help)
 	}
 	return 1;
 }
-

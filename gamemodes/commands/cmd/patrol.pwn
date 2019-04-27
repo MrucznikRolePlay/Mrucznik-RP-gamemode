@@ -197,4 +197,3 @@ YCMD:patrol(playerid, params[], help)
     }
     return 1;
 }
-

@@ -88,4 +88,3 @@ YCMD:wizytowka(playerid, params[], help)
 	SetPVarInt(giveplayerid, "wizytowka", playerid);
 	return 1;
 }
-

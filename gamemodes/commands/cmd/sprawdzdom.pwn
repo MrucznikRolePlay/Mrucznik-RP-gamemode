@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:sprawdzdom(playerid, params[], help)
 {
 	new string[64];
@@ -67,5 +66,3 @@ YCMD:sprawdzdom(playerid, params[], help)
 	}
 	return 1;
 }
-
-

@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:wplac(playerid, params[], help)
 {
 	new string[128];
@@ -91,5 +89,3 @@ YCMD:wplac(playerid, params[], help)
 	}
 	return 1;
 }
-
-

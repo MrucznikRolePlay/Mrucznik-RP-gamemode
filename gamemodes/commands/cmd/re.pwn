@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:re(playerid, params[], help) {
     if(lastMsg[playerid] != INVALID_PLAYER_ID) {
         if(!IsPlayerConnected(lastMsg[playerid])) return sendErrorMessage(playerid, "Tego gracza nie ma na serwerze!");
@@ -38,4 +37,3 @@ YCMD:re(playerid, params[], help) {
     }
     return 1;
 }
-

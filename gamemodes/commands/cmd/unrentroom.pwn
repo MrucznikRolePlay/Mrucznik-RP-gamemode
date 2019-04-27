@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:unrentroom(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -96,6 +94,3 @@ YCMD:unrentroom(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

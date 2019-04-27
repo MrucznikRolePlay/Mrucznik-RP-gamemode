@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:togdepo(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -46,4 +45,3 @@ YCMD:togdepo(playerid, params[], help)
     }
     return 1;
 }
-

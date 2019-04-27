@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:kogut(playerid, params[], help)
 {
 	new string[256];
@@ -101,4 +99,3 @@ YCMD:kogut(playerid, params[], help)
 	}
 	return 1;
 }
-

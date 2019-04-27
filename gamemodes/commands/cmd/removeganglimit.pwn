@@ -38,4 +38,3 @@ YCMD:removeganglimit(playerid, p[], help)
     }
     return 1;
 }
-

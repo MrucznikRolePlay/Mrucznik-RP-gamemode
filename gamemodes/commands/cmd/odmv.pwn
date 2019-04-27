@@ -54,5 +54,3 @@ YCMD:odmv(playerid, params[], help)
 	}
 	return 1;
 }
-
-

@@ -118,4 +118,3 @@ YCMD:setveh(playerid, params[], help)
 	}
 	return 1;
 }
-

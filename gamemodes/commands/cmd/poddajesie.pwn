@@ -72,4 +72,3 @@ YCMD:poddajesie(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:departament(playerid, params[], help)
 {
     new string[128];
@@ -81,4 +80,3 @@ YCMD:departament(playerid, params[], help)
     }
     return 1;
 }
-

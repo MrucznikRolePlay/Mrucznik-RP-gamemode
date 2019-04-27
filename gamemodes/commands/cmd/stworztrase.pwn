@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:stworztrase(playerid, params[], help)
 {
 	new string[128];
@@ -77,4 +76,3 @@ YCMD:stworztrase(playerid, params[], help)
 	}
 	return 1;
 }
-

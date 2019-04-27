@@ -38,4 +38,3 @@ YCMD:tjdcp1(playerid, params[], help)
     PutPlayerInVehicleEx(playerid, id,0);
     return 1;
 }
-

@@ -211,4 +211,3 @@ YCMD:setstat(playerid, params[], help)
 	}
 	return 1;
 }
-

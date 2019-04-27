@@ -64,5 +64,3 @@ YCMD:zamroz(playerid, params[], help)
 	}
 	return 1;
 }
-
-

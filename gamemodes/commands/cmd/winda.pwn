@@ -74,4 +74,3 @@ YCMD:winda(playerid, params[], help)
 	}
 	return 1;
 }
-

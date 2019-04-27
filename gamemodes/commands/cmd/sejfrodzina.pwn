@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:sejfrodzina(playerid, params[], help)
 {
 	if(orgIsLeader(playerid))
@@ -38,4 +37,3 @@ YCMD:sejfrodzina(playerid, params[], help)
 	else return noAccessMessage(playerid);
 	return 1;
 }
-

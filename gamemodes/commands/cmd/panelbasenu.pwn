@@ -75,4 +75,3 @@ YCMD:panelbasenu(playerid, params[], help)
 
 	return 1;
 }
-

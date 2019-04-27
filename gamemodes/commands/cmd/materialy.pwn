@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:materialy(playerid, params[], help)
 {
 	new string[128];
@@ -144,58 +142,3 @@ YCMD:materialy(playerid, params[], help)
 	}
 	return 1;
 }
-/*CMD:sprzedajpistol(playerid, params[])
-{
-    new string[128];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
-    {
-        if(PlayerInfo[playerid][pJob] == 9)
-        {
-			new umiejetnosc;
-			new skillz;
-			new x_weapon[16],weapon[MAX_PLAYERS],ammo[MAX_PLAYERS],price[MAX_PLAYERS];
-			new giveplayerid;
-			if( sscanf(params, "k<fix>", giveplayerid))
-			{
-				SendClientMessage(playerid, COLOR_GRAD1, "U¿yj: /sprzedajpistol [ID gracza]");
-				return 1;
-			}
-
-			if (zmatsowany[playerid] == 1)
-			{
-			    SendClientMessage(playerid,COLOR_GREY,"   Poczekaj 10 sekund zanim sprzedasz temu graczowi nastêpn¹ broñ !");
-			    return 1;
-			}
-			if (IsPlayerConnected(giveplayerid))
-			{
-			    if(PlayerInfo[giveplayerid][pLevel] >= 2)
-			    {
-					if(giveplayerid != INVALID_PLAYER_ID)
-					{
-						if(PlayerInfo[playerid][pMats] > 149)
-						{
-							weapon[playerid] = 22;
-							price[playerid] = 150;
-							ammo[playerid] = 200;
-							umiejetnosc = 1;
-							if(umiejetnosc <= skillz)
-							{
-								PlayerInfo[giveplayerid][pGun2] = 22;
-								PlayerInfo[giveplayerid][pAmmo2] = 200;
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid,COLOR_GREY,"   Nie masz wystarczaj¹cej iloœci materia³ów na tê broñ!");
-							return 1;
-						}
-					}
-				}
-				else
-				{
-					SendClientMessage(playerid,COLOR_GREY,"   Gracz musi mieæ minimum 2LVL!");
-					return 1;
-				}*/

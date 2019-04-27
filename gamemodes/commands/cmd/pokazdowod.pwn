@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:pokazdowod(playerid, params[], help)
 {
 	new string[64];
@@ -156,4 +155,3 @@ YCMD:pokazdowod(playerid, params[], help)
 	}
     return 1;
 }
-

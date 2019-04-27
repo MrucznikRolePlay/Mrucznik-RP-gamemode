@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:kuppojazd(playerid, params[], help)
 {
 	if(IsPlayerInAnyVehicle(playerid))
@@ -49,4 +46,3 @@ YCMD:kuppojazd(playerid, params[], help)
 	}
 	return 1;
 }
-

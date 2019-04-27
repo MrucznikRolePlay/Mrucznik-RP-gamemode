@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wez(playerid, params[], help)
 {
 	new string[128];
@@ -115,4 +114,3 @@ YCMD:wez(playerid, params[], help)
 	}//not connected
 	return 1;
 }
-

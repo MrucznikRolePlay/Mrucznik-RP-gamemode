@@ -119,4 +119,3 @@ YCMD:sprzedajrybe(playerid, params[], help)
 	}
 	return 1;
 }
-

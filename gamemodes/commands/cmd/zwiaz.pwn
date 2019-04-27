@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:zwiaz(playerid, params[], help)
 {
 	new string[128];
@@ -106,5 +105,3 @@ YCMD:zwiaz(playerid, params[], help)
 	}
 	return 1;
 }
-
-

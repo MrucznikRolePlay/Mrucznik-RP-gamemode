@@ -100,6 +100,3 @@ YCMD:kradnij(playerid, params[], help)
 	}//not connected
 	return 1;
 }
-
-
-

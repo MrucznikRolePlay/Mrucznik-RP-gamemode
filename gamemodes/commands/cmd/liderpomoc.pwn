@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:liderpomoc(playerid, params[], help)
 {
 	if (PlayerInfo[playerid][pLider] >= 1)
@@ -46,5 +45,3 @@ YCMD:liderpomoc(playerid, params[], help)
 	}
 	return 1;
 }
-
-

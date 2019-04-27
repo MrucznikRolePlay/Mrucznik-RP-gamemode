@@ -72,4 +72,3 @@ YCMD:zapytaj(playerid, p[], help)
         sendTipMessageEx(playerid, COLOR_RED, "Nie mo¿na dodaæ zapytania, lista jest pe³na.");
     return 1;
 }
-

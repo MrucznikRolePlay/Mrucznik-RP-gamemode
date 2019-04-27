@@ -81,4 +81,3 @@ YCMD:setname(playerid, params[], help)
 	}
 	return 1;
 }
-

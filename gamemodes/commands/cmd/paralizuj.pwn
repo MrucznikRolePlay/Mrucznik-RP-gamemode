@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:paralizuj(playerid, params[], help)
 {
 	new string[128];
@@ -114,6 +113,3 @@ YCMD:paralizuj(playerid, params[], help)
 	}//not connected
     return 1;
 }
-
-
-

@@ -78,4 +78,3 @@ YCMD:sban(playerid, params[], help)
 	}
 	return 1;
 }
-

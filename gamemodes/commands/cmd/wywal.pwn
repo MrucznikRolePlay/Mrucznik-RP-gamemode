@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wywal(playerid, params[], help)
 {
 	new string[128];
@@ -90,4 +89,3 @@ YCMD:wywal(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:resms(playerid, params[], help)
 {
 	new string[256];
@@ -45,4 +44,3 @@ YCMD:resms(playerid, params[], help)
 	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
 	return RunCommand(playerid, "/sms",  string);
 }
-

@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:carhelp(playerid, params[], help)
 {
     if(GUIExit[playerid] == 0)
@@ -39,4 +36,3 @@ YCMD:carhelp(playerid, params[], help)
 	}
 	return 1;
 }
-

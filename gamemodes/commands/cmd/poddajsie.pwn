@@ -102,5 +102,3 @@ YCMD:poddajsie(playerid, params[], help)
 	}
 	return 1;
 }
-
-

@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:giveroom(playerid, params[], help)
 {
 	new string[128];
@@ -108,6 +106,3 @@ YCMD:giveroom(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

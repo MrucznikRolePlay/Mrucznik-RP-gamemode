@@ -47,4 +47,3 @@ YCMD:reflektor(playerid, params[], help)
     }
 	return 1;
 }
-

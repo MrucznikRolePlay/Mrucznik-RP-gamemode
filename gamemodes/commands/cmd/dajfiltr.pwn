@@ -57,4 +57,3 @@ YCMD:dajfiltr(playerid, params[], help)
 	}
 	return 1;
 }
-

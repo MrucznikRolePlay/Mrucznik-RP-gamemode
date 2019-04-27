@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:uleczmnie(playerid, params[], help)
 {
 	new string[128];
@@ -70,5 +69,3 @@ YCMD:uleczmnie(playerid, params[], help)
     }
 	return 1;
 }
-
-

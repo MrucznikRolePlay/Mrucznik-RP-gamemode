@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:zdmv(playerid, params[], help)
 {
 	new string[128];

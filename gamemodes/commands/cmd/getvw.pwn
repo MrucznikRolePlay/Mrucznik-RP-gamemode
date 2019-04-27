@@ -54,4 +54,3 @@ YCMD:getvw(playerid, params[], help)
 	}
 	return 1;
 }
-

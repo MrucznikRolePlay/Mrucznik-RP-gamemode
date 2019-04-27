@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:sms(playerid, params[], help)
 {
 	new string[256];
@@ -169,5 +167,3 @@ YCMD:sms(playerid, params[], help)
 	}
 	return 1;
 }
-
-

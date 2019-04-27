@@ -71,4 +71,3 @@ YCMD:pojazdygracza(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wynajempomoc(playerid, params[], help)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
@@ -37,6 +36,3 @@ YCMD:wynajempomoc(playerid, params[], help)
 	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /pomoc /bizpomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
 	return 1;
 }
-
-
-

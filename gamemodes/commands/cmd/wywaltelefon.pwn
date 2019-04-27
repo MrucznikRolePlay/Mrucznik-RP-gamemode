@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wywaltelefon(playerid, params[], help) {
     if(!IsPlayerConnected(playerid)) return 1;
     PlayerInfo[playerid][pPnumber] = 0;

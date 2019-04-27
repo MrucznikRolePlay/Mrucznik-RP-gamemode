@@ -44,4 +44,3 @@ YCMD:pozwolenie(playerid, params[], help) {
     sendTipMessage(komu, string, COLOR_LIGHTBLUE);
     return 1;
 }
-

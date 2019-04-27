@@ -37,4 +37,3 @@ YCMD:loadconfig(playerid, params[], help)
     //
     return 1;
 }
-

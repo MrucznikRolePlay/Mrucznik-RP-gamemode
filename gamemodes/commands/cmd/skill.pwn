@@ -160,4 +160,3 @@ YCMD:skill(playerid, params[], help)
 	}
     return 1;
 }
-

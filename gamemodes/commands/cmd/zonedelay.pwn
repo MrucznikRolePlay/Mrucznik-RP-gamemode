@@ -19,26 +19,28 @@
 
 // Opis:
 /*
-	
-*/
+
+ */
 
 
 // Notatki skryptera:
 /*
-	
-*/
+
+ */
 
 YCMD:zonedelay(playerid, p[], help)
 {
-    if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) 
+    {
         new id;
         new str[64];
-        if(sscanf(p, "d", id)) {
+        if(sscanf(p, "d", id)) 
+        {
             sendTipMessage(playerid, "U¿yj /zonedelay [Czas w sekundach]");
             format(str,64,"Aktualnie: %d sek", ZONE_DEF_TIME);
             sendTipMessage(playerid, str);
-        } 
-        if(id < 60 || id > 900) return sendTipMessageEx(playerid, COLOR_GRAD2, "Czas od 60 do 900s!");
+        }
+        if(id < 60 || id > 900) { return sendTipMessageEx(playerid, COLOR_GRAD2, "Czas od 60 do 900s!"); }
         ZONE_DEF_TIME = id;
         format(str, 64, "UPDATE `mru_config` SET `gangtimedelay`='%d'", id);
         mysql_query(str);
@@ -48,4 +50,3 @@ YCMD:zonedelay(playerid, p[], help)
     }
     return 1;
 }
-

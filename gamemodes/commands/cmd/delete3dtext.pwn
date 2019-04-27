@@ -98,4 +98,3 @@ YCMD:delete3dtext(playerid, p[], help)
 
     return 1;
 }
-

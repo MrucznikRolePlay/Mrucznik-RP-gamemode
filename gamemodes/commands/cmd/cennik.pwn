@@ -39,4 +39,3 @@ YCMD:cennik(playerid, params[], help)
 	ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK, DIALOG_STYLE_LIST, "Cennik drinków", string, "Ok", "");
 	return 1;
 }
-

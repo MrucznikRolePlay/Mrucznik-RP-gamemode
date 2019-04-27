@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:stworzdom(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)
@@ -64,5 +63,3 @@ YCMD:stworzdom(playerid, params[], help)
 	}
 	return 1;
 }
-
-

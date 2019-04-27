@@ -45,4 +45,3 @@ YCMD:gotostad(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -52,22 +52,3 @@ YCMD:app(playerid, params[], help) {
     PayLog(string);
     return 1;
 }
-
-/*
-if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania pozwolenia prawniczego to $10 000. Nie masz tyle!");
-                            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-                            GetPlayerName(playerid, sendername, sizeof(sendername));
-                            format(string, sizeof(string), "* Da³eœ zgodê %s na uwolnienie wiêŸnia z celi. Tracisz $10 000 z portfela", giveplayer);
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE,string);
-                            format(string, sizeof(string), "* Policjant %s da³ ci zgodê na uwolnienie wiêŸnia z celi. (wpisz /uwolnij)", sendername);
-                            SendClientMessage(giveplayerid, COLOR_LIGHTBLUE,string);
-                            format(string, sizeof(string), "* %s da³ zgodê na uwolnienie wiêŸnia prawnikowi %s.", sendername, giveplayer);
-                            SendRadioMessage(1, COLOR_PANICRED, string);
-                            SendRadioMessage(2, COLOR_PANICRED, string);
-                            SendRadioMessage(3, COLOR_PANICRED, string);
-                            DajKase(playerid, -20000);
-                            Sejf_Add(PlayerInfo[playerid][pMember], 10000);
-                            ApprovedLawyer[giveplayerid] = 1;
-*/
-//-------------------------------------[NOWA KOMENDA WJED]------------------------------------
-//by Simeone 25-11-2018

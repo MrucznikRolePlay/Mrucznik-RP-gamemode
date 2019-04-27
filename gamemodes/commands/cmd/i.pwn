@@ -19,19 +19,19 @@
 
 // Opis:
 /*
-	
-*/
+
+ */
 
 
 // Notatki skryptera:
 /*
-	
-*/
+
+ */
 
 YCMD:i(playerid, params[], help)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
+    new string[128];
+    new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -41,20 +41,18 @@ YCMD:i(playerid, params[], help)
             return 1;
         }
         if(PlayerInfo[playerid][pMuted] == 1)
-		{
-			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ, jesteœ uciszony");
-			return 1;
-		}
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(isnull(params))
-		{
-			sendTipMessage(playerid, "U¿yj /i [irc chat]");
-			return 1;
-		}
-		format(string, sizeof(string), "** IRC %s: %s. **", sendername, params);
-		SendIRCMessage(PlayersChannel[playerid], COLOR_YELLOW2, string);
+        {
+            sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ, jesteœ uciszony");
+            return 1;
+        }
+        GetPlayerName(playerid, sendername, sizeof(sendername));
+        if(isnull(params))
+        {
+            sendTipMessage(playerid, "U¿yj /i [irc chat]");
+            return 1;
+        }
+        format(string, sizeof(string), "** IRC %s: %s. **", sendername, params);
+        SendIRCMessage(PlayersChannel[playerid], COLOR_YELLOW2, string);
     }
     return 1;
 }
-
-

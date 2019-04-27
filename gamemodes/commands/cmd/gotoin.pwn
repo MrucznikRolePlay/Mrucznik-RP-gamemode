@@ -53,4 +53,3 @@ YCMD:gotoin(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -79,4 +79,3 @@ YCMD:setzonecontrol(playerid, p[], help)
     return 1;
 
 }
-

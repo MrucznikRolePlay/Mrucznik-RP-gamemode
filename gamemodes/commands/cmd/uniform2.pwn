@@ -45,5 +45,3 @@ YCMD:uniform2(playerid, params[], help)
     }
     return 1;
 }
-
-

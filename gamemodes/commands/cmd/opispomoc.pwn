@@ -41,4 +41,3 @@ YCMD:opispomoc(playerid, params[], help)
 	}
 	return 1;
 }
-

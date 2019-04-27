@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wejdz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))

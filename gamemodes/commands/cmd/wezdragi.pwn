@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:wezdragi(playerid, params[], help)
 {
 	new string[128];
@@ -126,5 +124,3 @@ YCMD:wezdragi(playerid, params[], help)
 	}//not connected
 	return 1;
 }
-
-

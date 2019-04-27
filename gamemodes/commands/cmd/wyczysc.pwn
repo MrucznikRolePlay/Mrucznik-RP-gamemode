@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:wyczysc(playerid, params[], help)
 {
 	new string[128];

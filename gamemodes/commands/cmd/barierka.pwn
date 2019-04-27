@@ -68,4 +68,3 @@ YCMD:barierka(playerid, params[], help)
     }
     return 1;
 }
-

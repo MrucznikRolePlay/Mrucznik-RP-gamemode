@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:mojeauta(playerid, params[], help)
 {
 	new string[256];
@@ -59,8 +58,3 @@ YCMD:mojeauta(playerid, params[], help)
     }
     return 1;
 }
-
-
-
-
-

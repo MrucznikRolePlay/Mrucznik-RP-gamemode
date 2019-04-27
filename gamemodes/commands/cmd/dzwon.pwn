@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:dzwon(playerid, params[], help)
 {
 	new string[128];
@@ -135,4 +134,3 @@ YCMD:dzwon(playerid, params[], help)
 	}
 	return 1;
 }
-

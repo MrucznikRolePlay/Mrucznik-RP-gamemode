@@ -28,11 +28,6 @@
 	
 */
 
-
-
-
-
-
 YCMD:losowostworzdom(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)
@@ -65,6 +60,3 @@ YCMD:losowostworzdom(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

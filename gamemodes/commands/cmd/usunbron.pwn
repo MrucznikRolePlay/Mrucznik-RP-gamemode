@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:usunbron(playerid, params[], help)
 {
 
@@ -47,4 +46,3 @@ YCMD:usunbron(playerid, params[], help)
 	}
 	return 1;
 }
-

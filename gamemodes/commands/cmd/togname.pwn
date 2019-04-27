@@ -51,6 +51,3 @@ YCMD:togname(playerid, params[], help)
     }
     return 1;
 }
-
-
-

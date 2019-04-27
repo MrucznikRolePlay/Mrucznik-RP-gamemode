@@ -51,5 +51,3 @@ YCMD:wczytajskrypt(playerid, params[], help)
 	}
 	return 1;
 }
-
-

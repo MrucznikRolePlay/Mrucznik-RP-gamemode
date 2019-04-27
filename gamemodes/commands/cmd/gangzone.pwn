@@ -43,4 +43,3 @@ YCMD:gangzone(playerid, p[], help)
     }
     return 1;
 }
-

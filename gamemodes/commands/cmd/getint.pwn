@@ -54,4 +54,3 @@ YCMD:getint(playerid, params[], help)
 	}
 	return 1;
 }
-

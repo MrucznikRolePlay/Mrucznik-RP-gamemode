@@ -60,5 +60,3 @@ YCMD:wylogujgracz(playerid, params[], help)
 	}
 	return 1;
 }
-
-

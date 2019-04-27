@@ -48,4 +48,3 @@ YCMD:cmdinfo(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -79,6 +79,3 @@ YCMD:degraduj(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

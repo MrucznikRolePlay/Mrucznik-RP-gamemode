@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:przyjmij(playerid, params[], help)
 {
 	new string[160];
@@ -105,4 +104,3 @@ YCMD:przyjmij(playerid, params[], help)
 	}
 	return 1;
 }
-

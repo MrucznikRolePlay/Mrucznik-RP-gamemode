@@ -93,4 +93,3 @@ YCMD:sad(playerid, params[], help)
 	}
 	return 1;
 }
-

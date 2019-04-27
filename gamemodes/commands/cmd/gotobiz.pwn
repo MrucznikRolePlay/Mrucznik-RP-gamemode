@@ -55,4 +55,3 @@ YCMD:gotobiz(playerid, params[], help)
 	}
 	return 1;
 }
-

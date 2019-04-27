@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wypisz(playerid, params[], help)
 {
 	//new string[128];
@@ -76,6 +75,3 @@ YCMD:wypisz(playerid, params[], help)
     }
     return 1;
 }
-
-
-

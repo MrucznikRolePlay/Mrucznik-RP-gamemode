@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:zderzaki(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -112,4 +111,3 @@ YCMD:zderzaki(playerid, params[], help)
     }
     return 1;
 }
-

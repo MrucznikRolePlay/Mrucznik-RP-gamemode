@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:namierz(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
@@ -133,4 +130,3 @@ YCMD:namierz(playerid, params[], help)
 	}
 	return 1;
 }
-

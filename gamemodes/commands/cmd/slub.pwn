@@ -88,4 +88,3 @@ YCMD:slub(playerid, params[], help)
     }
     return 1;
 }
-

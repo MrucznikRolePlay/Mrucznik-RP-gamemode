@@ -56,4 +56,3 @@ YCMD:gotosf(playerid, params[], help)
 	}
 	return 1;
 }
-

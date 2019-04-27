@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:sprawdzkredyty(playerid, params[], help)
 {
 	new string[64];

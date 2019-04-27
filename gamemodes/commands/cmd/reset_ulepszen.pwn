@@ -28,10 +28,6 @@
 	
 */
 
-
-
-
-
 YCMD:reset_ulepszen(playerid, params[], help)
 {
 	new string[128];
@@ -67,4 +63,3 @@ YCMD:reset_ulepszen(playerid, params[], help)
 	}
 	return 1;
 }
-

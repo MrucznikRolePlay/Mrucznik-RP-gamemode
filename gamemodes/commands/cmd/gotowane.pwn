@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:gotowane(playerid, params[], help)
 {
 	new string[128];
@@ -51,4 +49,3 @@ YCMD:gotowane(playerid, params[], help)
 	}
     return 1;
 }
-

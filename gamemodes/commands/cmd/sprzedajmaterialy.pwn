@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:sprzedajmaterialy(playerid, params[], help)
 {
 	new giveplayerid, moneys, kasa;
@@ -101,4 +100,3 @@ YCMD:sprzedajmaterialy(playerid, params[], help)
 	}
 	return 1;
 }
-

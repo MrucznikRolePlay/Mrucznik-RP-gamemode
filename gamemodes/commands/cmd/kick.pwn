@@ -91,5 +91,3 @@ YCMD:kick(playerid, params[], help)
 	}
 	return 1;
 }
-
-

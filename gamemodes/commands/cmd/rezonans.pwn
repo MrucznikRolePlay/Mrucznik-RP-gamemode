@@ -47,5 +47,3 @@ YCMD:rezonans(playerid,cmdtext[], help)
 	}
 	return 1;
 }
-
-//SN teleturniej 09.06.2014

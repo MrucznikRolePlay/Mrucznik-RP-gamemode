@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:reklama(playerid, params[], help)
 {
 	if(!IsAHA(playerid))
@@ -66,5 +65,3 @@ YCMD:reklama(playerid, params[], help)
 	}
 	return 1;
 }
-
-

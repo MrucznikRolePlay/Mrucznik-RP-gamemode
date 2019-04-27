@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:ukradnij(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -59,4 +57,3 @@ YCMD:ukradnij(playerid, params[], help)
 	}//not connected
 	return 1;
 }
-

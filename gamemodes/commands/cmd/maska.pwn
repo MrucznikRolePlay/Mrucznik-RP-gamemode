@@ -58,5 +58,3 @@ YCMD:maska(playerid, params[], help)
 	}
 	return 1;
 }
-
-

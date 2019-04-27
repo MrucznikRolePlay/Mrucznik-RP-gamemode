@@ -62,4 +62,3 @@ YCMD:cnnn(playerid, params[], help)
 		return 1;
 	}
 }
-

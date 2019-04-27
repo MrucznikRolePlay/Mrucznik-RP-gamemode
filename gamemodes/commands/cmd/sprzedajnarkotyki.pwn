@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:sprzedajnarkotyki(playerid, params[], help)
 {
 	new string[128];
@@ -88,6 +85,3 @@ YCMD:sprzedajnarkotyki(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-//PAèDZIOCH

@@ -221,4 +221,3 @@ YCMD:kostka(playerid, params[], help)
     }
     return 1;
 }
-

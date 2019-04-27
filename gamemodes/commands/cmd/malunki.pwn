@@ -39,4 +39,3 @@ YCMD:malunki(playerid, params[], help)
 	}
 	return 1;
 }
-

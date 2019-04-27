@@ -33,6 +33,3 @@ YCMD:kuparmor(playerid, params[], help)
 	sendTipMessage(playerid, "Komenda wy³¹czona, kamizelke mo¿esz kupiæ u ochroniarzy. Krêc¹ siê oni w pobli¿u si³owni.");
 	return 1;
 }
-
-
-

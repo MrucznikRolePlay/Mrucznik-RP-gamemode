@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:spoilery(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -40,4 +39,3 @@ YCMD:spoilery(playerid, params[], help)
 	}
 	return 1;
 }
-//PizzaJob

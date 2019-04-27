@@ -49,4 +49,3 @@ YCMD:gotobank(playerid, params[], help)
     return 1;
 
 }
-

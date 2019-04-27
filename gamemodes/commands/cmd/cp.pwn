@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:cp(playerid, params[], help)
 {
 	new string[128];
@@ -133,4 +131,3 @@ YCMD:cp(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -37,4 +37,3 @@ YCMD:zapiszdomy(playerid, params[], help)
 	}
 	return 1;
 }
-

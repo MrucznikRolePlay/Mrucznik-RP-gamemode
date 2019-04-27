@@ -19,19 +19,19 @@
 
 // Opis:
 /*
-	
-*/
+
+ */
 
 
 // Notatki skryptera:
 /*
-	
-*/
+
+ */
 
 YCMD:ibiza(playerid, params[], help)
 {
-	if(gPlayerOrgLeader[playerid] && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
-	PrezesDialog(playerid);
-	return 1;
+    if(gPlayerOrgLeader[playerid] && GetPlayerOrg(playerid) == FAMILY_IBIZA) { //RANGA
+        PrezesDialog(playerid);
+    }
+    return 1;
 }
-

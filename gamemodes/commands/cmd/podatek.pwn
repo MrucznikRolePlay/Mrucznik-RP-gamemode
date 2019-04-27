@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:podatek(playerid, params[], help)
 {
 	new string[64];
@@ -55,5 +54,3 @@ YCMD:podatek(playerid, params[], help)
     }
     return 1;
 }
-
-

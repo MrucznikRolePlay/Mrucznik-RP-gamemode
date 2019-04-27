@@ -64,4 +64,3 @@ YCMD:kod(playerid,params[], help)
     }
 	return 1;
 }
-

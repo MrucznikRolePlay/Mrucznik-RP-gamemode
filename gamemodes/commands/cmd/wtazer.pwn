@@ -54,5 +54,3 @@ YCMD:wtazer(playerid, params[], help)
 	}
 	return 1;
 }
-
-

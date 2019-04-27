@@ -62,5 +62,3 @@ YCMD:getcar(playerid, params[], help)
 	}
 	return 1;
 }
-
-

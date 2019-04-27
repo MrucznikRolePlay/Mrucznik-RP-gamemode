@@ -38,5 +38,3 @@ YCMD:zoneid(playerid, params[], help)
     }
     return 1;
 }
-
-

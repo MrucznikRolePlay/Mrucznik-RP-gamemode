@@ -43,4 +43,3 @@ YCMD:zamknijlinie(playerid, p[], help)
     else sendErrorMessage(playerid, "Nie jesteœ z SN.");
     return 1;
 }
-

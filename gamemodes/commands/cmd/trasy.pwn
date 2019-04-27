@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:trasy(playerid, params[], help)
 {
 	if(GUIExit[playerid] == 0)
@@ -56,4 +55,3 @@ YCMD:trasy(playerid, params[], help)
 	}
 	return 1;
 }
-

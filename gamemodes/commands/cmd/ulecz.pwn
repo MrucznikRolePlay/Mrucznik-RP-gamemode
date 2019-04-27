@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:ulecz(playerid, params[], help)
 {
 	new string[128];
@@ -145,29 +144,3 @@ YCMD:ulecz(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-
-
-
-/*CMD:hq(playerid, params[])
-{
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
-    if(PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pLider] == 2 || PlayerInfo[playerid][pLider] == 3)
-    {
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(isnull(params))
-		{
-			//sendTipMessage(playerid, "U¿yj /hq [hq text]");
-			return 1;
-		}
-		format(string, sizeof(string), "HQ: %s, bez odbioru", params);
-		if (gTeam[playerid] != 2 ){SendClientMessage(playerid, COLOR_DBLUE, string);}
-		SendTeamBeepMessage(2, COLOR_DBLUE, string);
-		printf("HQ: %s", params);
-	}
-	return 1;
-}*/
-

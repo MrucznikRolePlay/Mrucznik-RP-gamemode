@@ -104,6 +104,3 @@ YCMD:przebierz(playerid, params[], help)
     }
 	return 1;
 }
-
-
-

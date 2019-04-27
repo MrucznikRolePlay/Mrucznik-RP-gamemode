@@ -92,4 +92,3 @@ YCMD:dr(playerid, params[], help)
 	}
 	return 1;
 }
-

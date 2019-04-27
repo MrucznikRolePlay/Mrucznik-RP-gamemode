@@ -56,4 +56,3 @@ YCMD:gotols(playerid, params[], help)
 	}
 	return 1;
 }
-

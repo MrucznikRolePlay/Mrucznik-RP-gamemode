@@ -64,5 +64,3 @@ YCMD:respawn(playerid, params[], help)
 	}
 	return 1;
 }
-
-

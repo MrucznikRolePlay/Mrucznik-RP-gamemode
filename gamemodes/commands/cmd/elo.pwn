@@ -72,4 +72,3 @@ YCMD:elo(playerid, params[], help)
 	}
 	return 1;
 }
-

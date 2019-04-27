@@ -90,4 +90,3 @@ YCMD:pjtest(playerid, params[], help)
 		return 1;
 	}
 }
-

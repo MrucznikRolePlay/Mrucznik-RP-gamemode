@@ -39,5 +39,3 @@ YCMD:muzyczka(playerid, params[], help)
     PlayerPlaySound(playerid, muzyczka, 0.0, 0.0, 0.0);
 	return 1;
 }
-
-

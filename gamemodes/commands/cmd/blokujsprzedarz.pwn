@@ -45,7 +45,6 @@ YCMD:blokujsprzedarz(playerid, params[], help)
 					return 1;
 				}
 
-
 				format(string, sizeof(string), "Domy/Dom%d.ini", dom);
 				if(dini_Exists(string))
 				{
@@ -71,6 +70,3 @@ YCMD:blokujsprzedarz(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

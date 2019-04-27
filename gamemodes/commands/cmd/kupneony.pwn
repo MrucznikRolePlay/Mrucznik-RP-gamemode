@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kupneony(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -83,5 +82,3 @@ YCMD:kupneony(playerid, params[], help)
     }
 	return 1;
 }
-
-

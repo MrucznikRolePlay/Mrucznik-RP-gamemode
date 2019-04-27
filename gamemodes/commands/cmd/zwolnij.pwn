@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:zwolnij(playerid, params[], help)
 {
 	new string[128];
@@ -95,4 +94,3 @@ YCMD:zwolnij(playerid, params[], help)
 	}
 	return 1;
 }
-

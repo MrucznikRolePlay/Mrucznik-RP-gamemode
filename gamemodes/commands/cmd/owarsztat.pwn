@@ -53,4 +53,3 @@ YCMD:owarsztat(playerid, params[], help)
 	}
 	return 1;
 }
-

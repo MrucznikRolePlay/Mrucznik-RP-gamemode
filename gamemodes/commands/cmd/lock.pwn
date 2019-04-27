@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:lock(playerid, params[], help)
 {
     new newcar=0, Float:dis=2.75, Float:x, Float:y, Float:z, Float:currdist;
@@ -67,5 +66,3 @@ YCMD:lock(playerid, params[], help)
     }
     return 1;
 }
-
-

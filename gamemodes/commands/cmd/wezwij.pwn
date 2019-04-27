@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wezwij(playerid, params[], help)
 {
 	new string[128];
@@ -182,5 +181,3 @@ YCMD:wezwij(playerid, params[], help)
 	}
 	return 1;
 }
-
-

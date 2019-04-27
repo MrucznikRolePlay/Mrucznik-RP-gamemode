@@ -60,4 +60,3 @@ YCMD:wybieralka(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:zmienplec(playerid, params[], help)
 {
 	new playa;
@@ -92,4 +91,3 @@ YCMD:zmienplec(playerid, params[], help)
 	}
 	return 1;
 }
-

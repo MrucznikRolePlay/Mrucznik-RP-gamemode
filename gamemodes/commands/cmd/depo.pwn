@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:depo(playerid, params[], help)
 {
     new string[128];
@@ -82,4 +80,3 @@ YCMD:depo(playerid, params[], help)
     }
     return 1;
 }
-

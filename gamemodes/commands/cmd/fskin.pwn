@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:fskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -64,4 +62,3 @@ YCMD:fskin(playerid, params[], help)
 	}
 	return 1;
 }
-

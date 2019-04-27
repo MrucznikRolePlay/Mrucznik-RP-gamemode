@@ -90,6 +90,3 @@ YCMD:streamer(playerid, params[], help)
     }
     return 1;
 }
-
-
-

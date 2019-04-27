@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:qf(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
@@ -60,4 +59,3 @@ YCMD:qf(playerid, params[], help)
 	}
 	return 1;
 }
-

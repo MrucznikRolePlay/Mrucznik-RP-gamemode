@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:wywaldragi(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pDrugs] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie narkotyków");

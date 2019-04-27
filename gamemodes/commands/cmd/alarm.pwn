@@ -138,8 +138,3 @@ YCMD:alarm(playerid,cmdtext[], help) //TODO
 	}
     return 1;
 }
-
-
-
-
-

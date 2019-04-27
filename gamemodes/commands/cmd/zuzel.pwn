@@ -36,4 +36,3 @@ YCMD:zuzel(playerid, params[], help)
 	}
 	return 1;
 }
-

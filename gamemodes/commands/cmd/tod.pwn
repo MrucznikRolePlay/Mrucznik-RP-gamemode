@@ -72,4 +72,3 @@ YCMD:tod(playerid, params[], help)
 	}
 	return 1;
 }
-

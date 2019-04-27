@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:paliwo(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -49,4 +47,3 @@ YCMD:paliwo(playerid, params[], help)
 	}
 	return 1;
 }
-

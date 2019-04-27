@@ -28,10 +28,6 @@
 	
 */
 
-
-
-
-
 YCMD:zatrzymajlekcje(playerid, params[], help)
 {
 	new string[128];
@@ -85,4 +81,3 @@ YCMD:zatrzymajlekcje(playerid, params[], help)
     }
     return 1;
 }
-

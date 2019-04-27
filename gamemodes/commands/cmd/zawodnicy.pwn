@@ -48,4 +48,3 @@ YCMD:zawodnicy(playerid, params[], help)
     }
 	return 1;
 }
-

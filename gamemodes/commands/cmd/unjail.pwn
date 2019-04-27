@@ -92,4 +92,3 @@ YCMD:unjail(playerid, params[], help)
 	}
 	return 1;
 }
-

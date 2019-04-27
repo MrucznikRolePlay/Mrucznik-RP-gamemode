@@ -95,5 +95,3 @@ YCMD:alkomat(playerid, params[], help)
 	}
 	return 1;
 }
-
-

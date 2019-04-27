@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:quitpraca(playerid, params[], help)
 {
 	new string[128];
@@ -79,5 +77,3 @@ YCMD:quitpraca(playerid, params[], help)
 	}//not connected
 	return 1;
 }
-
-

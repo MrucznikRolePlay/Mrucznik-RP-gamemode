@@ -42,4 +42,3 @@ YCMD:togtxda(playerid, params[], help)
 	}
 	return 1;
 }
-

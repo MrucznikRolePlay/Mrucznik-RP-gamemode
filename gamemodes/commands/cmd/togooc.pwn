@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:togooc(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -46,4 +45,3 @@ YCMD:togooc(playerid, params[], help)
 	}
 	return 1;
 }
-

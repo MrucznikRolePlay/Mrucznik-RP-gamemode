@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:finisz(playerid, params[], help)
 {
 	new string[128];
@@ -108,4 +107,3 @@ YCMD:finisz(playerid, params[], help)
 	}
 	return 1;
 }
-

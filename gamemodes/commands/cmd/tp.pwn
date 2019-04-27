@@ -123,4 +123,3 @@ YCMD:tp(playerid, params[], help)
 	}
 	return 1;
 }
-

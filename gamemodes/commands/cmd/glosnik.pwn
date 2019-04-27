@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:glosnik(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 8 ||PlayerInfo[playerid][pLider] == 9 || GetPlayerOrg(playerid) == 19 && IsPlayerInRangeOfPoint(playerid, 75.0 , 578.6193,-2195.7708,1.6288) && PlayerInfo[playerid][pRank] >= 3)
@@ -73,4 +72,3 @@ YCMD:glosnik(playerid, params[], help)
 	}
     return 1;
 }
-

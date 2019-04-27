@@ -67,5 +67,3 @@ YCMD:choroba(playerid, params[], help)
 	}
 	return 1;
 }
-
-

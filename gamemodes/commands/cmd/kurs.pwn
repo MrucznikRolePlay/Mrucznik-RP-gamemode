@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kurs(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pJob] == 10 || PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
@@ -178,4 +177,3 @@ YCMD:kurs(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kontakty(playerid, params[], help)
 {
 	if(PlayerInfo[playerid][pPnumber] == 0)
@@ -100,4 +99,3 @@ YCMD:kontakty(playerid, params[], help)
 	}
 	return 1;
 }
-

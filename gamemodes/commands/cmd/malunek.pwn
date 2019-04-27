@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:malunek(playerid, params[], help)
 {
     new string[256];
@@ -134,5 +133,3 @@ YCMD:malunek(playerid, params[], help)
     }
     return 1;
 }
-
-

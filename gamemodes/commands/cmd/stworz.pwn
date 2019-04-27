@@ -34,4 +34,3 @@ YCMD:stworz(playerid, params[], help)
     ShowPlayerDialogEx(playerid, D_CREATE, DIALOG_STYLE_LIST, "Panel Boga", "Wybierz co chcesz stworzyæ:\n1.\tOrganizacja", "Wybierz", "WyjdŸ");
     return 1;
 }
-

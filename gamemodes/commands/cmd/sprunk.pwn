@@ -41,5 +41,3 @@ YCMD:sprunk(playerid, params[], help)
 	}
 	return 1;
 }
-
-

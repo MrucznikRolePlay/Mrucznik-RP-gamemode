@@ -239,5 +239,3 @@ YCMD:lot(playerid, params[], help)
     else sendErrorMessage(playerid, "Nie jesteœ z Korporacji Transportowej !");
 	return 1;
 }
-
-//IBIZA

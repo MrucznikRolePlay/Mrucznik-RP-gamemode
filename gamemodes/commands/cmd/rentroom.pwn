@@ -28,10 +28,6 @@
 	
 */
 
-
-
-
-
 YCMD:rentroom(playerid, params[], help)
 {
 	new string[128];
@@ -429,6 +425,3 @@ YCMD:rentroom(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

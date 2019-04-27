@@ -64,6 +64,3 @@ YCMD:kolejka(playerid, params[], help)
     }
     return 1;
 }
-
-
-

@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:zdejmijkevlar(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -43,4 +41,3 @@ YCMD:zdejmijkevlar(playerid, params[], help)
     }
     return 1;
 }
-

@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:dolacz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -223,6 +222,3 @@ YCMD:dolacz(playerid, params[], help)
 	}//not connected
     return 1;
 }
-
-
-

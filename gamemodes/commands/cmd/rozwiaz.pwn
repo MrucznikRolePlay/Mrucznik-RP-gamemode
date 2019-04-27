@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:rozwiaz(playerid, params[], help)
 {
 	new string[128];
@@ -98,4 +96,3 @@ YCMD:rozwiaz(playerid, params[], help)
 	}//not connected
 	return 1;
 }
-

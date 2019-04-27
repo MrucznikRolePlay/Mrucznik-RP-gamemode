@@ -28,10 +28,6 @@
 	
 */
 
-
-
-
-
 YCMD:ksiazkatel(playerid, params[], help)
 {
 	new string[64];
@@ -70,4 +66,3 @@ YCMD:ksiazkatel(playerid, params[], help)
 	}
 	return 1;
 }
-

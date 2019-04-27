@@ -74,4 +74,3 @@ YCMD:awans(playerid, params[], help)
 	}
 	return 1;
 }
-

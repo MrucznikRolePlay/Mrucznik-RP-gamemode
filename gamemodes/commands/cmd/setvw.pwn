@@ -66,4 +66,3 @@ YCMD:setvw(playerid, params[], help)
 	}
 	return 1;
 }
-

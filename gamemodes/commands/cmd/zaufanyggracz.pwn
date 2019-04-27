@@ -110,4 +110,3 @@ YCMD:zaufanyggracz(playerid, params[], help)
 	}
 	return 1;
 }
-

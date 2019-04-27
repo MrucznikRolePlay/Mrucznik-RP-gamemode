@@ -75,4 +75,3 @@ YCMD:tablet(playerid, params[], help)
 	}
 	return 1;
 }
-

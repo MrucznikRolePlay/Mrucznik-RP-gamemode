@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:megafon(playerid, params[], help)
 {
 	new string[256];
@@ -158,5 +156,3 @@ YCMD:megafon(playerid, params[], help)
 	}
 	return 1;
 }
-
-

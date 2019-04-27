@@ -56,4 +56,3 @@ YCMD:gotolv(playerid, params[], help)
 	}
 	return 1;
 }
-

@@ -89,5 +89,3 @@ YCMD:blok(playerid, params[], help)
 	}
 	return 1;
 }
-
-

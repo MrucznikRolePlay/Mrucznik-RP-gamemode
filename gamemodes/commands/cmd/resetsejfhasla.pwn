@@ -48,4 +48,3 @@ YCMD:resetsejfhasla(playerid, params[], help)
 	}
 	return 1;
 }
-

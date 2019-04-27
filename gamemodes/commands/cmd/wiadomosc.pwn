@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:wiadomosc(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 0)
@@ -202,4 +201,3 @@ YCMD:wiadomosc(playerid, params[], help)
     }
     return 1;
 }
-

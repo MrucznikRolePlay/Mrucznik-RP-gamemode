@@ -69,4 +69,3 @@ YCMD:pogodaall(playerid, params[], help)
 	}
 	return 1;
 }
-

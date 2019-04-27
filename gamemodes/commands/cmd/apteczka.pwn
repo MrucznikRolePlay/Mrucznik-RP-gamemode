@@ -81,4 +81,3 @@ YCMD:apteczka(playerid, params[], help)
 	}
 	return 1;
 }
-

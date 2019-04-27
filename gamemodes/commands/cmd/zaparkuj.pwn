@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:zaparkuj(playerid, params[], help)
 {
 	new string[256];
@@ -95,6 +94,3 @@ YCMD:zaparkuj(playerid, params[], help)
 	}
 	return 1;
 }
-
-
-

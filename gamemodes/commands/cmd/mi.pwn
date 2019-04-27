@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 YCMD:mi(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -51,4 +48,3 @@ YCMD:mi(playerid, params[], help)
 	}
 	return 1;
 }
-

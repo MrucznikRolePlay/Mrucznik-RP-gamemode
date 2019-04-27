@@ -95,4 +95,3 @@ YCMD:placmedyk(playerid, params[], help)
 	}
 	return 1;
 }
-

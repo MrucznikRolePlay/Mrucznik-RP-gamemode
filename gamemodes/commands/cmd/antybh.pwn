@@ -75,5 +75,3 @@ YCMD:antybh(playerid, params[], help)
 	}
 	return 1;
 }
-
-

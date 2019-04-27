@@ -28,8 +28,6 @@
 	
 */
 
-
-
 YCMD:pomocdom(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)

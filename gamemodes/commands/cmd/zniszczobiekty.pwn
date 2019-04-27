@@ -41,4 +41,3 @@ YCMD:zniszczobiekty(playerid, params[], help)
     }
 	return 1;
 }
-

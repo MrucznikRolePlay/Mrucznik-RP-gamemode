@@ -47,4 +47,3 @@ YCMD:b(playerid, params[], help)
 	}
 	return 1;
 }
-

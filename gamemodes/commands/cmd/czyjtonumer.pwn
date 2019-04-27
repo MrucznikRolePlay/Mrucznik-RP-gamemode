@@ -90,4 +90,3 @@ YCMD:czyjtonumer(playerid, params[], help)
   	}
 	return 1;
 }
-

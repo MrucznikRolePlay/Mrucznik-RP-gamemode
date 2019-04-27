@@ -36,4 +36,3 @@ YCMD:autoranny(playerid, params[], help)
 	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	return 1;
 }
-

@@ -88,5 +88,3 @@ YCMD:kill(playerid, params[], help)
 	}
 	return 1;
 }
-
-

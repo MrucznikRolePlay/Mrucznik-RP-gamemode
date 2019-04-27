@@ -28,7 +28,6 @@
 	
 */
 
-
 YCMD:kanister(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -53,5 +52,3 @@ YCMD:kanister(playerid, params[], help)
 	}
 	return 1;
 }
-
-
