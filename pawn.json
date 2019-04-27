@@ -18,6 +18,7 @@
 		"pawn-lang/YSI-Includes@4.x"
 	],
 	"build": {
+		"version": "3.10.9",
 		"name": "",
 		"args": [
 			"-d3",

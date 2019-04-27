@@ -165,7 +165,6 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
-//#include "commands\aliasy.pwn"
 
 //-------<[ Dialogi ]>-------
 #include "dialogs\OnDialogResponse.pwn"

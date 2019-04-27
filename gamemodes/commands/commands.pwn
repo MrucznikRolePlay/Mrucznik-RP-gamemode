@@ -664,9 +664,871 @@
 #include "cmd/kick.pwn"
 #include "cmd/banip.pwn"
 
-
 InitCommands()
 {
+	Aliases();
+}
+
+static Aliases()
+{
+	//bus
+	Command_AddAltNamed("bus", "businfo");
+
+	//car
+	Command_AddAltNamed("car", "auto");
+	Command_AddAltNamed("car", "pojazd");
+	Command_AddAltNamed("car", "samochod");
+
+	//carhelp
+	Command_AddAltNamed("carhelp", "autopomoc");
+	Command_AddAltNamed("carhelp", "pojazdpomoc");
+	Command_AddAltNamed("carhelp", "samochodpomoc");
+
+	//cbradio
+	Command_AddAltNamed("cbradio", "cb");
+	Command_AddAltNamed("cbradio", "cb_radio");
+
+	//cp_usun
+	Command_AddAltNamed("cp_usun", "czekpoint_usun");
+	Command_AddAltNamed("cp_usun", "checkpoint_usun");
+
+	//cp
+	Command_AddAltNamed("cp", "czekpoint");
+	Command_AddAltNamed("cp", "checkpoint");
+
+	//czas
+	Command_AddAltNamed("czas", "time");
+
+	//dajklucze
+	Command_AddAltNamed("dajklucze", "kluczyki");
+	Command_AddAltNamed("dajklucze", "dajkluczyki");
+
+	//dajneony
+	Command_AddAltNamed("dajneony", "sprzedajneon");
+	Command_AddAltNamed("dajneony", "dajneon");
+	Command_AddAltNamed("dajneony", "sprzedajneony");
+
+	//dajpodatek
+	Command_AddAltNamed("dajpodatek", "givetax");
+
+	//dajrange
+	Command_AddAltNamed("dajrange", "giverank");
+
+	//datek
+	Command_AddAltNamed("datek", "charity");
+
+	//deletedom
+	Command_AddAltNamed("deletedom", "usundom");
+	Command_AddAltNamed("deletedom", "deldom");
+
+	//departament
+	Command_AddAltNamed("departament", "d");
+
+	//depo
+	Command_AddAltNamed("depo", "departmentooc");
+	Command_AddAltNamed("depo", "dooc");
+
+	//dl
+	Command_AddAltNamed("dl", "givelicense");
+	Command_AddAltNamed("dl", "dajlicencje");
+	Command_AddAltNamed("dl", "dajl");
+
+	//dolacz
+	Command_AddAltNamed("dolacz", "join");
+
+	//dutycd
+	Command_AddAltNamed("dutycd", "dutysbi");
+
+	//dzwon
+	Command_AddAltNamed("dzwon", "call");
+
+	//federalne
+	Command_AddAltNamed("federalne", "fed");
+
+	//felga
+	Command_AddAltNamed("felga", "zmienfelge");
+
+	//finisz
+	Command_AddAltNamed("finisz", "meta");
+
+	//fooc
+	Command_AddAltNamed("fooc", "familyooc");
+	Command_AddAltNamed("fooc", "fo");
+	Command_AddAltNamed("fooc", "rodzinnyooc");
+
+	//fskin
+	Command_AddAltNamed("fskin", "mundur");
+	Command_AddAltNamed("fskin", "uniform");
+
+	//giveroom
+	Command_AddAltNamed("giveroom", "dajpokoj");
+	Command_AddAltNamed("giveroom", "dajwynajem");
+
+	//glosnik
+	Command_AddAltNamed("glosnik", "sanradio");
+
+	//gotowane
+	Command_AddAltNamed("gotowane", "cooked");
+	Command_AddAltNamed("gotowane", "ugotowane");
+
+	//house
+	Command_AddAltNamed("house", "dom");
+
+	//houseinfo
+	Command_AddAltNamed("houseinfo", "dominfo");
+	Command_AddAltNamed("houseinfo", "dom_info");
+
+	//icons
+	Command_AddAltNamed("icons", "ikonki");
+	Command_AddAltNamed("icons", "ikony");
+
+	//innyspawn
+	Command_AddAltNamed("innyspawn", "spawnchange");
+	Command_AddAltNamed("innyspawn", "zmianaspawnu");
+	Command_AddAltNamed("innyspawn", "zmienspawn");
+
+	//ircpomoc
+	Command_AddAltNamed("ircpomoc", "irchelp");
+
+	//ja
+	Command_AddAltNamed("ja", "me");
+
+	//k
+	Command_AddAltNamed("k", "krzyk");
+
+	//kamera_wiezienie
+	Command_AddAltNamed("kamera_wiezienie", "kameraw");
+	Command_AddAltNamed("kamera_wiezienie", "kamera_w");
+	Command_AddAltNamed("kamera_wiezienie", "kamerawiezienie");
+	Command_AddAltNamed("kamera_wiezienie", "kamera_wiezienna");
+	Command_AddAltNamed("kamera_wiezienie", "kamerawiezienna");
+
+	//kanister
+	Command_AddAltNamed("kanister", "fillcar");
+
+	//kaucja
+	Command_AddAltNamed("kaucja", "bail");
+
+	//kb
+	Command_AddAltNamed("kb", "kontobankowe");
+
+	//kogut
+	Command_AddAltNamed("kogut", "syrena");
+	Command_AddAltNamed("kogut", "sygnal");
+
+	//kolo
+	Command_AddAltNamed("kolo", "kolofortuny");
+	Command_AddAltNamed("kolo", "kf");
+
+	//komandos
+	Command_AddAltNamed("komandos", "wino");
+
+	//komentuj
+	Command_AddAltNamed("komentuj", "km");
+
+	//kontakty
+	Command_AddAltNamed("kontakty", "kontakt");
+
+	//kontrakt
+	Command_AddAltNamed("kontrakt", "contract");
+
+	//kostka2
+	Command_AddAltNamed("kostka2", "dice");
+
+	//ksiazkatel
+	Command_AddAltNamed("ksiazkatel", "number");
+	Command_AddAltNamed("ksiazkatel", "numer");
+	Command_AddAltNamed("ksiazkatel", "sprawdznumber");
+	Command_AddAltNamed("ksiazkatel", "ksiazka");
+
+	//kup
+	Command_AddAltNamed("kup", "buy");
+
+	//kuparmor
+	Command_AddAltNamed("kupbron", "buygun");
+
+	//kupbiletpociag
+	Command_AddAltNamed("kupbiletpociag", "kbpo");
+	Command_AddAltNamed("kupbiletpociag", "kpociag");
+
+	//kuphelikopter
+	Command_AddAltNamed("kuphelikopter", "buyhelicopter");
+	Command_AddAltNamed("kuphelikopter", "kupheli");
+	Command_AddAltNamed("kuphelikopter", "buyheli");
+
+	//kuplodzie
+	Command_AddAltNamed("kuplodzie", "kuplodz");
+	Command_AddAltNamed("kuplodzie", "kupstatek");
+	Command_AddAltNamed("kuplodzie", "buyboat");
+
+	//kupneony
+	Command_AddAltNamed("kupneony", "kupneon");
+
+	//kupowaniedomu
+	Command_AddAltNamed("kupowaniedomu", "kupdom");
+	Command_AddAltNamed("kupowaniedomu", "buyhouse");
+
+	//kuppojazd
+	Command_AddAltNamed("kuppojazd", "kupsamochod");
+	Command_AddAltNamed("kuppojazd", "kupauto");
+	Command_AddAltNamed("kuppojazd", "buycar");
+
+	//kupsamoloty
+	Command_AddAltNamed("kupsamoloty", "kupsamolot");
+	Command_AddAltNamed("kupsamoloty", "kuplot");
+	Command_AddAltNamed("kupsamoloty", "buyplane");
+
+	//kupskin
+	Command_AddAltNamed("kupskin", "wybierzskin");
+
+	//kurs
+	Command_AddAltNamed("kurs", "fare");
+
+	//laptop
+	Command_AddAltNamed("laptop", "portable");
+
+	//licencje
+	Command_AddAltNamed("licencje", "licenses");
+
+	//liderpomoc
+	Command_AddAltNamed("liderpomoc", "leaderhelp");
+
+	//lock
+	Command_AddAltNamed("lock", "unlock");
+
+	//lockint
+	Command_AddAltNamed("lockint", "zamekint");
+
+	//losowostworzdom
+	Command_AddAltNamed("losowostworzdom", "lzrobdom");
+	Command_AddAltNamed("losowostworzdom", "lstworzdom");
+	Command_AddAltNamed("losowostworzdom", "lcreatehouse");
+	Command_AddAltNamed("losowostworzdom", "lpostawdom");
+	Command_AddAltNamed("losowostworzdom", "ltworzdom");
+
+	//malunek
+	Command_AddAltNamed("malunek", "maluj");
+
+	//mandacik
+	Command_AddAltNamed("mandacik", "ticket");
+	Command_AddAltNamed("mandacik", "mandat");
+
+	//materialy
+	Command_AddAltNamed("materialy", "materials");
+	Command_AddAltNamed("materialy", "mats");
+
+	//megafon
+	Command_AddAltNamed("megafon", "megaphone");
+	Command_AddAltNamed("megafon", "m");
+
+	//mi
+	Command_AddAltNamed("mi", "deathwarning");
+	Command_AddAltNamed("mi", "warningdeath");
+	Command_AddAltNamed("mi", "mordinfo");
+
+	//mojeauta
+	Command_AddAltNamed("mojeauta", "mojeauto");
+
+	//mp3
+	Command_AddAltNamed("mp3", "music");
+	Command_AddAltNamed("mp3", "muzyka");
+
+	//namierz
+	Command_AddAltNamed("namierz", "find");
+	Command_AddAltNamed("namierz", "znajdz");
+	Command_AddAltNamed("namierz", "szukaj");
+
+	//napraw
+	Command_AddAltNamed("napraw", "repair");
+
+	//nastepnylevel
+	Command_AddAltNamed("nastepnylevel", "buylevel");
+	Command_AddAltNamed("nastepnylevel", "kuplevel");
+	Command_AddAltNamed("nastepnylevel", "nextlevel");
+
+	//nazywo
+	Command_AddAltNamed("nazywo", "live");
+	Command_AddAltNamed("nazywo", "wywiad");
+
+	//newbie
+	Command_AddAltNamed("newbie", "n");
+
+	//noa
+	Command_AddAltNamed("noa", "fdu");
+
+	//nos
+	Command_AddAltNamed("nos", "nitro");
+
+	//o
+	Command_AddAltNamed("o", "ooc");
+
+	//obezwladnij
+	Command_AddAltNamed("obezwladnij", "ob");
+
+	//ochrona
+	Command_AddAltNamed("ochrona", "guard");
+	Command_AddAltNamed("ochrona", "sellkami");
+	Command_AddAltNamed("ochrona", "sellkamizelke");
+
+	//od
+	Command_AddAltNamed("od", "podnies");
+	Command_AddAltNamed("od", "p");
+
+	//og
+	Command_AddAltNamed("og", "advertise");
+	Command_AddAltNamed("og", "ad");
+	Command_AddAltNamed("og", "ogloszenie");
+
+	//opuscdom
+	Command_AddAltNamed("opuscdom", "zlomujdom");
+	Command_AddAltNamed("opuscdom", "zlomujhouse");
+
+	//organizacje
+	Command_AddAltNamed("organizacje", "rodziny");
+	Command_AddAltNamed("organizacje", "biznesy");
+
+	//paliwo
+	Command_AddAltNamed("paliwo", "fuel");
+	Command_AddAltNamed("paliwo", "licznikpaliwa");
+
+	//paralizuj
+	Command_AddAltNamed("paralizuj", "paraliz");
+
+	//pl
+	Command_AddAltNamed("pl", "showlicenses");
+	Command_AddAltNamed("pl", "pokazlicencje");
+
+	//plac
+	Command_AddAltNamed("plac", "pay");
+	Command_AddAltNamed("plac", "zaplac");
+
+	//po
+	Command_AddAltNamed("po", "suspect");
+	Command_AddAltNamed("po", "su");
+	Command_AddAltNamed("po", "poszukuj");
+
+	//podatek
+	Command_AddAltNamed("podatek", "settax");
+
+	//pogoda
+	Command_AddAltNamed("pogoda", "weather");
+
+	//pokazdowod
+	Command_AddAltNamed("pokazdowod", "dowod");
+
+	//pomoc2
+	Command_AddAltNamed("pomoc2", "help");
+
+	//pomocdom
+	Command_AddAltNamed("pomocdom", "dompomoc");
+	Command_AddAltNamed("pomocdom", "househelp");
+
+	//pr
+	Command_AddAltNamed("pr", "panelrodzinny");
+
+	//premium
+	Command_AddAltNamed("premium", "kp");
+	Command_AddAltNamed("premium", "dotacje");
+
+	//premiumskin
+	Command_AddAltNamed("premiumskin", "unikat");
+
+	//przelew
+	Command_AddAltNamed("przelew", "transfer");
+	Command_AddAltNamed("przelew", "wiretransfer");
+	Command_AddAltNamed("przelew", "przelej");
+
+	//przeszukaj
+	Command_AddAltNamed("przeszukaj", "frisk");
+
+	//przyjmij
+	Command_AddAltNamed("przyjmij", "invite");
+
+	//qf
+	Command_AddAltNamed("qf", "quitfrakcja");
+
+	//quitpraca
+	Command_AddAltNamed("quitpraca", "quitjob");
+	Command_AddAltNamed("quitpraca", "opuscprace");
+
+	//r
+	Command_AddAltNamed("r", "radio");
+
+	//raport
+	Command_AddAltNamed("raport", "report");
+
+	//re
+	Command_AddAltNamed("re", "reply");
+
+	//reklama
+	Command_AddAltNamed("reklama", "ha");
+
+	//rentroom
+	Command_AddAltNamed("rentroom", "wynajmij");
+	Command_AddAltNamed("rentroom", "wynajmuj");
+	Command_AddAltNamed("rentroom", "wynajem");
+	Command_AddAltNamed("rentroom", "wynajmijpokoj");
+
+	//reset_ulepszen
+	Command_AddAltNamed("reset_ulepszen", "resetupgrades");
+	Command_AddAltNamed("reset_ulepszen", "resetujulepszenia");
+	Command_AddAltNamed("reset_ulepszen", "resetulepszen");
+	Command_AddAltNamed("reset_ulepszen", "resetuj_ulepszenia");
+
+	//cca
+	Command_AddAltNamed("cca", "cc");
+
+	//resms
+	Command_AddAltNamed("resms", "res");
+
+	//rodzinny
+	Command_AddAltNamed("rodzinny", "family");
+	Command_AddAltNamed("rodzinny", "f");
+
+	//rooc
+	Command_AddAltNamed("rooc", "radioooc");
+	Command_AddAltNamed("rooc", "ro");
+
+	//rozkuj
+	Command_AddAltNamed("rozkuj", "uncuff");
+	Command_AddAltNamed("rozkuj", "odkuj");
+
+	//rozwiaz
+	Command_AddAltNamed("rozwiaz", "untie");
+	Command_AddAltNamed("rozwiaz", "odwiaz");
+
+	//ruleta
+	Command_AddAltNamed("ruleta", "ruletka");
+
+	//ryby
+	Command_AddAltNamed("ryby", "fishes");
+
+	//rybypomoc
+	Command_AddAltNamed("rybypomoc", "fishhelp");
+
+	//say
+	Command_AddAltNamed("say", "local");
+	Command_AddAltNamed("say", "l");
+
+	//sb
+	Command_AddAltNamed("sb", "sprawdzbron");
+	Command_AddAltNamed("sb", "szukajbroni");
+
+	//sejffrakcja
+	Command_AddAltNamed("sejffrakcja", "sejff");
+
+	//sejfpomoc
+	Command_AddAltNamed("sejfpomoc", "sejf");
+	Command_AddAltNamed("sejfpomoc", "sejfpanel");
+
+	//sejfrodzina
+	Command_AddAltNamed("sejfrodzina", "sejfr");
+
+	//selldom
+	Command_AddAltNamed("selldom", "sprzedajdom");
+	Command_AddAltNamed("selldom", "sellhouse");
+
+	//sluzba
+	Command_AddAltNamed("sluzba", "duty");
+
+	//sms
+	Command_AddAltNamed("sms", "txt");
+	Command_AddAltNamed("sms", "t");
+
+	//spoiler
+	Command_AddAltNamed("spoiler", "spojler");
+
+	//spoilery
+	Command_AddAltNamed("spoilery", "spojlery");
+
+	//sprawdzdom
+	Command_AddAltNamed("sprawdzdom", "checkdom");
+
+	//sprawdzteam
+	Command_AddAltNamed("sprawdzteam", "checkteam");
+
+	//sprzedajalkohol
+	Command_AddAltNamed("sprzedajalkohol", "sprzedaja");
+	Command_AddAltNamed("sprzedajalkohol", "sella");
+
+	//sprzedajauto
+	Command_AddAltNamed("sprzedajauto", "dajauto");
+	Command_AddAltNamed("sprzedajauto", "dajsamochod");
+
+	//sprzedajbron
+	Command_AddAltNamed("sprzedajbron", "sellgun");
+
+	//sprzedajmaterialy
+	Command_AddAltNamed("sprzedajmaterialy", "sprzedajmats");
+
+	//sprzedajnarkotyki
+	Command_AddAltNamed("sprzedajnarkotyki", "selldrugs");
+	Command_AddAltNamed("sprzedajnarkotyki", "sprzedajdragi");
+	Command_AddAltNamed("sprzedajnarkotyki", "selldragi");
+
+	//startujlekcje
+	Command_AddAltNamed("startujlekcje", "startlesson");
+	Command_AddAltNamed("startujlekcje", "zacznijlekcje");
+	Command_AddAltNamed("startujlekcje", "startlekcja");
+	Command_AddAltNamed("startujlekcje", "startegzamin");
+
+	//staty
+	Command_AddAltNamed("staty", "stats");
+	Command_AddAltNamed("staty", "statystyki");
+
+	//stopanim
+	Command_AddAltNamed("stopanim", "stopani");
+
+	//stworzdom
+	Command_AddAltNamed("stworzdom", "zrobdom");
+
+	//stworztrase
+	Command_AddAltNamed("stworztrase", "stworzwyscig");
+
+	//swiadek
+	Command_AddAltNamed("swiadek", "witness");
+
+	//szept
+	Command_AddAltNamed("szept", "cicho");
+	Command_AddAltNamed("szept", "s");
+
+	//szukani
+	Command_AddAltNamed("szukani", "wanted");
+	Command_AddAltNamed("szukani", "poszukiwani");
+
+	//tankowanie
+	Command_AddAltNamed("tankowanie", "refill");
+
+	//telefonpomoc
+	Command_AddAltNamed("telefonpomoc", "cellphonehelp");
+
+	//togadmin
+	Command_AddAltNamed("togadmin", "togadm");
+
+	//togdepo
+	Command_AddAltNamed("togdepo", "zablokujdepo");
+
+	//toglicznik
+	Command_AddAltNamed("toglicznik", "togtextdraw");
+	Command_AddAltNamed("toglicznik", "togspeed");
+
+	//togooc
+	Command_AddAltNamed("togooc", "zablokujooc");
+
+	//togwl
+	Command_AddAltNamed("togwl", "togcrime");
+	Command_AddAltNamed("togwl", "toghq");
+
+	//trasy
+	Command_AddAltNamed("trasy", "wyscigi");
+
+	//ugotuj
+	Command_AddAltNamed("ugotuj", "cook");
+	Command_AddAltNamed("ugotuj", "gotuj");
+
+	//ukradnij
+	Command_AddAltNamed("ukradnij", "dropcar");
+	Command_AddAltNamed("ukradnij", "kradnijauto");
+
+	//ulecz
+	Command_AddAltNamed("ulecz", "heal");
+
+	//uleczmnie
+	Command_AddAltNamed("uleczmnie", "healme");
+
+	//ulepsz
+	Command_AddAltNamed("ulepsz", "upgrade");
+	Command_AddAltNamed("ulepsz", "ulepszenia");
+
+	//unrentroom
+	Command_AddAltNamed("unrentroom", "unrent");
+	Command_AddAltNamed("unrentroom", "niewynajmuj");
+
+	//usunbron
+	Command_AddAltNamed("usunbron", "ub");
+
+	//wejdz
+	Command_AddAltNamed("wejdz", "enter");
+
+	//wejdzw
+	Command_AddAltNamed("wejdzw", "wyjdzw");
+
+	//wez
+	Command_AddAltNamed("wez", "get");
+
+	//wezdragi
+	Command_AddAltNamed("wezdragi", "usedrugs");
+	Command_AddAltNamed("wezdragi", "weznarkotyki");
+
+	//wezwij
+	Command_AddAltNamed("wezwij", "service");
+
+	//wezwijwoz
+	Command_AddAltNamed("wezwijwoz", "callcar");
+
+	//wezzlecenie
+	Command_AddAltNamed("wezzlecenie", "zlecenie");
+
+	//wiadomosc
+	Command_AddAltNamed("wiadomosc", "w");
+
+	//wieza
+	Command_AddAltNamed("wieza", "tower");
+
+	//wk
+	Command_AddAltNamed("wk", "wyrzuckluczyki");
+	Command_AddAltNamed("wk", "wywalklucze");
+	Command_AddAltNamed("wk", "wywalkluczyki");
+	Command_AddAltNamed("wk", "wyrzucklucze");
+
+	//wplac
+	Command_AddAltNamed("wplac", "bank");
+	Command_AddAltNamed("wplac", "deposit");
+
+	//wrzuc
+	Command_AddAltNamed("wrzuc", "wepchnij");
+	Command_AddAltNamed("wrzuc", "wepchaj");
+
+	//wyczysc
+	Command_AddAltNamed("wyczysc", "clear");
+	Command_AddAltNamed("wyczysc", "oczysc");
+
+	//wyjdz
+	Command_AddAltNamed("wyjdz", "exit");
+
+	//wyjedz
+	Command_AddAltNamed("wyjedz", "wjedz");
+
+	//wynajempomoc
+	Command_AddAltNamed("wynajempomoc", "renthelp");
+
+	//wypij
+	Command_AddAltNamed("wypij", "drink");
+	Command_AddAltNamed("wypij", "pij");
+
+	//wypisz
+	Command_AddAltNamed("wypisz", "wydaj");
+
+	//wyplac
+	Command_AddAltNamed("wyplac", "withdraw");
+
+	//wypusc
+	Command_AddAltNamed("wypusc", "free");
+	Command_AddAltNamed("wypusc", "uwolnij");
+
+	//wypuscrybe
+	Command_AddAltNamed("wypuscrybe", "releasefish");
+	Command_AddAltNamed("wypuscrybe", "wyrzucrybe");
+
+	//wyrzucbronie
+	Command_AddAltNamed("wyrzucbronie", "wb");
+
+	//wywal
+	Command_AddAltNamed("wywal", "eject");
+
+	//wywaldmv
+	Command_AddAltNamed("wywaldmv", "wywalzdmv");
+
+	//wywaldragi
+	Command_AddAltNamed("wywaldragi", "wd");
+	Command_AddAltNamed("wywaldragi", "wyrzucdragi");
+
+	//wywalmaterialy
+	Command_AddAltNamed("wm", "wyrzucmaterialy");
+	Command_AddAltNamed("wm", "wm");
+
+	//wywalrybe
+	Command_AddAltNamed("wywalrybe", "throwback");
+
+	//wywalryby
+	Command_AddAltNamed("wywalryby", "throwbackall");
+
+	//wywaltelefon
+	Command_AddAltNamed("wywaltelefon", "wywaltel");
+
+	//z
+	Command_AddAltNamed("z", "hangup");
+	Command_AddAltNamed("z", "h");
+	Command_AddAltNamed("z", "zakoncz");
+
+	//zabierz
+	Command_AddAltNamed("zabierz", "take");
+
+	//zablokujtel
+	Command_AddAltNamed("zablokujtel", "togphone");
+	Command_AddAltNamed("zablokujtel", "togtel");
+	Command_AddAltNamed("zablokujtel", "togtelefon");
+
+	//zablokujw
+	Command_AddAltNamed("zablokujw", "togwhisper");
+	Command_AddAltNamed("zablokujw", "togw");
+
+	//zakuj
+	Command_AddAltNamed("zakuj", "cuff");
+	Command_AddAltNamed("zakuj", "skuj");
+
+	//zaparkuj
+	Command_AddAltNamed("zaparkuj", "parkuj");
+
+	//zatankuj
+	Command_AddAltNamed("zatankuj", "fill");
+	Command_AddAltNamed("zatankuj", "tankuj");
+
+	//zatrzymajlekcje
+	Command_AddAltNamed("zatrzymajlekcje", "stoplesson");
+	Command_AddAltNamed("zatrzymajlekcje", "zakonczlekcje");
+	Command_AddAltNamed("zatrzymajlekcje", "stoplekcja");
+	Command_AddAltNamed("zatrzymajlekcje", "stopegzamin");
+
+	//zdejmijkevlar
+	Command_AddAltNamed("zdejmijkevlar", "wyrzuckami");
+	Command_AddAltNamed("zdejmijkevlar", "zdejmijkami");
+
+	//zderzaki
+	Command_AddAltNamed("zderzaki", "zderzak");
+
+	//zdmv
+	Command_AddAltNamed("zdmv", "cdmv");
+
+	//zjedz
+	Command_AddAltNamed("zjedz", "eat");
+	Command_AddAltNamed("zjedz", "jedz");
+
+	//zk
+	Command_AddAltNamed("zk", "odbierzkluczyki");
+	Command_AddAltNamed("zk", "zabierzkluczyki");
+
+	//zlap
+	Command_AddAltNamed("zlap", "fish");
+	Command_AddAltNamed("zlap", "ryba");
+	Command_AddAltNamed("zlap", "wedkuj");
+	Command_AddAltNamed("zlap", "low");
+	Command_AddAltNamed("zlap", "wedka");
+
+	//zlomuj
+	Command_AddAltNamed("zlomuj", "spawnuj");
+	Command_AddAltNamed("zlomuj", "przemaluj");
+	Command_AddAltNamed("zlomuj", "nauto");
+
+	//zmiendom
+	Command_AddAltNamed("zmiendom", "setdom");
+	Command_AddAltNamed("zmiendom", "sethouse");
+
+	//zmiendomk
+	Command_AddAltNamed("zmiendomk", "setdomk");
+	Command_AddAltNamed("zmiendomk", "setdomkupiony");
+
+	//zmienplec
+	Command_AddAltNamed("zmienplec", "srs");
+
+	//zwiaz
+	Command_AddAltNamed("zwiaz", "tie");
+
+	//zwolnij
+	Command_AddAltNamed("zwolnij", "uninvite");
+
+	//admins
+	Command_AddAltNamed("admini", "admins");
+
+	//block
+	Command_AddAltNamed("blok", "block");
+
+	//sblock
+	Command_AddAltNamed("sblok", "sblock");
+
+	//pblock
+	Command_AddAltNamed("pblok", "pblock");
+
+	//undemorgan
+	Command_AddAltNamed("undemorgan", "prisonoff");
+	Command_AddAltNamed("undemorgan", "unprison");
+
+	//choroba
+	Command_AddAltNamed("choroba", "setstd");
+	Command_AddAltNamed("choroba", "zaraz");
+
+	//zmienwiek
+	Command_AddAltNamed("zmienwiek", "setwiek");
+	Command_AddAltNamed("zmienwiek", "setage");
+
+	//zmienprace
+	Command_AddAltNamed("zmienprace", "setjob");
+	Command_AddAltNamed("zmienprace", "zmienjob");
+
+	//setveh
+	Command_AddAltNamed("setveh", "setauto");
+	Command_AddAltNamed("setveh", "zmienauto");
+	Command_AddAltNamed("setveh", "setcar");
+
+	//zmienwl
+	Command_AddAltNamed("zmienwl", "setwl");
+
+	//respawnplayer
+	Command_AddAltNamed("respawnplayer", "respp");
+
+	//respawncar
+	Command_AddAltNamed("respawncar", "respcar");
+
+	//cziterzy
+	Command_AddAltNamed("cziterzy", "czity");
+
+	//zobp
+	Command_AddAltNamed("zobp", "checkprawko");
+	Command_AddAltNamed("zobp", "zobaczprawko");
+
+	//ustawmistrz
+	Command_AddAltNamed("ustawmistrz", "setchamp");
+	Command_AddAltNamed("ustawmistrz", "setmistrz");
+
+	//zaufanyggracz
+	Command_AddAltNamed("zaufanyggracz", "zg");
+
+	//wyloguj
+	Command_AddAltNamed("wyloguj", "logout");
+
+	//wylogujgracz
+	Command_AddAltNamed("wylogujgracz", "logoutpl");
+
+	//wylogujall
+	Command_AddAltNamed("wylogujall", "logoutall");
+
+	//demorgan
+	Command_AddAltNamed("demorgan", "prison");
+
+	//unjail
+	Command_AddAltNamed("unjail", "unaj");
+
+	//adminajail
+	Command_AddAltNamed("adminajail", "aj");
+
+	//tankveh
+	Command_AddAltNamed("tankveh", "fuelcar");
+	Command_AddAltNamed("tankveh", "tankujauto");
+
+	//tankujauta
+	Command_AddAltNamed("tankujauta", "fuelcars");
+
+	//zmienhp
+	Command_AddAltNamed("zmienhp", "sethp");
+
+	//pogodaall
+	Command_AddAltNamed("pogodaall", "weatherall");
+
+	//kasa
+	Command_AddAltNamed("kasa", "money");
+
+	//dajkase
+	Command_AddAltNamed("dajkase", "givemoney");
+
+	//ucisz
+	Command_AddAltNamed("ucisz", "mute");
+	Command_AddAltNamed("ucisz", "unmute");
+
+	//zamroz
+	Command_AddAltNamed("zamroz", "freeze");
+
+	//odmroz
+	Command_AddAltNamed("odmroz", "unfreeze");
 
     return 1;
 }
