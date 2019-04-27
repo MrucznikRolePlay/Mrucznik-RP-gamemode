@@ -28,7 +28,7 @@
 	
 */
 
-CMD:settax(playerid, params[]) return cmd_podatek(playerid, params);
+
 CMD:podatek(playerid, params[])
 {
 	new string[64];

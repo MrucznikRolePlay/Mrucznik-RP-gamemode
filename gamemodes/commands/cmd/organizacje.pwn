@@ -28,8 +28,8 @@
 	
 */
 
-CMD:rodziny(playerid, p[]) return cmd_organizacje(playerid, p);
-CMD:biznesy(playerid, p[]) return cmd_organizacje(playerid, p);
+
+
 CMD:organizacje(playerid, p[])
 {
     new lStr[128];

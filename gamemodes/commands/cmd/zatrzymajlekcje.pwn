@@ -28,10 +28,10 @@
 	
 */
 
-CMD:stoplesson(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
-CMD:zakonczlekcje(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
-CMD:stoplekcja(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
-CMD:stopegzamin(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
+
+
+
+
 CMD:zatrzymajlekcje(playerid, params[])
 {
 	new string[128];

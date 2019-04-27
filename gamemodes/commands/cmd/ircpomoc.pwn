@@ -28,7 +28,7 @@
 	
 */
 
-CMD:irchelp(playerid) return cmd_ircpomoc(playerid);
+
 CMD:ircpomoc(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");

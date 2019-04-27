@@ -28,8 +28,6 @@
 	
 */
 
-CMD:tognews(playerid) return cmd_blokujnews(playerid);
-CMD:zablokujnews(playerid) return cmd_blokujnews(playerid);
 CMD:blokujnews(playerid)
 {
     if(IsPlayerConnected(playerid))

@@ -30,7 +30,6 @@
 	
 */
 
-//CMD:alias(playerid) return cmd_$itemname$(playerid);
 CMD:$itemname$(playerid)
 {
     //command body

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fdu(playerid, params[]) return cmd_noa(playerid, params);
+
 CMD:noa(playerid, params[])
 {
 	new string[256];

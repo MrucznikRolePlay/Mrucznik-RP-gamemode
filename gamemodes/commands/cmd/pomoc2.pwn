@@ -28,7 +28,7 @@
 	
 */
 
-CMD:help(playerid) return cmd_pomoc2(playerid);
+
 CMD:pomoc2(playerid)
 {
     SendClientMessage(playerid, COLOR_GRAD1,"*** KONTO *** /zasady /stats /nextlevel /ulepszenia");

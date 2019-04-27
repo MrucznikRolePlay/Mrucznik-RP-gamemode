@@ -28,8 +28,8 @@
 	
 */
 
-CMD:setdom(playerid, params[]) return cmd_zmiendom(playerid, params);
-CMD:sethouse(playerid, params[]) return cmd_zmiendom(playerid, params);
+
+
 CMD:zmiendom(playerid, params[])
 {
 	new string[128];

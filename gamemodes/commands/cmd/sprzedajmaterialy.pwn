@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sprzedajmats(playerid, params[]) return cmd_sprzedajmaterialy(playerid, params);
+
 CMD:sprzedajmaterialy(playerid, params[])
 {
 	new giveplayerid, moneys, kasa;

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:dropcar(playerid) return cmd_ukradnij(playerid);
-CMD:kradnijauto(playerid) return cmd_ukradnij(playerid);
+
+
 CMD:ukradnij(playerid)
 {
     if(IsPlayerConnected(playerid))

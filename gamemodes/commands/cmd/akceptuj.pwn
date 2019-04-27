@@ -28,7 +28,6 @@
 	
 */
 
-CMD:accept(playerid, params[]) return cmd_akceptuj(playerid, params);
 CMD:akceptuj(playerid, params[])
 {
     new string[256];

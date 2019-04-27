@@ -95,4 +95,4 @@ CMD:studia(playerid)
 	return 1;
 }
 
-/*CMD:clothes(playerid) return cmd_skin(playerid);
+

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:showlicenses(playerid, params[]) return cmd_pl(playerid, params);
-CMD:pokazlicencje(playerid, params[]) return cmd_pl(playerid, params);
+
+
 CMD:pl(playerid, params[])
 {
 	new string[128];

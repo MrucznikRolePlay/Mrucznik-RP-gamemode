@@ -28,7 +28,7 @@
 	
 */
 
-CMD:time(playerid) return cmd_czas(playerid);
+
 CMD:czas(playerid)
 {
 	new string[128];

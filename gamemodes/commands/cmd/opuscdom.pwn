@@ -28,8 +28,8 @@
 	
 */
 
-CMD:zlomujdom(playerid) return cmd_opuscdom(playerid);
-CMD:zlomujhouse(playerid) return cmd_opuscdom(playerid);
+
+
 CMD:opuscdom(playerid)
 {
 	new string[128];

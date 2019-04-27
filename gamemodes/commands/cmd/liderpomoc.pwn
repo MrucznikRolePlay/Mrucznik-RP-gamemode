@@ -28,7 +28,7 @@
 	
 */
 
-CMD:leaderhelp(playerid) return cmd_liderpomoc(playerid);
+
 CMD:liderpomoc(playerid)
 {
 	if (PlayerInfo[playerid][pLider] >= 1)

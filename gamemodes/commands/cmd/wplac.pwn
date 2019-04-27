@@ -28,8 +28,8 @@
 	
 */
 
-CMD:bank(playerid, params[]) return cmd_wplac(playerid, params);
-CMD:deposit(playerid, params[]) return cmd_wplac(playerid, params);
+
+
 CMD:wplac(playerid, params[])
 {
 	new string[128];

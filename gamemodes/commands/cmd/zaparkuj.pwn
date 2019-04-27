@@ -28,7 +28,7 @@
 	
 */
 
-CMD:parkuj(playerid) return cmd_zaparkuj(playerid);
+
 CMD:zaparkuj(playerid)
 {
 	new string[256];

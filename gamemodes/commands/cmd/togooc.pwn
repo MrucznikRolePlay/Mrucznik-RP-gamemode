@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zablokujooc(playerid) return cmd_togooc(playerid);
+
 CMD:togooc(playerid)
 {
     if(IsPlayerConnected(playerid))

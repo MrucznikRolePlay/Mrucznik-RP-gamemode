@@ -28,7 +28,7 @@
 	
 */
 
-CMD:km(playerid, params[]) return cmd_komentuj(playerid, params);
+
 CMD:komentuj(playerid, params[])
 {
 	new string[128];

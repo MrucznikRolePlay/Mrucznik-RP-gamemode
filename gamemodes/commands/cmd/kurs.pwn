@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fare(playerid, params[]) return cmd_kurs(playerid, params);
+
 CMD:kurs(playerid, params[])
 {
 	if(PlayerInfo[playerid][pJob] == 10 || PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)

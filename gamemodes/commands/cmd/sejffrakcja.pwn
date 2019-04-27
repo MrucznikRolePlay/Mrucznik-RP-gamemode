@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sejff(playerid) return cmd_sejffrakcja(playerid);
+
 CMD:sejffrakcja(playerid)
 {
 	sendErrorMessage(playerid, "U¿yj /kontobankowe"); 

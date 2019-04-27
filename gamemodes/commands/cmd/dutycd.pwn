@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dutysbi(playerid) return cmd_dutycd(playerid);
+
 CMD:dutycd(playerid)
 {
 	new string[128];

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:sprawdzbron(playerid, params[]) return cmd_sb(playerid, params);
-CMD:szukajbroni(playerid, params[]) return cmd_sb(playerid, params);
+
+
 CMD:sb(playerid, params[])
 {
 	new string[128];

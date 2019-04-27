@@ -28,8 +28,8 @@
 	
 */
 
-CMD:wd(playerid) return cmd_wywaldragi(playerid);
-CMD:wyrzucdragi(playerid) return cmd_wywaldragi(playerid);
+
+
 CMD:wywaldragi(playerid)
 {
     if(PlayerInfo[playerid][pDrugs] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie narkotyków");

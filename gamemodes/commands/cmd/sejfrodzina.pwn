@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sejfr(playerid) return cmd_sejfrodzina(playerid);
+
 CMD:sejfrodzina(playerid)
 {
 	if(orgIsLeader(playerid))

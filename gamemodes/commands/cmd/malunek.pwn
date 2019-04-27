@@ -28,7 +28,7 @@
 	
 */
 
-CMD:maluj(playerid, params[]) return cmd_malunek(playerid, params);
+
 CMD:malunek(playerid, params[])
 {
     new string[256];

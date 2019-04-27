@@ -28,8 +28,8 @@
 	
 */
 
-CMD:releasefish(playerid, params[]) return cmd_wypuscrybe(playerid, params);
-CMD:wyrzucrybe(playerid, params[]) return cmd_wypuscrybe(playerid, params);
+
+
 CMD:wypuscrybe(playerid, params[])
 {
     if(IsPlayerConnected(playerid))

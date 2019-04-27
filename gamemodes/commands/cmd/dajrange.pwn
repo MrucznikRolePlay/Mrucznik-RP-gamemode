@@ -28,7 +28,7 @@
 	
 */
 
-CMD:giverank(playerid, params[]) return cmd_dajrange(playerid, params);
+
 CMD:dajrange(playerid, params[])
 {
 	new string[128];

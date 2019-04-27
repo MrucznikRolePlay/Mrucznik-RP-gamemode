@@ -28,8 +28,8 @@
 	
 */
 
-CMD:dajauto(playerid, params[]) return cmd_sprzedajauto(playerid, params);
-CMD:dajsamochod(playerid, params[]) return cmd_sprzedajauto(playerid, params);
+
+
 CMD:sprzedajauto(playerid, params[])
 {
 	new string[256];

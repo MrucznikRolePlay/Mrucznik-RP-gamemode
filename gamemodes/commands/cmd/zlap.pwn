@@ -28,11 +28,11 @@
 	
 */
 
-CMD:fish(playerid) return cmd_zlap(playerid);
-CMD:ryba(playerid) return cmd_zlap(playerid);
-CMD:wedkuj(playerid) return cmd_zlap(playerid);
-CMD:low(playerid) return cmd_zlap(playerid);
-CMD:wedka(playerid) return cmd_zlap(playerid);
+
+
+
+
+
 CMD:zlap(playerid)
 {
 	new string[128];

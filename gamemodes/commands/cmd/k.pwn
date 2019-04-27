@@ -28,7 +28,7 @@
 	
 */
 
-CMD:krzyk(playerid, params[]) return cmd_k(playerid, params);
+
 CMD:k(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:nitro(playerid, params[]) return cmd_nos(playerid, params);
+
 CMD:nos(playerid, params[])
 {
     new string[256];

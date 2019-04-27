@@ -28,8 +28,6 @@
 	
 */
 
-CMD:blokujdom(playerid, params[]) return cmd_blokujsprzedarz(playerid, params);
-CMD:blokadadomu(playerid, params[]) return cmd_blokujsprzedarz(playerid, params);
 CMD:blokujsprzedarz(playerid, params[])
 {
 	new string[64];

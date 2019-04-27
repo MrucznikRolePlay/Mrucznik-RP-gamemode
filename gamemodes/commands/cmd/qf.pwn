@@ -28,7 +28,7 @@
 	
 */
 
-CMD:quitfrakcja(playerid) return cmd_qf(playerid);
+
 CMD:qf(playerid)
 {
 	if(IsPlayerConnected(playerid))

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:togcrime(playerid) return cmd_togwl(playerid);
-CMD:toghq(playerid) return cmd_togwl(playerid);
+
+
 CMD:togwl(playerid)
 {
     if(IsPlayerConnected(playerid))

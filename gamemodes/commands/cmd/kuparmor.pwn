@@ -35,4 +35,4 @@ CMD:kuparmor(playerid)
 }
 
 
-//CMD:buygun(playerid, params[]) return cmd_kupbron(playerid, params);
+

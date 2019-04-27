@@ -28,7 +28,6 @@
 	
 */
 
-CMD:dodatki(playerid) return cmd_adds(playerid);
 CMD:adds(playerid)
 {
 	if(IsPlayerConnected(playerid))

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:drink(playerid, params[]) return cmd_wypij(playerid, params);
-CMD:pij(playerid, params[]) return cmd_wypij(playerid, params);
+
+
 CMD:wypij(playerid, params[])
 {
 	new string[128];

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:ikonki(playerid) return cmd_icons(playerid);
-CMD:ikony(playerid) return cmd_icons(playerid);
+
+
 CMD:icons(playerid)
 {
     if(IsPlayerConnected(playerid))

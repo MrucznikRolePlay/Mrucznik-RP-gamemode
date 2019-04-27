@@ -28,7 +28,6 @@
 	
 */
 
-CMD:oczko(playerid) return cmd_blackjack(playerid);
 CMD:blackjack(playerid)
 {
 	new string[128];

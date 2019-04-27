@@ -28,8 +28,8 @@
 	
 */
 
-CMD:materials(playerid, params[]) return cmd_materialy(playerid, params);
-CMD:mats(playerid, params[]) return cmd_materialy(playerid, params);
+
+
 CMD:materialy(playerid, params[])
 {
 	new string[128];

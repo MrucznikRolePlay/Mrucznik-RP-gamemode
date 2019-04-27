@@ -28,7 +28,7 @@
 	
 */
 
-CMD:refill(playerid, params[]) return cmd_tankowanie(playerid, params);
+
 CMD:tankowanie(playerid, params[])
 {
 	new string[128];

@@ -28,8 +28,6 @@
 	
 */
 
-CMD:dodatkihelp(playerid) return cmd_addshelp(playerid);
-CMD:dodatkipomoc(playerid) return cmd_addshelp(playerid);
 CMD:addshelp(playerid)
 {
 	if(IsPlayerConnected(playerid))

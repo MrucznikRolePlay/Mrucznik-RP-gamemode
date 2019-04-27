@@ -28,7 +28,7 @@
 	
 */
 
-CMD:duty(playerid) return cmd_sluzba(playerid);
+
 CMD:sluzba(playerid)
 {
     new string[128];

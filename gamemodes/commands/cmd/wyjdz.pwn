@@ -28,7 +28,7 @@
 	
 */
 
-CMD:exit(playerid) return cmd_wyjdz(playerid);
+
 CMD:wyjdz(playerid)
 {
     if(IsPlayerConnected(playerid))

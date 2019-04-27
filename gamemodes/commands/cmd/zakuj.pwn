@@ -28,8 +28,8 @@
 	
 */
 
-CMD:cuff(playerid, params[]) return cmd_zakuj(playerid, params);
-CMD:skuj(playerid, params[]) return cmd_zakuj(playerid, params);
+
+
 CMD:zakuj(playerid, params[])
 {
 	new string[128];

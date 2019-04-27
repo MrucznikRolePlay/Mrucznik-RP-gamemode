@@ -28,7 +28,7 @@
 	
 */
 
-CMD:w(playerid, params[]) return cmd_wiadomosc(playerid, params);
+
 CMD:wiadomosc(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 0)

@@ -30,7 +30,7 @@
 	
 */
 
-CMD:unikat(playerid, params[]) return cmd_premiumskin(playerid, params);
+
 CMD:premiumskin(playerid, params[])
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");

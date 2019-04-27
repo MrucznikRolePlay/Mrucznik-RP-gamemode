@@ -28,7 +28,7 @@
 	
 */
 
-CMD:buy(playerid) return cmd_kup(playerid);
+
 CMD:kup(playerid)
 {
     if(IsPlayerConnected(playerid))

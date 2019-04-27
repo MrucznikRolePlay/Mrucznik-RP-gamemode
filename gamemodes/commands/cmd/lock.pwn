@@ -28,7 +28,7 @@
 	
 */
 
-CMD:unlock(playerid) return cmd_lock(playerid);
+
 CMD:lock(playerid)
 {
     new newcar=0, Float:dis=2.75, Float:x, Float:y, Float:z, Float:currdist;

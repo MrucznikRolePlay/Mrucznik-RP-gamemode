@@ -28,8 +28,8 @@
 	
 */
 
-CMD:syrena(playerid) return cmd_kogut(playerid);
-CMD:sygnal(playerid) return cmd_kogut(playerid);
+
+
 CMD:kogut(playerid)
 {
 	new string[256];

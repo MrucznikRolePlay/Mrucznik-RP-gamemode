@@ -28,8 +28,8 @@
 	
 */
 
-CMD:usundom(playerid, params[]) return cmd_deletedom(playerid, params);
-CMD:deldom(playerid, params[]) return cmd_deletedom(playerid, params);
+
+
 CMD:deletedom(playerid, params[])
 {
 	new string[64];

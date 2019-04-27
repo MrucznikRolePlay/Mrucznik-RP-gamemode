@@ -28,9 +28,9 @@
 	
 */
 
-CMD:advertise(playerid, params[]) return cmd_og(playerid, params);
-CMD:ad(playerid, params[]) return cmd_og(playerid, params);
-CMD:ogloszenie(playerid, params[]) return cmd_og(playerid, params);
+
+
+
 CMD:og(playerid, params[])
 {
     new string[256];

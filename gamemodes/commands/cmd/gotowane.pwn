@@ -28,8 +28,8 @@
 	
 */
 
-CMD:cooked(playerid) return cmd_gotowane(playerid);
-CMD:ugotowane(playerid) return cmd_gotowane(playerid);
+
+
 CMD:gotowane(playerid)
 {
 	new string[128];

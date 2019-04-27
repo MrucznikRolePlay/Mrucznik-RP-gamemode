@@ -28,7 +28,7 @@
 	
 */
 
-CMD:take(playerid, params[]) return cmd_zabierz(playerid, params);
+
 CMD:zabierz(playerid, params[])
 {
 	new string[128];

@@ -28,8 +28,6 @@
 	
 */
 
-CMD:businesshelp(playerid) return cmd_biznespomoc(playerid);
-CMD:bizpomoc(playerid) return cmd_biznespomoc(playerid);
 CMD:biznespomoc(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:spojlery(playerid) return cmd_spoilery(playerid);
+
 CMD:spoilery(playerid)
 {
     if(IsPlayerConnected(playerid))

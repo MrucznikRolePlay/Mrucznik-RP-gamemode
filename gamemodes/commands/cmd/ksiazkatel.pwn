@@ -28,10 +28,10 @@
 	
 */
 
-CMD:number(playerid, params[]) return cmd_ksiazkatel(playerid, params);
-CMD:numer(playerid, params[]) return cmd_ksiazkatel(playerid, params);
-CMD:sprawdznumber(playerid, params[]) return cmd_ksiazkatel(playerid, params);
-CMD:ksiazka(playerid, params[]) return cmd_ksiazkatel(playerid, params);
+
+
+
+
 CMD:ksiazkatel(playerid, params[])
 {
 	new string[64];

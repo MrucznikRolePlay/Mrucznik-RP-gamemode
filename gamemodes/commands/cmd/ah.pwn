@@ -28,7 +28,6 @@
 	
 */
 
-CMD:adminhelp(playerid) return cmd_ah(playerid);
 CMD:ah(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");

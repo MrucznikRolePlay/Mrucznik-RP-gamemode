@@ -28,8 +28,6 @@
 	
 */
 
-CMD:balance(playerid) return cmd_balans(playerid);
-CMD:stan(playerid) return cmd_balans(playerid);
 CMD:balans(playerid)
 {
 /*

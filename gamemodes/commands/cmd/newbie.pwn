@@ -28,7 +28,7 @@
 	
 */
 
-CMD:n(playerid, params[]) return cmd_newbie(playerid, params);
+
 CMD:newbie(playerid, params[])
 {
 	new string[128];

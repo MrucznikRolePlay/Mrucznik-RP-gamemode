@@ -144,10 +144,10 @@ native WP_Hash(buffer[], len, const str[]);
 
 
 //-------<[ Inne ]>-------
-#include "modules\Inne\ibiza.inc"
-#include "modules\Inne\system_aut.pwn"
-#include "modules\Inne\system_kp.pwn"
-#include "modules\Inne\external.pwn"
+#include "modules\inne\ibiza.inc"
+#include "modules\inne\system_aut.pwn"
+#include "modules\inne\system_kp.pwn"
+#include "modules\inne\external.pwn"
 
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"

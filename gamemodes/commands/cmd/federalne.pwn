@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fed(playerid, params[]) return cmd_federalne(playerid, params);
+
 CMD:federalne(playerid, params[])
 {
 	new string[128];

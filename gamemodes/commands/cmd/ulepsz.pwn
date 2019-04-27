@@ -28,8 +28,8 @@
 	
 */
 
-CMD:upgrade(playerid, params[]) return cmd_ulepsz(playerid, params);
-CMD:ulepszenia(playerid, params[]) return cmd_ulepsz(playerid, params);
+
+
 CMD:ulepsz(playerid, params[])
 {
 	new string[128];

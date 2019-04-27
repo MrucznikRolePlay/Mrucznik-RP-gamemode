@@ -28,8 +28,8 @@
 	
 */
 
-CMD:czekpoint_usun(playerid) return cmd_cp_usun(playerid);
-CMD:checkpoint_usun(playerid) return cmd_cp_usun(playerid);
+
+
 CMD:cp_usun(playerid)
 {
 	new string[128];

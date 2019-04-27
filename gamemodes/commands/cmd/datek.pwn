@@ -28,7 +28,7 @@
 	
 */
 
-CMD:charity(playerid, params[]) return cmd_datek(playerid, params);
+
 CMD:datek(playerid, params[])
 {
 	new string[128];

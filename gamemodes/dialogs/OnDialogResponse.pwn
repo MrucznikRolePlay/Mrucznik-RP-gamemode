@@ -15891,7 +15891,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_TRANSPORT_LIST)
     {
-        if(!response) return cmd_zlecenie(playerid, "");
+        //TODO: if(!response) return cmd_zlecenie(playerid, "");
         new idx = strval(inputtext);
         SetPVarInt(playerid, "trans_idx", idx);
         new lStr[256];
@@ -15901,7 +15901,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_TRANSPORT_ACCEPT)
     {
-        if(!response) return cmd_zlecenie(playerid, "");
+        //TODO: if(!response) return cmd_zlecenie(playerid, "");
         new idx = GetPVarInt(playerid, "trans_idx");
         new lStr[128];
         if(TransportJobData[idx][eTJDMats] > TJD_Materials)

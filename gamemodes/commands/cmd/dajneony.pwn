@@ -28,9 +28,9 @@
 	
 */
 
-CMD:sprzedajneon(playerid, params[]) return cmd_dajneony(playerid, params);
-CMD:dajneon(playerid, params[]) return cmd_dajneony(playerid, params);
-CMD:sprzedajneony(playerid, params[]) return cmd_dajneony(playerid, params);
+
+
+
 CMD:dajneony(playerid, params[])
 {
     new string[256];

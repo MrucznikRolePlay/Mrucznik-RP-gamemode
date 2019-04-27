@@ -28,8 +28,8 @@
 	
 */
 
-CMD:podnies(playerid) return cmd_od(playerid);
-CMD:p(playerid) return cmd_od(playerid);
+
+
 CMD:od(playerid)
 {
 	new string[64];

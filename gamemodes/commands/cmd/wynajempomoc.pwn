@@ -28,7 +28,7 @@
 	
 */
 
-CMD:renthelp(playerid) return cmd_wynajempomoc(playerid);
+
 CMD:wynajempomoc(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");

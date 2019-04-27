@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zrobdom(playerid, params[]) return cmd_stworzdom(playerid, params);
+
 CMD:stworzdom(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)

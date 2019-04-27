@@ -28,7 +28,7 @@
 	
 */
 
-CMD:throwbackall(playerid) return cmd_wywalryby(playerid);
+
 CMD:wywalryby(playerid)
 {
     if(IsPlayerConnected(playerid))

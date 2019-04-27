@@ -28,11 +28,11 @@
 	
 */
 
-CMD:kameraw(playerid, params[]) return cmd_kamera_wiezienie(playerid, params);
-CMD:kamera_w(playerid, params[]) return cmd_kamera_wiezienie(playerid, params);
-CMD:kamerawiezienie(playerid, params[]) return cmd_kamera_wiezienie(playerid, params);
-CMD:kamera_wiezienna(playerid, params[]) return cmd_kamera_wiezienie(playerid, params);
-CMD:kamerawiezienna(playerid, params[]) return cmd_kamera_wiezienie(playerid, params);
+
+
+
+
+
 CMD:kamera_wiezienie(playerid, params[])
 {
     if(IsPlayerConnected(playerid))

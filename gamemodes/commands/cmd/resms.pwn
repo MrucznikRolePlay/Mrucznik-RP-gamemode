@@ -28,7 +28,7 @@
 	
 */
 
-CMD:res(playerid, params[]) return cmd_resms(playerid, params);
+
 CMD:resms(playerid, params[])
 {
 	new string[256];

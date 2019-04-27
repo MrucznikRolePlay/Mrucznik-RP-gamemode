@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dom(playerid) return cmd_house(playerid);
+
 CMD:house(playerid)
 {
 	new string[128];

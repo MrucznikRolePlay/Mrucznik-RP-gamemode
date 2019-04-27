@@ -28,10 +28,10 @@
 	
 */
 
-CMD:wynajmij(playerid) return cmd_rentroom(playerid);
-CMD:wynajmuj(playerid) return cmd_rentroom(playerid);
-CMD:wynajem(playerid) return cmd_rentroom(playerid);
-CMD:wynajmijpokoj(playerid) return cmd_rentroom(playerid);
+
+
+
+
 CMD:rentroom(playerid)
 {
 	new string[128];

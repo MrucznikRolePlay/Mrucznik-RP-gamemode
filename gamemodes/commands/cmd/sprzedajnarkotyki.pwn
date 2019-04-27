@@ -28,9 +28,9 @@
 	
 */
 
-CMD:selldrugs(playerid, params[]) return cmd_sprzedajnarkotyki(playerid, params);
-CMD:sprzedajdragi(playerid, params[]) return cmd_sprzedajnarkotyki(playerid, params);
-CMD:selldragi(playerid, params[]) return cmd_sprzedajnarkotyki(playerid, params);
+
+
+
 CMD:sprzedajnarkotyki(playerid, params[])
 {
 	new string[128];

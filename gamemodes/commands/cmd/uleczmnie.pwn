@@ -28,7 +28,7 @@
 	
 */
 
-CMD:healme(playerid) return cmd_uleczmnie(playerid);
+
 CMD:uleczmnie(playerid)
 {
 	new string[128];

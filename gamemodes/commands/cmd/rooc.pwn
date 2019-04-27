@@ -28,8 +28,8 @@
 	
 */
 
-CMD:radioooc(playerid, params[]) return cmd_rooc(playerid, params);
-CMD:ro(playerid, params[]) return cmd_rooc(playerid, params);
+
+
 CMD:rooc(playerid, params[])
 {
 	new string[256];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:stopani(playerid) return cmd_stopanim(playerid);
+
 CMD:stopanim(playerid)
 {
     if(IsPlayerConnected(playerid))

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:me(playerid, params[]) return cmd_ja(playerid, params);
+
 CMD:ja(playerid, params[])
 {
 	if(isnull(params))

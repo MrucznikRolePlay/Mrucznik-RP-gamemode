@@ -28,7 +28,7 @@
 	
 */
 
-CMD:paraliz(playerid, params[]) return cmd_paralizuj(playerid, params);
+
 CMD:paralizuj(playerid, params[])
 {
 	new string[128];

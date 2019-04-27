@@ -28,8 +28,8 @@
 	
 */
 
-CMD:cb(playerid, params[]) return cmd_cbradio(playerid, params);
-CMD:cb_radio(playerid, params[]) return cmd_cbradio(playerid, params);
+
+
 CMD:cbradio(playerid, params[])
 {
 	if(PlayerInfo[playerid][pCB] == 0)

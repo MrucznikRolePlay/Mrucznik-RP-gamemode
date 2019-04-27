@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fillcar(playerid) return cmd_kanister(playerid);
+
 CMD:kanister(playerid)
 {
     if(IsPlayerConnected(playerid))

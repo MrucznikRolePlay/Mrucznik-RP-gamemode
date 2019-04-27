@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ooc(playerid, params[]) return cmd_o(playerid, params);
+
 CMD:o(playerid, params[])
 {
 	new string[128];

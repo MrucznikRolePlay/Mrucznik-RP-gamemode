@@ -28,9 +28,9 @@
 	
 */
 
-CMD:suspect(playerid, params[]) return cmd_po(playerid, params);
-CMD:su(playerid, params[]) return cmd_po(playerid, params);
-CMD:poszukuj(playerid, params[]) return cmd_po(playerid, params);
+
+
+
 CMD:po(playerid, params[])
 {
 	new string[128];

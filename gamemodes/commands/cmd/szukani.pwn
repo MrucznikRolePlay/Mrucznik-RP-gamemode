@@ -28,8 +28,8 @@
 	
 */
 
-CMD:wanted(playerid) return cmd_szukani(playerid);
-CMD:poszukiwani(playerid) return cmd_szukani(playerid);
+
+
 CMD:szukani(playerid)
 {
 	new string[128];

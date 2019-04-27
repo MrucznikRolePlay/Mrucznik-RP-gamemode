@@ -28,8 +28,8 @@
 	
 */
 
-CMD:czekpoint(playerid) return cmd_cp(playerid);
-CMD:checkpoint(playerid) return cmd_cp(playerid);
+
+
 CMD:cp(playerid)
 {
 	new string[128];

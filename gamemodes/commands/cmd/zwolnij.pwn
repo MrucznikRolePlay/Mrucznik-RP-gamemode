@@ -28,7 +28,7 @@
 	
 */
 
-CMD:uninvite(playerid, params[]) return cmd_zwolnij(playerid, params);
+
 CMD:zwolnij(playerid, params[])
 {
 	new string[128];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:callcar(playerid) return cmd_wezwijwoz(playerid);
+
 CMD:wezwijwoz(playerid)
 {
 	new string[128];

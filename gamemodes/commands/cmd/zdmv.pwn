@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cdmv(playerid) return cmd_zdmv(playerid);
+
 CMD:zdmv(playerid)
 {
 	new string[128];

@@ -76,7 +76,6 @@
 #include "cmd/elo2.pwn"
 #include "cmd/witaj.pwn"
 #include "cmd/caluj.pwn"
-#include "cmd/animacje.pwn"
 #include "cmd/bdaj.pwn"
 #include "cmd/killtimer.pwn"
 #include "cmd/killalltimer.pwn"

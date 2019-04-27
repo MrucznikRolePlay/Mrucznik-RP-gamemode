@@ -28,7 +28,7 @@
 	
 */
 
-CMD:businfo(playerid) return cmd_bus(playerid);
+
 CMD:bus(playerid)
 {
     if(IsPlayerConnected(playerid))

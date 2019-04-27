@@ -28,8 +28,8 @@
 	
 */
 
-CMD:sejf(playerid) return cmd_sejfpomoc(playerid);
-CMD:sejfpanel(playerid) return cmd_sejfpomoc(playerid);
+
+
 CMD:sejfpomoc(playerid)
 {
 	//SendClientMessage(playerid, COLOR_PANICRED, "Sejf wy³¹czony na czas naprawy. Przepraszamy za uniedogodnienia.");
@@ -90,4 +90,4 @@ CMD:sejfpomoc(playerid)
 
 
 
-/*CMD:zbrojownia(playerid) return cmd_zbrojuj(playerid);
+

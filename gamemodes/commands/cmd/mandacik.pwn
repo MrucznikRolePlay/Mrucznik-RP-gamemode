@@ -28,8 +28,8 @@
 	
 */
 
-CMD:ticket(playerid, params[]) return cmd_mandacik(playerid, params);
-CMD:mandat(playerid, params[]) return cmd_mandacik(playerid, params);
+
+
 CMD:mandacik(playerid, params[])
 {
 	new string[128];

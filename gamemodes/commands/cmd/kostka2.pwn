@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dice(playerid) return cmd_kostka2(playerid);
+
 CMD:kostka2(playerid)
 {
 	new string[64];

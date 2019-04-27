@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zablokujdepo(playerid) return cmd_togdepo(playerid);
+
 CMD:togdepo(playerid)
 {
     if(IsPlayerConnected(playerid))

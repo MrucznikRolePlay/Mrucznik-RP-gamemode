@@ -28,7 +28,7 @@
 	
 */
 
-CMD:service(playerid, params[]) return cmd_wezwij(playerid, params);
+
 CMD:wezwij(playerid, params[])
 {
 	new string[128];

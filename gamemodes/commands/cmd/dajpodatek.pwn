@@ -28,7 +28,7 @@
 	
 */
 
-CMD:givetax(playerid) return cmd_dajpodatek(playerid);
+
 CMD:dajpodatek(playerid)
 {
 	new string[128];

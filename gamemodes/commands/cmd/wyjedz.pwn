@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wjedz(playerid) return cmd_wyjedz(playerid);
+
 CMD:wyjedz(playerid)
 {
 	if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)

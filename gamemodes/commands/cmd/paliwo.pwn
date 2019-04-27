@@ -28,8 +28,8 @@
 	
 */
 
-CMD:fuel(playerid) return cmd_paliwo(playerid);
-CMD:licznikpaliwa(playerid) return cmd_paliwo(playerid);
+
+
 CMD:paliwo(playerid)
 {
     if(IsPlayerConnected(playerid))

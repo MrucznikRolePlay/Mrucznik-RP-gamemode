@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zlecenie(playerid, params[]) return cmd_wezzlecenie(playerid, params);
+
 CMD:wezzlecenie(playerid, params[])
 {
     if(PlayerInfo[playerid][pJob] == JOB_TRUCKER)

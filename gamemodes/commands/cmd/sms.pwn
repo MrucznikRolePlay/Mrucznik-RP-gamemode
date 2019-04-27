@@ -28,8 +28,8 @@
 	
 */
 
-CMD:txt(playerid, params[]) return cmd_sms(playerid, params);
-CMD:t(playerid, params[]) return cmd_sms(playerid, params);
+
+
 CMD:sms(playerid, params[])
 {
 	new string[256];

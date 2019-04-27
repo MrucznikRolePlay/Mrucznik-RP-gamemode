@@ -28,9 +28,9 @@
 	
 */
 
-CMD:spawnuj(playerid) return cmd_zlomuj(playerid);
-CMD:przemaluj(playerid) return cmd_zlomuj(playerid);
-CMD:nauto(playerid) return cmd_zlomuj(playerid);
+
+
+
 CMD:zlomuj(playerid)
 {
     if(IsPlayerConnected(playerid))

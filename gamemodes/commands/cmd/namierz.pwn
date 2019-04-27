@@ -28,9 +28,9 @@
 	
 */
 
-CMD:find(playerid, params[]) return cmd_namierz(playerid, params);
-CMD:znajdz(playerid, params[]) return cmd_namierz(playerid, params);
-CMD:szukaj(playerid, params[]) return cmd_namierz(playerid, params);
+
+
+
 CMD:namierz(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))

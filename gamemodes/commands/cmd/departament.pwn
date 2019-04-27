@@ -28,7 +28,7 @@
 	
 */
 
-CMD:d(playerid, params[]) return cmd_departament(playerid, params);
+
 CMD:departament(playerid, params[])
 {
     new string[128];

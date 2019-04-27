@@ -28,7 +28,7 @@
 	
 */
 
-CMD:report(playerid, params[]) return cmd_raport(playerid, params);
+
 CMD:raport(playerid, params[])
 {
 	new string[128];

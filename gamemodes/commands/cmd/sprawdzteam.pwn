@@ -28,7 +28,7 @@
 	
 */
 
-CMD:checkteam(playerid, params[]) return cmd_sprawdzteam(playerid, params);
+
 CMD:sprawdzteam(playerid, params[])
 {
 	new string[128];

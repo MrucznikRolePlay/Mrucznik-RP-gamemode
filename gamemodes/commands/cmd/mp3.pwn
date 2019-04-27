@@ -28,8 +28,8 @@
 	
 */
 
-CMD:music(playerid, params[]) return cmd_mp3(playerid, params);
-CMD:muzyka(playerid, params[]) return cmd_mp3(playerid, params);
+
+
 CMD:mp3(playerid, params[])
 {
     if(IsPlayerConnected(playerid))

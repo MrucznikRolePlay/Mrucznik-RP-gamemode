@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togadm(playerid) return cmd_togadmin(playerid);
+
 CMD:togadmin(playerid)
 {
 	if(GetPVarInt(playerid, "togadmincmd") == 0)

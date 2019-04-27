@@ -28,7 +28,7 @@
 	
 */
 
-CMD:call(playerid, params[]) return cmd_dzwon(playerid, params);
+
 CMD:dzwon(playerid, params[])
 {
 	new string[128];

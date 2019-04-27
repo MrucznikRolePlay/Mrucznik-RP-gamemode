@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bail(playerid) return cmd_kaucja(playerid);
+
 CMD:kaucja(playerid)
 {
 	new string[128];

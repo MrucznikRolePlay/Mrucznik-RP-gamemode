@@ -28,7 +28,7 @@
 	
 */
 
-CMD:heal(playerid, params[]) return cmd_ulecz(playerid, params);
+
 CMD:ulecz(playerid, params[])
 {
 	new string[128];

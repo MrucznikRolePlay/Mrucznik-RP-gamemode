@@ -28,7 +28,7 @@
 	
 */
 
-CMD:reply(playerid, params[]) return cmd_re(playerid, params);
+
 CMD:re(playerid, params[]) {
     if(lastMsg[playerid] != INVALID_PLAYER_ID) {
         if(!IsPlayerConnected(lastMsg[playerid])) return sendErrorMessage(playerid, "Tego gracza nie ma na serwerze!");

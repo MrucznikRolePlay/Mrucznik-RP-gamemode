@@ -1451,7 +1451,7 @@ stock ShowHeadquarters(playerid, page=HQ_MAIN)
 	}
 	if(page == HQ_WL)
 	{
-		cmd_wanted(playerid);
+		//TODO: cmd_wanted(playerid);
 		return ShowHeadquarters(playerid);
 	}
 	if(page == HQ_ZGL)

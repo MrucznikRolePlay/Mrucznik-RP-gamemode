@@ -28,8 +28,8 @@
 	
 */
 
-CMD:sprzedaja(playerid, params[]) return cmd_sprzedajalkohol(playerid, params);
-CMD:sella(playerid, params[]) return cmd_sprzedajalkohol(playerid, params);
+
+
 CMD:sprzedajalkohol(playerid, params[])
 {
 	new string[128];

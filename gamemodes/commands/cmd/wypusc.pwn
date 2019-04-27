@@ -28,8 +28,8 @@
 	
 */
 
-CMD:free(playerid, params[]) return cmd_wypusc(playerid, params);
-CMD:uwolnij(playerid, params[]) return cmd_wypusc(playerid, params);
+
+
 CMD:wypusc(playerid, params[])
 {
 	new string[128];

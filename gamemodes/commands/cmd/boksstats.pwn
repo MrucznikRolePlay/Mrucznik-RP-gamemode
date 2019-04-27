@@ -28,7 +28,6 @@
 	
 */
 
-CMD:boxstats(playerid) return cmd_boksstats(playerid);
 CMD:boksstats(playerid)
 {
 	new string[128];

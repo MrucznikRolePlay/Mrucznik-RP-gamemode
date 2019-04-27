@@ -74,4 +74,4 @@ CMD:caluj(playerid, params[])
 	return 1;
 }
 
-/*CMD:animhelp(playerid) return cmd_animacje(playerid);
+

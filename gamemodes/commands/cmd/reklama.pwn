@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ha(playerid) return cmd_reklama(playerid);
+
 CMD:reklama(playerid)
 {
 	if(!IsAHA(playerid))

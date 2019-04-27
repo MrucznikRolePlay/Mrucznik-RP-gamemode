@@ -28,10 +28,6 @@
 	
 */
 
-CMD:autoklucze(playerid) return cmd_autok(playerid);
-CMD:pojazdklucze(playerid) return cmd_autok(playerid);
-CMD:samochodklucze(playerid) return cmd_autok(playerid);
-CMD:carklucze(playerid) return cmd_autok(playerid);
 CMD:autok(playerid)
 {
 	if(PlayerInfo[playerid][pKluczeAuta] > 0)

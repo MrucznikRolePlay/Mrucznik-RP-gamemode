@@ -28,7 +28,7 @@
 	
 */
 
-CMD:licenses(playerid) return cmd_licencje(playerid);
+
 CMD:licencje(playerid)
 {
 	new string[128];

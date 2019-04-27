@@ -28,8 +28,8 @@
 	
 */
 
-CMD:togtextdraw(playerid) return cmd_toglicznik(playerid);
-CMD:togspeed(playerid) return cmd_toglicznik(playerid);
+
+
 CMD:toglicznik(playerid)
 {
     if(IsPlayerConnected(playerid))

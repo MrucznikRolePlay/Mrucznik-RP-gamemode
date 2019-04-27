@@ -28,9 +28,6 @@
 	
 */
 
-CMD:fight(playerid, params[]) return cmd_boks(playerid, params);
-CMD:walka(playerid, params[]) return cmd_boks(playerid, params);
-CMD:walcz(playerid, params[]) return cmd_boks(playerid, params);
 CMD:boks(playerid, params[])
 {
 	new string[128];

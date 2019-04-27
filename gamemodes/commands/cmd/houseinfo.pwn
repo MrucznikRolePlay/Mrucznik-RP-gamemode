@@ -28,8 +28,8 @@
 	
 */
 
-CMD:dominfo(playerid) return cmd_houseinfo(playerid);
-CMD:dom_info(playerid) return cmd_houseinfo(playerid);
+
+
 CMD:houseinfo(playerid)
 {
     if(IsPlayerConnected(playerid))

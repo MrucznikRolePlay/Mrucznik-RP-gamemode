@@ -28,7 +28,7 @@
 	
 */
 
-CMD:contract(playerid, params[]) return cmd_kontrakt(playerid, params);
+
 CMD:kontrakt(playerid, params[])
 {
 	new string[128];

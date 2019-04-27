@@ -28,8 +28,8 @@
 	
 */
 
-CMD:kp(playerid, params[]) return cmd_premium(playerid, params);
-CMD:dotacje(playerid, params[]) return cmd_premium(playerid, params);
+
+
 CMD:premium(playerid, params[])
 {
 	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");

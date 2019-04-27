@@ -28,7 +28,6 @@
 	
 */
 
-CMD:admin(playerid, params[]) return cmd_a(playerid, params);
 CMD:a(playerid, params[])
 {
 	new string[144];

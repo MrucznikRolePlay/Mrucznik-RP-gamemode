@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fishhelp(playerid) return cmd_rybypomoc(playerid);
+
 CMD:rybypomoc(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");

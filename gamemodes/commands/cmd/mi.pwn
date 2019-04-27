@@ -28,9 +28,9 @@
 	
 */
 
-CMD:deathwarning(playerid) return cmd_mi(playerid);
-CMD:warningdeath(playerid) return cmd_mi(playerid);
-CMD:mordinfo(playerid) return cmd_mi(playerid);
+
+
+
 CMD:mi(playerid)
 {
     if(IsPlayerConnected(playerid))

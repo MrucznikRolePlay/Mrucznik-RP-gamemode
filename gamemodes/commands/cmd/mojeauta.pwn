@@ -28,7 +28,7 @@
 	
 */
 
-CMD:mojeauto(playerid) return cmd_mojeauta(playerid);
+
 CMD:mojeauta(playerid)
 {
 	new string[256];

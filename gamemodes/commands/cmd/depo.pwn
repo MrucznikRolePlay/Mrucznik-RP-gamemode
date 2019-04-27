@@ -28,8 +28,8 @@
 	
 */
 
-CMD:departmentooc(playerid, params[]) return cmd_depo(playerid, params);
-CMD:dooc(playerid, params[]) return cmd_depo(playerid, params);
+
+
 CMD:depo(playerid, params[])
 {
     new string[128];

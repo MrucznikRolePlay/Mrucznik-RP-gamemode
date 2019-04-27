@@ -28,7 +28,7 @@
 	
 */
 
-CMD:weather(playerid, params[]) return cmd_pogoda(playerid, params);
+
 CMD:pogoda(playerid, params[])
 {
     if(IsPlayerConnected(playerid))

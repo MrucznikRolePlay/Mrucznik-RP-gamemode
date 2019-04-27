@@ -28,7 +28,7 @@
 	
 */
 
-CMD:spojler(playerid, params[]) return cmd_spoiler(playerid, params);
+
 CMD:spoiler(playerid, params[])
 {
     new string[256];

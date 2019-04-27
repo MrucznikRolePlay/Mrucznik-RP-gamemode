@@ -28,7 +28,7 @@
 	
 */
 
-CMD:radio(playerid, params[]) return cmd_r(playerid, params);
+
 CMD:r(playerid, params[])
 {
 	new string[256];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wyscigi(playerid) return cmd_trasy(playerid);
+
 CMD:trasy(playerid)
 {
 	if(GUIExit[playerid] == 0)

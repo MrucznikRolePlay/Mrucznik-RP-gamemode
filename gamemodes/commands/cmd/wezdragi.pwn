@@ -28,8 +28,8 @@
 	
 */
 
-CMD:usedrugs(playerid) return cmd_wezdragi(playerid);
-CMD:weznarkotyki(playerid) return cmd_wezdragi(playerid);
+
+
 CMD:wezdragi(playerid)
 {
 	new string[128];

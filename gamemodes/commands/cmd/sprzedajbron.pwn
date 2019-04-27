@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sellgun(playerid, params[]) return cmd_sprzedajbron(playerid, params);
+
 CMD:sprzedajbron(playerid, params[])
 {
     new string[128];

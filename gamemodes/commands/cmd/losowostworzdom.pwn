@@ -28,11 +28,11 @@
 	
 */
 
-CMD:lzrobdom(playerid, params[]) return cmd_losowostworzdom(playerid, params);
-CMD:lstworzdom(playerid, params[]) return cmd_losowostworzdom(playerid, params);
-CMD:lcreatehouse(playerid, params[]) return cmd_losowostworzdom(playerid, params);
-CMD:lpostawdom(playerid, params[]) return cmd_losowostworzdom(playerid, params);
-CMD:ltworzdom(playerid, params[]) return cmd_losowostworzdom(playerid, params);
+
+
+
+
+
 CMD:losowostworzdom(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)

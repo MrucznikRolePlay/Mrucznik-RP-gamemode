@@ -28,7 +28,6 @@
 	
 */
 
-CMD:arrest(playerid, params[]) return cmd_aresztuj(playerid, params);
 CMD:aresztuj(playerid, params[])
 {
 	new string[135];

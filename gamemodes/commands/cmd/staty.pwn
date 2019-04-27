@@ -28,8 +28,8 @@
 	
 */
 
-CMD:stats(playerid) return cmd_staty(playerid);
-CMD:statystyki(playerid) return cmd_staty(playerid);
+
+
 CMD:staty(playerid)
 {
     if(IsPlayerConnected(playerid))

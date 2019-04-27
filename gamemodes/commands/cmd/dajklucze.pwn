@@ -28,8 +28,8 @@
 	
 */
 
-CMD:kluczyki(playerid, params[]) return cmd_dajklucze(playerid, params);
-CMD:dajkluczyki(playerid, params[]) return cmd_dajklucze(playerid, params);
+
+
 CMD:dajklucze(playerid, params[])
 {
 	new string[256];

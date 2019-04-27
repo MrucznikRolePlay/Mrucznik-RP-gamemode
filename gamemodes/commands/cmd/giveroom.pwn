@@ -28,8 +28,8 @@
 	
 */
 
-CMD:dajpokoj(playerid, params[]) return cmd_giveroom(playerid, params);
-CMD:dajwynajem(playerid, params[]) return cmd_giveroom(playerid, params);
+
+
 CMD:giveroom(playerid, params[])
 {
 	new string[128];

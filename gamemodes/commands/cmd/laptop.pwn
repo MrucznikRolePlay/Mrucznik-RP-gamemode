@@ -28,7 +28,7 @@
 	
 */
 
-CMD:portable(playerid) return cmd_laptop(playerid);
+
 CMD:laptop(playerid)
 {
 	new sendername[MAX_PLAYER_NAME];

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:wyrzucmaterialy(playerid) return cmd_wm(playerid);
-CMD:wm(playerid) return cmd_wm(playerid);
+
+
 CMD:wywalmaterialy(playerid)
 {
     if(PlayerInfo[playerid][pMats] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie materia³ów");

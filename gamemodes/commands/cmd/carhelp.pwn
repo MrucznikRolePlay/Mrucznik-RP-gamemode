@@ -28,9 +28,9 @@
 	
 */
 
-CMD:autopomoc(playerid) return cmd_carhelp(playerid);
-CMD:pojazdpomoc(playerid) return cmd_carhelp(playerid);
-CMD:samochodpomoc(playerid) return cmd_carhelp(playerid);
+
+
+
 CMD:carhelp(playerid)
 {
     if(GUIExit[playerid] == 0)

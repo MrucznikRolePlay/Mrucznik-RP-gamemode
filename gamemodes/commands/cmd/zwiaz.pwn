@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tie(playerid, params[]) return cmd_zwiaz(playerid, params);
+
 CMD:zwiaz(playerid, params[])
 {
 	new string[128];

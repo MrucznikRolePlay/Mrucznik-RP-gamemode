@@ -28,7 +28,7 @@
 	
 */
 
-CMD:srs(playerid, params[]) return cmd_zmienplec(playerid, params);
+
 CMD:zmienplec(playerid, params[])
 {
 	new playa;

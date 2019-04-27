@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kontakt(playerid, params[]) return cmd_kontakty(playerid, params);
+
 CMD:kontakty(playerid, params[])
 {
 	if(PlayerInfo[playerid][pPnumber] == 0)

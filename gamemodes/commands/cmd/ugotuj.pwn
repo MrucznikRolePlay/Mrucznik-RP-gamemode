@@ -28,8 +28,8 @@
 	
 */
 
-CMD:cook(playerid, params[]) return cmd_ugotuj(playerid, params);
-CMD:gotuj(playerid, params[]) return cmd_ugotuj(playerid, params);
+
+
 CMD:ugotuj(playerid, params[])
 {
 	new string[128];

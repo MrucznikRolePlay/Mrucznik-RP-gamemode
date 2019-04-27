@@ -97,7 +97,6 @@ new editingRoundAboutID[MAX_PLAYERS];
 =            Commands            =
 ================================*/
 
-COMMAND:ar(playerid, params[]) return cmd_aroundabout(playerid, params);
 COMMAND:aroundabout(playerid, params[])
 {
 	if(!IsPlayerAdmin(playerid)) return 1;

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:kolofortuny(playerid) return cmd_kolo(playerid);
-CMD:kf(playerid) return cmd_kolo(playerid);
+
+
 CMD:kolo(playerid)
 {
 	new string[128];

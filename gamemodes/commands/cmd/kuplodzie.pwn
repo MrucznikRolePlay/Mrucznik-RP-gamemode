@@ -28,9 +28,9 @@
 	
 */
 
-CMD:kuplodz(playerid) return cmd_kuplodzie(playerid);
-CMD:kupstatek(playerid) return cmd_kuplodzie(playerid);
-CMD:buyboat(playerid) return cmd_kuplodzie(playerid);
+
+
+
 CMD:kuplodzie(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666))

@@ -28,9 +28,9 @@
 	
 */
 
-CMD:hangup(playerid) return cmd_z(playerid);
-CMD:h(playerid) return cmd_z(playerid);
-CMD:zakoncz(playerid) return cmd_z(playerid);
+
+
+
 CMD:z(playerid)
 {
 	if(Mobile[playerid] == INVALID_PLAYER_ID)

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:kbpo(playerid) return cmd_kupbiletpociag(playerid);
-CMD:kpociag(playerid) return cmd_kupbiletpociag(playerid);
+
+
 CMD:kupbiletpociag(playerid)
 {
 	if(IsPlayerConnected(playerid))

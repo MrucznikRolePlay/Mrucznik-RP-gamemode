@@ -28,8 +28,8 @@
 	
 */
 
-CMD:sprzedajdom(playerid, params[]) return cmd_selldom(playerid, params);
-CMD:sellhouse(playerid, params[]) return cmd_selldom(playerid, params);
+
+
 CMD:selldom(playerid, params[])
 {
 	new string[128];

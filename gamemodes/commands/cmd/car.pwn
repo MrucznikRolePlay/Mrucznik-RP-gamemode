@@ -28,9 +28,9 @@
 	
 */
 
-CMD:auto(playerid) return cmd_car(playerid);
-CMD:pojazd(playerid) return cmd_car(playerid);
-CMD:samochod(playerid) return cmd_car(playerid);
+
+
+
 CMD:car(playerid)
 {
     if(IsPlayerConnected(playerid))

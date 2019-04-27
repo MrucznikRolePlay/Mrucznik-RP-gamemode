@@ -28,7 +28,7 @@
 	
 */
 
-CMD:get(playerid, params[]) return cmd_wez(playerid, params);
+
 CMD:wez(playerid, params[])
 {
 	new string[128];

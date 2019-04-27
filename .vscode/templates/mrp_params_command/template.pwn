@@ -30,7 +30,6 @@
 	
 */
 
-//CMD:alias(playerid, params[]) return cmd_$itemname$(playerid, params);
 CMD:$itemname$(playerid, params[])
 {
     //fetching params

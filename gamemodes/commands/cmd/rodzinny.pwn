@@ -28,8 +28,8 @@
 	
 */
 
-CMD:family(playerid, params[]) return cmd_rodzinny(playerid, params);
-CMD:f(playerid, params[]) return cmd_rodzinny(playerid, params);
+
+
 CMD:rodzinny(playerid, params[])
 {
 	new string[256];

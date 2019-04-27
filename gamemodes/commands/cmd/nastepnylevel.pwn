@@ -28,9 +28,9 @@
 	
 */
 
-CMD:buylevel(playerid) return cmd_nastepnylevel(playerid);
-CMD:kuplevel(playerid) return cmd_nastepnylevel(playerid);
-CMD:nextlevel(playerid) return cmd_nastepnylevel(playerid);
+
+
+
 CMD:nastepnylevel(playerid)
 {
 	new string[128];

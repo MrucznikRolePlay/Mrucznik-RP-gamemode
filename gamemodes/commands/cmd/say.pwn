@@ -28,8 +28,8 @@
 	
 */
 
-CMD:local(playerid, params[]) return cmd_say(playerid, params);
-CMD:l(playerid, params[]) return cmd_say(playerid, params);
+
+
 CMD:say(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))

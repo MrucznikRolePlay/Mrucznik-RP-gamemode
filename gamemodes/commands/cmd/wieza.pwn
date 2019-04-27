@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tower(playerid, params[]) return cmd_wieza(playerid, params);
+
 CMD:wieza(playerid, params[])
 {
     new data[32], sub[128];

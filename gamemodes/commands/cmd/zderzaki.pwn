@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zderzak(playerid, params[]) return cmd_zderzaki(playerid, params);
+
 CMD:zderzaki(playerid, params[])
 {
     if(IsPlayerConnected(playerid))

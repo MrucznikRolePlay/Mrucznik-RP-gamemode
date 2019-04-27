@@ -28,8 +28,8 @@
 	
 */
 
-CMD:megaphone(playerid, params[]) return cmd_megafon(playerid, params);
-CMD:m(playerid, params[]) return cmd_megafon(playerid, params);
+
+
 CMD:megafon(playerid, params[])
 {
 	new string[256];

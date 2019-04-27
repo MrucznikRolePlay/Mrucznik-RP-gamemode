@@ -630,7 +630,7 @@ CMD:togtxda(playerid)
 	}
 	return 1;
 }
-CMD:admins(playerid) return cmd_admini(playerid);
+
 CMD:admini(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -1060,7 +1060,7 @@ CMD:setname(playerid, params[])
 	}
 	return 1;
 }
-CMD:block(playerid, params[]) return cmd_blok(playerid, params);
+
 CMD:blok(playerid, params[])
 {
 	new string[128];
@@ -1123,7 +1123,7 @@ CMD:blok(playerid, params[])
 	return 1;
 }
 
-CMD:sblock(playerid, params[]) return cmd_sblok(playerid, params);
+
 CMD:sblok(playerid, params[])
 {
 	new string[128];
@@ -1181,7 +1181,7 @@ CMD:sblok(playerid, params[])
 	}
 	return 1;
 }
-CMD:pblock(playerid, params[]) return cmd_pblok(playerid, params);
+
 CMD:pblok(playerid, params[])
 {
 	new string[128];
@@ -1716,8 +1716,8 @@ CMD:antybh(playerid, params[])
 	}
 	return 1;
 }
-CMD:prisonoff(playerid, params[]) return cmd_undemorgan(playerid, params);
-CMD:unprison(playerid, params[]) return cmd_undemorgan(playerid, params);
+
+
 CMD:undemorgan(playerid, params[])
 {
 	new string[128];
@@ -1826,8 +1826,8 @@ CMD:kill(playerid, params[])
 	}
 	return 1;
 }
-CMD:setstd(playerid, params[]) return cmd_choroba(playerid, params);
-CMD:zaraz(playerid, params[]) return cmd_choroba(playerid, params);
+
+
 CMD:choroba(playerid, params[])
 {
 	new string[64];
@@ -1867,8 +1867,8 @@ CMD:choroba(playerid, params[])
 	}
 	return 1;
 }
-CMD:setwiek(playerid, params[]) return cmd_zmienwiek(playerid, params);
-CMD:setage(playerid, params[]) return cmd_zmienwiek(playerid, params);
+
+
 CMD:zmienwiek(playerid, params[])
 {
 	new string[128];
@@ -1909,8 +1909,8 @@ CMD:zmienwiek(playerid, params[])
 	}
 	return 1;
 }
-CMD:setjob(playerid, params[]) return cmd_zmienprace(playerid, params);
-CMD:zmienjob(playerid, params[]) return cmd_zmienprace(playerid, params);
+
+
 CMD:zmienprace(playerid, params[])
 {
 	new string[128];
@@ -2083,9 +2083,9 @@ CMD:checkcars(playerid, params[])
 	}
 	return 1;
 }
-CMD:setauto(playerid, params[]) return cmd_setveh(playerid, params);
-CMD:zmienauto(playerid, params[]) return cmd_setveh(playerid, params);
-CMD:setcar(playerid, params[]) return cmd_setveh(playerid, params);
+
+
+
 CMD:setveh(playerid, params[])
 {
 	new string[256];
@@ -2176,7 +2176,7 @@ CMD:setveh(playerid, params[])
 	}
 	return 1;
 }
-CMD:setwl(playerid, params[]) return cmd_zmienwl(playerid, params);
+
 CMD:zmienwl(playerid, params[])
 {
 	new string[128];
@@ -2958,7 +2958,7 @@ CMD:respawn(playerid)
 	return 1;
 }
 
-CMD:respp(playerid, params[]) return cmd_respawnplayer(playerid, params);
+
 CMD:respawnplayer(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
@@ -2977,7 +2977,7 @@ CMD:respawnplayer(playerid, params[])
     return 1;
 }
 
-CMD:respcar(playerid, params[]) return cmd_respawncar(playerid, params);
+
 CMD:respawncar(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
@@ -4190,7 +4190,7 @@ CMD:unbw(playerid, p[])
 	}
     return 1;
 }
-CMD:czity(playerid, params[]) return cmd_cziterzy(playerid, params);
+
 CMD:cziterzy(playerid, params[])
 {
     /*if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)//if(PlayerInfo[playerid][pAdmin] < 1) return 1;
@@ -4232,8 +4232,8 @@ CMD:cziterzy(playerid, params[])
     return 1;
 }
 
-CMD:checkprawko(playerid, params[]) return cmd_zobp(playerid, params);
-CMD:zobaczprawko(playerid, params[]) return cmd_zobp(playerid, params);
+
+
 CMD:zobp(playerid, params[])
 {
 	new string[128];
@@ -4327,8 +4327,8 @@ CMD:wczytajskrypt(playerid, params[])
 	}
 	return 1;
 }
-CMD:setchamp(playerid, params[]) return cmd_ustawmistrz(playerid, params);
-CMD:setmistrz(playerid, params[]) return cmd_ustawmistrz(playerid, params);
+
+
 CMD:ustawmistrz(playerid, params[])
 {
 	new string[128];
@@ -4412,7 +4412,7 @@ CMD:mole(playerid, params[])
 	}
 	return 1;
 }
-CMD:zg(playerid, params[]) return cmd_zaufanyggracz(playerid, params);
+
 CMD:zaufanyggracz(playerid, params[])
 {
 	new string[128];
@@ -4495,7 +4495,7 @@ CMD:zaufanyggracz(playerid, params[])
 	}
 	return 1;
 }
-CMD:logout(playerid) return cmd_wyloguj(playerid);
+
 CMD:wyloguj(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -4517,7 +4517,7 @@ CMD:wyloguj(playerid)
 	return 1;
 }
 
-CMD:logoutpl(playerid, params[]) return cmd_wylogujgracz(playerid, params);
+
 CMD:wylogujgracz(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
@@ -4551,7 +4551,7 @@ CMD:wylogujgracz(playerid, params[])
 	return 1;
 }
 
-CMD:logoutall(playerid) return cmd_wylogujall(playerid);
+
 CMD:wylogujall(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -4645,7 +4645,7 @@ CMD:cnnn(playerid, params[])
 		return 1;
 	}
 }
-CMD:prison(playerid, params[]) return cmd_demorgan(playerid, params);
+
 CMD:demorgan(playerid, params[])
 {
 	new string[128];
@@ -4697,7 +4697,7 @@ CMD:demorgan(playerid, params[])
     }
     return 1;
 }
-CMD:unaj(playerid, params[]) return cmd_unjail(playerid, params);
+
 CMD:unjail(playerid, params[])
 {
 	new string[128];
@@ -4762,7 +4762,7 @@ CMD:unjail(playerid, params[])
 	}
 	return 1;
 }
-CMD:aj(playerid, params[]) return cmd_adminajail(playerid, params);
+
 CMD:adminajail(playerid, params[])
 {
 	new string[128];
@@ -6633,8 +6633,8 @@ CMD:getcar(playerid, params[])
 	}
 	return 1;
 }
-CMD:fuelcar(playerid) return cmd_tankveh(playerid);
-CMD:tankujauto(playerid) return cmd_tankveh(playerid);
+
+
 CMD:tankveh(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -6667,7 +6667,7 @@ CMD:tankveh(playerid)
     return 1;
 }
 
-CMD:fuelcars(playerid) return cmd_tankujauta(playerid);
+
 CMD:tankujauta(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -6861,7 +6861,7 @@ CMD:givegun(playerid, params[])
 	}
 	return 1;
 }
-CMD:sethp(playerid, params[]) return cmd_zmienhp(playerid, params);
+
 CMD:zmienhp(playerid, params[])
 {
 	new giveplayer[MAX_PLAYER_NAME];
@@ -7007,7 +7007,7 @@ CMD:fixallveh(playerid)
     }
     return 1;
 }
-CMD:weatherall(playerid, params[]) return cmd_pogodaall(playerid, params);
+
 CMD:pogodaall(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
@@ -7049,7 +7049,7 @@ CMD:pogodaall(playerid, params[])
 	}
 	return 1;
 }
-CMD:money(playerid, params[]) return cmd_kasa(playerid, params);
+
 CMD:kasa(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
@@ -7083,7 +7083,7 @@ CMD:kasa(playerid, params[])
 	}
 	return 1;
 }
-CMD:givemoney(playerid, params[]) return cmd_dajkase(playerid, params);
+
 CMD:dajkase(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
@@ -7202,8 +7202,8 @@ CMD:slap(playerid, params[])
 	}
 	return 1;
 }
-CMD:mute(playerid, params[]) return cmd_ucisz(playerid, params);
-CMD:unmute(playerid, params[]) return cmd_ucisz(playerid, params);
+
+
 CMD:ucisz(playerid, params[])
 {
 	new string[128];
@@ -7340,7 +7340,7 @@ CMD:glosowanie(playerid, params[])
 	}
 	return 1;
 }
-CMD:freeze(playerid, params[]) return cmd_zamroz(playerid, params);
+
 CMD:zamroz(playerid, params[])
 {
 	new string[128];
@@ -7378,7 +7378,7 @@ CMD:zamroz(playerid, params[])
 	return 1;
 }
 
-CMD:unfreeze(playerid, params[]) return cmd_odmroz(playerid, params);
+
 CMD:odmroz(playerid, params[])
 {
 	new string[128];

@@ -28,9 +28,9 @@
 	
 */
 
-CMD:familyooc(playerid, params[]) return cmd_fooc(playerid, params);
-CMD:fo(playerid, params[]) return cmd_fooc(playerid, params);
-CMD:rodzinnyooc(playerid, params[]) return cmd_fooc(playerid, params);
+
+
+
 CMD:fooc(playerid, params[])
 {
 	new string[256];

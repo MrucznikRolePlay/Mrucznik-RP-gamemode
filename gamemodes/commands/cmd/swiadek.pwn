@@ -28,7 +28,7 @@
 	
 */
 
-CMD:witness(playerid, params[]) return cmd_swiadek(playerid, params);
+
 CMD:swiadek(playerid, params[])
 {
 	new string[128];

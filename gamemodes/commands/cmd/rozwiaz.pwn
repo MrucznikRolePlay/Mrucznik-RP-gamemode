@@ -28,8 +28,8 @@
 	
 */
 
-CMD:untie(playerid, params[]) return cmd_rozwiaz(playerid, params);
-CMD:odwiaz(playerid, params[]) return cmd_rozwiaz(playerid, params);
+
+
 CMD:rozwiaz(playerid, params[])
 {
 	new string[128];

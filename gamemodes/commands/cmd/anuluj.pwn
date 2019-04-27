@@ -28,7 +28,6 @@
 	
 */
 
-CMD:cancel(playerid, params[]) return cmd_anuluj(playerid, params);
 CMD:anuluj(playerid, params[])
 {
 	new x_job[16];

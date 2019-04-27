@@ -28,8 +28,8 @@
 	
 */
 
-CMD:live(playerid, params[]) return cmd_nazywo(playerid, params);
-CMD:wywiad(playerid, params[]) return cmd_nazywo(playerid, params);
+
+
 CMD:nazywo(playerid, params[])
 {
 	new string[128];

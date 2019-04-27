@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wywalzdmv(playerid, params[]) return cmd_wywaldmv(playerid, params);
+
 CMD:wywaldmv(playerid, params[])
 {
 	new string[128];

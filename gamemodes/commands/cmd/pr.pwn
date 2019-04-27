@@ -28,7 +28,7 @@
 	
 */
 
-CMD:panelrodzinny(playerid, params[]) return cmd_pr(playerid, params);
+
 CMD:pr(playerid, params[])
 {
 	new string[128];

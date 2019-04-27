@@ -28,7 +28,7 @@
 	
 */
 
-CMD:repair(playerid, params[]) return cmd_napraw(playerid, params);
+
 CMD:napraw(playerid, params[])
 {
     new string[128];

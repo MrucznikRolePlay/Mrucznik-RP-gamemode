@@ -70,4 +70,4 @@ CMD:tazer(playerid, params[])
 	}
     return 1;
 }
-//CMD:tazer22(playerid, params[]) return cmd_paralizuj(playerid, params);
+

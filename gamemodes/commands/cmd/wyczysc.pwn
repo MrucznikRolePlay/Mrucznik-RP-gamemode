@@ -28,8 +28,8 @@
 	
 */
 
-CMD:clear(playerid, params[]) return cmd_wyczysc(playerid, params);
-CMD:oczysc(playerid, params[]) return cmd_wyczysc(playerid, params);
+
+
 CMD:wyczysc(playerid, params[])
 {
 	new string[128];

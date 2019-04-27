@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wino(playerid) return cmd_komandos(playerid);
+
 CMD:komandos(playerid)
 {
     if(PlayerInfo[playerid][pWino] >= 1)

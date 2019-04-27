@@ -28,8 +28,8 @@
 	
 */
 
-CMD:togwhisper(playerid) return cmd_zablokujw(playerid);
-CMD:togw(playerid) return cmd_zablokujw(playerid);
+
+
 CMD:zablokujw(playerid)
 {
     if(IsPlayerConnected(playerid))

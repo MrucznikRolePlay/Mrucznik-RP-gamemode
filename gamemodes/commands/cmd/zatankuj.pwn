@@ -28,8 +28,8 @@
 	
 */
 
-CMD:fill(playerid) return cmd_zatankuj(playerid);
-CMD:tankuj(playerid) return cmd_zatankuj(playerid);
+
+
 CMD:zatankuj(playerid)
 {
     if(IsPlayerConnected(playerid))

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:invite(playerid, params[]) return cmd_przyjmij(playerid, params);
+
 CMD:przyjmij(playerid, params[])
 {
 	new string[160];

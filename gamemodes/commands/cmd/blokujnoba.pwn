@@ -28,8 +28,6 @@
 	
 */
 
-CMD:tognewbie(playerid) return cmd_blokujnoba(playerid);
-CMD:togn(playerid) return cmd_blokujnoba(playerid);
 CMD:blokujnoba(playerid)
 {
     if(IsPlayerConnected(playerid))

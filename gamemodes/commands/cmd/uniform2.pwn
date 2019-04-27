@@ -46,4 +46,4 @@ CMD:uniform2(playerid, params[])
     return 1;
 }
 
-/*CMD:podszyj(playerid, params[]) return cmd_podszyjsie(playerid, params);
+

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:join(playerid) return cmd_dolacz(playerid);
+
 CMD:dolacz(playerid)
 {
     if(IsPlayerConnected(playerid))

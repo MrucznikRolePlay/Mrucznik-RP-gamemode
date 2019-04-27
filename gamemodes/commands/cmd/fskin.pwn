@@ -28,8 +28,8 @@
 	
 */
 
-CMD:mundur(playerid) return cmd_fskin(playerid);
-CMD:uniform(playerid) return cmd_fskin(playerid);
+
+
 CMD:fskin(playerid)
 {
     if(IsPlayerConnected(playerid))

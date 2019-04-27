@@ -28,7 +28,7 @@
 	
 */
 /*
-CMD:zbrojka(playerid) return cmd_zbrojuj(playerid);
+CMD:zbrojownia(playerid) return cmd_zbrojuj(playerid);
 CMD:zbrojuj(playerid)
 {
     if(IsPlayerConnected(playerid))

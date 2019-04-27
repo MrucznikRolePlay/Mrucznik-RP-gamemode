@@ -28,8 +28,8 @@
 	
 */
 
-CMD:wyrzuckami(playerid) return cmd_zdejmijkevlar(playerid);
-CMD:zdejmijkami(playerid) return cmd_zdejmijkevlar(playerid);
+
+
 CMD:zdejmijkevlar(playerid)
 {
     if(IsPlayerConnected(playerid))

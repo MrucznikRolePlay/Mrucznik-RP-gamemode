@@ -28,9 +28,9 @@
 	
 */
 
-CMD:togphone(playerid) return cmd_zablokujtel(playerid);
-CMD:togtel(playerid) return cmd_zablokujtel(playerid);
-CMD:togtelefon(playerid) return cmd_zablokujtel(playerid);
+
+
+
 CMD:zablokujtel(playerid)
 {
     if(IsPlayerConnected(playerid))

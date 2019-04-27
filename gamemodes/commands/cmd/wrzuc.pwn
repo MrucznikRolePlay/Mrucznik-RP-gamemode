@@ -28,8 +28,8 @@
 	
 */
 
-CMD:wepchnij(playerid, params[]) return cmd_wrzuc(playerid, params);
-CMD:wepchaj(playerid, params[]) return cmd_wrzuc(playerid, params);
+
+
 CMD:wrzuc(playerid, params[])
 {
 	new string[128];

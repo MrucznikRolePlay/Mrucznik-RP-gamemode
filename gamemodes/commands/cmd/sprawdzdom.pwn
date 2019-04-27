@@ -28,7 +28,7 @@
 	
 */
 
-CMD:checkdom(playerid, params[]) return cmd_sprawdzdom(playerid, params);
+
 CMD:sprawdzdom(playerid, params[])
 {
 	new string[64];

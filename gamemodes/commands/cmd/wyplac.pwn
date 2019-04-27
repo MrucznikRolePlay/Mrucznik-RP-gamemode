@@ -28,7 +28,7 @@
 	
 */
 
-CMD:withdraw(playerid, params[]) return cmd_wyplac(playerid, params);
+
 CMD:wyplac(playerid, params[])
 {
 	new string[128];

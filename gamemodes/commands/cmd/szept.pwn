@@ -28,8 +28,8 @@
 	
 */
 
-CMD:cicho(playerid, params[]) return cmd_szept(playerid, params);
-CMD:s(playerid, params[]) return cmd_szept(playerid, params);
+
+
 CMD:szept(playerid, params[])
 {
 	

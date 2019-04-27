@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wb(playerid) return cmd_wyrzucbronie(playerid);
+
 CMD:wyrzucbronie(playerid)
 {
 	if(IsPlayerConnected(playerid))

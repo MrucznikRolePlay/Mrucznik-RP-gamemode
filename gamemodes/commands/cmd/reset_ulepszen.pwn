@@ -28,10 +28,10 @@
 	
 */
 
-CMD:resetupgrades(playerid) return cmd_reset_ulepszen(playerid);
-CMD:resetujulepszenia(playerid) return cmd_reset_ulepszen(playerid);
-CMD:resetulepszen(playerid) return cmd_reset_ulepszen(playerid);
-CMD:resetuj_ulepszenia(playerid) return cmd_reset_ulepszen(playerid);
+
+
+
+
 CMD:reset_ulepszen(playerid)
 {
 	new string[128];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kupneon(playerid) return cmd_kupneony(playerid);
+
 CMD:kupneony(playerid)
 {
     if(IsPlayerConnected(playerid))

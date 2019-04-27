@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dowod(playerid, params[]) return cmd_pokazdowod(playerid, params);
+
 CMD:pokazdowod(playerid, params[])
 {
 	new string[64];

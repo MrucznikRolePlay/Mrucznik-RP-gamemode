@@ -28,7 +28,7 @@
 	
 */
 
-CMD:stworzwyscig(playerid) return cmd_stworztrase(playerid);
+
 CMD:stworztrase(playerid)
 {
 	new string[128];

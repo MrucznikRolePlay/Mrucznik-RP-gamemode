@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wywaltel(playerid) return cmd_wywaltelefon(playerid);
+
 CMD:wywaltelefon(playerid) {
     if(!IsPlayerConnected(playerid)) return 1;
     PlayerInfo[playerid][pPnumber] = 0;

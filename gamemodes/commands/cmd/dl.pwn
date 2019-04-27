@@ -28,9 +28,9 @@
 	
 */
 
-CMD:givelicense(playerid, params[]) return cmd_dl(playerid, params);
-CMD:dajlicencje(playerid, params[]) return cmd_dl(playerid, params);
-CMD:dajl(playerid, params[]) return cmd_dl(playerid, params);
+
+
+
 CMD:dl(playerid, params[])
 {
 	new string[128];

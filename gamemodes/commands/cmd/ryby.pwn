@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fishes(playerid) return cmd_ryby(playerid);
+
 CMD:ryby(playerid)
 {
 	new string[128];

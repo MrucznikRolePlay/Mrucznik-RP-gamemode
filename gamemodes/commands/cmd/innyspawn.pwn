@@ -28,9 +28,9 @@
 	
 */
 
-CMD:spawnchange(playerid) return cmd_innyspawn(playerid);
-CMD:zmianaspawnu(playerid) return cmd_innyspawn(playerid);
-CMD:zmienspawn(playerid) return cmd_innyspawn(playerid);
+
+
+
 CMD:innyspawn(playerid)
 {
     if(IsPlayerConnected(playerid))

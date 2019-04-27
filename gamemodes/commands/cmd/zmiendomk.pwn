@@ -28,8 +28,8 @@
 	
 */
 
-CMD:setdomk(playerid, params[]) return cmd_zmiendomk(playerid, params);
-CMD:setdomkupiony(playerid, params[]) return cmd_zmiendomk(playerid, params);
+
+
 CMD:zmiendomk(playerid, params[])
 {
 	new string[128];

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:unrent(playerid) return cmd_unrentroom(playerid);
-CMD:niewynajmuj(playerid) return cmd_unrentroom(playerid);
+
+
 CMD:unrentroom(playerid)
 {
     if(IsPlayerConnected(playerid))

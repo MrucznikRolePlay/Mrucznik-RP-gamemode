@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wybierzskin(playerid, params[]) return cmd_kupskin(playerid, params);
+
 CMD:kupskin(playerid, params[])
 {
     if(IsPlayerConnected(playerid))

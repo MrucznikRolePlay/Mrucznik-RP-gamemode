@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zamekint(playerid) return cmd_lockint(playerid);
+
 CMD:lockint(playerid)
 {
     if(IsPlayerConnected(playerid))

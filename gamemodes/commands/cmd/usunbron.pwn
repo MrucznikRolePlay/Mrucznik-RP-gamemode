@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ub(playerid) return cmd_usunbron(playerid);
+
 CMD:usunbron(playerid)
 {
 

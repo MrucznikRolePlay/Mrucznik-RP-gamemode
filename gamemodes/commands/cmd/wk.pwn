@@ -28,10 +28,10 @@
 	
 */
 
-CMD:wyrzuckluczyki(playerid) return cmd_wk(playerid);
-CMD:wywalklucze(playerid) return cmd_wk(playerid);
-CMD:wywalkluczyki(playerid) return cmd_wk(playerid);
-CMD:wyrzucklucze(playerid) return cmd_wk(playerid);
+
+
+
+
 CMD:wk(playerid)
 {
     if(PlayerInfo[playerid][pKluczeAuta] != 0)

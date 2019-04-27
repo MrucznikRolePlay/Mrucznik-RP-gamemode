@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cellphonehelp(playerid) return cmd_telefonpomoc(playerid);
+
 CMD:telefonpomoc(playerid)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");

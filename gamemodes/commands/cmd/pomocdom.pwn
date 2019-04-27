@@ -28,8 +28,8 @@
 	
 */
 
-CMD:dompomoc(playerid) return cmd_pomocdom(playerid);
-CMD:househelp(playerid) return cmd_pomocdom(playerid);
+
+
 CMD:pomocdom(playerid)
 {
     if(gPlayerLogged[playerid] == 1)

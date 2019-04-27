@@ -28,10 +28,10 @@
 	
 */
 
-CMD:startlesson(playerid, params[]) return cmd_startujlekcje(playerid, params);
-CMD:zacznijlekcje(playerid, params[]) return cmd_startujlekcje(playerid, params);
-CMD:startlekcja(playerid, params[]) return cmd_startujlekcje(playerid, params);
-CMD:startegzamin(playerid, params[]) return cmd_startujlekcje(playerid, params);
+
+
+
+
 CMD:startujlekcje(playerid, params[])
 {
 	new string[128];

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:quitjob(playerid) return cmd_quitpraca(playerid);
-CMD:opuscprace(playerid) return cmd_quitpraca(playerid);
+
+
 CMD:quitpraca(playerid)
 {
 	new string[128];

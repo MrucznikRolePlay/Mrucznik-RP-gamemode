@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zmienfelge(playerid, params[]) return cmd_felga(playerid, params);
+
 CMD:felga(playerid, params[])
 {
     new string[256];

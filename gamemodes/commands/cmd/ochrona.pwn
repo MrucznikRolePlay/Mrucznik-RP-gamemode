@@ -28,9 +28,9 @@
 	
 */
 
-CMD:guard(playerid, params[]) return cmd_ochrona(playerid, params);
-CMD:sellkami(playerid, params[]) return cmd_ochrona(playerid, params);
-CMD:sellkamizelke(playerid, params[]) return cmd_ochrona(playerid, params);
+
+
+
 CMD:ochrona(playerid, params[])
 {
 	new string[128];

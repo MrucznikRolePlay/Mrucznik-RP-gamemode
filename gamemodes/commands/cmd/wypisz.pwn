@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wydaj(playerid, params[]) return cmd_wypisz(playerid, params);
+
 CMD:wypisz(playerid, params[])
 {
 	//new string[128];

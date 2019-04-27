@@ -28,9 +28,9 @@
 	
 */
 
-CMD:kupsamolot(playerid) return cmd_kupsamoloty(playerid);
-CMD:kuplot(playerid) return cmd_kupsamoloty(playerid);
-CMD:buyplane(playerid) return cmd_kupsamoloty(playerid);
+
+
+
 CMD:kupsamoloty(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392))//kupowanie samolotu

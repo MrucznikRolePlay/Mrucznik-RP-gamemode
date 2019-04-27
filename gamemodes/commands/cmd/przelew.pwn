@@ -28,9 +28,9 @@
 	
 */
 
-CMD:transfer(playerid, params[]) return cmd_przelew(playerid, params);
-CMD:wiretransfer(playerid, params[]) return cmd_przelew(playerid, params);
-CMD:przelej(playerid, params[]) return cmd_przelew(playerid, params);
+
+
+
 CMD:przelew(playerid, params[])
 {
 	new string[128];

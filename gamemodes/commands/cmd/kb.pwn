@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kontobankowe(playerid)return cmd_kb(playerid);
+
 CMD:kb(playerid)
 {
 	if(IsPlayerConnected(playerid))

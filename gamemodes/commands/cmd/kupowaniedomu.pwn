@@ -28,8 +28,8 @@
 	
 */
 
-CMD:kupdom(playerid) return cmd_kupowaniedomu(playerid);
-CMD:buyhouse(playerid) return cmd_kupowaniedomu(playerid);
+
+
 CMD:kupowaniedomu(playerid)
 {
 	new string[128];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:enter(playerid) return cmd_wejdz(playerid);
+
 CMD:wejdz(playerid)
 {
     if(IsPlayerConnected(playerid))

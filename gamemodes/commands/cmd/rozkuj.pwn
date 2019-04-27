@@ -28,8 +28,8 @@
 	
 */
 
-CMD:uncuff(playerid, params[]) return cmd_rozkuj(playerid, params);
-CMD:odkuj(playerid, params[]) return cmd_rozkuj(playerid, params);
+
+
 CMD:rozkuj(playerid, params[])
 {
 	new string[128];

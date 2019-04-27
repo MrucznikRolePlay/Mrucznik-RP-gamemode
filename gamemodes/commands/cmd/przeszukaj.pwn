@@ -28,7 +28,7 @@
 	
 */
 
-CMD:frisk(playerid, params[]) return cmd_przeszukaj(playerid, params);
+
 CMD:przeszukaj(playerid, params[])
 {
 	new string[128];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:eject(playerid, params[]) return cmd_wywal(playerid, params);
+
 CMD:wywal(playerid, params[])
 {
 	new string[128];

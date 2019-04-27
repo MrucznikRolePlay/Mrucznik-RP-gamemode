@@ -28,7 +28,6 @@
 	
 */
 
-CMD:pancerz(playerid) return cmd_armor(playerid);
 CMD:armor(playerid)
 {
     if(IsPlayerConnected(playerid))

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:odbierzkluczyki(playerid, params[]) return cmd_zk(playerid, params);
-CMD:zabierzkluczyki(playerid, params[]) return cmd_zk(playerid, params);
+
+
 CMD:zk(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)

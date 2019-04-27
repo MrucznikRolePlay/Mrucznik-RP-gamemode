@@ -28,9 +28,9 @@
 	
 */
 
-CMD:kupsamochod(playerid) return cmd_kuppojazd(playerid);
-CMD:kupauto(playerid) return cmd_kuppojazd(playerid);
-CMD:buycar(playerid) return cmd_kuppojazd(playerid);
+
+
+
 CMD:kuppojazd(playerid)
 {
 	if(IsPlayerInAnyVehicle(playerid))

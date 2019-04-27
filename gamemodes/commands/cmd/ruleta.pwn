@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ruletka(playerid) return cmd_ruleta(playerid);
+
 CMD:ruleta(playerid)
 {
 	new string[128];

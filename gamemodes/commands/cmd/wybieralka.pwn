@@ -60,4 +60,4 @@ CMD:wybieralka(playerid, params[])
 	}
 	return 1;
 }
-//CMD:wybieralka(playerid) return cmd_ubranie(playerid);
+

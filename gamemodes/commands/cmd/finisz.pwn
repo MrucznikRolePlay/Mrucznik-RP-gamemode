@@ -28,7 +28,7 @@
 	
 */
 
-CMD:meta(playerid) return cmd_finisz(playerid);
+
 CMD:finisz(playerid)
 {
 	new string[128];

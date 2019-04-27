@@ -28,8 +28,8 @@
 	
 */
 
-CMD:eat(playerid, params[]) return cmd_zjedz(playerid, params);
-CMD:jedz(playerid, params[]) return cmd_zjedz(playerid, params);
+
+
 CMD:zjedz(playerid, params[])
 {
 	new string[128];

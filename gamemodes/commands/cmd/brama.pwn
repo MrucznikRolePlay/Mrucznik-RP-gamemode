@@ -28,7 +28,6 @@
 	
 */
 
-CMD:br(playerid) return cmd_brama(playerid);
 CMD:brama(playerid)
 {
 	if(IsPlayerConnected(playerid))

@@ -28,8 +28,8 @@
 	
 */
 
-CMD:pay(playerid, params[]) return cmd_plac(playerid, params);
-CMD:zaplac(playerid, params[]) return cmd_plac(playerid, params);
+
+
 CMD:plac(playerid, params[])
 {
 	new string[64];
