@@ -30,8 +30,14 @@
 	
 */
 
-CMD:$itemname$(playerid, params[])
+YCMD:$itemname$(playerid, params[], help)
 {
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda /$itemname$ - ");
+        return 1;
+    }
+
     //fetching params
     new id;
     if(sscanf(params, "d", id))
@@ -41,6 +47,5 @@ CMD:$itemname$(playerid, params[])
     }
 
     //command body
-    
     return 1;
 }

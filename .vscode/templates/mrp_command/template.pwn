@@ -30,8 +30,14 @@
 	
 */
 
-CMD:$itemname$(playerid)
+YCMD:$itemname$(playerid, params[], help)
 {
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda /$itemname$ - ");
+        return 1;
+    }
+
     //command body
     return 1;
 }
