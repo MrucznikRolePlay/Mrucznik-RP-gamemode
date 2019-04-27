@@ -27,6 +27,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 		Niceczlowiek - okry³ siê hañb¹ publikuj¹c mapê
 		PECET - dobry skrypter
 		LukeSqly - Niby coœ zacz¹³, ale wysz³o jak zwykle
+		Simeone - Kox przez x
 
 */
 //----------------------------------------------------*------------------------------------------------------//
@@ -37,7 +38,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #pragma warning disable 239
 #pragma warning disable 214
 
-//-------------------------------------------<[ Includy ]>---------------------------------------------------//
+//-------------------------------------------<[ Biblioteki ]>------------------------------------------------//
 //-                                                                                                         -//
 #include <a_samp>
 #define FIX_ispacked 0 
@@ -82,6 +83,7 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
+//-------<[ System ]>-------
 #include "system\definicje.pwn"
 #include "system\kolory.pwn"
 #include "system\forward.pwn"
@@ -89,28 +91,41 @@ native WP_Hash(buffer[], len, const str[]);
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
 
-//niceczlowiek
+//-------<[ Niceczlowiek ]>-------
 #include "modules\niceczlowiek\general.pwn"
 #include "modules\niceczlowiek\dynamicgui.pwn"
+#include "modules\niceczlowiek\noysi.pwn"
+#include "modules\niceczlowiek\wybieralka.pwn"
 
-//MySQL:
+//-------<[ MySQL ]>-------
 #include "modules\mysql\mru_mysql.pwn"
 
 
-//______MODU£Y ALA MAPA 3.0___________
-
+//-------<[ 3.0 style ]>-------
 //.def
 #include "modules\chaty\chaty.def"
 #include "modules\admin_duty_system\adminduty.def"
 #include "modules\admin\admin.def"
 #include "modules\sila\sila.def"
 #include "modules\biznes\biznes.def"
+#include "modules\bramy\bramy.def"
+#include "modules\wejscia\wejscia.def"
+#include "modules\budki\budki.def"
+#include "modules\premium\premium.def"
+#include "modules\wjedz\wjedz.def"
+
 //.hwn
 #include "modules\chaty\chaty.hwn"
 #include "modules\admin_duty_system\adminduty.hwn"
 #include "modules\admin\admin.hwn"
 #include "modules\sila\sila.hwn"
 #include "modules\biznes\biznes.hwn"
+#include "modules\bramy\bramy.hwn"
+#include "modules\wejscia\wejscia.hwn"
+#include "modules\budki\budki.hwn"
+#include "modules\premium\premium.hwn"
+#include "modules\wjedz\wjedz.hwn"
+
 //.pwn
 #include "modules\admin_duty_system\adminduty.pwn"
 #include "modules\admin\admin.pwn"
@@ -119,58 +134,37 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\chaty\komunikaty.pwn"
 #include "modules\sila\sila.pwn"
 #include "modules\biznes\biznes.pwn"
-
-
-//Nowe modu³y .def:
-#include "modules\bramy\bramy.def"
-#include "modules\wejscia\wejscia.def"
-#include "modules\budki\budki.def"
-#include "modules\premium\premium.def"
-#include "modules\wjedz\wjedz.def"
-
-
-//Nowe modu³y .hwn:
-#include "modules\bramy\bramy.hwn"
-#include "modules\wejscia\wejscia.hwn"
-#include "modules\budki\budki.hwn"
-#include "modules\premium\premium.hwn"
-#include "modules\wjedz\wjedz.hwn"
-
-//Nowe modu³y .pwn:
 #include "modules\bramy\bramy.pwn"
 #include "modules\wejscia\wejscia.pwn"
 #include "modules\budki\budki.pwn"
 #include "modules\premium\premium.pwn"
 #include "modules\wjedz\wjedz.pwn"
+#include "modules\discord\discord.pwn"
 
-//Inne:
+
+//-------<[ Inne ]>-------
 #include "modules\Inne\ibiza.inc"
 #include "modules\Inne\system_aut.pwn"
 #include "modules\Inne\system_kp.pwn"
 #include "modules\Inne\external.pwn"
 
-//Modu³y mapy c.d.
+//-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
+
+//-------<[ Timery ]>-------
 #include "system\timery.pwn"
 
-//Obiekty:
+//-------<[ Obiekty ]>-------
 #include "modules\obiekty\stare_obiekty.pwn"
 #include "modules\obiekty\nowe_obiekty.pwn"
 #include "modules\obiekty\pickupy.pwn"
 #include "modules\obiekty\3dtexty.pwn"
 #include "modules\obiekty\ikony.pwn"
 
-//Modu³y mapy c.d.
-#include "modules\niceczlowiek\noysi.pwn"
-#include "modules\niceczlowiek\wybieralka.pwn"
-
-//sktomdiscordconnect
-#include "modules\discord\discord.pwn"
-
-//komendy
+//-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
 
-//dialogi
+//-------<[ Dialogi ]>-------
 #include "dialogs\OnDialogResponse.pwn"
 #include "modules\premium\premium_dialogs.pwn"
 
