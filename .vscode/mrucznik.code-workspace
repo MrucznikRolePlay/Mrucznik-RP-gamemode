@@ -4,5 +4,12 @@
 			"path": ".."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"[pawn]": {
+			"files.encoding": "windows1250"
+		},
+		"vzfiletemplates.userTemplatesFolders": [
+			"K:\\2_Mrucznik Role Play\\SA-MP\\Mrucznik-RP-2.5\\.vscode\\templates"
+		]
+	}
 }

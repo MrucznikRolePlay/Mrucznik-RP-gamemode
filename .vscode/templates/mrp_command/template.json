@@ -1,0 +1,22 @@
+{
+    "name" : "Komenda",
+    "description" : "Nowa komenda dla gememodu Mrucznik Role Play",
+    "defaultName" : "command.pwn",
+    "sortOrder" : "100",
+    "category" : "Mrucznik",
+    "iconLight" : "kot.ico",
+    "iconDark" : "kot.ico",
+    "elements" : [
+        {
+            "fileName" : "template.pwn",
+            "targetName" : "$itemname$.pwn",
+            "replaceParameters" : true,
+            "open" : true
+        }
+    ],
+    "isProject" : false,
+    "command" : "",
+    "commandParameters" : [],
+    "openFiles" : [],
+    "settingsProcessors" : []
+}

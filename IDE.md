@@ -37,6 +37,10 @@ Aby w plikach pawn poprawnie kodowane były polskie znaki, należy otworzyć pli
     }
 ``` 
 
+### Szablony plików
+Aby korzystać z mrucznikowych szablonów plików, należy pobrać dodatek VZ File Templates for Visual Studio Code.
+https://marketplace.visualstudio.com/items?itemName=VisualZoran.vz-file-templates
+
 # Notepad++
 
 ## Wstęp
