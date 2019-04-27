@@ -24,9 +24,9 @@
 			"-d3",
 			"-;+",
 			"-(+",
-			"-Z+",
-			"-i../include"
-		]
+			"-Z+"
+		],
+		"includes": ["./include"]
 	},
 	"runtime": {
 		"version": "0.3.7",
