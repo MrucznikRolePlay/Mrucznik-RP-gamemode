@@ -29,7 +29,7 @@
 */
 
 
-CMD:kostka2(playerid)
+CMD:kostka2(playerid, params[])
 {
 	new string[64];
 	new sendername[MAX_PLAYER_NAME];

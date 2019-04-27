@@ -29,7 +29,7 @@
 */
 
 
-CMD:pomoc2(playerid)
+CMD:pomoc2(playerid, params[])
 {
     SendClientMessage(playerid, COLOR_GRAD1,"*** KONTO *** /zasady /stats /nextlevel /ulepszenia");
     SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /plac /datek /czas /kup /wyrzucbronie /dajklucz /zmienklucz /id /pij /muzyka /pokazlicencje /ubranie");

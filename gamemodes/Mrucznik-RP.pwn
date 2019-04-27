@@ -50,7 +50,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <utils>
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include <YSI_Data\y_iterate>
-#include <izcmd>
+#include <YSI\y_commands>
+#include <YSI\y_master>
 #include <md5>
 #include <double-o-files2>
 #include <dialogs>
@@ -164,7 +165,7 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
-#include "commands\aliasy.pwn"
+//#include "commands\aliasy.pwn"
 
 //-------<[ Dialogi ]>-------
 #include "dialogs\OnDialogResponse.pwn"

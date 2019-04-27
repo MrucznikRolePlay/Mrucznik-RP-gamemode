@@ -671,7 +671,12 @@ InitCommands()
     return 1;
 }
 
-public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+RunCommand(playerid, command[], params[])
+{
+	return Command_ReProcess(playerid, sprintf("%s %s", command, params), false);
+}
+
+/*public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 {
 	#if DEBUG == 1
 		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
@@ -689,11 +694,11 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
 		return 0;
 	}
-    /*if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)//antyspam
-	{
-		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
-		return 0;
-	}*/
+    //if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)//antyspam
+	//{
+	//	SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
+	//	return 0;
+	//}
     if(IsCommandBlocked(cmdtext))
     {
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
@@ -701,4 +706,4 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
     }
 	StaryCzas[playerid] = GetTickCount();
 	return 1;
-}
+}*/

@@ -220,6 +220,7 @@ CMD:roleta(playerid,params[])
 			open = 0;
 		}
 	}
+	return 1;
 }
 
 /*

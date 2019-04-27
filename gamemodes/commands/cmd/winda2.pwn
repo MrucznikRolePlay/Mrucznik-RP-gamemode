@@ -28,7 +28,7 @@
 	
 */
 
-CMD:winda2(playerid)
+CMD:winda2(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{
