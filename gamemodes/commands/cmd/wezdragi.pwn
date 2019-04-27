@@ -30,7 +30,7 @@
 
 
 
-CMD:wezdragi(playerid)
+CMD:wezdragi(playerid, params[])
 {
 	new string[128];
 

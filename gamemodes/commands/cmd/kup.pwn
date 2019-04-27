@@ -29,7 +29,7 @@
 */
 
 
-CMD:kup(playerid)
+CMD:kup(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

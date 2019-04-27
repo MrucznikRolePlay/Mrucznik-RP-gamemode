@@ -28,7 +28,7 @@
 	
 */
 
-CMD:usunpozar(playerid)
+CMD:usunpozar(playerid, params[])
 {
 	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
 	{

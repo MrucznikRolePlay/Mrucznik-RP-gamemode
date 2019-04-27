@@ -29,7 +29,7 @@
 */
 
 
-CMD:licencje(playerid)
+CMD:licencje(playerid, params[])
 {
 	new string[128];
 

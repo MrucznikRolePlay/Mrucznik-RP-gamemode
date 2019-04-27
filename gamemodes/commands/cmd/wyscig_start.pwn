@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wyscig_start(playerid)
+CMD:wyscig_start(playerid, params[])
 {
     if(IsANoA(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togtxda(playerid)
+CMD:togtxda(playerid, params[])
 {
 	if(togADMTXD[playerid] == 0)
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:supportduty(playerid)
+CMD:supportduty(playerid, params[])
 {
     if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
     if(GetPVarInt(playerid, "support_duty") == 0)

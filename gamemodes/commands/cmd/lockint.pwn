@@ -29,7 +29,7 @@
 */
 
 
-CMD:lockint(playerid)
+CMD:lockint(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
 	{

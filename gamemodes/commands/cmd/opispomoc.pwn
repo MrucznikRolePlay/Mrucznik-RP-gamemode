@@ -28,7 +28,7 @@
 	
 */
 
-CMD:opispomoc(playerid)
+CMD:opispomoc(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

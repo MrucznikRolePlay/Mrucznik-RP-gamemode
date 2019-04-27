@@ -28,7 +28,7 @@
 	
 */
 
-CMD:balans(playerid)
+CMD:balans(playerid, params[])
 {
 /*
 	new string[64];

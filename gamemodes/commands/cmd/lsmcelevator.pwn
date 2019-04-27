@@ -28,7 +28,7 @@
 	
 */
 
-CMD:lsmcelevator(playerid)
+CMD:lsmcelevator(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] < 20) return 1;
     ChangeLSMCElevatorState();

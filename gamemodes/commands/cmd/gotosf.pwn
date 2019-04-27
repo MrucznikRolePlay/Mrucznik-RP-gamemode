@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotosf(playerid)
+CMD:gotosf(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

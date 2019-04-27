@@ -28,7 +28,7 @@
 	
 */
 
-CMD:studia(playerid)
+CMD:studia(playerid, params[])
 {
 	new string[128];
 

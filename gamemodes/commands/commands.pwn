@@ -506,7 +506,6 @@
 #include "cmd/czyjtonumer.pwn"
 #include "cmd/flip.pwn"
 #include "cmd/cca.pwn"
-#include "cmd/cc.pwn"
 #include "cmd/hpall.pwn"
 #include "cmd/killall.pwn"
 #include "cmd/podglad.pwn"

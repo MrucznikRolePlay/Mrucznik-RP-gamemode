@@ -29,7 +29,7 @@
 */
 
 
-CMD:wejdz(playerid)
+CMD:wejdz(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

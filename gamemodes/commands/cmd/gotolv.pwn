@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotolv(playerid)
+CMD:gotolv(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

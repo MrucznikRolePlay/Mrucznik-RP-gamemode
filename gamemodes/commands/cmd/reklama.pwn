@@ -29,7 +29,7 @@
 */
 
 
-CMD:reklama(playerid)
+CMD:reklama(playerid, params[])
 {
 	if(!IsAHA(playerid))
 	{

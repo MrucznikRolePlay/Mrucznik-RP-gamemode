@@ -29,7 +29,7 @@
 */
 
 
-CMD:togooc(playerid)
+CMD:togooc(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

@@ -29,7 +29,7 @@
 */
 
 
-CMD:bus(playerid)
+CMD:bus(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

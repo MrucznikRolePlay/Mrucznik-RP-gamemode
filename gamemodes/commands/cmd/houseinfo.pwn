@@ -30,7 +30,7 @@
 
 
 
-CMD:houseinfo(playerid)
+CMD:houseinfo(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

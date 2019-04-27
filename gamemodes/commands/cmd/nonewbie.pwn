@@ -28,7 +28,7 @@
 	
 */
 
-CMD:nonewbie(playerid)
+CMD:nonewbie(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

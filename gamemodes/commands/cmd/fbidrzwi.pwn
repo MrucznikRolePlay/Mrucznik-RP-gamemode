@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fbidrzwi(playerid)
+CMD:fbidrzwi(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

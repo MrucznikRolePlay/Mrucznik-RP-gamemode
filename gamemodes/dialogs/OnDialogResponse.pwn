@@ -5793,10 +5793,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         else if(dialogid == D_AUTO_REJESTRACJA)
     	{
 	    	new lUID = IloscAut[playerid];
-	        if(!response) return cmd_car(playerid);
+	        if(!response) return cmd_car(playerid, "");
 	        if(strlen(inputtext) < 1 || strlen(inputtext) > 5)
 	        {
-	            cmd_car(playerid);
+	            cmd_car(playerid, "");
 	            SendClientMessage(playerid, COLOR_GRAD1, "Nieodpowiednia iloœæ znaków.");
 	            return 1;
 	        }
@@ -15257,14 +15257,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     //TWORZENIE ORGANIZACJI
     else if(dialogid == D_CREATE_ORG)
     {
-        if(!response) return cmd_stworz(playerid);
+        if(!response) return cmd_stworz(playerid, "");
         SetPVarInt(playerid, "create_org_typ", listitem);
         ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwê rodziny:", "Dalej", "Wróæ");
         return 1;
     }
     else if(dialogid == D_CREATE_ORG_NAME)
     {
-        if(!response) return cmd_stworz(playerid);
+        if(!response) return cmd_stworz(playerid, "");
         if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwê rodziny:", "Dalej", "Wróæ");
         SetPVarString(playerid, "create_org_name", inputtext);
         new lStr[256] = "Wybierz wolny slot (ID)\n";
@@ -15302,14 +15302,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     //EDYCJA ORGANIZACJI
     else if(dialogid == D_EDIT_ORG)
     {
-        if(!response) return cmd_edytuj(playerid);
+        if(!response) return cmd_edytuj(playerid, "");
         SetPVarInt(playerid, "edit_org", strval(inputtext));
         ShowPlayerDialogEx(playerid, D_EDIT_ORG_LIST, DIALOG_STYLE_LIST, "Edycja organizacji", "Zmieñ typ\nZmieñ nazwê\nUsuñ lidera(ów)\nUsuñ organizacje", "Wybierz", "Wróæ");
         return 1;
     }
     else if(dialogid == D_EDIT_ORG_LIST)
     {
-        if(!response) return cmd_edytuj(playerid);
+        if(!response) return cmd_edytuj(playerid, "");
         new lStr[256];
         switch(listitem)
         {
@@ -15339,7 +15339,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_EDIT_ORG_TYP)
     {
-        if(!response) return cmd_edytuj(playerid);
+        if(!response) return cmd_edytuj(playerid, "");
         new id = GetPVarInt(playerid, "edit_org"), lStr[128];
         OrgInfo[id][o_Type] = listitem;
         format(lStr, 128, "Zmieniono typ organizacji %s na %s", OrgInfo[id][o_Name], OrgTypes[listitem]);
@@ -15350,7 +15350,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_EDIT_ORG_NAME)
     {
-        if(!response) return cmd_edytuj(playerid);
+        if(!response) return cmd_edytuj(playerid, "");
         new id = GetPVarInt(playerid, "edit_org"), lStr[128];
         if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "WprowadŸ now¹ nazwê", "Zmieñ", "Wróæ");
         format(lStr, 128, "Zmieniono nazwê organizacji %s na %s", OrgInfo[id][o_Name], inputtext);
@@ -15362,7 +15362,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_EDIT_ORG_DELETE)
     {
-        if(!response) return cmd_edytuj(playerid);
+        if(!response) return cmd_edytuj(playerid, "");
         new id = GetPVarInt(playerid, "edit_org"), lStr[128];
         format(lStr, 128, "Usuniêto organizacjê %s.", OrgInfo[id][o_Name]);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
@@ -15403,7 +15403,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     //EDYCJA POJAZDÓW
     else if(dialogid == D_EDIT_CAR)
     {
-        if(!response) return cmd_edytuj(playerid);
+        if(!response) return cmd_edytuj(playerid, "");
         new lStr[1024];
         if(strval(inputtext) == 0)
         {
@@ -15435,7 +15435,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_EDIT_CAR_MENU)
     {
-        if(!response) return cmd_edytuj(playerid);
+        if(!response) return cmd_edytuj(playerid, "");
         new car = GetPVarInt(playerid, "edit-car");
         if(CarData[car][c_UID] == 0) return 1;
         switch(listitem)
@@ -15763,7 +15763,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     //EDYCJA    RANG
     else if(dialogid == D_EDIT_RANG)
     {
-        if(!response) return cmd_edytuj(playerid);
+        if(!response) return cmd_edytuj(playerid, "");
         new string[512];
         SetPVarInt(playerid, "edit_rang_typ", listitem);
         if(listitem == 0)

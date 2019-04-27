@@ -32,7 +32,7 @@
 
 
 
-CMD:wk(playerid)
+CMD:wk(playerid, params[])
 {
     if(PlayerInfo[playerid][pKluczeAuta] != 0)
     {

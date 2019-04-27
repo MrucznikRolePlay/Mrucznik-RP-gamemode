@@ -28,7 +28,7 @@
 	
 */
 
-CMD:armor(playerid)
+CMD:armor(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
 	{

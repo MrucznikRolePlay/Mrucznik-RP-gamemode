@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kolory(playerid)
+CMD:kolory(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

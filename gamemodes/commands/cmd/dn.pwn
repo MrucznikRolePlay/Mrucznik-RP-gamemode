@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dn(playerid)
+CMD:dn(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

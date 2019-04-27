@@ -28,7 +28,7 @@
 	
 */
 
-CMD:up(playerid)
+CMD:up(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

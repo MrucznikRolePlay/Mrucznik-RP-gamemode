@@ -28,7 +28,7 @@
 	
 */
 
-CMD:stworzobiekty(playerid)
+CMD:stworzobiekty(playerid, params[])
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:brama(playerid)
+CMD:brama(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

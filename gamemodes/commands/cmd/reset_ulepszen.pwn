@@ -32,7 +32,7 @@
 
 
 
-CMD:reset_ulepszen(playerid)
+CMD:reset_ulepszen(playerid, params[])
 {
 	new string[128];
 

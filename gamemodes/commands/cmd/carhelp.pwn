@@ -31,7 +31,7 @@
 
 
 
-CMD:carhelp(playerid)
+CMD:carhelp(playerid, params[])
 {
     if(GUIExit[playerid] == 0)
     {

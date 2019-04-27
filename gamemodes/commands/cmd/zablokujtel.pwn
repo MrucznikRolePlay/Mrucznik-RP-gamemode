@@ -31,7 +31,7 @@
 
 
 
-CMD:zablokujtel(playerid)
+CMD:zablokujtel(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

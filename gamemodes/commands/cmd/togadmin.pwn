@@ -29,7 +29,7 @@
 */
 
 
-CMD:togadmin(playerid)
+CMD:togadmin(playerid, params[])
 {
 	if(GetPVarInt(playerid, "togadmincmd") == 0)
 	{

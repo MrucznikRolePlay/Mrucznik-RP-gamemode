@@ -32,7 +32,7 @@
 
 
 
-CMD:rentroom(playerid)
+CMD:rentroom(playerid, params[])
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

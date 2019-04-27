@@ -29,7 +29,7 @@
 */
 
 
-CMD:zaparkuj(playerid)
+CMD:zaparkuj(playerid, params[])
 {
 	new string[256];
 	new VW = GetPlayerVirtualWorld(playerid); 

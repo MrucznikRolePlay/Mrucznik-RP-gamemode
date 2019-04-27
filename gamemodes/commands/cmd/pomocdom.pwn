@@ -30,7 +30,7 @@
 
 
 
-CMD:pomocdom(playerid)
+CMD:pomocdom(playerid, params[])
 {
     if(gPlayerLogged[playerid] == 1)
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:vopispomoc(playerid)
+CMD:vopispomoc(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

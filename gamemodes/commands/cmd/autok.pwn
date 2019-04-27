@@ -28,7 +28,7 @@
 	
 */
 
-CMD:autok(playerid)
+CMD:autok(playerid, params[])
 {
 	if(PlayerInfo[playerid][pKluczeAuta] > 0)
 	{

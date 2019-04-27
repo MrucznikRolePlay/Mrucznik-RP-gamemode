@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bandana(playerid)
+CMD:bandana(playerid, params[])
 {
 	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{

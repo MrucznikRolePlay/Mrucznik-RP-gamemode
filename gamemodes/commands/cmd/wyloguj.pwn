@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wyloguj(playerid)
+CMD:wyloguj(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cwarsztat(playerid)
+CMD:cwarsztat(playerid, params[])
 {
 	if(IsANoA(playerid))
 	{

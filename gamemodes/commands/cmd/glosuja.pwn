@@ -28,7 +28,7 @@
 	
 */
 
-CMD:glosuja(playerid)
+CMD:glosuja(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

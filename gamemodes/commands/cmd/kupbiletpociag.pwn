@@ -30,7 +30,7 @@
 
 
 
-CMD:kupbiletpociag(playerid)
+CMD:kupbiletpociag(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

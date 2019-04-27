@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tankveh(playerid)
+CMD:tankveh(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

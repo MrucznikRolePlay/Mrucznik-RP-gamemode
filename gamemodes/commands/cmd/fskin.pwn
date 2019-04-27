@@ -30,7 +30,7 @@
 
 
 
-CMD:fskin(playerid)
+CMD:fskin(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

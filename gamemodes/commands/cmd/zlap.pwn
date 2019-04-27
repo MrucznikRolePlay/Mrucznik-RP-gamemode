@@ -33,7 +33,7 @@
 
 
 
-CMD:zlap(playerid)
+CMD:zlap(playerid, params[])
 {
 	new string[128];
 

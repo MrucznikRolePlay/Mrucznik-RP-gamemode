@@ -28,7 +28,7 @@
 	
 */
 
-CMD:boksstats(playerid)
+CMD:boksstats(playerid, params[])
 {
 	new string[128];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:noooc(playerid)
+CMD:noooc(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

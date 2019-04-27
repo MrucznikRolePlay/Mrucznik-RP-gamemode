@@ -28,7 +28,7 @@
 	
 */
 
-CMD:reflektor(playerid)
+CMD:reflektor(playerid, params[])
 {
     if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
     {

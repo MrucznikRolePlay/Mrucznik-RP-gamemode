@@ -28,7 +28,7 @@
 	
 */
 
-CMD:resetsejfhasla(playerid)
+CMD:resetsejfhasla(playerid, params[])
 {
 	new string[64];
 

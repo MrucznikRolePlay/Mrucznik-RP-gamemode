@@ -28,7 +28,7 @@
 	
 */
 
-CMD:malunki(playerid)
+CMD:malunki(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

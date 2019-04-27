@@ -29,7 +29,7 @@
 */
 
 
-CMD:finisz(playerid)
+CMD:finisz(playerid, params[])
 {
 	new string[128];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togfam(playerid)
+CMD:togfam(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:endround(playerid)
+CMD:endround(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
@@ -47,7 +47,7 @@ CMD:endround(playerid)
 
 
 
-/*CMD:zaufani(playerid)
+/*CMD:zaufani(playerid, params[])
 {
 	new string[64];
 	new sendername[MAX_PLAYER_NAME];

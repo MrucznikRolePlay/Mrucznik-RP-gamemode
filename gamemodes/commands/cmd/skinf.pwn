@@ -28,7 +28,7 @@
 	
 */
 
-CMD:skinf(playerid)
+CMD:skinf(playerid, params[])
 {
     if(!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) return 1;
     if(GetPlayerFraction(playerid) == 0) return sendErrorMessage(playerid, "Nie jesteœ we frakcji!");

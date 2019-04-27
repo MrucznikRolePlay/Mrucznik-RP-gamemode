@@ -28,7 +28,7 @@
 	
 */
 
-CMD:showkary(playerid)
+CMD:showkary(playerid, params[])
 {
 	if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] > 4500)
 	{

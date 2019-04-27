@@ -31,7 +31,7 @@
 
 
 
-CMD:kuphelikopter(playerid)
+CMD:kuphelikopter(playerid, params[])
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392))//kupowanie heli
     {

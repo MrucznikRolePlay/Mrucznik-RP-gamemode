@@ -29,7 +29,7 @@
 */
 
 
-CMD:togdepo(playerid)
+CMD:togdepo(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kamera(playerid)
+CMD:kamera(playerid, params[])
 {
 	if(PlayerInfo[playerid][pRank] >= 6 && GetPlayerOrg(playerid) == FAMILY_IBIZA && IsPlayerInRangeOfPoint(playerid, 50.0, 1896.3619,-2445.5969,18.5559) && GetPlayerVirtualWorld(playerid) == 1) //RANGA
 	{

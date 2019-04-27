@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotosalon(playerid)
+CMD:gotosalon(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

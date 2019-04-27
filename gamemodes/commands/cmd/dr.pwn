@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dr(playerid)
+CMD:dr(playerid, params[])
 {
 	if(IsPlayerInAnyVehicle(playerid))
 	{

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:panelbasenu(playerid)
+CMD:panelbasenu(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

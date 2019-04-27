@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bigears(playerid)
+CMD:bigears(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] > 200)
     {

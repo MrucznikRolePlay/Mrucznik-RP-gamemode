@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zniszczobiekty(playerid)
+CMD:zniszczobiekty(playerid, params[])
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {

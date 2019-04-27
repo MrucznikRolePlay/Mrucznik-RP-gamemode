@@ -28,7 +28,7 @@
 	
 */
 
-CMD:oldcar(playerid)
+CMD:oldcar(playerid, params[])
 {
 	new string[64];
 

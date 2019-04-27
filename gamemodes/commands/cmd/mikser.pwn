@@ -28,7 +28,7 @@
 	
 */
 
-CMD:mikser(playerid)
+CMD:mikser(playerid, params[])
 {
 	if(PlayerInfo[playerid][pRank] >=5 && GetPlayerOrg(playerid) == FAMILY_IBIZA)  //RANGA
 	{

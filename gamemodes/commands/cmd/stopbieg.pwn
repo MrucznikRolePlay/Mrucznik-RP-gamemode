@@ -28,7 +28,7 @@
 	
 */
 
-CMD:stopbieg(playerid)
+CMD:stopbieg(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

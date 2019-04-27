@@ -30,7 +30,7 @@
 
 
 
-CMD:staty(playerid)
+CMD:staty(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {
@@ -42,7 +42,7 @@ CMD:staty(playerid)
 	return 1;
 }
 
-/*CMD:fly(playerid)
+/*CMD:fly(playerid, params[])
 {
 	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
 	{

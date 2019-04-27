@@ -28,7 +28,7 @@
 	
 */
 
-CMD:piwo(playerid)
+CMD:piwo(playerid, params[])
 {
     if(PlayerInfo[playerid][pPiwo] >= 1)
     {

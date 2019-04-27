@@ -31,7 +31,7 @@
 
 
 
-CMD:z(playerid)
+CMD:z(playerid, params[])
 {
 	if(Mobile[playerid] == INVALID_PLAYER_ID)
 	{

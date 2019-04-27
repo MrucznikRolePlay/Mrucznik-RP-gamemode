@@ -28,7 +28,7 @@
 	
 */
 
-CMD:sh(playerid)
+CMD:sh(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {

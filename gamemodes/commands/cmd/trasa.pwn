@@ -28,7 +28,7 @@
 	
 */
 
-CMD:trasa(playerid)
+CMD:trasa(playerid, params[])
 {
 	new Veh = GetPlayerVehicleID(playerid);
 	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][pJob] == 10)

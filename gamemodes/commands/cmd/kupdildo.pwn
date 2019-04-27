@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kupdildo(playerid)
+CMD:kupdildo(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

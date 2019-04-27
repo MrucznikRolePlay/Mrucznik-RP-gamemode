@@ -28,7 +28,7 @@
 	
 */
 
-CMD:restart(playerid)
+CMD:restart(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

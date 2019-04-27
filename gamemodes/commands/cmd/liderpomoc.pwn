@@ -29,7 +29,7 @@
 */
 
 
-CMD:liderpomoc(playerid)
+CMD:liderpomoc(playerid, params[])
 {
 	if (PlayerInfo[playerid][pLider] >= 1)
 	{

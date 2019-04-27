@@ -28,7 +28,7 @@
 	
 */
 
-CMD:respawn(playerid)
+CMD:respawn(playerid, params[])
 {
 	new string[128];
 	

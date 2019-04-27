@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togname(playerid)
+CMD:togname(playerid, params[])
 {
     if(GetPVarInt(playerid, "tognick") == 1)
     {

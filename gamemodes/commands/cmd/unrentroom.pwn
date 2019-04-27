@@ -30,7 +30,7 @@
 
 
 
-CMD:unrentroom(playerid)
+CMD:unrentroom(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bizinfo(playerid)
+CMD:bizinfo(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

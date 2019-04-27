@@ -29,7 +29,7 @@
 */
 
 
-CMD:kanister(playerid)
+CMD:kanister(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

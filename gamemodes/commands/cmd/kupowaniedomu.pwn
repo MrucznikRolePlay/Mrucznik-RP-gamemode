@@ -30,7 +30,7 @@
 
 
 
-CMD:kupowaniedomu(playerid)
+CMD:kupowaniedomu(playerid, params[])
 {
 	new string[128];
 

@@ -29,7 +29,7 @@
 */
 
 
-CMD:laptop(playerid)
+CMD:laptop(playerid, params[])
 {
 	new sendername[MAX_PLAYER_NAME];
 

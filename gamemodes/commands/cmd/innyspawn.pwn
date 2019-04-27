@@ -31,7 +31,7 @@
 
 
 
-CMD:innyspawn(playerid)
+CMD:innyspawn(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

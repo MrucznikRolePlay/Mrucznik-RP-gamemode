@@ -28,7 +28,7 @@
 	
 */
 
-CMD:skret(playerid)
+CMD:skret(playerid, params[])
 {
 	if(PlayerInfo[playerid][pCygaro] >= 1)
     {

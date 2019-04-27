@@ -29,7 +29,7 @@
 */
 
 
-CMD:stworztrase(playerid)
+CMD:stworztrase(playerid, params[])
 {
 	new string[128];
 

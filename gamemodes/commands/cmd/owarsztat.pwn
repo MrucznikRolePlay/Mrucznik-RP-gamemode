@@ -28,7 +28,7 @@
 	
 */
 
-CMD:owarsztat(playerid)
+CMD:owarsztat(playerid, params[])
 {
 	if(IsANoA(playerid))
 	{

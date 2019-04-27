@@ -28,7 +28,7 @@
 	
 */
 
-CMD:forum(playerid)
+CMD:forum(playerid, params[])
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

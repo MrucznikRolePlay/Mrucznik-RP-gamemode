@@ -29,7 +29,7 @@
 */
 
 
-CMD:telefonpomoc(playerid)
+CMD:telefonpomoc(playerid, params[])
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	if (PlayerInfo[playerid][pPnumber] > 0)

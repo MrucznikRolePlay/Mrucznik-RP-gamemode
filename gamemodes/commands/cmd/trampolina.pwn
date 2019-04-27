@@ -28,7 +28,7 @@
 	
 */
 
-CMD:trampolina(playerid)
+CMD:trampolina(playerid, params[])
 {
 	if (IsPlayerInRangeOfPoint(playerid, 5.0, 578.6193,-2195.7708,1.6288)) // trampolina wejœcie
 	{

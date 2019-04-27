@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zuzel_stop(playerid)
+CMD:zuzel_stop(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

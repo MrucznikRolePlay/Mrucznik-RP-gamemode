@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togfinfo(playerid)
+CMD:togfinfo(playerid, params[])
 {
 	if(GetPVarInt(playerid, "TOG_frakcja_info") == 0)
 	{

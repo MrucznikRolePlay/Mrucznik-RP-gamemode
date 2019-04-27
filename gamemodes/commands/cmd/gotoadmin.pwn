@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotoadmin(playerid)
+CMD:gotoadmin(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     SetPlayerVirtualWorld(playerid, 5000);

@@ -29,7 +29,7 @@
 */
 
 
-CMD:wynajempomoc(playerid)
+CMD:wynajempomoc(playerid, params[])
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	SendClientMessage(playerid, COLOR_WHITE,"*** WYNAJMOWANIE POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");

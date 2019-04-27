@@ -29,7 +29,7 @@
 */
 
 
-CMD:wezwijwoz(playerid)
+CMD:wezwijwoz(playerid, params[])
 {
 	new string[128];
 

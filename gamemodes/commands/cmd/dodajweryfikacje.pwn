@@ -28,7 +28,7 @@
 	
 */
 
-CMD:dodajweryfikacje(playerid)
+CMD:dodajweryfikacje(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

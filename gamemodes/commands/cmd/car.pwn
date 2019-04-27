@@ -31,7 +31,7 @@
 
 
 
-CMD:car(playerid)
+CMD:car(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

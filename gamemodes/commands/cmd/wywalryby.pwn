@@ -29,7 +29,7 @@
 */
 
 
-CMD:wywalryby(playerid)
+CMD:wywalryby(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

@@ -29,7 +29,7 @@
 */
 
 
-CMD:wyrzucbronie(playerid)
+CMD:wyrzucbronie(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

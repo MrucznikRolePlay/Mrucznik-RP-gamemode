@@ -29,8 +29,8 @@
 */
 
 /*
-CMD:clothes(playerid) return cmd_skin(playerid);
-CMD:skin(playerid)
+CMD:clothes(playerid, params[]) return cmd_skin(playerid);
+CMD:skin(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

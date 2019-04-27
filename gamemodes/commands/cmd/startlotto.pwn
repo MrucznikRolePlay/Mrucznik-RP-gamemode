@@ -28,7 +28,7 @@
 	
 */
 
-CMD:startlotto(playerid)
+CMD:startlotto(playerid, params[])
 {
 	new string[128];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:kupkredyty(playerid)
+CMD:kupkredyty(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

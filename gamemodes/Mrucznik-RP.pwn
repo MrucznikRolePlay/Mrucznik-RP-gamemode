@@ -6474,9 +6474,9 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		new engine, unused;
 		GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine , unused , unused, unused, unused, unused, unused);
 		if(engine == 1)
-			cmd_zgas(playerid);
+			cmd_zgas(playerid, "");
 		else
-			cmd_odpal(playerid);
+			cmd_odpal(playerid, "");
 	}
     if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_ONFOOT))
     {

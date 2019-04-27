@@ -28,7 +28,7 @@
 	
 */
 
-CMD:basenstats(playerid)
+CMD:basenstats(playerid, params[])
 {
 	if(GetPlayerOrg(playerid) == 43)
 	{

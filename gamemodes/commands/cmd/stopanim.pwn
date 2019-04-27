@@ -29,7 +29,7 @@
 */
 
 
-CMD:stopanim(playerid)
+CMD:stopanim(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

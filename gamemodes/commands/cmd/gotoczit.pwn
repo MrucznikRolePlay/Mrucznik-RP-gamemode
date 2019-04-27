@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotoczit(playerid)
+CMD:gotoczit(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] > 1 || IsAScripter(playerid))
     {

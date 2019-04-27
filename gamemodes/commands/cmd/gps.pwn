@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gps(playerid)
+CMD:gps(playerid, params[])
 {
 	if(IsACop(playerid) || IsAMedyk(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD)
 	{

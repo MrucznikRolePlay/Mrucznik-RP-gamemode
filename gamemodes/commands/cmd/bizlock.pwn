@@ -28,7 +28,7 @@
 	
 */
 
-CMD:bizlock(playerid)
+CMD:bizlock(playerid, params[])
 {
 	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES)
 	{

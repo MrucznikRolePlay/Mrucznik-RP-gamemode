@@ -31,7 +31,7 @@
 
 
 
-CMD:zlomuj(playerid)
+CMD:zlomuj(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

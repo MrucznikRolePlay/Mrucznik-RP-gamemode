@@ -28,7 +28,7 @@
 	
 */
 
-CMD:biegnij(playerid)
+CMD:biegnij(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

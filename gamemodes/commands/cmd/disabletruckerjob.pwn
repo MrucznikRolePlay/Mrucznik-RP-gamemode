@@ -28,7 +28,7 @@
 	
 */
 
-CMD:disabletruckerjob(playerid)
+CMD:disabletruckerjob(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
     if(!GLOBAL_DISABLETRUCKER) GLOBAL_DISABLETRUCKER = true;
@@ -37,7 +37,7 @@ CMD:disabletruckerjob(playerid)
     return 1;
 }
 
-/*CMD:rentcar(playerid)
+/*CMD:rentcar(playerid, params[])
 {
     if(HireCar[playerid] == 0) return 1;
     if(PlayerInfo[playerid][pDonateRank] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd wypo¿yczyæ mo¿e tylko Konto Premium!");

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:graj(playerid)
+CMD:graj(playerid, params[])
 {
 	if(PlayerToPoint(40.0,playerid, 1139.7068,-2.5457,1000.6797))
 	{

@@ -1,21 +1,21 @@
 //bus
-CMD:businfo(playerid) return cmd_bus(playerid);
+CMD:businfo(playerid, params[]) return cmd_bus(playerid, params);
 
 
 //car
-CMD:auto(playerid) return cmd_car(playerid);
+CMD:auto(playerid, params[]) return cmd_car(playerid, params);
 
-CMD:pojazd(playerid) return cmd_car(playerid);
+CMD:pojazd(playerid, params[]) return cmd_car(playerid, params);
 
-CMD:samochod(playerid) return cmd_car(playerid);
+CMD:samochod(playerid, params[]) return cmd_car(playerid, params);
 
 
 //carhelp
-CMD:autopomoc(playerid) return cmd_carhelp(playerid);
+CMD:autopomoc(playerid, params[]) return cmd_carhelp(playerid, params);
 
-CMD:pojazdpomoc(playerid) return cmd_carhelp(playerid);
+CMD:pojazdpomoc(playerid, params[]) return cmd_carhelp(playerid, params);
 
-CMD:samochodpomoc(playerid) return cmd_carhelp(playerid);
+CMD:samochodpomoc(playerid, params[]) return cmd_carhelp(playerid, params);
 
 
 //cbradio
@@ -25,19 +25,19 @@ CMD:cb_radio(playerid, params[]) return cmd_cbradio(playerid, params);
 
 
 //cp_usun
-CMD:czekpoint_usun(playerid) return cmd_cp_usun(playerid);
+CMD:czekpoint_usun(playerid, params[]) return cmd_cp_usun(playerid, params);
 
-CMD:checkpoint_usun(playerid) return cmd_cp_usun(playerid);
+CMD:checkpoint_usun(playerid, params[]) return cmd_cp_usun(playerid, params);
 
 
 //cp
-CMD:czekpoint(playerid) return cmd_cp(playerid);
+CMD:czekpoint(playerid, params[]) return cmd_cp(playerid, params);
 
-CMD:checkpoint(playerid) return cmd_cp(playerid);
+CMD:checkpoint(playerid, params[]) return cmd_cp(playerid, params);
 
 
 //czas
-CMD:time(playerid) return cmd_czas(playerid);
+CMD:time(playerid, params[]) return cmd_czas(playerid, params);
 
 
 //dajklucze
@@ -55,7 +55,7 @@ CMD:sprzedajneony(playerid, params[]) return cmd_dajneony(playerid, params);
 
 
 //dajpodatek
-CMD:givetax(playerid) return cmd_dajpodatek(playerid);
+CMD:givetax(playerid, params[]) return cmd_dajpodatek(playerid, params);
 
 
 //dajrange
@@ -91,11 +91,11 @@ CMD:dajl(playerid, params[]) return cmd_dl(playerid, params);
 
 
 //dolacz
-CMD:join(playerid) return cmd_dolacz(playerid);
+CMD:join(playerid, params[]) return cmd_dolacz(playerid, params);
 
 
 //dutycd
-CMD:dutysbi(playerid) return cmd_dutycd(playerid);
+CMD:dutysbi(playerid, params[]) return cmd_dutycd(playerid, params);
 
 
 //dzwon
@@ -111,7 +111,7 @@ CMD:zmienfelge(playerid, params[]) return cmd_felga(playerid, params);
 
 
 //finisz
-CMD:meta(playerid) return cmd_finisz(playerid);
+CMD:meta(playerid, params[]) return cmd_finisz(playerid, params);
 
 
 //fooc
@@ -123,9 +123,9 @@ CMD:rodzinnyooc(playerid, params[]) return cmd_fooc(playerid, params);
 
 
 //fskin
-CMD:mundur(playerid) return cmd_fskin(playerid);
+CMD:mundur(playerid, params[]) return cmd_fskin(playerid, params);
 
-CMD:uniform(playerid) return cmd_fskin(playerid);
+CMD:uniform(playerid, params[]) return cmd_fskin(playerid, params);
 
 
 //giveroom
@@ -135,41 +135,41 @@ CMD:dajwynajem(playerid, params[]) return cmd_giveroom(playerid, params);
 
 
 //glosnik
-CMD:sanradio(playerid) return cmd_glosnik(playerid);
+CMD:sanradio(playerid, params[]) return cmd_glosnik(playerid, params);
 
 
 //gotowane
-CMD:cooked(playerid) return cmd_gotowane(playerid);
+CMD:cooked(playerid, params[]) return cmd_gotowane(playerid, params);
 
-CMD:ugotowane(playerid) return cmd_gotowane(playerid);
+CMD:ugotowane(playerid, params[]) return cmd_gotowane(playerid, params);
 
 
 //house
-CMD:dom(playerid) return cmd_house(playerid);
+CMD:dom(playerid, params[]) return cmd_house(playerid, params);
 
 
 //houseinfo
-CMD:dominfo(playerid) return cmd_houseinfo(playerid);
+CMD:dominfo(playerid, params[]) return cmd_houseinfo(playerid, params);
 
-CMD:dom_info(playerid) return cmd_houseinfo(playerid);
+CMD:dom_info(playerid, params[]) return cmd_houseinfo(playerid, params);
 
 
 //icons
-CMD:ikonki(playerid) return cmd_icons(playerid);
+CMD:ikonki(playerid, params[]) return cmd_icons(playerid, params);
 
-CMD:ikony(playerid) return cmd_icons(playerid);
+CMD:ikony(playerid, params[]) return cmd_icons(playerid, params);
 
 
 //innyspawn
-CMD:spawnchange(playerid) return cmd_innyspawn(playerid);
+CMD:spawnchange(playerid, params[]) return cmd_innyspawn(playerid, params);
 
-CMD:zmianaspawnu(playerid) return cmd_innyspawn(playerid);
+CMD:zmianaspawnu(playerid, params[]) return cmd_innyspawn(playerid, params);
 
-CMD:zmienspawn(playerid) return cmd_innyspawn(playerid);
+CMD:zmienspawn(playerid, params[]) return cmd_innyspawn(playerid, params);
 
 
 //ircpomoc
-CMD:irchelp(playerid) return cmd_ircpomoc(playerid);
+CMD:irchelp(playerid, params[]) return cmd_ircpomoc(playerid, params);
 
 
 //ja
@@ -193,31 +193,31 @@ CMD:kamerawiezienna(playerid, params[]) return cmd_kamera_wiezienie(playerid, pa
 
 
 //kanister
-CMD:fillcar(playerid) return cmd_kanister(playerid);
+CMD:fillcar(playerid, params[]) return cmd_kanister(playerid, params);
 
 
 //kaucja
-CMD:bail(playerid) return cmd_kaucja(playerid);
+CMD:bail(playerid, params[]) return cmd_kaucja(playerid, params);
 
 
 //kb
-CMD:kontobankowe(playerid)return cmd_kb(playerid);
+CMD:kontobankowe(playerid, params[])return cmd_kb(playerid, params);
 
 
 //kogut
-CMD:syrena(playerid) return cmd_kogut(playerid);
+CMD:syrena(playerid, params[]) return cmd_kogut(playerid, params);
 
-CMD:sygnal(playerid) return cmd_kogut(playerid);
+CMD:sygnal(playerid, params[]) return cmd_kogut(playerid, params);
 
 
 //kolo
-CMD:kolofortuny(playerid) return cmd_kolo(playerid);
+CMD:kolofortuny(playerid, params[]) return cmd_kolo(playerid, params);
 
-CMD:kf(playerid) return cmd_kolo(playerid);
+CMD:kf(playerid, params[]) return cmd_kolo(playerid, params);
 
 
 //komandos
-CMD:wino(playerid) return cmd_komandos(playerid);
+CMD:wino(playerid, params[]) return cmd_komandos(playerid, params);
 
 
 //komentuj
@@ -233,7 +233,7 @@ CMD:contract(playerid, params[]) return cmd_kontrakt(playerid, params);
 
 
 //kostka2
-CMD:dice(playerid) return cmd_kostka2(playerid);
+CMD:dice(playerid, params[]) return cmd_kostka2(playerid);
 
 
 //ksiazkatel
@@ -247,7 +247,7 @@ CMD:ksiazka(playerid, params[]) return cmd_ksiazkatel(playerid, params);
 
 
 //kup
-CMD:buy(playerid) return cmd_kup(playerid);
+CMD:buy(playerid, params[]) return cmd_kup(playerid, params);
 
 
 //kuparmor
@@ -255,51 +255,51 @@ CMD:buygun(playerid, params[]) return cmd_kupbron(playerid, params);
 
 
 //kupbiletpociag
-CMD:kbpo(playerid) return cmd_kupbiletpociag(playerid);
+CMD:kbpo(playerid, params[]) return cmd_kupbiletpociag(playerid, params);
 
-CMD:kpociag(playerid) return cmd_kupbiletpociag(playerid);
+CMD:kpociag(playerid, params[]) return cmd_kupbiletpociag(playerid, params);
 
 
 //kuphelikopter
-CMD:buyhelicopter(playerid) return cmd_kuphelikopter(playerid);
+CMD:buyhelicopter(playerid, params[]) return cmd_kuphelikopter(playerid, params);
 
-CMD:kupheli(playerid) return cmd_kuphelikopter(playerid);
+CMD:kupheli(playerid, params[]) return cmd_kuphelikopter(playerid, params);
 
-CMD:buyheli(playerid) return cmd_kuphelikopter(playerid);
+CMD:buyheli(playerid, params[]) return cmd_kuphelikopter(playerid, params);
 
 
 //kuplodzie
-CMD:kuplodz(playerid) return cmd_kuplodzie(playerid);
+CMD:kuplodz(playerid, params[]) return cmd_kuplodzie(playerid, params);
 
-CMD:kupstatek(playerid) return cmd_kuplodzie(playerid);
+CMD:kupstatek(playerid, params[]) return cmd_kuplodzie(playerid, params);
 
-CMD:buyboat(playerid) return cmd_kuplodzie(playerid);
+CMD:buyboat(playerid, params[]) return cmd_kuplodzie(playerid, params);
 
 
 //kupneony
-CMD:kupneon(playerid) return cmd_kupneony(playerid);
+CMD:kupneon(playerid, params[]) return cmd_kupneony(playerid, params);
 
 
 //kupowaniedomu
-CMD:kupdom(playerid) return cmd_kupowaniedomu(playerid);
+CMD:kupdom(playerid, params[]) return cmd_kupowaniedomu(playerid, params);
 
-CMD:buyhouse(playerid) return cmd_kupowaniedomu(playerid);
+CMD:buyhouse(playerid, params[]) return cmd_kupowaniedomu(playerid, params);
 
 
 //kuppojazd
-CMD:kupsamochod(playerid) return cmd_kuppojazd(playerid);
+CMD:kupsamochod(playerid, params[]) return cmd_kuppojazd(playerid, params);
 
-CMD:kupauto(playerid) return cmd_kuppojazd(playerid);
+CMD:kupauto(playerid, params[]) return cmd_kuppojazd(playerid, params);
 
-CMD:buycar(playerid) return cmd_kuppojazd(playerid);
+CMD:buycar(playerid, params[]) return cmd_kuppojazd(playerid, params);
 
 
 //kupsamoloty
-CMD:kupsamolot(playerid) return cmd_kupsamoloty(playerid);
+CMD:kupsamolot(playerid, params[]) return cmd_kupsamoloty(playerid, params);
 
-CMD:kuplot(playerid) return cmd_kupsamoloty(playerid);
+CMD:kuplot(playerid, params[]) return cmd_kupsamoloty(playerid, params);
 
-CMD:buyplane(playerid) return cmd_kupsamoloty(playerid);
+CMD:buyplane(playerid, params[]) return cmd_kupsamoloty(playerid, params);
 
 
 //kupskin
@@ -311,23 +311,23 @@ CMD:fare(playerid, params[]) return cmd_kurs(playerid, params);
 
 
 //laptop
-CMD:portable(playerid) return cmd_laptop(playerid);
+CMD:portable(playerid, params[]) return cmd_laptop(playerid, params);
 
 
 //licencje
-CMD:licenses(playerid) return cmd_licencje(playerid);
+CMD:licenses(playerid, params[]) return cmd_licencje(playerid, params);
 
 
 //liderpomoc
-CMD:leaderhelp(playerid) return cmd_liderpomoc(playerid);
+CMD:leaderhelp(playerid, params[]) return cmd_liderpomoc(playerid, params);
 
 
 //lock
-CMD:unlock(playerid) return cmd_lock(playerid);
+CMD:unlock(playerid, params[]) return cmd_lock(playerid, params);
 
 
 //lockint
-CMD:zamekint(playerid) return cmd_lockint(playerid);
+CMD:zamekint(playerid, params[]) return cmd_lockint(playerid, params);
 
 
 //losowostworzdom
@@ -365,15 +365,15 @@ CMD:m(playerid, params[]) return cmd_megafon(playerid, params);
 
 
 //mi
-CMD:deathwarning(playerid) return cmd_mi(playerid);
+CMD:deathwarning(playerid, params[]) return cmd_mi(playerid, params);
 
-CMD:warningdeath(playerid) return cmd_mi(playerid);
+CMD:warningdeath(playerid, params[]) return cmd_mi(playerid, params);
 
-CMD:mordinfo(playerid) return cmd_mi(playerid);
+CMD:mordinfo(playerid, params[]) return cmd_mi(playerid, params);
 
 
 //mojeauta
-CMD:mojeauto(playerid) return cmd_mojeauta(playerid);
+CMD:mojeauto(playerid, params[]) return cmd_mojeauta(playerid, params);
 
 
 //mp3
@@ -395,11 +395,11 @@ CMD:repair(playerid, params[]) return cmd_napraw(playerid, params);
 
 
 //nastepnylevel
-CMD:buylevel(playerid) return cmd_nastepnylevel(playerid);
+CMD:buylevel(playerid, params[]) return cmd_nastepnylevel(playerid, params);
 
-CMD:kuplevel(playerid) return cmd_nastepnylevel(playerid);
+CMD:kuplevel(playerid, params[]) return cmd_nastepnylevel(playerid, params);
 
-CMD:nextlevel(playerid) return cmd_nastepnylevel(playerid);
+CMD:nextlevel(playerid, params[]) return cmd_nastepnylevel(playerid, params);
 
 
 //nazywo
@@ -437,9 +437,9 @@ CMD:sellkamizelke(playerid, params[]) return cmd_ochrona(playerid, params);
 
 
 //od
-CMD:podnies(playerid) return cmd_od(playerid);
+CMD:podnies(playerid, params[]) return cmd_od(playerid, params);
 
-CMD:p(playerid) return cmd_od(playerid);
+CMD:p(playerid, params[]) return cmd_od(playerid, params);
 
 
 //og
@@ -451,9 +451,9 @@ CMD:ogloszenie(playerid, params[]) return cmd_og(playerid, params);
 
 
 //opuscdom
-CMD:zlomujdom(playerid) return cmd_opuscdom(playerid);
+CMD:zlomujdom(playerid, params[]) return cmd_opuscdom(playerid, params);
 
-CMD:zlomujhouse(playerid) return cmd_opuscdom(playerid);
+CMD:zlomujhouse(playerid, params[]) return cmd_opuscdom(playerid, params);
 
 
 //organizacje
@@ -463,9 +463,9 @@ CMD:biznesy(playerid, p[]) return cmd_organizacje(playerid, p);
 
 
 //paliwo
-CMD:fuel(playerid) return cmd_paliwo(playerid);
+CMD:fuel(playerid, params[]) return cmd_paliwo(playerid, params);
 
-CMD:licznikpaliwa(playerid) return cmd_paliwo(playerid);
+CMD:licznikpaliwa(playerid, params[]) return cmd_paliwo(playerid, params);
 
 
 //paralizuj
@@ -505,13 +505,13 @@ CMD:dowod(playerid, params[]) return cmd_pokazdowod(playerid, params);
 
 
 //pomoc2
-CMD:help(playerid) return cmd_pomoc2(playerid);
+CMD:help(playerid, params[]) return cmd_pomoc2(playerid);
 
 
 //pomocdom
-CMD:dompomoc(playerid) return cmd_pomocdom(playerid);
+CMD:dompomoc(playerid, params[]) return cmd_pomocdom(playerid, params);
 
-CMD:househelp(playerid) return cmd_pomocdom(playerid);
+CMD:househelp(playerid, params[]) return cmd_pomocdom(playerid, params);
 
 
 //pr
@@ -545,13 +545,13 @@ CMD:invite(playerid, params[]) return cmd_przyjmij(playerid, params);
 
 
 //qf
-CMD:quitfrakcja(playerid) return cmd_qf(playerid);
+CMD:quitfrakcja(playerid, params[]) return cmd_qf(playerid, params);
 
 
 //quitpraca
-CMD:quitjob(playerid) return cmd_quitpraca(playerid);
+CMD:quitjob(playerid, params[]) return cmd_quitpraca(playerid, params);
 
-CMD:opuscprace(playerid) return cmd_quitpraca(playerid);
+CMD:opuscprace(playerid, params[]) return cmd_quitpraca(playerid, params);
 
 
 //r
@@ -567,28 +567,30 @@ CMD:reply(playerid, params[]) return cmd_re(playerid, params);
 
 
 //reklama
-CMD:ha(playerid) return cmd_reklama(playerid);
+CMD:ha(playerid, params[]) return cmd_reklama(playerid, params);
 
 
 //rentroom
-CMD:wynajmij(playerid) return cmd_rentroom(playerid);
+CMD:wynajmij(playerid, params[]) return cmd_rentroom(playerid, params);
 
-CMD:wynajmuj(playerid) return cmd_rentroom(playerid);
+CMD:wynajmuj(playerid, params[]) return cmd_rentroom(playerid, params);
 
-CMD:wynajem(playerid) return cmd_rentroom(playerid);
+CMD:wynajem(playerid, params[]) return cmd_rentroom(playerid, params);
 
-CMD:wynajmijpokoj(playerid) return cmd_rentroom(playerid);
+CMD:wynajmijpokoj(playerid, params[]) return cmd_rentroom(playerid, params);
 
 
 //reset_ulepszen
-CMD:resetupgrades(playerid) return cmd_reset_ulepszen(playerid);
+CMD:resetupgrades(playerid, params[]) return cmd_reset_ulepszen(playerid, params);
 
-CMD:resetujulepszenia(playerid) return cmd_reset_ulepszen(playerid);
+CMD:resetujulepszenia(playerid, params[]) return cmd_reset_ulepszen(playerid, params);
 
-CMD:resetulepszen(playerid) return cmd_reset_ulepszen(playerid);
+CMD:resetulepszen(playerid, params[]) return cmd_reset_ulepszen(playerid, params);
 
-CMD:resetuj_ulepszenia(playerid) return cmd_reset_ulepszen(playerid);
+CMD:resetuj_ulepszenia(playerid, params[]) return cmd_reset_ulepszen(playerid, params);
 
+//cca
+CMD:cc(playerid, params[]) return cmd_cca(playerid, "");
 
 //resms
 CMD:res(playerid, params[]) return cmd_resms(playerid, params);
@@ -619,15 +621,15 @@ CMD:odwiaz(playerid, params[]) return cmd_rozwiaz(playerid, params);
 
 
 //ruleta
-CMD:ruletka(playerid) return cmd_ruleta(playerid);
+CMD:ruletka(playerid, params[]) return cmd_ruleta(playerid, params);
 
 
 //ryby
-CMD:fishes(playerid) return cmd_ryby(playerid);
+CMD:fishes(playerid, params[]) return cmd_ryby(playerid, params);
 
 
 //rybypomoc
-CMD:fishhelp(playerid) return cmd_rybypomoc(playerid);
+CMD:fishhelp(playerid, params[]) return cmd_rybypomoc(playerid, params);
 
 
 //say
@@ -643,17 +645,17 @@ CMD:szukajbroni(playerid, params[]) return cmd_sb(playerid, params);
 
 
 //sejffrakcja
-CMD:sejff(playerid) return cmd_sejffrakcja(playerid);
+CMD:sejff(playerid, params[]) return cmd_sejffrakcja(playerid, params);
 
 
 //sejfpomoc
-CMD:sejf(playerid) return cmd_sejfpomoc(playerid);
+CMD:sejf(playerid, params[]) return cmd_sejfpomoc(playerid, params);
 
-CMD:sejfpanel(playerid) return cmd_sejfpomoc(playerid);
+CMD:sejfpanel(playerid, params[]) return cmd_sejfpomoc(playerid, params);
 
 
 //sejfrodzina
-CMD:sejfr(playerid) return cmd_sejfrodzina(playerid);
+CMD:sejfr(playerid, params[]) return cmd_sejfrodzina(playerid, params);
 
 
 //selldom
@@ -663,7 +665,7 @@ CMD:sellhouse(playerid, params[]) return cmd_selldom(playerid, params);
 
 
 //sluzba
-CMD:duty(playerid) return cmd_sluzba(playerid);
+CMD:duty(playerid, params[]) return cmd_sluzba(playerid, params);
 
 
 //sms
@@ -677,7 +679,7 @@ CMD:spojler(playerid, params[]) return cmd_spoiler(playerid, params);
 
 
 //spoilery
-CMD:spojlery(playerid) return cmd_spoilery(playerid);
+CMD:spojlery(playerid, params[]) return cmd_spoilery(playerid, params);
 
 
 //sprawdzdom
@@ -727,13 +729,13 @@ CMD:startegzamin(playerid, params[]) return cmd_startujlekcje(playerid, params);
 
 
 //staty
-CMD:stats(playerid) return cmd_staty(playerid);
+CMD:stats(playerid, params[]) return cmd_staty(playerid, params);
 
-CMD:statystyki(playerid) return cmd_staty(playerid);
+CMD:statystyki(playerid, params[]) return cmd_staty(playerid, params);
 
 
 //stopanim
-CMD:stopani(playerid) return cmd_stopanim(playerid);
+CMD:stopani(playerid, params[]) return cmd_stopanim(playerid, params);
 
 
 
@@ -743,7 +745,7 @@ CMD:zrobdom(playerid, params[]) return cmd_stworzdom(playerid, params);
 
 
 //stworztrase
-CMD:stworzwyscig(playerid) return cmd_stworztrase(playerid);
+CMD:stworzwyscig(playerid, params[]) return cmd_stworztrase(playerid, params);
 
 
 //swiadek
@@ -757,9 +759,9 @@ CMD:s(playerid, params[]) return cmd_szept(playerid, params);
 
 
 //szukani
-CMD:wanted(playerid) return cmd_szukani(playerid);
+CMD:wanted(playerid, params[]) return cmd_szukani(playerid, params);
 
-CMD:poszukiwani(playerid) return cmd_szukani(playerid);
+CMD:poszukiwani(playerid, params[]) return cmd_szukani(playerid, params);
 
 
 //tankowanie
@@ -767,35 +769,35 @@ CMD:refill(playerid, params[]) return cmd_tankowanie(playerid, params);
 
 
 //telefonpomoc
-CMD:cellphonehelp(playerid) return cmd_telefonpomoc(playerid);
+CMD:cellphonehelp(playerid, params[]) return cmd_telefonpomoc(playerid, params);
 
 
 //togadmin
-CMD:togadm(playerid) return cmd_togadmin(playerid);
+CMD:togadm(playerid, params[]) return cmd_togadmin(playerid, params);
 
 
 //togdepo
-CMD:zablokujdepo(playerid) return cmd_togdepo(playerid);
+CMD:zablokujdepo(playerid, params[]) return cmd_togdepo(playerid, params);
 
 
 //toglicznik
-CMD:togtextdraw(playerid) return cmd_toglicznik(playerid);
+CMD:togtextdraw(playerid, params[]) return cmd_toglicznik(playerid, params);
 
-CMD:togspeed(playerid) return cmd_toglicznik(playerid);
+CMD:togspeed(playerid, params[]) return cmd_toglicznik(playerid, params);
 
 
 //togooc
-CMD:zablokujooc(playerid) return cmd_togooc(playerid);
+CMD:zablokujooc(playerid, params[]) return cmd_togooc(playerid, params);
 
 
 //togwl
-CMD:togcrime(playerid) return cmd_togwl(playerid);
+CMD:togcrime(playerid, params[]) return cmd_togwl(playerid, params);
 
-CMD:toghq(playerid) return cmd_togwl(playerid);
+CMD:toghq(playerid, params[]) return cmd_togwl(playerid, params);
 
 
 //trasy
-CMD:wyscigi(playerid) return cmd_trasy(playerid);
+CMD:wyscigi(playerid, params[]) return cmd_trasy(playerid, params);
 
 
 //ugotuj
@@ -805,9 +807,9 @@ CMD:gotuj(playerid, params[]) return cmd_ugotuj(playerid, params);
 
 
 //ukradnij
-CMD:dropcar(playerid) return cmd_ukradnij(playerid);
+CMD:dropcar(playerid, params[]) return cmd_ukradnij(playerid, params);
 
-CMD:kradnijauto(playerid) return cmd_ukradnij(playerid);
+CMD:kradnijauto(playerid, params[]) return cmd_ukradnij(playerid, params);
 
 
 //ulecz
@@ -815,7 +817,7 @@ CMD:heal(playerid, params[]) return cmd_ulecz(playerid, params);
 
 
 //uleczmnie
-CMD:healme(playerid) return cmd_uleczmnie(playerid);
+CMD:healme(playerid, params[]) return cmd_uleczmnie(playerid, params);
 
 
 //ulepsz
@@ -825,21 +827,21 @@ CMD:ulepszenia(playerid, params[]) return cmd_ulepsz(playerid, params);
 
 
 //unrentroom
-CMD:unrent(playerid) return cmd_unrentroom(playerid);
+CMD:unrent(playerid, params[]) return cmd_unrentroom(playerid, params);
 
-CMD:niewynajmuj(playerid) return cmd_unrentroom(playerid);
+CMD:niewynajmuj(playerid, params[]) return cmd_unrentroom(playerid, params);
 
 
 //usunbron
-CMD:ub(playerid) return cmd_usunbron(playerid);
+CMD:ub(playerid, params[]) return cmd_usunbron(playerid, params);
 
 
 //wejdz
-CMD:enter(playerid) return cmd_wejdz(playerid);
+CMD:enter(playerid, params[]) return cmd_wejdz(playerid, params);
 
 
 //wejdzw
-CMD:wyjdzw(playerid) return cmd_wejdzw(playerid);
+CMD:wyjdzw(playerid, params[]) return cmd_wejdzw(playerid, params);
 
 
 //wez
@@ -847,9 +849,9 @@ CMD:get(playerid, params[]) return cmd_wez(playerid, params);
 
 
 //wezdragi
-CMD:usedrugs(playerid) return cmd_wezdragi(playerid);
+CMD:usedrugs(playerid, params[]) return cmd_wezdragi(playerid, params);
 
-CMD:weznarkotyki(playerid) return cmd_wezdragi(playerid);
+CMD:weznarkotyki(playerid, params[]) return cmd_wezdragi(playerid, params);
 
 
 //wezwij
@@ -857,7 +859,7 @@ CMD:service(playerid, params[]) return cmd_wezwij(playerid, params);
 
 
 //wezwijwoz
-CMD:callcar(playerid) return cmd_wezwijwoz(playerid);
+CMD:callcar(playerid, params[]) return cmd_wezwijwoz(playerid, params);
 
 
 //wezzlecenie
@@ -873,13 +875,13 @@ CMD:tower(playerid, params[]) return cmd_wieza(playerid, params);
 
 
 //wk
-CMD:wyrzuckluczyki(playerid) return cmd_wk(playerid);
+CMD:wyrzuckluczyki(playerid, params[]) return cmd_wk(playerid, params);
 
-CMD:wywalklucze(playerid) return cmd_wk(playerid);
+CMD:wywalklucze(playerid, params[]) return cmd_wk(playerid, params);
 
-CMD:wywalkluczyki(playerid) return cmd_wk(playerid);
+CMD:wywalkluczyki(playerid, params[]) return cmd_wk(playerid, params);
 
-CMD:wyrzucklucze(playerid) return cmd_wk(playerid);
+CMD:wyrzucklucze(playerid, params[]) return cmd_wk(playerid, params);
 
 
 //wplac
@@ -901,15 +903,15 @@ CMD:oczysc(playerid, params[]) return cmd_wyczysc(playerid, params);
 
 
 //wyjdz
-CMD:exit(playerid) return cmd_wyjdz(playerid);
+CMD:exit(playerid, params[]) return cmd_wyjdz(playerid, params);
 
 
 //wyjedz
-CMD:wjedz(playerid) return cmd_wyjedz(playerid);
+CMD:wjedz(playerid, params[]) return cmd_wyjedz(playerid, params);
 
 
 //wynajempomoc
-CMD:renthelp(playerid) return cmd_wynajempomoc(playerid);
+CMD:renthelp(playerid, params[]) return cmd_wynajempomoc(playerid, params);
 
 
 //wypij
@@ -939,7 +941,7 @@ CMD:wyrzucrybe(playerid, params[]) return cmd_wypuscrybe(playerid, params);
 
 
 //wyrzucbronie
-CMD:wb(playerid) return cmd_wyrzucbronie(playerid);
+CMD:wb(playerid, params[]) return cmd_wyrzucbronie(playerid, params);
 
 
 //wywal
@@ -951,35 +953,35 @@ CMD:wywalzdmv(playerid, params[]) return cmd_wywaldmv(playerid, params);
 
 
 //wywaldragi
-CMD:wd(playerid) return cmd_wywaldragi(playerid);
+CMD:wd(playerid, params[]) return cmd_wywaldragi(playerid, params);
 
-CMD:wyrzucdragi(playerid) return cmd_wywaldragi(playerid);
+CMD:wyrzucdragi(playerid, params[]) return cmd_wywaldragi(playerid, params);
 
 
 //wywalmaterialy
-CMD:wyrzucmaterialy(playerid) return cmd_wm(playerid);
+CMD:wyrzucmaterialy(playerid, params[]) return cmd_wm(playerid, params);
 
-CMD:wm(playerid) return cmd_wm(playerid);
+CMD:wm(playerid, params[]) return cmd_wm(playerid, params);
 
 
 //wywalrybe
-CMD:throwback(playerid) return cmd_wywalrybe(playerid);
+CMD:throwback(playerid, params[]) return cmd_wywalrybe(playerid, params);
 
 
 //wywalryby
-CMD:throwbackall(playerid) return cmd_wywalryby(playerid);
+CMD:throwbackall(playerid, params[]) return cmd_wywalryby(playerid, params);
 
 
 //wywaltelefon
-CMD:wywaltel(playerid) return cmd_wywaltelefon(playerid);
+CMD:wywaltel(playerid, params[]) return cmd_wywaltelefon(playerid, params);
 
 
 //z
-CMD:hangup(playerid) return cmd_z(playerid);
+CMD:hangup(playerid, params[]) return cmd_z(playerid, params);
 
-CMD:h(playerid) return cmd_z(playerid);
+CMD:h(playerid, params[]) return cmd_z(playerid, params);
 
-CMD:zakoncz(playerid) return cmd_z(playerid);
+CMD:zakoncz(playerid, params[]) return cmd_z(playerid, params);
 
 
 //zabierz
@@ -987,17 +989,17 @@ CMD:take(playerid, params[]) return cmd_zabierz(playerid, params);
 
 
 //zablokujtel
-CMD:togphone(playerid) return cmd_zablokujtel(playerid);
+CMD:togphone(playerid, params[]) return cmd_zablokujtel(playerid, params);
 
-CMD:togtel(playerid) return cmd_zablokujtel(playerid);
+CMD:togtel(playerid, params[]) return cmd_zablokujtel(playerid, params);
 
-CMD:togtelefon(playerid) return cmd_zablokujtel(playerid);
+CMD:togtelefon(playerid, params[]) return cmd_zablokujtel(playerid, params);
 
 
 //zablokujw
-CMD:togwhisper(playerid) return cmd_zablokujw(playerid);
+CMD:togwhisper(playerid, params[]) return cmd_zablokujw(playerid, params);
 
-CMD:togw(playerid) return cmd_zablokujw(playerid);
+CMD:togw(playerid, params[]) return cmd_zablokujw(playerid, params);
 
 
 //zakuj
@@ -1007,13 +1009,13 @@ CMD:skuj(playerid, params[]) return cmd_zakuj(playerid, params);
 
 
 //zaparkuj
-CMD:parkuj(playerid) return cmd_zaparkuj(playerid);
+CMD:parkuj(playerid, params[]) return cmd_zaparkuj(playerid, params);
 
 
 //zatankuj
-CMD:fill(playerid) return cmd_zatankuj(playerid);
+CMD:fill(playerid, params[]) return cmd_zatankuj(playerid, params);
 
-CMD:tankuj(playerid) return cmd_zatankuj(playerid);
+CMD:tankuj(playerid, params[]) return cmd_zatankuj(playerid, params);
 
 
 //zatrzymajlekcje
@@ -1023,9 +1025,9 @@ CMD:stoplekcja(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
 CMD:stopegzamin(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
 
 //zdejmijkevlar
-CMD:wyrzuckami(playerid) return cmd_zdejmijkevlar(playerid);
+CMD:wyrzuckami(playerid, params[]) return cmd_zdejmijkevlar(playerid, params);
 
-CMD:zdejmijkami(playerid) return cmd_zdejmijkevlar(playerid);
+CMD:zdejmijkami(playerid, params[]) return cmd_zdejmijkevlar(playerid, params);
 
 
 //zderzaki
@@ -1033,7 +1035,7 @@ CMD:zderzak(playerid, params[]) return cmd_zderzaki(playerid, params);
 
 
 //zdmv
-CMD:cdmv(playerid) return cmd_zdmv(playerid);
+CMD:cdmv(playerid, params[]) return cmd_zdmv(playerid, params);
 
 
 //zjedz
@@ -1049,23 +1051,23 @@ CMD:zabierzkluczyki(playerid, params[]) return cmd_zk(playerid, params);
 
 
 //zlap
-CMD:fish(playerid) return cmd_zlap(playerid);
+CMD:fish(playerid, params[]) return cmd_zlap(playerid, params);
 
-CMD:ryba(playerid) return cmd_zlap(playerid);
+CMD:ryba(playerid, params[]) return cmd_zlap(playerid, params);
 
-CMD:wedkuj(playerid) return cmd_zlap(playerid);
+CMD:wedkuj(playerid, params[]) return cmd_zlap(playerid, params);
 
-CMD:low(playerid) return cmd_zlap(playerid);
+CMD:low(playerid, params[]) return cmd_zlap(playerid, params);
 
-CMD:wedka(playerid) return cmd_zlap(playerid);
+CMD:wedka(playerid, params[]) return cmd_zlap(playerid, params);
 
 
 //zlomuj
-CMD:spawnuj(playerid) return cmd_zlomuj(playerid);
+CMD:spawnuj(playerid, params[]) return cmd_zlomuj(playerid, params);
 
-CMD:przemaluj(playerid) return cmd_zlomuj(playerid);
+CMD:przemaluj(playerid, params[]) return cmd_zlomuj(playerid, params);
 
-CMD:nauto(playerid) return cmd_zlomuj(playerid);
+CMD:nauto(playerid, params[]) return cmd_zlomuj(playerid, params);
 
 
 //zmiendom
@@ -1093,7 +1095,7 @@ CMD:uninvite(playerid, params[]) return cmd_zwolnij(playerid, params);
 
 
 //simeone/admin
-CMD:admins(playerid) return cmd_admini(playerid);
+CMD:admins(playerid, params[]) return cmd_admini(playerid, params);
 
 CMD:block(playerid, params[]) return cmd_blok(playerid, params);
 
@@ -1141,11 +1143,11 @@ CMD:setmistrz(playerid, params[]) return cmd_ustawmistrz(playerid, params);
 
 CMD:zg(playerid, params[]) return cmd_zaufanyggracz(playerid, params);
 
-CMD:logout(playerid) return cmd_wyloguj(playerid);
+CMD:logout(playerid, params[]) return cmd_wyloguj(playerid, params);
 
 CMD:logoutpl(playerid, params[]) return cmd_wylogujgracz(playerid, params);
 
-CMD:logoutall(playerid) return cmd_wylogujall(playerid);
+CMD:logoutall(playerid, params[]) return cmd_wylogujall(playerid, params);
 
 CMD:prison(playerid, params[]) return cmd_demorgan(playerid, params);
 
@@ -1153,11 +1155,11 @@ CMD:unaj(playerid, params[]) return cmd_unjail(playerid, params);
 
 CMD:aj(playerid, params[]) return cmd_adminajail(playerid, params);
 
-CMD:fuelcar(playerid) return cmd_tankveh(playerid);
+CMD:fuelcar(playerid, params[]) return cmd_tankveh(playerid, params);
 
-CMD:tankujauto(playerid) return cmd_tankveh(playerid);
+CMD:tankujauto(playerid, params[]) return cmd_tankveh(playerid, params);
 
-CMD:fuelcars(playerid) return cmd_tankujauta(playerid);
+CMD:fuelcars(playerid, params[]) return cmd_tankujauta(playerid, params);
 
 CMD:sethp(playerid, params[]) return cmd_zmienhp(playerid, params);
 

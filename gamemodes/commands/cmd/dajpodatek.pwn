@@ -29,7 +29,7 @@
 */
 
 
-CMD:dajpodatek(playerid)
+CMD:dajpodatek(playerid, params[])
 {
 	new string[128];
 

@@ -30,7 +30,7 @@
 
 
 
-CMD:szukani(playerid)
+CMD:szukani(playerid, params[])
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

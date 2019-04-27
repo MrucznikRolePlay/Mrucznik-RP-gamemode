@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ibiza(playerid)
+CMD:ibiza(playerid, params[])
 {
 	if(gPlayerOrgLeader[playerid] && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
 	PrezesDialog(playerid);

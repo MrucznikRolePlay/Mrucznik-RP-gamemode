@@ -30,7 +30,7 @@
 
 
 
-CMD:od(playerid)
+CMD:od(playerid, params[])
 {
 	new string[64];
 

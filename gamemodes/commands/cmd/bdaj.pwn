@@ -129,7 +129,7 @@ CMD:bdaj(playerid, params[])
 	return 1;
 }*/
 
-/*CMD:startalltimer(playerid)
+/*CMD:startalltimer(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
     {

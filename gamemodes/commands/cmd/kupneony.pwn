@@ -29,7 +29,7 @@
 */
 
 
-CMD:kupneony(playerid)
+CMD:kupneony(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

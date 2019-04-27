@@ -31,7 +31,7 @@
 
 
 
-CMD:nastepnylevel(playerid)
+CMD:nastepnylevel(playerid, params[])
 {
 	new string[128];
 

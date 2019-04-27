@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zrobkolejke(playerid)
+CMD:zrobkolejke(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] < 5000) return 1;
     if(!VAR_Kolejka)

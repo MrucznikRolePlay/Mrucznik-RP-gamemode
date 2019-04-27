@@ -29,7 +29,7 @@
 */
 
 
-CMD:dolacz(playerid)
+CMD:dolacz(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

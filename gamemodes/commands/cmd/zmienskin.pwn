@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zmienskin(playerid)
+CMD:zmienskin(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

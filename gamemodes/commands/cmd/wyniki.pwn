@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wyniki(playerid)
+CMD:wyniki(playerid, params[])
 {
 	new string[64];
 

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zgas(playerid)
+CMD:zgas(playerid, params[])
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

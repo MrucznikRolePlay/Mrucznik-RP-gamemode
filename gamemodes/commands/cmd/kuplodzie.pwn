@@ -31,7 +31,7 @@
 
 
 
-CMD:kuplodzie(playerid)
+CMD:kuplodzie(playerid, params[])
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666))
     {

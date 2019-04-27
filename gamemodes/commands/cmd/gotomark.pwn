@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotomark(playerid)
+CMD:gotomark(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

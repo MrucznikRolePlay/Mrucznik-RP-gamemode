@@ -28,7 +28,7 @@
 	
 */
 
-CMD:togcb(playerid)
+CMD:togcb(playerid, params[])
 {
 	if(PlayerInfo[playerid][pCB] == 1)
 	{

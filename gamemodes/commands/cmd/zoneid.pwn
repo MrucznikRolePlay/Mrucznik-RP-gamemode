@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zoneid(playerid)
+CMD:zoneid(playerid, params[])
 {
     if(GetPVarInt(playerid, "zoneid") != -1)
     {

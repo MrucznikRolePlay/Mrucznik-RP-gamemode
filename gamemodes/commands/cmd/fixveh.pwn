@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fixveh(playerid)
+CMD:fixveh(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

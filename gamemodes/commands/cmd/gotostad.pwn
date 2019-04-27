@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotostad(playerid)
+CMD:gotostad(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

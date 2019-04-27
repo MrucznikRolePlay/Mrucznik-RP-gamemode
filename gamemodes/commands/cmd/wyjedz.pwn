@@ -29,7 +29,7 @@
 */
 
 
-CMD:wyjedz(playerid)
+CMD:wyjedz(playerid, params[])
 {
 	if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
 	{

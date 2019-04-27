@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pracownicy(playerid)
+CMD:pracownicy(playerid, params[])
 {
     new frac = GetPlayerFraction(playerid);
 	if(frac > 0 && PlayerInfo[playerid][pRank] >= 4)

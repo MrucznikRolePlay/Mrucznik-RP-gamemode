@@ -28,7 +28,7 @@
 	
 */
 
-CMD:KickEx_all(playerid)
+CMD:KickEx_all(playerid, params[])
 {
 	if(IsAHeadAdmin(playerid))
 	{

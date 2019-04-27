@@ -28,9 +28,9 @@
 	
 */
 /*
-CMD:zbrojka(playerid) return cmd_zbrojuj(playerid);
-CMD:zbrojownia(playerid) return cmd_zbrojuj(playerid);
-CMD:zbrojuj(playerid)
+CMD:zbrojka(playerid, params[]) return cmd_zbrojuj(playerid);
+CMD:zbrojownia(playerid, params[]) return cmd_zbrojuj(playerid);
+CMD:zbrojuj(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

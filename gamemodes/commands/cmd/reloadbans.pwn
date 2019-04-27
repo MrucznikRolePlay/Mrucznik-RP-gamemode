@@ -28,7 +28,7 @@
 	
 */
 
-CMD:reloadbans(playerid)
+CMD:reloadbans(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 100)
 	{

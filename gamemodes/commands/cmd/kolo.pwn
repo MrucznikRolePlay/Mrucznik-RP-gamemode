@@ -30,7 +30,7 @@
 
 
 
-CMD:kolo(playerid)
+CMD:kolo(playerid, params[])
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

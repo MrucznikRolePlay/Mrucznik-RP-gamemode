@@ -31,7 +31,7 @@
 
 
 
-CMD:mi(playerid)
+CMD:mi(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

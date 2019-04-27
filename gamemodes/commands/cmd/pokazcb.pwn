@@ -28,7 +28,7 @@
 	
 */
 
-CMD:pokazcb(playerid)
+CMD:pokazcb(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1)
 	{

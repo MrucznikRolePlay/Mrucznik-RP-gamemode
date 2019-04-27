@@ -28,7 +28,7 @@
 	
 */
 
-CMD:blokujnoba(playerid)
+CMD:blokujnoba(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

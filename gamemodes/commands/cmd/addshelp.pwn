@@ -28,7 +28,7 @@
 	
 */
 
-CMD:addshelp(playerid)
+CMD:addshelp(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

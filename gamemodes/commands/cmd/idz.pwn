@@ -28,7 +28,7 @@
 	
 */
 
-CMD:idz(playerid)
+CMD:idz(playerid, params[])
 {
 	ShowPlayerDialogEx(playerid, 1213, DIALOG_STYLE_LIST,"Automatyczna animacja","Pijak\nNormalny\nBabcia\nGangsta\nGangsta 2\nGarbaty\nZ broni¹\nNormalny 2\nStaruszka\nDziwka\nPaker\nKobieta\nTuptuœ\nNormalny 3","Akceptuj","Anuluj");
 	return 1;

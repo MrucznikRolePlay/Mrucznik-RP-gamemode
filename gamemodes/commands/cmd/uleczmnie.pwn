@@ -29,7 +29,7 @@
 */
 
 
-CMD:uleczmnie(playerid)
+CMD:uleczmnie(playerid, params[])
 {
 	new string[128];
 

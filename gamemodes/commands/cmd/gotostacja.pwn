@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotostacja(playerid)
+CMD:gotostacja(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) {
         

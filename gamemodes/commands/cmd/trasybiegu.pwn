@@ -28,7 +28,7 @@
 	
 */
 
-CMD:trasybiegu(playerid)
+CMD:trasybiegu(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

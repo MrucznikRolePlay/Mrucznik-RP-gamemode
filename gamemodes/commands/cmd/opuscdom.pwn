@@ -30,7 +30,7 @@
 
 
 
-CMD:opuscdom(playerid)
+CMD:opuscdom(playerid, params[])
 {
 	new string[128];
 

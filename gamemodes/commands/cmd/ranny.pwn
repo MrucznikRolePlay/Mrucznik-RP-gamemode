@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ranny(playerid)
+CMD:ranny(playerid, params[])
 {
 	new string[128];
 	ApplyAnimation(playerid,"CRACK","crckidle1",4.1,0,1,1,1,1);

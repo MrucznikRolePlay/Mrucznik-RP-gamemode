@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wywalcb(playerid)
+CMD:wywalcb(playerid, params[])
 {
 	if(PlayerInfo[playerid][pCB] == 0)
 	{

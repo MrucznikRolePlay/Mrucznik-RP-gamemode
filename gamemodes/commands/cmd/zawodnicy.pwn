@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zawodnicy(playerid)
+CMD:zawodnicy(playerid, params[])
 {
 	new string[32];
 

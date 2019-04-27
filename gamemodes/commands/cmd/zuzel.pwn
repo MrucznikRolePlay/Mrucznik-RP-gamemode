@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zuzel(playerid)
+CMD:zuzel(playerid, params[])
 {
     if(GUIExit[playerid] == 0)
     {

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:tickets(playerid)
+CMD:tickets(playerid, params[])
 {
     if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
     Support_ShowTickets(playerid);

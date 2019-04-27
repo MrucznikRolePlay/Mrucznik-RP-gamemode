@@ -30,7 +30,7 @@
 
 
 
-CMD:togwl(playerid)
+CMD:togwl(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

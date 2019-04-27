@@ -29,7 +29,7 @@
 */
 
 
-CMD:trasy(playerid)
+CMD:trasy(playerid, params[])
 {
 	if(GUIExit[playerid] == 0)
 	{

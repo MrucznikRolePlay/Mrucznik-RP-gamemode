@@ -28,7 +28,7 @@
 	
 */
 
-CMD:wylogujall(playerid)
+CMD:wylogujall(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

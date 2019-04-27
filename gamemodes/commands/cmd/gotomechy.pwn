@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotomechy(playerid)
+CMD:gotomechy(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid)) {
 		

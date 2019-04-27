@@ -30,7 +30,7 @@
 
 
 
-CMD:icons(playerid)
+CMD:icons(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

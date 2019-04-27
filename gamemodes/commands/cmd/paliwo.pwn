@@ -30,7 +30,7 @@
 
 
 
-CMD:paliwo(playerid)
+CMD:paliwo(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

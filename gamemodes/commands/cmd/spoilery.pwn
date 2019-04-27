@@ -29,7 +29,7 @@
 */
 
 
-CMD:spoilery(playerid)
+CMD:spoilery(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

@@ -30,7 +30,7 @@
 
 
 
-CMD:cp_usun(playerid)
+CMD:cp_usun(playerid, params[])
 {
 	new string[128];
 

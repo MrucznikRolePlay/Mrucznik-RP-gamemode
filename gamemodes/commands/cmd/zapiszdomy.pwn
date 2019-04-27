@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zapiszdomy(playerid)
+CMD:zapiszdomy(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{

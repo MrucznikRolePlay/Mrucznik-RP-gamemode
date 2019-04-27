@@ -28,7 +28,7 @@
 	
 */
 
-CMD:adminstats(playerid)
+CMD:adminstats(playerid, params[])
 {
 	if(PlayerInfo[playerid][pAdmin] >= 1 )
 	{

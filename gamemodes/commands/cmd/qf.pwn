@@ -29,7 +29,7 @@
 */
 
 
-CMD:qf(playerid)
+CMD:qf(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

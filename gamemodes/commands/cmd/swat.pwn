@@ -28,7 +28,7 @@
 	
 */
 
-CMD:swat(playerid)
+CMD:swat(playerid, params[])
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];

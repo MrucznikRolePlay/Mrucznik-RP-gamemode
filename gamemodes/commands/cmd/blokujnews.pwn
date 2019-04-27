@@ -28,7 +28,7 @@
 	
 */
 
-CMD:blokujnews(playerid)
+CMD:blokujnews(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

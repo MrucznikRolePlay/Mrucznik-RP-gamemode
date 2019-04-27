@@ -29,7 +29,7 @@
 */
 
 
-CMD:komandos(playerid)
+CMD:komandos(playerid, params[])
 {
     if(PlayerInfo[playerid][pWino] >= 1)
     {

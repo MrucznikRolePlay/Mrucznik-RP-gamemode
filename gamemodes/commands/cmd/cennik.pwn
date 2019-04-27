@@ -28,7 +28,7 @@
 	
 */
 
-CMD:cennik(playerid)
+CMD:cennik(playerid, params[])
 {
 	if(!IsPlayerInRangeOfPoint(playerid, 5.0, 1904.3759,-2494.4448,13.6266) && GetPlayerVirtualWorld(playerid) == 1) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ przy barze Ibizy");
 	new string[300];

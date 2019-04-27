@@ -29,7 +29,7 @@
 */
 
 
-CMD:kb(playerid)
+CMD:kb(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
     {

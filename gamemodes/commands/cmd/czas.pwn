@@ -29,7 +29,7 @@
 */
 
 
-CMD:czas(playerid)
+CMD:czas(playerid, params[])
 {
 	new string[128];
 

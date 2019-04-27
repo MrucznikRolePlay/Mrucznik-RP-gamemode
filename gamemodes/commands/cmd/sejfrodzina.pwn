@@ -29,7 +29,7 @@
 */
 
 
-CMD:sejfrodzina(playerid)
+CMD:sejfrodzina(playerid, params[])
 {
 	if(orgIsLeader(playerid))
     {

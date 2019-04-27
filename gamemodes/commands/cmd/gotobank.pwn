@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotobank(playerid)
+CMD:gotobank(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) {
         

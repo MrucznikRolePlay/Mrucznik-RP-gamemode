@@ -28,7 +28,7 @@
 	
 */
 
-CMD:ubranie(playerid)
+CMD:ubranie(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
 	{

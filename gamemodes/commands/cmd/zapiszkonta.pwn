@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zapiszkonta(playerid)
+CMD:zapiszkonta(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{

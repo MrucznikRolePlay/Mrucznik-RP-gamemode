@@ -28,7 +28,7 @@
 	
 */
 
-CMD:fixr(playerid)
+CMD:fixr(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
 	{

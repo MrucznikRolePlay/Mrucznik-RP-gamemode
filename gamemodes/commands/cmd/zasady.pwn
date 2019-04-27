@@ -28,7 +28,7 @@
 	
 */
 
-CMD:zasady(playerid)
+CMD:zasady(playerid, params[])
 {
     SendClientMessage(playerid,COLOR_P@,"|_________________Zasady ruletki i Black Jack'a_________________|");
 	SendClientMessage(playerid,COLOR_WHITE,"Black Jack - gracz stara siê pokonac krupiera poprzez uzyskanie sumy najbli¿szej 21pkt.");

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:admini(playerid)
+CMD:admini(playerid, params[])
 {
 	if(IsPlayerConnected(playerid))
 	{

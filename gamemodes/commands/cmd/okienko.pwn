@@ -28,7 +28,7 @@
 	
 */
 
-CMD:okienko(playerid)
+CMD:okienko(playerid, params[])
 {
 	if (IsAUrzednik(playerid))
 	{

@@ -30,7 +30,7 @@
 
 
 
-CMD:quitpraca(playerid)
+CMD:quitpraca(playerid, params[])
 {
 	new string[128];
 

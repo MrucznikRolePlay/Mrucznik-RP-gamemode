@@ -28,7 +28,7 @@
 	
 */
 
-CMD:clearwlall(playerid)
+CMD:clearwlall(playerid, params[])
 {
 	new string[128];
 

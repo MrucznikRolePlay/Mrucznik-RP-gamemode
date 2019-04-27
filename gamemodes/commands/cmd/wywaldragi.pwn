@@ -30,7 +30,7 @@
 
 
 
-CMD:wywaldragi(playerid)
+CMD:wywaldragi(playerid, params[])
 {
     if(PlayerInfo[playerid][pDrugs] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie narkotyków");
 	new nick[MAX_PLAYER_NAME], string[128];

@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotoin(playerid)
+CMD:gotoin(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

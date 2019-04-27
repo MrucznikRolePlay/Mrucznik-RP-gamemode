@@ -28,7 +28,7 @@
 	
 */
 
-CMD:mark(playerid)
+CMD:mark(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

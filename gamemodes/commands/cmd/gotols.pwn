@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotols(playerid)
+CMD:gotols(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

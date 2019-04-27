@@ -30,7 +30,7 @@
 
 
 
-CMD:cp(playerid)
+CMD:cp(playerid, params[])
 {
 	new string[128];
 

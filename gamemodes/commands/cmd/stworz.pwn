@@ -28,7 +28,7 @@
 	
 */
 
-CMD:stworz(playerid)
+CMD:stworz(playerid, params[])
 {
     if(!Uprawnienia(playerid, ACCESS_PANEL)) return 1;
     ShowPlayerDialogEx(playerid, D_CREATE, DIALOG_STYLE_LIST, "Panel Boga", "Wybierz co chcesz stworzyæ:\n1.\tOrganizacja", "Wybierz", "WyjdŸ");

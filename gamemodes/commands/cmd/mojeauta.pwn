@@ -29,7 +29,7 @@
 */
 
 
-CMD:mojeauta(playerid)
+CMD:mojeauta(playerid, params[])
 {
 	new string[256];
 	new sendername[MAX_PLAYER_NAME];

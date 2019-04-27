@@ -28,7 +28,7 @@
 	
 */
 
-CMD:gotojet(playerid)
+CMD:gotojet(playerid, params[])
 {
     if(IsPlayerConnected(playerid))
     {

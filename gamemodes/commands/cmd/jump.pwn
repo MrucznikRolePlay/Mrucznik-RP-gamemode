@@ -28,7 +28,7 @@
 	
 */
 
-CMD:jump(playerid)
+CMD:jump(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {
