@@ -170,13 +170,15 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\obiekty\ikony.pwn"
 
 //Modu³y mapy c.d.
-#include "system\komendy.pwn"
 #include "modules\new\niceczlowiek\cmd.pwn"
 #include "modules\new\niceczlowiek\noysi.pwn"
 #include "modules\new\niceczlowiek\wybieralka.pwn"
 
 //sktomdiscordconnect
 #include "modules\discord.pwn"
+
+//komendy
+#include "include_commands.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()

@@ -5568,6 +5568,7 @@ CMD:makeircadmin(playerid, params[])
 	}
 	return 1;
 }
+
 CMD:forceskin(playerid, params[])
 {
 	new string[128];
