@@ -162,6 +162,7 @@
 #include "cmd/kamera_wiezienie.pwn"
 #include "cmd/uniform2.pwn"
 #include "cmd/podszyjsie.pwn"
+#include "cmd/fooc.pwn"
 #include "cmd/federalne.pwn"
 #include "cmd/bus.pwn"
 #include "cmd/stworzdom.pwn"

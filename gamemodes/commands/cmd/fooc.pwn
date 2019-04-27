@@ -28,9 +28,6 @@
 	
 */
 
-
-
-
 CMD:fooc(playerid, params[])
 {
 	new string[256];

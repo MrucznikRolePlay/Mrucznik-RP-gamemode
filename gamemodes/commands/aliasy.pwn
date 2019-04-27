@@ -1,17 +1,5 @@
-//animacje
-CMD:animpomoc(playerid) return cmd_animacje(playerid);
-
-CMD:animlist(playerid) return cmd_animacje(playerid);
-
-CMD:anim(playerid) return cmd_animacje(playerid);
-
-
 //bus
 CMD:businfo(playerid) return cmd_bus(playerid);
-
-
-//caluj
-CMD:animhelp(playerid) return cmd_animacje(playerid);
 
 
 //car
@@ -748,7 +736,6 @@ CMD:statystyki(playerid) return cmd_staty(playerid);
 CMD:stopani(playerid) return cmd_stopanim(playerid);
 
 
-CMD:clothes(playerid) return cmd_skin(playerid);
 
 
 //stworzdom
@@ -1034,10 +1021,6 @@ CMD:stoplesson(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
 CMD:zakonczlekcje(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
 CMD:stoplekcja(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
 CMD:stopegzamin(playerid, params[]) return cmd_zatrzymajlekcje(playerid, params);
-
-//zbrojuj
-CMD:zbrojka(playerid) return cmd_zbrojuj(playerid);
-
 
 //zdejmijkevlar
 CMD:wyrzuckami(playerid) return cmd_zdejmijkevlar(playerid);
