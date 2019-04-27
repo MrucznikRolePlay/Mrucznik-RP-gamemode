@@ -1,0 +1,22 @@
+{
+    "name" : "Dialog",
+    "description" : "Nowy dialog GUI",
+    "defaultName" : "dialog.pwn",
+    "sortOrder" : "100",
+    "category" : "Mrucznik",
+    "iconLight" : "kot.ico",
+    "iconDark" : "kot.ico",
+    "elements" : [
+            {
+                "fileName" : "dialog.pwn",
+                "targetName" : "$itemname$.txt",
+                "replaceParameters" : true,
+                "open" : true
+            }        
+        ],
+    "isProject" : false,
+    "command" : "",
+    "commandParameters" : [],
+    "openFiles" : [],
+    "settingsProcessors" : []
+}

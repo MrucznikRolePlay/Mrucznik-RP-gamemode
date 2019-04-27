@@ -25,8 +25,6 @@
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
 
-#include "modules\niceczlowiek\definicje.pwn"
-
 #define         MAX_VEHICLE_ID_CHANGES          3
 
 //Makra:

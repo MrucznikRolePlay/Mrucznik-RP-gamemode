@@ -83,12 +83,13 @@ native WP_Hash(buffer[], len, const str[]);
 //-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
 #include "system\definicje.pwn"
-#include "modules\niceczlowiek\definicje.pwn"
 #include "system\kolory.pwn"
 #include "system\forward.pwn"
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
-#include "modules\zmienne.pwn"
+#include "system\zmienne.pwn"
+
+//niceczlowiek
 #include "modules\niceczlowiek\general.pwn"
 #include "modules\niceczlowiek\dynamicgui.pwn"
 
@@ -164,13 +165,13 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\niceczlowiek\wybieralka.pwn"
 
 //sktomdiscordconnect
-#include "modules\discord.pwn"
+#include "modules\discord\discord.pwn"
 
 //komendy
 #include "commands\commands.pwn"
 
 //dialogi
-#include "modules\OnDialogResponse.pwn"
+#include "dialogs\OnDialogResponse.pwn"
 #include "modules\premium\premium_dialogs.pwn"
 
 //------------------------------------------------------------------------------------------------------
