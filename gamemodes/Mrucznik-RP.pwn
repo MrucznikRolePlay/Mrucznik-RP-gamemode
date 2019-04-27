@@ -24,6 +24,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 	Inni developerzy:
 		Kubi - zwyk³y skurwysyn
 		Akil - chyba nic nie zrobi³ koniec koñców
+		Veroon - porobi³ porobi³ i uciek³ :(
 		Niceczlowiek - okry³ siê hañb¹ publikuj¹c mapê
 		PECET - dobry skrypter
 		LukeSqly - Niby coœ zacz¹³, ale wysz³o jak zwykle
