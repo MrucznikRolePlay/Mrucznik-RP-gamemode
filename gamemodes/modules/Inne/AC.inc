@@ -259,19 +259,6 @@ static LastVehicleID[MAX_PLAYERS];
 static VehicleIDChanges[MAX_PLAYERS];
 static VehicleIDChangeTime[MAX_PLAYERS];
 
-cmd:gotoczit(playerid)
-{
-    if(PlayerInfo[playerid][pAdmin] > 1 || PlayerInfo[playerid][pNewAP] == 5)
-    {
-        SetPlayerPos(playerid, czitX, czitY, czitZ);
-        SetPlayerVirtualWorld(playerid, 0);
-        SetPlayerInterior(playerid, 0);
-        SendClientMessage(playerid, -1, "Teleportowałeś się na miejsce zbrodni");
-        }
-    }
-    return 1;
-}
-
 public OnPlayerUpdate(playerid)
 {
     AC_pause[playerid] = true;

@@ -140,7 +140,6 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules\new\wejscia\wejscia.pwn"
 #include "modules\new\budki\budki.pwn"
 #include "modules\new\premium\premium.pwn"
-#include "modules\new\premium\premium_dialogs.pwn"
 #include "modules\new\wjedz\wjedz.pwn"
 
 //Inne:
@@ -170,6 +169,10 @@ native WP_Hash(buffer[], len, const str[]);
 
 //komendy
 #include "include_commands.pwn"
+
+//dialogi
+#include "modules\OnDialogResponse.pwn"
+#include "modules\new\premium\premium_dialogs.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()
@@ -226,9 +229,6 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 	StaryCzas[playerid] = GetTickCount();
 	return 1;
 }
-
-//public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
-#include "modules\OnDialogResponse.pwn"
 
 public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 {
