@@ -50,7 +50,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <utils>
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include <YSI_Data\y_iterate>
-#define MAX_COMMANDS 1024
+#define MAX_COMMANDS 1200
 #include <YSI\y_commands>
 #include <YSI\y_groups>
 #include <YSI\y_master>
