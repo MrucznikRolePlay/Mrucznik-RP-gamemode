@@ -57,6 +57,12 @@ YCMD:barierka(playerid, params[], help)
         if(sscanf(params, "s[32]d", var, id)) return sendTipMessage(playerid, "U¿yj /barierka usuñ [ID]");
         if(strcmp(var, "usuñ", true) == 0 ||  strcmp(var, "usun", true) == 0)
         {
+            if(GetPVarInt(playerid, "gatechose_active") == 1)//Zabezpieczenie przed edycj¹ obiektów mapy
+            {
+                DestroySelectionMenu(playerid);
+                SetPVarInt(playerid, "gatechose_active", 0);
+                return 1;
+            }
             if(id < 0 || id > 9) return 1;
             new frac = GetPlayerFraction(playerid);
             if(!BarierState[frac][id]) return 1;

@@ -72,6 +72,20 @@ YCMD:dajklucze(playerid, params[], help)
      				SendClientMessage(playerid, 0xFFC0CB, string);
      				format(string, sizeof(string), "* %s wyjmuje kluczyki i podaje je %s.", sendername ,giveplayer);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					
+					//log 
+					new year, day, month;
+					getdate(year, month, day);
+					format(string, sizeof(string), "[%d|%d|%d] %s [%d] Poda³ kluczyki dla %s [%d] [KEYS: %d]",
+					year, 
+					month,
+					day,
+					GetNick(playerid, true), 
+					PlayerInfo[playerid][pUID],
+					GetNick(playa, true),
+					PlayerInfo[playa][pUID],
+					PlayerInfo[playa][pKluczeAuta]);
+					PayLog(string);
      			}
      			else
      			{
