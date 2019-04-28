@@ -9,7 +9,7 @@
     "elements" : [
             {
                 "fileName" : "dialog.pwn",
-                "targetName" : "$itemname$.txt",
+                "targetName" : "$itemname$.pwn",
                 "replaceParameters" : true,
                 "open" : true
             }        
