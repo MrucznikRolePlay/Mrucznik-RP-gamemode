@@ -1582,6 +1582,8 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	#if DEBUG == 1
 		printf("%s wpisal komende %s", GetNick(playerid), cmdtext);
 	#endif
+	StaryCzas[playerid] = GetTickCount();
+	
 	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
@@ -1602,12 +1604,27 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 
 	switch(success)
 	{
-		case COMMAND_UNDEFINED:
+		case COMMAND_ZERO_RET:
+		{
+			sendErrorMessage(playerid, "Komenda zwróci³a wartoœæ zerow¹."); //TODO: delete
+		}
+		case COMMAND_BAD_PREFIX:
+		{
+			sendErrorMessage(playerid, "Z³y prefix! U¿yj \"/\".");
+		}
+		case COMMAND_DENIED:
+		{
+			sendErrorMessage(playerid, "Nie jesteœ uprawniony do u¿ywania tej komendy.");
+		}
+		case COMMAND_INVALID_INPUT:
+		{
+			sendErrorMessage(playerid, "Podano nieprawid³owe argumenty do komendy.");
+		}
+		case COMMAND_UNDEFINED, COMMAND_HIDDEN:
 		{
 			sendErrorMessage(playerid, "Ta komenda nie istnieje. Wpisz /komendy aby zobaczyæ listê dostêpnych komend.");
 		}
 	}
 
-	StaryCzas[playerid] = GetTickCount();
 	return success;
 }
