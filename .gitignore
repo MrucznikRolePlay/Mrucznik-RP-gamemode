@@ -28,8 +28,7 @@ $RECYCLE.BIN/
 *.db
 *.db-journal
 
-#Scriptfiles and plugins igonre
-scriptfiles/**
+#Plugins igonre
 plugins/**
 
 #AMX file format
