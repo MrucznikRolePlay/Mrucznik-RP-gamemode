@@ -101,6 +101,15 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-------<[ MySQL ]>-------
 #include "modules\mysql\mru_mysql.pwn"
+#include "modules\mysql\mysql_external.pwn"
+#include "modules\mysql\mysql_funkcje.pwn"
+#include "modules\mysql\mysql_ibiza.pwn"
+#include "modules\mysql\mysql_komendy.pwn"
+#include "modules\mysql\mysql_noysi.pwn"
+#include "modules\mysql\mysql_OnDialogResponse.pwn"
+#include "modules\mysql\mysql_premium.pwn"
+#include "modules\mysql\mysql_system_aut.pwn"
+#include "modules\mysql\mysql_system_kp.pwn"
 
 
 //-------<[ 3.0 style ]>-------

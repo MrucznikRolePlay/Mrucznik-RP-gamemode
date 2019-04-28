@@ -36,9 +36,7 @@ YCMD:clearzone(playerid, p[], help)
         if(id < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
         ZoneControl[id] = 0;
         ZoneProtect[id] = 0;
-        new str[64];
-        format(str, 64, "UPDATE `mru_strefy` SET `gang`='0' WHERE `id`='%d'", id);
-        mysql_query(str);
+        MruMySQL_ClearZone(id);
         foreach(new i : Player)
         {
             GangZoneHideForPlayer(i, id);

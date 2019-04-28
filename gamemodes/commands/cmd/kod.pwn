@@ -38,9 +38,7 @@ YCMD:kod(playerid,params[], help)
         {
             if(!(0 < lKey < 6666)) return sendTipMessage(playerid, "U¿yj /kod [kod(od 0 do 6666)]");
             STANOWE_GATE_KEY = lKey;
-            new lStr[64];
-            format(lStr, 64, "UPDATE `mru_config` SET `stanowe_key`='%d'", lKey);
-            mysql_query(lStr);
+            MruMySQL_KodStanowca(lKey);
             SendClientMessage(playerid, COLOR_GRAD2, "Zmieniono");
         }
     }

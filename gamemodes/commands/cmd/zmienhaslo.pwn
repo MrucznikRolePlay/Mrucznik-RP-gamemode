@@ -30,8 +30,6 @@
 
 YCMD:zmienhaslo(playerid, params[], help)
 {
-	new string[256];
-
     if(IsPlayerConnected(playerid))
     {
         if(gPlayerLogged[playerid] == 0)
@@ -59,8 +57,7 @@ YCMD:zmienhaslo(playerid, params[], help)
 
 		
 		WP_Hash(password, sizeof(password), tmppass);
-		format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", password, GetNick(playerid));
-		mysql_query(string);
+		MruMySQL_ChangePassword(GetNick(playerid), password);
 	}
 	return 1;
 }

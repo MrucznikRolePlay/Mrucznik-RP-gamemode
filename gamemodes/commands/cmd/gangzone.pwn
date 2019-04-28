@@ -35,9 +35,7 @@ YCMD:gangzone(playerid, p[], help)
         if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /gangzone [0/1]");
         if(id < 0 || id > 1) return 1;
         ZONE_DISABLED = id;
-        new str[64];
-        format(str, 64, "UPDATE `mru_config` SET `gangzone`='%d'", id);
-        mysql_query(str);
+        MruMySQL_Gangzone(id);
 
         sendTipMessageEx(playerid, COLOR_GRAD2, "OK");
     }

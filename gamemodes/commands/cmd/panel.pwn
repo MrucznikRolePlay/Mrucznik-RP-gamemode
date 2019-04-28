@@ -179,17 +179,13 @@ YCMD:panel(playerid, params[], help)
             new warny = MruMySQL_GetAccInt("Warnings", var);
             if(warny > 0)
             {
-				new escaped_nick[MAX_PLAYER_NAME];
-				mysql_real_escape_string(var, escaped_nick);
-                format(str, sizeof(str), "UPDATE `mru_konta` SET `Warnings` = `Warnings`-1 WHERE `Nick` = '%s'", escaped_nick);
-    	        mysql_query(str);
-
+                MruMySQL_Unwarn(var);
                 format(str, sizeof(str), "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
                 ABroadCast(COLOR_YELLOW,str,1);
-			/*	if(!IsPlayerAdmin(playerid))
+				if(!IsPlayerAdmin(playerid))
 				{
 					SendClientMessage(playerid, COLOR_YELLOW, str);
-				}*/
+				}
                 WarnLog(str);
             }
             else sendTipMessage(playerid, "Gracz nie posiada warnów");
