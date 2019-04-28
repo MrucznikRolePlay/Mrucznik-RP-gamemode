@@ -18,15 +18,17 @@
 		"pawn-lang/YSI-Includes@4.x"
 	],
 	"build": {
-		"version": "3.10.9",
 		"name": "",
+		"version": "3.10.9",
 		"args": [
 			"-d3",
 			"-;+",
 			"-(+",
 			"-Z+"
 		],
-		"includes": ["./include"]
+		"includes": [
+			"./include"
+		]
 	},
 	"runtime": {
 		"version": "0.3.7",
