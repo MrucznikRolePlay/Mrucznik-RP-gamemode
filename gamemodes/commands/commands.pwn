@@ -232,6 +232,7 @@
 #include "cmd/kolo.pwn"
 #include "cmd/kolory.pwn"
 #include "cmd/komandos.pwn"
+#include "cmd/komenda.pwn"
 #include "cmd/komentuj.pwn"
 #include "cmd/komunikat.pwn"
 #include "cmd/konsola.pwn"
@@ -819,6 +820,9 @@ static Aliases()
 
 	//komandos
 	Command_AddAltNamed("komandos", "wino");
+
+	//komenda
+	Command_AddAltNamed("komenda", "command");
 
 	//komentuj
 	Command_AddAltNamed("komentuj", "km");
