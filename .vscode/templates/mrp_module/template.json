@@ -27,7 +27,7 @@
             },
             {
                 "fileName" : "module.inc",
-                "targetName" : "$itemname$.pwn",
+                "targetName" : "$itemname$.inc",
                 "replaceParameters" : true,
                 "open" : true
             }
