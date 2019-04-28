@@ -24,12 +24,6 @@
                 "targetName" : "$itemname$.pwn",
                 "replaceParameters" : true,
                 "open" : true
-            },
-            {
-                "fileName" : "module.inc",
-                "targetName" : "$itemname$.inc",
-                "replaceParameters" : true,
-                "open" : true
             }
         ],
     "isProject" : false,
