@@ -1,0 +1,34 @@
+{
+    "name" : "Moduł",
+    "description" : "Nowy moduł w stylu mapy 3.0. Przed utworzeniem, należy stworzyć folder.",
+    "defaultName" : "module.pwn",
+    "sortOrder" : "100",
+    "category" : "Mrucznik",
+    "iconLight" : "kot.ico",
+    "iconDark" : "kot.ico",
+    "elements" : [
+            {
+                "fileName" : "module.def",
+                "targetName" : "$itemname$.def",
+                "replaceParameters" : true,
+                "open" : true
+            },
+            {
+                "fileName" : "module.hwn",
+                "targetName" : "$itemname$.hwn",
+                "replaceParameters" : true,
+                "open" : true
+            },
+            {
+                "fileName" : "module.pwn",
+                "targetName" : "$itemname$.pwn",
+                "replaceParameters" : true,
+                "open" : true
+            }
+        ],
+    "isProject" : false,
+    "command" : "",
+    "commandParameters" : [],
+    "openFiles" : [],
+    "settingsProcessors" : []
+}

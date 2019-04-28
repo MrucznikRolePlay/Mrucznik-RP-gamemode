@@ -30,8 +30,6 @@
 
 YCMD:zmienhaslo(playerid, params[], help)
 {
-	new string[256];
-
     if(IsPlayerConnected(playerid))
     {
         if(gPlayerLogged[playerid] == 0)
@@ -39,7 +37,7 @@ YCMD:zmienhaslo(playerid, params[], help)
             sendErrorMessage(playerid, "Nie zalogowa³eœ siê!");
             return 1;
         }
-        new tmppass[64], password[129];
+        new tmppass[64], password[WHIRLPOOL_LEN];
 		if(sscanf(params, "s[64]", tmppass))
 		{
 			sendTipMessage(playerid, "U¿yj /zmienhaslo [nowehaslo]");
@@ -59,8 +57,7 @@ YCMD:zmienhaslo(playerid, params[], help)
 
 		
 		WP_Hash(password, sizeof(password), tmppass);
-		format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", password, GetNick(playerid));
-		mysql_query(string);
+		MruMySQL_ChangePassword(GetNick(playerid), password);
 	}
 	return 1;
 }

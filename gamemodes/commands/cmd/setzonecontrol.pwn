@@ -35,9 +35,7 @@ YCMD:setzonecontrol(playerid, p[], help)
         if(sscanf(p, "dd", id, frac)) return sendTipMessage(playerid, "U¿yj /setzonecontrol [ZoneID] [Owner]");
         if(id < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
         ZoneControl[id] = frac;
-        new str[128];
-        format(str, 128, "UPDATE `mru_strefy` SET `gang`='%d' WHERE `id`='%d'", frac, id);
-        mysql_query(str);
+        MruMySQL_SetZoneControl(frac, id);
 
         new org;
         if(frac > 100) org = orgID(frac-100);

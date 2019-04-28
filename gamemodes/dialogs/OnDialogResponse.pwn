@@ -688,12 +688,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 SendClientMessage(id, 0x05CA8CFF, str);
                 format(str, 128, "(PERM) Zapisales prawa %s", GetNick(id));
                 SendClientMessage(playerid, 0x05CA8CFF, str);
-                format(str, 128, "SELECT `UID` FROM `mru_uprawnienia` WHERE `UID`=%d", PlayerInfo[id][pUID]);
-                mysql_query(str);
-                mysql_store_result();
-                if(mysql_num_rows()) format(str, 128, "UPDATE `mru_uprawnienia` SET `FLAGS`= b'%b' WHERE `UID`=%d", ACCESS[id], PlayerInfo[id][pUID]);
-                else format(str, 128, "INSERT INTO `mru_uprawnienia` (`FLAGS`, `UID`) VALUES (b'%b', %d)", ACCESS[id], PlayerInfo[id][pUID]);
-                mysql_query(str);
+                
+				MruMySQL_ZapiszUprawnienia(playerid);
                 printf("(PERM) %s zmienil prawa %s (%d) na %b",GetNick(playerid), GetNick(id), PlayerInfo[id][pUID], ACCESS[id]);
             }
             return 1;
@@ -821,28 +817,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP » Sprawdzanie statystyk gracza", "WprowadŸ nick gracza:                    ", "SprawdŸ", "WyjdŸ");
             return 0;
         }
-        new lStr[256];
-		new nick_escaped[MAX_PLAYER_NAME];
-		mysql_real_escape_string(inputtext, nick_escaped);
-        format(lStr, 256, "SELECT `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s'", nick_escaped);
-        mysql_query(lStr);
-        mysql_store_result();
-        if(mysql_num_rows())
-        {
-            mysql_fetch_row_format(lStr, "|");
-            new plvl, padmin, pzg, ppadmin, ppremium, pmoney, pbank, pnr, pjob, pbp, pmember, porg, pdom, pblock, pzn, pwarn, puid;
-            sscanf(lStr, "p<|>ddddddddddddddddd", plvl, padmin, pzg, ppadmin, ppremium, pmoney, pbank, pnr, pjob, pbp, pmember, porg, pdom, pblock, pzn, pwarn, puid);
-            format(lStr, 256, "> %s {FFFFFF}(UID: %d)",inputtext,puid);
-            SendClientMessage(playerid, COLOR_RED, lStr);
-            format(lStr, 256, "Level: %d ¦ Kasa: %d ¦ Bank: %d ¦ Numer tel.: %d ¦ ZN: %d ¦ Dom: %d", plvl, pmoney, pbank, pnr, pzn, pdom);
-            SendClientMessage(playerid, -1, lStr);
-            format(lStr, 256, "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d : Warny: %d", padmin, ppadmin, pzg, pbp, pblock, pwarn);
-            SendClientMessage(playerid, -1, lStr);
-            format(lStr, 256, "Premium: %d ¦ Praca: %d ¦ Frakcja: %d ¦ Org.: %d", ppremium, pjob, pmember, porg);
-            SendClientMessage(playerid, -1, lStr);
-            SendClientMessage(playerid, COLOR_YELLOW, "--------------------------------------------------------------------------");
-            mysql_free_result();
-        }
+		MruMySQL_PobierzStatystyki(playerid, inputtext);
 
         return 0;
     }
@@ -1061,29 +1036,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             return 1;
         }
         //OK
-        new query[256],ip[16], str[800];
-        mysql_real_escape_string(inputtext, ip);
-        format(query, sizeof(query), "SELECT `nadal_uid`, `nadal`, `powod`, `czas`, `dostal`, `dostal_uid`, `typ` FROM `mru_bany` WHERE `IP` = '%s' AND `typ`>1 ORDER BY `czas` DESC LIMIT 4", ip);
-    	mysql_query(query);
-    	mysql_store_result();
-        if(mysql_num_rows())
-        {
-            while(mysql_fetch_row_format(query, "|"))
-            {
-                new powod[64], admin[32], id, czas[32], pid, nick[32], typ;
-    		    sscanf(query, "p<|>ds[32]s[64]s[32]s[32]dd", id, admin, powod, czas,nick,pid, typ);
-                new resultfit[80];
-                if(strlen(powod) > 0)
-                    format(resultfit, 80, "{079FE1}%s\n", powod);
-                format(str, 800, "%s{FFFFFF}Gracz: %s\t\tPID: %d\tIP: %s\nNada³: %s\t\tPID: %d\n%sData: %s\tStatus: %s\n",str, nick,pid,ip,admin,id, resultfit, czas, (typ == WARN_BAN) ? ("{FF0000}BAN") : ("{00FF00}UNBAN"));
-            }
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ_INFO, DIALOG_STYLE_LIST, "M-RP » Panel zarz¹dzania karami", str, "Wróæ", "");
-        }
-        else
-        {
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ_INFO, DIALOG_STYLE_LIST, "M-RP » Panel zarz¹dzania karami", "Brak wyników", "Wróæ", "");
-        }
-        mysql_free_result();
+		MruMySQL_ZnajdzBanaPoIP(playerid, inputtext);
     }
     else if(dialogid == D_PANEL_KAR_ZNAJDZNICK)
     {
@@ -1095,29 +1048,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             return 1;
         }
         //OK
-        new query[256],nick[MAX_PLAYER_NAME], str[800];
-        mysql_real_escape_string(inputtext, nick);
-        format(query, sizeof(query), "SELECT `nadal_uid`, `nadal`, `powod`, `czas`, `IP`, `dostal_uid`, `typ` FROM `mru_bany` WHERE `dostal` = '%s' AND `typ`>1 ORDER BY `czas` DESC LIMIT 4", nick);
-    	mysql_query(query);
-    	mysql_store_result();
-        if(mysql_num_rows())
-        {
-            while(mysql_fetch_row_format(query, "|"))
-            {
-                new powod[64], admin[32], id, czas[32], ip[16], pid, typ;
-    		    sscanf(query, "p<|>ds[32]s[64]s[32]s[16]dd", id, admin, powod, czas,ip, pid, typ);
-                new resultfit[80];
-                if(strlen(powod) > 0)
-                    format(resultfit, 80, "{079FE1}%s\n", powod);
-                format(str, 800, "%s{FFFFFF}Gracz: %s\t\tPID: %d\tIP: %s\nNada³: %s\t\tPID: %d\n%sData: %s\tStatus: %s\n",str, nick,pid,ip,admin,id, resultfit, czas, (typ == WARN_BAN) ? ("{FF0000}BAN") : ("{00FF00}UNBAN"));
-            }
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ_INFO, DIALOG_STYLE_LIST, "M-RP » Panel zarz¹dzania karami", str, "Wróæ", "");
-        }
-        else
-        {
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ_INFO, DIALOG_STYLE_LIST, "M-RP » Panel zarz¹dzania karami", "Brak wyników", "Wróæ", "");
-        }
-        mysql_free_result();
+        MruMySQL_ZnajdzBanaPoNicku(playerid, inputtext);
     }
     else if(dialogid == D_PANEL_KAR_ZNAJDZ_INFO)
     {
@@ -15364,9 +15295,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return RunCommand(playerid, "/edytuj",  "");
         new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        format(lStr, 128, "Usuniêto organizacjê %s.", OrgInfo[id][o_Name]);
+        format(lStr, sizeof(lStr), "Usuniêto organizacjê %s.", OrgInfo[id][o_Name]);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
-        format(lStr, 128, "Organizacja usuniêta przez %s.", GetNick(playerid));
+        format(lStr, sizeof(lStr), "Organizacja usuniêta przez %s.", GetNick(playerid));
         foreach(new i : Player)
         {
             if(GetPlayerOrg(i) == OrgInfo[id][o_UID])
@@ -15375,15 +15306,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 orgUnInvitePlayer(i);
             }
         }
-
-        format(lStr, 128, "UPDATE `mru_konta` SET `FMember`=0, `Rank`=0 WHERE `FMember`='%d'", OrgInfo[id][o_UID]);
-        mysql_query(lStr);
-
-        format(lStr, 128, "DELETE FROM `mru_org` WHERE `UID`='%d'", OrgInfo[id][o_UID]);
-        mysql_query(lStr);
-
-        format(lStr, 128, "UPDATE `mru_strefy` SET `gang`=0 WHERE `gang`='%d'", OrgInfo[id][o_UID]);
-        mysql_query(lStr);
+		MruMySQL_UsunOrganizacje(id);
 
         for(new j=0;j<MAX_ZONES;j++)
         {

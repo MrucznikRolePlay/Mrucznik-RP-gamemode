@@ -66,17 +66,7 @@ YCMD:dajlideraorg(playerid, params[], help)
     }
     else
     {
-        SendClientMessage(playerid, COLOR_RED, "================ LISTA LIDERÓW ================");
-        format(str, 128, "SELECT `Nick` FROM `mru_konta` WHERE `FMember`='%d' AND `Rank`>1000", family);
-        mysql_query(str);
-        mysql_store_result();
-        new nick[24];
-        while(mysql_fetch_row_format(str, "|"))
-        {
-            sscanf(str, "p<|>s[24]", nick);
-            SendClientMessage(playerid, -1, nick);
-        }
-        SendClientMessage(playerid, COLOR_RED, "================ KONIEC ================");
+        MruMySQL_ListaLiderow(playerid, family);
     }
     return 1;
 }

@@ -42,8 +42,7 @@ YCMD:zonedelay(playerid, p[], help)
         }
         if(id < 60 || id > 900) { return sendTipMessageEx(playerid, COLOR_GRAD2, "Czas od 60 do 900s!"); }
         ZONE_DEF_TIME = id;
-        format(str, 64, "UPDATE `mru_config` SET `gangtimedelay`='%d'", id);
-        mysql_query(str);
+        MruMySQL_ZoneDelay(id);
 
         sendTipMessageEx(playerid, COLOR_GRAD2, "OK");
         return 1;

@@ -72,7 +72,7 @@ MruMySQL_CreateAccount(playerid, pass[])
 	if(!MYSQL_ON) return 0;
 	
 	new query[256];
-    new password[129];
+    new password[WHIRLPOOL_LEN];
 	WP_Hash(password, sizeof(password), pass);
 	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`) VALUES ('%s', '%s')", GetNick(playerid), password);
 	mysql_query(query);

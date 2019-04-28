@@ -59,19 +59,7 @@ YCMD:czyjtonumer(playerid, params[], help)
 			format(string, sizeof(string), "Osoby z numerem %d:", number);
 			SendClientMessage(playerid, COLOR_WHITE, string);
 			
-			format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `PhoneNr`='%d'", number);
-			mysql_query(string);
-			mysql_store_result();
-			if(mysql_num_rows())
-			{
-				while(mysql_fetch_row_format(string, "|"))
-				{
-					new nick[MAX_PLAYER_NAME];
-					sscanf(string, "p<|>s[24]", nick);
-					SendClientMessage(playerid, COLOR_WHITE, nick);
-				}
-			}
-			mysql_free_result();
+			MruMySQL_CzyjToNumer(playerid, number);
 		}
 		else
 		{

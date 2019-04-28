@@ -229,7 +229,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 IsAHeadAdmin(playerid)
 {
-	if(!IsAHeadAdmin(playerid))
+	if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
 		return 1;
 	}
