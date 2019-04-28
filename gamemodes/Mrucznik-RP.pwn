@@ -114,46 +114,47 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-------<[ 3.0 style ]>-------
 //.def
-#include "modules\chaty\chaty.def"
-#include "modules\admin_duty_system\adminduty.def"
-#include "modules\admin\admin.def"
-#include "modules\sila\sila.def"
-#include "modules\biznes\biznes.def"
-#include "modules\bramy\bramy.def"
-#include "modules\wejscia\wejscia.def"
-#include "modules\budki\budki.def"
-#include "modules\premium\premium.def"
-#include "modules\wjedz\wjedz.def"
+#include "26modules\chaty\chaty.def"
+#include "26modules\admin_duty_system\adminduty.def"
+#include "26modules\admin\admin.def"
+#include "26modules\sila\sila.def"
+#include "26modules\biznes\biznes.def"
+#include "26modules\bramy\bramy.def"
+#include "26modules\wejscia\wejscia.def"
+#include "26modules\budki\budki.def"
+#include "26modules\premium\premium.def"
+#include "26modules\wjedz\wjedz.def"
 
 //.hwn
-#include "modules\chaty\chaty.hwn"
-#include "modules\admin_duty_system\adminduty.hwn"
-#include "modules\admin\admin.hwn"
-#include "modules\sila\sila.hwn"
-#include "modules\biznes\biznes.hwn"
-#include "modules\bramy\bramy.hwn"
-#include "modules\wejscia\wejscia.hwn"
-#include "modules\budki\budki.hwn"
-#include "modules\premium\premium.hwn"
-#include "modules\wjedz\wjedz.hwn"
+#include "26modules\chaty\chaty.hwn"
+#include "26modules\admin_duty_system\adminduty.hwn"
+#include "26modules\admin\admin.hwn"
+#include "26modules\sila\sila.hwn"
+#include "26modules\biznes\biznes.hwn"
+#include "26modules\bramy\bramy.hwn"
+#include "26modules\wejscia\wejscia.hwn"
+#include "26modules\budki\budki.hwn"
+#include "26modules\premium\premium.hwn"
+#include "26modules\wjedz\wjedz.hwn"
 
 //.pwn
-#include "modules\admin_duty_system\adminduty.pwn"
-#include "modules\admin\admin.pwn"
-#include "modules\chaty\chaty.pwn"
-#include "modules\chaty\chaty_komunikaty.pwn"
-#include "modules\chaty\komunikaty.pwn"
-#include "modules\sila\sila.pwn"
-#include "modules\biznes\biznes.pwn"
-#include "modules\bramy\bramy.pwn"
-#include "modules\wejscia\wejscia.pwn"
-#include "modules\budki\budki.pwn"
-#include "modules\premium\premium.pwn"
-#include "modules\wjedz\wjedz.pwn"
-#include "modules\discord\discord.pwn"
+#include "26modules\admin_duty_system\adminduty.pwn"
+#include "26modules\admin\admin.pwn"
+#include "26modules\chaty\chaty.pwn"
+#include "26modules\chaty\chaty_komunikaty.pwn"
+#include "26modules\chaty\komunikaty.pwn"
+#include "26modules\sila\sila.pwn"
+#include "26modules\biznes\biznes.pwn"
+#include "26modules\bramy\bramy.pwn"
+#include "26modules\wejscia\wejscia.pwn"
+#include "26modules\budki\budki.pwn"
+#include "26modules\premium\premium.pwn"
+#include "26modules\premium\premium_dialogs.pwn"
+#include "26modules\wjedz\wjedz.pwn"
 
 
 //-------<[ Inne ]>-------
+#include "modules\discord\discord.pwn"
 #include "modules\inne\ibiza.inc"
 #include "modules\inne\system_aut.pwn"
 #include "modules\inne\system_kp.pwn"
@@ -177,7 +178,6 @@ native WP_Hash(buffer[], len, const str[]);
 
 //-------<[ Dialogi ]>-------
 #include "dialogs\OnDialogResponse.pwn"
-#include "modules\premium\premium_dialogs.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()
