@@ -27,16 +27,22 @@
 
 #define         MAX_VEHICLE_ID_CHANGES          3
 
-//Makra:
+//------------------------------------------------------------------------------
+//                              MARKA
+//------------------------------------------------------------------------------
 #define PreloadAnimLib(%1,%2)   ApplyAnimation(%1,%2,"null",0.0,0,0,0,0,0)
 #define Distance3D(%1,%2,%3,%4,%5,%6) (VectorSize(%1-%4,%2-%5,%3-%6))/100)
 #define Distance3D2(%1,%2,%3,%4,%5,%6) (VectorSize(%1-%4,%2-%5,%3-%6))*1000.0)
+//Keys
+#define PRESSING(%0,%1) \
+	(%0 & (%1))
 #define PRESSED(%0) \
         (((newkeys & (%0)) == (%0)) && ((oldkeys & (%0)) != (%0)))
 #define RELEASED(%0) \
 	(((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
+
 
 //Œwiat anty czita ¿eby da³ porz¹dny desync graczowi aby ju¿ nic nie zjeba³ :D
 #define AC_WORLD	50005
@@ -52,7 +58,6 @@
 #define SPAM_PROTECTION_VALUE 		3 			//iloœæ dzia³añ które mo¿na wykonaæ przed w³¹czeniem ochrony antyspamowej 
 #define COLOR_STRING_LENGTH			6			//d³ugoœæ ci¹gu znaków odpowiedzialna za kolor
 #define NOT_FOUND					-1			//u¿ywane do strfind
-#define STREAM_DISTANCE 300.0
 
 #define BIKE_COST 30000
 //KB

@@ -71,11 +71,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #endif
 #include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
 #include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
+#include <whirlpool>
 #include <timestamptodate>
 #include <discord-connector>
-
-//-------<[ Natives ]>-------
-native WP_Hash(buffer[], len, const str[]);
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
@@ -5944,7 +5942,7 @@ OnPlayerLogin(playerid, password[])
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerLogin - begin", GetNick(playerid), playerid);
 	#endif
-    new nick[MAX_PLAYER_NAME], string[256], accountPass[129], hashedPassword[129];
+    new nick[MAX_PLAYER_NAME], string[256], accountPass[WHIRLPOOL_LEN], hashedPassword[WHIRLPOOL_LEN];
 	GetPlayerName(playerid, nick, sizeof(nick));
     format(accountPass, sizeof(accountPass), "%s", MruMySQL_ReturnPassword(nick));
 

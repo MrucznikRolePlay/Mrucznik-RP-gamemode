@@ -37,7 +37,7 @@ YCMD:zmienhaslo(playerid, params[], help)
             sendErrorMessage(playerid, "Nie zalogowa³eœ siê!");
             return 1;
         }
-        new tmppass[64], password[129];
+        new tmppass[64], password[WHIRLPOOL_LEN];
 		if(sscanf(params, "s[64]", tmppass))
 		{
 			sendTipMessage(playerid, "U¿yj /zmienhaslo [nowehaslo]");

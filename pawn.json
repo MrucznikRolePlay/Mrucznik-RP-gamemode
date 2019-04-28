@@ -15,7 +15,8 @@
 		"maddinat0r/sscanf:v2.8.3",
 		"maddinat0r/samp-log:v0.4",
 		"maddinat0r/samp-discord-connector:v0.2.4",
-		"pawn-lang/YSI-Includes@4.x"
+		"pawn-lang/YSI-Includes@4.x",
+		"Southclaws/samp-whirlpool"
 	],
 	"build": {
 		"name": "",
@@ -50,7 +51,7 @@
 		"sleep": 5,
 		"maxnpc": 0,
 		"stream_rate": 1000,
-		"stream_distance": 200,
+		"stream_distance": 300,
 		"onfoot_rate": 30,
 		"incar_rate": 30,
 		"weapon_rate": 30,
