@@ -51,6 +51,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
 #include <YSI_Data\y_iterate>
 #include <YSI\y_commands>
+#include <YSI\y_groups>
 #include <YSI\y_master>
 #include <md5>
 #include <double-o-files2>
@@ -63,14 +64,11 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <true_random>
 
 //-------<[ Pluginy ]>-------
-#include <crashdetect>                  // By Zeex, 4.18.1              https://github.com/Zeex/samp-plugin-crashdetect/releases
-#include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
-#define REGEX_ON
-#if defined REGEX_ON
-#include <libRegEx>						// By Koala818 v0.2				https://github.com/FF-Koala/Regular-Expressions-Plugin
-#endif
-#include <streamer>						// By Incognito, 2.9.2			http://forum.sa-mp.com/showthread.php?t=102865
-#include <mysql_R5>						// By BlueG, R41-4				https://github.com/pBlueG/SA-MP-MySQL
+#include <crashdetect>
+#include <sscanf2>
+#include <libRegEx>
+#include <streamer>
+#include <mysql_R5>
 #include <whirlpool>
 #include <timestamptodate>
 #include <discord-connector>
@@ -209,10 +207,10 @@ public OnGameModeInit()
 	#endif
 	AntiDeAMX(); // Can't touch this
 	WasteDeAMXersTime(); //Hammer Time
-	#if defined REGEX_ON
+	
 	regex_syntax(SYNTAX_PERL); //regex
 	regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
-	#endif
+
 
 	#if DEBUG == 1
 	if(dini_Exists("production.info"))

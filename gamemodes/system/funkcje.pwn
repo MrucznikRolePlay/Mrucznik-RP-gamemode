@@ -352,13 +352,9 @@ public OznaczCzitera(playerid)
 
 stock IsAValidURL(string[])
 {
-	#if defined REGEX_ON
 	if(regex_exmatch(string, regexURL) >= 0 )
 		return 1;
 	return 0;
-	#else
-	return 1;
-	#endif
 }
 stock GetFreeVehicleSeat(vehicleid)
 {
