@@ -1117,6 +1117,7 @@ ZerujZmienne(playerid)
 
     PlayerInfo[playerid][pDesc][0] = EOS;
 
+	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
 	komentator[playerid] = 0;//¯u¿el
 	okrazenia[playerid] = 0;//¯u¿el

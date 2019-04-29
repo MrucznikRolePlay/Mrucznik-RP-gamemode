@@ -1561,7 +1561,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_
 	#if DEBUG == 1
 		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
 	#endif
-	return success;
+	return COMMAND_OK;
 }
 
 /*
@@ -1584,7 +1584,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	#endif
 
 	//antyspam
-    if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100 && StaryCzas[playerid] != 0)
+    if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
 		return COMMAND_OK;
