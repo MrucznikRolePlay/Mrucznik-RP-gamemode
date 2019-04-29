@@ -15,7 +15,8 @@
 		"maddinat0r/samp-log:v0.4",
 		"maddinat0r/samp-discord-connector:v0.2.4",
 		"pawn-lang/YSI-Includes@4.x",
-		"Southclaws/samp-whirlpool"
+		"Southclaws/samp-whirlpool",
+		"Wuzi/vending"
 	],
 	"build": {
 		"name": "",

@@ -1561,7 +1561,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_
 	#if DEBUG == 1
 		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
 	#endif
-	return COMMAND_OK;
+	return success;
 }
 
 /*

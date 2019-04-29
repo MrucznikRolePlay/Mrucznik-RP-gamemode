@@ -44,25 +44,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <a_samp>
 #define FIX_ispacked 0 
 #include <fixes>
-#include <a_http>
-#include <strlib>
-#include <callbacks>
-#include <utils>
-#include <nex-ac>    		// By NexiusTailer, v1.9.10	r1	https://github.com/NexiusTailer/Nex-AC
-#include <YSI_Data\y_iterate>
-#define MAX_COMMANDS 1200
-#include <YSI\y_commands>
-#include <YSI\y_groups>
-#include <YSI\y_master>
-#include <md5>
-#include <double-o-files2>
-#include <dialogs>
-#include <fadescreen>
-#include <ACSBM>
-#include <timestamp>
-#define AC_MAX_CONNECTS_FROM_IP		2
-#include <systempozarow>   //System Po¿arów v0.1 by PECET
-#include <true_random>
 
 //-------<[ Pluginy ]>-------
 #include <crashdetect>
@@ -73,6 +54,27 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <whirlpool>
 #include <timestamptodate>
 #include <discord-connector>
+
+//-------<[ Include ]>-------
+#include <a_http>
+#include <strlib>
+#include <callbacks>
+#include <utils>
+#include <YSI_Data\y_iterate>
+#define MAX_COMMANDS 1200
+#include <YSI\y_commands>
+#include <YSI\y_groups>
+#include <YSI\y_master>
+#include <nex-ac>
+#include <md5>
+#include <double-o-files2>
+#include <dialogs>
+#include <fadescreen>
+#include <ACSBM>
+#include <timestamp>
+#define AC_MAX_CONNECTS_FROM_IP		2
+#include <systempozarow>   //System Po¿arów v0.1 by PECET
+#include <true_random>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
