@@ -64,6 +64,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define MAX_COMMANDS 1200
 #include <YSI\y_commands>
 #include <YSI\y_groups>
+#include <YSI\y_hooks>
 #include <YSI\y_master>
 #include <nex-ac>
 #include <md5>
