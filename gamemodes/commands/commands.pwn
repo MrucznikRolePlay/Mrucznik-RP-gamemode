@@ -1582,8 +1582,18 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	#if DEBUG == 1
 		printf("%s wpisal komende %s", GetNick(playerid), cmdtext);
 	#endif
-	StaryCzas[playerid] = GetTickCount();
-	
+
+	//antyspam
+    if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100 || StaryCzas[playerid] == 0)
+	{
+		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
+		return COMMAND_OK;
+	}
+	else 
+	{
+		StaryCzas[playerid] = GetTickCount();
+	}
+
 	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
@@ -1595,12 +1605,6 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
         SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
         return COMMAND_DISABLED;
     }
-
-    if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)//antyspam
-	{
-		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
-		return COMMAND_DENIED;
-	}
 
 	switch(success)
 	{
@@ -1618,7 +1622,11 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		}
 		case COMMAND_INVALID_INPUT:
 		{
-			sendErrorMessage(playerid, "Podano nieprawid³owe argumenty do komendy.");
+			sendErrorMessage(playerid,. "Podano nieprawid³owe argumenty do komendy.");
+		}
+		case COMMAND_NO_PLAYER:
+		{
+			sendErrorMessage(playerid, "Nie powinieneœ istnieæ.");
 		}
 		case COMMAND_UNDEFINED, COMMAND_HIDDEN:
 		{
