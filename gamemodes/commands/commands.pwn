@@ -1622,7 +1622,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		}
 		case COMMAND_INVALID_INPUT:
 		{
-			sendErrorMessage(playerid,. "Podano nieprawid³owe argumenty do komendy.");
+			sendErrorMessage(playerid, "Podano nieprawid³owe argumenty do komendy.");
 		}
 		case COMMAND_NO_PLAYER:
 		{
