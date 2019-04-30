@@ -21,7 +21,10 @@ new nickRP[MAX_PLAYERS][MAX_PLAYER_NAME];
 new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
 new bool:bramki_sasd_state[18];
-
+//vinyl club
+new cenaNorm = 50000;
+new cenaVIP = 80000;
+new kasjerkaWolna = 666;
 //PizzaJob
 new PizzaJob[MAX_PLAYERS] = 0;
 new Actor01;

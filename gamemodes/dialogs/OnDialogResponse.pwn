@@ -141,6 +141,113 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DajKase(playerid, -30000);
 		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i øycie");
 	}	
+	else if(dialogid == 6999)
+	{
+		if(!response) return 1;
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0://Open/Close/nUstal cene Norm./nUstal cene VIP/nUstal cene napoi
+				{
+					sendErrorMessage(playerid, "Ta opcja bÍdzie dostÍpna wkrÛtce!");
+				}
+				case 1:
+				{
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "Wprowadü poniøej kwotÍ, ktÛra ktoú bÍdzie musia≥ zap≥aciÊ za bilet Normalny", "Wybierz", "OdrzuÊ");
+					SetPVarInt(playerid, "b-wybor", 1);
+				}
+				case 2:
+				{
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "Wprowadü poniøej kwotÍ, ktÛra ktoú bÍdzie musia≥ zap≥aciÊ za bilet Normalny", "Wybierz", "OdrzuÊ");
+					SetPVarInt(playerid, "b-wybor", 2);
+				}
+				case 3:
+				{
+					sendErrorMessage(playerid, "Ta opcja bÍdzie dostÍpna wkrÛtce!");
+				}
+			}
+		}
+	}
+	else if(dialogid == 6998)
+	{
+		if(!response) return 1;
+		if(response)
+		{
+			new cValue = FunkcjaK(inputtext);
+			if(cValue > 100 && cValue <= 500000)
+			{
+				if(GetPVarInt(playerid, "p-wybor") == 1)
+				{
+					cenaNorm = cValue; 
+				}
+				else if(GetPVarInt(playerid, "p-wybor") == 2)
+				{
+					cenaVIP = cValue; 
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Wystπpi≥ b≥πd! SprÛbuj dokonaÊ reloga");
+					return 1;
+				}
+			}
+			else 
+			{
+				sendErrorMessage(playerid, "Koszt biletu od 100$ do 500.000$");
+				return 1;
+			}
+		}
+	}
+	else if(dialogid == 6997)
+	{
+		if(!response)
+		{
+			kasjerkaWolna = 666; 
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(GetPlayerMoney(playerid) >= cenaNorm)
+					{
+						ZabierzKase(playerid, cenaNorm); 
+						SetPVarInt(playerid, "Vinyl-bilet", 1);//2 = VIP
+						sendTipMessage(playerid, "Otrzyma≥eú bilet zwyk≥y do vinyl clubu");
+						Sejf_Add(FRAC_SN, cenaNorm);
+						Sejf_Save(FRAC_SN);
+						kasjerkaWolna = 666; 
+					}
+					else 
+					{
+						sendErrorMessage(playerid, "Brak wystarczajπcej kwoty!");
+						kasjerkaWolna = 666; 
+						return 1;
+					}
+				}
+				case 1:
+				{
+					if(GetPlayerMoney(playerid) >= cenaVIP)
+					{
+						ZabierzKase(playerid, cenaVIP); 
+						SetPVarInt(playerid, "Vinyl-bilet", 2);//2 = VIP
+						sendTipMessage(playerid, "Otrzyma≥eú bilet VIP do vinyl clubu");
+						Sejf_Add(FRAC_SN, cenaVIP);
+						Sejf_Save(FRAC_SN);
+						kasjerkaWolna = 666; 
+					}
+					else 
+					{
+						sendErrorMessage(playerid, "Brak wystarczajπcej kwoty!");
+						kasjerkaWolna = 666; 
+						return 1;
+					}
+				}
+			}
+		}
+	}
 	//PAèDZIOCH
 	else if(dialogid == DIALOGID_MUZYKA) 
 	{
