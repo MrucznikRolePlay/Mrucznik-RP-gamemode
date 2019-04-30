@@ -56,6 +56,9 @@ YCMD:zmienhp(playerid, params[], help)
 						printf("SETHP: AdmCmd: %s da³ %d hp %s", sendername, health,  giveplayer);
 					    SetVehicleHealth(GetPlayerVehicleID(playa), health);
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
+						new string[128];
+						format(string, sizeof(string), "%s da³ %d hp dla %s", sendername, health, giveplayer);
+						SendMessageToAdmin(string, COLOR_P@);
 						if(GetPlayerAdminDutyStatus(playerid) == 1)
 						{
 							iloscInne[playerid] = iloscInne[playerid]+1;
