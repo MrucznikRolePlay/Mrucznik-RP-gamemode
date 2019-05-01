@@ -19,7 +19,7 @@
 
 // Opis:
 /*
-	
+	Zmienia pogodê dla gracza o podanym ID.
 */
 
 
@@ -32,22 +32,34 @@ YCMD:pogoda(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 1)
+        if(PlayerInfo[playerid][pAdmin] < 1 || !IsAScripter(playerid))
 		{
 		    noAccessMessage(playerid);
 		    return 1;
 		}
-		new weather;
-		if( sscanf(params, "d", weather))
+		new weather, giveplayerid;
+		if( sscanf(params, "k<fix>d", giveplayerid, weather))
 		{
-		    sendTipMessage(playerid, "U¿yj /pogoda [pogodaid]");
+		    sendTipMessage(playerid, "U¿yj /pogoda [ID/Czêœæ nicku] [pogodaid]");
 		    return 1;
 		}
+		if(weather < 2||weather > 20)
+		{ 
+			sendTipMessageEx(playerid, COLOR_GREY, "Id pogody od 2 do 20 !"); 
+			return 1; 
+		}
+		if(IsPlayerConnected(giveplayerid))
+		{
+			sendErrorMessage(playerid, "Nie ma takiego gracza!");
+			return 1;
+		}
 
-
-		if(weather < 2||weather > 20) { sendTipMessageEx(playerid, COLOR_GREY, "Id pogody od 2 do 20 !"); return 1; }
-		SetPlayerWeatherEx(playerid, weather);
-		sendTipMessageEx(playerid, COLOR_GREY, "Pogoda zmieniona !");
+		SetPlayerWeatherEx(giveplayerid, weather);
+		new string[128];
+		format(string, sizeof(string), "Admin %s zmieni³ pogodê dla %s na %d", GetNick(playerid), GetNick(giveplayerid, true), weather); 
+		SendMessageToAdmin(string, COLOR_P@);
+		format(string, sizeof(string), "Administrator %s zmieni³ Ci pogodê na %d", GetNick(playerid), weather);
+		sendTipMessage(giveplayerid, string); 
 	}
 	return 1;
 }
