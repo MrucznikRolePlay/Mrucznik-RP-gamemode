@@ -5634,17 +5634,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
 		        switch(listitem)
 				{
-				    case 0://spawnuj kluczyki
+				    case 0://spawnuj kluczyki - tu jest bug?
 				    {
-			    		if(CarData[idx][c_ID] != 0)
+			    		if(CarData[idx][c_ID] == 0)
 			    		{
 		                   SendClientMessage(playerid, 0xFFC0CB, "Pojazd do którego masz kluczyki jest ju¿ zespawnowany");
-		      			}
-		      			else
-		      			{
-                            Car_Spawn(idx);
-		                    SendClientMessage(playerid, 0xFFC0CB, "Twój pojazd zosta³ zrespawnowany");
-		                }
+						   return 1;
+						}
+                        Car_Spawn(idx);
+		                SendClientMessage(playerid, 0xFFC0CB, "Twój pojazd zosta³ zrespawnowany");
+		                
 				    }
 				    case 1://ZnajdŸ
 				    {
