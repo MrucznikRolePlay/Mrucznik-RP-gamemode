@@ -63,6 +63,11 @@ YCMD:dajbilet(playerid, params[], help)
     {
         if(kaska[playerid] >= 20000)
 		{
+			if(IsPlayerConnected(playerid))
+			{
+				sendTipMessage(playerid, "U¿yj /panelvinyl");
+				return 1;
+			}
 			new giveplayerid, typ, string[128];
 			if(sscanf(params, "k<fix>D(1)", giveplayerid, typ))
 			{

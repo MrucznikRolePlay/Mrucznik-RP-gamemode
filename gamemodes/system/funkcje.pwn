@@ -4623,6 +4623,11 @@ stock PayLog(text[])
     new plik[32] = "logi/pay.log";
     Log(plik, text);
 }
+stock AutoLog(text[])
+{
+	new plik[32] = "logi/auta.log";
+	Log(plik, text);
+}
 stock BankomatLog(text[])
 {
 

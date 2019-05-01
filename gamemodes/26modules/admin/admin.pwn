@@ -243,6 +243,19 @@ IsAScripter(playerid)
 	}
 	return 0;
 }
+stock SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bie
+{
+	foreach(new i : Player)
+	{
+		if(GetPlayerAdminDutyStatus(i) == 1)
+		{
+			new stradm[256];
+			format(stradm, sizeof(stradm), "AdmCmd: %s", text);
+			SendClientMessage(i, mColor, stradm);
+		}
+	}
+	return 1;
+}
 stock KickPlayerTXD(playerid, adminid, reason[])
 {
     //PlayerLogged[playerid]=0;
