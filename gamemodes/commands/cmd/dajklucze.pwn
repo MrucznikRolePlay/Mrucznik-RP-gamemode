@@ -85,7 +85,7 @@ YCMD:dajklucze(playerid, params[], help)
 					GetNick(playa, true),
 					PlayerInfo[playa][pUID],
 					PlayerInfo[playa][pKluczeAuta]);
-					PayLog(string);
+					AutoLog(string);
      			}
      			else
      			{

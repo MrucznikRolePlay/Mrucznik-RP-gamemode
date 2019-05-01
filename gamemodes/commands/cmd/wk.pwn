@@ -50,7 +50,7 @@ YCMD:wk(playerid, params[], help)
 		GetNick(playerid, true),
 		PlayerInfo[playerid][pUID],
 		PlayerInfo[playerid][pKluczeAuta]);
-		PayLog(string);
+		AutoLog(string);
   	}
   	else
   	{
