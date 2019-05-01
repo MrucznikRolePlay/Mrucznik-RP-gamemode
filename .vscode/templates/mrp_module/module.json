@@ -1,0 +1,33 @@
+{
+    "name": "Module",
+    "description": "kek",
+    "commands": [
+        {
+            "name": "kick",
+            "description": "Komenda kickuje graczy",
+            "permissions": ["global", "admin"],
+            "aliases": ["kickuj", "wyjebnooba"],
+            "parameters": [
+                {
+                    "name": "giveplayerid",
+                    "type": "integer",
+                    "defaultValue": "2",
+                    "description": "gracz"
+                }
+            ]
+        },
+        {
+            "name": "kick",
+            "description": "Komenda kickuje graczy",
+            "permissions": ["global", "admin"],
+            "aliases": ["kickuj", "wyjebnooba"],
+            "parameters": [
+                {
+                    "name": "giveplayerid",
+                    "type": "integer",
+                    "defaultValue": "2"
+                }
+            ]
+        }
+    ]
+}

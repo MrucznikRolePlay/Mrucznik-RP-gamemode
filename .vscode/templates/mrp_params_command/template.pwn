@@ -47,5 +47,6 @@ YCMD:$itemname$(playerid, params[], help)
     }
 
     //command body
+    command_$itemname$(playerid, id);
     return 1;
 }

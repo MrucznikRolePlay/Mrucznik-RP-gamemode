@@ -30,6 +30,18 @@
 	
 */
 
+command_$itemname$()
+{
+    new command = Command_GetId("$itemname$")
+
+    //aliases
+    Command_AddAlt(command, "ALIAS");
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    Group_SetCommand(group, command, true);
+}
+
 YCMD:$itemname$(playerid, params[], help)
 {
     if (help)

@@ -196,8 +196,7 @@ main()
 	print("P | ---         O          --- | P");
 	print("----------------------------------\n");
 	//exit;
-	AntiDeAMX();
-	WasteDeAMXersTime();
+	AntiDeAMX(); // Can't touch this
 }
 //------------------------------------------------------------------------------------------------------
 
@@ -206,44 +205,74 @@ main()
 
 public OnGameModeInit()
 {
+	//-------<[ Debug check ]>-------
 	#if DEBUG == 1
 		printf("OnGameModeInit - begin");
+		
+		if(dini_Exists("production.info"))
+		{
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			print("Wersja debug na produkcji!! Wylaczam serwer.");
+			SendRconCommand("exit");
+			return 0;
+		}
 	#endif
-	AntiDeAMX(); // Can't touch this
-	WasteDeAMXersTime(); //Hammer Time
-	
-	regex_syntax(SYNTAX_PERL); //regex
+
+	//-------<[ Anty DeAMX ]>-------
+	AntiDeAMX(); // Hammer time
+
+	//-------<[ SAMP config ]>-------
+	SetGameModeText("Mrucznik-RP "VERSION);
+
+	//-------<[ Gameplay config ]>-------
+    SetWeatherEx(3);
+	AllowInteriorWeapons(1); //broñ w intkach
+	ShowPlayerMarkers(0); //wy³¹czenie markerów graczy
+	DisableInteriorEnterExits(); //wy³¹czenie wejœæ do intków z GTA
+	EnableStuntBonusForAll(0); //brak hajsu za stunty
+	ManualVehicleEngineAndLights(); //brak automatycznego w³¹czania silnika i œwiate³
+	ShowNameTags(1); //Pokazywanie nicków graczy
+	SetNameTagDrawDistance(20.0); //Wyœwietlanie nicków od 20 metrów
+	//UsePlayerPedAnims(); // Animacja CJ 
+		// - off (broñ trzymana w obu rêkach jest trzymana jedn¹, skiny chodz¹ swoim chodem)
+		// - on  (broñ trzymana jest normalnie, wszystkie skiny chodz¹ jak CJ)
+
+	//-------<[ libRegEx ]>-------
+	regex_syntax(SYNTAX_PERL);
 	regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
 
-
-	#if DEBUG == 1
-	if(dini_Exists("production.info"))
-	{
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		print("Wersja debug na produkcji!! Wylaczam serwer.");
-		SendRconCommand("exit");
-		return 0;
-	}
-	#endif
+	//-------<[ sscanf ]>-------
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
+
+	//-------<[ streamer ]>-------
     Streamer_SetVisibleItems(0, 900);
     Streamer_SetTickRate(50);
+
+	//-------<[ MySQL ]>-------
+	MruMySQL_Connect();//mysql
+	
+	//-------<[ AC ]>-------
+	Ac_OnGameModeInit();//Antyczit
+	
+	//-------<[ y_commands ]>-------
+	InitCommands();
+
+	//
 
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	KaryTXDLoad(); 
-	InitCommands();
     //Streamer_SetTickRate(40);
 
     PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
@@ -295,9 +324,6 @@ public OnGameModeInit()
     }
 
     systempozarow_init();//System Po¿arów v0.1
-	//Mrucznik:
-	Ac_OnGameModeInit();//Antyczit
-	MruMySQL_Connect();//mysql
 
     //22.06
     LoadConfig();
@@ -338,8 +364,6 @@ public OnGameModeInit()
     Patrol_Init();
     LoadServerInfo(); //Informacja dla graczy np. o wylaczeniu czegos
     LoadDisallowedCommands();
-
-	SetGameModeText("Mrucznik-RP "VERSION);
 
     //13.06
     LoadTXD();
@@ -395,12 +419,6 @@ public OnGameModeInit()
 		SetWorldTime(wtime);
 		ServerTime = wtime;
 	}
-    SetWeatherEx(3);
-	AllowInteriorWeapons(1);
-	ShowPlayerMarkers(0);
-	DisableInteriorEnterExits();
-	EnableStuntBonusForAll(0);
-	ManualVehicleEngineAndLights();
 	// CreatedCars check
 	for(new i = 0; i < sizeof(CreatedCars); i++)
 	{
@@ -440,28 +458,6 @@ public OnGameModeInit()
 		VehicleUID[v][vUID] = 0;
 		SetVehicleNumberPlate(v, "{1F9F06}M-RP");
 	}
-
-
-    //LEGAL
-    /*
-    CREATE TABLE mru_legal (
-        pID integer,
-        weapon1 integer not null,
-        weapon2 integer not null,
-        weapon3 integer not null,
-        weapon4 integer not null,
-        weapon5 integer not null,
-        weapon6 integer not null,
-        weapon7 integer not null,
-        weapon8 integer not null,
-        weapon9 integer not null,
-        weapon10 integer not null,
-        weapon11 integer not null,
-        weapon12 integer not null,
-        weapon13 integer not null,
-        unique (pID)
-    );
-    */
 
     if((db_handle = db_open("mru.db")) == DB:0)
     {
@@ -7721,20 +7717,19 @@ public OnPlayerStreamIn(playerid, forplayerid)
     return 1;
 }
 
-AntiDeAMX()
+AntiDeAMX() //suprise motherfucker
 {
-    new a[][] = {
-        "Trololo (Wpierdol)",
-        "Brass K"
+    new whack[][] =
+    {
+        "lol",
+        "traktor"
     };
-    #pragma unused a
-}
-
-WasteDeAMXersTime()
-{
-    new b;
-    #emit load.pri b
-    #emit stor.pri b
+    #pragma unused whack
+	
+	//Thanks to Y_Less
+    new nyan;
+    #emit load.pri nyan
+    #emit stor.pri nyan
 }
 
 //Koniec.
