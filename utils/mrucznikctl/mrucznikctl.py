@@ -5,8 +5,11 @@ import glob
 import pystache
 import os
 import json
+import regex
 from argparse import ArgumentParser
 from PyInquirer import prompt, print_json
+from PyInquirer import Validator, ValidationError
+
 
 # ------- config -------
 groups = [
@@ -37,14 +40,33 @@ def getDefaultParameterName(param):
 def getDefaultParameterDescription(param):
     return parameterDefaultDescriptions.get(param, '')
 
+# ------- validators -------
+class NameValidator(Validator):
+    def validate(self, document):
+        ok = regex.match('^[a-z_]*$', document.text)
+        if not ok:
+            raise ValidationError(
+                message='Nazwa musi zawierać tylko małe litery oraz "_"',
+                cursor_position=len(document.text))
+                
+class VariableValidator(Validator):
+    def validate(self, document):
+        ok = regex.match('^[a-z0-9_]*$', document.text)
+        if not ok:
+            raise ValidationError(
+                message='Nazwa zmiennej musi być w formacie camelCase',
+                cursor_position=len(document.text))
+
 # ------- modules -------
 def create_module(args):
     print('Witaj w narzędziu tworzącym moduł mapy Mrucznik Role Play')
+
     questions = [
         {
             'type': 'input',
             'name': 'name',
             'message': 'Jak ma nazywać się moduł?',
+            'validate': NameValidator
         },
         {
             'type': 'input',
@@ -52,17 +74,30 @@ def create_module(args):
             'message': 'Uzupełnij opis modułu:',
         },
         {
-            'type': 'input',
-            'name': 'description',
-            'message': 'Uzupełnij opis modułu',
+            'type': 'confirm',
+            'name': 'commands',
+            'message': 'Czy chcesz dodać komendy do modułu?'
         }
     ]
 
     answers = prompt(questions)
-    print(answers)
-
-def generate_module(args):
-    print("build module")
+    if answers.pop('commands') == True:
+        answers['commands'] = []
+        next = True
+        while next:
+            answers['commands'].append(create_command(args)['name'])
+            next = prompt([{
+                'type': 'confirm',
+                'name': 'next',
+                'message': 'Czy chcesz dodać kolejną komendę?'
+            }])['next']
+    else:
+        answers['commands'] = {}
+    
+    moduleName = '{}.json'.format(answers['name'])
+    with open(moduleName, 'w') as file:
+        json.dump(answers, file, indent=4)
+    print('Moduł pomyślnie utworzony jako plik {}'.format(moduleName))
 
 # ------- commands -------
 def create_command(args):
@@ -74,19 +109,7 @@ def create_command(args):
         json.dump(command, file, indent=4)
     print('Komenda pomyślnie utworzona jako plik {}'.format(commandName))
 
-    answers = prompt([
-        {
-            'type': 'confirm',
-            'name': 'build',
-            'message': 'Czy chcesz wygenerować automatycznie kod pawn dla tej komendy?'
-
-        }
-    ])
-
-    if(answers['build'] == True):
-        print('ok')
-    else:
-        print('Nie generuje kodu pawn dla komendy. Aby zrobić to później, wpisz: mrucznikctl command build')
+    return command
 
 def command_creator():
     questions = [
@@ -94,6 +117,7 @@ def command_creator():
             'type': 'input',
             'name': 'name',
             'message': 'Jak ma nazywać się komenda?',
+            'validate': NameValidator
         },
         {
             'type': 'input',
@@ -144,6 +168,7 @@ def command_aliases():
                 'type': 'input',
                 'name': 'alias',
                 'message': 'Wpisz alias:',
+                'validate': NameValidator
             },
             {
                 'type': 'confirm',
@@ -175,7 +200,8 @@ def command_parameters():
                 'type': 'input',
                 'name': 'name',
                 'message': 'Wpisz nazwę parametru:',
-                'default': getDefaultParameterName(answers['type'])
+                'default': getDefaultParameterName(answers['type']),
+                'validate': VariableValidator
             },
             {
                 'type': 'input',
@@ -211,6 +237,66 @@ def command_parameters():
 
     return parameters
 
+# ------- code generation -------
+def generate_code(args):
+    print('code generation')
+    
+def generate_command():
+    print('generate command')
+    
+def generate_module():
+    print('generate command')
+
+def generate_modules_inc():
+    print('generate command')
+
+def generate_commands_inc():
+    print('generate command')
+
+# ------- check configuration -------
+
+# struktura mapy mrucznika
+# legenda: 
+# A - kod generowany automatycznie
+# T - szablon
+# Mrucznik-RP.pwn
+# - modules
+#   - modules.json - zawiera spis wszystkich modułów
+#   - modules.pwn A
+#   - przykładowy_moduł
+#       - przykładowy_moduł.json
+#       - przykładowy_moduł_inc.pwn A
+#       - przykładowy_moduł.def T
+#       - przykładowy_moduł.hwn T
+#       - przykładowy_moduł.pwn T
+#       - commands
+#           - commands_inc.pwn A
+#           - przykładowa komenda
+#               - command.json
+#               - command.pwn A
+#               - command_impl.pwn
+#       - dialogs
+def check_configuration(args):
+    assert(os.path.isdir('./modules'))
+    assert(os.path.exists('./modules/modules.json'))
+    # all modules in modules.json check
+    with open('./modules/modules.json') as modules_json:  
+        jsonData = json.load(modules_json)
+        for modules in jsonData['modules']:
+            module_name = modules['name']
+            module_filename = './modules/{0}/{0}.json'.format(module_name)
+            assert(os.path.isdir('./modules/{}'.format(module_name)))
+            assert(os.path.exists(module_filename))
+            with open(module_filename) as module_file:
+                module_json = json.load(module_file)
+                assert(os.path.isdir('./modules/{}/commands'.format(module_name)))
+                for command in module_json['commands']:
+                    command_name = command['name']
+                    assert(os.path.isdir('./modules/{}/commands/{}'.format(module_name, command_name)))
+                    assert(os.path.exists('./modules/{0}/commands/{1}/{1}.json'.format(module_name, command_name)))
+
+    print('all ok')
+    # TODO: checking for unlisted files
 
 # ------- arguments -------
 # create the top-level parser
@@ -218,23 +304,22 @@ parser = ArgumentParser(prog='mrucznikctl', description="Narzędzie do generowan
 subparsers = parser.add_subparsers(title='Dostępne opcje:', metavar='opcja', required=True)
 
 
-# --- modules ---
-parser_module = subparsers.add_parser('module', description='Zarządzanie modułami.', help='- zarządzanie modułami')
-module_subparser = parser_module.add_subparsers(title='Dostępne działania', metavar='działanie', required=True)
+# --- create ---
+opcja_create = subparsers.add_parser('create', description='Tworzenie komponentów mapy.', help='- tworzenie komponentów mapy')
+subparser_create = opcja_create.add_subparsers(title='Dostępne komponenty', metavar='komponenty', required=True)
 # options
-parser_create_module = module_subparser.add_parser('create', help='- tworzy moduł')
+parser_create_module = subparser_create.add_parser('module', help='- tworzy moduł')
 parser_create_module.set_defaults(func=create_module)
-
-parser_generate_module = module_subparser.add_parser('build', help='- generuje kod modułu')
-parser_generate_module.set_defaults(func=generate_module)
-
-# --- commands ---
-parser_command = subparsers.add_parser('command', description='Zarządzanie komendami.', help='- zarządzanie komendami')
-command_subparser = parser_command.add_subparsers(title='Dostępne opcje', metavar='działanie', required=True)
-# options
-parser_create_command = command_subparser.add_parser('create', help='- tworzy nową komendę')
+parser_create_command = subparser_create.add_parser('command', help='- tworzy nową komendę')
 parser_create_command.set_defaults(func=create_command)
 
+# --- build ---
+parser_build = subparsers.add_parser('build', description='Generuje kod na podstawie plików json.', help='- generowanie kodu')
+parser_build.set_defaults(func=generate_code)
+
+# --- ensure ---
+parser_build = subparsers.add_parser('check', description='Sprawdza, czy konfiguracja mapy jest poprawna.', help='- sprawdzanie konfiguracji')
+parser_build.set_defaults(func=check_configuration)
 
 # parse arguments
 args = parser.parse_args()
@@ -263,3 +348,6 @@ args.func(args)
 # - includowanie wszystkich modułów
 # - modules_Init() zawierającą wywołanie wszystkich funkcji module_Init()
 # - modules_PlayerInit() zawierającą wywołanie wszystkich funkcji module_PlayerInit()
+
+# TODO: Problem z polskimi znakami w generowanych plikach JSON
+
