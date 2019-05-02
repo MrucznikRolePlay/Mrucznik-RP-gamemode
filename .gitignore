@@ -95,3 +95,8 @@ samp.ban
 #
 
 *.sublime-workspace
+
+
+__pycache__/
+*.py[cod]
+*$py.class
