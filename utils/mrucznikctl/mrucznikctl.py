@@ -2,14 +2,17 @@ from __future__ import print_function, unicode_literals
 import sys
 import re
 import glob
-import pystache
 import os
 import json
 import regex
+from jinja2 import Environment, PackageLoader, select_autoescape
 from argparse import ArgumentParser
 from PyInquirer import prompt, print_json
 from PyInquirer import Validator, ValidationError
 
+env = Environment(
+    loader=PackageLoader('mrucznikctl', 'templates')
+)
 
 # ------- config -------
 groups = [
@@ -25,6 +28,18 @@ parameterTypes = [
     'float',
     'character'
 ]
+
+parameterSymbols = {
+    'player': 'r',
+    'integer': 'd',
+    'string': 's',
+    'float': 'f',
+    'character': 'c'
+}
+
+parameterVariablePrefixes = {
+    'float': 'Float:'
+}
 
 parameterDefaultNames = {
     'player': 'giveplayerid'
@@ -72,6 +87,11 @@ def create_module(args):
             'type': 'input',
             'name': 'description',
             'message': 'Uzupełnij opis modułu:',
+        },
+        {
+            'type': 'input',
+            'name': 'author',
+            'message': 'Kto jest autorem modułu?'
         },
         {
             'type': 'confirm',
@@ -129,6 +149,11 @@ def command_creator():
             'name': 'permissions',
             'message': 'Wybierz, które grupy mają mieć dostęp do komendy:',
             'choices': groups
+        },
+        {
+            'type': 'input',
+            'name': 'author',
+            'message': 'Kto jest autorem komendy?'
         },
         {
             'type': 'confirm',
@@ -195,7 +220,18 @@ def command_parameters():
             },
         )
 
-        answers.update(prompt([
+        questions = []
+        if(answers['type'] == 'string'):
+            questions.append({
+                {
+                    'type': 'input',
+                    'name': 'size',
+                    'message': 'Wpisz rozmiar ciągu znaków:',
+                    'default': getDefaultParameterDescription(answers['type'])
+                },
+            })
+
+        questions.append([
             {
                 'type': 'input',
                 'name': 'name',
@@ -214,7 +250,9 @@ def command_parameters():
                 'name': 'default',
                 'message': 'Czy parametr powinien mieć wartość domyślną?',
             }
-        ]))
+        ])
+
+        answers.update(prompt(questions))
 
         if(answers.pop('default') == True):
             answers.update(prompt([
@@ -239,10 +277,17 @@ def command_parameters():
 
 # ------- code generation -------
 def generate_code(args):
-    print('code generation')
+    with open('telefon.json') as commandFile:
+        commandJson = json.load(commandFile)
+        prepareParameters(commandJson['parameters'])
+        generate_command(commandJson)
     
-def generate_command():
-    print('generate command')
+def generate_command(commandData):
+    command = env.get_template('command.pwn.jinja2')
+    command_impl = env.get_template('command_impl.pwn.jinja2')
+
+    print(command.render(commandData))
+    print(command_impl.render(commandData))
     
 def generate_module():
     print('generate command')
@@ -252,6 +297,25 @@ def generate_modules_inc():
 
 def generate_commands_inc():
     print('generate command')
+
+def prepareParameters(parameters):
+    for parameter in parameters:
+        parameter['variable'] = generateParameterVariableName(parameter)
+        parameter['symbol'] = generateParameterSymbol(parameter)
+
+def generateParameterVariableName(parameter):
+    paramPrefix = parameterVariablePrefixes.get(parameter['type'], '')
+    if('size' in parameter):
+        return "{}{}[{}]".format(paramPrefix, parameter['name'], parameter['size'])
+    return "{}{}".format(paramPrefix, parameter['name'])
+
+def generateParameterSymbol(parameter):
+    symbol = parameterSymbols[parameter['type']]
+    if('defaultValue' in parameter):
+        symbol = '{}({})'.format(symbol.upper(), parameter['defaultValue'])
+    if('size' in parameter):
+        symbol = '{}[{}]'.format(symbol, parameter['size'])
+    return symbol
 
 # ------- check configuration -------
 
@@ -265,16 +329,15 @@ def generate_commands_inc():
 #   - modules.pwn A
 #   - przykładowy_moduł
 #       - przykładowy_moduł.json
-#       - przykładowy_moduł_inc.pwn A
 #       - przykładowy_moduł.def T
 #       - przykładowy_moduł.hwn T
 #       - przykładowy_moduł.pwn T
 #       - commands
-#           - commands_inc.pwn A
+#           - commands.pwn A
 #           - przykładowa komenda
 #               - command.json
 #               - command.pwn A
-#               - command_impl.pwn
+#               - command_impl.pwn T
 #       - dialogs
 def check_configuration(args):
     assert(os.path.isdir('./modules'))
