@@ -216,6 +216,14 @@ YCMD:wyjdz(playerid, params[], help)
 		    SetPlayerInterior(playerid, 0);
 			SetPlayerVirtualWorld(playerid,0);
 		}
+		//vinyl
+		else if(IsPlayerInRangeOfPoint(playerid, 1.5, 817.0987,-1375.1685,23.6475))
+		{
+			SetPlayerPosEx(playerid, 814.4426,-1378.2600,23.6475);
+			GameTextForPlayer(playerid, "~w~Impreza dalej trwa~n~~r~bez ciebie", 5000, 1);
+            Wchodzenie(playerid);
+			return 1;
+		}
         //IBIZA
     	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1892.9077,-2451.8071,21.6559) && GetPlayerVirtualWorld(playerid) == 1)
     	{

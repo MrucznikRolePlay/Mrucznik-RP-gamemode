@@ -32,7 +32,7 @@ YCMD:piwo(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pPiwo] >= 1)
     {
-		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_BEER);
+		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_BEER);//daje piwo do ³apy
 		PlayerInfo[playerid][pPiwo] -= 1;
 	}
 	else

@@ -54,6 +54,19 @@ YCMD:kup(playerid, params[], help)
 					sendTipMessage(playerid, string);
 				}
 		}
+		else if(IsPlayerInRangeOfPoint(playerid, 2.0, 814.2560,-1371.4149,23.6475) 
+		|| IsPlayerInRangeOfPoint(playerid, 2.0, 811.1123,-1351.7429,27.8413))
+		{
+			if(PlayerInfo[playerid][pAge] >= 18)
+			{
+				ShowPlayerDialogEx(playerid, 6996, DIALOG_STYLE_LIST, "Vinyl-Club", "Cytrynowy-sza³\t10.000$\nW³adca procêtów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$", "Pij", "Odrzuæ");
+			}
+			else
+			{
+				SendClientMessage(playerid, -1, "Barman_Jaros³aw mówi: Nieletnim nie sprzedajemy alkoholu!");
+				return 1;
+			}
+		}
 		else 
 		{
 			sendErrorMessage(playerid, "Nie jesteœ w miejscu, w którym mo¿na u¿yæ tej komendy.");

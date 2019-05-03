@@ -198,6 +198,94 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
+	else if(dialogid == 6996)
+	{
+		if(!response)
+		{
+			sendTipMessage(playerid, "Wymiêkasz? Abstynent!");
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)//Cytrynowy-sza³\t10.000$\nW³adca procêtów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$
+			{
+				new string[128];
+				case 0:
+				{
+					if(GetPlayerMoney(playerid) >= 10000)
+					{
+						format(string, sizeof(string), "%s kupi³ w barze Cytrynowy Sza³ i zaczyna go piæ", GetNick(playerid));
+						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+						SetPlayerDrunkLevel(playerid, 2000);
+						SetPlayerSpecialAction(playerid, 22);
+						ZabierzKase(playerid, 10000);
+						Sejf_Add(FRAC_SN, 10000);
+						Sejf_Save(FRAC_SN);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+						return 1;
+					}
+				}
+				case 1:
+				{
+					if(GetPlayerMoney(playerid) >= 15000)
+					{
+						format(string, sizeof(string), "%s kupi³ w barze W³adce procentów i zaczyna go piæ", GetNick(playerid));
+						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+						SetPlayerDrunkLevel(playerid, 2500);
+						SetPlayerSpecialAction(playerid, 22);
+						ZabierzKase(playerid, 15000);
+						Sejf_Add(FRAC_SN, 15000);
+						Sejf_Save(FRAC_SN);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+						return 1;
+					}
+				}
+				case 2:
+				{
+					if(GetPlayerMoney(playerid) >= 20000)
+					{
+						format(string, sizeof(string), "%s kupi³ w barze Napój Cotty (chce byæ jak L.Cotta) i zaczyna go piæ", GetNick(playerid));
+						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+						SetPlayerDrunkLevel(playerid, 4000);
+						SetPlayerSpecialAction(playerid, 20);
+						ZabierzKase(playerid, 20000);
+						Sejf_Add(FRAC_SN, 20000);
+						Sejf_Save(FRAC_SN);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+						return 1;
+					}
+				}
+				case 3:
+				{
+					if(GetPlayerMoney(playerid) >= 30000)
+					{
+						format(string, sizeof(string), "%s kupi³ w barze twoja stara i zaczyna go piæ jak kozak", GetNick(playerid));
+						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+						SetPlayerDrunkLevel(playerid, 5000);
+						SetPlayerSpecialAction(playerid, 20);
+						ZabierzKase(playerid, 30000);
+						Sejf_Add(FRAC_SN, 30000);
+						Sejf_Save(FRAC_SN);
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+						return 1;
+					}
+				}
+				
+			}
+		}
+	}
 	else if(dialogid == 6997)
 	{
 		if(!response)

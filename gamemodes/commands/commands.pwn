@@ -662,6 +662,7 @@
 #include "cmd/zuzel_stop.pwn"
 #include "cmd/zwiaz.pwn"
 #include "cmd/zwolnij.pwn"
+#include "cmd/panelvinyl.pwn"
 
 InitCommands()
 {

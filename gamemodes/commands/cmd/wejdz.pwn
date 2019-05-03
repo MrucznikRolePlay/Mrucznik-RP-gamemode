@@ -234,7 +234,20 @@ YCMD:wejdz(playerid, params[], help)
 //======================================================================
 
         
-       
+       //chwilowe do vinyl
+        else if(PlayerToPoint(1.5, playerid, 814.4426,-1378.2600,23.6475))
+        {
+            if(GetPVarInt(playerid, "Vinyl-bilet") < 1)
+            {
+                sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyla!"); 
+                return 1;
+            }
+            SetPlayerPosEx(playerid, 817.0987,-1375.1685,23.6475);
+            GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
+            Wchodzenie(playerid);
+            return 1;
+        }
+       //reszta
         else if (PlayerToPoint(4.0, playerid,738.8545, -1428.7880, 13.5927)) //biura LCN
         {
             SetPlayerPosEx(playerid,738.5865, -1427.7610, 23.5927); //biura LCN wejœcie
