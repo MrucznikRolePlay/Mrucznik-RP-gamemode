@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:panelbasenu(playerid, params[], help)
+YCMD:panelvinyl(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
