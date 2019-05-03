@@ -48,7 +48,7 @@ YCMD:wyczysc(playerid, params[], help)
 					return 1;
 				}
 
-				if(PoziomPoszukiwania[giveplayerid] > 1)
+				if(PoziomPoszukiwania[giveplayerid] > 1 && PlayerInfo[playerid][pLider] != FRAC_FBI)
 				{
 					sendTipMessageEx(playerid, COLOR_GRAD1, "Mo¿esz oczyœciæ tylko graczy z 1 WL");
 					return 1;

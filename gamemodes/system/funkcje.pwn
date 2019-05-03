@@ -2004,13 +2004,6 @@ SetWeatherEx(id)
     if(!(1 < id < 21) || id == 11 || id == 19) return 1;
 	SetWeather(id);
 	ServerWeather = id;
-	foreach(new i : Player)
-	{
-		if(GetPlayerVirtualWorld(i) == 0 && GetPlayerInterior(i) == 0)
-		{
-			SetPVarInt(i, "Weather", id);
-		}
-	}
 	return 1;
 }
 

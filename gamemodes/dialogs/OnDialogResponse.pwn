@@ -175,19 +175,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new cValue = FunkcjaK(inputtext);
+			new string[124];
 			if(cValue > 100 && cValue <= 500000)
 			{
-				if(GetPVarInt(playerid, "p-wybor") == 1)
+				if(GetPVarInt(playerid, "b-wybor") == 1)
 				{
 					cenaNorm = cValue; 
+					format(string, sizeof(string), "Nowa cena biletu zwyk³ego to: %d$", cenaNorm);
+					sendTipMessage(playerid, string); 
+					return 1;
 				}
-				else if(GetPVarInt(playerid, "p-wybor") == 2)
+				if(GetPVarInt(playerid, "b-wybor") == 2)
 				{
 					cenaVIP = cValue; 
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Wyst¹pi³ b³¹d! Spróbuj dokonaæ reloga");
+					format(string, sizeof(string), "Nowa cena biletu VIP to: %d$", cenaVIP); 
+					sendTipMessage(playerid, string); 
 					return 1;
 				}
 			}

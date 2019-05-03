@@ -221,6 +221,7 @@ YCMD:wyjdz(playerid, params[], help)
 		{
 			SetPlayerPosEx(playerid, 814.4426,-1378.2600,23.6475);
 			GameTextForPlayer(playerid, "~w~Impreza dalej trwa~n~~r~bez ciebie", 5000, 1);
+			SetPLocal(playerid, PLOCAL_DEFAULT); 
             Wchodzenie(playerid);
 			return 1;
 		}

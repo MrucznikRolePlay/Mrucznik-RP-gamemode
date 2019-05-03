@@ -5683,7 +5683,8 @@ PayDay()
 					        PlayerInfo[i][pPayDayHad] = 0;
 					    }
 					}
-					if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
+					SetWeatherEx(2+random(19));//Pogoda dla ka¿dego
+					if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)//Zerowanie pogody dla graczy w intkach
 					{
 						SetInteriorTimeAndWeather(i);
 					}
@@ -5728,7 +5729,6 @@ PayDay()
         printf("-> Starting lotto");
 	  	Lotto(rand);
 	}
-	SetWeatherEx(2+random(19));
   	SendClientMessageToAll(COLOR_YELLOW, "Odliczanie do respawnu rozpoczête");
 	BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
     printf("-> Doing respawn");

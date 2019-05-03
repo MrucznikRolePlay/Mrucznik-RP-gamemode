@@ -55,7 +55,7 @@ YCMD:pogodaall(playerid, params[], help)
 			}
 			foreach(new i : Player)//Je¿eli gracze s¹ w intkach 
 			{
-				if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
+				if(GetPlayerVirtualWorld(i) != 0)
 				{
 					SetInteriorTimeAndWeather(i);
 				}
