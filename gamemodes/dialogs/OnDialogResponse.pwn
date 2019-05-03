@@ -207,9 +207,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(response)
 		{
+			new string[128];
 			switch(listitem)//Cytrynowy-sza³\t10.000$\nW³adca procêtów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$
 			{
-				new string[128];
 				case 0:
 				{
 					if(GetPlayerMoney(playerid) >= 10000)
