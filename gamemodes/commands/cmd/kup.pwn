@@ -59,7 +59,7 @@ YCMD:kup(playerid, params[], help)
 		{
 			if(PlayerInfo[playerid][pAge] >= 18)
 			{
-				ShowPlayerDialogEx(playerid, 6996, DIALOG_STYLE_LIST, "Vinyl-Club", "Cytrynowy-sza³\t10.000$\nW³adca procêtów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$", "Pij", "Odrzuæ");
+				ShowPlayerDialogEx(playerid, 6996, DIALOG_STYLE_LIST, "Vinyl-Club", "Cytrynowy-sza³\t 10.000$\nW³adca procentów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$", "Pij", "Odrzuæ");
 			}
 			else
 			{
