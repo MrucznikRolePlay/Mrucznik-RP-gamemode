@@ -1535,6 +1535,10 @@ static Aliases()
 	//odmroz
 	Command_AddAltNamed("odmroz", "unfreeze");
 
+	foreach (new command : Command())
+	{
+		Group_SetGlobalCommand(command, true);
+	}
     return 1;
 }
 
