@@ -1,0 +1,7 @@
+{
+    "name": "logi",
+    "description": "Narzędzia do obsługi logów.",
+    "author": "Mrucznik",
+    "commands": true,
+    "date": "04.05.2019"
+}

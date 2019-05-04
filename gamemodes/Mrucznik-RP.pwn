@@ -85,6 +85,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 
 //-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
+// #include "26modules\modules.pwn"
+
 //-------<[ System ]>-------
 #include "system\definicje.pwn"
 #include "system\kolory.pwn"
@@ -111,46 +113,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "mysql\mysql_system_aut.pwn"
 #include "mysql\mysql_system_kp.pwn"
 
-
 //-------<[ 3.0 style ]>-------
-//.def
-#include "26modules\chaty\chaty.def"
-#include "26modules\admin_duty_system\adminduty.def"
-#include "26modules\admin\admin.def"
-#include "26modules\sila\sila.def"
-#include "26modules\biznes\biznes.def"
-#include "26modules\bramy\bramy.def"
-#include "26modules\wejscia\wejscia.def"
-#include "26modules\budki\budki.def"
-#include "26modules\premium\premium.def"
-#include "26modules\wjedz\wjedz.def"
-
-//.hwn
-#include "26modules\chaty\chaty.hwn"
-#include "26modules\admin_duty_system\adminduty.hwn"
-#include "26modules\admin\admin.hwn"
-#include "26modules\sila\sila.hwn"
-#include "26modules\biznes\biznes.hwn"
-#include "26modules\bramy\bramy.hwn"
-#include "26modules\wejscia\wejscia.hwn"
-#include "26modules\budki\budki.hwn"
-#include "26modules\premium\premium.hwn"
-#include "26modules\wjedz\wjedz.hwn"
-
-//.pwn
-#include "26modules\admin_duty_system\adminduty.pwn"
-#include "26modules\admin\admin.pwn"
-#include "26modules\chaty\chaty.pwn"
-#include "26modules\chaty\chaty_komunikaty.pwn"
-#include "26modules\chaty\komunikaty.pwn"
-#include "26modules\sila\sila.pwn"
-#include "26modules\biznes\biznes.pwn"
-#include "26modules\bramy\bramy.pwn"
-#include "26modules\wejscia\wejscia.pwn"
-#include "26modules\budki\budki.pwn"
-#include "26modules\premium\premium.pwn"
-#include "26modules\premium\premium_dialogs.pwn"
-#include "26modules\wjedz\wjedz.pwn"
+#include "26modules\modules.pwn"
 
 
 //-------<[ Inne ]>-------

@@ -1547,7 +1547,6 @@ RunCommand(playerid, command[], params[])
 {
 	return Command_ReProcess(playerid, sprintf("%s %s", command, params), false);
 }
-
 /*
         Error & Return type
 

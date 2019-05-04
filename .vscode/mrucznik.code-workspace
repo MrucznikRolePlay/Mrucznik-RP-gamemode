@@ -8,6 +8,9 @@
 		"[pawn]": {
 			"files.encoding": "windows1250"
 		},
+		"[json]": {
+			"files.encoding": "windows1250"
+		},
 		"vzfiletemplates.userTemplatesFolders": [
 			"./.vscode/templates"
 		],

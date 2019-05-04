@@ -1,14 +1,5 @@
-//biznes.pwn
-
-//----------------------------------------------<< Source >>-------------------------------------------------//
-//------------------------------------------[ Modu³: biznes.pwn ]---------------------------------------------//
-//Opis:
-/*
-	Zawiera system biznesów == aktów w³asnoœci
-	A dok³adnie:
-		> ...
-		> ..
-*/
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  biznesy                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -25,11 +16,17 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: 2.5
+// Data utworzenia: 04.05.2019
+//Opis:
+/*
+	System biznesów.
+*/
 
 //
 
+//-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-
 stock ZaladujBiznesy()
 {
     for(new i=0;i<MAX_BIZNES;i++)
@@ -40,6 +37,7 @@ stock ZaladujBiznesy()
 	PickupSklep01 = CreateDynamicPickup(1239, 3, BizData[10][eBizWyjX], BizData[10][eBizWyjY], BizData[10][eBizWyjZ], -1, -1, -1, 10.0);//ZIP
 	return 1;
 }
+
 stock Biz_Owner(biz)
 {
     new lStr[64];
@@ -62,6 +60,7 @@ stock ResetBizOffer(playerid)
 	SetPVarInt(playerid, "wpisal_sprzedaj_biz", 0);
 	return 1;
 }
+
 stock CheckBizLocation(bizid)
 {
 	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_LS)
@@ -102,6 +101,7 @@ stock CheckBizLocation(bizid)
 	}
 	return bizLocation;
 }
+
 stock GiveRandomMoneyBiz(playerid)
 {
 	new string[128];
@@ -280,5 +280,8 @@ stock GiveRandomMoneyBiz(playerid)
 	}
 	return 1;
 }
+
+//------------------<[ MySQL: ]>--------------------
+//-----------------<[ Komendy: ]>-------------------
 
 //end

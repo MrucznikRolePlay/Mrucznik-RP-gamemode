@@ -1,0 +1,7 @@
+{
+    "name": "admin",
+    "description": "System administracji.",
+    "author": "2.5",
+    "commands": true,
+    "date": "04.05.2019"
+}

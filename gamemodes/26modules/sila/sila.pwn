@@ -1,29 +1,5 @@
-//sila.pwn
-
-//----------------------------------------------<< Source >>-------------------------------------------------//
-//------------------------------------------[ Modu³: sila.pwn ]---------------------------------------------//
-//Opis:
-/*
-//Odnosi siê do komend: /wezdragi;
-//Autor: Simeone
-//Data: 26-02-2019
-//Opis: 
-System si³y to rewolucja na serwerze Mrucznik Role_Play. Dziêki sile mo¿emy realnie prze³o¿yæ akcje na postaæ.
-Przyk³adowo: Gracz X (200V) i policjant Y (25V) - policjant próbuje aresztowaæ gracza, gracz wyrywa siê bez wiêkszego problemu.
-RE: Ta sama sytuacja, z tym, ¿e policjant ma ju¿ 1/2 wartoœci si³y gracza - wtedy gracz ma zaledwie 25% na ucieczkê, które maleje z ka¿dym policjantem obok.
-Wnioski? Dziêki temu systemowi, gracze bêd¹ mieli realne szanse uciec z aresztowania i /przetrwaæ/, a dla PD bêdzie wyzwaniem z³apaæ 140 kilowego sku*wysyna.
-
-Przyk³ad drugi: Gracz X (350V) chce pobiæ gracza Y (50V) - dochodzi do pobicia bez wiêkszego oporu. Jednak, jeœli gracz Y ma o drobinê wiêksz¹ wartoœæ (ni¿ 1/7 gracza X), 
-wtedy system odpala mo¿liwoœæ /szansy/ i oblicza procentowo udzia³. 
-
-Si³ê mo¿emy zdobyæ poprzez 4 mo¿liwe sposoby (mo¿liwe, ¿e w przysz³oœci zwiêkszy siê ich liczba):
->Admin mo¿e j¹ nadaæ komend¹ /setstrong
->Biegaj¹c (skryptem do biegu)
->Æwicz¹c na si³owni
->P³ywaj¹c na basenie Tsunami
-
-Dodatkowo za¿ywanie narkotyków daje boosta (2x si³y) na okres 5 minut. Jednak, jeœli bêdziemy tego nadu¿ywaæ, skrypt odbierze nam -15V si³y :D 
-*/
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    sila                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -40,9 +16,30 @@ Dodatkowo za¿ywanie narkotyków daje boosta (2x si³y) na okres 5 minut. Jednak, j
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Simeone
+// Data utworzenia: 04.05.2019
+//Opis:
+/*
+	System si³y to rewolucja na serwerze Mrucznik Role_Play. Dziêki sile mo¿emy realnie prze³o¿yæ akcje na postaæ.
+	Przyk³adowo: Gracz X (200V) i policjant Y (25V) - policjant próbuje aresztowaæ gracza, gracz wyrywa siê bez wiêkszego problemu.
+	RE: Ta sama sytuacja, z tym, ¿e policjant ma ju¿ 1/2 wartoœci si³y gracza - wtedy gracz ma zaledwie 25% na ucieczkê, które maleje z ka¿dym policjantem obok.
+	Wnioski? Dziêki temu systemowi, gracze bêd¹ mieli realne szanse uciec z aresztowania i /przetrwaæ/, a dla PD bêdzie wyzwaniem z³apaæ 140 kilowego sku*wysyna.
+
+	Przyk³ad drugi: Gracz X (350V) chce pobiæ gracza Y (50V) - dochodzi do pobicia bez wiêkszego oporu. Jednak, jeœli gracz Y ma o drobinê wiêksz¹ wartoœæ (ni¿ 1/7 gracza X), 
+	wtedy system odpala mo¿liwoœæ /szansy/ i oblicza procentowo udzia³. 
+
+	Si³ê mo¿emy zdobyæ poprzez 4 mo¿liwe sposoby (mo¿liwe, ¿e w przysz³oœci zwiêkszy siê ich liczba):
+	>Admin mo¿e j¹ nadaæ komend¹ /setstrong
+	>Biegaj¹c (skryptem do biegu)
+	>Æwicz¹c na si³owni
+	>P³ywaj¹c na basenie Tsunami
+
+	Dodatkowo za¿ywanie narkotyków daje boosta (2x si³y) na okres 5 minut. Jednak, jeœli bêdziemy tego nadu¿ywaæ, skrypt odbierze nam -15V si³y :D 
+*/
 
 //
 
+//-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
 stock AddStrong(playerid, wartosc)
 {
@@ -59,7 +56,8 @@ stock AddStrong(playerid, wartosc)
 	}
 
 	return 1;
-}	
+}
+
 stock TakeStrong(playerid, wartosc)
 {
 	if(PlayerInfo[playerid][pStrong] >= wartosc)
@@ -76,6 +74,7 @@ stock TakeStrong(playerid, wartosc)
 
 	return 1;
 }
+
 stock SetStrong(playerid, wartosc)
 {
 	if(wartosc <= MAX_STRONG_VALUE)
@@ -84,6 +83,7 @@ stock SetStrong(playerid, wartosc)
 	}
 	return 1;
 }
+
 stock EndRunPlayer(playerid, wartosc)
 {
 
@@ -103,11 +103,13 @@ stock EndRunPlayer(playerid, wartosc)
 	
 	return 1;
 }
+
 stock GetPlayerStrong(playerid)
 {
 	new strongVal = PlayerInfo[playerid][pStrong];
 	return strongVal; 
 }
+
 stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], strongValue, bool:strongadd=false, bool:sendTip=true)
 {
 	DisablePlayerCheckpoint(playerid);
@@ -144,6 +146,7 @@ public BazaCheckOszust(playerid)
 	}
 	return 1;
 }
+
 forward BazaCheckPoint(playerid);
 public BazaCheckPoint(playerid)
 {
@@ -185,6 +188,7 @@ public BazaCheckPoint(playerid)
 
 	return 1;
 }
+
 forward EfektNarkotyku(playerid);
 public EfektNarkotyku(playerid)
 {
@@ -199,5 +203,9 @@ public EfektNarkotyku(playerid)
 
 	return 1;
 }
+
+
+//------------------<[ MySQL: ]>--------------------
+//-----------------<[ Komendy: ]>-------------------
 
 //end

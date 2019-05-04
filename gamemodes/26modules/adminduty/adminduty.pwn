@@ -1,17 +1,5 @@
-//chaty.pwn
-
-//----------------------------------------------<< Source >>-------------------------------------------------//
-//------------------------------------------[ Modu³: chaty.pwn ]---------------------------------------------//
-//Opis:
-/*
-	Zawiera system admin duty stworzony na potrzeby administracji.
-	W tym pliku dok³adnie:
-		> G³ówne CMD adminduty
-		> Funkcja SprawdzZnaki
-		> Funkcja AdminDutyPlayer - ustawia graczu adminduty
-		> Funkcja GetPlayerAdminDutyStatus - pobiera status, czy gracz jest na adminduty.
-		> Timer do AdminDuty
-*/
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 adminduty                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,11 +16,23 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+//Opis:
+/*
+	Zawiera system s³u¿by administratora.
+	W tym pliku dok³adnie:
+		> G³ówne CMD adminduty
+		> Funkcja SprawdzZnaki
+		> Funkcja AdminDutyPlayer - ustawia graczu adminduty
+		> Funkcja GetPlayerAdminDutyStatus - pobiera status, czy gracz jest na adminduty.
+		> Timer do AdminDuty
+*/
+// Autor: Simeone
+// Data utworzenia: 04.05.2019
 
 //
 
+//-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-
 stock SprawdzZnaki(text[])
 {
 	new checkAdminNameValue;
@@ -155,8 +155,8 @@ stock AdminDutyPlayer(playerid, status)
 	return 1;
 }
 
-//-----------------<[ Timery: ]>-------------------
 
+//-----------------<[ Timery: ]>-------------------
 forward AdminDutyCzas(playerid);
 public AdminDutyCzas(playerid)
 {
@@ -169,4 +169,9 @@ public AdminDutyCzas(playerid)
 	}
 	return 1;
 }
+
+
+//------------------<[ MySQL: ]>--------------------
+//-----------------<[ Komendy: ]>-------------------
+
 //end

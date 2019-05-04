@@ -1,0 +1,7 @@
+{
+    "name": "debug",
+    "description": "Narzêdzia do debugowania.",
+    "author": "Mrucznik",
+    "commands": true,
+    "date": "04.05.2019"
+}

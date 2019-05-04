@@ -1,15 +1,5 @@
-//bramy.pwn
-
-//----------------------------------------------<< Source >>-------------------------------------------------//
-//---------------------------------------[ Moduł: bramy.pwn ]------------------------------------------//
-//Opis:
-/*
-
-*/
-//Adnotacje:
-/*
-
-*/
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   bramy                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -26,9 +16,16 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: 2.5
+// Data utworzenia: 04.05.2019
+//Opis:
+/*
+	System bram.
+*/
 
 //
 
+//-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
 stock DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Float:frz1, Float:fx2, Float:fy2, Float:fz2, Float:frx2, Float:fry2, Float:frz2, Float:fspeed, Float:frange, fuprtyp=0, fuprval=0, bool:flag=false)
 {
@@ -57,6 +54,7 @@ stock DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry
 	bramy[iloscbram][b_uprval] = fuprval;
 	return iloscbram++;
 }
+
 stock DualGateAdd(object1,//Obiekt pierwszej bramy
 	Float:fx1,//Pozycja pierwszej bramy X
 	Float:fy1,//Pozycja pierwszej bramy Y 
@@ -178,6 +176,7 @@ stock SprawdzBramy(playerid)
 	}
 	return 0;
 }
+
 
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------

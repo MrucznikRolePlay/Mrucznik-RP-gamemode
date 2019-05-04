@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  premium                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,40 +16,15 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-//
+#include <YSI\y_hooks>
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define PREMIUM_TABLE_	"mru_"
+//-------<[ include ]>-------
 
-#define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 41
-#define MAX_PREMIUM_SKINS 26
 
-//Cennik
-#define MIESIAC_KP_CENA 675
-
-#define CAR_SLOT_CENA 450
-
-#define ZMIANA_NICKU_CENA 500
-
-#define UNIKATOWY_SKIN_CENA 1000
-
-#define TELEFON_CENA_1 6750
-#define TELEFON_CENA_2 2125
-#define TELEFON_CENA_3 1115
-#define TELEFON_CENA_4 675
-#define TELEFON_CENA_5 335
-
-//Kolorki
-
-#define 				PREMIUM_EMBED1 			"{F7F7F2}" // granat
-#define 				PREMIUM_EMBED2 			"{00B7FF}" // niebiedski
-#define 				PREMIUM_EMBED3 			"{49A350}" // zielony
-#define 				PREMIUM_EMBED4 			"{F7F7F2}" // jasny1
-#define 				PREMIUM_EMBED5 			"{E3D8F1}" // jasny2
-
-//end
+//-------<[ initialize ]>-------
+hook OnGameModeInit()
+{
+    
+}
