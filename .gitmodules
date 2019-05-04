@@ -1,5 +1,5 @@
-[submodule "gamemodes/modules/obiekty"]
-	path = gamemodes/modules/obiekty
+[submodule "gamemodes/obiekty"]
+	path = gamemodes/obiekty
 	url = git@github.com:Mrucznik/Mrucznik-RP-obiekty.git
 [submodule "include"]
 	path = include
