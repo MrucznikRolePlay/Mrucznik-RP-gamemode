@@ -119,7 +119,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 
 //-------<[ Inne ]>-------
 #include "old_modules\inne\ibiza.inc"
-#include "old_modules\inne\system_aut.pwn"
 #include "old_modules\inne\system_kp.pwn"
 #include "old_modules\inne\external.pwn"
 
