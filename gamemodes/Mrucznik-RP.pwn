@@ -96,10 +96,10 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "system\zmienne.pwn"
 
 //-------<[ Niceczlowiek ]>-------
-#include "modules\niceczlowiek\general.pwn"
-#include "modules\niceczlowiek\dynamicgui.pwn"
-#include "modules\niceczlowiek\noysi.pwn"
-#include "modules\niceczlowiek\wybieralka.pwn"
+#include "old_modules\niceczlowiek\general.pwn"
+#include "old_modules\niceczlowiek\dynamicgui.pwn"
+#include "old_modules\niceczlowiek\noysi.pwn"
+#include "old_modules\niceczlowiek\wybieralka.pwn"
 
 //-------<[ MySQL ]>-------
 #include "mysql\mru_mysql.pwn"
@@ -114,15 +114,14 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "mysql\mysql_system_kp.pwn"
 
 //-------<[ 3.0 style ]>-------
-#include "26modules\modules.pwn"
+#include "modules\modules.pwn"
 
 
 //-------<[ Inne ]>-------
-#include "modules\discord\discord.pwn"
-#include "modules\inne\ibiza.inc"
-#include "modules\inne\system_aut.pwn"
-#include "modules\inne\system_kp.pwn"
-#include "modules\inne\external.pwn"
+#include "old_modules\inne\ibiza.inc"
+#include "old_modules\inne\system_aut.pwn"
+#include "old_modules\inne\system_kp.pwn"
+#include "old_modules\inne\external.pwn"
 
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
@@ -131,11 +130,11 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "system\timery.pwn"
 
 //-------<[ Obiekty ]>-------
-#include "obiekty\stare_obiekty.pwn"
-#include "obiekty\nowe_obiekty.pwn"
-#include "obiekty\pickupy.pwn"
-#include "obiekty\3dtexty.pwn"
-#include "obiekty\ikony.pwn"
+#include "old_modules\obiekty\stare_obiekty.pwn"
+#include "old_modules\obiekty\nowe_obiekty.pwn"
+#include "old_modules\obiekty\pickupy.pwn"
+#include "old_modules\obiekty\3dtexty.pwn"
+#include "old_modules\obiekty\ikony.pwn"
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
