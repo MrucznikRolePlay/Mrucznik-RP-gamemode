@@ -28,10 +28,10 @@
 	
 */
 
-YCMD:organizacje(playerid, p[], help)
+YCMD:organizacje(playerid, params[], help)
 {
     new lStr[128];
-    if(isnull(p))
+    if(isnull(params))
     {
         for(new i=0;i<sizeof(OrgTypes);i++)
         {
@@ -41,7 +41,7 @@ YCMD:organizacje(playerid, p[], help)
         return 1;
     }
     new lID;
-    sscanf(p, "d", lID);
+    sscanf(params, "d", lID);
     if(!orgIsValid(orgID(lID))) return 1;
     format(lStr, 128, "|| Cz³onkowie ONLINE w %s ||", OrgInfo[orgID(lID)][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);

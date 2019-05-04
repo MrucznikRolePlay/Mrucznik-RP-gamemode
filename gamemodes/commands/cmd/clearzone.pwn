@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:clearzone(playerid, p[], help)
+YCMD:clearzone(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
-        if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /clearzone [ID]");
+        if(sscanf(params, "d", id)) return sendTipMessage(playerid, "U¿yj /clearzone [ID]");
         if(id < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
         ZoneControl[id] = 0;
         ZoneProtect[id] = 0;

@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:removezoneprotect(playerid, p[], help)
+YCMD:removezoneprotect(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
-        if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /removezoneprotect [ID strefy]");
+        if(sscanf(params, "d", id)) return sendTipMessage(playerid, "U¿yj /removezoneprotect [ID strefy]");
         ZoneProtect[id] = false;
         sendTipMessageEx(playerid, COLOR_GRAD2, "Removed");
     }

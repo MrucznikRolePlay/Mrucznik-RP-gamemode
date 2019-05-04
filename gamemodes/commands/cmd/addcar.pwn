@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:addcar(playerid, p[], help)
+YCMD:addcar(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return 1;
     new model, color1, color2;
-    if(sscanf(p, "ddd", model, color1, color2)) return sendTipMessage(playerid, "U¿yj /addcar [Model] [Kolor] [Kolor]");
+    if(sscanf(params, "ddd", model, color1, color2)) return sendTipMessage(playerid, "U¿yj /addcar [Model] [Kolor] [Kolor]");
     new Float:x, Float:y, Float:z, Float:a;
     GetPlayerPos(playerid, x ,y ,z);
     GetPlayerFacingAngle(playerid, a);

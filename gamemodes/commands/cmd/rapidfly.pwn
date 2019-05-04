@@ -28,12 +28,12 @@
 	
 */
 
-YCMD:rapidfly(playerid, p[], help)
+YCMD:rapidfly(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
     {
         new typ;
-        sscanf(p, "D(0)", typ);
+        sscanf(params, "D(0)", typ);
     	if(GetPVarType(playerid, "FlyMode")) CancelFlyMode(playerid);
     	else FlyMode(playerid, typ);
     }

@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:removeganglimit(playerid, p[], help)
+YCMD:removeganglimit(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
-        if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /removeganglimit [ID frakcji]");
+        if(sscanf(params, "d", id)) return sendTipMessage(playerid, "U¿yj /removeganglimit [ID frakcji]");
         ZoneGangLimit[id] = true;
         sendTipMessageEx(playerid, COLOR_GRAD2, "Removed");
     }

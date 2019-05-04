@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:deleteobject(playerid, p[], help)
+YCMD:deleteobject(playerid, params[], help)
 {
     if(!IsAHeadAdmin(playerid)) return 1;
     new typ, data, extra;
-    if(sscanf(p, "ddD(0)", typ, data, extra))
+    if(sscanf(params, "ddD(0)", typ, data, extra))
     {
         sendTipMessageEx(playerid, -1, "/deleteobject [TYP] [Data] [Extra - 0]");
         sendTipMessageEx(playerid, -1, "TYP: OBJECT - 0 | VW - 1");

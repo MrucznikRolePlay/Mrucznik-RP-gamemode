@@ -28,12 +28,12 @@
 	
 */
 
-YCMD:delete3dtext(playerid, p[], help)
+YCMD:delete3dtext(playerid, params[], help)
 {
     if(!IsAHeadAdmin(playerid)) return 1;
 
     new typ, Text3D:data, extra;
-    if(sscanf(p, "ddD(0)", typ, _:data, extra))
+    if(sscanf(params, "ddD(0)", typ, _:data, extra))
     {
         sendTipMessageEx(playerid, -1, "/delete3dtext [TYP] [Data] [Extra - 0]");
         sendTipMessageEx(playerid, -1, "TYP: TextID - 0 | VW - 1");

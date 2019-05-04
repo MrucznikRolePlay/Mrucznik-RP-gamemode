@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:removecar(playerid, p[], help)
+YCMD:removecar(playerid, params[], help)
 {
     if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return 1;
     new car;
-    if(sscanf(p, "d", car)) return sendTipMessage(playerid, "U¿yj /removecar [Car UID]");
+    if(sscanf(params, "d", car)) return sendTipMessage(playerid, "U¿yj /removecar [Car UID]");
 
     new uid = Car_GetIDXFromUID(car);
     if(uid == -1)

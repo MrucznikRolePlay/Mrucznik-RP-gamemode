@@ -28,13 +28,13 @@
 
  */
 
-YCMD:zonedelay(playerid, p[], help)
+YCMD:zonedelay(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) 
     {
         new id;
         new str[64];
-        if(sscanf(p, "d", id)) 
+        if(sscanf(params, "d", id)) 
         {
             sendTipMessage(playerid, "U¿yj /zonedelay [Czas w sekundach]");
             format(str,64,"Aktualnie: %d sek", ZONE_DEF_TIME);

@@ -28,12 +28,12 @@
 	
 */
 
-YCMD:otworzlinie(playerid, p[], help)
+YCMD:otworzlinie(playerid, params[], help)
 {
     if(IsPlayerInFraction(playerid, FRAC_SN, 1000))
     {
         new lLine;
-        if(sscanf(p, "d", lLine)) return sendTipMessage(playerid, "Podaj numer lini, któr¹ chcesz otworzyæ np. 100 lub 150");
+        if(sscanf(params, "d", lLine)) return sendTipMessage(playerid, "Podaj numer lini, któr¹ chcesz otworzyæ np. 100 lub 150");
         if(!(100 <= lLine <= 150)) return sendTipMessage(playerid, "Numer od 100 do 150.");
         new lStr[128];
         gSNLockedLine[lLine-100] = false;

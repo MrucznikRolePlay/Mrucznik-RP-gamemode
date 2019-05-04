@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:gangzone(playerid, p[], help)
+YCMD:gangzone(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id;
-        if(sscanf(p, "d", id)) return sendTipMessage(playerid, "U¿yj /gangzone [0/1]");
+        if(sscanf(params, "d", id)) return sendTipMessage(playerid, "U¿yj /gangzone [0/1]");
         if(id < 0 || id > 1) return 1;
         ZONE_DISABLED = id;
         MruMySQL_Gangzone(id);

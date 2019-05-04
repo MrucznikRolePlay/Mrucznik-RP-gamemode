@@ -28,12 +28,12 @@
 	
 */
 
-YCMD:zamknijlinie(playerid, p[], help)
+YCMD:zamknijlinie(playerid, params[], help)
 {
     if(IsPlayerInFraction(playerid, FRAC_SN, 1000))
     {
         new lLine;
-        if(sscanf(p, "d", lLine)) return sendTipMessage(playerid, "Podaj numer lini, któr¹ chcesz zamkn¹æ np. 100 lub 150");
+        if(sscanf(params, "d", lLine)) return sendTipMessage(playerid, "Podaj numer lini, któr¹ chcesz zamkn¹æ np. 100 lub 150");
         if(lLine < 100 || lLine > 150) return sendTipMessage(playerid, "Numer od 100 do 150.");
         new lStr[128];
         gSNLockedLine[lLine-100] = true;

@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:zaznacz(playerid, p[], help)
+YCMD:zaznacz(playerid, params[], help)
 {
     SelectTextDraw(playerid, 0x00FF00FF);
     return 1;

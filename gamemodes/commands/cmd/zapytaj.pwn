@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:zapytaj(playerid, p[], help)
+YCMD:zapytaj(playerid, params[], help)
 {
     if(GetPVarInt(playerid, "active_ticket") != 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Twoje wczesniejsze zg³oszenie nadal jest aktywne. Poczekaj na odpowiedŸ!");
     new desc[64];
-    if(sscanf(p, "s[64]", desc))
+    if(sscanf(params, "s[64]", desc))
     {
         SendClientMessage(playerid, COLOR_YELLOW, "Potrzebujesz pomocy na temat gry IC? U¿yj zapytania do supportu!");
         SendClientMessage(playerid, COLOR_GRAD2, "Wpisz ogólny temat w nawiasach kwadratowych [TEMAT] oraz dalsz¹ tresc.");

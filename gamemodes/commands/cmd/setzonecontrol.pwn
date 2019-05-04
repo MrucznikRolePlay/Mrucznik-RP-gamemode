@@ -28,11 +28,11 @@
 	
 */
 
-YCMD:setzonecontrol(playerid, p[], help)
+YCMD:setzonecontrol(playerid, params[], help)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid)) {
         new id, frac;
-        if(sscanf(p, "dd", id, frac)) return sendTipMessage(playerid, "U¿yj /setzonecontrol [ZoneID] [Owner]");
+        if(sscanf(params, "dd", id, frac)) return sendTipMessage(playerid, "U¿yj /setzonecontrol [ZoneID] [Owner]");
         if(id < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
         ZoneControl[id] = frac;
         MruMySQL_SetZoneControl(frac, id);
