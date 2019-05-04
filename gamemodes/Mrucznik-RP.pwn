@@ -131,11 +131,11 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "system\timery.pwn"
 
 //-------<[ Obiekty ]>-------
-#include "modules\obiekty\stare_obiekty.pwn"
-#include "modules\obiekty\nowe_obiekty.pwn"
-#include "modules\obiekty\pickupy.pwn"
-#include "modules\obiekty\3dtexty.pwn"
-#include "modules\obiekty\ikony.pwn"
+#include "obiekty\stare_obiekty.pwn"
+#include "obiekty\nowe_obiekty.pwn"
+#include "obiekty\pickupy.pwn"
+#include "obiekty\3dtexty.pwn"
+#include "obiekty\ikony.pwn"
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
