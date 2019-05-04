@@ -28,8 +28,9 @@
 	
 */
 
-/*CMD:lina(playerid, cmdtext[])
+CMD:lina(playerid, cmdtext[])
 {
+    /*
     if( IsACop(playerid) && GetPVarInt(playerid,"roped") == 0 && GetPlayerVehicleSeat(playerid) != 0 && IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetPlayerVehicleID(playerid)))
     {
     	GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
@@ -48,5 +49,6 @@
         }
        	SetTimerEx("syncanim",DUR,0,"i",playerid);
 	}
+    */
 	return 1;
-}*/
+}

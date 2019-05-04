@@ -28,9 +28,10 @@
 	
 */
 
-/*
+
 YCMD:poddajsie2(playerid, params[], help)
 {
+	/*
 	if(IsPlayerConnected(playerid))
 	{
 		if(PlayerInfo[playerid][pJob] == 1)
@@ -116,7 +117,7 @@ YCMD:poddajsie2(playerid, params[], help)
 		{
 			sendErrorMessage(playerid, "Nie jesteœ ³owc¹ nagród!");
 		}
-	}
+	}*/
 	return 1;
 }
-*/
+

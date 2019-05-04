@@ -28,10 +28,11 @@
 	
 */
 
-/*
-YCMD:podszyj(playerid, params[]) return RunCommand(playerid, "/podszyjsie",  params, help);
+
+// YCMD:podszyj(playerid, params[], help) return RunCommand(playerid, "/podszyjsie",  params, help);
 YCMD:podszyjsie(playerid, params[], help)
 {
+	/*
     if(IsPlayerConnected(playerid))
     {
         if(GetPlayerFraction(playerid) != FRAC_FBI) return 1;
@@ -44,6 +45,7 @@ YCMD:podszyjsie(playerid, params[], help)
             SendClientMessage(playerid, COLOR_GRAD2, "	Nie mo¿esz siê podszywaæ!");
 		}
 	}
+	*/
 	return 1;
-}*/
+}
 

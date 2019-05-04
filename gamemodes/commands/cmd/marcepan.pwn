@@ -28,9 +28,10 @@
 	
 */
 
-/*CMD:marcepan(playerid, params[])
+YCMD:marcepan(playerid, params[], help)
 {
 	//komenda tymczasowo wy³¹czona
+    /*
     if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
     {
         new id;
@@ -69,8 +70,8 @@
     else
     {
         return noAccessMessage(playerid);
-    }
+    }*/
     return 1;
-}*/
+}
 
 

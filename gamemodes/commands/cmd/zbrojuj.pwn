@@ -27,11 +27,12 @@
 /*
 	
 */
-/*
-YCMD:zbrojka(playerid, params[]) return cmd_zbrojuj(playerid, help);
-YCMD:zbrojownia(playerid, params[]) return cmd_zbrojuj(playerid, help);
+
+// YCMD:zbrojka(playerid, params[], help) return cmd_zbrojuj(playerid, help);
+// YCMD:zbrojownia(playerid, params[], help) return cmd_zbrojuj(playerid, help);
 YCMD:zbrojuj(playerid, params[], help)
 {
+	/*
     if(IsPlayerConnected(playerid))
     {
 	    if(gPlayerLogged[playerid] == 1)
@@ -64,8 +65,9 @@ YCMD:zbrojuj(playerid, params[], help)
 	    	}
 	    }
 	}
+	*/
 	return 1;
-}*/
+}
 
 
 
