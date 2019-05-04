@@ -29,7 +29,7 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
-stock premium_ConvertToNewSystem(playerid)
+premium_ConvertToNewSystem(playerid)
 {
 	if(PlayerInfo[playerid][pDonateRank] != 11 && PlayerInfo[playerid][pDonateRank] != 0)
 	{
@@ -57,7 +57,7 @@ premium_clearCache(playerid)
 	}
 }
 
-stock premium_loadForPlayer(playerid)
+premium_loadForPlayer(playerid)
 {
 
 	if(PlayerInfo[playerid][pDonateRank] != 11 && PlayerInfo[playerid][pDonateRank] != 0)
@@ -185,7 +185,7 @@ premium_printMcQuantity(playerid)
 	return _MruGracz(playerid, sprintf("Aktualnie na Twoim koncie znajduje siê %d MruCoins.", PremiumInfo[playerid][pMC]));
 }
 
-stock ZabierzKP(playerid)
+ZabierzKP(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -206,7 +206,7 @@ stock ZabierzKP(playerid)
 	}
 }
 
-stock DajKP(playerid, time, bool:msg=true)
+DajKP(playerid, time, bool:msg=true)
 {
 	//PremiumInfo[playerid][pKP] = 1;
 	if(IsPlayerConnected(playerid))
@@ -250,7 +250,7 @@ stock DajKP(playerid, time, bool:msg=true)
     }
 }
 
-stock DajMC(playerid, mc)
+DajMC(playerid, mc)
 {
 	if(mc <= 0)
 	{
@@ -462,21 +462,21 @@ KupNumerTelefonu(playerid, string:_numer[])
 }
 
 //---< Is >---
-stock IsPlayerSponsor(playerid)
+IsPlayerSponsor(playerid)
 {
 	if(PremiumInfo[playerid][pSponsor] == 1)
 		return 1;
 	return 0;
 }
 
-stock IsPlayerPremium(playerid)
+IsPlayerPremium(playerid)
 {
 	if(PremiumInfo[playerid][pKP] == 1)
 		return 1;
 	return 0;
 }
 
-stock IsAUnikat(modelid)
+IsAUnikat(modelid)
 {
 	for(new i; i<MAX_PREMIUM_VEHICLES; i++)
 		if(modelid == PojazdyPremium[i][Model])

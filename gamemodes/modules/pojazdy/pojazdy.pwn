@@ -27,7 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>------------------
-stock Car_AddSlotToQueue(id)
+Car_AddSlotToQueue(id)
 {
     if(strlen(Car_SlotQueue) < 1020)
     {
@@ -37,7 +37,7 @@ stock Car_AddSlotToQueue(id)
     }
 }
 
-stock Car_GetFromQueue()
+Car_GetFromQueue()
 {
     new lID[8];
     new pos = strfind(Car_SlotQueue, "|");
@@ -50,7 +50,7 @@ stock Car_GetFromQueue()
     return -1;
 }
 
-stock ShowCarsForPlayer(playerid, forplayerid)
+ShowCarsForPlayer(playerid, forplayerid)
 {
     new lStr[512], lSlots, lMaxCars = PlayerInfo[playerid][pCarSlots], lID;
     for(new i=0;i<MAX_CAR_SLOT;i++)
@@ -74,7 +74,7 @@ stock ShowCarsForPlayer(playerid, forplayerid)
     else SendClientMessage(forplayerid, COLOR_GRAD2, "Brak jakichkolwiek pojazdów!");
 }
 
-stock Car_MakePlayerOwner(playerid, uid)
+Car_MakePlayerOwner(playerid, uid)
 {
     for(new i=0;i<MAX_CAR_SLOT;i++)
     {
@@ -94,7 +94,7 @@ stock Car_MakePlayerOwner(playerid, uid)
     return 1;
 }
 
-stock Car_RemovePlayerOwner(playerid, uid)
+Car_RemovePlayerOwner(playerid, uid)
 {
     for(new i=0;i<MAX_CAR_SLOT;i++)
     {
@@ -108,7 +108,7 @@ stock Car_RemovePlayerOwner(playerid, uid)
     //Car_SortPlayerCars(playerid);
 }
 
-stock Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
+Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
 {
     new lUID, lStr[256], idx=-1;
     format(lStr, 256, "INSERT INTO `mru_cars` (`model`, `x`, `y`, `z`, `angle`, `color1`, `color2`) VALUES (%d, %.2f, %.2f, %.2f, %.1f, %d, %d)", model, x, y, z, angle, color1, color2);
@@ -159,7 +159,7 @@ stock Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
     return idx;
 }
 
-stock Car_Load()
+Car_Load()
 {
     new lStr[512], lLoad=gCars, unused;
     mysql_query("SELECT * FROM `mru_cars` WHERE `ownertype` != 3 AND `ownertype` != 0");
@@ -312,7 +312,7 @@ stock Car_Load()
     printf("Wczytano %d pojazdów", gCars-1);
 }
 
-stock Car_LoadEx(lUID)
+Car_LoadEx(lUID)
 {
     new lStr[256];
     new lVehID = Car_GetFromQueue(), bool:doadd=false, unused;
@@ -358,7 +358,7 @@ stock Car_LoadEx(lUID)
     return lVehID;
 }
 
-stock Car_LoadForPlayer(playerid)
+Car_LoadForPlayer(playerid)
 {
     new lStr[256], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8], unused;
 
@@ -431,7 +431,7 @@ stock Car_LoadForPlayer(playerid)
     }
 }
 
-stock Car_UnloadForPlayer(playerid)
+Car_UnloadForPlayer(playerid)
 {
     new lVehUID;
     for(new i=0;i<MAX_CAR_SLOT;i++)
@@ -443,7 +443,7 @@ stock Car_UnloadForPlayer(playerid)
     }
 }
 
-stock Car_ReloadEx(lVehID)
+Car_ReloadEx(lVehID)
 {
     new lStr[256], unused;
     format(lStr, 64, "SELECT * FROM `mru_cars` WHERE `UID`='%d'", lVehID);
@@ -481,7 +481,7 @@ stock Car_ReloadEx(lVehID)
     mysql_free_result();
 }
 
-stock CountPlayerCars(playerid)
+CountPlayerCars(playerid)
 {
     new lCount;
     for(new i=0;i<MAX_CAR_SLOT;i++)
@@ -492,7 +492,7 @@ stock CountPlayerCars(playerid)
     return lCount;
 }
 
-stock Car_SortPlayerCars(playerid)
+Car_SortPlayerCars(playerid)
 {
     new lArray[MAX_CAR_SLOT] = {0, ...}, lAI;
     for(new i=0;i<MAX_CAR_SLOT;i++)
@@ -535,7 +535,7 @@ stock Car_SortPlayerCars(playerid)
     return lAI;
 }
 
-stock Car_AddTune(vehicleid)
+Car_AddTune(vehicleid)
 {
     new uid = VehicleUID[vehicleid][vUID];
     if(CarData[uid][c_Nitro] != 0) AddVehicleComponent(vehicleid, CarData[uid][c_Nitro]);
@@ -548,7 +548,7 @@ stock Car_AddTune(vehicleid)
     ChangeVehicleColor(vehicleid, CarData[uid][c_Color][0], CarData[uid][c_Color][1]);
 }
 
-stock IsCarOwner(playerid, vehicle, bool:kluczyki=false)
+IsCarOwner(playerid, vehicle, bool:kluczyki=false)
 {
     new uid = VehicleUID[vehicle][vUID];
     if(uid == 0) return 0;
@@ -566,25 +566,25 @@ stock IsCarOwner(playerid, vehicle, bool:kluczyki=false)
     return 0;
 }
 
-stock Car_IsValid(vehicleid)
+Car_IsValid(vehicleid)
 {
     if(VehicleUID[vehicleid][vUID] == 0) return 0;
     return 1;
 }
 
-stock Car_GetOwnerType(vehicleid)
+Car_GetOwnerType(vehicleid)
 {
     if(VehicleUID[vehicleid][vUID] == 0) return 0;
     return CarData[VehicleUID[vehicleid][vUID]][c_OwnerType];
 }
 
-stock Car_GetOwner(vehicleid)
+Car_GetOwner(vehicleid)
 {
     if(VehicleUID[vehicleid][vUID] == 0) return 0;
     return CarData[VehicleUID[vehicleid][vUID]][c_Owner];
 }
 
-stock Car_Spawn(lUID, bool:onload=false, bool:loaddesc=true)
+Car_Spawn(lUID, bool:onload=false, bool:loaddesc=true)
 {
     if(GetVehicleModel(CarData[lUID][c_ID]) != 0) return 0;
 
@@ -641,7 +641,7 @@ stock Car_Spawn(lUID, bool:onload=false, bool:loaddesc=true)
     dodany wolny index.
 */
 
-stock Car_ClearMem(lVehID)
+Car_ClearMem(lVehID)
 {
     if(CarData[lVehID][c_ID] != 0) VehicleUID[CarData[lVehID][c_ID]][vUID] = 0;
     CarData[lVehID][c_UID]= 0;
@@ -654,7 +654,7 @@ stock Car_ClearMem(lVehID)
     Car_AddSlotToQueue(lVehID);
 }
 
-stock Car_GetIDXFromUID(lUID)
+Car_GetIDXFromUID(lUID)
 {
     for(new i=0;i<MAX_CARS;i++)
     {
@@ -663,13 +663,13 @@ stock Car_GetIDXFromUID(lUID)
     return -1;
 }
 
-stock Car_IsMemSet(lUID)
+Car_IsMemSet(lUID)
 {
     if(Car_GetIDXFromUID(lUID) != -1) return true;
     return false;
 }
 
-stock Car_Unspawn(v, bool:playercall=false)
+Car_Unspawn(v, bool:playercall=false)
 {
     if(GetVehicleModel(v) == 0) return 0;
     GetVehicleHealth(v, CarData[VehicleUID[v][vUID]][c_HP]);
@@ -718,7 +718,7 @@ stock Car_Unspawn(v, bool:playercall=false)
     return 1;
 }
 
-stock Car_Destroy(lV)
+Car_Destroy(lV)
 {
     if(CarData[lV][c_ID] != 0) Car_Unspawn(CarData[lV][c_ID], true);
     new lStr[64];
@@ -728,7 +728,7 @@ stock Car_Destroy(lV)
     Car_ClearMem(lV);
 }
 
-stock Car_Save(lUID, lType)
+Car_Save(lUID, lType)
 {
     new lStr[256];
     switch(lType)
@@ -785,7 +785,7 @@ IsAHeliModel(carid)
     return 0;
 }
 
-stock Car_PrintOwner(car)
+Car_PrintOwner(car)
 {
     new lStr[64];
     new type = CarData[car][c_OwnerType];
@@ -838,7 +838,7 @@ stock Car_PrintOwner(car)
     return lStr;
 }
 
-stock ShowCarEditDialog(playerid)
+ShowCarEditDialog(playerid)
 {
     new lStr[512], car = GetPVarInt(playerid, "edit-car"), Float:lHP;
     if(CarData[car][c_ID] == 0) lHP = CarData[car][c_HP];
@@ -849,7 +849,7 @@ stock ShowCarEditDialog(playerid)
     return 1;
 }
 
-stock CONVERT_PlayerCar(playerid)
+CONVERT_PlayerCar(playerid)
 {
     new owner[32], str[512], nick[32], dopojazdu1[64], carlist[8], model, Float:x, Float:y, Float:z, Float:angle, color1, color2, bumper1, bumper2, neon, nitro, hydraulika, felgi, spoiler, malunek, lUsed=0;
     GetPlayerName(playerid, nick, 32);

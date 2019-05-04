@@ -27,7 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock ZaladujBiznesy()
+ZaladujBiznesy()
 {
     for(new i=0;i<MAX_BIZNES;i++)
 	{
@@ -38,7 +38,7 @@ stock ZaladujBiznesy()
 	return 1;
 }
 
-stock Biz_Owner(biz)
+Biz_Owner(biz)
 {
     new lStr[64];
     format(lStr, 64, "SELECT `Nick` FROM mru_konta WHERE `Bizz`='%d'", biz);
@@ -52,7 +52,7 @@ stock Biz_Owner(biz)
     return lStr;
 }
 
-stock ResetBizOffer(playerid)
+ResetBizOffer(playerid)
 {
 	SetPVarInt(playerid, "Oferujacy_ID", -1);
 	SetPVarInt(playerid, "Oferujacy_Cena", 0); 
@@ -61,7 +61,7 @@ stock ResetBizOffer(playerid)
 	return 1;
 }
 
-stock CheckBizLocation(bizid)
+CheckBizLocation(bizid)
 {
 	if(BizData[bizid][eBizLocation] == BIZ_LOCATION_LS)
 	{
@@ -102,7 +102,7 @@ stock CheckBizLocation(bizid)
 	return bizLocation;
 }
 
-stock GiveRandomMoneyBiz(playerid)
+GiveRandomMoneyBiz(playerid)
 {
 	new string[128];
 	new losuj = random(10);

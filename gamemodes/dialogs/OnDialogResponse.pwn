@@ -1,7 +1,7 @@
 //OnDialogResponse.pwn
 
 
-stock IsDialogProtected(dialogid)
+IsDialogProtected(dialogid)
 {
     switch(dialogid)
     {

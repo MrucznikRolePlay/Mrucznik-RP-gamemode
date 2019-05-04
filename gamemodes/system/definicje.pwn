@@ -549,7 +549,7 @@ public _SafeReturnCode_(dest[], src[], bytes)
     memcpy(dest, src, 0, bytes, bytes);
 }
 
-stock SafeReturnCode(const src[], const bytes = sizeof (src))
+SafeReturnCode(const src[], const bytes = sizeof (src))
 {
     // Push the lengths for the memcpy (needs "pri", so done first).
     #emit LOAD.S.pri    bytes

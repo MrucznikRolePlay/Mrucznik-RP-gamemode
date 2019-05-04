@@ -14,7 +14,7 @@ new Text:NowaWybieralka_Right;
 	NowaWybieralka_Setup(playerid);
 } */
 
-stock NowaWybieralka_Setup(playerid)
+NowaWybieralka_Setup(playerid)
 {
 
 	if(GetPVarInt(playerid, "wyborPierwszego") == 0)
@@ -48,7 +48,7 @@ stock NowaWybieralka_Setup(playerid)
 	SetPlayerCameraLookAt(playerid, 208.775955, -34.981678, 1001.929687);
 }
 
-stock NowaWybieralka_Init()
+NowaWybieralka_Init()
 {
 	NowaWybieralka_CreateTxd();
 
@@ -56,14 +56,14 @@ stock NowaWybieralka_Init()
 }
 
 
-stock NowaWybieralka_InitPlayer(playerid)
+NowaWybieralka_InitPlayer(playerid)
 {
 
 	return 1;
 }
 
 
-stock NowaWybieralka_CreateTxd()
+NowaWybieralka_CreateTxd()
 {
 
 	NowaWybieralka_Left = TextDrawCreate(250.154693, 383.833343, "<<<");
@@ -111,7 +111,7 @@ stock NowaWybieralka_CreateTxd()
 	return 1;
 }
 
-stock NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
+NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 {
 	//Przebierz
 	if(clickedid == NowaWybieralka_Left)

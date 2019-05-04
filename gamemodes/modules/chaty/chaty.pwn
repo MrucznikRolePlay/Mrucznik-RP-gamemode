@@ -42,7 +42,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock CheckStars(const text[])
+CheckStars(const text[])
 {
     new Message[256];
     strcat(Message, text);
@@ -58,7 +58,7 @@ stock CheckStars(const text[])
     }
     return Message;
 }
-stock CheckEmoji(const text[])
+CheckEmoji(const text[])
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text); 
@@ -81,13 +81,13 @@ stock CheckEmoji(const text[])
 	regex_replace(emojiMessFix, "o{1}_{1}o{1}", "{C2A2DA}**Robi okulary z d³oni**{FFFFFF}");
 	return emojiMessFix;
 }
-stock CorrectICForm(const text[])
+CorrectICForm(const text[])
 {
 	new correctForm[256];
 	format(correctForm, sizeof(correctForm), "%s", CheckEmoji(CheckStars(text)));
 	return correctForm;
 }
-stock sprawdzReklame(text[], playerid)
+sprawdzReklame(text[], playerid)
 {
 	new valueAdd;
 	if(strfind(text , "ip:" , true)>=0 
@@ -127,7 +127,7 @@ stock sprawdzReklame(text[], playerid)
 	}
 	return valueAdd;
 }
-stock sprawdzWulgaryzmy(text[], playerid)
+sprawdzWulgaryzmy(text[], playerid)
 {
 	new valueWulgaryzmy;
 	new stringReturn[256];
@@ -169,7 +169,7 @@ stock sprawdzWulgaryzmy(text[], playerid)
 	}
 	return valueWulgaryzmy;
 }
-stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true)
+PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true)
 {
 	new string[256]; 
 	if(strlen(jakMowi) <= 1)
@@ -234,7 +234,7 @@ stock PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBoobl
 	}	
 	return 1;
 }
-stock PlayerTalkOOC(playerid, text[], Float:rangeTalk)
+PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 {
 	new string[256];
 	if(IsPlayerConnected(playerid))
@@ -269,7 +269,7 @@ stock PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 	return 1;
 }
 
-stock GetFractionColor(fraction)
+GetFractionColor(fraction)
 {
 	new fracColor;
 	if(fraction == 1)
@@ -347,7 +347,7 @@ stock GetFractionColor(fraction)
 	return fracColor;
 }
 
-stock sendFractionMessageToAll(playerid, text[])
+sendFractionMessageToAll(playerid, text[])
 {
 	new sContent[256];
 	foreach(new i : Player) 
@@ -367,7 +367,7 @@ stock sendFractionMessageToAll(playerid, text[])
 	return 1;
 }
 
-stock showTimedMsgBox(playerid, delay, text[]) {
+showTimedMsgBox(playerid, delay, text[]) {
 	CzasInformacyjnego[playerid] = delay;
 	PlayerTextDrawHide(playerid, TextInformacyjny[playerid]);
 	PlayerTextDrawSetString(playerid, TextInformacyjny[playerid], text);

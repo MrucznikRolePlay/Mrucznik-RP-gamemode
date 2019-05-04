@@ -41,7 +41,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock AddStrong(playerid, wartosc)
+AddStrong(playerid, wartosc)
 {
 	if(PlayerInfo[playerid][pStrong]+wartosc <= MAX_STRONG_VALUE)
 	{
@@ -58,7 +58,7 @@ stock AddStrong(playerid, wartosc)
 	return 1;
 }
 
-stock TakeStrong(playerid, wartosc)
+TakeStrong(playerid, wartosc)
 {
 	if(PlayerInfo[playerid][pStrong] >= wartosc)
 	{
@@ -75,7 +75,7 @@ stock TakeStrong(playerid, wartosc)
 	return 1;
 }
 
-stock SetStrong(playerid, wartosc)
+SetStrong(playerid, wartosc)
 {
 	if(wartosc <= MAX_STRONG_VALUE)
 	{
@@ -84,7 +84,7 @@ stock SetStrong(playerid, wartosc)
 	return 1;
 }
 
-stock EndRunPlayer(playerid, wartosc)
+EndRunPlayer(playerid, wartosc)
 {
 
 	DisablePlayerCheckpoint(playerid);
@@ -104,13 +104,13 @@ stock EndRunPlayer(playerid, wartosc)
 	return 1;
 }
 
-stock GetPlayerStrong(playerid)
+GetPlayerStrong(playerid)
 {
 	new strongVal = PlayerInfo[playerid][pStrong];
 	return strongVal; 
 }
 
-stock CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], strongValue, bool:strongadd=false, bool:sendTip=true)
+CreateNewRunCheckPoint(playerid, Float:x, Float:y, Float:z, Float:range, text[], strongValue, bool:strongadd=false, bool:sendTip=true)
 {
 	DisablePlayerCheckpoint(playerid);
 

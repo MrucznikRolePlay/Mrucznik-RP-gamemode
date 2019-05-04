@@ -28,7 +28,7 @@ SSCANF:fix(string[])
 	return ret;
 }
 
-stock IsVehicleEmpty(vehicleid)
+IsVehicleEmpty(vehicleid)
 {
   for(new i; i < MAX_PLAYERS; i++)
   {
@@ -37,7 +37,7 @@ stock IsVehicleEmpty(vehicleid)
   return 1;
 }
 
-stock GetTickDiff(newtick, oldtick)
+GetTickDiff(newtick, oldtick)
 {
 	if (oldtick < 0 && newtick >= 0) {
 		return newtick - oldtick;
@@ -47,17 +47,17 @@ stock GetTickDiff(newtick, oldtick)
 	return newtick - oldtick;
 }
 
-stock SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
+SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
 {
     SetPlayerPos(playerid,X,Y,Z);
 }
 
-stock PutPlayerInVehicleEx(playerid,vehicleid,seatid)
+PutPlayerInVehicleEx(playerid,vehicleid,seatid)
 {
     PutPlayerInVehicle(playerid,vehicleid,seatid);
 }
 
-stock RemovePlayerFromVehicleEx(playerid)
+RemovePlayerFromVehicleEx(playerid)
 {
     new veh = GetPlayerVehicleID(playerid);
     new model = GetVehicleModel(veh);
@@ -76,7 +76,7 @@ public Lowienie(playerid)
 	return 1;
 }
 
-stock saveLegale(playerid) {
+saveLegale(playerid) {
 	//LEGAL
 	new lStr[256];
 	format(lStr, sizeof lStr, "UPDATE mru_legal SET weapon1=%d, weapon2=%d, weapon3=%d, weapon4=%d, weapon5=%d, weapon6=%d, weapon7=%d, weapon8=%d, weapon9=%d, weapon10=%d, weapon11=%d,weapon12=%d,weapon13=%d WHERE pID = %d", playerWeapons[playerid][weaponLegal1],playerWeapons[playerid][weaponLegal2],playerWeapons[playerid][weaponLegal3],playerWeapons[playerid][weaponLegal4],playerWeapons[playerid][weaponLegal5],playerWeapons[playerid][weaponLegal6],playerWeapons[playerid][weaponLegal7],playerWeapons[playerid][weaponLegal8],playerWeapons[playerid][weaponLegal9],playerWeapons[playerid][weaponLegal10],playerWeapons[playerid][weaponLegal11],playerWeapons[playerid][weaponLegal12],playerWeapons[playerid][weaponLegal13], PlayerInfo[playerid][pUID]);
@@ -84,7 +84,7 @@ stock saveLegale(playerid) {
 }
 
 
-stock loadKamiPos(playerid)
+loadKamiPos(playerid)
 {
 	new lStr[256];
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
@@ -122,7 +122,7 @@ stock loadKamiPos(playerid)
 }
 
 
-stock saveKevlarPos(playerid, recurention=1)
+saveKevlarPos(playerid, recurention=1)
 {
 	new lStr[256];
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
@@ -152,7 +152,7 @@ new scm_buf[144];
 	(format(scm_buf, sizeof scm_buf, %1,%2), sendTipMessage(%0,scm_buf))
 #define sendTipMessageFormatEx(%0,%1,%2,%3) \
 	(format(scm_buf, sizeof scm_buf, %2,%3), sendTipMessageEx(%0,%1,scm_buf))	
-stock pusteZgloszenia() {
+pusteZgloszenia() {
 	for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
 		new Hour, Minute;
 		gettime(Hour, Minute);
@@ -172,13 +172,13 @@ stock pusteZgloszenia() {
 		strmid(ZgloszenieSasp[i][zgloszenie_tresc], "Brak", 0, 4, 70);
 	}
 }
-stock getWolneZgloszenie() {
+getWolneZgloszenie() {
 	if(ilosczgloszen == OSTATNIE_ZGLOSZENIA) {
 		ilosczgloszen = 0;
 	}
 	return ilosczgloszen++;
 }
-stock getWolneZgloszenieSasp() {
+getWolneZgloszenieSasp() {
 	if(ilosczgloszenSasp == OSTATNIE_ZGLOSZENIASASP) {
 		ilosczgloszenSasp = 0;
 	}
@@ -218,7 +218,7 @@ sendErrorMessage(id, string:msg[]) {
 }
 //2.5.2
 
-stock GetMajatek(playerid)
+GetMajatek(playerid)
 {
 	new vehvalues;
 	for(new i=0;i<MAX_CAR_SLOT;i++)
@@ -282,7 +282,7 @@ DialogListaSkinow(frakcja)
 	safe_return skiny;
 }
 
-stock PDTuneSultan(vehicleid)
+PDTuneSultan(vehicleid)
 {
 	new o[5];
 	o[0] = CreateDynamicObject(19797, 0, 0, 0, 0, 0, 0);
@@ -297,7 +297,7 @@ stock PDTuneSultan(vehicleid)
 	AttachDynamicObjectToVehicle(o[4], vehicleid, 0.676498, -2.344018, 0.110000, 0.000000, 179.895095, -0.000001); //Object Model: 19797 |
 }
 
-stock PDTuneInfernus(vehicleid)
+PDTuneInfernus(vehicleid)
 {
     new alspdo = CreateDynamicObject(2286,-0.0972000,-1.9730999,0.2444000,275.5001526,0.0000000,0.0000000);
     SetDynamicObjectMaterial(alspdo, 1, 0, "none", "none");
@@ -350,13 +350,13 @@ public OznaczCzitera(playerid)
 	}
 }*/
 
-stock IsAValidURL(string[])
+IsAValidURL(string[])
 {
 	if(regex_exmatch(string, regexURL) >= 0 )
 		return 1;
 	return 0;
 }
-stock GetFreeVehicleSeat(vehicleid)
+GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
 	foreach(new i : Player)
@@ -376,7 +376,7 @@ stock GetFreeVehicleSeat(vehicleid)
 	else return -1;
 }
 
-stock GetCarSpeed(vehicleid)
+GetCarSpeed(vehicleid)
 {
     new Float:pAC_Pos[3],Float:VS ;
     GetVehicleVelocity(vehicleid, pAC_Pos[0], pAC_Pos[1], pAC_Pos[2]);
@@ -384,7 +384,7 @@ stock GetCarSpeed(vehicleid)
     return floatround(VS,floatround_round);
 }
 
-stock Odpolszcz(text[])
+Odpolszcz(text[])
 {
     new string[256], i_pos;
     format(string, sizeof(string), text);
@@ -409,7 +409,7 @@ stock Odpolszcz(text[])
 	return string;
 }
 
-stock Uprawnienia(playerid, flags, bool:part=false)
+Uprawnienia(playerid, flags, bool:part=false)
 {
     if(flags & ACCESS[playerid] != 0)
     {
@@ -423,7 +423,7 @@ stock Uprawnienia(playerid, flags, bool:part=false)
     else return 0;
 }
 
-stock Taxi_FareEnd(playerid)
+Taxi_FareEnd(playerid)
 {
     new string[128];
     if(TransportDuty[playerid] == 1)
@@ -453,7 +453,7 @@ stock Taxi_FareEnd(playerid)
 	TransportValue[playerid] = 0; TransportMoney[playerid] = 0;
 }
 
-stock Taxi_Pay(playerid)
+Taxi_Pay(playerid)
 {
     new taxidriver = TransportDriver[playerid];
     if(IsPlayerConnected(taxidriver))
@@ -496,7 +496,7 @@ stock Taxi_Pay(playerid)
 	}
 }
 
-stock Taxi_HideHUD(playerid)
+Taxi_HideHUD(playerid)
 {
     TextDrawHideForPlayer(playerid, TAXI_BG[0]);
     TextDrawHideForPlayer(playerid, TAXI_BG[1]);
@@ -504,7 +504,7 @@ stock Taxi_HideHUD(playerid)
     PlayerTextDrawHide(playerid, TAXI_COST[playerid]);
 }
 
-stock Taxi_ShowHUD(playerid)
+Taxi_ShowHUD(playerid)
 {
     TextDrawShowForPlayer(playerid, TAXI_BG[0]);
     TextDrawShowForPlayer(playerid, TAXI_BG[1]);
@@ -514,13 +514,13 @@ stock Taxi_ShowHUD(playerid)
     PlayerTextDrawShow(playerid, TAXI_COST[playerid]);
 }
 
-stock GetPlayerFraction(playerid)
+GetPlayerFraction(playerid)
 {
     if(PlayerInfo[playerid][pMember] == 0) return PlayerInfo[playerid][pLider];
     else return PlayerInfo[playerid][pMember];
 }
 
-stock CarOpis_Usun(playerid, vehicleid, message=false)
+CarOpis_Usun(playerid, vehicleid, message=false)
 {
     if(vehicleid >= MAX_VEHICLES) return 0;
     if(CarOpis[vehicleid] != Text3D:INVALID_3DTEXT_ID)
@@ -542,7 +542,7 @@ stock CarOpis_Usun(playerid, vehicleid, message=false)
 }
 
 
-stock DopalaczPD(playerid)
+DopalaczPD(playerid)
 {
 	new Float:Velocity[3], veh;
 	veh = GetPlayerVehicleID(playerid);
@@ -635,7 +635,7 @@ AntyCzitText(result[])
 		return 0;
 }
 
-stock GetPlayerSpeed(playerid)
+GetPlayerSpeed(playerid)
 {
     new
         Float: vX = Float: GetPlayerVehicleID(playerid),
@@ -653,7 +653,7 @@ stock GetPlayerSpeed(playerid)
     return (VectorSize(vX, vY, vZ) * 200.0);
 }
 
-stock HABox(numer, playerid)
+HABox(numer, playerid)
 {
     if(numer == 0)
 	{
@@ -761,11 +761,11 @@ public PlayerFixRadio(playerid)
 	}
 }
 
-stock MruDialog(playerid, title[], text[])
+MruDialog(playerid, title[], text[])
 {
 	return ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_MSGBOX, MruTitle(title), text, "Ok", "");
 }
-stock MruTitle(text[])
+MruTitle(text[])
 {
 	new title_str[128];
 	format(title_str, 128, "Mrucznik-RP » {00b33c}%s", text);
@@ -1345,7 +1345,7 @@ KoniecWyscigu(playerid)
 	return 1;
 }
 
-stock strreplace2(string[], find, replace)
+strreplace2(string[], find, replace)
 {
     for(new i=0; string[i]; i++)
     {
@@ -1472,7 +1472,7 @@ public AutodbzesRH(playerid)
 	return 0;
 }
 
-stock IsPlayerInCube(playerid, Float:xmin, Float:ymin, Float:zmin, Float:xmax, Float:ymax, Float:zmax)
+IsPlayerInCube(playerid, Float:xmin, Float:ymin, Float:zmin, Float:xmax, Float:ymax, Float:zmax)
 {
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
@@ -1480,7 +1480,7 @@ stock IsPlayerInCube(playerid, Float:xmin, Float:ymin, Float:zmin, Float:xmax, F
 	return 0;
 }
 
-stock GetPlayer2DZone(playerid, zone[], len)
+GetPlayer2DZone(playerid, zone[], len)
 {
 	if(PlayerInfo[playerid][pJailed] == 3) 
 	{
@@ -1498,7 +1498,7 @@ stock GetPlayer2DZone(playerid, zone[], len)
 	return 0;
 }
 
-stock IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2)
+IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2)
 {
     x2 -= x;
     y2 -= y;
@@ -1507,7 +1507,7 @@ stock IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Fl
 }
 
 //->Powiêkszenie czatu --->>>Skubany
-stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', maxlenght = sizeof (output))
+str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', maxlenght = sizeof (output))
 {
 	new len = strlen (source);
 	if (!source[idx])
@@ -1542,7 +1542,7 @@ stock str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', 
 	}
 }
 
-stock GetNick(playerid, rp = false)
+GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
@@ -1551,7 +1551,7 @@ stock GetNick(playerid, rp = false)
 	}
 	return nick;
 }
-stock GetObjectName(objectid)
+GetObjectName(objectid)
 {
 	new name[128];
 	if(objectid == 18974)
@@ -1576,7 +1576,7 @@ stock GetObjectName(objectid)
 	}
 	return name;
 }
-stock GetObjectBone(playerid, objectid)
+GetObjectBone(playerid, objectid)
 {
 	if(objectid == 18961)
 	{
@@ -1600,7 +1600,7 @@ stock GetObjectBone(playerid, objectid)
 	}
 	return boneIDzmienna[playerid];
 }
-stock ZmniejszDodatki(playerid, coGraczUsunal)
+ZmniejszDodatki(playerid, coGraczUsunal)
 {
 	if(coGraczUsunal == 9)
 	{
@@ -1688,12 +1688,12 @@ stock ZmniejszDodatki(playerid, coGraczUsunal)
 	}
 	return 0;
 }
-stock GetNumber(playerid)
+GetNumber(playerid)
 {
 	return PlayerInfo[playerid][pPnumber];
 }
 
-stock FindPlayerByNumber(number)
+FindPlayerByNumber(number)
 {
 	foreach(new i : Player)
 	{
@@ -1703,7 +1703,7 @@ stock FindPlayerByNumber(number)
 	return INVALID_PLAYER_ID;
 }
 
-stock Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
+Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
 {
     //Kilka sprawdzeñ
     if(!quit && !IsPlayerConnected(loser)) return 0;
@@ -1912,7 +1912,7 @@ DestroySelectionMenu(playerid)
     gPrevButtonTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
 }
 
-stock GetBarierID(frac)
+GetBarierID(frac)
 {
     new id=-1;
     for(new i=0;i<10;i++)
@@ -1946,7 +1946,7 @@ HandlePlayerItemSelection(playerid, selecteditem)
     return 1;
 }
 
-stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
+BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
 {
 	DestroyDynamicObject(Barier[frac][id]);
 	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
@@ -1955,7 +1955,7 @@ stock BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
     return 1;
 }
 
-stock BARIERKA_Remove(frakcja, id)
+BARIERKA_Remove(frakcja, id)
 {
     SetDynamicObjectPos(Barier[frakcja][id], 0.0, 0.0, -100.0);
     DestroyDynamic3DTextLabel(BarText[frakcja][id]);
@@ -1963,7 +1963,7 @@ stock BARIERKA_Remove(frakcja, id)
     return 1;
 }
 
-stock BARIERKA_Init()
+BARIERKA_Init()
 {
     for(new j=0;j<=4;j++) //rodziny, LSPD, FBI, NG LSMC
     {
@@ -2051,7 +2051,7 @@ strtok(const string[], &index)
 	return result;
 }
 
-stock ini_GetKey( line[] )
+ini_GetKey( line[] )
 {
 	new keyRes[256];
 	keyRes[0] = 0;
@@ -2060,7 +2060,7 @@ stock ini_GetKey( line[] )
     return keyRes;
 }
 
-stock ini_GetValue( line[] )
+ini_GetValue( line[] )
 {
 	new valRes[256];
 	valRes[0]=0;
@@ -2183,7 +2183,7 @@ DollahScoreUpdate()
 	return 1;
 }
 
-stock rightStr(source[], len)
+rightStr(source[], len)
 {
 	new retval[MAX_STRING2], srclen;
 	srclen = strlen(source);
@@ -2401,7 +2401,7 @@ IsAHA(playerid)
 	return 0;
 }
 
-stock IsPlayerInFraction(playerid, frac, adminlvl=-1)
+IsPlayerInFraction(playerid, frac, adminlvl=-1)
 {
     new leader = PlayerInfo[playerid][pLider];
     new member = PlayerInfo[playerid][pMember];
@@ -2521,7 +2521,7 @@ IsAKO(playerid)
 	return 0;
 }
 
-stock MozePobic(playerid)
+MozePobic(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -2555,7 +2555,7 @@ MozeMowicNaFamily(playerid)
 	return 0;
 }
 
-stock IsATajniak(playerid)
+IsATajniak(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -4024,7 +4024,7 @@ IsAInteriorVehicle(model)
 	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582 || model == 431 || model == 427 || model == 570);
 }
 
-stock IS_KomunikacjaMiejsca(carid)
+IS_KomunikacjaMiejsca(carid)
 {
     new lID = VehicleUID[carid][vUID];
     if(lID == 0) return 0;
@@ -4065,7 +4065,7 @@ IsATrain(carid)
 	return 0;
 }
 
-stock IsAAdministrator(playerid)
+IsAAdministrator(playerid)
 {
 	if(PlayerInfo[playerid][pAdmin] > 0)
 		return 1;
@@ -4279,7 +4279,7 @@ ClearCrime(playerid)
 	return 1;
 }
 
-stock FishCost(playerid, fish)
+FishCost(playerid, fish)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -4545,49 +4545,49 @@ Lotto(number)
 
 //------------[Logi:]----------------------
 
-stock AntiCheatLog(text[])
+AntiCheatLog(text[])
 {
 	new plik[32] = "logi/anticheatlog.log";
 	Log(plik, text);
 }
 
-stock VehicleErrorLog(text[])
+VehicleErrorLog(text[])
 {
 	new plik[32] = "logi/vehicleerror.log";
 	Log(plik, text);
 }
 
-stock WarningLog(text[])
+WarningLog(text[])
 {
     new plik[32] = "logi/warning.log";
     Log(plik, text);
 }
 
-stock CMDLog(text[])
+CMDLog(text[])
 {
     new plik[32] = "logi/cmd.log";
     Log(plik, text);
 }
 
-stock SejfLog(text[])
+SejfLog(text[])
 {
     new plik[32] = "logi/sejf.log";
     Log(plik, text);
 }
 
-stock ActionLog(text[])
+ActionLog(text[])
 {
     new plik[32] = "logi/action.log";
     Log(plik, text);
 }
 
-stock WeapLog(text[])
+WeapLog(text[])
 {
     new plik[32] = "logi/weap.log";
     Log(plik, text);
 }
 
-stock AccountSaveLog(text[])
+AccountSaveLog(text[])
 {
     new y,m,d;
     getdate(y, m, d);
@@ -4596,106 +4596,106 @@ stock AccountSaveLog(text[])
     Log(plik, text);
 }
 
-stock CzitLog(text[])
+CzitLog(text[])
 {
     new plik[32] = "logi/czit.log";
     Log(plik, text);
 }
 
-stock KasynoLog(text[])
+KasynoLog(text[])
 {
     new plik[32] = "logi/kasyno.log";
     Log(plik, text);
 }
-stock PrzekretLog(text[]) {
+PrzekretLog(text[]) {
 	new plik32[] = "logi/przekret.log";
 	Log(plik, text);
 }
-stock PayLog(text[])
+PayLog(text[])
 {
     new plik[32] = "logi/pay.log";
     Log(plik, text);
 }
-stock AutoLog(text[])
+AutoLog(text[])
 {
 	new plik[32] = "logi/auta.log";
 	Log(plik, text);
 }
-stock BankomatLog(text[])
+BankomatLog(text[])
 {
 
 	new plik[32] = "logi/bankomat.log";
 	Log(plik, text);
 }
-stock PremiumLog(text[])
+PremiumLog(text[])
 {
     new plik[32] = "logi/premium.log";
     Log(plik, text);
 }
 
-stock KickLog(text[])
+KickLog(text[])
 {
     new plik[32] = "logi/kick.log";
     Log(plik, text);
 }
 
-stock BanLog(text[])
+BanLog(text[])
 {
     new plik[32] = "logi/ban.log";
     Log(plik, text);
 }
-stock AdminDutyLog(text[])
+AdminDutyLog(text[])
 {
 	new plik[32] = "logi/adminduty.log";
 	Log(plik, text);
 }
-stock AdminDutyMaszLog(text[])
+AdminDutyMaszLog(text[])
 {
 	new plik[32] = "logi/admindutymasz.log";
 	Log(plik, text);
 }
 
-stock BiznesLog(text[])
+BiznesLog(text[])
 {
     new plik[32] = "logi/biznesy.log";
     Log(plik, text);
 }
 
-stock StatsLog(text[])
+StatsLog(text[])
 {
     new plik[32] = "logi/setstats.log";
     Log(plik, text);
 }
 
-stock EventLog(text[])
+EventLog(text[])
 {
     new plik[32] = "logi/event.log";
     Log(plik, text);
 }
 
-stock CKLog(text[])
+CKLog(text[])
 {
     new plik[32] = "logi/ck.log";
     Log(plik, text);
 }
-stock DomyLog(text[])
+DomyLog(text[])
 {
 	new plik[32] = "logi/domy.log";
 	Log(plik, text);
 }
-stock WarnLog(text[])
+WarnLog(text[])
 {
     new plik[32] = "logi/warn.log";
     Log(plik, text);
 }
 
-stock NickLog(text[])
+NickLog(text[])
 {
     new plik[32] = "logi/nick.log";
     Log(plik, text);
 }
 
-stock Log(plik[], text[])
+Log(plik[], text[])
 {
 	new File:file = fopen(plik, io_append);
     new message[512], data[2][3];
@@ -4728,7 +4728,7 @@ stock Log(plik[], text[])
 //------------[Koniec logi]----------------------
 
 
-stock SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
+SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
 {
 	foreach(new i : Player)
 	{
@@ -4741,7 +4741,7 @@ stock SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num
 
 }
 
-stock SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
+SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
 {
 	foreach(new i : Player)
 	{
@@ -4753,7 +4753,7 @@ stock SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
 	return 1;
 }
 
-stock LockCar(carid)
+LockCar(carid)
 {
 	foreach(new i : Player)
 	{
@@ -4761,7 +4761,7 @@ stock LockCar(carid)
 	}
 }
 
-stock UnLockCar(carid)
+UnLockCar(carid)
 {
 	foreach(new i : Player)
 	{
@@ -4769,7 +4769,7 @@ stock UnLockCar(carid)
 	}
 }
 
-stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
+SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {//example: SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Stealing A Police Vehicle");
 	if(IsPlayerConnected(playerid))
 	{
@@ -4993,7 +4993,7 @@ stock SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 	}
 }*/
 
-stock getEngineState(vehid)
+getEngineState(vehid)
 {
 	new engine, tmp;
 	GetVehicleParamsEx(vehid, engine, tmp, tmp, tmp, tmp, tmp, tmp);
@@ -5314,7 +5314,7 @@ SaveIRC()
 
 //--------------------------------------------------- SYTEM ORGANIZACJI --------------------------------------------
 
-stock orgLoad()
+orgLoad()
 {
     new lQuery[256], lID, lRow;
     mysql_query("SELECT * FROM `mru_org`");
@@ -5327,7 +5327,7 @@ stock orgLoad()
     printf("%d | Wczytano organizacje", lID);
 }
 
-stock orgSave(lID, savetype)
+orgSave(lID, savetype)
 {
     if(!orgIsValid(lID)) return 0;
     if(!MYSQL_SAVING) return 1;
@@ -5347,7 +5347,7 @@ stock orgSave(lID, savetype)
     return 1;
 }
 
-stock orgAdd(typ, name[], uid, id)
+orgAdd(typ, name[], uid, id)
 {
     OrgInfo[id][o_UID] = uid;
     OrgInfo[id][o_Type] = typ;
@@ -5360,16 +5360,16 @@ stock orgAdd(typ, name[], uid, id)
     mysql_query(lStr);
 }
 
-stock GetPlayerOrgType(playerid) return orgType(gPlayerOrg[playerid]);
-stock orgType(lID)
+GetPlayerOrgType(playerid) return orgType(gPlayerOrg[playerid]);
+orgType(lID)
 {
     if(lID == 0xFFFF) return 0;
     return OrgInfo[lID][o_Type];
 }
-stock orgPrintType(lID) return OrgTypes[orgType(lID)];
-stock GetPlayerOrg(playerid) return PlayerInfo[playerid][pOrg];
+orgPrintType(lID) return OrgTypes[orgType(lID)];
+GetPlayerOrg(playerid) return PlayerInfo[playerid][pOrg];
 
-stock orgID(uid)
+orgID(uid)
 {
     for(new i=0;i<MAX_ORG;i++)
     {
@@ -5381,13 +5381,13 @@ stock orgID(uid)
     return 0xFFFF;
 }
 
-stock orgIsValid(orgid)
+orgIsValid(orgid)
 {
     if(orgid < 0 || orgid > MAX_ORG-1) return 0;
     if(OrgInfo[orgid][o_UID] == 0) return 0;
     return 1;
 }
-stock orgGetFreeSlot()
+orgGetFreeSlot()
 {
     for(new i=0;i<MAX_ORG;i++)
     {
@@ -5399,7 +5399,7 @@ stock orgGetFreeSlot()
     return 0xFFFF;
 }
 
-stock orgInvitePlayer(playerid, orguid)
+orgInvitePlayer(playerid, orguid)
 {
     new orgid = orgID(orguid);
     if(!orgIsValid(orgid)) return 0;
@@ -5415,7 +5415,7 @@ stock orgInvitePlayer(playerid, orguid)
     return 1;
 }
 
-stock orgUnInvitePlayer(playerid)
+orgUnInvitePlayer(playerid)
 {
     new orgid = gPlayerOrg[playerid];
     PlayerInfo[playerid][pOrg] = 0;
@@ -5431,7 +5431,7 @@ stock orgUnInvitePlayer(playerid)
     return 1;
 }
 
-stock orgSetName(orgid, name[])
+orgSetName(orgid, name[])
 {
     if(!orgIsValid(orgid)) return 0;
     if(strlen(name) < 3 || strlen(name) > 31) return 0;
@@ -5439,7 +5439,7 @@ stock orgSetName(orgid, name[])
     return 1;
 }
 
-stock orgSetMotd(orgid, lMotd[])
+orgSetMotd(orgid, lMotd[])
 {
     if(!orgIsValid(orgid)) return 0;
     if(strlen(lMotd) > 127) return 0;
@@ -5448,7 +5448,7 @@ stock orgSetMotd(orgid, lMotd[])
     return 1;
 }
 
-stock orgSetSpawnAtPlayerPos(playerid, orgid)
+orgSetSpawnAtPlayerPos(playerid, orgid)
 {
     if(!orgIsValid(orgid)) return 0;
     GetPlayerPos(playerid, OrgInfo[orgid][o_Spawn][0], OrgInfo[orgid][o_Spawn][1], OrgInfo[orgid][o_Spawn][2]);
@@ -5457,7 +5457,7 @@ stock orgSetSpawnAtPlayerPos(playerid, orgid)
     return 1;
 }
 
-stock orgGivePlayerRank(playerid, callerid, rankid)
+orgGivePlayerRank(playerid, callerid, rankid)
 {
     new orgid = gPlayerOrg[playerid];
     if(!orgIsValid(orgid)) return 0;
@@ -5468,7 +5468,7 @@ stock orgGivePlayerRank(playerid, callerid, rankid)
     return 1;
 }
 
-stock orgIsLeader(playerid)
+orgIsLeader(playerid)
 {
     new orgid = gPlayerOrg[playerid];
     if(!orgIsValid(orgid)) return 0;
@@ -6267,7 +6267,7 @@ StworzDom(playerid, interior, oplata)
 	return dld;
 }
 
-stock Dom_ChangeInt(playerid, dld, interior)
+Dom_ChangeInt(playerid, dld, interior)
 {
 	if(interior == 8 || interior == 14)
 	{
@@ -6324,7 +6324,7 @@ stock Dom_ChangeInt(playerid, dld, interior)
 	return 1;
 }
 
-stock Dom_ChangeOwner(playerid, dom, forid)
+Dom_ChangeOwner(playerid, dom, forid)
 {
     new string[128];
 
@@ -7584,7 +7584,7 @@ BroadCast(color,const string[])
 	return 1;
 }
 
-stock enjoter(color,const string[], level)
+enjoter(color,const string[], level)
 {
 	foreach(new i : Player)
 	{
@@ -8147,7 +8147,7 @@ SendZGMessage(color, string[])
 
 //-----------------------[koniec chaty]------------------------------
 
-stock AddCar(car)
+AddCar(car)
 {
 	new randcol = random(126);
 	new randcol2 = 1;
@@ -8319,7 +8319,7 @@ VehicleToPoint(Float:radi, vehicleid, Float:x, Float:y, Float:z)
 		return 0;
 }
 //stock DodajWjedz(playerid, Float:x, Float:y, Float:z, Float:xX, Float:xY, Float:xZ, Float:x2, Float:y2, Float:z2, Float:xX2, Float:xY2, Float:xZ2, VW, INT, VW2, INT2, const tekst[], const tekst2[], wyswietlajtekst = false, wyswietlajtekst2 = false)
-stock IsVehicleInUse(vehicleid)
+IsVehicleInUse(vehicleid)
 {
 	new temp;
 	foreach(new i : Player)
@@ -8333,7 +8333,7 @@ stock IsVehicleInUse(vehicleid)
     else return false;
 }
 
-stock SetCamBack(playerid)
+SetCamBack(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
@@ -8881,7 +8881,7 @@ public NG_OpenGateWithKey(playerid)
 	return 1;
 }
 
-stock OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
+OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
 {
 	new Float:health;
 	new timeobl;
@@ -8899,7 +8899,7 @@ stock OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false
 	return 1;
 }
 //      Aktualizacja    09.06.2014  KUBI  fix 09.07
-stock ElevatorTravel(playerid, Float:x, Float:y, Float:z, vw, Float:face)
+ElevatorTravel(playerid, Float:x, Float:y, Float:z, vw, Float:face)
 {
     if(LSMCElevatorQueue) return;
     LSMCElevatorQueue = true;
@@ -8953,7 +8953,7 @@ public LSMCElevatorFree()
     return 1;
 }
 
-stock ChangeLSMCElevatorState()
+ChangeLSMCElevatorState()
 {
     for(new i=0;i<8;i++)
     {
@@ -8989,7 +8989,7 @@ stock ChangeLSMCElevatorState()
     }
 }
 
-stock LoadServerInfo()
+LoadServerInfo()
 {
     ServerInfo="\0";
     mysql_query("SELECT `info` FROM `mru_serverinfo` WHERE `aktywne`=1 LIMIT 1");
@@ -9019,7 +9019,7 @@ stock LoadServerInfo()
     }
 }
 
-stock LoadDisallowedCommands()
+LoadDisallowedCommands()
 {
     for(new i=0;i<sizeof(DisallowedCommands);i++)
     {
@@ -9032,7 +9032,7 @@ stock LoadDisallowedCommands()
     mysql_free_result();
 }
 
-stock IsCommandBlocked(cmd[])
+IsCommandBlocked(cmd[])
 {
     for(new i=0;i<sizeof(DisallowedCommands);i++)
     {
@@ -9042,7 +9042,7 @@ stock IsCommandBlocked(cmd[])
     return 0;
 }
 
-stock LoadConfig()
+LoadConfig()
 {
     new query[1024], data[256];
     mysql_query("SELECT * FROM `mru_config`");
@@ -9067,7 +9067,7 @@ stock LoadConfig()
     mysql_free_result();
 }
 
-stock WczytajRangi()
+WczytajRangi()
 {
     new query[512], id, typ, rangi[256],ranga[MAX_RANG][MAX_RANG_LEN];
     mysql_query("SELECT * FROM `mru_nazwyrang`");
@@ -9097,7 +9097,7 @@ stock WczytajRangi()
     print("Wczytano rangi");
 }
 
-stock WczytajSkiny()
+WczytajSkiny()
 {
     new query[256], id, typ, skiny[128],skin[MAX_SKIN_SELECT];
     mysql_query("SELECT * FROM `mru_skins`");
@@ -9127,7 +9127,7 @@ stock WczytajSkiny()
     print("Wczytano skiny");
 }
 
-stock Config_FamilyScript()
+Config_FamilyScript()
 {
     new query[256], id, nazwa[20];
     mysql_query("SELECT * FROM `mru_rodziny`");
@@ -9169,7 +9169,7 @@ stock Config_FamilyScript()
     mysql_free_result();
 }
 
-stock WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
+WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
 {
     new length = strlen(source);
 
@@ -9191,7 +9191,7 @@ stock WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
 }
 
 //Sjefy
-stock Sejf_Add(frakcja, kasa)
+Sejf_Add(frakcja, kasa)
 {
     if(frakcja != 19)
     {
@@ -9203,7 +9203,7 @@ stock Sejf_Add(frakcja, kasa)
     Sejf_Save(frakcja);
 }
 
-stock SejfR_Add(frakcja, kasa)
+SejfR_Add(frakcja, kasa)
 {
     new str[80];
     format(str, 80, "RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
@@ -9212,7 +9212,7 @@ stock SejfR_Add(frakcja, kasa)
     SejfR_Save(frakcja);
 }
 
-stock Sejf_Save(frakcja)
+Sejf_Save(frakcja)
 {
     if(!SafeLoaded) return;
     new query[128];
@@ -9220,7 +9220,7 @@ stock Sejf_Save(frakcja)
     if(MYSQL_SAVING) mysql_query(query);
 }
 
-stock SejfR_Save(frakcja)
+SejfR_Save(frakcja)
 {
     if(!SafeLoaded) return;
     new query[128];
@@ -9228,7 +9228,7 @@ stock SejfR_Save(frakcja)
     if(MYSQL_SAVING) mysql_query(query);
 }
 
-stock Sejf_Load()
+Sejf_Load()
 {
     new query[128], id, typ, kasa, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
     mysql_query("SELECT * FROM `mru_sejfy`");
@@ -9251,11 +9251,11 @@ public HTTP_LogResponse(index, response_code, data[])
     }
 }
 
-stock MASTER_SendTextToWebsite(file[]) {
+MASTER_SendTextToWebsite(file[]) {
 
 }
 
-stock MASTER_SendLog(typ)
+MASTER_SendLog(typ)
 {
     new plik[32];
     switch(typ)
@@ -9274,7 +9274,7 @@ stock MASTER_SendLog(typ)
     MASTER_SendTextToWebsite(plik);
 }
 
-stock IsNickCorrect(nick[])
+IsNickCorrect(nick[])
 {
 	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
 	{
@@ -9283,7 +9283,7 @@ stock IsNickCorrect(nick[])
 	return 0;
 }
 
-stock CheckAlfaNumeric(password[])
+CheckAlfaNumeric(password[])
 {
     new charsets[46] = "0123456789a¹bcædeêfghijkl³mnñoóprsœtuvwyz¿Ÿxq";
 
@@ -9355,7 +9355,7 @@ stock CheckAlfaNumeric(password[])
     return 1;
 }*/
 
-stock GetVehicleMaxPassengers(iModel) //RydeR
+GetVehicleMaxPassengers(iModel) //RydeR
 {
     if(400 <= iModel <= 611)
     {
@@ -9372,7 +9372,7 @@ stock GetVehicleMaxPassengers(iModel) //RydeR
     return 0xF;
 }
 
-stock issafefortextdraw(str[]) { //JerneL
+issafefortextdraw(str[]) { //JerneL
 
 	new safetil = -5;
 
@@ -9398,7 +9398,7 @@ stock issafefortextdraw(str[]) { //JerneL
 
 //Kubi AIRLINES system TOWER manager 3D
 
-stock Render_Smart3D(playerid, vehicleid, Float:x, Float:y, Float:z)
+Render_Smart3D(playerid, vehicleid, Float:x, Float:y, Float:z)
 {
     z = (80.4125) - ((y+2297.7136 +250.0)/600);
     y=-2297.7136;
@@ -9409,7 +9409,7 @@ stock Render_Smart3D(playerid, vehicleid, Float:x, Float:y, Float:z)
     TOWER_TrafficHologram[playerid][vehicleid] = CreatePlayer3DTextLabel(playerid, str, 0xFF0000FF, x, y, z, 8.0);
 }
 
-stock AirTower3DDelete(playerid)
+AirTower3DDelete(playerid)
 {
     for(new i=0;i<MAX_VEHICLES;i++)
     {
@@ -9440,7 +9440,7 @@ public INT_AirTower_RadarLoop(playerid)
     }
 }
 
-stock INT_AirTower_RadarInit(playerid) //first step
+INT_AirTower_RadarInit(playerid) //first step
 {
     TOWER_PlayerHologram[playerid] = CreatePlayer3DTextLabel(playerid, "=========================================\n=                                                                                |\n=========================================\n\n\n\n\n                          TOWER", 0xFFFF00FF, 1627.3287, -2297.7136, 80.4125, 8.0);
 
@@ -9448,7 +9448,7 @@ stock INT_AirTower_RadarInit(playerid) //first step
     TOWET_LoopTimer[playerid] = SetTimerEx("INT_AirTower_RadarLoop", 1000, 1, "i", playerid);
 }
 
-stock INT_AirTower_RadarExit(playerid)
+INT_AirTower_RadarExit(playerid)
 {
     DeletePlayer3DTextLabel(playerid, TOWER_PlayerHologram[playerid]);
     AirTower3DDelete(playerid);
@@ -9489,7 +9489,7 @@ public TRAIN_DoHorn(veh)
 
 
 //13.07 system skinow mysql
-stock DestroySkinSelection(playerid)
+DestroySkinSelection(playerid)
 {
     for(new i=0;i<=MAX_SKIN_SELECT;i++)
     {
@@ -9521,7 +9521,7 @@ PlayerText:CreateSkinSelectionTXD(playerid, modelindex, Float:Xpos, Float:Ypos, 
     return txtPlayerSprite;
 }
 
-stock SkinSelection_GetNumber(typ, index)
+SkinSelection_GetNumber(typ, index)
 {
     new ile=0;
     switch(typ)
@@ -9544,7 +9544,7 @@ stock SkinSelection_GetNumber(typ, index)
     return ile;
 }
 
-stock ProceedSkinSelection(playerid, index, typ)
+ProceedSkinSelection(playerid, index, typ)
 {
     //W - szerokosc H - wysokosc
     new Float:xstart=0.0, Float:ystart=300.0, Float:w=50.0, Float:h=60.0,Float:margin = 5.0, Float:x, Float:y;
@@ -9665,7 +9665,7 @@ stock ProceedSkinSelection(playerid, index, typ)
 
 //BLINK
 
-stock SetCarBlinking(veh, side, bool:skip=false) //0 - left 1 - right 2 - emergy
+SetCarBlinking(veh, side, bool:skip=false) //0 - left 1 - right 2 - emergy
 {
     if(IsCarBlinking(veh) && !skip) return DisableCarBlinking(veh);
     new model=GetVehicleModel(veh),obj[4];
@@ -9768,21 +9768,21 @@ public B_DisableBlinks(vehicleid)
     return 1;
 }
 
-stock DisableCarBlinking(veh)
+DisableCarBlinking(veh)
 {
 	if(!IsCarBlinking(veh)) return 1;
     B_DisableBlinks(veh);
 	return 1;
 }
 
-stock IsCarBlinking(vehicleid)
+IsCarBlinking(vehicleid)
 {
     if((BlinkSide[vehicleid] == 0 && Blink[vehicleid][0] == -1 && Blink[vehicleid][1] == -1) || (BlinkSide[vehicleid] == 1 && Blink[vehicleid][2] == -1 && Blink[vehicleid][3] == -1)) return 0;
     else if(Blink[vehicleid][0] == -1 && Blink[vehicleid][1] == -1 && Blink[vehicleid][2] == -1 && Blink[vehicleid][3] == -1) return 0;
     return 1;
 }
 
-stock B_IsTrailer(vehicleid)
+B_IsTrailer(vehicleid)
 {
     switch(GetVehicleModel(vehicleid))
     {
@@ -9839,13 +9839,13 @@ public Zone_HideInfo(playerid)
     ZonePlayerTimer[playerid]=0;
 }
 
-stock ZoneTXD_Unload()
+ZoneTXD_Unload()
 {
     for(new i=0;i<4;i++) TextDrawDestroy(Text:i);
 }
 
 
-stock Zone_StartAttack(zoneid, attacker, defender)
+Zone_StartAttack(zoneid, attacker, defender)
 {
     ZoneAttack[zoneid] = true; //make
 
@@ -9950,7 +9950,7 @@ stock Zone_StartAttack(zoneid, attacker, defender)
     printf("[GangZone] Atak na strefê %d przez %d. Atakuje %d osób broni %d osób.", zoneid, attacker, ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
 }
 
-stock Zone_GangUpdate(bool:cash=false)
+Zone_GangUpdate(bool:cash=false)
 {
     new string[256];
     new gangid, timegang;
@@ -10157,7 +10157,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
     ZoneAttackData[zoneid][1] = 0;
 }
 
-stock Zone_Sync(playerid)
+Zone_Sync(playerid)
 {
     new frac = GetPlayerFraction(playerid);
     if(frac == 0) frac = GetPlayerOrg(playerid);
@@ -10195,7 +10195,7 @@ stock Zone_Sync(playerid)
     }
 }
 
-stock Zone_Load()
+Zone_Load()
 {
     new query[128];
     mysql_query("SELECT * FROM `mru_strefy`");
@@ -10232,7 +10232,7 @@ stock Zone_Load()
     Zone_Points[1] = id;
 }
 
-stock Zone_CheckPossToAttack(playerid, zoneid)
+Zone_CheckPossToAttack(playerid, zoneid)
 {
     if(ZoneProtect[zoneid] == 1)
     {
@@ -10337,7 +10337,7 @@ stock Zone_CheckPossToAttack(playerid, zoneid)
     return true;
 }
 
-stock ZoneTXD_Show(playerid, zoneid)
+ZoneTXD_Show(playerid, zoneid)
 {
     new bool:gang=false;
     new frac=GetPlayerFraction(playerid);
@@ -10378,7 +10378,7 @@ stock ZoneTXD_Show(playerid, zoneid)
     SetPVarInt(playerid, "zoneid", zoneid);
 }
 
-stock ZoneTXD_Hide(playerid)
+ZoneTXD_Hide(playerid)
 {
     for(new i=0;i<4;i++)
     {
@@ -10390,7 +10390,7 @@ stock ZoneTXD_Hide(playerid)
     PlayerTextDrawHide(playerid, ZonePTXD_Member[playerid]);
 }
 
-stock Zone_MinimumPeople(zoneid)
+Zone_MinimumPeople(zoneid)
 {
     new Float:area = Zone_Area[zoneid]/10000;
     new ppl;
@@ -10408,7 +10408,7 @@ stock Zone_MinimumPeople(zoneid)
     return ppl;
 }
 
-stock Zone_GetCash(zoneid)
+Zone_GetCash(zoneid)
 {
     new Float:area = Zone_Area[zoneid]/10000;
     // za 1km^2 - 1.000 co PayDay?
@@ -10442,7 +10442,7 @@ stock Zone_GetCash(zoneid)
     return 1;
 }*/
 
-stock Car_Lock(playerid, veh)
+Car_Lock(playerid, veh)
 {
 	if(IsABike(veh)) return sendErrorMessage(playerid, "Nie mo¿esz u¿yæ /lock na motocyklu");
     new engine, lights, alarm, doors, bonnet, boot, objective;
@@ -10467,7 +10467,7 @@ stock Car_Lock(playerid, veh)
 //13.08
 //--------------------------------------------------
 
-stock GetMoveDirectionFromKeys(ud, lr)
+GetMoveDirectionFromKeys(ud, lr)
 {
 	new direction = 0;
 
@@ -10491,7 +10491,7 @@ stock GetMoveDirectionFromKeys(ud, lr)
 
 //--------------------------------------------------
 
-stock MoveCamera(playerid)
+MoveCamera(playerid)
 {
 	new Float:FV[3], Float:ncCP[3];
 	GetPlayerCameraPos(playerid, ncCP[0], ncCP[1], ncCP[2]);          // 	Cameras position in space
@@ -10517,7 +10517,7 @@ stock MoveCamera(playerid)
 
 //--------------------------------------------------
 
-stock GetNextCameraPosition(move_mode, Float:ncCP[3], Float:FV[3], &Float:X, &Float:Y, &Float:Z)
+GetNextCameraPosition(move_mode, Float:ncCP[3], Float:FV[3], &Float:X, &Float:Y, &Float:Z)
 {
     // Calculate the cameras next position based on their current position and the direction their camera is facing
     #define OFFSET_X (FV[0]*6000.0)
@@ -10577,7 +10577,7 @@ stock GetNextCameraPosition(move_mode, Float:ncCP[3], Float:FV[3], &Float:X, &Fl
 }
 //--------------------------------------------------
 
-stock CancelFlyMode(playerid)
+CancelFlyMode(playerid)
 {
     GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	DeletePVar(playerid, "FlyMode");
@@ -10597,7 +10597,7 @@ stock CancelFlyMode(playerid)
 
 //--------------------------------------------------
 
-stock FlyMode(playerid, typ)
+FlyMode(playerid, typ)
 {
 	// Create an invisible object for the players camera to be attached to
 	new Float:X, Float:Y, Float:Z;
@@ -10625,7 +10625,7 @@ stock FlyMode(playerid, typ)
 	return 1;
 }
 
-stock Kolczatka_GetID()
+Kolczatka_GetID()
 {
     new id=-1;
     for(new i=0;i<MAX_KOLCZATEK;i++)
@@ -10639,7 +10639,7 @@ stock Kolczatka_GetID()
     return id;
 }
 
-stock Kolczatka_Delete(id)
+Kolczatka_Delete(id)
 {
     if(KolID[id] == -1) return 1;
     DestroyDynamicObject(KolID[id]);
@@ -10661,7 +10661,7 @@ public OnPlayerEnterSpikes(playerid)
     return 1;
 }
 
-stock GetVehicleRotation(vehicleid,&Float:heading, &Float:attitude, &Float:bank)
+GetVehicleRotation(vehicleid,&Float:heading, &Float:attitude, &Float:bank)
 {
     new Float:quat_w,Float:quat_x,Float:quat_y,Float:quat_z;
     GetVehicleRotationQuat(vehicleid,quat_w,quat_x,quat_y,quat_z);
@@ -10670,7 +10670,7 @@ stock GetVehicleRotation(vehicleid,&Float:heading, &Float:attitude, &Float:bank)
     return 1;
 }
 
-stock ConvertNonNormaQuatToEuler(Float: qw, Float: qx, Float:qy, Float:qz,
+ConvertNonNormaQuatToEuler(Float: qw, Float: qx, Float:qy, Float:qz,
                                 &Float:heading, &Float:attitude, &Float:bank)
 {
     new Float: sqw = qw*qw;
@@ -10700,7 +10700,7 @@ stock ConvertNonNormaQuatToEuler(Float: qw, Float: qx, Float:qy, Float:qz,
     return 1;
 }
 
-stock Patrol_Init()
+Patrol_Init()
 {
     //BLUE
     PatrolZones[0] = GangZoneCreate(78.125,-1777.34375,625.0,-816.40625);//1
@@ -10875,7 +10875,7 @@ stock Patrol_Init()
     }
 }
 
-stock Patrol_Unload()
+Patrol_Unload()
 {
     TextDrawDestroy(PatrolMap);
     TextDrawDestroy(PatrolAlfa[0]);
@@ -10905,7 +10905,7 @@ stock Patrol_Unload()
     }
 }
 
-stock GetPatrolID()
+GetPatrolID()
 {
     new id=-1;
     for(new i = 0; i < MAX_PATROLS ;i++)
@@ -10919,7 +10919,7 @@ stock GetPatrolID()
     return id;
 }
 
-stock Patrol_ShowMap(playerid)
+Patrol_ShowMap(playerid)
 {
     TextDrawShowForPlayer(playerid, PatrolMap);
     TextDrawShowForPlayer(playerid, PatrolAlfa[0]);
@@ -10939,7 +10939,7 @@ stock Patrol_ShowMap(playerid)
     SetPVarInt(playerid, "patrolmap", 1);
 }
 
-stock Patrol_HideMap(playerid)
+Patrol_HideMap(playerid)
 {
     TextDrawHideForPlayer(playerid, PatrolMap);
     TextDrawHideForPlayer(playerid, PatrolAlfa[0]);
@@ -10964,7 +10964,7 @@ stock Patrol_HideMap(playerid)
     SetPVarInt(playerid, "patrolmap", 0);
 }
 
-stock Patrol_DisplayZones(playerid)
+Patrol_DisplayZones(playerid)
 {
     GangZoneShowForPlayer(playerid, PatrolZones[0], 0x0000CC55);
     GangZoneShowForPlayer(playerid, PatrolZones[1], 0x0000CC55);
@@ -10979,7 +10979,7 @@ stock Patrol_DisplayZones(playerid)
     GangZoneShowForPlayer(playerid, PatrolZones[7], 0xCCCC0055);
 }
 
-stock Patrol_HideZones(playerid)
+Patrol_HideZones(playerid)
 {
     GangZoneHideForPlayer(playerid, PatrolZones[0]);
     GangZoneHideForPlayer(playerid, PatrolZones[1]);
@@ -11024,7 +11024,7 @@ public PatrolGPS()
     }
 }
 
-stock Patrol_CreateMarker(patrolid, Float:x, Float:y, type)
+Patrol_CreateMarker(patrolid, Float:x, Float:y, type)
 {
     if(_:PatrolMarker[patrolid] != INVALID_TEXT_DRAW)
     {
@@ -11074,7 +11074,7 @@ stock Patrol_CreateMarker(patrolid, Float:x, Float:y, type)
 }
 
 //Scena
-stock Scena_CreateAt(Float:x, Float:y, Float:z)
+Scena_CreateAt(Float:x, Float:y, Float:z)
 {
     new start, end, objstart, objend;
     //Pod³oga
@@ -11176,7 +11176,7 @@ public Scena_GenerateEffect()
     Scena_Refresh();
 }
 
-stock Scena_Refresh()
+Scena_Refresh()
 {
     for(new i=0;i<MAX_PLAYERS;i++)
     {
@@ -11202,7 +11202,7 @@ public Scena_ScreenEffect()
     }
 }
 
-stock Scena_NeonEffect()
+Scena_NeonEffect()
 {
     switch(ScenaNeonData[SCNeonTyp])
     {
@@ -11284,7 +11284,7 @@ stock Scena_NeonEffect()
     }
 }
 
-stock Scena_Destroy()
+Scena_Destroy()
 {
     for(new i=ScenaData[0];i<=ScenaData[1];i++)
     {
@@ -11325,7 +11325,7 @@ public OnPlayerEnterOilSpot(playerid)
     return 1;
 }
 
-stock Oil_LoadCleanProcedure(playerid)
+Oil_LoadCleanProcedure(playerid)
 {
     for(new i=0;i<5;i++)
     {
@@ -11342,7 +11342,7 @@ stock Oil_LoadCleanProcedure(playerid)
     ApplyAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_In", 4.1, 0, 0, 0, 0, -1);
 }
 
-stock Oil_UpdateRandomKeys(playerid)
+Oil_UpdateRandomKeys(playerid)
 {
     for(new i=0;i<4;i++)
     {
@@ -11351,7 +11351,7 @@ stock Oil_UpdateRandomKeys(playerid)
     PlayerOilKeys[playerid][4] = 1+random(4);
 }
 
-stock Oil_OnPlayerPress(playerid, keys)
+Oil_OnPlayerPress(playerid, keys)
 {
     if(GetTickDiff(GetTickCount(), GetPVarInt(playerid, "oil_press")) < 100) return 0;
     if((keys == KEY_UP) && PlayerOilKeys[playerid][2] == 3) Oil_PressedOK(playerid);
@@ -11376,7 +11376,7 @@ stock Oil_OnPlayerPress(playerid, keys)
     return 1;
 }
 
-stock Oil_PressedOK(playerid)
+Oil_PressedOK(playerid)
 {
     new lID = GetPVarInt(playerid, "oil_id");
     PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
@@ -11390,7 +11390,7 @@ stock Oil_PressedOK(playerid)
     GameTextForPlayer(playerid, lStr, 1000, 5);
 }
 
-stock Oil_UpdateKeysSeq(playerid)
+Oil_UpdateKeysSeq(playerid)
 {
     new lStr[8];
     for(new i=0;i<5;i++)
@@ -11408,7 +11408,7 @@ stock Oil_UpdateKeysSeq(playerid)
     }
 }
 
-stock Oil_GenerateFromVehicle(vehicleid)
+Oil_GenerateFromVehicle(vehicleid)
 {
     if(!bOilOccur[vehicleid])
     {
@@ -11453,7 +11453,7 @@ stock Oil_GenerateFromVehicle(vehicleid)
     return 1;
 }
 
-stock Oil_Destroy(lID)
+Oil_Destroy(lID)
 {
     OilData[lID][oilPos][0] = 0.0,
     OilData[lID][oilPos][1] = 0.0,
@@ -11479,7 +11479,7 @@ stock Oil_Destroy(lID)
     }
 }
 
-stock areThereAnyAdminsOrPolAdmins()
+areThereAnyAdminsOrPolAdmins()
 {
 	new bool:liczydelko=false;
 	foreach(new i : Player)
@@ -11496,7 +11496,7 @@ stock areThereAnyAdminsOrPolAdmins()
 	return liczydelko;
 }
 
-stock Oil_GenerateID()
+Oil_GenerateID()
 {
     for(new i=0;i<MAX_OILS;i++)
     {
@@ -11506,9 +11506,9 @@ stock Oil_GenerateID()
     return -1;
 }
 
-stock Oil_IsValid(id) return (OilData[id][oilPos][0] != 0.0);
+Oil_IsValid(id) return (OilData[id][oilPos][0] != 0.0);
 
-stock Oil_GetIDAtPosition(Float:x, Float:y, Float:z, Float:radius)
+Oil_GetIDAtPosition(Float:x, Float:y, Float:z, Float:radius)
 {
     new id=-1, Float:lA, Float:lB=radius;
     for(new i=0;i<MAX_OILS;i++)
@@ -11526,7 +11526,7 @@ stock Oil_GetIDAtPosition(Float:x, Float:y, Float:z, Float:radius)
     return id;
 }
 
-stock ChangePlayerName(playerid, name[])
+ChangePlayerName(playerid, name[])
 {
     if(strlen(name) >= 21)
 	{
@@ -11605,7 +11605,7 @@ stock ChangePlayerName(playerid, name[])
     MruMySQL_SaveAccount(playerid);
     return 1;
 }
-stock CheckVulgarityString(text[])
+CheckVulgarityString(text[])
 {
 	new valueVulgarity;
 	if(strfind(text, "kurwa") != -1
@@ -11623,7 +11623,7 @@ stock CheckVulgarityString(text[])
 	}
 	return valueVulgarity;
 }
-stock SetRPName(playerid)
+SetRPName(playerid)
 {
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, sizeof(nick));
@@ -11650,7 +11650,7 @@ public VendCheck(playerid)
 //--------------------------------------------------
 //--------------------------------------------------
 //30.10
-stock TJD_Exit()
+TJD_Exit()
 {
     TextDrawDestroy(TXD_TJDBg);
     TextDrawDestroy(TXD_TJDImg);
@@ -11661,7 +11661,7 @@ stock TJD_Exit()
     if(MYSQL_SAVING) mysql_query(lStr);
 }
 
-stock TJD_Load()
+TJD_Load()
 {
     for(new i=0;i<7;i++) TJD_RestoreBox(i);
 
@@ -11788,13 +11788,13 @@ stock TJD_Load()
     TJD_Label = CreateDynamic3DTextLabel(lStr, -1, TransportJobData[0][eTJDStartX], TransportJobData[0][eTJDStartY], TransportJobData[0][eTJDStartZ]+1.0, 15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
 }
 
-stock TJD_UpdateLabel()
+TJD_UpdateLabel()
 {
     new lStr[64];
     format(lStr, 64, "Liczba materia³ów\n{99311E}%d\n{646464}(/zlecenie)", TJD_Materials);
     UpdateDynamic3DTextLabelText(TJD_Label, -1, lStr);
 }
-stock TJD_JobEnd(playerid, bool:quiter=false)
+TJD_JobEnd(playerid, bool:quiter=false)
 {
     SetPVarInt(playerid, "TJDend", 0);
     SetPVarInt(playerid, "TJDstartend", 0);
@@ -11828,7 +11828,7 @@ stock TJD_JobEnd(playerid, bool:quiter=false)
     PlayerInfo[playerid][pTruckSkill]+=PlayerInfo[playerid][pTruckSkill]+floatround(ile/5, floatround_floor);
 }
 
-stock TJD_CallCheckpoint(playerid, veh)
+TJD_CallCheckpoint(playerid, veh)
 {
     if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return 1;
     if(GetVehicleModel(veh) == 578)
@@ -11891,7 +11891,7 @@ stock TJD_CallCheckpoint(playerid, veh)
 }
 
 
-stock TJD_CallRaceCheckpoint(playerid)
+TJD_CallRaceCheckpoint(playerid)
 {
     if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
     if(GetPVarInt(playerid, "TJDend") == 1)
@@ -11901,7 +11901,7 @@ stock TJD_CallRaceCheckpoint(playerid)
     }
 }
 
-stock TJD_CallEnterVeh(playerid, veh)
+TJD_CallEnterVeh(playerid, veh)
 {
     if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
     if(GetVehicleModel(veh) == 530)
@@ -11925,7 +11925,7 @@ stock TJD_CallEnterVeh(playerid, veh)
     }
 }
 
-stock TJD_CallExitVeh(playerid)
+TJD_CallExitVeh(playerid)
 {
     if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
     if(GetPVarInt(playerid, "transjob") == 1)
@@ -11942,7 +11942,7 @@ stock TJD_CallExitVeh(playerid)
     }
 }
 
-stock TJD_CheckForUsedBox(vehicleid)
+TJD_CheckForUsedBox(vehicleid)
 {
     if(TJDVehBox[vehicleid] != 0)
     {
@@ -11978,7 +11978,7 @@ stock TJD_CheckForUsedBox(vehicleid)
     }
 }
 
-stock TJD_TryPickup(playerid, veh)
+TJD_TryPickup(playerid, veh)
 {
     if(TJDVehBox[veh] == 0)
     {
@@ -12026,7 +12026,7 @@ stock TJD_TryPickup(playerid, veh)
     }
 }
 
-stock TJD_RestoreBox(id)
+TJD_RestoreBox(id)
 {
     if(TJDBoxes[id] != 0) DestroyDynamicObject(TJDBoxes[id]);
     TJDBoxes[id] = CreateDynamicObject(1558, TJD_BoxPos[id][0],TJD_BoxPos[id][1],TJD_BoxPos[id][2],0.0,0.0,0.0);
@@ -12163,7 +12163,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
     }
 }
 
-stock TJD_DestroyTXD(playerid)
+TJD_DestroyTXD(playerid)
 {
     PlayerTextDrawDestroy(playerid, TXD_TJDCounter[playerid]);
     TextDrawHideForPlayer(playerid, TXD_TJDBg);
@@ -12172,7 +12172,7 @@ stock TJD_DestroyTXD(playerid)
     SetPlayerWorldBounds(playerid, 20000.0000, -20000.0000, 20000.0000, -20000.0000);
 }
 
-stock TJD_CreateTXD(playerid)
+TJD_CreateTXD(playerid)
 {
     new str[8];
     format(str, 8, "%d", GetPVarInt(playerid, "transboxes"));
@@ -12222,7 +12222,7 @@ public BBD_Timer()
     }
 }
 
-stock BBD_Turn(id)
+BBD_Turn(id)
 {
     if(BoomBoxData[id][BBD_Standby])
     {
@@ -12252,7 +12252,7 @@ stock BBD_Turn(id)
     if(BoomBoxData[id][BBD_Refresh]) BoomBoxData[id][BBD_Refresh] = false;
 }
 
-stock BBD_Pickup(playerid, id)
+BBD_Pickup(playerid, id)
 {
     if(BoomBoxData[id][BBD_Carried]-1 >= 0) return;
     if(BoomBoxData[id][BBD_Standby])
@@ -12274,7 +12274,7 @@ stock BBD_Pickup(playerid, id)
     if(BoomBoxData[id][BBD_Obj] != 0) DestroyDynamicObject(BoomBoxData[id][BBD_Obj]);
 }
 
-stock BBD_Putdown(playerid, id)
+BBD_Putdown(playerid, id)
 {
     if(BoomBoxData[id][BBD_Carried]-1 < 0) return;
     new Float:x, Float:y, Float:z, Float:a;
@@ -12301,7 +12301,7 @@ stock BBD_Putdown(playerid, id)
     BBD_Turn(id);
 }
 
-stock BBD_GetID()
+BBD_GetID()
 {
     for(new i=0;i<MAX_BOOMBOX;i++)
     {
@@ -12335,7 +12335,7 @@ public UnhireRentCar(playerid, veh)
     return 1;
 }
 
-stock EDIT_ShowRangNames(playerid, typ, uid, bool:edit=false)
+EDIT_ShowRangNames(playerid, typ, uid, bool:edit=false)
 {
     new str[512];
     for(new i=0;i<10;i++)
@@ -12350,7 +12350,7 @@ stock EDIT_ShowRangNames(playerid, typ, uid, bool:edit=false)
     return 1;
 }
 
-stock EDIT_SaveRangs(typ, uid)
+EDIT_SaveRangs(typ, uid)
 {
     new lStr[256], lStr_escaped[256], query[512];
 
@@ -12497,7 +12497,7 @@ ZaladujSamochody()
 	return 1;
 }
 
-stock Support_GetID()
+Support_GetID()
 {
     for(new i=0;i<MAX_TICKETS;i++)
     {
@@ -12507,7 +12507,7 @@ stock Support_GetID()
     return -1;
 }
 
-stock Support_Add(caller, sub[], desc[])
+Support_Add(caller, sub[], desc[])
 {
     new id = Support_GetID();
     if(id == -1) return -1;
@@ -12522,7 +12522,7 @@ stock Support_Add(caller, sub[], desc[])
     return id;
 }
 
-stock Support_ClearTicket(id)
+Support_ClearTicket(id)
 {
     TICKET[id][suppValid] = false;
     SetPVarInt(TICKET[id][suppCaller], "active_ticket", 0);
@@ -12533,7 +12533,7 @@ stock Support_ClearTicket(id)
     return 1;
 }
 
-stock Support_ShowTickets(playerid)
+Support_ShowTickets(playerid)
 {
     new str[1024], shortname[24];
     for(new i=0;i<MAX_TICKETS;i++)
@@ -12564,7 +12564,7 @@ stock Support_ShowTickets(playerid)
     return 1;
 }
 
-stock name_add_tabs(names[])
+name_add_tabs(names[])
 {
 	new ret[40];
 	if(strlen(names) <= 8)	format(ret, sizeof(ret), "%s\t\t", names);
@@ -12572,12 +12572,12 @@ stock name_add_tabs(names[])
 	return ret;
 }
 
-stock RGBAtoRGB(color)
+RGBAtoRGB(color)
 {
     return (color & ~0xFF) >>> 8;
 }
 
-stock SetPlayerInteriorEx(playerid, int)
+SetPlayerInteriorEx(playerid, int)
 {
 	SetPlayerInterior(playerid, int);
 	PlayerInfo[playerid][pInt] = int;
@@ -12658,19 +12658,19 @@ WeaponHackCheck(issuerid, weaponid)
     }
 	return false;
 }
-stock SetPLocal(playerid, wartosc)
+SetPLocal(playerid, wartosc)
 {
 	PlayerInfo[playerid][pLocal] = wartosc;
 	
 	return 1;
 }
-stock GetPLocal(playerid)
+GetPLocal(playerid)
 {
 	new wartoscLocalu; 
 	wartoscLocalu = PlayerInfo[playerid][pLocal];
 	return wartoscLocalu;
 }
-stock SprawdzMuzyke(playerid) 
+SprawdzMuzyke(playerid) 
 {
 	if(muzykaON[11] == 1 && PlayerInfo[playerid][pLocal] == PLOCAL_FRAC_DMV)
 	{
@@ -12699,7 +12699,7 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	}
 	return 0;
 }
-stock GetWeaponSlot(weapon)
+GetWeaponSlot(weapon)
 {
     new slot;
     switch (weapon)

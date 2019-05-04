@@ -27,7 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock dodajBudke(fobiekt, Float:x, Float:y, Float:z, Float: rx, Float:ry, Float: rz)
+dodajBudke(fobiekt, Float:x, Float:y, Float:z, Float: rx, Float:ry, Float: rz)
 {
 	#pragma unused x,y,z,rx,ry,rz,fobiekt
 	budki[iloscbudek][b_model] = fobiekt;
@@ -41,7 +41,7 @@ stock dodajBudke(fobiekt, Float:x, Float:y, Float:z, Float: rx, Float:ry, Float:
 	return iloscbudek++;
 }
 
-stock jestObokBudki(playerid)
+jestObokBudki(playerid)
 {
 	for(new i; i<iloscbudek; i++)
 	{

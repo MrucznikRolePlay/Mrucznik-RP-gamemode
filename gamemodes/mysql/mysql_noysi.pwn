@@ -1,5 +1,5 @@
 
-stock showFactionWorkers(playerid, page=1)
+showFactionWorkers(playerid, page=1)
 {
 	new query[128];
 

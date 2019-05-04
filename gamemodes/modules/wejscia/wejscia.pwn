@@ -27,7 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255)
+DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255)
 {
 	wejscia[iloscwejsc][w_x1] = fx1;
 	wejscia[iloscwejsc][w_y1] = fy1;
@@ -64,7 +64,7 @@ stock DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:
 	
 	return iloscwejsc++;
 }
-stock Sprawdz_w_cord(playerid, id)
+Sprawdz_w_cord(playerid, id)
 {
 	new playerPos;//0 - nigdzie, 1 - na /wejdz, 2 - na /wyjdz
 	
@@ -86,7 +86,7 @@ stock Sprawdz_w_cord(playerid, id)
 	}
 	return playerPos;
 }
-stock Sprawdz_UID_Wchodzenie(playerid, Check_ID)
+Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 {
 	if(Check_ID == 1)
 	{
@@ -232,7 +232,7 @@ stock Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	return 0; 
 }
-stock Sprawdz_UID_Wychodzenie(playerid, Check_ID)
+Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 {
 	if(Check_ID == 6)
 	{
@@ -287,7 +287,7 @@ stock Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 
 	return 0; 
 }
-stock SprawdzWejscia(playerid)
+SprawdzWejscia(playerid)
 {
 	for(new i; i<iloscwejsc; i++)
 	{
@@ -353,7 +353,7 @@ stock SprawdzWejscia(playerid)
 //-------------------
 //-----[ Wjedz ]-----
 //-------------------
-stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
+StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
 {
 	wjazdy[valueWjedz][wj_X] = wjedzX;
 	wjazdy[valueWjedz][wj_Y] = wjedzY;
@@ -392,7 +392,7 @@ stock StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float
 	return valueWjedz++;
 }
 //new 
-stock SprawdzWjazdy(playerid)
+SprawdzWjazdy(playerid)
 {
 	if(GetPlayerVehicleSeat(playerid) != 0)
 	{
@@ -606,7 +606,7 @@ public WjedzTimerDebug(playerid)
 }
 /*
 ============================[OLD]==============================
-stock SprawdzWjazdy(playerid)
+SprawdzWjazdy(playerid)
 {
 	new playerVehicleID = GetPlayerVehicleID(playerid);
 	new pSeatID = GetPlayerVehicleSeat(playerid);

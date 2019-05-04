@@ -1,4 +1,4 @@
-stock BreakLines(string[], delimiter[], limit)
+BreakLines(string[], delimiter[], limit)
 {
 	new inserts, tempLimit = limit, pos[50], string2[150], lastEmptyPos;
 	format(string2, 150, string);
@@ -32,7 +32,7 @@ stock BreakLines(string[], delimiter[], limit)
 #define DG_DESC_ADD 		3
 #define DG_DESC_USEOLD		4
 
-stock opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if(dialogid==4192)
 	{
@@ -231,7 +231,7 @@ COMMAND:changelog(playerid, params[])
 	return 1;
 }
 
-stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	#pragma unused inputtext
 	if(dialogid == 1963)
@@ -777,7 +777,7 @@ stock changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputte
 	return 0;
 }
 
-stock showChangeLog(playerid, page = CHANGELOG_MAIN)
+showChangeLog(playerid, page = CHANGELOG_MAIN)
 {
 	if(page == CHANGELOG_MAIN)
 	{
@@ -816,7 +816,7 @@ stock showChangeLog(playerid, page = CHANGELOG_MAIN)
 #define FPANEL_DG_PREV		2
 #define FPANEL_DG_NEXT		3
 
-stock fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
@@ -934,7 +934,7 @@ stock fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 	return 0;
 }
 
-stock showEmployeeInfo(playerid, employeeUid)
+showEmployeeInfo(playerid, employeeUid)
 {
 	new pracownik_nick[26], rankname[26], ranga, employeestring[1100];
     new isLider;
@@ -959,7 +959,7 @@ stock showEmployeeInfo(playerid, employeeUid)
     return 1;
 }
 
-stock factionLeaderPanel(playerid, page = FPANEL_MAIN)
+factionLeaderPanel(playerid, page = FPANEL_MAIN)
 {
 	if(page == FPANEL_MAIN)
 	{
@@ -1012,7 +1012,7 @@ COMMAND:fpanel(playerid, params[])
 new opis_przewinienia[50][600];
 new przewinienia[3000];
 
-stock LoadPrzewinienia()
+LoadPrzewinienia()
 {
 	new File:file = fopen("kary.mrp", io_read), line[700];
     format(przewinienia, sizeof(przewinienia), "Przewinienie\t\t\tTyp kary");
@@ -1044,7 +1044,7 @@ stock LoadPrzewinienia()
 	}
 }
 
-stock noYsi_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+noYsi_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	#pragma unused inputtext
 	if(dialogid == 1590)
@@ -1084,7 +1084,7 @@ stock noYsi_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 	return 0;
 }
 
-stock ShowPodrecznik(playerid, page=HELP_MAIN)
+ShowPodrecznik(playerid, page=HELP_MAIN)
 {
 	new mainstring[2000];
 	if( page == HELP_MAIN )
@@ -1191,7 +1191,7 @@ COMMAND:podrecznik(playerid, params[])
 #define DG_SELECT_ZGL	1
 
 
-stock hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	noYsi_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
@@ -1371,7 +1371,7 @@ stock hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 }
 
 
-stock ShowHeadquarters(playerid, page=HQ_MAIN)
+ShowHeadquarters(playerid, page=HQ_MAIN)
 {
 	if(page == HQ_MAIN)
 	{

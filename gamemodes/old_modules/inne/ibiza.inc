@@ -113,7 +113,7 @@ new Telebim[telebim];
 
 
 //stocki
-stock WylaczSwiatla()
+WylaczSwiatla()
 {
 	for(new i =0; i<MAX_PLAYERS; i++)
 	{
@@ -123,7 +123,7 @@ stock WylaczSwiatla()
 	}
 	return 1;
 }
-stock IbizaOdswiezObiekty()
+IbizaOdswiezObiekty()
 {
 	for(new i=0; i<MAX_PLAYERS; i++)
 	{
@@ -132,21 +132,21 @@ stock IbizaOdswiezObiekty()
 	}
 	return 1;
 }
-stock WylaczSwiatlaP(playerid)
+WylaczSwiatlaP(playerid)
 {
 	SetPlayerWeather(playerid, 24); //63
 	SetPlayerTime(playerid, 6, 0);
 	return 1;
 }
 
-stock WlaczSwiatlaP(playerid)
+WlaczSwiatlaP(playerid)
 {
 	SetPlayerWeather(playerid, 1);
 	SetPlayerTime(playerid, 12, 0);
 	return 1;
 }
 
-stock IbizaDrinkiPobierz()
+IbizaDrinkiPobierz()
 {
 	new string[128];
 	for(new i=0; i<12; i++)
@@ -164,7 +164,7 @@ stock IbizaDrinkiPobierz()
 	return 1;
 }
 
-stock IbizaDrinkiZapisz()
+IbizaDrinkiZapisz()
 {
 	new bufor[128];
 	for(new i=0; i<12; i++)
@@ -175,7 +175,7 @@ stock IbizaDrinkiZapisz()
 	return 1;
 }
 
-stock IbizaWyjscie(playerid)
+IbizaWyjscie(playerid)
 {
 	new h, m, s;
 	gettime(h, m, s);
@@ -186,7 +186,7 @@ stock IbizaWyjscie(playerid)
 
 
 
-stock PlayerName(playerid)
+PlayerName(playerid)
 {
 	new string[MAX_PLAYER_NAME+1];
 	GetPlayerName(playerid, string, MAX_PLAYER_NAME);
@@ -195,13 +195,13 @@ stock PlayerName(playerid)
 
 
 
-stock MikserDialog(playerid)
+MikserDialog(playerid)
 {
 	ShowPlayerDialogEx(playerid, DIALOG_IBIZA_MIKSER, DIALOG_STYLE_LIST, "Konsola DJa", "Stream\nTelebim\nŒwiat³a\nStroboskopy\nMaszynka do dymu\nRury", "Wybierz", "Wyjdz");
 	return 1;
 }
 
-stock PrezesDialog(playerid)
+PrezesDialog(playerid)
 {
 	new string[256];
 	new drzwi[64],biuro[64],dach[64];
@@ -216,7 +216,7 @@ stock PrezesDialog(playerid)
 	return 1;
 }
 
-stock WlaczSwiatla()
+WlaczSwiatla()
 {
 	for(new i =0; i<MAX_PLAYERS; i++)
 	{
@@ -227,7 +227,7 @@ stock WlaczSwiatla()
 	return 1;
 }
 
-stock IbizaUstawKamere(playerid, index)
+IbizaUstawKamere(playerid, index)
 {
 	new dd,mm,rr, g,m,s, string[64];
 	format(string, sizeof string, "CAM %02d", index+1);
@@ -254,7 +254,7 @@ stock IbizaUstawKamere(playerid, index)
 }
 
 
-stock WlaczStream(id)
+WlaczStream(id)
 {
 	for(new i=0; i<MAX_PLAYERS; i++)
 	{
@@ -384,7 +384,7 @@ IBIZA_Reszta()
 	IbizaBramaObiekty[1] = CreateDynamicObject(2372,358.4000000,-1783.9000000,4.2000000,0.0000000,0.0000000,0.0000000,0, 0, -1);
 }
 
-stock IBIZA_end()
+IBIZA_end()
 {
     IbizaDrinkiZapisz();
 }

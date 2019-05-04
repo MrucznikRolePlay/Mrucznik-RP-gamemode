@@ -245,7 +245,7 @@ IsAScripter(playerid)
 	}
 	return 0;
 }
-stock SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bie
+SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bie
 {
 	foreach(new i : Player)
 	{
@@ -258,7 +258,7 @@ stock SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na 
 	}
 	return 1;
 }
-stock KickPlayerTXD(playerid, adminid, reason[])
+KickPlayerTXD(playerid, adminid, reason[])
 {
     //PlayerLogged[playerid]=0;
     new str[128];
@@ -275,7 +275,7 @@ stock KickPlayerTXD(playerid, adminid, reason[])
 	}
     return 1;
 }
-stock AJPlayerTXD(playerid, adminid, reason[])
+AJPlayerTXD(playerid, adminid, reason[])
 {
 	new str[256];
     format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
@@ -291,7 +291,7 @@ stock AJPlayerTXD(playerid, adminid, reason[])
 	}
 	return 1;
 }
-stock BPPlayerTXD(playerid, adminid, timeVal, reason[])
+BPPlayerTXD(playerid, adminid, timeVal, reason[])
 {
 	new str[256];
     format(str, sizeof(str), "~r~Blokada Pisania~w~~n~Dla: %s~n~Od: %s~n~Na: %d godzin~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, reason);
@@ -307,7 +307,7 @@ stock BPPlayerTXD(playerid, adminid, timeVal, reason[])
 	}
 	return 1;
 }
-stock BanPlayerTXD(playerid, adminid, reason[])
+BanPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
     format(str, sizeof(str), "~r~Ban~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
@@ -324,7 +324,7 @@ stock BanPlayerTXD(playerid, adminid, reason[])
 
 	return 1;
 }
-stock WarnPlayerTXD(playerid, adminid, reason[])
+WarnPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
     format(str, sizeof(str), "~r~Warn~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
@@ -340,7 +340,7 @@ stock WarnPlayerTXD(playerid, adminid, reason[])
 	}
 	return 1;
 }
-stock BlockPlayerTXD(playerid, adminid, reason[])
+BlockPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
     format(str, sizeof(str), "~r~Block~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
@@ -356,7 +356,7 @@ stock BlockPlayerTXD(playerid, adminid, reason[])
 	}
 	return 1;
 }
-stock PWarnPlayerTXD(player[], adminid, result[])
+PWarnPlayerTXD(player[], adminid, result[])
 {
 	new str[128];
 	new nickDoWarna[MAX_PLAYER_NAME]; 
@@ -374,7 +374,7 @@ stock PWarnPlayerTXD(player[], adminid, result[])
 	}
 	return 1;
 }
-stock GivePWarnForPlayer(player[], adminid, result[]) 
+GivePWarnForPlayer(player[], adminid, result[]) 
 {
 	new nickDoWarna[MAX_PLAYER_NAME];
 	strcat(nickDoWarna, player); 
@@ -394,7 +394,7 @@ stock GivePWarnForPlayer(player[], adminid, result[])
 	}
 	return 1;
 }
-stock GiveWarnForPlayer(playerid, adminid, result[])
+GiveWarnForPlayer(playerid, adminid, result[])
 {
 	new str[256];
 	new string[256];
@@ -428,7 +428,7 @@ stock GiveWarnForPlayer(playerid, adminid, result[])
 	}
 	return 1;
 }
-stock PBlockPlayerTXD(player[], adminid, reason[])
+PBlockPlayerTXD(player[], adminid, reason[])
 {
 	new str[128];
 	new nickOdbieracza[MAX_PLAYER_NAME];
@@ -446,7 +446,7 @@ stock PBlockPlayerTXD(player[], adminid, reason[])
 	}
 	return 1;
 }
-stock PBanPlayerTXD(player[], adminid, reason[])
+PBanPlayerTXD(player[], adminid, reason[])
 {
 	new str[128];
 	new nickOdbieracza[MAX_PLAYER_NAME];
@@ -464,7 +464,7 @@ stock PBanPlayerTXD(player[], adminid, reason[])
 	}
 	return 1;
 }
-stock PAJPlayerTXD(player[], adminid, timeVal, reason[])
+PAJPlayerTXD(player[], adminid, timeVal, reason[])
 {
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
@@ -482,7 +482,7 @@ stock PAJPlayerTXD(player[], adminid, timeVal, reason[])
 	}
 	return 1;
 }
-stock SetPlayerPAdminJail(player[], adminid, timeVal, result[])
+SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 {
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
@@ -500,7 +500,7 @@ stock SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 	AntySpam[adminid] = 1;
 	return 1;
 }
-stock SetPlayerAdminJail(playerid, adminid, timeVal, result[])
+SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 {
 	new string[256];
 	format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina %s, Czas: %d. Powod: %s", GetNick(adminid), timeVal, (result));
@@ -524,7 +524,7 @@ stock SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	Wchodzenie(playerid);		
 	return 1;
 }
-stock GiveKickForPlayer(playerid, adminid, result[])
+GiveKickForPlayer(playerid, adminid, result[])
 {
 	new string[256];
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
@@ -543,7 +543,7 @@ stock GiveKickForPlayer(playerid, adminid, result[])
 	AntySpam[adminid] = 1;
 	return 1;
 }
-stock GiveBPForPlayer(playerid, adminid, timeVal, result[])
+GiveBPForPlayer(playerid, adminid, timeVal, result[])
 {
 	new string[256];
 	PlayerInfo[playerid][pBP] = timeVal;
@@ -556,7 +556,7 @@ stock GiveBPForPlayer(playerid, adminid, timeVal, result[])
 	PlayerInfo[playerid][pDesc][0] = EOS;
 	return 1;
 }
-stock GiveBlockForPlayer(playerid, adminid, result[])
+GiveBlockForPlayer(playerid, adminid, result[])
 {
 	new string[256];
 	new nickDoBlocka[MAX_PLAYER_NAME];
@@ -574,7 +574,7 @@ stock GiveBlockForPlayer(playerid, adminid, result[])
 	}
 	return 1;
 }
-stock GivePBanForPlayer(player[], adminid, result[])
+GivePBanForPlayer(player[], adminid, result[])
 {
 	new nickDoBlocka[MAX_PLAYER_NAME];
 	strcat(nickDoBlocka, player);
@@ -590,7 +590,7 @@ stock GivePBanForPlayer(player[], adminid, result[])
 	}
 	return 1;
 }	
-stock GivePBlockForPlayer(player[], adminid, result[])
+GivePBlockForPlayer(player[], adminid, result[])
 {
 	new string[256];
 	new nickDoBlocka[MAX_PLAYER_NAME];

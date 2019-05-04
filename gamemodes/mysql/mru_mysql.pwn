@@ -79,7 +79,7 @@ MruMySQL_CreateAccount(playerid, pass[])
 	return 1;
 }
 
-stock MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
+MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 {
 	if(!MYSQL_ON) return 0;
     if(GLOBAL_EXIT) return 0;
@@ -656,14 +656,14 @@ public MruMySQL_LoadAcocount(playerid)
 	return true;
 }
 
-stock MruMySQL_ConvertPassword(playerid, hashedPassword[])
+MruMySQL_ConvertPassword(playerid, hashedPassword[])
 {
 	new string[256];
 	format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", hashedPassword, GetNick(playerid));
 	mysql_query(string);
 }
 
-stock MruMySQL_WczytajOpis(handle, uid, typ)
+MruMySQL_WczytajOpis(handle, uid, typ)
 {
     new lStr[128], lText[128];
     format(lStr, 128, "SELECT `desc` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
@@ -686,7 +686,7 @@ stock MruMySQL_WczytajOpis(handle, uid, typ)
     return 1;
 }
 
-stock MruMySQL_UpdateOpis(handle, uid, typ)
+MruMySQL_UpdateOpis(handle, uid, typ)
 {
     new lStr[256], packed[128], opis[128];
     strunpack(packed, (typ == 1) ? (PlayerDesc[handle]) : (CarDesc[handle]));
@@ -698,7 +698,7 @@ stock MruMySQL_UpdateOpis(handle, uid, typ)
     mysql_query(lStr);
 }
 
-stock MruMySQL_CheckOpis(uid, typ)
+MruMySQL_CheckOpis(uid, typ)
 {
     new lStr[128];
     format(lStr, sizeof(lStr), "SELECT `UID` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
@@ -712,7 +712,7 @@ stock MruMySQL_CheckOpis(uid, typ)
     return 0;
 }
 
-stock MruMySQL_DeleteOpis(uid, typ)
+MruMySQL_DeleteOpis(uid, typ)
 {
     new lStr[128];
     format(lStr, sizeof(lStr), "DELETE FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
@@ -767,7 +767,7 @@ MruMySQL_DoesAccountExist(nick[])
 	return 0;
 }
 
-stock MruMySQL_ReturnPassword(nick[])
+MruMySQL_ReturnPassword(nick[])
 {
 	new string[128], key[129];
 	
@@ -790,7 +790,7 @@ stock MruMySQL_ReturnPassword(nick[])
 
 //--------------------------------------------------------------<[ Kary ]>--------------------------------------------------------------
 
-stock MruMySQL_KonwertujBana(playerid)
+MruMySQL_KonwertujBana(playerid)
 { 
 	new plik[128];
 	format(plik, sizeof(plik), "Bany/%s.ini", GetNick(playerid));
@@ -991,7 +991,7 @@ bool:MruMySQL_SprawdzBany(playerid)
 
 //Pobieranie i zwracanie pojedynczych zmiennych:
 
-stock MruMySQL_GetNameFromUID(uid) {
+MruMySQL_GetNameFromUID(uid) {
 	new wartosc[MAX_PLAYER_NAME], string[128];
 	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `UID` = '%d'", uid);
 	mysql_query(string);
@@ -1006,7 +1006,7 @@ stock MruMySQL_GetNameFromUID(uid) {
 	return wartosc;
 }
 
-stock MruMySQL_GetAccString(kolumna[], nick[])
+MruMySQL_GetAccString(kolumna[], nick[])
 {
 	new string[128], wartosc[256];
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1025,7 +1025,7 @@ stock MruMySQL_GetAccString(kolumna[], nick[])
 	return wartosc;
 }
 
-stock MruMySQL_GetAccInt(kolumna[], nick[])
+MruMySQL_GetAccInt(kolumna[], nick[])
 {
 	new string[128], wartosc;
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1041,7 +1041,7 @@ stock MruMySQL_GetAccInt(kolumna[], nick[])
 	return wartosc;
 }
 
-stock MruMySQL_GetAccFloat(kolumna[], nick[])
+MruMySQL_GetAccFloat(kolumna[], nick[])
 {
 	new string[128], Float:wartosc;
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1054,7 +1054,7 @@ stock MruMySQL_GetAccFloat(kolumna[], nick[])
 	return wartosc;
 }
 
-stock MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
+MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
 {
 	new string[128];
 	mysql_real_escape_string(wartosc, wartosc);
@@ -1065,7 +1065,7 @@ stock MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
 	return 1;
 }
 
-stock MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
+MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 {
 	new string[128];
 	mysql_real_escape_string(nick, nick);
@@ -1075,7 +1075,7 @@ stock MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 	return 1;
 }
 
-stock MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
+MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 {
 	new string[128];
 	mysql_real_escape_string(nick, nick);

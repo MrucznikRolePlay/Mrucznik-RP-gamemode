@@ -27,7 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Float:frz1, Float:fx2, Float:fy2, Float:fz2, Float:frx2, Float:fry2, Float:frz2, Float:fspeed, Float:frange, fuprtyp=0, fuprval=0, bool:flag=false)
+DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Float:frz1, Float:fx2, Float:fy2, Float:fz2, Float:frx2, Float:fry2, Float:frz2, Float:fspeed, Float:frange, fuprtyp=0, fuprval=0, bool:flag=false)
 {
 	bramy[iloscbram][b_obiekt] = fobiekt;
 	if(flag==false) {
@@ -55,7 +55,7 @@ stock DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry
 	return iloscbram++;
 }
 
-stock DualGateAdd(object1,//Obiekt pierwszej bramy
+DualGateAdd(object1,//Obiekt pierwszej bramy
 	Float:fx1,//Pozycja pierwszej bramy X
 	Float:fy1,//Pozycja pierwszej bramy Y 
 	Float:fz1, //Pozycja pierwszej bramy Z
@@ -131,7 +131,7 @@ stock DualGateAdd(object1,//Obiekt pierwszej bramy
 	return iloscbram++; 
 }
 
-stock SprawdzBramy(playerid)
+SprawdzBramy(playerid)
 {
 	for(new i; i<iloscbram; i++)
 	{	

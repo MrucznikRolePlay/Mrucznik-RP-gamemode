@@ -33,7 +33,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock SprawdzZnaki(text[])
+SprawdzZnaki(text[])
 {
 	new checkAdminNameValue;
 	if(strfind(text, "%") == -1 
@@ -86,12 +86,12 @@ stock SprawdzZnaki(text[])
 	return checkAdminNameValue; 
 }
 
-stock GetPlayerAdminDutyStatus(playerid)
+GetPlayerAdminDutyStatus(playerid)
 {
 	new valueAdminStatus = GetPVarInt(playerid, "dutyadmin");
 	return valueAdminStatus; 
 }
-stock AdminDutyPlayer(playerid, status)
+AdminDutyPlayer(playerid, status)
 {
 	new string[128];
 	GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 

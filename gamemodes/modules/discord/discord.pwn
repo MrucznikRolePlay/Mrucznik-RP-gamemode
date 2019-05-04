@@ -27,7 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
-stock DiscordConnectInit()
+DiscordConnectInit()
 {
 	g_SanNewsChannelId=DCC_FindChannelById("538403089263362098");
 	g_AdminChannelId=DCC_FindChannelById("538403269077106725");
@@ -51,7 +51,7 @@ stock DiscordConnectInit()
 
 	return 1;
 }
-stock SendDiscordMessage(channel, message[])
+SendDiscordMessage(channel, message[])
 {
 	new dest[512];
 	utf8encode(dest, message);
@@ -73,7 +73,7 @@ stock SendDiscordMessage(channel, message[])
 	return 1;
 }
 
-stock SendDiscordFracMessage(fractionid, message[])
+SendDiscordFracMessage(fractionid, message[])
 {
 	new dest[512];
 	utf8encode(dest, message);
@@ -81,7 +81,7 @@ stock SendDiscordFracMessage(fractionid, message[])
 
 	return 1;
 }
-stock SendDiscordOrgMessage(orgid, message[])
+SendDiscordOrgMessage(orgid, message[])
 {
 	new dest[512];
 	utf8encode(dest, message);

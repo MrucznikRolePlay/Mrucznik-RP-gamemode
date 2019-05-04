@@ -2,7 +2,7 @@
 forward MRP_SaveMC(playerid);
 forward MRP_GiveKP(playerid, time);
 
-stock MRP_LoadPremium(playerid)
+MRP_LoadPremium(playerid)
 {
     if(!MYSQL_ON) return false;
 
@@ -139,7 +139,7 @@ stock MRP_LoadPremium(playerid)
     return 1;
 }
 
-stock MRP_CheckLastBlock(playerid, &lasttime)
+MRP_CheckLastBlock(playerid, &lasttime)
 {
     new time=0, ip[16], nick[24];
     GetPlayerName(playerid, nick, 24);
@@ -167,7 +167,7 @@ stock MRP_CheckLastBlock(playerid, &lasttime)
     return time;
 }
 
-stock MRP_CheckLastLogin(uid, &time, ip[])
+MRP_CheckLastLogin(uid, &time, ip[])
 {
     new str[256];
     format(str, 256, "SELECT UNIX_TIMESTAMP(`time`) a, `IP` FROM `mru_logowania` WHERE `PID`='%d' ORDER BY a DESC LIMIT 1", uid);
@@ -182,7 +182,7 @@ stock MRP_CheckLastLogin(uid, &time, ip[])
     return 1;
 }
 
-stock MRP_PlayerLog(playerid)
+MRP_PlayerLog(playerid)
 {
     new str[128], ip[16];
     GetPlayerIp(playerid, ip, 16);

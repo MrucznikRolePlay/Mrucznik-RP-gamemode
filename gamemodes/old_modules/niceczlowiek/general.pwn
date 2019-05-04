@@ -1,4 +1,4 @@
-stock guiMsg(playerid, title[80], str[])
+guiMsg(playerid, title[80], str[])
 {
 	new final_title[80];
 	format(final_title, sizeof(final_title), "{49A350}Mrucznik » {FFFFFF}%s", title);
@@ -8,7 +8,7 @@ stock guiMsg(playerid, title[80], str[])
 
 
 
-stock highestAdminLevel()
+highestAdminLevel()
 {
 	new highest = 0, playa = INVALID_PLAYER_ID;
 	foreach(Player, i)
@@ -43,7 +43,7 @@ new FabrykaMats_ActorSkins[] =
 
 forward FabrykaActor_ReCreate();
 
-stock FabrykaMats_LoadLogic()
+FabrykaMats_LoadLogic()
 {
 	// Init Actors
 
@@ -90,7 +90,7 @@ public FabrykaActor_ReCreate()
 	return 1;
 }
 
-stock FabrykaMats_ActorTalk(playerid)
+FabrykaMats_ActorTalk(playerid)
 {
 	new Float:ActorX, Float:ActorY, Float:ActorZ;
 	GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
@@ -103,14 +103,14 @@ stock FabrykaMats_ActorTalk(playerid)
 	return 1;
 }
 
-stock getUnknownString(playerid) {
+getUnknownString(playerid) {
 	new str[32];
 	new uid =  PlayerInfo[playerid][pUID];
 	format(str, sizeof(str), "%x", uid);
 	return str;
 }
 
-stock getStringFromUnknown(hex) {
+getStringFromUnknown(hex) {
 
 	new uid = hex >> 8;
 	return uid;

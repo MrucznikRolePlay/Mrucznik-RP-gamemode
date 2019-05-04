@@ -217,14 +217,14 @@ LoadTXD()
     TextDrawSetSelectable(TXD_Info, 1);
 }
 
-stock LoadingShow(playerid)
+LoadingShow(playerid)
 {
     TextDrawShowForPlayer(playerid, Loading_Box);
     TextDrawShowForPlayer(playerid, Loading_Title);
     TextDrawShowForPlayer(playerid, Loading_Info);
 }
 
-stock LoadingHide(playerid)
+LoadingHide(playerid)
 {
     TextDrawHideForPlayer(playerid, Loading_Box);
     TextDrawHideForPlayer(playerid, Loading_Title);
@@ -331,7 +331,7 @@ UnLoadTextDraws(playerid)
 	return 1;
 }
 
-stock NG_CreateGateTD()
+NG_CreateGateTD()
 {
     NG_GateTD[0] = TextDrawCreate(450.000000, 220.000000, "New Textdraw");
     TextDrawBackgroundColor(NG_GateTD[0], 0);
@@ -401,7 +401,7 @@ stock NG_CreateGateTD()
 }
 
 /*              MESSAGE BOX                 FUNKCJE                 By KUBI                  */
-stock MSGBOX_Show(playerid, title[], icon, time=2, bool:priority=false)
+MSGBOX_Show(playerid, title[], icon, time=2, bool:priority=false)
 {
     if(GetPVarInt(playerid, "MSGBOX-display") == 1)
     {
@@ -432,7 +432,7 @@ public MSGBOX_Hide(playerid)
     if(GetPVarInt(playerid, "MSGBOX-priority") == 1) SetPVarInt(playerid, "MSGBOX-priority", 0);
 }
 
-stock fMSGBOX_InitForPlayer(playerid, title[], icon[])
+fMSGBOX_InitForPlayer(playerid, title[], icon[])
 {
     new len = strlen(title),pos=0, pos2=0;
     while((pos = strfind(title, "~", false, pos)) != -1 || pos >= len)
@@ -476,7 +476,7 @@ stock fMSGBOX_InitForPlayer(playerid, title[], icon[])
     PlayerTextDrawSetSelectable(playerid, MSGBOXtd_Icon[playerid], 0);
 }
 
-stock fMSGBOX_Init()
+fMSGBOX_Init()
 {
     MSGBOXtd_Sign = TextDrawCreate(210.000000, 153.000000, "M-RP");
     TextDrawBackgroundColor(MSGBOXtd_Sign, 255);
@@ -513,13 +513,13 @@ stock fMSGBOX_Init()
     TextDrawSetSelectable(MSGBOXtd_Kubi, 0);
 }
 
-stock fMSGBOX_ExitForPlayer(playerid)
+fMSGBOX_ExitForPlayer(playerid)
 {
     PlayerTextDrawDestroy(playerid,MSGBOXtd_Title[playerid]);
     PlayerTextDrawDestroy(playerid,MSGBOXtd_Icon[playerid]);
 }
 
-stock fMSGBOX_Exit()
+fMSGBOX_Exit()
 {
     TextDrawDestroy(MSGBOXtd_Sign);
     TextDrawDestroy(MSGBOXtd_Ver);
@@ -534,7 +534,7 @@ stock fMSGBOX_Exit()
 }
 
 //strefy
-stock ZonePTXD_Unload(playerid)
+ZonePTXD_Unload(playerid)
 {
     PlayerTextDrawDestroy(playerid, ZonePTXD_Name[playerid]);
     PlayerTextDrawDestroy(playerid, ZonePTXD_Cash[playerid]);
@@ -542,7 +542,7 @@ stock ZonePTXD_Unload(playerid)
     PlayerTextDrawDestroy(playerid, ZonePTXD_Member[playerid]);
 }
 
-stock ZonePTXD_Load(playerid)
+ZonePTXD_Load(playerid)
 {
     ZonePTXD_Name[playerid] = CreatePlayerTextDraw(playerid, 552.666503, 208.614776, "Kontrolowana~n~przez: Brak");
     PlayerTextDrawLetterSize(playerid, ZonePTXD_Name[playerid], 0.149333, 1.010963);
@@ -585,7 +585,7 @@ stock ZonePTXD_Load(playerid)
     PlayerTextDrawSetProportional(playerid, ZonePTXD_Member[playerid], 1);
 }
 
-stock ZoneTXD_Load()
+ZoneTXD_Load()
 {
     ZoneTXD[0] = TextDrawCreate(636.000000, 204.551849, "usebox");
     TextDrawLetterSize(ZoneTXD[0], 0.000000, 10.468517);
@@ -737,14 +737,14 @@ stock ZoneTXD_Load()
     TextDrawSetSelectable(Speedo_ToggleStan, 1);
 }
 
-stock Speedo_Unload()
+Speedo_Unload()
 {
     for(new i=0;i<sizeof(Speedo_BG);i++) TextDrawDestroy(Speedo_BG[i]);
     TextDrawDestroy(Speedo_ToggleStan);
     TextDrawDestroy(Speedo_ToggleGPS);
 }*/
 
-stock Speedo_PlayerLoad(playerid)
+Speedo_PlayerLoad(playerid)
 {
     /*Speedo_Engine[playerid] = CreatePlayerTextDraw(playerid, 594.000000, 414.000000, "E");
 	PlayerTextDrawBackgroundColor(playerid, Speedo_Engine[playerid], 255);
@@ -867,7 +867,7 @@ stock Speedo_PlayerLoad(playerid)
     PlayerTextDrawSetSelectable(playerid,Licznik[playerid], 0);
 }
 
-stock Speedo_PlayerUnload(playerid)
+Speedo_PlayerUnload(playerid)
 {
     /*PlayerTextDrawDestroy(playerid, Speedo_Lights[playerid]);
     PlayerTextDrawDestroy(playerid, Speedo_Engine[playerid]);
@@ -880,7 +880,7 @@ stock Speedo_PlayerUnload(playerid)
     PlayerTextDrawDestroy(playerid, Licznik[playerid]);
 }
 
-stock Oil_LoadTXD()
+Oil_LoadTXD()
 {
     OilTXD_BG[0] = TextDrawCreate(414.333374, 375.662780, "usebox");
     TextDrawLetterSize(OilTXD_BG[0], 0.000000, 4.768930);
@@ -904,13 +904,13 @@ stock Oil_LoadTXD()
     TextDrawFont(OilTXD_BG[1], 4);
 }
 
-stock Oil_UnloadTXD()
+Oil_UnloadTXD()
 {
     TextDrawDestroy(OilTXD_BG[0]);
     TextDrawDestroy(OilTXD_BG[1]);
 }
 
-stock Oil_LoadPTXD(playerid)
+Oil_LoadPTXD(playerid)
 {
     OilPTXD_Arrow[0][playerid] = CreatePlayerTextDraw(playerid, 235.0, 375.0, "_"); //last   235.0
     PlayerTextDrawLetterSize(playerid, OilPTXD_Arrow[0][playerid], 0.536999, 3.458371);
@@ -963,7 +963,7 @@ stock Oil_LoadPTXD(playerid)
     PlayerTextDrawSetProportional(playerid, OilPTXD_Arrow[4][playerid], 1);
 }
 
-stock Oil_UnloadPTXD(playerid)
+Oil_UnloadPTXD(playerid)
 {
     for(new i=0;i<5;i++)
     {

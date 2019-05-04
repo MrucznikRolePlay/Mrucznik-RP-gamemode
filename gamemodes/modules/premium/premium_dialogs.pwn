@@ -290,7 +290,7 @@ static DialogDotacje(playerid)
 }
 
 //------- US£UGI PREMIUM ------------------
-stock static DialogLicytacje(playerid)
+static DialogLicytacje(playerid)
 {
 	//zaawansowany system
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(LICYTACJE), DIALOG_STYLE_LIST, "Premium - Us³ugi - Licytacje", 
@@ -350,7 +350,7 @@ DialogSkiny(playerid)
 	return true;
 }
 
-stock ListPlayerUniqueSkins(playerid)
+ListPlayerUniqueSkins(playerid)
 {
 	DynamicGui_Init(playerid);
 
