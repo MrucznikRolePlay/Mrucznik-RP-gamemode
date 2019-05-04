@@ -38,7 +38,7 @@ YCMD:a(playerid, params[], help)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
-			sendTipMessage(playerid, "U?yj (/a)dmin [admin chat]");
+			sendTipMessage(playerid, "U¿yj (/a)dmin [admin chat]");
 			return 1;
 		}
 		
