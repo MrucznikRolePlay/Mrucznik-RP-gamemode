@@ -6133,7 +6133,7 @@ OnPlayerLogin(playerid, password[])
         else if(strlen(OrgInfo[gPlayerOrg[playerid]][o_Motd]) > 3)
         {
     		format(string, sizeof(string), "Rodzina MOTD: %s.", OrgInfo[gPlayerOrg[playerid]][o_Motd]);
-    		SendClientMessage(playerid, COLOR_YELLOW, string);
+    		SendClientMessage(playerid, OrgInfo[gPlayerOrg[playerid]][o_Color], string);
         }
         if(PlayerInfo[playerid][pRank] < 0 || PlayerInfo[playerid][pRank] > 9) PlayerInfo[playerid][pRank] = 9;
 	}

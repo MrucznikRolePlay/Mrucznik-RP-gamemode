@@ -1681,7 +1681,7 @@ public Spectator()
 
 							case 2:
 							{
-								format(string, sizeof(string), "* %swyci¹ga Kij Golfowy.", specNAME);
+								format(string, sizeof(string), "* %s wyci¹ga Kij Golfowy.", specNAME);
 								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							}
 

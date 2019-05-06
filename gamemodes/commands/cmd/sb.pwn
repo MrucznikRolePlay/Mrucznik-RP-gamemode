@@ -47,7 +47,12 @@ YCMD:sb(playerid, params[], help)
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-				if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+				if(Spectate[giveplayerid] == playerid)
+				{
+					sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie!");
+					return 1;
+				}
+				if (ProxDetectorS(8.0, playerid, giveplayerid))
 				{
 				    if(!IsPlayerInAnyVehicle(playerid) && !IsPlayerInAnyVehicle(giveplayerid))
 				    {
@@ -148,13 +153,13 @@ YCMD:sb(playerid, params[], help)
 					}
 					else
 					{
-					    sendTipMessageEx(playerid, COLOR_GREY, "Nikt z was nie mo¿e byæ w pojeŸdzie !");
+					    sendTipMessageEx(playerid, COLOR_GREY, "Nikt z was nie mo¿e byæ w pojeŸdzie!");
 				    	return 1;
 					}
 				}
 				else
 				{
-				    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
+				    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie!");
 				    return 1;
 				}
 			}

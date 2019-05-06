@@ -414,6 +414,7 @@ SprawdzWjazdy(playerid)
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
 						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+						SetInteriorTimeAndWeather(playerid);
 					}
 					else
 					{
@@ -436,6 +437,7 @@ SprawdzWjazdy(playerid)
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
 						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+						SetInteriorTimeAndWeather(playerid);
 					}
 					else
 					{
@@ -459,6 +461,7 @@ SprawdzWjazdy(playerid)
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
 						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+						SetInteriorTimeAndWeather(playerid);
 					}
 					else
 					{
@@ -480,6 +483,7 @@ SprawdzWjazdy(playerid)
 					WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 					PlayerTextDrawShow(playerid, textwjedz[playerid]);
 					SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+					SetInteriorTimeAndWeather(playerid);
 				}
 				else
 				{
@@ -495,6 +499,7 @@ SprawdzWjazdy(playerid)
 					SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
 					SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
 					TogglePlayerControllable(i2, 0);
+					SetInteriorTimeAndWeather(i2);
 				}
 			}
 			return 1;
@@ -507,6 +512,7 @@ SprawdzWjazdy(playerid)
 				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 				PlayerTextDrawShow(playerid, textwjedz[playerid]);
 				SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+				SetServerWeatherAndTime(playerid); 
 			}
 			else
 			{
@@ -521,6 +527,7 @@ SprawdzWjazdy(playerid)
 					SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
 					SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
 					TogglePlayerControllable(i2, 0);
+					SetServerWeatherAndTime(i2); 
 				}
 			}
 			return 1;
