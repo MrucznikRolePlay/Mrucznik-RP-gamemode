@@ -23,5 +23,8 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define DISCORD_SAN_NEWS	0
+#define DISCORD_ADMIN_CHAT	1
+#define DISCORD_REPORT	2
 
 //end
