@@ -89,7 +89,18 @@ native WP_Hash(buffer[], len, const str[]);
 #include "modules/zmienne.pwn"
 #include "modules/new/niceczlowiek/general.pwn"
 #include "modules/new/niceczlowiek/dynamicgui.pwn"
-#include "modules/mru_mysql.pwn"
+
+//MySQL:
+#include "modules/mysql/mru_mysql.pwn"
+#include "modules/mysql/mysql_external.pwn"
+#include "modules/mysql/mysql_funkcje.pwn"
+#include "modules/mysql/mysql_ibiza.pwn"
+#include "modules/mysql/mysql_komendy.pwn"
+#include "modules/mysql/mysql_noysi.pwn"
+#include "modules/mysql/mysql_OnDialogResponse.pwn"
+#include "modules/mysql/mysql_premium.pwn"
+#include "modules/mysql/mysql_system_aut.pwn"
+#include "modules/mysql/mysql_system_kp.pwn"
 
 //Nowe modu³y .def:
 #include "modules/new/bramy/bramy.def"
@@ -1354,7 +1365,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	new killername[MAX_PLAYER_NAME];
 	new string[128];
 
-	if(gPlayerLogged[playerid] != 1 || gPlayerLogged[killerid] != 1) //nie przetwarzaj dla niezalogowanych osób
+	if(!IsPlayerConnected(playerid) || !IsPlayerConnected(killerid) || gPlayerLogged[playerid] != 1 || gPlayerLogged[killerid] != 1) //nie przetwarzaj dla niezalogowanych osób
 	{
 		return 1;
 	}
@@ -5711,8 +5722,7 @@ OnPlayerLogin(playerid, password[])
 		//konwersja hase³ MD5 na Whirlpool
 		if(strcmp(accountPass, MD5_Hash(password), true ) == 0)
 		{
-			format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", hashedPassword, GetNick(playerid));
-			mysql_query(string);
+			MruMySQL_ConvertPassword(playerid, hashedPassword);
 			format(accountPass, sizeof(accountPass), hashedPassword);
 			printf("Konwersja hasla konta %s na hash whirlpool", nick);
 		}

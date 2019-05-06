@@ -89,7 +89,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, dest);
 		return 1;
 	}
-	for(new i=0;i<MAX_ORG;i++)
+	for(new i=0;i<MAX_FRAC;i++)
 	{
 		if(channel == g_FracChannel[i] && IsBot == false) 
 		{
