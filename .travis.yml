@@ -33,7 +33,7 @@ before_install:
 
 install:
   - pip3 install chardet
-  - sudo dpkg -i CI_scripts/sampctl_1.8.38_linux_amd64.deb # sampctl installation
+  - sudo dpkg -i CI_scripts/sampctl_1.8.39_linux_amd64.deb # sampctl installation
   - sudo dpkg --add-architecture i386
   - sudo apt update && sudo apt install -y g++-multilib
 
