@@ -139,97 +139,8 @@ opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	return 0;
 }
 
-COMMAND:opis(playerid, params[])
-{
-	if(PlayerInfo[playerid][pBP] != 0)
-	{
-		return SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
-	}
-	DynamicGui_Init(playerid);
-	new string[1400];
-		
-	if(!isnull(PlayerInfo[playerid][pDesc]))
-	{
-		new str[256];
-		strcopy(str, PlayerInfo[playerid][pDesc], 256);
-		strdel(str, 55, 256); // jednak pokazujemy ca³y opis :D
-		format(string, sizeof(string), "%s{f4f5fa}%s...\n", string, str);
-		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
-	
-		format(string, sizeof(string), "%s{888888}##\t{ff0000}Usuñ opis\n", string);
-		DynamicGui_AddRow(playerid, DG_DESC_DELETE);
-	}
-	else
-	{
-		format(string, sizeof(string), "%s{888888}##\t{00B33C}Ustaw opis\n", string);
-		DynamicGui_AddRow(playerid, DG_DESC_ADD);
-	}
-
-	format(string, sizeof(string), "%s\t\t\n", string);
-	DynamicGui_AddBlankRow(playerid);
-	format(string, sizeof(string), "%s{00B33C}Ostatnie opisy\n", string);
-	DynamicGui_AddBlankRow(playerid);
-
-	new DBResult:db_result;
-	db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`=%d ORDER BY `last_used` DESC LIMIT 5", PlayerInfo[playerid][pUID]));
-
-	new rows = db_num_rows(db_result);
-		
-	if( rows )
-	{
-			//for(new row = 0; row < rows; row++)
-		for(new row; row < rows; row++,db_next_row(db_result))   
-		{
-			new tmpText[256];
-			db_get_field(db_result, 1, tmpText, sizeof(tmpText));
-			strdel(tmpText, 55, 256);
-			format(string, sizeof(string), "%s(%d)\t%s...\n", string, row+1, tmpText);
-			DynamicGui_AddRow(playerid, DG_DESC_USEOLD, db_get_field_assoc_int(db_result, "uid"));
-		}
-	}
-	else 
-	{
-		format(string, sizeof(string), "%sBrak\n", string);
-		DynamicGui_AddBlankRow(playerid);
-	}
-
-	ShowPlayerDialogEx(playerid, 4192, DIALOG_STYLE_LIST, "Opis", string, "Ok", "X");
-	return 1;
-}
-
-COMMAND:usunopis(playerid, params[])
-{
-	if(PlayerInfo[playerid][pAdmin] == 0) return 1;
-	new id;
-    if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(USUÑ OPIS) - Podaj Nick lub ID gracza.");
-    if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Nie ma takiego gracza");
-
-    if(isnull(PlayerInfo[id][pDesc]))
-	{
-		return sendErrorMessage(playerid, "Ten gracz nie ma ustawionego opisu");
-	}
-	else
-	{
-		Update3DTextLabelText(PlayerInfo[id][pDescLabel], 0xBBACCFFF, "");
-		PlayerInfo[id][pDesc][0] = EOS;
-		new msg[128];
-		format(msg, 128, "Administrator %s usun¹³ twój opis", GetNick(playerid, true));
-		sendErrorMessage(id, msg);
-		format(msg, 128, "Usun¹³eœ opis %s", GetNick(id, true));
-		sendErrorMessage(playerid, msg);
-	}
-	return 1;
-}
-
 
 #define CHANGELOG_MAIN		1
-
-COMMAND:zmiany(playerid, params[]) return RunCommand(playerid, "/changelog",  params);
-COMMAND:changelog(playerid, params[])
-{
-	showChangeLog(playerid);
-	return 1;
-}
 
 changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
@@ -990,15 +901,6 @@ factionLeaderPanel(playerid, page = FPANEL_MAIN)
 	return 1;
 }
 
-COMMAND:fpanel(playerid, params[])
-{
-	if(PlayerInfo[playerid][pLider] < 1) return noAccessMessage(playerid);
-	factionLeaderPanel(playerid, FPANEL_MAIN);
-	return 1;
-}
-
-
-
 
 #define HELP_MAIN			0
 #define HELP_TYPY_KAR 		1
@@ -1169,15 +1071,6 @@ ShowPodrecznik(playerid, page=HELP_MAIN)
 		ShowPlayerDialogEx(playerid, 1594, DIALOG_STYLE_MSGBOX, "Profity posiadania konta na Forum", "W celu uzyskania dodatkowej pomocy, skorzystaj z komendy /zapytaj.\n \nWpisz /zapytaj [NAG£ÓWEK- na przyk³ad SALON AUT] Treœæ- na przyk³ad: gdzie znajduje siê salon aut\n \n", "Ok", ""); 	
 	}
 
-	return 1;
-}
-
-
-COMMAND:lkiz(playerid, params[]) return RunCommand(playerid, "/podrecznik",  params);
-COMMAND:pomoc(playerid, params[]) return RunCommand(playerid, "/podrecznik",  params);
-COMMAND:podrecznik(playerid, params[])
-{
-	ShowPodrecznik(playerid, HELP_MAIN);
 	return 1;
 }
 
@@ -1431,19 +1324,6 @@ ShowHeadquarters(playerid, page=HQ_MAIN)
 	        }
 	        ShowPlayerDialogEx(playerid, 1596, DIALOG_STYLE_LIST, ("Ostatnie zg³oszenia"), string, "Ok", "Wstecz");
     	}
-	}
-	return 1;
-}
-
-COMMAND:hq(playerid, params[])
-{
-	if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
-	{
-		ShowHeadquarters(playerid);
-	}
-	else
-	{
-		return noAccessMessage(playerid);
 	}
 	return 1;
 }

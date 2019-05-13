@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                    lkiz                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,13 +27,32 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-
+#include "lkiz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_lkiz()
 {
+    new command = Command_GetID("lkiz");
+
+    //aliases
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+}
+
+//-------<[ command ]>-------
+YCMD:lkiz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla lista kar i zasad, czyli g³ówny regulamin serwera.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_lkiz_Impl(playerid);
 }

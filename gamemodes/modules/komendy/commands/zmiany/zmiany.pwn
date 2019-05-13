@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   zmiany                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,13 +27,33 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-
+#include "zmiany_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_zmiany()
 {
+    new command = Command_GetID("zmiany");
+
+    //aliases
+    Command_AddAlt(command, "changelog");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zmiany(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla listê zmian wprowadzonych w aktualizacjach skryptu serwera.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zmiany_Impl(playerid);
 }

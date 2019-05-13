@@ -1,0 +1,17 @@
+{
+    "name": "usunopis",
+    "description": "Komenda administracyjna pozwalaj¹ca usun¹æ opis dowolnemu graczowi.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "niceczlowiek",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "13.05.2019"
+}

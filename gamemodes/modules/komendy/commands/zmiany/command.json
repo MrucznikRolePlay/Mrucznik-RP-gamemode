@@ -1,0 +1,13 @@
+{
+    "name": "zmiany",
+    "description": "Wyœwietla listê zmian wprowadzonych w aktualizacjach skryptu serwera.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "niceczlowiek",
+    "aliases": [
+        "changelog"
+    ],
+    "parameters": [],
+    "date": "13.05.2019"
+}

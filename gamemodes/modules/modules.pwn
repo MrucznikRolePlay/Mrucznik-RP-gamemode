@@ -1,4 +1,4 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
 //-----------------------------------------------[ Modules ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
@@ -18,6 +18,15 @@
 //----------------------------------------------------*------------------------------------------------------//
 // Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
+
+
 //-------<[ .def ]>-------
 #include "admin\admin.def"
 #include "adminduty\adminduty.def"
@@ -27,6 +36,7 @@
 #include "chaty\chaty.def"
 #include "debug\debug.def"
 #include "discord\discord.def"
+#include "komendy\komendy.def"
 #include "logi\logi.def"
 #include "pojazdy\pojazdy.def"
 #include "premium\premium.def"
@@ -43,6 +53,7 @@
 #include "chaty\chaty.hwn"
 #include "debug\debug.hwn"
 #include "discord\discord.hwn"
+#include "komendy\komendy.hwn"
 #include "logi\logi.hwn"
 #include "pojazdy\pojazdy.hwn"
 #include "premium\premium.hwn"
@@ -59,6 +70,7 @@
 #include "chaty\chaty.pwn"
 #include "debug\debug.pwn"
 #include "discord\discord.pwn"
+#include "komendy\komendy.pwn"
 #include "logi\logi.pwn"
 #include "pojazdy\pojazdy.pwn"
 #include "premium\premium.pwn"
@@ -72,6 +84,7 @@
 #include "bramy\commands\commands.pwn"
 #include "chaty\commands\commands.pwn"
 #include "debug\commands\commands.pwn"
+#include "komendy\commands\commands.pwn"
 #include "logi\commands\commands.pwn"
 #include "pojazdy\commands\commands.pwn"
 #include "premium\commands\commands.pwn"

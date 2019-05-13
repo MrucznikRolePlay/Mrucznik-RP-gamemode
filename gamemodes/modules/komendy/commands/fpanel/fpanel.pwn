@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   fpanel                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,13 +27,31 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-
+#include "fpanel_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_fpanel()
 {
     
+
+    //aliases
+    
+
+    //permissions
+    
+}
+
+//-------<[ command ]>-------
+YCMD:fpanel(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Panel zarz¹dzania frakcj¹.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_fpanel_Impl(playerid);
 }

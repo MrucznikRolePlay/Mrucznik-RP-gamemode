@@ -1,0 +1,8 @@
+{
+    "[json]": {
+        "files.encoding": "windows1250"
+    },
+    "[pawn]": {
+        "files.encoding": "windows1250"
+    }
+}

@@ -3,17 +3,6 @@ new Text:NowaWybieralka_Left;
 new Text:NowaWybieralka_Right;
 
 
-//COMMAND:ubranie(playerid)
-/*{
-
-	if((OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0) || SanDuty[playerid] == 1)
-	{
-		return sendErrorMessage(playerid, "Bêd¹c na s³u¿bie nie mo¿esz wybraæ skina cywilnego.");
-	}
-
-	NowaWybieralka_Setup(playerid);
-} */
-
 NowaWybieralka_Setup(playerid)
 {
 

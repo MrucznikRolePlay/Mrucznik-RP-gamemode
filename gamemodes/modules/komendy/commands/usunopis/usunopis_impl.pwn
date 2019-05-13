@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  usunopis                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,24 +16,34 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: niceczlowiek
+// Data utworzenia: 13.05.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_usunopis_Impl(playerid, giveplayerid)
 {
-    
+    if(PlayerInfo[playerid][pAdmin] == 0) return 1;
+    if(!IsPlayerConnected(giveplayerid)) return sendErrorMessage(playerid, "Nie ma takiego gracza");
+
+    if(isnull(PlayerInfo[giveplayerid][pDesc]))
+	{
+		return sendErrorMessage(playerid, "Ten gracz nie ma ustawionego opisu");
+	}
+	else
+	{
+		Update3DTextLabelText(PlayerInfo[giveplayerid][pDescLabel], 0xBBACCFFF, "");
+		PlayerInfo[giveplayerid][pDesc][0] = EOS;
+		new msg[128];
+		format(msg, 128, "Administrator %s usun¹³ twój opis", GetNick(playerid, true));
+		sendErrorMessage(giveplayerid, msg);
+		format(msg, 128, "Usun¹³eœ opis %s", GetNick(giveplayerid, true));
+		sendErrorMessage(playerid, msg);
+	}
+	return 1;
 }
+
+
+//end
