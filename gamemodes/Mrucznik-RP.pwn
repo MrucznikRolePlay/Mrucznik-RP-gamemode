@@ -60,12 +60,14 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <strlib>
 #include <callbacks>
 #include <utils>
+#pragma compat 1
 #include <YSI_Data\y_iterate>
 #define MAX_COMMANDS 1200
 #include <YSI\y_commands>
 #include <YSI\y_groups>
 #include <YSI\y_hooks>
 #include <YSI\y_master>
+#pragma compat 0
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
