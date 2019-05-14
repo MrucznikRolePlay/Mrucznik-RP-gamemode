@@ -45,7 +45,7 @@ YCMD:getvw(playerid, params[], help)
 
 	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
-		format(string, sizeof(string), "VirutalWorld gracza %s to %d.", GetNick(gracz), GetPlayerVirtualWorld(gracz));
+		format(string, sizeof(string), "VirtualWorld gracza %s to %d.", GetNick(gracz), GetPlayerVirtualWorld(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);
 	}
 	else
