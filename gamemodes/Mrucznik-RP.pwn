@@ -157,7 +157,7 @@ main()
 	print("R | ---         |          --- | R");
 	print("P | ---         O          --- | P");
 	print("----------------------------------\n");
-	//exit;
+	
 	AntiDeAMX(); // Can't touch this
 }
 //------------------------------------------------------------------------------------------------------
@@ -168,26 +168,24 @@ public OnGameModeInit()
 {
 	//-------<[ Debug check ]>-------
 	#if DEBUG == 1
-		printf("OnGameModeInit - begin");
-		
-		if(dini_Exists("production.info"))
-		{
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			print("Wersja debug na produkcji!! Wylaczam serwer.");
-			SendRconCommand("exit");
-			return 0;
-		}
+	if(dini_Exists("production.info"))
+	{
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		print("Wersja debug na produkcji!! Wylaczam serwer.");
+		SendRconCommand("exit");
+		return 0;
+	}
 	#endif
 
 	//-------<[ Anty DeAMX ]>-------
@@ -226,54 +224,28 @@ public OnGameModeInit()
 	//-------<[ AC ]>-------
 	Ac_OnGameModeInit();//Antyczit
 	
-	//-------<[ y_commands ]>-------
+	//-------<[ commands ]>-------
 	InitCommands();
 
-	//
-
+	//-------<[ modules ]>-------
+    systempozarow_init();
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	KaryTXDLoad(); 
-    //Streamer_SetTickRate(40);
 	
-	//AKTORZY
+	//-------<[ actors ]>-------
     PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
 	SetActorVirtualWorld(PaniJanina, 43);
 	new KasjerkaBasia = CreateActor(129, 815.6807,-1382.8877,23.6475,88.8177);
 	SetActorVirtualWorld(KasjerkaBasia, 255);
-	//AFK timer
-	for(new i; i<MAX_PLAYERS; i++)
-	{
-		afk_timer[i] = -1;
-	}
-	//Wybory:
-	if(dini_Exists("wybory.ini"))
-	{
-		for(new i; i<2; i++)
-		{
-			new string[12];
-			format(string,sizeof(string), "kandydat%d", i);
-			wybory[i] = dini_Int("wybory.ini", string);
-		}
-	}
-	else
-	{
-		dini_Create("wybory.ini");
-		for(new i; i<2; i++)
-		{
-			new string[12];
-			format(string,sizeof(string), "kandydat%d", i);
-			wybory[i] = dini_IntSet("wybory.ini", string, 0);
-		}
-	}
-    //Ustawienia BW
+
+	//-------<[ Kubi BW ]>-------
     if(dini_Exists("Settings.ini"))
     {
         new ust = dini_Int("Settings.ini", "OnlyGangZones");
         SetSVarInt("BW_OnlyGangZones", ust);
         ust = dini_Int("Settings.ini", "Time");
         SetSVarInt("BW_Time", ust);
-        //dini_Get("Settings.ini", "muzyka_bonehead");
         SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
     }
     else
@@ -281,32 +253,29 @@ public OnGameModeInit()
         dini_Create("Settings.ini");
         dini_IntSet("Settings.ini", "OnlyGangZones", 0);
         dini_IntSet("Settings.ini", "Time", 180);
-        //dini_S("Settings.ini", "muzyka_bonehead");
         dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
         SetSVarInt("BW_OnlyGangZones", 0);
         SetSVarInt("BW_Time", 180);
     }
 
-    systempozarow_init();//System Po¿arów v0.1
 
-    //22.06
     LoadConfig();
     WczytajRangi();
     WczytajSkiny();
     //Konfiguracja ID skryptu dla rodzin  - daj -1 w bazie aby wy³¹czyæ korzystanie ze skryptu dla slotu
     Config_FamilyScript();
     //
-    BARIERKA_Init(); //Przed limitem obiektów
+    BARIERKA_Init();
 
-    Stworz_Obiekty();//obiekty
-	obiekty_OnGameModeInit();//nowe obiekty
+    Stworz_Obiekty();
+	obiekty_OnGameModeInit();
 
-    ZaladujDomy();//System Domów
+    ZaladujDomy();
     ZaladujBiznesy();
     orgLoad();
     Zone_Load();
 
-    ZaladujTrasy();//System wyœcigów
+    ZaladujTrasy(); //System wyœcigów
 	ZaladujPickupy();
 	ZaladujSamochody(); //Auta do kradziezy
 	Zaladuj3DTexty();
@@ -316,6 +285,7 @@ public OnGameModeInit()
 	LoadBoxer();
 	LoadStuff();
 	LoadIRC();
+
 	LadujInteriory();
 
     //Sejfy mysql
@@ -341,8 +311,13 @@ public OnGameModeInit()
 	//discordconnect
 	DiscordConnectInit();
 
-    new string[MAX_PLAYER_NAME];
-    new string1[MAX_PLAYER_NAME];
+
+	//AFK timer
+	for(new i; i<MAX_PLAYERS; i++)
+	{
+		afk_timer[i] = -1;
+	}
+
 	for(new c=0;c<CAR_AMOUNT;c++)
 	{
 		Gas[c] = GasMax;
@@ -353,6 +328,9 @@ public OnGameModeInit()
 	IRCInfo[6][iPlayers] = 0; IRCInfo[7][iPlayers] = 0; IRCInfo[8][iPlayers] = 0;
 	IRCInfo[9][iPlayers] = 0;
 	News[hTaken1] = 0; News[hTaken2] = 0; News[hTaken3] = 0; News[hTaken4] = 0; News[hTaken5] = 0;
+
+    new string[MAX_PLAYER_NAME];
+    new string1[MAX_PLAYER_NAME];
 	format(string, sizeof(string), "Nothing");
 	strmid(News[hAdd1], string, 0, strlen(string), 255);
 	strmid(News[hAdd2], string, 0, strlen(string), 255);
@@ -437,9 +415,7 @@ public OnGameModeInit()
     }
 
     db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_legal (pID integer,weapon1 integer not null,weapon2 integer not null,weapon3 integer not null,weapon4 integer not null,weapon5 integer not null,weapon6 integer not null,weapon7 integer not null,weapon8 integer not null,weapon9 integer not null,weapon10 integer not null,weapon11 integer not null,weapon12 integer not null,weapon13 integer not null,unique (pID));"));
-
     db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_opisy(uid INTEGER PRIMARY KEY AUTOINCREMENT, text VARCHAR, owner INT, last_used INT);"));
-
     db_free_result(db_query(db_handle, "CREATE TABLE IF NOT EXISTS mru_kevlar(pID integer, offsetX FLOAT, offsetY FLOAT, offsetZ FLOAT, rotX FLOAT, rotY FLOAT, rotZ FLOAT, scaleX FLOAT, scaleY FLOAT, scaleZ FLOAT);"));
 
     for(new i;i<MAX_PLAYERS;i++)
@@ -448,20 +424,14 @@ public OnGameModeInit()
     }
 
     pusteZgloszenia();
-    print("GameMode init - done!");
-    //SendRconCommand("reloadfs MRP/mrpshop");
-    //SendRconCommand("reloadfs MRP/mrpattach");
-	#if DEBUG == 1
-		printf("OnGameModeInit - end");
-	#endif
+
+
+    print("----- OnGameModeInit done.");
 	return 1;
 }
 
 public OnGameModeExit()
 {
-	#if DEBUG == 1
-		printf("OnGameModeExit - begin");
-	#endif
 	//AFK timer
 	for(new i; i<MAX_PLAYERS; i++)
 	{
@@ -510,10 +480,7 @@ public OnGameModeExit()
 	DOF2_Exit();
 
     GLOBAL_EXIT = true;
-    print("Serwer zostaje wy³¹czony.");
-	#if DEBUG == 1
-		printf("OnGameModeExit - end");
-	#endif
+    print("----- OnGameModeExit done.");
 	return 1;
 }
 

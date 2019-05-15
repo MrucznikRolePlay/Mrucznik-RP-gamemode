@@ -404,7 +404,6 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_P_SALES 10002
 #define D_PREMIUM_BUY   10003
 #define D_P_CARS        10004
-#define D_KUBICWEL        10094 //dialog wybory
 
 #define D_KONTAKTY_DZWON				10100
 #define D_KONTAKTY_SMS					10101

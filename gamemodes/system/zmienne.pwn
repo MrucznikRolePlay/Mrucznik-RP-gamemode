@@ -140,8 +140,6 @@ new afk_timer[MAX_PLAYERS];
 //tazer
 new MaTazer[MAX_PLAYERS];
 new TazerAktywny[MAX_PLAYERS];
-//2015.08.25
-new wybory[6];
 ///
 //17.01.2015
 new TICKS_MySQLRefresh=0;
