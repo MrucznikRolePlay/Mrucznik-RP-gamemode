@@ -30,12 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "prace\prace.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_prace();
     
 }

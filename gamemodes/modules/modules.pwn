@@ -87,6 +87,30 @@
 #include "wejscia\wejscia.pwn"
 
 
+//-------<[ timers ]>-------
+#include "organizacje\organizacje_timers.pwn"
+#include "pojazdy\pojazdy_timers.pwn"
+#include "prace\prace_timers.pwn"
+#include "premium\premium_timers.pwn"
+
+
+//-------<[ mysql ]>-------
+#include "organizacje\organizacje_mysql.pwn"
+#include "pojazdy\pojazdy_mysql.pwn"
+#include "prace\prace_mysql.pwn"
+#include "premium\premium_mysql.pwn"
+
+
+//-------<[ others ]>-------
+
+
+//-------<[ callbacks ]>-------
+#include "organizacje\organizacje_callbacks.pwn"
+#include "pojazdy\pojazdy_callbacks.pwn"
+#include "prace\prace_callbacks.pwn"
+#include "premium\premium_callbacks.pwn"
+
+
 //-------<[ commands ]>-------
 #include "admin\commands\admin_commands.pwn"
 #include "biznesy\commands\biznesy_commands.pwn"

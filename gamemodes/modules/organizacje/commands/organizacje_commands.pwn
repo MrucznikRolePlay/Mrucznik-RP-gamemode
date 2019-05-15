@@ -30,12 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "organizacje\organizacje.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_organizacje();
     
 }

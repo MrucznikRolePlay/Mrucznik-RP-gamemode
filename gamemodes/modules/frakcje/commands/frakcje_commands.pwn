@@ -30,12 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "frakcje\frakcje.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_frakcje();
     
 }

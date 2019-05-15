@@ -3,5 +3,8 @@
     "description": "System pojazdów.",
     "author": "Mrucznik",
     "commands": true,
+    "mysql": true,
+    "timers": true,
+    "callbacks": true,
     "date": "04.05.2019"
 }
