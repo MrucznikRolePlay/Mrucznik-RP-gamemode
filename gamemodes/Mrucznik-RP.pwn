@@ -51,9 +51,11 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <libRegEx>
 #include <streamer>
 #include <mysql_R5>
+//#include <a_mysql> TODO: replace R5 plugin
 #include <whirlpool>
 #include <timestamptodate>
 #include <discord-connector>
+#include <requests>
 
 //-------<[ Include ]>-------
 #include <a_http>
@@ -6368,16 +6370,16 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			new Float:pX, Float:pY, Float:pZ;
 			GetPlayerPos(playerid,pX,pY,pZ);
 			new Float:vX,Float:vY,Float:vZ;
-			new Found=0;
+			new found=0;
 			new vid=0;
-			while((vid<MAX_VEHICLES)&&(!Found))
+			while((vid<MAX_VEHICLES)&&(!found))
 			{
 				vid++;
 				GetVehiclePos(vid,vX,vY,vZ);
                 if(vid == 1) continue;
 				if ((floatabs(pX-vX)<7.0)&&(floatabs(pY-vY)<7.0)&&(floatabs(pZ-vZ)<7.0)&&(vid!=GetPlayerVehicleID(playerid)))
 				{
-					Found=1;
+					found=1;
 					if (IsTrailerAttachedToVehicle(GetPlayerVehicleID(playerid)))
 					{
 						DetachTrailerFromVehicle(GetPlayerVehicleID(playerid));
@@ -6388,7 +6390,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 					SendClientMessage(playerid,COLOR_BROWN, "Pojazd podczepiony");
 				}
 			}
-			if (!Found)
+			if (!found)
 			{
 				SendClientMessage(playerid,COLOR_BROWN, "Nie ma w pobli¿u ¿adnych samochodów.");
 			}
