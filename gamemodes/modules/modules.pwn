@@ -88,6 +88,7 @@
 
 
 //-------<[ timers ]>-------
+#include "admin\admin_timers.pwn"
 #include "organizacje\organizacje_timers.pwn"
 #include "pojazdy\pojazdy_timers.pwn"
 #include "prace\prace_timers.pwn"
@@ -95,6 +96,7 @@
 
 
 //-------<[ mysql ]>-------
+#include "admin\admin_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
 #include "pojazdy\pojazdy_mysql.pwn"
 #include "prace\prace_mysql.pwn"
@@ -105,6 +107,7 @@
 
 
 //-------<[ callbacks ]>-------
+#include "admin\admin_callbacks.pwn"
 #include "organizacje\organizacje_callbacks.pwn"
 #include "pojazdy\pojazdy_callbacks.pwn"
 #include "prace\prace_callbacks.pwn"
