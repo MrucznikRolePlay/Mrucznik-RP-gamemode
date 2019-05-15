@@ -297,7 +297,6 @@ public OnGameModeInit()
     //Patrol Data
     Patrol_Init();
     LoadServerInfo(); //Informacja dla graczy np. o wylaczeniu czegos
-    LoadDisallowedCommands();
 
     //13.06
     LoadTXD();

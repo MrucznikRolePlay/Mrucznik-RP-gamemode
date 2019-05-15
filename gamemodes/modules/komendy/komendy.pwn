@@ -83,14 +83,8 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
-		return COMMAND_DENIED;
+		return COMMAND_OK;
 	}
-
-    if(IsCommandBlocked(cmdtext))
-    {
-        SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Komenda jest wy³¹czona.");
-        return COMMAND_DISABLED;
-    }
 
 	switch(success)
 	{

@@ -9019,29 +9019,6 @@ LoadServerInfo()
     }
 }
 
-LoadDisallowedCommands()
-{
-    for(new i=0;i<sizeof(DisallowedCommands);i++)
-    {
-        DisallowedCommands[i] = "\0";
-    }
-    new lID=0;
-    mysql_query("SELECT `cmd` FROM `mru_commands`");
-    mysql_store_result();
-    while(mysql_fetch_row_format(DisallowedCommands[lID], "|")) lID++;
-    mysql_free_result();
-}
-
-IsCommandBlocked(cmd[])
-{
-    for(new i=0;i<sizeof(DisallowedCommands);i++)
-    {
-        if(strlen(DisallowedCommands[i]) < 1) continue;
-        if(strfind(cmd, DisallowedCommands[i], true) != -1) return 1;
-    }
-    return 0;
-}
-
 LoadConfig()
 {
     new query[1024], data[256];

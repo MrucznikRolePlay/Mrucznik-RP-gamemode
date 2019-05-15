@@ -265,7 +265,6 @@
 #include "cmd/liderpomoc.pwn"
 #include "cmd/lina.pwn"
 #include "cmd/linie.pwn"
-#include "cmd/loadcommands.pwn"
 #include "cmd/loadconfig.pwn"
 #include "cmd/loadinfo.pwn"
 #include "cmd/lock.pwn"
