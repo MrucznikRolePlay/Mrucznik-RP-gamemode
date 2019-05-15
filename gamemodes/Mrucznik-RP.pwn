@@ -113,7 +113,11 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-------<[ 3.0 style ]>-------
 #include "modules\modules.pwn"
 
-
+/*
+#include "modules\ActorSystem\actors.pwn"
+#include "modules\ActorSystem\actors.hwn"
+#include "modules\ActorSystem\actors.def"
+*/
 //-------<[ Inne ]>-------
 #include "old_modules\inne\ibiza.inc"
 #include "old_modules\inne\system_kp.pwn"
@@ -1079,7 +1083,7 @@ public OnPlayerConnect(playerid)
 	
 	Command_SetPlayerDisabled(playerid, true);
 	
-	
+	LoadActors(playerid); 
 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
