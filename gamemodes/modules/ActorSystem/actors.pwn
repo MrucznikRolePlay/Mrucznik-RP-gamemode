@@ -40,19 +40,19 @@ CreaetDynamicActorEx(skinid, float:pX, float:pY, float:pZ, float:pRot vw, int, c
 	sActors[valActors][a_animation] = animation; 
 	return valActors++;
 }
-LoadTextOnActor(Float:pX, Float:pY, Float:pZ, const text[], vw, int, pID)
+LoadTextOnActor(Float:pX, Float:pY, Float:pZ, const text[], vw, int)
 {
-	CreateDynamic3DTextLabel(text, COLOR_WHITE, pX, pY, pZ, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID,  0, vw, int, pID);
+	CreateDynamic3DTextLabel(text, COLOR_WHITE, pX, pY, pZ, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID,  0, vw, int, -1);
 	return 1; 
 }
-LoadActors(playerid) 
+LoadActors() 
 {
 	for(new i; i<valActors; i++)
 	{	
 		new actorID[i] = CreateActor(sActors[i][a_skin], sActors[i][a_x], sActors[i][a_y], sActors[i][a_z], sActors[i][a_rot]);
 		if(strlen(sActors[i][a_text] >= 3))
 		{
-			LoadTextOnActor(sActors[i][a_x], sActors[i][a_y], sActors[i][a_z]+0.85, sActors[i][a_text], sActors[i][a_vw], sActors[i][a_int], playerid);
+			LoadTextOnActor(sActors[i][a_x], sActors[i][a_y], sActors[i][a_z]+0.85, sActors[i][a_text], sActors[i][a_vw], sActors[i][a_int]);
 		}
 	/*	if(sActors[i][a_animation] >= 1)
 		{

@@ -233,7 +233,7 @@ public OnGameModeInit()
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	KaryTXDLoad(); 
-	
+	//LoadActors(); 	
 	//-------<[ actors ]>-------
     PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
 	SetActorVirtualWorld(PaniJanina, 43);
@@ -1083,7 +1083,6 @@ public OnPlayerConnect(playerid)
 	
 	Command_SetPlayerDisabled(playerid, true);
 	
-	LoadActors(playerid); 
 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
