@@ -39,7 +39,7 @@ YCMD:usunpozar(playerid, params[], help)
 	    new string[128];
         format(string, 128, "CMD_Info: /usunpozar u¿yte przez %s [%d]", GetNick(playerid), playerid);
         SendCommandLogMessage(string);
-        CMDLog(string);
+        Log(cmdLog, INFO, string);
 	}
 	else
 	{

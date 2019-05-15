@@ -51,7 +51,7 @@ YCMD:sprzedajrybe(playerid, params[], help)
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			format(string, sizeof(string), "AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport(ryby)", sendername);
             SendPunishMessage(string, playerid);
-			KickLog(string);
+			Log(kickLog, INFO, string);
 			KickEx(playerid);
 			return 1;
 		}

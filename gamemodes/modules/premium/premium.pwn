@@ -300,7 +300,7 @@ KupPojazdPremium(playerid, id)
 	new string[128];
 	MRP_ShopPurchaseCar(playerid, PojazdyPremium[id][Model], PojazdyPremium[id][Cena]);
 	format(string, sizeof(string), "%s kupil pojazd premium %s za %d MC", GetNick(playerid), VehicleNames[PojazdyPremium[id][Model]-400], PojazdyPremium[id][Cena]);
-	PremiumLog(string);
+	Log(premiumLog, INFO, string);
 
 	premium_printMcQuantity(playerid);
 
@@ -335,7 +335,7 @@ KupSkinPremium(playerid, skin)
     mysql_query(string);
 
 	format(string, sizeof(string), "%s kupil skin %d za %d MC", GetNick(playerid), SkinyPremium[id][Model], UNIKATOWY_SKIN_CENA);
-	PremiumLog(string);
+	Log(premiumLog, INFO, string);
 
 	UniqueSkins[playerid][id] = true;
 
@@ -370,7 +370,7 @@ KupSlotPojazdu(playerid)
 	new string[128];
 
 	format(string, sizeof(string), "%s kupil slot wozu za %d MC", GetNick(playerid), CAR_SLOT_CENA);
-	PremiumLog(string);
+	Log(premiumLog, INFO, string);
 
 	MRP_SetPlayerCarSlots(playerid, MRP_GetPlayerCarSlots(playerid)+1);
 
@@ -398,7 +398,7 @@ KupZmianeNicku(playerid)
 	new string[128];
 
 	format(string, sizeof(string), "%s kupil zmiane nicku za %d MC", GetNick(playerid), ZMIANA_NICKU_CENA);
-	PremiumLog(string);
+	Log(premiumLog, INFO, string);
 
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie zmianê nicku za %d MC. Masz teraz %d zmian nicku.", ZMIANA_NICKU_CENA, MRP_GetPlayerNickChanges(playerid)));
 
@@ -446,7 +446,7 @@ KupNumerTelefonu(playerid, string:_numer[])
 		_MruAdmin(playerid, sprintf("Twój nowy numer telefonu: %d.", numer));
 
 		format(string, sizeof(string), "%s kupil numer telefonu %d za %d MC.", GetNick(playerid), numer, cena);
-		PremiumLog(string);
+		Log(premiumLog, INFO, string);
 
 		DialogMenuDotacje(playerid);
 

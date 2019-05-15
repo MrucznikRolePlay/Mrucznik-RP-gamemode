@@ -54,7 +54,7 @@ YCMD:dajlideraorg(playerid, params[], help)
 			
 			//logi
 			format(str, sizeof(str), "%s dal kontrole nad rodzina %d graczowi %s", GetNick(playerid), family, GetNick(id));
-			ActionLog(str);
+			Log(actionLog, INFO, str);
 			
 			PlayerInfo[id][pTeam] = 5;
 			gTeam[id] = 5;

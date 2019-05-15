@@ -95,7 +95,7 @@ YCMD:plac(playerid, params[], help)
 							format(string, sizeof(string), "   Otrzyma³eœ $%d od %s(gracz: %d).", moneys, sendername, playerid);
 							SendClientMessage(giveplayerid, COLOR_GRAD1, string);
 							format(string, sizeof(string), "%s da³ $%d graczowi %s", sendername, moneys, giveplayer);
-							PayLog(string);
+							Log(payLog, INFO, string);
 							if(moneys >= 1000000)
 							{
 								ABroadCast(COLOR_YELLOW,string,1);

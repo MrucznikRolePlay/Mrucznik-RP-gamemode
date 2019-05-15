@@ -45,7 +45,7 @@ YCMD:tankveh(playerid, params[], help)
 				
 				format(string, sizeof(string), "AdmCmd: %s zatankowa³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
 				SendPunishMessage(string, playerid);
-				KickLog(string);
+				Log(kickLog, INFO, string);
 				if(GetPlayerAdminDutyStatus(playerid) == 1)
 				{
 					iloscInne[playerid] = iloscInne[playerid]+1;

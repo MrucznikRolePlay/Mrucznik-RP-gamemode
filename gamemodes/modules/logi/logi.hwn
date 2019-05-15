@@ -22,6 +22,32 @@
 //
 
 //-----------------<[ Zmienne: ]>-------------------
+new Logger:serverLog;
+new Logger:vehicleErrorLog;
+new Logger:warningLog;
+new Logger:cmdLog;
+new Logger:sejfLog;
+new Logger:actionLog;
+new Logger:weapLog;
+new Logger:czitLog;
+new Logger:kasynoLog;
+new Logger:przekretLog;
+new Logger:payLog;
+new Logger:autaLog;
+new Logger:bankomatLog;
+new Logger:premiumLog;
+new Logger:kickLog;
+new Logger:banLog;
+new Logger:admindutyLog;
+new Logger:admindutyMaszLog;
+new Logger:biznesLog;
+new Logger:statsLog;
+new Logger:eventLog;
+new Logger:ckLog;
+new Logger:houseLog;
+new Logger:warnLog;
+new Logger:nickLog;
+
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------
 

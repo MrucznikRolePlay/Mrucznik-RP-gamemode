@@ -53,7 +53,7 @@ YCMD:fixallveh(playerid, params[], help)
         new string[128];
         format(string, sizeof(string), "Admin %s naprawi³ wszystkim graczom pojazdy", GetNick(playerid, true));
         SendClientMessageToAll(COLOR_LIGHTBLUE, string);
-		KickLog(string);
+		Log(kickLog, INFO, string);
     }
     return 1;
 }

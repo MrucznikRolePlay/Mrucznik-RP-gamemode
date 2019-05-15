@@ -50,7 +50,7 @@ YCMD:dajskryptera(playerid, params[], help)
         {
             PlayerInfo[para1][pNewAP] = 5;
             format(string, sizeof(string), "AdmCmd: %s mianowal %s na skryptera.", sendername, giveplayer);
-            CKLog(string);
+            Log(ckLog, INFO, string);
             format(string, sizeof(string), "Zosta³eœ mianowany na skryptera przez %s", sendername);
             SendClientMessage(para1, COLOR_LIGHTBLUE, string);
             format(string, sizeof(string), "Da³eœ %s skryptera.", giveplayer);

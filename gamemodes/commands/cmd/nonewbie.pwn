@@ -39,7 +39,7 @@ YCMD:nonewbie(playerid, params[], help)
 			BroadCast(COLOR_GRAD2, "Czat newbie zosta³ zablokowany przez Administratora!");
             format(string, 128, "CMD_Info: /nonewbie u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
-            CMDLog(string);
+            Log(cmdLog, INFO, string);
 		}
 		else if (PlayerInfo[playerid][pAdmin] >= 5 && (newbie) || IsAScripter(playerid) && (newbie))
 		{
@@ -57,7 +57,7 @@ YCMD:nonewbie(playerid, params[], help)
 			BroadCast(COLOR_GRAD2, "Czat newbie zosta³ odblokowany przez Administratora !");
             format(string, 128, "CMD_Info: /nonewbie u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
-            CMDLog(string);
+            Log(cmdLog, INFO, string);
 		}
 		else
 		{

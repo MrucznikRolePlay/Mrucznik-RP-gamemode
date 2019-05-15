@@ -43,7 +43,7 @@ YCMD:mole(playerid, params[], help)
 		}
 		
         format(string, sizeof(string), "CMD_Info: /mole u¿yte przez %s [%d] - %s", GetNick(playerid), playerid, params);
-        CMDLog(string);
+        Log(cmdLog, INFO, string);
 		SendCommandLogMessage(string);
 		
 		SendSMSMessageToAll(555, params); //mole

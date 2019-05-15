@@ -55,7 +55,7 @@ YCMD:wejdzw(playerid, params[], help)
                             {
                                 new string[256];
                                 format(string, sizeof(string), "Cziter %s zostal zbanowany za ucieczke z AJ",  GetNick(playerid));
-                                BanLog(string);
+                                Log(banLog, INFO, string);
                                 Ban(playerid);
                             }
                             return 1;

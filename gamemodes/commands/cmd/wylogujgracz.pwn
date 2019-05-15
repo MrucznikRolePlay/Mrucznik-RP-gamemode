@@ -50,7 +50,7 @@ YCMD:wylogujgracz(playerid, params[], help)
                 format(str, 128, "* Zosta³es wylogowany przez admina %s [%d].", GetNick(playerid), playerid);
                 SendClientMessage(giveplayerid, COLOR_GRAD1,str);
                 format(str, 128, "* Admin %s wylogowa³ %s", GetNick(playerid), GetNick(giveplayerid));
-                StatsLog(str);
+                Log(statsLog, INFO, str);
 			}
 		}
 		else

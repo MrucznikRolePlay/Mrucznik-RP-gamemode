@@ -68,7 +68,7 @@ YCMD:makewomanleader(playerid, params[], help)
 					
 					//logi
 					format(string, sizeof(string), "%s dal kontrole nad frakcja numer %d graczowi %s", sendername, level, giveplayer);
-					ActionLog(string);
+					Log(actionLog, INFO, string);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;

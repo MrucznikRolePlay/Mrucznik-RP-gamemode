@@ -25,9 +25,30 @@
 
 //
 
-//-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-//------------------<[ MySQL: ]>--------------------
-//-----------------<[ Komendy: ]>-------------------
+MRP_CheckLastLogin(uid, &time, ip[])
+{
+    new str[256];
+    format(str, 256, "SELECT UNIX_TIMESTAMP(`time`) a, `IP` FROM `mru_logowania` WHERE `PID`='%d' ORDER BY a DESC LIMIT 1", uid);
+    mysql_query(str);
+    mysql_store_result();
+    if(mysql_num_rows())
+    {
+        mysql_fetch_row_format(str, "|");
+        sscanf(str, "p<|>ds[16]", time, ip);
+        mysql_free_result();
+    }
+    return 1;
+}
+
+MRP_PlayerLog(playerid)
+{
+    new str[128], ip[16];
+    GetPlayerIp(playerid, ip, 16);
+    format(str, 128, "INSERT INTO `mru_logowania` (`PID`, `time`, `IP`) VALUES ('%d', NOW(), '%s')", PlayerInfo[playerid][pUID], ip);
+    mysql_query(str);
+    return 1;
+}
+
 
 //end

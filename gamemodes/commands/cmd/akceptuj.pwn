@@ -89,7 +89,7 @@ YCMD:akceptuj(playerid, params[], help)
 					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pUID], //otrzymuj¹cy UID
 					PlayerInfo[playerid][pPbiskey],
 					GetPVarInt(playerid, "Oferujacy_Cena"));
-					BiznesLog(string);
+					Log(biznesLog, INFO, string);
 					ResetBizOffer(playerid); 
 					ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 
 				}
@@ -182,7 +182,7 @@ YCMD:akceptuj(playerid, params[], help)
                                     format(string, sizeof(string), "* %s akceptowa³ sprzeda¿ neonów, zarabiasz 25 000$.", sendername);
                                     SendClientMessage(dawacz, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "%s kupi³ od %s neony do auta %s (UID auta:%d)", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], VehicleUID[GetPlayerVehicleID(playerid)][vUID]);
-                                    PayLog(string);
+                                    Log(payLog, INFO, string);
                                     DajKase(playerid, -3000000);
                                     DajKase(dawacz, 75000);
                                     Sejf_Add(FRAC_NOA, 50000);//wplacanie kasy
@@ -258,7 +258,7 @@ YCMD:akceptuj(playerid, params[], help)
 
                             format(string, sizeof(string), "%s kupi³ od %s auto marki %s (ID pliku auta:%d) za %d$", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczDajacy[playerid]))-400], CarData[IDAuta[playerid]][c_UID], CenaDawanegoAuta[playerid]);
 
-                            AutoLog(string);
+                            Log(autaLog, INFO, string);
                             new loled2 = CenaDawanegoAuta[playerid];
                             ZabierzKase(playerid, loled2);
                             DajKase(GraczDajacy[playerid], CenaDawanegoAuta[playerid]);
@@ -336,7 +336,7 @@ YCMD:akceptuj(playerid, params[], help)
 
                             format(string, sizeof(string), "%s wymieni³ z %s auto marki %s (ID pliku auta:%d) za %s (ID pliku auta:%d) z dop³at¹ %d$", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczWymieniajacy[playerid]))-400], CarData[IDAuta[playerid]][c_UID], VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_UID], CenaWymienianegoAuta[playerid]);
 
-                            PayLog(string);
+                            Log(payLog, INFO, string);
                             new loled2 = CenaWymienianegoAuta[playerid];
                             ZabierzKase(playerid, loled2);
                             DajKase(GraczWymieniajacy[playerid], CenaWymienianegoAuta[playerid]);
@@ -1123,7 +1123,7 @@ YCMD:akceptuj(playerid, params[], help)
                         SetPlayerArmour(playerid, 90);
                         sendTipMessage(playerid, "Dosta³eœ kamizelkê kuloodporn¹ od ochroniarza.");
                         format(string, sizeof(string), "%s kupil kamizelke od %s za $%d", sendername, giveplayer, GuardPrice[playerid]);
-                        PayLog(string);
+                        Log(payLog, INFO, string);
                         GuardOffer[playerid] = 999;
                         GuardPrice[playerid] = 0;
                         return 1;
@@ -1225,7 +1225,7 @@ YCMD:akceptuj(playerid, params[], help)
                             //
                             format(string, sizeof(string), "%s jebal siê za $%d z %s", sendername, SexPrice[playerid], giveplayer);
                             ABroadCast(COLOR_YELLOW,string,1);
-                            PayLog(string);
+                            Log(payLog, INFO, string);
                             //
 							ZabierzKase(playerid, SexPrice[playerid]);
 							if(PlayerInfo[SexOffer[playerid]][pSexSkill] == 50)
@@ -1495,7 +1495,7 @@ YCMD:akceptuj(playerid, params[], help)
                         DajKase(DomOffer[playerid], DomCena[playerid]);
                         ZapiszDom(PlayerInfo[playerid][pDom]);
                         format(string, sizeof(string), "%s kupil dom (id %d) od %s za %d$. ", sendername, PlayerInfo[playerid][pDom], giveplayer, DomCena[playerid]);
-                        PayLog(string);
+                        Log(payLog, INFO, string);
                         DomCena[playerid] = 0;
                         DomOffer[playerid] = 999;
                         return 1;

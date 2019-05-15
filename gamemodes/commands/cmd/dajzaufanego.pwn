@@ -48,7 +48,7 @@ YCMD:dajzaufanego(playerid, params[], help)
                 GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				format(string, sizeof(string), "AdmCmd: %s mianowa³ %s na %d level zaufanego.", sendername, giveplayer, level);
-				CKLog(string);
+				Log(ckLog, INFO, string);
 				format(string, sizeof(string), "Zosta³eœ mianowany na %d level zaufanego gracza przez %s", level, sendername);
 				SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "Da³eœ %s zaufanego o levelu %d.", giveplayer,level);

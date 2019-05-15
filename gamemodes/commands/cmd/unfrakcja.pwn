@@ -66,7 +66,7 @@ YCMD:unfrakcja(playerid, params[], help)
 					
 					//logi
 					format(string, sizeof(string), "%s unfrakcjowal gracza %s", sendername, GetNick(para1));
-					ActionLog(string);
+					Log(actionLog, INFO, string);
 				}
 			}//not connected
 		}

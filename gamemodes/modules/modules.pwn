@@ -108,6 +108,7 @@
 
 //-------<[ callbacks ]>-------
 #include "admin\admin_callbacks.pwn"
+#include "logi\logi_callbacks.pwn"
 #include "organizacje\organizacje_callbacks.pwn"
 #include "pojazdy\pojazdy_callbacks.pwn"
 #include "prace\prace_callbacks.pwn"

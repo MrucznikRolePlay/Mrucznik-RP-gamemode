@@ -88,7 +88,7 @@ YCMD:przelew(playerid, params[], help)
 								ABroadCast(COLOR_YELLOW,string,1);
 							}
 							printf("%s", string);
-							PayLog(string);
+							Log(payLog, INFO, string);
 							PlayerPlaySound(giveplayerid, 1052, 0.0, 0.0, 0.0);
 						}
 						else
@@ -103,7 +103,7 @@ YCMD:przelew(playerid, params[], help)
 								ABroadCast(COLOR_YELLOW,string,1);
 							}
 							printf("%s", string);
-							PayLog(string);
+							Log(payLog, INFO, string);
 						}
 					}
 					else

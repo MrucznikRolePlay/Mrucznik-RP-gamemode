@@ -62,7 +62,7 @@ YCMD:skick(playerid, params[], help)
 			        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "AdmCmd: Admin %s was kicked by admin %s, Powód: CICHY kick", giveplayer, sendername);
-					KickLog(string);
+					Log(kickLog, INFO, string);
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 					AntySpam[playerid] = 1;

@@ -60,7 +60,7 @@ YCMD:givegun(playerid, params[], help)
 						GivePlayerWeapon(playa, gun, ammo);
 						//logi broñ
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 		            if(gun >= 2 && gun <= 9)
@@ -69,7 +69,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo1] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if(gun >= 10 && gun <= 15)
@@ -78,7 +78,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo10] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if(gun >= 16 && gun <= 18)
@@ -87,7 +87,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo8] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if(gun >= 19 && gun <= 21)
@@ -100,7 +100,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo2] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if(gun >= 25 && gun <= 27)
@@ -109,7 +109,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo3] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if(gun == 28 || gun == 29 || gun == 32)
@@ -118,7 +118,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo4] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if(gun == 30 || gun == 31)
@@ -127,7 +127,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo5] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 					}
 					else if(gun == 33 || gun == 34)
 					{
@@ -135,7 +135,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo6] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if( gun == 39)
@@ -147,7 +147,7 @@ YCMD:givegun(playerid, params[], help)
 						GivePlayerWeapon(playa, gun, ammo);
 						GivePlayerWeapon(playa, 40, 1);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if( gun >= 35 || gun <= 38)
@@ -156,7 +156,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo7] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if( gun >= 41 || gun <= 43)
@@ -165,7 +165,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo9] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else if( gun == 46)
@@ -174,7 +174,7 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo11] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
 						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						WeapLog(string);
+						Log(weapLog, INFO, string);
 						SendCommandLogMessage(string);
 					}
 					else

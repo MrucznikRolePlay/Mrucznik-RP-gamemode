@@ -49,6 +49,6 @@ YCMD:app(playerid, params[], help) {
     Sejf_Add(PlayerInfo[ofertaod][pMember], 10000);
     ApprovedLawyer[playerid] = 1;
     format(string, sizeof(string), "%s dal zgode %s", GetNick(ofertaod), GetNick(playerid));
-    PayLog(string);
+    Log(payLog, INFO, string);
     return 1;
 }

@@ -47,6 +47,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 
 //-------<[ Pluginy ]>-------
 #include <crashdetect>
+#include <log-plugin>
 #include <sscanf2>
 #include <libRegEx>
 #include <streamer>
@@ -105,15 +106,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 
 //-------<[ MySQL ]>-------
 #include "mysql\mru_mysql.pwn"
-#include "mysql\mysql_external.pwn"
-#include "mysql\mysql_funkcje.pwn"
-#include "mysql\mysql_ibiza.pwn"
 #include "mysql\mysql_komendy.pwn"
 #include "mysql\mysql_noysi.pwn"
 #include "mysql\mysql_OnDialogResponse.pwn"
-#include "mysql\mysql_premium.pwn"
-#include "mysql\mysql_system_aut.pwn"
-#include "mysql\mysql_system_kp.pwn"
 
 //-------<[ 3.0 style ]>-------
 #include "modules\modules.pwn"
@@ -1362,21 +1357,21 @@ public OnPlayerDisconnect(playerid, reason)
 		{
 			getdate(y1, mi1, d1); 
 			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
-			AdminDutyLog(stringlog); //Create LOG
+			Log(admindutyLog, INFO, stringlog); //Create LOG
 				
 			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
 			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d /q", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
-			AdminDutyMaszLog(stringlog);
+			Log(admindutyMaszLog, INFO, stringlog);
 		}
 		else
 		{
 			getdate(y1, mi1, d1); 
 			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez AFK", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
-			AdminDutyLog(stringlog); //Create LOG
+			Log(admindutyLog, INFO, stringlog); //Create LOG
 				
 			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
 			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d AFK", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
-			AdminDutyMaszLog(stringlog);
+			Log(admindutyMaszLog, INFO, stringlog);
 		
 		
 		
@@ -1885,13 +1880,13 @@ public OnPlayerDeath(playerid, killerid, reason)
 				{
 					format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
 					ABroadCast(COLOR_YELLOW,string,1);
-					WarningLog(string);
+					Log(warningLog, INFO, string);
 				}
 				else
 				{
 					format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] z DB, dosta³ kicka !", killername, killerid, playername, playerid);
 					ABroadCast(COLOR_YELLOW,string,1);
-					WarningLog(string);
+					Log(warningLog, INFO, string);
 					SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
 					KickEx(killerid);
 					#if DEBUG == 1
@@ -1904,19 +1899,19 @@ public OnPlayerDeath(playerid, killerid, reason)
 			{
 				format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
 				ABroadCast(COLOR_YELLOW,string,1);
-				CzitLog(string);
+				Log(czitLog, INFO, string);
 			}
 			if(reason == 41)
 			{
 				format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s ze spreya !", killerid, killername, playername);
 				ABroadCast(COLOR_YELLOW,string,1);
-				WarningLog(string);
+				Log(warningLog, INFO, string);
 			}
 			if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
 			{
                 format(string, 128, "AdmWarning: £owca Nagród [%d]%s zabi³ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
 				ABroadCast(COLOR_YELLOW,string,1);
-				WarningLog(string);
+				Log(warningLog, INFO, string);
 			}
 			//-------<[    Inne    ]>---------
 			if(PlayerPaintballing[playerid] != 0)
@@ -1954,7 +1949,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 							DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
 							format(string,128,"<< Hitman %s wype³ni³ kontrakt na: %s i zarobi³ $%d >>",killername,playername,PlayerInfo[playerid][pHeadValue]);
 							SendFamilyMessage(8, COLOR_YELLOW, string);
-							PayLog(string);
+							Log(payLog, INFO, string);
 							format(string,128,"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s. Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",playername);
 							SendClientMessageToAll(COLOR_NEWS, string);
 							PlayerInfo[playerid][pHeadValue] = 0;
@@ -2085,7 +2080,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
-        AntiCheatLog(string);
+        Log(czitLog, INFO, string);
 		
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
@@ -2285,7 +2280,7 @@ SetPlayerSpawnPos(playerid)
 		format(string, sizeof(string), "Dodatkowo zabrano z twojego portfela %d$ i wyzerowano twoje bronie oraz zabrano po³owê matsów", kaseczka);
         SendClientMessage(playerid, COLOR_LIGHTRED, string);
         format(string, sizeof(string),"%s dal /q podczas akcji i zabrano mu %d$ i %d mats oraz bronie", sendername, kaseczka, PlayerInfo[playerid][pMats]/2);
-        PayLog(string);
+        Log(payLog, INFO, string);
         ZabierzKase(playerid, kaseczka);
         PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
 	}
@@ -4913,7 +4908,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		if(newstate == PLAYER_STATE_SPAWNED || newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
 		{
 			format(string, sizeof(string), "%s zostal skickowany za bycie niezalogowanym (OPST)", GetNick(playerid));
-			KickLog(string);
+			Log(kickLog, INFO, string);
 			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
 			KickEx(playerid);
 			return 1;
@@ -5602,7 +5597,7 @@ PayDay()
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
 						format(string, sizeof(string), "%s zostal zbanowany za 10mln i 1 lvl", playername2);
-						BanLog(string);
+						Log(banLog, INFO, string);
 						KickEx(i);
 					}
 					if(PlayerInfo[i][pDonateRank] > 0)
@@ -5677,7 +5672,7 @@ PayDay()
 			    new domex[128];
 			    ZlomowanieDomu(9999, h);
 				format(domex, sizeof(domex), "Dom nr %d zostal zezlomowany z powodu uplywu czasu");
-			    PayLog(domex);
+			    Log(payLog, INFO, domex);
 			}
 	    }
 		ZapiszDomy();
@@ -5729,7 +5724,7 @@ public OnPlayerUpdate(playerid)
 		{
 			new string[128];
 			format(string, sizeof(string), "%s zostal skickowany za bycie niezalogowanym", GetNick(playerid));
-			KickLog(string);
+			Log(kickLog, INFO, string);
 			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
 			KickEx(playerid);
 			return 0;

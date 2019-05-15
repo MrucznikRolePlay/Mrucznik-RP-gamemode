@@ -61,7 +61,7 @@ YCMD:sban(playerid, params[], help)
 					}
 					
 					format(string, sizeof(string), "AdmCmd: Ukryty (/sban) Admin %s zbanowal %s, powód: %s",  sendername, giveplayer, result);
-					BanLog(string);
+					Log(banLog, INFO, string);
 				    MruMySQL_Banuj(giveplayerid, result, playerid);
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);

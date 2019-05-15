@@ -44,7 +44,7 @@ YCMD:startlotto(playerid, params[], help)
 
             format(string, sizeof(string), "CMD_Info: /startlotto u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
-            CMDLog(string);
+            Log(cmdLog, INFO, string);
         }
         else
         {

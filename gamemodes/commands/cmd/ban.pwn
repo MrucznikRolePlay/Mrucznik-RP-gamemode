@@ -84,7 +84,7 @@ YCMD:ban(playerid, params[], help)
                     }
 					SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
 					format(string, sizeof(string), "AdmCmd: Admin %s zbanowal %s, powód: %s",  sendername, giveplayer, result);
-					BanLog(string);
+					Log(banLog, INFO, string);
 					if(kary_TXD_Status == 0)
 					{
 						format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, result);
@@ -104,7 +104,7 @@ YCMD:ban(playerid, params[], help)
 					{
 					    MruMySQL_Banuj(playerid, result, giveplayerid);
 						format(str, sizeof(str), "%s zostal zbanowany za zbanowanie admina /ban",sendername);
-						BanLog(str);
+						Log(banLog, INFO, str);
 					    KickEx(playerid);
 						//adminduty
 						if(GetPlayerAdminDutyStatus(playerid) == 1)
@@ -141,7 +141,7 @@ YCMD:ban(playerid, params[], help)
                         }
 						SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
 						format(string, sizeof(string), "AdmCmd: Pó³Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, (result));
-						BanLog(string);
+						Log(banLog, INFO, string);
                         SendPunishMessage(string, giveplayerid);
 						format(str,sizeof(str),"~y~Ban Info:~n~~r~Osoba zbanowana: ~w~%s~n~~r~Powod: ~w~%s~n~~r~Nalozyl: ~w~%s", giveplayer ,(result), sendername);
 						MruMySQL_Banuj(giveplayerid, result, playerid);

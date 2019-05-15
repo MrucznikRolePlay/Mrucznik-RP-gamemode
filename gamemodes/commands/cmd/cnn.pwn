@@ -50,7 +50,7 @@ YCMD:cnn(playerid, params[], help)
 				GameTextForPlayer(i, string, 5000, 6);
 			}
 		}
-        CMDLog(string);
+        Log(cmdLog, INFO, string);
 		return 1;
 	}
 	else

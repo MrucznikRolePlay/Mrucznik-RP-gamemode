@@ -66,7 +66,7 @@ YCMD:panel(playerid, params[], help)
 
             format(str, sizeof(str), "ADM: %s - odblokowano nick: %s", GetNick(playerid), var);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
-            BanLog(str);
+            Log(banLog, INFO, str);
             return 1;
         }
         else if(strcmp(sub, "unbanip", true) == 0)
@@ -100,7 +100,7 @@ YCMD:panel(playerid, params[], help)
 
             format(str, sizeof(str), "ADM: %s - odblokowano IP: %s", GetNick(playerid), var);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
-            BanLog(str);
+            Log(banLog, INFO, str);
             return 1;
         }
         else if(strcmp(sub, "ban", true) == 0)
@@ -124,7 +124,7 @@ YCMD:panel(playerid, params[], help)
 
             format(str, sizeof(str), "ADM: %s - zablokowano nick: %s powód: %s", GetNick(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
-            BanLog(str);
+            Log(banLog, INFO, str);
             return 1;
         }
         else if(strcmp(sub, "banip", true) == 0)
@@ -154,7 +154,7 @@ YCMD:panel(playerid, params[], help)
 
             format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
-            BanLog(str);
+            Log(banLog, INFO, str);
             return 1;
         }
         else if(strcmp(sub, "unwarn", true) == 0)
@@ -186,7 +186,7 @@ YCMD:panel(playerid, params[], help)
 				{
 					SendClientMessage(playerid, COLOR_YELLOW, str);
 				}
-                WarnLog(str);
+                Log(warnLog, INFO, str);
             }
             else sendTipMessage(playerid, "Gracz nie posiada warnów");
             return 1;

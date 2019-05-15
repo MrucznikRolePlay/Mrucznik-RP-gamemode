@@ -45,7 +45,7 @@ YCMD:dajkp(playerid, params[], help)
 		new string[90];
 
 		format(string, sizeof(string), "AdmCmd: %s dal %s KP na %d", GetNick(playerid), GetNick(giveplayerid), givetime);
-		CKLog(string);
+		Log(ckLog, INFO, string);
 
 		if(givetime == 0)
 		{

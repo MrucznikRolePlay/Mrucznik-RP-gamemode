@@ -80,14 +80,14 @@ YCMD:wiadomosc(playerid, params[], help)
             SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
             format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,text);
             ABroadCast(COLOR_LIGHTRED,string,1);
-            CzitLog(string);
+            Log(czitLog, INFO, string);
             return 1;
         }
         if (AntyCzitText(text))
         {
             format(string, sizeof(string), "AdmWarning: [%d]%s mówi coœ o cheat'ach do[%s]: %s",playerid,sendername, giveplayer,text);
             ABroadCast(COLOR_LIGHTRED,string,1);
-            CzitLog(string);
+            Log(czitLog, INFO, string);
         }
 
         //wiadomoœci:

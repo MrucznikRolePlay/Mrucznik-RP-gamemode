@@ -73,7 +73,7 @@ YCMD:wplac(playerid, params[], help)
                 format(string, sizeof(string), "Wp³aci³eœ $%d na swoje konto, obecny stan to: $%d ", cashdeposit-depo2,PlayerInfo[playerid][pAccount]);
                 SendClientMessage(playerid, COLOR_YELLOW, string);
 				format(string, sizeof(string), "[BANKOMAT] %s wp³aci³ na swoje konto %d$. Nowy stan: %d$", GetNick(playerid), cashdeposit-depo2, PlayerInfo[playerid][pAccount]);
-				BankomatLog(string);
+				Log(bankomatLog, INFO, string);
             } else {
                 SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
                 format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);

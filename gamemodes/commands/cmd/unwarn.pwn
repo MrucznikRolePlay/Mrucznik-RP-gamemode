@@ -64,7 +64,7 @@ YCMD:unwarn(playerid, params[], help)
 					{
 						SendClientMessage(playerid, COLOR_YELLOW, string);
 					}*/
-                    WarnLog(string);
+                    Log(warnLog, INFO, string);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscWarn[playerid] = iloscWarn[playerid]+1;

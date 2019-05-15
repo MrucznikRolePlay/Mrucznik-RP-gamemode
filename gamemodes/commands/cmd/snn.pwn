@@ -54,6 +54,6 @@ YCMD:snn(playerid, params[], help)
 
     strcat(string, " - ");
     strcat(string, params);
-    CMDLog(string);
+    Log(cmdLog, INFO, string);
 	return 1;
 }

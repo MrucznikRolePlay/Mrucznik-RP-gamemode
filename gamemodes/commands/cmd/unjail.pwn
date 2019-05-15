@@ -60,7 +60,7 @@ YCMD:unjail(playerid, params[], help)
 						format(string, sizeof(string), "ADMCMD: Administrator %s uwolni³ %s z AJ", sendername, giveplayer);
 						SendAdminMessage(COLOR_RED, string);
 						format(string, sizeof(string), "ADMCMD: Administrator %s uwolnil %s z AJ", sendername, giveplayer);
-                        KickLog(string);
+                        Log(kickLog, INFO, string);
 
 						PlayerInfo[playa][pJailed] = 0;
 						PlayerInfo[playa][pJailTime] = 0;

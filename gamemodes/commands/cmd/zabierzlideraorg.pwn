@@ -50,7 +50,7 @@ YCMD:zabierzlideraorg(playerid, params[], help)
 		
 		//logi
 		format(str, sizeof(str), "%s odebral kontrole nad rodzina %d graczowi %s", GetNick(playerid), gPlayerOrg[id], GetNick(id));
-		ActionLog(str);
+		Log(actionLog, INFO, str);
     }
     return 1;
 }

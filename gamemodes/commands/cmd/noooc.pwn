@@ -40,7 +40,7 @@ YCMD:noooc(playerid, params[], help)
 
             format(string, 128, "CMD_Info: /noooc u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
-            CMDLog(string);
+            Log(cmdLog, INFO, string);
 		}
 		else if (PlayerInfo[playerid][pAdmin] >= 20 && (noooc))
 		{
@@ -48,7 +48,7 @@ YCMD:noooc(playerid, params[], help)
 			BroadCast(COLOR_GRAD2, "»» Czat OOC Zosta³ odblokowany przez Administratora !");
             format(string, 128, "CMD_Info: /noooc u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
-            CMDLog(string);
+            Log(cmdLog, INFO, string);
 		}
 		else
 		{

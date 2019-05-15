@@ -44,7 +44,7 @@ YCMD:dajdowozu(playerid, params[], help)
 		    PutPlayerInVehicleEx(giveplayerid, level, 0);
 			new string[128];
 			format(string, 128, "CMD_Info: /dajdowozu u¿yte przez %s na %s", GetNick(playerid), GetNick(giveplayerid));
-			CMDLog(string);
+			Log(cmdLog, INFO, string);
 		}
 	}
 	return 1;

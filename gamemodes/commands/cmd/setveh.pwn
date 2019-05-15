@@ -74,7 +74,7 @@ YCMD:setveh(playerid, params[], help)
                         if(PlayerInfo[para1][pCars][nrcar-1] != 0)
                         {
                             format(string, 256, "Gracz posiada³ auto (UID: %d) na slocie %d. Pojazd zostaje bez w³asciciela.", CarData[PlayerInfo[para1][pCars][nrcar-1]][c_UID], nrcar);
-                            StatsLog(string);
+                            Log(statsLog, INFO, string);
                         }
 
                         if(level != 0)
@@ -82,7 +82,7 @@ YCMD:setveh(playerid, params[], help)
     						format(string, sizeof(string), " Ustawiono pojazd %s (%d) graczowi %s.", VehicleNames[CarData[lID][c_Model]-400],level,GetNick(para1));
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
     						format(string, sizeof(string), "%s dal %s auto %s UID %d na slot %d /setcar", GetNick(playerid), GetNick(para1), VehicleNames[CarData[lID][c_Model]-400], level, nrcar);
-    						StatsLog(string);
+    						Log(statsLog, INFO, string);
 
                             PlayerInfo[para1][pCars][nrcar-1] = lID;
 
@@ -97,7 +97,7 @@ YCMD:setveh(playerid, params[], help)
                             format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", nrcar, GetNick(para1));
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
     						format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d /setcar", GetNick(playerid), GetNick(para1), nrcar);
-    						StatsLog(string);
+    						Log(statsLog, INFO, string);
 
                             PlayerInfo[para1][pCars][nrcar-1] = 0;
 

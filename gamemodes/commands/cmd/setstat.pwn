@@ -200,7 +200,7 @@ YCMD:setstat(playerid, params[], help)
 					}
 					SendClientMessage(playerid, COLOR_GRAD1, string);
 					format(string, sizeof(string), "%s da³ %s: %s", GetNick(playerid), GetNick(giveplayerid), string);
-					StatsLog(string);
+					Log(statsLog, INFO, string);
 				}
 				else
 				{

@@ -77,7 +77,7 @@ YCMD:wezportfel(playerid, params[], help)
 
 								format(string, sizeof(string), "* %s zabiera portfel %s razem z %d$", sendername ,giveplayer, pieniadze);
 								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								PayLog(string);
+								Log(payLog, INFO, string);
 								DajKase(playerid, pieniadze);
 								DajKase(giveplayerid, -pieniadze);
 								okradziony[giveplayerid] = 1;

@@ -52,7 +52,7 @@ YCMD:setarmor(playerid, params[], help)
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					new string[128];
 					format(string, sizeof(string), "AdmCmd: %s da³ $d armora %s", sendername, health,  giveplayer);
-					StatsLog(string);
+					Log(statsLog, INFO, string);
 					SetPlayerArmour(playa, health);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{

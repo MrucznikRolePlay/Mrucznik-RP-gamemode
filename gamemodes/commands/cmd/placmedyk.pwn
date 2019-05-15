@@ -73,7 +73,7 @@ YCMD:placmedyk(playerid, params[], help)
 			        format(komunikat, sizeof(komunikat), "Na konto frakcji wp³ynê³o %d$ od gracza.", money);
 			        SendClientMessage(giveplayerid, COLOR_P@, komunikat);
 			        format(komunikat, sizeof(komunikat), "Gracz %s zap³aci³ medykowi %d$. Dodano do sejfu LSMC. Jest w nim teraz %d$", sendername, money, Sejf_Frakcji[4]);
-			        PayLog(komunikat);
+			        Log(payLog, INFO, komunikat);
 					Sejf_Save(4);
 			        return 1;
 				}

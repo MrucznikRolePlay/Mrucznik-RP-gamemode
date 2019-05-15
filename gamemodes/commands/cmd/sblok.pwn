@@ -63,7 +63,7 @@ YCMD:sblok(playerid, params[], help)
 	                GetPlayerName(playerid, sendername, sizeof(sendername));
 		            format(string, sizeof(string), "AdmCmd: Konto gracza %s zostalo sblock przez %s, Powod: %s", giveplayer, sendername, (result));
 		            //PlayerInfo[giveplayerid][pCK] = 2;
-		            BanLog(string);
+		            Log(banLog, INFO, string);
 		            PlayerInfo[playerid][pBlock] = 1;
 					SendClientMessage(giveplayerid, COLOR_NEWS, "Twoje konto zosta³o zablokowane za z³y nick. Jeœli block jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i napiœ proœbê o UN BLOCK");
 					KickEx(giveplayerid);

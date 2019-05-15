@@ -36,7 +36,7 @@ YCMD:wylogujall(playerid, params[], help)
 		{
             new str[128];
             format(str, 128, "* Admin %s wylogowa³ WSZYSTKICH!!", GetNick(playerid));
-            StatsLog(str);
+            Log(statsLog, INFO, str);
             foreach(new i : Player)
             {
     			if(IsPlayerConnected(i))

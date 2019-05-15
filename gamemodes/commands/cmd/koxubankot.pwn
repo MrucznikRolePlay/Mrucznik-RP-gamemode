@@ -55,7 +55,7 @@ YCMD:koxubankot(playerid, params[], help)
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						PlayerInfo[para1][pAdmin] = level;
 						format(string, sizeof(string), "AdmCmd: %s mianowa³ %s na %d level admina.", sendername, giveplayer, level);
-						StatsLog(string);
+						Log(statsLog, INFO, string);
 						format(string, sizeof(string), "   Zosta³eœ mianowany na %d level admina przez %s", level, sendername);
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "   Da³eœ %s admina o levelu %d.", giveplayer,level);
@@ -74,7 +74,7 @@ YCMD:koxubankot(playerid, params[], help)
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						PlayerInfo[para1][pAdmin] = level;
 						format(string, sizeof(string), "AdmCmd: %s mianowa³ %s na %d level admina.", sendername, giveplayer, level);
-						StatsLog(string);
+						Log(statsLog, INFO, string);
 						format(string, sizeof(string), "   Zosta³eœ mianowany na %d level admina przez %s", level, sendername);
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "   Da³eœ %s admina o levelu %d.", giveplayer,level);

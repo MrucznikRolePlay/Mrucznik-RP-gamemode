@@ -49,7 +49,7 @@ YCMD:ann(playerid, params[], help)
 
         strcat(string, " - ");
         strcat(string, params);
-        CMDLog(string);
+        Log(cmdLog, INFO, string);
 	}
 	else
 	{

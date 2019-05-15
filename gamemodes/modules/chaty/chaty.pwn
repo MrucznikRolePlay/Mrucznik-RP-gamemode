@@ -118,7 +118,7 @@ sprawdzReklame(text[], playerid)
 			format(string, sizeof(string), "AdmWarning: %s - Wykryto reklamê", text);
 		}
 		ABroadCast(COLOR_LIGHTRED,string,1);
-		CzitLog(string);
+		Log(czitLog, INFO, string);
 		valueAdd=1;
 	}
 	else
@@ -160,7 +160,7 @@ sprawdzWulgaryzmy(text[], playerid)
 			format(stringReturn, sizeof(stringReturn), "AdmWarning: %s - pojawi³y siê wulgaryzmy");
 		}
 		ABroadCast(COLOR_LIGHTRED,stringReturn,1000);
-		WarningLog(stringReturn);
+		Log(warningLog, INFO, stringReturn);
 		valueWulgaryzmy = 1;
 	}
 	else

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ tod ]--------------------------------------------------//
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                    logi                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,59 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: Mrucznik
+// Data utworzenia: 04.05.2019
+//Opis:
 /*
-	
+	Narzêdzia do obs³ugi logów.
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
+#include <YSI\y_hooks>
 
-YCMD:tod(playerid, params[], help)
+//-----------------<[ Callbacki: ]>-----------------
+hook OnGameModeInit()
 {
-	new string[128];
-
-    if(IsPlayerConnected(playerid))
-    {
-		new hour;
-		if( sscanf(params, "d", hour))
-		{
-			sendTipMessage(playerid, "U¿yj /tod [czas] (0-23)");
-			return 1;
-		}
-
-
-		if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
-		{
-            SetWorldTime(hour);
-            ServerTime = hour;
-			
-			format(string, sizeof(string), "Czas zmieniony na %d Godzine.", hour);
-			BroadCast(COLOR_GRAD1, string);
-
-            format(string, sizeof(string), "CMD_Info: /tod u¿yte przez %s [%d]", GetNick(playerid), playerid);
-            SendCommandLogMessage(string);
-            Log(cmdLog, INFO, string);
-			if(GetPlayerAdminDutyStatus(playerid) == 1)
-			{
-				iloscInne[playerid] = iloscInne[playerid]+1;
-			}
-			foreach(new i : Player)//Je¿eli gracze s¹ w intkach 
-			{
-				if(GetPlayerVirtualWorld(i) != 0 || GetPlayerInterior(i) != 0)
-				{
-					SetInteriorTimeAndWeather(i);
-				}
-			}
-		}
-		else
-		{
-			noAccessMessage(playerid);
-		}
-	}
-	return 1;
+	serverLog = CreateLog("logi/server");
+	vehicleErrorLog = CreateLog("logi/vehicleerror");
+	warningLog = CreateLog("logi/warning");
+	cmdLog = CreateLog("logi/cmd");
+	sejfLog = CreateLog("logi/sejf");
+	actionLog = CreateLog("logi/action");
+	weapLog = CreateLog("logi/weap");
+	czitLog = CreateLog("logi/czit");
+	kasynoLog = CreateLog("logi/kasyno");
+	przekretLog = CreateLog("logi/przekret");
+	payLog = CreateLog("logi/pay");
+	autaLog = CreateLog("logi/auta");
+	bankomatLog = CreateLog("logi/bankomat");
+	premiumLog = CreateLog("logi/premium");
+	kickLog = CreateLog("logi/kick");
+	banLog = CreateLog("logi/ban");
+	admindutyLog = CreateLog("logi/adminduty");
+	admindutyMaszLog = CreateLog("logi/admindutymasz");
+	biznesLog = CreateLog("logi/biznesy");
+	statsLog = CreateLog("logi/setstats");
+	eventLog = CreateLog("logi/event");
+	ckLog = CreateLog("logi/ck");
+	houseLog = CreateLog("logi/domy");
+	warnLog = CreateLog("logi/warn");
+	nickLog = CreateLog("logi/nick");
 }
+
+//end

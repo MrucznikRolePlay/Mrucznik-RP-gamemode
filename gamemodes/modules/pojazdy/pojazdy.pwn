@@ -872,7 +872,7 @@ CONVERT_PlayerCar(playerid)
                 format(str, 128, "CAR.CONVERTER: B³¹d! Brak pliku pojazdu o ID %d slot: %d.", carlist[i], i);
                 SendClientMessage(playerid, COLOR_YELLOW, str);
                 format(str, 128, "[CAR.CONVERTER]: File not found [%d]. Caller %s", carlist[i], nick);
-                EventLog(str);
+                Log(eventLog, INFO, str);
                 continue;
             }
             strcat(owner, dini_Get(dopojazdu1, "Posiadacz"), 32);
@@ -893,7 +893,7 @@ CONVERT_PlayerCar(playerid)
                     SendClientMessage(playerid, COLOR_YELLOW, str);
 
                     format(str, 128, "[CAR.CONVERTER]: Owner mismatch for CarID [%d] is [%d]. Caller %s", carlist[i], ownuid, nick);
-                    EventLog(str);
+                    Log(eventLog, INFO, str);
                     continue;
                 }
             }
@@ -904,7 +904,7 @@ CONVERT_PlayerCar(playerid)
                 SendClientMessage(playerid, COLOR_YELLOW, str);
 
                 format(str, 128, "[CAR.CONVERTER]: Invalid model. CarID [%d] is [%d]. Caller %s", carlist[i], model, nick);
-                EventLog(str);
+                Log(eventLog, INFO, str);
                 continue;
             }
             x = dini_Float(dopojazdu1, "Pozycja_X");
@@ -928,7 +928,7 @@ CONVERT_PlayerCar(playerid)
                 SendClientMessage(playerid, COLOR_YELLOW, str);
 
                 format(str, 128, "[CAR.CONVERTER]: Can't query CarID [%d]. Caller %s", carlist[i], nick);
-                EventLog(str);
+                Log(eventLog, INFO, str);
                 continue;
             }
             new lUID = mysql_insert_id();

@@ -46,7 +46,7 @@ YCMD:setmats(playerid, params[], help)
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			PlayerInfo[gracz][pMats] = wartosc;
 			format(string, sizeof(string),"AdmCmd: %s dal %d matsow graczowi %s.", sendername, wartosc, giveplayer);
-            StatsLog(string);
+            Log(statsLog, INFO, string);
 
             _MruAdmin(playerid, sprintf("Da³eœ %d materia³ów graczowi %s [ID: %d]", wartosc, GetNick(gracz, true), gracz));
             if(gracz != playerid) _MruAdmin(gracz, sprintf("Dosta³eœ %d materia³ów od admina %s [ID: %d]", wartosc, GetNick(playerid, true), playerid));

@@ -40,7 +40,7 @@ YCMD:dajbiznes(playerid, params[], help)
 			PlayerInfo[gracz][pPbiskey] = wartosc;
 			MruMySQL_SaveAccount(playerid);
 			format(string, sizeof(string),"AdmCmd: %s dal biznes %s (ID %d) graczowi %s.", GetNick(playerid), BizData[wartosc][eBizName], wartosc, GetNick(gracz));
-            BiznesLog(string);
+            Log(biznesLog, INFO, string);
             _MruAdmin(playerid, sprintf("Da³eœ biznes %s (ID %d) graczowi %s [ID: %d]", BizData[wartosc][eBizName], wartosc, GetNick(gracz, true), gracz));
             if(gracz != playerid) _MruAdmin(gracz, sprintf("Dosta³eœ biznes %s (ID %d) Admina %s [ID: %d]", BizData[wartosc][eBizName], wartosc, GetNick(playerid, true), playerid));
 		}

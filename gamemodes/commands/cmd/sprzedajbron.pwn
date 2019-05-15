@@ -460,7 +460,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                 GivePlayerWeapon(giveplayerid,weapon[playerid],ammo[playerid]);
                                 format(string, sizeof(string), "Gracz %s sprzedal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), weapon[playerid], ammo[playerid], GetNick(giveplayerid));
-								WeapLog(string);
+								Log(weapLog, INFO, string);
                                 PlayerInfo[playerid][pMats] -= price[playerid];
                                 new weapons[13][2];
                                 for (new i = 0; i <= 12; i++)

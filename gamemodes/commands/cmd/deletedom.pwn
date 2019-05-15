@@ -150,7 +150,7 @@ YCMD:deletedom(playerid, params[], help)
 				Dom[kategoria][hS_A11] = 0;
 			    sendTipMessage(playerid, "Dom usuniêty");
 				format(string, sizeof(string), "%s usunal dom o (id %d)", GetNick(playerid), kategoria);
-				StatsLog(string);
+				Log(statsLog, INFO, string);
 				return 1;
 			}
 			else

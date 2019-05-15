@@ -46,7 +46,7 @@ YCMD:unblock(playerid, params[], help)
     		format(string, sizeof(string), "Administrator %s ublokowa³ %s", sendername, params);
             //SendPunishMessage(string);
             ABroadCast(COLOR_YELLOW,string,1);
-            BanLog(string);
+            Log(banLog, INFO, string);
         }
 	}
 	return 1;

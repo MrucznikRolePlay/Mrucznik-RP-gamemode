@@ -70,7 +70,7 @@ YCMD:datek(playerid, params[], help)
 		SendAdminMessage(COLOR_YELLOW, string);
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 		SendClientMessage(playerid, COLOR_GRAD1, string);
-		PayLog(string);
+		Log(payLog, INFO, string);
 	}
 	return 1;
 }

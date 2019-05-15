@@ -442,7 +442,7 @@ Taxi_FareEnd(playerid)
 	_MruGracz(playerid, string);
 
 	format(string,128,"%s zarobil $%d dla KT podczas /duty",GetNick(playerid), TransportMoney[playerid]);
-	PayLog(string);
+	Log(payLog, INFO, string);
 
 	if(GetPlayerFraction(playerid) != FRAC_KT) DajKase(playerid, TransportMoney[playerid]);
     else
@@ -1727,7 +1727,7 @@ Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-    KasynoLog(str);
+    Log(kasynoLog, INFO, str);
     Sejf_Add(19, podatek);
 
 
@@ -4510,7 +4510,7 @@ Lotto(number)
 			        GetPlayerName(i, winner, sizeof(winner));
 					format(string, sizeof(string), "Totolotek: %s Wygra³ nagrodê w wysokoœci: $%d.", winner, Jackpot);
 					OOCOff(COLOR_WHITE, string);
-					PayLog(string);
+					Log(payLog, INFO, string);
 					format(string, sizeof(string), "* Wygra³eœ nagrodê o wysokoœci: $%d dziêki wytypowaniu prawid³owej liczby !", Jackpot);
 					SendClientMessage(i, COLOR_YELLOW, string);
 			    	DajKase(i, Jackpot);
@@ -4542,191 +4542,6 @@ Lotto(number)
 	}
 	return 1;
 }
-
-//------------[Logi:]----------------------
-
-AntiCheatLog(text[])
-{
-	new plik[32] = "logi/anticheatlog.log";
-	Log(plik, text);
-}
-
-VehicleErrorLog(text[])
-{
-	new plik[32] = "logi/vehicleerror.log";
-	Log(plik, text);
-}
-
-WarningLog(text[])
-{
-    new plik[32] = "logi/warning.log";
-    Log(plik, text);
-}
-
-CMDLog(text[])
-{
-    new plik[32] = "logi/cmd.log";
-    Log(plik, text);
-}
-
-SejfLog(text[])
-{
-    new plik[32] = "logi/sejf.log";
-    Log(plik, text);
-}
-
-ActionLog(text[])
-{
-    new plik[32] = "logi/action.log";
-    Log(plik, text);
-}
-
-WeapLog(text[])
-{
-    new plik[32] = "logi/weap.log";
-    Log(plik, text);
-}
-
-AccountSaveLog(text[])
-{
-    new y,m,d;
-    getdate(y, m, d);
-    new plik[32];
-    format(plik, 32, "MySQL/save_%d_%02d_%02d.log", y, m, d);
-    Log(plik, text);
-}
-
-CzitLog(text[])
-{
-    new plik[32] = "logi/czit.log";
-    Log(plik, text);
-}
-
-KasynoLog(text[])
-{
-    new plik[32] = "logi/kasyno.log";
-    Log(plik, text);
-}
-PrzekretLog(text[]) {
-	new plik32[] = "logi/przekret.log";
-	Log(plik, text);
-}
-PayLog(text[])
-{
-    new plik[32] = "logi/pay.log";
-    Log(plik, text);
-}
-AutoLog(text[])
-{
-	new plik[32] = "logi/auta.log";
-	Log(plik, text);
-}
-BankomatLog(text[])
-{
-
-	new plik[32] = "logi/bankomat.log";
-	Log(plik, text);
-}
-PremiumLog(text[])
-{
-    new plik[32] = "logi/premium.log";
-    Log(plik, text);
-}
-
-KickLog(text[])
-{
-    new plik[32] = "logi/kick.log";
-    Log(plik, text);
-}
-
-BanLog(text[])
-{
-    new plik[32] = "logi/ban.log";
-    Log(plik, text);
-}
-AdminDutyLog(text[])
-{
-	new plik[32] = "logi/adminduty.log";
-	Log(plik, text);
-}
-AdminDutyMaszLog(text[])
-{
-	new plik[32] = "logi/admindutymasz.log";
-	Log(plik, text);
-}
-
-BiznesLog(text[])
-{
-    new plik[32] = "logi/biznesy.log";
-    Log(plik, text);
-}
-
-StatsLog(text[])
-{
-    new plik[32] = "logi/setstats.log";
-    Log(plik, text);
-}
-
-EventLog(text[])
-{
-    new plik[32] = "logi/event.log";
-    Log(plik, text);
-}
-
-CKLog(text[])
-{
-    new plik[32] = "logi/ck.log";
-    Log(plik, text);
-}
-DomyLog(text[])
-{
-	new plik[32] = "logi/domy.log";
-	Log(plik, text);
-}
-WarnLog(text[])
-{
-    new plik[32] = "logi/warn.log";
-    Log(plik, text);
-}
-
-NickLog(text[])
-{
-    new plik[32] = "logi/nick.log";
-    Log(plik, text);
-}
-
-Log(plik[], text[])
-{
-	new File:file = fopen(plik, io_append);
-    new message[512], data[2][3];
-    if(file)
-    {
-    	gettime(data[0][0], data[0][1], data[0][2]);
-    	getdate(data[1][0], data[1][1], data[1][2]);
-
-    	format(message, sizeof(message), "[%02d/%02d/%02d - %02d:%02d:%02d] %s\r\n", data[1][0], data[1][1], data[1][2], data[0][0], data[0][1], data[0][2], text);
-        fwrite(file, message);
-        fclose(file);
-    }
-    else if(!fexist(plik))
-    {
-        file = fopen(plik, io_write);
-        if(file)
-        {
-        	gettime(data[0][0], data[0][1], data[0][2]);
-        	getdate(data[1][0], data[1][1], data[1][2]);
-
-        	format(message, sizeof(message), "[%02d/%02d/%02d - %02d:%02d:%02d] %s\r\n", data[1][0], data[1][1], data[1][2], data[0][0], data[0][1], data[0][2], text);
-            fwrite(file, message);
-            fclose(file);
-        }
-    }
-    else printf("File handle error! File %s cannot be opened to write [%s]", plik, text);
-	return 1;
-}
-
-//------------[Koniec logi]----------------------
-
 
 SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
 {
@@ -5675,7 +5490,7 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
 	//SendClientMessage(playerid,COLOR_NEWS, komunikat);
 
     format(komunikat, sizeof(komunikat), "%s kupil UNIKATOWY pojazd %s za %d MC. UID %d", nick, VehicleNames[model-400], cena, carid);
-	PayLog(komunikat);
+	Log(payLog, INFO, komunikat);
     //TODO
     if(carid >= MAX_CARS)
     {
@@ -5729,7 +5544,7 @@ KupowaniePojazdu(playerid, model, kolor1, kolor2, cena)
             ZabierzKase(playerid, cena);
 
             format(komunikat, sizeof(komunikat), "%s kupil pojazd %s za %d$. UID %d", nick, VehicleNames[model-400], cena, carid);
-			PayLog(komunikat);
+			Log(payLog, INFO, komunikat);
             //TODO
             if(carid >= MAX_CARS) return SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Mo¿liwe przepe³nienie, auto zosta³o kupione lecz nie mo¿esz go u¿yæ.");
 
@@ -6318,7 +6133,7 @@ Dom_ChangeInt(playerid, dld, interior)
 	SendClientMessage(playerid, COLOR_NEWS, string);
 
     format(string, 128, "DomInt: %s dom %d, int %d", GetNick(playerid), dld, interior);
-    ActionLog(string);
+    Log(actionLog, INFO, string);
 	//
 	ZapiszDom(dld);
 	return 1;
@@ -6339,7 +6154,7 @@ Dom_ChangeOwner(playerid, dom, forid)
 	SendClientMessage(playerid, COLOR_NEWS, string);
 
     format(string, 128, "DomOwn: %s dom %d, owner %s", GetNick(playerid), dom, GeT);
-    ActionLog(string);
+    Log(actionLog, INFO, string);
 	//
 	ZapiszDom(dom);
 	return 1;
@@ -6652,13 +6467,13 @@ KupowanieDomu(playerid, dom, platnosc)
 	    PlayerInfo[playerid][pDomT] = h;
 	    SendClientMessage(playerid, COLOR_NEWS, "Aby zobaczyæ komendy domu wpisz /dompomoc");
         format(str2, sizeof(str2), "%s kupil dom (id %d) za %d$", GeT, dom, cenadomu);
-		PayLog(str2);
+		Log(payLog, INFO, str2);
 	    //
 		//nowe logi - domy
 		new day, month, year;
 		getdate(year, month, day);
 		format(str2, sizeof(str2), "[%d:%d:%d] %s [UID: %d]  kupi³ dom [%d] za %d$", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, cenadomu);
-		DomyLog(str2);
+		Log(houseLog, INFO, str2);
 		ZapiszDom(dom);
 	}
 	return 1;
@@ -6775,7 +6590,7 @@ ZlomowanieDomu(playerid, dom)
 			format(GeT2, sizeof(GeT2), "Sprzeda³eœ swój dom za %d$. Osoby wynajmuj¹ce zosta³y wyeksmitowane. Przedmioty w sejfie oraz dodatki do domu przepad³y.", (Dom[dom][hCena]/2));
 			SendClientMessage(playerid, COLOR_NEWS, GeT2);
             format(GeT2, sizeof(GeT2), "%s zezlomowal dom nr %d i dostal %d$", GeT4, dom, (Dom[dom][hCena]/2));
-			PayLog(GeT2);
+			Log(payLog, INFO, GeT2);
 			format(GeT, sizeof(GeT), "Brak");
 			Dom[dom][hWlasciciel] = GeT;
 		}
@@ -6785,7 +6600,7 @@ ZlomowanieDomu(playerid, dom)
 			{
 				new str[128];
 				format(str, 128, "Dom %d wlasciciel: %s zostal zezlomowany z powodu nieaktywnosci dluzszej niz 30 dni", dom, Dom[dom][hWlasciciel]);
-				PayLog(str);
+				Log(payLog, INFO, str);
 				format(GeT, sizeof(GeT), "Gracz Nieaktywny");
 				Dom[dom][hWlasciciel] = GeT;
 			}
@@ -6829,7 +6644,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 			ZapiszDom(PlayerInfo[playerid][pDom]);
 			SendClientMessage(playerid, COLOR_PANICRED, "Wykryto bug z niekupionym domem, zosta³ on automatycznie naprawiony. Je¿eli komunikat bêdzie siê powtarza³ lub wyst¹pi¹ inne bugi, zg³oœ to koniecznie na forum!");
 			format(string, sizeof(string), "%s posiadal buga z niekupionym domem o (id %d)", GetNick(playerid), PlayerInfo[playerid][pDom] );
-			PayLog(string);
+			Log(payLog, INFO, string);
 		}
 	}
 	else if(domcheck == 0)
@@ -6839,7 +6654,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 			DajKase(playerid, (Dom[PlayerInfo[playerid][pDom]][hCena]/2));
 			SendClientMessage(playerid, COLOR_PANICRED, "Twój dom zosta³ zabrany z powodu nieaktywnoœci, otrzymujesz po³owê wartosci domu!");
 			format(string, sizeof(string), "%s stracil dom z powodu nieaktywnosci (id %d) i dostal %d$", GetNick(playerid), PlayerInfo[playerid][pDom], Dom[PlayerInfo[playerid][pDom]][hCena]/2 );
-			PayLog(string);
+			Log(payLog, INFO, string);
 			PlayerInfo[playerid][pDom] = 0;
 		}
 		else
@@ -6847,7 +6662,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 			DajKase(playerid, (Dom[PlayerInfo[playerid][pDom]][hCena]/2));
 			SendClientMessage(playerid, COLOR_PANICRED, "Wykro bug z dwoma w³aœcicielami! Jesteœ drugim w³aœcicielem, wiêc tracisz dom, otrzymujesz po³owê wartosci domu.");
 			format(string, sizeof(string), "%s stracil dom z powodu dwoch wlascicieli (id %d) i dostal %d$", GetNick(playerid), PlayerInfo[playerid][pDom], Dom[PlayerInfo[playerid][pDom]][hCena]/2 );
-			PayLog(string);
+			Log(payLog, INFO, string);
 			PlayerInfo[playerid][pDom] = 0;
 		}
 	}
@@ -6855,7 +6670,7 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 	{
 		SendClientMessage(playerid, COLOR_PANICRED, "Twój dom nie istnieje! Prawdopodobnie zosta³ usuniêty lub coœ posz³o nie tak.");
 		format(string, sizeof(string), "Brak domu gracza %s dom (id %d)", GetNick(playerid), PlayerInfo[playerid][pDom]);
-		PayLog(string);
+		Log(payLog, INFO, string);
 		PlayerInfo[playerid][pDom] = 0;
 	}
 }
@@ -8447,7 +8262,7 @@ Niwelacje(playerid)
 		SendClientMessage(playerid, COLOR_PANICRED, kox);
 		strins(kox, playername2, 0);
   		PlayerInfo[playerid][pMats] = 0;
-		PayLog(kox);
+		Log(payLog, INFO, kox);
 	}
 	if(PlayerInfo[playerid][pLevel] == 1)
 	{
@@ -8457,7 +8272,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 5000000)//5mln
 		{
@@ -8465,7 +8280,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 5000000)//5mln
 		{
@@ -8473,7 +8288,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pMats] >= 1000000)
 		{
@@ -8488,7 +8303,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 20000000)//1 000000 - 1mln
 		{
@@ -8496,7 +8311,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pCash] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 20000000)//1 000000 - 1mln
 		{
@@ -8504,7 +8319,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] == 3)
@@ -8515,7 +8330,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 50000000)//1 000000 - 1mln
 		{
@@ -8523,7 +8338,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 50000000)//1 000000 - 1mln
 		{
@@ -8532,7 +8347,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] == 4)
@@ -8543,7 +8358,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 75000000)//1 000000 - 1mln
 		{
@@ -8551,7 +8366,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 75000000)//1 000000 - 1mln
 		{
@@ -8559,7 +8374,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] == 5)
@@ -8570,7 +8385,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 100000000)//1 000000 - 1mln
 		{
@@ -8578,7 +8393,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 100000000)//1 000000 - 1mln
 		{
@@ -8587,7 +8402,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			PlayerInfo[playerid][pAccount] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] == 6)
@@ -8598,7 +8413,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 150000000)//1 000000 - 1mln
 		{
@@ -8606,7 +8421,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 150000000)//1 000000 - 1mln
 		{
@@ -8614,7 +8429,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pAccount] = 0;
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] == 7)
@@ -8625,7 +8440,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
    			ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 200000000)//1 000000 - 1mln
 		{
@@ -8633,7 +8448,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             PlayerInfo[playerid][pCash] = 0;
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 200000000)//1 000000 - 1mln
 		{
@@ -8641,7 +8456,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pAccount] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] == 8)
@@ -8652,7 +8467,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 250000000)//1 000000 - 1mln
 		{
@@ -8660,7 +8475,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pCash] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 250000000)//1 000000 - 1mln
 		{
@@ -8668,7 +8483,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pAccount] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] == 9)
@@ -8679,7 +8494,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             ResetujKase(playerid);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 350000000)//1 000000 - 1mln
 		{
@@ -8687,7 +8502,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pCash] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 350000000)//1 000000 - 1mln
 		{
@@ -8695,7 +8510,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pAccount] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] >= 10 && PlayerInfo[playerid][pLevel] <= 12)
@@ -8706,7 +8521,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
             ResetujKase(playerid);
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 500000000)//1 000000 - 1mln
 		{
@@ -8714,7 +8529,7 @@ Niwelacje(playerid)
 			SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
             PlayerInfo[playerid][pCash] = 0;
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 500000000)//1 000000 - 1mln
 		{
@@ -8722,7 +8537,7 @@ Niwelacje(playerid)
             PlayerInfo[playerid][pAccount] = 0;
             SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	else if(PlayerInfo[playerid][pLevel] >= 13 && PlayerInfo[playerid][pLevel] <= 30)
@@ -8733,7 +8548,7 @@ Niwelacje(playerid)
             ResetujKase(playerid);
             SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pCash] >= 1000000000)//1 000000 - 1mln
 		{
@@ -8741,7 +8556,7 @@ Niwelacje(playerid)
             PlayerInfo[playerid][pCash] = 0;
             SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 		if(PlayerInfo[playerid][pAccount] >= 1000000000)//1 000000 - 1mln
 		{
@@ -8749,7 +8564,7 @@ Niwelacje(playerid)
             PlayerInfo[playerid][pAccount] = 0;
             SendClientMessage(playerid, COLOR_PANICRED, kox);
 			strins(kox, playername2, 0);
-			PayLog(kox);
+			Log(payLog, INFO, kox);
 		}
 	}
 	return 1;
@@ -9174,7 +8989,7 @@ Sejf_Add(frakcja, kasa)
     {
         new str[80];
         format(str, 80, "FRAKCJA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Frakcji[frakcja]);
-        SejfLog(str);
+        Log(sejfLog, INFO, str);
     }
     Sejf_Frakcji[frakcja]+=kasa;
     Sejf_Save(frakcja);
@@ -9184,7 +8999,7 @@ SejfR_Add(frakcja, kasa)
 {
     new str[80];
     format(str, 80, "RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
-    SejfLog(str);
+    Log(sejfLog, INFO, str);
     Sejf_Rodziny[frakcja]+=kasa;
     SejfR_Save(frakcja);
 }

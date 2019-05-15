@@ -57,7 +57,7 @@ YCMD:podglad(playerid, params[], help)
 						PlayerInfo[para1][pPodPW] = 1;
 
                         format(string, sizeof(string), "AdmCmd: %s wlaczyl podglad PW %s",GetNick(playerid) ,giveplayer);
-                        CMDLog(string);
+                        Log(cmdLog, INFO, string);
 					}
 					else
 					{

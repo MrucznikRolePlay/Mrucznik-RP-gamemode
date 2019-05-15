@@ -39,7 +39,7 @@ YCMD:wyloguj(playerid, params[], help)
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Wylogowa³eœ siê.");
             new str[128];
             format(str, 128, "* Admin %s wylogowa³ siê.", GetNick(playerid));
-            StatsLog(str);
+            Log(statsLog, INFO, str);
 		}
 		else
 		{

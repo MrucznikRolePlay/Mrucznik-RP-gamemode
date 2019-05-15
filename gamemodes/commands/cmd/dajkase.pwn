@@ -48,7 +48,7 @@ YCMD:dajkase(playerid, params[], help)
 					DajKase(playa, money);
 					new string[128];
 					format(string, sizeof(string), "%s dal %s: %d$ /givemoney", GetNick(playerid), GetNick(playa), money);
-					StatsLog(string);
+					Log(statsLog, INFO, string);
 				}
 			}
 		}

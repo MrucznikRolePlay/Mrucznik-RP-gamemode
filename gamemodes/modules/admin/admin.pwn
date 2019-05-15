@@ -380,7 +380,7 @@ GivePWarnForPlayer(player[], adminid, result[])
 	strcat(nickDoWarna, player); 
 	new string[256];
 	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zwarnowane przez %s, Powod: %s", nickDoWarna, GetNick(adminid), (result));
-	WarnLog(string);
+	Log(warnLog, INFO, string);
 	MruMySQL_SetAccInt("Warnings", nickDoWarna, MruMySQL_GetAccInt("Warnings", nickDoWarna)+1);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
@@ -403,7 +403,7 @@ GiveWarnForPlayer(playerid, adminid, result[])
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 		format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez Admina %s (3 warny), powód: %s", GetNick(playerid), GetNick(adminid), (result));
-		BanLog(string);
+		Log(banLog, INFO, string);
 		if(GetPlayerAdminDutyStatus(adminid) == 1)
 		{
 			iloscBan[adminid]++; 
@@ -418,7 +418,7 @@ GiveWarnForPlayer(playerid, adminid, result[])
 	format(str, sizeof(str), "Dosta³eœ warna od %s, powód: %s", GetNick(adminid), (result));
 	SendClientMessage(playerid, COLOR_LIGHTRED, str);
 	format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez Admina %s, powód: %s", GetNick(playerid), GetNick(adminid), (result));
-	WarnLog(string);
+	Log(warnLog, INFO, string);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	KickEx(playerid);
@@ -488,7 +488,7 @@ SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 	strcat(nickOdbieracza, player); 
 	new string[256];
 	format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nickOdbieracza, timeVal, GetNick(adminid), (result));
-	KickLog(string);
+	Log(kickLog, INFO, string);
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
 		iloscAJ[adminid] = iloscAJ[adminid]+1;
@@ -512,7 +512,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 	poscig[playerid] = 0;
 	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNick(adminid), timeVal, (result)); 
-	KickLog(string);
+	Log(kickLog, INFO, string);
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		iloscAJ[playerid] = iloscAJ[playerid]+1;
@@ -529,7 +529,7 @@ GiveKickForPlayer(playerid, adminid, result[])
 	new string[256];
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 	format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", GetNick(adminid), GetNick(playerid), (result));
-	KickLog(string);
+	Log(kickLog, INFO, string);
 	//adminduty
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
@@ -549,7 +549,7 @@ GiveBPForPlayer(playerid, adminid, timeVal, result[])
 	PlayerInfo[playerid][pBP] = timeVal;
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 	format(string, sizeof(string), "AdmCmd: %s dostal BP od %s na %d godzin, z powodem %s", GetNick(playerid), GetNick(adminid), timeVal, result);
-	KickLog(string);
+	Log(kickLog, INFO, string);
 	//opis
 	//Opis_Usun(giveplayerid);
 	Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
@@ -562,7 +562,7 @@ GiveBlockForPlayer(playerid, adminid, result[])
 	new nickDoBlocka[MAX_PLAYER_NAME];
 	strcat(nickDoBlocka, GetNick(playerid)); 
 	format(string, sizeof(string), "AdmCmd: Konto gracza %s zostalo zablokowane przez %s, Powod: %s", GetNick(playerid), GetNick(adminid), (result));
-	BanLog(string);
+	Log(banLog, INFO, string);
 	PlayerInfo[playerid][pBlock] = 1;
 	KickEx(playerid);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
@@ -580,7 +580,7 @@ GivePBanForPlayer(player[], adminid, result[])
 	strcat(nickDoBlocka, player);
 	new string[256];
 	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zbanowane przez %s, Powod: %s ", nickDoBlocka, GetNick(adminid), (result));
-	BanLog(string);
+	Log(banLog, INFO, string);
 	MruMySQL_BanujOffline(nickDoBlocka, result, adminid);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
@@ -596,7 +596,7 @@ GivePBlockForPlayer(player[], adminid, result[])
 	new nickDoBlocka[MAX_PLAYER_NAME];
 	strcat(nickDoBlocka, player); 
 	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zablokowane przez %s, Powod: %s", player, GetNick(adminid), (result));
-	BanLog(string);
+	Log(banLog, INFO, string);
 	MruMySQL_Blockuj(nickDoBlocka, adminid, (result));
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;

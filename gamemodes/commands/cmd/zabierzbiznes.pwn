@@ -40,7 +40,7 @@ YCMD:zabierzbiznes(playerid, params[], help)
 			PlayerInfo[gracz][pPbiskey] = 255;
 			MruMySQL_SaveAccount(playerid);
 			format(string, sizeof(string),"AdmCmd: %s zabral biznes graczowi %s.", GetNick(playerid), GetNick(gracz));
-            BiznesLog(string);
+            Log(biznesLog, INFO, string);
             _MruAdmin(playerid, sprintf("Zabra³eœ biznes graczowi %s [ID: %d]", GetNick(gracz, true), gracz));
             if(gracz != playerid) _MruAdmin(gracz, sprintf("Biznes zosta³ zabrany przez Admina %s [ID: %d]", GetNick(playerid, true), playerid));
 		}

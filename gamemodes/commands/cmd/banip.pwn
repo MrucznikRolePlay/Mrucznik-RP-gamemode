@@ -73,7 +73,7 @@ YCMD:banip(playerid, params[], help)
 				iloscBan[playerid] = iloscBan[playerid]+1;
 				
 			}
-            BanLog(str);
+            Log(banLog, INFO, str);
 		}
 		else
 		{

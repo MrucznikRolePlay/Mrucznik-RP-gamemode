@@ -55,7 +55,7 @@ YCMD:reklama(playerid, params[], help)
 				SendClientMessage(i, 0xD8C173FF, string);
 			}
 		}
-        CMDLog(string);
+        Log(cmdLog, INFO, string);
 		AntySpam[playerid] = 1;
 		SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
 	}

@@ -45,7 +45,7 @@ YCMD:setmc(playerid, params[], help)
 
 		format(string, sizeof(string), "AdmCmd: %s dal %s %d mrucznik coinsow", GetNick(playerid), GetNick(giveplayerid), VARmcVal);
 
-		CKLog(string);
+		Log(ckLog, INFO, string);
 
 		PremiumInfo[giveplayerid][pMC] = VARmcVal;
 

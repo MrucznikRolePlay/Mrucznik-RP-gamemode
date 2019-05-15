@@ -65,7 +65,7 @@ YCMD:makemember(playerid, params[], help)
 					
 					//logi
 					format(string, sizeof(string), "%s mianowal na czlonka frakcji numer %d gracza %s", sendername, level, giveplayer);
-					ActionLog(string);
+					Log(actionLog, INFO, string);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;

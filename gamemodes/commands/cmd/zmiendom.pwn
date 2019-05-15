@@ -53,7 +53,7 @@ YCMD:zmiendom(playerid, params[], help)
                     GetPlayerName(playerid, sendername, sizeof(sendername));
                     PlayerInfo[para1][pDom] = level;
                     format(string, sizeof(string), "AdmCmd: %s zmieni³ dom %s na %d.", sendername, giveplayer, level);
-                    StatsLog(string);
+                    Log(statsLog, INFO, string);
                     format(string, sizeof(string), "   Twój dom zosta³ zmieniony na dom nr %d przez %s", level, sendername);
                     SendClientMessage(para1, COLOR_LIGHTBLUE, string);
                     format(string, sizeof(string), "   Zmieni³eœ dom graczowi %s na dom nr %d.", giveplayer,level);
