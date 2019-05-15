@@ -25,6 +25,9 @@
 
 //
 
+#include <YSI\y_hooks>
+
+
 //-----------------<[ Callbacki: ]>-----------------
 /*
         Error & Return type
@@ -119,6 +122,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 
 	return success;
 }
+
 //-----------------<[ Funkcje: ]>-------------------
 RunCommand(playerid, command[], params[]) //temporary
 {

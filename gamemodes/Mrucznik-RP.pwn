@@ -1114,6 +1114,7 @@ public OnPlayerConnect(playerid)
     LoadingShow(playerid);
     LoadingHide(playerid);
 	
+	Command_SetPlayerDisabled(playerid, true);
 	
 	
 
@@ -5966,6 +5967,7 @@ OnPlayerLogin(playerid, password[])
 
         Car_LoadForPlayer(playerid); //System aut
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
+		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
 
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);
