@@ -1,0 +1,11 @@
+{
+    "name": "prace",
+    "description": "Wyœwietla dostêpne prace.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "15.05.2019"
+}

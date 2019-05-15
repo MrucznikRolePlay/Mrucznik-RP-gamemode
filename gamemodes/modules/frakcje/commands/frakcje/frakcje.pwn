@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  usunopis                                                 //
+//                                                  frakcje                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,41 +28,31 @@
 
 
 //-------<[ include ]>-------
-#include "usunopis_impl.pwn"
+#include "frakcje_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_usunopis()
+command_frakcje()
 {
-    new command = Command_GetID("usunopis");
+    new command = Command_GetID("frakcje");
 
     //aliases
     
 
     //permissions
-    Group_SetCommand(Group_GetID("admini"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 }
 
 //-------<[ command ]>-------
-YCMD:usunopis(playerid, params[], help)
+YCMD:frakcje(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Komenda administracyjna pozwalaj¹ca usun¹æ opis dowolnemu graczowi.");
+        sendTipMessage(playerid, "Wyœwietla dostêpne frakcje.");
         return 1;
     }
-    //fetching params
-    new giveplayerid;
-    if(sscanf(params, "r", giveplayerid))
-    {
-        sendTipMessage(playerid, "U¿yj /usunopis [Nick/ID] ");
-        return 1;
-    }
-    if(!IsPlayerConnected(giveplayerid))
-    {
-        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
-        return 1;
-    }
+    
+    
     //command body
-    return command_usunopis_Impl(playerid, giveplayerid);
+    return command_frakcje_Impl(playerid);
 }

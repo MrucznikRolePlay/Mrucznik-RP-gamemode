@@ -1,0 +1,7 @@
+{
+    "name": "organizacje",
+    "description": "System organizacji przestêpczych.",
+    "author": "Mrucznik",
+    "commands": true,
+    "date": "15.05.2019"
+}

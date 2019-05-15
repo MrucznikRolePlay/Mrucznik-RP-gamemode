@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  usunopis                                                 //
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,42 +27,15 @@
 // ================= UWAGA! =================
 
 
+#include <YSI\y_hooks>
+
 //-------<[ include ]>-------
-#include "usunopis_impl.pwn"
+#include "prace\prace.pwn"
+
 
 //-------<[ initialize ]>-------
-command_usunopis()
+hook OnGameModeInit()
 {
-    new command = Command_GetID("usunopis");
-
-    //aliases
+    command_prace();
     
-
-    //permissions
-    Group_SetCommand(Group_GetID("admini"), command, true);
-    
-}
-
-//-------<[ command ]>-------
-YCMD:usunopis(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Komenda administracyjna pozwalaj¹ca usun¹æ opis dowolnemu graczowi.");
-        return 1;
-    }
-    //fetching params
-    new giveplayerid;
-    if(sscanf(params, "r", giveplayerid))
-    {
-        sendTipMessage(playerid, "U¿yj /usunopis [Nick/ID] ");
-        return 1;
-    }
-    if(!IsPlayerConnected(giveplayerid))
-    {
-        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
-        return 1;
-    }
-    //command body
-    return command_usunopis_Impl(playerid, giveplayerid);
 }
