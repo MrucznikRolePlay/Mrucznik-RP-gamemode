@@ -29,7 +29,7 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 hook OnGameModeInit()
-{
+{ 
 	serverLog = CreateLog("logi/server");
 	vehicleErrorLog = CreateLog("logi/vehicleerror");
 	warningLog = CreateLog("logi/warning");
