@@ -113,7 +113,11 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-------<[ 3.0 style ]>-------
 #include "modules\modules.pwn"
 
-
+/*
+#include "modules\ActorSystem\actors.pwn"
+#include "modules\ActorSystem\actors.hwn"
+#include "modules\ActorSystem\actors.def"
+*/
 //-------<[ Inne ]>-------
 #include "old_modules\inne\ibiza.inc"
 #include "old_modules\inne\system_kp.pwn"
@@ -229,7 +233,7 @@ public OnGameModeInit()
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	KaryTXDLoad(); 
-	
+	//LoadActors(); 	
 	//-------<[ actors ]>-------
     PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
 	SetActorVirtualWorld(PaniJanina, 43);
@@ -1078,7 +1082,6 @@ public OnPlayerConnect(playerid)
     LoadingHide(playerid);
 	
 	Command_SetPlayerDisabled(playerid, true);
-	
 	
 
 	//Poprawny nick:
