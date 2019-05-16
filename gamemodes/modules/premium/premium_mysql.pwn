@@ -20,7 +20,7 @@
 // Data utworzenia: 04.05.2019
 //Opis:
 /*
-	Monetyzacja, us≈Çugi premium.
+	Monetyzacja, us≥ugi premium.
 */
 
 //
