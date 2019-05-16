@@ -28,6 +28,7 @@
 
 
 //-------<[ .def ]>-------
+#include "actors\actors.def"
 #include "admin\admin.def"
 #include "adminduty\adminduty.def"
 #include "biznesy\biznesy.def"
@@ -48,6 +49,7 @@
 
 
 //-------<[ .hwn ]>-------
+#include "actors\actors.hwn"
 #include "admin\admin.hwn"
 #include "adminduty\adminduty.hwn"
 #include "biznesy\biznesy.hwn"
@@ -68,6 +70,7 @@
 
 
 //-------<[ .pwn ]>-------
+#include "actors\actors.pwn"
 #include "admin\admin.pwn"
 #include "adminduty\adminduty.pwn"
 #include "biznesy\biznesy.pwn"

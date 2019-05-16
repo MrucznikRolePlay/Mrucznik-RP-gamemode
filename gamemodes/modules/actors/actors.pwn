@@ -27,8 +27,9 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-CreaetDynamicActorEx(skinid, float:pX, float:pY, float:pZ, float:pRot vw, int, const text[], animation)
+CreaetDynamicActorEx(skinid, float:pX, float:pY, float:pZ, float:pRot, vw, int, const text[], animation)
 {
+	new valActors;
 	sActors[valActors][a_skin] = skinid;
 	sActors[valActors][a_vw] = vw;
 	sActors[valActors][a_int] = int;
@@ -40,11 +41,13 @@ CreaetDynamicActorEx(skinid, float:pX, float:pY, float:pZ, float:pRot vw, int, c
 	sActors[valActors][a_animation] = animation; 
 	return valActors++;
 }
+
 LoadTextOnActor(Float:pX, Float:pY, Float:pZ, const text[], vw, int)
 {
 	CreateDynamic3DTextLabel(text, COLOR_WHITE, pX, pY, pZ, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID,  0, vw, int, -1);
 	return 1; 
 }
+
 LoadActors() 
 {
 	for(new i; i<valActors; i++)
@@ -61,6 +64,7 @@ LoadActors()
 	}
 	return 0; 
 }
+
 //-----------------<[ Timery: ]>-------------------
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------

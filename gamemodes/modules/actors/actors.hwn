@@ -33,7 +33,7 @@ enum eActor
     float:a_y,
     float:a_z,
     float:a_rot,
-    const a_text[],
+    a_text[256],
     a_animation,
     a_vw,
     a_int
