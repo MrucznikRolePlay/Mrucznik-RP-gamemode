@@ -23,11 +23,11 @@
 
 //-----------------<[ Zmienne: ]>-------------------
 new TimerEfektNarkotyku[MAX_PLAYERS];
-new efektNarkotykuMinuta[MAX_PLAYERS] = 0;
+new efektNarkotykuMinuta[MAX_PLAYERS];
 new bazaCheck[MAX_PLAYERS];
-new PlayerRunStat[MAX_PLAYERS]=0;
-new OszukujewBiegu[MAX_PLAYERS]=0;
-new bazaOszust[MAX_PLAYERS]=0; 
+new PlayerRunStat[MAX_PLAYERS];
+new OszukujewBiegu[MAX_PLAYERS];
+new bazaOszust[MAX_PLAYERS]; 
 
 
 //------------------<[ Enumy: ]>--------------------

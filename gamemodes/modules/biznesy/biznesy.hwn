@@ -22,7 +22,7 @@
 //
 
 //-----------------<[ Zmienne: ]>-------------------
-new BizOpenStatus[MAX_BIZNES] = 0;
+new BizOpenStatus[MAX_BIZNES];
 
 
 //------------------<[ Enumy: ]>--------------------

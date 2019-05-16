@@ -26,7 +26,7 @@ new cenaNorm = 50000;
 new cenaVIP = 80000;
 new kasjerkaWolna = 666;
 //PizzaJob
-new PizzaJob[MAX_PLAYERS] = 0;
+new PizzaJob[MAX_PLAYERS];
 new Actor01;
 //FishGood
 new FishGood[MAX_PLAYERS];
@@ -49,14 +49,14 @@ new glosowanie_admina_nie = 0;
 
 
 //Prawnik - oferta
-new LawyerOffer[MAX_PLAYERS] = 0;
-new OfferPlayer[MAX_PLAYERS] = 0;
-new OfferPrice[MAX_PLAYERS] = 0;
+new LawyerOffer[MAX_PLAYERS];
+new OfferPlayer[MAX_PLAYERS];
+new OfferPrice[MAX_PLAYERS];
 
 //Caluj - oferta
-new kissPlayerOffer[MAX_PLAYERS] = 0;
-new spamujeCaluj[MAX_PLAYERS] = 0;
-new odliczanie[MAX_PLAYERS]=0;
+new kissPlayerOffer[MAX_PLAYERS];
+new spamujeCaluj[MAX_PLAYERS];
+new odliczanie[MAX_PLAYERS];
 new timerCaluj[MAX_PLAYERS];
 
 //ALARM DMV:
@@ -77,14 +77,14 @@ new poolTrampolineStats=0;
 
 //Spamowanie /dmv /lspd etc
 new komunikatTime[MAX_PLAYERS];
-new komunikatMinuty[MAX_PLAYERS]=0;
+new komunikatMinuty[MAX_PLAYERS];
 new komunikatTimeZerowanie[MAX_PLAYERS];
-new komunikatMinutyZerowanie[MAX_PLAYERS]=0;
+new komunikatMinutyZerowanie[MAX_PLAYERS];
 
 
 //Admin Adds
 new TimerOddaniaZycia[MAX_PLAYERS];
-new dajHPSekunda[MAX_PLAYERS]=0;
+new dajHPSekunda[MAX_PLAYERS];
 //DODATKI
 new boneIDzmienna[MAX_PLAYERS];
 
@@ -234,7 +234,7 @@ new CarOpisCaller[MAX_VEHICLES][MAX_PLAYER_NAME];
 //20.09
 new STANOWE_GATE_KEY = 5231;
 new Brama_FDU[3];
-new Brama_FDU_Move[3] = 0;
+new Brama_FDU_Move[3];
 //16.09 system plam olejowych LSFD
 new OilData[MAX_OILS][eOilData];
 new bool:bOilOccur[MAX_VEHICLES] = {false, ...};
@@ -476,7 +476,7 @@ new SanMove6 = 0;
 new BramaSan1;
 new BramaSan2;
 new Teleturniejstart = 0;
-new grajacy[MAX_PLAYERS] = 0;
+new grajacy[MAX_PLAYERS];
 
 //---------------------------------------------//
 
@@ -863,7 +863,7 @@ new BramaHAS = 1;
 new BrF[8];
 new BrFS[8];
 new TimerJedzenie[MAX_PLAYERS];
-new ZarcieCooldown[MAX_PLAYERS] = 0;
+new ZarcieCooldown[MAX_PLAYERS];
 
 //nowe bramy
 
@@ -890,11 +890,11 @@ new BramaBaySideS = 1;
 //dla nowej alhambry
 new bramka[7];
 new windka;
-new movegate[3] = 0;
+new movegate[3];
 
 //WPS klu bonehead
 new SkinBrama[3];
-new SkinBramaMove[3] = 0;
+new SkinBramaMove[3];
 
 //brama ¿u¿el by micha³
 new BramaZuz;
@@ -945,7 +945,7 @@ new WindaYKZKratas = 1;
 new Text3D:okienko[8];
 
 new bramadmv[19];
-new movedmv[20] = 0;
+new movedmv[20];
 new bramadom1;
 new bramadom1State = 1;//brama NoA
 //new DzwiDMV;

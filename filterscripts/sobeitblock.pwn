@@ -11,7 +11,7 @@ new
 	bool: pHaveSobeit[MAX_PLAYERS] = false, // czy znalaz³o soba
 	bool: pAFKK[MAX_PLAYERS] = false;
 
-new pCountCheck[MAX_PLAYERS] = 0; // maksymalna iloœæ sprawdzeñ soba (timer Check, max. 3 próby)
+new pCountCheck[MAX_PLAYERS]; // maksymalna iloœæ sprawdzeñ soba (timer Check, max. 3 próby)
 
 new File:fSobeitLog;
 new fSobeitBuff;
