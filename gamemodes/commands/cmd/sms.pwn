@@ -112,6 +112,7 @@ YCMD:sms(playerid, params[], help)
 		}
 		return 1;
 	}
+	//Normal SMS
 	if(givePlayerNumber != 555) 
 	{
 		new checkNumberPlayer = FindPlayerByNumber(givePlayerNumber);
