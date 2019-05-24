@@ -63,8 +63,32 @@ YCMD:sms(playerid, params[], help)
 	{
 		new numerLinii = numerTelefonuOdbiorcy-100;
 		new liczbaPracownikowSAN = GetFractionMembersNumber(FRAC_SN, true);
-		kosztSMS += numerLinii*100;
-		
+		//kosztSMS += numerLinii*100;
+		//Ustawianie koszta sms
+		if(numerTelefonuOdbiorcy == 100)
+		{
+			kosztSMS = COST_SN_SMS_0; 
+		}
+		if(numerTelefonuOdbiorcy == 110)
+		{
+			kosztSMS = COST_SN_SMS_1; 
+		}
+		if(numerTelefonuOdbiorcy == 120)
+		{
+			kosztSMS = COST_SN_SMS_2; 
+		}
+		if(numerTelefonuOdbiorcy == 130)
+		{
+			kosztSMS = COST_SN_SMS_3; 
+		}
+		if(numerTelefonuOdbiorcy == 140)
+		{
+			kosztSMS = COST_SN_SMS_4; 
+		}
+		if(numerTelefonuOdbiorcy == 150)
+		{
+			kosztSMS = COST_SN_SMS_5; 
+		}
         if(gSNLockedLine[numerLinii] || liczbaPracownikowSAN == 0) 
 		{
 			GameTextForPlayer(playerid, "~r~Linia zamknieta", 5000, 1);
@@ -73,6 +97,7 @@ YCMD:sms(playerid, params[], help)
 		else
 		{
 			zarobekPracownikaSAN = kosztSMS/liczbaPracownikowSAN;
+			zarobekPracownikaSAN = zarobekPracownikaSAN/2;
 		}
 	}
 	//zwyk³y sms
@@ -123,6 +148,8 @@ YCMD:sms(playerid, params[], help)
 					format(string, sizeof(string), "P³atny SMS wygenerowa³: %d$, czyli %d$ dla ka¿dego", kosztSMS, zarobekPracownikaSAN);
 					SendClientMessage(i, COLOR_YELLOW, string);
 					DajKase(i, zarobekPracownikaSAN);
+					Sejf_Add(FRAC_SN, kosztSMS/2);
+					Sejf_Save(FRAC_SN); 
 				}
 			}
 		}

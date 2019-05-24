@@ -79,6 +79,13 @@
 #define OFFSETZ 12
 #define DUR 250
 
+//sn
+#define COST_SN_SMS_0 0
+#define COST_SN_SMS_1 2500
+#define COST_SN_SMS_2 5000
+#define COST_SN_SMS_3 7500
+#define COST_SN_SMS_4 10000
+#define COST_SN_SMS_5 12500
 
 //Inne:
 #define TEAM_CYAN 1
