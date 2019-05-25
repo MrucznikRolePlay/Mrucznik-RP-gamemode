@@ -44,7 +44,7 @@ YCMD:fixveh(playerid, params[], help)
 				
 				new string[128];
 				format(string, sizeof(string), "AdmCmd: %s naprawi³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
-				SendPunishMessage(string, playerid);
+				SendMessageToAdmin(string, COLOR_RED);
 				Log(kickLog, INFO, string);
 				if(GetPlayerAdminDutyStatus(playerid) == 1)
 				{

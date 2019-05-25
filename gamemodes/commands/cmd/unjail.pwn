@@ -58,7 +58,7 @@ YCMD:unjail(playerid, params[], help)
 						format(string, sizeof(string), "* Zosta³eœ uwolniony przez %s.", sendername);
 						_MruAdmin(playa, string);
 						format(string, sizeof(string), "ADMCMD: Administrator %s uwolni³ %s z AJ", sendername, giveplayer);
-						SendAdminMessage(COLOR_RED, string);
+						SendMessageToAdmin(string, COLOR_RED);
 						format(string, sizeof(string), "ADMCMD: Administrator %s uwolnil %s z AJ", sendername, giveplayer);
                         Log(kickLog, INFO, string);
 

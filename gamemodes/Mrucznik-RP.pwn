@@ -1862,7 +1862,7 @@ public OnPlayerDeath(playerid, killerid, reason)
             }
             else
 				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : NiggaNames[reason-46]);
-			DeWu(string, 1);
+			SendMessageToAdmin(string, COLOR_P@);
 		}
 		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 		{
@@ -1881,13 +1881,13 @@ public OnPlayerDeath(playerid, killerid, reason)
 				if(PlayerInfo[killerid][pLevel] > 1)
 				{
 					format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
-					ABroadCast(COLOR_YELLOW,string,1);
+					SendMessageToAdmin(string, COLOR_YELLOW);
 					Log(warningLog, INFO, string);
 				}
 				else
 				{
 					format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] z DB, dosta³ kicka !", killername, killerid, playername, playerid);
-					ABroadCast(COLOR_YELLOW,string,1);
+					SendMessageToAdmin(string, COLOR_YELLOW);
 					Log(warningLog, INFO, string);
 					SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
 					KickEx(killerid);
@@ -1900,19 +1900,19 @@ public OnPlayerDeath(playerid, killerid, reason)
 			if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
 			{
 				format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
-				ABroadCast(COLOR_YELLOW,string,1);
+				SendMessageToAdmin(string, COLOR_YELLOW);
 				Log(czitLog, INFO, string);
 			}
 			if(reason == 41)
 			{
 				format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s ze spreya !", killerid, killername, playername);
-				ABroadCast(COLOR_YELLOW,string,1);
+				SendMessageToAdmin(string, COLOR_YELLOW);
 				Log(warningLog, INFO, string);
 			}
 			if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
 			{
                 format(string, 128, "AdmWarning: £owca Nagród [%d]%s zabi³ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
-				ABroadCast(COLOR_YELLOW,string,1);
+				SendMessageToAdmin(string, COLOR_YELLOW);
 				Log(warningLog, INFO, string);
 			}
 			//-------<[    Inne    ]>---------
@@ -2078,7 +2078,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		}
 
 		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNick(playerid), playerid, plrIP, code);
-		ABroadCast(0x9ACD32AA, string, 1);
+		SendMessageToAdmin(string, 0x9ACD32AA);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");

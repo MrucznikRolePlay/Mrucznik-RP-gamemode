@@ -66,7 +66,7 @@ YCMD:demorgan(playerid, params[], help)
 				UsunBron(giveplayerid);
 
                 format(string, sizeof(string), "CMD_Info: /demorgan u¿yte przez %s [%d]", GetNick(playerid), playerid);
-                SendCommandLogMessage(string);
+                SendMessageToAdmin(string, 0x9ACD32AA);
                 Log(cmdLog, INFO, string);
 				JailDeMorgan(giveplayerid);
 	        }

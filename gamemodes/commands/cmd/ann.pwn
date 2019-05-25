@@ -45,7 +45,7 @@ YCMD:ann(playerid, params[], help)
         if(!issafefortextdraw(string)) return sendErrorMessage(playerid, "Niekompletny tekst (tyldy etc)");
         GameTextForAll(string, 3000, 3);
 		format(string, sizeof(string), "AdmCmd: %s [ID: %d] napisal cos na /ann", sendername, playerid);
-		ABroadCast(COLOR_PANICRED,string,1);
+		SendMessageToAdmin(string, COLOR_PANICRED);
 
         strcat(string, " - ");
         strcat(string, params);

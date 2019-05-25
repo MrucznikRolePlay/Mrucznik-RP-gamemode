@@ -45,7 +45,7 @@ YCMD:dajrange(playerid, params[], help)
 
 		if(level > 9 || level < 0)
 		{sendTipMessageEx(playerid, COLOR_GREY, "Numer rangi od 0 do 9!"); return 1; }
-		if (PlayerInfo[playerid][pLider] >= 1 || PlayerInfo[playerid][pAdmin] >= 1000)
+		if (PlayerInfo[playerid][pLider] >= 1)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
