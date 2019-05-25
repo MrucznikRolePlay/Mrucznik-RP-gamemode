@@ -47,7 +47,7 @@ YCMD:adajrange(playerid, params[], help)
 
                     if(strlen(FracRang[GetPlayerFraction(giveplayerid)][rankValue]) < 1)
                     {
-                        SendErrorMessage(playerid, "Ta ranga nie jest stworzona!"); 
+                        sendErrorMessage(playerid, "Ta ranga nie jest stworzona!"); 
                         return 1;
                     } 
                     format(string, sizeof(string), "AdmCmd: %s [%d] da³ %s [%d] rangê %d z poprzedniej rangi %d [w %d]", 
@@ -66,12 +66,12 @@ YCMD:adajrange(playerid, params[], help)
                 }
                 else
                 {
-                    return SendErrorMessage(playerid, "Ten gracz nie ma ¿adnej frakcji i organizacji!"); 
+                    return sendErrorMessage(playerid, "Ten gracz nie ma ¿adnej frakcji i organizacji!"); 
                 }
             }
             else
             {
-                return SendErrorMessage(playerid, "Nie ma takiego gracza"); 
+                return sendErrorMessage(playerid, "Nie ma takiego gracza"); 
             }
         }
     }

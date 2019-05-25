@@ -17,6 +17,7 @@
 //----------------------------------------------------*------------------------------------------------------//
                                                                                                                                              
 #include "cmd/a.pwn"
+#include "cmd/adajrange.pwn"
 #include "cmd/addcar.pwn"
 #include "cmd/adds.pwn"
 #include "cmd/addshelp.pwn"
@@ -672,6 +673,8 @@ static Aliases()
 {
 	//bus
 	Command_AddAltNamed("bus", "businfo");
+
+	Command_AddAltNamed("adajrange", "admindajrange"); 
 
 	//car
 	Command_AddAltNamed("car", "auto");
