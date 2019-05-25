@@ -2416,7 +2416,23 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_SN: //9
 						{
-						    SetPlayerPosEx(playerid, 735.2266,-1336.5826,13.5358);
+							if(PlayerInfo[playerid][pRank] <= 1)
+							{
+								SetPlayerPosEx(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
+								Wchodzenie(playerid);
+								sendTipMessage(playerid, "Zrespi³eœ siê na dachu San News"); 
+							}
+							else if(PlayerInfo[playerid][pRank] >= 2 && PlayerInfo[playerid][pRank] < 7) 
+							{
+								SetPlayerPosEx(playerid, 288.0914,-1609.7465,17.9994); 
+								Wchodzenie(playerid);
+							}
+							else if(PlayerInfo[playerid][pRank] >= 8)
+							{
+								SetPlayerPosEx(playerid, 288.0914,-1609.7465,17.9994); 
+								Wchodzenie(playerid);
+							}
+						   // SetPlayerPosEx(playerid, 735.2266,-1336.5826,13.5358);
 						}
 						case FRAC_KT: //10
 						{

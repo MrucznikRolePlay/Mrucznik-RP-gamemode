@@ -471,10 +471,6 @@ new SanMove1 = 0;
 new SanMove2 = 0;
 new SanMove3 = 0;
 new SanMove4 = 0;
-new SanMove5 = 0;
-new SanMove6 = 0;
-new BramaSan1;
-new BramaSan2;
 new Teleturniejstart = 0;
 new grajacy[MAX_PLAYERS];
 

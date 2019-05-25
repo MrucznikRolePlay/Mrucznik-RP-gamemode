@@ -640,35 +640,6 @@ YCMD:brama(playerid, params[], help)
         	    }
         	}
         }
-		if(PlayerInfo[playerid][pLider] == 9 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pAdmin] >= 1000)
-		{
-            if(IsPlayerInRangeOfPoint(playerid,10.0,777.94202, -1384.71582, 15.21590))//bramy
-        	{
-        	    if(SanMove5 == 0)
-        	    {
-        	        MoveDynamicObject(BramaSan1,777.94202, -1384.71582, 7.9880,3);
-        	        SanMove5 = 1;
-        	    }
-        	    else
-        	    {
-        	        MoveDynamicObject(BramaSan1,777.94202, -1384.71582, 15.21590,3);
-        	        SanMove5 = 0;
-        	    }
-        	}
-        	if(IsPlayerInRangeOfPoint(playerid,10.0,777.94196, -1330.32983, 15.21590))//bramy
-        	{
-        	    if(SanMove6 == 0)
-        	    {
-        	        MoveDynamicObject(BramaSan2,777.94196, -1330.32983, 7.9880,3);
-        	        SanMove6 = 1;
-        	    }
-        	    else
-        	    {
-        	        MoveDynamicObject(BramaSan2,777.94196, -1330.32983, 15.21590,3);
-        	        SanMove6 = 0;
-        	    }
-        	}
-		}
 		if(PlayerInfo[playerid][pLider] == 7 || PlayerInfo[playerid][pMember] == 7)
 		{
 			if(IsPlayerInRangeOfPoint(playerid,3,1501.6648, -1452.1390, 63.3306))

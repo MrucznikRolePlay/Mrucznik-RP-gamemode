@@ -1966,7 +1966,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	            case 0://parking
     	            {
     	                SetPlayerVirtualWorld(playerid,0);
-    	                SetPlayerPosEx(playerid,732.6443, -1343.4160, 13.5982);
+    	                SetPlayerPosEx(playerid,288.0914,-1609.7465,17.9994);
     	                new Hour, Minute, Second;
     					gettime(Hour, Minute, Second);
     					SetPlayerTime(playerid,Hour,Minute);
@@ -2022,7 +2022,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	            case 6://dach
     	            {
     	                SetPlayerVirtualWorld(playerid,0);
-    	                SetPlayerPosEx(playerid,721.5345, -1381.9717, 25.7202);
+    	                SetPlayerPosEx(playerid,297.7128,-1612.1783,114.4219);
     	                new Hour, Minute, Second;
     					gettime(Hour, Minute, Second);
     					SetPlayerTime(playerid,Hour,Minute);

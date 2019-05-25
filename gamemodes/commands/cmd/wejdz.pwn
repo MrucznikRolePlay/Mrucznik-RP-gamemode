@@ -91,12 +91,12 @@ YCMD:wejdz(playerid, params[], help)
         {
             ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking podziemny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
         }
-		else if(IsPlayerInRangeOfPoint(playerid,5,732.6443, -1343.4160, 13.5982)//parking SAN News
+		else if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
         || IsPlayerInRangeOfPoint(playerid,5,666.5681, -1353.2101, 29.3031)//recepcja Winda
         || IsPlayerInRangeOfPoint(playerid,5,661.8192, -1344.7736, 29.4743)/* Winda Victim*/
         || IsPlayerInRangeOfPoint(playerid,5,655.7669, -1376.8688, 28.6743)/*Drukarnia // Studio*/
         || IsPlayerInRangeOfPoint(playerid,5,737.3818, -1366.2958, 34.0796)/*Sale Konferencyjne*/
-        || IsPlayerInRangeOfPoint(playerid,5,721.5345, -1381.9717, 25.7202)/*Dach*/
+        || IsPlayerInRangeOfPoint(playerid,5,297.7128,-1612.1783,114.4219)/*Dach*/
         || IsPlayerInRangeOfPoint(playerid,5,663.6946, -1374.4166, 27.9148)/*Biura SAN NEWS*/)
         {
             ShowPlayerDialogEx(playerid,WINDA_SAN,DIALOG_STYLE_LIST,"Winda - San News","[Pietro - 0]Parking\n[Pietro - 1]Recepcja\n[Pietro - 2]Studio Victim\n[Pietro - 3]Drukarnia & Studio Nagran\n[Pietro - 4]Sale Konferencyjne\n[Pietro - 5]Biura San News\n[Pietro - 6]Dach","Jedz","Anuluj");

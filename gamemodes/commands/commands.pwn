@@ -1215,7 +1215,8 @@ static Aliases()
 
 	//togdepo
 	Command_AddAltNamed("togdepo", "zablokujdepo");
-
+	//brama
+	Command_AddAltNamed("brama", "br"); 
 	//toglicznik
 	Command_AddAltNamed("toglicznik", "togtextdraw");
 	Command_AddAltNamed("toglicznik", "togspeed");
