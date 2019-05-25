@@ -94,6 +94,7 @@ GetPlayerAdminDutyStatus(playerid)
 AdminDutyPlayer(playerid, status)
 {
 	new string[128];
+	SetPVarString(playerid, "pAdminDutyNickOn", PlayerInfo[playerid][pAdminName]); 
 	GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
 	GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 	new stringlog[325];//String do logu

@@ -16463,6 +16463,51 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
        
 	
 	}
+	else if(dialogid == 10001)
+	{
+		if(response)
+		{
+			if(gPlayerLogged[playerid] == 1)
+			{
+				if(strlen(inputtext) >= 3)
+				{
+					if(SprawdzZnaki(inputtext) == 0)
+					{
+						new nickAdminStatus; 
+						foreach(new i : Player)
+						{
+							if(strfind(GetNick(i), inputtext) == -1)
+							{
+								nickAdminStatus = 0; 	
+							}
+							else
+							{
+								sendErrorMessage(playerid, "Taki nick jest ju¿ u¿ywany!"); 
+								return 1;
+							}
+						}
+						if(nickAdminStatus == 0)
+						{
+							strdel(PlayerInfo[playerid][pAdminName], 0, MAX_PLAYER_NAME); 
+							strcat(PlayerInfo[playerid][pAdminName], inputtext); 
+							return 1;
+						}
+					}
+					else
+					{
+						sendErrorMessage(playerid, "U¿y³eœ nieodpowiednich znaków!"); 
+						return 1;
+					}
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Zbyt krótka/d³uga liczba znaków w nicku"); 
+					return 1;
+				}
+			}
+		}
+		return 1;
+	}
 	else if(dialogid == 1071)//wyp³ata z swojego konta
 	{
 		if(response)

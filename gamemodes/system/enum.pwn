@@ -1445,7 +1445,8 @@ enum pInfo
     Text3D:pDescLabel,
     pDesc[128],
 	pStrong,
-	pCard
+	pCard,
+	pAdminName[MAX_PLAYER_NAME]
 };
 enum StringData
 {
