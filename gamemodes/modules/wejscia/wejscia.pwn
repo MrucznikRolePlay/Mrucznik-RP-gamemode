@@ -511,7 +511,7 @@ SprawdzWjazdy(playerid)
 				TogglePlayerControllable(playerid, 0);
 				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 				PlayerTextDrawShow(playerid, textwjedz[playerid]);
-				SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+				SetPVarInt(playerid, "JestPodczasWjezdzania", 1); 
 				SetServerWeatherAndTime(playerid); 
 			}
 			else
@@ -526,7 +526,7 @@ SprawdzWjazdy(playerid)
 					WjedzTimer[i2] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", i2);
 					SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
 					SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
-					TogglePlayerControllable(i2, 0);
+					TogglePlayerControllable(i2, 0); 
 					SetServerWeatherAndTime(i2); 
 				}
 			}
