@@ -87,6 +87,8 @@
 #define COST_SN_SMS_4 10000
 #define COST_SN_SMS_5 12500
 
+//sprunki i snacki
+#define SPRUNK_COST 2000
 //Inne:
 #define TEAM_CYAN 1
 #define TEAM_BLUE 2
