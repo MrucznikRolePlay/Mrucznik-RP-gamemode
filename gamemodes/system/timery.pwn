@@ -180,6 +180,7 @@ public SpamujeCalowaniem(playerid)
 	if(odliczanie[playerid] == 2)
 	{
 		spamujeCaluj[playerid] =0;
+		odliczanie[playerid] = 0; 
 		KillTimer(timerCaluj[playerid]);
 	}
 	return 1;

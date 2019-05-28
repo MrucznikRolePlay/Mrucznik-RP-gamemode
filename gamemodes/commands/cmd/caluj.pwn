@@ -62,7 +62,7 @@ YCMD:caluj(playerid, params[], help)
 					sendTipMessage(playerid, string);
 					kissPlayerOffer[playa] = playerid;
 					spamujeCaluj[playerid] = 1;
-					timerCaluj[playerid] = SetTimerEx("SpamujeCalowaniem",60000,0,"i",playerid);
+					timerCaluj[playerid] = SetTimerEx("SpamujeCalowaniem",60000,0,"i",playerid);//odczekaj 2 minuty
 				}
 			}
 		}
