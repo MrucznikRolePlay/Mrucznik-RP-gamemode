@@ -184,7 +184,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 7)
 	{
-		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 && GetPlayerOrg(playerid) != FAMILY_VINYL && GetPlayerFraction(playerid) != FRAC_SN)
+		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 && GetPlayerFraction(playerid) != FRAC_SN)
 		{
 			sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
 			return 1;
