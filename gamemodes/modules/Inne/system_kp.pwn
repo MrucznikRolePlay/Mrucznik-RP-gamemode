@@ -184,9 +184,10 @@ stock MRP_CheckLastLogin(uid, &time, ip[])
 
 stock MRP_PlayerLog(playerid)
 {
-    new str[128], ip[16];
+    new str[256], ip[16], GPCI[128];
     GetPlayerIp(playerid, ip, 16);
-    format(str, 128, "INSERT INTO `mru_logowania` (`PID`, `time`, `IP`) VALUES ('%d', NOW(), '%s')", PlayerInfo[playerid][pUID], ip);
+	gpci(playerid, GPCI, 128); 
+    format(str, 256, "INSERT INTO `mru_logowania` (`PID`, `time`, `IP`,`gpci`) VALUES ('%d', NOW(), '%s', '%s')", PlayerInfo[playerid][pUID], ip, GPCI);
     mysql_query(str);
     return 1;
 }
