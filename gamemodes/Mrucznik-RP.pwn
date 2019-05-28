@@ -71,6 +71,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 
 //-------<[ Natives ]>-------
 native WP_Hash(buffer[], len, const str[]);
+#if !defined gpci
+native gpci (playerid, serial [], len);
+#endif
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
