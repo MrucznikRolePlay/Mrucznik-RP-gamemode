@@ -474,6 +474,14 @@ new SanMove4 = 0;
 new Teleturniejstart = 0;
 new grajacy[MAX_PLAYERS];
 
+new drinkCost1=10000;
+new drinkCost2=15000;
+new drinkCost3=18000;
+new drinkCost4=20000;
+new drinkName1[32] = "Red Tart";
+new drinkName2[32] = "Cuba Libre";
+new drinkName3[32] = "Tom Collins";
+new drinkName4[32] = "Twoja Stara"; 
 //---------------------------------------------//
 
 //abram01

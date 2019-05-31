@@ -59,7 +59,18 @@ YCMD:kup(playerid, params[], help)
 		{
 			if(PlayerInfo[playerid][pAge] >= 18)
 			{
-				ShowPlayerDialogEx(playerid, 6996, DIALOG_STYLE_LIST, "Vinyl-Club", "Cytrynowy-sza³\t 10.000$\nW³adca procentów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$", "Pij", "Odrzuæ");
+				new stringBig[256]; 
+				format(stringBig, sizeof(stringBig), 
+				"Nazwa\tKoszt\tMoc (vol)\n\
+				{FF0000}%s\t{80FF00}$%d\t15\n\
+				{FF0000}%s\t{80FF00}$%d\t30\n\
+				{FF0000}%s\t{80FF00}$%d\t40\n\
+				{FF0000}%s\t{80FF00}$%d\t60", 
+				drinkName1, drinkCost1, 
+				drinkName2, drinkCost2,
+				drinkName3, drinkCost3,
+				drinkName4, drinkCost4); 
+				ShowPlayerDialogEx(playerid, 6996, DIALOG_STYLE_TABLIST_HEADERS, "Vinyl-Club", stringBig, "Pij", "Odrzuæ");
 			}
 			else
 			{

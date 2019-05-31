@@ -141,14 +141,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DajKase(playerid, -30000);
 		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i ¿ycie");
 	}	
-	else if(dialogid == 6999)
+	else if(dialogid == 6999)//vinyl panel
 	{
 		if(!response) return 1;
 		if(response)
 		{
 			switch(listitem)
 			{
-				case 0://Open/Close/nUstal cene Norm./nUstal cene VIP/nUstal cene napoi
+				case 0://Open/Close/nUstal cene Norm./nUstal cene VIP/nUstal cene napoi\nUstal nazwe napoi
 				{
 					sendErrorMessage(playerid, "Ta opcja bêdzie dostêpna wkrótce!");
 				}
@@ -164,16 +164,155 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					sendErrorMessage(playerid, "Ta opcja bêdzie dostêpna wkrótce!");
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadŸ poni¿ej numer napoju,\ndla którego chcesz zmieniæ cenê", "PotwierdŸ", "Anuluj"); 
+					SetPVarInt(playerid, "b-wybor", 3); 
+				}
+				case 4:
+				{
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadŸ poni¿ej numer napoju,\ndla którego chcesz zmieniæ nazwê", "PotwierdŸ", "Anuluj"); 
+					SetPVarInt(playerid, "b-wybor", 6); 
 				}
 			}
 		}
 	}
-	else if(dialogid == 6998)
+	else if(dialogid == 6998)//vinyl input
 	{
 		if(!response) return 1;
 		if(response)
 		{
+			if(GetPVarInt(playerid, "b-wybor") == 7)
+			{
+				new drinkID = GetPVarInt(playerid, "b-wprowadzil"); 
+				if(strlen(inputtext) <= 32)
+				{
+					if(drinkID == 1)
+					{
+						strdel(drinkName1, 0, 32); 
+						strins(drinkName1, inputtext, 0);
+					}
+					else if(drinkID == 2)
+					{
+						strdel(drinkName2, 0, 32); 
+						strins(drinkName2, inputtext, 0);
+					}
+					else if(drinkID == 3)
+					{
+						strdel(drinkName3, 0, 32); 
+						strins(drinkName3, inputtext, 0);
+					}
+					else if(drinkID == 4)
+					{
+						strdel(drinkName4, 0, 32); 
+						strins(drinkName4, inputtext, 0); 
+					}
+					sendTipMessage(playerid, "Pomyœlnie zmieniono nazwê drinka!"); 
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nieprawid³owa d³ugoœæ nazwy napoju [MAX 33 znaki]");
+				}
+				return 1;
+			}
+			if(GetPVarInt(playerid, "b-wybor") == 6)
+			{
+				new drinkID = FunkcjaK(inputtext); 
+				SetPVarInt(playerid, "b-wprowadzil", drinkID); 
+				new string[124]; 
+				if(drinkID == 1)
+				{
+					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1);
+				}
+				else if(drinkID == 2)
+				{
+					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName2, drinkCost2);
+				}
+				else if(drinkID == 3)
+				{
+					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName3, drinkCost3);
+				}
+				else if(drinkID == 4)
+				{
+					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName4, drinkCost4);
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Wyst¹pi³ nieznany problem. Skontaktuj siê z Komisj¹ ds. Ulepszeñ"); 
+					return 1;
+				}
+				ShowPlayerDialogEx(playerid, DIALOG_STYLE_INPUT, 6998, "Panel lidera", string, "Akceptuj", "Odrzuæ"); 
+				SetPVarInt(playerid, "b-wybor", 7); 
+				return 1;
+			}
+			if(GetPVarInt(playerid, "b-wybor") == 5)
+			{
+				new drinkID = GetPVarInt(playerid, "b-wprowadzil"); 
+				new drinkCost = FunkcjaK(inputtext); 
+				new string[124]; 
+				if(drinkCost > 100000 || drinkCost <= 1)
+				{
+					sendErrorMessage(playerid, "Nieprawid³owa nowa cena drinka!"); 
+					return 1;
+				}
+				if(drinkID == 1) 
+				{
+					drinkCost1 = drinkCost; 
+					format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", drinkName1, drinkCost1); 
+					sendTipMessage(playerid, string); 
+				}
+				else if(drinkID == 2)
+				{
+					drinkCost2 = drinkCost; 
+					format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", drinkName2, drinkCost2); 
+					sendTipMessage(playerid, string);
+				}
+				else if(drinkID == 3)
+				{
+					drinkCost3 = drinkCost; 
+					format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", drinkName3, drinkCost3); 
+					sendTipMessage(playerid, string);
+				}
+				else if(drinkID == 4)
+				{
+					drinkCost4 = drinkCost; 
+					format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", drinkName4, drinkCost4); 
+					sendTipMessage(playerid, string);
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Wyst¹pi³ nieznany problem. Skontaktuj siê z Komisj¹ ds. Ulepszeñ"); 
+				}
+				return 1;
+			}
+			if(GetPVarInt(playerid, "b-wybor") == 3)
+			{
+				new drinkID = FunkcjaK(inputtext);
+				SetPVarInt(playerid, "b-wprowadzil", drinkID); 
+				new string[124]; 
+				if(drinkID == 1)
+				{
+					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1); 
+				}
+				else if(drinkID == 2)
+				{
+					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s\nAktualna cena to: $%d", drinkName2, drinkCost2); 
+				}
+				else if(drinkID == 3)
+				{
+					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s\nAktualna cena to: $%d", drinkName3, drinkCost3); 
+				}
+				else if(drinkID == 4)
+				{
+					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s\nAktualna cena to: $%d", drinkName4, drinkCost4); 
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nieprawid³owy numer napoju"); 
+					return 1;
+				}
+				SetPVarInt(playerid, "b-wybor", 5);
+				ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", string, "Dalej", "Odrzuæ");
+				return 1;
+			}
 			new cValue = FunkcjaK(inputtext);
 			new string[124];
 			if(cValue > 100 && cValue <= 500000)
