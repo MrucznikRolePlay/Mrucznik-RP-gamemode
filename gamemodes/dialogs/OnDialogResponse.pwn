@@ -218,6 +218,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new drinkID = FunkcjaK(inputtext); 
 				SetPVarInt(playerid, "b-wprowadzil", drinkID); 
 				new string[124]; 
+				if(drinkID > 4)
+				{
+					sendErrorMessage(playerid, "Nieprawid³owe ID drinka"); 
+					return 1;
+				}
+				if(drinkID < 1)
+				{
+					sendErrorMessage(playerid, "Nieprawid³owe ID drinka"); 
+					return 1;
+				}
 				if(drinkID == 1)
 				{
 					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1);
@@ -233,11 +243,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				else if(drinkID == 4)
 				{
 					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName4, drinkCost4);
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Wyst¹pi³ nieznany problem. Skontaktuj siê z Komisj¹ ds. Ulepszeñ"); 
-					return 1;
 				}
 				ShowPlayerDialogEx(playerid, DIALOG_STYLE_INPUT, 6998, "Panel lidera", string, "Akceptuj", "Odrzuæ"); 
 				SetPVarInt(playerid, "b-wybor", 7); 

@@ -30,7 +30,7 @@
 
 YCMD:edytujupr(playerid, params[], help)
 {
-    if(!(Uprawnienia(playerid, ACCESS_EDITPERM) && IsPlayerAdmin(playerid)) || !IsAScripter(playerid)) return SendClientMessage(playerid, -1, "(PERM) - Nie posiadasz pe³nych praw.");
+    if(!(Uprawnienia(playerid, ACCESS_EDITPERM) && IsPlayerAdmin(playerid))) return SendClientMessage(playerid, -1, "(PERM) - Nie posiadasz pe³nych praw.");
     new id;
     if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(PERM) - Podaj Nick lub ID gracza.");
     new str[512];
