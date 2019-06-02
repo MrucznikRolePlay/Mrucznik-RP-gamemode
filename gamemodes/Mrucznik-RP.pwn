@@ -2639,18 +2639,18 @@ SetPlayerSpawnWeapon(playerid)
     //HP:
     if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
     {
-        SetPlayerHealth(playerid, 90);
+        SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]);
         //f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
 	       //SetPlayerArmour(playerid, 15);
     }
     else if(IsAPrzestepca(playerid))
 	{
-	    SetPlayerHealth(playerid, 90);
+	    SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]);
         //SetPlayerArmour(playerid, 15);
 	}
 	else
 	{
-	    SetPlayerHealth(playerid, 90);
+	    SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]);
 	}
 	return 1;
 }
@@ -5333,7 +5333,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{
-		if(PlayerInfo[playerid][pDonateRank] > 0) { SetPlayerHealth(playerid, 100.0); }
+		if(PlayerInfo[playerid][pDonateRank] > 0) { SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]); }
 		else { SetPlayerHealth(playerid, 50.0+PlayerInfo[playerid][pSHealth]); }
 		MedicBill[playerid] = 1;
 		gPlayerSpawned[playerid] = 1;
@@ -6475,11 +6475,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			new Float:health;
 			if(IsAtPlaceGetHP(playerid))
 			{
-				if(GetPlayerHealth(playerid, health) <= 70)
+				if(GetPlayerHealth(playerid, health) <= PlayerInfo[playerid][pHealth])
 				{
 					if(TimerJedzenie[playerid] == 0)
 					{
-						SetPlayerHealth(playerid, health+20);
+						SetPlayerHealth(playerid, health+10);
 						ZabierzKase(playerid, 1000);
 						sendTipMessageEx(playerid, COLOR_RED, "Kupi³eœ jedzenie"); 
 						ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
@@ -6492,6 +6492,12 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 					{
 						sendTipMessage(playerid, "Odczekaj chwilê!"); 
 					}
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie mo¿esz wzi¹æ wiêcej HP!");
+					sendTipMessage(playerid, "Aby móc braæ wiêcej HP ulepsz HP w /ulepszenia!"); 
+					return 1;
 				}
 			}
 		}
@@ -7666,7 +7672,7 @@ public OnPlayerUseVendingMachine(playerid, machineid)//Gdy gracz u¿yje maszyny
     }
     new Float:health;
     GetPlayerHealth(playerid, health);
-    if((health + 10.0) > 100.0) health = 100.0;
+    if((health + 10.0) > PlayerInfo[playerid][pHealth]) health = PlayerInfo[playerid][pHealth];
     else health += 10.0;
     SetPlayerHealth(playerid, health);
 	ZabierzKase(playerid, SPRUNK_COST); 

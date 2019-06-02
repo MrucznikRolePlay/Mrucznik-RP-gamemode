@@ -275,10 +275,10 @@ KickPlayerTXD(playerid, adminid, reason[])
 	}
     return 1;
 }
-AJPlayerTXD(playerid, adminid, reason[])
+AJPlayerTXD(playerid, adminid, reason[], timeVal)
 {
 	new str[256];
-    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~w~Na: %d~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);

@@ -73,7 +73,7 @@ YCMD:adminajail(playerid, params[], help)
 						SetPlayerAdminJail(playa, playerid, money, result);
 						if(kary_TXD_Status == 1)
 						{
-							AJPlayerTXD(playa, playerid, (result)); 
+							AJPlayerTXD(playa, playerid, (result), money); 
 						}
 						else if(kary_TXD_Status == 0)
 						{
@@ -101,7 +101,7 @@ YCMD:adminajail(playerid, params[], help)
 					}
 					if(kary_TXD_Status == 1)
 					{
-						AJPlayerTXD(playa, playerid, (result)); 
+						AJPlayerTXD(playa, playerid, (result), money); 
 					}
 					else if(kary_TXD_Status == 0)
 					{
