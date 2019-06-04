@@ -2646,18 +2646,18 @@ SetPlayerSpawnWeapon(playerid)
 	}
     if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
     {
-        SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth+50.0]);
+        SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
         //f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
 	       //SetPlayerArmour(playerid, 15);
     }
     else if(IsAPrzestepca(playerid))
 	{
-	    SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]+50.0);
+	    SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
         //SetPlayerArmour(playerid, 15);
 	}
 	else
 	{
-	    SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]+50.0);
+	    SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
 	}
 	return 1;
 }
