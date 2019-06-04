@@ -685,7 +685,8 @@ static Aliases()
 	Command_AddAltNamed("carhelp", "autopomoc");
 	Command_AddAltNamed("carhelp", "pojazdpomoc");
 	Command_AddAltNamed("carhelp", "samochodpomoc");
-
+	//adminduty
+	Command_AddAltNamed("adminduty", "aduty"); 
 	//cbradio
 	Command_AddAltNamed("cbradio", "cb");
 	Command_AddAltNamed("cbradio", "cb_radio");
