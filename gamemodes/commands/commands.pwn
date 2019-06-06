@@ -663,6 +663,7 @@
 #include "cmd/zwiaz.pwn"
 #include "cmd/zwolnij.pwn"
 #include "cmd/panelvinyl.pwn"
+#include "cmd/specshow.pwn"
 
 InitCommands()
 {

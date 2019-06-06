@@ -80,6 +80,20 @@ YCMD:spec(playerid, params[], help)
             SetTimerEx("SpecToggle", 3000, false, "i", playerid);
             if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
             else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
+			foreach(new i : Player)
+			{
+				if(PlayerInfo[i][pAdmin] >= 1)
+				{
+					if(showSpec[i] != 666)
+					{
+						if(showSpec[i] == playerid || showSpec[i] == -1)
+						{
+							format(string, sizeof(string), "Admin %s [%d] podgl¹da [spec] gracza %s [%d]", GetNick(playerid), playerid, giveplayer, pid);
+							sendTipMessageEx(i, COLOR_RED,  string); 
+						}
+					}
+				}
+			}
         }
 	}
 	return 1;

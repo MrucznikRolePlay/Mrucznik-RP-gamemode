@@ -53,6 +53,7 @@ new LawyerOffer[MAX_PLAYERS];
 new OfferPlayer[MAX_PLAYERS];
 new OfferPrice[MAX_PLAYERS];
 
+new showSpec[MAX_PLAYERS] = 666; 
 //Caluj - oferta
 new kissPlayerOffer[MAX_PLAYERS];
 //ALARM DMV:
