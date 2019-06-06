@@ -31,9 +31,6 @@
 YCMD:wywaz(playerid, params[], help)
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
         if(!IsACop(playerid))
@@ -70,28 +67,28 @@ YCMD:wywaz(playerid, params[], help)
 				    }
 				    if (giveplayerid == playerid)
 				    {
-				       	sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz sam wywa¿yæ drzwi !");
+				       	sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz sam wywa¿yæ drzwi!");
 				        return 1;
 				    }
 				    if(Dom[dom][hKupiony] == 0)
 				    {
-				       	sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz wywa¿yæ tych drzwi !");
+				       	sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz wywa¿yæ tych drzwi!");
 				        return 1;
 				    }
                     if(Dom[dom][hZamek] == 0)
 					{
-					    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
                         Dom[dom][hZamek] = 1;
-                        format(string, sizeof(string),"* Policjanci %s oraz %s bior¹ taran policyjny i uderzaj¹ nim w drzwi wywa¿aj¹c je.",sendername,giveplayer);
+                        format(string, sizeof(string),"* Policjanci %s oraz %s bior¹ taran policyjny i uderzaj¹ nim w drzwi wywa¿aj¹c je.",GetNick(playerid, true), GetNick(giveplayerid, true));
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						format(string, sizeof(string), "* Drzwi zosta³y wywa¿one (( %s ))", sendername);
+						format(string, sizeof(string), "* Drzwi zosta³y wywa¿one (( %s ))", GetNick(playerid, true));
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						format(string, sizeof(string), "[ALARM DOMOWY] Twoje drzwi zosta³y wywa¿one! SprawdŸ to! (Podejrzany: %s)", GetNick(playerid, true));
+						sendTipMessageEx(GetPlayerIDFromName(Dom[dom][hWlasciciel]), COLOR_RED, string); 
                         return 1;
 					}
 					else
 					{
-                        sendTipMessageEx(playerid, COLOR_GREY, "Te drzwi s¹ otwarte !");
+                        sendTipMessageEx(playerid, COLOR_GREY, "Te drzwi s¹ otwarte!");
                         return 1;
 					}
 				}

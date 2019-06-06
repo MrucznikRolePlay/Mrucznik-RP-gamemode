@@ -7635,7 +7635,17 @@ SendNewFamilyMessage(family, color, string[])
 		}
 	}
 }
-
+GetPlayerIDFromName(playerName[])
+{
+	foreach(new i : Player)
+	{
+		if(strcmp(GetNick(i), playerName, false, strlen(playerName)) == 0)
+		{
+			return i; 
+		}
+	}
+	return INVALID_PLAYER_ID; 
+}
 WyscigMessage(color, string[])
 {
 	foreach(new i : Player)
