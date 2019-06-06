@@ -55,10 +55,6 @@ new OfferPrice[MAX_PLAYERS];
 
 //Caluj - oferta
 new kissPlayerOffer[MAX_PLAYERS];
-new spamujeCaluj[MAX_PLAYERS];
-new odliczanie[MAX_PLAYERS];
-new timerCaluj[MAX_PLAYERS];
-
 //ALARM DMV:
 new DMV_ALARM = 0;
 new bramaAlarmu[4];
@@ -460,7 +456,11 @@ new lsmc19move = 0;
 new lsmc20move = 0;
 new lsmc21move = 0;
 new rezonansmove = 0;
+//dialogs
 
+new dialTimer[MAX_PLAYERS]; 
+new dialAccess[MAX_PLAYERS]; 
+new dialTime[MAX_PLAYERS]; 
 //SAN NEWS
 new SanDrzwi1;
 new SanDrzwi2;
@@ -1146,7 +1146,6 @@ ZerujZmienne(playerid)
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	spamujeCaluj[playerid] =0;
 	
 	
 	

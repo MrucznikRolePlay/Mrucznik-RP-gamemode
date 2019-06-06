@@ -8191,17 +8191,37 @@ public MRP_ForceDialog(playerid, dialogid)
     iddialog[playerid] = dialogid;
     return 1;
 }
-
+/*
 forward ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[]);
 public ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[])
 {
+	
 	ShowPlayerDialog(playerid, dialogid, style, caption, info, button1, button2);
 	iddialog[playerid] = dialogid;
 	antyHider[playerid] = 1;
-
+	
 	return 1;
 }
-
+*/
+stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[], bool:dialogTimer=false)
+{
+	if(dialAccess[playerid] == 0)
+	{
+		ShowPlayerDialog(playerid, dialogid, style, caption, info, button1, button2);
+		iddialog[playerid] = dialogid;
+		antyHider[playerid] = 1;
+		if(dialogTimer == true)
+		{
+			dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, false, "i", playerid);
+			dialAccess[playerid] = 1; 
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Odczekaj 15 sekund przed wywo³aniem kolejnego dialogu"); 
+	}
+	return 1;
+}
 Otwieramdrzwibusa(playerid)
 {
 	new string[256];

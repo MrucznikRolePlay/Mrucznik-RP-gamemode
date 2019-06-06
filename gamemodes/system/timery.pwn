@@ -172,16 +172,17 @@ public JedzenieCooldown(playerid)
 	}
 	return 1;
 }
-//Ca³owanie - anty spam
-forward SpamujeCalowaniem(playerid);
-public SpamujeCalowaniem(playerid)
+//dialogi
+
+forward timerDialogs(playerid);
+public timerDialogs(playerid)
 {
-	odliczanie[playerid]++;
-	if(odliczanie[playerid] == 2)
+	dialTime[playerid]++; 
+	if(dialTime[playerid] == 3)
 	{
-		spamujeCaluj[playerid] =0;
-		odliczanie[playerid] = 0; 
-		KillTimer(timerCaluj[playerid]);
+		dialTime[playerid] = 0; 
+		dialAccess[playerid] = 0; 
+		KillTimer(dialTimer[playerid]);
 	}
 	return 1;
 }

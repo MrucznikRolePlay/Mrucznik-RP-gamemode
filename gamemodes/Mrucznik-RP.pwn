@@ -1323,7 +1323,6 @@ public OnPlayerDisconnect(playerid, reason)
 	OfferPlayer[playerid] = 0;
 	//caluj
 	kissPlayerOffer[playerid] = 0;
-	odliczanie[playerid]=0;
 	//komunikaty frakcyjne
 	komunikatMinutyZerowanie[playerid]=0;
 	
@@ -7670,6 +7669,7 @@ public OnVehicleRespray(playerid, vehicleid, color1, color2)
 	#endif
     return 1;
 }
+/*
 public OnPlayerUseVendingMachine(playerid, machineid)//Gdy gracz u¿yje maszyny
 { 
     if(GetPlayerMoney(playerid) < SPRUNK_COST)
@@ -7696,9 +7696,9 @@ public OnPlayerDrinkSprunk(playerid)
 	}
 	new float:health; 
 	GetPlayerHealth(playerid, health); 
-	if((health+5.0) >= 100.0) 
+	if((health+5) >= 100) 
 	{
-		health = 100.0; 
+		health = 100; 
 	}
 	else
 	{
@@ -7708,7 +7708,7 @@ public OnPlayerDrinkSprunk(playerid)
 	sprunkUseVal--; 
 	SetPVarInt(playerid, "sprunk-possible-use", sprunkUseVal); 
     return 1;
-}
+}*/
 public OnPlayerStreamIn(playerid, forplayerid)
 {
     if(GetPVarInt(forplayerid, "tognick") == 1)

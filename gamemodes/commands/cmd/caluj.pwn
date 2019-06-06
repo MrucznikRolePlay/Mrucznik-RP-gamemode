@@ -40,11 +40,6 @@ YCMD:caluj(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /caluj [ID gracza]");
 			return 1;
 		}
-		if(spamujeCaluj[playerid] == 1)
-		{
-			sendErrorMessage(playerid, "Odczekaj 2 minuty!"); 
-			return 1;
-		}
 		if(playa == playerid)
 		{
 			sendErrorMessage(playerid, "Nie mo¿esz poca³owaæ samego siebie!"); 
@@ -57,12 +52,10 @@ YCMD:caluj(playerid, params[], help)
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 					format(string, sizeof(string), "%s chce siê z tob¹ poca³owaæ - jeœli go kochasz kliknij ''Ca³uj''!", GetNick(playerid, true));
-  					ShowPlayerDialogEx(playa, 1092, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play - poca³unek", string, "Ca³uj", "Odrzuæ");
+  					ShowPlayerDialogEx(playa, 1092, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play - poca³unek", string, "Ca³uj", "Odrzuæ", true);
 					format(string, sizeof(string), "Zaoferowa³eœ poca³unek %s - oczekuj na reakcje!", GetNick(playa, true));
 					sendTipMessage(playerid, string);
 					kissPlayerOffer[playa] = playerid;
-					spamujeCaluj[playerid] = 1;
-					timerCaluj[playerid] = SetTimerEx("SpamujeCalowaniem",60000,0,"i",playerid);//odczekaj 2 minuty
 				}
 			}
 		}
