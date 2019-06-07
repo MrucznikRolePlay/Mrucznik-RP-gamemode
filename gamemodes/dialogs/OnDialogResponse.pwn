@@ -150,7 +150,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0://Open/Close/nUstal cene Norm./nUstal cene VIP/nUstal cene napoi\nUstal nazwe napoi
 				{
-					sendErrorMessage(playerid, "Ta opcja bêdzie dostêpna wkrótce!");
+					if(vinylStatus == 0)
+					{
+						vinylStatus = 1; 
+						sendTipMessage(playerid, "Otworzy³eœ/aœ vinyl Club!");
+					}
+					else if(vinylStatus == 1)
+					{
+						vinylStatus = 0; 
+						sendTipMessage(playerid, "Zamkn¹³eœ/aœ vinyl Club!"); 
+					}
 				}
 				case 1:
 				{

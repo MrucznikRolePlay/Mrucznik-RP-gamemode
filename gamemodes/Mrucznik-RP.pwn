@@ -1049,6 +1049,19 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
             Player_RemoveFromVeh(playerid);
 		}
 	}
+	if(GetVehicleModel(vehicleid) == 408)//Smierciarka
+	{
+		if(PlayerInfo[playerid][pJob] == 17)
+		{
+			sendTipMessage(playerid, "Aby rozpocz¹æ trasê œmieciarza wpisz komendê /starttrash");
+		}
+		else
+		{
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ w odpowiedniej pracy!");
+			Player_RemoveFromVeh(playerid); 
+			return 1;
+		}
+	}
 	if (GetVehicleModel(vehicleid) == 525)
 	{
 		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
@@ -1679,7 +1692,10 @@ public OnPlayerDisconnect(playerid, reason)
 	#endif
 	return 1;
 }
-
+public OnPlayerEnterDynamicCP(playerid, checkpointid)
+{
+	return 1;
+}
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)

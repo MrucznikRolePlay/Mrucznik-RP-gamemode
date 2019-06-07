@@ -209,10 +209,30 @@ YCMD:dolacz(playerid, params[], help)
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
 				    GettingJob[playerid] = 16;
 				}
+				else if(GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid, 0.0, 0.0, 0.0))
+				{
+					if(PlayerInfo[playerid][pCarLic] != 1)
+					{
+						sendTipMessage(playerid, "Do tej pracy wymagane jest prawo jazdy - Kategoria B!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0)
+					{
+						sendErrorMessage(playerid, "Aby do³¹czyæ do tej pracy musisz odejœæ z obecnej! [/quitjob] [/qf]");
+						return 1;
+					}
+				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
+				    SendClientMessage(playerid, COLOR_WHITE, "   Praca polega na zbieraniu œmieci z terenów Los Santos");
+                    SendClientMessage(playerid, COLOR_WHITE, "   Transporcie œmieci w wyznaczone miejsca");
+                    SendClientMessage(playerid, COLOR_WHITE, "   Praca jest optymalna, przynosi w miarê dobre zyski - do 3.000$ za jeden œmietnik.");
+                    SendClientMessage(playerid, COLOR_WHITE, "   Atutem jest zarabianie kasy do rêki, za odwiezienie zebranych œmieci ze œmietników. ");
+				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
+				    GettingJob[playerid] = 17;
+				}
 			}
 			else
 			{
-			    sendTipMessageEx(playerid, COLOR_GREY, "Nie posiadasz dowodu osobistego, wyrób go w Urzêdzie Miasta !");
+			    sendTipMessageEx(playerid, COLOR_GREY, "Nie posiadasz dowodu osobistego, wyrób go w Urzêdzie Miasta!");
 			}
 		}
 		else

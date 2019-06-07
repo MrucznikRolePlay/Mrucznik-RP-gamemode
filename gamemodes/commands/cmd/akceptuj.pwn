@@ -856,7 +856,7 @@ YCMD:akceptuj(playerid, params[], help)
                 return 1;
             }
         }
-        else if(strcmp(x_job,"job",true) == 0 || strcmp(x_job,"praca",true) == 0)
+        else if(strcmp(x_job,"job",true) == 0 || strcmp(x_job,"praca",true) == 0)//prace dorywcze
         {
             if(GettingJob[playerid] > 0)
             {

@@ -47,12 +47,25 @@ new glosowanie_admina_status = 0;
 new glosowanie_admina_tak = 0;
 new glosowanie_admina_nie = 0;
 
-
+//trashmaster job
+/*
+new pTrashCollected[MAX_PLAYERS]; 
+new trasherPoint[MAX_PLAYERS]; 
+new trasherZoneID[MAX_PLAYERS]; 
+new trasherStartCollecting[MAX_PLAYERS]; 
+new trashCanPoint1[MAX_PLAYERS];
+new trashCanPoint2[MAX_PLAYERS];
+new trashCanPoint3[MAX_PLAYERS]; 
+new trashCanPoint4[MAX_PlAYERS]; 
+new trascCanPoint5[MAX_PLAYERS]; 
+new showPlayerTrashCan[MAX_PLAYERS];
+*/ 
 //Prawnik - oferta
 new LawyerOffer[MAX_PLAYERS];
 new OfferPlayer[MAX_PLAYERS];
 new OfferPrice[MAX_PLAYERS];
 
+new vinylStatus; 
 new showSpec[MAX_PLAYERS] = 666; 
 //Caluj - oferta
 new kissPlayerOffer[MAX_PLAYERS];

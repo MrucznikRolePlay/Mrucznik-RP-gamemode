@@ -242,6 +242,11 @@ YCMD:wejdz(playerid, params[], help)
                 sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyla!"); 
                 return 1;
             }
+            if(vinylStatus == 0)
+            {
+                sendTipMessage(playerid, "Vinyl jest aktualnie zamkniêty! Skontaktuj siê z w³aœcicielem klubu."); 
+                return 1;
+            }
             SetPLocal(playerid, PLOCAL_ORG_SN); 
             SetPlayerPosEx(playerid, 817.0987,-1375.1685,23.6475);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);

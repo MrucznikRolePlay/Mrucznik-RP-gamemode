@@ -43,6 +43,7 @@ YCMD:spec(playerid, params[], help)
 			if(sscanf(params, "k<fix>", pid)) return sendTipMessage(playerid, "U¿yj /spec [Nick lub ID gracza] - Aby wy³¹czyæ - Klawisz skoku");
             if(pid == INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Cel nie jest osiagalny.");
             if(pid == playerid) return sendErrorMessage(playerid, "Cel nie jest osiagalny.");
+			if(PlayerInfo[pid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] < 1000) return sendErrorMessage(playerid, "Nie mo¿esz specowaæ tego admina!"); 
 	        /*if(SpectateTime[playerid] >= 1)
 	        {
 				new Float:spectime = (SpectateTime[playerid]*2)/60;
