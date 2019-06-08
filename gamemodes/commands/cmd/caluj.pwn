@@ -45,14 +45,20 @@ YCMD:caluj(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie mo¿esz poca³owaæ samego siebie!"); 
 			return 1;
 		}
+		if(dialAccess[playerid] == 1)
+		{
+			sendErrorMessage(playerid, "Musisz odczekaæ 15 sekund przed ponownym poca³unkiem!"); 
+			return 1;
+		}
 		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
 		    if(IsPlayerConnected(playa))
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
+					ShowPlayerDialogEx(playerid, 1092, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play - poca³unek", "Zaoferowa³eœ poca³unek\nOdczekaj chwilê na akceptacje", "Okej", "", true); 
 					format(string, sizeof(string), "%s chce siê z tob¹ poca³owaæ - jeœli go kochasz kliknij ''Ca³uj''!", GetNick(playerid, true));
-  					ShowPlayerDialogEx(playa, 1092, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play - poca³unek", string, "Ca³uj", "Odrzuæ", true);
+  					ShowPlayerDialogEx(playa, 1092, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play - poca³unek", string, "Ca³uj", "Odrzuæ", false);
 					format(string, sizeof(string), "Zaoferowa³eœ poca³unek %s - oczekuj na reakcje!", GetNick(playa, true));
 					sendTipMessage(playerid, string);
 					kissPlayerOffer[playa] = playerid;

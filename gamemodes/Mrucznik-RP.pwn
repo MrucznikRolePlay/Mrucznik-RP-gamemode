@@ -1083,6 +1083,8 @@ public OnPlayerConnect(playerid)
 
 	ZerujZmienne(playerid);
 	ZerujKontakty(playerid);
+	dialAccess[playerid] = 0; 
+	dialTimer[playerid] = 0; 
 
     ClearChat(playerid);
 
