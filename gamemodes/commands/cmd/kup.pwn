@@ -70,7 +70,7 @@ YCMD:kup(playerid, params[], help)
 				drinkName2, drinkCost2,
 				drinkName3, drinkCost3,
 				drinkName4, drinkCost4); 
-				ShowPlayerDialogEx(playerid, 6996, DIALOG_STYLE_TABLIST_HEADERS, "Vinyl-Club", stringBig, "Pij", "Odrzuæ");
+				ShowPlayerDialogEx(playerid, 6996, DIALOG_STYLE_TABLIST_HEADERS, "Vinyl-Club", stringBig, "Pij", "Odrzuæ", true);
 			}
 			else
 			{
