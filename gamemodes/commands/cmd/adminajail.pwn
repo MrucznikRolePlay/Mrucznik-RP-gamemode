@@ -97,7 +97,7 @@ YCMD:adminajail(playerid, params[], help)
 					//Admin stats - /adminduty
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
-						iloscAJ[playerid] = iloscAJ[playerid]+1;
+						iloscAJ[playerid]++;
 					}
 					if(kary_TXD_Status == 1)
 					{

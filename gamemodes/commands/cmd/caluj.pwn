@@ -55,6 +55,7 @@ YCMD:caluj(playerid, params[], help)
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
+					dialAccess[playa] = 0; 
 					format(string, sizeof(string), "%s chce siê z tob¹ poca³owaæ - jeœli go kochasz kliknij ''Ca³uj''!", GetNick(playerid, true));
   					ShowPlayerDialogEx(playa, 1092, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play - poca³unek", string, "Ca³uj", "Odrzuæ", false);
 					ShowPlayerInfoDialog(playerid, "Mrucznik Role-Play", "Zaoferowa³eœ poca³unek - oczekuj na reakcje!", true);
