@@ -23,33 +23,25 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_dajkp_Impl(playerid, giveplayerid)
+command_dajkp_Impl(playerid, giveplayerid, time)
 {
     if(IsAKox(playerid))
 	{
-		new giveplayerid, givetime;
-
-		if(sscanf(params, "k<fix>d", giveplayerid, givetime))
-		{
-			sendTipMessage(playerid, "U¿yj /dajkp [playerid/CzêœæNicku] [Czas kp w sekundach (0=Na zawsze)]");
-			return 1;
-		}
-
 		new string[90];
 
-		format(string, sizeof(string), "AdmCmd: %s dal %s KP na %d", GetNick(playerid), GetNick(giveplayerid), givetime);
+		format(string, sizeof(string), "AdmCmd: %s dal %s KP na %d", GetNick(playerid), GetNick(giveplayerid), time);
 		Log(ckLog, INFO, string);
 
-		if(givetime == 0)
+		if(time == 0)
 		{
 			DajKP(giveplayerid, 0, true);
 		}
 		else
 		{
-			DajKP(giveplayerid, gettime()+givetime, true);
+			DajKP(giveplayerid, gettime()+time, true);
 		}
 
-		_MruAdmin(playerid, sprintf("Da³eœ KP graczowi %s [ID: %d] na czas %d.", GetNick(giveplayerid, true), giveplayerid, givetime));
+		_MruAdmin(playerid, sprintf("Da³eœ KP graczowi %s [ID: %d] na czas %d.", GetNick(giveplayerid, true), giveplayerid, time));
 		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ KP od Admina %s [ID: %d]", GetNick(playerid, true), playerid));
 		return 1;
 	}

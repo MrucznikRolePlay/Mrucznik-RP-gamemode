@@ -11,6 +11,11 @@
             "type": "player",
             "name": "giveplayerid",
             "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "time",
+            "description": "czas"
         }
     ],
     "date": "09.06.2019"

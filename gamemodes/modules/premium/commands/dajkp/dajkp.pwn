@@ -52,10 +52,10 @@ YCMD:dajkp(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new giveplayerid;
-    if(sscanf(params, "r", giveplayerid))
+    new giveplayerid, time;
+    if(sscanf(params, "rd", giveplayerid, time))
     {
-        sendTipMessage(playerid, "U¿yj /dajkp [Nick/ID] ");
+        sendTipMessage(playerid, "U¿yj /dajkp [Nick/ID] [czas] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -64,5 +64,5 @@ YCMD:dajkp(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_dajkp_Impl(playerid, giveplayerid);
+    return command_dajkp_Impl(playerid, giveplayerid, time);
 }
