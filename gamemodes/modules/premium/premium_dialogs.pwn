@@ -81,7 +81,6 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(IsPlayerPremium(playerid)) return DialogMenuDotacje(playerid);
 				KupKP(playerid);
-				//SendClientMessage(playerid, COLOR_LIGHTRED, "Gratulacje! Konto premium na miesi¹c zosta³o przypisane do twojego konta!"); Komunikat jest w KupKP
 				DialogMenuDotacje(playerid);
 			}
 			else

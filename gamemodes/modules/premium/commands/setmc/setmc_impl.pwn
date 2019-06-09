@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ setmc ]-------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   setmc                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,32 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Mrucznik
+// Data utworzenia: 09.06.2019
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:setmc(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_setmc_Impl(playerid, giveplayerid, value)
 {
-	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
-/*	
-	if(PlayerInfo[playerid][pAdmin] == 5000)
+    if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
-		new giveplayerid, VARmcVal;
-		if( sscanf(params, "k<fix>d", giveplayerid, VARmcVal))
-		{
-			sendTipMessage(playerid, "U¿yj /setmc [playerid/CzêœæNicku] [mrucznik coins]");
-			return 1;
-		}
-		
 		new string[90];
-
-		format(string, sizeof(string), "AdmCmd: %s dal %s %d mrucznik coinsow", GetNick(playerid), GetNick(giveplayerid), VARmcVal);
+		format(string, sizeof(string), "AdmCmd: %s dal %s %d mrucznik coinsow", GetNick(playerid), GetNick(giveplayerid), value);
 
 		Log(ckLog, INFO, string);
-
-		PremiumInfo[giveplayerid][pMC] = VARmcVal;
-
+		PremiumInfo[giveplayerid][pMC] = value;
 		premium_saveMc(giveplayerid);
 
-		_MruAdmin(playerid, sprintf("Da³eœ %d MC graczowi %s [ID: %d]", VARmcVal, GetNick(giveplayerid, true), giveplayerid));
-		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d MC od Admina %s [ID: %d]", VARmcVal, GetNick(playerid, true), playerid));
+		_MruAdmin(playerid, sprintf("Da³eœ %d MC graczowi %s [ID: %d]", value, GetNick(giveplayerid, true), giveplayerid));
+		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d MC od Admina %s [ID: %d]", value, GetNick(playerid, true), playerid));
 
 		return 1;
 
 	}
-	else return noAccessMessage(playerid);*/
+	else return noAccessMessage(playerid);
 }
+
+
+//end

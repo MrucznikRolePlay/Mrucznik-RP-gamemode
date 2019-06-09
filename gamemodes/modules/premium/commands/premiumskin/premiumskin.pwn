@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                premiumskin                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,38 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "premiumpanel\premiumpanel.pwn"
-#include "premiumskin\premiumskin.pwn"
-#include "setmc\setmc.pwn"
-
+#include "premiumskin_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_premiumskin()
 {
-    command_premiumpanel();
-    command_premiumskin();
-    command_setmc();
+    new command = Command_GetID("premiumskin");
+
+    //aliases
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+}
+
+//-------<[ command ]>-------
+YCMD:premiumskin(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda pozwalaj¹ca przebraæ siê w skina premium.");
+        return 1;
+    }
+    //fetching params
+    new skin;
+    if(sscanf(params, "d", skin))
+    {
+        sendTipMessage(playerid, "U¿yj /premiumskin [ID skina] ");
+        return 1;
+    }
+    
+    //command body
+    return command_premiumskin_Impl(playerid, skin);
 }

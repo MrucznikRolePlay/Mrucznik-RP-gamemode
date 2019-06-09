@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ premiumskin ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                premiumpanel                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,42 +16,44 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 2019-4-27
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-*/
 
+//-------<[ include ]>-------
+#include "premiumpanel_impl.pwn"
 
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:premiumskin(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_premiumpanel()
 {
-	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
-/*	
-	if(isnull(params))
-		return sendTipMessage(playerid, "U¿yj /premiumskin [ID Skina]");
+    new command = Command_GetID("premiumpanel");
 
-	new skin = strval(params);
+    //aliases
+    Command_AddAlt(command, "premium");
+    
 
-	if(!PlayerHasSkin(playerid, skin))
-		return sendErrorMessage(playerid, "Nie masz tego skina.");
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+}
 
-	if((OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0) || SanDuty[playerid] == 1)
-	{
-		return sendErrorMessage(playerid, "Bêd¹c na s³u¿bie nie mo¿esz aktywowaæ unikatowego skina.");
-	}
-	
-	PlayerInfo[playerid][pModel] = skin;
-
-	SetPlayerSkin(playerid, skin);
-
-	_MruAdmin(playerid, sprintf("Aktywowa³eœ swój unikatowy skin [ID: %d]", skin));
-
-	return 1;*/
+//-------<[ command ]>-------
+YCMD:premiumpanel(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda wyœwietlaj¹ca panel us³ug premium.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_premiumpanel_Impl(playerid);
 }

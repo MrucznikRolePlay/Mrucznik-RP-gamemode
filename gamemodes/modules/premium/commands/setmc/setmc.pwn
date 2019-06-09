@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   setmc                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,43 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "premiumpanel\premiumpanel.pwn"
-#include "premiumskin\premiumskin.pwn"
-#include "setmc\setmc.pwn"
-
+#include "setmc_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_setmc()
 {
-    command_premiumpanel();
-    command_premiumskin();
-    command_setmc();
+    new command = Command_GetID("setmc");
+
+    //aliases
+    Command_AddAlt(command, "dajmc");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+}
+
+//-------<[ command ]>-------
+YCMD:setmc(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda nadaj¹ca graczowi Mrucznik Coiny");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, value;
+    if(sscanf(params, "rd", giveplayerid, value))
+    {
+        sendTipMessage(playerid, "U¿yj /setmc [Nick/ID] [iloœæ mrucznik coinów] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_setmc_Impl(playerid, giveplayerid, value);
 }

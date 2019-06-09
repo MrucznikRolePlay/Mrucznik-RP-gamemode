@@ -2,7 +2,9 @@
     "name": "premium",
     "description": "Monetyzacja, us³ugi premium.",
     "author": "Mrucznik",
-    "commands": true,
+    "commands": [
+        "test"
+    ],
     "mysql": true,
     "timers": true,
     "callbacks": true,

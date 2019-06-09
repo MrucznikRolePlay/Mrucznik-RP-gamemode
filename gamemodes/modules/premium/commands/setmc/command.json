@@ -1,0 +1,24 @@
+{
+    "name": "setmc",
+    "description": "Komenda nadaj¹ca graczowi Mrucznik Coiny",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "dajmc"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "value",
+            "description": "iloœæ mrucznik coinów"
+        }
+    ],
+    "date": "09.06.2019"
+}

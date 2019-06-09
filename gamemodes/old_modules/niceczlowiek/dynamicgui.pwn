@@ -5,7 +5,7 @@
 
 enum e_dynamic_gui_row
 {
-	value,
+	dynamic_value,
 	additional_data_int,
 }
 new dynamic_gui[MAX_PLAYERS][DYNAMIC_GUI_MAX_ROWS][e_dynamic_gui_row];
@@ -16,7 +16,7 @@ DynamicGui_Init(playerid)
 {
 	for(new i; i < DYNAMIC_GUI_MAX_ROWS; i++)
 	{
-		dynamic_gui[playerid][i][value] = INVALID_ROW_VALUE;
+		dynamic_gui[playerid][i][dynamic_value] = INVALID_ROW_VALUE;
 		dynamic_gui[playerid][i][additional_data_int] = 0;
 	}
 	
@@ -37,7 +37,7 @@ DynamicGui_FreeRow(playerid)
 {
 	for(new i; i < DYNAMIC_GUI_MAX_ROWS; i++)
 	{
-		if( dynamic_gui[playerid][i][value] == INVALID_ROW_VALUE )
+		if( dynamic_gui[playerid][i][dynamic_value] == INVALID_ROW_VALUE )
 		{
 			return i;
 		}
@@ -51,7 +51,7 @@ DynamicGui_AddRow(playerid, dg_value, dg_additional_data_int = 0)
 	new first_free_row = DynamicGui_FreeRow(playerid);
 	if( first_free_row == -1 ) return;
 
-	dynamic_gui[playerid][first_free_row][value] = dg_value;
+	dynamic_gui[playerid][first_free_row][dynamic_value] = dg_value;
 	dynamic_gui[playerid][first_free_row][additional_data_int] = dg_additional_data_int;
 }
 
@@ -60,14 +60,14 @@ DynamicGui_AddBlankRow(playerid)
 	new first_free_row = DynamicGui_FreeRow(playerid);
 	if( first_free_row == -1 ) return;
 
-	dynamic_gui[playerid][first_free_row][value] = DG_NO_ACTION;
+	dynamic_gui[playerid][first_free_row][dynamic_value] = DG_NO_ACTION;
 }
 
 DynamicGui_GetValue(playerid, listitem)
 {
 	if( listitem > DYNAMIC_GUI_MAX_ROWS-1 ) return 0;
 	
-	return dynamic_gui[playerid][listitem][value];
+	return dynamic_gui[playerid][listitem][dynamic_value];
 }
 
 DynamicGui_GetDataInt(playerid, listitem)

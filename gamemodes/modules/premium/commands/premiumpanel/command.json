@@ -1,0 +1,11 @@
+{
+    "name": "premiumpanel",
+    "description": "Komenda wyœwietlaj¹ca panel us³ug premium.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": ["premium"],
+    "parameters": [],
+    "date": "09.06.2019"
+}

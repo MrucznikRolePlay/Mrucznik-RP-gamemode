@@ -1,0 +1,17 @@
+{
+    "name": "premiumskin",
+    "description": "Komenda pozwalaj¹ca przebraæ siê w skina premium.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "skin",
+            "description": "ID skina"
+        }
+    ],
+    "date": "09.06.2019"
+}

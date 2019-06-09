@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                premiumskin                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,31 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 09.06.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "premiumpanel\premiumpanel.pwn"
-#include "premiumskin\premiumskin.pwn"
-#include "setmc\setmc.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_premiumskin_Impl(playerid, skin)
 {
-    command_premiumpanel();
-    command_premiumskin();
-    command_setmc();
-    
+	if(!PlayerHasSkin(playerid, skin))
+		return sendErrorMessage(playerid, "Nie masz tego skina.");
+
+	if((OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0) || SanDuty[playerid] == 1)
+	{
+		return sendErrorMessage(playerid, "Bêd¹c na s³u¿bie nie mo¿esz aktywowaæ unikatowego skina.");
+	}
+	
+	PlayerInfo[playerid][pModel] = skin;
+
+	SetPlayerSkin(playerid, skin);
+
+	_MruAdmin(playerid, sprintf("Aktywowa³eœ swój unikatowy skin [ID: %d]", skin));
+
+	return 1;
 }
+
+
+//end
