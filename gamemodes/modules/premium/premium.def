@@ -26,7 +26,7 @@
 #define PREMIUM_TABLE_	"mru_"
 
 #define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 41
+#define MAX_PREMIUM_VEHICLES 18
 #define MAX_PREMIUM_SKINS 26
 
 //Cennik
