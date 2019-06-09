@@ -85,48 +85,14 @@ premium_loadForPlayer(playerid)
 			}
 			else
 			{
+				new lVal = kpEnds-gettime();
 
-				if(GetPVarInt(playerid, "kp_readd") == 1)
-                {
-
-                    new bantime, unbantime;
-                    unbantime = MRP_CheckLastBlock(playerid, bantime);
-                    new logintime, ip[16];
-                    MRP_CheckLastLogin(PlayerInfo[playerid][pUID], logintime, ip);
-                    if(logintime <= bantime && bantime != 0 && unbantime != 0)
-                    {
-                        unbantime-=bantime;
-                        if(unbantime < 0)
-                        {
-                            sendErrorMessage(playerid, "Napotkano konflikt, gdzie kara nie zostala zdjeta prawid³owo. Skontaktuj siê z administracj¹.");
-                        }
-                        else
-                        {
-                            format(qr, 128, "Przed³u¿ono Twoje premium o %d dni i %d godzin.", floatround(floatdiv(unbantime, 86400), floatround_floor), floatround(floatdiv(unbantime, 3600), floatround_floor)%24);
-
-                            _MruAdmin(playerid, qr);
-
-                            PremiumInfo[playerid][pKP] = 1;
-
-                            format(qr, sizeof(qr), "UPDATE `mru_premium` SET `p_LastCheck`=FROM_UNIXTIME(%d) WHERE `p_charUID`='%d'", kpLastLogin+unbantime, PlayerInfo[playerid][pUID]);
-                            mysql_query(qr);
-                        }
-                    }
-                    SetPVarInt(playerid, "kp_readd", 0);
-                }
-                else
-                {
-                	new lVal = kpEnds-gettime();
-
-                	if(lVal > 0)
-                	{
-                		format(qr, 170, "Twoje konto premium wygasa za %d dni i %d godzin.", floatround(floatdiv(lVal, 86400), floatround_floor), floatround(floatdiv(lVal, 3600), floatround_floor)%24);
-						_MruAdmin(playerid, qr);
-                	}
-
-					PremiumInfo[playerid][pKP] = 1;
-
-                }
+				if(lVal > 0)
+				{
+					format(qr, 170, "Twoje konto premium wygasa za %d dni i %d godzin.", floatround(floatdiv(lVal, 86400), floatround_floor), floatround(floatdiv(lVal, 3600), floatround_floor)%24);
+					_MruAdmin(playerid, qr);
+				}
+				PremiumInfo[playerid][pKP] = 1;
 			}
 			if(IsPlayerPremium(playerid)) PremiumInfo[playerid][pExpires] = kpEnds;
         }
@@ -279,6 +245,7 @@ ZabierzMC(playerid, mc)
 KupKP(playerid)
 {
 	ZabierzMC(playerid, MIESIAC_KP_CENA);
+	PremiumInfo[playerid][pKP] = 1;
 	SendClientMessage(playerid, COLOR_LIGHTGREEN, "Gratulacjê! Zakupi³eœ konto premium. Od teraz masz dostêp do mo¿liwoœci premium. Dziêkujemy za wspieranie serwera!"); 
 }
 
@@ -301,7 +268,7 @@ KupPojazdPremium(playerid, id)
 	Log(premiumLog, INFO, string);
 
 	premium_printMcQuantity(playerid);
-
+	DialogMenuDotacje(playerid);
 	return 1;
 }
 
@@ -353,7 +320,7 @@ KupSlotPojazdu(playerid)
 	if(PremiumInfo[playerid][pMC] < CAR_SLOT_CENA)
 	{
 		sendErrorMessage(playerid, "Nie staæ Ciê na zakup dodatkowego slotu.");
-		return DialogZmianyNicku(playerid);
+		return DialogSlotyPojazdu(playerid);
 	}
 
 	if(MRP_GetPlayerCarSlots(playerid) >= 10)
@@ -374,7 +341,7 @@ KupSlotPojazdu(playerid)
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie slot na auto za %d MC. Masz teraz %d slotów.", CAR_SLOT_CENA, MRP_GetPlayerCarSlots(playerid)));
 
 	premium_printMcQuantity(playerid);
-
+	DialogMenuDotacje(playerid);
 	return 1;
 }
 
@@ -400,7 +367,7 @@ KupZmianeNicku(playerid)
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie zmianê nicku za %d MC. Masz teraz %d zmian nicku.", ZMIANA_NICKU_CENA, MRP_GetPlayerNickChanges(playerid)));
 
 	premium_printMcQuantity(playerid);
-
+	DialogMenuDotacje(playerid);
 	return 1;
 }
 
@@ -448,6 +415,7 @@ KupNumerTelefonu(playerid, string:_numer[])
 		DialogMenuDotacje(playerid);
 
 		premium_printMcQuantity(playerid);
+		DialogMenuDotacje(playerid);
 	}
 	else
 	{
@@ -481,6 +449,11 @@ IsAUnikat(modelid)
 		if(modelid == PojazdyPremium[i][Model])
 			return 1;
 	return 0;
+}
+
+IsAKox(playerid)
+{
+	return PlayerInfo[playerid][pUID] == 1 || PlayerInfo[playerid][pUID] == 2;
 }
 
 PlayerHasSkin(playerid, skinid)

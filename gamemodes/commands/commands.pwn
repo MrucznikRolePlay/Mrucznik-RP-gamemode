@@ -106,7 +106,6 @@
 #include "cmd/dajkase.pwn"
 #include "cmd/dajklucze.pwn"
 #include "cmd/dajkm.pwn"
-#include "cmd/dajkp.pwn"
 #include "cmd/dajlideraorg.pwn"
 #include "cmd/dajneony.pwn"
 #include "cmd/dajpodatek.pwn"
@@ -437,7 +436,6 @@
 #include "cmd/skill.pwn"
 #include "cmd/skille.pwn"
 #include "cmd/skinf.pwn"
-#include "cmd/skiny.pwn"
 #include "cmd/skret.pwn"
 #include "cmd/skydive.pwn"
 #include "cmd/slap.pwn"
@@ -1032,13 +1030,6 @@ static Aliases()
 
 	//pr
 	Command_AddAltNamed("pr", "panelrodzinny");
-
-	//premium
-	Command_AddAltNamed("premium", "kp");
-	Command_AddAltNamed("premium", "dotacje");
-
-	//premiumskin
-	Command_AddAltNamed("premiumskin", "unikat");
 
 	//przelew
 	Command_AddAltNamed("przelew", "transfer");

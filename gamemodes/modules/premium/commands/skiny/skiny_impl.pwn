@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                premiumpanel                                               //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   skiny                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,18 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 09.06.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "premiumpanel_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_premiumpanel()
+//------------------<[ Implementacja: ]>-------------------
+command_skiny_Impl(playerid)
 {
-    new command = Command_GetID("premiumpanel");
-
-    //aliases
-    Command_AddAlt(command, "premium");
-    Command_AddAlt(command, "kp");
-    Command_AddAlt(command, "dotacje");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
+    ListPlayerUniqueSkins(playerid);
+	return 1;
 }
 
-//-------<[ command ]>-------
-YCMD:premiumpanel(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Komenda wyœwietlaj¹ca panel us³ug premium.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_premiumpanel_Impl(playerid);
-}
+
+//end

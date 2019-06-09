@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                premiumpanel                                               //
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,35 +27,15 @@
 // ================= UWAGA! =================
 
 
+#include <YSI\y_hooks>
+
 //-------<[ include ]>-------
-#include "premiumpanel_impl.pwn"
+#include "premium\premium.pwn"
+
 
 //-------<[ initialize ]>-------
-command_premiumpanel()
+hook OnGameModeInit()
 {
-    new command = Command_GetID("premiumpanel");
-
-    //aliases
-    Command_AddAlt(command, "premium");
-    Command_AddAlt(command, "kp");
-    Command_AddAlt(command, "dotacje");
+    command_premium();
     
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-}
-
-//-------<[ command ]>-------
-YCMD:premiumpanel(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Komenda wyœwietlaj¹ca panel us³ug premium.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_premiumpanel_Impl(playerid);
 }

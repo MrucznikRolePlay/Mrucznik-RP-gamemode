@@ -24,6 +24,7 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 #define PREMIUM_TABLE_	"mru_"
+//tables: mru_premium, mru_premium_skins
 
 #define PREMIUM_DIALOG(%0) (_:%0+7450)
 #define MAX_PREMIUM_VEHICLES 18

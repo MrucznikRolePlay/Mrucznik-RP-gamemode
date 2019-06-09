@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                premiumpanel                                               //
+//                                                   dajkp                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,17 +28,14 @@
 
 
 //-------<[ include ]>-------
-#include "premiumpanel_impl.pwn"
+#include "dajkp_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_premiumpanel()
+command_dajkp()
 {
-    new command = Command_GetID("premiumpanel");
+    new command = Command_GetID("dajkp");
 
     //aliases
-    Command_AddAlt(command, "premium");
-    Command_AddAlt(command, "kp");
-    Command_AddAlt(command, "dotacje");
     
 
     //permissions
@@ -47,15 +44,25 @@ command_premiumpanel()
 }
 
 //-------<[ command ]>-------
-YCMD:premiumpanel(playerid, params[], help)
+YCMD:dajkp(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Komenda wyœwietlaj¹ca panel us³ug premium.");
+        sendTipMessage(playerid, "Komenda nadaj¹ca KP dla gracza.");
         return 1;
     }
-    
-    
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /dajkp [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
     //command body
-    return command_premiumpanel_Impl(playerid);
+    return command_dajkp_Impl(playerid, giveplayerid);
 }

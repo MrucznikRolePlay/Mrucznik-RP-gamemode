@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ dajkp ]-------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   skiny                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,49 +16,44 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "skiny_impl.pwn"
 
-YCMD:dajkp(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_skiny()
 {
-	return SendClientMessage(playerid, COLOR_GREEN, "Ju¿ wkrótce!");
-/*	
-	if(PlayerInfo[playerid][pAdmin] == 5000)
-	{
-		new giveplayerid, givetime;
+    new command = Command_GetID("skiny");
 
-		if(sscanf(params, "k<fix>d", giveplayerid, givetime))
-		{
-			sendTipMessage(playerid, "U¿yj /dajkp [playerid/CzêœæNicku] [Czas kp w sekundach (0=Na zawsze)]");
-			return 1;
-		}
+    //aliases
+    Command_AddAlt(command, "unikat");
+    
 
-		new string[90];
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+}
 
-		format(string, sizeof(string), "AdmCmd: %s dal %s KP na %d", GetNick(playerid), GetNick(giveplayerid), givetime);
-		Log(ckLog, INFO, string);
-
-		if(givetime == 0)
-		{
-			DajKP(giveplayerid, 0, true);
-		}
-		else
-		{
-			DajKP(giveplayerid, gettime()+givetime, true);
-		}
-
-		_MruAdmin(playerid, sprintf("Da³eœ KP graczowi %s [ID: %d] na czas %d.", GetNick(giveplayerid, true), giveplayerid, givetime));
-		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ KP od Admina %s [ID: %d]", GetNick(playerid, true), playerid));
-		return 1;
-	}
-	else return noAccessMessage(playerid);*/
+//-------<[ command ]>-------
+YCMD:skiny(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Lista skinów premium.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_skiny_Impl(playerid);
 }

@@ -1,0 +1,11 @@
+{
+    "name": "skiny",
+    "description": "Lista skinów premium.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": ["unikat"],
+    "parameters": [],
+    "date": "09.06.2019"
+}
