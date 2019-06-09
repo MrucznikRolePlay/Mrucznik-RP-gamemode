@@ -45,7 +45,7 @@ YCMD:o(playerid, params[], help)
 		    {
 		        if(PlayerInfo[playerid][pZG] < 5)
 		        {
-				    if(PlayerInfo[playerid][pDonateRank] < 3)
+				    if(!IsPlayerPremiumOld(playerid))
 				    {
 						sendErrorMessage(playerid, "Kana³ OOC zosta³ zablokowany przez administratora !");
 						return 1;

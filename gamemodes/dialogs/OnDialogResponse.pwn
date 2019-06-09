@@ -12704,7 +12704,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    }
 				    else
 				    {
-						if(PlayerInfo[playerid][pDonateRank] > 0)
+						if(IsPlayerPremiumOld(playerid))
 			            {
 							VehicleUID[veh][vNeonObject][0] = CreateDynamicObject(CarData[VehicleUID[veh][vUID]][c_Neon], 0.0,0.0,0.0, 0, 0, 0);
                             AttachDynamicObjectToVehicle(VehicleUID[veh][vNeonObject][0], veh, -0.8, 0.0, -0.5, 0.0, 0.0, 0.0);
@@ -17129,14 +17129,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				HireCar[playerid] = 0;
 				return 0;
 			}
-    		/*if(PlayerInfo[playerid][pDonateRank] == 0)
-			{
-				sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd wypo¿yczyæ mo¿e tylko Konto Premium!");
-				TogglePlayerControllable(playerid, 1);
-				RemovePlayerFromVehicleEx(playerid);
-				HireCar[playerid] = 0;
-				return 0;
-			}*/
     		new veh = HireCar[playerid];
     		if(veh == 0) return 1;
     		if(Car_GetOwner(veh) != RENT_CAR || Car_GetOwnerType(veh) != CAR_OWNER_SPECIAL)

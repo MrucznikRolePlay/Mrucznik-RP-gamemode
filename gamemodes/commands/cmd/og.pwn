@@ -68,7 +68,7 @@ YCMD:og(playerid, params[], help)
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, string);
 			return 1;
 		}
-		if ((!adds) && PlayerInfo[playerid][pDonateRank] < 2 && PlayerInfo[playerid][pAdmin] < 10)
+		if ((!adds) && (!IsPlayerPremiumOld(playerid)) && PlayerInfo[playerid][pAdmin] < 10)
 		{
 			format(string, sizeof(string), "Spróbuj póŸniej, %d sekund miêdzy og³oszeniami !",  (addtimer/1000));
 			SendClientMessage(playerid, COLOR_GRAD2, string);
@@ -86,7 +86,7 @@ YCMD:og(playerid, params[], help)
 		OOCNews(TEAM_GROVE_COLOR,string);
 		format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
 		GameTextForPlayer(playerid, string, 5000, 5);
-		if (PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pDonateRank] < 2)
+		if (PlayerInfo[playerid][pAdmin] < 1 && (!IsPlayerPremiumOld(playerid)))
 		{
 			SetTimer("AddsOn", addtimer, 0);adds = 0;
 		}

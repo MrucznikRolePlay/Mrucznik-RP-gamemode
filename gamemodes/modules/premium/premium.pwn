@@ -31,9 +31,8 @@
 //-----------------<[ Funkcje: ]>-------------------
 premium_ConvertToNewSystem(playerid)
 {
-	if(PlayerInfo[playerid][pDonateRank] != 11 && PlayerInfo[playerid][pDonateRank] != 0)
+	if(PlayerInfo[playerid][pDonateRank] != 0)
 	{
-
 		PlayerInfo[playerid][pDonateRank] = 0;
 
 		DajKP(playerid, gettime()+8046000, false); // KP na 3 msc dla osób, które mieli premiuma na starym systemie
@@ -48,7 +47,6 @@ premium_clearCache(playerid)
 {
 	PremiumInfo[playerid][pMC] = 0;
 	PremiumInfo[playerid][pKP] = 0;
-	PremiumInfo[playerid][pSponsor] = 0;
 	PremiumInfo[playerid][pExpires] = 0;
 
 	for(new i; i<MAX_PREMIUM_SKINS; i++)
@@ -60,7 +58,7 @@ premium_clearCache(playerid)
 premium_loadForPlayer(playerid)
 {
 
-	if(PlayerInfo[playerid][pDonateRank] != 11 && PlayerInfo[playerid][pDonateRank] != 0)
+	if(PlayerInfo[playerid][pDonateRank] != 0)
 	{
 		premium_ConvertToNewSystem(playerid);
 	}
@@ -309,7 +307,6 @@ KupPojazdPremium(playerid, id)
 
 KupSkinPremium(playerid, skin)
 {
-
 	new id = -1;
 
 	for(new i; i<MAX_PREMIUM_SKINS; i++)
@@ -462,16 +459,18 @@ KupNumerTelefonu(playerid, string:_numer[])
 }
 
 //---< Is >---
-IsPlayerSponsor(playerid)
+IsPlayerPremium(playerid)
 {
-	if(PremiumInfo[playerid][pSponsor] == 1)
+	if(PremiumInfo[playerid][pKP] == 1)
 		return 1;
 	return 0;
 }
 
-IsPlayerPremium(playerid)
+IsPlayerPremiumOld(playerid)
 {
 	if(PremiumInfo[playerid][pKP] == 1)
+		return 1;
+	if(PlayerInfo[playerid][pDonateRank] != 0)
 		return 1;
 	return 0;
 }

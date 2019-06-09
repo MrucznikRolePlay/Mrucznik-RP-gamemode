@@ -72,11 +72,6 @@ YCMD:ban(playerid, params[], help)
 						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ gracza z levelem wiekszym niz 1!");
 						return 1;
 					}
-					if(PlayerInfo[giveplayerid][pDonateRank] > 1 && PlayerInfo[playerid][pZG] >= 6)
-					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ gracza z KP!");
-						return 1;
-					}
                     if(gPlayerLogged[giveplayerid] == 0)
                     {
                         sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany, u¿yj kicka.");

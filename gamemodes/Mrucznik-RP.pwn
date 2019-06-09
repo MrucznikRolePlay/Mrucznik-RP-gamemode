@@ -5357,7 +5357,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{
-		if(PlayerInfo[playerid][pDonateRank] > 0) { SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]); }
+		if(IsPlayerPremiumOld(playerid)) { SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]); }
 		else { SetPlayerHealth(playerid, 50.0+PlayerInfo[playerid][pSHealth]); }
 		MedicBill[playerid] = 1;
 		gPlayerSpawned[playerid] = 1;
@@ -5557,12 +5557,12 @@ PayDay()
 
 				if (PlayerInfo[i][pDom] != 0)
 				{
-				    if(PlayerInfo[i][pDonateRank] > 0) { tmpintrate = intrate+4; }
+				    if(IsPlayerPremiumOld(i)) { tmpintrate = intrate+4; }
 					else { tmpintrate = intrate+2; }//HouseInfo[key][hLevel]
 				}
 				else
 				{
-				    if(PlayerInfo[i][pDonateRank] > 0) { tmpintrate = 3; }
+				    if(IsPlayerPremiumOld(i)) { tmpintrate = 3; }
 					else { tmpintrate = 1; }
 				}
 				if(PlayerInfo[i][pPayDay] >= 5)
@@ -5644,7 +5644,7 @@ PayDay()
 						Log(banLog, INFO, string);
 						KickEx(i);
 					}
-					if(PlayerInfo[i][pDonateRank] > 0)
+					if(IsPlayerPremiumOld(i))
 					{
 					    PlayerInfo[i][pPayDayHad] += 1;
 					    if(PlayerInfo[i][pPayDayHad] >= 5)
@@ -5980,7 +5980,7 @@ OnPlayerLogin(playerid, password[])
 		format(string, sizeof(string), "Witaj, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
 		printf("%s has logged in.",nick);
-		if (PlayerInfo[playerid][pDonateRank] > 0)
+		if (IsPlayerPremiumOld(playerid))
 		{
 			SendClientMessage(playerid, COLOR_WHITE,"Jesteœ posiadaczem {E2BA1B}Konta Premium.");
 		}
@@ -6107,9 +6107,7 @@ OnPlayerLogin(playerid, password[])
 
 
 	//TODO: new premium
-    MRP_LoadPremium(playerid);
-
-    //premium_loadForPlayer(playerid);
+	premium_loadForPlayer(playerid);
 
 	//Odbugowywanie domów:
     if(PlayerInfo[playerid][pDom] != 0)

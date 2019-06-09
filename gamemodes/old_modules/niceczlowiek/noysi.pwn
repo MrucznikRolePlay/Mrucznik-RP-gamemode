@@ -454,7 +454,7 @@ changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid,COLOR_WHITE,"Medycy mog¹ teraz aktywowaæ i odbieraæ sygna³ GPS");//sprawdzone-dzia³a
 				SendClientMessage(playerid,COLOR_WHITE,"Po zmiane nicku wywo³ywany jest kreator postaci umo¿liwiaj¹cy zmianê wieku, pochodzenia i p³ci.");//sprawdzone-dzia³a
 				SendClientMessage(playerid,COLOR_WHITE,"Dodano komendê /taryfikator zawieraj¹ca spis przewinieñ za które mo¿na otrzymaæ mandat");//nie dzia³a przerzucanie dialogów, pomoc prawna crashuje serwer
-				if (PlayerInfo[playerid][pDonateRank] == 3)
+				if (IsPlayerPremiumOld(playerid))
 				{
 					SendClientMessage(playerid,COLOR_WHITE,"Mo¿liwoœc zyskania jednej zmiany nicku za pomoca komendy /odejmijzmiane (dla KP lvl 3)");//sprawdzone-dzia³a
 				}

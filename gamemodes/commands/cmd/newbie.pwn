@@ -103,7 +103,7 @@ YCMD:newbie(playerid, params[], help)
             {
                 format(nobchat, sizeof(nobchat), "(({DAFC10} Skrypter [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], sendername, params);
             }
-	 		else if(PlayerInfo[playerid][pDonateRank] == 10)
+	 		else if(IsPlayerPremiumOld(playerid))
 			{
 			    format(nobchat, sizeof(nobchat), "(({FFD700} Sponsor [%d] %s: {8D8DFF}%s ))", playerid, sendername, params);
 			}

@@ -791,7 +791,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
 			}
 		}
-		else if(afktime > 600 && PlayerInfo[playerid][pDonateRank] >= 1)
+		else if(afktime > 600 && IsPlayerPremiumOld(playerid))
 		{
 			if(afktime > 1200)
 			{
@@ -1047,7 +1047,7 @@ public Spectator()
 		{
 			if(gPlayerLogged[i] == 1)
 			{
-				if(PlayerInfo[i][pDonateRank] == 0)
+				if(!IsPlayerPremiumOld(i))
 				{
 					SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka, POWÓD: Ping wiêkszy ni¿ 2 000");
 					KickEx(i);

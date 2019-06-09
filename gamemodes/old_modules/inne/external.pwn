@@ -7,18 +7,15 @@ forward MRP_GetPlayerPhone(playerid);
 forward MRP_GetPlayerNickChanges(playerid);
 forward MRP_GetPlayerAge(playerid);
 forward MRP_GetPlayerUID(playerid);
-forward MRP_GetPlayerKP(playerid);
 forward MRP_IsInPolice(playerid);
 forward MRP_IsInGang(playerid);
 
 //SET
 forward MRP_SetPlayerMoney(playerid, val);
-forward MRP_SetPlayerMC(playerid, val);
 forward MRP_SetPlayerCarSlots(playerid, val);
 forward MRP_SetPlayerPhone(playerid, val);
 forward MRP_SetPlayerNickChanges(playerid, val);
 forward MRP_SetPlayerAge(playerid, val);
-forward MRP_SetPlayerKP(playerid, val);
 forward MRP_ShopPurchaseCar(playerid, model, cena);
 forward MRP_ForceDialog(playerid, dialogid);
 forward MRP_CreatePlayerAttachedItem(playerid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, bone);
@@ -37,7 +34,6 @@ public MRP_GetPlayerPhone(playerid) return PlayerInfo[playerid][pPnumber];
 public MRP_GetPlayerNickChanges(playerid) return PlayerInfo[playerid][pZmienilNick];
 public MRP_GetPlayerAge(playerid) return PlayerInfo[playerid][pAge];
 public MRP_GetPlayerUID(playerid) return PlayerInfo[playerid][pUID];
-public MRP_GetPlayerKP(playerid) return PlayerInfo[playerid][pDonateRank];
 public MRP_IsInPolice(playerid)
 {
     if(GetPlayerFraction(playerid) == FRAC_LSPD || GetPlayerFraction(playerid) == FRAC_FBI || GetPlayerFraction(playerid) == FRAC_NG) return 1;
@@ -51,12 +47,6 @@ public MRP_IsInGang(playerid)
 
 //SET
 public MRP_SetPlayerMoney(playerid, val)  kaska[playerid] = val;
-public MRP_SetPlayerMC(playerid, val)
-{
-    PlayerMC[playerid] = val;
-    MRP_SaveMC(playerid);
-    return 1;
-}
 public MRP_SetPlayerCarSlots(playerid, val)  PlayerInfo[playerid][pCarSlots] = val;
 public MRP_SetPlayerPhone(playerid, val)  {
     PlayerInfo[playerid][pPnumber] = val;
@@ -64,7 +54,6 @@ public MRP_SetPlayerPhone(playerid, val)  {
 }
 public MRP_SetPlayerNickChanges(playerid, val)  PlayerInfo[playerid][pZmienilNick] = val;
 public MRP_SetPlayerAge(playerid, val)  PlayerInfo[playerid][pAge] = val;
-public MRP_SetPlayerKP(playerid, val)  PlayerInfo[playerid][pDonateRank] = val;
 
 public MRP_CreatePlayerAttachedItem(playerid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, bone)
 //playerid, model, uid, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, bone

@@ -49,7 +49,7 @@ YCMD:kupneony(playerid, params[], help)
 	                    if(IsCarOwner(playerid, veh))
 						{
                             IloscAut[playerid] = VehicleUID[veh][vUID];
-						    if(PlayerInfo[playerid][pDonateRank] > 0)
+						    if(IsPlayerPremiumOld(playerid))
 						    {
 						        ShowPlayerDialogEx(playerid, 1401, DIALOG_STYLE_LIST, "Wybierz kolor neonu", "{FFFFFF}Bia³y\n{DAA520}¯ó³ty\n{9ACD32}Zielony\n{0000FF}Niebieski\n{FF0000}Czerwony\n{C2A2DA}Ró¿owy", "Kup", "Anuluj");
 						    }

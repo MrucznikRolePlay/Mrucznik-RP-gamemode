@@ -73,14 +73,14 @@ YCMD:wymiana(playerid, params[], help)
 	    format(string, sizeof(string), "%s oferuje ci wymianê %s za %s z twoj¹ dop³at¹ %d$. Jeœli siê zgadzasz, wpisz /akceptuj wymiana.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], VehicleNames[GetVehicleModel(GetPlayerVehicleID(playa))-400], cena);
         SendClientMessage(playa, 0xFFC0CB, string);
 
-        if(PlayerInfo[playa][pDonateRank] == 0)
+        if(!IsPlayerPremiumOld(playerid))
         {
             if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
             {
                 SendClientMessage(playa, 0xFF0000FF, "UWAGA!: Ten samochód ma kolorowe neony dostêpne tylko dla kont premium. Gdy zakupisz to auto neony automatycznie zmieni¹ kolor na {FFFFFF}bia³y!");
             }
         }
-        if(PlayerInfo[playerid][pDonateRank] == 0)
+        if(!IsPlayerPremiumOld(playerid))
         {
             if(CarData[IDAuta[playerid]][c_Neon] != 18652 && CarData[IDAuta[playerid]][c_Neon] != 0)
             {

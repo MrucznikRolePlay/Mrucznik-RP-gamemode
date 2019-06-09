@@ -45,7 +45,6 @@ enum ePremiumInfo
 {
 	pMC,
 	pKP,
-	pSponsor,
 	pExpires
 };
 

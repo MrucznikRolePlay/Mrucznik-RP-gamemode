@@ -56,7 +56,7 @@ YCMD:nastepnylevel(playerid, params[], help)
 					PlayerPlayMusic(playerid);
 					DajKase(playerid, (costlevel));
 					PlayerInfo[playerid][pLevel]++;
-					if(PlayerInfo[playerid][pDonateRank] > 0)
+					if(IsPlayerPremiumOld(playerid))
 					{
 					    PlayerInfo[playerid][pExp] -= expamount;
 					    new total = PlayerInfo[playerid][pExp];

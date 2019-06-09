@@ -32,7 +32,7 @@ YCMD:zablokujw(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pDonateRank] > 0 || PlayerInfo[playerid][pAdmin] > 1)
+        if(IsPlayerPremiumOld(playerid) || PlayerInfo[playerid][pAdmin] > 1)
         {
 			if (!HidePM[playerid])
 			{

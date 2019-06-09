@@ -329,7 +329,7 @@ YCMD:rentroom(playerid, params[], help)
 										}
 										else if(Dom[i][hWW] == 4)
 									    {
-									        if(Dom[i][hTWW] <= PlayerInfo[playerid][pDonateRank])
+									        if(IsPlayerPremiumOld(playerid))
 										    {
 										        GetPlayerName(playerid, sendername, sizeof(sendername));
 												if(Dom[i][hPW] == 0)

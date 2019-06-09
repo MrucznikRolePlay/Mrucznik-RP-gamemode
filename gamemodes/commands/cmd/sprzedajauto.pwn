@@ -71,7 +71,7 @@ YCMD:sprzedajauto(playerid, params[], help)
 	    format(string, sizeof(string), "%s oferuje ci sprzeda¿ %s za %d$. Jeœli chcesz kupiæ to auto wpisz /akceptuj pojazd aby kupiæ.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], cena);
         SendClientMessage(playa, 0xFFC0CB, string);
         //TODO
-        if(PlayerInfo[playa][pDonateRank] == 0)
+        if(!IsPlayerPremiumOld(playa))
         {
             if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)
             {

@@ -109,8 +109,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 10:
 						{
-							PlayerInfo[giveplayerid][pDonateRank] = amount;
-							format(string, sizeof(string), "Konto premium gracza zmienione na %d", amount);
+							format(string, sizeof(string), "Ta funkcja zosta³a wy³¹czona", amount);
 						}
 						case 11:
 						{

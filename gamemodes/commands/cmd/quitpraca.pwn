@@ -36,7 +36,7 @@ YCMD:quitpraca(playerid, params[], help)
    	{
 	    if(PlayerInfo[playerid][pJob] > 0)
 	    {
-	        if(PlayerInfo[playerid][pDonateRank] > 0)
+	        if(IsPlayerPremiumOld(playerid))
 	        {
 	            if(PlayerInfo[playerid][pContractTime] >= 2)
 				{

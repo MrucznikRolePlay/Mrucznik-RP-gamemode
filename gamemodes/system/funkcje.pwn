@@ -4768,7 +4768,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			if(gTeam[playerid] >= 3)
 			{
 			}
-			if(PlayerInfo[playerid][pDonateRank]>= 0)
+			if(IsPlayerPremiumOld(playerid))
 			{
 				if (PlayerInfo[playerid][pGun1] > 0)
 				{
@@ -4852,9 +4852,7 @@ ShowStats(playerid,targetid)
         new jtext[20];
         format(jtext, 20, "%s", JobNames[PlayerInfo[targetid][pJob]]);
 		new drank[20];
-		if(PlayerInfo[targetid][pDonateRank] == 1) { drank = "Sponsor"; }
-		else if(PlayerInfo[targetid][pDonateRank] == 2) { drank = "Dobry gracz"; }
-		else if(PlayerInfo[targetid][pDonateRank] >= 3) { drank = "Super gracz"; }
+		if(IsPlayerPremiumOld(targetid)) { drank = "Sponsor"; }
 		else { drank = "Zwykly wieprz"; }
 		new age = PlayerInfo[targetid][pAge];
 		new ptime = PlayerInfo[targetid][pConnectTime];

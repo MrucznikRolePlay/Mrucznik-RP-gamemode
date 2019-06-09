@@ -43,7 +43,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					DialogKupKP(playerid);
 				}
-				case 5: // Telefon
+				case 5:
 				{
 					DialogTelefon(playerid);
 				}
@@ -138,7 +138,6 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//TODO:
 			KupSlotPojazdu(playerid);
 		}
 		else
@@ -150,7 +149,6 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//TODO:
 			KupZmianeNicku(playerid);
 		}
 		else
@@ -199,7 +197,6 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//TODO:
 			KupNumerTelefonu(playerid, inputtext);
 		}
 		else
@@ -267,7 +264,7 @@ static DialogKupKP(playerid)
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(KUP_KP), DIALOG_STYLE_MSGBOX, "Premium - KP", string, "Tak", "Nie");
 }
 
-/*static DialogRynekMC(playerid)
+static DialogRynekMC(playerid) //TODO
 {
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(RYNEK_MC), DIALOG_STYLE_LIST, "Premium - Rynek MC", 
 		"Oferty kupna Mrucznik Coinów\n"\
@@ -277,7 +274,7 @@ static DialogKupKP(playerid)
 		"Moje oferty\n"\
 		"Historia transakcji",
 	"Wybierz", "Wróæ");
-}*/
+}
 
 static DialogDotacje(playerid)
 {
@@ -289,9 +286,9 @@ static DialogDotacje(playerid)
 }
 
 //------- US£UGI PREMIUM ------------------
-static DialogLicytacje(playerid)
+DialogLicytacje(playerid)
 {
-	//zaawansowany system
+	//TODO
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(LICYTACJE), DIALOG_STYLE_LIST, "Premium - Us³ugi - Licytacje", 
 		"W budowie"\
 		"",
@@ -312,13 +309,14 @@ DialogPojazdyPremium(playerid)
 	return 1;
 }
 
-/*static DialogPrzedmioty(playerid)
+DialogPrzedmioty(playerid)
 {
+	//TODO
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTY), DIALOG_STYLE_LIST, "Premium - Us³ugi - Przedmioty", 
 		" "\
 		"",
 	"Kup", "Wróæ");
-}*/
+}
 
 DialogSlotyPojazdu(playerid)
 {
@@ -353,7 +351,7 @@ ListPlayerUniqueSkins(playerid)
 {
 	DynamicGui_Init(playerid);
 
-	new count, list[512];
+	new count, list[16*MAX_PREMIUM_SKINS];
 
 	for(new i; i<MAX_PREMIUM_SKINS; i++)
 	{

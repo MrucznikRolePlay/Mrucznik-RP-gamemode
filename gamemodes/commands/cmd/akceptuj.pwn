@@ -187,7 +187,7 @@ YCMD:akceptuj(playerid, params[], help)
                                     DajKase(dawacz, 75000);
                                     Sejf_Add(FRAC_NOA, 50000);//wplacanie kasy
                                     IloscAut[playerid] = VehicleUID[pojazd][vUID];
-                                    if(PlayerInfo[playerid][pDonateRank] > 0)
+                                    if(IsPlayerPremiumOld(playerid))
                                     {
                                         ShowPlayerDialogEx(playerid, 1402, DIALOG_STYLE_LIST, "Wybierz kolor neonu", "{FFFFFF}Bia³y\n{DAA520}¯ó³ty\n{9ACD32}Zielony\n{0000FF}Niebieski\n{FF0000}Czerwony\n{C2A2DA}Ró¿owy", "Wybierz", "");
                                     }

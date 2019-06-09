@@ -109,7 +109,7 @@ GiveRandomMoneyBiz(playerid)
 	new bizid = PlayerInfo[playerid][pPbiskey];
 	if(PlayerInfo[playerid][pPbiskey] >= 0 && PlayerInfo[playerid][pPbiskey] <= MAX_BIZNES)
 	{
-		if(PlayerInfo[playerid][pDonateRank] > 2)
+		if(IsPlayerPremiumOld(playerid))
 		{
 			if(losuj == 1 || losuj == 2 || losuj == 3)//Max kwota
 			{
