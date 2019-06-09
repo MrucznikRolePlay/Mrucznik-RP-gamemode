@@ -8212,7 +8212,7 @@ stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[]
 		antyHider[playerid] = 1;
 		if(dialogTimer == true)
 		{
-			dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, false, "i", playerid);
+			dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
 			dialAccess[playerid] = 1; 
 		}
 	}
