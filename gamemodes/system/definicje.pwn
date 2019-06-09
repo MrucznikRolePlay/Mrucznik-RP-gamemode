@@ -271,6 +271,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 //------------------------------------------------------------------------------
 //                              DIALOGI
 //------------------------------------------------------------------------------
+#define DIALOG_EMPTY_SC 1142
 #define DIALOG_LIST 1
 #define DIALOG_MSGBOX 2
 #define DIALOG_PASSWORD 3

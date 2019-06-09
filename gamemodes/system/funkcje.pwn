@@ -8201,6 +8201,23 @@ public ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[
 	return 1;
 }
 */
+stock ShowPlayerInfoDialog(playerid, caption[], info[], bool:dialogTimer=false)
+{
+	if(dialAccess[playerid] == 0)
+	{
+		ShowPlayerDialog(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, caption, info, "Okej", " ");
+		if(dialogTimer == true)
+		{
+			dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
+			dialAccess[playerid] = 1; 
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Odczekaj 15 sekund przed wywo³aniem kolejnego dialogu"); 
+	}
+	return 1;
+}
 stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[], bool:dialogTimer=false)
 {
 	if(dialAccess[playerid] == 0)
