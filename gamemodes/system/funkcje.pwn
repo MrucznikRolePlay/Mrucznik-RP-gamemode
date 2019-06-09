@@ -7825,12 +7825,12 @@ ListaKontaktowGracza(playerid)
 		if(FindPlayerByNumber(PlayerInfo[playerid][pPnumber]) != INVALID_PLAYER_ID)
 		{
 			//aktywny
-			format(string, sizeof(string), "%s"INCOLOR_LIGHTGREEN"%s - %d\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "%s%s - %d (on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 		else
 		{
 			//nieaktywny
-			format(string, sizeof(string), "%s"INCOLOR_GREY"%s - %d\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "%s%s - %d (off-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 	}
 	

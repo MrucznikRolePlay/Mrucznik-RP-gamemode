@@ -103,8 +103,8 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//TODO:
-			//
+			//TODO: stworzyæ licytacje
+			SendClientMessage(playerid, -1, "W budowie.");
 		}
 		else
 		{
@@ -126,8 +126,8 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//TODO:
-			//
+			//TODO: stworzyæ przedmioty
+			SendClientMessage(playerid, -1, "W budowie.");
 		}
 		else
 		{
