@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_setmc_Impl(playerid, giveplayerid, value)
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000)
+    if(PlayerInfo[playerid][pUID] == 1 || PlayerInfo[playerid][pUID] == 2)
 	{
 		new string[90];
 		format(string, sizeof(string), "AdmCmd: %s dal %s %d mrucznik coinsow", GetNick(playerid), GetNick(giveplayerid), value);
