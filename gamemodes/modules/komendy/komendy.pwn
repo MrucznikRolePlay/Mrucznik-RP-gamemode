@@ -47,7 +47,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_
 	#if DEBUG == 1
 		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
 	#endif
-	return success;
+	return COMMAND_OK;
 }
 
 /*
@@ -114,7 +114,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		}
 	}
 
-	return success;
+	return COMMAND_OK;
 }
 
 //-----------------<[ Funkcje: ]>-------------------
