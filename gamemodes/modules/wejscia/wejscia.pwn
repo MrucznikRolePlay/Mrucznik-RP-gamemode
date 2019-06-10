@@ -220,7 +220,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 12)//Do to poprawy
 	{
-		if(!DoorInfo[FRAC_LCN][d_State] != 1)
+		if(!DoorInfo[FRAC_LCN][d_State])
 		{
 			sendErrorMessage(playerid, "Te drzwi s¹ zamkniête"); 
 			return 1;
