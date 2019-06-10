@@ -2652,13 +2652,6 @@ SetPlayerSpawnWeapon(playerid)
 		PrzywrocBron(playerid);
 
     //HP:
-	if(PlayerInfo[playerid][pSHealth] > 100)
-	{
-		sendErrorMessage(playerid, "Twoje HP zosta³o zbugowane. Zg³oœ to do Komisji ds. Ulepszeñ!");
-		sendTipMessage(playerid, "Przywrócono domyœln¹ wartoœæ Health na 50.0"); 
-		PlayerInfo[playerid][pSHealth] = 50.0; 
-		return 1;
-	}
     if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
     {
         SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);

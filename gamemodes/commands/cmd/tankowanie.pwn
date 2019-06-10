@@ -44,7 +44,6 @@ YCMD:tankowanie(playerid, params[], help)
 				sendTipMessage(playerid, "U¿yj /tankowanie [playerid/CzêœæNicku] [cena]");
 				return 1;
 			}
-			money = FunkcjaK(money); 
 			if(money < 600 || money > 2500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 600$ do 2500$!"); return 1; }
 			if(IsPlayerConnected(playa))
 			{
