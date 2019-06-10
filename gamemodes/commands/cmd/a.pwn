@@ -42,15 +42,15 @@ YCMD:a(playerid, params[], help)
 		new rankname[10+MAX_PLAYER_NAME];
 		if(PlayerInfo[playerid][pAdmin] >= 1) 
 		{
-			format(rankname, sizeof(rankname), "Admin [%d] %s:", PlayerInfo[playerid][pAdmin]);
+			format(rankname, sizeof(rankname), "Admin [%d] %s:", PlayerInfo[playerid][pAdmin], GetNick(playerid));
 		}
 		else if(PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 4)
 		{
-			format(rankname, sizeof(rankname), "Pó³-Admin [%d] %s:", PlayerInfo[playerid][pNewAP]);
+			format(rankname, sizeof(rankname), "Pó³-Admin [%d] %s:", PlayerInfo[playerid][pNewAP], GetNick(playerid));
 		}
 		else if(IsAScripter(playerid))
 		{
-			format(rankname, sizeof(rankname), "Skrypter %s:");
+			format(rankname, sizeof(rankname), "Skrypter %s:", GetNick(playerid));
 		}
 		else 
 		{
