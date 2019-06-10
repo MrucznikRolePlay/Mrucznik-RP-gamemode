@@ -153,7 +153,7 @@ YCMD:sms(playerid, params[], help)
 		GameTextForPlayer(playerid, string, 5000, 1);
 		ZabierzKase(playerid, smsCost);
 		SendClientMessage(playerid, COLOR_WHITE, "Wiadomoœæ dostarczona.");
-		SendSMSMessage(PlayerInfo[playerid][pPnumber], givePlayerNumber, messSMS);
+		SendSMSMessage(PlayerInfo[playerid][pPnumber], checkNumberPlayer, messSMS);
 		return 1;
 	}
 	if(givePlayerNumber == 555)
