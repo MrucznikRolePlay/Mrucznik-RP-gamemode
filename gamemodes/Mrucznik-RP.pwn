@@ -203,7 +203,7 @@ public OnGameModeInit()
 	EnableStuntBonusForAll(0); //brak hajsu za stunty
 	ManualVehicleEngineAndLights(); //brak automatycznego w³¹czania silnika i œwiate³
 	ShowNameTags(1); //Pokazywanie nicków graczy
-	SetNameTagDrawDistance(20.0); //Wyœwietlanie nicków od 20 metrów
+	SetNameTagDrawDistance(70.0); //Wyœwietlanie nicków od 70 metrów
 	//UsePlayerPedAnims(); // Animacja CJ 
 		// - off (broñ trzymana w obu rêkach jest trzymana jedn¹, skiny chodz¹ swoim chodem)
 		// - on  (broñ trzymana jest normalnie, wszystkie skiny chodz¹ jak CJ)
