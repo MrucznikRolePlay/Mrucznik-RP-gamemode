@@ -120,7 +120,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 //-----------------<[ Funkcje: ]>-------------------
 RunCommand(playerid, command[], params[]) //temporary
 {
-	StaryCzas[playerid] = GetTickCount()+100;
+	StaryCzas[playerid] = GetTickCount()-101;
 	return Command_ReProcess(playerid, sprintf("%s %s", command, params), false);
 }
 
