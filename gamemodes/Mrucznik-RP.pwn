@@ -6719,21 +6719,6 @@ public OnVehicleSpawn(vehicleid)
 
 public OnPlayerText(playerid, text[])
 {
-	/*#if DEBUG_MODE > 0
-	if(IsPlayerNPC(playerid))
-	{
-		if(text[0] == '#')
-		{
-			return 1;
-		}
-		printf("[Bot %s:] %s", GetNick(playerid), text);
-		return 0;
-	}
-	else if(text[0] == 'b' && text[1] == 'o' && text[2] == 't')
-	{
-		return 1;
-	}
-	#endif
     if(text[0] == '@') //animacja
     {
         if(strlen(text) > 31) return 0;
@@ -6741,8 +6726,7 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
-	Chat(playerid, ChatICAdditions(playerid, text));
-	*/
+	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
