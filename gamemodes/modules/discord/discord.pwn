@@ -35,14 +35,18 @@ DiscordConnectInit()
 
 	g_FracChannel[1]=DCC_FindChannelById("545045344652886056");
 	g_FracChannel[2]=DCC_FindChannelById("545620322423144459");
+	g_FracChannel[3]=DCC_FindChannelById("574930724973576207");
 	g_FracChannel[4]=DCC_FindChannelById("545619975151288321");
 	g_FracChannel[5]=DCC_FindChannelById("545625556578992128");
+	g_FracChannel[6]=DCC_FindChannelById("574930782007853066");
 	g_FracChannel[7]=DCC_FindChannelById("545626921950511104");
+	g_FracChannel[8]=DCC_FindChannelById("574930925209780228");
 	g_FracChannel[9]=DCC_FindChannelById("545621434098253824");
 	g_FracChannel[10]=DCC_FindChannelById("545622580246347776");
 	g_FracChannel[11]=DCC_FindChannelById("545622546939117569");
 	g_FracChannel[12]=DCC_FindChannelById("545642957106053123");
 	g_FracChannel[13]=DCC_FindChannelById("557567568198631441");
+	g_FracChannel[14]=DCC_FindChannelById("574931026888097802");
 	g_FracChannel[15]=DCC_FindChannelById("545643012437311491");
 	g_FracChannel[16]=DCC_FindChannelById("545643300736991235");
 	g_FracChannel[17]=DCC_FindChannelById("545619305832775700");
