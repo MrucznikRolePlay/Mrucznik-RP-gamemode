@@ -2249,20 +2249,6 @@ IsACop(playerid)
 	return 0;
 }
 
-IsASkuban(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new nick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"gunwo", false) == 0)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
 IsAFakeKonto(playerid)
 {
 	if(IsPlayerConnected(playerid))

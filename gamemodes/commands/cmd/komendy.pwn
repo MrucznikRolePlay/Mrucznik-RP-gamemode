@@ -38,9 +38,6 @@ YCMD:komendy2(playerid, params[], help)
         return 1;
     }
 
-    SendClientMessage(playerid, -1, "W trakcie budowy...");
-    return 1;
-
     //command body
     new count = Command_GetPlayerCommandCount(playerid);
     for (new i = 0; i != count; ++i)
