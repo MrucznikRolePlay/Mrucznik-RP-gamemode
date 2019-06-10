@@ -34,7 +34,6 @@ YCMD:admini(playerid, params[], help)
 	{
 		new string[128]; 
 		SendClientMessage(playerid, -1, "Lista administratorów na s³u¿bie:"); 
-		SendClientMessage(playerid, -1, " "); 
 		foreach(new i : Player)
 		{
 			if(GetPlayerAdminDutyStatus(i) == 1)

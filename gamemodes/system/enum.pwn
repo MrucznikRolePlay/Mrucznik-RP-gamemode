@@ -1446,7 +1446,8 @@ enum pInfo
     pDesc[128],
 	pStrong,
 	pCard,
-	pAdminName[MAX_PLAYER_NAME]
+	pAdminName[MAX_PLAYER_NAME],
+	pAdminAccess
 };
 enum StringData
 {
