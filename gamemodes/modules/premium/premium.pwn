@@ -33,13 +33,14 @@ premium_ConvertToNewSystem(playerid)
 {
 	if(PlayerInfo[playerid][pDonateRank] != 0)
 	{
-		PlayerInfo[playerid][pDonateRank] = 0;
-
 		DajKP(playerid, gettime()+KP_3_MIESIACE, false); // KP na 3 msc dla osób, które mieli premiuma na starym systemie
 		DajMC(playerid, 500); // i jeszcze prezent...
 
 		_MruGracz(playerid, "Uwaga! Twoje premium zosta³o przeniesione na nowy system!");
 		_MruGracz(playerid, "Otrzyma³eœ Konto Premium na 3 miesi¹ce i dodatkowe 500 MC do wykorzystania.");
+
+		Log(premiumLog, INFO, sprintf("KONWERSJA KP: Nick %s | Level KP: %d", GetNick(playerid), PlayerInfo[playerid][pDonateRank]));
+		PlayerInfo[playerid][pDonateRank] = 0;
 	}
 }
 
@@ -153,6 +154,7 @@ ZabierzKP(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
+		Log(premiumLog, INFO, sprintf("ZABRANIE KP: Nick %s", GetNick(playerid)));
 		PremiumInfo[playerid][pKP] = 0;
 		new query[128];
 		format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
@@ -174,6 +176,7 @@ DajKP(playerid, time, bool:msg=true)
 {
 	if(IsPlayerConnected(playerid))
     {
+		Log(premiumLog, INFO, sprintf("NADANIE KP: Nick %s | Czas %d", GetNick(playerid), time));
         new query[170];
         format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
     	mysql_query(query);
@@ -215,6 +218,7 @@ DajKP(playerid, time, bool:msg=true)
 
 DajMC(playerid, mc)
 {
+	Log(premiumLog, INFO, sprintf("NADANIE MC: Nick %s | Ilosc: %d", GetNick(playerid), mc));
 	if(mc <= 0)
 	{
 		printf("ERROR: funkcja DajMC miala ujemna wartosc dla playerid: %s [%d] Wartosc: %d", GetNick(playerid), playerid, mc);
@@ -229,6 +233,7 @@ DajMC(playerid, mc)
 
 ZabierzMC(playerid, mc)
 {
+	Log(premiumLog, INFO, sprintf("ZABRANIE MC: Nick %s | Ilosc %d", GetNick(playerid), mc));
 	if(mc <= 0)
 	{
 		printf("ERROR: funkcja ZabierzMC miala ujemna wartosc dla playerid: %s [%d] Wartosc: %d", GetNick(playerid), playerid, mc);
@@ -244,7 +249,7 @@ ZabierzMC(playerid, mc)
 KupKP(playerid)
 {
 	ZabierzMC(playerid, MIESIAC_KP_CENA);
-	DajKP(playerid, KP_MIESIAC);
+	DajKP(playerid, gettime()+KP_MIESIAC);
 	SendClientMessage(playerid, COLOR_LIGHTGREEN, "Gratulacjê! Zakupi³eœ konto premium. Od teraz masz dostêp do mo¿liwoœci premium. Dziêkujemy za wspieranie serwera!"); 
 }
 
