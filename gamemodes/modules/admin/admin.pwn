@@ -248,7 +248,7 @@ IsAHeadAdmin(playerid)
 }
 IsAScripter(playerid)
 {
-	if(PlayerInfo[playerid][pNewAP] != 5)
+	if(PlayerInfo[playerid][pNewAP] == 5)
 	{
 		return 1;
 	}

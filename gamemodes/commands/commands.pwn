@@ -1023,6 +1023,7 @@ static Aliases()
 
 	//pomoc2
 	Command_AddAltNamed("pomoc2", "help");
+	Command_AddAltNamed("pomoc", "help");
 
 	//pomocdom
 	Command_AddAltNamed("pomocdom", "dompomoc");
