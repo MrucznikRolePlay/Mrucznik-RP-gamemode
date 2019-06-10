@@ -193,7 +193,7 @@ DajKP(playerid, time, bool:msg=true)
         }
         mysql_free_result();
 
-        new lVal = time-(gettime()+3600);
+        new lVal = time-gettime();
 
         if(lVal > 0 && time != 0)
         {

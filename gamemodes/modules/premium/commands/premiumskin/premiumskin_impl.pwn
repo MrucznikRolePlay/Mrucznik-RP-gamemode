@@ -32,13 +32,17 @@ command_premiumskin_Impl(playerid, skin)
 	{
 		return sendErrorMessage(playerid, "Bêd¹c na s³u¿bie nie mo¿esz aktywowaæ unikatowego skina.");
 	}
+
+	if(IsPlayerInAnyVehicle(playerid))
+	{
+		return sendErrorMessage(playerid, "Nie mo¿esz przebraæ siê bêd¹c w pojeŸdzie.");
+	}
 	
 	PlayerInfo[playerid][pModel] = skin;
 
 	SetPlayerSkin(playerid, skin);
 
 	_MruAdmin(playerid, sprintf("Aktywowa³eœ swój unikatowy skin [ID: %d]", skin));
-
 	return 1;
 }
 

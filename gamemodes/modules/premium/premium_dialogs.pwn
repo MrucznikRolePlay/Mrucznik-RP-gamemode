@@ -53,8 +53,15 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 8:
 				{
-					_MruGracz(playerid, "Pamiêtaj, ¿e aby kupiæ pojazd unikatowy musisz znajdowaæ siê przy salonie aut.");
-					DialogPojazdyPremium(playerid);
+					if(PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
+					{
+						DialogPojazdyPremium(playerid);
+					}
+					else
+					{
+						_MruGracz(playerid, "Aby kupiæ pojazd unikatowy musisz znajdowaæ siê przy salonie aut.");
+						DialogMenuDotacje(playerid);
+					}
 				}
 				case 10:
 				{
@@ -62,8 +69,15 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 11:
 				{
-					_MruGracz(playerid, "Pamiêtaj, ¿e aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami.");
-					DialogSkiny(playerid);
+					if(IsAtClothShop(playerid))
+					{
+						DialogSkiny(playerid);
+					}
+					else
+					{
+						_MruGracz(playerid, "Pamiêtaj, ¿e aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami.");
+						DialogMenuDotacje(playerid);
+					}
 				}
 				default:
 				{
@@ -82,6 +96,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(IsPlayerPremium(playerid)) 
 				{
 					PrzedluzKP(playerid);
+					DialogMenuDotacje(playerid);
 				}
 				else
 				{
