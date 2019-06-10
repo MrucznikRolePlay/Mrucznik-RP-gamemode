@@ -35,7 +35,7 @@ premium_ConvertToNewSystem(playerid)
 	{
 		PlayerInfo[playerid][pDonateRank] = 0;
 
-		DajKP(playerid, gettime()+8046000, false); // KP na 3 msc dla osób, które mieli premiuma na starym systemie
+		DajKP(playerid, gettime()+KP_3_MIESIACE, false); // KP na 3 msc dla osób, które mieli premiuma na starym systemie
 		DajMC(playerid, 500); // i jeszcze prezent...
 
 		_MruGracz(playerid, "Uwaga! Twoje premium zosta³o przeniesione na nowy system!");
@@ -172,7 +172,6 @@ ZabierzKP(playerid)
 
 DajKP(playerid, time, bool:msg=true)
 {
-	//PremiumInfo[playerid][pKP] = 1;
 	if(IsPlayerConnected(playerid))
     {
         new query[170];
@@ -245,8 +244,15 @@ ZabierzMC(playerid, mc)
 KupKP(playerid)
 {
 	ZabierzMC(playerid, MIESIAC_KP_CENA);
-	PremiumInfo[playerid][pKP] = 1;
+	DajKP(playerid, KP_MIESIAC);
 	SendClientMessage(playerid, COLOR_LIGHTGREEN, "Gratulacjê! Zakupi³eœ konto premium. Od teraz masz dostêp do mo¿liwoœci premium. Dziêkujemy za wspieranie serwera!"); 
+}
+
+PrzedluzKP(playerid)
+{
+	ZabierzMC(playerid, MIESIAC_KP_CENA);
+	DajKP(playerid, PremiumInfo[playerid][pExpires]+KP_MIESIAC);
+	SendClientMessage(playerid, COLOR_LIGHTGREEN, "Konto premium przed³u¿one :D!"); 
 }
 
 KupPojazdPremium(playerid, id)

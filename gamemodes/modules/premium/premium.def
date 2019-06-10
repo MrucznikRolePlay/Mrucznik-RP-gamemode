@@ -30,6 +30,10 @@
 #define MAX_PREMIUM_VEHICLES 18
 #define MAX_PREMIUM_SKINS 26
 
+//Czas
+#define KP_MIESIAC 2592000
+#define KP_3_MIESIACE 8046000
+
 //Cennik
 #define MIESIAC_KP_CENA 425
 

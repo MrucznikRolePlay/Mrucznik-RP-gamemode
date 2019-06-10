@@ -79,9 +79,15 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(PremiumInfo[playerid][pMC] >= MIESIAC_KP_CENA)
 			{
-				if(IsPlayerPremium(playerid)) return DialogMenuDotacje(playerid);
-				KupKP(playerid);
-				DialogMenuDotacje(playerid);
+				if(IsPlayerPremium(playerid)) 
+				{
+					PrzedluzKP(playerid);
+				}
+				else
+				{
+					KupKP(playerid);
+					DialogMenuDotacje(playerid);
+				}
 			}
 			else
 			{
@@ -258,9 +264,9 @@ static DialogKupKP(playerid)
 {
 	new string[256];
 	if(IsPlayerPremium(playerid))
-		format(string, sizeof(string), "Posiadasz ju¿ aktywne konto premium!");
+		format(string, sizeof(string), "Mo¿esz przed³u¿yæ konto premium o 30 dni za "INCOLOR_GREEN""#MIESIAC_KP_CENA" Mrucznik Coinsów\nCzy chcesz to zrobiæ?");
 	else
-		format(string, sizeof(string), "Mo¿esz kupiæ konto premium na miesi¹c za "INCOLOR_GREEN""#MIESIAC_KP_CENA" Mrucznik Coinsów\nCzy chcesz to zrobiæ?");
+		format(string, sizeof(string), "Mo¿esz kupiæ konto premium na 30 dni za "INCOLOR_GREEN""#MIESIAC_KP_CENA" Mrucznik Coinsów\nCzy chcesz to zrobiæ?");
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(KUP_KP), DIALOG_STYLE_MSGBOX, "Premium - KP", string, "Tak", "Nie");
 }
 
