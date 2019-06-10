@@ -54,7 +54,6 @@ YCMD:r(playerid, params[], help)
 	    {
             format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
-			SendDiscordFracMessage(member, string);
             format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid, true), params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
             printf("%s", string);

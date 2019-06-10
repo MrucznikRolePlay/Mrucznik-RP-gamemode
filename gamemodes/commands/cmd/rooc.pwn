@@ -47,13 +47,15 @@ YCMD:rooc(playerid, params[], help)
             {
                 format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],AdminName, params);
                 SendRadioMessage(member, TEAM_BLUE_COLOR, string);
+                SendDiscordFracMessage(member, string);
                 printf("%s", string);
 
             } 
-						else
+			else
             {
                 format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
                 SendRadioMessage(member, TEAM_BLUE_COLOR, string);
+                SendDiscordFracMessage(member, string);
                 printf("%s", string);
 
             }
