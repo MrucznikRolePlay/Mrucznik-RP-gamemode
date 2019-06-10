@@ -16616,7 +16616,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
        
 	
 	}
-	else if(dialogid == 10001)
+	/*else if(dialogid == 10001)
 	{
 		if(response)
 		{
@@ -16660,7 +16660,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 		return 1;
-	}
+	}*/ 
 	else if(dialogid == 1071)//wyp³ata z swojego konta
 	{
 		if(response)

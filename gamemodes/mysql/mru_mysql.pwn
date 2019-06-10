@@ -403,8 +403,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
-	PlayerInfo[playerid][pZG], 
-	PlayerInfo[playerid][pAdminName],
+	PlayerInfo[playerid][pZG],
     PlayerInfo[playerid][pUID]);
 
     if(!mysql_query(query)) fault=false;
@@ -608,8 +607,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pSpawn],
 		PlayerInfo[playerid][pBW],
 		PlayerInfo[playerid][pCzystka],
-        PlayerInfo[playerid][pCarSlots],
-        PlayerInfo[playerid][pAdminName]);
+        PlayerInfo[playerid][pCarSlots]);
 
 		format(lStr, 1024, "UPDATE `mru_konta` SET `connected`='1' WHERE `Nick`='%s'", lStr, GetNick(playerid));
 		mysql_query(lStr);
