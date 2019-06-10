@@ -44,7 +44,7 @@ YCMD:zmiendomk(playerid, params[], help)
         }
 
 
-        if (PlayerInfo[playerid][pAdmin] >= 5000 || IsASkuban(playerid))
+        if (PlayerInfo[playerid][pAdmin] >= 5000)
         {
             if(IsPlayerConnected(para1))
             {
