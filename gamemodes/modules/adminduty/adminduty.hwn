@@ -22,7 +22,6 @@
 //
 
 //-----------------<[ Zmienne: ]>-------------------
-new nickadminaIC[MAX_PLAYER_NAME];//NickAdministratora IC
 
 //Statystyki:
 new iloscKick[MAX_PLAYERS];//Iloœæ kicków nadanych przez @ -----------------------> [/kick]
@@ -36,8 +35,6 @@ new iloscInne[MAX_PLAYERS]; //Inne kary/akcje administracyjne ------------------
 new AdminDutyMinuty[MAX_PLAYERS];//Czas s³u¿by - Minuty
 new AdminDutyGodziny[MAX_PLAYERS];//Czas s³u¿by - Godziny
 new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
-new AdminName[MAX_PLAYER_NAME];//Nick administratora (Po wpisaniu adminduty)
-new FirstNickname[MAX_PLAYER_NAME];//Pierwotny nick administratora (np. John_Mrucznik)
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------
 
