@@ -59,7 +59,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 
 //-------<[ Include ]>-------
 #include <a_http>
-#include <strlib>
+#include <strlib_fix>
 #include <callbacks>
 #include <utils>
 #include <YSI_Data\y_iterate>
