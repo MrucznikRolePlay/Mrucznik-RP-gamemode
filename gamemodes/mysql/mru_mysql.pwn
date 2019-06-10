@@ -93,7 +93,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     }
 
 	new query[1024], bool:fault=true;
-	new adminName[32];
 
 	if(forcegmx == false) GetPlayerHealth(playerid,PlayerInfo[playerid][pHealth]);
 
