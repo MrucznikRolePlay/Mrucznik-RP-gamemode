@@ -223,12 +223,21 @@
 	Funkcje
 		>IsAHeadAdmin
 		>IsAScripter
+		>AdminCommandAcces
 */
 
 //
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
+AdminCommandAccess(playerid, accessID)
+{
+	if(PlayerInfo[playerid][pAdminAccess] != accessID)
+	{
+		return noAccessMessage(playerid); 
+	}
+	return 0;
+}
 IsAHeadAdmin(playerid)
 {
 	if(PlayerInfo[playerid][pAdmin] == 5000)
@@ -278,7 +287,7 @@ KickPlayerTXD(playerid, adminid, reason[])
 AJPlayerTXD(playerid, adminid, reason[], timeVal)
 {
 	new str[256];
-    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~w~Na: %d~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, reason);
+    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~w~Na: %d min~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, reason);
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
