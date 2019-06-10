@@ -57,6 +57,7 @@ YCMD:a(playerid, params[], help)
 			noAccessMessage(playerid);
 			return 1;
 		}
+		format(string, sizeof(string), "%s %s", rankname, params); 
 		SendAdminMessage(0xFFC0CB, string);
 		SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
 	}
