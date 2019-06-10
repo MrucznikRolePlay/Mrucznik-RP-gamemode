@@ -1123,8 +1123,6 @@ public OnPlayerConnect(playerid)
 		return 1;
 	}
 	SetRPName(playerid);
-	GetPlayerName(playerid, nickadminaIC, sizeof(nickadminaIC));
-	SetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC);
 	timeSecWjedz[playerid] = 0;
 
 	//Pocz¹tkowe ustawienia:

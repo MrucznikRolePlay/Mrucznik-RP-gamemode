@@ -48,10 +48,8 @@ YCMD:checkadminstats(playerid, params[], help)
 				if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
 				{
 					
-					GetPVarString(giveplayerid, "pAdminDutyNickOn", SenderAdminName, sizeof(SenderAdminName)); 
-					GetPVarString(giveplayerid, "pAdminDutyNickOff", FirstSenderAdminName, sizeof(FirstSenderAdminName)); 
 					
-					format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nick IC: {C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", SenderAdminName, FirstSenderAdminName,iloscBan[giveplayerid],iloscWarn[giveplayerid],iloscKick[giveplayerid],(iloscInne[giveplayerid]+iloscAJ[giveplayerid]),AdminDutyGodziny[giveplayerid], AdminDutyMinuty[giveplayerid]);
+					format(string, sizeof(string), "{C0C0C0}Statystyki\n{800080}Nick administratora:{C0C0C0}%s\n{800080}Nadane Bany: {C0C0C0}%d\n{800080}Nadane Warny: {C0C0C0}%d\n{800080}Nadane Kicki: {C0C0C0}%d\n{800080}Inne akcje: {C0C0C0}%d\n\n{C2A2DA}Na s³u¿bie ju¿: {C0C0C0}%d godzin i %d minut", GetNick(giveplayerid),iloscBan[giveplayerid],iloscWarn[giveplayerid],iloscKick[giveplayerid],(iloscInne[giveplayerid]+iloscAJ[giveplayerid]),AdminDutyGodziny[giveplayerid], AdminDutyMinuty[giveplayerid]);
 					ShowPlayerDialogEx(playerid, 1091, DIALOG_STYLE_MSGBOX, "System @DUTY", string, "Okej", "");
 					return 1;
 				}

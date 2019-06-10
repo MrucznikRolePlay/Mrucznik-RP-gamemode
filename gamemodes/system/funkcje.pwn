@@ -1547,7 +1547,7 @@ GetNick(playerid, rp = false)
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
 	if(rp) {
-		//return nickRP[playerid];
+		return nickRP[playerid];
 	}
 	return nick;
 }

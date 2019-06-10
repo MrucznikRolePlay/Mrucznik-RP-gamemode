@@ -34,7 +34,7 @@ YCMD:adminduty(playerid, params[], help)
 	{	
 		if(GetPlayerAdminDutyStatus(playerid) == 0)
 		{
-			if(strlen(PlayerInfo[playerid][pAdminName]) >= 3)
+		/*	if(strlen(PlayerInfo[playerid][pAdminName]) >= 3)
 			{
 				foreach(new i : Player)
 				{
@@ -50,7 +50,8 @@ YCMD:adminduty(playerid, params[], help)
 			else
 			{
 				ShowPlayerDialogEx(playerid, 10001, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "WprowadŸ poni¿ej swój nick administratora\nBêdziesz go u¿ywa³ za ka¿dym razem!", "Akceptuj", "Odrzuæ"); 
-			}
+			}*/
+			AdminDutyPlayer(playerid, 1); 
 				
 			return 1;	
 		}

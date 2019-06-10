@@ -94,30 +94,21 @@ GetPlayerAdminDutyStatus(playerid)
 AdminDutyPlayer(playerid, status)
 {
 	new string[128];
-	SetPVarString(playerid, "pAdminDutyNickOn", PlayerInfo[playerid][pAdminName]); 
-	GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
-	GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 	new stringlog[325];//String do logu
 	new y1,mi1,d1;//Data
 	
 	if(status == 1)//Je¿eli ma wejœæ
 	{
 		AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-		format(string, sizeof(string), "Administrator %s [%s] wszed³  na s³u¿bê administratora!", AdminName,FirstNickname);
+		format(string, sizeof(string), "Administrator %s wszed³  na s³u¿bê administratora!", GetNick(playerid));
 		SendAdminMessage(COLOR_RED, string); 
 		MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
-		format(string, sizeof(string), "%s", AdminName); 
-		SetPlayerName(playerid, Odpolszcz(string));
 		SetPVarInt(playerid, "dutyadmin", 1);
 		SetPlayerColor(playerid, 0xFF0000FF);
 	
 	}
 	else//Je¿eli ma zejœæ
 	{	
-		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
-		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
-		format(string, sizeof(string), "%s", FirstNickname);
-		SetPlayerName(playerid, string); 
 		SetPVarInt(playerid, "dutyadmin", 0); 
 		SetPlayerColor(playerid,TEAM_HIT_COLOR);
 		
@@ -129,7 +120,7 @@ AdminDutyPlayer(playerid, status)
 		
 		//LOG
 		getdate(y1, mi1, d1); 
-		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - gra dalej", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],(iloscInne[playerid]+iloscAJ[playerid])); //GENERATE LOG
+		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - gra dalej", d1, mi1, y1, GetNick(playerid), AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],(iloscInne[playerid]+iloscAJ[playerid])); //GENERATE LOG
 		Log(admindutyLog, INFO, stringlog); //Create LOG
 		
 		//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
