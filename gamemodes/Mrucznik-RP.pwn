@@ -2128,6 +2128,8 @@ public OnPlayerSpawn(playerid)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerSpawn - begin", GetNick(playerid), playerid);
 	#endif
+	SetPlayerTeam(playerid, NO_TEAM);
+
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)
 	{
