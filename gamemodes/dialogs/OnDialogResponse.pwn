@@ -16646,7 +16646,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(nickAdminStatus == 0)
 						{
 							strdel(PlayerInfo[playerid][pAdminName], 0, MAX_PLAYER_NAME); 
-							mysql_real_escape_string(inputtext, PlayerInfo[playerid][pAdminName])
+							mysql_real_escape_string(inputtext, PlayerInfo[playerid][pAdminName]);
 							return 1;
 						}
 					}
