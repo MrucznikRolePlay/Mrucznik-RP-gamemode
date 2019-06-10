@@ -23,7 +23,7 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define MAX_WEJSC 500
+#define MAX_WEJSC 1000
 #define INTERIOR_3DTEXT_RANGE 5.0
 #define EXTERIOR_3DTEXT_RANGE 15.0
 #define NOT_IN_ENTER_RANGE 0
