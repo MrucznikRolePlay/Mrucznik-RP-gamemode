@@ -10909,7 +10909,6 @@ Patrol_CreateMarker(patrolid, Float:x, Float:y, type)
     TextDrawFont(PatrolMarker[patrolid], 4);
     TextDrawSetSelectable(PatrolMarker[patrolid], true);
 }
-
 //Scena
 Scena_CreateAt(Float:x, Float:y, Float:z)
 {
