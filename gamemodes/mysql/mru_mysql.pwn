@@ -93,6 +93,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     }
 
 	new query[1024], bool:fault=true;
+	new adminName[32];
 
 	if(forcegmx == false) GetPlayerHealth(playerid,PlayerInfo[playerid][pHealth]);
 
@@ -246,7 +247,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pHealth],
 	PlayerInfo[playerid][pInt]);
 
-    format(query, sizeof(query), "%s \
+    format(query, sizeof(query), "%s, \
     `Local`='%d', \
 	`Team`='%d', \
 	`Model`='%d', \
@@ -387,7 +388,9 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`PodgladWiadomosci`='%d', \
 	`StylWalki`='%d', \
 	`PAdmin`='%d', \
-	`ZaufanyGracz`='%d' \
+	`ZaufanyGracz`='%d', \
+	`AdminName`='%s', \
+	`connected`='0' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
 	PoziomPoszukiwania[playerid],
@@ -401,7 +404,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
-	PlayerInfo[playerid][pZG],
+	PlayerInfo[playerid][pZG], 
+	PlayerInfo[playerid][pAdminName],
     PlayerInfo[playerid][pUID]);
 
     if(!mysql_query(query)) fault=false;
@@ -570,7 +574,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `ZaufanyGracz`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Czystka`, `CarSlots`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `ZaufanyGracz`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Czystka`, `CarSlots`, `AdminName`";
 
         format(lStr, 1024, "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
@@ -579,7 +583,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddds[32]",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -605,7 +609,11 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pSpawn],
 		PlayerInfo[playerid][pBW],
 		PlayerInfo[playerid][pCzystka],
-        PlayerInfo[playerid][pCarSlots]);
+        PlayerInfo[playerid][pCarSlots],
+        PlayerInfo[playerid][pAdminName]);
+
+		format(lStr, 1024, "UPDATE `mru_konta` SET `connected`='1' WHERE `Nick`='%s'", lStr, GetNick(playerid));
+		mysql_query(lStr);
 	}
 
 	// Pozycje kamizelki
@@ -649,6 +657,7 @@ public MruMySQL_LoadAcocount(playerid)
 		format(lStr, sizeof lStr, "INSERT INTO `mru_legal` (`pID`,`weapon1`, `weapon2`, `weapon3`, `weapon4`, `weapon5`, `weapon6`, `weapon7`, `weapon8`, `weapon9`, `weapon10`, `weapon11`, `weapon12`, `weapon13`) VALUES (%d, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)", PlayerInfo[playerid][pUID]);
 		db_free_result(db_query(db_handle, lStr));
 	}
+
 
     MruMySQL_LoadAccess(playerid);
     //MruMySQL_WczytajOpis(playerid, PlayerInfo[playerid][pUID], 1);
