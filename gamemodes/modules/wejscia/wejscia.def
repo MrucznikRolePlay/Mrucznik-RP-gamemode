@@ -30,7 +30,7 @@
 #define IN_INTERIOR 2
 #define OUT_INTERIOR 1
 
-#define MAX_WJEDZ 500
+#define MAX_WJEDZ 1000
 
 
 //end
