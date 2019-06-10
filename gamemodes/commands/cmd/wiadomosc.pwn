@@ -100,23 +100,6 @@ YCMD:wiadomosc(playerid, params[], help)
 		
         if(strlen(params) < 78)
         {
-			GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
-			
-			if(GetPlayerAdminDutyStatus(playerid) == 0)
-			{
-				format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid, true), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
-				SendClientMessage(playerid, COLOR_YELLOW, string);
-				
-				format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid, true), playerid, text);
-				SendClientMessage(giveplayerid, COLOR_NEWS, string);
-				if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
-				{
-					iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
-				}
-				
-			}
-			else
-			{
 				format(string, sizeof(string), "«« %s (%d%s): %s", AdminName, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
 				SendClientMessage(playerid, COLOR_YELLOW, string);
 				
