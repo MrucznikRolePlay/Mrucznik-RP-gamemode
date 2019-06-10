@@ -1776,7 +1776,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	new killername[MAX_PLAYER_NAME];
 	new string[128];
 
-	if(gPlayerLogged[playerid] != 1 || gPlayerLogged[killerid] != 1) //nie przetwarzaj dla niezalogowanych osób
+	if( (IsPlayerConnected(playerid) && gPlayerLogged[playerid] != 1) || (IsPlayerConnected(killerid) && gPlayerLogged[killerid] != 1)) //nie przetwarzaj dla niezalogowanych osób
 	{
 		return 1;
 	}

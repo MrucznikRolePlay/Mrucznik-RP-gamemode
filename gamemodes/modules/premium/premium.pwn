@@ -124,7 +124,7 @@ premium_loadForPlayer(playerid)
 premium_saveMc(playerid)
 {
 	new query[128];
-    format(query, sizeof(query), "SELECT `p_UID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
+    format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
 	mysql_query(query);
 	mysql_store_result();
     if(mysql_num_rows())
@@ -155,7 +155,7 @@ ZabierzKP(playerid)
 	{
 		PremiumInfo[playerid][pKP] = 0;
 		new query[128];
-		format(query, sizeof(query), "SELECT `p_UID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
+		format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
     	mysql_query(query);
     	mysql_store_result();
         if(mysql_num_rows())
@@ -176,7 +176,7 @@ DajKP(playerid, time, bool:msg=true)
 	if(IsPlayerConnected(playerid))
     {
         new query[170];
-        format(query, sizeof(query), "SELECT `p_UID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
+        format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
     	mysql_query(query);
     	mysql_store_result();
         if(mysql_num_rows())
