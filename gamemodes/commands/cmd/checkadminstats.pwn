@@ -30,8 +30,6 @@
 
 YCMD:checkadminstats(playerid, params[], help)
 {
-	new SenderAdminName[MAX_PLAYER_NAME];
-	new FirstSenderAdminName[MAX_PLAYER_NAME];
 	new string[325];
 	new giveplayerid;
 	if(sscanf(params, "k<fix>", giveplayerid))
