@@ -271,7 +271,7 @@ KickPlayerTXD(playerid, adminid, reason[])
 {
     //PlayerLogged[playerid]=0;
     new str[128];
-    format(str, sizeof(str), "~r~Kick~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Kick~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -287,7 +287,7 @@ KickPlayerTXD(playerid, adminid, reason[])
 AJPlayerTXD(playerid, adminid, reason[], timeVal)
 {
 	new str[256];
-    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~w~Na: %d min~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, reason);
+    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~w~Na: %d min~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -303,7 +303,7 @@ AJPlayerTXD(playerid, adminid, reason[], timeVal)
 BPPlayerTXD(playerid, adminid, timeVal, reason[])
 {
 	new str[256];
-    format(str, sizeof(str), "~r~Blokada Pisania~w~~n~Dla: %s~n~Od: %s~n~Na: %d godzin~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, reason);
+    format(str, sizeof(str), "~r~Blokada Pisania~w~~n~Dla: %s~n~Od: %s~n~Na: %d godzin~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -319,7 +319,7 @@ BPPlayerTXD(playerid, adminid, timeVal, reason[])
 BanPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Ban~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Ban~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -336,7 +336,7 @@ BanPlayerTXD(playerid, adminid, reason[])
 WarnPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Warn~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Warn~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -352,7 +352,7 @@ WarnPlayerTXD(playerid, adminid, reason[])
 BlockPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Block~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Block~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -370,7 +370,7 @@ PWarnPlayerTXD(player[], adminid, result[])
 	new str[128];
 	new nickDoWarna[MAX_PLAYER_NAME]; 
 	strcat(nickDoWarna, player); 
-    format(str, sizeof(str), "~r~Warn Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickDoWarna, GetNick(adminid), result);
+    format(str, sizeof(str), "~r~Warn Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickDoWarna, GetNick(adminid), Odpolszcz(result));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -388,7 +388,7 @@ GivePWarnForPlayer(player[], adminid, result[])
 	new nickDoWarna[MAX_PLAYER_NAME];
 	strcat(nickDoWarna, player); 
 	new string[256];
-	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zwarnowane przez %s, Powod: %s", nickDoWarna, GetNick(adminid), (result));
+	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zwarnowane przez %s, Powod: %s", nickDoWarna, GetNick(adminid), Odpolszcz(result));
 	Log(warnLog, INFO, string);
 	MruMySQL_SetAccInt("Warnings", nickDoWarna, MruMySQL_GetAccInt("Warnings", nickDoWarna)+1);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
@@ -411,7 +411,7 @@ GiveWarnForPlayer(playerid, adminid, result[])
 	if(PlayerInfo[playerid][pWarns] >= 3)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
-		format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez Admina %s (3 warny), powód: %s", GetNick(playerid), GetNick(adminid), (result));
+		format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez Admina %s (3 warny), powód: %s", GetNick(playerid), GetNick(adminid), Odpolszcz(result));
 		Log(banLog, INFO, string);
 		if(GetPlayerAdminDutyStatus(adminid) == 1)
 		{
@@ -442,7 +442,7 @@ PBlockPlayerTXD(player[], adminid, reason[])
 	new str[128];
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
-    format(str, sizeof(str), "~r~Block Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Block Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -460,7 +460,7 @@ PBanPlayerTXD(player[], adminid, reason[])
 	new str[128];
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
-    format(str, sizeof(str), "~r~Ban Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), reason);
+    format(str, sizeof(str), "~r~Ban Offline~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -478,7 +478,7 @@ PAJPlayerTXD(player[], adminid, timeVal, reason[])
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
 	new str[128];
-    format(str, sizeof(str), "~r~AJ Offline~w~~n~Dla: %s~n~Od: %s~n~Na %d~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), timeVal, reason);
+    format(str, sizeof(str), "~r~AJ Offline~w~~n~Dla: %s~n~Od: %s~n~Na %d~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), timeVal, Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);

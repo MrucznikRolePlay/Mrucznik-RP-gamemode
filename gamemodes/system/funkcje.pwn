@@ -1600,6 +1600,7 @@ GetObjectBone(playerid, objectid)
 	}
 	return boneIDzmienna[playerid];
 }
+/*
 ZmniejszDodatki(playerid, coGraczUsunal)
 {
 	if(coGraczUsunal == 9)
@@ -1687,7 +1688,7 @@ ZmniejszDodatki(playerid, coGraczUsunal)
 		PlayerAdds[playerid][pSlot10] = 0;
 	}
 	return 0;
-}
+}*/
 GetNumber(playerid)
 {
 	return PlayerInfo[playerid][pPnumber];
