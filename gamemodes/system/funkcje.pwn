@@ -8206,7 +8206,7 @@ stock ShowPlayerInfoDialog(playerid, caption[], info[], bool:dialogTimer=false)
 {
 	if(dialAccess[playerid] == 0)
 	{
-		ShowPlayerDialog(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, caption, info, "Okej", " ");
+		ShowPlayerDialog(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, caption, info, "Okej", "");
 		if(dialogTimer == true)
 		{
 			dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);

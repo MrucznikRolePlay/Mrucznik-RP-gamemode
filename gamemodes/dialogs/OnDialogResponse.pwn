@@ -13007,10 +13007,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             format(SANrepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
-		else if(dialogid == 1142)
-		{
-			if(!response) return 1;
-		}
         else if(dialogid == 1401)
 		{
 		    if(response)
@@ -16702,6 +16698,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	
+	}
+	else if(dialogid == 1142)
+	{
+		if(!response) return 1;
+		if(response)
+		{
+			return 1;
+		}
 	}
 	//============[PRZELEWY OD GRACZA DO GRACZA = ID ODBIORCY]===================================
 	else if(dialogid == 1072)//Przelew
