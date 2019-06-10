@@ -100,18 +100,16 @@ YCMD:wiadomosc(playerid, params[], help)
 		
         if(strlen(params) < 78)
         {
-				format(string, sizeof(string), "«« %s (%d%s): %s", AdminName, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
-				SendClientMessage(playerid, COLOR_YELLOW, string);
-				
-				format(string, sizeof(string), "»» %s (%d): %s", AdminName, playerid, text);
-				SendClientMessage(giveplayerid, COLOR_NEWS, string);
-				iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
-				if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
-				{
-					iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
-				}
-			
-			}
+            format(string, sizeof(string), "«« %s (%d%s): %s", AdminName, giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
+            SendClientMessage(playerid, COLOR_YELLOW, string);
+            
+            format(string, sizeof(string), "»» %s (%d): %s", AdminName, playerid, text);
+            SendClientMessage(giveplayerid, COLOR_NEWS, string);
+            iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
+            if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
+            {
+                iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
+            }
         } else {
             new pos = strfind(params, " ", true, strlen(params) / 2);
             if(pos != -1)
