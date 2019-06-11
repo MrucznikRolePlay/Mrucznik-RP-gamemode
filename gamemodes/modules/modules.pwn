@@ -46,6 +46,7 @@
 #include "premium\premium.def"
 #include "sila\sila.def"
 #include "wejscia\wejscia.def"
+#include "wypadek\wypadek.def"
 
 
 //-------<[ .hwn ]>-------
@@ -67,6 +68,7 @@
 #include "premium\premium.hwn"
 #include "sila\sila.hwn"
 #include "wejscia\wejscia.hwn"
+#include "wypadek\wypadek.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -88,6 +90,7 @@
 #include "premium\premium.pwn"
 #include "sila\sila.pwn"
 #include "wejscia\wejscia.pwn"
+#include "wypadek\wypadek.pwn"
 
 
 //-------<[ timers ]>-------
@@ -96,6 +99,7 @@
 #include "pojazdy\pojazdy_timers.pwn"
 #include "prace\prace_timers.pwn"
 #include "premium\premium_timers.pwn"
+#include "wypadek\wypadek_timers.pwn"
 
 
 //-------<[ mysql ]>-------
@@ -116,6 +120,7 @@
 #include "pojazdy\pojazdy_callbacks.pwn"
 #include "prace\prace_callbacks.pwn"
 #include "premium\premium_callbacks.pwn"
+#include "wypadek\wypadek_callbacks.pwn"
 
 
 //-------<[ commands ]>-------
@@ -132,3 +137,4 @@
 #include "prace\commands\prace_commands.pwn"
 #include "premium\commands\premium_commands.pwn"
 #include "sila\commands\sila_commands.pwn"
+#include "wypadek\commands\wypadek_commands.pwn"

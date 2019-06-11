@@ -1,0 +1,11 @@
+{
+    "name": "wypadek",
+    "description": "System wypadków. Dawny filterscript scanhp.",
+    "author": "Mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "11.06.2019"
+}

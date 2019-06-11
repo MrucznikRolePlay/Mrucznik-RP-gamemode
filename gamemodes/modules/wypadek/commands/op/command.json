@@ -1,0 +1,14 @@
+{
+    "name": "op",
+    "description": "Odpinanie pasów.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "odepnijpasy",
+        "odepnijpas"
+    ],
+    "parameters": [],
+    "date": "11.06.2019"
+}
