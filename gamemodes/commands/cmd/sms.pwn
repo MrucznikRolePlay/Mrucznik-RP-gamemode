@@ -30,7 +30,7 @@
 YCMD:sms(playerid, params[], help)
 {
 	new string[256];
-	new smsCost = 2500; 
+	new smsCost; 
 	new givePlayerNumber, messSMS[128]; 
 	//Sprawdzanie - check
 	if(sscanf(params, "ds[128]", givePlayerNumber, messSMS))
@@ -86,11 +86,16 @@ YCMD:sms(playerid, params[], help)
 			GameTextForPlayer(playerid, "~r~Linia zamknieta", 5000, 1);
 			return 1;
 		}
-
+		if(GetPlayerMoney(playerid) < smsCost)
+		{
+			sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci œrodków!"); 
+			return 1;
+		}
 		//All its okay, continue code:
 		new giveMoneyForWorker = smsCost/SanWorkers; 
 		Sejf_Add(FRAC_SN, smsCost/2); 
 		Sejf_Save(FRAC_SN); 
+		ZabierzKase(playerid, smsCost); 
 		format(string, sizeof(string), "Dodatkowy koszt p³atnego SMS: %d$", smsCost);
 		SendClientMessage(playerid, COLOR_WHITE, string);
 		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid, true));
@@ -115,6 +120,7 @@ YCMD:sms(playerid, params[], help)
 	//Normal SMS
 	if(givePlayerNumber != 555) 
 	{
+		smsCost = 450; //Przypisanie watoœci koszta sms
 		new checkNumberPlayer = FindPlayerByNumber(givePlayerNumber);
 		
 		if(checkNumberPlayer == INVALID_PLAYER_ID)
