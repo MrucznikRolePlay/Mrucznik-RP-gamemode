@@ -1,6 +1,7 @@
 //actors.pwn
 //Chwilowa opcja ³adowania actorów - w przysz³oœci przeniesiona zostanie na modu³
 new valActor; 
+//new actorUID[valActor];
 #define ACTORS_ON_WORLD 100
 enum eActors
 {
