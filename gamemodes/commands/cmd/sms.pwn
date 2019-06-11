@@ -93,7 +93,7 @@ YCMD:sms(playerid, params[], help)
 		}
 		//All its okay, continue code:
 		new giveMoneyForWorker = smsCost/SanWorkers; 
-		Sejf_Add(FRAC_SN, smsCost/2); 
+		Sejf_Add(FRAC_SN, (smsCost/2)); 
 		Sejf_Save(FRAC_SN); 
 		ZabierzKase(playerid, smsCost); 
 		format(string, sizeof(string), "Dodatkowy koszt p³atnego SMS: %d$", smsCost);
@@ -110,8 +110,6 @@ YCMD:sms(playerid, params[], help)
 					format(string, sizeof(string), "P³atny SMS wygenerowa³: %d$, czyli %d$ dla ka¿dego", smsCost, giveMoneyForWorker);
 					SendClientMessage(i, COLOR_YELLOW, string);
 					DajKase(i, giveMoneyForWorker);
-					Sejf_Add(FRAC_SN, smsCost/2);
-					Sejf_Save(FRAC_SN); 
 				}
 			}
 		}

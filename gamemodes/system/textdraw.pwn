@@ -93,8 +93,8 @@ new PlayerText:OilPTXD_Arrow[5][MAX_PLAYERS];
 new Text:TXD_Info;
 KaryTXDLoad()
 {
-	Kary  = TextDrawCreate(7.481735+0.5, 272.249847, "_");
-	TextDrawLetterSize(Kary, 0.200876, 2.004995+0.004);
+	Kary  = TextDrawCreate(7.481735-1.5, 272.249847, "_");
+	TextDrawLetterSize(Kary, 0.200876, 2.004995);
 	TextDrawAlignment(Kary, 1);
 	TextDrawColor(Kary, -1);
 	TextDrawSetShadow(Kary, 0);
