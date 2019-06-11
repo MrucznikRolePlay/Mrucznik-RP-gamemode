@@ -237,7 +237,7 @@ YCMD:wejdz(playerid, params[], help)
        //chwilowe do vinyl
         else if(PlayerToPoint(1.5, playerid, 814.4426,-1378.2600,23.6475))
         {
-            if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && (PlayerInfo[playerid][pMember] != 9 || PlayerInfo[playerid][pLider] != 9))
+            if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
             {
                 sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyla!"); 
                 return 1;

@@ -2082,13 +2082,12 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//disable problematic codes for trusted players
 			return 1;
 		}
-		if(code == 4 && (GetPVarInt(playerid, "CodeACDisable") == 1) 
-		|| code == 50 && (GetPVarInt(playerid, "CodeACDisable") == 1))
+		if(GetPVarInt(playerid, "CodeACDisable") > 0) 
 		{
 			//disable if player call to cmd "wjedz" 
 			return 1;
 		}
-		if(GetPVarInt(playerid, "AntyCheatOff") == code)
+		if(GetPVarInt(playerid, "AntyCheatOff") > 0 )
 		{
 			timerAC[playerid] = SetTimerEx("AntyCheatON", 2500, true, "i", playerid);
 			return 1; 
