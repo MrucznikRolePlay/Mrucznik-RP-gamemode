@@ -16699,6 +16699,67 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 	
 	}
+	else if(dialogid == 9992)
+	{
+		if(!response)
+		{
+			sendTipMessage(playerid, "Wy³¹czono system actorów"); 
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					for(new i; i<valActor; i++)
+					{
+						if(IsPlayerInRangeOfPoint(playerid, 5.0, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posY]))
+						{
+							new string[124];
+							format(string, sizeof(string), "Pomyœlnie zaznaczono actora %d - %s", i, Actors[i][a_Name]); 
+							sendTipMessage(playerid, string);
+							SetPVarInt(playerid, "pActorID", i); 
+						}
+					}
+				}
+				case 1:
+				{
+					if(GetPVarInt(playerid, "pActorID") != 666)
+					{
+						if(GetPlayerInterior(playerid) != 0)
+						{
+							sendErrorMessage(playerid, "Actorów nie mo¿na przenosiæ pomiêdzy interiorami!"); 
+							return 1;
+						}
+						new uidActor = actorUID[GetPVarInt(playerid, "pActorID")], Float:pX, Float:pY, Float:pZ, Float:pR;
+						GetPlayerPos(playerid, pX, pY, pZ);
+						GetPlayerFacingAngle(playerid, pR); 
+						SetDynamicActorFacingAngle(uidActor, pR);
+						SetDynamicActorVirtualWorld(uidActor, GetPlayerVirtualWorld(playerid));
+						SetDynamicActorPos(uidActor, pX, pY+0.2, pZ);
+						sendTipMessage(playerid, "Pomyœlnie przeniesiono do Ciebie actora!"); 
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Najpierw zaznacz aktora!"); 
+					}
+				}
+				case 2:
+				{
+					sendTipMessage(playerid, "Ta opcja zostanie dodana ju¿ niebawem!");
+				}
+				case 3:
+				{
+					sendTipMessage(playerid, "Ta opcja zostanie dodana ju¿ niebawem!");
+				}
+				case 4:
+				{
+					sendTipMessage(playerid, "Ta opcja zostanie dodana ju¿ niebawem!");
+				}
+			}
+		}
+	}
 	else if(dialogid == 1142)
 	{
 		if(!response) return 1;

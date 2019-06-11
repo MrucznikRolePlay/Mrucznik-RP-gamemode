@@ -659,6 +659,7 @@
 #include "cmd/zwolnij.pwn"
 #include "cmd/panelvinyl.pwn"
 #include "cmd/specshow.pwn"
+#include "cmd/asystem.pwn"
 
 InitCommands()
 {

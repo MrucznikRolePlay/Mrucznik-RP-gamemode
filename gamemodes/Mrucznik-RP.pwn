@@ -1101,7 +1101,8 @@ public OnPlayerConnect(playerid)
 	
 	Command_SetPlayerDisabled(playerid, true);
 	
-
+	//Actors:
+	SetPVarInt(playerid, "pActorID", 666); 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);

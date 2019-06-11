@@ -1,8 +1,8 @@
 //actors.pwn
 //Chwilowa opcja ³adowania actorów - w przysz³oœci przeniesiona zostanie na modu³
 new valActor; 
-//new actorUID[valActor];
 #define ACTORS_ON_WORLD 100
+new actorUID[ACTORS_ON_WORLD];
 enum eActors
 {
 	a_Skin,
@@ -37,7 +37,7 @@ stock LoadActors()
 {
 	for(new i; i<valActor; i++)
 	{
-		CreateDynamicActor(Actors[i][a_Skin],
+		actorUID[i] = CreateDynamicActor(Actors[i][a_Skin],
 		Actors[i][a_posX],
 		Actors[i][a_posY], 
 		Actors[i][a_posZ], 
@@ -49,7 +49,9 @@ stock LoadActors()
 		Actors[i][a_Player]);
 		if(strlen(Actors[i][a_Name]) > 3)
 		{
-			CreateDynamic3DTextLabel(Actors[i][a_Name], COLOR_WHITE, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]+0.3, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, Actors[i][a_VW], Actors[i][a_INT], Actors[i][a_Player]);
+			new textnamed[64];
+			format(textnamed, sizeof(textnamed), "%s\n[ID: %d]", Actors[i][a_Name], i); 
+			CreateDynamic3DTextLabel(textnamed, COLOR_WHITE, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]+0.55, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, Actors[i][a_VW], Actors[i][a_INT], Actors[i][a_Player]);
 		}
 	}
 	//VINYL CLUB

@@ -217,7 +217,7 @@ sendErrorMessage(id, string:msg[]) {
 	return SendClientMessage(id, COLOR_LIGHTRED, _str);
 }
 //2.5.2
-
+/*
 GetMajatek(playerid)
 {
 	new vehvalues;
@@ -232,7 +232,7 @@ GetMajatek(playerid)
 	return kaska[playerid]+PlayerInfo[playerid][pAccount]+vehvalues+Dom[PlayerInfo[playerid][pDom]][hCena];
 }
 
-
+*/
 
 //WRZUCANIE DO DEMORGAN
 JailDeMorgan(playerid)
@@ -1497,7 +1497,7 @@ GetPlayer2DZone(playerid, zone[], len)
 	}
 	return 0;
 }
-
+/*
 IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2)
 {
     x2 -= x;
@@ -1505,7 +1505,7 @@ IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Float:y2
     z2 -= z;
     return ((x2 * x2) + (y2 * y2) + (z2 * z2)) < (range * range);
 }
-
+*/
 //->Powiêkszenie czatu --->>>Skubany
 str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', maxlenght = sizeof (output))
 {
@@ -1689,10 +1689,6 @@ ZmniejszDodatki(playerid, coGraczUsunal)
 	}
 	return 0;
 }*/
-GetNumber(playerid)
-{
-	return PlayerInfo[playerid][pPnumber];
-}
 
 FindPlayerByNumber(number)
 {
@@ -2507,7 +2503,7 @@ IsAKO(playerid)
 	}
 	return 0;
 }
-
+/*
 MozePobic(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2529,7 +2525,7 @@ MozePobic(playerid)
 	}
 	return 0;
 }
-
+*/
 MozeMowicNaFamily(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2541,31 +2537,6 @@ MozeMowicNaFamily(playerid)
 	}
 	return 0;
 }
-
-IsATajniak(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    new ranga = PlayerInfo[playerid][pRank];
-	    new tajniak = PlayerInfo[playerid][pTajniak];
-	    if(member == 2 && ranga >= 7)
-		{
-		    return 1;
-		}
-		if(leader == 2)
-		{
-		    return 1;
-		}
-		if(tajniak >= 1 && tajniak <= 4)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
 IsAFBI(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -4051,14 +4022,6 @@ IsATrain(carid)
     }
 	return 0;
 }
-
-IsAAdministrator(playerid)
-{
-	if(PlayerInfo[playerid][pAdmin] > 0)
-		return 1;
-	return 0;
-}
-
 WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", local, gametext[]="")
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
