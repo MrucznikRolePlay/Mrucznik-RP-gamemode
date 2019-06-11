@@ -135,6 +135,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "obiekty\pickupy.pwn"
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
+#include "obiekty\actorsOnWorld.pwn"
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
@@ -235,6 +236,7 @@ public OnGameModeInit()
 	KaryTXDLoad(); 
 	//LoadActors(); 	
 	//-------<[ actors ]>-------
+	PushActors(); 
 	LoadActors();
     PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
 	SetActorVirtualWorld(PaniJanina, 43);
