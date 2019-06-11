@@ -2082,7 +2082,8 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//disable problematic codes for trusted players
 			return 1;
 		}
-		if(code == 4 && (GetPVarInt(playerid, "CodeACDisable") == 1))
+		if(code == 4 && (GetPVarInt(playerid, "CodeACDisable") == 1) 
+		|| code == 50 && (GetPVarInt(playerid, "CodeACDisable") == 1))
 		{
 			//disable if player call to cmd "wjedz" 
 			return 1;

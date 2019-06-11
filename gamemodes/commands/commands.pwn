@@ -660,6 +660,8 @@
 #include "cmd/panelvinyl.pwn"
 #include "cmd/specshow.pwn"
 #include "cmd/asystem.pwn"
+#include "cmd/setserverpass.pwn"
+#include "cmd/tognewbie.pwn"
 
 InitCommands()
 {
@@ -668,6 +670,8 @@ InitCommands()
 
 static Aliases()
 {
+	Command_AddAltNamed("tognewbie", "togn"); 
+	Command_AddAltNamed("setserverpass", "ssp"); 
 	//bus
 	Command_AddAltNamed("bus", "businfo");
 

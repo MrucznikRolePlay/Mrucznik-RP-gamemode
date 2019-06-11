@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ tognewbie ]-----------------------------------------------//
+//------------------------------------------------[ restart ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,17 +28,41 @@
 	
 */
 
-YCMD:tognewbie(playerid, params[], help)
+YCMD:setservpass(playerid, params[], help)
 {
-	if(GetPVarInt(playerid, "TOG_newbie") == 0)
+	if(IsPlayerConnected(playerid))
 	{
-		SetPVarInt(playerid, "TOG_newbie", 1); 
-		MSGBOX_Show(playerid, "Chat_Newbie_~r~OFF", MSGBOX_ICON_TYPE_WARNING);
-	}
-	else
-	{
-		SetPVarInt(playerid, "TOG_newbie", 0); 
-		MSGBOX_Show(playerid, "Chat_Newbie_~g~ON", MSGBOX_ICON_TYPE_WARNING);
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
+		{
+			new string[128], passServ[64]; 
+			if( sscanf(params, "s[64]", passServ))
+			{
+				sendTipMessage(playerid, "U¿yj /ssp [nowe haslo]");
+				return 1;
+			}
+			if(strlen(passServ) < 4)
+			{
+				sendErrorMessage(playerid, "Zbyt krótkie has³o"); 
+				return 1;
+			}
+			format(string, sizeof(string), "%s zarz¹dzi³ zamkniêcie serwera! Has³o zosta³o w³¹czone", GetNick(playerid));
+			foreach(new i : Player)
+			{
+				sendErrorMessage(i, string);
+				sendErrorMessage(i, "Wracamy za krótk¹ chwilê!"); 
+				if(!IsAScripter(i) && PlayerInfo[i][pAdmin] == 0)
+				{
+					Kick(i); 
+				}
+			}
+			format(string, sizeof(string), "password %s", passServ);
+			SendRconCommand(string);
+		}
+		else
+		{
+			sendErrorMessage(playerid, "BRAK UPRAWNIEÑ!");
+			return 1;
+		}
 	}
 	return 1;
 }
