@@ -193,7 +193,7 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 				strmid(text2, text, pos + 1, strlen(text));
 				strdel(text, pos, strlen(text));
 
-				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", GetNick(playerid), text);
+				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", GetNick(playerid), playerid, text);
 				ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 				format(string, sizeof(string), "{C0C0C0}>>(([..] %s ))", text2);

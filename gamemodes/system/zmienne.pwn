@@ -15,6 +15,8 @@ new Float:czitX;
 new Float:czitY;
 new Float:czitZ;
 
+new timerAC[MAX_PLAYERS];
+new timeAC[MAX_PLAYERS]; 
 //doors
 new noAccessCome[MAX_PLAYERS]; 
 

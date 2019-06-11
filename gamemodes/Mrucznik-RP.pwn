@@ -2089,7 +2089,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		}
 		if(GetPVarInt(playerid, "AntyCheatOff") == code)
 		{
-			SetAntyCheatForPlayer(playerid, 0);
+			timerAC[playerid] = SetTimerEx("AntyCheatON", 2500, true, "i", playerid);
 			return 1; 
 		}
 		

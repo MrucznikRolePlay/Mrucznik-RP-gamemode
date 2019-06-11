@@ -18,7 +18,17 @@ public CheckCode2003(killerid, playerid)
     	SendCommandLogMessage(string);
 	}
 }
-
+forward AntyCheatON(playerid);
+public AntyCheatON(playerid)
+{
+	timeAC[playerid]++; 
+	if(timeAC[playerid] >= 3)
+	{
+		SetAntyCheatForPlayer(playerid, 0);
+		timeAC[playerid] = 0; 
+		KillTimer(timerAC[playerid]); 
+	}
+}
 forward SpecToggle(playerid);
 public SpecToggle(playerid)
 {
