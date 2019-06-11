@@ -580,7 +580,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddds[32]",
+        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
