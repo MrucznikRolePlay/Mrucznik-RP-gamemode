@@ -34,6 +34,11 @@ YCMD:adminduty(playerid, params[], help)
 	{	
 		if(GetPlayerAdminDutyStatus(playerid) == 0)
 		{
+			if(OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1)
+			{
+				sendErrorMessage(playerid, "Nie w³¹czyæ s³u¿by gdy jesteœ na s³u¿bie IC!"); 
+				return 1;
+			}
 		/*	if(strlen(PlayerInfo[playerid][pAdminName]) >= 3)
 			{
 				foreach(new i : Player)
