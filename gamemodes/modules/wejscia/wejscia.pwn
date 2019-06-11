@@ -187,6 +187,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 && GetPlayerFraction(playerid) != FRAC_SN)
 		{
 			sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
+			noAccessCome[playerid] = 1; 
 			return 1;
 		}
 	}
@@ -195,6 +196,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 && GetPlayerFraction(playerid) != FRAC_SN)
 		{
 			sendErrorMessage(playerid, "Brak dostêpu do strefy V.I.P"); 
+			noAccessCome[playerid] = 1; 
 			return 1;
 		}
 	}
@@ -203,6 +205,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		if(GetPlayerFraction(playerid) != FRAC_SN)
 		{
 			sendTipMessage(playerid, "Ups! Wygl¹da na to, ¿e drzwi s¹ zamkniête"); 
+			noAccessCome[playerid] = 1; 
 			return 1;
 		}
 		else
@@ -223,6 +226,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		if(!DoorInfo[FRAC_LCN][d_State])
 		{
 			sendErrorMessage(playerid, "Te drzwi s¹ zamkniête"); 
+			noAccessCome[playerid] = 1; 
 			return 1;
 		}
 	}
@@ -294,6 +298,11 @@ SprawdzWejscia(playerid)
 		if(Sprawdz_w_cord(playerid, i) == OUT_INTERIOR)
 		{
 			Sprawdz_UID_Wchodzenie(playerid, wejscia[i][w_UID]);
+			if(noAccessCome[playerid] == 1)
+			{
+				noAccessCome[playerid] = 0;
+				return 1;
+			}
 			SetPlayerPosEx(playerid,  wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]);
 			SetPlayerInterior(playerid, wejscia[i][w_int2]);
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
@@ -305,6 +314,11 @@ SprawdzWejscia(playerid)
 		if(Sprawdz_w_cord(playerid, i) == IN_INTERIOR)
 		{
 			Sprawdz_UID_Wychodzenie(playerid, wejscia[i][w_UID]);
+			if(noAccessCome[playerid] == 1)
+			{
+				noAccessCome[playerid] = 0;
+				return 1;
+			}
 			SetPlayerPosEx(playerid,  wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]);
 			SetPlayerInterior(playerid, wejscia[i][w_int1]);
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
@@ -414,6 +428,7 @@ SprawdzWjazdy(playerid)
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
 						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+						SetPVarInt(playerid, "CodeACDisable", 1);
 						SetInteriorTimeAndWeather(playerid);
 					}
 					else
@@ -437,6 +452,7 @@ SprawdzWjazdy(playerid)
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
 						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+						SetPVarInt(playerid, "CodeACDisable", 1);//wylaczenie ac
 						SetInteriorTimeAndWeather(playerid);
 					}
 					else
@@ -461,6 +477,7 @@ SprawdzWjazdy(playerid)
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
 						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+						SetPVarInt(playerid, "CodeACDisable", 1);//wylaczenie ac
 						SetInteriorTimeAndWeather(playerid);
 					}
 					else
@@ -483,6 +500,7 @@ SprawdzWjazdy(playerid)
 					WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 					PlayerTextDrawShow(playerid, textwjedz[playerid]);
 					SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+					SetPVarInt(playerid, "CodeACDisable", 1);//wylaczenie ac
 					SetInteriorTimeAndWeather(playerid);
 				}
 				else
@@ -497,6 +515,7 @@ SprawdzWjazdy(playerid)
 				{
 					WjedzTimer[i2] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", i2);
 					SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
+					SetPVarInt(i2, "CodeACDisable", 1);//wylaczenie ac
 					SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
 					TogglePlayerControllable(i2, 0);
 					SetInteriorTimeAndWeather(i2);
@@ -585,6 +604,7 @@ public WjedzTimerDebug(playerid)
 					KillTimer(WjedzTimer[playerid]);
 					TogglePlayerControllable(playerid, 1);
 					SetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer", 0);
+					SetPVarInt(playerid, "CodeACDisable", 0);
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
@@ -598,6 +618,7 @@ public WjedzTimerDebug(playerid)
 					KillTimer(WjedzTimer[playerid]);
 					TogglePlayerControllable(playerid, 1);
 					SetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer", 0);
+					SetPVarInt(playerid, "CodeACDisable", 0);
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
@@ -608,6 +629,7 @@ public WjedzTimerDebug(playerid)
 		timeSecWjedz[playerid] = 0;
 		SetPVarInt(playerid, "JestPodczasWjezdzania", 0);
 		KillTimer(WjedzTimer[playerid]);
+		SetPVarInt(playerid, "CodeACDisable", 0);
 	}
 	return 1;
 }

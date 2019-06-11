@@ -44,7 +44,7 @@ YCMD:makeleader(playerid, params[], help)
 		}
 
 		if(level > 17 || level < 0) { sendTipMessageEx(playerid, COLOR_GREY, "Numer lidera od 1 do 17!"); return 1; }
-		if(Uprawnienia(playerid, ACCESS_MAKELEADER) || IsAScripter(playerid))
+		if(!Uprawnienia(playerid, ACCESS_MAKELEADER) || !IsAScripter(playerid))
 		{
 			noAccessMessage(playerid); 
 			return 1;
