@@ -548,7 +548,7 @@ SprawdzWjazdy(playerid)
 					SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
 					TogglePlayerControllable(i2, 0); 
 					SetServerWeatherAndTime(i2); 
-					SetAntyCheatForPlayer(i2, 4); 
+					SetAntyCheatForPlayer(i2, 4);
 				}
 			}
 			return 1;
@@ -574,19 +574,21 @@ public WjedzTimerDebug(playerid)
 					TogglePlayerControllable(playerid, 1);
 					SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 					TogglePlayerControllable(playerid, 0);
+					sendTipMessage(playerid, "Ustalanie VW - Ustalono"); 
 					return 1;
 				}
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);	
 			}
-			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
+			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
 			{
 				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
 				{
 					TogglePlayerControllable(playerid, 0);
 					SetPlayerVirtualWorld(playerid, 0);
 					TogglePlayerControllable(playerid, 1);
+					sendTipMessage(playerid, "Ustalanie VW - Ustawiono"); 
 					return 1;
 				}
 				RemovePlayerFromVehicle(playerid);
