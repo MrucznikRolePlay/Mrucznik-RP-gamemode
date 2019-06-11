@@ -41,6 +41,9 @@ command_lkiz()
     //permissions
     Group_SetGlobalCommand(command, true);
     
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------

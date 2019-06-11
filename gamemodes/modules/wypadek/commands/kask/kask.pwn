@@ -41,6 +41,9 @@ command_kask()
     //permissions
     Group_SetGlobalCommand(command, true);
     
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------

@@ -31,6 +31,7 @@
 #include "actors\actors.def"
 #include "admin\admin.def"
 #include "adminduty\adminduty.def"
+#include "animacje\animacje.def"
 #include "biznesy\biznesy.def"
 #include "bramy\bramy.def"
 #include "budki\budki.def"
@@ -53,6 +54,7 @@
 #include "actors\actors.hwn"
 #include "admin\admin.hwn"
 #include "adminduty\adminduty.hwn"
+#include "animacje\animacje.hwn"
 #include "biznesy\biznesy.hwn"
 #include "bramy\bramy.hwn"
 #include "budki\budki.hwn"
@@ -75,6 +77,7 @@
 #include "actors\actors.pwn"
 #include "admin\admin.pwn"
 #include "adminduty\adminduty.pwn"
+#include "animacje\animacje.pwn"
 #include "biznesy\biznesy.pwn"
 #include "bramy\bramy.pwn"
 #include "budki\budki.pwn"
@@ -125,6 +128,7 @@
 
 //-------<[ commands ]>-------
 #include "admin\commands\admin_commands.pwn"
+#include "animacje\commands\animacje_commands.pwn"
 #include "biznesy\commands\biznesy_commands.pwn"
 #include "bramy\commands\bramy_commands.pwn"
 #include "chaty\commands\chaty_commands.pwn"

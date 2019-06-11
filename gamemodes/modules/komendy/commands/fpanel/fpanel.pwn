@@ -40,6 +40,9 @@ command_fpanel()
 
     //permissions
     
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------

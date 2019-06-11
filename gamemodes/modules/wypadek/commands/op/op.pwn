@@ -43,6 +43,9 @@ command_op()
     //permissions
     Group_SetGlobalCommand(command, true);
     
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------

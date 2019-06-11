@@ -41,6 +41,9 @@ command_usunopis()
     //permissions
     Group_SetCommand(Group_GetID("admini"), command, true);
     
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------
