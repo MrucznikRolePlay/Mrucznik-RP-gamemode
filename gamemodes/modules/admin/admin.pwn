@@ -522,9 +522,9 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	poscig[playerid] = 0;
 	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNick(adminid), timeVal, (result)); 
 	Log(kickLog, INFO, string);
-	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
-		iloscAJ[playerid] = iloscAJ[playerid]+1;
+		iloscAJ[adminid]++; 
 	}
 	//adminowe logi
 	format(string, sizeof(string), "Admini/%s.ini", GetNick(adminid));
@@ -533,16 +533,16 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	Wchodzenie(playerid);		
 	return 1;
 }
-GiveKickForPlayer(playerid, adminid, result[])
+GiveKickForPlayer(playerid, adminid, result[])//zjebane
 {
 	new string[256];
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 	format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", GetNick(adminid), GetNick(playerid), (result));
 	Log(kickLog, INFO, string);
 	//adminduty
-	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
-		iloscKick[playerid] = iloscKick[playerid]+1;
+		iloscKick[adminid]++;
 	}
 
 	format(string, sizeof(string), "Admini/%s.ini", GetNick(adminid));
