@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ wyjedz ]------------------------------------------------//
+//-------------------------------------------------[ stan ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,26 +28,21 @@
 	
 */
 
-YCMD:wyjedz(playerid, params[], help)
+YCMD:stan(playerid, params[], help)
 {
-	if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
-	{
-		sendTipMessage(playerid, "Jesteœ podczas wje¿d¿ania!"); 
-		return 1;
-	}
-	if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
-	{
-		sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile"); 
-		return 1;
-	}	
-	SetAntyCheatForPlayer(playerid, 4); 
-	if(SprawdzWjazdy(playerid))
-	{
-	
-	}
-	else
-	{
-		sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
+	new string[128];
+    if(IsPlayerConnected(playerid))
+    {
+        if(gPlayerLogged[playerid] == 1)
+        {
+	        if(PlayerInfo[playerid][pLocal] != 103 && !GraczBankomat(playerid))
+	        {
+          		sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie!");
+	            return 1;
+	        }
+			format(string, sizeof(string), "Na swoim koncie bankowym masz aktualnie $%d.", PlayerInfo[playerid][pBank]);
+			sendTipMessageEx(playerid, COLOR_GREEN, string); 
+		}
 	}
 	return 1;
 }

@@ -530,6 +530,7 @@ SprawdzWjazdy(playerid)
 				TogglePlayerControllable(playerid, 0);
 				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 				PlayerTextDrawShow(playerid, textwjedz[playerid]);
+				SetAntyCheatForPlayer(playerid, 4);
 				SetPVarInt(playerid, "JestPodczasWjezdzania", 1); 
 				SetServerWeatherAndTime(playerid); 
 			}
@@ -547,6 +548,7 @@ SprawdzWjazdy(playerid)
 					SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
 					TogglePlayerControllable(i2, 0); 
 					SetServerWeatherAndTime(i2); 
+					SetAntyCheatForPlayer(i2, 4); 
 				}
 			}
 			return 1;
@@ -574,7 +576,7 @@ public WjedzTimerDebug(playerid)
 				}
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
-				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);		
+				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);	
 			}
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
 			{
@@ -605,9 +607,11 @@ public WjedzTimerDebug(playerid)
 					TogglePlayerControllable(playerid, 1);
 					SetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer", 0);
 					SetPVarInt(playerid, "CodeACDisable", 0);
+					SetAntyCheatForPlayer(playerid, 0);
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+				SetAntyCheatForPlayer(playerid, 0);
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
 			{
@@ -619,6 +623,7 @@ public WjedzTimerDebug(playerid)
 					TogglePlayerControllable(playerid, 1);
 					SetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer", 0);
 					SetPVarInt(playerid, "CodeACDisable", 0);
+					SetAntyCheatForPlayer(playerid, 0);
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
@@ -630,6 +635,7 @@ public WjedzTimerDebug(playerid)
 		SetPVarInt(playerid, "JestPodczasWjezdzania", 0);
 		KillTimer(WjedzTimer[playerid]);
 		SetPVarInt(playerid, "CodeACDisable", 0);
+		SetAntyCheatForPlayer(playerid, 0);
 	}
 	return 1;
 }
