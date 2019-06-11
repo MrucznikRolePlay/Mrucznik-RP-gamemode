@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    kask                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 11.06.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "hq_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_hq()
+//------------------<[ Implementacja: ]>-------------------
+command_kask_Impl(playerid)
 {
-    new command = Command_GetID("hq");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
-{
-    if (help)
+    if( !(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == 2 || GetPlayerState(playerid) == 3))
     {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Tej komendy mo¿esz u¿yæ tylko bêd¹c w pojeŸdzie");
         return 1;
     }
     
-    
-    //command body
-    return command_hq_Impl(playerid);
+    if(IsABike(GetPlayerVehicleID(playerid)))
+    {
+        new nick[MAX_PLAYER_NAME];
+        new string[256];
+        GetPlayerName(playerid, nick, sizeof(nick));
+        if(kask[playerid] == 1)
+        {
+            format(string, sizeof(string), "* %s œci¹ga kask z g³owy.", nick);
+            ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+            RemovePlayerAttachedObject(playerid, 3);
+            kask[playerid] = 0;
+        }
+        else if(kask[playerid] != 1)
+        {
+            format(string, sizeof(string), "* %s zak³ada kask na g³owê.", nick);
+            ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+            SetPlayerAttachedObject(playerid,3 , 18645, 2, 0.07, 0.017, 0, 88, 75, 0);
+            kask[playerid] = 1;
+        }
+    }
+    else
+    {
+        SendClientMessage(playerid, COLOR_LIGHTBLUE,"Nie mo¿esz za³o¿yæ kasku!");
+    }
+    return 1;
 }
+
+
+//end

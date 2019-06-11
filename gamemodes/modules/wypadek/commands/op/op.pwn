@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//                                                     op                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,18 +28,20 @@
 
 
 //-------<[ include ]>-------
-#include "hq_impl.pwn"
+#include "op_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_hq()
+command_op()
 {
-    new command = Command_GetID("hq");
+    new command = Command_GetID("op");
 
     //aliases
+    Command_AddAlt(command, "odepnijpasy");
+    Command_AddAlt(command, "odepnijpas");
     
 
     //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
@@ -47,15 +49,15 @@ command_hq()
 }
 
 //-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
+YCMD:op(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
+        sendTipMessage(playerid, "Odpinanie pasów.");
         return 1;
     }
     
     
     //command body
-    return command_hq_Impl(playerid);
+    return command_op_Impl(playerid);
 }

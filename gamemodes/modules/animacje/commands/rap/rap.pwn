@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//                                                    rap                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,34 +28,34 @@
 
 
 //-------<[ include ]>-------
-#include "hq_impl.pwn"
+#include "rap_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_hq()
+command_rap()
 {
-    new command = Command_GetID("hq");
+    new command = Command_GetID("rap");
 
     //aliases
     
 
     //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
-    
+    Command_SetPrefix(command, '@');
 }
 
 //-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
+YCMD:rap(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
+        sendTipMessage(playerid, "Wyœwietla animacjê rapowania.");
         return 1;
     }
     
     
     //command body
-    return command_hq_Impl(playerid);
+    return command_rap_Impl(playerid);
 }

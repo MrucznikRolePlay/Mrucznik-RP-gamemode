@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    rap                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,17 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 11.06.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "hq_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_hq()
+//------------------<[ Implementacja: ]>-------------------
+command_rap_Impl(playerid)
 {
-    new command = Command_GetID("hq");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
-    
-
-    //prefix
-    
+    ApplyAnimation(playerid, "RAPPING", "RAP_A_Loop", 4.0999, 1, 0, 0, 0, 0, 0);
+    return 1;
 }
 
-//-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_hq_Impl(playerid);
-}
+//end

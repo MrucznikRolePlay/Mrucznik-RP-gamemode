@@ -1,0 +1,11 @@
+{
+    "name": "kask",
+    "description": "Za³o¿enie kasku na g³owê.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "11.06.2019"
+}

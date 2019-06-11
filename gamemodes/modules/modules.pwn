@@ -31,6 +31,7 @@
 #include "actors\actors.def"
 #include "admin\admin.def"
 #include "adminduty\adminduty.def"
+#include "animacje\animacje.def"
 #include "biznesy\biznesy.def"
 #include "bramy\bramy.def"
 #include "budki\budki.def"
@@ -46,12 +47,14 @@
 #include "premium\premium.def"
 #include "sila\sila.def"
 #include "wejscia\wejscia.def"
+#include "wypadek\wypadek.def"
 
 
 //-------<[ .hwn ]>-------
 #include "actors\actors.hwn"
 #include "admin\admin.hwn"
 #include "adminduty\adminduty.hwn"
+#include "animacje\animacje.hwn"
 #include "biznesy\biznesy.hwn"
 #include "bramy\bramy.hwn"
 #include "budki\budki.hwn"
@@ -67,12 +70,14 @@
 #include "premium\premium.hwn"
 #include "sila\sila.hwn"
 #include "wejscia\wejscia.hwn"
+#include "wypadek\wypadek.hwn"
 
 
 //-------<[ .pwn ]>-------
 #include "actors\actors.pwn"
 #include "admin\admin.pwn"
 #include "adminduty\adminduty.pwn"
+#include "animacje\animacje.pwn"
 #include "biznesy\biznesy.pwn"
 #include "bramy\bramy.pwn"
 #include "budki\budki.pwn"
@@ -88,6 +93,7 @@
 #include "premium\premium.pwn"
 #include "sila\sila.pwn"
 #include "wejscia\wejscia.pwn"
+#include "wypadek\wypadek.pwn"
 
 
 //-------<[ timers ]>-------
@@ -96,6 +102,7 @@
 #include "pojazdy\pojazdy_timers.pwn"
 #include "prace\prace_timers.pwn"
 #include "premium\premium_timers.pwn"
+#include "wypadek\wypadek_timers.pwn"
 
 
 //-------<[ mysql ]>-------
@@ -116,10 +123,12 @@
 #include "pojazdy\pojazdy_callbacks.pwn"
 #include "prace\prace_callbacks.pwn"
 #include "premium\premium_callbacks.pwn"
+#include "wypadek\wypadek_callbacks.pwn"
 
 
 //-------<[ commands ]>-------
 #include "admin\commands\admin_commands.pwn"
+#include "animacje\commands\animacje_commands.pwn"
 #include "biznesy\commands\biznesy_commands.pwn"
 #include "bramy\commands\bramy_commands.pwn"
 #include "chaty\commands\chaty_commands.pwn"
@@ -132,3 +141,4 @@
 #include "prace\commands\prace_commands.pwn"
 #include "premium\commands\premium_commands.pwn"
 #include "sila\commands\sila_commands.pwn"
+#include "wypadek\commands\wypadek_commands.pwn"

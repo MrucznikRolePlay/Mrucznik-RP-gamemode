@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//                                                     zp                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,18 +28,20 @@
 
 
 //-------<[ include ]>-------
-#include "hq_impl.pwn"
+#include "zp_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_hq()
+command_zp()
 {
-    new command = Command_GetID("hq");
+    new command = Command_GetID("zp");
 
     //aliases
+    Command_AddAlt(command, "zapnijpasy");
+    Command_AddAlt(command, "zapnijpas");
     
 
     //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
@@ -47,15 +49,15 @@ command_hq()
 }
 
 //-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
+YCMD:zp(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
+        sendTipMessage(playerid, "Zapinanie pasów, aby nie odnieœæ powa¿nych ran podczas wypadku.");
         return 1;
     }
     
     
     //command body
-    return command_hq_Impl(playerid);
+    return command_zp_Impl(playerid);
 }

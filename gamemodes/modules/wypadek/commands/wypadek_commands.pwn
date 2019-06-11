@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,35 +27,19 @@
 // ================= UWAGA! =================
 
 
+#include <YSI\y_hooks>
+
 //-------<[ include ]>-------
-#include "hq_impl.pwn"
+#include "kask\kask.pwn"
+#include "op\op.pwn"
+#include "zp\zp.pwn"
+
 
 //-------<[ initialize ]>-------
-command_hq()
+hook OnGameModeInit()
 {
-    new command = Command_GetID("hq");
-
-    //aliases
+    command_kask();
+    command_op();
+    command_zp();
     
-
-    //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_hq_Impl(playerid);
 }

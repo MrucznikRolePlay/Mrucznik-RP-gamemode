@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                     op                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 11.06.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "hq_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_hq()
+//------------------<[ Implementacja: ]>-------------------
+command_op_Impl(playerid)
 {
-    new command = Command_GetID("hq");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
-{
-    if (help)
+    if( !(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == 2 || GetPlayerState(playerid) == 3))
     {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Tej komendy mo¿esz u¿yæ tylko bêd¹c w pojeŸdzie");
         return 1;
     }
-    
-    
-    //command body
-    return command_hq_Impl(playerid);
+
+    if(!IsABike(GetPlayerVehicleID(playerid)))
+    {
+        new nick[MAX_PLAYER_NAME];
+        new string[256];
+        GetPlayerName(playerid, nick, sizeof(nick));
+        format(string, sizeof(string), "* %s odpina pasy", nick);
+        ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+        pasy[playerid] = 0;
+    }
+    else
+    {
+        SendClientMessage(playerid, COLOR_LIGHTBLUE,"Nie mo¿esz odpi¹æ pasów!");
+    }
+    return 1;
 }
+
+
+//end

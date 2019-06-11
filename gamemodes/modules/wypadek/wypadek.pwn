@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  wypadek                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,34 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 11.06.2019
+//Opis:
+/*
+	System wypadków. Dawny filterscript scanhp.
+*/
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "hq_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_hq()
+//-----------------<[ Funkcje: ]>-------------------
+StarScanhpTimer(playerid)
 {
-    new command = Command_GetID("hq");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
-    
-
-    //prefix
-    
+	if(!IsScanhpTimerActive(playerid))
+	{
+		scantimer[playerid] = SetTimerEx("scanhp",1000,true,"i",playerid);
+	}
 }
 
-//-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
+IsScanhpTimerActive(playerid)
 {
-    if (help)
-    {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_hq_Impl(playerid);
+	return scantimer[playerid] != -1;
 }
+
+KillScanhpTimer(playerid)
+{
+	KillTimer(scantimer[playerid]);
+	scantimer[playerid] = -1;
+}
+
+
+//end

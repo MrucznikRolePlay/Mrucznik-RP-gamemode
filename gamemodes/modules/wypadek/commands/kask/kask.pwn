@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     hq                                                    //
+//                                                    kask                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,18 +28,18 @@
 
 
 //-------<[ include ]>-------
-#include "hq_impl.pwn"
+#include "kask_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_hq()
+command_kask()
 {
-    new command = Command_GetID("hq");
+    new command = Command_GetID("kask");
 
     //aliases
     
 
     //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
@@ -47,15 +47,15 @@ command_hq()
 }
 
 //-------<[ command ]>-------
-YCMD:hq(playerid, params[], help)
+YCMD:kask(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.");
+        sendTipMessage(playerid, "Za³o¿enie kasku na g³owê.");
         return 1;
     }
     
     
     //command body
-    return command_hq_Impl(playerid);
+    return command_kask_Impl(playerid);
 }
