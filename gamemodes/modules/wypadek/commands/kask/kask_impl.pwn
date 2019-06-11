@@ -27,7 +27,7 @@ command_kask_Impl(playerid)
 {
     if( !(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == 2 || GetPlayerState(playerid) == 3))
     {
-        SendClientMessage(playerid,COLOR, "Tej komendy mo¿esz u¿yæ tylko bêd¹c w pojeŸdzie");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Tej komendy mo¿esz u¿yæ tylko bêd¹c w pojeŸdzie");
         return 1;
     }
     
@@ -53,7 +53,7 @@ command_kask_Impl(playerid)
     }
     else
     {
-        SendClientMessage(playerid,COLOR,"Nie mo¿esz za³o¿yæ kasku!");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE,"Nie mo¿esz za³o¿yæ kasku!");
     }
     return 1;
 }

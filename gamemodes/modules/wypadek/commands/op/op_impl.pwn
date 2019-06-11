@@ -27,7 +27,7 @@ command_op_Impl(playerid)
 {
     if( !(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == 2 || GetPlayerState(playerid) == 3))
     {
-        SendClientMessage(playerid,COLOR, "Tej komendy mo¿esz u¿yæ tylko bêd¹c w pojeŸdzie");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Tej komendy mo¿esz u¿yæ tylko bêd¹c w pojeŸdzie");
         return 1;
     }
 
@@ -42,7 +42,7 @@ command_op_Impl(playerid)
     }
     else
     {
-        SendClientMessage(playerid,COLOR,"Nie mo¿esz odpi¹æ pasów!");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE,"Nie mo¿esz odpi¹æ pasów!");
     }
     return 1;
 }
