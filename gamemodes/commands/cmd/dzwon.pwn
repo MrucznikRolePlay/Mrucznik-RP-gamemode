@@ -73,7 +73,7 @@ YCMD:dzwon(playerid, params[], help)
 		sendErrorMessage(playerid, "Dzwonisz ju¿ do kogoœ.");
 		return 1;
 	}
-	if(GetPVarInt(reciverid, "dutyadmin") == 1)
+	if(GetPlayerAdminDutyStatus(reciverid) == 1)
 	{
 		sendErrorMessage(playerid, "Osoba do której próbujesz zadzwoniæ jest nieosi¹galna!"); 
 		return 1;

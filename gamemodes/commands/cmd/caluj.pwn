@@ -44,6 +44,16 @@ YCMD:caluj(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie mo¿esz poca³owaæ samego siebie!"); 
 			return 1;
 		}
+		if(GetPlayerAdminDutyStatus(playa) == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz ca³owaæ administratora!"); 
+			return 1;
+		}
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz ca³owaæ siê bêd¹c na s³u¿bie @"); 
+			return 1;
+		}
 		if(dialAccess[playerid] == 1)
 		{
 			sendErrorMessage(playerid, "Musisz odczekaæ 15 sekund przed ponownym poca³unkiem!"); 
