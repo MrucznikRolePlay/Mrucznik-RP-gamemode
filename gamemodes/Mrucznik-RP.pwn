@@ -2085,6 +2085,11 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//disable if player call to cmd "wjedz" 
 			return 1;
 		}
+		if(GetPVarInt(playerid, "AntyCheatOff") == code)
+		{
+			SetAntyCheatForPlayer(playerid, 0);
+			return 1; 
+		}
 		
 		if(GetPVarInt(playerid, "CheatDetected") == 1)
 		{

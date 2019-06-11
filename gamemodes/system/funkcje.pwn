@@ -1541,155 +1541,20 @@ str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', maxlen
 		}
 	}
 }
-
+SetAntyCheatForPlayer(playerid, valueCode)
+{
+	SetPVarInt(playerid, "AntyCheatOff", valueCode);
+	return 1;
+}
 GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
 	if(rp) {
-		return nickRP[playerid];
+		//return nickRP[playerid];
 	}
 	return nick;
 }
-GetObjectName(objectid)
-{
-	new name[128];
-	if(objectid == 18974)
-	{
-		format(name, sizeof(name), "Zorro Mask");
-	}
-	if(objectid == 18961)
-	{
-		format(name, sizeof(name), "Bobby Hat"); 
-	}
-	if(objectid == 18962)
-	{
-		format(name, sizeof(name), "Kapelusz"); 
-	}
-	if(objectid == 19528)
-	{
-		format(name, sizeof(name), "Czapka Wiedümy"); 
-	}
-	if(objectid == 19559)
-	{
-		format(name, sizeof(name), "Plecak turystyczny"); 
-	}
-	return name;
-}
-GetObjectBone(playerid, objectid)
-{
-	if(objectid == 18961)
-	{
-		boneIDzmienna[playerid] = 2;
-	}
-	if(objectid == 18974)
-	{
-		boneIDzmienna[playerid] = 2;
-	}
-	if(objectid == 18962) 
-	{
-		boneIDzmienna[playerid] = 2;
-	}
-	if(objectid == 19528)
-	{
-		boneIDzmienna[playerid] = 2;
-	}
-	if(objectid == 19559)
-	{
-		boneIDzmienna[playerid] = 1;
-	}
-	return boneIDzmienna[playerid];
-}
-/*
-ZmniejszDodatki(playerid, coGraczUsunal)
-{
-	if(coGraczUsunal == 9)
-	{
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 8)
-	{
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 7)
-	{
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	
-	}
-	if(coGraczUsunal == 6)
-	{
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 5)
-	{
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 4)
-	{
-		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 3)
-	{
-		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	
-	}
-	if(coGraczUsunal == 2)
-	{
-		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
-		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	
-	}
-	if(coGraczUsunal == 1)
-	{
-		PlayerAdds[playerid][pSlot1] = PlayerAdds[playerid][pSlot2];
-		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
-		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	return 0;
-}*/
-
 FindPlayerByNumber(number)
 {
 	foreach(new i : Player)
@@ -7459,7 +7324,7 @@ OOCNewbie(const string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(!gNewbie[i])
+		    if(!gNewbie[i] && GetPVarInt(i, "TOG_newbie") == 0)
 		    {
 				SendClientMessage(i, 0x8D8DFF00, string);
 			}
