@@ -35,6 +35,7 @@ new iloscInne[MAX_PLAYERS]; //Inne kary/akcje administracyjne ------------------
 new AdminDutyMinuty[MAX_PLAYERS];//Czas s³u¿by - Minuty
 new AdminDutyGodziny[MAX_PLAYERS];//Czas s³u¿by - Godziny
 new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer
+new firstDutyAdmin[MAX_PLAYERS]; //Sprawdza czy gracz by³ podczas adminduty, je¿eli by³ to wykonuje zapis w logi
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------
 

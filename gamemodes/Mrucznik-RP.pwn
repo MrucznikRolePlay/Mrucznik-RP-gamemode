@@ -1357,11 +1357,11 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		StopACall(playerid);
 	}
-	if(GetPlayerAdminDutyStatus(playerid) == 1)
+//	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pAdmin] > 0
+	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pNewAP] > 0)//Je¿eli admin by³ na duty, wykonuje zapis w logi 
 	{
 		new stringlog[325];//String do logu
-		
-		
 		new y1,mi1,d1;//Data
 		//LOG
 		if(!IsPlayerPaused(playerid))
@@ -1383,11 +1383,7 @@ public OnPlayerDisconnect(playerid, reason)
 			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
 			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d AFK", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
 			Log(admindutyMaszLog, INFO, stringlog);
-		
-		
-		
 		}
-		
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;
@@ -1396,12 +1392,12 @@ public OnPlayerDisconnect(playerid, reason)
 		iloscAJ[playerid] = 0;
 		iloscInWiadomosci[playerid] = 0;
 		iloscOutWiadomosci[playerid] = 0;
-		iloscZapytaj[playerid] = 0;
-		
+		iloscZapytaj[playerid] = 0;	
 		//Kill timer 
 		KillTimer(AdminDutyTimer[playerid]);
 		AdminDutyGodziny[playerid] = 0;
 		AdminDutyMinuty[playerid] = 0;
+		firstDutyAdmin[playerid] = 0; 
 		
 	}
 

@@ -93,10 +93,7 @@ GetPlayerAdminDutyStatus(playerid)
 }
 AdminDutyPlayer(playerid, status)
 {
-	new string[128];
-	new stringlog[325];//String do logu
-	new y1,mi1,d1;//Data
-	
+	new string[128];	
 	if(status == 1)//Je¿eli ma wejœæ
 	{
 		AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
@@ -105,45 +102,20 @@ AdminDutyPlayer(playerid, status)
 		MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
 		SetPVarInt(playerid, "dutyadmin", 1);
 		SetPlayerColor(playerid, 0xFF0000FF);
-	
+		firstDutyAdmin[playerid] = 1; 
 	}
 	else//Je¿eli ma zejœæ
 	{	
 		SetPVarInt(playerid, "dutyadmin", 0); 
 		SetPlayerColor(playerid,TEAM_HIT_COLOR);
-		
 		//Komunikaty
 		format(string, sizeof(string), "@DUTY: Wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid], (iloscInne[playerid]+iloscAJ[playerid])); 
 		sendErrorMessage(playerid, string); 
 		MSGBOX_Show(playerid, "Admin Duty ~r~OFF", MSGBOX_ICON_TYPE_OK);
-		sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 
-		
-		//LOG
-		getdate(y1, mi1, d1); 
-		format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - gra dalej", d1, mi1, y1, GetNick(playerid), AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],(iloscInne[playerid]+iloscAJ[playerid])); //GENERATE LOG
-		Log(admindutyLog, INFO, stringlog); //Create LOG
-		
-		//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-		format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d /AdminDuty(2x)", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
-		Log(admindutyMaszLog, INFO, stringlog);
-		
-		//Zerowanie zmiennych - po zejœciu z duty admina :) 
-		iloscKick[playerid] = 0;
-		iloscWarn[playerid] = 0;
-		iloscBan[playerid] = 0;
-		iloscInne[playerid] = 0;
-		iloscAJ[playerid] = 0;
-		iloscInWiadomosci[playerid] = 0;
-		iloscOutWiadomosci[playerid] = 0;
-		iloscZapytaj[playerid] = 0;
-		
+		sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 	
 		//Timer's kill
 		KillTimer(AdminDutyTimer[playerid]);
-		AdminDutyGodziny[playerid] = 0;
-		AdminDutyMinuty[playerid] = 0;
-	
 	}
-
 	return 1;
 }
 
