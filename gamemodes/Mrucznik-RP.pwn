@@ -238,11 +238,6 @@ public OnGameModeInit()
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
-    PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
-	SetActorVirtualWorld(PaniJanina, 43);
-	new KasjerkaBasia = CreateActor(129, 815.6807,-1382.8877,23.6475,88.8177);
-	SetActorVirtualWorld(KasjerkaBasia, 255);
-
 	//-------<[ Kubi BW ]>-------
     if(dini_Exists("Settings.ini"))
     {
