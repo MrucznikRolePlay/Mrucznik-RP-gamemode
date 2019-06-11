@@ -30,7 +30,7 @@ Otwiera linie 100-150 dla San News.
 
 YCMD:otworzlinie(playerid, params[], help)
 {
-    if(IsPlayerInFraction(playerid, FRAC_SN, 1000))
+    if(PlayerInfo[playerid][pMember] == FRAC_SN || PlayerInfo[playerid][pLider] == FRAC_SN)
     {
         new lLine;
         if(sscanf(params, "d", lLine)) return sendTipMessage(playerid, "Podaj numer lini, któr¹ chcesz otworzyæ np. 100 lub 150");

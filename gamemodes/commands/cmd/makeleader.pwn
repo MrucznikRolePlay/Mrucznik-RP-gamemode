@@ -109,7 +109,7 @@ YCMD:makeleader(playerid, params[], help)
 		}
 		else
 		{
-			noAccesMessage(playerid); 
+			noAccessMessage(playerid); 
 		}
 	}
 	return 1;
