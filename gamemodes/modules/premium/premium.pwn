@@ -272,12 +272,10 @@ KupPojazdPremium(playerid, id)
 		sendErrorMessage(playerid, "Nie staæ Ciê na ten pojazd");
 		return DialogPojazdyPremium(playerid);
 	}
-
 	new string[128];
 	MRP_ShopPurchaseCar(playerid, PojazdyPremium[id][Model], PojazdyPremium[id][Cena]);
 	format(string, sizeof(string), "%s kupil pojazd premium %s za %d MC", GetNick(playerid), VehicleNames[PojazdyPremium[id][Model]-400], PojazdyPremium[id][Cena]);
 	Log(premiumLog, INFO, string);
-
 	premium_printMcQuantity(playerid);
 	DialogMenuDotacje(playerid);
 	return 1;
