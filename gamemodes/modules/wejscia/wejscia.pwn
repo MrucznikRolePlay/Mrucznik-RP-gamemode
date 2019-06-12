@@ -618,6 +618,7 @@ public WjedzTimerDebug(playerid)
 					SetPVarInt(playerid, "CodeACDisable", 0);
 					SetAntyCheatForPlayer(playerid, 0);
 					sendTipMessage(playerid, "Wykonano wjedü dla pasaøera"); 
+					timeSecWjedz[playerid]=0; 
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
@@ -635,6 +636,7 @@ public WjedzTimerDebug(playerid)
 					SetPVarInt(playerid, "CodeACDisable", 0);
 					SetAntyCheatForPlayer(playerid, 0);
 					sendTipMessage(playerid, "Wykonano wyjedü dla pasaøera!"); 
+					timeSecWjedz[playerid] = 0; 
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
