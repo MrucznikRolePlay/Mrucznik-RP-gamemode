@@ -538,7 +538,7 @@ SprawdzWjazdy(playerid)
 				{
 					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
 					{
-						KillTimer([WjedzTimer[i2]]; )
+						KillTimer([WjedzTimer[i2]]);
 						WjedzTimer[i2] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", i2);
 						SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
 						SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
