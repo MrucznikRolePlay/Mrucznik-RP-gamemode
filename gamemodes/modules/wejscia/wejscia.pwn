@@ -533,23 +533,26 @@ SprawdzWjazdy(playerid)
 				SetAntyCheatForPlayer(playerid, 4);
 				SetPVarInt(playerid, "JestPodczasWjezdzania", 1); 
 				SetServerWeatherAndTime(playerid); 
+				
+				foreach(new i2 : Player)
+				{
+					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
+					{
+						KillTimer([WjedzTimer[i2]]; )
+						WjedzTimer[i2] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", i2);
+						SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
+						SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
+						TogglePlayerControllable(i2, 0); 
+						SetServerWeatherAndTime(i2); 
+						SetAntyCheatForPlayer(i2, 4);
+						sendTipMessage(playerid, "Zmienianie pogody - pomyœlnie wykonano!");
+					}
+				}
 			}
 			else
 			{
 				sendTipMessage(playerid, "U¿yj /wejdz"); 
 				return 1;
-			}
-			foreach(new i2 : Player)
-			{
-				if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
-				{
-					WjedzTimer[i2] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", i2);
-					SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
-					SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
-					TogglePlayerControllable(i2, 0); 
-					SetServerWeatherAndTime(i2); 
-					SetAntyCheatForPlayer(i2, 4);
-				}
 			}
 			return 1;
 		}
