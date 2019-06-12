@@ -16818,7 +16818,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else//Jeœli kliknie "TAK"
 		{
-			new string[128];
+			new string[256];
 			new sendername[MAX_PLAYER_NAME];
 			new giveplayer[MAX_PLAYER_NAME];
 			new giveplayerid = GetPVarInt(playerid, PVAR_PRZELEW_ID);
