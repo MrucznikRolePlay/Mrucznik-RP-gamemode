@@ -287,7 +287,7 @@ KickPlayerTXD(playerid, adminid, reason[])
 AJPlayerTXD(playerid, adminid, reason[], timeVal)
 {
 	new str[256];
-    format(str, sizeof(str), "~r~AdminJail~w~~n~Dla: %s~n~Od: %s~n~~w~Na: %d min~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, Odpolszcz(reason));
+    format(str, sizeof(str), "~r~AdminJail [%d minut]~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", timeVal, GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -303,7 +303,7 @@ AJPlayerTXD(playerid, adminid, reason[], timeVal)
 BPPlayerTXD(playerid, adminid, timeVal, reason[])
 {
 	new str[256];
-    format(str, sizeof(str), "~r~Blokada Pisania~w~~n~Dla: %s~n~Od: %s~n~Na: %d godzin~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), timeVal, Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Blokada Pisania [%d godzin]~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s",timeVal, GetNick(playerid), GetNick(adminid),Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
@@ -478,7 +478,7 @@ PAJPlayerTXD(player[], adminid, timeVal, reason[])
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
 	new str[128];
-    format(str, sizeof(str), "~r~AJ Offline~w~~n~Dla: %s~n~Od: %s~n~Na %d~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), timeVal, Odpolszcz(reason));
+    format(str, sizeof(str), "~r~AJ Offline [%d minut]~w~~n~Dla: %s~n~Od: %s~n~~y~Powod: ~w~%s", timeVal, nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
     TextDrawSetString(Kary, str);
     TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
