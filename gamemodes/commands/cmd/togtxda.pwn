@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:togtxda(playerid, params[], help)
+
 {
 	if(togADMTXD[playerid] == 0)
 	{
