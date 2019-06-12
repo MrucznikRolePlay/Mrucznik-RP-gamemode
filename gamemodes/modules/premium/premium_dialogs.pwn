@@ -326,7 +326,9 @@ DialogPojazdyPremium(playerid)
 			format(string, sizeof(string), "%s%s - "INCOLOR_GREEN"%d Mrucznik Coins\n", string, VehicleNames[PojazdyPremium[i][Model]-400], PojazdyPremium[i][Cena]);
 	}
 	string[strlen(string)-1] = '\0';
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(POJAZDY), DIALOG_STYLE_LIST, "Premium - Us³ugi - Pojazdy\nUwaga - klikniecie powoduje zakup", string,"Kup", "Wróæ");
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(POJAZDY), DIALOG_STYLE_LIST, "Premium - Us³ugi - Pojazdy", string,"Kup", "Wróæ");
+	sendTipMessageEx(playerid, COLOR_RED, "Uwaga klikniêcie w pojazd powoduje jego natychmiastowy zakup!"); 
+	sendTipMessageEx(playerid, COLOR_RED, "Je¿eli nie jesteœ zdecydowany nie naciskaj w nazwê pojazdu."); 
 	return 1;
 }
 
