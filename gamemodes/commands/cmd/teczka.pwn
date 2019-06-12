@@ -30,7 +30,7 @@
 
 YCMD:teczka(playerid, params[], help)
 {
-	new string[64];
+	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
