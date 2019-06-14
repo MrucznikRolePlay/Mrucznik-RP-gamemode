@@ -1114,7 +1114,7 @@ public OnPlayerConnect(playerid)
 		#endif
 		return 1;
     }*/
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
