@@ -83,6 +83,7 @@ new Text:PatrolDeltaSq;
 new Text:PatrolLabel;
 new Text:PatrolMarker[MAX_PATROLS];
 new Text:SkinSelectionAccept,Text:SkinSelectionDenied, Text:SkinSelectionMy;
+
 new PlayerText:Kary[MAX_PLAYERS];
 
 
@@ -91,18 +92,9 @@ new Text:OilTXD_BG[2];
 new PlayerText:OilPTXD_Arrow[5][MAX_PLAYERS];
 //01.10
 new Text:TXD_Info;
-KaryTXDLoad(playerid)
+/*KaryTXDLoad(playerid)
 {
-	/* Kary[playerid]  = TextDrawCreate(7.481735, 215.249847, "_");
-	TextDrawLetterSize(Kary[playerid], 0.300876, 2.004995);
-	TextDrawAlignment(Kary[playerid], 1);
-	TextDrawColor(Kary[playerid], -1);
-	TextDrawSetShadow(Kary[playerid], 1);
-	TextDrawSetOutline(Kary[playerid], 1);
-	TextDrawBackgroundColor(Kary[playerid], 83);
-	TextDrawFont(Kary[playerid], 1);
-	TextDrawSetProportional(Kary[playerid], 1);
-	TextDrawSetShadow(Kary[playerid], 0);*/ 
+
     
     //Odbugowane textdrawy: 
     Kary[playerid] = CreatePlayerTextDraw(playerid, -10.481735, 10.249847, "_"); 
@@ -114,7 +106,7 @@ KaryTXDLoad(playerid)
     PlayerTextDrawFont(playerid, Kary[playerid], 1); 
     PlayerTextDrawSetProportional(playerid, Kary[playerid], 1); 
     PlayerTextDrawSetShadow(playerid, Kary[playerid], 0);  
-}
+}*/ 
 LoadTXD()
 {
     //Debug dla peirwszego TXD
@@ -327,7 +319,20 @@ LoadTextDraws(playerid)
 	//PlayerTextDrawBoxColor(playerid, textwjedz[playerid], 0xFFFFFFFF);
 	//PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
 	
-    
+    //TEXTDRAWY OD KAR
+    Kary[playerid] = CreatePlayerTextDraw(playerid, 9.000000, 231.000000, "_");
+    PlayerTextDrawFont(playerid, Kary[playerid], 2);
+    PlayerTextDrawLetterSize(playerid, Kary[playerid], 0.433333, 1.700000);
+    PlayerTextDrawTextSize(playerid, Kary[playerid], 162.500000, 14.500000);
+    PlayerTextDrawSetOutline(playerid, Kary[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, Kary[playerid], 0);
+    PlayerTextDrawAlignment(playerid, Kary[playerid], 1);
+    PlayerTextDrawColor(playerid, Kary[playerid], -1);
+    PlayerTextDrawBackgroundColor(playerid, Kary[playerid], 255);
+    PlayerTextDrawBoxColor(playerid, Kary[playerid], 50);
+    PlayerTextDrawUseBox(playerid, Kary[playerid], 0);
+    PlayerTextDrawSetProportional(playerid, Kary[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, Kary[playerid], 0);
 	return 1;
 }
 
