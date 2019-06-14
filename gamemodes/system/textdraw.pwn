@@ -244,12 +244,12 @@ UnloadTXD()
 }
 KaryTXDLoadForPlayer(playerid)
 {
-    Kary[playerid] = CreatePlayerTextDraw(playerid, 9.000000, 231.000000, "_");
+    Kary[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 257.000000, "_");
     PlayerTextDrawFont(playerid, Kary[playerid], 2);
     PlayerTextDrawLetterSize(playerid, Kary[playerid], 0.433333, 1.700000);
-    PlayerTextDrawTextSize(playerid, Kary[playerid], 162.500000, 14.500000);
-    PlayerTextDrawSetOutline(playerid, Kary[playerid], 1);
-    PlayerTextDrawSetShadow(playerid, Kary[playerid], 0);
+    PlayerTextDrawTextSize(playerid, Kary[playerid], 328.500000, -135.500000);
+    PlayerTextDrawSetOutline(playerid, Kary[playerid], 0);
+    PlayerTextDrawSetShadow(playerid, Kary[playerid], 2);
     PlayerTextDrawAlignment(playerid, Kary[playerid], 1);
     PlayerTextDrawColor(playerid, Kary[playerid], -1);
     PlayerTextDrawBackgroundColor(playerid, Kary[playerid], 255);
