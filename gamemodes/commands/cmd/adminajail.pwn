@@ -85,7 +85,7 @@ YCMD:adminajail(playerid, params[], help)
 			
 					
 					//CZYNNOŒCI - GDY NADA£ Dm2
-					SetPVarInt(playerid, "DostalDM2", 1);
+					SetPVarInt(playa, "DostalDM2", 1);
 					sendTipMessage(playa, "Marcepan Marks mówi: Otrzyma³eœ AJ'ota z powodem DM2, za karê zabiorê twoj¹ broñ!"); 
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;

@@ -92,21 +92,6 @@ new Text:OilTXD_BG[2];
 new PlayerText:OilPTXD_Arrow[5][MAX_PLAYERS];
 //01.10
 new Text:TXD_Info;
-/*KaryTXDLoad(playerid)
-{
-
-    
-    //Odbugowane textdrawy: 
-    Kary[playerid] = CreatePlayerTextDraw(playerid, -10.481735, 10.249847, "_"); 
-    PlayerTextDrawLetterSize(playerid, Kary[playerid], 0.300876, 2.004995);
-    PlayerTextDrawAlignment(playerid, Kary[playerid], 1); 
-    PlayerTextDrawColor(playerid, Kary[playerid], -1); 
-    PlayerTextDrawSetOutline(playerid, Kary[playerid], 1);
-    PlayerTextDrawBackgroundColor(playerid, Kary[playerid], 83); 
-    PlayerTextDrawFont(playerid, Kary[playerid], 1); 
-    PlayerTextDrawSetProportional(playerid, Kary[playerid], 1); 
-    PlayerTextDrawSetShadow(playerid, Kary[playerid], 0);  
-}*/ 
 LoadTXD()
 {
     //Debug dla peirwszego TXD
