@@ -1120,6 +1120,7 @@ public OnPlayerConnect(playerid)
 		KickEx(playerid);
 		#if DEBUG == 1
 		printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
+		#endif
 		return 1;
 	}
 	//Nick bez wulgaryzmów
