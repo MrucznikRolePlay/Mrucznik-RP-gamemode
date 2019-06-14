@@ -36,7 +36,7 @@
 	
 	Komendy:
 		> Admins - lista administratorów na s³u¿bie
-		> karytxd - kary w txd
+		> Kary[i] txd - Kary[i]  w txd
 		> check - sprawdza statystyki gracza (showstats) 
 		> nonewbie - odpala/gasi chat newbie
 		> dn & up - teleportuje gracza w górê/dó³
@@ -272,14 +272,14 @@ KickPlayerTXD(playerid, adminid, reason[])
     //PlayerLogged[playerid]=0;
     new str[128];
     format(str, sizeof(str), "~r~Kick~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
     return 1;
@@ -288,14 +288,14 @@ AJPlayerTXD(playerid, adminid, reason[], timeVal)
 {
 	new str[256];
     format(str, sizeof(str), "~r~AdminJail [%d minut]~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", timeVal, GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 	return 1;
@@ -304,14 +304,14 @@ BPPlayerTXD(playerid, adminid, timeVal, reason[])
 {
 	new str[256];
     format(str, sizeof(str), "~r~Blokada Pisania [%d godzin]~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s",timeVal, GetNick(playerid), GetNick(adminid),Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 	return 1;
@@ -320,14 +320,14 @@ BanPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
     format(str, sizeof(str), "~r~Ban~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 
@@ -337,14 +337,14 @@ WarnPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
     format(str, sizeof(str), "~r~Warn~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 	return 1;
@@ -353,14 +353,14 @@ BlockPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
     format(str, sizeof(str), "~r~Block~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 	return 1;
@@ -371,14 +371,14 @@ PWarnPlayerTXD(player[], adminid, result[])
 	new nickDoWarna[MAX_PLAYER_NAME]; 
 	strcat(nickDoWarna, player); 
     format(str, sizeof(str), "~r~Warn Offline~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", nickDoWarna, GetNick(adminid), Odpolszcz(result));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 	return 1;
@@ -443,14 +443,14 @@ PBlockPlayerTXD(player[], adminid, reason[])
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
     format(str, sizeof(str), "~r~Block Offline~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 	return 1;
@@ -461,14 +461,14 @@ PBanPlayerTXD(player[], adminid, reason[])
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
     format(str, sizeof(str), "~r~Ban Offline~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 	return 1;
@@ -479,14 +479,14 @@ PAJPlayerTXD(player[], adminid, timeVal, reason[])
 	strcat(nickOdbieracza, player); 
 	new str[128];
     format(str, sizeof(str), "~r~AJ Offline [%d minut]~w~~n~Gracz: %s~n~Admin: %s~n~~y~Powod: ~w~%s", timeVal, nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
-    TextDrawSetString(Kary, str);
-    TextDrawShowForAll(Kary);
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
+		PlayerTextDrawSetString(i, Kary[i] , str);
+		PlayerTextDrawShow(i, Kary[i] ); 
 		if(togADMTXD[i] == 1)
 		{
-			TextDrawHideForPlayer(i, Kary); 
+			PlayerTextDrawHide(i, Kary[i] ); 
 		}
 	}
 	return 1;
@@ -623,7 +623,11 @@ GivePBlockForPlayer(player[], adminid, result[])
 forward StopDraw();
 public StopDraw()
 {
-	TextDrawHideForAll(Kary); 
+	foreach(new i : Player)
+	{
+		PlayerTextDrawHide(i, Kary[i] ); 
+	//TextDrawHideForAll(Kary[i] ); 
+	}
 	KillTimer(karaTimer);
 	return 1;
 }
