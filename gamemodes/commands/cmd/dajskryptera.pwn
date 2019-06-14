@@ -53,7 +53,7 @@ YCMD:dajskryptera(playerid, params[], help)
             Log(ckLog, INFO, string);
             format(string, sizeof(string), "Zosta³eœ mianowany na skryptera przez %s", sendername);
             SendClientMessage(para1, COLOR_LIGHTBLUE, string);
-            format(string, sizeof(string), "Da³eœ %s skryptera.", giveplayer);
+            format(string, sizeof(string), "Da³eœ %s skryptera - to ustawienie mo¿e byæ ryzykowne!", giveplayer);
             SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         }
     }

@@ -34,7 +34,7 @@ YCMD:deletedom(playerid, params[], help)
 
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 )
+	    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 		    new kategoria;
 			if( sscanf(params, "d", kategoria))

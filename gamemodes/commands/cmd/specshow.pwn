@@ -32,13 +32,13 @@ YCMD:specshow(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 100 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] >= 250 || IsAScripter(playerid))
 		{
 			new giveplayerid; 
 			if(sscanf(params, "d", giveplayerid))
 			{
 				sendTipMessage(playerid, "U¿yj /specshow [warunek]");
-				sendTipMessage(playerid, "-1 = wszyscy");
+				sendTipMessage(playerid, "777 = wszyscy");
 				sendTipMessage(playerid, "[ID] = dla podanego ID");
 				sendTipMessage(playerid, "666 = Wy³¹cz podgl¹d spec");
 				return 1;

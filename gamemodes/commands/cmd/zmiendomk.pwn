@@ -44,7 +44,7 @@ YCMD:zmiendomk(playerid, params[], help)
         }
 
 
-        if (PlayerInfo[playerid][pAdmin] >= 5000)
+        if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
         {
             if(IsPlayerConnected(para1))
             {

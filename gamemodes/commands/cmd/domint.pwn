@@ -30,7 +30,7 @@
 
 YCMD:domint(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000)
+    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 	{
 		new dld, interior;
 		if( sscanf(params, "dd", dld, interior))
