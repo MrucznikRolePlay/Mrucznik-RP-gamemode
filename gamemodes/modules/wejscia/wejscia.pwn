@@ -122,6 +122,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			{
 				SendClientMessage(playerid, COLOR_RED, "Zosta³eœ wyrzucony z Urzêdu przez agentów USSS, spróbuj póŸniej.");
 				SendClientMessage(playerid, COLOR_WHITE, "[Czas wyrzucenia: 10 minut]");
+				noAccessCome[playerid] = 1; 
 				return 1;
 			}
 		}
@@ -137,6 +138,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			SendClientMessage(playerid,COLOR_WHITE,"                          Od 15:00 do 16:00");
 			SendClientMessage(playerid,COLOR_WHITE,"");
 			SendClientMessage(playerid,COLOR_RED,"|____________>>> Urz¹d Miasta Los Santos <<<____________|");
+			noAccessCome[playerid] =1; 
 			return 1;
 		}	
 	}
@@ -150,6 +152,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		if(doorFBIStatus == 0 || GetPlayerFraction(playerid) != FRAC_FBI)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
+			noAccessCome[playerid] =1; 
 			return 1;
 		}
 		else
@@ -275,6 +278,7 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 			else
 			{
 				sendErrorMessage(playerid, "Zosta³eœ wyrzucony z urzêdu!, nie próbuj wchodziæ tylnim wejœciem");
+				noAccessCome[playerid] =1;
 				return 1;
 			}
 		}

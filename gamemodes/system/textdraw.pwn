@@ -242,7 +242,22 @@ UnloadTXD()
     TextDrawDestroy(TXD_Info);
     //Speedo_Unload();
 }
-
+KaryTXDLoadForPlayer(playerid)
+{
+    Kary[playerid] = CreatePlayerTextDraw(playerid, 9.000000, 231.000000, "_");
+    PlayerTextDrawFont(playerid, Kary[playerid], 2);
+    PlayerTextDrawLetterSize(playerid, Kary[playerid], 0.433333, 1.700000);
+    PlayerTextDrawTextSize(playerid, Kary[playerid], 162.500000, 14.500000);
+    PlayerTextDrawSetOutline(playerid, Kary[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, Kary[playerid], 0);
+    PlayerTextDrawAlignment(playerid, Kary[playerid], 1);
+    PlayerTextDrawColor(playerid, Kary[playerid], -1);
+    PlayerTextDrawBackgroundColor(playerid, Kary[playerid], 255);
+    PlayerTextDrawBoxColor(playerid, Kary[playerid], 50);
+    PlayerTextDrawUseBox(playerid, Kary[playerid], 0);
+    PlayerTextDrawSetProportional(playerid, Kary[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, Kary[playerid], 0);
+}
 LoadTextDraws(playerid)
 {
     TAXI_DIST[playerid] = CreatePlayerTextDraw(playerid, 320.000000, 77.000000, "0KM");
@@ -298,26 +313,10 @@ LoadTextDraws(playerid)
 	
 	textwjedz[playerid] = CreatePlayerTextDraw(playerid, 230.0, 250.0, "~r~Trwa przejazd"); 
 	PlayerTextDrawFont(playerid, textwjedz[playerid], 1);
-	//PlayerTextDrawSetShadow
 	PlayerTextDrawColor(playerid, TextOferta1[playerid], 0x80FF00FF);
-	//PlayerTextDrawUseBox(playerid, textwjedz[playerid], 1);
-	//PlayerTextDrawBoxColor(playerid, textwjedz[playerid], 0xFFFFFFFF);
-	//PlayerTextDrawTextSize(playerid, TextOferta1[playerid], 608.000000, 221.000000);
+    KaryTXDLoadForPlayer(playerid); 
 	
     //TEXTDRAWY OD KAR
-    Kary[playerid] = CreatePlayerTextDraw(playerid, 9.000000, 231.000000, "_");
-    PlayerTextDrawFont(playerid, Kary[playerid], 2);
-    PlayerTextDrawLetterSize(playerid, Kary[playerid], 0.433333, 1.700000);
-    PlayerTextDrawTextSize(playerid, Kary[playerid], 162.500000, 14.500000);
-    PlayerTextDrawSetOutline(playerid, Kary[playerid], 1);
-    PlayerTextDrawSetShadow(playerid, Kary[playerid], 0);
-    PlayerTextDrawAlignment(playerid, Kary[playerid], 1);
-    PlayerTextDrawColor(playerid, Kary[playerid], -1);
-    PlayerTextDrawBackgroundColor(playerid, Kary[playerid], 255);
-    PlayerTextDrawBoxColor(playerid, Kary[playerid], 50);
-    PlayerTextDrawUseBox(playerid, Kary[playerid], 0);
-    PlayerTextDrawSetProportional(playerid, Kary[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid, Kary[playerid], 0);
 	return 1;
 }
 
