@@ -86,6 +86,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "VERSION.pwn"
 #define DEBUG 0 //1- DEBUG ON | 0- DEBUG OFF
 
+#if !defined gpci
+native gpci (playerid, serial [], len);
+#endif
 
 //-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
