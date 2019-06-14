@@ -5958,11 +5958,25 @@ OnPlayerLogin(playerid, password[])
 
 		//Nadawanie pieniêdzy:
 		ResetujKase(playerid);
+		if(PlayerInfo[playerid][pCash] < 0)
+		{
+			PlayerInfo[playerid][pCash] = 0; 
+			if(PlayerInfo[playerid][pWL] < 9)
+			{
+				PlayerInfo[playerid][pWL]++; 
+				sendTipMessage(playerid, "Twoje d³ugi zaprowadzi³y Ciê po kolejne listy goñcze!"); 
+			}
+			if(PlayerInfo[playerid][pWL] >= 9)
+			{
+				PlayerInfo[playerid][pWL] = 10; 
+				sendTipMessage(playerid, "Masz ju¿ 10 listów goñczych! Czêœæ z nich jest spowodowana d³ugami! Zrób coœ z tym!"); 
+			}
+			DajKase(playerid, 0);
+		}
 		if(PlayerInfo[playerid][pCash] > 0)
-			DajKase(playerid, PlayerInfo[playerid][pCash]);
-		else
-			ZabierzKase(playerid, PlayerInfo[playerid][pCash]);
-
+		{
+			DajKase(playerid, PlayerInfo[playerid][pCash]); 
+		}
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
 
