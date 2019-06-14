@@ -597,7 +597,7 @@ GivePBanForPlayer(player[], adminid, result[])
 	new string[256];
 	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zbanowane przez %s, Powod: %s ", nickDoBlocka, GetNick(adminid), (result));
 	Log(banLog, INFO, string);
-	SendMessageToAdmin(string, COLO_RED); 
+	SendMessageToAdmin(string, COLOR_RED); 
 	MruMySQL_BanujOffline(nickDoBlocka, result, adminid);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;

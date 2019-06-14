@@ -27,7 +27,7 @@ SSCANF:fix(string[])
 	
 	return ret;
 }
-
+/*
 IsVehicleEmpty(vehicleid)
 {
   for(new i; i < MAX_PLAYERS; i++)
@@ -36,7 +36,7 @@ IsVehicleEmpty(vehicleid)
   }
   return 1;
 }
-
+*/
 GetTickDiff(newtick, oldtick)
 {
 	if (oldtick < 0 && newtick >= 0) {
@@ -349,13 +349,13 @@ public OznaczCzitera(playerid)
 		}
 	}
 }*/
-
+/*
 IsAValidURL(string[])
 {
 	if(regex_exmatch(string, regexURL) >= 0 )
 		return 1;
 	return 0;
-}
+}*/
 GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
@@ -1471,14 +1471,14 @@ public AutodbzesRH(playerid)
 	PlayerInfo[playerid][pRockHotelPuAc]=0;
 	return 0;
 }
-
+/*
 IsPlayerInCube(playerid, Float:xmin, Float:ymin, Float:zmin, Float:xmax, Float:ymax, Float:zmax)
 {
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
 	if(x > xmin && y > ymin && z > zmin && x < xmax && y < ymax && z < zmax)return 1;
 	return 0;
-}
+}*/ 
 
 GetPlayer2DZone(playerid, zone[], len)
 {
@@ -4357,7 +4357,7 @@ Lotto(number)
 	}
 	return 1;
 }
-
+/*========[STARA NIE U¯YWANA FUNKCJA]========
 SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
 {
 	foreach(new i : Player)
@@ -4382,7 +4382,6 @@ SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
 	}
 	return 1;
 }
-
 LockCar(carid)
 {
 	foreach(new i : Player)
@@ -4398,7 +4397,7 @@ UnLockCar(carid)
 		SetVehicleParamsForPlayer(carid,i,0,0);
 	}
 }
-
+*/
 SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {//example: SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Stealing A Police Vehicle");
 	if(IsPlayerConnected(playerid))
@@ -7956,7 +7955,7 @@ VehicleToPoint(Float:radi, vehicleid, Float:x, Float:y, Float:z)
 		}
 		return 0;
 }
-//stock DodajWjedz(playerid, Float:x, Float:y, Float:z, Float:xX, Float:xY, Float:xZ, Float:x2, Float:y2, Float:z2, Float:xX2, Float:xY2, Float:xZ2, VW, INT, VW2, INT2, const tekst[], const tekst2[], wyswietlajtekst = false, wyswietlajtekst2 = false)
+/* ========[STARA NIE U¯YWANA FUNKCJA]========
 IsVehicleInUse(vehicleid)
 {
 	new temp;
@@ -7981,7 +7980,7 @@ SetCamBack(playerid)
 		SetPlayerInterior(playerid,14);
 	}
 }
-
+*/
 FixHour(hour)
 {
 	hour = timeshift+hour+1;

@@ -33,8 +33,8 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-SprawdzZnaki(text[])
-{
+/*SprawdzZnaki(text[])
+{========[STARA NIE U¯YWANA FUNKCJA]========
 	new checkAdminNameValue;
 	if(strfind(text, "%") == -1 
 	&& strfind(text, "_") == -1 
@@ -85,7 +85,7 @@ SprawdzZnaki(text[])
 	}
 	return checkAdminNameValue; 
 }
-
+*/
 GetPlayerAdminDutyStatus(playerid)
 {
 	new valueAdminStatus = GetPVarInt(playerid, "dutyadmin");
