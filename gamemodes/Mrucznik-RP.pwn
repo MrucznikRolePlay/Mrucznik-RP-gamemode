@@ -1105,7 +1105,7 @@ public OnPlayerConnect(playerid)
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-   	if(!IsNickCorrect(nick))
+   	/*if(!IsNickCorrect(nick))
     {
         SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
@@ -1113,8 +1113,19 @@ public OnPlayerConnect(playerid)
 			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
 		#endif
 		return 1;
-    }
-	CheckLoginNick(playerid, nick);
+    }*/
+	IsNickCorrect(nick[])
+	{
+		if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+		{
+			SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
+			KickEx(playerid);
+			#if DEBUG == 1
+			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
+			return 1;
+		}
+		return 0;
+	}
 	//Nick bez wulgaryzmów
 	if(CheckVulgarityString(nick) == 1)
 	{

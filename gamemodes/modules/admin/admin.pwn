@@ -261,7 +261,7 @@ SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bi
 		if(GetPlayerAdminDutyStatus(i) == 1)
 		{
 			new stradm[256];
-			format(stradm, sizeof(stradm), "AdmCmd: %s", text);
+			format(stradm, sizeof(stradm), "%s", text);
 			SendClientMessage(i, mColor, stradm);
 		}
 	}
