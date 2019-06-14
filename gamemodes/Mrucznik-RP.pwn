@@ -5960,7 +5960,6 @@ OnPlayerLogin(playerid, password[])
 		ResetujKase(playerid);
 		if(PlayerInfo[playerid][pCash] < 0)
 		{
-			PlayerInfo[playerid][pCash] = 0; 
 			if(PlayerInfo[playerid][pWL] < 9)
 			{
 				PlayerInfo[playerid][pWL]++; 
@@ -5973,7 +5972,7 @@ OnPlayerLogin(playerid, password[])
 			}
 			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
 		}
-		if(PlayerInfo[playerid][pCash] > 0)
+		else if(PlayerInfo[playerid][pCash] >= 0)
 		{
 			DajKase(playerid, PlayerInfo[playerid][pCash]); 
 		}
