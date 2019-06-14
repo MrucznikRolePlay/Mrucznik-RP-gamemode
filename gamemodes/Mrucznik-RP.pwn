@@ -5964,12 +5964,12 @@ OnPlayerLogin(playerid, password[])
 			if(PlayerInfo[playerid][pWL] < 9)
 			{
 				PlayerInfo[playerid][pWL]++; 
-				sendTipMessage(playerid, "Twoje d³ugi zaprowadzi³y Ciê po kolejne listy goñcze!"); 
+				sendTipMessage(playerid, "Masz d³ugi pieniê¿ne wobec pañstwa, twój poziom poszukiwania roœnie."); 
 			}
 			if(PlayerInfo[playerid][pWL] >= 9)
 			{
 				PlayerInfo[playerid][pWL] = 10; 
-				sendTipMessage(playerid, "Masz ju¿ 10 listów goñczych! Czêœæ z nich jest spowodowana d³ugami! Zrób coœ z tym!"); 
+				sendTipMessage(playerid, "Masz ju¿ 10 poziom poszukiwania! Czêœæ jest spowodowana d³ugami! Zrób coœ z tym!"); 
 			}
 			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
 		}
