@@ -59,11 +59,13 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 
 //-------<[ Include ]>-------
 #include <a_http>
-#include <strlib>
+#include <strlib_fix>
 #include <callbacks>
 #include <utils>
+#define YSI_NO_MASTER
 #include <YSI_Data\y_iterate>
 #define MAX_COMMANDS 1200
+#define Y_COMMANDS_USE_CHARS
 #include <YSI\y_commands>
 #include <YSI\y_groups>
 #include <YSI\y_hooks>
@@ -84,6 +86,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "VERSION.pwn"
 #define DEBUG 0 //1- DEBUG ON | 0- DEBUG OFF
 
+#if !defined gpci
+native gpci (playerid, serial [], len);
+#endif
 
 //-----------------------------------------<[ Modu³y mapy ]>-------------------------------------------------//
 //-                                                                                                         -//
@@ -135,6 +140,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include "obiekty\pickupy.pwn"
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
+#include "obiekty\actorsOnWorld.pwn"
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
@@ -203,7 +209,7 @@ public OnGameModeInit()
 	EnableStuntBonusForAll(0); //brak hajsu za stunty
 	ManualVehicleEngineAndLights(); //brak automatycznego w³¹czania silnika i œwiate³
 	ShowNameTags(1); //Pokazywanie nicków graczy
-	SetNameTagDrawDistance(20.0); //Wyœwietlanie nicków od 20 metrów
+	SetNameTagDrawDistance(70.0); //Wyœwietlanie nicków od 70 metrów
 	//UsePlayerPedAnims(); // Animacja CJ 
 		// - off (broñ trzymana w obu rêkach jest trzymana jedn¹, skiny chodz¹ swoim chodem)
 		// - on  (broñ trzymana jest normalnie, wszystkie skiny chodz¹ jak CJ)
@@ -232,15 +238,10 @@ public OnGameModeInit()
     systempozarow_init();
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
-	KaryTXDLoad(); 
 	//LoadActors(); 	
 	//-------<[ actors ]>-------
+	PushActors(); 
 	LoadActors();
-    PaniJanina = CreateActor(88, 1197.0911,-1772.3119,13.7282, 0);//basen
-	SetActorVirtualWorld(PaniJanina, 43);
-	new KasjerkaBasia = CreateActor(129, 815.6807,-1382.8877,23.6475,88.8177);
-	SetActorVirtualWorld(KasjerkaBasia, 255);
-
 	//-------<[ Kubi BW ]>-------
     if(dini_Exists("Settings.ini"))
     {
@@ -1099,11 +1100,12 @@ public OnPlayerConnect(playerid)
 	
 	Command_SetPlayerDisabled(playerid, true);
 	
-
+	//Actors:
+	SetPVarInt(playerid, "pActorID", 666); 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-    if(!IsNickCorrect(nick))
+   	/*if(!IsNickCorrect(nick))
     {
         SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
@@ -1111,7 +1113,16 @@ public OnPlayerConnect(playerid)
 			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
 		#endif
 		return 1;
-    }
+    }*/
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
+	{
+		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
+		KickEx(playerid);
+		#if DEBUG == 1
+		printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
+		#endif
+		return 1;
+	}
 	//Nick bez wulgaryzmów
 	if(CheckVulgarityString(nick) == 1)
 	{
@@ -1123,8 +1134,6 @@ public OnPlayerConnect(playerid)
 		return 1;
 	}
 	SetRPName(playerid);
-	GetPlayerName(playerid, nickadminaIC, sizeof(nickadminaIC));
-	SetPVarString(playerid, "pAdminDutyNickOff", nickadminaIC);
 	timeSecWjedz[playerid] = 0;
 
 	//Pocz¹tkowe ustawienia:
@@ -1359,22 +1368,17 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		StopACall(playerid);
 	}
-	if(GetPlayerAdminDutyStatus(playerid) == 1)
+//	if(GetPlayerAdminDutyStatus(playerid) == 1)
+	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pAdmin] > 0
+	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pNewAP] > 0)//Je¿eli admin by³ na duty, wykonuje zapis w logi 
 	{
 		new stringlog[325];//String do logu
-		
-		
 		new y1,mi1,d1;//Data
-		
-		//String-Get
-		GetPVarString(playerid, "pAdminDutyNickOn", AdminName, sizeof(AdminName)); 
-		GetPVarString(playerid, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
-	
 		//LOG
 		if(!IsPlayerPaused(playerid))
 		{
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", d1, mi1, y1, GetNick(playerid), AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
 			Log(admindutyLog, INFO, stringlog); //Create LOG
 				
 			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
@@ -1384,17 +1388,13 @@ public OnPlayerDisconnect(playerid, reason)
 		else
 		{
 			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s [%s] zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez AFK", d1, mi1, y1, FirstNickname, AdminName, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
+			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez AFK", d1, mi1, y1, GetNick(playerid), AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
 			Log(admindutyLog, INFO, stringlog); //Create LOG
 				
 			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
 			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d AFK", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
 			Log(admindutyMaszLog, INFO, stringlog);
-		
-		
-		
 		}
-		
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;
@@ -1403,12 +1403,12 @@ public OnPlayerDisconnect(playerid, reason)
 		iloscAJ[playerid] = 0;
 		iloscInWiadomosci[playerid] = 0;
 		iloscOutWiadomosci[playerid] = 0;
-		iloscZapytaj[playerid] = 0;
-		
+		iloscZapytaj[playerid] = 0;	
 		//Kill timer 
 		KillTimer(AdminDutyTimer[playerid]);
 		AdminDutyGodziny[playerid] = 0;
 		AdminDutyMinuty[playerid] = 0;
+		firstDutyAdmin[playerid] = 0; 
 		
 	}
 
@@ -2089,6 +2089,16 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//disable problematic codes for trusted players
 			return 1;
 		}
+		if(GetPVarInt(playerid, "CodeACDisable") > 0) 
+		{
+			//disable if player call to cmd "wjedz" 
+			return 1;
+		}
+		if(GetPVarInt(playerid, "AntyCheatOff") > 0 )
+		{
+			timerAC[playerid] = SetTimerEx("AntyCheatON", 2500, true, "i", playerid);
+			return 1; 
+		}
 		
 		if(GetPVarInt(playerid, "CheatDetected") == 1)
 		{
@@ -2130,6 +2140,8 @@ public OnPlayerSpawn(playerid)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerSpawn - begin", GetNick(playerid), playerid);
 	#endif
+	SetPlayerTeam(playerid, NO_TEAM);
+
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)
 	{
@@ -2654,13 +2666,6 @@ SetPlayerSpawnWeapon(playerid)
 		PrzywrocBron(playerid);
 
     //HP:
-	if(PlayerInfo[playerid][pSHealth] > 100)
-	{
-		sendErrorMessage(playerid, "Twoje HP zosta³o zbugowane. Zg³oœ to do Komisji ds. Ulepszeñ!");
-		sendTipMessage(playerid, "Przywrócono domyœln¹ wartoœæ Health na 50.0"); 
-		PlayerInfo[playerid][pSHealth] = 50.0; 
-		return 1;
-	}
     if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
     {
         SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
@@ -5964,11 +5969,24 @@ OnPlayerLogin(playerid, password[])
 
 		//Nadawanie pieniêdzy:
 		ResetujKase(playerid);
-		if(PlayerInfo[playerid][pCash] > 0)
-			DajKase(playerid, PlayerInfo[playerid][pCash]);
-		else
-			ZabierzKase(playerid, PlayerInfo[playerid][pCash]);
-
+		if(PlayerInfo[playerid][pCash] < 0)
+		{
+			if(PlayerInfo[playerid][pWL] < 9)
+			{
+				PlayerInfo[playerid][pWL]++; 
+				sendTipMessage(playerid, "Masz d³ugi pieniê¿ne wobec pañstwa, twój poziom poszukiwania roœnie."); 
+			}
+			if(PlayerInfo[playerid][pWL] >= 9)
+			{
+				PlayerInfo[playerid][pWL] = 10; 
+				sendTipMessage(playerid, "Masz ju¿ 10 poziom poszukiwania! Czêœæ jest spowodowana d³ugami! Zrób coœ z tym!"); 
+			}
+			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
+		}
+		else if(PlayerInfo[playerid][pCash] >= 0)
+		{
+			DajKase(playerid, PlayerInfo[playerid][pCash]); 
+		}
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
 
@@ -6721,21 +6739,6 @@ public OnVehicleSpawn(vehicleid)
 
 public OnPlayerText(playerid, text[])
 {
-	/*#if DEBUG_MODE > 0
-	if(IsPlayerNPC(playerid))
-	{
-		if(text[0] == '#')
-		{
-			return 1;
-		}
-		printf("[Bot %s:] %s", GetNick(playerid), text);
-		return 0;
-	}
-	else if(text[0] == 'b' && text[1] == 'o' && text[2] == 't')
-	{
-		return 1;
-	}
-	#endif
     if(text[0] == '@') //animacja
     {
         if(strlen(text) > 31) return 0;
@@ -6743,8 +6746,7 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
-	Chat(playerid, ChatICAdditions(playerid, text));
-	*/
+	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];

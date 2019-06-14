@@ -27,7 +27,7 @@ SSCANF:fix(string[])
 	
 	return ret;
 }
-
+/*
 IsVehicleEmpty(vehicleid)
 {
   for(new i; i < MAX_PLAYERS; i++)
@@ -36,7 +36,7 @@ IsVehicleEmpty(vehicleid)
   }
   return 1;
 }
-
+*/
 GetTickDiff(newtick, oldtick)
 {
 	if (oldtick < 0 && newtick >= 0) {
@@ -217,7 +217,7 @@ sendErrorMessage(id, string:msg[]) {
 	return SendClientMessage(id, COLOR_LIGHTRED, _str);
 }
 //2.5.2
-
+/*
 GetMajatek(playerid)
 {
 	new vehvalues;
@@ -232,7 +232,7 @@ GetMajatek(playerid)
 	return kaska[playerid]+PlayerInfo[playerid][pAccount]+vehvalues+Dom[PlayerInfo[playerid][pDom]][hCena];
 }
 
-
+*/
 
 //WRZUCANIE DO DEMORGAN
 JailDeMorgan(playerid)
@@ -349,13 +349,13 @@ public OznaczCzitera(playerid)
 		}
 	}
 }*/
-
+/*
 IsAValidURL(string[])
 {
 	if(regex_exmatch(string, regexURL) >= 0 )
 		return 1;
 	return 0;
-}
+}*/
 GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
@@ -1471,14 +1471,14 @@ public AutodbzesRH(playerid)
 	PlayerInfo[playerid][pRockHotelPuAc]=0;
 	return 0;
 }
-
+/*
 IsPlayerInCube(playerid, Float:xmin, Float:ymin, Float:zmin, Float:xmax, Float:ymax, Float:zmax)
 {
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
 	if(x > xmin && y > ymin && z > zmin && x < xmax && y < ymax && z < zmax)return 1;
 	return 0;
-}
+}*/ 
 
 GetPlayer2DZone(playerid, zone[], len)
 {
@@ -1497,7 +1497,7 @@ GetPlayer2DZone(playerid, zone[], len)
 	}
 	return 0;
 }
-
+/*
 IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2)
 {
     x2 -= x;
@@ -1505,7 +1505,7 @@ IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Float:y2
     z2 -= z;
     return ((x2 * x2) + (y2 * y2) + (z2 * z2)) < (range * range);
 }
-
+*/
 //->Powiêkszenie czatu --->>>Skubany
 str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', maxlenght = sizeof (output))
 {
@@ -1541,158 +1541,20 @@ str_divide_line (const source[], output[], &idx, lenght, delimiter = ' ', maxlen
 		}
 	}
 }
-
+SetAntyCheatForPlayer(playerid, valueCode)
+{
+	SetPVarInt(playerid, "AntyCheatOff", valueCode);
+	return 1;
+}
 GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
 	if(rp) {
-		return nickRP[playerid];
+		//return nickRP[playerid];
 	}
 	return nick;
 }
-GetObjectName(objectid)
-{
-	new name[128];
-	if(objectid == 18974)
-	{
-		format(name, sizeof(name), "Zorro Mask");
-	}
-	if(objectid == 18961)
-	{
-		format(name, sizeof(name), "Bobby Hat"); 
-	}
-	if(objectid == 18962)
-	{
-		format(name, sizeof(name), "Kapelusz"); 
-	}
-	if(objectid == 19528)
-	{
-		format(name, sizeof(name), "Czapka WiedŸmy"); 
-	}
-	if(objectid == 19559)
-	{
-		format(name, sizeof(name), "Plecak turystyczny"); 
-	}
-	return name;
-}
-GetObjectBone(playerid, objectid)
-{
-	if(objectid == 18961)
-	{
-		boneIDzmienna[playerid] = 2;
-	}
-	if(objectid == 18974)
-	{
-		boneIDzmienna[playerid] = 2;
-	}
-	if(objectid == 18962) 
-	{
-		boneIDzmienna[playerid] = 2;
-	}
-	if(objectid == 19528)
-	{
-		boneIDzmienna[playerid] = 2;
-	}
-	if(objectid == 19559)
-	{
-		boneIDzmienna[playerid] = 1;
-	}
-	return boneIDzmienna[playerid];
-}
-ZmniejszDodatki(playerid, coGraczUsunal)
-{
-	if(coGraczUsunal == 9)
-	{
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 8)
-	{
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 7)
-	{
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	
-	}
-	if(coGraczUsunal == 6)
-	{
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 5)
-	{
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 4)
-	{
-		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	if(coGraczUsunal == 3)
-	{
-		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	
-	}
-	if(coGraczUsunal == 2)
-	{
-		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
-		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	
-	}
-	if(coGraczUsunal == 1)
-	{
-		PlayerAdds[playerid][pSlot1] = PlayerAdds[playerid][pSlot2];
-		PlayerAdds[playerid][pSlot2] = PlayerAdds[playerid][pSlot3];
-		PlayerAdds[playerid][pSlot3] = PlayerAdds[playerid][pSlot4];
-		PlayerAdds[playerid][pSlot4] = PlayerAdds[playerid][pSlot5];
-		PlayerAdds[playerid][pSlot5] = PlayerAdds[playerid][pSlot6];
-		PlayerAdds[playerid][pSlot6] = PlayerAdds[playerid][pSlot7];
-		PlayerAdds[playerid][pSlot7] = PlayerAdds[playerid][pSlot8];
-		PlayerAdds[playerid][pSlot8] = PlayerAdds[playerid][pSlot9];
-		PlayerAdds[playerid][pSlot9] = PlayerAdds[playerid][pSlot10];
-		PlayerAdds[playerid][pSlot10] = 0;
-	}
-	return 0;
-}
-GetNumber(playerid)
-{
-	return PlayerInfo[playerid][pPnumber];
-}
-
 FindPlayerByNumber(number)
 {
 	foreach(new i : Player)
@@ -2248,20 +2110,6 @@ IsACop(playerid)
 	return 0;
 }
 
-IsASkuban(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new nick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"gunwo", false) == 0)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
 IsAFakeKonto(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2520,7 +2368,7 @@ IsAKO(playerid)
 	}
 	return 0;
 }
-
+/*
 MozePobic(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2542,7 +2390,7 @@ MozePobic(playerid)
 	}
 	return 0;
 }
-
+*/
 MozeMowicNaFamily(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2554,31 +2402,6 @@ MozeMowicNaFamily(playerid)
 	}
 	return 0;
 }
-
-IsATajniak(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    new ranga = PlayerInfo[playerid][pRank];
-	    new tajniak = PlayerInfo[playerid][pTajniak];
-	    if(member == 2 && ranga >= 7)
-		{
-		    return 1;
-		}
-		if(leader == 2)
-		{
-		    return 1;
-		}
-		if(tajniak >= 1 && tajniak <= 4)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
 IsAFBI(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -4064,14 +3887,6 @@ IsATrain(carid)
     }
 	return 0;
 }
-
-IsAAdministrator(playerid)
-{
-	if(PlayerInfo[playerid][pAdmin] > 0)
-		return 1;
-	return 0;
-}
-
 WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", local, gametext[]="")
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
@@ -4542,7 +4357,7 @@ Lotto(number)
 	}
 	return 1;
 }
-
+/*========[STARA NIE U¯YWANA FUNKCJA]========
 SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
 {
 	foreach(new i : Player)
@@ -4567,7 +4382,6 @@ SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
 	}
 	return 1;
 }
-
 LockCar(carid)
 {
 	foreach(new i : Player)
@@ -4583,7 +4397,7 @@ UnLockCar(carid)
 		SetVehicleParamsForPlayer(carid,i,0,0);
 	}
 }
-
+*/
 SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {//example: SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Stealing A Police Vehicle");
 	if(IsPlayerConnected(playerid))
@@ -7509,7 +7323,7 @@ OOCNewbie(const string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(!gNewbie[i])
+		    if(!gNewbie[i] && GetPVarInt(i, "TOG_newbie") == 0)
 		    {
 				SendClientMessage(i, 0x8D8DFF00, string);
 			}
@@ -8141,7 +7955,7 @@ VehicleToPoint(Float:radi, vehicleid, Float:x, Float:y, Float:z)
 		}
 		return 0;
 }
-//stock DodajWjedz(playerid, Float:x, Float:y, Float:z, Float:xX, Float:xY, Float:xZ, Float:x2, Float:y2, Float:z2, Float:xX2, Float:xY2, Float:xZ2, VW, INT, VW2, INT2, const tekst[], const tekst2[], wyswietlajtekst = false, wyswietlajtekst2 = false)
+/* ========[STARA NIE U¯YWANA FUNKCJA]========
 IsVehicleInUse(vehicleid)
 {
 	new temp;
@@ -8166,7 +7980,7 @@ SetCamBack(playerid)
 		SetPlayerInterior(playerid,14);
 	}
 }
-
+*/
 FixHour(hour)
 {
 	hour = timeshift+hour+1;
@@ -8205,7 +8019,7 @@ stock ShowPlayerInfoDialog(playerid, caption[], info[], bool:dialogTimer=false)
 {
 	if(dialAccess[playerid] == 0)
 	{
-		ShowPlayerDialog(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, caption, info, "Okej", " ");
+		ShowPlayerDialog(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, caption, info, "Okej", "");
 		if(dialogTimer == true)
 		{
 			dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
@@ -9110,10 +8924,24 @@ MASTER_SendLog(typ)
     }
     MASTER_SendTextToWebsite(plik);
 }
+CheckLoginNick(playerid, nick[])
+{
+	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)
+	{
+		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
+		KickEx(playerid);
+		#if DEBUG == 1
+			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
+		#endif
+		return 1;
+	}
+	return 0; 
+}
 
 IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+	//if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)
 	{
 		return 1;
 	}

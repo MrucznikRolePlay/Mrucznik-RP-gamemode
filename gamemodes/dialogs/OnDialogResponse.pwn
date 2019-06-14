@@ -78,6 +78,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			SetPVarInt(playerid, "CheatDetected", 0);
 		}
 		else
 		{
@@ -13007,10 +13008,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             format(SANrepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
-		else if(dialogid == 1142)
-		{
-			if(!response) return 1;
-		}
         else if(dialogid == 1401)
 		{
 		    if(response)
@@ -16620,7 +16617,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
        
 	
 	}
-	else if(dialogid == 10001)
+	/*else if(dialogid == 10001)
 	{
 		if(response)
 		{
@@ -16664,7 +16661,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 		return 1;
-	}
+	}*/ 
 	else if(dialogid == 1071)//wyp³ata z swojego konta
 	{
 		if(response)
@@ -16702,6 +16699,75 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	
+	}
+	else if(dialogid == 9992)
+	{
+		if(!response)
+		{
+			sendTipMessage(playerid, "Wy³¹czono system actorów"); 
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					for(new i; i<valActor; i++)
+					{
+						if(IsPlayerInRangeOfPoint(playerid, 5.0, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posY]))
+						{
+							new string[124];
+							format(string, sizeof(string), "Pomyœlnie zaznaczono actora %d - %s", i, Actors[i][a_Name]); 
+							sendTipMessage(playerid, string);
+							SetPVarInt(playerid, "pActorID", i); 
+						}
+					}
+				}
+				case 1:
+				{
+					if(GetPVarInt(playerid, "pActorID") != 666)
+					{
+						if(GetPlayerInterior(playerid) != 0)
+						{
+							sendErrorMessage(playerid, "Actorów nie mo¿na przenosiæ pomiêdzy interiorami!"); 
+							return 1;
+						}
+						new uidActor = actorUID[GetPVarInt(playerid, "pActorID")], Float:pX, Float:pY, Float:pZ, Float:pR;
+						GetPlayerPos(playerid, pX, pY, pZ);
+						GetPlayerFacingAngle(playerid, pR); 
+						SetDynamicActorFacingAngle(uidActor, pR);
+						SetDynamicActorVirtualWorld(uidActor, GetPlayerVirtualWorld(playerid));
+						SetDynamicActorPos(uidActor, pX, pY+0.2, pZ);
+						sendTipMessage(playerid, "Pomyœlnie przeniesiono do Ciebie actora!"); 
+					}
+					else
+					{
+						sendErrorMessage(playerid, "Najpierw zaznacz aktora!"); 
+					}
+				}
+				case 2:
+				{
+					sendTipMessage(playerid, "Ta opcja zostanie dodana ju¿ niebawem!");
+				}
+				case 3:
+				{
+					sendTipMessage(playerid, "Ta opcja zostanie dodana ju¿ niebawem!");
+				}
+				case 4:
+				{
+					sendTipMessage(playerid, "Ta opcja zostanie dodana ju¿ niebawem!");
+				}
+			}
+		}
+	}
+	else if(dialogid == 1142)
+	{
+		if(!response) return 1;
+		if(response)
+		{
+			return 1;
+		}
 	}
 	//============[PRZELEWY OD GRACZA DO GRACZA = ID ODBIORCY]===================================
 	else if(dialogid == 1072)//Przelew
@@ -16752,7 +16818,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else//Jeœli kliknie "TAK"
 		{
-			new string[128];
+			new string[256];
 			new sendername[MAX_PLAYER_NAME];
 			new giveplayer[MAX_PLAYER_NAME];
 			new giveplayerid = GetPVarInt(playerid, PVAR_PRZELEW_ID);
@@ -17180,206 +17246,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			RemovePlayerFromVehicleEx(playerid);
 			HireCar[playerid] = 0;
 		}
-	}
-	else if(dialogid == 1010)
-	{
-		if(response)
-		{
-			new string[128];
-			switch(listitem)
-			{
-				case 0:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 1))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot1]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot1]);
-						SetPlayerAttachedObject(playerid, 0, PlayerAdds[playerid][pSlot1], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 0); 
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
-						return 1;
-					}
-				}
-				case 1:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 2))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot2]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot2]);
-						SetPlayerAttachedObject(playerid, 2, PlayerAdds[playerid][pSlot2], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 2);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
-						return 1;
-					}
-				
-				}
-				case 2:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 3))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot3]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot3]);
-						SetPlayerAttachedObject(playerid, 3, PlayerAdds[playerid][pSlot3], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 3);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
-						return 1;
-					}
-				
-				}
-				case 3:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 4))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot4]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot4]);
-						SetPlayerAttachedObject(playerid, 4, PlayerAdds[playerid][pSlot4], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 4);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
-						return 1;
-					}
-				}
-				case 4:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 5))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot5]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot5]);
-						SetPlayerAttachedObject(playerid, 5, PlayerAdds[playerid][pSlot5], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 5);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
-						return 1;
-					}
-				}
-				case 5:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 6))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot6]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot6]);
-						SetPlayerAttachedObject(playerid, 6, PlayerAdds[playerid][pSlot6], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 6);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota!"); 
-						return 1;
-					}
-				}
-				case 6:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 7))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot7]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot7]);
-						SetPlayerAttachedObject(playerid, 7, PlayerAdds[playerid][pSlot7], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 7);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
-						return 1;
-					}
-				}
-				case 7:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 8))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot8]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot8]);
-						SetPlayerAttachedObject(playerid, 8, PlayerAdds[playerid][pSlot8], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 8);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
-						return 1;
-					}
-				}
-				case 8:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 9))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot9]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot9]);
-						SetPlayerAttachedObject(playerid, 9, PlayerAdds[playerid][pSlot9], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 9);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota"); 
-						return 1;
-					}
-					
-				}
-				case 9:
-				{
-					if(!IsPlayerAttachedObjectSlotUsed(playerid, 10))
-					{
-						//komunikaty
-						format(string, sizeof(string), "%s zak³ada na siebie %s", GetNick(playerid, true), GetObjectName(PlayerAdds[playerid][pSlot10]));
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						//czynnoœci
-						GetObjectBone(playerid, PlayerAdds[playerid][pSlot10]);
-						SetPlayerAttachedObject(playerid, 10, PlayerAdds[playerid][pSlot10], boneIDzmienna[playerid]);
-						EditAttachedObject(playerid, 10);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "U¿ywasz ju¿ tego slota!");
-						return 1;
-					}
-				}
-			}
-			return 1;
-		}
-		if(!response)
-		{
-			sendTipMessage(playerid, "Wy³¹czy³eœ dialog ubioru"); 
-			return 1;
-		}
-		
 	}
 	else if(dialogid == 1012)
 	{

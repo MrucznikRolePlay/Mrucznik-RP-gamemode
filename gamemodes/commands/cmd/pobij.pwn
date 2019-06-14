@@ -67,6 +67,16 @@ YCMD:pobij(playerid, params[], help)
  				    {
  				        if(GetPlayerState(playa) == 1)
  				    	{
+							if(GetPlayerAdminDutyStatus(playerid) == 1)
+							{
+								sendErrorMessage(playerid, "Nie mo¿esz pobiæ nikogo bêd¹c na @Duty!"); 
+								return 1;
+							}
+							if(GetPlayerAdminDutyStatus(playa) == 1)
+							{
+								sendErrorMessage(playerid, "Nie mo¿esz pobiæ administratora!"); 
+								return 1;
+							}
  				    	    if(podczasbicia[playa] == 0)
  				    	    {
  				    	        if(GUIExit[playerid] == 0 && GUIExit[playa] == 0)

@@ -41,6 +41,7 @@ YCMD:dajdowozu(playerid, params[], help)
 
 		if(PlayerInfo[playerid][pLevel] >= 1)
 		{
+			SetAntyCheatForPlayer(giveplayerid, 2001); 
 		    PutPlayerInVehicleEx(giveplayerid, level, 0);
 			new string[128];
 			format(string, 128, "CMD_Info: /dajdowozu u¿yte przez %s na %s", GetNick(playerid), GetNick(giveplayerid));

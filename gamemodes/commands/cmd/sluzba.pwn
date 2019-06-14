@@ -35,11 +35,6 @@ YCMD:sluzba(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
-		{
-			sendErrorMessage(playerid, "Podczas wsiadania nie mo¿esz tego u¿yæ"); 
-			return 1;
-		}
         if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
         {
             sendTipMessage(playerid, "Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");

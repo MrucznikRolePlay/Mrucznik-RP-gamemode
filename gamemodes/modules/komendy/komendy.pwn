@@ -73,7 +73,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
     if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Odczekaj chwilê zanim wpiszesz nastêpn¹ komende!");
-		return COMMAND_OK;
+		return COMMAND_ZERO_RET;
 	}
 	else 
 	{
@@ -83,7 +83,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
-		return COMMAND_OK;
+		return COMMAND_ZERO_RET;
 	}
 
 	switch(success)
@@ -120,6 +120,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 //-----------------<[ Funkcje: ]>-------------------
 RunCommand(playerid, command[], params[]) //temporary
 {
+	StaryCzas[playerid] = GetTickCount()-101;
 	return Command_ReProcess(playerid, sprintf("%s %s", command, params), false);
 }
 

@@ -41,6 +41,9 @@ command_premiumskin()
     //permissions
     Group_SetGlobalCommand(command, true);
     
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------

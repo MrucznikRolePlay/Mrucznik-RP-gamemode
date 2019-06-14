@@ -659,6 +659,10 @@
 #include "cmd/zwolnij.pwn"
 #include "cmd/panelvinyl.pwn"
 #include "cmd/specshow.pwn"
+#include "cmd/asystem.pwn"
+#include "cmd/setserverpass.pwn"
+#include "cmd/tognewbie.pwn"
+#include "cmd/stan.pwn"
 
 InitCommands()
 {
@@ -667,9 +671,16 @@ InitCommands()
 
 static Aliases()
 {
+	//tognewbie
+	Command_AddAltNamed("tognewbie", "togn"); 
+	//setserverpass
+	Command_AddAltNamed("setserverpass", "ssp"); 
+
+	//stan
+	Command_AddAltNamed("stan", "stankonta"); 
 	//bus
 	Command_AddAltNamed("bus", "businfo");
-
+	//adajrange
 	Command_AddAltNamed("adajrange", "admindajrange"); 
 
 	//car
@@ -1023,6 +1034,8 @@ static Aliases()
 
 	//pomoc2
 	Command_AddAltNamed("pomoc2", "help");
+	Command_AddAltNamed("pomoc2", "pomoc");
+	Command_AddAltNamed("pomoc2", "komendy");
 
 	//pomocdom
 	Command_AddAltNamed("pomocdom", "dompomoc");

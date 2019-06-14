@@ -41,6 +41,9 @@ command_hq()
     //permissions
     Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
     
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------

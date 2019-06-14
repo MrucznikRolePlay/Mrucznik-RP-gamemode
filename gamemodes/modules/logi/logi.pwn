@@ -43,9 +43,11 @@ MRP_CheckLastLogin(uid, &time, ip[])
 
 MRP_PlayerLog(playerid)
 {
-    new str[128], ip[16];
+    new str[128], ip[16], GPCI[128];
     GetPlayerIp(playerid, ip, 16);
-    format(str, 128, "INSERT INTO `mru_logowania` (`PID`, `time`, `IP`) VALUES ('%d', NOW(), '%s')", PlayerInfo[playerid][pUID], ip);
+    gpci(playerid, GPCI, 128);
+    mysql_real_escape_string(GPCI, GPCI);
+    format(str, 128, "INSERT INTO `mru_logowania` (`PID`, `time`, `IP`, `gpci`) VALUES ('%d', NOW(), '%s', '%s')", PlayerInfo[playerid][pUID], ip, GPCI);
     mysql_query(str);
     return 1;
 }

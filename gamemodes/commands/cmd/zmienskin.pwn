@@ -37,6 +37,8 @@ YCMD:zmienskin(playerid, params[], help)
             if(PlayerInfo[playerid][pRank] >= 1)
             {
                 //printf(DialogListaFrakcji());
+                SetPVarInt(playerid, "CheatDetected", 1);
+               // SetAntyCheatForPlayer(playerid, 43);
                 ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
             } 
 						else

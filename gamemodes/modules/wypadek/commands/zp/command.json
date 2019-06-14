@@ -1,0 +1,11 @@
+{
+    "name": "zp",
+    "description": "Zapinanie pasów, aby nie odnieœæ powa¿nych ran podczas wypadku.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": ["zapnijpasy", "zapnijpas"],
+    "parameters": [],
+    "date": "11.06.2019"
+}

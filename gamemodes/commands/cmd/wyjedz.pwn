@@ -40,6 +40,7 @@ YCMD:wyjedz(playerid, params[], help)
 		sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile"); 
 		return 1;
 	}	
+	SetAntyCheatForPlayer(playerid, 4); 
 	if(SprawdzWjazdy(playerid))
 	{
 	

@@ -42,6 +42,9 @@ command_skiny()
     //permissions
     Group_SetGlobalCommand(command, true);
     
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------

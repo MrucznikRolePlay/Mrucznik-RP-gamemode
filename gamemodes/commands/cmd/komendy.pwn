@@ -30,7 +30,7 @@
 	
 */
 
-YCMD:komendy(playerid, params[], help)
+YCMD:komendy2(playerid, params[], help)
 {
     if (help)
     {

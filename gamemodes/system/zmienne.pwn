@@ -15,6 +15,11 @@ new Float:czitX;
 new Float:czitY;
 new Float:czitZ;
 
+new timerAC[MAX_PLAYERS];
+new timeAC[MAX_PLAYERS]; 
+//doors
+new noAccessCome[MAX_PLAYERS]; 
+
 new saveMyAccountTimer[MAX_PLAYERS];//respawn
 new nickRP[MAX_PLAYERS][MAX_PLAYER_NAME];
 

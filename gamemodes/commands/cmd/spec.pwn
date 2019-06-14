@@ -87,7 +87,12 @@ YCMD:spec(playerid, params[], help)
 				{
 					if(showSpec[i] != 666)
 					{
-						if(showSpec[i] == playerid || showSpec[i] == -1)
+						if(showSpec[i] == playerid)
+						{
+							format(string, sizeof(string), "Admin %s [%d] podgl¹da [spec] gracza %s [%d]", GetNick(playerid), playerid, giveplayer, pid);
+							sendTipMessageEx(i, COLOR_RED,  string); 
+						}
+						else if(showSpec[i] == 777)
 						{
 							format(string, sizeof(string), "Admin %s [%d] podgl¹da [spec] gracza %s [%d]", GetNick(playerid), playerid, giveplayer, pid);
 							sendTipMessageEx(i, COLOR_RED,  string); 

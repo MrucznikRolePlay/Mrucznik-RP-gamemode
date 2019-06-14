@@ -52,7 +52,7 @@ YCMD:sb(playerid, params[], help)
 					sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie!");
 					return 1;
 				}
-				if (ProxDetectorS(8.0, playerid, giveplayerid))
+				if (ProxDetectorS(8.0, playerid, giveplayerid) ||  PlayerInfo[playerid][pAdmin] > 0)
 				{
 				    if(!IsPlayerInAnyVehicle(playerid) && !IsPlayerInAnyVehicle(giveplayerid))
 				    {

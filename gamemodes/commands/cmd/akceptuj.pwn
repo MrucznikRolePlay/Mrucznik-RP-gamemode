@@ -1343,7 +1343,7 @@ YCMD:akceptuj(playerid, params[], help)
                     {
                         if(IsPlayerConnected(RepairOffer[playerid]))
                         {
-							if(ProxDetectorS(10.5, playerid, giveplayerid))
+							if(ProxDetectorS(10.5, playerid, RepairOffer[playerid]))
 							{
 								GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
 								GetPlayerName(playerid, sendername, sizeof(sendername));
