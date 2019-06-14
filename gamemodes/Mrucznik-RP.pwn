@@ -5971,7 +5971,7 @@ OnPlayerLogin(playerid, password[])
 				PlayerInfo[playerid][pWL] = 10; 
 				sendTipMessage(playerid, "Masz ju¿ 10 listów goñczych! Czêœæ z nich jest spowodowana d³ugami! Zrób coœ z tym!"); 
 			}
-			DajKase(playerid, 0);
+			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
 		}
 		if(PlayerInfo[playerid][pCash] > 0)
 		{
