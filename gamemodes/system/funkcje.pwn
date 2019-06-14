@@ -8925,7 +8925,20 @@ MASTER_SendLog(typ)
     }
     MASTER_SendTextToWebsite(plik);
 }
-
+CheckLoginNick(playerid, nick[])
+{
+	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)
+	{
+		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
+		KickEx(playerid);
+		#if DEBUG == 1
+			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
+		#endif
+		return 1;
+	}
+	return 0; 
+}
+/*
 IsNickCorrect(nick[])
 {
 	//if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
@@ -8935,7 +8948,7 @@ IsNickCorrect(nick[])
 	}
 	return 0;
 }
-
+*/
 CheckAlfaNumeric(password[])
 {
     new charsets[46] = "0123456789a¹bcædeêfghijkl³mnñoóprsœtuvwyz¿Ÿxq";

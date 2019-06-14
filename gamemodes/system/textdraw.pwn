@@ -105,7 +105,7 @@ KaryTXDLoad(playerid)
 	TextDrawSetShadow(Kary[playerid], 0);*/ 
     
     //Odbugowane textdrawy: 
-    Kary[playerid] = CreatePlayerTextDraw(playerid, 7.481735, 215.249847, "_"); 
+    Kary[playerid] = CreatePlayerTextDraw(playerid, -10.481735, 10.249847, "_"); 
     PlayerTextDrawLetterSize(playerid, Kary[playerid], 0.300876, 2.004995);
     PlayerTextDrawAlignment(playerid, Kary[playerid], 1); 
     PlayerTextDrawColor(playerid, Kary[playerid], -1); 
