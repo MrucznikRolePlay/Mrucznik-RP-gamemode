@@ -31,6 +31,20 @@ GetPlayerLogName(playerid)
     return sprintf("%s[%d]", GetNick(playerid), PlayerInfo[playerid][pUID]);
 }
 
+GetWeaponLogName(weapon, ammo=-1)
+{
+    new gunname[32];
+    GetWeaponName(weapon, gunname, sizeof(gunname));
+    if(ammo == -1)
+    {
+        return sprintf("%s[id: %d]", gunname, weapon);
+    }
+    else
+    {
+        return sprintf("%s[id: %d, ammo: %d]", gunname, weapon, ammo);
+    }
+}
+
 MRP_CheckLastLogin(uid, &time, ip[])
 {
     new str[256];

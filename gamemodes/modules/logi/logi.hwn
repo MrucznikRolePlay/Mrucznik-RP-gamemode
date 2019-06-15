@@ -40,7 +40,6 @@ new Logger:commandLog;
 new Logger:admindutyLog;
 new Logger:admindutyMaszLog;
 
-new Logger:weapLog;
 new Logger:czitLog;
 new Logger:kasynoLog;
 new Logger:payLog;

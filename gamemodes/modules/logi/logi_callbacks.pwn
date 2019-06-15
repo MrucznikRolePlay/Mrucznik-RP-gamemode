@@ -34,7 +34,6 @@ hook OnGameModeInit()
 	warningLog = CreateLog("logi/warning", INFO | WARNING | ERROR, false);
 	commandLog = CreateLog("logi/command", INFO | WARNING | ERROR, false);
 	sejfLog = CreateLog("logi/sejf", INFO | WARNING | ERROR, false);
-	weapLog = CreateLog("logi/weap", INFO | WARNING | ERROR, false);
 	czitLog = CreateLog("logi/czit", INFO | WARNING | ERROR, false);
 	kasynoLog = CreateLog("logi/kasyno", INFO | WARNING | ERROR, false);
 	payLog = CreateLog("logi/pay", INFO | WARNING | ERROR, false);
