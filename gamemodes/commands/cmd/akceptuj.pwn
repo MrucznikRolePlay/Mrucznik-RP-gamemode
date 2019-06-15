@@ -258,7 +258,7 @@ YCMD:akceptuj(playerid, params[], help)
 
                             format(string, sizeof(string), "%s kupi³ od %s auto marki %s (ID pliku auta:%d) za %d$", sendername, giveplayer, VehicleNames[GetVehicleModel(GetPlayerVehicleID(GraczDajacy[playerid]))-400], CarData[IDAuta[playerid]][c_UID], CenaDawanegoAuta[playerid]);
 
-                            Log(autaLog, INFO, string);
+                            Log(payLog, INFO, string);
                             new loled2 = CenaDawanegoAuta[playerid];
                             ZabierzKase(playerid, loled2);
                             DajKase(GraczDajacy[playerid], CenaDawanegoAuta[playerid]);
