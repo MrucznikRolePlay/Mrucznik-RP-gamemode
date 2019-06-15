@@ -30,16 +30,13 @@
 //-----------------<[ Callbacki: ]>-----------------
 hook OnGameModeInit()
 { 
-	serverLog = CreateLog("logi/server", INFO | WARNING | ERROR, false);
-	vehicleErrorLog = CreateLog("logi/vehicleerror", INFO | WARNING | ERROR, false);
+	//old
 	warningLog = CreateLog("logi/warning", INFO | WARNING | ERROR, false);
-	cmdLog = CreateLog("logi/cmd", INFO | WARNING | ERROR, false);
+	commandLog = CreateLog("logi/command", INFO | WARNING | ERROR, false);
 	sejfLog = CreateLog("logi/sejf", INFO | WARNING | ERROR, false);
-	actionLog = CreateLog("logi/action", INFO | WARNING | ERROR, false);
 	weapLog = CreateLog("logi/weap", INFO | WARNING | ERROR, false);
 	czitLog = CreateLog("logi/czit", INFO | WARNING | ERROR, false);
 	kasynoLog = CreateLog("logi/kasyno", INFO | WARNING | ERROR, false);
-	przekretLog = CreateLog("logi/przekret", INFO | WARNING | ERROR, false);
 	payLog = CreateLog("logi/pay", INFO | WARNING | ERROR, false);
 	autaLog = CreateLog("logi/auta", INFO | WARNING | ERROR, false);
 	bankomatLog = CreateLog("logi/bankomat", INFO | WARNING | ERROR, false);

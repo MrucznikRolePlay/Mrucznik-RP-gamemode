@@ -37,7 +37,7 @@ YCMD:zniszczobiekty(playerid, params[], help)
         new string[128];
         format(string, 128, "CMD_Info: /zniszczobiekty u¿yte przez %s [%d]", GetNick(playerid), playerid);
         SendCommandLogMessage(string);
-        Log(cmdLog, INFO, string);
+		Log(adminLog, INFO, "Admin %s u¿y³ /zniszczobiekty", GetPlayerLogName(playerid));
     }
 	return 1;
 }

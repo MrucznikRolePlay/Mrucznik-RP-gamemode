@@ -68,14 +68,15 @@ YCMD:newbie(playerid, params[], help)
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Oka¿ trochê kultury na kanale OOC! Nie przeklinaj.");
 			format(string, sizeof(string), "AdmWarning: [%d] %s Przeklina: %s.",playerid,sendername,params);
 			ABroadCast(COLOR_LIGHTRED,string,1);
-			Log(warningLog, INFO, string);
+			
+			Log(warningLog, INFO, "Gracz %s przeklina: %s", GetPlayerLogName(playerid), params);
 		}
 		else if (strfind(params , ":1" , true)>=0 || strfind(params , ":2" , true)>=0 || strfind(params , ":7" , true)>=0 || strfind(params , ":4" , true)>=0 || strfind(params , ":5" , true)>=0 || strfind(params , ":6" , true)>=0 || strfind(params , ":8" , true)>=0 || strfind(params , ":9" , true)>=0 || strfind(params , "s-rp" , true)>=0 || strfind(params , "s - rp" , true || strfind(params , "s- rp" , true)>=0)>=0 || strfind(params , "s -rp" , true)>=0)
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
 			format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
 			ABroadCast(COLOR_LIGHTRED,string,1);
-			Log(czitLog, INFO, string);
+			Log(warningLog, INFO, "Gracz %s reklamuje na chacie newbie: %s", GetPlayerLogName(playerid), params);
 		}
 		else
 		{

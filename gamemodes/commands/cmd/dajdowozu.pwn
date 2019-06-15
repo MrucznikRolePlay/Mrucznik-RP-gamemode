@@ -43,9 +43,7 @@ YCMD:dajdowozu(playerid, params[], help)
 		{
 			SetAntyCheatForPlayer(giveplayerid, 2001); 
 		    PutPlayerInVehicleEx(giveplayerid, level, 0);
-			new string[128];
-			format(string, 128, "CMD_Info: /dajdowozu u¿yte przez %s na %s", GetNick(playerid), GetNick(giveplayerid));
-			Log(cmdLog, INFO, string);
+        	Log(adminLog, INFO, "Admin %s u¿y³ /dajdowozu na graczu %s id wozu %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), level);
 		}
 	}
 	return 1;

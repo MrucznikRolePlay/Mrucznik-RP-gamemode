@@ -51,10 +51,10 @@ YCMD:unfrakcja(playerid, params[], help)
 		        {
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-					printf("AdmCmd: %s zosta³ wyrzucony przez %s.", sendername, giveplayer);
 					format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+    				Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
 					PlayerInfo[para1][pMember] = 0;
 					PlayerInfo[para1][pLider] = 0;
 					PlayerInfo[para1][pJob] = 0;
@@ -63,10 +63,6 @@ YCMD:unfrakcja(playerid, params[], help)
 					SpawnPlayer(para1);
 					format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					
-					//logi
-					format(string, sizeof(string), "%s unfrakcjowal gracza %s", sendername, GetNick(para1));
-					Log(actionLog, INFO, string);
 				}
 			}//not connected
 		}

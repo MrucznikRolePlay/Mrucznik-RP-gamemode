@@ -40,7 +40,7 @@ YCMD:losowypozar(playerid, params[], help)
 	    new string[128];
         format(string, 128, "CMD_Info: /losowypozar u¿yte przez %s [%d]", GetNick(playerid), playerid);
         SendCommandLogMessage(string);
-        Log(cmdLog, INFO, string);
+		Log(adminLog, INFO, "Admin %s u¿y³ /losowypozar", GetPlayerLogName(playerid));
 	}
 	else
 	{

@@ -52,8 +52,6 @@ YCMD:snn(playerid, params[], help)
 	format(string, sizeof(string), "AdmCmd: %s [ID: %d] napisal cos na /snn", sendername, playerid);
 	ABroadCast(COLOR_PANICRED,string,1);
 
-    strcat(string, " - ");
-    strcat(string, params);
-    Log(cmdLog, INFO, string);
+	Log(adminLog, INFO, "Admin %s u¿y³ /snn o treœci: %s", GetPlayerLogName(playerid), params);
 	return 1;
 }

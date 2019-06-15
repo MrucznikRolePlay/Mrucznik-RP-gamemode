@@ -15810,9 +15810,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 		
 		//logi
-		new string[128];
-		format(string, sizeof(string), "%s zmienil model pojazdu %d z %d na %d", GetNick(playerid), CarData[car][c_UID], oldmodel, CarData[car][c_Model]);
-		Log(actionLog, INFO, string);
+		Log(adminLog, INFO, "Admin %s zmieni³ model pojazdu %d z %s[%d] na %s[%d]", \
+			GetPlayerLogName(playerid), \
+			CarData[car][c_UID], \
+			VehicleNames[oldmodel-400], oldmodel, \
+			VehicleNames[CarData[car][c_Model]-400], CarData[car][c_Model] \
+		);
         return 1;
     }
     else if(dialogid == D_EDIT_CAR_RANG)

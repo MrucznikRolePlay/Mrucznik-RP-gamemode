@@ -5913,6 +5913,7 @@ Dom_ChangeInt(playerid, dld, interior)
 	}
     new string[128];
 
+	new oldInt = Dom[dld][hDomNr];
     new Float:Wej_X, Float: Wej_Y, Float: Wej_Z;
  	GetPlayerPos(playerid, Wej_X, Wej_Y, Wej_Z);
 
@@ -5943,9 +5944,8 @@ Dom_ChangeInt(playerid, dld, interior)
 
 	format(string, sizeof(string), "Zmiana Interioru - OK. || Dom %d || NrDom %d || Interior: %d || Cena %d", dld, Dom[dld][hDomNr], interior, Dom[dld][hCena]);
 	SendClientMessage(playerid, COLOR_NEWS, string);
-
-    format(string, 128, "DomInt: %s dom %d, int %d", GetNick(playerid), dld, interior);
-    Log(actionLog, INFO, string);
+        
+	Log(adminLog, INFO, "Admin %s zmieni³ interior domu %d z %d na %d", GetPlayerLogName(playerid), dld, oldInt, interior);
 	//
 	ZapiszDom(dld);
 	return 1;
@@ -5955,6 +5955,7 @@ Dom_ChangeOwner(playerid, dom, forid)
 {
     new string[128];
 
+	Log(adminLog, INFO, "Admin %s zmieni³ w³aœciciela domu %d z %s na %s", GetPlayerLogName(playerid), dom, Dom[dom][hWlasciciel], GetPlayerLogName(forid));
     PlayerInfo[forid][pDom] = dom;
     new GeT[MAX_PLAYER_NAME];
 	GetPlayerName(forid, GeT, sizeof(GeT));
@@ -5965,8 +5966,6 @@ Dom_ChangeOwner(playerid, dom, forid)
 	format(string, sizeof(string), "Zmiana wlasciciela - OK. || Dom %d || NrDom %d || Wlasciciel: %s", dom, Dom[dom][hDomNr], GeT);
 	SendClientMessage(playerid, COLOR_NEWS, string);
 
-    format(string, 128, "DomOwn: %s dom %d, owner %s", GetNick(playerid), dom, GeT);
-    Log(actionLog, INFO, string);
 	//
 	ZapiszDom(dom);
 	return 1;

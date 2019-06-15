@@ -44,7 +44,7 @@ YCMD:removecar(playerid, params[], help)
     new str[128];
     format(str, 128, "[CAR] Usuniêto pojazd (UID: %d) przez %s", CarData[uid][c_UID], GetNick(playerid));
 	SendClientMessage(playerid, COLOR_GRAD2, str);
-    Log(actionLog, INFO, str);
+    Log(adminLog, INFO, "Admin %s usun¹³ pojazd o UID %d", GetPlayerLogName(playerid), CarData[uid][c_UID]);
     Car_Destroy(uid);
 
     return 1;

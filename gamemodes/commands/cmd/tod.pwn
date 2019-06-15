@@ -52,7 +52,7 @@ YCMD:tod(playerid, params[], help)
 
             format(string, sizeof(string), "CMD_Info: /tod u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
-            Log(cmdLog, INFO, string);
+        	Log(adminLog, INFO, "Admin %s u¿y³ /tod z wartoœci¹ %d", GetPlayerLogName(playerid), hour);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{
 				iloscInne[playerid] = iloscInne[playerid]+1;

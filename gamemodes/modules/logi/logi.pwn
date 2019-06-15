@@ -26,6 +26,11 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+GetPlayerLogName(playerid)
+{
+    return sprintf("%s[%d]", GetNick(playerid), PlayerInfo[playerid][pUID]);
+}
+
 MRP_CheckLastLogin(uid, &time, ip[])
 {
     new str[256];

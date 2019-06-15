@@ -50,7 +50,7 @@ YCMD:cnn(playerid, params[], help)
 				GameTextForPlayer(i, string, 5000, 6);
 			}
 		}
-        Log(cmdLog, INFO, string);
+        Log(adminLog, INFO, "Admin %s u¿y³ /cnn o treœci: %s", GetPlayerLogName(playerid), params);
 		return 1;
 	}
 	else

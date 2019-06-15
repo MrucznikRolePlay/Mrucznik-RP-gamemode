@@ -53,8 +53,7 @@ YCMD:dajlideraorg(playerid, params[], help)
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
 			
 			//logi
-			format(str, sizeof(str), "%s dal kontrole nad rodzina %d graczowi %s", GetNick(playerid), family, GetNick(id));
-			Log(actionLog, INFO, str);
+            Log(adminLog, INFO, "Admin %s da³ graczowi %s lidera rodziny %d", GetPlayerLogName(playerid), GetPlayerLogName(id), family);
 			
 			PlayerInfo[id][pTeam] = 5;
 			gTeam[id] = 5;

@@ -55,8 +55,7 @@ YCMD:ip(playerid, params[], help)
             GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
             format(string, sizeof(string), "-| %s IP: %s |-", giveplayer,ip);
             SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            format(string, sizeof(string), "CMD_Info: %s uzyl /ip na %s", GetNick(playerid), GetNick(giveplayerid));
-            Log(cmdLog, INFO, string);
+            Log(adminLog, INFO, "Admin %s u¿y³ /ip na graczu %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
         } else
         {
             format(string, sizeof(string), "Nie znaleziono gracza o nicku/id %s", params);

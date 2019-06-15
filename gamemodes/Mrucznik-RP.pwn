@@ -1896,18 +1896,19 @@ public OnPlayerDeath(playerid, killerid, reason)
 			}
 			if(GetPlayerState(killerid) == 2)
 			{
+				Log(warningLog, INFO, "Gracz %s zabi³ %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
 				SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
+
 				if(PlayerInfo[killerid][pLevel] > 1)
 				{
 					format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
 					SendMessageToAdmin(string, COLOR_YELLOW);
-					Log(warningLog, INFO, string);
 				}
 				else
 				{
 					format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] z DB, dosta³ kicka !", killername, killerid, playername, playerid);
 					SendMessageToAdmin(string, COLOR_YELLOW);
-					Log(warningLog, INFO, string);
+					Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
 					SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
 					KickEx(killerid);
 					#if DEBUG == 1
@@ -1926,13 +1927,13 @@ public OnPlayerDeath(playerid, killerid, reason)
 			{
 				format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s ze spreya !", killerid, killername, playername);
 				SendMessageToAdmin(string, COLOR_YELLOW);
-				Log(warningLog, INFO, string);
+				Log(warningLog, INFO, "Gracz %s zabi³ gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 			}
 			if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
 			{
                 format(string, 128, "AdmWarning: £owca Nagród [%d]%s zabi³ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
 				SendMessageToAdmin(string, COLOR_YELLOW);
-				Log(warningLog, INFO, string);
+				Log(warningLog, INFO, "£owca nagród %s zabi³ gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 			}
 			//-------<[    Inne    ]>---------
 			if(PlayerPaintballing[playerid] != 0)
