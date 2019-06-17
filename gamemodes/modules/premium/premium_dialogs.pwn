@@ -279,7 +279,7 @@ static DialogKupKP(playerid)
 {
 	new string[256];
 	if(IsPlayerPremium(playerid))
-		format(string, sizeof(string), "Mo¿esz przed³u¿yæ konto premium o 30 dni za "INCOLOR_GREEN""#MIESIAC_KP_CENA" Mrucznik Coinsów\nCzy chcesz to zrobiæ?");
+		format(string, sizeof(string), "Mo¿esz przed³u¿yæ konto premium o 30 dni za "INCOLOR_GREEN""#PRZEDLUZ_KP_CENA" Mrucznik Coinsów\nCzy chcesz to zrobiæ?");
 	else
 		format(string, sizeof(string), "Mo¿esz kupiæ konto premium na 30 dni za "INCOLOR_GREEN""#MIESIAC_KP_CENA" Mrucznik Coinsów\nCzy chcesz to zrobiæ?");
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(KUP_KP), DIALOG_STYLE_MSGBOX, "Premium - KP", string, "Tak", "Nie");

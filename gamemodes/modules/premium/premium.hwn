@@ -65,26 +65,26 @@ new PremiumInfo[MAX_PLAYERS][ePremiumInfo];
 new PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =
 {
 	//drogie:
-	{573, 6000}, //0 Dune
-	{494, 4500}, //1 Hotring Racer
-	{530, 4500}, //2 Wózek wid³owy
-	{548, 4000}, //3 Cargobob
-	{525, 4000}, //4 Holownik
-	{403, 4000}, //5 Linerunner (TIR)
-	{531, 3500}, //6 Traktor
+	{486, 15000}, //0 Dozer
+	{494, 9000}, //1 Hotring Racer
+	{530, 9000}, //2 Wózek wid³owy
+	{548, 8000}, //3 Cargobob
+	{525, 8000}, //4 Holownik
+	{531, 5000}, //5 Traktor
 	//œrednio drogie:
-	{578, 2500}, //7 DFT-30
-	{428, 2000}, //8 Securicar
-	{509, 2000}, //9 Rower
-	{504, 2000}, //10 Bloodring Banger
-	{442, 1500}, //11 Romero (karawan)
+	{578, 5000}, //6 DFT-30
+	{428, 4000}, //7 Securicar
+	{509, 4000}, //8 Rower
+	{504, 4000}, //9 Bloodring Banger
+	{442, 3000}, //10 Romero (karawan)
 	//tanie:
-	{574, 1300}, //12 Sweeper
-	{457, 1000}, //13 Caddy
-	{571, 750}, //14 Go-Kart
-	{498, 250}, //15 Boxville
-	{461, 500}, //16 PCJ-600
-	{552, 300} //17 Utility Van
+	{574, 2600}, //11 Sweeper
+	{448, 2500}, //12 Pizza boy
+	{457, 2000}, //13 Caddy
+	{571, 1500}, //14 Go-Kart
+	{461, 1000}, //15 PCJ-600
+	{552, 600}, //16 Utility Van
+	{498, 500} //17 Boxville
 };
 
 new SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
