@@ -61,7 +61,7 @@ YCMD:newbie(playerid, params[], help)
 			SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
 			format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
 			ABroadCast(COLOR_LIGHTRED,string,1);
-			Log(czitLog, INFO, string);
+			Log(warningLog, INFO, "%s reklamuje na chacie newbie: %s", GetPlayerLogName(playerid), params);
 		}
 		else if (strfind(params , "kurwa" , true)>=0 ||strfind(params , "huj" , true)>=0 || strfind(params , "pizda" , true)>=0 || strfind(params , "cipa" , true)>=0  || strfind(params , "n00b" , true)>=0 || strfind(params , "noob" , true)>=0 || strfind(params , "pierdole" , true)>=0 || strfind(params , "debil" , true)>=0 || strfind(params , "fiut" , true)>=0 || strfind(params , "kutas" , true)>=0 || strfind(params , "jeb" , true)>=0 || strfind(params , "ssij" , true)>=0)
 		{
@@ -69,14 +69,14 @@ YCMD:newbie(playerid, params[], help)
 			format(string, sizeof(string), "AdmWarning: [%d] %s Przeklina: %s.",playerid,sendername,params);
 			ABroadCast(COLOR_LIGHTRED,string,1);
 			
-			Log(warningLog, INFO, "Gracz %s przeklina: %s", GetPlayerLogName(playerid), params);
+			Log(warningLog, INFO, "%s przeklina na chacie newbie: %s", GetPlayerLogName(playerid), params);
 		}
 		else if (strfind(params , ":1" , true)>=0 || strfind(params , ":2" , true)>=0 || strfind(params , ":7" , true)>=0 || strfind(params , ":4" , true)>=0 || strfind(params , ":5" , true)>=0 || strfind(params , ":6" , true)>=0 || strfind(params , ":8" , true)>=0 || strfind(params , ":9" , true)>=0 || strfind(params , "s-rp" , true)>=0 || strfind(params , "s - rp" , true || strfind(params , "s- rp" , true)>=0)>=0 || strfind(params , "s -rp" , true)>=0)
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
 			format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
 			ABroadCast(COLOR_LIGHTRED,string,1);
-			Log(warningLog, INFO, "Gracz %s reklamuje na chacie newbie: %s", GetPlayerLogName(playerid), params);
+			Log(warningLog, INFO, "%s reklamuje na chacie newbie: %s", GetPlayerLogName(playerid), params);
 		}
 		else
 		{

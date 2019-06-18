@@ -115,7 +115,7 @@ sprawdzReklame(text[], playerid)
 			format(string, sizeof(string), "AdmWarning: %s - Wykryto reklamê", text);
 		}
 		ABroadCast(COLOR_LIGHTRED,string,1);
-		Log(czitLog, INFO, string);
+		Log(warningLog, INFO, "%s reklamuje: %s", GetPlayerLogName(playerid), text);
 		valueAdd=1;
 	}
 	else
@@ -158,7 +158,7 @@ sprawdzWulgaryzmy(text[], playerid)
 			format(stringReturn, sizeof(stringReturn), "AdmWarning: %s - pojawi³y siê wulgaryzmy");
 		}
 		ABroadCast(COLOR_LIGHTRED,stringReturn,1000);
-		Log(warningLog, INFO, "Gracz %s przeklina: %s", GetPlayerLogName(playerid), text);
+		Log(warningLog, INFO, "%s przeklina: %s", GetPlayerLogName(playerid), text);
 		valueWulgaryzmy = 1;
 	}
 	else

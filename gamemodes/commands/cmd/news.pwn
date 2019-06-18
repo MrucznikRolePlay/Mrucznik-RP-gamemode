@@ -81,7 +81,7 @@ YCMD:news(playerid, params[], help)
 					SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
 					format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
 					ABroadCast(COLOR_LIGHTRED,string,1);
-					Log(czitLog, INFO, string);
+					Log(warningLog, INFO, "%s reklamuje na /news: %s", GetPlayerLogName(playerid), params);
 				}
 				else
 				{
@@ -120,7 +120,7 @@ YCMD:news(playerid, params[], help)
 					SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
 					format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
 					ABroadCast(COLOR_LIGHTRED,string,1);
-					Log(czitLog, INFO, string);
+					Log(warningLog, INFO, "%s reklamuje na /news: %s", GetPlayerLogName(playerid), params);
 				}
 				else
 				{
@@ -159,7 +159,8 @@ YCMD:news(playerid, params[], help)
 					SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
 					format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
 					ABroadCast(COLOR_LIGHTRED,string,1);
-					Log(czitLog, INFO, string);
+					Log(warningLog, INFO, "%s reklamuje na /news: %s", GetPlayerLogName(playerid), params);
+					return
 				}
 				else
 				{

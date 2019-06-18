@@ -25,13 +25,11 @@
 new Logger:adminLog; //Logi akcji administracyjnych
 new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
 new Logger:premiumLog;
-new Logger:sejfLog;
 // new Logger:chatLog;
 // new Logger:bugLog;
 new Logger:punishmentLog;
 new Logger:warningLog;
 new Logger:commandLog;
-// new Logger:czitLog;
 // new Logger:connectLog;
 // new Logger:nickLog;
 // new Logger:damageLog;
@@ -41,7 +39,6 @@ new Logger:serverLog;
 new Logger:admindutyLog;
 new Logger:admindutyMaszLog;
 
-new Logger:czitLog;
 new Logger:autaLog; //Logi z akcji zwi¹zanych z pojazdami
 new Logger:kickLog;
 new Logger:banLog;

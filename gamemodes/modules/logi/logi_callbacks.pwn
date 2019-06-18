@@ -29,12 +29,12 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 hook OnGameModeInit()
-{ 
+{
+
+
 	//old
 	warningLog = CreateLog("logi/warning", INFO | WARNING | ERROR, false);
 	commandLog = CreateLog("logi/command", INFO | WARNING | ERROR, false);
-	sejfLog = CreateLog("logi/sejf", INFO | WARNING | ERROR, false);
-	czitLog = CreateLog("logi/czit", INFO | WARNING | ERROR, false);
 	payLog = CreateLog("logi/pay", INFO | WARNING | ERROR, false);
 	autaLog = CreateLog("logi/auta", INFO | WARNING | ERROR, false);
 	premiumLog = CreateLog("logi/premium", INFO | WARNING | ERROR, false);

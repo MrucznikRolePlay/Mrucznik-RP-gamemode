@@ -8513,23 +8513,16 @@ WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
 //Sjefy
 Sejf_Add(frakcja, kasa)
 {
-    if(frakcja != 19)
-    {
-        new str[80];
-        format(str, 80, "FRAKCJA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Frakcji[frakcja]);
-        Log(sejfLog, INFO, str);
-    }
     Sejf_Frakcji[frakcja]+=kasa;
     Sejf_Save(frakcja);
+	Log(serverLog, E_LOGLEVEL:DEBUG, "SEJF FRAKCJA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Frakcji[frakcja]);
 }
 
 SejfR_Add(frakcja, kasa)
 {
-    new str[80];
-    format(str, 80, "RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
-    Log(sejfLog, INFO, str);
     Sejf_Rodziny[frakcja]+=kasa;
     SejfR_Save(frakcja);
+    Log(serverLog, E_LOGLEVEL:DEBUG, "SEJF RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
 }
 
 Sejf_Save(frakcja)
