@@ -36,13 +36,13 @@ hook OnGameModeInit()
 	punishmentLog = CreateLog("logi/punishment", INFO, false);
 	warningLog = CreateLog("logi/warning", INFO, false);
 	nickLog = CreateLog("logi/nick", INFO, false);
-
 	sejfLog = CreateLog("logi/sejf", INFO, false);
 	serverLog = CreateLog("logi/server", E_LOGLEVEL:ALL, false);
 	commandLog = CreateLog("logi/command", INFO | WARNING | ERROR, false);
 	chatLog = CreateLog("logi/chat", E_LOGLEVEL:DEBUG | INFO, false);
 	damageLog = CreateLog("logi/damage", E_LOGLEVEL:DEBUG | INFO, false);
 	connectLog = CreateLog("logi/connect", INFO, false);
+	mysqlLog = CreateLog("logi/mysql", E_LOGLEVEL:ALL, true);
 
 	//old
 	admindutyLog = CreateLog("logi/adminduty", INFO, false);
@@ -63,6 +63,7 @@ hook OnGameModeExit()
 	DestroyLog(chatLog);
 	DestroyLog(damageLog);
 	DestroyLog(connectLog);
+	DestroyLog(mysqlLog);
 	DestroyLog(admindutyLog);
 	DestroyLog(admindutyMaszLog);
 }

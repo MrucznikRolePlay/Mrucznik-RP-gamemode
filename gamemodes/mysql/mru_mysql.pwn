@@ -7,12 +7,11 @@ new MYSQL_HOST[32];
 new MYSQL_USER[32];
 new MYSQL_DATABASE[32];
 new MYSQL_PASS[256];
-	
-forward MruMySQL_Error(error[]);
+new Logger:mysqlLog;
 
 public OnQueryError(errorid, error[], resultid, extraid, callback[], query[], connectionHandle)
 {
-	MruMySQL_Error(error);
+	Log(mysqlLog, ERROR, "%s | resultid: %d | extraid: %d | callback: %s | query: %s", error, resultid, extraid, callback, query);
 	return 1;
 }
 
@@ -1141,23 +1140,6 @@ MruMySQL_DeletePhoneContact(uid)
 	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);
 	mysql_query(string);
 	return 1;
-}
-
-public MruMySQL_Error(error[])
-{
-    new str[256];
-    format(str, sizeof(str), "MySQL/error.log");
-    new File:f, h,m,s,dd,mm,yy;
-    gettime(h,m,s);
-    getdate(yy,mm,dd);
-    f = fopen(str, io_append);
-    if(f)
-    {
-        format(str, 256, "[%02d/%02d/%d - %02d:%02d:%02d] %s\r\n", dd,mm,yy,h,m,s,error);
-        fwrite(f, str);
-        fclose(f);
-    } else printf("File handle error at error.log [%s]", error);
-    return 1;
 }
 
 new bool:MySQL_timeout=false;

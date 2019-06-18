@@ -8883,28 +8883,6 @@ public HTTP_LogResponse(index, response_code, data[])
     }
 }
 
-MASTER_SendTextToWebsite(file[]) {
-
-}
-
-MASTER_SendLog(typ)
-{
-    new plik[32];
-    switch(typ)
-    {
-        case 1: plik="logi/ck.log";
-        case 2: plik="logi/nick.log";
-        case 3: plik="logi/pay.log";
-        case 4: plik="logi/setstats.log";
-        case 5: plik="logi/ban.log";
-        case 6: plik="logi/czit.log";
-        case 7: plik="logi/kick.log";
-        case 8: plik="logi/warn.log";
-        case 9: plik="logi/warning.log";
-        case 10: plik="MySQL/error.log";
-    }
-    MASTER_SendTextToWebsite(plik);
-}
 CheckLoginNick(playerid, nick[])
 {
 	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)
