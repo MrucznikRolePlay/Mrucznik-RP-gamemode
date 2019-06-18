@@ -125,6 +125,7 @@ YCMD:wiadomosc(playerid, params[], help)
                 }		
             }
         }
+	    Log(chatLog, E_LOGLEVEL:DEBUG, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
         //dŸwiêki
         PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
         PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);

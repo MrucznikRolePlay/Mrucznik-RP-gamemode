@@ -78,6 +78,7 @@ YCMD:r(playerid, params[], help)
 			noAccessMessage(playerid);
 			return 1;
 		}
+		Log(chatLog, INFO, "%s radio policyjne %d IC: %s", GetPlayerLogName(playerid), member, params);
 	}
 	return 1;
 }

@@ -6767,6 +6767,8 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
+
+	Log(chatLog, DEBUG, "%s chat IC: %s", GetPlayerLogName(playerid), text);
 	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];

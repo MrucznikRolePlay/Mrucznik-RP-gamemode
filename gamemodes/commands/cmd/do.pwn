@@ -63,6 +63,7 @@ YCMD:do(playerid, params[], help)
 
             format(string, sizeof(string), "[.] %s (( %s ))", text, GetNick(playerid, true));
             ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	        Log(chatLog, E_LOGLEVEL:DEBUG, "%s /do: %s", GetPlayerLogName(playerid), params);
         }
     }
     return 1;

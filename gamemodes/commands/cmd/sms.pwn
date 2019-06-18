@@ -100,6 +100,7 @@ YCMD:sms(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_WHITE, string);
 		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid, true));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	    Log(chatLog, INFO, "%s sms SAN %d: %s", GetPlayerLogName(playerid), givePlayerNumber, messSMS);
 		foreach(new i : Player)
 		{
 			if(GetPlayerFraction(i) == FRAC_SN)
@@ -140,6 +141,7 @@ YCMD:sms(playerid, params[], help)
 		}
 		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid, true));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	    Log(chatLog, INFO, "%s sms do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(checkNumberPlayer), messSMS);
 		new slotKontaktu = PobierzSlotKontaktuPoNumerze(playerid, givePlayerNumber);
 		if(slotKontaktu >= 0)
 		{

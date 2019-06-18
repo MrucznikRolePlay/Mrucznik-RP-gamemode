@@ -53,7 +53,8 @@ YCMD:szept(playerid, params[], help)
 			return 1;
 		}
 		
-		PlayerTalkIC(playerid, params, "szepcze", 5.0,  true); 		
+		PlayerTalkIC(playerid, params, "szepcze", 5.0,  true); 	
+		Log(chatLog, INFO, "%s szept: %s", GetPlayerLogName(playerid), params);	
 	}
 	return 1;
 }

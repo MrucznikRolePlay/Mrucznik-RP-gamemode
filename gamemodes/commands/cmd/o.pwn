@@ -96,7 +96,7 @@ YCMD:o(playerid, params[], help)
 
 			format(string, sizeof(string), "(( %s [%d]: %s ))", sendername, playerid, params);
 			OOCOff(COLOR_OOC,string);
-			printf("%s", string);
+            Log(chatLog, INFO, "%s globalny chat OOC: %s", GetPlayerLogName(playerid), params);
 		}
 	}
 	return 1;

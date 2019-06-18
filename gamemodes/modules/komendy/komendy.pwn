@@ -45,7 +45,7 @@
 public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
 	if(success == COMMAND_OK) {
-		Log(commandLog, INFO, "%s wykona³ komendê %s", GetPlayerLogName(playerid), cmdtext);
+		Log(commandLog, E_LOGLEVEL:DEBUG, "%s wykona³ komendê %s", GetPlayerLogName(playerid), cmdtext);
 	}
 	return COMMAND_OK;
 }
@@ -111,7 +111,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	}
 
 	if(success == COMMAND_OK) {
-		Log(commandLog, INFO, "%s wpisa³ komendê %s", GetPlayerLogName(playerid), cmdtext);
+		Log(commandLog, E_LOGLEVEL:DEBUG, "%s wpisa³ komendê %s", GetPlayerLogName(playerid), cmdtext);
 	}
 
 	return COMMAND_OK;

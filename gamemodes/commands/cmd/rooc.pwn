@@ -57,9 +57,7 @@ YCMD:rooc(playerid, params[], help)
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
-            printf("%s", string);
-
-            
+            Log(chatLog, INFO, "%s radio policyjne %d OOC: %s", GetPlayerLogName(playerid), member, params);
         } 
 		else
         {

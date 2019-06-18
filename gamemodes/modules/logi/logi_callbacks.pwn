@@ -38,15 +38,33 @@ hook OnGameModeInit()
 	nickLog = CreateLog("logi/nick", INFO, false);
 
 	sejfLog = CreateLog("logi/sejf", INFO, false);
-	serverLog = CreateLog("logi/server", E_LOGLEVEL:DEBUG | INFO | WARNING | ERROR, false);
-	commandLog = CreateLog("logi/command", INFO, false);
-	chatLog = CreateLog("logi/chat", INFO, false);
-	damageLog = CreateLog("logi/damage", INFO, false);
+	serverLog = CreateLog("logi/server", E_LOGLEVEL:ALL, false);
+	commandLog = CreateLog("logi/command", E_LOGLEVEL:ALL, false);
+	chatLog = CreateLog("logi/chat", E_LOGLEVEL:DEBUG | INFO, false);
+	damageLog = CreateLog("logi/damage", E_LOGLEVEL:DEBUG | INFO, false);
 	connectLog = CreateLog("logi/connect", INFO, false);
 
 	//old
 	admindutyLog = CreateLog("logi/adminduty", INFO, false);
 	admindutyMaszLog = CreateLog("logi/admindutymasz", INFO, false);
+}
+
+hook OnGameModeExit()
+{
+	DestroyLog(adminLog);
+	DestroyLog(payLog);
+	DestroyLog(premiumLog);
+	DestroyLog(punishmentLog);
+	DestroyLog(warningLog);
+	DestroyLog(nickLog);
+	DestroyLog(sejfLog);
+	DestroyLog(serverLog);
+	DestroyLog(commandLog);
+	DestroyLog(chatLog);
+	DestroyLog(damageLog);
+	DestroyLog(connectLog);
+	DestroyLog(admindutyLog);
+	DestroyLog(admindutyMaszLog);
 }
 
 //end

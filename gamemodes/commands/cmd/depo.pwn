@@ -52,7 +52,7 @@ YCMD:depo(playerid, params[], help)
 			SendTeamMessage(2, COLOR_ALLDEPT, string, 1);
 			SendTeamMessage(1, COLOR_ALLDEPT, string, 1);
 			SendTeamMessage(18, COLOR_ALLDEPT, string, 1);
-			printf("%s", string);	
+            Log(chatLog, INFO, "%s departament %d OOC: %s", GetPlayerLogName(playerid), member, params);
 		}
         else
         {
