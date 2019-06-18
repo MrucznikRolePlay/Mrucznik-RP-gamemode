@@ -28,7 +28,10 @@
 //-----------------<[ Funkcje: ]>-------------------
 GetPlayerLogName(playerid)
 {
-    return sprintf("{Player: %s[%d]}", GetNick(playerid), PlayerInfo[playerid][pUID]);
+    if(gPlayerLogged[playerid]) {
+        return sprintf("{Player: %s[%d]}", GetNick(playerid), PlayerInfo[playerid][pUID]);
+    } 
+    return sprintf("{Player: %s}", GetNick(playerid));
 }
 
 GetWeaponLogName(weapon, ammo=-1)
