@@ -24,21 +24,20 @@
 //-----------------<[ Zmienne: ]>-------------------
 new Logger:adminLog; //Logi akcji administracyjnych
 new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
-new Logger:premiumLog;
-// new Logger:chatLog;
-new Logger:punishmentLog;
-new Logger:warningLog;
-new Logger:commandLog;
-// new Logger:connectLog;
-// new Logger:nickLog;
-// new Logger:damageLog;
-new Logger:serverLog;
+new Logger:premiumLog; //Logi z systemu premium
+new Logger:punishmentLog; //Logi nadawania oraz zdejmowania kar dla graczy
+new Logger:warningLog; //Logi warningów administracyjnych
+new Logger:commandLog; //Logi komendy wykonanych przez graczy
+new Logger:nickLog; //Logi zmian nicków
+//TODO:
+new Logger:serverLog; //Logi akcji serwera
+new Logger:chatLog; //Logi chatów
+new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
+new Logger:connectLog; //Logi logowañ
 
 //old
 new Logger:admindutyLog;
 new Logger:admindutyMaszLog;
-
-new Logger:nickLog;
 
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------

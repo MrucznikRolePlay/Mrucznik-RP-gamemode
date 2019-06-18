@@ -7832,7 +7832,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "%s[%d] cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid),PlayerInfo[playerid][pUID]);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 60.000.000$");
-							Log(nickLog, INFO, string);
+							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 60000000$", GetPlayerLogName(playerid));
 							DajKase(playerid, -60000000);
 						}
 						else
@@ -7845,9 +7845,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if (kaska[playerid] >= 25000000 && PlayerInfo[playerid][pExp] >= 180)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
-							Log(nickLog, INFO, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktów respektu");
+							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 25000000$ i 180 punktów respektu", GetPlayerLogName(playerid));
 							PlayerInfo[playerid][pZmienilNick] --;
 							DajKase(playerid, -25000000);
 							PlayerInfo[playerid][pExp] -=180;
@@ -7862,9 +7862,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    if (PlayerInfo[playerid][pExp] >= 340)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
-							Log(nickLog, INFO, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
+							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 340 punktów respektu", GetPlayerLogName(playerid));
 							PlayerInfo[playerid][pZmienilNick] --;
 							PlayerInfo[playerid][pExp] -=340;
 						}
