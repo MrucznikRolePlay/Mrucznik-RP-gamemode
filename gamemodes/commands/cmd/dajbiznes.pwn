@@ -36,11 +36,9 @@ YCMD:dajbiznes(playerid, params[], help)
 		if(sscanf(params, "k<fix>d", gracz, wartosc)) return sendTipMessage(playerid, "U¿yj /dajbiznes [playerid/CzêœæNicku] [ID Biznesu]");
 		if(IsPlayerConnected(gracz))
 		{
-			new string[128];
 			PlayerInfo[gracz][pPbiskey] = wartosc;
 			MruMySQL_SaveAccount(playerid);
-			format(string, sizeof(string),"AdmCmd: %s dal biznes %s (ID %d) graczowi %s.", GetNick(playerid), BizData[wartosc][eBizName], wartosc, GetNick(gracz));
-            Log(biznesLog, INFO, string);
+            Log(adminLog, INFO, "Admin %s da³ %s biznes %s", GetPlayerLogName(playerid), GetPlayerLogName(gracz), GetBusinessLogName(wartosc));
             _MruAdmin(playerid, sprintf("Da³eœ biznes %s (ID %d) graczowi %s [ID: %d]", BizData[wartosc][eBizName], wartosc, GetNick(gracz, true), gracz));
             if(gracz != playerid) _MruAdmin(gracz, sprintf("Dosta³eœ biznes %s (ID %d) Admina %s [ID: %d]", BizData[wartosc][eBizName], wartosc, GetNick(playerid, true), playerid));
 		}

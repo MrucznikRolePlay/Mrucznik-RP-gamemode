@@ -81,15 +81,13 @@ YCMD:akceptuj(playerid, params[], help)
 					PlayerInfo[playerid][pPbiskey] = GetPVarInt(playerid, "Oferujacy_biz_ID"); 
 					MruMySQL_SaveAccount(playerid);
 					MruMySQL_SaveAccount(GetPVarInt(playerid, "Oferujacy_ID")); 
-					
-					format(string, sizeof(string),"CMD: %s [UID: %s] dal %s [UID: %d] biznes [ID: %d] za cene %d$",
-                        GetNick(playerid, true), //Daj¹cy
-                        PlayerInfo[playerid][pUID], //Daj¹cy UID
-                        GetNick(GetPVarInt(playerid, "Oferujacy_ID")),//Otrzymuj¹cy 
-                        PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pUID], //otrzymuj¹cy UID
-                        PlayerInfo[playerid][pPbiskey],
+
+                    Log(payLog, INFO, "%s sprzeda³ %s biznes %s za %d$",
+                        GetPlayerLogName(GetPVarInt(playerid, "Oferujacy_ID")),
+                        GetPlayerLogName(playerid),
+                        GetBusinessLogName(PlayerInfo[playerid][pPbiskey]),
                         GetPVarInt(playerid, "Oferujacy_Cena"));
-					Log(biznesLog, INFO, string);
+
 					ResetBizOffer(playerid); 
 					ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 
 				}

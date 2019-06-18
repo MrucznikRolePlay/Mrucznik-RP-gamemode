@@ -39,7 +39,6 @@ hook OnGameModeInit()
 	premiumLog = CreateLog("logi/premium", INFO | WARNING | ERROR, false);
 	admindutyLog = CreateLog("logi/adminduty", INFO | WARNING | ERROR, false);
 	admindutyMaszLog = CreateLog("logi/admindutymasz", INFO | WARNING | ERROR, false);
-	biznesLog = CreateLog("logi/biznesy", INFO | WARNING | ERROR, false);
 	nickLog = CreateLog("logi/nick", INFO | WARNING | ERROR, false);
 }
 

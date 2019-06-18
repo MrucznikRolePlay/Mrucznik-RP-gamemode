@@ -60,6 +60,11 @@ GetHouseLogName(house)
     return sprintf("{House: %d}", house);
 }
 
+GetBusinessLogName(business)
+{
+    return sprintf("{Business: %s[%d]}", BizData[business][eBizName], business);
+}
+
 MRP_CheckLastLogin(uid, &time, ip[])
 {
     new str[256];
