@@ -32,9 +32,9 @@ new Logger:nickLog; //Logi zmian nicków
 new Logger:sejfLog; //Logi stanu sejfów
 new Logger:serverLog; //Logi akcji serwera
 new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
+new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
 //TODO:
 new Logger:chatLog; //Logi chatów
-new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
 
 //old
 new Logger:admindutyLog;

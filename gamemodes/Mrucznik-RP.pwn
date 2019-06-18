@@ -1079,7 +1079,9 @@ public OnPlayerConnect(playerid)
 		printf("%s[%d] OnPlayerConnect - begin", GetNick(playerid), playerid);
 	#endif
 
-	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid));
+	new GPCI[41];
+	gpci(playerid, GPCI, 41);
+	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
 
 	Ac_OnPlayerConnect(playerid);
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
@@ -5985,7 +5987,7 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 			return 1;
 		}
-
+		
 		Log(connectLog, INFO, "Gracz %s zalogowa³ siê na konto", GetPlayerLogName(playerid));
 
 		//Nadawanie pieniêdzy:
@@ -6186,8 +6188,6 @@ OnPlayerLogin(playerid, password[])
 
     //Konwersja pojazdów:
     CONVERT_PlayerCar(playerid);
-
-    MRP_PlayerLog(playerid);
 
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
