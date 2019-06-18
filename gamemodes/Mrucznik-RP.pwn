@@ -4956,8 +4956,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	{
 		if(newstate == PLAYER_STATE_SPAWNED || newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
 		{
-			format(string, sizeof(string), "%s zostal skickowany za bycie niezalogowanym (OPST)", GetNick(playerid));
-			Log(kickLog, INFO, string);
+			Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: spawn bêd¹c niezalogowanym");
 			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
 			KickEx(playerid);
 			return 1;
@@ -5769,9 +5768,7 @@ public OnPlayerUpdate(playerid)
 		}
 		if(GetPlayerState(playerid) == PLAYER_STATE_SPAWNED || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER || GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 		{
-			new string[128];
-			format(string, sizeof(string), "%s zostal skickowany za bycie niezalogowanym", GetNick(playerid));
-			Log(kickLog, INFO, string);
+			Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: spawn bêd¹c niezalogowanym");
 			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
 			KickEx(playerid);
 			return 0;

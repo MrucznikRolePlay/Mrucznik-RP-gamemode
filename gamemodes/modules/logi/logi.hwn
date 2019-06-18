@@ -26,7 +26,6 @@ new Logger:adminLog; //Logi akcji administracyjnych
 new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
 new Logger:premiumLog;
 // new Logger:chatLog;
-// new Logger:bugLog;
 new Logger:punishmentLog;
 new Logger:warningLog;
 new Logger:commandLog;
@@ -39,7 +38,6 @@ new Logger:serverLog;
 new Logger:admindutyLog;
 new Logger:admindutyMaszLog;
 
-new Logger:kickLog;
 new Logger:banLog;
 new Logger:biznesLog;
 new Logger:statsLog;

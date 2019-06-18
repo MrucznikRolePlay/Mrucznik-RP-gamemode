@@ -31,8 +31,6 @@
 YCMD:skick(playerid, params[], help)
 {
 	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -59,10 +57,9 @@ YCMD:skick(playerid, params[], help)
 		                sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ Admina !");
 		                return 1;
 		            }
-			        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "AdmCmd: Admin %s was kicked by admin %s, Powód: CICHY kick", giveplayer, sendername);
-					Log(kickLog, INFO, string);
+					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ cichego kicka", 
+						GetPlayerLogName(playerid),
+						GetPlayerLogName(giveplayerid));
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 					AntySpam[playerid] = 1;

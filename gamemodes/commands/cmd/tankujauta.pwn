@@ -42,7 +42,7 @@ YCMD:tankujauta(playerid, params[], help)
 			new string[64];
 			format(string, sizeof(string), "AdmCmd: %s zatankowa³ wszystkie pojazdy.", GetNick(playerid));
 			SendPunishMessage(string, playerid);
-			Log(kickLog, INFO, string);
+			Log(adminLog, INFO, "Admin %s zatankowa³ wszystkie pojazdy", GetPlayerLogName(playerid));
 			SendClientMessage(playerid, COLOR_GREY, "Wszystkie pojazdy zatankowane ! ");
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{

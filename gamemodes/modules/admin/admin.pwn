@@ -499,8 +499,14 @@ SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 	strcat(nickOdbieracza, player); 
 	new string[256];
 	format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nickOdbieracza, timeVal, GetNick(adminid), (result));
-	Log(kickLog, INFO, string);
 	SendMessageToAdmin(string, COLOR_RED); 
+	
+	Log(punishmentLog, INFO, "Admin %s ukara³ offline %s kar¹ AJ %d minut, powód: %s", 
+		GetPlayerLogName(adminid),
+		nickOdbieracza,
+		timeVal,
+		result);
+
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
 		iloscAJ[adminid] = iloscAJ[adminid]+1;
@@ -524,8 +530,12 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 	poscig[playerid] = 0;
 	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNick(adminid), timeVal, (result)); 
-	Log(kickLog, INFO, string);
 	SendMessageToAdmin(string, COLOR_RED); 
+	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ AJ %d minut, powód: %s", 
+		GetPlayerLogName(adminid),
+		GetPlayerLogName(playerid),
+		timeVal,
+		result);
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
 		iloscAJ[adminid]++; 
@@ -542,8 +552,11 @@ GiveKickForPlayer(playerid, adminid, result[])//zjebane
 	new string[256];
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 	format(string, sizeof(string), "AdmCmd: Admin %s zkickowa³ %s, Powód: %s", GetNick(adminid), GetNick(playerid), (result));
-	Log(kickLog, INFO, string);
 	SendMessageToAdmin(string, COLOR_RED); 
+	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ kick, powód: %s", 
+		GetPlayerLogName(adminid),
+		GetPlayerLogName(playerid),
+		result);
 	//adminduty
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
@@ -563,8 +576,12 @@ GiveBPForPlayer(playerid, adminid, timeVal, result[])
 	PlayerInfo[playerid][pBP] = timeVal;
 	SendClientMessage(playerid, COLOR_NEWS, "SprawdŸ czy otrzymana kara jest zgodna z list¹ kar i zasad, znajdziesz j¹ na www.Mrucznik-RP.pl");
 	format(string, sizeof(string), "AdmCmd: %s dostal BP od %s na %d godzin, z powodem %s", GetNick(playerid), GetNick(adminid), timeVal, result);
-	Log(kickLog, INFO, string);
 	SendMessageToAdmin(string, COLOR_RED); 
+	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ blokady pisania na %d godzin, powód: %s", 
+		GetPlayerLogName(adminid),
+		GetPlayerLogName(playerid),
+		timeVal,
+		result);
 	//opis
 	//Opis_Usun(giveplayerid);
 	Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
