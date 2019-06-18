@@ -39,7 +39,7 @@ hook OnGameModeInit()
 
 	sejfLog = CreateLog("logi/sejf", INFO, false);
 	serverLog = CreateLog("logi/server", E_LOGLEVEL:ALL, false);
-	commandLog = CreateLog("logi/command", E_LOGLEVEL:ALL, false);
+	commandLog = CreateLog("logi/command", INFO | WARNING | ERROR, false);
 	chatLog = CreateLog("logi/chat", E_LOGLEVEL:DEBUG | INFO, false);
 	damageLog = CreateLog("logi/damage", E_LOGLEVEL:DEBUG | INFO, false);
 	connectLog = CreateLog("logi/connect", INFO, false);
