@@ -88,10 +88,14 @@ premium_loadForPlayer(playerid)
 			{
 				new lVal = kpEnds-gettime();
 
-				if(lVal > 0)
+				if(lVal > KP_TYDZIEN)
 				{
-					format(qr, 170, "Twoje konto premium wygasa za %d dni i %d godzin.", floatround(floatdiv(lVal, 86400), floatround_floor), floatround(floatdiv(lVal, 3600), floatround_floor)%24);
+					format(qr, 170, "UWAGA! Twoje konto premium wygasa za %d dni i %d godzin.", floatround(floatdiv(lVal, 86400), floatround_floor), floatround(floatdiv(lVal, 3600), floatround_floor)%24);
 					_MruAdmin(playerid, qr);
+				}
+				else
+				{
+					_MruAdmin(playerid, "Jesteœ posiadaczem konta premium! :)");
 				}
 				PremiumInfo[playerid][pKP] = 1;
 			}
@@ -255,7 +259,7 @@ KupKP(playerid)
 
 PrzedluzKP(playerid)
 {
-	ZabierzMC(playerid, MIESIAC_KP_CENA);
+	ZabierzMC(playerid, PRZEDLUZ_KP_CENA);
 	DajKP(playerid, PremiumInfo[playerid][pExpires]+KP_MIESIAC);
 	SendClientMessage(playerid, COLOR_LIGHTGREEN, "Konto premium przed³u¿one :D!"); 
 }
