@@ -66,11 +66,10 @@ YCMD:datek(playerid, params[], help)
 		ZabierzKase(playerid, moneys);
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		format(string, sizeof(string), "%s bardzo dziêkujemy za przekazan¹ sumê $%d.",sendername, moneys);
-		printf("%s", string);
 		SendAdminMessage(COLOR_YELLOW, string);
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 		SendClientMessage(playerid, COLOR_GRAD1, string);
-		Log(payLog, INFO, string);
+		Log(payLog, INFO, "%s wp³aci³ datek %d$", GetPlayerLogName(playerid), moneys);
 	}
 	return 1;
 }

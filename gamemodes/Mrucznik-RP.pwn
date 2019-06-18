@@ -1971,9 +1971,9 @@ public OnPlayerDeath(playerid, killerid, reason)
 							DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
 							format(string,128,"<< Hitman %s wype³ni³ kontrakt na: %s i zarobi³ $%d >>",killername,playername,PlayerInfo[playerid][pHeadValue]);
 							SendFamilyMessage(8, COLOR_YELLOW, string);
-							Log(payLog, INFO, string);
 							format(string,128,"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s. Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",playername);
 							SendClientMessageToAll(COLOR_NEWS, string);
+							Log(payLog, INFO, "Hitman %s zabi³ %s i zarobi³ %d$", GetPlayerLogName(killerid), GetPlayerLogName(playerid), PlayerInfo[playerid][pHeadValue]);
 							PlayerInfo[playerid][pHeadValue] = 0;
 							GotHit[playerid] = 0;
 							GetChased[playerid] = 999;
@@ -2313,8 +2313,7 @@ SetPlayerSpawnPos(playerid)
 		SendClientMessageToAll(COLOR_LIGHTRED, string);
 		format(string, sizeof(string), "Dodatkowo zabrano z twojego portfela %d$ i wyzerowano twoje bronie oraz zabrano po³owê matsów", kaseczka);
         SendClientMessage(playerid, COLOR_LIGHTRED, string);
-        format(string, sizeof(string),"%s dal /q podczas akcji i zabrano mu %d$ i %d mats oraz bronie", sendername, kaseczka, PlayerInfo[playerid][pMats]/2);
-        Log(payLog, INFO, string);
+        Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc zabrano mu %d$, %d materia³ów oraz broñ.", GetPlayerLogName(playerid), kaseczka, PlayerInfo[playerid][pMats]/2);
         ZabierzKase(playerid, kaseczka);
         PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
 	}
@@ -5719,10 +5718,8 @@ PayDay()
 			Dom[h][hData_DD] ++;
 			if(Dom[h][hData_DD] >= 30)
 			{
-			    new domex[128];
 			    ZlomowanieDomu(9999, h);
-				format(domex, sizeof(domex), "Dom nr %d zostal zezlomowany z powodu uplywu czasu");
-			    Log(payLog, INFO, domex);
+			    Log(serverLog, INFO, "Dom %s zosta³ zez³omowany z powodu up³ywu czasu.", GetHouseLogName(h));
 			}
 	    }
 		ZapiszDomy();

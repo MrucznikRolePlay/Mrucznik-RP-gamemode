@@ -28,7 +28,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 GetPlayerLogName(playerid)
 {
-    return sprintf("%s[%d]", GetNick(playerid), PlayerInfo[playerid][pUID]);
+    return sprintf("{Player: %s[%d]}", GetNick(playerid), PlayerInfo[playerid][pUID]);
 }
 
 GetWeaponLogName(weapon, ammo=-1)
@@ -37,12 +37,22 @@ GetWeaponLogName(weapon, ammo=-1)
     GetWeaponName(weapon, gunname, sizeof(gunname));
     if(ammo == -1)
     {
-        return sprintf("%s[id: %d]", gunname, weapon);
+        return sprintf("{Weapon: %s[id: %d]}", gunname, weapon);
     }
     else
     {
-        return sprintf("%s[id: %d, ammo: %d]", gunname, weapon, ammo);
+        return sprintf("{Weapon: %s[id: %d, ammo: %d]}", gunname, weapon, ammo);
     }
+}
+
+GetVehicleLogName(vehicleid)
+{
+    return sprintf("{Vehicle: %s[%d]}", VehicleNames[GetVehicleModel(vehicleid)-400], CarData[VehicleUID[vehicleid][vUID]][c_UID]);
+}
+
+GetHouseLogName(house)
+{
+    return sprintf("{House: %d}", house);
 }
 
 MRP_CheckLastLogin(uid, &time, ip[])

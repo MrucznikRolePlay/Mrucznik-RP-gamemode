@@ -23,7 +23,7 @@
 
 //-----------------<[ Zmienne: ]>-------------------
 new Logger:adminLog; //Logi akcji administracyjnych
-// new Logger:payLog;
+//new Logger:payLog;
 // new Logger:premiumLog;
 new Logger:sejfLog;
 // new Logger:chatLog;
@@ -35,16 +35,15 @@ new Logger:commandLog;
 // new Logger:connectLog;
 // new Logger:nickLog;
 // new Logger:damageLog;
+new Logger:serverLog;
 
 //old
 new Logger:admindutyLog;
 new Logger:admindutyMaszLog;
 
 new Logger:czitLog;
-new Logger:kasynoLog;
 new Logger:payLog;
 new Logger:autaLog; //Logi z akcji zwi¹zanych z pojazdami
-new Logger:bankomatLog;
 new Logger:premiumLog;
 new Logger:kickLog;
 new Logger:banLog;
@@ -52,7 +51,6 @@ new Logger:biznesLog;
 new Logger:statsLog;
 new Logger:eventLog;
 new Logger:ckLog; //Logi akcji administracyjnych
-new Logger:houseLog;
 new Logger:warnLog;
 new Logger:nickLog;
 

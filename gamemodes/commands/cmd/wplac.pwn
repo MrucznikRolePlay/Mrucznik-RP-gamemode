@@ -64,16 +64,17 @@ YCMD:wplac(playerid, params[], help)
 				sendTipMessage(playerid, "Maksymalnie w banku mo¿esz trzymaæ 100 milionów!"); 
 				return 1;
 			}
-			DajKase(playerid,-cashdeposit);
+			ZabierzKase(playerid, cashdeposit);
             //new poprowizji = $l * (1-$p*.01);
 			new curfunds = PlayerInfo[playerid][pAccount];
             if(GraczBankomat(playerid)) depo2 = floatround(((cashdeposit/100) * 6), floatround_round);
 			PlayerInfo[playerid][pAccount]=(cashdeposit-depo2)+PlayerInfo[playerid][pAccount];
+
+			Log(payLog, INFO, "%s wp³aci³ na swoje konto %d$. Koszt wp³aty %d, nowy stan %d$.", GetPlayerLogName(playerid), cashdeposit-depo2, depo2, PlayerInfo[playerid][pAccount]);
+
             if(GraczBankomat(playerid)) {
                 format(string, sizeof(string), "Wp³aci³eœ $%d na swoje konto, obecny stan to: $%d ", cashdeposit-depo2,PlayerInfo[playerid][pAccount]);
                 SendClientMessage(playerid, COLOR_YELLOW, string);
-				format(string, sizeof(string), "[BANKOMAT] %s wp³aci³ na swoje konto %d$. Nowy stan: %d$", GetNick(playerid), cashdeposit-depo2, PlayerInfo[playerid][pAccount]);
-				Log(bankomatLog, INFO, string);
             } else {
                 SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
                 format(string, sizeof(string), "  Poprzedni stan: $%d", curfunds);

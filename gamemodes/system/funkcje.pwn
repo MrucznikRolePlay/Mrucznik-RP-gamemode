@@ -441,14 +441,16 @@ Taxi_FareEnd(playerid)
 
 	_MruGracz(playerid, string);
 
-	format(string,128,"%s zarobil $%d dla KT podczas /duty",GetNick(playerid), TransportMoney[playerid]);
-	Log(payLog, INFO, string);
 
-	if(GetPlayerFraction(playerid) != FRAC_KT) DajKase(playerid, TransportMoney[playerid]);
+	if(GetPlayerFraction(playerid) != FRAC_KT) 
+	{
+		DajKase(playerid, TransportMoney[playerid]);
+		Log(payLog, INFO, "%s zarobi³ $%d na s³u¿bie taksówkarza.", GetPlayerLogName(playerid), TransportMoney[playerid]);
+	}
     else
     {
         Sejf_Add(FRAC_KT, TransportMoney[playerid]);
-        //DajKase(playerid, TransportMoney[playerid]/2);
+		Log(payLog, INFO, "%s zarobil $%d dla KT na s³u¿bie taksówkarza.", GetPlayerLogName(playerid), TransportMoney[playerid]);
     }
 	TransportValue[playerid] = 0; TransportMoney[playerid] = 0;
 }
@@ -1574,12 +1576,8 @@ Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
 
     new podatek = floatround(kasa*0.05); //tutaj do sejfu 5% podatku
     DajKase(playerid, kasa-podatek);
-    new str[128];
-    format(str, 128, "[Kostka] %s wygral z %s o %d$", GetNick(playerid), GetNick(loser), kasa);
     if(quit)
     {
-        strcat(str, " (quit)");
-
         SetPVarInt(playerid, "kostka",0);
         SetPVarInt(playerid, "kostka-throw", 0);
         SetPVarInt(playerid, "kostka-suma", 0);
@@ -1589,7 +1587,7 @@ Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-    Log(kasynoLog, INFO, str);
+    Log(payLog, INFO, "%s wygra³ rzuty kostk¹ z %s na kwotê %d$ %s", GetPlayerLogName(playerid), GetPlayerLogName(loser), kasa, quit ? "(quit)" : "");
     Sejf_Add(19, podatek);
 
 
@@ -4325,7 +4323,7 @@ Lotto(number)
 			        GetPlayerName(i, winner, sizeof(winner));
 					format(string, sizeof(string), "Totolotek: %s Wygra³ nagrodê w wysokoœci: $%d.", winner, Jackpot);
 					OOCOff(COLOR_WHITE, string);
-					Log(payLog, INFO, string);
+					Log(payLog, INFO, "%s wygra³ w totolotku %d$ (wygra³a liczba %d)", GetPlayerLogName(i), Jackpot, number);
 					format(string, sizeof(string), "* Wygra³eœ nagrodê o wysokoœci: $%d dziêki wytypowaniu prawid³owej liczby !", Jackpot);
 					SendClientMessage(i, COLOR_YELLOW, string);
 			    	DajKase(i, Jackpot);
@@ -5301,8 +5299,7 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
 
 	//SendClientMessage(playerid,COLOR_NEWS, komunikat);
 
-    format(komunikat, sizeof(komunikat), "%s kupil UNIKATOWY pojazd %s za %d MC. UID %d", nick, VehicleNames[model-400], cena, carid);
-	Log(payLog, INFO, komunikat);
+	Log(premiumLog, INFO, "%s kupi³ unikatowy pojazd %s za %dMC", GetPlayerLogName(playerid), GetVehicleLogName(CarData[carid][c_ID]), cena);
     //TODO
     if(carid >= MAX_CARS)
     {
@@ -5355,8 +5352,7 @@ KupowaniePojazdu(playerid, model, kolor1, kolor2, cena)
 
             ZabierzKase(playerid, cena);
 
-            format(komunikat, sizeof(komunikat), "%s kupil pojazd %s za %d$. UID %d", nick, VehicleNames[model-400], cena, carid);
-			Log(payLog, INFO, komunikat);
+			Log(payLog, INFO, "%s kupi³ pojazd %s za %d$", GetPlayerLogName(playerid), GetVehicleLogName(CarData[carid][c_ID]), cena);
             //TODO
             if(carid >= MAX_CARS) return SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Mo¿liwe przepe³nienie, auto zosta³o kupione lecz nie mo¿esz go u¿yæ.");
 
@@ -6277,14 +6273,7 @@ KupowanieDomu(playerid, dom, platnosc)
 	    PlayerInfo[playerid][pDomWKJ] = dom;
 	    PlayerInfo[playerid][pDomT] = h;
 	    SendClientMessage(playerid, COLOR_NEWS, "Aby zobaczyæ komendy domu wpisz /dompomoc");
-        format(str2, sizeof(str2), "%s kupil dom (id %d) za %d$", GeT, dom, cenadomu);
-		Log(payLog, INFO, str2);
-	    //
-		//nowe logi - domy
-		new day, month, year;
-		getdate(year, month, day);
-		format(str2, sizeof(str2), "[%d:%d:%d] %s [UID: %d]  kupi³ dom [%d] za %d$", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, cenadomu);
-		Log(houseLog, INFO, str2);
+		Log(payLog, INFO, "%s kupi³ dom %s za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), cenadomu);
 		ZapiszDom(dom);
 	}
 	return 1;
@@ -6400,8 +6389,7 @@ ZlomowanieDomu(playerid, dom)
 			new GeT2[512];
 			format(GeT2, sizeof(GeT2), "Sprzeda³eœ swój dom za %d$. Osoby wynajmuj¹ce zosta³y wyeksmitowane. Przedmioty w sejfie oraz dodatki do domu przepad³y.", (Dom[dom][hCena]/2));
 			SendClientMessage(playerid, COLOR_NEWS, GeT2);
-            format(GeT2, sizeof(GeT2), "%s zezlomowal dom nr %d i dostal %d$", GeT4, dom, (Dom[dom][hCena]/2));
-			Log(payLog, INFO, GeT2);
+			Log(payLog, INFO, "%s zezomowa³ dom %s i dosta³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), (Dom[dom][hCena]/2));
 			format(GeT, sizeof(GeT), "Brak");
 			Dom[dom][hWlasciciel] = GeT;
 		}
@@ -6409,9 +6397,7 @@ ZlomowanieDomu(playerid, dom)
 		{
 			if(strcmp(Dom[dom][hWlasciciel], "Gracz Nieaktywny") != 0)
 			{
-				new str[128];
-				format(str, 128, "Dom %d wlasciciel: %s zostal zezlomowany z powodu nieaktywnosci dluzszej niz 30 dni", dom, Dom[dom][hWlasciciel]);
-				Log(payLog, INFO, str);
+				Log(serverLog, INFO, "Dom %s zosta³ zez³omowany z powodu nieaktywnoœci w³aœciciela %s.", GetHouseLogName(dom), Dom[dom][hWlasciciel]);
 				format(GeT, sizeof(GeT), "Gracz Nieaktywny");
 				Dom[dom][hWlasciciel] = GeT;
 			}
@@ -6445,43 +6431,39 @@ SprawdzSpojnoscWlascicielaDomu(playerid)
 
 NaprawSpojnoscWlascicielaDomu(playerid)
 {
-	new string[256];
 	new domcheck = SprawdzSpojnoscWlascicielaDomu(playerid);
+	new dom = PlayerInfo[playerid][pDom];
 	if(domcheck == 1)
 	{
-		if(Dom[PlayerInfo[playerid][pDom]][hKupiony] == 0)
+		if(Dom[dom][hKupiony] == 0)
 		{
-			Dom[PlayerInfo[playerid][pDom]][hKupiony] = 1;
-			ZapiszDom(PlayerInfo[playerid][pDom]);
+			Dom[dom][hKupiony] = 1;
+			ZapiszDom(dom);
 			SendClientMessage(playerid, COLOR_PANICRED, "Wykryto bug z niekupionym domem, zosta³ on automatycznie naprawiony. Je¿eli komunikat bêdzie siê powtarza³ lub wyst¹pi¹ inne bugi, zg³oœ to koniecznie na forum!");
-			format(string, sizeof(string), "%s posiadal buga z niekupionym domem o (id %d)", GetNick(playerid), PlayerInfo[playerid][pDom] );
-			Log(payLog, INFO, string);
+			Log(serverLog, WARNING, "%s posiada³ bug z niekupionym domem %s. Naprawiono.", GetPlayerLogName(playerid), GetHouseLogName(dom));
 		}
 	}
 	else if(domcheck == 0)
 	{
-		if(Dom[PlayerInfo[playerid][pDom]][hKupiony] == 0)
+		if(Dom[dom][hKupiony] == 0)
 		{
-			DajKase(playerid, (Dom[PlayerInfo[playerid][pDom]][hCena]/2));
+			DajKase(playerid, (Dom[dom][hCena]/2));
 			SendClientMessage(playerid, COLOR_PANICRED, "Twój dom zosta³ zabrany z powodu nieaktywnoœci, otrzymujesz po³owê wartosci domu!");
-			format(string, sizeof(string), "%s stracil dom z powodu nieaktywnosci (id %d) i dostal %d$", GetNick(playerid), PlayerInfo[playerid][pDom], Dom[PlayerInfo[playerid][pDom]][hCena]/2 );
-			Log(payLog, INFO, string);
+			Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]/2);
 			PlayerInfo[playerid][pDom] = 0;
 		}
 		else
 		{
-			DajKase(playerid, (Dom[PlayerInfo[playerid][pDom]][hCena]/2));
+			DajKase(playerid, (Dom[dom][hCena]/2));
 			SendClientMessage(playerid, COLOR_PANICRED, "Wykro bug z dwoma w³aœcicielami! Jesteœ drugim w³aœcicielem, wiêc tracisz dom, otrzymujesz po³owê wartosci domu.");
-			format(string, sizeof(string), "%s stracil dom z powodu dwoch wlascicieli (id %d) i dostal %d$", GetNick(playerid), PlayerInfo[playerid][pDom], Dom[PlayerInfo[playerid][pDom]][hCena]/2 );
-			Log(payLog, INFO, string);
+			Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci (2 w³aœcicieli) i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]/2);
 			PlayerInfo[playerid][pDom] = 0;
 		}
 	}
 	else
 	{
 		SendClientMessage(playerid, COLOR_PANICRED, "Twój dom nie istnieje! Prawdopodobnie zosta³ usuniêty lub coœ posz³o nie tak.");
-		format(string, sizeof(string), "Brak domu gracza %s dom (id %d)", GetNick(playerid), PlayerInfo[playerid][pDom]);
-		Log(payLog, INFO, string);
+		Log(serverLog, ERROR, "Brak domu %s gracza %s. Usuwam mu dom.", GetPlayerLogName(playerid), GetHouseLogName(dom));
 		PlayerInfo[playerid][pDom] = 0;
 	}
 }
@@ -8112,319 +8094,7 @@ FunkcjaK(string[])
 
 Niwelacje(playerid)
 {
-	new kox[256], playername2[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, playername2, sizeof(playername2));
-	if(PlayerInfo[playerid][pMats] >= 500000000)
-	{
-		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d MATSÓW DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pMats],PlayerInfo[playerid][pLevel]);
-		SendClientMessage(playerid, COLOR_PANICRED, kox);
-		strins(kox, playername2, 0);
-  		PlayerInfo[playerid][pMats] = 0;
-		Log(payLog, INFO, kox);
-	}
-	if(PlayerInfo[playerid][pLevel] == 1)
-	{
-		if(kaska[playerid] >= 5000000)//5mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 5000000)//5mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-            PlayerInfo[playerid][pCash] = 0;
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 5000000)//5mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			PlayerInfo[playerid][pAccount] = 0;
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pMats] >= 1000000)
-		{
-			PlayerInfo[playerid][pMats] = 0;
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] == 2)
-	{
-		if(kaska[playerid] >= 20000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 20000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            PlayerInfo[playerid][pCash] = 0;
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 20000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			PlayerInfo[playerid][pAccount] = 0;
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] == 3)
-	{
-		if(kaska[playerid] >= 50000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 50000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-            PlayerInfo[playerid][pCash] = 0;
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 50000000)//1 000000 - 1mln
-		{
-
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			PlayerInfo[playerid][pAccount] = 0;
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] == 4)
-	{
-		if(kaska[playerid] >= 75000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 75000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-            PlayerInfo[playerid][pCash] = 0;
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 75000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			PlayerInfo[playerid][pAccount] = 0;
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] == 5)
-	{
-		if(kaska[playerid] >= 100000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 100000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-            PlayerInfo[playerid][pCash] = 0;
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 100000000)//1 000000 - 1mln
-		{
-
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			PlayerInfo[playerid][pAccount] = 0;
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] == 6)
-	{
-		if(kaska[playerid] >= 150000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 150000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-            PlayerInfo[playerid][pCash] = 0;
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 150000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-            PlayerInfo[playerid][pAccount] = 0;
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] == 7)
-	{
-		if(kaska[playerid] >= 200000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-   			ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 200000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-            PlayerInfo[playerid][pCash] = 0;
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 200000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            PlayerInfo[playerid][pAccount] = 0;
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] == 8)
-	{
-		if(kaska[playerid] >= 250000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 250000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            PlayerInfo[playerid][pCash] = 0;
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 250000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            PlayerInfo[playerid][pAccount] = 0;
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] == 9)
-	{
-		if(kaska[playerid] >= 350000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            ResetujKase(playerid);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 350000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            PlayerInfo[playerid][pCash] = 0;
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 350000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            PlayerInfo[playerid][pAccount] = 0;
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] >= 10 && PlayerInfo[playerid][pLevel] <= 12)
-	{
-		if(kaska[playerid] >= 500000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-            ResetujKase(playerid);
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 500000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-			SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-            PlayerInfo[playerid][pCash] = 0;
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 500000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-            PlayerInfo[playerid][pAccount] = 0;
-            SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-	}
-	else if(PlayerInfo[playerid][pLevel] >= 13 && PlayerInfo[playerid][pLevel] <= 30)
-	{
-		if(kaska[playerid] >= 1000000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
-            ResetujKase(playerid);
-            SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pCash] >= 1000000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
-            PlayerInfo[playerid][pCash] = 0;
-            SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-		if(PlayerInfo[playerid][pAccount] >= 1000000000)//1 000000 - 1mln
-		{
-			format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
-            PlayerInfo[playerid][pAccount] = 0;
-            SendClientMessage(playerid, COLOR_PANICRED, kox);
-			strins(kox, playername2, 0);
-			Log(payLog, INFO, kox);
-		}
-	}
+	//TODO:
 	return 1;
 }
 
