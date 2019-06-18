@@ -1548,7 +1548,7 @@ SetAntyCheatForPlayer(playerid, valueCode)
 	SetPVarInt(playerid, "AntyCheatOff", valueCode);
 	return 1;
 }
-GetNick(playerid, rp = false)
+stock GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
@@ -1556,6 +1556,12 @@ GetNick(playerid, rp = false)
 		//return nickRP[playerid];
 	}
 	return nick;
+}
+stock GetIp(playerid)
+{
+	new ip[16];
+	GetPlayerIp(playerid, ip, sizeof(ip));
+	return ip;
 }
 FindPlayerByNumber(number)
 {

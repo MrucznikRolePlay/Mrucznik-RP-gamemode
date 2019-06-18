@@ -30,11 +30,11 @@ new Logger:warningLog; //Logi warningów administracyjnych
 new Logger:commandLog; //Logi komendy wykonanych przez graczy
 new Logger:nickLog; //Logi zmian nicków
 new Logger:sejfLog; //Logi stanu sejfów
-//TODO:
 new Logger:serverLog; //Logi akcji serwera
+new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
+//TODO:
 new Logger:chatLog; //Logi chatów
 new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
-new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
 
 //old
 new Logger:admindutyLog;

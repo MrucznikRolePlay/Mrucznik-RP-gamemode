@@ -1079,6 +1079,8 @@ public OnPlayerConnect(playerid)
 		printf("%s[%d] OnPlayerConnect - begin", GetNick(playerid), playerid);
 	#endif
 
+	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid));
+
 	Ac_OnPlayerConnect(playerid);
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
@@ -1257,6 +1259,8 @@ public OnPlayerDisconnect(playerid, reason)
 	#if DEBUG == 1
 		printf("%s[%d] OnPlayerDisconnect - begin", GetNick(playerid), playerid);
 	#endif
+
+	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNick(playerid), playerid, reason);
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
@@ -1698,12 +1702,28 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 {
 	return 1;
 }
+
+public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
+{
+	Log(damageLog, INFO, "%s zg³asza zranienie gracza %s o %fhp broni¹ %d", 
+		GetPlayerLogName(playerid),
+		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
+		amount,
+		weaponid);
+}
+
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)
 	{
 		return 1;
 	}
+
+	Log(damageLog, INFO, "%s zosta³ zraniony przez %s o %fhp broni¹ %d", 
+		GetPlayerLogName(playerid),
+		IsPlayerConnected(issuerid) ? GetPlayerLogName(issuerid) : sprintf("%d", issuerid),
+		amount,
+		weaponid);
 
     SetTimerEx("OnPlayerTakeDamageWeaponHack", 500, false, "iii", issuerid, weaponid, playerid);
 
@@ -1780,6 +1800,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 	{
 		return 1;
 	}
+	
+	Log(damageLog, INFO, "%s zosta³ zabity przez %s, powód: %d", 
+		GetPlayerLogName(playerid),
+		IsPlayerConnected(killerid) ? GetPlayerLogName(killerid) : sprintf("%d", killerid),
+		reason);
 
     GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 
@@ -5960,6 +5985,8 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 			return 1;
 		}
+
+		Log(connectLog, INFO, "Gracz %s zalogowa³ siê na konto", GetPlayerLogName(playerid));
 
 		//Nadawanie pieniêdzy:
 		ResetujKase(playerid);
