@@ -37,13 +37,11 @@ hook OnGameModeInit()
 	commandLog = CreateLog("logi/command", INFO | WARNING | ERROR, false);
 	payLog = CreateLog("logi/pay", INFO | WARNING | ERROR, false);
 	premiumLog = CreateLog("logi/premium", INFO | WARNING | ERROR, false);
-	banLog = CreateLog("logi/ban", INFO | WARNING | ERROR, false);
 	admindutyLog = CreateLog("logi/adminduty", INFO | WARNING | ERROR, false);
 	admindutyMaszLog = CreateLog("logi/admindutymasz", INFO | WARNING | ERROR, false);
 	biznesLog = CreateLog("logi/biznesy", INFO | WARNING | ERROR, false);
 	statsLog = CreateLog("logi/setstats", INFO | WARNING | ERROR, false);
 	ckLog = CreateLog("logi/ck", INFO | WARNING | ERROR, false);
-	warnLog = CreateLog("logi/warn", INFO | WARNING | ERROR, false);
 	nickLog = CreateLog("logi/nick", INFO | WARNING | ERROR, false);
 }
 

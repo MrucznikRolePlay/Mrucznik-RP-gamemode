@@ -38,11 +38,9 @@ new Logger:serverLog;
 new Logger:admindutyLog;
 new Logger:admindutyMaszLog;
 
-new Logger:banLog;
 new Logger:biznesLog;
 new Logger:statsLog;
 new Logger:ckLog; //Logi akcji administracyjnych
-new Logger:warnLog;
 new Logger:nickLog;
 
 //------------------<[ Enumy: ]>--------------------

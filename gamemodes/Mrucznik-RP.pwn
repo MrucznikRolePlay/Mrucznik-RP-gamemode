@@ -5644,8 +5644,7 @@ PayDay()
 					if(kaska[i] >= 10000000 && PlayerInfo[i][pLevel] <= 2 || PlayerInfo[i][pAccount] >= 10000000 && PlayerInfo[i][pLevel] <= 2)
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
-						format(string, sizeof(string), "%s zostal zbanowany za 10mln i 1 lvl", playername2);
-						Log(banLog, INFO, string);
+						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
 						KickEx(i);
 					}
 					if(IsPlayerPremiumOld(i))

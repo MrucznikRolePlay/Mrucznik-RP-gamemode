@@ -1274,7 +1274,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         format(str, 128, "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), inputtext, powod);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(banLog, INFO, str);
+        Log(punishmentLog, INFO, "Admin %s zablokowa³ offline ip %s, powód: %s", 
+                GetPlayerLogName(playerid),
+                inputtext,
+                powod);
 
         SetPVarInt(playerid, "panel-kary-continue", 0);
     }
@@ -1293,7 +1296,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         format(str, 128, "ADM: %s - zablokowano nick: %s powód: %s", GetNick(playerid), inputtext, powod);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(banLog, INFO, str);
+        Log(punishmentLog, INFO, "Admin %s zablokowa³ offline %s, powód: %s", 
+                GetPlayerLogName(playerid),
+                inputtext,
+                powod);
 
         SetPVarInt(playerid, "panel-kary-continue", 0);
     }
@@ -1327,7 +1333,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         format(str, 128, "ADM: %s - odblokowano IP: %s", GetNick(playerid), inputtext);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(banLog, INFO, str);
+        Log(punishmentLog, INFO, "Admin %s odblokowa³ ip %s", 
+                GetPlayerLogName(playerid),
+                inputtext);
     }
     else if(dialogid == D_PANEL_KAR_UNBANNICK)
     {
@@ -1347,7 +1355,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         format(str, 128, "ADM: %s - odblokowano nick: %s", GetNick(playerid), inputtext);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(banLog, INFO, str);
+        Log(punishmentLog, INFO, "Admin %s odblokowa³ %s", 
+                GetPlayerLogName(playerid),
+                inputtext);
     }
     else if(dialogid == D_PANEL_KAR_ZNAJDZ)  //SprawdŸ dane po IP | SprawdŸ dane po nicku
     {

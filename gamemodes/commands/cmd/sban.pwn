@@ -31,8 +31,6 @@
 YCMD:sban(playerid, params[], help)
 {
 	new string[256];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -60,8 +58,10 @@ YCMD:sban(playerid, params[], help)
 						return 1;
 					}
 					
-					format(string, sizeof(string), "AdmCmd: Ukryty (/sban) Admin %s zbanowal %s, powód: %s",  sendername, giveplayer, result);
-					Log(banLog, INFO, string);
+					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ cichego bana, powód: %s", 
+						GetPlayerLogName(playerid),
+						GetPlayerLogName(giveplayerid),
+						result);
 				    MruMySQL_Banuj(giveplayerid, result, playerid);
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
