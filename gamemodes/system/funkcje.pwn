@@ -8100,7 +8100,320 @@ FunkcjaK(string[])
 
 Niwelacje(playerid)
 {
-	//TODO:
+	//TODO usun¹c albo poprawiæ, bo rzygaæ siê chce jak na to patrzê
+	// new kox[256], playername2[MAX_PLAYER_NAME];
+	// GetPlayerName(playerid, playername2, sizeof(playername2));
+	// if(PlayerInfo[playerid][pMats] >= 500000000)
+	// {
+	// 	format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d MATSÓW DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pMats],PlayerInfo[playerid][pLevel]);
+	// 	SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 	strins(kox, playername2, 0);
+  	// 	PlayerInfo[playerid][pMats] = 0;
+	// 	Log(payLog, INFO, kox);
+	// }
+	// if(PlayerInfo[playerid][pLevel] == 1)
+	// {
+	// 	if(kaska[playerid] >= 5000000)//5mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 5000000)//5mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 5000000)//5mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		PlayerInfo[playerid][pAccount] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pMats] >= 1000000)
+	// 	{
+	// 		PlayerInfo[playerid][pMats] = 0;
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] == 2)
+	// {
+	// 	if(kaska[playerid] >= 20000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 20000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 20000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		PlayerInfo[playerid][pAccount] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] == 3)
+	// {
+	// 	if(kaska[playerid] >= 50000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 50000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 50000000)//1 000000 - 1mln
+	// 	{
+
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		PlayerInfo[playerid][pAccount] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] == 4)
+	// {
+	// 	if(kaska[playerid] >= 75000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 75000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 75000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		PlayerInfo[playerid][pAccount] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] == 5)
+	// {
+	// 	if(kaska[playerid] >= 100000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 100000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 100000000)//1 000000 - 1mln
+	// 	{
+
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		PlayerInfo[playerid][pAccount] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] == 6)
+	// {
+	// 	if(kaska[playerid] >= 150000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 150000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 150000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+    //         PlayerInfo[playerid][pAccount] = 0;
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] == 7)
+	// {
+	// 	if(kaska[playerid] >= 200000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+   	// 		ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 200000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 200000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         PlayerInfo[playerid][pAccount] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] == 8)
+	// {
+	// 	if(kaska[playerid] >= 250000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 250000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 250000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         PlayerInfo[playerid][pAccount] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] == 9)
+	// {
+	// 	if(kaska[playerid] >= 350000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         ResetujKase(playerid);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 350000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 350000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         PlayerInfo[playerid][pAccount] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] >= 10 && PlayerInfo[playerid][pLevel] <= 12)
+	// {
+	// 	if(kaska[playerid] >= 500000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+    //         ResetujKase(playerid);
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 500000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+	// 		SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+    //         PlayerInfo[playerid][pCash] = 0;
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 500000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+    //         PlayerInfo[playerid][pAccount] = 0;
+    //         SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
+	// else if(PlayerInfo[playerid][pLevel] >= 13 && PlayerInfo[playerid][pLevel] <= 30)
+	// {
+	// 	if(kaska[playerid] >= 1000000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",kaska[playerid],PlayerInfo[playerid][pLevel]);
+    //         ResetujKase(playerid);
+    //         SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pCash] >= 1000000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pCash],PlayerInfo[playerid][pLevel]);
+    //         PlayerInfo[playerid][pCash] = 0;
+    //         SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// 	if(PlayerInfo[playerid][pAccount] >= 1000000000)//1 000000 - 1mln
+	// 	{
+	// 		format(kox, sizeof(kox), " ZNIWELOWANO TWOJE %d$ DO 0$. JE¯ELI UWA¯ASZ, ¯E NIES£USZNIE - ZG£OŒ STRATÊ NA FORUM. AKUTALNY LVL: %d",PlayerInfo[playerid][pAccount],PlayerInfo[playerid][pLevel]);
+    //         PlayerInfo[playerid][pAccount] = 0;
+    //         SendClientMessage(playerid, COLOR_PANICRED, kox);
+	// 		strins(kox, playername2, 0);
+	// 		Log(payLog, INFO, kox);
+	// 	}
+	// }
 	return 1;
 }
 
