@@ -50,6 +50,11 @@ GetVehicleLogName(vehicleid)
     return sprintf("{Vehicle: %s[%d]}", VehicleNames[GetVehicleModel(vehicleid)-400], CarData[VehicleUID[vehicleid][vUID]][c_UID]);
 }
 
+GetCarDataLogName(cardata)
+{
+    return sprintf("{Vehicle: %s[%d]}", VehicleNames[CarData[cardata][c_Model]-400], CarData[cardata][c_UID]);
+}
+
 GetHouseLogName(house)
 {
     return sprintf("{House: %d}", house);

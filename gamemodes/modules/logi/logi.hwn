@@ -39,12 +39,10 @@ new Logger:serverLog;
 new Logger:admindutyLog;
 new Logger:admindutyMaszLog;
 
-new Logger:autaLog; //Logi z akcji zwi¹zanych z pojazdami
 new Logger:kickLog;
 new Logger:banLog;
 new Logger:biznesLog;
 new Logger:statsLog;
-new Logger:eventLog;
 new Logger:ckLog; //Logi akcji administracyjnych
 new Logger:warnLog;
 new Logger:nickLog;

@@ -871,8 +871,7 @@ CONVERT_PlayerCar(playerid)
             {
                 format(str, 128, "CAR.CONVERTER: B³¹d! Brak pliku pojazdu o ID %d slot: %d.", carlist[i], i);
                 SendClientMessage(playerid, COLOR_YELLOW, str);
-                format(str, 128, "[CAR.CONVERTER]: File not found [%d]. Caller %s", carlist[i], nick);
-                Log(eventLog, INFO, str);
+                Log(serverLog, ERROR, "[CAR.CONVERTER]: File not found [%d]. Caller %s", carlist[i], nick);
                 continue;
             }
             strcat(owner, dini_Get(dopojazdu1, "Posiadacz"), 32);
@@ -892,8 +891,7 @@ CONVERT_PlayerCar(playerid)
                     format(str, 128, "CAR.CONVERTER: Pojazd ten przypisany ju¿ zosta³ do gracza o UID: %d", ownuid);
                     SendClientMessage(playerid, COLOR_YELLOW, str);
 
-                    format(str, 128, "[CAR.CONVERTER]: Owner mismatch for CarID [%d] is [%d]. Caller %s", carlist[i], ownuid, nick);
-                    Log(eventLog, INFO, str);
+                    Log(serverLog, ERROR, "[CAR.CONVERTER]: Owner mismatch for CarID [%d] is [%d]. Caller %s", carlist[i], ownuid, nick);
                     continue;
                 }
             }
@@ -903,8 +901,7 @@ CONVERT_PlayerCar(playerid)
                 format(str, 128, "CAR.CONVERTER: Pojazd %d nie posiada modelu.", carlist[i]);
                 SendClientMessage(playerid, COLOR_YELLOW, str);
 
-                format(str, 128, "[CAR.CONVERTER]: Invalid model. CarID [%d] is [%d]. Caller %s", carlist[i], model, nick);
-                Log(eventLog, INFO, str);
+                Log(serverLog, ERROR, "[CAR.CONVERTER]: Invalid model. CarID [%d] is [%d]. Caller %s", carlist[i], model, nick);
                 continue;
             }
             x = dini_Float(dopojazdu1, "Pozycja_X");
@@ -927,8 +924,7 @@ CONVERT_PlayerCar(playerid)
                 format(str, 128, "CAR.CONVERTER: Pojazd %d nie móg³ zostaæ stworzony w bazie.", carlist[i]);
                 SendClientMessage(playerid, COLOR_YELLOW, str);
 
-                format(str, 128, "[CAR.CONVERTER]: Can't query CarID [%d]. Caller %s", carlist[i], nick);
-                Log(eventLog, INFO, str);
+                Log(serverLog, ERROR, "[CAR.CONVERTER]: Can't query CarID [%d]. Caller %s", carlist[i], nick);
                 continue;
             }
             new lUID = mysql_insert_id();

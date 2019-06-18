@@ -160,7 +160,7 @@ YCMD:news(playerid, params[], help)
 					format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.",playerid,sendername,params);
 					ABroadCast(COLOR_LIGHTRED,string,1);
 					Log(warningLog, INFO, "%s reklamuje na /news: %s", GetPlayerLogName(playerid), params);
-					return
+					return 1;
 				}
 				else
 				{
