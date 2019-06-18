@@ -57,6 +57,8 @@ YCMD:a(playerid, params[], help)
 		}
 		SendAdminMessage(0xFFC0CB, string);
 		SendDiscordMessage(DISCORD_ADMIN_CHAT, string);
+		Log(chatLog, INFO, "%s admin chat: %s", GetPlayerLogName(playerid), params);
+
 	}
 	return 1;
 }
