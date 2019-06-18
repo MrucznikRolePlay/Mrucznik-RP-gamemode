@@ -55,8 +55,10 @@ YCMD:vopis(playerid, params[], help)
 			new str[64];
 			format(str, sizeof(str), "(OPIS) - Usun¹³eœ opis pojazdu ustawiony przez gracza %s.", CarOpisCaller[id]);
 			SendClientMessage(playerid, COLOR_PURPLE, str);
-			format(str, sizeof(str), "%s usun¹³ opis ustawiony przez gracza %s - pojazd %d", GetNick(playerid), CarOpisCaller[id], id);
-			Log(statsLog, INFO, str);
+			Log(adminLog, INFO, "Admin %s usun¹³ opis pojazdu %s ustawiony przez gracza %s", 
+						GetPlayerLogName(playerid),
+                        GetVehicleLogName(id),
+						CarOpisCaller[id]);
 			return 1;
         }
         else

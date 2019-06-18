@@ -34,9 +34,7 @@ YCMD:wylogujall(playerid, params[], help)
     {
 		if (IsAHeadAdmin(playerid))
 		{
-            new str[128];
-            format(str, 128, "* Admin %s wylogowa³ WSZYSTKICH!!", GetNick(playerid));
-            Log(statsLog, INFO, str);
+            Log(adminLog, INFO, "Admin %s wylogowa³ wszystkich graczy", GetPlayerLogName(playerid));
             foreach(new i : Player)
             {
     			if(IsPlayerConnected(i))

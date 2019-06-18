@@ -54,34 +54,14 @@ YCMD:koxubankot(playerid, params[], help)
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						PlayerInfo[para1][pAdmin] = level;
-						format(string, sizeof(string), "AdmCmd: %s mianowa³ %s na %d level admina.", sendername, giveplayer, level);
-						Log(statsLog, INFO, string);
 						format(string, sizeof(string), "   Zosta³eœ mianowany na %d level admina przez %s", level, sendername);
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "   Da³eœ %s admina o levelu %d.", giveplayer,level);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+           	 			Log(adminLog, INFO, "Admin %s mianowa³ %s na %d level admina", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					}
 				}
 				
-			}
-			else if(PlayerInfo[playerid][pUID] == 6480)//Pluszak
-			{
-				if(IsPlayerConnected(para1))
-				{
-					if(para1 != INVALID_PLAYER_ID)
-					{
-						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						PlayerInfo[para1][pAdmin] = level;
-						format(string, sizeof(string), "AdmCmd: %s mianowa³ %s na %d level admina.", sendername, giveplayer, level);
-						Log(statsLog, INFO, string);
-						format(string, sizeof(string), "   Zosta³eœ mianowany na %d level admina przez %s", level, sendername);
-						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "   Da³eœ %s admina o levelu %d.", giveplayer,level);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					}
-				}
-			
 			}
 		}
 		else

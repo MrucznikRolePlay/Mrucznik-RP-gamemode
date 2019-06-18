@@ -48,9 +48,7 @@ YCMD:kasa(playerid, params[], help)
 					ResetujKase(playa);
 					PlayerInfo[playa][pCash] = 0;
 					DajKase(playa, money);
-					new string[128];
-					format(string, sizeof(string), "%s dal %s: %d$ /money", GetNick(playerid), GetNick(playa), money);
-					Log(statsLog, INFO, string);
+					Log(adminLog, INFO, "Admin %s da³ %s kwotê %d$ (/money)", GetPlayerLogName(playerid), GetPlayerLogName(playa), money);
 				}
 			}
 		}

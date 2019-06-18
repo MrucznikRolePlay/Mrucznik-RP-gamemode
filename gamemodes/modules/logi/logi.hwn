@@ -39,8 +39,6 @@ new Logger:admindutyLog;
 new Logger:admindutyMaszLog;
 
 new Logger:biznesLog;
-new Logger:statsLog;
-new Logger:ckLog; //Logi akcji administracyjnych
 new Logger:nickLog;
 
 //------------------<[ Enumy: ]>--------------------

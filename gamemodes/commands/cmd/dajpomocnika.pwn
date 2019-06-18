@@ -52,12 +52,11 @@ YCMD:dajpomocnika(playerid, params[], help)
             {
 
 				PlayerInfo[para1][pNewAP] = level;
-				format(string, sizeof(string), "AdmCmd: %s mianowal %s na %d level poladmina.", sendername, giveplayer, level);
-				Log(ckLog, INFO, string);
 				format(string, sizeof(string), "Zosta³eœ mianowany na %d level pó³admina przez %s", level, sendername);
 				SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "Da³eœ %s pó³admina o levelu %d.", giveplayer,level);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				Log(adminLog, INFO, "Admin %s mianowa³ %s na %d level pó³admina", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
             }
 			else
 			{

@@ -73,16 +73,21 @@ YCMD:setveh(playerid, params[], help)
 
                         if(PlayerInfo[para1][pCars][nrcar-1] != 0)
                         {
-                            format(string, 256, "Gracz posiada³ auto (UID: %d) na slocie %d. Pojazd zostaje bez w³asciciela.", CarData[PlayerInfo[para1][pCars][nrcar-1]][c_UID], nrcar);
-                            Log(statsLog, INFO, string);
+                            Log(serverLog, WARNING, "Gracz %s posiada³ auto %s na slocie %d. Pojazd zostaje bez w³asciciela.", 
+                                GetPlayerLogName(para1),
+                                GetCarDataLogName(PlayerInfo[para1][pCars][nrcar-1]),
+                                nrcar);
                         }
 
                         if(level != 0)
                         {
     						format(string, sizeof(string), " Ustawiono pojazd %s (%d) graczowi %s.", VehicleNames[CarData[lID][c_Model]-400],level,GetNick(para1));
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-    						format(string, sizeof(string), "%s dal %s auto %s UID %d na slot %d /setcar", GetNick(playerid), GetNick(para1), VehicleNames[CarData[lID][c_Model]-400], level, nrcar);
-    						Log(statsLog, INFO, string);
+    						Log(adminLog, INFO, "Admin %s da³ %s auto %s na slot %d", 
+                                GetPlayerLogName(playerid),
+                                GetPlayerLogName(para1),
+                                GetCarDataLogName(lID),
+                                nrcar);
 
                             PlayerInfo[para1][pCars][nrcar-1] = lID;
 
@@ -96,8 +101,11 @@ YCMD:setveh(playerid, params[], help)
                         {
                             format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", nrcar, GetNick(para1));
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-    						format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d /setcar", GetNick(playerid), GetNick(para1), nrcar);
-    						Log(statsLog, INFO, string);
+    						Log(adminLog, INFO, "Admin %s usun¹³ %s auto %s ze slotu %d", 
+                                GetPlayerLogName(playerid),
+                                GetPlayerLogName(para1),
+                                GetCarDataLogName(lID),
+                                nrcar);
 
                             PlayerInfo[para1][pCars][nrcar-1] = 0;
 

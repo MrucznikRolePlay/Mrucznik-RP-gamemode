@@ -15841,9 +15841,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 								format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-								Log(statsLog, INFO, string);
-
+								
+                   				Log(adminLog, INFO, "Admin %s usun¹³ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
 								//Car_SortPlayerCars(i);
 								break;
 							}
@@ -15853,8 +15856,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_OwnerType] = 0;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
-				format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype 0 - %s", car, GetNick(playerid));
-				Log(statsLog, INFO, string);
+				Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na 0", GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
             case 1:
             {
@@ -15909,8 +15911,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 								format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-								Log(statsLog, INFO, string);
+								Log(adminLog, INFO, "Admin %s usun¹³ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
 
 								//Car_SortPlayerCars(i);
 								break;
@@ -15921,8 +15926,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_OwnerType] = 6;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
-				format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype 6 - %s", car, GetNick(playerid));
-				Log(statsLog, INFO, string);
+				Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na 6",  GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
         }
         ShowCarEditDialog(playerid);
@@ -15957,8 +15961,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 						format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-						Log(statsLog, INFO, string);
+						Log(adminLog, INFO, "Admin %s usun¹³ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
 
 						//Car_SortPlayerCars(i);
 						break;
@@ -15981,8 +15988,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		CarData[car][c_OwnerType] = typ;
 		CarData[car][c_Owner] = strval(inputtext);
 		
-		format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype %d owner %d - %s", car, typ, strval(inputtext), GetNick(playerid));
-		Log(statsLog, INFO, string);
+		Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na %d", GetPlayerLogName(playerid), GetCarDataLogName(car), typ);
 		Car_Save(car, CAR_SAVE_OWNER);
 		
         ShowCarEditDialog(playerid);
