@@ -55,7 +55,7 @@ YCMD:reklama(playerid, params[], help)
 				SendClientMessage(i, 0xD8C173FF, string);
 			}
 		}
-        Log(serverLog, INFO, "%s u¿y³ /ha", GetPlayerLogName(playerid));
+        Log(warningLog, INFO, "%s u¿y³ /ha", GetPlayerLogName(playerid));
 		AntySpam[playerid] = 1;
 		SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
 	}

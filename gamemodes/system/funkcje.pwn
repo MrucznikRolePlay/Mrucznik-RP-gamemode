@@ -8515,14 +8515,14 @@ Sejf_Add(frakcja, kasa)
 {
     Sejf_Frakcji[frakcja]+=kasa;
     Sejf_Save(frakcja);
-	Log(serverLog, E_LOGLEVEL:DEBUG, "SEJF FRAKCJA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Frakcji[frakcja]);
+	Log(sejfLog, INFO, "SEJF FRAKCJA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Frakcji[frakcja]);
 }
 
 SejfR_Add(frakcja, kasa)
 {
     Sejf_Rodziny[frakcja]+=kasa;
     SejfR_Save(frakcja);
-    Log(serverLog, E_LOGLEVEL:DEBUG, "SEJF RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
+    Log(sejfLog, INFO, "SEJF RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
 }
 
 Sejf_Save(frakcja)

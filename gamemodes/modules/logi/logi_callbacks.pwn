@@ -37,6 +37,7 @@ hook OnGameModeInit()
 	warningLog = CreateLog("logi/warning", INFO, false);
 	nickLog = CreateLog("logi/nick", INFO, false);
 
+	sejfLog = CreateLog("logi/sejf", INFO, false);
 	serverLog = CreateLog("logi/server", E_LOGLEVEL:DEBUG | INFO | WARNING | ERROR, false);
 	commandLog = CreateLog("logi/command", INFO, false);
 	chatLog = CreateLog("logi/chat", INFO, false);
