@@ -28,10 +28,10 @@
 //-----------------<[ Funkcje: ]>-------------------
 GetPlayerLogName(playerid)
 {
-    if(gPlayerLogged[playerid]) {
-        return sprintf("{Player: %s[%d]}", GetNick(playerid), PlayerInfo[playerid][pUID]);
+    if(IsPlayerConnected(playerid) && gPlayerLogged[playerid]) {
+        safe_return sprintf("{Player: %s[%d]}", GetNick(playerid), PlayerInfo[playerid][pUID]);
     } 
-    return sprintf("{Player: %s}", GetNick(playerid));
+    safe_return sprintf("{Player: %s}", GetNick(playerid));
 }
 
 GetWeaponLogName(weapon, ammo=-1)
@@ -40,37 +40,37 @@ GetWeaponLogName(weapon, ammo=-1)
     GetWeaponName(weapon, gunname, sizeof(gunname));
     if(ammo == -1)
     {
-        return sprintf("{Weapon: %s[id: %d]}", gunname, weapon);
+        safe_return sprintf("{Weapon: %s[id: %d]}", gunname, weapon);
     }
     else
     {
-        return sprintf("{Weapon: %s[id: %d, ammo: %d]}", gunname, weapon, ammo);
+        safe_return sprintf("{Weapon: %s[id: %d, ammo: %d]}", gunname, weapon, ammo);
     }
 }
 
 GetVehicleLogName(vehicleid)
 {
-    return sprintf("{Vehicle: %s[%d]}", VehicleNames[GetVehicleModel(vehicleid)-400], CarData[VehicleUID[vehicleid][vUID]][c_UID]);
+    safe_return sprintf("{Vehicle: %s[%d]}", VehicleNames[GetVehicleModel(vehicleid)-400], CarData[VehicleUID[vehicleid][vUID]][c_UID]);
 }
 
 GetCarDataLogName(cardata)
 {
-    return sprintf("{Vehicle: %s[%d]}", VehicleNames[CarData[cardata][c_Model]-400], CarData[cardata][c_UID]);
+    safe_return sprintf("{Vehicle: %s[%d]}", VehicleNames[CarData[cardata][c_Model]-400], CarData[cardata][c_UID]);
 }
 
 GetHouseLogName(house)
 {
-    return sprintf("{House: %d}", house);
+    safe_return sprintf("{House: %d}", house);
 }
 
 GetBusinessLogName(business)
 {
-    return sprintf("{Business: %s[%d]}", BizData[business][eBizName], business);
+    safe_return sprintf("{Business: %s[%d]}", BizData[business][eBizName], business);
 }
 
 GetFractionLogName(fraction)
 {
-    return sprintf("{Fraction: %s[%d]}", FractionNames[fraction], fraction);
+    safe_return sprintf("{Fraction: %s[%d]}", FractionNames[fraction], fraction);
 }
 
 //end
