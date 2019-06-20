@@ -453,11 +453,6 @@ IsAUnikat(modelid)
 	return 0;
 }
 
-IsAKox(playerid)
-{
-	return PlayerInfo[playerid][pUID] == 1 || PlayerInfo[playerid][pUID] == 2;
-}
-
 PlayerHasSkin(playerid, skinid)
 {
 	for(new i; i<MAX_PREMIUM_SKINS; i++)

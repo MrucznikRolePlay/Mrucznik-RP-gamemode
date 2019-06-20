@@ -238,6 +238,12 @@ IsAHeadAdmin(playerid)
 	}
 	return 0;
 }
+
+IsAKox(playerid)
+{
+	return PlayerInfo[playerid][pUID] == 1 || PlayerInfo[playerid][pUID] == 2;
+}
+
 IsAScripter(playerid)
 {
 	if(PlayerInfo[playerid][pNewAP] == 5)
@@ -246,6 +252,7 @@ IsAScripter(playerid)
 	}
 	return 0;
 }
+
 SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bie
 {
 	foreach(new i : Player)
@@ -259,6 +266,7 @@ SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bi
 	}
 	return 1;
 }
+
 KickPlayerTXD(playerid, adminid, reason[])
 {
     //PlayerLogged[playerid]=0;
@@ -276,6 +284,7 @@ KickPlayerTXD(playerid, adminid, reason[])
 	}
     return 1;
 }
+
 AJPlayerTXD(playerid, adminid, reason[], timeVal)
 {
 	new str[256];
