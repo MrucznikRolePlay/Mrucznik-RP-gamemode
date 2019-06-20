@@ -1152,7 +1152,6 @@ public OnPlayerConnect(playerid)
 	}
 
 	gItemAt[playerid] = 0;
-	printf("Poprawnie Connect ID: %d", playerid);
 	return 1;
 }
 public OnPlayerPause(playerid)
@@ -5768,7 +5767,7 @@ OnPlayerLogin(playerid, password[])
 		if( !MruMySQL_LoadAcocount(playerid) )
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b³¹d konta. Zg³oœ zaistnia³¹ sytuacjê na forum.");
-			printf("Nick %s posiada blad krytyczny konta (pusty rekord?)", nick);
+			Log(serverLog, ERROR, "Krytyczny b³¹d konta %s (pusty rekord?)", nick);
 			KickEx(playerid);
 			return 1;
 		}
