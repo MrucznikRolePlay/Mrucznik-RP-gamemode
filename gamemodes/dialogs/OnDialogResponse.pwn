@@ -22,9 +22,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(dialogid == D_ANIMLIST || dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B³êdne ID GUI.");
-        #if defined DEBUG
-        printf("B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
-        #endif
+        Log(serverLog, WARNING, "B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
         return 1;
     }
     if(IsDialogProtected(dialogid) || true) //MySQL anti injection
@@ -1040,7 +1038,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 SendClientMessage(playerid, 0x05CA8CFF, str);
                 
 				MruMySQL_ZapiszUprawnienia(playerid);
-                printf("(PERM) %s zmienil prawa %s (%d) na %b",GetNick(playerid), GetNick(id), PlayerInfo[id][pUID], ACCESS[id]);
+				Log(adminLog, INFO, "Admin %s zmieni³ prawa %s na %b", GetPlayerLogName(playerid), GetPlayerLogName(id), ACCESS[id]);
             }
             return 1;
         }
@@ -13631,6 +13629,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 			{
+				Log(commandLog, INFO, "%s zlikwidowa³ trasê wyœcigow¹ %s[%d]", GetPlayerLogName(playerid), Wyscig[tworzenietrasy[playerid]][wNazwa], tworzenietrasy[playerid]);
+
 			    Wyscig[tworzenietrasy[playerid]][wStworzony] = 0;
 				strcat(Wyscig[tworzenietrasy[playerid]][wNazwa], "Wolne", 20);
 				strcat(Wyscig[tworzenietrasy[playerid]][wOpis], "", 50);
@@ -13644,7 +13644,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			  		wCheckpoint[tworzenietrasy[playerid]][ii][1] = 0;
 			    	wCheckpoint[tworzenietrasy[playerid]][ii][2] = 0;
 			    }
-			    printf("Trasa %d zlikwidowana", tworzenietrasy[playerid]);
 				SendClientMessage(playerid, COLOR_RED, "Trasa pomyœlnie zlikwidowana!");
 				tworzenietrasy[playerid] = 666;
 			    if(PlayerInfo[playerid][pRank] >= 4)

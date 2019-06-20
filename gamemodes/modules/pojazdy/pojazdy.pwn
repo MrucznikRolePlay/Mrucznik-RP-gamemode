@@ -530,7 +530,7 @@ Car_Spawn(lUID, bool:onload=false, bool:loaddesc=true)
     Car_AddTune(vehicleid);
     CarData[lUID][c_ID] = vehicleid;
 
-	if(!onload) printf("Pojazd nr %d zespawnowany!", vehicleid);
+	if(!onload) Log(serverLog, INFO, "Pojazd nr %d zespawnowany!", vehicleid);
 
 	SetVehicleHealth(vehicleid, CarData[lUID][c_HP]);
 

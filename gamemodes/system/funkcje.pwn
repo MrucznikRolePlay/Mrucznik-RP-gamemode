@@ -8305,14 +8305,6 @@ Sejf_Load()
     mysql_free_result();
 }
 
-public HTTP_LogResponse(index, response_code, data[])
-{
-    if(index == HTTP_SEND_LOGS)
-    {
-        if(strfind(data, "Not set") != 1) print("Check your POST, it isn't set.");
-    }
-}
-
 CheckLoginNick(playerid, nick[])
 {
 	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)

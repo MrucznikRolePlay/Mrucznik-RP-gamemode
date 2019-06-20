@@ -260,7 +260,6 @@ PlayerTalkOOC(playerid, text[], Float:rangeTalk)
             }
         }
 	    format(string, sizeof(string), "(( %s Napisa³: %s ))", GetNick(playerid), text);
-        printf("%s", string);
 		SetPlayerChatBubble(playerid,string,COLOR_FADE1,25.0,8000);
 	    Log(chatLog, INFO, "%s OOC: %s", GetPlayerLogName(playerid), text);
 	}

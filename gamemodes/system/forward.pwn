@@ -101,7 +101,6 @@ forward INT_AirTower_RadarLoop(playerid);
 //12.07
 forward TRAIN_DoHorn(veh);
 //16.07
-forward HTTP_LogResponse(index, response_code, data[]);
 
 forward B_OnTrailerDetached(trailerid, fromvehicleid);
 forward B_OnTrailerAttached(trailerid, tovehicleid);

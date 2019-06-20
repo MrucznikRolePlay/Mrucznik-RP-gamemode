@@ -99,7 +99,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 
     if(PlayerInfo[playerid][pLevel] == 0)
     {
-        printf("MySQL:: %s - blad zapisu!!!", GetNick(playerid));
+        Log(mysqlLog, ERROR, "MySQL:: %s - b³¹d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
         return 0;
     }
 	

@@ -171,7 +171,7 @@ ZabierzKP(playerid)
         }
         else
         {
-        	printf("ERROR: ZabierzKP zosta³o wykonane na osobie, która nie posiada³a premium! UID Postaci: %d", PlayerInfo[playerid][pUID]);
+        	Log(premiumLog, ERROR, "ERROR: ZabierzKP zosta³o wykonane na osobie, która nie posiada³a premium! %s", GetPlayerLogName(playerid));
         }
 	}
 }
@@ -225,7 +225,7 @@ DajMC(playerid, mc)
 	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s nadano %dMC", GetPlayerLogName(playerid), mc);
 	if(mc <= 0)
 	{
-		printf("ERROR: funkcja DajMC miala ujemna wartosc dla playerid: %s [%d] Wartosc: %d", GetNick(playerid), playerid, mc);
+		Log(premiumLog, ERROR,"ERROR: funkcja DajMC miala ujemna wartosc dla %s Wartosc: %d", GetPlayerLogName(playerid), mc);
 		return 0;
 	}
 	PremiumInfo[playerid][pMC] += mc;
@@ -240,7 +240,7 @@ ZabierzMC(playerid, mc)
 	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s zabrano %dMC", GetPlayerLogName(playerid), mc);
 	if(mc <= 0)
 	{
-		printf("ERROR: funkcja ZabierzMC miala ujemna wartosc dla playerid: %s [%d] Wartosc: %d", GetNick(playerid), playerid, mc);
+		Log(premiumLog, ERROR, "ERROR: funkcja ZabierzMC miala ujemna wartosc dla %s", GetPlayerLogName(playerid), mc);
 		return 0;
 	}
 	PremiumInfo[playerid][pMC] -= mc;
