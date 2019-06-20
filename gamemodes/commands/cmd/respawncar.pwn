@@ -47,12 +47,12 @@ YCMD:respawncar(playerid, params[], help)
     if(used) return sendErrorMessage(playerid, "Pojazd nie jest pusty");
     else
     {
+        Log(adminLog, INFO, "Admin %s respawnowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(v));
         SetVehicleToRespawn(v);
 	    if(Car_GetOwnerType(v) == CAR_OWNER_PLAYER)
 	    {
             Car_Unspawn(v);
         }
     }
-    printf("[RESPAWN] Pojazd %d unspawnowany przez %s", v, GetNick(playerid));
     return 1;
 }

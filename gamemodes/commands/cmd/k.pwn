@@ -53,6 +53,7 @@ YCMD:k(playerid, params[], help)
         }
 
         PlayerTalkIC(playerid, params, "krzyczy", 15.0, true);
+	    Log(chatLog, INFO, "%s krzyk: %s", GetPlayerLogName(playerid), params);
     }
     if(!IsPlayerInAnyVehicle(playerid))
     {

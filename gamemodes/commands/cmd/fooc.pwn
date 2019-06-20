@@ -100,7 +100,7 @@ YCMD:fooc(playerid, params[], help)
                 SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
 				SendDiscordOrgMessage(member, string);
 			}
-			printf("%s", string);
+            Log(chatLog, INFO, "%s radio rodziny %d OOC: %s", GetPlayerLogName(playerid), member, params);
 			return 1;
 		}
         else if(GetPlayerFraction(playerid) == FRAC_GOV || GetPlayerFraction(playerid) == FRAC_BOR|| GetPlayerOrg(playerid) == 1) //DMV i BOR po³aczenie
@@ -110,17 +110,8 @@ YCMD:fooc(playerid, params[], help)
     		SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
 			SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
-            printf("%s", string);
+            Log(chatLog, INFO, "%s radio frakcji %d OOC: %s", GetPlayerLogName(playerid), member, params);
         }
-       /* else if(GetPlayerFraction(playerid) == FRAC_BOR) //DMV i BOR po³aczenie
-        {
-            new member = GetPlayerFraction(playerid);
-            format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
-    		SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
-            SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
-            SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
-            printf("%s", string);
-        }*/
 		else
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jesteœ we frakcji!");

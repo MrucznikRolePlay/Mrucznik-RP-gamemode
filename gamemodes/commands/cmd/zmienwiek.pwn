@@ -53,7 +53,7 @@ YCMD:zmienwiek(playerid, params[], help)
                     GetPlayerName(para1, giveplayer, sizeof(giveplayer));
                     GetPlayerName(playerid, sendername, sizeof(sendername));
                     PlayerInfo[para1][pAge] = level;
-                    printf("AdmCmd: %s zmieni³ wiek %s na %d.", sendername, giveplayer, level);
+					Log(adminLog, INFO, "Admin %s zmieni³ wiek %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
                     format(string, sizeof(string), "   Twój wiek zosta³ zmieniony na %d lat przez %s", level, sendername);
                     SendClientMessage(para1, COLOR_LIGHTBLUE, string);
                     format(string, sizeof(string), "   Zmieni³eœ wiek graczowi %s na %d lat.", giveplayer,level);

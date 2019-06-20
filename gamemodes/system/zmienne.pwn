@@ -52,19 +52,6 @@ new glosowanie_admina_status = 0;
 new glosowanie_admina_tak = 0;
 new glosowanie_admina_nie = 0;
 
-//trashmaster job
-/*
-new pTrashCollected[MAX_PLAYERS]; 
-new trasherPoint[MAX_PLAYERS]; 
-new trasherZoneID[MAX_PLAYERS]; 
-new trasherStartCollecting[MAX_PLAYERS]; 
-new trashCanPoint1[MAX_PLAYERS];
-new trashCanPoint2[MAX_PLAYERS];
-new trashCanPoint3[MAX_PLAYERS]; 
-new trashCanPoint4[MAX_PlAYERS]; 
-new trascCanPoint5[MAX_PLAYERS]; 
-new showPlayerTrashCan[MAX_PLAYERS];
-*/ 
 //Prawnik - oferta
 new LawyerOffer[MAX_PLAYERS];
 new OfferPlayer[MAX_PLAYERS];
@@ -100,8 +87,6 @@ new komunikatMinutyZerowanie[MAX_PLAYERS];
 //Admin Adds
 new TimerOddaniaZycia[MAX_PLAYERS];
 new dajHPSekunda[MAX_PLAYERS];
-//DODATKI
-new boneIDzmienna[MAX_PLAYERS];
 
 
 //legal
@@ -563,30 +548,8 @@ new Scigamy = 666;//Jaki wyœcig jest w³¹czony
 new IloscZawodnikow;//Iloœæ zawodników w wyœcigu
 new Ukonczyl = 1;
 
-
-
-
-
-new habox[5];
 new dajeKontrakt[MAX_PLAYERS];
 new haHajs[MAX_PLAYERS];
-
-
-
-//skubany
-
-//-LOGOWANIE/REJESTRACJA-//
-/*new Text:Panorama,Text:Panorama2;
-
-new Text:Wszelka;
-new Text:Jezeli;
-new Text:Zapraszamy;
-new Text:strona;
-
-//-Napis wyskakujacy-//
-new Text:Textdraw3,
-	    bool:NapisUzywany,
-	    NapisTimer;*/
 
 //N!ree
 new cbradijo[MAX_PLAYERS];
@@ -740,8 +703,6 @@ new JailPrice[MAX_PLAYERS];
 new WynajemOffer[MAX_PLAYERS];
 new DomOffer[MAX_PLAYERS];
 new DomCena[MAX_PLAYERS];
-//new WantedPoints[MAX_PLAYERS];
-//new WantedLevel[MAX_PLAYERS];
 new wywalzdmv[MAX_PLAYERS];
 new poscig[MAX_PLAYERS];
 new PoziomPoszukiwania[MAX_PLAYERS];
@@ -773,7 +734,6 @@ new LastSMSNumber[MAX_PLAYERS];
 new gDice[MAX_PLAYERS];
 new gGas[MAX_PLAYERS];
 new FirstSpawn[MAX_PLAYERS];
-//new SwitchKey[MAX_PLAYERS];
 new Fixr[MAX_PLAYERS];
 new Locator[MAX_PLAYERS];
 new Mobile[MAX_PLAYERS];
@@ -783,7 +743,6 @@ new RingTone[MAX_PLAYERS];
 new gPlayerAccount[MAX_PLAYERS];
 new gPlayerMission[MAX_PLAYERS];
 new vKickEx[MAX_PLAYERS];
-//new MissionPlayable = 0;
 new newbie = 1;
 new noooc = 1;
 new adds = 1;
@@ -800,7 +759,6 @@ new rexl;
 //new OnPlayerUpdate_ON = 0;
 new addtimer = 60000;
 new Float:stareVHP[MAX_PLAYERS];//zapis uszkodzen
-//new opona[MAX_PLAYERS];//zapis uszkodzen
 new SANradio = 0;
 new Text3D:SAN3d;
 new Text3D:NapislotLS1, Text3D:NapislotLS2, Text3D:NapislotLV1, Text3D:NapislotSF1;
@@ -813,24 +771,10 @@ new kosztbiletu;
 new osoby;
 new planeisstopped;
 new Wodliczanie;
-//new PlayerText:Worker[MAX_PLAYERS];
-//new Float:KX, Float:KY, Float:KZ;
 
 //koniec wozy Ballas
-//new WindaW;//Winda
-//new WindaWP = 0;//Winda
-//new BramaPolicja;//ro
-//new BramaPolicjaState = 1;//ro
-//new SzlabanPolicja;//ro
-//new SzlabanPolicjaState = 1;//ro
 new lspdWjazdDolny;
 new lspdWjazdDolnyState = 0; // 0 close 1 open
-/*new DrzwiTajniak1a;
-new DrzwiTajniak1b;
-new DrzwiTajniak1State = 1;
-new DrzwiTajniak2a;
-new DrzwiTajniak2b;
-new DrzwiTajniak2State = 1;*/
 //stary komisariat (old komi)
 new DrzwiPDKomi;
 new DrzwiPDKomi2;
@@ -927,32 +871,6 @@ new BramaZuzS = 1;
 new starabron[MAX_PLAYERS];
 new ZapisSkinu[MAX_PLAYERS];
 new PDGPS = -1;//gps
-//koniec inne
-//3d bot
-/*new Text3D:linia55jeden;
-new Text3D:linia55dwa;
-new Text3D:linia72jeden;
-new Text3D:linia72dwa;
-new Text3D:linia96jeden;
-new Text3D:linia96dwa;*/
-//koniec 3d
-//przedmioty
-/*new becz;
-new beczka1;
-new beczka2;
-new beczka3;*/
-//new ruszt;
-//new rusztowanie1;
-//new rusztowanie2;
-//new rusztowanie3;
-//new barierka1;
-//new barierka2;
-//new barierka3;
-//new barierka4;
-//new Text3D:bar1d;
-//new Text3D:bar2d;
-//new Text3D:bar3d;
-//new Text3D:bar4d;
 //koniec przedmioty
 new Respawn[MAX_PLAYERS];//respawn
 //timery
@@ -971,8 +889,6 @@ new bramadmv[19];
 new movedmv[20];
 new bramadom1;
 new bramadom1State = 1;//brama NoA
-//new DzwiDMV;
-//new DzwiDMVs = 1;
 //urzad miasta by abram01 - SIMEONE EDIT
 new urzad;
 new urzad1;
@@ -998,11 +914,6 @@ new zmatsowany[MAX_PLAYERS];//diler brono
 new BusCzit[MAX_PLAYERS];
 new IDDomu[MAX_PLAYERS];//SYSTEM DOMÓW
 new MatsGood[MAX_PLAYERS];
-//new IloscGraczyGlosojacych;//voteKickEx
-//new IloscGlosow;//voteKickEx
-//new IDglosowania;//voteKickEx
-//new PanelAdmina[MAX_PLAYERS];//PanelAdmina
-//new DawanieAJ[MAX_PLAYERS];//PanelAdmina
 new KradniecieWozu[MAX_PLAYERS];
 new AntyBH = 1;//Anty BH
 new antyczolg[MAX_PLAYERS];//Anty Czo³g
@@ -1053,23 +964,9 @@ new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
 new DomOgladany[MAX_PLAYERS];//SYSTEM DOMÓW BY MRUCZNIK
 new carselect[15];
-//new objstore[128];
 new cbjstore[128];
 new motd[256];
 new rccounter = 0;
-/*//Kart do gry
-new Talia[MAX_PLAYERS][52];//talia
-new Karta1[MAX_PLAYERS];
-new Karta2[MAX_PLAYERS];
-new Karta3[MAX_PLAYERS];
-new Karta4[MAX_PLAYERS];
-new Karta5[MAX_PLAYERS];
-new Karta6[MAX_PLAYERS];
-new Karta7[MAX_PLAYERS];
-new Karta8[MAX_PLAYERS];
-new Karta9[MAX_PLAYERS];
-new Karta10[MAX_PLAYERS];*/
-//new RStart;
 new ghour = 0;
 new gminute = 0;
 new gsecond = 0;
@@ -1085,11 +982,6 @@ new shifthour;
 
 new intrate = 1;
 new levelexp = 4;
-//new civnokill = 0;
-//new suecost = 2000;
-new txtcost = 25;
-//new pickups;
-//new CIV[] = {7,19,20,23,73,101,37};
 new STD1[] = {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3};
 new STD2[] = {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3};
 new STD3[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3};

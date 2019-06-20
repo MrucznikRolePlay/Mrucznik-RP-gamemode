@@ -45,13 +45,6 @@ NowaWybieralka_Init()
 }
 
 
-NowaWybieralka_InitPlayer(playerid)
-{
-
-	return 1;
-}
-
-
 NowaWybieralka_CreateTxd()
 {
 

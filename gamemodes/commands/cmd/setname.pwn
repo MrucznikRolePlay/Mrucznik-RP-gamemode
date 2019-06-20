@@ -56,7 +56,8 @@ YCMD:setname(playerid, params[], help)
                     {
     					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", sendername,giveplayer,PlayerInfo[giveplayerid][pUID],newname);
     					SendClientMessageToAll(COLOR_LIGHTRED, string);
-    					Log(nickLog, INFO, string);
+						Log(adminLog, INFO, "Admin %s zmieni³ %s nick na %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), newname);
+						Log(nickLog, INFO, "Admin %s zmieni³ %s nick na %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), newname);
 
                         ShowPlayerDialogEx(giveplayerid, 70, DIALOG_STYLE_MSGBOX, "Zmiana nicku", "W³aœnie zmieni³eœ nick. Nastêpuj¹ce elementy zosta³y wyzerowane:\n\nPraca\nFrakcja\nWanted Level\nRodzina\nLider\nRanga\nSkin\nZaufany Gracz\n\n\nPamiêtaj, ¿e ka¿da zmiana nicku jest na wagê z³ota wiêc nie trwoñ ich pochopnie!\nJe¿eli dosz³o do b³êdnej zmiany zg³oœ ten fakt prêdko na forum w panelu strat!\nPamiêtaj: nowa postaæ = nowe ¿ycie.", "Dalej", "");
 

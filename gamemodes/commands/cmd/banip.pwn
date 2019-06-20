@@ -73,7 +73,10 @@ YCMD:banip(playerid, params[], help)
 				iloscBan[playerid] = iloscBan[playerid]+1;
 				
 			}
-            Log(banLog, INFO, str);
+            Log(punishmentLog, INFO, "Admin %s zablokowa³ ip %s, powód: %s", 
+                GetPlayerLogName(playerid),
+                var,
+                powod);
 		}
 		else
 		{

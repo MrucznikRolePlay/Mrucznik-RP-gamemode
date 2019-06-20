@@ -78,8 +78,10 @@ YCMD:ban(playerid, params[], help)
 						return 1;
                     }
 					SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
-					format(string, sizeof(string), "AdmCmd: Admin %s zbanowal %s, powód: %s",  sendername, giveplayer, result);
-					Log(banLog, INFO, string);
+					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ bana, powód: %s", 
+						GetPlayerLogName(playerid),
+						GetPlayerLogName(giveplayerid),
+						result);
 					if(kary_TXD_Status == 0)
 					{
 						format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, result);
@@ -98,8 +100,9 @@ YCMD:ban(playerid, params[], help)
 					if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 					{
 					    MruMySQL_Banuj(playerid, result, giveplayerid);
-						format(str, sizeof(str), "%s zostal zbanowany za zbanowanie admina /ban",sendername);
-						Log(banLog, INFO, str);
+						Log(punishmentLog, INFO, "Admin %s zosta³ zbanowany za zbanowanie admina %s", 
+							GetPlayerLogName(playerid),
+							GetPlayerLogName(giveplayerid));
 					    KickEx(playerid);
 						//adminduty
 						if(GetPlayerAdminDutyStatus(playerid) == 1)
@@ -136,8 +139,11 @@ YCMD:ban(playerid, params[], help)
                         }
 						SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
 						format(string, sizeof(string), "AdmCmd: Pó³Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, (result));
-						Log(banLog, INFO, string);
                         SendPunishMessage(string, giveplayerid);
+						Log(punishmentLog, INFO, "Pó³Admin %s ukara³ %s kar¹ bana, powód: %s", 
+							GetPlayerLogName(playerid),
+							GetPlayerLogName(giveplayerid),
+							result);
 						format(str,sizeof(str),"~y~Ban Info:~n~~r~Osoba zbanowana: ~w~%s~n~~r~Powod: ~w~%s~n~~r~Nalozyl: ~w~%s", giveplayer ,(result), sendername);
 						MruMySQL_Banuj(giveplayerid, result, playerid);
 						KickEx(giveplayerid);

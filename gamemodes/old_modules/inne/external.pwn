@@ -96,9 +96,7 @@ public MRP_IsPhoneNumberAvailable(number) {
 
 public MRP_UpdateAttachedItem(playerid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, bone, active, id) {
     new str[256];
-    //format(str, 256, "INSERT INTO `mru_playeritems` (`model`, `UID`, `bone`, `x`, `y`, `z`, `rx`, `ry`, `rz`) VALUES ('%d', '%d', '%d', '%f', '%f', '%f', '%f', '%f', '%f')", model, PlayerInfo[playerid][pUID], bone, x,y,z,rx,ry,rz);
     format(str, 256, "UPDATE mru_playeritems SET `model`='%d', `bone`='%d', `x`='%f',`y`='%f',`z`='%f', `rx`='%f',`ry`='%f',`rz`='%f', `active`='%d' WHERE `id`=%d", model, bone, x,y,z,rx,ry,rz, active, id);
-    printf(str);
     mysql_query(str);
 }
 

@@ -60,7 +60,7 @@ YCMD:slap(playerid, params[], help)
 					GetPlayerPos(playa, slx, sly, slz);
 					SetPlayerPosEx(playa, slx, sly, slz+5);
 					PlayerPlaySound(playa, 1130, slx, sly, slz+5);
-					printf("AdmCmd: %s da³ klaspa w dupsko %s",sendername,  giveplayer);
+        			Log(punishmentLog, INFO, "Admin %s da³ slapa %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 					format(string, sizeof(string), "AdmCmd: %s da³ klapsa w dupsko %s",sendername, giveplayer);
 					ABroadCast(COLOR_LIGHTRED,string,1);
 					format(string, sizeof(string), "Dosta³eœ klapsa w dupsko od administratora %s, widocznie zrobi³eœ coœ z³ego :)", sendername);

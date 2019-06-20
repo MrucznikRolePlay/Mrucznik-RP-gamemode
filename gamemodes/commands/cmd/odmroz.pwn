@@ -46,8 +46,7 @@ YCMD:odmroz(playerid, params[], help)
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 					TogglePlayerControllable(playa, 1);
-					format(string, sizeof(string), "AdmCmd: %s odmrozi³ %s", GetNick(playerid),  GetNick(playa));
-					printf("%s",string);
+					Log(adminLog, INFO, "Admin %s odmrozi³ gracza %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 					format(string, sizeof(string), "AdmCmd: %s zosta³ odmro¿ony przez %s", GetNick(playa), GetNick(playerid));
 					ABroadCast(COLOR_LIGHTRED,string,1);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)

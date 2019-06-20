@@ -55,8 +55,7 @@ YCMD:wyplac(playerid, params[], help)
 			PlayerInfo[playerid][pAccount]=PlayerInfo[playerid][pAccount]-cashdeposit;
 			format(string, sizeof(string), "Wyp³aci³eœ $%d ze swojego konta, obecny stan to: $%d ", cashdeposit,PlayerInfo[playerid][pAccount]);
 			SendClientMessage(playerid, COLOR_YELLOW, string);
-			format(string, sizeof(string), "[BANK/BANKOMAT] %s wyp³aci³ ze swojego konta %d$. Nowy stan: %d$", GetNick(playerid), cashdeposit, PlayerInfo[playerid][pAccount]);
-			Log(bankomatLog, INFO, string);
+			Log(payLog, INFO, "%s wyp³aci³ ze swojego konta %d$. Nowu stan: %d$", GetPlayerLogName(playerid), cashdeposit, PlayerInfo[playerid][pAccount]);
 			return 1;
 		}
 		else

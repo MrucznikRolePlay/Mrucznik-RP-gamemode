@@ -54,7 +54,7 @@ YCMD:dajkm(playerid, params[], help)
 		            if(komentator[para1] != 1)
 		            {
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-						printf("AdmCmd: %s da³ komentatora ¿u¿lowego graczowi %s.", sendername, giveplayer);
+						Log(adminLog, INFO, "Admin %s da³ %s komentatora ¿u¿lowego", GetPlayerLogName(playerid), GetPlayerLogName(para1));   
 						SendClientMessage(para1, COLOR_LIGHTBLUE, "   Jesteœ teraz komentatorem ¿u¿lowym, bierz mikrofon");
 						format(string, sizeof(string), "   Gracz %s jest teraz komentator ¿u¿lowym.", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -66,7 +66,7 @@ YCMD:dajkm(playerid, params[], help)
 					{
 					    GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-						printf("AdmCmd: %s zabra³ komentatora ¿u¿lowego graczowi %s.", sendername, giveplayer);
+						Log(adminLog, INFO, "Admin %s zabra³ %s komentatora ¿u¿lowego", GetPlayerLogName(playerid), GetPlayerLogName(para1));   
 						SendClientMessage(para1, COLOR_LIGHTBLUE, "   Ju¿ nie jestes komentatorem ¿u¿lowym");
 						format(string, sizeof(string), "   Zabra³eœ graczowi %s komentatora ¿u¿lowego.", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

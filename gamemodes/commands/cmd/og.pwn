@@ -82,8 +82,9 @@ YCMD:og(playerid, params[], help)
 			return 1;
 		}
 		DajKase(playerid, - payout);
-		format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d",  params, GetNick(playerid, true), PlayerInfo[playerid][pPnumber]);
+		format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d", params, GetNick(playerid, true), PlayerInfo[playerid][pPnumber]);
 		OOCNews(TEAM_GROVE_COLOR,string);
+		Log(chatLog, INFO, "%s og³oszenie: %s", GetPlayerLogName(playerid), params);
 		format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
 		GameTextForPlayer(playerid, string, 5000, 5);
 		if (PlayerInfo[playerid][pAdmin] < 1 && (!IsPlayerPremiumOld(playerid)))

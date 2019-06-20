@@ -53,9 +53,7 @@ YCMD:wejdzw(playerid, params[], help)
                         {
                             if(PlayerInfo[playerid][pJailed] == 3)
                             {
-                                new string[256];
-                                format(string, sizeof(string), "Cziter %s zostal zbanowany za ucieczke z AJ",  GetNick(playerid));
-                                Log(banLog, INFO, string);
+								Log(punishmentLog, INFO, "%s dosta³ bana od antycheata, powód: Ucieczka przed AJ");
                                 Ban(playerid);
                             }
                             return 1;

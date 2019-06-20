@@ -46,9 +46,7 @@ YCMD:dajkase(playerid, params[], help)
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 					DajKase(playa, money);
-					new string[128];
-					format(string, sizeof(string), "%s dal %s: %d$ /givemoney", GetNick(playerid), GetNick(playa), money);
-					Log(statsLog, INFO, string);
+					Log(adminLog, INFO, "Admin %s da³ %s kwotê %d$ (/dajkase)", GetPlayerLogName(playerid), GetPlayerLogName(playa), money);
 				}
 			}
 		}

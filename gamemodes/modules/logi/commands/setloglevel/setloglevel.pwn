@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                    logi                                                   //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                setloglevel                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,31 +16,52 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//-----------------<[ Zmienne: ]>-------------------
-new Logger:adminLog; //Logi akcji administracyjnych
-new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
-new Logger:premiumLog; //Logi z systemu premium
-new Logger:punishmentLog; //Logi nadawania oraz zdejmowania kar dla graczy
-new Logger:warningLog; //Logi warningów administracyjnych
-new Logger:commandLog; //Logi komendy wykonanych przez graczy
-new Logger:nickLog; //Logi zmian nicków
-new Logger:sejfLog; //Logi stanu sejfów
-new Logger:serverLog; //Logi akcji serwera
-new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
-new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
-new Logger:chatLog; //Logi chatów
-//new Logger:mysqlLog; //B³êdy mySQL - moved to mru_mysql.pwn due to weird error (undefined symbol "mysqlLog"; did you mean "mysqlLog"?)
 
-//old
-new Logger:admindutyLog;
-new Logger:admindutyMaszLog;
+//-------<[ include ]>-------
+#include "setloglevel_impl.pwn"
 
-//------------------<[ Enumy: ]>--------------------
-//------------------<[ Forwardy: ]>--------------------
+//-------<[ initialize ]>-------
+command_setloglevel()
+{
+    new command = Command_GetID("setloglevel");
 
-//end
+    //aliases
+    
+
+    //permissions
+    Group_SetCommand(Group_GetID("admini"), command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:setloglevel(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Ustawia poziom gadatliwoœci logów.");
+        return 1;
+    }
+    //fetching params
+    new logname[32], loglevel;
+    if(sscanf(params, "s[32]d", logname, loglevel))
+    {
+        sendTipMessage(playerid, "U¿yj /setloglevel [log (admin, pay, premium, punishment, warning, nick, sejf, server, command, chat, damage, connect, adminduty, admindutymasz)] [level (0-none | 1-debug | 2-info | 4-warning | 8 - ERROR | 15 - all)] ");
+        return 1;
+    }
+    
+    //command body
+    return command_setloglevel_Impl(playerid, logname, loglevel);
+}

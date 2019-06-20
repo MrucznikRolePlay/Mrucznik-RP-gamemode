@@ -33,22 +33,22 @@ YCMD:noooc(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         new string[128];
-		if (PlayerInfo[playerid][pAdmin] >= 20 && (!noooc))
+		if (PlayerInfo[playerid][pAdmin] >= 20)
 		{
-			noooc = 1;
-			BroadCast(COLOR_GRAD2, "»» Czat OOC Zosta³ zablokowany przez Administratora !");
+			if(!noooc)
+			{
+				noooc = 1;
+				BroadCast(COLOR_GRAD2, "»» Czat OOC Zosta³ zablokowany przez Administratora !");
+			}
+			else
+			{
+				noooc = 0;
+				BroadCast(COLOR_GRAD2, "»» Czat OOC Zosta³ odblokowany przez Administratora !");
+			}
 
             format(string, 128, "CMD_Info: /noooc u¿yte przez %s [%d]", GetNick(playerid), playerid);
             SendCommandLogMessage(string);
-            Log(cmdLog, INFO, string);
-		}
-		else if (PlayerInfo[playerid][pAdmin] >= 20 && (noooc))
-		{
-			noooc = 0;
-			BroadCast(COLOR_GRAD2, "»» Czat OOC Zosta³ odblokowany przez Administratora !");
-            format(string, 128, "CMD_Info: /noooc u¿yte przez %s [%d]", GetNick(playerid), playerid);
-            SendCommandLogMessage(string);
-            Log(cmdLog, INFO, string);
+			Log(adminLog, INFO, "Admin %s u¿y³ /noooc", GetPlayerLogName(playerid));
 		}
 		else
 		{

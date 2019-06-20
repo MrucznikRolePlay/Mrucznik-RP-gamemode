@@ -55,7 +55,7 @@ YCMD:ucisz(playerid, params[], help)
 					if(PlayerInfo[playa][pMuted] == 0)
 					{
 						PlayerInfo[playa][pMuted] = 1;
-						printf("AdmCmd: %s uciszyl %s",sendername,  giveplayer);
+        				Log(adminLog, INFO, "Admin %s uciszy³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 						format(string, sizeof(string), "AdmCmd: %s uciszyl %s",sendername, giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);
 						format(string, sizeof(string), "Zosta³eœ uciszony przez administratora %s, widocznie powiedzia³eœ coœ z³ego :)", sendername);
@@ -64,7 +64,7 @@ YCMD:ucisz(playerid, params[], help)
 					else
 					{
 						PlayerInfo[playa][pMuted] = 0;
-						printf("AdmCmd: %s odciszy³ %s",sendername,  giveplayer);
+        				Log(adminLog, INFO, "Admin %s odciszy³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 						format(string, sizeof(string), "AdmCmd: %s odciszy³ %s",sendername, giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);
 						format(string, sizeof(string), "Zosta³eœ odciszony przez administratora %s, popraw siê :)", sendername);

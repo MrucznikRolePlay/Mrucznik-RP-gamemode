@@ -93,7 +93,11 @@ YCMD:adminajail(playerid, params[], help)
 					PlayerInfo[playa][pMuted] = 1;
 					SetPlayerPosEx(playa, 1481.1666259766,-1790.2204589844,156.7875213623);
 					poscig[playa] = 0;
-					Log(kickLog, INFO, string);
+					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ AJ %d minut, powód: %s", 
+						GetPlayerLogName(playerid),
+						GetPlayerLogName(playa),
+						money,
+						result);
 					//Admin stats - /adminduty
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{

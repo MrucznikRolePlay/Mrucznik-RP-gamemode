@@ -54,7 +54,7 @@ YCMD:zawodnik(playerid, params[], help)
 		            if(zawodnik[para1] != 1)
 		            {
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-						printf("AdmCmd: %s da³ zawodnika ¿u¿lowego graczowi %s.", sendername, giveplayer);
+						Log(adminLog, INFO, "Admin %s da³ %s zawodnika ¿u¿lowego", GetPlayerLogName(playerid), GetPlayerLogName(para1));
 						SendClientMessage(para1, COLOR_LIGHTBLUE, "   Jesteœ teraz zawodnikiem ¿u¿lowym, bierz swój motor");
 						format(string, sizeof(string), "   Gracz %s jest teraz zawodnikiem ¿u¿lowym.", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -66,7 +66,7 @@ YCMD:zawodnik(playerid, params[], help)
 					{
 					    GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-						printf("AdmCmd: %s zabra³ zawodnika ¿u¿lowego graczowi %s.", sendername, giveplayer);
+						Log(adminLog, INFO, "Admin %s zabra³ %s zawodnika ¿u¿lowego", GetPlayerLogName(playerid), GetPlayerLogName(para1));
 						SendClientMessage(para1, COLOR_LIGHTBLUE, "   Ju¿ nie jestes zawodnikiem ¿u¿lowym, idŸ na trybuny");
 						format(string, sizeof(string), "   Zabra³eœ graczowi %s zawodnika ¿u¿lowego.", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

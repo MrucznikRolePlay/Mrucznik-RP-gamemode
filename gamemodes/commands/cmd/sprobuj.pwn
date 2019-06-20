@@ -45,6 +45,6 @@ YCMD:sprobuj(playerid, params[], help)
 		case 1: format(string, 256, "*** %s spróbowa³ %s i nie uda³o mu siê ***",GetNick(playerid, true), params);
 	}
     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	printf("%s", string);
+	Log(chatLog, INFO, "%s spróbuj: %s", GetPlayerLogName(playerid), params);
 	return 1;
 }

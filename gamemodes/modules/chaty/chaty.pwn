@@ -115,7 +115,7 @@ sprawdzReklame(text[], playerid)
 			format(string, sizeof(string), "AdmWarning: %s - Wykryto reklamê", text);
 		}
 		ABroadCast(COLOR_LIGHTRED,string,1);
-		Log(czitLog, INFO, string);
+		Log(warningLog, INFO, "%s reklamuje: %s", GetPlayerLogName(playerid), text);
 		valueAdd=1;
 	}
 	else
@@ -149,15 +149,16 @@ sprawdzWulgaryzmy(text[], playerid)
 		{
 		
 			SendClientMessage(playerid, COLOR_GRAD2, "Zosta³eœ ukarany grzywn¹ za wulgaryzmy! Kara: (20.000$)");
-			format(stringReturn, sizeof(stringReturn), "AdmWarning: [%d] %s u¿ycie wulgaryzmów (kara -10 000$): %s.",playerid,GetNick(playerid),text);
+			format(stringReturn, sizeof(stringReturn), "AdmWarning: [%d] %s u¿ycie wulgaryzmów (kara -20 000$): %s.",playerid,GetNick(playerid),text);
 			DajKase(playerid, -20000);
+			Log(punishmentLog, INFO, "Gracz %s zosta³ ukarany kar¹ 20000$ za przelinanie.", GetPlayerLogName(playerid));
 		}
 		else
 		{
 			format(stringReturn, sizeof(stringReturn), "AdmWarning: %s - pojawi³y siê wulgaryzmy");
 		}
 		ABroadCast(COLOR_LIGHTRED,stringReturn,1000);
-		Log(warningLog, INFO, stringReturn);
+		Log(warningLog, INFO, "%s przeklina: %s", GetPlayerLogName(playerid), text);
 		valueWulgaryzmy = 1;
 	}
 	else
@@ -259,9 +260,8 @@ PlayerTalkOOC(playerid, text[], Float:rangeTalk)
             }
         }
 	    format(string, sizeof(string), "(( %s Napisa³: %s ))", GetNick(playerid), text);
-        printf("%s", string);
 		SetPlayerChatBubble(playerid,string,COLOR_FADE1,25.0,8000);
-	
+	    Log(chatLog, INFO, "%s OOC: %s", GetPlayerLogName(playerid), text);
 	}
 	return 1;
 }

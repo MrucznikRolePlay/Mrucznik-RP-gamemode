@@ -842,24 +842,15 @@ public PlayerAFK(playerid, afktime, breaktime)
 forward syncanim(playerid);
 public syncanim(playerid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] syncanim - begin", GetNick(playerid), playerid);
-	#endif
 	if(GetPVarInt(playerid,"roped") == 0) return 0;
  	SetTimerEx("syncanim",DUR,0,"i",playerid);
   	ApplyAnimation(playerid,"ped","abseil",4.0,0,0,0,1,0);
-	#if DEBUG == 1
-		printf("%s[%d] syncanim - end", GetNick(playerid), playerid);
-	#endif
    	return 1;
 }
 
 forward MainTimer();
 public MainTimer()
 {
-	#if DEBUG == 1
-		printf("MainTimer - begin");
-	#endif
     JednaSekundaTimer();
     if(TICKS_Second)
     {
@@ -942,10 +933,6 @@ public MainTimer()
         TICKS_30Min = 0;
     else
         TICKS_30Min++;
-		
-	#if DEBUG == 1
-		printf("MainTimer - end");
-	#endif
 }
 
 //TODO: mysql asynchroniczny
@@ -964,9 +951,6 @@ public SaveMyAccountTimer(playerid)
 
 public ServerStuffSave()
 {
-	#if DEBUG == 1
-		printf("ServerStuffSave - begin");
-	#endif
     for(new i=0;i<MAX_FRAC;i++)
     {
         Sejf_Save(i);
@@ -988,16 +972,10 @@ public ServerStuffSave()
             }
         }
     }
-	#if DEBUG == 1
-		printf("ServerStuffSave - end");
-	#endif
 }
 
 public Spectator()
 {
-	#if DEBUG == 1
-		printf("Spectator - begin");
-	#endif
 	new string[128], specid, Float:specHP, specNAME[MAX_PLAYER_NAME+1], weaponID, playerState;
 
     if(PDGPS != -1)
@@ -1943,30 +1921,18 @@ public Spectator()
 			}
 		 }
 	}
-	#if DEBUG == 1
-		printf("Spectator - end");
-	#endif
     return 1;
 }
 
 public SyncUp()
 {
-	#if DEBUG == 1
-		printf("SyncUp - begin");
-	#endif
 	SyncTime();
 	DollahScoreUpdate();
-	#if DEBUG == 1
-		printf("SyncUp - end");
-	#endif
 	return 1;
 }
 
 public SyncTime()
 {
-	#if DEBUG == 1
-		printf("SyncTime - begin");
-	#endif
 	new string[64];
 	new tmphour,tmpminute,tmpsecond;
 	gettime(tmphour, tmpminute, tmpsecond);
@@ -1984,9 +1950,6 @@ public SyncTime()
 			ServerTime = tmphour;
 		}
 	}
-	#if DEBUG == 1
-		printf("SyncTime - end");
-	#endif
 	return 1;
 }
 
@@ -3505,9 +3468,6 @@ public GangZone_ShowInfoToParticipants() {
 }
 public VehicleUpdate()
 {
-	#if DEBUG == 1
-		printf("VehicleUpdate - begin");
-	#endif
     new Float:lHP = 0.0,
         engine, lights, alarm, doors, bonnect, boot, objective;
     for(new i=0;i<MAX_VEHICLES;i++)
@@ -3532,9 +3492,6 @@ public VehicleUpdate()
             }
         }
     }
-	#if DEBUG == 1
-		printf("VehicleUpdate - end");
-	#endif
 }
 
 forward closeGate(i, j, playerid);

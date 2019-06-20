@@ -164,17 +164,6 @@ IbizaDrinkiPobierz()
 	return 1;
 }
 
-IbizaDrinkiZapisz()
-{
-	new bufor[128];
-	for(new i=0; i<12; i++)
-	{
-		format(bufor, sizeof bufor, "UPDATE `ibizadrinki` SET `cena`=%d WHERE `id`=%d", IbizaDrinkiCeny[i], i);
-		mysql_query(bufor);
-	}
-	return 1;
-}
-
 IbizaWyjscie(playerid)
 {
 	new h, m, s;
@@ -382,10 +371,5 @@ IBIZA_Reszta()
 	IbizaKameryObiekty[11] = CreateDynamicObject(1616,308.5300000,-1816.9700000,10.0100000,0.0000000,0.0000000,-122.2800000,0, 0, -1); //z parkingu
 	IbizaBramaObiekty[0] = CreateDynamicObject(2372,420.9000000,-1783.4000000,4.3100000,0.0000000,0.0000000,0.0000000,0, 0, -1);
 	IbizaBramaObiekty[1] = CreateDynamicObject(2372,358.4000000,-1783.9000000,4.2000000,0.0000000,0.0000000,0.0000000,0, 0, -1);
-}
-
-IBIZA_end()
-{
-    IbizaDrinkiZapisz();
 }
 

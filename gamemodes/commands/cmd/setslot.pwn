@@ -52,7 +52,7 @@ YCMD:setslot(playerid, params[], help)
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pCarSlots] = level;
-					printf("AdmCmd: %s sloty %s na %d.", sendername, giveplayer, level);
+        			Log(adminLog, INFO, "Admin %s zmieni³ %s iloœæ slotów na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					format(string, sizeof(string), "   Liczba slotow zostala zmieniona %d przez %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "   Zmieni³eœ sloty graczowi %s na %d.", giveplayer,level);

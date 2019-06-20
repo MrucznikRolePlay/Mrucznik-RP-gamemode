@@ -55,7 +55,7 @@ YCMD:zmienwl(playerid, params[], help)
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PoziomPoszukiwania[para1] = level;
-					printf("AdmCmd: %s zmieni³ wanted level gracza %s na wartoœæ %d.", sendername, giveplayer, level);
+					Log(adminLog, INFO, "Admin %s zmieni³ wanted level %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					format(string, sizeof(string), "   Twój Poziom Poszukiwania zosta³ zmieniony na %d przez admina %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "   Zmieni³eœ poziom poszukiwania %s na %d.", giveplayer,level);

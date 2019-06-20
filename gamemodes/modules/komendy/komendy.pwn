@@ -44,9 +44,9 @@
 */ 
 public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
-	#if DEBUG == 1
-		printf("%s wykonal komende %s", GetNick(playerid), cmdtext);
-	#endif
+	if(success == COMMAND_OK) {
+		Log(commandLog, E_LOGLEVEL:DEBUG, "%s wykona³ komendê %s", GetPlayerLogName(playerid), cmdtext);
+	}
 	return COMMAND_OK;
 }
 
@@ -65,10 +65,6 @@ public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_
 */ 
 public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
-	#if DEBUG == 1
-		printf("%s wpisal komende %s", GetNick(playerid), cmdtext);
-	#endif
-
 	//antyspam
     if(GetTickDiff(GetTickCount(), StaryCzas[playerid]) < 100)
 	{
@@ -112,6 +108,10 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		{
 			sendErrorMessage(playerid, "Ta komenda nie istnieje. Wpisz /komendy aby zobaczyæ listê dostêpnych komend.");
 		}
+	}
+
+	if(success == COMMAND_OK) {
+		Log(commandLog, E_LOGLEVEL:DEBUG, "%s wpisa³ komendê %s", GetPlayerLogName(playerid), cmdtext);
 	}
 
 	return COMMAND_OK;

@@ -77,9 +77,9 @@ YCMD:wezportfel(playerid, params[], help)
 
 								format(string, sizeof(string), "* %s zabiera portfel %s razem z %d$", sendername ,giveplayer, pieniadze);
 								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								Log(payLog, INFO, string);
+								Log(payLog, INFO, "%s zabra³ portfel %s razem z %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), pieniadze);
 								DajKase(playerid, pieniadze);
-								DajKase(giveplayerid, -pieniadze);
+								ZabierzKase(giveplayerid, pieniadze);
 								okradziony[giveplayerid] = 1;
 								PoziomPoszukiwania[playerid] += 3;
 								SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Porwanie + kradzie¿");

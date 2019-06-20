@@ -57,12 +57,13 @@ YCMD:podglad(playerid, params[], help)
 						PlayerInfo[para1][pPodPW] = 1;
 
                         format(string, sizeof(string), "AdmCmd: %s wlaczyl podglad PW %s",GetNick(playerid) ,giveplayer);
-                        Log(cmdLog, INFO, string);
+						Log(adminLog, INFO, "Admin %s w³¹czy³ podgl¹d /w dla gracza %s", GetPlayerLogName(playerid), GetPlayerLogName(para1));
 					}
 					else
 					{
                         SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ podgl¹d dla %s [%d]", GetNick(playerid), playerid, GetNick(para1), para1));
 						PlayerInfo[para1][pPodPW] = 0;
+						Log(adminLog, INFO, "Admin %s wy³¹czy³ podgl¹d /w dla gracza %s", GetPlayerLogName(playerid), GetPlayerLogName(para1));
 					}
 				}
 			}
