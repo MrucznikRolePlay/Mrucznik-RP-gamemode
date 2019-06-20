@@ -75,7 +75,6 @@ forward SzukanieAuta(playerid);
 forward TablicaWynikow(playerid);
 forward AutodbzesRH(playerid);
 forward Dopalaj(playerid); // Dopalacz auta
-forward HABox(numer, playerid);
 forward StopMusic();
 forward PlayerFixRadio2();
 forward CountDown();

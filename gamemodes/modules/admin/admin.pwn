@@ -230,14 +230,6 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-AdminCommandAccess(playerid, accessID)
-{
-	if(PlayerInfo[playerid][pAdminAccess] != accessID)
-	{
-		return noAccessMessage(playerid); 
-	}
-	return 0;
-}
 IsAHeadAdmin(playerid)
 {
 	if(PlayerInfo[playerid][pAdmin] == 5000)

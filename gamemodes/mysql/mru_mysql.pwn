@@ -995,7 +995,7 @@ bool:MruMySQL_SprawdzBany(playerid)
 
 //Pobieranie i zwracanie pojedynczych zmiennych:
 
-MruMySQL_GetNameFromUID(uid) {
+stock MruMySQL_GetNameFromUID(uid) {
 	new wartosc[MAX_PLAYER_NAME], string[128];
 	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `UID` = '%d'", uid);
 	mysql_query(string);
@@ -1010,7 +1010,7 @@ MruMySQL_GetNameFromUID(uid) {
 	return wartosc;
 }
 
-MruMySQL_GetAccString(kolumna[], nick[])
+stock MruMySQL_GetAccString(kolumna[], nick[])
 {
 	new string[128], wartosc[256];
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1029,7 +1029,7 @@ MruMySQL_GetAccString(kolumna[], nick[])
 	return wartosc;
 }
 
-MruMySQL_GetAccInt(kolumna[], nick[])
+stock MruMySQL_GetAccInt(kolumna[], nick[])
 {
 	new string[128], wartosc;
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1045,7 +1045,7 @@ MruMySQL_GetAccInt(kolumna[], nick[])
 	return wartosc;
 }
 
-MruMySQL_GetAccFloat(kolumna[], nick[])
+stock MruMySQL_GetAccFloat(kolumna[], nick[])
 {
 	new string[128], Float:wartosc;
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1058,7 +1058,7 @@ MruMySQL_GetAccFloat(kolumna[], nick[])
 	return wartosc;
 }
 
-MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
+stock MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
 {
 	new string[128];
 	mysql_real_escape_string(wartosc, wartosc);
@@ -1069,7 +1069,7 @@ MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
 	return 1;
 }
 
-MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
+stock MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 {
 	new string[128];
 	mysql_real_escape_string(nick, nick);
@@ -1079,7 +1079,7 @@ MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 	return 1;
 }
 
-MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
+stock MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 {
 	new string[128];
 	mysql_real_escape_string(nick, nick);
@@ -1089,7 +1089,7 @@ MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 	return 0;
 }
 
-MruMySQL_LoadPhoneContacts(playerid)
+stock MruMySQL_LoadPhoneContacts(playerid)
 {
 	new string[128];
 	format(string, sizeof(string), "SELECT UID, Number, Name FROM mru_kontakty WHERE Owner='%d' LIMIT 10", PlayerInfo[playerid][pUID]); //MAX_KONTAKTY
@@ -1114,7 +1114,7 @@ MruMySQL_LoadPhoneContacts(playerid)
 	return 1;
 }
 
-MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
+stock MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
 {
 	new string[128], escapedName[32];
 	mysql_real_escape_string(nazwa, escapedName);
@@ -1125,7 +1125,7 @@ MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
 	return uid;
 }
 
-MruMySQL_EditPhoneContact(uid, nazwa[])
+stock MruMySQL_EditPhoneContact(uid, nazwa[])
 {
 	new string[128], escapedName[32];
 	mysql_real_escape_string(nazwa, escapedName);
@@ -1134,7 +1134,7 @@ MruMySQL_EditPhoneContact(uid, nazwa[])
 	return 1;
 }
 
-MruMySQL_DeletePhoneContact(uid)
+stock MruMySQL_DeletePhoneContact(uid)
 {
 	new string[128];
 	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);

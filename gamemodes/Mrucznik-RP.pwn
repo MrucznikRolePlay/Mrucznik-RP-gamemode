@@ -125,7 +125,6 @@ native gpci (playerid, serial [], len);
 */
 //-------<[ Inne ]>-------
 #include "old_modules\inne\ibiza.inc"
-#include "old_modules\inne\system_kp.pwn"
 #include "old_modules\inne\external.pwn"
 
 //-------<[ Funkcje ]>-------
@@ -6136,8 +6135,6 @@ OnPlayerLogin(playerid, password[])
         }
 	}
 
-	//Niwelacje hajsu i matsów w zale¿noœci od lvl:
-	Niwelacje(playerid);
     if(PlayerInfo[playerid][pWarns] >= 3)
     {
         MruMySQL_Banuj(playerid, "Limit warnów (3)");

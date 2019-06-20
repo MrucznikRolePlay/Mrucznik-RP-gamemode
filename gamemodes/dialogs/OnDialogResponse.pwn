@@ -1856,37 +1856,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				dajeKontrakt[playerid] = 9999;
 				haHajs[playerid] = 0;
 				ClearAnimations(playerid);
-	        	if(IsPlayerInRangeOfPoint(playerid, 5.0, 1013.0000000,-452.6000061,50.5999985))
-	        	{
-	        	    SetTimerEx("HABox",30000,0,"dd",0, playerid);
-	        	    DestroyDynamicObject(habox[0]);
-					habox[0] = CreateDynamicObject(3407,1013.0000000,-452.6000061,50.5999985,0.0000000,0.0000000,2.0000000);
-	        	}
-				else if(IsPlayerInRangeOfPoint(playerid, 5.0, 2130.6000977,-1875.4000244,12.5000000))
-				{
-				    SetTimerEx("HABox",30000,0,"dd",1, playerid);
-				    DestroyDynamicObject(habox[1]);
-					habox[1] = CreateDynamicObject(3407,2130.6000977,-1875.4000244,12.5000000,0.0000000,0.0000000,213.9999390); //object(ce_mailbox2) (2)
-				}
-				else if(IsPlayerInRangeOfPoint(playerid, 5.0, 18.2000008,-214.6000061, 0.5))
-				{
-				    SetTimerEx("HABox",30000,0,"dd",2, playerid);
-					DestroyDynamicObject(habox[2]);
-					habox[2] = CreateDynamicObject(3407,18.2000008,-214.6000061,0.5000000,0.0000000,0.0000000,190.0000000); //object(ce_mailbox2) (3)
-				}
-				else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1230.5999756,-1652.9000244,10.8000002))
-				{
-				    SetTimerEx("HABox",30000,0,"dd",3, playerid);
-					DestroyDynamicObject(habox[3]);
-					habox[3] = CreateDynamicObject(3407,1230.5999756,-1652.9000244,10.8000002,0.0000000,0.0000000,70.0000000); //object(ce_mailbox2) (4)
-				}
-				else if(IsPlayerInRangeOfPoint(playerid, 5.0, 2355.1999512,-651.7999878,127.0999985))
-		        {
-		            SetTimerEx("HABox",30000,0,"dd",4, playerid);
-					DestroyDynamicObject(habox[4]);
-					habox[4] = CreateDynamicObject(3407,2355.1999512,-651.7999878,127.0999985,0.0000000,0.0000000,44.0000000); //object(ce_mailbox2) (5)
-		        }
-		        //OnPlayerUpdate(playerid);
 		        return 1;
 			}
 			else
@@ -15847,7 +15816,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									GetPlayerLogName(i),
 									GetCarDataLogName(car),
 									lSlot);
-								//Car_SortPlayerCars(i);
 								break;
 							}
 						}
@@ -15916,8 +15884,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									GetPlayerLogName(i),
 									GetCarDataLogName(car),
 									lSlot);
-
-								//Car_SortPlayerCars(i);
 								break;
 							}
 						}
@@ -15966,8 +15932,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									GetPlayerLogName(i),
 									GetCarDataLogName(car),
 									lSlot);
-
-						//Car_SortPlayerCars(i);
 						break;
 					}
 				}

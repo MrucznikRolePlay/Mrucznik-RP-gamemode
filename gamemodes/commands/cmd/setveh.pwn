@@ -91,8 +91,6 @@ YCMD:setveh(playerid, params[], help)
 
                             PlayerInfo[para1][pCars][nrcar-1] = lID;
 
-                            //Car_SortPlayerCars(para1);
-
                             CarData[lID][c_OwnerType] = CAR_OWNER_PLAYER;
                             CarData[lID][c_Owner] = PlayerInfo[para1][pUID];
                             Car_Save(lID, CAR_SAVE_OWNER);
@@ -108,8 +106,6 @@ YCMD:setveh(playerid, params[], help)
                                 nrcar);
 
                             PlayerInfo[para1][pCars][nrcar-1] = 0;
-
-                            //Car_SortPlayerCars(para1);
                         }
 					}
 					else
