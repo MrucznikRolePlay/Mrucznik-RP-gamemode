@@ -6767,8 +6767,6 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
-
-	Log(chatLog, DEBUG, "%s chat IC: %s", GetPlayerLogName(playerid), text);
 	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
@@ -6781,6 +6779,7 @@ public OnPlayerText(playerid, text[])
 		sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ jesteœ uciszony");
 		return 0;
 	}
+	
 	if(MarriageCeremoney[playerid] > 0)
 	{
 	    if (strcmp("tak", text, true) == 0)
@@ -7438,6 +7437,7 @@ public OnPlayerText(playerid, text[])
 			OOCNews(COLOR_LIGHTGREEN, string);
 			SendDiscordMessage(DISCORD_SAN_NEWS, string);
 		}
+		Log(chatLog, INFO, "%s wywiad: %s", GetPlayerLogName(playerid), text);
 		return 0;
 	}
 	if(Mobile[playerid] != INVALID_PLAYER_ID && Callin[playerid] != CALL_NONE)
@@ -7445,6 +7445,7 @@ public OnPlayerText(playerid, text[])
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		format(string, sizeof(string), "%s mówi (telefon): %s", sendername, text);
 		ProxDetector(20.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
+		Log(chatLog, INFO, "%s telefon: %s", GetPlayerLogName(playerid), text);
 
 		if(Mobile[playerid] < EMERGENCY_NUMBERS)
 		{
@@ -7528,6 +7529,7 @@ public OnPlayerText(playerid, text[])
 	        return 0;
       	}
 		PlayerTalkIC(playerid, text, "mówi", 15.0);
+		Log(chatLog, INFO, "%s chat IC: %s", GetPlayerLogName(playerid), text);
 		return 0;
 	}
 	#if DEBUG == 1
