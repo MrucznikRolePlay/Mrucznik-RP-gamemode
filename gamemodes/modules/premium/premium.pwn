@@ -88,7 +88,7 @@ premium_loadForPlayer(playerid)
 			{
 				new lVal = kpEnds-gettime();
 
-				if(lVal > KP_TYDZIEN)
+				if(lVal < KP_TYDZIEN)
 				{
 					format(qr, 170, "UWAGA! Twoje konto premium wygasa za %d dni i %d godzin.", floatround(floatdiv(lVal, 86400), floatround_floor), floatround(floatdiv(lVal, 3600), floatround_floor)%24);
 					_MruAdmin(playerid, qr);
