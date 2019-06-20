@@ -13,9 +13,6 @@ IsDialogProtected(dialogid)
 //ID DIALOGÓW 9900+ BIZNESY.
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
-	#if DEBUG == 1
-		printf("%s OnDialogResponse(%d, %d, %d, %d, %s) - begin", GetNick(playerid), playerid, dialogid, response, listitem, inputtext);
-	#endif
     if(dialogid < 0) return 1;
     if(dialogid != iddialog[playerid])
     {

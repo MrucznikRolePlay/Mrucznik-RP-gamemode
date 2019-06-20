@@ -8311,9 +8311,6 @@ CheckLoginNick(playerid, nick[])
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-		#endif
 		return 1;
 	}
 	return 0; 

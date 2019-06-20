@@ -534,10 +534,6 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 
 public OnPlayerClickTextDraw(playerid, Text:clickedid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerClickTextDraw - begin", GetNick(playerid), playerid);
-	#endif
-
     NowaWybieralka_ClickedTxd(playerid, clickedid);
 
     new str[128];
@@ -585,9 +581,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
             if(strlen(ngkey) == 4) NG_OpenGateWithKey(playerid); //apply key
         }
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerClickTextDraw - end", GetNick(playerid), playerid);
-		#endif
         return 1;
     }
     //IBIZA
@@ -607,9 +600,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		DeletePVar(playerid, "IbizaKamery");
 		PlayerTextDrawDestroy(playerid, PlayerText:GetPVarInt(playerid, "IbizaCam"));
 		DeletePVar(playerid, "IbizaCam");
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerClickTextDraw - end", GetNick(playerid), playerid);
-		#endif
 		return 1;
 	}
 	else
@@ -636,9 +626,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
             if(!GetPVarInt(playerid, "skin-done"))
             {
                 GameTextForPlayer(playerid, "~r~Wybierz ubranie", 1000, 5);
-				#if DEBUG == 1
-					printf("%s[%d] OnPlayerClickTextDraw - end", GetNick(playerid), playerid);
-				#endif
                 return 1;
             }
             SetPVarInt(playerid, "skin-select", 0);
@@ -682,9 +669,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
         {
             SendClientMessage(playerid, COLOR_PAPAYAWHIP, "Wybierz region.");
             SelectTextDraw(playerid, 0xD2691E55);
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerClickTextDraw - end", GetNick(playerid), playerid);
-			#endif
             return 1;
         }
         else
@@ -750,9 +734,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
         {
             CancelSelectTextDraw(playerid);
             Patrol_HideMap(playerid);
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerClickTextDraw - end", GetNick(playerid), playerid);
-			#endif
             return 1;
         }
         new stanp[32], pnick1[24], pnick2[MAX_PLAYER_NAME+1];
@@ -779,17 +760,11 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     {
         if(strlen(ServerInfo) > 1) ShowPlayerDialogEx(playerid, D_SERVERINFO, DIALOG_STYLE_MSGBOX, "Mrucznik-RP » Informacja", ServerInfo, "Schowaj", "Zamknij");
     }
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerClickTextDraw - end", GetNick(playerid), playerid);
-	#endif
    	return 1;
 }
 
 public OnPlayerEnterDynamicArea(playerid, areaid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEnterDynamicArea - begin", GetNick(playerid), playerid);
-	#endif
     if(IsPlayerInAnyVehicle(playerid))
     {
         new kolid=-1;
@@ -804,9 +779,6 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
         if(kolid != -1 && OilData[kolid][oilHP] > 0)
         {
             OnPlayerEnterOilSpot(playerid);
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerEnterDynamicArea - end", GetNick(playerid), playerid);
-			#endif
             return;
         }
         kolid = -1;
@@ -821,22 +793,13 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
         if(kolid != -1)
         {
             OnPlayerEnterSpikes(playerid);
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerEnterDynamicArea - end", GetNick(playerid), playerid);
-			#endif
             return;
         }
     }
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEnterDynamicArea - end", GetNick(playerid), playerid);
-	#endif
 }
 
 public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerClickPlayerTextDraw - begin", GetNick(playerid), playerid);
-	#endif
 	if(GetPVarInt(playerid, "gatechose_active") == 1)   //Barierki
     {
     	new curpage = GetPVarInt(playerid, "gatechose_page");
@@ -850,9 +813,6 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
     		} else {
     		    PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
     		}
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerClickPlayerTextDraw - end", GetNick(playerid), playerid);
-			#endif
     		return 1;
     	}
     	if(playertextid == gPrevButtonTextDrawId[playerid]) {
@@ -864,9 +824,6 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
     		} else {
     		    PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
     		}
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerClickPlayerTextDraw - end", GetNick(playerid), playerid);
-			#endif
     		return 1;
     	}
     	new x=0;
@@ -877,9 +834,6 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
     	        DestroySelectionMenu(playerid);
     	        CancelSelectTextDraw(playerid);
             	SetPVarInt(playerid, "gatechose_active", 0);
-				#if DEBUG == 1
-					printf("%s[%d] OnPlayerClickPlayerTextDraw - end", GetNick(playerid), playerid);
-				#endif
             	return 1;
     		}
     		x++;
@@ -903,9 +857,6 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
             SetPVarInt(playerid, "skin-done", 1);
         }
     }
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerClickPlayerTextDraw - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
@@ -916,42 +867,27 @@ public OnVehicleDamageStatusUpdate(vehicleid, playerid)
 
 public OnEnterExitModShop(playerid, enterexit, interiorid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnEnterExitModShop - begin", GetNick(playerid), playerid);
-	#endif
     if(enterexit == 0)
     {
         if(GetPlayerVehicleID(playerid) != 0)
             CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
     }
-	#if DEBUG == 1
-		printf("%s[%d] OnEnterExitModShop - end", GetNick(playerid), playerid);
-	#endif
     return 1;
 }
 
 public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEnterVehicle - begin", GetNick(playerid), playerid);
-	#endif
 	SetPVarInt(playerid, "IsAGetInTheCar", 1);
 	new Float:pX,Float:pY,Float:pZ;
     if(vehicleid > MAX_VEHICLES || vehicleid < 0)
     {
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Exceed vehicle limit");
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerEnterVehicle - end", GetNick(playerid), playerid);
-		#endif
         return 0;
     }
     new validseat = GetVehicleMaxPassengers(GetVehicleModel(vehicleid));
     if(validseat == 0xF)
     {
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Invalid seat");
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerEnterVehicle - end", GetNick(playerid), playerid);
-		#endif
         return 0;
     }
     if(gPlayerLogged[playerid] == 0)
@@ -961,9 +897,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	    	SendClientMessage(playerid, COLOR_LIGHTRED, "** Musisz siê zalogowaæ zanim wybierzesz skin (Zosta³eœ wyrzucony) **");
 	        SetTimerEx("KickTimer",500,0,"d",playerid);
 	    }
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerEnterVehicle - end", GetNick(playerid), playerid);
-		#endif
         return 0;
  	}
 	//Sila
@@ -1066,18 +999,11 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
 	}
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEnterVehicle - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
 public OnPlayerConnect(playerid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerConnect - begin", GetNick(playerid), playerid);
-	#endif
-
 	new GPCI[41];
 	gpci(playerid, GPCI, 41);
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
@@ -1112,18 +1038,12 @@ public OnPlayerConnect(playerid)
     {
         SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-		#endif
 		return 1;
     }*/
 	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
-		#if DEBUG == 1
-		printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-		#endif
 		return 1;
 	}
 	//Nick bez wulgaryzmów
@@ -1131,9 +1051,6 @@ public OnPlayerConnect(playerid)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick zawiera wulgaryzmy/niedozwolone s³owa - zmieñ go!"); 
 		KickEx(playerid);
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-		#endif
 		return 1;
 	}
 	SetRPName(playerid);
@@ -1236,9 +1153,6 @@ public OnPlayerConnect(playerid)
 
 	gItemAt[playerid] = 0;
 	printf("Poprawnie Connect ID: %d", playerid);
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerConnect - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 public OnPlayerPause(playerid)
@@ -1256,11 +1170,6 @@ public OnPlayerDisconnect(playerid, reason)
 		return 0;
 
 	//Pobieranie starej pozycji:
-
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerDisconnect - begin", GetNick(playerid), playerid);
-	#endif
-
 	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNick(playerid), playerid, reason);
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
@@ -1694,9 +1603,6 @@ public OnPlayerDisconnect(playerid, reason)
 	JobDuty[playerid] = 0;
     gPlayerLogged[playerid] = 0; //wylogowany
     MRP_PremiumHours[playerid] = 0;
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerDisconnect - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 public OnPlayerEnterDynamicCP(playerid, checkpointid)
@@ -1790,9 +1696,6 @@ public StandUp(playerid)
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerDeath - begin", GetNick(playerid), playerid);
-	#endif
 	new playername[MAX_PLAYER_NAME];
 	new killername[MAX_PLAYER_NAME];
 	new string[128];
@@ -1915,9 +1818,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 			if(gPlayerLogged[killerid] == 0)
 			{
 				KickEx(killerid);
-				#if DEBUG == 1
-					printf("%s[%d] OnPlayerDeath - end", GetNick(playerid), playerid);
-				#endif
 				return 1;
 			}
 			if(GetPlayerState(killerid) == 2)
@@ -1937,9 +1837,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 					Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
 					SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
 					KickEx(killerid);
-					#if DEBUG == 1
-						printf("%s[%d] OnPlayerDeath - end", GetNick(playerid), playerid);
-					#endif
 					return 1;
 				}
 			}
@@ -1981,9 +1878,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 						}
 					}
 				}
-				#if DEBUG == 1
-					printf("%s[%d] OnPlayerDeath - end", GetNick(playerid), playerid);
-				#endif
 				return 1;
 			}
 			if(PlayerInfo[playerid][pHeadValue] > 0)
@@ -2089,9 +1983,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 		}
 	}
 	SetPlayerColor(playerid,COLOR_GRAD2);
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerDeath - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
@@ -2164,9 +2055,6 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 public OnPlayerSpawn(playerid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerSpawn - begin", GetNick(playerid), playerid);
-	#endif
 	SetPlayerTeam(playerid, NO_TEAM);
 
 	//Czyszczenie zmiennych
@@ -2263,9 +2151,6 @@ public OnPlayerSpawn(playerid)
     }
     //Spawn Pos
 	SetTimerEx("SpawnPosInfo", 1000, false, "i", playerid);
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerSpawn - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
@@ -2796,9 +2681,6 @@ SetPlayerSpawnSkin(playerid)
 
 public OnPlayerEnterCheckpoint(playerid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEnterCheckpoint - begin", GetNick(playerid), playerid);
-	#endif
 	new string[128];
 	new name[MAX_PLAYER_NAME];
     DisablePlayerCheckpoint(playerid);
@@ -4672,9 +4554,6 @@ public OnPlayerEnterCheckpoint(playerid)
 		    }
 		}
 	}
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEnterCheckpoint - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
@@ -4685,17 +4564,11 @@ public OnPlayerLeaveCheckpoint(playerid)
 
 public OnPlayerEnterRaceCheckpoint(playerid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEnterRaceCheckpoint - begin", GetNick(playerid), playerid);
-	#endif
     TJD_CallRaceCheckpoint(playerid);
 	if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0 && Scigamy != 666)
 	{
 	    if(!IsPlayerInAnyVehicle(playerid))
 		{
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerEnterRaceCheckpoint - end", GetNick(playerid), playerid);
-			#endif
 			return 1;
 	    }
 	    //
@@ -4772,9 +4645,6 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 	        SetPlayerRaceCheckpoint(playerid,Wyscig[Scigamy][wTypCH],wCheckpoint[Scigamy][ch][0], wCheckpoint[Scigamy][ch][1], wCheckpoint[Scigamy][ch][2],wCheckpoint[Scigamy][ch+1][0], wCheckpoint[Scigamy][ch+1][1], wCheckpoint[Scigamy][ch+1][2], Wyscig[Scigamy][wRozmiarCH]);
 	    }
 	}
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEnterRaceCheckpoint - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
@@ -4790,22 +4660,11 @@ public OnPlayerSelectObject(playerid, type, objectid, modelid, Float:fX, Float:f
 
 public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, Float:fY, Float:fZ, Float:fRotX, Float:fRotY, Float:fRotZ)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEditObject - begin", GetNick(playerid), playerid);
-	#endif
-
-
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEditObject - end", GetNick(playerid), playerid);
-	#endif
     return 1;
 }
 
 public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEditDynamicObject - begin", GetNick(playerid), playerid);
-	#endif
     if(IsValidDynamicObject(objectid))
 	{
 		if(GetPVarInt(playerid, "Allow-edit"))
@@ -4864,16 +4723,10 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
             }
         }
     }
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerEditDynamicObject - end", GetNick(playerid), playerid);
-	#endif
 }
 
 public OnRconLoginAttempt(ip[], password[], success)
 {
-	#if DEBUG == 1
-		printf("OnRconLoginAttempt - begin");
-	#endif
     new player=-1;
     new pip[16];
     for(new i=0; i<MAX_PLAYERS; i++)
@@ -4905,9 +4758,6 @@ public OnRconLoginAttempt(ip[], password[], success)
 				SendAdminMessage(COLOR_PANICRED, str);
 				KickEx(player);
 				print(str);
-				#if DEBUG == 1
-					printf("OnRconLoginAttempt - end");
-				#endif
 				return 0;
 			}
 			else
@@ -4916,9 +4766,6 @@ public OnRconLoginAttempt(ip[], password[], success)
 			}
         }
     }
-	#if DEBUG == 1
-		printf("OnRconLoginAttempt - end");
-	#endif
     return 1;
 }
 
@@ -5392,22 +5239,13 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		MedicBill[playerid] = 1;
 		gPlayerSpawned[playerid] = 1;
 	}
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerStateChange - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
 public OnPlayerExitVehicle(playerid, vehicleid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerExitVehicle - begin", GetNick(playerid), playerid);
-	#endif
     if(vehicleid > MAX_VEHICLES || vehicleid < 0)
 	{
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerExitVehicle - end", GetNick(playerid), playerid);
-		#endif
 		SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Exceed vehicle limit");
 		return 1;
 	}
@@ -5415,9 +5253,6 @@ public OnPlayerExitVehicle(playerid, vehicleid)
     if(validseat == 0xF)
     {
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Invalid seat");
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerExitVehicle - end", GetNick(playerid), playerid);
-		#endif
         return 0;
     }
 
@@ -5437,9 +5272,6 @@ public OnPlayerExitVehicle(playerid, vehicleid)
     }
 	if (GetPlayerState(playerid) == 1)
 	{
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerExitVehicle - end", GetNick(playerid), playerid);
-		#endif
 		return 1;
 	}
 	if(gGas[playerid] == 1)
@@ -5454,9 +5286,6 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	{
 	    IDWymienianegoAuta[playerid] = 0;
 	}
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerExitVehicle - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
@@ -5475,11 +5304,6 @@ public OnPlayerRequestSpawn(playerid)
 }
 public OnPlayerRequestClass(playerid, classid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerRequestClass - begin", GetNick(playerid), playerid);
-		SendClientMessage(playerid, -1, "OnPlayerRequestClass");
-	#endif
-
 	if(PlayerInfo[playerid][pModel] == 0)
 		PlayerInfo[playerid][pModel] = 252;
 
@@ -5558,10 +5382,6 @@ public OnPlayerRequestClass(playerid, classid)
 		TogglePlayerSpectating(playerid, true);
 		TogglePlayerSpectating(playerid, false);
 	}
-
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerRequestClass - end", GetNick(playerid), playerid);
-	#endif
 	return 0;
 }
 
@@ -5781,10 +5601,6 @@ PayDay()
 
 public OnPlayerUpdate(playerid)
 {
-	/*#if DEBUG == 1
-		printf("%s[%d] OnPlayerUpdate - begin", GetNick(playerid), playerid);
-	#endif*/
-
 	if(gPlayerLogged[playerid] == 0)
 	{
 		if(GetPlayerVirtualWorld(playerid) != 1488)
@@ -5824,9 +5640,6 @@ public OnPlayerUpdate(playerid)
             GetPlayerKeys(playerid, keys, ud, lr);
             if((keys & KEY_FIRE))
 			{
-				#if DEBUG == 1
-					printf("%s[%d] OnPlayerUpdate - end", GetNick(playerid), playerid);
-				#endif
 				return 0; //desycn missile
 			}
         }
@@ -5836,9 +5649,6 @@ public OnPlayerUpdate(playerid)
             GetPlayerKeys(playerid, keys, ud, lr);
             if((keys & KEY_ACTION))
 			{
-				#if DEBUG == 1
-					printf("%s[%d] OnPlayerUpdate - end", GetNick(playerid), playerid);
-				#endif
 				return 0; //desycn hydra missile
 			}
         }
@@ -5902,9 +5712,6 @@ public OnPlayerUpdate(playerid)
 			}
 		}
 		noclipdata[playerid][udold] = ud; noclipdata[playerid][lrold] = lr; // Store current keys pressed for comparison next update
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerUpdate - end", GetNick(playerid), playerid);
-		#endif
 		return 0;
 	}
     if(GetPVarInt(playerid, "oil_clear") == 1)
@@ -5916,9 +5723,6 @@ public OnPlayerUpdate(playerid)
         if(lr == KEY_RIGHT) Oil_OnPlayerPress(playerid, KEY_RIGHT*2);
         else if(lr == KEY_LEFT) Oil_OnPlayerPress(playerid, KEY_LEFT*2);
     }
-	/*#if DEBUG == 1
-		printf("%s[%d] OnPlayerUpdate - end", GetNick(playerid), playerid);
-	#endif*/
 	return 1;
 }
 
@@ -5934,9 +5738,6 @@ OnPlayerRegister(playerid, password[])
 
 OnPlayerLogin(playerid, password[])
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerLogin - begin", GetNick(playerid), playerid);
-	#endif
     new nick[MAX_PLAYER_NAME], string[256], accountPass[WHIRLPOOL_LEN], hashedPassword[WHIRLPOOL_LEN];
 	GetPlayerName(playerid, nick, sizeof(nick));
     format(accountPass, sizeof(accountPass), "%s", MruMySQL_ReturnPassword(nick));
@@ -6219,17 +6020,11 @@ OnPlayerLogin(playerid, password[])
 		SendClientMessage(playerid, COLOR_WHITE, "Aby zacz¹æ grê musisz przejœæ procedury rejestracji.");
 		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeœli jesteœ tu nowy, to przygotowaliœmy dla ciebie poradnik\nZa chwilê bêdziesz móg³ go obejrzeæ, lecz najpierw bêdziesz musia³ opisaæ postaæ któr¹ bêdziesz sterowa³\nAby przejœæ dalej wciœnij przycisk 'dalej'", "Dalej", "");
     }
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerLogin - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
 public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerKeyStateChange - begin", GetNick(playerid), playerid);
-	#endif
     //09.06.2014
     if(Teleturniejstart == 1)
 	{
@@ -6249,9 +6044,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							Teleturniejstart = 0;
 							grajacy[playerid] = 0;
-							#if DEBUG == 1
-								printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-							#endif
                             return 0;
 						}
 		            }
@@ -6309,9 +6101,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
                         {
                             TRAIN_HornTimer = SetTimerEx("TRAIN_DoHorn", 500, 1, "i", veh);
                             TRAIN_DoHorn(veh);
-							#if DEBUG == 1
-								printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-							#endif
                             return 0;
                         }
                     }
@@ -6335,9 +6124,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
                     SetPVarInt(i, "train-horn", 0);
                 }
             }
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-			#endif
             return 0;
         }
     }
@@ -6411,9 +6197,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
                         GetVehicleRotation(vehid, h, a, b);
                         if(floatabs(b) > 15.0)
 						{
-							#if DEBUG == 1
-								printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-							#endif
 							return 1;
 						}
                         //z -= 0.5;
@@ -6424,9 +6207,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
                         KolArea[id] = CreateDynamicCylinder(x, y, z-10, z+10, 4.0);
                         KolDelay[veh] = true;
                         KolVehicle[id] = veh;
-						#if DEBUG == 1
-							printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-						#endif
                         return 0;
                     }
                 }
@@ -6467,9 +6247,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			{
 				SendClientMessage(playerid,COLOR_BROWN, "Nie ma w pobli¿u ¿adnych samochodów.");
 			}
-			#if DEBUG == 1
-				printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-			#endif
             return 0;
 		}
 	}
@@ -6592,17 +6369,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 							if(VehicleUID[v][vIntLock] == 1)
 			          	    {
 								Do_WnetrzaWozu(playerid, v, model);
-								#if DEBUG == 1
-									printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-								#endif
 								return 0;
 							}
 							else
 							{
 							    SendClientMessage(playerid, COLOR_GREY, "Interior jest zamkniêty!");
-								#if DEBUG == 1
-									printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-								#endif
 							    return 0;
 							}
 		          		}
@@ -6632,22 +6403,13 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     if(PRESSED(KEY_SECONDARY_ATTACK))
     {
         if(GetPlayerAnimationIndex(playerid)!=1660) SetTimerEx("VendCheck", 500, false, "d", playerid);
-		#if DEBUG == 1
-			printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-		#endif
         return 0;
     }
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerKeyStateChange - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }
 
 public OnVehicleDeath(vehicleid, killerid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnVehicleDeath pojazd %d - begin", GetNick(killerid), killerid, vehicleid);
-	#endif
 	if(GetVehicleModel(vehicleid) == 577)
 	{
         foreach(new i : Player)
@@ -6704,18 +6466,11 @@ public OnVehicleDeath(vehicleid, killerid)
         }
     }
     else DisableCarBlinking(vehicleid);
-
-	#if DEBUG == 1
-		printf("%s[%d] OnVehicleDeath pojazd %d - end", GetNick(killerid), killerid, vehicleid);
-	#endif
 	return 1;
 }
 
 public OnVehicleSpawn(vehicleid)
 {
-	#if DEBUG == 1
-		printf("%d OnVehicleSpawn - begin", vehicleid);
-	#endif
     if(B_IsTrailer(vehicleid))
     {
         new veh;
@@ -6749,9 +6504,6 @@ public OnVehicleSpawn(vehicleid)
         RepairVehicle(vehicleid); //
 
     }
-	#if DEBUG == 1
-		printf("%d OnVehicleSpawn - end", vehicleid);
-	#endif
     return 1;
 }
 
@@ -7529,17 +7281,11 @@ public OnPlayerText(playerid, text[])
 		Log(chatLog, INFO, "%s chat IC: %s", GetPlayerLogName(playerid), text);
 		return 0;
 	}
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerText - end", GetNick(playerid), playerid);
-	#endif
 	return 1;
 }//OnPlayerText
 
 public OnPlayerSelectDynamicObject(playerid, objectid, modelid, Float:x, Float:y, Float:z)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerSelectDynamicObject - begin", GetNick(playerid), playerid);
-	#endif
     if(GetPVarInt(playerid, "Allow-edit"))
     {
         EditDynamicObject(playerid, objectid);
@@ -7547,9 +7293,6 @@ public OnPlayerSelectDynamicObject(playerid, objectid, modelid, Float:x, Float:y
         format(lStr, 32, "OBJID: %d", objectid);
         SendClientMessage(playerid, -1, lStr);
     }
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerSelectDynamicObject - end", GetNick(playerid), playerid);
-	#endif
     return 1;
 }
 
@@ -7587,9 +7330,6 @@ public OnPlayerEnterGangZone(playerid, zoneid)
 
 public OnPlayerLeaveGangZone(playerid, zoneid)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerLeaveGangZone - begin", GetNick(playerid), playerid);
-	#endif
     if(zoneid < 0)
     {
         printf("Invalid zoneid (%d) for player %d", zoneid, playerid);
@@ -7622,9 +7362,6 @@ public OnPlayerLeaveGangZone(playerid, zoneid)
         }
     }
     SetPVarInt(playerid, "zoneid", -1);
-	#if DEBUG == 1
-		printf("%s[%d] OnPlayerLeaveGangZone - end", GetNick(playerid), playerid);
-	#endif
 }
 
 public OnTrailerUpdate(playerid, vehicleid)
@@ -7658,9 +7395,6 @@ public OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 
 public OnDynamicObjectMoved(objectid)
 {
-	#if DEBUG == 1
-		printf("%d OnDynamicObjectMoved - begin", objectid);
-	#endif
     if(ScenaCreated)
     {
         if(objectid == ScenaScreenObject)
@@ -7682,17 +7416,11 @@ public OnDynamicObjectMoved(objectid)
             }
         }
     }
-	#if DEBUG == 1
-		printf("%d OnDynamicObjectMoved - end", objectid);
-	#endif
     return 1;
 }
 
 public OnVehicleRespray(playerid, vehicleid, color1, color2)
 {
-	#if DEBUG == 1
-		printf("%s[%d] OnVehicleRespray - begin", GetNick(playerid), playerid);
-	#endif
     if(CarData[VehicleUID[vehicleid][vUID]][c_Color][0] != color1)
     {
         ChangeVehicleColor(vehicleid, CarData[VehicleUID[vehicleid][vUID]][c_Color][0], CarData[VehicleUID[vehicleid][vUID]][c_Color][1]);
@@ -7703,10 +7431,6 @@ public OnVehicleRespray(playerid, vehicleid, color1, color2)
         ChangeVehicleColor(vehicleid, CarData[VehicleUID[vehicleid][vUID]][c_Color][0], CarData[VehicleUID[vehicleid][vUID]][c_Color][1]);
         return 0;
     }
-
-	#if DEBUG == 1
-		printf("%s[%d] OnVehicleRespray - end", GetNick(playerid), playerid);
-	#endif
     return 1;
 }
 /*
