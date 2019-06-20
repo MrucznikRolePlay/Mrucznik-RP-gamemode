@@ -87,7 +87,6 @@ YCMD:pr(playerid, params[], help)
 				}
                 hexa = (hexa << 8);
                 OrgInfo[org][o_Color] = hexa;
-                printf("%08x i %08x i %08h", hexa, OrgInfo[org][o_Color], hexa);
 			    sendTipMessageEx(playerid, hexa, "Zmieni³eœ kolor rodziny.");
 			}
 			else if(strcmp(x_nr,"spawn",true) == 0)

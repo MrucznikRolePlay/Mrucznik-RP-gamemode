@@ -59,7 +59,6 @@ YCMD:stworztrase(playerid, params[], help)
 				}
 				else
 				{
-					printf("%d", ow);
 					format(string, sizeof(string), "Gracz [%d] %s jest w trakcie tworzenia wyscigu. Poczekaj a¿ skoñczy", ow, GetNick(ow));
 					sendTipMessage(playerid, string);
 				}

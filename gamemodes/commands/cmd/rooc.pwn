@@ -45,25 +45,21 @@ YCMD:rooc(playerid, params[], help)
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNick(playerid, true), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
             SendDiscordFracMessage(member, string);
-            printf("%s", string);
-
-            
         } 
 		else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie + DMV
         {
-   
             member = GetPlayerOrg(playerid);
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNick(playerid, true), params);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
-            Log(chatLog, INFO, "%s radio policyjne %d OOC: %s", GetPlayerLogName(playerid), member, params);
         } 
 		else
         {
             noAccessMessage(playerid);
             return 1;
         }
+        Log(chatLog, INFO, "%s radio policyjne %d OOC: %s", GetPlayerLogName(playerid), member, params);
     }
     return 1;
 }

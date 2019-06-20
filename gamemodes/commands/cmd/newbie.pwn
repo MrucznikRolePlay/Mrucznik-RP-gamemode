@@ -190,8 +190,7 @@ YCMD:newbie(playerid, params[], help)
 				AntySpam[playerid] = 1;
 				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
 			}
-			format(nobchat, sizeof(nobchat), "((N-Chat: %s [%d]: %s ))", sendername, PlayerInfo[playerid][pLevel], params);
-			printf(nobchat);
+			Log(chatLog, INFO, "%s newbie: %s", GetPlayerLogName(playerid), params);
 			new admin = 0;
 			foreach(new i : Player)
 			{

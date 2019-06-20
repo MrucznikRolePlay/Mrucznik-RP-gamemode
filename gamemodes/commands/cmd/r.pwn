@@ -56,7 +56,6 @@ YCMD:r(playerid, params[], help)
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
             format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid, true), params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-            printf("%s", string);
 			format(string, sizeof(string), "Radio: %s", params);
 			SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
         }
@@ -69,7 +68,6 @@ YCMD:r(playerid, params[], help)
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid, true), params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-            printf("%s", string);
             format(string, sizeof(string), "Radio: %s", params);
 			SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
         }

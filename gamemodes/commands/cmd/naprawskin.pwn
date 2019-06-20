@@ -50,7 +50,7 @@ YCMD:naprawskin(playerid, params[], help)
 					if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby naprawiæ skin gracz musi byæ pieszo!");
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-					printf("AdmCmd: %s naprawi³ skin gracza %s.", sendername, giveplayer);
+					Log(adminLog, INFO, "Admin %s naprawi³ skin %s", GetPlayerLogName(playerid), GetPlayerLogName(para1));
 					
 					new level = PlayerInfo[para1][pModel];
 					SetPlayerSkin(para1, level);

@@ -57,7 +57,7 @@ YCMD:deleteobject(playerid, params[], help)
                     if(Streamer_GetIntData(STREAMER_TYPE_OBJECT, i, E_STREAMER_WORLD_ID) == data)
                     {
                         GetDynamicObjectPos(i, x, y, z);
-                        printf("Delete object %d - model %d at [%.1f, %.1f, %.1f]", i, Streamer_GetIntData(STREAMER_TYPE_OBJECT, i, E_STREAMER_MODEL_ID), x, y, z);
+                        Log(adminLog, INFO, "Admin %s usun¹³ obiekt %d - model %d at [%.1f, %.1f, %.1f]", GetPlayerLogName(playerid), i, Streamer_GetIntData(STREAMER_TYPE_OBJECT, i, E_STREAMER_MODEL_ID), x, y, z);
                         DestroyDynamicObject(i);
                         count++;
                     }
@@ -77,7 +77,7 @@ YCMD:deleteobject(playerid, params[], help)
                         GetDynamicObjectPos(i, x, y, z);
                         if(VectorSize(x-px, y-py, z-pz) < float(extra))
                         {
-                            printf("Delete VW.%d dist.%d object %d - model %d at [%.1f, %.1f, %.1f]", data, extra, i, Streamer_GetIntData(STREAMER_TYPE_OBJECT, i, E_STREAMER_MODEL_ID), x, y, z);
+                            Log(adminLog, INFO, "Admin %s usun¹³ VW.%d dist.%d object %d - model %d at [%.1f, %.1f, %.1f]", GetPlayerLogName(playerid), data, extra, i, Streamer_GetIntData(STREAMER_TYPE_OBJECT, i, E_STREAMER_MODEL_ID), x, y, z);
                             DestroyDynamicObject(i);
                             count++;
 

@@ -54,229 +54,95 @@ YCMD:zabierz(playerid, params[], help)
 				SendClientMessage(playerid, COLOR_WHITE, "|_______________________________________________________|");
 				return 1;
 			}
+
+			if(!IsPlayerConnected(giveplayerid))
+			{
+				sendErrorMessage(playerid, "Nie ma takiego gracza !");
+				return 1;
+			}
+
+			if (!ProxDetectorS(8.0, playerid, giveplayerid))
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
+				return 1;
+			}
+
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+
 		    if(strcmp(x_nr,"prawojazdy",true) == 0)
 			{
-				if(IsPlayerConnected(giveplayerid))
-				{
-				    if(giveplayerid != INVALID_PLAYER_ID)
-				    {
-				        if (ProxDetectorS(8.0, playerid, giveplayerid))
-						{
-						    GetPlayerName(playerid, sendername, sizeof(sendername));
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					        format(string, sizeof(string), "* Zabra³eœ %s prawo jazdy.", giveplayer);
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ Ci prawo jazdy.", sendername);
-					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ %s prawo jazdy.", sendername, giveplayer);
-					        printf(string);
-					        PlayerInfo[giveplayerid][pCarLic] = 0;
-						}
-						else
-						{
-						    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
-						    return 1;
-						}
-				    }
-				}
-				else
-				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-				    return 1;
-				}
+				format(string, sizeof(string), "* Zabra³eœ %s prawo jazdy.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ Ci prawo jazdy.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ %s prawo jazdy.", sendername, giveplayer);
+				PlayerInfo[giveplayerid][pCarLic] = 0;
 			}
 			else if(strcmp(x_nr,"licencjalot",true) == 0)
 			{
-				if(IsPlayerConnected(giveplayerid))
-				{
-				    if(giveplayerid != INVALID_PLAYER_ID)
-				    {
-				        if (ProxDetectorS(8.0, playerid, giveplayerid))
-						{
-						    GetPlayerName(playerid, sendername, sizeof(sendername));
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					        format(string, sizeof(string), "* Zabra³eœ %s Licencje na latanie.", giveplayer);
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ Ci licencjê na latanie.", sendername);
-					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na latanie.", sendername, giveplayer);
-					        printf(string);
-					        PlayerInfo[giveplayerid][pFlyLic] = 0;
-						}
-						else
-						{
-						    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
-						    return 1;
-						}
-				    }
-				}
-				else
-				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-				    return 1;
-				}
+				format(string, sizeof(string), "* Zabra³eœ %s Licencje na latanie.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ Ci licencjê na latanie.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na latanie.", sendername, giveplayer);
+				PlayerInfo[giveplayerid][pFlyLic] = 0;
+
 			}
 			else if(strcmp(x_nr,"licencjabron",true) == 0)
 			{
-				if(IsPlayerConnected(giveplayerid))
-				{
-				    if(giveplayerid != INVALID_PLAYER_ID)
-				    {
-				        if (ProxDetectorS(8.0, playerid, giveplayerid))
-						{
-						    GetPlayerName(playerid, sendername, sizeof(sendername));
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					        format(string, sizeof(string), "* Zabra³eœ %s Licencjê na Broñ.", giveplayer);
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ Ci licencjê na broñ.", sendername);
-					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na broñ.", sendername, giveplayer);
-					        printf(string);
-					        PlayerInfo[giveplayerid][pGunLic] = 0;
-				        }
-				        else
-						{
-						    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
-						    return 1;
-						}
-				    }
-				}
-				else
-				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-				    return 1;
-				}
+				format(string, sizeof(string), "* Zabra³eœ %s Licencjê na Broñ.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ Ci licencjê na broñ.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na broñ.", sendername, giveplayer);
+				PlayerInfo[giveplayerid][pGunLic] = 0;
 			}
 			else if(strcmp(x_nr,"licencjalodz",true) == 0)
 			{
-				if(IsPlayerConnected(giveplayerid))
-				{
-				    if(giveplayerid != INVALID_PLAYER_ID)
-				    {
-				        if (ProxDetectorS(8.0, playerid, giveplayerid))
-						{
-						    GetPlayerName(playerid, sendername, sizeof(sendername));
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					        format(string, sizeof(string), "* Zabra³eœ %s Licencje na p³ywanie ³odziami.", giveplayer);
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ Ci twoj¹ licencjê na p³ywanie ³odziami.", sendername);
-					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na lodz.", sendername, giveplayer);
-					        printf(string);
-					        PlayerInfo[giveplayerid][pBoatLic] = 0;
-				        }
-				        else
-						{
-						    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
-						    return 1;
-						}
-				    }
-				}
-				else
-				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-				    return 1;
-				}
+				format(string, sizeof(string), "* Zabra³eœ %s Licencje na p³ywanie ³odziami.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ Ci twoj¹ licencjê na p³ywanie ³odziami.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na lodz.", sendername, giveplayer);
+				PlayerInfo[giveplayerid][pBoatLic] = 0;
+
 			}
 			else if(strcmp(x_nr,"bron",true) == 0)
 			{
-				if(IsPlayerConnected(giveplayerid))
-				{
-				    if(giveplayerid != INVALID_PLAYER_ID)
-				    {
-				        if (ProxDetectorS(8.0, playerid, giveplayerid))
-						{
-						    GetPlayerName(playerid, sendername, sizeof(sendername));
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					        format(string, sizeof(string), "* Zabra³eœ %s Bronie.", giveplayer);
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ twoj¹ broñ.", sendername);
-					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ %s broñ.", sendername, giveplayer);
-					        printf(string);
-					        ResetPlayerWeapons(giveplayerid);
-					        UsunBron(giveplayerid);
-				        }
-				        else
-						{
-						    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
-						    return 1;
-						}
-				    }
-				}
-				else
-				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-				    return 1;
-				}
+				format(string, sizeof(string), "* Zabra³eœ %s Bronie.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ twoj¹ broñ.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ %s broñ.", sendername, giveplayer);
+				ResetPlayerWeapons(giveplayerid);
+				UsunBron(giveplayerid);
 			}
 			else if(strcmp(x_nr,"dragi",true) == 0)
 			{
-				if(IsPlayerConnected(giveplayerid))
-				{
-				    if(giveplayerid != INVALID_PLAYER_ID)
-				    {
-				        if (ProxDetectorS(8.0, playerid, giveplayerid))
-						{
-						    GetPlayerName(playerid, sendername, sizeof(sendername));
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-						    format(string, sizeof(string), "* Zabra³eœ %s dragi.", giveplayer);
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ twoje narkotyki.", sendername);
-					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ %s dragi %d.", sendername, giveplayer, PlayerInfo[giveplayerid][pDrugs]);
-					        printf(string);
-					        PlayerInfo[giveplayerid][pDrugs] = 0;
-						}
-				        else
-						{
-						    sendTipMessageEx(playerid, COLOR_GREY, "   Ten gracz nie jest przy tobie !");
-						    return 1;
-						}
-				    }
-				}
-				else
-				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-				    return 1;
-				}
+				format(string, sizeof(string), "* Zabra³eœ %s dragi.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ twoje narkotyki.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ %s dragi %d.", sendername, giveplayer, PlayerInfo[giveplayerid][pDrugs]);
+				PlayerInfo[giveplayerid][pDrugs] = 0;
 			}
 			else if(strcmp(x_nr,"mats",true) == 0)
 			{
-				if(IsPlayerConnected(giveplayerid))
-				{
-				    if(giveplayerid != INVALID_PLAYER_ID)
-				    {
-				        if (ProxDetectorS(8.0, playerid, giveplayerid))
-						{
-						    GetPlayerName(playerid, sendername, sizeof(sendername));
-							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-						    format(string, sizeof(string), "* Zabra³eœ %s Materia³y.", giveplayer);
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ twoje Materia³y.", sendername);
-					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					        format(string, sizeof(string), "* Oficer %s zabra³ %s matsy %d.", sendername, giveplayer, PlayerInfo[giveplayerid][pMats]);
-					        printf(string);
-					        PlayerInfo[giveplayerid][pMats] = 0;
-						}
-				        else
-						{
-						    sendTipMessageEx(playerid, COLOR_GREY, "   Ten gracz nie jest przy tobie !");
-						    return 1;
-						}
-				    }
-				}
-				else
-				{
-				    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-				    return 1;
-				}
+				format(string, sizeof(string), "* Zabra³eœ %s Materia³y.", giveplayer);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ twoje Materia³y.", sendername);
+				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+				format(string, sizeof(string), "* Oficer %s zabra³ %s matsy %d.", sendername, giveplayer, PlayerInfo[giveplayerid][pMats]);
+				PlayerInfo[giveplayerid][pMats] = 0;
 			}
 			else
 			{
 				sendTipMessageEx(playerid, COLOR_GREY, "Z³a nazwa");
 				return 1;
 			}
+
+			Log(commandLog, INFO, "%s zabra³ %s %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), x_nr);
         }
         else
         {

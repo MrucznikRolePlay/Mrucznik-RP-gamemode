@@ -52,7 +52,7 @@ YCMD:zmienprace(playerid, params[], help)
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pJob] = level;
-					printf("AdmCmd: %s zmieni³ pracê %s na %d.", sendername, giveplayer, level);
+					Log(adminLog, INFO, "Admin %s zmieni³ pracê %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					format(string, sizeof(string), "   Twoja praca zosta³a zmieniona na %d przez %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "   Zmieni³eœ pracê graczowi %s na pracê %d.", giveplayer,level);

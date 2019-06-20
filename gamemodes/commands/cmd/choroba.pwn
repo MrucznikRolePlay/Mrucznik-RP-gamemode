@@ -52,7 +52,7 @@ YCMD:choroba(playerid, params[], help)
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					STDPlayer[para1] = level;
-					printf("AdmCmd: %s zmieni³ chorobê %s na %d.", sendername, giveplayer, level);
+					Log(adminLog, INFO, "Admin %s zarazi³ %s chorob¹ %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					format(string, sizeof(string), "   Zarazi³eœ siê chorob¹");
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "   Zmieni³eœ chorobê graczowi %s na pracê %d.", giveplayer,level);

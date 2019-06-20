@@ -125,15 +125,6 @@ YCMD:rodzinny(playerid, params[], help)
 			format(string, sizeof(string), "%s mówi przez radio: %s", sendername, params);
 			SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
         }
-      /*  else if(GetPlayerFraction(playerid) == FRAC_BOR)
-        {
-            new member = GetPlayerFraction(playerid);
-            format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],sendername, params);
-    		SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
-            SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
-            SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
-            printf("%s", string);
-        }*/
 		else
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jesteœ we frakcji!");

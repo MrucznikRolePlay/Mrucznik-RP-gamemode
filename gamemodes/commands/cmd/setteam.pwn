@@ -55,7 +55,7 @@ YCMD:setteam(playerid, params[], help)
 					gTeam[para1] = level;
 					//SetPlayerWeapons(para1);
 					SetPlayerSpawn(para1);
-					printf("AdmCmd: %s zmienil druzyne %s na %d.", sendername, giveplayer, level);
+        			Log(adminLog, INFO, "Admin %s zmieni³ %s dru¿ynê na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					format(string, sizeof(string), "Twoja dru¿yna zosta³a zmieniona na %d przez %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Zmieni³eœ dru¿ynê graczowi %s na %d.", giveplayer,level);

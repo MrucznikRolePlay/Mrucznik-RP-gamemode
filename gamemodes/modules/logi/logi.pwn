@@ -68,6 +68,9 @@ GetBusinessLogName(business)
     return sprintf("{Business: %s[%d]}", BizData[business][eBizName], business);
 }
 
-
+GetFractionLogName(fraction)
+{
+    return sprintf("{Fraction: %s[%d]}", FractionNames[fraction], fraction);
+}
 
 //end

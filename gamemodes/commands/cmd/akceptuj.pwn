@@ -1157,7 +1157,7 @@ YCMD:akceptuj(playerid, params[], help)
                             //
                             format(string, sizeof(string), "%s kupi³ dragi za $%d od %s", sendername, DrugPrice[playerid], giveplayer);
                             ABroadCast(COLOR_YELLOW,string,1);
-                            printf("%s", string);
+					        Log(payLog, INFO, "%s kupi³ od %s paczkê %d narkotyków za %d$", GetPlayerLogName(playerid), GetPlayerLogName(DrugOffer[playerid]), DrugGram[playerid], DrugPrice[playerid]);
                             //
 							PlayerInfo[DrugOffer[playerid]][pPayCheck] += DrugPrice[playerid];
 							PlayerInfo[DrugOffer[playerid]][pDrugsSkill] ++;
