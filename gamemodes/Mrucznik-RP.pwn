@@ -5787,7 +5787,6 @@ OnPlayerLogin(playerid, password[])
 			return 1;
 		}
 		
-		Log(connectLog, INFO, "Gracz %s zalogowa³ siê na konto", GetPlayerLogName(playerid));
 
 		//Nadawanie pieniêdzy:
 		ResetujKase(playerid);
@@ -5811,6 +5810,7 @@ OnPlayerLogin(playerid, password[])
 		}
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
+		Log(connectLog, INFO, "Gracz %s zalogowa³ siê na konto", GetPlayerLogName(playerid));
 
         Car_LoadForPlayer(playerid); //System aut
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
