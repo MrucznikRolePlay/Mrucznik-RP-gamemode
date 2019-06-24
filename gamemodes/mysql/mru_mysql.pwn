@@ -56,7 +56,7 @@ MruMySQL_Connect()
 		SendRconCommand("exit");
 		return 0;
 	}
-	#if DEBUG == 1
+	#if DEBUG_MODE == 1
 		mysql_debug(1);
 	#else
 		mysql_debug(0);

@@ -84,7 +84,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
 #include "VERSION.pwn"
-#define DEBUG 0 //1- DEBUG ON | 0- DEBUG OFF
+#define DEBUG_MODE 0 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
 
 #if !defined gpci
 native gpci (playerid, serial [], len);
@@ -173,7 +173,7 @@ main()
 public OnGameModeInit()
 {
 	//-------<[ Debug check ]>-------
-	#if DEBUG == 1
+	#if DEBUG_MODE == 1
 	if(dini_Exists("production.info"))
 	{
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
