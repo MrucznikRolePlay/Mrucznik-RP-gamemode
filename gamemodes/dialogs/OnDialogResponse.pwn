@@ -362,7 +362,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					if(GetPlayerMoney(playerid) >= 10000)
+					if(kaska[playerid] >= 10000)
 					{
 						format(string, sizeof(string), "%s kupi³ w barze Cytrynowy Sza³ i zaczyna go piæ", GetNick(playerid));
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -380,7 +380,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(GetPlayerMoney(playerid) >= 15000)
+					if(kaska[playerid] >= 15000)
 					{
 						format(string, sizeof(string), "%s kupi³ w barze W³adce procentów i zaczyna go piæ", GetNick(playerid));
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -398,7 +398,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					if(GetPlayerMoney(playerid) >= 20000)
+					if(kaska[playerid] >= 20000)
 					{
 						format(string, sizeof(string), "%s kupi³ w barze Napój Cotty (chce byæ jak L.Cotta) i zaczyna go piæ", GetNick(playerid));
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -416,7 +416,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					if(GetPlayerMoney(playerid) >= 30000)
+					if(kaska[playerid] >= 30000)
 					{
 						format(string, sizeof(string), "%s kupi³ w barze twoja stara i zaczyna go piæ jak kozak", GetNick(playerid));
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -449,7 +449,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					if(GetPlayerMoney(playerid) >= cenaNorm)
+					if(kaska[playerid] >= cenaNorm)
 					{
 						ZabierzKase(playerid, cenaNorm); 
 						SetPVarInt(playerid, "Vinyl-bilet", 1);//2 = VIP
@@ -467,7 +467,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(GetPlayerMoney(playerid) >= cenaVIP)
+					if(kaska[playerid] >= cenaVIP)
 					{
 						ZabierzKase(playerid, cenaVIP); 
 						SetPVarInt(playerid, "Vinyl-bilet", 2);//2 = VIP
@@ -13018,7 +13018,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					
 		            case 0:
 		            {
-						if(GetPlayerMoney(playerid) >= onePoolPrice)
+						if(kaska[playerid] >= onePoolPrice)
 						{
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
@@ -13037,7 +13037,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 1:
 		            {
-						if(GetPlayerMoney(playerid) >= twoPoolPrice)
+						if(kaska[playerid] >= twoPoolPrice)
 						{
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
@@ -13056,7 +13056,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 2://Zielony
 		            {
-						if(GetPlayerMoney(playerid) >= threePoolPrice)
+						if(kaska[playerid] >= threePoolPrice)
 						{
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
@@ -13075,7 +13075,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 3://Niebieski
 		            {
-						if(GetPlayerMoney(playerid) >= fourPoolPrice)
+						if(kaska[playerid] >= fourPoolPrice)
 						{
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", fourPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
@@ -14949,7 +14949,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new hajs = strval(inputtext);
 			if(hajs<=0) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota");
-			if(hajs > GetPlayerMoney(playerid)) return SendClientMessage(playerid, -1, "Nie masz tyle hajsu"); //HAJS zamieniæ GetPlayerMoney na pobranie ze struktury
+			if(hajs > kaska[playerid]) return SendClientMessage(playerid, -1, "Nie masz tyle hajsu");
 			DajKase(playerid, -hajs); //HAJS zabraæ pieni¹dze ze struktury
 			IbizaWplac(hajs);
 			new string[128];
@@ -15261,7 +15261,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			//if(PlayerInfo[playerid][pCash] < IbizaBilet) return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
-			new hajs = kaska[playerid]; //HAJS - zamiast GetPlayerMoney pobranie hajsu ze struktury
+			new hajs = kaska[playerid];
 			if(hajs < IbizaBilet)
 			{
 				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");

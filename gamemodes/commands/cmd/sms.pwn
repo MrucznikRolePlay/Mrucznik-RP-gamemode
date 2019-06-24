@@ -86,7 +86,7 @@ YCMD:sms(playerid, params[], help)
 			GameTextForPlayer(playerid, "~r~Linia zamknieta", 5000, 1);
 			return 1;
 		}
-		if(GetPlayerMoney(playerid) < smsCost)
+		if(kaska[playerid] < smsCost)
 		{
 			sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci œrodków!"); 
 			return 1;

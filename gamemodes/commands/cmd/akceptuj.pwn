@@ -65,7 +65,7 @@ YCMD:akceptuj(playerid, params[], help)
 			}
 			if(IsPlayerConnected(GetPVarInt(playerid, "Oferujacy_ID")))
 			{
-				if(GetPlayerMoney(playerid) >= GetPVarInt(playerid, "Oferujacy_Cena"))
+				if(kaska[playerid] >= GetPVarInt(playerid, "Oferujacy_Cena"))
 				{
 					new kwotaSprzedazy =  GetPVarInt(playerid, "Oferujacy_Cena");
 					ZabierzKase(playerid, kwotaSprzedazy);
@@ -1052,7 +1052,7 @@ YCMD:akceptuj(playerid, params[], help)
         {
 			new money = OfferPrice[playerid];
 			//SetPVarInt(playerid, "idPrawnika", playerid);
-			if(GetPlayerMoney(playerid) >= money)
+			if(kaska[playerid] >= money)
 			{
 				//Test
 				GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));

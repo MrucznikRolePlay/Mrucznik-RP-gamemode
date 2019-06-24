@@ -7435,7 +7435,7 @@ public OnVehicleRespray(playerid, vehicleid, color1, color2)
 /*
 public OnPlayerUseVendingMachine(playerid, machineid)//Gdy gracz u¿yje maszyny
 { 
-    if(GetPlayerMoney(playerid) < SPRUNK_COST)
+    if(kaska[playerid] < SPRUNK_COST)
     {
         sendErrorMessage(playerid, "Brak wystarczaj¹cej iloœci gotówki - 2500$");
         return 0;

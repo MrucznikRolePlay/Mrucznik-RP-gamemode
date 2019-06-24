@@ -146,7 +146,7 @@ GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}minimalne straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-				if(GetPlayerMoney(playerid) >= kwotaStraty)
+				if(kaska[playerid] >= kwotaStraty)
 				{
 					ZabierzKase(playerid, kwotaStraty);
 				}
@@ -174,7 +174,7 @@ GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}du¿e straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-				if(GetPlayerMoney(playerid) >= BizData[bizid][eBizMoney])
+				if(kaska[playerid] >= BizData[bizid][eBizMoney])
 				{
 					ZabierzKase(playerid,BizData[bizid][eBizMoney]);
 				}
@@ -227,7 +227,7 @@ GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid,COLOR_WHITE, string);
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}minimalne straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-				if(GetPlayerMoney(playerid) >= kwotaStraty)
+				if(kaska[playerid] >= kwotaStraty)
 				{
 					ZabierzKase(playerid,kwotaStraty);
 				}
@@ -254,7 +254,7 @@ GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid,COLOR_WHITE, string);
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}du¿e straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-				if(GetPlayerMoney(playerid) >= BizData[bizid][eBizMoney])
+				if(kaska[playerid] >= BizData[bizid][eBizMoney])
 				{
 					ZabierzKase(playerid,BizData[bizid][eBizMoney]);
 				}
