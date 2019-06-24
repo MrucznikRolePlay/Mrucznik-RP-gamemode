@@ -68,14 +68,14 @@ YCMD:wiadomosc(playerid, params[], help)
             SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
             format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.", playerid, GetNick(playerid), text);
             SendMessageToAdmin(string, COLOR_LIGHTRED);
-            Log(czitLog, INFO, string);
+			Log(warningLog, INFO, "%s reklamuje na PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
             return 1;
         }
         if (AntyCzitText(text))
         {
             format(string, sizeof(string), "AdmWarning: [%d] %s mówi coœ o cheat'ach do [%s]: %s", playerid, GetNick(playerid), giveplayerid, text);
             SendMessageToAdmin(string, COLOR_LIGHTRED); 
-            Log(czitLog, INFO, string);
+			Log(warningLog, INFO, "%s mówi coœ o czitach na PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
         }
         //======================================[WYKONANIE - WYS£ANIE WIADOMOŒCI]==================
         if(strlen(params) < 78)
@@ -125,6 +125,7 @@ YCMD:wiadomosc(playerid, params[], help)
                 }		
             }
         }
+	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
         //dŸwiêki
         PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
         PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);

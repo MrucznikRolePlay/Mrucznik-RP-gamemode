@@ -44,7 +44,7 @@ YCMD:addcar(playerid, params[], help)
     new str[128];
     format(str, 128, "[CAR] Stworzono pojazd (UID: %d) model: %d przez %s", CarData[id][c_UID], model, GetNick(playerid));
 	SendClientMessage(playerid, COLOR_GRAD2, str);
-    Log(actionLog, INFO, str);
+    Log(adminLog, INFO, "Admin %s stworzy³ Auto o UID %d model %d", GetPlayerLogName(playerid), CarData[id][c_UID], model);
     return 1;
 }
 

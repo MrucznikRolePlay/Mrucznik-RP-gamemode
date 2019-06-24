@@ -150,7 +150,7 @@ YCMD:megafon(playerid, params[], help)
 		    noAccessMessage(playerid);
 			return 1;
 		}
-		printf("%s", string);
+	    Log(chatLog, INFO, "%s megafon: %s", GetPlayerLogName(playerid), params);
 		format(string, sizeof(string), "Megafon: %s!!", params);
 		SetPlayerChatBubble(playerid,string,COLOR_YELLOW,30.0,8000);
 	}

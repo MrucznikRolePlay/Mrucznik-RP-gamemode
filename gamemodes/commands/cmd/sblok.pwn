@@ -31,8 +31,6 @@
 YCMD:sblok(playerid, params[], help)
 {
 	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -59,11 +57,10 @@ YCMD:sblok(playerid, params[], help)
 		                sendErrorMessage(playerid, "Nie mozesz zablokowaæ Admina !");
 		                return 1;
 		            }
-	                GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-	                GetPlayerName(playerid, sendername, sizeof(sendername));
-		            format(string, sizeof(string), "AdmCmd: Konto gracza %s zostalo sblock przez %s, Powod: %s", giveplayer, sendername, (result));
-		            //PlayerInfo[giveplayerid][pCK] = 2;
-		            Log(banLog, INFO, string);
+	                Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ cichego blocka, powód: %s", 
+						GetPlayerLogName(playerid),
+						GetPlayerLogName(giveplayerid),
+						result);
 		            PlayerInfo[playerid][pBlock] = 1;
 					SendClientMessage(giveplayerid, COLOR_NEWS, "Twoje konto zosta³o zablokowane za z³y nick. Jeœli block jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i napiœ proœbê o UN BLOCK");
 					KickEx(giveplayerid);

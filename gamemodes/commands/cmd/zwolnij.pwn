@@ -57,7 +57,7 @@ YCMD:zwolnij(playerid, params[], help)
 							GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
                             new liderid = PlayerInfo[playerid][pLider];
-							printf("AdmCmd: %s wyprosil %s.", sendername, giveplayer);
+							Log(commandLog, INFO, "%s wyrzuci³ %s z frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(liderid));
 							format(string, sizeof(string), "Zostales wyrzucony z frakcji %s przez %s.", FractionNames[liderid],sendername);
 							sendTipMessageEx(para1, COLOR_LIGHTBLUE, string);
 							gTeam[para1] = 3;

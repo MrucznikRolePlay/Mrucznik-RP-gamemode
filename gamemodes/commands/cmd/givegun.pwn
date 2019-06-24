@@ -58,85 +58,59 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pGun0] = gun;
 		            	PlayerInfo[playa][pAmmo0] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						//logi broñ
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 		            if(gun >= 2 && gun <= 9)
 		            {
 		            	PlayerInfo[playa][pGun1] = gun;
 		            	PlayerInfo[playa][pAmmo1] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if(gun >= 10 && gun <= 15)
 					{
 					    PlayerInfo[playa][pGun10] = gun;
 		            	PlayerInfo[playa][pAmmo10] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if(gun >= 16 && gun <= 18)
 					{
 					    PlayerInfo[playa][pGun8] = gun;
 		            	PlayerInfo[playa][pAmmo8] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if(gun >= 19 && gun <= 21)
 					{
       					SendClientMessage(playerid, COLOR_GREY, "Na tym slocie nie ma broni !");
+						return 1;
 					}
 					else if(gun >= 22 && gun <= 24)
 					{
 					    PlayerInfo[playa][pGun2] = gun;
 		            	PlayerInfo[playa][pAmmo2] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if(gun >= 25 && gun <= 27)
 					{
 					    PlayerInfo[playa][pGun3] = gun;
 		            	PlayerInfo[playa][pAmmo3] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if(gun == 28 || gun == 29 || gun == 32)
 					{
 					    PlayerInfo[playa][pGun4] = gun;
 		            	PlayerInfo[playa][pAmmo4] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if(gun == 30 || gun == 31)
 					{
 					    PlayerInfo[playa][pGun5] = gun;
 		            	PlayerInfo[playa][pAmmo5] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
 					}
 					else if(gun == 33 || gun == 34)
 					{
 					    PlayerInfo[playa][pGun6] = gun;
 		            	PlayerInfo[playa][pAmmo6] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if( gun == 39)
 					{
@@ -146,42 +120,35 @@ YCMD:givegun(playerid, params[], help)
 		            	PlayerInfo[playa][pAmmo12] = 1;
 						GivePlayerWeapon(playa, gun, ammo);
 						GivePlayerWeapon(playa, 40, 1);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if( gun >= 35 || gun <= 38)
 					{
 					    PlayerInfo[playa][pGun7] = gun;
 		            	PlayerInfo[playa][pAmmo7] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if( gun >= 41 || gun <= 43)
 					{
 					    PlayerInfo[playa][pGun9] = gun;
 		            	PlayerInfo[playa][pAmmo9] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else if( gun == 46)
 					{
 					    PlayerInfo[playa][pGun11] = gun;
 		            	PlayerInfo[playa][pAmmo11] = ammo;
 						GivePlayerWeapon(playa, gun, ammo);
-						format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
-						Log(weapLog, INFO, string);
-						SendCommandLogMessage(string);
 					}
 					else
 					{
 					    SendClientMessage(playerid, COLOR_GREY, "Broñ zablokowana lub nie istnieje !");
 					    return 1;
 					}
+					
+					//logi broñ
+					format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+					SendCommandLogMessage(string);
+					Log(adminLog, INFO, "Admin %s da³ graczowi %s broñ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa), GetWeaponLogName(gun, ammo));
 				}
 			}
 		}

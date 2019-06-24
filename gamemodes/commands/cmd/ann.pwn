@@ -47,9 +47,7 @@ YCMD:ann(playerid, params[], help)
 		format(string, sizeof(string), "AdmCmd: %s [ID: %d] napisal cos na /ann", sendername, playerid);
 		SendMessageToAdmin(string, COLOR_PANICRED);
 
-        strcat(string, " - ");
-        strcat(string, params);
-        Log(cmdLog, INFO, string);
+        Log(adminLog, INFO, "Admin %s u¿y³ /ann o treœci: %s", GetPlayerLogName(playerid), params);
 	}
 	else
 	{

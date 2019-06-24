@@ -60,7 +60,7 @@ YCMD:delete3dtext(playerid, params[], help)
                         Streamer_GetFloatData(STREAMER_TYPE_3D_TEXT_LABEL, Text3D:i, E_STREAMER_X, x);
                         Streamer_GetFloatData(STREAMER_TYPE_3D_TEXT_LABEL, Text3D:i, E_STREAMER_Y, y);
                         Streamer_GetFloatData(STREAMER_TYPE_3D_TEXT_LABEL, Text3D:i, E_STREAMER_Z, z);
-                        printf("Delete 3DText %d - at [%.1f, %.1f, %.1f]", i, x, y, z);
+                        Log(adminLog, INFO, "Admin %s usun¹³ 3DText %d - at [%.1f, %.1f, %.1f]", GetPlayerLogName(playerid), i, x, y, z);
                         DestroyDynamic3DTextLabel(Text3D:i);
                         count++;
                     }
@@ -82,7 +82,7 @@ YCMD:delete3dtext(playerid, params[], help)
                         Streamer_GetFloatData(STREAMER_TYPE_3D_TEXT_LABEL, Text3D:i, E_STREAMER_Z, z);
                         if(VectorSize(x-px, y-py, z-pz) < float(extra))
                         {
-                            printf("Delete VW.%d dist.%d Text3D %d - at [%.1f, %.1f, %.1f]", _:data, extra, i, x, y, z);
+                            Log(adminLog, INFO, "Admin %s usun¹³ VW VW.%d dist.%d Text3D %d - at [%.1f, %.1f, %.1f]",  GetPlayerLogName(playerid), _:data, extra, i, x, y, z);
                             DestroyDynamic3DTextLabel(Text3D:i);
                             count++;
 

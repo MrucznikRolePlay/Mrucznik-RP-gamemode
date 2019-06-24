@@ -41,16 +41,9 @@ YCMD:wk(playerid, params[], help)
   		sendTipMessage(playerid, "Kluczyki wywalone (skrót komendy: /wk)", COLOR_LIGHTBLUE);
 
 		//log
-		new string[256];
-		new year, month, day;
-		getdate(year, month, day);
-		format(string, sizeof(string), "[%d|%d|%d] %s wyrzucil klucze [KEYS: %d]", year,
-		month, 
-		day, 
-		GetNick(playerid, true),
-		PlayerInfo[playerid][pUID],
-		PlayerInfo[playerid][pKluczeAuta]);
-		Log(autaLog, INFO, string);
+		Log(payLog, INFO, "%s wyrzuci³ kluczyki do pojazdu %s",
+			GetPlayerLogName(playerid),
+			GetCarDataLogName(uid));
   	}
   	else
   	{

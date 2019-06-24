@@ -39,7 +39,7 @@ premium_ConvertToNewSystem(playerid)
 		_MruGracz(playerid, "Uwaga! Twoje premium zosta³o przeniesione na nowy system!");
 		_MruGracz(playerid, "Otrzyma³eœ Konto Premium na 3 miesi¹ce i dodatkowe 500 MC do wykorzystania.");
 
-		Log(premiumLog, INFO, sprintf("KONWERSJA KP: Nick %s | Level KP: %d", GetNick(playerid), PlayerInfo[playerid][pDonateRank]));
+		Log(premiumLog, INFO, "%s otrzyma³ konwersje KP %d na nowy system", GetPlayerLogName(playerid), PlayerInfo[playerid][pDonateRank]);
 		PlayerInfo[playerid][pDonateRank] = 0;
 	}
 }
@@ -88,7 +88,7 @@ premium_loadForPlayer(playerid)
 			{
 				new lVal = kpEnds-gettime();
 
-				if(lVal > KP_TYDZIEN)
+				if(lVal < KP_TYDZIEN)
 				{
 					format(qr, 170, "UWAGA! Twoje konto premium wygasa za %d dni i %d godzin.", floatround(floatdiv(lVal, 86400), floatround_floor), floatround(floatdiv(lVal, 3600), floatround_floor)%24);
 					_MruAdmin(playerid, qr);
@@ -158,7 +158,7 @@ ZabierzKP(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		Log(premiumLog, INFO, sprintf("ZABRANIE KP: Nick %s", GetNick(playerid)));
+		Log(premiumLog, E_LOGLEVEL:DEBUG, "%s zabrano KP", GetPlayerLogName(playerid));
 		PremiumInfo[playerid][pKP] = 0;
 		new query[128];
 		format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
@@ -171,7 +171,7 @@ ZabierzKP(playerid)
         }
         else
         {
-        	printf("ERROR: ZabierzKP zosta³o wykonane na osobie, która nie posiada³a premium! UID Postaci: %d", PlayerInfo[playerid][pUID]);
+        	Log(premiumLog, ERROR, "ERROR: ZabierzKP zosta³o wykonane na osobie, która nie posiada³a premium! %s", GetPlayerLogName(playerid));
         }
 	}
 }
@@ -180,7 +180,7 @@ DajKP(playerid, time, bool:msg=true)
 {
 	if(IsPlayerConnected(playerid))
     {
-		Log(premiumLog, INFO, sprintf("NADANIE KP: Nick %s | Czas %d", GetNick(playerid), time));
+		Log(premiumLog, E_LOGLEVEL:DEBUG, "%s nadano KP na %d", GetPlayerLogName(playerid), time);
         new query[170];
         format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
     	mysql_query(query);
@@ -222,10 +222,10 @@ DajKP(playerid, time, bool:msg=true)
 
 DajMC(playerid, mc)
 {
-	Log(premiumLog, INFO, sprintf("NADANIE MC: Nick %s | Ilosc: %d", GetNick(playerid), mc));
+	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s nadano %dMC", GetPlayerLogName(playerid), mc);
 	if(mc <= 0)
 	{
-		printf("ERROR: funkcja DajMC miala ujemna wartosc dla playerid: %s [%d] Wartosc: %d", GetNick(playerid), playerid, mc);
+		Log(premiumLog, ERROR,"ERROR: funkcja DajMC miala ujemna wartosc dla %s Wartosc: %d", GetPlayerLogName(playerid), mc);
 		return 0;
 	}
 	PremiumInfo[playerid][pMC] += mc;
@@ -237,10 +237,10 @@ DajMC(playerid, mc)
 
 ZabierzMC(playerid, mc)
 {
-	Log(premiumLog, INFO, sprintf("ZABRANIE MC: Nick %s | Ilosc %d", GetNick(playerid), mc));
+	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s zabrano %dMC", GetPlayerLogName(playerid), mc);
 	if(mc <= 0)
 	{
-		printf("ERROR: funkcja ZabierzMC miala ujemna wartosc dla playerid: %s [%d] Wartosc: %d", GetNick(playerid), playerid, mc);
+		Log(premiumLog, ERROR, "ERROR: funkcja ZabierzMC miala ujemna wartosc dla %s", GetPlayerLogName(playerid), mc);
 		return 0;
 	}
 	PremiumInfo[playerid][pMC] -= mc;
@@ -276,10 +276,11 @@ KupPojazdPremium(playerid, id)
 		sendErrorMessage(playerid, "Nie staæ Ciê na ten pojazd");
 		return DialogPojazdyPremium(playerid);
 	}
-	new string[128];
 	MRP_ShopPurchaseCar(playerid, PojazdyPremium[id][Model], PojazdyPremium[id][Cena]);
-	format(string, sizeof(string), "%s kupil pojazd premium %s za %d MC", GetNick(playerid), VehicleNames[PojazdyPremium[id][Model]-400], PojazdyPremium[id][Cena]);
-	Log(premiumLog, INFO, string);
+	Log(premiumLog, INFO, "%s kupil pojazd premium %s za %dMC",
+		GetPlayerLogName(playerid), 
+		VehicleNames[PojazdyPremium[id][Model]-400], 
+		PojazdyPremium[id][Cena]);
 	premium_printMcQuantity(playerid);
 	DialogMenuDotacje(playerid);
 	return 1;
@@ -311,8 +312,10 @@ KupSkinPremium(playerid, skin)
 	format(string, sizeof(string), "INSERT INTO `mru_premium_skins` (`s_charUID`, `s_ID`) VALUES('%d', '%d')", PlayerInfo[playerid][pUID], SkinyPremium[id][Model]);
     mysql_query(string);
 
-	format(string, sizeof(string), "%s kupil skin %d za %d MC", GetNick(playerid), SkinyPremium[id][Model], UNIKATOWY_SKIN_CENA);
-	Log(premiumLog, INFO, string);
+	Log(premiumLog, INFO, "%s kupi³ unikatowy skin %d za %dMC",
+		GetPlayerLogName(playerid), 
+		SkinyPremium[id][Model], 
+		UNIKATOWY_SKIN_CENA);
 
 	UniqueSkins[playerid][id] = true;
 
@@ -343,14 +346,10 @@ KupSlotPojazdu(playerid)
 	}
 
 	ZabierzMC(playerid, CAR_SLOT_CENA);
-
-	new string[128];
-
-	format(string, sizeof(string), "%s kupil slot wozu za %d MC", GetNick(playerid), CAR_SLOT_CENA);
-	Log(premiumLog, INFO, string);
-
 	MRP_SetPlayerCarSlots(playerid, MRP_GetPlayerCarSlots(playerid)+1);
 
+	Log(premiumLog, INFO, "%s kupi³ slot wozu za "#CAR_SLOT_CENA"MC",
+		GetPlayerLogName(playerid));
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie slot na auto za %d MC. Masz teraz %d slotów.", CAR_SLOT_CENA, MRP_GetPlayerCarSlots(playerid)));
 
 	premium_printMcQuantity(playerid);
@@ -369,14 +368,10 @@ KupZmianeNicku(playerid)
 	}
 
 	ZabierzMC(playerid, ZMIANA_NICKU_CENA);
-
 	MRP_SetPlayerNickChanges(playerid, MRP_GetPlayerNickChanges(playerid)+1);
 
-	new string[128];
-
-	format(string, sizeof(string), "%s kupil zmiane nicku za %d MC", GetNick(playerid), ZMIANA_NICKU_CENA);
-	Log(premiumLog, INFO, string);
-
+	Log(premiumLog, INFO, "%s kupil zmiane nicku za "#ZMIANA_NICKU_CENA"MC",
+		GetPlayerLogName(playerid));
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie zmianê nicku za %d MC. Masz teraz %d zmian nicku.", ZMIANA_NICKU_CENA, MRP_GetPlayerNickChanges(playerid)));
 
 	premium_printMcQuantity(playerid);
@@ -414,18 +409,12 @@ KupNumerTelefonu(playerid, string:_numer[])
 			return DialogTelefon(playerid);
 		}
 
-		new string[128];
-
 		ZabierzMC(playerid, cena);
-
 		MRP_SetPlayerPhone(playerid, numer);
 
 		_MruAdmin(playerid, sprintf("Twój nowy numer telefonu: %d.", numer));
-
-		format(string, sizeof(string), "%s kupil numer telefonu %d za %d MC.", GetNick(playerid), numer, cena);
-		Log(premiumLog, INFO, string);
-
-		DialogMenuDotacje(playerid);
+		Log(premiumLog, INFO, "%s kupil numer telefonu %d za %dMC.",
+			GetPlayerLogName(playerid), numer, cena);
 
 		premium_printMcQuantity(playerid);
 		DialogMenuDotacje(playerid);
@@ -462,11 +451,6 @@ IsAUnikat(modelid)
 		if(modelid == PojazdyPremium[i][Model])
 			return 1;
 	return 0;
-}
-
-IsAKox(playerid)
-{
-	return PlayerInfo[playerid][pUID] == 1 || PlayerInfo[playerid][pUID] == 2;
 }
 
 PlayerHasSkin(playerid, skinid)

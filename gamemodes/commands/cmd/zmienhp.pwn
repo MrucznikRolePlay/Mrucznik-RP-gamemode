@@ -53,7 +53,7 @@ YCMD:zmienhp(playerid, params[], help)
 					{
 					    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-						printf("SETHP: AdmCmd: %s da³ %d hp %s", sendername, health,  giveplayer);
+						Log(adminLog, INFO, "Admin %s ustawi³ %s hp na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), health);
 					    SetVehicleHealth(GetPlayerVehicleID(playa), health);
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
 						new string[128];

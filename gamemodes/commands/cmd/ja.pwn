@@ -47,6 +47,7 @@ YCMD:ja(playerid, params[], help)
     {
         format(string, sizeof(string), "* %s %s", GetNick(playerid, true), params);
         ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+	    Log(chatLog, INFO, "%s me: %s", GetPlayerLogName(playerid), params);
     } else
     {
         new pos = strfind(params, " ", true, strlen(params) / 2);

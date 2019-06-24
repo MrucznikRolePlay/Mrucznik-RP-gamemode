@@ -13,18 +13,13 @@ IsDialogProtected(dialogid)
 //ID DIALOGÓW 9900+ BIZNESY.
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
-	#if DEBUG == 1
-		printf("%s OnDialogResponse(%d, %d, %d, %d, %s) - begin", GetNick(playerid), playerid, dialogid, response, listitem, inputtext);
-	#endif
     if(dialogid < 0) return 1;
     if(dialogid != iddialog[playerid])
     {
         if(dialogid == D_ANIMLIST || dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B³êdne ID GUI.");
-        #if defined DEBUG
-        printf("B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
-        #endif
+        Log(serverLog, WARNING, "B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
         return 1;
     }
     if(IsDialogProtected(dialogid) || true) //MySQL anti injection
@@ -90,7 +85,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    new kasa = GetPVarInt(playerid, "Mats-kasa");
         new giveplayerid = GetPVarInt(playerid, "Mats-id");
         new moneys = GetPVarInt(playerid, "Mats-mats");
-		new firstValue = PlayerInfo[playerid][pMats];
         new string[256];
 		if(!response)
 		{
@@ -104,6 +98,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 		if(kaska[playerid] < kasa) return sendErrorMessage(playerid, "Nie masz tyle kasy!");
+		if(PlayerInfo[giveplayerid][pMats] < moneys) return sendErrorMessage(playerid, "Gracz nie ma tyle materia³ów!");
 		if(GetPVarInt(playerid, "OKupMats") == 0) return sendErrorMessage(playerid, "Coœ posz³o nie tak! (kupno)");
         //if(GetPVarInt(playerid, "OSprzedajMats") == 0) return sendErrorMessage(playerid, "Coœ posz³o nie tak! (sprzeda¿)");
 		if(GetPVarInt(giveplayerid, "OSprzedajMats") == 1)
@@ -119,8 +114,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			DajKase(giveplayerid, kasa);
 			DajKase(playerid, -kasa);
 			
-			format(string, sizeof(string), "%s kupil od %s materialy (Kupil: %d || Poprzednio: %d || Cena: %d)", GetNick(playerid), GetNick(giveplayerid), moneys, firstValue, kasa);
-			Log(payLog, INFO, string);
+			Log(payLog, INFO, "%s kupi³ od %s materia³y w iloœci %d za %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), moneys, kasa);
 			SetPVarInt(playerid, "OKupMats", 0);
 			SetPVarInt(giveplayerid, "OSprzedajMats", 0);
 			SetPVarInt(playerid, "Mats-kasa", 0);
@@ -368,7 +362,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					if(GetPlayerMoney(playerid) >= 10000)
+					if(kaska[playerid] >= 10000)
 					{
 						format(string, sizeof(string), "%s kupi³ w barze Cytrynowy Sza³ i zaczyna go piæ", GetNick(playerid));
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -386,7 +380,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(GetPlayerMoney(playerid) >= 15000)
+					if(kaska[playerid] >= 15000)
 					{
 						format(string, sizeof(string), "%s kupi³ w barze W³adce procentów i zaczyna go piæ", GetNick(playerid));
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -404,7 +398,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					if(GetPlayerMoney(playerid) >= 20000)
+					if(kaska[playerid] >= 20000)
 					{
 						format(string, sizeof(string), "%s kupi³ w barze Napój Cotty (chce byæ jak L.Cotta) i zaczyna go piæ", GetNick(playerid));
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -422,7 +416,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					if(GetPlayerMoney(playerid) >= 30000)
+					if(kaska[playerid] >= 30000)
 					{
 						format(string, sizeof(string), "%s kupi³ w barze twoja stara i zaczyna go piæ jak kozak", GetNick(playerid));
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
@@ -455,7 +449,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					if(GetPlayerMoney(playerid) >= cenaNorm)
+					if(kaska[playerid] >= cenaNorm)
 					{
 						ZabierzKase(playerid, cenaNorm); 
 						SetPVarInt(playerid, "Vinyl-bilet", 1);//2 = VIP
@@ -473,7 +467,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(GetPlayerMoney(playerid) >= cenaVIP)
+					if(kaska[playerid] >= cenaVIP)
 					{
 						ZabierzKase(playerid, cenaVIP); 
 						SetPVarInt(playerid, "Vinyl-bilet", 2);//2 = VIP
@@ -1041,7 +1035,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 SendClientMessage(playerid, 0x05CA8CFF, str);
                 
 				MruMySQL_ZapiszUprawnienia(playerid);
-                printf("(PERM) %s zmienil prawa %s (%d) na %b",GetNick(playerid), GetNick(id), PlayerInfo[id][pUID], ACCESS[id]);
+				Log(adminLog, INFO, "Admin %s zmieni³ prawa %s na %b", GetPlayerLogName(playerid), GetPlayerLogName(id), ACCESS[id]);
             }
             return 1;
         }
@@ -1275,7 +1269,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         format(str, 128, "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), inputtext, powod);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(banLog, INFO, str);
+        Log(punishmentLog, INFO, "Admin %s zablokowa³ offline ip %s, powód: %s", 
+                GetPlayerLogName(playerid),
+                inputtext,
+                powod);
 
         SetPVarInt(playerid, "panel-kary-continue", 0);
     }
@@ -1294,7 +1291,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         format(str, 128, "ADM: %s - zablokowano nick: %s powód: %s", GetNick(playerid), inputtext, powod);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(banLog, INFO, str);
+        Log(punishmentLog, INFO, "Admin %s zablokowa³ offline %s, powód: %s", 
+                GetPlayerLogName(playerid),
+                inputtext,
+                powod);
 
         SetPVarInt(playerid, "panel-kary-continue", 0);
     }
@@ -1328,7 +1328,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         format(str, 128, "ADM: %s - odblokowano IP: %s", GetNick(playerid), inputtext);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(banLog, INFO, str);
+        Log(punishmentLog, INFO, "Admin %s odblokowa³ ip %s", 
+                GetPlayerLogName(playerid),
+                inputtext);
     }
     else if(dialogid == D_PANEL_KAR_UNBANNICK)
     {
@@ -1348,7 +1350,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         format(str, 128, "ADM: %s - odblokowano nick: %s", GetNick(playerid), inputtext);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(banLog, INFO, str);
+        Log(punishmentLog, INFO, "Admin %s odblokowa³ %s", 
+                GetPlayerLogName(playerid),
+                inputtext);
     }
     else if(dialogid == D_PANEL_KAR_ZNAJDZ)  //SprawdŸ dane po IP | SprawdŸ dane po nicku
     {
@@ -1847,37 +1851,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				dajeKontrakt[playerid] = 9999;
 				haHajs[playerid] = 0;
 				ClearAnimations(playerid);
-	        	if(IsPlayerInRangeOfPoint(playerid, 5.0, 1013.0000000,-452.6000061,50.5999985))
-	        	{
-	        	    SetTimerEx("HABox",30000,0,"dd",0, playerid);
-	        	    DestroyDynamicObject(habox[0]);
-					habox[0] = CreateDynamicObject(3407,1013.0000000,-452.6000061,50.5999985,0.0000000,0.0000000,2.0000000);
-	        	}
-				else if(IsPlayerInRangeOfPoint(playerid, 5.0, 2130.6000977,-1875.4000244,12.5000000))
-				{
-				    SetTimerEx("HABox",30000,0,"dd",1, playerid);
-				    DestroyDynamicObject(habox[1]);
-					habox[1] = CreateDynamicObject(3407,2130.6000977,-1875.4000244,12.5000000,0.0000000,0.0000000,213.9999390); //object(ce_mailbox2) (2)
-				}
-				else if(IsPlayerInRangeOfPoint(playerid, 5.0, 18.2000008,-214.6000061, 0.5))
-				{
-				    SetTimerEx("HABox",30000,0,"dd",2, playerid);
-					DestroyDynamicObject(habox[2]);
-					habox[2] = CreateDynamicObject(3407,18.2000008,-214.6000061,0.5000000,0.0000000,0.0000000,190.0000000); //object(ce_mailbox2) (3)
-				}
-				else if(IsPlayerInRangeOfPoint(playerid, 5.0, 1230.5999756,-1652.9000244,10.8000002))
-				{
-				    SetTimerEx("HABox",30000,0,"dd",3, playerid);
-					DestroyDynamicObject(habox[3]);
-					habox[3] = CreateDynamicObject(3407,1230.5999756,-1652.9000244,10.8000002,0.0000000,0.0000000,70.0000000); //object(ce_mailbox2) (4)
-				}
-				else if(IsPlayerInRangeOfPoint(playerid, 5.0, 2355.1999512,-651.7999878,127.0999985))
-		        {
-		            SetTimerEx("HABox",30000,0,"dd",4, playerid);
-					DestroyDynamicObject(habox[4]);
-					habox[4] = CreateDynamicObject(3407,2355.1999512,-651.7999878,127.0999985,0.0000000,0.0000000,44.0000000); //object(ce_mailbox2) (5)
-		        }
-		        //OnPlayerUpdate(playerid);
 		        return 1;
 			}
 			else
@@ -7343,9 +7316,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        new vehicleid = GetPlayerVehicleID(playerid);
 			        new giveplayer[MAX_PLAYER_NAME];
 			        GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-                    new string[128];
-			        format(string, sizeof(string), "Auto o ID %d zosta³o zez³omowane przez %s", CarData[VehicleUID[vehicleid][vUID]][c_UID], giveplayer);
-					Log(payLog, INFO, string);
+					Log(payLog, INFO, "%s zez³omowa³ auto %s i dosta³ 5000$", GetPlayerLogName(playerid), GetVehicleLogName(vehicleid));
 					RemovePlayerFromVehicleEx(playerid);
 					ClearAnimations(playerid);
     				SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
@@ -7825,7 +7796,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "%s[%d] cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid),PlayerInfo[playerid][pUID]);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 60.000.000$");
-							Log(nickLog, INFO, string);
+							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 60000000$", GetPlayerLogName(playerid));
 							DajKase(playerid, -60000000);
 						}
 						else
@@ -7838,9 +7809,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if (kaska[playerid] >= 25000000 && PlayerInfo[playerid][pExp] >= 180)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
-							Log(nickLog, INFO, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktów respektu");
+							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 25000000$ i 180 punktów respektu", GetPlayerLogName(playerid));
 							PlayerInfo[playerid][pZmienilNick] --;
 							DajKase(playerid, -25000000);
 							PlayerInfo[playerid][pExp] -=180;
@@ -7855,9 +7826,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    if (PlayerInfo[playerid][pExp] >= 340)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
-							Log(nickLog, INFO, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
+							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 340 punktów respektu", GetPlayerLogName(playerid));
 							PlayerInfo[playerid][pZmienilNick] --;
 							PlayerInfo[playerid][pExp] -=340;
 						}
@@ -9513,11 +9484,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_P@, str3);
 							Dom[dom][hSejf] ++;
 							KupowanieDodatkow(playerid, dom);
-							//log
-							new day, month, year;
-							getdate(day, month, year);
-							format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - sejf [Aktualny poziom: %d] ", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hSejf]);
-							Log(houseLog, INFO, str3);
+							Log(payLog, INFO, "%s kupi³ do domu %s sejf poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hSejf], dmdm);
 	       				}
 	       				else
 	       				{
@@ -9552,11 +9519,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_P@, str3);
 							Dom[dom][hSejf] ++;
 							KupowanieDodatkow(playerid, dom);
-							//log
-							new day, month, year;
-							getdate(day, month, year);
-							format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - sejf [Aktualny poziom: %d] ", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hSejf]);
-							Log(houseLog, INFO, str3);
+							Log(payLog, INFO, "%s kupi³ do domu %s sejf poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hSejf], dmdm);
 				        }
 				        else
 				        {
@@ -9591,12 +9554,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            DajKase(playerid, -1000000);
 			            SendClientMessage(playerid, COLOR_P@, "Gratulacje, kupi³eœ zbrojownie za 1 000 000$, skonfiguruj teraz co chcesz w niej przechowywaæ! Aby jej u¿yæ wpisz /zbrojownia we wnêtrzu swojego domu");
 						DialogZbrojowni(playerid);
-						
-						new day, month, year;
-						new str3[256];
-						getdate(day, month, year);
-						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - Zbrojownie", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom);
-						Log(houseLog, INFO, str3);
+						Log(payLog, INFO, "%s kupi³ do domu %s zbrojownie za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom));
 			        }
 			        else
 					{
@@ -9694,12 +9652,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//Dom[dom][hMagazyn] --;
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ Apteczkê za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej u¿yæ wpisz /ulecz");
 						KupowanieDodatkow(playerid, dom);
-						//log
-						new str3[256];
-						new day, month, year;
-						getdate(day, month, year);
-						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - apteczka [Aktualny LVL: %d]", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hApteczka]);
-						Log(houseLog, INFO, str3);
+						Log(payLog, INFO, "%s kupi³ do domu %s apteczkê poziomu %d za 100000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hApteczka]);
 					}
 					else
 					{
@@ -9738,11 +9691,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    	format(str3, sizeof(str3), "Kupi³eœ %d level Pancerza za %d$ i wino. Aby jej u¿yæ wpisz /pancerz", Dom[dom][hKami], 100000*(Dom[dom][hKami]+1));
 						SendClientMessage(playerid, COLOR_P@, str3);
 						KupowanieDodatkow(playerid, dom);
-						//log
-						new day, month, year;
-						getdate(day, month, year);
-						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - pancerz [Aktualny LVL: %d]", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hKami]);
-						Log(houseLog, INFO, str3);
+						Log(payLog, INFO, "%s kupi³ do domu %s pancerz poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hKami], dmdm);
 					}
 					else
 					{
@@ -9776,12 +9725,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Dom[dom][hLadowisko] = 20;
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ L¹dowisko za 10 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy 20 metrów od domu");
 						KupowanieDodatkow(playerid, dom);
-						//log
-						new str3[256];
-						new day, month, year;
-						getdate(day, month, year);
-						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - Ladowisko [Aktualny LVL: %d]", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hLadowisko]);
-						Log(houseLog, INFO, str3);
+						Log(payLog, INFO, "%s kupi³ do domu %s l¹dowisko poziomu %d za 10000000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hLadowisko]);
                 	}
                 	else
                 	{
@@ -9797,12 +9741,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Dom[dom][hLadowisko] += 20;
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ ulepszenie l¹dowiska za 1 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy o 20 metrów wiêcej ni¿ poprzednio.");
 						KupowanieDodatkow(playerid, dom);
-						//log
-						new day, month, year;
-						new str3[256];
-						getdate(day, month, year);
-						format(str3, sizeof(str3), "[%d:%d:%d] %s [UID: %d]  kupil dodatek do domu [ID: %d] - Ladowisko [Aktualny LVL: %d]", day, month, year, GetNick(playerid, true), PlayerInfo[playerid][pUID], dom, Dom[dom][hLadowisko]);
-						Log(houseLog, INFO, str3);
+						Log(payLog, INFO, "%s kupi³ do domu %s l¹dowisko poziomu %d za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hLadowisko]);
                 	}
                 	else
                 	{
@@ -9981,8 +9920,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						format(string, sizeof(string), "Gracz %s wlozyl %d$ do sejfu. W sejfie przed: %d, po: %d", GetNick(playerid), strval(inputtext), before, after);
-						Log(payLog, INFO, string);
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %d kwotê %d$. W sejfie przed: %d$, po: %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
 					}
 					else
 					{
@@ -10034,8 +9972,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						format(string, sizeof(string), "Gracz %s wlozyl %d matsow do sejfu", GetNick(playerid), strval(inputtext));
-						Log(payLog, INFO, string);
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d materia³ów", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 					}
 					else
 					{
@@ -10086,8 +10023,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						format(string, sizeof(string), "Gracz %s wlozyl %d dragow do sejfu", GetNick(playerid), strval(inputtext));
-						Log(payLog, INFO, string);
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d narkotyków ", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 					}
 					else
 					{
@@ -10126,8 +10062,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            format(string, sizeof(string), "Wyj¹³eœ z sejfu %d$. Jest w nim teraz %d$.", strval(inputtext), Dom[dom][hS_kasa]);
 		            SendClientMessage(playerid, COLOR_P@, string);
 		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
-					format(string, sizeof(string), "Gracz %s wyjal %d$ z sejfu", GetNick(playerid), strval(inputtext));
-					Log(payLog, INFO, string);
+					Log(payLog, INFO, "%s wyj¹³ z sejfu w domu %s kwotê %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 		        }
 		        else
 		        {
@@ -10153,19 +10088,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
 		        new string[256];
-				new firstValue = Dom[dom][hS_mats];
 		        if(strval(inputtext) >= 1 && strval(inputtext) <= Dom[dom][hS_mats])
 		        {
 		            Dom[dom][hS_mats] -= strval(inputtext);
-					new newValue = Dom[dom][hS_mats];
 					dini_IntSet(string, "S_mats", Dom[dom][hS_mats]);
 		            PlayerInfo[playerid][pMats] += strval(inputtext);
 		            format(string, sizeof(string), "Wyj¹³eœ z sejfu %d materia³ów. Jest w nim teraz %d materia³ów.", strval(inputtext), Dom[dom][hS_mats]);
 		            SendClientMessage(playerid, COLOR_P@, string);
 		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 		            ZapiszDom(PlayerInfo[playerid][pDom]);
-					format(string, sizeof(string), "Gracz %s wyjal %d mats z sejfu, poprzedni stan %d, nowy stan: ", GetNick(playerid), strval(inputtext), firstValue, newValue);
-					Log(payLog, INFO, string);
+					Log(payLog, INFO, "%s wyj¹³ z sejfu w domu %s paczkê %d materia³ów", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 		        }
 		        else
 		        {
@@ -10230,8 +10162,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            SendClientMessage(playerid, COLOR_P@, string);
 		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 		            ZapiszDom(PlayerInfo[playerid][pDom]);
-					format(string, sizeof(string), "Gracz %s wyjal %d dragow z sejfu", GetNick(playerid), strval(inputtext));
-					Log(payLog, INFO, string);
+					Log(payLog, INFO, "%s wyj¹³ z sejfu w domu %s paczkê %d narkotyków", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 		        }
 		        else
 		        {
@@ -12554,8 +12485,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            new komunikat[256];
 			            format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
 			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            format(komunikat, sizeof(komunikat), "Lider %s wyplacil %d$ z sejfu rodziny nr %d. Jest w nim teraz %d$", nick, kasa, lider, Sejf_Rodziny[lider]);
-			            Log(payLog, INFO, komunikat);
+			            Log(payLog, INFO, "%s wyp³aci³ z sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
+							GetPlayerLogName(playerid),
+							lider,
+							kasa,
+							Sejf_Rodziny[lider]);
                         SejfR_Save(lider);
 						ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
 					}
@@ -12609,8 +12543,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            new komunikat[256];
 			            format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
 			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            format(komunikat, sizeof(komunikat), "Lider %s wplacil %d$ do sejfu rodziny nr %d. Jest w nim teraz %d$", nick, kasa, lider, Sejf_Rodziny[lider]);
-			            Log(payLog, INFO, komunikat);
+			            Log(payLog, INFO, "%s wp³aci³ do sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
+							GetPlayerLogName(playerid),
+							lider,
+							kasa,
+							Sejf_Rodziny[lider]);
                         SejfR_Save(lider);
 			            ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
 					}
@@ -13081,7 +13018,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					
 		            case 0:
 		            {
-						if(GetPlayerMoney(playerid) >= onePoolPrice)
+						if(kaska[playerid] >= onePoolPrice)
 						{
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
@@ -13100,7 +13037,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 1:
 		            {
-						if(GetPlayerMoney(playerid) >= twoPoolPrice)
+						if(kaska[playerid] >= twoPoolPrice)
 						{
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
@@ -13119,7 +13056,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 2://Zielony
 		            {
-						if(GetPlayerMoney(playerid) >= threePoolPrice)
+						if(kaska[playerid] >= threePoolPrice)
 						{
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
@@ -13138,7 +13075,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 3://Niebieski
 		            {
-						if(GetPlayerMoney(playerid) >= fourPoolPrice)
+						if(kaska[playerid] >= fourPoolPrice)
 						{
 							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", fourPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
@@ -13665,8 +13602,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					owyscig[playerid] = tworzenietrasy[playerid];
 					tworzenietrasy[playerid] = 666;
 					
-					format(komunikat, sizeof(komunikat), "%s zorganizowal wyscig %s (koszt: %d, nagroda: %d)", sendername, Wyscig[tworzenietrasy[playerid]][wNazwa], (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000, Wyscig[tworzenietrasy[playerid]][wNagroda]);
-					Log(payLog, INFO, komunikat);
+					Log(payLog, INFO, "%s zorganizowa³ wyœcig %s. Koszt organizacji: %d$, nagroda: %d$",
+						GetPlayerLogName(playerid),
+						Wyscig[tworzenietrasy[playerid]][wNazwa], 
+						(Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000, 
+						Wyscig[tworzenietrasy[playerid]][wNagroda]);
 				}
 				else
 				{
@@ -13686,6 +13626,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 			{
+				Log(commandLog, INFO, "%s zlikwidowa³ trasê wyœcigow¹ %s[%d]", GetPlayerLogName(playerid), Wyscig[tworzenietrasy[playerid]][wNazwa], tworzenietrasy[playerid]);
+
 			    Wyscig[tworzenietrasy[playerid]][wStworzony] = 0;
 				strcat(Wyscig[tworzenietrasy[playerid]][wNazwa], "Wolne", 20);
 				strcat(Wyscig[tworzenietrasy[playerid]][wOpis], "", 50);
@@ -13699,7 +13641,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			  		wCheckpoint[tworzenietrasy[playerid]][ii][1] = 0;
 			    	wCheckpoint[tworzenietrasy[playerid]][ii][2] = 0;
 			    }
-			    printf("Trasa %d zlikwidowana", tworzenietrasy[playerid]);
 				SendClientMessage(playerid, COLOR_RED, "Trasa pomyœlnie zlikwidowana!");
 				tworzenietrasy[playerid] = 666;
 			    if(PlayerInfo[playerid][pRank] >= 4)
@@ -15008,7 +14949,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new hajs = strval(inputtext);
 			if(hajs<=0) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota");
-			if(hajs > GetPlayerMoney(playerid)) return SendClientMessage(playerid, -1, "Nie masz tyle hajsu"); //HAJS zamieniæ GetPlayerMoney na pobranie ze struktury
+			if(hajs > kaska[playerid]) return SendClientMessage(playerid, -1, "Nie masz tyle hajsu");
 			DajKase(playerid, -hajs); //HAJS zabraæ pieni¹dze ze struktury
 			IbizaWplac(hajs);
 			new string[128];
@@ -15320,7 +15261,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			//if(PlayerInfo[playerid][pCash] < IbizaBilet) return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
-			new hajs = kaska[playerid]; //HAJS - zamiast GetPlayerMoney pobranie hajsu ze struktury
+			new hajs = kaska[playerid];
 			if(hajs < IbizaBilet)
 			{
 				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
@@ -15810,9 +15751,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 		
 		//logi
-		new string[128];
-		format(string, sizeof(string), "%s zmienil model pojazdu %d z %d na %d", GetNick(playerid), CarData[car][c_UID], oldmodel, CarData[car][c_Model]);
-		Log(actionLog, INFO, string);
+		Log(adminLog, INFO, "Admin %s zmieni³ model pojazdu %d z %s[%d] na %s[%d]", \
+			GetPlayerLogName(playerid), \
+			CarData[car][c_UID], \
+			VehicleNames[oldmodel-400], oldmodel, \
+			VehicleNames[CarData[car][c_Model]-400], CarData[car][c_Model] \
+		);
         return 1;
     }
     else if(dialogid == D_EDIT_CAR_RANG)
@@ -15862,10 +15806,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 								format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-								Log(statsLog, INFO, string);
-
-								//Car_SortPlayerCars(i);
+								
+                   				Log(adminLog, INFO, "Admin %s usun¹³ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
 								break;
 							}
 						}
@@ -15874,8 +15820,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_OwnerType] = 0;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
-				format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype 0 - %s", car, GetNick(playerid));
-				Log(statsLog, INFO, string);
+				Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na 0", GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
             case 1:
             {
@@ -15930,10 +15875,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 								format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-								Log(statsLog, INFO, string);
-
-								//Car_SortPlayerCars(i);
+								Log(adminLog, INFO, "Admin %s usun¹³ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
 								break;
 							}
 						}
@@ -15942,8 +15888,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_OwnerType] = 6;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
-				format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype 6 - %s", car, GetNick(playerid));
-				Log(statsLog, INFO, string);
+				Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na 6",  GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
         }
         ShowCarEditDialog(playerid);
@@ -15978,10 +15923,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 						format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "%s usun¹³ pojazd %s ze slotu %d (UID: %d) /edytuj - pojazd", GetNick(playerid), GetNick(i), lSlot, lUID);
-						Log(statsLog, INFO, string);
-
-						//Car_SortPlayerCars(i);
+						Log(adminLog, INFO, "Admin %s usun¹³ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
 						break;
 					}
 				}
@@ -16002,8 +15948,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		CarData[car][c_OwnerType] = typ;
 		CarData[car][c_Owner] = strval(inputtext);
 		
-		format(string, sizeof(string), "Wykonano zmiane pojazdu %d ownertype %d owner %d - %s", car, typ, strval(inputtext), GetNick(playerid));
-		Log(statsLog, INFO, string);
+		Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na %d", GetPlayerLogName(playerid), GetCarDataLogName(car), typ);
 		Car_Save(car, CAR_SAVE_OWNER);
 		
         ShowCarEditDialog(playerid);
@@ -16373,8 +16318,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
 				
-				format(string, sizeof(string), "Gracz UID: %d, Nick: %s wplacil na swoje konto %d$, nowy stan: %d$", PlayerInfo[playerid][pUID], GetNick(playerid), money, PlayerInfo[playerid][pAccount]);
-				Log(payLog, INFO, string);
+				Log(payLog, INFO, "%s wp³aci³ na swoje konto %d$. Nowy stan: %d$",
+					GetPlayerLogName(playerid),
+					money, 
+					PlayerInfo[playerid][pAccount]);
 			}	
 			return 1;
 		}
@@ -16562,12 +16509,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendLeaderRadioMessage(frac, COLOR_RED, "==================================="); 
 				
 				//LOG
-				format(bigstring, sizeof(bigstring), "Lider %s - %s [UID: %d] dokona³ przelewu na konto %s w wysokoœci %d", 
-				FractionNames[frakcja], 
-				GetNick(playerid, true),
-				PlayerInfo[playerid][pUID],
-				FractionNames[frac], money);
-				Log(payLog, INFO, bigstring);
+				Log(payLog, INFO, "%s przela³ do sejfu frakcji %d kwotê %d$. Nowy stan: %d$",
+					GetPlayerLogName(playerid),
+					frakcja,
+					money,
+					Sejf_Frakcji[frakcja]);
 				
 				//Powiadomienie dla adminów
 				if(money >= 2_500_000)
@@ -16693,8 +16639,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
 				
-				format(string, sizeof(string), "Gracz UID: %d, Nick: %s wyplacil ze swojego konta %d$, nowy stan: %d$", PlayerInfo[playerid][pUID], GetNick(playerid), money, PlayerInfo[playerid][pAccount]);
-				Log(payLog, INFO, string);
+				Log(payLog, INFO, "%s wyp³aci³ ze swojego konta %d$. Nowu stan: %d$", 
+					GetPlayerLogName(playerid), 
+					money, 
+					PlayerInfo[playerid][pAccount]);
 			}	
 			return 1;
 		}
@@ -16849,14 +16797,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "Wys³a³eœ przelew dla %s w wysokoœci %d$. Pieni¹dze zosta³y pobrane z twojego konta bankowego", giveplayer, money);
 				SendClientMessage(playerid, COLOR_RED, string); 
 				
-				format(string, sizeof(string), "Gracz UID: %d, Nick: %s dokonal przelewu %d$ dla gracza %s uid: %d, nowy stan: %d$", 
-					PlayerInfo[playerid][pUID], 
-					sendername, 
-					money, 
-					giveplayer, 
-					PlayerInfo[giveplayerid][pUID], 
-					PlayerInfo[playerid][pAccount]);
-				Log(payLog, INFO, string);
+				Log(payLog, INFO, "%s przela³ %s kwotê %d$", 
+					GetPlayerLogName(playerid),
+					GetPlayerLogName(giveplayerid),
+					money);
 				
 				if(money >= 5_000_000)//Wiadomosc dla adminow
 				{
@@ -16965,15 +16909,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof(string), ">>>Lider %s[%d] wys³a³ %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid);
 			SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string);
 			
-			format(string, sizeof(string), "Gracz UID: %d, Nick: %s dokonal przelewu frakcyjnego (frakcja %d) %d$ dla gracza %s uid: %d, nowy stan: %d$", 
-					PlayerInfo[playerid][pUID], 
-					sendername, 
-					frakcja,
-					money, 
-					giveplayer, 
-					PlayerInfo[giveplayerid][pUID], 
-					Sejf_Frakcji[frakcja]);
-			Log(payLog, INFO, string);
+			Log(payLog, INFO, "%s przela³ z sejfu frakcji %d na konto gracza %s kwotê %d$. Nowy stan: %d$",
+				GetPlayerLogName(playerid),
+				frakcja,
+				GetPlayerLogName(giveplayerid),
+				money,
+				Sejf_Frakcji[frakcja]);
 				
 			if(money >= 2500000)//Warning dla adminów, gdy gracz przekroczy 2.5kk 
 			{
@@ -17013,13 +16954,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					format(string, sizeof(string), "Gracz UID: %d, Nick: %s wplacil na konto frakcyjne (frakcja %d) %d$, nowy stan: %d$", 
-						PlayerInfo[playerid][pUID], 
-						sendername, 
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d kwotê %d$. Nowy stan: %d$", 
+						GetPlayerLogName(playerid),
 						frakcja,
 						money,
 						Sejf_Frakcji[frakcja]);
-					Log(payLog, INFO, string);
 				}
 				else
 				{
@@ -17064,13 +17003,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wyp³aci³ %d$ z konta organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					format(string, sizeof(string), "Gracz UID: %d, Nick: %s wyplacil z konta frakcyjnego (frakcja %d) %d$, nowy stan: %d$", 
-						PlayerInfo[playerid][pUID], 
-						sendername, 
+					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %d kwotê %d$. Nowy stan: %d$", 
+						GetPlayerLogName(playerid),
 						frakcja,
 						money,
 						Sejf_Frakcji[frakcja]);
-					Log(payLog, INFO, string);
 					
 					if(money >= 2000000)
 					{

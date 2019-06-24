@@ -90,12 +90,7 @@ YCMD:teczka(playerid, params[], help)
 							SendClientMessage(playerid, COLOR_GRAD1, string);
 							format(string, sizeof(string), "   Otrzyma³eœ $%d od %s(gracz: %d).", moneys, sendername, playerid);
 							SendClientMessage(giveplayerid, COLOR_GRAD1, string);
-							format(string, sizeof(string), "%s dal teczke z $%d graczowi %s", sendername, moneys, giveplayer);
-							Log(payLog, INFO, string);
-							if(moneys >= 10000000)
-							{
-								ABroadCast(COLOR_YELLOW,string,1);
-							}
+							Log(payLog, INFO, "%s da³ %s kwotê %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), moneys);
 							PlayerPlaySound(giveplayerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "* %s wyci¹ga teczkê i podaje %s.", sendername ,giveplayer);
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);

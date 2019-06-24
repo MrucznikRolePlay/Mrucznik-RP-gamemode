@@ -64,6 +64,7 @@ YCMD:cbradio(playerid, params[], help)
 					{
 						format(string, sizeof(string), "%s mówi przez CB-Radio: %s", GetNick(playerid, true), params);
 						SendClientMessage(i,0xff00ff, string);
+						Log(chatLog, INFO, "%s cb-radio: %s", GetPlayerLogName(playerid), params);
 					}
 				}
 			}

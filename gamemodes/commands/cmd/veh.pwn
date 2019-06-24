@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:veh(playerid, params[], help)
+YCMD:veh(playerid, params[], help) //TODO: naprawiæ/usun¹æ
 {
 	new string[64];
 
@@ -56,7 +56,7 @@ YCMD:veh(playerid, params[], help)
 		CreatedCars[CreatedCar] = car;
 		CreatedCar ++;
 		format(string, sizeof(string), "   Pojazd %d zespawnowany.", car);
-		printf("   Pojazd %d zespawnowany.", car);
+		Log(adminLog, INFO, "Admin %s zespawnowa³ pojazd %d", GetPlayerLogName(playerid), car);
 		sendTipMessageEx(playerid, COLOR_GREY, string);
 	}
 	return 1;

@@ -29,32 +29,43 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 hook OnGameModeInit()
-{ 
-	serverLog = CreateLog("logi/server", INFO | WARNING | ERROR, false);
-	vehicleErrorLog = CreateLog("logi/vehicleerror", INFO | WARNING | ERROR, false);
-	warningLog = CreateLog("logi/warning", INFO | WARNING | ERROR, false);
-	cmdLog = CreateLog("logi/cmd", INFO | WARNING | ERROR, false);
-	sejfLog = CreateLog("logi/sejf", INFO | WARNING | ERROR, false);
-	actionLog = CreateLog("logi/action", INFO | WARNING | ERROR, false);
-	weapLog = CreateLog("logi/weap", INFO | WARNING | ERROR, false);
-	czitLog = CreateLog("logi/czit", INFO | WARNING | ERROR, false);
-	kasynoLog = CreateLog("logi/kasyno", INFO | WARNING | ERROR, false);
-	przekretLog = CreateLog("logi/przekret", INFO | WARNING | ERROR, false);
-	payLog = CreateLog("logi/pay", INFO | WARNING | ERROR, false);
-	autaLog = CreateLog("logi/auta", INFO | WARNING | ERROR, false);
-	bankomatLog = CreateLog("logi/bankomat", INFO | WARNING | ERROR, false);
-	premiumLog = CreateLog("logi/premium", INFO | WARNING | ERROR, false);
-	kickLog = CreateLog("logi/kick", INFO | WARNING | ERROR, false);
-	banLog = CreateLog("logi/ban", INFO | WARNING | ERROR, false);
-	admindutyLog = CreateLog("logi/adminduty", INFO | WARNING | ERROR, false);
-	admindutyMaszLog = CreateLog("logi/admindutymasz", INFO | WARNING | ERROR, false);
-	biznesLog = CreateLog("logi/biznesy", INFO | WARNING | ERROR, false);
-	statsLog = CreateLog("logi/setstats", INFO | WARNING | ERROR, false);
-	eventLog = CreateLog("logi/event", INFO | WARNING | ERROR, false);
-	ckLog = CreateLog("logi/ck", INFO | WARNING | ERROR, false);
-	houseLog = CreateLog("logi/domy", INFO | WARNING | ERROR, false);
-	warnLog = CreateLog("logi/warn", INFO | WARNING | ERROR, false);
-	nickLog = CreateLog("logi/nick", INFO | WARNING | ERROR, false);
+{
+	adminLog = CreateLog("logi/admin", ALL, false); 
+	payLog = CreateLog("logi/pay", ALL, false);
+	premiumLog = CreateLog("logi/premium", ALL, false);
+	punishmentLog = CreateLog("logi/punishment", ALL, false);
+	warningLog = CreateLog("logi/warning", ALL, false);
+	nickLog = CreateLog("logi/nick", ALL, false);
+	sejfLog = CreateLog("logi/sejf", ALL, false);
+	serverLog = CreateLog("logi/server", ALL, false);
+	commandLog = CreateLog("logi/command", ALL, false);
+	chatLog = CreateLog("logi/chat", ALL, false);
+	damageLog = CreateLog("logi/damage", ALL, false);
+	connectLog = CreateLog("logi/connect", ALL, false);
+	mysqlLog = CreateLog("logi/mysql", ALL, true);
+
+	//old
+	admindutyLog = CreateLog("logi/adminduty", ALL, false);
+	admindutyMaszLog = CreateLog("logi/admindutymasz", ALL, false);
+}
+
+hook OnGameModeExit()
+{
+	DestroyLog(adminLog);
+	DestroyLog(payLog);
+	DestroyLog(premiumLog);
+	DestroyLog(punishmentLog);
+	DestroyLog(warningLog);
+	DestroyLog(nickLog);
+	DestroyLog(sejfLog);
+	DestroyLog(serverLog);
+	DestroyLog(commandLog);
+	DestroyLog(chatLog);
+	DestroyLog(damageLog);
+	DestroyLog(connectLog);
+	DestroyLog(mysqlLog);
+	DestroyLog(admindutyLog);
+	DestroyLog(admindutyMaszLog);
 }
 
 //end

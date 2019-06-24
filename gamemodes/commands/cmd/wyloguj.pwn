@@ -37,9 +37,7 @@ YCMD:wyloguj(playerid, params[], help)
             MruMySQL_SaveAccount(playerid);
 			gPlayerLogged[playerid] = 0;
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Wylogowa³eœ siê.");
-            new str[128];
-            format(str, 128, "* Admin %s wylogowa³ siê.", GetNick(playerid));
-            Log(statsLog, INFO, str);
+            Log(adminLog, INFO, "Admin %s wylogowa³ siê", GetPlayerLogName(playerid));
 		}
 		else
 		{

@@ -89,7 +89,7 @@ YCMD:sprzedajmaterialy(playerid, params[], help)
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Mo¿esz komuœ przekazaæ minimum 5000 materia³ów!");
+					sendErrorMessage(playerid, "Nie masz tylu materia³ów!");
 				}
 			}
 		}

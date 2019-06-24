@@ -66,7 +66,7 @@ YCMD:panel(playerid, params[], help)
 
             format(str, sizeof(str), "ADM: %s - odblokowano nick: %s", GetNick(playerid), var);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
-            Log(banLog, INFO, str);
+            Log(punishmentLog, INFO, "Admin %s odbanowa³ %s", GetPlayerLogName(playerid), var);
             return 1;
         }
         else if(strcmp(sub, "unbanip", true) == 0)
@@ -100,7 +100,7 @@ YCMD:panel(playerid, params[], help)
 
             format(str, sizeof(str), "ADM: %s - odblokowano IP: %s", GetNick(playerid), var);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
-            Log(banLog, INFO, str);
+            Log(punishmentLog, INFO, "Admin %s oblokowa³ ip %s", GetPlayerLogName(playerid), var);
             return 1;
         }
         else if(strcmp(sub, "ban", true) == 0)
@@ -124,7 +124,10 @@ YCMD:panel(playerid, params[], help)
 
             format(str, sizeof(str), "ADM: %s - zablokowano nick: %s powód: %s", GetNick(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
-            Log(banLog, INFO, str);
+            Log(punishmentLog, INFO, "Admin %s ukara³ offline %s kar¹ bana, powód: %s", 
+                GetPlayerLogName(playerid),
+                var,
+                powod);
             return 1;
         }
         else if(strcmp(sub, "banip", true) == 0)
@@ -154,7 +157,10 @@ YCMD:panel(playerid, params[], help)
 
             format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
-            Log(banLog, INFO, str);
+            Log(punishmentLog, INFO, "Admin %s zablokowa³ ip %s, powód: %s", 
+                GetPlayerLogName(playerid),
+                var,
+                powod);
             return 1;
         }
         else if(strcmp(sub, "unwarn", true) == 0)
@@ -186,7 +192,7 @@ YCMD:panel(playerid, params[], help)
 				{
 					SendClientMessage(playerid, COLOR_YELLOW, str);
 				}
-                Log(warnLog, INFO, str);
+                Log(punishmentLog, INFO, "Admin %s unwarnowa³ %s", GetPlayerLogName(playerid), var);
             }
             else sendTipMessage(playerid, "Gracz nie posiada warnów");
             return 1;

@@ -53,6 +53,7 @@ YCMD:i(playerid, params[], help)
         }
         format(string, sizeof(string), "** IRC %s: %s. **", sendername, params);
         SendIRCMessage(PlayersChannel[playerid], COLOR_YELLOW2, string);
+		Log(chatLog, INFO, "%s irc: %s", GetPlayerLogName(playerid), params);
     }
     return 1;
 }

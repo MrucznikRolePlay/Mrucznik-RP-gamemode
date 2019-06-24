@@ -1,28 +1,3 @@
-guiMsg(playerid, title[80], str[])
-{
-	new final_title[80];
-	format(final_title, sizeof(final_title), "{49A350}Mrucznik » {FFFFFF}%s", title);
-	Dialog_Show(playerid, DIALOG_STYLE_MSGBOX, final_title, str, "Ok", "");
-	return 1;
-}
-
-
-
-highestAdminLevel()
-{
-	new highest = 0, playa = INVALID_PLAYER_ID;
-	foreach(Player, i)
-	{
-		if(PlayerInfo[i][pAdmin] > highest)
-		{
-			highest = PlayerInfo[i][pAdmin];
-			playa = i;
-		}
-	}
-	if(highest < 1) return INVALID_PLAYER_ID;
-	return playa;
-}
-
 new FabrykaMats_Actor;
 new Text3D:FabrykaMats_ActorLabel;
 
@@ -102,20 +77,6 @@ FabrykaMats_ActorTalk(playerid)
 
 	return 1;
 }
-
-getUnknownString(playerid) {
-	new str[32];
-	new uid =  PlayerInfo[playerid][pUID];
-	format(str, sizeof(str), "%x", uid);
-	return str;
-}
-
-getStringFromUnknown(hex) {
-
-	new uid = hex >> 8;
-	return uid;
-}
-
 
 public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {

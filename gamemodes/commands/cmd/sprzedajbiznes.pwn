@@ -56,7 +56,7 @@ YCMD:sprzedajbiznes(playerid, params[], help)
 				
 					if(valueCost <= BIZ_SELL_MONEY_LIMIT)
 					{
-						if(GetPlayerMoney(giveplayerid) >= valueCost)
+						if(kaska[giveplayerid]>= valueCost)
 						{
 							if(GetPVarInt(playerid, "wpisal_sprzedaj_biz") == 0)
 							{

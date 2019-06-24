@@ -28,7 +28,7 @@
 	
 */
 
-#if DEBUG == 1
+#if DEBUG_MODE == 1
 YCMD:pakietmrucznika(playerid, params[], help)
 {
 

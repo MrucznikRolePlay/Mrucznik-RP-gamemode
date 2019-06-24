@@ -50,14 +50,12 @@ YCMD:setarmor(playerid, params[], help)
 		        {
 		            GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-					new string[128];
-					format(string, sizeof(string), "AdmCmd: %s da³ $d armora %s", sendername, health,  giveplayer);
-					Log(statsLog, INFO, string);
 					SetPlayerArmour(playa, health);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;
 					}
+					Log(adminLog, INFO, "Admin %s da³ %s pancerz na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), health);
 				}
 			}
 		}

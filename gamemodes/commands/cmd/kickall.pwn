@@ -36,7 +36,7 @@ YCMD:kickall(playerid, params[], help)
 		GetPlayerName(playerid,sendername,sizeof(sendername));
 		format(string, sizeof(string), "Admin %s (id:%d) zkickowal wszystkich graczy",sendername, playerid);
 		SendClientMessageToAll(COLOR_RED, string);
-		printf(string);
+		Log(adminLog, INFO, "Admin %s zkickowa³ wszystkich graczy", GetPlayerLogName(playerid));   
 
 		foreach(new i : Player)
 		{

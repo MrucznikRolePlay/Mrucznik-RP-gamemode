@@ -52,7 +52,8 @@ YCMD:say(playerid, params[], help)
 			return 1;
 		}
 		
-		PlayerTalkIC(playerid, params, "mówi", 8.0,  true); 		
+		PlayerTalkIC(playerid, params, "mówi", 8.0,  true); 
+		Log(chatLog, INFO, "%s chat IC: %s", GetPlayerLogName(playerid), params);	
 	}
 
 	return 1;

@@ -28,7 +28,7 @@
 	
 */
 
-#if DEBUG == 1
+#if DEBUG_MODE == 1
 YCMD:skille(playerid, params[], help)
 {
     PlayerInfo[playerid][pDetSkill] = 5000;

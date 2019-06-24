@@ -60,11 +60,7 @@ YCMD:unwarn(playerid, params[], help)
 					SendClientMessage(giveplayerid, COLOR_LIGHTRED, str);
 					format(string, sizeof(string), "AdmCmd: %s zosta³ UN-warnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
 					ABroadCast(COLOR_YELLOW,string,1);
-					/*if(!IsPlayerAdmin(playerid))
-					{
-						SendClientMessage(playerid, COLOR_YELLOW, string);
-					}*/
-                    Log(warnLog, INFO, string);
+            		Log(punishmentLog, INFO, "Admin %s unwarnowa³ %s, powód: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), result);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscWarn[playerid] = iloscWarn[playerid]+1;

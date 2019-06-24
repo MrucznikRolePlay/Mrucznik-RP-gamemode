@@ -85,8 +85,6 @@ Car_MakePlayerOwner(playerid, uid)
         }
     }
 
-    //Car_SortPlayerCars(playerid);
-
     if(uid >= MAX_CARS) return 0;
     CarData[uid][c_OwnerType] = CAR_OWNER_PLAYER;
     CarData[uid][c_Owner] = PlayerInfo[playerid][pUID];
@@ -104,8 +102,6 @@ Car_RemovePlayerOwner(playerid, uid)
             break;
         }
     }
-
-    //Car_SortPlayerCars(playerid);
 }
 
 Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
@@ -443,44 +439,6 @@ Car_UnloadForPlayer(playerid)
     }
 }
 
-Car_ReloadEx(lVehID)
-{
-    new lStr[256], unused;
-    format(lStr, 64, "SELECT * FROM `mru_cars` WHERE `UID`='%d'", lVehID);
-    mysql_query(lStr);
-    mysql_store_result();
-    if(mysql_num_rows())
-    {
-        mysql_fetch_row_format(lStr, "|");
-        sscanf(lStr, "p<|>ddddfffffddddlddddddddddd",
-        CarData[lVehID][c_UID],
-        CarData[lVehID][c_OwnerType],
-        CarData[lVehID][c_Owner],
-        CarData[lVehID][c_Model],
-        CarData[lVehID][c_Pos][0],
-        CarData[lVehID][c_Pos][1],
-        CarData[lVehID][c_Pos][2],
-        CarData[lVehID][c_Rot],
-        CarData[lVehID][c_HP],
-        CarData[lVehID][c_Tires],
-        CarData[lVehID][c_Color][0],
-        CarData[lVehID][c_Color][1],
-        CarData[lVehID][c_Nitro],
-        CarData[lVehID][c_bHydraulika],
-        CarData[lVehID][c_Felgi],
-        CarData[lVehID][c_Malunek],
-        CarData[lVehID][c_Spoiler],
-        CarData[lVehID][c_Bumper][0],
-        CarData[lVehID][c_Bumper][1],
-        CarData[lVehID][c_Keys],
-        CarData[lVehID][c_Neon],
-        CarData[lVehID][c_Rang],
-        CarData[lVehID][c_Int],
-        CarData[lVehID][c_VW]);
-    }
-    mysql_free_result();
-}
-
 CountPlayerCars(playerid)
 {
     new lCount;
@@ -490,49 +448,6 @@ CountPlayerCars(playerid)
         else lCount++;
     }
     return lCount;
-}
-
-Car_SortPlayerCars(playerid)
-{
-    new lArray[MAX_CAR_SLOT] = {0, ...}, lAI;
-    for(new i=0;i<MAX_CAR_SLOT;i++)
-    {
-        if(PlayerInfo[playerid][pCars][i] == 0) continue;
-        else lArray[lAI++] = PlayerInfo[playerid][pCars][i];
-    }
-
-    if( lAI > 0)
-    {
-        new lSwap;
-        new bool:bSwapped = true;
-        new I;
-
-        while(bSwapped)
-        {
-            bSwapped = false;
-            for(I = lAI-1; I > 0; I--)
-            {
-                if(lArray[I] < lArray[I - 1]) {
-                    lSwap = lArray[I - 1];
-                    lArray[I - 1] = lArray[I];
-                    lArray[I] = lSwap;
-                    bSwapped = true;
-                }
-                if(lArray[lAI - I-1] > lArray[lAI - I]) {
-                    lSwap = lArray[lAI - I];
-                    lArray[lAI - I] = lArray[lAI - I-1];
-                    lArray[lAI - I-1] = lSwap;
-                    bSwapped = true;
-                }
-            }
-        }
-
-        for(new i=0;i<MAX_CAR_SLOT;i++)
-        {
-            PlayerInfo[playerid][pCars][i] = lArray[i];
-        }
-    }
-    return lAI;
 }
 
 Car_AddTune(vehicleid)
@@ -615,7 +530,7 @@ Car_Spawn(lUID, bool:onload=false, bool:loaddesc=true)
     Car_AddTune(vehicleid);
     CarData[lUID][c_ID] = vehicleid;
 
-	if(!onload) printf("Pojazd nr %d zespawnowany!", vehicleid);
+	if(!onload) Log(serverLog, INFO, "Pojazd nr %d zespawnowany!", vehicleid);
 
 	SetVehicleHealth(vehicleid, CarData[lUID][c_HP]);
 
@@ -661,12 +576,6 @@ Car_GetIDXFromUID(lUID)
         if(CarData[i][c_UID] == lUID) return i;
     }
     return -1;
-}
-
-Car_IsMemSet(lUID)
-{
-    if(Car_GetIDXFromUID(lUID) != -1) return true;
-    return false;
 }
 
 Car_Unspawn(v, bool:playercall=false)
@@ -871,8 +780,7 @@ CONVERT_PlayerCar(playerid)
             {
                 format(str, 128, "CAR.CONVERTER: B³¹d! Brak pliku pojazdu o ID %d slot: %d.", carlist[i], i);
                 SendClientMessage(playerid, COLOR_YELLOW, str);
-                format(str, 128, "[CAR.CONVERTER]: File not found [%d]. Caller %s", carlist[i], nick);
-                Log(eventLog, INFO, str);
+                Log(serverLog, ERROR, "[CAR.CONVERTER]: File not found [%d]. Caller %s", carlist[i], nick);
                 continue;
             }
             strcat(owner, dini_Get(dopojazdu1, "Posiadacz"), 32);
@@ -892,8 +800,7 @@ CONVERT_PlayerCar(playerid)
                     format(str, 128, "CAR.CONVERTER: Pojazd ten przypisany ju¿ zosta³ do gracza o UID: %d", ownuid);
                     SendClientMessage(playerid, COLOR_YELLOW, str);
 
-                    format(str, 128, "[CAR.CONVERTER]: Owner mismatch for CarID [%d] is [%d]. Caller %s", carlist[i], ownuid, nick);
-                    Log(eventLog, INFO, str);
+                    Log(serverLog, ERROR, "[CAR.CONVERTER]: Owner mismatch for CarID [%d] is [%d]. Caller %s", carlist[i], ownuid, nick);
                     continue;
                 }
             }
@@ -903,8 +810,7 @@ CONVERT_PlayerCar(playerid)
                 format(str, 128, "CAR.CONVERTER: Pojazd %d nie posiada modelu.", carlist[i]);
                 SendClientMessage(playerid, COLOR_YELLOW, str);
 
-                format(str, 128, "[CAR.CONVERTER]: Invalid model. CarID [%d] is [%d]. Caller %s", carlist[i], model, nick);
-                Log(eventLog, INFO, str);
+                Log(serverLog, ERROR, "[CAR.CONVERTER]: Invalid model. CarID [%d] is [%d]. Caller %s", carlist[i], model, nick);
                 continue;
             }
             x = dini_Float(dopojazdu1, "Pozycja_X");
@@ -927,8 +833,7 @@ CONVERT_PlayerCar(playerid)
                 format(str, 128, "CAR.CONVERTER: Pojazd %d nie móg³ zostaæ stworzony w bazie.", carlist[i]);
                 SendClientMessage(playerid, COLOR_YELLOW, str);
 
-                format(str, 128, "[CAR.CONVERTER]: Can't query CarID [%d]. Caller %s", carlist[i], nick);
-                Log(eventLog, INFO, str);
+                Log(serverLog, ERROR, "[CAR.CONVERTER]: Can't query CarID [%d]. Caller %s", carlist[i], nick);
                 continue;
             }
             new lUID = mysql_insert_id();

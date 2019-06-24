@@ -30,7 +30,6 @@
 
 YCMD:kill(playerid, params[], help)
 {
-	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	
@@ -54,8 +53,7 @@ YCMD:kill(playerid, params[], help)
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerHealth(playa, 0);
-					format(string, sizeof(string), "AdmCmd: %s Zabi³ adminem %s",sendername,  giveplayer);
-					printf("%s",string);
+					Log(adminLog, INFO, "Admin %s zabi³ %s komend¹ /kill", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 
 					_MruAdmin(playerid, sprintf("Zabi³eœ gracza %s [%d] za pomoc¹ komendy", GetNick(playa, true), playa));
 					if(playerid != playa) _MruAdmin(playa, sprintf("Zosta³eœ zabity przez admina %s [%d]", GetNick(playerid, true), playerid));

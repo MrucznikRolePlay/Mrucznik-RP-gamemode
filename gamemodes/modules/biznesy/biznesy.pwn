@@ -137,18 +137,18 @@ GiveRandomMoneyBiz(playerid)
 			}
 			if(losuj == 8 || losuj == 9)//minimalna strata
 			{
-				new kwotaStraty = 0-(BizData[bizid][eBizMoney]/2);
+				new kwotaStraty = BizData[bizid][eBizMoney]/2;
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
 				format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
 				SendClientMessage(playerid,COLOR_WHITE, string); 
-				format(string, sizeof(string), "  Strata z biznesu: $%d", kwotaStraty);
+				format(string, sizeof(string), "  Strata z biznesu: -$%d", kwotaStraty);
 				SendClientMessage(playerid,COLOR_WHITE, string);
 				SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}minimalne straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-				if(GetPlayerMoney(playerid) >= kwotaStraty)
+				if(kaska[playerid] >= kwotaStraty)
 				{
-					ZabierzKase(playerid,kwotaStraty);
+					ZabierzKase(playerid, kwotaStraty);
 				}
 				else
 				{
@@ -158,6 +158,7 @@ GiveRandomMoneyBiz(playerid)
 					}
 					else
 					{
+						ZabierzKase(playerid, kwotaStraty);
 						sendTipMessageEx(playerid,COLOR_RED, "Twoje d³ugi rosn¹! Twój biznes przynosi kolejne straty"); 
 					}
 				}
@@ -165,7 +166,6 @@ GiveRandomMoneyBiz(playerid)
 			}
 			if(losuj == 10)//Du¿a strata
 			{
-				
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
 				format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
 				SendClientMessage(playerid,COLOR_WHITE, string); 
@@ -174,7 +174,7 @@ GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}du¿e straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-				if(GetPlayerMoney(playerid) >= BizData[bizid][eBizMoney])
+				if(kaska[playerid] >= BizData[bizid][eBizMoney])
 				{
 					ZabierzKase(playerid,BizData[bizid][eBizMoney]);
 				}
@@ -186,6 +186,7 @@ GiveRandomMoneyBiz(playerid)
 					}
 					else
 					{
+						ZabierzKase(playerid,BizData[bizid][eBizMoney]);
 						sendTipMessageEx(playerid,COLOR_RED, "Twoje d³ugi rosn¹! Twój biznes przynosi kolejne straty"); 
 					}
 				}
@@ -218,15 +219,15 @@ GiveRandomMoneyBiz(playerid)
 			}
 			if(losuj == 7 || losuj == 8 || losuj == 3)//minimalna strata
 			{
-				new kwotaStraty = 0-(BizData[bizid][eBizMoney]/2);
+				new kwotaStraty = BizData[bizid][eBizMoney]/2;
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|___ DOCHÓD Z BIZNESU ___|");
 				format(string, sizeof(string), "Nazwa biznesu: %s", BizData[bizid][eBizName]);
 				SendClientMessage(playerid,COLOR_WHITE, string); 
-				format(string, sizeof(string), "  Strata z biznesu: $%d", kwotaStraty);
+				format(string, sizeof(string), "  Strata z biznesu: -$%d", kwotaStraty);
 				SendClientMessage(playerid,COLOR_WHITE, string);
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}minimalne straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-				if(GetPlayerMoney(playerid) >= kwotaStraty)
+				if(kaska[playerid] >= kwotaStraty)
 				{
 					ZabierzKase(playerid,kwotaStraty);
 				}
@@ -253,7 +254,7 @@ GiveRandomMoneyBiz(playerid)
 				SendClientMessage(playerid,COLOR_WHITE, string);
 				SendClientMessage(playerid,COLOR_WHITE, "Twój biznes przyniós³ {FF0000}du¿e straty"); 
 				SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
-				if(GetPlayerMoney(playerid) >= BizData[bizid][eBizMoney])
+				if(kaska[playerid] >= BizData[bizid][eBizMoney])
 				{
 					ZabierzKase(playerid,BizData[bizid][eBizMoney]);
 				}

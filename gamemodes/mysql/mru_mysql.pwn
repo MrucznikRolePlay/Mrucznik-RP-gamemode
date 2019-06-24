@@ -7,12 +7,11 @@ new MYSQL_HOST[32];
 new MYSQL_USER[32];
 new MYSQL_DATABASE[32];
 new MYSQL_PASS[256];
-	
-forward MruMySQL_Error(error[]);
+new Logger:mysqlLog;
 
 public OnQueryError(errorid, error[], resultid, extraid, callback[], query[], connectionHandle)
 {
-	MruMySQL_Error(error);
+	Log(mysqlLog, ERROR, "%s | resultid: %d | extraid: %d | callback: %s | query: %s", error, resultid, extraid, callback, query);
 	return 1;
 }
 
@@ -57,7 +56,7 @@ MruMySQL_Connect()
 		SendRconCommand("exit");
 		return 0;
 	}
-	#if DEBUG == 1
+	#if DEBUG_MODE == 1
 		mysql_debug(1);
 	#else
 		mysql_debug(0);
@@ -100,7 +99,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 
     if(PlayerInfo[playerid][pLevel] == 0)
     {
-        printf("MySQL:: %s - blad zapisu!!!", GetNick(playerid));
+        Log(mysqlLog, ERROR, "MySQL:: %s - b³¹d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
         return 0;
     }
 	
@@ -996,7 +995,7 @@ bool:MruMySQL_SprawdzBany(playerid)
 
 //Pobieranie i zwracanie pojedynczych zmiennych:
 
-MruMySQL_GetNameFromUID(uid) {
+stock MruMySQL_GetNameFromUID(uid) {
 	new wartosc[MAX_PLAYER_NAME], string[128];
 	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `UID` = '%d'", uid);
 	mysql_query(string);
@@ -1011,7 +1010,7 @@ MruMySQL_GetNameFromUID(uid) {
 	return wartosc;
 }
 
-MruMySQL_GetAccString(kolumna[], nick[])
+stock MruMySQL_GetAccString(kolumna[], nick[])
 {
 	new string[128], wartosc[256];
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1030,7 +1029,7 @@ MruMySQL_GetAccString(kolumna[], nick[])
 	return wartosc;
 }
 
-MruMySQL_GetAccInt(kolumna[], nick[])
+stock MruMySQL_GetAccInt(kolumna[], nick[])
 {
 	new string[128], wartosc;
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1046,7 +1045,7 @@ MruMySQL_GetAccInt(kolumna[], nick[])
 	return wartosc;
 }
 
-MruMySQL_GetAccFloat(kolumna[], nick[])
+stock MruMySQL_GetAccFloat(kolumna[], nick[])
 {
 	new string[128], Float:wartosc;
 	mysql_real_escape_string(kolumna, kolumna);
@@ -1059,7 +1058,7 @@ MruMySQL_GetAccFloat(kolumna[], nick[])
 	return wartosc;
 }
 
-MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
+stock MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
 {
 	new string[128];
 	mysql_real_escape_string(wartosc, wartosc);
@@ -1070,7 +1069,7 @@ MruMySQL_SetAccString(kolumna[], nick[], wartosc[])
 	return 1;
 }
 
-MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
+stock MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 {
 	new string[128];
 	mysql_real_escape_string(nick, nick);
@@ -1080,7 +1079,7 @@ MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 	return 1;
 }
 
-MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
+stock MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 {
 	new string[128];
 	mysql_real_escape_string(nick, nick);
@@ -1090,7 +1089,7 @@ MruMySQL_SetAccFloat(kolumna[], nick[], Float:wartosc)
 	return 0;
 }
 
-MruMySQL_LoadPhoneContacts(playerid)
+stock MruMySQL_LoadPhoneContacts(playerid)
 {
 	new string[128];
 	format(string, sizeof(string), "SELECT UID, Number, Name FROM mru_kontakty WHERE Owner='%d' LIMIT 10", PlayerInfo[playerid][pUID]); //MAX_KONTAKTY
@@ -1115,7 +1114,7 @@ MruMySQL_LoadPhoneContacts(playerid)
 	return 1;
 }
 
-MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
+stock MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
 {
 	new string[128], escapedName[32];
 	mysql_real_escape_string(nazwa, escapedName);
@@ -1126,7 +1125,7 @@ MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
 	return uid;
 }
 
-MruMySQL_EditPhoneContact(uid, nazwa[])
+stock MruMySQL_EditPhoneContact(uid, nazwa[])
 {
 	new string[128], escapedName[32];
 	mysql_real_escape_string(nazwa, escapedName);
@@ -1135,29 +1134,12 @@ MruMySQL_EditPhoneContact(uid, nazwa[])
 	return 1;
 }
 
-MruMySQL_DeletePhoneContact(uid)
+stock MruMySQL_DeletePhoneContact(uid)
 {
 	new string[128];
 	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);
 	mysql_query(string);
 	return 1;
-}
-
-public MruMySQL_Error(error[])
-{
-    new str[256];
-    format(str, sizeof(str), "MySQL/error.log");
-    new File:f, h,m,s,dd,mm,yy;
-    gettime(h,m,s);
-    getdate(yy,mm,dd);
-    f = fopen(str, io_append);
-    if(f)
-    {
-        format(str, 256, "[%02d/%02d/%d - %02d:%02d:%02d] %s\r\n", dd,mm,yy,h,m,s,error);
-        fwrite(f, str);
-        fclose(f);
-    } else printf("File handle error at error.log [%s]", error);
-    return 1;
 }
 
 new bool:MySQL_timeout=false;

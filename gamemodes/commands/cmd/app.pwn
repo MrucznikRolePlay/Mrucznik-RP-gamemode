@@ -48,7 +48,6 @@ YCMD:app(playerid, params[], help) {
     SetPVarInt(playerid, "pozwolenie-oferuje", 999);
     Sejf_Add(PlayerInfo[ofertaod][pMember], 10000);
     ApprovedLawyer[playerid] = 1;
-    format(string, sizeof(string), "%s dal zgode %s", GetNick(ofertaod), GetNick(playerid));
-    Log(payLog, INFO, string);
+    Log(payLog, INFO, "%s da³ zgodê prawnicz¹ %s", GetPlayerLogName(ofertaod), GetPlayerLogName(playerid));
     return 1;
 }

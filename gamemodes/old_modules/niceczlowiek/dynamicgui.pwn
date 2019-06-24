@@ -12,7 +12,7 @@ new dynamic_gui[MAX_PLAYERS][DYNAMIC_GUI_MAX_ROWS][e_dynamic_gui_row];
 
 new dynamic_gui_value[MAX_PLAYERS] = {-1, ...};
 
-DynamicGui_Init(playerid)
+stock DynamicGui_Init(playerid)
 {
 	for(new i; i < DYNAMIC_GUI_MAX_ROWS; i++)
 	{
@@ -23,17 +23,17 @@ DynamicGui_Init(playerid)
 	dynamic_gui_value[playerid] = -1;
 }
 
-DynamicGui_SetDialogValue(playerid, d_value)
+stock DynamicGui_SetDialogValue(playerid, d_value)
 {
 	dynamic_gui_value[playerid] = d_value;
 }
 
-DynamicGui_GetDialogValue(playerid)
+stock DynamicGui_GetDialogValue(playerid)
 {
 	return dynamic_gui_value[playerid];
 }
 
-DynamicGui_FreeRow(playerid)
+stock DynamicGui_FreeRow(playerid)
 {
 	for(new i; i < DYNAMIC_GUI_MAX_ROWS; i++)
 	{
@@ -46,7 +46,7 @@ DynamicGui_FreeRow(playerid)
 	return -1;
 }
 
-DynamicGui_AddRow(playerid, dg_value, dg_additional_data_int = 0)
+stock DynamicGui_AddRow(playerid, dg_value, dg_additional_data_int = 0)
 {
 	new first_free_row = DynamicGui_FreeRow(playerid);
 	if( first_free_row == -1 ) return;
@@ -55,7 +55,7 @@ DynamicGui_AddRow(playerid, dg_value, dg_additional_data_int = 0)
 	dynamic_gui[playerid][first_free_row][additional_data_int] = dg_additional_data_int;
 }
 
-DynamicGui_AddBlankRow(playerid)
+stock DynamicGui_AddBlankRow(playerid)
 {
 	new first_free_row = DynamicGui_FreeRow(playerid);
 	if( first_free_row == -1 ) return;
@@ -63,14 +63,14 @@ DynamicGui_AddBlankRow(playerid)
 	dynamic_gui[playerid][first_free_row][dynamic_value] = DG_NO_ACTION;
 }
 
-DynamicGui_GetValue(playerid, listitem)
+stock DynamicGui_GetValue(playerid, listitem)
 {
 	if( listitem > DYNAMIC_GUI_MAX_ROWS-1 ) return 0;
 	
 	return dynamic_gui[playerid][listitem][dynamic_value];
 }
 
-DynamicGui_GetDataInt(playerid, listitem)
+stock DynamicGui_GetDataInt(playerid, listitem)
 {
 	if( listitem > DYNAMIC_GUI_MAX_ROWS-1 ) return 0;
 	

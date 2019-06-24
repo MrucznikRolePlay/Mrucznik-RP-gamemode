@@ -42,7 +42,7 @@ YCMD:cca(playerid, params[], help)
 		format(string, sizeof(string), "%s [ID: %d] uzyl /cca", sendername, playerid);
 		ABroadCast(COLOR_PANICRED,string,1);
         SendCommandLogMessage(string);
-		printf(string);
+		Log(adminLog, INFO, "%s wyczyœci³ chat /cca", GetPlayerLogName(playerid));              
 	}
 	return 1;
 }
