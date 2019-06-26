@@ -92,14 +92,14 @@ YCMD:wejdz(playerid, params[], help)
             ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking podziemny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
         }
 		else if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
-        || IsPlayerInRangeOfPoint(playerid,5,666.5681, -1353.2101, 29.3031)//recepcja Winda
-        || IsPlayerInRangeOfPoint(playerid,5,661.8192, -1344.7736, 29.4743)/* Winda Victim*/
-        || IsPlayerInRangeOfPoint(playerid,5,655.7669, -1376.8688, 28.6743)/*Drukarnia // Studio*/
-        || IsPlayerInRangeOfPoint(playerid,5,737.3818, -1366.2958, 34.0796)/*Sale Konferencyjne*/
-        || IsPlayerInRangeOfPoint(playerid,5,297.7128,-1612.1783,114.4219)/*Dach*/
-        || IsPlayerInRangeOfPoint(playerid,5,663.6946, -1374.4166, 27.9148)/*Biura SAN NEWS*/)
+        || IsPlayerInRangeOfPoint(playerid, 3, 287.7476,-1609.9395,33.0723)//PARTER
+        || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
+        || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
+        || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
+        || IsPlayerInRangeOfPoint(playerid,3,297.7128,-1612.1783,114.4219)/*Dach*/
+        || IsPlayerInRangeOfPoint(playerid,3,290.7577,-1604.3273,134.6113)/*Biura SAN NEWS*/)
         {
-            ShowPlayerDialogEx(playerid,WINDA_SAN,DIALOG_STYLE_LIST,"Winda - San News","[Pietro - 0]Parking\n[Pietro - 1]Recepcja\n[Pietro - 2]Studio Victim\n[Pietro - 3]Drukarnia & Studio Nagran\n[Pietro - 4]Sale Konferencyjne\n[Pietro - 5]Biura San News\n[Pietro - 6]Dach","Jedz","Anuluj");
+            ShowPlayerDialogEx(playerid,WINDA_SAN,DIALOG_STYLE_LIST,"Winda - San News","[Pietro - 0] Parking\n[Pietro 1] Wejscie do budynku\n[Pietro - 2] Recepcja\n[Pietro - 3] Studia\n[Pietro - 4] Akademia\n[Pietro - 5]Biura San News\n[Pietro - 6]Dach","Jedz","Anuluj");
         }
         //winda FBI
 		else if(IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
@@ -251,6 +251,33 @@ YCMD:wejdz(playerid, params[], help)
             SetPlayerPosEx(playerid, 817.0987,-1375.1685,23.6475);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);
+            return 1;
+        }
+        //san news biura
+        else if(PlayerToPoint(1.0, playerid, 286.0645,-1602.0117,134.4274) && posDrzwiSN[playerid] == 0)
+        {
+            sendTipMessageEx(playerid, COLOR_RED, "Witaj w biurze dyrektorki!"); 
+            SetPlayerPosEx(playerid, 285.8782,-1604.2446,134.4756); 
+            posDrzwiSN[playerid] = 1; 
+            return 1;
+        }
+        else if(PlayerToPoint(1.0, playerid, 285.8782,-1604.2446,134.4756) && posDrzwiSN[playerid] == 1)
+        {
+            SetPlayerPosEx(playerid, 286.0645,-1602.0117,134.4274); 
+            posDrzwiSN[playerid] = 0; 
+            return 1;
+        }
+        else if(PlayerToPoint(1.0, playerid, 298.0779,-1603.7250,134.4482) && posDrzwiSN[playerid] == 0)
+        {
+            sendTipMessageEx(playerid, COLOR_RED, "Witaj w biurze v-dyrektora!"); 
+            SetPlayerPosEx(playerid, 297.9890,-1605.9541,134.4645); 
+            posDrzwiSN[playerid] = 1; 
+            return 1;
+        }
+        else if(PlayerToPoint(1.0, playerid, 297.9890,-1605.9541,134.4645) && posDrzwiSN[playerid] == 1)
+        {
+            SetPlayerPosEx(playerid, 298.0779,-1603.7250,134.4482); 
+            posDrzwiSN[playerid] = 0; 
             return 1;
         }
        //reszta

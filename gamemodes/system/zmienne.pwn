@@ -466,6 +466,7 @@ new dialTimer[MAX_PLAYERS];
 new dialAccess[MAX_PLAYERS]; 
 new dialTime[MAX_PLAYERS]; 
 //SAN NEWS
+new posDrzwiSN[MAX_PLAYERS]; 
 new SanDrzwi1;
 new SanDrzwi2;
 new SanDrzwi3;
@@ -477,6 +478,7 @@ new SanMove3 = 0;
 new SanMove4 = 0;
 new Teleturniejstart = 0;
 new grajacy[MAX_PLAYERS];
+new levelLock[MAX_FRAC][MAX_LEVELINT];
 
 new drinkCost1=10000;
 new drinkCost2=15000;

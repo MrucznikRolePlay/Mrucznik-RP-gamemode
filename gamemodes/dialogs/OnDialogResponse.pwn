@@ -2092,67 +2092,97 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	        {
     	            case 0://parking
     	            {
+						if(levelLock[FRAC_SN][0] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPosEx(playerid,288.0914,-1609.7465,17.9994);
     	                new Hour, Minute, Second;
     					gettime(Hour, Minute, Second);
     					SetPlayerTime(playerid,Hour,Minute);
     	            }
-    	            case 1://recepcja
+					case 1://wejscie do budynku
+					{
+						if(levelLock[FRAC_SN][1] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+						SetPlayerVirtualWorld(playerid, 0);
+						SetPlayerInterior(playerid, 0); 
+						SetServerWeatherAndTime(playerid); 
+						TogglePlayerControllable(playerid, 0);
+						Wchodzenie(playerid); 
+						SetPlayerPos(playerid, 287.7476,-1609.9395,33.0723); 
+					}
+    	            case 2://recepcja
     	            {
-    	                SetPlayerVirtualWorld(playerid,20);
+						if(levelLock[FRAC_SN][2] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+    	                SetPlayerVirtualWorld(playerid,14);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,666.5681, -1353.2101, 29.3031);
-    				    new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    				    SetPlayerPosEx(playerid, 292.0818,-1610.0715,124.7512);
+    				    SetInteriorTimeAndWeather(playerid); 
+						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone", 5000, 1);
     	            }
-    	            case 2://studio Victim
+    	            case 3://studia
     	            {
-    	                SetPlayerVirtualWorld(playerid,21);
+						if(levelLock[FRAC_SN][3] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+    	                SetPlayerVirtualWorld(playerid,16);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,661.8192, -1344.7736, 29.4743);
-    				    SetPlayerTime(playerid,1,0);
+    				    SetPlayerPosEx(playerid,296.9033,-1598.3610,117.0619);
+						SetInteriorTimeAndWeather(playerid); 
+						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
     	            }
-    	            case 3://drukarnia & studio nagran
+    	            case 4://Akademia
     	            {
-    	                SetPlayerVirtualWorld(playerid,22);
+						if(levelLock[FRAC_SN][4] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+    	                SetPlayerVirtualWorld(playerid,17);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,655.7669, -1376.8688, 28.6743);
-    				    new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
-    	            }
-    	            case 4://sale konferencyjne
-    	            {
-    	                SetPlayerVirtualWorld(playerid,23);
-    				    TogglePlayerControllable(playerid,0);
-                        Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,737.4208, -1366.9336, 34.0796);
-    				    new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    				    SetPlayerPosEx(playerid,295.1328,-1609.4705,115.6818);
+    				    SetInteriorTimeAndWeather(playerid); 
+						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
     	            }
     	            case 5:
     	            {
-    	                SetPlayerVirtualWorld(playerid,24);
+						if(levelLock[FRAC_SN][5] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+    	                SetPlayerVirtualWorld(playerid,18);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,663.6946, -1374.4166, 27.9148);
-    				    new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    				    SetPlayerPosEx(playerid,290.7577,-1604.3273,134.6113);
+    				    SetInteriorTimeAndWeather(playerid); 
+						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
     	            }
     	            case 6://dach
     	            {
+						if(levelLock[FRAC_SN][6] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPosEx(playerid,297.7128,-1612.1783,114.4219);
-    	                new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    	                SetServerWeatherAndTime(playerid);
     	            }
     	        }
     	    }

@@ -86,6 +86,7 @@
 #define COST_SN_SMS_3 7500
 #define COST_SN_SMS_4 10000
 #define COST_SN_SMS_5 12500
+#define MAX_LEVELINT 10
 
 //sprunki i snacki
 #define SPRUNK_COST 2000

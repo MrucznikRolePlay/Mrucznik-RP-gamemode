@@ -42,8 +42,33 @@ YCMD:windalock(playerid, params[], help)
 			return 1;
 		}
 
-
-		if((IsPlayerInRangeOfPoint(playerid,3,1327.6746, -1324.7770, 39.9210)
+		if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
+        || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
+        || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
+        || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
+        || IsPlayerInRangeOfPoint(playerid,3,297.7128,-1612.1783,114.4219)/*Dach*/
+        || IsPlayerInRangeOfPoint(playerid,3,290.7577,-1604.3273,134.6113)/*Biura SAN NEWS*/ 
+		&& (PlayerInfo[playerid][pMember] == FRAC_SN || PlayerInfo[playerid][pLider] == FRAC_SN))
+		{
+			if(level > 7 || level < 0)
+			{
+				sendErrorMessage(playerid, "Poziom od 0 do 7");
+				return 1;
+			}
+			if(levelLock[FRAC_SN][level] == 1)
+			{
+				levelLock[FRAC_SN][level] = 0; 
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i odblokowuje poziom [%d].", GetNick(playerid), level);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(levelLock[FRAC_SN][level] == 0)
+			{
+				levelLock[FRAC_SN][level] = 1; 
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [%d].", GetNick(playerid), level);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+		}
+		else if((IsPlayerInRangeOfPoint(playerid,3,1327.6746, -1324.7770, 39.9210)
         || IsPlayerInRangeOfPoint(playerid,3,1289.0969, -1292.7489, 35.9681)
         || IsPlayerInRangeOfPoint(playerid,3,1310.3494, -1361.7319, 39.0876)
         || IsPlayerInRangeOfPoint(playerid,3,1310.0021, -1319.7189, 35.5984)) && GetPlayerOrg(playerid) == FAMILY_SAD)

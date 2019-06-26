@@ -343,6 +343,32 @@ YCMD:wyjdz(playerid, params[], help)
     		PlayAudioStreamForPlayer(playerid, IbizaStream[IbizaStreamID]);
     		return 1;
     	}
+		else if(PlayerToPoint(1.0, playerid, 286.0645,-1602.0117,134.4274) && posDrzwiSN[playerid] == 0)
+        {
+            sendTipMessageEx(playerid, COLOR_RED, "Witaj w biurze dyrektorki!"); 
+            SetPlayerPosEx(playerid, 285.8782,-1604.2446,134.4756); 
+            posDrzwiSN[playerid] = 1; 
+            return 1;
+        }
+        else if(PlayerToPoint(1.0, playerid, 285.8782,-1604.2446,134.4756) && posDrzwiSN[playerid] == 1)
+        {
+            SetPlayerPosEx(playerid, 286.0645,-1602.0117,134.4274); 
+            posDrzwiSN[playerid] = 0; 
+            return 1;
+        }
+		else if(PlayerToPoint(1.0, playerid, 298.0779,-1603.7250,134.4482) && posDrzwiSN[playerid] == 0)
+        {
+            sendTipMessageEx(playerid, COLOR_RED, "Witaj w biurze v-dyrektora!"); 
+            SetPlayerPosEx(playerid, 297.9890,-1605.9541,134.4645); 
+            posDrzwiSN[playerid] = 1; 
+            return 1;
+        }
+        else if(PlayerToPoint(1.0, playerid, 297.9890,-1605.9541,134.4645) && posDrzwiSN[playerid] == 1)
+        {
+            SetPlayerPosEx(playerid, 298.0779,-1603.7250,134.4482); 
+            posDrzwiSN[playerid] = 0; 
+            return 1;
+        }
         //AirTower LS
         else if (IsPlayerInRangeOfPoint(playerid,3.0,1627.3157,-2279.6157,75.0))
         {
