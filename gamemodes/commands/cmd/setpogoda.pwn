@@ -48,7 +48,7 @@ YCMD:setpogoda(playerid, params[], help)
 			sendTipMessageEx(playerid, COLOR_GREY, "Id pogody od 2 do 20 !"); 
 			return 1; 
 		}
-		if(IsPlayerConnected(giveplayerid))
+		if(!IsPlayerConnected(giveplayerid))
 		{
 			sendErrorMessage(playerid, "Nie ma takiego gracza!");
 			return 1;
