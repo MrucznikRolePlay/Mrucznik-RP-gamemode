@@ -16739,10 +16739,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-	else if(dialogid == 1142)
+	else if(dialogid == DIALOG_EMPTY_SC)
 	{
-		if(!response) return 1;
-		if(response)
+		if(!response)
+		{
+			return 1;
+		}
+		else
 		{
 			return 1;
 		}
