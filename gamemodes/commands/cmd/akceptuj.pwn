@@ -264,13 +264,13 @@ YCMD:akceptuj(playerid, params[], help)
                         }
                         else
                         {
-                            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie zaoferowa³ ci auta !");
+                            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie zaoferowa³ ci auta!");
                             return 1;
                         }
                     }
                     else
                     {
-                        SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê !");
+                        SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê!");
                         return 1;
                     }
                 }
@@ -278,7 +278,7 @@ YCMD:akceptuj(playerid, params[], help)
             }
             else
             {
-                SendClientMessage(playerid, COLOR_GREY, "   Nikt nie oferowa³ ci sprzeda¿y !");
+                SendClientMessage(playerid, COLOR_GREY, "   Nikt nie oferowa³ ci sprzeda¿y!");
                 return 1;
             }
         }

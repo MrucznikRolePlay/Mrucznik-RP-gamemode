@@ -47,7 +47,7 @@ YCMD:sprzedajauto(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
 			return 1;
 		}
-        if(GetPVarInt(playa, "offer-car")) return sendErrorMessage(playerid, "Ten gracz otrzyma³ ju¿ ofertê kupna pojazdu! Zaczekaj 30 sekund");
+        if(GraczDajacy[playerid] < 999) return sendErrorMessage(playerid, "Ten gracz otrzyma³ ju¿ ofertê kupna pojazdu! Zaczekaj 30 sekund");
         if(!IsPlayerConnected(playa)) return sendErrorMessage(playerid, "Brak takiego gracza.");
 		cena = FunkcjaK(string);
 		//
@@ -57,7 +57,7 @@ YCMD:sprzedajauto(playerid, params[], help)
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedawaæ pojazdu bo masz 1 lvl");
 
         new vehid = VehicleUID[lVeh][vUID];
- 		if(!ProxDetectorS(10.0, playerid, playa) && Spectate[playa] != INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
+ 		if(GetDistanceBetweenPlayers(playerid,playa) < 5 && Spectate[playa] != INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Ten gracz jest za daleko!");
 		if(!(cena > 0 && cena < 900000001)) return sendErrorMessage(playerid, "Cena od 1 do 900 000 000$ !");
 
         if(lVeh <= CAR_End) return sendErrorMessage(playerid, "Tego pojazdu nie mo¿na sprzedaæ");
