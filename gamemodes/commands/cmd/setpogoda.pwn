@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:pogoda(playerid, params[], help)
+YCMD:setpogoda(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {

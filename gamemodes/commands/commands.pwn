@@ -1027,7 +1027,8 @@ static Aliases()
 	Command_AddAltNamed("podatek", "settax");
 
 	//pogoda
-	Command_AddAltNamed("pogoda", "weather");
+	Command_AddAltNamed("setpogoda", "setweather");
+	Command_AddAltNamed("setpogoda", "dajpogode"); 
 
 	//pokazdowod
 	Command_AddAltNamed("pokazdowod", "dowod");
