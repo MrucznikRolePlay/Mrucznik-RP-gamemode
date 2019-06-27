@@ -23,6 +23,8 @@ new noAccessCome[MAX_PLAYERS];
 new saveMyAccountTimer[MAX_PLAYERS];//respawn
 new nickRP[MAX_PLAYERS][MAX_PLAYER_NAME];
 
+new timerTime[MAX_PLAYERS]; 
+
 new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
 new bool:bramki_sasd_state[18];
@@ -118,7 +120,7 @@ new pFindZone[MAX_PLAYERS];
 
 
 new gTeam[MAX_PLAYERS];
-
+new odczekajTimer[MAX_PLAYERS];
 //regex
 new regexURL;
 
@@ -1276,21 +1278,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	
-	//chwilowe
-	PlayerAdds[playerid][pSlot1] = 0;
-	PlayerAdds[playerid][pSlot2] = 0;
-	PlayerAdds[playerid][pSlot3] = 0;
-	PlayerAdds[playerid][pSlot4] = 0;
-	PlayerAdds[playerid][pSlot5] = 0;
-	PlayerAdds[playerid][pSlot6] = 0;
-	PlayerAdds[playerid][pSlot7] = 0;
-	PlayerAdds[playerid][pSlot8] = 0;
-	PlayerAdds[playerid][pSlot9] = 0;
-	PlayerAdds[playerid][pSlot10] = 0;
-
-
-	
+	timerTime[playerid] = 0; 
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);
