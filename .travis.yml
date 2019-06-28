@@ -59,7 +59,7 @@ deploy:
   on:
     repo: Mrucznik/Mrucznik-RP-2.5
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^development|pecet|simeone|sktom|mrucznik|2\.6\.\d+$
+    condition: $TRAVIS_BRANCH =~ ^development|pecet|simeone|skTom|mrucznik|2\.6\.\d+$
     branch:
       - development
       - pecet
