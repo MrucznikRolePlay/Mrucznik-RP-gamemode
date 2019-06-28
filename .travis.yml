@@ -17,6 +17,7 @@ branches:
   - pecet
   - simeone
   - sktom
+  - mrucznik
   - '/^2\.6\.\d+$/'
 
 addons:
@@ -57,6 +58,8 @@ deploy:
   skip_cleanup: true
   on:
     repo: Mrucznik/Mrucznik-RP-2.5
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^development|pecet|simeone|sktom|mrucznik|2\.6\.\d+$
     branch:
       - development
       - pecet
