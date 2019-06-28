@@ -125,12 +125,14 @@ YCMD:wejdz(playerid, params[], help)
             }
         }
         //SAD
-        else if(IsPlayerInRangeOfPoint(playerid,3,1327.6746, -1324.7770, 39.9210)
-        || IsPlayerInRangeOfPoint(playerid,3,1289.0969, -1292.7489, 35.9681)
-        || IsPlayerInRangeOfPoint(playerid,3,1310.3494, -1361.7319, 39.0876)
-        || IsPlayerInRangeOfPoint(playerid,3,1310.0021, -1319.7189, 35.5984))
+        else if(IsPlayerInRangeOfPoint(playerid,3,1311.5483,-1361.2096,62.8567)
+        || IsPlayerInRangeOfPoint(playerid,3,1305.9991,-1326.1344,52.5659)
+        || IsPlayerInRangeOfPoint(playerid,3,1309.9982,-1364.2216,59.6271)
+        || IsPlayerInRangeOfPoint(playerid,3,1310.1989,-1328.8876,82.5859)
+        || IsPlayerInRangeOfPoint(playerid,3,1310.2946,-1321.2517,74.6955)
+        || IsPlayerInRangeOfPoint(playerid,3,1310.3961,-1319.0530,35.6587))
         { //WINDA
-            ShowPlayerDialogEx(playerid, DIALOG_ELEVATOR_SAD, DIALOG_STYLE_LIST, "Winda:", "{660000}[1] {D2CFA6} Hol s¹du\n{660000}[2] {D2CFA6} S¹d Stanu San Andreas\n{660000}[3] {D2CFA6} Biura urzêdników s¹dowych\n{660000}[4] {D2CFA6} Dach", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, DIALOG_ELEVATOR_SAD, DIALOG_STYLE_LIST, "Winda:", "{660000}[-1] {D2CFA6} Archiwum\n{660000}[0] {D2CFA6} Recepcja\n{660000}[1] {D2CFA6} Sale Rozpraw\n{660000}[2] {D2CFA6} Biura\n{660000}[3] {D2CFA6} Pomieszczenia Socjalne\n{660000}[4] {D2CFA6} Dach", "Wybierz", "Anuluj");
         }
 		else if(IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) ||
         IsPlayerInRangeOfPoint(playerid,2.0, -2805.0967,2596.0566,-98.0829) ||

@@ -37,11 +37,8 @@ new PizzaJob[MAX_PLAYERS];
 new Actor01;
 //FishGood
 new FishGood[MAX_PLAYERS];
-//WINDA
-new SadWindap1 = 0;//Winda S퉐
-new SadWindap2 = 0;//Winda S퉐
-new SadWindap3 = 0;//Winda S퉐
-new SadWindap4 = 0;//Winda S퉐
+//Sad
+new SadWinda[10];
 
 new LSMCWindap0 = 0;//Winda LSMC
 new LSMCWindap2 = 0;//Winda LSMC

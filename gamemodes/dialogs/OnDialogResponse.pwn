@@ -15359,57 +15359,91 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
 			switch(listitem)
 			{
-			    case 0:
+			    case 0: // archiwum
 				{
-				    if(SadWindap1 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+				 	if(SadWinda[0] == 1)
 					{
-				    	SetPlayerPosEx(playerid, 1327.6746, -1324.7770, 39.9210);
-				    	GameTextForPlayer(playerid, "~r~Hol sadu ~n~ by abram01", 6000, 1);
-				    	SetPlayerVirtualWorld ( playerid, 500 );
-                    	Wchodzenie(playerid);
-                    	SetPlayerWeather(playerid, 3);//Pogoda
-            			SetPlayerTime(playerid, 14, 0);//Czas
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
 					}
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
+    	            SetPlayerVirtualWorld(playerid,10);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1311.5483,-1361.2096,62.8567);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
-				case 1:
+				case 1: // hol 
     			{
-    			    if(SadWindap2 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+					if(SadWinda[1] == 1)
 					{
-						SetPlayerPosEx(playerid, 1289.0969, -1292.7489, 35.9681);
-						GameTextForPlayer(playerid, "~r~Sad Stanu San Andreas ~n~ by abram01", 6000, 1);
-						SetPlayerVirtualWorld (playerid, 501 );
-                    	Wchodzenie(playerid);
-                    	SetPlayerWeather(playerid, 3);//Pogoda
-            			SetPlayerTime(playerid, 14, 0);//Czas
-                    }
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,11);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1305.9991,-1326.1344,52.5659);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
-				case 2:
+				case 2: //Sale Rozpraw
 				{
-				    if(SadWindap3 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+				  	if(SadWinda[2] == 1)
 					{
-				    	SetPlayerPosEx(playerid,1310.3494, -1361.7319, 39.0876);
-				    	GameTextForPlayer(playerid, "~r~Biura urzednikow sadowych ~n~ by abram01", 8000, 1);
-				    	SetPlayerVirtualWorld ( playerid, 502 );
-                    	Wchodzenie(playerid);
-                    	SetPlayerWeather(playerid, 3);//Pogoda
-            			SetPlayerTime(playerid, 14, 0);//Czas
-                    }
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,12);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1309.9982,-1364.2216,59.6271);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
-                case 3:
+                case 3: //Biura
 				{
-				    if(SadWindap4 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+					if(SadWinda[3] == 1)
 					{
-				    	SetPlayerPosEx(playerid,1310.0021, -1319.7189, 35.5984);
-				    	SetPlayerVirtualWorld ( playerid, 0 );
-				    	SetPlayerWeather(playerid, ServerWeather);
-    					SetPlayerTime(playerid, ServerTime, 0);
-                    	Wchodzenie(playerid);
-                    }
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
-
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,13);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1310.1989,-1328.8876,82.5859);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
+				}
+				case 4: //Socjal
+				{
+					if(SadWinda[4] == 1)
+					{
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,14);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1310.2946,-1321.2517,74.6955);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
+				
+				}
+				case 5: //Dach
+				{
+					if(SadWinda[5] == 1)
+					{
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,0);
+    	            SetPlayerPosEx(playerid,1310.3961,-1319.0530,35.6587);
+    	            new Hour, Minute, Second;
+    				gettime(Hour, Minute, Second);
+    				SetPlayerTime(playerid,Hour,Minute);
+					
+				
 				}
 			}
 		}
