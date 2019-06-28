@@ -663,6 +663,7 @@
 #include "cmd/setserverpass.pwn"
 #include "cmd/tognewbie.pwn"
 #include "cmd/stan.pwn"
+#include "cmd/personalizuj.pwn"
 
 InitCommands()
 {

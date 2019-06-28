@@ -16855,7 +16855,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	//=================[DIALOG ZWROTNY --> Zwraca nas do "Twoje Konto"]=================
 	else if(dialogid == 1074)
 	{
-		if(response)//Je¿eli TAK
+		if(response)
 		{
 			new string[128];
 			new giveplayer[MAX_PLAYER_NAME];
@@ -17331,6 +17331,37 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, inputtext);
+		}
+	}
+	else if(dialogid == D_PERSONALIZE)
+	{
+		if(!response)
+		{
+			sendTipMessage(playerid, "Wyszed³eœ z personalizacji - ustawienia zapisane"); 
+			return 1;
+		}
+		else if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_KB] == 0)
+					{
+						sendTipMessage(playerid, "Wy³¹czy³eœ konto bankowe"); 
+						PlayerPersonalization[playerid][PERS_KB] =1;
+					}
+					else if(PlayerPersonalization[playerid][PERS_KB] == 1)
+					{
+						sendTipMessage(playerid, "W³¹czy³eœ konto bankowe"); 
+						PlayerPersonalization[playerid][PERS_KB] = 0; 
+					}
+				}
+				case 1:
+				{
+					sendTipMessage(playerid, "Ju¿ nied³ugo!"); 
+				}
+			}
 		}
 	}
 	return 0;
