@@ -66,6 +66,11 @@ YCMD:przelew(playerid, params[], help)
 						sendErrorMessage(playerid, "Nie masz takiej kwoty na swoim koncie!"); 
 						return 1;
 					}
+					if(value <= 0)
+					{
+						sendErrorMessage(playerid, "Nie mo¿esz wykonywaæ przelewów na minus / zero.");
+						return 1;
+					}
 					if(PlayerInfo[giveplayerid][pAccount]+value > MAX_MONEY_IN_BANK)
 					{
 						sendErrorMessage(playerid, "Gracz do którego próbowa³eœ przelaæ gotówkê - ma zbyt du¿o pieniêdzy na koncie."); 
