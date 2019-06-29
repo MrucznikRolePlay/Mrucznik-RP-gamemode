@@ -84,13 +84,13 @@ YCMD:windalock(playerid, params[], help)
 			if(SadWinda[level+1] == 1)
 			{
 				SadWinda[level+1] = 0; 
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i odblokowuje poziom [%d].", GetNick(playerid), level+1);
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i odblokowuje poziom [%d].", GetNick(playerid), level);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			}
-			else if(SadWinda[level+1] == 1)
+			else if(SadWinda[level+1] == 0)
 			{
 				SadWinda[level+1] = 1; 
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i odblokowuje poziom [%d].", GetNick(playerid), level+1);
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [%d].", GetNick(playerid), level);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			}		
 		
