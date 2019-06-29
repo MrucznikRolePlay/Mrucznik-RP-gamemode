@@ -52,6 +52,37 @@ YCMD:megafon(playerid, params[], help)
 			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /b [treœæ]");
 			return 1;
 		}
+		//=========================[DLA SAN NEWS]==================================
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 292.9130,-1572.0863,118.1219))
+		{
+			format(string, sizeof(string), "[Uczestnik [1] %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 294.8142,-1572.0300,118.1219))
+		{
+			format(string, sizeof(string), "[Uczestnik [2] %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 297.7858,-1572.1030,118.1219))
+		{
+			format(string, sizeof(string), "[Uczestnik [3] %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 299.9479,-1572.0898,118.1219))
+		{
+			format(string, sizeof(string), "[Uczestnik [4] %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 296.5654,-1574.9280,118.1219))
+		{
+			format(string, sizeof(string), "[Prowadz¹cy %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
 		//=========================[DLA S¥DU]======================================
 		if(IsPlayerInRangeOfPoint(playerid,5,1319.7424,-1359.5912,73.1409)
         || IsPlayerInRangeOfPoint(playerid,5,1319.8655,-1319.5767,73.1409)

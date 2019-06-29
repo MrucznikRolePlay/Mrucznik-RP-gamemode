@@ -11729,6 +11729,55 @@ SprawdzMuzyke(playerid)
 	}
 	return 1;
 }
+ShowPersonalization(playerid, value)
+{
+	new persona_A[64];
+	new persona_B[64];
+	/*new persona_C[64];
+	new persona_D[64];
+	new persona_E[64]; */
+	new string[256]; 
+	if(value == 1)
+	{
+		sendTipMessage(playerid, "Trwaj¹ prace!"); 
+		return 1;
+	}
+	if(value == 2)
+	{
+		sendTipMessage(playerid, "Trwaj¹ prace!"); 
+	}
+	if(value == 3)
+	{
+		if(PlayerPersonalization[playerid][PERS_REPORT] == 1)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Reporty\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_REPORT] == 0)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Reporty\t{80FF00}ON\n ", 0);
+		}
+		if(PlayerPersonalization[playerid][WARNDEATH] == 1)
+		{
+			strdel(persona_B, 0, 64); 
+			strins(persona_B,"Death Warning\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][WARNDEATH] == 0)
+		{
+			strdel(persona_B, 0, 64); 
+			strins(persona_B,"Death Warning\t{80FF00}ON\n", 0);
+		}
+		format(string, sizeof(string), "%s%s", persona_A, persona_B);
+		ShowPlayerDialogEx(playerid, D_PERS_ADMIN, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz");
+	}
+	if(value == 4)
+	{
+		sendTipMessage(playerid, "Trwaj¹ prace"); 
+	}
+		 
+	return 1;
+}
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {

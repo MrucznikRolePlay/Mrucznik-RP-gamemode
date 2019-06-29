@@ -2099,9 +2099,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPosEx(playerid,288.0914,-1609.7465,17.9994);
-    	                new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    	            	SetServerWeatherAndTime(playerid); 
+						SetPLocal(playerid, PLOCAL_DEFAULT);
     	            }
 					case 1://wejscie do budynku
 					{
@@ -2116,6 +2115,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid); 
 						SetPlayerPos(playerid, 287.7476,-1609.9395,33.0723); 
+						SetPLocal(playerid, PLOCAL_DEFAULT);
 					}
     	            case 2://recepcja
     	            {
@@ -2130,6 +2130,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPosEx(playerid, 292.0818,-1610.0715,124.7512);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone", 5000, 1);
+						SetPLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 3://studia
     	            {
@@ -2144,6 +2145,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPosEx(playerid,296.9033,-1598.3610,117.0619);
 						SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
+						SetPLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 4://Akademia
     	            {
@@ -2158,6 +2160,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPosEx(playerid,295.1328,-1609.4705,115.6818);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
+						SetPLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 5:
     	            {
@@ -2172,6 +2175,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPosEx(playerid,290.7577,-1604.3273,134.6113);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
+						SetPLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 6://dach
     	            {
@@ -2183,6 +2187,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPosEx(playerid,297.7128,-1612.1783,114.4219);
     	                SetServerWeatherAndTime(playerid);
+						SetPLocal(playerid, PLOCAL_DEFAULT);
     	            }
     	        }
     	    }
@@ -17380,6 +17385,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
+					sendTipMessageEx(playerid, COLOR_P@, "Ta opcja zostanie w³¹czona ju¿ nied³ugo!"); 
 					if(PlayerPersonalization[playerid][PERS_KB] == 0)
 					{
 						sendTipMessage(playerid, "Wy³¹czy³eœ konto bankowe"); 
@@ -17393,7 +17399,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					sendTipMessage(playerid, "Ju¿ nied³ugo!"); 
+					sendTipMessageEx(playerid, COLOR_P@, "Ta opcja zostanie w³¹czona ju¿ nied³ugo!"); 
+				}
+				case 2:
+				{
+					if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0)
+					{
+						sendTipMessage(playerid, "Nie jesteœ administratorem"); 
+						return 1;
+					}
+					ShowPersonalization(playerid, 3); 
+				}
+			}
+		}
+	}
+/*	else if(dialogid == D_PERS_VEH)
+	{
+
+	}*/
+	else if(dialogid == D_PERS_ADMIN)
+	{
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_REPORT] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_REPORT] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ widocznoœæ zg³oszeñ graczy"); 
+					}
+					else if(PlayerPersonalization[playerid][PERS_REPORT] == 1)
+					{
+						PlayerPersonalization[playerid][PERS_REPORT] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ widocznoœæ zg³oszeñ graczy"); 
+					}
+				}
+				case 1:
+				{
+					if(PlayerPersonalization[playerid][WARNDEATH] == 0)
+					{
+						PlayerPersonalization[playerid][WARNDEATH] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d widocznoœci œmierci graczy"); 
+					}
+					else if(PlayerPersonalization[playerid][WARNDEATH] == 1)
+					{
+						PlayerPersonalization[playerid][WARNDEATH] =0;
+						sendTipMessage(playerid, "W³¹czy³eœ podgl¹d widocznoœci œmierci graczy!"); 
+					}
 				}
 			}
 		}

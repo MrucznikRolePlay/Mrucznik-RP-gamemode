@@ -266,6 +266,33 @@ SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bi
 	}
 	return 1;
 }
+SendMessageToAdminEx(text[], mColor, condition)//Wysy³a wiadomoœæ do administratora za spe³nieniem warunku
+{
+	new stradm[256];
+	foreach(new i : Player)
+	{
+		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pNewAP] > 0)
+		{
+			if(condition == 1)//Warunek w³¹czonej widocznoœci reportów
+			{
+				if(PlayerPersonalization[i][PERS_REPORT] == 0)
+				{
+					format(stradm, sizeof(stradm), "%s", text);
+					SendClientMessage(i, mColor, stradm);
+				}
+			}
+			else if(condition == 2)//Warunek w³¹czonej widocznoœci DEATH_WARNING
+			{
+				if(PlayerPersonalization[i][WARNDEATH] == 0)
+				{
+					format(stradm, sizeof(stradm), "%s", text);
+					SendClientMessage(i, mColor, stradm);
+				}
+			}
+		}	
+	}
+	return 1;
+}
 
 KickPlayerTXD(playerid, adminid, reason[])
 {
