@@ -1809,7 +1809,7 @@ public OnPlayerDeath(playerid, killerid, reason)
             }
             else
 				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : NiggaNames[reason-46]);
-			SendMessageToAdmin(string, COLOR_P@);
+			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 		{

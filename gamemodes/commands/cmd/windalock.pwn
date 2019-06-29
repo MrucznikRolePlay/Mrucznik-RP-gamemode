@@ -47,12 +47,21 @@ YCMD:windalock(playerid, params[], help)
         || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
         || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
         || IsPlayerInRangeOfPoint(playerid,3,297.7128,-1612.1783,114.4219)/*Dach*/
-        || IsPlayerInRangeOfPoint(playerid,3,290.7577,-1604.3273,134.6113)/*Biura SAN NEWS*/ 
-		&& (PlayerInfo[playerid][pMember] == FRAC_SN || PlayerInfo[playerid][pLider] == FRAC_SN))
+        || IsPlayerInRangeOfPoint(playerid,3,290.7577,-1604.3273,134.6113)/*Biura SAN NEWS*/)
 		{
+			if(PlayerInfo[playerid][pLider] != FRAC_SN && PlayerInfo[playerid][pMember] != FRAC_SN)
+			{
+				sendErrorMessage(playerid, "Nie masz uprawnieñ - nie jesteœ z San News"); 
+				return 1;
+			}
 			if(level > 7 || level < 0)
 			{
 				sendErrorMessage(playerid, "Poziom od 0 do 7");
+				return 1;
+			}
+			if(level == 6 && PlayerInfo[playerid][pLider] != FRAC_SN)
+			{
+				sendErrorMessage(playerid, "Nie masz wystarczaj¹cych uprawnieñ aby otwieraæ to piêtro!"); 
 				return 1;
 			}
 			if(levelLock[FRAC_SN][level] == 1)
