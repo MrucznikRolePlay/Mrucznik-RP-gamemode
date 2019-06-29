@@ -11733,8 +11733,8 @@ ShowPersonalization(playerid, value)
 {
 	new persona_A[64];
 	new persona_B[64];
-	/*new persona_C[64];
-	new persona_D[64];
+	new persona_C[64];
+	/*new persona_D[64];
 	new persona_E[64]; */
 	new string[256]; 
 	if(value == 1)
@@ -11773,7 +11773,38 @@ ShowPersonalization(playerid, value)
 	}
 	if(value == 4)
 	{
-		sendTipMessage(playerid, "Trwaj¹ prace"); 
+		if(PlayerPersonalization[playerid][PERS_KB] == 0)
+		{
+			strdel(persona_A, 0, 64); 
+			strins(persona_A, "Przelew Kontem Bankowym\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_KB] == 1)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Przelew Kontem Bankowym\t{FF6A6A}OFF\n", 0);
+		}
+		if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 0)
+		{
+			strdel(persona_B, 0, 64); 
+			strins(persona_B, "Wyœwietlanie nicków\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 1)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "Wyœwietlanie nicków\t{FF6A6A}OFF\n",0);
+		}
+		if(PlayerPersonalization[playerid][PERS_KARYTXD] == 0)
+		{
+			strdel(persona_C, 0, 64);
+			strins(persona_C, "Kary w TXD\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_KARYTXD] == 1)
+		{
+			strdel(persona_C, 0, 64); 
+			strins(persona_C, "Kary w TXD\t{FF6A6A}OFF\n", 0); 
+		}
+		format(string, sizeof(string), "%s%s%s", persona_A, persona_B, persona_C);
+		ShowPlayerDialogEx(playerid, D_PERS_INNE, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz"); 
 	}
 		 
 	return 1;

@@ -17410,6 +17410,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					ShowPersonalization(playerid, 3); 
 				}
+				case 3:
+				{
+					ShowPersonalization(playerid, 4); 
+				}
 			}
 		}
 	}
@@ -17419,6 +17423,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}*/
 	else if(dialogid == D_PERS_ADMIN)
 	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
 		if(response)
 		{
 			switch(listitem)
@@ -17449,6 +17458,73 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						sendTipMessage(playerid, "W³¹czy³eœ podgl¹d widocznoœci œmierci graczy!"); 
 					}
 				}
+			}
+		}
+	}
+	else if(dialogid == D_PERS_INNE)
+	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0://Konto Bankowe
+				{
+					if(PlayerPersonalization[playerid][PERS_KB] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_KB]=1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ przelew za pomoc¹ /kb"); 
+					}
+					else if(PlayerPersonalization[playerid][PERS_KB] == 1)
+					{
+						PlayerPersonalization[playerid][PERS_KB] =0; 
+						sendTipMessage(playerid, "W³¹czy³eœ przelew za pomoc¹ /kb"); 
+					}
+				}
+				case 1://NickNames
+				{
+					if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_NICKNAMES] =1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie nicków nad g³ow¹!");
+						SetPVarInt(playerid, "tognick", 1);
+      					foreach(new i : Player)
+						{
+							ShowPlayerNameTagForPlayer(playerid, i, 0);
+						}
+					}
+					else if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 1)
+					{
+						PlayerPersonalization[playerid][PERS_NICKNAMES] = 0; 
+						sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie nicków nad g³ow¹"); 
+						SetPVarInt(playerid, "tognick", 1);
+      					foreach(new i : Player)
+						{
+							ShowPlayerNameTagForPlayer(playerid, i, 1);
+						}
+					}
+				
+				}
+				case 2:
+				{
+					if(togADMTXD[playerid] == 0)
+					{
+						togADMTXD[playerid] =1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ textdrawy kar");
+						PlayerPersonalization[playerid][PERS_KARYTXD] =1;
+					}
+					else if(togADMTXD[playerid] == 1)
+					{
+						togADMTXD[playerid] =0; 
+						sendTipMessage(playerid, "W³¹czy³eœ textdrawy kar"); 
+						PlayerPersonalization[playerid][PERS_KARYTXD]=0;
+					}
+				}
+
 			}
 		}
 	}

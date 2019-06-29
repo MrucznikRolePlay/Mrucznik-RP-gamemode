@@ -1465,7 +1465,8 @@ enum pPInfo
 	PERS_NICKNAMES,//Wyœwietlanie nicków nad g³owami postaci
 	PERS_CB,//Wyœwietlanie CB radia
 	PERS_REPORT,//Wyœwietlanie reportów bez @Duty
-	WARNDEATH//Warningi o œmierciach
+	WARNDEATH,//Warningi o œmierciach
+	PERS_KARYTXD
 };
 new PlayerPersonalization[MAX_PLAYERS][pPInfo];
 enum pDodatek
