@@ -23,6 +23,8 @@ new noAccessCome[MAX_PLAYERS];
 new saveMyAccountTimer[MAX_PLAYERS];//respawn
 new nickRP[MAX_PLAYERS][MAX_PLAYER_NAME];
 
+new timerTime[MAX_PLAYERS]; 
+
 new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
 new bool:bramki_sasd_state[18];
@@ -35,11 +37,8 @@ new PizzaJob[MAX_PLAYERS];
 new Actor01;
 //FishGood
 new FishGood[MAX_PLAYERS];
-//WINDA
-new SadWindap1 = 0;//Winda S퉐
-new SadWindap2 = 0;//Winda S퉐
-new SadWindap3 = 0;//Winda S퉐
-new SadWindap4 = 0;//Winda S퉐
+//Sad
+new SadWinda[10];
 
 new LSMCWindap0 = 0;//Winda LSMC
 new LSMCWindap2 = 0;//Winda LSMC
@@ -118,7 +117,7 @@ new pFindZone[MAX_PLAYERS];
 
 
 new gTeam[MAX_PLAYERS];
-
+new odczekajTimer[MAX_PLAYERS];
 //regex
 new regexURL;
 
@@ -466,6 +465,7 @@ new dialTimer[MAX_PLAYERS];
 new dialAccess[MAX_PLAYERS]; 
 new dialTime[MAX_PLAYERS]; 
 //SAN NEWS
+new posDrzwiSN[MAX_PLAYERS]; 
 new SanDrzwi1;
 new SanDrzwi2;
 new SanDrzwi3;
@@ -477,6 +477,7 @@ new SanMove3 = 0;
 new SanMove4 = 0;
 new Teleturniejstart = 0;
 new grajacy[MAX_PLAYERS];
+new levelLock[MAX_FRAC][MAX_LEVELINT];
 
 new drinkCost1=10000;
 new drinkCost2=15000;
@@ -1274,21 +1275,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci퉓u
 	PlayerInfo[playerid][pBiletpociag] = 0;
-	
-	//chwilowe
-	PlayerAdds[playerid][pSlot1] = 0;
-	PlayerAdds[playerid][pSlot2] = 0;
-	PlayerAdds[playerid][pSlot3] = 0;
-	PlayerAdds[playerid][pSlot4] = 0;
-	PlayerAdds[playerid][pSlot5] = 0;
-	PlayerAdds[playerid][pSlot6] = 0;
-	PlayerAdds[playerid][pSlot7] = 0;
-	PlayerAdds[playerid][pSlot8] = 0;
-	PlayerAdds[playerid][pSlot9] = 0;
-	PlayerAdds[playerid][pSlot10] = 0;
-
-
-	
+	timerTime[playerid] = 0; 
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);

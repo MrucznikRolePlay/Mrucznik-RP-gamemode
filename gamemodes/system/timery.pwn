@@ -133,7 +133,27 @@ public Naprawa(playerid)
 	}
     return 1;
 }
-
+forward odczekaj15sec(playerid);
+public odczekaj15sec(playerid)
+{
+	timerTime[playerid]++; 
+	if(timerTime[playerid] == 3)
+	{
+		if(GetPVarInt(playerid, "WhatToDo") == 1)
+		{
+			timerTime[playerid] = 0;
+			SetPVarInt(playerid, "CanDoIt", 0); 
+			KillTimer(odczekajTimer[playerid]);
+		}
+		else if(GetPVarInt(playerid, "WhatToDo") == 2)
+		{
+			timerTime[playerid] = 0;
+			SetPVarInt(playerid, "CanDoIt", 0); 
+			KillTimer(odczekajTimer[playerid]);
+		}
+	}
+	return 1; 
+}
 forward glosuj_admin_ankieta();
 public glosuj_admin_ankieta()
 {
