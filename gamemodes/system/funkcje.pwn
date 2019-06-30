@@ -11809,6 +11809,49 @@ ShowPersonalization(playerid, value)
 		 
 	return 1;
 }
+stock DestroyNeons(){
+	DestroyDynamicObject(neon1);
+	DestroyDynamicObject(neon2);
+	DestroyDynamicObject(neon3);
+	DestroyDynamicObject(neon4);
+	DestroyDynamicObject(neon5);
+	DestroyDynamicObject(neon6);
+	DestroyDynamicObject(neon7);
+	DestroyDynamicObject(neon8);
+	DestroyDynamicObject(neon9);
+	DestroyDynamicObject(neon10);
+	DestroyDynamicObject(neon11);
+	DestroyDynamicObject(neon12);
+	DestroyDynamicObject(neon13);
+	DestroyDynamicObject(neon14);
+	DestroyDynamicObject(neon15);
+	DestroyDynamicObject(neon16);
+	DestroyDynamicObject(neon17);
+	DestroyDynamicObject(neon18);
+	DestroyDynamicObject(neon19);
+	DestroyDynamicObject(neon20);
+	DestroyDynamicObject(neon21);
+	DestroyDynamicObject(neon22);
+	DestroyDynamicObject(neon23);
+}
+stock DestroyEq(){
+	DestroyDynamicObject(eq_1_1);
+	DestroyDynamicObject(eq_1_2);
+	DestroyDynamicObject(eq_2_1);
+	DestroyDynamicObject(eq_2_2);
+	DestroyDynamicObject(eq_3_1);
+	DestroyDynamicObject(eq_3_2);
+	DestroyDynamicObject(eq_4_1);
+	DestroyDynamicObject(eq_4_2);
+	DestroyDynamicObject(eq_5_1);
+	DestroyDynamicObject(eq_5_2);
+	DestroyDynamicObject(eq_6_1);
+	DestroyDynamicObject(eq_6_2);
+	DestroyDynamicObject(eq_7_1);
+	DestroyDynamicObject(eq_7_2);
+	DestroyDynamicObject(eq_8_1);
+	DestroyDynamicObject(eq_8_2);
+}
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {

@@ -478,6 +478,30 @@ new Teleturniejstart = 0;
 new grajacy[MAX_PLAYERS];
 new levelLock[MAX_FRAC][MAX_LEVELINT];
 
+
+new bool:moveZaluzja1 = false;
+new bool:moveZaluzja2 = false;
+new zaluzja1;
+new zaluzja2;
+new bool:lightsVinyl = false;
+new neonVinyl = 0;
+new bool:sphereVinyl = false;
+new bool:podestVinyl = false;
+new bool:neonsVinyl = false;
+new bool:jacuzziVinyl = false;
+new bool:dymVinyl = false;
+new bool:eqVinyl = false;
+new podest1, podest2, dym1, dym2, dym3, dym4, dym5, led1, led2, led3,  kula;
+new neon1, neon2, neon3, neon4, neon5, neon6, neon7, neon8, neon9, neon10, neon11, neon12, neon13, neon14;
+new neon15, neon16, neon17, neon18, neon19, neon20, neon21, neon22, neon23;
+new eq_1_1, eq_1_2, eq_2_1, eq_2_2, eq_3_1, eq_3_2, eq_4_1, eq_4_2, eq_5_1, eq_5_2, eq_6_1, eq_6_2, eq_7_1, eq_7_2, eq_8_1, eq_8_2;
+new sphereTimer, sphereTimer_second, NeonsTimer;
+new eqTimer_First, eqTimer_Second, eqTimer_Third, eqTimer_Fourth;
+new textVinyl_Timer;
+new text_Vinyl;
+new bool:textVinyl;
+
+
 new drinkCost1=10000;
 new drinkCost2=15000;
 new drinkCost3=18000;

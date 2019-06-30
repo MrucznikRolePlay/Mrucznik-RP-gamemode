@@ -237,7 +237,7 @@ YCMD:wejdz(playerid, params[], help)
 
         
        //chwilowe do vinyl
-        else if(PlayerToPoint(1.5, playerid, 814.4426,-1378.2600,23.6475))
+      /*  else if(PlayerToPoint(1.5, playerid, 814.4426,-1378.2600,23.6475))
         {
             if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
             {
@@ -254,7 +254,7 @@ YCMD:wejdz(playerid, params[], help)
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);
             return 1;
-        }
+        }*/
         //san news biura
         else if(PlayerToPoint(1.0, playerid, 286.0645,-1602.0117,134.4274) && posDrzwiSN[playerid] == 0)
         {
