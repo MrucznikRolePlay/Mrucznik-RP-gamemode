@@ -181,13 +181,12 @@ SprawdzBramy(playerid)
 						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2],  bramy[i][b_ry2], bramy[i][b_rz2]);
 						bramy[i][b_flaga]=~bramy[i][b_flaga];
 					}
-					return 1;
 				}
-			}
-			if(PlayerInfo[playerid][pAdmin] > 0)
-			{
-				format(string, sizeof(string), "VW tej bramy to %d", bramaVW); 
-				sendTipMessage(playerid, string); 
+				if(PlayerInfo[playerid][pAdmin] > 0)
+				{
+					format(string, sizeof(string), "VW tej bramy to %d", bramaVW); 
+					sendTipMessage(playerid, string); 
+				}
 			}
 		}
 	}
