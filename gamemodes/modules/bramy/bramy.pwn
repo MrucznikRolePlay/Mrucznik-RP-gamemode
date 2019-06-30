@@ -16,11 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: 2.5
+// Autor: Mrucznik & Simeone
 // Data utworzenia: 04.05.2019
 //Opis:
 /*
-	System bram.
+	System bram. Odpowiada za wszelkie dodane na serwer bramy. Posiada sprawdzanie warunków - pozycji, miejsca, vw, frakcji, organizacji.
+	Zosta³ rozbudowany o dodatkow¹ funkcjê DualGate.
 */
 
 //
@@ -134,25 +135,24 @@ DualGateAdd(object1,//Obiekt pierwszej bramy
 SprawdzBramy(playerid)
 {
 	new bramaVW;
+	new string[64]; 
 	for(new i; i<iloscbram; i++)
 	{	
-		if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2]))
+		bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, bramy[i][b_obiekt], E_STREAMER_WORLD_ID);
+		if(GetPlayerVirtualWorld(playerid) == bramaVW)
 		{
-			if((bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+			if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2]))
 			{
-				if(bramy[i][pAccessCard] > 0)
+				if((bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
 				{
-					if(PlayerInfo[playerid][pCard] != bramy[i][pAccessCard])
+					if(bramy[i][pAccessCard] > 0)
 					{
-						SendClientMessage(playerid, -1, "Nie masz uprawnieñ do otwierania tych drzwi");
-						return 1;
+						if(PlayerInfo[playerid][pCard] != bramy[i][pAccessCard])
+						{
+							SendClientMessage(playerid, -1, "Nie masz uprawnieñ do otwierania tych drzwi");
+							return 1;
+						}
 					}
-				}
-				bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, bramy[i][b_obiekt], E_STREAMER_WORLD_ID);
-				if(GetPlayerVirtualWorld(playerid) == bramaVW)
-				{
-
-				
 					if(bramy[i][b_flaga])//Je¿eli ma zamkn¹æ
 					{
 						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1], bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1], bramy[i][b_ry1], bramy[i][b_rz1]);
@@ -165,15 +165,12 @@ SprawdzBramy(playerid)
 						bramy[i][b_flaga]=~bramy[i][b_flaga];
 						return 1;
 					}
+					
 				}
 			}
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2]))
-		{
-			if( (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+			else if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2]))
 			{
-				bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, bramy[i][b_obiekt], E_STREAMER_WORLD_ID);
-				if(GetPlayerVirtualWorld(playerid) != bramaVW)
+				if( (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
 				{
 					if(bramy[i][b_flaga])
 					{
@@ -184,8 +181,13 @@ SprawdzBramy(playerid)
 						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2],  bramy[i][b_ry2], bramy[i][b_rz2]);
 						bramy[i][b_flaga]=~bramy[i][b_flaga];
 					}
+					return 1;
 				}
-				return 1;
+			}
+			if(PlayerInfo[playerid][pAdmin] > 0)
+			{
+				format(string, sizeof(string), "VW tej bramy to %d", bramaVW); 
+				sendTipMessage(playerid, string); 
 			}
 		}
 	}
