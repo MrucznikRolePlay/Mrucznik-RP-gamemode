@@ -385,7 +385,8 @@ public OnGameModeInit()
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
     SetTimer("RPGTimer", 100, true);
-
+	//Ustalanie wartoœci wind
+	levelLock[FRAC_SN][5]=1;//Zamkniête
     for(new i=0;i<MAX_VEHICLES;i++)
     {
         Blink[i][0] = -1;

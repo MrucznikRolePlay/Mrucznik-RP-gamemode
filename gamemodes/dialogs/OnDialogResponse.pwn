@@ -2185,7 +2185,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
     	                SetPlayerVirtualWorld(playerid,0);
-    	                SetPlayerPosEx(playerid,297.7128,-1612.1783,114.4219);
+    	                SetPlayerPosEx(playerid,285.8397,-1596.4153,114.5687);
     	                SetServerWeatherAndTime(playerid);
 						SetPLocal(playerid, PLOCAL_DEFAULT);
     	            }
