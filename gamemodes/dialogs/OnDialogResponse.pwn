@@ -362,14 +362,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					if(kaska[playerid] >= 10000)
+					if(kaska[playerid] >= drinkCost1)
 					{
-						format(string, sizeof(string), "%s kupi³ w barze Cytrynowy Sza³ i zaczyna go piæ", GetNick(playerid));
+						format(string, sizeof(string), "%s kupi³ w barze %s - zaczyna piæ", GetNick(playerid), drinkName1);
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 						SetPlayerDrunkLevel(playerid, 2000);
 						SetPlayerSpecialAction(playerid, 22);
+						if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
+						{
+							ZabierzKase(playerid, (drinkCost1/2));
+							Sejf_Add(FRAC_SN, (drinkCost1/2));
+							Sejf_Save(FRAC_SN);
+							sendTipMessageEx(playerid, COLOR_GREEN, "Jesteœ VIP - p³acisz o po³owê mniej za swojego drinka!"); 
+							return 1;
+						}
 						ZabierzKase(playerid, 10000);
-						Sejf_Add(FRAC_SN, 10000);
+						Sejf_Add(FRAC_SN, drinkCost1);
 						Sejf_Save(FRAC_SN);
 					}
 					else
@@ -380,14 +388,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(kaska[playerid] >= 15000)
+					if(kaska[playerid] >= drinkCost2)
 					{
-						format(string, sizeof(string), "%s kupi³ w barze W³adce procentów i zaczyna go piæ", GetNick(playerid));
+						format(string, sizeof(string), "%s kupi³ w barze %s - zaczyna powoli s¹czyæ!", GetNick(playerid), drinkName2);
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 						SetPlayerDrunkLevel(playerid, 2500);
 						SetPlayerSpecialAction(playerid, 22);
-						ZabierzKase(playerid, 15000);
-						Sejf_Add(FRAC_SN, 15000);
+						if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
+						{
+							ZabierzKase(playerid, (drinkCost2/2));
+							Sejf_Add(FRAC_SN, (drinkCost2/2));
+							Sejf_Save(FRAC_SN);
+							sendTipMessageEx(playerid, COLOR_GREEN, "Jesteœ VIP - p³acisz o po³owê mniej za swojego drinka!"); 
+							return 1;
+						}
+						ZabierzKase(playerid, drinkCost2);
+						Sejf_Add(FRAC_SN, drinkCost2);
 						Sejf_Save(FRAC_SN);
 					}
 					else
@@ -398,14 +414,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					if(kaska[playerid] >= 20000)
+					if(kaska[playerid] >= drinkCost3)
 					{
-						format(string, sizeof(string), "%s kupi³ w barze Napój Cotty (chce byæ jak L.Cotta) i zaczyna go piæ", GetNick(playerid));
+						format(string, sizeof(string), "%s kupi³ w barze %s - zaczyna go piæ. Cieknie mu po bluzce!", GetNick(playerid), drinkName3);
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 						SetPlayerDrunkLevel(playerid, 4000);
 						SetPlayerSpecialAction(playerid, 20);
-						ZabierzKase(playerid, 20000);
-						Sejf_Add(FRAC_SN, 20000);
+						if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
+						{
+							ZabierzKase(playerid, (drinkCost3/2));
+							Sejf_Add(FRAC_SN, (drinkCost3/2));
+							Sejf_Save(FRAC_SN);
+							sendTipMessageEx(playerid, COLOR_GREEN, "Jesteœ VIP - p³acisz o po³owê mniej za swojego drinka!"); 
+							return 1;
+						}
+						ZabierzKase(playerid, drinkCost3);
+						Sejf_Add(FRAC_SN, drinkCost3);
 						Sejf_Save(FRAC_SN);
 					}
 					else
@@ -416,14 +440,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					if(kaska[playerid] >= 30000)
+					if(kaska[playerid] >= drinkCost4)
 					{
-						format(string, sizeof(string), "%s kupi³ w barze twoja stara i zaczyna go piæ jak kozak", GetNick(playerid));
+						format(string, sizeof(string), "%s kupi³ w barze %s bo chce byæ rich", GetNick(playerid), drinkName4);
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 						SetPlayerDrunkLevel(playerid, 5000);
 						SetPlayerSpecialAction(playerid, 20);
-						ZabierzKase(playerid, 30000);
-						Sejf_Add(FRAC_SN, 30000);
+						if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
+						{
+							ZabierzKase(playerid, (drinkCost4/2));
+							Sejf_Add(FRAC_SN, (drinkCost4/2));
+							Sejf_Save(FRAC_SN);
+							sendTipMessageEx(playerid, COLOR_GREEN, "Jesteœ VIP - p³acisz o po³owê mniej za swojego drinka!"); 
+							return 1;
+						}
+						ZabierzKase(playerid, drinkCost4);
+						Sejf_Add(FRAC_SN, drinkCost4);
 						Sejf_Save(FRAC_SN);
 					}
 					else

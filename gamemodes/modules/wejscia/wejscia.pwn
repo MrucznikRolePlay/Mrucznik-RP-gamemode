@@ -27,7 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255)
+DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255, bool:specialCome=false)
 {
 	wejscia[iloscwejsc][w_x1] = fx1;
 	wejscia[iloscwejsc][w_y1] = fy1;
@@ -41,8 +41,10 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 	wejscia[iloscwejsc][w_int2] = int2;
 	wejscia[iloscwejsc][w_pLocal] = playerLocal;
 	wejscia[iloscwejsc][w_UID] = wejdzUID;
-	
-	
+	if(specialCome)
+	{
+		wejscia[iloscwejsc][w_specCome] = 1.3;
+	}
 	if(isnull(nazwain)) 
 	{
 		CreateDynamicPickup(1239, 2, fx1, fy1, fz1, vw1, int1);
@@ -67,22 +69,43 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 Sprawdz_w_cord(playerid, id)
 {
 	new playerPos;//0 - nigdzie, 1 - na /wejdz, 2 - na /wyjdz
-	
-	if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw1]
-	&& GetPlayerInterior(playerid) == wejscia[id][w_int1]
-	&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x1],wejscia[id][w_y1],wejscia[id][w_z1]))
+	if(wejscia[id][w_specCome] > 0.5)
 	{
-		playerPos = OUT_INTERIOR; 
+		if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw1]
+		&& GetPlayerInterior(playerid) == wejscia[id][w_int1]
+		&& IsPlayerInRangeOfPoint(playerid, wejscia[id][w_specCome], wejscia[id][w_x1],wejscia[id][w_y1],wejscia[id][w_z1]))
+		{
+			playerPos = OUT_INTERIOR; 
+		}
+		else if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw2]
+		&& GetPlayerInterior(playerid) == wejscia[id][w_int2]
+		&& IsPlayerInRangeOfPoint(playerid, wejscia[id][w_specCome], wejscia[id][w_x2],wejscia[id][w_y2],wejscia[id][w_z2]))
+		{
+			playerPos = IN_INTERIOR; 
+		}
+		else
+		{
+			playerPos = NOT_IN_ENTER_RANGE;
+		}
 	}
-	else if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw2]
-	&& GetPlayerInterior(playerid) == wejscia[id][w_int2]
-	&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x2],wejscia[id][w_y2],wejscia[id][w_z2]))
+	else 
 	{
-		playerPos = IN_INTERIOR; 
-	}
-	else
-	{
-		playerPos = NOT_IN_ENTER_RANGE;
+		if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw1]
+		&& GetPlayerInterior(playerid) == wejscia[id][w_int1]
+		&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x1],wejscia[id][w_y1],wejscia[id][w_z1]))
+		{
+			playerPos = OUT_INTERIOR; 
+		}
+		else if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw2]
+		&& GetPlayerInterior(playerid) == wejscia[id][w_int2]
+		&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x2],wejscia[id][w_y2],wejscia[id][w_z2]))
+		{
+			playerPos = IN_INTERIOR; 
+		}
+		else
+		{
+			playerPos = NOT_IN_ENTER_RANGE;
+		}
 	}
 	return playerPos;
 }

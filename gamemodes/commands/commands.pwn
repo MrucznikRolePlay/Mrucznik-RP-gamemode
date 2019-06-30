@@ -665,6 +665,7 @@
 #include "cmd/tognewbie.pwn"
 #include "cmd/stan.pwn"
 #include "cmd/personalizuj.pwn"
+#include "cmd/vinyl.pwn"
 
 InitCommands()
 {

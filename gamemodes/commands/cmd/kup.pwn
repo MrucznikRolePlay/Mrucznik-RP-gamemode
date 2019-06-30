@@ -40,7 +40,7 @@ YCMD:kup(playerid, params[], help)
 				ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsi¹¿ka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrêdkoœciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJD");
 			}
 		}
-		else if(PlayerToPoint(4.0, playerid, 815.6807,-1382.8877,23.6475))
+		else if(PlayerToPoint(5.0, playerid, 809.4175,-1420.2585,-22.6193))
 		{
 				if(kasjerkaWolna == 666)
 				{
@@ -54,11 +54,15 @@ YCMD:kup(playerid, params[], help)
 					sendTipMessage(playerid, string);
 				}
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 2.0, 814.2560,-1371.4149,23.6475) 
-		|| IsPlayerInRangeOfPoint(playerid, 2.0, 811.1123,-1351.7429,27.8413))
+		else if(IsPlayerInRangeOfPoint(playerid, 2.0, 800.8901,-1410.6635,-22.6093) 
+		|| IsPlayerInRangeOfPoint(playerid, 2.0, 833.8511,-1391.2689,-17.6433))
 		{
 			if(PlayerInfo[playerid][pAge] >= 18)
 			{
+				if(IsPlayerInRangeOfPoint(playerid, 2.0, 833.8511,-1391.2689,-17.6433))
+				{
+					SetPVarInt(playerid, "jestPrzyBarzeVIP", 1);
+				}
 				new stringBig[256]; 
 				format(stringBig, sizeof(stringBig), 
 				"Nazwa\tKoszt\tMoc (vol)\n\
