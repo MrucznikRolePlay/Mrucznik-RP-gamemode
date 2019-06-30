@@ -30,6 +30,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Float:frz1, Float:fx2, Float:fy2, Float:fz2, Float:frx2, Float:fry2, Float:frz2, Float:fspeed, Float:frange, fuprtyp=0, fuprval=0, bool:flag=false)
 {
+	new	bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, fobiekt, E_STREAMER_WORLD_ID);
 	bramy[iloscbram][b_obiekt] = fobiekt;
 	if(flag==false) {
 		bramy[iloscbram][b_flaga] = false;
@@ -53,6 +54,7 @@ DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Flo
 	bramy[iloscbram][b_range] = frange;
 	bramy[iloscbram][b_uprtyp] = fuprtyp;
 	bramy[iloscbram][b_uprval] = fuprval;
+	bramy[iloscbram][b_vw] = bramaVW; 
 	return iloscbram++;
 }
 
@@ -89,6 +91,7 @@ DualGateAdd(object1,//Obiekt pierwszej bramy
 	accessCard = 0, //Karta dostêpu
 	bool:flg=false)
 { 
+	new bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, object1, E_STREAMER_WORLD_ID);
 	bramy[iloscbram][b_obiekt] = object1;
 	bramy[iloscbram][b_x1] = fx1;
 	bramy[iloscbram][b_y1] = fy1;
@@ -120,6 +123,7 @@ DualGateAdd(object1,//Obiekt pierwszej bramy
 	bramy[iloscbram][b_uprtyp] = fuprtyp1;
 	bramy[iloscbram][b_uprval] = fuprval1;
 	bramy[iloscbram][pAccessCard] = accessCard;
+	bramy[iloscbram][b_vw] = bramaVW;
 	if(flg==false) 
 	{
 	bramy[iloscbram][b_flaga] = false;
@@ -134,11 +138,9 @@ DualGateAdd(object1,//Obiekt pierwszej bramy
 
 SprawdzBramy(playerid)
 {
-	new bramaVW;
 	for(new i; i<iloscbram; i++)
 	{	
-		bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, bramy[i][b_obiekt], E_STREAMER_WORLD_ID);
-		if(GetPlayerVirtualWorld(playerid) == bramaVW)
+		if(GetPlayerVirtualWorld(playerid) == bramy[i][b_vw])
 		{
 			if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2]))
 			{
@@ -187,7 +189,7 @@ SprawdzBramy(playerid)
 					}
 				}
 			}
-		}
+		}	
 	}
 	return 0;
 }
