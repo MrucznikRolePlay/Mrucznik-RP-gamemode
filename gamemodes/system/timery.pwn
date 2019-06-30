@@ -315,6 +315,18 @@ public eqThird(){
 	
 	return 1;
 }
+forward SetTimeAndWeather (playerid);
+public SetTimeAndWeather(playerid)
+{
+	new weatherID, timeVal; 
+	weatherID = GetPVarInt(playerid, "WeatherToSet"); 
+	timeVal = GetPVarInt(playerid, "TimeToSet");
+	SetPlayerTime(playerid, timeVal, 0);
+	SetPlayerWeather(playerid, weatherID);
+	sendTipMessage(playerid, "Pomyœlnie ustalono pogodê i czas dla VW"); 
+	KillTimer(SetTAWForPlayer[playerid]); 
+	return 1;
+}
 forward eqFourth();
 public eqFourth(){
  //CZARNE
@@ -1237,7 +1249,7 @@ public Spectator()
         //Vinyl audio check
         if(!GetPVarInt(i, "VINYL-stream"))
         {
-            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3], VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && GetPlayerVirtualWorld(i) == floatround(VinylAudioPos[4]))
+            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3], VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && (GetPlayerVirtualWorld(i) == 71 || GetPlayerVirtualWorld(i) == 72))
             {
                 SetPVarInt(i, "VINYL-stream", 1);
                 PlayAudioStreamForPlayer(i, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);

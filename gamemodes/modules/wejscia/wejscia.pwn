@@ -241,7 +241,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 10)
 	{
-		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
+		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~MrN", 5000, 1);	
 	}
 	else if(Check_ID == 11)
 	{
@@ -255,6 +255,11 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			noAccessCome[playerid] = 1; 
 			return 1;
 		}
+	}
+	else if(Check_ID == 13)
+	{
+		sendTipMessage(playerid, "Trwa inicjowanie pogody i czasu - NOC"); 
+		SetPlayerTW(playerid, 5000, 1, 6); 
 	}
 	else
 	{

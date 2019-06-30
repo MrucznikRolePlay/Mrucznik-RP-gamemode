@@ -351,7 +351,7 @@ new KTAir_Start, KTAir_End, Float:KTAir_Offsets[3]; //Dla At400 nie ruszaæ.
 new bool:VAR_MySQLREGISTER=true; //W³¹czyæ rejestracje?
 new GATE_VINYL, bool:GATE_VINYL_S=false,
     GATE_VINYL_IN[4], bool:GATE_VINYL_IN_S[4] = {false, ...};
-new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,69.0};  //pos[3] dist, vw
+new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,71.0};  //pos[3] dist, vw
 new VINYL_Stream[128];
 //22.06  system rang mysql
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
@@ -501,7 +501,7 @@ new textVinyl_Timer;
 new text_Vinyl;
 new bool:textVinyl;
 
-
+new SetTAWForPlayer[MAX_PLAYERS];
 new drinkCost1=10000;
 new drinkCost2=15000;
 new drinkCost3=18000;

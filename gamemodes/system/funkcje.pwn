@@ -11852,6 +11852,14 @@ stock DestroyEq(){
 	DestroyDynamicObject(eq_8_1);
 	DestroyDynamicObject(eq_8_2);
 }
+stock SetPlayerTW(playerid, valueTime, time, weather)
+{
+	SetTAWForPlayer[playerid] = SetTimerEx("SetTimeAndWeather", valueTime,0,"d",playerid);
+	SetPVarInt(playerid, "TimeToSet", time); 
+	SetPVarInt(playerid, "WeatherToSet", weather); 
+	sendTipMessage(playerid, "Trwa inicjowanie pogody i czasu - chwilê to potrwa!"); 
+	return 1;
+}
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {
