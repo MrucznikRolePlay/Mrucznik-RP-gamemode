@@ -38,7 +38,7 @@ new Actor01;
 //FishGood
 new FishGood[MAX_PLAYERS];
 //Sad
-new SadWinda[10];
+new SadWinda[6] = {1,0,0,1,1,0};
 
 new LSMCWindap0 = 0;//Winda LSMC
 new LSMCWindap2 = 0;//Winda LSMC
@@ -287,7 +287,6 @@ new Brama_Move_HA = 0;
 new Brama_Move_HA1 = 0;
 new GATE_SAD[42] = {0, ...};
 new bool:GATE_SAD_ALARM = false;
-new GATE_ALARM_OBJ[7];
 //01.08 speedometer
 new bool:ToggleSpeedo[MAX_PLAYERS],
     bool:ToggleSpeedoGPS[MAX_PLAYERS];
