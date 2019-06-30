@@ -149,22 +149,22 @@ SprawdzBramy(playerid)
 					}
 				}
 				bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, bramy[i][b_obiekt], E_STREAMER_WORLD_ID);
-				if(GetPlayerVirtualWorld(playerid) != bramaVW)
+				if(GetPlayerVirtualWorld(playerid) == bramaVW)
 				{
 
-					return 1;
-				}
-				if(bramy[i][b_flaga])//Je¿eli ma zamkn¹æ
-				{
-					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1], bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1], bramy[i][b_ry1], bramy[i][b_rz1]);
-					MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1], bramy[i][b_speed], bramy[i][duo_rx1], bramy[i][duo_ry1], bramy[i][duo_rz1]); 	
-				}
-				else//otwiera
-				{
-					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2], bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2], bramy[i][b_ry2], bramy[i][b_rz2]);
-					MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2], bramy[i][b_speed], bramy[i][duo_rx2], bramy[i][duo_ry2], bramy[i][duo_rz2]); 
-					bramy[i][b_flaga]=~bramy[i][b_flaga];
-					return 1;
+				
+					if(bramy[i][b_flaga])//Je¿eli ma zamkn¹æ
+					{
+						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1], bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1], bramy[i][b_ry1], bramy[i][b_rz1]);
+						MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1], bramy[i][b_speed], bramy[i][duo_rx1], bramy[i][duo_ry1], bramy[i][duo_rz1]); 	
+					}
+					else//otwiera
+					{
+						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2], bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2], bramy[i][b_ry2], bramy[i][b_rz2]);
+						MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2], bramy[i][b_speed], bramy[i][duo_rx2], bramy[i][duo_ry2], bramy[i][duo_rz2]); 
+						bramy[i][b_flaga]=~bramy[i][b_flaga];
+						return 1;
+					}
 				}
 			}
 		}
@@ -175,17 +175,15 @@ SprawdzBramy(playerid)
 				bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, bramy[i][b_obiekt], E_STREAMER_WORLD_ID);
 				if(GetPlayerVirtualWorld(playerid) != bramaVW)
 				{
-
-					return 1;
-				}
-				if(bramy[i][b_flaga])
-				{
-					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1],  bramy[i][b_ry1], bramy[i][b_rz1]);
-				}
-				else
-				{
-					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2],  bramy[i][b_ry2], bramy[i][b_rz2]);
-					bramy[i][b_flaga]=~bramy[i][b_flaga];
+					if(bramy[i][b_flaga])
+					{
+						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1],  bramy[i][b_ry1], bramy[i][b_rz1]);
+					}
+					else
+					{
+						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2],  bramy[i][b_ry2], bramy[i][b_rz2]);
+						bramy[i][b_flaga]=~bramy[i][b_flaga];
+					}
 				}
 				return 1;
 			}
