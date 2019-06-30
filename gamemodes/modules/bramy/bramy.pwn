@@ -135,7 +135,6 @@ DualGateAdd(object1,//Obiekt pierwszej bramy
 SprawdzBramy(playerid)
 {
 	new bramaVW;
-	new string[64]; 
 	for(new i; i<iloscbram; i++)
 	{	
 		bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, bramy[i][b_obiekt], E_STREAMER_WORLD_ID);
@@ -157,12 +156,13 @@ SprawdzBramy(playerid)
 					{
 						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1], bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1], bramy[i][b_ry1], bramy[i][b_rz1]);
 						MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1], bramy[i][b_speed], bramy[i][duo_rx1], bramy[i][duo_ry1], bramy[i][duo_rz1]); 	
+						bramy[iloscbram][b_flaga] = false;
 					}
 					else//otwiera
 					{
 						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2], bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2], bramy[i][b_ry2], bramy[i][b_rz2]);
 						MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2], bramy[i][b_speed], bramy[i][duo_rx2], bramy[i][duo_ry2], bramy[i][duo_rz2]); 
-						bramy[i][b_flaga]=~bramy[i][b_flaga];
+						bramy[i][b_flaga] = true;
 						return 1;
 					}
 					
@@ -170,16 +170,19 @@ SprawdzBramy(playerid)
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2]))
 			{
-				if( (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+				if( (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) 
+				|| (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) 
+				|| bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
 				{
 					if(bramy[i][b_flaga])
 					{
 						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1],  bramy[i][b_ry1], bramy[i][b_rz1]);
+						bramy[iloscbram][b_flaga] = false;
 					}
 					else
 					{
 						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2],  bramy[i][b_ry2], bramy[i][b_rz2]);
-						bramy[i][b_flaga]=~bramy[i][b_flaga];
+						bramy[i][b_flaga]= true;
 						return 1;
 					}
 				}
