@@ -2564,13 +2564,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new payout = 500 - price;
 						        format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 						    }
 						    else
 						    {
 						        format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								DajKase(playerid,-500);
+								ZabierzKase(playerid, 500);
 						    }
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							new randphone = 10000 + random(89999);//minimum 1000  max 9999
@@ -2591,13 +2591,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 7500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 7500 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-7500);
+							    ZabierzKase(playerid, 7500);
 								format(string, sizeof(string), "~r~-$%d", 1000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2686,13 +2686,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 5000 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 5000 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-5000);
+							    ZabierzKase(playerid, 5000);
 								format(string, sizeof(string), "~r~-$%d", 5000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2713,13 +2713,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 500 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-500);
+							    ZabierzKase(playerid, 500);
 								format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2734,7 +2734,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(kaska[playerid] > 5000)
 						{
-						    DajKase(playerid,-5000);
+						    ZabierzKase(playerid, 5000);
 						    GameTextForPlayer(playerid, "~r~-$5000", 5000, 1);
 							PlayerInfo[playerid][pGun9] = 43;
 							PlayerInfo[playerid][pAmmo9] += 100;
@@ -2786,13 +2786,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 50 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 50 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-50);
+							    ZabierzKase(playerid, 50);
 								format(string, sizeof(string), "~r~-$%d", 50);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2812,13 +2812,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 2500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 2500 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 2500);
+							    ZabierzKase(playerid, 2500);
 								format(string, sizeof(string), "~r~-$%d", 2500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2843,18 +2843,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 20 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 20 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 								ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsiπøka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrÍdkoúciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJDè");
 							}
 							else
 							{
-							    DajKase(playerid, - 20);
+							    ZabierzKase(playerid, 20);
 								format(string, sizeof(string), "~r~-$%d", 20);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
-						    DajKase(playerid, - 20);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Piwo 'Mruczny Gul; zakupione.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
@@ -2879,17 +2878,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 25 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 25 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 25);
+							    ZabierzKase(playerid, 25);
 								format(string, sizeof(string), "~r~-$%d", 25);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
-						    DajKase(playerid, - 25);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Wino 'Komandos zakupione'.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
@@ -2914,13 +2912,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 15 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 15 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 15);
+							    ZabierzKase(playerid, 15);
 								format(string, sizeof(string), "~r~-$%d", 15);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2942,13 +2940,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 2500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 2500 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 2500);
+							    ZabierzKase(playerid, 2500);
 								format(string, sizeof(string), "~r~-$%d", 2500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2973,13 +2971,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 200 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 200 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 200);
+							    ZabierzKase(playerid, 200);
 								format(string, sizeof(string), "~r~-$%d", 200);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
