@@ -241,7 +241,8 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 10)
 	{
-		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~MrN", 5000, 1);	
+		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~MrN", 5000, 1);
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);	
 	}
 	else if(Check_ID == 11)
 	{
@@ -258,8 +259,8 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 13)
 	{
-		sendTipMessage(playerid, "Trwa inicjowanie pogody i czasu - NOC"); 
 		SetPlayerTW(playerid, 5000, 1, 6); 
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}
 	else
 	{
@@ -269,7 +270,11 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 }
 Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 {
-	if(Check_ID == 6)
+	if(Check_ID == 10)
+	{
+		StopAudioStreamForPlayer(playerid); 
+	}
+	else if(Check_ID == 6)
 	{
 		StopAudioStreamForPlayer(playerid);	
 	}
