@@ -60,7 +60,7 @@ YCMD:startujlekcje(playerid, params[], help)
 					        format(string, sizeof(string), "* Urzêdnik %s zacz¹³ z tob¹ egzamin.",sendername);
 					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        TakingLesson[giveplayerid] = 1;
-					        DajKase(playerid, -12500);
+					        ZabierzKase(playerid, 12500);
                             Sejf_Add(FRAC_GOV, 12500);
 				        }
 				        else
