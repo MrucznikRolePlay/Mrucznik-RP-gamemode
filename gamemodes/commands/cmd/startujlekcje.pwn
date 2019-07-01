@@ -34,6 +34,8 @@ YCMD:startujlekcje(playerid, params[], help)
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
 
+	const EGZAMIN_PRICE = 12500;
+
     if(IsPlayerConnected(playerid))
     {
         if(IsAnInstructor(playerid))
@@ -49,7 +51,7 @@ YCMD:startujlekcje(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-			        if(kaska[playerid] >= 3000)
+			        if(kaska[playerid] >= EGZAMIN_PRICE)
 			        {
 				        if(PlayerInfo[giveplayerid][pCarLic] == 2)
 				        {
@@ -60,8 +62,8 @@ YCMD:startujlekcje(playerid, params[], help)
 					        format(string, sizeof(string), "* Urzêdnik %s zacz¹³ z tob¹ egzamin.",sendername);
 					        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					        TakingLesson[giveplayerid] = 1;
-					        ZabierzKase(playerid, 12500);
-                            Sejf_Add(FRAC_GOV, 12500);
+					        ZabierzKase(playerid, EGZAMIN_PRICE);
+                            Sejf_Add(FRAC_GOV, EGZAMIN_PRICE);
 				        }
 				        else
 						{
