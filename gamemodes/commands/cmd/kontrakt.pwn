@@ -94,7 +94,7 @@ YCMD:kontrakt(playerid, params[], help)
 				new playermoney = kaska[playerid];
 				if (moneys > 0 && playermoney >= moneys)
 				{
-					DajKase(playerid, (0 - moneys));
+					ZabierzKase(playerid, moneys);
 					PlayerInfo[giveplayerid][pHeadValue]+=moneys;
 					format(string, sizeof(string), "%s podpisa³ kontrakt na %s, nagroda za wykonanie $%d.",sendername, giveplayer, moneys);
 					SendFamilyMessage(8, COLOR_YELLOW, string);
