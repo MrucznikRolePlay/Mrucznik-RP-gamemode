@@ -73,7 +73,7 @@ YCMD:hydraulika(playerid, params[], help)
                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje hydraulike w %s.", sendername, VehicleNames[GetVehicleModel(pojazd) - 400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                    DajKase(playerid, -10000);
+                                    ZabierzKase(playerid, 10000);
                                     format(string, sizeof(string), "~r~-$%d", 10000);
                                     GameTextForPlayer(playerid, string, 5000, 1);
                                     PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
