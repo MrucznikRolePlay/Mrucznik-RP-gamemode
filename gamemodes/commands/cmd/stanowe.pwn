@@ -106,7 +106,7 @@ YCMD:stanowe(playerid, params[], help)
                             DajKase(playerid, 40000);
 							SendClientMessage(playerid, COLOR_GRAD1, "Kasa +40000");
                         }
-                        DajKase(giveplayerid, -pricestan);
+                        ZabierzKase(giveplayerid, pricestan);
                         PoziomPoszukiwania[giveplayerid] = 0;
 					}
 				}
