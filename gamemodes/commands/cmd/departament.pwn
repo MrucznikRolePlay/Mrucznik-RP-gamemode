@@ -50,7 +50,7 @@ YCMD:departament(playerid, params[], help)
 			}
             new member = GetPlayerFraction(playerid);
 			
-            if(0 < member <= 4 || member == 17)// || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
+            if(0 < member <= 4 || member == 17 || GetPlayerFraction(playerid) == FRAC_BOR)// || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
             {
                 format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
                 SendTeamMessage(17,COLOR_ALLDEPT,string);
@@ -58,6 +58,7 @@ YCMD:departament(playerid, params[], help)
                 SendTeamMessage(3, COLOR_ALLDEPT, string);
                 SendTeamMessage(2, COLOR_ALLDEPT, string);
                 SendTeamMessage(1, COLOR_ALLDEPT, string);
+                SendTeamMessage(FRAC_BOR, COLOR_ALLDEPT, string); 
 				
                 format(string, sizeof(string), "%s mówi przez radio: %s", sendername, params);
                 ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
