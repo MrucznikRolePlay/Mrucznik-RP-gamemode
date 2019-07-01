@@ -68,7 +68,7 @@ YCMD:aresztuj(playerid, params[], help)
 						            new bail = PoziomPoszukiwania[playa]*16000;
 						            new jt = PoziomPoszukiwania[playa]*200;
 						            //DajKase(playerid, price);
-								    DajKase(playa, -price2);
+								    ZabierzKase(playa, price2);
 	                                GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 	                                GetPlayerName(playerid, sendername, sizeof(sendername));
                                     new depo2 = floatround(((price/100) * 80), floatround_round);
