@@ -63,7 +63,7 @@ YCMD:oczyscmdc(playerid, params[], help)
 					        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 					        format(string, sizeof(string),"* %s wykonuje parê telefonów i oczyszcza kartoteki %s.", sendername, giveplayer);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                            DajKase(playerid, -300);
+                            ZabierzKase(playerid, 300);
                             format(string, sizeof(string), "~r~-$%d", 300);
 							GameTextForPlayer(playerid, string, 5000, 1);
                     		PlayerPlaySound(playerid, 1054, 0.0, 0.0, 0.0);
