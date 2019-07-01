@@ -75,7 +75,7 @@ YCMD:spoiler(playerid, params[], help)
                                                 SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                 format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                 ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                DajKase(playerid, -25000);
+                                                ZabierzKase(playerid, 25000);
                                                 format(string, sizeof(string), "~r~-$%d", 25000);
                                                 GameTextForPlayer(playerid, string, 5000, 1);
                                                 PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
