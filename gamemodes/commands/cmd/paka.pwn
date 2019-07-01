@@ -80,7 +80,7 @@ YCMD:paka(playerid, params[], help)
                     Sejf_Add(PlayerInfo[playerid][pMember], depo2);
                     format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, moneys, depo3);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					DajKase(suspect, -moneys);
+					ZabierzKase(suspect, moneys);
                     poscig[suspect] = 0;
 					//DajKase(playerid, moneys);
 					format(string, sizeof(string), "Aresztowany przez %s ~n~    grzywna $%d", sendername, moneys);
