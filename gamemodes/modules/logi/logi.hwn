@@ -34,7 +34,8 @@ new Logger:serverLog; //Logi akcji serwera
 new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
 new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
 new Logger:chatLog; //Logi chatów
-//new Logger:mysqlLog; //B³êdy mySQL - moved to mru_mysql.pwn due to weird error (undefined symbol "mysqlLog"; did you mean "mysqlLog"?)
+new Logger:moneyLog; //Logi akcji zwi¹zanych z pieniêdzmi
+new Logger:mysqlLog; //B³êdy mySQL
 
 //old
 new Logger:admindutyLog;

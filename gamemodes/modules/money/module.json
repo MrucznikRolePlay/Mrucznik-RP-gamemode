@@ -2,7 +2,7 @@
     "name": "money",
     "description": "Modu³ odpowiadaj¹cy za operacje na pieni¹dzach gracza.",
     "author": "Mrucznik",
-    "timers": false,
+    "timers": true,
     "callbacks": true,
     "mysql": false,
     "files": [],

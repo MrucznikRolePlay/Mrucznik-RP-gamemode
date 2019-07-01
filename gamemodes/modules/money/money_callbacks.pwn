@@ -29,4 +29,16 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 
+hook OnGameModeInit()//anty cheat
+{
+	SetTimer("AntyCheatSystemByMrucznik", 1000, 1);
+	return 1;
+}
+
+hook OnPlayerConnect(playerid)
+{
+	kaska[playerid]=0;	
+	return 1;
+}
+
 //end

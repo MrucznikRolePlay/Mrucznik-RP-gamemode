@@ -101,6 +101,7 @@
 
 //-------<[ timers ]>-------
 #include "admin\admin_timers.pwn"
+#include "money\money_timers.pwn"
 #include "organizacje\organizacje_timers.pwn"
 #include "pojazdy\pojazdy_timers.pwn"
 #include "prace\prace_timers.pwn"

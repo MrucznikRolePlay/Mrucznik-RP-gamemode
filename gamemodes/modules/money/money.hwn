@@ -23,6 +23,13 @@
 
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
+new kaska[MAX_PLAYERS];
+
 //------------------<[ Forwardy: ]>--------------------
+forward DajKase(playerid, money);
+forward ZabierzKase(playerid, money);
+forward UstawKase(playerid, money);
+forward ResetujKase(playerid);
+
 
 //end

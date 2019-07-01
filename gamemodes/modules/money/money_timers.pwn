@@ -1,5 +1,5 @@
-//----------------------------------------------<< Callbacks >>----------------------------------------------//
-//                                                    logi                                                   //
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                   money                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,58 +17,30 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Data utworzenia: 01.07.2019
 //Opis:
 /*
-	Narzêdzia do obs³ugi logów.
+	Modu³ odpowiadaj¹cy za operacje na pieni¹dzach gracza.
 */
 
 //
 
-#include <YSI\y_hooks>
-
-//-----------------<[ Callbacki: ]>-----------------
-hook OnGameModeInit()
+//-----------------<[ Timery: ]>-------------------
+forward AntyCheatSystemByMrucznik(); //repeated every second
+public AntyCheatSystemByMrucznik()
 {
-	adminLog = CreateLog("logi/admin", ALL, false); 
-	payLog = CreateLog("logi/pay", ALL, false);
-	premiumLog = CreateLog("logi/premium", ALL, false);
-	punishmentLog = CreateLog("logi/punishment", ALL, false);
-	warningLog = CreateLog("logi/warning", ALL, false);
-	nickLog = CreateLog("logi/nick", ALL, false);
-	sejfLog = CreateLog("logi/sejf", ALL, false);
-	serverLog = CreateLog("logi/server", ALL, false);
-	commandLog = CreateLog("logi/command", ALL, false);
-	chatLog = CreateLog("logi/chat", ALL, false);
-	damageLog = CreateLog("logi/damage", ALL, false);
-	connectLog = CreateLog("logi/connect", ALL, false);
-	mysqlLog = CreateLog("logi/mysql", ALL, true);
-	moneyLog = CreateLog("logi/money");
-
-	//old
-	admindutyLog = CreateLog("logi/adminduty", ALL, false);
-	admindutyMaszLog = CreateLog("logi/admindutymasz", ALL, false);
-}
-
-hook OnGameModeExit()
-{
-	DestroyLog(adminLog);
-	DestroyLog(payLog);
-	DestroyLog(premiumLog);
-	DestroyLog(punishmentLog);
-	DestroyLog(warningLog);
-	DestroyLog(nickLog);
-	DestroyLog(sejfLog);
-	DestroyLog(serverLog);
-	DestroyLog(commandLog);
-	DestroyLog(chatLog);
-	DestroyLog(damageLog);
-	DestroyLog(connectLog);
-	DestroyLog(mysqlLog);
-	DestroyLog(moneyLog);
-
-	DestroyLog(admindutyLog);
-	DestroyLog(admindutyMaszLog);
+    for(new i = 0, p = GetMaxPlayers(); i < p; i++)
+    {
+		if(GetPlayerMoney(i) != kaska[i])
+		{
+			if(IsPlayerConnected(i))
+			{
+				ResetPlayerMoney(i);
+				GivePlayerMoney(i,kaska[i]);
+			}
+		}
+	}
+	return 1;
 }
 
 //end

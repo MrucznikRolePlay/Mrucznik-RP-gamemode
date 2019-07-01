@@ -75,7 +75,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
-#include <ACSBM>
 #include <timestamp>
 #define AC_MAX_CONNECTS_FROM_IP		2
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
@@ -109,14 +108,15 @@ native gpci (playerid, serial [], len);
 #include "old_modules\niceczlowiek\noysi.pwn"
 #include "old_modules\niceczlowiek\wybieralka.pwn"
 
+//-------<[ 3.0 style ]>-------
+#include "modules\modules.pwn"
+
 //-------<[ MySQL ]>-------
 #include "mysql\mru_mysql.pwn"
 #include "mysql\mysql_komendy.pwn"
 #include "mysql\mysql_noysi.pwn"
 #include "mysql\mysql_OnDialogResponse.pwn"
 
-//-------<[ 3.0 style ]>-------
-#include "modules\modules.pwn"
 
 /*
 #include "modules\ActorSystem\actors.pwn"
@@ -226,9 +226,6 @@ public OnGameModeInit()
 
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
-	
-	//-------<[ AC ]>-------
-	Ac_OnGameModeInit();//Antyczit
 	
 	//-------<[ commands ]>-------
 	InitCommands();
@@ -1008,7 +1005,6 @@ public OnPlayerConnect(playerid)
 	gpci(playerid, GPCI, 41);
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
 
-	Ac_OnPlayerConnect(playerid);
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
 	ZerujZmienne(playerid);
