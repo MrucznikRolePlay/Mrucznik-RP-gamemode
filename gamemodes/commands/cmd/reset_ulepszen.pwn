@@ -56,7 +56,7 @@ YCMD:reset_ulepszen(playerid, params[], help)
 		PlayerInfo[playerid][pMiserPerk] = 0;
 		PlayerInfo[playerid][pPainPerk] = 0;
 		PlayerInfo[playerid][pTraderPerk] = 0;
-		DajKase(playerid,-100000);
+		ZabierzKase(playerid,100000);
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "   Masz teraz %d niewykorzystanych Punktów Ulepszenia !",PlayerInfo[playerid][gPupgrade]);
 		SendClientMessage(playerid, COLOR_GRAD2, string);
