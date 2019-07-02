@@ -1001,8 +1001,8 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 public OnPlayerConnect(playerid)
 {
-	new GPCI[41];
-	gpci(playerid, GPCI, 41);
+	new GPCI[40];
+	gpci(playerid, GPCI, sizeof(GPCI));
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
 
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
