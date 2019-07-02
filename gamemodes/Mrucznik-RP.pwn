@@ -1013,6 +1013,7 @@ public OnPlayerConnect(playerid)
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
 	ZerujZmienne(playerid);
+	ClearVariableConnect(playerid);
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
@@ -1258,7 +1259,7 @@ public OnPlayerDisconnect(playerid, reason)
 	//lawyer
 	OfferPrice[playerid] = 0;
 	LawyerOffer[playerid] = 0;
-	OfferPlayer[playerid] = 0;
+	ClearVariableDisconnect(playerid); 
 	//caluj
 	kissPlayerOffer[playerid] = 0;
 	//komunikaty frakcyjne

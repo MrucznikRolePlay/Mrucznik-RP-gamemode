@@ -1035,6 +1035,17 @@ new DCC_Channel:g_OrgChannel[MAX_ORG];
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
+ClearVariableConnect(playerid)
+{
+	OfferPlayer[playerid] = 666;//Prawnik oferuje /uwolnij (Check)
+	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
+	return 1;
+}
+ClearVariableDisconnect(playerid)
+{
+	OfferPlayer[playerid] = 666;//Prawnik oferuje /uwolnij (Check)
+	return 1;
+}
 ZerujZmienne(playerid)
 {
     SetPVarInt(playerid, "budka-Mobile", 999);
@@ -1080,8 +1091,6 @@ ZerujZmienne(playerid)
 	podczasbicia[playerid] = 0;
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
-	PlayerInfo[playerid][pBiletpociag] = 0;
-	
 	
 	
 	
@@ -1136,7 +1145,6 @@ ZerujZmienne(playerid)
 	WatchingTV[playerid] = 0; PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
 	Fishes[playerid][pLastFish] = 0; Fishes[playerid][pFishID] = 0;
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
-
 	BiletAlhambra[playerid] = 0;
 	PlayerInfo[playerid][pLevel] = 0;
 	PlayerInfo[playerid][pAdmin] = 0;
@@ -1297,7 +1305,6 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pSamolot] = 0;
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
-	PlayerInfo[playerid][pBiletpociag] = 0;
 	timerTime[playerid] = 0; 
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;

@@ -1054,7 +1054,12 @@ YCMD:akceptuj(playerid, params[], help)
 			//SetPVarInt(playerid, "idPrawnika", playerid);
 			if(kaska[playerid] >= money)
 			{
-				//Test
+                if(OfferPlayer[playerid] == 666)
+                {
+                    sendErrorMessage(playerid, "Nikt nie oferowa³ Ci uwolnienia z wiêzienia!"); 
+                    return 1;
+                }
+				//Test XD
 				GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));
 				format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia za kwotê %d$", GetNick(playerid, true), money);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -1089,7 +1094,7 @@ YCMD:akceptuj(playerid, params[], help)
 				//zerowanie zmiennych 2
 				OfferPrice[playerid] = 0;
 				LawyerOffer[playerid] = 0;
-				OfferPlayer[playerid] = 0;
+				OfferPlayer[playerid] = 666;
 				
 				
 			}
