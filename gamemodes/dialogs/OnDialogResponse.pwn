@@ -7810,7 +7810,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktów respektu");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 25000000$ i 180 punktów respektu", GetPlayerLogName(playerid));
-							PlayerInfo[playerid][pZmienilNick] --;
+							PlayerInfo[playerid][pZmienilNick] ++;
 							ZabierzKase(playerid, 25000000);
 							PlayerInfo[playerid][pExp] -=180;
 						}
@@ -7827,7 +7827,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 340 punktów respektu", GetPlayerLogName(playerid));
-							PlayerInfo[playerid][pZmienilNick] --;
+							PlayerInfo[playerid][pZmienilNick] ++;
 							PlayerInfo[playerid][pExp] -=340;
 						}
 						else
