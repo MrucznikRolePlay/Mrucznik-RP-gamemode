@@ -349,7 +349,7 @@ sendFractionMessageToAll(playerid, text[])
 	new sContent[256];
 	foreach(new i : Player) 
 	{
-		if(GetPVarInt(i, "TOG_frakcja_info") == 0)
+		if(GetPVarInt(i, "TOG_frakcja_info") == 0 && PlayerPersonalization[i][PERS_FAMINFO] == 0)
 		{
 			fractionMessageRange++; 
 			format(sContent, sizeof(sContent), "|___________ %s ___________|", FractionNames[GetPlayerFraction(playerid)]); 

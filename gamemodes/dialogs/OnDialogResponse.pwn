@@ -17417,21 +17417,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					sendTipMessageEx(playerid, COLOR_P@, "Ta opcja zostanie w³¹czona ju¿ nied³ugo!"); 
-					if(PlayerPersonalization[playerid][PERS_KB] == 0)
-					{
-						sendTipMessage(playerid, "Wy³¹czy³eœ konto bankowe"); 
-						PlayerPersonalization[playerid][PERS_KB] =1;
-					}
-					else if(PlayerPersonalization[playerid][PERS_KB] == 1)
-					{
-						sendTipMessage(playerid, "W³¹czy³eœ konto bankowe"); 
-						PlayerPersonalization[playerid][PERS_KB] = 0; 
-					}
+					ShowPersonalization(playerid, 1); 
 				}
 				case 1:
 				{
-					sendTipMessageEx(playerid, COLOR_P@, "Ta opcja zostanie w³¹czona ju¿ nied³ugo!"); 
+					ShowPersonalization(playerid, 2); 
 				}
 				case 2:
 				{
@@ -17449,10 +17439,114 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-/*	else if(dialogid == D_PERS_VEH)
+	else if(dialogid == D_PERS_VEH)
 	{
-
-	}*/
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_LICZNIK] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_LICZNIK] = 1; 
+						ToggleSpeedo[playerid] = true;
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie licznika!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_LICZNIK] = 0;
+						ToggleSpeedo[playerid] = false;
+						sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie licznika w wozie!");
+					}
+				}
+				case 1:
+				{
+					if(PlayerPersonalization[playerid][PERS_CB] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_CB] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ CB-RADIO"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_CB] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ CB-RADIO!"); 
+					}
+				}
+			}
+		}
+	}
+	else if(dialogid == D_PERS_CHAT)
+	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;	
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_AD] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_AD] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie og³oszeñ graczy!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_AD] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ widocznoœæ og³oszeñ graczy!"); 
+					}
+				}
+				case 1:
+				{
+					if(PlayerPersonalization[playerid][PERS_NEWBIE] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_NEWBIE] =1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ chat newbie!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_NEWBIE] =0;
+						sendTipMessage(playerid, "W³¹czy³eœ chat newbie!"); 
+					}
+				}
+				case 2:
+				{
+					if(PlayerPersonalization[playerid][PERS_FINFO] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_FINFO] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ komunikaty od frakcji"); 
+					}
+					else 
+					{
+						PlayerPersonalization[playerid][PERS_FINFO] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ komunikaty od frakcji"); 
+					}
+				}
+				case 3:
+				{
+					if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_FAMINFO] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ komunikaty od rodzin!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_FAMINFO] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ komunikaty od rodzin!"); 
+					}
+				}
+			}
+		}
+	}
 	else if(dialogid == D_PERS_ADMIN)
 	{
 		if(!response)

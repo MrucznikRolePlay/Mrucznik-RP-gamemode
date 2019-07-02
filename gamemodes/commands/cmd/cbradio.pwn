@@ -60,7 +60,7 @@ YCMD:cbradio(playerid, params[], help)
 			{
 				if(PlayerInfo[i][pCB] == 1)
 				{
-					if(cbradijo[i] == 0)
+					if(cbradijo[i] == 0 && PlayerPersonalization[i][PERS_CB] == 0)
 					{
 						format(string, sizeof(string), "%s mówi przez CB-Radio: %s", GetNick(playerid, true), params);
 						SendClientMessage(i,0xff00ff, string);

@@ -7059,7 +7059,7 @@ OOCNewbie(const string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(!gNewbie[i] && GetPVarInt(i, "TOG_newbie") == 0)
+		    if(!gNewbie[i] && GetPVarInt(i, "TOG_newbie") == 0 && PlayerPersonalization[i][PERS_NEWBIE] == 0)
 		    {
 				SendClientMessage(i, 0x8D8DFF00, string);
 			}
@@ -7087,7 +7087,7 @@ OOCNews(color,const string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(!gNews[i])
+		    if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -11734,17 +11734,78 @@ ShowPersonalization(playerid, value)
 	new persona_A[64];
 	new persona_B[64];
 	new persona_C[64];
-	/*new persona_D[64];
-	new persona_E[64]; */
-	new string[256]; 
+	new persona_D[64];
+	new string[356]; 
 	if(value == 1)
 	{
-		sendTipMessage(playerid, "Trwaj¹ prace!"); 
-		return 1;
+		if(PlayerPersonalization[playerid][PERS_LICZNIK] == 1)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Licznik w pojazdach\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_LICZNIK] == 0)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Licznik w pojazdach\t{80FF00}ON\n", 0);
+		}
+		if(PlayerPersonalization[playerid][PERS_CB] == 1)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "CB-RADIO\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_CB] == 0)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "CB-RADIO\t{80FF00}ON\n", 0);
+		}
+		format(string, sizeof(string), "%s%s", persona_A, persona_B);
+		ShowPlayerDialogEx(playerid, D_PERS_VEH, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz");
 	}
 	if(value == 2)
 	{
-		sendTipMessage(playerid, "Trwaj¹ prace!"); 
+		if(PlayerPersonalization[playerid][PERS_AD] == 1)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Og³oszenia [AD]\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_AD] == 0)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Og³oszenia [AD]\t{80FF00}ON\n", 0);
+		}
+		if(PlayerPersonalization[playerid][PERS_NEWBIE] == 1)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "Newbie Chat\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_NEWBIE] == 0)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "Newbie Chat\t{80FF00}ON\n", 0);
+		}
+		if(PlayerPersonalization[playerid][PERS_FINFO] == 1)
+		{
+			strdel(persona_C, 0, 64);
+			strins(persona_C, "Og³oszenia FRAKCJI\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_FINFO] == 0)
+		{
+			strdel(persona_C, 0, 64);
+			strins(persona_C, "Og³oszenia FRAKCJI\t{80FF00}ON\n", 0);	
+		}
+		if(PlayerPersonalization[playerid][PERS_FAMINFO] == 1)
+		{
+			strdel(persona_D, 0, 64);
+			strins(persona_D, "Og³oszenia RODZIN\t{FF6A6A}OFF\n", 0);	
+		}
+		else if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
+		{
+			strdel(persona_D, 0, 64);
+			strins(persona_D, "Og³oszenia RODZIN\t{80FF00}ON\n", 0);	
+		}
+		format(string, sizeof(string), "%s%s%s%s", persona_A, persona_B, persona_C, persona_D);
+		ShowPlayerDialogEx(playerid, D_PERS_CHAT, DIALOG_STYLE_TABLIST, "Mrucznik RP", string, "Akceptuj", "Odrzuæ"); 
+
 	}
 	if(value == 3)
 	{

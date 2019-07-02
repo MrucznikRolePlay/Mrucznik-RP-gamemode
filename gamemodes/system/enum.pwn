@@ -1466,7 +1466,9 @@ enum pPInfo
 	PERS_CB,//Wyœwietlanie CB radia
 	PERS_REPORT,//Wyœwietlanie reportów bez @Duty
 	WARNDEATH,//Warningi o œmierciach
-	PERS_KARYTXD
+	PERS_KARYTXD,//Wyœwietlanie kar w TXD
+	PERS_NEWNICK,//Nowe nicki w 3dtextach
+	PERS_NEWBIE//Wyœwietlanie chatu newbie
 };
 new PlayerPersonalization[MAX_PLAYERS][pPInfo];
 enum pDodatek
