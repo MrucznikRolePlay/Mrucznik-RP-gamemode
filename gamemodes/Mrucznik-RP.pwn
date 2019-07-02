@@ -1001,7 +1001,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 public OnPlayerConnect(playerid)
 {
-	new GPCI[40];
+	new GPCI[41];
 	gpci(playerid, GPCI, sizeof(GPCI));
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
 
