@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   addmc                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,25 +27,46 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "addmc\addmc.pwn"
-#include "dajkp\dajkp.pwn"
-#include "premiumpanel\premiumpanel.pwn"
-#include "premiumskin\premiumskin.pwn"
-#include "setmc\setmc.pwn"
-#include "skiny\skiny.pwn"
-
+#include "addmc_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_addmc()
 {
-    command_addmc();
-    command_dajkp();
-    command_premiumpanel();
-    command_premiumskin();
-    command_setmc();
-    command_skiny();
+    new command = Command_GetID("addmc");
+
+    //aliases
+    Command_AddAlt(command, "dodajmc");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:addmc(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda dodaj¹ca graczowi MC'ków.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, value;
+    if(sscanf(params, "rd", giveplayerid, value))
+    {
+        sendTipMessage(playerid, "U¿yj /addmc [Nick/ID] [mrucznik coiny] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_addmc_Impl(playerid, giveplayerid, value);
 }

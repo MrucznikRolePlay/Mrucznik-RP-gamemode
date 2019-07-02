@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   addmc                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,36 +16,28 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 02.07.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "addmc\addmc.pwn"
-#include "dajkp\dajkp.pwn"
-#include "premiumpanel\premiumpanel.pwn"
-#include "premiumskin\premiumskin.pwn"
-#include "setmc\setmc.pwn"
-#include "skiny\skiny.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_addmc_Impl(playerid, giveplayerid, value)
 {
-    command_addmc();
-    command_dajkp();
-    command_premiumpanel();
-    command_premiumskin();
-    command_setmc();
-    command_skiny();
-    
+    if(IsAKox(playerid))
+	{
+		PremiumInfo[giveplayerid][pMC] += value;
+		premium_saveMc(giveplayerid);
+
+		Log(premiumLog, INFO, "Admin %s doda³ %s %dMC", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value);
+		_MruAdmin(playerid, sprintf("Doda³eœ %d MC graczowi %s [ID: %d]", value, GetNick(giveplayerid, true), giveplayerid));
+		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d dodatkowych MC od Admina %s [ID: %d]", value, GetNick(playerid, true), playerid));
+
+		return 1;
+
+	}
+	else return noAccessMessage(playerid);
 }
+
+//end
