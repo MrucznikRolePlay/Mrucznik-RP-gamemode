@@ -37,7 +37,7 @@ public DajKase(playerid, money)
 	
 	if(money < 0)
 	{
-		Log(moneyLog, ERROR, logstring);
+		Log(errorLog, ERROR, logstring);
 	}
 	else
 	{
@@ -57,7 +57,7 @@ public ZabierzKase(playerid, money)
 	
 	if(money < 0)
 	{
-		Log(moneyLog, ERROR, logstring);
+		Log(errorLog, ERROR, logstring);
 	}
 	else
 	{
