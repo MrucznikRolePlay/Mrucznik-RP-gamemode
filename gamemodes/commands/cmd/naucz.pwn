@@ -77,7 +77,7 @@ YCMD:naucz(playerid, params[], help)
                             {
                                 SetPlayerFightingStyle(playa, FIGHT_STYLE_BOXING);
                                 PlayerInfo[playa][pStylWalki] = 1;
-                                DajKase(playerid, -2500);
+                                ZabierzKase(playerid, 2500);
                                 format(string, sizeof(string), "* Nauczy³eœ gracza %s stylu walki 'gangster', koszty nauki wynios³y 2500$",GetNick(playa));
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 format(string, sizeof(string), "* Bokser %s nauczy³ ciê stylu walki 'gangster'.",GetNick(playerid));
@@ -145,7 +145,7 @@ YCMD:naucz(playerid, params[], help)
                                 {
                                     SetPlayerFightingStyle(playa, FIGHT_STYLE_KUNGFU);
                                     PlayerInfo[playa][pStylWalki] = 2;
-                                    DajKase(playerid, -5000);
+                                    ZabierzKase(playerid, 5000);
                                     GetPlayerName(playerid, sendername, sizeof(sendername));
                                     GetPlayerName(playa, giveplayer, sizeof(giveplayer));
                                     format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'kung-fu', koszty nauki wynios³y 5000$",giveplayer);
@@ -209,7 +209,7 @@ YCMD:naucz(playerid, params[], help)
                                 {
                                     SetPlayerFightingStyle(playa, FIGHT_STYLE_KNEEHEAD);
                                     PlayerInfo[playa][pStylWalki] = 3;
-                                    DajKase(playerid, -10000);
+                                    ZabierzKase(playerid, 10000);
                                     GetPlayerName(playerid, sendername, sizeof(sendername));
                                     GetPlayerName(playa, giveplayer, sizeof(giveplayer));
                                     format(string, sizeof(string), "* Naucz³eœ gracza %s stylu walki 'Kick Boxing', koszty nauki wynios³y 10000$",giveplayer);

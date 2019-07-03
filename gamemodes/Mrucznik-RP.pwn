@@ -75,7 +75,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
-#include <ACSBM>
 #include <timestamp>
 #define AC_MAX_CONNECTS_FROM_IP		2
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
@@ -109,14 +108,15 @@ native gpci (playerid, serial [], len);
 #include "old_modules\niceczlowiek\noysi.pwn"
 #include "old_modules\niceczlowiek\wybieralka.pwn"
 
+//-------<[ 3.0 style ]>-------
+#include "modules\modules.pwn"
+
 //-------<[ MySQL ]>-------
 #include "mysql\mru_mysql.pwn"
 #include "mysql\mysql_komendy.pwn"
 #include "mysql\mysql_noysi.pwn"
 #include "mysql\mysql_OnDialogResponse.pwn"
 
-//-------<[ 3.0 style ]>-------
-#include "modules\modules.pwn"
 
 /*
 #include "modules\ActorSystem\actors.pwn"
@@ -226,9 +226,6 @@ public OnGameModeInit()
 
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
-	
-	//-------<[ AC ]>-------
-	Ac_OnGameModeInit();//Antyczit
 	
 	//-------<[ commands ]>-------
 	InitCommands();
@@ -1005,10 +1002,9 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 public OnPlayerConnect(playerid)
 {
 	new GPCI[41];
-	gpci(playerid, GPCI, 41);
+	gpci(playerid, GPCI, sizeof(GPCI));
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
 
-	Ac_OnPlayerConnect(playerid);
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
 	ZerujZmienne(playerid);
@@ -1285,29 +1281,29 @@ public OnPlayerDisconnect(playerid, reason)
 	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pAdmin] > 0
 	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pNewAP] > 0)//Je¿eli admin by³ na duty, wykonuje zapis w logi 
 	{
-		new stringlog[325];//String do logu
-		new y1,mi1,d1;//Data
+		new exitReason[16];//String do logu
 		//LOG
 		if(!IsPlayerPaused(playerid))
 		{
-			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", d1, mi1, y1, GetNick(playerid), AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
-			Log(admindutyLog, INFO, stringlog); //Create LOG
-				
-			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d /q", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
-			Log(admindutyMaszLog, INFO, stringlog);
+			format(exitReason, sizeof(exitReason), "DISCONNECT");
 		}
-		else
+		else 
 		{
-			getdate(y1, mi1, d1); 
-			format(stringlog, sizeof(stringlog), "[%d:%d:%d] Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez AFK", d1, mi1, y1, GetNick(playerid), AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
-			Log(admindutyLog, INFO, stringlog); //Create LOG
-				
-			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-			format(stringlog, sizeof(stringlog), "%d %d-%d-%d %d:%d %d %d %d %d %d %d %d %d AFK", PlayerInfo[playerid][pUID], y1,mi1,d1, AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
-			Log(admindutyMaszLog, INFO, stringlog);
+			format(exitReason, sizeof(exitReason), "AFK");
 		}
+		
+		//Log dla 0Verte [Nick][UID] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
+		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez %s", 
+			GetPlayerLogName(playerid), 
+			AdminDutyGodziny[playerid], 
+			AdminDutyMinuty[playerid],
+			iloscBan[playerid],
+			iloscWarn[playerid],
+			iloscKick[playerid],
+			iloscInne[playerid], 
+			exitReason
+		); //Create LOG
+
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;

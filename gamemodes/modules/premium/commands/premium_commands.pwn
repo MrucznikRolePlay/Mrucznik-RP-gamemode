@@ -30,6 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "addmc\addmc.pwn"
 #include "dajkp\dajkp.pwn"
 #include "premiumpanel\premiumpanel.pwn"
 #include "premiumskin\premiumskin.pwn"
@@ -40,6 +41,7 @@
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_addmc();
     command_dajkp();
     command_premiumpanel();
     command_premiumskin();

@@ -64,7 +64,7 @@ YCMD:blackjack(playerid, params[], help)
                 format(string, sizeof(string), "* %s wyci¹ga kartê i jest to: A (as)", sendername);
 				ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
             }
-            DajKase(playerid, -100);
+            ZabierzKase(playerid, 100);
 			sendTipMessageEx(playerid, TEAM_AZTECAS_COLOR, "Kasyno pobiera op³atê za u¿ycie talii kart (100$)");
         }
         else

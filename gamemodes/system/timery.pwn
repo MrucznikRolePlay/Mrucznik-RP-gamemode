@@ -2100,7 +2100,7 @@ public CustomPickups()
 				    case 1:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						DajKase(i, - 5000);
+						ZabierzKase(i, 5000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
@@ -2111,7 +2111,7 @@ public CustomPickups()
 					case 2:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						DajKase(i, - 5000);
+						ZabierzKase(i, 5000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2123,7 +2123,7 @@ public CustomPickups()
 					case 3:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1);
-						DajKase(i, - 6000);
+						ZabierzKase(i, 6000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2136,7 +2136,7 @@ public CustomPickups()
 					case 4:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1);
-						DajKase(i, - 6000);
+						ZabierzKase(i, 6000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2149,7 +2149,7 @@ public CustomPickups()
 					case 5:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						DajKase(i, - 8000);
+						ZabierzKase(i, 8000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2163,7 +2163,7 @@ public CustomPickups()
 					case 6:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						DajKase(i, - 8000);
+						ZabierzKase(i, 8000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2177,7 +2177,7 @@ public CustomPickups()
 					case 7:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						DajKase(i, - 8500);
+						ZabierzKase(i, 8500);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2191,7 +2191,7 @@ public CustomPickups()
 					case 8:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						DajKase(i, - 8500);
+						ZabierzKase(i, 8500);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2205,7 +2205,7 @@ public CustomPickups()
 					case 9:
 					{
 						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
-						DajKase(i, - 10000);
+						ZabierzKase(i, 10000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
 						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
@@ -2219,7 +2219,7 @@ public CustomPickups()
 					case 10:
 					{
 						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
-						DajKase(i, - 10000);
+						ZabierzKase(i, 10000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
 						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
@@ -3364,7 +3364,7 @@ public Fillup()
 				FillUp = FillUp * 120;
 				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUp);
 				SendClientMessage(i, COLOR_LIGHTBLUE,string);
-				DajKase(i, - FillUp);
+				ZabierzKase(i, FillUp);
 				Refueling[i] = 0;
 			}
 			else

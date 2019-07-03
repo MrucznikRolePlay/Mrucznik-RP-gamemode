@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                    logi                                                   //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   money                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,31 +17,74 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Data utworzenia: 01.07.2019
+//Opis:
+/*
+	Modu³ odpowiadaj¹cy za operacje na pieni¹dzach gracza.
+*/
 
 //
 
-//-----------------<[ Zmienne: ]>-------------------
-new Logger:adminLog; //Logi akcji administracyjnych
-new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
-new Logger:premiumLog; //Logi z systemu premium
-new Logger:punishmentLog; //Logi nadawania oraz zdejmowania kar dla graczy
-new Logger:warningLog; //Logi warningów administracyjnych
-new Logger:commandLog; //Logi komendy wykonanych przez graczy
-new Logger:nickLog; //Logi zmian nicków
-new Logger:sejfLog; //Logi stanu sejfów
-new Logger:serverLog; //Logi akcji serwera
-new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
-new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
-new Logger:chatLog; //Logi chatów
-new Logger:moneyLog; //Logi akcji zwi¹zanych z pieniêdzmi
-new Logger:errorLog; //Logi b³êdów wraz ze œcie¿k¹ wyst¹pienia
-new Logger:mysqlLog; //B³êdy mySQL
+//-----------------<[ Funkcje: ]>-------------------
+public DajKase(playerid, money)
+{
+	new logstring[256], nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	format(logstring, sizeof(logstring), "%s dostal %d$", nick, money);
 
-//old
-new Logger:admindutyLog;
+	kaska[playerid] += money;
+	GivePlayerMoney(playerid, money);
+	
+	if(money < 0)
+	{
+		Log(errorLog, ERROR, logstring);
+	}
+	else
+	{
+		Log(moneyLog, INFO, logstring);
+	}
+	return 1;
+}
 
-//------------------<[ Enumy: ]>--------------------
-//------------------<[ Forwardy: ]>--------------------
+public ZabierzKase(playerid, money)
+{
+	new logstring[256], nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	format(logstring, sizeof(logstring), "%s zabrano %d$", nick, money);
+
+	kaska[playerid] -= money;
+	GivePlayerMoney(playerid, -money);
+	
+	if(money < 0)
+	{
+		Log(errorLog, ERROR, logstring);
+	}
+	else
+	{
+		Log(moneyLog, INFO, logstring);
+	}
+	return 1;
+}
+
+public UstawKase(playerid, money)
+{
+	new logstring[256], nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	format(logstring, sizeof(logstring), "%s ustawiono %d$", nick, money);
+
+	kaska[playerid] = money;
+	ResetPlayerMoney(playerid);
+	GivePlayerMoney(playerid, money);
+	
+	Log(moneyLog, INFO, logstring);
+	return 1;
+}
+
+public ResetujKase(playerid)
+{
+	kaska[playerid]=0;
+	ResetPlayerMoney(playerid);
+	return 1;
+}
 
 //end

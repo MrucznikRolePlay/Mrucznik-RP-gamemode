@@ -57,7 +57,7 @@ YCMD:kupskin(playerid, params[], help)
 				    PlayerInfo[playerid][pModel] = lolgf;
 					SetPlayerSkin(playerid, lolgf);
 					sendTipMessageEx(playerid, COLOR_P@, "Kupi³eœ nowy skin!");
-					DajKase(playerid, -5000);
+					ZabierzKase(playerid, 5000);
 					GameTextForPlayer(playerid, "~r~-5000$", 2500, 1);
 				}
 				else

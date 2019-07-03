@@ -83,7 +83,7 @@ YCMD:teczka(playerid, params[], help)
 						new playermoney = kaska[playerid];
 						if (moneys > 0 && playermoney >= moneys)
 						{
-							DajKase(playerid, (0 - moneys));
+							ZabierzKase(playerid, moneys);
 							DajKase(giveplayerid, moneys);
 							format(string, sizeof(string), "   Da³eœ %s(gracz: %d), $%d.", giveplayer,giveplayerid, moneys);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);

@@ -69,7 +69,7 @@ YCMD:kolo(playerid, params[], help)
                 format(string, sizeof(string), "* %s zakrêci³ ko³em fortuny które zatrzyma³o siê na gwieŸdzie fortuny (40$)", sendername);
 				ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
             }
-            DajKase(playerid, -5000);
+            ZabierzKase(playerid, 5000);
 			sendTipMessageEx(playerid, TEAM_AZTECAS_COLOR, "Kasyno pobiera op³atê za u¿ycie ko³a fortuny (5000$)");
         }
         else

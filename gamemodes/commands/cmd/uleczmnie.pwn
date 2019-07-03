@@ -52,7 +52,7 @@ YCMD:uleczmnie(playerid, params[], help)
  				{
  				    STDPlayer[playerid] = 0;
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ zdrowy dziêki szpitalnej pomocy !");
-					DajKase(playerid, -1000);
+					ZabierzKase(playerid, 1000);
 					SendClientMessage(playerid, TEAM_CYAN_COLOR, "Doktor: Koszt pobytu w szpitalu wynosi $1000,-. Mi³ego dnia!");
 				}
 			}

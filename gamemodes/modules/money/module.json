@@ -1,0 +1,11 @@
+{
+    "name": "money",
+    "description": "Modu³ odpowiadaj¹cy za operacje na pieni¹dzach gracza.",
+    "author": "Mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": false,
+    "date": "01.07.2019"
+}

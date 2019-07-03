@@ -50,7 +50,7 @@ YCMD:dajbilet(playerid, params[], help)
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			format(string, sizeof(string), "Otrzyma³eœ bilet do klubu Alhmabra od %s", GetNick(playerid, true));
 			SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-            DajKase(playerid, -20000);
+            ZabierzKase(playerid, 20000);
             SejfR_Add(FAMILY_ALHAMBRA, 20000);
 			BiletAlhambra[giveplayerid] = 1;
 		}
@@ -88,13 +88,13 @@ YCMD:dajbilet(playerid, params[], help)
 
             if(typ == 1)
 		    {
-                DajKase(playerid, -20000);
+                ZabierzKase(playerid, 20000);
                 SejfR_Add(FAMILY_VINYL, 20000);
 		    	format(string,sizeof(string),"*%s da³ bilet %s",GetNick(playerid, true),GetNick(giveplayerid, true));
 		    }
 		    else if(typ == 2)
 		    {
-                DajKase(playerid, -50000);
+                ZabierzKase(playerid, 50000);
                 SejfR_Add(FAMILY_VINYL, 50000);
 		    	format(string,sizeof(string),"*%s da³ bilet VIP %s",GetNick(playerid, true),GetNick(giveplayerid, true));
 		    }

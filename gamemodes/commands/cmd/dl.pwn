@@ -70,7 +70,7 @@ YCMD:dl(playerid, params[], help)
 									        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 									        format(string, sizeof(string), "* Urzêdnik %s da³ prawo jazdy %s. Urz¹d zarobi³ 14 000$.",sendername,giveplayer);
 									        SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
-									        DajKase(playerid, -14000);
+									        ZabierzKase(playerid, 14000);
                                             Sejf_Add(FRAC_GOV, 14000);
 									        PlayerInfo[giveplayerid][pCarLic] = 1;
 									        return 1;
@@ -122,7 +122,7 @@ YCMD:dl(playerid, params[], help)
 								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string), "* Urzêdnik %s da³ licencje na latanie %s. Urz¹d zarobi³ 4 000 000$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
-								        DajKase(playerid, -4000000);
+								        ZabierzKase(playerid, 4000000);
                                         Sejf_Add(FRAC_GOV, 4000000);
 								        PlayerInfo[giveplayerid][pFlyLic] = 1;
 								        return 1;
@@ -169,7 +169,7 @@ YCMD:dl(playerid, params[], help)
 								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string), "* Urzêdnik %s da³ licencjê na p³ywanie %s. Urz¹d zarobi³ 280 000$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
-								        DajKase(playerid, -280000);
+								        ZabierzKase(playerid, 280000);
                                         Sejf_Add(FRAC_GOV, 280000);
 								        PlayerInfo[giveplayerid][pBoatLic] = 1;
 								        return 1;
@@ -214,7 +214,7 @@ YCMD:dl(playerid, params[], help)
 							        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "* Urzêdnik %s da³ kartê wêdkarsk¹ %s. Urz¹d zarobi³ 5 000$.",sendername,giveplayer);
 									SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
-							        DajKase(playerid, -5000);
+							        ZabierzKase(playerid, 5000);
                                     Sejf_Add(FRAC_GOV, 5000);
 							        PlayerInfo[giveplayerid][pFishLic] = 1;
 							        return 1;
@@ -256,7 +256,7 @@ YCMD:dl(playerid, params[], help)
 								        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string), "* Urzêdnik %s da³ licencjê na broñ %s. Urz¹d zarobi³ 450 000$.",sendername,giveplayer);
 									    SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
-								        DajKase(playerid, -450000);
+								        ZabierzKase(playerid, 450000);
                                         Sejf_Add(FRAC_GOV, 450000);
 								        PlayerInfo[giveplayerid][pGunLic] = 1;
 								        return 1;

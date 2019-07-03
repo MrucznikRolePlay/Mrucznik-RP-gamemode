@@ -42,12 +42,12 @@ YCMD:ja(playerid, params[], help)
     }
     new string[256];
     params[0] = tolower(params[0]);
+    Log(chatLog, INFO, "%s me: %s", GetPlayerLogName(playerid), params);
 
     if(strlen(params) < 78)
     {
         format(string, sizeof(string), "* %s %s", GetNick(playerid, true), params);
         ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-	    Log(chatLog, INFO, "%s me: %s", GetPlayerLogName(playerid), params);
     } else
     {
         new pos = strfind(params, " ", true, strlen(params) / 2);

@@ -133,7 +133,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(kaska[playerid] < 30000) return sendErrorMessage(playerid, "Nie masz tyle kasy");
 		SetPlayerArmour(playerid, 90);
 		SetPlayerHealth(playerid, 100);
-		DajKase(playerid, -30000);
+		ZabierzKase(playerid, 30000);
 		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i ¿ycie");
 	}	
 	else if(dialogid == 6999)//vinyl panel
@@ -2599,13 +2599,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new payout = 500 - price;
 						        format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 						    }
 						    else
 						    {
 						        format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								DajKase(playerid,-500);
+								ZabierzKase(playerid, 500);
 						    }
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							new randphone = 10000 + random(89999);//minimum 1000  max 9999
@@ -2626,13 +2626,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 7500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 7500 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-7500);
+							    ZabierzKase(playerid, 7500);
 								format(string, sizeof(string), "~r~-$%d", 1000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2721,13 +2721,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 5000 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 5000 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-5000);
+							    ZabierzKase(playerid, 5000);
 								format(string, sizeof(string), "~r~-$%d", 5000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2748,13 +2748,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 500 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-500);
+							    ZabierzKase(playerid, 500);
 								format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2769,7 +2769,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(kaska[playerid] > 5000)
 						{
-						    DajKase(playerid,-5000);
+						    ZabierzKase(playerid, 5000);
 						    GameTextForPlayer(playerid, "~r~-$5000", 5000, 1);
 							PlayerInfo[playerid][pGun9] = 43;
 							PlayerInfo[playerid][pAmmo9] += 100;
@@ -2800,7 +2800,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 							else
 							{
-							    DajKase(playerid,-5000);
+							    ZabierzKase(playerid,5000);
 								format(string, sizeof(string), "~r~-$%d", 5000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2821,13 +2821,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 50 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 50 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-50);
+							    ZabierzKase(playerid, 50);
 								format(string, sizeof(string), "~r~-$%d", 50);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2847,13 +2847,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 2500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 2500 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 2500);
+							    ZabierzKase(playerid, 2500);
 								format(string, sizeof(string), "~r~-$%d", 2500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2878,18 +2878,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 20 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 20 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 								ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsi¹¿ka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrêdkoœciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJD");
 							}
 							else
 							{
-							    DajKase(playerid, - 20);
+							    ZabierzKase(playerid, 20);
 								format(string, sizeof(string), "~r~-$%d", 20);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
-						    DajKase(playerid, - 20);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Piwo 'Mruczny Gul; zakupione.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
@@ -2914,17 +2913,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 25 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 25 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 25);
+							    ZabierzKase(playerid, 25);
 								format(string, sizeof(string), "~r~-$%d", 25);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
-						    DajKase(playerid, - 25);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Wino 'Komandos zakupione'.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
@@ -2949,13 +2947,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 15 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 15 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 15);
+							    ZabierzKase(playerid, 15);
 								format(string, sizeof(string), "~r~-$%d", 15);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2977,13 +2975,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 2500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 2500 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 2500);
+							    ZabierzKase(playerid, 2500);
 								format(string, sizeof(string), "~r~-$%d", 2500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -3008,13 +3006,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 200 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 200 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 200);
+							    ZabierzKase(playerid, 200);
 								format(string, sizeof(string), "~r~-$%d", 200);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -4479,7 +4477,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -10000);
+							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4546,7 +4544,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -10000);
+							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4615,7 +4613,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -10000);
+							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4675,7 +4673,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -10000);
+							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4711,7 +4709,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						DajKase(playerid, -10000);
+						ZabierzKase(playerid, 10000);
 						format(string, sizeof(string), "~r~-$%d", 10000);
 						GameTextForPlayer(playerid, string, 5000, 1);
 	     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4945,7 +4943,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    {
 						    SetPlayerArmour(playerid, 90);
 							SetPlayerHealth(playerid, 100);
-							DajKase(playerid, -5000);
+							ZabierzKase(playerid, 5000);
 							SendClientMessage(playerid, COLOR_WHITE, " **Zaplaciles 5000$ za kamizelke i ¿ycie");
 						}
 						else
@@ -4970,7 +4968,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 10, 1);
 					        PlayerInfo[playerid][pGun10] = 10;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -25000);
+							ZabierzKase(playerid, 25000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ wibrator 'Purpurowy Big Jim' za 25 000$");
 						}
@@ -4986,7 +4984,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 11, 1);
 					        PlayerInfo[playerid][pGun10] = 11;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -7500);
+							ZabierzKase(playerid, 7500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ wibrator 'Analny Penetrator' za 7500$");
 						}
@@ -5002,7 +5000,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 12, 1);
 					        PlayerInfo[playerid][pGun10] = 12;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -20000);
+							ZabierzKase(playerid, 20000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ wibrator 'Bia³y Intruz' za 20 000$");
 						}
@@ -5018,7 +5016,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 13, 1);
 					        PlayerInfo[playerid][pGun10] = 13;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -12000);
+							ZabierzKase(playerid, 12000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ wibrator 'Srebrny Masturbator' za 12 000$");
 						}
@@ -5034,7 +5032,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 15, 1);
 					        PlayerInfo[playerid][pGun10] = 15;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Laskê sado-maso za 1500$");
 						}
@@ -5050,7 +5048,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 14, 1);
 					        PlayerInfo[playerid][pGun10] = 14;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -500);
+							ZabierzKase(playerid, 500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kwiaty za 500$");
 						}
@@ -5065,7 +5063,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		  	 			{
 							Condom[playerid] ++;
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							DajKase(playerid, -50);
+							ZabierzKase(playerid, 50);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ paczkê prezerwatyw za 50$");
 						}
 						else
@@ -5212,7 +5210,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 2, 1);
 	                     	PlayerInfo[playerid][pGun1] = 2;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -400);
+	                     	ZabierzKase(playerid, 400);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kij golfowy za 400$");
 		                }
 		                else
@@ -5227,7 +5225,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 3, 1);
 	                     	PlayerInfo[playerid][pGun1] = 3;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -300);
+	                     	ZabierzKase(playerid, 300);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ pa³kê PD za 300$");
 		                }
 		                else
@@ -5242,7 +5240,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 5, 1);
 	                     	PlayerInfo[playerid][pGun1] = 5;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -700);
+	                     	ZabierzKase(playerid, 700);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ bejzbola za 700$");
 		                }
 		                else
@@ -5257,7 +5255,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 6, 1);
 	                     	PlayerInfo[playerid][pGun1] = 6;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -300);
+	                     	ZabierzKase(playerid, 300);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ ³opatê za 300$");
 		                }
 		                else
@@ -5272,7 +5270,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 7, 1);
 	                     	PlayerInfo[playerid][pGun1] = 7;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -100);
+	                     	ZabierzKase(playerid, 100);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kij bilardowy za 100$");
 		                }
 		                else
@@ -5287,7 +5285,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 14, 1);
 	                     	PlayerInfo[playerid][pGun10] = 14;
 	                     	PlayerInfo[playerid][pAmmo10] = 1;
-	                     	DajKase(playerid, -200);
+	                     	ZabierzKase(playerid, 200);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kwiaty za 200$");
 		                }
 		                else
@@ -5302,7 +5300,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 15, 1);
 	                     	PlayerInfo[playerid][pGun10] = 15;
 	                     	PlayerInfo[playerid][pAmmo10] = 1;
-	                     	DajKase(playerid, -600);
+	                     	ZabierzKase(playerid, 600);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ laska za 600$");
 		                }
 		                else
@@ -5317,7 +5315,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 1, 1);
 	                     	PlayerInfo[playerid][pGun0] = 1;
 	                     	PlayerInfo[playerid][pAmmo0] = 1;
-	                     	DajKase(playerid, -50);
+	                     	ZabierzKase(playerid, 50);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kastet za 50$");
 		                }
 		                else
@@ -5345,7 +5343,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 46, 1);
 	                     	PlayerInfo[playerid][pGun11] = 46;
 	                     	PlayerInfo[playerid][pAmmo11] = 1;
-	                     	DajKase(playerid, -500);
+	                     	ZabierzKase(playerid, 500);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ spadochron za 500$");
 		                }
 		                else
@@ -5931,7 +5929,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         Car_Unspawn(vehicleid);
                         Car_Spawn(IloscAut[playerid]);
 
-                        DajKase(playerid, -5000);
+                        ZabierzKase(playerid, 5000);
 				        SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta³ zrespawnowany. Koszt: {FF0000}5000$");
 					}
 					else
@@ -5963,7 +5961,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  					{
                         Car_Unspawn(vehicleid);
 
-                        DajKase(playerid, -5000);
+                        ZabierzKase(playerid, 5000);
 				        SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta³ unspawnowany. Koszt: {FF0000}5000$");
 					}
 					else
@@ -7232,7 +7230,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 						}
 					}
 					case 9:
@@ -7242,7 +7240,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ChangeVehicleColor(veh, KolorPierwszy[playerid], 42);
 							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 						}
 					}
 					case 10:
@@ -7252,7 +7250,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ChangeVehicleColor(veh, KolorPierwszy[playerid], 16);
 							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 						}
 					}
 					case 11:
@@ -7262,7 +7260,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ChangeVehicleColor(veh, KolorPierwszy[playerid], 20);
 							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 						}
 					}
 					case 12:
@@ -7327,7 +7325,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
 						MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
 						SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-						DajKase(playerid, -1500);
+						ZabierzKase(playerid, 1500);
 					}
 				}
 				else
@@ -7832,7 +7830,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 60.000.000$");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 60000000$", GetPlayerLogName(playerid));
-							DajKase(playerid, -60000000);
+							ZabierzKase(playerid, 60000000);
 						}
 						else
 						{
@@ -7847,8 +7845,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktów respektu");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 25000000$ i 180 punktów respektu", GetPlayerLogName(playerid));
-							PlayerInfo[playerid][pZmienilNick] --;
-							DajKase(playerid, -25000000);
+							PlayerInfo[playerid][pZmienilNick] ++;
+							ZabierzKase(playerid, 25000000);
 							PlayerInfo[playerid][pExp] -=180;
 						}
 						else
@@ -7864,7 +7862,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 340 punktów respektu", GetPlayerLogName(playerid));
-							PlayerInfo[playerid][pZmienilNick] --;
+							PlayerInfo[playerid][pZmienilNick] ++;
 							PlayerInfo[playerid][pExp] -=340;
 						}
 						else
@@ -9586,7 +9584,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        if(kaska[playerid] != 0 && kaska[playerid] >= 1000000)
 			        {
 			            Dom[dom][hZbrojownia] = 1;
-			            DajKase(playerid, -1000000);
+			            ZabierzKase(playerid, 1000000);
 			            SendClientMessage(playerid, COLOR_P@, "Gratulacje, kupi³eœ zbrojownie za 1 000 000$, skonfiguruj teraz co chcesz w niej przechowywaæ! Aby jej u¿yæ wpisz /zbrojownia we wnêtrzu swojego domu");
 						DialogZbrojowni(playerid);
 						Log(payLog, INFO, "%s kupi³ do domu %s zbrojownie za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom));
@@ -9679,7 +9677,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 	      			if(kaska[playerid] != 0 && kaska[playerid] >= 100000)
 		        	{
-				        DajKase(playerid, -100000);
+				        ZabierzKase(playerid, 100000);
 						Dom[dom][hApteczka] = 1;
 						//PlayerInfo[playerid][pZiolo] -= 10;
 						PlayerInfo[playerid][pDrugs] -= 10;
@@ -9756,7 +9754,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                 	if(kaska[playerid] != 0 && kaska[playerid] >= 10000000)
                 	{
-                	    DajKase(playerid, -10000000);
+                	    ZabierzKase(playerid, 10000000);
 						Dom[dom][hLadowisko] = 20;
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ L¹dowisko za 10 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy 20 metrów od domu");
 						KupowanieDodatkow(playerid, dom);
@@ -9772,7 +9770,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(kaska[playerid] != 0 && kaska[playerid] >= 1000000)
                 	{
-                	    DajKase(playerid, -1000000);
+                	    ZabierzKase(playerid, 1000000);
 						Dom[dom][hLadowisko] += 20;
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ ulepszenie l¹dowiska za 1 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy o 20 metrów wiêcej ni¿ poprzednio.");
 						KupowanieDodatkow(playerid, dom);
@@ -10480,7 +10478,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 1000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania kastetu za 1 000$!");
-							DajKase(playerid, -1000);
+							ZabierzKase(playerid, 1000);
 							Dom[dom][hS_PG0] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10503,7 +10501,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    if(kaska[playerid] >= 1 && kaska[playerid] >= 5000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania spadochronu za 5 000$!");
-							DajKase(playerid, -5000);
+							ZabierzKase(playerid, 5000);
 							Dom[dom][hS_PG11] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10526,7 +10524,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 50000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania sperju, gaœnicy i kamery za 50 000$!");
-							DajKase(playerid, -50000);
+							ZabierzKase(playerid, 50000);
 							Dom[dom][hS_PG9] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10549,7 +10547,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 60000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania wibratorów, laski i kwiatów za 60 000$!");
-							DajKase(playerid, -60000);
+							ZabierzKase(playerid, 60000);
 							Dom[dom][hS_PG10] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10572,7 +10570,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 75000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania broni bia³ej za 75 000$!");
-							DajKase(playerid, -75000);
+							ZabierzKase(playerid, 75000);
 							Dom[dom][hS_PG1] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10595,7 +10593,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 250000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania pistoletów za 250 000$!");
-							DajKase(playerid, -250000);
+							ZabierzKase(playerid, 250000);
 							Dom[dom][hS_PG2] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10618,7 +10616,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 450000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania strzelb za 450 000$!");
-							DajKase(playerid, -450000);
+							ZabierzKase(playerid, 450000);
 							Dom[dom][hS_PG3] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10641,7 +10639,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 550000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania pistoletów maszynowych za 550 000$!");
-							DajKase(playerid, -550000);
+							ZabierzKase(playerid, 550000);
 							Dom[dom][hS_PG4] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10664,7 +10662,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    if(kaska[playerid] >= 1 && kaska[playerid] >= 850000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania karabinów szturmowych za 850 000$!");
-							DajKase(playerid, -850000);
+							ZabierzKase(playerid, 850000);
 							Dom[dom][hS_PG5] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10687,7 +10685,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 700000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania snajperek za 700 000$!");
-							DajKase(playerid, -700000);
+							ZabierzKase(playerid, 700000);
 							Dom[dom][hS_PG6] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10710,7 +10708,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 2000000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania broni ciêzkiej za 2 000 000$!");
-							DajKase(playerid, -2000000);
+							ZabierzKase(playerid, 2000000);
 							Dom[dom][hS_PG7] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10733,7 +10731,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 4000000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania ³adunków wybuchowych za 4 000 000$!");
-							DajKase(playerid, -4000000);
+							ZabierzKase(playerid, 4000000);
 							Dom[dom][hS_PG8] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -12993,7 +12991,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18652;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 1://¯ó³ty
 		            {
@@ -13001,7 +12999,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, 0xDAA520FF, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18650;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 2://Zielony
 		            {
@@ -13009,7 +13007,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18649;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 3://Niebieski
 		            {
@@ -13018,7 +13016,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18648;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 
 		            }
 		            case 4://Czerwony
@@ -13028,7 +13026,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_RED, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18647;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 
 		            }
 		            case 5://Ró¿owy
@@ -13037,7 +13035,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_PURPLE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18651;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 		            }
 		        }
                 Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);

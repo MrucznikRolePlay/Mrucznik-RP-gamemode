@@ -44,7 +44,7 @@ YCMD:graj(playerid, params[], help)
 		}
 		else
 		{
-			DajKase(playerid,-400);
+			ZabierzKase(playerid,400);
 			format(string, sizeof(string), "~r~-$%d", 1000);
 			GameTextForPlayer(playerid, string, 5000, 1);
 		}

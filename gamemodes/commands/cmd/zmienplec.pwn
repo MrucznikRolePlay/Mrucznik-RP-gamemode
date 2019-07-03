@@ -53,7 +53,7 @@ YCMD:zmienplec(playerid, params[], help)
                         if(kaska[playerid] < 50000) return sendErrorMessage(playerid, "Nie masz 50 000$ na operacjê.");
 						format(string, sizeof(string),"Przeprowadzi³eœ operacje zmiany p³ci na %s. Koszt: 50 000$", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                        DajKase(playerid, -50000);
+                        ZabierzKase(playerid, 50000);
                         Sejf_Add(FRAC_LSMC, 50000);
 						if(PlayerInfo[playa][pSex] == 1)
 						{
