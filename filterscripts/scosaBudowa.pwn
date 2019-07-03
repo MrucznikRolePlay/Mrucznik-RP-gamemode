@@ -74,7 +74,6 @@ public OnFilterScriptInit()
 
 
 CMD:zuraw(playerid, params[]) {
-	SetPlayerVirtualWorld(playerid, 0);
 	switch(craneState)
 	{
 	case 0:
