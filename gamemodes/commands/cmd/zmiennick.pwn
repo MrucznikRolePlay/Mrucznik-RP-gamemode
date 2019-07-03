@@ -53,6 +53,7 @@ YCMD:zmiennick(playerid, params[], help)
 				{
                     if(ChangePlayerName(playerid, params))
                     {
+						format(string, sizeof(string), "Gracz %s zmieni³ sobie nick na %s", sendername, params); 
                     	SendClientMessageToAll(COLOR_LIGHTRED, string);
                     	Log(nickLog, INFO, "{Player: %s[%d]} zmieni³ nick na: %s",sendername,PlayerInfo[playerid][pUID],params);
 
