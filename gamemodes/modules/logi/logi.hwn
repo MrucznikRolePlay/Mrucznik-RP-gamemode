@@ -40,7 +40,6 @@ new Logger:mysqlLog; //B³êdy mySQL
 
 //old
 new Logger:admindutyLog;
-new Logger:admindutyMaszLog;
 
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------

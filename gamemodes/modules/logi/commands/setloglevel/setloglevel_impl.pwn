@@ -47,7 +47,6 @@ command_setloglevel_Impl(playerid, logname[32], loglevel)
         case _H<money>: logger = moneyLog;
         case _H<error>: logger = errorLog;
         case _H<adminduty>: logger = admindutyLog;
-        case _H<admindutymasz>: logger = admindutyMaszLog;
         default: return sendErrorMessage(playerid, "Z³y typ logów!");
     }
     SetLogLevel(logger, E_LOGLEVEL:loglevel);

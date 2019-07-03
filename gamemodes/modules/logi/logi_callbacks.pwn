@@ -48,7 +48,6 @@ hook OnGameModeInit()
 
 	//old
 	admindutyLog = CreateLog("logi/adminduty", ALL, false);
-	admindutyMaszLog = CreateLog("logi/admindutymasz", ALL, false);
 }
 
 hook OnGameModeExit()
@@ -70,7 +69,6 @@ hook OnGameModeExit()
 	DestroyLog(errorLog);
 
 	DestroyLog(admindutyLog);
-	DestroyLog(admindutyMaszLog);
 }
 
 //end

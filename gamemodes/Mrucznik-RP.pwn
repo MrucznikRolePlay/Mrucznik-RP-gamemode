@@ -1281,27 +1281,29 @@ public OnPlayerDisconnect(playerid, reason)
 	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pAdmin] > 0
 	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pNewAP] > 0)//Je¿eli admin by³ na duty, wykonuje zapis w logi 
 	{
-		new stringlog[325];//String do logu
-		new y1,mi1,d1;//Data
+		new exitReason[16];//String do logu
 		//LOG
 		if(!IsPlayerPaused(playerid))
 		{
-			format(stringlog, sizeof(stringlog), "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez DISCONNECT", GetPlayerLogName(playerid), AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
-			Log(admindutyLog, INFO, stringlog); //Create LOG
-				
-			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-			format(stringlog, sizeof(stringlog), "%d %d:%d %d %d %d %d %d %d %d %d /q", PlayerInfo[playerid][pUID], AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
-			Log(admindutyMaszLog, INFO, stringlog);
+			format(exitReason, sizeof(exitReason), "DISCONNECT");
 		}
-		else
+		else 
 		{
-			format(stringlog, sizeof(stringlog), "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez AFK", GetPlayerLogName(playerid), AdminDutyGodziny[playerid], AdminDutyMinuty[playerid],iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid],iloscInne[playerid]); //GENERATE LOG
-			Log(admindutyLog, INFO, stringlog); //Create LOG
-				
-			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-			format(stringlog, sizeof(stringlog), "%d %d:%d %d %d %d %d %d %d %d %d AFK", PlayerInfo[playerid][pUID], AdminDutyGodziny[playerid], AdminDutyMinuty[playerid], iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid]);
-			Log(admindutyMaszLog, INFO, stringlog);
+			format(exitReason, sizeof(exitReason), "AFK");
 		}
+		
+		//Log dla 0Verte [Nick][UID] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
+		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez %s", 
+			GetPlayerLogName(playerid), 
+			AdminDutyGodziny[playerid], 
+			AdminDutyMinuty[playerid],
+			iloscBan[playerid],
+			iloscWarn[playerid],
+			iloscKick[playerid],
+			iloscInne[playerid], 
+			exitReason
+		); //Create LOG
+
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;
