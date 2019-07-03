@@ -27,12 +27,13 @@
 
 
 #include <a_samp>
-#include <zcmd>
 #include <streamer>	
 
 new scosafs;
 new craneObj;
 new craneState = 0;
+new zurawTimer;
+
 public OnFilterScriptInit()
 {
 	print("\n--scosaBudowa zaladowana\n");
@@ -67,13 +68,20 @@ public OnFilterScriptInit()
 	CreateActor(260,1255.8334,-1332.3978,12.9624,277.2327);
 	CreateActor(27,1257.9969,-1331.7865,12.9640,88.9409);
 
-  
+	zurawTimer = SetTimer("zuraw_timer", 30000, true);
 	
 	return 1;
 }
 
+public OnFilterScriptExit()
+{
+	KillTimer(zurawTimer);
+}
 
-CMD:zuraw(playerid, params[]) {
+
+forward zuraw_timer();
+public zuraw_timer()
+{
 	switch(craneState)
 	{
 	case 0:
@@ -98,4 +106,3 @@ CMD:zuraw(playerid, params[]) {
 		}
 	}
 }
-
