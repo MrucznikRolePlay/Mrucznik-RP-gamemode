@@ -44,7 +44,7 @@ public OnFilterScriptInit()
 	SetDynamicObjectMaterial(scosafs, 1, 981, "helixbarrier", "bridgehzrd_kb_128", 0x00000000);
 	scosafs = CreateDynamicObject(9618, 1280.929321, -1347.052612, 24.115032, 0.000000, 0.000000, 0.000000, 0, 0, -1, 500.00, 500.00); 
 	scosafs = CreateDynamicObject(1391, 1258.825683, -1326.858764, 44.513481, 0.000000, 0.000000, 0.000000, 0, 0, -1, 500.00, 500.00); 
-	craneObj = CreateDynamicObject(1394, 1258.904174, -1326.908325, 57.008861, 0.000000, 0.000000, -63, 0, 0, -1, 500.00, 500.00); // zuraw1state
+	craneObj = CreateDynamicObject(1394, 1258.904174, -1326.908325, 57.000000, 0.000000, 0.000000, -63, 0, 0, -1, 500.00, 500.00); // zuraw1state
 	scosafs = CreateDynamicObject(8885, 1280.378417, -1299.792236, 15.720217, 0.000000, 0.000000, 90.000000, 0, 0, -1, 500.00, 500.00); 
 	scosafs = CreateDynamicObject(3172, 1273.123779, -1316.475463, 12.492575, 0.000000, 0.000000, 180.000000, 0, 0, -1, 500.00, 500.00); 
 	scosafs = CreateDynamicObject(3577, 1310.918090, -1379.468750, 13.426674, 0.000000, 0.000000, -23.899997, 0, 0, -1, 500.00, 500.00); 
@@ -86,23 +86,24 @@ public zuraw_timer()
 	{
 	case 0:
 		{
-			MoveDynamicObject(craneObj, 1258.904174, -1326.908325, 57.008861, 0.6, 0.000000, 0.000000, -63);
+			MoveDynamicObject(craneObj, 1258.904174, -1326.908325, 57.000000, 0.001, 0.000000, 0.000000, -63);
 			craneState = 1;
 		}
 	case 1:
 		{
-			MoveDynamicObject(craneObj, 1258.904174, -1326.908325, 57.008861, 0.6, 0.000000,  0.000000, -100);
+			MoveDynamicObject(craneObj, 1258.904174, -1326.908325, 57.010000, 0.001, 0.000000,  0.000000, -100);
 			craneState = 2;
 		}
 	case 2:
 		{
-			MoveDynamicObject(craneObj, 1258.904174, -1326.908325, 57.008861, 0.6, 0.000000,  0.000000, -138);
+			MoveDynamicObject(craneObj, 1258.904174, -1326.908325, 57.000000, 0.001, 0.000000,  0.000000, -138);
 			craneState = 3;
 		}
 	case 3:
 		{
-			MoveDynamicObject(craneObj, 1258.904174, -1326.908325, 57.008861, 0.6, 0.000000,  0.000000, -100);
+			MoveDynamicObject(craneObj, 1258.904174, -1326.908325, 57.010000, 0.001, 0.000000,  0.000000, -100);
 			craneState = 0;
 		}
 	}
 }
+
