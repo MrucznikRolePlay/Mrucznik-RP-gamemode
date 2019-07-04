@@ -262,6 +262,19 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		SetPlayerTW(playerid, 5000, 1, 6); 
 		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}
+	else if(Check_ID == 14)
+	{
+		sendTipMessageEx(playerid, COLOR_GREEN, "======[Los Santos MMA]======");
+		sendTipMessageEx(playerid, COLOR_P@, "Sponsorzy:");
+		sendTipMessage(playerid, "San News, United States Secret Service, Communist Part of San Andreas;");
+		sendTipMessage(playerid, "Kancelaria Gubernatora, Simon Cotta, John Mcintosh"); 
+		sendTipMessageEx(playerid, COLOR_P@, "W³odarze:");
+		sendTipMessage(playerid, "Beyonce Bennett, Mat Drep"); 
+		sendTipMessageEx(playerid, COLOR_P@, "Walka wieczoru:"); 
+		sendTipMessage(playerid, "Simon Cotta vs. John Mrucznik"); 
+		sendTipMessageEx(playerid, COLOR_GREEN, "===========[Fight]===========");
+		GameTextForPlayer(playerid, "~w~By~n~~r~Dreptacz", 5000, 1); 
+	}
 	else
 	{
 		sendTipMessage(playerid, "Proces /wejdz - poprawnie przeprowadzony"); 
