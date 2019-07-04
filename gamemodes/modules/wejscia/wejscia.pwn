@@ -278,7 +278,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	else if(Check_ID == 15)
 	{
 		GameTextForPlayer(playerid, "~w~By~n~~g~Dreptacz", 5000, 1); 
-		sendTipMessage(playerid, "Zapraszamy na rzeü!")
+		sendTipMessage(playerid, "Zapraszamy na rzeü!");
 
 	}
 	else
