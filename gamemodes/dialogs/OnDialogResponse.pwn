@@ -1994,7 +1994,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				//(actorpID, alib[], aname[], Float:fdelt, loop, lockx, locky, freeze, time)
 				case 0: 
 				{
-					SetActorAnimationEx(actorpID, "COP_AMBIENT", "Coplook_loop",  1, 1, 1);
+				//	SetActorAnimationEx(actorpID, "COP_AMBIENT", "Coplook_loop",  1, 1, 1);
+					ApplyDynamicActorAnimation(actorpID, "COP_AMBIENT", "Coplook_loop", 4.1,  1, 1, 1, 0, 0);
 					format(string, sizeof(string), "%s %s [%d]", "COP_AMBIENT", "Coplook_loop", actorpID);
 					sendTipMessage(playerid, string); 
 					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
