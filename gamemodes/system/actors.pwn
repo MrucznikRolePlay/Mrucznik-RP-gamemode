@@ -33,6 +33,23 @@ stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:
 	Actors[valActor][a_Player] = aPlayer; 
 	return valActor++; 
 }
+stock SetActorAnimationEx(actorIDu, alib[], aname[], Float:fdelt, loop, lockx, locky, freeze, time)
+{
+	ApplyDynamicActorAnimation(actorIDu, alib, aname, fdelt, loop, lockx, locky, freeze, time);
+	return 1;
+}
+stock RepairActors(worldID, interiorID)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza
+{
+	for(new i; i<valActor; i++)
+	{
+		if(Actors[i][a_VW] == worldID && Actors[i][a_INT] == interiorID)
+		{
+			SetDynamicActorPos(actorUID[i], Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]); 
+			SetDynamicActorFacingAngle(actorUID[i], Actors[i][a_posR]);
+		}
+	}
+	return 1;
+}
 stock LoadActors()
 {
 	for(new i; i<valActor; i++)

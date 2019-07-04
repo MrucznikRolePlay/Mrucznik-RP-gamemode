@@ -22,24 +22,9 @@
 //
 
 //-----------------<[ Zmienne: ]>-------------------
-new valActors; 
-new actorID[MAX_ACTORS]; 
 
 //------------------<[ Enumy: ]>--------------------
-enum eActor
-{
-    a_skin,
-    float:a_x,
-    float:a_y,
-    float:a_z,
-    float:a_rot,
-    a_text[256],
-    a_animation,
-    a_vw,
-    a_int
-};
 
-new sActors[MAX_ACTORS][eActor];
 //------------------<[ Forwardy: ]>--------------------
 
 //end

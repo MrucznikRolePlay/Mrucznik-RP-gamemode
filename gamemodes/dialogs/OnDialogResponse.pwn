@@ -1982,6 +1982,51 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
+	else if(dialogid == 1215)
+	{
+		if(response)
+		{
+			new actorpID = GetPVarInt(playerid, "actorIDChoice");
+			new string[124]; 
+			switch(listitem)
+			{
+				//(playerid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync)
+				//(actorpID, alib[], aname[], Float:fdelt, loop, lockx, locky, freeze, time)
+				case 0: 
+				{
+					SetActorAnimationEx(actorpID, "COP_AMBIENT", "Coplook_loop", 4.1, 1, 1, 1, 1, 0);
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED); 
+				}
+				case 1:
+				{
+					SetActorAnimationEx(actorpID, "RAPPING","RAP_C_Loop", 4.1, 1, 1, 1, 1, 0); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 2:
+				{
+					SetActorAnimationEx(actorpID, "BD_FIRE","BD_Panic_Loop", 4.1, 1, 1, 1, 1, 0); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 3:
+				{
+					ClearDynamicActorAnimations(actorpID);
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s wyczyœci³ animacje dla actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+			}
+		}
+	}
 	else if(dialogid == iddialog[playerid])
 	{
 		if(dialogid == 1)
@@ -16769,20 +16814,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							new string[124];
 							format(string, sizeof(string), "Pomyœlnie zaznaczono actora %d - %s", i, Actors[i][a_Name]); 
 							sendTipMessage(playerid, string);
-							SetPVarInt(playerid, "pActorID", i); 
+							SetPVarInt(playerid, "pactorID", i); 
 						}
 					}
 				}
 				case 1:
 				{
-					if(GetPVarInt(playerid, "pActorID") != 666)
+					if(GetPVarInt(playerid, "pactorID") != 666)
 					{
 						if(GetPlayerInterior(playerid) != 0)
 						{
 							sendErrorMessage(playerid, "Actorów nie mo¿na przenosiæ pomiêdzy interiorami!"); 
 							return 1;
 						}
-						new uidActor = actorUID[GetPVarInt(playerid, "pActorID")], Float:pX, Float:pY, Float:pZ, Float:pR;
+						new uidActor = actorUID[GetPVarInt(playerid, "pactorID")], Float:pX, Float:pY, Float:pZ, Float:pR;
 						GetPlayerPos(playerid, pX, pY, pZ);
 						GetPlayerFacingAngle(playerid, pR); 
 						SetDynamicActorFacingAngle(uidActor, pR);

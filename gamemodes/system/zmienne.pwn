@@ -1024,6 +1024,7 @@ new Float:OldCoordsX[MAX_PLAYERS], Float:OldCoordsY[MAX_PLAYERS];
 new Gas[CAR_AMOUNT];
 new Refueling[MAX_PLAYERS];
 new Naprawiasie[MAX_PLAYERS];
+new fixActorsTimer[MAX_PLAYERS]; 
 
 new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
@@ -1039,6 +1040,7 @@ ClearVariableConnect(playerid)
 {
 	OfferPlayer[playerid] = 666;//Prawnik oferuje /uwolnij (Check)
 	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
+	fixActorsTimer[playerid] = 0; 
 	return 1;
 }
 ClearVariableDisconnect(playerid)

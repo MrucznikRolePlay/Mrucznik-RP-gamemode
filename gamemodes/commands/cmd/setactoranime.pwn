@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                              ActorSystem                                                  //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//----------------------------------------------[ setactoranim ]---------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,20 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 15.05.2019
-//Opis:
+
+// Opis:
 /*
-	Skrypt umo¿liwiaj¹cy tworzenie Actorów, ala DodajBrame. 
+	
 */
 
-//
 
-//-----------------<[ Callbacki: ]>-------------------
-//-----------------<[ Funkcje: ]>-------------------
+// Notatki skryptera:
+/*
+	
+*/
 
-//-----------------<[ Timery: ]>-------------------
-//------------------<[ MySQL: ]>--------------------
-//-----------------<[ Komendy: ]>-------------------
+YCMD:setactoranim(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(PlayerInfo[playerid][pNewAP] != 5 && PlayerInfo[playerid][pAdmin] < 3000)
+        {
+            noAccessMessage(playerid); 
+            return 1;
+        }
+        new aID;
+        if(sscanf(params, "d", aID))
+        {
+            sendTipMessage(playerid, "/setactoranim [ID]"); 
+            return 1;
+        }
+        SetPVarInt(playerid, "ActorIDChoice", aID); 
+        ShowPlayerDialogEx(playerid, 1215, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Ramiona\nRapowanie\nOpiera sie o lade\nClear Animation", "Okej", "Wyjdz"); 
 
-//end
+    }
+    return 1;
+}

@@ -85,6 +85,15 @@ public PizzaJobTimer01(playerid)
 	}
 	return 1;
 }
+forward ActorsFix(playerid);
+public ActorsFix(playerid)
+{
+	new playerVW = GetPlayerVirtualWorld(playerid); 
+	new playerINT = GetPlayerInterior(playerid); 
+	RepairActors(playerVW, playerINT);
+	KillTimer(fixActorsTimer[playerid]); 
+	return 1;
+}
 //Naprawianie timer
 public Naprawa(playerid)
 {
@@ -1167,7 +1176,6 @@ public MainTimer()
     else
         TICKS_30Min++;
 }
-
 //TODO: mysql asynchroniczny
 forward SaveMyAccountTimer(playerid);
 public SaveMyAccountTimer(playerid)
