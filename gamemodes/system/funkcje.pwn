@@ -1739,8 +1739,8 @@ BARIERKA_Init()
     }
     for(new i=0;i<10;i++) //LSFD
     {
-        Barier[FRAC_LSFD][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
-        BarierState[FRAC_LSFD][i] = false;
+        Barier[FRAC_ERS][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+        BarierState[FRAC_ERS][i] = false;
     }
     for(new i=0;i<10;i++) //USSS
     {
@@ -2528,7 +2528,7 @@ DajBronieFrakcyjne(playerid)
 	        playerWeapons[playerid][weaponLegal10] = 1;
 	    }
 	}
-    else if(GetPlayerFraction(playerid) == FRAC_LSFD)
+    else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] <= 3)
 	{
         if(JobDuty[playerid] == 1)
         {
@@ -4562,17 +4562,6 @@ SetPlayerToTeamColor(playerid)
 		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
 		    }
 		}
-        else if(GetPlayerFraction(playerid) == FRAC_LSFD)
-		{
-		    if(JobDuty[playerid])
-		    {
-		    	SetPlayerColor(playerid, COLOR_ALLDEPT);
-		    }
-		    else
-		    {
-		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
-		    }
-		}
 		else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7)
 		{
 		    if(OnDuty[playerid])
@@ -4912,7 +4901,7 @@ GetFractionMembersNumber(fractionid, bool:withOnDutyCheck)
 					continue;
 				else if((fractionid == FRAC_LSPD || fractionid == FRAC_FBI || fractionid == FRAC_NG || fractionid == FRAC_BOR) && OnDuty[i] == 0)
 					continue;
-				else if( (fractionid == FRAC_LSMC || fractionid == FRAC_LSFD || fractionid == FRAC_GOV || fractionid == FRAC_KT) && JobDuty[i])
+				else if( (fractionid == FRAC_ERS || fractionid == FRAC_GOV || fractionid == FRAC_KT) && JobDuty[i])
 					continue;
 			}
 			membersNumber++;
@@ -8305,16 +8294,6 @@ Sejf_Load()
     mysql_free_result();
 }
 
-CheckLoginNick(playerid, nick[])
-{
-	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)
-	{
-		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
-		KickEx(playerid);
-		return 1;
-	}
-	return 0; 
-}
 
 IsNickCorrect(nick[])
 {

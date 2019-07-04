@@ -478,7 +478,7 @@ new FractionNames[][40] = {
     "Los Santos Police Department",
     "Federal Bureau of Investigation",
     "San Andreas Sherrifs Department",
-    "Los Santos Medical Center",
+    "Emergency Rescue Service",
     "SA Bahamas",
     "Yakuza",
     "United States Secret Service",
@@ -491,7 +491,7 @@ new FractionNames[][40] = {
     "Hillside Nortenos 14",
     "Nightmare of Adrenalin",
     "IV Saint Reich",
-    "Los Santos Fire Department",
+    "Brak",
     "Brak",
     "Brak"
 };

@@ -1473,7 +1473,7 @@ public OnPlayerDisconnect(playerid, reason)
     {
         foreach(new i : Player)
         {
-            if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
+            if(IsACop(i) || IsAMedyk(i) || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
             {
                 DisablePlayerCheckpoint(i);
             }
@@ -2352,7 +2352,7 @@ SetPlayerSpawnPos(playerid)
 							SetPlayerVirtualWorld(playerid, 88);
 							Wchodzenie(playerid);
 						}
-						case FRAC_LSMC:  //4
+						case FRAC_ERS:  //4
 						{
 						    SetPlayerPosEx(playerid, 1148.4323,-1315.4225,13.9841);
 		    				SetPlayerFacingAngle(playerid,358.0);
@@ -2451,13 +2451,6 @@ SetPlayerSpawnPos(playerid)
 						case FRAC_WPS: //16
 						{
 						    SetPlayerPosEx(playerid, 2508.0671,-2019.8987,13.9482);
-						}
-						case FRAC_LSFD: //17
-						{
-						    SetPlayerPosEx(playerid, 1757.6122,-1123.4604,227.8059);
-				            SetPlayerVirtualWorld(playerid, 22);
-						    SetPlayerFacingAngle(playerid,180.0);
-						    Wchodzenie(playerid);
 						}
 				    }
 				}
@@ -2658,7 +2651,7 @@ SetPlayerSpawnSkin(playerid)
 	{
 		if(GetPlayerFraction(playerid) != 0)
 		{
-			if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC)
+			if(IsACop(playerid)  || GetPlayerFraction(playerid) == FRAC_ERS)
 			{
 				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);

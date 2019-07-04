@@ -34,7 +34,7 @@ YCMD:brama(playerid, params[], help)
 	{
 		if(SprawdzBramy(playerid))
 			return 1;
-        if(IsPlayerInFraction(playerid, FRAC_LSFD, 5000)) //bramy LSFD
+        if(IsPlayerInFraction(playerid, FRAC_ERS, 5000)) //bramy LSFD
         {
             if (IsPlayerInRangeOfPoint(playerid, 9.0, 1712.68005, -1141.50000, 24.27000))
             {

@@ -184,6 +184,7 @@
 #define FRAC_FBI    2
 #define FRAC_NG     3
 #define FRAC_LSMC   4
+#define FRAC_ERS    4
 #define FRAC_LCN    5
 #define FRAC_YKZ    6
 #define FRAC_BOR    7
@@ -196,7 +197,6 @@
 #define FRAC_VAGOS  14
 #define FRAC_NOA    15
 #define FRAC_WPS    16 
-#define FRAC_LSFD   17
 #define SPOILER_D 200000
 #define ZDERZAK_D 250000
 #define FELGA_D 250000

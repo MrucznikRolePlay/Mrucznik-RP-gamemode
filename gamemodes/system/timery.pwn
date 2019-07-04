@@ -1229,7 +1229,7 @@ public Spectator()
 		GetPlayerPos(PDGPS, x, y, z);
 		foreach(new i : Player)
 		{
-			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
+			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
 				SetPlayerCheckpoint(i, x, y, z, 4.0);
 		}
 	}
