@@ -172,7 +172,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}	
 	else if(Check_ID == 3)
 	{
-		if(doorFBIStatus == 0 || GetPlayerFraction(playerid) != FRAC_FBI)
+		if(doorFBIStatus == 0 && GetPlayerFraction(playerid) != FRAC_FBI)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
 			noAccessCome[playerid] =1; 
