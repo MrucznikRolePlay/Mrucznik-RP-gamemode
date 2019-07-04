@@ -28,8 +28,18 @@
 
  */
 
-YCMD:@idz(playerid, params[], help)
+YCMD:idz(playerid, params[], help)
 {
-    ShowPlayerDialogEx(playerid, 1213, DIALOG_STYLE_LIST,"Automatyczna animacja","Pijak\nNormalny\nBabcia\nGangsta\nGangsta 2\nGarbaty\nZ broni¹\nNormalny 2\nStaruszka\nDziwka\nPaker\nKobieta\nTuptuœ\nNormalny 3","Akceptuj","Anuluj");
+    if(IsPlayerConnected(playerid))
+    {
+        if(PlayerInfo[playerid][pLevel] >= 2)
+        {
+            ShowPlayerDialogEx(playerid, 1213, DIALOG_STYLE_LIST,"Automatyczna animacja","Pijak\nNormalny\nBabcia\nGangsta\nGangsta 2\nGarbaty\nZ broni¹\nNormalny 2\nStaruszka\nDziwka\nPaker\nKobieta\nTuptuœ\nNormalny 3","Akceptuj","Anuluj");
+        }
+        else
+        {
+            sendTipMessage(playerid, "Ta opcja zostanie dostêpna dopiero, gdy twoja postaæ osi¹gnie drugi poziom!"); 
+        }
+    }
     return 1;
 }
