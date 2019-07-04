@@ -1995,7 +1995,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 0: 
 				{
 				//	SetActorAnimationEx(actorpID, "COP_AMBIENT", "Coplook_loop",  1, 1, 1);
-					ApplyDynamicActorAnimation(actorpID, "COP_AMBIENT", "Coplook_loop", 4.1,  1, 1, 1, 0, 0);
+					ApplyDynamicActorAnimation(actorUID[actorpID], "COP_AMBIENT", "Coplook_loop", 4.1,  1, 1, 1, 0, 0);
 					format(string, sizeof(string), "%s %s [%d]", "COP_AMBIENT", "Coplook_loop", actorpID);
 					sendTipMessage(playerid, string); 
 					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
@@ -2005,7 +2005,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					SetActorAnimationEx(actorpID, "RAPPING","RAP_C_Loop",  1, 1, 1); 
+					SetActorAnimationEx(actorUID[actorpID], "RAPPING","RAP_C_Loop",  1, 1, 1); 
 					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
 					sendTipMessage(playerid, string); 
 					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
@@ -2013,7 +2013,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					SetActorAnimationEx(actorpID, "BD_FIRE","BD_Panic_Loop", 1, 1, 1); 
+					SetActorAnimationEx(actorUID[actorpID], "BD_FIRE","BD_Panic_Loop", 1, 1, 1); 
 					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
 					sendTipMessage(playerid, string); 
 					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
@@ -2021,7 +2021,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					ClearDynamicActorAnimations(actorpID);
+					ClearDynamicActorAnimations(actorUID[actorpID]);
 					format(string, sizeof(string), "Wy³¹czy³eœ animacje dla %s [%d]", Actors[actorpID][a_Name], actorpID);
 					sendTipMessage(playerid, string); 
 					format(string, sizeof(string), "Admin %s wyczyœci³ animacje dla actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
