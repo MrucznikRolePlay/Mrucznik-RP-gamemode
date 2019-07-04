@@ -53,7 +53,7 @@ YCMD:akceptuj(playerid, params[], help)
 			/*SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
 			SetPVarInt(giveplayerid, "Oferujacy_Cena", value); 
 			SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]);*/
-			if(GetPVarInt(playerid, "Oferujacy_ID") == INVALID_PLAYER_ID)
+			if(GetPVarInt(playerid, "Oferujacy_ID") == INVALID_PLAYER_ID)//przy connect
 			{
 				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
 				return 1;
