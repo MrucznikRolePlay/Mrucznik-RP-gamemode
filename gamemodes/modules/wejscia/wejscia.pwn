@@ -275,6 +275,12 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		sendTipMessageEx(playerid, COLOR_GREEN, "===========[Fight]===========");
 		GameTextForPlayer(playerid, "~w~By~n~~r~Dreptacz", 5000, 1); 
 	}
+	else if(Check_ID == 15)
+	{
+		GameTextForPlayer(playerid, "~w~By~n~~g~Dreptacz", 5000, 1); 
+		sendTipMessage(playerid, "Zapraszamy na rzeü!")
+
+	}
 	else
 	{
 		sendTipMessage(playerid, "Proces /wejdz - poprawnie przeprowadzony"); 
