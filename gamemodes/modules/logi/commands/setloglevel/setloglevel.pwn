@@ -58,7 +58,7 @@ YCMD:setloglevel(playerid, params[], help)
     new logname[32], loglevel;
     if(sscanf(params, "s[32]d", logname, loglevel))
     {
-        sendTipMessage(playerid, "U¿yj /setloglevel [log (admin, pay, premium, punishment, warning, nick, sejf, server, command, chat, damage, connect, adminduty, admindutymasz)] [level (0-none | 1-debug | 2-info | 4-warning | 8 - ERROR | 15 - all)] ");
+        sendTipMessage(playerid, "U¿yj /setloglevel [log (admin, pay, premium, punishment, warning, nick, sejf, server, command, chat, damage, connect, money, adminduty)] [level (0-none | 1-debug | 2-info | 4-warning | 8 - ERROR | 15 - all)] ");
         return 1;
     }
     

@@ -41,6 +41,7 @@
 #include "frakcje\frakcje.def"
 #include "komendy\komendy.def"
 #include "logi\logi.def"
+#include "money\money.def"
 #include "organizacje\organizacje.def"
 #include "pojazdy\pojazdy.def"
 #include "prace\prace.def"
@@ -64,6 +65,7 @@
 #include "frakcje\frakcje.hwn"
 #include "komendy\komendy.hwn"
 #include "logi\logi.hwn"
+#include "money\money.hwn"
 #include "organizacje\organizacje.hwn"
 #include "pojazdy\pojazdy.hwn"
 #include "prace\prace.hwn"
@@ -87,6 +89,7 @@
 #include "frakcje\frakcje.pwn"
 #include "komendy\komendy.pwn"
 #include "logi\logi.pwn"
+#include "money\money.pwn"
 #include "organizacje\organizacje.pwn"
 #include "pojazdy\pojazdy.pwn"
 #include "prace\prace.pwn"
@@ -98,6 +101,7 @@
 
 //-------<[ timers ]>-------
 #include "admin\admin_timers.pwn"
+#include "money\money_timers.pwn"
 #include "organizacje\organizacje_timers.pwn"
 #include "pojazdy\pojazdy_timers.pwn"
 #include "prace\prace_timers.pwn"
@@ -119,6 +123,7 @@
 //-------<[ callbacks ]>-------
 #include "admin\admin_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
+#include "money\money_callbacks.pwn"
 #include "organizacje\organizacje_callbacks.pwn"
 #include "pojazdy\pojazdy_callbacks.pwn"
 #include "prace\prace_callbacks.pwn"

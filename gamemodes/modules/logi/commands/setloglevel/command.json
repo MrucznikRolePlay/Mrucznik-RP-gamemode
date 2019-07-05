@@ -11,7 +11,7 @@
             "type": "string",
             "size": "32",
             "name": "logname",
-            "description": "log (admin, pay, premium, punishment, warning, nick, sejf, server, command, chat, damage, connect, adminduty, admindutymasz)"
+            "description": "log (admin, pay, premium, punishment, warning, nick, sejf, server, command, chat, damage, connect, money, adminduty)"
         },
         {
             "type": "integer",

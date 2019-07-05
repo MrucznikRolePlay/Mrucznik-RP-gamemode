@@ -7,7 +7,6 @@ new MYSQL_HOST[32];
 new MYSQL_USER[32];
 new MYSQL_DATABASE[32];
 new MYSQL_PASS[256];
-new Logger:mysqlLog;
 
 public OnQueryError(errorid, error[], resultid, extraid, callback[], query[], connectionHandle)
 {

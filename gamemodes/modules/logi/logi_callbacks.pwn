@@ -43,10 +43,11 @@ hook OnGameModeInit()
 	damageLog = CreateLog("logi/damage", ALL, false);
 	connectLog = CreateLog("logi/connect", ALL, false);
 	mysqlLog = CreateLog("logi/mysql", ALL, true);
+	moneyLog = CreateLog("logi/money", ALL, false);
+	errorLog = CreateLog("logi/error", ERROR, true);
 
 	//old
 	admindutyLog = CreateLog("logi/adminduty", ALL, false);
-	admindutyMaszLog = CreateLog("logi/admindutymasz", ALL, false);
 }
 
 hook OnGameModeExit()
@@ -64,8 +65,10 @@ hook OnGameModeExit()
 	DestroyLog(damageLog);
 	DestroyLog(connectLog);
 	DestroyLog(mysqlLog);
+	DestroyLog(moneyLog);
+	DestroyLog(errorLog);
+
 	DestroyLog(admindutyLog);
-	DestroyLog(admindutyMaszLog);
 }
 
 //end

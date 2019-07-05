@@ -30,7 +30,6 @@
 
 YCMD:zmiennick(playerid, params[], help)
 {
-	new string[128];
 	new sendername[MAX_PLAYER_NAME];
 
 	if (PlayerInfo[playerid][pLevel] >= 3)
@@ -53,9 +52,8 @@ YCMD:zmiennick(playerid, params[], help)
 				{
                     if(ChangePlayerName(playerid, params))
                     {
-						format(string, sizeof(string), "Gracz %s zmieni³ sobie nick na %s", sendername, params); 
-                    	SendClientMessageToAll(COLOR_LIGHTRED, string);
-                    	Log(nickLog, INFO, "{Player: %s[%d]} zmieni³ nick na: %s",sendername,PlayerInfo[playerid][pUID],params);
+                    	SendClientMessageToAll(COLOR_LIGHTRED, sprintf("%s[%d] zmieni˜ sobie nick - Nowy nick: %s", sendername,PlayerInfo[playerid][pUID],params));
+                    	Log(nickLog, INFO, "{Player: %s[%d]} zmieni³ nick na: %s", sendername, PlayerInfo[playerid][pUID], params);
 
 						ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Zmiana nicku", "W³aœnie zmieni³eœ nick. Nastêpuj¹ce elementy zosta³y wyzerowane:\n\nPraca\nFrakcja\nWanted Level\nRodzina\nLider\nRanga\nSkin\nZaufany Gracz\n\n\nPamiêtaj, ¿e ka¿da zmiana nicku jest na wagê z³ota wiêc nie trwoñ ich pochopnie!\nJe¿eli dosz³o do b³êdnej zmiany zg³oœ ten fakt prêdko na forum w panelu strat!\nPamiêtaj: nowa postaæ = nowe ¿ycie.", "Dalej", "");
                     }

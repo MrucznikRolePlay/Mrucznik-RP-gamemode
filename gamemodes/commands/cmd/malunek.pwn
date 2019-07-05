@@ -76,7 +76,7 @@ YCMD:malunek(playerid, params[], help)
                                             SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                             format(string, sizeof(string),"* Mechanik %s wyci¹ga sprey i tworzy malunek na %s.", sendername, VehicleNames[model-400]);
                                             ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                            DajKase(playerid, -20000);
+                                            ZabierzKase(playerid, 20000);
                                             format(string, sizeof(string), "~r~-$%d", 20000);
                                             GameTextForPlayer(playerid, string, 5000, 1);
                                             ChangeVehiclePaintjob(pojazd,malunek);

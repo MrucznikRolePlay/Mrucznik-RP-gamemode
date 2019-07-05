@@ -61,7 +61,7 @@ YCMD:sprzedajalkohol(playerid, params[], help)
 						format(string, sizeof(string), "* Gracz %s sprzeda³ tobie 5 Piw 'Mruczny Gul'.",sendername);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 						PlayerInfo[giveplayerid][pPiwo] = 5;
-						DajKase(playerid, -40);
+						ZabierzKase(playerid, 40);
 						return 1;
 					}
 					else if(strcmp(x_nr,"wino",true) == 0)
@@ -71,7 +71,7 @@ YCMD:sprzedajalkohol(playerid, params[], help)
 						format(string, sizeof(string), "* Gracz %s sprzeda³ tobie 5 Win 'Komandos'.",sendername);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 						PlayerInfo[giveplayerid][pWino] = 5;
-						DajKase(playerid, -50);
+						ZabierzKase(playerid, 50);
 						return 1;
 					}
 					else if(strcmp(x_nr,"sprunk",true) == 0)
@@ -81,7 +81,7 @@ YCMD:sprzedajalkohol(playerid, params[], help)
 						format(string, sizeof(string), "* Gracz %s sprzeda³ tobie 5 Sprunków.",sendername);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 						PlayerInfo[giveplayerid][pSprunk] = 5;
-						DajKase(playerid, -30);
+						ZabierzKase(playerid, 30);
 						return 1;
 					}
 					else if(strcmp(x_nr,"cygaro",true) == 0)
@@ -91,7 +91,7 @@ YCMD:sprzedajalkohol(playerid, params[], help)
 						format(string, sizeof(string), "* Gracz %s sprzeda³ tobie paczkê 5 cygar kolumbijskich.",sendername);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 						PlayerInfo[giveplayerid][pCygaro] = 5;
-						DajKase(playerid, -75);
+						ZabierzKase(playerid, 75);
 						return 1;
 					}
 				}
