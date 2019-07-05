@@ -421,7 +421,7 @@ public MruMySQL_LoadAcocount(playerid)
 	if(!MYSQL_ON) return false;
 
 	new lStr[1024], id=0;
-	
+
     lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `JailTime`, `Materials`,`Drugs`, `Lider`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
 
     format(lStr, 1024, "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
@@ -615,6 +615,30 @@ public MruMySQL_LoadAcocount(playerid)
 
 	loadKamiPos(playerid);
 
+	//Wczytaj personalizacje
+	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `newbie`";
+	format(lStr, 1024, "SELECT %s FROM `mru_pers' WHERE `pUID'=%d", lStr, PlayerInfo[playerid][pUID]);
+	mysql_query(lStr); 
+	mysql_store_result(); 
+	if(mysql_num_rows())
+	{
+		mysql_fetch_row_format(lStr, "|"); 
+		mysql_free_result();
+		id++; 
+		sscanf(lStr, "p<|>dddddddddddd", 
+		PlayerPersonalization[playerid][PERS_KB],
+		PlayerPersonalization[playerid][PERS_AD],
+		PlayerPersonalization[playerid][PERS_LICZNIK],
+		PlayerPersonalization[playerid][PERS_FINFO],
+		PlayerPersonalization[playerid][PERS_FAMINFO],
+		PlayerPersonalization[playerid][PERS_NICKNAMES],
+		PlayerPersonalization[playerid][PERS_CB],
+		PlayerPersonalization[playerid][PERS_REPORT],
+		PlayerPersonalization[playerid][WARNDEATH],
+		PlayerPersonalization[playerid][PERS_KARYTXD],
+		PlayerPersonalization[playerid][PERS_NEWNICK],
+		PlayerPersonalization[playerid][PERS_NEWBIE]); 
+	}
 	//legal
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_legal` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
 	new DBResult:db_result;
