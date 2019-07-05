@@ -101,7 +101,6 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
-#include "system\actors.pwn"
 
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"

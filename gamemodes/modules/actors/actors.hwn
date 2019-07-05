@@ -22,9 +22,24 @@
 //
 
 //-----------------<[ Zmienne: ]>-------------------
-
+new actorUID[ACTORS_ON_WORLD];
+new valActor; 
 //------------------<[ Enumy: ]>--------------------
-
+enum eActors
+{
+	a_Skin,
+	a_Name[MAX_PLAYER_NAME],
+	Float:a_posX,
+	Float:a_posY,
+	Float:a_posZ,
+	Float:a_posR,
+	a_Invulnerable,
+	Float:a_StreamDistance,
+	a_VW,
+	a_INT,
+	a_Player
+};
+new	Float:Actors[ACTORS_ON_WORLD][eActors];
 //------------------<[ Forwardy: ]>--------------------
 
 //end
