@@ -1990,8 +1990,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[124]; 
 			switch(listitem)
 			{
-				//(playerid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync)
-				//(actorpID, alib[], aname[], Float:fdelt, loop, lockx, locky, freeze, time)
 				case 0: 
 				{
 				//	SetActorAnimationEx(actorpID, "COP_AMBIENT", "Coplook_loop",  1, 1, 1);
