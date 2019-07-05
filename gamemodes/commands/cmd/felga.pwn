@@ -74,7 +74,7 @@ YCMD:felga(playerid, params[], help)
                                         SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe felgi w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                         ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                        DajKase(playerid, -15000);
+                                        ZabierzKase(playerid, 15000);
                                         format(string, sizeof(string), "~r~-$%d", 15000);
                                         GameTextForPlayer(playerid, string, 5000, 1);
                                         PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);

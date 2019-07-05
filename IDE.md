@@ -30,7 +30,7 @@ Aby automatycznie zbudować skrypt mrucznika został dodany plik .vscode/tasks.j
 Budowanie uruchamiamy skrótem *CTRL+SHIFT+B*
 
 ### Kodowanie plików
-Aby w plikach pawn poprawnie kodowane były polskie znaki, została dodana konfiguracja w pliku .vscode/settings.json
+Aby w plikach pawn poprawnie kodowane były polskie znaki, należy otworzyć plik `%APPDATA\Code\User\settings.json` a następnie dodać następujące ustawienie:
 ```json
     "[pawn]": {
         "files.encoding": "windows1250"

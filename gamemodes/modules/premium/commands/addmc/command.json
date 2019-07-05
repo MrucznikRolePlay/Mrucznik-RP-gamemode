@@ -1,0 +1,24 @@
+{
+    "name": "addmc",
+    "description": "Komenda dodaj¹ca graczowi MC'ków.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "dodajmc"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "value",
+            "description": "mrucznik coiny"
+        }
+    ],
+    "date": "02.07.2019"
+}

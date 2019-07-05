@@ -43,7 +43,7 @@ YCMD:app(playerid, params[], help) {
     SendRadioMessage(1, COLOR_PANICRED, string);
     SendRadioMessage(2, COLOR_PANICRED, string);
     SendRadioMessage(3, COLOR_PANICRED, string);
-    DajKase(playerid, -20000);
+    ZabierzKase(playerid, 20000);
     DajKase(ofertaod, 10000);
     SetPVarInt(playerid, "pozwolenie-oferuje", 999);
     Sejf_Add(PlayerInfo[ofertaod][pMember], 10000);

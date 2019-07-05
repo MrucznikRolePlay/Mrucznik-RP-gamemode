@@ -30,7 +30,7 @@
 
 YCMD:gps(playerid, params[], help)
 {
-	if(IsACop(playerid) || IsAMedyk(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD)
+	if(IsACop(playerid) || IsAMedyk(playerid) || GetPlayerFraction(playerid) == FRAC_BOR)
 	{
 		if(OnDuty[playerid] == 1 || JobDuty[playerid] == 1)
 		{
@@ -41,7 +41,7 @@ YCMD:gps(playerid, params[], help)
 			{
 				foreach(new i : Player)
 				{
-					if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+					if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
 						DisablePlayerCheckpoint(i);
 				}
 			}
@@ -54,7 +54,7 @@ YCMD:gps(playerid, params[], help)
 			SendRadioMessage(3, COLOR_YELLOW2, string);
 			SendRadioMessage(4, COLOR_YELLOW2, string);
 			//SendRadioMessage(9, COLOR_YELLOW2, string);
-            SendRadioMessage(FRAC_LSFD, COLOR_YELLOW2, string);
+			SendRadioMessage(FRAC_BOR, COLOR_YELLOW2, string); 
 		}
 		else
 		{

@@ -85,6 +85,19 @@ public PizzaJobTimer01(playerid)
 	}
 	return 1;
 }
+forward ActorsFix(playerid);
+public ActorsFix(playerid)
+{
+	new playerVW = GetPlayerVirtualWorld(playerid); 
+	new playerINT = GetPlayerInterior(playerid); 
+	RepairActors(playerVW, playerINT);
+	if(PlayerInfo[playerid][pAdmin] > 1)
+	{
+		sendTipMessage(playerid, "Reset Aktorów - UDANY"); 
+	}
+	KillTimer(fixActorsTimer[playerid]); 
+	return 1;
+}
 //Naprawianie timer
 public Naprawa(playerid)
 {
@@ -134,6 +147,60 @@ public Naprawa(playerid)
     return 1;
 }
 
+//===============[VINYL CLUB]=======
+forward textVinylT();
+public textVinylT(){
+	new Float:Pos[3];
+	GetDynamicObjectPos(text_Vinyl, Pos[0], Pos[1], Pos[2]);
+	if(Pos[2] == -21.528980){
+		MoveDynamicObject(text_Vinyl, 817.176879, -1386.975463, -23.0, 1);
+	}else{
+		MoveDynamicObject(text_Vinyl, 817.176879, -1386.975463, -21.528980, 1);
+	}
+	return 1;
+}
+forward FreezePlayer(playerid);
+public FreezePlayer(playerid){
+	TogglePlayerControllable(playerid, 1);
+	return 1;
+}
+
+forward SetTimeAndWeather (playerid);
+public SetTimeAndWeather(playerid)
+{
+	new weatherID, timeVal; 
+	weatherID = GetPVarInt(playerid, "WeatherToSet"); 
+	timeVal = GetPVarInt(playerid, "TimeToSet");
+	SetPlayerTime(playerid, timeVal, 0);
+	SetPlayerWeather(playerid, weatherID);
+	sendTipMessage(playerid, "Pomyœlnie ustalono pogodê i czas dla VW"); 
+	KillTimer(SetTAWForPlayer[playerid]); 
+	return 1;
+}
+
+
+//KONIEC
+forward odczekaj15sec(playerid);
+public odczekaj15sec(playerid)
+{
+	timerTime[playerid]++; 
+	if(timerTime[playerid] == 3)
+	{
+		if(GetPVarInt(playerid, "WhatToDo") == 1)
+		{
+			timerTime[playerid] = 0;
+			SetPVarInt(playerid, "CanDoIt", 0); 
+			KillTimer(odczekajTimer[playerid]);
+		}
+		else if(GetPVarInt(playerid, "WhatToDo") == 2)
+		{
+			timerTime[playerid] = 0;
+			SetPVarInt(playerid, "CanDoIt", 0); 
+			KillTimer(odczekajTimer[playerid]);
+		}
+	}
+	return 1; 
+}
 forward glosuj_admin_ankieta();
 public glosuj_admin_ankieta()
 {
@@ -934,7 +1001,6 @@ public MainTimer()
     else
         TICKS_30Min++;
 }
-
 //TODO: mysql asynchroniczny
 forward SaveMyAccountTimer(playerid);
 public SaveMyAccountTimer(playerid)
@@ -984,7 +1050,7 @@ public Spectator()
 		GetPlayerPos(PDGPS, x, y, z);
 		foreach(new i : Player)
 		{
-			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
+			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
 				SetPlayerCheckpoint(i, x, y, z, 4.0);
 		}
 	}
@@ -1016,7 +1082,7 @@ public Spectator()
         //Vinyl audio check
         if(!GetPVarInt(i, "VINYL-stream"))
         {
-            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3], VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && GetPlayerVirtualWorld(i) == floatround(VinylAudioPos[4]))
+            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3], VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && (GetPlayerVirtualWorld(i) == 71 || GetPlayerVirtualWorld(i) == 72))
             {
                 SetPVarInt(i, "VINYL-stream", 1);
                 PlayAudioStreamForPlayer(i, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
@@ -2080,7 +2146,7 @@ public CustomPickups()
 				    case 1:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						DajKase(i, - 5000);
+						ZabierzKase(i, 5000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
@@ -2091,7 +2157,7 @@ public CustomPickups()
 					case 2:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						DajKase(i, - 5000);
+						ZabierzKase(i, 5000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2103,7 +2169,7 @@ public CustomPickups()
 					case 3:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1);
-						DajKase(i, - 6000);
+						ZabierzKase(i, 6000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2116,7 +2182,7 @@ public CustomPickups()
 					case 4:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1);
-						DajKase(i, - 6000);
+						ZabierzKase(i, 6000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2129,7 +2195,7 @@ public CustomPickups()
 					case 5:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						DajKase(i, - 8000);
+						ZabierzKase(i, 8000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2143,7 +2209,7 @@ public CustomPickups()
 					case 6:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						DajKase(i, - 8000);
+						ZabierzKase(i, 8000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2157,7 +2223,7 @@ public CustomPickups()
 					case 7:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						DajKase(i, - 8500);
+						ZabierzKase(i, 8500);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2171,7 +2237,7 @@ public CustomPickups()
 					case 8:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						DajKase(i, - 8500);
+						ZabierzKase(i, 8500);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -2185,7 +2251,7 @@ public CustomPickups()
 					case 9:
 					{
 						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
-						DajKase(i, - 10000);
+						ZabierzKase(i, 10000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
 						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
@@ -2199,7 +2265,7 @@ public CustomPickups()
 					case 10:
 					{
 						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
-						DajKase(i, - 10000);
+						ZabierzKase(i, 10000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
 						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
@@ -3344,7 +3410,7 @@ public Fillup()
 				FillUp = FillUp * 120;
 				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUp);
 				SendClientMessage(i, COLOR_LIGHTBLUE,string);
-				DajKase(i, - FillUp);
+				ZabierzKase(i, FillUp);
 				Refueling[i] = 0;
 			}
 			else

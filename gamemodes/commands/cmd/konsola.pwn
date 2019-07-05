@@ -32,8 +32,8 @@ YCMD:konsola(playerid, params[], help)
 {
     if(GetPlayerOrg(playerid) == FAMILY_VINYL || GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pRank] >= 4)
     {
-        if(!IsPlayerInRangeOfPoint(playerid, 4.0, 819.6357,-1351.2813,25.3)) return 1;
-        if(PlayerInfo[playerid][pRank] < 1) return sendErrorMessage(playerid, "Potrzebujesz rangi wiêkszej od 1!");
+        if(!IsPlayerInRangeOfPoint(playerid, 5.0, 816.3592,-1384.7954,-20.1095)) return 1;
+        if(PlayerInfo[playerid][pRank] < 3) return sendErrorMessage(playerid, "Tylko dla stopni od 4 wzwy¿!!");
         ShowPlayerDialogEx(playerid, DIALOG_KONSOLA_VINYL, DIALOG_STYLE_INPUT, "Konsola DJ'a", "Tutaj mo¿esz zmieniæ muzykê graj¹c¹ w klubie.\nWprowadŸ poni¿ej adres URL.", "Ustaw", "WyjdŸ");
     }
     return 1;

@@ -133,7 +133,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(kaska[playerid] < 30000) return sendErrorMessage(playerid, "Nie masz tyle kasy");
 		SetPlayerArmour(playerid, 90);
 		SetPlayerHealth(playerid, 100);
-		DajKase(playerid, -30000);
+		ZabierzKase(playerid, 30000);
 		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i ¿ycie");
 	}	
 	else if(dialogid == 6999)//vinyl panel
@@ -357,80 +357,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(response)
 		{
-			new string[128];
-			switch(listitem)//Cytrynowy-sza³\t10.000$\nW³adca procêtów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$
+			switch(listitem)
 			{
 				case 0:
 				{
-					if(kaska[playerid] >= 10000)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze Cytrynowy Sza³ i zaczyna go piæ", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 2000);
-						SetPlayerSpecialAction(playerid, 22);
-						ZabierzKase(playerid, 10000);
-						Sejf_Add(FRAC_SN, 10000);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName1, drinkCost1, 2000, 22);
 				}
 				case 1:
 				{
-					if(kaska[playerid] >= 15000)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze W³adce procentów i zaczyna go piæ", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 2500);
-						SetPlayerSpecialAction(playerid, 22);
-						ZabierzKase(playerid, 15000);
-						Sejf_Add(FRAC_SN, 15000);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName2, drinkCost2, 2500, 22);
 				}
 				case 2:
 				{
-					if(kaska[playerid] >= 20000)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze Napój Cotty (chce byæ jak L.Cotta) i zaczyna go piæ", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 4000);
-						SetPlayerSpecialAction(playerid, 20);
-						ZabierzKase(playerid, 20000);
-						Sejf_Add(FRAC_SN, 20000);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName3, drinkCost3, 4000, 20);
 				}
 				case 3:
 				{
-					if(kaska[playerid] >= 30000)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze twoja stara i zaczyna go piæ jak kozak", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 5000);
-						SetPlayerSpecialAction(playerid, 20);
-						ZabierzKase(playerid, 30000);
-						Sejf_Add(FRAC_SN, 30000);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName4, drinkCost4, 5000, 20);
 				}
 				
 			}
@@ -1513,7 +1456,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         foreach(new i : Player)
         {
-            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3],VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && GetPlayerVirtualWorld(i) == floatround(VinylAudioPos[4]))
+            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3],VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && (GetPlayerVirtualWorld(i) == 71 || GetPlayerVirtualWorld(i) == 72))
             {
                 PlayAudioStreamForPlayer(i, inputtext,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             }
@@ -1950,6 +1893,85 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
+	else if(dialogid == 1215)
+	{
+		if(response)
+		{
+			new actorpID = GetPVarInt(playerid, "actorIDChoice");
+			new string[124]; 
+			switch(listitem)
+			{
+				case 0: 
+				{
+					ApplyDynamicActorAnimation(actorUID[actorpID], "COP_AMBIENT", "Coplook_loop", 4.1,  1, 1, 1, 0, 0);
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 1:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "RAPPING","RAP_C_Loop",  1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 2:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "BD_FIRE","BD_Panic_Loop", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 3:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "PED","IDLE_CHAT", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 4:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "DANCING","bd_clap1", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 5:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "DANCING","DAN_Loop_A", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 6:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "JST_BUISNESS","girl_02", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 7:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "ON_LOOKERS","Pointup_in", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 8:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "ON_LOOKERS","point_loop", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 9:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "PAULNMAC","Piss_loop", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 10:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "SHOP","Smoke_RYD", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 11:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "SMOKING","M_smk_drag", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 12:
+				{
+					ClearDynamicActorAnimations(actorUID[actorpID]);
+					format(string, sizeof(string), "Wy³¹czy³eœ animacje dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s wyczyœci³ animacje dla actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+			}
+		}
+	}
 	else if(dialogid == iddialog[playerid])
 	{
 		if(dialogid == 1)
@@ -2092,67 +2114,102 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	        {
     	            case 0://parking
     	            {
+						if(levelLock[FRAC_SN][0] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPosEx(playerid,288.0914,-1609.7465,17.9994);
-    	                new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    	            	SetServerWeatherAndTime(playerid); 
+						SetPLocal(playerid, PLOCAL_DEFAULT);
     	            }
-    	            case 1://recepcja
+					case 1://wejscie do budynku
+					{
+						if(levelLock[FRAC_SN][1] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+						SetPlayerVirtualWorld(playerid, 0);
+						SetPlayerInterior(playerid, 0); 
+						SetServerWeatherAndTime(playerid); 
+						TogglePlayerControllable(playerid, 0);
+						Wchodzenie(playerid); 
+						SetPlayerPos(playerid, 287.7476,-1609.9395,33.0723); 
+						SetPLocal(playerid, PLOCAL_DEFAULT);
+					}
+    	            case 2://recepcja
     	            {
-    	                SetPlayerVirtualWorld(playerid,20);
+						if(levelLock[FRAC_SN][2] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+    	                SetPlayerVirtualWorld(playerid,14);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,666.5681, -1353.2101, 29.3031);
-    				    new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    				    SetPlayerPosEx(playerid, 292.0818,-1610.0715,124.7512);
+    				    SetInteriorTimeAndWeather(playerid); 
+						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone", 5000, 1);
+						SetPLocal(playerid, PLOCAL_ORG_SN);
     	            }
-    	            case 2://studio Victim
+    	            case 3://studia
     	            {
-    	                SetPlayerVirtualWorld(playerid,21);
+						if(levelLock[FRAC_SN][3] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+    	                SetPlayerVirtualWorld(playerid,16);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,661.8192, -1344.7736, 29.4743);
-    				    SetPlayerTime(playerid,1,0);
+    				    SetPlayerPosEx(playerid,296.9033,-1598.3610,117.0619);
+						SetInteriorTimeAndWeather(playerid); 
+						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
+						SetPLocal(playerid, PLOCAL_ORG_SN);
     	            }
-    	            case 3://drukarnia & studio nagran
+    	            case 4://Akademia
     	            {
-    	                SetPlayerVirtualWorld(playerid,22);
+						if(levelLock[FRAC_SN][4] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+    	                SetPlayerVirtualWorld(playerid,17);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,655.7669, -1376.8688, 28.6743);
-    				    new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
-    	            }
-    	            case 4://sale konferencyjne
-    	            {
-    	                SetPlayerVirtualWorld(playerid,23);
-    				    TogglePlayerControllable(playerid,0);
-                        Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,737.4208, -1366.9336, 34.0796);
-    				    new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    				    SetPlayerPosEx(playerid,295.1328,-1609.4705,115.6818);
+    				    SetInteriorTimeAndWeather(playerid); 
+						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
+						SetPLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 5:
     	            {
-    	                SetPlayerVirtualWorld(playerid,24);
+						if(levelLock[FRAC_SN][5] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+    	                SetPlayerVirtualWorld(playerid,18);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,663.6946, -1374.4166, 27.9148);
-    				    new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    				    SetPlayerPosEx(playerid,290.7577,-1604.3273,134.6113);
+    				    SetInteriorTimeAndWeather(playerid); 
+						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
+						SetPLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 6://dach
     	            {
+						if(levelLock[FRAC_SN][6] == 1)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
     	                SetPlayerVirtualWorld(playerid,0);
-    	                SetPlayerPosEx(playerid,297.7128,-1612.1783,114.4219);
-    	                new Hour, Minute, Second;
-    					gettime(Hour, Minute, Second);
-    					SetPlayerTime(playerid,Hour,Minute);
+    	                SetPlayerPosEx(playerid,285.8397,-1596.4153,114.5687);
+    	                SetServerWeatherAndTime(playerid);
+						SetPLocal(playerid, PLOCAL_DEFAULT);
     	            }
     	        }
     	    }
@@ -2564,13 +2621,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new payout = 500 - price;
 						        format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 						    }
 						    else
 						    {
 						        format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								DajKase(playerid,-500);
+								ZabierzKase(playerid, 500);
 						    }
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							new randphone = 10000 + random(89999);//minimum 1000  max 9999
@@ -2591,13 +2648,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 7500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 7500 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-7500);
+							    ZabierzKase(playerid, 7500);
 								format(string, sizeof(string), "~r~-$%d", 1000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2686,13 +2743,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 5000 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 5000 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-5000);
+							    ZabierzKase(playerid, 5000);
 								format(string, sizeof(string), "~r~-$%d", 5000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2713,13 +2770,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 500 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-500);
+							    ZabierzKase(playerid, 500);
 								format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2734,7 +2791,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(kaska[playerid] > 5000)
 						{
-						    DajKase(playerid,-5000);
+						    ZabierzKase(playerid, 5000);
 						    GameTextForPlayer(playerid, "~r~-$5000", 5000, 1);
 							PlayerInfo[playerid][pGun9] = 43;
 							PlayerInfo[playerid][pAmmo9] += 100;
@@ -2765,7 +2822,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 							else
 							{
-							    DajKase(playerid,-5000);
+							    ZabierzKase(playerid,5000);
 								format(string, sizeof(string), "~r~-$%d", 5000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2786,13 +2843,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 50 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 50 - price;
-								DajKase(playerid,- payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid,-50);
+							    ZabierzKase(playerid, 50);
 								format(string, sizeof(string), "~r~-$%d", 50);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2812,13 +2869,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 2500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 2500 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 2500);
+							    ZabierzKase(playerid, 2500);
 								format(string, sizeof(string), "~r~-$%d", 2500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2843,18 +2900,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 20 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 20 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 								ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsi¹¿ka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrêdkoœciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJD");
 							}
 							else
 							{
-							    DajKase(playerid, - 20);
+							    ZabierzKase(playerid, 20);
 								format(string, sizeof(string), "~r~-$%d", 20);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
-						    DajKase(playerid, - 20);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Piwo 'Mruczny Gul; zakupione.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
@@ -2879,17 +2935,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 25 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 25 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 25);
+							    ZabierzKase(playerid, 25);
 								format(string, sizeof(string), "~r~-$%d", 25);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
-						    DajKase(playerid, - 25);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Wino 'Komandos zakupione'.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
@@ -2914,13 +2969,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 15 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 15 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 15);
+							    ZabierzKase(playerid, 15);
 								format(string, sizeof(string), "~r~-$%d", 15);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2942,13 +2997,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 2500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 2500 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 2500);
+							    ZabierzKase(playerid, 2500);
 								format(string, sizeof(string), "~r~-$%d", 2500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -2973,13 +3028,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								new skill = 200 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
 								new payout = 200 - price;
-								DajKase(playerid, - payout);
+								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    DajKase(playerid, - 200);
+							    ZabierzKase(playerid, 200);
 								format(string, sizeof(string), "~r~-$%d", 200);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
@@ -4444,7 +4499,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -10000);
+							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4511,7 +4566,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -10000);
+							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4580,7 +4635,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -10000);
+							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4640,7 +4695,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							DajKase(playerid, -10000);
+							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 		     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4676,7 +4731,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						DajKase(playerid, -10000);
+						ZabierzKase(playerid, 10000);
 						format(string, sizeof(string), "~r~-$%d", 10000);
 						GameTextForPlayer(playerid, string, 5000, 1);
 	     				PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -4910,7 +4965,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    {
 						    SetPlayerArmour(playerid, 90);
 							SetPlayerHealth(playerid, 100);
-							DajKase(playerid, -5000);
+							ZabierzKase(playerid, 5000);
 							SendClientMessage(playerid, COLOR_WHITE, " **Zaplaciles 5000$ za kamizelke i ¿ycie");
 						}
 						else
@@ -4935,7 +4990,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 10, 1);
 					        PlayerInfo[playerid][pGun10] = 10;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -25000);
+							ZabierzKase(playerid, 25000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ wibrator 'Purpurowy Big Jim' za 25 000$");
 						}
@@ -4951,7 +5006,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 11, 1);
 					        PlayerInfo[playerid][pGun10] = 11;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -7500);
+							ZabierzKase(playerid, 7500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ wibrator 'Analny Penetrator' za 7500$");
 						}
@@ -4967,7 +5022,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 12, 1);
 					        PlayerInfo[playerid][pGun10] = 12;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -20000);
+							ZabierzKase(playerid, 20000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ wibrator 'Bia³y Intruz' za 20 000$");
 						}
@@ -4983,7 +5038,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 13, 1);
 					        PlayerInfo[playerid][pGun10] = 13;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -12000);
+							ZabierzKase(playerid, 12000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ wibrator 'Srebrny Masturbator' za 12 000$");
 						}
@@ -4999,7 +5054,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 15, 1);
 					        PlayerInfo[playerid][pGun10] = 15;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Laskê sado-maso za 1500$");
 						}
@@ -5015,7 +5070,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        GivePlayerWeapon(playerid, 14, 1);
 					        PlayerInfo[playerid][pGun10] = 14;
 							PlayerInfo[playerid][pAmmo10] = 1;
-							DajKase(playerid, -500);
+							ZabierzKase(playerid, 500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kwiaty za 500$");
 						}
@@ -5030,7 +5085,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		  	 			{
 							Condom[playerid] ++;
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							DajKase(playerid, -50);
+							ZabierzKase(playerid, 50);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ paczkê prezerwatyw za 50$");
 						}
 						else
@@ -5177,7 +5232,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 2, 1);
 	                     	PlayerInfo[playerid][pGun1] = 2;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -400);
+	                     	ZabierzKase(playerid, 400);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kij golfowy za 400$");
 		                }
 		                else
@@ -5192,7 +5247,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 3, 1);
 	                     	PlayerInfo[playerid][pGun1] = 3;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -300);
+	                     	ZabierzKase(playerid, 300);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ pa³kê PD za 300$");
 		                }
 		                else
@@ -5207,7 +5262,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 5, 1);
 	                     	PlayerInfo[playerid][pGun1] = 5;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -700);
+	                     	ZabierzKase(playerid, 700);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ bejzbola za 700$");
 		                }
 		                else
@@ -5222,7 +5277,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 6, 1);
 	                     	PlayerInfo[playerid][pGun1] = 6;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -300);
+	                     	ZabierzKase(playerid, 300);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ ³opatê za 300$");
 		                }
 		                else
@@ -5237,7 +5292,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 7, 1);
 	                     	PlayerInfo[playerid][pGun1] = 7;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
-	                     	DajKase(playerid, -100);
+	                     	ZabierzKase(playerid, 100);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kij bilardowy za 100$");
 		                }
 		                else
@@ -5252,7 +5307,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 14, 1);
 	                     	PlayerInfo[playerid][pGun10] = 14;
 	                     	PlayerInfo[playerid][pAmmo10] = 1;
-	                     	DajKase(playerid, -200);
+	                     	ZabierzKase(playerid, 200);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kwiaty za 200$");
 		                }
 		                else
@@ -5267,7 +5322,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 15, 1);
 	                     	PlayerInfo[playerid][pGun10] = 15;
 	                     	PlayerInfo[playerid][pAmmo10] = 1;
-	                     	DajKase(playerid, -600);
+	                     	ZabierzKase(playerid, 600);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ laska za 600$");
 		                }
 		                else
@@ -5282,7 +5337,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 1, 1);
 	                     	PlayerInfo[playerid][pGun0] = 1;
 	                     	PlayerInfo[playerid][pAmmo0] = 1;
-	                     	DajKase(playerid, -50);
+	                     	ZabierzKase(playerid, 50);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kastet za 50$");
 		                }
 		                else
@@ -5310,7 +5365,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	GivePlayerWeapon(playerid, 46, 1);
 	                     	PlayerInfo[playerid][pGun11] = 46;
 	                     	PlayerInfo[playerid][pAmmo11] = 1;
-	                     	DajKase(playerid, -500);
+	                     	ZabierzKase(playerid, 500);
 		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ spadochron za 500$");
 		                }
 		                else
@@ -5896,7 +5951,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         Car_Unspawn(vehicleid);
                         Car_Spawn(IloscAut[playerid]);
 
-                        DajKase(playerid, -5000);
+                        ZabierzKase(playerid, 5000);
 				        SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta³ zrespawnowany. Koszt: {FF0000}5000$");
 					}
 					else
@@ -5928,7 +5983,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  					{
                         Car_Unspawn(vehicleid);
 
-                        DajKase(playerid, -5000);
+                        ZabierzKase(playerid, 5000);
 				        SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta³ unspawnowany. Koszt: {FF0000}5000$");
 					}
 					else
@@ -7197,7 +7252,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 						}
 					}
 					case 9:
@@ -7207,7 +7262,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ChangeVehicleColor(veh, KolorPierwszy[playerid], 42);
 							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 						}
 					}
 					case 10:
@@ -7217,7 +7272,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ChangeVehicleColor(veh, KolorPierwszy[playerid], 16);
 							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 						}
 					}
 					case 11:
@@ -7227,7 +7282,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ChangeVehicleColor(veh, KolorPierwszy[playerid], 20);
 							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
 							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							DajKase(playerid, -1500);
+							ZabierzKase(playerid, 1500);
 						}
 					}
 					case 12:
@@ -7292,7 +7347,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
 						MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
 						SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-						DajKase(playerid, -1500);
+						ZabierzKase(playerid, 1500);
 					}
 				}
 				else
@@ -7797,7 +7852,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 60.000.000$");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 60000000$", GetPlayerLogName(playerid));
-							DajKase(playerid, -60000000);
+							ZabierzKase(playerid, 60000000);
 						}
 						else
 						{
@@ -7812,8 +7867,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktów respektu");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 25000000$ i 180 punktów respektu", GetPlayerLogName(playerid));
-							PlayerInfo[playerid][pZmienilNick] --;
-							DajKase(playerid, -25000000);
+							PlayerInfo[playerid][pZmienilNick] ++;
+							ZabierzKase(playerid, 25000000);
 							PlayerInfo[playerid][pExp] -=180;
 						}
 						else
@@ -7829,7 +7884,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 340 punktów respektu", GetPlayerLogName(playerid));
-							PlayerInfo[playerid][pZmienilNick] --;
+							PlayerInfo[playerid][pZmienilNick] ++;
 							PlayerInfo[playerid][pExp] -=340;
 						}
 						else
@@ -9551,7 +9606,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        if(kaska[playerid] != 0 && kaska[playerid] >= 1000000)
 			        {
 			            Dom[dom][hZbrojownia] = 1;
-			            DajKase(playerid, -1000000);
+			            ZabierzKase(playerid, 1000000);
 			            SendClientMessage(playerid, COLOR_P@, "Gratulacje, kupi³eœ zbrojownie za 1 000 000$, skonfiguruj teraz co chcesz w niej przechowywaæ! Aby jej u¿yæ wpisz /zbrojownia we wnêtrzu swojego domu");
 						DialogZbrojowni(playerid);
 						Log(payLog, INFO, "%s kupi³ do domu %s zbrojownie za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom));
@@ -9644,7 +9699,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 	      			if(kaska[playerid] != 0 && kaska[playerid] >= 100000)
 		        	{
-				        DajKase(playerid, -100000);
+				        ZabierzKase(playerid, 100000);
 						Dom[dom][hApteczka] = 1;
 						//PlayerInfo[playerid][pZiolo] -= 10;
 						PlayerInfo[playerid][pDrugs] -= 10;
@@ -9721,7 +9776,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                 	if(kaska[playerid] != 0 && kaska[playerid] >= 10000000)
                 	{
-                	    DajKase(playerid, -10000000);
+                	    ZabierzKase(playerid, 10000000);
 						Dom[dom][hLadowisko] = 20;
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ L¹dowisko za 10 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy 20 metrów od domu");
 						KupowanieDodatkow(playerid, dom);
@@ -9737,7 +9792,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(kaska[playerid] != 0 && kaska[playerid] >= 1000000)
                 	{
-                	    DajKase(playerid, -1000000);
+                	    ZabierzKase(playerid, 1000000);
 						Dom[dom][hLadowisko] += 20;
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ ulepszenie l¹dowiska za 1 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy o 20 metrów wiêcej ni¿ poprzednio.");
 						KupowanieDodatkow(playerid, dom);
@@ -10445,7 +10500,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 1000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania kastetu za 1 000$!");
-							DajKase(playerid, -1000);
+							ZabierzKase(playerid, 1000);
 							Dom[dom][hS_PG0] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10468,7 +10523,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    if(kaska[playerid] >= 1 && kaska[playerid] >= 5000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania spadochronu za 5 000$!");
-							DajKase(playerid, -5000);
+							ZabierzKase(playerid, 5000);
 							Dom[dom][hS_PG11] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10491,7 +10546,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 50000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania sperju, gaœnicy i kamery za 50 000$!");
-							DajKase(playerid, -50000);
+							ZabierzKase(playerid, 50000);
 							Dom[dom][hS_PG9] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10514,7 +10569,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 60000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania wibratorów, laski i kwiatów za 60 000$!");
-							DajKase(playerid, -60000);
+							ZabierzKase(playerid, 60000);
 							Dom[dom][hS_PG10] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10537,7 +10592,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 75000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania broni bia³ej za 75 000$!");
-							DajKase(playerid, -75000);
+							ZabierzKase(playerid, 75000);
 							Dom[dom][hS_PG1] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10560,7 +10615,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 250000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania pistoletów za 250 000$!");
-							DajKase(playerid, -250000);
+							ZabierzKase(playerid, 250000);
 							Dom[dom][hS_PG2] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10583,7 +10638,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 450000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania strzelb za 450 000$!");
-							DajKase(playerid, -450000);
+							ZabierzKase(playerid, 450000);
 							Dom[dom][hS_PG3] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10606,7 +10661,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 550000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania pistoletów maszynowych za 550 000$!");
-							DajKase(playerid, -550000);
+							ZabierzKase(playerid, 550000);
 							Dom[dom][hS_PG4] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10629,7 +10684,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    if(kaska[playerid] >= 1 && kaska[playerid] >= 850000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania karabinów szturmowych za 850 000$!");
-							DajKase(playerid, -850000);
+							ZabierzKase(playerid, 850000);
 							Dom[dom][hS_PG5] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10652,7 +10707,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 700000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania snajperek za 700 000$!");
-							DajKase(playerid, -700000);
+							ZabierzKase(playerid, 700000);
 							Dom[dom][hS_PG6] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10675,7 +10730,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 2000000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania broni ciêzkiej za 2 000 000$!");
-							DajKase(playerid, -2000000);
+							ZabierzKase(playerid, 2000000);
 							Dom[dom][hS_PG7] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -10698,7 +10753,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 4000000)
 		                {
 			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa³eœ swoj¹ zbrojownie do przechowywania ³adunków wybuchowych za 4 000 000$!");
-							DajKase(playerid, -4000000);
+							ZabierzKase(playerid, 4000000);
 							Dom[dom][hS_PG8] = 1;
 							DialogZbrojowni(playerid);
 						}
@@ -12958,7 +13013,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18652;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 1://¯ó³ty
 		            {
@@ -12966,7 +13021,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, 0xDAA520FF, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18650;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 2://Zielony
 		            {
@@ -12974,7 +13029,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18649;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 3://Niebieski
 		            {
@@ -12983,7 +13038,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18648;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 
 		            }
 		            case 4://Czerwony
@@ -12993,7 +13048,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_RED, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18647;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 
 		            }
 		            case 5://Ró¿owy
@@ -13002,7 +13057,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_PURPLE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18651;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        DajKase(playerid, -3500000);
+                        ZabierzKase(playerid, 3500000);
 		            }
 		        }
                 Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);
@@ -15329,57 +15384,91 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
 			switch(listitem)
 			{
-			    case 0:
+			    case 0: // archiwum
 				{
-				    if(SadWindap1 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+				 	if(SadWinda[0] == 1)
 					{
-				    	SetPlayerPosEx(playerid, 1327.6746, -1324.7770, 39.9210);
-				    	GameTextForPlayer(playerid, "~r~Hol sadu ~n~ by abram01", 6000, 1);
-				    	SetPlayerVirtualWorld ( playerid, 500 );
-                    	Wchodzenie(playerid);
-                    	SetPlayerWeather(playerid, 3);//Pogoda
-            			SetPlayerTime(playerid, 14, 0);//Czas
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
 					}
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
+    	            SetPlayerVirtualWorld(playerid,10);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1311.5483,-1361.2096,62.8567);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
-				case 1:
+				case 1: // hol 
     			{
-    			    if(SadWindap2 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+					if(SadWinda[1] == 1)
 					{
-						SetPlayerPosEx(playerid, 1289.0969, -1292.7489, 35.9681);
-						GameTextForPlayer(playerid, "~r~Sad Stanu San Andreas ~n~ by abram01", 6000, 1);
-						SetPlayerVirtualWorld (playerid, 501 );
-                    	Wchodzenie(playerid);
-                    	SetPlayerWeather(playerid, 3);//Pogoda
-            			SetPlayerTime(playerid, 14, 0);//Czas
-                    }
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,11);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1305.9991,-1326.1344,52.5659);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
-				case 2:
+				case 2: //Sale Rozpraw
 				{
-				    if(SadWindap3 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+				  	if(SadWinda[2] == 1)
 					{
-				    	SetPlayerPosEx(playerid,1310.3494, -1361.7319, 39.0876);
-				    	GameTextForPlayer(playerid, "~r~Biura urzednikow sadowych ~n~ by abram01", 8000, 1);
-				    	SetPlayerVirtualWorld ( playerid, 502 );
-                    	Wchodzenie(playerid);
-                    	SetPlayerWeather(playerid, 3);//Pogoda
-            			SetPlayerTime(playerid, 14, 0);//Czas
-                    }
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,12);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1309.9982,-1364.2216,59.6271);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
-                case 3:
+                case 3: //Biura
 				{
-				    if(SadWindap4 == 0 || GetPlayerOrg(playerid) == FAMILY_SAD)
+					if(SadWinda[3] == 1)
 					{
-				    	SetPlayerPosEx(playerid,1310.0021, -1319.7189, 35.5984);
-				    	SetPlayerVirtualWorld ( playerid, 0 );
-				    	SetPlayerWeather(playerid, ServerWeather);
-    					SetPlayerTime(playerid, ServerTime, 0);
-                    	Wchodzenie(playerid);
-                    }
-					else sendErrorMessage(playerid, "Ten poziom zosta³ zablokowany przez pracownika S¹du!");
-
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,13);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1310.1989,-1328.8876,82.5859);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
+				}
+				case 4: //Socjal
+				{
+					if(SadWinda[4] == 1)
+					{
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,14);
+    				TogglePlayerControllable(playerid,0);
+                    Wchodzenie(playerid);
+    				SetPlayerPosEx(playerid,1310.2946,-1321.2517,74.6955);
+    				SetInteriorTimeAndWeather(playerid); 
+					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
+				
+				}
+				case 5: //Dach
+				{
+					if(SadWinda[5] == 1)
+					{
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta³ zablokowany przez pracowników s¹du!"); 
+						return 1;
+					}
+    	            SetPlayerVirtualWorld(playerid,0);
+    	            SetPlayerPosEx(playerid,1310.3961,-1319.0530,35.6587);
+    	            new Hour, Minute, Second;
+    				gettime(Hour, Minute, Second);
+    				SetPlayerTime(playerid,Hour,Minute);
+					
+				
 				}
 			}
 		}
@@ -16661,38 +16750,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					for(new i; i<valActor; i++)
-					{
-						if(IsPlayerInRangeOfPoint(playerid, 5.0, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posY]))
-						{
-							new string[124];
-							format(string, sizeof(string), "Pomyœlnie zaznaczono actora %d - %s", i, Actors[i][a_Name]); 
-							sendTipMessage(playerid, string);
-							SetPVarInt(playerid, "pActorID", i); 
-						}
-					}
+					sendTipMessage(playerid, "Dostêpne ju¿ wkrótce"); 
 				}
 				case 1:
 				{
-					if(GetPVarInt(playerid, "pActorID") != 666)
-					{
-						if(GetPlayerInterior(playerid) != 0)
-						{
-							sendErrorMessage(playerid, "Actorów nie mo¿na przenosiæ pomiêdzy interiorami!"); 
-							return 1;
-						}
-						new uidActor = actorUID[GetPVarInt(playerid, "pActorID")], Float:pX, Float:pY, Float:pZ, Float:pR;
-						GetPlayerPos(playerid, pX, pY, pZ);
-						GetPlayerFacingAngle(playerid, pR); 
-						SetDynamicActorFacingAngle(uidActor, pR);
-						SetDynamicActorVirtualWorld(uidActor, GetPlayerVirtualWorld(playerid));
-						SetDynamicActorPos(uidActor, pX, pY+0.2, pZ);
-						sendTipMessage(playerid, "Pomyœlnie przeniesiono do Ciebie actora!"); 
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Najpierw zaznacz aktora!"); 
-					}
+					sendTipMessage(playerid, "Dostêpne ju¿ wkrótce");
 				}
 				case 2:
 				{
@@ -16709,10 +16771,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-	else if(dialogid == 1142)
+	else if(dialogid == DIALOG_EMPTY_SC)
 	{
-		if(!response) return 1;
-		if(response)
+		if(!response)
+		{
+			return 1;
+		}
+		else
 		{
 			return 1;
 		}
@@ -16822,7 +16887,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	//=================[DIALOG ZWROTNY --> Zwraca nas do "Twoje Konto"]=================
 	else if(dialogid == 1074)
 	{
-		if(response)//Je¿eli TAK
+		if(response)
 		{
 			new string[128];
 			new giveplayer[MAX_PLAYER_NAME];
@@ -17298,6 +17363,818 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, inputtext);
+		}
+	}
+	else if(dialogid == D_PERSONALIZE)
+	{
+		if(!response)
+		{
+			sendTipMessage(playerid, "Wyszed³eœ z personalizacji - ustawienia zapisane"); 
+			return 1;
+		}
+		else if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					ShowPersonalization(playerid, 1); 
+				}
+				case 1:
+				{
+					ShowPersonalization(playerid, 2); 
+				}
+				case 2:
+				{
+					if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0)
+					{
+						sendTipMessage(playerid, "Nie jesteœ administratorem"); 
+						return 1;
+					}
+					ShowPersonalization(playerid, 3); 
+				}
+				case 3:
+				{
+					ShowPersonalization(playerid, 4); 
+				}
+			}
+		}
+	}
+	else if(dialogid == D_PERS_VEH)
+	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_LICZNIK] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_LICZNIK] = 1; 
+						ToggleSpeedo[playerid] = true;
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie licznika!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_LICZNIK] = 0;
+						ToggleSpeedo[playerid] = false;
+						sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie licznika w wozie!");
+					}
+				}
+				case 1:
+				{
+					if(PlayerPersonalization[playerid][PERS_CB] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_CB] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ CB-RADIO"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_CB] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ CB-RADIO!"); 
+					}
+				}
+			}
+		}
+	}
+	else if(dialogid == D_PERS_CHAT)
+	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;	
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_AD] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_AD] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie og³oszeñ graczy!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_AD] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ widocznoœæ og³oszeñ graczy!"); 
+					}
+				}
+				case 1:
+				{
+					if(PlayerPersonalization[playerid][PERS_NEWBIE] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_NEWBIE] =1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ chat newbie!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_NEWBIE] =0;
+						sendTipMessage(playerid, "W³¹czy³eœ chat newbie!"); 
+					}
+				}
+				case 2:
+				{
+					if(PlayerPersonalization[playerid][PERS_FINFO] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_FINFO] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ komunikaty od frakcji"); 
+					}
+					else 
+					{
+						PlayerPersonalization[playerid][PERS_FINFO] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ komunikaty od frakcji"); 
+					}
+				}
+				case 3:
+				{
+					if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_FAMINFO] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ komunikaty od rodzin!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_FAMINFO] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ komunikaty od rodzin!"); 
+					}
+				}
+			}
+		}
+	}
+	else if(dialogid == D_PERS_ADMIN)
+	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_REPORT] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_REPORT] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ widocznoœæ zg³oszeñ graczy"); 
+					}
+					else if(PlayerPersonalization[playerid][PERS_REPORT] == 1)
+					{
+						PlayerPersonalization[playerid][PERS_REPORT] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ widocznoœæ zg³oszeñ graczy"); 
+					}
+				}
+				case 1:
+				{
+					if(PlayerPersonalization[playerid][WARNDEATH] == 0)
+					{
+						PlayerPersonalization[playerid][WARNDEATH] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d widocznoœci œmierci graczy"); 
+					}
+					else if(PlayerPersonalization[playerid][WARNDEATH] == 1)
+					{
+						PlayerPersonalization[playerid][WARNDEATH] =0;
+						sendTipMessage(playerid, "W³¹czy³eœ podgl¹d widocznoœci œmierci graczy!"); 
+					}
+				}
+			}
+		}
+	}
+	else if(dialogid == D_PERS_INNE)
+	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0://Konto Bankowe
+				{
+					if(PlayerPersonalization[playerid][PERS_KB] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_KB]=1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ przelew za pomoc¹ /kb"); 
+					}
+					else if(PlayerPersonalization[playerid][PERS_KB] == 1)
+					{
+						PlayerPersonalization[playerid][PERS_KB] =0; 
+						sendTipMessage(playerid, "W³¹czy³eœ przelew za pomoc¹ /kb"); 
+					}
+				}
+				case 1://NickNames
+				{
+					if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_NICKNAMES] =1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie nicków nad g³ow¹!");
+						SetPVarInt(playerid, "tognick", 1);
+      					foreach(new i : Player)
+						{
+							ShowPlayerNameTagForPlayer(playerid, i, 0);
+						}
+					}
+					else if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 1)
+					{
+						PlayerPersonalization[playerid][PERS_NICKNAMES] = 0; 
+						sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie nicków nad g³ow¹"); 
+						SetPVarInt(playerid, "tognick", 1);
+      					foreach(new i : Player)
+						{
+							ShowPlayerNameTagForPlayer(playerid, i, 1);
+						}
+					}
+				
+				}
+				case 2:
+				{
+					if(togADMTXD[playerid] == 0)
+					{
+						togADMTXD[playerid] =1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ textdrawy kar");
+						PlayerPersonalization[playerid][PERS_KARYTXD] =1;
+					}
+					else if(togADMTXD[playerid] == 1)
+					{
+						togADMTXD[playerid] =0; 
+						sendTipMessage(playerid, "W³¹czy³eœ textdrawy kar"); 
+						PlayerPersonalization[playerid][PERS_KARYTXD]=0;
+					}
+				}
+
+			}
+		}
+	}
+	else if(dialogid == D_VINYL)
+	{
+		if(response)
+		{
+			new txt_light[128], txt_neon[128], txt_sphere[128], txt_podest[128], txt_zaluzja[128];
+			new txt_klub[256], txt_biuro[256], txt_dym[128], txt_eq[128], txt_txt[128];
+			// KLUB
+			if(lightsVinyl == false){
+				format(txt_light, 128, "{FFFFFF}Oœwietlenie: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_light, 128, "{FFFFFF}Oœwietlenie: \t{00FF00}W³¹czone");
+			}
+			if(neonVinyl == 0){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \tBrak");
+			}
+			if(neonVinyl == 1){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \tMieszane");
+			}
+			if(neonVinyl == 2){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{1E2BFE}Niebieski");
+			}
+			if(neonVinyl == 3){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{C71E09}Czerwony");
+			}
+			if(neonVinyl == 4){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{CD17F9}Fioletowy");
+			}
+			if(neonVinyl == 5){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{1CFF27}Zielony");
+			}
+			if(neonVinyl == 6){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{F3FA30}¯ó³ty");
+			}
+			if(sphereVinyl == false){
+				format(txt_sphere, 128, "{FFFFFF}\nKula: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_sphere, 128, "{FFFFFF}\nKula: \t{00FF00}W³¹czone");
+			}
+			if(podestVinyl == false){
+				format(txt_podest, 128, "{FFFFFF}\nPodest: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_podest, 128, "{FFFFFF}\nPodest: \t{00FF00}W³¹czone");
+			}
+			if(dymVinyl == false){
+				format(txt_dym, 128, "{FFFFFF}\nDym: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_dym, 128, "{FFFFFF}\nDym: \t{00FF00}W³¹czone");
+			}
+			if(eqVinyl == false){
+				format(txt_eq, 128, "{FFFFFF}\nEqualizator: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_eq, 128, "{FFFFFF}\nEqualizator: \t{00FF00}W³¹czone");
+			}
+			if(textVinyl == false){
+				format(txt_txt, 128, "{FFFFFF}\nTekst: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_txt, 128, "{FFFFFF}\nTekst: \t{00FF00}W³¹czone");
+			}
+			format(txt_klub, 256, "%s %s %s %s %s %s %s", txt_light, txt_neon, txt_sphere, txt_podest, txt_dym, txt_eq, txt_txt);
+			// BIURO
+			if((moveZaluzja1 == false) && (moveZaluzja2 == false)){
+				format(txt_zaluzja, 128, "{FFFFFF}¯aluzje: \t{00FF00}W³¹czone");
+			}else{
+				format(txt_zaluzja, 128, "{FFFFFF}¯aluzje: \t{FF0000}Wy³¹czone");
+			}
+			format(txt_biuro, 256, "%s \n{FFFFFF}Kamery: \tOgl¹daj", txt_zaluzja);
+			switch(listitem)
+			{
+				case 0:
+				{
+					ShowPlayerDialogEx(playerid, D_VINYL_K, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Klub", txt_klub, "Wybierz", "Anuluj");
+				}
+				case 1:
+				{
+					ShowPlayerDialogEx(playerid, D_VINYL_B, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Biuro", txt_biuro, "Wybierz", "Anuluj");
+				}
+				case 2:
+				{
+					ShowPlayerDialog(playerid, D_VINYL_J, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Jacuzzi", "Jacuzzi", "Wybierz", "Anuluj");
+				}
+			}
+		}
+	}
+	else if(dialogid == D_VINYL_K)
+	{
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+
+					if(lightsVinyl == false)
+					{
+						led1 = CreateDynamicObject(18653, 822.621154, -1387.984619, -19.836418, 0.000000, -11.000000, 70.000000, 71, 0, -1, 300.00, 300.00); 
+						led2 = CreateDynamicObject(18653, 811.361022, -1387.984619, -19.836418, 0.000000, -11.000000, 110.000000, 71, 0, -1, 300.00, 300.00); 
+						led3 = CreateDynamicObject(18102, 820.466613, -1402.050292, -20.383949, 31.300003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wy³¹czono oœwietlenie"); 
+						lightsVinyl = true;
+					}
+					else
+					{
+						DestroyDynamicObject(led1);
+						DestroyDynamicObject(led2);
+						DestroyDynamicObject(led3);
+						lightsVinyl = false;
+						sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wy³¹czono oœwietlenie!"); 
+					}
+				}
+				case 1:
+				{
+					ShowPlayerDialogEx(playerid, D_VINYL_NEON, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Klub >> Neony", "Brak \nMieszane \n{1E2BFE}Niebieski \n{C71E09}Czerwony \n{CD17F9}Fioletowy \n{1CFF27}Zielony \n{F3FA30}¯ó³ty", "Wybierz", "Anuluj");
+				}
+				case 2:
+				{
+					if(sphereVinyl == false){
+						kula = CreateDynamicObject(3054, 817.169311, -1394.821899, -9.629315, 0.000000, 0.000000, 0.000000, 71, 0, -1, 340.00, 340.00); 
+						SetDynamicObjectMaterial(kula, 0, 19041, "matwatches", "watchtype10map", 0x00000000);
+						SetDynamicObjectMaterial(kula, 1, 18901, "matclothes", "hatmap1", 0x00000000);
+						MoveDynamicObject(kula, 817.169311, -1394.821899, -13.629315, 1);
+						sphereTimer = SetTimer("SphereSpinFirst", 5000, false);
+						
+						
+						sphereVinyl = true;
+					}else{
+						MoveDynamicObject(kula, 817.169311, -1394.821899, -9.629315, 1);
+						KillTimer(sphereTimer);
+						KillTimer(sphereTimer_second);
+						
+						sphereVinyl = false;
+					}
+				}
+				case 3:
+				{
+					if(podestVinyl == false){
+						MoveDynamicObject(podest1, 816.637390, -1403.019653, -24.998998, 1);
+						MoveDynamicObject(podest2, 816.607849, -1402.989624, -22.408988, 1);
+						podestVinyl = true;
+						sendTipMessage(playerid, "Podest zosta³ wysuniêy!");
+					}else{
+						MoveDynamicObject(podest1, 816.637390, -1403.019653, -26.998998, 1);
+						MoveDynamicObject(podest2, 816.607849, -1402.989624, -24.408988, 1);
+						podestVinyl = false;
+						sendTipMessage(playerid, "Podest zosta³ schowany!"); 
+					}
+				}
+				case 4:{
+					if(dymVinyl == false){
+						dym1 = CreateDynamicObject(18747, 817.424255, -1390.892700, -23.989006, 0.000000, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						dym2 = CreateDynamicObject(18747, 817.424255, -1394.652587, -23.989006, 0.000000, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						dym3 = CreateDynamicObject(18747, 817.424255, -1398.743164, -23.989006, 0.000000, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+
+						dym4 = CreateDynamicObject(18728, 812.184020, -1386.922851, -22.539764, 22.800003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						dym5 = CreateDynamicObject(18728, 821.514099, -1386.922851, -22.539764, 22.800003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						dymVinyl = true;
+						sendTipMessage(playerid, "Dym w sali vinyl Club zosta³ w³¹czony!"); 
+					}else{
+						DestroyDynamicObject(dym1);
+						DestroyDynamicObject(dym2);
+						DestroyDynamicObject(dym3);
+						DestroyDynamicObject(dym4);
+						DestroyDynamicObject(dym5);
+						dymVinyl = false;
+						sendTipMessage(playerid, "Dym w sali Vinyl Club zosta³ wy³¹czony!"); 
+					}
+				}
+				case 5:{
+					if(eqVinyl == false){
+						eq_1_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -23.328979, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_1_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -23.328979, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_1_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_1_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_2_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -22.818969, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_2_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -22.818969, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_2_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_2_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_3_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -22.298957, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_3_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -22.298957, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_3_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_3_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_4_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -21.728950, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_4_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -21.728950, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_4_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_4_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_5_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -21.158937, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_5_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -21.158937, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_5_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_5_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_6_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -20.598926, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_6_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -20.598926, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_6_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_6_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_7_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -20.028915, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_7_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -20.028915, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_7_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_7_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_8_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -19.468902, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_8_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -19.468902, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_8_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_8_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						eqTimer_First = SetTimer("eqFirst", 2000, true);
+						eqTimer_First = SetTimer("eqSecond", 1400, true);
+						eqTimer_First = SetTimer("eqThird", 900, true);
+						eqTimer_First = SetTimer("eqFourth", 400, true);
+					
+						eqVinyl = true;
+					}else{
+						DestroyEq();
+						KillTimer(eqTimer_First);
+						KillTimer(eqTimer_Second);
+						KillTimer(eqTimer_Third);
+						KillTimer(eqTimer_Fourth);
+						eqVinyl = false;
+					}
+				}
+				case 6:{
+					ShowPlayerDialogEx(playerid, D_VINYL_TEKST, DIALOG_STYLE_INPUT, "PANEL: {00FFFF}VinylClub >> Tekst", "Wpisz tekst", "Wybierz", "Anuluj");
+				}
+			}
+		}
+	}
+	else if(dialogid == D_VINYL_TEKST)
+	{
+		if(response)
+		{
+			if(textVinyl == false){
+				text_Vinyl = CreateDynamicObject(7911, 817.176879, -1386.975463, -21.528980, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+				SetDynamicObjectMaterialText(text_Vinyl, 0, inputtext, 130, "Calibri", 20, 0, 0xFF00FFFF, 0x00000000, 1);
+				textVinyl_Timer = SetTimer("textVinylT", 3000, true);
+				textVinyl = true;
+			}else{
+				textVinyl = false;
+				KillTimer(textVinyl_Timer);
+				DestroyDynamicObject(text_Vinyl);
+			}
+		}
+	}
+	else if(dialogid == D_VINYL_NEON)
+	{
+		if(response){
+			switch(listitem){
+				case 0:{
+					DestroyNeons();
+					neonsVinyl = false;
+					KillTimer(NeonsTimer);
+				}
+				case 1:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18647, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18647, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18648, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18648, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18648, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18648, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18648, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18648, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18648, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18648, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18648, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18648, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18651, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18651, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18651, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18651, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18650, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18650, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18649, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18649, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18649, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18649, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18649, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 1;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 2:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18648, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18648, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18648, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18648, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18648, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18648, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18648, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18648, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18648, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18648, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18648, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18648, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18648, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18648, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18648, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18648, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18648, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18648, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18648, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18648, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18648, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18648, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18648, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 2;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 3:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18647, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18647, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18647, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18647, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18647, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18647, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18647, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18647, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18647, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18647, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18647, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18647, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18647, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18647, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18647, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18647, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18647, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18647, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18647, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18647, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18647, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18647, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18647, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 3;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 4:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18651, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18651, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18651, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18651, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18651, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18651, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18651, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18651, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18651, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18651, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18651, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18651, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18651, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18651, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18651, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18651, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18651, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18651, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18651, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18651, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18651, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18651, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18651, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 4;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 5:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18649, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18649, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18649, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18649, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18649, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18649, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18649, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18649, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18649, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18649, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18649, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18649, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18649, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18649, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18649, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18649, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18649, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18649, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18649, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18649, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18649, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18649, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18649, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 5;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 6:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18650, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18650, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18650, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18650, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18650, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18650, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18650, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18650, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18650, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18650, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18650, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18650, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18650, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18650, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18650, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18650, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18650, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18650, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18650, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18650, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18650, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18650, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18650, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 6;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+			}
+		}
+	}
+	else if(dialogid == D_VINYL_B)
+	{
+		if(response){
+			switch(listitem){
+				case 0:{
+					if(IsPlayerInRangeOfPoint(playerid, 4, 678.121704, -1393.385620, -21.709302)){
+						if((moveZaluzja1 == false) && (moveZaluzja2 == false)){
+							MoveDynamicObject(zaluzja1, 678.121704, -1393.385620, -19.709302, 1);
+							MoveDynamicObject(zaluzja2, 680.731506, -1393.385620, -19.709302, 1);
+							moveZaluzja1 = true;
+							moveZaluzja2 = true;
+						}else{
+							MoveDynamicObject(zaluzja1, 678.121704, -1393.385620, -21.709302, 1);
+							MoveDynamicObject(zaluzja2, 680.731506, -1393.385620, -21.709302, 1);
+							moveZaluzja1 = false;
+							moveZaluzja2 = false;
+						}
+					}
+				}
+				case 1:{
+					ShowPlayerDialogEx(playerid, D_VINYL_CAM, DIALOG_STYLE_LIST, "PANEL: {00FFFF}VinylClub >> Kamery", "Brak \nHol \nObok baru \nPrzy ³azienkach \nParkiet", "Wybierz", "Anuluj");
+				}
+			}
+			
+		}
+	}
+	else if(dialogid == D_VINYL_CAM)
+	{
+		if(response){
+			if(IsPlayerInRangeOfPoint(playerid, 4,  674.076904, -1390.442871, -22.679317)){
+				switch(listitem){
+					case 0:{
+						SetCameraBehindPlayer(playerid);
+					}
+					case 1:{
+						//HOL PRZEDSIONEK
+						SetPlayerCameraPos(playerid, 675.147, -1399.068, -20.939);
+						SetPlayerCameraLookAt(playerid, 688.3051,-1395.4424,-22.6093, 1);
+					}
+					case 2:{
+						//PRZY WEJŒCIU VIPA
+						SetPlayerCameraPos(playerid, 804.162, -1414.056, -20.379);
+						SetPlayerCameraLookAt(playerid, 801.9684,-1389.1116,-22.6193, 1);
+					}
+					case 3:{
+						//PRZY WC
+						SetPlayerCameraPos(playerid, 829.635, -1388.634, -20.350);
+						SetPlayerCameraLookAt(playerid, 832.2269,-1413.2073,-22.6093, 1);
+					}
+					case 4:{
+						//PARKIET
+						SetPlayerCameraPos(playerid, 830.185, -1389.178, -14.814);
+						SetPlayerCameraLookAt(playerid, 812.8127,-1399.2845,-22.5390, 1);
+					}
+				}
+			}else{
+				SendClientMessage(playerid, -1, "Nie znajdujesz siê przy monitoringu");
+			}
 		}
 	}
 	return 0;

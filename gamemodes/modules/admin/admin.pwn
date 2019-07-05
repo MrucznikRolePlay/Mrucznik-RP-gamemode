@@ -266,6 +266,33 @@ SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bi
 	}
 	return 1;
 }
+SendMessageToAdminEx(text[], mColor, condition)//Wysy³a wiadomoœæ do administratora za spe³nieniem warunku
+{
+	new stradm[256];
+	foreach(new i : Player)
+	{
+		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pNewAP] > 0)
+		{
+			if(condition == 1)//Warunek w³¹czonej widocznoœci reportów
+			{
+				if(PlayerPersonalization[i][PERS_REPORT] == 0)
+				{
+					format(stradm, sizeof(stradm), "%s", text);
+					SendClientMessage(i, mColor, stradm);
+				}
+			}
+			else if(condition == 2)//Warunek w³¹czonej widocznoœci DEATH_WARNING
+			{
+				if(PlayerPersonalization[i][WARNDEATH] == 0)
+				{
+					format(stradm, sizeof(stradm), "%s", text);
+					SendClientMessage(i, mColor, stradm);
+				}
+			}
+		}	
+	}
+	return 1;
+}
 
 KickPlayerTXD(playerid, adminid, reason[])
 {
@@ -404,7 +431,7 @@ GivePWarnForPlayer(player[], adminid, result[])
 	}
 	else if(GetPlayerAdminDutyStatus(adminid) == 0)
 	{
-		sendErrorMessage(adminid, "Nie jesteœ podczas s³u¿by administratora, Warn nie zostaje zaliczony!"); 
+		iloscPozaDuty[adminid]++; 
 	}
 	return 1;
 }
@@ -452,6 +479,10 @@ GiveWarnForPlayer(playerid, adminid, result[])
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
 		iloscWarn[adminid] = iloscWarn[adminid]+1;
+	}
+	else if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		iloscPozaDuty[adminid]++; 
 	}
 	return 1;
 }
@@ -528,6 +559,10 @@ SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 		iloscAJ[adminid] = iloscAJ[adminid]+1;
 	
 	}
+	else if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		iloscPozaDuty[adminid]++; 
+	}
 	MruMySQL_SetAccInt("Jailed", nickOdbieracza, 3);
 	MruMySQL_SetAccInt("JailTime", nickOdbieracza, timeVal*60);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
@@ -556,6 +591,10 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	{
 		iloscAJ[adminid]++; 
 	}
+	else if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		iloscPozaDuty[adminid]++; 
+	}
 	//adminowe logi
 	format(string, sizeof(string), "Admini/%s.ini", GetNick(adminid));
 	dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
@@ -577,6 +616,10 @@ GiveKickForPlayer(playerid, adminid, result[])//zjebane
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
 		iloscKick[adminid]++;
+	}
+	else if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		iloscPozaDuty[adminid]++; 
 	}
 
 	format(string, sizeof(string), "Admini/%s.ini", GetNick(adminid));
@@ -602,6 +645,14 @@ GiveBPForPlayer(playerid, adminid, timeVal, result[])
 	//Opis_Usun(giveplayerid);
 	Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
 	PlayerInfo[playerid][pDesc][0] = EOS;
+	if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		iloscPozaDuty[adminid]++; 
+	}
+	else if(GetPlayerAdminDutyStatus(adminid) == 1)
+	{
+		iloscInne[adminid]++; 
+	}
 	return 1;
 }
 GiveBlockForPlayer(playerid, adminid, result[])
@@ -624,6 +675,10 @@ GiveBlockForPlayer(playerid, adminid, result[])
 	{
 		iloscBan[adminid] = iloscBan[adminid]+1;
 	}
+	else if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		iloscPozaDuty[adminid]++; 
+	}
 	return 1;
 }
 GivePBanForPlayer(player[], adminid, result[])
@@ -643,6 +698,10 @@ GivePBanForPlayer(player[], adminid, result[])
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
 	{
 		iloscBan[adminid] = iloscBan[adminid]+1;
+	}
+	else if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		iloscPozaDuty[adminid]++; 
 	}
 	return 1;
 }	
@@ -664,7 +723,10 @@ GivePBlockForPlayer(player[], adminid, result[])
 	{
 		iloscBan[adminid] = iloscBan[adminid]+1;
 	}
-
+	else if(GetPlayerAdminDutyStatus(adminid) == 0)
+	{
+		iloscPozaDuty[adminid]++; 
+	}
 	return 1;
 }
 

@@ -42,81 +42,67 @@ YCMD:windalock(playerid, params[], help)
 			return 1;
 		}
 
-
-		if((IsPlayerInRangeOfPoint(playerid,3,1327.6746, -1324.7770, 39.9210)
-        || IsPlayerInRangeOfPoint(playerid,3,1289.0969, -1292.7489, 35.9681)
-        || IsPlayerInRangeOfPoint(playerid,3,1310.3494, -1361.7319, 39.0876)
-        || IsPlayerInRangeOfPoint(playerid,3,1310.0021, -1319.7189, 35.5984)) && GetPlayerOrg(playerid) == FAMILY_SAD)
+		if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
+        || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
+        || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
+        || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
+        || IsPlayerInRangeOfPoint(playerid,3,297.7128,-1612.1783,114.4219)/*Dach*/
+        || IsPlayerInRangeOfPoint(playerid,3,290.7577,-1604.3273,134.6113)/*Biura SAN NEWS*/)
 		{
-		    if(level == 1 && SadWindap1 == 0)//level 01
-		    {
-		    	SadWindap1 = 1;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [1]!");
-				GetPlayerName(playerid, nick, sizeof(nick));
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [1].", nick);
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else if(level == 1 && SadWindap1 == 1)//level 01
-		    {
-		    	SadWindap1 = 0;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [1]!");
-				GetPlayerName(playerid, nick, sizeof(nick));
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [1].", nick);
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else if(level == 2 && SadWindap2 == 0)//level 02
-		    {
-		    	SadWindap2 = 1;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [2]!");
-				GetPlayerName(playerid, nick, sizeof(nick));
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [2].", nick);
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else if(level == 2 && SadWindap2 == 1)//level 02
-		    {
-		    	SadWindap2 = 0;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [2]!");
-				GetPlayerName(playerid, nick, sizeof(nick));
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [2].", nick);
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else if(level == 3 && SadWindap3 == 0)//level 03
-		    {
-		    	SadWindap3 = 1;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [3]!");
-				GetPlayerName(playerid, nick, sizeof(nick));
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [3].", nick);
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else if(level == 3 && SadWindap3 == 1)//level 03
-		    {
-		    	SadWindap3 = 0;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [3]!");
-				GetPlayerName(playerid, nick, sizeof(nick));
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [3].", nick);
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else if(level == 4 && SadWindap4 == 0)//level 04
-		    {
-		    	SadWindap4 = 1;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [4]!");
-				GetPlayerName(playerid, nick, sizeof(nick));
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [4].", nick);
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else if(level == 4 && SadWindap4 == 1)//level 04
-		    {
-		    	SadWindap4 = 0;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [4]!");
-				GetPlayerName(playerid, nick, sizeof(nick));
-				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [4].", nick);
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else
+			if(PlayerInfo[playerid][pLider] != FRAC_SN && PlayerInfo[playerid][pMember] != FRAC_SN)
 			{
-		 		sendErrorMessage(playerid, "Nieodpowiedni poziom windy!");
-		 		return 1;
+				sendErrorMessage(playerid, "Nie masz uprawnieñ - nie jesteœ z San News"); 
+				return 1;
 			}
+			if(level > 7 || level < 0)
+			{
+				sendErrorMessage(playerid, "Poziom od 0 do 7");
+				return 1;
+			}
+			if(level == 5 && PlayerInfo[playerid][pLider] != FRAC_SN)
+			{
+				sendErrorMessage(playerid, "Nie masz wystarczaj¹cych uprawnieñ aby otwieraæ to piêtro!"); 
+				return 1;
+			}
+			if(levelLock[FRAC_SN][level] == 1)
+			{
+				levelLock[FRAC_SN][level] = 0; 
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i odblokowuje poziom [%d].", GetNick(playerid), level);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(levelLock[FRAC_SN][level] == 0)
+			{
+				levelLock[FRAC_SN][level] = 1; 
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [%d].", GetNick(playerid), level);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+		}
+		else if((IsPlayerInRangeOfPoint(playerid,3,1311.5483,-1361.2096,62.8567) //-1 archiwum
+        || IsPlayerInRangeOfPoint(playerid,3,1305.9991,-1326.1344,52.5659) // 0 recepcja 
+        || IsPlayerInRangeOfPoint(playerid,3,1309.9982,-1364.2216,59.6271) // 1 korytarze
+        || IsPlayerInRangeOfPoint(playerid,3,1310.1989,-1328.8876,82.5859) // 2 biura
+        || IsPlayerInRangeOfPoint(playerid,3,1310.2946,-1321.2517,74.6955) // 3 socjal
+        || IsPlayerInRangeOfPoint(playerid,3,1310.3961,-1319.0530,35.6587))// 4 dach
+		&& GetPlayerOrg(playerid) == FAMILY_SAD)
+		{
+		    if(level > 4 || level < -1)
+			{
+				sendErrorMessage(playerid, "Poziom od -1 do 4");
+				return 1;
+			}
+			if(SadWinda[level+1] == 1)
+			{
+				SadWinda[level+1] = 0; 
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i odblokowuje poziom [%d].", GetNick(playerid), level);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(SadWinda[level+1] == 0)
+			{
+				SadWinda[level+1] = 1; 
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [%d].", GetNick(playerid), level);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}		
+		
 		}
 		else if((IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) ||
         IsPlayerInRangeOfPoint(playerid,2.0, 1167.2428,-1311.8409,31.6567) ||

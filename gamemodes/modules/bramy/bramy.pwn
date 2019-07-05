@@ -16,11 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: 2.5
+// Autor: Mrucznik & Simeone
 // Data utworzenia: 04.05.2019
 //Opis:
 /*
-	System bram.
+	System bram. Odpowiada za wszelkie dodane na serwer bramy. Posiada sprawdzanie warunków - pozycji, miejsca, vw, frakcji, organizacji.
+	Zosta³ rozbudowany o dodatkow¹ funkcjê DualGate.
 */
 
 //
@@ -29,6 +30,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Float:frz1, Float:fx2, Float:fy2, Float:fz2, Float:frx2, Float:fry2, Float:frz2, Float:fspeed, Float:frange, fuprtyp=0, fuprval=0, bool:flag=false)
 {
+	new	bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, fobiekt, E_STREAMER_WORLD_ID);
 	bramy[iloscbram][b_obiekt] = fobiekt;
 	if(flag==false) {
 		bramy[iloscbram][b_flaga] = false;
@@ -52,6 +54,7 @@ DodajBrame(fobiekt, Float:fx1, Float:fy1, Float:fz1, Float:frx1, Float:fry1, Flo
 	bramy[iloscbram][b_range] = frange;
 	bramy[iloscbram][b_uprtyp] = fuprtyp;
 	bramy[iloscbram][b_uprval] = fuprval;
+	bramy[iloscbram][b_vw] = bramaVW; 
 	return iloscbram++;
 }
 
@@ -88,6 +91,7 @@ DualGateAdd(object1,//Obiekt pierwszej bramy
 	accessCard = 0, //Karta dostêpu
 	bool:flg=false)
 { 
+	new bramaVW = Streamer_GetIntData(STREAMER_TYPE_OBJECT, object1, E_STREAMER_WORLD_ID);
 	bramy[iloscbram][b_obiekt] = object1;
 	bramy[iloscbram][b_x1] = fx1;
 	bramy[iloscbram][b_y1] = fy1;
@@ -119,6 +123,7 @@ DualGateAdd(object1,//Obiekt pierwszej bramy
 	bramy[iloscbram][b_uprtyp] = fuprtyp1;
 	bramy[iloscbram][b_uprval] = fuprval1;
 	bramy[iloscbram][pAccessCard] = accessCard;
+	bramy[iloscbram][b_vw] = bramaVW;
 	if(flg==false) 
 	{
 	bramy[iloscbram][b_flaga] = false;
@@ -135,44 +140,57 @@ SprawdzBramy(playerid)
 {
 	for(new i; i<iloscbram; i++)
 	{	
-		if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2]))
+		if(GetPlayerVirtualWorld(playerid) == bramy[i][b_vw])
 		{
-			if((bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+			if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2]))
 			{
-				if(bramy[i][pAccessCard] > 0)
+				if((bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
 				{
-					if(PlayerInfo[playerid][pCard] != bramy[i][pAccessCard])
+					if(bramy[i][pAccessCard] > 0)
 					{
-						SendClientMessage(playerid, -1, "Nie masz uprawnieñ do otwierania tych drzwi");
-						return 1;
+						if(PlayerInfo[playerid][pCard] != bramy[i][pAccessCard])
+						{
+							SendClientMessage(playerid, -1, "Nie masz uprawnieñ do otwierania tych drzwi");
+							return 1;
+						}
 					}
-				}
-				if(bramy[i][b_flaga])//Je¿eli ma zamkn¹æ
-				{
-					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1], bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1], bramy[i][b_ry1], bramy[i][b_rz1]);
-					MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1], bramy[i][b_speed], bramy[i][duo_rx1], bramy[i][duo_ry1], bramy[i][duo_rz1]); 	
-				}
-				else//otwiera
-				{
-					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2], bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2], bramy[i][b_ry2], bramy[i][b_rz2]);
-					MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2], bramy[i][b_speed], bramy[i][duo_rx2], bramy[i][duo_ry2], bramy[i][duo_rz2]); 
-					bramy[i][b_flaga]=~bramy[i][b_flaga];
+					if(bramy[i][b_flaga])//Je¿eli ma zamkn¹æ
+					{
+						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1], bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1], bramy[i][b_ry1], bramy[i][b_rz1]);
+						MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1], bramy[i][b_speed], bramy[i][duo_rx1], bramy[i][duo_ry1], bramy[i][duo_rz1]); 	
+						bramy[i][b_flaga] = false;
+					}
+					else//otwiera
+					{
+						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2], bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2], bramy[i][b_ry2], bramy[i][b_rz2]);
+						MoveDynamicObject(bramy[i][duo_obiekt], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2], bramy[i][b_speed], bramy[i][duo_rx2], bramy[i][duo_ry2], bramy[i][duo_rz2]); 
+						bramy[i][b_flaga] = true;
+					}
 					return 1;
 				}
 			}
-		}
-		if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2]))
-		{
-			if( (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+			
+			if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1]) 
+			|| IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2]))
 			{
-				if(bramy[i][b_flaga])
-					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1],  bramy[i][b_ry1], bramy[i][b_rz1]);
-				else
-					MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2],  bramy[i][b_ry2], bramy[i][b_rz2]);
-				bramy[i][b_flaga]=~bramy[i][b_flaga];
-				return 1;
+				if( (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) 
+				|| (bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) 
+				|| bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_NONE)
+				{
+					if(bramy[i][b_flaga])
+					{
+						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1], bramy[i][b_speed], bramy[i][b_rx1],  bramy[i][b_ry1], bramy[i][b_rz1]);
+						bramy[i][b_flaga] = false;
+					}
+					else
+					{
+						MoveDynamicObject(bramy[i][b_obiekt], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2], bramy[i][b_speed], bramy[i][b_rx2],  bramy[i][b_ry2], bramy[i][b_rz2]);
+						bramy[i][b_flaga]= true;
+					}
+					return 1;
+				}
 			}
-		}
+		}	
 	}
 	return 0;
 }

@@ -40,6 +40,7 @@ enum eBizData {
 	epLocal,
 	eBizLock,
 	eBizLocation
+	//eBizCost
 };
 new BizData[MAX_BIZNES][eBizData] = {
     {"BIZNES TESTOWY", 0.0,0.0,-100.0, 0.0,0.0,-100.0, 0, 0, 0, 255, 1, BIZ_LOCATION_UNKNOW},//0

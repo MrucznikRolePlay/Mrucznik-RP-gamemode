@@ -73,7 +73,7 @@ YCMD:wiadomosc(playerid, params[], help)
         }
         if (AntyCzitText(text))
         {
-            format(string, sizeof(string), "AdmWarning: [%d] %s mówi coœ o cheat'ach do [%s]: %s", playerid, GetNick(playerid), giveplayerid, text);
+            format(string, sizeof(string), "AdmWarning: [%d] %s mówi coœ o cheat'ach do [%s]: %s", playerid, GetNick(playerid), GetNick(giveplayerid), text);
             SendMessageToAdmin(string, COLOR_LIGHTRED); 
 			Log(warningLog, INFO, "%s mówi coœ o czitach na PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
         }
@@ -125,7 +125,7 @@ YCMD:wiadomosc(playerid, params[], help)
                 }		
             }
         }
-	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
+	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), params);
         //dŸwiêki
         PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
         PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);

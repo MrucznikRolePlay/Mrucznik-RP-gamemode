@@ -62,8 +62,8 @@ YCMD:kostka(playerid, params[], help)
         SetPVarInt(playerid, "kostka-rzut", 1);
         SetPVarInt(id, "kostka-rzut", 0);
 
-        DajKase(playerid, -GetPVarInt(id, "kostka-cash"));
-        DajKase(id, -GetPVarInt(id, "kostka-cash"));
+        ZabierzKase(playerid, GetPVarInt(id, "kostka-cash"));
+        ZabierzKase(id, GetPVarInt(id, "kostka-cash"));
     }
     else if(strcmp(params, "odrzuæ", true) == 0 || strcmp(params, "odrzuc", true) == 0 || strcmp(params, "o", true) == 0)
     {

@@ -103,6 +103,10 @@ YCMD:adminajail(playerid, params[], help)
 					{
 						iloscAJ[playerid]++;
 					}
+					else if(GetPlayerAdminDutyStatus(playerid) == 0)
+					{
+						iloscPozaDuty[playerid]++; 
+					}
 					if(kary_TXD_Status == 1)
 					{
 						AJPlayerTXD(playa, playerid, (result), money); 

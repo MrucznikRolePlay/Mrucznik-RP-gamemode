@@ -23,6 +23,8 @@ new noAccessCome[MAX_PLAYERS];
 new saveMyAccountTimer[MAX_PLAYERS];//respawn
 new nickRP[MAX_PLAYERS][MAX_PLAYER_NAME];
 
+new timerTime[MAX_PLAYERS]; 
+
 new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
 new bool:bramki_sasd_state[18];
@@ -35,11 +37,8 @@ new PizzaJob[MAX_PLAYERS];
 new Actor01;
 //FishGood
 new FishGood[MAX_PLAYERS];
-//WINDA
-new SadWindap1 = 0;//Winda S¹d
-new SadWindap2 = 0;//Winda S¹d
-new SadWindap3 = 0;//Winda S¹d
-new SadWindap4 = 0;//Winda S¹d
+//Sad
+new SadWinda[6] = {1,0,0,1,1,0};
 
 new LSMCWindap0 = 0;//Winda LSMC
 new LSMCWindap2 = 0;//Winda LSMC
@@ -118,7 +117,7 @@ new pFindZone[MAX_PLAYERS];
 
 
 new gTeam[MAX_PLAYERS];
-
+new odczekajTimer[MAX_PLAYERS];
 //regex
 new regexURL;
 
@@ -288,7 +287,6 @@ new Brama_Move_HA = 0;
 new Brama_Move_HA1 = 0;
 new GATE_SAD[42] = {0, ...};
 new bool:GATE_SAD_ALARM = false;
-new GATE_ALARM_OBJ[7];
 //01.08 speedometer
 new bool:ToggleSpeedo[MAX_PLAYERS],
     bool:ToggleSpeedoGPS[MAX_PLAYERS];
@@ -353,7 +351,7 @@ new KTAir_Start, KTAir_End, Float:KTAir_Offsets[3]; //Dla At400 nie ruszaæ.
 new bool:VAR_MySQLREGISTER=true; //W³¹czyæ rejestracje?
 new GATE_VINYL, bool:GATE_VINYL_S=false,
     GATE_VINYL_IN[4], bool:GATE_VINYL_IN_S[4] = {false, ...};
-new Float:VinylAudioPos[5] = {819.6044,-1354.2113,24.3107,75.0,255.0};  //pos[3] dist, vw
+new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,71.0};  //pos[3] dist, vw
 new VINYL_Stream[128];
 //22.06  system rang mysql
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
@@ -466,6 +464,7 @@ new dialTimer[MAX_PLAYERS];
 new dialAccess[MAX_PLAYERS]; 
 new dialTime[MAX_PLAYERS]; 
 //SAN NEWS
+new posDrzwiSN[MAX_PLAYERS]; 
 new SanDrzwi1;
 new SanDrzwi2;
 new SanDrzwi3;
@@ -477,7 +476,32 @@ new SanMove3 = 0;
 new SanMove4 = 0;
 new Teleturniejstart = 0;
 new grajacy[MAX_PLAYERS];
+new levelLock[MAX_FRAC][MAX_LEVELINT];
 
+
+new bool:moveZaluzja1 = false;
+new bool:moveZaluzja2 = false;
+new zaluzja1;
+new zaluzja2;
+new bool:lightsVinyl = false;
+new neonVinyl = 0;
+new bool:sphereVinyl = false;
+new bool:podestVinyl = false;
+new bool:neonsVinyl = false;
+new bool:jacuzziVinyl = false;
+new bool:dymVinyl = false;
+new bool:eqVinyl = false;
+new podest1, podest2, dym1, dym2, dym3, dym4, dym5, led1, led2, led3,  kula;
+new neon1, neon2, neon3, neon4, neon5, neon6, neon7, neon8, neon9, neon10, neon11, neon12, neon13, neon14;
+new neon15, neon16, neon17, neon18, neon19, neon20, neon21, neon22, neon23;
+new eq_1_1, eq_1_2, eq_2_1, eq_2_2, eq_3_1, eq_3_2, eq_4_1, eq_4_2, eq_5_1, eq_5_2, eq_6_1, eq_6_2, eq_7_1, eq_7_2, eq_8_1, eq_8_2;
+new sphereTimer, sphereTimer_second, NeonsTimer;
+new eqTimer_First, eqTimer_Second, eqTimer_Third, eqTimer_Fourth;
+new textVinyl_Timer;
+new text_Vinyl;
+new bool:textVinyl;
+
+new SetTAWForPlayer[MAX_PLAYERS];
 new drinkCost1=10000;
 new drinkCost2=15000;
 new drinkCost3=18000;
@@ -1000,6 +1024,7 @@ new Float:OldCoordsX[MAX_PLAYERS], Float:OldCoordsY[MAX_PLAYERS];
 new Gas[CAR_AMOUNT];
 new Refueling[MAX_PLAYERS];
 new Naprawiasie[MAX_PLAYERS];
+new fixActorsTimer[MAX_PLAYERS]; 
 
 new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
@@ -1011,6 +1036,18 @@ new DCC_Channel:g_OrgChannel[MAX_ORG];
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
+ClearVariableConnect(playerid)
+{
+	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
+	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
+	fixActorsTimer[playerid] = 0; 
+	return 1;
+}
+ClearVariableDisconnect(playerid)
+{
+	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
+	return 1;
+}
 ZerujZmienne(playerid)
 {
     SetPVarInt(playerid, "budka-Mobile", 999);
@@ -1056,8 +1093,6 @@ ZerujZmienne(playerid)
 	podczasbicia[playerid] = 0;
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
-	PlayerInfo[playerid][pBiletpociag] = 0;
-	
 	
 	
 	
@@ -1112,7 +1147,6 @@ ZerujZmienne(playerid)
 	WatchingTV[playerid] = 0; PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
 	Fishes[playerid][pLastFish] = 0; Fishes[playerid][pFishID] = 0;
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
-
 	BiletAlhambra[playerid] = 0;
 	PlayerInfo[playerid][pLevel] = 0;
 	PlayerInfo[playerid][pAdmin] = 0;
@@ -1273,22 +1307,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pSamolot] = 0;
 	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
-	PlayerInfo[playerid][pBiletpociag] = 0;
-	
-	//chwilowe
-	PlayerAdds[playerid][pSlot1] = 0;
-	PlayerAdds[playerid][pSlot2] = 0;
-	PlayerAdds[playerid][pSlot3] = 0;
-	PlayerAdds[playerid][pSlot4] = 0;
-	PlayerAdds[playerid][pSlot5] = 0;
-	PlayerAdds[playerid][pSlot6] = 0;
-	PlayerAdds[playerid][pSlot7] = 0;
-	PlayerAdds[playerid][pSlot8] = 0;
-	PlayerAdds[playerid][pSlot9] = 0;
-	PlayerAdds[playerid][pSlot10] = 0;
-
-
-	
+	timerTime[playerid] = 0; 
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);

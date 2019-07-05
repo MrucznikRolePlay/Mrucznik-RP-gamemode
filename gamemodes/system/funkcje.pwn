@@ -1739,8 +1739,8 @@ BARIERKA_Init()
     }
     for(new i=0;i<10;i++) //LSFD
     {
-        Barier[FRAC_LSFD][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
-        BarierState[FRAC_LSFD][i] = false;
+        Barier[FRAC_ERS][i] = CreateDynamicObject(19300, 0.0, 0.0, -50.0, 0.0, 0.0, 0.0);
+        BarierState[FRAC_ERS][i] = false;
     }
     for(new i=0;i<10;i++) //USSS
     {
@@ -2528,7 +2528,7 @@ DajBronieFrakcyjne(playerid)
 	        playerWeapons[playerid][weaponLegal10] = 1;
 	    }
 	}
-    else if(GetPlayerFraction(playerid) == FRAC_LSFD)
+    else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] <= 3)
 	{
         if(JobDuty[playerid] == 1)
         {
@@ -3718,7 +3718,7 @@ IsAnAmbulance(carid)
     if(lID == 0) return 0;
     if(CarData[lID][c_OwnerType] == CAR_OWNER_FRACTION)
     {
-        if(CarData[lID][c_Owner] == FRAC_LSMC) return 1;
+        if(CarData[lID][c_Owner] == FRAC_ERS) return 1;
     }
 	return 0;
 }
@@ -4562,17 +4562,6 @@ SetPlayerToTeamColor(playerid)
 		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
 		    }
 		}
-        else if(GetPlayerFraction(playerid) == FRAC_LSFD)
-		{
-		    if(JobDuty[playerid])
-		    {
-		    	SetPlayerColor(playerid, COLOR_ALLDEPT);
-		    }
-		    else
-		    {
-		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
-		    }
-		}
 		else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7)
 		{
 		    if(OnDuty[playerid])
@@ -4912,7 +4901,7 @@ GetFractionMembersNumber(fractionid, bool:withOnDutyCheck)
 					continue;
 				else if((fractionid == FRAC_LSPD || fractionid == FRAC_FBI || fractionid == FRAC_NG || fractionid == FRAC_BOR) && OnDuty[i] == 0)
 					continue;
-				else if( (fractionid == FRAC_LSMC || fractionid == FRAC_LSFD || fractionid == FRAC_GOV || fractionid == FRAC_KT) && JobDuty[i])
+				else if( (fractionid == FRAC_ERS || fractionid == FRAC_GOV || fractionid == FRAC_KT) && JobDuty[i])
 					continue;
 			}
 			membersNumber++;
@@ -7059,7 +7048,7 @@ OOCNewbie(const string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(!gNewbie[i] && GetPVarInt(i, "TOG_newbie") == 0)
+		    if(!gNewbie[i] && GetPVarInt(i, "TOG_newbie") == 0 && PlayerPersonalization[i][PERS_NEWBIE] == 0)
 		    {
 				SendClientMessage(i, 0x8D8DFF00, string);
 			}
@@ -7087,7 +7076,7 @@ OOCNews(color,const string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(!gNews[i])
+		    if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -7755,7 +7744,7 @@ stock ShowPlayerInfoDialog(playerid, caption[], info[], bool:dialogTimer=false)
 {
 	if(dialAccess[playerid] == 0)
 	{
-		ShowPlayerDialog(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, caption, info, "Okej", "");
+		ShowPlayerDialogEx(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, caption, info, "Okej", "");
 		if(dialogTimer == true)
 		{
 			dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
@@ -8305,16 +8294,6 @@ Sejf_Load()
     mysql_free_result();
 }
 
-CheckLoginNick(playerid, nick[])
-{
-	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)
-	{
-		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
-		KickEx(playerid);
-		return 1;
-	}
-	return 0; 
-}
 
 IsNickCorrect(nick[])
 {
@@ -11704,6 +11683,47 @@ WeaponHackCheck(issuerid, weaponid)
     }
 	return false;
 }
+BuyDrinkOnClub(playerid, const dName[], dCost, dLVL, dAction)
+{
+	new string[128];
+	if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
+	{
+		if(kaska[playerid] >= (dCost/2))
+		{
+			format(string, sizeof(string), "%s kupi³ w barze %s - zaczyna piæ", GetNick(playerid), dName);
+			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+			SetPlayerDrunkLevel(playerid, dLVL);
+			SetPlayerSpecialAction(playerid, dAction);
+			ZabierzKase(playerid, (dCost/2));
+			Sejf_Add(FRAC_SN, (dCost/2));
+			Sejf_Save(FRAC_SN);
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie masz takiej iloœci gotówki!"); 
+			return 1;
+		}
+	}
+	else if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 0)
+	{
+		if(kaska[playerid] >= dCost)
+		{
+			format(string, sizeof(string), "%s kupi³ w barze %s - zaczyna piæ", GetNick(playerid), dName);
+			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+			SetPlayerDrunkLevel(playerid, dLVL);
+			SetPlayerSpecialAction(playerid, dAction);
+			ZabierzKase(playerid, (dCost));
+			Sejf_Add(FRAC_SN, dCost);
+			Sejf_Save(FRAC_SN);
+		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie masz takiej iloœci gotówki!");
+			return 1;
+		}
+	}
+	return 1;
+}
 SetPLocal(playerid, wartosc)
 {
 	PlayerInfo[playerid][pLocal] = wartosc;
@@ -11727,6 +11747,156 @@ SprawdzMuzyke(playerid)
 	
 	
 	}
+	return 1;
+}
+ShowPersonalization(playerid, value)
+{
+	new persona_A[64];
+	new persona_B[64];
+	new persona_C[64];
+	new persona_D[64];
+	new string[356]; 
+	if(value == 1)
+	{
+		if(PlayerPersonalization[playerid][PERS_LICZNIK] == 1)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Licznik w pojazdach\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_LICZNIK] == 0)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Licznik w pojazdach\t{80FF00}ON\n", 0);
+		}
+		if(PlayerPersonalization[playerid][PERS_CB] == 1)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "CB-RADIO\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_CB] == 0)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "CB-RADIO\t{80FF00}ON\n", 0);
+		}
+		format(string, sizeof(string), "%s%s", persona_A, persona_B);
+		ShowPlayerDialogEx(playerid, D_PERS_VEH, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz");
+	}
+	if(value == 2)
+	{
+		if(PlayerPersonalization[playerid][PERS_AD] == 1)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Og³oszenia [AD]\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_AD] == 0)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Og³oszenia [AD]\t{80FF00}ON\n", 0);
+		}
+		if(PlayerPersonalization[playerid][PERS_NEWBIE] == 1)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "Newbie Chat\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_NEWBIE] == 0)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "Newbie Chat\t{80FF00}ON\n", 0);
+		}
+		if(PlayerPersonalization[playerid][PERS_FINFO] == 1)
+		{
+			strdel(persona_C, 0, 64);
+			strins(persona_C, "Og³oszenia FRAKCJI\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_FINFO] == 0)
+		{
+			strdel(persona_C, 0, 64);
+			strins(persona_C, "Og³oszenia FRAKCJI\t{80FF00}ON\n", 0);	
+		}
+		if(PlayerPersonalization[playerid][PERS_FAMINFO] == 1)
+		{
+			strdel(persona_D, 0, 64);
+			strins(persona_D, "Og³oszenia RODZIN\t{FF6A6A}OFF\n", 0);	
+		}
+		else if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
+		{
+			strdel(persona_D, 0, 64);
+			strins(persona_D, "Og³oszenia RODZIN\t{80FF00}ON\n", 0);	
+		}
+		format(string, sizeof(string), "%s%s%s%s", persona_A, persona_B, persona_C, persona_D);
+		ShowPlayerDialogEx(playerid, D_PERS_CHAT, DIALOG_STYLE_TABLIST, "Mrucznik RP", string, "Akceptuj", "Odrzuæ"); 
+
+	}
+	if(value == 3)
+	{
+		if(PlayerPersonalization[playerid][PERS_REPORT] == 1)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Reporty\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_REPORT] == 0)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Reporty\t{80FF00}ON\n ", 0);
+		}
+		if(PlayerPersonalization[playerid][WARNDEATH] == 1)
+		{
+			strdel(persona_B, 0, 64); 
+			strins(persona_B,"Death Warning\t{FF6A6A}OFF\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][WARNDEATH] == 0)
+		{
+			strdel(persona_B, 0, 64); 
+			strins(persona_B,"Death Warning\t{80FF00}ON\n", 0);
+		}
+		format(string, sizeof(string), "%s%s", persona_A, persona_B);
+		ShowPlayerDialogEx(playerid, D_PERS_ADMIN, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz");
+	}
+	if(value == 4)
+	{
+		if(PlayerPersonalization[playerid][PERS_KB] == 0)
+		{
+			strdel(persona_A, 0, 64); 
+			strins(persona_A, "Przelew Kontem Bankowym\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_KB] == 1)
+		{
+			strdel(persona_A, 0, 64);
+			strins(persona_A, "Przelew Kontem Bankowym\t{FF6A6A}OFF\n", 0);
+		}
+		if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 0)
+		{
+			strdel(persona_B, 0, 64); 
+			strins(persona_B, "Wyœwietlanie nicków\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 1)
+		{
+			strdel(persona_B, 0, 64);
+			strins(persona_B, "Wyœwietlanie nicków\t{FF6A6A}OFF\n",0);
+		}
+		if(PlayerPersonalization[playerid][PERS_KARYTXD] == 0)
+		{
+			strdel(persona_C, 0, 64);
+			strins(persona_C, "Kary w TXD\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_KARYTXD] == 1)
+		{
+			strdel(persona_C, 0, 64); 
+			strins(persona_C, "Kary w TXD\t{FF6A6A}OFF\n", 0); 
+		}
+		format(string, sizeof(string), "%s%s%s", persona_A, persona_B, persona_C);
+		ShowPlayerDialogEx(playerid, D_PERS_INNE, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz"); 
+	}
+		 
+	return 1;
+}
+
+stock SetPlayerTW(playerid, valueTime, time, weather)
+{
+	SetTAWForPlayer[playerid] = SetTimerEx("SetTimeAndWeather", valueTime,0,"d",playerid);
+	SetPVarInt(playerid, "TimeToSet", time); 
+	SetPVarInt(playerid, "WeatherToSet", weather); 
+	sendTipMessage(playerid, "Trwa inicjowanie pogody i czasu - chwilê to potrwa!"); 
 	return 1;
 }
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);

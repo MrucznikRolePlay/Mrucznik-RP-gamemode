@@ -73,7 +73,7 @@ YCMD:nos(playerid, params[], help)
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     AddVehicleComponent(pojazd, 1009);
-                                    DajKase(playerid, -5000);
+                                    ZabierzKase(playerid, 5000);
                                     format(string, sizeof(string), "~r~-$%d", 5000);
                                     GameTextForPlayer(playerid, string, 5000, 1);
                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -96,7 +96,7 @@ YCMD:nos(playerid, params[], help)
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     AddVehicleComponent(pojazd, 1008);
-                                    DajKase(playerid, -5000);
+                                    ZabierzKase(playerid, 5000);
                                     format(string, sizeof(string), "~r~-$%d", 5000);
                                     GameTextForPlayer(playerid, string, 5000, 1);
                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -119,7 +119,7 @@ YCMD:nos(playerid, params[], help)
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     AddVehicleComponent(pojazd, 1010);
-                                    DajKase(playerid, -5000);
+                                    ZabierzKase(playerid, 5000);
                                     format(string, sizeof(string), "~r~-$%d", 5000);
                                     GameTextForPlayer(playerid, string, 5000, 1);
                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -142,7 +142,7 @@ YCMD:nos(playerid, params[], help)
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     AddVehicleComponent(pojazd, 1009);
-                                    DajKase(playerid, -5000);
+                                    ZabierzKase(playerid, 5000);
                                     format(string, sizeof(string), "~r~-$%d", 5000);
                                     GameTextForPlayer(playerid, string, 5000, 1);
                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);

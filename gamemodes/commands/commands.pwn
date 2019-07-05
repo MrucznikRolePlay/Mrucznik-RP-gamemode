@@ -349,7 +349,7 @@
 #include "cmd/poddajsie2.pwn"
 #include "cmd/podglad.pwn"
 #include "cmd/podszyjsie.pwn"
-#include "cmd/pogoda.pwn"
+#include "cmd/setpogoda.pwn"
 #include "cmd/pogodaall.pwn"
 #include "cmd/pojazdygracza.pwn"
 #include "cmd/pokazcb.pwn"
@@ -466,6 +466,7 @@
 #include "cmd/sprzedajnarkotyki.pwn"
 #include "cmd/sprzedajrybe.pwn"
 #include "cmd/stanowe.pwn"
+#include "cmd/setactoranime.pwn"
 #include "cmd/startlotto.pwn"
 #include "cmd/startujlekcje.pwn"
 #include "cmd/staty.pwn"
@@ -663,6 +664,8 @@
 #include "cmd/setserverpass.pwn"
 #include "cmd/tognewbie.pwn"
 #include "cmd/stan.pwn"
+#include "cmd/personalizuj.pwn"
+#include "cmd/vinyl.pwn"
 
 InitCommands()
 {
@@ -1027,7 +1030,8 @@ static Aliases()
 	Command_AddAltNamed("podatek", "settax");
 
 	//pogoda
-	Command_AddAltNamed("pogoda", "weather");
+	Command_AddAltNamed("setpogoda", "setweather");
+	Command_AddAltNamed("setpogoda", "dajpogode"); 
 
 	//pokazdowod
 	Command_AddAltNamed("pokazdowod", "dowod");

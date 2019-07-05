@@ -61,7 +61,7 @@ YCMD:wypij(playerid, params[], help)
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_BEER);
 					SetPlayerDrunkLevel (playerid, 3000);
 					PlayerInfo[playerid][pPiwo] += 1;
-				    DajKase(playerid, - 6);
+				    ZabierzKase(playerid, 6);
 				    PlayerDrunk[playerid] += 1;
 					if(PlayerDrunk[playerid] >= 5) { GameTextForPlayer(playerid, "~w~Jestes~n~~p~Pijany", 3500, 1); }
 					if(health < 100.0)
@@ -86,7 +86,7 @@ YCMD:wypij(playerid, params[], help)
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_BEER);
 					SetPlayerDrunkLevel (playerid, 5000);
 					PlayerInfo[playerid][pPiwo] += 1;
-				    DajKase(playerid, - 10);
+				    ZabierzKase(playerid, 10);
 				    PlayerDrunk[playerid] += 2;
 					if(PlayerDrunk[playerid] >= 5) { GameTextForPlayer(playerid, "~w~Jestes~n~~p~Pijany", 3500, 1); }
 					if(health < 100)
@@ -105,7 +105,7 @@ YCMD:wypij(playerid, params[], help)
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_WINE);
 					SetPlayerDrunkLevel (playerid, 10000);
 					PlayerInfo[playerid][pWino] += 1;
-				    DajKase(playerid, - 10);
+				    ZabierzKase(playerid, 10);
 				    PlayerDrunk[playerid] += 3;
 					if(PlayerDrunk[playerid] >= 5) { GameTextForPlayer(playerid, "~w~Jestes~n~~p~Pijany", 3500, 1); }
 					if(health < 100)
@@ -118,7 +118,7 @@ YCMD:wypij(playerid, params[], help)
 				{
 				    SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
 				    PlayerInfo[playerid][pSprunk] += 1;
-				    DajKase(playerid, - 1);
+				    ZabierzKase(playerid, 1);
 				    if(health < 100)
 					{
 					    if(PlayerInfo[playerid][pAlcoholPerk] > 0) { new hp = 2 * PlayerInfo[playerid][pAlcoholPerk]; hp += 5; SetPlayerHealth(playerid, health + hp); }
@@ -129,7 +129,7 @@ YCMD:wypij(playerid, params[], help)
 				{
 				    SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
 				    PlayerInfo[playerid][pSprunk] += 1;
-				    DajKase(playerid, - 2);
+				    ZabierzKase(playerid, 2);
 				    if(health < 100)
 					{
 					    if(PlayerInfo[playerid][pAlcoholPerk] > 0)
@@ -148,7 +148,7 @@ YCMD:wypij(playerid, params[], help)
 				{
 				    SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
 				    PlayerInfo[playerid][pSprunk] += 1;
-				    DajKase(playerid, - 3);
+				    ZabierzKase(playerid, 3);
 				    if(health < 100)
 					{
 					    if(PlayerInfo[playerid][pAlcoholPerk] > 0) { new hp = 2 * PlayerInfo[playerid][pAlcoholPerk]; hp += 7; SetPlayerHealth(playerid, health + hp); }
@@ -165,7 +165,7 @@ YCMD:wypij(playerid, params[], help)
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_WINE);
 					SetPlayerDrunkLevel (playerid, 5000);
 					PlayerInfo[playerid][pWino] += 1;
-				    DajKase(playerid, - 10);
+				    ZabierzKase(playerid, 10);
 				    PlayerDrunk[playerid] += 1;
 					if(PlayerDrunk[playerid] >= 5) { GameTextForPlayer(playerid, "~w~Jestes~n~~p~Pijany", 3500, 1); }
 					if(health < 100)
@@ -180,7 +180,7 @@ YCMD:wypij(playerid, params[], help)
 				    SetPlayerDrunkLevel (playerid, 10000);
 				    PlayerInfo[playerid][pPiwo] += 1;
     				SendClientMessage(playerid, COLOR_WHITE, "Barman: Mam nadzieje ¿e nie bêdziesz tego pi³, gdy¿ denaturat do tego nie s³u¿y.");
-				 	DajKase(playerid, - 2);
+				 	ZabierzKase(playerid, 2);
 	    			PlayerDrunk[playerid] += 2;
 					if(PlayerDrunk[playerid] >= 5) { GameTextForPlayer(playerid, "~w~Jestes~n~~p~Pijany", 3500, 1); }
 					if(health < 100)
@@ -199,7 +199,7 @@ YCMD:wypij(playerid, params[], help)
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_BEER);
 					SetPlayerDrunkLevel (playerid, 3000);
 					PlayerInfo[playerid][pPiwo] += 1;
-				    DajKase(playerid, - 2);
+				    ZabierzKase(playerid, 2);
 				    PlayerDrunk[playerid] += 1;
 					if(PlayerDrunk[playerid] >= 5) { GameTextForPlayer(playerid, "~w~Jestes~n~~p~Pijany", 3500, 1); }
 					if(health < 100)
@@ -217,7 +217,7 @@ YCMD:wypij(playerid, params[], help)
 					}
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
 					SetPlayerDrunkLevel (playerid, 50000);
-				    DajKase(playerid, - 100);
+				    ZabierzKase(playerid, 100);
 				    PlayerDrunk[playerid] += 5;
 					if(PlayerDrunk[playerid] >= 5) { GameTextForPlayer(playerid, "~w~Jestes~n~~p~Pijany", 3500, 1); }
 					if(health < 100)

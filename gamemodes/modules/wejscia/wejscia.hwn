@@ -40,7 +40,8 @@ enum eWejscia
 	w_int2,
 	w_vw2,
 	w_pLocal,
-	w_UID
+	w_UID,
+	Float:w_specCome
 };
 new	Float:wejscia[MAX_WEJSC][eWejscia];
 

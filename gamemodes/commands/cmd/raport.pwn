@@ -51,7 +51,7 @@ YCMD:raport(playerid, params[], help)
 				return 1;
 			}
 			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
-			SendMessageToAdmin(string, COLOR_YELLOW);
+			SendMessageToAdminEx(string, COLOR_YELLOW, 1);
 			format(string, sizeof(string), "? Report od %s [%d]: %s", sendername, playerid, params);
 			SendDiscordMessage(DISCORD_REPORT, string);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid

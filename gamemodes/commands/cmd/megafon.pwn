@@ -52,24 +52,64 @@ YCMD:megafon(playerid, params[], help)
 			sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /b [treœæ]");
 			return 1;
 		}
+		//=========================[DLA SAN NEWS]==================================
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 292.9130,-1572.0863,118.1219))
+		{
+			format(string, sizeof(string), "[Uczestnik [1] %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 294.8142,-1572.0300,118.1219))
+		{
+			format(string, sizeof(string), "[Uczestnik [2] %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 297.7858,-1572.1030,118.1219))
+		{
+			format(string, sizeof(string), "[Uczestnik [3] %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 299.9479,-1572.0898,118.1219))
+		{
+			format(string, sizeof(string), "[Uczestnik [4] %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 296.5654,-1574.9280,118.1219))
+		{
+			format(string, sizeof(string), "[Prowadz¹cy %s: %s]", sendername, params);
+			ProxDetector(50.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			return 1;
+		}
 		//=========================[DLA S¥DU]======================================
-		if(IsPlayerInRangeOfPoint(playerid, 2.2, 1306.3802,-1305.0647,36.7236))//Oskar¿ony
+		if(GetPlayerVirtualWorld(playerid)== 15 || GetPlayerVirtualWorld(playerid)== 16 || GetPlayerVirtualWorld(playerid)== 17)
 		{
-			format(string, sizeof(string), "[Oskar¿ony %s: %s]", sendername, params);
-			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			return 1;
-		}
-		if(IsPlayerInRangeOfPoint(playerid, 2.2, 1305.8812,-1294.8978,36.7216))//Oskar¿yciel
-		{
-			format(string, sizeof(string), "[Oskar¿yciel %s: %s]", sendername, params);
-			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			return 1;
-		}
-		if(IsPlayerInRangeOfPoint(playerid, 2.2, 1304.4594,-1300.0845,35.6941))//Swiadek
-		{
-			format(string, sizeof(string), "[Œwiadek %s: %s]", sendername, params);
-			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			return 1;
+			if(IsPlayerInRangeOfPoint(playerid,5,1319.7424,-1359.5912,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1319.8655,-1319.5767,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1313.1859,-1295.6798,79.7320))//Oskar¿ony
+			{
+				format(string, sizeof(string), "[Oskar¿ony %s: %s]", sendername, params);
+				ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+				return 1;
+			}
+			if(IsPlayerInRangeOfPoint(playerid,5,1311.6882,-1359.3763,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1311.6819,-1319.5743,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1306.6122,-1295.5017,79.7320))//Oskar¿yciel
+			{
+				format(string, sizeof(string), "[Oskar¿yciel %s: %s]", sendername, params);
+				ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+				return 1;
+			}
+			if(IsPlayerInRangeOfPoint(playerid,5,1315.5699,-1355.1246,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1315.6741,-1314.7883,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1321.9991,-1283.2745,80.1720))//Swiadek
+			{
+				format(string, sizeof(string), "[Œwiadek %s: %s]", sendername, params);
+				ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+				return 1;
+			}
 		}
 		//=======================[KONIEC]==================================================
 		//=======================[DLA ORGANIZACJI:]========================================
@@ -135,10 +175,12 @@ YCMD:megafon(playerid, params[], help)
         }
         else if(GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
         {
-            if(IsPlayerInRangeOfPoint(playerid, 3.0, 1310.2848,-1299.7623,36.9401))
+            if(IsPlayerInRangeOfPoint(playerid,5,1315.6835,-1348.1102,73.9968)
+        	|| IsPlayerInRangeOfPoint(playerid,5,1315.5305,-1308.1102,73.9968)
+        	|| IsPlayerInRangeOfPoint(playerid,10,1309.9856,-1278.9166,81.7088))
             {
                 format(string, sizeof(string), "[Sêdzia %s: %s]", sendername, params);
-			    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			    ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
             }
             else
             {

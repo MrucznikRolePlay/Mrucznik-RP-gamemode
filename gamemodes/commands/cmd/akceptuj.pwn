@@ -53,7 +53,7 @@ YCMD:akceptuj(playerid, params[], help)
 			/*SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
 			SetPVarInt(giveplayerid, "Oferujacy_Cena", value); 
 			SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]);*/
-			if(GetPVarInt(playerid, "Oferujacy_ID") == INVALID_PLAYER_ID)
+			if(GetPVarInt(playerid, "Oferujacy_ID") == INVALID_PLAYER_ID)//przy connect
 			{
 				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
 				return 1;
@@ -180,7 +180,7 @@ YCMD:akceptuj(playerid, params[], help)
                                     format(string, sizeof(string), "* %s akceptowa³ sprzeda¿ neonów, zarabiasz 25 000$.", sendername);
                                     SendClientMessage(dawacz, COLOR_LIGHTBLUE, string);
                                     Log(payLog, INFO, "%s kupi³ od %s neony do auta %s", GetPlayerLogName(playerid), GetPlayerLogName(dawacz), GetVehicleLogName(pojazd));
-                                    DajKase(playerid, -3000000);
+                                    ZabierzKase(playerid, 3000000);
                                     DajKase(dawacz, 75000);
                                     Sejf_Add(FRAC_NOA, 50000);//wplacanie kasy
                                     IloscAut[playerid] = VehicleUID[pojazd][vUID];
@@ -264,13 +264,13 @@ YCMD:akceptuj(playerid, params[], help)
                         }
                         else
                         {
-                            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie zaoferowa³ ci auta !");
+                            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie zaoferowa³ ci auta!");
                             return 1;
                         }
                     }
                     else
                     {
-                        SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê !");
+                        SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê!");
                         return 1;
                     }
                 }
@@ -278,7 +278,7 @@ YCMD:akceptuj(playerid, params[], help)
             }
             else
             {
-                SendClientMessage(playerid, COLOR_GREY, "   Nikt nie oferowa³ ci sprzeda¿y !");
+                SendClientMessage(playerid, COLOR_GREY, "   Nikt nie oferowa³ ci sprzeda¿y!");
                 return 1;
             }
         }
@@ -1031,7 +1031,7 @@ YCMD:akceptuj(playerid, params[], help)
                             SendRadioMessage(1, COLOR_PANICRED, string);
                             SendRadioMessage(2, COLOR_PANICRED, string);
                             SendRadioMessage(3, COLOR_PANICRED, string);
-                            DajKase(playerid, -20000);
+                            ZabierzKase(playerid, 20000);
                             Sejf_Add(PlayerInfo[playerid][pMember], 10000);
                             ApprovedLawyer[giveplayerid] = 1;
                             return 1;
@@ -1054,7 +1054,12 @@ YCMD:akceptuj(playerid, params[], help)
 			//SetPVarInt(playerid, "idPrawnika", playerid);
 			if(kaska[playerid] >= money)
 			{
-				//Test
+                if(OfferPlayer[playerid] == -1)
+                {
+                    sendErrorMessage(playerid, "Nikt nie oferowa³ Ci uwolnienia z wiêzienia!"); 
+                    return 1;
+                }
+				//Test XD
 				GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));
 				format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia za kwotê %d$", GetNick(playerid, true), money);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -1089,7 +1094,7 @@ YCMD:akceptuj(playerid, params[], help)
 				//zerowanie zmiennych 2
 				OfferPrice[playerid] = 0;
 				LawyerOffer[playerid] = 0;
-				OfferPlayer[playerid] = 0;
+				OfferPlayer[playerid] = -1;
 				
 				
 			}

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ pogoda ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   money                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,50 +16,75 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: Mrucznik
+// Data utworzenia: 01.07.2019
+//Opis:
 /*
-	Zmienia pogodê dla gracza o podanym ID.
+	Modu³ odpowiadaj¹cy za operacje na pieni¹dzach gracza.
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:pogoda(playerid, params[], help)
+//-----------------<[ Funkcje: ]>-------------------
+public DajKase(playerid, money)
 {
-    if(IsPlayerConnected(playerid))
-    {
-        if(PlayerInfo[playerid][pAdmin] < 1 || !IsAScripter(playerid))
-		{
-		    noAccessMessage(playerid);
-		    return 1;
-		}
-		new weather, giveplayerid;
-		if( sscanf(params, "k<fix>d", giveplayerid, weather))
-		{
-		    sendTipMessage(playerid, "U¿yj /pogoda [ID/Czêœæ nicku] [pogodaid]");
-		    return 1;
-		}
-		if(weather < 2||weather > 20)
-		{ 
-			sendTipMessageEx(playerid, COLOR_GREY, "Id pogody od 2 do 20 !"); 
-			return 1; 
-		}
-		if(IsPlayerConnected(giveplayerid))
-		{
-			sendErrorMessage(playerid, "Nie ma takiego gracza!");
-			return 1;
-		}
+	new logstring[256], nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	format(logstring, sizeof(logstring), "%s dostal %d$", nick, money);
 
-		SetPlayerWeatherEx(giveplayerid, weather);
-		new string[128];
-		format(string, sizeof(string), "Admin %s zmieni³ pogodê dla %s na %d", GetNick(playerid), GetNick(giveplayerid, true), weather); 
-		SendMessageToAdmin(string, COLOR_P@);
-		format(string, sizeof(string), "Administrator %s zmieni³ Ci pogodê na %d", GetNick(playerid), weather);
-		sendTipMessage(giveplayerid, string); 
+	kaska[playerid] += money;
+	GivePlayerMoney(playerid, money);
+	
+	if(money < 0)
+	{
+		Log(errorLog, ERROR, logstring);
+	}
+	else
+	{
+		Log(moneyLog, INFO, logstring);
 	}
 	return 1;
 }
+
+public ZabierzKase(playerid, money)
+{
+	new logstring[256], nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	format(logstring, sizeof(logstring), "%s zabrano %d$", nick, money);
+
+	kaska[playerid] -= money;
+	GivePlayerMoney(playerid, -money);
+	
+	if(money < 0)
+	{
+		Log(errorLog, ERROR, logstring);
+	}
+	else
+	{
+		Log(moneyLog, INFO, logstring);
+	}
+	return 1;
+}
+
+public UstawKase(playerid, money)
+{
+	new logstring[256], nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, sizeof(nick));
+	format(logstring, sizeof(logstring), "%s ustawiono %d$", nick, money);
+
+	kaska[playerid] = money;
+	ResetPlayerMoney(playerid);
+	GivePlayerMoney(playerid, money);
+	
+	Log(moneyLog, INFO, logstring);
+	return 1;
+}
+
+public ResetujKase(playerid)
+{
+	kaska[playerid]=0;
+	ResetPlayerMoney(playerid);
+	return 1;
+}
+
+//end
