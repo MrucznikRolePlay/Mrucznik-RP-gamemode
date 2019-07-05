@@ -37,7 +37,9 @@ enum eActors
 	Float:a_StreamDistance,
 	a_VW,
 	a_INT,
-	a_Player
+	a_Player,
+	a_animLib[40],
+	a_animName[40]
 };
 new	Float:Actors[ACTORS_ON_WORLD][eActors];
 //------------------<[ Forwardy: ]>--------------------

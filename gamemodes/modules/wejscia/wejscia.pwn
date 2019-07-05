@@ -364,6 +364,7 @@ SprawdzWejscia(playerid)
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
 			SetInteriorTimeAndWeather(playerid);
+			fixActorsTimer[playerid] = SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}

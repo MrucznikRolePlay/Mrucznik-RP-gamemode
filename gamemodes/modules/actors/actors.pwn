@@ -36,7 +36,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:aZ, Float:aR, aInvulnerable, Float:aStreamDistance, aVW, aINT, aPlayer)
+stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:aZ, Float:aR, aInvulnerable, Float:aStreamDistance, aVW, aINT, aPlayer, aLib[40]="", aNam[40]="")
 //Tworzenie nowego actora
 {
 	Actors[valActor][a_Skin] = actorIDs;
@@ -50,6 +50,8 @@ stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:
 	Actors[valActor][a_VW] = aVW; 
 	Actors[valActor][a_INT] = aINT; 
 	Actors[valActor][a_Player] = aPlayer; 
+	Actors[valActor][a_animLib] = aLib;
+	Actors[valActor][a_animName] = aNam;
 	return valActor++; 
 }
 stock SetAnimatiorToActorMess(playerid, qActor)
@@ -61,9 +63,11 @@ stock SetAnimatiorToActorMess(playerid, qActor)
 	SendMessageToAdmin(string, COLOR_RED); 
 	return 1;
 }
-stock SetActorAnimationEx(actorIDu, alib[], aname[], loop, lockx, locky)//Ustawianie animacji dla Actora
+stock SetActorAnimationEx(actorIDu, alib[40], aname[40], loop, lockx, locky)//Ustawianie animacji dla Actora
 {
 	ApplyDynamicActorAnimation(actorIDu, alib, aname, 4.1, loop, lockx, locky, 0, 0);
+	Actors[actorIDu][a_animLib] = alib;
+	Actors[actorIDu][a_animName] = aname;
 	return 1;
 }
 stock RepairActors(worldID, interiorID)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza'
@@ -74,6 +78,13 @@ stock RepairActors(worldID, interiorID)//Funkcja naprawiaj¹ce aktorów - gdy zgin
 		{
 			SetDynamicActorPos(actorUID[i], Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]); 
 			SetDynamicActorFacingAngle(actorUID[i], Actors[i][a_posR]);
+			if(strlen(Actors[i][a_animLib]) > 3 && strlen(Actors[i][a_animName]) > 3)
+			{
+				new aalib[40], aaName[40];
+				strcat(Actors[i][a_animLib], aalib);
+				strcat(Actors[i][a_animName], aaName); 
+				SetActorAnimationEx(actorUID[i], aalib, aaName, 1, 1, 1); 
+			}
 		}
 	}
 	return 1;
@@ -97,6 +108,13 @@ stock LoadActors()//Wczytywanie actorów, tworzenie textów nad g³ow¹.
 			new textnamed[64];
 			format(textnamed, sizeof(textnamed), "%s\n[ID: %d]", Actors[i][a_Name], i); 
 			CreateDynamic3DTextLabel(textnamed, COLOR_WHITE, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]+0.98, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, Actors[i][a_VW], Actors[i][a_INT], Actors[i][a_Player]);
+		}
+		if(strlen(Actors[i][a_animLib]) > 3 && strlen(Actors[i][a_animName]) > 3)
+		{
+			new aalib[40], aaName[40];
+			strcat(Actors[i][a_animLib], aalib);
+			strcat(Actors[i][a_animName], aaName); 
+			SetActorAnimationEx(actorUID[i], aalib, aaName, 1, 1, 1); 
 		}
 	}
 	return 0; 
