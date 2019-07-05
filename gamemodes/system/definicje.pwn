@@ -183,7 +183,7 @@
 #define FRAC_LSPD   1
 #define FRAC_FBI    2
 #define FRAC_NG     3
-#define FRAC_LSMC   4
+#define FRAC_ERS    4
 #define FRAC_LCN    5
 #define FRAC_YKZ    6
 #define FRAC_BOR    7
@@ -196,7 +196,6 @@
 #define FRAC_VAGOS  14
 #define FRAC_NOA    15
 #define FRAC_WPS    16 
-#define FRAC_LSFD   17
 #define SPOILER_D 200000
 #define ZDERZAK_D 250000
 #define FELGA_D 250000
@@ -393,7 +392,17 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 #define D_PERSONALIZE 5511
 #define D_PERS_ADMIN 5513
+#define D_PERS_CHAT 5514
 #define D_PERS_VEH 5512
+#define D_PERS_INNE 5515
+
+#define D_VINYL_B 5520
+#define D_VINYL 5521
+#define D_VINYL_K 5522
+#define D_VINYL_TEKST 5523
+#define D_VINYL_NEON 5524
+#define D_VINYL_J 5525
+#define D_VINYL_CAM 5526
 
 #define SCENA_DIALOG_MAIN       5998
 #define SCENA_DIALOG_CREATE     5999

@@ -146,14 +146,14 @@ YCMD:odznaka(playerid, params[], help)
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"ka¿dego obywatela na terenie stanu San Andreas.");
 						SendClientMessage(giveplayerid, COLOR_BLUE, "|____ San Andreas State Police ____|");
 					}
-					if(GetPlayerFraction(playerid) == FRAC_LSMC)
+					if(GetPlayerFraction(playerid) == FRAC_ERS)
 					{
-						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|______________ Idetyfikator SAM-ERS ______________|");
+						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|______________ Idetyfikator ERS ______________|");
 						format(string, sizeof(string), "Numer identyfikatora: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-                        format(string, sizeof(string), "Ranga: %s", FracRang[FRAC_LSMC][PlayerInfo[playerid][pRank]]);
+                        format(string, sizeof(string), "Ranga: %s", FracRang[FRAC_ERS][PlayerInfo[playerid][pRank]]);
 						SendClientMessage(giveplayerid,COLOR_WHITE,string);
 						if(OnDuty[playerid] == 0)
 						{
@@ -166,27 +166,6 @@ YCMD:odznaka(playerid, params[], help)
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"Identyfikator uprawnia do uczestniczenia w akcjach");
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"s³u¿b. porz. oraz dowództwo w zakresie ochrony zdrowia");
 						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|____ San Andreas Metropolitan Emergency Service ____|");
-					}
-                    if(GetPlayerFraction(playerid) == FRAC_LSFD)
-					{
-						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|______________ Idetyfikator LSFD ______________|");
-						format(string, sizeof(string), "Numer identyfikatora: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
-						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
-						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-                        format(string, sizeof(string), "Ranga: %s", FracRang[FRAC_LSFD][PlayerInfo[playerid][pRank]]);
-						SendClientMessage(giveplayerid,COLOR_WHITE,string);
-						if(OnDuty[playerid] == 0)
-						{
-							SendClientMessage(giveplayerid,COLOR_WHITE,"Mo¿liwoœæ interwencji: Nie");
-						}
-						else
-						{
-							SendClientMessage(giveplayerid,COLOR_WHITE,"Mo¿liwoœæ interwencji: Tak");
-						}
-						SendClientMessage(giveplayerid,COLOR_GRAD2,"Identyfikator uprawnia do uczestniczenia w akcjach");
-						SendClientMessage(giveplayerid,COLOR_GRAD2,"s³u¿b. porz. oraz dowództwo w zakresie ochrony zdrowia");
-						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|____ Los Santos Fire Department ____|");
 					}
 					if (GetPlayerFraction(playerid) == FRAC_BOR)
 					{

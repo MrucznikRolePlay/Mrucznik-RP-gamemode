@@ -96,7 +96,7 @@ YCMD:wejdz(playerid, params[], help)
         || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
         || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
         || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
-        || IsPlayerInRangeOfPoint(playerid,3,297.7128,-1612.1783,114.4219)/*Dach*/
+        || IsPlayerInRangeOfPoint(playerid,3,285.8397,-1596.4153,114.5687)/*Dach*/
         || IsPlayerInRangeOfPoint(playerid,3,290.7577,-1604.3273,134.6113)/*Biura SAN NEWS*/)
         {
             ShowPlayerDialogEx(playerid,WINDA_SAN,DIALOG_STYLE_LIST,"Winda - San News","[Pietro - 0] Parking\n[Pietro 1] Wejscie do budynku\n[Pietro - 2] Recepcja\n[Pietro - 3] Studia\n[Pietro - 4] Akademia\n[Pietro - 5]Biura San News\n[Pietro - 6]Dach","Jedz","Anuluj");
@@ -237,7 +237,7 @@ YCMD:wejdz(playerid, params[], help)
 
         
        //chwilowe do vinyl
-        else if(PlayerToPoint(1.5, playerid, 814.4426,-1378.2600,23.6475))
+      /*  else if(PlayerToPoint(1.5, playerid, 814.4426,-1378.2600,23.6475))
         {
             if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
             {
@@ -254,7 +254,7 @@ YCMD:wejdz(playerid, params[], help)
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);
             return 1;
-        }
+        }*/
         //san news biura
         else if(PlayerToPoint(1.0, playerid, 286.0645,-1602.0117,134.4274) && posDrzwiSN[playerid] == 0)
         {

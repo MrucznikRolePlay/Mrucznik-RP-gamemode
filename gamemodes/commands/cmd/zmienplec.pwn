@@ -54,7 +54,7 @@ YCMD:zmienplec(playerid, params[], help)
 						format(string, sizeof(string),"Przeprowadzi³eœ operacje zmiany p³ci na %s. Koszt: 50 000$", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         ZabierzKase(playerid, 50000);
-                        Sejf_Add(FRAC_LSMC, 50000);
+                        Sejf_Add(FRAC_ERS, 50000);
 						if(PlayerInfo[playa][pSex] == 1)
 						{
 							format(string, sizeof(string), "Lekarz %s przeprowadzi³ na tobie operacje zmiany p³ci. Jesteœ teraz kobiet¹!", giveplayer);

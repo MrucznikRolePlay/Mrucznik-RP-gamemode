@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                   bramy                                                   //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-------------------------------------------------[ vinyl ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,55 +16,49 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: 2.5
-// Data utworzenia: 04.05.2019
 
-//
-
-//-----------------<[ Zmienne: ]>-------------------
-new iloscbram;
+// Opis:
+/*
+	
+*/
 
 
-//------------------<[ Enumy: ]>--------------------
-enum eBramy
+// Notatki skryptera:
+/*
+	
+*/
+
+YCMD:vinyl(playerid, params[], help)
 {
-	b_obiekt,
-	bool:b_flaga,
-	Float:b_x1,
-	Float:b_y1,
-	Float:b_z1,
-	Float:b_rx1,
-	Float:b_ry1,
-	Float:b_rz1,
-	Float:b_x2,
-	Float:b_y2,
-	Float:b_z2,
-	Float:b_rx2,
-	Float:b_ry2,
-	Float:b_rz2,
-	Float:b_speed,
-	Float:b_range,
-	b_uprtyp,
-	b_uprval,
-	duo_obiekt,
-	Float:duo_x1,
-	Float:duo_y1,
-	Float:duo_z1,
-	Float:duo_rx1,
-	Float:duo_ry1,
-	Float:duo_rz1,
-	Float:duo_x2,
-	Float:duo_y2,
-	Float:duo_z2,
-	Float:duo_rx2,
-	Float:duo_ry2,
-	Float:duo_rz2,
-	pAccessCard,
-	b_vw
-};
-new bramy[MAX_BRAM][eBramy];
-
-
-//------------------<[ Forwardy: ]>--------------------
-
-//end
+    if(IsPlayerConnected(playerid))
+    {
+       	if(IsPlayerInRangeOfPoint(playerid, 300, 678.121704, -1393.385620, -21.709302))
+	   	{
+			if(PlayerInfo[playerid][pLider] == FRAC_SN)
+			{
+				new txt_jacuzzi[128], txt[256];
+				if(!jacuzziVinyl)
+				{
+					format(txt_jacuzzi, 128, "{FFFFFF}\nJacuzzi: \t{FF0000}Zamkniête");
+				}
+				else
+				{
+					format(txt_jacuzzi, 128, "{FFFFFF}\nJacuzzi: \t{00FF00}Otwarte");
+				}
+				format(txt, 256, "Klub \nBiuro %s", txt_jacuzzi);
+				ShowPlayerDialogEx(playerid, D_VINYL, DIALOG_STYLE_TABLIST, "PANEL: {00FFFF}VinylClub", txt, "Wybierz", "Anuluj");
+			}
+			else
+			{
+				noAccessMessage(playerid); 
+			}
+		}
+		else 
+		{
+			sendErrorMessage(playerid, "Nie jesteœ w pobli¿u klubu!"); 
+			return 1;
+		}
+		
+	}
+	return 1;
+}

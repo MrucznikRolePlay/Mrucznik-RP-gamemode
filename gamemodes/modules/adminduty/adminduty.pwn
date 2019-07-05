@@ -33,59 +33,6 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-/*SprawdzZnaki(text[])
-{========[STARA NIE U¯YWANA FUNKCJA]========
-	new checkAdminNameValue;
-	if(strfind(text, "%") == -1 
-	&& strfind(text, "_") == -1 
-	&& strfind(text, " ") == -1
-	&& strfind(text, "!") == -1
-	&& strfind(text, "@") == -1
-	&& strfind(text, "#") == -1
-	&& strfind(text, "$") == -1
-	&& strfind(text, "^") == -1
-	&& strfind(text, "&") == -1
-	&& strfind(text, "*") == -1
-	&& strfind(text, "-") == -1
-	&& strfind(text, "~") == -1
-	&& strfind(text, "=") == -1
-	&& strfind(text, "?") == -1
-	&& strfind(text, ",") == -1
-	&& strfind(text, ".") == -1
-	&& strfind(text, "<") == -1
-	&& strfind(text, ">") == -1
-	&& strfind(text, ")") == -1
-	&& strfind(text, "(") == -1
-	&& strfind(text, "]") == -1
-	&& strfind(text, "[") == -1
-	&& strfind(text, "XD") == -1
-	&& strfind(text, "}") == -1
-	&& strfind(text, "{") == -1
-	&& strfind(text, ":") == -1 
-	&& strfind(text, "`") == -1 
-	&& strfind(text, "/") == -1
-	&& strfind(text, "|") == -1
-
-	&& strfind(text, "kurwa") == -1
-	&& strfind(text, "jebaæ") == -1
-	&& strfind(text, "jebac") == -1
-	&& strfind(text, "huj") == -1
-	&& strfind(text, "cipa") == -1
-	&& strfind(text, "kutas") == -1
-	&& strfind(text, "chuj") == -1
-	&& strfind(text, "69") == -1//Zabezpieczenie Anty-Jupik
-	&& strfind(text, "§") == -1
-	&& strfind(text, "+") == -1)
-	{
-		checkAdminNameValue = 0;
-	}
-	else
-	{
-		checkAdminNameValue = 1;
-	}
-	return checkAdminNameValue; 
-}
-*/
 GetPlayerAdminDutyStatus(playerid)
 {
 	new valueAdminStatus = GetPVarInt(playerid, "dutyadmin");
@@ -97,7 +44,7 @@ AdminDutyPlayer(playerid, status)
 	if(status == 1)//Je¿eli ma wejœæ
 	{
 		AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-		format(string, sizeof(string), "Administrator %s wszed³  na s³u¿bê administratora!", GetNick(playerid));
+		format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora!", GetNick(playerid));
 		SendAdminMessage(COLOR_RED, string); 
 		MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
 		SetPVarInt(playerid, "dutyadmin", 1);

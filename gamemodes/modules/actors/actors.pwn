@@ -16,55 +16,109 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 15.05.2019
+// Autor: Simeone 
+// Data utworzenia: 05.07.2019
 //Opis:
 /*
-	Skrypt umo¿liwiaj¹cy tworzenie Actorów, ala DodajBrame. 
+	Skrypt umo¿liwiaj¹cy tworzenie Aktorów.
+	Pozwala na interakcjê z nimi inGame.
+
+	Commands:
+	>/setactoranim - pozwala na ustawienie animacji dla actora
+	>/selactor - pozwala zaznaczyæ actora, wyœwietla GUI umo¿liwiaj¹ce edycje i ustalanie wartoœci [Trwaj¹ prace]
+
+	Odwo³ania:
+	>Submodule obiekty - plik ActorsOnWorld - zawiera wszystkich stworzonych actorów na potrzeby œwiata M-RP. 
+
 */
 
 //
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-CreaetDynamicActorEx(skinid, float:pX, float:pY, float:pZ, float:pRot, vw, int, const text[], animation)
+stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:aZ, Float:aR, aInvulnerable, Float:aStreamDistance, aVW, aINT, aPlayer, aLib[40]="", aNam[40]="")
+//Tworzenie nowego actora
 {
-	new valActors;
-	sActors[valActors][a_skin] = skinid;
-	sActors[valActors][a_vw] = vw;
-	sActors[valActors][a_int] = int;
-	sActors[valActors][a_x] = pX;
-	sActors[valActors][a_y] = pY;
-	sActors[valActors][a_z] = pZ; 
-	sActors[valActors][a_rot] = pRot; 
-	sActors[valActors][a_text] = text; 
-	sActors[valActors][a_animation] = animation; 
-	return valActors++;
+	Actors[valActor][a_Skin] = actorIDs;
+	Actors[valActor][a_Name] = aName; 
+	Actors[valActor][a_posX] = aX; 
+	Actors[valActor][a_posY] = aY;
+	Actors[valActor][a_posZ] = aZ; 
+	Actors[valActor][a_posR] = aR; 
+	Actors[valActor][a_Invulnerable] = aInvulnerable; 
+	Actors[valActor][a_StreamDistance] = aStreamDistance;
+	Actors[valActor][a_VW] = aVW; 
+	Actors[valActor][a_INT] = aINT; 
+	Actors[valActor][a_Player] = aPlayer; 
+	Actors[valActor][a_animLib] = aLib;
+	Actors[valActor][a_animName] = aNam;
+	return valActor++; 
 }
-
-LoadTextOnActor(Float:pX, Float:pY, Float:pZ, const text[], vw, int)
+stock SetAnimatiorToActorMess(playerid, qActor)
 {
-	CreateDynamic3DTextLabel(text, COLOR_WHITE, pX, pY, pZ, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID,  0, vw, int, -1);
-	return 1; 
+	new string[124]; 
+	format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[qActor][a_Name], qActor);
+	sendTipMessage(playerid, string); 
+	format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[qActor][a_Name], qActor); 
+	SendMessageToAdmin(string, COLOR_RED); 
+	return 1;
 }
-
-LoadActors() 
+stock SetActorAnimationEx(actorIDu, alib[40], aname[40], loop, lockx, locky)//Ustawianie animacji dla Actora
 {
-	for(new i; i<valActors; i++)
-	{	
-		new actorID[i] = CreateActor(sActors[i][a_skin], sActors[i][a_x], sActors[i][a_y], sActors[i][a_z], sActors[i][a_rot]);
-		if(strlen(sActors[i][a_text] >= 3))
+	ApplyDynamicActorAnimation(actorIDu, alib, aname, 4.1, loop, lockx, locky, 0, 0);
+	Actors[actorIDu][a_animLib] = alib;
+	Actors[actorIDu][a_animName] = aname;
+	return 1;
+}
+stock RepairActors(worldID, interiorID)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza'
+{
+	for(new i; i<valActor; i++)
+	{
+		if(Actors[i][a_VW] == worldID && Actors[i][a_INT] == interiorID)
 		{
-			LoadTextOnActor(sActors[i][a_x], sActors[i][a_y], sActors[i][a_z]+0.85, sActors[i][a_text], sActors[i][a_vw], sActors[i][a_int]);
+			SetDynamicActorPos(actorUID[i], Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]); 
+			SetDynamicActorFacingAngle(actorUID[i], Actors[i][a_posR]);
+			if(strlen(Actors[i][a_animLib]) > 3 && strlen(Actors[i][a_animName]) > 3)
+			{
+				new aalib[40], aaName[40];
+				strcat(Actors[i][a_animLib], aalib);
+				strcat(Actors[i][a_animName], aaName); 
+				SetActorAnimationEx(actorUID[i], aalib, aaName, 1, 1, 1); 
+			}
 		}
-	/*	if(sActors[i][a_animation] >= 1)
+	}
+	return 1;
+}
+stock LoadActors()//Wczytywanie actorów, tworzenie textów nad g³ow¹. 
+{
+	for(new i; i<valActor; i++)
+	{
+		actorUID[i] = CreateDynamicActor(Actors[i][a_Skin],
+		Actors[i][a_posX],
+		Actors[i][a_posY], 
+		Actors[i][a_posZ], 
+		Actors[i][a_posR],
+		Actors[i][a_Invulnerable],
+		Actors[i][a_StreamDistance],
+		Actors[i][a_VW],
+		Actors[i][a_INT],
+		Actors[i][a_Player]);
+		if(strlen(Actors[i][a_Name]) > 3)
 		{
-			ApplyActorAnimation(actorID[i], animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time) 
-		}*/
+			new textnamed[64];
+			format(textnamed, sizeof(textnamed), "%s\n[ID: %d]", Actors[i][a_Name], i); 
+			CreateDynamic3DTextLabel(textnamed, COLOR_WHITE, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]+0.98, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, Actors[i][a_VW], Actors[i][a_INT], Actors[i][a_Player]);
+		}
+		if(strlen(Actors[i][a_animLib]) > 3 && strlen(Actors[i][a_animName]) > 3)
+		{
+			new aalib[40], aaName[40];
+			strcat(Actors[i][a_animLib], aalib);
+			strcat(Actors[i][a_animName], aaName); 
+			SetActorAnimationEx(actorUID[i], aalib, aaName, 1, 1, 1); 
+		}
 	}
 	return 0; 
 }
-
 //-----------------<[ Timery: ]>-------------------
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------

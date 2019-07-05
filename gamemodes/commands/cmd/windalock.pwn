@@ -59,7 +59,7 @@ YCMD:windalock(playerid, params[], help)
 				sendErrorMessage(playerid, "Poziom od 0 do 7");
 				return 1;
 			}
-			if(level == 6 && PlayerInfo[playerid][pLider] != FRAC_SN)
+			if(level == 5 && PlayerInfo[playerid][pLider] != FRAC_SN)
 			{
 				sendErrorMessage(playerid, "Nie masz wystarczaj¹cych uprawnieñ aby otwieraæ to piêtro!"); 
 				return 1;

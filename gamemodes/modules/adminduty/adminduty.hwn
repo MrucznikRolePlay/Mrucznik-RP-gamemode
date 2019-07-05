@@ -31,7 +31,8 @@ new iloscAJ[MAX_PLAYERS];//Iloœæ rozdanych przez admina AJ ---------------------
 new iloscInWiadomosci[MAX_PLAYERS];//Iloœæ wchodz¹cych wiadomoœci ----------------> [/w]
 new iloscOutWiadomosci[MAX_PLAYERS];//Iloœæ wuchodz¹cych wiadomoœci --------------> [/w]
 new iloscZapytaj[MAX_PLAYERS];//Iloœæ reakcji na /zapytaj -------------------------> [/tickets]
-new iloscInne[MAX_PLAYERS]; //Inne kary/akcje administracyjne ---------------------> [/slap, /gethere, /tp, /getcar, /pogodaall, /fuelcar, /fixveh, /fuelcars, /sethp, /setarmor, /fixallveh, /mute, /freeze, /unfreeze, ]
+new iloscPozaDuty[MAX_PLAYERS];//Iloœæ akcji wykonanych poza s³u¿b¹ administratora -> [/ban /kick /block /aj /pban /block /paj /bp]
+new iloscInne[MAX_PLAYERS]; //Inne kary/akcje administracyjne ---------------------> [/slap, /gethere, /tp, /getcar, /pogodaall, /fuelcar, /fixveh, /fuelcars, /sethp, /setarmor, /fixallveh, /mute, /freeze, /unfreeze, /bp ]
 new AdminDutyMinuty[MAX_PLAYERS];//Czas s³u¿by - Minuty
 new AdminDutyGodziny[MAX_PLAYERS];//Czas s³u¿by - Godziny
 new AdminDutyTimer[MAX_PLAYERS];//Czas s³u¿by - Timer

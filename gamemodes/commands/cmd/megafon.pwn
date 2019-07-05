@@ -84,29 +84,32 @@ YCMD:megafon(playerid, params[], help)
 			return 1;
 		}
 		//=========================[DLA S¥DU]======================================
-		if(IsPlayerInRangeOfPoint(playerid,5,1319.7424,-1359.5912,73.1409)
-        || IsPlayerInRangeOfPoint(playerid,5,1319.8655,-1319.5767,73.1409)
-        || IsPlayerInRangeOfPoint(playerid,10,1313.1859,-1295.6798,79.7320))//Oskar¿ony
+		if(GetPlayerVirtualWorld(playerid)== 15 || GetPlayerVirtualWorld(playerid)== 16 || GetPlayerVirtualWorld(playerid)== 17)
 		{
-			format(string, sizeof(string), "[Oskar¿ony %s: %s]", sendername, params);
-			ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			return 1;
-		}
-		if(IsPlayerInRangeOfPoint(playerid,5,1311.6882,-1359.3763,73.1409)
-        || IsPlayerInRangeOfPoint(playerid,5,1311.6819,-1319.5743,73.1409)
-        || IsPlayerInRangeOfPoint(playerid,10,1306.6122,-1295.5017,79.7320))//Oskar¿yciel
-		{
-			format(string, sizeof(string), "[Oskar¿yciel %s: %s]", sendername, params);
-			ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			return 1;
-		}
-		if(IsPlayerInRangeOfPoint(playerid,5,1315.5699,-1355.1246,73.1409)
-        || IsPlayerInRangeOfPoint(playerid,5,1315.6741,-1314.7883,73.1409)
-        || IsPlayerInRangeOfPoint(playerid,10,1321.9991,-1283.2745,80.1720))//Swiadek
-		{
-			format(string, sizeof(string), "[Œwiadek %s: %s]", sendername, params);
-			ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			return 1;
+			if(IsPlayerInRangeOfPoint(playerid,5,1319.7424,-1359.5912,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1319.8655,-1319.5767,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1313.1859,-1295.6798,79.7320))//Oskar¿ony
+			{
+				format(string, sizeof(string), "[Oskar¿ony %s: %s]", sendername, params);
+				ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+				return 1;
+			}
+			if(IsPlayerInRangeOfPoint(playerid,5,1311.6882,-1359.3763,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1311.6819,-1319.5743,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1306.6122,-1295.5017,79.7320))//Oskar¿yciel
+			{
+				format(string, sizeof(string), "[Oskar¿yciel %s: %s]", sendername, params);
+				ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+				return 1;
+			}
+			if(IsPlayerInRangeOfPoint(playerid,5,1315.5699,-1355.1246,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1315.6741,-1314.7883,73.1409)
+			|| IsPlayerInRangeOfPoint(playerid,5,1321.9991,-1283.2745,80.1720))//Swiadek
+			{
+				format(string, sizeof(string), "[Œwiadek %s: %s]", sendername, params);
+				ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+				return 1;
+			}
 		}
 		//=======================[KONIEC]==================================================
 		//=======================[DLA ORGANIZACJI:]========================================

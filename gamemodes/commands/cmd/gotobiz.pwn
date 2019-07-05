@@ -36,7 +36,7 @@ YCMD:gotobiz(playerid, params[], help)
 		if(sscanf(params, "d", plo)) return sendTipMessage(playerid, "U¿yj /gototbiz [ID biznesu]");
 		if(plo >= 1)
 		{
-		    if(plo <= 100)
+		    if(plo <= MAX_BIZNES)//Max Biz
 		    {
 				if(PlayerInfo[playerid][pAdmin] >= 1)
 				{

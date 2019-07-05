@@ -85,6 +85,19 @@ public PizzaJobTimer01(playerid)
 	}
 	return 1;
 }
+forward ActorsFix(playerid);
+public ActorsFix(playerid)
+{
+	new playerVW = GetPlayerVirtualWorld(playerid); 
+	new playerINT = GetPlayerInterior(playerid); 
+	RepairActors(playerVW, playerINT);
+	if(PlayerInfo[playerid][pAdmin] > 1)
+	{
+		sendTipMessage(playerid, "Reset Aktorów - UDANY"); 
+	}
+	KillTimer(fixActorsTimer[playerid]); 
+	return 1;
+}
 //Naprawianie timer
 public Naprawa(playerid)
 {
@@ -133,6 +146,40 @@ public Naprawa(playerid)
 	}
     return 1;
 }
+
+//===============[VINYL CLUB]=======
+forward textVinylT();
+public textVinylT(){
+	new Float:Pos[3];
+	GetDynamicObjectPos(text_Vinyl, Pos[0], Pos[1], Pos[2]);
+	if(Pos[2] == -21.528980){
+		MoveDynamicObject(text_Vinyl, 817.176879, -1386.975463, -23.0, 1);
+	}else{
+		MoveDynamicObject(text_Vinyl, 817.176879, -1386.975463, -21.528980, 1);
+	}
+	return 1;
+}
+forward FreezePlayer(playerid);
+public FreezePlayer(playerid){
+	TogglePlayerControllable(playerid, 1);
+	return 1;
+}
+
+forward SetTimeAndWeather (playerid);
+public SetTimeAndWeather(playerid)
+{
+	new weatherID, timeVal; 
+	weatherID = GetPVarInt(playerid, "WeatherToSet"); 
+	timeVal = GetPVarInt(playerid, "TimeToSet");
+	SetPlayerTime(playerid, timeVal, 0);
+	SetPlayerWeather(playerid, weatherID);
+	sendTipMessage(playerid, "Pomyœlnie ustalono pogodê i czas dla VW"); 
+	KillTimer(SetTAWForPlayer[playerid]); 
+	return 1;
+}
+
+
+//KONIEC
 forward odczekaj15sec(playerid);
 public odczekaj15sec(playerid)
 {
@@ -954,7 +1001,6 @@ public MainTimer()
     else
         TICKS_30Min++;
 }
-
 //TODO: mysql asynchroniczny
 forward SaveMyAccountTimer(playerid);
 public SaveMyAccountTimer(playerid)
@@ -1004,7 +1050,7 @@ public Spectator()
 		GetPlayerPos(PDGPS, x, y, z);
 		foreach(new i : Player)
 		{
-			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
+			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
 				SetPlayerCheckpoint(i, x, y, z, 4.0);
 		}
 	}
@@ -1036,7 +1082,7 @@ public Spectator()
         //Vinyl audio check
         if(!GetPVarInt(i, "VINYL-stream"))
         {
-            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3], VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && GetPlayerVirtualWorld(i) == floatround(VinylAudioPos[4]))
+            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3], VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && (GetPlayerVirtualWorld(i) == 71 || GetPlayerVirtualWorld(i) == 72))
             {
                 SetPVarInt(i, "VINYL-stream", 1);
                 PlayAudioStreamForPlayer(i, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);

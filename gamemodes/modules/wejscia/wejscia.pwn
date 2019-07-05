@@ -27,7 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255)
+DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255, bool:specialCome=false)
 {
 	wejscia[iloscwejsc][w_x1] = fx1;
 	wejscia[iloscwejsc][w_y1] = fy1;
@@ -41,8 +41,10 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 	wejscia[iloscwejsc][w_int2] = int2;
 	wejscia[iloscwejsc][w_pLocal] = playerLocal;
 	wejscia[iloscwejsc][w_UID] = wejdzUID;
-	
-	
+	if(specialCome)
+	{
+		wejscia[iloscwejsc][w_specCome] = 1.3;
+	}
 	if(isnull(nazwain)) 
 	{
 		CreateDynamicPickup(1239, 2, fx1, fy1, fz1, vw1, int1);
@@ -67,22 +69,43 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 Sprawdz_w_cord(playerid, id)
 {
 	new playerPos;//0 - nigdzie, 1 - na /wejdz, 2 - na /wyjdz
-	
-	if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw1]
-	&& GetPlayerInterior(playerid) == wejscia[id][w_int1]
-	&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x1],wejscia[id][w_y1],wejscia[id][w_z1]))
+	if(wejscia[id][w_specCome] > 0.5)
 	{
-		playerPos = OUT_INTERIOR; 
+		if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw1]
+		&& GetPlayerInterior(playerid) == wejscia[id][w_int1]
+		&& IsPlayerInRangeOfPoint(playerid, wejscia[id][w_specCome], wejscia[id][w_x1],wejscia[id][w_y1],wejscia[id][w_z1]))
+		{
+			playerPos = OUT_INTERIOR; 
+		}
+		else if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw2]
+		&& GetPlayerInterior(playerid) == wejscia[id][w_int2]
+		&& IsPlayerInRangeOfPoint(playerid, wejscia[id][w_specCome], wejscia[id][w_x2],wejscia[id][w_y2],wejscia[id][w_z2]))
+		{
+			playerPos = IN_INTERIOR; 
+		}
+		else
+		{
+			playerPos = NOT_IN_ENTER_RANGE;
+		}
 	}
-	else if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw2]
-	&& GetPlayerInterior(playerid) == wejscia[id][w_int2]
-	&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x2],wejscia[id][w_y2],wejscia[id][w_z2]))
+	else 
 	{
-		playerPos = IN_INTERIOR; 
-	}
-	else
-	{
-		playerPos = NOT_IN_ENTER_RANGE;
+		if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw1]
+		&& GetPlayerInterior(playerid) == wejscia[id][w_int1]
+		&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x1],wejscia[id][w_y1],wejscia[id][w_z1]))
+		{
+			playerPos = OUT_INTERIOR; 
+		}
+		else if(GetPlayerVirtualWorld(playerid) == wejscia[id][w_vw2]
+		&& GetPlayerInterior(playerid) == wejscia[id][w_int2]
+		&& IsPlayerInRangeOfPoint(playerid, 3.0, wejscia[id][w_x2],wejscia[id][w_y2],wejscia[id][w_z2]))
+		{
+			playerPos = IN_INTERIOR; 
+		}
+		else
+		{
+			playerPos = NOT_IN_ENTER_RANGE;
+		}
 	}
 	return playerPos;
 }
@@ -149,7 +172,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}	
 	else if(Check_ID == 3)
 	{
-		if(doorFBIStatus == 0 || GetPlayerFraction(playerid) != FRAC_FBI)
+		if(doorFBIStatus == 0 && GetPlayerFraction(playerid) != FRAC_FBI)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "Drzwi s¹ zamkniête"); 
 			noAccessCome[playerid] =1; 
@@ -218,7 +241,8 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 10)
 	{
-		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~Albert ~w~& ~h~~y~Patryk", 5000, 1);	
+		GameTextForPlayer(playerid, "~w~Witamy w Klubie by~n~  ~h~~g~MrN", 5000, 1);
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);	
 	}
 	else if(Check_ID == 11)
 	{
@@ -233,6 +257,30 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			return 1;
 		}
 	}
+	else if(Check_ID == 13)
+	{
+		SetPlayerTW(playerid, 5000, 1, 6); 
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+	}
+	else if(Check_ID == 14)
+	{
+		sendTipMessageEx(playerid, COLOR_GREEN, "======[Los Santos MMA]======");
+		sendTipMessageEx(playerid, COLOR_P@, "Sponsorzy:");
+		sendTipMessage(playerid, "San News, United States Secret Service, Communist Part of San Andreas;");
+		sendTipMessage(playerid, "Kancelaria Gubernatora, Simon Cotta, John Mcintosh"); 
+		sendTipMessageEx(playerid, COLOR_P@, "W³odarze:");
+		sendTipMessage(playerid, "Beyonce Bennett, Mat Drep"); 
+		sendTipMessageEx(playerid, COLOR_P@, "Walka wieczoru:"); 
+		sendTipMessage(playerid, "Simon Cotta vs. John Mrucznik"); 
+		sendTipMessageEx(playerid, COLOR_GREEN, "===========[Fight]===========");
+		GameTextForPlayer(playerid, "~w~By~n~~r~Dreptacz", 5000, 1); 
+	}
+	else if(Check_ID == 15)
+	{
+		GameTextForPlayer(playerid, "~w~By~n~~g~Dreptacz", 5000, 1); 
+		sendTipMessage(playerid, "Zapraszamy na rzeŸ!");
+
+	}
 	else
 	{
 		sendTipMessage(playerid, "Proces /wejdz - poprawnie przeprowadzony"); 
@@ -241,7 +289,11 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 }
 Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 {
-	if(Check_ID == 6)
+	if(Check_ID == 10)
+	{
+		StopAudioStreamForPlayer(playerid); 
+	}
+	else if(Check_ID == 6)
 	{
 		StopAudioStreamForPlayer(playerid);	
 	}
@@ -312,6 +364,7 @@ SprawdzWejscia(playerid)
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
 			SetInteriorTimeAndWeather(playerid);
+			fixActorsTimer[playerid] = SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}
@@ -328,6 +381,7 @@ SprawdzWejscia(playerid)
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 			PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 			SetServerWeatherAndTime(playerid);
+			fixActorsTimer[playerid] = SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}

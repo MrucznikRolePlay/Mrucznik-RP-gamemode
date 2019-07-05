@@ -82,6 +82,14 @@ YCMD:ban(playerid, params[], help)
 						GetPlayerLogName(playerid),
 						GetPlayerLogName(giveplayerid),
 						result);
+					if(GetPlayerAdminDutyStatus(playerid) == 1)
+					{
+						iloscBan[playerid]++;
+					}
+					else if(GetPlayerAdminDutyStatus(playerid) == 0)
+					{
+						iloscPozaDuty[playerid]++; 
+					}
 					if(kary_TXD_Status == 0)
 					{
 						format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, result);
@@ -104,12 +112,6 @@ YCMD:ban(playerid, params[], help)
 							GetPlayerLogName(playerid),
 							GetPlayerLogName(giveplayerid));
 					    KickEx(playerid);
-						//adminduty
-						if(GetPlayerAdminDutyStatus(playerid) == 1)
-						{
-							iloscBan[playerid] = iloscBan[playerid]+1;
-							
-						}
 					}
 					else
 					{

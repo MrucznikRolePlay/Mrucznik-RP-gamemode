@@ -32,7 +32,7 @@ YCMD:skinf(playerid, params[], help)
 {
     if(!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) return 1;
     if(GetPlayerFraction(playerid) == 0) return sendErrorMessage(playerid, "Nie jesteœ we frakcji!");
-    if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC || GetPlayerFraction(playerid) == FRAC_SN) return sendErrorMessage(playerid, "Twoja frakcja nie posiada tej komendy!");
+    if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_ERS || GetPlayerFraction(playerid) == FRAC_SN) return sendErrorMessage(playerid, "Twoja frakcja nie posiada tej komendy!");
 	if(GetPlayerVehicleID(playerid) != 0) return sendErrorMessage(playerid, "Nie mo¿esz znajdowaæ siê w pojeŸdzie!");
 	if(!IsAtClothShop(playerid)) return sendErrorMessage(playerid, "Nie znajdujesz siê w sklepie z ubraniami!");
     if(GetPVarInt(playerid, "skinF") == 0)

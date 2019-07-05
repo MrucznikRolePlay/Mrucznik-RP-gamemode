@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                   bramy                                                   //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ kupbiznes ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,55 +16,28 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: 2.5
-// Data utworzenia: 04.05.2019
 
-//
-
-//-----------------<[ Zmienne: ]>-------------------
-new iloscbram;
+// Opis:
+/*
+	
+*/
 
 
-//------------------<[ Enumy: ]>--------------------
-enum eBramy
+// Notatki skryptera:
+/*
+	
+*/
+
+YCMD:kupbiznes(playerid, params[], help)
 {
-	b_obiekt,
-	bool:b_flaga,
-	Float:b_x1,
-	Float:b_y1,
-	Float:b_z1,
-	Float:b_rx1,
-	Float:b_ry1,
-	Float:b_rz1,
-	Float:b_x2,
-	Float:b_y2,
-	Float:b_z2,
-	Float:b_rx2,
-	Float:b_ry2,
-	Float:b_rz2,
-	Float:b_speed,
-	Float:b_range,
-	b_uprtyp,
-	b_uprval,
-	duo_obiekt,
-	Float:duo_x1,
-	Float:duo_y1,
-	Float:duo_z1,
-	Float:duo_rx1,
-	Float:duo_ry1,
-	Float:duo_rz1,
-	Float:duo_x2,
-	Float:duo_y2,
-	Float:duo_z2,
-	Float:duo_rx2,
-	Float:duo_ry2,
-	Float:duo_rz2,
-	pAccessCard,
-	b_vw
-};
-new bramy[MAX_BRAM][eBramy];
-
-
-//------------------<[ Forwardy: ]>--------------------
-
-//end
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerInfo[playerid][pLevel] < 2)
+		{
+			sendTipMessage(playerid, "Mo¿esz zakupiæ w³asny biznes dopiero od poziomu 2");
+			return 1;
+		}
+		sendTipMessageEx(playerid, COLOR_RED, "Ta funkcja bêdzie dostêpna w aktualizacji 2.6.1"); 
+	}
+	return 1;
+}

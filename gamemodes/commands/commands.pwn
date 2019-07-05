@@ -466,6 +466,7 @@
 #include "cmd/sprzedajnarkotyki.pwn"
 #include "cmd/sprzedajrybe.pwn"
 #include "cmd/stanowe.pwn"
+#include "cmd/setactoranime.pwn"
 #include "cmd/startlotto.pwn"
 #include "cmd/startujlekcje.pwn"
 #include "cmd/staty.pwn"
@@ -664,6 +665,7 @@
 #include "cmd/tognewbie.pwn"
 #include "cmd/stan.pwn"
 #include "cmd/personalizuj.pwn"
+#include "cmd/vinyl.pwn"
 
 InitCommands()
 {

@@ -198,7 +198,7 @@ YCMD:sluzba(playerid, params[], help)
                 }
 			}
 		}
-        else if(PlayerInfo[playerid][pMember] == 4||PlayerInfo[playerid][pLider] == 4)
+        else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] >= 4)
         {
             if (PlayerToPoint(4, playerid,1147.3623,-1314.4891,13.6743))
             {
@@ -225,7 +225,7 @@ YCMD:sluzba(playerid, params[], help)
                 return 1;
             }
         }
-        else if(GetPlayerFraction(playerid) == FRAC_LSFD)
+        else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] <= 3)
         {
             if (IsPlayerInRangeOfPoint(playerid, 4.0, 1758.4077,-1123.4249,227.8059))
             {

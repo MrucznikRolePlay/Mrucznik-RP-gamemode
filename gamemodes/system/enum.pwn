@@ -478,7 +478,7 @@ new FractionNames[][40] = {
     "Los Santos Police Department",
     "Federal Bureau of Investigation",
     "San Andreas Sherrifs Department",
-    "Los Santos Medical Center",
+    "Emergency Rescue Service",
     "SA Bahamas",
     "Yakuza",
     "United States Secret Service",
@@ -491,7 +491,7 @@ new FractionNames[][40] = {
     "Hillside Nortenos 14",
     "Nightmare of Adrenalin",
     "IV Saint Reich",
-    "Los Santos Fire Department",
+    "Brak",
     "Brak",
     "Brak"
 };
@@ -1465,7 +1465,10 @@ enum pPInfo
 	PERS_NICKNAMES,//Wyœwietlanie nicków nad g³owami postaci
 	PERS_CB,//Wyœwietlanie CB radia
 	PERS_REPORT,//Wyœwietlanie reportów bez @Duty
-	WARNDEATH//Warningi o œmierciach
+	WARNDEATH,//Warningi o œmierciach
+	PERS_KARYTXD,//Wyœwietlanie kar w TXD
+	PERS_NEWNICK,//Nowe nicki w 3dtextach
+	PERS_NEWBIE//Wyœwietlanie chatu newbie
 };
 new PlayerPersonalization[MAX_PLAYERS][pPInfo];
 enum pDodatek

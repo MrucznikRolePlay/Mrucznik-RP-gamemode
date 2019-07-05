@@ -357,80 +357,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(response)
 		{
-			new string[128];
-			switch(listitem)//Cytrynowy-sza³\t10.000$\nW³adca procêtów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$
+			switch(listitem)
 			{
 				case 0:
 				{
-					if(kaska[playerid] >= 10000)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze Cytrynowy Sza³ i zaczyna go piæ", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 2000);
-						SetPlayerSpecialAction(playerid, 22);
-						ZabierzKase(playerid, 10000);
-						Sejf_Add(FRAC_SN, 10000);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName1, drinkCost1, 2000, 22);
 				}
 				case 1:
 				{
-					if(kaska[playerid] >= 15000)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze W³adce procentów i zaczyna go piæ", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 2500);
-						SetPlayerSpecialAction(playerid, 22);
-						ZabierzKase(playerid, 15000);
-						Sejf_Add(FRAC_SN, 15000);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName2, drinkCost2, 2500, 22);
 				}
 				case 2:
 				{
-					if(kaska[playerid] >= 20000)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze Napój Cotty (chce byæ jak L.Cotta) i zaczyna go piæ", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 4000);
-						SetPlayerSpecialAction(playerid, 20);
-						ZabierzKase(playerid, 20000);
-						Sejf_Add(FRAC_SN, 20000);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName3, drinkCost3, 4000, 20);
 				}
 				case 3:
 				{
-					if(kaska[playerid] >= 30000)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze twoja stara i zaczyna go piæ jak kozak", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 5000);
-						SetPlayerSpecialAction(playerid, 20);
-						ZabierzKase(playerid, 30000);
-						Sejf_Add(FRAC_SN, 30000);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName4, drinkCost4, 5000, 20);
 				}
 				
 			}
@@ -1513,7 +1456,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         foreach(new i : Player)
         {
-            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3],VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && GetPlayerVirtualWorld(i) == floatround(VinylAudioPos[4]))
+            if(IsPlayerInRangeOfPoint(i, VinylAudioPos[3],VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2]) && (GetPlayerVirtualWorld(i) == 71 || GetPlayerVirtualWorld(i) == 72))
             {
                 PlayAudioStreamForPlayer(i, inputtext,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             }
@@ -1950,6 +1893,85 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
+	else if(dialogid == 1215)
+	{
+		if(response)
+		{
+			new actorpID = GetPVarInt(playerid, "actorIDChoice");
+			new string[124]; 
+			switch(listitem)
+			{
+				case 0: 
+				{
+					ApplyDynamicActorAnimation(actorUID[actorpID], "COP_AMBIENT", "Coplook_loop", 4.1,  1, 1, 1, 0, 0);
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 1:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "RAPPING","RAP_C_Loop",  1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 2:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "BD_FIRE","BD_Panic_Loop", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 3:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "PED","IDLE_CHAT", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 4:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "DANCING","bd_clap1", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 5:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "DANCING","DAN_Loop_A", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 6:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "JST_BUISNESS","girl_02", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 7:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "ON_LOOKERS","Pointup_in", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 8:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "ON_LOOKERS","point_loop", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 9:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "PAULNMAC","Piss_loop", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 10:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "SHOP","Smoke_RYD", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 11:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "SMOKING","M_smk_drag", 1, 1, 1); 
+					SetAnimatiorToActorMess(playerid, actorpID);
+				}
+				case 12:
+				{
+					ClearDynamicActorAnimations(actorUID[actorpID]);
+					format(string, sizeof(string), "Wy³¹czy³eœ animacje dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s wyczyœci³ animacje dla actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+			}
+		}
+	}
 	else if(dialogid == iddialog[playerid])
 	{
 		if(dialogid == 1)
@@ -2185,7 +2207,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
     	                SetPlayerVirtualWorld(playerid,0);
-    	                SetPlayerPosEx(playerid,297.7128,-1612.1783,114.4219);
+    	                SetPlayerPosEx(playerid,285.8397,-1596.4153,114.5687);
     	                SetServerWeatherAndTime(playerid);
 						SetPLocal(playerid, PLOCAL_DEFAULT);
     	            }
@@ -16728,38 +16750,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					for(new i; i<valActor; i++)
-					{
-						if(IsPlayerInRangeOfPoint(playerid, 5.0, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posY]))
-						{
-							new string[124];
-							format(string, sizeof(string), "Pomyœlnie zaznaczono actora %d - %s", i, Actors[i][a_Name]); 
-							sendTipMessage(playerid, string);
-							SetPVarInt(playerid, "pActorID", i); 
-						}
-					}
+					sendTipMessage(playerid, "Dostêpne ju¿ wkrótce"); 
 				}
 				case 1:
 				{
-					if(GetPVarInt(playerid, "pActorID") != 666)
-					{
-						if(GetPlayerInterior(playerid) != 0)
-						{
-							sendErrorMessage(playerid, "Actorów nie mo¿na przenosiæ pomiêdzy interiorami!"); 
-							return 1;
-						}
-						new uidActor = actorUID[GetPVarInt(playerid, "pActorID")], Float:pX, Float:pY, Float:pZ, Float:pR;
-						GetPlayerPos(playerid, pX, pY, pZ);
-						GetPlayerFacingAngle(playerid, pR); 
-						SetDynamicActorFacingAngle(uidActor, pR);
-						SetDynamicActorVirtualWorld(uidActor, GetPlayerVirtualWorld(playerid));
-						SetDynamicActorPos(uidActor, pX, pY+0.2, pZ);
-						sendTipMessage(playerid, "Pomyœlnie przeniesiono do Ciebie actora!"); 
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Najpierw zaznacz aktora!"); 
-					}
+					sendTipMessage(playerid, "Dostêpne ju¿ wkrótce");
 				}
 				case 2:
 				{
@@ -17383,21 +17378,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					sendTipMessageEx(playerid, COLOR_P@, "Ta opcja zostanie w³¹czona ju¿ nied³ugo!"); 
-					if(PlayerPersonalization[playerid][PERS_KB] == 0)
-					{
-						sendTipMessage(playerid, "Wy³¹czy³eœ konto bankowe"); 
-						PlayerPersonalization[playerid][PERS_KB] =1;
-					}
-					else if(PlayerPersonalization[playerid][PERS_KB] == 1)
-					{
-						sendTipMessage(playerid, "W³¹czy³eœ konto bankowe"); 
-						PlayerPersonalization[playerid][PERS_KB] = 0; 
-					}
+					ShowPersonalization(playerid, 1); 
 				}
 				case 1:
 				{
-					sendTipMessageEx(playerid, COLOR_P@, "Ta opcja zostanie w³¹czona ju¿ nied³ugo!"); 
+					ShowPersonalization(playerid, 2); 
 				}
 				case 2:
 				{
@@ -17408,15 +17393,128 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					ShowPersonalization(playerid, 3); 
 				}
+				case 3:
+				{
+					ShowPersonalization(playerid, 4); 
+				}
 			}
 		}
 	}
-/*	else if(dialogid == D_PERS_VEH)
+	else if(dialogid == D_PERS_VEH)
 	{
-
-	}*/
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_LICZNIK] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_LICZNIK] = 1; 
+						ToggleSpeedo[playerid] = true;
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie licznika!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_LICZNIK] = 0;
+						ToggleSpeedo[playerid] = false;
+						sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie licznika w wozie!");
+					}
+				}
+				case 1:
+				{
+					if(PlayerPersonalization[playerid][PERS_CB] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_CB] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ CB-RADIO"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_CB] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ CB-RADIO!"); 
+					}
+				}
+			}
+		}
+	}
+	else if(dialogid == D_PERS_CHAT)
+	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;	
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+					if(PlayerPersonalization[playerid][PERS_AD] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_AD] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie og³oszeñ graczy!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_AD] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ widocznoœæ og³oszeñ graczy!"); 
+					}
+				}
+				case 1:
+				{
+					if(PlayerPersonalization[playerid][PERS_NEWBIE] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_NEWBIE] =1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ chat newbie!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_NEWBIE] =0;
+						sendTipMessage(playerid, "W³¹czy³eœ chat newbie!"); 
+					}
+				}
+				case 2:
+				{
+					if(PlayerPersonalization[playerid][PERS_FINFO] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_FINFO] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ komunikaty od frakcji"); 
+					}
+					else 
+					{
+						PlayerPersonalization[playerid][PERS_FINFO] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ komunikaty od frakcji"); 
+					}
+				}
+				case 3:
+				{
+					if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_FAMINFO] = 1;
+						sendTipMessage(playerid, "Wy³¹czy³eœ komunikaty od rodzin!"); 
+					}
+					else
+					{
+						PlayerPersonalization[playerid][PERS_FAMINFO] = 0;
+						sendTipMessage(playerid, "W³¹czy³eœ komunikaty od rodzin!"); 
+					}
+				}
+			}
+		}
+	}
 	else if(dialogid == D_PERS_ADMIN)
 	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
 		if(response)
 		{
 			switch(listitem)
@@ -17447,6 +17545,635 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						sendTipMessage(playerid, "W³¹czy³eœ podgl¹d widocznoœci œmierci graczy!"); 
 					}
 				}
+			}
+		}
+	}
+	else if(dialogid == D_PERS_INNE)
+	{
+		if(!response)
+		{
+			ShowPlayerDialogEx(playerid, D_PERSONALIZE, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Pojazd\nChat\nAdmin\nInne", "Akceptuj", "Wyjdz");
+			return 1;
+		}
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0://Konto Bankowe
+				{
+					if(PlayerPersonalization[playerid][PERS_KB] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_KB]=1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ przelew za pomoc¹ /kb"); 
+					}
+					else if(PlayerPersonalization[playerid][PERS_KB] == 1)
+					{
+						PlayerPersonalization[playerid][PERS_KB] =0; 
+						sendTipMessage(playerid, "W³¹czy³eœ przelew za pomoc¹ /kb"); 
+					}
+				}
+				case 1://NickNames
+				{
+					if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 0)
+					{
+						PlayerPersonalization[playerid][PERS_NICKNAMES] =1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ wyœwietlanie nicków nad g³ow¹!");
+						SetPVarInt(playerid, "tognick", 1);
+      					foreach(new i : Player)
+						{
+							ShowPlayerNameTagForPlayer(playerid, i, 0);
+						}
+					}
+					else if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 1)
+					{
+						PlayerPersonalization[playerid][PERS_NICKNAMES] = 0; 
+						sendTipMessage(playerid, "W³¹czy³eœ wyœwietlanie nicków nad g³ow¹"); 
+						SetPVarInt(playerid, "tognick", 1);
+      					foreach(new i : Player)
+						{
+							ShowPlayerNameTagForPlayer(playerid, i, 1);
+						}
+					}
+				
+				}
+				case 2:
+				{
+					if(togADMTXD[playerid] == 0)
+					{
+						togADMTXD[playerid] =1; 
+						sendTipMessage(playerid, "Wy³¹czy³eœ textdrawy kar");
+						PlayerPersonalization[playerid][PERS_KARYTXD] =1;
+					}
+					else if(togADMTXD[playerid] == 1)
+					{
+						togADMTXD[playerid] =0; 
+						sendTipMessage(playerid, "W³¹czy³eœ textdrawy kar"); 
+						PlayerPersonalization[playerid][PERS_KARYTXD]=0;
+					}
+				}
+
+			}
+		}
+	}
+	else if(dialogid == D_VINYL)
+	{
+		if(response)
+		{
+			new txt_light[128], txt_neon[128], txt_sphere[128], txt_podest[128], txt_zaluzja[128];
+			new txt_klub[256], txt_biuro[256], txt_dym[128], txt_eq[128], txt_txt[128];
+			// KLUB
+			if(lightsVinyl == false){
+				format(txt_light, 128, "{FFFFFF}Oœwietlenie: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_light, 128, "{FFFFFF}Oœwietlenie: \t{00FF00}W³¹czone");
+			}
+			if(neonVinyl == 0){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \tBrak");
+			}
+			if(neonVinyl == 1){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \tMieszane");
+			}
+			if(neonVinyl == 2){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{1E2BFE}Niebieski");
+			}
+			if(neonVinyl == 3){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{C71E09}Czerwony");
+			}
+			if(neonVinyl == 4){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{CD17F9}Fioletowy");
+			}
+			if(neonVinyl == 5){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{1CFF27}Zielony");
+			}
+			if(neonVinyl == 6){
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{F3FA30}¯ó³ty");
+			}
+			if(sphereVinyl == false){
+				format(txt_sphere, 128, "{FFFFFF}\nKula: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_sphere, 128, "{FFFFFF}\nKula: \t{00FF00}W³¹czone");
+			}
+			if(podestVinyl == false){
+				format(txt_podest, 128, "{FFFFFF}\nPodest: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_podest, 128, "{FFFFFF}\nPodest: \t{00FF00}W³¹czone");
+			}
+			if(dymVinyl == false){
+				format(txt_dym, 128, "{FFFFFF}\nDym: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_dym, 128, "{FFFFFF}\nDym: \t{00FF00}W³¹czone");
+			}
+			if(eqVinyl == false){
+				format(txt_eq, 128, "{FFFFFF}\nEqualizator: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_eq, 128, "{FFFFFF}\nEqualizator: \t{00FF00}W³¹czone");
+			}
+			if(textVinyl == false){
+				format(txt_txt, 128, "{FFFFFF}\nTekst: \t{FF0000}Wy³¹czone");
+			}else{
+				format(txt_txt, 128, "{FFFFFF}\nTekst: \t{00FF00}W³¹czone");
+			}
+			format(txt_klub, 256, "%s %s %s %s %s %s %s", txt_light, txt_neon, txt_sphere, txt_podest, txt_dym, txt_eq, txt_txt);
+			// BIURO
+			if((moveZaluzja1 == false) && (moveZaluzja2 == false)){
+				format(txt_zaluzja, 128, "{FFFFFF}¯aluzje: \t{00FF00}W³¹czone");
+			}else{
+				format(txt_zaluzja, 128, "{FFFFFF}¯aluzje: \t{FF0000}Wy³¹czone");
+			}
+			format(txt_biuro, 256, "%s \n{FFFFFF}Kamery: \tOgl¹daj", txt_zaluzja);
+			switch(listitem)
+			{
+				case 0:
+				{
+					ShowPlayerDialogEx(playerid, D_VINYL_K, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Klub", txt_klub, "Wybierz", "Anuluj");
+				}
+				case 1:
+				{
+					ShowPlayerDialogEx(playerid, D_VINYL_B, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Biuro", txt_biuro, "Wybierz", "Anuluj");
+				}
+				case 2:
+				{
+					ShowPlayerDialog(playerid, D_VINYL_J, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Jacuzzi", "Jacuzzi", "Wybierz", "Anuluj");
+				}
+			}
+		}
+	}
+	else if(dialogid == D_VINYL_K)
+	{
+		if(response)
+		{
+			switch(listitem)
+			{
+				case 0:
+				{
+
+					if(lightsVinyl == false)
+					{
+						led1 = CreateDynamicObject(18653, 822.621154, -1387.984619, -19.836418, 0.000000, -11.000000, 70.000000, 71, 0, -1, 300.00, 300.00); 
+						led2 = CreateDynamicObject(18653, 811.361022, -1387.984619, -19.836418, 0.000000, -11.000000, 110.000000, 71, 0, -1, 300.00, 300.00); 
+						led3 = CreateDynamicObject(18102, 820.466613, -1402.050292, -20.383949, 31.300003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wy³¹czono oœwietlenie"); 
+						lightsVinyl = true;
+					}
+					else
+					{
+						DestroyDynamicObject(led1);
+						DestroyDynamicObject(led2);
+						DestroyDynamicObject(led3);
+						lightsVinyl = false;
+						sendTipMessageEx(playerid, COLOR_P@, "Pomyœlnie wy³¹czono oœwietlenie!"); 
+					}
+				}
+				case 1:
+				{
+					ShowPlayerDialogEx(playerid, D_VINYL_NEON, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Klub >> Neony", "Brak \nMieszane \n{1E2BFE}Niebieski \n{C71E09}Czerwony \n{CD17F9}Fioletowy \n{1CFF27}Zielony \n{F3FA30}¯ó³ty", "Wybierz", "Anuluj");
+				}
+				case 2:
+				{
+					if(sphereVinyl == false){
+						kula = CreateDynamicObject(3054, 817.169311, -1394.821899, -9.629315, 0.000000, 0.000000, 0.000000, 71, 0, -1, 340.00, 340.00); 
+						SetDynamicObjectMaterial(kula, 0, 19041, "matwatches", "watchtype10map", 0x00000000);
+						SetDynamicObjectMaterial(kula, 1, 18901, "matclothes", "hatmap1", 0x00000000);
+						MoveDynamicObject(kula, 817.169311, -1394.821899, -13.629315, 1);
+						sphereTimer = SetTimer("SphereSpinFirst", 5000, false);
+						
+						
+						sphereVinyl = true;
+					}else{
+						MoveDynamicObject(kula, 817.169311, -1394.821899, -9.629315, 1);
+						KillTimer(sphereTimer);
+						KillTimer(sphereTimer_second);
+						
+						sphereVinyl = false;
+					}
+				}
+				case 3:
+				{
+					if(podestVinyl == false){
+						MoveDynamicObject(podest1, 816.637390, -1403.019653, -24.998998, 1);
+						MoveDynamicObject(podest2, 816.607849, -1402.989624, -22.408988, 1);
+						podestVinyl = true;
+						sendTipMessage(playerid, "Podest zosta³ wysuniêy!");
+					}else{
+						MoveDynamicObject(podest1, 816.637390, -1403.019653, -26.998998, 1);
+						MoveDynamicObject(podest2, 816.607849, -1402.989624, -24.408988, 1);
+						podestVinyl = false;
+						sendTipMessage(playerid, "Podest zosta³ schowany!"); 
+					}
+				}
+				case 4:{
+					if(dymVinyl == false){
+						dym1 = CreateDynamicObject(18747, 817.424255, -1390.892700, -23.989006, 0.000000, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						dym2 = CreateDynamicObject(18747, 817.424255, -1394.652587, -23.989006, 0.000000, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						dym3 = CreateDynamicObject(18747, 817.424255, -1398.743164, -23.989006, 0.000000, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+
+						dym4 = CreateDynamicObject(18728, 812.184020, -1386.922851, -22.539764, 22.800003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						dym5 = CreateDynamicObject(18728, 821.514099, -1386.922851, -22.539764, 22.800003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
+						dymVinyl = true;
+						sendTipMessage(playerid, "Dym w sali vinyl Club zosta³ w³¹czony!"); 
+					}else{
+						DestroyDynamicObject(dym1);
+						DestroyDynamicObject(dym2);
+						DestroyDynamicObject(dym3);
+						DestroyDynamicObject(dym4);
+						DestroyDynamicObject(dym5);
+						dymVinyl = false;
+						sendTipMessage(playerid, "Dym w sali Vinyl Club zosta³ wy³¹czony!"); 
+					}
+				}
+				case 5:{
+					if(eqVinyl == false){
+						eq_1_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -23.328979, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_1_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -23.328979, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_1_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_1_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_2_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -22.818969, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_2_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -22.818969, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_2_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_2_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_3_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -22.298957, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_3_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -22.298957, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_3_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_3_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_4_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -21.728950, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_4_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -21.728950, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_4_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_4_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_5_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -21.158937, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_5_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -21.158937, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_5_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_5_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_6_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -20.598926, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_6_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -20.598926, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_6_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_6_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_7_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -20.028915, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_7_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -20.028915, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_7_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_7_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+
+						eq_8_1 = CreateDynamicObject(19939, 809.013793, -1387.950805, -19.468902, 180.000000, 90.000000, 90.000000, 71, 0, -1, 300.00, 300.00); 
+						eq_8_2 = CreateDynamicObject(19939, 824.865051, -1387.950805, -19.468902, -0.000007, 270.000000, -89.999984, 71, 0, -1, 300.00, 300.00); 
+						SetDynamicObjectMaterial(eq_8_1, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						SetDynamicObjectMaterial(eq_8_2, 0, 10765, "airportgnd_sfse", "white", 0xFF202020);
+						eqTimer_First = SetTimer("eqFirst", 2000, true);
+						eqTimer_First = SetTimer("eqSecond", 1400, true);
+						eqTimer_First = SetTimer("eqThird", 900, true);
+						eqTimer_First = SetTimer("eqFourth", 400, true);
+					
+						eqVinyl = true;
+					}else{
+						DestroyEq();
+						KillTimer(eqTimer_First);
+						KillTimer(eqTimer_Second);
+						KillTimer(eqTimer_Third);
+						KillTimer(eqTimer_Fourth);
+						eqVinyl = false;
+					}
+				}
+				case 6:{
+					ShowPlayerDialogEx(playerid, D_VINYL_TEKST, DIALOG_STYLE_INPUT, "PANEL: {00FFFF}VinylClub >> Tekst", "Wpisz tekst", "Wybierz", "Anuluj");
+				}
+			}
+		}
+	}
+	else if(dialogid == D_VINYL_TEKST)
+	{
+		if(response)
+		{
+			if(textVinyl == false){
+				text_Vinyl = CreateDynamicObject(7911, 817.176879, -1386.975463, -21.528980, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+				SetDynamicObjectMaterialText(text_Vinyl, 0, inputtext, 130, "Calibri", 20, 0, 0xFF00FFFF, 0x00000000, 1);
+				textVinyl_Timer = SetTimer("textVinylT", 3000, true);
+				textVinyl = true;
+			}else{
+				textVinyl = false;
+				KillTimer(textVinyl_Timer);
+				DestroyDynamicObject(text_Vinyl);
+			}
+		}
+	}
+	else if(dialogid == D_VINYL_NEON)
+	{
+		if(response){
+			switch(listitem){
+				case 0:{
+					DestroyNeons();
+					neonsVinyl = false;
+					KillTimer(NeonsTimer);
+				}
+				case 1:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18647, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18647, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18648, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18648, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18648, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18648, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18648, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18648, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18648, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18648, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18648, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18648, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18651, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18651, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18651, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18651, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18650, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18650, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18649, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18649, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18649, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18649, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18649, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 1;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 2:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18648, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18648, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18648, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18648, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18648, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18648, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18648, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18648, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18648, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18648, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18648, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18648, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18648, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18648, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18648, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18648, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18648, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18648, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18648, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18648, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18648, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18648, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18648, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 2;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 3:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18647, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18647, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18647, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18647, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18647, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18647, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18647, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18647, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18647, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18647, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18647, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18647, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18647, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18647, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18647, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18647, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18647, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18647, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18647, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18647, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18647, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18647, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18647, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 3;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 4:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18651, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18651, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18651, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18651, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18651, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18651, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18651, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18651, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18651, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18651, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18651, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18651, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18651, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18651, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18651, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18651, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18651, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18651, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18651, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18651, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18651, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18651, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18651, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 4;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 5:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18649, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18649, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18649, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18649, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18649, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18649, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18649, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18649, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18649, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18649, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18649, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18649, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18649, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18649, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18649, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18649, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18649, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18649, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18649, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18649, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18649, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18649, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18649, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 5;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+				case 6:{
+					// MIESZANE
+					if(neonsVinyl == false){
+						DestroyNeons();
+						neon1 = CreateDynamicObject(18650, 821.522766, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon2 = CreateDynamicObject(18650, 812.322387, -1400.391113, -19.608976, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - blue
+						neon3 = CreateDynamicObject(18650, 836.026428, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon4 = CreateDynamicObject(18650, 797.565612, -1401.542114, -21.099332, 0.000000, 0.000000, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon5 = CreateDynamicObject(18650, 816.854736, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon6 = CreateDynamicObject(18650, 818.914855, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon7 = CreateDynamicObject(18650, 820.985351, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon8 = CreateDynamicObject(18650, 814.755065, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon9 = CreateDynamicObject(18650, 812.654663, -1387.407104, -17.199321, 0.000000, 0.000000, 270.000000, 71, 0, -1, 400.00, 400.00); 
+						neon10 = CreateDynamicObject(18650, 895.382629, -1416.163452, -20.143314, 0.000007, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon11 = CreateDynamicObject(18650, 899.163024, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						neon12 = CreateDynamicObject(18650, 895.652343, -1413.132690, -15.103283, 0.000000, -0.000007, 180.000000, 71, 0, -1, 400.00, 400.00); 
+						// - purple
+						neon13 = CreateDynamicObject(18650, 821.579284, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon14 = CreateDynamicObject(18650, 831.959838, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon15 = CreateDynamicObject(18650, 811.879882, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon16 = CreateDynamicObject(18650, 803.919372, -1414.808471, -19.919300, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - yellow
+						neon17 = CreateDynamicObject(18650, 805.490844, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						neon18 = CreateDynamicObject(18650, 828.301147, -1400.387573, -19.639308, 0.000000, 0.000000, 90.000000, 71, 0, -1, 400.00, 400.00); 
+						// - green
+						neon19 = CreateDynamicObject(18650, 835.885803, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon20 = CreateDynamicObject(18650, 835.885803, -1413.598632, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon21 = CreateDynamicObject(18650, 835.885803, -1407.657836, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon22 = CreateDynamicObject(18650, 798.036376, -1407.517700, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						neon23 = CreateDynamicObject(18650, 798.036376, -1391.377685, -19.889291, 0.000000, 0.000000, 0.000000, 71, 0, -1, 400.00, 400.00); 
+						
+						NeonsTimer = SetTimer("MoveNeons", 3000, true);
+						neonVinyl = 6;
+						neonsVinyl = true;
+					}else{
+						DestroyNeons();
+						neonsVinyl = false;
+						neonVinyl = 0;
+					}
+				}
+			}
+		}
+	}
+	else if(dialogid == D_VINYL_B)
+	{
+		if(response){
+			switch(listitem){
+				case 0:{
+					if(IsPlayerInRangeOfPoint(playerid, 4, 678.121704, -1393.385620, -21.709302)){
+						if((moveZaluzja1 == false) && (moveZaluzja2 == false)){
+							MoveDynamicObject(zaluzja1, 678.121704, -1393.385620, -19.709302, 1);
+							MoveDynamicObject(zaluzja2, 680.731506, -1393.385620, -19.709302, 1);
+							moveZaluzja1 = true;
+							moveZaluzja2 = true;
+						}else{
+							MoveDynamicObject(zaluzja1, 678.121704, -1393.385620, -21.709302, 1);
+							MoveDynamicObject(zaluzja2, 680.731506, -1393.385620, -21.709302, 1);
+							moveZaluzja1 = false;
+							moveZaluzja2 = false;
+						}
+					}
+				}
+				case 1:{
+					ShowPlayerDialogEx(playerid, D_VINYL_CAM, DIALOG_STYLE_LIST, "PANEL: {00FFFF}VinylClub >> Kamery", "Brak \nHol \nObok baru \nPrzy ³azienkach \nParkiet", "Wybierz", "Anuluj");
+				}
+			}
+			
+		}
+	}
+	else if(dialogid == D_VINYL_CAM)
+	{
+		if(response){
+			if(IsPlayerInRangeOfPoint(playerid, 4,  674.076904, -1390.442871, -22.679317)){
+				switch(listitem){
+					case 0:{
+						SetCameraBehindPlayer(playerid);
+					}
+					case 1:{
+						//HOL PRZEDSIONEK
+						SetPlayerCameraPos(playerid, 675.147, -1399.068, -20.939);
+						SetPlayerCameraLookAt(playerid, 688.3051,-1395.4424,-22.6093, 1);
+					}
+					case 2:{
+						//PRZY WEJŒCIU VIPA
+						SetPlayerCameraPos(playerid, 804.162, -1414.056, -20.379);
+						SetPlayerCameraLookAt(playerid, 801.9684,-1389.1116,-22.6193, 1);
+					}
+					case 3:{
+						//PRZY WC
+						SetPlayerCameraPos(playerid, 829.635, -1388.634, -20.350);
+						SetPlayerCameraLookAt(playerid, 832.2269,-1413.2073,-22.6093, 1);
+					}
+					case 4:{
+						//PARKIET
+						SetPlayerCameraPos(playerid, 830.185, -1389.178, -14.814);
+						SetPlayerCameraLookAt(playerid, 812.8127,-1399.2845,-22.5390, 1);
+					}
+				}
+			}else{
+				SendClientMessage(playerid, -1, "Nie znajdujesz siê przy monitoringu");
 			}
 		}
 	}

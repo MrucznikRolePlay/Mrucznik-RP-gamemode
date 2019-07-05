@@ -100,7 +100,6 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
-#include "system\actors.pwn"
 
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"
@@ -140,6 +139,7 @@ native gpci (playerid, serial [], len);
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
 #include "obiekty\actorsOnWorld.pwn"
+#include "obiekty\vinylscript.pwn"
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
@@ -382,7 +382,8 @@ public OnGameModeInit()
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
     SetTimer("RPGTimer", 100, true);
-
+	//Ustalanie wartoœci wind
+	levelLock[FRAC_SN][5]=1;//Zamkniête
     for(new i=0;i<MAX_VEHICLES;i++)
     {
         Blink[i][0] = -1;
@@ -1008,6 +1009,7 @@ public OnPlayerConnect(playerid)
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
 	ZerujZmienne(playerid);
+	ClearVariableConnect(playerid);
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
@@ -1135,7 +1137,9 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 77, 2582.2329, 61.6251, 26.2817, 42, 0); //Stacja benzynowa w PC
     SetPlayerMapIcon(playerid, 78, 1383.4578, 461.5694, 19.8450, 42, 0); //Stacja benzynowa w Montgomery
     SetPlayerMapIcon(playerid, 79, 2202.3503, 2474.2419, 10.5474, 42, 0); //Stacja w LV V2
-
+	
+	//biz
+	ResetBizOffer(playerid);
 	//system barierek by Kubi
 	gHeaderTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
     gBackgroundTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
@@ -1253,7 +1257,7 @@ public OnPlayerDisconnect(playerid, reason)
 	//lawyer
 	OfferPrice[playerid] = 0;
 	LawyerOffer[playerid] = 0;
-	OfferPlayer[playerid] = 0;
+	ClearVariableDisconnect(playerid); 
 	//caluj
 	kissPlayerOffer[playerid] = 0;
 	//komunikaty frakcyjne
@@ -1293,7 +1297,7 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		
 		//Log dla 0Verte [Nick][UID] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d] - Wyszedl poprzez %s", 
+		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d] - Wyszedl poprzez %s", 
 			GetPlayerLogName(playerid), 
 			AdminDutyGodziny[playerid], 
 			AdminDutyMinuty[playerid],
@@ -1301,6 +1305,7 @@ public OnPlayerDisconnect(playerid, reason)
 			iloscWarn[playerid],
 			iloscKick[playerid],
 			iloscInne[playerid], 
+			iloscPozaDuty[playerid],
 			exitReason
 		); //Create LOG
 
@@ -1313,6 +1318,7 @@ public OnPlayerDisconnect(playerid, reason)
 		iloscInWiadomosci[playerid] = 0;
 		iloscOutWiadomosci[playerid] = 0;
 		iloscZapytaj[playerid] = 0;	
+		iloscPozaDuty[playerid] = 0; 
 		//Kill timer 
 		KillTimer(AdminDutyTimer[playerid]);
 		AdminDutyGodziny[playerid] = 0;
@@ -1320,7 +1326,34 @@ public OnPlayerDisconnect(playerid, reason)
 		firstDutyAdmin[playerid] = 0; 
 		
 	}
-
+	if((PlayerInfo[playerid][pAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
+	|| (PlayerInfo[playerid][pNewAP] >= 1 && iloscPozaDuty[playerid] >= 1))//Gdy nie by³ na admin duty, ale wykonywa³ akcje
+	{
+		if(firstDutyAdmin[playerid] == 0)
+		{
+			new exitReason[16];//String do logu
+			if(!IsPlayerPaused(playerid))
+			{
+				format(exitReason, sizeof(exitReason), "DISCONNECT");
+			}
+			else 
+			{
+				format(exitReason, sizeof(exitReason), "AFK");
+			}
+			Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d] - Wyszedl poprzez %s", 
+				GetPlayerLogName(playerid), 
+				AdminDutyGodziny[playerid], 
+				AdminDutyMinuty[playerid],
+				iloscBan[playerid],
+				iloscWarn[playerid],
+				iloscKick[playerid],
+				iloscInne[playerid], 
+				iloscPozaDuty[playerid],
+				exitReason
+			); //Create LOG
+			iloscPozaDuty[playerid] = 0; 
+		}
+	}
 	//kajdanki
 	if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
 	{
@@ -1451,7 +1484,7 @@ public OnPlayerDisconnect(playerid, reason)
     {
         foreach(new i : Player)
         {
-            if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_LSFD || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
+            if(IsACop(i) || IsAMedyk(i) || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
             {
                 DisablePlayerCheckpoint(i);
             }
@@ -2330,7 +2363,7 @@ SetPlayerSpawnPos(playerid)
 							SetPlayerVirtualWorld(playerid, 88);
 							Wchodzenie(playerid);
 						}
-						case FRAC_LSMC:  //4
+						case FRAC_ERS:  //4
 						{
 						    SetPlayerPosEx(playerid, 1148.4323,-1315.4225,13.9841);
 		    				SetPlayerFacingAngle(playerid,358.0);
@@ -2429,13 +2462,6 @@ SetPlayerSpawnPos(playerid)
 						case FRAC_WPS: //16
 						{
 						    SetPlayerPosEx(playerid, 2508.0671,-2019.8987,13.9482);
-						}
-						case FRAC_LSFD: //17
-						{
-						    SetPlayerPosEx(playerid, 1757.6122,-1123.4604,227.8059);
-				            SetPlayerVirtualWorld(playerid, 22);
-						    SetPlayerFacingAngle(playerid,180.0);
-						    Wchodzenie(playerid);
 						}
 				    }
 				}
@@ -2636,7 +2662,7 @@ SetPlayerSpawnSkin(playerid)
 	{
 		if(GetPlayerFraction(playerid) != 0)
 		{
-			if(IsACop(playerid) || GetPlayerFraction(playerid) == FRAC_LSFD || GetPlayerFraction(playerid) == FRAC_LSMC)
+			if(IsACop(playerid)  || GetPlayerFraction(playerid) == FRAC_ERS)
 			{
 				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
 					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);

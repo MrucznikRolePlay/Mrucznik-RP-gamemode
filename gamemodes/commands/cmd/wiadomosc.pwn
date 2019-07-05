@@ -73,7 +73,7 @@ YCMD:wiadomosc(playerid, params[], help)
         }
         if (AntyCzitText(text))
         {
-            format(string, sizeof(string), "AdmWarning: [%d] %s mówi coœ o cheat'ach do [%s]: %s", playerid, GetNick(playerid), giveplayerid, text);
+            format(string, sizeof(string), "AdmWarning: [%d] %s mówi coœ o cheat'ach do [%s]: %s", playerid, GetNick(playerid), GetNick(giveplayerid), text);
             SendMessageToAdmin(string, COLOR_LIGHTRED); 
 			Log(warningLog, INFO, "%s mówi coœ o czitach na PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
         }

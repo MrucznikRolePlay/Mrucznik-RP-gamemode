@@ -95,6 +95,38 @@ YCMD:dutycd(playerid, params[], help)
 				return 1;
 			}
 		}
+		else if((PlayerInfo[playerid][pMember] == FRAC_BOR && PlayerInfo[playerid][pRank] >= 2) || PlayerInfo[playerid][pLider] == FRAC_BOR)
+		{
+			if(IsPlayerInRangeOfPoint(playerid, 5.0, 1526.9919,-1452.6593,67.8331))
+			{
+				if(OnDuty[playerid] == 0 && OnDutyCD[playerid] == 0)
+				{
+					format(string, sizeof(string), "* Agent %s bierze identyfikator i broñ ze swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    DajBronieFrakcyjne(playerid);
+                    SetPlayerArmour(playerid, 70);
+                    SetPlayerHealth(playerid, 100);
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    OnDuty[playerid] = 1;
+                    OnDutyCD[playerid] = 1;
+				}
+				else
+				{
+					format(string, sizeof(string), "* Agent %s odk³ada identyfikator i broñ do swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 0.0);
+                    OnDuty[playerid] = 0;
+                    OnDutyCD[playerid] = 0;
+                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    PrzywrocBron(playerid);
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ w odpowiednim miejscu!"); 
+				return 1;
+			}
+		}
 		else if(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
         {
             if ( IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) || IsPlayerInRangeOfPoint(playerid, 5.0, 609.0364,-555.1090,19.4573) ) //PlayerToPoint(3, playerid,255.3,77.4,1003.6) || PlayerToPoint(3,playerid,266.7904,118.9303,1004.6172) || PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
