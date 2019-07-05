@@ -1331,12 +1331,26 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		if(firstDutyAdmin[playerid] == 0)
 		{
-			new stringlog[325];
-			new y1,mi1,d1;//Data
-			getdate(y1, mi1, d1); 
-			//Log dla 0Verte [UID] [RRRR-MM-DD] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [Iloœæ_akcji_poza_admin_duty] [powod zakoñczenia s³u¿by]
-			format(stringlog, sizeof(stringlog), "%d %d-%d-%d 0:0 %d %d %d %d %d %d %d %d %d AFK", PlayerInfo[playerid][pUID], y1,mi1,d1, iloscBan[playerid], iloscWarn[playerid], iloscAJ[playerid], iloscKick[playerid], iloscInne[playerid], iloscZapytaj[playerid], iloscInWiadomosci[playerid], iloscOutWiadomosci[playerid], iloscPozaDuty[playerid]);
-			Log(admindutyMaszLog, INFO, stringlog);
+			new exitReason[16];//String do logu
+			if(!IsPlayerPaused(playerid))
+			{
+				format(exitReason, sizeof(exitReason), "DISCONNECT");
+			}
+			else 
+			{
+				format(exitReason, sizeof(exitReason), "AFK");
+			}
+			Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d] - Wyszedl poprzez %s", 
+				GetPlayerLogName(playerid), 
+				AdminDutyGodziny[playerid], 
+				AdminDutyMinuty[playerid],
+				iloscBan[playerid],
+				iloscWarn[playerid],
+				iloscKick[playerid],
+				iloscInne[playerid], 
+				iloscPozaDuty[playerid],
+				exitReason
+			); //Create LOG
 			iloscPozaDuty[playerid] = 0; 
 		}
 	}
