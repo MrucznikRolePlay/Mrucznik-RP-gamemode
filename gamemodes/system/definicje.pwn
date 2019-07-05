@@ -183,7 +183,6 @@
 #define FRAC_LSPD   1
 #define FRAC_FBI    2
 #define FRAC_NG     3
-#define FRAC_LSMC   4
 #define FRAC_ERS    4
 #define FRAC_LCN    5
 #define FRAC_YKZ    6

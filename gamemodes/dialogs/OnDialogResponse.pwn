@@ -357,112 +357,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(response)
 		{
-			new string[128];
-			switch(listitem)//Cytrynowy-sza³\t10.000$\nW³adca procêtów\t15.000$\nNapój mistrza Cotty\t20.000$\nTwoja Stara\t 30.000$
+			switch(listitem)
 			{
 				case 0:
 				{
-					if(kaska[playerid] >= drinkCost1)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze %s - zaczyna piæ", GetNick(playerid), drinkName1);
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 2000);
-						SetPlayerSpecialAction(playerid, 22);
-						if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
-						{
-							ZabierzKase(playerid, (drinkCost1/2));
-							Sejf_Add(FRAC_SN, (drinkCost1/2));
-							Sejf_Save(FRAC_SN);
-							sendTipMessageEx(playerid, COLOR_GREEN, "Jesteœ VIP - p³acisz o po³owê mniej za swojego drinka!"); 
-							return 1;
-						}
-						ZabierzKase(playerid, 10000);
-						Sejf_Add(FRAC_SN, drinkCost1);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName1, drinkCost1, 2000, 22);
 				}
 				case 1:
 				{
-					if(kaska[playerid] >= drinkCost2)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze %s - zaczyna powoli s¹czyæ!", GetNick(playerid), drinkName2);
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 2500);
-						SetPlayerSpecialAction(playerid, 22);
-						if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
-						{
-							ZabierzKase(playerid, (drinkCost2/2));
-							Sejf_Add(FRAC_SN, (drinkCost2/2));
-							Sejf_Save(FRAC_SN);
-							sendTipMessageEx(playerid, COLOR_GREEN, "Jesteœ VIP - p³acisz o po³owê mniej za swojego drinka!"); 
-							return 1;
-						}
-						ZabierzKase(playerid, drinkCost2);
-						Sejf_Add(FRAC_SN, drinkCost2);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName2, drinkCost2, 2500, 22);
 				}
 				case 2:
 				{
-					if(kaska[playerid] >= drinkCost3)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze %s - zaczyna go piæ. Cieknie mu po bluzce!", GetNick(playerid), drinkName3);
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 4000);
-						SetPlayerSpecialAction(playerid, 20);
-						if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
-						{
-							ZabierzKase(playerid, (drinkCost3/2));
-							Sejf_Add(FRAC_SN, (drinkCost3/2));
-							Sejf_Save(FRAC_SN);
-							sendTipMessageEx(playerid, COLOR_GREEN, "Jesteœ VIP - p³acisz o po³owê mniej za swojego drinka!"); 
-							return 1;
-						}
-						ZabierzKase(playerid, drinkCost3);
-						Sejf_Add(FRAC_SN, drinkCost3);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName3, drinkCost3, 4000, 20);
 				}
 				case 3:
 				{
-					if(kaska[playerid] >= drinkCost4)
-					{
-						format(string, sizeof(string), "%s kupi³ w barze %s bo chce byæ rich", GetNick(playerid), drinkName4);
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-						SetPlayerDrunkLevel(playerid, 5000);
-						SetPlayerSpecialAction(playerid, 20);
-						if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
-						{
-							ZabierzKase(playerid, (drinkCost4/2));
-							Sejf_Add(FRAC_SN, (drinkCost4/2));
-							Sejf_Save(FRAC_SN);
-							sendTipMessageEx(playerid, COLOR_GREEN, "Jesteœ VIP - p³acisz o po³owê mniej za swojego drinka!"); 
-							return 1;
-						}
-						ZabierzKase(playerid, drinkCost4);
-						Sejf_Add(FRAC_SN, drinkCost4);
-						Sejf_Save(FRAC_SN);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-						return 1;
-					}
+					BuyDrinkOnClub(playerid, drinkName4, drinkCost4, 5000, 20);
 				}
 				
 			}
@@ -1992,102 +1903,63 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0: 
 				{
-				//	SetActorAnimationEx(actorpID, "COP_AMBIENT", "Coplook_loop",  1, 1, 1);
 					ApplyDynamicActorAnimation(actorUID[actorpID], "COP_AMBIENT", "Coplook_loop", 4.1,  1, 1, 1, 0, 0);
-					format(string, sizeof(string), "%s %s [%d]", "COP_AMBIENT", "Coplook_loop", actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED); 
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 1:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "RAPPING","RAP_C_Loop",  1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 2:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "BD_FIRE","BD_Panic_Loop", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 3:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "PED","IDLE_CHAT", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 4:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "DANCING","bd_clap1", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 5:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "DANCING","DAN_Loop_A", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 6:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "JST_BUISNESS","girl_02", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 7:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "ON_LOOKERS","Pointup_in", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 8:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "ON_LOOKERS","point_loop", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 9:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "PAULNMAC","Piss_loop", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 10:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "SHOP","Smoke_RYD", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 11:
 				{
 					SetActorAnimationEx(actorUID[actorpID], "SMOKING","M_smk_drag", 1, 1, 1); 
-					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
-					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
-					SendMessageToAdmin(string, COLOR_RED);
+					SetAnimatiorToActorMess(playerid, actorpID);
 				}
 				case 12:
 				{
@@ -16880,38 +16752,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					for(new i; i<valActor; i++)
-					{
-						if(IsPlayerInRangeOfPoint(playerid, 5.0, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posY]))
-						{
-							new string[124];
-							format(string, sizeof(string), "Pomyœlnie zaznaczono actora %d - %s", i, Actors[i][a_Name]); 
-							sendTipMessage(playerid, string);
-							SetPVarInt(playerid, "pactorID", i); 
-						}
-					}
+					sendTipMessage(playerid, "Dostêpne ju¿ wkrótce"); 
 				}
 				case 1:
 				{
-					if(GetPVarInt(playerid, "pactorID") != 666)
-					{
-						if(GetPlayerInterior(playerid) != 0)
-						{
-							sendErrorMessage(playerid, "Actorów nie mo¿na przenosiæ pomiêdzy interiorami!"); 
-							return 1;
-						}
-						new uidActor = actorUID[GetPVarInt(playerid, "pactorID")], Float:pX, Float:pY, Float:pZ, Float:pR;
-						GetPlayerPos(playerid, pX, pY, pZ);
-						GetPlayerFacingAngle(playerid, pR); 
-						SetDynamicActorFacingAngle(uidActor, pR);
-						SetDynamicActorVirtualWorld(uidActor, GetPlayerVirtualWorld(playerid));
-						SetDynamicActorPos(uidActor, pX, pY+0.2, pZ);
-						sendTipMessage(playerid, "Pomyœlnie przeniesiono do Ciebie actora!"); 
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Najpierw zaznacz aktora!"); 
-					}
+					sendTipMessage(playerid, "Dostêpne ju¿ wkrótce");
 				}
 				case 2:
 				{

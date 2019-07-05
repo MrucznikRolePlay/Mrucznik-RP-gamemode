@@ -52,6 +52,15 @@ stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:
 	Actors[valActor][a_Player] = aPlayer; 
 	return valActor++; 
 }
+stock SetAnimatiorToActorMess(playerid, qActor)
+{
+	new string[124]; 
+	format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[qActor][a_Name], qActor);
+	sendTipMessage(playerid, string); 
+	format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[qActor][a_Name], qActor); 
+	SendMessageToAdmin(string, COLOR_RED); 
+	return 1;
+}
 stock SetActorAnimationEx(actorIDu, alib[], aname[], loop, lockx, locky)//Ustawianie animacji dla Actora
 {
 	ApplyDynamicActorAnimation(actorIDu, alib, aname, 4.1, loop, lockx, locky, 0, 0);

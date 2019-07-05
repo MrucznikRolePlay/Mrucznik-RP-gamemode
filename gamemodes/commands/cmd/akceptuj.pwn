@@ -1054,7 +1054,7 @@ YCMD:akceptuj(playerid, params[], help)
 			//SetPVarInt(playerid, "idPrawnika", playerid);
 			if(kaska[playerid] >= money)
 			{
-                if(OfferPlayer[playerid] == 666)
+                if(OfferPlayer[playerid] == -1)
                 {
                     sendErrorMessage(playerid, "Nikt nie oferowa³ Ci uwolnienia z wiêzienia!"); 
                     return 1;
@@ -1094,7 +1094,7 @@ YCMD:akceptuj(playerid, params[], help)
 				//zerowanie zmiennych 2
 				OfferPrice[playerid] = 0;
 				LawyerOffer[playerid] = 0;
-				OfferPlayer[playerid] = 666;
+				OfferPlayer[playerid] = -1;
 				
 				
 			}

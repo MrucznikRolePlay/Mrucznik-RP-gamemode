@@ -1038,14 +1038,14 @@ new DCC_Channel:g_OrgChannel[MAX_ORG];
 //-----------------------------------------------
 ClearVariableConnect(playerid)
 {
-	OfferPlayer[playerid] = 666;//Prawnik oferuje /uwolnij (Check)
+	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
 	fixActorsTimer[playerid] = 0; 
 	return 1;
 }
 ClearVariableDisconnect(playerid)
 {
-	OfferPlayer[playerid] = 666;//Prawnik oferuje /uwolnij (Check)
+	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	return 1;
 }
 ZerujZmienne(playerid)

@@ -1795,7 +1795,7 @@ YCMD:brama(playerid, params[], help)
 			}
 		}
         //LSMC EXT
-        if(IsPlayerInFraction(playerid, FRAC_LSMC, 5000))
+        if(IsPlayerInFraction(playerid, FRAC_ERS, 5000))
         {
         	if(IsPlayerInRangeOfPoint(playerid,10,1113.1650, -1291.4082, 15.3756))
         	{

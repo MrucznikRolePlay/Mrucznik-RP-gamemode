@@ -32,12 +32,12 @@ YCMD:cygaro(playerid, params[], help)
 {
 	if(IsPlayerInRangeOfPoint(playerid, 3.5, 833.8511,-1391.2689,-17.6433))
 	{
-		if(GetPlayerMoney(playerid) < 1000)
+		if(kaska[playerid] < 1000)
 		{
 			sendErrorMessage(playerid, "Nie masz wystarczaj¹co gotówki!"); 
 			return 1;
 		}
-		sendTipMessage(playerid, "Jesteœ VIP - otrzymujesz cygaro za 100 dolców!"); 
+		sendTipMessage(playerid, "Jesteœ VIP - otrzymujesz cygaro za 1000 dolców!"); 
 		ZabierzKase(playerid, 1000); 
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_SMOKE_CIGGY);
 		Sejf_Add(FRAC_SN, 1000);
