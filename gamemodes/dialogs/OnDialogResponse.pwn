@@ -2021,6 +2021,78 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
+					SetActorAnimationEx(actorUID[actorpID], "PED","IDLE_CHAT", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 4:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "DANCING","bd_clap1", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 5:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "DANCING","DAN_Loop_A", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 6:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "JST_BUISNESS","girl_02", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 7:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "ON_LOOKERS","Pointup_in", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 8:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "ON_LOOKERS","point_loop", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 9:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "PAULNMAC","Piss_loop", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 10:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "SHOP","Smoke_RYD", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 11:
+				{
+					SetActorAnimationEx(actorUID[actorpID], "SMOKING","M_smk_drag", 1, 1, 1); 
+					format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					SendMessageToAdmin(string, COLOR_RED);
+				}
+				case 12:
+				{
 					ClearDynamicActorAnimations(actorUID[actorpID]);
 					format(string, sizeof(string), "Wy³¹czy³eœ animacje dla %s [%d]", Actors[actorpID][a_Name], actorpID);
 					sendTipMessage(playerid, string); 

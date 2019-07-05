@@ -44,7 +44,7 @@ YCMD:setactoranim(playerid, params[], help)
             return 1;
         }
         SetPVarInt(playerid, "ActorIDChoice", aID); 
-        ShowPlayerDialogEx(playerid, 1215, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Ramiona\nRapowanie\nOpiera sie o lade\nClear Animation", "Okej", "Wyjdz"); 
+        ShowPlayerDialogEx(playerid, 1215, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Ramiona\nRapowanie\nOpiera sie o lade\nMówi\nPojeb Dance\nDance 6\nNoga na noge\nPowitanie Nazisty\nWskazuje\nSikanie\nOpieraj - szlug\nPalenie\nClear Animation", "Okej", "Wyjdz"); 
 
     }
     return 1;
