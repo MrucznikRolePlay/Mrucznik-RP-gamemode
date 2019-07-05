@@ -406,6 +406,33 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 
     if(!mysql_query(query)) fault=false;
 
+	format(query, sizeof(query), "UPDATE `mru_personalization` SET \
+	%s \
+	`KontoBankowe` = '%d' \
+	`Ogloszenia` = '%d' \
+	`LicznikPojazdu` = '%d' \
+	`Ogloszk` = '%d' \
+	`CBRadieniaFrakcji` = '%d' \
+	`OldNico` = '%d' \
+	`Report` = '%d' \
+	`DeathWarning` = '%d' \
+	`KaryTXD` = '%d' \
+	`Newbie` = '%d'	\
+	WHERE `UID`= '%d'",
+	query, 
+	PlayerPersonalization[playerid][PERS_KB],
+	PlayerPersonalization[playerid][PERS_AD],
+	PlayerPersonalization[playerid][PERS_LICZNIK],
+	PlayerPersonalization[playerid][PERS_FINFO],
+	PlayerPersonalization[playerid][PERS_FAMINFO],
+	PlayerPersonalization[playerid][PERS_NICKNAMES],
+	PlayerPersonalization[playerid][PERS_CB],
+	PlayerPersonalization[playerid][PERS_REPORT],
+	PlayerPersonalization[playerid][WARNDEATH],
+	PlayerPersonalization[playerid][PERS_KARYTXD],
+	PlayerPersonalization[playerid][PERS_NEWNICK],
+	PlayerPersonalization[playerid][PERS_NEWBIE]); 
+	}
     //Zapis MruCoinow
     //premium_saveMc(playerid);
 
@@ -617,7 +644,7 @@ public MruMySQL_LoadAcocount(playerid)
 
 	//Wczytaj personalizacje
 	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `newbie`";
-	format(lStr, 1024, "SELECT %s FROM `mru_pers' WHERE `pUID'=%d", lStr, PlayerInfo[playerid][pUID]);
+	format(lStr, 1024, "SELECT %s FROM `mru_personalization' WHERE `pUID'=%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())
