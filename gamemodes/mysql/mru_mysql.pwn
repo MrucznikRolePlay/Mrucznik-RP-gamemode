@@ -421,7 +421,7 @@ public MruMySQL_LoadAcocount(playerid)
 	if(!MYSQL_ON) return false;
 
 	new lStr[1024], id=0;
-
+	
     lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `JailTime`, `Materials`,`Drugs`, `Lider`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
 
     format(lStr, 1024, "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
