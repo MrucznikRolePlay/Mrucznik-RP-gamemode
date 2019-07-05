@@ -406,15 +406,15 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     if(!mysql_query(query)) fault=false;
 
 	format(query, sizeof(query), "UPDATE `mru_personalization` SET \
-	`KontoBankowe` = '%d' \
-	`Ogloszenia` = '%d' \
-	`LicznikPojazdu` = '%d' \
-	`Ogloszk` = '%d' \
-	`CBRadieniaFrakcji` = '%d' \
-	`OldNico` = '%d' \
-	`Report` = '%d' \
-	`DeathWarning` = '%d' \
-	`KaryTXD` = '%d' \
+	`KontoBankowe` = '%d', \
+	`Ogloszenia` = '%d', \
+	`LicznikPojazdu` = '%d', \
+	`Ogloszk` = '%d', \
+	`CBRadieniaFrakcji` = '%d', \
+	`OldNico` = '%d', \
+	`Report` = '%d', \
+	`DeathWarning` = '%d', \
+	`KaryTXD` = '%d', \
 	`Newbie` = '%d'	\
 	WHERE `UID`= '%d'",
 	PlayerPersonalization[playerid][PERS_KB],
@@ -428,10 +428,13 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][WARNDEATH],
 	PlayerPersonalization[playerid][PERS_KARYTXD],
 	PlayerPersonalization[playerid][PERS_NEWNICK],
-	PlayerPersonalization[playerid][PERS_NEWBIE]); 
+	PlayerPersonalization[playerid][PERS_NEWBIE],
+	PlayerInfo[playerid][pUID]); 
+
+    if(!mysql_query(query)) fault=false;
 	
     //Zapis MruCoinow
-    //premium_saveMc(playerid);
+    premium_saveMc(playerid);
 
     saveLegale(playerid);
 
@@ -641,14 +644,13 @@ public MruMySQL_LoadAcocount(playerid)
 
 	//Wczytaj personalizacje
 	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `newbie`";
-	format(lStr, 1024, "SELECT %s FROM `mru_personalization' WHERE `pUID'=%d", lStr, PlayerInfo[playerid][pUID]);
+	format(lStr, 1024, "SELECT %s FROM `mru_personalization' WHERE `UID'=%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())
 	{
 		mysql_fetch_row_format(lStr, "|"); 
 		mysql_free_result();
-		id++; 
 		sscanf(lStr, "p<|>dddddddddddd", 
 		PlayerPersonalization[playerid][PERS_KB],
 		PlayerPersonalization[playerid][PERS_AD],
@@ -663,6 +665,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerPersonalization[playerid][PERS_NEWNICK],
 		PlayerPersonalization[playerid][PERS_NEWBIE]); 
 	}
+	
 	//legal
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_legal` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
 	new DBResult:db_result;
