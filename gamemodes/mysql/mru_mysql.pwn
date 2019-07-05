@@ -406,7 +406,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     if(!mysql_query(query)) fault=false;
 
 	format(query, sizeof(query), "UPDATE `mru_personalization` SET \
-	%s \
 	`KontoBankowe` = '%d' \
 	`Ogloszenia` = '%d' \
 	`LicznikPojazdu` = '%d' \
@@ -418,7 +417,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`KaryTXD` = '%d' \
 	`Newbie` = '%d'	\
 	WHERE `UID`= '%d'",
-	query, 
 	PlayerPersonalization[playerid][PERS_KB],
 	PlayerPersonalization[playerid][PERS_AD],
 	PlayerPersonalization[playerid][PERS_LICZNIK],
@@ -431,7 +429,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_KARYTXD],
 	PlayerPersonalization[playerid][PERS_NEWNICK],
 	PlayerPersonalization[playerid][PERS_NEWBIE]); 
-	}
+	
     //Zapis MruCoinow
     //premium_saveMc(playerid);
 
