@@ -270,7 +270,6 @@ public OnGameModeInit()
 	obiekty_OnGameModeInit();
 
     ZaladujDomy();
-    ZaladujBiznesy();
     orgLoad();
     Zone_Load();
 
@@ -1140,6 +1139,13 @@ public OnPlayerConnect(playerid)
 	
 	//biz
 	ResetBizOffer(playerid);
+	if(PlayerInfo[playerid][pBusinessOwner] == 0 || PlayerInfo[playerid][pBusinessMember] == 0)
+	{
+		PlayerInfo[playerid][pBusinessMember] = -1;
+		PlayerInfo[playerid][pBusinessOwner] = -1;
+		sendTipMessage(playerid, "Twój biznes mia³ ID 0"); 
+		sendTipMessage(playerid, "Pomyœlnie przywrócono - BRAK BIZNESU!"); 
+	}
 	//system barierek by Kubi
 	gHeaderTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
     gBackgroundTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
@@ -5497,7 +5503,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD5, string);
 					format(string, sizeof(string), "  Wynajem: -$%d", Dom[PlayerInfo[i][pWynajem]][hCenaWynajmu]);
 					SendClientMessage(i, COLOR_GRAD5, string);
-					GiveRandomMoneyBiz(i);
+					BusinessPayDay(i);  
 					format(string, sizeof(string), "~y~Wyplata");
 					GameTextForPlayer(i, string, 5000, 1);
 					PlayerInfo[i][pPayDay] = 0;

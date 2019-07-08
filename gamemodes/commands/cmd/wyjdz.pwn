@@ -389,12 +389,6 @@ YCMD:wyjdz(playerid, params[], help)
 		    Wyjdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
 			Wyjdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
 			
-			//BIZNESY
-            for(new i=0;i<MAX_BIZNES;i++)
-			{
-				WyjdzInt(playerid, BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"", BizData[i][epLocal]);//biz 1
-			}
-            //BIZNESY END
 
 			for(new i; i<=MAX_NrDOM; i++)
 		    {

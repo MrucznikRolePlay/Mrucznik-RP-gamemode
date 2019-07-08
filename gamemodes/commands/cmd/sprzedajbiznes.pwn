@@ -47,53 +47,41 @@ YCMD:sprzedajbiznes(playerid, params[], help)
 			}
 			if(ProxDetectorS(8.0, playerid, giveplayerid))
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 
-				5.0, 
-				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejX], 
-				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejY],
-				BizData[PlayerInfo[playerid][pPbiskey]][eBizWejZ]))
+				if(CheckIfPlayerInBiznesPoint(playerid) == 0)
 				{
-				
-					if(valueCost <= BIZ_SELL_MONEY_LIMIT)
+					sendTipMessage(playerid, "Nie jesteœ obok swojego biznesu"); 
+					return 1;
+				}
+				new ID_Business = GetPVarInt(playerid, "JestObokBiz"); 
+				if(PlayerInfo[playerid][pBusinessOwner] == ID_Business)
+				{
+					sendErrorMessage(playerid, "To nie jest twój biznes"); 
+					return 1;
+				}
+				if(valueCost <= Business[ID_Business][b_cost]+10000000)
+				{
+					if(kaska[giveplayerid]>= valueCost)
 					{
-						if(kaska[giveplayerid]>= valueCost)
-						{
-							if(GetPVarInt(playerid, "wpisal_sprzedaj_biz") == 0)
-							{
-								sendTipMessage(playerid, "Pamiêtaj, ¿e Wydzia³ Planowania otr¹ci podatek w wysokoœci 1/5 podanej kwoty."); 
-								sendTipMessage(playerid, "Je¿eli akceptujesz podane warunki wpisz ponownie komendê"); 
-								SetPVarInt(playerid, "wpisal_sprzedaj_biz", 1); 
-							}
-							else
-							{
-								format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d", GetNick(giveplayerid, true), PlayerInfo[playerid][pPbiskey], valueCost);
-								sendTipMessage(playerid, string);
-								sendTipMessage(playerid, "Oczekuj na akceptacje"); 
-								
-								
-								//do giveplayerid
-								format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), PlayerInfo[playerid][pPbiskey], valueCost); 
-								sendTipMessage(giveplayerid, string); 
-								SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
-								SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 
-								SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]); 
-							}
-						}
-						else
-						{
-							sendTipMessage(playerid, "Ten gracz nie ma przy sobie takiej kwoty"); 
-							return 1;
-						}
+						format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d", GetNick(giveplayerid, true), ID_Business, valueCost);
+						sendTipMessage(playerid, string);
+						sendTipMessage(playerid, "Oczekuj na akceptacje"); 
+						
+						
+						//do giveplayerid
+						format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), ID_Business, valueCost); 
+						sendTipMessage(giveplayerid, string); 
+						SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
+						SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 
 					}
 					else
 					{
-						sendTipMessage(playerid, "Przy sprzeda¿y biznesu za wiêksz¹ cene wymagana jest obecnoœæ cz³onka Wydzia³u Planowania"); 
+						sendTipMessage(playerid, "Ten gracz nie ma przy sobie takiej kwoty"); 
 						return 1;
 					}
 				}
 				else
 				{
-					sendTipMessage(playerid, "Nie znajdujesz siê pod swoim biznesem"); 
+					sendTipMessage(playerid, "Przy sprzeda¿y biznesu za wiêksz¹ cene wymagana jest obecnoœæ cz³onka Wydzia³u Planowania"); 
 					return 1;
 				}
 			}
@@ -105,8 +93,9 @@ YCMD:sprzedajbiznes(playerid, params[], help)
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie ma takiego gracza"); 
+			sendTipMessage(playerid, "Nie ma takiego gracza!"); 
 		}
+		
 	}
 	return 1;
 }

@@ -1446,7 +1446,9 @@ enum pInfo
     pDesc[128],
 	pStrong,
 	pCard,
-	pAdminAccess
+	pAdminAccess,
+	pBusinessOwner,
+	pBusinessMember
 };
 enum StringData
 {

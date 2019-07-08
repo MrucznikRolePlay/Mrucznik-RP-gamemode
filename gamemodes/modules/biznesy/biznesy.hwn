@@ -23,9 +23,30 @@
 
 //-----------------<[ Zmienne: ]>-------------------
 new BizOpenStatus[MAX_BIZNES];
-
+new BusinessLoaded;//Zmienna odpowiadaj¹ca za iloœæ wczytanych przez bazê biznesów
 
 //------------------<[ Enumy: ]>--------------------
+enum eBusiness {
+	b_Name[64], 
+	b_ownerUID,
+	Float:b_enX,
+	Float:b_enY,
+	Float:b_enZ,
+	Float:b_exX,
+	Float:b_exY,
+	Float:b_exZ,
+	Float:b_rangePoint,
+	b_int,
+	b_vw,
+	b_pLocal,
+	b_maxMoney, 
+	b_Location[64],
+	b_cost,
+	b_moneyPocket
+};
+new Business[MAX_BIZNES][eBusiness]; 
+
+/*
 enum eBizData {
     eBizName[32],
     Float:eBizWejX,
@@ -149,6 +170,8 @@ new BizData[MAX_BIZNES][eBizData] = {
 	{"Hippie Club", 1247.9531,-1560.7169,13.5556, 1244.5197,-1544.6584,3.1351, 0, 40, 18000, 255, 1, BIZ_LOCATION_LS}
 };
 
+
+*/ 
 //------------------<[ Forwardy: ]>--------------------
 
 //end

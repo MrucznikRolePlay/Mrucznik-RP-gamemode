@@ -4510,10 +4510,16 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		if(PlayerInfo[targetid][pPbiskey] >= 0 && PlayerInfo[targetid][pPbiskey] <= MAX_BIZNES)
+		if(PlayerInfo[playerid][pBusinessOwner] > 0 && PlayerInfo[playerid][pBusinessOwner] <= MAX_BIZNES)
 		{
-			new bizid = PlayerInfo[targetid][pPbiskey];
-			format(coordsstring, sizeof(coordsstring), "Biznes:[%s] MaxDochódBiz[%d] BizID [%d]", BizData[bizid][eBizName], BizData[bizid][eBizMoney], bizid);
+			new bizid = PlayerInfo[playerid][pBusinessOwner];
+			format(coordsstring, sizeof(coordsstring), "W³aœciciel Biznesu: [%s] MaxDochódBiz[%d] BizID: [%d]", Business[bizid][b_Name], Business[bizid][b_maxMoney], bizid);
+			SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
+		}
+		if(PlayerInfo[playerid][pBusinessMember] > 0 && PlayerInfo[playerid][pBusinessMember] <= MAX_BIZNES)
+		{
+			new bizid = PlayerInfo[playerid][pBusinessMember];
+			format(coordsstring, sizeof(coordsstring), "Cz³onek Biznesu: [%s] BizID: [%d]", Business[bizid][b_Name], bizid);
 			SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
 		}
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)

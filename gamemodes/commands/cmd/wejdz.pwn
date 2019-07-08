@@ -549,22 +549,34 @@ YCMD:wejdz(playerid, params[], help)
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
             
 			//BIZNESY
-            for(new i=0;i<MAX_BIZNES;i++)
-			{
-				if(IsPlayerInRangeOfPoint(playerid, 5.0, BizData[i][eBizWejX], BizData[i][eBizWejY], BizData[i][eBizWejZ]))
-				{
-					if(BizOpenStatus[i] == 0)
-					{
-						WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"",BizData[i][epLocal]);
-						//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
-					}
-					else
-					{
-						sendTipMessage(playerid, "Ten biznes jest zamkniêty! Nie masz wytrycha"); 
-						return 1;
-					}
-				}
-			}
+            for(new i=0; i<BusinessLoaded; i++)
+            {
+                if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_enX], Business[i][b_enY], Business[i][b_enY])
+                && GetPlayerVirtualWorld(playerid) == 0)
+                {
+                    if(BizOpenStatus[i] == 1 
+                    && PlayerInfo[playerid][pBusinessOwner] != i
+                    && PlayerInfo[playerid][pBusinessMember] != i)
+                    {
+                        sendErrorMessage(playerid, "Ten biznes jest zamkniêty!"); 
+                        return 1;
+                    }
+                    SetPlayerVirtualWorld(playerid, Business[i][b_vw]); 
+                    SetPlayerInterior(playerid, Business[i][b_int]); 
+                    SetPLocal(playerid, Business[i][b_pLocal]); 
+                    SetPlayerPosEx(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
+                    sendTipMessage(playerid, "Pomyœlnie wykonano wejœcie");    
+                }
+                else if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ])
+                && GetPlayerVirtualWorld(playerid) == Business[i][b_vw])
+                {
+                    SetPlayerVirtualWorld(playerid, 0); 
+                    SetPlayerInterior(playerid, 0); 
+                    SetPLocal(playerid, PLOCAL_DEFAULT); 
+                    SetPlayerPosEx(playerid, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]);
+                    sendTipMessage(playerid, "Pomyœlnie wykonano wyjœcie");   
+                }
+            }
 
             for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
             {

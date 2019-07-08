@@ -30,27 +30,27 @@
 
 YCMD:gotobiz(playerid, params[], help)
 {
-    if(IsPlayerConnected(playerid))
-    {
-		new plo;
-		if(sscanf(params, "d", plo)) return sendTipMessage(playerid, "U¿yj /gototbiz [ID biznesu]");
-		if(plo >= 1)
+	if(IsPlayerConnected(playerid))
+	{
+		if(PlayerInfo[playerid][pAdmin] >= 5)
 		{
-		    if(plo <= MAX_BIZNES)//Max Biz
-		    {
-				if(PlayerInfo[playerid][pAdmin] >= 1)
-				{
-				    if(BizData[plo][eBizWejX] == 0.0 && BizData[plo][eBizWejY] == 0.0 && BizData[plo][eBizWejZ] == 0.0) return _MruAdmin(playerid, sprintf("Nie mo¿na siê teleportowaæ. Biznes %s (ID %d) nie jest aktywny.", BizData[plo][eBizName], plo));
-					SetPlayerPosEx(playerid, BizData[plo][eBizWejX],BizData[plo][eBizWejY],BizData[plo][eBizWejZ]);
-					SetPlayerInterior(playerid, 0);
-					SetPlayerVirtualWorld(playerid, 0);
-  					_MruAdmin(playerid, sprintf("Teleportowa³eœ siê do biznesu %s (ID %d)", BizData[plo][eBizName], plo));
-				}
-				else
-				{
-					noAccessMessage(playerid);
-				}
+			new ID_BUSINESS;
+			if(sscanf(params, "d<fix>", ID_BUSINESS))
+			{
+				sendTipMessage(playerid, "U¿yj /gotobiz [ID_BIZNESU]"); 
+				return 1;
 			}
+			if(ID_BUSINESS > BusinessLoaded || ID_BUSINESS== -1)
+			{
+				sendErrorMessage(playerid, "Nie ma takiego biznesu!"); 
+				return 1;
+			}
+			SetPlayerPos(playerid, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]); 
+			sendTipMessage(playerid, "Teleportowano Ciê do biznesu!"); 
+		}
+		else
+		{
+			noAccessMessage(playerid);
 		}
 	}
 	return 1;
