@@ -296,9 +296,12 @@ stock GetFreeBizID()
 	new bID; 
 	for(new i; i<BusinessLoaded; i++)
 	{
-		if(strlen(Business[i][b_Name]) <= 3)
+		if(i != 0)
 		{
-			return bID; 
+			if(strlen(Business[i][b_Name]) <= 3)
+			{
+				return bID; 
+			}
 		}
 	}
 	return bID; 
@@ -318,8 +321,24 @@ stock LoadBusinessPickup()
 //------------------<[ MySQL: ]>--------------------
 LoadBusiness()//£adowanie biznesów z bazy danych
 {
+	//Tworzenie BIZ na ID 0
+	Business[0][b_Name] = "Testowy Biznes"; 
+	Business[0][b_ownerUID] = 0; 
+	Business[0][b_enX] = 0.0;
+	Business[0][b_enY] = 0.0;
+	Business[0][b_enZ] = -2.0; 
+	Business[0][b_exX] = 0.0;
+	Business[0][b_exY] = 0.0;
+	Business[0][b_exZ] = -2.0; 
+	Business[0][b_int] = 0;   
+	Business[0][b_vw] = 0; 
+	Business[0][b_pLocal] = 255; 
+	Business[0][b_maxMoney] = 0;
+	Business[0][b_cost] = 100000000;
+	Business[0][b_Location] = "Szmulowice Dolne"; 
+	BusinessLoaded=0; 
 	new lStr[1024];
-	for(new CurrentBID; CurrentBID<MAX_BIZNES; CurrentBID++)
+	for(new CurrentBID=1; CurrentBID<MAX_BIZNES; CurrentBID++)
 	{
 		lStr = "`ownerUID`, `ownerName`, `ID`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
 
