@@ -1,5 +1,5 @@
 # Mrucznik-RP-2.6
-Mapa serwera Mrucznik Role Play
+Mapa serwera Mrucznik Role Play, kreowana od 2009 roku. 
 
 ## Ważne adnotacje odnośnie kodu
 - aby pobrać różnicę między nowym GetTickCount a starym GetTickCount, użyj funkcji GetTickDiff
@@ -9,6 +9,15 @@ Mapa serwera Mrucznik Role Play
 - do wyświetlania dialogów zawsze używaj ShowPlayerDialogEx(..); 
 - do pobrania nicku gracza możesz użyć GetNick(playerid);
 - do pobrania ID gracza z nicku możesz użyć GetPlayerIDFromName(nick); 
+## Twórcy
+- [Mrucznik] Twórca mapy i założyciel serwera Mrucznik Role Play,
+- [Simeone] Developer od 2018 roku
+- [Pecet] Developer w latach 2017-2019
+- [Akil] Developer (brak szczegółowych danych)
+- [Kubi] Developer do 2015 roku
+- [Veroon] Developer (brak szczegółowych danych)
+- [niceCzlowiek] Developer w latach 2017-2018 
+- [lukeSql] Developer w 2018
 
 ## [Edytory do PAWN](IDE.md)
 
