@@ -59,6 +59,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 		   else if(GetPVarInt(playerid, "ActionCreateBiz") == 2)
 		   {
 			   new ID_BUSINESS = GetPVarInt(playerid, "FreeBizID"); 
+			   new debugText[124]; 
 			   new Float:X, Float:Y, Float:Z; 
 			   new bizCost = GetPVarInt(playerid, "SetBizCost"); 
 			   new bizMoneyPD = GetPVarInt(playerid, "SetBizMoney"); 
@@ -91,6 +92,9 @@ YCMD:stworzbiznes(playerid, params[], help)
 					   BusinessLoaded++; 
 					   SaveBusiness(ID_BUSINESS); 
 					   SetPVarInt(playerid, "ActionCreateBiz", 0);
+					   SetPVarInt(playerid, "MustBe", 0); 
+					   format(debugText, sizeof(debugText), "ID %d", ID_BUSINESS); 
+					   sendTipMessage(playerid, debugText); 
 				   }
 				   else
 				   {
@@ -115,6 +119,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 						BusinessLoaded++; 
 						SaveBusiness(ID_BUSINESS); 
 						SetPVarInt(playerid, "ActionCreateBiz", 0);
+						SetPVarInt(playerid, "MustBe", 0); 
 				   }
 			   }
 			   else
@@ -146,6 +151,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					BusinessLoaded++; 
 					SaveBusiness(ID_BUSINESS); 
 					SetPVarInt(playerid, "ActionCreateBiz", 0); 
+					SetPVarInt(playerid, "MustBe", 0); 
 			   }
 		   }
 	   }

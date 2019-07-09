@@ -258,7 +258,7 @@ new Float:Zone_Data[MAX_ZONES][4] = {
     {2272.0, -2040.0, 2401.0, -1973.0},
     {2229.0, -1884.0, 2314.0, -1861.0}
 }; //Strefy
-
+/*
 new VehiclePrice[211] = {
 	200000,
     160000,
@@ -472,7 +472,7 @@ new VehiclePrice[211] = {
     3000,
     2000
 };
-
+*/ 
 new FractionNames[][40] = {
     "Brak",
     "Los Santos Police Department",
@@ -1473,21 +1473,6 @@ enum pPInfo
 	PERS_NEWBIE//Wyœwietlanie chatu newbie
 };
 new PlayerPersonalization[MAX_PLAYERS][pPInfo];
-enum pDodatek
-{
-	pSlot1,
-	pSlot2,
-	pSlot3,
-	pSlot4,
-	pSlot5,
-	pSlot6,
-	pSlot7,
-	pSlot8,
-	pSlot9,
-	pSlot10
-
-};
-new PlayerAdds[MAX_PLAYERS][pDodatek];
 enum pHaul
 {
 	pCapasity,

@@ -40,7 +40,7 @@ dodajBudke(fobiekt, Float:x, Float:y, Float:z, Float: rx, Float:ry, Float: rz)
 	budki[iloscbudek][b_Id] = CreateDynamicObject(fobiekt, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz); 
 	return iloscbudek++;
 }
-
+/*
 jestObokBudki(playerid)
 {
 	for(new i; i<iloscbudek; i++)
@@ -52,7 +52,7 @@ jestObokBudki(playerid)
 	}
 	return 0;
 }
-
+*/
 
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
