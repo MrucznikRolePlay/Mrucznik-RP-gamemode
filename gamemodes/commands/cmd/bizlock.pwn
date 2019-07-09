@@ -46,7 +46,7 @@ YCMD:bizlock(playerid, params[], help)
 		{
 			ID_BUSINESS = PlayerInfo[playerid][pBusinessMember]; 
 		}
-		if(CheckIfPlayerInBiznesPoint(playerid) == INVALID_BIZ_ID)
+		if(!CheckIfPlayerInBiznesPoint(playerid))
 		{
 			sendErrorMessage(playerid, "Nie jesteœ obok biznesu!"); 
 			return 1;

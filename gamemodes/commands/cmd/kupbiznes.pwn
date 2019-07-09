@@ -44,7 +44,7 @@ YCMD:kupbiznes(playerid, params[], help)
 			sendTipMessage(playerid, "Je¿eli jesteœ cz³onkiem wpisz: /quitbiznes"); 
 			return 1; 
 		}
-		if(CheckIfPlayerInBiznesPoint(playerid) == INVALID_BIZ_ID)
+		if(!CheckIfPlayerInBiznesPoint(playerid))
 		{
 			sendTipMessage(playerid, "Nie jesteœ w miejscu biznesu!"); 
 			return 1;

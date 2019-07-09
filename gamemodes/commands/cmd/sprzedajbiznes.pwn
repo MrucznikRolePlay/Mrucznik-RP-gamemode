@@ -48,7 +48,7 @@ YCMD:sprzedajbiznes(playerid, params[], help)
 			CorrectPlayerBusiness(playerid);
 			if(ProxDetectorS(8.0, playerid, giveplayerid))
 			{
-				if(CheckIfPlayerInBiznesPoint(playerid) == INVALID_BIZ_ID)
+				if(!CheckIfPlayerInBiznesPoint(playerid))
 				{
 					sendTipMessage(playerid, "Nie jesteœ obok swojego biznesu"); 
 					return 1;
