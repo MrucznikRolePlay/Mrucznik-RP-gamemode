@@ -5,7 +5,10 @@ Mapa serwera Mrucznik Role Play
 - aby pobrać różnicę między nowym GetTickCount a starym GetTickCount, użyj funkcji GetTickDiff
 - aby sprawdzić stan gotówki przy graczu porównaj value z kaska[playerid]
 - aby wyświetlić dialog informacyjny użyj ShowPlayerInfoDialog(..); 
-- Aktorów twórz tylko i wyłącznie w pliku ActorsOnWorld.pwn (github obiekty) 
+- aktorów twórz tylko i wyłącznie w pliku ActorsOnWorld.pwn (github obiekty) 
+- do wyświetlania dialogów zawsze używaj ShowPlayerDialogEx(..); 
+- do pobrania nicku gracza możesz użyć GetNick(playerid);
+- do pobrania ID gracza z nicku możesz użyć GetPlayerIDFromName(nick); 
 
 ## [Edytory do PAWN](IDE.md)
 
