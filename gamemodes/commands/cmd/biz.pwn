@@ -39,7 +39,7 @@ YCMD:biz(playerid, params[], help)
 			return 1;
 		}
 		CorrectPlayerBusiness(playerid);
-		if(GetPlayerBusiness(playerid) == -1)
+		if(GetPlayerBusiness(playerid) == INVALID_BIZ_ID)
 		{
 			sendErrorMessage(playerid, "Nie jesteœ cz³onkiem ¿adnego biznesu!"); 
 			return 1;

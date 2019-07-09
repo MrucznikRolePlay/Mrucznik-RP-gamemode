@@ -41,7 +41,7 @@
 stock IsALeaderBusiness(playerid)
 {
 	new lid = PlayerInfo[playerid][pBusinessOwner]; 
-	if(lid >= 0)
+	if(lid >= 0 && lid != INVALID_BIZ_ID)
 	{
 		return 1;
 	}
@@ -50,7 +50,7 @@ stock IsALeaderBusiness(playerid)
 stock IsAMemberBusiness(playerid)
 {
 	new lid = PlayerInfo[playerid][pBusinessMember]; 
-	if(lid >= 0)
+	if(lid >= 0 && lid != INVALID_BIZ_ID)
 	{
 		return 1;
 	}
@@ -69,7 +69,7 @@ GetPlayerBusiness(playerid)
 	}
 	else 
 	{
-		value = -1; 
+		value = INVALID_BIZ_ID; 
 	}
 	return value; 
 }
@@ -98,7 +98,7 @@ BusinessPayDay(playerid)
 	new randomValue = random(10); 
 	new moneyForPlayer; 
 	new string[124]; 
-	if(PlayerInfo[playerid][pBusinessOwner] == -1)
+	if(PlayerInfo[playerid][pBusinessOwner] == INVALID_BIZ_ID)
 	{
 		sendTipMessage(playerid, "Nie posiadasz w³asego biznesu"); 
 		return 1;
@@ -260,7 +260,7 @@ stock CheckIfPlayerInBiznesPoint(playerid)
 		}
 		else
 		{
-			value = -1; 
+			value = INVALID_BIZ_ID; 
 		}
 	}
 	return value; 
@@ -270,7 +270,7 @@ stock ResetBizOffer(playerid)
 	SetPVarInt(playerid, "Oferujacy_ID", -1);
 	SetPVarInt(playerid, "Oferujacy_Cena", 0); 
 	SetPVarInt(playerid, "wpisal_sprzedaj_biz", 0);
-	SetPVarInt(playerid, "JestObokBiz", -1); 
+	SetPVarInt(playerid, "JestObokBiz", INVALID_BIZ_ID); 
 	return 1;
 }
 stock Biz_Owner(biz)
@@ -290,8 +290,8 @@ stock CorrectPlayerBusiness(playerid)
 {
 	if(PlayerInfo[playerid][pBusinessOwner] == 0 || PlayerInfo[playerid][pBusinessMember] == 0)
 	{
-		PlayerInfo[playerid][pBusinessMember] = -1;
-		PlayerInfo[playerid][pBusinessOwner] = -1;
+		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID;
+		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
 	}
 	return 0; 
@@ -326,7 +326,7 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 	new lStr[1024];
 	for(new CurrentBID; CurrentBID<MAX_BIZNES; CurrentBID++)
 	{
-		lStr = "`ownerUID`, `ID`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
+		lStr = "`ownerUID`, `ownerName`, `ID`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
 
 		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
 		mysql_query(lStr);
@@ -335,8 +335,9 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 		{
 			mysql_fetch_row_format(lStr, "|");
 			mysql_free_result();
-			sscanf(lStr, "p<|>dds[64]ffffffddddds[64]d",
+			sscanf(lStr, "p<|>ds[32]ds[64]ffffffddddds[64]d",
 			Business[CurrentBID][b_ownerUID],
+			Business[CurrentBID][b_Name_Owner],
 			Business[CurrentBID][b_ID], 
 			Business[CurrentBID][b_Name],
 			Business[CurrentBID][b_enX],
@@ -367,6 +368,7 @@ SaveBusiness(busID)//Zapis biznesów do bazy danych
 
 	format(query, sizeof(query), "UPDATE `mru_business` SET \
 	`ownerUID`='%d', \
+	`ownerName`='%s', \
 	`ID`='%d', \
 	`Name`='%s', \
 	`enX`='%f', \
@@ -384,6 +386,7 @@ SaveBusiness(busID)//Zapis biznesów do bazy danych
 	`MoneyPocket` = '%d' \
 	WHERE `ID`='%d'", 
 	Business[busID][b_ownerUID],
+	Business[busID][b_Name_Owner],
 	Business[busID][b_ID], 
 	Business[busID][b_Name],
 	Business[busID][b_enX], 

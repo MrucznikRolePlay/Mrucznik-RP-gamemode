@@ -75,9 +75,10 @@ YCMD:akceptuj(playerid, params[], help)
 					SendAdminMessage(COLOR_P@, string); 
 					
 					//Wykonanie czynnoœci
-					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pBusinessOwner] = -1; 
+					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pBusinessOwner] = INVALID_BIZ_ID; 
 					PlayerInfo[playerid][pBusinessOwner] = ID_BUSINESS;
                     Business[ID_BUSINESS][b_ownerUID] = PlayerInfo[playerid][pUID]; 
+                    Business[ID_BUSINESS][b_Name_Owner] = GetNick(playerid); 
 					MruMySQL_SaveAccount(playerid);
 					MruMySQL_SaveAccount(GetPVarInt(playerid, "Oferujacy_ID")); 
 
@@ -87,8 +88,8 @@ YCMD:akceptuj(playerid, params[], help)
                         Business[ID_BUSINESS][b_Name],
                         GetPVarInt(playerid, "Oferujacy_Cena"));
 
+                    ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 
 					ResetBizOffer(playerid); 
-					ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 
 				}
 				else
 				{

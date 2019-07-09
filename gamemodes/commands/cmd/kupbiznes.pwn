@@ -37,14 +37,14 @@ YCMD:kupbiznes(playerid, params[], help)
 			sendTipMessage(playerid, "Mo¿esz zakupiæ w³asny biznes dopiero od poziomu 2");
 			return 1;
 		}
-		if(GetPlayerBusiness(playerid) != -1)
+		if(GetPlayerBusiness(playerid) == INVALID_BIZ_ID)
 		{
 			sendTipMessage(playerid, "Jesteœ w³aœcicielem b¹dŸ cz³onkiem biznesu! Nie mo¿esz kupiæ nastêpnego.");
 			sendTipMessage(playerid, "Je¿eli jesteœ w³aœcicielem wpisz: /zlomujbiznes");
 			sendTipMessage(playerid, "Je¿eli jesteœ cz³onkiem wpisz: /quitbiznes"); 
 			return 1; 
 		}
-		if(CheckIfPlayerInBiznesPoint(playerid) == 0)
+		if(CheckIfPlayerInBiznesPoint(playerid) == INVALID_BIZ_ID)
 		{
 			sendTipMessage(playerid, "Nie jesteœ w miejscu biznesu!"); 
 			return 1;
@@ -67,6 +67,7 @@ YCMD:kupbiznes(playerid, params[], help)
 		}
 		PlayerInfo[playerid][pBusinessOwner] = ID_Business; 
 		Business[ID_Business][b_ownerUID] = PlayerInfo[playerid][pUID]; 
+		Business[ID_Business][b_Name_Owner] = GetNick(playerid); 
 		new string[124]; 
 		sendTipMessageEx(playerid, COLOR_GREEN, "===[Zakupi³eœ swój w³asny biznes]===");
 		format(string, sizeof(string), "Nazwa biznesu: %s", Business[ID_Business][b_Name]);  

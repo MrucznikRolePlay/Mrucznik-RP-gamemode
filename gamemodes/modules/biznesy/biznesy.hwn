@@ -30,6 +30,7 @@ enum eBusiness {
 	b_Name[64], 
 	b_ownerUID,
 	b_ID,
+	b_Name_Owner[MAX_PLAYER_NAME], 
 	Float:b_enX,
 	Float:b_enY,
 	Float:b_enZ,

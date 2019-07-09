@@ -25,5 +25,6 @@
 //------------------<[ Define: ]>-------------------
 #define MAX_BIZNES 250
 #define BIZ_SELL_MONEY_LIMIT 30000000
+#define INVALID_BIZ_ID 9999
 
 //end

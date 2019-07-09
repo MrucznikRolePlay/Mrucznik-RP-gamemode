@@ -4498,6 +4498,8 @@ ShowStats(playerid,targetid)
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
 		new coordsstring[256];
+		new busiMem = PlayerInfo[playerid][pBusinessMember];
+		new busiOwn = PlayerInfo[playerid][pBusinessOwner]; 
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
@@ -4511,16 +4513,14 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		if(PlayerInfo[playerid][pBusinessOwner] > 0 && PlayerInfo[playerid][pBusinessOwner] <= MAX_BIZNES)
+		if(busiOwn != INVALID_BIZ_ID)
 		{
-			new bizid = PlayerInfo[playerid][pBusinessOwner];
-			format(coordsstring, sizeof(coordsstring), "W³aœciciel Biznesu: [%s] MaxDochódBiz[%d] BizID: [%d]", Business[bizid][b_Name], Business[bizid][b_maxMoney], bizid);
+			format(coordsstring, sizeof(coordsstring), "W³aœciciel Biznesu: [%s] MaxDochódBiz[%d] BizID: [%d]", Business[busiOwn][b_Name], Business[busiOwn][b_maxMoney], busiOwn);
 			SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
 		}
-		if(PlayerInfo[playerid][pBusinessMember] > 0 && PlayerInfo[playerid][pBusinessMember] <= MAX_BIZNES)
+		if(busiMem != INVALID_BIZ_ID)
 		{
-			new bizid = PlayerInfo[playerid][pBusinessMember];
-			format(coordsstring, sizeof(coordsstring), "Cz³onek Biznesu: [%s] BizID: [%d]", Business[bizid][b_Name], bizid);
+			format(coordsstring, sizeof(coordsstring), "Cz³onek Biznesu: [%s] BizID: [%d]", Business[busiMem][b_Name], busiMem);
 			SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
 		}
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
