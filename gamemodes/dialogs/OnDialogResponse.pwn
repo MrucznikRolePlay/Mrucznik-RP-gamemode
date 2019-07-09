@@ -18143,6 +18143,109 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			
 		}
 	}
+	else if(dialogid == DIALOG_PANEL_BIZ)
+	{
+		if(!response)
+		{
+			return 1;
+		}
+		if(response)
+		{
+			new string[124];
+			new giveplayerid = strval(inputtext); 
+			if(GetPVarInt(playerid, "bizWhatToDo") == 1)//Przyjmij pracownika
+			{
+				if(IsPlayerConnected(giveplayerid))
+				{
+					if(GetPlayerBusiness(playerid) != INVALID_BIZ_ID)
+					{
+						sendErrorMessage(playerid, "Ten gracz ma ju¿ biznes!"); 
+						return 1; 
+					}
+					if(playerid == giveplayerid)
+					{
+						sendErrorMessage(playerid, "Nie mo¿esz przyj¹æ samego siebie!"); 
+						return 1;
+					}
+					PlayerInfo[giveplayerid ][pBusinessMember] = PlayerInfo[playerid][pBusinessOwner]; 
+					format(string, sizeof(string), "Zosta³eœ przyjêty do %s przez %s", Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], GetNick(playerid));
+					sendTipMessageEx(giveplayerid , COLOR_BLUE, string); 
+					format(string, sizeof(string), "Przyj¹³eœ %s do swojego biznesu!", GetNick(giveplayerid)); 
+					sendTipMessageEx(playerid, COLOR_BLUE, string); 
+				}
+			}
+			else if(GetPVarInt(playerid, "bizWhatToDo") == 2)//Zwolnij pracownika
+			{
+				if(IsPlayerConnected(giveplayerid))
+				{
+					if(PlayerInfo[playerid][pBusinessOwner] != PlayerInfo[playerid][pBusinessMember])
+					{
+						format(string, sizeof(string), "Gracz %s nie jest cz³onkiem twojego biznesu!", GetNick(giveplayerid)); 
+						sendErrorMessage(playerid, string); 
+						return 1;
+					}
+					PlayerInfo[giveplayerid ][pBusinessMember] = INVALID_BIZ_ID; 
+					format(string, sizeof(string), "Zosta³eœ zwolniony z %s przez %s", Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], GetNick(playerid));
+					sendTipMessageEx(giveplayerid , COLOR_BLUE, string); 
+					format(string, sizeof(string), "Zwolni³eœ %s ze swojego biznesu!", GetNick(giveplayerid )); 
+					sendTipMessageEx(playerid, COLOR_BLUE, string); 
+				}
+			}
+			else if(GetPVarInt(playerid, "bizWhatToDo") == 3)
+			{
+				new valueMoney = FunkcjaK(inputtext); 
+				if(kaska[playerid] < valueMoney)
+				{
+					sendErrorMessage(playerid, "Nie posiadasz przy sobie takiej gotówki!"); 
+					return 1;
+				}
+				if(Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]+valueMoney > 1_000_000_000)
+				{
+					sendErrorMessage(playerid, "Nie mo¿esz wsadziæ takiej gotówki - sejf jest przepe³niony!"); 
+					return 1;
+				}
+				if(valueMoney <= 0)
+				{
+					sendErrorMessage(playerid, "Wartoœæ nie mo¿e byæ podana z ''-''"); 
+					return 1;
+				}
+				format(string, sizeof(string), "Wp³aci³eœ do sejfu $%d, jest w nim teraz $%d", valueMoney, Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]+valueMoney);
+				sendTipMessageEx(playerid, COLOR_BLUE, string); 
+				Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket] = Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]+valueMoney; 
+				ZabierzKase(playerid, valueMoney); 
+				Log(businessLog, INFO, "%s [UID: %d] wp³aci³ do biznesu %s %d. Nowy stan: %d",
+				GetPlayerLogName(playerid),
+				PlayerInfo[playerid][pUID], 
+				Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], 
+				valueMoney,
+				Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]);
+			}
+			else if(GetPVarInt(playerid, "bizWhatToDo") == 4)
+			{
+				new valueMoney = FunkcjaK(inputtext); 
+				if(Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket] < valueMoney)
+				{
+					sendErrorMessage(playerid, "Nie posiadasz w sejfie biznesu takiej gotówki!"); 
+					return 1;
+				}
+				if(valueMoney <= 0)
+				{
+					sendErrorMessage(playerid, "Wartoœæ nie mo¿e byæ podana z ''-''"); 
+					return 1;
+				}
+				format(string, sizeof(string), "Wp³aci³eœ do sejfu $%d, jest w nim teraz $%d", valueMoney, Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]+valueMoney);
+				sendTipMessageEx(playerid, COLOR_BLUE, string); 
+				Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket] = Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]-valueMoney; 
+				DajKase(playerid, valueMoney); 
+				Log(businessLog, INFO, "%s [UID: %d] wyp³aci³ z biznesu %s %d. Nowy stan: %d",
+				GetPlayerLogName(playerid),
+				PlayerInfo[playerid][pUID], 
+				Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], 
+				valueMoney,
+				Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]);
+			}
+		}
+	}
 	else if(dialogid == D_BIZ_WRITE)
 	{
 		if(!response)

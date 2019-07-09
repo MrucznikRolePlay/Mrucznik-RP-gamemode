@@ -46,6 +46,8 @@ hook OnGameModeInit()
 	moneyLog = CreateLog("logi/money", ALL, false);
 	errorLog = CreateLog("logi/error", ERROR, true);
 
+	//biznesy
+	businessLog = CreateLog("logi/business", ALL, false);
 	//old
 	admindutyLog = CreateLog("logi/adminduty", ALL, false);
 }
@@ -67,7 +69,7 @@ hook OnGameModeExit()
 	DestroyLog(mysqlLog);
 	DestroyLog(moneyLog);
 	DestroyLog(errorLog);
-
+	DestroyLog(businessLog); 
 	DestroyLog(admindutyLog);
 }
 

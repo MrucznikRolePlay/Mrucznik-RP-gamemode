@@ -38,6 +38,7 @@ new Logger:moneyLog; //Logi akcji zwi¹zanych z pieniêdzmi
 new Logger:errorLog; //Logi b³êdów wraz ze œcie¿k¹ wyst¹pienia
 new Logger:mysqlLog; //B³êdy mySQL
 
+new Logger:businessLog; //Logi z biznesów
 //old
 new Logger:admindutyLog;
 

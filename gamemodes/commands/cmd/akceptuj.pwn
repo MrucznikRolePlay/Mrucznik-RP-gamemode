@@ -82,10 +82,11 @@ YCMD:akceptuj(playerid, params[], help)
 					MruMySQL_SaveAccount(playerid);
 					MruMySQL_SaveAccount(GetPVarInt(playerid, "Oferujacy_ID")); 
 
-                    Log(payLog, INFO, "%s sprzeda³ %s biznes %s za %d$",
+                    Log(businessLog, INFO, "%s sprzeda³ %s biznes %s [%d] za %d$",
                         GetPlayerLogName(GetPVarInt(playerid, "Oferujacy_ID")),
                         GetPlayerLogName(playerid),
                         Business[ID_BUSINESS][b_Name],
+                        ID_BUSINESS, 
                         GetPVarInt(playerid, "Oferujacy_Cena"));
 
                     ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 

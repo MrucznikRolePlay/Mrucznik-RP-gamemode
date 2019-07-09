@@ -41,8 +41,9 @@ YCMD:bizinfo(playerid, params[], help)
 		new string[256]; 
 		if(Business[ID_BUSINESS][b_ownerUID] == 0)
 		{
-			format(string, sizeof(string), "{FFFFFF}Nazwa: {37AC45}%s\n{FFFFFF}ID: {37AC45}%d\n{FFFFFF}Cena: {37AC45}$%d\n{FFFFFF}Dochody: {37AC45}$%d\n{FFFFFF}Lokalizacja: {37AC45}%s",
+			format(string, sizeof(string), "{FFFFFF}Nazwa: {37AC45}%s\n{FFFFFF}W³aœciciel: {37AC45}%s\n{FFFFFF}ID: {37AC45}%d\n{FFFFFF}Cena: {37AC45}$%d\n{FFFFFF}Dochody: {37AC45}$%d\n{FFFFFF}Lokalizacja: {37AC45}%s",
 			Business[ID_BUSINESS][b_Name],
+			Business[ID_BUSINESS][b_Name_Owner], 
 			ID_BUSINESS,
 			Business[ID_BUSINESS][b_cost],
 			Business[ID_BUSINESS][b_maxMoney],

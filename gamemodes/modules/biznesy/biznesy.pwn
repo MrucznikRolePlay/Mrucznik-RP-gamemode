@@ -250,11 +250,8 @@ BusinessPayDay(playerid)
 }
 stock CheckIfPlayerInBiznesPoint(playerid)
 {
-	new string[124];
 	for(new i; i<BusinessLoaded+1; i++)
 	{
-		format(string, sizeof(string), "i to teraz %d", i); 
-		sendTipMessage(playerid, string); 
 		if(IsPlayerInRangeOfPoint(playerid, 4.0, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]))
 		{
 			SetPVarInt(playerid, "JestObokBiz", i);
@@ -327,6 +324,7 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 {
 	//Tworzenie BIZ na ID 0
 	new stringName[64]; 
+	new stringNamed[MAX_PLAYER_NAME]; 
 	format(stringName, sizeof(stringName), "Testowy Biznes");
 	Business[0][b_Name] = stringName; 
 	Business[0][b_ownerUID] = 0; 
@@ -343,6 +341,8 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 	Business[0][b_cost] = 100000000;
 	format(stringName, sizeof(stringName), "Szmulowice Dolne");
 	Business[0][b_Location] = stringName; 
+	format(stringNamed, sizeof(stringNamed), "Brak - na sprzeda¿");
+	Business[0][b_Name_Owner] = stringNamed; 
 	BusinessLoaded=0; 
 	new lStr[1024];
 	for(new CurrentBID=1; CurrentBID<MAX_BIZNES; CurrentBID++)
