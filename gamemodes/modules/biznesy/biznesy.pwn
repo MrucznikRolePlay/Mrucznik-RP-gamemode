@@ -38,7 +38,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-IsALeaderBusiness(playerid)
+stock IsALeaderBusiness(playerid)
 {
 	new lid = PlayerInfo[playerid][pBusinessOwner]; 
 	if(lid >= 0)
@@ -47,7 +47,7 @@ IsALeaderBusiness(playerid)
 	}
 	return 0; 
 }
-IsAMemberBusiness(playerid)
+stock IsAMemberBusiness(playerid)
 {
 	new lid = PlayerInfo[playerid][pBusinessMember]; 
 	if(lid >= 0)
@@ -59,11 +59,11 @@ IsAMemberBusiness(playerid)
 GetPlayerBusiness(playerid)
 {
 	new value;
-	if(IsAMemberBusiness)
+	if(IsAMemberBusiness(playerid))
 	{
 		value = PlayerInfo[playerid][pBusinessMember]; 
 	}
-	else if(IsALeaderBusiness)
+	else if(IsALeaderBusiness(playerid))
 	{
 		value = PlayerInfo[playerid][pBusinessOwner]; 
 	}
@@ -352,7 +352,7 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 }
 SaveBusiness(busID)//Zapis biznesów do bazy danych
 {
-	new query[1024]; 
+	new query[1024];
 
 	format(query, sizeof(query), "UPDATE `mru_business` SET \
 	`ownerUID`='%d', \
@@ -389,8 +389,6 @@ SaveBusiness(busID)//Zapis biznesów do bazy danych
 	Business[busID][b_Location],
 	Business[busID][b_moneyPocket],
 	busID); 
-
-	if(!mysql_query(query)) fault=false;  
 	return 1;
 }
 //-----------------<[ Komendy: ]>-------------------

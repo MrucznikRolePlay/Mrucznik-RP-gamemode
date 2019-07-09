@@ -351,6 +351,7 @@
 #include "cmd/podglad.pwn"
 #include "cmd/podszyjsie.pwn"
 #include "cmd/setpogoda.pwn"
+#include "cmd/stworzbiznes.pwn"
 #include "cmd/pogodaall.pwn"
 #include "cmd/pojazdygracza.pwn"
 #include "cmd/pokazcb.pwn"
