@@ -4513,16 +4513,8 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		if(busiOwn != INVALID_BIZ_ID)
-		{
-			format(coordsstring, sizeof(coordsstring), "W³aœciciel Biznesu: [%s] MaxDochódBiz[%d] BizID: [%d]", Business[busiOwn][b_Name], Business[busiOwn][b_maxMoney], busiOwn);
-			SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
-		}
-		if(busiMem != INVALID_BIZ_ID)
-		{
-			format(coordsstring, sizeof(coordsstring), "Cz³onek Biznesu: [%s] BizID: [%d]", Business[busiMem][b_Name], busiMem);
-			SendClientMessage(playerid, COLOR_GRAD5, coordsstring);
-		}
+		format(coordsstring, sizeof(coordsstring), "BizOID:[%d] BizMID[%d]", busiOwn, busiMem);
+		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
 			format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
