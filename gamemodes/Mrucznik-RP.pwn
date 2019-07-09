@@ -1142,6 +1142,15 @@ public OnPlayerConnect(playerid)
 	//biz
 	ResetBizOffer(playerid);
 	CorrectPlayerBusiness(playerid);
+	if(PlayerInfo[playerid][pBusinessOwner] != INVALID_BIZ_ID)
+	{
+		if(Business[PlayerInfo[playerid][pBusinessOwner]][b_ownerUID] != PlayerInfo[playerid][pUID])
+		{
+			sendErrorMessage(playerid, "Wczytywanie twojego biznesu siê nie powiod³o! Zostaje Ci on odebrany"); 
+			sendErrorMessage(playerid, "Je¿eli uwa¿asz to za b³¹d skryptu - zg³oœ stratê na naszym forum!");
+			PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
+		}
+	}
 	//system barierek by Kubi
 	gHeaderTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
     gBackgroundTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;

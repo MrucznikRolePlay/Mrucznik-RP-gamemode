@@ -250,18 +250,19 @@ BusinessPayDay(playerid)
 }
 stock CheckIfPlayerInBiznesPoint(playerid)
 {
-	new string[124]; 
-	for(new i; i<BusinessLoaded; i++)
+	new string[124], bool:valueReturn=false; 
+	for(new i; i<BusinessLoaded+1; i++)
 	{
 		format(string, sizeof(string), "i to teraz %d", i); 
 		sendTipMessage(playerid, string); 
 		if(IsPlayerInRangeOfPoint(playerid, 4.0, Business[i][b_enX], Business[i][b_enY], Business[i][b_enY]))
 		{
 			SetPVarInt(playerid, "JestObokBiz", i);
-			return true;  
+			valueReturn = true;
+			return valueReturn;  
 		}
 	}
-	return false; 
+	return valueReturn; 
 }
 stock ResetBizOffer(playerid)
 {
