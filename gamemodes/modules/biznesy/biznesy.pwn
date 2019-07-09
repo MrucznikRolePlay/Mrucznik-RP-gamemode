@@ -250,11 +250,12 @@ BusinessPayDay(playerid)
 }
 stock CheckIfPlayerInBiznesPoint(playerid)
 {
+	new string[124]; 
 	for(new i; i<BusinessLoaded; i++)
 	{
 		format(string, sizeof(string), "i to teraz %d", i); 
 		sendTipMessage(playerid, string); 
-		if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_enX], Business[i][b_enY], Business[i][b_enY]))
+		if(IsPlayerInRangeOfPoint(playerid, 4.0, Business[i][b_enX], Business[i][b_enY], Business[i][b_enY]))
 		{
 			SetPVarInt(playerid, "JestObokBiz", i);
 			return true;  
