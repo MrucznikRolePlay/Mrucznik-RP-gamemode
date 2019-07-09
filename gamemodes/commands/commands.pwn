@@ -249,6 +249,7 @@
 #include "cmd/kup.pwn"
 #include "cmd/kuparmor.pwn"
 #include "cmd/kupbiletpociag.pwn"
+#include "cmd/kupbiznes.pwn"
 #include "cmd/kupbron.pwn"
 #include "cmd/kupdildo.pwn"
 #include "cmd/kuphelikopter.pwn"

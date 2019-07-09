@@ -250,17 +250,13 @@ BusinessPayDay(playerid)
 }
 stock CheckIfPlayerInBiznesPoint(playerid)
 {
-	new value; 
+	new value = INVALID_BIZ_ID; 
 	for(new i; i<BusinessLoaded; i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_enX], Business[i][b_enY], Business[i][b_enY]))
 		{
 			value = 1;
 			SetPVarInt(playerid, "JestObokBiz", i); 
-		}
-		else
-		{
-			value = INVALID_BIZ_ID; 
 		}
 	}
 	return value; 

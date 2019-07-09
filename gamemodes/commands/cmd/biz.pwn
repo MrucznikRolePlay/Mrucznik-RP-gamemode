@@ -44,16 +44,8 @@ YCMD:biz(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie jesteœ cz³onkiem ¿adnego biznesu!"); 
 			return 1;
 		}
-		if(PlayerInfo[playerid][pBusinessOwner] >= 0)
-		{
-			ID_BUSINESS = PlayerInfo[playerid][pBusinessOwner]; 
-		}
-		if(PlayerInfo[playerid][pBusinessMember] >= 0)
-		{
-			ID_BUSINESS = PlayerInfo[playerid][pBusinessMember]; 
-		}
 		new string[256]; 
-		
+		ID_BUSINESS = GetPlayerBusiness(playerid); 
 		format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid), text); 
 		SendMessageToBiz(ID_BUSINESS, string, KOLOR_NIEBIESKI, 1);
 		ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);

@@ -73,17 +73,17 @@ YCMD:kupbiznes(playerid, params[], help)
 		format(string, sizeof(string), "Nazwa biznesu: %s", Business[ID_Business][b_Name]);  
 		sendTipMessage(playerid, string); 
 		format(string, sizeof(string), "ID biznesu: %d", ID_Business); 
-		sendTipMessage(playerid, string): 
+		sendTipMessage(playerid, string);
 		format(string, sizeof(string), "Twoje UID: %d", PlayerInfo[playerid][pUID]); 
 		sendTipMessage(playerid, string); 
 		sendTipMessageEx(playerid, COLOR_GREEN, "===[WYKONAJ ZRZUT EKRANU]==="); 
 
-		 Log(payLog, INFO, "%s [UID: %d] kupi³ biznes %s [%d] za %d$",
-                        GetPlayerLogName(playerid),
-						PlayerInfo[playerid][pUID], 
-						Business[ID_Business][b_Name], 
-                        ID_Business,
-                        Business[ID_Business][b_cost]);
+		Log(payLog, INFO, "%s [UID: %d] kupi³ biznes %s [%d] za %d$",
+        GetPlayerLogName(playerid),
+		PlayerInfo[playerid][pUID], 
+		Business[ID_Business][b_Name], 
+    	ID_Business,
+        Business[ID_Business][b_cost]);
 		ZabierzKase(playerid, Business[ID_Business][b_cost]); 
 		ResetBizOffer(playerid);
 	}
