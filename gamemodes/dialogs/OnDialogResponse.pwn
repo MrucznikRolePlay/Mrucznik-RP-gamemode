@@ -18143,6 +18143,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			
 		}
 	}
+	else if(dialogid == D_BIZ_WRITE)
+	{
+		if(!response)
+		{
+			sendErrorMessage(playerid, "Wyszed³eœ z panelu tworzenia biznesu"); 
+			return 1;
+		}
+		new value, string[124]; 
+		if(response)
+		{
+			if(GetPVarInt(playerid, "MustBe") == 0)//Kwota kasy za jaka gracz ma kupic
+			{
+				value = FunkcjaK(inputtext); 
+				SetPVarInt(playerid, "SetBizCost", value); 
+				SetPVarInt(playerid, "MustBe", 1); 
+				ShowPlayerDialogEx(playerid, D_BIZ_WRITE, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "WprowadŸ poni¿ej maksymalny zysk\nktóry gracz bêdzie móg³ otrzymaæ co godzine.", "Dalej", "WyjdŸ"); 
+				return 1;
+			}
+			if(GetPVarInt(playerid, "MustBe") == 1)
+			{
+				value = FunkcjaK(inputtext); 
+				SetPVarInt(playerid, "SetBizMoney", value); 
+				SetPVarInt(playerid, "MustBe", 2); 
+				ShowPlayerDialogEx(playerid, D_BIZ_WRITE, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "Wpisz poni¿ej nazwê biznesu", "Dalej", "WyjdŸ"); 
+				return 1;
+			}
+			if(GetPVarInt(playerid, "MustBe") == 2)
+			{
+				if(strlen(inputtext) > 3 && strlen(inputtext) < 64)
+				{
+					SetPVarString(playerid, "SetBizName", inputtext); 
+					sendTipMessageEx(playerid, COLOR_GREEN, "===[Tworzenie biznesu 1/3]==="); 
+					format(string, sizeof(string), "Nazwa biznesu: %s", inputtext); 
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Cena: $%d", GetPVarInt(playerid, "SetBizCost"));
+					sendTipMessage(playerid, string); 
+					format(string, sizeof(string), "Odsetki uwarunkowane (max): $%d", GetPVarInt(playerid, "SetBizMoney")); 
+					sendTipMessage(playerid, string); 
+					sendTipMessage(playerid, "Teraz trzeba wybraæ pozycjê wejœcia - stañ w miejscu i wpisz /stworzbiznes"); 
+					SetPVarInt(playerid, "ActionCreateBiz", 1); 
+				}
+				else
+				{
+					ShowPlayerDialogEx(playerid, D_BIZ_WRITE, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "Wpisz poni¿ej nazwê biznesu\nMINIMALNIE 3 ZNAKI", "Dalej", "WyjdŸ"); 
+				}
+				return 1;
+			}
+		}
+	}
 	else if(dialogid == D_VINYL_CAM)
 	{
 		if(response){

@@ -248,7 +248,7 @@ stock CheckIfPlayerInBiznesPoint(playerid)
 	}
 	return value; 
 }
-ResetBizOffer(playerid)
+stock ResetBizOffer(playerid)
 {
 	SetPVarInt(playerid, "Oferujacy_ID", -1);
 	SetPVarInt(playerid, "Oferujacy_Cena", 0); 
@@ -256,13 +256,124 @@ ResetBizOffer(playerid)
 	SetPVarInt(playerid, "JestObokBiz", -1); 
 	return 1;
 }
+stock Biz_Owner(biz)
+{
+    new lStr[64];
+    format(lStr, 64, "SELECT `Nick` FROM mru_konta WHERE `Bizz`='%d'", biz);
+    mysql_query(lStr);
+    mysql_store_result();
+    if(mysql_num_rows())
+    {
+    	mysql_fetch_row_format(lStr, "|");
+		mysql_free_result();
+	}
+    return lStr;
+}
+stock GetFreeBizID()
+{
+	new bID; 
+	for(new i; i<BusinessLoaded; i++)
+	{
+		if(strlen(Business[i][b_Name]) <= 3)
+		{
+			return bID; 
+		}
+	}
+	return bID; 
+}
+stock LoadBusinessPickup()
+{
+	for(new i; i<MAX_BIZNES; i++)
+	{
+		if(strlen(Business[i][b_Name]) >= 3)
+		{	
+			CreateDynamicPickup(1272, 0, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 0, 0 -1);
+		}
+	}
+	return 1;
+}
 //------------------<[ MySQL: ]>--------------------
 LoadBusiness()//£adowanie biznesów z bazy danych
 {
+	new lStr[1024];
+	for(new CurrentBID; CurrentBID<MAX_BIZNES; CurrentBID++)
+	{
+		lStr = "`ownerUID`, `ID`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
+
+		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
+		mysql_query(lStr);
+		mysql_store_result();
+		if (mysql_num_rows())
+		{
+			mysql_fetch_row_format(lStr, "|");
+			mysql_free_result();
+			sscanf(lStr, "p<|>dds[64]ffffffddddds[64]d",
+			Business[CurrentBID][b_ownerUID],
+			Business[CurrentBID][b_ID], 
+			Business[CurrentBID][b_Name],
+			Business[CurrentBID][b_enX],
+			Business[CurrentBID][b_enY],
+			Business[CurrentBID][b_enZ],
+			Business[CurrentBID][b_exX],
+			Business[CurrentBID][b_exY],
+			Business[CurrentBID][b_exZ],
+			Business[CurrentBID][b_vw],
+			Business[CurrentBID][b_int],
+			Business[CurrentBID][b_pLocal],
+			Business[CurrentBID][b_maxMoney],
+			Business[CurrentBID][b_cost],
+			Business[CurrentBID][b_Location],
+			Business[CurrentBID][b_moneyPocket]); 
+			
+			if(strlen(Business[CurrentBID][b_Name]) >= 3)
+			{
+				BusinessLoaded++; 
+			}
+		}
+	}
 	return 1;
 }
-SaveBusiness()//Zapis biznesów do bazy danych
+SaveBusiness(busID)//Zapis biznesów do bazy danych
 {
+	new query[1024]; 
+
+	format(query, sizeof(query), "UPDATE `mru_business` SET \
+	`ownerUID`='%d', \
+	`ID`='%d', \
+	`Name`='%s', \
+	`enX`='%f', \
+	`enY`='%f', \
+	`enZ`='%f', \
+	`exX`='%f', \
+	`exY`= '%f', \
+	`exZ`= '%f', \
+	`exVW`= '%d', \
+	`exINT` = '%d', \
+	`pLocal` = '%d', \
+	`Money` = '%d', \
+	`Cost` = '%d', \
+	`Location` = '%s', \
+	`MoneyPocket` = '%d' \
+	WHERE `ID`='%d'", 
+	Business[busID][b_ownerUID],
+	Business[busID][b_ID], 
+	Business[busID][b_Name],
+	Business[busID][b_enX], 
+	Business[busID][b_enY],
+	Business[busID][b_enZ],
+	Business[busID][b_exX],
+	Business[busID][b_exY],
+	Business[busID][b_exZ],
+	Business[busID][b_vw],
+	Business[busID][b_int],
+	Business[busID][b_pLocal],
+	Business[busID][b_maxMoney],
+	Business[busID][b_cost],
+	Business[busID][b_Location],
+	Business[busID][b_moneyPocket],
+	busID); 
+
+	if(!mysql_query(query)) fault=false;  
 	return 1;
 }
 //-----------------<[ Komendy: ]>-------------------

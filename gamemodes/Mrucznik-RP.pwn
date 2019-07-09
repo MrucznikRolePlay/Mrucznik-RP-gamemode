@@ -234,6 +234,8 @@ public OnGameModeInit()
     systempozarow_init();
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
+	LoadBusiness(); 
+	LoadBusinessPickup(); 
 	//LoadActors(); 	
 	//-------<[ actors ]>-------
 	PushActors(); 

@@ -3814,7 +3814,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 	}
 	return 1;
 }
-
+/*
 WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", local)
 {
     if(x==x2 && y==y2 && z==z2) return 0;
@@ -3852,6 +3852,7 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 	}
 	return 1;
 }
+*/ 
 
 SetServerWeatherAndTime(playerid)
 {
