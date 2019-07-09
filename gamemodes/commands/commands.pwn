@@ -17,6 +17,7 @@
 //----------------------------------------------------*------------------------------------------------------//
                                                                                                                                              
 #include "cmd/a.pwn"
+#include "cmd/achuj.pwn"
 #include "cmd/adajrange.pwn"
 #include "cmd/addcar.pwn"
 #include "cmd/adds.pwn"
