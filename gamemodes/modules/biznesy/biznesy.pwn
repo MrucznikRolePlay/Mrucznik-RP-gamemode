@@ -293,13 +293,14 @@ stock CorrectPlayerBusiness(playerid)
 }
 stock GetFreeBizID()
 {
-	new bID; 
+	new bID = BusinessLoaded+1; 
 	for(new i; i<BusinessLoaded; i++)
 	{
 		if(i != 0)
 		{
 			if(strlen(Business[i][b_Name]) <= 3)
 			{
+				bID = i; 
 				return bID; 
 			}
 		}
@@ -322,7 +323,9 @@ stock LoadBusinessPickup()
 LoadBusiness()//£adowanie biznesów z bazy danych
 {
 	//Tworzenie BIZ na ID 0
-	Business[0][b_Name] = "Testowy Biznes"; 
+	new stringName[64]; 
+	format(stringName, sizeof(stringName), "Testowy Biznes");
+	Business[0][b_Name] = stringName; 
 	Business[0][b_ownerUID] = 0; 
 	Business[0][b_enX] = 0.0;
 	Business[0][b_enY] = 0.0;
@@ -335,7 +338,8 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 	Business[0][b_pLocal] = 255; 
 	Business[0][b_maxMoney] = 0;
 	Business[0][b_cost] = 100000000;
-	Business[0][b_Location] = "Szmulowice Dolne"; 
+	format(stringName, sizeof(stringName), "Szmulowice Dolne");
+	Business[0][b_Location] = stringName; 
 	BusinessLoaded=0; 
 	new lStr[1024];
 	for(new CurrentBID=1; CurrentBID<MAX_BIZNES; CurrentBID++)
