@@ -90,6 +90,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					   CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
 					   BusinessLoaded++; 
 					   SaveBusiness(ID_BUSINESS); 
+					   SetPVarInt(playerid, "ActionCreateBiz", 0);
 				   }
 				   else
 				   {
@@ -113,6 +114,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					   	CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
 						BusinessLoaded++; 
 						SaveBusiness(ID_BUSINESS); 
+						SetPVarInt(playerid, "ActionCreateBiz", 0);
 				   }
 			   }
 			   else
@@ -143,6 +145,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
 					BusinessLoaded++; 
 					SaveBusiness(ID_BUSINESS); 
+					SetPVarInt(playerid, "ActionCreateBiz", 0); 
 			   }
 		   }
 	   }
