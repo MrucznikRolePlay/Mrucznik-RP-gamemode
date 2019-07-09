@@ -1,8 +1,11 @@
-# Mrucznik-RP-2.5
+# Mrucznik-RP-2.6
 Mapa serwera Mrucznik Role Play
 
 ## Ważne adnotacje odnośnie kodu
 - aby pobrać różnicę między nowym GetTickCount a starym GetTickCount, użyj funkcji GetTickDiff
+- aby sprawdzić stan gotówki przy graczu porównaj value z kaska[playerid]
+- aby wyświetlić dialog informacyjny użyj ShowPlayerInfoDialog(..); 
+- Aktorów twórz tylko i wyłącznie w pliku ActorsOnWorld.pwn (github obiekty) 
 
 ## [Edytory do PAWN](IDE.md)
 
