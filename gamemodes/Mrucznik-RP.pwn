@@ -1141,13 +1141,7 @@ public OnPlayerConnect(playerid)
 	
 	//biz
 	ResetBizOffer(playerid);
-	if(PlayerInfo[playerid][pBusinessOwner] == 0 || PlayerInfo[playerid][pBusinessMember] == 0)
-	{
-		PlayerInfo[playerid][pBusinessMember] = -1;
-		PlayerInfo[playerid][pBusinessOwner] = -1;
-		sendTipMessage(playerid, "Twój biznes mia³ ID 0"); 
-		sendTipMessage(playerid, "Pomyœlnie przywrócono - BRAK BIZNESU!"); 
-	}
+	CorrectPlayerBusiness(playerid);
 	//system barierek by Kubi
 	gHeaderTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
     gBackgroundTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;

@@ -561,6 +561,11 @@ YCMD:wejdz(playerid, params[], help)
                         sendErrorMessage(playerid, "Ten biznes jest zamkniêty!"); 
                         return 1;
                     }
+                    if(Business[i][b_vw] == 0)
+                    {
+                        sendTipMessage(playerid, "Ten biznes nie ma wnêtrza!"); 
+                        return 1;
+                    }
                     SetPlayerVirtualWorld(playerid, Business[i][b_vw]); 
                     SetPlayerInterior(playerid, Business[i][b_int]); 
                     SetPLocal(playerid, Business[i][b_pLocal]); 

@@ -45,6 +45,7 @@ YCMD:sprzedajbiznes(playerid, params[], help)
 				sendTipMessage(playerid, "Nie mo¿esz zaoferowaæ sprzeda¿y samemu sobie"); 
 				return 1;
 			}
+			CorrectPlayerBusiness(playerid);
 			if(ProxDetectorS(8.0, playerid, giveplayerid))
 			{
 				if(CheckIfPlayerInBiznesPoint(playerid) == 0)

@@ -38,6 +38,7 @@ YCMD:obiz(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /obiz [Text]");
 			return 1;
 		}
+		CorrectPlayerBusiness(playerid);
 		if(GetPlayerBusiness(playerid) == -1)
 		{
 			sendErrorMessage(playerid, "Nie jesteœ cz³onkiem ¿adnego biznesu!"); 

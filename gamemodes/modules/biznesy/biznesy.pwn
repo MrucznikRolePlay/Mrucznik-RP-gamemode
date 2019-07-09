@@ -286,6 +286,16 @@ stock Biz_Owner(biz)
 	}
     return lStr;
 }
+stock CorrectPlayerBusiness(playerid)
+{
+	if(PlayerInfo[playerid][pBusinessOwner] == 0 || PlayerInfo[playerid][pBusinessMember] == 0)
+	{
+		PlayerInfo[playerid][pBusinessMember] = -1;
+		PlayerInfo[playerid][pBusinessOwner] = -1;
+		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
+	}
+	return 0; 
+}
 stock GetFreeBizID()
 {
 	new bID; 
@@ -304,7 +314,8 @@ stock LoadBusinessPickup()
 	{
 		if(strlen(Business[i][b_Name]) >= 3)
 		{	
-			CreateDynamicPickup(1272, 0, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 0, 0 -1);
+			CreateDynamicPickup(1272, 1, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 0, 0 -1);
+			CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.4, 10.0);
 		}
 	}
 	return 1;

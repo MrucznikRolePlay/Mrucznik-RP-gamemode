@@ -86,31 +86,33 @@ YCMD:stworzbiznes(playerid, params[], help)
 					   Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
 					   Business[ID_BUSINESS][b_cost] = bizCost;
 					   Business[ID_BUSINESS][b_Location] = bizLoc; 
-					   CreateDynamicPickup(1272, 0, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
+					   CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
+					   CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
 					   BusinessLoaded++; 
 					   SaveBusiness(ID_BUSINESS); 
 				   }
 				   else
 				   {
-					   sendTipMessage(playerid, "Stworzy³eœ biznes z interiorem!");
-					   sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
-					   Business[ID_BUSINESS][b_Name] = bizName; 
-					   Business[ID_BUSINESS][b_ownerUID] = 0; 
-					   Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
-					   Business[ID_BUSINESS][b_enY] = GetPVarFloat(playerid, "CreateBizOnY");
-					   Business[ID_BUSINESS][b_enZ] = GetPVarFloat(playerid, "CreateBizOnZ"); 
-					   Business[ID_BUSINESS][b_exX] = X;
-					   Business[ID_BUSINESS][b_exY] = Y;
-					   Business[ID_BUSINESS][b_exZ] = Z; 
-					   Business[ID_BUSINESS][b_int] = GetPlayerInterior(playerid);   
-					   Business[ID_BUSINESS][b_vw] = GetPlayerVirtualWorld(playerid); 
-					   Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 
-					   Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
-					   Business[ID_BUSINESS][b_cost] = bizCost;
-					   Business[ID_BUSINESS][b_Location] = bizLoc; 
-					   CreateDynamicPickup(1272, 0, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
-					   BusinessLoaded++; 
-					   SaveBusiness(ID_BUSINESS); 
+						sendTipMessage(playerid, "Stworzy³eœ biznes z interiorem!");
+						sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
+						Business[ID_BUSINESS][b_Name] = bizName; 
+						Business[ID_BUSINESS][b_ownerUID] = 0; 
+						Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
+						Business[ID_BUSINESS][b_enY] = GetPVarFloat(playerid, "CreateBizOnY");
+						Business[ID_BUSINESS][b_enZ] = GetPVarFloat(playerid, "CreateBizOnZ"); 
+						Business[ID_BUSINESS][b_exX] = X;
+						Business[ID_BUSINESS][b_exY] = Y;
+						Business[ID_BUSINESS][b_exZ] = Z; 
+						Business[ID_BUSINESS][b_int] = GetPlayerInterior(playerid);   
+						Business[ID_BUSINESS][b_vw] = GetPlayerVirtualWorld(playerid); 
+						Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 
+						Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
+						Business[ID_BUSINESS][b_cost] = bizCost;
+						Business[ID_BUSINESS][b_Location] = bizLoc; 
+						CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
+					   	CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
+						BusinessLoaded++; 
+						SaveBusiness(ID_BUSINESS); 
 				   }
 			   }
 			   else
@@ -137,7 +139,8 @@ YCMD:stworzbiznes(playerid, params[], help)
 					Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
 					Business[ID_BUSINESS][b_cost] = bizCost;
 					Business[ID_BUSINESS][b_Location] = bizLoc; 
-					CreateDynamicPickup(1272, 0, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
+					CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
+					CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
 					BusinessLoaded++; 
 					SaveBusiness(ID_BUSINESS); 
 			   }
