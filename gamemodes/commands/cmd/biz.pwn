@@ -33,7 +33,7 @@ YCMD:biz(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
 		new text[124], ID_BUSINESS;
-		if( sscanf(params, "k<fix>", text))
+		if( sscanf(params, "s[124]", text))
 		{
 			sendTipMessage(playerid, "U¿yj /biz [Text]");
 			return 1;
@@ -43,11 +43,11 @@ YCMD:biz(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie jesteœ cz³onkiem ¿adnego biznesu!"); 
 			return 1;
 		}
-		if(PlayerInfo[playerid][pBusinessOwner] != -1)
+		if(PlayerInfo[playerid][pBusinessOwner] >= 0)
 		{
 			ID_BUSINESS = PlayerInfo[playerid][pBusinessOwner]; 
 		}
-		if(PlayerInfo[playerid][pBusinessMember] != -1)
+		if(PlayerInfo[playerid][pBusinessMember] >= 0)
 		{
 			ID_BUSINESS = PlayerInfo[playerid][pBusinessMember]; 
 		}

@@ -38,25 +38,42 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
+IsALeaderBusiness(playerid)
+{
+	new lid = PlayerInfo[playerid][pBusinessOwner]; 
+	if(lid >= 0)
+	{
+		return 1;
+	}
+	return 0; 
+}
+IsAMemberBusiness(playerid)
+{
+	new lid = PlayerInfo[playerid][pBusinessMember]; 
+	if(lid >= 0)
+	{
+		return 1;
+	}
+	return 0;
+}
 GetPlayerBusiness(playerid)
 {
-	new value; 
-	if(PlayerInfo[playerid][pBusinessOwner] >= 0)
-	{
-		value = PlayerInfo[playerid][pBusinessOwner]; 
-	}
-	else if(PlayerInfo[playerid][pBusinessMember] >= 0)
+	new value;
+	if(IsAMemberBusiness)
 	{
 		value = PlayerInfo[playerid][pBusinessMember]; 
 	}
-	else if(PlayerInfo[playerid][pBusinessMember] == -1 && PlayerInfo[playerid][pBusinessOwner] == -1)
+	else if(IsALeaderBusiness)
 	{
-		value = -1;
+		value = PlayerInfo[playerid][pBusinessOwner]; 
 	}
-
+	else 
+	{
+		value = -1; 
+	}
 	return value; 
 }
-SendMessageToBiz(bizID, const mess[], color, type)
+SendMessageToBiz(bizID, mess[], color, type)
 {
 	new string[256]; 
 	foreach(new i : Player)
