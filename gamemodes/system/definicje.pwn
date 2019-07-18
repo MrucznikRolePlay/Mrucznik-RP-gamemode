@@ -155,9 +155,9 @@
 #define NG_BOUNDS_maxX 2809.2007
 #define NG_BOUNDS_maxY -2330.6167
 //Stanowe wiêzienie
-#define NG_JAIL_X 593.1502
-#define NG_JAIL_Y -1495.5145
-#define NG_JAIL_Z 82.1648
+#define NG_JAIL_X -554.7513
+#define NG_JAIL_Y 2590.4070
+#define NG_JAIL_Z 53.6603
 
 #define MAX_DOORS   20 //tymczasowe
 

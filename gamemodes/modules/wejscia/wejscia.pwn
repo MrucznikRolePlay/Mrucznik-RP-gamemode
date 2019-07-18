@@ -281,6 +281,16 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		sendTipMessage(playerid, "Zapraszamy na rzeŸ!");
 
 	}
+	else if(Check_ID == 16)//Wiêzienie stanowe - wejœcie i wyjœcie
+	{
+		if(!IsACop(playerid) && !IsABOR(playerid))
+		{
+			SendClientMessage(playerid, -1, "Simon_Mrucznikov mówi: Zaraz zaraz kolego! A ty gdzie? Nie mo¿esz tu wejœæ!"); 
+			noAccessCome[playerid] = 1;
+			return 1;
+		}
+		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
+	}
 	else
 	{
 		sendTipMessage(playerid, "Proces /wejdz - poprawnie przeprowadzony"); 
@@ -339,6 +349,16 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 			sendErrorMessage(playerid, "Brak dostêpu do tego wejœcia"); 
 			return 1;
 		}
+	}
+	else if(Check_ID == 16)//Wiêzienie stanowe - g³ówne wejœcie
+	{
+		if(PlayerInfo[playerid][pJailed] > 0)
+		{
+			SendClientMessage(playerid, -1, "Pavlo_Rudovy mówi: Koleszko? Nie pojeba³o Ci siê coœ? Wracaj do celi!!"); 
+			noAccessCome[playerid] =1;
+			return 1;
+		}
+		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
 	}
 	else
 	{
