@@ -16,7 +16,7 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone (started by Pecet) 
+// Autor: Simeone (started by Pecet) & _Kamil
 // Data utworzenia: 08.07.2019
 //Opis:
 /*
@@ -347,7 +347,7 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 	new lStr[1024];
 	for(new CurrentBID=1; CurrentBID<MAX_BIZNES; CurrentBID++)
 	{
-		lStr = "`ownerUID`, `ownerName`, `ID`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
+		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
 
 		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
 		mysql_query(lStr);
@@ -356,10 +356,10 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 		{
 			mysql_fetch_row_format(lStr, "|");
 			mysql_free_result();
-			sscanf(lStr, "p<|>ds[32]ds[64]ffffffddddds[64]d",
+			sscanf(lStr, "p<|>dds[32]s[64]ffffffddddds[64]d",
+			Business[CurrentBID][b_ID], 
 			Business[CurrentBID][b_ownerUID],
 			Business[CurrentBID][b_Name_Owner],
-			Business[CurrentBID][b_ID], 
 			Business[CurrentBID][b_Name],
 			Business[CurrentBID][b_enX],
 			Business[CurrentBID][b_enY],
@@ -388,9 +388,9 @@ SaveBusiness(busID)//Zapis biznesów do bazy danych
 	new query[1024];
 
 	format(query, sizeof(query), "UPDATE `mru_business` SET \
+	`ID`='%d', \
 	`ownerUID`='%d', \
 	`ownerName`='%s', \
-	`ID`='%d', \
 	`Name`='%s', \
 	`enX`='%f', \
 	`enY`='%f', \
@@ -406,9 +406,9 @@ SaveBusiness(busID)//Zapis biznesów do bazy danych
 	`Location` = '%s', \
 	`MoneyPocket` = '%d' \
 	WHERE `ID`='%d'", 
+	Business[busID][b_ID], 
 	Business[busID][b_ownerUID],
 	Business[busID][b_Name_Owner],
-	Business[busID][b_ID], 
 	Business[busID][b_Name],
 	Business[busID][b_enX], 
 	Business[busID][b_enY],
