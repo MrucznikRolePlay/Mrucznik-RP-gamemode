@@ -39,6 +39,7 @@
 #include "cmd/armia.pwn"
 #include "cmd/armor.pwn"
 #include "cmd/atakuj.pwn"
+#include "cmd/autorzy.pwn"
 #include "cmd/autok.pwn"
 #include "cmd/autoranny.pwn"
 #include "cmd/awans.pwn"
@@ -677,6 +678,8 @@ InitCommands()
 
 static Aliases()
 {
+	//autorzy
+	Command_AddAltNamed("autorzy", "tworcy"); 
 	//tognewbie
 	Command_AddAltNamed("tognewbie", "togn"); 
 	//setserverpass
