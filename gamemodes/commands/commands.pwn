@@ -335,6 +335,8 @@
 #include "cmd/paliwo.pwn"
 #include "cmd/panel.pwn"
 #include "cmd/panelbasenu.pwn"
+#include "cmd/panelbiznesu.pwn"
+#include "cmd/zlomujbiznes.pwn"
 #include "cmd/paralizuj.pwn"
 #include "cmd/patrol.pwn"
 #include "cmd/pban.pwn"

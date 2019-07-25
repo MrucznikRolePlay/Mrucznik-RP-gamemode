@@ -49,7 +49,7 @@ YCMD:panelbiznesu(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie jesteœ liderem biznesu"); 
 			return 1;
 		}
-		new ID_Business = PlayerInfo[playerid][pBusinessOwner];
+		new string[256];
 		if(strcmp(pChoice, "Przyjmij",  false, 124))
 		{
 			format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej ID gracza\nktórego pragniesz zatrudniæ w swoim biznesie.\n",

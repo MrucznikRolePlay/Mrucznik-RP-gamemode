@@ -58,6 +58,8 @@ YCMD:zlomujbiznes(playerid, params[], help)
 		}
 		else if(GetPVarInt(playerid, "Wpisal_zlomujbiznes") == 1)
 		{
+			new stringName[MAX_PLAYER_NAME]; 
+			new string[128]; 
 			Business[ID_Business][b_ownerUID] = 0;  
 			format(stringName, sizeof(stringName), "Brak - na sprzeda¿");
 			Business[ID_Business][b_Name_Owner] = stringName; 

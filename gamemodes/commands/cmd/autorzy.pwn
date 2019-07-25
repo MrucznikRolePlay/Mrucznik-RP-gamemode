@@ -32,8 +32,8 @@ YCMD:autorzy(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		ShowPlayerDialogEx(playerid, 9494, DIALOG_STYLE_LIST, "Mrucznik Role Play", 
-		"{37AC45}2009+\nMrucznik\tW³aœciciel\n{37AC45}2015+\nKubi\tSkrypter\nAkil\tSkrypter\nVeroon\tSkrypter\n{37AC45}2017\nniceCzlowiek\tSkrypter\nPecet\tSkrypter\n{37AC45}2018+\nSimeone\tG³ówny Skrypter\nPomocnicy:\n_Kamil\nSniper", "Okej", ""); 
+		ShowPlayerDialogEx(playerid, 9494, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", 
+		"{37AC45}===[2009+]===\nMrucznik\tW³aœciciel\n{37AC45}===[2015+]====\nKubi\tSkrypter\nAkil\tSkrypter\nVeroon\tSkrypter\n{37AC45}===[2017+]===\nniceCzlowiek\tSkrypter\nPecet\tSkrypter\n{37AC45}===[2018+]===\nSimeone\tG³ówny Skrypter\n{37AC45}===[Pomocnicy:]===\n_Kamil\nSniper", "Okej", ""); 
 	}
 	return 1;
 }
