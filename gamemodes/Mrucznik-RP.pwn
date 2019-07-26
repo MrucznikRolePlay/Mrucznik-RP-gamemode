@@ -7452,7 +7452,11 @@ public OnDynamicObjectMoved(objectid)
     }
     return 1;
 }
-
+public OnPlayerRequestDownload(playerid, type, crc)
+{
+	sendTipMessage(playerid, "Trwa pobieranie zasobów serwera!"); 
+	return 1;
+}
 public OnVehicleRespray(playerid, vehicleid, color1, color2)
 {
     if(CarData[VehicleUID[vehicleid][vUID]][c_Color][0] != color1)

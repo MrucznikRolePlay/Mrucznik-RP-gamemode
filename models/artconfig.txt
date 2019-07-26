@@ -1,0 +1,1 @@
+AddCharModel(45, 20000, "resources/skin-01/mrucznik_1.diff", "resources/skin-01/mrucznik_1.diff");
