@@ -67,6 +67,8 @@ YCMD:stworzbiznes(playerid, params[], help)
 			   GetPVarString(playerid, "SetBizName", bizName, sizeof(bizName));
 			   GetPVarString(playerid, "SetBizLocation", bizLoc, sizeof(bizLoc));  
 			   GetPlayerPos(playerid, X, Y, Z);  
+			   new nameOwn[MAX_PLAYER_NAME];
+			   format(nameOwn, sizeof(nameOwn), "Brak - na sprzeda¿"); 
 			   if(IsPlayerInRangeOfPoint(playerid, 4.0, GetPVarFloat(playerid, "CreateBizOnX"), GetPVarFloat(playerid, "CreateBizOnY"), GetPVarFloat(playerid, "CreateBizOnZ")))
 			   {
 				   if(GetPlayerVirtualWorld(playerid) == 0)//Ustawianie tego samego - brak wejœcia 
@@ -83,6 +85,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					   Business[ID_BUSINESS][b_exX] = GetPVarFloat(playerid, "CreateBizOnX");
 					   Business[ID_BUSINESS][b_exY] = GetPVarFloat(playerid, "CreateBizOnX");
 					   Business[ID_BUSINESS][b_exZ] = GetPVarFloat(playerid, "CreateBizOnZ"); 
+					   Business[ID_BUSINESS][b_Name_Owner] = nameOwn;
 					   Business[ID_BUSINESS][b_int] = 0; 
 					   Business[ID_BUSINESS][b_vw] = 0; 
 					   Business[ID_BUSINESS][b_pLocal] = PLOCAL_DEFAULT; 
@@ -112,6 +115,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 						Business[ID_BUSINESS][b_exX] = X;
 						Business[ID_BUSINESS][b_exY] = Y;
 						Business[ID_BUSINESS][b_exZ] = Z; 
+						Business[ID_BUSINESS][b_Name_Owner] = nameOwn;
 						Business[ID_BUSINESS][b_int] = GetPlayerInterior(playerid);   
 						Business[ID_BUSINESS][b_vw] = GetPlayerVirtualWorld(playerid); 
 						Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 
@@ -146,6 +150,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					Business[ID_BUSINESS][b_exX] = X;
 					Business[ID_BUSINESS][b_exY] = Y;
 					Business[ID_BUSINESS][b_exZ] = Z; 
+					Business[ID_BUSINESS][b_Name_Owner] = nameOwn;
 					Business[ID_BUSINESS][b_int] = GetPlayerInterior(playerid);   
 					Business[ID_BUSINESS][b_vw] = GetPlayerVirtualWorld(playerid); 
 					Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 

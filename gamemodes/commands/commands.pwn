@@ -1459,7 +1459,9 @@ static Aliases()
 
 	//sblock
 	Command_AddAltNamed("sblok", "sblock");
-
+	//panelbiznesu
+	Command_AddAltNamed("panelbiznesu", "panelbiz"); 
+	Command_AddAltNamed("panelbiznesu", "bizpan"); 
 	//pblock
 	Command_AddAltNamed("pblok", "pblock");
 
