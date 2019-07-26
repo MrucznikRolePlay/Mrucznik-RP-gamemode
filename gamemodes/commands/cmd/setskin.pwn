@@ -77,7 +77,7 @@ YCMD:setskin(playerid, params[], help)
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "Zmieni³eœ skin graczowi %s na %d.", GetNick(para1),level);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						SetPlayerSkin(para1, 16000+level);
+						SetPlayerSkin(para1, 19600+level);
 						return 1;
 					}
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
