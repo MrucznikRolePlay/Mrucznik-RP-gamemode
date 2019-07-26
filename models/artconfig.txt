@@ -1,3 +1,3 @@
-AddCharModel(45, 20000, "mrucznik_1.diff", "mrucznik_1.txd");
-AddCharModel(45, 20001, "mrucznik_2.diff", "mrucznik_2.txd");
-AddCharModel(45, 20002, "mrucznik_3.diff", "mrucznik_3.txd");
+AddCharModel(45, 20001, "mrucznik_1.dff", "mrucznik_1.txd");
+AddCharModel(45, 20002, "mrucznik_2.dff", "mrucznik_2.txd");
+AddCharModel(45, 20003, "mrucznik_3.dff", "mrucznik_3.txd");

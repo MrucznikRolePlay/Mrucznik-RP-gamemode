@@ -1151,8 +1151,6 @@ public OnPlayerConnect(playerid)
     for(new x=0; x < SELECTION_ITEMS; x++) {
         gSelectionItems[playerid][x] = PlayerText:INVALID_TEXT_DRAW;
 	}
-	RedirectDownload(playerid, "https://github.com/SzYm3k/MrucznikResources/raw/master/mrucznik_1.dff");
-	RedirectDownload(playerid, "https://github.com/SzYm3k/MrucznikResources/raw/master/mrucznik_1.txd");
 	gItemAt[playerid] = 0;
 	return 1;
 }
