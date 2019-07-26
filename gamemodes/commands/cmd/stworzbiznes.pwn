@@ -73,6 +73,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 				   {
 					   sendTipMessage(playerid, "Stworzy³eœ biznes bez interioru!");
 					   sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
+					   Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumnê w bazie danych
 					   Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
 					   Business[ID_BUSINESS][b_Name] = bizName; 
 					   Business[ID_BUSINESS][b_ownerUID] = 0; 
@@ -100,7 +101,8 @@ YCMD:stworzbiznes(playerid, params[], help)
 				   else
 				   {
 						sendTipMessage(playerid, "Stworzy³eœ biznes z interiorem!");
-						sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
+						sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê");
+						Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumnê w bazie danych 
 						Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
 						Business[ID_BUSINESS][b_Name] = bizName; 
 						Business[ID_BUSINESS][b_ownerUID] = 0; 
@@ -134,6 +136,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					}
 					sendTipMessage(playerid, "Stworzy³eœ biznes z interiorem!");
 					sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
+					Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumnê w bazie danych
 					Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
 					Business[ID_BUSINESS][b_Name] = bizName; 
 					Business[ID_BUSINESS][b_ownerUID] = 0; 

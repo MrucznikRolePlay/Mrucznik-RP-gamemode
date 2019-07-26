@@ -383,10 +383,36 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 	}
 	return 1;
 }
-SaveBusiness(busID)//Zapis biznesów do bazy danych
+Create_BusinessMySQL(bus_ID)
 {
 	new query[1024];
 
+	format(query, sizeof(query), "INSERT INTO `mru_business` (`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`) VALUES\
+	('%d', '%d', '%s', '%s', '%f', '%f', '%f', '%f', '%f', '%f', '%d', '%d', '%d', '%d', '%d', '%s', '%d')", 
+	bus_ID, 
+	Business[bus_ID][b_ownerUID],
+	Business[bus_ID][b_Name_Owner],
+	Business[bus_ID][b_Name],
+	Business[bus_ID][b_enX], 
+	Business[bus_ID][b_enY],
+	Business[bus_ID][b_enZ],
+	Business[bus_ID][b_exX],
+	Business[bus_ID][b_exY],
+	Business[bus_ID][b_exZ],
+	Business[bus_ID][b_vw],
+	Business[bus_ID][b_int],
+	Business[bus_ID][b_pLocal],
+	Business[bus_ID][b_maxMoney],
+	Business[bus_ID][b_cost],
+	Business[bus_ID][b_Location],
+	Business[bus_ID][b_moneyPocket]);
+
+	mysql_query(query);
+	return 1;
+}
+SaveBusiness(busID)//Zapis biznesów do bazy danych
+{
+	new query[1024];
 	format(query, sizeof(query), "UPDATE `mru_business` SET \
 	`ID`='%d', \
 	`ownerUID`='%d', \
@@ -424,6 +450,7 @@ SaveBusiness(busID)//Zapis biznesów do bazy danych
 	Business[busID][b_Location],
 	Business[busID][b_moneyPocket],
 	busID); 
+	mysql_query(query);
 	return 1;
 }
 //-----------------<[ Komendy: ]>-------------------

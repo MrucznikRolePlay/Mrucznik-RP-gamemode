@@ -401,8 +401,7 @@ YCMD:wyjdz(playerid, params[], help)
                     sendTipMessage(playerid, "Pomyœlnie wykonano wyjœcie");  
 					return 1; 
                 }
-            }
-
+			}
 			for(new i; i<=MAX_NrDOM; i++)
 		    {
 				if(IsPlayerInRangeOfPoint(playerid, 5.0, IntInfo[i][Int_X], IntInfo[i][Int_Y], IntInfo[i][Int_Z]))
