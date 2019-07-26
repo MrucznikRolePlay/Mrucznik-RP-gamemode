@@ -47,17 +47,39 @@ YCMD:setskin(playerid, params[], help)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
-		        if(level > 311)
+				if(level < 0)
+				{
+					sendErrorMessage(playerid, "B³êdne ID skina"); 
+					return 1;
+				}
+				if(level > 311 && level < 400)
+				{
+					sendErrorMessage(playerid, "Brak takiego skina w samp-resources"); 
+					return 1;
+				}
+		       /* if(level > 311)
 				{
 					sendTipMessage(playerid, "Numer skinu od 0 do 311!");
 					if(PlayerInfo[playerid][pAdmin] != 12345)
 					{
 						return 1;
 					}
-				}
+				}*/
 		        if(para1 != INVALID_PLAYER_ID)
 		        {
                     if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby nadaæ skina gracz musi byæ pieszo!");
+					if(level > 399)
+					{
+						PlayerInfo[para1][pModel] = level;
+						PlayerInfo[para1][pSkin] = level;
+						Log(adminLog, INFO, "Admin %s zmieni³ %s skin na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
+						format(string, sizeof(string), "Twój skin zosta³ zmieniony na %d przez %s", level, GetNick(playerid));
+						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+						format(string, sizeof(string), "Zmieni³eœ skin graczowi %s na %d.", GetNick(para1),level);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+						SetPlayerSkin(para1, 16000+level);
+						return 1;
+					}
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerSkin(para1, level);
