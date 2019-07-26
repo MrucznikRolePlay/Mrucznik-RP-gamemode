@@ -7450,7 +7450,7 @@ public OnDynamicObjectMoved(objectid)
         }
     }
     return 1;
-}
+}/*
 new SERVER_DOWNLOAD[] = "https://github.com/SzYm3k/MrucznikResources/raw/master";
 public OnPlayerRequestDownload(playerid, type, crc)
 {
@@ -7473,7 +7473,7 @@ public OnPlayerRequestDownload(playerid, type, crc)
 		RedirectDownload(playerid, final_url);
 	}
 	return 1;
-}
+}*/
 public OnVehicleRespray(playerid, vehicleid, color1, color2)
 {
     if(CarData[VehicleUID[vehicleid][vUID]][c_Color][0] != color1)
