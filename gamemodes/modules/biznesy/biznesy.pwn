@@ -16,7 +16,7 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone (started by Pecet) & _Kamil
+// Autor: Simeone & _Kamil
 // Data utworzenia: 08.07.2019
 //Opis:
 /*
@@ -31,6 +31,10 @@
 	> GetPlayerBusiness - sprawdza jaki ma biznes gracz (owner/member) i zwraca wartoœæ value. 
 	> SendMessageToBiz - wysy³a wiadomoœæ do cz³onków biznesu (1 - IC, 0 - OOC)
 	> BusinessPayDay - przydziela gotówkê za posiadanie biznesu. 
+	> IsALeaderBusiness - sprawdza czy gracz jest liderem jakiegoœ biznesu
+	> IsAMemberBusiness - sprawdza czy gracz jest cz³onkiem jakiegoœ biznesu
+	> GetPlayerBusiness - pobiera biznes gracza i zwraca go jako Value
+	> CheckIfPlayerInBusinessPoint - sprawdza czy gracz jest w miejscu biznesu.
 
 */
 

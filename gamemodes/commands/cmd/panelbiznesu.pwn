@@ -40,6 +40,8 @@ YCMD:panelbiznesu(playerid, params[], help)
             SendClientMessage(playerid, COLOR_WHITE, "|_____________ Business Panel _______________|");
             SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /panelbiz [nazwa]");
             SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Przyjmij, Zwolnij, Wplac, Wyplac");
+			SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Stan");
+			SendClientMessage(playerid, COLOR_GREY, "JU¯ NIED£UGO - Ulepsz, Schowaj, Wez");
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
@@ -54,33 +56,38 @@ YCMD:panelbiznesu(playerid, params[], help)
 			return 1;
 		}
 		new string[256];
-		if(strcmp(pChoice, "Przyjmij", false) == 0)
+		if(strcmp(pChoice, "Przyjmij", true) == 0)
 		{
 			format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej ID gracza\nktórego pragniesz zatrudniæ w swoim biznesie.\n",
 			Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]); 
 			ShowPlayerDialogEx(playerid, DIALOG_PANEL_BIZ, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
 			SetPVarInt(playerid, "bizWhatToDo", 1); 
 		}
-		else if(strcmp(pChoice, "Zwolnij", false) == 0)
+		else if(strcmp(pChoice, "Zwolnij", true) == 0)
 		{
 			format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej ID gracza\nktórego pragniesz zwolniæ ze swojego biznesu.\n",
 			Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]); 
 			ShowPlayerDialogEx(playerid, DIALOG_PANEL_BIZ, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
 			SetPVarInt(playerid, "bizWhatToDo", 2); 
 		}
-		else if(strcmp(pChoice, "Wplac", false) == 0)
+		else if(strcmp(pChoice, "Wplac", true) == 0)
 		{
 			format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej kwotê jak¹ chcesz wp³aciæ\ndo swojego sejfu!",
 			Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]); 
 			ShowPlayerDialogEx(playerid, DIALOG_PANEL_BIZ, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
 			SetPVarInt(playerid, "bizWhatToDo", 3); 
 		}
-		else if(strcmp(pChoice, "Wyplac", false) == 0)
+		else if(strcmp(pChoice, "Wyplac", true) == 0)
 		{
 			format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej kwotê jak¹ chcesz wyp³aciæ\nze swojego sejfu biznesowego",
 			Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]); 
 			ShowPlayerDialogEx(playerid, DIALOG_PANEL_BIZ, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
 			SetPVarInt(playerid, "bizWhatToDo", 4); 
+		}
+		else if(strcmp(pChoice, "Stan", true) == 0)
+		{
+			format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}W sejfie twojego biznesu znajduje siê aktualnie: $%d",
+			Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]); 
 		}
 		else
 		{

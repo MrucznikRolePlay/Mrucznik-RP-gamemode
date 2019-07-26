@@ -672,6 +672,7 @@
 #include "cmd/stan.pwn"
 #include "cmd/personalizuj.pwn"
 #include "cmd/vinyl.pwn"
+#include "cmd/quitbusiness.pwn"
 
 InitCommands()
 {
@@ -1462,6 +1463,9 @@ static Aliases()
 	//panelbiznesu
 	Command_AddAltNamed("panelbiznesu", "panelbiz"); 
 	Command_AddAltNamed("panelbiznesu", "bizpan"); 
+	//quitbusiness
+	Command_AddAltNamed("quitbusiness", "qb");
+	Command_AddAltNamed("quitbusiness", "quitbiz"); 
 	//pblock
 	Command_AddAltNamed("pblok", "pblock");
 

@@ -18157,7 +18157,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(IsPlayerConnected(giveplayerid))
 				{
-					if(GetPlayerBusiness(playerid) != INVALID_BIZ_ID)
+					if(GetPlayerBusiness(giveplayerid) != INVALID_BIZ_ID)
 					{
 						sendErrorMessage(playerid, "Ten gracz ma ju¿ biznes!"); 
 						return 1; 
@@ -18178,7 +18178,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(IsPlayerConnected(giveplayerid))
 				{
-					if(PlayerInfo[playerid][pBusinessOwner] != PlayerInfo[playerid][pBusinessMember])
+					if(PlayerInfo[playerid][pBusinessOwner] != PlayerInfo[giveplayerid][pBusinessMember])
 					{
 						format(string, sizeof(string), "Gracz %s nie jest cz³onkiem twojego biznesu!", GetNick(giveplayerid)); 
 						sendErrorMessage(playerid, string); 
@@ -18219,6 +18219,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], 
 				valueMoney,
 				Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]);
+				SaveBusiness(PlayerInfo[playerid][pBusinessOwner]); 
 			}
 			else if(GetPVarInt(playerid, "bizWhatToDo") == 4)
 			{
@@ -18233,7 +18234,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendErrorMessage(playerid, "Wartoœæ nie mo¿e byæ podana z ''-''"); 
 					return 1;
 				}
-				format(string, sizeof(string), "Wp³aci³eœ do sejfu $%d, jest w nim teraz $%d", valueMoney, Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]+valueMoney);
+				format(string, sizeof(string), "Wp³aci³eœ do sejfu $%d, jest w nim teraz $%d", valueMoney, Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]-valueMoney);
 				sendTipMessageEx(playerid, COLOR_BLUE, string); 
 				Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket] = Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]-valueMoney; 
 				DajKase(playerid, valueMoney); 
@@ -18243,6 +18244,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], 
 				valueMoney,
 				Business[PlayerInfo[playerid][pBusinessOwner]][b_moneyPocket]);
+				SaveBusiness(PlayerInfo[playerid][pBusinessOwner]); 
 			}
 		}
 	}
