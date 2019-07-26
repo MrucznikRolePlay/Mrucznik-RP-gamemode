@@ -1,3 +1,3 @@
-AddCharModel(45, 20000, "resources/skin-01/mrucznik_1.diff", "resources/skin-01/mrucznik_1.diff");
-AddCharModel(45, 20001, "resources/skin-02/mrucznik_2.diff", "resources/skin-02/mrucznik_2.diff");
-AddCharModel(45, 20002, "resources/skin-03/mrucznik_3.diff", "resources/skin-03/mrucznik_3.diff");
+AddCharModel(45, 20000, "mrucznik_1.diff", "mrucznik_1.diff");
+AddCharModel(45, 20001, "mrucznik_2.diff", "mrucznik_2.diff");
+AddCharModel(45, 20002, "mrucznik_3.diff", "mrucznik_3.diff");
