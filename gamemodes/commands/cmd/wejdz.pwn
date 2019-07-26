@@ -570,16 +570,8 @@ YCMD:wejdz(playerid, params[], help)
                     SetPlayerInterior(playerid, Business[i][b_int]); 
                     SetPLocal(playerid, Business[i][b_pLocal]); 
                     SetPlayerPosEx(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
-                    sendTipMessage(playerid, "Pomyœlnie wykonano wejœcie");    
-                }
-                else if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ])
-                && GetPlayerVirtualWorld(playerid) == Business[i][b_vw])
-                {
-                    SetPlayerVirtualWorld(playerid, 0); 
-                    SetPlayerInterior(playerid, 0); 
-                    SetPLocal(playerid, PLOCAL_DEFAULT); 
-                    SetPlayerPosEx(playerid, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]);
-                    sendTipMessage(playerid, "Pomyœlnie wykonano wyjœcie");   
+                    sendTipMessage(playerid, "Pomyœlnie wykonano wejœcie");  
+                    return 1;  
                 }
             }
 

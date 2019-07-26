@@ -389,6 +389,19 @@ YCMD:wyjdz(playerid, params[], help)
 		    Wyjdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
 			Wyjdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
 			
+			for(new i=0; i<BusinessLoaded; i++)
+            {
+               if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ])
+                && GetPlayerVirtualWorld(playerid) == Business[i][b_vw])
+                {
+                    SetPlayerVirtualWorld(playerid, 0); 
+                    SetPlayerInterior(playerid, 0); 
+                    SetPLocal(playerid, PLOCAL_DEFAULT); 
+                    SetPlayerPosEx(playerid, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]);
+                    sendTipMessage(playerid, "Pomyœlnie wykonano wyjœcie");  
+					return 1; 
+                }
+            }
 
 			for(new i; i<=MAX_NrDOM; i++)
 		    {

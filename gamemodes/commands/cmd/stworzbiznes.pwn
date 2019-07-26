@@ -73,6 +73,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 				   {
 					   sendTipMessage(playerid, "Stworzy³eœ biznes bez interioru!");
 					   sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
+					   Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
 					   Business[ID_BUSINESS][b_Name] = bizName; 
 					   Business[ID_BUSINESS][b_ownerUID] = 0; 
 					   Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
@@ -100,6 +101,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 				   {
 						sendTipMessage(playerid, "Stworzy³eœ biznes z interiorem!");
 						sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
+						Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
 						Business[ID_BUSINESS][b_Name] = bizName; 
 						Business[ID_BUSINESS][b_ownerUID] = 0; 
 						Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
@@ -132,6 +134,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					}
 					sendTipMessage(playerid, "Stworzy³eœ biznes z interiorem!");
 					sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
+					Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
 					Business[ID_BUSINESS][b_Name] = bizName; 
 					Business[ID_BUSINESS][b_ownerUID] = 0; 
 					Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
