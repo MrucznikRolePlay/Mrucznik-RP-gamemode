@@ -215,7 +215,7 @@ public OnGameModeInit()
 
 	//-------<[ libRegEx ]>-------
 	regex_syntax(SYNTAX_PERL);
-	regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
+	//regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
 
 	//-------<[ sscanf ]>-------
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
@@ -634,7 +634,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
             if(GetPVarInt(playerid, "skin-choosen") != 0)
             {
-                SetPlayerSkin(playerid, GetPVarInt(playerid, "skin-choosen"));
+                SetPlayerSkinEx(playerid, GetPVarInt(playerid, "skin-choosen"));
                 PlayerInfo[playerid][pSkin] = GetPVarInt(playerid, "skin-choosen");
             }
         }
@@ -653,7 +653,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
             TogglePlayerControllable(playerid, 1);
 
             PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pModel];
-            SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
         }
     }
     //Strefy
@@ -2279,7 +2279,7 @@ SetPlayerSpawnPos(playerid)
         ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.1, 0, 0, 0, 0, 0, 1);
         GameTextForPlayer(playerid, "Zostales brutalnie pobity!", 15000, 5);
         PlayerInfo[playerid][pMuted] = 1;
-        if(GetPVarInt(playerid, "bw-skin") != 0) SetPlayerSkin(playerid, GetPVarInt(playerid, "bw-skin"));
+        if(GetPVarInt(playerid, "bw-skin") != 0) SetPlayerSkinEx(playerid, GetPVarInt(playerid, "bw-skin"));
 
 	}
     else
@@ -2631,27 +2631,27 @@ SetPlayerSpawnSkin(playerid)
 		    {
 				case 1:
 				{
-                    SetPlayerSkin(playerid, 107);
+                    SetPlayerSkinEx(playerid, 107);
 				}
 				case 2:
 				{
-                    SetPlayerSkin(playerid, 104);
+                    SetPlayerSkinEx(playerid, 104);
 				}
 				case 3:
 				{
-                    SetPlayerSkin(playerid, 124);
+                    SetPlayerSkinEx(playerid, 124);
 				}
 				case 4:
 				{
-                    SetPlayerSkin(playerid, 123);
+                    SetPlayerSkinEx(playerid, 123);
 				}
 				case 5:
 				{
-                    SetPlayerSkin(playerid, 108);
+                    SetPlayerSkinEx(playerid, 108);
 				}
 				case 6:
 				{
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
 				}
 			}
 			return 1;
@@ -2665,35 +2665,35 @@ SetPlayerSpawnSkin(playerid)
 			if(IsACop(playerid)  || GetPlayerFraction(playerid) == FRAC_ERS)
 			{
 				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
-					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 				else
-					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
 			}
 			else if(GetPlayerFraction(playerid) == FRAC_SN)
 			{
 				if(SanDuty[playerid] == 1)
-					SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 				else
-					SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
 			}
 			else
             {
-				SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+				SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                 SetPVarInt(playerid, "skinF", 1);
             }
 		}
 		else if(GetPlayerOrg(playerid) != 0)
 		{
- 			SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+ 			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 		}
 		else if(JobDuty[playerid] == 1)
 		{
-			SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 		}
 	}
     else
 	{
-		SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
         SetPVarInt(playerid, "skinF", 0);
 	}
 
@@ -5851,6 +5851,8 @@ OnPlayerLogin(playerid, password[])
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
+		format(string, sizeof(string), "Aktualna wersja naszej mapy to %d. Platforma: SAMP-0.3DL", VERSION);
+		SendClientMessage(playerid, COLOR_WHITE, string);
 		printf("%s has logged in.",nick);
 		if (IsPlayerPremiumOld(playerid))
 		{
@@ -7450,7 +7452,18 @@ public OnDynamicObjectMoved(objectid)
         }
     }
     return 1;
-}/*
+}
+public OnPlayerRequestDownload(playerid, type, crc)
+{
+
+	return 0;
+}
+public OnPlayerFinishedDownloading(playerid, virtualworld)
+{
+    sendTipMessageEx(playerid, COLOR_GREEN, "Pomyœlnie ukoñczono pobieranie zasobów serwera"); 
+    return 1;
+}
+/*
 new SERVER_DOWNLOAD[] = "https://github.com/SzYm3k/MrucznikResources/raw/master";
 public OnPlayerRequestDownload(playerid, type, crc)
 {

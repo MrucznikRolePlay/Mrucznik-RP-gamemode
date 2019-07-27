@@ -444,14 +444,14 @@ IsPlayerPremiumOld(playerid)
 		return 1;
 	return 0;
 }
-
+/*
 IsAUnikat(modelid)
 {
 	for(new i; i<MAX_PREMIUM_VEHICLES; i++)
 		if(modelid == PojazdyPremium[i][Model])
 			return 1;
 	return 0;
-}
+}*/
 
 PlayerHasSkin(playerid, skinid)
 {

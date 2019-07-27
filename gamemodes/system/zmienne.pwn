@@ -119,7 +119,7 @@ new pFindZone[MAX_PLAYERS];
 new gTeam[MAX_PLAYERS];
 new odczekajTimer[MAX_PLAYERS];
 //regex
-new regexURL;
+//new regexURL;
 
 new lastMsg[MAX_PLAYERS];
 
