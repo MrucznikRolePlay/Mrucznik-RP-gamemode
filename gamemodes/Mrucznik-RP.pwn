@@ -5833,10 +5833,6 @@ OnPlayerLogin(playerid, password[])
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
 		Log(connectLog, INFO, "Gracz %s zalogowa³ siê na konto", GetPlayerLogName(playerid));
-		if(PlayerInfo[playerid][pSkin] > LOADED_SKINS)//debug
-		{
-			PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pSkin]-19601; 
-		}
         Car_LoadForPlayer(playerid); //System aut
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
@@ -7454,16 +7450,6 @@ public OnDynamicObjectMoved(objectid)
             }
         }
     }
-    return 1;
-}
-public OnPlayerRequestDownload(playerid, type, crc)
-{
-
-	return 0;
-}
-public OnPlayerFinishedDownloading(playerid, virtualworld)
-{
-    sendTipMessageEx(playerid, COLOR_GREEN, "Pomyœlnie ukoñczono pobieranie zasobów serwera"); 
     return 1;
 }
 /*
