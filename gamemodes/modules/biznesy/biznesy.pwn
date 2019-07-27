@@ -287,10 +287,14 @@ stock Biz_Owner(biz)
 }
 stock CorrectPlayerBusiness(playerid)
 {
-	if(PlayerInfo[playerid][pBusinessOwner] == 0 || PlayerInfo[playerid][pBusinessMember] == 0)
+	if(PlayerInfo[playerid][pBusinessOwner] == 0)
+	{
+		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
+		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
+	}
+	if(PlayerInfo[playerid][pBusinessMember] == 0)
 	{
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID;
-		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
 	}
 	return 0; 

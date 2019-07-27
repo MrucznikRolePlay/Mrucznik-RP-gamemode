@@ -4489,7 +4489,7 @@ ShowStats(playerid,targetid)
 		new expamount = nxtlevel*levelexp;
 		new costlevel = nxtlevel*levelcost;//10k for testing purposes
 		new housekey = PlayerInfo[targetid][pDom];
-		new skin = PlayerInfo[targetid][pModel];
+		new skin = PlayerInfo[targetid][pModel]-19601;
 		new Float:shealth = PlayerInfo[targetid][pSHealth];
 		new Float:health;
 		new name[MAX_PLAYER_NAME];

@@ -60,6 +60,7 @@
 #define NOT_FOUND					-1			//u¿ywane do strfind
 
 #define BIKE_COST 30000
+#define LOADED_SKINS 403
 //KB
 #define MAX_MONEY_IN_BANK 100000000
 

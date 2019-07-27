@@ -17,7 +17,7 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 
-// Opis:
+// Opis
 /*
 	
 */
@@ -43,6 +43,11 @@ YCMD:kupskin(playerid, params[], help)
 			}
 
 			new dobrze = 0;
+			if(kaska[playerid] < 5000)
+			{
+				sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹co œrodków!");
+				return 1;
+			}
 			if(lolgf > 0 && lolgf < 300)
 			{
 				for(new skin = 0; skin<194; skin++)
@@ -65,9 +70,17 @@ YCMD:kupskin(playerid, params[], help)
 				    sendTipMessage(playerid, "Tego skina nie mo¿esz wybraæ!");
 				}
 			}
+			else if(lolgf >= 400 && lolgf <= LOADED_SKINS)
+			{
+				PlayerInfo[playerid][pModel] = lolgf+19601;
+				SetPlayerSkin(playerid, lolgf+19601);
+				sendTipMessageEx(playerid, COLOR_P@, "Kupi³eœ nowy skin!");
+				ZabierzKase(playerid, 5000);
+				GameTextForPlayer(playerid, "~r~-5000$", 2500, 1);
+			}
 			else
 			{
-			    sendTipMessage(playerid, "Skin od 1 do 299!");
+			    sendTipMessage(playerid, "B³êdne SKIN_ID!");
 			}
         }
         else
