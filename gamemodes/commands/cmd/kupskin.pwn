@@ -48,7 +48,7 @@ YCMD:kupskin(playerid, params[], help)
 				return 1;
 			}
 			new dobrze = 0; 
-			for(new skin = 0; skin<=197; skin++)
+			for(new skin = 0; skin<=222; skin++)
 			{
 				if(skinID == Przebierz[skin][0])
 				{
