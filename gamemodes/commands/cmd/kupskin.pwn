@@ -47,23 +47,8 @@ YCMD:kupskin(playerid, params[], help)
 				sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹co œrodków!");
 				return 1;
 			}
-			if(skinID == 0 
-			|| skinID > 299 && skinID < 400)
-			{
-				sendTipMessage(playerid, "Tego skina nie mo¿esz wybraæ!"); 
-				return 1;
-			}
-			if(skinID > 400 && skinID <= LOADED_SKINS)
-			{
-				if(SprawdzSkin(1, skinID))
-				{
-					sendTipMessage(playerid, "Zakupi³eœ nowego skina!"); 
-					SetPlayerSkinEx(playerid, skinID); 
-				}
-				return 1;
-			}
 			new dobrze = 0; 
-			for(new skin = 0; skin<194; skin++)
+			for(new skin = 0; skin<=197; skin++)
 			{
 				if(skinID == Przebierz[skin][0])
 				{
@@ -73,6 +58,7 @@ YCMD:kupskin(playerid, params[], help)
 			if(dobrze == 1)
 			{
 				sendTipMessage(playerid, "Zakupi³eœ nowego skina!"); 
+				ZabierzKase(playerid, 5000); 
 				SetPlayerSkinEx(playerid, skinID); 
 			}
 			else

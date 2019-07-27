@@ -25,23 +25,6 @@
 new eventForSkin[LOADED_SKINS]; 
 
 //------------------<[ Enumy: ]>--------------------
-enum eSkin
-{
-	Model
-};
-new skinsToEvent[3][eSkin] =
-{
-	//================[SAMP SKINS]==================
-	{0},//CJ
-	//================[Mrucznik SKINS]===============
-	{406},//Shrek
-	{418}//Dog
-
-};
-new skinsToPremium[0][eSkin] =
-{
-	{402}
-};
 //------------------<[ Forwardy: ]>--------------------
 
 //end
