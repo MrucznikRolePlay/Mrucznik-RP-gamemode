@@ -68,7 +68,7 @@ YCMD:setskin(playerid, params[], help)
 		        if(para1 != INVALID_PLAYER_ID)
 		        {
                     if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby nadaæ skina gracz musi byæ pieszo!");
-					if(level > 399)
+					if(level > 399 && level <= LOADED_SKINS)
 					{
 						PlayerInfo[para1][pModel] = 19601+level;
 						PlayerInfo[para1][pSkin] = 19601+level;
@@ -91,6 +91,17 @@ YCMD:setskin(playerid, params[], help)
 					format(string, sizeof(string), "   Zmieni³eœ skin graczowi %s na %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
+			}
+		}
+		else if(PlayerInfo[playerid][pAdmin] >= 5)
+		{
+			if(para1 == playerid)
+			{
+				GiveMeSkin(playerid, level, 0, 0); 
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Mo¿esz ustawiæ skin tylko sobie!"); 
 			}
 		}
 		else

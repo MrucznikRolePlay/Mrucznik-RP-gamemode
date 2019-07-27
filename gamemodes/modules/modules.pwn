@@ -49,6 +49,7 @@
 #include "sila\sila.def"
 #include "wejscia\wejscia.def"
 #include "wypadek\wypadek.def"
+#include "03DL\03DL.def"
 
 
 //-------<[ .hwn ]>-------
@@ -73,6 +74,7 @@
 #include "sila\sila.hwn"
 #include "wejscia\wejscia.hwn"
 #include "wypadek\wypadek.hwn"
+#include "03DL\03DL.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -97,6 +99,7 @@
 #include "sila\sila.pwn"
 #include "wejscia\wejscia.pwn"
 #include "wypadek\wypadek.pwn"
+#include "03DL\03DL.pwn"
 
 
 //-------<[ timers ]>-------

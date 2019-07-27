@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ kupskin ]------------------------------------------------//
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                   03DL                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,43 +16,32 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Simeone
+// Data utworzenia: 27.07.2019
 
-// Opis
-/*
-	
-*/
+//
 
+//-----------------<[ Zmienne: ]>-------------------
+new eventForSkin[DL_SKIN_MAX]; 
 
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:kupskin(playerid, params[], help)
+//------------------<[ Enumy: ]>--------------------
+enum eSkin
 {
-    if(IsPlayerConnected(playerid))
-    {
-        if(IsAtClothShop(playerid))
-        {
-            new lolgf;
-			if( sscanf(params, "d", lolgf))
-			{
-				sendTipMessage(playerid, "U¿yj /wybierzskin [id skinu] (koszt: 5000$)");
-				sendTipMessage(playerid, "ID skinów znajdziesz na: http://wiki.sa-mp.com/wiki/Skins:All");
-				sendTipMessage(playerid, "ID skinów [+400] znajdziesz na: http://mrucznik-rp.pl");
-				return 1;
-			}
-			if(kaska[playerid] < 5000)
-			{
-				sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹co œrodków!");
-				return 1;
-			}
-			GiveMeSkin(playerid, lolgf, 5000, 1);
-        }
-        else
-		{
-		    sendErrorMessage(playerid, "Nie jesteœ w sklepie z ciuchami!");
-		}
-    }
-	return 1;
-}
+	Model
+};
+new skinsToEvent[3][eSkin] =
+{
+	//================[SAMP SKINS]==================
+	{0},//CJ
+	//================[Mrucznik SKINS]===============
+	{406},//Shrek
+	{418}//Dog
+
+};
+new skinsToPremium[0][eSkin] =
+{
+	{402}
+};
+//------------------<[ Forwardy: ]>--------------------
+
+//end

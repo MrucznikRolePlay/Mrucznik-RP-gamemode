@@ -673,6 +673,7 @@
 #include "cmd/personalizuj.pwn"
 #include "cmd/vinyl.pwn"
 #include "cmd/quitbusiness.pwn"
+#include "cmd/startskinevent.pwn"
 
 InitCommands()
 {
