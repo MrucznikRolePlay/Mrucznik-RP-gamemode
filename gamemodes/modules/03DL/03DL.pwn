@@ -29,7 +29,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 SprawdzSkin(dlaCzego, skinID)
 {
-	for(new i; i<DL_SKIN_MAX; i++)
+	for(new i; i<=LOADED_SKINS; i++)
 	{
 		if(dlaCzego == 1)
 		{

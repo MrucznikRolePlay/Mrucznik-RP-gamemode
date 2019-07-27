@@ -22,7 +22,7 @@
 //
 
 //-----------------<[ Zmienne: ]>-------------------
-new eventForSkin[DL_SKIN_MAX]; 
+new eventForSkin[LOADED_SKINS]; 
 
 //------------------<[ Enumy: ]>--------------------
 enum eSkin
