@@ -5833,7 +5833,10 @@ OnPlayerLogin(playerid, password[])
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
 		Log(connectLog, INFO, "Gracz %s zalogowa³ siê na konto", GetPlayerLogName(playerid));
-
+		if(PlayerInfo[playerid][pSkin] > LOADED_SKINS)//debug
+		{
+			PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pSkin]-19601; 
+		}
         Car_LoadForPlayer(playerid); //System aut
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend

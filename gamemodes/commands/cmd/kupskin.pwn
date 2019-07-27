@@ -70,6 +70,7 @@ YCMD:kupskin(playerid, params[], help)
 					sendTipMessage(playerid, "Zakupi³eœ nowego skina!"); 
 					ZabierzKase(playerid, 5000); 
 					SetPlayerSkinEx(playerid, skinID); 
+					PlayerInfo[playerid][pSkin] = skinID; 
 					return 1;
 				}
 			}
