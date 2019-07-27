@@ -7452,6 +7452,8 @@ public OnDynamicObjectMoved(objectid)
     }
     return 1;
 }
+
+
 /*
 new SERVER_DOWNLOAD[] = "https://github.com/SzYm3k/MrucznikResources/raw/master";
 public OnPlayerRequestDownload(playerid, type, crc)

@@ -26,7 +26,7 @@ NowaWybieralka_Setup(playerid)
 	TextDrawShowForPlayer(playerid, NowaWybieralka_Left);
 	TextDrawShowForPlayer(playerid, NowaWybieralka_Right);
 
-	SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
 
 	SetPVarInt(playerid, "NowaWybieralkaSelect", PlayerInfo[playerid][pModel]);
 
@@ -102,7 +102,7 @@ NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 		if(GetPVarInt(playerid, "NowaWybieralka") <= 0) SetPVarInt(playerid, "NowaWybieralka", sizeof(Przebierz)-1);
 		else SetPVarInt(playerid, "NowaWybieralka", GetPVarInt(playerid, "NowaWybieralka")-1);
 
-		SetPlayerSkin(playerid, Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);
+		SetPlayerSkinEx(playerid, Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);
 
 		SetPVarInt(playerid, "NowaWybieralkaSelect", Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);
 		return 1;
@@ -112,7 +112,7 @@ NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 		if(GetPVarInt(playerid, "NowaWybieralka") >= sizeof(Przebierz)-1) SetPVarInt(playerid, "NowaWybieralka", 0);
 		else SetPVarInt(playerid, "NowaWybieralka", GetPVarInt(playerid, "NowaWybieralka")+1);
 
-		SetPlayerSkin(playerid, Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);
+		SetPlayerSkinEx(playerid, Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);
 
 		SetPVarInt(playerid, "NowaWybieralkaSelect", Przebierz[GetPVarInt(playerid, "NowaWybieralka")][0]);
 

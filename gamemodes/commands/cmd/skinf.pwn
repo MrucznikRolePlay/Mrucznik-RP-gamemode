@@ -41,7 +41,7 @@ YCMD:skinf(playerid, params[], help)
 
         sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "Przebra³eœ siê w strój frakcyjny");
 
-        SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+        SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 
         return 1;
     }
@@ -51,7 +51,7 @@ YCMD:skinf(playerid, params[], help)
 
         sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "Przebra³eœ siê w strój cywilny");
 
-        SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+        SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
 
         return 1;
     }

@@ -3829,11 +3829,11 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
         {
         	if(PlayerInfo[playerid][pChar] > 0)
 			{
-				SetPlayerSkin(playerid, PlayerInfo[playerid][pChar]);
+				SetPlayerSkinEx(playerid, PlayerInfo[playerid][pChar]);
 			}
 			else
 			{
-				SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+				SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
 			}
 		}
 		
@@ -4489,7 +4489,7 @@ ShowStats(playerid,targetid)
 		new expamount = nxtlevel*levelexp;
 		new costlevel = nxtlevel*levelcost;//10k for testing purposes
 		new housekey = PlayerInfo[targetid][pDom];
-		new skin = PlayerInfo[targetid][pModel]-19601;
+		new skin = PlayerInfo[targetid][pModel];
 		new Float:shealth = PlayerInfo[targetid][pSHealth];
 		new Float:health;
 		new name[MAX_PLAYER_NAME];

@@ -198,8 +198,8 @@ YCMD:wyjdz(playerid, params[], help)
 		/*else if (IsPlayerInRangeOfPoint(playerid, 5.0, 575.5542,-2048.8000,16.1670)) // basen recepcja
 		{
 		    SetPlayerPosEx(playerid, 1210.552734375,-1749.1850585938,13.593885421753 ); // basen na zewnatrz
-		    if(PlayerInfo[playerid][pChar] > 0) { SetPlayerSkin(playerid, PlayerInfo[playerid][pChar]); }
-			else { SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]); }
+		    if(PlayerInfo[playerid][pChar] > 0) { SetPlayerSkinEx(playerid, PlayerInfo[playerid][pChar]); }
+			else { SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]); }
 			SetPlayerVirtualWorld(playerid, 0);
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
