@@ -77,12 +77,12 @@ YCMD:setskin(playerid, params[], help)
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "Zmieni³eœ skin graczowi %s na %d.", GetNick(para1),level);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						SetPlayerSkin(para1, 19601+level);
+						SetPlayerSkinEx(para1, level);
 						return 1;
 					}
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-					SetPlayerSkin(para1, level);
+					SetPlayerSkinEx(para1, level);
 					PlayerInfo[para1][pModel] = level;
 					PlayerInfo[para1][pSkin] = level;
         			Log(adminLog, INFO, "Admin %s zmieni³ %s skin na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
@@ -97,7 +97,7 @@ YCMD:setskin(playerid, params[], help)
 		{
 			if(para1 == playerid)
 			{
-				GiveMeSkin(playerid, level, 0, 0); 
+				SetPlayerSkinEx(playerid, level); 
 			}
 			else
 			{

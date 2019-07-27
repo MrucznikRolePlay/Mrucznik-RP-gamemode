@@ -52,7 +52,7 @@ SprawdzSkin(dlaCzego, skinID)
 	}
 	return false;
 }
-stock GiveMeSkin(playerid, value, money, durability)
+/*stock GiveMeSkin(playerid, value, money, durability)
 {
 	if(value >= DL_SKIN_START)
 	{
@@ -61,7 +61,7 @@ stock GiveMeSkin(playerid, value, money, durability)
 			sendErrorMessage(playerid, "B³¹d! Nie ma takiego skina"); 
 			return 1;
 		}	
-		if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))//Omijanie sprawdzania dostêpnoœci 
+		if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))//Omijanie sprawdzania dostêpnoœci 
 		{
 			SetPlayerSkin(playerid, value+19601); 
 		}
@@ -146,6 +146,16 @@ stock GiveMeSkin(playerid, value, money, durability)
 			sendErrorMessage(playerid, "Ten skin jest dostêpny tylko na eventy!"); 
 		}
 	}
+	return 1;
+}*/
+stock SetPlayerSkinEx(playerid, value)
+{
+	if(value >= 400)
+	{
+		SetPlayerSkin(playerid, value+19601); 
+		return 1;
+	}
+	SetPlayerSkin(playerid, value); 
 	return 1;
 }
 //-----------------<[ Timery: ]>-------------------

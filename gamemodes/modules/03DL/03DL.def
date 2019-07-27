@@ -25,7 +25,7 @@
 //------------------<[ Define: ]>-------------------
 #define DL_SKIN_START 400
 #define DL_SKIN_MAX 1000
-#define LOADED_SKINS 419
+#define LOADED_SKINS 418
 #define SKIN_TYPE_DEFAULT 0
 #define SKIN_TYPE_PREMIUM 1
 #define SKIN_TYPE_EVENT 2
