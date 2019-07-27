@@ -47,25 +47,17 @@ YCMD:kupskin(playerid, params[], help)
 				sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹co œrodków!");
 				return 1;
 			}
-			new dobrze = 0; 
 			for(new skin = 0; skin<=222; skin++)
 			{
 				if(skinID == Przebierz[skin][0])
 				{
-					dobrze = 1;
+					sendTipMessage(playerid, "Zakupi³eœ nowego skina!"); 
+					ZabierzKase(playerid, 5000); 
+					SetPlayerSkinEx(playerid, skinID); 
+					return 1;
 				}
 			}
-			if(dobrze == 1)
-			{
-				sendTipMessage(playerid, "Zakupi³eœ nowego skina!"); 
-				ZabierzKase(playerid, 5000); 
-				SetPlayerSkinEx(playerid, skinID); 
-			}
-			else
-			{
-				sendTipMessage(playerid, "Tego skina nie mo¿esz wybraæ!"); 
-				return 1;
-			}
+			sendTipMessage(playerid, "Tego skina nie mo¿esz wybraæ!"); 	
         }
         else
 		{
