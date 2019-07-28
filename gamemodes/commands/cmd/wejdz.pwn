@@ -549,7 +549,7 @@ YCMD:wejdz(playerid, params[], help)
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
             
 			//BIZNESY
-            for(new i=0; i<BusinessLoaded; i++)
+            for(new i=0; i<=BusinessLoaded; i++)
             {
                 if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ])
                 && GetPlayerVirtualWorld(playerid) == 0)

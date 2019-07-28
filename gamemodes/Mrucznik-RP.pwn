@@ -379,6 +379,8 @@ public OnGameModeInit()
 		SetWorldTime(tmphour);
 		ServerTime = tmphour;
 	}
+	//testowy obiekt 0.3DL
+	CreateDynamicObject(-1001, 1356.08862, -1663.05505, 14.76700,   0.00000, 0.00000, 90.00000);
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
@@ -5850,7 +5852,7 @@ OnPlayerLogin(playerid, password[])
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
-		format(string, sizeof(string), "Aktualna wersja naszej mapy to %d. Platforma: SAMP-0.3DL", VERSION);
+		format(string, sizeof(string), "Welcome to Mrucznik Role Play %s - SAMP-0.3DL-R1", VERSION);
 		SendClientMessage(playerid, COLOR_WHITE, string);
 		printf("%s has logged in.",nick);
 		if (IsPlayerPremiumOld(playerid))
@@ -5991,7 +5993,7 @@ OnPlayerLogin(playerid, password[])
     	if(Dom[PlayerInfo[playerid][pDom]][hPW] < 0) Dom[PlayerInfo[playerid][pDom]][hPW] = 0;
 	}
 
-	//Spawnowanie gracza:
+	//Spawnowanie gracza
 	SetTimerEx("AntySB", 5000, 0, "d", playerid); //by nie kickowa³o timer broni
 	AntySpawnBroni[playerid] = 5;
 	GUIExit[playerid] = 0;
