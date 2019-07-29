@@ -2619,7 +2619,8 @@ SetPlayerSpawnWeapon(playerid)
 
 SetPlayerSpawnSkin(playerid)
 {
-    if(PlayerInfo[playerid][pChar] > 0)
+	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+  /*  if(PlayerInfo[playerid][pChar] > 0)
 		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
 
     if(GetPlayerFraction(playerid) == FRAC_FBI && PlayerInfo[playerid][pTajniak] != 0)
@@ -2696,7 +2697,7 @@ SetPlayerSpawnSkin(playerid)
 	{
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
         SetPVarInt(playerid, "skinF", 0);
-	}
+	}*/
 
 	return 1;
 }
