@@ -48,8 +48,14 @@ YCMD:setname(playerid, params[], help)
 		{
 		    if(PlayerInfo[giveplayerid][pDom] == 0)
 		    {
-		        if(PlayerInfo[giveplayerid][pPbiskey] == 255)
+		        if(PlayerInfo[giveplayerid][pBusinessOwner] > 0)
 		        {
+					if(strlen(newname) > MAX_PLAYER_NAME)
+					{
+						format(string, sizeof(string), "Nowy nick nie mo¿e byæ d³u¿szy jak %d znaków", MAX_PLAYER_NAME); 
+						sendErrorMessage(playerid, string); 
+						return 1;
+					}
                     GetPlayerName(giveplayerid, giveplayer, MAX_PLAYER_NAME);
                     GetPlayerName(playerid, sendername, MAX_PLAYER_NAME);
                     if(ChangePlayerName(giveplayerid, newname))
