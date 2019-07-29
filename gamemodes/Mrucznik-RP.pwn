@@ -2167,9 +2167,6 @@ public OnPlayerSpawn(playerid)
 	if(PlayerInfo[playerid][pDom] != 0)
  		Dom[PlayerInfo[playerid][pDom]][hData_DD] = 0; //Zerowanie dni do usuniêcia domu
 	SetPlayerToTeamColor(playerid);
-
-	//SetPlayerSpawn:
-	SetPlayerSpawn(playerid);
 	//AdminDuty
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
@@ -2179,6 +2176,8 @@ public OnPlayerSpawn(playerid)
     {
         SetPVarInt(playerid, "scena-allow", 1);
     }
+	//SetPlayerSpawn:
+	SetPlayerSpawn(playerid);
     //Spawn Pos
 	SetTimerEx("SpawnPosInfo", 1000, false, "i", playerid);
 	return 1;

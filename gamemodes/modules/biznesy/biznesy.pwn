@@ -292,10 +292,9 @@ stock CorrectPlayerBusiness(playerid)
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
 	}
-	if(PlayerInfo[playerid][pBusinessMember] > MAX_BIZNES || PlayerInfo[playerid][pBusinessOwner] > MAX_BIZNES)
+	if(PlayerInfo[playerid][pBusinessOwner] > MAX_BIZNES)
 	{
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
-		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID;
 		sendErrorMessage(playerid, "Posiada³eœ b³êdny biznes - zosta³ on WYZEROWANY!");
 		sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d - zg³oœ to na naszym forum!"); 
 	}
