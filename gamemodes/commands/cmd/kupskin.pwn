@@ -48,6 +48,11 @@ YCMD:kupskin(playerid, params[], help)
 					sendErrorMessage(playerid, "B³êdne ID skina - brak przedzia³u od 300-399"); 
 					return 1;
 				}
+				if(skinID > LOADED_SKINS)
+				{
+					sendErrorMessage(playerid, "B³êdne ID skina - nie znaleziono w bazie!"); 
+					return 1;
+				}
 				if(skinIsLegally(skinID))
 				{
 					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
