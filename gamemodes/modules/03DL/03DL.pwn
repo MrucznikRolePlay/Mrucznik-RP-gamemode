@@ -29,12 +29,23 @@
 //-----------------<[ Funkcje: ]>-------------------
 stock SetPlayerSkinEx(playerid, value)
 {
-	if(value >= 400)
+	if(value > 20032)
 	{
-		SetPlayerSkin(playerid, value+19601); 
+		sendErrorMessage(playerid, "B³êdny zwrot na PlayerSkin"); 
 		return 1;
 	}
-	SetPlayerSkin(playerid, value); 
+	if(value >= 400 && value < 20000)
+	{
+		SetPlayerSkin(playerid, value+19601); 
+	}
+	else if(value > 20000 && value <= 20032)
+	{
+		SetPlayerSkin(playerid, value); 
+	}
+	else
+	{
+		SetPlayerSkin(playerid, value); 
+	}
 	return 1;
 }
 stock skinIsLegally(skinID)
