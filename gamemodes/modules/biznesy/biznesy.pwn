@@ -334,7 +334,7 @@ stock LoadBusinessPickup()
 	return 1;
 }
 //------------------<[ MySQL: ]>--------------------
-LoadBusiness()//£adowanie biznesów z bazy danych
+LoadBusiness()//?adowanie biznesów z bazy danych
 {
 	//Tworzenie BIZ na ID 0
 	new stringName[64]; 
@@ -355,17 +355,20 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 	Business[0][b_cost] = 100000000;
 	format(stringName, sizeof(stringName), "Szmulowice Dolne");
 	Business[0][b_Location] = stringName; 
-	format(stringNamed, sizeof(stringNamed), "Brak - na sprzeda¿");
+	format(stringNamed, sizeof(stringNamed), "Brak - na sprzeda?");
 	Business[0][b_Name_Owner] = stringNamed; 
 	BusinessLoaded=0; 
 	new lStr[1024];
-	for(new CurrentBID=1; CurrentBID<MAX_BIZNES; CurrentBID++)
+
+	new CurrentBID = 0;
+	mysql_store_result();
+	while(CurrentBID < mysql_num_rows())
 	{
 		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
 
 		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
 		mysql_query(lStr);
-		mysql_store_result();
+
 		if (mysql_num_rows())
 		{
 			mysql_fetch_row_format(lStr, "|");
@@ -387,12 +390,13 @@ LoadBusiness()//£adowanie biznesów z bazy danych
 			Business[CurrentBID][b_maxMoney],
 			Business[CurrentBID][b_cost],
 			Business[CurrentBID][b_Location],
-			Business[CurrentBID][b_moneyPocket]); 
-			
+			Business[CurrentBID][b_moneyPocket]);
+
 			if(strlen(Business[CurrentBID][b_Name]) >= 3)
 			{
 				BusinessLoaded++; 
 			}
+			CurrentBID++;
 		}
 	}
 	return 1;

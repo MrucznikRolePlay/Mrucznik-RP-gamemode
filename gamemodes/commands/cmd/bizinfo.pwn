@@ -61,9 +61,6 @@ YCMD:bizinfo(playerid, params[], help)
 			Business[ID_BUSINESS][b_Location]); 
 		}
 		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string, false); 
-
-		format(string, sizeof(string), "Wyœwietlam informacje dla %s", Business[ID_BUSINESS][b_Location]); 
-		sendTipMessage(playerid, string); 
 	}
 	return 1;
 }
