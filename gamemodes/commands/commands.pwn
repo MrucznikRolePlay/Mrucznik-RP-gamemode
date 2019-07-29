@@ -238,7 +238,6 @@
 #include "cmd/komendy.pwn"
 #include "cmd/komentuj.pwn"
 #include "cmd/komunikat.pwn"
-#include "cmd/achuj123.pwn"//TODO: USUÑ TO
 #include "cmd/konsola.pwn"
 #include "cmd/kontakty.pwn"
 #include "cmd/kontrakt.pwn"

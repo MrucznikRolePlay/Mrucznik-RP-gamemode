@@ -38,7 +38,7 @@ YCMD:kupskin(playerid, params[], help)
 			{
 				sendTipMessage(playerid, "U¿yj /wybierzskin [id skinu] (koszt: 5000$)");
 				sendTipMessage(playerid, "ID skinów znajdziesz na: http://wiki.sa-mp.com/wiki/Skins:All");
-				sendTipMessage(playerid, "ID skinów [+400] znajdziesz na: http://mrucznik-rp.pl");
+				sendTipMessage(playerid, "ID skinów [+20.000] znajdziesz na: http://mrucznik-rp.pl");
 				return 1;
 			}
 			if(kaska[playerid] >= 5000){
@@ -48,21 +48,39 @@ YCMD:kupskin(playerid, params[], help)
 					sendErrorMessage(playerid, "B³êdne ID skina - brak przedzia³u od 300-399"); 
 					return 1;
 				}
-				if(skinID > LOADED_SKINS)
-				{
-					sendErrorMessage(playerid, "B³êdne ID skina - nie znaleziono w bazie!"); 
-					return 1;
-				}
-				if(skinIsLegally(skinID))
+				else if(skinIsLegally(skinID))
 				{
 					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
-					SetPlayerSkinEx(playerid, skinID); 
-				}
-				else
-				{
-					sendTipMessage(playerid, "1. Nie mo¿na kupiæ w tym sklepie takiego skina! Spróbuj pod /kp");
-					sendTipMessage(playerid, "2. Podany przez Ciebie skin mo¿e byæ skinem tylko i wy³¹cznie pod evenety!");
+					ZabierzKase(playerid, 5000); 
 					return 1;
+				}	
+				else if(skinID > 20000 && skinID <= 20100)//SKINY EVENTOWE
+				{
+					if(eventForSkin[skinID] != 1)
+					{
+						sendTipMessage(playerid, "Event dla tego skina jest wy³¹czony!"); 
+						return 1;
+					}
+					SetPlayerSkin(playerid, skinID); 
+					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
+					ZabierzKase(playerid, 5000); 
+					return 1;
+				}
+				else if(skinID > 20100 && skinID <= 20300)//Skiny dla frakcji
+				{
+					sendTipMessage(playerid, "Ten skin jest tylko i wy³¹cznie dla frakcji! U¿yj /uniform"); 
+					return 1;
+				}
+				else if(skinID > 20300 && skinID <= 20400)
+				{
+					sendErrorMessage(playerid, "Ten skin jest do kupienia za MC"); 
+					return 1;
+				}
+				else if(skinID > 20400 && skinID < LOADED_SKINS)//Normalne skiny dla ka¿dego
+				{
+					SetPlayerSkin(playerid, skinID); 
+					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
+					ZabierzKase(playerid, 5000); 
 				}
 			}
 			else

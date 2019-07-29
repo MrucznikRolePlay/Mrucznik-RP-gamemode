@@ -39,19 +39,26 @@ YCMD:startskinevent(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj: /startskinevent [ID]"); 
 			return 1;
 		}
-		if(PlayerInfo[playerid][pAdmin] >= 3500)
+		if(PlayerInfo[playerid][pAdmin] >= 3500 || IsAScripter(playerid))
 		{
-			if(eventForSkin[value] == 0)
+			if(value == 20007 || value == 20019)
 			{
-				eventForSkin[value] = 1;
-				format(string, sizeof(string), "%s w³¹czy³ event dla skina %d", GetNick(playerid), value); 
-				SendMessageToAdmin(string, COLOR_YELLOW);
+				if(eventForSkin[value] == 0)
+				{
+					eventForSkin[value] = 1;
+					format(string, sizeof(string), "%s w³¹czy³ event dla skina %d", GetNick(playerid), value); 
+					SendMessageToAdmin(string, COLOR_YELLOW);
+				}
+				else if(eventForSkin[value] == 1)
+				{
+					eventForSkin[value] = 0;
+					format(string, sizeof(string), "%s wy³¹czy³ event dla skina %d", GetNick(playerid), value); 
+					SendMessageToAdmin(string, COLOR_YELLOW);
+				}
 			}
-			else if(eventForSkin[value] == 1)
+			else
 			{
-				eventForSkin[value] = 0;
-				format(string, sizeof(string), "%s wy³¹czy³ event dla skina %d", GetNick(playerid), value); 
-				SendMessageToAdmin(string, COLOR_YELLOW);
+				sendErrorMessage(playerid, "Ten skin nie istnieje dla eventów!"); 
 			}
 		}
 	}

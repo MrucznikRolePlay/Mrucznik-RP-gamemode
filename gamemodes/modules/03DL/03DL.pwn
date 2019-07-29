@@ -29,7 +29,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 stock SetPlayerSkinEx(playerid, value)
 {
-	if(value > 20032)
+	/*if(value > 20032)
 	{
 		sendErrorMessage(playerid, "B³êdny zwrot na PlayerSkin"); 
 		return 1;
@@ -40,41 +40,15 @@ stock SetPlayerSkinEx(playerid, value)
 		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], value, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 	}
 	else
-	{
-		SetPlayerSkin(playerid, value); 
-	}
+	{*/
+	SetPlayerSkin(playerid, value); 
+	
 	return 1;
 }
 stock skinIsLegally(skinID)
 {
-	//SKINY 0.3DL - Mrucznik Resources
-	if(skinID == 400)
-	{
-		return true;	
-	}
-	else if(skinID >= 403 && skinID < 406)
-	{
-		return true;	
-	}
-	else if(skinID >= 407 && skinID < 418)
-	{
-		return true;
-	}
-	else if(skinID >= 419 && skinID <= LOADED_SKINS)
-	{
-		return true; 
-	}
-	//Skiny 0.3DL - Mrucznik Resources - SPECIAL FOR EVENS
-	else if(skinID == 406 && eventForSkin[skinID] == 1)
-	{
-		return true;//SHREK
-	}
-	else if(skinID == 418 && eventForSkin[skinID] == 1)
-	{
-		return true; //DOG
-	}
 	//SKINY SAMP
-	else if(skinID == 1 || skinID == 2)
+	if(skinID == 1 || skinID == 2)
 	{
 		return true;
 	}
