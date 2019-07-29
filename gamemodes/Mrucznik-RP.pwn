@@ -2085,6 +2085,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 public OnPlayerSpawn(playerid)
 {
+	sendTipMessage(playerid, "STARTUJE SPAWN");
 	SetPlayerTeam(playerid, NO_TEAM);
 
 	//Czyszczenie zmiennych
@@ -2098,13 +2099,13 @@ public OnPlayerSpawn(playerid)
 	{
 		SetPlayerVirtualWorld(playerid, 0);
 	}
-
+	sendTipMessage(playerid, "SPRAWDZI£EM CZY JESTEŒ ZALOGOWANY");
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
     PlayerInfo[playerid][pMuted] = 0;
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
-
+	sendTipMessage(playerid, "SPRAWDZI£EM JAKIEŒ GÓWNO");
 	if(GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0)
 	{
     	SetPlayerWeatherEx(playerid, ServerWeather);//Pogoda
@@ -2113,12 +2114,14 @@ public OnPlayerSpawn(playerid)
 	{
     	SetPlayerWeatherEx(playerid, 3);//Pogoda
 	}
+	sendTipMessage(playerid, "RESET POGODY ZROBI£EM");
 	//Diler Broni
 	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
 	{
 	    PlayerInfo[playerid][pJob] = 0;
 	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
 	}
+	sendTipMessage(playerid, "Sprawdzi³em czy masz job 9 ");
     // usuwanie
     if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
         PlayerInfo[playerid][pRank] = 0;
@@ -2134,6 +2137,7 @@ public OnPlayerSpawn(playerid)
         UsunBron(playerid);
         sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta³eœ wyrzucony z pracy przez lidera, gdy by³eœ offline!");
     }
+	sendTipMessage(playerid, "Jakieœ gówno z usuwania - wykona³em");
     SetPVarInt(playerid, "mozeUsunacBronie", 0);
     // zabieranie prawka //
     new string[128];
@@ -2144,42 +2148,51 @@ public OnPlayerSpawn(playerid)
         PlayerInfo[playerid][pPK] = 0;
         PlayerInfo[playerid][pCarLic] = gettime()+86400;
     }
+	sendTipMessage(playerid, "ZABIERANIE PRAWKA");
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 1000);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_MICRO_UZI, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL, 500);
     SetPlayerSkillLevel(playerid, WEAPONSKILL_SNIPERRIFLE, 1);
-
+	sendTipMessage(playerid, "ZROBI£EM SKILL");
     //Style walki
     if(PlayerInfo[playerid][pStylWalki] == 1) SetPlayerFightingStyle(playerid, FIGHT_STYLE_BOXING);
 	else if(PlayerInfo[playerid][pStylWalki] == 2) SetPlayerFightingStyle(playerid, FIGHT_STYLE_KUNGFU);
 	else if(PlayerInfo[playerid][pStylWalki] == 3) SetPlayerFightingStyle(playerid, FIGHT_STYLE_KNEEHEAD);
-
+	sendTipMessage(playerid, "Zrobi³em kurwa Styl walki");
 	//DŸwiêki
 	StopAudioStreamForPlayer(playerid);
 	PlayerFixRadio(playerid);
+	sendTipMessage(playerid, "Ustali³em dŸwiêki i da³em cos");
 
 	//Kubi
 	INT_AirTowerLS_Exit(playerid, false, true);
+	sendTipMessage(playerid, "Jebaæ Kubiego");
 
 	//Inne
 	if(PlayerInfo[playerid][pDom] != 0)
  		Dom[PlayerInfo[playerid][pDom]][hData_DD] = 0; //Zerowanie dni do usuniêcia domu
+		sendTipMessage(playerid, "Chuj cos przy domach zrobilem");
 	SetPlayerToTeamColor(playerid);
+	sendTipMessage(playerid, "Da³em kolor teamu");
 	//AdminDuty
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		SetPlayerColor(playerid, 0xFF0000FF);
 	}
+	sendTipMessage(playerid, "ZROBI£EM KURWA ADMINDUTY");
     if(PlayerInfo[playerid][pLider] == FRAC_SN)
     {
         SetPVarInt(playerid, "scena-allow", 1);
     }
+	sendTipMessage(playerid, "Zrobi³em scena allow");
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
+	sendTipMessage(playerid, "Wykona³em SetPlayerSpawn");
     //Spawn Pos
 	SetTimerEx("SpawnPosInfo", 1000, false, "i", playerid);
+	sendTipMessage(playerid, "KONIEC SETPLAYERSPAWN");
 	return 1;
 }
 
