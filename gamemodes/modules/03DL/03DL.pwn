@@ -37,7 +37,7 @@ stock SetPlayerSkinEx(playerid, value)
 	if(value >= 400 && value < 20000)
 	{
 		//SetPlayerSkin(playerid, value+19601); 
-		SetSpawnInfo(playerid, NO_TEAM, value+19601, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 269.15, 26, 36, 28, 150, 0, 0 );
+		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], value, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 	}
 	else
 	{

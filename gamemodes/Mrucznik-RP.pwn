@@ -367,10 +367,10 @@ public OnGameModeInit()
 	}
 
 	// Skiny graczy (wybieralka)
-	for(new i = 0; i <= sizeof(Peds)-1; i++)
+/*	for(new i = 0; i <= sizeof(Peds)-1; i++)
 	{
 		AddPlayerClass(Peds[i][0],1958.3783,1343.1572,1100.3746,269.1425,-1,-1,-1,-1,-1,-1);
-	}
+	}*/
 
 	if (realtime)
 	{
