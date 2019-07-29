@@ -2172,8 +2172,10 @@ public OnPlayerSpawn(playerid)
 
 	//Inne
 	if(PlayerInfo[playerid][pDom] != 0)
- 		Dom[PlayerInfo[playerid][pDom]][hData_DD] = 0; //Zerowanie dni do usuniêcia domu
+	{
+		Dom[PlayerInfo[playerid][pDom]][hData_DD] = 0; //Zerowanie dni do usuniêcia domu
 		sendTipMessage(playerid, "Chuj cos przy domach zrobilem");
+	}
 	SetPlayerToTeamColor(playerid);
 	sendTipMessage(playerid, "Da³em kolor teamu");
 	//AdminDuty
