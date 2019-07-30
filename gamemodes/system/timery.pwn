@@ -2334,7 +2334,7 @@ public PlayerShowForHunter(playerid)
 			if(PlayerInfo[i][pWL] >= 10)
 			{
 				new Float:posX, Float:posY, Float:posZ;
-				GetPlayerPos(playerid, posX, posY, posZ); 
+				GetPlayerPos(i, posX, posY, posZ); 
 				chpIDHunter[i] = CreateDynamicCP(posX, posY, posZ, 2.5, GetPlayerInterior(i), GetPlayerInterior(i), playerid);
 				hunterSeeMe[i] = playerid; 
 				wantedValuePlayer++; 
@@ -2342,7 +2342,7 @@ public PlayerShowForHunter(playerid)
 		}
 		sendTipMessageEx(playerid, COLOR_GREEN, ">======[KOMPUTER £OWCY]======<");
 		format(string, sizeof(string), "Iloœæ osób z Wanted Level +10 to %d", wantedValuePlayer); 
-		sendTipMessage(playerid, "Iloœæ osób z Wanted Level 10+ to ..");
+		sendTipMessage(playerid, string);
 		sendTipMessage(playerid, "Pomyœlnie zaktualizowano po³o¿enia na GPS"); 
 		sendTipMessageEx(playerid, COLOR_GREEN, ">============================<");
 		wantedValuePlayer=0;

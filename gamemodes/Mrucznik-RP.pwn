@@ -1198,6 +1198,7 @@ public OnPlayerDisconnect(playerid, reason)
 		format(reString, sizeof(reString), "Poszukiwany %s opuœci³ San Andreas ((wyszed³ z gry)).", GetNick(playerid));
 		sendTipMessageEx(hunterSeeMe[playerid], COLOR_RED, reString);
 		DestroyDynamicCP(chpIDHunter[playerid]); 
+		KillTimer(timerForHunter[playerid]); 
 	}
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
