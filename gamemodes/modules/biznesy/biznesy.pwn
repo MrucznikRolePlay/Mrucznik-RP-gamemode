@@ -360,16 +360,17 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	BusinessLoaded=0; 
 	new lStr[1024];
 
-	new CurrentBID = 0;
-	mysql_store_result();
+	new CurrentBID = 1;
+
 	while(CurrentBID < mysql_num_rows())
 	{
 		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
 
 		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
 		mysql_query(lStr);
+		mysql_store_result();
 
-		if (mysql_num_rows())
+		if(mysql_num_rows())
 		{
 			mysql_fetch_row_format(lStr, "|");
 			mysql_free_result();
