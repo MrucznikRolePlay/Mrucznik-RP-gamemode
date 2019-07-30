@@ -359,14 +359,12 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	Business[0][b_Name_Owner] = stringNamed; 
 	BusinessLoaded=0; 
 	new lStr[1024];
-
-	new CurrentBID = 1;
-
-	while(CurrentBID < mysql_num_rows())
-	{
-		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
-
-		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
+	new CurrentBID = 1;// 1 poniewa¿ wczyta³o wynik dla 0 powy¿ej
+    lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
+	format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID` > 0 AND `exX` > 0.0", lStr, CurrentBID);
+    mysql_store_result();
+    while(mysql_fetch_row_format(lStr, "|"))
+    {
 		mysql_query(lStr);
 		mysql_store_result();
 
@@ -399,6 +397,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 			}
 			CurrentBID++;
 		}
+		mysql_free_result(); 
 	}
 	return 1;
 }
