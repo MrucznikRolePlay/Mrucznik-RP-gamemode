@@ -1046,10 +1046,10 @@ ClearVariableConnect(playerid)
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
 	fixActorsTimer[playerid] = 0; 
-	chpIDHunter[playerid] =0;
+/*	chpIDHunter[playerid] =0;
 	hunterSeeMe[playerid]=0;
 	hunterStatus[playerid]=0;
-	timerForHunter[playerid]=0;
+	timerForHunter[playerid]=0;*/
 	return 1;
 }
 ClearVariableDisconnect(playerid)
