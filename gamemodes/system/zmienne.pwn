@@ -1032,11 +1032,12 @@ new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_
 new DCC_Channel:g_FracChannel[MAX_FRAC];
 new DCC_Channel:g_OrgChannel[MAX_ORG];
 
+/*
 new chpIDHunter[MAX_PLAYERS];
 new hunterSeeMe[MAX_PLAYERS]; 
 new hunterStatus[MAX_PLAYERS]; 
 new wantedValuePlayer;
-new timerForHunter[MAX_PLAYERS];
+new timerForHunter[MAX_PLAYERS];*/
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------

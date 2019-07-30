@@ -46,11 +46,6 @@ YCMD:wiadomosc(playerid, params[], help)
             sendErrorMessage(playerid, "Gracz aktualnie loguje siê do gry! Odczekaj chwilê"); 
             return 1;
         }
-        if(!IsPlayerConnected(giveplayerid))
-        {
-            sendErrorMessage(playerid, "Nie ma na serwerze takiego gracza!"); 
-            return 1;
-        }
         if(HidePM[giveplayerid] > 0 || HidePM[playerid] > 0)
         {
             sendTipMessage(playerid, "Ktoœ z was ma zablokowane wiadomoœci!"); 
@@ -142,6 +137,10 @@ YCMD:wiadomosc(playerid, params[], help)
             format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
             ABroadCast2(COLOR_LIGHTGREEN,string,1);
         }
+    }
+    else 
+    {
+        sendTipMessage(playerid, "Nie ma takiego gracza na serwerze!"); 
     }
     return 1;
 }

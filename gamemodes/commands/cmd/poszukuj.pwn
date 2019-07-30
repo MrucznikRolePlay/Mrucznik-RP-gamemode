@@ -32,7 +32,7 @@ YCMD:poszukiwania(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pJob] != 1)
+	/*	if(PlayerInfo[playerid][pJob] != 1)
 		{
 			sendErrorMessage(playerid, "Nie jesteœ ³owc¹ nagród!"); 
 			return 1;
@@ -57,7 +57,8 @@ YCMD:poszukiwania(playerid, params[], help)
 				}
 			}
 		}
-		
+		*/
+		sendErrorMessage(playerid, "Trwaj¹ prace nad t¹ komend¹!"); 
 	}
 	return 1;
 }

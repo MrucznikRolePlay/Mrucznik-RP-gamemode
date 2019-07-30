@@ -100,6 +100,7 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
+#include "system\resources.pwn"
 
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"
@@ -226,7 +227,9 @@ public OnGameModeInit()
 
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
-	
+
+	//-------<[ 0.3DL ]>-------
+	Load_DL_Skins(); 
 	//-------<[ commands ]>-------
 	InitCommands();
 
@@ -1193,13 +1196,13 @@ public OnPlayerDisconnect(playerid, reason)
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 	}
-	if(hunterSeeMe[playerid] > 0)
+	/*if(hunterSeeMe[playerid] > 0)
 	{
 		format(reString, sizeof(reString), "Poszukiwany %s opuœci³ San Andreas ((wyszed³ z gry)).", GetNick(playerid));
 		sendTipMessageEx(hunterSeeMe[playerid], COLOR_RED, reString);
-		DestroyDynamicCP(chpIDHunter[playerid]); 
-		KillTimer(timerForHunter[playerid]); 
-	}
+		DestroyDynamicCP(chpIDHunter[hunterSeeMe[playerid]]); 
+		KillTimer(timerForHunter[hunterSeeMe[playerid]]); 
+	}*/
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
         new giveplayerid = GetPVarInt(playerid, "Mats-id");

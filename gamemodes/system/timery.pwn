@@ -2321,7 +2321,7 @@ public IdleKick()
 		}
 	}
 	return 1;
-}
+}/*
 forward PlayerShowForHunter(playerid);
 public PlayerShowForHunter(playerid)
 {
@@ -2357,7 +2357,7 @@ public PlayerShowForHunter(playerid)
 		}
 	}
 	return 1;
-}
+}*/
 forward RPGTimer();
 public RPGTimer()
 {

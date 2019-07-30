@@ -701,7 +701,9 @@ static Aliases()
 	Command_AddAltNamed("car", "auto");
 	Command_AddAltNamed("car", "pojazd");
 	Command_AddAltNamed("car", "samochod");
-
+	//quitbusiness
+	Command_AddAltNamed("quitbusiness", "qb");
+	Command_AddAltNamed("quitbusiness", "quitbiz");
 	//carhelp
 	Command_AddAltNamed("carhelp", "autopomoc");
 	Command_AddAltNamed("carhelp", "pojazdpomoc");
