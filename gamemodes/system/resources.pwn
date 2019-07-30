@@ -51,6 +51,7 @@ Load_DL_Skins()
 	AddSimpleModel(0, 19464, -1003, "mrp_logo.dff", "wallito.txd");//MRUCZNIK LOGO
 	AddSimpleModel(0, 19371, -1004, "usss_logo.dff", "wallito.txd");//USSS LOGO
 	AddSimpleModel(0, 19327, -1005, "sn_logos.dff", "logos.txd");//San News Logo (na plakacie)
+	AddSimpleModel(0, 4238, -1006, "bilb_cotta.dff", "bilb_cotta.txd"); //Simon Cotta - SIM_DEV (SIM-DEV)
 
 	return 0; 
 }
