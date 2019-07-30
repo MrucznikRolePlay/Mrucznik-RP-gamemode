@@ -455,6 +455,10 @@ public OnGameModeExit()
         SejfR_Save(i);
         if(RANG_ApplyChanges[1][i]) EDIT_SaveRangs(1, i);
     }
+	for(new i=1; i<=BusinessLoaded; i++)
+	{
+		SaveBusiness(i); 
+	}
     UnloadTXD();
     Patrol_Unload();
     TJD_Exit();
