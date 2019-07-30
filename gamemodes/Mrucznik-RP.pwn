@@ -2633,7 +2633,7 @@ SetPlayerSpawnWeapon(playerid)
 
 SetPlayerSpawnSkin(playerid)
 {
-	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
   /*  if(PlayerInfo[playerid][pChar] > 0)
 		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
 

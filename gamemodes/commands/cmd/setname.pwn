@@ -38,9 +38,15 @@ YCMD:setname(playerid, params[], help)
 	if (PlayerInfo[playerid][pAdmin] >= 5000)//(Uprawnienia(playerid, ACCESS_OWNER))
 	{
 		new giveplayerid;
-		if( sscanf(params, "k<fix>s[24]", giveplayerid, newname))
+		if( sscanf(params, "k<fix>s[25]", giveplayerid, newname))
 		{
 			sendTipMessage(playerid, "U¿yj /setname [playerid] [nowynick]");
+			return 1;
+		}
+		if(strlen(newname) > MAX_PLAYER_NAME)
+		{
+			format(string, sizeof(string), "Nowy nick nie mo¿e byæ d³u¿szy jak %d znaków", MAX_PLAYER_NAME); 
+			sendErrorMessage(playerid, string); 
 			return 1;
 		}
 
@@ -50,12 +56,6 @@ YCMD:setname(playerid, params[], help)
 		    {
 		        if(PlayerInfo[giveplayerid][pBusinessOwner] == INVALID_BIZ_ID)
 		        {
-					if(strlen(newname) > MAX_PLAYER_NAME)
-					{
-						format(string, sizeof(string), "Nowy nick nie mo¿e byæ d³u¿szy jak %d znaków", MAX_PLAYER_NAME); 
-						sendErrorMessage(playerid, string); 
-						return 1;
-					}
                     GetPlayerName(giveplayerid, giveplayer, MAX_PLAYER_NAME);
                     GetPlayerName(playerid, sendername, MAX_PLAYER_NAME);
                     if(ChangePlayerName(giveplayerid, newname))

@@ -2333,6 +2333,10 @@ public PlayerShowForHunter(playerid)
 		{
 			if(PlayerInfo[i][pWL] >= 10)
 			{
+				if(i == playerid)
+				{
+					continue;
+				}
 				DestroyDynamicCP(chpIDHunter[i]);
 				new Float:posX, Float:posY, Float:posZ;
 				GetPlayerPos(i, posX, posY, posZ); 
