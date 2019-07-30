@@ -60,7 +60,7 @@ YCMD:unfrakcja(playerid, params[], help)
 					PlayerInfo[para1][pJob] = 0;
                     orgUnInvitePlayer(para1);
 					MedicBill[para1] = 0;
-					SpawnPlayer(para1);
+					SetPlayerSpawn(para1);
 					format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}

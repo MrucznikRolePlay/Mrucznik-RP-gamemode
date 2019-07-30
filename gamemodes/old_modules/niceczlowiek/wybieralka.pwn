@@ -129,7 +129,7 @@ NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 
 		if(GetPVarInt(playerid, "wyborPierwszego") == 1)
 		{
-			SpawnPlayer(playerid);
+			SetPlayerSpawn(playerid);
 			SetPlayerSpawnPos(playerid);
 			SetPlayerInterior(playerid, 0);
 			SetPlayerVirtualWorld(playerid, 0);

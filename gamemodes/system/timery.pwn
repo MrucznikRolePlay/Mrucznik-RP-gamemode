@@ -2327,12 +2327,13 @@ public PlayerShowForHunter(playerid)
 {
 	hunterStatus[playerid]++; 
 	new string[128];
-	if(hunterStatus[playerid] == 6 || hunterStatus[playerid] == 18)//Pierwsza aktualizacja
+	if(hunterStatus[playerid] == 1 || hunterStatus[playerid] == 6 || hunterStatus[playerid] == 18)//Aktualizacja 
 	{
 		foreach(new i : Player)
 		{
 			if(PlayerInfo[i][pWL] >= 10)
 			{
+				DestroyDynamicCP(chpIDHunter[i]);
 				new Float:posX, Float:posY, Float:posZ;
 				GetPlayerPos(i, posX, posY, posZ); 
 				chpIDHunter[i] = CreateDynamicCP(posX, posY, posZ, 2.5, GetPlayerInterior(i), GetPlayerInterior(i), playerid);
@@ -2346,7 +2347,7 @@ public PlayerShowForHunter(playerid)
 		sendTipMessage(playerid, "Pomyœlnie zaktualizowano po³o¿enia na GPS"); 
 		sendTipMessageEx(playerid, COLOR_GREEN, ">============================<");
 		wantedValuePlayer=0;
-		if(hunterStatus[playerid] == 18)
+		if(hunterStatus[playerid] >= 18)
 		{
 			hunterStatus[playerid]=1; 
 		}
@@ -2832,7 +2833,7 @@ public JednaSekundaTimer()
 				NeedMedicTime[i] = 0;
 				PlayerInfo[i][pDeaths] += 1;
 				PlayerFixRadio(i);
-				SpawnPlayer(i);
+				SetPlayerSpawn(i);
 			}
 		}
 		if(WantLawyer[i] >= 1)

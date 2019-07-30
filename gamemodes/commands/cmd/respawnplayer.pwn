@@ -42,6 +42,6 @@ YCMD:respawnplayer(playerid, params[], help)
     format(str, 128, "$System$ » Zrespawnowa³eœ gracza o nicku %s", GetNick(v));
     SendClientMessage(playerid, COLOR_LIGHTGREEN, str);
 
-    SpawnPlayer(v);
+    SetPlayerSpawn(v)
     return 1;
 }

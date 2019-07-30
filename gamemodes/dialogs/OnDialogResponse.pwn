@@ -7673,7 +7673,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         {
                             SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
                             TogglePlayerSpectating(playerid, false);
-							SpawnPlayer(playerid);
+							SetPlayerSpawn(playerid);
                         }
 					}
 			        else

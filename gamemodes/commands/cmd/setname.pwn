@@ -48,7 +48,7 @@ YCMD:setname(playerid, params[], help)
 		{
 		    if(PlayerInfo[giveplayerid][pDom] == 0)
 		    {
-		        if(PlayerInfo[giveplayerid][pBusinessOwner] > 0)
+		        if(PlayerInfo[giveplayerid][pBusinessOwner] == INVALID_BIZ_ID)
 		        {
 					if(strlen(newname) > MAX_PLAYER_NAME)
 					{

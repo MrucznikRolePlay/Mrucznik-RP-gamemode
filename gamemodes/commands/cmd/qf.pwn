@@ -49,7 +49,7 @@ YCMD:qf(playerid, params[], help)
 			PlayerInfo[playerid][pSkin] = 0;
             orgUnInvitePlayer(playerid);
 			MedicBill[playerid] = 0;
-			SpawnPlayer(playerid);
+			SetPlayerSpawn(playerid);
 			return 1;
 		}
 		else
