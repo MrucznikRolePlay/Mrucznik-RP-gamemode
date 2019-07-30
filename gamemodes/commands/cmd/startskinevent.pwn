@@ -41,7 +41,7 @@ YCMD:startskinevent(playerid, params[], help)
 		}
 		if(PlayerInfo[playerid][pAdmin] >= 3500 || IsAScripter(playerid))
 		{
-			if(value == 20007 || value == 20019)
+			if(value >= 20001 && value <= 20003)
 			{
 				if(eventForSkin[value] == 0)
 				{

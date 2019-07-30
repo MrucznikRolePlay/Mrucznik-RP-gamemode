@@ -594,10 +594,11 @@ public MRP_DoAnimation(playerid, arg1[])
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@intkubijakb", arg1, true) == 0)
+	if(strcmp("@rolki", arg1, true) == 0)
 	{
-		ApplyAnimation(playerid, "SKATE", "skate_sprint", 4.0999, 1, 1, 1, 1, 1, 1);
-		SetPVarInt(playerid, "anim_do", 1);
+		/*ApplyAnimation(playerid, "SKATE", "skate_sprint", 4.0999, 1, 1, 1, 1, 1, 1);
+		SetPVarInt(playerid, "anim_do", 1);*/
+		SendClientMessage(playerid, -1, "Ta animacja zosta³a wy³¹czona na czas tworzenia systemu przedmiotów!");
 		return 1;
 	}
 	if(strcmp("@siad4", arg1, true) == 0)

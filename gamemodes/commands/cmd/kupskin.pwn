@@ -43,7 +43,7 @@ YCMD:kupskin(playerid, params[], help)
 			}
 			if(kaska[playerid] >= 5000){
 				
-				if(skinID > 299 && skinID < 400)
+				if(skinID > 299 && skinID <= 20000)
 				{
 					sendErrorMessage(playerid, "B³êdne ID skina - brak przedzia³u od 300-399"); 
 					return 1;
