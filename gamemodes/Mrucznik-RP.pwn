@@ -976,31 +976,12 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 			ClearAnimations(playerid);
 		}
 	}
-
 	if (IsAnAmbulance(vehicleid) && !ispassenger)
 	{
-		if(IsAMedyk(playerid) && JobDuty[playerid] == 0 )
-		{
-			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem na s³u¿bie!");
-            Player_RemoveFromVeh(playerid);
-		}
-		else if(!IsAMedyk(playerid))
+		if(!IsAMedyk(playerid))
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
             Player_RemoveFromVeh(playerid);
-		}
-	}
-	if(GetVehicleModel(vehicleid) == 408)//Smierciarka
-	{
-		if(PlayerInfo[playerid][pJob] == 17)
-		{
-			sendTipMessage(playerid, "Aby rozpocz¹æ trasê œmieciarza wpisz komendê /starttrash");
-		}
-		else
-		{
-			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ w odpowiedniej pracy!");
-			Player_RemoveFromVeh(playerid); 
-			return 1;
 		}
 	}
 	if (GetVehicleModel(vehicleid) == 525)

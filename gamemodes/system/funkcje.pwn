@@ -10492,10 +10492,10 @@ Oil_Destroy(lID)
         TextDrawHideForPlayer(i, OilTXD_BG[0]);
         TextDrawHideForPlayer(i, OilTXD_BG[1]);
         ApplyAnimation(i, "BOMBER", "BOM_Plant_Crouch_Out", 4.0, 0, 0, 0, 0, -1);
-        SendClientMessage(i, COLOR_WHITE, "[LSFD] Usun¹³eœ plamê oleju! Otrzymujesz 5 000$! [LSFD]");
-        DajKase(i, 5000);
-        SendFamilyMessage(17, COLOR_GREEN, "[LSFD] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 5 000$! [LSFD]");
-        Sejf_Add(17, 5000);
+        SendClientMessage(i, COLOR_WHITE, "[ERS] Usun¹³eœ plamê oleju! Otrzymujesz 7 500$! [ERS]");
+        DajKase(i, 7500);
+        SendFamilyMessage(17, COLOR_GREEN, "[ERS] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 12 500$! [ERS]");
+        Sejf_Add(FRAC_ERS, 12500);
     }
 }
 
