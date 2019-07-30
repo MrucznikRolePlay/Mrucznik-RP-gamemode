@@ -361,7 +361,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	new lStr[1024];
 
 	new CurrentBID = 1;
-	while(mysql_num_rows())
+	while(CurrentBID <= MAX_BIZNES)
 	{
 		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
 

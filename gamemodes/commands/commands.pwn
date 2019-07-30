@@ -241,6 +241,7 @@
 #include "cmd/konsola.pwn"
 #include "cmd/kontakty.pwn"
 #include "cmd/kontrakt.pwn"
+#include "cmd/poszukuj.pwn"
 #include "cmd/kostka.pwn"
 #include "cmd/kostka2.pwn"
 #include "cmd/koxubankot.pwn"

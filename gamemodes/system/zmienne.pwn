@@ -1032,6 +1032,11 @@ new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_
 new DCC_Channel:g_FracChannel[MAX_FRAC];
 new DCC_Channel:g_OrgChannel[MAX_ORG];
 
+new chpIDHunter[MAX_PLAYERS];
+new hunterSeeMe[MAX_PLAYERS]; 
+new hunterStatus[MAX_PLAYERS]; 
+new wantedValuePlayer;
+new timerForHunter[MAX_PLAYERS];
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1040,6 +1045,10 @@ ClearVariableConnect(playerid)
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
 	fixActorsTimer[playerid] = 0; 
+	chpIDHunter[playerid] =0;
+	hunterSeeMe[playerid]=0;
+	hunterStatus[playerid]=0;
+	timerForHunter[playerid]=0;
 	return 1;
 }
 ClearVariableDisconnect(playerid)

@@ -1193,6 +1193,12 @@ public OnPlayerDisconnect(playerid, reason)
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 	}
+	if(hunterSeeMe[playerid] > 0)
+	{
+		format(reString, sizeof(reString), "Poszukiwany %s opuœci³ San Andreas ((wyszed³ z gry)).", GetNick(playerid));
+		sendTipMessageEx(hunterSeeMe[playerid], COLOR_RED, reString);
+		DestroyDynamicCP(chpIDHunter[playerid]); 
+	}
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
         new giveplayerid = GetPVarInt(playerid, "Mats-id");
@@ -2013,6 +2019,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 				PlayerPlaySound(killerid, 1083, 0.0, 0.0, 0.0);
 				PoziomPoszukiwania[killerid] ++;
 				SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
+				if(PoziomPoszukiwania[killerid] >= 10)
+				{
+					sendTipMessageEx(playerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
+					sendTipMessage(playerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
+				}
 			}
 		}
 	}
