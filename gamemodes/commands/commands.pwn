@@ -675,6 +675,9 @@
 #include "cmd/vinyl.pwn"
 #include "cmd/quitbusiness.pwn"
 #include "cmd/startskinevent.pwn"
+#include "cmd/bpracownicy.pwn"
+#include "cmd/bizedit.pwn"
+#include "cmd/usunbiznes.pwn"
 
 InitCommands()
 {

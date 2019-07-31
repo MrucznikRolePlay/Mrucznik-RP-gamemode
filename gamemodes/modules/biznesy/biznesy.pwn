@@ -327,13 +327,48 @@ stock LoadBusinessPickup()
 	{
 		if(strlen(Business[i][b_Name]) >= 3)
 		{	
-			CreateDynamicPickup(1272, 1, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 0, 0 -1);
-			CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.4, 10.0);
+			BizPickUp[i] = CreateDynamicPickup(1272, 1, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 0, 0 -1);
+			Biz3DText[i] = CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.6, 20.0);
 		}
 	}
 	return 1;
 }
+stock UnLoadBusiness(idBIZ)
+{
+	new stringName[64]; 
+	new stringNamed[MAX_PLAYER_NAME]; 
+	format(stringName, sizeof(stringName), " ");
+	Business[idBIZ][b_Name] = stringName; 
+	Business[idBIZ][b_ownerUID] = 0; 
+	Business[idBIZ][b_enX] = 0.0;
+	Business[idBIZ][b_enY] = 0.0;
+	Business[idBIZ][b_enZ] = 0.0; 
+	Business[idBIZ][b_exX] = 0.0;
+	Business[idBIZ][b_exY] = 0.0;
+	Business[idBIZ][b_exZ] = 0.0; 
+	Business[idBIZ][b_int] = 0;   
+	Business[idBIZ][b_vw] = 0; 
+	Business[idBIZ][b_pLocal] = 255; 
+	Business[idBIZ][b_maxMoney] = 0;
+	Business[idBIZ][b_cost] = 0;
+	format(stringName, sizeof(stringName), " ");
+	Business[idBIZ][b_Location] = stringName; 
+	format(stringNamed, sizeof(stringNamed), " ");
+	Business[idBIZ][b_Name_Owner] = stringNamed; 
+	DestroyDynamicPickup(BizPickUp[idBIZ]); 
+	DestroyDynamic3DTextLabel(Biz3DText[idBIZ]);
+	BizPickUp[idBIZ] = 0;
+
+	return 1;
+}
 //------------------<[ MySQL: ]>--------------------
+DeleteBusiness(bizID)
+{
+	new lStr[256];
+	format(lStr, 256, "DELETE * FROM `mru_business` WHERE `ID`='%d'", bizID);
+	mysql_query(lStr);
+	return 1;
+}
 LoadBusiness()//?adowanie biznesów z bazy danych
 {
 	//Tworzenie BIZ na ID 0
@@ -355,7 +390,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	Business[0][b_cost] = 100000000;
 	format(stringName, sizeof(stringName), "Szmulowice Dolne");
 	Business[0][b_Location] = stringName; 
-	format(stringNamed, sizeof(stringNamed), "Brak - na sprzeda?");
+	format(stringNamed, sizeof(stringNamed), "Brak - na sprzeda¿");
 	Business[0][b_Name_Owner] = stringNamed; 
 	BusinessLoaded=0; 
 	new lStr[1024];

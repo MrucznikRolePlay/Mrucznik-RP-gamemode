@@ -24,6 +24,8 @@
 //-----------------<[ Zmienne: ]>-------------------
 new BizOpenStatus[MAX_BIZNES];
 new BusinessLoaded;//Zmienna odpowiadaj¹ca za iloœæ wczytanych przez bazê biznesów
+new Text3D:Biz3DText[MAX_BIZNES];
+new BizPickUp[MAX_BIZNES]; 
 
 //------------------<[ Enumy: ]>--------------------
 enum eBusiness {
