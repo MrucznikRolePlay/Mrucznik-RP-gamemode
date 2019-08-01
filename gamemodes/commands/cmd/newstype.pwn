@@ -34,6 +34,7 @@ YCMD:newstype(playerid, params[], help)
 	{
 		newsTypePlayer[playerid] = 0; 
 		MSGBOX_Show(playerid, "Chat_News:_~g~Chat", MSGBOX_ICON_TYPE_WARNING); 
+		PlayerTextDrawHide(playerid, SN_MESS[playerid]); 
 		return 1;
 	}
 	newsTypePlayer[playerid]++ ;

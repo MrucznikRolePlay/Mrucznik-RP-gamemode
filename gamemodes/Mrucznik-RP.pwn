@@ -2174,6 +2174,11 @@ public OnPlayerSpawn(playerid)
     {
         SetPVarInt(playerid, "scena-allow", 1);
     }
+	if(newsTypePlayer[playerid] != 0 && !gNews[playerid] && PlayerPersonalization[playerid][PERS_AD] == 0)
+	{
+		PlayerTextDrawSetString(playerid, SN_MESS[playerid], "~y~NR Marcepan Marks: ~w~Zapraszamy na nasza strone www.sannews.com");
+		PlayerTextDrawShow(playerid, SN_MESS[playerid]); 
+	}
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
     //Spawn Pos

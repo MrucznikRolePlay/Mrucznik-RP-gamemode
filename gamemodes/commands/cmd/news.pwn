@@ -92,7 +92,20 @@ YCMD:news(playerid, params[], help)
 				        return 1;
 				    }
 					format(string, sizeof(string), "%s", params);
-					format(string2, sizeof(string2), "~y~NR: %s: ~w~%s", GetNick(playerid), params);  
+					if(strlen(params) > 100)
+					{
+						new stringRef[124]; 
+						strcat(stringRef, params); 
+						new pos = strfind(stringRef, " ", true, 90);
+						new allL = strlen(stringRef);
+						allL = allL-pos;  
+						strdel(stringRef, pos, pos+allL);
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s [..]", GetNick(playerid), stringRef); 
+					}
+					else if(strlen(params) <= 100)
+					{
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
+					}
 					Send_News_Message(COLOR_NEWS, string, Odpolszcz(string2));
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
                     //OOCNews(0xFF8C55FF, string);
@@ -132,7 +145,20 @@ YCMD:news(playerid, params[], help)
 				    }
 					//OOCNews(COLOR_NEWS,string);
 					format(string, sizeof(string), "%s", params); 
-					format(string2, sizeof(string2), "~y~NR: %s: ~w~%s", GetNick(playerid), params); 
+					if(strlen(params) > 100)
+					{
+						new stringRef[124]; 
+						strcat(stringRef, params); 
+						new pos = strfind(stringRef, " ", true, 90);
+						new allL = strlen(stringRef);
+						allL = allL-pos;  
+						strdel(stringRef, pos, pos+allL);
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s [..]", GetNick(playerid), stringRef); 
+					}
+					else if(strlen(params) <= 100)
+					{
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
+					}
                     Send_News_Message(COLOR_NEWS, string, Odpolszcz(string2));
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
@@ -172,7 +198,20 @@ YCMD:news(playerid, params[], help)
 				        return 1;
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
-					format(string2, sizeof(string2), "~y~NR: %s: ~w~%s", GetNick(playerid), params); 
+					if(strlen(params) > 100)
+					{
+						new stringRef[124]; 
+						strcat(stringRef, params); 
+						new pos = strfind(stringRef, " ", true, 90);
+						new allL = strlen(stringRef);
+						allL = allL-pos;  
+						strdel(stringRef, pos, pos+allL);
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s [..]", GetNick(playerid), stringRef); 
+					}
+					else if(strlen(params) <= 100)
+					{
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
+					}
 					//OOCNews(COLOR_NEWS,string);
                     Send_News_Message(COLOR_NEWS, string, Odpolszcz(string2));
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
