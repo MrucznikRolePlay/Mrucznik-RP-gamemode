@@ -4471,8 +4471,8 @@ ShowStats2(playerid)
 	format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: Unknow"); 
 	format(plRespekt, sizeof(plRespekt), "Respekt: %d/%d", PlayerInfo[playerid][pExp], ((PlayerInfo[playerid][pLevel]+1)*levelexp)); 
 	format(plWiek, sizeof(plWiek), "Wiek: %d",PlayerInfo[playerid][pAge]);
-	if(IsPlayerPremiumOld(playerid)) { plKP = "Sponsor"; }
-	else { plKP = "Zwykly wieprz"; }
+	if(IsPlayerPremiumOld(playerid)) { plKP = "~y~Sponsor"; }
+	else { plKP = "~y~Zwykly wieprz"; }
 	if(PlayerInfo[playerid][pOrigin] == 1) { plPochodzenie = "USA"; }
 	else if(PlayerInfo[playerid][pOrigin] == 2) { plPochodzenie = "Europa"; }
 	else if(PlayerInfo[playerid][pOrigin] == 3) { plPochodzenie = "Azja"; }
@@ -4621,6 +4621,7 @@ ShowStats2(playerid)
 }
 HideStats2(playerid)
 {
+	PlayerTextDrawHide(playerid, TXDSTATS_Background[playerid]); 
 	PlayerTextDrawHide(playerid, TXDSTATS_UID[playerid]);
 	PlayerTextDrawHide(playerid, TXDSTATS_SkinShow[playerid]); 
 	PlayerTextDrawHide(playerid, TXDSTATS_LogoMRP[playerid]);  
