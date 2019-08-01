@@ -4473,11 +4473,11 @@ ShowStats2(playerid)
 	format(plWiek, sizeof(plWiek), "Wiek: %d",PlayerInfo[playerid][pAge]);
 	if(IsPlayerPremiumOld(playerid)) { plKP = "~y~Sponsor"; }
 	else { plKP = "~y~Zwykly wieprz"; }
-	if(PlayerInfo[playerid][pOrigin] == 1) { plPochodzenie = "USA"; }
-	else if(PlayerInfo[playerid][pOrigin] == 2) { plPochodzenie = "Europa"; }
-	else if(PlayerInfo[playerid][pOrigin] == 3) { plPochodzenie = "Azja"; }
-	if(PlayerInfo[playerid][pSex] == 1) { plPlec = "Mê¿czyzna"; }
-	else if(PlayerInfo[playerid][pSex] == 2) { plPlec = "Kobieta"; }
+	if(PlayerInfo[playerid][pOrigin] == 1) { plPochodzenie = "Pochodzenie: USA"; }
+	else if(PlayerInfo[playerid][pOrigin] == 2) { plPochodzenie = "Pochodzenie: Europa"; }
+	else if(PlayerInfo[playerid][pOrigin] == 3) { plPochodzenie = "Pochodzoenie: Azja"; }
+	if(PlayerInfo[playerid][pSex] == 1) { plPlec = "Plec: Mezczyzna"; }
+	else if(PlayerInfo[playerid][pSex] == 2) { plPlec = "Plec: Kobieta"; }
 	if(strlen(PlayerInfo[playerid][pMarriedTo]) > 20)
 	{
 		format(plSlub, sizeof(plSlub), "Slub: Unknow");
@@ -4493,7 +4493,7 @@ ShowStats2(playerid)
 		
 	if(GetPlayerOrg(playerid) != 0)
 	{
-		if(orgIsValid(gPlayerOrg[playerid])) format(plRodzina, 30, "Ranga: %s",OrgInfo[gPlayerOrg[playerid]][o_Name]);
+		if(orgIsValid(gPlayerOrg[playerid])) format(plRodzina, 30, "Rodzina: %s",OrgInfo[gPlayerOrg[playerid]][o_Name]);
 		//Przypisane rangi
 		if(strlen(FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]) > 1)
 		{
@@ -4510,7 +4510,7 @@ ShowStats2(playerid)
 	}
 	else if(GetPlayerFraction(playerid) > 0)
 	{
-		plRodzina= "Ranga: Brak";
+		plRodzina= "Rodzina: Brak";
 		plRodzinkaRank= "Ranga: Brak";
 		format(plFractionRank, sizeof(plFractionRank), "Ranga: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]]);
 		format(plFraction, sizeof(plFraction), "Frakcja: %s", FractionNames[GetPlayerFraction(playerid)]);
