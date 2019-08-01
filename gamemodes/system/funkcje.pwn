@@ -4427,7 +4427,249 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 		}
 	}
 }*/
+ShowStats2(playerid)
+{
+	new plUID[64], plLVL[64], plPlec[64];
+	new plPochodzenie[64], plZdrowie[64], plBank[64], plKasa[64];
+	new plTelefon[64], plKP[64], plWiek[64], plSlub[64], plData[64], plCzas[64], plPKT[64], plWantedD[64];
+	new plPraca[64], plFraction[64], plFractionRank[64], plAdmin[64], plDrugs[64], plMats[64];
+	new plPrzestepstwa[64], plZN[64], plZabic[64], plSmierci[64], plAresztCzas[64], plWL[64]; 
+	new year, month, day, hour, minute, second, plRyba[64], plWozKlucz[64];
+	gettime(hour,minute,second);
+	FixHour(hour);
+	hour = shifthour;
+	getdate(year, month, day);
+	format(plData, sizeof(plData), "%d.%d.%d", day, month, year);
+	format(plCzas, sizeof(plCzas), "%d:%d", hour, minute); 
+	format(plPKT, sizeof(plPKT), "Punkty Karne: %d", PlayerInfo[playerid][pPK]);
+	format(plWL, sizeof(plWL), "WantedLevel: %d", PlayerInfo[playerid][pWL]); 
+	format(plRyba, sizeof(plRyba), "Ryba: %d kg", PlayerInfo[playerid][pFishes]); 
+	format(plWozKlucz, sizeof(plWozKlucz), "Klucze auta: %d", PlayerInfo[playerid][pKluczeAuta]);
+	format(plWantedD, sizeof(plWantedD), "Wanted-Death: %d", PlayerInfo[playerid][pWantedDeaths]);
+	format(plAresztCzas, sizeof(plAresztCzas), "Czas aresztu: %d", PlayerInfo[playerid][pArrested]);  
+	new plRodzina[64], plRespekt[64], plOnline[64], plRodzinkaRank[64], plBMID[64], plBOID[64], plDom[64], plSkin[64], plWarny[64]; 
+	format(plUID, sizeof(plUID), "UID: %d", PlayerInfo[playerid][pUID]);
+	format(plSmierci, sizeof(plSmierci), "Smierci: %d", PlayerInfo[playerid][pDeaths]);
+	format(plZabic, sizeof(plZabic), "Zabic: %d", PlayerInfo[playerid][pKills]);
+	format(plZN, sizeof(plZN), "ZmienNick: %d", PlayerInfo[playerid][pZmienilNick]); 
+	format(plPrzestepstwa, sizeof(plPrzestepstwa), "Crimes: %d", PlayerInfo[playerid][pCrimes]); 
+	format(plLVL, sizeof(plLVL), "Level: %d", PlayerInfo[playerid][pLevel]); 
+	format(plKasa, sizeof(plKasa), "Kasa: %d$", kaska[playerid]); 
+	format(plBank, sizeof(plBank), "Bank: %d$", PlayerInfo[playerid][pAccount]); 
+	format(plZdrowie, sizeof(plZdrowie), "Zdrowie: %.1f", PlayerInfo[playerid][pSHealth]+50);
+	format(plTelefon, sizeof(plTelefon), "Telefon: %d", PlayerInfo[playerid][pPnumber]);
+	format(plOnline, sizeof(plOnline), "On-line: %d", PlayerInfo[playerid][pConnectTime]);
+	format(plBMID, sizeof(plBMID), "B-MID: %d", PlayerInfo[playerid][pBusinessMember]); 
+	format(plBOID, sizeof(plBOID), "B-OID: %d", PlayerInfo[playerid][pBusinessOwner]); 
+	format(plSkin, sizeof(plSkin), "Skin: %d", PlayerInfo[playerid][pModel]); 
+	format(plWarny, sizeof(plWarny), "Warny: %d", PlayerInfo[playerid][pWarns]); 
+	format(plMats, sizeof(plMats), "Mats: %d", PlayerInfo[playerid][pMats]);
+	format(plDrugs, sizeof(plDrugs), "Drugs: %d", PlayerInfo[playerid][pDrugs]); 
+	format(plAdmin, sizeof(plAdmin), "Admin: %d", PlayerInfo[playerid][pAdmin]); 
+	format(plPraca, sizeof(plPraca), "Praca: %s", JobNames[PlayerInfo[playerid][pJob]]); 
+	format(plDom, sizeof(plDom), "Dom: %d", PlayerInfo[playerid][pDom]);
+	format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: Unknow"); 
+	format(plRespekt, sizeof(plRespekt), "Respekt: %d/%d", PlayerInfo[playerid][pExp], ((PlayerInfo[playerid][pLevel]+1)*levelexp)); 
+	format(plWiek, sizeof(plWiek), "Wiek: %d",PlayerInfo[playerid][pAge]);
+	if(IsPlayerPremiumOld(playerid)) { plKP = "Sponsor"; }
+	else { plKP = "Zwykly wieprz"; }
+	if(PlayerInfo[playerid][pOrigin] == 1) { plPochodzenie = "USA"; }
+	else if(PlayerInfo[playerid][pOrigin] == 2) { plPochodzenie = "Europa"; }
+	else if(PlayerInfo[playerid][pOrigin] == 3) { plPochodzenie = "Azja"; }
+	if(PlayerInfo[playerid][pSex] == 1) { plPlec = "Mê¿czyzna"; }
+	else if(PlayerInfo[playerid][pSex] == 2) { plPlec = "Kobieta"; }
+	if(strlen(PlayerInfo[playerid][pMarriedTo]) > 20)
+	{
+		format(plSlub, sizeof(plSlub), "Slub: Unknow");
+	}
+	else if(strlen(PlayerInfo[playerid][pMarriedTo]) <= 20 && strlen(PlayerInfo[playerid][pMarriedTo]) > 3)
+	{
+		format(plSlub, sizeof(plSlub), "Slub: %s", PlayerInfo[playerid][pMarriedTo]);
+	}
+	else if(strlen(PlayerInfo[playerid][pMarriedTo]) <= 3)
+	{
+		format(plSlub, sizeof(plSlub), "Slub: Brak"); 
+	}
+		
+	if(GetPlayerOrg(playerid) != 0)
+	{
+		if(orgIsValid(gPlayerOrg[playerid])) format(plRodzina, 30, "Ranga: %s",OrgInfo[gPlayerOrg[playerid]][o_Name]);
+		//Przypisane rangi
+		if(strlen(FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]) > 1)
+		{
+			format(plRodzinkaRank, sizeof(plRodzinkaRank), "%s", FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]);
+		}
+		//Rangi podstawowe
+		else
+		{
+			format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: %s", FamRang[0][PlayerInfo[playerid][pRank]]);
+		}
+		plFraction = "Frakcja: Brak";
+		plFractionRank = "Ranga: Brak"; 
 
+	}
+	else if(GetPlayerFraction(playerid) > 0)
+	{
+		plRodzina= "Ranga: Brak";
+		plRodzinkaRank= "Ranga: Brak";
+		format(plFractionRank, sizeof(plFractionRank), "Ranga: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]]);
+		format(plFraction, sizeof(plFraction), "Frakcja: %s", FractionNames[GetPlayerFraction(playerid)]);
+	}
+	else
+	{
+		plRodzina= "Rodzina: Brak";
+		plRodzinkaRank= "Ranga: Brak";
+		plFraction = "Frakcja: Brak";
+		plFractionRank = "Ranga: Brak"; 	
+	}
+	
+	if(IsPlayerConnected(playerid))
+	{
+		PlayerTextDrawShow(playerid, TXDSTATS_Background[playerid]); 
+		//set
+		PlayerTextDrawSetString(playerid, TXDSTATS_UID[playerid], plUID);
+		PlayerTextDrawSetString(playerid, TXDSTATS_LVL[playerid], plLVL);
+		PlayerTextDrawSetString(playerid, TXDSTATS_NICK[playerid], GetNick(playerid)); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_PLEC[playerid], plPlec); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_Pochodzenie[playerid], plPochodzenie);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Zdrowie[playerid], plZdrowie); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_Kasa[playerid], plKasa);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Bank[playerid], plBank);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Telefon[playerid], plTelefon);
+		PlayerTextDrawSetString(playerid, TXDSTATS_KP[playerid], plKP); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_Wiek[playerid], plWiek);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Slub[playerid], plSlub);
+		PlayerTextDrawSetString(playerid, TXDSTATS_OnLine[playerid], plOnline);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Respekt[playerid], plRespekt);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Rodzina[playerid], plRodzina); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_RodzinaRanga[playerid], plRodzinkaRank);
+		PlayerTextDrawSetString(playerid, TXDSTATS_BMID[playerid], plBMID);
+		PlayerTextDrawSetString(playerid, TXDSTATS_BOID[playerid], plBOID);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Skin[playerid], plSkin); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_Dom[playerid], plDom);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Warny[playerid], plWarny);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Praca[playerid], plPraca);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Admin[playerid], plAdmin);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Drugs[playerid], plDrugs);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Mats[playerid], plMats);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Fraction[playerid], plFraction);
+		PlayerTextDrawSetString(playerid, TXDSTATS_FractionRank[playerid], plFractionRank);  
+		PlayerTextDrawSetString(playerid, TXDSTATS_Przestepstwa[playerid], plPrzestepstwa);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Smierci[playerid], plSmierci);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Zabic[playerid], plZabic);
+		PlayerTextDrawSetString(playerid, TXDSTATS_ZmienNick[playerid], plZN); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_AresztTime[playerid], plAresztCzas);
+		PlayerTextDrawSetString(playerid, TXDSTATS_WL[playerid], plWL); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_WozKlucz[playerid], plWozKlucz); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_Pkt[playerid], plPKT);
+		PlayerTextDrawSetString(playerid, TXDSTATS_WantedDeath[playerid], plWantedD); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_Ryba[playerid], plRyba); 
+		PlayerTextDrawSetString(playerid, TXDSTATS_Data[playerid], plData);
+		PlayerTextDrawSetString(playerid, TXDSTATS_Czas[playerid], plCzas);
+		PlayerTextDrawSetPreviewModel(playerid, TXDSTATS_SkinShow[playerid], PlayerInfo[playerid][pModel]); 
+
+		//show
+		PlayerTextDrawShow(playerid, TXDSTATS_UID[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_SkinShow[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_LogoMRP[playerid]);  
+		PlayerTextDrawShow(playerid, TXDSTATS_LVL[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_NICK[playerid]);  
+		PlayerTextDrawShow(playerid, TXDSTATS_PLEC[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Pochodzenie[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Zdrowie[playerid]);  
+		PlayerTextDrawShow(playerid, TXDSTATS_Kasa[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Bank[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Telefon[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_KP[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Wiek[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Slub[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_OnLine[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Respekt[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Rodzina[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_RodzinaRanga[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_BOID[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_BMID[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Skin[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Dom[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Warny[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Praca[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Admin[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Drugs[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Mats[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Fraction[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_FractionRank[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Przestepstwa[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Zabic[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Smierci[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_ZmienNick[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_AresztTime[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_WozKlucz[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Pkt[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Sila[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_WL[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_WantedDeath[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Ryba[playerid]); 
+		PlayerTextDrawShow(playerid, TXDSTATS_Data[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Czas[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_LogoMRP[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Linia_01[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Linia_02[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Linia_03[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_Linia_04[playerid]);
+		PlayerTextDrawShow(playerid, TXDSTATS_ZnakWodny[playerid]); 
+	}
+}
+HideStats2(playerid)
+{
+	PlayerTextDrawHide(playerid, TXDSTATS_UID[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_SkinShow[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_LogoMRP[playerid]);  
+	PlayerTextDrawHide(playerid, TXDSTATS_LVL[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_NICK[playerid]);  
+	PlayerTextDrawHide(playerid, TXDSTATS_PLEC[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Pochodzenie[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Zdrowie[playerid]);  
+	PlayerTextDrawHide(playerid, TXDSTATS_Kasa[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Bank[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Telefon[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_KP[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Wiek[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Slub[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_OnLine[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Respekt[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Rodzina[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_RodzinaRanga[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_BOID[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_BMID[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Skin[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Dom[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Warny[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Praca[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Admin[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Drugs[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Mats[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Fraction[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_FractionRank[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Przestepstwa[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Zabic[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Smierci[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_ZmienNick[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_AresztTime[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_WozKlucz[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Pkt[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Sila[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_WL[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_WantedDeath[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Ryba[playerid]); 
+	PlayerTextDrawHide(playerid, TXDSTATS_Data[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Czas[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_LogoMRP[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Linia_01[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Linia_02[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Linia_03[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_Linia_04[playerid]);
+	PlayerTextDrawHide(playerid, TXDSTATS_ZnakWodny[playerid]); 
+}
 ShowStats(playerid,targetid)
 {
     if(IsPlayerConnected(playerid) && IsPlayerConnected(targetid))

@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ staty ]-------------------------------------------------//
+//-------------------------------------------------[ staty2 ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,22 +28,13 @@
 	
 */
 
-YCMD:staty(playerid, params[], help)
+YCMD:staty2(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
 		if (gPlayerLogged[playerid] != 0)
 		{
-			if(GetPVarInt(playerid, "OgladaStaty") == 0)
-			{
-				ShowStats2(playerid);
-				SetPVarInt(playerid, "OgladaStaty", 1); 
-			}
-			else
-			{
-				SetPVarInt(playerid, "OgladaStaty", 0);
-				HideStats2(playerid); 
-			}
+			ShowStats(playerid,playerid);
 		}
 	}
 	return 1;

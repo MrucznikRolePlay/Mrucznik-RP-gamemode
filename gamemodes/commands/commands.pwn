@@ -679,6 +679,7 @@
 #include "cmd/bizedit.pwn"
 #include "cmd/usunbiznes.pwn"
 #include "cmd/newstype.pwn"
+#include "cmd/staty2.pwn"
 
 InitCommands()
 {
@@ -687,6 +688,7 @@ InitCommands()
 
 static Aliases()
 {
+	Command_AddAltNamed("staty2", "stats2"); 
 	//autorzy
 	Command_AddAltNamed("autorzy", "tworcy"); 
 	//tognewbie
