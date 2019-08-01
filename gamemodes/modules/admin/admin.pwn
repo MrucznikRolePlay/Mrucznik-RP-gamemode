@@ -298,7 +298,7 @@ KickPlayerTXD(playerid, adminid, reason[])
 {
     //PlayerLogged[playerid]=0;
     new str[128];
-    format(str, sizeof(str), "~r~]_Kick_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Kick~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -315,7 +315,7 @@ KickPlayerTXD(playerid, adminid, reason[])
 AJPlayerTXD(playerid, adminid, reason[], timeVal)
 {
 	new str[256];
-    format(str, sizeof(str), "~r~]_AJ %d min_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", timeVal, GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~AdminJail [%d minut]~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", timeVal, GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -331,7 +331,7 @@ AJPlayerTXD(playerid, adminid, reason[], timeVal)
 BPPlayerTXD(playerid, adminid, timeVal, reason[])
 {
 	new str[256];
-    format(str, sizeof(str), "~r~]_BP %d godzin_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s",timeVal, GetNick(playerid), GetNick(adminid),Odpolszcz(reason));
+    format(str, sizeof(str), "~r~BP [%d godzin]~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s",timeVal, GetNick(playerid), GetNick(adminid),Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -347,7 +347,7 @@ BPPlayerTXD(playerid, adminid, timeVal, reason[])
 BanPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~]_Banicja_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Banicja~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -364,7 +364,7 @@ BanPlayerTXD(playerid, adminid, reason[])
 WarnPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~]_Warn_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Warn~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -380,7 +380,7 @@ WarnPlayerTXD(playerid, adminid, reason[])
 BlockPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~]_Blokada Postaci_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Block~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", GetNick(playerid), GetNick(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -398,7 +398,7 @@ PWarnPlayerTXD(player[], adminid, result[])
 	new str[128];
 	new nickDoWarna[MAX_PLAYER_NAME]; 
 	strcat(nickDoWarna, player); 
-    format(str, sizeof(str), "~r~]_Warn Offline_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", nickDoWarna, GetNick(adminid), Odpolszcz(result));
+    format(str, sizeof(str), "~r~Warn Offline~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", nickDoWarna, GetNick(adminid), Odpolszcz(result));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -491,7 +491,7 @@ PBlockPlayerTXD(player[], adminid, reason[])
 	new str[128];
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
-    format(str, sizeof(str), "~r~]_Block Offline_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Block Offline~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -509,7 +509,7 @@ PBanPlayerTXD(player[], adminid, reason[])
 	new str[128];
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
-    format(str, sizeof(str), "~r~]_Ban Offline_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Ban Offline~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -527,7 +527,7 @@ PAJPlayerTXD(player[], adminid, timeVal, reason[])
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
 	new str[128];
-    format(str, sizeof(str), "~r~]_AJ Offline %d minut_]~n~~w~Gracz: %s~n~Admin: %s~n~Powod: %s", timeVal, nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~O-AdminJail [%d minut]~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", timeVal, nickOdbieracza, GetNick(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{

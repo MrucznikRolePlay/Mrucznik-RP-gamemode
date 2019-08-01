@@ -85,6 +85,7 @@ new Text:PatrolMarker[MAX_PATROLS];
 new Text:SkinSelectionAccept,Text:SkinSelectionDenied, Text:SkinSelectionMy;
 
 new PlayerText:Kary[MAX_PLAYERS];
+new PlayerText:SN_MESS[MAX_PLAYERS];
 
 
 //Oil 16.09
@@ -244,6 +245,22 @@ UnloadTXD()
 }
 KaryTXDLoadForPlayer(playerid)
 {
+    Kary[playerid] = CreatePlayerTextDraw(playerid, 7.000000, 281.000000, "_");
+	PlayerTextDrawFont(playerid, Kary[playerid], 1);
+	PlayerTextDrawLetterSize(playerid, Kary[playerid], 0.308333, 1.200000);
+	PlayerTextDrawTextSize(playerid, Kary[playerid], 687.000000, 144.500000);
+	PlayerTextDrawSetOutline(playerid, Kary[playerid], 1);
+	PlayerTextDrawSetShadow(playerid, Kary[playerid], 0);
+	PlayerTextDrawAlignment(playerid, Kary[playerid], 1);
+	PlayerTextDrawColor(playerid, Kary[playerid], -1);
+	PlayerTextDrawBackgroundColor(playerid, Kary[playerid], 255);
+	PlayerTextDrawBoxColor(playerid, Kary[playerid], 50);
+	PlayerTextDrawUseBox(playerid, Kary[playerid], 0);
+	PlayerTextDrawSetProportional(playerid, Kary[playerid], 1);
+	PlayerTextDrawSetSelectable(playerid, Kary[playerid], 0);
+    /*
+    ==================> STARY TXD
+
     Kary[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 257.000000, "_");
     PlayerTextDrawFont(playerid, Kary[playerid], 2);
     PlayerTextDrawLetterSize(playerid, Kary[playerid], 0.433333, 1.700000);
@@ -256,7 +273,24 @@ KaryTXDLoadForPlayer(playerid)
     PlayerTextDrawBoxColor(playerid, Kary[playerid], 50);
     PlayerTextDrawUseBox(playerid, Kary[playerid], 0);
     PlayerTextDrawSetProportional(playerid, Kary[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid, Kary[playerid], 0);
+    PlayerTextDrawSetSelectable(playerid, Kary[playerid], 0);*/
+}
+SN_Message_Load(playerid)
+{
+    SN_MESS[playerid] = CreatePlayerTextDraw(playerid, 2.000000, 433.000000, "_");
+	PlayerTextDrawFont(playerid, SN_MESS[playerid], 2);
+	PlayerTextDrawLetterSize(playerid, SN_MESS[playerid], 0.279166, 1.449998);
+	PlayerTextDrawTextSize(playerid, SN_MESS[playerid], 682.000000, 640.000000);
+	PlayerTextDrawSetOutline(playerid, SN_MESS[playerid], 0);
+	PlayerTextDrawSetShadow(playerid, SN_MESS[playerid], 2);
+	PlayerTextDrawAlignment(playerid, SN_MESS[playerid], 1);
+	PlayerTextDrawColor(playerid, SN_MESS[playerid], -1);
+	PlayerTextDrawBackgroundColor(playerid, SN_MESS[playerid], 255);
+	PlayerTextDrawBoxColor(playerid, SN_MESS[playerid], 172);
+	PlayerTextDrawUseBox(playerid, SN_MESS[playerid], 1);
+	PlayerTextDrawSetProportional(playerid, SN_MESS[playerid], 1);
+	PlayerTextDrawSetSelectable(playerid, SN_MESS[playerid], 0);
+    return 1;
 }
 LoadTextDraws(playerid)
 {
@@ -315,6 +349,7 @@ LoadTextDraws(playerid)
 	PlayerTextDrawFont(playerid, textwjedz[playerid], 1);
 	PlayerTextDrawColor(playerid, TextOferta1[playerid], 0x80FF00FF);
     KaryTXDLoadForPlayer(playerid); 
+    SN_Message_Load(playerid);
 	
     //TEXTDRAWY OD KAR
 	return 1;

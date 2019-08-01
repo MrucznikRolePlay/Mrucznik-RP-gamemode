@@ -678,6 +678,7 @@
 #include "cmd/bpracownicy.pwn"
 #include "cmd/bizedit.pwn"
 #include "cmd/usunbiznes.pwn"
+#include "cmd/newstype.pwn"
 
 InitCommands()
 {

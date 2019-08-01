@@ -7082,7 +7082,30 @@ OOCNews(color,const string[])
 		}
 	}
 }
-
+Send_News_Message(color, const string[], const txdString[])
+{
+	foreach(new i : Player)
+	{
+		if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)
+		{
+			if(newsTypePlayer[i] == 0)//Na chat
+			{
+				SendClientMessage(i, color, string); 
+			}
+			else if(newsTypePlayer[i] == 1)//Na dole
+			{
+				PlayerTextDrawSetString(i, SN_MESS[i], txdString);
+				PlayerTextDrawShow(i, SN_MESS[i]); 
+			}
+			else if(newsTypePlayer[i] == 3)//Tu i tu
+			{
+				PlayerTextDrawSetString(i, SN_MESS[i], txdString);
+				PlayerTextDrawShow(i, SN_MESS[i]); 
+				SendClientMessage(i, color, string); 
+			}
+		}
+	}
+}
 
 SendTeamMessage(team, color, string[], isDepo = 0)
 {
