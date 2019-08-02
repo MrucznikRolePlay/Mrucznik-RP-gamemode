@@ -62,16 +62,17 @@ YCMD:makeleader(playerid, params[], help)
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pLider] = level;
+					PlayerInfo[para1][pLiderValue] = 1; 
 					PlayerInfo[para1][pMember] = level;
 					MruMySQL_SetAccInt("Member", giveplayer, level);
 					MruMySQL_SetAccInt("Lider", giveplayer, level);
-					format(string, sizeof(string), "Zosta³eœ mianowany liderem frakcji przez %s", sendername);
+					format(string, sizeof(string), "Zosta³eœ mianowany liderem [GLD] frakcji przez %s", sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "Da³eœ graczowi %s kontrolê nad frakcj¹ numer %d.", giveplayer,level);
+					format(string, sizeof(string), "Da³eœ graczowi %s kontrolê [GLD] nad frakcj¹ numer %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					
 					//logi
-            		Log(adminLog, INFO, "Admin %s da³ graczowi %s lidera frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
+            		Log(adminLog, INFO, "Admin %s da³ graczowi %s lidera [GLD] frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;

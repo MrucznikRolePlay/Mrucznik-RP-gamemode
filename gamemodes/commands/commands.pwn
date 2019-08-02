@@ -680,6 +680,7 @@
 #include "cmd/usunbiznes.pwn"
 #include "cmd/newstype.pwn"
 #include "cmd/staty2.pwn"
+#include "cmd/makevlider.pwn"
 
 InitCommands()
 {

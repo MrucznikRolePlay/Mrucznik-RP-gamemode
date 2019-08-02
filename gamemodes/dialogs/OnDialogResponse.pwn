@@ -16349,8 +16349,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pLider] != 0)
 						{
-							format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
-							ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
+							if(PlayerInfo[playerid][pLiderValue] < 3)
+							{
+								format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
+								ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
+							}
+							else 
+							{
+								sendErrorMessage(playerid, "Nie mo¿esz zarz¹dzaæ kontem twojej frakcji!"); 
+								return 1;
+							}
+
 						}
 						else
 						{

@@ -53,6 +53,11 @@ YCMD:fpanel(playerid, params[], help)
         sendTipMessage(playerid, "Panel zarz¹dzania frakcj¹.");
         return 1;
     }
+    if(PlayerInfo[playerid][pLiderValue] >= 3)
+    {
+        sendTipMessage(playerid, "Nie masz odpowiednich uprawnieñ!"); 
+        return 1;
+    }
     
     
     //command body
