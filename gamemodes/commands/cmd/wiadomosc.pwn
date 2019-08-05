@@ -51,6 +51,11 @@ YCMD:wiadomosc(playerid, params[], help)
             sendTipMessage(playerid, "Ktoœ z was ma zablokowane wiadomoœci!"); 
             return 1;
         }
+        if(AntySpam[playerid] == 1)
+        {
+            sendErrorMessage(playerid, "Odczekaj 5 sekund zanim wyœlesz kolejn¹ wiadomoœæ!"); 
+            return 1;
+        }
         if(PlayerInfo[playerid][pBW] > 0 && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0 && (PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)) {
             return sendErrorMessage(playerid, "Gdy masz BW mo¿esz wysy³aæ wiadomoœci jedynie na ma³¹ odleg³oœæ");
         }
@@ -131,6 +136,9 @@ YCMD:wiadomosc(playerid, params[], help)
         PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);
         //zapisywanie do /re
         lastMsg[giveplayerid] = playerid;
+        //AntySPAM!!!!!
+        SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+		AntySpam[playerid] = 1;
         //podgl¹d
         if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
         {
