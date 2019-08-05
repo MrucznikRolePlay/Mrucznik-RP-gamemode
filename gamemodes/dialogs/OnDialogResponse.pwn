@@ -1833,6 +1833,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	        return 1;
 		}
 	}
+	else if(dialogid == DIALOG_UNFRAKCJA)
+	{
+		new id_Lidera = GetPVarInt(playerid, "ID_LIDERA"); 
+		new string[256]; 
+		if(!response)
+		{
+			format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
+			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, string);
+			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+			Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d - pozostawiaj¹c VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), PlayerInfo[id_Lidera][pMember]);
+			PlayerInfo[id_Lidera][pMember] = 0;
+			PlayerInfo[id_Lidera][pLider] = 0;
+			PlayerInfo[id_Lidera][pJob] = 0;
+			orgUnInvitePlayer(id_Lidera);
+			MedicBill[id_Lidera] = 0;
+			SetPlayerSpawn(id_Lidera);
+			format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(id_Lidera));
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			return 1;
+		}
+		RemoveLeadersFromFraction(id_Lidera, playerid); 
+	}
     else if(dialogid == D_PRZEBIERZ_FDU)
     {
         if(!response) return 1;

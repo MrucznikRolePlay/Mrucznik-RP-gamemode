@@ -4767,6 +4767,54 @@ ShowStats(playerid,targetid)
 	}
 }
 
+RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - giveplayerid to lider, playerid to osoba nadaj¹ca
+{
+	//Najpierw zabieranie dla GLD
+	new frac_Gracza = PlayerInfo[giveplayerid][pLider]; 
+	new string[256];
+	format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
+	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d - Usuwaj¹c VLD", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), PlayerInfo[giveplayerid][pMember]);
+	PlayerInfo[giveplayerid][pMember] = 0;
+	PlayerInfo[giveplayerid][pLider] = 0;
+	PlayerInfo[giveplayerid][pJob] = 0;
+	orgUnInvitePlayer(giveplayerid);
+	MedicBill[giveplayerid] = 0;
+	SetPlayerSpawn(giveplayerid);
+	format(string, sizeof(string), "  Wyrzuci³es %s z frakcji - usuwaj¹c przy tym wszystkich  VLD", GetNick(giveplayerid));
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+
+	//Usuwanie reszty
+	new lStr[1024], liderName[MAX_PLAYER_NAME], liderUID[10], liderFraction[10];
+
+    lStr = "`UID`, `Nick`, `Lider`";
+	format(lStr, 1024, "SELECT %s FROM `mru_konta` WHERE `Lider`='%d'", lStr, frac_Gracza);
+	for(new i; i<MAX_LEADERS+1; i++)
+	{
+		mysql_query(lStr);
+		mysql_store_result();
+		if (mysql_num_rows())
+		{
+			mysql_fetch_row_format(lStr, "|");
+			mysql_free_result();
+			sscanf(lStr, "p<|>ds[24]d",
+			liderUID[i],
+			liderName,
+			liderFraction[i]
+			);
+		}
+		if(liderFraction[i] == frac_Gracza)
+		{
+			new queryS[256];
+			format(queryS, sizeof(queryS), "INSERT INTO `mru_konta` (`Lider`, `Member`) VALUES ('%d', '%d') WHERE `UID`='%d'", 0, 0, liderUID[i]);
+			mysql_query(queryS);
+			format(string, sizeof(string), "%s zosta³ usuniêty z frakcji - posiada³ VLD", liderName);
+			sendTipMessage(playerid, string); 
+			strdel(liderName, 0, MAX_PLAYER_NAME); 
+		}
+	}
+}
 SetPlayerToTeamColor(playerid)
 {
 	if(IsPlayerConnected(playerid))
