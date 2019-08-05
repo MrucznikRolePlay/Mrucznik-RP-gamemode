@@ -681,6 +681,7 @@
 #include "cmd/newstype.pwn"
 #include "cmd/staty2.pwn"
 #include "cmd/makevlider.pwn"
+#include "cmd/dajscene.pwn"
 
 InitCommands()
 {

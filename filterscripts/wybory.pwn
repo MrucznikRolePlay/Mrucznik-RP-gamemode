@@ -369,11 +369,12 @@ CMD:glosuj(playerid)
 		SendClientMessage(playerid, COLOR_GRAD2, "Nie masz 3 lvl.");
 		return 1;
 	}
-	if(!IsPlayerInRangeOfPoint(playerid, 5.0, 1483.9551,-1759.6519,13.7169)) {
+	if(!IsPlayerInRangeOfPoint(playerid, 5.0, 1483.9551,-1759.6519,13.7169))
+	{
 		SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w lokalu wyborczym.");
 		return 1;
 	}
-	if(GetPlayerVirtualWorld(playerid) =! 49)
+	if(GetPlayerVirtualWorld(playerid) != 49)
 	{
 		SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w lokalu wyborczym!"); 
 		return 1;

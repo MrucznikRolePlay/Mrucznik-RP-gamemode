@@ -216,6 +216,8 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			noAccessCome[playerid] = 1; 
 			return 1;
 		}
+		SetPlayerTW(playerid, 5000, 1, 6); 
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}
 	else if(Check_ID == 8)
 	{
@@ -225,6 +227,8 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			noAccessCome[playerid] = 1; 
 			return 1;
 		}
+		SetPlayerTW(playerid, 5000, 1, 6); 
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}
 	else if(Check_ID == 9)
 	{
@@ -259,19 +263,17 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 13)
 	{
-		SetPlayerTW(playerid, 5000, 1, 6); 
-		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+		//WOLNE
 	}
 	else if(Check_ID == 14)
 	{
-		sendTipMessageEx(playerid, COLOR_GREEN, "======[Los Santos MMA]======");
+		sendTipMessageEx(playerid, COLOR_GREEN, "======[Los Santos MMA 2]======");
 		sendTipMessageEx(playerid, COLOR_P@, "Sponsorzy:");
-		sendTipMessage(playerid, "San News, United States Secret Service, Communist Part of San Andreas;");
-		sendTipMessage(playerid, "Kancelaria Gubernatora, Simon Cotta, John Mcintosh"); 
+		sendTipMessage(playerid, "San News;");
 		sendTipMessageEx(playerid, COLOR_P@, "W³odarze:");
-		sendTipMessage(playerid, "Beyonce Bennett, Mat Drep"); 
+		sendTipMessage(playerid, "Beyonce Bennett"); 
 		sendTipMessageEx(playerid, COLOR_P@, "Walka wieczoru:"); 
-		sendTipMessage(playerid, "Simon Cotta vs. John Mrucznik"); 
+		sendTipMessage(playerid, "BRAK USTALONEJ"); 
 		sendTipMessageEx(playerid, COLOR_GREEN, "===========[Fight]===========");
 		GameTextForPlayer(playerid, "~w~By~n~~r~Dreptacz", 5000, 1); 
 	}

@@ -1767,6 +1767,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         return 1;
     }
+	else if(dialogid == SCENA_DIALOG_GETMONEY)
+	{
+		if(!response)
+		{
+			return 1;
+		}
+		if(kaska[playerid] >= 2_000_000)
+		{
+			ZabierzKase(playerid, 2000000); 
+			Sejf_Add(FRAC_SN, 2000000); 
+			Sejf_Save(FRAC_SN); 
+			new string[124]; 
+			format(string, sizeof(string), "%s umieœci³ w sejfie 2 miliony za scenê!"); 
+			SendLeaderRadioMessage(FRAC_SN, COLOR_LIGHTGREEN, string); 
+			SN_ACCESS[playerid] = 1; 
+			sendTipMessageEx(playerid, COLOR_P@, "Umieœci³eœ op³atê za scenê w sejfie SN"); 
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+			return 1;
+		}
+	}
 	else if(dialogid == 7421)
 	{
 	    if(response)

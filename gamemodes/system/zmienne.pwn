@@ -32,6 +32,8 @@ new bool:bramki_sasd_state[18];
 new cenaNorm = 50000;
 new cenaVIP = 80000;
 new kasjerkaWolna = 666;
+//sn
+new SN_ACCESS[MAX_PLAYERS]; 
 //PizzaJob
 new PizzaJob[MAX_PLAYERS];
 new Actor01;
@@ -1056,6 +1058,7 @@ ClearVariableConnect(playerid)
 ClearVariableDisconnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
+	SN_ACCESS[playerid] = 0; 
 	return 1;
 }
 ZerujZmienne(playerid)
