@@ -74,6 +74,9 @@ MruMySQL_CreateAccount(playerid, pass[])
 	WP_Hash(password, sizeof(password), pass);
 	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`) VALUES ('%s', '%s')", GetNick(playerid), password);
 	mysql_query(query);
+	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`Nick`) VALUES ('%s')", GetNick(playerid));
+	mysql_query(query);
+	
 	return 1;
 }
 
@@ -160,7 +163,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`JailTime`='%d',\
 	`Materials`='%d',\
 	`Drugs`='%d',\
-	`Lider`='%d',\
 	`Member`='%d',\
 	`FMember`='%d',\
 	`Rank`='%d',\
@@ -189,7 +191,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pJailTime],
 	PlayerInfo[playerid][pMats],
 	PlayerInfo[playerid][pDrugs],
-	PlayerInfo[playerid][pLider],
 	PlayerInfo[playerid][pMember],
 	PlayerInfo[playerid][pOrg],
 	(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]),
@@ -431,6 +432,20 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_NEWBIE],
 	PlayerInfo[playerid][pUID]); 
 
+	if(!mysql_query(query)) fault=false;
+
+	format(query, sizeof(query), "UPDATE `mru_liderzy` SET \
+	`NICK`='%s', \
+	`UID`='%d', \
+	`FracID`='%d', \
+	`LiderValue`='%d' \
+	WHERE `NICK`='%s'",
+	GetNick(playerid),
+	PlayerInfo[playerid][pUID],
+	PlayerInfo[playerid][pLider],
+	PlayerInfo[playerid][pLiderValue],
+	GetNick(playerid)); 
+
     if(!mysql_query(query)) fault=false;
 	
     //Zapis MruCoinow
@@ -449,7 +464,7 @@ public MruMySQL_LoadAcocount(playerid)
 
 	new lStr[1024], id=0;
 
-    lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `JailTime`, `Materials`,`Drugs`, `Lider`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
+    lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `JailTime`, `Materials`,`Drugs`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
 
     format(lStr, 1024, "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
 	mysql_query(lStr);
@@ -459,7 +474,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
         id++;
-		sscanf(lStr, "p<|>ds[24]dddddddddddddddddddddddddddddddddddddd",
+		sscanf(lStr, "p<|>ds[24]ddddddddddddddddddddddddddddddddddddd",
 		PlayerInfo[playerid][pUID],
 		PlayerInfo[playerid][pNick],
 		PlayerInfo[playerid][pLevel], 
@@ -493,7 +508,6 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pJailTime], 
 		PlayerInfo[playerid][pMats], 
 		PlayerInfo[playerid][pDrugs], 
-		PlayerInfo[playerid][pLider], 
 		PlayerInfo[playerid][pMember], 
 		PlayerInfo[playerid][pOrg],
 		PlayerInfo[playerid][pRank], 
@@ -642,9 +656,24 @@ public MruMySQL_LoadAcocount(playerid)
 
 	loadKamiPos(playerid);
 
+	//Wczytaj liderów
+	lStr = "`NICK`, `UID`, `FracID`, `LiderValue`";
+	format(lStr, 1024, "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", lStr, GetNick(playerid));
+	mysql_query(lStr);
+	mysql_store_result(); 
+	if(mysql_num_rows())
+	{
+		mysql_fetch_row_format(lStr, "|"); 
+		mysql_free_result();
+		sscanf(lStr, "p<|>s[24]ddd",
+		GetNick(playerid),
+		PlayerInfo[playerid][pUID],
+		PlayerInfo[playerid][pLider],
+		PlayerInfo[playerid][pLiderValue]); 
+	} 
 	//Wczytaj personalizacje
 	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `newbie`";
-	format(lStr, 1024, "SELECT %s FROM `mru_personalization' WHERE `UID'=%d", lStr, PlayerInfo[playerid][pUID]);
+	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`='%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())

@@ -60,7 +60,7 @@ YCMD:makevleader(playerid, params[], help)
 					new Frac = GetPlayerFraction(playerid); 
 					PlayerInfo[giveplayerid][pLider] = Frac; 
 					PlayerInfo[giveplayerid][pLiderValue] = value; 
-					PlayerInfo[giveplayerid][pMember] = value; 
+					PlayerInfo[giveplayerid][pMember] = Frac; 
 					format(string, sizeof(string), "%s mianowa³ Ciê liderem [%d] organizacji %s [%d]", GetNick(playerid), value, FractionNames[Frac], Frac); 
 					sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 					format(string, sizeof(string), "Mianowa³eœ/aœ %s liderem na stopien %d dla swojej frakcji!", GetNick(giveplayerid), value); 
