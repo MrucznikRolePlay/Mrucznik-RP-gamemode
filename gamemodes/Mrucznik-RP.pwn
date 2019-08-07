@@ -1441,13 +1441,17 @@ public OnPlayerDisconnect(playerid, reason)
 
     if(GetPVarInt(playerid, "patrol") != 0) {
         new patrol = GetPVarInt(playerid, "patrol-id");
-        RunCommand(PatrolInfo[patrol][patroluje][0], "/patrol", "stop");
-        RunCommand(PatrolInfo[patrol][patroluje][1], "/patrol", "stop");
-        sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
-        sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+		if(PatrolInfo[patrol][patroluje][0] != INVALID_PLAYER_ID)
+        {
+        	sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+			RunCommand(PatrolInfo[patrol][patroluje][0], "/patrol", "stop");
+		}
+		if(PatrolInfo[patrol][patroluje][1] != INVALID_PLAYER_ID)
+		{
+        	sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+        	RunCommand(PatrolInfo[patrol][patroluje][1], "/patrol", "stop");
+		}
     }
-    //SetPVarInt(playerid, "patrol-id", pat);
-    //SetPVarInt(playerid, "patrol", 1);
     if(GetPVarInt(playerid, "rentTimer") != 0)
     {
         UnhireRentCar(playerid, GetPVarInt(playerid, "rentCar"));
@@ -6537,6 +6541,11 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
+	if(text[0] == '€' || text[1] == '€')//blokada
+	{
+		sendErrorMessage(playerid, "Znak € zosta³ zablokowany w pozycji 0,1"); 
+		return 0; 
+	}
 	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];

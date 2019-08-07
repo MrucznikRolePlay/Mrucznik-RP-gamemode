@@ -644,7 +644,7 @@ public MruMySQL_LoadAcocount(playerid)
 
 	//Wczytaj personalizacje
 	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `newbie`";
-	format(lStr, 1024, "SELECT %s FROM `mru_personalization' WHERE `UID'=%d", lStr, PlayerInfo[playerid][pUID]);
+	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())
