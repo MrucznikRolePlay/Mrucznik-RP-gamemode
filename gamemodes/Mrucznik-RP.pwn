@@ -6537,6 +6537,11 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
+	if(text[0] == '€' || text[1] == '€')
+	{
+		sendErrorMessage(playerid, "Znak € zosta³ zablokowany w pozycji 0,1"); 
+		return 0; 
+	}
 	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
