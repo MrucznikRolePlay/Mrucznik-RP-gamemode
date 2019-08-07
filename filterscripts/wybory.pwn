@@ -82,7 +82,7 @@ public OnFilterScriptInit()
 		}
 	}
 	
-	pickup = CreateDynamicPickup(1239, 2, 1250.2009,-1445.6368,13.5715 , -1);
+	pickup = CreateDynamicPickup(1239, 2, 1483.9551,-1759.6519,13.7169 , 49);
 
 	print("\n--------------------------------------");
 	print(" Fliterscript 'wybory' zaladowany");
@@ -369,9 +369,14 @@ CMD:glosuj(playerid)
 		SendClientMessage(playerid, COLOR_GRAD2, "Nie masz 3 lvl.");
 		return 1;
 	}
-	if(!IsPlayerInRangeOfPoint(playerid, 5.0, 1250.2009,-1445.6368,13.5715)) {
+	if(!IsPlayerInRangeOfPoint(playerid, 5.0,1483.9551,-1759.6519,13.7169)) {
 		SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w lokalu wyborczym.");
 		return 1;
+	}
+	if(GetPlayerVirtualWorld(playerid) !=49)
+	{
+		SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w lokalu wyborczym.");
+		return 1;	
 	}
 	new unused, dzien, godzina;
 	getdate(unused, unused, dzien);

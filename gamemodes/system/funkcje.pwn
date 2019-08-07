@@ -6177,7 +6177,7 @@ ZlomowanieDomu(playerid, dom)
 			new GeT2[512];
 			format(GeT2, sizeof(GeT2), "Sprzeda³eœ swój dom za %d$. Osoby wynajmuj¹ce zosta³y wyeksmitowane. Przedmioty w sejfie oraz dodatki do domu przepad³y.", (Dom[dom][hCena]/2));
 			SendClientMessage(playerid, COLOR_NEWS, GeT2);
-			Log(payLog, INFO, "%s zezomowa³ dom %s i dosta³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), (Dom[dom][hCena]/2));
+			Log(payLog, INFO, "%s zez³omowa³ dom %s i dosta³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), (Dom[dom][hCena]/2));
 			format(GeT, sizeof(GeT), "Brak");
 			Dom[dom][hWlasciciel] = GeT;
 		}
@@ -11905,12 +11905,9 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][pLevel] > 1)
 	{
 		new string[128];
-		//MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
-		//format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack. | Mo¿liwy fakekill: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
-		//SendCommandLogMessage(string);
 		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
 		SendCommandLogMessage(string);
-		//KickEx(playerid);
+		Log(warningLog, INFO, string);
 		return 1;
 	}
 	return 0;
