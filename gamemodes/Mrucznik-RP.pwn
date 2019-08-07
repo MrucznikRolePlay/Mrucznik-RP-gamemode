@@ -65,7 +65,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define YSI_NO_MASTER
 #include <YSI_Data\y_iterate>
 #define MAX_COMMANDS 1200
-#define Y_COMMANDS_USE_CHARS
+// #define Y_COMMANDS_USE_CHARS // ERUO SIGN ERROR
 #include <YSI\y_commands>
 #include <YSI\y_groups>
 #include <YSI\y_hooks>
