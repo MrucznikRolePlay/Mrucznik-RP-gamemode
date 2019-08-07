@@ -73,6 +73,7 @@ YCMD:dl(playerid, params[], help)
 									        ZabierzKase(playerid, 14000);
                                             Sejf_Add(FRAC_GOV, 14000);
 									        PlayerInfo[giveplayerid][pCarLic] = 1;
+											Log(payLog, INFO, "Urzêdnik %s da³ %s prawo jazdy (14000$).", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
 									        return 1;
 									    }
 									    else
@@ -125,6 +126,7 @@ YCMD:dl(playerid, params[], help)
 								        ZabierzKase(playerid, 4000000);
                                         Sejf_Add(FRAC_GOV, 4000000);
 								        PlayerInfo[giveplayerid][pFlyLic] = 1;
+										Log(payLog, INFO, "Urzêdnik %s da³ %s licencje na latanie (4000000$).", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
 								        return 1;
 	                                }
 								    else
@@ -172,6 +174,7 @@ YCMD:dl(playerid, params[], help)
 								        ZabierzKase(playerid, 280000);
                                         Sejf_Add(FRAC_GOV, 280000);
 								        PlayerInfo[giveplayerid][pBoatLic] = 1;
+										Log(payLog, INFO, "Urzêdnik %s da³ %s licencje na p³ywanie (280000$).", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
 								        return 1;
 							        }
 								    else
@@ -217,6 +220,7 @@ YCMD:dl(playerid, params[], help)
 							        ZabierzKase(playerid, 5000);
                                     Sejf_Add(FRAC_GOV, 5000);
 							        PlayerInfo[giveplayerid][pFishLic] = 1;
+									Log(payLog, INFO, "Urzêdnik %s da³ %s kartê wêdkarsk¹ (5000$).", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
 							        return 1;
 						        }
 							    else
@@ -259,6 +263,7 @@ YCMD:dl(playerid, params[], help)
 								        ZabierzKase(playerid, 450000);
                                         Sejf_Add(FRAC_GOV, 450000);
 								        PlayerInfo[giveplayerid][pGunLic] = 1;
+										Log(payLog, INFO, "Urzêdnik %s da³ %s licencjê na broñ (450000$).", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
 								        return 1;
 							        }
 								    else
