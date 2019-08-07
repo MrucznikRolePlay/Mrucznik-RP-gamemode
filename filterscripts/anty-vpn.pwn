@@ -37,6 +37,7 @@
 
 //-----------------<[ Zmienne: ]>-------------------
 new race_check[MAX_PLAYERS];
+new vpnCheckServiceOnLine = false;
 
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------
@@ -66,11 +67,14 @@ public OnFilterScriptExit()
 
 public OnPlayerConnect(playerid) 
 {
-	new ip[16], string[64];
-	race_check[playerid] = playerid;
-	GetPlayerIp(playerid, ip, sizeof(ip));
-	format(string, sizeof string, VPN_SERVICE_ADDRESS VPN_SERVICE_PORT "/check?ip=", ip);
-	HTTP(playerid, HTTP_GET, string, "", "Mru_AntyVPNResponse");
+	if(vpnCheckServiceOnLine)
+	{
+		new ip[16], string[64];
+		race_check[playerid] = playerid;
+		GetPlayerIp(playerid, ip, sizeof(ip));
+		format(string, sizeof string, VPN_SERVICE_ADDRESS VPN_SERVICE_PORT "/check?ip=", ip);
+		HTTP(playerid, HTTP_GET, string, "", "Mru_AntyVPNResponse");
+	}
 }
 
 public OnPlayerDisconnect(playerid, reason)
@@ -96,7 +100,7 @@ public Mru_AntyVPNResponse(playerid, response_code, data[])
 		
 		if(strcmp(data, "false", false) != 0)
 		{
-			printf("Error! Problem in anty-vpn request for playerd %s[%d], response: %s (%d)", name, playerid, data, response_code);
+			printf("Error! Problem in anty-vpn request for playerid %s[%d], response: %s (%d)", name, playerid, data, response_code);
 		}
 	}
 	return 1;
@@ -105,6 +109,9 @@ public Mru_AntyVPNResponse(playerid, response_code, data[])
 public Mru_AntyVPNTest(id, response_code, data[])
 {
 	printf("ANTY-VPN: test request result: %s (%d)", data, response_code);
+	if(response_code == 200 && strcmp(data, "true", false) == 0) {
+		vpnCheckServiceOnLine = true;
+	}
 	return 1;
 }
 
