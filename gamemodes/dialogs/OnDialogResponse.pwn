@@ -9975,7 +9975,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %d kwotê %d$. W sejfie przed: %d$, po: %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s kwotê %d$. W sejfie przed: %d$, po: %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
 					}
 					else
 					{

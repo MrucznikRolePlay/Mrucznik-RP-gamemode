@@ -11905,12 +11905,9 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][pLevel] > 1)
 	{
 		new string[128];
-		//MruDialog(playerid, "ACv2: Kod #2002", "Zosta³eœ wyrzucony za weapon hack.");
-		//format(string, sizeof string, "ACv2 [#2002]: %s zosta³ wyrzucony za weapon hack. | Mo¿liwy fakekill: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
-		//SendCommandLogMessage(string);
 		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
 		SendCommandLogMessage(string);
-		//KickEx(playerid);
+		Log(warningLog, INFO, string);
 		return 1;
 	}
 	return 0;

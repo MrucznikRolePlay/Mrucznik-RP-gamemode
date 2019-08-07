@@ -1492,7 +1492,7 @@ YCMD:akceptuj(playerid, params[], help)
                         ZabierzKase(playerid, DomCena[playerid]);
                         DajKase(DomOffer[playerid], DomCena[playerid]);
                         ZapiszDom(PlayerInfo[playerid][pDom]);
-                        Log(payLog, INFO, "%s kupi³ od %s dom %d za %d$. ", \
+                        Log(payLog, INFO, "%s kupi³ od %s dom %s za %d$. ", \
                             GetPlayerLogName(playerid), \
                             GetPlayerLogName(DomOffer[playerid]), \
                             GetHouseLogName(PlayerInfo[playerid][pDom]), \
