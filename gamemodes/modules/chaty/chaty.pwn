@@ -175,7 +175,7 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 		sendErrorMessage(playerid, "B³¹d! Zbyt krótka wartoœæ 'jakMowi'"); 
 		return 1;
 	}
-	if(strfind(text, "€"))
+	if(strfind(text, "€") != -1)
 	{
 		sendErrorMessage(playerid, "Znak € jest zablokowany!"); 
 		return 1;
