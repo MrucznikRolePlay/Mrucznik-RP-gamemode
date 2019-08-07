@@ -34,7 +34,8 @@ YCMD:quitpraca(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
    	{
-	    if(PlayerInfo[playerid][pJob] > 0)
+		new job = PlayerInfo[playerid][pJob];
+	    if(job > 0)
 	    {
 	        if(IsPlayerPremiumOld(playerid))
 	        {
@@ -51,6 +52,7 @@ YCMD:quitpraca(playerid, params[], help)
 				    new chours = 2 - PlayerInfo[playerid][pContractTime];
 				    format(string, sizeof(string), "* Masz jeszcze %d godzin do koñca kontraktu, dopiero wtedy bedziesz móg³ siê zwolniæ.", chours / 2);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					return 1;
 				}
 	        }
 	        else
@@ -67,8 +69,11 @@ YCMD:quitpraca(playerid, params[], help)
 				    new chours = 10 - PlayerInfo[playerid][pContractTime];
 				    format(string, sizeof(string), "* Masz jeszcze %d godzin do koñca kontraktu, dopiero wtedy bedziesz móg³ siê zwolniæ.", chours / 2);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					return 1;
 				}
 			}
+			
+			Log(serverLog, INFO, "Gracz %s opuœci³ pracê %d.", GetPlayerLogName(playerid), job);
 		}
 		else
 		{

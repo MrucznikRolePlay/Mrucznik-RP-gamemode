@@ -55,7 +55,7 @@ YCMD:zmienhaslo(playerid, params[], help)
 		sendErrorMessage(playerid, "Nowe has³o:");
 		SendClientMessage(playerid, COLOR_PANICRED, tmppass);
 
-		
+		Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
 		WP_Hash(password, sizeof(password), tmppass);
 		MruMySQL_ChangePassword(GetNick(playerid), password);
 	}

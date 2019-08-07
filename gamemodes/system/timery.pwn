@@ -11,11 +11,14 @@ public CheckCode2003(killerid, playerid)
 		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNick(killerid, true));
     	SendCommandLogMessage(string);
     	KickEx(killerid);
+		Log(warningLog, INFO, string);
+		Log(punishmentLog, INFO, string);
 	}
 	else
 	{
 	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNick(killerid, true));
     	SendCommandLogMessage(string);
+		Log(warningLog, INFO, string);
 	}
 }
 forward AntyCheatON(playerid);
