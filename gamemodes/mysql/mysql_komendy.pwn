@@ -53,7 +53,6 @@ MruMySQL_KodStanowca(code)
     format(lStr, sizeof(lStr), "UPDATE `mru_config` SET `stanowe_key`='%d'", code);
     mysql_query(lStr);
 }
-
 MruMySQL_Unwarn(nick[])
 {
     new str[128];

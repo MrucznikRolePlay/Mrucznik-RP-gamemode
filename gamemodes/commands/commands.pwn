@@ -678,10 +678,10 @@
 #include "cmd/bpracownicy.pwn"
 #include "cmd/bizedit.pwn"
 #include "cmd/usunbiznes.pwn"
-#include "cmd/newstype.pwn"
 #include "cmd/staty2.pwn"
 #include "cmd/makevlider.pwn"
 #include "cmd/dajscene.pwn"
+#include "cmd/news2.pwn"
 
 InitCommands()
 {

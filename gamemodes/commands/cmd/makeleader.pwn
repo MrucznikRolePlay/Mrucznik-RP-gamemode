@@ -66,7 +66,9 @@ YCMD:makeleader(playerid, params[], help)
 					PlayerInfo[para1][pMember] = level;
 					MruMySQL_SetAccInt("Member", giveplayer, level);
 					//MruMySQL_SetAccInt("Lider", giveplayer, level);
-					Create_MySQL_Leader(playerid, level, 1);//Tworzenie konta GLD
+					Create_MySQL_Leader(para1, level, 1);//Tworzenie konta GLD
+					Save_MySQL_Leader(para1);
+					All_Leaders++;  
 					format(string, sizeof(string), "Zosta³eœ mianowany liderem [GLD] frakcji przez %s", sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ graczowi %s kontrolê [GLD] nad frakcj¹ numer %d.", giveplayer,level);

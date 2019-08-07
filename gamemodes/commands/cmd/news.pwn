@@ -106,7 +106,7 @@ YCMD:news(playerid, params[], help)
 					{
 						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
 					}
-					Send_News_Message(COLOR_NEWS, string, Odpolszcz(string2));
+					OOCNews(COLOR_NEWS,string);
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
                     //OOCNews(0xFF8C55FF, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
@@ -159,7 +159,7 @@ YCMD:news(playerid, params[], help)
 					{
 						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
 					}
-                    Send_News_Message(COLOR_NEWS, string, Odpolszcz(string2));
+					OOCNews(COLOR_NEWS,string);
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
@@ -212,8 +212,7 @@ YCMD:news(playerid, params[], help)
 					{
 						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
 					}
-					//OOCNews(COLOR_NEWS,string);
-                    Send_News_Message(COLOR_NEWS, string, Odpolszcz(string2));
+					OOCNews(COLOR_NEWS,string);
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)

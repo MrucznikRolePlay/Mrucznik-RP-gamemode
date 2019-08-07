@@ -133,7 +133,8 @@ CREATE TABLE IF NOT EXISTS `mru_config` (
   `login_audio` varchar(256) COLLATE utf8_polish_ci NOT NULL,
   `stanowe_key` int(11) NOT NULL,
   `trucker_magazyn` int(11) NOT NULL,
-  `wosp` int(11) NOT NULL
+  `wosp` int(11) NOT NULL,
+  `FracLiders` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
@@ -230,7 +231,6 @@ CREATE TABLE IF NOT EXISTS `mru_konta` (
   `JailTime` smallint(5) unsigned NOT NULL DEFAULT '0',
   `Materials` int(10) unsigned NOT NULL DEFAULT '0',
   `Drugs` int(10) unsigned NOT NULL DEFAULT '0',
-  `Lider` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `Member` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `FMember` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `Rank` smallint(5) unsigned NOT NULL DEFAULT '0',

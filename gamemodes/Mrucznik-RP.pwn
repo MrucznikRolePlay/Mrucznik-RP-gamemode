@@ -227,6 +227,7 @@ public OnGameModeInit()
 
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
+	MruMySQL_IloscLiderowLoad();
 
 	//-------<[ 0.3DL ]>-------
 	Load_DL_Skins(); 
@@ -465,6 +466,7 @@ public OnGameModeExit()
     UnloadTXD();
     Patrol_Unload();
     TJD_Exit();
+	MruMySQL_IloscLiderowUPDATE();
     for(new i=Zone_Points[0];i<=Zone_Points[1];i++)
     {
         GangZoneDestroy(i);
@@ -1194,6 +1196,10 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "Mats-mats", 0);
         sendErrorMessage(giveplayerid, "Sprzeda¿ zosta³a anulowana!");
     }
+	if(PlayerInfo[playerid][pLider] > 0)
+	{
+		Save_MySQL_Leader(playerid); 
+	}
 	if(GetPVarInt(playerid, "ZjadlDragi") == 1)
 	{
 		new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
@@ -5851,7 +5857,8 @@ OnPlayerLogin(playerid, password[])
 				PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
 			}
 		}
-
+		//Lider
+		Load_MySQL_Leader(playerid); 
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);

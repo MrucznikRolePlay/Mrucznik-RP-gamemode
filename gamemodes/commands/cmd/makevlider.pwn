@@ -61,6 +61,9 @@ YCMD:makevleader(playerid, params[], help)
 					PlayerInfo[giveplayerid][pLider] = Frac; 
 					PlayerInfo[giveplayerid][pLiderValue] = value; 
 					PlayerInfo[giveplayerid][pMember] = Frac; 
+					Create_MySQL_Leader(giveplayerid, Frac, value);//Tworzenie konta LD
+					Save_MySQL_Leader(giveplayerid);
+					All_Leaders++;   
 					format(string, sizeof(string), "%s mianowa³ Ciê liderem [%d] organizacji %s [%d]", GetNick(playerid), value, FractionNames[Frac], Frac); 
 					sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 					format(string, sizeof(string), "Mianowa³eœ/aœ %s liderem na stopien %d dla swojej frakcji!", GetNick(giveplayerid), value); 

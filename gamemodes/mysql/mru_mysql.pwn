@@ -78,6 +78,55 @@ Remove_MySQL_Leader(playerid)
 	mysql_query(query);
 	return 1;
 }
+Save_MySQL_Leader(playerid)
+{
+	new query[256];
+	format(query, sizeof(query), "UPDATE `mru_liderzy` SET \
+	`NICK`='%s', \
+	`UID`='%d', \
+	`FracID`='%d', \
+	`LiderValue`='%d' \
+	WHERE `NICK`='%s'",
+	GetNick(playerid),
+	PlayerInfo[playerid][pUID],
+	PlayerInfo[playerid][pLider],
+	PlayerInfo[playerid][pLiderValue],
+	GetNick(playerid)); 
+	mysql_query(query);
+	return 1;
+}
+Load_MySQL_Leader(playerid)
+{
+	new query[256]="`FracID`, `LiderValue`";
+	format(query, sizeof(query), "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", query, GetNick(playerid));
+	mysql_query(query);
+	mysql_store_result();
+    if (mysql_num_rows())
+	{
+        mysql_fetch_row_format(query, "|");
+        mysql_free_result();
+		sscanf(query, "p<|>dd", 
+		PlayerInfo[playerid][pLider],
+		PlayerInfo[playerid][pLiderValue]);
+	}
+	return 1;
+}
+MruMySQL_IloscLiderowUPDATE()
+{
+    new lStr[64];
+    format(lStr, sizeof(lStr), "UPDATE `mru_config` SET `FracLiders`='%d'", All_Leaders);
+    mysql_query(lStr); 
+}
+MruMySQL_IloscLiderowLoad()
+{
+    new lStr[124];
+    format(lStr, sizeof(lStr), "SELECT `FracLiders` FROM `mru_config`");
+    mysql_query(lStr);
+    mysql_store_result(); 
+    mysql_fetch_row_format(lStr, "|");
+    mysql_free_result();
+	sscanf(lStr, "p<|>d", All_Leaders);  
+}
 MruMySQL_CreateAccount(playerid, pass[])
 {
 	if(!MYSQL_ON) return 0;
@@ -443,20 +492,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pUID]); 
 
 	if(!mysql_query(query)) fault=false;
-
-	format(query, sizeof(query), "UPDATE `mru_liderzy` SET \
-	`NICK`='%s', \
-	`UID`='%d', \
-	`FracID`='%d', \
-	`LiderValue`='%d' \
-	WHERE `NICK`='%s'",
-	GetNick(playerid),
-	PlayerInfo[playerid][pUID],
-	PlayerInfo[playerid][pLider],
-	PlayerInfo[playerid][pLiderValue],
-	GetNick(playerid)); 
-
-    if(!mysql_query(query)) fault=false;
 	
     //Zapis MruCoinow
     premium_saveMc(playerid);
