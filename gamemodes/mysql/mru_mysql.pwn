@@ -409,13 +409,15 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`KontoBankowe` = '%d', \
 	`Ogloszenia` = '%d', \
 	`LicznikPojazdu` = '%d', \
-	`Ogloszk` = '%d', \
-	`CBRadieniaFrakcji` = '%d', \
-	`OldNico` = '%d', \
+	`OgloszeniaFrakcji` = '%d', \
+	`OgloszeniaRodzin` = '%d', \
+	`OldNick` = '%d', \
+	`CBRadio` = '%d', \
 	`Report` = '%d', \
 	`DeathWarning` = '%d', \
 	`KaryTXD` = '%d', \
-	`Newbie` = '%d'	\
+	`NewNick` = '%d', \
+	`newbie` = '%d'	\
 	WHERE `UID`= '%d'",
 	PlayerPersonalization[playerid][PERS_KB],
 	PlayerPersonalization[playerid][PERS_AD],
@@ -643,7 +645,7 @@ public MruMySQL_LoadAcocount(playerid)
 	loadKamiPos(playerid);
 
 	//Wczytaj personalizacje
-	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `newbie`";
+	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`";
 	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
