@@ -1446,7 +1446,7 @@ public OnPlayerDisconnect(playerid, reason)
         	sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
 			RunCommand(PatrolInfo[patrol][patroluje][0], "/patrol", "stop");
 		}
-		if(PatrolInfo[patrol][patroluje][1] !+ INVALID_PLAYER_ID)
+		if(PatrolInfo[patrol][patroluje][1] != INVALID_PLAYER_ID)
 		{
         	sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
         	RunCommand(PatrolInfo[patrol][patroluje][1], "/patrol", "stop");
