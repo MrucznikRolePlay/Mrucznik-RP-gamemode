@@ -64,7 +64,20 @@ MruMySQL_Connect()
 	mysql_query("SET NAMES 'cp1250'");
 	return 1;
 }
-
+Create_MySQL_Leader(playerid, frac, level)
+{
+	new query[256];
+	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID` `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNick(playerid), PlayerInfo[playerid][pUID], frac, level);
+	mysql_query(query);
+	return 1;
+}
+Remove_MySQL_Leader(playerid)
+{
+	new query[256];
+	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `NICK`='%s'", GetNick(playerid));
+	mysql_query(query);
+	return 1;
+}
 MruMySQL_CreateAccount(playerid, pass[])
 {
 	if(!MYSQL_ON) return 0;
@@ -74,9 +87,6 @@ MruMySQL_CreateAccount(playerid, pass[])
 	WP_Hash(password, sizeof(password), pass);
 	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`) VALUES ('%s', '%s')", GetNick(playerid), password);
 	mysql_query(query);
-	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`Nick`) VALUES ('%s')", GetNick(playerid));
-	mysql_query(query);
-	
 	return 1;
 }
 
