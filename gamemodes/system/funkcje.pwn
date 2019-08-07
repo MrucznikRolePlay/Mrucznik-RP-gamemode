@@ -6177,7 +6177,7 @@ ZlomowanieDomu(playerid, dom)
 			new GeT2[512];
 			format(GeT2, sizeof(GeT2), "Sprzeda³eœ swój dom za %d$. Osoby wynajmuj¹ce zosta³y wyeksmitowane. Przedmioty w sejfie oraz dodatki do domu przepad³y.", (Dom[dom][hCena]/2));
 			SendClientMessage(playerid, COLOR_NEWS, GeT2);
-			Log(payLog, INFO, "%s zezomowa³ dom %s i dosta³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), (Dom[dom][hCena]/2));
+			Log(payLog, INFO, "%s zez³omowa³ dom %s i dosta³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), (Dom[dom][hCena]/2));
 			format(GeT, sizeof(GeT), "Brak");
 			Dom[dom][hWlasciciel] = GeT;
 		}
