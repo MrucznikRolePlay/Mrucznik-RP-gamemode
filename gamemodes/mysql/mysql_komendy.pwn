@@ -81,7 +81,7 @@ MruMySQL_SetZoneControl(frac, id)
 
 MruMySQL_ChangePassword(nick[], password[])
 {
-    new string[128];
+    new string[256];
     new escaped_nick[MAX_PLAYER_NAME];
     mysql_real_escape_string(nick, escaped_nick);
     format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", password, escaped_nick);
