@@ -67,7 +67,7 @@ MruMySQL_Connect()
 Create_MySQL_Leader(playerid, frac, level)
 {
 	new query[256];
-	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID` `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNick(playerid), PlayerInfo[playerid][pUID], frac, level);
+	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID`, `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNick(playerid), PlayerInfo[playerid][pUID], frac, level);
 	mysql_query(query);
 	return 1;
 }
