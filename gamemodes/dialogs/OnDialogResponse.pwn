@@ -2430,6 +2430,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                      	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Proszê czekaæ, za chwilê otworz¹ siê drzwi(10sek) <<<<");
                      	PlayerInfo[playerid][pLocal] = 108;
 			        }
+					case 2:
+					{
+						SetPlayerPosEx(playerid,1481.5200,-1821.0967,58.1563);
+						SetPlayerVirtualWorld(playerid,51);
+				        SetPlayerInterior(playerid,0);
+	                    TogglePlayerControllable(playerid,0);
+                        Wchodzenie(playerid);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 10 - Kancelaria Burmistrza <<<<");
+						PlayerInfo[playerid][pLocal] = 108;
+						GameTextForPlayer(playerid, "~r~by skTom&skLolsy", 5000, 1);	
+					}
 				}
 			}
 		}

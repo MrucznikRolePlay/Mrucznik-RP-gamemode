@@ -61,9 +61,10 @@ YCMD:wejdz(playerid, params[], help)
             ShowPlayerDialogEx(playerid, 121, DIALOG_STYLE_LIST, "Wybierz pomieszczenie", "Salka Konferencyjna\nBiura\nPiwnice", "Wybierz", "WyjdŸ");
         }
         else if(IsPlayerInRangeOfPoint(playerid,3,1450.6615,-1819.2279,77.9613) 
-			||  IsPlayerInRangeOfPoint(playerid,5,1412.3348388672, -1790.5777587891, 15.370599746704) && IsAUrzednik(playerid))
+			||  IsPlayerInRangeOfPoint(playerid,5,1412.3348388672, -1790.5777587891, 15.370599746704) && IsAUrzednik(playerid)
+            ||  IsPlayerInRangeOfPoint(playerid,3,1481.5200,-1821.0967,58.1563))
         {
-            ShowPlayerDialogEx(playerid,122,DIALOG_STYLE_LIST,"Winda: Wybierz Piêtro","[Poziom 0] Zaplecze\n[Poziom 9] G³ówna sala urzêdu","Wybierz","WyjdŸ");
+            ShowPlayerDialogEx(playerid,122,DIALOG_STYLE_LIST,"Winda: Wybierz Piêtro","[Poziom 0] Zaplecze\n[Poziom 9] G³ówna sala urzêdu\n[Poziom 10] Kancelaria burmistrza","Wybierz","WyjdŸ");
         }
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 1745.8119, -1129.8972, 24.0781) 
 		|| IsPlayerInRangeOfPoint(playerid, 3.0, 1746.0676, -1127.9219, 46.5746) 
