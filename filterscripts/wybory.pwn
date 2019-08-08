@@ -37,13 +37,16 @@
 #include <sscanf2>
 #include <zcmd>
 #include <foreach>
-#include <dini>
+#include <dini2>
 #include <streamer>
 
 #define COLOR_GRAD2 		0xBFC0C2FF
 #define MAX_CANDIDATES 		20
+#define LOKAL_WYBORCZY_POS 1483.9551,-1759.6519,13.7169
+#define LOKAL_WYBORCZY_VW 49
 
-#define WYBORY_WYNIKI_PLIK "wyniki.txt"
+#define WYBORY_WYNIKI_PLIK "wybory_wyniki.ini"
+#define WYBORY_GLOSY_PLIK "wybory_glosy.ini"
 
 //-----------------<[ Zmienne: ]>-------------------
 new kandydaci[MAX_CANDIDATES][MAX_PLAYER_NAME];
@@ -57,6 +60,7 @@ new PlayerText:nickiTxd[MAX_PLAYERS][MAX_CANDIDATES];
 new PlayerText:akceptujTxd[MAX_PLAYERS];
 
 new wyborKandydata[MAX_PLAYERS];
+new votingInProgress[MAX_PLAYERS];
 
 new zaglosowaliNicki[1000][MAX_PLAYER_NAME];
 new zaglosowali;
@@ -67,22 +71,15 @@ new pickup;
 public OnFilterScriptInit()
 {
 	LoadConfig();
+	LoadVotes();
+	LoadPlayerVotes();
 	
 	foreach(Player, i)
 	{
 		CreateTextdraws(i);
 	}
 	
-	if(!dini_Exists(WYBORY_WYNIKI_PLIK))
-	{
-		dini_Create(WYBORY_WYNIKI_PLIK);
-		for(new i=0; i<iloscKandydatow; i++)
-		{
-			wyniki[i] = dini_Int(WYBORY_WYNIKI_PLIK, kandydaci[i]);
-		}
-	}
-	
-	pickup = CreateDynamicPickup(1239, 2, 1483.9551,-1759.6519,13.7169 , 49);
+	pickup = CreateDynamicPickup(1239, 2, LOKAL_WYBORCZY_POS, 49);
 
 	print("\n--------------------------------------");
 	print(" Fliterscript 'wybory' zaladowany");
@@ -103,6 +100,8 @@ public OnFilterScriptExit()
 	{
 		printf("Wynik kandydata %s: %d", kandydaci[i], wyniki[i]);
 	}
+
+	SavePlayerVotes();
 	
 	print("\n--------------------------------------");
 	print(" Fliterscript 'wybory' wylaczony");
@@ -116,14 +115,36 @@ public OnPlayerConnect(playerid)
 	return 1;
 }
 
+public OnPlayerPickUpPickup(playerid, pickupid)
+{
+	if(CanPlayerVote(playerid))
+	{
+		ShowElectionTextdraws(playerid);
+	}
+    return 1;
+}
+
+public OnPlayerClickTextDraw(playerid, Text:clickedid)
+{
+    if(clickedid == Text:INVALID_TEXT_DRAW && votingInProgress[playerid])
+    {
+		HideElectionTextdraws(playerid);
+		return 1;
+    }
+    return 0;
+}
+
 public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 {
 	if(playertextid == akceptujTxd[playerid] && wyborKandydata[playerid] != -1)
 	{
+		if(CzyZaglosowal(playerid)) {
+			return 1;
+		}
 		new string[128];
 		format(string, sizeof(string), "Odda³eœ g³os na kandydata nr %d - %s\nDziêkujemy za udzia³ w wyborach!", wyborKandydata[playerid]+1, kandydaci[wyborKandydata[playerid]]);
 		SendClientMessage(playerid, 0xFFFFFFFF, string);
-		wyniki[wyborKandydata[playerid]]++;
+		wyniki[wyborKandydata[playerid]] += 1;
 		dini_IntSet(WYBORY_WYNIKI_PLIK, kandydaci[wyborKandydata[playerid]], wyniki[wyborKandydata[playerid]]);
 		
 		new nick[MAX_PLAYER_NAME];
@@ -134,6 +155,8 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 		HideElectionTextdraws(playerid);
 		ShowPlayerDialog(playerid, -1, DIALOG_STYLE_MSGBOX, "G³osowanie", string, "OK", "");
 		CancelSelectTextDraw(playerid);
+		printf("%s oddal glos na %s", nick, kandydaci[wyborKandydata[playerid]]);
+		return 1;
 	}
 	else
 	{
@@ -160,9 +183,11 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 				PlayerTextDrawColor(playerid, numeryTxd[playerid][i], 0x00FF00FF);
 				PlayerTextDrawShow(playerid, nickiTxd[playerid][i]);
 				PlayerTextDrawShow(playerid, numeryTxd[playerid][i]);
+				return 1;
 			}
 		}
 	}
+	return 0;
 }
 
 //-----------------<[ Funkcje: ]>-------------------
@@ -182,8 +207,8 @@ LoadConfig()
 		{
 			for(new i=0; i<iloscKandydatow; i++)
 			{
-				fread(configFile, kandydaci[i]);
-				print(kandydaci[i]);
+				fread(configFile, line);
+				strmid(kandydaci[i], line, 0, strfind(line, "\r") == -1 ? (strfind(line, "\n") == -1 ? strlen(line) : strfind(line, "\n")) : strfind(line, "\r")); //spaghetti code xd
 			}
 		}
 		else
@@ -198,7 +223,62 @@ LoadConfig()
 	}
 }
 
-Error(string[])
+LoadVotes()
+{
+	if(!dini_Exists(WYBORY_WYNIKI_PLIK))
+	{
+		dini_Create(WYBORY_WYNIKI_PLIK);
+		for(new i=0; i<iloscKandydatow; i++)
+		{
+			dini_IntSet(WYBORY_WYNIKI_PLIK, kandydaci[i], 0);
+		}
+	}
+	else
+	{
+		for(new i=0; i<iloscKandydatow; i++)
+		{
+			wyniki[i] = dini_Int(WYBORY_WYNIKI_PLIK, kandydaci[i]);
+		}
+	}
+}
+
+LoadPlayerVotes()
+{
+	new File:file;
+	file = fopen(WYBORY_GLOSY_PLIK, io_read);
+	if(file)
+	{
+		new buf[64];
+		zaglosowali=0;
+		while(fread(file, buf))
+		{
+			new newLinePos = strfind(buf, "\n");
+			if(newLinePos != -1) 
+			{
+				strmid(zaglosowaliNicki[zaglosowali++], buf, 0, newLinePos);
+			}
+		}
+		fclose(file);
+	}
+}
+
+SavePlayerVotes()
+{
+	new File:file;
+	file = fopen(WYBORY_GLOSY_PLIK);
+	if(file)
+	{
+		for(new i; i<zaglosowali; i++)
+		{
+			new buf[64];
+			format(buf, sizeof(buf), "%s\n", zaglosowaliNicki[i]);
+			fwrite(file, buf);
+		}
+		fclose(file);
+	}
+}
+
+Error(const string[])
 {
 	print(string);
 }
@@ -330,6 +410,7 @@ ShowElectionTextdraws(playerid)
 	}
 	PlayerTextDrawShow(playerid, akceptujTxd[playerid]);
 	SelectTextDraw(playerid, 0xFF0000FF);
+	votingInProgress[playerid] = 1;
 }
 
 HideElectionTextdraws(playerid)
@@ -344,6 +425,7 @@ HideElectionTextdraws(playerid)
 		PlayerTextDrawHide(playerid, nickiTxd[playerid][i]);
 	}
 	PlayerTextDrawHide(playerid, akceptujTxd[playerid]);
+	votingInProgress[playerid] = 0;
 }
 
 CzyZaglosowal(playerid)
@@ -360,20 +442,42 @@ CzyZaglosowal(playerid)
 	return false;
 }
 
-//------------------<[ MySQL: ]>--------------------
-//-----------------<[ Komendy: ]>-------------------
+CanPlayerVote(playerid)
+{
+	if(
+		GetPlayerScore(playerid) < 3 ||
+		GetPlayerVirtualWorld(playerid) != LOKAL_WYBORCZY_VW ||
+		!IsPlayerInRangeOfPoint(playerid, 5.0, LOKAL_WYBORCZY_POS)
+	) {
+		return 0;
+	}
 
-CMD:glosuj(playerid)
+	new unused, dzien, godzina;
+	getdate(unused, unused, dzien);
+	gettime(godzina, unused, unused);
+
+	if(
+		dzien != dzienWyborow ||
+		godzina < godzinaPoczatek ||
+		godzina > godzinaKoniec ||
+		CzyZaglosowal(playerid)
+	) {
+		return 0;
+	}
+	return 1;
+}
+
+PlayerCantVoteMessage(playerid)
 {
 	if(GetPlayerScore(playerid) < 3) {
 		SendClientMessage(playerid, COLOR_GRAD2, "Nie masz 3 lvl.");
 		return 1;
 	}
-	if(!IsPlayerInRangeOfPoint(playerid, 5.0,1483.9551,-1759.6519,13.7169)) {
+	if(!IsPlayerInRangeOfPoint(playerid, 5.0, LOKAL_WYBORCZY_POS)) {
 		SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w lokalu wyborczym.");
 		return 1;
 	}
-	if(GetPlayerVirtualWorld(playerid) !=49)
+	if(GetPlayerVirtualWorld(playerid) != LOKAL_WYBORCZY_VW)
 	{
 		SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w lokalu wyborczym.");
 		return 1;	
@@ -397,7 +501,30 @@ CMD:glosuj(playerid)
 		SendClientMessage(playerid, COLOR_GRAD2, "Ju¿ odda³eœ g³os w tych wyborach!");
 		return 1;
 	}
-	
-	ShowElectionTextdraws(playerid);
+	return 1;
+}
+
+//------------------<[ MySQL: ]>--------------------
+//-----------------<[ Komendy: ]>-------------------
+
+CMD:gotowybory(playerid)
+{
+	if(IsPlayerAdmin(playerid))
+	{
+		SetPlayerPos(playerid, LOKAL_WYBORCZY_POS);
+		SetPlayerVirtualWorld(playerid, LOKAL_WYBORCZY_VW);
+	}
+}
+
+CMD:glosuj(playerid)
+{
+	if(CanPlayerVote(playerid))
+	{
+		ShowElectionTextdraws(playerid);
+	}
+	else
+	{
+		PlayerCantVoteMessage(playerid);
+	}
 	return 1;
 }
