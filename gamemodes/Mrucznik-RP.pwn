@@ -6562,7 +6562,7 @@ public OnPlayerText(playerid, text[])
     {
         if(strlen(text) > 31) return 0;
         new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, text);
-        if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
+        if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
         return 0;
     }
 	if(text[0] == '€')

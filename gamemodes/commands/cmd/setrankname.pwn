@@ -47,7 +47,6 @@ YCMD:setrankname(playerid, params[], help)
             }
             new fracID = GetPlayerFraction(playerid);  
             format(FracRang[fracID][rankID], MAX_RANG_LEN, "%s", rankNAME);
-            EDIT_SaveRangs(fracID, rankID);//Save rang
             format(string, sizeof(string), "Edytowa³eœ rangê [%d] na nazwê [%d]", rankID, rankNAME); 
             sendTipMessage(playerid, string); 
        }

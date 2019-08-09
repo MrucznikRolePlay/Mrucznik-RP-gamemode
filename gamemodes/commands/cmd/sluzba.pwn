@@ -198,13 +198,13 @@ YCMD:sluzba(playerid, params[], help)
                 }
 			}
 		}
-        else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] >= 4)
+        else if(GetPlayerFraction(playerid) == FRAC_ERS)
         {
             if (PlayerToPoint(4, playerid,1147.3623,-1314.4891,13.6743))
             {
                 if(JobDuty[playerid] == 1)
                 {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie medyka, nie bêdziesz widzia³ zg³oszeñ.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie ERS, nie bêdziesz widzia³ zg³oszeñ.");
                     JobDuty[playerid] = 0;
                     Medics -= 1;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
@@ -212,36 +212,9 @@ YCMD:sluzba(playerid, params[], help)
                 }
                 else
                 {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie medyka, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie ERS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
                     JobDuty[playerid] = 1;
                     Medics += 1;
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-                    SetPlayerToTeamColor(playerid);
-                }
-            }
-            else
-            {
-                sendTipMessage(playerid, "Nie jesteœ w szatni !");
-                return 1;
-            }
-        }
-        else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] <= 3)
-        {
-            if (IsPlayerInRangeOfPoint(playerid, 4.0, 1758.4077,-1123.4249,227.8059))
-            {
-                if(JobDuty[playerid] == 1)
-                {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie stra¿aka.");
-                    JobDuty[playerid] = 0;
-                    PrzywrocBron(playerid);
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-                    SetPlayerToTeamColor(playerid);
-                }
-                else
-                {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie stra¿aka.");
-                    JobDuty[playerid] = 1;
-                    DajBronieFrakcyjne(playerid);
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
                 }

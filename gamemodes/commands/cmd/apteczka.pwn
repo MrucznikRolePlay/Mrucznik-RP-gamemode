@@ -36,7 +36,7 @@ YCMD:apteczka(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /apteczka [ID gracza] [¯ycia]");
 		return 1;
 	}
-	if (PlayerInfo[playerid][pMember] == 4 && PlayerInfo[playerid][pRank] >= 2 || PlayerInfo[playerid][pLider] == 4)
+	if (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
 	{
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
