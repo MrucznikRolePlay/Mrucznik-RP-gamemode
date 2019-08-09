@@ -86,7 +86,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	{
 		case COMMAND_ZERO_RET:
 		{
-			sendErrorMessage(playerid, "Komenda zwróci³a wartoœæ zerow¹."); //TODO: delete
+			sendErrorMessage(playerid, "Komenda zwróci³a wartoœæ zerow¹.");
 		}
 		case COMMAND_BAD_PREFIX:
 		{

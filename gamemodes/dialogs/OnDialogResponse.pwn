@@ -17333,7 +17333,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//todo numer
 			new string[256];
 			format(string, sizeof(string), "%d %s", Kontakty[playerid][GetPVarInt(playerid, "kontakty-dialog-slot")][eNumer], inputtext);
 			RunCommand(playerid, "/sms",  string);

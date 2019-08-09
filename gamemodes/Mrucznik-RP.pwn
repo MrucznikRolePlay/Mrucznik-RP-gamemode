@@ -5973,8 +5973,6 @@ OnPlayerLogin(playerid, password[])
     }
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;
 
-
-	//TODO: new premium
 	premium_loadForPlayer(playerid);
 
 	//Odbugowywanie domów:

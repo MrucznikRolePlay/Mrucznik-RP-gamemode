@@ -1004,7 +1004,7 @@ public MainTimer()
     else
         TICKS_30Min++;
 }
-//TODO: mysql asynchroniczny
+
 forward SaveMyAccountTimer(playerid);
 public SaveMyAccountTimer(playerid)
 {

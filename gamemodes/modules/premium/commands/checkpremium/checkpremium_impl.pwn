@@ -46,7 +46,7 @@ command_checkpremium_Impl(playerid, giveplayerid)
     }
     _MruAdmin(playerid, sprintf("- stan MC: %d", PremiumInfo[playerid][pMC]));
     
-    //TODO:
+    //TODO: wiêcej informacji w /checkpremium
     // _MruAdmin(playerid, "- Skiny premium:");
     // for(new i; i<MAX_PREMIUM_SKINS; i++)
     // {
