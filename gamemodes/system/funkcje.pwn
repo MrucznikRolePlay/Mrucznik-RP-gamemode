@@ -4180,7 +4180,8 @@ Lotto(number)
 				else 
 				{
 					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d", PlayerInfo[i][pLottoNr]);
-					SendClientMessage(i, COLOR_WHITE, string); 
+					SendClientMessage(i, COLOR_WHITE, string);
+					PlayerInfo[i][pLottoNr] = 0; 
 				}
 			}
 		}
@@ -4191,7 +4192,7 @@ Lotto(number)
 		{
 			if(winners == 0)
 			{
-				new rand = random(350000); 
+				new rand = random(200000); 
 				Jackpot = Jackpot+rand; 
 				format(string, sizeof(string), "Nagroda zosta³a podwy¿szona do %d$", Jackpot);
 				OOCOff(COLOR_WHITE, string);  

@@ -2664,7 +2664,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsi¹¿ka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrêdkoœciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJD");
+				ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t50000$\nKsi¹¿ka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrêdkoœciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJD");
 	            new string[256];
 	            switch(listitem)
 	            {
@@ -2699,96 +2699,73 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1:
 					{
-						if (kaska[playerid] > 7500)
+						if (kaska[playerid] > 50000)
 						{
+							if(PlayerGames[playerid] >= 4)
+							{
+								sendTipMessage(playerid, "Przepraszamy, zu¿y³eœ wszystkie zdrapki na naszym magazynie!"); 
+								sendTipMessage(playerid, "Spróbuj przyjœæ za godzinê, mo¿e przyjd¹ nowe."); 
+								return 1;
+							}
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    {
-								new skill = 7500 / 100;
-								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = 7500 - price;
-								ZabierzKase(playerid, payout);
-								format(string, sizeof(string), "~r~-$%d", payout);
-								GameTextForPlayer(playerid, string, 5000, 1);
+								format(string, sizeof(string), "%s kupuje zdrapkê w sklepie i zaczyna j¹ zdrapywaæ", GetNick(playerid)); 
+								ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								new winValue = true_random(100);
+								new playerValue = true_random(100); 
+								if(playerValue > winValue && playerValue >= 85))
+								{
+									new bonus = (PlayerInfo[playerid][pTraderPerk]*10000);
+									format(string, sizeof(string), "Po zdrapaniu widaæ wygran¹ 200.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 200000+bonus); 
+								}
+								else if(playerValue > winValue && playerValue < 85 && playerValue >= 50)
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaæ wygran¹ 85.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 85000); 
+								}
+								else if(playerValue < winValue && playerValue > 50)
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaæ wygran¹ 35.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 35000); 
+								}
+								else
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaæ napis ''Graj dalej'' ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								}
+								PlayerGames[playerid]++; 
 							}
 							else
 							{
-							    ZabierzKase(playerid, 7500);
-								format(string, sizeof(string), "~r~-$%d", 1000);
-								GameTextForPlayer(playerid, string, 5000, 1);
-							}
-							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							new prize;
-							new symb1[32]; new symb2[32]; new symb3[32];
-							new randcard1 = random(10);//minimum 1000  max 9999
-							new randcard2 = random(10);//minimum 1000  max 9999
-							new randcard3 = random(10);//minimum 1000  max 9999
-							if(randcard1 >= 5)
-							{
-								format(symb1, sizeof(symb1), "~b~]");
-								randcard1 = 1;
-							}
-							else if(randcard1 <= 4 && randcard1 >= 2)
-							{
-								format(symb1, sizeof(symb1), "~g~]");
-								randcard1 = 2;
-							}
-							else if(randcard1 < 2)
-							{
-								format(symb1, sizeof(symb1), "~y~]");
-								randcard1 = 3;
-							}
-							if(randcard2 >= 5)
-							{
-								format(symb2, sizeof(symb2), "~b~]");
-								randcard2 = 1;
-							}
-							else if(randcard2 <= 4 && randcard2 >= 2)
-							{
-								format(symb2, sizeof(symb2), "~g~]");
-								randcard2 = 2;
-							}
-							else if(randcard2 < 2)
-							{
-								format(symb2, sizeof(symb2), "~y~]");
-								randcard2 = 3;
-							}
-							if(randcard3 >= 5)
-							{
-								format(symb3, sizeof(symb3), "~b~]");
-								randcard3 = 1;
-							}
-							else if(randcard3 <= 4 && randcard3 >= 2)
-							{
-								format(symb3, sizeof(symb3), "~g~]");
-								randcard3 = 2;
-							}
-							else if(randcard3 < 2)
-							{
-								format(symb3, sizeof(symb3), "~y~]");
-								randcard3 = 3;
-							}
-							if(randcard1 == randcard2 && randcard1 == randcard3)
-							{
-								if(randcard1 > 5)
+								if(playerValue > winValue && playerValue >= 85))
 								{
-									prize = 25000;
+									format(string, sizeof(string), "Po zdrapaniu widaæ wygran¹ 100.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 100000); 
 								}
-								if(randcard1 <= 4 && randcard1 >= 2)
+								else if(playerValue > winValue && playerValue < 85 && playerValue >= 50)
 								{
-									prize = 15000;
+									format(string, sizeof(string), "Po zdrapaniu widaæ wygran¹ 55.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 55000); 
 								}
-								if(randcard1 < 2)
+								else if(playerValue < winValue && playerValue > 50)
 								{
-									prize = 7500;
+									format(string, sizeof(string), "Po zdrapaniu widaæ wygran¹ 15.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 15000); 
 								}
-								DajKase(playerid,prize);
-								format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~%s %s %s ~n~~n~~w~~g~$%d",symb1,symb2,symb3, prize);
+								else
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaæ napis ''Graj dalej'' ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								}
+								PlayerGames[playerid]++; 
 							}
-							else
-							{
-								format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~%s %s %s ~n~~n~~w~~r~$0",symb1,symb2,symb3);
-							}
-							GameTextForPlayer(playerid, string, 3000, 3);
 							return 1;
 						}
 					}

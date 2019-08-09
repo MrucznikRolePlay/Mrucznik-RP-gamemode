@@ -857,7 +857,8 @@ new BrFS[8];
 new TimerJedzenie[MAX_PLAYERS];
 new ZarcieCooldown[MAX_PLAYERS];
 
-//nowe bramy
+//zdrapki
+new PlayerGames[MAX_PLAYERS];
 
 //new BramaWDolS = 1;
 //fbi
@@ -1059,7 +1060,8 @@ ClearVariableConnect(playerid)
 ClearVariableDisconnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
-	SN_ACCESS[playerid] = 0; 
+	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
+	PlayerGames[playerid] = 0;//Zdrapki 
 	return 1;
 }
 ZerujZmienne(playerid)

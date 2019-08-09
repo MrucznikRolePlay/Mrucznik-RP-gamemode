@@ -5514,6 +5514,7 @@ PayDay()
 					PlayerInfo[i][pPayDay] = 0;
 					PlayerInfo[i][pPayCheck] = 0;
 					PlayerInfo[i][pConnectTime] += 1;
+					PlayerGames[i] = 0;
                     MRP_PremiumHours[i]++;
 					if(PlayerInfo[i][pBP] >= 1)
 					{
