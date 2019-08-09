@@ -395,12 +395,12 @@ IsAUnikat(modelid)
 
 PlayerHasSkin(playerid, skin)
 {
-	return VECTOR_find_val(VPremiumSkins[playerid], skin);
+	return VECTOR_find_val(VPremiumSkins[playerid], skin) != INVALID_VECTOR_INDEX;
 }
 
 PlayerHasPremiumItem(playerid, item)
 {
-	return VECTOR_find_val(VPremiumItems[playerid], item);
+	return VECTOR_find_val(VPremiumItems[playerid], item) != INVALID_VECTOR_INDEX;
 }
 
 // returns -1 if skin is not premium skin,
