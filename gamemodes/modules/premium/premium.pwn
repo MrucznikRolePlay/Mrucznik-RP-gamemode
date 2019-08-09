@@ -49,10 +49,8 @@ premium_clearCache(playerid)
 	PremiumInfo[playerid][pKP] = 0;
 	PremiumInfo[playerid][pExpires] = 0;
 
-	for(new i; i<MAX_PREMIUM_SKINS; i++)
-	{
-		UniqueSkins[playerid][i] = false;
-	}
+	VECTOR_clear(VPremiumSkins[playerid]);
+	VECTOR_clear(VPremiumItems[playerid]);
 }
 
 premium_loadForPlayer(playerid)
@@ -100,7 +98,7 @@ premium_loadForPlayer(playerid)
 
 	if(kpMC > 0) PremiumInfo[playerid][pMC] = kpMC;
 
-	MruMySQL_LoadPlayerUniqueSkins(playerid);
+	MruMySQL_LoadPlayerPremiumSkins(playerid);
 }
 
 premium_printMcBalance(playerid)
@@ -304,7 +302,7 @@ KupSkinPremium(playerid, id)
 		SkinyPremium[id][Model], 
 		SkinyPremium[id][Cena]);
 
-	UniqueSkins[playerid][id] = true;
+	VECTOR_push_back_val(VPremiumSkins[playerid], SkinyPremium[id][Model]);
 
 	ZabierzMC(playerid, SkinyPremium[id][Cena]);
 
@@ -389,21 +387,14 @@ IsAUnikat(modelid)
 	return 0;
 }
 
-PlayerHasSkin(playerid, skinid)
+PlayerHasSkin(playerid, skin)
 {
-	for(new i; i<MAX_PREMIUM_SKINS; i++)
-	{
-		if(SkinyPremium[i][Model] == skinid)
-		{
-			return UniqueSkins[playerid][i];
-		}
-	}
-	return false;
+	return VECTOR_find_val(VPremiumSkins[playerid], skin);
 }
 
 PlayerHasPremiumItem(playerid, item)
 {
-	//TODO: impl
+	return VECTOR_find_val(VPremiumItems[playerid], item);
 	return false;
 }
 

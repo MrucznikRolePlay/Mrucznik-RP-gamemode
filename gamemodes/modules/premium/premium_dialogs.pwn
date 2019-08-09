@@ -207,16 +207,14 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return DialogSkiny(playerid);
 			}
 
-			if(!PlayerHasSkin(playerid, listitem))
-			{
-				KupSkinPremium(playerid, listitem);
-				DialogPlayerUniqueSkins(playerid);
-			}
-			else
+			if(PlayerHasSkin(playerid, SkinyPremium[listitem][Model]))
 			{
 				sendErrorMessage(playerid, "Masz ju¿ ten skin!");
 				return DialogSkiny(playerid);
 			}
+			
+			KupSkinPremium(playerid, listitem);
+			DialogSkinyPremiumGracza(playerid);
 		}
 		else
 		{
@@ -240,7 +238,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new skin = DynamicGui_GetDataInt(playerid, listitem);
 			new param[4];
-			valstr(param,skin);
+			valstr(param, skin);
 			return RunCommand(playerid, "/premiumskin",  param); 
 		}
 		else
@@ -396,20 +394,18 @@ DialogSkiny(playerid)
 	return 1;
 }
 
-DialogPlayerUniqueSkins(playerid)
+DialogSkinyPremiumGracza(playerid)
 {
 	DynamicGui_Init(playerid);
 
-	new count, list[16*MAX_PREMIUM_SKINS];
+	new count, list[5*MAX_PREMIUM_SKINS];
 
-	for(new i; i<MAX_PREMIUM_SKINS; i++)
+	VECTOR_foreach(v : VPremiumSkins[playerid])
 	{
-		if(UniqueSkins[playerid][i])
-		{
-			format(list, sizeof(list), "%s%d\n", list, SkinyPremium[i][Model]);
-			count++;
-			DynamicGui_AddRow(playerid, 1, SkinyPremium[i][Model]);
-		}
+		new skin = MEM_get_val(v);
+		format(list, sizeof(list), "%s%d\n", list, skin);
+		count++;
+		DynamicGui_AddRow(playerid, 1, skin);
 	}
 
 	if(count==0) return sendErrorMessage(playerid, "Nie masz unikatowych skinów");

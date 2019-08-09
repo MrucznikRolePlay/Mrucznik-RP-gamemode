@@ -111,7 +111,7 @@ MruMySQL_SaveMc(playerid)
     }
 }
 
-MruMySQL_LoadPlayerUniqueSkins(playerid)
+MruMySQL_LoadPlayerPremiumSkins(playerid)
 {
 	new qr[256];
 	format(qr, sizeof(qr), "SELECT `s_ID` FROM `mru_premium_skins` WHERE `s_charUID`='%d'", PlayerInfo[playerid][pUID]);
@@ -124,10 +124,7 @@ MruMySQL_LoadPlayerUniqueSkins(playerid)
 			while(mysql_fetch_row_format(qr, "|"))
 			{
 				sscanf(qr, "p<|>d", skinID);
-
-				for(new i; i<MAX_PREMIUM_SKINS; i++)
-					if(SkinyPremium[i][Model] == skinID)
-						UniqueSkins[playerid][i] = true;
+				VECTOR_push_back_val(VPremiumSkins[playerid], skinID);
 			}
 		}
         mysql_free_result();

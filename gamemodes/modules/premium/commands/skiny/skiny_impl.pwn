@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_skiny_Impl(playerid)
 {
-    DialogPlayerUniqueSkins(playerid);
+    DialogSkinyPremiumGracza(playerid);
 	return 1;
 }
 

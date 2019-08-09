@@ -67,9 +67,13 @@ enum ePrzedmiotyPremium
 }
 
 //-----------------<[ Zmienne: ]>-------------------
-new bool:UniqueSkins[MAX_PLAYERS][MAX_PREMIUM_SKINS] = {false, ...};
+new Vector:VPremiumSkins[MAX_PLAYERS]; //TODO: Maybe zamieniæ na bintree, bo w sumie wiecej szukania niz wkladania. Maybe move to https://github.com/IllidanS4/PawnPlus
+new Vector:VPremiumItems[MAX_PLAYERS];
+
 new PremiumInfo[MAX_PLAYERS][ePremiumInfo];
-new PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =
+
+//-----------------<[ Sta³e: ]>-------------------
+new const PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =
 {
 	//drogie:
 	{486, 15000}, //0 Dozer
@@ -94,7 +98,7 @@ new PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =
 	{498, 500} //17 Boxville
 };
 
-new SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
+new const SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
 {
 	{93, UNIKATOWY_SKIN_CENA},
 	{102, UNIKATOWY_SKIN_CENA},
@@ -124,7 +128,7 @@ new SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
 	{149, UNIKATOWY_SKIN_CENA}
 };
 
-new PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] = 
+new const PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] = 
 {
 	{18645, 100},
 	{18956, 100},
