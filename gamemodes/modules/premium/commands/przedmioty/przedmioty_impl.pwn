@@ -25,6 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_przedmioty_Impl(playerid)
 {
+    DialogPrzedmiotyPremiumGracza(playerid);
     return 1;
 }
 

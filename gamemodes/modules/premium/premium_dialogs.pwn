@@ -419,6 +419,12 @@ DialogPlayerUniqueSkins(playerid)
 	return true;
 }
 
+DialogPrzedmiotyPremiumGracza(playerid)
+{
+	//TODO:
+	return 1;
+}
+
 DialogTelefon(playerid)
 {
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(TELEFON), DIALOG_STYLE_INPUT, "Premium - Us³ugi - Telefon", 
