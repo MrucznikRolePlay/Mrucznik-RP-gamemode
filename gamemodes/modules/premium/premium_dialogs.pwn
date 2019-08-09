@@ -403,12 +403,12 @@ DialogSkinyPremiumGracza(playerid)
 	VECTOR_foreach(v : VPremiumSkins[playerid])
 	{
 		new skin = MEM_get_val(v);
-		format(list, sizeof(list), "%s%d\n", list, skin);
+		strcat(list, sprintf("%d\n", list, skin));
 		count++;
 		DynamicGui_AddRow(playerid, 1, skin);
 	}
 
-	if(count==0) return sendErrorMessage(playerid, "Nie masz unikatowych skinów");
+	if(count==0) return sendErrorMessage(playerid, "Nie masz unikatowych skinów.");
 
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(ZMIENSKIN), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje Skiny", list, "Ustaw", "WyjdŸ");
 
@@ -417,7 +417,20 @@ DialogSkinyPremiumGracza(playerid)
 
 DialogPrzedmiotyPremiumGracza(playerid)
 {
-	//TODO:
+	DynamicGui_Init(playerid);
+
+	new count, list[7*MAX_PREMIUM_ITEMS];
+	VECTOR_foreach(v : VPremiumItems[playerid])
+	{
+		new item = MEM_get_val(v);
+		strcat(list, sprintf("%d\n", list, item));
+		count++;
+		DynamicGui_AddRow(playerid, 1, item);
+	}
+
+	if(count==0) return sendErrorMessage(playerid, "Nie masz ¿adnych przedmiotów premium.");
+
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTYGRACZA), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje Skiny", list, "Ustaw", "WyjdŸ");
 	return 1;
 }
 

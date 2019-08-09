@@ -38,7 +38,8 @@ enum ePremiumDialog
 	ZMIANY_NICKU,
 	SKINY,
 	TELEFON,
-	ZMIENSKIN
+	ZMIENSKIN,
+	PRZEDMIOTYGRACZA
 };
 
 enum ePremiumInfo
@@ -128,6 +129,7 @@ new const SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
 	{149, UNIKATOWY_SKIN_CENA}
 };
 
+//TODO: dodac nazwy przedmiotow
 new const PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] = 
 {
 	{18645, 100},

@@ -228,9 +228,9 @@ KupPrzedmiotPremium(playerid, id)
 		PrzedmiotyPremium[id][Cena]);
 
 	ZabierzMC(playerid, PrzedmiotyPremium[id][Cena]);
-	//TODO: dodaæ item do posiadanych
-	//TODO: dodac nazwy przedmiotow
-	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", SkinyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
+	VECTOR_push_back_val(VPremiumItems[playerid], PrzedmiotyPremium[id][Model]);
+	
+	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", PrzedmiotyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
 	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /przedmioty");
 
 	premium_printMcBalance(playerid);
@@ -395,7 +395,6 @@ PlayerHasSkin(playerid, skin)
 PlayerHasPremiumItem(playerid, item)
 {
 	return VECTOR_find_val(VPremiumItems[playerid], item);
-	return false;
 }
 
 // returns -1 if skin is not premium skin,
