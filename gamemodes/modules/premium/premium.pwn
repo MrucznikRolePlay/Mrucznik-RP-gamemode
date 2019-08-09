@@ -214,12 +214,9 @@ KupPojazdPremium(playerid, id)
 	return 1;
 }
 
-KupSkinPremium(playerid, skin)
+KupSkinPremium(playerid, id)
 {
-	new id = GetPremiumSkinSlot(skin);
-	if(id==-1) return DialogSkiny(playerid);
-
-	if(PremiumInfo[playerid][pMC] < UNIKATOWY_SKIN_CENA)
+	if(PremiumInfo[playerid][pMC] < SkinyPremium[id][Cena])
 	{
 		sendErrorMessage(playerid, "Nie staæ Ciê na ten skin");
 		return DialogSkiny(playerid);
@@ -230,7 +227,7 @@ KupSkinPremium(playerid, skin)
 	Log(premiumLog, INFO, "%s kupi³ unikatowy skin %d za %dMC",
 		GetPlayerLogName(playerid), 
 		SkinyPremium[id][Model], 
-		UNIKATOWY_SKIN_CENA);
+		SkinyPremium[id][Cena]);
 
 	UniqueSkins[playerid][id] = true;
 

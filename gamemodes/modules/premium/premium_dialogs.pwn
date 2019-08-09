@@ -185,22 +185,19 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			new skin = GetPremiumSkinSlot(listitem);
-			if(skin != -1)
+			if(listitem < 0 || listitem >= MAX_PREMIUM_SKINS)
 			{
-				if(!PlayerHasSkin(playerid, skin))
-				{
-					KupSkinPremium(playerid, skin);
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Masz juø ten skin!");
-					return DialogSkiny(playerid);
-				} 
+				Log(premiumLog, ERROR, "Error in PREMIUM_DIALOG_SKINY (listitem %d for player %s)", listitem, GetPlayerLogName(playerid));
+				return DialogSkiny(playerid);
 			}
-			else 
+
+			if(!PlayerHasSkin(playerid, listitem))
 			{
-				Log(premiumLog, ERROR, "Error in PREMIUM_DIALOG_SKINY (skin index -1 from listitem %d for player", listitem, GetPlayerLogName(playerid));
+				KupSkinPremium(playerid, listitem);
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Masz juø ten skin!");
 				return DialogSkiny(playerid);
 			}
 		}
@@ -391,7 +388,7 @@ ListPlayerUniqueSkins(playerid)
 	{
 		if(UniqueSkins[playerid][i])
 		{
-			format(list, sizeof list, "%sSkin ID: %d\n", list, SkinyPremium[i][Model]);
+			format(list, sizeof(list), "%s%d\n", list, SkinyPremium[i][Model]);
 			count++;
 			DynamicGui_AddRow(playerid, 1, SkinyPremium[i][Model]);
 		}
@@ -399,7 +396,7 @@ ListPlayerUniqueSkins(playerid)
 
 	if(count==0) return sendErrorMessage(playerid, "Nie masz unikatowych skinÛw");
 
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(ZMIENSKIN), DIALOG_STYLE_LIST, "Premium - Twoje Skiny", list, "Ustaw", "Wyjdü");
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(ZMIENSKIN), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje Skiny", list, "Ustaw", "Wyjdü");
 
 	return true;
 }
