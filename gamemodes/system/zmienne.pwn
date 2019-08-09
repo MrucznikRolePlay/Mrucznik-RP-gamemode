@@ -1,5 +1,5 @@
 //zmienne.pwn
-
+new prawoJazdyLosowanie[9];
 
 new PickupSklep01;//ZIP
 
@@ -1283,7 +1283,6 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 0;
 	PlayerInfo[playerid][pMinalczasnazdpr] = 0;
 	PlayerInfo[playerid][pWtrakcietestprawa] = 0;
-	PlayerInfo[playerid][pPraojazdyniewylosowane] = 0;
 	PlayerInfo[playerid][pLinia55] = 0;
 	PlayerInfo[playerid][pLinia72] = 0;
 	PlayerInfo[playerid][pLinia82] = 0;

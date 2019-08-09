@@ -5834,9 +5834,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response == 1)
       	  	{
-            	new __[9] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-            	PlayerInfo[playerid][pPraojazdyniewylosowane] = __;
-            	PrawoJazdyRandomGUITest(playerid, PlayerInfo[playerid][pPraojazdyniewylosowane], 9 - PlayerInfo[playerid][pPrawojazdypytania]);
+				for(new i; i<9; i++)
+				{
+            		prawoJazdyLosowanie[i] = i;
+				}
+            	PrawoJazdyRandomGUITest(playerid, prawoJazdyLosowanie, 9 - PlayerInfo[playerid][pPrawojazdypytania]);
             	return 1;
  			}
     	}
@@ -5886,7 +5888,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		   		}
 			else
  			{
- 				PrawoJazdyRandomGUITest(playerid, PlayerInfo[playerid][pPraojazdyniewylosowane], 9 - PlayerInfo[playerid][pPrawojazdypytania]);
+ 				PrawoJazdyRandomGUITest(playerid, prawoJazdyLosowanie, 9 - PlayerInfo[playerid][pPrawojazdypytania]);
 			}
 		}
   		if(dialogid == 443)
