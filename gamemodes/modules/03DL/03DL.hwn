@@ -23,6 +23,11 @@
 
 //-----------------<[ Zmienne: ]>-------------------
 new eventForSkin[LOADED_SKINS]; 
+new skinsLoaded; 
+new skinsLoaded_Normal=20400;
+new skinsLoaded_Uni=20300;
+new skinsLoaded_Fraction=20100; 
+new skinsLoaded_Event=20000;
 
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------

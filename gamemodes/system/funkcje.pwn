@@ -7843,7 +7843,6 @@ SendZGMessage(color, string[])
 }
 
 //-----------------------[koniec chaty]------------------------------
-
 AddCar(car)
 {
 	new randcol = random(126);

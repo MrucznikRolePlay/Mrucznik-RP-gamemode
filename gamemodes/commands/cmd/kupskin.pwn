@@ -54,7 +54,7 @@ YCMD:kupskin(playerid, params[], help)
 					ZabierzKase(playerid, 5000); 
 					return 1;
 				}	
-				else if(skinID > 20000 && skinID <= 20100)//SKINY EVENTOWE
+				else if(skinID > 20000 && skinID <= skinsLoaded_Event)//SKINY EVENTOWE
 				{
 					if(eventForSkin[skinID] != 1)
 					{
@@ -66,17 +66,17 @@ YCMD:kupskin(playerid, params[], help)
 					ZabierzKase(playerid, 5000); 
 					return 1;
 				}
-				else if(skinID > 20100 && skinID <= 20300)//Skiny dla frakcji
+				else if(skinID > 20100 && skinID <= skinsLoaded_Fraction)//Skiny dla frakcji
 				{
 					sendTipMessage(playerid, "Ten skin jest tylko i wy³¹cznie dla frakcji! U¿yj /uniform"); 
 					return 1;
 				}
-				else if(skinID > 20300 && skinID <= 20400)
+				else if(skinID > 20300 && skinID <= skinsLoaded_Uni)
 				{
 					sendErrorMessage(playerid, "Ten skin jest do kupienia za MC"); 
 					return 1;
 				}
-				else if(skinID > 20400 && skinID < LOADED_SKINS)//Normalne skiny dla ka¿dego
+				else if(skinID > 20400 && skinID <= skinsLoaded_Normal)//Normalne skiny dla ka¿dego
 				{
 					SetPlayerSkin(playerid, skinID); 
 					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 

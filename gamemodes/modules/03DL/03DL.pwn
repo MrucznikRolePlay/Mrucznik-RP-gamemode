@@ -116,6 +116,28 @@ stock skinIsLegally(skinID)
 	
 	return false;
 }
+stock AddCharModelEx(baseID, newID, dffName[25], txdName[25], type)
+{
+	AddCharModel(baseID, newID, dffName, txdName);
+	skinsLoaded++; 
+	if(type == 0)
+	{
+		skinsLoaded_Normal++;
+	}
+	else if(type == 1)
+	{
+		skinsLoaded_Uni++;
+	}
+	else if(type == 2)
+	{
+		skinsLoaded_Fraction++; 
+	}
+	else if(type == 3)
+	{
+		skinsLoaded_Event++; 
+	}
+	return 1;
+}
 //-----------------<[ Timery: ]>-------------------
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
