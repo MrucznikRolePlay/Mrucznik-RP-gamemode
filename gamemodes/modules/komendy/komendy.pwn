@@ -107,6 +107,17 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		case COMMAND_UNDEFINED, COMMAND_HIDDEN:
 		{
 			sendErrorMessage(playerid, "Ta komenda nie istnieje. Wpisz /komendy aby zobaczyæ listê dostêpnych komend.");
+			if(PlayerInfo[playerid][pLevel] <= 1)//Anty slapper X_D
+			{
+				if(IsPlayerInAnyVehicle(playerid))
+				{
+					if(GetPlayerVehicleSeat(playerid) != 0)
+					{
+						Player_RemoveFromVeh(playerid);
+						sendTipMessageEx(playerid, COLOR_GREEN, "[Mru-AC] Zosta³eœ wyrzucony z pojazdu z powodu podejrzeñ slappera!"); 
+					}
+				}
+			}
 		}
 	}
 

@@ -41,9 +41,19 @@ YCMD:wiadomosc(playerid, params[], help)
     }
     if(IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
     {
+        if(TutTime[playerid] > 0 && TutTime[playerid] <= 125)
+        {
+            sendErrorMessage(playerid, "Nie mo¿esz wysy³aæ wiadomoœci podczas TUT!"); 
+            return 1;
+        }
         if(gPlayerLogged[giveplayerid] == 0)
         {
             sendErrorMessage(playerid, "Gracz aktualnie loguje siê do gry! Odczekaj chwilê"); 
+            return 1;
+        }
+        if(gPlayerLogged[playerid] == 0)
+        {
+            sendErrorMessage(playerid, "Jesteœ w trakcie logowania!");
             return 1;
         }
         if(HidePM[giveplayerid] > 0 || HidePM[playerid] > 0)
@@ -51,7 +61,7 @@ YCMD:wiadomosc(playerid, params[], help)
             sendTipMessage(playerid, "Ktoœ z was ma zablokowane wiadomoœci!"); 
             return 1;
         }
-        if(AntySpam[playerid] == 1)
+        if(AntySpam[playerid] == 1 && PlayerInfo[playerid][pConnectTime] <= 3)
         {
             sendErrorMessage(playerid, "Odczekaj 5 sekund zanim wyœlesz kolejn¹ wiadomoœæ!"); 
             return 1;

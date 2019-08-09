@@ -1855,6 +1855,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 		RemoveLeadersFromFraction(id_Lidera, playerid); 
+		
 	}
     else if(dialogid == D_PRZEBIERZ_FDU)
     {

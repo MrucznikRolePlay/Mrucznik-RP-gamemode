@@ -4769,7 +4769,7 @@ ShowStats(playerid,targetid)
 
 RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - giveplayerid to lider, playerid to osoba nadaj¹ca
 {
-	new query[256];
+	new query[256], string[124];
 	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `FracID`='%d'", GetPlayerFraction(giveplayerid));
 	for(new i; i<=All_Leaders; i++)
 	{
@@ -4777,6 +4777,18 @@ RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - givep
 	}
 	format(query, sizeof(query), "Usuniêto wszystkich liderów z frakcji %s", FractionNames[GetPlayerFraction(giveplayerid)]);
 	sendTipMessageEx(playerid, COLOR_DBLUE, query); 
+	format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
+	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d - pozostawiaj¹c VLD.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), PlayerInfo[giveplayerid][pMember]);
+	PlayerInfo[giveplayerid][pMember] = 0;
+	PlayerInfo[giveplayerid][pLider] = 0;
+	PlayerInfo[giveplayerid][pJob] = 0;
+	orgUnInvitePlayer(giveplayerid);
+	MedicBill[giveplayerid] = 0;
+	SetPlayerSpawn(giveplayerid);
+	format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(giveplayerid));
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 }
 SetPlayerToTeamColor(playerid)
 {

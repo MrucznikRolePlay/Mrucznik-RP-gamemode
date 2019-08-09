@@ -682,6 +682,7 @@
 #include "cmd/makevlider.pwn"
 #include "cmd/dajscene.pwn"
 #include "cmd/news2.pwn"
+#include "cmd/setrankname.pwn"
 
 InitCommands()
 {
@@ -690,6 +691,7 @@ InitCommands()
 
 static Aliases()
 {
+	Command_AddAltNamed("setrankname", "setrn"); 
 	Command_AddAltNamed("staty2", "stats2"); 
 	//autorzy
 	Command_AddAltNamed("autorzy", "tworcy"); 
