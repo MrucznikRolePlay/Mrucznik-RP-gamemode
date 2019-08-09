@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   skiny                                                   //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 przedmioty                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,18 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 09.06.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_skiny_Impl(playerid)
+
+//-------<[ include ]>-------
+#include "przedmioty_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_przedmioty()
 {
-    DialogPlayerUniqueSkins(playerid);
-	return 1;
+    new command = Command_GetID("przedmioty");
+
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
 }
 
-
-//end
+//-------<[ command ]>-------
+YCMD:przedmioty(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla posiadane przedmioty premium.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_przedmioty_Impl(playerid);
+}
