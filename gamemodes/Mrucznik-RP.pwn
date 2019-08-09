@@ -7531,7 +7531,7 @@ public OnDynamicObjectMoved(objectid)
     }
     return 1;
 }
-
+new linkResources[] = "http://rak-samp.5v.pl/modele/";
 public OnPlayerRequestDownload(playerid, type, crc)
 {
 	if(!IsPlayerConnected(playerid))
@@ -7545,14 +7545,14 @@ public OnPlayerRequestDownload(playerid, type, crc)
 	if(!IsPlayerConnected(playerid)) return 0;
  
 	if(type == DOWNLOAD_REQUEST_TEXTURE_FILE) {
-		foundfilename = FindTextureFileNameFromCRC(crc,dlfilename,64);
+		foundfilename = FindTextureFileNameFromCRC(crc,dlfilename,sizeof(dlfilename));
 	}
 	else if(type == DOWNLOAD_REQUEST_MODEL_FILE) {
-		foundfilename = FindModelFileNameFromCRC(crc,dlfilename,64);
+		foundfilename = FindModelFileNameFromCRC(crc,dlfilename,sizeof(dlfilename));
 	}
  
 	if(foundfilename) {
-		format(fullurl,256,"https://github.com/Mrucznik/Mrucznik-RP-Models/raw/master/%s",dlfilename);
+		format(fullurl,sizeof(fullurl),"%s%s",linkResources, dlfilename);
 		RedirectDownload(playerid,fullurl);
 	}
 	return 0;
