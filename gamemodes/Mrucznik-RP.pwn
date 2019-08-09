@@ -81,6 +81,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_MAX_CONNECTS_FROM_IP		2
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
 #include <true_random>
+#include <PreviewModelDialog>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
