@@ -185,8 +185,8 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			new skin = strval(inputtext);
-			if(IsPremiumSkin(skin))
+			new skin = GetPremiumSkinSlot(listitem);
+			if(skin != -1)
 			{
 				if(!PlayerHasSkin(playerid, skin))
 				{
@@ -198,9 +198,9 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					return DialogSkiny(playerid);
 				} 
 			}
-			else
+			else 
 			{
-				sendErrorMessage(playerid, "Skin o podanym ID nie jest skinem unikalnym");
+				Log(premiumLog, ERROR, "Error in PREMIUM_DIALOG_SKINY (skin index -1 from listitem %d for player", listitem, GetPlayerLogName(playerid));
 				return DialogSkiny(playerid);
 			}
 		}
@@ -355,15 +355,24 @@ DialogZmianyNicku(playerid)
 
 DialogSkiny(playerid)
 {
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(SKINY), DIALOG_STYLE_INPUT, "Premium - Us³ugi - Skiny", 
-		"Aby zakupiæ unikatowego skina musisz znaæ jego ID.\n"\
-		"Unikatowy skin mo¿esz ustawiæ w dowolnym momencie komend¹ /premiumskin.\n"\
-		"Mo¿esz posiadaæ nieograniczon¹ iloœæ unikatowych skinów.\n"\
-		"Koszt unikatowego skina to "INCOLOR_GREEN""#UNIKATOWY_SKIN_CENA""INCOLOR_DIALOG" Mrucznik Coinów.\n"\
-		"Wpisz ID w okienko ni¿ej i naciœnij \"Kup\" aby dokonaæ zakupu.",
-	"Kup", "Wróæ");
+	new substring[16];
+	static string[MAX_PREMIUM_SKINS * sizeof(substring)];
 
-	return true;
+	if(isnull(string)) {
+        for (new i; i < MAX_PREMIUM_SKINS; i++) {
+            format(substring, sizeof(substring), "%i\t~g~~h~%dMC\n", SkinyPremium[i][Model], SkinyPremium[i][Cena]);
+            strcat(string, substring);
+        } 
+	}
+
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(SKINY), DIALOG_STYLE_PREVIEW_MODEL, 
+		"Premium - Us³ugi - Skiny", 
+		string,
+		"Kup", "Wróæ"
+	);
+
+	//UNIKATOWY_SKIN_CENA
+	return 1;
 }
 
 ListPlayerUniqueSkins(playerid)

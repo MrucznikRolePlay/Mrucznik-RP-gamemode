@@ -380,11 +380,6 @@ PlayerHasSkin(playerid, skinid)
 	return false;
 }
 
-IsPremiumSkin(skin)
-{
-	return GetPremiumSkinSlot(skin) != -1;
-}
-
 // returns -1 if skin is not premium skin,
 // returns id of premium skin othervise
 GetPremiumSkinSlot(skin)
