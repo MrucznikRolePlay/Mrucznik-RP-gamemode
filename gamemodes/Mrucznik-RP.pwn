@@ -58,7 +58,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <discord-connector>
 #include <requests>
 #include <memory>
-#include <ColAndreas>
+#include <colandreas>
 #include <PawnPlus>
 
 //-------<[ Include ]>-------
