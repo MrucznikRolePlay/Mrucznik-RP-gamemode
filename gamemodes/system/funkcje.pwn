@@ -4769,7 +4769,14 @@ ShowStats(playerid,targetid)
 
 RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - giveplayerid to lider, playerid to osoba nadaj¹ca
 {
-//
+	new query[256];
+	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `FracID`='%d'", GetPlayerFraction(giveplayerid));
+	for(new i; i<=All_Leaders; i++)
+	{
+		mysql_query(query); 
+	}
+	format(query, sizeof(query), "Usuniêto wszystkich liderów z frakcji %s", FractionNames[GetPlayerFraction(giveplayerid)]);
+	sendTipMessageEx(playerid, COLOR_DBLUE, query); 
 }
 SetPlayerToTeamColor(playerid)
 {

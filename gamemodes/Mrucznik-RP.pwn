@@ -5868,6 +5868,11 @@ OnPlayerLogin(playerid, password[])
 		{
 			SendClientMessage(playerid, COLOR_WHITE,"Jesteœ posiadaczem {E2BA1B}Konta Premium.");
 		}
+		if(Uprawnienia(playerid, ACCESS_PANEL))
+		{
+			format(string, sizeof(string), "Liderów frakcji w bazie danych: %d.", All_Leader);
+			sendTipMessage(playerid, string); 
+		}
 	}
 	else
 	{//z³e has³o

@@ -69,6 +69,7 @@ Create_MySQL_Leader(playerid, frac, level)
 	new query[256];
 	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID`, `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNick(playerid), PlayerInfo[playerid][pUID], frac, level);
 	mysql_query(query);
+	All_Leaders++;  
 	return 1;
 }
 Remove_MySQL_Leader(playerid)
@@ -76,6 +77,7 @@ Remove_MySQL_Leader(playerid)
 	new query[256];
 	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `NICK`='%s'", GetNick(playerid));
 	mysql_query(query);
+	All_Leaders--;
 	return 1;
 }
 Save_MySQL_Leader(playerid)
