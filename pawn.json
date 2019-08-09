@@ -19,8 +19,10 @@
 		"pawn-lang/YSI-Includes@4.x",
 		"Southclaws/samp-whirlpool",
 		"Wuzi/vending",
-		"BigETI/pawn-memory",
-		"BigETI/pawn-vector"
+		"BigETI/pawn-memory:v2.0.1",
+		"BigETI/pawn-vector",
+		"IllidanS4/PawnPlus:v1.1",
+		"Pottus/ColAndreas:v1.4.0.3"
 	],
 	"build": {
 		"name": "",
