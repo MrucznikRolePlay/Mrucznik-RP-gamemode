@@ -26,7 +26,6 @@
 //
 
 //-----------------<[ Dialogi: ]>-------------------
-
 premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if(dialogid == PREMIUM_DIALOG(MENU))
@@ -423,7 +422,7 @@ DialogSkinyPremiumGracza(playerid)
 
 	if(count==0) return sendErrorMessage(playerid, "Nie masz unikatowych skinów.");
 
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(ZMIENSKIN), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje Skiny", list, "Ustaw", "WyjdŸ");
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(ZMIENSKIN), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje skiny", list, "Ustaw", "Wyjdz");
 
 	return true;
 }
@@ -443,7 +442,7 @@ DialogPrzedmiotyPremiumGracza(playerid)
 
 	if(count==0) return sendErrorMessage(playerid, "Nie masz ¿adnych przedmiotów premium.");
 
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTYGRACZA), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje Skiny", list, "Ustaw", "WyjdŸ");
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTYGRACZA), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje przedmioty", list, "Ustaw", "Wyjdz");
 	return 1;
 }
 

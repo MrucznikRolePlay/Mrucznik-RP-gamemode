@@ -216,23 +216,6 @@ sendErrorMessage(id, string:msg[]) {
 	format(_str,128,"»» %s", msg);
 	return SendClientMessage(id, COLOR_LIGHTRED, _str);
 }
-//2.5.2
-/*
-GetMajatek(playerid)
-{
-	new vehvalues;
-	for(new i=0;i<MAX_CAR_SLOT;i++)
-    {
-		new car_id = PlayerInfo[playerid][pCars][i];
-        if( car_id != 0 && CarData[car_id][c_UID] != 0)
-        {
-            vehvalues += VehiclePrice[CarData[car_id][c_Model]];
-        }
-    }
-	return kaska[playerid]+PlayerInfo[playerid][pAccount]+vehvalues+Dom[PlayerInfo[playerid][pDom]][hCena];
-}
-
-*/
 
 //WRZUCANIE DO DEMORGAN
 JailDeMorgan(playerid)
