@@ -2707,13 +2707,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								sendTipMessage(playerid, "Spróbuj przyjœæ za godzinê, mo¿e przyjd¹ nowe."); 
 								return 1;
 							}
+							format(string, sizeof(string), "%s kupuje zdrapkê w sklepie i zaczyna j¹ zdrapywaæ", GetNick(playerid)); 
+							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							new winValue = true_random(100);
+							new playerValue = true_random(100);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
-						    {
-								format(string, sizeof(string), "%s kupuje zdrapkê w sklepie i zaczyna j¹ zdrapywaæ", GetNick(playerid)); 
-								ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								new winValue = true_random(100);
-								new playerValue = true_random(100); 
-								if(playerValue > winValue && playerValue >= 85))
+						    { 
+								if(playerValue > winValue && playerValue >= 85)
 								{
 									new bonus = (PlayerInfo[playerid][pTraderPerk]*10000);
 									format(string, sizeof(string), "Po zdrapaniu widaæ wygran¹ 200.000$! ((%s))", GetNick(playerid));
@@ -2741,7 +2741,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 							else
 							{
-								if(playerValue > winValue && playerValue >= 85))
+								if(playerValue > winValue && playerValue >= 85)
 								{
 									format(string, sizeof(string), "Po zdrapaniu widaæ wygran¹ 100.000$! ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
