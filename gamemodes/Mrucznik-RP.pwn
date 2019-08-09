@@ -7571,46 +7571,6 @@ public OnVehicleRespray(playerid, vehicleid, color1, color2)
     }
     return 1;
 }
-/*
-public OnPlayerUseVendingMachine(playerid, machineid)//Gdy gracz u¿yje maszyny
-{ 
-    if(kaska[playerid] < SPRUNK_COST)
-    {
-        sendErrorMessage(playerid, "Brak wystarczaj¹cej iloœci gotówki - 2500$");
-        return 0;
-    }
-    new Float:health;
-    GetPlayerHealth(playerid, health);
-    if((health + 10.0) > PlayerInfo[playerid][pHealth]) health = PlayerInfo[playerid][pHealth];
-    else health += 10.0;
-    SetPlayerHealth(playerid, health);
-	ZabierzKase(playerid, SPRUNK_COST); 
-	SetPVarInt(playerid, "sprunk-possible-use", 3); 
-    return 1;
-}
-public OnPlayerDrinkSprunk(playerid)
-{// Odzywa siê gdy gracz pije sprunka
-    new sprunkUseVal = GetPVarInt(playerid, "sprunk-possible-use"); 
-	if(sprunkUseVal == 0)
-	{
-		sendErrorMessage(playerid, "Nie ma ju¿ nic w tym kubeczku!"); 
-		return 1;
-	}
-	new float:health; 
-	GetPlayerHealth(playerid, health); 
-	if((health+5) >= 100) 
-	{
-		health = 100; 
-	}
-	else
-	{
-		health+=10; 
-	}
-	SetPlayerHealth(playerid, health);
-	sprunkUseVal--; 
-	SetPVarInt(playerid, "sprunk-possible-use", sprunkUseVal); 
-    return 1;
-}*/
 public OnPlayerStreamIn(playerid, forplayerid)
 {
     if(GetPVarInt(forplayerid, "tognick") == 1)
