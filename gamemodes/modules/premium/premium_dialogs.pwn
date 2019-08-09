@@ -261,7 +261,7 @@ DialogMenuDotacje(playerid)
 		"    "HQ_COLOR_TEKST2"Kup pojazd unikatowy\n"\
 		""#HQ_COLOR_TEKST"Postaæ\n"\
 		"    "HQ_COLOR_TEKST2"Dodatkowa zmiana nicku\n"\
-		"    "HQ_COLOR_TEKST2"Unikatowy skin\n",
+		"    "HQ_COLOR_TEKST2"Unikatowy skin\n"
 		"    "HQ_COLOR_TEKST2"Obiekt do noszenia\n",
 		//"Rynek Mrucznik Coins'ów\n"
 		//"Wspomó¿ nasz serwer i otrzymaj Mrucznik Coins'y!", 
@@ -355,12 +355,12 @@ DialogZmianyNicku(playerid)
 
 DialogSkiny(playerid)
 {
-	new substring[16];
+	new substring[20];
 	static string[MAX_PREMIUM_SKINS * sizeof(substring)];
 
 	if(isnull(string)) {
         for (new i; i < MAX_PREMIUM_SKINS; i++) {
-            format(substring, sizeof(substring), "%i\t~g~~h~%dMC\n", SkinyPremium[i][Model], SkinyPremium[i][Cena]);
+            format(substring, sizeof(substring), "%i\t~g~%dMC\n", SkinyPremium[i][Model], SkinyPremium[i][Cena]);
             strcat(string, substring);
         } 
 	}
@@ -370,8 +370,6 @@ DialogSkiny(playerid)
 		string,
 		"Kup", "Wróæ"
 	);
-
-	//UNIKATOWY_SKIN_CENA
 	return 1;
 }
 
