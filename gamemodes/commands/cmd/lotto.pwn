@@ -39,9 +39,9 @@ YCMD:lotto(playerid, params[], help)
             sendTipMessageEx(playerid, COLOR_GREY, "Posiadasz ju¿ los loteryjny !");
             return 1;
         }
-        if(kaska[playerid] < 1500)
+        if(kaska[playerid] < 5000)
         {
-            sendTipMessageEx(playerid, COLOR_GREY, "Potrzebujesz 1500$ aby kupiæ los lotto !");
+            sendTipMessageEx(playerid, COLOR_GREY, "Potrzebujesz 5000$ aby kupiæ los lotto !");
             return 1;
         }
         new lottonr;
@@ -54,8 +54,9 @@ YCMD:lotto(playerid, params[], help)
 		if(lottonr < 1 || lottonr > 80) { sendTipMessageEx(playerid, COLOR_GREY, "Numer lotto od 1 do 80 !"); return 1; }
 		format(string, sizeof(string), "* Kupi³eœ los lotto z numerem: %d.", lottonr);
 		sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
-		ZabierzKase(playerid, 1500);
+		ZabierzKase(playerid, 5000);
 		PlayerInfo[playerid][pLottoNr] = lottonr;
+        Jackpot = Jackpot+5000;
     }
     return 1;
 }

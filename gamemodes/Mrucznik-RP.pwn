@@ -4915,14 +4915,16 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pNewAP] != 5)
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
+				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
+				{
+					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
+					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNick(playerid, true), GetPlayerVehicleID(playerid));
+					SendCommandLogMessage(string);
 
-                MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
-                format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNick(playerid, true), GetPlayerVehicleID(playerid));
-                SendCommandLogMessage(string);
+					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
 
-                SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
-
-                KickEx(playerid);
+					KickEx(playerid);
+				}
             }
         }
         //AT400

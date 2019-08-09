@@ -16936,6 +16936,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				if(money >= 5_000_000)//Wiadomosc dla adminow
 				{
+					format(string, sizeof(string), "Gracz %s wys³a³ przelew do %s w wysokoœci %d$", GetNick(playerid), GetNick(giveplayerid), money); 
 					SendAdminMessage(COLOR_YELLOW, string);
 					return 1;
 				}

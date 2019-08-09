@@ -4111,7 +4111,7 @@ ClearGroceries(playerid)
 	}
 	return 1;
 }
-
+/*
 Lotto(number)
 {
 	new JackpotFallen = 0;
@@ -4155,13 +4155,72 @@ Lotto(number)
 	}
 	else
 	{
-	    new rand = random(15000); rand += 2158;
+	    new rand = random(300000); rand += 2158;
 	    Jackpot += rand;
 	    SaveStuff();
 	    format(string, sizeof(string), "Totolotek: Nagroda zosta³a podwy¿szona do: $%d.", Jackpot);
 		OOCOff(COLOR_WHITE, string);
 	}
 	return 1;
+}*/
+Lotto(number)
+{
+	new winners=0, string[256], status=1; 
+	foreach(new i : Player)
+	{
+		if(IsPlayerConnected(i))
+		{
+			if(PlayerInfo[i][pLottoNr] > 0)
+			{
+				if(PlayerInfo[i][pLottoNr] == number)
+				{
+					winners++; 
+					status=2;
+				}
+				else 
+				{
+					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d", PlayerInfo[i][pLottoNr]);
+					SendClientMessage(i, COLOR_WHITE, string); 
+				}
+			}
+		}
+	}
+	foreach(new i2 : Player)
+	{
+		if(status == 1)
+		{
+			if(winners == 0)
+			{
+				new rand = random(350000); 
+				Jackpot = Jackpot+rand; 
+				format(string, sizeof(string), "Nagroda zosta³a podwy¿szona do %d$", Jackpot);
+				OOCOff(COLOR_WHITE, string);  
+				break; 
+			}
+		}
+		if(status == 2)
+		{
+			if(winners == 0)
+			{
+				new rand = random(350000);
+				Jackpot = rand; 
+				format(string, sizeof(string), "Lotto rozpoczyna kolejn¹ loteriê, kasa wyjœcia to %d$", Jackpot); 
+				OOCOff(COLOR_WHITE, string); 
+				status = 1;
+				break;
+			}
+			if(PlayerInfo[i2][pLottoNr] > 0 && PlayerInfo[i2][pLottoNr] == number)
+			{
+				new kasaWin = Jackpot/winners; 
+				format(string, sizeof(string), "%s wygra³ w totolotku %d$", GetNick(i2), kasaWin); 
+				OOCOff(COLOR_WHITE, string);
+				DajKase(i2, kasaWin);
+				PlayerInfo[i2][pLottoNr] =0;
+				winners--;   
+			}
+		}
+			
+	}
 }
 /*========[STARA NIE U¯YWANA FUNKCJA]========
 SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
