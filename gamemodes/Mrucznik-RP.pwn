@@ -56,6 +56,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <whirlpool>
 #include <timestamptodate>
 #include <discord-connector>
+#include <requests>
 
 //-------<[ Include ]>-------
 #include <a_http>
