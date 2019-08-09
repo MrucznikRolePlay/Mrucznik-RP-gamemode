@@ -7531,6 +7531,7 @@ public OnDynamicObjectMoved(objectid)
     }
     return 1;
 }
+/*
 public OnPlayerRequestDownload(playerid, type, crc)
 {
 	if(!IsPlayerConnected(playerid))
@@ -7555,7 +7556,7 @@ public OnPlayerRequestDownload(playerid, type, crc)
 		RedirectDownload(playerid,fullurl);
 	}
 	return 0;
-}
+}*/
 public OnVehicleRespray(playerid, vehicleid, color1, color2)
 {
     if(CarData[VehicleUID[vehicleid][vUID]][c_Color][0] != color1)
