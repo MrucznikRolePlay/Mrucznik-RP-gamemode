@@ -436,7 +436,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     if(!mysql_query(query)) fault=false;
 	
     //Zapis MruCoinow
-    premium_saveMc(playerid);
+    MruMySQL_SaveMc(playerid);
 
     saveLegale(playerid);
 

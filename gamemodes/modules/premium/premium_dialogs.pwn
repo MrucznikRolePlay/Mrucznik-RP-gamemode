@@ -181,17 +181,8 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			new bool:found=false;
 			new skin = strval(inputtext);
-			for(new i; i<MAX_PREMIUM_SKINS; i++)
-			{
-				if(SkinyPremium[i][Model] == skin)
-				{
-					found = true;
-					break;
-				}
-			}
-			if(found)
+			if(IsPremiumSkin(skin))
 			{
 				if(!PlayerHasSkin(playerid, skin))
 				{
