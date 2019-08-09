@@ -133,4 +133,14 @@ MruMySQL_LoadPlayerUniqueSkins(playerid)
         mysql_free_result();
 	}
 }
+
+MruMySQL_InsertPremiumItem(playerid, itemid)
+{
+	//TODO: Zapis
+}
+
+MruMySQL_LoadPlayerPremiumItems(playerid)
+{
+	//TODO: Odczyt
+}
 //end

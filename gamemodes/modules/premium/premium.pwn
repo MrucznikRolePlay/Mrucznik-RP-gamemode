@@ -103,7 +103,7 @@ premium_loadForPlayer(playerid)
 	MruMySQL_LoadPlayerUniqueSkins(playerid);
 }
 
-premium_printMcQuantity(playerid)
+premium_printMcBalance(playerid)
 {
 	return _MruGracz(playerid, sprintf("Aktualnie na Twoim koncie znajduje siê %d MruCoins.", PremiumInfo[playerid][pMC]));
 }
@@ -209,35 +209,33 @@ KupPojazdPremium(playerid, id)
 		GetPlayerLogName(playerid), 
 		VehicleNames[PojazdyPremium[id][Model]-400], 
 		PojazdyPremium[id][Cena]);
-	premium_printMcQuantity(playerid);
+	premium_printMcBalance(playerid);
 	DialogMenuDotacje(playerid);
 	return 1;
 }
 
-KupSkinPremium(playerid, id)
+KupPrzedmiotPremium(playerid, id)
 {
-	if(PremiumInfo[playerid][pMC] < SkinyPremium[id][Cena])
+	if(PremiumInfo[playerid][pMC] < PrzedmiotyPremium[id][Cena])
 	{
-		sendErrorMessage(playerid, "Nie staæ Ciê na ten skin");
-		return DialogSkiny(playerid);
+		sendErrorMessage(playerid, "Nie staæ Ciê na ten przedmiot!");
+		return DialogPrzedmioty(playerid);
 	}
 
-	MruMySQL_InsertSkin(playerid, id);
+	MruMySQL_InsertPremiumItem(playerid, id);
 
-	Log(premiumLog, INFO, "%s kupi³ unikatowy skin %d za %dMC",
+	Log(premiumLog, INFO, "%s kupi³ unikatowy przedmiot %d za %dMC",
 		GetPlayerLogName(playerid), 
-		SkinyPremium[id][Model], 
-		SkinyPremium[id][Cena]);
+		PrzedmiotyPremium[id][Model], 
+		PrzedmiotyPremium[id][Cena]);
 
-	UniqueSkins[playerid][id] = true;
+	ZabierzMC(playerid, PrzedmiotyPremium[id][Cena]);
+	//TODO: dodaæ item do posiadanych
+	//TODO: dodac nazwy przedmiotow
+	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", SkinyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
+	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /przedmioty");
 
-	ZabierzMC(playerid, UNIKATOWY_SKIN_CENA);
-
-	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ skin o ID %d za %d MC.", SkinyPremium[id][Model], UNIKATOWY_SKIN_CENA));
-	_MruAdmin(playerid, "Listê swoich skinów premium znajdziesz pod komend¹ /skiny");
-
-	premium_printMcQuantity(playerid);
-
+	premium_printMcBalance(playerid);
 	return 1;
 }
 
@@ -264,7 +262,7 @@ KupSlotPojazdu(playerid)
 		GetPlayerLogName(playerid));
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie slot na auto za %d MC. Masz teraz %d slotów.", CAR_SLOT_CENA, MRP_GetPlayerCarSlots(playerid)));
 
-	premium_printMcQuantity(playerid);
+	premium_printMcBalance(playerid);
 	DialogMenuDotacje(playerid);
 	return 1;
 }
@@ -286,8 +284,34 @@ KupZmianeNicku(playerid)
 		GetPlayerLogName(playerid));
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie zmianê nicku za %d MC. Masz teraz %d zmian nicku.", ZMIANA_NICKU_CENA, MRP_GetPlayerNickChanges(playerid)));
 
-	premium_printMcQuantity(playerid);
+	premium_printMcBalance(playerid);
 	DialogMenuDotacje(playerid);
+	return 1;
+}
+
+KupSkinPremium(playerid, id)
+{
+	if(PremiumInfo[playerid][pMC] < SkinyPremium[id][Cena])
+	{
+		sendErrorMessage(playerid, "Nie staæ Ciê na ten skin");
+		return DialogSkiny(playerid);
+	}
+
+	MruMySQL_InsertSkin(playerid, id);
+
+	Log(premiumLog, INFO, "%s kupi³ unikatowy skin %d za %dMC",
+		GetPlayerLogName(playerid), 
+		SkinyPremium[id][Model], 
+		SkinyPremium[id][Cena]);
+
+	UniqueSkins[playerid][id] = true;
+
+	ZabierzMC(playerid, SkinyPremium[id][Cena]);
+
+	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ skin o ID %d za %d MC.", SkinyPremium[id][Model], SkinyPremium[id][Cena]));
+	_MruAdmin(playerid, "Listê swoich skinów premium znajdziesz pod komend¹ /skiny");
+
+	premium_printMcBalance(playerid);
 	return 1;
 }
 
@@ -328,7 +352,7 @@ KupNumerTelefonu(playerid, string:_numer[])
 		Log(premiumLog, INFO, "%s kupil numer telefonu %d za %dMC.",
 			GetPlayerLogName(playerid), numer, cena);
 
-		premium_printMcQuantity(playerid);
+		premium_printMcBalance(playerid);
 		DialogMenuDotacje(playerid);
 	}
 	else
@@ -374,6 +398,12 @@ PlayerHasSkin(playerid, skinid)
 			return UniqueSkins[playerid][i];
 		}
 	}
+	return false;
+}
+
+PlayerHasPremiumItem(playerid, item)
+{
+	//TODO: impl
 	return false;
 }
 

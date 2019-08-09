@@ -151,8 +151,23 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//TODO: stworzyæ przedmioty
-			SendClientMessage(playerid, -1, "W budowie.");
+			if(listitem < 0 || listitem >= MAX_PREMIUM_ITEMS)
+			{
+				Log(premiumLog, ERROR, "Error in PREMIUM_DIALOG_PRZEDMIOTY (listitem %d for player %s)", listitem, GetPlayerLogName(playerid));
+				sendErrorMessage(playerid, "B³¹d, nie da siê kupiæ tego przedmiotu. Zg³oœ swój problem administracji.");
+				return DialogPrzedmioty(playerid);
+			}
+
+			if(!PlayerHasPremiumItem(playerid, listitem))
+			{
+				KupPrzedmiotPremium(playerid, listitem);
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Masz ju¿ ten przedmiot!");
+				return DialogPrzedmioty(playerid);
+			}
+			KupPrzedmiotPremium(playerid, listitem);
 		}
 		else
 		{
@@ -188,12 +203,14 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(listitem < 0 || listitem >= MAX_PREMIUM_SKINS)
 			{
 				Log(premiumLog, ERROR, "Error in PREMIUM_DIALOG_SKINY (listitem %d for player %s)", listitem, GetPlayerLogName(playerid));
+				sendErrorMessage(playerid, "B³¹d, nie da siê kupiæ tego skina. Zg³oœ swój problem administracji.");
 				return DialogSkiny(playerid);
 			}
 
 			if(!PlayerHasSkin(playerid, listitem))
 			{
 				KupSkinPremium(playerid, listitem);
+				DialogPlayerUniqueSkins(playerid);
 			}
 			else
 			{
@@ -340,6 +357,7 @@ DialogPrzedmioty(playerid)
 		string,
 		"Kup", "Wstecz"
 	);
+	return 1;
 }
 
 DialogSlotyPojazdu(playerid)
@@ -378,7 +396,7 @@ DialogSkiny(playerid)
 	return 1;
 }
 
-ListPlayerUniqueSkins(playerid)
+DialogPlayerUniqueSkins(playerid)
 {
 	DynamicGui_Init(playerid);
 
