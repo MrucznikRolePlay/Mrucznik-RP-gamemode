@@ -7531,17 +7531,14 @@ public OnDynamicObjectMoved(objectid)
     }
     return 1;
 }
-
-
-/*
-new SERVER_DOWNLOAD[] = "https://github.com/SzYm3k/MrucznikResources/raw/master";
+new SERVER_DOWNLOAD[] = "https://github.com/Mrucznik/Mrucznik-RP-Models/raw/master";
 public OnPlayerRequestDownload(playerid, type, crc)
 {
 	if(!IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
-	new filename[64], filefound, final_url[256];
+	new filename[64], filefound, final_url[256], string[124];
 	if(type == DOWNLOAD_REQUEST_TEXTURE_FILE)
 	{
 		filefound = FindTextureFileNameFromCRC(crc, filename, sizeof(filename));
@@ -7554,9 +7551,11 @@ public OnPlayerRequestDownload(playerid, type, crc)
 	{
 		format(final_url, sizeof(final_url), "%s/%s", SERVER_DOWNLOAD, filename);
 		RedirectDownload(playerid, final_url);
+		format(string, sizeof(string), "Poprawnie wykonano request po plik %s", filename); 
+		sendTipMessage(playerid, string); 
 	}
 	return 1;
-}*/
+}
 public OnVehicleRespray(playerid, vehicleid, color1, color2)
 {
     if(CarData[VehicleUID[vehicleid][vUID]][c_Color][0] != color1)
