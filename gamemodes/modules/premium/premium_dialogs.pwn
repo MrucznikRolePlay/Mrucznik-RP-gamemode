@@ -340,11 +340,10 @@ DialogPojazdyPremium(playerid)
 	new string[1590];
 	for(new i; i<MAX_PREMIUM_VEHICLES; i++)
 	{
-		if(PojazdyPremium[i][Model] != 0)
-			format(string, sizeof(string), "%s%s - "INCOLOR_GREEN"%d Mrucznik Coins\n", string, VehicleNames[PojazdyPremium[i][Model]-400], PojazdyPremium[i][Cena]);
+		strcat(string, sprintf("%d\t%s~n~~g~%dMC\n", PojazdyPremium[i][Model], VehicleNames[PojazdyPremium[i][Model]-400], PojazdyPremium[i][Cena]));
 	}
 	string[strlen(string)-1] = '\0';
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(POJAZDY), DIALOG_STYLE_LIST, "Premium - Us³ugi - Pojazdy", string,"Kup", "Wróæ");
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(POJAZDY), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Us³ugi - Pojazdy", string, "Kup", "Wstecz");
 	sendTipMessageEx(playerid, COLOR_RED, "Uwaga klikniêcie w pojazd powoduje jego natychmiastowy zakup!"); 
 	sendTipMessageEx(playerid, COLOR_RED, "Je¿eli nie jesteœ zdecydowany nie naciskaj w nazwê pojazdu."); 
 	return 1;
@@ -361,6 +360,7 @@ DialogPrzedmioty(playerid)
             strcat(string, substring);
         } 
 	}
+	string[strlen(string)-1] = '\0';
 
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTY), DIALOG_STYLE_PREVIEW_MODEL,
 		"Premium - Us³ugi - Przedmioty",
@@ -397,6 +397,7 @@ DialogSkiny(playerid)
             strcat(string, substring);
         } 
 	}
+	string[strlen(string)-1] = '\0';
 
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(SKINY), DIALOG_STYLE_PREVIEW_MODEL, 
 		"Premium - Us³ugi - Skiny", 
