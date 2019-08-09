@@ -2426,20 +2426,7 @@ DajBronieFrakcyjne(playerid)
 	        playerWeapons[playerid][weaponLegal10] = 1;
 	    }
 	}
-	else if(PlayerInfo[playerid][pMember] == 2 && PlayerInfo[playerid][pRank] >= 4 && PlayerInfo[playerid][pRank] >= 5)
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 23 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 23; PlayerInfo[playerid][pAmmo2] = 207;
-	        playerWeapons[playerid][weaponLegal3] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun3] == 0 || PlayerInfo[playerid][pGun3] == 25 && PlayerInfo[playerid][pAmmo3] < 50 || PlayerInfo[playerid][pAmmo3] <= 5)
-	    {
-	        PlayerInfo[playerid][pGun3] = 25; PlayerInfo[playerid][pAmmo3] = 150;
-	        playerWeapons[playerid][weaponLegal4] = 1;
-	    }
-	}
-	if(PlayerInfo[playerid][pMember] == 2 && PlayerInfo[playerid][pRank] <= 3 || PlayerInfo[playerid][pLider] == 2)
+	if(PlayerInfo[playerid][pMember] == 2)
 	{
 	    if(PlayerInfo[playerid][pGun1] == 0)
 	    {
@@ -2468,7 +2455,7 @@ DajBronieFrakcyjne(playerid)
 	    }
 	    if(PlayerInfo[playerid][pGun6] == 0 || PlayerInfo[playerid][pGun6] == 33 && PlayerInfo[playerid][pAmmo6] < 20  || PlayerInfo[playerid][pAmmo4] <= 5)
 	    {
-	        PlayerInfo[playerid][pGun6] = 33; PlayerInfo[playerid][pAmmo6] = 50;
+	        PlayerInfo[playerid][pGun6] = 34; PlayerInfo[playerid][pAmmo6] = 69;
 	        playerWeapons[playerid][weaponLegal7] = 1;
 	    }
 	    if(PlayerInfo[playerid][pGun8] == 0 || PlayerInfo[playerid][pGun8] == 17 && PlayerInfo[playerid][pAmmo8] < 10 || PlayerInfo[playerid][pAmmo8] <= 2)

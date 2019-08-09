@@ -7531,30 +7531,30 @@ public OnDynamicObjectMoved(objectid)
     }
     return 1;
 }
-new SERVER_DOWNLOAD[] = "https://github.com/Mrucznik/Mrucznik-RP-Models/raw/master";
 public OnPlayerRequestDownload(playerid, type, crc)
 {
 	if(!IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
-	new filename[64], filefound, final_url[256], string[124];
-	if(type == DOWNLOAD_REQUEST_TEXTURE_FILE)
-	{
-		filefound = FindTextureFileNameFromCRC(crc, filename, sizeof(filename));
+	new fullurl[256+1];
+	new dlfilename[64+1];
+	new foundfilename=0;
+ 
+	if(!IsPlayerConnected(playerid)) return 0;
+ 
+	if(type == DOWNLOAD_REQUEST_TEXTURE_FILE) {
+		foundfilename = FindTextureFileNameFromCRC(crc,dlfilename,64);
 	}
-	else if(type == DOWNLOAD_REQUEST_MODEL_FILE)
-	{
-		filefound = FindModelFileNameFromCRC(crc, filename, sizeof(filename));
-	}	
-	if(filefound)
-	{
-		format(final_url, sizeof(final_url), "%s/%s", SERVER_DOWNLOAD, filename);
-		RedirectDownload(playerid, final_url);
-		format(string, sizeof(string), "Poprawnie wykonano request po plik %s", filename); 
-		sendTipMessage(playerid, string); 
+	else if(type == DOWNLOAD_REQUEST_MODEL_FILE) {
+		foundfilename = FindModelFileNameFromCRC(crc,dlfilename,64);
 	}
-	return 1;
+ 
+	if(foundfilename) {
+		format(fullurl,256,"https://github.com/Mrucznik/Mrucznik-RP-Models/raw/master/%s",dlfilename);
+		RedirectDownload(playerid,fullurl);
+	}
+	return 0;
 }
 public OnVehicleRespray(playerid, vehicleid, color1, color2)
 {
