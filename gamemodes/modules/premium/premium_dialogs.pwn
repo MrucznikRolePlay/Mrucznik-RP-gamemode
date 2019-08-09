@@ -225,10 +225,8 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new skin = DynamicGui_GetDataInt(playerid, listitem);
-
 			new param[4];
 			valstr(param,skin);
-
 			return RunCommand(playerid, "/premiumskin",  param); 
 		}
 		else
@@ -261,7 +259,7 @@ DialogMenuDotacje(playerid)
 		"    "HQ_COLOR_TEKST2"Kup pojazd unikatowy\n"\
 		""#HQ_COLOR_TEKST"Postaæ\n"\
 		"    "HQ_COLOR_TEKST2"Dodatkowa zmiana nicku\n"\
-		"    "HQ_COLOR_TEKST2"Unikatowy skin\n"
+		"    "HQ_COLOR_TEKST2"Unikatowy skin\n"\
 		"    "HQ_COLOR_TEKST2"Obiekt do noszenia\n",
 		//"Rynek Mrucznik Coins'ów\n"
 		//"Wspomó¿ nasz serwer i otrzymaj Mrucznik Coins'y!", 
@@ -330,11 +328,21 @@ DialogPojazdyPremium(playerid)
 
 DialogPrzedmioty(playerid)
 {
-	//TODO
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTY), DIALOG_STYLE_LIST, "Premium - Us³ugi - Przedmioty", 
-		" "\
-		"",
-	"Kup", "Wróæ");
+	new substring[32];
+	static string[MAX_PREMIUM_ITEMS * sizeof(substring)];
+
+	if(isnull(string)) {
+        for (new i; i < MAX_PREMIUM_ITEMS; i++) {
+            format(substring, sizeof(substring), "%i\t~g~%dMC\n", PrzedmiotyPremium[i][Model], PrzedmiotyPremium[i][Cena]);
+            strcat(string, substring);
+        } 
+	}
+
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTY), DIALOG_STYLE_PREVIEW_MODEL,
+		"Premium - Us³ugi - Przedmioty",
+		string,
+		"Kup", "Wstecz"
+	);
 }
 
 DialogSlotyPojazdu(playerid)
@@ -355,7 +363,7 @@ DialogZmianyNicku(playerid)
 
 DialogSkiny(playerid)
 {
-	new substring[20];
+	new substring[32];
 	static string[MAX_PREMIUM_SKINS * sizeof(substring)];
 
 	if(isnull(string)) {
@@ -368,7 +376,7 @@ DialogSkiny(playerid)
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(SKINY), DIALOG_STYLE_PREVIEW_MODEL, 
 		"Premium - Us³ugi - Skiny", 
 		string,
-		"Kup", "Wróæ"
+		"Kup", "Wstecz"
 	);
 	return 1;
 }

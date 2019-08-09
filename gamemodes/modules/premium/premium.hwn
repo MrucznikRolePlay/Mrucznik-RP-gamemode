@@ -126,7 +126,7 @@ new SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
 
 new PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] = 
 {
-	{18645, 100},
+	{18645, 100}
 };
 
 
