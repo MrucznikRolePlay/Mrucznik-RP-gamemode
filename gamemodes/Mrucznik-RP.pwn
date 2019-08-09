@@ -57,6 +57,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <timestamptodate>
 #include <discord-connector>
 #include <requests>
+#include <memory>
 
 //-------<[ Include ]>-------
 #include <a_http>
