@@ -229,7 +229,7 @@ public OnGameModeInit()
 	MruMySQL_IloscLiderowLoad();
 
 	//-------<[ 0.3DL ]>-------
-	Load_DL_Skins(); 
+	LoadDLSkins();
 	//-------<[ commands ]>-------
 	InitCommands();
 
