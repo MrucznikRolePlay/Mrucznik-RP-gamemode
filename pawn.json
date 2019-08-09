@@ -18,7 +18,8 @@
 		"oscar-broman/strlib",
 		"pawn-lang/YSI-Includes@4.x",
 		"Southclaws/samp-whirlpool",
-		"Wuzi/vending"
+		"Wuzi/vending",
+		"BigETI/pawn-memory"
 	],
 	"build": {
 		"name": "",

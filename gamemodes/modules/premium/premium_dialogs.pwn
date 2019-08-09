@@ -79,6 +79,10 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						DialogMenuDotacje(playerid);
 					}
 				}
+				case 12:
+				{
+					DialogPrzedmioty(playerid);
+				}
 				default:
 				{
 					DialogMenuDotacje(playerid);
@@ -258,6 +262,7 @@ DialogMenuDotacje(playerid)
 		""#HQ_COLOR_TEKST"Postaæ\n"\
 		"    "HQ_COLOR_TEKST2"Dodatkowa zmiana nicku\n"\
 		"    "HQ_COLOR_TEKST2"Unikatowy skin\n",
+		"    "HQ_COLOR_TEKST2"Obiekt do noszenia\n",
 		//"Rynek Mrucznik Coins'ów\n"
 		//"Wspomó¿ nasz serwer i otrzymaj Mrucznik Coins'y!", 
 	PremiumInfo[playerid][pMC], kpinfo, ((IsPlayerPremium(playerid)) ? ("Przed³u¿") : ("Kup")), PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCarSlots]);

@@ -59,6 +59,12 @@ enum eSkinyPremium
 	Model
 };
 
+enum ePrzedmiotyPremium
+{
+	Model,
+	Cena
+}
+
 //-----------------<[ Zmienne: ]>-------------------
 new bool:UniqueSkins[MAX_PLAYERS][MAX_PREMIUM_SKINS] = {false, ...};
 new PremiumInfo[MAX_PLAYERS][ePremiumInfo];
@@ -116,6 +122,11 @@ new SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
 	{127},
 	{149}
 };
+
+new PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] = 
+{
+	{18645, 100},
+}
 
 
 //------------------<[ Forwardy: ]>--------------------
