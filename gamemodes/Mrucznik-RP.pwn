@@ -71,6 +71,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_commands>
 #include <YSI\y_groups>
 #include <YSI\y_hooks>
+#include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <nex-ac>
 #include <md5>
@@ -82,6 +83,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
 #include <true_random>
 #include <PreviewModelDialog>
+#include <vector>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
