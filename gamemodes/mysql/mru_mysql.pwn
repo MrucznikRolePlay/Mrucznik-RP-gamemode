@@ -113,21 +113,11 @@ Load_MySQL_Leader(playerid)
 	}
 	return 1;
 }
-MruMySQL_IloscLiderowUPDATE()
-{
-    new lStr[64];
-    format(lStr, sizeof(lStr), "UPDATE `mru_config` SET `FracLiders`='%d'", All_Leaders);
-    mysql_query(lStr); 
-}
 MruMySQL_IloscLiderowLoad()
 {
-    new lStr[124];
-    format(lStr, sizeof(lStr), "SELECT `FracLiders` FROM `mru_config`");
-    mysql_query(lStr);
-    mysql_store_result(); 
-    mysql_fetch_row_format(lStr, "|");
-    mysql_free_result();
-	sscanf(lStr, "p<|>d", All_Leaders);  
+    new lStr[64];
+    format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_liderzy`");
+    All_Leaders = mysql_query(lStr); 
 }
 MruMySQL_CreateAccount(playerid, pass[])
 {

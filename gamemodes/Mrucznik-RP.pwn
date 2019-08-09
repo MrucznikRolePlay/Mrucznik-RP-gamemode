@@ -465,7 +465,6 @@ public OnGameModeExit()
     UnloadTXD();
     Patrol_Unload();
     TJD_Exit();
-	MruMySQL_IloscLiderowUPDATE();
     for(new i=Zone_Points[0];i<=Zone_Points[1];i++)
     {
         GangZoneDestroy(i);
