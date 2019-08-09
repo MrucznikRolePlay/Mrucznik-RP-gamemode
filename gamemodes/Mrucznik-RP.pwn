@@ -5870,7 +5870,7 @@ OnPlayerLogin(playerid, password[])
 		}
 		if(Uprawnienia(playerid, ACCESS_PANEL))
 		{
-			format(string, sizeof(string), "Liderów frakcji w bazie danych: %d.", All_Leader);
+			format(string, sizeof(string), "Liderów frakcji w bazie danych: %d.", All_Leaders);
 			sendTipMessage(playerid, string); 
 		}
 	}
@@ -6566,7 +6566,7 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@: Nie znaleziono animacji.");
         return 0;
     }
-	if(text[0] = '€')
+	if(text[0] == '€')
 	{
 		sendErrorMessage(playerid, "Znak € na pocz¹tku zdania jest zablokowany!"); 
 		return 0;

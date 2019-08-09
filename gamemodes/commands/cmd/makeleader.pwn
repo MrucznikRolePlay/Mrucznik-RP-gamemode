@@ -75,12 +75,12 @@ YCMD:makeleader(playerid, params[], help)
 						Remove_MySQL_Leader(para1); 
 						return 1;
 					}
-						if(PlayerInfo[para1][pMember] > 0 || GetPlayerOrg(para1) != 0)
-						{
-							sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest we frakcji jako cz³onek lub w rodzinie !");
-							return 1;
-						}
+					if(PlayerInfo[para1][pMember] > 0 || GetPlayerOrg(para1) != 0)
+					{
+						sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest we frakcji jako cz³onek lub w rodzinie !");
+						return 1;
 					}
+					
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pLider] = level;
