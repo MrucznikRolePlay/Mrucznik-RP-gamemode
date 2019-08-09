@@ -246,6 +246,18 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
+	else if(dialogid == PREMIUM_DIALOG(PRZEDMIOTYGRACZA))
+	{
+		if(response)
+		{
+			new item = DynamicGui_GetDataInt(playerid, listitem);
+			AttachPremiumItem(playerid, item);
+		}
+		else
+		{
+			return 1;
+		}
+	}
 	return 1;
 }
 

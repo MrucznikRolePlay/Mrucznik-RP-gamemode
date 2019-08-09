@@ -362,6 +362,12 @@ KupNumerTelefonu(playerid, string:_numer[])
 	return 1;
 }
 
+AttachPremiumItem(playerid, item)
+{
+	SetPlayerAttachedObject(playerid, 3, item, 2);
+	return 1;
+}
+
 //---< Is >---
 IsPlayerPremium(playerid)
 {
