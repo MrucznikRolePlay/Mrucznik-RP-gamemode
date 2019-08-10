@@ -319,26 +319,6 @@ public OznaczCzitera(playerid)
 	return 1;
 }
 
-/*stock ListaCziterow(playerid)
-{
-	new string[32];
-	SendClientMessage(playerid, COLOR_RED, "Lista cziterów u których wykryto s0beita:");
-	foreach(new i : Player)
-	{
-		if(GetPVarInt(i, "AC_oznaczony") == 1)
-		{
-			format(string, sizeof(string), "%s[%d]", GetNick(i), i);
-			SendClientMessage(playerid, COLOR_WHITE, string);
-		}
-	}
-}*/
-/*
-IsAValidURL(string[])
-{
-	if(regex_exmatch(string, regexURL) >= 0 )
-		return 1;
-	return 0;
-}*/
 GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];

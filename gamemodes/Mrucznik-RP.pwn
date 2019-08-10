@@ -222,7 +222,6 @@ public OnGameModeInit()
 
 	//-------<[ libRegEx ]>-------
 	regex_syntax(SYNTAX_PERL);
-	regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
 
 	//-------<[ sscanf ]>-------
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
