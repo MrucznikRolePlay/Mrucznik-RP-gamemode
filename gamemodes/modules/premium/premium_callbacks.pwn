@@ -48,9 +48,9 @@ hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:f
 
 			MruMySQL_UpdatePremiumItem(playerid, modelid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, boneid, true);
 			SetPlayerAttachedObject(playerid, index, modelid, boneid, 
-				ao[playerid][index][ao_x], ao[playerid][index][ao_y], ao[playerid][index][ao_z], 
-				ao[playerid][index][ao_rx], ao[playerid][index][ao_ry], ao[playerid][index][ao_rz], 
-				1, 1, 1
+				fOffsetX, fOffsetY, fOffsetZ, 
+				fRotX, fRotY, fRotZ, 
+				1, 1, 1 //scale always 1
 			);
 		}
 		else

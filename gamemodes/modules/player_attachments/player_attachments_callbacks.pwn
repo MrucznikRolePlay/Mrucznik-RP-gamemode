@@ -28,5 +28,9 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
+hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
+{
+	//TODO: Move premium items here
+}
 
 //end
