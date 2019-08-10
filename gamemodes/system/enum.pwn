@@ -1470,21 +1470,6 @@ enum pPInfo
 	PERS_NEWBIE//Wyœwietlanie chatu newbie
 };
 new PlayerPersonalization[MAX_PLAYERS][pPInfo];
-enum pDodatek
-{
-	pSlot1,
-	pSlot2,
-	pSlot3,
-	pSlot4,
-	pSlot5,
-	pSlot6,
-	pSlot7,
-	pSlot8,
-	pSlot9,
-	pSlot10
-
-};
-new PlayerAdds[MAX_PLAYERS][pDodatek];
 enum pHaul
 {
 	pCapasity,
