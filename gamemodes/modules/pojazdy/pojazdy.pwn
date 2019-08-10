@@ -198,7 +198,7 @@ Car_Load()
     //SPAWN
     for(new i=lLoad;i<gCars;i++)
     {
-        new vid = Car_Spawn(i, true, false);
+        new vid = Car_Spawn(i, false);
 
 		//Sultany PD:
 		if(CarData[i][c_Siren] == 1)
@@ -499,7 +499,7 @@ Car_GetOwner(vehicleid)
     return CarData[VehicleUID[vehicleid][vUID]][c_Owner];
 }
 
-Car_Spawn(lUID, bool:onload=false, bool:loaddesc=true)
+Car_Spawn(lUID, bool:loaddesc=true)
 {
     if(GetVehicleModel(CarData[lUID][c_ID]) != 0) return 0;
 

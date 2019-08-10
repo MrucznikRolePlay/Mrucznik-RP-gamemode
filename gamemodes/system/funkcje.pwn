@@ -11436,22 +11436,6 @@ public TourCamera(playerid, step)
         SetPVarInt(playerid, "tourcameratimer", SetTimerEx("TourCamera", lTime, 0, "dd", playerid, step+1));
     return 1;
 }
-
-public MyItems_Load(playerid)
-{
-    new str[256], model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, uid, active, bone;
-    format(str, 256, "SELECT `model`, `id`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`, `active`,`bone` FROM `mru_playeritems` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
-    mysql_query(str);
-    mysql_store_result();
-    while(mysql_fetch_row_format(str, "|"))
-    {
-        sscanf(str, "p<|>ddfffffffffdd", model, uid, x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-        CallRemoteFunction("SEC_MyItems_HandleItems", "dddfffffffffdd", playerid, model, uid, x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-    }
-    mysql_free_result();
-    //CallRemoteFunction("SEC_MyItems_HandleOne", "dd", playerid, 19065);
-    InitMyItems[playerid] = true;
-}
 //--------------------------------------------------
 
 

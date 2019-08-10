@@ -52,15 +52,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 8:
 				{
-					if(PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
-					{
-						DialogPojazdyPremium(playerid);
-					}
-					else
-					{
-						_MruGracz(playerid, "Aby kupiæ pojazd unikatowy musisz znajdowaæ siê przy salonie aut.");
-						DialogMenuDotacje(playerid);
-					}
+					DialogPojazdyPremium(playerid);
 				}
 				case 10:
 				{
@@ -68,15 +60,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 11:
 				{
-					if(IsAtClothShop(playerid))
-					{
-						DialogSkiny(playerid);
-					}
-					else
-					{
-						_MruGracz(playerid, "Pamiêtaj, ¿e aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami.");
-						DialogMenuDotacje(playerid);
-					}
+					DialogSkiny(playerid);
 				}
 				case 12:
 				{
@@ -139,6 +123,12 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
+			if(!PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
+			{
+				_MruGracz(playerid, "Aby kupiæ pojazd unikatowy musisz znajdowaæ siê przy salonie aut.");
+				DialogPojazdyPremium(playerid);
+				return 1;
+			}
 			KupPojazdPremium(playerid, listitem);
 		}
 		else
@@ -150,11 +140,11 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(listitem < 0 || listitem >= MAX_PREMIUM_ITEMS)
+			if(!IsAtClothShop(playerid))
 			{
-				Log(premiumLog, ERROR, "Error in PREMIUM_DIALOG_PRZEDMIOTY (listitem %d for player %s)", listitem, GetPlayerLogName(playerid));
-				sendErrorMessage(playerid, "B³¹d, nie da siê kupiæ tego przedmiotu. Zg³oœ swój problem administracji.");
-				return DialogPrzedmioty(playerid);
+				_MruGracz(playerid, "Aby kupiæ unikatowy przedmiot, musisz znajdowaæ siê w sklepie z ubraniami.");
+				DialogPrzedmioty(playerid);
+				return 1;
 			}
 
 			if(PlayerHasPremiumItem(playerid, PrzedmiotyPremium[listitem][Model]))
@@ -196,17 +186,17 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(listitem < 0 || listitem >= MAX_PREMIUM_SKINS)
-			{
-				Log(premiumLog, ERROR, "Error in PREMIUM_DIALOG_SKINY (listitem %d for player %s)", listitem, GetPlayerLogName(playerid));
-				sendErrorMessage(playerid, "B³¹d, nie da siê kupiæ tego skina. Zg³oœ swój problem administracji.");
-				return DialogSkiny(playerid);
-			}
-
 			if(PlayerHasSkin(playerid, SkinyPremium[listitem][Model]))
 			{
 				sendErrorMessage(playerid, "Masz ju¿ ten skin!");
 				return DialogSkiny(playerid);
+			}
+
+			if(!IsAtClothShop(playerid))
+			{
+				_MruGracz(playerid, "Aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami.");
+				DialogSkiny(playerid);
+				return 1;
 			}
 			
 			KupSkinPremium(playerid, listitem);
@@ -247,7 +237,8 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new item = DynamicGui_GetDataInt(playerid, listitem);
-			AttachPremiumItem(playerid, item);
+			new index = AttachPremiumItem(playerid, item, 2);
+			EditAttachedObject(playerid, index);
 		}
 		else
 		{

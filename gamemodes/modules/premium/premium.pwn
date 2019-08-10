@@ -99,6 +99,7 @@ premium_loadForPlayer(playerid)
 	if(kpMC > 0) PremiumInfo[playerid][pMC] = kpMC;
 
 	MruMySQL_LoadPlayerPremiumSkins(playerid);
+	MruMySQL_LoadPlayerPremiumItems(playerid);
 }
 
 premium_printMcBalance(playerid)
@@ -221,13 +222,12 @@ KupPrzedmiotPremium(playerid, id)
 	}
 
 	MruMySQL_InsertPremiumItem(playerid, id);
+	ZabierzMC(playerid, PrzedmiotyPremium[id][Cena]);
 
 	Log(premiumLog, INFO, "%s kupi³ unikatowy przedmiot %d za %dMC",
 		GetPlayerLogName(playerid), 
-		PrzedmiotyPremium[id][Model], 
+		PrzedmiotyPremium[id][Model],
 		PrzedmiotyPremium[id][Cena]);
-
-	ZabierzMC(playerid, PrzedmiotyPremium[id][Cena]);
 	VECTOR_push_back_val(VPremiumItems[playerid], PrzedmiotyPremium[id][Model]);
 	
 	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", PrzedmiotyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
@@ -321,7 +321,7 @@ KupNumerTelefonu(playerid, string:_numer[])
 
 	new numer = strval(_numer);
 
-	if(!MRP_IsPhoneNumberAvailable(numer))
+	if(!MruMySQL_IsPhoneNumberAvailable(numer))
 	{
 
 		new cena;
@@ -362,10 +362,22 @@ KupNumerTelefonu(playerid, string:_numer[])
 	return 1;
 }
 
-AttachPremiumItem(playerid, item)
+AttachPremiumItem(playerid, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY = 0.0, Float:fOffsetZ = 0.0, Float:fRotX = 0.0, Float:fRotY = 0.0, Float:fRotZ = 0.0, Float:fScaleX = 1.0, Float:fScaleY = 1.0, Float:fScaleZ = 1.0, materialcolor1 = 0, materialcolor2 = 0)
 {
-	SetPlayerAttachedObject(playerid, 3, item, 2);
-	return 1;
+	//TODO: indexes management
+	new index = 3;
+	ao[playerid][index][ao_x] = fOffsetX;
+	ao[playerid][index][ao_y] = fOffsetY;
+	ao[playerid][index][ao_z] = fOffsetZ;
+	ao[playerid][index][ao_rx] = fRotX;
+	ao[playerid][index][ao_ry] = fRotY;
+	ao[playerid][index][ao_rz] = fRotZ;
+	ao[playerid][index][ao_sx] = fScaleX;
+	ao[playerid][index][ao_sy] = fScaleY;
+	ao[playerid][index][ao_sz] = fScaleZ;
+
+	SetPlayerAttachedObject(playerid, index, modelid, bone, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ, materialcolor1, materialcolor2); 
+	return index;
 }
 
 //---< Is >---
@@ -385,7 +397,7 @@ IsPlayerPremiumOld(playerid)
 	return 0;
 }
 
-IsAUnikat(modelid)
+IsAUnikatowyPojazd(modelid)
 {
 	for(new i; i<MAX_PREMIUM_VEHICLES; i++)
 		if(modelid == PojazdyPremium[i][Model])
@@ -401,20 +413,6 @@ PlayerHasSkin(playerid, skin)
 PlayerHasPremiumItem(playerid, item)
 {
 	return VECTOR_find_val(VPremiumItems[playerid], item) != INVALID_VECTOR_INDEX;
-}
-
-// returns -1 if skin is not premium skin,
-// returns id of premium skin othervise
-GetPremiumSkinSlot(skin)
-{
-	for(new i; i<MAX_PREMIUM_SKINS; i++)
-	{
-		if(SkinyPremium[i][Model] == skin)
-		{
-			return i;
-		}
-	}
-	return -1;
 }
 
 //end
