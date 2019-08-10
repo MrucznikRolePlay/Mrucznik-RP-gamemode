@@ -41,6 +41,7 @@ YCMD:makevleader(playerid, params[], help)
 				if(sscanf(params, "k<fix>d", giveplayerid, value))
 				{
 					sendTipMessage(playerid, "U¿yj /makevleader [Nick] [Poziom Lidera]"); 
+					sendTipMessage(playerid, "Poziom 0 - NIKT [Zabiera lidera pomocniczego]");
 					sendTipMessage(playerid, "Poziom 2 - VLD [Pe³ny dostêp, nie mo¿e mianowaæ innych VLD]");
 					sendTipMessage(playerid, "Poziom 3 - Kierownik [Tylko /przyjmij, /awans /zwolnij"); 
 					return 1; 
@@ -52,12 +53,34 @@ YCMD:makevleader(playerid, params[], help)
 				}
 				if(IsPlayerConnected(giveplayerid))
 				{
+					if(value == 0)
+					{
+						Remove_MySQL_Leader(giveplayerid); 
+						format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
+						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+						Log(fracLDLog, INFO, "Lider %s usun¹³ gracza [VLD] %s z jego frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(PlayerInfo[playerid][pMember]));
+						PlayerInfo[giveplayerid][pMember] = 0;
+						PlayerInfo[giveplayerid][pLider] = 0;
+						PlayerInfo[giveplayerid][pJob] = 0;
+						orgUnInvitePlayer(giveplayerid);
+						MedicBill[giveplayerid] = 0;
+						SetPlayerSpawn(giveplayerid);
+						format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(giveplayerid));
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+						return 1;
+					}
 					if(PlayerInfo[giveplayerid][pLider] > 0 || PlayerInfo[giveplayerid][pMember] > 0)
 					{	
 						sendErrorMessage(playerid, "Ten Gracz jest ju¿ w jakiejœ frakcji!");
 						return 1;
 					}
 					new Frac = GetPlayerFraction(playerid); 
+					if((LeadersValue[LEADER_FRAC][Frac]+1) > 4)
+					{
+						sendErrorMessage(playerid, "Nie mo¿esz przyj¹æ kolejnego lidera! Limit to 4"); 
+						return 1;
+					}
 					PlayerInfo[giveplayerid][pLider] = Frac; 
 					PlayerInfo[giveplayerid][pLiderValue] = value; 
 					PlayerInfo[giveplayerid][pMember] = Frac; 
@@ -67,7 +90,7 @@ YCMD:makevleader(playerid, params[], help)
 					sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 					format(string, sizeof(string), "Mianowa³eœ/aœ %s liderem na stopien %d dla swojej frakcji!", GetNick(giveplayerid), value); 
 					sendTipMessageEx(playerid, COLOR_P@, string); 
-					Log(adminLog, INFO, "GLD %s dal lidera %s [%d] dla %s", GetPlayerLogName(playerid), FractionNames[Frac], value, GetPlayerLogName(giveplayerid));
+					Log(fracLDLog, INFO, "GLD %s dal lidera %s {Moc: %d} dla %s", GetPlayerLogName(playerid), GetFractionLogName(Frac), value,  GetPlayerLogName(giveplayerid));
 				}
 				else{
 					sendErrorMessage(playerid, "Nie ma takiego gracza"); 

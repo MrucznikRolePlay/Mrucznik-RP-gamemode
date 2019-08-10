@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                    logi                                                   //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ fracinfo ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,44 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 04.05.2019
 
-//
+// Opis:
+/*
+	
+*/
 
-//-----------------<[ Zmienne: ]>-------------------
-new Logger:adminLog; //Logi akcji administracyjnych
-new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
-new Logger:premiumLog; //Logi z systemu premium
-new Logger:punishmentLog; //Logi nadawania oraz zdejmowania kar dla graczy
-new Logger:warningLog; //Logi warningów administracyjnych
-new Logger:commandLog; //Logi komendy wykonanych przez graczy
-new Logger:nickLog; //Logi zmian nicków
-new Logger:sejfLog; //Logi stanu sejfów
-new Logger:serverLog; //Logi akcji serwera
-new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
-new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
-new Logger:chatLog; //Logi chatów
-new Logger:moneyLog; //Logi akcji zwi¹zanych z pieniêdzmi
-new Logger:errorLog; //Logi b³êdów wraz ze œcie¿k¹ wyst¹pienia
-new Logger:mysqlLog; //B³êdy mySQL
 
-new Logger:businessLog; //Logi z biznesów
-new Logger:fracLDLog; //logi z makevleader i innych dzia³añ 
-//old
-new Logger:admindutyLog;
+// Notatki skryptera:
+/*
+	
+*/
 
-//------------------<[ Enumy: ]>--------------------
-//------------------<[ Forwardy: ]>--------------------
-
-//end
+YCMD:fracinfo(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+		new valueFrac, string[256];
+		if( sscanf(params, "d", valueFrac))
+		{
+			sendTipMessage(playerid, "U¿yj /fracinfo [ID FRAKCJI]");
+			return 1;
+		}
+		if(valueFrac <= 0 || valueFrac > MAX_FRAC)
+		{
+			sendErrorMessage(playerid, "Nieprawid³owe ID frakcji!"); 
+			return 1;
+		}
+		new countWorkers;
+		foreach(new i : Player)
+		{
+			if(PlayerInfo[i][pMember] == valueFrac)
+			{
+				countWorkers++; 
+			}
+		}
+		format(string, sizeof(string), "{FFFFFF}Name: {AA3333}%s\n{FFFFFF}Slot: {AA3333}%d\n{FFFFFF}Liderów: {AA3333}%d\n{FFFFFF}Pracowników [On-Line]: {AA3333}%d", FractionNames[valueFrac], valueFrac, LeadersValue[LEADER_FRAC][valueFrac], countWorkers);
+		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string, false);
+		countWorkers=0;
+	}
+	return 1;
+}

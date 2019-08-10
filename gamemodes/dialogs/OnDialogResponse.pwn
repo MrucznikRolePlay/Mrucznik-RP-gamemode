@@ -1842,7 +1842,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
 			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, string);
 			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
-			Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d - pozostawiaj¹c VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), PlayerInfo[id_Lidera][pMember]);
+			Log(fracLDLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %s - pozostawiaj¹c VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), GetFractionLogName(PlayerInfo[id_Lidera][pMember]));
 			PlayerInfo[id_Lidera][pMember] = 0;
 			PlayerInfo[id_Lidera][pLider] = 0;
 			PlayerInfo[id_Lidera][pJob] = 0;

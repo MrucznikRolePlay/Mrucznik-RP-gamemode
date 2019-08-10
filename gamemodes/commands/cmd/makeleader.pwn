@@ -60,10 +60,11 @@ YCMD:makeleader(playerid, params[], help)
 							ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
 							return 1;
 						}
+						Remove_MySQL_Leader(para1); 
 						format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
-						Log(adminLog, INFO, "Admin %s usun¹³ gracza [VLD] %s z jego frakcji {NR %d }", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
+						Log(fracLDLog, INFO, "Admin %s usun¹³ gracza [VLD] %s z jego frakcji ", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(PlayerInfo[para1][pMember]));
 						PlayerInfo[para1][pMember] = 0;
 						PlayerInfo[para1][pLider] = 0;
 						PlayerInfo[para1][pJob] = 0;
@@ -72,7 +73,6 @@ YCMD:makeleader(playerid, params[], help)
 						SetPlayerSpawn(para1);
 						format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(para1));
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						Remove_MySQL_Leader(para1); 
 						return 1;
 					}
 					if(PlayerInfo[para1][pMember] > 0 || GetPlayerOrg(para1) != 0)
@@ -80,7 +80,11 @@ YCMD:makeleader(playerid, params[], help)
 						sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest we frakcji jako cz³onek lub w rodzinie !");
 						return 1;
 					}
-					
+					if((LeadersValue[LEADER_FRAC][level]+1) > 4)
+					{
+						sendErrorMessage(playerid, "Nie mo¿esz przyj¹æ kolejnego lidera! Limit to 4"); 
+						return 1;
+					}
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pLider] = level;
@@ -96,7 +100,7 @@ YCMD:makeleader(playerid, params[], help)
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					
 					//logi
-            		Log(adminLog, INFO, "Admin %s da³ graczowi %s lidera [GLD] frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
+            		Log(fracLDLog, INFO, "Admin %s da³ graczowi %s lidera [GLD] frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(level));
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;

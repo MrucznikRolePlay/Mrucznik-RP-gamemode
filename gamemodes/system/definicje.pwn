@@ -122,6 +122,9 @@
 #define ILOSC_AUT 483
 #define MAX_CHECKPOINTS 51
 
+//
+#define LEADER_FRAC 1
+#define LEADER_FAM 2
 
 //Kary:
 #define KARA_BAN 1

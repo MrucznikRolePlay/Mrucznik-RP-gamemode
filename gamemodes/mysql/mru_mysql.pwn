@@ -69,7 +69,8 @@ Create_MySQL_Leader(playerid, frac, level)
 	new query[256];
 	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID`, `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNick(playerid), PlayerInfo[playerid][pUID], frac, level);
 	mysql_query(query);
-	All_Leaders++;  
+	All_Leaders++;
+	LeadersValue[LEADER_FRAC][frac]++;   
 	return 1;
 }
 Remove_MySQL_Leader(playerid)
@@ -77,6 +78,7 @@ Remove_MySQL_Leader(playerid)
 	new query[256];
 	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `NICK`='%s'", GetNick(playerid));
 	mysql_query(query);
+	LeadersValue[LEADER_FRAC][GetPlayerFraction(playerid)]--; 
 	All_Leaders--;
 	return 1;
 }
@@ -118,6 +120,14 @@ MruMySQL_IloscLiderowLoad()
     new lStr[64];
     format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_liderzy`");
     All_Leaders = mysql_query(lStr); 
+	for(new i; i<=MAX_FRAC; i++)
+	{
+		if(i != 0)
+		{
+			format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_liderzy` WHERE `FracID`='%d'", i);
+			LeadersValue[LEADER_FRAC][i] = mysql_query(lStr); 
+		}
+	}
 }
 MruMySQL_CreateAccount(playerid, pass[])
 {

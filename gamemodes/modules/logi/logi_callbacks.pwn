@@ -48,6 +48,8 @@ hook OnGameModeInit()
 
 	//biznesy
 	businessLog = CreateLog("logi/business", ALL, false);
+	//frakcje
+	fracLDLog = CreateLog("logi/lider", ALL, false); 
 	//old
 	admindutyLog = CreateLog("logi/adminduty", ALL, false);
 }
@@ -70,6 +72,7 @@ hook OnGameModeExit()
 	DestroyLog(moneyLog);
 	DestroyLog(errorLog);
 	DestroyLog(businessLog); 
+	DestroyLog(fracLDLog); 
 	DestroyLog(admindutyLog);
 }
 

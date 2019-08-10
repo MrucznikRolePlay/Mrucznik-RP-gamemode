@@ -281,7 +281,6 @@
 #include "cmd/makeircadmin.pwn"
 #include "cmd/makeleader.pwn"
 #include "cmd/makemember.pwn"
-#include "cmd/makewomanleader.pwn"
 #include "cmd/malunek.pwn"
 #include "cmd/malunki.pwn"
 #include "cmd/mandacik.pwn"
@@ -683,6 +682,7 @@
 #include "cmd/dajscene.pwn"
 #include "cmd/news2.pwn"
 #include "cmd/setrankname.pwn"
+#include "cmd/fracinfo.pwn"
 
 InitCommands()
 {
