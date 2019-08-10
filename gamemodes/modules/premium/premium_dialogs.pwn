@@ -157,15 +157,12 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return DialogPrzedmioty(playerid);
 			}
 
-			if(!PlayerHasPremiumItem(playerid, listitem))
-			{
-				KupPrzedmiotPremium(playerid, listitem);
-			}
-			else
+			if(PlayerHasPremiumItem(playerid, PrzedmiotyPremium[listitem][Model]))
 			{
 				sendErrorMessage(playerid, "Masz ju¿ ten przedmiot!");
 				return DialogPrzedmioty(playerid);
 			}
+
 			KupPrzedmiotPremium(playerid, listitem);
 		}
 		else
@@ -415,7 +412,7 @@ DialogSkinyPremiumGracza(playerid)
 	VECTOR_foreach(v : VPremiumSkins[playerid])
 	{
 		new skin = MEM_get_val(v);
-		strcat(list, sprintf("%d\n", list, skin));
+		strcat(list, sprintf("%d\n", skin));
 		count++;
 		DynamicGui_AddRow(playerid, 1, skin);
 	}
@@ -435,7 +432,7 @@ DialogPrzedmiotyPremiumGracza(playerid)
 	VECTOR_foreach(v : VPremiumItems[playerid])
 	{
 		new item = MEM_get_val(v);
-		strcat(list, sprintf("%d\n", list, item));
+		strcat(list, sprintf("%d\n", item));
 		count++;
 		DynamicGui_AddRow(playerid, 1, item);
 	}
