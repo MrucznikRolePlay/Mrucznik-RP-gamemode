@@ -711,13 +711,8 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pLiderValue]); 
 	} 
 	//Wczytaj personalizacje
-<<<<<<< HEAD
-	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `newbie`";
-	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`='%d", lStr, PlayerInfo[playerid][pUID]);
-=======
 	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`";
 	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
->>>>>>> master
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())

@@ -118,10 +118,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 {
 	if(CanPlayerVote(playerid))
 	{
-<<<<<<< HEAD
-=======
 		CreateTextdraws(playerid);
->>>>>>> master
 		ShowElectionTextdraws(playerid);
 	}
     return 1;
@@ -132,10 +129,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     if(clickedid == Text:INVALID_TEXT_DRAW && votingInProgress[playerid])
     {
 		HideElectionTextdraws(playerid);
-<<<<<<< HEAD
-=======
 		DestroyTextdraws(playerid);
->>>>>>> master
 		return 1;
     }
     return 0;
@@ -514,8 +508,6 @@ PlayerCantVoteMessage(playerid)
 
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
-<<<<<<< HEAD
-=======
 CMD:reloadwybory(playerid)
 {
 	new nick[MAX_PLAYER_NAME];
@@ -527,7 +519,6 @@ CMD:reloadwybory(playerid)
 	}
 	return 1;
 }
->>>>>>> master
 
 CMD:gotowybory(playerid)
 {
@@ -536,20 +527,14 @@ CMD:gotowybory(playerid)
 		SetPlayerPos(playerid, LOKAL_WYBORCZY_POS);
 		SetPlayerVirtualWorld(playerid, LOKAL_WYBORCZY_VW);
 	}
-<<<<<<< HEAD
-=======
 	return 1;
->>>>>>> master
 }
 
 CMD:glosuj(playerid)
 {
 	if(CanPlayerVote(playerid))
 	{
-<<<<<<< HEAD
-=======
 		CreateTextdraws(playerid);
->>>>>>> master
 		ShowElectionTextdraws(playerid);
 	}
 	else

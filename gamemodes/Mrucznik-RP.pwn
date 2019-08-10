@@ -4921,19 +4921,9 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
 					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNick(playerid, true), GetPlayerVehicleID(playerid));
 					SendCommandLogMessage(string);
-
-<<<<<<< HEAD
+					Log(warningLog, INFO, string);
+					Log(punishmentLog, INFO, string);
 					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
-=======
-                MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
-                format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNick(playerid, true), GetPlayerVehicleID(playerid));
-                SendCommandLogMessage(string);
-				Log(warningLog, INFO, string);
-				Log(punishmentLog, INFO, string);
-
-                SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
->>>>>>> master
-
 					KickEx(playerid);
 				}
             }
@@ -6579,18 +6569,7 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
         return 0;
     }
-<<<<<<< HEAD
-	if(text[0] == '€')
-	{
-		sendErrorMessage(playerid, "Znak € na pocz¹tku zdania jest zablokowany!"); 
-		return 0;
-=======
-	if(text[0] == '€')//blokada
-	{
-		sendErrorMessage(playerid, "Znak € zosta³ zablokowany w pozycji 0,1"); 
-		return 0; 
->>>>>>> master
-	}
+	
 	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
