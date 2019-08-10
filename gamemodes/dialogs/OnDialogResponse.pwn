@@ -5949,6 +5949,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						   return 1;
 						}
                         Car_Spawn(idx);
+						Log(serverLog, INFO, "Gracz %s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(idx));
 		                SendClientMessage(playerid, 0xFFC0CB, "Twój pojazd zosta³ zrespawnowany");
 		                
 				    }
@@ -5985,6 +5986,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  					{
                         Car_Unspawn(vehicleid);
                         Car_Spawn(IloscAut[playerid]);
+						Log(serverLog, INFO, "Gracz %s zrespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(IloscAut[playerid]));
 
                         ZabierzKase(playerid, 5000);
 				        SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta³ zrespawnowany. Koszt: {FF0000}5000$");
@@ -6017,6 +6019,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        if((vehicleid = CarData[IloscAut[playerid]][c_ID]) != 0)
  					{
                         Car_Unspawn(vehicleid);
+						Log(serverLog, INFO, "Gracz %s unspawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(IloscAut[playerid]));
 
                         ZabierzKase(playerid, 5000);
 				        SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta³ unspawnowany. Koszt: {FF0000}5000$");
@@ -6068,6 +6071,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     if(CarData[lUID][c_ID] == 0)
                     {
                         Car_Spawn(lUID);
+						Log(serverLog, INFO, "Gracz %s zrespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(lUID));
                         SendClientMessage(playerid, COLOR_WHITE, "Twój pojazd zosta³ {2DE9B1}zespawnowany{FFFFFF}!");
                     }
                     else
@@ -10010,7 +10014,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %d kwotê %d$. W sejfie przed: %d$, po: %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s kwotê %d$. W sejfie przed: %d$, po: %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
 					}
 					else
 					{
@@ -15818,6 +15822,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 Car_Save(CarData[car][c_ID], CAR_SAVE_STATE);
                 Car_Unspawn(veh);
                 Car_Spawn(car);
+				Log(serverLog, INFO, "Gracz %s zaparkowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(car));
                 new string[128];
 				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d] [UID: %d] [VW: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID], CarData[car][c_VW]);
 				SendClientMessage(playerid, 0xFFC0CB, string);

@@ -1442,13 +1442,17 @@ public OnPlayerDisconnect(playerid, reason)
 
     if(GetPVarInt(playerid, "patrol") != 0) {
         new patrol = GetPVarInt(playerid, "patrol-id");
-        RunCommand(PatrolInfo[patrol][patroluje][0], "/patrol", "stop");
-        RunCommand(PatrolInfo[patrol][patroluje][1], "/patrol", "stop");
-        sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
-        sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+		if(PatrolInfo[patrol][patroluje][0] != INVALID_PLAYER_ID)
+        {
+        	sendTipMessageEx(PatrolInfo[patrol][patroluje][0], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+			RunCommand(PatrolInfo[patrol][patroluje][0], "/patrol", "stop");
+		}
+		if(PatrolInfo[patrol][patroluje][1] != INVALID_PLAYER_ID)
+		{
+        	sendTipMessageEx(PatrolInfo[patrol][patroluje][1], COLOR_PAPAYAWHIP, "Partner opuœci³ patrol. 10-33!");
+        	RunCommand(PatrolInfo[patrol][patroluje][1], "/patrol", "stop");
+		}
     }
-    //SetPVarInt(playerid, "patrol-id", pat);
-    //SetPVarInt(playerid, "patrol", 1);
     if(GetPVarInt(playerid, "rentTimer") != 0)
     {
         UnhireRentCar(playerid, GetPVarInt(playerid, "rentCar"));
@@ -1749,12 +1753,9 @@ public OnPlayerDeath(playerid, killerid, reason)
     }
     if(reason == 38 && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
     {
-	    //MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
-		//format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNick(killerid, true));
-        //SendCommandLogMessage(string);
-        //KickEx(killerid);
         format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNick(playerid, true), playerid);
         SendCommandLogMessage(string);
+		Log(warningLog, INFO, string);
         SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
     }
 
@@ -4921,7 +4922,17 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNick(playerid, true), GetPlayerVehicleID(playerid));
 					SendCommandLogMessage(string);
 
+<<<<<<< HEAD
 					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
+=======
+                MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
+                format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNick(playerid, true), GetPlayerVehicleID(playerid));
+                SendCommandLogMessage(string);
+				Log(warningLog, INFO, string);
+				Log(punishmentLog, INFO, string);
+
+                SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
+>>>>>>> master
 
 					KickEx(playerid);
 				}
@@ -6568,10 +6579,17 @@ public OnPlayerText(playerid, text[])
         if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
         return 0;
     }
+<<<<<<< HEAD
 	if(text[0] == '€')
 	{
 		sendErrorMessage(playerid, "Znak € na pocz¹tku zdania jest zablokowany!"); 
 		return 0;
+=======
+	if(text[0] == '€')//blokada
+	{
+		sendErrorMessage(playerid, "Znak € zosta³ zablokowany w pozycji 0,1"); 
+		return 0; 
+>>>>>>> master
 	}
 	
 	new giver[MAX_PLAYER_NAME];

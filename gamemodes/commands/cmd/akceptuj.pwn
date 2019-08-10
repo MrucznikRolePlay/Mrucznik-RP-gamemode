@@ -871,6 +871,7 @@ YCMD:akceptuj(playerid, params[], help)
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Podpisa³eœ umowe na 2,5 godziny, zaczynasz now¹ pracê.");
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Gratulujemy nowej pracy, wpisz /pomoc aby zobaczyæ nowe komendy.");
                 PlayerInfo[playerid][pJob] = GettingJob[playerid];
+		        Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pJob]);
                 if(GettingJob[playerid] == 14)
                 {
                     PlayerInfo[playerid][pRank] = 0;
@@ -1493,7 +1494,7 @@ YCMD:akceptuj(playerid, params[], help)
                         ZabierzKase(playerid, DomCena[playerid]);
                         DajKase(DomOffer[playerid], DomCena[playerid]);
                         ZapiszDom(PlayerInfo[playerid][pDom]);
-                        Log(payLog, INFO, "%s kupi³ od %s dom %d za %d$. ", \
+                        Log(payLog, INFO, "%s kupi³ od %s dom %s za %d$. ", \
                             GetPlayerLogName(playerid), \
                             GetPlayerLogName(DomOffer[playerid]), \
                             GetHouseLogName(PlayerInfo[playerid][pDom]), \

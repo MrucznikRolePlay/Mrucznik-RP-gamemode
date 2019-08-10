@@ -26,3 +26,6 @@ Gamemod Mrucznika jest przystosowany do [sampctl](https://github.com/Southclaws/
 Aby skompilować gamemode z użyciem sampctl, należy [zainstalować sampctl](https://github.com/Southclaws/sampctl/wiki/Windows) a następnie wpisać następujące polecenia:
 - sampctl package ensure
 - sampctl package build
+
+## Inne repozytoria
+

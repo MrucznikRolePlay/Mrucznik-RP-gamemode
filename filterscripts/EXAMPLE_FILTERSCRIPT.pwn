@@ -1,5 +1,13 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ zmienhaslo ]----------------------------------------------//
+//-------------------------------------------<< Filterscript >>----------------------------------------------//
+//------------------------------------------[ Modu³: EXAMPLE_FILTERSCRIPT.pwn ]---------------------------------------------//
+//Opis:
+/*
+
+*/
+//Adnotacje:
+/*
+
+*/
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,47 +25,33 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 
-// Opis:
-/*
-	
-*/
+//
+
+#include <a_samp>
 
 
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:zmienhaslo(playerid, params[], help)
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+//-----------------<[ Zmienne: ]>-------------------
+//------------------<[ Enumy: ]>--------------------
+//------------------<[ Forwardy: ]>--------------------
+//-----------------<[ Callback'i: ]>-------------------
+public OnFilterScriptInit()
 {
-    if(IsPlayerConnected(playerid))
-    {
-        if(gPlayerLogged[playerid] == 0)
-        {
-            sendErrorMessage(playerid, "Nie zalogowa³eœ siê!");
-            return 1;
-        }
-        new tmppass[64], password[WHIRLPOOL_LEN];
-		if(sscanf(params, "s[64]", tmppass))
-		{
-			sendTipMessage(playerid, "U¿yj /zmienhaslo [nowehaslo]");
-			return 1;
-		}
-		
-		if(strfind(params, "%") != -1)
-		{
-            sendErrorMessage(playerid, "Has³o nie mo¿e zawieraæ znaku procenta!");
-            return 1;
-		}
-		
-		sendErrorMessage(playerid, "Twoje has³o do konta w grze zosta³o zmienione!!!!");
-		sendErrorMessage(playerid, "Jeœli wpisa³eœ t¹ komendê przypadkowo, nie wychodŸ z serwera i zmieñ has³o ponownie za pomoc¹ tej komendy");
-		sendErrorMessage(playerid, "Nowe has³o:");
-		SendClientMessage(playerid, COLOR_PANICRED, tmppass);
-
-		Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
-		WP_Hash(password, sizeof(password), tmppass);
-		MruMySQL_ChangePassword(GetNick(playerid), password);
-	}
+	print("\n--------------------------------------");
+	print(" Fliterscript -EXAMPLE_FILTERSCRIPT- zaladowany");
+	print("--------------------------------------\n");
 	return 1;
 }
+
+public OnFilterScriptExit()
+{
+	print("\n--------------------------------------");
+	print(" Fliterscript -EXAMPLE_FILTERSCRIPT- wylaczony");
+	print("--------------------------------------\n");
+	return 1;
+}
+
+//-----------------<[ Funkcje: ]>-------------------
+//------------------<[ MySQL: ]>--------------------
+//-----------------<[ Komendy: ]>-------------------
