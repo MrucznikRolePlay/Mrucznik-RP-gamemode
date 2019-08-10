@@ -11452,28 +11452,6 @@ public MyItems_Load(playerid)
     //CallRemoteFunction("SEC_MyItems_HandleOne", "dd", playerid, 19065);
     InitMyItems[playerid] = true;
 }
-/*
-stock StartTrashCollecting(playerid)
-{
-	if(pTrashCollected[playerid] <= 5)//Pierwsza strefa
-	{
-		trasherPoint[playerid] = CreateDynamicCP(Float:x, Float:y, Float:z, 10.0, 0,0,playerid,STREAMER_CP_SD,-1,0);
-		sendTipMessageEx(playerid, COLOR_RED, "Na tej strefie znajdziesz 5 œmietników");
-	}
-	return 1;
-}
-stock ShowPlayerTrashForZone(playerid, zoneid) 
-{
-	if(pTrashCollected[playerid] <= 5)
-	{
-		trashCanPoint1[playerid] = CreateDynamicCP();
-		trashCanPoint2[playerid] = CreateDynamicCP(); 
-		trashCanPoint3[playerid] = CreateDynamicCP(); 
-		trashCanPoint4[playerid] = CreateDynamicCP();
-		trashCanPoint5[playerid] = CreateDynamicCP(); 
-	}
-	return 1;
-}*/ 
 //--------------------------------------------------
 
 
