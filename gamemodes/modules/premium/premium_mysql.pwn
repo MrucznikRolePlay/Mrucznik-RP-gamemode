@@ -133,13 +133,15 @@ MruMySQL_LoadPlayerPremiumSkins(playerid)
 
 MruMySQL_InsertPremiumItem(playerid, itemid)
 {
-    new str[256];
-    format(str, 256, "INSERT INTO `mru_playeritems` (`model`, `UID`, `bone`, `x`, `y`, `z`, `rx`, `ry`, `rz`) VALUES ('%d', '%d', '%d', '%f', '%f', '%f', '%f', '%f', '%f')", 
+    new str[512];
+    format(str, 512, "INSERT INTO `mru_playeritems` (`model`, `UID`, `bone`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sz`, `sy`, `sz`)"\
+					 " VALUES ('%d', '%d', '%d', '%f', '%f', '%f', '%f', '%f', '%f', '%f', '%f', '%f')", 
 		PrzedmiotyPremium[itemid][Model], 
 		PlayerInfo[playerid][pUID], 
 		2, //TODO
 		0.0, 0.0, 0.0,
-		0.0, 0.0, 0.0
+		0.0, 0.0, 0.0,
+		1.0, 1.0, 1.0
 	);
     mysql_query(str);
     new id = mysql_insert_id();
