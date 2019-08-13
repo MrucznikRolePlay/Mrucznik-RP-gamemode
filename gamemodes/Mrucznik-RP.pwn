@@ -1303,7 +1303,7 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		
 		//Log dla 0Verte [Nick][UID] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d] - Wyszedl poprzez %s", 
+		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d/Z%d/WI%d/WO%d] - Wyszedl poprzez %s", 
 			GetPlayerLogName(playerid), 
 			AdminDutyGodziny[playerid], 
 			AdminDutyMinuty[playerid],
@@ -1312,6 +1312,9 @@ public OnPlayerDisconnect(playerid, reason)
 			iloscKick[playerid],
 			iloscInne[playerid], 
 			iloscPozaDuty[playerid],
+			iloscZapytaj[playerid], 
+			iloscInWiadomosci[playerid], 
+			iloscOutWiadomosci[playerid],
 			exitReason
 		); //Create LOG
 
@@ -1346,7 +1349,7 @@ public OnPlayerDisconnect(playerid, reason)
 			{
 				format(exitReason, sizeof(exitReason), "AFK");
 			}
-			Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d] - Wyszedl poprzez %s", 
+			Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d/Z%d/WI%d/WO%d] - Wyszedl poprzez %s", 
 				GetPlayerLogName(playerid), 
 				AdminDutyGodziny[playerid], 
 				AdminDutyMinuty[playerid],
@@ -1355,6 +1358,9 @@ public OnPlayerDisconnect(playerid, reason)
 				iloscKick[playerid],
 				iloscInne[playerid], 
 				iloscPozaDuty[playerid],
+				iloscZapytaj[playerid], 
+				iloscInWiadomosci[playerid], 
+				iloscOutWiadomosci[playerid],
 				exitReason
 			); //Create LOG
 			iloscPozaDuty[playerid] = 0; 
