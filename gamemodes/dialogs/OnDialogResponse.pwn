@@ -2636,6 +2636,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
 							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
+							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d", GetPlayerLogName(playerid), randphone);
 							return 1;
 						}
 					}
