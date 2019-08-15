@@ -4817,10 +4817,11 @@ ShowStats(playerid,targetid)
 RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - giveplayerid to lider, playerid to osoba nadaj¹ca
 {
 	new query[256], string[124];
+	new givePlayerFrac = GetPlayerFraction(giveplayerid); 
 	//Najpierw sprawdzanie czy s¹ inni liderzy on-LINE
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][pLider] == GetPlayerFraction(giveplayerid) && i != giveplayerid)
+		if(PlayerInfo[i][pLider] == givePlayerFrac && i != giveplayerid) 
 		{
 			PlayerInfo[i][pMember] = 0;
 			PlayerInfo[i][pLider] = 0;
@@ -4834,21 +4835,13 @@ RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - givep
 			sendTipMessage(i, string); 
 		}
 	}
-	//Teraz usuwanie tych offline
-	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `FracID`='%d'", GetPlayerFraction(giveplayerid));
-	for(new i; i<=All_Leaders; i++)
-	{
-		mysql_query(query); 
-	}
-	
-
-	//Teraz usuwanie GLD i wysy³anie komunikatu
-	format(query, sizeof(query), "Usuniêto wszystkich liderów z frakcji %s", FractionNames[GetPlayerFraction(giveplayerid)]);
+	Remove_MySQL_Leaders(givePlayerFrac);
+	format(query, sizeof(query), "Usuniêto wszystkich liderów z frakcji %s", FractionNames[givePlayerFrac]);
 	sendTipMessageEx(playerid, COLOR_DBLUE, query); 
 	format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
 	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
-	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %s - usuwajac VLD.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(PlayerInfo[giveplayerid][pMember]));
+	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %s - usuwajac VLD.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(givePlayerFrac));
 	PlayerInfo[giveplayerid][pMember] = 0;
 	PlayerInfo[giveplayerid][pLider] = 0;
 	PlayerInfo[giveplayerid][pJob] = 0;

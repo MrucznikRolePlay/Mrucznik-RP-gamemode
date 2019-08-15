@@ -82,6 +82,13 @@ Remove_MySQL_Leader(playerid)
 	All_Leaders--;
 	return 1;
 }
+Remove_MySQL_Leaders(fracID)
+{
+	new query[126];
+	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `FracID`='%d'", fracID);
+	new i; while(i <= All_Leaders){mysql_query(query); i++; }
+	return 1;
+}
 Save_MySQL_Leader(playerid)
 {
 	new query[256];
@@ -97,7 +104,7 @@ Save_MySQL_Leader(playerid)
 	PlayerInfo[playerid][pLiderValue],
 	GetNick(playerid)); 
 	mysql_query(query);
-	MruMySQL_IloscLiderowLoad()
+	MruMySQL_IloscLiderowLoad();
 	return 1;
 }
 Load_MySQL_Leader(playerid)
