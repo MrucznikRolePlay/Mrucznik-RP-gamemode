@@ -963,6 +963,7 @@ static Aliases()
 	Command_AddAltNamed("megafon", "megaphone");
 	Command_AddAltNamed("megafon", "m");
 
+
 	//mi
 	Command_AddAltNamed("mi", "deathwarning");
 	Command_AddAltNamed("mi", "warningdeath");
@@ -1035,7 +1036,10 @@ static Aliases()
 
 	//paralizuj
 	Command_AddAltNamed("paralizuj", "paraliz");
-
+	//personalizuj
+	Command_AddAltNamed("personalizuj", "pers");
+	Command_AddAltNamed("personalizuj", "personalize");  
+	Command_AddAltNamed("personalizuj", "ustawper"); 
 	//pl
 	Command_AddAltNamed("pl", "showlicenses");
 	Command_AddAltNamed("pl", "pokazlicencje");

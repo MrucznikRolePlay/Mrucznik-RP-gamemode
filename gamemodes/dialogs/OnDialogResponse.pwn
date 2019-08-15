@@ -1839,6 +1839,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new string[256]; 
 		if(!response)
 		{
+			Remove_MySQL_Leader(id_Lidera); 
 			format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
 			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, string);
 			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
@@ -1851,7 +1852,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SetPlayerSpawn(id_Lidera);
 			format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(id_Lidera));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			Remove_MySQL_Leader(id_Lidera); 
 			return 1;
 		}
 		RemoveLeadersFromFraction(id_Lidera, playerid); 
