@@ -29,28 +29,28 @@
 //-----------------<[ Funkcje: ]>-------------------
 DiscordConnectInit()
 {
-	g_SanNewsChannelId=DCC_FindChannelById("604719827608797240");
-	g_AdminChannelId=DCC_FindChannelById("604719840720191522");
-	g_ReportChannelId=DCC_FindChannelById("604719842020294666");
+	g_SanNewsChannelId=DCC_FindChannelById("538403089263362098"); //ig-san-news
+	g_AdminChannelId=DCC_FindChannelById("538403269077106725"); //ig-admin
+	g_ReportChannelId=DCC_FindChannelById("538403303550091264"); //ig-report
 
-	g_FracChannel[1]=DCC_FindChannelById("604719843295625226");
-	g_FracChannel[2]=DCC_FindChannelById("604719853823066150");
-	g_FracChannel[3]=DCC_FindChannelById("604719856847421471");
-	g_FracChannel[4]=DCC_FindChannelById("604719860517437448");
-	g_FracChannel[5]=DCC_FindChannelById("604719863713234986");
-	g_FracChannel[6]=DCC_FindChannelById("604719865579962418");
-	g_FracChannel[7]=DCC_FindChannelById("604719866955431946");
-	g_FracChannel[8]=DCC_FindChannelById("604719868251602977");
-	g_FracChannel[9]=DCC_FindChannelById("604719869505830932");
-	g_FracChannel[10]=DCC_FindChannelById("604719870957060097");
-	g_FracChannel[11]=DCC_FindChannelById("604719872341049354");
-	g_FracChannel[12]=DCC_FindChannelById("604719873393819659");
-	g_FracChannel[13]=DCC_FindChannelById("604719874958426122");
-	g_FracChannel[14]=DCC_FindChannelById("604719876371775595");
-	g_FracChannel[15]=DCC_FindChannelById("604719877957222422");
-	g_FracChannel[16]=DCC_FindChannelById("604719879261650994");
-	g_FracChannel[17]=DCC_FindChannelById("604719880423342091");
-	g_OrgChannel[1]=DCC_FindChannelById("604719882147201036");
+	g_FracChannel[1]=DCC_FindChannelById("545045344652886056");
+	g_FracChannel[2]=DCC_FindChannelById("545620322423144459");
+	g_FracChannel[3]=DCC_FindChannelById("574930724973576207");
+	g_FracChannel[4]=DCC_FindChannelById("545619975151288321");
+	g_FracChannel[5]=DCC_FindChannelById("545625556578992128");
+	g_FracChannel[6]=DCC_FindChannelById("574930782007853066");
+	g_FracChannel[7]=DCC_FindChannelById("545626921950511104");
+	g_FracChannel[8]=DCC_FindChannelById("574930925209780228");
+	g_FracChannel[9]=DCC_FindChannelById("545621434098253824");
+	g_FracChannel[10]=DCC_FindChannelById("545622580246347776");
+	g_FracChannel[11]=DCC_FindChannelById("545622546939117569");
+	g_FracChannel[12]=DCC_FindChannelById("545642957106053123");
+	g_FracChannel[13]=DCC_FindChannelById("557567568198631441");
+	g_FracChannel[14]=DCC_FindChannelById("574931026888097802");
+	g_FracChannel[15]=DCC_FindChannelById("545643012437311491");
+	g_FracChannel[16]=DCC_FindChannelById("545643300736991235");
+	g_FracChannel[17]=DCC_FindChannelById("545619305832775700");
+	g_OrgChannel[1]=DCC_FindChannelById("545643431112867841");
 
 
 	return 1;
