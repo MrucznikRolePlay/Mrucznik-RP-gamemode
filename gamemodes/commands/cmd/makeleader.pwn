@@ -53,29 +53,10 @@ YCMD:makeleader(playerid, params[], help)
 				{
 					if(level == 0)
 					{
-						if(PlayerInfo[para1][pLiderValue] == 1)
-						{
-							format(string, sizeof(string), "%s jest g³ównym liderem organizacji.\nCzy chcesz zwolniæ wszystkich liderów?", GetNick(para1));
-							SetPVarInt(playerid, "ID_LIDERA", para1);  
-							ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
-							return 1;
-						}
-						Remove_MySQL_Leader(para1); 
-						format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
-						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
-						SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
-						Log(fracLDLog, INFO, "Admin %s usun¹³ gracza [VLD] %s z jego frakcji ", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(PlayerInfo[para1][pMember]));
-						PlayerInfo[para1][pMember] = 0;
-						PlayerInfo[para1][pLider] = 0;
-						PlayerInfo[para1][pJob] = 0;
-						orgUnInvitePlayer(para1);
-						MedicBill[para1] = 0;
-						SetPlayerSpawn(para1);
-						format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(para1));
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+						sendTipMessage(playerid, "U¿yj /unfrakcja [ID]");
 						return 1;
 					}
-					if(PlayerInfo[para1][pMember] > 0 || GetPlayerOrg(para1) != 0)
+					if(PlayerInfo[para1][pMember] > 0|| GetPlayerOrg(para1) != 0 )
 					{
 						sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest we frakcji jako cz³onek lub w rodzinie !");
 						return 1;
