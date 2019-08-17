@@ -127,7 +127,7 @@ MruMySQL_IloscLiderowLoad()
 {
     new lStr[64];
     format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_liderzy`");
-	mysql_query(lstr);
+	mysql_query(lStr);
 	mysql_store_result();
 	new szmuleonetescik[24];
 	mysql_fetch_row_format(szmuleonetescik,"|");
