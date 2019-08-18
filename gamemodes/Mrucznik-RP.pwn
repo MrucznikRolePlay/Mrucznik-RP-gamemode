@@ -64,6 +64,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <utils>
 #define YSI_NO_MASTER
 #include <YSI_Data\y_iterate>
+#define Y_COMMANDS_USE_CHARS
 #define MAX_COMMANDS 1200
 #include <YSI\y_commands>
 #include <YSI\y_groups>
