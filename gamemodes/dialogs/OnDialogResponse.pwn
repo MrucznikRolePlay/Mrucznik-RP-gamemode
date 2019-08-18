@@ -1852,10 +1852,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SetPlayerSpawn(id_Lidera);
 			format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(id_Lidera));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			return 1;
 		}
-		RemoveLeadersFromFraction(id_Lidera, playerid); 
-		
+		else if(response)
+		{
+			RemoveLeadersFromFraction(id_Lidera, playerid); 
+		}
 	}
     else if(dialogid == D_PRZEBIERZ_FDU)
     {

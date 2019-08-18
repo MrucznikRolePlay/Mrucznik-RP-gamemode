@@ -382,8 +382,6 @@ public OnGameModeInit()
 		SetWorldTime(tmphour);
 		ServerTime = tmphour;
 	}
-	//testowy obiekt 0.3DL
-	CreateDynamicObject(-1001, 1356.08862, -1663.05505, 14.76700,   0.00000, 0.00000, 90.00000);
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
@@ -1177,13 +1175,6 @@ public OnPlayerDisconnect(playerid, reason)
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 	}
-	/*if(hunterSeeMe[playerid] > 0)
-	{
-		format(reString, sizeof(reString), "Poszukiwany %s opuœci³ San Andreas ((wyszed³ z gry)).", GetNick(playerid));
-		sendTipMessageEx(hunterSeeMe[playerid], COLOR_RED, reString);
-		DestroyDynamicCP(chpIDHunter[hunterSeeMe[playerid]]); 
-		KillTimer(timerForHunter[hunterSeeMe[playerid]]); 
-	}*/
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
         new giveplayerid = GetPVarInt(playerid, "Mats-id");
@@ -5856,6 +5847,10 @@ OnPlayerLogin(playerid, password[])
 			{
 				sendErrorMessage(playerid, "Wczytywanie twojego biznesu siê nie powiod³o! Zostaje Ci on odebrany"); 
 				sendErrorMessage(playerid, "Je¿eli uwa¿asz to za b³¹d skryptu - zg³oœ stratê na naszym forum!");
+				Log(businessLog, INFO, "%s zosta³ odebrany biznes {ID: %d NAME: %s] z powodu b³êdu w wczytaniu",
+				GetPlayerLogName(playerid), 
+				PlayerInfo[playerid][pBusinessOwner], 
+				Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]);
 				PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
 			}
 		}

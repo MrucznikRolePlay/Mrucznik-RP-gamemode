@@ -30,43 +30,42 @@
 
 YCMD:bizlock(playerid, params[], help)
 {
-	if(IsPlayerConnected(playerid))
+
+	if(PlayerInfo[playerid][pBusinessOwner] == INVALID_BIZ_ID && PlayerInfo[playerid][pBusinessMember] == INVALID_BIZ_ID)
 	{
-		if(PlayerInfo[playerid][pBusinessOwner] == -1 && PlayerInfo[playerid][pBusinessMember] == -1)
-		{
-			sendErrorMessage(playerid, "Nie masz w³asnego biznesu"); 
-			return 1;
-		}
-		new ID_BUSINESS, string[124]; 
-		if(PlayerInfo[playerid][pBusinessOwner] != -1)
-		{
-			ID_BUSINESS = PlayerInfo[playerid][pBusinessOwner]; 
-		}
-		else if(PlayerInfo[playerid][pBusinessMember] != -1)
-		{
-			ID_BUSINESS = PlayerInfo[playerid][pBusinessMember]; 
-		}
-		if(!CheckIfPlayerInBiznesPoint(playerid))
-		{
-			sendErrorMessage(playerid, "Nie jesteœ obok biznesu!"); 
-			return 1;
-		}
-		if(ID_BUSINESS != GetPVarInt(playerid, "JestObokBiz"))
-		{
-			sendErrorMessage(playerid, "To nie jest twój biznes!"); 
-			return 1;
-		}
-		if(BizOpenStatus[ID_BUSINESS] == 0)
-		{
-			BizOpenStatus[ID_BUSINESS] = 1;
-			format(string, sizeof(string), "%s zamyka drzwi od %s", GetNick(playerid), Business[ID_BUSINESS][b_Name]);
-		}
-		else if(BizOpenStatus[ID_BUSINESS] == 1)
-		{
-			BizOpenStatus[ID_BUSINESS] = 0;
-			format(string, sizeof(string), "%s otwiera drzwi  %s", GetNick(playerid), Business[ID_BUSINESS][b_Name]); 
-		}
-		ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		sendErrorMessage(playerid, "Nie masz w³asnego biznesu"); 
+		return 1;
 	}
+	new businessID, string[124]; 
+	if(PlayerInfo[playerid][pBusinessOwner] != INVALID_BIZ_ID)
+	{
+		businessID = PlayerInfo[playerid][pBusinessOwner]; 
+	}
+	else if(PlayerInfo[playerid][pBusinessMember] != INVALID_BIZ_ID)
+	{
+		businessID = PlayerInfo[playerid][pBusinessMember]; 
+	}
+	if(!CheckIfPlayerInBiznesPoint(playerid))
+	{
+		sendErrorMessage(playerid, "Nie jesteœ obok biznesu!"); 
+		return 1;
+	}
+	if(businessID != GetPVarInt(playerid, "JestObokBiz"))
+	{
+		sendErrorMessage(playerid, "To nie jest twój biznes!"); 
+		return 1;
+	}
+	if(BizOpenStatus[businessID] == 0)
+	{
+		BizOpenStatus[businessID] = 1;
+		format(string, sizeof(string), "%s zamyka drzwi od %s", GetNick(playerid), Business[businessID][b_Name]);
+	}
+	else if(BizOpenStatus[businessID] == 1)
+	{
+		BizOpenStatus[businessID] = 0;
+		format(string, sizeof(string), "%s otwiera drzwi  %s", GetNick(playerid), Business[businessID][b_Name]); 
+	}
+	ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	
 	return 1;
 }

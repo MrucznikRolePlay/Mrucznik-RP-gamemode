@@ -55,7 +55,7 @@ YCMD:akceptuj(playerid, params[], help)
 				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
 				return 1;
 			}
-			if(GetPlayerBusiness(playerid) > -1)
+			if(GetPlayerBusiness(playerid) != -1)
 			{
 				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
 				return 1;
@@ -64,29 +64,28 @@ YCMD:akceptuj(playerid, params[], help)
 			{
 				if(kaska[playerid] >= GetPVarInt(playerid, "Oferujacy_Cena"))
 				{
-                    new ID_BUSINESS = PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pBusinessOwner]; 
+                    new businessID = PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pBusinessOwner]; 
 					new kwotaSprzedazy =  GetPVarInt(playerid, "Oferujacy_Cena");
 					ZabierzKase(playerid, kwotaSprzedazy);
 					DajKase(GetPVarInt(playerid, "Oferujacy_ID"), (kwotaSprzedazy-(kwotaSprzedazy/5))); 
 					Sejf_Add(FRAC_GOV, (kwotaSprzedazy/4)); 
 					Sejf_Save(FRAC_GOV); 
-					format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", GetNick(playerid, true), playerid, ID_BUSINESS, GetNick(GetPVarInt(playerid, "Oferujacy_ID"), true), GetPVarInt(playerid, "Oferujacy_ID"), kwotaSprzedazy);
+					format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", GetNick(playerid, true), playerid, businessID, GetNick(GetPVarInt(playerid, "Oferujacy_ID"), true), GetPVarInt(playerid, "Oferujacy_ID"), kwotaSprzedazy);
 					SendLeaderRadioMessage(FRAC_GOV, COLOR_LIGHTGREEN, string);
 					SendAdminMessage(COLOR_P@, string); 
 					
 					//Wykonanie czynnoœci
 					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pBusinessOwner] = INVALID_BIZ_ID; 
-					PlayerInfo[playerid][pBusinessOwner] = ID_BUSINESS;
-                    Business[ID_BUSINESS][b_ownerUID] = PlayerInfo[playerid][pUID]; 
-                    Business[ID_BUSINESS][b_Name_Owner] = GetNick(playerid); 
+					PlayerInfo[playerid][pBusinessOwner] = businessID;
+                    Business[businessID][b_ownerUID] = PlayerInfo[playerid][pUID]; 
+                    Business[businessID][b_Name_Owner] = GetNick(playerid); 
 					MruMySQL_SaveAccount(playerid);
 					MruMySQL_SaveAccount(GetPVarInt(playerid, "Oferujacy_ID")); 
 
                     Log(businessLog, INFO, "%s sprzeda³ %s biznes %s [%d] za %d$",
                         GetPlayerLogName(GetPVarInt(playerid, "Oferujacy_ID")),
                         GetPlayerLogName(playerid),
-                        Business[ID_BUSINESS][b_Name],
-                        ID_BUSINESS, 
+                        GetBusinessLogName(businessID),
                         GetPVarInt(playerid, "Oferujacy_Cena"));
 
                     ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 

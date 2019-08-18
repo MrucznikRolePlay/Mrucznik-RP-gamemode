@@ -32,7 +32,7 @@ YCMD:bizedit(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(IsAHA(playerid) || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
 		{
 				sendTipMessage(playerid, "Ta komenda zostanie wprowadzona ju¿ wkrótce!");
 
