@@ -1853,7 +1853,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(id_Lidera));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		}
-		else if(response)
+		else 
 		{
 			RemoveLeadersFromFraction(id_Lidera, playerid); 
 		}

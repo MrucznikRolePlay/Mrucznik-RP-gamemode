@@ -48,28 +48,28 @@ YCMD:sprzedajbiznes(playerid, params[], help)
 			CorrectPlayerBusiness(playerid);
 			if(ProxDetectorS(8.0, playerid, giveplayerid))
 			{
-				if(!CheckIfPlayerInBiznesPoint(playerid))
+				new businessID = GetNearestBusiness(playerid); 
+				if(businessID == INVALID_BIZ_ID)
 				{
-					sendTipMessage(playerid, "Nie jesteœ obok swojego biznesu"); 
+					sendErrorMessage(playerid, "Nie jesteœ obok biznesu!");
 					return 1;
 				}
-				new ID_Business = GetPVarInt(playerid, "JestObokBiz"); 
-				if(PlayerInfo[playerid][pBusinessOwner] == ID_Business)
+				if(PlayerInfo[playerid][pBusinessOwner] == businessID)
 				{
 					sendErrorMessage(playerid, "To nie jest twój biznes"); 
 					return 1;
 				}
-				if(valueCost <= Business[ID_Business][b_cost]+10000000)
+				if(valueCost <= Business[businessID][b_cost]+10000000)
 				{
 					if(kaska[giveplayerid]>= valueCost)
 					{
-						format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d", GetNick(giveplayerid, true), ID_Business, valueCost);
+						format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d", GetNick(giveplayerid, true), businessID, valueCost);
 						sendTipMessage(playerid, string);
 						sendTipMessage(playerid, "Oczekuj na akceptacje"); 
 						
 						
 						//do giveplayerid
-						format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), ID_Business, valueCost); 
+						format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), businessID, valueCost); 
 						sendTipMessage(giveplayerid, string); 
 						SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
 						SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 

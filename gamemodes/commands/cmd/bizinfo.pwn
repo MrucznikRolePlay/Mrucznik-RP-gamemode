@@ -30,13 +30,12 @@
 
 YCMD:bizinfo(playerid, params[], help)
 {
-	
-	if(!CheckIfPlayerInBiznesPoint(playerid))
+	new businessID = GetNearestBusiness(playerid); 
+	if(businessID == INVALID_BIZ_ID)
 	{
-		sendErrorMessage(playerid, "Nie jesteœ obok biznesu!"); 
+		sendErrorMessage(playerid, "Nie jesteœ obok biznesu!");
 		return 1;
 	}
-	new businessID = GetPVarInt(playerid, "JestObokBiz"); 
 	new string[256]; 
 	if(Business[businessID][b_ownerUID] == 0)
 	{

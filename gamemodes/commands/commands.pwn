@@ -54,7 +54,6 @@
 #include "cmd/biegnij.pwn"
 #include "cmd/bigears.pwn"
 #include "cmd/bizinfo.pwn"
-#include "cmd/bizlock.pwn"
 #include "cmd/bizmoneydebug.pwn"
 #include "cmd/biznespomoc.pwn"
 #include "cmd/obiz.pwn"

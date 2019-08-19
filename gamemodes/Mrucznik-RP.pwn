@@ -5850,8 +5850,7 @@ OnPlayerLogin(playerid, password[])
 				sendErrorMessage(playerid, "Je¿eli uwa¿asz to za b³¹d skryptu - zg³oœ stratê na naszym forum!");
 				Log(businessLog, INFO, "%s zosta³ odebrany biznes {ID: %d NAME: %s] z powodu b³êdu w wczytaniu",
 				GetPlayerLogName(playerid), 
-				PlayerInfo[playerid][pBusinessOwner], 
-				Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]);
+				GetBusinessLogName(PlayerInfo[playerid][pBusinessOwner]));
 				PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
 			}
 		}

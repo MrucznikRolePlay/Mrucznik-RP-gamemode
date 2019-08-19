@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ bizlock ]------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  bizlock                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,56 +16,48 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "bizlock_impl.pwn"
 
+//-------<[ initialize ]>-------
+command_bizlock()
+{
+    new command = Command_GetID("bizlock");
+
+    //aliases
+    Command_AddAlt(command, "zamknijbiznes");
+    Command_AddAlt(command, "otworzbiznes");
+    Command_AddAlt(command, "businesslock");
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
 YCMD:bizlock(playerid, params[], help)
 {
-
-	if(PlayerInfo[playerid][pBusinessOwner] == INVALID_BIZ_ID && PlayerInfo[playerid][pBusinessMember] == INVALID_BIZ_ID)
-	{
-		sendErrorMessage(playerid, "Nie masz w³asnego biznesu"); 
-		return 1;
-	}
-	new businessID, string[124]; 
-	if(PlayerInfo[playerid][pBusinessOwner] != INVALID_BIZ_ID)
-	{
-		businessID = PlayerInfo[playerid][pBusinessOwner]; 
-	}
-	else if(PlayerInfo[playerid][pBusinessMember] != INVALID_BIZ_ID)
-	{
-		businessID = PlayerInfo[playerid][pBusinessMember]; 
-	}
-	if(!CheckIfPlayerInBiznesPoint(playerid))
-	{
-		sendErrorMessage(playerid, "Nie jesteœ obok biznesu!"); 
-		return 1;
-	}
-	if(businessID != GetPVarInt(playerid, "JestObokBiz"))
-	{
-		sendErrorMessage(playerid, "To nie jest twój biznes!"); 
-		return 1;
-	}
-	if(BizOpenStatus[businessID] == 0)
-	{
-		BizOpenStatus[businessID] = 1;
-		format(string, sizeof(string), "%s zamyka drzwi od %s", GetNick(playerid), Business[businessID][b_Name]);
-	}
-	else if(BizOpenStatus[businessID] == 1)
-	{
-		BizOpenStatus[businessID] = 0;
-		format(string, sizeof(string), "%s otwiera drzwi  %s", GetNick(playerid), Business[businessID][b_Name]); 
-	}
-	ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	
-	return 1;
+    if (help)
+    {
+        sendTipMessage(playerid, "Pozwala zamkn¹æ b¹dŸ otworzyæ twój biznes. Mo¿e j¹ u¿yæ zarówno cz³onek jak i w³asciciel biznesu.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_bizlock_Impl(playerid);
 }

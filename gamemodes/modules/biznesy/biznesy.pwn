@@ -252,17 +252,18 @@ BusinessPayDay(playerid)
 	
 	return 1;
 }
-stock CheckIfPlayerInBiznesPoint(playerid)
+GetNearestBusiness(playerid)
 {
+	new bizID=INVALID_BIZ_ID; 
 	for(new i; i<BusinessLoaded+1; i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, 4.0, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]))
 		{
-			SetPVarInt(playerid, "JestObokBiz", i);
-			return true;  
+			bizID = i;
+			return bizID; 
 		}
 	}
-	return false; 
+	return bizID; 
 }
 stock ResetBizOffer(playerid)
 {
@@ -362,13 +363,6 @@ stock UnLoadBusiness(idBIZ)
 	return 1;
 }
 //------------------<[ MySQL: ]>--------------------
-DeleteBusiness(bizID)
-{
-	new lStr[256];
-	format(lStr, 256, "DELETE * FROM `mru_business` WHERE `ID`='%d'", bizID);
-	mysql_query(lStr);
-	return 1;
-}
 LoadBusiness()//?adowanie biznesów z bazy danych
 {
 	//Tworzenie BIZ na ID 0

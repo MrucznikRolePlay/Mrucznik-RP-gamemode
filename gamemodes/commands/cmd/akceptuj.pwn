@@ -55,7 +55,7 @@ YCMD:akceptuj(playerid, params[], help)
 				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
 				return 1;
 			}
-			if(GetPlayerBusiness(playerid) != -1)
+			if(GetPlayerBusiness(playerid) != INVALID_BIZ_ID)
 			{
 				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
 				return 1;
