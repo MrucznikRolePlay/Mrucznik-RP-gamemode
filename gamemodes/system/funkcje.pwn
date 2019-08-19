@@ -7409,6 +7409,7 @@ OOCNews(color,const string[])
 		}
 	}
 }
+/*
 SendNews_2(const txdString[])
 {
 	foreach(new i : Player)
@@ -7420,7 +7421,7 @@ SendNews_2(const txdString[])
 		}
 	}
 }
-
+*/
 SendTeamMessage(team, color, string[], isDepo = 0)
 {
 	foreach(new i : Player)

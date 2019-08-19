@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------[ bizmoneydebug ]---------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                zlomujbiznes                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,27 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "zlomujbiznes_impl.pwn"
 
-YCMD:bizmoneydebug(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_zlomujbiznes()
 {
-	if(IsAHeadAdmin(playerid))
-	{
-		BusinessPayDay(playerid);
-	}
-	else
-	{
-		return noAccessMessage(playerid); 
-	}
-	return 1;
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zlomujbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala zez³omowaæ biznes. Musisz byæ w³aœcicielem. ");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zlomujbiznes_Impl(playerid);
 }

@@ -1044,7 +1044,7 @@ new hunterSeeMe[MAX_PLAYERS];
 new hunterStatus[MAX_PLAYERS]; 
 new wantedValuePlayer;
 new timerForHunter[MAX_PLAYERS];*/
-new newsTypePlayer[MAX_PLAYERS] = 3; 
+//new newsTypePlayer[MAX_PLAYERS] = 3; 
 new All_Leaders; 
 
 //-----------------------------------------------

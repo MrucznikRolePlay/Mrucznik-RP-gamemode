@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ gotobiz ]------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  gotobiz                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,42 +16,51 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "gotobiz_impl.pwn"
 
+//-------<[ initialize ]>-------
+command_gotobiz()
+{
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
 YCMD:gotobiz(playerid, params[], help)
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(PlayerInfo[playerid][pAdmin] >= 5)
-		{
-			new ID_BUSINESS;
-			if(sscanf(params, "d<fix>", ID_BUSINESS))
-			{
-				sendTipMessage(playerid, "U¿yj /gotobiz [ID_BIZNESU]"); 
-				return 1;
-			}
-			if(ID_BUSINESS > BusinessLoaded || ID_BUSINESS== -1)
-			{
-				sendErrorMessage(playerid, "Nie ma takiego biznesu!"); 
-				return 1;
-			}
-			SetPlayerPos(playerid, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]); 
-			sendTipMessage(playerid, "Teleportowano Ciê do biznesu!"); 
-		}
-		else
-		{
-			noAccessMessage(playerid);
-		}
-	}
-	return 1;
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która teleportuje nas do biznesu.");
+        return 1;
+    }
+    //fetching params
+    new businessID;
+    if(sscanf(params, "d", businessID))
+    {
+        sendTipMessage(playerid, "U¿yj /gotobiz [ID_BIZNESU] ");
+        return 1;
+    }
+    
+    //command body
+    return command_gotobiz_Impl(playerid, businessID);
 }

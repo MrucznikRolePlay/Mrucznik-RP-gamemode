@@ -75,31 +75,31 @@ YCMD:stworzbiznes(playerid, params[], help)
 				   {
 					   sendTipMessage(playerid, "Stworzy³eœ biznes bez interioru!");
 					   sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
-					   Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumnê w bazie danych
-					   Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
-					   Business[ID_BUSINESS][b_Name] = bizName; 
-					   Business[ID_BUSINESS][b_ownerUID] = 0; 
-					   Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
-					   Business[ID_BUSINESS][b_enY] = GetPVarFloat(playerid, "CreateBizOnY");
-					   Business[ID_BUSINESS][b_enZ] = GetPVarFloat(playerid, "CreateBizOnZ"); 
-					   Business[ID_BUSINESS][b_exX] = GetPVarFloat(playerid, "CreateBizOnX");
-					   Business[ID_BUSINESS][b_exY] = GetPVarFloat(playerid, "CreateBizOnX");
-					   Business[ID_BUSINESS][b_exZ] = GetPVarFloat(playerid, "CreateBizOnZ"); 
-					   Business[ID_BUSINESS][b_Name_Owner] = nameOwn;
-					   Business[ID_BUSINESS][b_int] = 0; 
-					   Business[ID_BUSINESS][b_vw] = 0; 
-					   Business[ID_BUSINESS][b_pLocal] = PLOCAL_DEFAULT; 
-					   Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
-					   Business[ID_BUSINESS][b_cost] = bizCost;
-					   Business[ID_BUSINESS][b_Location] = bizLoc; 
-					   CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
-					   CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
-					   BusinessLoaded++; 
-					   SaveBusiness(ID_BUSINESS); 
-					   SetPVarInt(playerid, "ActionCreateBiz", 0);
-					   SetPVarInt(playerid, "MustBe", 0); 
-					   format(debugText, sizeof(debugText), "ID %d", ID_BUSINESS); 
-					   sendTipMessage(playerid, debugText); 
+					  Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumn? w bazie danych
+						Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
+						mysql_real_escape_string(bizName, Business[ID_BUSINESS][b_Name]); 
+						Business[ID_BUSINESS][b_ownerUID] = 0; 
+						Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
+						Business[ID_BUSINESS][b_enY] = GetPVarFloat(playerid, "CreateBizOnY");
+						Business[ID_BUSINESS][b_enZ] = GetPVarFloat(playerid, "CreateBizOnZ"); 
+						Business[ID_BUSINESS][b_exX] = GetPVarFloat(playerid, "CreateBizOnX");
+						Business[ID_BUSINESS][b_exY] = GetPVarFloat(playerid, "CreateBizOnX");
+						Business[ID_BUSINESS][b_exZ] = GetPVarFloat(playerid, "CreateBizOnZ"); 
+						mysql_real_escape_string(nameOwn, Business[ID_BUSINESS][b_Name_Owner]); 
+						Business[ID_BUSINESS][b_int] = 0; 
+						Business[ID_BUSINESS][b_vw] = 0; 
+						Business[ID_BUSINESS][b_pLocal] = PLOCAL_DEFAULT; 
+						Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
+						Business[ID_BUSINESS][b_cost] = bizCost;
+						mysql_real_escape_string(bizLoc, Business[ID_BUSINESS][b_Location]); 
+						CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
+						CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
+						BusinessLoaded++; 
+						SaveBusiness(ID_BUSINESS); 
+						SetPVarInt(playerid, "ActionCreateBiz", 0);
+						SetPVarInt(playerid, "MustBe", 0); 
+						format(debugText, sizeof(debugText), "ID %d", ID_BUSINESS); 
+						sendTipMessage(playerid, debugText); 
 				   }
 				   else
 				   {
@@ -107,7 +107,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 						sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê");
 						Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumnê w bazie danych 
 						Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
-						Business[ID_BUSINESS][b_Name] = bizName; 
+						mysql_real_escape_string(bizName, Business[ID_BUSINESS][b_Name]);
 						Business[ID_BUSINESS][b_ownerUID] = 0; 
 						Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
 						Business[ID_BUSINESS][b_enY] = GetPVarFloat(playerid, "CreateBizOnY");
@@ -115,13 +115,13 @@ YCMD:stworzbiznes(playerid, params[], help)
 						Business[ID_BUSINESS][b_exX] = X;
 						Business[ID_BUSINESS][b_exY] = Y;
 						Business[ID_BUSINESS][b_exZ] = Z; 
-						Business[ID_BUSINESS][b_Name_Owner] = nameOwn;
+						mysql_real_escape_string(nameOwn, Business[ID_BUSINESS][b_Name_Owner]); 
 						Business[ID_BUSINESS][b_int] = GetPlayerInterior(playerid);   
 						Business[ID_BUSINESS][b_vw] = GetPlayerVirtualWorld(playerid); 
 						Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 
 						Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
 						Business[ID_BUSINESS][b_cost] = bizCost;
-						Business[ID_BUSINESS][b_Location] = bizLoc; 
+						mysql_real_escape_string(bizLoc, Business[ID_BUSINESS][b_Location]);
 						CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
 					   	CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
 						BusinessLoaded++; 
@@ -142,7 +142,7 @@ YCMD:stworzbiznes(playerid, params[], help)
 					sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
 					Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumnê w bazie danych
 					Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
-					Business[ID_BUSINESS][b_Name] = bizName; 
+					mysql_real_escape_string(bizName, Business[ID_BUSINESS][b_Name]); 
 					Business[ID_BUSINESS][b_ownerUID] = 0; 
 					Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
 					Business[ID_BUSINESS][b_enY] = GetPVarFloat(playerid, "CreateBizOnY");
@@ -150,13 +150,13 @@ YCMD:stworzbiznes(playerid, params[], help)
 					Business[ID_BUSINESS][b_exX] = X;
 					Business[ID_BUSINESS][b_exY] = Y;
 					Business[ID_BUSINESS][b_exZ] = Z; 
-					Business[ID_BUSINESS][b_Name_Owner] = nameOwn;
+					mysql_real_escape_string(nameOwn, Business[ID_BUSINESS][b_Name_Owner]); 
 					Business[ID_BUSINESS][b_int] = GetPlayerInterior(playerid);   
 					Business[ID_BUSINESS][b_vw] = GetPlayerVirtualWorld(playerid); 
 					Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 
 					Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
 					Business[ID_BUSINESS][b_cost] = bizCost;
-					Business[ID_BUSINESS][b_Location] = bizLoc; 
+					mysql_real_escape_string(bizLoc, Business[ID_BUSINESS][b_Location]); 
 					CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
 					CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
 					BusinessLoaded++; 

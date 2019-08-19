@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                bpracownicy                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,31 +27,36 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-
+#include "bpracownicy_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_bpracownicy()
 {
-    command_bizinfo();
-    command_bizlock();
-    command_bpracownicy();
-    command_dajbiznes();
-    command_gotobiz();
-    command_kupbiznes();
-    command_sprzedajbiznes();
-    command_zabierzbiznes();
-    command_zlomujbiznes();
+    new command = Command_GetID("bpracownicy");
+
+    //aliases
+    Command_AddAlt(command, "biznespracownicy");
+    Command_AddAlt(command, "businessworkers");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:bpracownicy(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla listê pracowników online biznesu.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_bpracownicy_Impl(playerid);
 }

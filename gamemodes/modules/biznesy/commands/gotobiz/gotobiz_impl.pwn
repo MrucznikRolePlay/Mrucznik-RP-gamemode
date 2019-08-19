@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------[ bpracownicy ]-----------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  gotobiz                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,42 +16,30 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Simeone
+// Data utworzenia: 19.08.2019
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:bpracownicy(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_gotobiz_Impl(playerid, businessID)
 {
-	new string[256];
-    if(IsPlayerConnected(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 5)
     {
-		if(IsALeaderBusiness(playerid))
-		{
-			sendTipMessageEx(playerid, COLOR_GREEN, "=========[Pracownicy Biznesu On-Line]=========");
-			foreach(new i : Player)
-			{
-				if(PlayerInfo[i][pBusinessMember] == PlayerInfo[playerid][pBusinessOwner])
-				{
-					format(string, sizeof(string), "> %s [%d] <", GetNick(i), i); 
-					SendClientMessage(playerid, -1, string); 
-				}
-			}
-			sendTipMessageEx(playerid, COLOR_GREEN, "=========[Koniec Pracowników On-Line]=========");
-		}else{
-			sendErrorMessage(playerid, "Nie jesteœ liderem biznesu!"); 
-		}
-
-	}
-	return 1;
+        if(businessID > BusinessLoaded || businessID== -1)
+        {
+            sendErrorMessage(playerid, "Nie ma takiego biznesu!"); 
+            return 1;
+        }
+        SetPlayerPos(playerid, Business[businessID][b_enX], Business[businessID][b_enY], Business[businessID][b_enZ]); 
+        sendTipMessage(playerid, "Teleportowano Ciê do biznesu!"); 
+    }
+    else
+    {
+        noAccessMessage(playerid);
+    }
+    return 1;
 }
 
-
-
+//end
