@@ -73,9 +73,15 @@ YCMD:stworzbiznes(playerid, params[], help)
 			   {
 				   if(GetPlayerVirtualWorld(playerid) == 0)//Ustawianie tego samego - brak wejœcia 
 				   {
+<<<<<<< HEAD
 					   sendTipMessage(playerid, "Stworzy³eœ biznes bez interioru!");
 					   sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
 					  Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumn? w bazie danych
+=======
+						sendTipMessage(playerid, "Stworzy³eœ biznes bez interioru!");
+						sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê"); 
+						Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumnê w bazie danych
+>>>>>>> 00fbe6895f1c3ffb62239b19363b537078aae988
 						Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
 						mysql_real_escape_string(bizName, Business[ID_BUSINESS][b_Name]); 
 						Business[ID_BUSINESS][b_ownerUID] = 0; 
@@ -107,7 +113,11 @@ YCMD:stworzbiznes(playerid, params[], help)
 						sendTipMessage(playerid, "Wpisz /bizinfo aby spojrzeæ na specyfikacjê");
 						Create_BusinessMySQL(ID_BUSINESS); //Tworzy kolumnê w bazie danych 
 						Business[ID_BUSINESS][b_ID] = ID_BUSINESS;
+<<<<<<< HEAD
 						mysql_real_escape_string(bizName, Business[ID_BUSINESS][b_Name]);
+=======
+					    mysql_real_escape_string(bizName, Business[ID_BUSINESS][b_Name]); 
+>>>>>>> 00fbe6895f1c3ffb62239b19363b537078aae988
 						Business[ID_BUSINESS][b_ownerUID] = 0; 
 						Business[ID_BUSINESS][b_enX] = GetPVarFloat(playerid, "CreateBizOnX");
 						Business[ID_BUSINESS][b_enY] = GetPVarFloat(playerid, "CreateBizOnY");
@@ -121,7 +131,11 @@ YCMD:stworzbiznes(playerid, params[], help)
 						Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 
 						Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
 						Business[ID_BUSINESS][b_cost] = bizCost;
+<<<<<<< HEAD
 						mysql_real_escape_string(bizLoc, Business[ID_BUSINESS][b_Location]);
+=======
+						mysql_real_escape_string(bizLoc, Business[ID_BUSINESS][b_Location]); 
+>>>>>>> 00fbe6895f1c3ffb62239b19363b537078aae988
 						CreateDynamic3DTextLabel(Business[ID_BUSINESS][b_Name], 0x008080FF, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ]+0.4, 10.0);
 					   	CreateDynamicPickup(1272, 1, Business[ID_BUSINESS][b_enX], Business[ID_BUSINESS][b_enY], Business[ID_BUSINESS][b_enZ], 0, 0, -1, STREAMER_PICKUP_SD); 
 						BusinessLoaded++; 

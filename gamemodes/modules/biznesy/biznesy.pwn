@@ -380,7 +380,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	Business[0][b_maxMoney] = 0;
 	Business[0][b_cost] = 100000000;
 	mysql_real_escape_string("Szmulowice Dolne", Business[0][b_Location]); 
-	mysql_real_escape_string("Brak - na sprzeda?", Business[0][b_Name_Owner]);
+	mysql_real_escape_string("Brak - na sprzeda¿", Business[0][b_Name_Owner]);
 	BusinessLoaded=0; 
 	new lStr[1024];
 
