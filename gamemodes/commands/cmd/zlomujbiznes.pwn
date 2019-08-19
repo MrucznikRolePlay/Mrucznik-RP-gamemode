@@ -58,11 +58,9 @@ YCMD:zlomujbiznes(playerid, params[], help)
 		}
 		else if(GetPVarInt(playerid, "Wpisal_zlomujbiznes") == 1)
 		{
-			new stringName[MAX_PLAYER_NAME]; 
 			new string[128]; 
 			Business[businessID][b_ownerUID] = 0;  
-			format(stringName, sizeof(stringName), "Brak - na sprzeda¿");
-			Business[businessID][b_Name_Owner] = stringName; 
+			mysql_real_escape_string("Brak - na sprzeda¿", Business[businessID][b_Name_Owner]); 
 			PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
 			format(string, sizeof(string), "%s zez³omowa³ biznes %d za $%d", GetNick(playerid), businessID, valueMoneyB); 
 			SendMessageToAdmin(string, COLOR_RED); 
