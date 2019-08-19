@@ -42,6 +42,12 @@ YCMD:sprawdztest(playerid, params[], help)
     		sendTipMessage(playerid, "U¿yj /sprawdztest [ID/Nick]");
     		return 1;
     	}
+
+		if(!IsPlayerConnected(giveplayerid)) 
+		{
+			return sendErrorMessage(playerid, "Nie ma takiego gracza.");
+		}
+
         GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 		if(PlayerInfo[giveplayerid][pWtrakcietestprawa]==1)
 		{
