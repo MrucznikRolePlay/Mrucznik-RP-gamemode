@@ -40,6 +40,11 @@ YCMD:pojazdygracza(playerid, params[], help)
 			return 1;
 		}
 
+        if(!IsPlayerConnected(para1))
+        {
+            return sendErrorMessage(playerid, "Nie ma takiego gracza.");
+        }
+
 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL))
 		{
