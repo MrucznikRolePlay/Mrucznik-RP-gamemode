@@ -339,7 +339,7 @@ stock UnLoadBusiness(idBIZ)
 	new stringName[64]; 
 	new stringNamed[MAX_PLAYER_NAME]; 
 	format(stringName, sizeof(stringName), " ");
-	Business[idBIZ][b_Name] = stringName; 
+	mysql_real_escape_string(stringName, Business[idBIZ][b_Name]); 
 	Business[idBIZ][b_ownerUID] = 0; 
 	Business[idBIZ][b_enX] = 0.0;
 	Business[idBIZ][b_enY] = 0.0;
@@ -366,10 +366,7 @@ stock UnLoadBusiness(idBIZ)
 LoadBusiness()//?adowanie biznesów z bazy danych
 {
 	//Tworzenie BIZ na ID 0
-	new stringName[64]; 
-	new stringNamed[MAX_PLAYER_NAME]; 
-	format(stringName, sizeof(stringName), "Testowy Biznes");
-	Business[0][b_Name] = stringName; 
+	mysql_real_escape_string("Testowy Biznes", Business[0][b_Name]); 
 	Business[0][b_ownerUID] = 0; 
 	Business[0][b_enX] = 0.0;
 	Business[0][b_enY] = 0.0;
@@ -382,10 +379,8 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	Business[0][b_pLocal] = 255; 
 	Business[0][b_maxMoney] = 0;
 	Business[0][b_cost] = 100000000;
-	format(stringName, sizeof(stringName), "Szmulowice Dolne");
-	Business[0][b_Location] = stringName; 
-	format(stringNamed, sizeof(stringNamed), "Brak - na sprzeda¿");
-	Business[0][b_Name_Owner] = stringNamed; 
+	mysql_real_escape_string("Szmulowice Dolne", Business[0][b_Location]); 
+	mysql_real_escape_string("Brak - na sprzeda?", Business[0][b_Name_Owner]);
 	BusinessLoaded=0; 
 	new lStr[1024];
 
