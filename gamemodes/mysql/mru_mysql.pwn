@@ -134,7 +134,7 @@ MruMySQL_IloscLiderowLoad()
 	All_Leaders = strval(szmuleonetescik);
 	mysql_free_result();
 	
-	for(new i; i<=MAX_FRAC; i++)
+	for(new i; i<MAX_FRAC; i++)
 	{
 		if(i != 0)
 		{

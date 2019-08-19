@@ -43,15 +43,15 @@ YCMD:startskinevent(playerid, params[], help)
 		{
 			if(value >= 20001 && value <= 20003)
 			{
-				if(eventForSkin[value] == 0)
+				if(eventForSkin[value-20000] == 0)
 				{
-					eventForSkin[value] = 1;
+					eventForSkin[value-20000] = 1;
 					format(string, sizeof(string), "%s w³¹czy³ event dla skina %d", GetNick(playerid), value); 
 					SendMessageToAdmin(string, COLOR_YELLOW);
 				}
-				else if(eventForSkin[value] == 1)
+				else if(eventForSkin[value-20000] == 1)
 				{
-					eventForSkin[value] = 0;
+					eventForSkin[value-20000] = 0;
 					format(string, sizeof(string), "%s wy³¹czy³ event dla skina %d", GetNick(playerid), value); 
 					SendMessageToAdmin(string, COLOR_YELLOW);
 				}

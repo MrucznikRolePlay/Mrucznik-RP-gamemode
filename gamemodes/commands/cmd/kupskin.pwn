@@ -56,7 +56,7 @@ YCMD:kupskin(playerid, params[], help)
 				}	
 				else if(skinID > 20000 && skinID <= skinsLoaded_Event)//SKINY EVENTOWE
 				{
-					if(eventForSkin[skinID] != 1)
+					if(eventForSkin[skinID-20000] != 1)
 					{
 						sendTipMessage(playerid, "Event dla tego skina jest wy³¹czony!"); 
 						return 1;
