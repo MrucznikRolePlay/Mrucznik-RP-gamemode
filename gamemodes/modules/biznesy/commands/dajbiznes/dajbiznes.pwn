@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 dajbiznes                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,25 +27,44 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-
+#include "dajbiznes_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_dajbiznes()
 {
-    command_bizinfo();
-    command_bizlock();
-    command_dajbiznes();
-    command_kupbiznes();
-    command_sprzedajbiznes();
-    command_zabierzbiznes();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:dajbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która nadaje biznes dla gracza. Niezale¿nie od odleg³oœci.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, valueBiz;
+    if(sscanf(params, "rd", giveplayerid, valueBiz))
+    {
+        sendTipMessage(playerid, "U¿yj /dajbiznes [Nick/ID] [BIZ_ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_dajbiznes_Impl(playerid, giveplayerid, valueBiz);
 }

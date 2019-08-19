@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 dajbiznes                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,36 +16,39 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 19.08.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_dajbiznes_Impl(playerid, giveplayerid, valueBiz)
 {
-    command_bizinfo();
-    command_bizlock();
-    command_dajbiznes();
-    command_kupbiznes();
-    command_sprzedajbiznes();
-    command_zabierzbiznes();
-    
+    if(valueBiz <= 0 && valueBiz > BusinessLoaded || valueBiz == INVALID_BIZ_ID)
+    {
+        sendErrorMessage(playerid, "Nie ma takiego biznesu!"); 
+        return 1;
+    }
+    if(PlayerInfo[giveplayerid][pBusinessOwner] != INVALID_BIZ_ID)
+    {
+        sendErrorMessage(playerid, "Ten gracz ma ju¿ biznes"); 
+        return 1;
+    }
+    if(Business[valueBiz][b_ownerUID] > 0)
+    {
+        sendErrorMessage(playerid, "Ten biznes ju¿ do kogoœ nale¿y!"); 
+        return 1;
+    }
+    PlayerInfo[playerid][pBusinessOwner] = valueBiz; 
+    Business[valueBiz][b_ownerUID] = PlayerInfo[giveplayerid][pUID]; 
+	Business[valueBiz][b_Name_Owner] = GetNick(giveplayerid); 
+
+    Log(businessLog, INFO, "%s dal biznes %s graczowi %s",
+	GetPlayerLogName(playerid), 
+	GetBusinessLogName(valueBiz),
+	GetBusinessLogName(valueBiz));
+    return 1;
 }
+
+//end

@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                               zabierzbiznes                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,36 +16,33 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 19.08.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_zabierzbiznes_Impl(playerid)
 {
-    command_bizinfo();
-    command_bizlock();
-    command_dajbiznes();
-    command_kupbiznes();
-    command_sprzedajbiznes();
-    command_zabierzbiznes();
-    
+    new businessID = GetNearestBusiness(playerid); 
+	if(businessID == INVALID_BIZ_ID)
+	{
+		sendErrorMessage(playerid, "Nie jesteœ obok biznesu!");
+		return 1;
+	}
+    if(PlayerInfo[playerid][pAdmin] != 5000 && !IsAScripter(playerid))
+    {
+        noAccessMessage(playerid); 
+        return 1;   
+    }
+    Log(businessLog, INFO, "%s zabral biznes %s graczowi [UID: %d]",
+	GetPlayerLogName(playerid), 
+	GetBusinessLogName(businessID),
+	Business[businessID][b_Name_Owner]);
+    sendTipMessageEx(playerid, COLOR_RED, "Zabra³eœ biznes z r¹k gracza"); 
+    ClearBusinessOwner(businessID); 
+    return 1;
 }
+
+//end

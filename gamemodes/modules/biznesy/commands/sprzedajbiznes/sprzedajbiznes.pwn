@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                               sprzedajbiznes                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,25 +27,44 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-
+#include "sprzedajbiznes_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_sprzedajbiznes()
 {
-    command_bizinfo();
-    command_bizlock();
-    command_dajbiznes();
-    command_kupbiznes();
-    command_sprzedajbiznes();
-    command_zabierzbiznes();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:sprzedajbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala sprzedaæ biznes - o ile siê go posiada.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, valueCost;
+    if(sscanf(params, "rd", giveplayerid, valueCost))
+    {
+        sendTipMessage(playerid, "U¿yj /sprzedajbiznes [ID/NICK] [Cena] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost);
 }

@@ -429,6 +429,20 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	}
 	return 1;
 }
+ClearBusinessOwner(businessID)
+{
+	new query[256];
+	format(query, sizeof(query), "UPDATE `mru_konta` SET \
+	`bizz`='%d' \
+	WHERE `bizz`='%d'", INVALID_BIZ_ID, businessID); 
+	mysql_query(query); 
+	format(query, sizeof(query), "UPDATE `mru_business` SET \
+	`ownerUID='%d', \
+	`ownerName`='%d' \
+	WHERE `ID`='%d'", 0, "Brak", businessID);
+	mysql_query(query); 
+	return 1;
+}
 Create_BusinessMySQL(bus_ID)
 {
 	new query[1024];

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------[ zabierzbiznes ]---------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  bizinfo                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,41 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Simeone
+// Data utworzenia: 19.08.2019
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:zabierzbiznes(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_bizinfo_Impl(playerid)
 {
-	if (PlayerInfo[playerid][pAdmin] == 5000 || PlayerInfo[playerid][pAdmin] == 5001)
+    new businessID = GetNearestBusiness(playerid); 
+	if(businessID == INVALID_BIZ_ID)
 	{
-		new gracz;
-		if(sscanf(params, "d", gracz)) return sendTipMessage(playerid, "U¿yj /zabierzbiznes [playerid/CzêœæNicku]");
-		if(IsPlayerConnected(gracz))
-		{
-            Log(adminLog, INFO, "Admin %s zabra³ %s biznes %s", GetPlayerLogName(playerid), GetPlayerLogName(gracz), GetBusinessLogName(PlayerInfo[gracz][pPbiskey]));
-			PlayerInfo[gracz][pPbiskey] = 255;
-			MruMySQL_SaveAccount(playerid);
-            _MruAdmin(playerid, sprintf("Zabra³eœ biznes graczowi %s [ID: %d]", GetNick(gracz, true), gracz));
-            if(gracz != playerid) _MruAdmin(gracz, sprintf("Biznes zosta³ zabrany przez Admina %s [ID: %d]", GetNick(playerid, true), playerid));
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Ten gracz jest offline!");
-		}
-
+		sendErrorMessage(playerid, "Nie jesteœ obok biznesu!");
+		return 1;
+	}
+	new string[256]; 
+	if(Business[businessID][b_ownerUID] == 0)
+	{
+		format(string, sizeof(string), "{FFFFFF}Nazwa: {37AC45}%s\n{FFFFFF}W³aœciciel: {37AC45}%s\n{FFFFFF}ID: {37AC45}%d\n{FFFFFF}Cena: {37AC45}$%d\n{FFFFFF}Dochody: {37AC45}$%d\n{FFFFFF}Lokalizacja: {37AC45}%s",
+		Business[businessID][b_Name],
+		Business[businessID][b_Name_Owner], 
+		businessID,
+		Business[businessID][b_cost],
+		Business[businessID][b_maxMoney],
+		Business[businessID][b_Location]); 
 	}
 	else
 	{
-		noAccessMessage(playerid);
+		format(string, sizeof(string), "{FFFFFF}Nazwa: {37AC45}%s\n{FFFFFF}W³aœciciel: {37AC45}%s [%d]\n{FFFFFF}ID: {37AC45}%d\n{FFFFFF}Cena: {37AC45}$%d\n{FFFFFF}Dochody: {37AC45}$%d\n{FFFFFF}Lokalizacja: {37AC45}%s",
+		Business[businessID][b_Name],
+		Business[businessID][b_Name_Owner], 
+		Business[businessID][b_ownerUID],
+		businessID,
+		Business[businessID][b_cost],
+		Business[businessID][b_maxMoney],
+		Business[businessID][b_Location]); 
 	}
-	return 1;
+	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string, false);     
+    return 1;
 }
+
+//end
