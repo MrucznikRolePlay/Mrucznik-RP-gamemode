@@ -36,14 +36,16 @@ YCMD:wk(playerid, params[], help)
         if(uid != -1) 
 		{
 			CarData[uid][c_Keys] = 0;
+			
 		}
   		PlayerInfo[playerid][pKluczeAuta] = 0;
   		sendTipMessage(playerid, "Kluczyki wywalone (skrót komendy: /wk)", COLOR_LIGHTBLUE);
-
+		  
 		//log
 		Log(payLog, INFO, "%s wyrzuci³ kluczyki do pojazdu %s",
 			GetPlayerLogName(playerid),
-			GetCarDataLogName(uid));
+			uid != -1 ? GetCarDataLogName(uid) : "{Vehicle: Brak[-1]}");
+
   	}
   	else
   	{
