@@ -84,6 +84,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-                                                                                                         -//
 #include "VERSION.pwn"
 #define DEBUG_MODE 0 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
+#define RESOURCES_LINK "http://51.68.141.69/models/"
 
 #if !defined gpci
 native gpci (playerid, serial [], len);
@@ -7523,7 +7524,6 @@ public OnDynamicObjectMoved(objectid)
     }
     return 1;
 }
-new linkResources[] = "http://rak-samp.5v.pl/modele/";
 public OnPlayerRequestDownload(playerid, type, crc)
 {
 	if(!IsPlayerConnected(playerid))
@@ -7544,7 +7544,7 @@ public OnPlayerRequestDownload(playerid, type, crc)
 	}
  
 	if(foundfilename) {
-		format(fullurl,sizeof(fullurl),"%s%s",linkResources, dlfilename);
+		format(fullurl,sizeof(fullurl), RESOURCES_LINK"%s", dlfilename);
 		RedirectDownload(playerid,fullurl);
 	}
 	return 0;
