@@ -38,6 +38,12 @@ YCMD:wyscig_start(playerid, params[], help)
             {
                 if(Scigamy == 666)
                 {
+					if(tworzenietrasy[playerid] == 666)
+					{
+						sendErrorMessage(playerid, "Nie wybra³eœ trasy wyœcigu!");
+						return 1;
+					}
+
 	            	ScigaSie[playerid] = owyscig[playerid];
 	            	owyscig[playerid] = 666;
 	            	Scigamy = ScigaSie[playerid];

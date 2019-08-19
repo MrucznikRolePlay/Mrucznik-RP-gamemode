@@ -13658,14 +13658,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ZabierzKase(playerid, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					Sejf_Add(FRAC_NOA, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					ZabierzKase(playerid, Wyscig[tworzenietrasy[playerid]][wNagroda]);
-					owyscig[playerid] = tworzenietrasy[playerid];
-					tworzenietrasy[playerid] = 666;
 					
 					Log(payLog, INFO, "%s zorganizowa³ wyœcig %s. Koszt organizacji: %d$, nagroda: %d$",
 						GetPlayerLogName(playerid),
 						Wyscig[tworzenietrasy[playerid]][wNazwa], 
 						(Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000, 
 						Wyscig[tworzenietrasy[playerid]][wNagroda]);
+
+					owyscig[playerid] = tworzenietrasy[playerid];
+					tworzenietrasy[playerid] = 666;
+					
 				}
 				else
 				{
