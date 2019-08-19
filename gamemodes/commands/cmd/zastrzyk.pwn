@@ -36,6 +36,12 @@ YCMD:zastrzyk(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /zastrzyk [ID gracza]");
 		return 1;
 	}
+	
+	if(!IsPlayerConnected(playa)) 
+	{
+		return sendErrorMessage(playerid, "Nie ma takiego gracza.");
+	}
+
 	if (PlayerInfo[playerid][pMember] == 4 && PlayerInfo[playerid][pRank] >= 4 || PlayerInfo[playerid][pLider] == 4)
 	{
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
