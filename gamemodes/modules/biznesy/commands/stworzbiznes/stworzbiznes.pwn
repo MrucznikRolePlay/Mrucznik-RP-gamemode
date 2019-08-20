@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ biz ]--------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                stworzbiznes                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,49 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "stworzbiznes_impl.pwn"
 
-YCMD:biz(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_stworzbiznes()
 {
-	new text[124], businessID, string[256];
-	if( sscanf(params, "s[124]", text))
-	{
-		sendTipMessage(playerid, "U¿yj /biz [Text]");
-		return 1;
-	}
-	CorrectPlayerBusiness(playerid);
-	if(GetPlayerBusiness(playerid) == INVALID_BIZ_ID)
-	{
-		sendErrorMessage(playerid, "Nie jesteœ cz³onkiem ¿adnego biznesu!"); 
-		return 1;
-	} 
-	businessID = GetPlayerBusiness(playerid); 
-	format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid), text); 
-	SendMessageToBiz(businessID, string, KOLOR_NIEBIESKI, 1);
-	ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-	format(string, sizeof(string), "Radio: %s", text);
-	SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
-	
-	return 1;
+    new command = Command_GetID("stworzbiznes");
+
+    //aliases
+    Command_AddAlt(command, "stworzbiz");
+    Command_AddAlt(command, "createbiz");
+    Command_AddAlt(command, "createbusiness");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:stworzbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda do tworzenia biznesu");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_stworzbiznes_Impl(playerid);
 }

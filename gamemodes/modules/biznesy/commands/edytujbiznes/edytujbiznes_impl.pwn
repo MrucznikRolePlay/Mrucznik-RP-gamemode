@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------[ stworzbiznes ]----------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                edytujbiznes                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,24 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Simeone
+// Data utworzenia: 20.08.2019
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:usunbiznes(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_edytujbiznes_Impl(playerid)
 {
-    if(IsPlayerConnected(playerid))
-   	{
-       if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
-	   {
-		  sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
-	   }
-	   else 
-	   {
-		   return noAccessMessage(playerid); 
-	   }
-	}
-	return 1;
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
+    {
+        sendTipMessage(playerid, "Ta komenda zostanie wprowadzona ju¿ wkrótce!");
+    }
+    else
+    {
+        noAccessMessage(playerid); 
+    }
+    return 1;
 }
+
+//end

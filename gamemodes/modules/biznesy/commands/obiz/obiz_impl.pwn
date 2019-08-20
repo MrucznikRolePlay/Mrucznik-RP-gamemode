@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ biznespomoc ]----------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    obiz                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,26 +16,27 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Simeone
+// Data utworzenia: 20.08.2019
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:biznespomoc(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_obiz_Impl(playerid, text[124])
 {
-	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
-	SendClientMessage(playerid, COLOR_WHITE,"*** BIZNES POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-	SendClientMessage(playerid, COLOR_GRAD3,"*** BIZNES *** /bizinfo /wejdz /wyjdz /kupbiznes /sprzedajbiznes");
-	SendClientMessage(playerid, COLOR_GRAD3, "*** BIZNES *** /bizlock /biz /obiz /bizpanel");
-	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /pomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
-	return 1;
+    new ID_BUSINESS;
+    CorrectPlayerBusiness(playerid);
+    if(GetPlayerBusiness(playerid) == INVALID_BIZ_ID)
+    {
+        sendErrorMessage(playerid, "Nie jesteœ cz³onkiem ¿adnego biznesu!"); 
+        return 1;
+    }
+    new string[256]; 
+    ID_BUSINESS = GetPlayerBusiness(playerid); 
+    format(string, sizeof(string), "%s [%d]: %s", GetNick(playerid), playerid,  text); 
+    SendMessageToBiz(ID_BUSINESS, string, KOLOR_NIEBIESKI, 0);
+    return 1;
 }
 
-
+//end

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------[ bizedit ]---------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 usunbiznes                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,49 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "usunbiznes_impl.pwn"
 
-YCMD:bizedit(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_usunbiznes()
 {
-    if(IsPlayerConnected(playerid))
-    {
-		if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
-		{
-				sendTipMessage(playerid, "Ta komenda zostanie wprowadzona ju¿ wkrótce!");
+    new command = Command_GetID("usunbiznes");
 
-		}else{
-			noAccessMessage(playerid); 
-		}
-	}
-	return 1;
+    //aliases
+    Command_AddAlt(command, "deletebusiness");
+    Command_AddAlt(command, "deletebiz");
+    Command_AddAlt(command, "usunbiz");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
 }
 
-
-
+//-------<[ command ]>-------
+YCMD:usunbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Usuñ biznes.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_usunbiznes_Impl(playerid);
+}

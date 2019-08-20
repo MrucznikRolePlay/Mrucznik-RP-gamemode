@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                    biz                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,47 +27,43 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "biz\biz.pwn"
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "biznespomoc\biznespomoc.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "obiz\obiz.pwn"
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "stworzbiznes\stworzbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-
+#include "biz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_biz()
 {
-    command_biz();
-    command_bizinfo();
-    command_bizlock();
-    command_biznespomoc();
-    command_bpracownicy();
-    command_dajbiznes();
-    command_edytujbiznes();
-    command_gotobiz();
-    command_kupbiznes();
-    command_obiz();
-    command_panelbiznesu();
-    command_quitbusiness();
-    command_sprzedajbiznes();
-    command_stworzbiznes();
-    command_usunbiznes();
-    command_zabierzbiznes();
-    command_zlomujbiznes();
+    new command = Command_GetID("biz");
+
+    //aliases
+    Command_AddAlt(command, "bizradio");
+    Command_AddAlt(command, "radiobiz");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:biz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Radio biznesowe.");
+        return 1;
+    }
+    //fetching params
+    new message[124];
+    if(sscanf(params, "s[124]", message))
+    {
+        sendTipMessage(playerid, "U¿yj /biz [wiadomoœæ] ");
+        return 1;
+    }
+    
+    //command body
+    return command_biz_Impl(playerid, message);
 }

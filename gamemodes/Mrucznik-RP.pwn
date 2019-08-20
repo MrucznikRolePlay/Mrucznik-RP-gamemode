@@ -5843,21 +5843,8 @@ OnPlayerLogin(playerid, password[])
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
 		CorrectPlayerBusiness(playerid);
-
-		new businessID = PlayerInfo[playerid][pBusinessOwner];
-		if(businessID != INVALID_BIZ_ID)
-		{
-			if(Business[businessID][b_ownerUID] != PlayerInfo[playerid][pUID])
-			{
-				sendErrorMessage(playerid, "Wczytywanie twojego biznesu siê nie powiod³o! Zostaje Ci on odebrany"); 
-				sendErrorMessage(playerid, "Je¿eli uwa¿asz to za b³¹d skryptu - zg³oœ stratê na naszym forum!");
-				Log(errorLog, INFO, "%s zosta³ odebrany biznes %s z powodu b³êdu w wczytaniu",
-					GetPlayerLogName(playerid), 
-					GetBusinessLogName(businessID)
-				);
-				PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
-			}
-		}
+		CheckPlayerBusiness(playerid);
+		
 		//Lider
 		Load_MySQL_Leader(playerid); 
 		//Powitanie:

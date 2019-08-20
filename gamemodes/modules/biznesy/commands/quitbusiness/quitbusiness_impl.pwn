@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ yo2 ]--------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                quitbusiness                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,25 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Simeone
+// Data utworzenia: 20.08.2019
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:obiz(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_quitbusiness_Impl(playerid)
 {
-    if(IsPlayerConnected(playerid))
+    if(IsAMemberBusiness(playerid))
     {
-		new text[124], ID_BUSINESS;
-		if( sscanf(params, "s[124]", text))
-		{
-			sendTipMessage(playerid, "U¿yj /obiz [Text]");
-			return 1;
-		}
-		CorrectPlayerBusiness(playerid);
-		if(GetPlayerBusiness(playerid) == INVALID_BIZ_ID)
-		{
-			sendErrorMessage(playerid, "Nie jesteœ cz³onkiem ¿adnego biznesu!"); 
-			return 1;
-		}
-		new string[256]; 
-		ID_BUSINESS = GetPlayerBusiness(playerid); 
-		format(string, sizeof(string), "%s [%d]: %s", GetNick(playerid), playerid,  text); 
-		SendMessageToBiz(ID_BUSINESS, string, KOLOR_NIEBIESKI, 0);
-	}
-	return 1;
+        sendTipMessage(playerid, "Opuœci³eœ biznes"); 
+        PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
+    }
+    else
+    {
+        noAccessMessage(playerid); 
+    }
+    return 1;
 }
+
+//end

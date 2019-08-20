@@ -305,6 +305,25 @@ stock CorrectPlayerBusiness(playerid)
 	}
 	return 0; 
 }
+
+CheckPlayerBusiness(playerid)
+{
+	new businessID = PlayerInfo[playerid][pBusinessOwner];
+	if(businessID != INVALID_BIZ_ID)
+	{
+		if(Business[businessID][b_ownerUID] != PlayerInfo[playerid][pUID])
+		{
+			sendErrorMessage(playerid, "Wczytywanie twojego biznesu siê nie powiod³o! Zostaje Ci on odebrany"); 
+			sendErrorMessage(playerid, "Je¿eli uwa¿asz to za b³¹d skryptu - zg³oœ stratê na naszym forum!");
+			Log(errorLog, INFO, "%s zosta³ odebrany biznes %s z powodu b³êdu w wczytaniu",
+				GetPlayerLogName(playerid), 
+				GetBusinessLogName(businessID)
+			);
+			PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
+		}
+	}
+}
+
 stock GetFreeBizID()
 {
 	new bID = BusinessLoaded+1; 
@@ -362,4 +381,74 @@ stock UnLoadBusiness(idBIZ)
 	return 1;
 }
 
+Business_AkceptujBiznes(playerid)
+{
+	new string[256];
+	new giveplayerid = GetPVarInt(playerid, "Oferujacy_ID");
+	new price = GetPVarInt(playerid, "Oferujacy_Cena");
+
+	if(giveplayerid == INVALID_PLAYER_ID)//przy connect
+	{
+		sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
+		return 1;
+	}
+	
+	if(GetPlayerBusiness(playerid) != INVALID_BIZ_ID)
+	{
+		sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
+		return 1;
+	}
+
+	if(!IsPlayerConnected(giveplayerid))
+	{
+		sendErrorMessage(playerid, "Gracz, który oferowa³ Ci biznes wyszed³ z serwera"); 
+		ResetBizOffer(playerid);
+		return 1;
+	}
+
+	if(kaska[playerid] < price)
+	{
+		sendTipMessage(playerid, "Nie masz takiej kwoty"); 
+		ResetBizOffer(playerid);
+		return 1;
+	}
+
+	new businessID = PlayerInfo[giveplayerid][pBusinessOwner]; 
+	new tax = (price/5);
+
+	ZabierzKase(playerid, price);
+	DajKase(giveplayerid, (price-tax)); 
+	Sejf_Add(FRAC_GOV, tax); 
+	Sejf_Save(FRAC_GOV); 
+
+	format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", 
+		GetNick(playerid, true), 
+		playerid, 
+		businessID, 
+		GetNick(giveplayerid, true), 
+		giveplayerid, 
+		price
+	);
+	SendLeaderRadioMessage(FRAC_GOV, COLOR_LIGHTGREEN, string);
+	SendAdminMessage(COLOR_P@, string); 
+	
+	//Wykonanie czynnoœci
+	PlayerInfo[giveplayerid][pBusinessOwner] = INVALID_BIZ_ID; 
+	PlayerInfo[playerid][pBusinessOwner] = businessID;
+	Business[businessID][b_ownerUID] = PlayerInfo[playerid][pUID]; 
+	Business[businessID][b_Name_Owner] = GetNick(playerid); 
+	MruMySQL_SaveAccount(playerid);
+	MruMySQL_SaveAccount(giveplayerid); 
+
+	Log(payLog, INFO, "%s sprzeda³ %s biznes %s za %d$",
+		GetPlayerLogName(giveplayerid),
+		GetPlayerLogName(playerid),
+		GetBusinessLogName(businessID),
+		price
+	);
+
+	ResetBizOffer(giveplayerid); 
+	ResetBizOffer(playerid);
+	return 1;
+}
 //end

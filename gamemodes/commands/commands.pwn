@@ -53,9 +53,6 @@
 #include "cmd/bdaj.pwn"
 #include "cmd/biegnij.pwn"
 #include "cmd/bigears.pwn"
-#include "cmd/biznespomoc.pwn"
-#include "cmd/obiz.pwn"
-#include "cmd/biz.pwn"
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
 #include "cmd/blokujnews.pwn"
@@ -330,7 +327,6 @@
 #include "cmd/paliwo.pwn"
 #include "cmd/panel.pwn"
 #include "cmd/panelbasenu.pwn"
-#include "cmd/panelbiznesu.pwn"
 #include "cmd/paralizuj.pwn"
 #include "cmd/patrol.pwn"
 #include "cmd/pban.pwn"
@@ -349,7 +345,6 @@
 #include "cmd/podglad.pwn"
 #include "cmd/podszyjsie.pwn"
 #include "cmd/setpogoda.pwn"
-#include "cmd/stworzbiznes.pwn"
 #include "cmd/pogodaall.pwn"
 #include "cmd/pojazdygracza.pwn"
 #include "cmd/pokazcb.pwn"
@@ -664,10 +659,7 @@
 #include "cmd/stan.pwn"
 #include "cmd/personalizuj.pwn"
 #include "cmd/vinyl.pwn"
-#include "cmd/quitbusiness.pwn"
 #include "cmd/startskinevent.pwn"
-#include "cmd/bizedit.pwn"
-#include "cmd/usunbiznes.pwn"
 #include "cmd/staty2.pwn"
 #include "cmd/makevlider.pwn"
 #include "cmd/dajscene.pwn"
@@ -700,9 +692,7 @@ static Aliases()
 	Command_AddAltNamed("car", "auto");
 	Command_AddAltNamed("car", "pojazd");
 	Command_AddAltNamed("car", "samochod");
-	//quitbusiness
-	Command_AddAltNamed("quitbusiness", "qb");
-	Command_AddAltNamed("quitbusiness", "quitbiz");
+	
 	//carhelp
 	Command_AddAltNamed("carhelp", "autopomoc");
 	Command_AddAltNamed("carhelp", "pojazdpomoc");
@@ -1467,12 +1457,6 @@ static Aliases()
 
 	//sblock
 	Command_AddAltNamed("sblok", "sblock");
-	//panelbiznesu
-	Command_AddAltNamed("panelbiznesu", "panelbiz"); 
-	Command_AddAltNamed("panelbiznesu", "bizpan"); 
-	//quitbusiness
-	Command_AddAltNamed("quitbusiness", "qb");
-	Command_AddAltNamed("quitbusiness", "quitbiz"); 
 	//pblock
 	Command_AddAltNamed("pblok", "pblock");
 

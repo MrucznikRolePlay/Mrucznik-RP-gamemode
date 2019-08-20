@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                biznespomoc                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,47 +27,37 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "biz\biz.pwn"
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "biznespomoc\biznespomoc.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "obiz\obiz.pwn"
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "stworzbiznes\stworzbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-
+#include "biznespomoc_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_biznespomoc()
 {
-    command_biz();
-    command_bizinfo();
-    command_bizlock();
-    command_biznespomoc();
-    command_bpracownicy();
-    command_dajbiznes();
-    command_edytujbiznes();
-    command_gotobiz();
-    command_kupbiznes();
-    command_obiz();
-    command_panelbiznesu();
-    command_quitbusiness();
-    command_sprzedajbiznes();
-    command_stworzbiznes();
-    command_usunbiznes();
-    command_zabierzbiznes();
-    command_zlomujbiznes();
+    new command = Command_GetID("biznespomoc");
+
+    //aliases
+    Command_AddAlt(command, "bizpomoc");
+    Command_AddAlt(command, "bizhelp");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:biznespomoc(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda wyœwietlaj¹ca listê komend zwi¹zanych z systemem biznesów.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_biznespomoc_Impl(playerid);
 }

@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                    obiz                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,47 +27,45 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "biz\biz.pwn"
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "biznespomoc\biznespomoc.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "obiz\obiz.pwn"
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "stworzbiznes\stworzbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-
+#include "obiz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_obiz()
 {
-    command_biz();
-    command_bizinfo();
-    command_bizlock();
-    command_biznespomoc();
-    command_bpracownicy();
-    command_dajbiznes();
-    command_edytujbiznes();
-    command_gotobiz();
-    command_kupbiznes();
-    command_obiz();
-    command_panelbiznesu();
-    command_quitbusiness();
-    command_sprzedajbiznes();
-    command_stworzbiznes();
-    command_usunbiznes();
-    command_zabierzbiznes();
-    command_zlomujbiznes();
+    new command = Command_GetID("obiz");
+
+    //aliases
+    Command_AddAlt(command, "ogloszeniebiznesowe");
+    Command_AddAlt(command, "ogloszeniebiz");
+    Command_AddAlt(command, "bizad");
+    Command_AddAlt(command, "buisnessad");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:obiz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Og³oszenie biznesowe.");
+        return 1;
+    }
+    //fetching params
+    new text[124];
+    if(sscanf(params, "s[124]", text))
+    {
+        sendTipMessage(playerid, "U¿yj /obiz [og³oszenie] ");
+        return 1;
+    }
+    
+    //command body
+    return command_obiz_Impl(playerid, text);
 }

@@ -50,73 +50,7 @@ YCMD:akceptuj(playerid, params[], help)
         }
 		if(strcmp(x_job, "biznes", false) == 0)
 		{
-			if(GetPVarInt(playerid, "Oferujacy_ID") == INVALID_PLAYER_ID)//przy connect
-			{
-				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
-				return 1;
-			}
-			if(GetPlayerBusiness(playerid) != INVALID_BIZ_ID)
-			{
-				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
-				return 1;
-			}
-            giveplayerid = GetPVarInt(playerid, "Oferujacy_ID");
-            new price = GetPVarInt(playerid, "Oferujacy_Cena");
-
-			if(IsPlayerConnected(giveplayerid))
-			{
-				if(kaska[playerid] >= price)
-				{
-                    new businessID = PlayerInfo[giveplayerid][pBusinessOwner]; 
-                    new tax = (price/5);
-
-					ZabierzKase(playerid, price);
-					DajKase(giveplayerid, (price-tax)); 
-					Sejf_Add(FRAC_GOV, tax); 
-					Sejf_Save(FRAC_GOV); 
-
-					format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", 
-                        GetNick(playerid, true), 
-                        playerid, 
-                        businessID, 
-                        GetNick(giveplayerid, true), 
-                        giveplayerid, 
-                        price
-                    );
-					SendLeaderRadioMessage(FRAC_GOV, COLOR_LIGHTGREEN, string);
-					SendAdminMessage(COLOR_P@, string); 
-					
-					//Wykonanie czynnoœci
-					PlayerInfo[giveplayerid][pBusinessOwner] = INVALID_BIZ_ID; 
-					PlayerInfo[playerid][pBusinessOwner] = businessID;
-                    Business[businessID][b_ownerUID] = PlayerInfo[playerid][pUID]; 
-                    Business[businessID][b_Name_Owner] = GetNick(playerid); 
-					MruMySQL_SaveAccount(playerid);
-					MruMySQL_SaveAccount(giveplayerid); 
-
-                    Log(payLog, INFO, "%s sprzeda³ %s biznes %s za %d$",
-                        GetPlayerLogName(giveplayerid),
-                        GetPlayerLogName(playerid),
-                        GetBusinessLogName(businessID),
-                        price
-                    );
-
-                    ResetBizOffer(giveplayerid); 
-					ResetBizOffer(playerid); 
-				}
-				else
-				{
-					sendTipMessage(playerid, "Nie masz takiej kwoty"); 
-					return ResetBizOffer(playerid);
-				}
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Gracz, który oferowa³ Ci biznes wyszed³ z serwera"); 
-				ResetBizOffer(playerid);
-				return 1;
-			}
-		
+            Business_AkceptujBiznes(playerid);
 		}
 		else if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
 		{
