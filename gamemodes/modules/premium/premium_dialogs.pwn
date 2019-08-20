@@ -290,7 +290,7 @@ static DialogKupKP(playerid)
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(KUP_KP), DIALOG_STYLE_MSGBOX, "Premium - KP", string, "Tak", "Nie");
 }
 
-static DialogRynekMC(playerid) //TODO: stworzyæ licytacje
+static stock DialogRynekMC(playerid) //TODO: stworzyæ licytacje
 {
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(RYNEK_MC), DIALOG_STYLE_LIST, "Premium - Rynek MC", 
 		"Oferty kupna Mrucznik Coinów\n"\

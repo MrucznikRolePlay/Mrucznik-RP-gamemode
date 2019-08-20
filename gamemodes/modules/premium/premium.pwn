@@ -397,7 +397,7 @@ IsPlayerPremiumOld(playerid)
 	return 0;
 }
 
-IsAUnikatowyPojazd(modelid)
+stock IsAUnikatowyPojazd(modelid)
 {
 	for(new i; i<MAX_PREMIUM_VEHICLES; i++)
 		if(modelid == PojazdyPremium[i][Model])
