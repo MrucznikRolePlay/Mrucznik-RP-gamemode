@@ -48,7 +48,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0://spawnuj kluczyki - tu jest bug?
 				{
-					if(CarData[idx][c_ID] == 0)
+					if(CarData[idx][c_ID] != 0)
 					{
 						SendClientMessage(playerid, 0xFFC0CB, "Pojazd do którego masz kluczyki jest ju¿ zespawnowany");
 						return 1;
