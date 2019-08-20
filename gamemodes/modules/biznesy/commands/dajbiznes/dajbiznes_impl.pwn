@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dajbiznes_Impl(playerid, giveplayerid, valueBiz)
 {
-    if(valueBiz <= 0 && valueBiz > BusinessLoaded || valueBiz == INVALID_BIZ_ID)
+    if(valueBiz <= 0 || valueBiz > BusinessLoaded || valueBiz == INVALID_BIZ_ID)
     {
         sendErrorMessage(playerid, "Nie ma takiego biznesu!"); 
         return 1;

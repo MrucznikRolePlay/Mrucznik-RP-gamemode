@@ -69,7 +69,7 @@ Create_MySQL_Leader(playerid, frac, level)
 	new query[256];
 	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID`, `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNick(playerid), PlayerInfo[playerid][pUID], frac, level);
 	mysql_query(query);
-	All_Leaders++;
+	AllLeaders++;
 	LeadersValue[LEADER_FRAC][frac]++;   
 	return 1;
 }
@@ -79,14 +79,14 @@ Remove_MySQL_Leader(playerid)
 	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `NICK`='%s'", GetNick(playerid));
 	mysql_query(query);
 	LeadersValue[LEADER_FRAC][GetPlayerFraction(playerid)]--; 
-	All_Leaders--;
+	AllLeaders--;
 	return 1;
 }
 Remove_MySQL_Leaders(fracID)
 {
 	new query[126];
 	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `FracID`='%d'", fracID);
-	new i; while(i <= All_Leaders){mysql_query(query); i++; }
+	new i; while(i <= AllLeaders){mysql_query(query); i++; }
 	return 1;
 }
 Save_MySQL_Leader(playerid)
@@ -131,7 +131,7 @@ MruMySQL_IloscLiderowLoad()
 	mysql_store_result();
 	new szmuleonetescik[24];
 	mysql_fetch_row_format(szmuleonetescik,"|");
-	All_Leaders = strval(szmuleonetescik);
+	AllLeaders = strval(szmuleonetescik);
 	mysql_free_result();
 	
 	for(new i; i<MAX_FRAC; i++)

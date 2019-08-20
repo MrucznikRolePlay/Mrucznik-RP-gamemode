@@ -112,7 +112,7 @@ BusinessPayDay(playerid)
 		BusinessPayDay(playerid);//powtórzenie dla wartoœci zerowej. 
 		return 1;
 	}
-	if(IsPlayerPremiumOld(playerid))
+	if(IsPlayerPremium(playerid))
 	{
 		
 		if(randomValue <= 4)//40% na MAX

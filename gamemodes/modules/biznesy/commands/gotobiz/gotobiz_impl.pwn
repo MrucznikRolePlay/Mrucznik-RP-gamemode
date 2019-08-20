@@ -27,7 +27,7 @@ command_gotobiz_Impl(playerid, businessID)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5)
     {
-        if(businessID > BusinessLoaded || businessID== -1)
+        if(businessID > BusinessLoaded || businessID < 0)
         {
             sendErrorMessage(playerid, "Nie ma takiego biznesu!"); 
             return 1;

@@ -5859,7 +5859,7 @@ OnPlayerLogin(playerid, password[])
 		}
 		if(Uprawnienia(playerid, ACCESS_PANEL))
 		{
-			format(string, sizeof(string), "Liderów frakcji w bazie danych: %d.", All_Leaders);
+			format(string, sizeof(string), "Liderów frakcji w bazie danych: %d.", AllLeaders);
 			sendTipMessage(playerid, string); 
 		}
 	}
