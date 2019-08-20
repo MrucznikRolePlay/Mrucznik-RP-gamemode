@@ -46,8 +46,6 @@ hook OnGameModeInit()
 	moneyLog = CreateLog("logi/money", ALL, false);
 	errorLog = CreateLog("logi/error", ERROR, true);
 
-	//biznesy
-	businessLog = CreateLog("logi/business", ALL, false);
 	//frakcje
 	fracLDLog = CreateLog("logi/lider", ALL, false); 
 	//old
@@ -71,7 +69,6 @@ hook OnGameModeExit()
 	DestroyLog(mysqlLog);
 	DestroyLog(moneyLog);
 	DestroyLog(errorLog);
-	DestroyLog(businessLog); 
 	DestroyLog(fracLDLog); 
 	DestroyLog(admindutyLog);
 }

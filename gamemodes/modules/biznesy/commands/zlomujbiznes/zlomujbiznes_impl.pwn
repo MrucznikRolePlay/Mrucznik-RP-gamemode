@@ -60,10 +60,11 @@ command_zlomujbiznes_Impl(playerid)
         format(string, sizeof(string), "%s zez³omowa³ biznes %d za $%d", GetNick(playerid), businessID, valueMoneyB); 
         SendMessageToAdmin(string, COLOR_RED); 
 
-        Log(businessLog, INFO, "%s zez³omowa³ biznes %s za $%d",
-        GetPlayerLogName(playerid),
-        GetBusinessLogName(businessID),
-        valueMoneyB);
+        Log(payLog, INFO, "%s zez³omowa³ biznes %s za $%d",
+            GetPlayerLogName(playerid),
+            GetBusinessLogName(businessID),
+            valueMoneyB
+        );
         DajKase(playerid, valueMoneyB); 
         SetPVarInt(playerid, "Wpisal_zlomujbiznes", 0);
         sendTipMessage(playerid, "Pomyœlnie zez³omowa³eœ swój biznes!"); 

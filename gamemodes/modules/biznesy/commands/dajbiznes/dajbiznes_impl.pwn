@@ -40,11 +40,16 @@ command_dajbiznes_Impl(playerid, giveplayerid, valueBiz)
         sendErrorMessage(playerid, "Ten biznes ju¿ do kogoœ nale¿y!"); 
         return 1;
     }
+    if(!IsAHeadAdmin(playerid) && !IsAScripter(playerid))
+    {
+        sendErrorMessage(playerid, "Nie masz uprawnieñ.");
+        return 1;
+    }
     PlayerInfo[playerid][pBusinessOwner] = valueBiz; 
     Business[valueBiz][b_ownerUID] = PlayerInfo[giveplayerid][pUID]; 
 	Business[valueBiz][b_Name_Owner] = GetNick(giveplayerid); 
 
-    Log(businessLog, INFO, "%s dal biznes %s graczowi %s",
+    Log(adminLog, INFO, "%s dal biznes %s graczowi %s",
         GetPlayerLogName(playerid), 
         GetBusinessLogName(valueBiz),
         GetPlayerLogName(giveplayerid)

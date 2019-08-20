@@ -5843,15 +5843,17 @@ OnPlayerLogin(playerid, password[])
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
 		CorrectPlayerBusiness(playerid);
-		if(PlayerInfo[playerid][pBusinessOwner] != INVALID_BIZ_ID)
+
+		new businessID = PlayerInfo[playerid][pBusinessOwner];
+		if(businessID != INVALID_BIZ_ID)
 		{
-			if(Business[PlayerInfo[playerid][pBusinessOwner]][b_ownerUID] != PlayerInfo[playerid][pUID])
+			if(Business[businessID][b_ownerUID] != PlayerInfo[playerid][pUID])
 			{
 				sendErrorMessage(playerid, "Wczytywanie twojego biznesu siê nie powiod³o! Zostaje Ci on odebrany"); 
 				sendErrorMessage(playerid, "Je¿eli uwa¿asz to za b³¹d skryptu - zg³oœ stratê na naszym forum!");
-				Log(businessLog, INFO, "%s zosta³ odebrany biznes %s z powodu b³êdu w wczytaniu",
+				Log(errorLog, INFO, "%s zosta³ odebrany biznes %s z powodu b³êdu w wczytaniu",
 					GetPlayerLogName(playerid), 
-					GetBusinessLogName(PlayerInfo[playerid][pBusinessOwner])
+					GetBusinessLogName(businessID)
 				);
 				PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
 			}

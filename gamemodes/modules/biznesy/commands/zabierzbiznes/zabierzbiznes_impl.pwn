@@ -31,15 +31,17 @@ command_zabierzbiznes_Impl(playerid)
 		sendErrorMessage(playerid, "Nie jesteœ obok biznesu!");
 		return 1;
 	}
-    if(PlayerInfo[playerid][pAdmin] != 5000 && !IsAScripter(playerid))
+    if(!IsAHeadAdmin(playerid) && !IsAScripter(playerid))
     {
         noAccessMessage(playerid); 
         return 1;   
     }
-    Log(businessLog, INFO, "%s zabral biznes %s graczowi [UID: %d]",
-	GetPlayerLogName(playerid), 
-	GetBusinessLogName(businessID),
-	Business[businessID][b_Name_Owner]);
+    Log(adminLog, INFO, "%s zabral biznes %s graczowi {Player: %s[%d]}",
+        GetPlayerLogName(playerid), 
+        GetBusinessLogName(businessID),
+        Business[businessID][b_Name_Owner],
+        Business[businessID][b_ownerUID]
+    );
     sendTipMessageEx(playerid, COLOR_RED, "Zabra³eœ biznes z r¹k gracza"); 
     ClearBusinessOwner(businessID); 
     return 1;
