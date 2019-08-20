@@ -270,7 +270,6 @@ stock ResetBizOffer(playerid)
 	SetPVarInt(playerid, "Oferujacy_ID", -1);
 	SetPVarInt(playerid, "Oferujacy_Cena", 0); 
 	SetPVarInt(playerid, "wpisal_sprzedaj_biz", 0);
-	SetPVarInt(playerid, "JestObokBiz", INVALID_BIZ_ID); 
 	return 1;
 }
 stock Biz_Owner(biz)
