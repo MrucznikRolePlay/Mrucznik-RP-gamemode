@@ -56,7 +56,7 @@ YCMD:lotto(playerid, params[], help)
 		sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
 		ZabierzKase(playerid, 5000);
 		PlayerInfo[playerid][pLottoNr] = lottonr;
-        Jackpot = Jackpot+5000;
+        Jackpot = Jackpot+4500; //500 podatku od hazadru
     }
     return 1;
 }

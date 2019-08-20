@@ -4173,6 +4173,7 @@ Lotto(number)
 			}
 		}
 	}
+	new dzielnik = winners;
 	foreach(new i2 : Player)
 	{
 		if(status == 1)
@@ -4199,7 +4200,7 @@ Lotto(number)
 			}
 			if(PlayerInfo[i2][pLottoNr] > 0 && PlayerInfo[i2][pLottoNr] == number)
 			{
-				new kasaWin = Jackpot/winners; 
+				new kasaWin = Jackpot/dzielnik; 
 				format(string, sizeof(string), "%s wygra³ w totolotku %d$", GetNick(i2), kasaWin); 
 				OOCOff(COLOR_WHITE, string);
 				DajKase(i2, kasaWin);
