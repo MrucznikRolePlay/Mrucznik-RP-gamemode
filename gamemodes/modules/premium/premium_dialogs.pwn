@@ -147,7 +147,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 
-			if(PlayerHasPremiumItem(playerid, PrzedmiotyPremium[listitem][Model]))
+			if(PlayerHasAttachedObject(playerid, PrzedmiotyPremium[listitem][Model]))
 			{
 				sendErrorMessage(playerid, "Masz ju¿ ten przedmiot!");
 				return DialogPrzedmioty(playerid);
@@ -226,19 +226,6 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new param[4];
 			valstr(param, skin);
 			return RunCommand(playerid, "/premiumskin",  param); 
-		}
-		else
-		{
-			return 1;
-		}
-	}
-	else if(dialogid == PREMIUM_DIALOG(PRZEDMIOTYGRACZA))
-	{
-		if(response)
-		{
-			new item = DynamicGui_GetDataInt(playerid, listitem);
-			new index = AttachPremiumItem(playerid, item, 2);
-			EditAttachedObject(playerid, index);
 		}
 		else
 		{
@@ -414,25 +401,6 @@ DialogSkinyPremiumGracza(playerid)
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(ZMIENSKIN), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje skiny", list, "Ustaw", "Wyjdz");
 
 	return true;
-}
-
-DialogPrzedmiotyPremiumGracza(playerid)
-{
-	DynamicGui_Init(playerid);
-
-	new count, list[7*MAX_PREMIUM_ITEMS];
-	VECTOR_foreach(v : VPremiumItems[playerid])
-	{
-		new item = MEM_get_val(v);
-		strcat(list, sprintf("%d\n", item));
-		count++;
-		DynamicGui_AddRow(playerid, 1, item);
-	}
-
-	if(count==0) return sendErrorMessage(playerid, "Nie masz ¿adnych przedmiotów premium.");
-
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTYGRACZA), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje przedmioty", list, "Ustaw", "Wyjdz");
-	return 1;
 }
 
 DialogTelefon(playerid)

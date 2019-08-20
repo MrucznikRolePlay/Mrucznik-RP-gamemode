@@ -50,7 +50,6 @@ premium_clearCache(playerid)
 	PremiumInfo[playerid][pExpires] = 0;
 
 	VECTOR_clear(VPremiumSkins[playerid]);
-	VECTOR_clear(VPremiumItems[playerid]);
 }
 
 premium_loadForPlayer(playerid)
@@ -99,7 +98,6 @@ premium_loadForPlayer(playerid)
 	if(kpMC > 0) PremiumInfo[playerid][pMC] = kpMC;
 
 	MruMySQL_LoadPlayerPremiumSkins(playerid);
-	MruMySQL_LoadPlayerPremiumItems(playerid);
 }
 
 premium_printMcBalance(playerid)
@@ -221,14 +219,14 @@ KupPrzedmiotPremium(playerid, id)
 		return DialogPrzedmioty(playerid);
 	}
 
-	MruMySQL_InsertPremiumItem(playerid, id);
 	ZabierzMC(playerid, PrzedmiotyPremium[id][Cena]);
 
 	Log(premiumLog, INFO, "%s kupi³ unikatowy przedmiot %d za %dMC",
 		GetPlayerLogName(playerid), 
 		PrzedmiotyPremium[id][Model],
 		PrzedmiotyPremium[id][Cena]);
-	VECTOR_push_back_val(VPremiumItems[playerid], PrzedmiotyPremium[id][Model]);
+	
+	PlayerAttachments_Create(playerid, id);
 	
 	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", PrzedmiotyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
 	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /przedmioty");
@@ -362,24 +360,6 @@ KupNumerTelefonu(playerid, string:_numer[])
 	return 1;
 }
 
-AttachPremiumItem(playerid, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY = 0.0, Float:fOffsetZ = 0.0, Float:fRotX = 0.0, Float:fRotY = 0.0, Float:fRotZ = 0.0, Float:fScaleX = 1.0, Float:fScaleY = 1.0, Float:fScaleZ = 1.0, materialcolor1 = 0, materialcolor2 = 0)
-{
-	//TODO: indexes management
-	new index = 3;
-	AttachedObjects[playerid][index][ao_x] = fOffsetX;
-	AttachedObjects[playerid][index][ao_y] = fOffsetY;
-	AttachedObjects[playerid][index][ao_z] = fOffsetZ;
-	AttachedObjects[playerid][index][ao_rx] = fRotX;
-	AttachedObjects[playerid][index][ao_ry] = fRotY;
-	AttachedObjects[playerid][index][ao_rz] = fRotZ;
-	AttachedObjects[playerid][index][ao_sx] = fScaleX;
-	AttachedObjects[playerid][index][ao_sy] = fScaleY;
-	AttachedObjects[playerid][index][ao_sz] = fScaleZ;
-
-	SetPlayerAttachedObject(playerid, index, modelid, bone, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ, materialcolor1, materialcolor2); 
-	return index;
-}
-
 //---< Is >---
 IsPlayerPremium(playerid)
 {
@@ -410,9 +390,5 @@ PlayerHasSkin(playerid, skin)
 	return VECTOR_find_val(VPremiumSkins[playerid], skin) != INVALID_VECTOR_INDEX;
 }
 
-PlayerHasPremiumItem(playerid, item)
-{
-	return VECTOR_find_val(VPremiumItems[playerid], item) != INVALID_VECTOR_INDEX;
-}
 
 //end

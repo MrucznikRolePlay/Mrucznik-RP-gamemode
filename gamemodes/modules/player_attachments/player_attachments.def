@@ -23,5 +23,8 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define INVALID_ATTACHED_OBJECT_INDEX -1
+
+#define DIALOG_PRZEDMIOTYGRACZA 7449
 
 //end

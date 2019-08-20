@@ -131,49 +131,6 @@ MruMySQL_LoadPlayerPremiumSkins(playerid)
 	}
 }
 
-MruMySQL_InsertPremiumItem(playerid, itemid)
-{
-    new str[512];
-    format(str, 512, "INSERT INTO `mru_playeritems` (`model`, `UID`, `bone`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sz`, `sy`, `sz`)"\
-					 " VALUES ('%d', '%d', '%d', '%f', '%f', '%f', '%f', '%f', '%f', '%f', '%f', '%f')", 
-		PrzedmiotyPremium[itemid][Model], 
-		PlayerInfo[playerid][pUID], 
-		2, //TODO
-		0.0, 0.0, 0.0,
-		0.0, 0.0, 0.0,
-		1.0, 1.0, 1.0
-	);
-    mysql_query(str);
-    new id = mysql_insert_id();
-    return id;
-}
-
-MruMySQL_LoadPlayerPremiumItems(playerid)
-{
-	new str[256], model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, active, bone;
-    format(str, 256, "SELECT `model`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`, `active`,`bone` FROM `mru_playeritems` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
-    mysql_query(str);
-    mysql_store_result();
-    while(mysql_fetch_row_format(str, "|"))
-    {
-        sscanf(str, "p<|>dfffffffffdd", model, x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-		VECTOR_push_back_val(VPremiumItems[playerid], model);
-		if(active)
-		{
-			AttachPremiumItem(playerid, model, bone, x,y,z, rx,ry,rz, sx,sy,sz);
-		}
-    }
-    mysql_free_result();
-}
-
-
-MruMySQL_UpdatePremiumItem(playerid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, bone, active) {
-    new str[256];
-    format(str, 256, "UPDATE mru_playeritems SET `model`='%d', `bone`='%d', `x`='%f',`y`='%f',`z`='%f', `rx`='%f',`ry`='%f',`rz`='%f', `active`='%d' WHERE `uid`=%d AND model='%d'", 
-		model, bone, x,y,z,rx,ry,rz, active, PlayerInfo[playerid][pUID], model);
-    mysql_query(str);
-}
-
 MruMySQL_IsPhoneNumberAvailable(number) {
     
     if(100 >= number <= 150) return false;

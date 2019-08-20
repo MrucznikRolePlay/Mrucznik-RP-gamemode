@@ -22,7 +22,25 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+
+enum attached_object_data
+{
+    Float:ao_x,
+    Float:ao_y,
+    Float:ao_z,
+    Float:ao_rx,
+    Float:ao_ry,
+    Float:ao_rz,
+    Float:ao_sx,
+    Float:ao_sy,
+    Float:ao_sz,
+    bool:ao_active
+}
+new AttachedObjects[MAX_PLAYERS][MAX_PLAYER_ATTACHED_OBJECTS][attached_object_data];
+
 //-----------------<[ Zmienne: ]>-------------------
+new Map:MAttachedItems[MAX_PLAYERS];
+
 //------------------<[ Forwardy: ]>--------------------
 
 //end

@@ -2534,18 +2534,5 @@ new nexac_ac_names[53][] = {
 	"Anti-NOP's"
 };
 
-enum attached_object_data
-{
-    Float:ao_x,
-    Float:ao_y,
-    Float:ao_z,
-    Float:ao_rx,
-    Float:ao_ry,
-    Float:ao_rz,
-    Float:ao_sx,
-    Float:ao_sy,
-    Float:ao_sz
-}
-new AttachedObjects[MAX_PLAYERS][MAX_PLAYER_ATTACHED_OBJECTS][attached_object_data];
 
 //EOF

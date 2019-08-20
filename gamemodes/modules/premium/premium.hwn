@@ -38,8 +38,7 @@ enum ePremiumDialog
 	ZMIANY_NICKU,
 	SKINY,
 	TELEFON,
-	ZMIENSKIN,
-	PRZEDMIOTYGRACZA
+	ZMIENSKIN
 };
 
 enum ePremiumInfo
@@ -69,7 +68,6 @@ enum ePrzedmiotyPremium
 
 //-----------------<[ Zmienne: ]>-------------------
 new Vector:VPremiumSkins[MAX_PLAYERS]; //TODO: Maybe zamieniæ na bintree, bo w sumie wiecej szukania niz wkladania. Maybe move to https://github.com/IllidanS4/PawnPlus
-new Vector:VPremiumItems[MAX_PLAYERS];
 
 new PremiumInfo[MAX_PLAYERS][ePremiumInfo];
 
@@ -132,6 +130,7 @@ new const SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
 //TODO: dodac nazwy przedmiotow
 new const PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] = 
 {
+	//item, bone, price
 	{18645, 100},
 	{18956, 100},
 	{19025, 100},

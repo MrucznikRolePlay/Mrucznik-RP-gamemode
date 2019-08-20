@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_przedmioty_Impl(playerid)
 {
-    DialogPrzedmiotyPremiumGracza(playerid);
+    DialogPlayerAttachedItems(playerid);
     return 1;
 }
 

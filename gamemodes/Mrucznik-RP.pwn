@@ -5859,6 +5859,7 @@ OnPlayerLogin(playerid, password[])
 		
 		//Lider
 		Load_MySQL_Leader(playerid); 
+
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
@@ -5996,6 +5997,9 @@ OnPlayerLogin(playerid, password[])
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;
 
 	premium_loadForPlayer(playerid);
+
+	//obiekty
+	PlayerAttachments_LoadItems(playerid);
 
 	//Odbugowywanie domów:
     if(PlayerInfo[playerid][pDom] != 0)
