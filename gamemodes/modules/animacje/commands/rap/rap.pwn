@@ -43,7 +43,7 @@ command_rap()
     
 
     //prefix
-    //Command_SetPrefix(command, '@');
+    Command_SetPrefix(command, '@');
 }
 
 //-------<[ command ]>-------

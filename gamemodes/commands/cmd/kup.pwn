@@ -42,7 +42,8 @@ YCMD:kup(playerid, params[], help)
 		{
 			if(GUIExit[playerid] == 0)
 			{
-				}
+				ShowShopDialog(playerid);
+			}
 		}
 		else if(PlayerToPoint(5.0, playerid, 809.4175,-1420.2585,-22.6193))
 		{

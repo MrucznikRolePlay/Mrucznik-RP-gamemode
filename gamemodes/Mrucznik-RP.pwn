@@ -5849,9 +5849,10 @@ OnPlayerLogin(playerid, password[])
 			{
 				sendErrorMessage(playerid, "Wczytywanie twojego biznesu siê nie powiod³o! Zostaje Ci on odebrany"); 
 				sendErrorMessage(playerid, "Je¿eli uwa¿asz to za b³¹d skryptu - zg³oœ stratê na naszym forum!");
-				Log(businessLog, INFO, "%s zosta³ odebrany biznes {ID: %d NAME: %s] z powodu b³êdu w wczytaniu",
-				GetPlayerLogName(playerid), 
-				GetBusinessLogName(PlayerInfo[playerid][pBusinessOwner]));
+				Log(businessLog, INFO, "%s zosta³ odebrany biznes %s z powodu b³êdu w wczytaniu",
+					GetPlayerLogName(playerid), 
+					GetBusinessLogName(PlayerInfo[playerid][pBusinessOwner])
+				);
 				PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID; 
 			}
 		}

@@ -64,18 +64,13 @@ command_kupbiznes_Impl(playerid)
 	new string[124]; 
 	sendTipMessageEx(playerid, COLOR_GREEN, "===[Zakupi³eœ swój w³asny biznes]===");
 	format(string, sizeof(string), "Nazwa biznesu: %s", Business[businessID][b_Name]);  
-	sendTipMessage(playerid, string); 
-	format(string, sizeof(string), "ID biznesu: %d", businessID); 
 	sendTipMessage(playerid, string);
-	format(string, sizeof(string), "Twoje UID: %d", PlayerInfo[playerid][pUID]); 
-	sendTipMessage(playerid, string); 
-	sendTipMessageEx(playerid, COLOR_GREEN, "===[WYKONAJ ZRZUT EKRANU]==="); 
 
-	Log(businessLog, INFO, "%s [UID: %d] kupi³ biznes %s za %d$",
-	GetPlayerLogName(playerid),
-	PlayerInfo[playerid][pUID], 
-	GetBusinessLogName(businessID),
-	Business[businessID][b_cost]);
+	Log(payLog, INFO, "%s kupi³ biznes %s za %d$",
+		GetPlayerLogName(playerid),
+		GetBusinessLogName(businessID),
+		Business[businessID][b_cost]
+	);
 	ZabierzKase(playerid, Business[businessID][b_cost]); 
 	ResetBizOffer(playerid);
     return 1;
