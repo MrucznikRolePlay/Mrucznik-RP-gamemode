@@ -17,7 +17,7 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 
-// Opis:
+// Opis
 /*
 	
 */
@@ -27,48 +27,120 @@
 /*
 	
 */
-
 YCMD:kupskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
         if(IsAtClothShop(playerid))
         {
-            new lolgf;
-			if( sscanf(params, "d", lolgf))
+            new skinID;
+			if( sscanf(params, "d", skinID))
 			{
 				sendTipMessage(playerid, "U¿yj /wybierzskin [id skinu] (koszt: 5000$)");
 				sendTipMessage(playerid, "ID skinów znajdziesz na: http://wiki.sa-mp.com/wiki/Skins:All");
+				sendTipMessage(playerid, "ID skinów [+20.000] znajdziesz na: http://mrucznik-rp.pl");
 				return 1;
 			}
-
-			new dobrze = 0;
-			if(lolgf > 0 && lolgf < 300)
-			{
-				for(new skin = 0; skin<194; skin++)
+			if(kaska[playerid] >= 5000){
+				
+				if(skinID > 299 && skinID <= 20000)
 				{
-					if(lolgf == Przebierz[skin][0])
+					sendErrorMessage(playerid, "B³êdne ID skina - brak przedzia³u od 300-399"); 
+					return 1;
+				}
+				else if(skinIsLegally(skinID))
+				{
+					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
+					ZabierzKase(playerid, 5000); 
+					return 1;
+				}	
+				else if(skinID > 20000 && skinID <= skinsLoaded_Event)//SKINY EVENTOWE
+				{
+					if(eventForSkin[skinID-20000] != 1)
 					{
-					    dobrze = 1;
+						sendTipMessage(playerid, "Event dla tego skina jest wy³¹czony!"); 
+						return 1;
 					}
+					SetPlayerSkin(playerid, skinID); 
+					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
+					ZabierzKase(playerid, 5000); 
+					return 1;
 				}
-				if(dobrze == 1)
+				else if(skinID > 20100 && skinID <= skinsLoaded_Fraction)//Skiny dla frakcji
 				{
-				    PlayerInfo[playerid][pModel] = lolgf;
-					SetPlayerSkin(playerid, lolgf);
-					sendTipMessageEx(playerid, COLOR_P@, "Kupi³eœ nowy skin!");
-					ZabierzKase(playerid, 5000);
-					GameTextForPlayer(playerid, "~r~-5000$", 2500, 1);
+					sendTipMessage(playerid, "Ten skin jest tylko i wy³¹cznie dla frakcji! U¿yj /uniform"); 
+					return 1;
 				}
-				else
+				else if(skinID > 20300 && skinID <= skinsLoaded_Uni)
 				{
-				    sendTipMessage(playerid, "Tego skina nie mo¿esz wybraæ!");
+					sendErrorMessage(playerid, "Ten skin jest do kupienia za MC"); 
+					return 1;
+				}
+				else if(skinID > 20400 && skinID <= skinsLoaded_Normal)//Normalne skiny dla ka¿dego
+				{
+					SetPlayerSkin(playerid, skinID); 
+					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
+					ZabierzKase(playerid, 5000); 
 				}
 			}
 			else
 			{
-			    sendTipMessage(playerid, "Skin od 1 do 299!");
+				sendErrorMessage(playerid, "Nie posiadasz odpowiedniej iloœci gotówki!");
+				return 1;
 			}
+		}
+	}
+	return 1;
+}
+/*
+YCMD:kupskin(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(IsAtClothShop(playerid))
+        {
+            new skinID;
+			if( sscanf(params, "d", skinID))
+			{
+				sendTipMessage(playerid, "U¿yj /wybierzskin [id skinu] (koszt: 5000$)");
+				sendTipMessage(playerid, "ID skinów znajdziesz na: http://wiki.sa-mp.com/wiki/Skins:All");
+				sendTipMessage(playerid, "ID skinów [+400] znajdziesz na: http://mrucznik-rp.pl");
+				return 1;
+			}
+			if(kaska[playerid] < 5000)
+			{
+				sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹co œrodków!");
+				return 1;
+			}
+			if(skinID > )
+			for(new i; i<=2; i++)
+			{
+				if(skinID == PedsEvent[i][0])
+				{
+					if(eventForSkin[i] != 1)
+					{
+						sendErrorMessage(playerid, "Event dla tego skina zosta³ zakoñczony!"); 
+						return 1;
+					}
+					
+					sendTipMessage(playerid, "Zakupi³eœ nowego skina [Tymczasowego]!"); 
+					ZabierzKase(playerid, 5000); 
+					SetPlayerSkinEx(playerid, skinID); 
+					return 1;
+				}
+			}
+			for(new skin = 0; skin<=222; skin++)
+			{
+				if(skinID == Przebierz[skin][0])
+				{
+					sendTipMessage(playerid, "Zakupi³eœ nowego skina!"); 
+					ZabierzKase(playerid, 5000); 
+					SetPlayerSkinEx(playerid, skinID); 
+					PlayerInfo[playerid][pSkin] = skinID; 
+					return 1;
+				}
+			}
+			sendTipMessage(playerid, "Tego skina nie mo¿esz wybraæ!"); 	
         }
         else
 		{
@@ -77,3 +149,4 @@ YCMD:kupskin(playerid, params[], help)
     }
 	return 1;
 }
+*/

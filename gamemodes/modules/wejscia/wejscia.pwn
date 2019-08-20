@@ -216,6 +216,8 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			noAccessCome[playerid] = 1; 
 			return 1;
 		}
+		SetPlayerTW(playerid, 5000, 1, 6); 
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}
 	else if(Check_ID == 8)
 	{
@@ -225,6 +227,8 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			noAccessCome[playerid] = 1; 
 			return 1;
 		}
+		SetPlayerTW(playerid, 5000, 1, 6); 
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}
 	else if(Check_ID == 9)
 	{
@@ -259,19 +263,17 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 13)
 	{
-		SetPlayerTW(playerid, 5000, 1, 6); 
-		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+		//WOLNE
 	}
 	else if(Check_ID == 14)
 	{
-		sendTipMessageEx(playerid, COLOR_GREEN, "======[Los Santos MMA]======");
+		sendTipMessageEx(playerid, COLOR_GREEN, "======[Los Santos MMA 2]======");
 		sendTipMessageEx(playerid, COLOR_P@, "Sponsorzy:");
-		sendTipMessage(playerid, "San News, United States Secret Service, Communist Part of San Andreas;");
-		sendTipMessage(playerid, "Kancelaria Gubernatora, Simon Cotta, John Mcintosh"); 
+		sendTipMessage(playerid, "San News;");
 		sendTipMessageEx(playerid, COLOR_P@, "W³odarze:");
-		sendTipMessage(playerid, "Beyonce Bennett, Mat Drep"); 
+		sendTipMessage(playerid, "Beyonce Bennett"); 
 		sendTipMessageEx(playerid, COLOR_P@, "Walka wieczoru:"); 
-		sendTipMessage(playerid, "Simon Cotta vs. John Mrucznik"); 
+		sendTipMessage(playerid, "BRAK USTALONEJ"); 
 		sendTipMessageEx(playerid, COLOR_GREEN, "===========[Fight]===========");
 		GameTextForPlayer(playerid, "~w~By~n~~r~Dreptacz", 5000, 1); 
 	}
@@ -280,6 +282,16 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		GameTextForPlayer(playerid, "~w~By~n~~g~Dreptacz", 5000, 1); 
 		sendTipMessage(playerid, "Zapraszamy na rzeŸ!");
 
+	}
+	else if(Check_ID == 16)//Wiêzienie stanowe - wejœcie i wyjœcie
+	{
+		if(!IsACop(playerid) && !IsABOR(playerid))
+		{
+			SendClientMessage(playerid, COLOR_WHITE, "Simon_Mrucznikov mówi: Zaraz zaraz kolego! A ty gdzie? Nie mo¿esz tu wejœæ!"); 
+			noAccessCome[playerid] = 1;
+			return 1;
+		}
+		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
 	}
 	else
 	{
@@ -339,6 +351,16 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 			sendErrorMessage(playerid, "Brak dostêpu do tego wejœcia"); 
 			return 1;
 		}
+	}
+	else if(Check_ID == 16)//Wiêzienie stanowe - g³ówne wejœcie
+	{
+		if(PlayerInfo[playerid][pJailed] > 0)
+		{
+			SendClientMessage(playerid, COLOR_WHITE, "Pavlo_Rudovy mówi: Koleszko? Nie pomyli³o Ci siê coœ? Wracaj do celi!!"); 
+			noAccessCome[playerid] =1;
+			return 1;
+		}
+		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
 	}
 	else
 	{

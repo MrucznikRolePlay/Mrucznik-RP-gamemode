@@ -94,6 +94,7 @@ YCMD:przelew(playerid, params[], help)
 				
 					if(value >= 5_000_000)//Wiadomosc dla adminow
 					{
+						format(string, sizeof(string), "Gracz %s wys³a³ przelew do %s w wysokoœci %d$", GetNick(playerid), GetNick(giveplayerid), value);
 						SendAdminMessage(COLOR_YELLOW, string);
 						return 1;
 					}

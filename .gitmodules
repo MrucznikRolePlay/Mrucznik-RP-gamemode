@@ -4,3 +4,7 @@
 [submodule "include"]
 	path = include
 	url = git@github.com:Mrucznik/Mrucznik-RP-Includes.git
+[submodule "MrucznikResources"]
+	path = MrucznikResources
+	url = https://github.com/SzYm3k/MrucznikResources.git
+	branch = master

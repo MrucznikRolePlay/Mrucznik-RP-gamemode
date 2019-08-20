@@ -1,0 +1,15 @@
+{
+    "name": "gotobiz",
+    "description": "Komenda, która teleportuje nas do biznesu.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "businessID",
+            "description": "ID_BIZNESU"
+        }
+    ],
+    "date": "19.08.2019"
+}

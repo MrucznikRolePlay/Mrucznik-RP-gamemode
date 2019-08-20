@@ -70,7 +70,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
+			SetPlayerSkinEx(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak≥ada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			SetPVarInt(playerid, "CheatDetected", 0);
@@ -560,7 +560,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 165);
+				SetPlayerSkinEx(playerid, 165);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -570,7 +570,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 166);
+				SetPlayerSkinEx(playerid, 166);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -580,7 +580,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 211);
+				SetPlayerSkinEx(playerid, 211);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -590,7 +590,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 3:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 286);
+				SetPlayerSkinEx(playerid, 286);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -600,7 +600,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 4:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 295);
+				SetPlayerSkinEx(playerid, 295);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -617,7 +617,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 105);
+				SetPlayerSkinEx(playerid, 105);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -628,7 +628,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 106);
+				SetPlayerSkinEx(playerid, 106);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -639,7 +639,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 107);
+				SetPlayerSkinEx(playerid, 107);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -650,7 +650,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 3:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 269);
+				SetPlayerSkinEx(playerid, 269);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -661,7 +661,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 4:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 270);
+				SetPlayerSkinEx(playerid, 270);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -672,7 +672,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 5:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 271);
+				SetPlayerSkinEx(playerid, 271);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -690,7 +690,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 102);
+				SetPlayerSkinEx(playerid, 102);
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -701,7 +701,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 103);
+				SetPlayerSkinEx(playerid, 103);
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -712,7 +712,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 104);
+				SetPlayerSkinEx(playerid, 104);
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -730,7 +730,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 124);
+				SetPlayerSkinEx(playerid, 124);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -741,7 +741,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 125);
+				SetPlayerSkinEx(playerid, 125);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -752,7 +752,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 126);
+				SetPlayerSkinEx(playerid, 126);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -763,7 +763,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 3:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 111);
+				SetPlayerSkinEx(playerid, 111);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -774,7 +774,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 4:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 113);
+				SetPlayerSkinEx(playerid, 113);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -793,7 +793,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 117);
+				SetPlayerSkinEx(playerid, 117);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -804,7 +804,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 118);
+				SetPlayerSkinEx(playerid, 118);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -815,7 +815,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 120);
+				SetPlayerSkinEx(playerid, 120);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -826,7 +826,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 3:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 122);
+				SetPlayerSkinEx(playerid, 122);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -837,7 +837,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 4:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 123);
+				SetPlayerSkinEx(playerid, 123);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -856,7 +856,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 108);
+				SetPlayerSkinEx(playerid, 108);
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -867,7 +867,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 109);
+				SetPlayerSkinEx(playerid, 109);
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -878,7 +878,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 110);
+				SetPlayerSkinEx(playerid, 110);
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -1767,6 +1767,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         return 1;
     }
+	else if(dialogid == SCENA_DIALOG_GETMONEY)
+	{
+		if(!response)
+		{
+			return 1;
+		}
+		if(kaska[playerid] >= 2_000_000)
+		{
+			ZabierzKase(playerid, 2000000); 
+			Sejf_Add(FRAC_SN, 2000000); 
+			Sejf_Save(FRAC_SN); 
+			new string[124]; 
+			format(string, sizeof(string), "%s umieúci≥ w sejfie 2 miliony za scenÍ!"); 
+			SendLeaderRadioMessage(FRAC_SN, COLOR_LIGHTGREEN, string); 
+			SN_ACCESS[playerid] = 1; 
+			sendTipMessageEx(playerid, COLOR_P@, "Umieúci≥eú op≥atÍ za scenÍ w sejfie SN"); 
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nie masz wystarczajπcej iloúci gotÛwki!"); 
+			return 1;
+		}
+	}
 	else if(dialogid == 7421)
 	{
 	    if(response)
@@ -1810,6 +1833,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	        return 1;
 		}
 	}
+	else if(dialogid == DIALOG_UNFRAKCJA)
+	{
+		new id_Lidera = GetPVarInt(playerid, "ID_LIDERA"); 
+		new string[256]; 
+		if(!response)
+		{
+			Remove_MySQL_Leader(id_Lidera); 
+			format(string, sizeof(string), "* Zosta≥eú wyrzucony z frakcji przez %s.", GetNick(playerid));
+			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, string);
+			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, "* Jesteú cywilem.");
+			Log(adminLog, INFO, "Admin %s usunπ≥ gracza %s z frakcji %s - pozostawiajπc VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), GetFractionLogName(PlayerInfo[id_Lidera][pMember]));
+			PlayerInfo[id_Lidera][pMember] = 0;
+			PlayerInfo[id_Lidera][pLider] = 0;
+			PlayerInfo[id_Lidera][pJob] = 0;
+			orgUnInvitePlayer(id_Lidera);
+			MedicBill[id_Lidera] = 0;
+			SetPlayerSpawn(id_Lidera);
+			format(string, sizeof(string), "  Wyrzuci≥es %s z frakcji.", GetNick(id_Lidera));
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+		}
+		else 
+		{
+			RemoveLeadersFromFraction(id_Lidera, playerid); 
+		}
+	}
     else if(dialogid == D_PRZEBIERZ_FDU)
     {
         if(!response) return 1;
@@ -1825,7 +1873,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 6: lSkin = 270;
         }
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return SendClientMessage(playerid, 0xFF8D00FF, "Musisz byÊ pieszo, øeby zmieniÊ skin.");
-        SetPlayerSkin(playerid, lSkin);
+        SetPlayerSkinEx(playerid, lSkin);
         SendClientMessage(playerid, 0xC0FF9CFF, "ª Zmieni≥eú swoje przebranie.");
     }
 	else if(dialogid == 1213)
@@ -2384,6 +2432,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                      	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ProszÍ czekaÊ, za chwilÍ otworzπ siÍ drzwi(10sek) <<<<");
                      	PlayerInfo[playerid][pLocal] = 108;
 			        }
+					case 2:
+					{
+						SetPlayerPosEx(playerid,1481.5200,-1821.0967,58.1563);
+						SetPlayerVirtualWorld(playerid,51);
+				        SetPlayerInterior(playerid,0);
+	                    TogglePlayerControllable(playerid,0);
+                        Wchodzenie(playerid);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 10 - Kancelaria Burmistrza <<<<");
+						PlayerInfo[playerid][pLocal] = 108;
+						GameTextForPlayer(playerid, "~r~by skTom&skLolsy", 5000, 1);	
+					}
 				}
 			}
 		}
@@ -2606,7 +2665,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsiπøka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrÍdkoúciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJDè");
+				ShowShopDialog(playerid);
 	            new string[256];
 	            switch(listitem)
 	            {
@@ -2642,96 +2701,73 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1:
 					{
-						if (kaska[playerid] > 7500)
+						if (kaska[playerid] > 50000)
 						{
+							if(PlayerGames[playerid] >= 4)
+							{
+								sendTipMessage(playerid, "Przepraszamy, zuøy≥eú wszystkie zdrapki na naszym magazynie!"); 
+								sendTipMessage(playerid, "SprÛbuj przyjúÊ za godzinÍ, moøe przyjdπ nowe."); 
+								return 1;
+							}
+							format(string, sizeof(string), "%s kupuje zdrapkÍ w sklepie i zaczyna jπ zdrapywaÊ", GetNick(playerid)); 
+							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							new winValue = true_random(100);
+							new playerValue = true_random(100);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
-						    {
-								new skill = 7500 / 100;
-								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = 7500 - price;
-								ZabierzKase(playerid, payout);
-								format(string, sizeof(string), "~r~-$%d", payout);
-								GameTextForPlayer(playerid, string, 5000, 1);
+						    { 
+								if(playerValue > winValue && playerValue >= 85)
+								{
+									new bonus = (PlayerInfo[playerid][pTraderPerk]*10000);
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 200.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 200000+bonus); 
+								}
+								else if(playerValue > winValue && playerValue < 85 && playerValue >= 50)
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 85.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 85000); 
+								}
+								else if(playerValue < winValue && playerValue > 50)
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 35.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 35000); 
+								}
+								else
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaÊ napis ''Graj dalej'' ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								}
+								PlayerGames[playerid]++; 
 							}
 							else
 							{
-							    ZabierzKase(playerid, 7500);
-								format(string, sizeof(string), "~r~-$%d", 1000);
-								GameTextForPlayer(playerid, string, 5000, 1);
-							}
-							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							new prize;
-							new symb1[32]; new symb2[32]; new symb3[32];
-							new randcard1 = random(10);//minimum 1000  max 9999
-							new randcard2 = random(10);//minimum 1000  max 9999
-							new randcard3 = random(10);//minimum 1000  max 9999
-							if(randcard1 >= 5)
-							{
-								format(symb1, sizeof(symb1), "~b~]");
-								randcard1 = 1;
-							}
-							else if(randcard1 <= 4 && randcard1 >= 2)
-							{
-								format(symb1, sizeof(symb1), "~g~]");
-								randcard1 = 2;
-							}
-							else if(randcard1 < 2)
-							{
-								format(symb1, sizeof(symb1), "~y~]");
-								randcard1 = 3;
-							}
-							if(randcard2 >= 5)
-							{
-								format(symb2, sizeof(symb2), "~b~]");
-								randcard2 = 1;
-							}
-							else if(randcard2 <= 4 && randcard2 >= 2)
-							{
-								format(symb2, sizeof(symb2), "~g~]");
-								randcard2 = 2;
-							}
-							else if(randcard2 < 2)
-							{
-								format(symb2, sizeof(symb2), "~y~]");
-								randcard2 = 3;
-							}
-							if(randcard3 >= 5)
-							{
-								format(symb3, sizeof(symb3), "~b~]");
-								randcard3 = 1;
-							}
-							else if(randcard3 <= 4 && randcard3 >= 2)
-							{
-								format(symb3, sizeof(symb3), "~g~]");
-								randcard3 = 2;
-							}
-							else if(randcard3 < 2)
-							{
-								format(symb3, sizeof(symb3), "~y~]");
-								randcard3 = 3;
-							}
-							if(randcard1 == randcard2 && randcard1 == randcard3)
-							{
-								if(randcard1 > 5)
+								if(playerValue > winValue && playerValue >= 85)
 								{
-									prize = 25000;
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 100.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 100000); 
 								}
-								if(randcard1 <= 4 && randcard1 >= 2)
+								else if(playerValue > winValue && playerValue < 85 && playerValue >= 50)
 								{
-									prize = 15000;
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 55.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 55000); 
 								}
-								if(randcard1 < 2)
+								else if(playerValue < winValue && playerValue > 50)
 								{
-									prize = 7500;
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 15.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 15000); 
 								}
-								DajKase(playerid,prize);
-								format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~%s %s %s ~n~~n~~w~~g~$%d",symb1,symb2,symb3, prize);
+								else
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaÊ napis ''Graj dalej'' ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								}
+								PlayerGames[playerid]++; 
 							}
-							else
-							{
-								format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~%s %s %s ~n~~n~~w~~r~$0",symb1,symb2,symb3);
-							}
-							GameTextForPlayer(playerid, string, 3000, 3);
 							return 1;
 						}
 					}
@@ -2904,7 +2940,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsiπøka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrÍdkoúciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJDè");
 							}
 							else
 							{
@@ -5886,12 +5921,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		   		ProxDetector(40.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
            		PlayerInfo[playerid][pWtrakcietestprawa] = 0;
            		SetTimerEx("CleanPlayaPointsPJ", 30000, 0, "i", playerid);
-		   		}
+			}
 			else
  			{
  				PrawoJazdyRandomGUITest(playerid, prawoJazdyLosowanie, 9 - PlayerInfo[playerid][pPrawojazdypytania]);
 			}
 		}
+  		
   		
 		//logowanie w GUI
 		if(dialogid == D_LOGIN)
@@ -5972,7 +6008,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         {
                             SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
                             TogglePlayerSpectating(playerid, false);
-							SpawnPlayer(playerid);
+							SetPlayerSpawn(playerid);
                         }
 					}
 			        else
@@ -12318,49 +12354,49 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Lekarz
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 70;
-					   	SetPlayerSkin(playerid, 70);
+					   	SetPlayerSkinEx(playerid, 70);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 70 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://Sanitariusz Latynos
 					{
 						PlayerInfo[playerid][pSkin] = 275;
-					   	SetPlayerSkin(playerid, 275);
+					   	SetPlayerSkinEx(playerid, 275);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 275");
 					}
 					case 2://Sanitariusz Murzyn
 					{
 						PlayerInfo[playerid][pSkin] = 274;
-					   	SetPlayerSkin(playerid, 274);
+					   	SetPlayerSkinEx(playerid, 274);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 274");
 					}
 					case 3://Sanitariusz Bia≥y
 					{
 						PlayerInfo[playerid][pSkin] = 276;
-					   	SetPlayerSkin(playerid, 276);
+					   	SetPlayerSkinEx(playerid, 276);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 276");
 					}
 					case 4://Lekarka
 					{
 						PlayerInfo[playerid][pSkin] = 219;
-					   	SetPlayerSkin(playerid, 219);
+					   	SetPlayerSkinEx(playerid, 219);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 219");
 					}
 					case 5://PielÍgniarka Latynoska
 					{
 						PlayerInfo[playerid][pSkin] = 69;
-					   	SetPlayerSkin(playerid, 69);
+					   	SetPlayerSkinEx(playerid, 69);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 69");
 					}
 					case 6://PielÍgniarka Murzynka
 					{
 						PlayerInfo[playerid][pSkin] = 148;
-					   	SetPlayerSkin(playerid, 148);
+					   	SetPlayerSkinEx(playerid, 148);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 148");
 					}
 					case 7://PielÍgniarka Bia≥a
 					{
 						PlayerInfo[playerid][pSkin] = 216;
-					   	SetPlayerSkin(playerid, 216);
+					   	SetPlayerSkinEx(playerid, 216);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 216");
 					}
 				}
@@ -12377,65 +12413,65 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	{
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 93 : 266;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 1://Policjant tempeny
 					{
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 211 : 265;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 2://Policjant Latynos
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 192 : 267;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 3://Policjant bia≥y
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 148 : 280;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 4://Policjant bia≥y(z wπsem)
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 141 : 281;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 5://Policjant z Las Venturas
 					{
 						PlayerInfo[playerid][pSkin] = 282;
-					   	SetPlayerSkin(playerid, 282);
+					   	SetPlayerSkinEx(playerid, 282);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 282");
 					}
 					case 6://Policjant w kapeluszu
 					{
 						PlayerInfo[playerid][pSkin] = 283;
-					   	SetPlayerSkin(playerid, 283);
+					   	SetPlayerSkinEx(playerid, 283);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 283");
 					}
 					case 7://Policjant w kasku
 					{
 						PlayerInfo[playerid][pSkin] = 284;
-					   	SetPlayerSkin(playerid, 284);
+					   	SetPlayerSkinEx(playerid, 284);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 284");
 					}
 					case 8://Policjant w SWAT
 					{
 						PlayerInfo[playerid][pSkin] = 285;
-					   	SetPlayerSkin(playerid, 285);
+					   	SetPlayerSkinEx(playerid, 285);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 285");
 					}
 					case 9://Kadet
 					{
 						PlayerInfo[playerid][pSkin] = 71;
-					   	SetPlayerSkin(playerid, 71);
+					   	SetPlayerSkinEx(playerid, 71);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 71");
 					}
 				}
@@ -12451,55 +12487,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Poborowy
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 287 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://SZEREGOWY
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
 					case 2://KAPRAL
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
 					case 3://PORUCZNIK
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
 					case 4://MAJOR
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
 					case 5://PU£KOWNIK
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 287");
 					}
 					case 6://GERA£
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID:287");
 					}
 					case 7://SWAT
 					{
 						PlayerInfo[playerid][pSkin] = 285;
-					   	SetPlayerSkin(playerid, 285);
+					   	SetPlayerSkinEx(playerid, 285);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 285");
 					}
 					case 8://Kobiekta
 					{
 						PlayerInfo[playerid][pSkin] = 191;
-					   	SetPlayerSkin(playerid, 191);
+					   	SetPlayerSkinEx(playerid, 191);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 191");
 					}
 				}
@@ -12515,43 +12551,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Kadet
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 286;
-					   	SetPlayerSkin(playerid, 286);
+					   	SetPlayerSkinEx(playerid, 286);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 286 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://Agent Federalny
 					{
 						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkin(playerid, 165);
+					   	SetPlayerSkinEx(playerid, 165);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 165");
 					}
 					case 2://Agent åledczy
 					{
 						PlayerInfo[playerid][pSkin] = 166;
-					   	SetPlayerSkin(playerid, 166);
+					   	SetPlayerSkinEx(playerid, 166);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 166");
 					}
 					case 3://Koordynator åledczy
 					{
 						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkin(playerid, 165);
+					   	SetPlayerSkinEx(playerid, 165);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 165");
 					}
 					case 4://Tajny Agent
 					{
 						PlayerInfo[playerid][pSkin] = 166;
-					   	SetPlayerSkin(playerid, 166);
+					   	SetPlayerSkinEx(playerid, 166);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 166");
 					}
 					case 5://Agent Specjalny
 					{
 						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkin(playerid, 165);
+					   	SetPlayerSkinEx(playerid, 165);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 165");
 					}
 					case 6://Dyrektor
 					{
 						PlayerInfo[playerid][pSkin] = 295;
-					   	SetPlayerSkin(playerid, 295);
+					   	SetPlayerSkinEx(playerid, 295);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 295");
 					}
 				}
@@ -12567,25 +12603,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Ochrona 1
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 163;
-					   	SetPlayerSkin(playerid, 163);
+					   	SetPlayerSkinEx(playerid, 163);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 163 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://Technik 1
 					{
 						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkin(playerid, 164);
+					   	SetPlayerSkinEx(playerid, 164);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
 					}
 					case 2://Ochrona 2
 					{
 						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkin(playerid, 164);
+					   	SetPlayerSkinEx(playerid, 164);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
 					}
 					case 3://Technik 2
 					{
 						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkin(playerid, 164);
+					   	SetPlayerSkinEx(playerid, 164);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
 					}
 					case 4://Shatei
@@ -12593,7 +12629,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					   	}
 		   				else
@@ -12606,7 +12642,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					 	}
 		   				else
@@ -12619,7 +12655,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					   	}
 		   				else
@@ -12632,7 +12668,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 5)
 		 				{
 						PlayerInfo[playerid][pSkin] = 186;
-					   	SetPlayerSkin(playerid, 186);
+					   	SetPlayerSkinEx(playerid, 186);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybranoskin ID: 186");
 					   	}
 		   				else
@@ -12645,7 +12681,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 5)
 		 				{
 						PlayerInfo[playerid][pSkin] = 120;
-					   	SetPlayerSkin(playerid, 120);
+					   	SetPlayerSkinEx(playerid, 120);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 120");
 					   	}
 		   				else
@@ -12667,79 +12703,79 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Staøysta
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 76;
-					   	SetPlayerSkin(playerid, 76);
+					   	SetPlayerSkinEx(playerid, 76);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 76 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://Staøysta1
 					{
 						PlayerInfo[playerid][pSkin] = 60;
-					   	SetPlayerSkin(playerid, 60);
+					   	SetPlayerSkinEx(playerid, 60);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 60");
 					}
 					case 2://Egzaminator
 					{
 						PlayerInfo[playerid][pSkin] = 59;
-					   	SetPlayerSkin(playerid, 59);
+					   	SetPlayerSkinEx(playerid, 59);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 59");
 					}
 					case 3://Egzaminator1
 					{
 						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkin(playerid, 150);
+					   	SetPlayerSkinEx(playerid, 150);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
 					}
 					case 4://Instruktor
 					{
 						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkin(playerid, 150);
+					   	SetPlayerSkinEx(playerid, 150);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
 					}
 					case 5://Instruktor1
 					{
 						PlayerInfo[playerid][pSkin] = 59;
-					   	SetPlayerSkin(playerid, 59);
+					   	SetPlayerSkinEx(playerid, 59);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 59");
 					}
 					case 6://UrzÍdnik
 					{
 						PlayerInfo[playerid][pSkin] = 240;
-					   	SetPlayerSkin(playerid, 240);
+					   	SetPlayerSkinEx(playerid, 240);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 240");
 					}
 					case 7://UrzÍdnik1
 					{
 						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkin(playerid, 150);
+					   	SetPlayerSkinEx(playerid, 150);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
 					}
 					case 8://Menager
 					{
 						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkin(playerid, 150);
+					   	SetPlayerSkinEx(playerid, 150);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
 					}
 					case 9://Menager1
 					{
 						PlayerInfo[playerid][pSkin] = 240;
-					   	SetPlayerSkin(playerid, 240);
+					   	SetPlayerSkinEx(playerid, 240);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 240");
 					}
 					case 10://Z-ca Burmistrza
 					{
 						PlayerInfo[playerid][pSkin] =  141;
-					   	SetPlayerSkin(playerid, 141);
+					   	SetPlayerSkinEx(playerid, 141);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 141");
 					}
 					case 11://Z-ca Burmistrza1
 					{
 						PlayerInfo[playerid][pSkin] = 57;
-					   	SetPlayerSkin(playerid, 57);
+					   	SetPlayerSkinEx(playerid, 57);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 57");
 					}
 					case 12://Burmistrz
 					{
 						PlayerInfo[playerid][pSkin] = 147;
-					   	SetPlayerSkin(playerid, 147);
+					   	SetPlayerSkinEx(playerid, 147);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 147");
 					}
 				}
@@ -12755,43 +12791,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://£ysy
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 112;
-					   	SetPlayerSkin(playerid, 112);
+					   	SetPlayerSkinEx(playerid, 112);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 112 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://skoúnooki skin
 					{
 						PlayerInfo[playerid][pSkin] = 121;
-					   	SetPlayerSkin(playerid, 121);
+					   	SetPlayerSkinEx(playerid, 121);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 121");
 					}
 					case 2://wsiowy kox
 					{
 						PlayerInfo[playerid][pSkin] = 206;
-					   	SetPlayerSkin(playerid, 206);
+					   	SetPlayerSkinEx(playerid, 206);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 206");
 					}
 					case 3://tirowiec
 					{
 						PlayerInfo[playerid][pSkin] = 202;
-					   	SetPlayerSkin(playerid, 202);
+					   	SetPlayerSkinEx(playerid, 202);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 202");
 					}
 					case 4://stary metal
 					{
 						PlayerInfo[playerid][pSkin] = 133;
-					   	SetPlayerSkin(playerid, 133);
+					   	SetPlayerSkinEx(playerid, 133);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 133");
 					}
 					case 5://∆pun
 					{
 						PlayerInfo[playerid][pSkin] = 291;
-					   	SetPlayerSkin(playerid, 291);
+					   	SetPlayerSkinEx(playerid, 291);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 291");
 					}
 					case 6://SkinÛwa
 					{
 						PlayerInfo[playerid][pSkin] = 191;
-					   	SetPlayerSkin(playerid, 191);
+					   	SetPlayerSkinEx(playerid, 191);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 191");
 					}
 				}
@@ -12801,7 +12837,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(PlayerInfo[playerid][pFMember] != FAMILY_RSC) return 1;
             new skin = strval(inputtext);
-		   	SetPlayerSkin(playerid, skin);
+		   	SetPlayerSkinEx(playerid, skin);
 		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Przebra≥es siÍ na chwile.");
         }
         if(7007 <= dialogid <= 7010 || 7012 <= dialogid <= 7015 || dialogid == 7017)
@@ -12809,7 +12845,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(dialogid - GetPlayerFraction(playerid) != 7000) return 1;
             new skin = strval(inputtext);
             PlayerInfo[playerid][pSkin] = skin;
-		   	SetPlayerSkin(playerid, skin);
+		   	SetPlayerSkinEx(playerid, skin);
 		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
         }
         if(dialogid == D_UNIFORM_LCN)
@@ -12830,7 +12866,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 default: skin = PlayerInfo[playerid][pSkin];
             }
             PlayerInfo[playerid][pSkin] = skin;
-		   	SetPlayerSkin(playerid, skin);
+		   	SetPlayerSkinEx(playerid, skin);
 		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 
         }  */
@@ -14649,8 +14685,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pLider] != 0)
 						{
-							format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
-							ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp≥aÊ\nWyp≥aÊ\n<< Twoje konto", "Wybierz", "Wyjdü");
+							if(PlayerInfo[playerid][pLiderValue] < 3)
+							{
+								format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
+								ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp≥aÊ\nWyp≥aÊ\n<< Twoje konto", "Wybierz", "Wyjdü");
+							}
+							else 
+							{
+								sendErrorMessage(playerid, "Nie moøesz zarzπdzaÊ kontem twojej frakcji!"); 
+								return 1;
+							}
+
 						}
 						else
 						{
@@ -15169,6 +15214,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				if(money >= 5_000_000)//Wiadomosc dla adminow
 				{
+					format(string, sizeof(string), "Gracz %s wys≥a≥ przelew do %s w wysokoúci %d$", GetNick(playerid), GetNick(giveplayerid), money); 
 					SendAdminMessage(COLOR_YELLOW, string);
 					return 1;
 				}

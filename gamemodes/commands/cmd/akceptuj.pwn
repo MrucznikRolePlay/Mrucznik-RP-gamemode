@@ -50,60 +50,7 @@ YCMD:akceptuj(playerid, params[], help)
         }
 		if(strcmp(x_job, "biznes", false) == 0)
 		{
-			/*SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
-			SetPVarInt(giveplayerid, "Oferujacy_Cena", value); 
-			SetPVarInt(giveplayerid, "Oferujacy_biz_ID", PlayerInfo[playerid][pPbiskey]);*/
-			if(GetPVarInt(playerid, "Oferujacy_ID") == INVALID_PLAYER_ID)//przy connect
-			{
-				sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kupna biznesu"); 
-				return 1;
-			}
-			if(PlayerInfo[playerid][pPbiskey] < MAX_BIZNES || PlayerInfo[playerid][pPbiskey] < MAX_BIZNES)
-			{
-				sendTipMessage(playerid, "Masz ju¿ jakiœ biznes!");
-				return 1;
-			}
-			if(IsPlayerConnected(GetPVarInt(playerid, "Oferujacy_ID")))
-			{
-				if(kaska[playerid] >= GetPVarInt(playerid, "Oferujacy_Cena"))
-				{
-					new kwotaSprzedazy =  GetPVarInt(playerid, "Oferujacy_Cena");
-					ZabierzKase(playerid, kwotaSprzedazy);
-					DajKase(GetPVarInt(playerid, "Oferujacy_ID"), (kwotaSprzedazy-(kwotaSprzedazy/5))); 
-					Sejf_Add(FRAC_GOV, (kwotaSprzedazy/4)); 
-					Sejf_Save(FRAC_GOV); 
-					format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", GetNick(playerid, true), playerid, PlayerInfo[playerid][pPbiskey], GetNick(GetPVarInt(playerid, "Oferujacy_ID"), true), GetPVarInt(playerid, "Oferujacy_ID"), kwotaSprzedazy);
-					SendLeaderRadioMessage(FRAC_GOV, COLOR_LIGHTGREEN, string);
-					SendAdminMessage(COLOR_P@, string); 
-					
-					//Wykonanie czynnoœci
-					PlayerInfo[GetPVarInt(playerid, "Oferujacy_ID")][pPbiskey] = -1;
-					PlayerInfo[playerid][pPbiskey] = GetPVarInt(playerid, "Oferujacy_biz_ID"); 
-					MruMySQL_SaveAccount(playerid);
-					MruMySQL_SaveAccount(GetPVarInt(playerid, "Oferujacy_ID")); 
-
-                    Log(payLog, INFO, "%s sprzeda³ %s biznes %s za %d$",
-                        GetPlayerLogName(GetPVarInt(playerid, "Oferujacy_ID")),
-                        GetPlayerLogName(playerid),
-                        GetBusinessLogName(PlayerInfo[playerid][pPbiskey]),
-                        GetPVarInt(playerid, "Oferujacy_Cena"));
-
-					ResetBizOffer(playerid); 
-					ResetBizOffer(GetPVarInt(playerid, "Oferujacy_ID")); 
-				}
-				else
-				{
-					sendTipMessage(playerid, "Nie masz takiej kwoty"); 
-					return ResetBizOffer(playerid);
-				}
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Gracz, który oferowa³ Ci biznes wyszed³ z serwera"); 
-				ResetBizOffer(playerid);
-				return 1;
-			}
-		
+            Business_AkceptujBiznes(playerid);
 		}
 		else if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
 		{

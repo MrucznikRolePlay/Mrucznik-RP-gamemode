@@ -49,6 +49,13 @@ YCMD:unfrakcja(playerid, params[], help)
 		    {
 		        if(para1 != INVALID_PLAYER_ID)
 		        {
+					if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
+					{
+						format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ wszystkich liderów\nz organizacji? (Zabierze VLD)", GetNick(para1));
+						SetPVarInt(playerid, "ID_LIDERA", para1);  
+						ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
+						return 1;
+					}
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", sendername);
@@ -60,7 +67,7 @@ YCMD:unfrakcja(playerid, params[], help)
 					PlayerInfo[para1][pJob] = 0;
                     orgUnInvitePlayer(para1);
 					MedicBill[para1] = 0;
-					SpawnPlayer(para1);
+					SetPlayerSpawn(para1);
 					format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}

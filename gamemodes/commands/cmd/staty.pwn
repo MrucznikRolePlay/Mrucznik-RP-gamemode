@@ -34,7 +34,16 @@ YCMD:staty(playerid, params[], help)
     {
 		if (gPlayerLogged[playerid] != 0)
 		{
-			ShowStats(playerid,playerid);
+			if(GetPVarInt(playerid, "OgladaStaty") == 0)
+			{
+				ShowStats2(playerid);
+				SetPVarInt(playerid, "OgladaStaty", 1); 
+			}
+			else
+			{
+				SetPVarInt(playerid, "OgladaStaty", 0);
+				HideStats2(playerid); 
+			}
 		}
 	}
 	return 1;

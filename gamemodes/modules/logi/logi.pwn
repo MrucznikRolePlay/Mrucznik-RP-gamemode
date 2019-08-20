@@ -65,7 +65,7 @@ GetHouseLogName(house)
 
 GetBusinessLogName(business)
 {
-    safe_return sprintf("{Business: %s[%d]}", BizData[business][eBizName], business);
+    safe_return sprintf("{Business: %s[%d]}", Business[business][b_Name], business);
 }
 
 GetFractionLogName(fraction)

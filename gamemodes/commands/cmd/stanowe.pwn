@@ -40,7 +40,7 @@ YCMD:stanowe(playerid, params[], help)
         {
             if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))//nowe stanowe
 			{
-			    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy celach FBI");
+			    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy wejœciu do wiêzienia stanowego!");
 			    return 1;
 			}
 			new giveplayerid;
@@ -54,8 +54,8 @@ YCMD:stanowe(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-			        if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz wsadziæ samego siebie do demorgan !"); return 1; }
-			        if(PoziomPoszukiwania[giveplayerid] < 5) { sendTipMessageEx(playerid, COLOR_GREY, "Gracz musi mieæ przynajmniej 5 Wanted Level aby mo¿na by³o go wsadziæ do Fort DeMorgan !"); return 1; }
+			        if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz wsadziæ samego siebie do stanowego!"); return 1; }
+			        if(PoziomPoszukiwania[giveplayerid] < 5) { sendTipMessageEx(playerid, COLOR_GREY, "Gracz musi mieæ przynajmniej 5 Wanted Level aby mo¿na by³o go wsadziæ do stanowego!"); return 1; }
 			        if(PlayerInfo[giveplayerid][pLider] == 2 || PlayerInfo[giveplayerid][pMember] == 2) { return 1; }
 					if(ProxDetectorS(10.0, playerid, giveplayerid))
 					{

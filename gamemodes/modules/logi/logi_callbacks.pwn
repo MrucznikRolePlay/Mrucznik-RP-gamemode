@@ -67,7 +67,6 @@ hook OnGameModeExit()
 	DestroyLog(mysqlLog);
 	DestroyLog(moneyLog);
 	DestroyLog(errorLog);
-
 	DestroyLog(admindutyLog);
 }
 

@@ -41,14 +41,29 @@ YCMD:wiadomosc(playerid, params[], help)
     }
     if(IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
     {
+        if(TutTime[playerid] > 0 && TutTime[playerid] <= 125)
+        {
+            sendErrorMessage(playerid, "Nie mo¿esz wysy³aæ wiadomoœci podczas TUT!"); 
+            return 1;
+        }
         if(gPlayerLogged[giveplayerid] == 0)
         {
             sendErrorMessage(playerid, "Gracz aktualnie loguje siê do gry! Odczekaj chwilê"); 
             return 1;
         }
+        if(gPlayerLogged[playerid] == 0)
+        {
+            sendErrorMessage(playerid, "Jesteœ w trakcie logowania!");
+            return 1;
+        }
         if(HidePM[giveplayerid] > 0 || HidePM[playerid] > 0)
         {
             sendTipMessage(playerid, "Ktoœ z was ma zablokowane wiadomoœci!"); 
+            return 1;
+        }
+        if(AntySpam[playerid] == 1 && PlayerInfo[playerid][pConnectTime] <= 3)
+        {
+            sendErrorMessage(playerid, "Odczekaj 3 sekundy zanim wyœlesz kolejn¹ wiadomoœæ!"); 
             return 1;
         }
         if(PlayerInfo[playerid][pBW] > 0 && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0 && (PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)) {
@@ -131,12 +146,19 @@ YCMD:wiadomosc(playerid, params[], help)
         PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);
         //zapisywanie do /re
         lastMsg[giveplayerid] = playerid;
+        //AntySPAM!!!!!
+        SetTimerEx("AntySpamTimer",3000,0,"d",playerid);
+		AntySpam[playerid] = 1;
         //podgl¹d
         if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
         {
             format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
             ABroadCast2(COLOR_LIGHTGREEN,string,1);
         }
+    }
+    else 
+    {
+        sendTipMessage(playerid, "Nie ma takiego gracza na serwerze!"); 
     }
     return 1;
 }

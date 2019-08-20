@@ -1,0 +1,13 @@
+{
+    "name": "bizlock",
+    "description": "Pozwala zamkn¹æ b¹dŸ otworzyæ twój biznes. Mo¿e j¹ u¿yæ zarówno cz³onek jak i w³asciciel biznesu.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "zamknijbiznes",
+        "otworzbiznes",
+        "businesslock"
+    ],
+    "parameters": [],
+    "date": "19.08.2019"
+}
