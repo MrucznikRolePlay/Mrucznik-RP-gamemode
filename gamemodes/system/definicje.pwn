@@ -123,6 +123,7 @@
 #define MAX_CHECKPOINTS 51
 
 //
+#define LEADERS_TYPES 3
 #define LEADER_FRAC 1
 #define LEADER_FAM 2
 

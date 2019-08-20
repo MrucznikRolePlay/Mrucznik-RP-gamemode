@@ -97,7 +97,7 @@ YCMD:setskin(playerid, params[], help)
 		{
 			if(para1 == playerid)
 			{
-				if((level == 406 || level == 418) && !IsAScripter(playerid)) return 1;
+				if((level == 20001 || level == 20002) && !IsAScripter(playerid)) return 1;
 				SetPlayerSkinEx(playerid, level); 
 			}
 			else

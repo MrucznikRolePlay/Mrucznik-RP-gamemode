@@ -334,7 +334,7 @@ new FAM_SKINS[MAX_ORG][MAX_SKIN_SELECT];
 new SkinSelection[MAX_PLAYERS][MAX_SKIN_SELECT+1];
 
 //frac
-new LeadersValue[3][MAX_FRAC]; 
+new LeadersValue[LEADERS_TYPES][MAX_FRAC]; //a
 
 //12.07
 new TRAIN_HornTimer=0;
