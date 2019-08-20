@@ -336,7 +336,7 @@ DialogPojazdyPremium(playerid)
 	sendTipMessageEx(playerid, COLOR_RED, "Je¿eli nie jesteœ zdecydowany nie naciskaj w nazwê pojazdu."); 
 	return 1;
 }
-/*
+
 DialogPrzedmioty(playerid)
 {
 	new substring[32];
@@ -357,7 +357,7 @@ DialogPrzedmioty(playerid)
 	);
 	return 1;
 }
-*/
+
 DialogSlotyPojazdu(playerid)
 {
 	new string[300];
