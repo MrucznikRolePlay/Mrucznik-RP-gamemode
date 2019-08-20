@@ -109,8 +109,8 @@ Save_MySQL_Leader(playerid)
 }
 Load_MySQL_Leader(playerid)
 {
-	new query[256]="`FracID`, `LiderValue`";
-	format(query, sizeof(query), "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", query, GetNick(playerid));
+	new query[256];
+	format(query, sizeof(query), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `NICK`='%s'", GetNick(playerid));
 	mysql_query(query);
 	mysql_store_result();
     if (mysql_num_rows())

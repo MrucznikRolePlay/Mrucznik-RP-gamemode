@@ -1016,9 +1016,9 @@ static Aliases()
 	//paralizuj
 	Command_AddAltNamed("paralizuj", "paraliz");
 	//personalizuj
-	Command_AddAltNamed("personalizuj", "pers");
-	Command_AddAltNamed("personalizuj", "personalize");  
-	Command_AddAltNamed("personalizuj", "ustawper"); 
+	Command_AddAltNamed("personalizuj", "personalizacja");
+	Command_AddAltNamed("personalizuj", "personalize");
+	Command_AddAltNamed("personalizuj", "ustawienia");
 	//pl
 	Command_AddAltNamed("pl", "showlicenses");
 	Command_AddAltNamed("pl", "pokazlicencje");

@@ -63,7 +63,7 @@ YCMD:wiadomosc(playerid, params[], help)
         }
         if(AntySpam[playerid] == 1 && PlayerInfo[playerid][pConnectTime] <= 3)
         {
-            sendErrorMessage(playerid, "Odczekaj 5 sekund zanim wyœlesz kolejn¹ wiadomoœæ!"); 
+            sendErrorMessage(playerid, "Odczekaj 3 sekundy zanim wyœlesz kolejn¹ wiadomoœæ!"); 
             return 1;
         }
         if(PlayerInfo[playerid][pBW] > 0 && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0 && (PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)) {
@@ -147,7 +147,7 @@ YCMD:wiadomosc(playerid, params[], help)
         //zapisywanie do /re
         lastMsg[giveplayerid] = playerid;
         //AntySPAM!!!!!
-        SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+        SetTimerEx("AntySpamTimer",3000,0,"d",playerid);
 		AntySpam[playerid] = 1;
         //podgl¹d
         if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)

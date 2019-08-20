@@ -59,7 +59,7 @@ YCMD:makevleader(playerid, params[], help)
 						format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
-						Log(fracLDLog, INFO, "Lider %s usun¹³ gracza [VLD] %s z jego frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(PlayerInfo[playerid][pMember]));
+						Log(commandLog, INFO, "Lider %s usun¹³ gracza [VLD] %s z jego frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(PlayerInfo[playerid][pMember]));
 						PlayerInfo[giveplayerid][pMember] = 0;
 						PlayerInfo[giveplayerid][pLider] = 0;
 						PlayerInfo[giveplayerid][pJob] = 0;
@@ -90,7 +90,7 @@ YCMD:makevleader(playerid, params[], help)
 					sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 					format(string, sizeof(string), "Mianowa³eœ/aœ %s liderem na stopien %d dla swojej frakcji!", GetNick(giveplayerid), value); 
 					sendTipMessageEx(playerid, COLOR_P@, string); 
-					Log(fracLDLog, INFO, "GLD %s dal lidera %s {Moc: %d} dla %s", GetPlayerLogName(playerid), GetFractionLogName(Frac), value,  GetPlayerLogName(giveplayerid));
+					Log(commandLog, INFO, "GLD %s dal lidera %s {Moc: %d} dla %s", GetPlayerLogName(playerid), GetFractionLogName(Frac), value,  GetPlayerLogName(giveplayerid));
 				}
 				else{
 					sendErrorMessage(playerid, "Nie ma takiego gracza"); 

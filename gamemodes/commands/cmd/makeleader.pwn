@@ -81,7 +81,7 @@ YCMD:makeleader(playerid, params[], help)
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					
 					//logi
-            		Log(fracLDLog, INFO, "Admin %s da³ graczowi %s lidera [GLD] frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(level));
+            		Log(adminLog, INFO, "Admin %s da³ graczowi %s lidera [GLD] frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(level));
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;

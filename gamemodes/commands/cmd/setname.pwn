@@ -43,7 +43,7 @@ YCMD:setname(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /setname [playerid] [nowynick]");
 			return 1;
 		}
-		if(strlen(newname) > MAX_PLAYER_NAME)
+		if(strlen(newname) >= MAX_PLAYER_NAME)
 		{
 			format(string, sizeof(string), "Nowy nick nie mo¿e byæ d³u¿szy jak %d znaków", MAX_PLAYER_NAME); 
 			sendErrorMessage(playerid, string); 

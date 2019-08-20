@@ -287,7 +287,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	{
 		if(!IsACop(playerid) && !IsABOR(playerid))
 		{
-			SendClientMessage(playerid, -1, "Simon_Mrucznikov mówi: Zaraz zaraz kolego! A ty gdzie? Nie mo¿esz tu wejœæ!"); 
+			SendClientMessage(playerid, COLOR_WHITE, "Simon_Mrucznikov mówi: Zaraz zaraz kolego! A ty gdzie? Nie mo¿esz tu wejœæ!"); 
 			noAccessCome[playerid] = 1;
 			return 1;
 		}
@@ -356,7 +356,7 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 	{
 		if(PlayerInfo[playerid][pJailed] > 0)
 		{
-			SendClientMessage(playerid, -1, "Pavlo_Rudovy mówi: Koleszko? Nie pojeba³o Ci siê coœ? Wracaj do celi!!"); 
+			SendClientMessage(playerid, COLOR_WHITE, "Pavlo_Rudovy mówi: Koleszko? Nie pomyli³o Ci siê coœ? Wracaj do celi!!"); 
 			noAccessCome[playerid] =1;
 			return 1;
 		}
