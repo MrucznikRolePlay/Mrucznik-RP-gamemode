@@ -571,7 +571,6 @@ YCMD:wejdz(playerid, params[], help)
                     SetPlayerInterior(playerid, Business[i][b_int]); 
                     SetPLocal(playerid, Business[i][b_pLocal]); 
                     SetPlayerPosEx(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
-                    sendTipMessage(playerid, "Pomyœlnie wykonano wejœcie");  
                     return 1;  
                 }
             }

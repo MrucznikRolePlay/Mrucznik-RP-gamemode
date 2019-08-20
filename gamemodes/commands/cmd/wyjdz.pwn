@@ -398,7 +398,6 @@ YCMD:wyjdz(playerid, params[], help)
                     SetPlayerInterior(playerid, 0); 
                     SetPLocal(playerid, PLOCAL_DEFAULT); 
                     SetPlayerPosEx(playerid, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]);
-                    sendTipMessage(playerid, "Pomyœlnie wykonano wyjœcie");  
 					return 1; 
                 }
 			}
