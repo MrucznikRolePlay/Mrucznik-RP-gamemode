@@ -72,7 +72,7 @@ YCMD:zwolnij(playerid, params[], help)
 							UsunBron(para1);
 							SetSpawnInfo(para1, gTeam[para1], PlayerInfo[para1][pModel],0.0,0.0,0.0,0,0,0,0,0,0,0);
 							MedicBill[para1] = 0;
-							SpawnPlayer(para1);
+							SetPlayerSpawn(para1);
                             MruMySQL_SetAccInt("Rank", giveplayer, 0);
                             MruMySQL_SetAccInt("Member", giveplayer, 0);
 							format(string, sizeof(string), "Wyrzuci³eœ %s ze swojej frakcji %s", giveplayer, FractionNames[liderid]);

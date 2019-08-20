@@ -40,7 +40,7 @@ command_premiumskin_Impl(playerid, skin)
 	
 	PlayerInfo[playerid][pModel] = skin;
 
-	SetPlayerSkin(playerid, skin);
+	SetPlayerSkinEx(playerid, skin);
 
 	_MruAdmin(playerid, sprintf("Aktywowa³eœ swój unikatowy skin [ID: %d]", skin));
 	return 1;

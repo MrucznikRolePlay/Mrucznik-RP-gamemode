@@ -32,6 +32,8 @@ new bool:bramki_sasd_state[18];
 new cenaNorm = 50000;
 new cenaVIP = 80000;
 new kasjerkaWolna = 666;
+//sn
+new SN_ACCESS[MAX_PLAYERS]; 
 //PizzaJob
 new PizzaJob[MAX_PLAYERS];
 new Actor01;
@@ -119,7 +121,7 @@ new pFindZone[MAX_PLAYERS];
 new gTeam[MAX_PLAYERS];
 new odczekajTimer[MAX_PLAYERS];
 //regex
-new regexURL;
+//new regexURL;
 
 new lastMsg[MAX_PLAYERS];
 
@@ -330,6 +332,9 @@ new bool:BarierState[MAX_FRAC][10];
 new FRAC_SKINS[MAX_FRAC][MAX_SKIN_SELECT];
 new FAM_SKINS[MAX_ORG][MAX_SKIN_SELECT];
 new SkinSelection[MAX_PLAYERS][MAX_SKIN_SELECT+1];
+
+//frac
+new LeadersValue[LEADERS_TYPES][MAX_FRAC]; //a
 
 //12.07
 new TRAIN_HornTimer=0;
@@ -772,7 +777,6 @@ new noooc = 1;
 new adds = 1;
 new dmv;
 new doorFBIStatus=0;
-new bizLocation[64];
 new drukarnia;
 new studiovic;
 new studiog;
@@ -856,7 +860,8 @@ new BrFS[8];
 new TimerJedzenie[MAX_PLAYERS];
 new ZarcieCooldown[MAX_PLAYERS];
 
-//nowe bramy
+//zdrapki
+new PlayerGames[MAX_PLAYERS];
 
 //new BramaWDolS = 1;
 //fbi
@@ -1033,6 +1038,15 @@ new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_
 new DCC_Channel:g_FracChannel[MAX_FRAC];
 new DCC_Channel:g_OrgChannel[MAX_ORG];
 
+/*
+new chpIDHunter[MAX_PLAYERS];
+new hunterSeeMe[MAX_PLAYERS]; 
+new hunterStatus[MAX_PLAYERS]; 
+new wantedValuePlayer;
+new timerForHunter[MAX_PLAYERS];*/
+//new newsTypePlayer[MAX_PLAYERS] = 3; 
+new AllLeaders; 
+
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1041,11 +1055,17 @@ ClearVariableConnect(playerid)
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
 	fixActorsTimer[playerid] = 0; 
+/*	chpIDHunter[playerid] =0;
+	hunterSeeMe[playerid]=0;
+	hunterStatus[playerid]=0;
+	timerForHunter[playerid]=0;*/
 	return 1;
 }
 ClearVariableDisconnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
+	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
+	PlayerGames[playerid] = 0;//Zdrapki 
 	return 1;
 }
 ZerujZmienne(playerid)

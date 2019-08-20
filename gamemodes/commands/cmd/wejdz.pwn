@@ -61,9 +61,10 @@ YCMD:wejdz(playerid, params[], help)
             ShowPlayerDialogEx(playerid, 121, DIALOG_STYLE_LIST, "Wybierz pomieszczenie", "Salka Konferencyjna\nBiura\nPiwnice", "Wybierz", "WyjdŸ");
         }
         else if(IsPlayerInRangeOfPoint(playerid,3,1450.6615,-1819.2279,77.9613) 
-			||  IsPlayerInRangeOfPoint(playerid,5,1412.3348388672, -1790.5777587891, 15.370599746704) && IsAUrzednik(playerid))
+			||  IsPlayerInRangeOfPoint(playerid,5,1412.3348388672, -1790.5777587891, 15.370599746704) && IsAUrzednik(playerid)
+            ||  IsPlayerInRangeOfPoint(playerid,3,1481.5200,-1821.0967,58.1563))
         {
-            ShowPlayerDialogEx(playerid,122,DIALOG_STYLE_LIST,"Winda: Wybierz Piêtro","[Poziom 0] Zaplecze\n[Poziom 9] G³ówna sala urzêdu","Wybierz","WyjdŸ");
+            ShowPlayerDialogEx(playerid,122,DIALOG_STYLE_LIST,"Winda: Wybierz Piêtro","[Poziom 0] Zaplecze\n[Poziom 9] G³ówna sala urzêdu\n[Poziom 10] Kancelaria burmistrza","Wybierz","WyjdŸ");
         }
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 1745.8119, -1129.8972, 24.0781) 
 		|| IsPlayerInRangeOfPoint(playerid, 3.0, 1746.0676, -1127.9219, 46.5746) 
@@ -549,22 +550,30 @@ YCMD:wejdz(playerid, params[], help)
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
             
 			//BIZNESY
-            for(new i=0;i<MAX_BIZNES;i++)
-			{
-				if(IsPlayerInRangeOfPoint(playerid, 5.0, BizData[i][eBizWejX], BizData[i][eBizWejY], BizData[i][eBizWejZ]))
-				{
-					if(BizOpenStatus[i] == 0)
-					{
-						WejdzInt(playerid, BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"",BizData[i][epLocal]);
-						//WejdzInt(playerid, BizData[2][eBizWejX],BizData[2][eBizWejY],BizData[2][eBizWejZ], BizData[2][eBizWyjX],BizData[2][eBizWyjY],BizData[2][eBizWyjZ], 3.0, BizData[2][eBizInt]);//biz 1
-					}
-					else
-					{
-						sendTipMessage(playerid, "Ten biznes jest zamkniêty! Nie masz wytrycha"); 
-						return 1;
-					}
-				}
-			}
+            for(new i=0; i<=BusinessLoaded; i++)
+            {
+                if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ])
+                && GetPlayerVirtualWorld(playerid) == 0)
+                {
+                    if(BizOpenStatus[i] == 1 
+                    && PlayerInfo[playerid][pBusinessOwner] != i
+                    && PlayerInfo[playerid][pBusinessMember] != i)
+                    {
+                        sendErrorMessage(playerid, "Ten biznes jest zamkniêty!"); 
+                        return 1;
+                    }
+                    if(Business[i][b_vw] == 0)
+                    {
+                        sendTipMessage(playerid, "Ten biznes nie ma wnêtrza!"); 
+                        return 1;
+                    }
+                    SetPlayerVirtualWorld(playerid, Business[i][b_vw]); 
+                    SetPlayerInterior(playerid, Business[i][b_int]); 
+                    SetPLocal(playerid, Business[i][b_pLocal]); 
+                    SetPlayerPosEx(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
+                    return 1;  
+                }
+            }
 
             for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
             {

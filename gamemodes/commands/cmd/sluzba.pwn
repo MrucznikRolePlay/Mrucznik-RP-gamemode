@@ -72,7 +72,7 @@ YCMD:sluzba(playerid, params[], help)
                     DajBronieFrakcyjne(playerid);
                     SetPlayerHealth(playerid, 100);
                     SetPlayerArmour(playerid, 90.0);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     OnDuty[playerid] = 1;
                     SetPlayerToTeamColor(playerid);
                 }
@@ -81,7 +81,7 @@ YCMD:sluzba(playerid, params[], help)
                     format(string, sizeof(string), "* Oficer %s odk³ada odznakê i broñ do swojej szafki.", sendername);
                     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     SetPlayerHealth(playerid, 100);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
                     OnDuty[playerid] = 0;
                     SetPlayerArmour(playerid, 0.0);
                     PrzywrocBron(playerid);
@@ -110,7 +110,7 @@ YCMD:sluzba(playerid, params[], help)
 						SetPlayerArmour(playerid, 90);
 						SetPlayerHealth(playerid, 100);
 						OnDuty[playerid] = 1;
-						SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+						SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 						SetPlayerToTeamColor(playerid);
 					}
 					else if(OnDuty[playerid]==1)
@@ -121,7 +121,7 @@ YCMD:sluzba(playerid, params[], help)
 						SetPlayerHealth(playerid, 100);
 						OnDuty[playerid] = 0;
 						PrzywrocBron(playerid);
-						SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+						SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
 						SetPlayerToTeamColor(playerid);
 					}
 				}
@@ -149,7 +149,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 1;
                     SetPlayerToTeamColor(playerid);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                 }
                 else if(OnDuty[playerid]==1)
                 {
@@ -159,7 +159,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
                     SetPlayerToTeamColor(playerid);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
                     PrzywrocBron(playerid);
                 }
             }
@@ -181,9 +181,9 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerHealth(playerid, 100);
 					
 					if(PlayerInfo[playerid][pSex] == 1)
-						SetPlayerSkin(playerid, 287);
+						SetPlayerSkinEx(playerid, 287);
 					else
-						SetPlayerSkin(playerid, 191);
+						SetPlayerSkinEx(playerid, 191);
                     OnDuty[playerid] = 1;
                 }
                 else if(OnDuty[playerid]==1)
@@ -193,56 +193,29 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
                     PrzywrocBron(playerid);
                 }
 			}
 		}
-        else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] >= 4)
+        else if(GetPlayerFraction(playerid) == FRAC_ERS)
         {
             if (PlayerToPoint(4, playerid,1147.3623,-1314.4891,13.6743))
             {
                 if(JobDuty[playerid] == 1)
                 {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie medyka, nie bêdziesz widzia³ zg³oszeñ.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie ERS, nie bêdziesz widzia³ zg³oszeñ.");
                     JobDuty[playerid] = 0;
                     Medics -= 1;
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
                     SetPlayerToTeamColor(playerid);
                 }
                 else
                 {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie medyka, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie ERS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
                     JobDuty[playerid] = 1;
                     Medics += 1;
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-                    SetPlayerToTeamColor(playerid);
-                }
-            }
-            else
-            {
-                sendTipMessage(playerid, "Nie jesteœ w szatni !");
-                return 1;
-            }
-        }
-        else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] <= 3)
-        {
-            if (IsPlayerInRangeOfPoint(playerid, 4.0, 1758.4077,-1123.4249,227.8059))
-            {
-                if(JobDuty[playerid] == 1)
-                {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie stra¿aka.");
-                    JobDuty[playerid] = 0;
-                    PrzywrocBron(playerid);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
-                    SetPlayerToTeamColor(playerid);
-                }
-                else
-                {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie stra¿aka.");
-                    JobDuty[playerid] = 1;
-                    DajBronieFrakcyjne(playerid);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
                 }
             }
@@ -259,7 +232,7 @@ YCMD:sluzba(playerid, params[], help)
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie urzêdasa.");
                 JobDuty[playerid] = 0;
                 SetPlayerToTeamColor(playerid);
-                SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
 				
             }
             else
@@ -267,7 +240,7 @@ YCMD:sluzba(playerid, params[], help)
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ ju¿ na s³u¿bie urzêdasa. IdŸ do Urzêdu urzêdasie.");
                 JobDuty[playerid] = 1;
                 SetPlayerToTeamColor(playerid);
-                SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
             }
         }
         else if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7)
@@ -282,7 +255,7 @@ YCMD:sluzba(playerid, params[], help)
                     DajBronieFrakcyjne(playerid);
                     SetPlayerArmour(playerid, 90);
                     SetPlayerHealth(playerid, 100);
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
                 }
                 else if(OnDuty[playerid]==1)
@@ -292,7 +265,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
                     SetPlayerToTeamColor(playerid);
                     PrzywrocBron(playerid);
                 }
@@ -305,14 +278,14 @@ YCMD:sluzba(playerid, params[], help)
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, "*Nie jesteœ ju¿ na s³u¿bie taksówkarza");
 				JobDuty[playerid] = 0;
 				SetPlayerToTeamColor(playerid);
-				SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+				SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
             }
             else
             {
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wchodzisz na s³u¿bê, udaj siê do pojazdu!");
                 JobDuty[playerid] = 1;
                 SetPlayerToTeamColor(playerid);
-                SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
             }
         }
         else if(PlayerInfo[playerid][pJob] == 7)
@@ -344,14 +317,14 @@ YCMD:sluzba(playerid, params[], help)
             if(SanDuty[playerid] == 1)
             {
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie reportera, komunikaty oraz kasa za SMS nie bêd¹ wysy³ane.");
-                SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
                 SanDuty[playerid] = 0;
                 SetPlayerToTeamColor(playerid);
             }
             else
             {
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie reportera.");
-                SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+                SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                 SanDuty[playerid] = 1;
                 SetPlayerToTeamColor(playerid);
             }
@@ -362,7 +335,7 @@ YCMD:sluzba(playerid, params[], help)
         }
         if(GetPlayerSkin(playerid) == 0)
         {
-            SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
             sendTipMessage(playerid, "Nie masz skina frakcyjnego!");
         }
     }

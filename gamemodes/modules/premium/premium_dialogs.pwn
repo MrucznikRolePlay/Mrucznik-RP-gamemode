@@ -307,6 +307,7 @@ static DialogDotacje(playerid)
 }
 
 //------- US£UGI PREMIUM ------------------
+/*
 DialogLicytacje(playerid)
 {
 	//TODO
@@ -315,7 +316,7 @@ DialogLicytacje(playerid)
 		"",
 	"Wybierz", "Wróæ");
 	return 1;
-}
+}*/
 
 DialogPojazdyPremium(playerid)
 {
@@ -331,7 +332,7 @@ DialogPojazdyPremium(playerid)
 	sendTipMessageEx(playerid, COLOR_RED, "Je¿eli nie jesteœ zdecydowany nie naciskaj w nazwê pojazdu."); 
 	return 1;
 }
-
+/*
 DialogPrzedmioty(playerid)
 {
 	//TODO
@@ -340,7 +341,7 @@ DialogPrzedmioty(playerid)
 		"",
 	"Kup", "Wróæ");
 }
-
+*/
 DialogSlotyPojazdu(playerid)
 {
 	new string[300];

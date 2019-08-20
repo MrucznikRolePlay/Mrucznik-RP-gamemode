@@ -65,11 +65,16 @@ YCMD:unjail(playerid, params[], help)
 							PlayerInfo[playa][pJailed], 
 							PlayerInfo[playa][pJailTime]);
 
+						if(GetPVarInt(playa, "DostalDM2") != 0)
+						{
+							format(string, sizeof(string), "Info: %s nie zostanie zabrana broñ bo dosta³ UnJail", GetNick(playa));
+							sendTipMessage(playerid, string); 
+						}
 						PlayerInfo[playa][pJailed] = 0;
 						PlayerInfo[playa][pJailTime] = 0;
 						PlayerInfo[playa][pMuted] = 0;
 						SetPlayerInterior(playa, 0);
-						SetPVarInt(playerid, "DostalDM2", 0);
+						SetPVarInt(playa, "DostalDM2", 0);//
 						SetPlayerPosEx(playa,-1677.0605,917.2449,-52.4141);
 						SetPlayerVirtualWorld(playa, 1);
                         Wchodzenie(playa);

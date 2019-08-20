@@ -28,6 +28,7 @@
 
 
 //-------<[ .def ]>-------
+#include "03DL\03DL.def"
 #include "actors\actors.def"
 #include "admin\admin.def"
 #include "adminduty\adminduty.def"
@@ -52,6 +53,7 @@
 
 
 //-------<[ .hwn ]>-------
+#include "03DL\03DL.hwn"
 #include "actors\actors.hwn"
 #include "admin\admin.hwn"
 #include "adminduty\adminduty.hwn"
@@ -76,6 +78,7 @@
 
 
 //-------<[ .pwn ]>-------
+#include "03DL\03DL.pwn"
 #include "actors\actors.pwn"
 #include "admin\admin.pwn"
 #include "adminduty\adminduty.pwn"
@@ -111,6 +114,7 @@
 
 //-------<[ mysql ]>-------
 #include "admin\admin_mysql.pwn"
+#include "biznesy\biznesy_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
 #include "pojazdy\pojazdy_mysql.pwn"
 #include "prace\prace_mysql.pwn"
@@ -122,6 +126,7 @@
 
 //-------<[ callbacks ]>-------
 #include "admin\admin_callbacks.pwn"
+#include "biznesy\biznesy_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "money\money_callbacks.pwn"
 #include "organizacje\organizacje_callbacks.pwn"

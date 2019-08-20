@@ -43,6 +43,6 @@ YCMD:ticketend(playerid, params[], help)
         Wchodzenie(playerid);
     }
     else
-        SpawnPlayer(playerid);
+        SetPlayerSpawn(playerid);
     return 1;
 }

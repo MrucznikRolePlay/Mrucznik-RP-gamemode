@@ -29,9 +29,9 @@
 //-----------------<[ Funkcje: ]>-------------------
 DiscordConnectInit()
 {
-	g_SanNewsChannelId=DCC_FindChannelById("538403089263362098");
-	g_AdminChannelId=DCC_FindChannelById("538403269077106725");
-	g_ReportChannelId=DCC_FindChannelById("538403303550091264");
+	g_SanNewsChannelId=DCC_FindChannelById("538403089263362098"); //ig-san-news
+	g_AdminChannelId=DCC_FindChannelById("538403269077106725"); //ig-admin
+	g_ReportChannelId=DCC_FindChannelById("538403303550091264"); //ig-report
 
 	g_FracChannel[1]=DCC_FindChannelById("545045344652886056");
 	g_FracChannel[2]=DCC_FindChannelById("545620322423144459");
