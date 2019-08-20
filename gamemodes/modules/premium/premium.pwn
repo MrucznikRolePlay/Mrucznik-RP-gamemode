@@ -366,15 +366,15 @@ AttachPremiumItem(playerid, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY 
 {
 	//TODO: indexes management
 	new index = 3;
-	ao[playerid][index][ao_x] = fOffsetX;
-	ao[playerid][index][ao_y] = fOffsetY;
-	ao[playerid][index][ao_z] = fOffsetZ;
-	ao[playerid][index][ao_rx] = fRotX;
-	ao[playerid][index][ao_ry] = fRotY;
-	ao[playerid][index][ao_rz] = fRotZ;
-	ao[playerid][index][ao_sx] = fScaleX;
-	ao[playerid][index][ao_sy] = fScaleY;
-	ao[playerid][index][ao_sz] = fScaleZ;
+	AttachedObjects[playerid][index][ao_x] = fOffsetX;
+	AttachedObjects[playerid][index][ao_y] = fOffsetY;
+	AttachedObjects[playerid][index][ao_z] = fOffsetZ;
+	AttachedObjects[playerid][index][ao_rx] = fRotX;
+	AttachedObjects[playerid][index][ao_ry] = fRotY;
+	AttachedObjects[playerid][index][ao_rz] = fRotZ;
+	AttachedObjects[playerid][index][ao_sx] = fScaleX;
+	AttachedObjects[playerid][index][ao_sy] = fScaleY;
+	AttachedObjects[playerid][index][ao_sz] = fScaleZ;
 
 	SetPlayerAttachedObject(playerid, index, modelid, bone, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ, materialcolor1, materialcolor2); 
 	return index;

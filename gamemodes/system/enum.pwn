@@ -2546,6 +2546,6 @@ enum attached_object_data
     Float:ao_sy,
     Float:ao_sz
 }
-new ao[MAX_PLAYERS][MAX_PLAYER_ATTACHED_OBJECTS][attached_object_data];
+new AttachedObjects[MAX_PLAYERS][MAX_PLAYER_ATTACHED_OBJECTS][attached_object_data];
 
 //EOF
