@@ -29,10 +29,11 @@
 PlayerAttachments_Create(playerid, model, bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz)
 {
     new str[512];
-    format(str, sizeof(str), "INSERT INTO `mru_playeritems` (`UID`, `model`, `bone`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sz`, `sy`, `sz`)"\
+    format(str, sizeof(str), "INSERT INTO `mru_playeritems` (`UID`, `model`, `bone`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`)"\
 					 " VALUES ('%d', '%d', '%d', '%f', '%f', '%f', '%f', '%f', '%f', '%f', '%f', '%f')", 
 		PlayerInfo[playerid][pUID],
-		model, bone,
+		model, 
+        bone,
         x, y, z,
         rx, ry, rz,
         sx, sy, sz
@@ -72,7 +73,8 @@ PlayerAttachments_LoadItems(playerid)
 
 PlayerAttachments_LoadItem(playerid, model)
 {
-	new str[256], bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, bool:active, index = -1;
+	new str[256], bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, bool:active;
+    new index = INVALID_ATTACHED_OBJECT_INDEX;
 	format(str, sizeof(str), "SELECT `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`, `active`,`bone` FROM `mru_playeritems` WHERE `UID`='%d' AND `model`='%d'", 
 		PlayerInfo[playerid][pUID],
 		model
