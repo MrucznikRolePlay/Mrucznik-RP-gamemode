@@ -2162,7 +2162,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	        {
     	            case 0://parking
     	            {
-						if(levelLock[FRAC_SN][0] == 1)
+						if(levelLock[FRAC_SN][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_SN)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2510,38 +2510,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					case 0://parking podziemny
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							SetPlayerVirtualWorld(playerid,2);
-							SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
-							PlayerInfo[playerid][pLocal] = 255;
-							GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						SetPlayerVirtualWorld(playerid,2);
+						SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
+						PlayerInfo[playerid][pLocal] = 255;
+						GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
+						
 					}
 					case 1://parking
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							SetPlayerVirtualWorld(playerid,0);
-							SetPlayerPosEx(playerid,596.5255, -1489.2544, 15.3587);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
-							GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						SetPlayerVirtualWorld(playerid,0);
+						SetPlayerPosEx(playerid,596.5255, -1489.2544, 15.3587);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
+						GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
+						PlayerInfo[playerid][pLocal] = 255;
 					}
 					case 2://stanowe
 					{
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						SetPlayerVirtualWorld(playerid, 1);
 						SetPlayerPosEx(playerid, 594.05334, -1476.27490, 81.82840+0.5);
 						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
@@ -2550,6 +2550,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 3://recepcja
 					{
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,1);
@@ -2560,64 +2565,61 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 4://szatnia
 					{
-						if(IsAFBI(playerid))
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							TogglePlayerControllable(playerid,0);
-							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,2);
-							SetPlayerPosEx(playerid,592.65466, -1486.76575, 82.10487);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia");
-							PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-							GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid,2);
+						SetPlayerPosEx(playerid,592.65466, -1486.76575, 82.10487);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia");
+						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
+						PlayerInfo[playerid][pLocal] = 255;
 					
 					}
 					case 5://Zbrojownia
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							TogglePlayerControllable(playerid,0);
-							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,3);
-							SetPlayerPosEx(playerid,591.37579, -1482.26672, 80.43560);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3 - Zbrojownia");
-							PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-							GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
-							
 						}
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid,3);
+						SetPlayerPosEx(playerid,591.37579, -1482.26672, 80.43560);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3 - Zbrojownia");
+						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
+						PlayerInfo[playerid][pLocal] = 255;
+
 					}
 					case 6://Biura federalne
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							TogglePlayerControllable(playerid,0);
-							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,4);
-							SetPlayerPosEx(playerid,596.21857, -1477.92395, 84.06664);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Biura Federalne");
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid,4);
+						SetPlayerPosEx(playerid,596.21857, -1477.92395, 84.06664);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Biura Federalne");
+						PlayerInfo[playerid][pLocal] = 255;
+
 					}
 					case 7://Dyrektorat
 					{
-
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,5);
@@ -2627,6 +2629,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 8://CID ERT
 					{
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						SetPlayerPosEx(playerid,585.70782, -1479.54211, 99.01273);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2636,6 +2643,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 9://sale treningowe
 					{
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						SetPlayerPosEx(playerid, 590.42767, -1447.62939, 80.95732);
 						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
@@ -2645,18 +2657,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 10://dach
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							SetPlayerVirtualWorld(playerid,0);
-							SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostêpu na ten poziom");
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						SetPlayerVirtualWorld(playerid,0);
+						SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
+						PlayerInfo[playerid][pLocal] = 255;
 					}
 				}
 			}
