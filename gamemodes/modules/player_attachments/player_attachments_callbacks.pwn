@@ -80,6 +80,32 @@ hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:f
 	return 1;
 }
 
+hook OnPlayerDisconnect(playerid, reason)
+{
+	for(new index; index<MAX_ATTACHED_OBJECTS; index++)
+	{
+		AttachedObjects[playerid][index][ao_active] = false;
+	}
+	return 1;
+}
+
+hook OnPlayerSpawn(playerid)
+{
+	for(new index; index<MAX_ATTACHED_OBJECTS; index++)
+	{
+		if(AttachedObjects[playerid][index][ao_active])
+		{
+			SetPlayerAttachedObject(playerid, index, 
+				AttachedObjects[playerid][index][ao_model],
+				 AttachedObjects[playerid][index][ao_bone], 
+				AttachedObjects[playerid][index][ao_x], AttachedObjects[playerid][index][ao_y], AttachedObjects[playerid][index][ao_z], 
+				AttachedObjects[playerid][index][ao_rx], AttachedObjects[playerid][index][ao_ry], AttachedObjects[playerid][index][ao_rz], 
+				AttachedObjects[playerid][index][ao_sx], AttachedObjects[playerid][index][ao_sy], AttachedObjects[playerid][index][ao_sz]
+			);
+		}
+	}
+}
+
 hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if(dialogid == DIALOG_PRZEDMIOTYGRACZA)
