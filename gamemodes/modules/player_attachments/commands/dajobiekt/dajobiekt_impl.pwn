@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 dajobiekt                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,37 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 21.08.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "dajobiekt\dajobiekt.pwn"
-#include "dnobiekt\dnobiekt.pwn"
-#include "przedmioty\przedmioty.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
-#include "zdejmij\zdejmij.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_dajobiekt_Impl(playerid, giveplayerid, bone, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, materialcolor1, materialcolor2)
 {
-    command_dajobiekt();
-    command_dnobiekt();
-    command_przedmioty();
-    command_zabierzobiekt();
-    command_zdejmij();
-    
+    if(PlayerInfo[playerid][pAdmin] < 1000)
+    {
+        sendErrorMessage(playerid, "Nie jesteœ uprawniony!");
+        return 1;
+    }
+
+    if(GetFreeAttachedObjectSlot(giveplayerid) == INVALID_ATTACHED_OBJECT_INDEX)
+    {
+        sendErrorMessage(playerid, "Ten gracz ma za du¿o przyczepionych obiektów!");
+        return 1;
+    }
+
+    new index = AttachPlayerItem(giveplayerid, model, bone, x,y,z ,rx,ry,rz, sx,sy,sz, materialcolor1, materialcolor2);
+    EditAttachedObject(giveplayerid, index);
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("Otrzyma³eœ przyczepialny obiekt od admina %s", GetNick(playerid)));
+
+    Log(adminLog, INFO, "%s da³ %s przyczepialny obiekt %d",
+        GetPlayerLogName(playerid),
+        GetPlayerLogName(giveplayerid),
+        model
+    );
+    return 1;
 }
+
+//end

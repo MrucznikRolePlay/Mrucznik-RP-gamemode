@@ -1,0 +1,98 @@
+{
+    "name": "dnobiekt",
+    "description": "Doczepia obiekt do gracza.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "index",
+            "description": "index"
+        },
+        {
+            "type": "integer",
+            "name": "model",
+            "description": "model"
+        },
+        {
+            "type": "integer",
+            "name": "bone",
+            "description": "kosc"
+        },
+        {
+            "type": "float",
+            "name": "x",
+            "description": "x",
+            "defaultValue": "0.0"
+        },
+        {
+            "type": "float",
+            "name": "y",
+            "description": "y",
+            "defaultValue": "0.0"
+        },
+        {
+            "type": "float",
+            "name": "z",
+            "description": "z",
+            "defaultValue": "0.0"
+        },
+        {
+            "type": "float",
+            "name": "rx",
+            "description": "rx",
+            "defaultValue": "0.0"
+        },
+        {
+            "type": "float",
+            "name": "ry",
+            "description": "ry",
+            "defaultValue": "0.0"
+        },
+        {
+            "type": "float",
+            "name": "rz",
+            "description": "rz",
+            "defaultValue": "0.0"
+        },
+        {
+            "type": "float",
+            "name": "sx",
+            "description": "sx",
+            "defaultValue": "1.0"
+        },
+        {
+            "type": "float",
+            "name": "sy",
+            "description": "sy",
+            "defaultValue": "1.0"
+        },
+        {
+            "type": "float",
+            "name": "sz",
+            "description": "sz",
+            "defaultValue": "1.0"
+        },
+        {
+            "type": "integer",
+            "name": "materialcolor1",
+            "description": "materialcolor1",
+            "defaultValue": "0"
+        },
+        {
+            "type": "integer",
+            "name": "materialcolor2",
+            "description": "materialcolor2",
+            "defaultValue": "0"
+        }
+    ],
+    "date": "21.08.2019"
+}

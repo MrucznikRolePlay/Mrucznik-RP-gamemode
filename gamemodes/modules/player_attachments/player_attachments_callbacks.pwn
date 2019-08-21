@@ -30,15 +30,15 @@
 //-----------------<[ Callbacki: ]>-----------------
 hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
-	if(VECTOR_find_val(VAttachedItems[playerid], modelid) != INVALID_VECTOR_INDEX)
+	if(AttachedObjects[playerid][index][ao_active] == true)
 	{
 		if(response)
 		{
-			//TODO: Ograniczenia edycji
 			if(!CheckEditionBoundaries(fOffsetX, fOffsetY, fOffsetZ, fScaleX, fScaleY, fScaleZ))
 			{
 				sendErrorMessage(playerid, "Ten obiekt wykracza poza granice!");
 				EditAttachedObject(playerid, index);
+				//TODO: je¿eli gracz kliknie wyjdz 2 razy w krótkim czasie, nie w³aczy mu siê edycja
 				return -2;
 			}
 
@@ -60,7 +60,10 @@ hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:f
 				fScaleX, fScaleY, fScaleZ
 			);
 			
-			PlayerAttachments_UpdateItem(playerid, modelid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, boneid, true);
+			if(VECTOR_find_val(VAttachedItems[playerid], modelid) != INVALID_VECTOR_INDEX)
+			{
+				PlayerAttachments_UpdateItem(playerid, modelid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, boneid, true);
+			}
 		}
 		else
 		{
@@ -105,13 +108,21 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		return -2;
 	}
-	
 	else if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ)
 	{
 		if(response)
 		{
 			new index = DynamicGui_GetDataInt(playerid, listitem);
 			DetachPlayerItem(playerid, index);
+		}
+		return -2;
+	}
+	else if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ_ADMIN)
+	{
+		if(response)
+		{
+			new index = DynamicGui_GetDataInt(playerid, listitem);
+			DetachPlayerItem(GetPVarInt(playerid, "ZdejmijGiveplayerid"), index);
 		}
 		return -2;
 	}

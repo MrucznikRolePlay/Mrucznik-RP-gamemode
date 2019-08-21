@@ -128,4 +128,27 @@ DialogRemovePlayerAttachedItems(playerid)
 	return 1;
 }
 
+DialogAdminRemoveAttachedItems(playerid, giveplayerid)
+{
+	DynamicGui_Init(playerid);
+
+	new count, list[7*MAX_PLAYER_ATTACHED_OBJECTS];
+	for(new i; i<MAX_PLAYER_ATTACHED_OBJECTS; i++)
+	{
+		if(IsPlayerAttachedObjectSlotUsed(giveplayerid, i) && AttachedObjects[giveplayerid][i][ao_active])
+		{
+			new item = AttachedObjects[giveplayerid][i][ao_model];
+			strcat(list, sprintf("%d\n", item));
+			count++;
+			DynamicGui_AddRow(playerid, 1, i);
+		}
+	}
+
+	if(count==0) return sendErrorMessage(playerid, "Ten gracz nie ma za³o¿onych przedmiotów.");
+
+	SetPVarInt(playerid, "ZdejmijGiveplayerid", giveplayerid);
+	ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ_ADMIN, DIALOG_STYLE_PREVIEW_MODEL, "Przedmioty gracza", list, "Zdejmij", "Wyjdz");
+	return 1;
+}
+
 //end

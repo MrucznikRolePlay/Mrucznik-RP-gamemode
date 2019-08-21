@@ -120,7 +120,6 @@
 #include "cmd/disabletruckerjob.pwn"
 #include "cmd/dl.pwn"
 #include "cmd/dn.pwn"
-#include "cmd/dnobiekt.pwn"
 #include "cmd/do.pwn"
 #include "cmd/dodajweryfikacje.pwn"
 #include "cmd/dolacz.pwn"
