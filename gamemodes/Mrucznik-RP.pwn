@@ -202,6 +202,10 @@ public OnGameModeInit()
 		return 0;
 	}
 	#endif
+	if(!dini_Exists("production.info")) //brak production.info == serwer developerski
+	{
+		DEVELOPMENT = true;
+	}
 
 	//-------<[ Anty DeAMX ]>-------
 	AntiDeAMX(); // Hammer time

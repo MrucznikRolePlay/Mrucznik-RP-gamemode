@@ -1,4 +1,6 @@
 //zmienne.pwn
+new DEVELOPMENT = false;
+
 new prawoJazdyLosowanie[9];
 
 new PickupSklep01;//ZIP
