@@ -142,9 +142,9 @@ MruMySQL_IsPhoneNumberAvailable(number) {
     if(mysql_num_rows() > 0)
     {
         mysql_free_result();
-        return true;
+        return false;
     }
     mysql_free_result();
-    return false;
+    return true;
 }
 //end
