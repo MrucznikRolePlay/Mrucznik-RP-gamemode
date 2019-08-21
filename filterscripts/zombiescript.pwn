@@ -106,7 +106,225 @@ public OnFilterScriptInit()
     print(" Fliterscript 'zombiescript' zaladowany");
     print("--------------------------------------\n");
     CreateDynamic3DTextLabel("Aby wejsc na event wpisz {FF00FF}/dolaczzombie", COLOR_WHITE, POS_ENTER_X, POS_ENTER_Y, POS_ENTER_Z, 10.0, INVALID_PLAYER_ID,  INVALID_VEHICLE_ID,  0, -1, -1, -1);
-	new tmpobjid;
+	StworzObiektyZombie(); 
+    return 1;
+}
+
+public OnFilterScriptExit()
+{
+    print("\n--------------------------------------");
+    print(" Fliterscript 'zombiescript' wylaczony");
+    print("--------------------------------------\n");
+    return 1;
+}
+
+public OnPlayerConnect(playerid)
+{
+    SendClientMessage(playerid, COLOR_GREEN, "Na serwerze znajduje siê skrypt: ZOMBIE APOCALYPSE!");
+    SendClientMessage(playerid, COLOR_GRAD, "Weso³ego 10-lecia serwera Mrucznik Role Play!");
+    PlayerZombieStatus[playerid] = INVALID_PZOMBIE;
+    playerAccessToFS[playerid] = 0;
+    PlayerEventPoint[playerid] = 0;
+    togParty[playerid] = 0;
+    dostalSkina[playerid] = 0;
+
+    //TABELA
+    background[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 165.000000, "_");
+    PlayerTextDrawFont(playerid, background[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, background[playerid], -0.554166, 6.849999);
+    PlayerTextDrawTextSize(playerid, background[playerid], 105.000000, 7.000000);
+    PlayerTextDrawSetOutline(playerid, background[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, background[playerid], 0);
+    PlayerTextDrawAlignment(playerid, background[playerid], 1);
+    PlayerTextDrawColor(playerid, background[playerid], -1);
+    PlayerTextDrawBackgroundColor(playerid, background[playerid], 255);
+    PlayerTextDrawBoxColor(playerid, background[playerid], 205);
+    PlayerTextDrawUseBox(playerid, background[playerid], 1);
+    PlayerTextDrawSetProportional(playerid, background[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, background[playerid], 0);
+
+    skinTXD[playerid] = CreatePlayerTextDraw(playerid, 46.000000, 114.000000, "_");
+    PlayerTextDrawFont(playerid, skinTXD[playerid], TEXT_DRAW_FONT_MODEL_PREVIEW);
+    PlayerTextDrawLetterSize(playerid, skinTXD[playerid], 0.600000, 2.000000);
+    PlayerTextDrawTextSize(playerid, skinTXD[playerid], 102.000000, 87.000000);
+    PlayerTextDrawSetOutline(playerid, skinTXD[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, skinTXD[playerid], 0);
+    PlayerTextDrawAlignment(playerid, skinTXD[playerid], 1);
+    PlayerTextDrawColor(playerid, skinTXD[playerid], -1);
+    PlayerTextDrawBackgroundColor(playerid, skinTXD[playerid], 0);
+    PlayerTextDrawBoxColor(playerid, skinTXD[playerid], 5);
+    PlayerTextDrawUseBox(playerid, skinTXD[playerid], 1);
+    PlayerTextDrawSetProportional(playerid, skinTXD[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, skinTXD[playerid], 0);
+    PlayerTextDrawSetPreviewModel(playerid, skinTXD[playerid], 20004);
+    PlayerTextDrawSetPreviewRot(playerid, skinTXD[playerid], -10.000000, 0.000000, -20.000000, 1.000000);
+    PlayerTextDrawSetPreviewVehCol(playerid, skinTXD[playerid], 1, 1);
+
+    text1[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 166.000000, "Mrucznik Role Play");
+    PlayerTextDrawFont(playerid, text1[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, text1[playerid], 0.250000, 1.750000);
+    PlayerTextDrawTextSize(playerid, text1[playerid], 400.000000, 17.000000);
+    PlayerTextDrawSetOutline(playerid, text1[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, text1[playerid], 0);
+    PlayerTextDrawAlignment(playerid, text1[playerid], 1);
+    PlayerTextDrawColor(playerid, text1[playerid], -1);
+    PlayerTextDrawBackgroundColor(playerid, text1[playerid], 0);
+    PlayerTextDrawBoxColor(playerid, text1[playerid], 0);
+    PlayerTextDrawUseBox(playerid, text1[playerid], 1);
+    PlayerTextDrawSetProportional(playerid, text1[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, text1[playerid], 0);
+
+    text2[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 182.000000, "~g~Zdrowy");
+    PlayerTextDrawFont(playerid, text2[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, text2[playerid], 0.250000, 1.750000);
+    PlayerTextDrawTextSize(playerid, text2[playerid], 400.000000, 17.000000);
+    PlayerTextDrawSetOutline(playerid, text2[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, text2[playerid], 0);
+    PlayerTextDrawAlignment(playerid, text2[playerid], 1);
+    PlayerTextDrawColor(playerid, text2[playerid], -1);
+    PlayerTextDrawBackgroundColor(playerid, text2[playerid], 0);
+    PlayerTextDrawBoxColor(playerid, text2[playerid], 0);
+    PlayerTextDrawUseBox(playerid, text2[playerid], 1);
+    PlayerTextDrawSetProportional(playerid, text2[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, text2[playerid], 0);
+
+    text3[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 197.000000, "~y~Score: ~w~69");
+    PlayerTextDrawFont(playerid, text3[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, text3[playerid], 0.250000, 1.750000);
+    PlayerTextDrawTextSize(playerid, text3[playerid], 400.000000, 17.000000);
+    PlayerTextDrawSetOutline(playerid, text3[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, text3[playerid], 0);
+    PlayerTextDrawAlignment(playerid, text3[playerid], 1);
+    PlayerTextDrawColor(playerid, text3[playerid], -1);
+    PlayerTextDrawBackgroundColor(playerid, text3[playerid], 0);
+    PlayerTextDrawBoxColor(playerid, text3[playerid], 0);
+    PlayerTextDrawUseBox(playerid, text3[playerid], 1);
+    PlayerTextDrawSetProportional(playerid, text3[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, text3[playerid], 0);
+
+    text4[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 210.000000, "~y~Pozostali: ~w~10");
+    PlayerTextDrawFont(playerid, text4[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, text4[playerid], 0.250000, 1.750000);
+    PlayerTextDrawTextSize(playerid, text4[playerid], 400.000000, 17.000000);
+    PlayerTextDrawSetOutline(playerid, text4[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, text4[playerid], 0);
+    PlayerTextDrawAlignment(playerid, text4[playerid], 1);
+    PlayerTextDrawColor(playerid, text4[playerid], -1);
+    PlayerTextDrawBackgroundColor(playerid, text4[playerid], 0);
+    PlayerTextDrawBoxColor(playerid, text4[playerid], 0);
+    PlayerTextDrawUseBox(playerid, text4[playerid], 1);
+    PlayerTextDrawSetProportional(playerid, text4[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, text4[playerid], 0);
+    return 1;
+}
+public OnPlayerDisconnect(playerid, reason)
+{
+	if(PlayerZombieStatus[playerid] == 0)
+	{
+		AlivePlayers--;
+	}
+	return 1;
+}
+public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
+{
+	if(PlayerZombieStatus[playerid] == 2)
+	{
+		if(damagedid != playerid)
+		{
+			if(weaponid != 0)
+            {
+                SendClientMessage(playerid, COLOR_WHITE, "Nie mo¿esz u¿ywaæ innej broni - TYLKO piêœci");
+                new Float:pX, Float:pY, Float:pZ;
+                GetPlayerPos(playerid, pX, pY, pZ);
+                SetPlayerPos(playerid, pX, pY, pZ+5);
+                return 1;
+            }
+			if(PlayerZombieStatus[damagedid] == INVALID_PZOMBIE)
+			{
+				SendClientMessage(playerid, COLOR_RED, "Ta osoba nie uczestniczy  w zabawie!");
+				return 1;
+			}
+			if(PlayerZombieStatus[damagedid] == 2)
+			{
+				SendClientMessage(playerid, COLOR_RED, "Nie mo¿esz biæ swojego, zostaje Ci odjêty punkt w zabawie!");
+				GetPointsFromPlayer(playerid, 1);
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
+{
+    new string[256];
+    if(PlayerZombieStatus[issuerid] == 2)
+    {
+        if(issuerid != playerid)
+        {
+            if(PlayerZombieStatus[playerid] == 0)
+            {
+                PlayerZombieStatus[playerid] = 1;
+                SendClientMessage(playerid, COLOR_GRAD, "Oberwa³eœ od Zombie! Stajesz siê zara¿ony, postaraj siê znaleŸæ odtrutkê!");
+                SendClientMessage(playerid, COLOR_GRAD, "Masz na to 2 minuty!");
+                format(string, sizeof(string), "Uda³o Ci siê zaraziæ %s, uderz go jeszcze raz aby sta³ siê Zombie!", GetName(playerid));
+                SendClientMessage(issuerid, COLOR_GREEN, string);
+                SendClientMessage(issuerid, COLOR_GRAD, "Otrzymujesz 1 punkt w zabawie!");
+                AddPointsToPlayer(issuerid, 1);
+                ZarazonyTimer[playerid] = SetTimerEx("TimerZarazony", 5000, false, "d", playerid);
+            }
+            else if(PlayerZombieStatus[playerid] == 1)
+            {
+                PlayerZombieStatus[playerid] = 2;
+                SendClientMessage(playerid, COLOR_GRAD, "Oberwa³eœ drugi raz! Stajesz siê zombie!");
+                SendClientMessage(playerid, COLOR_GRAD, "Biegaj i bij innych, aby zamieniæ ich w zombie");
+                SendClientMessage(issuerid, COLOR_GRAD, "Zamieni³eœ gracza w zombie, otrzymujesz  2 punkty w zabawie!");
+                AddPointsToPlayer(issuerid, 2);
+                AlivePlayers--;
+            }
+        }
+    }
+    return 0;
+}
+
+//-----------------<[ Timery: ]>-------------------
+forward partyMember(playerid);
+public partyMember(playerid)
+{
+    if(dostalSkina[playerid] == 0)
+    {
+        if(PlayerZombieStatus[playerid] == 2)
+        {
+            new rand = random(3);
+            new pDeathSkin = 20004+rand;
+            SetPlayerSkin(playerid, pDeathSkin);
+            dostalSkina[playerid] = 1;
+        }
+    }
+    UpdateTableForPlayer(playerid);
+}
+forward TimerZarazony(playerid);
+public TimerZarazony(playerid)
+{
+    zarazonyTime[playerid]++;
+    if(zarazonyTime[playerid] == 36)
+    {
+        PlayerZombieStatus[playerid] = 2;
+        SendClientMessage(playerid, COLOR_RED, "Nie znalaz³eœ odtrutki! Stajesz siê zombie");
+    }
+}
+//-----------------<[ Funkcje: ]>-------------------
+stock GetPlayerSkinEx(playerid)
+{
+	new value = GetPlayerSkin(playerid);
+	if(value == 0)
+	{
+		value = GetPlayerCustomSkin(playerid); 
+	}
+	return value; 
+}
+StworzObiektyZombie()
+{
+    new tmpobjid;
     tmpobjid = CreateDynamicObject(19445, 1161.118164, 111.840507, 34.716670, 0.000000, 0.000000, 50.000000, -1, -1, -1, 300.00, 300.00);
     SetDynamicObjectMaterial(tmpobjid, 0, 19297, "matlights", "invisible", 0x00000000);
     tmpobjid = CreateDynamicObject(19445, 1159.992065, 127.624076, 33.441940, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00);
@@ -545,220 +763,27 @@ public OnFilterScriptInit()
     tmpobjid = CreateDynamicObject(1265, 1289.808471, 135.941223, 19.600940, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00);
     tmpobjid = CreateDynamicObject(1369, 1346.032836, 189.556365, 22.965490, 0.000000, -43.499996, 0.000000, -1, -1, -1, 300.00, 300.00);
 
+    //ext
+    CreateDynamicObject(1351, 1277.500000, 248.203002, 18.476600, 0.000000, 0.000000, -112.350852, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1308, 1260.540039, 251.492004, 18.820299, -0.817951, 2.412909, -19.820972, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1440, 1259.500000, 250.203002, 19.046899, 0.000000, 0.000000, -115.775955, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(13010, 1258.250000, 245.516006, 27.562500, 0.000000, 0.000000, 155.556015, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1690, 1270.479980, 240.460998, 30.773399, 0.000000, 0.000000, -23.695650, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1688, 1265.689941, 242.335998, 31.093799, 0.000000, 0.000000, 66.304290, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1687, 1253.989990, 231.438003, 26.343799, 0.000000, 0.000000, -23.695650, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(12905, 1251.589965, 218.085998, 18.468799, 0.000000, 0.000000, 0.000000, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1687, 1248.630004, 219.218994, 26.343799, 0.000000, 0.000000, -23.695650, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1351, 1244.689941, 257.515991, 18.476600, 0.000000, 0.000000, -22.350769, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1440, 1245.250000, 245.233993, 19.046899, 0.000000, 0.000000, 154.223983, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1440, 1247.040039, 245.022994, 19.046899, 0.000000, 0.000000, 123.723960, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(12850, 1246.380004, 231.367004, 18.515600, 0.000000, 0.000000, 155.556015, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1308, 1233.829956, 221.828002, 18.820299, -4.718946, 0.000000, -19.734790, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1438, 1240.589965, 217.695007, 18.531299, 0.000000, 0.000000, -29.500000, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1438, 1242.540039, 216.742004, 18.531299, 0.000000, 0.000000, 150.499984, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1688, 1251.010009, 213.453002, 23.046899, 0.000000, 0.000000, -23.695650, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1690, 1252.880004, 206.539001, 25.312500, 0.000000, 0.000000, 156.304336, 666, 0, -1, 300.00, 300.00); 
+	CreateDynamicObject(1294, 1256.510009, 197.117004, 23.007799, 0.000000, 0.000000, 116.468582, 666, 0, -1, 300.00, 300.00); 
     return 1;
-}
-
-public OnFilterScriptExit()
-{
-    print("\n--------------------------------------");
-    print(" Fliterscript 'zombiescript' wylaczony");
-    print("--------------------------------------\n");
-    return 1;
-}
-
-public OnPlayerConnect(playerid)
-{
-    SendClientMessage(playerid, COLOR_GREEN, "Na serwerze znajduje siê skrypt: ZOMBIE APOCALYPSE!");
-    SendClientMessage(playerid, COLOR_GRAD, "Weso³ego 10-lecia serwera Mrucznik Role Play!");
-    PlayerZombieStatus[playerid] = INVALID_PZOMBIE;
-    playerAccessToFS[playerid] = 0;
-    PlayerEventPoint[playerid] = 0;
-    togParty[playerid] = 0;
-    dostalSkina[playerid] = 0;
-
-    //TABELA
-    background[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 165.000000, "_");
-    PlayerTextDrawFont(playerid, background[playerid], 1);
-    PlayerTextDrawLetterSize(playerid, background[playerid], -0.554166, 6.849999);
-    PlayerTextDrawTextSize(playerid, background[playerid], 105.000000, 7.000000);
-    PlayerTextDrawSetOutline(playerid, background[playerid], 1);
-    PlayerTextDrawSetShadow(playerid, background[playerid], 0);
-    PlayerTextDrawAlignment(playerid, background[playerid], 1);
-    PlayerTextDrawColor(playerid, background[playerid], -1);
-    PlayerTextDrawBackgroundColor(playerid, background[playerid], 255);
-    PlayerTextDrawBoxColor(playerid, background[playerid], 205);
-    PlayerTextDrawUseBox(playerid, background[playerid], 1);
-    PlayerTextDrawSetProportional(playerid, background[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid, background[playerid], 0);
-
-    skinTXD[playerid] = CreatePlayerTextDraw(playerid, 46.000000, 114.000000, "_");
-    PlayerTextDrawFont(playerid, skinTXD[playerid], TEXT_DRAW_FONT_MODEL_PREVIEW);
-    PlayerTextDrawLetterSize(playerid, skinTXD[playerid], 0.600000, 2.000000);
-    PlayerTextDrawTextSize(playerid, skinTXD[playerid], 102.000000, 87.000000);
-    PlayerTextDrawSetOutline(playerid, skinTXD[playerid], 1);
-    PlayerTextDrawSetShadow(playerid, skinTXD[playerid], 0);
-    PlayerTextDrawAlignment(playerid, skinTXD[playerid], 1);
-    PlayerTextDrawColor(playerid, skinTXD[playerid], -1);
-    PlayerTextDrawBackgroundColor(playerid, skinTXD[playerid], 0);
-    PlayerTextDrawBoxColor(playerid, skinTXD[playerid], 5);
-    PlayerTextDrawUseBox(playerid, skinTXD[playerid], 1);
-    PlayerTextDrawSetProportional(playerid, skinTXD[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid, skinTXD[playerid], 0);
-    PlayerTextDrawSetPreviewModel(playerid, skinTXD[playerid], 20004);
-    PlayerTextDrawSetPreviewRot(playerid, skinTXD[playerid], -10.000000, 0.000000, -20.000000, 1.000000);
-    PlayerTextDrawSetPreviewVehCol(playerid, skinTXD[playerid], 1, 1);
-
-    text1[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 166.000000, "Mrucznik Role Play");
-    PlayerTextDrawFont(playerid, text1[playerid], 1);
-    PlayerTextDrawLetterSize(playerid, text1[playerid], 0.250000, 1.750000);
-    PlayerTextDrawTextSize(playerid, text1[playerid], 400.000000, 17.000000);
-    PlayerTextDrawSetOutline(playerid, text1[playerid], 1);
-    PlayerTextDrawSetShadow(playerid, text1[playerid], 0);
-    PlayerTextDrawAlignment(playerid, text1[playerid], 1);
-    PlayerTextDrawColor(playerid, text1[playerid], -1);
-    PlayerTextDrawBackgroundColor(playerid, text1[playerid], 0);
-    PlayerTextDrawBoxColor(playerid, text1[playerid], 0);
-    PlayerTextDrawUseBox(playerid, text1[playerid], 1);
-    PlayerTextDrawSetProportional(playerid, text1[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid, text1[playerid], 0);
-
-    text2[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 182.000000, "~g~Zdrowy");
-    PlayerTextDrawFont(playerid, text2[playerid], 1);
-    PlayerTextDrawLetterSize(playerid, text2[playerid], 0.250000, 1.750000);
-    PlayerTextDrawTextSize(playerid, text2[playerid], 400.000000, 17.000000);
-    PlayerTextDrawSetOutline(playerid, text2[playerid], 1);
-    PlayerTextDrawSetShadow(playerid, text2[playerid], 0);
-    PlayerTextDrawAlignment(playerid, text2[playerid], 1);
-    PlayerTextDrawColor(playerid, text2[playerid], -1);
-    PlayerTextDrawBackgroundColor(playerid, text2[playerid], 0);
-    PlayerTextDrawBoxColor(playerid, text2[playerid], 0);
-    PlayerTextDrawUseBox(playerid, text2[playerid], 1);
-    PlayerTextDrawSetProportional(playerid, text2[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid, text2[playerid], 0);
-
-    text3[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 197.000000, "~y~Score: ~w~69");
-    PlayerTextDrawFont(playerid, text3[playerid], 1);
-    PlayerTextDrawLetterSize(playerid, text3[playerid], 0.250000, 1.750000);
-    PlayerTextDrawTextSize(playerid, text3[playerid], 400.000000, 17.000000);
-    PlayerTextDrawSetOutline(playerid, text3[playerid], 1);
-    PlayerTextDrawSetShadow(playerid, text3[playerid], 0);
-    PlayerTextDrawAlignment(playerid, text3[playerid], 1);
-    PlayerTextDrawColor(playerid, text3[playerid], -1);
-    PlayerTextDrawBackgroundColor(playerid, text3[playerid], 0);
-    PlayerTextDrawBoxColor(playerid, text3[playerid], 0);
-    PlayerTextDrawUseBox(playerid, text3[playerid], 1);
-    PlayerTextDrawSetProportional(playerid, text3[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid, text3[playerid], 0);
-
-    text4[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 210.000000, "~y~Pozostali: ~w~10");
-    PlayerTextDrawFont(playerid, text4[playerid], 1);
-    PlayerTextDrawLetterSize(playerid, text4[playerid], 0.250000, 1.750000);
-    PlayerTextDrawTextSize(playerid, text4[playerid], 400.000000, 17.000000);
-    PlayerTextDrawSetOutline(playerid, text4[playerid], 1);
-    PlayerTextDrawSetShadow(playerid, text4[playerid], 0);
-    PlayerTextDrawAlignment(playerid, text4[playerid], 1);
-    PlayerTextDrawColor(playerid, text4[playerid], -1);
-    PlayerTextDrawBackgroundColor(playerid, text4[playerid], 0);
-    PlayerTextDrawBoxColor(playerid, text4[playerid], 0);
-    PlayerTextDrawUseBox(playerid, text4[playerid], 1);
-    PlayerTextDrawSetProportional(playerid, text4[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid, text4[playerid], 0);
-    return 1;
-}
-public OnPlayerDisconnect(playerid, reason)
-{
-	if(PlayerZombieStatus[playerid] == 0)
-	{
-		AlivePlayers--;
-	}
-	return 1;
-}
-public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
-{
-	if(PlayerZombieStatus[playerid] == 2)
-	{
-		if(damagedid != playerid)
-		{
-			if(weaponid != 0)
-            {
-                SendClientMessage(playerid, COLOR_WHITE, "Nie mo¿esz u¿ywaæ innej broni - TYLKO piêœci");
-                new Float:pX, Float:pY, Float:pZ;
-                GetPlayerPos(playerid, pX, pY, pZ);
-                SetPlayerPos(playerid, pX, pY, pZ+5);
-                return 1;
-            }
-			if(PlayerZombieStatus[damagedid] == INVALID_PZOMBIE)
-			{
-				SendClientMessage(playerid, COLOR_RED, "Ta osoba nie uczestniczy  w zabawie!");
-				return 1;
-			}
-			if(PlayerZombieStatus[damagedid] == 2)
-			{
-				SendClientMessage(playerid, COLOR_RED, "Nie mo¿esz biæ swojego, zostaje Ci odjêty punkt w zabawie!");
-				GetPointsFromPlayer(playerid, 1);
-				return 1;
-			}
-		}
-	}
-	return 0;
-}
-public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
-{
-    new string[256];
-    if(PlayerZombieStatus[issuerid] == 2)
-    {
-        if(issuerid != playerid)
-        {
-            if(PlayerZombieStatus[playerid] == 0)
-            {
-                PlayerZombieStatus[playerid] = 1;
-                SendClientMessage(playerid, COLOR_GRAD, "Oberwa³eœ od Zombie! Stajesz siê zara¿ony, postaraj siê znaleŸæ odtrutkê!");
-                SendClientMessage(playerid, COLOR_GRAD, "Masz na to 2 minuty!");
-                format(string, sizeof(string), "Uda³o Ci siê zaraziæ %s, uderz go jeszcze raz aby sta³ siê Zombie!", GetName(playerid));
-                SendClientMessage(issuerid, COLOR_GREEN, string);
-                SendClientMessage(issuerid, COLOR_GRAD, "Otrzymujesz 1 punkt w zabawie!");
-                AddPointsToPlayer(issuerid, 1);
-                ZarazonyTimer[playerid] = SetTimerEx("TimerZarazony", 5000, false, "d", playerid);
-            }
-            else if(PlayerZombieStatus[playerid] == 1)
-            {
-                PlayerZombieStatus[playerid] = 2;
-                SendClientMessage(playerid, COLOR_GRAD, "Oberwa³eœ drugi raz! Stajesz siê zombie!");
-                SendClientMessage(playerid, COLOR_GRAD, "Biegaj i bij innych, aby zamieniæ ich w zombie");
-                SendClientMessage(issuerid, COLOR_GRAD, "Zamieni³eœ gracza w zombie, otrzymujesz  2 punkty w zabawie!");
-                AddPointsToPlayer(issuerid, 2);
-                AlivePlayers--;
-            }
-        }
-    }
-    return 0;
-}
-
-//-----------------<[ Timery: ]>-------------------
-forward partyMember(playerid);
-public partyMember(playerid)
-{
-    if(dostalSkina[playerid] == 0)
-    {
-        if(PlayerZombieStatus[playerid] == 2)
-        {
-            new rand = random(3);
-            new pDeathSkin = 20004+rand;
-            SetPlayerSkin(playerid, pDeathSkin);
-            dostalSkina[playerid] = 1;
-        }
-    }
-    UpdateTableForPlayer(playerid);
-}
-forward TimerZarazony(playerid);
-public TimerZarazony(playerid)
-{
-    zarazonyTime[playerid]++;
-    if(zarazonyTime[playerid] == 36)
-    {
-        PlayerZombieStatus[playerid] = 2;
-        SendClientMessage(playerid, COLOR_RED, "Nie znalaz³eœ odtrutki! Stajesz siê zombie");
-    }
-}
-//-----------------<[ Funkcje: ]>-------------------
-stock GetPlayerSkinEx(playerid)
-{
-	new value = GetPlayerSkin(playerid);
-	if(value == 0)
-	{
-		value = GetPlayerCustomSkin(playerid); 
-	}
-	return value; 
 }
 UpdateTableForPlayer(playerid)
 {
@@ -1016,7 +1041,7 @@ CMD:setzombie(playerid, params[])
     if(IsPlayerConnected(playerid))
     {
         new giveplayerid, value;
-        if(sscanf(params, "k<fix>d", giveplayerid, value))
+        if(sscanf(params, "dd", giveplayerid, value))
         {
             SendClientMessage(playerid, COLOR_WHITE, "U¿yj /setzombie [ID / Czêœæ nicku] [Wartosc]");
             SendClientMessage(playerid, COLOR_WHITE, "Wartoœci: 0 - zdrowy; 1 - zara¿ony; 2 - Zombie");
