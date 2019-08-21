@@ -52,6 +52,7 @@ YCMD:kupskin(playerid, params[], help)
 				{
 					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
 					ZabierzKase(playerid, 5000); 
+					SetPlayerSkin(playerid, skinID); 
 					return 1;
 				}	
 				else if(skinID > 20000 && skinID <= skinsLoaded_Event)//SKINY EVENTOWE
@@ -76,7 +77,7 @@ YCMD:kupskin(playerid, params[], help)
 					sendErrorMessage(playerid, "Ten skin jest do kupienia za MC"); 
 					return 1;
 				}
-				else if(skinID > 20400 && skinID <= skinsLoaded_Normal)//Normalne skiny dla ka¿dego
+				else if(skinID > 20400 && skinID <= skinsLoaded_Normal-1)//Normalne skiny dla ka¿dego
 				{
 					SetPlayerSkin(playerid, skinID); 
 					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
