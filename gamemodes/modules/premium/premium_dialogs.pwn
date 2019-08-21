@@ -241,7 +241,7 @@ DialogMenuDotacje(playerid)
 	if(IsPlayerPremium(playerid))
 	{
 		new date[3], null;
-		TimestampToDate(PremiumInfo[playerid][pExpires],date[0],date[1],date[2],null, null, null,2);
+		TimestampToDate(PremiumInfo[playerid][pExpires],date[0],date[1],date[2],null, null, null, 2);
 		format(kpinfo, sizeof(kpinfo), ""#PREMIUM_EMBED2"(Wygasa: %02d.%02d.%d)", date[2], date[1], date[0]);
 	}
 
