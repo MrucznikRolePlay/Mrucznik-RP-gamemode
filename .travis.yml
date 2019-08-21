@@ -18,6 +18,7 @@ branches:
   - biznesy
   - sktom
   - mrucznik
+  - simeone
   - '/^2\.6\.\d+$/'
 
 addons:
