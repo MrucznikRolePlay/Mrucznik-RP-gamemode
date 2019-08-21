@@ -70,10 +70,11 @@ new memberTimer[MAX_PLAYERS];		//Timer cz³onka zabawy
 new antidoteObject[4];				//Obiekty antidotum
 new Text3D:antidoteText[4];			//3DTEXTY antidotum
 new antidoteUse[4];					//Czy antidotum by³o u¿yte?
-new firstSkinID[MAX_PLAYERS];		//Skin ID
+//new firstSkinID[MAX_PLAYERS];		//Skin ID
+new zabawaON; 
 //textdrawy
 new PlayerText:background[MAX_PLAYERS];
-new PlayerText:skinTXD[MAX_PLAYERS];
+//new PlayerText:skinTXD[MAX_PLAYERS];
 new PlayerText:text1[MAX_PLAYERS];
 new PlayerText:text2[MAX_PLAYERS];
 new PlayerText:text3[MAX_PLAYERS];
@@ -143,7 +144,7 @@ public OnPlayerConnect(playerid)
     PlayerTextDrawSetProportional(playerid, background[playerid], 1);
     PlayerTextDrawSetSelectable(playerid, background[playerid], 0);
 
-    skinTXD[playerid] = CreatePlayerTextDraw(playerid, 46.000000, 114.000000, "_");
+   /* skinTXD[playerid] = CreatePlayerTextDraw(playerid, 46.000000, 114.000000, "_");
     PlayerTextDrawFont(playerid, skinTXD[playerid], TEXT_DRAW_FONT_MODEL_PREVIEW);
     PlayerTextDrawLetterSize(playerid, skinTXD[playerid], 0.600000, 2.000000);
     PlayerTextDrawTextSize(playerid, skinTXD[playerid], 102.000000, 87.000000);
@@ -158,7 +159,7 @@ public OnPlayerConnect(playerid)
     PlayerTextDrawSetSelectable(playerid, skinTXD[playerid], 0);
     PlayerTextDrawSetPreviewModel(playerid, skinTXD[playerid], 20004);
     PlayerTextDrawSetPreviewRot(playerid, skinTXD[playerid], -10.000000, 0.000000, -20.000000, 1.000000);
-    PlayerTextDrawSetPreviewVehCol(playerid, skinTXD[playerid], 1, 1);
+    PlayerTextDrawSetPreviewVehCol(playerid, skinTXD[playerid], 1, 1);*/
 
     text1[playerid] = CreatePlayerTextDraw(playerid, 6.000000, 166.000000, "Mrucznik Role Play");
     PlayerTextDrawFont(playerid, text1[playerid], 1);
@@ -313,7 +314,7 @@ public TimerZarazony(playerid)
     }
 }
 //-----------------<[ Funkcje: ]>-------------------
-stock GetPlayerSkinEx(playerid)
+/*stock GetPlayerSkinEx(playerid)
 {
 	new value = GetPlayerSkin(playerid);
 	if(value == 0)
@@ -321,7 +322,7 @@ stock GetPlayerSkinEx(playerid)
 		value = GetPlayerCustomSkin(playerid); 
 	}
 	return value; 
-}
+}*/ 
 StworzObiektyZombie()
 {
     new tmpobjid;
@@ -805,15 +806,15 @@ UpdateTableForPlayer(playerid)
     PlayerTextDrawSetString(playerid, text3[playerid], string);
     format(string, sizeof(string), "~y~Pozostali: ~w~%d", AlivePlayers);
     PlayerTextDrawSetString(playerid, text4[playerid], string);
-    new pSkinID  = GetPlayerSkinEx(playerid); 
-    PlayerTextDrawSetPreviewModel(playerid, skinTXD[playerid], pSkinID);
-    PlayerTextDrawShow(playerid, skinTXD[playerid]);
+   // new pSkinID  = GetPlayerSkinEx(playerid); 
+   // PlayerTextDrawSetPreviewModel(playerid, skinTXD[playerid], pSkinID);
+  //  PlayerTextDrawShow(playerid, skinTXD[playerid]);
     return 1;
 }
 ShowTableForPlayer(playerid)
 {
     PlayerTextDrawShow(playerid, background[playerid]);
-    PlayerTextDrawShow(playerid, skinTXD[playerid]);
+   // PlayerTextDrawShow(playerid, skinTXD[playerid]);
     PlayerTextDrawShow(playerid, text1[playerid]);
     PlayerTextDrawShow(playerid, text2[playerid]);
     PlayerTextDrawShow(playerid, text3[playerid]);
@@ -824,7 +825,7 @@ ShowTableForPlayer(playerid)
 HideTableForPlayer(playerid)
 {
     PlayerTextDrawHide(playerid, background[playerid]);
-    PlayerTextDrawHide(playerid, skinTXD[playerid]);
+    //PlayerTextDrawHide(playerid, skinTXD[playerid]);
     PlayerTextDrawHide(playerid, text1[playerid]);
     PlayerTextDrawHide(playerid, text2[playerid]);
     PlayerTextDrawHide(playerid, text3[playerid]);
@@ -933,6 +934,11 @@ CMD:dolaczzombie(playerid)
         SendClientMessage(playerid, COLOR_RED, "Zabawa trwa!");
         return 1;
     }
+    if(zabawaON == 0)
+    {
+        SendClientMessage(playerid, COLOR_RED, "Zabawa jest wy³¹czona!"); 
+        return 1;
+    }
     if(IsPlayerInRangeOfPoint(playerid, 4.0, POS_ENTER_X, POS_ENTER_Y, POS_ENTER_Z))
     {
         new rand = random(4);
@@ -943,7 +949,7 @@ CMD:dolaczzombie(playerid)
         PlayerEventPoint[playerid] = 0;
         AlivePlayers++;
         SetPlayerVirtualWorld(playerid, ZOMBIE_VW);
-		firstSkinID[playerid] = GetPlayerSkinEx(playerid); 
+		//firstSkinID[playerid] = GetPlayerSkinEx(playerid); 
         memberTimer[playerid] = SetTimerEx("partyMember", 5000, false, "d", playerid);
     }
     else
@@ -964,7 +970,7 @@ CMD:wyjdzzombie(playerid)
     HideTableForPlayer(playerid);
     PlayerZombieStatus[playerid] = INVALID_PZOMBIE;
     KillTimer(memberTimer[playerid]);
-	SetPlayerSkin(playerid, firstSkinID[playerid]);
+	//SetPlayerSkin(playerid, firstSkinID[playerid]);
     if(PlayerZombieStatus[playerid] >= 2)
     {
         AlivePlayers--;
@@ -996,6 +1002,25 @@ CMD:zabawastatus(playerid)
         SendClientMessage(playerid, COLOR_GRAD, "Nie masz uprawnieñ!");
     }
     return 1;
+}
+CMD:zabawaon(playerid)
+{
+    new string[124];
+    if(playerAccessToFS[playerid] == 1)
+    {
+        if(zabawaON == 0)
+        {
+            zabawaON = 1;
+            format(string, sizeof(string), "%s odpali³ przebieran¹ zabawê w zombie!"); 
+            sendPartyMess(COLOR_GREEN, string);
+        }
+        else
+        {
+            zabawaON = 0;
+            format(string, sizeof(string), "%s wy³¹czy³ przebieran¹ zabawê w zombie!"); 
+            sendPartyMess(COLOR_GREEN, string);
+        }
+    }
 }
 CMD:giveaccessfs(playerid, params[])
 {

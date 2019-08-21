@@ -4440,6 +4440,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 }*/
 ShowStats2(playerid)
 {
+	SetPVarInt(playerid, "podglada-stats", 1); 
 	new plUID[64], plLVL[64], plPlec[64];
 	new plPochodzenie[64], plZdrowie[64], plBank[64], plKasa[64];
 	new plTelefon[64], plKP[64], plWiek[64], plSlub[64], plData[64], plCzas[64], plPKT[64], plWantedD[64];

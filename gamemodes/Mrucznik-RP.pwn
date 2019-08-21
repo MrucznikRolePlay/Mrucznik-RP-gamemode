@@ -6104,7 +6104,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		    }
 		}
 	}
-
     if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT && GetPVarInt(playerid, "obezwladniony")-15 > gettime())
     {
         if(HOLDING(KEY_SPRINT))
@@ -6268,6 +6267,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     }
 
     //
+	if((GetPVarInt(playerid, "podglada-stats") == 1) && newkeys==KEY_ACTION)
+	{
+		SetPVarInt(playerid, "podglada-stats", 0); 
+		HideStats2(playerid);
+	}
 	if ((newkeys==KEY_ACTION)&&(IsPlayerInAnyVehicle(playerid))&&(GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
 	{
 		if (GetVehicleModel(GetPlayerVehicleID(playerid)) == 525)

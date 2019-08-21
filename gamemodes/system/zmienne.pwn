@@ -481,7 +481,6 @@ new Teleturniejstart = 0;
 new grajacy[MAX_PLAYERS];
 new levelLock[MAX_FRAC][MAX_LEVELINT];
 
-
 new bool:moveZaluzja1 = false;
 new bool:moveZaluzja2 = false;
 new zaluzja1;
