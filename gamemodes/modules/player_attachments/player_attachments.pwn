@@ -73,6 +73,19 @@ PlayerHasAttachedObject(playerid, model)
 {
 	return VECTOR_find_val(VAttachedItems[playerid], model) != INVALID_VECTOR_INDEX;
 }
+
+CheckEditionBoundaries(Float:x, Float:y, Float:z, Float:sx, Float:sy, Float:sz)
+{
+	if(-2.0 > x || x > 2.0) return 0;
+	if(-2.0 > y || y > 2.0) return 0;
+	if(-2.0 > z || z > 2.0) return 0;
+	if(0 > sx || sx > 2.0) return 0;
+	if(0 > sy || sy > 2.0) return 0;
+	if(0 > sz || sz > 2.0) return 0;
+	return 1;
+}
+
+
 //-----------------<[ Dialogi: ]>-------------------
 DialogPlayerAttachedItems(playerid)
 {

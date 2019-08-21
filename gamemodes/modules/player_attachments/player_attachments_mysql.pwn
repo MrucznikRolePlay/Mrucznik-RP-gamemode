@@ -45,7 +45,8 @@ PlayerAttachments_Create(playerid, model, bone, Float:x, Float:y, Float:z, Float
     return id;
 }
 
-PlayerAttachments_Remove(playerid, model)
+//TODO: use
+stock PlayerAttachments_Remove(playerid, model)
 {
     new str[256];
     format(str, sizeof(str), "DELETE FROM mru_playeritems WHERE `uid`=%d AND `model`='%d'", PlayerInfo[playerid][pUID], model);

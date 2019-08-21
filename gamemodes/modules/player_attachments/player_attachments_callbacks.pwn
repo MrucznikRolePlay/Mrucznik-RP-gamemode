@@ -35,6 +35,12 @@ hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:f
 		if(response)
 		{
 			//TODO: Ograniczenia edycji
+			if(!CheckEditionBoundaries(fOffsetX, fOffsetY, fOffsetZ, fScaleX, fScaleY, fScaleZ))
+			{
+				sendErrorMessage(playerid, "Ten obiekt wykracza poza granice!");
+				EditAttachedObject(playerid, index);
+				return -2;
+			}
 
 			SendClientMessage(playerid, COLOR_GREEN, "Edytowa³eœ pozycjê swojego przedmiotu.");
 	
@@ -66,7 +72,9 @@ hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:f
 				AttachedObjects[playerid][index][ao_sx], AttachedObjects[playerid][index][ao_sy], AttachedObjects[playerid][index][ao_sz]
 			);
 		}
+		return -2;
 	}
+	return 1;
 }
 
 hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
