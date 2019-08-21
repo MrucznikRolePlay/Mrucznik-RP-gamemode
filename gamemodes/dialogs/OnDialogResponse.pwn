@@ -2653,7 +2653,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 7);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
-					1
 					}
 					case 10://dach
 					{
