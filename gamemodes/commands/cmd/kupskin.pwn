@@ -52,7 +52,8 @@ YCMD:kupskin(playerid, params[], help)
 				{
 					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
 					ZabierzKase(playerid, 5000); 
-					SetPlayerSkin(playerid, skinID); 
+					SetPlayerSkin(playerid, skinID);
+					PlayerInfo[playerid][pSkin] = skinID;  
 					return 1;
 				}	
 				else if(skinID > 20000 && skinID <= skinsLoaded_Event)//SKINY EVENTOWE
@@ -82,6 +83,7 @@ YCMD:kupskin(playerid, params[], help)
 					SetPlayerSkin(playerid, skinID); 
 					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
 					ZabierzKase(playerid, 5000); 
+					PlayerInfo[playerid][pSkin] = skinID; 
 				}
 			}
 			else

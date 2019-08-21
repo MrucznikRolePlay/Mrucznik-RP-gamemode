@@ -2524,7 +2524,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1://parking
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][1] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2537,7 +2537,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 2://stanowe
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][2] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2550,7 +2550,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 3://recepcja
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][3] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2565,7 +2565,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 4://szatnia
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][4] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2583,7 +2583,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 5://Zbrojownia
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][5] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2600,7 +2600,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 6://Biura federalne
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][6] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2615,7 +2615,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 7://Dyrektorat
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][7] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2629,7 +2629,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 8://CID ERT
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][8] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2643,7 +2643,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 9://sale treningowe
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][9] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2653,11 +2653,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 7);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
-					
+					1
 					}
 					case 10://dach
 					{
-						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						if(levelLock[FRAC_FBI][10] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
