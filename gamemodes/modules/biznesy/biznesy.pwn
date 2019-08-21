@@ -326,7 +326,7 @@ CheckPlayerBusiness(playerid)
 
 stock GetFreeBizID()
 {
-	new bID = BusinessLoaded+1; 
+	/*new bID = BusinessLoaded+1; 
 	for(new i; i<BusinessLoaded; i++)
 	{
 		if(i != 0)
@@ -337,7 +337,8 @@ stock GetFreeBizID()
 				return bID; 
 			}
 		}
-	}
+	}*/ 
+	new bID = BusinessLoaded++; 
 	return bID; 
 }
 stock LoadBusinessPickup()
