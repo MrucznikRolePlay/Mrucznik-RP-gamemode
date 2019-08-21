@@ -26,7 +26,6 @@
 //
 
 //-----------------<[ Dialogi: ]>-------------------
-
 premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if(dialogid == PREMIUM_DIALOG(MENU))
@@ -53,15 +52,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 8:
 				{
-					if(PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
-					{
-						DialogPojazdyPremium(playerid);
-					}
-					else
-					{
-						_MruGracz(playerid, "Aby kupiæ pojazd unikatowy musisz znajdowaæ siê przy salonie aut.");
-						DialogMenuDotacje(playerid);
-					}
+					DialogPojazdyPremium(playerid);
 				}
 				case 10:
 				{
@@ -69,15 +60,11 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 11:
 				{
-					if(IsAtClothShop(playerid))
-					{
-						DialogSkiny(playerid);
-					}
-					else
-					{
-						_MruGracz(playerid, "Pamiêtaj, ¿e aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami.");
-						DialogMenuDotacje(playerid);
-					}
+					DialogSkiny(playerid);
+				}
+				case 12:
+				{
+					DialogPrzedmioty(playerid);
 				}
 				default:
 				{
@@ -136,6 +123,12 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
+			if(!PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
+			{
+				_MruGracz(playerid, "Aby kupiæ pojazd unikatowy musisz znajdowaæ siê przy salonie aut.");
+				DialogPojazdyPremium(playerid);
+				return 1;
+			}
 			KupPojazdPremium(playerid, listitem);
 		}
 		else
@@ -147,8 +140,20 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//TODO: stworzyæ przedmioty
-			SendClientMessage(playerid, -1, "W budowie.");
+			if(!IsAtClothShop(playerid))
+			{
+				_MruGracz(playerid, "Aby kupiæ unikatowy przedmiot, musisz znajdowaæ siê w sklepie z ubraniami.");
+				DialogPrzedmioty(playerid);
+				return 1;
+			}
+
+			if(PlayerHasAttachedObject(playerid, PrzedmiotyPremium[listitem][Model]))
+			{
+				sendErrorMessage(playerid, "Masz ju¿ ten przedmiot!");
+				return DialogPrzedmioty(playerid);
+			}
+
+			KupPrzedmiotPremium(playerid, listitem);
 		}
 		else
 		{
@@ -181,33 +186,21 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			new bool:found=false;
-			new skin = strval(inputtext);
-			for(new i; i<MAX_PREMIUM_SKINS; i++)
+			if(PlayerHasSkin(playerid, SkinyPremium[listitem][Model]))
 			{
-				if(SkinyPremium[i][Model] == skin)
-				{
-					found = true;
-					break;
-				}
-			}
-			if(found)
-			{
-				if(!PlayerHasSkin(playerid, skin))
-				{
-					KupSkinPremium(playerid, skin);
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Masz ju¿ ten skin!");
-					return DialogSkiny(playerid);
-				} 
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Skin o podanym ID nie jest skinem unikalnym");
+				sendErrorMessage(playerid, "Masz ju¿ ten skin!");
 				return DialogSkiny(playerid);
 			}
+
+			if(!IsAtClothShop(playerid))
+			{
+				_MruGracz(playerid, "Aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami.");
+				DialogSkiny(playerid);
+				return 1;
+			}
+			
+			KupSkinPremium(playerid, listitem);
+			DialogSkinyPremiumGracza(playerid);
 		}
 		else
 		{
@@ -230,10 +223,8 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new skin = DynamicGui_GetDataInt(playerid, listitem);
-
 			new param[4];
-			valstr(param,skin);
-
+			valstr(param, skin);
 			return RunCommand(playerid, "/premiumskin",  param); 
 		}
 		else
@@ -250,7 +241,7 @@ DialogMenuDotacje(playerid)
 	if(IsPlayerPremium(playerid))
 	{
 		new date[3], null;
-		TimestampToDate(PremiumInfo[playerid][pExpires],date[0],date[1],date[2],null, null, null,2);
+		TimestampToDate(PremiumInfo[playerid][pExpires],date[0],date[1],date[2],null, null, null, 2);
 		format(kpinfo, sizeof(kpinfo), ""#PREMIUM_EMBED2"(Wygasa: %02d.%02d.%d)", date[2], date[1], date[0]);
 	}
 
@@ -266,7 +257,8 @@ DialogMenuDotacje(playerid)
 		"    "HQ_COLOR_TEKST2"Kup pojazd unikatowy\n"\
 		""#HQ_COLOR_TEKST"Postaæ\n"\
 		"    "HQ_COLOR_TEKST2"Dodatkowa zmiana nicku\n"\
-		"    "HQ_COLOR_TEKST2"Unikatowy skin\n",
+		"    "HQ_COLOR_TEKST2"Unikatowy skin\n"\
+		"    "HQ_COLOR_TEKST2"Obiekt do noszenia\n",
 		//"Rynek Mrucznik Coins'ów\n"
 		//"Wspomó¿ nasz serwer i otrzymaj Mrucznik Coins'y!", 
 	PremiumInfo[playerid][pMC], kpinfo, ((IsPlayerPremium(playerid)) ? ("Przed³u¿") : ("Kup")), PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCarSlots]);
@@ -285,7 +277,7 @@ static DialogKupKP(playerid)
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(KUP_KP), DIALOG_STYLE_MSGBOX, "Premium - KP", string, "Tak", "Nie");
 }
 
-static DialogRynekMC(playerid) //TODO
+static stock DialogRynekMC(playerid) //TODO: stworzyæ licytacje
 {
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(RYNEK_MC), DIALOG_STYLE_LIST, "Premium - Rynek MC", 
 		"Oferty kupna Mrucznik Coinów\n"\
@@ -310,7 +302,7 @@ static DialogDotacje(playerid)
 /*
 DialogLicytacje(playerid)
 {
-	//TODO
+	//TODO: stworzyæ licytacje
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(LICYTACJE), DIALOG_STYLE_LIST, "Premium - Us³ugi - Licytacje", 
 		"W budowie"\
 		"",
@@ -323,25 +315,36 @@ DialogPojazdyPremium(playerid)
 	new string[1590];
 	for(new i; i<MAX_PREMIUM_VEHICLES; i++)
 	{
-		if(PojazdyPremium[i][Model] != 0)
-			format(string, sizeof(string), "%s%s - "INCOLOR_GREEN"%d Mrucznik Coins\n", string, VehicleNames[PojazdyPremium[i][Model]-400], PojazdyPremium[i][Cena]);
+		strcat(string, sprintf("%d\t%s~n~~g~%dMC\n", PojazdyPremium[i][Model], VehicleNames[PojazdyPremium[i][Model]-400], PojazdyPremium[i][Cena]));
 	}
 	string[strlen(string)-1] = '\0';
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(POJAZDY), DIALOG_STYLE_LIST, "Premium - Us³ugi - Pojazdy", string,"Kup", "Wróæ");
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(POJAZDY), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Us³ugi - Pojazdy", string, "Kup", "Wstecz");
 	sendTipMessageEx(playerid, COLOR_RED, "Uwaga klikniêcie w pojazd powoduje jego natychmiastowy zakup!"); 
 	sendTipMessageEx(playerid, COLOR_RED, "Je¿eli nie jesteœ zdecydowany nie naciskaj w nazwê pojazdu."); 
 	return 1;
 }
-/*
+
 DialogPrzedmioty(playerid)
 {
-	//TODO
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTY), DIALOG_STYLE_LIST, "Premium - Us³ugi - Przedmioty", 
-		" "\
-		"",
-	"Kup", "Wróæ");
+	new substring[32];
+	static string[MAX_PREMIUM_ITEMS * sizeof(substring)];
+
+	if(isnull(string)) {
+        for (new i; i < MAX_PREMIUM_ITEMS; i++) {
+            format(substring, sizeof(substring), "%i\t~g~%dMC\n", PrzedmiotyPremium[i][Model], PrzedmiotyPremium[i][Cena]);
+            strcat(string, substring);
+        } 
+	}
+	string[strlen(string)-1] = '\0';
+
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTY), DIALOG_STYLE_PREVIEW_MODEL,
+		"Premium - Us³ugi - Przedmioty",
+		string,
+		"Kup", "Wstecz"
+	);
+	return 1;
 }
-*/
+
 DialogSlotyPojazdu(playerid)
 {
 	new string[300];
@@ -360,36 +363,42 @@ DialogZmianyNicku(playerid)
 
 DialogSkiny(playerid)
 {
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(SKINY), DIALOG_STYLE_INPUT, "Premium - Us³ugi - Skiny", 
-		"Aby zakupiæ unikatowego skina musisz znaæ jego ID.\n"\
-		"Unikatowy skin mo¿esz ustawiæ w dowolnym momencie komend¹ /premiumskin.\n"\
-		"Mo¿esz posiadaæ nieograniczon¹ iloœæ unikatowych skinów.\n"\
-		"Koszt unikatowego skina to "INCOLOR_GREEN""#UNIKATOWY_SKIN_CENA""INCOLOR_DIALOG" Mrucznik Coinów.\n"\
-		"Wpisz ID w okienko ni¿ej i naciœnij \"Kup\" aby dokonaæ zakupu.",
-	"Kup", "Wróæ");
+	new substring[32];
+	static string[MAX_PREMIUM_SKINS * sizeof(substring)];
 
-	return true;
+	if(isnull(string)) {
+        for (new i; i < MAX_PREMIUM_SKINS; i++) {
+            format(substring, sizeof(substring), "%i\t~g~%dMC\n", SkinyPremium[i][Model], SkinyPremium[i][Cena]);
+            strcat(string, substring);
+        } 
+	}
+	string[strlen(string)-1] = '\0';
+
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(SKINY), DIALOG_STYLE_PREVIEW_MODEL, 
+		"Premium - Us³ugi - Skiny", 
+		string,
+		"Kup", "Wstecz"
+	);
+	return 1;
 }
 
-ListPlayerUniqueSkins(playerid)
+DialogSkinyPremiumGracza(playerid)
 {
 	DynamicGui_Init(playerid);
 
-	new count, list[16*MAX_PREMIUM_SKINS];
+	new count, list[5*MAX_PREMIUM_SKINS];
 
-	for(new i; i<MAX_PREMIUM_SKINS; i++)
+	VECTOR_foreach(v : VPremiumSkins[playerid])
 	{
-		if(UniqueSkins[playerid][i])
-		{
-			format(list, sizeof list, "%sSkin ID: %d\n", list, SkinyPremium[i][Model]);
-			count++;
-			DynamicGui_AddRow(playerid, 1, SkinyPremium[i][Model]);
-		}
+		new skin = MEM_get_val(v);
+		strcat(list, sprintf("%d\n", skin));
+		count++;
+		DynamicGui_AddRow(playerid, 1, skin);
 	}
 
-	if(count==0) return sendErrorMessage(playerid, "Nie masz unikatowych skinów");
+	if(count==0) return sendErrorMessage(playerid, "Nie masz unikatowych skinów.");
 
-	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(ZMIENSKIN), DIALOG_STYLE_LIST, "Premium - Twoje Skiny", list, "Ustaw", "WyjdŸ");
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(ZMIENSKIN), DIALOG_STYLE_PREVIEW_MODEL, "Premium - Twoje skiny", list, "Ustaw", "Wyjdz");
 
 	return true;
 }

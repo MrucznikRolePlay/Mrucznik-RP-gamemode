@@ -56,6 +56,10 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <whirlpool>
 #include <timestamptodate>
 #include <discord-connector>
+#include <memory>
+#include <PawnPlus>
+// #include <requests>
+// #include <colandreas>
 
 //-------<[ Include ]>-------
 #include <a_http>
@@ -69,6 +73,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_commands>
 #include <YSI\y_groups>
 #include <YSI\y_hooks>
+#include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <nex-ac>
 #include <md5>
@@ -79,6 +84,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_MAX_CONNECTS_FROM_IP		2
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
 #include <true_random>
+#include <PreviewModelDialog>
+#include <vector>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
@@ -217,8 +224,7 @@ public OnGameModeInit()
 
 	//-------<[ libRegEx ]>-------
 	regex_syntax(SYNTAX_PERL);
-	//regexURL = regex_exbuild("^(http(?:s)?\\:\\/\\/[a-zA-Z0-9]+(?:(?:\\.|\\-)[a-zA-Z0-9]+)+(?:\\:\\d+)?(?:\\/[\\w\\-]+)*(?:\\/?|\\/\\w+\\.[a-zA-Z]{2,4}(?:\\?[\\w]+\\=[\\w\\-]+)?)?(?:\\&[\\w]+\\=[\\w\\-]+)*)$");
-
+	
 	//-------<[ sscanf ]>-------
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
 
@@ -1291,7 +1297,7 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 		
 		//Log dla 0Verte [Nick][UID] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
-		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d] - Wyszedl poprzez %s", 
+		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d/Z%d/WI%d/WO%d] - Wyszedl poprzez %s", 
 			GetPlayerLogName(playerid), 
 			AdminDutyGodziny[playerid], 
 			AdminDutyMinuty[playerid],
@@ -1300,6 +1306,9 @@ public OnPlayerDisconnect(playerid, reason)
 			iloscKick[playerid],
 			iloscInne[playerid], 
 			iloscPozaDuty[playerid],
+			iloscZapytaj[playerid], 
+			iloscInWiadomosci[playerid], 
+			iloscOutWiadomosci[playerid],
 			exitReason
 		); //Create LOG
 
@@ -1334,7 +1343,7 @@ public OnPlayerDisconnect(playerid, reason)
 			{
 				format(exitReason, sizeof(exitReason), "AFK");
 			}
-			Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d] - Wyszedl poprzez %s", 
+			Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d/Z%d/WI%d/WO%d] - Wyszedl poprzez %s", 
 				GetPlayerLogName(playerid), 
 				AdminDutyGodziny[playerid], 
 				AdminDutyMinuty[playerid],
@@ -1343,6 +1352,9 @@ public OnPlayerDisconnect(playerid, reason)
 				iloscKick[playerid],
 				iloscInne[playerid], 
 				iloscPozaDuty[playerid],
+				iloscZapytaj[playerid], 
+				iloscInWiadomosci[playerid], 
+				iloscOutWiadomosci[playerid],
 				exitReason
 			); //Create LOG
 			iloscPozaDuty[playerid] = 0; 
@@ -5847,6 +5859,7 @@ OnPlayerLogin(playerid, password[])
 		
 		//Lider
 		Load_MySQL_Leader(playerid); 
+
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
@@ -5983,9 +5996,10 @@ OnPlayerLogin(playerid, password[])
     }
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;
 
-
-	//TODO: new premium
 	premium_loadForPlayer(playerid);
+
+	//obiekty
+	PlayerAttachments_LoadItems(playerid);
 
 	//Odbugowywanie domów:
     if(PlayerInfo[playerid][pDom] != 0)

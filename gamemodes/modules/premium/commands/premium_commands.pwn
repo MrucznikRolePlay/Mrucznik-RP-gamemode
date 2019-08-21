@@ -31,6 +31,7 @@
 
 //-------<[ include ]>-------
 #include "addmc\addmc.pwn"
+#include "checkpremium\checkpremium.pwn"
 #include "dajkp\dajkp.pwn"
 #include "premiumpanel\premiumpanel.pwn"
 #include "premiumskin\premiumskin.pwn"
@@ -42,6 +43,7 @@
 hook OnGameModeInit()
 {
     command_addmc();
+    command_checkpremium();
     command_dajkp();
     command_premiumpanel();
     command_premiumskin();

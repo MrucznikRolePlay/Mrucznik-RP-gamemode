@@ -1,5 +1,5 @@
 //zmienne.pwn
-
+new prawoJazdyLosowanie[9];
 
 new PickupSklep01;//ZIP
 
@@ -120,8 +120,6 @@ new pFindZone[MAX_PLAYERS];
 
 new gTeam[MAX_PLAYERS];
 new odczekajTimer[MAX_PLAYERS];
-//regex
-//new regexURL;
 
 new lastMsg[MAX_PLAYERS];
 
@@ -1303,7 +1301,6 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 0;
 	PlayerInfo[playerid][pMinalczasnazdpr] = 0;
 	PlayerInfo[playerid][pWtrakcietestprawa] = 0;
-	PlayerInfo[playerid][pPraojazdyniewylosowane] = 0;
 	PlayerInfo[playerid][pLinia55] = 0;
 	PlayerInfo[playerid][pLinia72] = 0;
 	PlayerInfo[playerid][pLinia82] = 0;

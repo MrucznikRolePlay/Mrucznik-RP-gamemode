@@ -1,0 +1,19 @@
+{
+    "name": "zabierzobiekt",
+    "description": "Odczepia obiekt od gracza.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "removeobject"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "21.08.2019"
+}

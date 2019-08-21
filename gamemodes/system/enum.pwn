@@ -1423,7 +1423,6 @@ enum pInfo
 	pSprawdzczyzdalprawko,
 	pMinalczasnazdpr,
 	pWtrakcietestprawa,
-	pPraojazdyniewylosowane[9],
 	pLinia55,
 	pLinia72,
 	pLinia82,
@@ -2534,5 +2533,6 @@ new nexac_ac_names[53][] = {
 	"Anti-Ddos",
 	"Anti-NOP's"
 };
+
 
 //EOF

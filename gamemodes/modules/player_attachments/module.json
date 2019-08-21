@@ -1,0 +1,11 @@
+{
+    "name": "player_attachments",
+    "description": "Modu³ odpowiedzialny za zarz¹dzanie obiektami przyczepialnymi do gracza.",
+    "author": "Mrucznik",
+    "timers": false,
+    "callbacks": true,
+    "mysql": true,
+    "files": [],
+    "commands": true,
+    "date": "10.08.2019"
+}

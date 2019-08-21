@@ -216,23 +216,6 @@ sendErrorMessage(id, string:msg[]) {
 	format(_str,128,"»» %s", msg);
 	return SendClientMessage(id, COLOR_LIGHTRED, _str);
 }
-//2.5.2
-/*
-GetMajatek(playerid)
-{
-	new vehvalues;
-	for(new i=0;i<MAX_CAR_SLOT;i++)
-    {
-		new car_id = PlayerInfo[playerid][pCars][i];
-        if( car_id != 0 && CarData[car_id][c_UID] != 0)
-        {
-            vehvalues += VehiclePrice[CarData[car_id][c_Model]];
-        }
-    }
-	return kaska[playerid]+PlayerInfo[playerid][pAccount]+vehvalues+Dom[PlayerInfo[playerid][pDom]][hCena];
-}
-
-*/
 
 //WRZUCANIE DO DEMORGAN
 JailDeMorgan(playerid)
@@ -336,26 +319,6 @@ public OznaczCzitera(playerid)
 	return 1;
 }
 
-/*stock ListaCziterow(playerid)
-{
-	new string[32];
-	SendClientMessage(playerid, COLOR_RED, "Lista cziterów u których wykryto s0beita:");
-	foreach(new i : Player)
-	{
-		if(GetPVarInt(i, "AC_oznaczony") == 1)
-		{
-			format(string, sizeof(string), "%s[%d]", GetNick(i), i);
-			SendClientMessage(playerid, COLOR_WHITE, string);
-		}
-	}
-}*/
-/*
-IsAValidURL(string[])
-{
-	if(regex_exmatch(string, regexURL) >= 0 )
-		return 1;
-	return 0;
-}*/
 GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
@@ -11790,44 +11753,6 @@ public TourCamera(playerid, step)
         SetPVarInt(playerid, "tourcameratimer", SetTimerEx("TourCamera", lTime, 0, "dd", playerid, step+1));
     return 1;
 }
-
-public MyItems_Load(playerid)
-{
-    new str[256], model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, uid, active, bone;
-    format(str, 256, "SELECT `model`, `id`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`, `active`,`bone` FROM `mru_playeritems` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
-    mysql_query(str);
-    mysql_store_result();
-    while(mysql_fetch_row_format(str, "|"))
-    {
-        sscanf(str, "p<|>ddfffffffffdd", model, uid, x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-        CallRemoteFunction("SEC_MyItems_HandleItems", "dddfffffffffdd", playerid, model, uid, x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-    }
-    mysql_free_result();
-    //CallRemoteFunction("SEC_MyItems_HandleOne", "dd", playerid, 19065);
-    InitMyItems[playerid] = true;
-}
-/*
-stock StartTrashCollecting(playerid)
-{
-	if(pTrashCollected[playerid] <= 5)//Pierwsza strefa
-	{
-		trasherPoint[playerid] = CreateDynamicCP(Float:x, Float:y, Float:z, 10.0, 0,0,playerid,STREAMER_CP_SD,-1,0);
-		sendTipMessageEx(playerid, COLOR_RED, "Na tej strefie znajdziesz 5 œmietników");
-	}
-	return 1;
-}
-stock ShowPlayerTrashForZone(playerid, zoneid) 
-{
-	if(pTrashCollected[playerid] <= 5)
-	{
-		trashCanPoint1[playerid] = CreateDynamicCP();
-		trashCanPoint2[playerid] = CreateDynamicCP(); 
-		trashCanPoint3[playerid] = CreateDynamicCP(); 
-		trashCanPoint4[playerid] = CreateDynamicCP();
-		trashCanPoint5[playerid] = CreateDynamicCP(); 
-	}
-	return 1;
-}*/ 
 //--------------------------------------------------
 
 

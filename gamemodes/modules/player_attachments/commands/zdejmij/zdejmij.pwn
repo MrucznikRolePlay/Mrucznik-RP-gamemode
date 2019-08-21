@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ dnobiekt ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  zdejmij                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "zdejmij_impl.pwn"
 
-YCMD:dnobiekt(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_zdejmij()
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
-	{
-	    new Float:oX;
-	    new Float:oY;
-	    new Float:oZ;
-	    new Float:roX;
-	    new Float:roY;
-	    new Float:roZ;
-	    new Float:soX;
-	    new Float:soY;
-	    new Float:soZ;
-        new giveplayerid, index, obikt, kosc;
-		if(sscanf(params, "k<fix>dddfffffffff", giveplayerid, index, obikt, kosc, oX, oY, oZ, roX, roY, roZ, soX, soY, soZ)) return 1;
-		SetPlayerAttachedObject(giveplayerid,index,obikt, kosc, oX, oY, oZ, roX, roY, roZ, soX, soY, soZ); //kox
-	}
-	return 1;
+    new command = Command_GetID("zdejmij");
+
+    //aliases
+    Command_AddAlt(command, "zdejmijprzedmiot");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zdejmij(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zdejmuje przyczepiane przedmioty.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zdejmij_Impl(playerid);
 }

@@ -27,7 +27,6 @@
 //-----------------<[ Include: ]>-------------------
 #include "premium_dialogs.pwn"
 
-//-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
 premium_ConvertToNewSystem(playerid)
 {
@@ -50,129 +49,70 @@ premium_clearCache(playerid)
 	PremiumInfo[playerid][pKP] = 0;
 	PremiumInfo[playerid][pExpires] = 0;
 
-	for(new i; i<MAX_PREMIUM_SKINS; i++)
-	{
-		UniqueSkins[playerid][i] = false;
-	}
+	VECTOR_clear(VPremiumSkins[playerid]);
 }
 
 premium_loadForPlayer(playerid)
 {
-
 	if(PlayerInfo[playerid][pDonateRank] != 0)
 	{
 		premium_ConvertToNewSystem(playerid);
 	}
 
-	new qr[256], kpMC, kpStarted, kpEnds, kpLastLogin, kpActive;
+	new kpMC, kpStarted, kpEnds, kpLastLogin, kpActive;
+	MruMySQL_LoadPremiumData(playerid, kpMC, kpEnds, kpStarted, kpLastLogin, kpActive);
 
-	format(qr, sizeof(qr), "SELECT `p_MC`, UNIX_TIMESTAMP(`p_endDate`), UNIX_TIMESTAMP(`p_startDate`), UNIX_TIMESTAMP(`p_LastCheck`), `p_activeKp` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	mysql_query(qr);
-	mysql_store_result();
+	if(kpActive)
 	{
-		mysql_fetch_row_format(qr, "|");
-        mysql_free_result();
-        sscanf(qr, "p<|>ddddd", kpMC, kpEnds, kpStarted, kpLastLogin, kpActive);
-
-
-        if(kpActive)
-        {
-        	new shouldEnd = kpEnds-(gettime()+3600);
-			if(kpEnds != 0 && shouldEnd <= 0)
+		new shouldEnd = kpEnds-(gettime()+3600);
+		if(kpEnds != 0 && shouldEnd <= 0)
+		{
+			sendErrorMessage(playerid, "Twoje konto premium wygas³o!");
+			PremiumInfo[playerid][pKP] = 0;
+			ZabierzKP(playerid);
+		}
+		else
+		{
+			new expirationTime = kpEnds-gettime();
+			if(expirationTime < KP_TYDZIEN)
 			{
-			    sendErrorMessage(playerid, "Twoje konto premium wygas³o!");
-			    PremiumInfo[playerid][pKP] = 0;
-			    ZabierzKP(playerid);
+				_MruAdmin(playerid, 
+					sprintf("UWAGA! Twoje konto premium wygasa za %d dni i %d godzin", 
+						floatround(floatdiv(expirationTime, 86400), floatround_floor), 
+						floatround(floatdiv(expirationTime, 3600), floatround_floor)%24
+					)
+				);
 			}
 			else
 			{
-				new lVal = kpEnds-gettime();
-
-				if(lVal < KP_TYDZIEN)
-				{
-					format(qr, 170, "UWAGA! Twoje konto premium wygasa za %d dni i %d godzin.", floatround(floatdiv(lVal, 86400), floatround_floor), floatround(floatdiv(lVal, 3600), floatround_floor)%24);
-					_MruAdmin(playerid, qr);
-				}
-				else
-				{
-					_MruAdmin(playerid, "Jesteœ posiadaczem konta premium! :)");
-				}
-				PremiumInfo[playerid][pKP] = 1;
+				_MruAdmin(playerid, "Jesteœ posiadaczem konta premium! :)");
 			}
-			if(IsPlayerPremium(playerid)) PremiumInfo[playerid][pExpires] = kpEnds;
-        }
-
-        if(kpMC > 0) PremiumInfo[playerid][pMC] = kpMC;
-        
-	}
-
-	format(qr, sizeof(qr), "SELECT `s_ID` FROM `mru_premium_skins` WHERE `s_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	mysql_query(qr);
-	new skinID;
-	mysql_store_result();
-	{
-		if(mysql_num_rows()>0)
-		{
-			while(mysql_fetch_row_format(qr, "|"))
-			{
-				sscanf(qr, "p<|>d", skinID);
-
-				for(new i; i<MAX_PREMIUM_SKINS; i++)
-					if(SkinyPremium[i][Model] == skinID)
-						UniqueSkins[playerid][i] = true;
-			}
+			PremiumInfo[playerid][pKP] = 1;
 		}
-        mysql_free_result();
+		if(IsPlayerPremium(playerid)) 
+		{
+			PremiumInfo[playerid][pExpires] = kpEnds;
+		}
 	}
+
+	if(kpMC > 0) PremiumInfo[playerid][pMC] = kpMC;
+
+	MruMySQL_LoadPlayerPremiumSkins(playerid);
 }
 
-premium_saveMc(playerid)
-{
-	new query[128];
-    format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	mysql_query(query);
-	mysql_store_result();
-    if(mysql_num_rows())
-    {
-        mysql_free_result();
-        format(query, sizeof(query), "UPDATE `mru_premium` SET `p_MC`='%d' WHERE `p_charUID`='%d'", PremiumInfo[playerid][pMC], PlayerInfo[playerid][pUID]);
-        mysql_query(query);
-    }
-    else
-    {
-        mysql_free_result();
-        if(PremiumInfo[playerid][pMC] > 0)
-        {
-            format(query, sizeof(query), "INSERT INTO `mru_premium` (`p_charUID`, `p_MC`) VALUES('%d', '%d')", PlayerInfo[playerid][pUID], PremiumInfo[playerid][pMC]);
-            mysql_query(query);
-        }
-    }
-}
-
-premium_printMcQuantity(playerid)
+premium_printMcBalance(playerid)
 {
 	return _MruGracz(playerid, sprintf("Aktualnie na Twoim koncie znajduje siê %d MruCoins.", PremiumInfo[playerid][pMC]));
 }
 
+//---< Private >---
 ZabierzKP(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
 		Log(premiumLog, E_LOGLEVEL:DEBUG, "%s zabrano KP", GetPlayerLogName(playerid));
 		PremiumInfo[playerid][pKP] = 0;
-		new query[128];
-		format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-    	mysql_query(query);
-    	mysql_store_result();
-        if(mysql_num_rows())
-        {
-            format(query, sizeof(query), "UPDATE `mru_premium` SET `p_activeKp`=0, `p_endDate`=NOW() WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-            mysql_query(query);
-        }
-        else
-        {
-        	Log(premiumLog, ERROR, "ERROR: ZabierzKP zosta³o wykonane na osobie, która nie posiada³a premium! %s", GetPlayerLogName(playerid));
-        }
+		MruMySQL_RemoveKP(playerid);
 	}
 }
 
@@ -181,40 +121,27 @@ DajKP(playerid, time, bool:msg=true)
 	if(IsPlayerConnected(playerid))
     {
 		Log(premiumLog, E_LOGLEVEL:DEBUG, "%s nadano KP na %d", GetPlayerLogName(playerid), time);
-        new query[170];
-        format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-    	mysql_query(query);
-    	mysql_store_result();
-        if(mysql_num_rows())
-        {
-            format(query, sizeof(query), "UPDATE `mru_premium` SET `p_endDate`=FROM_UNIXTIME('%d'), `p_startDate`=NOW(), `p_LastCheck`=NOW(), `p_activeKp`=1 WHERE `p_charUID`='%d'", time, PlayerInfo[playerid][pUID]);
-            mysql_query(query);
-        }
-        else
-        {
-            format(query, sizeof(query), "INSERT INTO `mru_premium` (`p_endDate`, `p_charUID`, `p_LastCheck`, `p_startDate`, `p_activeKp`) VALUES(FROM_UNIXTIME('%d'), '%d', NOW(), NOW(), 1)", time, PlayerInfo[playerid][pUID]);
-            mysql_query(query);
-        }
-        mysql_free_result();
+        MruMySQL_SetKP(playerid, time);
 
-        new lVal = time-gettime();
-
-        if(lVal > 0 && time != 0)
+        new expirationTime = time-gettime();
+        if(expirationTime > 0 && time != 0)
         {
         	if(msg)
         	{
-	            format(query, 170, "Otrzyma³eœ Konto Premium. Wygasa ono za %d dni i %d godzin.", floatround(floatdiv(lVal, 86400), floatround_floor), floatround(floatdiv(lVal, 3600), floatround_floor)%24);
-	            _MruAdmin(playerid, query);
+	            _MruAdmin(playerid, 
+					sprintf("Otrzyma³eœ Konto Premium. Wygasa ono za %d dni i %d godzin.", 
+						floatround(floatdiv(expirationTime, 86400), floatround_floor), 
+						floatround(floatdiv(expirationTime, 3600), floatround_floor)%24
+					)
+				);
         	}
 
 			PremiumInfo[playerid][pExpires] = time;
-
             PremiumInfo[playerid][pKP] = 1;
         }
         else if(time == 0)
         {
             _MruAdmin(playerid, "Otrzyma³eœ konto Premium na czas nieokreœlony.");
-
             PremiumInfo[playerid][pKP] = 1;
         }
     }
@@ -228,10 +155,9 @@ DajMC(playerid, mc)
 		Log(premiumLog, ERROR,"ERROR: funkcja DajMC miala ujemna wartosc dla %s Wartosc: %d", GetPlayerLogName(playerid), mc);
 		return 0;
 	}
+
 	PremiumInfo[playerid][pMC] += mc;
-
-	premium_saveMc(playerid);
-
+	MruMySQL_SaveMc(playerid);
 	return 1;
 }
 
@@ -243,10 +169,9 @@ ZabierzMC(playerid, mc)
 		Log(premiumLog, ERROR, "ERROR: funkcja ZabierzMC miala ujemna wartosc dla %s", GetPlayerLogName(playerid), mc);
 		return 0;
 	}
+
 	PremiumInfo[playerid][pMC] -= mc;
-
-	premium_saveMc(playerid);
-
+	MruMySQL_SaveMc(playerid);
 	return 1;
 }
 
@@ -281,51 +206,38 @@ KupPojazdPremium(playerid, id)
 		GetPlayerLogName(playerid), 
 		VehicleNames[PojazdyPremium[id][Model]-400], 
 		PojazdyPremium[id][Cena]);
-	premium_printMcQuantity(playerid);
+	premium_printMcBalance(playerid);
 	DialogMenuDotacje(playerid);
 	return 1;
 }
 
-KupSkinPremium(playerid, skin)
+KupPrzedmiotPremium(playerid, id)
 {
-	new id = -1;
-
-	for(new i; i<MAX_PREMIUM_SKINS; i++)
+	if(PremiumInfo[playerid][pMC] < PrzedmiotyPremium[id][Cena])
 	{
-		if(SkinyPremium[i][Model] == skin)
-		{
-			id = i;
-			break;
-		}
+		sendErrorMessage(playerid, "Nie staæ Ciê na ten przedmiot!");
+		return DialogPrzedmioty(playerid);
 	}
 
-	if(id==-1) return DialogSkiny(playerid);
+	ZabierzMC(playerid, PrzedmiotyPremium[id][Cena]);
 
-	if(PremiumInfo[playerid][pMC] < UNIKATOWY_SKIN_CENA)
-	{
-		sendErrorMessage(playerid, "Nie staæ Ciê na ten skin");
-		return DialogSkiny(playerid);
-	}
-
-	new string[128];
-
-	format(string, sizeof(string), "INSERT INTO `mru_premium_skins` (`s_charUID`, `s_ID`) VALUES('%d', '%d')", PlayerInfo[playerid][pUID], SkinyPremium[id][Model]);
-    mysql_query(string);
-
-	Log(premiumLog, INFO, "%s kupi³ unikatowy skin %d za %dMC",
+	Log(premiumLog, INFO, "%s kupi³ unikatowy przedmiot %d za %dMC",
 		GetPlayerLogName(playerid), 
-		SkinyPremium[id][Model], 
-		UNIKATOWY_SKIN_CENA);
+		PrzedmiotyPremium[id][Model],
+		PrzedmiotyPremium[id][Cena]);
+	
+	PlayerAttachments_Create(playerid, 
+		PrzedmiotyPremium[id][Model],
+		PrzedmiotyPremium[id][Bone],
+		0.0, 0.0, 0.0,
+		0.0, 0.0, 0.0,
+		1.0, 1.0, 1.0
+	);
+	
+	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", PrzedmiotyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
+	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /przedmioty");
 
-	UniqueSkins[playerid][id] = true;
-
-	ZabierzMC(playerid, UNIKATOWY_SKIN_CENA);
-
-	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ skin o ID %d za %d MC.", SkinyPremium[id][Model], UNIKATOWY_SKIN_CENA));
-	_MruAdmin(playerid, "Listê swoich skinów premium znajdziesz pod komend¹ /skiny");
-
-	premium_printMcQuantity(playerid);
-
+	premium_printMcBalance(playerid);
 	return 1;
 }
 
@@ -352,7 +264,7 @@ KupSlotPojazdu(playerid)
 		GetPlayerLogName(playerid));
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie slot na auto za %d MC. Masz teraz %d slotów.", CAR_SLOT_CENA, MRP_GetPlayerCarSlots(playerid)));
 
-	premium_printMcQuantity(playerid);
+	premium_printMcBalance(playerid);
 	DialogMenuDotacje(playerid);
 	return 1;
 }
@@ -374,8 +286,34 @@ KupZmianeNicku(playerid)
 		GetPlayerLogName(playerid));
 	_MruAdmin(playerid, sprintf("Kupi³eœ sobie zmianê nicku za %d MC. Masz teraz %d zmian nicku.", ZMIANA_NICKU_CENA, MRP_GetPlayerNickChanges(playerid)));
 
-	premium_printMcQuantity(playerid);
+	premium_printMcBalance(playerid);
 	DialogMenuDotacje(playerid);
+	return 1;
+}
+
+KupSkinPremium(playerid, id)
+{
+	if(PremiumInfo[playerid][pMC] < SkinyPremium[id][Cena])
+	{
+		sendErrorMessage(playerid, "Nie staæ Ciê na ten skin");
+		return DialogSkiny(playerid);
+	}
+
+	MruMySQL_InsertSkin(playerid, id);
+
+	Log(premiumLog, INFO, "%s kupi³ unikatowy skin %d za %dMC",
+		GetPlayerLogName(playerid), 
+		SkinyPremium[id][Model], 
+		SkinyPremium[id][Cena]);
+
+	VECTOR_push_back_val(VPremiumSkins[playerid], SkinyPremium[id][Model]);
+
+	ZabierzMC(playerid, SkinyPremium[id][Cena]);
+
+	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ skin o ID %d za %d MC.", SkinyPremium[id][Model], SkinyPremium[id][Cena]));
+	_MruAdmin(playerid, "Listê swoich skinów premium znajdziesz pod komend¹ /skiny");
+
+	premium_printMcBalance(playerid);
 	return 1;
 }
 
@@ -387,7 +325,7 @@ KupNumerTelefonu(playerid, string:_numer[])
 
 	new numer = strval(_numer);
 
-	if(!MRP_IsPhoneNumberAvailable(numer))
+	if(!MruMySQL_IsPhoneNumberAvailable(numer))
 	{
 
 		new cena;
@@ -416,7 +354,7 @@ KupNumerTelefonu(playerid, string:_numer[])
 		Log(premiumLog, INFO, "%s kupil numer telefonu %d za %dMC.",
 			GetPlayerLogName(playerid), numer, cena);
 
-		premium_printMcQuantity(playerid);
+		premium_printMcBalance(playerid);
 		DialogMenuDotacje(playerid);
 	}
 	else
@@ -444,29 +382,19 @@ IsPlayerPremiumOld(playerid)
 		return 1;
 	return 0;
 }
-/*
-IsAUnikat(modelid)
+
+stock IsAUnikatowyPojazd(modelid)
 {
 	for(new i; i<MAX_PREMIUM_VEHICLES; i++)
 		if(modelid == PojazdyPremium[i][Model])
 			return 1;
 	return 0;
-}*/
-
-PlayerHasSkin(playerid, skinid)
-{
-	for(new i; i<MAX_PREMIUM_SKINS; i++)
-	{
-		if(SkinyPremium[i][Model] == skinid)
-		{
-			return UniqueSkins[playerid][i];
-		}
-	}
-	return false;
 }
 
+PlayerHasSkin(playerid, skin)
+{
+	return VECTOR_find_val(VPremiumSkins[playerid], skin) != INVALID_VECTOR_INDEX;
+}
 
-//------------------<[ MySQL: ]>--------------------
-//-----------------<[ Komendy: ]>-------------------
 
 //end
