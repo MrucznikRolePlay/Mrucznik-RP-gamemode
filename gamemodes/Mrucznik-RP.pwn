@@ -201,11 +201,11 @@ public OnGameModeInit()
 		SendRconCommand("exit");
 		return 0;
 	}
-	else
+	#endif
+	if(!dini_Exists("production.info")) //brak production.info == serwer developerski
 	{
 		DEVELOPMENT = true;
 	}
-	#endif
 
 	//-------<[ Anty DeAMX ]>-------
 	AntiDeAMX(); // Hammer time
