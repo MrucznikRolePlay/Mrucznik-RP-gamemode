@@ -118,7 +118,7 @@ YCMD:dolacz(playerid, params[], help)
 				}
 				else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,-1932.3859,276.2117,41.0391) || PlayerToPoint(5.0, playerid,2769.8376,-1610.7819,10.9219))
 				{
-				    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ wzi¹c tej pracy!"); return 1; }
+				    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || (GetPlayerOrg(playerid) != 0 && GetPlayerOrg(playerid) != 15)) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ wzi¹c tej pracy!"); return 1; }
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Mechanikiem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");

@@ -77,6 +77,41 @@ YCMD:windalock(playerid, params[], help)
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			}
 		}
+		else if(IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
+		|| IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
+		|| IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
+		|| IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
+		|| IsPlayerInRangeOfPoint(playerid,2,589.23029, -1479.66357, 91.74274)//Dyrektorat
+		|| IsPlayerInRangeOfPoint(playerid,2,613.4404,-1471.9745,73.8816)//DACH
+		|| IsPlayerInRangeOfPoint(playerid,2,596.5255, -1489.2544, 15.3587)//Parking
+		|| IsPlayerInRangeOfPoint(playerid,2,1093.0625,1530.8715,6.6905)//Parking podziemny
+		|| IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
+		|| IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
+		|| IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732))//Sale Treningowe
+		{
+			if(PlayerInfo[playerid][pLider] != FRAC_FBI && PlayerInfo[playerid][pMember] != FRAC_FBI)
+			{
+				sendErrorMessage(playerid, "Nie masz uprawnieñ do otwierania/zamykania windy!"); 
+				return 1;
+			}
+			if(level > 11 || level < 0)
+			{
+				sendErrorMessage(playerid, "Poziom od 0 do 11");
+				return 1;
+			}
+			if(levelLock[FRAC_FBI][level] == 1)
+			{
+				levelLock[FRAC_FBI][level] = 0; 
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i odblokowuje poziom [%d].", GetNick(playerid), level);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+			else if(levelLock[FRAC_FBI][level] == 0)
+			{
+				levelLock[FRAC_FBI][level] = 1; 
+				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [%d].", GetNick(playerid), level);
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			}
+		}
 		else if((IsPlayerInRangeOfPoint(playerid,3,1311.5483,-1361.2096,62.8567) //-1 archiwum
         || IsPlayerInRangeOfPoint(playerid,3,1305.9991,-1326.1344,52.5659) // 0 recepcja 
         || IsPlayerInRangeOfPoint(playerid,3,1309.9982,-1364.2216,59.6271) // 1 korytarze

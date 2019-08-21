@@ -206,7 +206,7 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 	}
 	if(strlen(text) < 78)
 	{
-		if(strfind(jakMowi, "krzyczy", false, 0))
+		if(strfind(jakMowi, "krzyczy", true, 0)  != -1)
 		{
 			format(string, sizeof(string), "%s %s: %s!!!", GetNick(playerid, true), jakMowi, text);
 			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
@@ -227,13 +227,6 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 
 			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid, true), jakMowi, text);
 			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-
-			if(strfind(jakMowi, "krzyczy", false, 0))
-			{
-				format(string, sizeof(string), "[.] %s!!!", text);
-				ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-				return 1;
-			}
 			format(string, sizeof(string), "[.] %s", text2);
 			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
