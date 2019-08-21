@@ -82,7 +82,7 @@ hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:f
 
 hook OnPlayerDisconnect(playerid, reason)
 {
-	for(new index; index<MAX_ATTACHED_OBJECTS; index++)
+	for(new index; index<MAX_PLAYER_ATTACHED_OBJECTS; index++)
 	{
 		AttachedObjects[playerid][index][ao_active] = false;
 	}
@@ -91,7 +91,7 @@ hook OnPlayerDisconnect(playerid, reason)
 
 hook OnPlayerSpawn(playerid)
 {
-	for(new index; index<MAX_ATTACHED_OBJECTS; index++)
+	for(new index; index<MAX_PLAYER_ATTACHED_OBJECTS; index++)
 	{
 		if(AttachedObjects[playerid][index][ao_active])
 		{
@@ -114,10 +114,10 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new item = DynamicGui_GetDataInt(playerid, listitem);
 			
-			if(HasPlayerActiveAttachedObject(playerid, model))
+			if(HasPlayerActiveAttachedObject(playerid, item))
 			{
 				DialogPlayerAttachedItems(playerid);
-				sendErrorMessage(playerid, "Masz ju¿ przyczepiony ten obiekt.")
+				sendErrorMessage(playerid, "Masz ju¿ przyczepiony ten obiekt.");
 				return 1;
 			}
 
