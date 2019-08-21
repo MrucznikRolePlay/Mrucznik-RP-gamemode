@@ -751,6 +751,15 @@ public TimerZarazony(playerid)
     }
 }
 //-----------------<[ Funkcje: ]>-------------------
+stock GetPlayerSkinEx(playerid)
+{
+	new value = GetPlayerSkin(playerid);
+	if(value == 0)
+	{
+		value = GetPlayerCustomSkin(playerid); 
+	}
+	return value; 
+}
 UpdateTableForPlayer(playerid)
 {
     new string[64];
@@ -771,7 +780,7 @@ UpdateTableForPlayer(playerid)
     PlayerTextDrawSetString(playerid, text3[playerid], string);
     format(string, sizeof(string), "~y~Pozostali: ~w~%d", AlivePlayers);
     PlayerTextDrawSetString(playerid, text4[playerid], string);
-    new pSkinID  = GetPlayerSkin(playerid);
+    new pSkinID  = GetPlayerSkinEx(playerid); 
     PlayerTextDrawSetPreviewModel(playerid, skinTXD[playerid], pSkinID);
     PlayerTextDrawShow(playerid, skinTXD[playerid]);
     return 1;
@@ -908,7 +917,7 @@ CMD:dolaczzombie(playerid)
         PlayerEventPoint[playerid] = 0;
         AlivePlayers++;
         SetPlayerVirtualWorld(playerid, ZOMBIE_VW);
-		firstSkinID[playerid] = GetPlayerCustomSkin(playerid);
+		firstSkinID[playerid] = GetPlayerSkinEx(playerid); 
         memberTimer[playerid] = SetTimerEx("partyMember", 5000, false, "d", playerid);
     }
     else
