@@ -25,6 +25,8 @@
 
 enum attached_object_data
 {
+    ao_model,
+    ao_bone,
     Float:ao_x,
     Float:ao_y,
     Float:ao_z,
@@ -39,7 +41,7 @@ enum attached_object_data
 new AttachedObjects[MAX_PLAYERS][MAX_PLAYER_ATTACHED_OBJECTS][attached_object_data];
 
 //-----------------<[ Zmienne: ]>-------------------
-new Map:MAttachedItems[MAX_PLAYERS];
+new Vector:VAttachedItems[MAX_PLAYERS];
 
 //------------------<[ Forwardy: ]>--------------------
 

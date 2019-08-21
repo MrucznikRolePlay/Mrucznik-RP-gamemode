@@ -1,0 +1,13 @@
+{
+    "name": "zdejmij",
+    "description": "Zdejmuje przyczepiane przedmioty.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "zdejmijprzedmiot"
+    ],
+    "parameters": [],
+    "date": "21.08.2019"
+}

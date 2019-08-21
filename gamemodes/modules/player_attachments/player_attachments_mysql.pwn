@@ -26,22 +26,21 @@
 //
 
 //------------------<[ MySQL: ]>--------------------
-PlayerAttachments_Create(playerid, itemid)
+PlayerAttachments_Create(playerid, model, bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz)
 {
     new str[512];
-    format(str, sizeof(str), "INSERT INTO `mru_playeritems` (`model`, `UID`, `bone`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sz`, `sy`, `sz`)"\
+    format(str, sizeof(str), "INSERT INTO `mru_playeritems` (`UID`, `model`, `bone`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sz`, `sy`, `sz`)"\
 					 " VALUES ('%d', '%d', '%d', '%f', '%f', '%f', '%f', '%f', '%f', '%f', '%f', '%f')", 
-		PrzedmiotyPremium[itemid][Model], 
-		PlayerInfo[playerid][pUID], 
-		/*TODO: PrzedmiotyPremium[itemid][bone]*/ 2,
-		0.0, 0.0, 0.0,
-		0.0, 0.0, 0.0,
-		1.0, 1.0, 1.0
+		PlayerInfo[playerid][pUID],
+		model, bone,
+        x, y, z,
+        rx, ry, rz,
+        sx, sy, sz
 	);
     mysql_query(str);
     new id = mysql_insert_id();
 
-	map_add(MAttachedItems[playerid], PrzedmiotyPremium[itemid][Model], true);
+	VECTOR_push_back_val(VAttachedItems[playerid], model);
     return id;
 }
 
@@ -50,7 +49,7 @@ PlayerAttachments_Remove(playerid, model)
     new str[256];
     format(str, sizeof(str), "DELETE FROM mru_playeritems WHERE `uid`=%d AND `model`='%d'", PlayerInfo[playerid][pUID], model);
     mysql_query(str);
-	map_remove(MAttachedItems[playerid], model);
+	VECTOR_remove_val(VAttachedItems[playerid]);
 }
 
 PlayerAttachments_LoadItems(playerid)
@@ -62,7 +61,7 @@ PlayerAttachments_LoadItems(playerid)
     while(mysql_fetch_row_format(str, "|"))
     {
         sscanf(str, "p<|>dfffffffffdd", model, x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-        map_add(MAttachedItems[playerid], model, active);
+        VECTOR_push_back_val(VAttachedItems[playerid], model);
 		if(active)
 		{
 			AttachPlayerItem(playerid, model, bone, x, y, z, rx, ry, rz, sx, sy, sz);
@@ -83,7 +82,6 @@ PlayerAttachments_LoadItem(playerid, model)
     if(mysql_fetch_row_format(str, "|"))
     {
         sscanf(str, "p<|>fffffffffdd", x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-        map_add(MAttachedItems[playerid], model, active);
 		if(active)
 		{
 			index = AttachPlayerItem(playerid, model, bone, x, y, z, rx, ry, rz, sx, sy, sz);

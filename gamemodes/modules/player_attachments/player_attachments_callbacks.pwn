@@ -28,24 +28,14 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
-hook OnPlayerConnect(playerid)
-{
-	MAttachedItems[playerid] = map_new();
-}
-
-hook OnPlayerDisconnect(playerid, reason)
-{
-	map_delete(MAttachedItems[playerid]);
-	return 1;
-}
-
 hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
-	//TODO: Move premium items here
-	if(map_has_key(MAttachedItems[playerid], modelid))
+	if(VECTOR_find_val(VAttachedItems[playerid], modelid) != INVALID_VECTOR_INDEX)
 	{
 		if(response)
 		{
+			//TODO: Ograniczenia edycji
+
 			SendClientMessage(playerid, COLOR_GREEN, "Edytowa³eœ pozycjê swojego przedmiotu.");
 	
 			AttachedObjects[playerid][index][ao_x] = fOffsetX;
@@ -86,12 +76,34 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new item = DynamicGui_GetDataInt(playerid, listitem);
-			new index = PlayerAttachments_LoadItem(playerid, item);
 			PlayerAttachments_SetActive(playerid, item, true);
+			new index = PlayerAttachments_LoadItem(playerid, item);
+			if(index == INVALID_ATTACHED_OBJECT_INDEX)
+			{
+				sendErrorMessage(playerid, "Masz zbyt du¿o za³o¿onych przedmiotów. U¿yj komendy /zdejmij aby zdj¹æ jakiœ przedmiot.");
+				return 1;
+			}
 
-			//TODO: Pytanie, czy chcesz edytowaæ pozycjê obiektu 
-			//TODO: Zdejmowanie obiektu
-			EditAttachedObject(playerid, index);
+			ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_EDYCJA, DIALOG_STYLE_PREVIEW_MODEL, "Przedmioty - edycja", "Czy chcesz edytowaæ pozycjê przedmiotu?", "Tak", "Nie");
+			SetPVarInt(playerid, "AttachedItem_EditIndex", index);
+		}
+		return -2;
+	}
+	else if(dialogid == DIALOG_PRZEDMIOTYGRACZA_EDYCJA)
+	{
+		if(response)
+		{
+			EditAttachedObject(playerid, GetPVarInt(playerid, "AttachedItem_EditIndex"));
+		}
+		return -2;
+	}
+	
+	else if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ)
+	{
+		if(response)
+		{
+			new index = DynamicGui_GetDataInt(playerid, listitem);
+			DetachPlayerItem(playerid, index);
 		}
 		return -2;
 	}

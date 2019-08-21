@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  zdejmij                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,36 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "przedmioty\przedmioty.pwn"
-#include "zdejmij\zdejmij.pwn"
-
+#include "zdejmij_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_zdejmij()
 {
-    command_przedmioty();
-    command_zdejmij();
+    new command = Command_GetID("zdejmij");
+
+    //aliases
+    Command_AddAlt(command, "zdejmijprzedmiot");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zdejmij(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zdejmuje przyczepiane przedmioty.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zdejmij_Impl(playerid);
 }

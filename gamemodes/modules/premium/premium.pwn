@@ -226,7 +226,13 @@ KupPrzedmiotPremium(playerid, id)
 		PrzedmiotyPremium[id][Model],
 		PrzedmiotyPremium[id][Cena]);
 	
-	PlayerAttachments_Create(playerid, id);
+	PlayerAttachments_Create(playerid, 
+		PrzedmiotyPremium[id][Model],
+		PrzedmiotyPremium[id][Bone],
+		0.0, 0.0, 0.0,
+		0.0, 0.0, 0.0,
+		1.0, 1.0, 1.0
+	);
 	
 	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", PrzedmiotyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
 	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /przedmioty");
