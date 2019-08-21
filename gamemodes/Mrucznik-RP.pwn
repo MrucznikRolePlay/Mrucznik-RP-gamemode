@@ -201,6 +201,10 @@ public OnGameModeInit()
 		SendRconCommand("exit");
 		return 0;
 	}
+	else
+	{
+		DEVELOPMENT = true;
+	}
 	#endif
 
 	//-------<[ Anty DeAMX ]>-------
