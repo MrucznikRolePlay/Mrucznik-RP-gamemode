@@ -911,6 +911,7 @@ CMD:dolaczzombie(playerid)
     if(IsPlayerInRangeOfPoint(playerid, 4.0, POS_ENTER_X, POS_ENTER_Y, POS_ENTER_Z))
     {
         new rand = random(4);
+		
         SetPlayerPos(playerid, randomPosX[rand], randomPosY[rand], randomPosZ[rand]);
         ShowTableForPlayer(playerid);
         PlayerZombieStatus[playerid] = 0;
