@@ -113,13 +113,22 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new item = DynamicGui_GetDataInt(playerid, listitem);
-			PlayerAttachments_SetActive(playerid, item, true);
-			new index = PlayerAttachments_LoadItem(playerid, item);
-			if(index == INVALID_ATTACHED_OBJECT_INDEX)
+			
+			if(HasPlayerActiveAttachedObject(playerid, model))
+			{
+				DialogPlayerAttachedItems(playerid);
+				sendErrorMessage(playerid, "Masz ju¿ przyczepiony ten obiekt.")
+				return 1;
+			}
+
+			if(GetFreeAttachedObjectSlot(playerid) == INVALID_ATTACHED_OBJECT_INDEX)
 			{
 				sendErrorMessage(playerid, "Masz zbyt du¿o za³o¿onych przedmiotów. U¿yj komendy /zdejmij aby zdj¹æ jakiœ przedmiot.");
 				return 1;
 			}
+
+			PlayerAttachments_SetActive(playerid, item, true);
+			new index = PlayerAttachments_LoadItem(playerid, item);
 
 			ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_EDYCJA, DIALOG_STYLE_MSGBOX, "Przedmioty - edycja", "Czy chcesz edytowaæ pozycjê przedmiotu?", "Tak", "Nie");
 			SetPVarInt(playerid, "AttachedItem_EditIndex", index);

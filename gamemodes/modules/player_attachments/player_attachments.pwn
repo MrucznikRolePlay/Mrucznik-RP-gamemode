@@ -58,8 +58,7 @@ DetachPlayerItem(playerid, index)
 
 GetFreeAttachedObjectSlot(playerid)
 {
-	//slot 9 for gamemode items
-	for(new i; i<MAX_PLAYER_ATTACHED_OBJECTS-1; i++) 
+	for(new i; i<MAX_PLAYER_ATTACHED_OBJECTS; i++) 
 	{
 		if(!IsPlayerAttachedObjectSlotUsed(playerid, i))
 		{
@@ -72,6 +71,18 @@ GetFreeAttachedObjectSlot(playerid)
 PlayerHasAttachedObject(playerid, model)
 {
 	return VECTOR_find_val(VAttachedItems[playerid], model) != INVALID_VECTOR_INDEX;
+}
+
+HasPlayerActiveAttachedObject(playerid, model)
+{
+	for(new i; i<MAX_PLAYER_ATTACHED_OBJECTS; i++)
+	{
+		if(AttachedObjects[playerid][i][ao_active] && AttachedObjects[playerid][i][ao_model] == model)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 CheckEditionBoundaries(Float:x, Float:y, Float:z, Float:sx, Float:sy, Float:sz)
