@@ -29,20 +29,22 @@
 //-----------------<[ Callbacki: ]>-----------------
 hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	if(!CheckDialogId(playerid, dialogid)) return -2;
+
 	if(dialogid == 443)
 	{
 		if(response)
 		{
 			new lUID = PlayerInfo[playerid][pKluczeAuta];
-			if(lUID == 0) return 1;
+			if(lUID == 0) return -2;
 
 			new idx = Car_GetIDXFromUID(lUID);
-			if(idx == -1) return 1;
+			if(idx == -1) return -2;
 			if(CarData[idx][c_Keys] != PlayerInfo[playerid][pUID])
 			{
 				SendClientMessage(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta³y zabrane przez w³aœciciela.");
 				PlayerInfo[playerid][pKluczeAuta] = 0;
-				return 1;
+				return -2;
 			}
 			switch(listitem)
 			{
@@ -51,7 +53,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(CarData[idx][c_ID] != 0)
 					{
 						SendClientMessage(playerid, 0xFFC0CB, "Pojazd do którego masz kluczyki jest ju¿ zespawnowany");
-						return 1;
+						return -2;
 					}
 					Car_Spawn(idx);
 					Log(serverLog, INFO, "Gracz %s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(idx));
@@ -62,7 +64,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					new Float:autox, Float:autoy, Float:autoz;
 					new pojazdszukany = CarData[idx][c_ID];
-					if(pojazdszukany == 0) return 1;
+					if(pojazdszukany == 0) return -2;
 					GetVehiclePos(pojazdszukany, autox, autoy, autoz);
 					SetPlayerCheckpoint(playerid, autox, autoy, autoz, 6);
 					SetTimerEx("SzukanieAuta",30000,0,"d",playerid);
@@ -99,7 +101,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				else
 				{
 					SendClientMessage(playerid, 0xFFC0CB, "Ten pojazd nie jest zespawnowany");
-					return 1;
+					return -2;
 				}
 			}
 			else
@@ -132,7 +134,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				else
 				{
 					SendClientMessage(playerid, 0xFFC0CB, "Ten pojazd nie jest zespawnowany");
-					return 1;
+					return -2;
 				}
 			}
 			else
@@ -148,25 +150,25 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	else if(dialogid == D_AUTO)
 	{
-		if(!response) return 1;
+		if(!response) return -2;
 		new lUID = strval(inputtext);
 		if(lUID < 0)
 		{
 			ShowCarsForPlayer(playerid, playerid);
 			SendClientMessage(playerid, COLOR_RED, "× Ten pojazd jest zablokowany, skontaktuj siê z administratorem.");
-			return 1;
+			return -2;
 		}
 
 		ShowPlayerDialogEx(playerid, D_AUTO_ACTION, DIALOG_STYLE_LIST, "Panel pojazdu", "Spawnuj\nRespawnuj\nUnspawnuj\nZnajdŸ\nPoka¿ parking\nPrzemaluj\nZ³omuj\nUsuñ tuning\nRejestracja", "Wybierz", "WyjdŸ");
 		IloscAut[playerid] = lUID;
-		return 1;
+		return -2;
 	}
 	if(dialogid == D_AUTO_ACTION)
 	{
 		if(!response)
 		{
 			ShowCarsForPlayer(playerid, playerid);
-			return 1;
+			return -2;
 		}
 		new lUID = IloscAut[playerid];
 		switch(listitem)
@@ -241,7 +243,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ShowPlayerDialogEx(playerid, D_AUTO_REJESTRACJA, DIALOG_STYLE_INPUT, "Rejestracja", "WprowadŸ nowy numer/tekst na swojej tablicy rejestracyjnej (do 5 znaków):", "Ustaw", "Wróæ");
 			}*/
 		}
-		return 1;
+		return -2;
 	}
 	else if(dialogid == D_AUTO_REJESTRACJA)
 	{
@@ -251,7 +253,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			RunCommand(playerid, "/car",  "");
 			SendClientMessage(playerid, COLOR_GRAD1, "Nieodpowiednia iloœæ znaków.");
-			return 1;
+			return -2;
 		}
 		else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
 			if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' '))
@@ -260,7 +262,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		CarData[lUID][c_Rejestracja] = strval(inputtext);
 		SendClientMessage(playerid, 0xFFC0CB, "Tablica zostanie zmieniona po respawnie.");
-		return 1;
+		return -2;
 	}
 	else if(dialogid == 440)//SYSTEM AUT - kategorie
 	{
@@ -1647,7 +1649,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(!response)
 		{
-			return 1;
+			return -2;
 		}
 	}
 	else if(dialogid == 410)//System samolotów - panel
@@ -1702,7 +1704,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(!response)
 		{
-			return 1;
+			return -2;
 		}
 	}
 	else if(dialogid == 420)//System helikopterów - panel
@@ -1739,7 +1741,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(!response)
 		{
-			return 1;
+			return -2;
 		}
 	}
 	else if(dialogid >= 401 && dialogid <= 409)

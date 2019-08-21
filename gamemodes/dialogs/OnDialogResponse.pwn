@@ -10,18 +10,25 @@ IsDialogProtected(dialogid)
     return false; //dodac dialogi z mysql
 }
 
-//ID DIALOGÓW 9900+ BIZNESY.
-public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+CheckDialogId(playerid, dialogid)
 {
-    if(dialogid < 0) return 1;
+    if(dialogid < 0) return 0;
     if(dialogid != iddialog[playerid])
     {
         if(dialogid == D_ANIMLIST || dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B³êdne ID GUI.");
         Log(serverLog, WARNING, "B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
-        return 1;
+        return 0;
     }
+	return 1;
+}
+
+//ID DIALOGÓW 9900+ BIZNESY.
+public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	if(!CheckDialogId(playerid, dialogid)) return 1;
+
     if(IsDialogProtected(dialogid) || true) //MySQL anti injection
     {
 		for(new i; i<strlen(inputtext); i++)
@@ -16046,7 +16053,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					ShowPlayerDialog(playerid, D_VINYL_J, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Jacuzzi", "Jacuzzi", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, D_VINYL_J, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Jacuzzi", "Jacuzzi", "Wybierz", "Anuluj");
 				}
 			}
 		}
