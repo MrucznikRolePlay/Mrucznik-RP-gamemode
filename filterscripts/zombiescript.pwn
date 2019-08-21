@@ -1021,6 +1021,7 @@ CMD:zabawaon(playerid)
             sendPartyMess(COLOR_GREEN, string);
         }
     }
+    return 1;
 }
 CMD:giveaccessfs(playerid, params[])
 {
@@ -1088,6 +1089,10 @@ CMD:setzombie(playerid, params[])
 			SendClientMessage(playerid, COLOR_GREEN, string);
 			PlayerZombieStatus[giveplayerid] = value;
 			partyMember(giveplayerid);
+            if(value == 2)
+            {
+                AlivePlayers--;
+            }
 
         }
         else

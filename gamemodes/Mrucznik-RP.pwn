@@ -1727,7 +1727,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
-	return 1;
+	return 0;
 }
 
 public StandUp(playerid)
