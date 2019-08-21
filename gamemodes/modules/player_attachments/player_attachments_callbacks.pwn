@@ -84,7 +84,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 
-			ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_EDYCJA, DIALOG_STYLE_PREVIEW_MODEL, "Przedmioty - edycja", "Czy chcesz edytowaæ pozycjê przedmiotu?", "Tak", "Nie");
+			ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_EDYCJA, DIALOG_STYLE_MSGBOX, "Przedmioty - edycja", "Czy chcesz edytowaæ pozycjê przedmiotu?", "Tak", "Nie");
 			SetPVarInt(playerid, "AttachedItem_EditIndex", index);
 		}
 		return -2;
