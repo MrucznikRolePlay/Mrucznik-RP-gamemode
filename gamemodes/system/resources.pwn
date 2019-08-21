@@ -10,6 +10,10 @@ LoadDLSkins()
 	AddCharModelEx(45, 20001, "mrucznikskin07.dff", "mrucznikskin07.txd", 3);//Shrek
 	AddCharModelEx(45, 20002, "mrucznikskin19.dff", "mrucznikskin19.txd", 3);//Pies
 	AddCharModelEx(45, 20003, "mrucznikskin34.dff", "mrucznikskin34.txd", 3);//lll rzesza 
+	AddCharModel(45, 20004, "mrucznikzombie1.dff", "mrucznikzombie1.txd", 3);
+	AddCharModel(45, 20005, "mrucznikzombie2.dff", "mrucznikzombie2.txd", 3);
+	AddCharModel(45, 20006, "mrucznikzombie3.dff", "mrucznikzombie3.txd", 3);
+	AddCharModel(45, 20007, "mrucznikzombie4.dff", "mrucznikzombie4.txd", 3);
 	
 	//SKINY PRZEZNACZONE DLA FRAKCJI 20.101-20.300
 
