@@ -325,7 +325,7 @@ KupNumerTelefonu(playerid, string:_numer[])
 
 	new numer = strval(_numer);
 
-	if(!MruMySQL_IsPhoneNumberAvailable(numer))
+	if(MruMySQL_IsPhoneNumberAvailable(numer))
 	{
 
 		new cena;
