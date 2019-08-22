@@ -36,6 +36,7 @@ command_obiz_Impl(playerid, text[124])
     ID_BUSINESS = GetPlayerBusiness(playerid); 
     format(string, sizeof(string), "%s [%d]: %s", GetNick(playerid), playerid,  text); 
     SendMessageToBiz(ID_BUSINESS, string, KOLOR_NIEBIESKI, 0);
+	Log(chatLog, INFO, "%s biznes chat OOC: %s", GetPlayerLogName(playerid), text);
     return 1;
 }
 

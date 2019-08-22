@@ -38,6 +38,7 @@ command_biz_Impl(playerid, message[124])
 	ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
 	format(string, sizeof(string), "Radio: %s", message);
 	SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
+	Log(chatLog, INFO, "%s biznes chat: %s", GetPlayerLogName(playerid), message);
     return 1;
 }
 
