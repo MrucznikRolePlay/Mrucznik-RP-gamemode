@@ -133,7 +133,7 @@ MruMySQL_LoadPlayerPremiumSkins(playerid)
 
 MruMySQL_IsPhoneNumberAvailable(number) {
     
-    if(100 >= number && number <= 150) return false;
+    if(100 <= number && number <= 150) return false;
     if(number == 555) return false;
     new string[70];
     format(string, sizeof(string), "SELECT `UID` FROM `mru_konta` WHERE `PhoneNr` = %d", number);
