@@ -40,6 +40,27 @@ enum attached_object_data
 }
 new AttachedObjects[MAX_PLAYERS][MAX_PLAYER_ATTACHED_OBJECTS][attached_object_data];
 
+new BoneNames[][] = {
+    "Krêgos³up",
+    "G³owa",
+    "Lewe ramiê",
+    "Prawe ramiê",
+    "Lewa rêka",
+    "Prawa rêka",
+    "Lewe udo",
+    "Prawe udo",
+    "Lewa stopa",
+    "Prawa stopa",
+    "Lewa ³ydka",
+    "Prawa ³ydka",
+    "Lewe przedramiê",
+    "Prawe przedramiê",
+    "Lewy obojczyk",
+    "Prawy obojczyk",
+    "Szyja",
+    "Szczêka"
+};
+
 //-----------------<[ Zmienne: ]>-------------------
 new Vector:VAttachedItems[MAX_PLAYERS];
 

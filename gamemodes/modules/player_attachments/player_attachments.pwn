@@ -162,4 +162,25 @@ DialogAdminRemoveAttachedItems(playerid, giveplayerid)
 	return 1;
 }
 
+DialogBoneSelect(playerid, bone=0)
+{
+	new string[256];
+	for(new i=1; i<19; i++)
+	{
+		if(i == bone)
+		{
+			strcat(string, sprintf(INCOLOR_GREEN"%s\n"INDIALOG_COLOR, BoneNames[i]));
+		}
+		else
+		{
+			strcat(string, sprintf("%s\n", BoneNames[i]));
+		}
+	}
+	ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_KOSC, DIALOG_STYLE_LIST, "Wybierz gdzie przyczepiæ przedmiot.", 
+		string, 
+		"Przyczep",
+		"WyjdŸ"
+	);
+}
+
 //end

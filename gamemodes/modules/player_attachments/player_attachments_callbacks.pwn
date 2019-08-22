@@ -135,15 +135,35 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		return -2;
 	}
-	else if(dialogid == DIALOG_PRZEDMIOTYGRACZA_EDYCJA)
+	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_EDYCJA)
 	{
 		if(response)
 		{
-			EditAttachedObject(playerid, GetPVarInt(playerid, "AttachedItem_EditIndex"));
+			new index = GetPVarInt(playerid, "AttachedItem_EditIndex");
+			DialogBoneSelect(playerid, AttachedObjects[playerid][index][ao_bone]);
 		}
 		return -2;
 	}
-	else if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ)
+	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_KOSC)
+	{
+		if(response)
+		{
+			new index = GetPVarInt(playerid, "AttachedItem_EditIndex");
+			new bone = listitem+1;
+			if(bone < 1 || bone > 18) return 1;
+
+			SetPlayerAttachedObject(playerid, index, AttachedObjects[playerid][index][ao_model], bone, 
+				AttachedObjects[playerid][index][ao_x], AttachedObjects[playerid][index][ao_y], AttachedObjects[playerid][index][ao_z], 
+				AttachedObjects[playerid][index][ao_rx], AttachedObjects[playerid][index][ao_ry], AttachedObjects[playerid][index][ao_rz], 
+				AttachedObjects[playerid][index][ao_sx], AttachedObjects[playerid][index][ao_sy], AttachedObjects[playerid][index][ao_sz]
+			);
+
+			EditAttachedObject(playerid, index);
+			sendTipMessage(playerid, "Wybierz pozycjê obiektu.");
+		}
+		return -2;
+	}
+	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ)
 	{
 		if(response)
 		{
@@ -152,7 +172,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		return -2;
 	}
-	else if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ_ADMIN)
+	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ_ADMIN)
 	{
 		if(response)
 		{
