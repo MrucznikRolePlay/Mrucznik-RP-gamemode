@@ -5,7 +5,7 @@
 	"output": "gamemodes/Mrucznik-RP.amx",
 	"dependencies": [
 		"zeex/samp-plugin-crashdetect:v4.19.4",
-		"sampctl/samp-stdlib:0.3.7-R2-2-1",
+		"sampctl/samp-stdlib:0.3.DL-R1",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
 		"maddinat0r/samp-log:v0.4",
@@ -18,7 +18,11 @@
 		"oscar-broman/strlib",
 		"pawn-lang/YSI-Includes@4.x",
 		"Southclaws/samp-whirlpool",
-		"Wuzi/vending"
+		"Wuzi/vending",
+		"BigETI/pawn-memory:v2.0.1",
+		"BigETI/pawn-vector",
+		"IllidanS4/PawnPlus:v1.1",
+		"Pottus/ColAndreas:v1.4.0.3"
 	],
 	"build": {
 		"name": "",

@@ -31,6 +31,7 @@
 YCMD:news(playerid, params[], help)
 {
 	new string[128];
+	new string2[128];
 	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
@@ -90,7 +91,21 @@ YCMD:news(playerid, params[], help)
 				        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 3 sekund");
 				        return 1;
 				    }
-					format(string, sizeof(string), "NR %s: %s", sendername, params);
+					format(string, sizeof(string), "%s", params);
+					if(strlen(params) > 100)
+					{
+						new stringRef[124]; 
+						strcat(stringRef, params); 
+						new pos = strfind(stringRef, " ", true, 90);
+						new allL = strlen(stringRef);
+						allL = allL-pos;  
+						strdel(stringRef, pos, pos+allL);
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s [..]", GetNick(playerid), stringRef); 
+					}
+					else if(strlen(params) <= 100)
+					{
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
+					}
 					OOCNews(COLOR_NEWS,string);
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
                     //OOCNews(0xFF8C55FF, string);
@@ -109,7 +124,6 @@ YCMD:news(playerid, params[], help)
 			}
 			else if(PlayerToPoint(10.5, playerid, 1820.0637,-1315.9836,109.9520))
 			{
-            	GetPlayerName(playerid, sendername, sizeof(sendername));
 				if(isnull(params))
 				{
 					sendTipMessage(playerid, "U¿yj /news [newstext]");
@@ -129,9 +143,23 @@ YCMD:news(playerid, params[], help)
 				        SendClientMessage(playerid, COLOR_GREY, "Odczekaj 3 sekund");
 				        return 1;
 				    }
-					format(string, sizeof(string), "NR %s: %s", sendername, params);
 					//OOCNews(COLOR_NEWS,string);
-                    OOCNews(COLOR_NEWS, string);
+					format(string, sizeof(string), "%s", params); 
+					if(strlen(params) > 100)
+					{
+						new stringRef[124]; 
+						strcat(stringRef, params); 
+						new pos = strfind(stringRef, " ", true, 90);
+						new allL = strlen(stringRef);
+						allL = allL-pos;  
+						strdel(stringRef, pos, pos+allL);
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s [..]", GetNick(playerid), stringRef); 
+					}
+					else if(strlen(params) <= 100)
+					{
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
+					}
+					OOCNews(COLOR_NEWS,string);
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)
@@ -170,8 +198,21 @@ YCMD:news(playerid, params[], help)
 				        return 1;
 				    }
 					format(string, sizeof(string), "NR %s: %s", sendername, params);
-					//OOCNews(COLOR_NEWS,string);
-                    OOCNews(COLOR_NEWS, string);
+					if(strlen(params) > 100)
+					{
+						new stringRef[124]; 
+						strcat(stringRef, params); 
+						new pos = strfind(stringRef, " ", true, 90);
+						new allL = strlen(stringRef);
+						allL = allL-pos;  
+						strdel(stringRef, pos, pos+allL);
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s [..]", GetNick(playerid), stringRef); 
+					}
+					else if(strlen(params) <= 100)
+					{
+						format(string2, sizeof(string2), "~y~NR %s: ~w~%s", GetNick(playerid), params); 
+					}
+					OOCNews(COLOR_NEWS,string);
 					SendDiscordMessage(DISCORD_SAN_NEWS, string);
 					PlayerInfo[playerid][pNewsSkill] ++;
 					if(PlayerInfo[playerid][pNewsSkill] == 50)

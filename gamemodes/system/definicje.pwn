@@ -86,7 +86,7 @@
 #define COST_SN_SMS_3 7500
 #define COST_SN_SMS_4 10000
 #define COST_SN_SMS_5 12500
-#define MAX_LEVELINT 10
+#define MAX_LEVELINT 11
 
 //sprunki i snacki
 #define SPRUNK_COST 2000
@@ -122,6 +122,10 @@
 #define ILOSC_AUT 483
 #define MAX_CHECKPOINTS 51
 
+//
+#define LEADERS_TYPES 3
+#define LEADER_FRAC 1
+#define LEADER_FAM 2
 
 //Kary:
 #define KARA_BAN 1
@@ -155,9 +159,9 @@
 #define NG_BOUNDS_maxX 2809.2007
 #define NG_BOUNDS_maxY -2330.6167
 //Stanowe wiêzienie
-#define NG_JAIL_X 593.1502
-#define NG_JAIL_Y -1495.5145
-#define NG_JAIL_Z 82.1648
+#define NG_JAIL_X -554.7513
+#define NG_JAIL_Y 2590.4070
+#define NG_JAIL_Z 53.6603
 
 #define MAX_DOORS   20 //tymczasowe
 
@@ -396,6 +400,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_PERS_VEH 5512
 #define D_PERS_INNE 5515
 
+#define D_BIZ_WRITE 5516
+
 #define D_VINYL_B 5520
 #define D_VINYL 5521
 #define D_VINYL_K 5522
@@ -420,6 +426,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define SCENA_DIALOG_NEON_COUNT 6023
 #define SCENA_DIALOG_NEON_KOLORY    6024
 #define SCENA_DIALOG_AUDIO      6030
+#define SCENA_DIALOG_GETMONEY 6031
+#define DIALOG_UNFRAKCJA 6032
 
 #define D_UNIFORM_LCN   7005
 #define D_UNIFORM_RSC   7114
@@ -525,11 +533,6 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define BONE_NECK 17
 #define BONE_LEFT_FOREARM 13
 #define BONE_RIGHT_FOREARM 14
-
-#define SetPlayerHoldingObject(%1,%2,%3,%4,%5,%6,%7,%8,%9) SetPlayerAttachedObject(%1,MAX_PLAYER_ATTACHED_OBJECTS-1,%2,%3,%4,%5,%6,%7,%8,%9) 
-#define StopPlayerHoldingObject(%1) RemovePlayerAttachedObject(%1,MAX_PLAYER_ATTACHED_OBJECTS-1) 
-#define IsPlayerHoldingObject(%1) IsPlayerAttachedObjectSlotUsed(%1,MAX_PLAYER_ATTACHED_OBJECTS-1)  
-
 
 //Auta specjalne
 #define RENT_CAR        1

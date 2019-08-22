@@ -28,7 +28,7 @@ command_setmc_Impl(playerid, giveplayerid, value)
     if(IsAKox(playerid))
 	{
 		PremiumInfo[giveplayerid][pMC] = value;
-		premium_saveMc(giveplayerid);
+		MruMySQL_SaveMc(giveplayerid);
 
 		Log(premiumLog, INFO, "Admin %s da³ %s %dMC", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value);
 		_MruAdmin(playerid, sprintf("Da³eœ %d MC graczowi %s [ID: %d]", value, GetNick(giveplayerid, true), giveplayerid));

@@ -28,6 +28,7 @@
 
 
 //-------<[ .def ]>-------
+#include "03DL\03DL.def"
 #include "actors\actors.def"
 #include "admin\admin.def"
 #include "adminduty\adminduty.def"
@@ -43,15 +44,18 @@
 #include "logi\logi.def"
 #include "money\money.def"
 #include "organizacje\organizacje.def"
+#include "player_attachments\player_attachments.def"
 #include "pojazdy\pojazdy.def"
 #include "prace\prace.def"
 #include "premium\premium.def"
 #include "sila\sila.def"
+#include "vehicle_attachments\vehicle_attachments.def"
 #include "wejscia\wejscia.def"
 #include "wypadek\wypadek.def"
 
 
 //-------<[ .hwn ]>-------
+#include "03DL\03DL.hwn"
 #include "actors\actors.hwn"
 #include "admin\admin.hwn"
 #include "adminduty\adminduty.hwn"
@@ -67,15 +71,18 @@
 #include "logi\logi.hwn"
 #include "money\money.hwn"
 #include "organizacje\organizacje.hwn"
+#include "player_attachments\player_attachments.hwn"
 #include "pojazdy\pojazdy.hwn"
 #include "prace\prace.hwn"
 #include "premium\premium.hwn"
 #include "sila\sila.hwn"
+#include "vehicle_attachments\vehicle_attachments.hwn"
 #include "wejscia\wejscia.hwn"
 #include "wypadek\wypadek.hwn"
 
 
 //-------<[ .pwn ]>-------
+#include "03DL\03DL.pwn"
 #include "actors\actors.pwn"
 #include "admin\admin.pwn"
 #include "adminduty\adminduty.pwn"
@@ -91,10 +98,12 @@
 #include "logi\logi.pwn"
 #include "money\money.pwn"
 #include "organizacje\organizacje.pwn"
+#include "player_attachments\player_attachments.pwn"
 #include "pojazdy\pojazdy.pwn"
 #include "prace\prace.pwn"
 #include "premium\premium.pwn"
 #include "sila\sila.pwn"
+#include "vehicle_attachments\vehicle_attachments.pwn"
 #include "wejscia\wejscia.pwn"
 #include "wypadek\wypadek.pwn"
 
@@ -111,10 +120,13 @@
 
 //-------<[ mysql ]>-------
 #include "admin\admin_mysql.pwn"
+#include "biznesy\biznesy_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
+#include "player_attachments\player_attachments_mysql.pwn"
 #include "pojazdy\pojazdy_mysql.pwn"
 #include "prace\prace_mysql.pwn"
 #include "premium\premium_mysql.pwn"
+#include "vehicle_attachments\vehicle_attachments_mysql.pwn"
 
 
 //-------<[ others ]>-------
@@ -122,12 +134,15 @@
 
 //-------<[ callbacks ]>-------
 #include "admin\admin_callbacks.pwn"
+#include "biznesy\biznesy_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "money\money_callbacks.pwn"
 #include "organizacje\organizacje_callbacks.pwn"
+#include "player_attachments\player_attachments_callbacks.pwn"
 #include "pojazdy\pojazdy_callbacks.pwn"
 #include "prace\prace_callbacks.pwn"
 #include "premium\premium_callbacks.pwn"
+#include "vehicle_attachments\vehicle_attachments_callbacks.pwn"
 #include "wypadek\wypadek_callbacks.pwn"
 
 
@@ -142,8 +157,10 @@
 #include "komendy\commands\komendy_commands.pwn"
 #include "logi\commands\logi_commands.pwn"
 #include "organizacje\commands\organizacje_commands.pwn"
+#include "player_attachments\commands\player_attachments_commands.pwn"
 #include "pojazdy\commands\pojazdy_commands.pwn"
 #include "prace\commands\prace_commands.pwn"
 #include "premium\commands\premium_commands.pwn"
 #include "sila\commands\sila_commands.pwn"
+#include "vehicle_attachments\commands\vehicle_attachments_commands.pwn"
 #include "wypadek\commands\wypadek_commands.pwn"

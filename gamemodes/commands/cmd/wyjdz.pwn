@@ -198,8 +198,8 @@ YCMD:wyjdz(playerid, params[], help)
 		/*else if (IsPlayerInRangeOfPoint(playerid, 5.0, 575.5542,-2048.8000,16.1670)) // basen recepcja
 		{
 		    SetPlayerPosEx(playerid, 1210.552734375,-1749.1850585938,13.593885421753 ); // basen na zewnatrz
-		    if(PlayerInfo[playerid][pChar] > 0) { SetPlayerSkin(playerid, PlayerInfo[playerid][pChar]); }
-			else { SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]); }
+		    if(PlayerInfo[playerid][pChar] > 0) { SetPlayerSkinEx(playerid, PlayerInfo[playerid][pChar]); }
+			else { SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]); }
 			SetPlayerVirtualWorld(playerid, 0);
 		    TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
@@ -389,13 +389,18 @@ YCMD:wyjdz(playerid, params[], help)
 		    Wyjdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
 			Wyjdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
 			
-			//BIZNESY
-            for(new i=0;i<MAX_BIZNES;i++)
-			{
-				WyjdzInt(playerid, BizData[i][eBizWyjX],BizData[i][eBizWyjY],BizData[i][eBizWyjZ], BizData[i][eBizWejX],BizData[i][eBizWejY],BizData[i][eBizWejZ], 3.0, BizData[i][eBizInt], BizData[i][eBizVw],"", BizData[i][epLocal]);//biz 1
+			for(new i=0; i<=BusinessLoaded; i++)//
+            {
+               if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ])
+                && GetPlayerVirtualWorld(playerid) == Business[i][b_vw])
+                {
+                    SetPlayerVirtualWorld(playerid, 0); 
+                    SetPlayerInterior(playerid, 0); 
+                    SetPLocal(playerid, PLOCAL_DEFAULT); 
+                    SetPlayerPosEx(playerid, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]);
+					return 1; 
+                }
 			}
-            //BIZNESY END
-
 			for(new i; i<=MAX_NrDOM; i++)
 		    {
 				if(IsPlayerInRangeOfPoint(playerid, 5.0, IntInfo[i][Int_X], IntInfo[i][Int_Y], IntInfo[i][Int_Z]))

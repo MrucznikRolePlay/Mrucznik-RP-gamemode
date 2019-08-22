@@ -10,18 +10,25 @@ IsDialogProtected(dialogid)
     return false; //dodac dialogi z mysql
 }
 
-//ID DIALOG”W 9900+ BIZNESY.
-public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+CheckDialogId(playerid, dialogid)
 {
-    if(dialogid < 0) return 1;
+    if(dialogid < 0) return 0;
     if(dialogid != iddialog[playerid])
     {
         if(dialogid == D_ANIMLIST || dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B≥Ídne ID GUI.");
         Log(serverLog, WARNING, "B≥Ídne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
-        return 1;
+        return 0;
     }
+	return 1;
+}
+
+//ID DIALOG”W 9900+ BIZNESY.
+public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	if(!CheckDialogId(playerid, dialogid)) return 1;
+
     if(IsDialogProtected(dialogid) || true) //MySQL anti injection
     {
 		for(new i; i<strlen(inputtext); i++)
@@ -70,7 +77,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[64];
-			SetPlayerSkin(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
+			SetPlayerSkinEx(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak≥ada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			SetPVarInt(playerid, "CheatDetected", 0);
@@ -560,7 +567,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 165);
+				SetPlayerSkinEx(playerid, 165);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -570,7 +577,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 166);
+				SetPlayerSkinEx(playerid, 166);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -580,7 +587,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 211);
+				SetPlayerSkinEx(playerid, 211);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -590,7 +597,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 3:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 286);
+				SetPlayerSkinEx(playerid, 286);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -600,7 +607,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 4:
 			{
 				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkin(playerid, 295);
+				SetPlayerSkinEx(playerid, 295);
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -617,7 +624,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 105);
+				SetPlayerSkinEx(playerid, 105);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -628,7 +635,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 106);
+				SetPlayerSkinEx(playerid, 106);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -639,7 +646,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 107);
+				SetPlayerSkinEx(playerid, 107);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -650,7 +657,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 3:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 269);
+				SetPlayerSkinEx(playerid, 269);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -661,7 +668,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 4:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 270);
+				SetPlayerSkinEx(playerid, 270);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -672,7 +679,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 5:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 271);
+				SetPlayerSkinEx(playerid, 271);
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -690,7 +697,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 102);
+				SetPlayerSkinEx(playerid, 102);
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -701,7 +708,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 103);
+				SetPlayerSkinEx(playerid, 103);
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -712,7 +719,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 104);
+				SetPlayerSkinEx(playerid, 104);
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -730,7 +737,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 124);
+				SetPlayerSkinEx(playerid, 124);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -741,7 +748,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 125);
+				SetPlayerSkinEx(playerid, 125);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -752,7 +759,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 126);
+				SetPlayerSkinEx(playerid, 126);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -763,7 +770,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 3:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 111);
+				SetPlayerSkinEx(playerid, 111);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -774,7 +781,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 4:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 113);
+				SetPlayerSkinEx(playerid, 113);
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -793,7 +800,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 117);
+				SetPlayerSkinEx(playerid, 117);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -804,7 +811,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 118);
+				SetPlayerSkinEx(playerid, 118);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -815,7 +822,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 120);
+				SetPlayerSkinEx(playerid, 120);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -826,7 +833,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 3:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 122);
+				SetPlayerSkinEx(playerid, 122);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -837,7 +844,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 4:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 123);
+				SetPlayerSkinEx(playerid, 123);
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -856,7 +863,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 0:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 108);
+				SetPlayerSkinEx(playerid, 108);
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -867,7 +874,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 1:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 109);
+				SetPlayerSkinEx(playerid, 109);
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -878,7 +885,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 2:
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkin(playerid, 110);
+				SetPlayerSkinEx(playerid, 110);
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
@@ -1767,6 +1774,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         return 1;
     }
+	else if(dialogid == SCENA_DIALOG_GETMONEY)
+	{
+		if(!response)
+		{
+			return 1;
+		}
+		if(kaska[playerid] >= 2_000_000)
+		{
+			ZabierzKase(playerid, 2000000); 
+			Sejf_Add(FRAC_SN, 2000000); 
+			Sejf_Save(FRAC_SN); 
+			new string[124]; 
+			format(string, sizeof(string), "%s umieúci≥ w sejfie 2 miliony za scenÍ!"); 
+			SendLeaderRadioMessage(FRAC_SN, COLOR_LIGHTGREEN, string); 
+			SN_ACCESS[playerid] = 1; 
+			sendTipMessageEx(playerid, COLOR_P@, "Umieúci≥eú op≥atÍ za scenÍ w sejfie SN"); 
+		}
+		else
+		{
+			sendTipMessage(playerid, "Nie masz wystarczajπcej iloúci gotÛwki!"); 
+			return 1;
+		}
+	}
 	else if(dialogid == 7421)
 	{
 	    if(response)
@@ -1810,6 +1840,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	        return 1;
 		}
 	}
+	else if(dialogid == DIALOG_UNFRAKCJA)
+	{
+		new id_Lidera = GetPVarInt(playerid, "ID_LIDERA"); 
+		new string[256]; 
+		if(!response)
+		{
+			Remove_MySQL_Leader(id_Lidera); 
+			format(string, sizeof(string), "* Zosta≥eú wyrzucony z frakcji przez %s.", GetNick(playerid));
+			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, string);
+			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, "* Jesteú cywilem.");
+			Log(adminLog, INFO, "Admin %s usunπ≥ gracza %s z frakcji %s - pozostawiajπc VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), GetFractionLogName(PlayerInfo[id_Lidera][pMember]));
+			PlayerInfo[id_Lidera][pMember] = 0;
+			PlayerInfo[id_Lidera][pLider] = 0;
+			PlayerInfo[id_Lidera][pJob] = 0;
+			orgUnInvitePlayer(id_Lidera);
+			MedicBill[id_Lidera] = 0;
+			SetPlayerSpawn(id_Lidera);
+			format(string, sizeof(string), "  Wyrzuci≥es %s z frakcji.", GetNick(id_Lidera));
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+		}
+		else 
+		{
+			RemoveLeadersFromFraction(id_Lidera, playerid); 
+		}
+	}
     else if(dialogid == D_PRZEBIERZ_FDU)
     {
         if(!response) return 1;
@@ -1825,7 +1880,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 6: lSkin = 270;
         }
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return SendClientMessage(playerid, 0xFF8D00FF, "Musisz byÊ pieszo, øeby zmieniÊ skin.");
-        SetPlayerSkin(playerid, lSkin);
+        SetPlayerSkinEx(playerid, lSkin);
         SendClientMessage(playerid, 0xC0FF9CFF, "ª Zmieni≥eú swoje przebranie.");
     }
 	else if(dialogid == 1213)
@@ -1972,7 +2027,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-	else if(dialogid == iddialog[playerid])
+	else if(dialogid == iddialog[playerid]) //TODO: WTF
 	{
 		if(dialogid == 1)
 	    {
@@ -2114,7 +2169,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	        {
     	            case 0://parking
     	            {
-						if(levelLock[FRAC_SN][0] == 1)
+						if(levelLock[FRAC_SN][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_SN)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2384,6 +2439,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                      	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ProszÍ czekaÊ, za chwilÍ otworzπ siÍ drzwi(10sek) <<<<");
                      	PlayerInfo[playerid][pLocal] = 108;
 			        }
+					case 2:
+					{
+						SetPlayerPosEx(playerid,1481.5200,-1821.0967,58.1563);
+						SetPlayerVirtualWorld(playerid,51);
+				        SetPlayerInterior(playerid,0);
+	                    TogglePlayerControllable(playerid,0);
+                        Wchodzenie(playerid);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 10 - Kancelaria Burmistrza <<<<");
+						PlayerInfo[playerid][pLocal] = 108;
+						GameTextForPlayer(playerid, "~r~by skTom&skLolsy", 5000, 1);	
+					}
 				}
 			}
 		}
@@ -2451,38 +2517,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					case 0://parking podziemny
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][0] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							SetPlayerVirtualWorld(playerid,2);
-							SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
-							PlayerInfo[playerid][pLocal] = 255;
-							GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostÍpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						SetPlayerVirtualWorld(playerid,2);
+						SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
+						PlayerInfo[playerid][pLocal] = 255;
+						GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
+						
 					}
 					case 1://parking
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][1] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							SetPlayerVirtualWorld(playerid,0);
-							SetPlayerPosEx(playerid,596.5255, -1489.2544, 15.3587);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
-							GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostÍpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						SetPlayerVirtualWorld(playerid,0);
+						SetPlayerPosEx(playerid,596.5255, -1489.2544, 15.3587);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
+						GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
+						PlayerInfo[playerid][pLocal] = 255;
 					}
 					case 2://stanowe
 					{
+						if(levelLock[FRAC_FBI][2] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						SetPlayerVirtualWorld(playerid, 1);
 						SetPlayerPosEx(playerid, 594.05334, -1476.27490, 81.82840+0.5);
 						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
@@ -2491,6 +2557,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 3://recepcja
 					{
+						if(levelLock[FRAC_FBI][3] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,1);
@@ -2501,64 +2572,61 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 4://szatnia
 					{
-						if(IsAFBI(playerid))
+						if(levelLock[FRAC_FBI][4] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							TogglePlayerControllable(playerid,0);
-							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,2);
-							SetPlayerPosEx(playerid,592.65466, -1486.76575, 82.10487);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia");
-							PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-							GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostÍpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid,2);
+						SetPlayerPosEx(playerid,592.65466, -1486.76575, 82.10487);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia");
+						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
+						PlayerInfo[playerid][pLocal] = 255;
 					
 					}
 					case 5://Zbrojownia
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][5] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							TogglePlayerControllable(playerid,0);
-							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,3);
-							SetPlayerPosEx(playerid,591.37579, -1482.26672, 80.43560);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3 - Zbrojownia");
-							PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-							GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostÍpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
-							
 						}
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid,3);
+						SetPlayerPosEx(playerid,591.37579, -1482.26672, 80.43560);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3 - Zbrojownia");
+						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
+						PlayerInfo[playerid][pLocal] = 255;
+
 					}
 					case 6://Biura federalne
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][6] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							TogglePlayerControllable(playerid,0);
-							Wchodzenie(playerid);
-							SetPlayerVirtualWorld(playerid,4);
-							SetPlayerPosEx(playerid,596.21857, -1477.92395, 84.06664);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Biura Federalne");
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostÍpu na ten poziom!"); 
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid,4);
+						SetPlayerPosEx(playerid,596.21857, -1477.92395, 84.06664);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Biura Federalne");
+						PlayerInfo[playerid][pLocal] = 255;
+
 					}
 					case 7://Dyrektorat
 					{
-
+						if(levelLock[FRAC_FBI][7] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,5);
@@ -2568,6 +2636,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 8://CID ERT
 					{
+						if(levelLock[FRAC_FBI][8] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						SetPlayerPosEx(playerid,585.70782, -1479.54211, 99.01273);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2577,27 +2650,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 9://sale treningowe
 					{
+						if(levelLock[FRAC_FBI][9] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
 						SetPlayerPosEx(playerid, 590.42767, -1447.62939, 80.95732);
 						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 7);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
-					
 					}
 					case 10://dach
 					{
-						if(IsACop(playerid))
+						if(levelLock[FRAC_FBI][10] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
-							SetPlayerVirtualWorld(playerid,0);
-							SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
-							SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
-							PlayerInfo[playerid][pLocal] = 255;
-						}
-						else
-						{
-							sendErrorMessage(playerid, "Nie masz dostÍpu na ten poziom");
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						SetPlayerVirtualWorld(playerid,0);
+						SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
+						PlayerInfo[playerid][pLocal] = 255;
 					}
 				}
 			}
@@ -2606,7 +2680,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsiπøka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrÍdkoúciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJDè");
+				ShowShopDialog(playerid);
 	            new string[256];
 	            switch(listitem)
 	            {
@@ -2636,101 +2710,79 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_GRAD5, "Moøesz sprawdziÊ go w kaødej chwili wpisujπc /stats");
 							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /telefonpomoc aby zobaczyÊ komendy telefonu.");
+							Log(payLog, INFO, "Gracz %s kupi≥ telefon o numerze %d", GetPlayerLogName(playerid), randphone);
 							return 1;
 						}
 					}
 					case 1:
 					{
-						if (kaska[playerid] > 7500)
+						if (kaska[playerid] > 50000)
 						{
+							if(PlayerGames[playerid] >= 4)
+							{
+								sendTipMessage(playerid, "Przepraszamy, zuøy≥eú wszystkie zdrapki na naszym magazynie!"); 
+								sendTipMessage(playerid, "SprÛbuj przyjúÊ za godzinÍ, moøe przyjdπ nowe."); 
+								return 1;
+							}
+							format(string, sizeof(string), "%s kupuje zdrapkÍ w sklepie i zaczyna jπ zdrapywaÊ", GetNick(playerid)); 
+							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							new winValue = true_random(100);
+							new playerValue = true_random(100);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
-						    {
-								new skill = 7500 / 100;
-								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = 7500 - price;
-								ZabierzKase(playerid, payout);
-								format(string, sizeof(string), "~r~-$%d", payout);
-								GameTextForPlayer(playerid, string, 5000, 1);
+						    { 
+								if(playerValue > winValue && playerValue >= 85)
+								{
+									new bonus = (PlayerInfo[playerid][pTraderPerk]*10000);
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 200.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 200000+bonus); 
+								}
+								else if(playerValue > winValue && playerValue < 85 && playerValue >= 50)
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 85.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 85000); 
+								}
+								else if(playerValue < winValue && playerValue > 50)
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 35.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 35000); 
+								}
+								else
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaÊ napis ''Graj dalej'' ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								}
+								PlayerGames[playerid]++; 
 							}
 							else
 							{
-							    ZabierzKase(playerid, 7500);
-								format(string, sizeof(string), "~r~-$%d", 1000);
-								GameTextForPlayer(playerid, string, 5000, 1);
-							}
-							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							new prize;
-							new symb1[32]; new symb2[32]; new symb3[32];
-							new randcard1 = random(10);//minimum 1000  max 9999
-							new randcard2 = random(10);//minimum 1000  max 9999
-							new randcard3 = random(10);//minimum 1000  max 9999
-							if(randcard1 >= 5)
-							{
-								format(symb1, sizeof(symb1), "~b~]");
-								randcard1 = 1;
-							}
-							else if(randcard1 <= 4 && randcard1 >= 2)
-							{
-								format(symb1, sizeof(symb1), "~g~]");
-								randcard1 = 2;
-							}
-							else if(randcard1 < 2)
-							{
-								format(symb1, sizeof(symb1), "~y~]");
-								randcard1 = 3;
-							}
-							if(randcard2 >= 5)
-							{
-								format(symb2, sizeof(symb2), "~b~]");
-								randcard2 = 1;
-							}
-							else if(randcard2 <= 4 && randcard2 >= 2)
-							{
-								format(symb2, sizeof(symb2), "~g~]");
-								randcard2 = 2;
-							}
-							else if(randcard2 < 2)
-							{
-								format(symb2, sizeof(symb2), "~y~]");
-								randcard2 = 3;
-							}
-							if(randcard3 >= 5)
-							{
-								format(symb3, sizeof(symb3), "~b~]");
-								randcard3 = 1;
-							}
-							else if(randcard3 <= 4 && randcard3 >= 2)
-							{
-								format(symb3, sizeof(symb3), "~g~]");
-								randcard3 = 2;
-							}
-							else if(randcard3 < 2)
-							{
-								format(symb3, sizeof(symb3), "~y~]");
-								randcard3 = 3;
-							}
-							if(randcard1 == randcard2 && randcard1 == randcard3)
-							{
-								if(randcard1 > 5)
+								if(playerValue > winValue && playerValue >= 85)
 								{
-									prize = 25000;
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 100.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 100000); 
 								}
-								if(randcard1 <= 4 && randcard1 >= 2)
+								else if(playerValue > winValue && playerValue < 85 && playerValue >= 50)
 								{
-									prize = 15000;
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 55.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 55000); 
 								}
-								if(randcard1 < 2)
+								else if(playerValue < winValue && playerValue > 50)
 								{
-									prize = 7500;
+									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 15.000$! ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+									DajKase(playerid, 15000); 
 								}
-								DajKase(playerid,prize);
-								format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~%s %s %s ~n~~n~~w~~g~$%d",symb1,symb2,symb3, prize);
+								else
+								{
+									format(string, sizeof(string), "Po zdrapaniu widaÊ napis ''Graj dalej'' ((%s))", GetNick(playerid));
+									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								}
+								PlayerGames[playerid]++; 
 							}
-							else
-							{
-								format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~%s %s %s ~n~~n~~w~~r~$0",symb1,symb2,symb3);
-							}
-							GameTextForPlayer(playerid, string, 3000, 3);
 							return 1;
 						}
 					}
@@ -2903,7 +2955,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t7500$\nKsiπøka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrÍdkoúciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$","KUP","WYJDè");
 							}
 							else
 							{
@@ -5834,9 +5885,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response == 1)
       	  	{
-            	new __[9] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-            	PlayerInfo[playerid][pPraojazdyniewylosowane] = __;
-            	PrawoJazdyRandomGUITest(playerid, PlayerInfo[playerid][pPraojazdyniewylosowane], 9 - PlayerInfo[playerid][pPrawojazdypytania]);
+				for(new i; i<9; i++)
+				{
+            		prawoJazdyLosowanie[i] = i;
+				}
+            	PrawoJazdyRandomGUITest(playerid, prawoJazdyLosowanie, 9 - PlayerInfo[playerid][pPrawojazdypytania]);
             	return 1;
  			}
     	}
@@ -5883,1721 +5936,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		   		ProxDetector(40.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
            		PlayerInfo[playerid][pWtrakcietestprawa] = 0;
            		SetTimerEx("CleanPlayaPointsPJ", 30000, 0, "i", playerid);
-		   		}
+			}
 			else
  			{
- 				PrawoJazdyRandomGUITest(playerid, PlayerInfo[playerid][pPraojazdyniewylosowane], 9 - PlayerInfo[playerid][pPrawojazdypytania]);
+ 				PrawoJazdyRandomGUITest(playerid, prawoJazdyLosowanie, 9 - PlayerInfo[playerid][pPrawojazdypytania]);
 			}
 		}
-  		if(dialogid == 443)
-		{
-		    if(response)
-		    {
-                new lUID = PlayerInfo[playerid][pKluczeAuta];
-                if(lUID == 0) return 1;
-
-                new idx = Car_GetIDXFromUID(lUID);
-                if(idx == -1) return 1;
-                if(CarData[idx][c_Keys] != PlayerInfo[playerid][pUID])
-                {
-                    SendClientMessage(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta≥y zabrane przez w≥aúciciela.");
-                    PlayerInfo[playerid][pKluczeAuta] = 0;
-                    return 1;
-                }
-		        switch(listitem)
-				{
-				    case 0://spawnuj kluczyki - tu jest bug?
-				    {
-			    		if(CarData[idx][c_ID] == 0)
-			    		{
-		                   SendClientMessage(playerid, 0xFFC0CB, "Pojazd do ktÛrego masz kluczyki jest juø zespawnowany");
-						   return 1;
-						}
-                        Car_Spawn(idx);
-						Log(serverLog, INFO, "Gracz %s zespawnowa≥ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(idx));
-		                SendClientMessage(playerid, 0xFFC0CB, "TwÛj pojazd zosta≥ zrespawnowany");
-		                
-				    }
-				    case 1://Znajdü
-				    {
-			    	    new Float:autox, Float:autoy, Float:autoz;
-			    	    new pojazdszukany = CarData[idx][c_ID];
-                        if(pojazdszukany == 0) return 1;
-         				GetVehiclePos(pojazdszukany, autox, autoy, autoz);
-         				SetPlayerCheckpoint(playerid, autox, autoy, autoz, 6);
-		                SetTimerEx("SzukanieAuta",30000,0,"d",playerid);
-		                SendClientMessage(playerid, 0xFFC0CB, "Jedü do czerwonego markera");
-
-				    }
-				    case 2://Pokaø parking
-				    {
-			    	    SetPlayerCheckpoint(playerid, CarData[idx][c_Pos][0],CarData[idx][c_Pos][1],CarData[idx][c_Pos][2], 6);
-		                SetTimerEx("SzukanieAuta",30000,0,"d",playerid);
-		                SendClientMessage(playerid, 0xFFC0CB, "Jedü do czerwonego markera");
-
-				    }
-				}
-			}
-		}
-		if(dialogid == D_AUTO_RESPAWN)//Potwierdzenie Respawnuj
-		{
-		    if(response)
-		    {
-			    if(kaska[playerid] >= 5000)
-			    {
-				    new vehicleid;
-
-			        if((vehicleid = CarData[IloscAut[playerid]][c_ID]) != 0)
- 					{
-                        Car_Unspawn(vehicleid);
-                        Car_Spawn(IloscAut[playerid]);
-						Log(serverLog, INFO, "Gracz %s zrespawnowa≥ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(IloscAut[playerid]));
-
-                        ZabierzKase(playerid, 5000);
-				        SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta≥ zrespawnowany. Koszt: {FF0000}5000$");
-					}
-					else
-					{
-					    SendClientMessage(playerid, 0xFFC0CB, "Ten pojazd nie jest zespawnowany");
-					    return 1;
-					}
-				}
-				else
-				{
-				    SendClientMessage(playerid, 0xFFC0CB, "Nie staÊ ciÍ!");
-				    ShowCarsForPlayer(playerid, playerid);
-				}
-			}
-			if(!response)
-			{
-			    ShowCarsForPlayer(playerid, playerid);
-			}
-		}
-		if(dialogid == D_AUTO_UNSPAWN)//Potwierdzenie Unspawnuj
-		{
-            if(response)
-		    {
-			    if(kaska[playerid] >= 5000)
-			    {
-				    new vehicleid;
-
-			        if((vehicleid = CarData[IloscAut[playerid]][c_ID]) != 0)
- 					{
-                        Car_Unspawn(vehicleid);
-						Log(serverLog, INFO, "Gracz %s unspawnowa≥ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(IloscAut[playerid]));
-
-                        ZabierzKase(playerid, 5000);
-				        SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta≥ unspawnowany. Koszt: {FF0000}5000$");
-					}
-					else
-					{
-					    SendClientMessage(playerid, 0xFFC0CB, "Ten pojazd nie jest zespawnowany");
-					    return 1;
-					}
-				}
-				else
-				{
-				    SendClientMessage(playerid, 0xFFC0CB, "Nie staÊ ciÍ!");
-                    ShowCarsForPlayer(playerid, playerid);
-				}
-			}
-			if(!response)
-			{
-                ShowCarsForPlayer(playerid, playerid);
-			}
-		}
-        if(dialogid == D_AUTO)
-		{
-            if(!response) return 1;
-            new lUID = strval(inputtext);
-            if(lUID < 0)
-            {
-                ShowCarsForPlayer(playerid, playerid);
-                SendClientMessage(playerid, COLOR_RED, "◊ Ten pojazd jest zablokowany, skontaktuj siÍ z administratorem.");
-                return 1;
-            }
-
-        	ShowPlayerDialogEx(playerid, D_AUTO_ACTION, DIALOG_STYLE_LIST, "Panel pojazdu", "Spawnuj\nRespawnuj\nUnspawnuj\nZnajdü\nPokaø parking\nPrzemaluj\nZ≥omuj\nUsuÒ tuning\nRejestracja", "Wybierz", "Wyjdü");
-        	IloscAut[playerid] = lUID;
-            return 1;
-        }
-        if(dialogid == D_AUTO_ACTION)
-        {
-            if(!response)
-            {
-                ShowCarsForPlayer(playerid, playerid);
-                return 1;
-            }
-            new lUID = IloscAut[playerid];
-            switch(listitem)
-            {
-                case 0:
-                {
-                    if(CarData[lUID][c_ID] == 0)
-                    {
-                        Car_Spawn(lUID);
-						Log(serverLog, INFO, "Gracz %s zrespawnowa≥ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(lUID));
-                        SendClientMessage(playerid, COLOR_WHITE, "TwÛj pojazd zosta≥ {2DE9B1}zespawnowany{FFFFFF}!");
-                    }
-                    else
-                    {
-                        SendClientMessage(playerid, COLOR_WHITE, "TwÛj pojazd jest juø {2DE9B1}zespawnowany{FFFFFF}, stoi tam gdzie go zostawi≥eú!");
-                    }
-                }
-                case 1: ShowPlayerDialogEx(playerid, D_AUTO_RESPAWN, DIALOG_STYLE_MSGBOX, "Respawnuj wÛz", "Czy na pewno chcesz zrespawnowaÊ Ê ten wÛø?\nKoszt respawnu wozu to {FF0000}5000${FFFAFA}!!!", "Respawnuj", "Anuluj");
-                case 2: ShowPlayerDialogEx(playerid, D_AUTO_UNSPAWN, DIALOG_STYLE_MSGBOX, "Unspawnuj wÛz", "Czy na pewno chcesz unspawnowaÊ ten wÛø?\nKoszt unspawnowania wozu to {FF0000}5000${FFFAFA}!!!", "Unspawnuj", "Anuluj");
-                case 3://Znajdü
-                {
-                    if(CarData[lUID][c_ID] == 0) return SendClientMessage(playerid, 0xFFC0CB, "Auto nie jest zespawnowane.");
-                    new Float:autox, Float:autoy, Float:autoz;
-                    new pojazdszukany = CarData[lUID][c_ID];
-                	GetVehiclePos(pojazdszukany, autox, autoy, autoz);
-                	SetPlayerCheckpoint(playerid, autox, autoy, autoz, 6);
-                    SetTimerEx("SzukanieAuta",30000,0,"d",playerid);
-                    SendClientMessage(playerid, 0xFFC0CB, "Lokalizacja pojazdu zosta≥a oznaczona na mapie.");
-                }
-                case 4://Pokaø parking
-                {
-                    SetPlayerCheckpoint(playerid, CarData[lUID][c_Pos][0],CarData[lUID][c_Pos][1],CarData[lUID][c_Pos][2], 6);
-                    SetTimerEx("SzukanieAuta",30000,0,"d",playerid);
-                    SendClientMessage(playerid, 0xFFC0CB, "Lokalizacja pojazdu zosta≥a oznaczona na mapie.");
-                }
-                case 5://Przemaluj
-                {
-                    if(IsPlayerInAnyVehicle(playerid))
-                    {
-                        if(kaska[playerid] >= 1500)
-                        {
-                            ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-                        }
-                        else
-                        {
-                            SendClientMessage(playerid, 0xFFC0CB, "Nie masz pieniÍdzy na przemalowanie (1500$)");
-                        }
-                    }
-                }
-                case 6://Z≥omuj
-                {
-                    if(IsPlayerInAnyVehicle(playerid))
-                    {
-                    	if(CarData[lUID][c_ID] == 0) return SendClientMessage(playerid, 0xFFC0CB, "Auto nie jest zespawnowane!");
-                    	if(CarData[lUID][c_ID] != GetPlayerVehicleID(playerid)) return SendClientMessage(playerid, 0xFFC0CB, "Nie siedzisz w aucie, ktore chcesz zezlomowac!");
-                    	ShowPlayerDialogEx(playerid, D_AUTO_DESTROY, DIALOG_STYLE_MSGBOX, "Z≥omowanie wozu", "Czy na pewno chcesz zez≥omowaÊ ten wÛz? Zarobisz na tym tylko 5000$!", "Z£OMUJ", "WYJDè");
-                    }
-                }
-                case 7://UsuÒ tuning/PrzywrÛc parking
-                {
-                    CarData[lUID][c_Nitro] = 0;
-                    CarData[lUID][c_bHydraulika] = false;
-                    CarData[lUID][c_Felgi] = 0;
-                    CarData[lUID][c_Malunek] = 3;
-                    CarData[lUID][c_Spoiler] = 0;
-                    CarData[lUID][c_Bumper][0] = 0;
-                    CarData[lUID][c_Bumper][1] = 0;
-                    SendClientMessage(playerid, 0xFFC0CB, "Tuning zostanie usuniÍty przy najbliøszym respawnie.");
-                }
-                /*case 8://rejestracja prototyp
-                {
-                    ShowPlayerDialogEx(playerid, D_AUTO_REJESTRACJA, DIALOG_STYLE_INPUT, "Rejestracja", "Wprowadü nowy numer/tekst na swojej tablicy rejestracyjnej (do 5 znakÛw):", "Ustaw", "WrÛÊ");
-                }*/
-            }
-            return 1;
-        }
-        else if(dialogid == D_AUTO_REJESTRACJA)
-    	{
-	    	new lUID = IloscAut[playerid];
-	        if(!response) return RunCommand(playerid, "/car",  "");
-	        if(strlen(inputtext) < 1 || strlen(inputtext) > 5)
-	        {
-	            RunCommand(playerid, "/car",  "");
-	            SendClientMessage(playerid, COLOR_GRAD1, "Nieodpowiednia iloúÊ znakÛw.");
-	            return 1;
-	        }
-	        else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
-			    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' '))
-					continue;
-				else return SendClientMessage(playerid, COLOR_GRAD1, "Uøy≥eú nieodpowiednich znakÛw rejestracji (tylko litery i cyfry).");
-			}
-	        CarData[lUID][c_Rejestracja] = strval(inputtext);
-	        SendClientMessage(playerid, 0xFFC0CB, "Tablica zostanie zmieniona po respawnie.");
-	        return 1;
-		}
-		if(dialogid == 440)//SYSTEM AUT - kategorie
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-				    {
-				        ShowPlayerDialogEx(playerid, 450, DIALOG_STYLE_LIST, "Samochody sportowe", "Turismo 10mln\nInfernus 12,5mln\nBullet 8mln\nSuper GT 7,5mln\nCheetah 7mln\nBanshee 6mln\nComet 5mln\nBuffalo 3mln\nZR-350 2,5mln\nPhoenix 750tys\nEuros 4mln\nSultan 5mln\nJester 4,5mln\nElegy 4mln\nUranus 3,25mln\nAlpha 900tys\nFlash 3,52mln\nHotknife 1,3mln", "Wybierz", "WrÛÊ");
-				    }
-				    case 1:
-				    {
-				        ShowPlayerDialogEx(playerid, 451, DIALOG_STYLE_LIST, "Samochody osobowe", "Bravura 160tys\nManana 180tys\nEsperanto 200tys\nPremier 280tys\nPrevion 150tys\nNebula 320tys\nSolair 350tys\nGlendale 280tys\nOceanic 340tys\nHermes 275tys\nSabre 300tys\nRegina 375tys\nGreenwood 275tys\nBlista Compact 500tys\nMajestic 250tys\nBuccaneer 140tys\nFortune 400tys\nCadrona 375tys\nWillard 340tys\nIntruder 385tys\nPrimo 340tys\nTahoma 390tys\nEmperor 230k\nClub 700tys\nSurnise", "Wybierz", "WrÛÊ");
-				    }
-				    case 2:
-				    {
-				        ShowPlayerDialogEx(playerid, 452, DIALOG_STYLE_LIST, "Samochody luksusowe", "Limuzyna 5mln\nVirgo 680tys\nWashington 750tys\nStafford 1,8mln\nSentiniel 600tys\nAdmiral 860tys\nElegant 750tys\nMerit 500tys\nStratum 2,85mln\nVincent 700tys", "Wybierz", "WrÛÊ");
-				    }
-				    case 3:
-				    {
-				        ShowPlayerDialogEx(playerid, 453, DIALOG_STYLE_LIST, "Samochody terenowe", "Rancher 600tys\nHuntley 350tys\nLandstalker 200tys\nMesa 700tys\nBF Injection 800tys\nHummer 7mln", "Wybierz", "WrÛÊ");
-				    }
-				    case 4:
-				    {
-				        ShowPlayerDialogEx(playerid, 454, DIALOG_STYLE_LIST, "Pick-up`y", "Yosemite 350tys\nBobcat 160tys\nPicador 220tys\nSadler 180tys\nWalton 80tys\nSlamvan 4,5mln", "Wybierz", "WrÛÊ");
-				    }
-				    case 5:
-				    {
-				        ShowPlayerDialogEx(playerid, 455, DIALOG_STYLE_LIST, "Kabriolety", "Comet 5mln\nWindsor 5,5mln\nFeltzer 1,4mln\nStalion 250tys", "Wybierz", "WrÛÊ");
-				    }
-				    case 6:
-				    {
-				        ShowPlayerDialogEx(playerid, 456, DIALOG_STYLE_LIST, "Lowridery", "Blade 1,28mln\nSavanna 1,33mln\nRemington 1,4mln\nTornado 1,23mln\nVoodoo 1,22mln\nBroadway 1,21mln", "Wybierz", "WrÛÊ");
-				    }
-				    case 7:
-				    {
-				        ShowPlayerDialogEx(playerid, 457, DIALOG_STYLE_LIST, "Na kaødπ kieszeÒ", "Clover 45tys\nTampa 40tys\nPerenniel 60tys\nGlendale(obity) 28tys\nSadler(obity) 25tys\nTurbowÛzek úmiesznie tanio\nSkuter 17tys", "Wybierz", "WrÛÊ");
-				    }
-				    case 8:
-				    {
-				        ShowPlayerDialogEx(playerid, 458, DIALOG_STYLE_LIST, "Jednoúlady", "NRG-500 11,5mln\nFCR-900 8mln\nBF-400 4,5mln\nFreeway 900tys\nWayfarer 750tys\nSanchez 1,5mln\nQuad 600tys\nFaggio 17tys", "Wybierz", "WrÛÊ");
-				    }
-				    case 9:
-				    {
-				        ShowPlayerDialogEx(playerid, 459, DIALOG_STYLE_LIST, "Inne pojazdy", "Burrito 350tys\nBandito 1,3mln\nHotknife 1,3mln\nCamper 350tys\nKamping 700tys\nHustler 550tys", "Wybierz", "WrÛÊ");
-				    }
-				}
-		    }
-		}
-		if(dialogid == 450)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-				    {
-				        ShowPlayerDialogEx(playerid, 4001, DIALOG_STYLE_MSGBOX, "Kupowanie Turismo", "Turismo\n\nCena: 10.000.000$\nPrÍdkoúÊ Maksymalna: 240km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 451;
-				        CenaPojazdu[playerid] = 10000000;
-				    }
-				    case 1:
-				    {
-				        ShowPlayerDialogEx(playerid, 4001, DIALOG_STYLE_MSGBOX, "Kupowanie Infernusa", "Infernus\n\nCena: 12.500.000$\nPrÍdkoúÊ Maksymalna: 240km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 411;
-				        CenaPojazdu[playerid] = 12500000;
-				    }
-				    case 2:
-				    {
-				        ShowPlayerDialogEx(playerid, 4002, DIALOG_STYLE_MSGBOX, "Kupowanie Bulleta", "Bullet\n\nCena: 8.000.000$\nPrÍdkoúÊ Maksymalna: 230km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 541;
-	                    CenaPojazdu[playerid] = 8000000;
-					}
-				    case 3:
-				    {
-				        ShowPlayerDialogEx(playerid, 4003, DIALOG_STYLE_MSGBOX, "Kupowanie Super GT", "Super GT\n\nCena: 7.500.000$\nPrÍdkoúÊ Maksymalna: 230km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 506;
-	                    CenaPojazdu[playerid] = 7500000;
-					}
-				    case 4:
-				    {
-				        ShowPlayerDialogEx(playerid, 4004, DIALOG_STYLE_MSGBOX, "Kupowanie Cheetah", "Cheetah\n\nCena: 7.000.000$\nPrÍdkoúÊ Maksymalna: 230km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 415;
-	                    CenaPojazdu[playerid] = 7000000;
-					}
-				    case 5:
-				    {
-				        ShowPlayerDialogEx(playerid, 4005, DIALOG_STYLE_MSGBOX, "Kupowanie Banshee", "Banshee\n\nCena: 6.000.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 429;
-	                    CenaPojazdu[playerid] = 6000000;
-					}
-				    case 6:
-				    {
-				        ShowPlayerDialogEx(playerid, 4006, DIALOG_STYLE_MSGBOX, "Kupowanie Cometa", "Comet\n\nCena: 5.000.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 480;
-	                    CenaPojazdu[playerid] = 5000000;
-					}
-				    case 7:
-				    {
-				        ShowPlayerDialogEx(playerid, 4007, DIALOG_STYLE_MSGBOX, "Kupowanie Buffalo", "Buffalo\n\nCena: 3.000.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 402;
-	                    CenaPojazdu[playerid] = 3000000;
-					}
-				    case 8:
-				    {
-				        ShowPlayerDialogEx(playerid, 4008, DIALOG_STYLE_MSGBOX, "Kupowanie ZR-350", "ZR-350\n\nCena: 2.500.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 477;
-	                    CenaPojazdu[playerid] = 2500000;
-					}
-				    case 9:
-				    {
-				        ShowPlayerDialogEx(playerid, 4009, DIALOG_STYLE_MSGBOX, "Kupowanie Phoenixa", "Phoenix\n\nCena: 750.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 603;
-	                    CenaPojazdu[playerid] = 750000;
-					}
-				    case 10:
-				    {
-				        ShowPlayerDialogEx(playerid, 4010, DIALOG_STYLE_MSGBOX, "Kupowanie Eurosa", "Euros\n\nCena: 4.000.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 587;
-	                    CenaPojazdu[playerid] = 4000000;
-					}
-				    case 11:
-				    {
-				        ShowPlayerDialogEx(playerid, 4011, DIALOG_STYLE_MSGBOX, "Kupowanie Sultana", "Sultan\n\nCena: 5.000.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 560;
-	                    CenaPojazdu[playerid] = 5000000;
-					}
-				    case 12:
-				    {
-				        ShowPlayerDialogEx(playerid, 4012, DIALOG_STYLE_MSGBOX, "Kupowanie Jestera", "Jester\n\nCena: 4.500.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 559;
-	                    CenaPojazdu[playerid] = 4500000;
-					}
-				    case 13:
-				    {
-				        ShowPlayerDialogEx(playerid, 4013, DIALOG_STYLE_MSGBOX, "Kupowanie Elegy", "Elegy\n\nCena: 4.000.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 562;
-	                    CenaPojazdu[playerid] = 4000000;
-					}
-				    case 14:
-				    {
-				        ShowPlayerDialogEx(playerid, 4014, DIALOG_STYLE_MSGBOX, "Kupowanie Uranusa", "Uranus\n\nCena: 3.250.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 558;
-	                    CenaPojazdu[playerid] = 3250000;
-					}
-				    case 15:
-				    {
-				        ShowPlayerDialogEx(playerid, 4015, DIALOG_STYLE_MSGBOX, "Kupowanie Aplha", "Alpha\n\nCena: 900.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 602;
-	                    CenaPojazdu[playerid] = 900000;
-					}
-				    case 16:
-				    {
-				        ShowPlayerDialogEx(playerid, 4016, DIALOG_STYLE_MSGBOX, "Kupowanie Flasha", "Flash\n\nCena: 3.520.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 565;
-	                    CenaPojazdu[playerid] = 3520000;
-					}
-				    case 17:
-				    {
-				        ShowPlayerDialogEx(playerid, 4017, DIALOG_STYLE_MSGBOX, "Kupowanie Hotknife", "Hotknife\n\nCena: 1.300.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 434;
-	                    CenaPojazdu[playerid] = 1300000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-	   		}
-		}
-		if(dialogid == 451)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-					case 0:
-					{
-					    ShowPlayerDialogEx(playerid, 4100, DIALOG_STYLE_MSGBOX, "Kupowanie Bravury", "Bravura\n\nCena: 160.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 401;
-	                    CenaPojazdu[playerid] = 160000;
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid, 4101, DIALOG_STYLE_MSGBOX, "Kupowanie Manany", "Manana\n\nCena: 180.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 410;
-	                    CenaPojazdu[playerid] = 180000;
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid, 4102, DIALOG_STYLE_MSGBOX, "Kupowanie Esperanto", "Esperanto\n\nCena: 200.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 419;
-	                    CenaPojazdu[playerid] = 200000;
-					}
-					case 3:
-					{
-					    ShowPlayerDialogEx(playerid, 4103, DIALOG_STYLE_MSGBOX, "Kupowanie Premiera", "Premier\n\nCena: 280.000$\nPrÍdkoúÊ Maksymalna: 180km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 426;
-	                    CenaPojazdu[playerid] = 280000;
-					}
-					case 4:
-					{
-					    ShowPlayerDialogEx(playerid, 4104, DIALOG_STYLE_MSGBOX, "Kupowanie Previona", "Previon\n\nCena: 150.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 436;
-	                    CenaPojazdu[playerid] = 150000;
-					}
-					case 5:
-					{
-					    ShowPlayerDialogEx(playerid, 4105, DIALOG_STYLE_MSGBOX, "Kupowanie Nebuli", "Nebula\n\nCena: 320.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 516;
-	                    CenaPojazdu[playerid] = 320000;
-					}
-					case 6:
-					{
-					    ShowPlayerDialogEx(playerid, 4106, DIALOG_STYLE_MSGBOX, "Kupowanie Solair", "Solair\n\nCena: 350.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 458;
-	                    CenaPojazdu[playerid] = 350000;
-					}
-					case 7:
-					{
-					    ShowPlayerDialogEx(playerid, 4107, DIALOG_STYLE_MSGBOX, "Kupowanie Glendale", "Glendale\n\nCena: 280.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 466;
-	                    CenaPojazdu[playerid] = 280000;
-					}
-					case 8:
-					{
-					    ShowPlayerDialogEx(playerid, 4108, DIALOG_STYLE_MSGBOX, "Kupowanie Oceanic", "Oceanic\n\nCena: 340.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 467;
-	                    CenaPojazdu[playerid] = 340000;
-					}
-					case 9:
-					{
-					    ShowPlayerDialogEx(playerid, 4109, DIALOG_STYLE_MSGBOX, "Kupowanie Hermesa", "Hermes\n\nCena: 275.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 474;
-	                    CenaPojazdu[playerid] = 275000;
-					}
-					case 10:
-					{
-					    ShowPlayerDialogEx(playerid, 4110, DIALOG_STYLE_MSGBOX, "Kupowanie Sabre", "Sabre\n\nCena: 300.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 475;
-	                    CenaPojazdu[playerid] = 300000;
-					}
-					case 11:
-					{
-					    ShowPlayerDialogEx(playerid, 4111, DIALOG_STYLE_MSGBOX, "Kupowanie Reginy", "Regina\n\nCena: 375.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 479;
-	                    CenaPojazdu[playerid] = 375000;
-					}
-					case 12:
-					{
-					    ShowPlayerDialogEx(playerid, 4112, DIALOG_STYLE_MSGBOX, "Kupowanie Greenwooda", "Greenwood\n\nCena: 275.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 492;
-	                    CenaPojazdu[playerid] = 275000;
-					}
-					case 13:
-					{
-					    ShowPlayerDialogEx(playerid, 4113, DIALOG_STYLE_MSGBOX, "Kupowanie Blisty", "Blista Compact\n\nCena: 500.000$\nPrÍdkoúÊ Maksymalna: 170km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 496;
-	                    CenaPojazdu[playerid] = 500000;
-					}
-					case 14:
-					{
-					    ShowPlayerDialogEx(playerid, 4114, DIALOG_STYLE_MSGBOX, "Kupowanie Majestica", "Majestic\n\nCena: 250.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 517;
-	                    CenaPojazdu[playerid] = 250000;
-					}
-					case 15:
-					{
-					    ShowPlayerDialogEx(playerid, 4115, DIALOG_STYLE_MSGBOX, "Kupowanie Buccaneera", "Buccaneer\n\nCena: 140.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 518;
-	                    CenaPojazdu[playerid] = 140000;
-					}
-					case 16:
-					{
-					    ShowPlayerDialogEx(playerid, 4116, DIALOG_STYLE_MSGBOX, "Kupowanie Fortune", "Fortune\n\nCena: 400.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 526;
-	                    CenaPojazdu[playerid] = 400000;
-					}
-					case 17:
-					{
-					    ShowPlayerDialogEx(playerid, 4117, DIALOG_STYLE_MSGBOX, "Kupowanie Cadrony", "Cadrona\n\nCena: 375.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 527;
-	                    CenaPojazdu[playerid] = 375000;
-					}
-					case 18:
-					{
-					    ShowPlayerDialogEx(playerid, 4118, DIALOG_STYLE_MSGBOX, "Kupowanie Willarda", "Willard\n\nCena: 340.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 529;
-	                    CenaPojazdu[playerid] = 340000;
-					}
-					case 19:
-					{
-					    ShowPlayerDialogEx(playerid, 4119, DIALOG_STYLE_MSGBOX, "Kupowanie Intrudera", "Intruder\n\nCena: 385.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 546;
-	                    CenaPojazdu[playerid] = 385000;
-					}
-					case 20:
-					{
-					    ShowPlayerDialogEx(playerid, 4120, DIALOG_STYLE_MSGBOX, "Kupowanie Primo", "Primo\n\nCena: 340.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 547;
-	                    CenaPojazdu[playerid] = 340000;
-					}
-					case 21:
-					{
-					    ShowPlayerDialogEx(playerid, 4121, DIALOG_STYLE_MSGBOX, "Kupowanie Tahomy", "Tahoma\n\nCena: 390.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 566;
-	                    CenaPojazdu[playerid] = 390000;
-					}
-					case 22:
-					{
-					    ShowPlayerDialogEx(playerid, 4122, DIALOG_STYLE_MSGBOX, "Kupowanie Emperora", "Emperor\n\nCena: 230.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 585;
-	                    CenaPojazdu[playerid] = 230000;
-					}
-					case 23:
-					{
-					    ShowPlayerDialogEx(playerid, 4123, DIALOG_STYLE_MSGBOX, "Kupowanie Cluba", "Club\n\nCena: 700.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 589;
-	                    CenaPojazdu[playerid] = 700000;
-					}
-					case 24:
-					{
-					    ShowPlayerDialogEx(playerid, 4124, DIALOG_STYLE_MSGBOX, "Kupowanie Surnise", "Surnise\n\nCena: 395.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 550;
-	                    CenaPojazdu[playerid] = 395000;
-					}
-				}
-			}
-			if(!response)
-			{
-	            ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid == 452)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    ShowPlayerDialogEx(playerid, 4200, DIALOG_STYLE_MSGBOX, "Kupowanie Limuzyny", "Limuzyna\n\nCena: 5.000.000$\nPrÍdkoúÊ Maksymalna: 180km/h\nIloúÊ miejsc: 4\nOpis: Pojazd posiada wnÍtrze do ktÛrego moøna \n\t wchodziÊ i wychodziÊ komendπ /wejdzw", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 409;
-	                    CenaPojazdu[playerid] = 5000000;
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid, 4201, DIALOG_STYLE_MSGBOX, "Kupowanie Virgo", "Virgo\n\nCena: 680.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 491;
-	                    CenaPojazdu[playerid] = 680000;
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid, 4203, DIALOG_STYLE_MSGBOX, "Kupowanie Washington", "Washington\n\nCena: 750.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 421;
-	                    CenaPojazdu[playerid] = 750000;
-					}
-					case 3:
-					{
-					    ShowPlayerDialogEx(playerid, 4203, DIALOG_STYLE_MSGBOX, "Kupowanie Stafforda", "Stafford\n\nCena: 1.800.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 580;
-	                    CenaPojazdu[playerid] = 1800000;
-					}
-					case 4:
-					{
-					    ShowPlayerDialogEx(playerid, 4204, DIALOG_STYLE_MSGBOX, "Kupowanie Sentinela", "Sentinel\n\nCena: 600.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 405;
-	                    CenaPojazdu[playerid] = 600000;
-					}
-					case 5:
-					{
-					    ShowPlayerDialogEx(playerid, 4205, DIALOG_STYLE_MSGBOX, "Kupowanie Admirala", "Admiral\n\nCena: 800.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 445;
-	                    CenaPojazdu[playerid] = 800000;
-					}
-					case 6:
-					{
-					    ShowPlayerDialogEx(playerid, 4206, DIALOG_STYLE_MSGBOX, "Kupowanie Eleganta", "Elegant\n\nCena: 750.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 507;
-	                    CenaPojazdu[playerid] = 750000;
-					}
-					case 7:
-					{
-					    ShowPlayerDialogEx(playerid, 4207, DIALOG_STYLE_MSGBOX, "Kupowanie Merita", "Merit\n\nCena: 500.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 551;
-	                    CenaPojazdu[playerid] = 500000;
-					}
-					case 8:
-					{
-					    ShowPlayerDialogEx(playerid, 4208, DIALOG_STYLE_MSGBOX, "Kupowanie Stratuma", "Stratum\n\nCena: 2.850.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 561;
-	                    CenaPojazdu[playerid] = 2850000;
-					}
-					case 9:
-					{
-					    ShowPlayerDialogEx(playerid, 4209, DIALOG_STYLE_MSGBOX, "Kupowanie Vincenta", "Vincent\n\nCena: 700.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 540;
-	                    CenaPojazdu[playerid] = 700000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid == 453)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    ShowPlayerDialogEx(playerid, 4300, DIALOG_STYLE_MSGBOX, "Kupowanie Ranchera", "Rancher\n\nCena: 600.000$\nPrÍdkoúÊ Maksymalna: 170km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 489;
-	                    CenaPojazdu[playerid] = 600000;
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid, 4301, DIALOG_STYLE_MSGBOX, "Kupowanie Huntleya", "Huntley\n\nCena: 350.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 579;
-	                    CenaPojazdu[playerid] = 350000;
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid, 4302, DIALOG_STYLE_MSGBOX, "Kupowanie Landstalkera", "Landstalker\n\nCena: 200.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 400;
-	                    CenaPojazdu[playerid] = 200000;
-					}
-					case 3:
-					{
-					    ShowPlayerDialogEx(playerid, 4302, DIALOG_STYLE_MSGBOX, "Kupowanie Mesy", "Mesa\n\nCena: 700.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 500;
-	                    CenaPojazdu[playerid] = 700000;
-					}
-					case 4:
-					{
-					    ShowPlayerDialogEx(playerid, 4303, DIALOG_STYLE_MSGBOX, "Kupowanie BF Injection", "BF Injection\n\nCena: 800.000$\nPrÍdkoúÊ Maksymalna: 170km/h\nIloúÊ miejsc: 2\nOpis: Najlepszy do lansowania siÍ na plaøy", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 424;
-	                    CenaPojazdu[playerid] = 800000;
-					}
-					/*=========[ZABLOKOWANO Z POWODU NADUØY∆ POJAZDU - 18-02-2019]=============
-					case 5:
-					{
-					    ShowPlayerDialogEx(playerid, 4304, DIALOG_STYLE_MSGBOX, "Kupowanie Sandkinga", "Sandking\n\nCena: 4.000.000$\nPrÍdkoúÊ Maksymalna: 180km/h\nIloúÊ miejsc: 2\nOpis: Sportowy wÛz terenowy, kolory raczej ciemne.\nPrzejedzie przez kaødπ przeszkodÍ!", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 495;
-	                    CenaPojazdu[playerid] = 4000000;
-					}*/
-					case 5:
-					{
-					    ShowPlayerDialogEx(playerid, 4304, DIALOG_STYLE_MSGBOX, "Kupowanie Hummera", "Hummer\n\nCena: 7.000.000$\nPrÍdkoúÊ Maksymalna: 180km/h\nIloúÊ miejsc: 2\nOpis: Wojskowy wÛz terenowy, tylko jeden kolor.", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 470;
-	                    CenaPojazdu[playerid] = 7000000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid == 454)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    ShowPlayerDialogEx(playerid, 4400, DIALOG_STYLE_MSGBOX, "Kupowanie Yosemite", "Yosemite\n\nCena: 350.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 554;
-	                    CenaPojazdu[playerid] = 350000;
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid, 4401, DIALOG_STYLE_MSGBOX, "Kupowanie Bobcata", "Bobcat\n\nCena: 160.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 422;
-	                    CenaPojazdu[playerid] = 160000;
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid, 4402, DIALOG_STYLE_MSGBOX, "Kupowanie Picadora", "Picador\n\nCena: 220.000$\nPrÍdkoúÊ Maksymalna: 165km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 600;
-	                    CenaPojazdu[playerid] = 220000;
-					}
-					case 3:
-					{
-					    ShowPlayerDialogEx(playerid, 4403, DIALOG_STYLE_MSGBOX, "Kupowanie Sadlera", "Sadler\n\nCena: 180.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 543;
-	                    CenaPojazdu[playerid] = 180000;
-					}
-					case 4:
-					{
-					    ShowPlayerDialogEx(playerid, 4404, DIALOG_STYLE_MSGBOX, "Kupowanie Waltona", "Walton\n\nCena: 80.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 478;
-	                    CenaPojazdu[playerid] = 80000;
-					}
-					case 5:
-					{
-					    ShowPlayerDialogEx(playerid, 4603, DIALOG_STYLE_MSGBOX, "Kupowanie Slamvana", "Slamvan\n\nCena: 4.500.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Van, dostÍpne malunki i full tuning.", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 535;//dodaj slamvana slamavana
-	                    CenaPojazdu[playerid] = 4500000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid == 455)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    ShowPlayerDialogEx(playerid, 4500, DIALOG_STYLE_MSGBOX, "Kupowanie Cometa", "Comet\n\nCena: 5.000.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 480;
-	                    CenaPojazdu[playerid] = 5000000;
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid, 4501, DIALOG_STYLE_MSGBOX, "Kupowanie Windsora", "Windsor\n\nCena: 5.550.000$\nPrÍdkoúÊ Maksymalna: 180km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 555;
-	                    CenaPojazdu[playerid] = 5550000;
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid, 4502, DIALOG_STYLE_MSGBOX, "Kupowanie Feltzera", "Feltzer\n\nCena: 1.400.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 533;
-	                    CenaPojazdu[playerid] = 1400000;
-					}
-					case 3:
-					{
-					    ShowPlayerDialogEx(playerid, 4503, DIALOG_STYLE_MSGBOX, "Kupowanie Staliona", "Stalion\n\nCena: 250.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 439;
-	                    CenaPojazdu[playerid] = 250000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid == 456)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    ShowPlayerDialogEx(playerid, 4600, DIALOG_STYLE_MSGBOX, "Kupowanie Blade", "Blade\n\nCena: 1.280.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 536;
-	                    CenaPojazdu[playerid] = 1280000;
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid, 4601, DIALOG_STYLE_MSGBOX, "Kupowanie Savanny", "Savanna\n\nCena: 1.330.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 567;
-	                    CenaPojazdu[playerid] = 1330000;
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid, 4602, DIALOG_STYLE_MSGBOX, "Kupowanie Remington", "Savanna\n\nCena: 1.400.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 534;
-	                    CenaPojazdu[playerid] = 1400000;
-					}
-					case 3:
-					{
-					    ShowPlayerDialogEx(playerid, 4603, DIALOG_STYLE_MSGBOX, "Kupowanie Tornada", "Tornado\n\nCena: 1.230.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 576;
-	                    CenaPojazdu[playerid] = 1230000;
-					}
-					case 4:
-					{
-					    ShowPlayerDialogEx(playerid, 4604, DIALOG_STYLE_MSGBOX, "Kupowanie Voodoo", "Voodoo\n\nCena: 1.220.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 412;
-	                    CenaPojazdu[playerid] = 1220000;
-					}
-					case 5:
-					{
-					    ShowPlayerDialogEx(playerid, 4605, DIALOG_STYLE_MSGBOX, "Kupowanie Broadwaya", "Broadway\n\nCena: 1.210.000$\nPrÍdkoúÊ Maksymalna: 170km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 575;
-	                    CenaPojazdu[playerid] = 1210000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid == 457)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    ShowPlayerDialogEx(playerid, 4700, DIALOG_STYLE_MSGBOX, "Kupowanie Clovera", "Clover\n\nCena: 45.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 542;
-	                    CenaPojazdu[playerid] = 45000;
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid, 4701, DIALOG_STYLE_MSGBOX, "Kupowanie Tampy", "Tampa\n\nCena: 40.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 549;
-	                    CenaPojazdu[playerid] = 40000;
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid, 4701, DIALOG_STYLE_MSGBOX, "Kupowanie Perennial", "Perennial\n\nCena: 60.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 404;
-	                    CenaPojazdu[playerid] = 60000;
-					}
-					case 3:
-					{
-					    ShowPlayerDialogEx(playerid, 4702, DIALOG_STYLE_MSGBOX, "Kupowanie Glendale(obity)", "Glendale(obity)\n\nCena: 28.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 604;
-	                    CenaPojazdu[playerid] = 28000;
-					}
-					case 4:
-					{
-					    ShowPlayerDialogEx(playerid, 4703, DIALOG_STYLE_MSGBOX, "Kupowanie Sadler(obity)", "Sadler(obity)\n\nCena: 25.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 605;
-	                    CenaPojazdu[playerid] = 25000;
-					}
-					case 5:
-					{
-					    ShowPlayerDialogEx(playerid, 4704, DIALOG_STYLE_MSGBOX, "Kupowanie TurbowÛzek", "TurbowÛzek\n\nCena: 7.500$\nPrÍdkoúÊ Maksymalna: 80km/h\nIloúÊ miejsc: 1\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 572;
-	                    CenaPojazdu[playerid] = 7500;
-					}
-					case 6:
-					{
-					    ShowPlayerDialogEx(playerid, 4705, DIALOG_STYLE_MSGBOX, "Kupowanie Skuter", "Skuter\n\nCena: 17.000$\nPrÍdkoúÊ Maksymalna: 120km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 462;
-	                    CenaPojazdu[playerid] = 17000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid == 458)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    ShowPlayerDialogEx(playerid, 4800, DIALOG_STYLE_MSGBOX, "Kupowanie NRG-500", "NRG-500\n\nCena: 11.500.000$\nPrÍdkoúÊ Maksymalna: 240km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 522;
-	                    CenaPojazdu[playerid] = 11500000;
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid, 4801, DIALOG_STYLE_MSGBOX, "Kupowanie FCR-900", "FCR-900\n\nCena: 8.000.000$\nPrÍdkoúÊ Maksymalna: 220km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 521;
-	                    CenaPojazdu[playerid] = 8000000;
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid, 4802, DIALOG_STYLE_MSGBOX, "Kupowanie BF-400", "BF-400\n\nCena: 4.500.000$\nPrÍdkoúÊ Maksymalna: 200km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 581;
-	                    CenaPojazdu[playerid] = 4500000;
-					}
-					case 3:
-					{
-					    ShowPlayerDialogEx(playerid, 4803, DIALOG_STYLE_MSGBOX, "Kupowanie Freeway", "Freeway\n\nCena: 900.000$\nPrÍdkoúÊ Maksymalna: 180km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 463;
-	                    CenaPojazdu[playerid] = 900000;
-					}
-					case 4:
-					{
-					    ShowPlayerDialogEx(playerid, 4804, DIALOG_STYLE_MSGBOX, "Kupowanie Wayfarer", "Wayfarer\n\nCena: 750.000$\nPrÍdkoúÊ Maksymalna: 170km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 586;
-	                    CenaPojazdu[playerid] = 750000;
-					}
-					case 5:
-					{
-					    ShowPlayerDialogEx(playerid, 4805, DIALOG_STYLE_MSGBOX, "Kupowanie Sancheza", "Sanchez\n\nCena: 1.500.000$\nPrÍdkoúÊ Maksymalna: 230km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 468;
-	                    CenaPojazdu[playerid] = 1500000;
-					}
-					case 6:
-					{
-					    ShowPlayerDialogEx(playerid, 4806, DIALOG_STYLE_MSGBOX, "Kupowanie Quad", "Quad\n\nCena: 600.000$\nPrÍdkoúÊ Maksymalna: 230km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 471;
-	                    CenaPojazdu[playerid] = 600000;
-					}
-					case 7:
-					{
-					   	ShowPlayerDialogEx(playerid, 4807, DIALOG_STYLE_MSGBOX, "Kupowanie Skuter", "Skuter\n\nCena: 17.000$\nPrÍdkoúÊ Maksymalna: 120km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 462;
-	                    CenaPojazdu[playerid] = 17000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid == 459)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-	                    ShowPlayerDialogEx(playerid, 4900, DIALOG_STYLE_MSGBOX, "Kupowanie Burrito", "Burrito\n\nCena: 350.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 482;
-	                    CenaPojazdu[playerid] = 350000;
-					}
-					case 1:
-					{
-	                    ShowPlayerDialogEx(playerid, 4901, DIALOG_STYLE_MSGBOX, "Kupowanie Bandito", "Bandito\n\nCena: 1.300.000$\nPrÍdkoúÊ Maksymalna: 170km/h\nIloúÊ miejsc: 1\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 568;
-	                    CenaPojazdu[playerid] = 1300000;
-					}
-					case 2:
-					{
-	                    ShowPlayerDialogEx(playerid, 4902, DIALOG_STYLE_MSGBOX, "Kupowanie Hotknife", "Hotknife\n\nCena: 1.300.000$\nPrÍdkoúÊ Maksymalna: 170km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 434;
-	                    CenaPojazdu[playerid] = 1300000;
-					}
-					case 3:
-					{
-	                    ShowPlayerDialogEx(playerid, 4903, DIALOG_STYLE_MSGBOX, "Kupowanie Camper", "Camper\n\nCena: 350.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 4\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 483;
-	                    CenaPojazdu[playerid] = 350000;
-					}
-					case 4:
-					{
-	                    ShowPlayerDialogEx(playerid, 4904, DIALOG_STYLE_MSGBOX, "Kupowanie Kamping", "Kamping\n\nCena: 700.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 10-15 (Ruchomy dom)\nOpis: Pojazd posiada wnÍtrze do ktÛrego moøna \n\t wchodziÊ i wychodziÊ komendπ /wejdzw", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 508;
-	                    CenaPojazdu[playerid] = 700000;
-					}
-					case 5:
-					{
-	                    ShowPlayerDialogEx(playerid, 4905, DIALOG_STYLE_MSGBOX, "Kupowanie Hustler", "Hustler\n\nCena: 550.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nIloúÊ miejsc: 2\nOpis: Brak", "Kup!", "WrÛÊ");
-	                    pojazdid[playerid] = 545;
-	                    CenaPojazdu[playerid] = 550000;
-					}
-				}
-			}
-			if(!response)
-			{
-				ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriÍ kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa kaødπ kieszeÒ\nMotory\nInne pojazdy", "Wybierz", "Wyjdü");
-			}
-		}
-		if(dialogid >= 4000 && dialogid <= 4017)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-		        ShowPlayerDialogEx(playerid, 450, DIALOG_STYLE_LIST, "Samochody sportowe", "Turismo 10mln\nInfernus 12,5mln\nBullet 8mln\nSuper GT 7,5mln\nCheetah 7mln\nBanshee 6mln\nComet 5mln\nBuffalo 3mln\nZR-350 2,5mln\nPhoenix 750tys\nEuros 4mln\nSultan 5mln\nJester 4,5mln\nElegy 4mln\nUranus 3,25mln\nAlpha 900tys\nFlash 3,52mln\nHotknife 1,3mln", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-		    }
-		}
-		if(dialogid >= 4100 && dialogid <= 4124)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 451, DIALOG_STYLE_LIST, "Samochody osobowe", "Bravura 160tys\nManana 180tys\nEsperanto 200tys\nPremier 280tys\nPrevion 150tys\nNebula 320tys\nSolair 350tys\nGlendale 280tys\nOceanic 340tys\nHermes 275tys\nSabre 300tys\nRegina 375tys\nGreenwood 275tys\nBlista Compact 500tys\nMajestic 250tys\nBuccaneer 140tys\nFortune 400tys\nCadrona 375tys\nWillard 340tys\nIntruder 385tys\nPrimo 340tys\nTahoma 390tys\nEmperor 230k\nClub 700tys\nSurnise", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 4200 && dialogid <= 4209)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 452, DIALOG_STYLE_LIST, "Samochody luksusowe", "Limuzyna 5mln\nVirgo 680tys\nWashington 750tys\nStafford 1,8mln\nSentiniel 600tys\nAdmiral 860tys\nElegant 750tys\nMerit 500tys\nStratum 2,85mln\nVincent 700tys", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 4300 && dialogid <= 4305)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 453, DIALOG_STYLE_LIST, "Samochody terenowe", "Rancher 600tys\nHuntley 350tys\nLandstalker 200tys\nMesa 700tys\nBF Injection 800tys\nSandking 4mln\nHummer 7mln", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 4400 && dialogid <= 4404)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 454, DIALOG_STYLE_LIST, "Pick-up`y", "Yosemite 350tys\nBobcat 160tys\nPicador 220tys\nSadler 180tys\nWalton 80tys\nSlamvan 4,5mln", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 4500 && dialogid <= 4503)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 455, DIALOG_STYLE_LIST, "Kabriolety", "Comet 5mln\nWindsor 5,5mln\nFeltzer 1,4mln\nStalion 250tys", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 4600 && dialogid <= 4605)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 456, DIALOG_STYLE_LIST, "Lowridery", "Blade 1,28mln\nSavanna 1,33mln\nRemington 1,4mln\nTornado 1,23mln\nVoodoo 1,22mln\nBroadway 1,21mln", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 4700 && dialogid <= 4705)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 457, DIALOG_STYLE_LIST, "Na kaødπ kieszeÒ", "Clover 45tys\nTampa 40tys\nPerenniel 60tys\nGlendale(obity) 28tys\nSadler(obity) 25tys\nTurbowÛzek úmiesznie tanio\nSkuter 17tys", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 4800 && dialogid <= 4807)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 458, DIALOG_STYLE_LIST, "Jednoúlady", "NRG-500 11,5mln\nFCR-900 8mln\nBF-400 4,5mln\nFreeway 900tys\nWayfarer 750tys\nSanchez 1,5mln\nQuad 600tys\nFaggio 17tys", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 4900 && dialogid <= 4907)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego wozu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-		    }
-		    if(!response)
-		    {
-	            ShowPlayerDialogEx(playerid, 459, DIALOG_STYLE_LIST, "Inne pojazdy", "Burrito 350tys\nBandito 1,3mln\nHotknife 1,3mln\nCamper 350tys\nKamping 700tys\nHustler 550tys", "Wybierz", "WrÛÊ");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid == 31)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    KolorPierwszy[playerid] = 0;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 1:
-					{
-	    				KolorPierwszy[playerid] = 1;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 2:
-					{
-	    				KolorPierwszy[playerid] = 2;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 3:
-					{
-	    				KolorPierwszy[playerid] = 3;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 4:
-					{
-	    				KolorPierwszy[playerid] = 4;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 5:
-					{
-	    				KolorPierwszy[playerid] = 126;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 6:
-					{
-	    				KolorPierwszy[playerid] = 6;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 7:
-					{
-	    				KolorPierwszy[playerid] = 7;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 8:
-					{
-	    				KolorPierwszy[playerid] = 8;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 9:
-					{
-	    				KolorPierwszy[playerid] = 42;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 10:
-					{
-	    				KolorPierwszy[playerid] = 16;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 11:
-					{
-	    				KolorPierwszy[playerid] = 20;
-					    ShowPlayerDialogEx(playerid, 32, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 12:
-					{
-					    ShowPlayerDialogEx(playerid, 35, DIALOG_STYLE_INPUT, "Wybierz Kolor 1", "Wpisz numer koloru (od 0 do 126)", "Wybierz", "Wyjdü");
-					}
-				}
-			}
-			if(!response)
-			{
-			    pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-        else if(dialogid == 32)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-						KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 0, CenaPojazdu[playerid]);
-					}
-					case 1:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 1, CenaPojazdu[playerid]);
-					}
-					case 2:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 2, CenaPojazdu[playerid]);
-					}
-					case 3:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 3, CenaPojazdu[playerid]);
-					}
-					case 4:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 4, CenaPojazdu[playerid]);
-					}
-					case 5:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 126, CenaPojazdu[playerid]);
-					}
-					case 6:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 6, CenaPojazdu[playerid]);
-					}
-					case 7:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 7, CenaPojazdu[playerid]);
-					}
-					case 8:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 8, CenaPojazdu[playerid]);
-					}
-					case 9:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 42, CenaPojazdu[playerid]);
-					}
-					case 10:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 16, CenaPojazdu[playerid]);
-					}
-					case 11:
-					{
-	    				KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], 20, CenaPojazdu[playerid]);
-					}
-					case 12:
-					{
-					    ShowPlayerDialogEx(playerid, 36, DIALOG_STYLE_INPUT, "Wybierz Kolor 2", "Wpisz numer koloru (od 0 do 126)", "Wybierz", "Wyjdü");
-					}
-				}
-			}
-			if(!response)
-			{
-			    pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-	            KolorPierwszy[playerid] = 0;
-			}
-		}
-        else if(dialogid == D_AUTO_RESPRAY)
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-					    KolorPierwszy[playerid] = 0;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 1:
-					{
-	    				KolorPierwszy[playerid] = 1;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 2:
-					{
-	    				KolorPierwszy[playerid] = 2;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 3:
-					{
-	    				KolorPierwszy[playerid] = 3;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 4:
-					{
-	    				KolorPierwszy[playerid] = 4;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 5:
-					{
-	    				KolorPierwszy[playerid] = 126;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 6:
-					{
-	    				KolorPierwszy[playerid] = 6;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 7:
-					{
-	    				KolorPierwszy[playerid] = 7;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 8:
-					{
-	    				KolorPierwszy[playerid] = 8;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 9:
-					{
-	    				KolorPierwszy[playerid] = 42;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 10:
-					{
-	    				KolorPierwszy[playerid] = 16;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 11:
-					{
-	    				KolorPierwszy[playerid] = 20;
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-					}
-					case 12:
-					{
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY_OWN, DIALOG_STYLE_INPUT, "Wybierz Kolor 1", "Wpisz numer koloru (od 0 do 126)", "Wybierz", "Wyjdü");
-					}
-				}
-			}
-		}
-		else if(dialogid == D_AUTO_RESPRAY2)
-		{
-		    if(response)
-		    {
-                new veh = GetPlayerVehicleID(playerid);
-		        switch(listitem)
-				{
-				    case 0..8:
-					{
-						if(IsCarOwner(playerid, veh))
-						{
-							ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
-							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
-							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							ZabierzKase(playerid, 1500);
-						}
-					}
-					case 9:
-					{
-                        if(IsCarOwner(playerid, veh))
-						{
-							ChangeVehicleColor(veh, KolorPierwszy[playerid], 42);
-							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
-							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							ZabierzKase(playerid, 1500);
-						}
-					}
-					case 10:
-					{
-                        if(IsCarOwner(playerid, veh))
-						{
-							ChangeVehicleColor(veh, KolorPierwszy[playerid], 16);
-							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
-							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							ZabierzKase(playerid, 1500);
-						}
-					}
-					case 11:
-					{
-                        if(IsCarOwner(playerid, veh))
-						{
-							ChangeVehicleColor(veh, KolorPierwszy[playerid], 20);
-							MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], listitem);
-							SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-							ZabierzKase(playerid, 1500);
-						}
-					}
-					case 12:
-					{
-					    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY_OWN2, DIALOG_STYLE_INPUT, "Wybierz Kolor 2", "Wpisz numer koloru (od 0 do 126)", "Wybierz", "Wyjdü");
-					}
-				}
-			}
-			if(!response)
-			{
-	            KolorPierwszy[playerid] = 0;
-			}
-		}
-		else if(dialogid == 36)
-		{
-		    if(response)
-		    {
-		        if(strval(inputtext) > 0 &&  strval(inputtext) < 255)
-		        {
-			        KupowaniePojazdu(playerid, pojazdid[playerid], KolorPierwszy[playerid], strval(inputtext), CenaPojazdu[playerid]);
-				}
-				else
-				{
-	                ShowPlayerDialogEx(playerid, 36, DIALOG_STYLE_INPUT, "Wybierz Kolor 2", "Wpisz numer koloru (od 0 do 255)", "Wybierz", "Wyjdü");
-				}
-			}
-		    if(!response)
-			{
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-	            KolorPierwszy[playerid] = 0;
-			}
-		}
-        else if(dialogid == D_AUTO_RESPRAY_OWN)
-		{
-		    if(response)
-		    {
-		        if(strval(inputtext) > 0 &&  strval(inputtext) < 255)
-		        {
-			        KolorPierwszy[playerid] = strval(inputtext);
-			    	ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY2, DIALOG_STYLE_LIST, "Wybierz Kolor 2", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)", "Wybierz", "Wyjdü");
-				}
-				else
-				{
-				    ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY_OWN, DIALOG_STYLE_INPUT, "Wybierz Kolor 1", "Wpisz numer koloru (od 0 do 255)", "Wybierz", "Wyjdü");
-				}
-			}
-		    if(!response)
-			{
-	            KolorPierwszy[playerid] = 0;
-			}
-		}
-		else if(dialogid == D_AUTO_RESPRAY_OWN2)
-		{
-		    if(response)
-		    {
-		    	if(strval(inputtext) > 0 &&  strval(inputtext) < 255)
-		        {
-                    new veh = GetPlayerVehicleID(playerid);
-                    if(IsCarOwner(playerid, veh))
-					{
-						ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
-						MRP_ChangeVehicleColor(veh, KolorPierwszy[playerid], strval(inputtext));
-						SendClientMessage(playerid, 0xFFC0CB, "Pojazd przemalowany! -1500$");
-						ZabierzKase(playerid, 1500);
-					}
-				}
-				else
-				{
-	                ShowPlayerDialogEx(playerid, D_AUTO_RESPRAY_OWN2, DIALOG_STYLE_INPUT, "Wybierz Kolor 2", "Wpisz numer koloru (od 0 do 126)", "Wybierz", "Wyjdü");
-				}
-			}
-		    if(!response)
-			{
-	            KolorPierwszy[playerid] = 0;
-			}
-		}
-		else if(dialogid == D_AUTO_DESTROY)
-		{
-		    if(response)
-		    {
-		        if(IsPlayerInAnyVehicle(playerid))
-				{
-                    if(!IsCarOwner(playerid, GetPlayerVehicleID(playerid))) return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie naleøy do Ciebie.");
-
-			        new vehicleid = GetPlayerVehicleID(playerid);
-			        new giveplayer[MAX_PLAYER_NAME];
-			        GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					Log(payLog, INFO, "%s zez≥omowa≥ auto %s i dosta≥ 5000$", GetPlayerLogName(playerid), GetVehicleLogName(vehicleid));
-					RemovePlayerFromVehicleEx(playerid);
-					ClearAnimations(playerid);
-    				SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
-
-                    for(new i=0;i<MAX_CAR_SLOT;i++)
-                    {
-                        if(PlayerInfo[playerid][pCars][i] == VehicleUID[vehicleid][vUID])
-                            PlayerInfo[playerid][pCars][i] = 0;
-                    }
-                    Car_Destroy(VehicleUID[vehicleid][vUID]);
-
-	                DajKase(playerid, 5000);
-					SendClientMessage(playerid, COLOR_YELLOW, "Auto zez≥omowane, dostajesz 5000$");
-				}
-				else
-				{
-				    SendClientMessage(playerid, COLOR_YELLOW, "Wsiπdü do pojazdu pojazdu");
-				}
-			}
-		}
-		//System ≥odzi
-		if(dialogid == 400)//System ≥odzi - panel
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-		        {
-	                case 0://Ponton
-		            {
-		                ShowPlayerDialogEx(playerid, 402, DIALOG_STYLE_MSGBOX, "Kupowanie Pontonu", "Ponton\n\nCena: 2.250.000$\nPrÍdkoúÊ Maksymalna: 120km/h\nWielkosc: Ma≥y\nOpis: Ma≥y, zwrotny oraz szybki ponton. Idealny do emocjonalnego p≥ywania po morzu. Jego cena jest przyjazna dla poczπtkujπcych øeglarzy. W 2 kolorach.", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 473;
-				        CenaPojazdu[playerid] = 2250000;
-		            }
-		            case 1://Kuter
-		            {
-		                ShowPlayerDialogEx(playerid, 401, DIALOG_STYLE_MSGBOX, "Kupowanie Kutra", "Kuter\n\nCena: 3.700.000$\nPrÍdkoúÊ Maksymalna: 70km/h\nWielkosc: Spory\nOpis: Jest to wolna oraz ma≥o zwrotna ≥Ûdü. Idealnie nadaje siÍ do ≥owienia ryb. Pok≥ad czÍúciowo zadaszony, reszta otwarta. DostÍpny w 1 kolorze.", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 453;
-				        CenaPojazdu[playerid] = 3700000;
-		            }
-		            case 2://Coastguard
-		            {
-		                ShowPlayerDialogEx(playerid, 403, DIALOG_STYLE_MSGBOX, "Kupowanie Coastguarda", "Coastguard\n\nCena: 8.500.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nWielkosc: åredni\nOpis: DosyÊ szybkki oraz zwrotny statek. Nie jest zadaszony, pok≥ad jest pod≥uøny. Uøywany przez ratownikÛw. Malowany na 2 kolory.", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 472;
-				        CenaPojazdu[playerid] = 8500000;
-		            }
-		            case 3://Launch
-		            {
-		                ShowPlayerDialogEx(playerid, 404, DIALOG_STYLE_MSGBOX, "Kupowanie Launcha", "Launch\n\nCena: 11.000.000$\nPrÍdkoúÊ Maksymalna: 150km/h\nWielkosc: åredni\nOpis: £Ûdü bojowa, uøywana przez wojsko, ma pod≥uøny kad≥ub. DostÍpna jest wersja cywilna z atrapπ karabinu. Nie jest zbyt zwrotna i szybka, ale ma walory bojowe. Zadaszona przednia czÍúÊ. Malowana w 1 kolorze.", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 595;
-				        CenaPojazdu[playerid] = 11000000;
-		            }
-		            case 4://Speeder
-		            {
-		                ShowPlayerDialogEx(playerid, 405, DIALOG_STYLE_MSGBOX, "Kupowanie Speedera", "Speeder\n\nCena: 13.500.000$\nPrÍdkoúÊ Maksymalna: 220km/h\nWielkosc: åredni\nOpis: Typowa motorÛwka: smuk≥a, duøe przyspieszenie i prÍdkoúÊ. Jej zwrotnoúÊ nie jest zachwycajπca ale powinna zadowoliÊ wiÍkszoúÊ uøytkownikÛw. Malowana w 1 kolorze.", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 452;
-				        CenaPojazdu[playerid] = 13500000;
-		            }
-		            case 5://Jetmax
-		            {
-				        ShowPlayerDialogEx(playerid, 407, DIALOG_STYLE_MSGBOX, "Kupowanie Jetmaxa", "Jetmax\n\nCena: 20.000.000$\nPrÍdkoúÊ Maksymalna: 220km/h\nWielkosc: Spory\nOpis: MotorÛwka wyúcigowa, stworzona do duøych prÍdkoúci. Jej cecha charakterystyczna to ogromny silnik wystajπcy z ty≥u ≥odzi. Malowana w 2 kolorach.", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 493;
-				        CenaPojazdu[playerid] = 20000000;
-		            }
-		            case 6://Tropic
-		            {
-		                ShowPlayerDialogEx(playerid, 406, DIALOG_STYLE_MSGBOX, "Kupowanie Tropica", "Speeder\n\nCena: 25.000.000$\nPrÍdkoúÊ Maksymalna: 160km/h\nWielkosc: Duøy\nOpis: Luksusowy jacht wycieczkowy. Posiada dwa piÍtra, miejsce mieszkalne i dach. Nie jest zwrotny ale szybki. Idealny dla bogaczy.", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 454;
-				        CenaPojazdu[playerid] = 25000000;
-		            }
-		            case 7://Squallo
-		            {
-		                ShowPlayerDialogEx(playerid, 408, DIALOG_STYLE_MSGBOX, "Kupowanie Squallo", "Squallo\n\nCena: 25.000.000$\nPrÍdkoúÊ Maksymalna: 260km/h\nWielkosc: Spory\nOpis: MotorÛwka luksusowo wyúcigowa. Jej prÍdkoúÊ jest nieprzyzwoicie duøa a wyglπd i luksus sprawiπ øe bÍdzie siÍ czu≥ jak prawdziwy bogacz. Malowana w 2 kolorach.", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 446;
-				        CenaPojazdu[playerid] = 25000000;
-		            }
-		            case 8://Jacht
-		            {
-		                ShowPlayerDialogEx(playerid, 409, DIALOG_STYLE_MSGBOX, "Kupowanie Jachtu", "Jacht\n\nCena: 40.000.000$\nPrÍdkoúÊ Maksymalna: 80km/h\nWielkosc: Wielki\nOpis: Jacht to statek dla ludzi ktÛrzy wyprawiajπ siÍ w miÍdzykontynentalnπ przeprawÍ oraz pragnπ luksusu. Moøna w nim spaÊ i normalnie gdyø posiada spore wnÍtrze. Malowany w 2 kolorach.\n((UWAGA! Pojazd posiada wnÍtrze do ktÛrego moøna wchodziÊ komendπ /wejdzw))", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 484;
-				        CenaPojazdu[playerid] = 40000000;
-		            }
-				}
-		    }
-		    if(!response)
-		    {
-                return 1;
-		    }
-		}
-		if(dialogid == 410)//System samolotÛw - panel
-		{
-		    if(response)
-		    {
-	     		switch(listitem)
-	       		{
-	         		case 0://Dodo
-	          		{
-		                ShowPlayerDialogEx(playerid, 411, DIALOG_STYLE_MSGBOX, "Kupowanie Dodo", "Dodo\n\nCena: 50.000.000$\nPrÍdkoúÊ lotu poziomego: 150km/h\nWielkosc: Ma≥y\nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 593;
-				        CenaPojazdu[playerid] = 50000000;
-		            }
-		            case 1://Cropduster
-		            {
-		                ShowPlayerDialogEx(playerid, 412, DIALOG_STYLE_MSGBOX, "Kupowanie Cropdustera", "Cropduster\n\nCena: 35.000.000$\nPrÍdkoúÊ lotu poziomego: 140km/h\nWielkosc: åredni\nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 512;
-				        CenaPojazdu[playerid] = 35000000;
-		            }
-		            case 2://Beagle
-		            {
-		                ShowPlayerDialogEx(playerid, 413, DIALOG_STYLE_MSGBOX, "Kupowanie Beagle", "Beagle\n\nCena: 170.000.000$\nPrÍdkoúÊ lotu poziomego: 160km/h\nWielkosc: Spory\nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 511;
-				        CenaPojazdu[playerid] = 170000000;
-		            }
-		            case 3://Stuntplane
-		            {
-		                ShowPlayerDialogEx(playerid, 414, DIALOG_STYLE_MSGBOX, "Kupowanie Stuntplane", "Stuntplane\n\nCena: 185.000.000$\nPrÍdkoúÊ lotu poziomego: 190km/h\nWielkosc: Ma≥y\nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 513;
-				        CenaPojazdu[playerid] = 185000000;
-			     	}
-	        		case 4://Nevada
-		            {
-		                ShowPlayerDialogEx(playerid, 415, DIALOG_STYLE_MSGBOX, "Kupowanie Nevady", "Nevada\n\nCena: 280.000.000$\nPrÍdkoúÊ lotu poziomego: 205km/h\nWielkosc: Duøy\nOpis: ((UWAGA! Pojazd posiada wnÍtrze do ktÛrego moøna wchodziÊ komendπ /wejdzw))", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 553;
-				        CenaPojazdu[playerid] = 280000000;
-		            }
-		            case 5://Shamal
-		            {
-		                ShowPlayerDialogEx(playerid, 416, DIALOG_STYLE_MSGBOX, "Kupowanie Shamala", "Shamal\n\nCena: 515.250.000$\nPrÍdkoúÊ lotu poziomego: 300km/h\nWielkosc: Duøy\nOpis: Odrzutowiec ((UWAGA! Pojazd posiada wnÍtrze do ktÛrego moøna wchodziÊ komendπ /wejdzw))", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 519;
-				        CenaPojazdu[playerid] = 515250000;
-		            }
-		            /*case 6://Wodolotu
-		            {
-		                ShowPlayerDialogEx(playerid, 417, DIALOG_STYLE_MSGBOX, "Kupowanie XXXXXXXXXX", "XXXXXXXXXX\n\nCena: .000.000$\nPrÍdkoúÊ lotu poziomego: km/h\nWielkosc: \nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = xXx;
-				        CenaPojazdu[playerid] = OOOOOOOOOOOOOOOOO;
-		            }*/
-				}
-		    }
-		    if(!response)
-		    {
-                return 1;
-		    }
-		}
-		if(dialogid == 420)//System helikopterÛw - panel
-		{
-		    if(response)
-		    {
-		        switch(listitem)
-		        {
-		            case 0://Sparrow
-		            {
-		                ShowPlayerDialogEx(playerid, 421, DIALOG_STYLE_MSGBOX, "Kupowanie Sparrowa", "Sparrow\n\nCena: 125.000.000$\nårednia prÍdkoúÊ lotu: 160km/h\nWielkosc: Ma≥y\nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 469;
-				        CenaPojazdu[playerid] = 125000000;
-		            }
-		            case 1://Maverick
-		            {
-		                ShowPlayerDialogEx(playerid, 422, DIALOG_STYLE_MSGBOX, "Kupowanie Mavericka", "Maverick\n\nCena: 200.000.000$\nårednia prÍdkoúÊ lotu: 180km/h\nWielkosc: åredni\nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 487;
-				        CenaPojazdu[playerid] = 200000000;
-		            }
-		            case 2://Leviathan
-		            {
-		                ShowPlayerDialogEx(playerid, 423, DIALOG_STYLE_MSGBOX, "Kupowanie Leviathana", "Leviathan\n\nCena: 265.000.000$\nårednia prÍdkoúÊ lotu: 130km/h\nWielkosc: Duøy\nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 417;
-				        CenaPojazdu[playerid] = 265000000;
-		            }
-		            case 3://Raindance
-		            {
-		                ShowPlayerDialogEx(playerid, 424, DIALOG_STYLE_MSGBOX, "Kupowanie Raindance", "Raindance\n\nCena: 325.000.000$\nårednia prÍdkoúÊ lotu: 100km/h\nWielkosc: Spory\nOpis:", "Kup!", "WrÛÊ");
-				        pojazdid[playerid] = 563;
-				        CenaPojazdu[playerid] = 325000000;
-		            }
-		        }
-		    }
-		    if(!response)
-		    {
-                return 1;
-		    }
-		}
-		if(dialogid >= 401 && dialogid <= 409)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranej ≥odzi");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)\nInny", "Wybierz", "Wyjdü");
-			}
-		    if(!response)
-		    {
-		        ShowPlayerDialogEx(playerid, 400, DIALOG_STYLE_LIST, "Kupowanie ≥odzi", "Ponton\t\t2 250 000$\nKuter\t\t3 700 000$\nCoastguard\t8 500 000$\nLaunch\t\t11 000 000$\nSpeeder\t13 500 000$\nJetmax\t\t20 000 000$\nTropic\t\t25 000 000$\nSquallo\t\t25 000 000$\nJacht\t\t40 000 000$", "Wybierz", "Wyjdü");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 411 && dialogid <= 417)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego samolotu");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)\nInny", "Wybierz", "Wyjdü");
-			}
-		    if(!response)
-		    {
-		        ShowPlayerDialogEx(playerid, 410, DIALOG_STYLE_LIST, "Kupowanie samolotu", "Dodo\t\t50 000 000$\nCropduster\t35 000 000$\nBeagle\t\t170 000 000$\nStuntplane\t185 000 000$\nNevada\t\t280 000 000$\nShamal\t\t515 250 000$", "Wybierz", "Wyjdü");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
-		if(dialogid >= 421 && dialogid <= 424)
-		{
-		    if(response)
-		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybierz kolor wybranego helikopteru");
-	            ShowPlayerDialogEx(playerid, 31, DIALOG_STYLE_LIST, "Wybierz Kolor 1", "Czarny\nBialy\nJasno-niebieski\nCzerwony\nZielony\nRÛøowy\nØÛ≥ty\nNiebieski\nSzary\nJasno-czerwony\nJasno-zielony\nFioletowy\nInny (Numer)\nInny", "Wybierz", "Wyjdü");
-			}
-		    if(!response)
-		    {
-		        ShowPlayerDialogEx(playerid, 420, DIALOG_STYLE_LIST, "Kupowanie Helikopteru", "Sparrow\t\t125 000 000$\nMaverick\t\t200 000 000$\nLeviathan\t\t265 000 000$\nRaindance\t\t325 000 000$", "Wybierz", "Wyjdü");
-	            pojazdid[playerid] = 0;
-	            CenaPojazdu[playerid] = 0;
-			}
-		}
+  		
+  		
 		//logowanie w GUI
 		if(dialogid == D_LOGIN)
 		{
@@ -7677,7 +6023,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         {
                             SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
                             TogglePlayerSpectating(playerid, false);
-							SpawnPlayer(playerid);
+							SetPlayerSpawn(playerid);
                         }
 					}
 			        else
@@ -14023,49 +12369,49 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Lekarz
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 70;
-					   	SetPlayerSkin(playerid, 70);
+					   	SetPlayerSkinEx(playerid, 70);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 70 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://Sanitariusz Latynos
 					{
 						PlayerInfo[playerid][pSkin] = 275;
-					   	SetPlayerSkin(playerid, 275);
+					   	SetPlayerSkinEx(playerid, 275);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 275");
 					}
 					case 2://Sanitariusz Murzyn
 					{
 						PlayerInfo[playerid][pSkin] = 274;
-					   	SetPlayerSkin(playerid, 274);
+					   	SetPlayerSkinEx(playerid, 274);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 274");
 					}
 					case 3://Sanitariusz Bia≥y
 					{
 						PlayerInfo[playerid][pSkin] = 276;
-					   	SetPlayerSkin(playerid, 276);
+					   	SetPlayerSkinEx(playerid, 276);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 276");
 					}
 					case 4://Lekarka
 					{
 						PlayerInfo[playerid][pSkin] = 219;
-					   	SetPlayerSkin(playerid, 219);
+					   	SetPlayerSkinEx(playerid, 219);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 219");
 					}
 					case 5://PielÍgniarka Latynoska
 					{
 						PlayerInfo[playerid][pSkin] = 69;
-					   	SetPlayerSkin(playerid, 69);
+					   	SetPlayerSkinEx(playerid, 69);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 69");
 					}
 					case 6://PielÍgniarka Murzynka
 					{
 						PlayerInfo[playerid][pSkin] = 148;
-					   	SetPlayerSkin(playerid, 148);
+					   	SetPlayerSkinEx(playerid, 148);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 148");
 					}
 					case 7://PielÍgniarka Bia≥a
 					{
 						PlayerInfo[playerid][pSkin] = 216;
-					   	SetPlayerSkin(playerid, 216);
+					   	SetPlayerSkinEx(playerid, 216);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 216");
 					}
 				}
@@ -14082,65 +12428,65 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	{
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 93 : 266;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 1://Policjant tempeny
 					{
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 211 : 265;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 2://Policjant Latynos
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 192 : 267;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 3://Policjant bia≥y
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 148 : 280;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 4://Policjant bia≥y(z wπsem)
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 141 : 281;
 						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkin(playerid, skin);
+						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 					}
 					case 5://Policjant z Las Venturas
 					{
 						PlayerInfo[playerid][pSkin] = 282;
-					   	SetPlayerSkin(playerid, 282);
+					   	SetPlayerSkinEx(playerid, 282);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 282");
 					}
 					case 6://Policjant w kapeluszu
 					{
 						PlayerInfo[playerid][pSkin] = 283;
-					   	SetPlayerSkin(playerid, 283);
+					   	SetPlayerSkinEx(playerid, 283);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 283");
 					}
 					case 7://Policjant w kasku
 					{
 						PlayerInfo[playerid][pSkin] = 284;
-					   	SetPlayerSkin(playerid, 284);
+					   	SetPlayerSkinEx(playerid, 284);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 284");
 					}
 					case 8://Policjant w SWAT
 					{
 						PlayerInfo[playerid][pSkin] = 285;
-					   	SetPlayerSkin(playerid, 285);
+					   	SetPlayerSkinEx(playerid, 285);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 285");
 					}
 					case 9://Kadet
 					{
 						PlayerInfo[playerid][pSkin] = 71;
-					   	SetPlayerSkin(playerid, 71);
+					   	SetPlayerSkinEx(playerid, 71);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 71");
 					}
 				}
@@ -14156,55 +12502,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Poborowy
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 287 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://SZEREGOWY
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
 					case 2://KAPRAL
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
 					case 3://PORUCZNIK
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
 					case 4://MAJOR
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
 					case 5://PU£KOWNIK
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 287");
 					}
 					case 6://GERA£
 					{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID:287");
 					}
 					case 7://SWAT
 					{
 						PlayerInfo[playerid][pSkin] = 285;
-					   	SetPlayerSkin(playerid, 285);
+					   	SetPlayerSkinEx(playerid, 285);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 285");
 					}
 					case 8://Kobiekta
 					{
 						PlayerInfo[playerid][pSkin] = 191;
-					   	SetPlayerSkin(playerid, 191);
+					   	SetPlayerSkinEx(playerid, 191);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 191");
 					}
 				}
@@ -14220,43 +12566,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Kadet
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 286;
-					   	SetPlayerSkin(playerid, 286);
+					   	SetPlayerSkinEx(playerid, 286);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 286 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://Agent Federalny
 					{
 						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkin(playerid, 165);
+					   	SetPlayerSkinEx(playerid, 165);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 165");
 					}
 					case 2://Agent åledczy
 					{
 						PlayerInfo[playerid][pSkin] = 166;
-					   	SetPlayerSkin(playerid, 166);
+					   	SetPlayerSkinEx(playerid, 166);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 166");
 					}
 					case 3://Koordynator åledczy
 					{
 						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkin(playerid, 165);
+					   	SetPlayerSkinEx(playerid, 165);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 165");
 					}
 					case 4://Tajny Agent
 					{
 						PlayerInfo[playerid][pSkin] = 166;
-					   	SetPlayerSkin(playerid, 166);
+					   	SetPlayerSkinEx(playerid, 166);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 166");
 					}
 					case 5://Agent Specjalny
 					{
 						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkin(playerid, 165);
+					   	SetPlayerSkinEx(playerid, 165);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 165");
 					}
 					case 6://Dyrektor
 					{
 						PlayerInfo[playerid][pSkin] = 295;
-					   	SetPlayerSkin(playerid, 295);
+					   	SetPlayerSkinEx(playerid, 295);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 295");
 					}
 				}
@@ -14272,25 +12618,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Ochrona 1
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 163;
-					   	SetPlayerSkin(playerid, 163);
+					   	SetPlayerSkinEx(playerid, 163);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 163 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://Technik 1
 					{
 						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkin(playerid, 164);
+					   	SetPlayerSkinEx(playerid, 164);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
 					}
 					case 2://Ochrona 2
 					{
 						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkin(playerid, 164);
+					   	SetPlayerSkinEx(playerid, 164);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
 					}
 					case 3://Technik 2
 					{
 						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkin(playerid, 164);
+					   	SetPlayerSkinEx(playerid, 164);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
 					}
 					case 4://Shatei
@@ -14298,7 +12644,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					   	}
 		   				else
@@ -14311,7 +12657,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					 	}
 		   				else
@@ -14324,7 +12670,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkin(playerid, 287);
+					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					   	}
 		   				else
@@ -14337,7 +12683,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 5)
 		 				{
 						PlayerInfo[playerid][pSkin] = 186;
-					   	SetPlayerSkin(playerid, 186);
+					   	SetPlayerSkinEx(playerid, 186);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybranoskin ID: 186");
 					   	}
 		   				else
@@ -14350,7 +12696,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    				if(PlayerInfo[playerid][pRank] <= 5)
 		 				{
 						PlayerInfo[playerid][pSkin] = 120;
-					   	SetPlayerSkin(playerid, 120);
+					   	SetPlayerSkinEx(playerid, 120);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 120");
 					   	}
 		   				else
@@ -14372,79 +12718,79 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://Staøysta
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 76;
-					   	SetPlayerSkin(playerid, 76);
+					   	SetPlayerSkinEx(playerid, 76);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 76 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://Staøysta1
 					{
 						PlayerInfo[playerid][pSkin] = 60;
-					   	SetPlayerSkin(playerid, 60);
+					   	SetPlayerSkinEx(playerid, 60);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 60");
 					}
 					case 2://Egzaminator
 					{
 						PlayerInfo[playerid][pSkin] = 59;
-					   	SetPlayerSkin(playerid, 59);
+					   	SetPlayerSkinEx(playerid, 59);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 59");
 					}
 					case 3://Egzaminator1
 					{
 						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkin(playerid, 150);
+					   	SetPlayerSkinEx(playerid, 150);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
 					}
 					case 4://Instruktor
 					{
 						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkin(playerid, 150);
+					   	SetPlayerSkinEx(playerid, 150);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
 					}
 					case 5://Instruktor1
 					{
 						PlayerInfo[playerid][pSkin] = 59;
-					   	SetPlayerSkin(playerid, 59);
+					   	SetPlayerSkinEx(playerid, 59);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 59");
 					}
 					case 6://UrzÍdnik
 					{
 						PlayerInfo[playerid][pSkin] = 240;
-					   	SetPlayerSkin(playerid, 240);
+					   	SetPlayerSkinEx(playerid, 240);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 240");
 					}
 					case 7://UrzÍdnik1
 					{
 						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkin(playerid, 150);
+					   	SetPlayerSkinEx(playerid, 150);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
 					}
 					case 8://Menager
 					{
 						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkin(playerid, 150);
+					   	SetPlayerSkinEx(playerid, 150);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
 					}
 					case 9://Menager1
 					{
 						PlayerInfo[playerid][pSkin] = 240;
-					   	SetPlayerSkin(playerid, 240);
+					   	SetPlayerSkinEx(playerid, 240);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 240");
 					}
 					case 10://Z-ca Burmistrza
 					{
 						PlayerInfo[playerid][pSkin] =  141;
-					   	SetPlayerSkin(playerid, 141);
+					   	SetPlayerSkinEx(playerid, 141);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 141");
 					}
 					case 11://Z-ca Burmistrza1
 					{
 						PlayerInfo[playerid][pSkin] = 57;
-					   	SetPlayerSkin(playerid, 57);
+					   	SetPlayerSkinEx(playerid, 57);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 57");
 					}
 					case 12://Burmistrz
 					{
 						PlayerInfo[playerid][pSkin] = 147;
-					   	SetPlayerSkin(playerid, 147);
+					   	SetPlayerSkinEx(playerid, 147);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 147");
 					}
 				}
@@ -14460,43 +12806,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	case 0://£ysy
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 112;
-					   	SetPlayerSkin(playerid, 112);
+					   	SetPlayerSkinEx(playerid, 112);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 112 jest teraz twoim nowym skinem frakcyjnym.");
 					}
 					case 1://skoúnooki skin
 					{
 						PlayerInfo[playerid][pSkin] = 121;
-					   	SetPlayerSkin(playerid, 121);
+					   	SetPlayerSkinEx(playerid, 121);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 121");
 					}
 					case 2://wsiowy kox
 					{
 						PlayerInfo[playerid][pSkin] = 206;
-					   	SetPlayerSkin(playerid, 206);
+					   	SetPlayerSkinEx(playerid, 206);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 206");
 					}
 					case 3://tirowiec
 					{
 						PlayerInfo[playerid][pSkin] = 202;
-					   	SetPlayerSkin(playerid, 202);
+					   	SetPlayerSkinEx(playerid, 202);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 202");
 					}
 					case 4://stary metal
 					{
 						PlayerInfo[playerid][pSkin] = 133;
-					   	SetPlayerSkin(playerid, 133);
+					   	SetPlayerSkinEx(playerid, 133);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 133");
 					}
 					case 5://∆pun
 					{
 						PlayerInfo[playerid][pSkin] = 291;
-					   	SetPlayerSkin(playerid, 291);
+					   	SetPlayerSkinEx(playerid, 291);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 291");
 					}
 					case 6://SkinÛwa
 					{
 						PlayerInfo[playerid][pSkin] = 191;
-					   	SetPlayerSkin(playerid, 191);
+					   	SetPlayerSkinEx(playerid, 191);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 191");
 					}
 				}
@@ -14506,7 +12852,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(PlayerInfo[playerid][pFMember] != FAMILY_RSC) return 1;
             new skin = strval(inputtext);
-		   	SetPlayerSkin(playerid, skin);
+		   	SetPlayerSkinEx(playerid, skin);
 		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Przebra≥es siÍ na chwile.");
         }
         if(7007 <= dialogid <= 7010 || 7012 <= dialogid <= 7015 || dialogid == 7017)
@@ -14514,7 +12860,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(dialogid - GetPlayerFraction(playerid) != 7000) return 1;
             new skin = strval(inputtext);
             PlayerInfo[playerid][pSkin] = skin;
-		   	SetPlayerSkin(playerid, skin);
+		   	SetPlayerSkinEx(playerid, skin);
 		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
         }
         if(dialogid == D_UNIFORM_LCN)
@@ -14535,7 +12881,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 default: skin = PlayerInfo[playerid][pSkin];
             }
             PlayerInfo[playerid][pSkin] = skin;
-		   	SetPlayerSkin(playerid, skin);
+		   	SetPlayerSkinEx(playerid, skin);
 		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 
         }  */
@@ -16354,8 +14700,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pLider] != 0)
 						{
-							format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
-							ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp≥aÊ\nWyp≥aÊ\n<< Twoje konto", "Wybierz", "Wyjdü");
+							if(PlayerInfo[playerid][pLiderValue] < 3)
+							{
+								format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
+								ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp≥aÊ\nWyp≥aÊ\n<< Twoje konto", "Wybierz", "Wyjdü");
+							}
+							else 
+							{
+								sendErrorMessage(playerid, "Nie moøesz zarzπdzaÊ kontem twojej frakcji!"); 
+								return 1;
+							}
+
 						}
 						else
 						{
@@ -16874,6 +15229,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				if(money >= 5_000_000)//Wiadomosc dla adminow
 				{
+					format(string, sizeof(string), "Gracz %s wys≥a≥ przelew do %s w wysokoúci %d$", GetNick(playerid), GetNick(giveplayerid), money); 
 					SendAdminMessage(COLOR_YELLOW, string);
 					return 1;
 				}
@@ -17333,7 +15689,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			//todo numer
 			new string[256];
 			format(string, sizeof(string), "%d %s", Kontakty[playerid][GetPVarInt(playerid, "kontakty-dialog-slot")][eNumer], inputtext);
 			RunCommand(playerid, "/sms",  string);
@@ -17698,7 +16053,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					ShowPlayerDialog(playerid, D_VINYL_J, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Jacuzzi", "Jacuzzi", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, D_VINYL_J, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Jacuzzi", "Jacuzzi", "Wybierz", "Anuluj");
 				}
 			}
 		}

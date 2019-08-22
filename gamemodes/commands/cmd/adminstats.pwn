@@ -30,7 +30,7 @@
 
 YCMD:adminstats(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1 )
+	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{
 		new string[325];
 		if(GetPlayerAdminDutyStatus(playerid) == 1)

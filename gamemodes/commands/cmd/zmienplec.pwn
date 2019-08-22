@@ -36,7 +36,7 @@ YCMD:zmienplec(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /zmienplec [ID gracza]");
 		return 1;
 	}
-	if (PlayerInfo[playerid][pMember] == 4 && PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 4)
+	if (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
 	{
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, sendername, sizeof(sendername));

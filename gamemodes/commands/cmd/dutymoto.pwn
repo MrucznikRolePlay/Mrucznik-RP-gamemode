@@ -61,7 +61,7 @@ YCMD:dutymoto(playerid, params[], help)
                     DajBronieFrakcyjne(playerid);
                     SetPlayerArmour(playerid, 90);
                     SetPlayerHealth(playerid, 100);
-                    SetPlayerSkin(playerid, 284);
+                    SetPlayerSkinEx(playerid, 284);
                     OnDuty[playerid] = 1;
                     OnDutyCD[playerid] = 1;
                 }
@@ -73,7 +73,7 @@ YCMD:dutymoto(playerid, params[], help)
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
                     OnDutyCD[playerid] = 0;
-                    SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
                     PrzywrocBron(playerid);
                 }
             }
@@ -89,7 +89,7 @@ YCMD:dutymoto(playerid, params[], help)
         }
         if(GetPlayerSkin(playerid) == 0)
         {
-            SetPlayerSkin(playerid, PlayerInfo[playerid][pModel]);
+            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
             sendTipMessage(playerid, "Nie masz skina frakcyjnego!");
         }
     }

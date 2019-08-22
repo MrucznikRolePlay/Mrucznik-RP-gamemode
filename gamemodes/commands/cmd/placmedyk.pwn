@@ -41,7 +41,7 @@ YCMD:placmedyk(playerid, params[], help)
 		return 1;
 	}
 
-	if(money < 100 || money > 100000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 100 do 100 000!"); return 1; }
+	if(money < 100 || money > 1_000_000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 100 do 1 000 000!"); return 1; }
 	if(IsPlayerConnected(giveplayerid))
 	{
 	    if(giveplayerid != INVALID_PLAYER_ID)

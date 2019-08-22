@@ -1,0 +1,23 @@
+{
+    "name": "panelbiznesu",
+    "description": "Panel zarz¹dzania biznesem.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Simeone",
+    "aliases": [
+        "bizpanel",
+        "bizpan",
+        "panelbiz"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "32",
+            "name": "choice",
+            "description": "opcja"
+        }
+    ],
+    "date": "20.08.2019",
+    "custom": true
+}

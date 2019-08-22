@@ -28,9 +28,8 @@
 //-----------------<[ Funkcje: ]>-------------------
 public DajKase(playerid, money)
 {
-	new logstring[256], nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	format(logstring, sizeof(logstring), "%s dostal %d$", nick, money);
+	new logstring[256];
+	format(logstring, sizeof(logstring), "%s dostal %d$", GetPlayerLogName(playerid), money);
 
 	kaska[playerid] += money;
 	GivePlayerMoney(playerid, money);
@@ -48,9 +47,8 @@ public DajKase(playerid, money)
 
 public ZabierzKase(playerid, money)
 {
-	new logstring[256], nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	format(logstring, sizeof(logstring), "%s zabrano %d$", nick, money);
+	new logstring[256];
+	format(logstring, sizeof(logstring), "%s zabrano %d$", GetPlayerLogName(playerid), money);
 
 	kaska[playerid] -= money;
 	GivePlayerMoney(playerid, -money);
@@ -68,9 +66,8 @@ public ZabierzKase(playerid, money)
 
 public UstawKase(playerid, money)
 {
-	new logstring[256], nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	format(logstring, sizeof(logstring), "%s ustawiono %d$", nick, money);
+	new logstring[256];
+	format(logstring, sizeof(logstring), "%s ustawiono %d$", GetPlayerLogName(playerid), money);
 
 	kaska[playerid] = money;
 	ResetPlayerMoney(playerid);

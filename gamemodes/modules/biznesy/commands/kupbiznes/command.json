@@ -1,0 +1,9 @@
+{
+    "name": "kupbiznes",
+    "description": "Komenda, która pozwala zakupiæ biznes. Zadzia³a tylko wtedy gdy jesteœmy w wyznaczonym do tego miejscu, a biznes nie jest kupiony.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [],
+    "parameters": [],
+    "date": "19.08.2019"
+}

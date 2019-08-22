@@ -39,6 +39,7 @@
 #include "cmd/armia.pwn"
 #include "cmd/armor.pwn"
 #include "cmd/atakuj.pwn"
+#include "cmd/autorzy.pwn"
 #include "cmd/autok.pwn"
 #include "cmd/autoranny.pwn"
 #include "cmd/awans.pwn"
@@ -52,10 +53,6 @@
 #include "cmd/bdaj.pwn"
 #include "cmd/biegnij.pwn"
 #include "cmd/bigears.pwn"
-#include "cmd/bizinfo.pwn"
-#include "cmd/bizlock.pwn"
-#include "cmd/bizmoneydebug.pwn"
-#include "cmd/biznespomoc.pwn"
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
 #include "cmd/blokujnews.pwn"
@@ -99,7 +96,6 @@
 #include "cmd/czyjtonumer.pwn"
 #include "cmd/czysc.pwn"
 #include "cmd/dajbilet.pwn"
-#include "cmd/dajbiznes.pwn"
 #include "cmd/dajdowozu.pwn"
 #include "cmd/dajdzwiek.pwn"
 #include "cmd/dajfiltr.pwn"
@@ -124,7 +120,6 @@
 #include "cmd/disabletruckerjob.pwn"
 #include "cmd/dl.pwn"
 #include "cmd/dn.pwn"
-#include "cmd/dnobiekt.pwn"
 #include "cmd/do.pwn"
 #include "cmd/dodajweryfikacje.pwn"
 #include "cmd/dolacz.pwn"
@@ -176,7 +171,6 @@
 #include "cmd/goto.pwn"
 #include "cmd/gotoadmin.pwn"
 #include "cmd/gotobank.pwn"
-#include "cmd/gotobiz.pwn"
 #include "cmd/gotocar.pwn"
 #include "cmd/gotoczit.pwn"
 #include "cmd/gotoin.pwn"
@@ -239,6 +233,7 @@
 #include "cmd/konsola.pwn"
 #include "cmd/kontakty.pwn"
 #include "cmd/kontrakt.pwn"
+#include "cmd/poszukuj.pwn"
 #include "cmd/kostka.pwn"
 #include "cmd/kostka2.pwn"
 #include "cmd/koxubankot.pwn"
@@ -277,7 +272,6 @@
 #include "cmd/makeircadmin.pwn"
 #include "cmd/makeleader.pwn"
 #include "cmd/makemember.pwn"
-#include "cmd/makewomanleader.pwn"
 #include "cmd/malunek.pwn"
 #include "cmd/malunki.pwn"
 #include "cmd/mandacik.pwn"
@@ -460,7 +454,6 @@
 #include "cmd/sprzedajalkohol.pwn"
 #include "cmd/sprzedajauto.pwn"
 #include "cmd/sprzedajbilet.pwn"
-#include "cmd/sprzedajbiznes.pwn"
 #include "cmd/sprzedajbron.pwn"
 #include "cmd/sprzedajmaterialy.pwn"
 #include "cmd/sprzedajnarkotyki.pwn"
@@ -604,7 +597,6 @@
 #include "cmd/yo4.pwn"
 #include "cmd/z.pwn"
 #include "cmd/zabierz.pwn"
-#include "cmd/zabierzbiznes.pwn"
 #include "cmd/zabierzlideraorg.pwn"
 #include "cmd/zablokujtel.pwn"
 #include "cmd/zablokujw.pwn"
@@ -666,6 +658,12 @@
 #include "cmd/stan.pwn"
 #include "cmd/personalizuj.pwn"
 #include "cmd/vinyl.pwn"
+#include "cmd/startskinevent.pwn"
+#include "cmd/staty2.pwn"
+#include "cmd/makevlider.pwn"
+#include "cmd/dajscene.pwn"
+//#include "cmd/news2.pwn"
+#include "cmd/fracinfo.pwn"
 
 InitCommands()
 {
@@ -674,6 +672,9 @@ InitCommands()
 
 static Aliases()
 {
+	Command_AddAltNamed("staty2", "stats2"); 
+	//autorzy
+	Command_AddAltNamed("autorzy", "tworcy"); 
 	//tognewbie
 	Command_AddAltNamed("tognewbie", "togn"); 
 	//setserverpass
@@ -690,7 +691,7 @@ static Aliases()
 	Command_AddAltNamed("car", "auto");
 	Command_AddAltNamed("car", "pojazd");
 	Command_AddAltNamed("car", "samochod");
-
+	
 	//carhelp
 	Command_AddAltNamed("carhelp", "autopomoc");
 	Command_AddAltNamed("carhelp", "pojazdpomoc");
@@ -940,6 +941,7 @@ static Aliases()
 	Command_AddAltNamed("megafon", "megaphone");
 	Command_AddAltNamed("megafon", "m");
 
+
 	//mi
 	Command_AddAltNamed("mi", "deathwarning");
 	Command_AddAltNamed("mi", "warningdeath");
@@ -1012,7 +1014,10 @@ static Aliases()
 
 	//paralizuj
 	Command_AddAltNamed("paralizuj", "paraliz");
-
+	//personalizuj
+	Command_AddAltNamed("personalizuj", "personalizacja");
+	Command_AddAltNamed("personalizuj", "personalize");
+	Command_AddAltNamed("personalizuj", "ustawienia");
 	//pl
 	Command_AddAltNamed("pl", "showlicenses");
 	Command_AddAltNamed("pl", "pokazlicencje");
@@ -1451,7 +1456,6 @@ static Aliases()
 
 	//sblock
 	Command_AddAltNamed("sblok", "sblock");
-
 	//pblock
 	Command_AddAltNamed("pblok", "pblock");
 
