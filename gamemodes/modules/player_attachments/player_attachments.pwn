@@ -96,7 +96,6 @@ CheckEditionBoundaries(Float:x, Float:y, Float:z, Float:sx, Float:sy, Float:sz)
 	return 1;
 }
 
-
 //-----------------<[ Dialogi: ]>-------------------
 DialogPlayerAttachedItems(playerid)
 {
@@ -165,9 +164,9 @@ DialogAdminRemoveAttachedItems(playerid, giveplayerid)
 DialogBoneSelect(playerid, bone=0)
 {
 	new string[256];
-	for(new i=1; i<19; i++)
+	for(new i=0; i<18; i++)
 	{
-		if(i == bone)
+		if(i == (bone-1))
 		{
 			strcat(string, sprintf(INCOLOR_GREEN"%s\n"INDIALOG_COLOR, BoneNames[i]));
 		}
