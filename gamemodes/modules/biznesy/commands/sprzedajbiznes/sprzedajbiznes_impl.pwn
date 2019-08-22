@@ -45,30 +45,27 @@ command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost)
             sendErrorMessage(playerid, "To nie jest twój biznes"); 
             return 1;
         }
-        if(valueCost <= Business[businessID][b_cost]+10000000)
+        if(kaska[giveplayerid]>= valueCost)
         {
-            if(kaska[giveplayerid]>= valueCost)
-            {
-                format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d", GetNick(giveplayerid, true), businessID, valueCost);
-                sendTipMessage(playerid, string);
-                sendTipMessage(playerid, "Oczekuj na akceptacje"); 
-                
-                
-                //do giveplayerid
-                format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), businessID, valueCost); 
-                sendTipMessage(giveplayerid, string); 
-                SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
-                SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 
-            }
-            else
-            {
-                sendTipMessage(playerid, "Ten gracz nie ma przy sobie takiej kwoty"); 
-                return 1;
-            }
+            format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d (-%d podatku)", 
+                GetNick(giveplayerid, true), 
+                businessID, 
+                valueCost,
+                valueCost/12
+            );
+            sendTipMessage(playerid, string);
+            sendTipMessage(playerid, "Oczekuj na akceptacje"); 
+            
+            
+            //do giveplayerid
+            format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), businessID, valueCost); 
+            sendTipMessage(giveplayerid, string); 
+            SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
+            SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 
         }
         else
         {
-            sendTipMessage(playerid, "Przy sprzeda¿y biznesu za wiêksz¹ cene wymagana jest obecnoœæ cz³onka Wydzia³u Planowania"); 
+            sendTipMessage(playerid, "Ten gracz nie ma przy sobie takiej kwoty"); 
             return 1;
         }
     }

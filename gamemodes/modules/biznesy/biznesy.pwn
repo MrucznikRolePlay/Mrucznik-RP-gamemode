@@ -415,7 +415,7 @@ Business_AkceptujBiznes(playerid)
 	}
 
 	new businessID = PlayerInfo[giveplayerid][pBusinessOwner]; 
-	new tax = (price/5);
+	new tax = (price/12);
 
 	ZabierzKase(playerid, price);
 	DajKase(giveplayerid, (price-tax)); 
@@ -436,6 +436,7 @@ Business_AkceptujBiznes(playerid)
 	//Wykonanie czynnoœci
 	PlayerInfo[giveplayerid][pBusinessOwner] = INVALID_BIZ_ID; 
 	PlayerInfo[playerid][pBusinessOwner] = businessID;
+	Business[businessID][b_cost] = price;
 	Business[businessID][b_ownerUID] = PlayerInfo[playerid][pUID]; 
 	Business[businessID][b_Name_Owner] = GetNick(playerid); 
 	MruMySQL_SaveAccount(playerid);

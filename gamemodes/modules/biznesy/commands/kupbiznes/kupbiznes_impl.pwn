@@ -53,6 +53,11 @@ command_kupbiznes_Impl(playerid)
 		sendErrorMessage(playerid, "Ten biznes nale¿y ju¿ do kogoœ!"); 
 		return 1;
 	}
+	if(Business[businessID][b_cost] <= 0)
+	{
+		sendErrorMessage(playerid, "Ten biznes mo¿na zakupiæ tylko w trakcie licytacji."); 
+		return 1;
+	}
 	if(kaska[playerid] < Business[businessID][b_cost])
 	{
 		sendErrorMessage(playerid, "Nie staæ Ciê!"); 
