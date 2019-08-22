@@ -327,6 +327,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`PhoneNr`='%d', \
 	`Dom`='%d', \
 	`Bizz`='%d', \
+	`BizzMember`='%d', \
 	`Wynajem`='%d', \
 	`Pos_x`='%f', \
 	`Pos_y`='%f', \
@@ -343,6 +344,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPnumber],
 	PlayerInfo[playerid][pDom],
 	PlayerInfo[playerid][pBusinessOwner],
+	PlayerInfo[playerid][pBusinessMember],
 	PlayerInfo[playerid][pWynajem],
 	PlayerInfo[playerid][pPos_x],
 	PlayerInfo[playerid][pPos_y],
@@ -578,7 +580,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pSkin], 
 		PlayerInfo[playerid][pContractTime]);
 
-        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `Model`, `PhoneNr`, `Dom`, `Bizz`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
+        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `Model`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
         format(lStr, 1024, "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
@@ -586,7 +588,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>dddddddddddddffddddddddfffddddd",
+        sscanf(lStr, "p<|>dddddddddddddffdddddddddfffddddd",
         PlayerInfo[playerid][pDetSkill],
 		PlayerInfo[playerid][pSexSkill],
 		PlayerInfo[playerid][pBoxSkill],
@@ -609,6 +611,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pPnumber],
 		PlayerInfo[playerid][pDom],
 		PlayerInfo[playerid][pBusinessOwner],
+		PlayerInfo[playerid][pBusinessMember],
 		PlayerInfo[playerid][pWynajem],
 		PlayerInfo[playerid][pPos_x],
 		PlayerInfo[playerid][pPos_y],
