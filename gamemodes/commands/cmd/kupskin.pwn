@@ -41,8 +41,8 @@ YCMD:kupskin(playerid, params[], help)
 				sendTipMessage(playerid, "ID skinów [+20.000] znajdziesz na: http://mrucznik-rp.pl");
 				return 1;
 			}
-			if(kaska[playerid] >= 5000){
-				
+			if(kaska[playerid] >= 5000) 
+			{				
 				if(skinID > 299 && skinID <= 20000)
 				{
 					sendErrorMessage(playerid, "B³êdne ID skina - brak przedzia³u od 300-399"); 
