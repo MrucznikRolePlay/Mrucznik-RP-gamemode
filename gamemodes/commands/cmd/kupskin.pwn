@@ -27,6 +27,40 @@
 /*
 	
 */
+new CenySkinow[] = {
+	15000,
+	15000,
+	50000,
+	50000,
+	100000,
+	15000,
+	15000,
+	15000,
+	15000,
+	15000,
+	50000,
+	15000,
+	15000,
+	15000,
+	50000,
+	100000,
+	50000,
+	50000,
+	50000,
+	50000,
+	100000,
+	15000,
+	100000,
+	50000,
+	15000,
+	15000,
+	15000,
+	100000,
+	100000,
+	50000,
+	100000
+};
+
 YCMD:kupskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
@@ -39,6 +73,7 @@ YCMD:kupskin(playerid, params[], help)
 				sendTipMessage(playerid, "U¿yj /wybierzskin [id skinu] (koszt: 5000$)");
 				sendTipMessage(playerid, "ID skinów znajdziesz na: http://wiki.sa-mp.com/wiki/Skins:All");
 				sendTipMessage(playerid, "ID skinów [+20.000] znajdziesz na: http://mrucznik-rp.pl");
+				sendTipMessage(playerid, "Uwaga! Nowe skiny (20.000+) kosztuj¹ 15k, 50k lub 100k!");
 				return 1;
 			}
 			if(kaska[playerid] >= 5000) 
@@ -83,7 +118,7 @@ YCMD:kupskin(playerid, params[], help)
 				{
 					SetPlayerSkin(playerid, skinID); 
 					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
-					ZabierzKase(playerid, 5000); 
+					ZabierzKase(playerid, CenySkinow[skinID-20401]); 
 					PlayerInfo[playerid][pSkin] = skinID; 
 					PlayerInfo[playerid][pModel] = skinID; 
 				}
