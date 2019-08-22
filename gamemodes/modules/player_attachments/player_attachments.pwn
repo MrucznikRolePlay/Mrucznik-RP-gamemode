@@ -85,14 +85,39 @@ HasPlayerActiveAttachedObject(playerid, model)
 	return false;
 }
 
-CheckEditionBoundaries(Float:x, Float:y, Float:z, Float:sx, Float:sy, Float:sz)
+CheckEditionBoundaries(playerid, Float:x, Float:y, Float:z, Float:sx, Float:sy, Float:sz)
 {
-	if(-2.0 > x || x > 2.0) return 0;
-	if(-2.0 > y || y > 2.0) return 0;
-	if(-2.0 > z || z > 2.0) return 0;
-	if(0 > sx || sx > 2.0) return 0;
-	if(0 > sy || sy > 2.0) return 0;
-	if(0 > sz || sz > 2.0) return 0;
+	if(-0.5 > x || x > 0.5) 
+	{ 
+		sendErrorMessage(playerid, "Ten obiekt wykracza poza granice w osi X!");
+		return 0;
+	}
+	if(-0.5 > y || y > 0.5) 
+	{ 
+		sendErrorMessage(playerid, "Ten obiekt wykracza poza granice w osi Y!");
+		return 0;
+	}
+	if(-0.5 > z || z > 0.5) 
+	{ 
+		sendErrorMessage(playerid, "Ten obiekt wykracza poza granice w osi Z!");
+		return 0;
+	}
+
+	if(0.5 > sx || sx > 1.5) 
+	{
+		sendErrorMessage(playerid, "Ten obiekt jest za du¿y w skali X!");
+		return 0;
+	} 
+	if(0.5 > sy || sy > 1.5) 
+	{
+		sendErrorMessage(playerid, "Ten obiekt jest za du¿y w skali Y!");
+		return 0;
+	} 
+	if(0.5 > sz || sz > 1.5) 
+	{
+		sendErrorMessage(playerid, "Ten obiekt jest za du¿y w skali Z!");
+		return 0;
+	} 
 	return 1;
 }
 
@@ -168,7 +193,7 @@ DialogBoneSelect(playerid, bone=0)
 	{
 		if(i == (bone-1))
 		{
-			strcat(string, sprintf(INCOLOR_GREEN"%s\n"INDIALOG_COLOR, BoneNames[i]));
+			strcat(string, sprintf(INCOLOR_GREEN"%s\n"INCOLOR_WHITE, BoneNames[i]));
 		}
 		else
 		{

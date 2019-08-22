@@ -34,9 +34,8 @@ hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:f
 	{
 		if(response)
 		{
-			if(!CheckEditionBoundaries(fOffsetX, fOffsetY, fOffsetZ, fScaleX, fScaleY, fScaleZ))
+			if(!CheckEditionBoundaries(playerid, fOffsetX, fOffsetY, fOffsetZ, fScaleX, fScaleY, fScaleZ))
 			{
-				sendErrorMessage(playerid, "Ten obiekt wykracza poza granice!");
 				EditAttachedObject(playerid, index);
 				//TODO: je¿eli gracz kliknie wyjdz 2 razy w krótkim czasie, nie w³aczy mu siê edycja
 				return -2;
@@ -177,7 +176,11 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new index = DynamicGui_GetDataInt(playerid, listitem);
-			DetachPlayerItem(GetPVarInt(playerid, "ZdejmijGiveplayerid"), index);
+			new giveplayerid = GetPVarInt(playerid, "ZdejmijGiveplayerid");
+			DetachPlayerItem(giveplayerid, index);
+
+			SendClientMessage(giveplayerid, COLOR_RED, sprintf("Administrator %s zdj¹³ twój obiekt, popraw jego u³o¿enie, inaczej mo¿esz otrzymaæ karê.", GetNick(playerid)));
+			sendTipMessage(playerid, sprintf("Zdj¹³eœ obiekt graczowi %s", GetNick(giveplayerid)));
 		}
 		return -2;
 	}
