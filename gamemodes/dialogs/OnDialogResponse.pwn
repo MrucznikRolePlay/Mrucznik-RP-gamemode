@@ -2728,6 +2728,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
+							ZabierzKase(playerid, 50000);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    { 
 								if(playerValue > winValue && playerValue >= 85)
