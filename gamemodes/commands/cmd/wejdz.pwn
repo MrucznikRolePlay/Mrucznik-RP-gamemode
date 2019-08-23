@@ -56,64 +56,66 @@ YCMD:wejdz(playerid, params[], help)
 //==================[Windy pod /wejdz]==================================
 //======================================================================
 		
-        else if(IsPlayerInRangeOfPoint(playerid, 5.0, 694.27490234375,-569.04272460938,-79.225189208984) || IsPlayerInRangeOfPoint(playerid, 3.0, 700.6748046875,-502.41955566406,23.515483856201) || IsPlayerInRangeOfPoint(playerid, 5.0, 707.06085205078,-508.38107299805,27.871946334839))//rada miasta dillimore (miasteczko) windy
+        else if(IsPlayerInRangeOfPoint(playerid, 5.0, 694.27490234375,-569.04272460938,-79.225189208984) 
+            || IsPlayerInRangeOfPoint(playerid, 3.0, 700.6748046875,-502.41955566406,23.515483856201) 
+            || IsPlayerInRangeOfPoint(playerid, 5.0, 707.06085205078,-508.38107299805,27.871946334839))//rada miasta dillimore (miasteczko) windy
         {
             ShowPlayerDialogEx(playerid, 121, DIALOG_STYLE_LIST, "Wybierz pomieszczenie", "Salka Konferencyjna\nBiura\nPiwnice", "Wybierz", "WyjdŸ");
         }
         else if(IsPlayerInRangeOfPoint(playerid,3,1450.6615,-1819.2279,77.9613) 
-			||  IsPlayerInRangeOfPoint(playerid,5,1412.3348388672, -1790.5777587891, 15.370599746704) && IsAUrzednik(playerid)
+			||  (IsPlayerInRangeOfPoint(playerid,5,1412.3348388672, -1790.5777587891, 15.370599746704) && IsAUrzednik(playerid))
             ||  IsPlayerInRangeOfPoint(playerid,3,1481.5200,-1821.0967,58.1563))
         {
             ShowPlayerDialogEx(playerid,122,DIALOG_STYLE_LIST,"Winda: Wybierz Piêtro","[Poziom 0] Zaplecze\n[Poziom 9] G³ówna sala urzêdu\n[Poziom 10] Kancelaria burmistrza","Wybierz","WyjdŸ");
         }
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 1745.8119, -1129.8972, 24.0781) 
-		|| IsPlayerInRangeOfPoint(playerid, 3.0, 1746.0676, -1127.9219, 46.5746) 
-		|| IsPlayerInRangeOfPoint(playerid, 3.0, 1746.2399, -1128.2211, 227.8059))
+            || IsPlayerInRangeOfPoint(playerid, 3.0, 1746.0676, -1127.9219, 46.5746) 
+            || IsPlayerInRangeOfPoint(playerid, 3.0, 1746.2399, -1128.2211, 227.8059))
 		{
             ShowPlayerDialogEx(playerid, D_WINDA_LSFD, DIALOG_STYLE_LIST, "Winda", "Gara¿\nPierwsze piêtro\nDrugie piêtro\nDach", "Wybierz", "WyjdŸ");
 		}
-        else if(IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsACop(playerid)//parking Dolny LSPD 1568.7660,-1691.4886,5.8906
-        || IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
-        || IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan
-        || IsPlayerInRangeOfPoint(playerid,4,-1745.1101, 824.0737, -48.0110)//biura LSPD
-        || IsPlayerInRangeOfPoint(playerid,4,-1695.1617, 1046.9861, -65.4119)//stolowka
-        || IsPlayerInRangeOfPoint(playerid,4,1568.1061, 2205.3196, -50.9522)//treningowe miejsca
-        || IsPlayerInRangeOfPoint(playerid,4,1565.0798, -1665.6580, 28.4782) && IsACop(playerid)//dach lspd
-        || IsPlayerInRangeOfPoint(playerid,4,1570.9799,-1636.7758,13.5713) && IsACop(playerid))//gorny LSPD
+        else if((IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsACop(playerid))//parking Dolny LSPD 1568.7660,-1691.4886,5.8906
+            || IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
+            || IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan
+            || IsPlayerInRangeOfPoint(playerid,4,-1745.1101, 824.0737, -48.0110)//biura LSPD
+            || IsPlayerInRangeOfPoint(playerid,4,-1695.1617, 1046.9861, -65.4119)//stolowka
+            || IsPlayerInRangeOfPoint(playerid,4,1568.1061, 2205.3196, -50.9522)//treningowe miejsca
+            || (IsPlayerInRangeOfPoint(playerid,4,1565.0798, -1665.6580, 28.4782) && IsACop(playerid))//dach lspd
+            || (IsPlayerInRangeOfPoint(playerid,4,1570.9799,-1636.7758,13.5713) && IsACop(playerid)))//gorny LSPD
         {
             ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
         }
         //else if(IsPlayerInRangeOfPoint(playerid,3,-2089.55835, -414.24173, 36.32352)//Podziemia BOR
         else if((IsPlayerInRangeOfPoint(playerid,3,1498.9341,-1537.0797,67.3069) && IsABOR(playerid))//Podziemia BOR
-        || IsPlayerInRangeOfPoint(playerid,3,1772.1613,-1547.9675,9.9067)
-        || IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
-        || IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
-        || IsPlayerInRangeOfPoint(playerid,3, 1795.4104,-1551.2864,22.9192)&& IsABOR(playerid))//dach BOR
+            || IsPlayerInRangeOfPoint(playerid,3,1772.1613,-1547.9675,9.9067)
+            || IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
+            || IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
+            || (IsPlayerInRangeOfPoint(playerid,3, 1795.4104,-1551.2864,22.9192)&& IsABOR(playerid)))//dach BOR
         {
             ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking podziemny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
         }
 		else if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
-        || IsPlayerInRangeOfPoint(playerid, 3, 287.7476,-1609.9395,33.0723)//PARTER
-        || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
-        || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
-        || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
-        || IsPlayerInRangeOfPoint(playerid,3,285.8397,-1596.4153,114.5687)/*Dach*/
-        || IsPlayerInRangeOfPoint(playerid,3,290.7577,-1604.3273,134.6113)/*Biura SAN NEWS*/)
+            || IsPlayerInRangeOfPoint(playerid, 3, 287.7476,-1609.9395,33.0723)//PARTER
+            || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
+            || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
+            || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
+            || IsPlayerInRangeOfPoint(playerid,3,285.8397,-1596.4153,114.5687)/*Dach*/
+            || IsPlayerInRangeOfPoint(playerid,3,290.7577,-1604.3273,134.6113)/*Biura SAN NEWS*/)
         {
             ShowPlayerDialogEx(playerid,WINDA_SAN,DIALOG_STYLE_LIST,"Winda - San News","[Pietro - 0] Parking\n[Pietro 1] Wejscie do budynku\n[Pietro - 2] Recepcja\n[Pietro - 3] Studia\n[Pietro - 4] Akademia\n[Pietro - 5]Biura San News\n[Pietro - 6]Dach","Jedz","Anuluj");
         }
         //winda FBI
 		else if(IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
-		|| IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
-		|| IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
-		|| IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
-		|| IsPlayerInRangeOfPoint(playerid,2,589.23029, -1479.66357, 91.74274)//Dyrektorat
-		|| IsPlayerInRangeOfPoint(playerid,2,613.4404,-1471.9745,73.8816)//DACH
-		|| IsPlayerInRangeOfPoint(playerid,2,596.5255, -1489.2544, 15.3587)//Parking
-		|| IsPlayerInRangeOfPoint(playerid,2,1093.0625,1530.8715,6.6905)//Parking podziemny
-		|| IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
-		|| IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
-		|| IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732))//Sale Treningowe
+            || IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
+            || IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
+            || IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
+            || IsPlayerInRangeOfPoint(playerid,2,589.23029, -1479.66357, 91.74274)//Dyrektorat
+            || IsPlayerInRangeOfPoint(playerid,2,613.4404,-1471.9745,73.8816)//DACH
+            || IsPlayerInRangeOfPoint(playerid,2,596.5255, -1489.2544, 15.3587)//Parking
+            || IsPlayerInRangeOfPoint(playerid,2,1093.0625,1530.8715,6.6905)//Parking podziemny
+            || IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
+            || IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
+            || IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732))//Sale Treningowe
 		{
 			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5] Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
         }
@@ -127,24 +129,24 @@ YCMD:wejdz(playerid, params[], help)
         }
         //SAD
         else if(IsPlayerInRangeOfPoint(playerid,3,1311.5483,-1361.2096,62.8567)
-        || IsPlayerInRangeOfPoint(playerid,3,1305.9991,-1326.1344,52.5659)
-        || IsPlayerInRangeOfPoint(playerid,3,1309.9982,-1364.2216,59.6271)
-        || IsPlayerInRangeOfPoint(playerid,3,1310.1989,-1328.8876,82.5859)
-        || IsPlayerInRangeOfPoint(playerid,3,1310.2946,-1321.2517,74.6955)
-        || IsPlayerInRangeOfPoint(playerid,3,1310.3961,-1319.0530,35.6587))
+            || IsPlayerInRangeOfPoint(playerid,3,1305.9991,-1326.1344,52.5659)
+            || IsPlayerInRangeOfPoint(playerid,3,1309.9982,-1364.2216,59.6271)
+            || IsPlayerInRangeOfPoint(playerid,3,1310.1989,-1328.8876,82.5859)
+            || IsPlayerInRangeOfPoint(playerid,3,1310.2946,-1321.2517,74.6955)
+            || IsPlayerInRangeOfPoint(playerid,3,1310.3961,-1319.0530,35.6587))
         { //WINDA
             ShowPlayerDialogEx(playerid, DIALOG_ELEVATOR_SAD, DIALOG_STYLE_LIST, "Winda:", "{660000}[-1] {D2CFA6} Archiwum\n{660000}[0] {D2CFA6} Recepcja\n{660000}[1] {D2CFA6} Sale Rozpraw\n{660000}[2] {D2CFA6} Biura\n{660000}[3] {D2CFA6} Pomieszczenia Socjalne\n{660000}[4] {D2CFA6} Dach", "Wybierz", "Anuluj");
         }
 		else if(IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) ||
-        IsPlayerInRangeOfPoint(playerid,2.0, -2805.0967,2596.0566,-98.0829) ||
-        IsPlayerInRangeOfPoint(playerid,2.0,1134.0449,-1320.7128,68.3750)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1183.3129,-1333.5684,88.1627)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1168.2112,-1340.6785,100.3780)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1158.6868,-1339.4423,120.2738)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1167.7832,-1332.2727,134.7856)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1177.4791,-1320.7749,178.0699)||
-        IsPlayerInRangeOfPoint(playerid,2.0,1178.2081,-1330.6317,191.5315)||
-        IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112))
+            IsPlayerInRangeOfPoint(playerid,2.0, -2805.0967,2596.0566,-98.0829) ||
+            IsPlayerInRangeOfPoint(playerid,2.0,1134.0449,-1320.7128,68.3750)||
+            IsPlayerInRangeOfPoint(playerid,2.0,1183.3129,-1333.5684,88.1627)||
+            IsPlayerInRangeOfPoint(playerid,2.0,1168.2112,-1340.6785,100.3780)||
+            IsPlayerInRangeOfPoint(playerid,2.0,1158.6868,-1339.4423,120.2738)||
+            IsPlayerInRangeOfPoint(playerid,2.0,1167.7832,-1332.2727,134.7856)||
+            IsPlayerInRangeOfPoint(playerid,2.0,1177.4791,-1320.7749,178.0699)||
+            IsPlayerInRangeOfPoint(playerid,2.0,1178.2081,-1330.6317,191.5315)||
+            IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112))
         {
             ShowPlayerDialogEx(playerid, D_ELEVATOR_LSMC, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[-1] {D2CFA6}Kostnica i laboratorium\n{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba przyjêæ\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Sale operacyjne\n{660000}[4] {D2CFA6}Sale pooperacyjne\n{660000}[5] {D2CFA6}Sale specjalistyczne\n{660000}[6] {D2CFA6}Akademia medyczna\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
         }
@@ -183,7 +185,9 @@ YCMD:wejdz(playerid, params[], help)
             GameTextForPlayer(playerid, "Chwytaj za stery!", 2000, 5);
         }
         //Lotnisko LS wejœcie do AT400
-        else if (PlayerToPoint(2.0, playerid,1937.5,-2275.8,16.9) || PlayerToPoint(2.0, playerid,-1360.0999755859, -239.89999389648, 17.60000038147) || PlayerToPoint(2.0, playerid,1581.6999511719, 1444.5, 14.10000038147))//LS
+        else if (PlayerToPoint(2.0, playerid,1937.5,-2275.8,16.9) 
+            || PlayerToPoint(2.0, playerid,-1360.0999755859, -239.89999389648, 17.60000038147) 
+            || PlayerToPoint(2.0, playerid,1581.6999511719, 1444.5, 14.10000038147))//LS
         {
             new Float:PosX,Float:PosY,Float:PosZ;
             for(new i=0;i<MAX_VEHICLES;i++)
