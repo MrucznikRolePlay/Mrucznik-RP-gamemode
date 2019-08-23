@@ -138,8 +138,6 @@ new const PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] =
 	
 	//premium
 	{"papuga", 19079, 1, PRZEDMIOT_DROGI_CENA * 20}, //https://files.prineside.com/gtasa_samp_model_id/white/19079_w.jpg
-	{"ogieñ", 18693, 1, PRZEDMIOT_DROGI_CENA * 50}, //https://files.prineside.com/gtasa_samp_model_id/white/18693_w.jpg
-	{"serduszko", 1240, 1, PRZEDMIOT_DROGI_CENA * 40}, //https://files.prineside.com/gtasa_samp_model_id/white/1240_w.jpg
 	//{"œwi¹teczna czapka", 19065, 1, PRZEDMIOT_DROGI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19065_w.jpg
 
 	//okulary aviatory
@@ -305,7 +303,10 @@ new const PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] =
 	{"¿ó³te s³uchawki", 19421, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19421_w.jpg
 	{"czarne s³uchawki", 19422, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19422_w.jpg
 	{"¿ó³te s³uchawki", 19423, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19423_w.jpg
-	{"niebieskie s³uchawki", 19424, 1, PRZEDMIOT_PRZECIETNY_CENA * 9} //https://files.prineside.com/gtasa_samp_model_id/white/19424_w.jpg
+	{"niebieskie s³uchawki", 19424, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19424_w.jpg
+
+	{"ogieñ", 18693, 1, PRZEDMIOT_DROGI_CENA * 50}, //https://files.prineside.com/gtasa_samp_model_id/white/18693_w.jpg
+	{"serduszko", 1240, 1, PRZEDMIOT_DROGI_CENA * 40} //https://files.prineside.com/gtasa_samp_model_id/white/1240_w.jpg
 };
 
 
