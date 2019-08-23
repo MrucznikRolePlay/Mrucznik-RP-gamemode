@@ -6,7 +6,6 @@ MruMySQL_ZapiszUprawnienia(playerid)
     mysql_query(str);
     mysql_store_result();
     if(mysql_num_rows()) format(str, sizeof(str), "UPDATE `mru_uprawnienia` SET `FLAGS`= b'%b' WHERE `UID`=%d", ACCESS[playerid], PlayerInfo[playerid][pUID]);
-    mysql_free_result();
     else format(str, sizeof(str), "INSERT INTO `mru_uprawnienia` (`FLAGS`, `UID`) VALUES (b'%b', %d)", ACCESS[playerid], PlayerInfo[playerid][pUID]);
     mysql_free_result();
     mysql_query(str);
