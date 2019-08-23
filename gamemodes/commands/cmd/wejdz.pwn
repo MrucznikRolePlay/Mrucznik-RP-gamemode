@@ -562,7 +562,7 @@ YCMD:wejdz(playerid, params[], help)
                         sendErrorMessage(playerid, "Ten biznes jest zamkniêty!"); 
                         return 1;
                     }
-                    if(Business[i][b_vw] == 0)
+                    if(Business[i][b_vw] == 0 && Business[i][b_enX] == Business[i][b_exX])
                     {
                         sendTipMessage(playerid, "Ten biznes nie ma wnêtrza!"); 
                         return 1;
