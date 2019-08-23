@@ -40,7 +40,7 @@ command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost)
             sendErrorMessage(playerid, "Nie jesteœ obok biznesu!");
             return 1;
         }
-        if(PlayerInfo[playerid][pBusinessOwner] == businessID)
+        if(PlayerInfo[playerid][pBusinessOwner] != businessID)
         {
             sendErrorMessage(playerid, "To nie jest twój biznes"); 
             return 1;
