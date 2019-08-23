@@ -291,17 +291,20 @@ stock CorrectPlayerBusiness(playerid)
 	{
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
+		Log(serverLog, WARNING, "%s wyzerowanie biznesu 0", GetPlayerLogName(playerid));
 	}
 	if(PlayerInfo[playerid][pBusinessOwner] > MAX_BIZNES)
 	{
-		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		sendErrorMessage(playerid, "Posiada³eœ b³êdny biznes - zosta³ on WYZEROWANY!");
 		sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d - zg³oœ to na naszym forum!"); 
+		Log(serverLog, ERROR, "%s wyzerowanie biznesu %d", GetPlayerLogName(playerid), PlayerInfo[playerid][pBusinessOwner]);
+		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 	}
 	if(PlayerInfo[playerid][pBusinessMember] == 0)
 	{
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID;
 		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
+		Log(serverLog, WARNING, "%s wyzerowanie pracownika biznesu 0", GetPlayerLogName(playerid));
 	}
 	return 0; 
 }
