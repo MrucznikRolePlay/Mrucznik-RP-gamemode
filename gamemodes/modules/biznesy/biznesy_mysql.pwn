@@ -95,7 +95,7 @@ ClearBusinessOwner(businessID)
 	WHERE `bizz`='%d'", INVALID_BIZ_ID, businessID); 
 	mysql_query(query); 
 	format(query, sizeof(query), "UPDATE `mru_business` SET \
-	`ownerUID='%d', \
+	`ownerUID`='%d', \
 	`ownerName`='Brak' \
 	WHERE `ID`='%d'", 0, businessID);
 	mysql_query(query); 
