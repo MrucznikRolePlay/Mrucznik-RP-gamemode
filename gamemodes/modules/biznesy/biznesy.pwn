@@ -281,8 +281,8 @@ stock Biz_Owner(biz)
     if(mysql_num_rows())
     {
     	mysql_fetch_row_format(lStr, "|");
-		mysql_free_result();
 	}
+	mysql_free_result();
     return lStr;
 }
 stock CorrectPlayerBusiness(playerid)

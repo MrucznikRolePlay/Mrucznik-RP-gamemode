@@ -5029,6 +5029,7 @@ orgLoad()
         sscanf(lQuery, "p<|>de<dds[32]s[128]hffffdd>", lRow, OrgInfo[lID]);
         lID++;
     }
+    mysql_free_result();
     printf("%d | Wczytano organizacje", lID);
 }
 
@@ -8379,7 +8380,6 @@ LoadServerInfo()
     if(mysql_num_rows())
     {
         mysql_fetch_row_format(ServerInfo, "|");
-        mysql_free_result();
         new lPos=0;
         while((lPos = strfind(ServerInfo, "\\n", false, lPos)) != -1)
         {
@@ -8399,6 +8399,7 @@ LoadServerInfo()
             if(gPlayerLogged[i] == 1) TextDrawShowForPlayer(i, TXD_Info);
         }
     }
+	mysql_free_result();
 }
 
 LoadConfig()
@@ -8412,6 +8413,7 @@ LoadConfig()
         sscanf(query, "p<|>s[128]s[128]dds[256]dd", RadioSANUno, RadioSANDos, ZONE_DISABLED, ZONE_DEF_TIME, data, STANOWE_GATE_KEY, TJD_Materials);
         sscanf(data, "a<s[16]>[20]", AUDIO_LoginData);
     }
+	mysql_free_result();
     for(new i=0;i<20;i++)
     {
         if(strlen(AUDIO_LoginData[i]) > 1) AUDIO_LoginTotal++;
@@ -8423,7 +8425,6 @@ LoadConfig()
     format(VINYL_Stream, 128, "%s",RadioSANDos);
 
     print("Wczytano podstawow¹ konfiguracjê");
-    mysql_free_result();
 }
 
 WczytajRangi()
@@ -11674,13 +11675,13 @@ EDIT_SaveRangs(typ, uid)
 	mysql_real_escape_string(lStr, lStr_escaped);
     if(mysql_num_rows())
     {
-        mysql_free_result();
         format(query, 512, "UPDATE mru_nazwyrang SET rangi='%s' WHERE `ID`='%d' AND `typ`='%d'", lStr_escaped, uid, typ+1);
     }
     else
     {
         format(query, 512, "INSERT INTO mru_nazwyrang (rangi, ID, typ) VALUES ('%s', '%d', '%d')", lStr_escaped, uid, typ+1);
     }
+	mysql_free_result();
     mysql_query(query);
     RANG_ApplyChanges[typ][uid] = false;
     return 1;

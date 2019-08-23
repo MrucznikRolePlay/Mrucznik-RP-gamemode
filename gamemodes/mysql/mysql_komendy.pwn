@@ -30,13 +30,13 @@ MruMySQL_ListaLiderow(playerid, family)
     SendClientMessage(playerid, COLOR_RED, "================ LISTA LIDERÓW ================");
     format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `FMember`='%d' AND `Rank`>1000", family);
     mysql_query(string);
-    mysql_store_result();
     new nick[24];
     while(mysql_fetch_row_format(string, "|"))
     {
         sscanf(string, "p<|>s[24]", nick);
         SendClientMessage(playerid, -1, nick);
     }
+    mysql_store_result();
     SendClientMessage(playerid, COLOR_RED, "================ KONIEC ================");
 }
 

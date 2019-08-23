@@ -6,6 +6,7 @@ MruMySQL_ZapiszUprawnienia(playerid)
     mysql_query(str);
     mysql_store_result();
     if(mysql_num_rows()) format(str, sizeof(str), "UPDATE `mru_uprawnienia` SET `FLAGS`= b'%b' WHERE `UID`=%d", ACCESS[playerid], PlayerInfo[playerid][pUID]);
+    mysql_free_result();
     else format(str, sizeof(str), "INSERT INTO `mru_uprawnienia` (`FLAGS`, `UID`) VALUES (b'%b', %d)", ACCESS[playerid], PlayerInfo[playerid][pUID]);
     mysql_query(str);
 }
@@ -32,8 +33,8 @@ MruMySQL_PobierzStatystyki(playerid, nick[])
         format(lStr, sizeof(lStr), "Premium: %d ¦ Praca: %d ¦ Frakcja: %d ¦ Org.: %d", ppremium, pjob, pmember, porg);
         SendClientMessage(playerid, -1, lStr);
         SendClientMessage(playerid, COLOR_YELLOW, "--------------------------------------------------------------------------");
-        mysql_free_result();
     }
+    mysql_free_result();
 }
 
 MruMySQL_ZnajdzBanaPoIP(playerid, unescaped_ip[])
