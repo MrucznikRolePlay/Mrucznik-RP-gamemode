@@ -1401,6 +1401,45 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
+	else if(dialogid == D_ELEVATOR_USSS)
+	{
+		if (response)
+		{	
+			switch(listitem)
+			{
+				case 0://Parking
+				{
+					SetPlayerVirtualWorld(playerid, 0);
+					SetPlayerPos(playerid, 1538.7106,-1474.8816,9.5000);
+				}
+				case 1://Recepcja
+				{
+					SetPlayerVirtualWorld(playerid, 41);
+					SetPlayerPos(playerid, 1526.7426,-1469.4413,23.0778);
+				}
+				case 2://Sala treningowa
+				{
+					SetPlayerVirtualWorld(playerid, 40);
+					SetPlayerPos(playerid, 1549.7249,-1462.1644,3.3250);
+				}
+				case 3://Strefa Pracownika
+				{
+					SetPlayerVirtualWorld(playerid, 42);
+					SetPlayerPos(playerid, 1526.7426,-1469.4413,23.0778);
+				}
+				case 4://Biura
+				{
+					SetPlayerVirtualWorld(playerid, 43);
+					SetPlayerPos(playerid, 1541.2571,-1464.1281,21.8429);
+				}
+				case 5://Akademia
+				{
+					SetPlayerVirtualWorld(playerid, 44);
+					SetPlayerPos(playerid, 1544.1202,-1466.9008,42.8386);
+				}
+			}
+		}
+	}
     else if(dialogid == D_ELEVATOR_LSMC)
     {
         if(response)

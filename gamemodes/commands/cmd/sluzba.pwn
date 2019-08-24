@@ -245,7 +245,7 @@ YCMD:sluzba(playerid, params[], help)
         }
         else if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7)
         {
-            if (PlayerToPoint(5, playerid,1527.2361,-1453.2623,67.8331))
+            if (PlayerToPoint(5, playerid, 1521.8843,-1479.6427,22.9377))
             {
                 if(OnDuty[playerid]==0)
                 {

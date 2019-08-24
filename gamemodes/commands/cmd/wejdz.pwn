@@ -137,18 +137,27 @@ YCMD:wejdz(playerid, params[], help)
         { //WINDA
             ShowPlayerDialogEx(playerid, DIALOG_ELEVATOR_SAD, DIALOG_STYLE_LIST, "Winda:", "{660000}[-1] {D2CFA6} Archiwum\n{660000}[0] {D2CFA6} Recepcja\n{660000}[1] {D2CFA6} Sale Rozpraw\n{660000}[2] {D2CFA6} Biura\n{660000}[3] {D2CFA6} Pomieszczenia Socjalne\n{660000}[4] {D2CFA6} Dach", "Wybierz", "Anuluj");
         }
-		else if(IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) ||
-            IsPlayerInRangeOfPoint(playerid,2.0, -2805.0967,2596.0566,-98.0829) ||
+		else if(IsPlayerInRangeOfPoint(playerid,2.0, 1144.4740, -1333.2556, 13.8348) || 
             IsPlayerInRangeOfPoint(playerid,2.0,1134.0449,-1320.7128,68.3750)||
-            IsPlayerInRangeOfPoint(playerid,2.0,1183.3129,-1333.5684,88.1627)||
+            IsPlayerInRangeOfPoint(playerid,2.0,1183.3129,-1333.5684,88.1627)|| 
+            IsPlayerInRangeOfPoint(playerid,2.0, -2805.0967,2596.0566,-98.0829) ||
             IsPlayerInRangeOfPoint(playerid,2.0,1168.2112,-1340.6785,100.3780)||
-            IsPlayerInRangeOfPoint(playerid,2.0,1158.6868,-1339.4423,120.2738)||
+            IsPlayerInRangeOfPoint(playerid,2.0,1158.6868,-1339.4423,120.2738)|| 
             IsPlayerInRangeOfPoint(playerid,2.0,1167.7832,-1332.2727,134.7856)||
             IsPlayerInRangeOfPoint(playerid,2.0,1177.4791,-1320.7749,178.0699)||
             IsPlayerInRangeOfPoint(playerid,2.0,1178.2081,-1330.6317,191.5315)||
             IsPlayerInRangeOfPoint(playerid,2.0, 1161.8228, -1337.0521, 31.6112))
         {
             ShowPlayerDialogEx(playerid, D_ELEVATOR_LSMC, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[-1] {D2CFA6}Kostnica i laboratorium\n{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba przyjêæ\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Sale operacyjne\n{660000}[4] {D2CFA6}Sale pooperacyjne\n{660000}[5] {D2CFA6}Sale specjalistyczne\n{660000}[6] {D2CFA6}Akademia medyczna\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
+        }
+        else if(IsPlayerInRangeOfPoint(playerid,2.0, 1538.7106,-1474.8816,9.5000) || //Parking
+            IsPlayerInRangeOfPoint(playerid,2.0, 1526.7426,-1469.4413,23.0778)|| //Recepcja
+            IsPlayerInRangeOfPoint(playerid,2.0, 1549.7249,-1462.1644,3.3250)|| //Strefa Pracownika
+            IsPlayerInRangeOfPoint(playerid,2.0, 1526.7426,-1469.4413,23.0778) || //Sala treningowa
+            IsPlayerInRangeOfPoint(playerid,2.0, 1541.2571,-1464.1281,21.8429)|| //Biura
+            IsPlayerInRangeOfPoint(playerid,2.0, 1544.1202,-1466.9008,42.8386)) //Akademia
+        {
+            ShowPlayerDialogEx(playerid, D_ELEVATOR_USSS, DIALOG_STYLE_LIST, "Winda:", "{660000}[-1] {D2CFA6}Parking\n{660000}[0] {D2CFA6}Recepcja\n{660000}[1] {D2CFA6}Sala treningowa\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Biura\n{660000}[4] {D2CFA6}Akademia", "Wybierz", "Anuluj");
         }
 		
 //======================================================================
