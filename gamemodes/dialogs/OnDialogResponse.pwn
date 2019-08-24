@@ -2705,9 +2705,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerVirtualWorld(playerid, 7);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
 					}
-					case 10://dach
+					case 10:
 					{
 						if(levelLock[FRAC_FBI][10] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+						SetPlayerPosEx(playerid, 605.5609, -1462.2583, 88.1674);
+						TogglePlayerControllable(playerid, 0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid, 8);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Sale przes³uchañ");
+					}
+					case 11://dach
+					{
+						if(levelLock[FRAC_FBI][11] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
