@@ -61,6 +61,7 @@ command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost)
             format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), businessID, valueCost); 
             sendTipMessage(giveplayerid, string); 
             SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
+            SetPVarInt(giveplayerid, "Biznes_ID", PlayerInfo[playerid][pBusinessOwner]);
             SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 
         }
         else

@@ -390,6 +390,7 @@ Business_AkceptujBiznes(playerid)
 	new string[256];
 	new giveplayerid = GetPVarInt(playerid, "Oferujacy_ID");
 	new price = GetPVarInt(playerid, "Oferujacy_Cena");
+	new tax = (price/12);
 
 	if(giveplayerid == INVALID_PLAYER_ID)//przy connect
 	{
@@ -417,8 +418,19 @@ Business_AkceptujBiznes(playerid)
 		return 1;
 	}
 
-	new businessID = PlayerInfo[giveplayerid][pBusinessOwner]; 
-	new tax = (price/12);
+	new businessID = GetPVarInt(playerid, "Biznes_ID"); 
+	if(businessID == INVALID_BIZ_ID)
+	{
+		sendErrorMessage(playerid, "Ten gracz nie ma biznesu.");
+		return 1;
+	}
+
+	if(businessID != PlayerInfo[giveplayerid][pBusinessOwner])
+	{
+		sendErrorMessage(playerid, "Nieprawid³owe ID biznesu.");
+		ResetBizOffer(playerid);
+		return 1;
+	}
 
 	ZabierzKase(playerid, price);
 	DajKase(giveplayerid, (price-tax)); 
