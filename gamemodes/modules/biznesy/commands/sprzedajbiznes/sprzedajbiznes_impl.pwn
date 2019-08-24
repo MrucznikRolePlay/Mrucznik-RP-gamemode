@@ -40,7 +40,7 @@ command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost)
             sendErrorMessage(playerid, "Nie jesteœ obok biznesu!");
             return 1;
         }
-        if(PlayerInfo[playerid][pBusinessOwner] == businessID)
+        if(PlayerInfo[playerid][pBusinessOwner] != businessID)
         {
             sendErrorMessage(playerid, "To nie jest twój biznes"); 
             return 1;
@@ -61,6 +61,7 @@ command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost)
             format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), businessID, valueCost); 
             sendTipMessage(giveplayerid, string); 
             SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
+            SetPVarInt(giveplayerid, "Biznes_ID", PlayerInfo[playerid][pBusinessOwner]);
             SetPVarInt(giveplayerid, "Oferujacy_Cena", valueCost); 
         }
         else

@@ -28,7 +28,7 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
-hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	//  When multiple versions of the same callback are hooked with y_hooks, they are all always called,
 	//   regardless of the return value of previous hooks. 
@@ -40,7 +40,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 		{
-			return -2;
+			return 1;
 		}
 		if(response)
 		{
@@ -53,12 +53,12 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(GetPlayerBusiness(giveplayerid) != INVALID_BIZ_ID)
 					{
 						sendErrorMessage(playerid, "Ten gracz ma ju¿ biznes!"); 
-						return -2; 
+						return 1; 
 					}
 					if(playerid == giveplayerid)
 					{
 						sendErrorMessage(playerid, "Nie mo¿esz przyj¹æ samego siebie!"); 
-						return -2;
+						return 1;
 					}
 					PlayerInfo[giveplayerid ][pBusinessMember] = PlayerInfo[playerid][pBusinessOwner]; 
 					format(string, sizeof(string), "Zosta³eœ przyjêty do %s przez %s", Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], GetNick(playerid));
@@ -75,7 +75,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						format(string, sizeof(string), "Gracz %s nie jest cz³onkiem twojego biznesu!", GetNick(giveplayerid)); 
 						sendErrorMessage(playerid, string); 
-						return -2;
+						return 1;
 					}
 					PlayerInfo[giveplayerid ][pBusinessMember] = INVALID_BIZ_ID; 
 					format(string, sizeof(string), "Zosta³eœ zwolniony z %s przez %s", Business[PlayerInfo[playerid][pBusinessOwner]][b_Name], GetNick(playerid));
@@ -91,17 +91,17 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(kaska[playerid] < valueMoney)
 				{
 					sendErrorMessage(playerid, "Nie posiadasz przy sobie takiej gotówki!"); 
-					return -2;
+					return 1;
 				}
 				if(Business[businessID][b_moneyPocket]+valueMoney > 1_000_000_000)
 				{
 					sendErrorMessage(playerid, "Nie mo¿esz wsadziæ takiej gotówki - sejf jest przepe³niony!"); 
-					return -2;
+					return 1;
 				}
 				if(valueMoney <= 0)
 				{
 					sendErrorMessage(playerid, "Wartoœæ nie mo¿e byæ podana z ''-''"); 
-					return -2;
+					return 1;
 				}
 				format(string, sizeof(string), "Wp³aci³eœ do sejfu $%d, jest w nim teraz $%d", 
 					valueMoney, 
@@ -126,12 +126,12 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(Business[businessID][b_moneyPocket] < valueMoney)
 				{
 					sendErrorMessage(playerid, "Nie posiadasz w sejfie biznesu takiej gotówki!"); 
-					return -2;
+					return 1;
 				}
 				if(valueMoney <= 0)
 				{
 					sendErrorMessage(playerid, "Wartoœæ nie mo¿e byæ podana z ''-''"); 
-					return -2;
+					return 1;
 				}
 				format(string, sizeof(string), "Wp³aci³eœ do sejfu $%d, jest w nim teraz $%d", 
 					valueMoney, 
@@ -149,14 +149,14 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SaveBusiness(businessID); 
 			}
 		}
-		return -2;
+		return 1;
 	}
 	else if(dialogid == D_BIZ_WRITE)
 	{
 		if(!response)
 		{
 			sendErrorMessage(playerid, "Wyszed³eœ z panelu tworzenia biznesu"); 
-			return -2;
+			return 1;
 		}
 		new value, string[124]; 
 		if(response)
@@ -167,7 +167,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "SetBizCost", value); 
 				SetPVarInt(playerid, "MustBe", 1); 
 				ShowPlayerDialogEx(playerid, D_BIZ_WRITE, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "WprowadŸ poni¿ej maksymalny zysk\nktóry gracz bêdzie móg³ otrzymaæ co godzine.", "Dalej", "WyjdŸ"); 
-				return -2;
+				return 1;
 			}
 			if(GetPVarInt(playerid, "MustBe") == 1)
 			{
@@ -175,7 +175,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "SetBizMoney", value); 
 				SetPVarInt(playerid, "MustBe", 2); 
 				ShowPlayerDialogEx(playerid, D_BIZ_WRITE, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "Wpisz poni¿ej nazwê biznesu", "Dalej", "WyjdŸ"); 
-				return -2;
+				return 1;
 			}
 			if(GetPVarInt(playerid, "MustBe") == 2)
 			{
@@ -196,11 +196,11 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					ShowPlayerDialogEx(playerid, D_BIZ_WRITE, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "Wpisz poni¿ej nazwê biznesu\nMINIMALNIE 3 ZNAKI", "Dalej", "WyjdŸ"); 
 				}
-				return -2;
+				return 1;
 			}
 		}
-		return -2;
+		return 1;
 	}
-	return 1;
+	return 0;
 }
 //end

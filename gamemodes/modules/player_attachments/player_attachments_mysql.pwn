@@ -85,10 +85,7 @@ PlayerAttachments_LoadItem(playerid, model)
     if(mysql_fetch_row_format(str, "|"))
     {
         sscanf(str, "p<|>fffffffffdd", x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-		if(active)
-		{
-			index = AttachPlayerItem(playerid, model, bone, x, y, z, rx, ry, rz, sx, sy, sz);
-		}
+        index = AttachPlayerItem(playerid, model, bone, x, y, z, rx, ry, rz, sx, sy, sz);
     }
     mysql_free_result();
     return index;

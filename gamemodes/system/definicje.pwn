@@ -86,7 +86,7 @@
 #define COST_SN_SMS_3 7500
 #define COST_SN_SMS_4 10000
 #define COST_SN_SMS_5 12500
-#define MAX_LEVELINT 11
+#define MAX_LEVELINT 12
 
 //sprunki i snacki
 #define SPRUNK_COST 2000
@@ -295,6 +295,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_LOGIN     230
 #define D_REGISTER  231
 
+#define D_ELEVATOR_USSS         179
 #define D_ELEVATOR_LSMC         180
 #define D_OPIS                  181
 #define D_OPIS_UPDATE           182

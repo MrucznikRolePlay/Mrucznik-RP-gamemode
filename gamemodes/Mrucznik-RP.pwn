@@ -57,7 +57,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <timestamptodate>
 #include <discord-connector>
 #include <memory>
-#include <PawnPlus>
+// #include <PawnPlus>
 // #include <requests>
 // #include <colandreas>
 
@@ -2396,7 +2396,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_BOR: //7
 						{
-						    SetPlayerPosEx(playerid, 1799.4161,-1577.8551,14.0733);
+						    SetPlayerPosEx(playerid, 1519.0970,-1449.6099,13.5391);
 						}
 						case FRAC_HA: //8
 						{

@@ -281,8 +281,8 @@ stock Biz_Owner(biz)
     if(mysql_num_rows())
     {
     	mysql_fetch_row_format(lStr, "|");
-		mysql_free_result();
 	}
+	mysql_free_result();
     return lStr;
 }
 stock CorrectPlayerBusiness(playerid)
@@ -291,17 +291,20 @@ stock CorrectPlayerBusiness(playerid)
 	{
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
+		Log(serverLog, WARNING, "%s wyzerowanie biznesu 0", GetPlayerLogName(playerid));
 	}
 	if(PlayerInfo[playerid][pBusinessOwner] > MAX_BIZNES)
 	{
-		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		sendErrorMessage(playerid, "Posiada³eœ b³êdny biznes - zosta³ on WYZEROWANY!");
 		sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d - zg³oœ to na naszym forum!"); 
+		Log(serverLog, ERROR, "%s wyzerowanie biznesu %d", GetPlayerLogName(playerid), PlayerInfo[playerid][pBusinessOwner]);
+		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 	}
 	if(PlayerInfo[playerid][pBusinessMember] == 0)
 	{
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID;
 		sendTipMessage(playerid, "Posiada³eœ biznes testowy - pomyœlnie wy³¹czono.");
+		Log(serverLog, WARNING, "%s wyzerowanie pracownika biznesu 0", GetPlayerLogName(playerid));
 	}
 	return 0; 
 }
@@ -387,6 +390,7 @@ Business_AkceptujBiznes(playerid)
 	new string[256];
 	new giveplayerid = GetPVarInt(playerid, "Oferujacy_ID");
 	new price = GetPVarInt(playerid, "Oferujacy_Cena");
+	new tax = (price/12);
 
 	if(giveplayerid == INVALID_PLAYER_ID)//przy connect
 	{
@@ -414,8 +418,19 @@ Business_AkceptujBiznes(playerid)
 		return 1;
 	}
 
-	new businessID = PlayerInfo[giveplayerid][pBusinessOwner]; 
-	new tax = (price/12);
+	new businessID = GetPVarInt(playerid, "Biznes_ID"); 
+	if(businessID == INVALID_BIZ_ID)
+	{
+		sendErrorMessage(playerid, "Ten gracz nie ma biznesu.");
+		return 1;
+	}
+
+	if(businessID != PlayerInfo[giveplayerid][pBusinessOwner])
+	{
+		sendErrorMessage(playerid, "Nieprawid³owe ID biznesu.");
+		ResetBizOffer(playerid);
+		return 1;
+	}
 
 	ZabierzKase(playerid, price);
 	DajKase(giveplayerid, (price-tax)); 

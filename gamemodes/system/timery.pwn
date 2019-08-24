@@ -94,7 +94,7 @@ public ActorsFix(playerid)
 	new playerVW = GetPlayerVirtualWorld(playerid); 
 	new playerINT = GetPlayerInterior(playerid); 
 	RepairActors(playerVW, playerINT);
-	if(PlayerInfo[playerid][pAdmin] > 1)
+	if(IsAScripter(playerid))
 	{
 		sendTipMessage(playerid, "Reset Aktorów - UDANY"); 
 	}

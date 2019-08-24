@@ -334,8 +334,8 @@ DialogPrzedmioty(playerid)
             format(substring, sizeof(substring), "%i\t~g~%dMC\n", PrzedmiotyPremium[i][Model], PrzedmiotyPremium[i][Cena]);
             strcat(string, substring);
         } 
+		string[strlen(string)-1] = '\0';
 	}
-	string[strlen(string)-1] = '\0';
 
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(PRZEDMIOTY), DIALOG_STYLE_PREVIEW_MODEL,
 		"Premium - Us³ugi - Przedmioty",

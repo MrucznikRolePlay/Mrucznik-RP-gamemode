@@ -86,7 +86,7 @@ Remove_MySQL_Leaders(fracID)
 {
 	new query[126];
 	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `FracID`='%d'", fracID);
-	new i; while(i <= AllLeaders){mysql_query(query); i++; }
+	new i; while(i <= AllLeaders) { mysql_query(query); i++; }
 	return 1;
 }
 Save_MySQL_Leader(playerid)
@@ -116,11 +116,11 @@ Load_MySQL_Leader(playerid)
     if (mysql_num_rows())
 	{
         mysql_fetch_row_format(query, "|");
-        mysql_free_result();
 		sscanf(query, "p<|>dd", 
 		PlayerInfo[playerid][pLider],
 		PlayerInfo[playerid][pLiderValue]);
 	}
+	mysql_free_result();
 	return 1;
 }
 MruMySQL_IloscLiderowLoad()
@@ -138,8 +138,12 @@ MruMySQL_IloscLiderowLoad()
 	{
 		if(i != 0)
 		{
-			format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_liderzy` WHERE `FracID`='%d'", i);
-			LeadersValue[LEADER_FRAC][i] = mysql_query(lStr); 
+			format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_liderzy` WHERE `FracID`='%d'", i); 
+			mysql_query(lStr); 
+			mysql_store_result();
+			mysql_fetch_row_format(szmuleonetescik,"|");
+			LeadersValue[LEADER_FRAC][i] = strval(szmuleonetescik);
+			mysql_free_result();
 		}
 	}
 }
@@ -730,13 +734,13 @@ public MruMySQL_LoadAcocount(playerid)
 	if(mysql_num_rows())
 	{
 		mysql_fetch_row_format(lStr, "|"); 
-		mysql_free_result();
 		sscanf(lStr, "p<|>s[24]ddd",
 		GetNick(playerid),
 		PlayerInfo[playerid][pUID],
 		PlayerInfo[playerid][pLider],
 		PlayerInfo[playerid][pLiderValue]); 
 	} 
+	mysql_free_result();
 	//Wczytaj personalizacje
 	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`";
 	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
@@ -745,7 +749,6 @@ public MruMySQL_LoadAcocount(playerid)
 	if(mysql_num_rows())
 	{
 		mysql_fetch_row_format(lStr, "|"); 
-		mysql_free_result();
 		sscanf(lStr, "p<|>dddddddddddd", 
 		PlayerPersonalization[playerid][PERS_KB],
 		PlayerPersonalization[playerid][PERS_AD],
@@ -760,6 +763,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerPersonalization[playerid][PERS_NEWNICK],
 		PlayerPersonalization[playerid][PERS_NEWBIE]); 
 	}
+	mysql_free_result();
 	
 	//legal
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_legal` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
@@ -831,8 +835,8 @@ MruMySQL_WczytajOpis(handle, uid, typ)
             mysql_fetch_row_format(lText, "|");
             strpack(CarDesc[handle], lText);
         }
-        mysql_free_result();
     }
+	mysql_free_result();
     return 1;
 }
 
@@ -859,6 +863,7 @@ MruMySQL_CheckOpis(uid, typ)
         mysql_free_result();
         return 1;
     }
+	mysql_free_result();
     return 0;
 }
 
@@ -1039,8 +1044,8 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
         if(mysql_num_rows())
         {
             mysql_fetch_row_format(ip, "|");
-            mysql_free_result();
         }
+		mysql_free_result();
     }
 
 
@@ -1136,6 +1141,7 @@ bool:MruMySQL_SprawdzBany(playerid)
             return false;
         }
 	}
+	mysql_free_result();
 	return false;
 }
 

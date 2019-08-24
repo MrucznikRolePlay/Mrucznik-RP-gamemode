@@ -293,10 +293,6 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		}
 		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
 	}
-	else
-	{
-		sendTipMessage(playerid, "Proces /wejdz - poprawnie przeprowadzony"); 
-	}
 	return 0; 
 }
 Sprawdz_UID_Wychodzenie(playerid, Check_ID)
@@ -361,10 +357,6 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 			return 1;
 		}
 		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
-	}
-	else
-	{
-		sendTipMessage(playerid, "Proces /wyjdz przeprowadzony pomyœlnie"); 
 	}
 
 	return 0; 

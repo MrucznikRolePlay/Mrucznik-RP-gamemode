@@ -58,6 +58,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	//2.5.8
 	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+
+	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+
 	//2.5.2
 	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
@@ -1396,6 +1401,45 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
+	else if(dialogid == D_ELEVATOR_USSS)
+	{
+		if (response)
+		{	
+			switch(listitem)
+			{
+				case 0://Parking
+				{
+					SetPlayerVirtualWorld(playerid, 0);
+					SetPlayerPos(playerid, 1538.7106,-1474.8816,9.5000);
+				}
+				case 1://Recepcja
+				{
+					SetPlayerVirtualWorld(playerid, 41);
+					SetPlayerPos(playerid, 1526.7426,-1469.4413,23.0778);
+				}
+				case 2://Sala treningowa
+				{
+					SetPlayerVirtualWorld(playerid, 40);
+					SetPlayerPos(playerid, 1549.7249,-1462.1644,3.3250);
+				}
+				case 3://Strefa Pracownika
+				{
+					SetPlayerVirtualWorld(playerid, 42);
+					SetPlayerPos(playerid, 1526.7426,-1469.4413,23.0778);
+				}
+				case 4://Biura
+				{
+					SetPlayerVirtualWorld(playerid, 43);
+					SetPlayerPos(playerid, 1541.2571,-1464.1281,21.8429);
+				}
+				case 5://Akademia
+				{
+					SetPlayerVirtualWorld(playerid, 44);
+					SetPlayerPos(playerid, 1544.1202,-1466.9008,42.8386);
+				}
+			}
+		}
+	}
     else if(dialogid == D_ELEVATOR_LSMC)
     {
         if(response)
@@ -2661,9 +2705,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerVirtualWorld(playerid, 7);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
 					}
-					case 10://dach
+					case 10:
 					{
 						if(levelLock[FRAC_FBI][10] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
+						{
+							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
+							return 1;
+						}
+						SetPlayerPosEx(playerid, 605.5609, -1462.2583, 88.1674);
+						TogglePlayerControllable(playerid, 0);
+						Wchodzenie(playerid);
+						SetPlayerVirtualWorld(playerid, 8);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Sale przes³uchañ");
+					}
+					case 11://dach
+					{
+						if(levelLock[FRAC_FBI][11] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
@@ -2728,6 +2785,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
+							ZabierzKase(playerid, 50000);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    { 
 								if(playerValue > winValue && playerValue >= 85)
@@ -14958,9 +15016,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendLeaderRadioMessage(frac, COLOR_RED, "==================================="); 
 				
 				//LOG
-				Log(payLog, INFO, "%s przela³ do sejfu frakcji %d kwotê %d$. Nowy stan: %d$",
+				Log(payLog, INFO, "%s przela³ do sejfu frakcji %s kwotê %d$. Nowy stan: %d$",
 					GetPlayerLogName(playerid),
-					frakcja,
+					GetFractionLogName(frakcja),
 					money,
 					Sejf_Frakcji[frakcja]);
 				
@@ -15335,9 +15393,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof(string), ">>>Lider %s[%d] wys³a³ %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid);
 			SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string);
 			
-			Log(payLog, INFO, "%s przela³ z sejfu frakcji %d na konto gracza %s kwotê %d$. Nowy stan: %d$",
+			Log(payLog, INFO, "%s przela³ z sejfu frakcji %s na konto gracza %s kwotê %d$. Nowy stan: %d$",
 				GetPlayerLogName(playerid),
-				frakcja,
+				GetFractionLogName(frakcja),
 				GetPlayerLogName(giveplayerid),
 				money,
 				Sejf_Frakcji[frakcja]);
