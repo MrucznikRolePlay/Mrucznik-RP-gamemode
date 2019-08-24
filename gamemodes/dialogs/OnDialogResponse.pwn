@@ -58,6 +58,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	//2.5.8
 	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+
+	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+
 	//2.5.2
 	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{

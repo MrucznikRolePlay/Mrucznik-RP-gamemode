@@ -105,7 +105,7 @@ hook OnPlayerSpawn(playerid)
 	}
 }
 
-hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if(dialogid == DIALOG_PRZEDMIOTYGRACZA)
 	{
@@ -132,7 +132,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_EDYCJA, DIALOG_STYLE_MSGBOX, "Przedmioty - edycja", "Czy chcesz edytowaæ pozycjê przedmiotu?", "Tak", "Nie");
 			SetPVarInt(playerid, "AttachedItem_EditIndex", index);
 		}
-		return -2;
+		return 1;
 	}
 	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_EDYCJA)
 	{
@@ -141,7 +141,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new index = GetPVarInt(playerid, "AttachedItem_EditIndex");
 			DialogBoneSelect(playerid, AttachedObjects[playerid][index][ao_bone]);
 		}
-		return -2;
+		return 1;
 	}
 	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_KOSC)
 	{
@@ -160,7 +160,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			EditAttachedObject(playerid, index);
 			sendTipMessage(playerid, "Wybierz pozycjê obiektu.");
 		}
-		return -2;
+		return 1;
 	}
 	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ)
 	{
@@ -169,7 +169,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new index = DynamicGui_GetDataInt(playerid, listitem);
 			DetachPlayerItem(playerid, index);
 		}
-		return -2;
+		return 1;
 	}
 	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ_ADMIN)
 	{
@@ -182,9 +182,9 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SendClientMessage(giveplayerid, COLOR_RED, sprintf("Administrator %s zdj¹³ twój obiekt, popraw jego u³o¿enie, inaczej mo¿esz otrzymaæ karê.", GetNick(playerid)));
 			sendTipMessage(playerid, sprintf("Zdj¹³eœ obiekt graczowi %s", GetNick(giveplayerid)));
 		}
-		return -2;
+		return 1;
 	}
-	return 1;
+	return 0;
 }
 
 //end
