@@ -128,6 +128,11 @@ attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 
 			PlayerAttachments_SetActive(playerid, item, true);
 			new index = PlayerAttachments_LoadItem(playerid, item);
+			if(index == INVALID_ATTACHED_OBJECT_INDEX)
+			{
+				sendErrorMessage(playerid, "B³¹d systemu doczepianych obiektów! Zg³oœ okolicznoœci na forum");
+				return 1;
+			}
 
 			ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_EDYCJA, DIALOG_STYLE_MSGBOX, "Przedmioty - edycja", "Czy chcesz edytowaæ pozycjê przedmiotu?", "Tak", "Nie");
 			SetPVarInt(playerid, "AttachedItem_EditIndex", index);
