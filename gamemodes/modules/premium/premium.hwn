@@ -129,7 +129,8 @@ new const SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
 	{127, UNIKATOWY_SKIN_CENA},
 	{149, UNIKATOWY_SKIN_CENA},
 	{234, UNIKATOWY_SKIN_CENA},
-	{294, UNIKATOWY_SKIN_CENA*2}
+	{294, UNIKATOWY_SKIN_CENA*3},
+	{303, UNIKATOWY_SKIN_CENA}
 };
 
 new const PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] = 
