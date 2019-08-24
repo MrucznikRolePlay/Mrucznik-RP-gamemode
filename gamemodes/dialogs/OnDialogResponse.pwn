@@ -14964,9 +14964,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendLeaderRadioMessage(frac, COLOR_RED, "==================================="); 
 				
 				//LOG
-				Log(payLog, INFO, "%s przela³ do sejfu frakcji %d kwotê %d$. Nowy stan: %d$",
+				Log(payLog, INFO, "%s przela³ do sejfu frakcji %s kwotê %d$. Nowy stan: %d$",
 					GetPlayerLogName(playerid),
-					frakcja,
+					GetFractionLogName(frakcja),
 					money,
 					Sejf_Frakcji[frakcja]);
 				
@@ -15341,9 +15341,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof(string), ">>>Lider %s[%d] wys³a³ %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid);
 			SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string);
 			
-			Log(payLog, INFO, "%s przela³ z sejfu frakcji %d na konto gracza %s kwotê %d$. Nowy stan: %d$",
+			Log(payLog, INFO, "%s przela³ z sejfu frakcji %s na konto gracza %s kwotê %d$. Nowy stan: %d$",
 				GetPlayerLogName(playerid),
-				frakcja,
+				GetFractionLogName(frakcja),
 				GetPlayerLogName(giveplayerid),
 				money,
 				Sejf_Frakcji[frakcja]);
