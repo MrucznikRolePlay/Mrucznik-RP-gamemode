@@ -6124,7 +6124,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
 		//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-		SetPlayerPosEx(playerid, Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]); //0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
+		SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]); //0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
 		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
 	    Spectate[playerid] = INVALID_PLAYER_ID;
         TogglePlayerSpectating(playerid, 0);
