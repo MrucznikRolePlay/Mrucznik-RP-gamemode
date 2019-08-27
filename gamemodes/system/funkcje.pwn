@@ -2200,19 +2200,6 @@ IsABOR(playerid)
 	return 0;
 }
 
-IsAKO(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new nick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Armin_Verwest", false) == 0)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
 /*
 MozePobic(playerid)
 {
