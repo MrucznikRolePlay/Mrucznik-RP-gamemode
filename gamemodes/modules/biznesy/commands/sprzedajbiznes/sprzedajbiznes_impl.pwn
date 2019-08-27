@@ -45,7 +45,13 @@ command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost)
             sendErrorMessage(playerid, "To nie jest twój biznes"); 
             return 1;
         }
-        if(kaska[giveplayerid]>= valueCost)
+        if(valueCost <= 0)
+        {
+            sendErrorMessage(playerid, "Nie mo¿esz sprzedaæ biznesu za ujemn¹ kwotê.");
+            return 1;
+        }
+
+        if(kaska[giveplayerid] >= valueCost)
         {
             format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d (-%d podatku)", 
                 GetNick(giveplayerid, true), 
