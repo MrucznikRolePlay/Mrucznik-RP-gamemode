@@ -6572,15 +6572,6 @@ public OnVehicleSpawn(vehicleid)
 
 public OnPlayerText(playerid, text[])
 {
-    if(text[0] == '@') //animacja
-    {
-        if(strlen(text) > 31) return 0;
-        new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, text);
-        if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
-        return 0;
-    }
-	
-	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
