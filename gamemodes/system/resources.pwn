@@ -29,7 +29,8 @@ LoadDLSkins()
 	AddCharModelEx(45, 20007, "mrucznikzombie4.dff", "mrucznikzombie4.txd", 3);// [KOBIETA[ZOMBIE]] [STARA] [By:____] [Added: 2.6.1]
 	
 	//SKINY PRZEZNACZONE DLA FRAKCJI 20.101-20.300
-
+	AddCharModelEx(20, 20101, "mrucznikskin46.dff", "mrucznikskin46.txd", 1);// [FACET[LSMC]] [ŒREDNI] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
+	AddCharModelEx(20, 20102, "mrucznikskin47.dff", "mrucznikskin47.txd", 1);// [KOBIETA[LSMC]] [M£ODA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
 
 	//SKINY PRZEZNACZONE POD UNIKATY 20.301-20.400
 	AddCharModelEx(45, 20301, "mrucznikskin02.dff", "mrucznikskin02.txd", 1);// [FACET] [ŒREDNIA] [By: Mrucznik-rp -> User mrN] [Added: 2.6.1]
@@ -42,13 +43,11 @@ LoadDLSkins()
 	AddCharModelEx(20, 20308, "mrucznikskin43.dff", "mrucznikskin43.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
 	AddCharModelEx(20, 20309, "mrucznikskin44.dff", "mrucznikskin44.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
 	AddCharModelEx(20, 20310, "mrucznikskin45.dff", "mrucznikskin45.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
-	AddCharModelEx(20, 20311, "mrucznikskin46.dff", "mrucznikskin46.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
-	AddCharModelEx(20, 20312, "mrucznikskin47.dff", "mrucznikskin47.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
-	AddCharModelEx(20, 20313, "mrucznikskin48.dff", "mrucznikskin48.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
-	AddCharModelEx(20, 20314, "mrucznikskin49.dff", "mrucznikskin49.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
-	AddCharModelEx(20, 20315, "mrucznikskin50.dff", "mrucznikskin50.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
-	AddCharModelEx(20, 20316, "mrucznikskin51.dff", "mrucznikskin51.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
-	AddCharModelEx(20, 20317, "mrucznikskin52.dff", "mrucznikskin52.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By:____] [Added: 2.6.11]
+	AddCharModelEx(20, 20311, "mrucznikskin48.dff", "mrucznikskin48.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
+	AddCharModelEx(20, 20312, "mrucznikskin49.dff", "mrucznikskin49.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
+	AddCharModelEx(20, 20313, "mrucznikskin50.dff", "mrucznikskin50.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
+	AddCharModelEx(20, 20314, "mrucznikskin51.dff", "mrucznikskin51.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By: https://vk.com/slivprivata/skins] [Added: 2.6.11]
+	AddCharModelEx(20, 20315, "mrucznikskin52.dff", "mrucznikskin52.txd", 1);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By:____] [Added: 2.6.11]
 
 
 	//ZWYK£E SKINY 20.401 - BRAK
