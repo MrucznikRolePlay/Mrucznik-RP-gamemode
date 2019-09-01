@@ -664,6 +664,7 @@
 #include "cmd/dajscene.pwn"
 //#include "cmd/news2.pwn"
 #include "cmd/fracinfo.pwn"
+#include "cmd/wlsett.pwn"
 
 InitCommands()
 {
