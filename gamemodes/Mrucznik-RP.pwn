@@ -2002,26 +2002,29 @@ public OnPlayerDeath(playerid, killerid, reason)
 		//-------<[     WL      ]>---------
 		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
 		{
-			if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+			if(giveWL)
 			{
-				format(string, sizeof(string), "Morderstwo");
-				if(IsACop(playerid))
+				if(!IsACop(killerid) && lowcaz[killerid] != playerid )
 				{
-					PoziomPoszukiwania[killerid] += 2;
-					strcat(string, " Policjanta");
-				}
-				if(lowcaz[killerid] == playerid)
-					strcat(string, " £owcy Nagród");
-				if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER || GetPlayerState(killerid) == PLAYER_STATE_PASSENGER)
-					strcat(string, " z okna pojazdu");
+					format(string, sizeof(string), "Morderstwo");
+					if(IsACop(playerid))
+					{
+						PoziomPoszukiwania[killerid] += 2;
+						strcat(string, " Policjanta");
+					}
+					if(lowcaz[killerid] == playerid)
+						strcat(string, " £owcy Nagród");
+					if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER || GetPlayerState(killerid) == PLAYER_STATE_PASSENGER)
+						strcat(string, " z okna pojazdu");
 
-				PlayerPlaySound(killerid, 1083, 0.0, 0.0, 0.0);
-				PoziomPoszukiwania[killerid] ++;
-				SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
-				if(PoziomPoszukiwania[killerid] >= 10)
-				{
-					sendTipMessageEx(playerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
-					sendTipMessage(playerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
+					PlayerPlaySound(killerid, 1083, 0.0, 0.0, 0.0);
+					PoziomPoszukiwania[killerid] ++;
+					SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
+					if(PoziomPoszukiwania[killerid] >= 10)
+					{
+						sendTipMessageEx(playerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
+						sendTipMessage(playerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
+					}
 				}
 			}
 		}
@@ -6572,15 +6575,6 @@ public OnVehicleSpawn(vehicleid)
 
 public OnPlayerText(playerid, text[])
 {
-    if(text[0] == '@') //animacja
-    {
-        if(strlen(text) > 31) return 0;
-        new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, text);
-        if(lVal != 1) SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
-        return 0;
-    }
-	
-	
 	new giver[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];

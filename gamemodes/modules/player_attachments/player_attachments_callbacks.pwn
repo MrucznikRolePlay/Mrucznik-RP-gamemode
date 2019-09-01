@@ -107,6 +107,7 @@ hook OnPlayerSpawn(playerid)
 
 attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	#pragma unused inputtext
 	if(dialogid == DIALOG_PRZEDMIOTYGRACZA)
 	{
 		if(response)

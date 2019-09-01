@@ -30,6 +30,7 @@
 //-----------------<[ Callbacki: ]>-----------------
 biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	#pragma unused listitem
 	//  When multiple versions of the same callback are hooked with y_hooks, they are all always called,
 	//   regardless of the return value of previous hooks. 
 	//  This can be prevented by using the two additional return values introduced in y_hooks:

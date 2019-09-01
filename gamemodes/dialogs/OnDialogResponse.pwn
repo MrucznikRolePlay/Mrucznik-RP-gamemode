@@ -2506,48 +2506,58 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 0:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1498.9341,-1537.0797,67.3069);
-						SetPlayerVirtualWorld (playerid, 2);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
+						SetPlayerPosEx(playerid, 1538.7106,-1474.8816,9.5000);
+						SetPlayerVirtualWorld (playerid, 8);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 1:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid,1772.1613,-1547.9675,9.9067);
-						SetPlayerVirtualWorld (playerid, 0) ;
+						SetPlayerPosEx(playerid,1549.7249,-1462.1644,3.3250);
+						SetPlayerVirtualWorld(playerid, 40);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking zewnêtrzny");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Sala treningowa");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 2:
 					{
 
-						SetPlayerPosEx(playerid,1496.9330, -1457.8887, 64.5854);
-						GameTextForPlayer(playerid, "~w~Centrala BOR \n ~r~by abram01", 5000, 1);
-						SetPlayerVirtualWorld (playerid, 80) ;
+						SetPlayerPosEx(playerid,1526.7426,-1469.4413,23.0778);
+						GameTextForPlayer(playerid, "~w~Centrala USSS \n ~r~by skPembleton", 5000, 1);
+						SetPlayerVirtualWorld(playerid, 41);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Centrala BOR");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Centrala USSS");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 3:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1482.2319, -1531.1719, 70.0080);
-						SetPlayerVirtualWorld (playerid, 80) ;
+						SetPlayerPosEx(playerid, 1526.7426,-1469.4413,23.0778);
+						SetPlayerVirtualWorld(playerid, 42);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Sale Treningowe");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Strefa Pracownika");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 4:
 					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1795.4104,-1551.2864,22.9192);
-						SetPlayerVirtualWorld (playerid, 0) ;
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Dach");
+						SetPlayerPosEx(playerid, 1541.2571,-1464.1281,21.8429);
+						SetPlayerVirtualWorld(playerid, 43);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Biura");
+						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+					}
+					case 5:
+					{
+						SetPlayerPosEx(playerid, 1544.1202,-1466.9008,42.8386);
+						SetPlayerVirtualWorld(playerid, 44); 
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Akademia");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 				}
