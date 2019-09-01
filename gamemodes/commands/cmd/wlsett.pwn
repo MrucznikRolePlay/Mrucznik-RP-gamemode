@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ fixallveh ]-----------------------------------------------//
+//------------------------------------------------[ wlsett ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -25,36 +25,28 @@
 
 // Notatki skryptera:
 /*
-	
+Komenda, która pozwala wy³¹czyæ nabijanie siê WL za morderstwa.
 */
 
-YCMD:fixallveh(playerid, params[], help)
+YCMD:wlsett(playerid, params[], help)
 {
-    if(IsPlayerConnected(playerid))
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 1000)
+        if(giveWL)
         {
-            noAccessMessage(playerid);
-            return 1;
+            giveWL=false;
+            sendTipMessage(playerid, "Wy³¹czy³eœ nabijanie WL za morderstwa!"); 
         }
-        foreach(new i : Player)
+        else
         {
-            if(IsPlayerInAnyVehicle(i))
-            {
-                new carID = GetPlayerVehicleID(i); 
-                SetVehicleHealth(carID, 1000.0);
-                RepairVehicle(carID);
-                CarData[VehicleUID[carID][vUID]][c_HP] = 1000.0;
-            }
+            giveWL= true;
+            sendTipMessage(playerid, "W³¹czy³eœ nabijanie WL za morderstwa!"); 
         }
-		if(GetPlayerAdminDutyStatus(playerid) == 1)
-		{
-			iloscInne[playerid] = iloscInne[playerid]+1;
-		}
-        new string[128];
-        format(string, sizeof(string), "Admin %s naprawi³ wszystkim graczom pojazdy", GetNick(playerid, true));
-        SendClientMessageToAll(COLOR_LIGHTBLUE, string);
-		Log(adminLog, INFO, "Admin %s u¿y³ /fixallveh", GetPlayerLogName(playerid));
     }
+    else
+    {
+        return noAccessMessage(playerid); 
+    }
+    
     return 1;
 }

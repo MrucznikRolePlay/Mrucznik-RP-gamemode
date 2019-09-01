@@ -88,6 +88,7 @@ Car_MakePlayerOwner(playerid, uid)
     if(uid >= MAX_CARS) return 0;
     CarData[uid][c_OwnerType] = CAR_OWNER_PLAYER;
     CarData[uid][c_Owner] = PlayerInfo[playerid][pUID];
+    CarData[uid][c_Keys] = 0;
     Car_Save(uid, CAR_SAVE_OWNER);
     return 1;
 }

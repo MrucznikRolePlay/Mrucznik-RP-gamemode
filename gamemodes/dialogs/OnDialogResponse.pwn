@@ -124,7 +124,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			PlayerInfo[giveplayerid][pMats] -= moneys;
 			PlayerInfo[playerid][pMats] += moneys;
 			DajKase(giveplayerid, kasa);
-			DajKase(playerid, -kasa);
+			ZabierzKase(playerid, kasa);
 			
 			Log(payLog, INFO, "%s kupi³ od %s materia³y w iloœci %d za %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), moneys, kasa);
 			SetPVarInt(playerid, "OKupMats", 0);
@@ -2506,48 +2506,58 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 0:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1498.9341,-1537.0797,67.3069);
-						SetPlayerVirtualWorld (playerid, 2);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking wewnêtrzny");
+						SetPlayerPosEx(playerid, 1538.7106,-1474.8816,9.5000);
+						SetPlayerVirtualWorld (playerid, 8);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 1:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid,1772.1613,-1547.9675,9.9067);
-						SetPlayerVirtualWorld (playerid, 0) ;
+						SetPlayerPosEx(playerid,1549.7249,-1462.1644,3.3250);
+						SetPlayerVirtualWorld(playerid, 40);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking zewnêtrzny");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Sala treningowa");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 2:
 					{
 
-						SetPlayerPosEx(playerid,1496.9330, -1457.8887, 64.5854);
-						GameTextForPlayer(playerid, "~w~Centrala BOR \n ~r~by abram01", 5000, 1);
-						SetPlayerVirtualWorld (playerid, 80) ;
+						SetPlayerPosEx(playerid,1526.7426,-1469.4413,23.0778);
+						GameTextForPlayer(playerid, "~w~Centrala USSS \n ~r~by skPembleton", 5000, 1);
+						SetPlayerVirtualWorld(playerid, 41);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Centrala BOR");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Centrala USSS");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 3:
 					{
 						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1482.2319, -1531.1719, 70.0080);
-						SetPlayerVirtualWorld (playerid, 80) ;
+						SetPlayerPosEx(playerid, 1526.7426,-1469.4413,23.0778);
+						SetPlayerVirtualWorld(playerid, 42);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Sale Treningowe");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Strefa Pracownika");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 					case 4:
 					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1795.4104,-1551.2864,22.9192);
-						SetPlayerVirtualWorld (playerid, 0) ;
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Dach");
+						SetPlayerPosEx(playerid, 1541.2571,-1464.1281,21.8429);
+						SetPlayerVirtualWorld(playerid, 43);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Biura");
+						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+					}
+					case 5:
+					{
+						SetPlayerPosEx(playerid, 1544.1202,-1466.9008,42.8386);
+						SetPlayerVirtualWorld(playerid, 44); 
+						TogglePlayerControllable(playerid,0);
+						Wchodzenie(playerid);
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Akademia");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 					}
 				}
@@ -5215,8 +5225,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        GivePlayerWeapon(playerid, 30, CenaBroni[playerid]);
 			        PlayerInfo[playerid][pGun5] = 30;
 					PlayerInfo[playerid][pAmmo5] = CenaBroni[playerid];
-					DajKase(playerid, -(GunPrice[22][0]));
-					DajKase(playerid, -(CenaBroni[playerid]*40));
+					ZabierzKase(playerid, GunPrice[22][0]);
+					ZabierzKase(playerid, CenaBroni[playerid]*40);
 					format(komunikat, sizeof(komunikat), "Kupi³eœ AK-47 z %d nabojami , kosztowa³o ciê to %d", CenaBroni[playerid],(GunPrice[22][0])+(CenaBroni[playerid]*40));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
@@ -12062,14 +12072,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ZabierzKase(playerid, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					Sejf_Add(FRAC_NOA, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					ZabierzKase(playerid, Wyscig[tworzenietrasy[playerid]][wNagroda]);
-					owyscig[playerid] = tworzenietrasy[playerid];
-					tworzenietrasy[playerid] = 666;
 					
 					Log(payLog, INFO, "%s zorganizowa³ wyœcig %s. Koszt organizacji: %d$, nagroda: %d$",
 						GetPlayerLogName(playerid),
 						Wyscig[tworzenietrasy[playerid]][wNazwa], 
 						(Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000, 
 						Wyscig[tworzenietrasy[playerid]][wNagroda]);
+
+					owyscig[playerid] = tworzenietrasy[playerid];
+					tworzenietrasy[playerid] = 666;
+					
 				}
 				else
 				{
@@ -14191,10 +14203,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 Car_Save(CarData[car][c_ID], CAR_SAVE_STATE);
                 Car_Unspawn(veh);
                 Car_Spawn(car);
-				Log(serverLog, INFO, "Gracz %s zaparkowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(car));
                 new string[128];
 				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d] [UID: %d] [VW: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID], CarData[car][c_VW]);
 				SendClientMessage(playerid, 0xFFC0CB, string);
+				Log(serverLog, INFO, "Gracz %s zaparkowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(veh));
             }
             case 6:
             {

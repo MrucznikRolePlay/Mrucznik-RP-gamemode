@@ -4,11 +4,11 @@
 //---------------------------------------[ Modu³: zombiescript.pwn ]-----------------------------------------//
 //Autor:
 /*
-    Simeone
+    Simeone & KamilPolska
 */
 //Opis:
 /*
-Skrypt na 10 lecie Mrucznik Role Play
+	Skrypt na 10 lecie Mrucznik Role Play
 */
 //Adnotacje:
 /*
@@ -39,39 +39,46 @@ Skrypt na 10 lecie Mrucznik Role Play
 #include <zcmd>
 #include <foreach>
 #include <streamer>
+#include <crashdetect>
+
 //-----------------<[ Define: ]>------------------
 #define COLOR_WHITE -1
 #define COLOR_GREEN 0x80FF00FF
 #define COLOR_RED 0xFF2F2FFF
 #define COLOR_GRAD 0xC0C0C0FF
 
-#define INVALID_PZOMBIE 9999	//Wartoœæ, która definiuje czy jesteœmy uczestnikiem zabawy
+#define INVALID_PZOMBIE 9999			//Wartoœæ, która definiuje czy jesteœmy uczestnikiem zabawy
 
 //POZYCJE
-#define POS_ENTER_X 1239.4888	//Pozycja wejœcia do zabawy [X]
-#define POS_ENTER_Y 108.5179	//Pozycja wejœcia do zabawy [Y]
-#define POS_ENTER_Z 20.7044		//Pozycja wejœcia do zabawy [Z]
+#define POS_ENTER_X 1239.4888			//Pozycja wejœcia do zabawy [X]
+#define POS_ENTER_Y 108.5179			//Pozycja wejœcia do zabawy [Y]
+#define POS_ENTER_Z 20.7044				//Pozycja wejœcia do zabawy [Z]
 
 //cfg
-#define ZOMBIE_VW 666			//VW, w którym odbywa siê zabawa
-#define DRAW_DIST_ANTIDOTE 10.0	//Odleg³oœæ w jakiej zobaczymy tekst [antidote]
-#define CMD_DIST_ANTIDOTE 4.0	//Odleg³oœæ w jakiej bêdziemy mogli u¿yæ antidotum
+#define ZOMBIE_VW 666					//VW, w którym odbywa siê zabawa
+#define DRAW_DIST_ANTIDOTE 10.0			//Odleg³oœæ w jakiej zobaczymy tekst [antidote]
+#define CMD_DIST_ANTIDOTE 4.0			//Odleg³oœæ w jakiej bêdziemy mogli u¿yæ antidotum
+
 //-----------------<[ Zmienne: ]>----------------------
-new playerAccessToFS[MAX_PLAYERS];	//Ma dostêp do FS [Owner]
-new PlayerZombieStatus[MAX_PLAYERS];//Jest zombie/zara¿ony/zdrowy
-new PlayerEventPoint[MAX_PLAYERS];	//Iloœæ punktów w zabawie
-new AlivePlayers;					//Pozostali ¿ywi gracze
-new ZarazonyTimer[MAX_PLAYERS];		//Timer zara¿enia
-new zarazonyTime[MAX_PLAYERS];		//Czas, który mamy do przemiany w zombie
-new togParty[MAX_PLAYERS];			//Wyciszenie komunikatów z zabawy
-new zabawaStatus;					//Zabawa trwa - TAK/NIE
-new dostalSkina[MAX_PLAYERS];		//Dosta³ skina zombie (?)
-new memberTimer[MAX_PLAYERS];		//Timer cz³onka zabawy
-new antidoteObject[4];				//Obiekty antidotum
-new Text3D:antidoteText[4];			//3DTEXTY antidotum
-new antidoteUse[4];					//Czy antidotum by³o u¿yte?
-//new firstSkinID[MAX_PLAYERS];		//Skin ID
-new zabawaON; 
+new playerAccessToFS[MAX_PLAYERS];		//Ma dostêp do FS [Owner]
+new PlayerZombieStatus[MAX_PLAYERS];	//Jest zombie/zara¿ony/zdrowy
+new PlayerEventPoint[MAX_PLAYERS];		//Iloœæ punktów w zabawie
+new AlivePlayers;						//Pozostali ¿ywi gracze
+new ZarazonyTimer[MAX_PLAYERS];			//Timer zara¿enia
+new zarazonyTime[MAX_PLAYERS];			//Czas, który mamy do przemiany w zombie
+new togParty[MAX_PLAYERS];				//Wyciszenie komunikatów z zabawy
+new zabawaStatus;						//Zabawa trwa - TAK/NIE
+new dostalSkina[MAX_PLAYERS];			//Dosta³ skina zombie (?)
+new memberTimer[MAX_PLAYERS];			//Timer cz³onka zabawy
+new antidoteObject[4];					//Obiekty antidotum
+new Text3D:antidoteText[4];				//3DTEXTY antidotum
+new antidoteUse[4];						//Czy antidotum by³o u¿yte?
+//new firstSkinID[MAX_PLAYERS];			//Skin ID
+new zabawaON;
+
+//
+new TimerWIN;
+
 //textdrawy
 new PlayerText:background[MAX_PLAYERS];
 //new PlayerText:skinTXD[MAX_PLAYERS];
@@ -100,6 +107,7 @@ new Float:randomPosZ[] = {
     19.5547,
     19.5547
 };
+
 //-----------------<[ Callback'i: ]>-------------------
 public OnFilterScriptInit()
 {
@@ -144,7 +152,7 @@ public OnPlayerConnect(playerid)
     PlayerTextDrawSetProportional(playerid, background[playerid], 1);
     PlayerTextDrawSetSelectable(playerid, background[playerid], 0);
 
-   /* skinTXD[playerid] = CreatePlayerTextDraw(playerid, 46.000000, 114.000000, "_");
+    /*skinTXD[playerid] = CreatePlayerTextDraw(playerid, 46.000000, 114.000000, "_");
     PlayerTextDrawFont(playerid, skinTXD[playerid], TEXT_DRAW_FONT_MODEL_PREVIEW);
     PlayerTextDrawLetterSize(playerid, skinTXD[playerid], 0.600000, 2.000000);
     PlayerTextDrawTextSize(playerid, skinTXD[playerid], 102.000000, 87.000000);
@@ -218,6 +226,7 @@ public OnPlayerConnect(playerid)
     PlayerTextDrawSetSelectable(playerid, text4[playerid], 0);
     return 1;
 }
+
 public OnPlayerDisconnect(playerid, reason)
 {
 	if(PlayerZombieStatus[playerid] == 0)
@@ -226,6 +235,7 @@ public OnPlayerDisconnect(playerid, reason)
 	}
 	return 1;
 }
+
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
 	if(PlayerZombieStatus[playerid] == 2)
@@ -242,10 +252,10 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
             }
 			if(PlayerZombieStatus[damagedid] == INVALID_PZOMBIE)
 			{
-				SendClientMessage(playerid, COLOR_RED, "Ta osoba nie uczestniczy  w zabawie!");
+				SendClientMessage(playerid, COLOR_RED, "Ta osoba nie uczestniczy w zabawie!");
 				return 1;
 			}
-			if(PlayerZombieStatus[damagedid] == 2)
+			if(PlayerZombieStatus[damagedid] == 0 || PlayerZombieStatus[damagedid] == 1 || PlayerZombieStatus[damagedid] == 2)
 			{
 				SendClientMessage(playerid, COLOR_RED, "Nie mo¿esz biæ swojego, zostaje Ci odjêty punkt w zabawie!");
 				GetPointsFromPlayer(playerid, 1);
@@ -255,6 +265,7 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 	}
 	return 0;
 }
+
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
     new string[256];
@@ -267,20 +278,26 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
                 PlayerZombieStatus[playerid] = 1;
                 SendClientMessage(playerid, COLOR_GRAD, "Oberwa³eœ od Zombie! Stajesz siê zara¿ony, postaraj siê znaleŸæ odtrutkê!");
                 SendClientMessage(playerid, COLOR_GRAD, "Masz na to 2 minuty!");
+
+                UpdateTableForPlayer(playerid);
+
                 format(string, sizeof(string), "Uda³o Ci siê zaraziæ %s, uderz go jeszcze raz aby sta³ siê Zombie!", GetName(playerid));
                 SendClientMessage(issuerid, COLOR_GREEN, string);
                 SendClientMessage(issuerid, COLOR_GRAD, "Otrzymujesz 1 punkt w zabawie!");
                 AddPointsToPlayer(issuerid, 1);
-                ZarazonyTimer[playerid] = SetTimerEx("TimerZarazony", 5000, false, "d", playerid);
+                ZarazonyTimer[playerid] = SetTimerEx("TimerZarazony", 5000, true, "d", playerid);
             }
             else if(PlayerZombieStatus[playerid] == 1)
             {
                 PlayerZombieStatus[playerid] = 2;
                 SendClientMessage(playerid, COLOR_GRAD, "Oberwa³eœ drugi raz! Stajesz siê zombie!");
                 SendClientMessage(playerid, COLOR_GRAD, "Biegaj i bij innych, aby zamieniæ ich w zombie");
-                SendClientMessage(issuerid, COLOR_GRAD, "Zamieni³eœ gracza w zombie, otrzymujesz  2 punkty w zabawie!");
-                AddPointsToPlayer(issuerid, 2);
                 AlivePlayers--;
+
+                UpdateTableForAll(playerid);
+
+                SendClientMessage(issuerid, COLOR_GRAD, "Zamieni³eœ gracza w zombie, otrzymujesz 2 punkty w zabawie!");
+                AddPointsToPlayer(issuerid, 2);
             }
         }
     }
@@ -301,8 +318,9 @@ public partyMember(playerid)
             dostalSkina[playerid] = 1;
         }
     }
-    UpdateTableForPlayer(playerid);
+    UpdateTableForAll(playerid);
 }
+
 forward TimerZarazony(playerid);
 public TimerZarazony(playerid)
 {
@@ -311,8 +329,11 @@ public TimerZarazony(playerid)
     {
         PlayerZombieStatus[playerid] = 2;
         SendClientMessage(playerid, COLOR_RED, "Nie znalaz³eœ odtrutki! Stajesz siê zombie");
+        AlivePlayers--;
+        UpdateTableForAll(playerid);
     }
 }
+
 //-----------------<[ Funkcje: ]>-------------------
 /*stock GetPlayerSkinEx(playerid)
 {
@@ -323,6 +344,7 @@ public TimerZarazony(playerid)
 	}
 	return value; 
 }*/ 
+
 StworzObiektyZombie()
 {
     new tmpobjid;
@@ -786,6 +808,7 @@ StworzObiektyZombie()
 	CreateDynamicObject(1294, 1256.510009, 197.117004, 23.007799, 0.000000, 0.000000, 116.468582, 666, 0, -1, 300.00, 300.00); 
     return 1;
 }
+
 UpdateTableForPlayer(playerid)
 {
     new string[64];
@@ -806,15 +829,16 @@ UpdateTableForPlayer(playerid)
     PlayerTextDrawSetString(playerid, text3[playerid], string);
     format(string, sizeof(string), "~y~Pozostali: ~w~%d", AlivePlayers);
     PlayerTextDrawSetString(playerid, text4[playerid], string);
-   // new pSkinID  = GetPlayerSkinEx(playerid); 
-   // PlayerTextDrawSetPreviewModel(playerid, skinTXD[playerid], pSkinID);
-  //  PlayerTextDrawShow(playerid, skinTXD[playerid]);
+   	//new pSkinID  = GetPlayerSkinEx(playerid);
+   	//PlayerTextDrawSetPreviewModel(playerid, skinTXD[playerid], pSkinID);
+  	//PlayerTextDrawShow(playerid, skinTXD[playerid]);
     return 1;
 }
+
 ShowTableForPlayer(playerid)
 {
     PlayerTextDrawShow(playerid, background[playerid]);
-   // PlayerTextDrawShow(playerid, skinTXD[playerid]);
+   	//PlayerTextDrawShow(playerid, skinTXD[playerid]);
     PlayerTextDrawShow(playerid, text1[playerid]);
     PlayerTextDrawShow(playerid, text2[playerid]);
     PlayerTextDrawShow(playerid, text3[playerid]);
@@ -822,6 +846,7 @@ ShowTableForPlayer(playerid)
     //UpdateTableForPlayer(playerid);
     return 1;
 }
+
 HideTableForPlayer(playerid)
 {
     PlayerTextDrawHide(playerid, background[playerid]);
@@ -832,23 +857,26 @@ HideTableForPlayer(playerid)
     PlayerTextDrawHide(playerid, text4[playerid]);
     return 1;
 }
+
 GetPointsFromPlayer(playerid, value)
 {
     PlayerEventPoint[playerid] = PlayerEventPoint[playerid]-value;
     UpdateTableForPlayer(playerid);
     return 1;
 }
+
 AddPointsToPlayer(playerid, value)
 {
     PlayerEventPoint[playerid] = PlayerEventPoint[playerid]+value;
     UpdateTableForPlayer(playerid);
     return 1;
 }
+
 sendPartyMess(color, const text[])
 {
     foreach(new i : Player)
     {
-        if(togParty[i] == 1)
+        if(togParty[i] == 0)
         {
             SendClientMessage(i, color, "======<[Zombie Apocalypse]>======");
             SendClientMessage(i, COLOR_WHITE, text);
@@ -857,18 +885,20 @@ sendPartyMess(color, const text[])
     }
     return 1;
 }
+
 CreateAntidote()
 {
 	antidoteObject[0] = CreateDynamicObject(2702, 1264.895019, 269.632385, 21.337291, 360.000000, 270.000000, 0.000000, -1, -1, -1, 50.00, 50.00);
 	antidoteObject[1] = CreateDynamicObject(1582, 1326.590942, 285.373504, 19.045194, 0.000000, 0.000000, 0.000000, -1, -1, -1, 50.00, 50.00);
 	antidoteObject[2] = CreateDynamicObject(1582, 1365.817260, 230.677383, 18.566932, 0.000000, 0.000000, 0.000000, -1, -1, -1, 50.00, 50.00);
 	antidoteObject[3] = CreateDynamicObject(1582, 1315.827148, 181.179000, 19.481203, 0.000000, 0.000000, 0.000000, -1, -1, -1, 50.00, 50.00);
-	antidoteText[0] = CreateDynamic3DTextLabel("Antidotum\n{FF00FF}Aby u¿yæ wpisz /getantidote", COLOR_WHITE, 1264.895019, 269.632385, 21.337291, DRAW_DIST_ANTIDOTE, INVALID_PLAYER_ID,INVALID_VEHICLE_ID,  ZOMBIE_VW, -1, -1,-1);
-	antidoteText[1] = CreateDynamic3DTextLabel("Antidotum\n{FF00FF}Aby u¿yæ wpisz /getantidote", COLOR_WHITE, 1326.590942, 285.373504, 19.045194, DRAW_DIST_ANTIDOTE, INVALID_PLAYER_ID,INVALID_VEHICLE_ID,  ZOMBIE_VW, -1, -1,-1);
-	antidoteText[2] = CreateDynamic3DTextLabel("Antidotum\n{FF00FF}Aby u¿yæ wpisz /getantidote", COLOR_WHITE, 1365.817260, 230.677383, 18.566932, DRAW_DIST_ANTIDOTE, INVALID_PLAYER_ID,INVALID_VEHICLE_ID,  ZOMBIE_VW, -1, -1,-1);
-	antidoteText[3] = CreateDynamic3DTextLabel("Antidotum\n{FF00FF}Aby u¿yæ wpisz /getantidote", COLOR_WHITE,1315.827148, 181.179000, 19.481203, DRAW_DIST_ANTIDOTE, INVALID_PLAYER_ID,INVALID_VEHICLE_ID,  ZOMBIE_VW, -1, -1,-1);
+	antidoteText[0] = CreateDynamic3DTextLabel("Antidotum\n{FF00FF}Aby u¿yæ wpisz /getantidote", COLOR_WHITE, 1264.895019, 269.632385, 21.337291, DRAW_DIST_ANTIDOTE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, ZOMBIE_VW, -1, -1,-1);
+	antidoteText[1] = CreateDynamic3DTextLabel("Antidotum\n{FF00FF}Aby u¿yæ wpisz /getantidote", COLOR_WHITE, 1326.590942, 285.373504, 19.045194, DRAW_DIST_ANTIDOTE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, ZOMBIE_VW, -1, -1,-1);
+	antidoteText[2] = CreateDynamic3DTextLabel("Antidotum\n{FF00FF}Aby u¿yæ wpisz /getantidote", COLOR_WHITE, 1365.817260, 230.677383, 18.566932, DRAW_DIST_ANTIDOTE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, ZOMBIE_VW, -1, -1,-1);
+	antidoteText[3] = CreateDynamic3DTextLabel("Antidotum\n{FF00FF}Aby u¿yæ wpisz /getantidote", COLOR_WHITE, 1315.827148, 181.179000, 19.481203, DRAW_DIST_ANTIDOTE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, ZOMBIE_VW, -1, -1,-1);
 	return 1;
 }
+
 DestroyAntidote()
 {
 	DestroyDynamicObject(antidoteObject[0]);
@@ -885,15 +915,18 @@ DestroyAntidote()
 	antidoteUse[3] = 0;
 	return 1;
 }
+
 stock GetName(playerid, rp = false)
 {
     new nick[MAX_PLAYER_NAME];
     GetPlayerName(playerid, nick, sizeof(nick));
-    if(rp) {
+    if(rp)
+    {
         //return nickRP[playerid];
     }
     return nick;
 }
+
 stock UprawnionyDoFS(playerid)
 {
     if(playerAccessToFS[playerid] == 1)
@@ -902,6 +935,7 @@ stock UprawnionyDoFS(playerid)
     }
     return false;
 }
+
 RemovePlayerFromParty(playerid)
 {
     HideTableForPlayer(playerid);
@@ -912,6 +946,7 @@ RemovePlayerFromParty(playerid)
     dostalSkina[playerid] = 0;
     KillTimer(memberTimer[playerid]);
 }
+
 stock CloseParty()
 {
     foreach(new i : Player)
@@ -925,7 +960,9 @@ stock CloseParty()
 	DestroyAntidote();
     return 1;
 }
+
 //------------------<[ MySQL: ]>--------------------
+
 //-----------------<[ Komendy: ]>-------------------
 CMD:dolaczzombie(playerid)
 {
@@ -958,6 +995,7 @@ CMD:dolaczzombie(playerid)
     }
     return 1;
 }
+
 CMD:wyjdzzombie(playerid)
 {
     if(PlayerZombieStatus[playerid] == INVALID_PZOMBIE)
@@ -971,38 +1009,60 @@ CMD:wyjdzzombie(playerid)
     PlayerZombieStatus[playerid] = INVALID_PZOMBIE;
     KillTimer(memberTimer[playerid]);
 	//SetPlayerSkin(playerid, firstSkinID[playerid]);
-    if(PlayerZombieStatus[playerid] >= 2)
+    if(PlayerZombieStatus[playerid] >= 1)
     {
         AlivePlayers--;
     }
+    UpdateTableForAll(playerid);
     return 1;
 }
+
 CMD:zabawastatus(playerid)
 {
-    new string[124];
+    new string[124], bool:found = false;
+
     if(playerAccessToFS[playerid] == 1)
     {
-        if(zabawaStatus == 0)
-        {
-            zabawaStatus = 1;
-            format(string, sizeof(string), "%s wystartowa³(a) zabawê w Zombie!", GetName(playerid));
-            sendPartyMess(COLOR_RED, string);
-			CreateAntidote();
-        }
-        else
-        {
-            zabawaStatus = 0;
-            format(string, sizeof(string), "%s zakoñczy³(a) zabawê w Zombie!", GetName(playerid));
-            sendPartyMess(COLOR_RED, string);
-            CloseParty();
-        }
-    }
-    else
-    {
-        SendClientMessage(playerid, COLOR_GRAD, "Nie masz uprawnieñ!");
-    }
+		foreach(new i : Player)
+		{
+		    if(PlayerZombieStatus[i] == 2)
+		    {
+		        found = true;
+		        break;
+		    }
+		}
+
+		if(found == true)
+		{
+	        if(zabawaStatus == 0)
+	        {
+	            zabawaStatus = 1;
+	            format(string, sizeof(string), "%s wystartowa³(a) zabawê w Zombie!", GetName(playerid));
+	            sendPartyMess(COLOR_RED, string);
+				CreateAntidote();
+
+	            TimerWIN = SetTimer("OstatniZywy", 1000, true);
+	        }
+	        else
+	        {
+	            zabawaStatus = 0;
+	            format(string, sizeof(string), "%s zakoñczy³(a) zabawê w Zombie!", GetName(playerid));
+	            sendPartyMess(COLOR_RED, string);
+	            CloseParty();
+	        }
+	    }
+	    else
+	    {
+	    	SendClientMessage(playerid, COLOR_RED, "Zombie musi byæ jeden!");
+	    }
+	}
+	else
+	{
+	    SendClientMessage(playerid, COLOR_GRAD, "Nie masz uprawnieñ!");
+	}
     return 1;
 }
+
 CMD:zabawaon(playerid)
 {
     new string[124];
@@ -1011,18 +1071,19 @@ CMD:zabawaon(playerid)
         if(zabawaON == 0)
         {
             zabawaON = 1;
-            format(string, sizeof(string), "%s odpali³ przebieran¹ zabawê w zombie!"); 
+            format(string, sizeof(string), "%s odpali³ przebieran¹ zabawê w zombie!", GetName(playerid));
             sendPartyMess(COLOR_GREEN, string);
         }
         else
         {
             zabawaON = 0;
-            format(string, sizeof(string), "%s wy³¹czy³ przebieran¹ zabawê w zombie!"); 
+            format(string, sizeof(string), "%s wy³¹czy³ przebieran¹ zabawê w zombie!", GetName(playerid));
             sendPartyMess(COLOR_GREEN, string);
         }
     }
     return 1;
 }
+
 CMD:giveaccessfs(playerid, params[])
 {
     new string[124];
@@ -1061,9 +1122,11 @@ CMD:giveaccessfs(playerid, params[])
     }
     return 1;
 }
+
 CMD:setzombie(playerid, params[])
 {
     new string[124];
+
     if(IsPlayerConnected(playerid))
     {
         new giveplayerid, value;
@@ -1073,27 +1136,33 @@ CMD:setzombie(playerid, params[])
             SendClientMessage(playerid, COLOR_WHITE, "Wartoœci: 0 - zdrowy; 1 - zara¿ony; 2 - Zombie");
             return 1;
         }
-        if(PlayerZombieStatus[giveplayerid] == INVALID_PZOMBIE)
-        {
-            SendClientMessage(playerid, COLOR_RED, "Ten gracz nie jest w strefie!");
-            return 1;
-        }
 		if(!UprawnionyDoFS(playerid))
 		{
 			SendClientMessage(playerid, COLOR_RED, "Nie jesteœ uprawniony do u¿ywania tej komendy!");
 			return 1;
 		}
+		if(PlayerZombieStatus[giveplayerid] == INVALID_PZOMBIE)
+        {
+            SendClientMessage(playerid, COLOR_RED, "Ta osoba nie uczestniczy w zabawie!");
+            return 1;
+        }
+        if(value < 0 || value > 2)
+        {
+        	SendClientMessage(playerid, COLOR_RED, "Wartoœci s¹ od 0 do 2!");
+        	return 1;
+        }
         if(IsPlayerConnected(giveplayerid))
         {
 			format(string, sizeof(string), "Zmieni³eœ wartoœæ %s na %d", GetName(giveplayerid), value);
 			SendClientMessage(playerid, COLOR_GREEN, string);
 			PlayerZombieStatus[giveplayerid] = value;
-			partyMember(giveplayerid);
-            if(value == 2)
-            {
-                AlivePlayers--;
-            }
 
+			if(value == 2)
+			{
+				AlivePlayers--;
+			}
+
+            partyMember(giveplayerid);
         }
         else
         {
@@ -1103,6 +1172,7 @@ CMD:setzombie(playerid, params[])
     }
     return 1;
 }
+
 CMD:zombieclear(playerid)
 {
     new string[124];
@@ -1121,15 +1191,16 @@ CMD:togparty(playerid)
     if(togParty[playerid] == 0)
     {
         togParty[playerid] = 1;
-        SendClientMessage(playerid, -1, "W³¹czy³eœ togparty!");
+        SendClientMessage(playerid, -1, "Wy³¹czy³eœ togparty!");
     }
     else
     {
         togParty[playerid] = 0;
-        SendClientMessage(playerid, -1, "Wy³¹czy³eœ togparty!");
+        SendClientMessage(playerid, -1, "W³¹czy³eœ togparty!");
     }
     return 1;
 }
+
 CMD:getantidote(playerid)
 {
 	if(IsPlayerInRangeOfPoint(playerid, CMD_DIST_ANTIDOTE, 1264.895019, 269.632385, 21.337291))
@@ -1205,5 +1276,67 @@ CMD:getantidote(playerid)
 		SendClientMessage(playerid, COLOR_RED, "Nie jesteœ obok antidotum [pizzy]");
 	}
 
+    if(PlayerZombieStatus[playerid] == 1)
+    {
+        AlivePlayers++;
+    }
+    UpdateTableForAll(playerid);
+
 	return 1;
+}
+
+CMD:strefa(playerid)
+{
+    SetPlayerPos(playerid, POS_ENTER_X, POS_ENTER_Y, POS_ENTER_Z);
+    return 1;
+}
+CMD:and1(playerid)
+{
+    SetPlayerPos(playerid, 1365.817260, 230.677383, 18.566932);
+    return 1;
+}
+
+UpdateTableForAll(id)
+{
+    foreach(id : Player)
+    {
+        if(PlayerZombieStatus[id] == 0 || PlayerZombieStatus[id] == 1 || PlayerZombieStatus[id] == 2)
+        {
+            UpdateTableForPlayer(id);
+        }
+    }
+    return 1;
+}
+
+forward OstatniZywy();
+public OstatniZywy()
+{
+    new alivecount;
+
+    foreach(new i : Player)
+    {
+        if(PlayerZombieStatus[i] == 0)
+        {
+            alivecount++;
+        }
+    }
+    
+    if(alivecount == 1)
+    {
+        KillTimer(TimerWIN);
+
+        foreach(new i : Player)
+        {
+            if(PlayerZombieStatus[i] == 0)
+            {
+                SendClientMessage(i, -1, "Wygra³eœ rundê!");
+                break;
+            }
+        }
+    
+        foreach(new i : Player)
+        {
+            if(PlayerZombieStatus[i] == 2) SendClientMessage(i, -1, "Przegra³eœ!");
+        }
+    }
 }

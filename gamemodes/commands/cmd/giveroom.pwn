@@ -49,6 +49,12 @@ YCMD:giveroom(playerid, params[], help)
 						return 1;
 					}
 
+					if(!IsPlayerConnected(giveplayerid)) 
+					{
+						sendErrorMessage(playerid, "Nie ma takiego gracza.");
+						return 1;
+					}
+
 					if(PlayerInfo[giveplayerid][pDom] == 0)
 					{
 					    if(PlayerInfo[giveplayerid][pWynajem] == 0)
