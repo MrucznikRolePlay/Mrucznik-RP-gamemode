@@ -85,14 +85,14 @@ YCMD:wejdz(playerid, params[], help)
         {
             ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
         }
-        //else if(IsPlayerInRangeOfPoint(playerid,3,-2089.55835, -414.24173, 36.32352)//Podziemia BOR
-        else if((IsPlayerInRangeOfPoint(playerid,3,1498.9341,-1537.0797,67.3069) && IsABOR(playerid))//Podziemia BOR
-            || IsPlayerInRangeOfPoint(playerid,3,1772.1613,-1547.9675,9.9067)
-            || IsPlayerInRangeOfPoint(playerid,3,1496.9330, -1457.8887, 64.5854)
-            || IsPlayerInRangeOfPoint(playerid,3, 1482.2319, -1531.1719, 70.0080)
-            || (IsPlayerInRangeOfPoint(playerid,3, 1795.4104,-1551.2864,22.9192)&& IsABOR(playerid)))//dach BOR
+        else if((IsPlayerInRangeOfPoint(playerid,3,1538.7106,-1474.8816,9.5000) && IsABOR(playerid))//Parking USSS
+            || IsPlayerInRangeOfPoint(playerid,3,1549.7249,-1462.1644,3.3250)//Sala treningowa
+            || IsPlayerInRangeOfPoint(playerid,3,1526.7426,-1469.4413,23.0778)//Recepcja
+            ||(IsPlayerInRangeOfPoint(playerid,3, 1526.7426,-1469.4413,23.0778) && IsABOR(playerid))//strefa pracownika
+            || IsPlayerInRangeOfPoint(playerid,3, 1541.2571,-1464.1281,21.8429)//Biura USSS
+            || (IsPlayerInRangeOfPoint(playerid,3, 1544.1202,-1466.9008,42.8386)))//Akademia
         {
-            ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking podziemny\n[Poziom 0] Parking zewnêtrzny\n[Poziom 1] Centrala GSA\n[Poziom 2] Sale Treningowe\n[Poziom 3] Dach", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking\n[Poziom 0] Sala treningowa\n[Poziom 1] Recepcja\n[Poziom 2] Strefa Pracownika\n[Poziom 3] Biura USSS\n[Poziom 4] Akademia USSS", "Wybierz", "Anuluj");
         }
 		else if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
             || IsPlayerInRangeOfPoint(playerid, 3, 287.7476,-1609.9395,33.0723)//PARTER
