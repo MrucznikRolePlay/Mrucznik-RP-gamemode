@@ -124,7 +124,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			PlayerInfo[giveplayerid][pMats] -= moneys;
 			PlayerInfo[playerid][pMats] += moneys;
 			DajKase(giveplayerid, kasa);
-			DajKase(playerid, -kasa);
+			ZabierzKase(playerid, kasa);
 			
 			Log(payLog, INFO, "%s kupi³ od %s materia³y w iloœci %d za %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), moneys, kasa);
 			SetPVarInt(playerid, "OKupMats", 0);
@@ -5215,8 +5215,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        GivePlayerWeapon(playerid, 30, CenaBroni[playerid]);
 			        PlayerInfo[playerid][pGun5] = 30;
 					PlayerInfo[playerid][pAmmo5] = CenaBroni[playerid];
-					DajKase(playerid, -(GunPrice[22][0]));
-					DajKase(playerid, -(CenaBroni[playerid]*40));
+					ZabierzKase(playerid, GunPrice[22][0]);
+					ZabierzKase(playerid, CenaBroni[playerid]*40);
 					format(komunikat, sizeof(komunikat), "Kupi³eœ AK-47 z %d nabojami , kosztowa³o ciê to %d", CenaBroni[playerid],(GunPrice[22][0])+(CenaBroni[playerid]*40));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
