@@ -39,11 +39,12 @@ YCMD:fixallveh(playerid, params[], help)
         }
         foreach(new i : Player)
         {
-            if(IsPlayerInAnyVehicle(playerid))
+            if(IsPlayerInAnyVehicle(i))
             {
-                SetVehicleHealth(GetPlayerVehicleID(playerid), 1000.0);
-                RepairVehicle(GetPlayerVehicleID(playerid));
-                CarData[VehicleUID[GetPlayerVehicleID(playerid)][vUID]][c_HP] = 1000.0;
+                new carID = GetPlayerVehicleID(i); 
+                SetVehicleHealth(carID, 1000.0);
+                RepairVehicle(carID);
+                CarData[VehicleUID[carID][vUID]][c_HP] = 1000.0;
             }
         }
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
