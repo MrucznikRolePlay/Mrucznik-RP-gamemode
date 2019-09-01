@@ -12062,14 +12062,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ZabierzKase(playerid, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					Sejf_Add(FRAC_NOA, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					ZabierzKase(playerid, Wyscig[tworzenietrasy[playerid]][wNagroda]);
-					owyscig[playerid] = tworzenietrasy[playerid];
-					tworzenietrasy[playerid] = 666;
 					
 					Log(payLog, INFO, "%s zorganizowa³ wyœcig %s. Koszt organizacji: %d$, nagroda: %d$",
 						GetPlayerLogName(playerid),
 						Wyscig[tworzenietrasy[playerid]][wNazwa], 
 						(Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000, 
 						Wyscig[tworzenietrasy[playerid]][wNagroda]);
+
+					owyscig[playerid] = tworzenietrasy[playerid];
+					tworzenietrasy[playerid] = 666;
+					
 				}
 				else
 				{
@@ -14191,10 +14193,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 Car_Save(CarData[car][c_ID], CAR_SAVE_STATE);
                 Car_Unspawn(veh);
                 Car_Spawn(car);
-				Log(serverLog, INFO, "Gracz %s zaparkowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(car));
                 new string[128];
 				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d] [UID: %d] [VW: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID], CarData[car][c_VW]);
 				SendClientMessage(playerid, 0xFFC0CB, string);
+				Log(serverLog, INFO, "Gracz %s zaparkowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(veh));
             }
             case 6:
             {

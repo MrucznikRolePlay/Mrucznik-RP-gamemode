@@ -36,6 +36,10 @@ YCMD:apteczka(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /apteczka [ID gracza] [¯ycia]");
 		return 1;
 	}
+	if(!IsPlayerConnected(playa)) 
+	{
+		return sendErrorMessage(playerid, "Nie ma takiego gracza.");
+	}
 	if (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
 	{
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
@@ -54,20 +58,15 @@ YCMD:apteczka(playerid, params[], help)
 				sendTipMessage(playerid, "Nie mo¿esz daæ graczowi wiêcej HP ni¿ 110, ani nie mniej ni¿ 25 !");
 				return 1;
 			}
-			if(IsPlayerConnected(playa))
-			{
-				if(playa != INVALID_PLAYER_ID)
-				{
-					SetPlayerHealth(playa, health);
-					SendClientMessage(playa, COLOR_WHITE, "Zostales uzdrowiony przez Lekarza");
-					format(string, sizeof(string),"* Lekarz %s wyci¹ga apteczkê, banda¿uje rany oraz podaje leki %s.", sendername, giveplayer);
-					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", giveplayer);
-					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					pobity[playa] = 0;
-					PlayerInfo[playa][pBW] = 2;
-				}
-			}
+			
+			SetPlayerHealth(playa, health);
+			SendClientMessage(playa, COLOR_WHITE, "Zostales uzdrowiony przez Lekarza");
+			format(string, sizeof(string),"* Lekarz %s wyci¹ga apteczkê, banda¿uje rany oraz podaje leki %s.", sendername, giveplayer);
+			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", giveplayer);
+			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			pobity[playa] = 0;
+			PlayerInfo[playa][pBW] = 2;
 		}
 		else
 		{
