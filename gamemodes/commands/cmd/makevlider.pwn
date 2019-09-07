@@ -55,6 +55,12 @@ YCMD:makevleader(playerid, params[], help)
 				{
 					if(value == 0)
 					{
+						if(PlayerInfo[giveplayerid][pLider] != PlayerInfo[playerid][pLider])
+						{
+							sendErrorMessage(playerid, "Nie mo¿esz wyrzuciæ gracza, który jest liderem innej frakcji."); 
+							return 1;
+						}
+
 						Remove_MySQL_Leader(giveplayerid); 
 						format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
