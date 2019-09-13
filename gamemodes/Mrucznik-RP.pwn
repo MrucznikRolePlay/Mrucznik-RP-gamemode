@@ -6586,6 +6586,20 @@ public OnPlayerText(playerid, text[])
 	new tmp[256];
 	new string[256];
 	new giveplayerid;
+	if(text[0] == '@')
+	{
+		if(strlen(text) > 31)
+		{
+			sendTipMessage(playerid, "Nieprawid³owa d³ugoœæ znaków animacji"); 
+			return 0;
+		}
+        new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, text);
+        if(lVal != 1)
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
+		} 
+		return 0;
+	}
 	if(PlayerInfo[playerid][pMuted] == 1)
 	{
 		sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ jesteœ uciszony");
