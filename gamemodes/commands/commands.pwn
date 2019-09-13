@@ -55,7 +55,6 @@
 #include "cmd/bigears.pwn"
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
-#include "cmd/blokujnews.pwn"
 #include "cmd/blokujnoba.pwn"
 #include "cmd/blokujsprzedarz.pwn"
 #include "cmd/boks.pwn"
@@ -297,7 +296,6 @@
 #include "cmd/nazywo.pwn"
 #include "cmd/newbie.pwn"
 #include "cmd/newcar.pwn"
-#include "cmd/news.pwn"
 #include "cmd/noa.pwn"
 #include "cmd/nonewbie.pwn"
 #include "cmd/noooc.pwn"
@@ -662,7 +660,6 @@
 #include "cmd/staty2.pwn"
 #include "cmd/makevlider.pwn"
 #include "cmd/dajscene.pwn"
-//#include "cmd/news2.pwn"
 #include "cmd/fracinfo.pwn"
 #include "cmd/wlsett.pwn"
 
