@@ -2502,6 +2502,7 @@ public JednaSekundaTimer()
 			}
 			if(PlayerInfo[i][pJailed] == 2)
 			{
+				new losuj= random(sizeof(SpawnStanowe));
 				if(!IsPlayerInRangeOfPoint(i, 90.0, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]))
 				{
 					SetPlayerSpawn(i); 
