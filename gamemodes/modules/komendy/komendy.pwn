@@ -87,7 +87,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
 		} 
-		return COMMAND_OK;
+		return COMMAND_ANIMATION;
 	}
 
 	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
