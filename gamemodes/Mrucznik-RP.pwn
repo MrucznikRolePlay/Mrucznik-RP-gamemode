@@ -654,7 +654,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
             if(GetPVarInt(playerid, "skin-choosen") != 0)
             {
                 SetPlayerSkinEx(playerid, GetPVarInt(playerid, "skin-choosen"));
-                PlayerInfo[playerid][pSkin] = GetPVarInt(playerid, "skin-choosen");
+                PlayerInfo[playerid][pUniform] = GetPVarInt(playerid, "skin-choosen");
             }
         }
         else if(clickedid == SkinSelectionDenied)//anuluj
@@ -671,8 +671,8 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
             DestroySkinSelection(playerid);
             TogglePlayerControllable(playerid, 1);
 
-            PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pModel];
-            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+            PlayerInfo[playerid][pUniform] = PlayerInfo[playerid][pModel];
+            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
         }
     }
     //Strefy

@@ -1448,7 +1448,8 @@ enum pInfo
 	pAdminAccess,
 	pBusinessOwner,
 	pBusinessMember,
-	pLiderValue
+	pLiderValue,
+	pUniform
 };
 enum StringData
 {
