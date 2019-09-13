@@ -43,6 +43,11 @@ YCMD:og(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie mo¿esz pisaæ og³oszeñ podczas s³u¿by administratora!"); 
 			return 1;
 		}
+		if(PlayerInfo[playerid][pJailed] != 0)
+		{
+			sendErrorMessage(playerid, "Nie posiadasz telefonu w wiêzieniu!"); 
+			return 1;
+		}
         if(PlayerInfo[playerid][pPnumber] == 0)
         {
             SendClientMessage(playerid, COLOR_GREY, "Nie masz telefonu. Kup go w 24/7 !");
