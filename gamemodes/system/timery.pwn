@@ -2500,6 +2500,13 @@ public JednaSekundaTimer()
 			{
 				PlayerInfo[i][pJailTime]--;
 			}
+			if(PlayerInfo[i][pJailed] == 2)
+			{
+				if(!IsPlayerInRangeOfPoint(i, 90.0, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]))
+				{
+					SetPlayerSpawn(i); 
+				}
+			}
 			if(PlayerInfo[i][pJailTime] <= 0 && WantLawyer[i] == 0)
 			{
 				PlayerInfo[i][pJailTime] = 0;

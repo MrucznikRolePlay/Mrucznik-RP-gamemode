@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ gotocar ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   names                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,51 +16,35 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: Simeone
+// Data utworzenia: 13.09.2019
+//Opis:
 /*
-	
+	Nicki nad g³owami postaci
 */
 
+//
 
-// Notatki skryptera:
+//-----------------<[ Funkcje: ]>-------------------
 /*
-	
-*/
-
-YCMD:gotocar(playerid, params[], help)
+stock Generate3DNickName(playerid)
 {
-    if(IsPlayerConnected(playerid))
-    {
-		new testcar;
-		if( sscanf(params, "d", testcar))
-		{
-			sendTipMessage(playerid, "U¿yj /gotocar [carid]");
-			return 1;
-		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
-		{
-			new Float:cwx2,Float:cwy2,Float:cwz2;
-			GetVehiclePos(testcar, cwx2, cwy2, cwz2);
-			new c_VW = GetVehicleVirtualWorld(testcar); 
-			if (GetPlayerState(playerid) == 2)
-			{
-				new tmpcar = GetPlayerVehicleID(playerid);
-				SetVehiclePos(tmpcar, cwx2, cwy2, cwz2);
-			}
-			else
-			{
-				SetPlayerPosEx(playerid, cwx2, cwy2, cwz2);
-			}
-			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
-			SetPlayerInterior(playerid,0);
-			SetPlayerVirtualWorld(playerid, c_VW); 
-		}
-		else
-		{
-			noAccessMessage(playerid);
-		}
-	}
 	return 1;
 }
+stock SetNickNamesForPlayer(playerid, stan)
+{
+	if(stan == 1)
+	{
+		foreach(new i : Player)
+		{
+			new pNam[MAX_PLAYER_NAME+30]; 
+			format(pNam, sizeof(pNam), "%s [%d]\n((%s))", GetNick(i), i, GetPlayerDepiction(i));
+			ShowPlayerNameTagForPlayer(playerid, i, 0);
+			PlayerName3D[playerid] = Create3DTextLabel(pNam, COLOR_WHITE, 0.0, 0.0, 0.0, 20.0, 0, 1);
+			PlayerName3D[i] = CreateDynamic3DTextLabel(pNam, COLOR_WHITE, 0.0, 0.0, 0.0, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID,  0,  GetPlayerVirtualWorld(i), GetPlayerInterior(i), playerid, 5.0);  
+			Attach3DTextLabelToPlayer(PlayerName3D[playerid], playerid, 0.0, 0.0, 0.3);
+		}
+	}
+}*/
+//end

@@ -2328,6 +2328,7 @@ SetPlayerSpawnPos(playerid)
 		    {
 		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
+				SetPlayerVirtualWorld(playerid, 0); 
 				if(GetPlayerFraction(playerid) > 0) //Spawn Frakcji
 				{
 				    switch(GetPlayerFraction(playerid))
