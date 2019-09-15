@@ -75,6 +75,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_hooks>
 #include <YSI\y_bintree>
 #include <YSI\y_master>
+#include <YSI\y_timers>
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
@@ -513,6 +514,11 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 	//return 0; = strza³ nie zabiera hp
 	if(GetPlayerWeapon(playerid) != WEAPON_FLAMETHROWER && GetPlayerWeapon(playerid) != WEAPON_SPRAYCAN && GetPlayerWeapon(playerid) != WEAPON_FIREEXTINGUISHER)
 	{
+		if(!repTimer)
+		{
+			repTimerID[playerid] = SetTimerEx("RepeatingTimer", 1000, false, "i", playerid);
+			repTimer[playerid]=true; 
+		}
 		GivenDamage[playerid]++;
 	}
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)

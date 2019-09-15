@@ -1040,7 +1040,8 @@ new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_
 new DCC_Channel:g_FracChannel[MAX_FRAC];
 new DCC_Channel:g_OrgChannel[MAX_ORG];
 new GivenDamage[MAX_PLAYERS];
-
+new bool:repTimer[MAX_PLAYERS]=false; 
+new repTimerID[MAX_PLAYERS]; 
 /*
 new chpIDHunter[MAX_PLAYERS];
 new hunterSeeMe[MAX_PLAYERS]; 
@@ -1070,6 +1071,8 @@ ClearVariableDisconnect(playerid)
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
 	PlayerGames[playerid] = 0;//Zdrapki 
+
+	repTimer[playerid]=false; 
 	return 1;
 }
 ZerujZmienne(playerid)
