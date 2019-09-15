@@ -1039,9 +1039,6 @@ new CenaBiletuPociag = 10000;
 new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_ReportChannelId; //discordconnect
 new DCC_Channel:g_FracChannel[MAX_FRAC];
 new DCC_Channel:g_OrgChannel[MAX_ORG];
-new GivenDamage[MAX_PLAYERS];
-new bool:repTimer[MAX_PLAYERS]=false; 
-new repTimerID[MAX_PLAYERS]; 
 /*
 new chpIDHunter[MAX_PLAYERS];
 new hunterSeeMe[MAX_PLAYERS]; 
@@ -1059,7 +1056,6 @@ ClearVariableConnect(playerid)
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
 	fixActorsTimer[playerid] = 0; 
-	GivenDamage[playerid]=0;
 /*	chpIDHunter[playerid] =0;
 	hunterSeeMe[playerid]=0;
 	hunterStatus[playerid]=0;
@@ -1071,8 +1067,6 @@ ClearVariableDisconnect(playerid)
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
 	PlayerGames[playerid] = 0;//Zdrapki 
-
-	repTimer[playerid]=false; 
 	return 1;
 }
 ZerujZmienne(playerid)
