@@ -21,6 +21,15 @@ public CheckCode2003(killerid, playerid)
 		Log(warningLog, INFO, string);
 	}
 }
+ptask RepeatingTimer[1000](playerid)
+{
+    if(GetPlayerWeapon(playerid) == WEAPON_COLT45 && WEAPON_SILENCED && GivenDamage[playerid] > 5) SendClientMessage(playerid, 1, "WEAPON_COLT45 && WEAPON_SILENCED");
+    if(GetPlayerWeapon(playerid) == WEAPON_DEAGLE && GivenDamage[playerid] > 3) SendClientMessage(playerid, 1, "WEAPON_DEAGLE");
+    if(GetPlayerWeapon(playerid) == WEAPON_UZI && WEAPON_MP5 && GivenDamage[playerid] > 9) SendClientMessage(playerid, 1, "WEAPON_UZI && WEAPON_MP5");
+    if(GetPlayerWeapon(playerid) == WEAPON_M4 && WEAPON_AK47 && GivenDamage[playerid] > 6) SendClientMessage(playerid, 1, "WEAPON_M4 && WEAPON_AK47");
+    if(GetPlayerWeapon(playerid) == WEAPON_RIFLE && WEAPON_SNIPER && GivenDamage[playerid] > 2) SendClientMessage(playerid, 1, "WEAPON_RIFLE && WEAPON_SNIPER");
+    GivenDamage[playerid]=0;
+}
 forward AntyCheatON(playerid);
 public AntyCheatON(playerid)
 {

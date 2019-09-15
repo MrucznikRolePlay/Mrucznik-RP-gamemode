@@ -511,7 +511,10 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
 	//return 0; = strza³ nie zabiera hp
-
+	if(GetPlayerWeapon(playerid) != WEAPON_FLAMETHROWER && GetPlayerWeapon(playerid) != WEAPON_SPRAYCAN && GetPlayerWeapon(playerid) != WEAPON_FIREEXTINGUISHER)
+	{
+		GivenDamage[playerid]++;
+	}
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
     {
     	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
