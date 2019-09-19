@@ -2639,7 +2639,7 @@ SetPlayerSpawnWeapon(playerid)
 
 SetPlayerSpawnSkin(playerid)
 {
-	if(PlayerInfo[playerid][pModel] > 20000 && PlayerInfo[playerid][pModel] < 20999)
+	if(PlayerInfo[playerid][pModel] > 20000 && PlayerInfo[playerid][pModel] < 20099)
 	{
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
 		PlayerInfo[playerid][pModel] = 136;
