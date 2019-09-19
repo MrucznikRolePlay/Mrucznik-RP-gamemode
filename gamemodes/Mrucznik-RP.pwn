@@ -75,7 +75,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_hooks>
 #include <YSI\y_bintree>
 #include <YSI\y_master>
-#include <YSI\y_timers>
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
@@ -6599,7 +6598,7 @@ public OnPlayerText(playerid, text[])
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
 		} 
-		return 0;
+		return 1;
 	}
 	if(PlayerInfo[playerid][pMuted] == 1)
 	{
