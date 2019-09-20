@@ -91,6 +91,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-                                                                                                         -//
 #include "VERSION.pwn"
 #define DEBUG_MODE 0 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
+#include "SERVER-DEF.pwn"//Definicja serwera, pokazuje czy to jest 0 - Produkcja || 1 - Development
 #define RESOURCES_LINK "http://51.68.141.69/models/"
 
 #if !defined gpci

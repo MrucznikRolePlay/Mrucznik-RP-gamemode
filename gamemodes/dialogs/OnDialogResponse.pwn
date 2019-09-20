@@ -6079,29 +6079,58 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			    {
-			        if(strcmp(inputtext,"SiveMopY", false) == 0 )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67 --> Has³o administracyjne
-			        {
-						weryfikacja[playerid] = 1;
-                        if(PlayerInfo[playerid][pJailed] == 0)
-                        {
-                            lowcap[playerid] = 1;
-                            ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
-                        }
-                        else
-                        {
-                            SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
-                            TogglePlayerSpectating(playerid, false);
-							SetPlayerSpawn(playerid);
-                        }
+					if(SERVER_TYPE == SVR_DEVELOPMENT)
+					{
+						if(strcmp(inputtext,"DevModeON", false) == 0 )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67 --> Has³o administracyjne
+						{
+							weryfikacja[playerid] = 1;
+							if(PlayerInfo[playerid][pJailed] == 0)
+							{
+								lowcap[playerid] = 1;
+								ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
+							}
+							else
+							{
+								SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+								TogglePlayerSpectating(playerid, false);
+								SetPlayerSpawn(playerid);
+							}
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
+							ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
+							GUIExit[playerid] = 0;
+							SetPlayerVirtualWorld(playerid, 0);
+							KickEx(playerid);
+						}
 					}
-			        else
-			        {
-			            SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
-				        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
-				        GUIExit[playerid] = 0;
-				        SetPlayerVirtualWorld(playerid, 0);
-						KickEx(playerid);
-			        }
+					else 
+					{
+						if(strcmp(inputtext,"FuniaDajAdmina", false) == 0 )//--> Has³o administracyjne
+						{
+							weryfikacja[playerid] = 1;
+							if(PlayerInfo[playerid][pJailed] == 0)
+							{
+								lowcap[playerid] = 1;
+								ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
+							}
+							else
+							{
+								SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+								TogglePlayerSpectating(playerid, false);
+								SetPlayerSpawn(playerid);
+							}
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
+							ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
+							GUIExit[playerid] = 0;
+							SetPlayerVirtualWorld(playerid, 0);
+							KickEx(playerid);
+						}
+					}
 			    }
 			    else
 			    {
