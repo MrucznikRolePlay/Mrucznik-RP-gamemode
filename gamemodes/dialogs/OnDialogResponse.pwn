@@ -15987,6 +15987,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD2, string);
 							return 1;
 						}
+						if(PlayerInfo[playerid][pCarLic] == 2)
+						{
+							sendErrorMessage(playerid, "Zaliczy≥eú juø egzamin teoretyczny!"); 
+							return 1;
+						}
+						if(PlayerInfo[playerid][pCarLic] == 4)
+						{
+							sendErrorMessage(playerid, "Masz juø prawo do jazdy!"); 
+							return 1;
+						}
 						if(PlayerInfo[playerid][pDowod] < 1)
 						{
 							sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
@@ -16007,7 +16017,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(kaska[playerid] >= DmvLicenseCost[5])
 					{
-						if(PlayerInfo[playerid][pCarLic] == 2)
+						if(PlayerInfo[playerid][pCarLic] != 2)
 						{
 							sendErrorMessage(playerid, "Najpierw podejdü do egzaminu teoretycznego!"); 
 							return 1;
@@ -16031,6 +16041,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(PlayerInfo[playerid][pCarLic] < 3)
 						{
 							sendErrorMessage(playerid, "Najpierw podejdü do egzaminu teoretycznego/praktycznego!"); 
+							return 1;
+						}
+						if(PlayerInfo[playerid][pCarLic] == 4)
+						{
+							sendErrorMessage(playerid, "Masz juø prawo jazdy!"); 
 							return 1;
 						}
 						if(PlayerInfo[playerid][pDowod] < 1)

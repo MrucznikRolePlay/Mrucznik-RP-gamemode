@@ -240,6 +240,7 @@ public OnGameModeInit()
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
 	MruMySQL_IloscLiderowLoad();
+	Load_License_Cost();
 
 	//-------<[ 0.3DL ]>-------
 	LoadDLSkins();
