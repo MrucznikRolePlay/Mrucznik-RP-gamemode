@@ -51,7 +51,7 @@ command_ustawcena_Impl(playerid, valueChoice, valueCost)
     DmvLicenseCost[valueChoice] = valueCost; 
     format(string, sizeof(string), "%s zmieni³ cenê licencji numer %d na %d", GetNick(playerid), valueChoice, valueCost);
     SendLeaderRadioMessage(FRAC_GOV, COLOR_LIGHTGREEN, string); 
-    Save_License_Cost();
+    sendTipMessage(playerid, "Ustawi³eœ now¹ cenê licencji!"); 
     return 1;
 }
 

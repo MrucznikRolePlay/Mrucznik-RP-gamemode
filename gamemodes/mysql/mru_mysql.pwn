@@ -107,51 +107,6 @@ Save_MySQL_Leader(playerid)
 	MruMySQL_IloscLiderowLoad();
 	return 1;
 }
-Load_License_Cost()
-{
-	new query[256];
-	format(query, sizeof(query), "SELECT `lic-0`, `lic-1`, `lic-2`, `lic-3`, `lic-4`, `lic-5`, `lic-6`, `lic-7` FROM `dmv_license`");
-	mysql_query(query); 
-	mysql_store_result();
-	if (mysql_num_rows())
-	{
-        mysql_fetch_row_format(query, "|");
-		sscanf(query, "p<|>dddddddd", 
-		DmvLicenseCost[0],
-		DmvLicenseCost[1],
-		DmvLicenseCost[2],
-		DmvLicenseCost[3],
-		DmvLicenseCost[4],
-		DmvLicenseCost[5],
-		DmvLicenseCost[6],
-		DmvLicenseCost[7]);
-	}
-	mysql_free_result();
-	return 1;
-}
-Save_License_Cost()
-{
-	new query[256];
-	format(query, sizeof(query), "UPDATE `dmv_license` SET \
-	`lic-0`='%s', \
-	`lic-1`='%d', \
-	`lic-2`='%d', \
-	`lic-3`='%d', \
-	`lic-4`='%d', \
-	`lic-5`='%d', \
-	`lic-6`='%d', \
-	`lic-7`='%d'",
-	DmvLicenseCost[0],
-	DmvLicenseCost[1],
-	DmvLicenseCost[2],
-	DmvLicenseCost[3],
-	DmvLicenseCost[4],
-	DmvLicenseCost[5],
-	DmvLicenseCost[6],
-	DmvLicenseCost[7]); 
-	mysql_query(query);
-	return 1;
-}
 Load_MySQL_Leader(playerid)
 {
 	new query[256];

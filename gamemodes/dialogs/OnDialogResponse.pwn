@@ -15921,6 +15921,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ZabierzKase(playerid, DmvLicenseCost[0]); 
 						format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje dowód osobisty", GetNick(playerid)); 
 						ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						Sejf_Add(FRAC_GOV, (DmvLicenseCost[0]/2));
+						Sejf_Save(FRAC_GOV); 
 					}
 				}
 				case 1:
@@ -15941,6 +15943,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ZabierzKase(playerid, DmvLicenseCost[0]); 
 						format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje kartê wêdkarsk¹", GetNick(playerid)); 
 						ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						Sejf_Add(FRAC_GOV, (DmvLicenseCost[1]/2));
+						Sejf_Save(FRAC_GOV); 
 					}
 				}
 				case 2:
@@ -15956,6 +15960,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ZabierzKase(playerid, DmvLicenseCost[2]); 
 						format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje pozwolenie na broñ", GetNick(playerid)); 
 						ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						Sejf_Add(FRAC_GOV, (DmvLicenseCost[2]/2));
+						Sejf_Save(FRAC_GOV); 
 					}
 				}
 				case 3:
@@ -15971,6 +15977,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ZabierzKase(playerid, DmvLicenseCost[3]); 
 						format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje patent ¿eglarski", GetNick(playerid)); 
 						ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						Sejf_Add(FRAC_GOV, (DmvLicenseCost[3]/2));
+						Sejf_Save(FRAC_GOV); 
 					}
 				}
 				case 4:
@@ -16011,6 +16019,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						ShowPlayerDialogEx(playerid, D_PJTEST, DIALOG_STYLE_MSGBOX, "Prawo jazdy - Test", "{7FFF00}Witaj!\n{FFFFFF}Rozpoczynasz test na prawo jazdy.\nW teœcie {FF0000}NIE U¯YWAJ{FFFFFF} polskich znaków!\n\n¯yczymy powodzenia!", "Rozpocznij", "");
 						ZabierzKase(playerid, DmvLicenseCost[4]); 
+						Sejf_Add(FRAC_GOV, (DmvLicenseCost[4]/2));
+						Sejf_Save(FRAC_GOV); 
 					}
 				}
 				case 5:
@@ -16032,6 +16042,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TakingLesson[playerid] = 0;
 			       		PlayerInfo[playerid][pCarLic] = 3;
 						ZabierzKase(playerid, DmvLicenseCost[5]); 
+						Sejf_Add(FRAC_GOV, (DmvLicenseCost[5]/2));
+						Sejf_Save(FRAC_GOV); 
 					}
 				}
 				case 6:
@@ -16056,6 +16068,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra³eœ prawo do jazdy."); 
 			       		PlayerInfo[playerid][pCarLic] = 4;
 						ZabierzKase(playerid, DmvLicenseCost[6]); 
+						Sejf_Add(FRAC_GOV, (DmvLicenseCost[6]/2));
+						Sejf_Save(FRAC_GOV); 
 					}
 				}
 				case 7:
@@ -16075,6 +16089,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra³eœ licencje na latanie!"); 
 			       		PlayerInfo[playerid][pFlyLic] = 1;
 						ZabierzKase(playerid, DmvLicenseCost[7]); 
+						Sejf_Add(FRAC_GOV, (DmvLicenseCost[7]/2));
+						Sejf_Save(FRAC_GOV); 
 					}
 				}
 			}

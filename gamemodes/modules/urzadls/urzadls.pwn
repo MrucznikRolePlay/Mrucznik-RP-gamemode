@@ -41,4 +41,16 @@ PlayerInDmvPoint(playerid)
 	}
 	return false;
 }
+DefaultItems_LicenseCost()
+{
+	DmvLicenseCost[0] = 5000;
+	DmvLicenseCost[1] = 10000;
+	DmvLicenseCost[2] = 500000;
+	DmvLicenseCost[3] = 350000;
+	DmvLicenseCost[4] = 10000;
+	DmvLicenseCost[5] = 15000;
+	DmvLicenseCost[6] = 20000;
+	DmvLicenseCost[7] = 5000000;
+	return 1; 
+}
 //end
