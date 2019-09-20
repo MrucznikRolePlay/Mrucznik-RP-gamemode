@@ -15901,6 +15901,35 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
+	else if(dialogid == DIALOG_DMV)
+	{
+		if(!response)
+		{
+			ProxDetector(15.0, playerid, "Urzêdnik mówi: Dziêkujemy i zapraszamy ponownie!", COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
+			return 1;
+		}
+		if(response)
+		{
+			new string[124];
+			switch(listitem)
+			{
+				case 0: //Dowód osobisty
+				{
+					if(kaska[playerid] >= DmvLicenseCost[0])
+					{
+						PlayerInfo[playerid][pDowod] = 1;
+						ZabierzKase(playerid, DmvLicenseCost[0]); 
+						format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje dowód osobisty", GetNick(playerid)); 
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					}
+				}
+				case 1:
+				{
+					sendTipMessage(playerid, "Trwaj¹ prace"); 
+				}
+			}
+		}
+	}
 	else if(dialogid == D_PERS_CHAT)
 	{
 		if(!response)
