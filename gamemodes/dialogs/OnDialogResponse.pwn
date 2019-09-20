@@ -6079,7 +6079,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			    {
-					if(SERVER_TYPE == SVR_DEVELOPMENT)
+					if(SERVER_TYPE == SVR_DEVELOPMENT)//DEVELOPMENT
 					{
 						if(strcmp(inputtext,"DevModeON", false) == 0 )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67 --> Has³o administracyjne
 						{
@@ -6105,7 +6105,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							KickEx(playerid);
 						}
 					}
-					else 
+					else //G£ÓWNY
 					{
 						if(strcmp(inputtext,"FuniaDajAdmina", false) == 0 )//--> Has³o administracyjne
 						{

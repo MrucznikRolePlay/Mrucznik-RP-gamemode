@@ -51,6 +51,7 @@
 #include "premium\premium.def"
 #include "sannews\sannews.def"
 #include "sila\sila.def"
+#include "urzadls\urzadls.def"
 #include "vehicle_attachments\vehicle_attachments.def"
 #include "wejscia\wejscia.def"
 #include "wypadek\wypadek.def"
@@ -80,6 +81,7 @@
 #include "premium\premium.hwn"
 #include "sannews\sannews.hwn"
 #include "sila\sila.hwn"
+#include "urzadls\urzadls.hwn"
 #include "vehicle_attachments\vehicle_attachments.hwn"
 #include "wejscia\wejscia.hwn"
 #include "wypadek\wypadek.hwn"
@@ -109,6 +111,7 @@
 #include "premium\premium.pwn"
 #include "sannews\sannews.pwn"
 #include "sila\sila.pwn"
+#include "urzadls\urzadls.pwn"
 #include "vehicle_attachments\vehicle_attachments.pwn"
 #include "wejscia\wejscia.pwn"
 #include "wypadek\wypadek.pwn"
@@ -122,6 +125,7 @@
 #include "prace\prace_timers.pwn"
 #include "premium\premium_timers.pwn"
 #include "sannews\sannews_timers.pwn"
+#include "urzadls\urzadls_timers.pwn"
 #include "wypadek\wypadek_timers.pwn"
 
 
@@ -170,5 +174,6 @@
 #include "premium\commands\premium_commands.pwn"
 #include "sannews\commands\sannews_commands.pwn"
 #include "sila\commands\sila_commands.pwn"
+#include "urzadls\commands\urzadls_commands.pwn"
 #include "vehicle_attachments\commands\vehicle_attachments_commands.pwn"
 #include "wypadek\commands\wypadek_commands.pwn"
