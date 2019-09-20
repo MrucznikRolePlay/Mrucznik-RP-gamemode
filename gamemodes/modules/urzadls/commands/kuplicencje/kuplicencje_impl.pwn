@@ -25,6 +25,14 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kuplicencje_Impl(playerid)
 {
+    if(PlayerInDmvPoint(playerid))
+    {
+        sendTipMessage(playerid, "Trwaj¹ prace"); 
+    }
+    else
+    {
+        sendErrorMessage(playerid, "Nie jesteœ przy okienkach urzêdu miasta!"); 
+    }
     return 1;
 }
 
