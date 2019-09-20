@@ -25,6 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_ustawcena_Impl(playerid, valueChoice, valueCost)
 {
+    new string[124];
     if(valueChoice > 7 || valueChoice < 0)
     {   
         sendErrorMessage(playerid, "Nieprawid³owe u¿ycie komendy!");
