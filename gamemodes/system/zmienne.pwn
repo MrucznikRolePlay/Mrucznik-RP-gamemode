@@ -778,7 +778,7 @@ new newbie = 1;
 new noooc = 1;
 new adds = 1;
 new dmv = 1;
-new doorFBIStatus=0;
+new doorFBIStatus=1;
 new drukarnia;
 new studiovic;
 new studiog;

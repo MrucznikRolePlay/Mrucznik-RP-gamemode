@@ -2025,8 +2025,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 					SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
 					if(PoziomPoszukiwania[killerid] >= 10)
 					{
-						sendTipMessageEx(playerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
-						sendTipMessage(playerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
+						sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
+						sendTipMessage(killerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
 					}
 				}
 			}

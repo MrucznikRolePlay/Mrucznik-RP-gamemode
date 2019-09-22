@@ -37,7 +37,9 @@ command_kuplicencje_Impl(playerid)
         Prawo jazdy - teoria\t{80FF00}$%d\n\
         Prawo Jazdy - praktyka\t{80FF00}$%d\n\
         Prawo jazdy - odbiór\t{80FF00}$%d\n\
-        Licencja pilota\t{80FF00}$%d", 
+        Licencja pilota\t{80FF00}$%d\n\
+        Rejestracja wozu\t{80FF00}$%d\n\
+        W³asna rejestracja wozu\t{80FF00}$%d", 
         DmvLicenseCost[0], 
         DmvLicenseCost[1],
         DmvLicenseCost[2],
@@ -45,7 +47,9 @@ command_kuplicencje_Impl(playerid)
         DmvLicenseCost[4],
         DmvLicenseCost[5],
         DmvLicenseCost[6],
-        DmvLicenseCost[7]); 
+        DmvLicenseCost[7],
+        DmvLicenseCost[8],
+        DmvLicenseCost[9]); 
         ProxDetector(30.0, playerid, "Urzêdnik mówi: Witam Pana(i) w Urzêdzie Miasta! W czym mogê Panu(i) pomóc?", COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
         ShowPlayerDialogEx(playerid, DIALOG_DMV, DIALOG_STYLE_TABLIST_HEADERS, "Wybierz dokument:", string, "Wyrób", "Wyjdz");
     }

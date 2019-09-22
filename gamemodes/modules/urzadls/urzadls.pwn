@@ -51,6 +51,8 @@ DefaultItems_LicenseCost()
 	DmvLicenseCost[5] = 15000;
 	DmvLicenseCost[6] = 20000;
 	DmvLicenseCost[7] = 5000000;
+	DmvLicenseCost[8] = 10000;
+	DmvLicenseCost[9] = 350000;
 	return 1; 
 }
 //end

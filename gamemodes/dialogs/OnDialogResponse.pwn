@@ -16094,6 +16094,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 			}
+			case 8:
+			{
+				sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
+			}
+			case 9:
+			{
+				if(IsPlayerPremiumOld(playerid))
+				{
+					sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.")
+				}
+			}
 		}
 	}
 	else if(dialogid == D_PERS_CHAT)
