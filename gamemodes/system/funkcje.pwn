@@ -709,7 +709,7 @@ public CountDown()
 		{
 			if(!used[v])
 			{
-			    SetVehicleToRespawn(v);
+			    RespawnVehicleEx(v);
 			    if(Car_GetOwnerType(v) == CAR_OWNER_PLAYER)
 			    {
                     Car_Unspawn(v);
@@ -12162,6 +12162,12 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 		return 1;
 	}
 	return 0;
+}
+RespawnVehicleEx(vehID)
+{
+	SetVehicleToRespawn(vehID);
+	SetVehicleVirtualWorld(vehID, CarData[VehicleUID[vehID][vUID]][c_VW]);
+	return 1;
 }
 GetWeaponSlot(weapon)
 {

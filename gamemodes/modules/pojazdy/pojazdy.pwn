@@ -526,7 +526,7 @@ Car_Spawn(lUID, bool:loaddesc=true)
 		format(rejestracja, sizeof(rejestracja), "%s", CarData[lUID][c_Rejestracja]);
 
     SetVehicleNumberPlate(vehicleid, rejestracja);
-	SetVehicleToRespawn(vehicleid);
+	RespawnVehicleEx(vehicleid);
 	//
     Car_AddTune(vehicleid);
     CarData[lUID][c_ID] = vehicleid;

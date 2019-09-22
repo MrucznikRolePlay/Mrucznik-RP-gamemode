@@ -5990,7 +5990,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
            		{
                 	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 1;
                		ShowPlayerDialogEx(playerid, 2, DIALOG_STYLE_MSGBOX, "Zda³eœ!", "Gratulujemy!\r\nZda³eœ test na Prawo Jazdy.\r\nZg³oœ siê do Urzêdnika w celu\r\nodebrania tych dokumentów!", "OK", "");
-                	PlayerInfo[playerid][pCarLic] = 2;
+                	PlayerInfo[playerid][pCarLic] = 1;
             	}
            		else
            		{

@@ -467,7 +467,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`PodgladWiadomosci`='%d', \
 	`StylWalki`='%d', \
 	`PAdmin`='%d', \
-	`ZaufanyGracz`='%d', \
+	`Uniform`='%d', \
 	`connected`='0' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
@@ -482,7 +482,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
-	PlayerInfo[playerid][pZG],
+	PlayerInfo[playerid][pUniform],
     PlayerInfo[playerid][pUID]);
 
     if(!mysql_query(query)) fault=false;

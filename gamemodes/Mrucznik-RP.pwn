@@ -2643,12 +2643,12 @@ SetPlayerSpawnWeapon(playerid)
 
 SetPlayerSpawnSkin(playerid)
 {
-	if(PlayerInfo[playerid][pModel] > 20000 && PlayerInfo[playerid][pModel] < 20099)
+	if(PlayerInfo[playerid][pSkin] > 20000 && PlayerInfo[playerid][pSkin] < 20099)
 	{
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
 		PlayerInfo[playerid][pModel] = 136;
 	}
-	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
   /*  if(PlayerInfo[playerid][pChar] > 0)
 		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
 
@@ -4325,7 +4325,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			GameTextForPlayer(playerid, "~y~Sprzedales pojazd", 2500, 1);
 			CP[playerid] = 0;
 		    DisablePlayerCheckpoint(playerid);
-		    SetVehicleToRespawn(GetPlayerVehicleID(playerid));
+		    RespawnVehicleEx(GetPlayerVehicleID(playerid));
 		}
 		else
 		{
