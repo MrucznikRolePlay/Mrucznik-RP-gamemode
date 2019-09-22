@@ -5990,7 +5990,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
            		{
                 	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 1;
                		ShowPlayerDialogEx(playerid, 2, DIALOG_STYLE_MSGBOX, "Zda³eœ!", "Gratulujemy!\r\nZda³eœ test na Prawo Jazdy.\r\nZg³oœ siê do Urzêdnika w celu\r\nodebrania tych dokumentów!", "OK", "");
-                	PlayerInfo[playerid][pCarLic] = 1;
+                	PlayerInfo[playerid][pCarLic] = 2;
             	}
            		else
            		{
@@ -16001,8 +16001,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendErrorMessage(playerid, "Zaliczy³eœ ju¿ egzamin teoretyczny!"); 
 							return 1;
 						}
-						if(PlayerInfo[playerid][pCarLic] == 4)
+						if(PlayerInfo[playerid][pCarLic] == 1)
 						{
+					
 							sendErrorMessage(playerid, "Masz ju¿ prawo do jazdy!"); 
 							return 1;
 						}
@@ -16056,7 +16057,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendErrorMessage(playerid, "Najpierw podejdŸ do egzaminu teoretycznego/praktycznego!"); 
 							return 1;
 						}
-						if(PlayerInfo[playerid][pCarLic] == 4)
+						if(PlayerInfo[playerid][pCarLic] == 1)
 						{
 							sendErrorMessage(playerid, "Masz ju¿ prawo jazdy!"); 
 							return 1;
@@ -16067,7 +16068,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 						sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra³eœ prawo do jazdy."); 
-			       		PlayerInfo[playerid][pCarLic] = 4;
+			       		PlayerInfo[playerid][pCarLic] = 1;
 						ZabierzKase(playerid, DmvLicenseCost[6]); 
 						Sejf_Add(FRAC_GOV, (DmvLicenseCost[6]/2));
 						Sejf_Save(FRAC_GOV); 
