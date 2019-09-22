@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                              setvregistration                                             //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,15 +27,42 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "setvregistration\setvregistration.pwn"
-
+#include "setvregistration_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_setvregistration()
 {
-    command_setvregistration();
+    new command = Command_GetID("setvregistration");
+
+    //aliases
+    Command_AddAlt(command, "setcarreg");
+    Command_AddAlt(command, "setrg");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:setvregistration(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Ustawia rejestracje wozu, w którym aktualnie siê znajdujesz.");
+        return 1;
+    }
+    //fetching params
+    new registerText[32];
+    if(sscanf(params, "s[32]", registerText))
+    {
+        sendTipMessage(playerid, "U¿yj /setvregistration [Nowa rejestracja] ");
+        return 1;
+    }
+    
+    //command body
+    return command_setvregistration_Impl(playerid, registerText);
 }

@@ -1,0 +1,19 @@
+{
+    "name": "setvregistration",
+    "description": "Ustawia rejestracje wozu, w którym aktualnie siê znajdujesz.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "setcarreg",
+        "setrg"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "32",
+            "name": "registerText",
+            "description": "Nowa rejestracja"
+        }
+    ],
+    "date": "22.09.2019"
+}

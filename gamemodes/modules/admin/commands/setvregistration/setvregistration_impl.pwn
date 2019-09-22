@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                              setvregistration                                             //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,26 +16,31 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 22.09.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "setvregistration\setvregistration.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_setvregistration_Impl(playerid, registerText[32])
 {
-    command_setvregistration();
-    
+    if(PlayerInfo[playerid][pAdmin] > 1500 || IsAScripter(playerid))
+    {
+        if(IsPlayerInAnyVehicle(playerid))
+        {
+            new vehID = GetPlayerVehicleID(playerid);
+            new string[124];
+            SetVehicleNumberPlate(vehID, registerText);
+            format(string, sizeof(string), "Administrator %s ustawi³ tablicê dla pojazdu %d - nowy text [%s]", GetNick(playerid), vehID, registerText);
+            SendMessageToAdminEx(string, COLOR_P@, 2);
+        }
+        else
+        {
+            sendErrorMessage(playerid, "Musisz byæ w pojeŸdzie!");
+        }
+    }
+    return 1;
 }
+
+//end
