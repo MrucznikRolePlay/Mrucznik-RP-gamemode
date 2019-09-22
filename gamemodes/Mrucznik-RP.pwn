@@ -673,8 +673,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
             CancelSelectTextDraw(playerid);
             DestroySkinSelection(playerid);
             TogglePlayerControllable(playerid, 1);
-
-            PlayerInfo[playerid][pUniform] = PlayerInfo[playerid][pModel];
+            PlayerInfo[playerid][pUniform] = PlayerInfo[playerid][pSkin];
             SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
         }
     }
@@ -2646,7 +2645,7 @@ SetPlayerSpawnSkin(playerid)
 	if(PlayerInfo[playerid][pSkin] > 20000 && PlayerInfo[playerid][pSkin] < 20099)
 	{
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
-		PlayerInfo[playerid][pModel] = 136;
+		PlayerInfo[playerid][pSkin] = 136;
 	}
 	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
   /*  if(PlayerInfo[playerid][pChar] > 0)
@@ -5358,10 +5357,10 @@ public OnPlayerRequestSpawn(playerid)
 }
 public OnPlayerRequestClass(playerid, classid)
 {
-	if(PlayerInfo[playerid][pModel] == 0)
-		PlayerInfo[playerid][pModel] = 252;
+	if(PlayerInfo[playerid][pSkin] == 0)
+		PlayerInfo[playerid][pSkin] = 252;
 
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 
 	if(gPlayerLogged[playerid] != 1)
 	{
@@ -5920,7 +5919,9 @@ OnPlayerLogin(playerid, password[])
 		PlayerInfo[playerid][pInt] = 0;
 		PlayerInfo[playerid][pLocal] = 255;
 		PlayerInfo[playerid][pTeam] = 3;
-		PlayerInfo[playerid][pModel] = 136;
+		PlayerInfo[playerid][pSkin] = 136;
+		PlayerInfo[playerid][pUniform] = 0;
+		PlayerInfo[playerid][pJobSkin] = 0; 
 		PlayerInfo[playerid][pPnumber] = 0;
 		PlayerInfo[playerid][pDom] = 0;
 		PlayerInfo[playerid][pPbiskey] = 255;
@@ -6075,14 +6076,14 @@ OnPlayerLogin(playerid, password[])
         }
         else
         {
-            SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+            SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
             TogglePlayerSpectating(playerid, false);
 			SetPlayerSpawn(playerid);
         }
 	}
     else
     {
-        SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+        SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
 		PlayerInfo[playerid][pMuted] = 1;
 		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");

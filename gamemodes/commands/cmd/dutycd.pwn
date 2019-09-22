@@ -69,8 +69,7 @@ YCMD:dutycd(playerid, params[], help)
 					DajBronieFrakcyjne(playerid);
 					SetPlayerArmour(playerid, 90);
 	    		    SetPlayerHealth(playerid, 100);
-	    		    //SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-	    		    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+	    		    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 					OnDuty[playerid] = 1;
 					OnDutyCD[playerid] = 1;
                     //SetPlayerToTeamColor(playerid);
@@ -82,7 +81,7 @@ YCMD:dutycd(playerid, params[], help)
 					SetPlayerArmour(playerid, 0.0);
 	    		    SetPlayerHealth(playerid, 100);
 					
-	    		    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+	    		    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     OnDuty[playerid] = 0;
                     OnDutyCD[playerid] = 0;
                     PrzywrocBron(playerid);
@@ -106,7 +105,7 @@ YCMD:dutycd(playerid, params[], help)
                     DajBronieFrakcyjne(playerid);
                     SetPlayerArmour(playerid, 70);
                     SetPlayerHealth(playerid, 100);
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     OnDuty[playerid] = 1;
                     OnDutyCD[playerid] = 1;
 				}
@@ -117,7 +116,7 @@ YCMD:dutycd(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     OnDuty[playerid] = 0;
                     OnDutyCD[playerid] = 0;
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     PrzywrocBron(playerid);
 				}
 			}
@@ -138,7 +137,7 @@ YCMD:dutycd(playerid, params[], help)
                     DajBronieFrakcyjne(playerid);
                     SetPlayerArmour(playerid, 90);
                     SetPlayerHealth(playerid, 100);
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     OnDuty[playerid] = 1;
                     OnDutyCD[playerid] = 1;
                 }
@@ -150,7 +149,7 @@ YCMD:dutycd(playerid, params[], help)
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
                     OnDutyCD[playerid] = 0;
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     PrzywrocBron(playerid);
                 }
             }
@@ -164,11 +163,6 @@ YCMD:dutycd(playerid, params[], help)
 		{
 		    noAccessMessage(playerid);
 		}
-        if(GetPlayerSkin(playerid) == 0)
-        {
-            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-            sendTipMessage(playerid, "Nie masz skina frakcyjnego!");
-        }
 	}
 	return 1;
 }

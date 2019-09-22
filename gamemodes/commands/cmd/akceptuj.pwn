@@ -832,7 +832,6 @@ YCMD:akceptuj(playerid, params[], help)
                     SelectChar[playerid] = 255;
                     SelectCharID[playerid] = PlayerInfo[playerid][pMember];
                     SelectCharPlace[playerid] = 1;
-                    //PlayerInfo[playerid][pModel] = ChosenSkin[playerid];
                     PlayerInfo[playerid][pSkin] = ChosenSkin[playerid];
                     SendClientMessage(playerid, COLOR_LIGHTRED, "* U¿yj 'next' aby zobaczyæ nastêpny skin.");
                     SendClientMessage(playerid, COLOR_LIGHTRED, "* Jeœli zdecydowa³eœ siê na konkretny skin wpisz 'gotowe'.");

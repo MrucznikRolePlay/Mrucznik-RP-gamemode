@@ -1335,7 +1335,7 @@ enum pInfo
 	//pDomW,
 	pLocal,
 	pTeam,
-	pModel,
+	pJobSkin,
 	pPnumber,
 	pDom,
 	pWynajem,

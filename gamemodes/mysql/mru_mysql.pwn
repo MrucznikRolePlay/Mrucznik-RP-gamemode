@@ -327,7 +327,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     format(query, sizeof(query), "%s, \
     `Local`='%d', \
 	`Team`='%d', \
-	`Model`='%d', \
+	`JobSkin`='%d', \
 	`PhoneNr`='%d', \
 	`Dom`='%d', \
 	`Bizz`='%d', \
@@ -344,7 +344,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     `Hat`='%d' WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pLocal],
 	PlayerInfo[playerid][pTeam],
-	PlayerInfo[playerid][pModel],
+	PlayerInfo[playerid][pJobSkin],
 	PlayerInfo[playerid][pPnumber],
 	PlayerInfo[playerid][pDom],
 	PlayerInfo[playerid][pBusinessOwner],
@@ -584,7 +584,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pSkin], 
 		PlayerInfo[playerid][pContractTime]);
 
-        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `Model`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
+        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
@@ -611,7 +611,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pInt],
 		PlayerInfo[playerid][pLocal],
 		PlayerInfo[playerid][pTeam],
-		PlayerInfo[playerid][pModel],
+		PlayerInfo[playerid][pJobSkin],
 		PlayerInfo[playerid][pPnumber],
 		PlayerInfo[playerid][pDom],
 		PlayerInfo[playerid][pBusinessOwner],
@@ -681,7 +681,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `ZaufanyGracz`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Czystka`, `CarSlots`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Czystka`, `CarSlots`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
@@ -704,7 +704,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pPodPW],
 		PlayerInfo[playerid][pStylWalki],
 		PlayerInfo[playerid][pNewAP],
-		PlayerInfo[playerid][pZG],
+		PlayerInfo[playerid][pUniform],
 		PlayerInfo[playerid][pAuto1],
 		PlayerInfo[playerid][pAuto2],
 		PlayerInfo[playerid][pAuto3],

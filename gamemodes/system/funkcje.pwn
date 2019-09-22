@@ -4460,7 +4460,7 @@ ShowStats2(playerid)
 	format(plOnline, sizeof(plOnline), "On-line: %d", PlayerInfo[playerid][pConnectTime]);
 	format(plBMID, sizeof(plBMID), "B-MID: %d", PlayerInfo[playerid][pBusinessMember]); 
 	format(plBOID, sizeof(plBOID), "B-OID: %d", PlayerInfo[playerid][pBusinessOwner]); 
-	format(plSkin, sizeof(plSkin), "Skin: %d", PlayerInfo[playerid][pModel]); 
+	format(plSkin, sizeof(plSkin), "Skin: %d", PlayerInfo[playerid][pSkin]); 
 	format(plWarny, sizeof(plWarny), "Warny: %d", PlayerInfo[playerid][pWarns]); 
 	format(plMats, sizeof(plMats), "Mats: %d", PlayerInfo[playerid][pMats]);
 	format(plDrugs, sizeof(plDrugs), "Drugs: %d", PlayerInfo[playerid][pDrugs]); 
@@ -4565,7 +4565,7 @@ ShowStats2(playerid)
 		PlayerTextDrawSetString(playerid, TXDSTATS_Ryba[playerid], plRyba); 
 		PlayerTextDrawSetString(playerid, TXDSTATS_Data[playerid], plData);
 		PlayerTextDrawSetString(playerid, TXDSTATS_Czas[playerid], plCzas);
-		PlayerTextDrawSetPreviewModel(playerid, TXDSTATS_SkinShow[playerid], PlayerInfo[playerid][pModel]); 
+		PlayerTextDrawSetPreviewModel(playerid, TXDSTATS_SkinShow[playerid], PlayerInfo[playerid][pSkin]); 
 
 		//show
 		PlayerTextDrawShow(playerid, TXDSTATS_UID[playerid]);
@@ -4731,7 +4731,7 @@ ShowStats(playerid,targetid)
 		new expamount = nxtlevel*levelexp;
 		new costlevel = nxtlevel*levelcost;//10k for testing purposes
 		new housekey = PlayerInfo[targetid][pDom];
-		new skin = PlayerInfo[targetid][pModel];
+		new skin = PlayerInfo[targetid][pSkin];
 		new Float:shealth = PlayerInfo[targetid][pSHealth];
 		new Float:health;
 		new name[MAX_PLAYER_NAME];
@@ -4755,7 +4755,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "BizOID:[%d] BizMID[%d]", busiOwn, busiMem);
+		format(coordsstring, sizeof(coordsstring), "BizOID:[%d] BizMID[%d] Uniform[%d] JobSkin[%d]", busiOwn, busiMem, PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
