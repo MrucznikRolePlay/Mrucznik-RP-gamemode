@@ -6079,7 +6079,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			    {
-					if(SERVER_TYPE == SVR_DEVELOPMENT)//DEVELOPMENT
+					new typeSVR = SERVER_TYPE; 
+					if(typeSVR == SVR_DEVELOPMENT)//DEVELOPMENT
 					{
 						if(strcmp(inputtext,"DevModeON", false) == 0 )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67 --> Has³o administracyjne
 						{
@@ -16107,7 +16108,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else
 					{
-						sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.")
+						sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.");
 					}
 				}
 			}
