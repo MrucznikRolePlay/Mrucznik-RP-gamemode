@@ -16070,6 +16070,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ZabierzKase(playerid, DmvLicenseCost[6]); 
 						Sejf_Add(FRAC_GOV, (DmvLicenseCost[6]/2));
 						Sejf_Save(FRAC_GOV); 
+						Log(payLog, INFO, "%s kupi³ licencje na pojazdy {Cost: %d}", GetPlayerLogName(playerid), DmvLicenseCost[6]);
 					}
 				}
 				case 7:
@@ -16091,22 +16092,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ZabierzKase(playerid, DmvLicenseCost[7]); 
 						Sejf_Add(FRAC_GOV, (DmvLicenseCost[7]/2));
 						Sejf_Save(FRAC_GOV); 
+						Log(payLog, INFO, "%s kupi³ licencje na latanie {Cost: %d}", GetPlayerLogName(playerid), DmvLicenseCost[7]);
 					}
 				}
-			}
-			case 8:
-			{
-				sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
-			}
-			case 9:
-			{
-				if(IsPlayerPremiumOld(playerid))
+				case 8:
 				{
 					sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
 				}
-				else
+				case 9:
 				{
-					sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.")
+					if(IsPlayerPremiumOld(playerid))
+					{
+						sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
+					}
+					else
+					{
+						sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.")
+					}
 				}
 			}
 		}
