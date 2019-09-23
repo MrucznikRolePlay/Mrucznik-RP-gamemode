@@ -1,0 +1,22 @@
+{
+    "name": "zmienwiek",
+    "description": "Komenda, która pozwala ustawiæ wiek dla gracza.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "setwiek"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "valueWiek",
+            "description": "Nowy wiek"
+        }
+    ],
+    "date": "23.09.2019"
+}

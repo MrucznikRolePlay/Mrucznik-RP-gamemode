@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ zmienwiek ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 zmienwiek                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,55 +16,56 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
- */
 
+//-------<[ include ]>-------
+#include "zmienwiek_impl.pwn"
 
-// Notatki skryptera:
-/*
+//-------<[ initialize ]>-------
+command_zmienwiek()
+{
+    new command = Command_GetID("zmienwiek");
 
- */
+    //aliases
+    Command_AddAlt(command, "setwiek");
+    
 
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
 YCMD:zmienwiek(playerid, params[], help)
 {
-    new string[128];
-    new sendername[MAX_PLAYER_NAME];
-    new giveplayer[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
+    if (help)
     {
-        new para1, level;
-        if( sscanf(params, "k<fix>d", para1, level))
-        {
-            sendTipMessage(playerid, "U¿yj /setwiek [playerid/CzêœæNicku] [wiek]");
-            return 1;
-        }
-
-
-        if (PlayerInfo[playerid][pAdmin] >= 5000)
-        {
-            if(IsPlayerConnected(para1))
-            {
-                if(para1 != INVALID_PLAYER_ID)
-                {
-                    GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-                    GetPlayerName(playerid, sendername, sizeof(sendername));
-                    PlayerInfo[para1][pAge] = level;
-					Log(adminLog, INFO, "Admin %s zmieni³ wiek %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
-                    format(string, sizeof(string), "   Twój wiek zosta³ zmieniony na %d lat przez %s", level, sendername);
-                    SendClientMessage(para1, COLOR_LIGHTBLUE, string);
-                    format(string, sizeof(string), "   Zmieni³eœ wiek graczowi %s na %d lat.", giveplayer,level);
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                }
-            }
-        } 
-				else
-        {
-            noAccessMessage(playerid);
-        }
+        sendTipMessage(playerid, "Komenda, która pozwala ustawiæ wiek dla gracza.");
+        return 1;
     }
-    return 1;
+    //fetching params
+    new giveplayerid, valueWiek;
+    if(sscanf(params, "rd", giveplayerid, valueWiek))
+    {
+        sendTipMessage(playerid, "U¿yj /zmienwiek [Nick/ID] [Nowy wiek] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_zmienwiek_Impl(playerid, giveplayerid, valueWiek);
 }

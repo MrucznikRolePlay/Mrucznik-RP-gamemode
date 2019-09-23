@@ -634,7 +634,6 @@
 #include "cmd/zmienplec.pwn"
 #include "cmd/zmienprace.pwn"
 #include "cmd/zmienskin.pwn"
-#include "cmd/zmienwiek.pwn"
 #include "cmd/zmienwl.pwn"
 #include "cmd/zniszczobiekty.pwn"
 #include "cmd/zobp.pwn"
@@ -1462,10 +1461,6 @@ static Aliases()
 	//choroba
 	Command_AddAltNamed("choroba", "setstd");
 	Command_AddAltNamed("choroba", "zaraz");
-
-	//zmienwiek
-	Command_AddAltNamed("zmienwiek", "setwiek");
-	Command_AddAltNamed("zmienwiek", "setage");
 
 	//zmienprace
 	Command_AddAltNamed("zmienprace", "setjob");
