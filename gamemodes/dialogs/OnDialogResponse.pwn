@@ -14256,6 +14256,44 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         return 1;
     }
+	else if(dialogid == D_HASLO_INFO)
+	{
+		if(!response) return KickEx(playerid); 
+		if(response)
+		{
+			sendTipMessage(playerid, "Zmieniasz has³o:");
+			ShowPlayerDialogEx(playerid, D_HASLO_ZMIEN, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "WprowadŸ poni¿ej nowe has³o, którego bêdziesz u¿ywa³\ndo gry na naszym serwisie!", "ZatwierdŸ", "Odrzuæ"); 
+		}
+		return 1;
+	}
+	else if(dialogid == D_HASLO_ZMIEN)
+	{
+		if(!response) return KickEx(playerid); 
+		if(response)
+		{
+			if(strlen(inputtext) < 4)
+			{
+				sendErrorMessage(playerid, "Has³o musi posiadaæ +3 znaki!"); 
+				return 1;
+			}
+			if(strfind(inputtext, "%") != -1)
+			{
+				sendErrorMessage(playerid, "Has³o nie mo¿e zawieraæ znaku procenta!");
+				return 1;
+			}
+			new password[WHIRLPOOL_LEN];
+			sendErrorMessage(playerid, "Twoje has³o do konta w grze zosta³o zmienione!!!!");
+			sendErrorMessage(playerid, "Jeœli nie jesteœ pewien  nowego has³a - nie wychodŸ z serwera i zmieñ je za pomoc¹ /zmienhaslo");
+			sendErrorMessage(playerid, "Nowe has³o:");
+			SendClientMessage(playerid, COLOR_PANICRED, inputtext);
+
+			Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
+			WP_Hash(password, sizeof(password), inputtext);
+			MruMySQL_ChangePassword(GetNick(playerid), password);
+			PlayerInfo[playerid][pNewPassword] = 1;
+		}
+		return 1;
+	}
 	else if(dialogid == 1089)
 	{
 		if(!response) return ShowCarEditDialog(playerid);

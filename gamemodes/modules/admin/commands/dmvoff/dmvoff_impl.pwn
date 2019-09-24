@@ -28,12 +28,10 @@ command_dmvoff_Impl(playerid)
     if(PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
     {
         new string[124];
-       
         DestroyActorsInDMV(playerid);
         sendTipMessage(playerid, "Wy³¹czy³eœ boty w urzêdzie miasta LS!"); 
         format(string, sizeof(string), "Administrator %s wy³¹czy³ zautomatyzowany Urz¹d miasta!"); 
         SendMessageToAdminEx(string, COLOR_P@, 2);
-        
     }
     else
     {
