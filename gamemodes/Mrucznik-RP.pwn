@@ -5946,6 +5946,7 @@ OnPlayerLogin(playerid, password[])
 		PlayerInfo[playerid][pAccount] = 5000;
 		PlayerInfo[playerid][pReg] = 1;
 		PlayerInfo[playerid][pDowod] = 0;
+		PlayerInfo[playerid][pNewPassword] = 1; 
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
 		DajKase(playerid, 5000);
