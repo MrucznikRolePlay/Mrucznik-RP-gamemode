@@ -6108,7 +6108,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else //G£ÓWNY
 					{
-						if(strcmp(inputtext,"FuniaDajAdmina", false) == 0 )//--> Has³o administracyjne
+						if(strcmp(inputtext,"SiveMopY", false) == 0 )//--> Has³o administracyjne
 						{
 							weryfikacja[playerid] = 1;
 							if(PlayerInfo[playerid][pJailed] == 0)

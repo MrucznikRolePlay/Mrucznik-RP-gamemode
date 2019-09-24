@@ -777,7 +777,7 @@ new vKickEx[MAX_PLAYERS];
 new newbie = 1;
 new noooc = 1;
 new adds = 1;
-new dmv = 1;
+new dmv;
 new doorFBIStatus=1;
 new drukarnia;
 new studiovic;

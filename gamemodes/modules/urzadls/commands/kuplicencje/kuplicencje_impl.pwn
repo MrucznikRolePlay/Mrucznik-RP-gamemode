@@ -28,6 +28,11 @@ command_kuplicencje_Impl(playerid)
 {
     if(PlayerInDmvPoint(playerid))
     {
+        if(!DmvActorStatus)
+        {
+            sendErrorMessage(playerid, "Ta komenda jest wy³¹czona - Urz¹d miasta nie obs³uguj¹ boty!"); 
+            return 1;
+        }
         new string[356]; 
         format(string, sizeof(string), "Nazwa\tKoszt\n\
         Dowód Osobisty\t{80FF00}$%d\n\

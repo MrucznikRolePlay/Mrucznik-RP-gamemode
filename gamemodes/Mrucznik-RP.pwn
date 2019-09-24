@@ -5608,6 +5608,13 @@ PayDay()
 	CountDown();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
+	if(DmvActorStatus)
+	{
+		if(shifthour != 17 && shifthour != 18 && shifthour != 19 && shifthour != 20 && shifthour != 21 && shifthour != 22)
+		{
+			DestroyActorsInDMV(); 
+		}
+	}
 	if(shifthour == 3)
 	{
 	    SendClientMessageToAll(COLOR_YELLOW, "Trwa aktualizacja systemu domów, czas na laga");
@@ -5621,6 +5628,13 @@ PayDay()
 			}
 	    }
 		ZapiszDomy();
+	}
+	else if(shifthour >= 16 && shifthour <= 22)
+	{
+		if(!DmvActorStatus)
+		{
+			CreateActorsInDMV(); 
+		}
 	}
 	else if(shifthour == 4)
 	{

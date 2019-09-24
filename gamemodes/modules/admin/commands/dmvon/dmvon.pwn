@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                    sila                                                   //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   dmvon                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,15 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 15.05.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define ACTORS_ON_WORLD 100
-#define AGROUP_DEFAULT 0
-#define AGROUP_DMV 1
 
-//end
+//-------<[ include ]>-------
+#include "dmvon_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_dmvon()
+{
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:dmvon(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala w³¹czyæ/wy³¹czyæ boty w urzêdzie Miasta.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_dmvon_Impl(playerid);
+}

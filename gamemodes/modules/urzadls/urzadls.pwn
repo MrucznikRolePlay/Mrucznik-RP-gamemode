@@ -41,6 +41,50 @@ PlayerInDmvPoint(playerid)
 	}
 	return false;
 }
+CreateActorsInDMV()
+{
+	DmvActorStatus=true; 
+	new freePlace; 
+	for(new i; i<valActor; i++)
+	{
+		if(Actors[i][a_Group] == AGROUP_DMV)
+		{
+			if(freePlace < 8)
+			{
+				SetActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
+				SetActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
+				SetActorVirtualWorld(actorUID[i], 50); 
+				UpdateActorText(actorUID[i]);
+				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}[Wpisz /kuplicencje]");
+				freePlace++; 
+			}
+		}
+	}
+	dmv = 1; 
+	return 1;
+}
+DestroyActorsInDMV()
+{
+	DmvActorStatus=false; 
+	new freePlace; 
+	for(new i; i<valActor; i++)
+	{
+		if(Actors[i][a_Group] == AGROUP_DMV)
+		{
+			if(freePlace < 8)
+			{
+				SetActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
+				SetActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
+				SetActorVirtualWorld(actorUID[i], 50); 
+				UpdateActorText(actorUID[i]);
+				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}Zamkniête!");
+				freePlace++; 
+			}
+		}
+	}
+	dmv = 0;
+	return 1;
+}
 DefaultItems_LicenseCost()
 {
 	DmvLicenseCost[0] = 5000;

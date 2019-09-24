@@ -1,0 +1,9 @@
+{
+    "name": "dmvon",
+    "description": "Komenda, która pozwala w³¹czyæ/wy³¹czyæ boty w urzêdzie Miasta.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [],
+    "parameters": [],
+    "date": "24.09.2019"
+}

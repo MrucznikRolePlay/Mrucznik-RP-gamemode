@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                    sila                                                   //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   dmvon                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,14 +17,37 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Simeone
-// Data utworzenia: 15.05.2019
+// Data utworzenia: 24.09.2019
+
 
 //
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define ACTORS_ON_WORLD 100
-#define AGROUP_DEFAULT 0
-#define AGROUP_DMV 1
+//------------------<[ Implementacja: ]>-------------------
+command_dmvon_Impl(playerid)
+{
+    if(PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
+    {
+        new string[124];
+        if(DmvActorStatus)
+        {
+            CreateActorsInDMV();
+            sendTipMessage(playerid, "W³¹czy³eœ boty w urzêdzie miasta LS!");
+            format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta na godzinê!"); 
+            SendMessageToAdminEx(string, COLOR_P@, 2);
+        }
+        else
+        {
+            DestroyActorsInDMV();
+            sendTipMessage(playerid, "Wy³¹czy³eœ boty w urzêdzie miasta LS!"); 
+            format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta!s"); 
+            SendMessageToAdminEx(string, COLOR_P@, 2);
+        }
+    }
+    else
+    {
+        noAccessMessage(playerid); 
+    }
+    return 1;
+}
 
 //end
