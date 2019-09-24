@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   dmvoff                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,21 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "dmvoff\dmvoff.pwn"
-#include "dmvon\dmvon.pwn"
-#include "setvregistration\setvregistration.pwn"
-#include "zmienwiek\zmienwiek.pwn"
-
+#include "dmvoff_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_dmvoff()
 {
-    command_dmvoff();
-    command_dmvon();
-    command_setvregistration();
-    command_zmienwiek();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:dmvoff(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala wy³¹czyæ boty w urzêdzie miasta");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_dmvoff_Impl(playerid);
 }

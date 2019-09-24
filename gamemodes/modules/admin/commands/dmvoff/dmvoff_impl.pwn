@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   dmvoff                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,30 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 24.09.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "dmvoff\dmvoff.pwn"
-#include "dmvon\dmvon.pwn"
-#include "setvregistration\setvregistration.pwn"
-#include "zmienwiek\zmienwiek.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_dmvoff_Impl(playerid)
 {
-    command_dmvoff();
-    command_dmvon();
-    command_setvregistration();
-    command_zmienwiek();
-    
+    if(PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
+    {
+        new string[124];
+       
+        DestroyActorsInDMV(playerid);
+        sendTipMessage(playerid, "Wy³¹czy³eœ boty w urzêdzie miasta LS!"); 
+        format(string, sizeof(string), "Administrator %s wy³¹czy³ zautomatyzowany Urz¹d miasta!"); 
+        SendMessageToAdminEx(string, COLOR_P@, 2);
+        
+    }
+    else
+    {
+        noAccessMessage(playerid); 
+    }
+    return 1;
 }
+
+//end
