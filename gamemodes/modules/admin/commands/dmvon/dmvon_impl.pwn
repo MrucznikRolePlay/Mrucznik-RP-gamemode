@@ -39,7 +39,7 @@ command_dmvon_Impl(playerid)
         {
             DestroyActorsInDMV();
             sendTipMessage(playerid, "Wy³¹czy³eœ boty w urzêdzie miasta LS!"); 
-            format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta!s"); 
+            format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta!"); 
             SendMessageToAdminEx(string, COLOR_P@, 2);
         }
     }
