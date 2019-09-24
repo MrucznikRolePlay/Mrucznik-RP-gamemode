@@ -694,9 +694,8 @@ public WjedzTimerDebug(playerid)
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-				new pVW2 = GetPlayerVirtualWorld(playerid); 
 				new pVeh2 = GetPlayerVehicleID(playerid);
-				CarData[VehicleUID[pVeh2][vUID]][c_VW] = pVW2; 
+				CarData[VehicleUID[pVeh2][vUID]][c_VW] = wjazdy[i][wj_VW]; 
 				SetAntyCheatForPlayer(playerid, 0);
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
@@ -715,9 +714,6 @@ public WjedzTimerDebug(playerid)
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
-				new pVW2 = GetPlayerVirtualWorld(playerid); 
-				new pVeh2 = GetPlayerVehicleID(playerid);
-				CarData[VehicleUID[pVeh2][vUID]][c_VW] = pVW2; 
 			}
 		}
 		PlayerTextDrawHide(playerid, textwjedz[playerid]);
