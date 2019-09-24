@@ -5612,7 +5612,7 @@ PayDay()
 	{
 		if(shifthour != 17 && shifthour != 18 && shifthour != 19 && shifthour != 20 && shifthour != 21 && shifthour != 22)
 		{
-			DestroyActorsInDMV(); 
+			DestroyActorsInDMV(playerid); 
 		}
 	}
 	if(shifthour == 3)
@@ -5633,7 +5633,7 @@ PayDay()
 	{
 		if(!DmvActorStatus)
 		{
-			CreateActorsInDMV(); 
+			CreateActorsInDMV(playerid); 
 		}
 	}
 	else if(shifthour == 4)

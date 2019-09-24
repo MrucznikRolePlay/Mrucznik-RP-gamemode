@@ -30,16 +30,16 @@ command_dmvon_Impl(playerid)
         new string[124];
         if(DmvActorStatus)
         {
-            CreateActorsInDMV();
+            CreateActorsInDMV(playerid);
             sendTipMessage(playerid, "W³¹czy³eœ boty w urzêdzie miasta LS!");
             format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta na godzinê!"); 
             SendMessageToAdminEx(string, COLOR_P@, 2);
         }
         else
         {
-            DestroyActorsInDMV();
+            DestroyActorsInDMV(playerid);
             sendTipMessage(playerid, "Wy³¹czy³eœ boty w urzêdzie miasta LS!"); 
-            format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta!"); 
+            format(string, sizeof(string), "Administrator %s wy³¹czy³ zautomatyzowany Urz¹d miasta!"); 
             SendMessageToAdminEx(string, COLOR_P@, 2);
         }
     }

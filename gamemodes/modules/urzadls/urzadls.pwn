@@ -41,10 +41,11 @@ PlayerInDmvPoint(playerid)
 	}
 	return false;
 }
-CreateActorsInDMV()
+CreateActorsInDMV(playerid)
 {
 	DmvActorStatus=true; 
 	new freePlace; 
+	new string[124];
 	for(new i; i<valActor; i++)
 	{
 		if(Actors[i][a_Group] == AGROUP_DMV)
@@ -52,32 +53,44 @@ CreateActorsInDMV()
 			if(freePlace < 8)
 			{
 				SetActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
+				format(string,sizeof(string), "Ustawiono aktorowi [%d] pozycjê, wzrok i VW", actorUID[i]);
+				sendTipMessage(playerid, string); 
 				SetActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
 				SetActorVirtualWorld(actorUID[i], 50); 
 				UpdateActorText(actorUID[i]);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}[Wpisz /kuplicencje]");
+				format(string, sizeof(string), "Ustawiono nowy text dla okienka [%d], zaktualizowano text actora [%d] na %s", freePlace, actorUID[i], Actors[i][a_Name]);
+				sendTipMessage(playerid,  string); 
 				freePlace++; 
 			}
 		}
 	}
 	dmv = 1; 
+	format(string, sizeof(string), "|____________Urz¹d Miasta otwarty przez %s_____________|", GetNick(playerid));
+	SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 	return 1;
 }
-DestroyActorsInDMV()
+DestroyActorsInDMV(playerid)
 {
 	DmvActorStatus=false; 
 	new freePlace; 
+	new string[124];
 	for(new i; i<valActor; i++)
 	{
 		if(Actors[i][a_Group] == AGROUP_DMV)
 		{
 			if(freePlace < 8)
 			{
-				SetActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
+				SetActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]+10);
+				format(string,sizeof(string), "Ustawiono aktorowi [%d] pozycjê, wzrok i VW", actorUID[i]);
+				sendTipMessage(playerid, string); 
 				SetActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
 				SetActorVirtualWorld(actorUID[i], 50); 
 				UpdateActorText(actorUID[i]);
-				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, "Urz¹d Miasta Los Santos\n{0080FF}Okienko 1 \n {FF0000}Zamkniête!");
+				format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace)
+				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
+				format(string, sizeof(string), "Ustawiono nowy text dla okienka [%d], zaktualizowano text actora [%d] na %s", freePlace, actorUID[i], Actors[i][a_Name]);
+				sendTipMessage(playerid,  string); 
 				freePlace++; 
 			}
 		}
