@@ -60,6 +60,11 @@ YCMD:kajdanki(playerid, params[], help)
                     sendErrorMessage(playerid, "Nie mo¿esz skuæ policjanta na s³u¿bie!");
                     return 1;
                 }
+                if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
+                {
+                    sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
+                    return 1;
+                }
                 if(PoziomPoszukiwania[giveplayerid] == 0)
                 {
                     sendTipMessage(playerid,"Chyba nie chcesz aresztowaæ niewinnego cz³owieka?");
