@@ -1897,6 +1897,12 @@ rightStr(source[], len)
 	strmid(retval, source, srclen - len, srclen, MAX_STRING2);
 	return retval;
 }
+
+IsAProductionServer()
+{
+	return dini_Exists("production.info");
+}
+
 IsAnInstructor(playerid)
 {
 	if(IsPlayerConnected(playerid))

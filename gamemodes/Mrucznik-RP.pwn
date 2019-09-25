@@ -182,9 +182,9 @@ main()
 public OnGameModeInit()
 {
 	//-------<[ Debug check ]>-------
-	#if DEBUG_MODE == 1
-	if(dini_Exists("production.info"))
+	if(IsAProductionServer())
 	{
+		#if DEBUG_MODE == 1
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
@@ -200,9 +200,9 @@ public OnGameModeInit()
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
 		SendRconCommand("exit");
 		return 0;
+		#endif
 	}
-	#endif
-	if(!dini_Exists("production.info")) //brak production.info == serwer developerski
+	else
 	{
 		DEVELOPMENT = true;
 	}
