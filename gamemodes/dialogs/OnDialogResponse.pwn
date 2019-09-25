@@ -16124,9 +16124,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 
-			ZabierzKase(playerid, DmvLicenseCost[listitem]); 
-			Sejf_Add(FRAC_GOV, (DmvLicenseCost[listitem]/2));
-			Sejf_Save(FRAC_GOV);
+			ZabierzKase(playerid, DmvLicenseCost[listitem]);
 		}
 	}
 	else if(dialogid == D_PERS_CHAT)
