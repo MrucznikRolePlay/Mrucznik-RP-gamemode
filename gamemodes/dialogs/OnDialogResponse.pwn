@@ -6098,7 +6098,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany.!");
+							SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany!");
 							ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
 							GUIExit[playerid] = 0;
 							SetPlayerVirtualWorld(playerid, 0);
@@ -6124,7 +6124,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany.!");
+							SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany!");
 							ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
 							GUIExit[playerid] = 0;
 							SetPlayerVirtualWorld(playerid, 0);
@@ -6174,7 +6174,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 			        else
 			        {
-			            SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany.!");
+			            SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany!");
 				        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
 				        GUIExit[playerid] = 0;
 				        SetPlayerVirtualWorld(playerid, 0);
@@ -6183,7 +6183,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany.!");
+			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany!");
 				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
 				    GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 0);

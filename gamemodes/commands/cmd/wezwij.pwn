@@ -60,7 +60,7 @@ YCMD:wezwij(playerid, params[], help)
 				}
 				SetAntySpamForPlayer(playerid, ASPAM_PRAWNIK);
 				new bool:jestPrawnik=false; 
-				format(string, sizeof(string), "%s potrzebuje pomocy prawnika w wiêzieniu! JedŸ tam i uwoolnij go za op³at¹!"); 
+				format(string, sizeof(string), "%s [ID: %d] potrzebuje pomocy prawnika w wiêzieniu! JedŸ tam i uwoolnij go za op³at¹!", GetNick(playerid), playerid); 
 				foreach(new checkPrawnik : Player)
 				{
 					if(PlayerInfo[checkPrawnik][pJob] == 2)
