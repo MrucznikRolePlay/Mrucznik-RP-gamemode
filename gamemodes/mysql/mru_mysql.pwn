@@ -151,7 +151,7 @@ MruMySQL_CreateAccount(playerid, pass[])
 {
 	if(!MYSQL_ON) return 0;
 	
-	new query[256];
+	new query[256+WHIRLPOOL_LEN+SALT_LENGTH];
     new password[WHIRLPOOL_LEN], salt[SALT_LENGTH];
 	randomString(salt, sizeof(salt));
 	WP_Hash(password, sizeof(password), sprintf("%s%s%s", ServerSecret, pass, salt));
