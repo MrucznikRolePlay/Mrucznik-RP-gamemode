@@ -87,7 +87,7 @@ SendDiscordFracMessage(fractionid, message[])
 }
 SendDiscordOrgMessage(orgid, message[])
 {
-	if(g_OrgChannel[orgid] == 0) return 1;
+	if(_:g_OrgChannel[orgid] == 0) return 1;
 
 	new dest[512];
 	utf8encode(dest, message);
