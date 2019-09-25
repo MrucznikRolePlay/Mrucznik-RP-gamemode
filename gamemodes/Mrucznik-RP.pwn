@@ -2207,6 +2207,10 @@ public OnPlayerSpawn(playerid)
 
 SetPlayerSpawn(playerid)
 {
+	if(PlayerInfo[playerid][pNewPassword] == 0)
+	{
+		ShowPlayerDialogEx(playerid, D_HASLO_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\nWymagana jest zmiana has³a do konta.\nIstnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ.", "Dalej", "Wyjdz"); 
+	}
 	SetPlayerSpawnPos(playerid);
 	SetPlayerSpawnSkin(playerid);
 	SetPlayerSpawnWeapon(playerid);
@@ -5887,10 +5891,6 @@ OnPlayerLogin(playerid, password[])
 		//Powitanie:
 		format(string, sizeof(string), "Witaj, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
-		if(PlayerInfo[playerid][pNewPassword] == 0)
-		{
-			ShowPlayerDialogEx(playerid, D_HASLO_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\nWymagana jest zmiana has³a do konta.\nIstnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ.", "Dalej", "Wyjdz"); 
-		}
 		format(string, sizeof(string), "Welcome to Mrucznik Role Play %s - SAMP-0.3DL-R1", VERSION);
 		SendClientMessage(playerid, COLOR_WHITE, string);
 		printf("%s has logged in.",nick);
