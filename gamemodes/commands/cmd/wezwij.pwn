@@ -47,11 +47,38 @@ YCMD:wezwij(playerid, params[], help)
 			{
 				SendClientMessage(playerid, COLOR_WHITE, "|__________________ Service Names __________________|");
 				SendClientMessage(playerid, COLOR_WHITE, "U¯YJ: /wezwij [nazwa]");
-		  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Taxi, Bus, Medyk, Mechanik, Heli");
+		  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Taxi, Bus, Medyk, Mechanik, Heli, Prawnik");
 				SendClientMessage(playerid, COLOR_WHITE, "|________________________________________________|");
 				return 1;
 			}
-		    if(strcmp(x_nr,"taxi",true) == 0)
+			if(strcmp(x_nr, "Prawnik", true) == 0)
+			{
+				if(CheckAntySpamForPlayer(playerid, ASPAM_PRAWNIK))
+				{
+					sendErrorMessage(playerid, "Odczekaj 30 sekund przed wezwaniem kolejnego prawnika!"); 
+					return 1;
+				}
+				SetAntySpamForPlayer(playerid, ASPAM_PRAWNIK);
+				new bool:jestPrawnik=false; 
+				format(string, sizeof(string), "%s potrzebuje pomocy prawnika w wiêzieniu! JedŸ tam i uwoolnij go za op³at¹!"); 
+				foreach(new checkPrawnik : Player)
+				{
+					if(PlayerInfo[checkPrawnik][pJob] == 2)
+					{
+						jestPrawnik=true; 
+						sendTipMessageEx(checkPrawnik, COLOR_P@, string); 
+					}
+				}
+				if(jestPrawnik)
+				{
+					sendTipMessage(playerid, "Wezwa³eœ prawnika, oczekuj na przyjazd!"); 
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie ma obecnie ¿adnych prawników w mieœcie! Odczekaj kilka minut"); 
+				}
+			}
+		    else if(strcmp(x_nr,"taxi",true) == 0)
 			{
 			    if(TaxiDrivers < 0)
 		        {

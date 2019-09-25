@@ -12150,6 +12150,17 @@ stock SetPlayerTW(playerid, valueTime, time, weather)
 	sendTipMessage(playerid, "Trwa inicjowanie pogody i czasu - chwilê to potrwa!"); 
 	return 1;
 }
+IsADevelopmentServer()
+{
+	if(fexist("developmentMode.txt"))
+	{
+		print("\n----------------------------------");
+		print("\n------<[Development Server]>------");
+		print("\n----------------------------------");
+		return true;
+	}
+	return false; 
+}
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {

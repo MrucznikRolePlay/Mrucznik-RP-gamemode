@@ -33,6 +33,7 @@
 #include "admin\admin.def"
 #include "adminduty\adminduty.def"
 #include "animacje\animacje.def"
+#include "antyspam\antyspam.def"
 #include "biznesy\biznesy.def"
 #include "bramy\bramy.def"
 #include "budki\budki.def"
@@ -63,6 +64,7 @@
 #include "admin\admin.hwn"
 #include "adminduty\adminduty.hwn"
 #include "animacje\animacje.hwn"
+#include "antyspam\antyspam.hwn"
 #include "biznesy\biznesy.hwn"
 #include "bramy\bramy.hwn"
 #include "budki\budki.hwn"
@@ -93,6 +95,7 @@
 #include "admin\admin.pwn"
 #include "adminduty\adminduty.pwn"
 #include "animacje\animacje.pwn"
+#include "antyspam\antyspam.pwn"
 #include "biznesy\biznesy.pwn"
 #include "bramy\bramy.pwn"
 #include "budki\budki.pwn"
@@ -119,6 +122,7 @@
 
 //-------<[ timers ]>-------
 #include "admin\admin_timers.pwn"
+#include "antyspam\antyspam_timers.pwn"
 #include "money\money_timers.pwn"
 #include "organizacje\organizacje_timers.pwn"
 #include "pojazdy\pojazdy_timers.pwn"
