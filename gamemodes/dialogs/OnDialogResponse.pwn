@@ -15950,194 +15950,165 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[124];
+
+			if(listitem < 0 || listitem > 9) return 1;
+
+			if(kaska[playerid] < DmvLicenseCost[listitem])
+			{
+				sendErrorMessage(playerid, sprintf("Ta us≥uga kosztuje %d$, a Ty tyle nie masz!", DmvLicenseCost[listitem]));
+				return 1;
+			}
+
 			switch(listitem)
 			{
 				case 0: //DowÛd osobisty
 				{
-					if(kaska[playerid] >= DmvLicenseCost[0])
-					{
-						PlayerInfo[playerid][pDowod] = 1;
-						ZabierzKase(playerid, DmvLicenseCost[0]); 
-						format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje dowÛd osobisty", GetNick(playerid)); 
-						ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Sejf_Add(FRAC_GOV, (DmvLicenseCost[0]/2));
-						Sejf_Save(FRAC_GOV); 
-					}
+					PlayerInfo[playerid][pDowod] = 1;
+					format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje dowÛd osobisty", GetNick(playerid)); 
+					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					Log(payLog, INFO, "%s kupi≥ dowÛd osobisty za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 1:
 				{
-					if(kaska[playerid] >= DmvLicenseCost[1])
+					if(PlayerInfo[playerid][pDowod] < 1)
 					{
-						if(PlayerInfo[playerid][pDowod] < 1)
-						{
-							sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
-							return 1;
-						}
-						if(PlayerInfo[playerid][pFishLic] == 1)
-						{
-							sendErrorMessage(playerid, "Masz juø kartÍ wÍdkarskπ!"); 
-							return 1;
-						}
-						PlayerInfo[playerid][pFishLic] = 1;
-						ZabierzKase(playerid, DmvLicenseCost[0]); 
-						format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje kartÍ wÍdkarskπ", GetNick(playerid)); 
-						ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Sejf_Add(FRAC_GOV, (DmvLicenseCost[1]/2));
-						Sejf_Save(FRAC_GOV); 
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
 					}
+					if(PlayerInfo[playerid][pFishLic] == 1)
+					{
+						sendErrorMessage(playerid, "Masz juø kartÍ wÍdkarskπ!"); 
+						return 1;
+					}
+
+					PlayerInfo[playerid][pFishLic] = 1;
+					format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje kartÍ wÍdkarskπ", GetNick(playerid)); 
+					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					Log(payLog, INFO, "%s kupi≥ kartÍ wÍdkarskπ za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 2:
 				{
-					if(kaska[playerid] >= DmvLicenseCost[2])
+					if(PlayerInfo[playerid][pDowod] < 1)
 					{
-						if(PlayerInfo[playerid][pDowod] < 1)
-						{
-							sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
-							return 1;
-						}
-						PlayerInfo[playerid][pGunLic] = 1;
-						ZabierzKase(playerid, DmvLicenseCost[2]); 
-						format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje pozwolenie na broÒ", GetNick(playerid)); 
-						ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Sejf_Add(FRAC_GOV, (DmvLicenseCost[2]/2));
-						Sejf_Save(FRAC_GOV); 
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
 					}
+
+					PlayerInfo[playerid][pGunLic] = 1;
+					format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje pozwolenie na broÒ", GetNick(playerid)); 
+					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					Log(payLog, INFO, "%s kupi≥ pozwolenie na broÒ za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 3:
 				{
-					if(kaska[playerid] >= DmvLicenseCost[3])
+					if(PlayerInfo[playerid][pDowod] < 1)
 					{
-						if(PlayerInfo[playerid][pDowod] < 1)
-						{
-							sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
-							return 1;
-						}
-						PlayerInfo[playerid][pBoatLic] = 1;
-						ZabierzKase(playerid, DmvLicenseCost[3]); 
-						format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje patent øeglarski", GetNick(playerid)); 
-						ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Sejf_Add(FRAC_GOV, (DmvLicenseCost[3]/2));
-						Sejf_Save(FRAC_GOV); 
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
 					}
+					
+					PlayerInfo[playerid][pBoatLic] = 1;
+					format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje patent øeglarski", GetNick(playerid)); 
+					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					Log(payLog, INFO, "%s kupi≥ patent øeglarski za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 4:
 				{
-					if(kaska[playerid] >= DmvLicenseCost[4])
+					if(PlayerInfo[playerid][pCarLic] > 1000)
 					{
-						if(PlayerInfo[playerid][pCarLic] > 1000)
-						{
-							new lTime = PlayerInfo[playerid][pCarLic]-gettime();
-							new hh, mm;
-							hh = floatround(floatround(floatdiv(lTime, 3600), floatround_floor)%24,floatround_floor);
-							mm = floatround(floatround(floatdiv(lTime, 60), floatround_floor)%60,floatround_floor);
-							format(string, 128, "Zosta≥o Ci odebrane prawo jazdy! Blokada mija za %d h i %d min", hh, mm);
-							SendClientMessage(playerid, COLOR_GRAD2, string);
-							return 1;
-						}
-						if(PlayerInfo[playerid][pCarLic] == 2)
-						{
-							sendErrorMessage(playerid, "Zaliczy≥eú juø egzamin teoretyczny!"); 
-							return 1;
-						}
-						if(PlayerInfo[playerid][pCarLic] == 1)
-						{
-					
-							sendErrorMessage(playerid, "Masz juø prawo do jazdy!"); 
-							return 1;
-						}
-						if(PlayerInfo[playerid][pDowod] < 1)
-						{
-							sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
-							return 1;
-						}
-						PlayerInfo[playerid][pPrawojazdypytania] = 0;
-						PlayerInfo[playerid][pPrawojazdydobreodp] = 0;
-						PlayerInfo[playerid][pPrawojazdyzleodp] = 0;
-						PlayerInfo[playerid][pMinalczasnazdpr] = 0;
-						PlayerInfo[playerid][pWtrakcietestprawa] = 1;
-						format(string, sizeof(string), "* UrzÍdnik wyciπga test oraz d≥ugopis i podaje %s", GetNick(playerid));
-						ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, D_PJTEST, DIALOG_STYLE_MSGBOX, "Prawo jazdy - Test", "{7FFF00}Witaj!\n{FFFFFF}Rozpoczynasz test na prawo jazdy.\nW teúcie {FF0000}NIE UØYWAJ{FFFFFF} polskich znakÛw!\n\nØyczymy powodzenia!", "Rozpocznij", "");
-						ZabierzKase(playerid, DmvLicenseCost[4]); 
-						Sejf_Add(FRAC_GOV, (DmvLicenseCost[4]/2));
-						Sejf_Save(FRAC_GOV); 
+						new lTime = PlayerInfo[playerid][pCarLic]-gettime();
+						new hh, mm;
+						hh = floatround(floatround(floatdiv(lTime, 3600), floatround_floor)%24,floatround_floor);
+						mm = floatround(floatround(floatdiv(lTime, 60), floatround_floor)%60,floatround_floor);
+						format(string, 128, "Zosta≥o Ci odebrane prawo jazdy! Blokada mija za %d h i %d min", hh, mm);
+						SendClientMessage(playerid, COLOR_GRAD2, string);
+						return 1;
 					}
+					if(PlayerInfo[playerid][pCarLic] == 2)
+					{
+						sendErrorMessage(playerid, "Zaliczy≥eú juø egzamin teoretyczny!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pCarLic] == 1)
+					{
+						sendErrorMessage(playerid, "Masz juø prawo do jazdy!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+
+					PlayerInfo[playerid][pPrawojazdypytania] = 0;
+					PlayerInfo[playerid][pPrawojazdydobreodp] = 0;
+					PlayerInfo[playerid][pPrawojazdyzleodp] = 0;
+					PlayerInfo[playerid][pMinalczasnazdpr] = 0;
+					PlayerInfo[playerid][pWtrakcietestprawa] = 1;
+					format(string, sizeof(string), "* UrzÍdnik wyciπga test oraz d≥ugopis i podaje %s", GetNick(playerid));
+					ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					ShowPlayerDialogEx(playerid, D_PJTEST, DIALOG_STYLE_MSGBOX, "Prawo jazdy - Test", "{7FFF00}Witaj!\n{FFFFFF}Rozpoczynasz test na prawo jazdy.\nW teúcie {FF0000}NIE UØYWAJ{FFFFFF} polskich znakÛw!\n\nØyczymy powodzenia!", "Rozpocznij", "");
 				}
 				case 5:
 				{
-					if(kaska[playerid] >= DmvLicenseCost[5])
+					if(PlayerInfo[playerid][pCarLic] != 2)
 					{
-						if(PlayerInfo[playerid][pCarLic] != 2)
-						{
-							sendErrorMessage(playerid, "Najpierw podejdü do egzaminu teoretycznego!"); 
-							return 1;
-						}
-						if(PlayerInfo[playerid][pDowod] < 1)
-						{
-							sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
-							return 1;
-						}
-						sendTipMessage(playerid, "Egzaminy praktyczne zostanπ dodane juø wkrÛtce!"); 
-						sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Gratulacje! Zda≥eú egzamin praktyczny!"); 
-						TakingLesson[playerid] = 0;
-			       		PlayerInfo[playerid][pCarLic] = 3;
-						ZabierzKase(playerid, DmvLicenseCost[5]); 
-						Sejf_Add(FRAC_GOV, (DmvLicenseCost[5]/2));
-						Sejf_Save(FRAC_GOV); 
+						sendErrorMessage(playerid, "Najpierw podejdü do egzaminu teoretycznego!"); 
+						return 1;
 					}
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+
+					sendTipMessage(playerid, "Egzaminy praktyczne zostanπ dodane juø wkrÛtce!"); 
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Gratulacje! Zda≥eú egzamin praktyczny!"); 
+					TakingLesson[playerid] = 0;
+					PlayerInfo[playerid][pCarLic] = 3;
 				}
 				case 6:
 				{
-					if(kaska[playerid] >= DmvLicenseCost[6])
+					if(PlayerInfo[playerid][pCarLic] < 3)
 					{
-						if(PlayerInfo[playerid][pCarLic] < 3)
-						{
-							sendErrorMessage(playerid, "Najpierw podejdü do egzaminu teoretycznego/praktycznego!"); 
-							return 1;
-						}
-						if(PlayerInfo[playerid][pCarLic] == 1)
-						{
-							sendErrorMessage(playerid, "Masz juø prawo jazdy!"); 
-							return 1;
-						}
-						if(PlayerInfo[playerid][pDowod] < 1)
-						{
-							sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
-							return 1;
-						}
-						sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra≥eú prawo do jazdy."); 
-			       		PlayerInfo[playerid][pCarLic] = 1;
-						ZabierzKase(playerid, DmvLicenseCost[6]); 
-						Sejf_Add(FRAC_GOV, (DmvLicenseCost[6]/2));
-						Sejf_Save(FRAC_GOV); 
-						Log(payLog, INFO, "%s kupi≥ licencje na pojazdy {Cost: %d}", GetPlayerLogName(playerid), DmvLicenseCost[6]);
+						sendErrorMessage(playerid, "Najpierw podejdü do egzaminu teoretycznego/praktycznego!"); 
+						return 1;
 					}
+					if(PlayerInfo[playerid][pCarLic] == 1)
+					{
+						sendErrorMessage(playerid, "Masz juø prawo jazdy!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+					PlayerInfo[playerid][pCarLic] = 1;
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra≥eú prawo do jazdy."); 
+					Log(payLog, INFO, "%s kupi≥ licencje na pojazdy za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 7:
 				{
-					if(kaska[playerid] >= DmvLicenseCost[7])
+					if(PlayerInfo[playerid][pFlyLic] == 1)
 					{
-						if(PlayerInfo[playerid][pFlyLic] == 1)
-						{
-							sendErrorMessage(playerid, "Masz juø licencje na latanie!"); 
-							return 1;
-						}
-						if(PlayerInfo[playerid][pDowod] < 1)
-						{
-							sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
-							return 1;
-						}
-						sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra≥eú licencje na latanie!"); 
-			       		PlayerInfo[playerid][pFlyLic] = 1;
-						ZabierzKase(playerid, DmvLicenseCost[7]); 
-						Sejf_Add(FRAC_GOV, (DmvLicenseCost[7]/2));
-						Sejf_Save(FRAC_GOV); 
-						Log(payLog, INFO, "%s kupi≥ licencje na latanie {Cost: %d}", GetPlayerLogName(playerid), DmvLicenseCost[7]);
+						sendErrorMessage(playerid, "Masz juø licencje na latanie!"); 
+						return 1;
 					}
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+
+					PlayerInfo[playerid][pFlyLic] = 1;
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra≥eú licencje na latanie!"); 
+					Log(payLog, INFO, "%s kupi≥ licencje na latanie za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 8:
 				{
 					sendTipMessage(playerid, "Ta opcja bÍdzie dostÍpna juø niebawem!"); 
+					return 1;
 				}
 				case 9:
 				{
@@ -16149,8 +16120,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.");
 					}
+					return 1;
 				}
 			}
+
+			ZabierzKase(playerid, DmvLicenseCost[listitem]); 
+			Sejf_Add(FRAC_GOV, (DmvLicenseCost[listitem]/2));
+			Sejf_Save(FRAC_GOV);
 		}
 	}
 	else if(dialogid == D_PERS_CHAT)
