@@ -1273,6 +1273,7 @@ enum pInfo
 	pUID,
 	pNick[24],
 	pKey[129],
+	pSalt[SALT_LENGTH],
 	pLevel,
 	pAdmin,
 	pDonateRank,
@@ -1449,8 +1450,7 @@ enum pInfo
 	pBusinessOwner,
 	pBusinessMember,
 	pLiderValue,
-	pUniform,
-	pNewPassword
+	pUniform
 };
 enum StringData
 {

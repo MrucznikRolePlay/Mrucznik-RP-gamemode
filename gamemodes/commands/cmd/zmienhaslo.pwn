@@ -37,7 +37,7 @@ YCMD:zmienhaslo(playerid, params[], help)
             sendErrorMessage(playerid, "Nie zalogowa³eœ siê!");
             return 1;
         }
-        new tmppass[64], password[WHIRLPOOL_LEN];
+        new tmppass[64];
 		if(sscanf(params, "s[64]", tmppass))
 		{
 			sendTipMessage(playerid, "U¿yj /zmienhaslo [nowehaslo]");
@@ -56,8 +56,7 @@ YCMD:zmienhaslo(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_PANICRED, tmppass);
 
 		Log(commandLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
-		WP_Hash(password, sizeof(password), tmppass);
-		MruMySQL_ChangePassword(GetNick(playerid), password);
+		MruMySQL_ChangePassword(GetNick(playerid), tmppass);
 	}
 	return 1;
 }

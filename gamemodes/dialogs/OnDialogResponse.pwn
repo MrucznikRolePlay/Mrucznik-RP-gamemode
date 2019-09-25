@@ -6019,7 +6019,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 			    if(IsPlayerConnected(playerid))
 			    {
-			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
+			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= MAX_PASSWORD_LENGTH)
 			        {
 						OnPlayerLogin(playerid, inputtext);
 					}
@@ -14280,16 +14280,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				sendErrorMessage(playerid, "Has³o nie mo¿e zawieraæ znaku procenta!");
 				return 1;
 			}
-			new password[WHIRLPOOL_LEN];
 			sendErrorMessage(playerid, "Twoje has³o do konta w grze zosta³o zmienione!!!!");
 			sendErrorMessage(playerid, "Jeœli nie jesteœ pewien  nowego has³a - nie wychodŸ z serwera i zmieñ je za pomoc¹ /zmienhaslo");
 			sendErrorMessage(playerid, "Nowe has³o:");
 			SendClientMessage(playerid, COLOR_PANICRED, inputtext);
 
 			Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
-			WP_Hash(password, sizeof(password), inputtext);
-			MruMySQL_ChangePassword(GetNick(playerid), password);
-			PlayerInfo[playerid][pNewPassword] = 1;
+			MruMySQL_ChangePassword(GetNick(playerid), inputtext);
 		}
 		return 1;
 	}

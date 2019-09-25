@@ -44,6 +44,11 @@
     ((newkeys & (%0)) == (%0))
 
 
+//salt
+#define MAX_SERVER_SECRET_LENGTH 16
+#define MAX_PASSWORD_LENGTH 64
+#define SALT_LENGTH 16
+
 //Œwiat anty czita ¿eby da³ porz¹dny desync graczowi aby ju¿ nic nie zjeba³ :D
 #define AC_WORLD	50005
 

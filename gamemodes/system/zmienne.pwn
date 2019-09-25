@@ -1,6 +1,8 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
 
+new ServerSecret[MAX_SERVER_SECRET_LENGTH];
+
 new prawoJazdyLosowanie[9];
 
 new PickupSklep01;//ZIP
