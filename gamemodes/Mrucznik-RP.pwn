@@ -2076,8 +2076,8 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			SetPVarInt(playerid, "ammohackdetect", 1);
 			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 16 (Ammo hack (add)).", GetNick(playerid), playerid);
 			SendMessageToAdmin(string, 0x9ACD32AA);
-			format(string, sizeof(string), "[Nex-AC] AC ammo: %d, ammo: %d, weaponid: %d", ACInfo[playerid][acAmmo][ac_s], ac_a, ac_w);
-			SendMessageToAdmin(string, 0x9ACD32AA);
+			//format(string, sizeof(string), "[Nex-AC] AC ammo: %d, ammo: %d, weaponid: %d", ACInfo[playerid][acAmmo][ac_s], ac_a, ac_w);
+			//SendMessageToAdmin(string, 0x9ACD32AA);
 			
 		}
 		if(code == 17)//ammohack
@@ -2085,8 +2085,8 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			SetPVarInt(playerid, "ammohackdetect", 1);
 			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 17 (Ammo hack (infinite)).", GetNick(playerid), playerid);
 			SendMessageToAdmin(string, 0x9ACD32AA);
-			format(string, sizeof(string), "[Nex-AC] Weaponid: %d, AC ammo: %d, ammo: %d", weaponid, ACInfo[playerid][acAmmo][ac_s], ac_t);
-			SendMessageToAdmin(string, 0x9ACD32AA);
+			//format(string, sizeof(string), "[Nex-AC] Weaponid: %d, AC ammo: %d, ammo: %d", weaponid, ACInfo[playerid][acAmmo][ac_s], ac_t);
+			//SendMessageToAdmin(string, 0x9ACD32AA);
 
 		}
 		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNick(playerid), playerid, plrIP, code);
