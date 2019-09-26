@@ -2071,13 +2071,30 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1;
 		}
 
+		if(code == 16 || code == 17)//ammohack
+		{
+			SetPVarInt(playerid, "ammohackdetect", 1);
+			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 16 (Ammo hack (add)).", GetNick(playerid), playerid);
+			SendMessageToAdmin(string, 0x9ACD32AA);
+			format(string, sizeof(string), "[Nex-AC] AC ammo: %d, ammo: %d, weaponid: %d", ACInfo[playerid][acAmmo][ac_s], ac_a, ac_w);
+			SendMessageToAdmin(string, 0x9ACD32AA);
+			
+		}
+		if(code == 17)//ammohack
+		{
+			SetPVarInt(playerid, "ammohackdetect", 1);
+			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 17 (Ammo hack (infinite)).", GetNick(playerid), playerid);
+			SendMessageToAdmin(string, 0x9ACD32AA);
+			format(string, sizeof(string), "[Nex-AC] Weaponid: %d, AC ammo: %d, ammo: %d", weaponid, ACInfo[playerid][acAmmo][ac_s], ac_t);
+			SendMessageToAdmin(string, 0x9ACD32AA);
+
+		}
 		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNick(playerid), playerid, plrIP, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
         Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
-		
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
 			Kick(playerid);
