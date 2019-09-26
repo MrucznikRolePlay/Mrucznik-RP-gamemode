@@ -2071,7 +2071,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1;
 		}
 
-		if(code == 16 || code == 17)//ammohack
+		if(code == 16)//ammohack
 		{
 			SetPVarInt(playerid, "ammohackdetect", 1);
 			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 16 (Ammo hack (add)).", GetNick(playerid), playerid);
