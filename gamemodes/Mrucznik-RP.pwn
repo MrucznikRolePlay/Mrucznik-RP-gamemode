@@ -5961,6 +5961,7 @@ PasswordVerify(playerid, password[])
 	
 	//hash password
 	WP_Hash(hashedPassword, sizeof(hashedPassword), sprintf("%s%s%s", ServerSecret, password, salt));
+	Log(serverLog, DEBUG, "%s | %s", accountPass, hashedPassword);
 
 	// veryfi password
 	if(strcmp(accountPass, hashedPassword, true ) == 0)
