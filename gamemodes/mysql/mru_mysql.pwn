@@ -928,8 +928,8 @@ MruMySQL_ReturnPassword(nick[], key[], salt[])
 	
 	if(mysql_retrieve_row())
 	{
-		mysql_fetch_field_row(key, "Key");
-		mysql_fetch_field_row(salt, "Salt");
+        mysql_fetch_row_format(string, "|");
+		sscanf(lStr, "p<|>s["#WHIRLPOOL_LEN"]s["SALT_LENGTH"]", key, salt);
 	}
 	
 	mysql_free_result();
