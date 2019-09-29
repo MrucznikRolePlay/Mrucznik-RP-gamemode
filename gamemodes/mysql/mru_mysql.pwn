@@ -933,8 +933,8 @@ MruMySQL_ReturnPassword(nick[], key[], salt[])
 		sscanf(string, "p<|>s[129]s[" #SALT_LENGTH "]", keybuf, saltbuf);
 		keybuf[0] = '\0';
 		saltbuf[0] = '\0';
-		strcat(key, keybuf);
-		strcat(salt, saltbuf);
+		strcat(key, keybuf, WHIRLPOOL_LEN);
+		strcat(salt, saltbuf, SALT_LENGTH);
 	}
 	
 	mysql_free_result();
