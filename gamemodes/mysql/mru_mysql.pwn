@@ -918,7 +918,8 @@ MruMySQL_DoesAccountExist(nick[])
 
 MruMySQL_ReturnPassword(nick[], key[], salt[])
 {
-	new string[128+WHIRLPOOL_LEN+SALT_LENGTH];
+	new string[128];
+	new result[8+WHIRLPOOL_LEN+SALT_LENGTH];
 	
 	mysql_real_escape_string(nick, nick);
 	format(string, sizeof(string), "SELECT `Key`, `Salt` FROM `mru_konta` WHERE `Nick` = '%s'", nick);
@@ -928,7 +929,8 @@ MruMySQL_ReturnPassword(nick[], key[], salt[])
 	
 	if(mysql_retrieve_row())
 	{
-        mysql_fetch_row_format(string, "|");
+        mysql_fetch_row_format(result, "|");
+		Log(serverLog, DEBUG, "res: %s", result);
 		new keybuf[WHIRLPOOL_LEN], saltbuf[SALT_LENGTH];
 		sscanf(string, "p<|>s[129]s[" #SALT_LENGTH "]", keybuf, saltbuf);
 		keybuf[0] = '\0';
