@@ -5882,15 +5882,17 @@ PasswordConversion(playerid, password[])
 		{
 			//convert
 			MruMySQL_ChangePassword(GetNick(playerid), password);
-			Log(serverLog, WARNING, "Konwersja hasla konta %s z MD5 na hash whirlpool + sól", GetNick(playerid));
+			Log(serverLog, DEBUG, "Converting password for account %s from MD5 to hash whirlpool + salt", GetNick(playerid));
 
 			if(VerifyPlayerIp(playerid))
 			{
+				Log(serverLog, DEBUG, "Password change required for %s (matched ip)", GetNick(playerid));
 				DialogChangePasswordRequired(playerid); //or block
 			}
 			else
 			{
 				//blokada konta
+				Log(serverLog, WARNING, "Account %s has been blocked because of mismatching ip address", GetNick(playerid));
 				DialogBlockedAccount(playerid);
 				KickEx(playerid);
 			}
@@ -5907,10 +5909,11 @@ PasswordConversion(playerid, password[])
 		{
 			//convert
 			MruMySQL_ChangePassword(GetNick(playerid), password);
-			Log(serverLog, WARNING, "Konwersja hasla konta %s z whirlpool na hash whirlpool + sól", GetNick(playerid));
+			Log(serverLog, DEBUG, "Converting password for account %s from whirlpool to hash whirlpool + salt", GetNick(playerid));
 
 			if(VerifyPlayerIp(playerid))
 			{
+				Log(serverLog, DEBUG, "Password change required for %s (matched ip)", GetNick(playerid));
 				DialogChangePasswordRequired(playerid);
 			}
 			else
@@ -5918,11 +5921,13 @@ PasswordConversion(playerid, password[])
 				//check last login
 				if(VeryfiLastLogin(playerid))
 				{
+					Log(serverLog, DEBUG, "Password change required for %s (matched last logon)", GetNick(playerid));
 					DialogChangePasswordRequired(playerid);
 				}
 				else
 				{
 					//blokada konta
+					Log(serverLog, WARNING, "Account %s has been blocked because of mismatching ip address and last logon date", GetNick(playerid));
 					DialogBlockedAccount(playerid);
 					KickEx(playerid);
 				}
@@ -5941,12 +5946,15 @@ PasswordVerify(playerid, password[])
 
 	if(strlen(salt) < 2) //not converted account - do conversion
 	{
+		Log(serverLog, DEBUG, "Converting password for %s", GetNick(playerid));
 		if(PasswordConversion(playerid, password))
 		{
+			Log(serverLog, DEBUG, "Conversion password for %s done.", GetNick(playerid));
 			MruMySQL_ReturnPassword(GetNick(playerid), accountPass, salt);
 		}
 		else //wrong password
 		{
+			Log(serverLog, DEBUG, "Conversion password for %s canceled - wrong password.", GetNick(playerid));
 			return false;
 		}
 	}
