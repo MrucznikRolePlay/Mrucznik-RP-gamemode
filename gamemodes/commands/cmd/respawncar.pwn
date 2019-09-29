@@ -48,7 +48,7 @@ YCMD:respawncar(playerid, params[], help)
     else
     {
         Log(adminLog, INFO, "Admin %s respawnowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(v));
-        SetVehicleToRespawn(v);
+        RespawnVehicleEx(v);
 	    if(Car_GetOwnerType(v) == CAR_OWNER_PLAYER)
 	    {
             Car_Unspawn(v);

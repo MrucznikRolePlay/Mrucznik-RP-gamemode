@@ -182,9 +182,10 @@ main()
 public OnGameModeInit()
 {
 	//-------<[ Debug check ]>-------
-	#if DEBUG_MODE == 1
-	if(dini_Exists("production.info"))
+	if(IsAProductionServer())
 	{
+		strcat(ServerSecret, dini_Get("production.info", "secret"));
+		#if DEBUG_MODE == 1
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
@@ -200,11 +201,12 @@ public OnGameModeInit()
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
 		SendRconCommand("exit");
 		return 0;
+		#endif
 	}
-	#endif
-	if(!dini_Exists("production.info")) //brak production.info == serwer developerski
+	else
 	{
 		DEVELOPMENT = true;
+		strcat(ServerSecret, "0tw954jtw598t9d");
 	}
 
 	//-------<[ Anty DeAMX ]>-------
@@ -239,6 +241,9 @@ public OnGameModeInit()
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
 	MruMySQL_IloscLiderowLoad();
+
+	
+	DefaultItems_LicenseCost();
 
 	//-------<[ 0.3DL ]>-------
 	LoadDLSkins();
@@ -511,7 +516,6 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
 	//return 0; = strza³ nie zabiera hp
-
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
     {
     	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
@@ -654,7 +658,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
             if(GetPVarInt(playerid, "skin-choosen") != 0)
             {
                 SetPlayerSkinEx(playerid, GetPVarInt(playerid, "skin-choosen"));
-                PlayerInfo[playerid][pSkin] = GetPVarInt(playerid, "skin-choosen");
+                PlayerInfo[playerid][pUniform] = GetPVarInt(playerid, "skin-choosen");
             }
         }
         else if(clickedid == SkinSelectionDenied)//anuluj
@@ -670,9 +674,8 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
             CancelSelectTextDraw(playerid);
             DestroySkinSelection(playerid);
             TogglePlayerControllable(playerid, 1);
-
-            PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pModel];
-            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+            PlayerInfo[playerid][pUniform] = PlayerInfo[playerid][pSkin];
+            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
         }
     }
     //Strefy
@@ -2022,8 +2025,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 					SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
 					if(PoziomPoszukiwania[killerid] >= 10)
 					{
-						sendTipMessageEx(playerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
-						sendTipMessage(playerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
+						sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
+						sendTipMessage(killerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
 					}
 				}
 			}
@@ -2328,6 +2331,7 @@ SetPlayerSpawnPos(playerid)
 		    {
 		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
+				SetPlayerVirtualWorld(playerid, 0); 
 				if(GetPlayerFraction(playerid) > 0) //Spawn Frakcji
 				{
 				    switch(GetPlayerFraction(playerid))
@@ -2639,7 +2643,12 @@ SetPlayerSpawnWeapon(playerid)
 
 SetPlayerSpawnSkin(playerid)
 {
-	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+	if(PlayerInfo[playerid][pSkin] > 20000 && PlayerInfo[playerid][pSkin] < 20099)
+	{
+		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
+		PlayerInfo[playerid][pSkin] = 136;
+	}
+	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
   /*  if(PlayerInfo[playerid][pChar] > 0)
 		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
 
@@ -4316,7 +4325,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			GameTextForPlayer(playerid, "~y~Sprzedales pojazd", 2500, 1);
 			CP[playerid] = 0;
 		    DisablePlayerCheckpoint(playerid);
-		    SetVehicleToRespawn(GetPlayerVehicleID(playerid));
+		    RespawnVehicleEx(GetPlayerVehicleID(playerid));
 		}
 		else
 		{
@@ -5349,10 +5358,10 @@ public OnPlayerRequestSpawn(playerid)
 }
 public OnPlayerRequestClass(playerid, classid)
 {
-	if(PlayerInfo[playerid][pModel] == 0)
-		PlayerInfo[playerid][pModel] = 252;
+	if(PlayerInfo[playerid][pSkin] == 0)
+		PlayerInfo[playerid][pSkin] = 252;
 
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 
 	if(gPlayerLogged[playerid] != 1)
 	{
@@ -5600,6 +5609,15 @@ PayDay()
 	CountDown();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
+	if(DmvActorStatus && shifthour < 16 || shifthour > 22)
+	{
+		DestroyActorsInDMV(INVALID_PLAYER_ID); 
+	}
+	else
+	{
+		CreateActorsInDMV(INVALID_PLAYER_ID);
+	}
+
 	if(shifthour == 3)
 	{
 	    SendClientMessageToAll(COLOR_YELLOW, "Trwa aktualizacja systemu domów, czas na laga");
@@ -5782,30 +5800,186 @@ OnPlayerRegister(playerid, password[])
 	return 1;
 }
 
-OnPlayerLogin(playerid, password[])
+stock randomString(strDest[], strLen) // credits go to: RyDeR`
 {
-    new nick[MAX_PLAYER_NAME], string[256], accountPass[WHIRLPOOL_LEN], hashedPassword[WHIRLPOOL_LEN];
-	GetPlayerName(playerid, nick, sizeof(nick));
-    format(accountPass, sizeof(accountPass), "%s", MruMySQL_ReturnPassword(nick));
+    while(strLen--)
+        strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
+}
 
-	WP_Hash(hashedPassword, sizeof(hashedPassword), password);
-	if(strlen(accountPass) == 32)
+DialogBlockedAccount(playerid)
+{
+	ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\nNiestety, ale Twoje konto zosta³o zablokowane do weryfikacji,\n poniewa¿ istnieje ryzyko, ¿e zosta³o zhackowane.\nNapisz stratê na forum, a jeœli u¿ywa³eœ takiego samego has³a w innym miejscu - zalecamy jego zmianê.", "Dalej", "Wyjdz"); 
+}
+
+DialogChangePasswordRequired(playerid)
+{
+	ShowPlayerDialogEx(playerid, D_HASLO_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\nWymagana jest zmiana has³a do konta.\nIstnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ.", "Dalej", "Wyjdz"); 
+}
+
+VerifyPlayerIp(playerid)
+{
+	new ip[16], query[256];
+	GetPlayerIp(playerid, ip, sizeof(ip));
+
+	format(query, sizeof(query), "SELECT DISTINCT t.ip FROM ( SELECT ip, time FROM mru_konta k JOIN mru_logowania l ON k.UID=l.PID WHERE Nick='%s' ORDER BY l.time DESC) t LIMIT 25 ", GetNick(playerid));
+	mysql_query(query);
+	mysql_store_result();
+    if(mysql_num_rows())
+    {
+        while(mysql_fetch_row_format(query, "|"))
+        {
+            new lastIp[MAX_PLAYER_NAME];
+            sscanf(query, "p<|>s[16]", lastIp);
+
+			if(strcmp(ip, MD5_Hash(lastIp), true ) == 0)
+			{
+    			mysql_free_result();
+				Log(serverLog, INFO, "Nie wymagana zmiana has³a dla gracza %s (zgodnoœæ ip %s)", GetNick(playerid), ip);
+				return true;
+			}
+			else
+			{
+				new host1, host2, lastHost1, lastHost2;
+				sscanf(ip, "p<.>dd", host1, host2);
+				sscanf(lastIp, "p<.>dd", lastHost1, lastHost2);
+				if(host1 == lastHost1 && host2 == lastHost2)
+				{
+					mysql_free_result();
+					Log(serverLog, INFO, "Nie wymagana zmiana has³a dla gracza %s (zgodnoœæ hosta ip %s)", GetNick(playerid), ip);
+					return true;
+				}
+			}
+        }
+    }
+    mysql_free_result();
+	return false;
+}
+
+VeryfiLastLogin(playerid)
+{
+	new query[128];
+	format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s'", GetNick(playerid));
+	mysql_query(query);
+	mysql_store_result();
+	if(mysql_num_rows()) //ostatnie logowanie po 15
+	{
+		mysql_free_result();
+		return true;
+	}
+	else
+	{
+		mysql_free_result();
+		return false;
+	}
+}
+
+PasswordConversion(playerid, password[])
+{
+	if(strlen(password) == 32)
 	{
 		//konwersja hase³ MD5 na Whirlpool
-		if(strcmp(accountPass, MD5_Hash(password), true ) == 0)
+		if(strcmp(password, MD5_Hash(password), true ) == 0)
 		{
-			MruMySQL_ConvertPassword(playerid, hashedPassword);
-			format(accountPass, sizeof(accountPass), hashedPassword);
-			printf("Konwersja hasla konta %s na hash whirlpool", nick);
+			//convert
+			MruMySQL_ChangePassword(GetNick(playerid), password);
+			Log(serverLog, DEBUG, "Converting password for account %s from MD5 to hash whirlpool + salt", GetNick(playerid));
+
+			if(VerifyPlayerIp(playerid))
+			{
+				Log(serverLog, DEBUG, "Password change required for %s (matched ip)", GetNick(playerid));
+				DialogChangePasswordRequired(playerid); //or block
+			}
+			else
+			{
+				//blokada konta
+				Log(serverLog, WARNING, "Account %s has been blocked because of mismatching ip address", GetNick(playerid));
+				DialogBlockedAccount(playerid);
+				KickEx(playerid);
+			}
+
+			return true;
 		}
 	}
+	else
+	{
+		//konwersja hase³ Whirlpool na Whirlpool + salt
+		new hashedPassword[WHIRLPOOL_LEN];
+		WP_Hash(hashedPassword, sizeof(hashedPassword), password);
+		if(strcmp(password, hashedPassword, true ) == 0)
+		{
+			//convert
+			MruMySQL_ChangePassword(GetNick(playerid), password);
+			Log(serverLog, DEBUG, "Converting password for account %s from whirlpool to hash whirlpool + salt", GetNick(playerid));
 
+			if(VerifyPlayerIp(playerid))
+			{
+				Log(serverLog, DEBUG, "Password change required for %s (matched ip)", GetNick(playerid));
+				DialogChangePasswordRequired(playerid);
+			}
+			else
+			{
+				//check last login
+				if(VeryfiLastLogin(playerid))
+				{
+					Log(serverLog, DEBUG, "Password change required for %s (matched last logon)", GetNick(playerid));
+					DialogChangePasswordRequired(playerid);
+				}
+				else
+				{
+					//blokada konta
+					Log(serverLog, WARNING, "Account %s has been blocked because of mismatching ip address and last logon date", GetNick(playerid));
+					DialogBlockedAccount(playerid);
+					KickEx(playerid);
+				}
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+PasswordVerify(playerid, password[])
+{
+	new accountPass[WHIRLPOOL_LEN], salt[SALT_LENGTH];
+	new hashedPassword[WHIRLPOOL_LEN];
+	MruMySQL_ReturnPassword(GetNick(playerid), accountPass, salt);
+
+	if(strlen(salt) < 2) //not converted account - do conversion
+	{
+		Log(serverLog, DEBUG, "Converting password for %s", GetNick(playerid));
+		if(PasswordConversion(playerid, password))
+		{
+			Log(serverLog, DEBUG, "Conversion password for %s done.", GetNick(playerid));
+			MruMySQL_ReturnPassword(GetNick(playerid), accountPass, salt);
+		}
+		else //wrong password
+		{
+			Log(serverLog, DEBUG, "Conversion password for %s canceled - wrong password.", GetNick(playerid));
+			return false;
+		}
+	}
+	
+	//hash password
+	WP_Hash(hashedPassword, sizeof(hashedPassword), sprintf("%s%s%s", ServerSecret, password, salt));
+	Log(serverLog, DEBUG, "%s | %s", accountPass, hashedPassword);
+
+	// veryfi password
 	if(strcmp(accountPass, hashedPassword, true ) == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+OnPlayerLogin(playerid, password[])
+{
+    new nick[MAX_PLAYER_NAME], string[256];
+	GetPlayerName(playerid, nick, sizeof(nick));
+    
+	if(!isnull(password) && PasswordVerify(playerid, password))
 	{//poprawne has³o
         MruMySQL_KonwertujBana(playerid);
         if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
-
-        format(PlayerInfo[playerid][pKey], 129, hashedPassword);
 
 		//----------------------------
 		//£adowanie konta i zmiennych:
@@ -5911,7 +6085,9 @@ OnPlayerLogin(playerid, password[])
 		PlayerInfo[playerid][pInt] = 0;
 		PlayerInfo[playerid][pLocal] = 255;
 		PlayerInfo[playerid][pTeam] = 3;
-		PlayerInfo[playerid][pModel] = 136;
+		PlayerInfo[playerid][pSkin] = 136;
+		PlayerInfo[playerid][pUniform] = 0;
+		PlayerInfo[playerid][pJobSkin] = 0; 
 		PlayerInfo[playerid][pPnumber] = 0;
 		PlayerInfo[playerid][pDom] = 0;
 		PlayerInfo[playerid][pPbiskey] = 255;
@@ -6066,14 +6242,14 @@ OnPlayerLogin(playerid, password[])
         }
         else
         {
-            SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+            SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
             TogglePlayerSpectating(playerid, false);
 			SetPlayerSpawn(playerid);
         }
 	}
     else
     {
-        SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+        SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
 		PlayerInfo[playerid][pMuted] = 1;
 		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");
@@ -6581,6 +6757,20 @@ public OnPlayerText(playerid, text[])
 	new tmp[256];
 	new string[256];
 	new giveplayerid;
+	if(text[0] == '@')
+	{
+		if(strlen(text) > 31)
+		{
+			sendTipMessage(playerid, "Nieprawid³owa d³ugoœæ znaków animacji"); 
+			return 0;
+		}
+        new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, text);
+        if(lVal != 1)
+		{
+			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
+		} 
+		return 1;
+	}
 	if(PlayerInfo[playerid][pMuted] == 1)
 	{
 		sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ jesteœ uciszony");

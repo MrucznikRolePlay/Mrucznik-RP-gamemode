@@ -44,6 +44,11 @@
     ((newkeys & (%0)) == (%0))
 
 
+//salt
+#define MAX_SERVER_SECRET_LENGTH 16
+#define MAX_PASSWORD_LENGTH 64
+#define SALT_LENGTH 16
+
 //Œwiat anty czita ¿eby da³ porz¹dny desync graczowi aby ju¿ nic nie zjeba³ :D
 #define AC_WORLD	50005
 
@@ -389,6 +394,10 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define DIALOG_PATROL_NAME      5237
 #define DIALOG_PATROL_PARTNER   5238
 #define D_PRZEBIERZ_FDU         5241
+
+
+#define D_HASLO_INFO 5245
+#define D_HASLO_ZMIEN 5246
 
 #define D_TRANSPORT         5439
 #define D_TRANSPORT_FAST    5440

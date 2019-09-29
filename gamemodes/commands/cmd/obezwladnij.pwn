@@ -55,7 +55,7 @@ YCMD:obezwladnij(playerid, params[], help)
 		}
 		if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
 		{
-			sendErrorMessage(playerid, "Ten gracz jest za daleko.");
+			sendErrorMessage(playerid, "Jesteœ zbyt daleko");
 			return 1;
 		}
 		if(GetPVarInt(giveplayerid, "obezwladniony") > gettime())

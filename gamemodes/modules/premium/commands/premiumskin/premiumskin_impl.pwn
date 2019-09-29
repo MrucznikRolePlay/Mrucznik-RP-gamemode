@@ -38,7 +38,7 @@ command_premiumskin_Impl(playerid, skin)
 		return sendErrorMessage(playerid, "Nie mo¿esz przebraæ siê bêd¹c w pojeŸdzie.");
 	}
 	
-	PlayerInfo[playerid][pModel] = skin;
+	PlayerInfo[playerid][pSkin] = skin;
 
 	SetPlayerSkinEx(playerid, skin);
 
