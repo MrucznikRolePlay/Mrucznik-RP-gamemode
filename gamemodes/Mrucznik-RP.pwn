@@ -5964,7 +5964,7 @@ PasswordVerify(playerid, password[])
 	Log(serverLog, DEBUG, "%s | %s", accountPass, hashedPassword);
 
 	// veryfi password
-	if(strcmp(accountPass, hashedPassword, true ) == 0)
+	if(!isnull(accountPass) && strcmp(accountPass, hashedPassword, true ) == 0)
 	{
 		return true;
 	}
