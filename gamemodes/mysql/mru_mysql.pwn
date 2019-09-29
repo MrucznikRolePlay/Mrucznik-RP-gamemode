@@ -929,7 +929,12 @@ MruMySQL_ReturnPassword(nick[], key[], salt[])
 	if(mysql_retrieve_row())
 	{
         mysql_fetch_row_format(string, "|");
-		sscanf(string, "p<|>s[129]s[" #SALT_LENGTH "]", key, salt);
+		new keybuf[WHIRLPOOL_LEN], saltbuf[SALT_LENGTH];
+		sscanf(string, "p<|>s[129]s[" #SALT_LENGTH "]", keybuf, saltbuf);
+		keybuf[0] = '\0';
+		saltbuf[0] = '\0';
+		strcat(key, keybuf);
+		strcat(salt, saltbuf);
 	}
 	
 	mysql_free_result();
