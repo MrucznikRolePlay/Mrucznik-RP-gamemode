@@ -155,6 +155,7 @@ MruMySQL_CreateAccount(playerid, password[])
     new hash[WHIRLPOOL_LEN], salt[SALT_LENGTH];
 	randomString(salt, sizeof(salt));
 	WP_Hash(hash, sizeof(hash), sprintf("%s%s%s", ServerSecret, password, salt));
+	Log(serverLog, DEBUG, "p: %s | hp: %s | salt: %s | secret: %s", sprintf("%s%s%s", ServerSecret, password, salt), hash, salt, ServerSecret);
 	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`, `Salt`) VALUES ('%s', '%s', '%s')", GetNick(playerid), hash, salt);
 	mysql_query(query);
 	return 1;
