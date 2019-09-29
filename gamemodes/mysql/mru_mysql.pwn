@@ -916,7 +916,7 @@ MruMySQL_DoesAccountExist(nick[])
 	return 0;
 }
 
-MruMySQL_ReturnPassword(nick[], key[WHIRLPOOL_LEN], salt[SALT_LENGTH])
+MruMySQL_ReturnPassword(nick[], key[], salt[])
 {
 	new string[128+WHIRLPOOL_LEN+SALT_LENGTH];
 	
