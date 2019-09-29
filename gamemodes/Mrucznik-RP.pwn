@@ -5943,6 +5943,7 @@ PasswordVerify(playerid, password[])
 	new accountPass[WHIRLPOOL_LEN], salt[SALT_LENGTH];
 	new hashedPassword[WHIRLPOOL_LEN];
 	MruMySQL_ReturnPassword(GetNick(playerid), accountPass, salt);
+	Log(serverLog, DEBUG, "%s | %s", accountPass, salt);
 
 	if(strlen(salt) < 2) //not converted account - do conversion
 	{
@@ -5961,7 +5962,6 @@ PasswordVerify(playerid, password[])
 	
 	//hash password
 	WP_Hash(hashedPassword, sizeof(hashedPassword), sprintf("%s%s%s", ServerSecret, password, salt));
-	Log(serverLog, DEBUG, "%s | %s", accountPass, hashedPassword);
 
 	// veryfi password
 	if(!isnull(accountPass) && strcmp(accountPass, hashedPassword, true ) == 0)
