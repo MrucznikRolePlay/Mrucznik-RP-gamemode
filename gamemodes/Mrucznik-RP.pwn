@@ -185,6 +185,9 @@ public OnGameModeInit()
 	if(IsAProductionServer())
 	{
 		strcat(ServerSecret, dini_Get("production.info", "secret"));
+		if(isnull(ServerSecret)) {
+			strcat(ServerSecret, "0vw954jtw598t9d");
+		}
 		#if DEBUG_MODE == 1
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
 		print("Wersja debug na produkcji!! Wylaczam serwer.");
@@ -5874,12 +5877,12 @@ VeryfiLastLogin(playerid)
 	}
 }
 
-PasswordConversion(playerid, password[])
+PasswordConversion(playerid, accountPass[], password[])
 {
 	if(strlen(password) == 32)
 	{
 		//konwersja hase³ MD5 na Whirlpool
-		if(strcmp(password, MD5_Hash(password), true ) == 0)
+		if(strcmp(accountPass, MD5_Hash(password), true ) == 0)
 		{
 			//convert
 			MruMySQL_ChangePassword(GetNick(playerid), password);
@@ -5906,7 +5909,7 @@ PasswordConversion(playerid, password[])
 		//konwersja hase³ Whirlpool na Whirlpool + salt
 		new hashedPassword[WHIRLPOOL_LEN];
 		WP_Hash(hashedPassword, sizeof(hashedPassword), password);
-		if(strcmp(password, hashedPassword, true ) == 0)
+		if(strcmp(accountPass, hashedPassword, true ) == 0)
 		{
 			//convert
 			MruMySQL_ChangePassword(GetNick(playerid), password);
@@ -5948,7 +5951,7 @@ PasswordVerify(playerid, password[])
 	if(strlen(salt) < 2) //not converted account - do conversion
 	{
 		Log(serverLog, DEBUG, "Converting password for %s", GetNick(playerid));
-		if(PasswordConversion(playerid, password))
+		if(PasswordConversion(playerid, accountPass, password))
 		{
 			Log(serverLog, DEBUG, "Conversion password for %s done.", GetNick(playerid));
 			MruMySQL_ReturnPassword(GetNick(playerid), accountPass, salt);
