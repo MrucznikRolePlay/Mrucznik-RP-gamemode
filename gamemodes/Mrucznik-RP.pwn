@@ -5962,7 +5962,6 @@ PasswordVerify(playerid, password[])
 	
 	//hash password
 	WP_Hash(hashedPassword, sizeof(hashedPassword), sprintf("%s%s%s", ServerSecret, password, salt));
-	Log(serverLog, DEBUG, "ap: %s | hp: %s | salt: %s | secret: %s", accountPass, hashedPassword, salt, ServerSecret);
 
 	// veryfi password
 	if(!isnull(accountPass) && strcmp(accountPass, hashedPassword, true ) == 0)
@@ -6043,10 +6042,8 @@ OnPlayerLogin(playerid, password[])
 		Load_MySQL_Leader(playerid); 
 
 		//Powitanie:
-		format(string, sizeof(string), "Witaj, %s!",nick);
+		format(string, sizeof(string), "Witaj na serwerze Mrucznik Role Play, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
-		format(string, sizeof(string), "Welcome to Mrucznik Role Play %s - SAMP-0.3DL-R1", VERSION);
-		SendClientMessage(playerid, COLOR_WHITE, string);
 		printf("%s has logged in.",nick);
 		if (IsPlayerPremiumOld(playerid))
 		{
