@@ -5802,6 +5802,7 @@ OnPlayerRegister(playerid, password[])
 
 stock randomString(strDest[], strLen) // credits go to: RyDeR`
 {
+	strDest[--strLen] = '\0';
     while(strLen--)
         strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
 }
