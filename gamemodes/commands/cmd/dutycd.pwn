@@ -96,7 +96,7 @@ YCMD:dutycd(playerid, params[], help)
 		}
 		else if((PlayerInfo[playerid][pMember] == FRAC_BOR && PlayerInfo[playerid][pRank] >= 2) || PlayerInfo[playerid][pLider] == FRAC_BOR)
 		{
-			if(IsPlayerInRangeOfPoint(playerid, 5.0, 1526.9919,-1452.6593,67.8331))
+			if(IsPlayerInRangeOfPoint(playerid, 5.0, 1521.8843,-1479.6427,22.9377))
 			{
 				if(OnDuty[playerid] == 0 && OnDutyCD[playerid] == 0)
 				{
