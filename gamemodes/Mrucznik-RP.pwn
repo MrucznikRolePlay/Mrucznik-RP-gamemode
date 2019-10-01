@@ -5879,7 +5879,7 @@ VeryfiLastLogin(playerid)
 
 PasswordConversion(playerid, accountPass[], password[])
 {
-	if(strlen(password) == 32)
+	if(strlen(accountPass) == 32)
 	{
 		//konwersja hase³ MD5 na Whirlpool
 		if(strcmp(accountPass, MD5_Hash(password), true ) == 0)
