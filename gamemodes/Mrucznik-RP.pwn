@@ -5818,6 +5818,7 @@ DialogBlockedAccount(playerid)
 
 DialogChangePasswordRequired(playerid)
 {
+	SetPVarInt(playerid, "ChangingPassword", 1);
 	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wymagana jest zmiana has³a do konta.\n{FF00FF}Istnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ..");
 	ShowPlayerDialogEx(playerid, D_HASLO_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\n{FF1010}Wymagana jest zmiana has³a do konta.\n{FF00FF}Istnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ.", "Dalej", "Wyjdz"); 
 }
@@ -5886,14 +5887,10 @@ PasswordConversion(playerid, accountPass[], password[])
 		//konwersja hase³ MD5 na Whirlpool
 		if(strcmp(accountPass, MD5_Hash(password), true ) == 0)
 		{
-			//convert
-			MruMySQL_ChangePassword(GetNick(playerid), password);
-			Log(serverLog, DEBUG, "Converting password for account %s from MD5 to hash whirlpool + salt", GetNick(playerid));
-
 			if(VerifyPlayerIp(playerid))
 			{
 				Log(serverLog, DEBUG, "Password change required for %s (matched ip)", GetNick(playerid));
-				DialogChangePasswordRequired(playerid); //or block
+				DialogChangePasswordRequired(playerid);
 			}
 			else
 			{
@@ -5901,8 +5898,8 @@ PasswordConversion(playerid, accountPass[], password[])
 				Log(serverLog, WARNING, "Account %s has been blocked because of mismatching ip address", GetNick(playerid));
 				DialogBlockedAccount(playerid);
 				KickEx(playerid);
+				return false;
 			}
-
 			return true;
 		}
 	}
@@ -5913,10 +5910,6 @@ PasswordConversion(playerid, accountPass[], password[])
 		WP_Hash(hashedPassword, sizeof(hashedPassword), password);
 		if(strcmp(accountPass, hashedPassword, true ) == 0)
 		{
-			//convert
-			MruMySQL_ChangePassword(GetNick(playerid), password);
-			Log(serverLog, DEBUG, "Converting password for account %s from whirlpool to hash whirlpool + salt", GetNick(playerid));
-
 			if(VerifyPlayerIp(playerid))
 			{
 				Log(serverLog, DEBUG, "Password change required for %s (matched ip)", GetNick(playerid));
@@ -5936,6 +5929,7 @@ PasswordConversion(playerid, accountPass[], password[])
 					Log(serverLog, WARNING, "Account %s has been blocked because of mismatching ip address and last logon date", GetNick(playerid));
 					DialogBlockedAccount(playerid);
 					KickEx(playerid);
+					return false;
 				}
 			}
 			return true;
@@ -6236,12 +6230,15 @@ OnPlayerLogin(playerid, password[])
                 SetPVarInt(playerid, "support_duty", 1);
                 SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
             }
-            ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
+
+			if(GetPVarInt(playerid, "ChangingPassword") != 1)
+				ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
         }
         else if(PlayerInfo[playerid][pJailed] == 0)
         {
     		lowcap[playerid] = 1;
-    		ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
+			if(GetPVarInt(playerid, "ChangingPassword") != 1)
+    			ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
         }
         else
         {
