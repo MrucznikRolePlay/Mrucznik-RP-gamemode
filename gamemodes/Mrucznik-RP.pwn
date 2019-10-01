@@ -5812,11 +5812,13 @@ stock randomString(strDest[], strLen) // credits go to: RyDeR`
 
 DialogBlockedAccount(playerid)
 {
+	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Niestety, ale Twoje konto zosta³o zablokowane do weryfikacji,\n poniewa¿ istnieje ryzyko, ¿e zosta³o zhackowane.\nNapisz stratê na forum, a jeœli u¿ywa³eœ takiego samego has³a w innym miejscu - zalecamy jego zmianê.");
 	ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\nNiestety, ale Twoje konto zosta³o zablokowane do weryfikacji,\n poniewa¿ istnieje ryzyko, ¿e zosta³o zhackowane.\nNapisz stratê na forum, a jeœli u¿ywa³eœ takiego samego has³a w innym miejscu - zalecamy jego zmianê.", "Dalej", "Wyjdz"); 
 }
 
 DialogChangePasswordRequired(playerid)
 {
+	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wymagana jest zmiana has³a do konta.\n{FF00FF}Istnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ..");
 	ShowPlayerDialogEx(playerid, D_HASLO_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\n{FF1010}Wymagana jest zmiana has³a do konta.\n{FF00FF}Istnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ.", "Dalej", "Wyjdz"); 
 }
 
@@ -5838,7 +5840,7 @@ VerifyPlayerIp(playerid)
 			if(strcmp(ip, MD5_Hash(lastIp), true ) == 0)
 			{
     			mysql_free_result();
-				Log(serverLog, INFO, "Nie wymagana zmiana has³a dla gracza %s (zgodnoœæ ip %s)", GetNick(playerid), ip);
+				Log(serverLog, INFO, "Ip %s matched for %s", ip, GetNick(playerid));
 				return true;
 			}
 			else
@@ -5849,7 +5851,7 @@ VerifyPlayerIp(playerid)
 				if(host1 == lastHost1 && host2 == lastHost2)
 				{
 					mysql_free_result();
-					Log(serverLog, INFO, "Nie wymagana zmiana has³a dla gracza %s (zgodnoœæ hosta ip %s)", GetNick(playerid), ip);
+					Log(serverLog, INFO, "Host %s matched for %s", ip, GetNick(playerid));
 					return true;
 				}
 			}
