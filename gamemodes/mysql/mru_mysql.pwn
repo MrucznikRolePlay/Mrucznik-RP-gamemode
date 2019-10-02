@@ -104,7 +104,6 @@ Save_MySQL_Leader(playerid)
 	PlayerInfo[playerid][pLiderValue],
 	GetNick(playerid)); 
 	mysql_query(query);
-	MruMySQL_IloscLiderowLoad();
 	return 1;
 }
 Load_MySQL_Leader(playerid)

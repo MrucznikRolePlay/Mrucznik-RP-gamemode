@@ -82,9 +82,9 @@ YCMD:makevleader(playerid, params[], help)
 						return 1;
 					}
 					new Frac = GetPlayerFraction(playerid); 
-					if((LeadersValue[LEADER_FRAC][Frac]+1) > 4)
+					if((LeadersValue[LEADER_FRAC][Frac]+1) > MAX_LEADERS_ON_FRAC)
 					{
-						sendErrorMessage(playerid, "Nie mo¿esz przyj¹æ kolejnego lidera! Limit to 4"); 
+						sendErrorMessage(playerid, "Nie mo¿esz przyj¹æ kolejnego lidera!"); 
 						return 1;
 					}
 					PlayerInfo[giveplayerid][pLider] = Frac; 
