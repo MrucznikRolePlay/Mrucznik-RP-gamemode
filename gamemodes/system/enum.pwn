@@ -481,7 +481,7 @@ new FractionNames[][40] = {
     "Emergency Rescue Service",
     "SA Bahamas",
     "Yakuza",
-    "United States Secret Service",
+    "Government Security Agency",
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
