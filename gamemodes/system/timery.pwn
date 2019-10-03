@@ -2885,7 +2885,8 @@ public JednaSekundaTimer()
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: Pocz¹tek ____|");
 				SendClientMessage(i, COLOR_WHITE, "Ooo... nowy na serwerze.... wiêc musisz o czymœ wiedzieæ.");
 				SendClientMessage(i, COLOR_WHITE, "Jest to serwer Role Play(RP). Role Playing to odzwierciedlanie realnego ¿ycia w grze.");
-				SendClientMessage(i, COLOR_WHITE, "Skoro ju¿ wiesz, co to jest Role Play musisz poznaæ zasady serwera.");
+				SendClientMessage(i, COLOR_WHITE, "Skoro ju¿ wiesz, co to jest Role Play musisz poznaæ zasady panuj¹ce na naszym serwerze.");
+				SendClientMessage(i, COLOR_WHITE, "W tym celu przejdziesz teraz drobny samouczek tekstowy, który przygotuje Ciê do rozgrywki!"); 
 			}
 			else if(TutTime[i] == 14)
 			{
@@ -2973,9 +2974,10 @@ public JednaSekundaTimer()
 			{
 				SendClientMessage(i, COLOR_WHITE, "Masz sie trzymac wymienionych zasad zrozumiano?.");
 				SendClientMessage(i, COLOR_WHITE, "Poprostu pamiêtaj o nich i ciesz siê gr¹, a jak nie... ");
-				SendClientMessage(i, COLOR_WHITE, "zapewne masz jeszcze sporo pytañ dotycz¹cych gry, znajdziesz na nie odpowiedŸ");
-				SendClientMessage(i, COLOR_WHITE, "na specjalnym kanale stworzonym dla nowych graczy. Po prostu wpisz /n [swoje pytanie]");
-				SendClientMessage(i, COLOR_WHITE, "To ju¿ koniec samouczka, lecz zasad jest jeszcze wiele. znajdziesz je na forum.");
+				SendClientMessage(i, COLOR_WHITE, "Zapewne masz jeszcze sporo pytañ dotycz¹cych gry. Spokojnie, znajdziesz na nie odpowiedŸ!");
+				SendClientMessage(i, COLOR_WHITE, "Mo¿esz œmia³o pytaæ administratora (/admins), poprzez zapytania (/zapytaj), b¹dŸ te¿ [.]");
+				SendClientMessage(i, COLOR_WHITE, "[.] poprzez chat dla nowych graczy /newbie. To ju¿ koniec samouczka. ");
+				SendClientMessage(i, COLOR_WHITE, "Zasad, poradników i pomocy jest znacznie wiêcej na naszym forum! OdwiedŸ je: https://mrucznik-rp.pl");
 			}
 			else if(TutTime[i] == 124)
 			{
