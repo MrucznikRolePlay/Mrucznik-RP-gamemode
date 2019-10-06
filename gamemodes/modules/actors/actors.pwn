@@ -36,7 +36,7 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:aZ, Float:aR, aInvulnerable, Float:aStreamDistance, aVW, aINT, aPlayer, aLib[40]="", aNam[40]="")
+stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:aZ, Float:aR, aInvulnerable, Float:aStreamDistance, aVW, aINT, aPlayer, groupActor=AGROUP_DEFAULT, aLib[40]="", aNam[40]="")
 //Tworzenie nowego actora
 {
 	Actors[valActor][a_Skin] = actorIDs;
@@ -52,6 +52,7 @@ stock CreateActorEx(actorIDs, aName[MAX_PLAYER_NAME], Float:aX, Float:aY, Float:
 	Actors[valActor][a_Player] = aPlayer; 
 	Actors[valActor][a_animLib] = aLib;
 	Actors[valActor][a_animName] = aNam;
+	Actors[valActor][a_Group] = groupActor;
 	return valActor++; 
 }
 stock SetAnimatiorToActorMess(playerid, qActor)
@@ -89,6 +90,17 @@ stock RepairActors(worldID, interiorID)//Funkcja naprawiaj¹ce aktorów - gdy zgin
 	}
 	return 1;
 }
+stock UpdateActorText(actorID)
+{
+	new Float:aX, Float:aY, Float:aZ; 
+	new textnamed[64];
+	GetActorPos(actorID, aX, aY, aZ); 
+	new acVW = GetActorVirtualWorld(actorID); 
+	DestroyDynamic3DTextLabel(Actors[actorID][a_TextLabel]);
+	format(textnamed, sizeof(textnamed), "%s\n[AID: %d]", Actors[actorID][a_Name], actorID); 
+	Actors[actorID][a_TextLabel] = CreateDynamic3DTextLabel(textnamed, COLOR_WHITE, aX, aY, aZ+0.98, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, acVW);
+	return 1;
+}
 stock LoadActors()//Wczytywanie actorów, tworzenie textów nad g³ow¹. 
 {
 	for(new i; i<valActor; i++)
@@ -107,7 +119,7 @@ stock LoadActors()//Wczytywanie actorów, tworzenie textów nad g³ow¹.
 		{
 			new textnamed[64];
 			format(textnamed, sizeof(textnamed), "%s\n[ID: %d]", Actors[i][a_Name], i); 
-			CreateDynamic3DTextLabel(textnamed, COLOR_WHITE, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]+0.98, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, Actors[i][a_VW], Actors[i][a_INT], Actors[i][a_Player]);
+			Actors[i][a_TextLabel] = CreateDynamic3DTextLabel(textnamed, COLOR_WHITE, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]+0.98, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, Actors[i][a_VW], Actors[i][a_INT], Actors[i][a_Player]);
 		}
 		if(strlen(Actors[i][a_animLib]) > 3 && strlen(Actors[i][a_animName]) > 3)
 		{

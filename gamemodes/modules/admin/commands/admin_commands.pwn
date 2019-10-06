@@ -30,10 +30,18 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "dmvoff\dmvoff.pwn"
+#include "dmvon\dmvon.pwn"
+#include "setvregistration\setvregistration.pwn"
+#include "zmienwiek\zmienwiek.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_dmvoff();
+    command_dmvon();
+    command_setvregistration();
+    command_zmienwiek();
     
 }

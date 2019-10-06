@@ -116,7 +116,7 @@ YCMD:pr(playerid, params[], help)
 				        format(string, sizeof(string), "* %s przyj¹³ Ciê do rodziny.",GetNick(playerid));
 				        sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, string);
                         orgInvitePlayer(giveplayerid, GetPlayerOrg(playerid));
-						Log(serverLog, INFO, "Lider %s przyj¹³ %s do rodziny %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetPlayerOrg(playerid));
+						Log(commandLog, INFO, "Lider %s przyj¹³ %s do rodziny %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetPlayerOrg(playerid));
 				        return 1;
 				    }
 				}
@@ -151,7 +151,7 @@ YCMD:pr(playerid, params[], help)
 				        format(string, sizeof(string), "* Lider %s wyrzuci³ ciê z rodziny.",GetNick(playerid));
 				        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
                         orgUnInvitePlayer(giveplayerid);
-						Log(serverLog, INFO, "Lider %s wyrzuci³ %s z rodziny %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetPlayerOrg(playerid));
+						Log(commandLog, INFO, "Lider %s wyrzuci³ %s z rodziny %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetPlayerOrg(playerid));
 				        return 1;
 				    }
 				}
@@ -190,7 +190,7 @@ YCMD:pr(playerid, params[], help)
                         format(string, sizeof string, "Da³es %d rangê graczowi %s", rank, GetNick(giveplayerid));
                         SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         orgGivePlayerRank(giveplayerid, playerid, rank);
-						Log(serverLog, INFO, "Lider %s rodziny %d da³ %s rangê %d.", GetPlayerLogName(playerid), GetPlayerOrg(playerid), GetPlayerLogName(giveplayerid), rank);
+						Log(commandLog, INFO, "Lider %s rodziny %d da³ %s rangê %d.", GetPlayerLogName(playerid), GetPlayerOrg(playerid), GetPlayerLogName(giveplayerid), rank);
 				        return 1;
 				    }
 				}

@@ -38,6 +38,11 @@ YCMD:sms(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /sms [numer] [treœæ]");
 		return 1;
 	}
+	if(PlayerInfo[playerid][pJailed] != 0)
+	{
+		sendErrorMessage(playerid, "Nie posiadasz telefonu w wiêzieniu!"); 
+		return 1;
+	}
 	if(PlayerInfo[playerid][pPnumber] == 0)
 	{
 		sendErrorMessage(playerid, "Nie posiadasz telefonu! Kup go w sklepie.");

@@ -208,8 +208,13 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		GetSVarString("muzyka_bonehead", muzik, 128);
 		PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
 	}
-	else if(Check_ID == 7)
+	else if(Check_ID == 7)//Wejscie do VINYL
 	{
+		if(vinylStatus == 0 && GetPlayerFraction(playerid) != FRAC_SN)
+		{
+			sendErrorMessage(playerid, "Klub jest teraz zamkniêty!"); 
+			return 1;
+		}
 		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 && GetPlayerFraction(playerid) != FRAC_SN)
 		{
 			sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
@@ -499,7 +504,7 @@ SprawdzWjazdy(playerid)
 						TogglePlayerControllable(playerid, 0);
 						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
 						PlayerTextDrawShow(playerid, textwjedz[playerid]);
-						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
+						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);//
 						SetPVarInt(playerid, "CodeACDisable", 1);
 						SetInteriorTimeAndWeather(playerid);
 					}
@@ -694,6 +699,8 @@ public WjedzTimerDebug(playerid)
 					return 1;
 				}
 				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+				new pVeh2 = GetPlayerVehicleID(playerid);
+				CarData[VehicleUID[pVeh2][vUID]][c_VW] = wjazdy[i][wj_VW]; 
 				SetAntyCheatForPlayer(playerid, 0);
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie

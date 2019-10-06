@@ -2497,72 +2497,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-		if(dialogid == 696)
-		{
-			if(response)
-			{
-				switch(listitem)
-				{
-					case 0:
-					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1538.7106,-1474.8816,9.5000);
-						SetPlayerVirtualWorld (playerid, 8);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking");
-						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-					}
-					case 1:
-					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid,1549.7249,-1462.1644,3.3250);
-						SetPlayerVirtualWorld(playerid, 40);
-						TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Sala treningowa");
-						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-					}
-					case 2:
-					{
-
-						SetPlayerPosEx(playerid,1526.7426,-1469.4413,23.0778);
-						GameTextForPlayer(playerid, "~w~Centrala USSS \n ~r~by skPembleton", 5000, 1);
-						SetPlayerVirtualWorld(playerid, 41);
-						TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Centrala USSS");
-						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-					}
-					case 3:
-					{
-						if(!IsABOR(playerid)) return SendClientMessage(playerid, 0xB52E2BFF, "Te wejœcie jest tylko dla pracowników.");
-						SetPlayerPosEx(playerid, 1526.7426,-1469.4413,23.0778);
-						SetPlayerVirtualWorld(playerid, 42);
-						TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Strefa Pracownika");
-						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-					}
-					case 4:
-					{
-						SetPlayerPosEx(playerid, 1541.2571,-1464.1281,21.8429);
-						SetPlayerVirtualWorld(playerid, 43);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3, Biura");
-						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-						TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-					}
-					case 5:
-					{
-						SetPlayerPosEx(playerid, 1544.1202,-1466.9008,42.8386);
-						SetPlayerVirtualWorld(playerid, 44); 
-						TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Akademia");
-						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-					}
-				}
-			}
-		}
 		else if(dialogid == 19)
 		{
 			if(response)
@@ -6019,7 +5953,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 			    if(IsPlayerConnected(playerid))
 			    {
-			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
+			        if(strlen(inputtext) >= 1 && strlen(inputtext) <= MAX_PASSWORD_LENGTH)
 			        {
 						OnPlayerLogin(playerid, inputtext);
 					}
@@ -6079,29 +6013,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			    {
-			        if(strcmp(inputtext,"SiveMopY", false) == 0 )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67 --> Has³o administracyjne
-			        {
+					if(strcmp(inputtext,"SiveMopY", false) == 0 || (DEVELOPMENT && strcmp(inputtext,"DevModeON", false) == 0) )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67 --> Has³o administracyjne
+					{
 						weryfikacja[playerid] = 1;
-                        if(PlayerInfo[playerid][pJailed] == 0)
-                        {
-                            lowcap[playerid] = 1;
-                            ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
-                        }
-                        else
-                        {
-                            SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
-                            TogglePlayerSpectating(playerid, false);
+						if(PlayerInfo[playerid][pJailed] == 0)
+						{
+							lowcap[playerid] = 1;
+							ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
+						}
+						else
+						{
+							SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+							TogglePlayerSpectating(playerid, false);
 							SetPlayerSpawn(playerid);
-                        }
+						}
 					}
-			        else
-			        {
-			            SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
-				        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
-				        GUIExit[playerid] = 0;
-				        SetPlayerVirtualWorld(playerid, 0);
+					else
+					{
+						SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany!");
+						ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
+						GUIExit[playerid] = 0;
+						SetPlayerVirtualWorld(playerid, 0);
 						KickEx(playerid);
-			        }
+					}
 			    }
 			    else
 			    {
@@ -6145,7 +6079,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 			        else
 			        {
-			            SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
+			            SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany!");
 				        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
 				        GUIExit[playerid] = 0;
 				        SetPlayerVirtualWorld(playerid, 0);
@@ -6154,7 +6088,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany.!");
+			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany!");
 				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
 				    GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 0);
@@ -14226,6 +14160,55 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         return 1;
     }
+	else if(dialogid == D_HASLO_INFO)
+	{
+		if(!response) return KickEx(playerid); 
+		if(response)
+		{
+			sendTipMessage(playerid, "Zmieniasz has³o:");
+			ShowPlayerDialogEx(playerid, D_HASLO_ZMIEN, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "WprowadŸ poni¿ej nowe has³o, którego bêdziesz u¿ywa³\ndo gry na naszym serwisie!", "ZatwierdŸ", "Odrzuæ"); 
+		}
+		return 1;
+	}
+	else if(dialogid == D_HASLO_ZMIEN)
+	{
+		if(!response) return KickEx(playerid); 
+		if(response)
+		{
+			if(strlen(inputtext) < 4)
+			{
+				sendErrorMessage(playerid, "Has³o musi posiadaæ +3 znaki!"); 
+				return 1;
+			}
+			if(strfind(inputtext, "%") != -1)
+			{
+				sendErrorMessage(playerid, "Has³o nie mo¿e zawieraæ znaku procenta!");
+				return 1;
+			}
+			sendErrorMessage(playerid, "Twoje has³o do konta w grze zosta³o zmienione!!!!");
+			sendErrorMessage(playerid, "Jeœli nie jesteœ pewien  nowego has³a - nie wychodŸ z serwera i zmieñ je za pomoc¹ /zmienhaslo");
+			sendErrorMessage(playerid, "Nowe has³o:");
+			SendClientMessage(playerid, COLOR_PANICRED, inputtext);
+
+			Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
+			MruMySQL_ChangePassword(GetNick(playerid), inputtext);
+
+			if(GetPVarInt(playerid, "ChangingPassword")) //password changing
+			{
+				if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)
+				{
+					ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
+				}
+
+				if(PlayerInfo[playerid][pJailed] == 0)
+				{
+					lowcap[playerid] = 1;
+					ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
+				}
+			}
+		}
+		return 1;
+	}
 	else if(dialogid == 1089)
 	{
 		if(!response) return ShowCarEditDialog(playerid);
@@ -15870,6 +15853,193 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 			}
+		}
+	}
+	else if(dialogid == DIALOG_DMV)
+	{
+		if(!response)
+		{
+			ProxDetector(15.0, playerid, "Urzêdnik mówi: Dziêkujemy i zapraszamy ponownie!", COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
+			return 1;
+		}
+		if(response)
+		{
+			new string[124];
+
+			if(listitem < 0 || listitem > 9) return 1;
+
+			if(kaska[playerid] < DmvLicenseCost[listitem])
+			{
+				sendErrorMessage(playerid, sprintf("Ta us³uga kosztuje %d$, a Ty tyle nie masz!", DmvLicenseCost[listitem]));
+				return 1;
+			}
+
+			switch(listitem)
+			{
+				case 0: //Dowód osobisty
+				{
+					PlayerInfo[playerid][pDowod] = 1;
+					format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje dowód osobisty", GetNick(playerid)); 
+					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					Log(payLog, INFO, "%s kupi³ dowód osobisty za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+				}
+				case 1:
+				{
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+					if(PlayerInfo[playerid][pFishLic] == 1)
+					{
+						sendErrorMessage(playerid, "Masz ju¿ kartê wêdkarsk¹!"); 
+						return 1;
+					}
+
+					PlayerInfo[playerid][pFishLic] = 1;
+					format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje kartê wêdkarsk¹", GetNick(playerid)); 
+					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					Log(payLog, INFO, "%s kupi³ kartê wêdkarsk¹ za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+				}
+				case 2:
+				{
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+
+					PlayerInfo[playerid][pGunLic] = 1;
+					format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje pozwolenie na broñ", GetNick(playerid)); 
+					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					Log(payLog, INFO, "%s kupi³ pozwolenie na broñ za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+				}
+				case 3:
+				{
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+					
+					PlayerInfo[playerid][pBoatLic] = 1;
+					format(string, sizeof(string), "Urzêdnik wprowadza dane %s do komputera, drukuje laminuje i podaje patent ¿eglarski", GetNick(playerid)); 
+					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					Log(payLog, INFO, "%s kupi³ patent ¿eglarski za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+				}
+				case 4:
+				{
+					if(PlayerInfo[playerid][pCarLic] > 1000)
+					{
+						new lTime = PlayerInfo[playerid][pCarLic]-gettime();
+						new hh, mm;
+						hh = floatround(floatround(floatdiv(lTime, 3600), floatround_floor)%24,floatround_floor);
+						mm = floatround(floatround(floatdiv(lTime, 60), floatround_floor)%60,floatround_floor);
+						format(string, 128, "Zosta³o Ci odebrane prawo jazdy! Blokada mija za %d h i %d min", hh, mm);
+						SendClientMessage(playerid, COLOR_GRAD2, string);
+						return 1;
+					}
+					if(PlayerInfo[playerid][pCarLic] == 2)
+					{
+						sendErrorMessage(playerid, "Zaliczy³eœ ju¿ egzamin teoretyczny!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pCarLic] == 1)
+					{
+						sendErrorMessage(playerid, "Masz ju¿ prawo do jazdy!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+
+					PlayerInfo[playerid][pPrawojazdypytania] = 0;
+					PlayerInfo[playerid][pPrawojazdydobreodp] = 0;
+					PlayerInfo[playerid][pPrawojazdyzleodp] = 0;
+					PlayerInfo[playerid][pMinalczasnazdpr] = 0;
+					PlayerInfo[playerid][pWtrakcietestprawa] = 1;
+					format(string, sizeof(string), "* Urzêdnik wyci¹ga test oraz d³ugopis i podaje %s", GetNick(playerid));
+					ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					ShowPlayerDialogEx(playerid, D_PJTEST, DIALOG_STYLE_MSGBOX, "Prawo jazdy - Test", "{7FFF00}Witaj!\n{FFFFFF}Rozpoczynasz test na prawo jazdy.\nW teœcie {FF0000}NIE U¯YWAJ{FFFFFF} polskich znaków!\n\n¯yczymy powodzenia!", "Rozpocznij", "");
+				}
+				case 5:
+				{
+					if(PlayerInfo[playerid][pCarLic] != 2)
+					{
+						sendErrorMessage(playerid, "Najpierw podejdŸ do egzaminu teoretycznego!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+
+					sendTipMessage(playerid, "Egzaminy praktyczne zostan¹ dodane ju¿ wkrótce!"); 
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Gratulacje! Zda³eœ egzamin praktyczny!"); 
+					TakingLesson[playerid] = 0;
+					PlayerInfo[playerid][pCarLic] = 3;
+				}
+				case 6:
+				{
+					if(PlayerInfo[playerid][pCarLic] < 3)
+					{
+						sendErrorMessage(playerid, "Najpierw podejdŸ do egzaminu teoretycznego/praktycznego!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pCarLic] == 1)
+					{
+						sendErrorMessage(playerid, "Masz ju¿ prawo jazdy!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+					PlayerInfo[playerid][pCarLic] = 1;
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra³eœ prawo do jazdy."); 
+					Log(payLog, INFO, "%s kupi³ licencje na pojazdy za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+				}
+				case 7:
+				{
+					if(PlayerInfo[playerid][pFlyLic] == 1)
+					{
+						sendErrorMessage(playerid, "Masz ju¿ licencje na latanie!"); 
+						return 1;
+					}
+					if(PlayerInfo[playerid][pDowod] < 1)
+					{
+						sendErrorMessage(playerid, "Nie posiadasz dowodu osobistego!");
+						return 1;
+					}
+
+					PlayerInfo[playerid][pFlyLic] = 1;
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra³eœ licencje na latanie!"); 
+					Log(payLog, INFO, "%s kupi³ licencje na latanie za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+				}
+				case 8:
+				{
+					sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
+					return 1;
+				}
+				case 9:
+				{
+					if(IsPlayerPremiumOld(playerid))
+					{
+						sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
+					}
+					else
+					{
+						sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.");
+					}
+					return 1;
+				}
+			}
+
+			ZabierzKase(playerid, DmvLicenseCost[listitem]);
 		}
 	}
 	else if(dialogid == D_PERS_CHAT)

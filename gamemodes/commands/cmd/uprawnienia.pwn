@@ -39,7 +39,7 @@ YCMD:uprawnienia(playerid, params[], help)
     if(Uprawnienia(playerid, ACCESS_KARY_UNBAN)) strcat(str, "\t» Zdejmowanie kar\n");
     if(Uprawnienia(playerid, ACCESS_ZG)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie ZG\n");
     if(Uprawnienia(playerid, ACCESS_MAKELEADER)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie paneli\n");
-    if(Uprawnienia(playerid, ACCESS_GIVEHALF)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie P@\n");
+    if(Uprawnienia(playerid, ACCESS_GIVEHALF)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie P@ i @\n");
 
     if(Uprawnienia(playerid, ACCESS_MAKEFAMILY)) strcat(str, "{00FF00}+{FFFFFF} Tworzenie organizacji\n");
     if(Uprawnienia(playerid, ACCESS_DELETEORG)) strcat(str, "{00FF00}+{FFFFFF} Usuwanie organizacji\n");

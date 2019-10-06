@@ -71,7 +71,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 4:
 						{
-							PlayerInfo[giveplayerid][pModel] = amount;
+							PlayerInfo[giveplayerid][pSkin] = amount;
 							format(string, sizeof(string), "Skin gracza zmieniony na %d", amount);
 						}
 						case 5:

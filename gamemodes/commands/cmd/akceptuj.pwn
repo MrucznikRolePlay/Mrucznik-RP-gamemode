@@ -817,7 +817,7 @@ YCMD:akceptuj(playerid, params[], help)
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Podpisa³eœ umowe na 2,5 godziny, zaczynasz now¹ pracê.");
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Gratulujemy nowej pracy, wpisz /pomoc aby zobaczyæ nowe komendy.");
                 PlayerInfo[playerid][pJob] = GettingJob[playerid];
-		        Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pJob]);
+		        Log(commandLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pJob]);
                 if(GettingJob[playerid] == 14)
                 {
                     PlayerInfo[playerid][pRank] = 0;
@@ -832,7 +832,6 @@ YCMD:akceptuj(playerid, params[], help)
                     SelectChar[playerid] = 255;
                     SelectCharID[playerid] = PlayerInfo[playerid][pMember];
                     SelectCharPlace[playerid] = 1;
-                    //PlayerInfo[playerid][pModel] = ChosenSkin[playerid];
                     PlayerInfo[playerid][pSkin] = ChosenSkin[playerid];
                     SendClientMessage(playerid, COLOR_LIGHTRED, "* U¿yj 'next' aby zobaczyæ nastêpny skin.");
                     SendClientMessage(playerid, COLOR_LIGHTRED, "* Jeœli zdecydowa³eœ siê na konkretny skin wpisz 'gotowe'.");

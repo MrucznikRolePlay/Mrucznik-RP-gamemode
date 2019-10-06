@@ -85,15 +85,6 @@ YCMD:wejdz(playerid, params[], help)
         {
             ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
         }
-        else if((IsPlayerInRangeOfPoint(playerid,3,1538.7106,-1474.8816,9.5000) && IsABOR(playerid))//Parking USSS
-            || IsPlayerInRangeOfPoint(playerid,3,1549.7249,-1462.1644,3.3250)//Sala treningowa
-            || IsPlayerInRangeOfPoint(playerid,3,1526.7426,-1469.4413,23.0778)//Recepcja
-            ||(IsPlayerInRangeOfPoint(playerid,3, 1526.7426,-1469.4413,23.0778) && IsABOR(playerid))//strefa pracownika
-            || IsPlayerInRangeOfPoint(playerid,3, 1541.2571,-1464.1281,21.8429)//Biura USSS
-            || (IsPlayerInRangeOfPoint(playerid,3, 1544.1202,-1466.9008,42.8386)))//Akademia
-        {
-            ShowPlayerDialogEx(playerid, 696, DIALOG_STYLE_LIST, "Winda:", "[Poziom -1] Parking\n[Poziom 0] Sala treningowa\n[Poziom 1] Recepcja\n[Poziom 2] Strefa Pracownika\n[Poziom 3] Biura USSS\n[Poziom 4] Akademia USSS", "Wybierz", "Anuluj");
-        }
 		else if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
             || IsPlayerInRangeOfPoint(playerid, 3, 287.7476,-1609.9395,33.0723)//PARTER
             || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
@@ -153,7 +144,7 @@ YCMD:wejdz(playerid, params[], help)
             ShowPlayerDialogEx(playerid, D_ELEVATOR_LSMC, DIALOG_STYLE_LIST, "Winda szpitalna:", "{660000}[-1] {D2CFA6}Kostnica i laboratorium\n{660000}[0] {D2CFA6}Parking wewnêtrzny\n{660000}[1] {D2CFA6}Izba przyjêæ\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Sale operacyjne\n{660000}[4] {D2CFA6}Sale pooperacyjne\n{660000}[5] {D2CFA6}Sale specjalistyczne\n{660000}[6] {D2CFA6}Akademia medyczna\n{660000}[7] {D2CFA6}Gabinety ordynatorów\n{660000}[8] {D2CFA6}Dach szpitala", "Wybierz", "Anuluj");
         }
         else if(IsPlayerInRangeOfPoint(playerid,2.0, 1538.7106,-1474.8816,9.5000) || //Parking
-            IsPlayerInRangeOfPoint(playerid,2.0, 1526.7426,-1469.4413,23.0778)|| //Recepcja
+            IsPlayerInRangeOfPoint(playerid,2.0, 1529.2543,-1489.3378,16.5134)|| //Recepcja
             IsPlayerInRangeOfPoint(playerid,2.0, 1549.7249,-1462.1644,3.3250)|| //Strefa Pracownika
             IsPlayerInRangeOfPoint(playerid,2.0, 1526.7426,-1469.4413,23.0778) || //Sala treningowa
             IsPlayerInRangeOfPoint(playerid,2.0, 1541.2571,-1464.1281,21.8429)|| //Biura

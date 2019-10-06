@@ -94,9 +94,6 @@ YCMD:makemember(playerid, params[], help)
                     MruMySQL_SetAccInt("Rank", giveplayer, 0);
 
                     PlayerInfo[para1][pRank] = 0;
-
-				    if(PlayerInfo[para1][pSkin] != 0) SetPlayerSkin(para1, PlayerInfo[para1][pSkin]);
-                    else SetPlayerSkin(para1, PlayerInfo[para1][pModel]);
 				}
 			}//not connected
 		}

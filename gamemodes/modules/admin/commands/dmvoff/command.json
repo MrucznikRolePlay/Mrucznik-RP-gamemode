@@ -1,0 +1,9 @@
+{
+    "name": "dmvoff",
+    "description": "Komenda, która pozwala wy³¹czyæ boty w urzêdzie miasta",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [],
+    "parameters": [],
+    "date": "24.09.2019"
+}

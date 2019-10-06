@@ -61,9 +61,10 @@ YCMD:makeleader(playerid, params[], help)
 						sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest we frakcji jako cz³onek lub w rodzinie !");
 						return 1;
 					}
-					if((LeadersValue[LEADER_FRAC][level]+1) > 4)
+					if((LeadersValue[LEADER_FRAC][level]+1) > MAX_LEADERS_ON_FRAC)
 					{
-						sendErrorMessage(playerid, "Nie mo¿esz przyj¹æ kolejnego lidera! Limit to 4"); 
+						format(string, sizeof(string), "Nie mo¿esz przyj¹æ kolejnego lidera! Limit to %d", MAX_LEADERS_ON_FRAC); 
+						sendErrorMessage(playerid, string); 
 						return 1;
 					}
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
@@ -111,8 +112,6 @@ YCMD:makeleader(playerid, params[], help)
 						PlayerInfo[para1][pTeam] = 11;
 						PlayerInfo[para1][pRank] = 6;
 					}
-					if(PlayerInfo[para1][pSkin] != 0) SetPlayerSkin(para1, PlayerInfo[para1][pSkin]);
-					else SetPlayerSkin(para1, PlayerInfo[para1][pModel]);
 				}
 			}//not connected
 		}

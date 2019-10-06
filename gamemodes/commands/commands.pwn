@@ -55,7 +55,6 @@
 #include "cmd/bigears.pwn"
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
-#include "cmd/blokujnews.pwn"
 #include "cmd/blokujnoba.pwn"
 #include "cmd/blokujsprzedarz.pwn"
 #include "cmd/boks.pwn"
@@ -130,7 +129,6 @@
 #include "cmd/dskill.pwn"
 #include "cmd/dsus.pwn"
 #include "cmd/dutycd.pwn"
-#include "cmd/dutymoto.pwn"
 #include "cmd/dzwon.pwn"
 #include "cmd/editobject.pwn"
 #include "cmd/edytuj.pwn"
@@ -291,13 +289,11 @@
 #include "cmd/muzyczka.pwn"
 #include "cmd/namierz.pwn"
 #include "cmd/napraw.pwn"
-#include "cmd/naprawskin.pwn"
 #include "cmd/nastepnylevel.pwn"
 #include "cmd/naucz.pwn"
 #include "cmd/nazywo.pwn"
 #include "cmd/newbie.pwn"
 #include "cmd/newcar.pwn"
-#include "cmd/news.pwn"
 #include "cmd/noa.pwn"
 #include "cmd/nonewbie.pwn"
 #include "cmd/noooc.pwn"
@@ -331,7 +327,7 @@
 #include "cmd/pban.pwn"
 #include "cmd/pblok.pwn"
 #include "cmd/piwo.pwn"
-#include "cmd/pjtest.pwn"
+//#include "cmd/pjtest.pwn"
 #include "cmd/pl.pwn"
 #include "cmd/plac.pwn"
 #include "cmd/placmedyk.pwn"
@@ -572,7 +568,7 @@
 #include "cmd/wynajempomoc.pwn"
 #include "cmd/wyniki.pwn"
 #include "cmd/wypij.pwn"
-#include "cmd/wypisz.pwn"
+//#include "cmd/wypisz.pwn"
 #include "cmd/wyplac.pwn"
 #include "cmd/wyprowadz.pwn"
 #include "cmd/wypusc.pwn"
@@ -638,7 +634,6 @@
 #include "cmd/zmienplec.pwn"
 #include "cmd/zmienprace.pwn"
 #include "cmd/zmienskin.pwn"
-#include "cmd/zmienwiek.pwn"
 #include "cmd/zmienwl.pwn"
 #include "cmd/zniszczobiekty.pwn"
 #include "cmd/zobp.pwn"
@@ -662,7 +657,6 @@
 #include "cmd/staty2.pwn"
 #include "cmd/makevlider.pwn"
 #include "cmd/dajscene.pwn"
-//#include "cmd/news2.pwn"
 #include "cmd/fracinfo.pwn"
 #include "cmd/wlsett.pwn"
 
@@ -1329,7 +1323,7 @@ static Aliases()
 	Command_AddAltNamed("wypij", "pij");
 
 	//wypisz
-	Command_AddAltNamed("wypisz", "wydaj");
+	//Command_AddAltNamed("wypisz", "wydaj");
 
 	//wyplac
 	Command_AddAltNamed("wyplac", "withdraw");
@@ -1467,10 +1461,6 @@ static Aliases()
 	//choroba
 	Command_AddAltNamed("choroba", "setstd");
 	Command_AddAltNamed("choroba", "zaraz");
-
-	//zmienwiek
-	Command_AddAltNamed("zmienwiek", "setwiek");
-	Command_AddAltNamed("zmienwiek", "setage");
 
 	//zmienprace
 	Command_AddAltNamed("zmienprace", "setjob");

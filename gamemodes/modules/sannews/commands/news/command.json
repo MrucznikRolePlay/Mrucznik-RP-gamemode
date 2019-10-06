@@ -1,0 +1,18 @@
+{
+    "name": "news",
+    "description": "Komenda pozwala wypowiadaæ siê na chacie San News - g³ównie uznawanym za radio.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "wiadomosc"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "newsText",
+            "description": "Na parametrze przetrzymywane jest to co gracz wpisa³ u¿ywaj¹c komendy /news"
+        }
+    ],
+    "date": "13.09.2019"
+}

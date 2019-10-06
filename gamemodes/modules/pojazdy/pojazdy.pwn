@@ -143,6 +143,7 @@ Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
         CarData[idx][c_Int] = -1;
         CarData[idx][c_VW] = -1;
 		CarData[idx][c_Siren] = 0;
+        strcat(CarData[idx][c_Rejestracja], "0"); 
 
         SetVehicleParamsEx(CarData[idx][c_ID], 0, 0, 0, 0, 0, 0, 0);
 
@@ -320,7 +321,7 @@ Car_LoadEx(lUID)
     if(mysql_num_rows())
     {
         mysql_fetch_row_format(lStr, "|");
-        sscanf(lStr, "p<|>ddddfffffddddlddddddddddd",
+        sscanf(lStr, "p<|>ddddfffffddddlddddddddddds[32]",
         CarData[lVehID][c_UID],
         CarData[lVehID][c_OwnerType],
         CarData[lVehID][c_Owner],
@@ -345,6 +346,7 @@ Car_LoadEx(lUID)
         CarData[lVehID][c_Rang],
         CarData[lVehID][c_Int],
         CarData[lVehID][c_VW],
+        CarData[lVehID][c_Rejestracja],
         unused);
 
         if(doadd) gCars++;
@@ -384,7 +386,7 @@ Car_LoadForPlayer(playerid)
         format(lsSearch, 8, "%d|", lsID);
         if(strfind(lList, lsSearch) == -1)
         {
-            sscanf(lStr, "p<|>ddddfffffddddlddddddddddd",
+            sscanf(lStr, "p<|>ddddfffffddddlddddddddddds[32]",
             CarData[lVehID][c_UID],
             CarData[lVehID][c_OwnerType],
             CarData[lVehID][c_Owner],
@@ -409,6 +411,7 @@ Car_LoadForPlayer(playerid)
             CarData[lVehID][c_Rang],
             CarData[lVehID][c_Int],
             CarData[lVehID][c_VW],
+            CarData[lVehID][c_Rejestracja],
             unused);
 
             PlayerInfo[playerid][pCars][lUsed++] = lVehID;
@@ -526,7 +529,7 @@ Car_Spawn(lUID, bool:loaddesc=true)
 		format(rejestracja, sizeof(rejestracja), "%s", CarData[lUID][c_Rejestracja]);
 
     SetVehicleNumberPlate(vehicleid, rejestracja);
-	SetVehicleToRespawn(vehicleid);
+	RespawnVehicleEx(vehicleid);
 	//
     Car_AddTune(vehicleid);
     CarData[lUID][c_ID] = vehicleid;
