@@ -14192,6 +14192,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
 			MruMySQL_ChangePassword(GetNick(playerid), inputtext);
+
+			if(GetPVarInt(playerid, "ChangingPassword")) //password changing
+			{
+				if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)
+				{
+					ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
+				}
+
+				if(PlayerInfo[playerid][pJailed] == 0)
+				{
+					lowcap[playerid] = 1;
+					ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
+				}
+			}
 		}
 		return 1;
 	}
