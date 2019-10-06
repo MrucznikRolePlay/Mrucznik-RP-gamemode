@@ -78,7 +78,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(PremiumInfo[playerid][pMC] >= MIESIAC_KP_CENA)
+			if((PremiumInfo[playerid][pKP] && PremiumInfo[playerid][pMC] >= PRZEDLUZ_KP_CENA) || PremiumInfo[playerid][pMC] >= MIESIAC_KP_CENA)
 			{
 				if(IsPlayerPremium(playerid)) 
 				{

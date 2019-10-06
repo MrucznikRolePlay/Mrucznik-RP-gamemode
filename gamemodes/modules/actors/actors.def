@@ -24,5 +24,7 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 #define ACTORS_ON_WORLD 100
+#define AGROUP_DEFAULT 0
+#define AGROUP_DMV 1
 
 //end

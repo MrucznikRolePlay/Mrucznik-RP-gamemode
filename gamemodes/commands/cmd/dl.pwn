@@ -48,6 +48,13 @@ YCMD:dl(playerid, params[], help)
 				    sendTipMessageEx(playerid, COLOR_WHITE, "Dostêpne nazwy: Auto, Lot, Lodzie, Ryby, Bron.");//, Bron.");
 					return 1;
 				}
+								
+				if(!IsPlayerConnected(giveplayerid))
+				{
+					sendErrorMessage(playerid, "Nie ma takiego gracza !");
+					return 1;
+				}
+				
 			    if(strcmp(x_nr,"auto",true) == 0)
 				{
 				    if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pAdmin] >= 5000)
@@ -56,36 +63,25 @@ YCMD:dl(playerid, params[], help)
 						{
 						    if(PlayerInfo[giveplayerid][pCarLic] == 3 || PlayerInfo[playerid][pAdmin] >= 5000)
 						    {
-								if(IsPlayerConnected(giveplayerid))
+								if(kaska[playerid] >= 14000)
 								{
-							    	if(giveplayerid != INVALID_PLAYER_ID)
-								    {
-								        if(kaska[playerid] >= 14000)
-								        {
-									        GetPlayerName(playerid, sendername, sizeof(sendername));
-									        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-                                            format(string, sizeof(string), "* Da³eœ licencjê na auto graczowi %s. Koszt licencji (14 000$) zosta³ pobrany z twojego portfela.",giveplayer);
-								            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-									        format(string, sizeof(string), "* Urzêdnik %s da³ tobie prawo jazdy.",sendername);
-									        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-									        format(string, sizeof(string), "* Urzêdnik %s da³ prawo jazdy %s. Urz¹d zarobi³ 14 000$.",sendername,giveplayer);
-									        SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
-									        ZabierzKase(playerid, 14000);
-                                            Sejf_Add(FRAC_GOV, 14000);
-									        PlayerInfo[giveplayerid][pCarLic] = 1;
-											Log(payLog, INFO, "Urzêdnik %s da³ %s prawo jazdy (14000$).", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
-									        return 1;
-									    }
-									    else
-									    {
-									        sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 14 000$ a Ty tyle nie masz!");
-									    }
-							        }
+									GetPlayerName(playerid, sendername, sizeof(sendername));
+									GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+									format(string, sizeof(string), "* Da³eœ licencjê na auto graczowi %s. Koszt licencji (14 000$) zosta³ pobrany z twojego portfela.",giveplayer);
+									SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+									format(string, sizeof(string), "* Urzêdnik %s da³ tobie prawo jazdy.",sendername);
+									SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+									format(string, sizeof(string), "* Urzêdnik %s da³ prawo jazdy %s. Urz¹d zarobi³ 14 000$.",sendername,giveplayer);
+									SendLeaderRadioMessage(11, COLOR_LIGHTGREEN, string);
+									ZabierzKase(playerid, 14000);
+									Sejf_Add(FRAC_GOV, 14000);
+									PlayerInfo[giveplayerid][pCarLic] = 1;
+									Log(payLog, INFO, "Urzêdnik %s da³ %s prawo jazdy (14000$).", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
+									return 1;
 								}
 								else
 								{
-								    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-								    return 1;
+									sendTipMessageEx(playerid, COLOR_GREY, "Koszt wydania tej licencji to 14 000$ a Ty tyle nie masz!");
 								}
 							}
 							else

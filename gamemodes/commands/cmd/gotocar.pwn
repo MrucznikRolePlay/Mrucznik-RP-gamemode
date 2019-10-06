@@ -43,6 +43,7 @@ YCMD:gotocar(playerid, params[], help)
 		{
 			new Float:cwx2,Float:cwy2,Float:cwz2;
 			GetVehiclePos(testcar, cwx2, cwy2, cwz2);
+			new ca_VW = GetVehicleVirtualWorld(testcar); 
 			if (GetPlayerState(playerid) == 2)
 			{
 				new tmpcar = GetPlayerVehicleID(playerid);
@@ -54,6 +55,7 @@ YCMD:gotocar(playerid, params[], help)
 			}
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 			SetPlayerInterior(playerid,0);
+			SetPlayerVirtualWorld(playerid, ca_VW); 
 		}
 		else
 		{

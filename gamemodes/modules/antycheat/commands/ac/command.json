@@ -1,0 +1,14 @@
+{
+    "name": "ac",
+    "description": "Panel anty-cheata",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "antycheat",
+        "antyczit"
+    ],
+    "parameters": [],
+    "date": "16.09.2019"
+}

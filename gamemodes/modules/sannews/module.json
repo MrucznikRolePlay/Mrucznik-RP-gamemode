@@ -1,0 +1,11 @@
+{
+    "name": "sannews",
+    "description": "Komendy, funkcje i wykorzystania frakcji San News i powi¹zanych z nimi podfrakcji (telewizja, kluby)",
+    "author": "Simeone",
+    "timers": true,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "13.09.2019"
+}

@@ -1,0 +1,20 @@
+{
+    "name": "ustawcena",
+    "description": "Ustawia cenê poszczególnej licencji w Urzêdzie Miasta Los Santos",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "valueChoice",
+            "description": "To co gracz wybra³"
+        },
+        {
+            "type": "integer",
+            "name": "valueCost",
+            "description": "Nowa cena licencji"
+        }
+    ],
+    "date": "20.09.2019"
+}

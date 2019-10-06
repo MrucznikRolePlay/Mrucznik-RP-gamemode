@@ -1,6 +1,8 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
 
+new ServerSecret[MAX_SERVER_SECRET_LENGTH];
+
 new prawoJazdyLosowanie[9];
 
 new PickupSklep01;//ZIP
@@ -778,7 +780,7 @@ new newbie = 1;
 new noooc = 1;
 new adds = 1;
 new dmv;
-new doorFBIStatus=0;
+new doorFBIStatus=1;
 new drukarnia;
 new studiovic;
 new studiog;
@@ -1039,7 +1041,6 @@ new CenaBiletuPociag = 10000;
 new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_ReportChannelId; //discordconnect
 new DCC_Channel:g_FracChannel[MAX_FRAC];
 new DCC_Channel:g_OrgChannel[MAX_ORG];
-
 /*
 new chpIDHunter[MAX_PLAYERS];
 new hunterSeeMe[MAX_PLAYERS]; 
@@ -1226,7 +1227,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pInt] = 0;
 	PlayerInfo[playerid][pLocal] = 255;
 	PlayerInfo[playerid][pTeam] = 3;
-	PlayerInfo[playerid][pModel] = 136;
+	PlayerInfo[playerid][pSkin] = 136;
 	//new randphone = 10000 + random(89999);//minimum 1000  max 9999 //giving one at the start
 	PlayerInfo[playerid][pPnumber] = 0;
 	PlayerInfo[playerid][pDom] = 0;

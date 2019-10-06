@@ -39,7 +39,9 @@ enum eActors
 	a_INT,
 	a_Player,
 	a_animLib[40],
-	a_animName[40]
+	a_animName[40],
+	Text3D:a_TextLabel,
+	a_Group
 };
 new	Float:Actors[ACTORS_ON_WORLD][eActors];
 //------------------<[ Forwardy: ]>--------------------

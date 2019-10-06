@@ -1,0 +1,11 @@
+{
+    "name": "kuplicencje",
+    "description": "Komenda pozwala wejœæ w interakcje z aktorem w Urzêdzie Miasta Los Santos",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "kuplic"
+    ],
+    "parameters": [],
+    "date": "20.09.2019"
+}

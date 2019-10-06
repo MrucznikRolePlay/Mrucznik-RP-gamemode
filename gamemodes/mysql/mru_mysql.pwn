@@ -104,7 +104,6 @@ Save_MySQL_Leader(playerid)
 	PlayerInfo[playerid][pLiderValue],
 	GetNick(playerid)); 
 	mysql_query(query);
-	MruMySQL_IloscLiderowLoad();
 	return 1;
 }
 Load_MySQL_Leader(playerid)
@@ -147,14 +146,15 @@ MruMySQL_IloscLiderowLoad()
 		}
 	}
 }
-MruMySQL_CreateAccount(playerid, pass[])
+MruMySQL_CreateAccount(playerid, password[])
 {
 	if(!MYSQL_ON) return 0;
 	
-	new query[256];
-    new password[WHIRLPOOL_LEN];
-	WP_Hash(password, sizeof(password), pass);
-	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`) VALUES ('%s', '%s')", GetNick(playerid), password);
+	new query[256+WHIRLPOOL_LEN+SALT_LENGTH];
+    new hash[WHIRLPOOL_LEN], salt[SALT_LENGTH];
+	randomString(salt, sizeof(salt));
+	WP_Hash(hash, sizeof(hash), sprintf("%s%s%s", ServerSecret, password, salt));
+	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`, `Salt`) VALUES ('%s', '%s', '%s')", GetNick(playerid), hash, salt);
 	mysql_query(query);
 	return 1;
 }
@@ -327,7 +327,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     format(query, sizeof(query), "%s, \
     `Local`='%d', \
 	`Team`='%d', \
-	`Model`='%d', \
+	`JobSkin`='%d', \
 	`PhoneNr`='%d', \
 	`Dom`='%d', \
 	`Bizz`='%d', \
@@ -344,7 +344,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     `Hat`='%d' WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pLocal],
 	PlayerInfo[playerid][pTeam],
-	PlayerInfo[playerid][pModel],
+	PlayerInfo[playerid][pJobSkin],
 	PlayerInfo[playerid][pPnumber],
 	PlayerInfo[playerid][pDom],
 	PlayerInfo[playerid][pBusinessOwner],
@@ -467,7 +467,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`PodgladWiadomosci`='%d', \
 	`StylWalki`='%d', \
 	`PAdmin`='%d', \
-	`ZaufanyGracz`='%d', \
+	`Uniform`='%d', \
 	`connected`='0' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
@@ -482,7 +482,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
-	PlayerInfo[playerid][pZG],
+	PlayerInfo[playerid][pUniform],
     PlayerInfo[playerid][pUID]);
 
     if(!mysql_query(query)) fault=false;
@@ -584,7 +584,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pSkin], 
 		PlayerInfo[playerid][pContractTime]);
 
-        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `Model`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
+        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
@@ -611,7 +611,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pInt],
 		PlayerInfo[playerid][pLocal],
 		PlayerInfo[playerid][pTeam],
-		PlayerInfo[playerid][pModel],
+		PlayerInfo[playerid][pJobSkin],
 		PlayerInfo[playerid][pPnumber],
 		PlayerInfo[playerid][pDom],
 		PlayerInfo[playerid][pBusinessOwner],
@@ -681,7 +681,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `ZaufanyGracz`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Czystka`, `CarSlots`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Czystka`, `CarSlots`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
@@ -690,7 +690,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -704,7 +704,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pPodPW],
 		PlayerInfo[playerid][pStylWalki],
 		PlayerInfo[playerid][pNewAP],
-		PlayerInfo[playerid][pZG],
+		PlayerInfo[playerid][pUniform],
 		PlayerInfo[playerid][pAuto1],
 		PlayerInfo[playerid][pAuto2],
 		PlayerInfo[playerid][pAuto3],
@@ -808,13 +808,6 @@ public MruMySQL_LoadAcocount(playerid)
     //MruMySQL_WczytajOpis(playerid, PlayerInfo[playerid][pUID], 1);
 	if(id != 4) return false;
 	return true;
-}
-
-MruMySQL_ConvertPassword(playerid, hashedPassword[])
-{
-	new string[256];
-	format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%s'", hashedPassword, GetNick(playerid));
-	mysql_query(string);
 }
 
 MruMySQL_WczytajOpis(handle, uid, typ)
@@ -922,24 +915,24 @@ MruMySQL_DoesAccountExist(nick[])
 	return 0;
 }
 
-MruMySQL_ReturnPassword(nick[])
+MruMySQL_ReturnPassword(nick[], key[], salt[])
 {
-	new string[128], key[129];
+	new string[128];
+	new result[8+WHIRLPOOL_LEN+SALT_LENGTH];
 	
 	mysql_real_escape_string(nick, nick);
-	format(string, sizeof(string), "SELECT `Key` FROM `mru_konta` WHERE `Nick` = '%s'", nick);
+	format(string, sizeof(string), "SELECT `Key`, `Salt` FROM `mru_konta` WHERE `Nick` = '%s'", nick);
 
 	mysql_query(string);
 	mysql_store_result();
-	
-	if(mysql_retrieve_row())
+	if(mysql_num_rows() > 0)
 	{
-		mysql_fetch_field_row(key, "Key");
+        mysql_fetch_row_format(result, "|");
+		sscanf(result, "p<|>s[129]s[" #SALT_LENGTH "]", key, salt);
 	}
 	
 	mysql_free_result();
-	
-	return key;
+	return 1;
 }
 
 
