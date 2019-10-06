@@ -77,16 +77,6 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	}
 	if(cmdtext[0] == '@')
 	{
-		if(strlen(cmdtext) > 31)
-		{
-			sendTipMessage(playerid, "Nieprawid³owa d³ugoœæ znaków animacji"); 
-			return COMMAND_OK;
-		}
-        new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, cmdtext);
-        if(lVal != 1)
-		{
-			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
-		} 
 		return COMMAND_OK;
 	}
 

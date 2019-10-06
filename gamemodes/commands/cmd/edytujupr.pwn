@@ -48,7 +48,7 @@ YCMD:edytujupr(playerid, params[], help)
 
     if(Uprawnienia(id, ACCESS_ZG)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie ZG\n");
     else strcat(str, "{FF0000}-{FFFFFF} Nadawanie ZG\n");
-    if(Uprawnienia(id, ACCESS_GIVEHALF)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie P@\n");
+    if(Uprawnienia(id, ACCESS_GIVEHALF)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie P@ i @\n");
     else strcat(str, "{FF0000}-{FFFFFF} Nadawanie P@\n");
     if(Uprawnienia(id, ACCESS_MAKELEADER)) strcat(str, "{00FF00}+{FFFFFF} Nadawanie paneli\n");
     else strcat(str, "{FF0000}-{FFFFFF} Nadawanie paneli\n");

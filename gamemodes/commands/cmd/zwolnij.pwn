@@ -70,7 +70,7 @@ YCMD:zwolnij(playerid, params[], help)
 							OnDuty[para1] = 0;
 							SanDuty[para1] = 0;
 							UsunBron(para1);
-							SetSpawnInfo(para1, gTeam[para1], PlayerInfo[para1][pModel],0.0,0.0,0.0,0,0,0,0,0,0,0);
+							SetSpawnInfo(para1, gTeam[para1], PlayerInfo[para1][pSkin],0.0,0.0,0.0,0,0,0,0,0,0,0);
 							MedicBill[para1] = 0;
 							SetPlayerSpawn(para1);
                             MruMySQL_SetAccInt("Rank", giveplayer, 0);

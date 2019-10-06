@@ -26,9 +26,9 @@ NowaWybieralka_Setup(playerid)
 	TextDrawShowForPlayer(playerid, NowaWybieralka_Left);
 	TextDrawShowForPlayer(playerid, NowaWybieralka_Right);
 
-	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
+	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 
-	SetPVarInt(playerid, "NowaWybieralkaSelect", PlayerInfo[playerid][pModel]);
+	SetPVarInt(playerid, "NowaWybieralkaSelect", PlayerInfo[playerid][pSkin]);
 
     SelectTextDraw(playerid, 0xAFAFAFAA);
 	TogglePlayerControllable(playerid,0);
@@ -125,7 +125,7 @@ NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 		TextDrawHideForPlayer(playerid,NowaWybieralka_Right);
 		TextDrawHideForPlayer(playerid,NowaWybieralka_Select);
 
-		PlayerInfo[playerid][pModel] = GetPVarInt(playerid, "NowaWybieralkaSelect");
+		PlayerInfo[playerid][pSkin] = GetPVarInt(playerid, "NowaWybieralkaSelect");
 
 		if(GetPVarInt(playerid, "wyborPierwszego") == 1)
 		{
@@ -142,7 +142,7 @@ NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 	        SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
 	    	SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	        Wchodzenie(playerid);
-	        sendTipMessageEx(playerid, COLOR_P@, sprintf("Kupi³eœ skin %d za $5000", PlayerInfo[playerid][pModel]));
+	        sendTipMessageEx(playerid, COLOR_P@, sprintf("Kupi³eœ skin %d za $5000", PlayerInfo[playerid][pSkin]));
 	        ZabierzKase(playerid, 5000);
 		}
 		TogglePlayerControllable(playerid, 1);		

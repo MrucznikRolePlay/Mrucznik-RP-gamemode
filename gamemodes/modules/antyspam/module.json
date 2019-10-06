@@ -1,0 +1,11 @@
+{
+    "name": "antyspam",
+    "description": "Timery i funkcje dotycz¹ce anty-spamu",
+    "author": "Simeone",
+    "timers": true,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": false,
+    "date": "25.09.2019"
+}

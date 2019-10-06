@@ -481,7 +481,7 @@ new FractionNames[][40] = {
     "Emergency Rescue Service",
     "SA Bahamas",
     "Yakuza",
-    "United States Secret Service",
+    "Government Security Agency",
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
@@ -1273,6 +1273,7 @@ enum pInfo
 	pUID,
 	pNick[24],
 	pKey[129],
+	pSalt[SALT_LENGTH],
 	pLevel,
 	pAdmin,
 	pDonateRank,
@@ -1335,7 +1336,7 @@ enum pInfo
 	//pDomW,
 	pLocal,
 	pTeam,
-	pModel,
+	pJobSkin,
 	pPnumber,
 	pDom,
 	pWynajem,
@@ -1448,7 +1449,8 @@ enum pInfo
 	pAdminAccess,
 	pBusinessOwner,
 	pBusinessMember,
-	pLiderValue
+	pLiderValue,
+	pUniform
 };
 enum StringData
 {

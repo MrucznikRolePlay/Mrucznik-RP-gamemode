@@ -1,0 +1,11 @@
+{
+    "name": "urzadls",
+    "description": "Automatyzacja Urzêdu Miasta w Los Santos - boty, skrypt botów, prawa jazdy [..] .",
+    "author": "Simeone",
+    "timers": true,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "20.09.2019"
+}

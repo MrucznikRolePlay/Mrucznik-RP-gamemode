@@ -73,7 +73,7 @@ YCMD:quitpraca(playerid, params[], help)
 				}
 			}
 			
-			Log(serverLog, INFO, "Gracz %s opuœci³ pracê %d.", GetPlayerLogName(playerid), job);
+			Log(commandLog, INFO, "Gracz %s opuœci³ pracê %d.", GetPlayerLogName(playerid), job);
 		}
 		else
 		{
