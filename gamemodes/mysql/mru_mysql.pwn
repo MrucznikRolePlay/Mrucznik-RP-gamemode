@@ -146,15 +146,15 @@ MruMySQL_IloscLiderowLoad()
 		}
 	}
 }
-MruMySQL_CreateAccount(playerid, pass[])
+MruMySQL_CreateAccount(playerid, password[])
 {
 	if(!MYSQL_ON) return 0;
 	
 	new query[256+WHIRLPOOL_LEN+SALT_LENGTH];
-    new password[WHIRLPOOL_LEN], salt[SALT_LENGTH];
+    new hash[WHIRLPOOL_LEN], salt[SALT_LENGTH];
 	randomString(salt, sizeof(salt));
-	WP_Hash(password, sizeof(password), sprintf("%s%s%s", ServerSecret, pass, salt));
-	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`, `Salt`) VALUES ('%s', '%s', '%s')", GetNick(playerid), password, salt);
+	WP_Hash(hash, sizeof(hash), sprintf("%s%s%s", ServerSecret, password, salt));
+	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`, `Salt`) VALUES ('%s', '%s', '%s')", GetNick(playerid), hash, salt);
 	mysql_query(query);
 	return 1;
 }
@@ -918,21 +918,20 @@ MruMySQL_DoesAccountExist(nick[])
 MruMySQL_ReturnPassword(nick[], key[], salt[])
 {
 	new string[128];
+	new result[8+WHIRLPOOL_LEN+SALT_LENGTH];
 	
 	mysql_real_escape_string(nick, nick);
 	format(string, sizeof(string), "SELECT `Key`, `Salt` FROM `mru_konta` WHERE `Nick` = '%s'", nick);
 
 	mysql_query(string);
 	mysql_store_result();
-	
-	if(mysql_retrieve_row())
+	if(mysql_num_rows() > 0)
 	{
-		mysql_fetch_field_row(key, "Key");
-		mysql_fetch_field_row(salt, "Salt");
+        mysql_fetch_row_format(result, "|");
+		sscanf(result, "p<|>s[129]s[" #SALT_LENGTH "]", key, salt);
 	}
 	
 	mysql_free_result();
-	
 	return 1;
 }
 

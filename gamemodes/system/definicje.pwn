@@ -260,20 +260,20 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 //                              UPRAWNIENIA
 //------------------------------------------------------------------------------
 //18.06 uprawniania do panelu kar
-#define ACCESS_PANEL        0b1 //G³ówny panel administracji
-#define ACCESS_KARY         0b10 //G³owny panel kar
+#define ACCESS_PANEL            0b1 //G³ówny panel administracji
+#define ACCESS_KARY             0b10 //G³owny panel kar
 
-#define ACCESS_KARY_ZNAJDZ  0b100 //Search
-#define ACCESS_KARY_UNBAN   0b1000 //Unban
-#define ACCESS_KARY_BAN     0b10000 //Ban
-#define ACCESS_ZG           0b100000
-#define ACCESS_MAKEFAMILY   0b1000000
-#define ACCESS_MAKELEADER   0b10000000
-#define ACCESS_EDITPERM     0b100000000
-#define ACCESS_EDITCAR      0b1000000000
-#define ACCESS_EDITRANG     0b10000000000
-#define ACCESS_GIVEHALF     0b100000000000
-#define ACCESS_DELETEORG    0b1000000000000 //13 bit
+#define ACCESS_KARY_ZNAJDZ      0b100 //Search
+#define ACCESS_KARY_UNBAN       0b1000 //Unban
+#define ACCESS_KARY_BAN         0b10000 //Ban
+#define ACCESS_ZG               0b100000
+#define ACCESS_MAKEFAMILY       0b1000000
+#define ACCESS_MAKELEADER       0b10000000
+#define ACCESS_EDITPERM         0b100000000
+#define ACCESS_EDITCAR          0b1000000000
+#define ACCESS_EDITRANG         0b10000000000
+#define ACCESS_GIVEHALF         0b100000000000
+#define ACCESS_DELETEORG        0b1000000000000 //13 bit
 
 #define ACCESS_OWNER        0b1111111111111
 

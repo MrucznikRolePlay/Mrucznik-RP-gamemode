@@ -82,11 +82,11 @@ MruMySQL_ChangePassword(nick[], password[])
 {
     new string[256];
     new escaped_nick[MAX_PLAYER_NAME];
-    new hashedPassword[WHIRLPOOL_LEN], salt[16];
+    new hashedPassword[WHIRLPOOL_LEN], salt[SALT_LENGTH];
     randomString(salt, sizeof(salt));
     WP_Hash(hashedPassword, sizeof(hashedPassword), sprintf("%s%s%s", ServerSecret, password, salt));
     mysql_real_escape_string(nick, escaped_nick);
-    format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s', `Salt` = '%s' WHERE `Nick` = '%s'", password, salt, escaped_nick);
+    format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s', `Salt` = '%s' WHERE `Nick` = '%s'", hashedPassword, salt, escaped_nick);
     mysql_query(string);
 }
 
