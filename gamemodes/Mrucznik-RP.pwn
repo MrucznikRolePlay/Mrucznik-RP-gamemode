@@ -5810,15 +5810,8 @@ stock randomString(strDest[], strLen) // credits go to: RyDeR`
         strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
 }
 
-DialogBlockedAccount(playerid)
-{
-	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Niestety, ale Twoje konto zosta³o zablokowane do weryfikacji,\n poniewa¿ istnieje ryzyko, ¿e zosta³o zhackowane.\nNapisz stratê na forum, a jeœli u¿ywa³eœ takiego samego has³a w innym miejscu - zalecamy jego zmianê.");
-	ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\nNiestety, ale Twoje konto zosta³o zablokowane do weryfikacji,\n poniewa¿ istnieje ryzyko, ¿e zosta³o zhackowane.\nNapisz stratê na forum, a jeœli u¿ywa³eœ takiego samego has³a w innym miejscu - zalecamy jego zmianê.", "Dalej", "Wyjdz"); 
-}
-
 DialogChangePasswordRequired(playerid)
 {
-	SetPVarInt(playerid, "ChangingPassword", 1);
 	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wymagana jest zmiana has³a do konta.\n{FF00FF}Istnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ..");
 	ShowPlayerDialogEx(playerid, D_HASLO_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\n{FF1010}Wymagana jest zmiana has³a do konta.\n{FF00FF}Istnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ.", "Dalej", "Wyjdz"); 
 }
@@ -5865,75 +5858,39 @@ VerifyPlayerIp(playerid)
 VeryfiLastLogin(playerid)
 {
 	new query[128];
-	format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s'", GetNick(playerid));
+	format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s' LIMIT 1", GetNick(playerid));
 	mysql_query(query);
 	mysql_store_result();
 	if(mysql_num_rows()) //ostatnie logowanie po 15
 	{
 		mysql_free_result();
+		Log(serverLog, INFO, "Logon matched for %s", GetNick(playerid));
 		return true;
 	}
 	else
 	{
 		mysql_free_result();
+		Log(serverLog, INFO, "Logon mismatched for %s", GetNick(playerid));
 		return false;
 	}
 }
 
 PasswordConversion(playerid, accountPass[], password[])
 {
-	if(strlen(accountPass) == 32)
+	new hashedPassword[WHIRLPOOL_LEN];
+	WP_Hash(hashedPassword, sizeof(hashedPassword), password);
+	new isMD5 = (strlen(accountPass) == 32);
+
+	if( (isMD5 && strcmp(accountPass, MD5_Hash(password), true ) == 0) //konwersja hase³ MD5 na Whirlpool + salt
+		|| strcmp(accountPass, hashedPassword, true ) == 0) //konwersja hase³ Whirlpool na Whirlpool + salt
 	{
-		//konwersja hase³ MD5 na Whirlpool
-		if(strcmp(accountPass, MD5_Hash(password), true ) == 0)
-		{
-			if(VerifyPlayerIp(playerid))
-			{
-				Log(serverLog, DEBUG, "Password change required for %s (matched ip)", GetNick(playerid));
-				DialogChangePasswordRequired(playerid);
-			}
-			else
-			{
-				//blokada konta
-				Log(serverLog, WARNING, "Account %s has been blocked because of mismatching ip address", GetNick(playerid));
-				DialogBlockedAccount(playerid);
-				KickEx(playerid);
-				return false;
-			}
-			return true;
-		}
-	}
-	else
-	{
-		//konwersja hase³ Whirlpool na Whirlpool + salt
-		new hashedPassword[WHIRLPOOL_LEN];
-		WP_Hash(hashedPassword, sizeof(hashedPassword), password);
-		if(strcmp(accountPass, hashedPassword, true ) == 0)
-		{
-			if(VerifyPlayerIp(playerid))
-			{
-				Log(serverLog, DEBUG, "Password change required for %s (matched ip)", GetNick(playerid));
-				DialogChangePasswordRequired(playerid);
-			}
-			else
-			{
-				//check last login
-				if(VeryfiLastLogin(playerid))
-				{
-					Log(serverLog, DEBUG, "Password change required for %s (matched last logon)", GetNick(playerid));
-					DialogChangePasswordRequired(playerid);
-				}
-				else
-				{
-					//blokada konta
-					Log(serverLog, WARNING, "Account %s has been blocked because of mismatching ip address and last logon date", GetNick(playerid));
-					DialogBlockedAccount(playerid);
-					KickEx(playerid);
-					return false;
-				}
-			}
-			return true;
-		}
+		Log(serverLog, INFO, "Converting account to new hash, previous: %s", (isMD5 == 32 ? "MD5" : "Whirlpool"));
+		VerifyPlayerIp(playerid);
+		VeryfiLastLogin(playerid);
+		MruMySQL_ChangePassword(GetNick(playerid), password);
+		DialogChangePasswordRequired(playerid);
+		SetPVarInt(playerid, "ChangingPassword", 1);
+		return true;
 	}
 	return false;
 }
