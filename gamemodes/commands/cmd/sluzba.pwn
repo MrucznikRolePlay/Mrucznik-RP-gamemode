@@ -333,7 +333,7 @@ YCMD:sluzba(playerid, params[], help)
         {
             sendTipMessage(playerid, "Nie jesteœ policjantem !");
         }
-        if(GetPlayerSkin(playerid) == 0)
+        if(PlayerInfo[playerid][pUniform] == 0)
         {
             SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
             sendTipMessage(playerid, "Nie masz skina frakcyjnego!");
