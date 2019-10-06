@@ -45,7 +45,7 @@ YCMD:koxubankot(playerid, params[], help)
 
 		if(IsPlayerAdmin(playerid))
 		{
-            if(Uprawnienia(playerid, ACCESS_OWNER))
+            if(Uprawnienia(playerid, ACCESS_OPIEKUN_ADMINOW))
 			{
 				if(IsPlayerConnected(para1))
 				{
