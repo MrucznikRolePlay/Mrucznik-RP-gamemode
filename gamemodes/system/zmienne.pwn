@@ -1205,7 +1205,6 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pOrg] = 0;
 	PlayerInfo[playerid][pRank] = 0;
 	PlayerInfo[playerid][pChar] = 0;
-	PlayerInfo[playerid][pSkin] = 0;
 	PlayerInfo[playerid][pContractTime] = 0;
 	PlayerInfo[playerid][pDetSkill] = 0;
 	PlayerInfo[playerid][pSexSkill] = 0;
