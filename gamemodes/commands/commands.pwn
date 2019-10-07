@@ -121,7 +121,7 @@
 #include "cmd/dn.pwn"
 #include "cmd/do.pwn"
 #include "cmd/dodajweryfikacje.pwn"
-#include "cmd/dolacz.pwn"
+//#include "cmd/dolacz.pwn" -> Przeniesione na modu³ Jobs
 #include "cmd/domint.pwn"
 #include "cmd/dopasuj.pwn"
 #include "cmd/dpa.pwn"
@@ -288,7 +288,6 @@
 #include "cmd/msgbox.pwn"
 #include "cmd/muzyczka.pwn"
 #include "cmd/namierz.pwn"
-#include "cmd/napraw.pwn"
 #include "cmd/nastepnylevel.pwn"
 #include "cmd/naucz.pwn"
 #include "cmd/nazywo.pwn"
@@ -953,9 +952,6 @@ static Aliases()
 	Command_AddAltNamed("namierz", "find");
 	Command_AddAltNamed("namierz", "znajdz");
 	Command_AddAltNamed("namierz", "szukaj");
-
-	//napraw
-	Command_AddAltNamed("napraw", "repair");
 
 	//nastepnylevel
 	Command_AddAltNamed("nastepnylevel", "buylevel");

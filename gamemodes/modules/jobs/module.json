@@ -1,0 +1,11 @@
+{
+    "name": "jobs",
+    "description": "Modu³, który odpowiada za wszelkie prace dorywcze na serwerze. ",
+    "author": "Simeone",
+    "timers": true,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "07.10.2019"
+}
