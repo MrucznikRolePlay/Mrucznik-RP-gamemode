@@ -26,7 +26,7 @@
 command_napraw_Impl(playerid, giveplayerid, valueCost)
 {
     new string[124];
-    if(GetPlayerJobID(playerid) != JOB_MECHAZORD)
+    if(!CheckPlayerJob(playerid, JOB_MECHAZORD))
     {
         sendErrorMessage(playerid, "Nie jesteœ mechanikiem!");
         sendTipMessage(playerid, "Mo¿esz do³¹czyæ do pracy mechanika wpisuj¹c /dolacz w odpowiednim punkcie!"); 

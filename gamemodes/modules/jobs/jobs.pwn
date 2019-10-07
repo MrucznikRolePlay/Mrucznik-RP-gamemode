@@ -38,7 +38,7 @@ SetPlayerJob(playerid, jobID)
 }
 CheckPlayerJob(playerid, jobID)
 {
-	if(GetPlayerJob(playerid) == jobID)
+	if(GetPlayerJobID(playerid) == jobID)
 	{
 		return true;
 	}
