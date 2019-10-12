@@ -4,8 +4,8 @@
 	"entry": "gamemodes/Mrucznik-RP.pwn",
 	"output": "gamemodes/Mrucznik-RP.amx",
 	"dependencies": [
-		"zeex/samp-plugin-crashdetect:v4.19.4",
 		"sampctl/samp-stdlib:0.3.DL-R1",
+		"zeex/samp-plugin-crashdetect:v4.19.4",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
 		"maddinat0r/samp-log:v0.4",
