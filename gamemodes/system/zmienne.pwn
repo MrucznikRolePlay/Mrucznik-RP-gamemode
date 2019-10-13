@@ -63,7 +63,6 @@ new OfferPlayer[MAX_PLAYERS];
 new OfferPrice[MAX_PLAYERS];
 
 new vinylStatus; 
-new showSpec[MAX_PLAYERS] = 666; 
 //Caluj - oferta
 new kissPlayerOffer[MAX_PLAYERS];
 //ALARM DMV:
@@ -1050,6 +1049,9 @@ new timerForHunter[MAX_PLAYERS];*/
 //new newsTypePlayer[MAX_PLAYERS] = 3; 
 new AllLeaders; 
 
+new playerTargetSpec[MAX_PLAYERS];
+new playerSeeSpec[MAX_PLAYERS];
+
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1062,6 +1064,8 @@ ClearVariableConnect(playerid)
 	hunterSeeMe[playerid]=0;
 	hunterStatus[playerid]=0;
 	timerForHunter[playerid]=0;*/
+	playerTargetSpec[playerid] = INVALID_SPECTATE_ID;
+	playerSeeSpec[playerid] = INVALID_SPECTATE_ID; 
 	return 1;
 }
 ClearVariableDisconnect(playerid)

@@ -1,0 +1,17 @@
+{
+    "name": "specshow",
+    "description": "Komenda, która pozwala spojrzeæ kogo podgl¹da dany administrator.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "specshow"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "valueSpec",
+            "description": "ID"
+        }
+    ],
+    "date": "13.10.2019"
+}
