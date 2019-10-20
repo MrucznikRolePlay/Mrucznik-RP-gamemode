@@ -101,19 +101,28 @@ PickupBox(playerid, boxid)
 DropBox(playerid)
 {
 	new boxid = carryingBox[playerid];
+
+    SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
+
+	defer AfterDropBox(playerid, boxid);
+	
+	carryingBox[playerid] = -1;
+	Boxes[boxid][box_player] = -1;
+	return 1;
+}
+
+timer AfterDropBox[500](playerid, boxid)
+{
 	new Float:x, Float:y, Float:z, Float:angle;
 	GetPlayerPos(playerid, x, y, z);
 	GetPlayerFacingAngle(playerid, angle);
 
-    SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
-	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, angle, 0.0, 0, 0);
 	Boxes[boxid][box_x] = x;
 	Boxes[boxid][box_y] = y;
 	Boxes[boxid][box_z] = z;
 
-	carryingBox[playerid] = -1;
-	Boxes[boxid][box_player] = -1;
-	return 1;
+	RemovePlayerAttachedObject(Boxes[boxid][box_player], Boxes[boxid][box_attachedSlot]);
+	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, angle, 0.0, 0, 0);
 }
 
 IsPlayerCarryingBox(playerid)
