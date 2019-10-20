@@ -105,7 +105,8 @@ DropBox(playerid)
 	GetPlayerPos(playerid, x, y, z);
 	GetPlayerFacingAngle(playerid, angle);
 
-	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-0.9, angle, 0.0, 0.0, 0, 0);
+    SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
+	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, angle, 0.0, 0.0, 0, 0);
 
 	carryingBox[playerid] = -1;
 	Boxes[boxid][box_player] = -1;
@@ -156,7 +157,7 @@ DropBoxFromCar(carid)
 	new driverid = GetVehicleDriverID(carid);
 	if(driverid != -1) ChatDo(driverid, "Z pojazdu konwojowego wypada skrzynka z amunicj¹.");
 
-	return CreateBox(x, y, z);
+	return CreateBox(x, y, z-BOX_VEHICLE_Z_OFFSET);
 }
 
 

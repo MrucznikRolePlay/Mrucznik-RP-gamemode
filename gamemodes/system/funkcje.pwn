@@ -12242,6 +12242,12 @@ stock GetVehicleDriverID(vehicleid)
     return -1;
 }  
 
+stock IsVehicleRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
+{
+    if(vehicleid == INVALID_VEHICLE_ID) return 0;
+    return GetVehicleDistanceFromPoint(vehicleid, x, y, z) <= range;
+}  
+
 //--------------------------------------------------
 
 public AddsOn()
