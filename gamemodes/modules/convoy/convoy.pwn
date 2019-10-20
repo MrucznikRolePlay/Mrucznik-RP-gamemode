@@ -51,7 +51,7 @@ CreateBox(Float:x, Float:y, Float:z, Float:rx=0.0, Float:ry=0.0, Float:rz=0.0)
 	new id = GetFreeBoxId();
 	if(id == -1) return -1;
 
-	Boxes[id][box_free] = false;
+	Boxes[id][box_used] = true;
 	Boxes[id][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z, rx, ry, rz, 0, 0);
 	Boxes[id][box_player] = -1;
 	Boxes[id][box_x] = x;
@@ -63,7 +63,7 @@ CreateBox(Float:x, Float:y, Float:z, Float:rx=0.0, Float:ry=0.0, Float:rz=0.0)
 
 DestroyBox(boxid)
 {
-	Boxes[boxid][box_free] = true;
+	Boxes[boxid][box_used] = false;
 	if(Boxes[boxid][box_object] != -1) 
 	{
 		DestroyDynamicObject(Boxes[boxid][box_object]);
@@ -131,7 +131,7 @@ GetFreeBoxId()
 {
 	for(new i; i<MAX_BOXES; i++)
 	{
-		if(Boxes[i][box_free]) return i;
+		if(!Boxes[i][box_used]) return i;
 	}
 	return -1;
 }
@@ -140,7 +140,7 @@ GetNearestBox(playerid)
 {
 	for(new i; i<MAX_BOXES; i++)
 	{
-		if(Boxes[i][box_free] == false && IsPlayerInRangeOfPoint(playerid, 5.0, Boxes[i][box_x], Boxes[i][box_y], Boxes[i][box_z]))
+		if(Boxes[i][box_used] && IsPlayerInRangeOfPoint(playerid, 5.0, Boxes[i][box_x], Boxes[i][box_y], Boxes[i][box_z]))
 		{
 			return i;
 		}

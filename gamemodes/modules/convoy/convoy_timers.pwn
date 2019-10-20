@@ -45,6 +45,9 @@ task ConvoyTimer[1000]()
 				DropBoxFromCar(convoyCar);
 			}
 		}
+		if(health < 300) {
+			StopConvoy();
+		}
 	}
 }
 

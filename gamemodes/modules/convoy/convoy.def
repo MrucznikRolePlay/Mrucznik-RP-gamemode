@@ -28,6 +28,6 @@
 #define BOX_BONUS 1000
 #define BOX_OBJECT 1271
 #define CONVOY_CAR 428
-#define CONVOY_CAR_HP 50000
+#define CONVOY_CAR_HP MAX_BOXES*1000
 
 //end
