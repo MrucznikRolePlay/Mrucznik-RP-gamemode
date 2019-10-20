@@ -75,10 +75,6 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	{
 		StaryCzas[playerid] = GetTickCount();
 	}
-	if(cmdtext[0] == '@')
-	{
-		return COMMAND_OK;
-	}
 
 	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
 	{
