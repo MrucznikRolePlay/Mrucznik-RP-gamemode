@@ -107,9 +107,9 @@ DropBox(playerid)
 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, angle, 0.0, 0, 0);
-	Boxes[id][box_x] = x;
-	Boxes[id][box_y] = y;
-	Boxes[id][box_z] = z;
+	Boxes[boxid][box_x] = x;
+	Boxes[boxid][box_y] = y;
+	Boxes[boxid][box_z] = z;
 
 	carryingBox[playerid] = -1;
 	Boxes[boxid][box_player] = -1;
