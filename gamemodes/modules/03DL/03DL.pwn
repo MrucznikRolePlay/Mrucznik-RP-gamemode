@@ -77,7 +77,7 @@ stock skinIsLegally(skinID)
 	{
 		return true;
 	}
-	else if(skinID >= 87 && skinID <= 97)
+	else if(skinID >= 87 && skinID <= 97 && skinID != 93)
 	{
 		return true;
 	}
