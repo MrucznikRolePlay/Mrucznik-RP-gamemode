@@ -82,11 +82,6 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		return COMMAND_ZERO_RET;
 	}
 
-	if(cmdtext[0] == '@')
-	{
-		return COMMAND_OK;
-	}
-
 	switch(success)
 	{
 		case COMMAND_ZERO_RET:

@@ -6726,7 +6726,7 @@ public OnPlayerText(playerid, text[])
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
 		} 
-		return 1;
+		return 0;
 	}
 	if(PlayerInfo[playerid][pMuted] == 1)
 	{
