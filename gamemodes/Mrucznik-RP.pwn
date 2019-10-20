@@ -1059,7 +1059,12 @@ public OnPlayerConnect(playerid)
 		return 1;
 	}
 	SetRPName(playerid);
+	
+	//bany
+	if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
+
 	timeSecWjedz[playerid] = 0;
+
 
 	//Pocz¹tkowe ustawienia:
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
@@ -5934,8 +5939,6 @@ OnPlayerLogin(playerid, password[])
     
 	if(!isnull(password) && PasswordVerify(playerid, password))
 	{//poprawne has³o
-        MruMySQL_KonwertujBana(playerid);
-        if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
 
 		//----------------------------
 		//£adowanie konta i zmiennych:
