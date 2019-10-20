@@ -46,6 +46,7 @@ StopConvoy()
 	DestroyBoxes();
 }
 
+//-----------------<[ Boxy: ]>-------------------
 CreateBox(Float:x, Float:y, Float:z, Float:rx=0.0, Float:ry=0.0, Float:rz=0.0)
 {
 	new id = GetFreeBoxId();
@@ -119,10 +120,20 @@ timer AfterDropBox[500](playerid, boxid)
 	GetPlayerFacingAngle(playerid, angle);
 
 	RemovePlayerAttachedObject(playerid, Boxes[boxid][box_attachedSlot]);
-	Boxes[boxid][box_x] = x;
-	Boxes[boxid][box_y] = y;
-	Boxes[boxid][box_z] = z;
-	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
+
+	if(IsPlayerInBoxDeliveryPoint(playerid))
+	{
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Gratulacje, dostarczy³eœ ³up z konwoju. Otrzymujesz %d$.", Boxes[boxid][box_bonus]));
+		DajKase(playerid, Boxes[boxid][box_bonus]);
+		DestroyBox(boxid);
+	}
+	else
+	{
+		Boxes[boxid][box_x] = x;
+		Boxes[boxid][box_y] = y;
+		Boxes[boxid][box_z] = z;
+		Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
+	}
 }
 
 IsPlayerCarryingBox(playerid)
@@ -140,6 +151,11 @@ IsPlayerInConvoyCar(playerid)
 	return IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleID(playerid) == convoyCar;
 }
 
+IsPlayerInBoxDeliveryPoint(playerid)
+{
+	return IsPlayerInRangeOfPoint(playerid, 5.0, ActorX, ActorY, ActorZ);
+}
+
 GetFreeBoxId()
 {
 	for(new i; i<MAX_BOXES; i++)
@@ -153,7 +169,7 @@ GetNearestBox(playerid)
 {
 	for(new i; i<MAX_BOXES; i++)
 	{
-		if(Boxes[i][box_used] && Boxes[i][box_player] == -1 && IsPlayerInRangeOfPoint(playerid, 5.0, Boxes[i][box_x], Boxes[i][box_y], Boxes[i][box_z]))
+		if(Boxes[i][box_used] && Boxes[i][box_player] == -1 && IsPlayerInRangeOfPoint(playerid, PICKUP_BOX_RANGE, Boxes[i][box_x], Boxes[i][box_y], Boxes[i][box_z]))
 		{
 			return i;
 		}
@@ -171,7 +187,6 @@ DropBoxFromCar(carid)
 
 	return CreateBox(x, y, z-BOX_VEHICLE_Z_OFFSET);
 }
-
 
 //-----------------<[ 3rd party: ]>-------------------
 stock GetPosBehindVehicle(vehicleid, &Float:x, &Float:y, &Float:z, Float:offset=0.5) //Credits go to MP2

@@ -41,7 +41,7 @@ command_createconvoybox_Impl(playerid)
         boxid = CreateBox(x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, ang);
     }
     if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
-    SendClientMessage(playerid, -1, sprintf("Stworzyles box o id %d", boxid));
+    SendClientMessage(playerid, -1, sprintf("Stworzy³eœ box o id %d", boxid));
     return 1;
 }
 

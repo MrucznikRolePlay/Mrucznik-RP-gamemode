@@ -35,6 +35,8 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		new boxid = GetNearestBox(playerid);
 		if(boxid != -1)
 		{
+			sendTipMessage(playerid, "Podnios³eœ skrzynkê z broni¹. Aby j¹ upuœciæ, naciœnij enter.");
+			sendTipMessage(playerid, "Dostarcz paczkê do handlarza materia³ami w fabryce, aby otrzymaæ nagrodê.");
 			ChatMe(playerid, "podnosi skrzynkê z broni¹.");
 			PickupBox(playerid, boxid);
 		}
