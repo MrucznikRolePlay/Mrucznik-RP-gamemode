@@ -7657,7 +7657,7 @@ ListaKontaktowGracza(playerid)
 			continue;
 		}
 		
-		if(FindPlayerByNumber(PlayerInfo[playerid][pPnumber]) != INVALID_PLAYER_ID)
+		if(FindPlayerByNumber(Kontakty[playerid][i][eNumer]) != INVALID_PLAYER_ID)
 		{
 			//aktywny
 			format(string, sizeof(string), "%s%s - %d (on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
