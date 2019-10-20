@@ -32,20 +32,20 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
 	if(PRESSED(KEY_CROUCH))
 	{
+		new boxid = GetNearestBox(playerid);
+		if(boxid != -1)
+		{
+			ChatMe(playerid, "podnosi skrzynkê z broni¹.");
+			PickupBox(playerid, boxid);
+		}
+	}
+	else if(PRESSED(KEY_SECONDARY_ATTACK))
+	{
 		if(IsPlayerCarryingBox(playerid))
 		{
 			DropBox(playerid);
    			ApplyAnimation(playerid,"CARRY","putdwn", 4.0, 0, 0, 0, 0, 0); 
 			ChatMe(playerid, "upuszcza skrzynkê z broni¹.");
-		}
-		else
-		{
-			new boxid = GetNearestBox(playerid);
-			if(boxid != -1)
-			{
-				ChatMe(playerid, "podnosi skrzynkê z broni¹.");
-				PickupBox(playerid, boxid);
-			}
 		}
 	}
 	return 1;

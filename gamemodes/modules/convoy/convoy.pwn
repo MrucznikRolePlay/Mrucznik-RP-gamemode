@@ -89,6 +89,7 @@ PickupBox(playerid, boxid)
 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
     SetPlayerAttachedObject(playerid, itemSlot, BOX_OBJECT, 5, 0.110999, 0.287000, 0.178999, 5.699999, 18.999992, 5.999998);
+	DestroyDynamicObject(Boxes[boxid][box_object]);
     ApplyAnimation(playerid,"CARRY","liftup", 4.0, 0, 0, 0, 0, 0); 
 
     carryingBox[playerid] = boxid;
@@ -105,7 +106,7 @@ DropBox(playerid)
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 
 	defer AfterDropBox(playerid, boxid);
-	
+
 	carryingBox[playerid] = -1;
 	Boxes[boxid][box_player] = -1;
 	return 1;
@@ -117,12 +118,11 @@ timer AfterDropBox[500](playerid, boxid)
 	GetPlayerPos(playerid, x, y, z);
 	GetPlayerFacingAngle(playerid, angle);
 
+	RemovePlayerAttachedObject(playerid, Boxes[boxid][box_attachedSlot]);
 	Boxes[boxid][box_x] = x;
 	Boxes[boxid][box_y] = y;
 	Boxes[boxid][box_z] = z;
-
-	RemovePlayerAttachedObject(Boxes[boxid][box_player], Boxes[boxid][box_attachedSlot]);
-	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, angle, 0.0, 0, 0);
+	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
 }
 
 IsPlayerCarryingBox(playerid)
@@ -153,7 +153,7 @@ GetNearestBox(playerid)
 {
 	for(new i; i<MAX_BOXES; i++)
 	{
-		if(Boxes[i][box_used] && IsPlayerInRangeOfPoint(playerid, 5.0, Boxes[i][box_x], Boxes[i][box_y], Boxes[i][box_z]))
+		if(Boxes[i][box_used] && Boxes[i][box_player] == -1 && IsPlayerInRangeOfPoint(playerid, 5.0, Boxes[i][box_x], Boxes[i][box_y], Boxes[i][box_z]))
 		{
 			return i;
 		}

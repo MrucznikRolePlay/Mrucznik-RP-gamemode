@@ -35,4 +35,6 @@
 #define CONVOY_BEGIN_POS 0.0,0.0,0.0
 #define CONVOY_END_POS 0.0,0.0,0.0
 
+#define BOX_DELIVERY_POINT 0.0,0.0,0.0
+
 //end

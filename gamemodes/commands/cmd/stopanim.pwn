@@ -34,7 +34,7 @@ YCMD:stopanim(playerid, params[], help)
     {
         new Float:Velocity[3];
 		GetPlayerVelocity(playerid, Velocity[0], Velocity[1], Velocity[2]);
-        if(!IsPlayerInAnyVehicle(playerid) && Velocity[2] == 0)
+        if( (!IsPlayerInAnyVehicle(playerid) && Velocity[2] == 0) && (!IsPlayerCarryingBox(playerid)))
         {
 	        ClearAnimations(playerid);
 	        SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
