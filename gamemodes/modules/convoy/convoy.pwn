@@ -37,11 +37,21 @@ StartConvoy(playerid, vehicleid)
 	convoyCar = vehicleid;
 	SetVehicleHealth(vehicleid, CONVOY_CAR_HP);
 	convoyCarHP = CONVOY_CAR_HP;
+
+	foreach(new i : Player)
+	{
+		if(IsACop(i))
+		{
+			SendClientMessage(i, COLOR_LFBI, "HQ: %s rozpocz¹³ konwój. Chroñ dostawê, aby dowieœæ ca³y ³adunek i %d$ nagrody!");
+		}
+	}
 }
 
 StopConvoy()
 {
 	ConvoyStarted = false;
+	convoyDelayed = true;
+	defer ConvoyDelay();
 
 	DestroyBoxes();
 }
@@ -153,6 +163,8 @@ IsPlayerInConvoyCar(playerid)
 
 IsPlayerInBoxDeliveryPoint(playerid)
 {
+	new Float:ActorX, Float:ActorY, Float:ActorZ;
+	GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
 	return IsPlayerInRangeOfPoint(playerid, 5.0, ActorX, ActorY, ActorZ);
 }
 

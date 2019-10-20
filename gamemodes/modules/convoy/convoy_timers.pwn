@@ -34,22 +34,34 @@ task ConvoyTimer[1000]()
 		GetVehicleHealth(convoyCar, Float:health);
 
 		//utrata hp przez pojazd konwojowy
-		if(health < convoyCarHP)
+		if(health < CONVOY_CAR_HP/2 && health < convoyCarHP)
 		{
 			convoyCarHPAcc += convoyCarHP - health;
 			convoyCarHP = health;
 
-			if(convoyCarHPAcc >= 1000)
+			new hpPerPackage = (CONVOY_CAR_HP/2)/MAX_BOXES;
+			if(convoyCarHPAcc >= hpPerPackage)
 			{
-				convoyCarHPAcc = 0;
-
+				convoyCarHPAcc -= hpPerPackage;
 				DropBoxFromCar(convoyCar);
 			}
 		}
 
 		//zniszczenie pojazdu konwojowego
-		if(health < 300) {
+		if(health < 350) {
 			StopConvoy();
+		}
+	}
+}
+
+timer ConvoyDelay[10800]()
+{
+	convoyDelayed = false;
+	foreach(new i : Player)
+	{
+		if(IsACop(i))
+		{
+			SendClientMessage(i, COLOR_LFBI, "HQ: Kolejny konwój z towarem czeka na zorganizowanie.");
 		}
 	}
 }

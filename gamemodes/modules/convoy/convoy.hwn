@@ -38,7 +38,8 @@ enum eBox
 new Boxes[MAX_BOXES][eBox];
 new carryingBox[MAX_PLAYERS];
 
-new ConvoyStarted = false;
+new bool:ConvoyStarted = false;
+new bool:convoyDelayed = false;
 new convoyCar = -1;
 new Float:convoyCarHP;
 new Float:convoyCarHPAcc;
