@@ -34,6 +34,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	{
 		if(IsPlayerCarryingBox(playerid))
 		{
+			ChatMe(playerid, "podnosi skrzynkê z broni¹.");
 			DropBox(playerid);
 		}
 		else
@@ -41,6 +42,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			new boxid = GetNearestBox(playerid);
 			if(boxid != -1)
 			{
+				ChatMe(playerid, "odk³ada skrzynkê z broni¹.");
 				PickupBox(playerid, boxid);
 			}
 		}
@@ -52,6 +54,7 @@ hook OnPlayerDeath(playerid)
 {
 	if(IsPlayerCarryingBox(playerid)) 
 	{
+		ChatMe(playerid, "upuszcza skrzynkê z broni¹.");
 		DropBox(playerid);
 	}
 	return 1;
@@ -61,6 +64,7 @@ hook OnPlayerDisconnect(playerid, reason)
 {
 	if(IsPlayerCarryingBox(playerid)) 
 	{
+		ChatMe(playerid, "upuszcza skrzynkê z broni¹.");
 		DropBox(playerid);
 	}
 	return 1;

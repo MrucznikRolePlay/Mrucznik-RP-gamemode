@@ -152,6 +152,9 @@ DropBoxFromCar(carid)
 {
 	new Float:x, Float:y, Float:z;
 	GetPosBehindVehicle(carid, x, y, z);
+	
+	new driverid = GetVehicleDriverID(carid);
+	if(driverid != -1) ChatDo(driverid, "Z pojazdu konwojowego wypada skrzynka z amunicj¹.");
 
 	return CreateBox(x, y, z);
 }

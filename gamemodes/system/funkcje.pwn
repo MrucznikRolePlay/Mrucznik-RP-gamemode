@@ -12230,6 +12230,18 @@ GetWeaponSlot(weapon)
     return slot;
 }
 
+stock GetVehicleDriverID(vehicleid)
+{
+    foreach(new i : Player) 
+	{
+		if(GetPlayerState(i) == PLAYER_STATE_DRIVER && IsPlayerInVehicle(i, vehicleid))
+		{
+			return i;
+		}
+	}
+    return -1;
+}  
+
 //--------------------------------------------------
 
 public AddsOn()
