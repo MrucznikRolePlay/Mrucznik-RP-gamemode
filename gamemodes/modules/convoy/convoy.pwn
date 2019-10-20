@@ -55,8 +55,8 @@ CreateBox(Float:x, Float:y, Float:z, Float:rx=0.0, Float:ry=0.0, Float:rz=0.0)
 	Boxes[id][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z, rx, ry, rz, 0, 0);
 	Boxes[id][box_player] = -1;
 	Boxes[id][box_x] = x;
-	Boxes[id][box_x] = y;
-	Boxes[id][box_x] = z;
+	Boxes[id][box_y] = y;
+	Boxes[id][box_z] = z;
 	Boxes[id][box_bonus] = random(BOX_BONUS)+BOX_BONUS_BASE;
 	return id;
 }
@@ -106,7 +106,10 @@ DropBox(playerid)
 	GetPlayerFacingAngle(playerid, angle);
 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
-	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, angle, 0.0, 0.0, 0, 0);
+	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, angle, 0.0, 0, 0);
+	Boxes[id][box_x] = x;
+	Boxes[id][box_y] = y;
+	Boxes[id][box_z] = z;
 
 	carryingBox[playerid] = -1;
 	Boxes[boxid][box_player] = -1;

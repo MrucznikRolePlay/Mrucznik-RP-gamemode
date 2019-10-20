@@ -38,7 +38,7 @@ command_createconvoybox_Impl(playerid)
     if(IsPlayerInAnyVehicle(playerid)) {
         boxid = DropBoxFromCar(GetPlayerVehicleID(playerid));
     } else {
-        boxid = CreateBox(x, y, z-BOX_ONFOOT_Z_OFFSET, ang, 0.0, 0.0);
+        boxid = CreateBox(x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, ang, 0.0);
     }
     if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
     SendClientMessage(playerid, -1, sprintf("Stworzyles box o id %d", boxid));
