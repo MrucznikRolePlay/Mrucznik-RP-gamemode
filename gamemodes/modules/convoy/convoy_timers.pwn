@@ -39,7 +39,7 @@ task ConvoyTimer[1000]()
 			convoyCarHPAcc += convoyCarHP - health;
 			convoyCarHP = health;
 
-			new hpPerPackage = (CONVOY_CAR_HP/2)/MAX_BOXES;
+			new hpPerPackage = CONVOY_HP_PER_PACKAGE;
 			if(convoyCarHPAcc >= hpPerPackage)
 			{
 				convoyCarHPAcc -= hpPerPackage;

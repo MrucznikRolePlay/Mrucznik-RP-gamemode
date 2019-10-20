@@ -113,25 +113,32 @@ PickupBox(playerid, boxid)
 DropBox(playerid)
 {
 	new boxid = carryingBox[playerid];
+	new Float:x, Float:y, Float:z, Float:angle;
+	GetPlayerPos(playerid, x, y, z);
+	GetPlayerFacingAngle(playerid, angle);
 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 
-	defer AfterDropBox(playerid, boxid);
+	defer AfterDropBox(playerid, boxid, x, y, z, angle);
 
 	carryingBox[playerid] = -1;
 	Boxes[boxid][box_player] = -1;
 	return 1;
 }
 
-timer AfterDropBox[500](playerid, boxid)
+timer AfterDropBox[500](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
 {
-	new Float:x, Float:y, Float:z, Float:angle;
-	GetPlayerPos(playerid, x, y, z);
-	GetPlayerFacingAngle(playerid, angle);
-
+	new Float:vx, Float:vy, Float:vz;
+	GetVehiclePos(convoyCar, vx, vy, vz);
 	RemovePlayerAttachedObject(playerid, Boxes[boxid][box_attachedSlot]);
 
-	if(IsPlayerInBoxDeliveryPoint(playerid))
+	if(IsPlayerInRangeOfPoint(playerid, 5.0, vx, vy, vz) && IsACop(playerid))
+	{
+		ChatMe(playerid, "wrzuca paczkê spowrotem do konwojowego furgonu.");
+		convoyCarHP += CONVOY_HP_PER_PACKAGE;
+		DestroyBox(boxid);
+	}
+	else if(IsPlayerInBoxDeliveryPoint(playerid) && !IsACop(playerid))
 	{
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Gratulacje, dostarczy³eœ ³up z konwoju. Otrzymujesz %d$.", Boxes[boxid][box_bonus]));
 		DajKase(playerid, Boxes[boxid][box_bonus]);
