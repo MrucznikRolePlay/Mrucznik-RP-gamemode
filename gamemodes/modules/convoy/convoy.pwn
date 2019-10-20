@@ -42,7 +42,7 @@ StartConvoy(playerid, vehicleid)
 	{
 		if(IsACop(i))
 		{
-			SendClientMessage(i, COLOR_LFBI, "HQ: %s rozpocz¹³ konwój. Chroñ dostawê, aby dowieœæ ca³y ³adunek i %d$ nagrody!");
+			SendClientMessage(i, COLOR_LFBI, sprintf("HQ: %s rozpocz¹³ konwój. Chroñ dostawê, aby dowieœæ ca³y ³adunek!", GetNick(playerid)));
 		}
 	}
 }
