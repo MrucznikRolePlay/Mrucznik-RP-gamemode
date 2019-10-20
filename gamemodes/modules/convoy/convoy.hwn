@@ -22,7 +22,27 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum eBox 
+{
+    bool:box_free,
+    box_object,
+    box_player,
+    box_attachedSlot,
+    Float:box_x,
+    Float:box_y,
+    Float:box_z,
+    box_bonus
+}
+
 //-----------------<[ Zmienne: ]>-------------------
+new Boxes[MAX_BOXES][eBox];
+new carryingBox[MAX_PLAYERS];
+
+new ConvoyStarted = false;
+new convoyCar = -1;
+new Float:convoyCarHP;
+new Float:convoyCarHPAcc;
+
 //------------------<[ Forwardy: ]>--------------------
 
 //end

@@ -266,7 +266,10 @@ public FreezeVeh(vehicleid, ddriver, repeat)
 {
 	SetVehicleVelocity(vehicleid, 0, 0 ,0);
 	
-	if(repeat < 100) SetTimerEx("FreezeVeh", 50, false, "ddd", vehicleid, ddriver, repeat+1);
+	if(repeat < 100) 
+	{
+		SetTimerEx("FreezeVeh", 50, false, "ddd", vehicleid, ddriver, repeat+1);
+	}
 	else
 	{
 		TogglePlayerControllable(ddriver, true);

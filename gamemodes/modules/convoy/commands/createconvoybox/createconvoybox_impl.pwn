@@ -1,5 +1,5 @@
-//----------------------------------------------<< Callbacks >>----------------------------------------------//
-//                                                   convoy                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                              createconvoybox                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -18,58 +18,31 @@
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
 // Data utworzenia: 20.10.2019
-//Opis:
-/*
-	System konwojów.
-*/
+
 
 //
 
-#include <YSI\y_hooks>
-
-//-----------------<[ Callbacki: ]>-----------------
-hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+//------------------<[ Implementacja: ]>-------------------
+command_createconvoybox_Impl(playerid)
 {
-	if(PRESSED(KEY_SECONDARY_ATTACK))
-	{
-		if(IsPlayerCarryingBox(playerid))
-		{
-			DropBox(playerid);
-		}
-		else
-		{
-			new boxid = GetNearestBox(playerid);
-			if(boxid != -1)
-			{
-				PickupBox(playerid, boxid);
-			}
-		}
-	}
-	return 1;
-}
+    if(PlayerInfo[playerid][pAdmin] < 5000)
+    {
+        noAccessMessage(playerid);
+    }
 
-hook OnPlayerDeath(playerid)
-{
-	if(IsPlayerCarryingBox(playerid)) 
-	{
-		DropBox(playerid);
-	}
-	return 1;
-}
+    new Float:x, Float:y, Float:z, Float:ang;
+    GetPlayerPos(playerid, x, y, z);
+    GetPlayerFacingAngle(playerid, Float:ang);
 
-hook OnPlayerDisconnect(playerid, reason)
-{
-	if(IsPlayerCarryingBox(playerid)) 
-	{
-		DropBox(playerid);
-	}
-	return 1;
-}
-
-hook OnPlayerConnect(playerid)
-{
-	carryingBox[playerid] = -1;
-	return 1;
+    new boxid;
+    if(IsPlayerInAnyVehicle(playerid)) {
+        boxid = DropBoxFromCar(GetPlayerVehicleID(playerid));
+    } else {
+        boxid = CreateBox(x, y, z-0.9, ang, 0.0, 0.0);
+    }
+    if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
+    SendClientMessage(playerid, -1, sprintf("Stworzyles box o id %d", boxid));
+    return 1;
 }
 
 //end

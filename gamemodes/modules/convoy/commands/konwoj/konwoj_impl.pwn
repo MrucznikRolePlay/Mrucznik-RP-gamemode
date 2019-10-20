@@ -25,6 +25,19 @@
 //------------------<[ Implementacja: ]>-------------------
 command_konwoj_Impl(playerid)
 {
+    if(ConvoyStarted)
+    {
+        StopConvoy();
+        SendClientMessage(playerid, -1, "Zatrzyma³eœ konwój");
+    }
+    else
+    {
+        if(IsPlayerInSecuriCar(playerid))
+        {
+            StartConvoy(playerid, GetPlayerVehicleID(playerid));
+            SendClientMessage(playerid, -1, "Wystartowa³eœ konwój");
+        }
+    }
     return 1;
 }
 

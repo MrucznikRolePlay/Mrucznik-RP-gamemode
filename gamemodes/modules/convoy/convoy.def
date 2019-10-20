@@ -23,5 +23,11 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define MAX_BOXES 50
+#define BOX_BONUS_BASE 1000
+#define BOX_BONUS 1000
+#define BOX_OBJECT 1271
+#define CONVOY_CAR 428
+#define CONVOY_CAR_HP 50000
 
 //end

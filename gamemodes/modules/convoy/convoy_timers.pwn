@@ -26,5 +26,26 @@
 //
 
 //-----------------<[ Timery: ]>-------------------
+task ConvoyTimer[1000]()
+{
+	if(convoyCar != -1)
+	{
+		new Float:health;
+		GetVehicleHealth(convoyCar, Float:health);
+
+		if(health < convoyCarHP)
+		{
+			convoyCarHPAcc += convoyCarHP - health;
+			convoyCarHP = health;
+
+			if(convoyCarHPAcc >= 1000)
+			{
+				convoyCarHPAcc = 0;
+
+				DropBoxFromCar(convoyCar);
+			}
+		}
+	}
+}
 
 //end

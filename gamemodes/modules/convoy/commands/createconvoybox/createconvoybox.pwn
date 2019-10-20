@@ -1,5 +1,5 @@
-//----------------------------------------------<< Callbacks >>----------------------------------------------//
-//                                                   convoy                                                  //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                              createconvoybox                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,60 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 20.10.2019
-//Opis:
-/*
-	System konwojów.
-*/
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-#include <YSI\y_hooks>
 
-//-----------------<[ Callbacki: ]>-----------------
-hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+//-------<[ include ]>-------
+#include "createconvoybox_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_createconvoybox()
 {
-	if(PRESSED(KEY_SECONDARY_ATTACK))
-	{
-		if(IsPlayerCarryingBox(playerid))
-		{
-			DropBox(playerid);
-		}
-		else
-		{
-			new boxid = GetNearestBox(playerid);
-			if(boxid != -1)
-			{
-				PickupBox(playerid, boxid);
-			}
-		}
-	}
-	return 1;
+    new command = Command_GetID("createconvoybox");
+
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
 }
 
-hook OnPlayerDeath(playerid)
+//-------<[ command ]>-------
+YCMD:createconvoybox(playerid, params[], help)
 {
-	if(IsPlayerCarryingBox(playerid)) 
-	{
-		DropBox(playerid);
-	}
-	return 1;
+    if (help)
+    {
+        sendTipMessage(playerid, "Tworzy convoy box - komenda debug");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_createconvoybox_Impl(playerid);
 }
-
-hook OnPlayerDisconnect(playerid, reason)
-{
-	if(IsPlayerCarryingBox(playerid)) 
-	{
-		DropBox(playerid);
-	}
-	return 1;
-}
-
-hook OnPlayerConnect(playerid)
-{
-	carryingBox[playerid] = -1;
-	return 1;
-}
-
-//end

@@ -1,5 +1,5 @@
-//----------------------------------------------<< Callbacks >>----------------------------------------------//
-//                                                   convoy                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                              destroyconvoybox                                             //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -18,58 +18,22 @@
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
 // Data utworzenia: 20.10.2019
-//Opis:
-/*
-	System konwojów.
-*/
+
 
 //
 
-#include <YSI\y_hooks>
-
-//-----------------<[ Callbacki: ]>-----------------
-hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+//------------------<[ Implementacja: ]>-------------------
+command_destroyconvoybox_Impl(playerid, boxid)
 {
-	if(PRESSED(KEY_SECONDARY_ATTACK))
-	{
-		if(IsPlayerCarryingBox(playerid))
-		{
-			DropBox(playerid);
-		}
-		else
-		{
-			new boxid = GetNearestBox(playerid);
-			if(boxid != -1)
-			{
-				PickupBox(playerid, boxid);
-			}
-		}
-	}
-	return 1;
-}
+    if(PlayerInfo[playerid][pAdmin] < 5000)
+    {
+        noAccessMessage(playerid);
+    }
 
-hook OnPlayerDeath(playerid)
-{
-	if(IsPlayerCarryingBox(playerid)) 
-	{
-		DropBox(playerid);
-	}
-	return 1;
-}
+    DestroyBox(boxid);
 
-hook OnPlayerDisconnect(playerid, reason)
-{
-	if(IsPlayerCarryingBox(playerid)) 
-	{
-		DropBox(playerid);
-	}
-	return 1;
-}
-
-hook OnPlayerConnect(playerid)
-{
-	carryingBox[playerid] = -1;
-	return 1;
+    SendClientMessage(playerid, -1, sprintf("Zniszczy³eœ box o id %d", boxid));
+    return 1;
 }
 
 //end
