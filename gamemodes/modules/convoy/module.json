@@ -1,0 +1,11 @@
+{
+    "name": "convoy",
+    "description": "System konwojów.",
+    "author": "Mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "20.10.2019"
+}

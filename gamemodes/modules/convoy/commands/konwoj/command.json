@@ -1,0 +1,13 @@
+{
+    "name": "konwoj",
+    "description": "Wystartuj konwój.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "convoy"
+    ],
+    "parameters": [],
+    "date": "20.10.2019"
+}
