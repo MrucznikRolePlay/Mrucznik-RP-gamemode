@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------[ specshow ]---------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  specshow                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,42 +16,52 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "specshow_impl.pwn"
 
-YCMD:specshow(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_specshow()
 {
-    if(IsPlayerConnected(playerid))
-    {
-		if(PlayerInfo[playerid][pAdmin] >= 250 || IsAScripter(playerid))
-		{
-			new giveplayerid; 
-			if(sscanf(params, "d", giveplayerid))
-			{
-				sendTipMessage(playerid, "U¿yj /specshow [warunek]");
-				sendTipMessage(playerid, "777 = wszyscy");
-				sendTipMessage(playerid, "[ID] = dla podanego ID");
-				sendTipMessage(playerid, "666 = Wy³¹cz podgl¹d spec");
-				return 1;
-			}
-			showSpec[playerid] = giveplayerid; 
-		}
-		else
-		{
-			noAccessMessage(playerid); 
-		}
-	}
-	return 1;
+    new command = Command_GetID("specshow");
+
+    //aliases
+    Command_AddAlt(command, "specshow");
+    
+
+    //permissions
+    
+
+    //prefix
+    
 }
 
-
-
+//-------<[ command ]>-------
+YCMD:specshow(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala spojrzeæ kogo podgl¹da dany administrator.");
+        return 1;
+    }
+    //fetching params
+    new valueSpec;
+    if(sscanf(params, "d", valueSpec))
+    {
+        sendTipMessage(playerid, "U¿yj /specshow [ID] ");
+        return 1;
+    }
+    
+    //command body
+    return command_specshow_Impl(playerid, valueSpec);
+}

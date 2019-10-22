@@ -5117,7 +5117,7 @@ orgUnInvitePlayer(playerid)
 {
     new orgid = gPlayerOrg[playerid];
     PlayerInfo[playerid][pOrg] = 0;
-    PlayerInfo[playerid][pSkin] = 0;
+    PlayerInfo[playerid][pUniform] = 0;
     gPlayerOrg[playerid] = 0xFFFF;
     PlayerInfo[playerid][pTeam] = 3;
     gTeam[playerid] = 3;

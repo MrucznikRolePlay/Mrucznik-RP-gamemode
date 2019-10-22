@@ -33,6 +33,7 @@
 #include "dmvoff\dmvoff.pwn"
 #include "dmvon\dmvon.pwn"
 #include "setvregistration\setvregistration.pwn"
+#include "specshow\specshow.pwn"
 #include "zmienwiek\zmienwiek.pwn"
 
 
@@ -42,6 +43,7 @@ hook OnGameModeInit()
     command_dmvoff();
     command_dmvon();
     command_setvregistration();
+    command_specshow();
     command_zmienwiek();
     
 }

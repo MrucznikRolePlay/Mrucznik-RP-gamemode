@@ -47,7 +47,7 @@ YCMD:qf(playerid, params[], help)
 			PlayerInfo[playerid][pTeam] = 3;
 			PlayerInfo[playerid][pMember] = 0;
 			PlayerInfo[playerid][pRank] = 0;
-			PlayerInfo[playerid][pSkin] = 0;
+			PlayerInfo[playerid][pUniform] = 0;
             orgUnInvitePlayer(playerid);
 			MedicBill[playerid] = 0;
 			SetPlayerSpawn(playerid);

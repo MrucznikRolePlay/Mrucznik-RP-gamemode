@@ -77,7 +77,8 @@
 #define BLINK_ALLOW_EMERGENCY           1   // 0 - 1, allow player to enable emergency lights.
 #define BLINK_TURN_ANGLE 55.0
 
-
+//specshow
+#define INVALID_SPECTATE_ID 9999
 //PAèDZIOCH
 #define ROPELENGTH 50 //D≥ugoúÊ maksymalna liny (ingame metr)
 

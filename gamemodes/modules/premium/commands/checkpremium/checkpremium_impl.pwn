@@ -31,9 +31,9 @@ command_checkpremium_Impl(playerid, giveplayerid)
     }
 
     _MruAdmin(playerid, sprintf("Us³ugi premium gracza %s:", GetNick(giveplayerid)));
-    if(PremiumInfo[playerid][pKP])
+    if(PremiumInfo[giveplayerid][pKP])
     {
-        new expirationTime = PremiumInfo[playerid][pExpires]-gettime();
+        new expirationTime = PremiumInfo[giveplayerid][pExpires]-gettime();
         _MruAdmin(playerid, sprintf("- KP wygasa za %d dni i %d godzin (timestamp: %d)", 
 						floatround(floatdiv(expirationTime, 86400), floatround_floor), 
 						floatround(floatdiv(expirationTime, 3600), floatround_floor)%24,
@@ -44,7 +44,7 @@ command_checkpremium_Impl(playerid, giveplayerid)
     {
         _MruAdmin(playerid, "- Brak KP");
     }
-    _MruAdmin(playerid, sprintf("- stan MC: %d", PremiumInfo[playerid][pMC]));
+    _MruAdmin(playerid, sprintf("- stan MC: %d", PremiumInfo[giveplayerid][pMC]));
     
     //TODO: wiêcej informacji w /checkpremium
     // _MruAdmin(playerid, "- Skiny premium:");

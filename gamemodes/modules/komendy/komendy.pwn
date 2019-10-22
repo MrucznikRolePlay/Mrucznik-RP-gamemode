@@ -75,15 +75,16 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	{
 		StaryCzas[playerid] = GetTickCount();
 	}
-	if(cmdtext[0] == '@')
-	{
-		return COMMAND_OK;
-	}
 
 	if(GUIExit[playerid] != 0 || gPlayerLogged[playerid] == 0)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "SERWER: "SZARY"Nie jesteœ zalogowany/Masz otwarte okno dialogowe!");
 		return COMMAND_ZERO_RET;
+	}
+
+	if(cmdtext[0] == '@')
+	{
+		return COMMAND_OK;
 	}
 
 	switch(success)
