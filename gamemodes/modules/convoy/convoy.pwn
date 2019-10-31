@@ -205,12 +205,11 @@ DestroyConvoyActor(actorid)
 
 GetNearestConvoyActor(playerid, Float:range)
 {
-	new Float:x, Float:y, Float:z;
-	
+	new Float:x, Float:y, Float:z;	
 	VECTOR_foreach(v : VConvoyActors)
 	{
 		new actor = MEM_get_val(v);
-		GetActorPos(actor, x, y, z);
+		GetDynamicActorPos(actor, x, y, z);
 		if(IsPlayerInRangeOfPoint(playerid, range, x, y, z)) 
 		{
 			return actor;
