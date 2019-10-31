@@ -40,9 +40,10 @@ task ConvoyTimer[100]()
 			convoyCarHP = health;
 		}
 
-		if(convoyCarHPAcc >= CONVOY_HP_PER_PACKAGE)
+		new Float:hp_dif = CONVOY_HP_PER_PACKAGE;
+		if(convoyCarHPAcc >= hp_dif)
 		{
-			convoyCarHPAcc -= CONVOY_HP_PER_PACKAGE;
+			convoyCarHPAcc -= hp_dif;
 			DropBoxFromCar(convoyCar);
 			SendClientMessageToAll(COLOR_WHITE, sprintf("%f|%f|%f", convoyCarHP, convoyCarHPAcc, health));
 		}

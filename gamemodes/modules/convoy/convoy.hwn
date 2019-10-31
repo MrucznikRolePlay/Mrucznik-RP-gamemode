@@ -51,7 +51,7 @@ new bool:ConvoyStarted = false;
 new bool:convoyDelayed = false;
 new convoyCar = -1;
 new Float:convoyCarHP;
-new Float:convoyCarHPAcc;
+new Float:convoyCarHPAcc = 0.0;
 
 //------------------<[ Forwardy: ]>--------------------
 
