@@ -26,7 +26,7 @@
 //
 
 //-----------------<[ Timery: ]>-------------------
-task ConvoyTimer[1000]()
+task ConvoyTimer[100]()
 {
 	if(convoyCar != -1)
 	{
