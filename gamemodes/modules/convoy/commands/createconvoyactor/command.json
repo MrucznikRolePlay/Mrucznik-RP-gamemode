@@ -1,0 +1,17 @@
+{
+    "name": "createconvoyactor",
+    "description": "Tworzenie punktu odbioru dla paczek konwojowych.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "skin",
+            "description": "skin"
+        }
+    ],
+    "date": "31.10.2019"
+}

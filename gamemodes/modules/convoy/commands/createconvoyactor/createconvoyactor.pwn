@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                             createconvoyactor                                             //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,21 +27,41 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "createconvoyactor\createconvoyactor.pwn"
-#include "createconvoybox\createconvoybox.pwn"
-#include "destroyconvoybox\destroyconvoybox.pwn"
-#include "konwoj\konwoj.pwn"
-
+#include "createconvoyactor_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_createconvoyactor()
 {
-    command_createconvoyactor();
-    command_createconvoybox();
-    command_destroyconvoybox();
-    command_konwoj();
+    new command = Command_GetID("createconvoyactor");
+
+    //aliases
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:createconvoyactor(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Tworzenie punktu odbioru dla paczek konwojowych.");
+        return 1;
+    }
+    //fetching params
+    new skin;
+    if(sscanf(params, "d", skin))
+    {
+        sendTipMessage(playerid, "U¿yj /createconvoyactor [skin] ");
+        return 1;
+    }
+    
+    //command body
+    return command_createconvoyactor_Impl(playerid, skin);
 }
