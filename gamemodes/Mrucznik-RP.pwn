@@ -57,6 +57,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <timestamptodate>
 #include <discord-connector>
 #include <memory>
+//TODO: add plugins
+// actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 // #include <requests>
 // #include <colandreas>
@@ -75,6 +77,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_hooks>
 #include <YSI\y_bintree>
 #include <YSI\y_master>
+#include <YSI\y_timers>
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
@@ -86,6 +89,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <true_random>
 #include <PreviewModelDialog>
 #include <vector>
+#include <map>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
@@ -689,7 +693,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
     if(GetPVarInt(playerid, "patrol-map") == 1 && GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(_:clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == INVALID_TEXT_DRAW)
         {
             SendClientMessage(playerid, COLOR_PAPAYAWHIP, "Wybierz region.");
             SelectTextDraw(playerid, 0xD2691E55);
@@ -754,7 +758,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     }
     else if(GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(_:clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == INVALID_TEXT_DRAW)
         {
             CancelSelectTextDraw(playerid);
             Patrol_HideMap(playerid);
@@ -1059,7 +1063,12 @@ public OnPlayerConnect(playerid)
 		return 1;
 	}
 	SetRPName(playerid);
+	
+	//bany
+	if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
+
 	timeSecWjedz[playerid] = 0;
+
 
 	//Pocz¹tkowe ustawienia:
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
@@ -5951,8 +5960,6 @@ OnPlayerLogin(playerid, password[])
     
 	if(!isnull(password) && PasswordVerify(playerid, password))
 	{//poprawne has³o
-        MruMySQL_KonwertujBana(playerid);
-        if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
 
 		//----------------------------
 		//£adowanie konta i zmiennych:

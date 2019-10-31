@@ -252,34 +252,10 @@ Car_Load()
                 elkaDMV = CreateDynamicObject(19326,0.0,0.0,-1000.0,0.0,0.0,0.0,-1,-1,-1,300.0,300.0);
                 SetDynamicObjectMaterialText(elkaDMV, 0, "L", 90, "Ariel", 92, 1, -1, 0, 1);
                 AttachDynamicObjectToVehicle(elkaDMV, CarData[i][c_ID], 0.000, -0.535, 1.186, -16.400, 0.000, 0.000);
- 
-            /*AttachDynamicObjectToVehicle(elkaDMV, CarData[i][c_ID], 0.000000, -0.424999, 0.919999, 0.000000, 0.000000, 0.000000);//Blista1
-                CarOpis[CarData[i][c_ID]] = CreateDynamic3DTextLabel("Pojazd uprzywilejowany\nUrz¹d Miasta", COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, CarData[i][c_ID]);*/
             }
         }
     }
 
-	//ZBUGOWANE:
-    /*new lText[128], lowner,ldesc[128];
-    mysql_query("SELECT `owner`, `desc` FROM `mru_opisy` WHERE `typ`=2");
-    mysql_store_result();
-    while(mysql_fetch_row_format(lStr, "|"))
-    {
-        sscanf(lStr, "p<|>ds[128]", lowner, ldesc);
-        for(new i=0;i<MAX_VEHICLES;i++)
-        {
-            if(VehicleUID[i][vUID] == 0) continue;
-            if(CarData[VehicleUID[i][vUID]][c_UID] == lowner)
-            {
-                WordWrap(ldesc, true, lText);
-
-                CarOpis[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i);
-                format(CarOpisCaller[i], MAX_PLAYER_NAME, "SYSTEM");
-
-                strpack(CarDesc[i], ldesc);
-            }
-        }
-    }*/
 	//naprawione:
 	new qText[128], lText[128], ldesc[128];
 	for(new i=0;i<MAX_VEHICLES;i++)

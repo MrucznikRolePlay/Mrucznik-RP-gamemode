@@ -408,7 +408,280 @@ showTimedMsgBox(playerid, delay, text[]) {
 	return true;
 }
 
-//------------------<[ MySQL: ]>--------------------
+//------------------<[ Z 3.0: ]>--------------------
+stock ChatIC(playerid, text[])
+{
+	new string[256];
+	if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER)
+	{ //(w pojeüdzie)
+		format(string, sizeof(string), "MÛwi: %s", text);
+		SetPlayerChatBubble(playerid,string,COLOR_FADE1, CHAT_RANGE, CHATBUBBLE_TIME);
+		format(string, sizeof(string), "%s MÛwi(w pojeüdzie): %s", GetNick(playerid), text);
+		RangeMessageColor(playerid, string, CHAT_RANGE, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+	}
+	else
+	{ //na zewnπtrz
+		format(string, sizeof(string), "MÛwi: %s", text);
+		SetPlayerChatBubble(playerid,string,COLOR_FADE1, CHAT_RANGE, CHATBUBBLE_TIME);
+		format(string, sizeof(string), "%s MÛwi: %s", GetNick(playerid), text);
+		RangeMessageColor(playerid, string, CHAT_RANGE, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+		ApplyAnimation(playerid,"PED","IDLE_CHAT",4.0,0,0,0,4,4); //animacja mowy
+	}
+	Log(chatLog, INFO, "Chat IC: %s", text);
+	return 1;
+}
+
+stock ActorChat(actorid, actor[], text[]) //TODO: better actor chat
+{
+	new Float:x, Float:y, Float:z;
+	GetDynamicActorPos(actorid, x, y, z);
+	return SystemRangeMessageColor(
+		x, y, z, 
+		GetDynamicActorVirtualWorld(actorid), 
+		sprintf("%s MÛwi: %s", actor, text), 
+		CHAT_RANGE, 
+		COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5
+	);
+}
+
+stock Krzyk(playerid, text[])
+{
+	new string[256];
+	if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER)
+	{ //(w pojeüdzie)
+		format(string, sizeof(string), "Krzyczy: %s!!",text);
+		SetPlayerChatBubble(playerid,string,COLOR_FADE1, KRZYK_RANGE, CHATBUBBLE_TIME);
+		format(string, sizeof(string), "%s Krzyczy(w pojeüdzie): %s!!", GetNick(playerid), text);
+		RangeMessageColor(playerid, string, KRZYK_RANGE, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_FADE1,COLOR_FADE2);
+	}
+	else
+	{ //na zewnπtrz
+		format(string, sizeof(string), "Krzyczy: %s!!",text);
+		SetPlayerChatBubble(playerid,string,COLOR_FADE1, KRZYK_RANGE, CHATBUBBLE_TIME);
+		format(string, sizeof(string), "%s Krzyczy: %s!!", GetNick(playerid), text);
+		RangeMessageColor(playerid, string, KRZYK_RANGE, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_FADE1,COLOR_FADE2);
+	}
+	Log(chatLog, INFO, "Krzyk: %s", text);
+	return 1;
+}
+
+stock Szept(playerid, text[])
+{
+	new string[256];
+	if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER)
+	{ //(w pojeüdzie)
+		format(string, sizeof(string), "Szepcze: %s", text);
+		SetPlayerChatBubble(playerid,string, COLOR_FADE1, SZEPT_RANGE, CHATBUBBLE_TIME);
+		format(string, sizeof(string), "%s Szepcze(w pojeüdzie): %s", GetNick(playerid), text);
+		RangeMessageColor(playerid, string, SZEPT_RANGE, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+	}
+	else
+	{ //na zewnπtrz
+		format(string, sizeof(string), "Szepcze: %s", text);
+		SetPlayerChatBubble(playerid,string, COLOR_FADE1, SZEPT_RANGE, CHATBUBBLE_TIME);
+		format(string, sizeof(string), "%s Szepcze: %s", GetNick(playerid), text);
+		RangeMessageColor(playerid, string, SZEPT_RANGE, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+	}
+	Log(chatLog, INFO, "Szept: %s", text);
+	return 1;
+}
+
+stock ChatOOC(playerid, text[])
+{
+	new string[256];
+	format(string, sizeof(string), "(( %s ))", text);
+	SetPlayerChatBubble(playerid,string, COLOR_FADE1, CHAT_RANGE, CHATBUBBLE_TIME);
+	format(string, sizeof(string), "%s [%d] Czat OOC: %s", GetNick(playerid), playerid, string);
+    RangeMessageColor(playerid, string, CHAT_RANGE, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+	Log(chatLog, INFO, "Chat OOC: %s", text);
+	return 1;
+}
+
+stock ChatMe(playerid, text[], Float:zasieg=ME_RANGE)
+{
+    new string[256];
+	format(string, sizeof(string), "* %s *", text);
+	SetPlayerChatBubble(playerid,string, COLOR_PURPLE, zasieg, CHATBUBBLE_TIME);
+    format(string, sizeof(string), "* %s %s", GetNick(playerid), text);
+    RangeMessage(playerid, COLOR_PURPLE, string, zasieg);
+	format(string, sizeof(string), "--/me:-- %s", text);
+	Log(chatLog, INFO, "Chat me: %s", text);
+	return 1;
+}
+
+stock ChatDo(playerid, text[], Float:zasieg=ME_RANGE)
+{
+    new string[256];
+	format(string, sizeof(string), "** %s **", text);
+	SetPlayerChatBubble(playerid,string, COLOR_PURPLE, zasieg, CHATBUBBLE_TIME);
+    format(string, sizeof(string), "* %s ((%s))", text, GetNick(playerid));
+    RangeMessageColor(playerid, string, zasieg, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+	format(string, sizeof(string), "--/do:-- %s", text);
+	Log(chatLog, INFO, "Chat do: %s", text);
+	return 1;
+}
+
+//------------------<[ MruMessage: ]>--------------------
+
+stock MruMessage(playerid, kolor, text[])
+{
+	new lenght = strlen(text);
+	if(lenght > MAX_MESSAGE_LENGHT)
+	{
+		new bufor[MAX_MESSAGE_LENGHT], spacja;
+		for(spacja=MAX_MESSAGE_LENGHT-5; spacja>MAX_MESSAGE_LENGHT*0.75; spacja--)
+			if(text[spacja] == ' ') break;
+		
+		strmid(bufor, text, 0, spacja);
+		strcat(bufor, "...");
+		SendClientMessage(playerid, kolor, bufor);
+		strmid(bufor, text, spacja+1, lenght);
+		strins(bufor, "...", 0);
+		SendClientMessage(playerid, kolor, bufor);
+		return 1;
+	}
+	else
+	{
+		return SendClientMessage(playerid, kolor, text);
+	}
+}
+
+stock MruMessageToAll(kolor, text[])
+{
+	new lenght = strlen(text);
+	if(lenght > MAX_MESSAGE_LENGHT)
+	{
+		new bufor[MAX_MESSAGE_LENGHT], spacja;
+		for(spacja=MAX_MESSAGE_LENGHT-5; spacja>MAX_MESSAGE_LENGHT*0.75; spacja--)
+			if(text[spacja] == ' ') break;
+		
+		strmid(bufor, text, 0, spacja);
+		strcat(bufor, "...");
+		SendClientMessageToAll(kolor, bufor);
+		strmid(bufor, text, spacja+1, lenght);
+		strins(bufor, "...", 0);
+		SendClientMessageToAll(kolor, bufor);
+	}
+	else
+	{
+		return SendClientMessageToAll(kolor, text);
+	}
+	return 1;
+}
+
+stock MruMessageF(playerid, color, fstring[], {Float, _}:...) //by Y_Less edited by Mrucznik
+{
+    static const STATIC_ARGS = 3;
+    new n = (numargs() - STATIC_ARGS) * BYTES_PER_CELL;
+    if(n)
+    {
+        new message[256],arg_start,arg_end;
+        #emit CONST.alt        fstring
+        #emit LCTRL          5
+        #emit ADD
+        #emit STOR.S.pri        arg_start
+
+        #emit LOAD.S.alt        n
+        #emit ADD
+        #emit STOR.S.pri        arg_end
+        do
+        {
+            #emit LOAD.I
+            #emit PUSH.pri
+            arg_end -= BYTES_PER_CELL;
+            #emit LOAD.S.pri      arg_end
+        }
+        while(arg_end > arg_start);
+
+        #emit PUSH.S          fstring
+        #emit PUSH.C          256
+        #emit PUSH.ADR         message
+
+        n += BYTES_PER_CELL * 3;
+        #emit PUSH.S          n
+        #emit SYSREQ.C         format
+
+        n += BYTES_PER_CELL;
+        #emit LCTRL          4
+        #emit LOAD.S.alt        n
+        #emit ADD
+        #emit SCTRL          4
+
+        if(playerid == INVALID_PLAYER_ID)
+        {
+            #pragma unused playerid
+            return MruMessageToAll(color, message);
+        } else {
+            return MruMessage(playerid, color, message);
+        }
+    } else {
+        if(playerid == INVALID_PLAYER_ID)
+        {
+            #pragma unused playerid
+            return MruMessageToAll(color, fstring);
+        } else {
+            return MruMessage(playerid, color, fstring);
+        }
+    }
+}
+
+stock SystemRangeMessage(Float:x, Float:y, Float:z, vw, kolor, text[], Float:zasieg=30.0)
+{ //wiadomoúÊ wyúwietlana w okreúlonym zasiÍgu
+	foreach(new i : Player)
+	{
+		if(gPlayerLogged[i] == 0) continue;
+		if(GetPlayerVirtualWorld(i) == vw || vw == -1)
+		{
+			if(IsPlayerInRangeOfPoint(i, zasieg, x, y, z))
+			{
+				MruMessage(i, kolor, text);
+			}
+		}
+	}
+	return 1;
+}
+
+stock RangeMessage(playerid, kolor, text[], Float:zasieg=30.0)
+{ //wiadomoúÊ wyúwietlana w okreúlonym zasiÍgu
+	new Float: x, Float:y, Float:z;
+	GetPlayerPos(playerid, x,y,z);
+	return SystemRangeMessage(x, y, z, GetPlayerVirtualWorld(playerid), kolor, text, zasieg);
+}
+
+stock SystemRangeMessageColor(Float:x, Float:y, Float:z, vw, text[], Float:zasieg, kolor1, kolor2, kolor3, kolor4, kolor5)
+{
+	foreach(new i : Player)
+	{
+		if(gPlayerLogged[i] == 0) continue;
+		if(GetPlayerVirtualWorld(i) == vw || vw == -1)
+		{
+			new Float:distance = GetPlayerDistanceFromPoint(i, x, y, z);
+			if(distance <= zasieg)
+			{
+				if(distance <= zasieg/16)
+					MruMessage(i, kolor1, text);
+				else if(distance <= zasieg/8)
+					MruMessage(i, kolor2, text);
+				else if(distance <= zasieg/4)
+					MruMessage(i, kolor3, text);
+				else if(distance <= zasieg/2)
+					MruMessage(i, kolor4, text);
+				else
+					MruMessage(i, kolor5, text);
+			}
+		}
+	}
+	return 1;
+}
+
+stock RangeMessageColor(playerid, text[], Float:zasieg, kolor1, kolor2, kolor3, kolor4, kolor5)
+{ //wiadomoúÊ wyúwietlana w okreúlonym zasiÍgu kolorowana w zaleønoúci od odleg≥oúci
+	new Float: x, Float:y, Float:z;
+	GetPlayerPos(playerid, x,y,z);
+	
+	return SystemRangeMessageColor(x, y, z, GetPlayerVirtualWorld(playerid), text, zasieg, kolor1, kolor2, kolor3, kolor4, kolor5);
+}
+
 //-----------------<[ Komendy: ]>-------------------
 
 //end

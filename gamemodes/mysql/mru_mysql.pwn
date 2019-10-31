@@ -938,37 +938,6 @@ MruMySQL_ReturnPassword(nick[], key[], salt[])
 
 //--------------------------------------------------------------<[ Kary ]>--------------------------------------------------------------
 
-MruMySQL_KonwertujBana(playerid)
-{ 
-	new plik[128];
-	format(plik, sizeof(plik), "Bany/%s.ini", GetNick(playerid));
-	
-	if(dini_Exists(plik))
-	{
-		new powod[256], admin[MAX_PLAYER_NAME], typ;
-		strcat(powod, dini_Get(powod, "Powod"));
-		strcat(admin, dini_Get(admin, "Admin"));
-		if(isnull(powod)) strcat(powod, "Konwersja banów");
-		else format(powod, sizeof(powod), "%s (%s)", powod, admin);
-		typ = dini_Int(plik, "Typ");
-		if(typ == 1)
-		{
-			MruMySQL_Blockuj(GetNick(playerid), -1, powod);
-		}
-		else if(typ == 2)
-		{
-			MruMySQL_Banuj(playerid, powod);	
-		}
-		dini_Remove(plik);
-	}
-	else
-	{
-		return 0;
-	}
-	
-	return 1;
-}
-
 MruMySQL_Blockuj(nick[], admin, powod[])
 { 
 	if(!MYSQL_ON) return 0;

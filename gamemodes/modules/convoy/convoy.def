@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  premium                                                  //
+//                                                   convoy                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,52 +17,29 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Data utworzenia: 20.10.2019
 
 //
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define PREMIUM_TABLE_	"mru_"
-//tables: mru_premium, mru_premium_skins
+#define MAX_BOXES 50
+#define BOX_BONUS_BASE 1000
+#define BOX_BONUS 50000
+#define BOX_OBJECT 19320 // box - 1271, pumpkin - 19320
+#define BOX_ONFOOT_Z_OFFSET 0.7
+#define BOX_VEHICLE_Z_OFFSET 0.85
+#define CONVOY_CAR 428
+#define CONVOY_CAR_HP (MAX_BOXES*1000)
+#define CONVOY_HP_DROP_LIMIT (CONVOY_CAR_HP)
+#define CONVOY_HP_PER_PACKAGE (CONVOY_HP_DROP_LIMIT/MAX_BOXES)
+#define PICKUP_BOX_RANGE 2.0
+#define CONVOY_PRICE 0 // 1_000_000
+#define CONVOY_BONUS 2_000_000
+#define CONVOY_ACTOR_DELIVERY_DISTANCE 3.0
+#define CONVOY_ACTOR_NAME "Upiorny handlarz"
 
-#define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 18
-#define MAX_PREMIUM_SKINS 43
-#define MAX_PREMIUM_ITEMS 133
-
-//Czas
-#define KP_MIESIAC 2592000
-#define KP_3_MIESIACE 8046000
-#define KP_TYDZIEN 604800
-
-//Cennik
-#define MIESIAC_KP_CENA 325
-#define PRZEDLUZ_KP_CENA 275
-
-#define CAR_SLOT_CENA 500
-#define ZMIANA_NICKU_CENA 275
-
-#define UNIKATOWY_SKIN_CENA 500
-
-#define TELEFON_CENA_1 10000
-#define TELEFON_CENA_2 2125
-#define TELEFON_CENA_3 1115
-#define TELEFON_CENA_4 675
-#define TELEFON_CENA_5 335
-
-#define PRZEDMIOT_DROGI_CENA 30
-#define PRZEDMIOT_PRZECIETNY_CENA 15
-#define PRZEDMIOT_TANI_CENA 5
-
-
-
-//Kolorki
-
-#define 				PREMIUM_EMBED1 			"{F7F7F2}" // granat
-#define 				PREMIUM_EMBED2 			"{00B7FF}" // niebiedski
-#define 				PREMIUM_EMBED3 			"{49A350}" // zielony
-#define 				PREMIUM_EMBED4 			"{F7F7F2}" // jasny1
-#define 				PREMIUM_EMBED5 			"{E3D8F1}" // jasny2
+#define CONVOY_BEGIN_POS 0.0,0.0,0.0
+#define CONVOY_END_POS 0.0,0.0,0.0
 
 //end

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  premium                                                  //
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                   convoy                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,52 +17,54 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Data utworzenia: 20.10.2019
+//Opis:
+/*
+	System konwojów.
+*/
 
 //
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define PREMIUM_TABLE_	"mru_"
-//tables: mru_premium, mru_premium_skins
+//-----------------<[ Timery: ]>-------------------
+task ConvoyTimer[100]()
+{
+	if(convoyCar != -1)
+	{
+		new Float:health;
+		GetVehicleHealth(convoyCar, Float:health);
 
-#define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 18
-#define MAX_PREMIUM_SKINS 43
-#define MAX_PREMIUM_ITEMS 133
+		//utrata hp przez pojazd konwojowy
+		if(health < CONVOY_HP_DROP_LIMIT && health < convoyCarHP)
+		{
+			convoyCarHPAcc += convoyCarHP - health;
+			convoyCarHP = health;
+		}
 
-//Czas
-#define KP_MIESIAC 2592000
-#define KP_3_MIESIACE 8046000
-#define KP_TYDZIEN 604800
+		new Float:hp_dif = CONVOY_HP_PER_PACKAGE;
+		if(convoyCarHPAcc >= hp_dif)
+		{
+			convoyCarHPAcc -= hp_dif;
+			DropBoxFromCar(convoyCar);
+			SendClientMessageToAll(COLOR_WHITE, sprintf("%f|%f|%f", convoyCarHP, convoyCarHPAcc, health));
+		}
 
-//Cennik
-#define MIESIAC_KP_CENA 325
-#define PRZEDLUZ_KP_CENA 275
+		//zniszczenie pojazdu konwojowego
+		if(health < 350) {
+			StopConvoy(CONVOY_STOP_VEHICLE_DESTROYED);
+		}
+	}
+}
 
-#define CAR_SLOT_CENA 500
-#define ZMIANA_NICKU_CENA 275
-
-#define UNIKATOWY_SKIN_CENA 500
-
-#define TELEFON_CENA_1 10000
-#define TELEFON_CENA_2 2125
-#define TELEFON_CENA_3 1115
-#define TELEFON_CENA_4 675
-#define TELEFON_CENA_5 335
-
-#define PRZEDMIOT_DROGI_CENA 30
-#define PRZEDMIOT_PRZECIETNY_CENA 15
-#define PRZEDMIOT_TANI_CENA 5
-
-
-
-//Kolorki
-
-#define 				PREMIUM_EMBED1 			"{F7F7F2}" // granat
-#define 				PREMIUM_EMBED2 			"{00B7FF}" // niebiedski
-#define 				PREMIUM_EMBED3 			"{49A350}" // zielony
-#define 				PREMIUM_EMBED4 			"{F7F7F2}" // jasny1
-#define 				PREMIUM_EMBED5 			"{E3D8F1}" // jasny2
+timer ConvoyDelay[10800]()
+{
+	convoyDelayed = false;
+	foreach(new i : Player)
+	{
+		if(IsInAConvoyTeam(i))
+		{
+			SendClientMessage(i, COLOR_LFBI, "HQ: Kolejny konwój z towarem czeka na zorganizowanie.");
+		}
+	}
+}
 
 //end

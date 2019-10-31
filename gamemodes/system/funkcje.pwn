@@ -7657,7 +7657,7 @@ ListaKontaktowGracza(playerid)
 			continue;
 		}
 		
-		if(FindPlayerByNumber(PlayerInfo[playerid][pPnumber]) != INVALID_PLAYER_ID)
+		if(FindPlayerByNumber(Kontakty[playerid][i][eNumer]) != INVALID_PLAYER_ID)
 		{
 			//aktywny
 			format(string, sizeof(string), "%s%s - %d (on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
@@ -10211,7 +10211,7 @@ Patrol_Unload()
 
     for(new i = 0; i < MAX_PATROLS ; i++)
     {
-        if(_:PatrolMarker[i] != INVALID_TEXT_DRAW)
+        if(PatrolMarker[i] != INVALID_TEXT_DRAW)
         {
             TextDrawDestroy(PatrolMarker[i]);
         }
@@ -10343,7 +10343,7 @@ public PatrolGPS()
 
 Patrol_CreateMarker(patrolid, Float:x, Float:y, type)
 {
-    if(_:PatrolMarker[patrolid] != INVALID_TEXT_DRAW)
+    if(PatrolMarker[patrolid] != INVALID_TEXT_DRAW)
     {
         TextDrawDestroy(PatrolMarker[patrolid]);
         PatrolMarker[patrolid] = Text:INVALID_TEXT_DRAW;
@@ -12229,6 +12229,24 @@ GetWeaponSlot(weapon)
     }
     return slot;
 }
+
+stock GetVehicleDriverID(vehicleid)
+{
+    foreach(new i : Player) 
+	{
+		if(GetPlayerState(i) == PLAYER_STATE_DRIVER && IsPlayerInVehicle(i, vehicleid))
+		{
+			return i;
+		}
+	}
+    return -1;
+}  
+
+stock IsVehicleRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
+{
+    if(vehicleid == INVALID_VEHICLE_ID) return 0;
+    return GetVehicleDistanceFromPoint(vehicleid, x, y, z) <= range;
+}  
 
 //--------------------------------------------------
 

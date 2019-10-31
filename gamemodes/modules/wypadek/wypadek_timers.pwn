@@ -30,6 +30,7 @@ public scanhp(playerid)
 {
 	if(!IsPlayerInAnyVehicle(playerid)) return 1;
     new vehicleid = GetPlayerVehicleID(playerid);
+	if(IsPlayerInConvoyCar(playerid)) return 1;
 	GetVehicleHealth(vehicleid,newhealth[playerid]);
 	if(oldhealth[playerid] > (newhealth[playerid] + SCAN_HP_VALUE))
 	{

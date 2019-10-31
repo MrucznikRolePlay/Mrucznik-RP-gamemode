@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  premium                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                              createconvoybox                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,52 +17,36 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Data utworzenia: 20.10.2019
+
 
 //
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define PREMIUM_TABLE_	"mru_"
-//tables: mru_premium, mru_premium_skins
+//------------------<[ Implementacja: ]>-------------------
+command_createconvoybox_Impl(playerid)
+{
+    if(PlayerInfo[playerid][pAdmin] < 5000)
+    {
+        noAccessMessage(playerid);
+    }
 
-#define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 18
-#define MAX_PREMIUM_SKINS 43
-#define MAX_PREMIUM_ITEMS 133
+    new Float:x, Float:y, Float:z, Float:ang;
+    GetPlayerPos(playerid, x, y, z);
+    GetPlayerFacingAngle(playerid, Float:ang);
 
-//Czas
-#define KP_MIESIAC 2592000
-#define KP_3_MIESIACE 8046000
-#define KP_TYDZIEN 604800
+    new boxid;
+    if(IsPlayerInAnyVehicle(playerid)) {
+        boxid = DropBoxFromCar(GetPlayerVehicleID(playerid));
+    } else {
+        boxid = CreateBox(x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, ang);
+    }
+    if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
+    SendClientMessage(playerid, -1, sprintf("Stworzy³eœ box o id %d", boxid));
 
-//Cennik
-#define MIESIAC_KP_CENA 325
-#define PRZEDLUZ_KP_CENA 275
-
-#define CAR_SLOT_CENA 500
-#define ZMIANA_NICKU_CENA 275
-
-#define UNIKATOWY_SKIN_CENA 500
-
-#define TELEFON_CENA_1 10000
-#define TELEFON_CENA_2 2125
-#define TELEFON_CENA_3 1115
-#define TELEFON_CENA_4 675
-#define TELEFON_CENA_5 335
-
-#define PRZEDMIOT_DROGI_CENA 30
-#define PRZEDMIOT_PRZECIETNY_CENA 15
-#define PRZEDMIOT_TANI_CENA 5
-
-
-
-//Kolorki
-
-#define 				PREMIUM_EMBED1 			"{F7F7F2}" // granat
-#define 				PREMIUM_EMBED2 			"{00B7FF}" // niebiedski
-#define 				PREMIUM_EMBED3 			"{49A350}" // zielony
-#define 				PREMIUM_EMBED4 			"{F7F7F2}" // jasny1
-#define 				PREMIUM_EMBED5 			"{E3D8F1}" // jasny2
+    Log(adminLog, INFO, "Admin %s stworzy³ box konwojowy", 
+        GetPlayerLogName(playerid)
+    );
+    return 1;
+}
 
 //end

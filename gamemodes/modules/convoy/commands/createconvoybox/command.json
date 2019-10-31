@@ -1,0 +1,11 @@
+{
+    "name": "createconvoybox",
+    "description": "Tworzy convoy box - komenda debug",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "20.10.2019"
+}

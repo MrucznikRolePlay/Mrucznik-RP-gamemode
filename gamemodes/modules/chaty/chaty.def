@@ -59,4 +59,6 @@
 #define ME_RANGE 25.0
 #define CHATBUBBLE_TIME 8000 //ile czasu ma siê wyœwietlaæ nad g³ow¹
 
+#define MAX_MESSAGE_LENGHT 			144 		//maksymalna liczba znaków jaka mo¿e zostaæ wyœwietlona na ekranie
+
 //end
