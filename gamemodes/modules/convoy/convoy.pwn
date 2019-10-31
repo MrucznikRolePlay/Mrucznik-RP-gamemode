@@ -40,20 +40,33 @@ StartConvoy(playerid, vehicleid)
 
 	foreach(new i : Player)
 	{
-		if(IsACop(i))
+		if(IsInAConvoyTeam(i))
 		{
-			SendClientMessage(i, COLOR_LFBI, sprintf("HQ: %s rozpocz¹³ konwój. Chroñ dostawê, aby dowieœæ ca³y ³adunek!", GetNick(playerid)));
+			SendClientMessage(i, COLOR_ADD, sprintf("%s rozpocz¹³ konwój. Chroñ dostawê, aby dowieœæ ca³y ³adunek!", GetNick(playerid)));
+		}
+		else
+		{
+			SendClientMessage(i, COLOR_ADD, sprintf("%s rozpocz¹³ przewóz dyñ z narkotykami!", GetNick(playerid)));
+			SendClientMessage(i, COLOR_ADD, "JedŸ do czerwonego markera i ostrzelaj konwój aby zdobyæ ³up!");
 		}
 	}
 }
 
-StopConvoy()
+StopConvoy(CONVOY_STOP_REASONS:reason)
 {
 	ConvoyStarted = false;
 	convoyDelayed = true;
 	defer ConvoyDelay();
 
 	DestroyBoxes();
+
+	switch(reason)
+	{
+		case CONVOY_STOP_VEHICLE_DESTROYED:
+		{
+			SendClientMessageToAll(COLOR_ADD, "Konwój z dyniami zosta³ rozbity! Los Santos znowu jest bezpieczne.");
+		}
+	}
 }
 
 //-----------------<[ Boxy: ]>-------------------
@@ -134,15 +147,21 @@ timer AfterDropBox[500](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
 
 	if(IsPlayerInRangeOfPoint(playerid, 5.0, vx, vy, vz) && IsInAConvoyTeam(playerid))
 	{
-		ChatMe(playerid, "wrzuca paczkê spowrotem do konwojowego furgonu.");
+		ChatMe(playerid, "wrzuca dyniê spowrotem do konwojowego furgonu.");
 		convoyCarHP += CONVOY_HP_PER_PACKAGE;
 		DestroyBox(boxid);
+		return 1;
 	}
-	else if(IsPlayerInBoxDeliveryPoint(playerid) && !IsInAConvoyTeam(playerid))
+	new actorid = GetNearestConvoyActor(playerid, CONVOY_ACTOR_DELIVERY_DISTANCE);
+	if(actorid != -1 && !IsInAConvoyTeam(playerid))
 	{
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Gratulacje, dostarczy³eœ ³up z konwoju. Otrzymujesz %d$.", Boxes[boxid][box_bonus]));
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Gratulacje, dostarczy³eœ dyniê z konwoju. Otrzymujesz %d$ i %dMC.", Boxes[boxid][box_bonus], Boxes[boxid][box_bonus]));
 		DajKase(playerid, Boxes[boxid][box_bonus]);
+		DajMC(playerid, Boxes[boxid][box_bonus]/1000);
 		DestroyBox(boxid);
+
+		ActorChat(actorid, CONVOY_ACTOR_NAME, "dziêki, oto twoja dzia³ka.");
+		ApplyDynamicActorAnimation(actorid, "CASINO", "manwind", 4.1, 0, 1, 1, 0, 0);
 	}
 	else
 	{
@@ -151,6 +170,46 @@ timer AfterDropBox[500](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
 		Boxes[boxid][box_z] = z;
 		Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
 	}
+	return 1;
+}
+
+CreateConvoyActor(model, Float:x, Float:y, Float:z, Float:a)
+{
+	new actorid = CreateDynamicActor(model, x, y, z, a);
+	if(actorid == INVALID_ACTOR_ID) return -1;
+
+	VECTOR_push_back_val(VConvoyActors, actorid);
+	MAP_insert_val_val(MActors3DTexts, 
+		actorid, 
+		_:CreateDynamic3DTextLabel(CONVOY_ACTOR_NAME, COLOR_WHITE, x, y, z+0.98, 5.0)
+	);
+	return actorid;
+}
+
+DestroyConvoyActor(actorid)
+{
+	if(actorid < 0) return -1;
+
+	VECTOR_remove_val(VConvoyActors, actorid);
+	DestroyDynamicActor(actorid);
+	DestroyDynamic3DTextLabel(Text3D:MAP_get_val_val(MActors3DTexts, actorid));
+	return 1;
+}
+
+GetNearestConvoyActor(playerid, Float:range)
+{
+	new Float:x, Float:y, Float:z;
+	
+	VECTOR_foreach(v : VConvoyActors)
+	{
+		new actor = MEM_get_val(v);
+		GetActorPos(actor, x, y, z);
+		if(IsPlayerInRangeOfPoint(playerid, range, x, y, z)) 
+		{
+			return actor;
+		}
+	}
+	return -1;
 }
 
 IsPlayerCarryingBox(playerid)
@@ -168,16 +227,15 @@ IsPlayerInConvoyCar(playerid)
 	return IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleID(playerid) == convoyCar;
 }
 
-IsPlayerInBoxDeliveryPoint(playerid)
-{
-	new Float:ActorX, Float:ActorY, Float:ActorZ;
-	GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
-	return IsPlayerInRangeOfPoint(playerid, 5.0, ActorX, ActorY, ActorZ);
-}
-
 IsInAConvoyTeam(playerid)
 {
-	
+	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1) return 1;
+	return 0;
+}
+
+IsAConvoyTeamLeader(playerid)
+{
+	if(PlayerInfo[playerid][pAdmin] >= 1) return 1;
 	return 0;
 }
 
@@ -208,7 +266,7 @@ DropBoxFromCar(carid)
 	GetPosBehindVehicle(carid, x, y, z);
 	
 	new driverid = GetVehicleDriverID(carid);
-	if(driverid != -1) ChatDo(driverid, "Z pojazdu konwojowego wypada skrzynka z amunicj¹.");
+	if(driverid != -1) ChatDo(driverid, "Z pojazdu konwojowego wypada dynia.");
 
 	return CreateBox(x, y, z-BOX_VEHICLE_Z_OFFSET);
 }

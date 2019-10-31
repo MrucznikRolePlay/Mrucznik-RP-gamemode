@@ -21,11 +21,20 @@ Mapa serwera Mrucznik Role Play, kreowana od 2009 roku.
 
 ## [Edytory do PAWN](IDE.md)
 
+## Konfiguracja repozytorium
+
+- `git clone  https://github.com/Mrucznik/Mrucznik-RP-2.5`
+- `cd Mrucznik-RP-2.5`
+- `git submodule init`
+- `git submodule update` - w razie problemów z uprawnieniami edytuj plik .git/config podmieniając ścieżki submodułów z protokołu git na https
+
 ## Kompilacja
+
 Gamemod Mrucznika jest przystosowany do [sampctl](https://github.com/Southclaws/sampctl).
 Aby skompilować gamemode z użyciem sampctl, należy [zainstalować sampctl](https://github.com/Southclaws/sampctl/wiki/Windows) a następnie wpisać następujące polecenia:
-- sampctl package ensure
-- sampctl package build
+
+- `sampctl package ensure`
+- `sampctl package build`
 
 ## Inne repozytoria
 

@@ -57,6 +57,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <timestamptodate>
 #include <discord-connector>
 #include <memory>
+//TODO: add plugins
+// actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 // #include <requests>
 // #include <colandreas>
@@ -87,6 +89,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <true_random>
 #include <PreviewModelDialog>
 #include <vector>
+#include <map>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
@@ -690,7 +693,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
     if(GetPVarInt(playerid, "patrol-map") == 1 && GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(_:clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == INVALID_TEXT_DRAW)
         {
             SendClientMessage(playerid, COLOR_PAPAYAWHIP, "Wybierz region.");
             SelectTextDraw(playerid, 0xD2691E55);
@@ -755,7 +758,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     }
     else if(GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(_:clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == INVALID_TEXT_DRAW)
         {
             CancelSelectTextDraw(playerid);
             Patrol_HideMap(playerid);

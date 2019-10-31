@@ -32,6 +32,7 @@
 //-------<[ include ]>-------
 #include "createconvoyactor\createconvoyactor.pwn"
 #include "createconvoybox\createconvoybox.pwn"
+#include "destroyconvoyactor\destroyconvoyactor.pwn"
 #include "destroyconvoybox\destroyconvoybox.pwn"
 #include "konwoj\konwoj.pwn"
 
@@ -41,6 +42,7 @@ hook OnGameModeInit()
 {
     command_createconvoyactor();
     command_createconvoybox();
+    command_destroyconvoyactor();
     command_destroyconvoybox();
     command_konwoj();
     

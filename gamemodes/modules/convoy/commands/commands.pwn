@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Timers >>------------------------------------------------//
-//                                                   convoy                                                  //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,53 +16,24 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 20.10.2019
-//Opis:
-/*
-	System konwojów.
-*/
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//-----------------<[ Timery: ]>-------------------
-task ConvoyTimer[1000]()
+
+#include <YSI\y_hooks>
+
+//-------<[ include ]>-------
+
+
+//-------<[ initialize ]>-------
+hook OnGameModeInit()
 {
-	if(convoyCar != -1)
-	{
-		new Float:health;
-		GetVehicleHealth(convoyCar, Float:health);
-
-		//utrata hp przez pojazd konwojowy
-		if(health < CONVOY_HP_DROP_LIMIT && health < convoyCarHP)
-		{
-			convoyCarHPAcc += convoyCarHP - health;
-			convoyCarHP = health;
-
-			if(convoyCarHPAcc >= CONVOY_HP_PER_PACKAGE)
-			{
-				convoyCarHPAcc -= CONVOY_HP_PER_PACKAGE;
-				DropBoxFromCar(convoyCar);
-			}
-		}
-
-		//zniszczenie pojazdu konwojowego
-		if(health < 350) {
-			StopConvoy(CONVOY_STOP_VEHICLE_DESTROYED);
-		}
-	}
+    
 }
-
-timer ConvoyDelay[10800]()
-{
-	convoyDelayed = false;
-	foreach(new i : Player)
-	{
-		if(IsInAConvoyTeam(i))
-		{
-			SendClientMessage(i, COLOR_LFBI, "HQ: Kolejny konwój z towarem czeka na zorganizowanie.");
-		}
-	}
-}
-
-//end

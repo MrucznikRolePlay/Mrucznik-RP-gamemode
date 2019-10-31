@@ -431,6 +431,19 @@ stock ChatIC(playerid, text[])
 	return 1;
 }
 
+stock ActorChat(actorid, actor[], text[]) //TODO: better actor chat
+{
+	new Float:x, Float:y, Float:z;
+	GetDynamicActorPos(actorid, x, y, z);
+	return SystemRangeMessageColor(
+		x, y, z, 
+		GetDynamicActorVirtualWorld(actorid), 
+		sprintf("%s Mówi: %s", actor, text), 
+		CHAT_RANGE, 
+		COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5
+	);
+}
+
 stock Krzyk(playerid, text[])
 {
 	new string[256];
@@ -612,14 +625,12 @@ stock MruMessageF(playerid, color, fstring[], {Float, _}:...) //by Y_Less edited
     }
 }
 
-stock RangeMessage(playerid, kolor, text[], Float:zasieg=30.0)
+stock SystemRangeMessage(Float:x, Float:y, Float:z, vw, kolor, text[], Float:zasieg=30.0)
 { //wiadomoœæ wyœwietlana w okreœlonym zasiêgu
-	new Float: x, Float:y, Float:z;
-	GetPlayerPos(playerid, x,y,z);
 	foreach(new i : Player)
 	{
-		if(gPlayerLogged[playerid] == 0) continue;
-		if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
+		if(gPlayerLogged[i] == 0) continue;
+		if(GetPlayerVirtualWorld(i) == vw)
 		{
 			if(IsPlayerInRangeOfPoint(i, zasieg, x, y, z))
 			{
@@ -630,14 +641,19 @@ stock RangeMessage(playerid, kolor, text[], Float:zasieg=30.0)
 	return 1;
 }
 
-stock RangeMessageColor(playerid, text[], Float:zasieg, kolor1, kolor2, kolor3, kolor4, kolor5)
-{ //wiadomoœæ wyœwietlana w okreœlonym zasiêgu kolorowana w zale¿noœci od odleg³oœci
+stock RangeMessage(playerid, kolor, text[], Float:zasieg=30.0)
+{ //wiadomoœæ wyœwietlana w okreœlonym zasiêgu
 	new Float: x, Float:y, Float:z;
 	GetPlayerPos(playerid, x,y,z);
+	return SystemRangeMessage(x, y, z, GetPlayerVirtualWorld(playerid), kolor, text, zasieg);
+}
+
+stock SystemRangeMessageColor(Float:x, Float:y, Float:z, vw, text[], Float:zasieg, kolor1, kolor2, kolor3, kolor4, kolor5)
+{
 	foreach(new i : Player)
 	{
-		if(gPlayerLogged[playerid] == 0) continue;
-		if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
+		if(gPlayerLogged[i] == 0) continue;
+		if(GetPlayerVirtualWorld(i) == vw)
 		{
 			new Float:distance = GetPlayerDistanceFromPoint(i, x, y, z);
 			if(distance <= zasieg)
@@ -656,6 +672,14 @@ stock RangeMessageColor(playerid, text[], Float:zasieg, kolor1, kolor2, kolor3, 
 		}
 	}
 	return 1;
+}
+
+stock RangeMessageColor(playerid, text[], Float:zasieg, kolor1, kolor2, kolor3, kolor4, kolor5)
+{ //wiadomoœæ wyœwietlana w okreœlonym zasiêgu kolorowana w zale¿noœci od odleg³oœci
+	new Float: x, Float:y, Float:z;
+	GetPlayerPos(playerid, x,y,z);
+	
+	return SystemRangeMessageColor(x, y, z, GetPlayerVirtualWorld(playerid), text, zasieg, kolor1, kolor2, kolor3, kolor4, kolor5);
 }
 
 //-----------------<[ Komendy: ]>-------------------

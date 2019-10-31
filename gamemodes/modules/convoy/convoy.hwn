@@ -34,7 +34,16 @@ enum eBox
     box_bonus
 }
 
+enum CONVOY_STOP_REASONS
+{
+    CONVOY_STOP_VEHICLE_DESTROYED,
+    CONVOY_STOP_CARGO_DELIVERED
+}
+
 //-----------------<[ Zmienne: ]>-------------------
+new Vector:VConvoyActors;
+new Map:MActors3DTexts;
+
 new Boxes[MAX_BOXES][eBox];
 new carryingBox[MAX_PLAYERS];
 

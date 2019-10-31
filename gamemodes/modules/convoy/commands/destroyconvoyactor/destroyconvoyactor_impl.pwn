@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Timers >>------------------------------------------------//
-//                                                   convoy                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                             destroyconvoyactor                                            //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,52 +17,43 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 20.10.2019
-//Opis:
-/*
-	System konwojów.
-*/
+// Data utworzenia: 31.10.2019
+
 
 //
 
-//-----------------<[ Timery: ]>-------------------
-task ConvoyTimer[1000]()
+//------------------<[ Implementacja: ]>-------------------
+command_destroyconvoyactor_Impl(playerid, actor)
 {
-	if(convoyCar != -1)
-	{
-		new Float:health;
-		GetVehicleHealth(convoyCar, Float:health);
+    if(PlayerInfo[playerid][pAdmin] < 1) 
+    {
+        return noAccessMessage(playerid);
+    }
 
-		//utrata hp przez pojazd konwojowy
-		if(health < CONVOY_HP_DROP_LIMIT && health < convoyCarHP)
-		{
-			convoyCarHPAcc += convoyCarHP - health;
-			convoyCarHP = health;
+    new actorid;
+    if(actor == -1)
+    {
+        actorid = GetNearestConvoyActor(playerid, 5.0);
+    }
+    else
+    {
+        actorid = actor;
+    }
 
-			if(convoyCarHPAcc >= CONVOY_HP_PER_PACKAGE)
-			{
-				convoyCarHPAcc -= CONVOY_HP_PER_PACKAGE;
-				DropBoxFromCar(convoyCar);
-			}
-		}
+    if(actorid == -1)
+    {
+        sendErrorMessage(playerid, "Brak konwojowego aktora w pobli¿u.");
+        return 1;
+    }
 
-		//zniszczenie pojazdu konwojowego
-		if(health < 350) {
-			StopConvoy(CONVOY_STOP_VEHICLE_DESTROYED);
-		}
-	}
-}
+    new err = DestroyConvoyActor(actorid);
+    if(err == -1) {
+        sendErrorMessage(playerid, "Nie uda³o siê usun¹æ aktora");
+        return 1;
+    }
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Pomyœlnie zniszczy³eœ aktora o ID %d.", actorid));
 
-timer ConvoyDelay[10800]()
-{
-	convoyDelayed = false;
-	foreach(new i : Player)
-	{
-		if(IsInAConvoyTeam(i))
-		{
-			SendClientMessage(i, COLOR_LFBI, "HQ: Kolejny konwój z towarem czeka na zorganizowanie.");
-		}
-	}
+    return 1;
 }
 
 //end
