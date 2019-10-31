@@ -43,6 +43,7 @@ task ConvoyTimer[100]()
 			{
 				convoyCarHPAcc -= CONVOY_HP_PER_PACKAGE;
 				DropBoxFromCar(convoyCar);
+				SendClientMessageToAll(COLOR_WHITE, sprintf("%d|%d|%d|%d", convoyCarHP, convoyCarHPAcc, health, CONVOY_HP_PER_PACKAGE));
 			}
 		}
 
