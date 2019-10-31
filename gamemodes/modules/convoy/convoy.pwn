@@ -38,6 +38,13 @@ StartConvoy(playerid, vehicleid)
 	SetVehicleHealth(vehicleid, CONVOY_CAR_HP);
 	convoyCarHP = CONVOY_CAR_HP;
 
+	// AttachDynamicObjectToVehicle(
+	// 	BOX_OBJECT, 
+	// 	convoyCar, 
+	// 	0, 0, 1.5, 
+	// 	0, 0, 0
+	// );
+
 	foreach(new i : Player)
 	{
 		if(IsInAConvoyTeam(i))
