@@ -161,6 +161,7 @@ timer AfterDropBox[500](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
 	{
 		ChatMe(playerid, "wrzuca dyniê spowrotem do konwojowego furgonu.");
 		convoyCarHP += CONVOY_HP_PER_PACKAGE;
+		SetVehicleHealth(convoyCar, convoyCarHP);
 		DestroyBox(boxid);
 		return 1;
 	}
