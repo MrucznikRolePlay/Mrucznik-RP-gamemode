@@ -63,7 +63,8 @@ command_konwoj_Impl(playerid)
 
     if(ConvoyStarted)
     {
-        sendErrorMessage(playerid, "Konwój ju¿ jest aktywny, nie mo¿esz go wystartowaæ ponownie.");
+        SendClientMessage(playerid, COLOR_WHITE, "Konwój stop");
+        StopConvoy(CONVOY_STOP_ADMIN);
         return 1;
     }
 
