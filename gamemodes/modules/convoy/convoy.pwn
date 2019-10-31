@@ -66,8 +66,8 @@ StopConvoy(CONVOY_STOP_REASONS:reason)
 	ConvoyStarted = false;
 	convoyDelayed = true;
 	convoyCar = -1;
-	convoyCarHP = 0;
-	convoyCarHPAcc = 0;
+	convoyCarHP = 0.0;
+	convoyCarHPAcc = 0.0;
 	defer ConvoyDelay();
 
 	DestroyBoxes();
@@ -77,6 +77,10 @@ StopConvoy(CONVOY_STOP_REASONS:reason)
 		case CONVOY_STOP_VEHICLE_DESTROYED:
 		{
 			SendClientMessageToAll(COLOR_ADD, "Konwój z dyniami zosta³ rozbity! Los Santos znowu jest bezpieczne.");
+		}
+		case CONVOY_STOP_ADMIN:
+		{
+			SendClientMessageToAll(COLOR_ADD, "Konwój z dyniami zosta³ przerwany przez admina.");
 		}
 	}
 	return 1;

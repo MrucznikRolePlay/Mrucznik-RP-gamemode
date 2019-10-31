@@ -45,7 +45,6 @@ task ConvoyTimer[100]()
 		{
 			convoyCarHPAcc -= hp_dif;
 			DropBoxFromCar(convoyCar);
-			SendClientMessageToAll(COLOR_WHITE, sprintf("%f|%f|%f", convoyCarHP, convoyCarHPAcc, health));
 		}
 
 		//zniszczenie pojazdu konwojowego
