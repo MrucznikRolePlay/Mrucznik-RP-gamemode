@@ -78,7 +78,7 @@ StopConvoy(CONVOY_STOP_REASONS:reason)
 		{
 			SendClientMessageToAll(COLOR_ADD, "Konwój z dyniami zosta³ rozbity! Los Santos znowu jest bezpieczne.");
 		}
-		case CONVOY_STOP_VEHICLE_DESTROYED:
+		case CONVOY_STOP_ADMIN:
 		{
 			SendClientMessageToAll(COLOR_ADD, "Konwój z dyniami zosta³ przerwany przez admina.");
 		}
