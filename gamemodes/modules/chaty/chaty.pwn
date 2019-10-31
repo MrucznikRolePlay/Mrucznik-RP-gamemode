@@ -630,7 +630,7 @@ stock SystemRangeMessage(Float:x, Float:y, Float:z, vw, kolor, text[], Float:zas
 	foreach(new i : Player)
 	{
 		if(gPlayerLogged[i] == 0) continue;
-		if(GetPlayerVirtualWorld(i) == vw)
+		if(GetPlayerVirtualWorld(i) == vw || vw == -1)
 		{
 			if(IsPlayerInRangeOfPoint(i, zasieg, x, y, z))
 			{
@@ -653,7 +653,7 @@ stock SystemRangeMessageColor(Float:x, Float:y, Float:z, vw, text[], Float:zasie
 	foreach(new i : Player)
 	{
 		if(gPlayerLogged[i] == 0) continue;
-		if(GetPlayerVirtualWorld(i) == vw)
+		if(GetPlayerVirtualWorld(i) == vw || vw == -1)
 		{
 			new Float:distance = GetPlayerDistanceFromPoint(i, x, y, z);
 			if(distance <= zasieg)

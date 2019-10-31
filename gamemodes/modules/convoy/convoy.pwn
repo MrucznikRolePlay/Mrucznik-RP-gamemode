@@ -162,7 +162,7 @@ timer AfterDropBox[500](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
 	new actorid = GetNearestConvoyActor(playerid, CONVOY_ACTOR_DELIVERY_DISTANCE);
 	if(actorid != -1 && !IsInAConvoyTeam(playerid))
 	{
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Gratulacje, dostarczy³eœ dyniê z konwoju. Otrzymujesz %d$ i %dMC.", Boxes[boxid][box_bonus], Boxes[boxid][box_bonus]));
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Gratulacje, dostarczy³eœ dyniê z konwoju. Otrzymujesz %d$ i %dMC.", Boxes[boxid][box_bonus], Boxes[boxid][box_bonus]/1000));
 		DajKase(playerid, Boxes[boxid][box_bonus]);
 		DajMC(playerid, Boxes[boxid][box_bonus]/1000);
 		DestroyBox(boxid);
