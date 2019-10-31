@@ -38,13 +38,13 @@ task ConvoyTimer[100]()
 		{
 			convoyCarHPAcc += convoyCarHP - health;
 			convoyCarHP = health;
+		}
 
-			if(convoyCarHPAcc >= CONVOY_HP_PER_PACKAGE)
-			{
-				convoyCarHPAcc -= CONVOY_HP_PER_PACKAGE;
-				DropBoxFromCar(convoyCar);
-				SendClientMessageToAll(COLOR_WHITE, sprintf("%d|%d|%d|%d", convoyCarHP, convoyCarHPAcc, health, CONVOY_HP_PER_PACKAGE));
-			}
+		if(convoyCarHPAcc >= CONVOY_HP_PER_PACKAGE)
+		{
+			convoyCarHPAcc -= CONVOY_HP_PER_PACKAGE;
+			DropBoxFromCar(convoyCar);
+			SendClientMessageToAll(COLOR_WHITE, sprintf("%f|%f|%f", convoyCarHP, convoyCarHPAcc, health));
 		}
 
 		//zniszczenie pojazdu konwojowego
