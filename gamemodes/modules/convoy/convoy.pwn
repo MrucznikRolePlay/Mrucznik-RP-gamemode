@@ -65,6 +65,9 @@ StopConvoy(CONVOY_STOP_REASONS:reason)
 
 	ConvoyStarted = false;
 	convoyDelayed = true;
+	convoyCar = -1;
+	convoyCarHP = 0;
+	convoyCarHPAcc = 0;
 	defer ConvoyDelay();
 
 	DestroyBoxes();
