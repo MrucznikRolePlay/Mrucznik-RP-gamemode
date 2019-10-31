@@ -61,6 +61,8 @@ StartConvoy(playerid, vehicleid)
 
 StopConvoy(CONVOY_STOP_REASONS:reason)
 {
+	if(!ConvoyStarted) return 0;
+
 	ConvoyStarted = false;
 	convoyDelayed = true;
 	defer ConvoyDelay();
@@ -74,6 +76,7 @@ StopConvoy(CONVOY_STOP_REASONS:reason)
 			SendClientMessageToAll(COLOR_ADD, "Konwój z dyniami zosta³ rozbity! Los Santos znowu jest bezpieczne.");
 		}
 	}
+	return 1;
 }
 
 //-----------------<[ Boxy: ]>-------------------
@@ -140,9 +143,6 @@ DropBox(playerid)
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 
 	defer AfterDropBox(playerid, boxid, x, y, z, angle);
-
-	carryingBox[playerid] = -1;
-	Boxes[boxid][box_player] = -1;
 	return 1;
 }
 
@@ -151,6 +151,8 @@ timer AfterDropBox[500](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
 	new Float:vx, Float:vy, Float:vz;
 	GetVehiclePos(convoyCar, vx, vy, vz);
 	RemovePlayerAttachedObject(playerid, Boxes[boxid][box_attachedSlot]);
+	carryingBox[playerid] = -1;
+	Boxes[boxid][box_player] = -1;
 
 	if(IsPlayerInRangeOfPoint(playerid, 5.0, vx, vy, vz) && IsInAConvoyTeam(playerid))
 	{

@@ -83,15 +83,4 @@ hook OnPlayerConnect(playerid)
 	return 1;
 }
 
-hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
-{
-	if(IsPlayerInConvoyCar(playerid))
-	{
-		new Float:hp;
-		GetPlayerHealth(playerid, hp);
-		SetPlayerHealth(playerid, hp+amount);
-	}
-	return 0;
-}
-
 //end
