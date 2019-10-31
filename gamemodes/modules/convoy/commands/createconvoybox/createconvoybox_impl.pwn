@@ -42,6 +42,10 @@ command_createconvoybox_Impl(playerid)
     }
     if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
     SendClientMessage(playerid, -1, sprintf("Stworzy³eœ box o id %d", boxid));
+
+    Log(adminLog, INFO, "Admin %s stworzy³ box konwojowy", 
+        GetPlayerLogName(playerid)
+    );
     return 1;
 }
 

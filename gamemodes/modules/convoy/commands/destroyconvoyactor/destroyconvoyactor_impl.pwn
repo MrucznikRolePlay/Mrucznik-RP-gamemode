@@ -52,7 +52,6 @@ command_destroyconvoyactor_Impl(playerid, actor)
         return 1;
     }
     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Pomyœlnie zniszczy³eœ aktora o ID %d.", actorid));
-
     return 1;
 }
 

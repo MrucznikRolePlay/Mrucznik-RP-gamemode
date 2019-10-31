@@ -70,6 +70,10 @@ command_konwoj_Impl(playerid)
     StartConvoy(playerid, GetPlayerVehicleID(playerid));
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wystartowa³eœ konwój. Po dojechaniu do celu otrzymasz nagrodê.");
     ZabierzKase(playerid, CONVOY_PRICE);
+
+    Log(adminLog, INFO, "Admin %s wystartowa³ konwój", 
+        GetPlayerLogName(playerid)
+    );
     return 1;
 }
 
