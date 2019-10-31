@@ -34,15 +34,14 @@ task ConvoyTimer[1000]()
 		GetVehicleHealth(convoyCar, Float:health);
 
 		//utrata hp przez pojazd konwojowy
-		if(health < CONVOY_CAR_HP/2 && health < convoyCarHP)
+		if(health < CONVOY_HP_DROP_LIMIT && health < convoyCarHP)
 		{
 			convoyCarHPAcc += convoyCarHP - health;
 			convoyCarHP = health;
 
-			new hpPerPackage = CONVOY_HP_PER_PACKAGE;
-			if(convoyCarHPAcc >= hpPerPackage)
+			if(convoyCarHPAcc >= CONVOY_HP_PER_PACKAGE)
 			{
-				convoyCarHPAcc -= hpPerPackage;
+				convoyCarHPAcc -= CONVOY_HP_PER_PACKAGE;
 				DropBoxFromCar(convoyCar);
 			}
 		}

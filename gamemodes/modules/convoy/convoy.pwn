@@ -132,13 +132,13 @@ timer AfterDropBox[500](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
 	GetVehiclePos(convoyCar, vx, vy, vz);
 	RemovePlayerAttachedObject(playerid, Boxes[boxid][box_attachedSlot]);
 
-	if(IsPlayerInRangeOfPoint(playerid, 5.0, vx, vy, vz) && IsACop(playerid))
+	if(IsPlayerInRangeOfPoint(playerid, 5.0, vx, vy, vz) && IsInAConvoyTeam(playerid))
 	{
 		ChatMe(playerid, "wrzuca paczkê spowrotem do konwojowego furgonu.");
 		convoyCarHP += CONVOY_HP_PER_PACKAGE;
 		DestroyBox(boxid);
 	}
-	else if(IsPlayerInBoxDeliveryPoint(playerid) && !IsACop(playerid))
+	else if(IsPlayerInBoxDeliveryPoint(playerid) && !IsInAConvoyTeam(playerid))
 	{
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Gratulacje, dostarczy³eœ ³up z konwoju. Otrzymujesz %d$.", Boxes[boxid][box_bonus]));
 		DajKase(playerid, Boxes[boxid][box_bonus]);
@@ -173,6 +173,12 @@ IsPlayerInBoxDeliveryPoint(playerid)
 	new Float:ActorX, Float:ActorY, Float:ActorZ;
 	GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
 	return IsPlayerInRangeOfPoint(playerid, 5.0, ActorX, ActorY, ActorZ);
+}
+
+IsInAConvoyTeam(playerid)
+{
+	
+	return 0;
 }
 
 GetFreeBoxId()
