@@ -7660,12 +7660,12 @@ ListaKontaktowGracza(playerid)
 		if(FindPlayerByNumber(Kontakty[playerid][i][eNumer]) != INVALID_PLAYER_ID)
 		{
 			//aktywny
-			format(string, sizeof(string), "%s%s - %d (on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "{FFFFFF}%s%s - %d {00FF00}(on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 		else
 		{
 			//nieaktywny
-			format(string, sizeof(string), "%s%s - %d (off-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "{FFFFFF}%s%s - %d {FF0000}(off-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 	}
 	
