@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:boks(playerid, params[], help)
+YCMD:walka(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

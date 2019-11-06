@@ -509,9 +509,9 @@ new JobNames[][20] = {
     "Diler broni",
     "Kierowca autobusu",
     "Rozwoziciel pizzy",//11
-    "Brak",
     "Bokser",
     "Brak",
+    "Taksówkarz",//14
     "Gazeciarz",
     "Kurier",
     "Brak",
