@@ -10010,6 +10010,31 @@ Kolczatka_Delete(id)
     return 1;
 }
 
+forward RepairCarAfterHitParachute(vehid, Float:health);
+public RepairCarAfterHitParachute(vehid, Float:health)
+{
+	SetVehicleHealth(vehid, health);
+	return 1;
+}
+
+forward GetClosestVehicleFromPlayer(playerid, Float:dis);
+public GetClosestVehicleFromPlayer(playerid, Float:dis)
+{
+    new veh = -1;
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+    for(new i = 1; i < MAX_VEHICLES; i++)
+    {
+        new Float:distance = GetVehicleDistanceFromPoint(i, x, y, z);
+        if(distance < dis)
+        {
+            dis = distance;
+            veh = i;
+        }
+    }
+    return veh;
+}
+
 public OnPlayerEnterSpikes(playerid)
 {
     new panels, doors, lights, tires, veh = GetPlayerVehicleID(playerid);

@@ -5727,6 +5727,7 @@ public OnPlayerUpdate(playerid)
     new veh = GetPlayerVehicleID(playerid);
     if(veh != 0)
     {
+
         new model = GetVehicleModel(veh);
         if(model == 425 || model == 432)
         {
@@ -6624,6 +6625,23 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			}
 		}
 	}
+	else if(PRESSED(KEY_FIRE))
+	{
+		if(GetPlayerWeapon(playerid) != 46)
+		{
+			new vehid;
+			if((vehid = GetClosestVehicleFromPlayer(playerid, 2.5)) != -1)
+			{
+				if(!GetVehicleDriverID(vehid))
+				{
+					new Float:vhealth;
+					GetVehicleHealth(veh, vhealth);
+					SetTimerEx("RepairCarAfterHitParachute", 500, false, "i", playerid, vhealth);
+				}
+			}
+		}
+	}
+
     if(PRESSED(KEY_SECONDARY_ATTACK))
     {
         if(GetPlayerAnimationIndex(playerid)!=1660) SetTimerEx("VendCheck", 500, false, "d", playerid);
