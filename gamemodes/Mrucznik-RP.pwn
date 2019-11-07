@@ -6627,7 +6627,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	else if(PRESSED(KEY_FIRE))
 	{
-		if(GetPlayerWeapon(playerid) != 46)
+		if(GetPlayerWeapon(playerid) == 46)
 		{
 			new vehid;
 			if((vehid = GetClosestVehicleFromPlayer(playerid, 2.5)) != -1)
