@@ -831,7 +831,7 @@ fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         if(MruMySQL_GetAccInt("Member", pracownik_nick) != PlayerInfo[playerid][pLider] ) return sendErrorMessage(playerid, "No ³adne hakowanie!");
 
-		new upordown[20];
+		new upordown[26];
 		upordown = (MruMySQL_GetAccInt("Rank", pracownik_nick) <= listitem) ? "Awansowa³eœ" : "Zdegradowa³eœ";
 		MruMySQL_SetAccInt("Rank", pracownik_nick, listitem);
 

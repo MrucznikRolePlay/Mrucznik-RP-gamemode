@@ -63,7 +63,7 @@ YCMD:red(playerid, params[], help)
                 }
             }
 
-            format(string, sizeof(string), "=: %s %s %s GPS %s - CODE RED :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa?") : ("aktywowa?"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie!"));
+            format(string, sizeof(string), "=: %s %s %s GPS %s - CODE RED :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie!"));
             PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
 
             SendRadioMessage(1, COLOR_YELLOW2, string);
