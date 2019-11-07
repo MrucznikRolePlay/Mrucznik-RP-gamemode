@@ -425,6 +425,7 @@ YCMD:wyjdz(playerid, params[], help)
 			TogglePlayerControllable(playerid, 1);
 			RemovePlayerFromVehicleEx(playerid);
 			KradniecieWozu[playerid] = 0;
+			NieSpamujKradnij[playerid] = 0;
 			KillTimer(GetPVarInt(playerid, "timerKradnij"));
 			return 1;
 		}
