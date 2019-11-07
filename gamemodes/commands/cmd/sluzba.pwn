@@ -207,7 +207,7 @@ YCMD:sluzba(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie ERS, nie bêdziesz widzia³ zg³oszeñ.");
                     JobDuty[playerid] = 0;
                     Medics -= 1;
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
                 }
                 else
@@ -215,7 +215,7 @@ YCMD:sluzba(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie ERS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
                     JobDuty[playerid] = 1;
                     Medics += 1;
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
                     SetPlayerToTeamColor(playerid);
                 }
             }
