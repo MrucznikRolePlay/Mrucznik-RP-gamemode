@@ -5543,7 +5543,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odestki: 0.%d procent",tmpintrate);
+						format(string, sizeof(string), "  Odsetki: 0.%d procent",tmpintrate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);
@@ -5634,7 +5634,7 @@ PayDay()
 	  	Lotto(rand);
 	}
   	SendClientMessageToAll(COLOR_YELLOW, "Odliczanie do respawnu rozpoczête");
-	BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nastšpi respawn nieu¿ywanych pojazdów !");
+	BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast±pi respawn nieu¿ywanych pojazdów !");
     printf("-> Doing respawn");
 	CountDown();
 	SendRconCommand("reloadlog");
