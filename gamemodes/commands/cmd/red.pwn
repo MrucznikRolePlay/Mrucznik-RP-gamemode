@@ -49,7 +49,7 @@ YCMD:red(playerid, params[], help)
                     format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", PatrolInfo[pat][patname]);
                     SendTeamMessage(1, COLOR_ALLDEPT, str);
                 }
-            {
+            }
             
             new string[128], sendername[MAX_PLAYER_NAME];
             GetPlayerName(playerid, sendername, sizeof(sendername));

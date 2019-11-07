@@ -365,6 +365,7 @@
 #include "cmd/rapidfly.pwn"
 #include "cmd/raport.pwn"
 #include "cmd/re.pwn"
+#include "cmd/red.pwn"
 #include "cmd/reflektor.pwn"
 #include "cmd/reklama.pwn"
 #include "cmd/reloadbans.pwn"
