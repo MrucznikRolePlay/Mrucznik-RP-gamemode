@@ -25,9 +25,9 @@ Mruczniké Role Play ----> stworzy≥ Mrucznik
 		Kubi - zwyk≥y skurwysyn
 		Akil - chyba nic nie zrobi≥ koniec koÒcÛw
 		Veroon - porobi≥ porobi≥ i uciek≥ :(
-		Niceczlowiek - okry≥ siÍ haÒbö publikujöc mapÍ
+		Niceczlowiek - okry≥ siÍ haÒbπ publikujπc mapÍ
 		PECET - dobry skrypter
-		LukeSqly - Niby co? zaczö≥, ale wysz≥o jak zwykle
+		LukeSqly - Niby co? zaczπ≥, ale wysz≥o jak zwykle
 		Simeone - Kox przez x
 		Creative - ma≥y szary cz≥owiek ale ambitny :D
 */
@@ -225,15 +225,15 @@ public OnGameModeInit()
 	//-------<[ Gameplay config ]>-------
     SetWeatherEx(3);
 	AllowInteriorWeapons(1); //broÒ w intkach
-	ShowPlayerMarkers(0); //wy≥öczenie markerÛw graczy
-	DisableInteriorEnterExits(); //wy≥öczenie wej?Ê do intkÛw z GTA
+	ShowPlayerMarkers(0); //wy≥πczenie markerÛw graczy
+	DisableInteriorEnterExits(); //wy≥πczenie wejúÊ do intkÛw z GTA
 	EnableStuntBonusForAll(0); //brak hajsu za stunty
-	ManualVehicleEngineAndLights(); //brak automatycznego w≥öczania silnika i ?wiate≥
+	ManualVehicleEngineAndLights(); //brak automatycznego w≥πczania silnika i ?wiate≥
 	ShowNameTags(1); //Pokazywanie nickÛw graczy
 	SetNameTagDrawDistance(70.0); //Wy?wietlanie nickÛw od 70 metrÛw
 	//UsePlayerPedAnims(); // Animacja CJ 
-		// - off (broÒ trzymana w obu rÍkach jest trzymana jednö, skiny chodzö swoim chodem)
-		// - on  (broÒ trzymana jest normalnie, wszystkie skiny chodzö jak CJ)
+		// - off (broÒ trzymana w obu rÍkach jest trzymana jednπ, skiny chodzπ swoim chodem)
+		// - on  (broÒ trzymana jest normalnie, wszystkie skiny chodzπ jak CJ)
 
 	//-------<[ libRegEx ]>-------
 	regex_syntax(SYNTAX_PERL);
@@ -290,7 +290,7 @@ public OnGameModeInit()
     LoadConfig();
     WczytajRangi();
     WczytajSkiny();
-    //Konfiguracja ID skryptu dla rodzin  - daj -1 w bazie aby wy≥öczyÊ korzystanie ze skryptu dla slotu
+    //Konfiguracja ID skryptu dla rodzin  - daj -1 w bazie aby wy≥πczyÊ korzystanie ze skryptu dla slotu
     Config_FamilyScript();
     //
     BARIERKA_Init();
@@ -710,7 +710,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
                 Patrolujacych[0]++;
                 GetPlayerName(playerid, fnick[0], MAX_PLAYER_NAME);
                 GetPlayerName(PatrolInfo[pat][patroluje][1], fnick[1], MAX_PLAYER_NAME);
-                format(str, 128, "{FFFFFF}ùù{6A5ACD} CENTRALA: {FFFFFF}%s{6A5ACD} 10-30 na strefÍ Alfa, sk≥ad %s %s", PatrolInfo[pat][patname], fnick[0], fnick[1]);
+                format(str, 128, "{FFFFFF}ªª{6A5ACD} CENTRALA: {FFFFFF}%s{6A5ACD} 10-30 na strefÍ Alfa, sk≥ad %s %s", PatrolInfo[pat][patname], fnick[0], fnick[1]);
             }
             else if((clickedid == PatrolBeta[0] || clickedid == PatrolBeta[1]) && Patrolujacych[1] < 4)
             {
@@ -720,7 +720,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
                 Patrolujacych[1]++;
                 GetPlayerName(playerid, fnick[0], MAX_PLAYER_NAME);
                 GetPlayerName(PatrolInfo[pat][patroluje][1], fnick[1], MAX_PLAYER_NAME);
-                format(str, 128, "{FFFFFF}ùù{6A5ACD} CENTRALA: {FFFFFF}%s{6A5ACD} 10-30 na strefÍ Beta, sk≥ad %s %s", PatrolInfo[pat][patname], fnick[0], fnick[1]);
+                format(str, 128, "{FFFFFF}ªª{6A5ACD} CENTRALA: {FFFFFF}%s{6A5ACD} 10-30 na strefÍ Beta, sk≥ad %s %s", PatrolInfo[pat][patname], fnick[0], fnick[1]);
             }
             else if((clickedid == PatrolGamma[0] || clickedid == PatrolGamma[1]) && Patrolujacych[2] < 6)
             {
@@ -730,7 +730,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
                 Patrolujacych[2]++;
                 GetPlayerName(playerid, fnick[0], MAX_PLAYER_NAME);
                 GetPlayerName(PatrolInfo[pat][patroluje][1], fnick[1], MAX_PLAYER_NAME);
-                format(str, 128, "{FFFFFF}ùù{6A5ACD} CENTRALA: {FFFFFF}%s{6A5ACD} 10-30 na strefÍ Gamma, sk≥ad %s %s", PatrolInfo[pat][patname], fnick[0], fnick[1]);
+                format(str, 128, "{FFFFFF}ªª{6A5ACD} CENTRALA: {FFFFFF}%s{6A5ACD} 10-30 na strefÍ Gamma, sk≥ad %s %s", PatrolInfo[pat][patname], fnick[0], fnick[1]);
             }
             else if((clickedid == PatrolDelta[0] || clickedid == PatrolDelta[1]) && Patrolujacych[3] < 6)
             {
@@ -740,9 +740,9 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
                 Patrolujacych[3]++;
                 GetPlayerName(playerid, fnick[0], MAX_PLAYER_NAME);
                 GetPlayerName(PatrolInfo[pat][patroluje][1], fnick[1], MAX_PLAYER_NAME);
-                format(str, 128, "{FFFFFF}ùù{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} 10-30 na strefÍ Delta, sk≥ad %s %s", PatrolInfo[pat][patname], fnick[0], fnick[1]);
+                format(str, 128, "{FFFFFF}ªª{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} 10-30 na strefÍ Delta, sk≥ad %s %s", PatrolInfo[pat][patname], fnick[0], fnick[1]);
             }
-            else SendClientMessage(playerid, COLOR_YELLOW, "Brak wolnego miejsca w tej strefie, sprÛbuj innö.");
+            else SendClientMessage(playerid, COLOR_YELLOW, "Brak wolnego miejsca w tej strefie, sprÛbuj innπ.");
             if(PatrolInfo[pat][patstrefa] != 0)
             {
                 PatrolInfo[pat][pataktywny] = 1;
@@ -773,9 +773,9 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
                 GetPlayerName(PatrolInfo[i][patroluje][1], pnick2, MAX_PLAYER_NAME);
                 switch(PatrolInfo[i][patstan])
                 {
-                    case 1: stanp="Sytuacja pod kontrolö";
+                    case 1: stanp="Sytuacja pod kontrolπ";
                     case 2: stanp="Potrzebne wsparcie";
-                    case 3: stanp="Po?cig za podejrzanym";
+                    case 3: stanp="Poúcig za podejrzanym";
                     case 4: stanp="Ranny funkcjonariusz";
                 }
                 format(str, 128, "Patrol %s - Funkcjonariusze: %s %s. Stan: %s", PatrolInfo[i][patname], pnick1, pnick2, stanp);
@@ -922,7 +922,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
         if(!IsPlayerNPC(playerid)) // znow tylko funkcja dla botow
 		{
-	    	SendClientMessage(playerid, COLOR_LIGHTRED, "** Musisz siÍ zalogowaÊ zanim wybierzesz skin (Zosta≥e? wyrzucony) **");
+	    	SendClientMessage(playerid, COLOR_LIGHTRED, "** Musisz siÍ zalogowaÊ zanim wybierzesz skin (Zosta≥eú wyrzucony) **");
 	        SetTimerEx("KickTimer",500,0,"d",playerid);
 	    }
         return 0;
@@ -930,13 +930,13 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	//Sila
 	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)//Zabezpieczenie, je?li jest podczas biegu
 	{
-		sendTipMessage(playerid, "Nie moøesz wej?Ê do pojazdu podczas biegu!"); 
+		sendTipMessage(playerid, "Nie moøesz wejúÊ do pojazdu podczas biegu!"); 
 		GetPlayerPos(playerid, pX,pY,pZ);
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
 	if(GetPlayerPing(playerid) >= 180 && !ispassenger)//Zabezpieczenie, je?li ma za duøy ping
 	{
-		sendTipMessage(playerid, "TwÛj ping jest stanowczo za wysoki! Odczekaj chwilÍ, zanim wsiödziesz do pojazdu"); 
+		sendTipMessage(playerid, "TwÛj ping jest stanowczo za wysoki! Odczekaj chwilÍ, zanim wsiπdziesz do pojazdu"); 
 		GetPlayerPos(playerid, pX,pY,pZ);
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
@@ -986,7 +986,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		if(IsACop(playerid))
 		{
-			sendTipMessageEx(playerid, COLOR_BLUE, "Po≥öczy≥e? siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnö");
+			sendTipMessageEx(playerid, COLOR_BLUE, "Po≥πczy≥eú siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnπ");
 		}
 		else
 		{
@@ -1006,7 +1006,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	}
 	if (GetVehicleModel(vehicleid) == 525)
 	{
-		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad≥e? do holownika, naci?nij CTRL alby podholowaÊ wÛz.");
+		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad≥eú do holownika, naci?nij CTRL alby podholowaÊ wÛz.");
 	}
 	return 1;
 }
@@ -1015,7 +1015,7 @@ public OnPlayerConnect(playerid)
 {
 	new GPCI[41];
 	gpci(playerid, GPCI, sizeof(GPCI));
-	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po≥öczy≥ siÍ z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
+	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po≥πczy≥ siÍ z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
 
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
@@ -1027,7 +1027,7 @@ public OnPlayerConnect(playerid)
 
     ClearChat(playerid);
 
-    // Wy≥öczone na testy
+    // Wy≥πczone na testy
     Usun_Obiekty(playerid); //stare obiekty
     obiekty_OnPlayerConnect(playerid);//nowe obiekty
 	
@@ -1070,7 +1070,7 @@ public OnPlayerConnect(playerid)
 	timeSecWjedz[playerid] = 0;
 
 
-	//Poczötkowe ustawienia:
+	//Poczπtkowe ustawienia:
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
 
     //Ikony
@@ -1087,7 +1087,7 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 11, 816.2141, -1386.5956, 13.6068, 48, 0); //Vinyl Club
     SetPlayerMapIcon(playerid, 12, 815.2556, -1616.2010, 13.7077, 14, 0); //Kurczak Marina
     SetPlayerMapIcon(playerid, 13, 925.6270, -1353.1003, 13.3768, 14, 0); //Kurczak Market
-    SetPlayerMapIcon(playerid, 14, 1038.1844, -1339.7595, 13.7266, 17, 0); //Pöczkarnia Allen
+    SetPlayerMapIcon(playerid, 14, 1038.1844, -1339.7595, 13.7266, 17, 0); //Pπczkarnia Allen
     SetPlayerMapIcon(playerid, 15, 1100.9039, -1235.4445, 15.5474, 27, 0); //FDU
     SetPlayerMapIcon(playerid, 16, 1022.4534, -1122.0057, 23.8715, 25, 0); //Kasyno
     SetPlayerMapIcon(playerid, 17, 1459.2233, -1140.6903, 24.0593, 45, 0); //ZIP
@@ -1108,15 +1108,15 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 32, 997.2347, -917.5255, 41.9068, 52, 0); //Bankomat na Temple
     SetPlayerMapIcon(playerid, 33, 1199.9893, -923.6624, 42.7465, 14, 0); //Kurczak Temple
     SetPlayerMapIcon(playerid, 34, 1315.3838, -904.4830, 38.6174, 36, 0); //24/7 na Temple (2)
-    SetPlayerMapIcon(playerid, 35, 1310.2568, -1370.4567, 13.3031, 34, 0); //Söd
-    SetPlayerMapIcon(playerid, 36, 1481.2053, -1768.3350, 18.5228, 34, 0); //Urzöd
+    SetPlayerMapIcon(playerid, 35, 1310.2568, -1370.4567, 13.3031, 34, 0); //Sπd
+    SetPlayerMapIcon(playerid, 36, 1481.2053, -1768.3350, 18.5228, 34, 0); //Urzπd
     SetPlayerMapIcon(playerid, 37, 1551.8835, -1676.2306, 15.5495, 30, 0); //Komisariat G≥Ûwny
     SetPlayerMapIcon(playerid, 38, 1939.0436, -1773.6844, 13.1137, 42, 0); //Stacja Benzynowa na Idlewood
     SetPlayerMapIcon(playerid, 39, 2073.7549, -1827.9742, 13.2739, 52, 0); //Bankomat (1)
     SetPlayerMapIcon(playerid, 40, 2227.1052, -1723.2871, 13.2840, 54, 0); //Si≥ownia
     SetPlayerMapIcon(playerid, 41, 2844.5139, -1562.8854, 10.8208, 52, 0); //Bankomat (2)
     SetPlayerMapIcon(playerid, 42, 1699.7645, 411.4212, 30.6384, 57, 0); //Granica LS - LV
-    SetPlayerMapIcon(playerid, 43, 2269.7112, -74.8501, 26.7724, 34, 0); //Urzöd w PC
+    SetPlayerMapIcon(playerid, 43, 2269.7112, -74.8501, 26.7724, 34, 0); //Urzπd w PC
     SetPlayerMapIcon(playerid, 44, 2302.0964, -16.2240, 26.4844, 52, 0); //Bank w PC
     SetPlayerMapIcon(playerid, 45, 2112.7124, -1213.1012, 23.6923, 45, 0); //Suburban obok Salonu Aut
     SetPlayerMapIcon(playerid, 46, 2421.2805, -1223.2761, 24.9988, 21, 0); //Pig Pen
@@ -1184,7 +1184,7 @@ public OnPlayerDisconnect(playerid, reason)
 		return 0;
 
 	//Pobieranie starej pozycji:
-	Log(connectLog, INFO, "Gracz %s[id: %d] roz≥öczy≥ siÍ, powÛd: %d", GetNick(playerid), playerid, reason);
+	Log(connectLog, INFO, "Gracz %s[id: %d] roz≥πczy≥ siÍ, powÛd: %d", GetNick(playerid), playerid, reason);
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
@@ -1199,7 +1199,7 @@ public OnPlayerDisconnect(playerid, reason)
     };
     if(Spectate[playerid] == INVALID_PLAYER_ID)
     {
-    	format(reString, sizeof(reString), "SERWER: Gracz znajdujöcy siÍ w pobliøu wyszed≥ z serwera (%s, powÛd: %s).", GetNick(playerid), DisconnectReason[reason]);
+    	format(reString, sizeof(reString), "SERWER: Gracz znajdujπcy siÍ w pobliøu wyszed≥ z serwera (%s, powÛd: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 	}
 	if(GetPVarInt(playerid, "OKupMats") == 1)
@@ -1266,7 +1266,7 @@ public OnPlayerDisconnect(playerid, reason)
     if(GetPVarInt(playerid, "budka-Mobile") != 999) {
         new caller = GetPVarInt(playerid, "budka-Mobile");
         if(GetPVarInt(caller, "budka-Mobile") == playerid) {
-            sendTipMessage(caller, "**biiip biiip** po≥öczenie zosta≥o przerwane ((Wyj?cie z gry))", COLOR_PAPAYAWHIP);
+            sendTipMessage(caller, "**biiip biiip** po≥πczenie zosta≥o przerwane ((Wyj?cie z gry))", COLOR_PAPAYAWHIP);
             budki[GetPVarInt(playerid, "budka-used")][isCurrentlyUsed] = 0;
             budki[GetPVarInt(caller, "budka-used")][isCurrentlyUsed] = 0;
             SetPVarInt(caller, "budka-Mobile", 999);
@@ -1296,7 +1296,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		if(Mobile[playerid] >= 0)
 		{
-			SendClientMessage(Mobile[playerid], COLOR_YELLOW, "Gracz, z ktÛrym prowadzi≥e? rozmowÍ telefonicznö, wyszed≥ z gry.");
+			SendClientMessage(Mobile[playerid], COLOR_YELLOW, "Gracz, z ktÛrym prowadzi≥eú rozmowÍ telefonicznπ, wyszed≥ z gry.");
 		}
 		StopACall(playerid);
 	}
@@ -1419,7 +1419,7 @@ public OnPlayerDisconnect(playerid, reason)
         }
         if(poscig[playerid] >= 1)
         {
-            strcat(powod, "po?cig, ");
+            strcat(powod, "poúcig, ");
         }
         new codal[16];
         switch(reason)
@@ -1669,7 +1669,7 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
-	Log(damageLog, INFO, "%s zg≥asza zranienie gracza %s o %fhp broniö %d", 
+	Log(damageLog, INFO, "%s zg≥asza zranienie gracza %s o %fhp broniπ %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
 		amount,
@@ -1683,7 +1683,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		return 1;
 	}
 
-	Log(damageLog, INFO, "%s zosta≥ zraniony przez %s o %fhp broniö %d", 
+	Log(damageLog, INFO, "%s zosta≥ zraniony przez %s o %fhp broniπ %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(issuerid) ? GetPlayerLogName(issuerid) : sprintf("%d", issuerid),
 		amount,
@@ -1876,12 +1876,12 @@ public OnPlayerDeath(playerid, killerid, reason)
 			}
 			if(GetPlayerState(killerid) == 2)
 			{
-				Log(warningLog, INFO, "%s zabi≥ %s z broni o id %d bÍdöc w aucie (moøliwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
-				SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robiöc DriveBy moøesz zostaÊ ukarany przez admina!");
+				Log(warningLog, INFO, "%s zabi≥ %s z broni o id %d bÍdπc w aucie (moøliwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
+				SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robiπc DriveBy moøesz zostaÊ ukarany przez admina!");
 
 				if(PlayerInfo[killerid][pLevel] > 1)
 				{
-					format(string, 128, "AdmWarning: %s[%d] zabi≥ %s[%d] bÍdö w aucie (moøliwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
+					format(string, 128, "AdmWarning: %s[%d] zabi≥ %s[%d] bÍdπ w aucie (moøliwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
 					SendMessageToAdmin(string, COLOR_YELLOW);
 				}
 				else
@@ -1889,7 +1889,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					format(string, 128, "AdmWarning: %s[%d] zabi≥ %s[%d] z DB, dosta≥ kicka !", killername, killerid, playername, playerid);
 					SendMessageToAdmin(string, COLOR_YELLOW);
 					Log(punishmentLog, INFO, "Gracz %s dosta≥ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
-					SendClientMessage(killerid, COLOR_PANICRED, "Dosta≥e? kicka za Drive-By do ludzi.");
+					SendClientMessage(killerid, COLOR_PANICRED, "Dosta≥eú kicka za Drive-By do ludzi.");
 					KickEx(killerid);
 					return 1;
 				}
@@ -1898,13 +1898,13 @@ public OnPlayerDeath(playerid, killerid, reason)
 			{
 				format(string, 128, "AdmWarning: [%d]%s zabi≥ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
 				SendMessageToAdmin(string, COLOR_YELLOW);
-				Log(warningLog, INFO, "%s zabi≥ gracza %s uøywajöc miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+				Log(warningLog, INFO, "%s zabi≥ gracza %s uøywajπc miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 			}
 			if(reason == 41)
 			{
 				format(string, 128, "AdmWarning: [%d]%s zabi≥ gracza %s ze spreya !", killerid, killername, playername);
 				SendMessageToAdmin(string, COLOR_YELLOW);
-				Log(warningLog, INFO, "%s zabi≥ gracza %s uøywajöc spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+				Log(warningLog, INFO, "%s zabi≥ gracza %s uøywajπc spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 			}
 			if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
 			{
@@ -1972,10 +1972,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 		//koniec rozmowy telefonicznej
 		if(Mobile[playerid] != INVALID_PLAYER_ID)
 		{
-			SendClientMessage(playerid, COLOR_YELLOW, "Umar≥e? - po≥öczenie zakoÒczone.");
+			SendClientMessage(playerid, COLOR_YELLOW, "Umar≥eú - po≥πczenie zakoÒczone.");
 			if(Mobile[playerid] >= 0)
 			{
-				SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S≥ychaÊ nag≥y trzask i po≥öczenie zostaje zakoÒczone.");
+				SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S≥ychaÊ nag≥y trzask i po≥πczenie zostaje zakoÒczone.");
 			}
 			StopACall(playerid);
 		}
@@ -1992,7 +1992,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		}
 		if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 		{
-			format(string, sizeof(string), "Wy?cig: {FFFFFF}%s zginö≥ jak prawdziwy ?cigant [*]", playername);
+			format(string, sizeof(string), "Wy?cig: {FFFFFF}%s zginπ≥ jak prawdziwy ?cigant [*]", playername);
 			WyscigMessage(COLOR_YELLOW, string);
 			IloscZawodnikow --;
 			if(IloscZawodnikow <= Ukonczyl)
@@ -2003,13 +2003,13 @@ public OnPlayerDeath(playerid, killerid, reason)
 		if(lowcaz[playerid] == killerid)
 		{
 			lowcaz[playerid] = 501;
-			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta≥o anulowane - nie moøesz wziöÊ teraz zlecenia na tego samego gracza!");
+			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta≥o anulowane - nie moøesz wziπÊ teraz zlecenia na tego samego gracza!");
 		}
 		if(GetPVarInt(playerid, "ZjadlDragi") == 1)
 		{
 			new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
 			SetPVarInt(playerid, "ZjadlDragi", 0);
-			sendTipMessage(playerid, "Z powodu ?mierci twÛj boost (dragÛw) zosta≥ wy≥öczony, zaøyj kolejnö dawkÍ!"); 
+			sendTipMessage(playerid, "Z powodu ?mierci twÛj boost (dragÛw) zosta≥ wy≥πczony, zaøyj kolejnπ dawkÍ!"); 
 			KillTimer(TimerEfektNarkotyku[playerid]);
 			SetStrong(playerid, FirstValue);
 		}
@@ -2082,7 +2082,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		
 		if(GetPVarInt(playerid, "CheatDetected") == 1)
 		{
-			//kod wy≥öczony, je?li wykryto (zapobiega dublowaniu komunikatÛw o wykryciu kodu nim gracz zostanie skickowany).
+			//kod wy≥πczony, je?li wykryto (zapobiega dublowaniu komunikatÛw o wykryciu kodu nim gracz zostanie skickowany).
 			return 1;
 		}
 
@@ -2106,9 +2106,9 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		}
 		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta≥ kicka. | Kod: %d.", GetNick(playerid), playerid, plrIP, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
-		format(string, sizeof(string), "Anti-Cheat: Dosta≥e? kicka. | Kod: %d.", code);
+		format(string, sizeof(string), "Anti-Cheat: Dosta≥eú kicka. | Kod: %d.", code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
-		SendClientMessage(playerid, 0x9ACD32AA, "Jeøeli uwaøasz, øe antycheat zadzia≥a≥ nieprawid≥owo, zg≥o? to administracji, podajöc kod z jakim otrzyma≥e? kicka.");
+		SendClientMessage(playerid, 0x9ACD32AA, "Jeøeli uwaøasz, øe antycheat zadzia≥a≥ nieprawid≥owo, zg≥o? to administracji, podajπc kod z jakim otrzyma≥eú kicka.");
         Log(punishmentLog, INFO, "%s dosta≥ kicka od antycheata, powÛd: kod %d", GetPlayerLogName(playerid), code);
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
@@ -2139,7 +2139,7 @@ public OnPlayerSpawn(playerid)
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)
 	{
-		sendErrorMessage(playerid, "Zespawnowa≥e? siÍ, a nie jeste? zalogowany! Zosta≥e? wyrzucony z serwera.");
+		sendErrorMessage(playerid, "Zespawnowa≥eú siÍ, a nie jeste? zalogowany! Zosta≥eú wyrzucony z serwera.");
 		KickEx(playerid);
 		return 0;
 	}
@@ -2164,7 +2164,7 @@ public OnPlayerSpawn(playerid)
 	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
 	{
 	    PlayerInfo[playerid][pJob] = 0;
-	    SendClientMessage(playerid, COLOR_WHITE, "Zosta≥e? wyrzucony z pracy!");
+	    SendClientMessage(playerid, COLOR_WHITE, "Zosta≥eú wyrzucony z pracy!");
 	}
     // usuwanie
     if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
@@ -2179,13 +2179,13 @@ public OnPlayerSpawn(playerid)
         MruMySQL_SetAccInt("Rank", GetNick(playerid), 0);
         MruMySQL_SetAccInt("Member", GetNick(playerid), 0);
         UsunBron(playerid);
-        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta≥e? wyrzucony z pracy przez lidera, gdy by≥e? offline!");
+        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta≥eú wyrzucony z pracy przez lidera, gdy by≥eú offline!");
     }
     SetPVarInt(playerid, "mozeUsunacBronie", 0);
     // zabieranie prawka //
     new string[128];
     if(PlayerInfo[playerid][pPK] > 24) {
-        format(string, sizeof(string), "* Przekroczy≥e? limit 24 PK. Tracisz prawo jazdy na 1 DZIE—");
+        format(string, sizeof(string), "* Przekroczy≥eú limit 24 PK. Tracisz prawo jazdy na 1 DZIE—");
         SendClientMessage(playerid, COLOR_RED, string);
                                         //86400
         PlayerInfo[playerid][pPK] = 0;
@@ -2282,7 +2282,7 @@ SetPlayerSpawnPos(playerid)
 		PlayerInfo[playerid][pMuted] = 1;
 		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
-	//	SendClientMessage(playerid, COLOR_LIGHTRED, "Gra≥e? NON-RP. Wracasz do Admin Jaila.");
+	//	SendClientMessage(playerid, COLOR_LIGHTRED, "Gra≥eú NON-RP. Wracasz do Admin Jaila.");
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
 	{
@@ -2290,7 +2290,7 @@ SetPlayerSpawnPos(playerid)
 	    new kaseczka = (kaska[playerid] > 0) ? (kaska[playerid]/2) : 1;
 	    new sendername[MAX_PLAYER_NAME];
 	    GetPlayerName(playerid, sendername, sizeof(sendername));
-		format(string, sizeof(string), "* Zosta≥e? uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
+		format(string, sizeof(string), "* Zosta≥eú uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
 		SendClientMessage(playerid, COLOR_LIGHTRED, string);
 		ResetPlayerWeapons(playerid);
 		UsunBron(playerid);
@@ -2299,7 +2299,7 @@ SetPlayerSpawnPos(playerid)
         SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerInfo[playerid][pMuted] = 1;
 		SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
-		format(string, sizeof(string), "Zosta≥e? ukarany na 15 minut. Powod: /q podczas akcji");
+		format(string, sizeof(string), "Zosta≥eú ukarany na 15 minut. Powod: /q podczas akcji");
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po≥owÍ kasy i broÒ", sendername);
 		SendClientMessageToAll(COLOR_LIGHTRED, string);
@@ -2444,7 +2444,7 @@ SetPlayerSpawnPos(playerid)
 							{
 								SetPlayerPosEx(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
 								Wchodzenie(playerid);
-								sendTipMessage(playerid, "Zrespi≥e? siÍ na dachu San News"); 
+								sendTipMessage(playerid, "Zrespi≥eú siÍ na dachu San News"); 
 							}
 							else if(PlayerInfo[playerid][pRank] >= 2 && PlayerInfo[playerid][pRank] < 7) 
 							{
@@ -2776,31 +2776,31 @@ public OnPlayerEnterCheckpoint(playerid)
 			{
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
 				{
-					CreateNewRunCheckPoint(playerid, 1709.3523,-1461.3938,13.5469, 3, "Zaliczy≥e? pierwszy przystanek, kolejny jest juø oznaczony!", 0, true);
+					CreateNewRunCheckPoint(playerid, 1709.3523,-1461.3938,13.5469, 3, "Zaliczy≥eú pierwszy przystanek, kolejny jest juø oznaczony!", 0, true);
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
 				{
-					CreateNewRunCheckPoint(playerid, 1707.8762,-1584.3118,13.5453, 3, "Zaliczy≥e? drugi przystanek, kolejny jest juø oznaczony!", 0, true); 
+					CreateNewRunCheckPoint(playerid, 1707.8762,-1584.3118,13.5453, 3, "Zaliczy≥eú drugi przystanek, kolejny jest juø oznaczony!", 0, true); 
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
 				{
-					CreateNewRunCheckPoint(playerid, 1625.7415,-1608.9004,13.7188, 3, "Zaliczy≥e? trzeci przystanek, kolejny jest juø oznaczony!", 5,true); 
+					CreateNewRunCheckPoint(playerid, 1625.7415,-1608.9004,13.7188, 3, "Zaliczy≥eú trzeci przystanek, kolejny jest juø oznaczony!", 5,true); 
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
 				{
-					CreateNewRunCheckPoint(playerid, 1538.9513,-1724.1267,13.5469, 3, "Zaliczy≥e? czwarty przystanek, kolejny jest juø oznaczony!", 0, true); 
+					CreateNewRunCheckPoint(playerid, 1538.9513,-1724.1267,13.5469, 3, "Zaliczy≥eú czwarty przystanek, kolejny jest juø oznaczony!", 0, true); 
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
 				{
-					CreateNewRunCheckPoint(playerid, 1322.6306,-1724.9469,13.5469, 3, "Zaliczy≥e? piöty przystanek, kolejny jest juø oznaczony!", 0, true); 
+					CreateNewRunCheckPoint(playerid, 1322.6306,-1724.9469,13.5469, 3, "Zaliczy≥eú piπty przystanek, kolejny jest juø oznaczony!", 0, true); 
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
 				{
-					CreateNewRunCheckPoint(playerid, 1318.4052,-1841.7726,13.5469, 3, "Zaliczy≥e? szÛsty przystanek, kolejny jest juø oznaczony!", 0, true); 
+					CreateNewRunCheckPoint(playerid, 1318.4052,-1841.7726,13.5469, 3, "Zaliczy≥eú szÛsty przystanek, kolejny jest juø oznaczony!", 0, true); 
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
 				{
-					CreateNewRunCheckPoint(playerid,  1382.2340,-1811.7761,13.5469, 3, "Zaliczy≥e? siÛdmy (przedostatni) przystanek, kolejny jest juø oznaczony!", 0, true); 
+					CreateNewRunCheckPoint(playerid,  1382.2340,-1811.7761,13.5469, 3, "Zaliczy≥eú siÛdmy (przedostatni) przystanek, kolejny jest juø oznaczony!", 0, true); 
 				}
 				if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
 				{
@@ -2820,23 +2820,23 @@ public OnPlayerEnterCheckpoint(playerid)
 		{
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
 			{
-				CreateNewRunCheckPoint(playerid,  535.0668,-1364.9790,15.8432, 2, "Zaliczy≥e? pierwszy checkpoint! NastÍpny zosta≥ juø oznaczony", 0, true); 
+				CreateNewRunCheckPoint(playerid,  535.0668,-1364.9790,15.8432, 2, "Zaliczy≥eú pierwszy checkpoint! NastÍpny zosta≥ juø oznaczony", 0, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
 			{
-				CreateNewRunCheckPoint(playerid,  339.2540,-1526.9476,33.3757, 2, "Zaliczy≥e? drugi checkpoint! NastÍpny zosta≥ oznaczony", 0, true); 
+				CreateNewRunCheckPoint(playerid,  339.2540,-1526.9476,33.3757, 2, "Zaliczy≥eú drugi checkpoint! NastÍpny zosta≥ oznaczony", 0, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
 			{
-				CreateNewRunCheckPoint(playerid,  317.4830,-1632.8326,33.3125, 2, "Zaliczy≥e? trzeci checkpoint! NastÍpny zosta≥ oznaczony, a ty siÍ nie poddajesz!", 5, true); 
+				CreateNewRunCheckPoint(playerid,  317.4830,-1632.8326,33.3125, 2, "Zaliczy≥eú trzeci checkpoint! NastÍpny zosta≥ oznaczony, a ty siÍ nie poddajesz!", 5, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
 			{
-				CreateNewRunCheckPoint(playerid,  364.1078,-1805.8809,7.8380, 2, "Zaliczy≥e? czwarty checkpoint! Piöty jest juø oznaczony!", 0, true); 
+				CreateNewRunCheckPoint(playerid,  364.1078,-1805.8809,7.8380, 2, "Zaliczy≥eú czwarty checkpoint! Piπty jest juø oznaczony!", 0, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
 			{
-				CreateNewRunCheckPoint(playerid,  664.4612,-1859.3246,5.4609, 2, "Zaliczy≥e? Piöty checkpoint! Zosta≥y jeszcze dwa!", 5, true); 
+				CreateNewRunCheckPoint(playerid,  664.4612,-1859.3246,5.4609, 2, "Zaliczy≥eú Piπty checkpoint! Zosta≥y jeszcze dwa!", 5, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
 			{
@@ -2845,7 +2845,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
 			{
-				CreateNewRunCheckPoint(playerid,  1000.8669,-1857.4419,12.8146, 2, "Zaliczy≥e? siÛdmy checkpoint! Juø widaÊ ostatni", 5, true); 
+				CreateNewRunCheckPoint(playerid,  1000.8669,-1857.4419,12.8146, 2, "Zaliczy≥eú siÛdmy checkpoint! Juø widaÊ ostatni", 5, true); 
 			}
 			if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
 			{
@@ -2855,7 +2855,7 @@ public OnPlayerEnterCheckpoint(playerid)
 		else//Je?li wybra≥ dialog do pokazania punktu startowego trasy
 		{
 			DisablePlayerCheckpoint(playerid);
-			sendTipMessageEx(playerid, COLOR_P@, "Aby rozpoczöÊ bieg wpisz w tym miejscu [/biegnij]"); 
+			sendTipMessageEx(playerid, COLOR_P@, "Aby rozpoczπÊ bieg wpisz w tym miejscu [/biegnij]"); 
 			SetPVarInt(playerid, "RozpoczalBieg", 0);
 		}
 	}
@@ -2900,14 +2900,14 @@ public OnPlayerEnterCheckpoint(playerid)
 	}
 	if(CP[playerid]==1200)
 	{
-	    SendClientMessage(playerid, COLOR_GREY, "Dojecha≥e? do zajezdni i zakoÒczy≥e? pracÍ.");
+	    SendClientMessage(playerid, COLOR_GREY, "Dojecha≥eú do zajezdni i zakoÒczy≥eú pracÍ.");
 		Przystanek(playerid, COLOR_GREEN, "Korporacja Transportowa\n Wydzia≥ Komunikacji Autbusowej");
 		DisablePlayerCheckpoint(playerid);
 		CP[playerid] = 0;
 	}
 	if(CP[playerid]==1201)
 	{
-	    SendClientMessage(playerid, COLOR_GREY, "Dojecha≥e? do zajezdni i zakoÒczy≥e? pracÍ.");
+	    SendClientMessage(playerid, COLOR_GREY, "Dojecha≥eú do zajezdni i zakoÒczy≥eú pracÍ.");
 		Przystanek(playerid, COLOR_YELLOW, "Los Santos Bus Department\n Komunikacja Miejska");
 		DisablePlayerCheckpoint(playerid);
 		CP[playerid] = 0;
@@ -2920,12 +2920,12 @@ public OnPlayerEnterCheckpoint(playerid)
 
 			DisablePlayerCheckpoint(playerid); //usuwa cp i...
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Przypomnienie_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpoczöÊ s≥uøby!!!");
+			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpoczπÊ s≥uøby!!!");
 			SendClientMessage(playerid, COLOR_GREEN, "Wpisz {FFFF00}/fare [cena]");
 			SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyÊ po wjechaniu w przystanek wpisz /zd");
 			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli bÍdziesz chcia≥ przerwaÊ trasÍ wcze?niej wpisz /zakoncztrase");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>/fare<<_____________|");
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Jefferson - Glen Park - Idlewood - El Corona - Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Motel Jefferson");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Jefferson - Glen Park - Idlewood - El Corona - Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Motel Jefferson");
 			ProxDetector(10.0, playerid, "Linia numer: {3333FF}55 (niebieska) {FFFF00} Kierunek ==> {3333FF}MRUCZNIK TOWER", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SetPlayerCheckpoint(playerid, 2248.4707,-1139.6617,25.7001, 4); //... ustawia nastepnego
 			CP[playerid]=552; //przypisuje id dla cp
@@ -2938,7 +2938,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1967.2327,-1198.9353,25.2217, 4);
 			CP[playerid]=553;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Glen Park - Idlewood - El Corona - Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Glen Park");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Glen Park - Idlewood - El Corona - Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Glen Park");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+230$");
 		}
@@ -2948,7 +2948,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1844.0139,-1361.4354,12.9694, 4);
 			CP[playerid]=554;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - El Corona - Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Skate Park");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - El Corona - Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Skate Park");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 		}
 		else if(CP[playerid]==554)
@@ -2959,7 +2959,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1742.6479,-1816.3966,12.9351, 4);
 			CP[playerid]=555;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: El Corona - Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Unity Station");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: El Corona - Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Unity Station");
 		}
 		else if(CP[playerid]==555)
 		{
@@ -2969,11 +2969,11 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1532.3134,-1648.4254,12.9485, 4); //Przystanek Komisariat
 			CP[playerid]=556;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Komisariat / Urzöd Miasta");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Komisariat / Urzπd Miasta");
 		}
 		else if(CP[playerid]==556)
 		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Pershing Square ? Komisariat / Urzöd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Pershing Square ? Komisariat / Urzπd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+230$");
 			DisablePlayerCheckpoint(playerid);
@@ -3058,9 +3058,9 @@ public OnPlayerEnterCheckpoint(playerid)
 			CP[playerid]=563;
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
 			SendClientMessage(playerid, COLOR_GREEN, "Za chwilÍ zbliøysz siÍ do koÒca trasy! (1/2 zadania).");
-			SendClientMessage(playerid, COLOR_GREEN, "Moøesz odpoczöÊ nie wjeødøajöc w kolejny checkpoint lub ruszyÊ dalej.");
+			SendClientMessage(playerid, COLOR_GREEN, "Moøesz odpoczπÊ nie wjeødøajπc w kolejny checkpoint lub ruszyÊ dalej.");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \nKierunek: Ko?ciÛ≥\n{778899}Trasa: Rodeo - Market - Downtown - Urzöd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Odjazd nastöpi po sygnale");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \nKierunek: Ko?ciÛ≥\n{778899}Trasa: Rodeo - Market - Downtown - Urzπd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Odjazd nastπpi po sygnale");
 		}
 		else if(CP[playerid]==563)
 		{
@@ -3070,7 +3070,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			SetPlayerCheckpoint(playerid, 359.0248,-1647.8008,32.3386, 4); //molo wÍdkarskie
 			CP[playerid]=564;
 			ProxDetector(10.0, playerid, "Linia numer: {3333FF}55 (niebieska) {FFFF00} Kierunek ==> {3333FF}KO?CI”£", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Rodeo - Market - Downtown - Urzöd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Molo WÍdkarskie");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Rodeo - Market - Downtown - Urzπd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Molo WÍdkarskie");
 		}
 		else if(CP[playerid]==564)
 		{
@@ -3080,7 +3080,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 639.6337,-1452.6040,13.7631, 4);
 			CP[playerid]=1007;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Rodeo - Market - Downtown - Urzöd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: G≥Ûwna siedziba FBI (N/Ø) ");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Rodeo - Market - Downtown - Urzπd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: G≥Ûwna siedziba FBI (N/Ø) ");
 		}
 		else if(CP[playerid]==1007)
 		{
@@ -3090,7 +3090,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 723.2538,-1407.2189,12.9320, 4);
 			CP[playerid]=566;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Rodeo - Market - Downtown - Urzöd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Centrala SAN ");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Rodeo - Market - Downtown - Urzπd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Centrala SAN ");
 		}
 		else if(CP[playerid]==566)
 		{
@@ -3100,7 +3100,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 830.8025,-1330.0034,13.5437, 4);
 			CP[playerid]=567;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Market - Downtown - Urzöd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Market Station ");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Market - Downtown - Urzπd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Market Station ");
 		}
 		else if(CP[playerid]==567)
 		{
@@ -3110,7 +3110,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1034.3179,-1150.8452,23.2292, 4); //Bymber Kasyno
 			CP[playerid]=568;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Market - Downtown - Urzöd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Bymber Casino ");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Market - Downtown - Urzπd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Bymber Casino ");
 		}
 		else if(CP[playerid]==568)
 		{
@@ -3120,7 +3120,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1449.7135,-1037.4396,23.2312, 4); //Bank
 			CP[playerid]=569;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Downtown - Urzöd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Verte Bank ");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Downtown - Urzπd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Verte Bank ");
 		}
 		else if(CP[playerid]==569)
 		{
@@ -3130,7 +3130,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1527.9624,-1695.4071,12.9535, 4); //Komisariat LS
 			CP[playerid]=570;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Urzöd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Komisariat / Urzöd Miasta ");
+			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Ko?ciÛ≥\n{778899}Trasa: Urzπd Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}NastÍpny przystanek: Komisariat / Urzπd Miasta ");
 		}
 		else if(CP[playerid]==570)
 		{
@@ -3193,10 +3193,10 @@ public OnPlayerEnterCheckpoint(playerid)
 				ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}Jefferson ? Ko?ciÛ≥", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 				DisablePlayerCheckpoint(playerid);
 				//TogglePlayerControllable(playerid, 0);//Zamraøamy do pÛki nie odpowie co robi dalej
-				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi≥e? pe≥nö trasÍ. Co zamierzasz teraz zrobiÊ?\n\nWci?nij PonÛw aby wczytaÊ trasÍ jeszcze raz.\nWci?nij Innö aby wybraÊ innö trasÍ.", "PonÛw", "Innö");
+				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi≥eú pe≥nπ trasÍ. Co zamierzasz teraz zrobiÊ?\n\nWci?nij PonÛw aby wczytaÊ trasÍ jeszcze raz.\nWci?nij Innπ aby wybraÊ innπ trasÍ.", "PonÛw", "Innπ");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 55 zakoÒczona!_____________|");
 				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 5980$ premii za dwukrotne przejechanie trasy! (26 przystankÛw)");
-				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczöÊ tö lub innö trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
+				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczπÊ tπ lub innπ trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
 				SendClientMessage(playerid, COLOR_GREEN, "Jeøeli jednak chcesz zakoÒczyÊ pracÍ kieruj siÍ do zajezdni LSBD (wskazanej przez GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
 				SendClientMessage(playerid, COLOR_GRAD1, "Skill +2");
@@ -3232,7 +3232,7 @@ public OnPlayerEnterCheckpoint(playerid)
 		{
 			DisablePlayerCheckpoint(playerid); //usuwa cp i...
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Przypomnienie_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpoczöÊ s≥uøby!!!");
+			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpoczπÊ s≥uøby!!!");
 			SendClientMessage(playerid, COLOR_GREEN, "Wpisz {FFFF00}/fare [cena]");
 			SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyÊ po wjechaniu w przystanek wpisz /zd");
 			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli bÍdziesz chcia≥ przerwaÊ trasÍ wcze?niej wpisz /zakoncztrase");
@@ -3240,7 +3240,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "Linia numer: {FFA500}72 (pomaraÒczowa)  {FFFF00}Kierunek ==> {FFA500}MRUCZNIK TOWER", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SetPlayerCheckpoint(playerid, 2572.6025,-1728.8365,13.3093, 4);
 			CP[playerid]=740; //przypisuje id dla cp up
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Ganton - Idlewood - Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Grove Street");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Ganton - Idlewood - Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Grove Street");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);//
 		}
 		//nowe ganton GS lewo 2471,-1735.9000244141,13.39999961853
@@ -3253,7 +3253,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Ganton ? Grove Street", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+100$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Ganton - Idlewood - Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Bar Ten Green Bottles (N/Ø)");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Ganton - Idlewood - Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Bar Ten Green Bottles (N/Ø)");
 		}
 		else if(CP[playerid]==1009)
 		{
@@ -3263,7 +3263,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Ganton ? Bar Ten Green Bottles (N/Ø)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+50$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Si≥ownia");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Si≥ownia");
 		}
 		else if(CP[playerid]==722)
 		{
@@ -3273,7 +3273,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Idlewood ? Si≥ownia", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Stacja Benzynowa");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Stacja Benzynowa");
 		}
 		else if(CP[playerid]==723)
 		{
@@ -3283,14 +3283,14 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Idlewood ? Stacja Benzynowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Urzöd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Komisariat / Urzöd Miasta ");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Urzπd Miasta - Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Komisariat / Urzπd Miasta ");
 		}
 		else if(CP[playerid]==724)
 		{
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1452.3877,-1031.1976,23.2277, 4);
 			CP[playerid]=725;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Pershing Square ? Komisariat / Urzöd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Pershing Square ? Komisariat / Urzπd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+200$");
 			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Downtown - Market - Rodeo\n{808080}NastÍpny przystanek: Verte Bank (jedn.) ");
@@ -3342,12 +3342,12 @@ public OnPlayerEnterCheckpoint(playerid)
 			CP[playerid]=1003;
 			ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}Rodeo ? Biurowiec 'Mrucznik Tower'", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! UkoÒczy≥e? trasÍ do Mrucznik Tower! (1/2 zadania). Moøesz tu odpoczöÊ.");
-			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli chcesz jechaÊ dalej wykonaj nawrÛt kierujöc siÍ do kolejnego checkpointu!");
+			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! UkoÒczy≥eú trasÍ do Mrucznik Tower! (1/2 zadania). Moøesz tu odpoczπÊ.");
+			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli chcesz jechaÊ dalej wykonaj nawrÛt kierujπc siÍ do kolejnego checkpointu!");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa: Market - Downtown - Urzöd Miasta - Idlewood - Ganton - East Los Santos\n{808080}Odjazd nastöpi po sygnale!");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa: Market - Downtown - Urzπd Miasta - Idlewood - Ganton - East Los Santos\n{808080}Odjazd nastπpi po sygnale!");
 		}
 		else if(CP[playerid]==1003)
 		{
@@ -3358,7 +3358,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "Linia numer: {FFA500}72 (pomaraÒczowa)  {FFFF00}Kierunek ==> {FFA500}BAZA MECHANIK”W", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa: Market - Downtown - Urzöd Miasta - Idlewood - Ganton - East Los Santos\n{808080}NastÍpny przystanek: Market Station ");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa: Market - Downtown - Urzπd Miasta - Idlewood - Ganton - East Los Santos\n{808080}NastÍpny przystanek: Market Station ");
 		}
 		else if(CP[playerid]==730)
 		{
@@ -3368,7 +3368,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Market Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa:  Market - Downtown - Urzöd Miasta - Idlewood - Ganton - East Los Santos\n{808080}NastÍpny przystanek: Szpital ");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa:  Market - Downtown - Urzπd Miasta - Idlewood - Ganton - East Los Santos\n{808080}NastÍpny przystanek: Szpital ");
 
 		}
 		else if(CP[playerid]==731)
@@ -3379,14 +3379,14 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Market - Szpital", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa: Downtown - Urzöd Miasta - Idlewood - Ganton - East Los Santos\n{808080}NastÍpny przystanek: Urzöd Miasta/Komisariat ");
+			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa: Downtown - Urzπd Miasta - Idlewood - Ganton - East Los Santos\n{808080}NastÍpny przystanek: Urzπd Miasta/Komisariat ");
 		}
 		else if(CP[playerid]==734)
 		{
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1924.6978,-1754.4702,12.9486, 4);
 			CP[playerid]=735;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Pershing Square ? Komisariat / Urzöd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Pershing Square ? Komisariat / Urzπd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+200$");
 			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza MechanikÛw\n{778899}Trasa: Idlewood - Ganton - East Los Santos\n{808080}NastÍpny przystanek: Stacja Benzynowa ");
@@ -3442,11 +3442,11 @@ public OnPlayerEnterCheckpoint(playerid)
 				ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}East Los Santos - Baza MechanikÛw (pÍtla)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 				DisablePlayerCheckpoint(playerid);
 				TogglePlayerControllable(playerid, 0);//Zamraøamy do pÛki nie odpowie co robi dalej
-				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi≥e? pe≥nö trasÍ. Co zamierzasz teraz zrobiÊ?\n\nWci?nij PonÛw aby wczytaÊ trasÍ jeszcze raz.\nWci?nij Innö aby wybraÊ innö trasÍ.", "PonÛw", "Innö");
+				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi≥eú pe≥nπ trasÍ. Co zamierzasz teraz zrobiÊ?\n\nWci?nij PonÛw aby wczytaÊ trasÍ jeszcze raz.\nWci?nij Innπ aby wybraÊ innπ trasÍ.", "PonÛw", "Innπ");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 72 zakoÒczona!_____________|");
 				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 3300$ premii za dwukrotne przejechanie trasy! (19 przystankÛw)");
-				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczöÊ tö lub innö trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
-				SendClientMessage(playerid, COLOR_GREEN, "Chcöc powtÛrzyÊ tö trasÍ zawrÛÊ wykorzystujöc parking znajdujöcy siÍ na skrzyøowaniu w w lewo.");
+				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczπÊ tπ lub innπ trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
+				SendClientMessage(playerid, COLOR_GREEN, "Chcπc powtÛrzyÊ tπ trasÍ zawrÛÊ wykorzystujπc parking znajdujπcy siÍ na skrzyøowaniu w w lewo.");
 				SendClientMessage(playerid, COLOR_GREEN, "Jeøeli jednak chcesz zakoÒczyÊ pracÍ kieruj siÍ do zajezdni LSBD (wskazanej przez GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
 				SendClientMessage(playerid, COLOR_GRAD1, "Skill +1");
@@ -3479,7 +3479,7 @@ public OnPlayerEnterCheckpoint(playerid)
 		if(CP[playerid]==821) //Sprawdza czy dojecha≥ do nastepnego
 		{
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Przypomnienie_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpoczöÊ s≥uøby!!!");
+			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpoczπÊ s≥uøby!!!");
 			SendClientMessage(playerid, COLOR_GREEN, "Wpisz {FFFF00}/fare [cena]");
 			SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyÊ po wjechaniu w przystanek wpisz /zd");
 			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli bÍdziesz chcia≥ przerwaÊ trasÍ wcze?niej wpisz /zakoncztrase");
@@ -3488,14 +3488,14 @@ public OnPlayerEnterCheckpoint(playerid)
 			SetPlayerCheckpoint(playerid, 1532.3134,-1648.4254,12.9485, 4); //... ustawia nastepnego KOMi (jedn)
 			CP[playerid]=822; //przypisuje id dla cp up
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);//
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Urzöd Miasta - East Los Santos - Palomino Creek - Dillimore - Bluberry - Las Venturas\n{808080}NastÍpny przystanek: Komisariat / Urzöd Miasta ");
+			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Urzπd Miasta - East Los Santos - Palomino Creek - Dillimore - Bluberry - Las Venturas\n{808080}NastÍpny przystanek: Komisariat / Urzπd Miasta ");
 		}
 		else if(CP[playerid]==822)
 		{
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 2864.6250,-1539.0991,10.4947, 4);
 			CP[playerid]=823;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Pershing Square ? Komisariat / Urzöd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Pershing Square ? Komisariat / Urzπd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do MechanikÛw_____________|");
 			SendClientMessage(playerid, COLOR_GREEN, "Kieruj siÍ do Alhambry, potem w LEWO.");
 			SendClientMessage(playerid, COLOR_GREEN, "Wjed? na autostradÍ, nastÍpnie prosto do bazy mechanikÛw.");
@@ -3522,7 +3522,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			CP[playerid]=825;
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}East Los Santos ? Agencja Ochrony", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do PC_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Jed? ciögle prosto zwyk≥ö drogö. Nie zjeødøaj na autostradÍ.");
+			SendClientMessage(playerid, COLOR_GREEN, "Jed? ciπgle prosto zwyk≥π drogπ. Nie zjeødøaj na autostradÍ.");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+510$");
@@ -3560,7 +3560,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Dillimore", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do Bluberry_____________|");
 			SendClientMessage(playerid, COLOR_GREEN, "Gdy miniesz komisariat SKR ∆ W LEWO.");
-			SendClientMessage(playerid, COLOR_GREEN, "Jed? prosto drogö do i SKR ∆ W LEWO do wyjazdu przy Cowboy Bar. Potem prosto.");
+			SendClientMessage(playerid, COLOR_GREEN, "Jed? prosto drogπ do i SKR ∆ W LEWO do wyjazdu przy Cowboy Bar. Potem prosto.");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+510$");
@@ -3588,14 +3588,14 @@ public OnPlayerEnterCheckpoint(playerid)
 			CP[playerid]=1000;
 			ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}Bay Side", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! UkoÒczy≥e? trasÍ do Bay Side! (1/2 zadania)");
-			SendClientMessage(playerid, COLOR_GREEN, "Moøesz chwilkÍ odpoczöÊ, wjed? w kolejny checkpoint aby ruszyÊ dalej!");
-			SendClientMessage(playerid, COLOR_GREEN, "Dodatkowo otrzymujesz premiÍ paliwowö z uwagi na utrudniony dostÍp do mechanikÛw.");
+			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! UkoÒczy≥eú trasÍ do Bay Side! (1/2 zadania)");
+			SendClientMessage(playerid, COLOR_GREEN, "Moøesz chwilkÍ odpoczπÊ, wjed? w kolejny checkpoint aby ruszyÊ dalej!");
+			SendClientMessage(playerid, COLOR_GREEN, "Dodatkowo otrzymujesz premiÍ paliwowπ z uwagi na utrudniony dostÍp do mechanikÛw.");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+510$");
 			Gas[GetPlayerVehicleID(playerid)] = 100;
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Dworzec Commerce\n{778899}Trasa: Bluberry - Dillimore - Palomino Creek - East Los Santos - Commerce\n{808080}Odjazd nastöpi po sygnale ");
+			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Dworzec Commerce\n{778899}Trasa: Bluberry - Dillimore - Palomino Creek - East Los Santos - Commerce\n{808080}Odjazd nastπpi po sygnale ");
 		}
 		else if(CP[playerid]==1000)
 		{
@@ -3665,7 +3665,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			CP[playerid]=836;
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}East Los Santos ? Baza MechanikÛw", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do Dworca_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Jed? ciögle autostradö.");
+			SendClientMessage(playerid, COLOR_GREEN, "Jed? ciπgle autostradπ.");
 			SendClientMessage(playerid, COLOR_GREEN, "Wyjed? na Idlewoo i kieruj siÍ ca≥y czas prosto.");
 			SendClientMessage(playerid, COLOR_GREEN, "Po przejechaniu spowalniacza, SKR ∆ w LEWO i kieruj siÍ na dworzec.");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
@@ -3684,10 +3684,10 @@ public OnPlayerEnterCheckpoint(playerid)
 				ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}Commerce ? Dworzec Autobusowy / Basen", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 				DisablePlayerCheckpoint(playerid);
 				TogglePlayerControllable(playerid, 0);//Zamraøamy do pÛki nie odpowie co robi dalej
-				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi≥e? pe≥nö trasÍ. Co zamierzasz teraz zrobiÊ?\n\nWci?nij PonÛw aby wczytaÊ trasÍ jeszcze raz.\nWci?nij Innö aby wybraÊ innö trasÍ.", "PonÛw", "Innö");
+				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi≥eú pe≥nπ trasÍ. Co zamierzasz teraz zrobiÊ?\n\nWci?nij PonÛw aby wczytaÊ trasÍ jeszcze raz.\nWci?nij Innπ aby wybraÊ innπ trasÍ.", "PonÛw", "Innπ");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 82 zakoÒczona!_____________|");
 				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 8670$ premii za dwukrotne przejechanie trasy! (17 przystankÛw)");
-				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczöÊ tö lub innö trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
+				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczπÊ tπ lub innπ trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
 				SendClientMessage(playerid, COLOR_GREEN, "Jeøeli jednak chcesz zakoÒczyÊ pracÍ kieruj siÍ do zajezdni LSBD (wskazanej przez GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
 				SendClientMessage(playerid, COLOR_GRAD1, "Skill +3");
@@ -3720,7 +3720,7 @@ public OnPlayerEnterCheckpoint(playerid)
 		{
 	        DisablePlayerCheckpoint(playerid);
 			/*GetPlayerName(playerid,sendername,sizeof(sendername));
-			format(string, sizeof(string), "%s rozpoczö≥ trasÍ  na linii autobusowej numer {ADFF2F}96 Biurowiec <==> Baza Wojskowa{00D900C8}. SzczegÛ≥owe informacje o trasach na /businfo", sendername);
+			format(string, sizeof(string), "%s rozpoczπ≥ trasÍ  na linii autobusowej numer {ADFF2F}96 Biurowiec <==> Baza Wojskowa{00D900C8}. SzczegÛ≥owe informacje o trasach na /businfo", sendername);
 			OOCNews(TEAM_GROVE_COLOR,string);*/
 			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Ocean Docks - Lotnisko - El Corona - Commerce - Market - Marina - Rodeo\n{808080}NastÍpny przystanek: Baza Wojskowa");
 			ProxDetector(10.0, playerid, "Linia numer: {ADFF2F}96 (zielona) {FFFF00}Kierunek ==> {ADFF2F}MRUCZNIK TOWER", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
@@ -3773,7 +3773,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1463.1995,-1868.8994,13.3999, 4); //Przystanek commerce VB prawa
 			CP[playerid]=966;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Commerce - Market - Marina - Rodeo\n{808080}NastÍpny przystanek: Verdant Bluffs / Urzöd Miasta");
+			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Commerce - Market - Marina - Rodeo\n{808080}NastÍpny przystanek: Verdant Bluffs / Urzπd Miasta");
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}El Corona ? Unity Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+310$");
@@ -3784,7 +3784,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			SetPlayerCheckpoint(playerid, 1181.8771,-1748.0386,12.9679, 4);
 			CP[playerid]=967;
 			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Commerce - Market - Marina - Rodeo\n{808080}NastÍpny przystanek: Zajezdnia Autobusowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Commerce ? Verdant Bluffs / Urzöd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Commerce ? Verdant Bluffs / Urzπd Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+310$");
 		}
@@ -3843,11 +3843,11 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 276.5778,-1575.9937,32.8686, 4); //KoÒcowy CP
 			CP[playerid]=1004;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: WiÍzienie Stanowe\n{778899}Trasa: Rodeo - Marina - Market - Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Odjazd nastöpi po sygnale");
+			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: WiÍzienie Stanowe\n{778899}Trasa: Rodeo - Marina - Market - Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Odjazd nastπpi po sygnale");
 			ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}Rodeo - Mrucznik Tower", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! UkoÒczy≥e? trasÍ do Mrucznik Tower! (1/2 zadania). Moøesz odpoczöÊ.");
-			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli chcesz jechaÊ dalej wykonaj nawrÛt kierujöc siÍ do kolejnego checkpointu!");
+			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! UkoÒczy≥eú trasÍ do Mrucznik Tower! (1/2 zadania). Moøesz odpoczπÊ.");
+			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli chcesz jechaÊ dalej wykonaj nawrÛt kierujπc siÍ do kolejnego checkpointu!");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+310$");
@@ -3908,7 +3908,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1492,-1875.8005,13.9999, 4);
 			CP[playerid]=978;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: WiÍzienie Stanowe\n{778899}Trasa: Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}NastÍpny przystanek: Verdant Bluffs / Urzöd Miasta");
+			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: WiÍzienie Stanowe\n{778899}Trasa: Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}NastÍpny przystanek: Verdant Bluffs / Urzπd Miasta");
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Commerce ? Basen ?Tsunami? / Zajezdnia Autobusowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+310$");
@@ -3994,7 +3994,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			    ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}Ocean Docks ? WiÍzienie Stanowe", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 	   			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 96 zakoÒczona!_____________|");
 				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 7440$ premii za dwukrotne przejechanie trasy! (24 przystanki)");
-				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczöÊ tö lub innö trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
+				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczπÊ tπ lub innπ trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
 				SendClientMessage(playerid, COLOR_GREEN, "Jeøeli jednak chcesz zakoÒczyÊ pracÍ kieruj siÍ do zajezdni LSBD (wskazanej przez sygan≥ GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
 				SendClientMessage(playerid, COLOR_GRAD1, "Skill +1");
@@ -4026,7 +4026,7 @@ public OnPlayerEnterCheckpoint(playerid)
 		{
 		    DisablePlayerCheckpoint(playerid);
 			/*GetPlayerName(playerid,sendername,sizeof(sendername));
-			format(string, sizeof(string), "%s rozpoczö≥ trasÍ  na linii autobusowej numer {FF00FF}85 Wysypisko <==> Szpital{00D900C8}. SzczegÛ≥owe informacje o trasach na /businfo", sendername);
+			format(string, sizeof(string), "%s rozpoczπ≥ trasÍ  na linii autobusowej numer {FF00FF}85 Wysypisko <==> Szpital{00D900C8}. SzczegÛ≥owe informacje o trasach na /businfo", sendername);
 			OOCNews(TEAM_GROVE_COLOR,string);*/
 			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Willowfield - East Los Santos - Las Colinas - Jefferson - Glen Park - Downtown - Market\n{808080}NastÍpny przystanek: Cluckin Bell");
 			ProxDetector(10.0, playerid, "Linia numer: {FF00FF}85 (rÛøowa) {FFFF00}Kierunek ==> {FF00FF}SZPITAL", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
@@ -4139,11 +4139,11 @@ public OnPlayerEnterCheckpoint(playerid)
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 1203.7321,-1358.3251,12.9416, 4); //KoÒcowy CP
 			CP[playerid]=1005;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Market - Downtown - Glen Park - Jefferson - Las Colinas - East LS - Willowfield\n{808080}Odjazd nastöpi po sygnale");
+			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Market - Downtown - Glen Park - Jefferson - Las Colinas - East LS - Willowfield\n{808080}Odjazd nastπpi po sygnale");
 			ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}Market ? Szpital", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! UkoÒczy≥e? trasÍ do Mrucznik Tower! (1/2 zadania). Moøesz odpoczöÊ.");
-			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli chcesz jechaÊ dalej wykonaj nawrÛt kierujöc siÍ do kolejnego checkpointu!");
+			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! UkoÒczy≥eú trasÍ do Mrucznik Tower! (1/2 zadania). Moøesz odpoczπÊ.");
+			SendClientMessage(playerid, COLOR_GREEN, "Jeøeli chcesz jechaÊ dalej wykonaj nawrÛt kierujπc siÍ do kolejnego checkpointu!");
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+270$");
@@ -4271,7 +4271,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			    ProxDetector(10.0, playerid, "Przystanek koÒcowy: {EE82EE}Willowfield ? Wysypisko", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 	   			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 85 zakoÒczona!_____________|");
 				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 6480$ premii za dwukrotne przejechanie trasy! (24 przystanki)");
-				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczöÊ tö lub innö trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
+				SendClientMessage(playerid, COLOR_GREEN, "Moøesz znÛw rozpoczπÊ tπ lub innπ trasÍ lub zrezygnowaÊ poprzez zamkniÍcie menu wyboru.");
 				SendClientMessage(playerid, COLOR_GREEN, "Jeøeli jednak chcesz zakoÒczyÊ pracÍ kieruj siÍ do zajezdni LSBD (wskazanej przez GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
 				SendClientMessage(playerid, COLOR_GRAD1, "Skill +2");
@@ -4315,7 +4315,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			if(level >= 0 && level <= 50)
 			{
 			    new rand = random(sizeof(SELLCAR1));
-			    format(string, sizeof(string), "Sprzeda≥e? pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 20 minut.", SELLCAR1[rand]);
+			    format(string, sizeof(string), "Sprzeda≥eú pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 20 minut.", SELLCAR1[rand]);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, SELLCAR1[rand]);//moneycheat
 			    PlayerInfo[playerid][pCarTime] = 600;
@@ -4323,7 +4323,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			else if(level >= 51 && level <= 100)
 			{
 			    new rand = random(sizeof(SELLCAR2));
-			    format(string, sizeof(string), "Sprzeda≥e? pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 18 minut.", SELLCAR2[rand]);
+			    format(string, sizeof(string), "Sprzeda≥eú pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 18 minut.", SELLCAR2[rand]);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, SELLCAR2[rand]);//moneycheat
 			    PlayerInfo[playerid][pCarTime] = 540;
@@ -4331,7 +4331,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			else if(level >= 101 && level <= 200)
 			{
 			    new rand = random(sizeof(SELLCAR3));
-			    format(string, sizeof(string), "Sprzeda≥e? pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 16 minut.", SELLCAR3[rand]);
+			    format(string, sizeof(string), "Sprzeda≥eú pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 16 minut.", SELLCAR3[rand]);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, SELLCAR3[rand]);//moneycheat
 			    PlayerInfo[playerid][pCarTime] = 480;
@@ -4339,7 +4339,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			else if(level >= 201 && level <= 400)
 			{
 			    new rand = random(sizeof(SELLCAR4));
-			    format(string, sizeof(string), "Sprzeda≥e? pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 14 minut.", SELLCAR4[rand]);
+			    format(string, sizeof(string), "Sprzeda≥eú pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 14 minut.", SELLCAR4[rand]);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, SELLCAR4[rand]);//moneycheat
 			    PlayerInfo[playerid][pCarTime] = 420;
@@ -4347,7 +4347,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			else if(level >= 401)
 			{
 			    new money = 6000;
-			    format(string, sizeof(string), "Sprzeda≥e? pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 12 minut.", money);
+			    format(string, sizeof(string), "Sprzeda≥eú pojazd za $%d, nastÍpny pojazd moøesz ukra?Ê za 12 minut.", money);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	  			DajKase(playerid, money);//moneycheat
 			    PlayerInfo[playerid][pCarTime] = 360;
@@ -4397,7 +4397,7 @@ public OnPlayerEnterCheckpoint(playerid)
 	            {
 		            if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
 		            {
-		                format(string, sizeof(string), "* %s ukoÒczy≥e? wy?cig jako pierwszy !",name);
+		                format(string, sizeof(string), "* %s ukoÒczy≥eú wy?cig jako pierwszy !",name);
 		                SendClientMessage(i, COLOR_WHITE, string);
 		            }
 				}
@@ -4412,7 +4412,7 @@ public OnPlayerEnterCheckpoint(playerid)
 	            {
 		            if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
 		            {
-		                format(string, sizeof(string), "* %s ukoÒczy≥e? wy?cig jako drugi !",name);
+		                format(string, sizeof(string), "* %s ukoÒczy≥eú wy?cig jako drugi !",name);
 		                SendClientMessage(i, COLOR_WHITE, string);
 		            }
 				}
@@ -4427,7 +4427,7 @@ public OnPlayerEnterCheckpoint(playerid)
 	            {
 		            if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
 		            {
-		                format(string, sizeof(string), "* %s ukoÒczy≥e? wy?cig jako trzeci.",name);
+		                format(string, sizeof(string), "* %s ukoÒczy≥eú wy?cig jako trzeci.",name);
 		                SendClientMessage(i, COLOR_WHITE, string);
 		                SendClientMessage(i, COLOR_WHITE, "** Koniec wy?cigu **");
 		                CP[i] = 0;
@@ -4533,7 +4533,7 @@ public OnPlayerEnterCheckpoint(playerid)
 		    {
 			    new sendername[MAX_PLAYER_NAME];
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "Wygra≥ %s - ukoÒczy≥ wy?cig zajmujöc 1 miejsce !!!.", sendername);
+				format(string, sizeof(string), "Wygra≥ %s - ukoÒczy≥ wy?cig zajmujπc 1 miejsce !!!.", sendername);
 				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 				DisablePlayerCheckpoint(playerid);
 		        DisablePlayerCheckpoint(playerid);
@@ -4547,7 +4547,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			{
 			    new sendername[MAX_PLAYER_NAME];
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "%s ukoÒczy≥ wy?cig zajmujöc 2 miejsce !!.", sendername);
+				format(string, sizeof(string), "%s ukoÒczy≥ wy?cig zajmujπc 2 miejsce !!.", sendername);
 				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 				DisablePlayerCheckpoint(playerid);
 		        DisablePlayerCheckpoint(playerid);
@@ -4561,7 +4561,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			{
 			    new sendername[MAX_PLAYER_NAME];
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "%s ukoÒczy≥ wy?cig zajmujöc 3 miejsce !.", sendername);
+				format(string, sizeof(string), "%s ukoÒczy≥ wy?cig zajmujπc 3 miejsce !.", sendername);
 				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 				DisablePlayerCheckpoint(playerid);
 		        DisablePlayerCheckpoint(playerid);
@@ -4576,7 +4576,7 @@ public OnPlayerEnterCheckpoint(playerid)
 			    iloscwygranych ++;
 			    new sendername[MAX_PLAYER_NAME];
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "%s ukoÒczy≥ wy?cig zajmujöc %d miejsce !.", sendername, iloscwygranych);
+				format(string, sizeof(string), "%s ukoÒczy≥ wy?cig zajmujπc %d miejsce !.", sendername, iloscwygranych);
 				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 				DisablePlayerCheckpoint(playerid);
 		        DisablePlayerCheckpoint(playerid);
@@ -4677,7 +4677,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 	        if(Ukonczyl == 1)
 	        {
 	            SendClientMessage(playerid, COLOR_YELLOW, "|_________ GRATULACJE!!!! _________|");
-        		SendClientMessage(playerid, COLOR_LIGHTGREEN, "| UkoÒczy≥e? wy?cig jako pierwszy! |");
+        		SendClientMessage(playerid, COLOR_LIGHTGREEN, "| UkoÒczy≥eú wy?cig jako pierwszy! |");
 				format(string, sizeof(string), "|   Otrzymujesz %d$ nagrody!   |", Wyscig[Scigamy][wNagroda]); SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 	        	SendClientMessage(playerid, COLOR_LIGHTGREEN, "|__________________________________|");
 	        	DajKase(playerid, Wyscig[Scigamy][wNagroda]);
@@ -4703,14 +4703,14 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 	        {
 	            if(Ukonczyl >= IloscZawodnikow)
 		        {
-		            SendClientMessage(playerid, COLOR_LIGHTGREEN, "UkoÒczy≥e? wy?cig jako ostatni - cienias!");
+		            SendClientMessage(playerid, COLOR_LIGHTGREEN, "UkoÒczy≥eú wy?cig jako ostatni - cienias!");
 					format(string, sizeof(string), "Komunikat wy?cigu: {FFFFFF}%s ukoÒczy≥ wy?cig jako ostatni !", GetNick(playerid, true));
 					WyscigMessage(COLOR_YELLOW, string);
 		            KoniecWyscigu(-2);
 		        }
 		        else
 		        {
-		            format(string, sizeof(string), "UkoÒczy≥e? wy?cig jako %d !", Ukonczyl);
+		            format(string, sizeof(string), "UkoÒczy≥eú wy?cig jako %d !", Ukonczyl);
 					SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 					format(string, sizeof(string), "Komunikat wy?cigu: {FFFFFF}%s ukoÒczy≥ wy?cig jako %d !", GetNick(playerid, true), Ukonczyl);
 					WyscigMessage(COLOR_YELLOW, string);
@@ -4873,7 +4873,7 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
     {
         SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________WybÛr skina - dostÍpne komendy_______________|");
         SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk≥ego menu wyboru skinÛw (wybiera≥ka). Tylko dla cywili.");
-        SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraÊ skin przydzielany po s≥uøbie. Tylko dla frakcji z dzia≥ajöcym /duty.");
+        SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraÊ skin przydzielany po s≥uøbie. Tylko dla frakcji z dzia≥ajπcym /duty.");
         SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianÍ uniformu s≥uøbowego. Tylko dla cz≥onkÛw frakcji z pominiÍciem liderÛw.");
         SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
     }
@@ -4911,8 +4911,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	{
 		if(newstate == PLAYER_STATE_SPAWNED || newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
 		{
-			Log(punishmentLog, INFO, "%s dosta≥ kicka od antycheata, powÛd: spawn bÍdöc niezalogowanym");
-			SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥e? zkickowany za spawn jako niezalogowany");
+			Log(punishmentLog, INFO, "%s dosta≥ kicka od antycheata, powÛd: spawn bÍdπc niezalogowanym");
+			SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany za spawn jako niezalogowany");
 			KickEx(playerid);
 			return 1;
 		}
@@ -4969,7 +4969,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
 				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
 				{
-					MruDialog(playerid, "ACv2: Kod #2001", "Zosta≥e? wyrzucony za kierowanie samochodem bez wymaganych uprawnieÒ");
+					MruDialog(playerid, "ACv2: Kod #2001", "Zosta≥eú wyrzucony za kierowanie samochodem bez wymaganych uprawnieÒ");
 					format(string, sizeof string, "ACv2 [#2001]: %s zosta≥ wyrzucony za jazdÍ bez uprawnieÒ [Veh: %d]", GetNick(playerid, true), GetPlayerVehicleID(playerid));
 					SendCommandLogMessage(string);
 					Log(warningLog, INFO, string);
@@ -5064,7 +5064,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 			{
 				if(kaska[playerid] < TransportValue[i])
 				{
-					format(string, sizeof(string), "* Potrzebujesz $%d aby wej?Ê.", TransportValue[i]);
+					format(string, sizeof(string), "* Potrzebujesz $%d aby wejúÊ.", TransportValue[i]);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					RemovePlayerFromVehicleEx(playerid);
 				}
@@ -5079,7 +5079,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                         if(PlayerInfo[playerid][pLevel] < 3)
                         {
                             ZabierzKase(playerid, floatround(TransportValue[i]/4));//moneycheat
-                            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jeste? nowym graczem, obowiözuje Cie rabat 75 procent na taksÛwkÍ.");
+                            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jeste? nowym graczem, obowiπzuje Cie rabat 75 procent na taksÛwkÍ.");
                         }
                         else
                         {
@@ -5096,7 +5096,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					}
 					else if(TransportDuty[i] == 2)
 					{
-						format(string, sizeof(string), "* Zap≥aci≥e? $%d Za bilet.", TransportValue[i]);
+						format(string, sizeof(string), "* Zap≥aci≥eú $%d Za bilet.", TransportValue[i]);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* Klient %s wszed≥ do autobusu i skasowa≥ bilet.", name);
 						SendClientMessage(i, COLOR_LIGHTBLUE, string);
@@ -5273,7 +5273,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					PlayerInfo[playerid][pWantedDeaths] += 1;
 					PlayerInfo[playerid][pJailed] = 1;
 				    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-				    format(string, sizeof(string), "* Jeste? w wiÍzieniu na %d Sekund i straci≥e? $%d gdyø ucieka≥e? lub strzela≥e? do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
+				    format(string, sizeof(string), "* Jeste? w wiÍzieniu na %d Sekund i straci≥eú $%d gdyø ucieka≥eú lub strzela≥eú do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
 				    SendClientMessage(playerid, COLOR_LIGHTRED, string);
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Jeøeli nie chcesz aby taka sytuacja powtÛrzy≥a siÍ w przysz≥o?ci, skorzystaj z us≥ug prawnika ktÛry zbije twÛj WL.");
 					PoziomPoszukiwania[playerid] = 0;
@@ -5291,7 +5291,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					PlayerInfo[playerid][pWantedDeaths] += 1;
 					PlayerInfo[playerid][pJailed] = 2;
 				    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-				    format(string, sizeof(string), "* Jeste? w DeMorgan na %d Sekund i straci≥e? $%d gdyø ucieka≥e? lub strzela≥e? do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
+				    format(string, sizeof(string), "* Jeste? w DeMorgan na %d Sekund i straci≥eú $%d gdyø ucieka≥eú lub strzela≥eú do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
 					SendClientMessage(playerid, COLOR_LIGHTRED, string);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Jeøeli nie chcesz aby taka sytuacja powtÛrzy≥a siÍ w przysz≥o?ci, skorzystaj z us≥ug prawnika ktÛry zbije twÛj WL.");
 					PoziomPoszukiwania[playerid] = 0;
@@ -5398,7 +5398,7 @@ public OnPlayerRequestClass(playerid, classid)
 		TogglePlayerSpectating(playerid, true);
 		SetTimerEx("OPCLogin", 100, 0, "i", playerid);
 
-		//Dla graczy ktÛrzy nie majö najnowszej wersji samp'a
+		//Dla graczy ktÛrzy nie majπ najnowszej wersji samp'a
 		PlayerPlaySound(playerid, 1187, 0.0, 0.0, 0.0);
 
 		new rand = random(5);
@@ -5482,7 +5482,7 @@ PayDay()
 		    {
 			    if(MoneyMessage[i]==1)
 				{
-				    SendClientMessage(i, COLOR_LIGHTRED, "Nie sp≥aci≥e? d≥ugu, wierzyciele nas≥ali na ciebie PolicjÍ !");
+				    SendClientMessage(i, COLOR_LIGHTRED, "Nie sp≥aci≥eú d≥ugu, wierzyciele nas≥ali na ciebie PolicjÍ !");
 					PoziomPoszukiwania[i] += 2;
 					SetPlayerCriminal(i,INVALID_PLAYER_ID, "Niesp≥acanie d≥ugu");
 				}
@@ -5536,7 +5536,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pDom] != 0 || PlayerInfo[i][pPbiskey] != 255)
 					{
-					    format(string, sizeof(string), "  Rachunek za pröd: -$%d", ebill);
+					    format(string, sizeof(string), "  Rachunek za prπd: -$%d", ebill);
 						SendClientMessage(i, COLOR_GRAD1, string);
 					}
 					format(string, sizeof(string), "  Stan konta: $%d", account);
@@ -5610,7 +5610,7 @@ PayDay()
 				}
 				else
 				{
-				    SendClientMessage(i, COLOR_LIGHTRED, "* Nie grasz wystarczajöco d≥ugo, aby dostaÊ wyp≥atÍ.");
+				    SendClientMessage(i, COLOR_LIGHTRED, "* Nie grasz wystarczajπco d≥ugo, aby dostaÊ wyp≥atÍ.");
 				}
 			}
 		}
@@ -5703,8 +5703,8 @@ public OnPlayerUpdate(playerid)
 		}
 		if(GetPlayerState(playerid) == PLAYER_STATE_SPAWNED || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER || GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 		{
-			Log(punishmentLog, INFO, "%s dosta≥ kicka od antycheata, powÛd: spawn bÍdöc niezalogowanym");
-			SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥e? zkickowany za spawn jako niezalogowany");
+			Log(punishmentLog, INFO, "%s dosta≥ kicka od antycheata, powÛd: spawn bÍdπc niezalogowanym");
+			SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany za spawn jako niezalogowany");
 			KickEx(playerid);
 			return 0;
 		}
@@ -5839,8 +5839,8 @@ stock randomString(strDest[], strLen) // credits go to: RyDeR`
 
 DialogChangePasswordRequired(playerid)
 {
-	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wymagana jest zmiana has≥a do konta.\n{FF00FF}Istnieje ryzyko, øe Twoje has≥o wyciek≥o w postaci zaszyfrowanej.\nJeøeli uøywa≥e? takiego samego has≥a do innych kont/us≥ug - radzimy je zmieniÊ..");
-	ShowPlayerDialogEx(playerid, D_HASLO_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\n{FF1010}Wymagana jest zmiana has≥a do konta.\n{FF00FF}Istnieje ryzyko, øe Twoje has≥o wyciek≥o w postaci zaszyfrowanej.\nJeøeli uøywa≥e? takiego samego has≥a do innych kont/us≥ug - radzimy je zmieniÊ.", "Dalej", "Wyjdz"); 
+	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wymagana jest zmiana has≥a do konta.\n{FF00FF}Istnieje ryzyko, øe Twoje has≥o wyciek≥o w postaci zaszyfrowanej.\nJeøeli uøywa≥eú takiego samego has≥a do innych kont/us≥ug - radzimy je zmieniÊ..");
+	ShowPlayerDialogEx(playerid, D_HASLO_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "{FF00FF}Witaj!\n{FF1010}Wymagana jest zmiana has≥a do konta.\n{FF00FF}Istnieje ryzyko, øe Twoje has≥o wyciek≥o w postaci zaszyfrowanej.\nJeøeli uøywa≥eú takiego samego has≥a do innych kont/us≥ug - radzimy je zmieniÊ.", "Dalej", "Wyjdz"); 
 }
 
 VerifyPlayerIp(playerid)
@@ -5968,8 +5968,8 @@ OnPlayerLogin(playerid, password[])
 
 		if( !MruMySQL_LoadAcocount(playerid) )
 		{
-			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b≥öd konta. Zg≥o? zaistnia≥ö sytuacjÍ na forum.");
-			Log(serverLog, ERROR, "Krytyczny b≥öd konta %s (pusty rekord?)", nick);
+			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b≥πd konta. Zg≥o? zaistnia≥π sytuacjÍ na forum.");
+			Log(serverLog, ERROR, "Krytyczny b≥πd konta %s (pusty rekord?)", nick);
 			KickEx(playerid);
 			return 1;
 		}
@@ -6015,7 +6015,7 @@ OnPlayerLogin(playerid, password[])
 		Log(connectLog, INFO, "Gracz %s zalogowa≥ siÍ na konto", GetPlayerLogName(playerid));
         Car_LoadForPlayer(playerid); //System aut
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
-		Command_SetPlayerDisabled(playerid, false); //W≥öczenie komend
+		Command_SetPlayerDisabled(playerid, false); //W≥πczenie komend
 		CorrectPlayerBusiness(playerid);
 		CheckPlayerBusiness(playerid);
 		
@@ -6040,19 +6040,19 @@ OnPlayerLogin(playerid, password[])
 	{//z≥e has≥o
 		SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Z≥e has≥o.");
 
-		format(string, sizeof(string), "Nick %s jest zarejestrowany.\nZaloguj siÍ wpisujöc w okienko poniøej has≥o.\nJeøli nie znasz has≥a do tego konta, wejd? pod innym nickiem", nick);
+		format(string, sizeof(string), "Nick %s jest zarejestrowany.\nZaloguj siÍ wpisujπc w okienko poniøej has≥o.\nJeøli nie znasz has≥a do tego konta, wejd? pod innym nickiem", nick);
 		ShowPlayerDialogEx(playerid, 230, DIALOG_STYLE_PASSWORD, "Logowanie", string, "Zaloguj", "Wyjd?");
 		gPlayerLogTries[playerid] += 1;
 		if(gPlayerLogTries[playerid] == 3)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Z≥e has≥o. Zostajesz zkickowany.");
-			ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "{FF0000}Dosta≥e? kicka za wpisanie z≥ego has≥a 3 razy pod rzöd!", "Wyjd?", "");
+			ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "{FF0000}Dosta≥eú kicka za wpisanie z≥ego has≥a 3 razy pod rzπd!", "Wyjd?", "");
 			KickEx(playerid);
 		}
 		return 1;
 	}
 
-	//Nadawanie poczötkowych itemÛw po rejestracji:
+	//Nadawanie poczπtkowych itemÛw po rejestracji:
 	if(PlayerInfo[playerid][pReg] == 0)
 	{
 		PlayerInfo[playerid][pLevel] = 1;
@@ -6106,8 +6106,8 @@ OnPlayerLogin(playerid, password[])
 		}
 		if(filtr != 0)
 		{
-			SendClientMessage(playerid, COLOR_WHITE,"SERVER: Zosta≥e? zkickowany, powÛd: Filtr na konto.");
-			SendClientMessage(playerid, COLOR_WHITE,"SERVER: Aby go zdjöÊ napisz na forum www.Mrucznik-RP.pl");
+			SendClientMessage(playerid, COLOR_WHITE,"SERVER: Zosta≥eú zkickowany, powÛd: Filtr na konto.");
+			SendClientMessage(playerid, COLOR_WHITE,"SERVER: Aby go zdjπÊ napisz na forum www.Mrucznik-RP.pl");
 			KickEx(playerid);
 			return 1;
 		}
@@ -6235,8 +6235,8 @@ OnPlayerLogin(playerid, password[])
 		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
 		PlayerInfo[playerid][pMuted] = 1;
 		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");
-		SendClientMessage(playerid, COLOR_WHITE, "Aby zaczöÊ grÍ musisz przej?Ê procedury rejestracji.");
-		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJe?li jeste? tu nowy, to przygotowali?my dla ciebie poradnik\nZa chwilÍ bÍdziesz mÛg≥ go obejrzeÊ, lecz najpierw bÍdziesz musia≥ opisaÊ postaÊ ktÛrö bÍdziesz sterowa≥\nAby przej?Ê dalej wci?nij przycisk 'dalej'", "Dalej", "");
+		SendClientMessage(playerid, COLOR_WHITE, "Aby zaczπÊ grÍ musisz przej?Ê procedury rejestracji.");
+		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJe?li jeste? tu nowy, to przygotowali?my dla ciebie poradnik\nZa chwilÍ bÍdziesz mÛg≥ go obejrzeÊ, lecz najpierw bÍdziesz musia≥ opisaÊ postaÊ ktÛrπ bÍdziesz sterowa≥\nAby przej?Ê dalej wci?nij przycisk 'dalej'", "Dalej", "");
     }
 	return 1;
 }
@@ -6285,8 +6285,8 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
 		//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-		SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]); //0.3DL - celowe ustawienie ze wzglÍdu na b≥öd SetSpawnInfo
-		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglÍdu na b≥öd SetSpawnInfo
+		SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]); //0.3DL - celowe ustawienie ze wzglÍdu na b≥πd SetSpawnInfo
+		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglÍdu na b≥πd SetSpawnInfo
 	    Spectate[playerid] = INVALID_PLAYER_ID;
         TogglePlayerSpectating(playerid, 0);
         return 0;
@@ -6540,7 +6540,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 					{
 						SetPlayerHealth(playerid, health+10);
 						ZabierzKase(playerid, 1000);
-						sendTipMessageEx(playerid, COLOR_RED, "Kupi≥e? jedzenie"); 
+						sendTipMessageEx(playerid, COLOR_RED, "Kupi≥eú jedzenie"); 
 						ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
 						GameTextForPlayer(playerid, "Om nom om", 5000, 1);
 						//SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
@@ -6554,7 +6554,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Nie moøesz wziöÊ wiÍcej HP!");
+					sendErrorMessage(playerid, "Nie moøesz wziπÊ wiÍcej HP!");
 					sendTipMessage(playerid, "Aby mÛc braÊ wiÍcej HP ulepsz HP w /ulepszenia!"); 
 					return 1;
 				}
@@ -6769,7 +6769,7 @@ public OnPlayerText(playerid, text[])
 				{
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerName(GotProposedBy[playerid], giveplayer, sizeof(giveplayer));
-				    format(string, sizeof(string), "Ksiödz: %s czy chcesz wziöÊ %s na swojö øone? (wpisz 'tak', cokolwiek innego anuluje ?lub).", giveplayer,sendername);
+				    format(string, sizeof(string), "Ksiπdz: %s czy chcesz wziπÊ %s na swojπ øone? (wpisz 'tak', cokolwiek innego anuluje ?lub).", giveplayer,sendername);
 					SendClientMessage(GotProposedBy[playerid], COLOR_WHITE, string);
 					MarriageCeremoney[GotProposedBy[playerid]] = 1;
 					MarriageCeremoney[playerid] = 0;
@@ -6791,29 +6791,29 @@ public OnPlayerText(playerid, text[])
 					GetPlayerName(ProposedTo[playerid], giveplayer, sizeof(giveplayer));
 					if(PlayerInfo[playerid][pSex] == 1 && PlayerInfo[ProposedTo[playerid]][pSex] == 2)
 					{
-						format(string, sizeof(string), "Ksiödz: %s i %s zostali?cie mÍøem i øonö, moøecie siÍ poca≥owaÊ.", sendername, giveplayer);
+						format(string, sizeof(string), "Ksiπdz: %s i %s zostali?cie mÍøem i øonπ, moøecie siÍ poca≥owaÊ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);
-				   		format(string, sizeof(string), "Ksiödz: %s i %s zostali?cie mÍøem i øonö, moøecie siÍ poca≥owaÊ.", giveplayer, sendername);
+				   		format(string, sizeof(string), "Ksiπdz: %s i %s zostali?cie mÍøem i øonπ, moøecie siÍ poca≥owaÊ.", giveplayer, sendername);
 						SendClientMessage(ProposedTo[playerid], COLOR_WHITE, string);
-						format(string, sizeof(string), "Ko?ciÛ≥: Mamy nowö pare, %s & %s zostali zarÍczeni.", sendername, giveplayer);
+						format(string, sizeof(string), "Ko?ciÛ≥: Mamy nowπ pare, %s & %s zostali zarÍczeni.", sendername, giveplayer);
 						OOCNews(COLOR_WHITE, string);
 					}
 					else if(PlayerInfo[playerid][pSex] == 1 && PlayerInfo[ProposedTo[playerid]][pSex] == 1)
 					{
-					    format(string, sizeof(string), "Ksiödz: %s i %s Zostali?cie mÍøem i mÍøem, moøecie siÍ poca≥owaÊ.", sendername, giveplayer);
+					    format(string, sizeof(string), "Ksiπdz: %s i %s Zostali?cie mÍøem i mÍøem, moøecie siÍ poca≥owaÊ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);
-				   		format(string, sizeof(string), "Ksiödz: %s i %s Zostali?cie mÍøem i mÍøem, moøecie siÍ poca≥owaÊ.", giveplayer, sendername);
+				   		format(string, sizeof(string), "Ksiπdz: %s i %s Zostali?cie mÍøem i mÍøem, moøecie siÍ poca≥owaÊ.", giveplayer, sendername);
 						SendClientMessage(ProposedTo[playerid], COLOR_WHITE, string);
-						format(string, sizeof(string), "Ko?ciÛ≥: Mamy nowö gejowskö pare, %s & %s zostali zarÍczeni.", sendername, giveplayer);
+						format(string, sizeof(string), "Ko?ciÛ≥: Mamy nowπ gejowskπ pare, %s & %s zostali zarÍczeni.", sendername, giveplayer);
 						OOCNews(COLOR_WHITE, string);
 					}
 					else if(PlayerInfo[playerid][pSex] == 2 && PlayerInfo[ProposedTo[playerid]][pSex] == 2)
 					{
-					    format(string, sizeof(string), "Ksiödz: %s i %s Zostali?cie øonö i øonö, moøecie siÍ poca≥owaÊ.", sendername, giveplayer);
+					    format(string, sizeof(string), "Ksiπdz: %s i %s Zostali?cie øonπ i øonπ, moøecie siÍ poca≥owaÊ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);
-				   		format(string, sizeof(string), "Ksiödz: %s i %s Zostali?cie øonö i øonö, moøecie siÍ poca≥owaÊ.", giveplayer, sendername);
+				   		format(string, sizeof(string), "Ksiπdz: %s i %s Zostali?cie øonπ i øonπ, moøecie siÍ poca≥owaÊ.", giveplayer, sendername);
 						SendClientMessage(ProposedTo[playerid], COLOR_WHITE, string);
-						format(string, sizeof(string), "Ko?ciÛ≥: Mamy nowö lesbijskö pare, %s & %s zostali zarÍczeni.", sendername, giveplayer);
+						format(string, sizeof(string), "Ko?ciÛ≥: Mamy nowπ lesbijskπ pare, %s & %s zostali zarÍczeni.", sendername, giveplayer);
 						OOCNews(COLOR_WHITE, string);
 					}
 					//MarriageCeremoney[ProposedTo[playerid]] = 1;
@@ -6845,7 +6845,7 @@ public OnPlayerText(playerid, text[])
 				{
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerName(GotProposedBy[playerid], giveplayer, sizeof(giveplayer));
-					format(string, sizeof(string), "* Nie chcesz po?lubiÊ %s, nie powiedzia≥e? 'tak'.",giveplayer);
+					format(string, sizeof(string), "* Nie chcesz po?lubiÊ %s, nie powiedzia≥eú 'tak'.",giveplayer);
 				    SendClientMessage(playerid, COLOR_YELLOW, string);
 				    format(string, sizeof(string), "* %s nie chce ciÍ po?lubiÊ gdyø nie powiedzia≥ 'tak'.",sendername);
 				    SendClientMessage(GotProposedBy[playerid], COLOR_YELLOW, string);
@@ -6866,7 +6866,7 @@ public OnPlayerText(playerid, text[])
 				{
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerName(ProposedTo[playerid], giveplayer, sizeof(giveplayer));
-					format(string, sizeof(string), "* Nie chcesz po?lubiÊ %s, nie powiedzia≥e? 'tak'.",giveplayer);
+					format(string, sizeof(string), "* Nie chcesz po?lubiÊ %s, nie powiedzia≥eú 'tak'.",giveplayer);
 				    SendClientMessage(playerid, COLOR_YELLOW, string);
 				    format(string, sizeof(string), "* %s nie chce ciÍ po?lubiÊ gdyø nie powiedzia≥ 'tak'.",sendername);
 				    SendClientMessage(ProposedTo[playerid], COLOR_YELLOW, string);
@@ -6893,7 +6893,7 @@ public OnPlayerText(playerid, text[])
 		{
 		    if(PlayerInfo[playerid][pRank] < 4)
 		    {
-		        SendClientMessage(playerid, COLOR_GREY, "Tylko Hitmani z 4 rangö mogö sprawdzaÊ listÍ kontraktÛw !");
+		        SendClientMessage(playerid, COLOR_GREY, "Tylko Hitmani z 4 rangπ mogπ sprawdzaÊ listÍ kontraktÛw !");
 		        return 0;
 		    }
 		    SearchingHit(playerid);
@@ -6931,7 +6931,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd1], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact1], string, 0, strlen(string));
 						News[hTaken1] = 1; PlacedNews[playerid] = 1;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥e? news na kanale Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
 				    else
@@ -6951,7 +6951,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd2], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact2], string, 0, strlen(string));
 						News[hTaken2] = 1; PlacedNews[playerid] = 1;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥e? news na kanale Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
 				    else
@@ -6971,7 +6971,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd3], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact3], string, 0, strlen(string));
 						News[hTaken3] = 1; PlacedNews[playerid] = 1;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥e? news na kanale Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
 				    else
@@ -6991,7 +6991,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd4], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact4], string, 0, strlen(string));
 						News[hTaken4] = 1; PlacedNews[playerid] = 1;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥e? news na kanale Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
 				    else
@@ -7011,7 +7011,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd5], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact5], string, 0, strlen(string));
 						News[hTaken5] = 1; PlacedNews[playerid] = 1;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥e? news na kanale Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umie?ci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
 				    else
@@ -7039,7 +7039,7 @@ public OnPlayerText(playerid, text[])
                         format(string, sizeof(string), "Nothing"); strmid(News[hAdd1], string, 0, strlen(string));
 						format(string1, sizeof(string1), "Nikt");	strmid(News[hContact1], string1, 0, strlen(string1));
 						News[hTaken1] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥e? newsa numer (1) Z kana≥u Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥eú newsa numer (1) Z kana≥u Hitman Agency.");
 						return 0;
                     }
                     else if(strcmp(x_tel,"2",true) == 0)
@@ -7047,7 +7047,7 @@ public OnPlayerText(playerid, text[])
                         format(string, sizeof(string), "Nothing"); strmid(News[hAdd2], string, 0, strlen(string));
 						format(string1, sizeof(string1), "Nikt");	strmid(News[hContact2], string1, 0, strlen(string1));
 						News[hTaken2] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥e? newsa numer (2) Z kana≥u Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥eú newsa numer (2) Z kana≥u Hitman Agency.");
 						return 0;
                     }
                     else if(strcmp(x_tel,"3",true) == 0)
@@ -7055,7 +7055,7 @@ public OnPlayerText(playerid, text[])
                         format(string, sizeof(string), "Nothing"); strmid(News[hAdd3], string, 0, strlen(string));
 						format(string1, sizeof(string1), "Nikt");	strmid(News[hContact3], string1, 0, strlen(string1));
 						News[hTaken3] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥e? newsa numer (3) Z kana≥u Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥eú newsa numer (3) Z kana≥u Hitman Agency.");
 						return 0;
                     }
                     else if(strcmp(x_tel,"4",true) == 0)
@@ -7063,7 +7063,7 @@ public OnPlayerText(playerid, text[])
                         format(string, sizeof(string), "Nothing"); strmid(News[hAdd4], string, 0, strlen(string));
 						format(string1, sizeof(string1), "Nikt");	strmid(News[hContact4], string1, 0, strlen(string1));
 						News[hTaken4] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥e? newsa numer (4) Z kana≥u Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥eú newsa numer (4) Z kana≥u Hitman Agency.");
 						return 0;
                     }
                     else if(strcmp(x_tel,"5",true) == 0)
@@ -7071,7 +7071,7 @@ public OnPlayerText(playerid, text[])
                         format(string, sizeof(string), "Nothing"); strmid(News[hAdd5], string, 0, strlen(string));
 						format(string1, sizeof(string1), "Nikt");	strmid(News[hContact5], string1, 0, strlen(string1));
 						News[hTaken5] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥e? newsa numer (5) Z kana≥u Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥eú newsa numer (5) Z kana≥u Hitman Agency.");
 						return 0;
                     }
                     else if(strcmp(x_tel,"all",true) == 0)
@@ -7091,7 +7091,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "Nothing"); strmid(News[hAdd5], string, 0, strlen(string));
 						format(string1, sizeof(string1), "Nikt");	strmid(News[hContact5], string1, 0, strlen(string1));
 						News[hTaken5] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥e? wszystkie newsy z kana≥u Hitman Agency.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Skasowa≥eú wszystkie newsy z kana≥u Hitman Agency.");
 						return 0;
                     }
                     else
@@ -7111,7 +7111,7 @@ public OnPlayerText(playerid, text[])
 		    }
 		    if(hitfound == 0)
 		    {
-		        SendClientMessage(playerid, COLOR_GREY, "Nie sprawdzi≥e? jeszcze kontraktÛw, zrÛb to w laptopie (wpisz 'kontrakty') !");
+		        SendClientMessage(playerid, COLOR_GREY, "Nie sprawdzi≥eú jeszcze kontraktÛw, zrÛb to w laptopie (wpisz 'kontrakty') !");
 		        return 0;
 		    }
 		    tmp = strtok(text, idx);
@@ -7153,7 +7153,7 @@ public OnPlayerText(playerid, text[])
 				    }
 				    else
 				    {
-				        SendClientMessage(playerid, COLOR_GREY, "Osoby, na ktÛrö jest zlecenie, nie ma na serwerze. SprÛbuj pÛ?niej !");
+				        SendClientMessage(playerid, COLOR_GREY, "Osoby, na ktÛrπ jest zlecenie, nie ma na serwerze. SprÛbuj pÛ?niej !");
 				        return 0;
 				    }
 				}
@@ -7185,16 +7185,16 @@ public OnPlayerText(playerid, text[])
 		{
 		    if(OrderReady[playerid] > 0)
 		    {
-		        SendClientMessage(playerid, COLOR_GREY, "ZamÛwi≥e? juø paczki z broniö, id? do swojej bazy aby je odebraÊ !");
+		        SendClientMessage(playerid, COLOR_GREY, "ZamÛwi≥eú juø paczki z broniπ, id? do swojej bazy aby je odebraÊ !");
 		        return 0;
 		    }
 		    tmp = strtok(text, idx);
 		    if ((strcmp("1", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("1")))
 			{
-			    //if(PlayerInfo[playerid][pRank] < 0) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    //if(PlayerInfo[playerid][pRank] < 0) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 2499)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczkÍ numer 1 ($2500), zostanie dostarczona do drzwi Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczkÍ numer 1 ($2500), zostanie dostarczona do drzwi Agencji.");
 			        OrderReady[playerid] = 1;
 			        return 0;
 			    }
@@ -7206,10 +7206,10 @@ public OnPlayerText(playerid, text[])
 			}
 		    else if ((strcmp("2", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("2")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 1) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 1) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 4999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczkÍ numer 2 ($5000), zostanie dostarczona do drzwi Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczkÍ numer 2 ($5000), zostanie dostarczona do drzwi Agencji.");
 			        OrderReady[playerid] = 2;
 			        return 0;
 			    }
@@ -7221,10 +7221,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("3", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("3")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 5999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczke numer 3 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 3 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 3;
 			        return 0;
 			    }
@@ -7236,10 +7236,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("4", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("4")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 5999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczke numer 4 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 4 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 4;
 			        return 0;
 			    }
@@ -7251,10 +7251,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("5", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("5")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 7999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczke numer 5 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 5 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 5;
 			        return 0;
 			    }
@@ -7266,10 +7266,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("6", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("6")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 7999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczke numer 6 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 6 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 6;
 			        return 0;
 			    }
@@ -7281,10 +7281,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("7", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("7")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 8499)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczke numer 7 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 7 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 7;
 			        return 0;
 			    }
@@ -7296,10 +7296,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("8", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("8")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 8499)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczke numer 8 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 8 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 8;
 			        return 0;
 			    }
@@ -7311,10 +7311,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("9", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("9")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 9999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczke numer 9 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 9 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 9;
 			        return 0;
 			    }
@@ -7326,10 +7326,10 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("10", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("10")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskö rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
+			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt niskπ rangÍ aby zamÛwiÊ tÍ paczke !"); return 0; }
 			    if(kaska[playerid] > 9999)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥e? paczke numer 10 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* ZamÛwi≥eú paczke numer 10 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 10;
 			        return 0;
 			    }
@@ -7358,7 +7358,7 @@ public OnPlayerText(playerid, text[])
 		}
 		else if ((strcmp("Logout", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("Logout")) || (strcmp("Wyloguj", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("Wyloguj")))
 		{
-		    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wy≥öczy≥e? swÛj laptop i zerwa≥e? po≥öczenie z agencjö.");
+		    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wy≥πczy≥eú swÛj laptop i zerwa≥eú po≥πczenie z agencjπ.");
       		ConnectedToPC[playerid] = 0;
 		    return 0;
 		}
@@ -7388,7 +7388,7 @@ public OnPlayerText(playerid, text[])
 		    format(string, sizeof(string), "** %s jest w wiÍzieniu i potrzebuje prawnika, jed? na komisariat.", sendername);
 	    	SendJobMessage(2, TEAM_AZTECAS_COLOR, string);
 	    	SendJobMessage(2, TEAM_AZTECAS_COLOR, "* Kiedy bÍdziesz juz na komisariacie, spytaj siÍ policjanta o /akceptuj prawnik.");
-	    	SendClientMessage(playerid, COLOR_LIGHTRED, "Je?li policjant siÍ zgodzi, prawnik bÍdzie mÛg≥ uwolniÊ ciÍ za op≥atö.");
+	    	SendClientMessage(playerid, COLOR_LIGHTRED, "Je?li policjant siÍ zgodzi, prawnik bÍdzie mÛg≥ uwolniÊ ciÍ za op≥atπ.");
 	    	WantLawyer[playerid] = 0;
 			CallLawyer[playerid] = 0;
 	    	return 0;
