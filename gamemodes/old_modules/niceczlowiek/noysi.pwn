@@ -804,7 +804,7 @@ fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            format(str, 512, "%s[%d] %s\n", str, i, (typ == 0) ? (FracRang[fracid][i]) : (FamRang[fracid][i]));
 		    }
 
-		    return ShowPlayerDialogEx(playerid, 1966, DIALOG_STYLE_LIST, "Wybierz rangê, któr¹ chcesz nadaæ graczu", str, "Nadaj", "Anuluj");
+		    return ShowPlayerDialogEx(playerid, 1966, DIALOG_STYLE_LIST, "Wybierz rangê, któr¹ chcesz nadaæ graczowi", str, "Nadaj", "Anuluj");
     	}
     	else
     	{
@@ -831,11 +831,13 @@ fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         if(MruMySQL_GetAccInt("Member", pracownik_nick) != PlayerInfo[playerid][pLider] ) return sendErrorMessage(playerid, "No ³adne hakowanie!");
 
+		new upordown[20];
+		upordown = (MruMySQL_GetAccInt("Rank", pracownik_nick) <= listitem) ? "Awansowa³eœ" : "Zdegradowa³eœ";
 		MruMySQL_SetAccInt("Rank", pracownik_nick, listitem);
 
 		new msg[128];
 
-		format(msg, sizeof(msg), "Awansowa³eœ %s na rangê %s", pracownik_nick, FracRang[PlayerInfo[playerid][pLider]][listitem]);
+		format(msg, sizeof(msg), "%s %s na rangê %s", upordown, pracownik_nick, FracRang[PlayerInfo[playerid][pLider]][listitem]);
         sendTipMessage(playerid, msg, COLOR_LIGHTBLUE);
 
         new uid = GetPVarInt(playerid, "fpanel_uid");
