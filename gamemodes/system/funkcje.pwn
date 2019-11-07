@@ -10373,7 +10373,7 @@ GPSMode(playerid, red = false)
 
 			if(red)
 			{
-				format(string, sizeof(string), "=: %s %s %s GPS %s - CODE RED :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie!"));
+				format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie! - CODE RED"));
             	PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
 			}
 			else

@@ -6642,19 +6642,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-	     		ShowPlayerDialogEx(playerid, 86, DIALOG_STYLE_MSGBOX, "Kupowanie domu - p³atnoœæ", "P³atnoœci chcesz dokonaæ gotówk¹ czy przelewem z banku?", "Gotówka", "Przelew");
+				ShowPlayerDialogEx(playerid, 86, DIALOG_STYLE_LIST, "Kupowanie domu - p³atnoœæ", "Zap³aæ gotówk¹\nZap³aæ przelewem z banku", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 86)//system domów
 		{
 		    if(response)
 		    {
-		        KupowanieDomu(playerid, IDDomu[playerid], 1);
-		    }
-		    if(!response)
-		    {
-		        KupowanieDomu(playerid, IDDomu[playerid], 2);
-		    }
+				switch(listitem)
+		        {
+		            case 0://Informacje o domu
+		            {
+		       		 	KupowanieDomu(playerid, IDDomu[playerid], 1);
+					}
+					case 1:
+					{
+						KupowanieDomu(playerid, IDDomu[playerid], 2);
+					}
+		   		}
+			}
 		}
 		if(dialogid == 87)//system domów
 		{

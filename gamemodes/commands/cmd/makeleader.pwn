@@ -39,7 +39,7 @@ YCMD:makeleader(playerid, params[], help)
 		new para1, level;
 		if( sscanf(params, "k<fix>d", para1, level))
 		{
-			sendTipMessage(playerid, "U¿yj /makeleader [playerid/CzêœæNicku] [Number(1-17)]");
+			sendTipMessage(playerid, "U¿yj /makeleader [playerid/CzêœæNicku] [Number(0-17)]");
 			return 1;
 		}
 
