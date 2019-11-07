@@ -247,7 +247,7 @@ IsAKox(playerid)
 
 IsAScripter(playerid)
 {
-	if(PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pUID] == 1290)
+	if(PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pUID] == 1290) //skasowac potem
 	{
 		return 1;
 	}
