@@ -37,28 +37,52 @@ YCMD:c(playerid, params[], help)
     {
         new pat = GetPVarInt(playerid, "patrol-id");
 
-        if(strcmp(var, "0") == 0)
+        /*
+            1 - ok
+            2 - wsparcie
+            3 - poœcig
+            4 - ranny
+        */
+        if(strcmp(var, "red", true) == 0)
         {
             PatrolInfo[pat][patstan] = 2;
-            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Potrzebne natychmiastowe wsparcie - {FFFFFF}KOD 0", PatrolInfo[pat][patname]);
+            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", PatrolInfo[pat][patname]);
             SendTeamMessage(1, COLOR_ALLDEPT, str);
         }
         else if(strcmp(var, "1") == 0)
         {
             PatrolInfo[pat][patstan] = 3;
-            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Poœcig za podejrzanym - {FFFFFF}KOD 1", PatrolInfo[pat][patname]);
+            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Poœcig za podejrzanym - {FFFFFF}CODE 1", PatrolInfo[pat][patname]);
             SendTeamMessage(1, COLOR_ALLDEPT, str);
         }
         else if(strcmp(var, "2") == 0)
         {
-            PatrolInfo[pat][patstan] = 4;
-            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Ranny funkcjonariusz - {FFFFFF}KOD 2", PatrolInfo[pat][patname]);
+            PatrolInfo[pat][patstan] = 3;
+            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Odbieram zg³oszenie z niskim priorytetem - {FFFFFF}CODE 2", PatrolInfo[pat][patname]);
             SendTeamMessage(1, COLOR_ALLDEPT, str);
         }
         else if(strcmp(var, "3") == 0)
         {
+            PatrolInfo[pat][patstan] = 3;
+            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Odbieram zg³oszenie z wysokim priorytetem (sygna³y i œwiat³a) - {FFFFFF}CODE 3", PatrolInfo[pat][patname]);
+            SendTeamMessage(1, COLOR_ALLDEPT, str);
+        }
+        else if(strcmp(var, "4") == 0)
+        {
             PatrolInfo[pat][patstan] = 1;
-            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Sytuacja pod kontrol¹ - {FFFFFF}KOD 3", PatrolInfo[pat][patname]);
+            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Odwo³ujê dodatkowe wsparcie - {FFFFFF}CODE 4", PatrolInfo[pat][patname]);
+            SendTeamMessage(1, COLOR_ALLDEPT, str);
+        }
+        else if(strcmp(var, "6") == 0)
+        {
+            PatrolInfo[pat][patstan] = 3;
+            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Interwencja poza pojazdem - {FFFFFF}CODE 6", PatrolInfo[pat][patname]);
+            SendTeamMessage(1, COLOR_ALLDEPT, str);
+        }
+        else if(strcmp(var, "7") == 0)
+        {
+            PatrolInfo[pat][patstan] = 1;
+            format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Zakoñczenie dzia³añ przy zdarzeniu - {FFFFFF}CODE 7", PatrolInfo[pat][patname]);
             SendTeamMessage(1, COLOR_ALLDEPT, str);
         }
     }
