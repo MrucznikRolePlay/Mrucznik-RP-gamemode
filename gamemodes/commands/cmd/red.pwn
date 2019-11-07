@@ -39,7 +39,7 @@ YCMD:red(playerid, params[], help)
             {
                 if(GetPVarInt(playerid, "patrol") != 1)
                 {
-                    sendErrorMessage(playerid, "Nie jeste? na patrolu.");
+                    sendErrorMessage(playerid, "Nie jesteœ na patrolu.");
                     return 1;
                 }
                 else
@@ -75,12 +75,12 @@ YCMD:red(playerid, params[], help)
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jeste? na s?u?bie.");
+			sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
 		}
 	}
 	else
 	{
-		sendErrorMessage(playerid, "Nie jeste? policjantem.");
+		sendErrorMessage(playerid, "Nie jesteœ policjantem.");
 	}
     return 1;
 }
