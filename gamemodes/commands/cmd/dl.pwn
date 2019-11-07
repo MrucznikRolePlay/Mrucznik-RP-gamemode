@@ -36,9 +36,9 @@ YCMD:dl(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAnInstructor(playerid) || PlayerInfo[playerid][pAdmin] >= 5000)
+        if(IsAnInstructor(playerid))
         {
-            if(PlayerInfo[playerid][pLocal] == 108 || PlayerInfo[playerid][pAdmin] >= 5000)
+            if(PlayerInfo[playerid][pLocal] == 108 || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid)) //jedna walidacja wystarczy
             {
 	            new x_nr[16];
 				new giveplayerid;
