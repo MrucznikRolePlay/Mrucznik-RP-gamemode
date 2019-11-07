@@ -53,7 +53,8 @@ YCMD:makeleader(playerid, params[], help)
 				{
 					if(level == 0)
 					{
-						sendTipMessage(playerid, "U¿yj /unfrakcja [ID]");
+						UnFrakcja(playerid, para1);
+						//sendTipMessage(playerid, "U¿yj /unfrakcja [ID]");
 						return 1;
 					}
 					if(PlayerInfo[para1][pMember] > 0|| GetPlayerOrg(para1) != 0 )
