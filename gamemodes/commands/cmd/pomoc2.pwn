@@ -86,7 +86,7 @@ YCMD:pomoc2(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat (/gov) /stanowe /camera /wywaz /obezwladnij /gps /odznaka");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /pacholek /barierka /skuj /rozkuj /mdc /aresztuj /sluzba /poszukiwani /tazer /cywil");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** (/r)adio (/d)epartment /ro(radiooc) /depo(departamentooc) (/m)egafon (/su)spect");
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /cela /togcrime /poscig /pozwolenie /finfo");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /cela /togcrime /poscig /pozwolenie /finfo /red /c");
     }
     if (PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
     {
