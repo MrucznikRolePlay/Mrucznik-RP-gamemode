@@ -4,5 +4,6 @@
     },
     "[pawn]": {
         "files.encoding": "windows1250"
-    }
+    },
+    "files.encoding": "windows1250"
 }
