@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  premium                                                  //
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                   convoy                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,52 +17,70 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Data utworzenia: 20.10.2019
+//Opis:
+/*
+	System konwojów.
+*/
 
 //
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define PREMIUM_TABLE_	"mru_"
-//tables: mru_premium, mru_premium_skins
+#include <YSI\y_hooks>
 
-#define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 18
-#define MAX_PREMIUM_SKINS 43
-#define MAX_PREMIUM_ITEMS 133
+//-----------------<[ Callbacki: ]>-----------------
+hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+{
+	if(PRESSED(KEY_CROUCH))
+	{
+		new boxid = GetNearestBox(playerid);
+		if(boxid != -1)
+		{
+			sendTipMessage(playerid, "Podnios³eœ dyniê z narkotykami. Aby j¹ upuœciæ, naciœnij enter.");
+			if(IsInAConvoyTeam(playerid)) {
+				sendTipMessage(playerid, "Upuœæ paczkê przy pojeŸdzie konwojowym, aby wrzuciæ j¹ spowrotem do œrodka.");
+			} else {
+				sendTipMessage(playerid, "Dostarcz dyniê do upiornych handlarzy, aby otrzymaæ nagrodê.");
+			}
+			ChatMe(playerid, "podnosi dyniê.");
+			PickupBox(playerid, boxid);
+		}
+	}
+	else if(PRESSED(KEY_SECONDARY_ATTACK))
+	{
+		if(IsPlayerCarryingBox(playerid))
+		{
+			DropBox(playerid);
+   			ApplyAnimation(playerid,"CARRY","putdwn", 4.0, 0, 0, 0, 0, 0); 
+			ChatMe(playerid, "upuszcza dyniê.");
+		}
+	}
+	return 1;
+}
 
-//Czas
-#define KP_MIESIAC 2592000
-#define KP_3_MIESIACE 8046000
-#define KP_TYDZIEN 604800
+hook OnPlayerDeath(playerid)
+{
+	if(IsPlayerCarryingBox(playerid)) 
+	{
+		ChatMe(playerid, "upuszcza dyniê.");
+		DropBox(playerid);
+	}
+	return 1;
+}
 
-//Cennik
-#define MIESIAC_KP_CENA 325
-#define PRZEDLUZ_KP_CENA 275
+hook OnPlayerDisconnect(playerid, reason)
+{
+	if(IsPlayerCarryingBox(playerid)) 
+	{
+		ChatMe(playerid, "upuszcza dyniê.");
+		DropBox(playerid);
+	}
+	return 1;
+}
 
-#define CAR_SLOT_CENA 500
-#define ZMIANA_NICKU_CENA 275
-
-#define UNIKATOWY_SKIN_CENA 500
-
-#define TELEFON_CENA_1 10000
-#define TELEFON_CENA_2 2125
-#define TELEFON_CENA_3 1115
-#define TELEFON_CENA_4 675
-#define TELEFON_CENA_5 335
-
-#define PRZEDMIOT_DROGI_CENA 30
-#define PRZEDMIOT_PRZECIETNY_CENA 15
-#define PRZEDMIOT_TANI_CENA 5
-
-
-
-//Kolorki
-
-#define 				PREMIUM_EMBED1 			"{F7F7F2}" // granat
-#define 				PREMIUM_EMBED2 			"{00B7FF}" // niebiedski
-#define 				PREMIUM_EMBED3 			"{49A350}" // zielony
-#define 				PREMIUM_EMBED4 			"{F7F7F2}" // jasny1
-#define 				PREMIUM_EMBED5 			"{E3D8F1}" // jasny2
+hook OnPlayerConnect(playerid)
+{
+	carryingBox[playerid] = -1;
+	return 1;
+}
 
 //end

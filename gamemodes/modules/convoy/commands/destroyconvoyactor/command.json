@@ -1,0 +1,18 @@
+{
+    "name": "destroyconvoyactor",
+    "description": "Usuwa kownojowego aktora.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "actor",
+            "description": "actor",
+            "defaultValue": "-1"
+        }
+    ],
+    "date": "31.10.2019"
+}

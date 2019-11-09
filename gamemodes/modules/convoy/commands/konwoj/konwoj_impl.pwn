@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                checkpremium                                               //
+//                                                   konwoj                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,52 +17,64 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 09.08.2019
+// Data utworzenia: 20.10.2019
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_checkpremium_Impl(playerid, giveplayerid)
+command_konwoj_Impl(playerid)
 {
-    if(!IsAKox(playerid))
-	{
-        return noAccessMessage(playerid);
+    new hour, minute, second;
+    gettime(hour, minute, second);
+
+    if(!IsPlayerInSecuriCar(playerid))
+    {
+        sendErrorMessage(playerid, "Musisz byæ w pojeŸdzie konwojowym (securicar) aby rozpocz¹æ konwój.");
+        return 1;
     }
 
-    _MruAdmin(playerid, sprintf("Us³ugi premium gracza %s:", GetNick(giveplayerid)));
-    if(PremiumInfo[giveplayerid][pKP])
+    if(PlayerInfo[playerid][pAdmin] < 1) 
     {
-        new expirationTime = PremiumInfo[giveplayerid][pExpires]-gettime();
-        _MruAdmin(playerid, sprintf("- KP wygasa za %d dni i %d godzin (timestamp: %d)", 
-						floatround(floatdiv(expirationTime, 86400), floatround_floor), 
-						floatround(floatdiv(expirationTime, 3600), floatround_floor)%24,
-                        expirationTime)
-        );
-    }
-    else
-    {
-        _MruAdmin(playerid, "- Brak KP");
-    }
-    _MruAdmin(playerid, sprintf("- stan MC: %d", PremiumInfo[giveplayerid][pMC]));
-    
-    //TODO: wiêcej informacji w /checkpremium
-    // _MruAdmin(playerid, "- Skiny premium:");
-    // for(new i; i<MAX_PREMIUM_SKINS; i++)
-    // {
-    //     _MruAdmin(playerid, sprintf("    - %d", ));
-    // }
-    // _MruAdmin(playerid, "- Pojazdy premium:");
-    // for(new i; i<MAX_; i++)
-    // {
-    //     _MruAdmin(playerid, sprintf("    - %s", ));
-    // }
-    // _MruAdmin(playerid, "- Przedmioty premium:");
-    // for(new i; i<MAX_PREMIUM_ITEMS; i++)
-    // {
-    //     _MruAdmin(playerid, sprintf("    - %d", ));
-    // }
+        if(!IsAConvoyTeamLeader(playerid))
+        {
+            sendErrorMessage(playerid, "Nie masz wystarczaj¹cych uprawnieñ aby zorganizowaæ konwój.");
+            return 1;
+        }
 
+        if(hour < 15 || hour > 22)
+        {
+            sendErrorMessage(playerid, "Konwój mo¿na wystartowaæ tylko od godziny 15:00 do 23:00.");
+            return 1;
+        }
+
+        if(convoyDelayed)
+        {
+            sendErrorMessage(playerid, "Nastêpny konwój mo¿na wystartowaæ dopiero po 3 godzinach od ukoñczenia ostatniego.");
+            return 1;
+        }
+
+        if(kaska[playerid] < CONVOY_PRICE)
+        {
+            sendErrorMessage(playerid, "Zorganizowanie konwoju kosztuje "#CONVOY_PRICE"$ a Ty tyle nie masz.");
+            return 1;
+        }
+    }
+
+    if(ConvoyStarted)
+    {
+        SendClientMessage(playerid, COLOR_WHITE, "Konwój stop");
+        StopConvoy(CONVOY_STOP_ADMIN);
+        return 1;
+    }
+
+    StartConvoy(playerid, GetPlayerVehicleID(playerid));
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wystartowa³eœ konwój. Po dojechaniu do celu otrzymasz nagrodê.");
+    ZabierzKase(playerid, CONVOY_PRICE);
+
+    Log(adminLog, INFO, "Admin %s wystartowa³ konwój", 
+        GetPlayerLogName(playerid)
+    );
     return 1;
 }
 

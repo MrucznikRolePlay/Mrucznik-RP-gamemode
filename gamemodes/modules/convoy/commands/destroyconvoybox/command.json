@@ -1,0 +1,17 @@
+{
+    "name": "destroyconvoybox",
+    "description": "Niszczy skrzynkê konwojow¹ o podanym id.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "boxid",
+            "description": "boxid"
+        }
+    ],
+    "date": "20.10.2019"
+}

@@ -34,12 +34,7 @@ YCMD:kurs(playerid, params[], help)
 	{
 		if(GetPlayerState(playerid) == 2)
 		{
-			if(AntySpam[playerid] == 0)
-			{
-				AntySpam[playerid] = 1;
-				SetTimerEx("AntySpamTimer",7000,0,"d",playerid);
-			}
-			else
+			if(AntySpam[playerid] != 0)
 			{
 				sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 7 sekund !");
 				return 1;
@@ -96,8 +91,6 @@ YCMD:kurs(playerid, params[], help)
     				format(string, sizeof(string), "Taksówkarz %s jest na s³u¿bie wpisz /wezwij taxi aby skorzystaæ z jego us³ug, koszt %d$", sendername, TransportValue[playerid]);
     				OOCNews(TEAM_GROVE_COLOR,string);
                 }
-                AntySpam[playerid] = 1;
-				SetTimerEx("AntySpamTimer",7000,0,"d",playerid);
 			}
 			else if(IsAMiniBus(vehicleid))
 			{
@@ -162,7 +155,10 @@ YCMD:kurs(playerid, params[], help)
 			else
 			{
 				sendTipMessageEx(playerid,COLOR_GREY,"W tym pojeŸdzie nie mo¿esz wejœæ na s³u¿bê !");
+				return 1;
 			}
+			AntySpam[playerid] = 1;
+			SetTimerEx("AntySpamTimer",7000,0,"d",playerid);
 		}
 		else
 		{

@@ -44,7 +44,7 @@ YCMD:quitpraca(playerid, params[], help)
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wype³ni³eœ 1 godzinny kontrakt wiêc mo¿esz zwolniæ siê z pracy.");
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zwolni³eœ siê ze swojej pracy, jesteœ bezrobotny.");
 				    PlayerInfo[playerid][pJob] = 0;
-				    PlayerInfo[playerid][pSkin] = 0;
+				    PlayerInfo[playerid][pUniform] = 0;
 				    PlayerInfo[playerid][pContractTime] = 0;
 				}
 				else
@@ -61,7 +61,7 @@ YCMD:quitpraca(playerid, params[], help)
 				{
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wype³ni³eœ 2.5 godzinny kontrakt wiêc mo¿esz zwolniæ siê z pracy.");
 				    PlayerInfo[playerid][pJob] = 0;
-				    PlayerInfo[playerid][pSkin] = 0;
+				    PlayerInfo[playerid][pUniform] = 0;
 				    PlayerInfo[playerid][pContractTime] = 0;
 				}
 				else

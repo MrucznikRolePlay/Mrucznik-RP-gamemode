@@ -80,24 +80,19 @@ YCMD:spec(playerid, params[], help)
             SetTimerEx("SpecToggle", 3000, false, "i", playerid);
             if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
             else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
-			foreach(new i : Player)
+			if(playerTargetSpec[playerid] != INVALID_SPECTATE_ID)
 			{
-				if(PlayerInfo[i][pAdmin] >= 1)
+				if(PlayerInfo[playerTargetSpec[playerid]][pAdmin] < 2000)
 				{
-					if(showSpec[i] != 666)
-					{
-						if(showSpec[i] == playerid)
-						{
-							format(string, sizeof(string), "Admin %s [%d] podgl¹da [spec] gracza %s [%d]", GetNick(playerid), playerid, giveplayer, pid);
-							sendTipMessageEx(i, COLOR_RED,  string); 
-						}
-						else if(showSpec[i] == 777)
-						{
-							format(string, sizeof(string), "Admin %s [%d] podgl¹da [spec] gracza %s [%d]", GetNick(playerid), playerid, giveplayer, pid);
-							sendTipMessageEx(i, COLOR_RED,  string); 
-						}
-					}
+					playerTargetSpec[playerid] = INVALID_SPECTATE_ID; 
+					return 1;
 				}
+				format(string, sizeof(string), "[CMD_USE_WARNING] Admin %s [%d] podgl¹da  %s [%d]", 
+				GetNick(playerid), 
+				playerid,
+				GetNick(pid),
+				pid); 
+				SendClientMessage(playerTargetSpec[playerid], COLOR_RED, string); 
 			}
         }
 	}

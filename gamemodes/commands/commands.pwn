@@ -645,7 +645,6 @@
 #include "cmd/zwiaz.pwn"
 #include "cmd/zwolnij.pwn"
 #include "cmd/panelvinyl.pwn"
-#include "cmd/specshow.pwn"
 #include "cmd/asystem.pwn"
 #include "cmd/setserverpass.pwn"
 #include "cmd/tognewbie.pwn"

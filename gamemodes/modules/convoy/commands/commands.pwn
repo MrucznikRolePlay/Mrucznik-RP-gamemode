@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  premium                                                  //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,53 +16,24 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
-
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define PREMIUM_TABLE_	"mru_"
-//tables: mru_premium, mru_premium_skins
-
-#define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 18
-#define MAX_PREMIUM_SKINS 43
-#define MAX_PREMIUM_ITEMS 133
-
-//Czas
-#define KP_MIESIAC 2592000
-#define KP_3_MIESIACE 8046000
-#define KP_TYDZIEN 604800
-
-//Cennik
-#define MIESIAC_KP_CENA 325
-#define PRZEDLUZ_KP_CENA 275
-
-#define CAR_SLOT_CENA 500
-#define ZMIANA_NICKU_CENA 275
-
-#define UNIKATOWY_SKIN_CENA 500
-
-#define TELEFON_CENA_1 10000
-#define TELEFON_CENA_2 2125
-#define TELEFON_CENA_3 1115
-#define TELEFON_CENA_4 675
-#define TELEFON_CENA_5 335
-
-#define PRZEDMIOT_DROGI_CENA 30
-#define PRZEDMIOT_PRZECIETNY_CENA 15
-#define PRZEDMIOT_TANI_CENA 5
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
+#include <YSI\y_hooks>
 
-//Kolorki
+//-------<[ include ]>-------
 
-#define 				PREMIUM_EMBED1 			"{F7F7F2}" // granat
-#define 				PREMIUM_EMBED2 			"{00B7FF}" // niebiedski
-#define 				PREMIUM_EMBED3 			"{49A350}" // zielony
-#define 				PREMIUM_EMBED4 			"{F7F7F2}" // jasny1
-#define 				PREMIUM_EMBED5 			"{E3D8F1}" // jasny2
 
-//end
+//-------<[ initialize ]>-------
+hook OnGameModeInit()
+{
+    
+}

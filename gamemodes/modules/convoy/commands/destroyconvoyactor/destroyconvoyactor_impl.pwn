@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  premium                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                             destroyconvoyactor                                            //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,52 +17,42 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Data utworzenia: 31.10.2019
+
 
 //
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define PREMIUM_TABLE_	"mru_"
-//tables: mru_premium, mru_premium_skins
+//------------------<[ Implementacja: ]>-------------------
+command_destroyconvoyactor_Impl(playerid, actor)
+{
+    if(PlayerInfo[playerid][pAdmin] < 1) 
+    {
+        return noAccessMessage(playerid);
+    }
 
-#define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 18
-#define MAX_PREMIUM_SKINS 43
-#define MAX_PREMIUM_ITEMS 133
+    new actorid;
+    if(actor == -1)
+    {
+        actorid = GetNearestConvoyActor(playerid, 5.0);
+    }
+    else
+    {
+        actorid = actor;
+    }
 
-//Czas
-#define KP_MIESIAC 2592000
-#define KP_3_MIESIACE 8046000
-#define KP_TYDZIEN 604800
+    if(actorid == -1)
+    {
+        sendErrorMessage(playerid, "Brak konwojowego aktora w pobli¿u.");
+        return 1;
+    }
 
-//Cennik
-#define MIESIAC_KP_CENA 325
-#define PRZEDLUZ_KP_CENA 275
-
-#define CAR_SLOT_CENA 500
-#define ZMIANA_NICKU_CENA 275
-
-#define UNIKATOWY_SKIN_CENA 500
-
-#define TELEFON_CENA_1 10000
-#define TELEFON_CENA_2 2125
-#define TELEFON_CENA_3 1115
-#define TELEFON_CENA_4 675
-#define TELEFON_CENA_5 335
-
-#define PRZEDMIOT_DROGI_CENA 30
-#define PRZEDMIOT_PRZECIETNY_CENA 15
-#define PRZEDMIOT_TANI_CENA 5
-
-
-
-//Kolorki
-
-#define 				PREMIUM_EMBED1 			"{F7F7F2}" // granat
-#define 				PREMIUM_EMBED2 			"{00B7FF}" // niebiedski
-#define 				PREMIUM_EMBED3 			"{49A350}" // zielony
-#define 				PREMIUM_EMBED4 			"{F7F7F2}" // jasny1
-#define 				PREMIUM_EMBED5 			"{E3D8F1}" // jasny2
+    new err = DestroyConvoyActor(actorid);
+    if(err == -1) {
+        sendErrorMessage(playerid, "Nie uda³o siê usun¹æ aktora");
+        return 1;
+    }
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Pomyœlnie zniszczy³eœ aktora o ID %d.", actorid));
+    return 1;
+}
 
 //end

@@ -57,6 +57,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <timestamptodate>
 #include <discord-connector>
 #include <memory>
+//TODO: add plugins
+// actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 // #include <requests>
 // #include <colandreas>
@@ -75,6 +77,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_hooks>
 #include <YSI\y_bintree>
 #include <YSI\y_master>
+#include <YSI\y_timers>
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
@@ -86,6 +89,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <true_random>
 #include <PreviewModelDialog>
 #include <vector>
+#include <map>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
@@ -689,7 +693,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
     if(GetPVarInt(playerid, "patrol-map") == 1 && GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(_:clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == INVALID_TEXT_DRAW)
         {
             SendClientMessage(playerid, COLOR_PAPAYAWHIP, "Wybierz region.");
             SelectTextDraw(playerid, 0xD2691E55);
@@ -754,7 +758,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     }
     else if(GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(_:clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == INVALID_TEXT_DRAW)
         {
             CancelSelectTextDraw(playerid);
             Patrol_HideMap(playerid);
@@ -1059,7 +1063,12 @@ public OnPlayerConnect(playerid)
 		return 1;
 	}
 	SetRPName(playerid);
+	
+	//bany
+	if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
+
 	timeSecWjedz[playerid] = 0;
+
 
 	//Pocz¹tkowe ustawienia:
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
@@ -2077,13 +2086,30 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1;
 		}
 
+		if(code == 16)//ammohack
+		{
+			SetPVarInt(playerid, "ammohackdetect", 1);
+			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 16 (Ammo hack (add)).", GetNick(playerid), playerid);
+			SendMessageToAdmin(string, 0x9ACD32AA);
+			//format(string, sizeof(string), "[Nex-AC] AC ammo: %d, ammo: %d, weaponid: %d", ACInfo[playerid][acAmmo][ac_s], ac_a, ac_w);
+			//SendMessageToAdmin(string, 0x9ACD32AA);
+			
+		}
+		if(code == 17)//ammohack
+		{
+			SetPVarInt(playerid, "ammohackdetect", 1);
+			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 17 (Ammo hack (infinite)).", GetNick(playerid), playerid);
+			SendMessageToAdmin(string, 0x9ACD32AA);
+			//format(string, sizeof(string), "[Nex-AC] Weaponid: %d, AC ammo: %d, ammo: %d", weaponid, ACInfo[playerid][acAmmo][ac_s], ac_t);
+			//SendMessageToAdmin(string, 0x9ACD32AA);
+
+		}
 		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNick(playerid), playerid, plrIP, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
         Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
-		
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
 			Kick(playerid);
@@ -2148,7 +2174,7 @@ public OnPlayerSpawn(playerid)
         PlayerInfo[playerid][pTeam] = 3;
         PlayerInfo[playerid][pMember] = 0;
         PlayerInfo[playerid][pRank] = 0;
-        PlayerInfo[playerid][pSkin] = 0;
+        PlayerInfo[playerid][pUniform] = 0;
         PlayerInfo[playerid][pTajniak] = 0;
         MruMySQL_SetAccInt("Rank", GetNick(playerid), 0);
         MruMySQL_SetAccInt("Member", GetNick(playerid), 0);
@@ -5934,8 +5960,6 @@ OnPlayerLogin(playerid, password[])
     
 	if(!isnull(password) && PasswordVerify(playerid, password))
 	{//poprawne has³o
-        MruMySQL_KonwertujBana(playerid);
-        if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
 
 		//----------------------------
 		//£adowanie konta i zmiennych:
@@ -6726,7 +6750,7 @@ public OnPlayerText(playerid, text[])
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
 		} 
-		return 1;
+		return 0;
 	}
 	if(PlayerInfo[playerid][pMuted] == 1)
 	{
