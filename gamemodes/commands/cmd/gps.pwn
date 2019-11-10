@@ -32,16 +32,14 @@ YCMD:gps(playerid, params[], help)
 {
 	if(!IsACop(playerid) && !IsAMedyk(playerid) && GetPlayerFraction(playerid) != FRAC_BOR)
 	{
-		sendErrorMessage(playerid, "Nie jesteœ policjantem lub medykiem.");
-		return 1;
+		return sendErrorMessage(playerid, "Nie jesteœ policjantem lub medykiem.");
 	}
 
 	if(OnDuty[playerid] != 1 && JobDuty[playerid] != 1)
 	{
-		sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
-		return 1;
+		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
 	}
-	
+
 	GPSMode(playerid);
 	return 1;
 }

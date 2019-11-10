@@ -32,26 +32,22 @@ YCMD:red(playerid, params[], help)
 {
     if(!IsACop(playerid) && GetPlayerFraction(playerid) != FRAC_LSPD)
 	{
-		sendErrorMessage(playerid, "Nie jesteœ policjantem.");
-		return 1;
+		return sendErrorMessage(playerid, "Nie jesteœ policjantem.");
 	}
 
 	if(OnDuty[playerid] != 1 && JobDuty[playerid] != 1)
 	{
-		sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
-		return 1;
+		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
 	}
 
     if(GetPVarInt(playerid, "patrol") != 1)
     {
-        sendErrorMessage(playerid, "Nie jesteœ na patrolu.");
-        return 1;
+        return sendErrorMessage(playerid, "Nie jesteœ na patrolu.");
     }
 
     if(PDGPS == playerid)
     {
-        sendErrorMessage(playerid, "Wezwa³eœ ju¿ wsparcie, u¿yj /gps!");
-        return 1;
+        return sendErrorMessage(playerid, "Wezwa³eœ ju¿ wsparcie, u¿yj /gps!");
     }
 
     new str[128];

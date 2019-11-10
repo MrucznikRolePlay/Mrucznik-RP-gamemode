@@ -38,14 +38,12 @@ YCMD:unfrakcja(playerid, params[], help)
 	new para1;
 	if(sscanf(params, "k<fix>", para1))
 	{
-		sendTipMessage(playerid, "U¿yj /unfrakcja [ID gracza]");
-		return 1;
+		return sendTipMessage(playerid, "U¿yj /unfrakcja [ID gracza]");
 	}
 
 	if (PlayerInfo[playerid][pAdmin] < 1000 && !(Uprawnienia(playerid, ACCESS_MAKELEADER)) && !(IsAScripter(playerid)))
 	{
-		noAccessMessage(playerid);
-		return 1;
+		return noAccessMessage(playerid);
 	}
 
 	if(IsPlayerConnected(para1))
