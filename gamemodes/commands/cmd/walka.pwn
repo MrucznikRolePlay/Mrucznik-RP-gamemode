@@ -59,7 +59,7 @@ YCMD:walka(playerid, params[], help)
         new giveplayerid;
 		if( sscanf(params, "k<fix>", giveplayerid))
 		{
-			sendTipMessage(playerid, "U¿yj /walcz [playerid/CzêœæNicku]");
+			sendTipMessage(playerid, "U¿yj /walka [playerid/CzêœæNicku]");
 			return 1;
 		}
 

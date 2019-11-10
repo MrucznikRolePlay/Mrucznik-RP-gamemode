@@ -30,16 +30,36 @@
 
 YCMD:unfrakcja(playerid, params[], help)
 {
-    if(IsPlayerConnected(playerid))
+    if(!IsPlayerConnected(playerid))
     {
-		new para1;
-		if( sscanf(params, "k<fix>", para1))
+		return 1;
+	}
+
+	new para1;
+	if(sscanf(params, "k<fix>", para1))
+	{
+		sendTipMessage(playerid, "U¿yj /unfrakcja [ID gracza]");
+		return 1;
+	}
+
+	if (PlayerInfo[playerid][pAdmin] < 1000 && !(Uprawnienia(playerid, ACCESS_MAKELEADER)) && !(IsAScripter(playerid)))
+	{
+		noAccessMessage(playerid);
+		return 1;
+	}
+
+	if(IsPlayerConnected(para1))
+	{
+		if(para1 == INVALID_PLAYER_ID)
 		{
-			sendTipMessage(playerid, "U¿yj /unfrakcja [ID gracza]");
 			return 1;
 		}
-
-		UnFrakcja(playerid, para1);
 	}
+	else
+	{
+		return 1;
+	}
+
+	UnFrakcja(playerid, para1);
 	return 1;
 }
