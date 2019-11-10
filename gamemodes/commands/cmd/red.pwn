@@ -30,7 +30,6 @@
 
 YCMD:red(playerid, params[], help)
 {
-    new str[128];
     if(!IsACop(playerid) && GetPlayerFraction(playerid) != FRAC_LSPD)
 	{
 		sendErrorMessage(playerid, "Nie jesteœ policjantem.");
@@ -51,10 +50,11 @@ YCMD:red(playerid, params[], help)
 
     if(PDGPS == playerid)
     {
-        sendErrorMessage(playerid, "Wezwa³eœ ju¿ wsparcie!");
+        sendErrorMessage(playerid, "Wezwa³eœ ju¿ wsparcie, u¿yj /gps!");
         return 1;
     }
 
+    new str[128];
     new pat = GetPVarInt(playerid, "patrol-id");
     PatrolInfo[pat][patstan] = 2;
     format(str, 128, "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", PatrolInfo[pat][patname]);

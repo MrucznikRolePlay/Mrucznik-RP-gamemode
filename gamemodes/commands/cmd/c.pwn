@@ -32,7 +32,7 @@ YCMD:c(playerid, params[], help)
 {
     new var[64];
     if(sscanf(params, "s[64]", var)) return sendTipMessage(playerid, "U¿j /c [KOD RADIOWY]");
-    new str[MAX_CLIENT_MESSAGE];
+    new str[144];
     if(GetPVarInt(playerid, "patrol") == 1)
     {
         new pat = GetPVarInt(playerid, "patrol-id");
