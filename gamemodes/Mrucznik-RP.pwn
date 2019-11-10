@@ -2678,7 +2678,13 @@ SetPlayerSpawnSkin(playerid)
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
 		PlayerInfo[playerid][pSkin] = 136;
 	}
-	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pUniform] > 0) {
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
+	}
+	else
+	{
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	}
   /*  if(PlayerInfo[playerid][pChar] > 0)
 		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
 
