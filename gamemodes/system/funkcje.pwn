@@ -8262,40 +8262,27 @@ UnFrakcja(playerid, para1)
 	new string[64];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
-	if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsAScripter(playerid))
+	if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
 	{
-		if(IsPlayerConnected(para1))
-		{
-			if(para1 != INVALID_PLAYER_ID)
-			{
-				if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
-				{
-					format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ wszystkich liderów\nz organizacji? (Zabierze VLD)", GetNick(para1));
-					SetPVarInt(playerid, "ID_LIDERA", para1);  
-					ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
-					return 1;
-				}
-				GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", sendername);
-				SendClientMessage(para1, COLOR_LIGHTBLUE, string);
-				SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
-				Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
-				PlayerInfo[para1][pMember] = 0;
-				PlayerInfo[para1][pLider] = 0;
-				PlayerInfo[para1][pJob] = 0;
-				orgUnInvitePlayer(para1);
-				MedicBill[para1] = 0;
-				SetPlayerSpawn(para1);
-				format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			}
-		}//not connected
+		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ wszystkich liderów\nz organizacji? (Zabierze VLD)", GetNick(para1));
+		SetPVarInt(playerid, "ID_LIDERA", para1);  
+		ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
+		return 1;
 	}
-	else
-	{
-		noAccessMessage(playerid);
-	}
+	GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+	format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", sendername);
+	SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+	SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
+	PlayerInfo[para1][pMember] = 0;
+	PlayerInfo[para1][pLider] = 0;
+	PlayerInfo[para1][pJob] = 0;
+	orgUnInvitePlayer(para1);
+	MedicBill[para1] = 0;
+	SetPlayerSpawn(para1);
+	format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	return 1;
 }
 
@@ -10378,7 +10365,7 @@ Patrol_HideZones(playerid)
     GangZoneHideForPlayer(playerid, PatrolZones[7]);
 }
 
-GPSMode(playerid, red = false)
+GPSMode(playerid, bool:red = false)
 {
 	new string[128], sendername[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, sendername, sizeof(sendername));
