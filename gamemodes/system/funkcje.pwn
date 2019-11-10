@@ -7551,18 +7551,45 @@ SendSMSMessageToAll(senderNumber, message[])
 
 SendSMSMessage(senderNumber, reciverid, message[])
 {
-	new string[256];
+	new string[144], string2[144];
 	
 	new slotKontaktu = PobierzSlotKontaktuPoNumerze(reciverid, senderNumber);
-	if(slotKontaktu >= 0)
+	if(strlen(message) < 78)
 	{
-		format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", message, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+		if(slotKontaktu >= 0)
+		{
+			format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", message, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+		}
+		else
+		{
+			format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+		}
+		SendClientMessage(reciverid, COLOR_YELLOW, string);
 	}
 	else
 	{
-		format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+		new pos = strfind(message, " ", true, strlen(message) / 2);
+		if(pos != -1)
+		{
+			new text2[64], text[128];
+			strmid(text2, text, pos, strlen(text));
+			strdel(text, pos, strlen(text));
+
+			if(slotKontaktu >= 0)
+			{
+				format(string2, sizeof(string2), "[.] %s, Nadawca: %s (%d)", text2, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+			}
+			else
+			{
+				format(string2, sizeof(string2), "[.] %s, Nadawca: %d", text2, senderNumber);
+			}
+
+			format(string, sizeof(string), "SMS: %s [.]", text);
+			SendClientMessage(reciverid, COLOR_YELLOW, string);
+			SendClientMessage(reciverid, COLOR_YELLOW, string2);
+		}
 	}
-	SendClientMessage(reciverid, COLOR_YELLOW, string);
+
 	PlayerPlaySound(reciverid, 6401, 0.0, 0.0, 0.0);
 	LastSMSNumber[reciverid] = senderNumber;
 }
