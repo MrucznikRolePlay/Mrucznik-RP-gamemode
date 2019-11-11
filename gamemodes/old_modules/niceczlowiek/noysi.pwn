@@ -831,11 +831,11 @@ fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         if(MruMySQL_GetAccInt("Member", pracownik_nick) != PlayerInfo[playerid][pLider] ) return sendErrorMessage(playerid, "No ³adne hakowanie!");
 
-		new upordown[26];
-		upordown = (MruMySQL_GetAccInt("Rank", pracownik_nick) <= listitem) ? "Awansowa³es" : "Zdegradowa³es";
+		new upordown[58];
+		upordown = (MruMySQL_GetAccInt("Rank", pracownik_nick) <= listitem) ? "Awansowa³eœ" : "Zdegradowa³eœ";
 		MruMySQL_SetAccInt("Rank", pracownik_nick, listitem);
 
-		new msg[128];
+		new msg[144];
 
 		format(msg, sizeof(msg), "%s %s na rangê %s", upordown, pracownik_nick, FracRang[PlayerInfo[playerid][pLider]][listitem]);
         sendTipMessage(playerid, msg, COLOR_LIGHTBLUE);
