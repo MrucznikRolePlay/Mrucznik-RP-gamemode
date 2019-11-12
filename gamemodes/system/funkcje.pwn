@@ -10027,6 +10027,7 @@ Kolczatka_Delete(id)
 forward RepairCarAfterHitParachute(vehid, Float:health);
 public RepairCarAfterHitParachute(vehid, Float:health)
 {
+	SendClientMessageToAll(-1, "Timer: 6");
 	SetVehicleHealth(vehid, health);
 	return 1;
 }

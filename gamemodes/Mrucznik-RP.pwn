@@ -6643,7 +6643,10 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				if((vehid = GetClosestVehicleFromPlayer(playerid, 2.5)) != -1)
 				{
 					sendErrorMessage(playerid, "4");
-					if(!GetVehicleDriverID(vehid))
+					new brrrr[144];
+					format(brrrr,sizeof(brrrr),"»» %d", GetVehicleDriverID(vehid));
+					SendClientMessage(playerid, COLOR_LIGHTRED, brrrr);
+					if(GetVehicleDriverID(vehid) == -1)
 					{
 						sendErrorMessage(playerid, "5");
 						new Float:vhealth;
