@@ -10024,14 +10024,6 @@ Kolczatka_Delete(id)
     return 1;
 }
 
-forward RepairCarAfterHitParachute(vehid, Float:health);
-public RepairCarAfterHitParachute(vehid, Float:health)
-{
-	SendClientMessageToAll(-1, "Timer: 6");
-	SetVehicleHealth(vehid, health);
-	return 1;
-}
-
 forward GetClosestVehicleFromPlayer(playerid, Float:dis);
 public GetClosestVehicleFromPlayer(playerid, Float:dis)
 {

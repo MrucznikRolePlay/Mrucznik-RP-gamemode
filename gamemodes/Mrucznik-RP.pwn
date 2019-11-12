@@ -6632,27 +6632,21 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	else
 	{
-		sendErrorMessage(playerid, "1");
 		if(PRESSED(KEY_FIRE))
 		{
-			sendErrorMessage(playerid, "2");
 			if(GetPlayerWeapon(playerid) == 46)
 			{
-				sendErrorMessage(playerid, "3");
 				new vehid;
 				if((vehid = GetClosestVehicleFromPlayer(playerid, 2.5)) != -1)
 				{
-					sendErrorMessage(playerid, "4");
-					new brrrr[144];
-					format(brrrr,sizeof(brrrr),"»» %d", GetVehicleDriverID(vehid));
-					SendClientMessage(playerid, COLOR_LIGHTRED, brrrr);
-					if(GetVehicleDriverID(vehid) == -1)
-					{
-						sendErrorMessage(playerid, "5");
-						new Float:vhealth;
-						GetVehicleHealth(veh, vhealth);
-						SetTimerEx("RepairCarAfterHitParachute", 500, false, "df", playerid, vhealth);
-					}
+					new Float:vhealth, Float:slx, Float:sly, Float:slz;
+					GetPlayerPos(playerid, slx, sly, slz);
+					SetPlayerPosEx(playerid, slx, sly, slz+3);
+					PlayerPlaySound(playerid, 1130, slx, sly, slz+3);
+        			SendClientMessage(playerid, COLOR_PANICRED, "Schowaj spadochron zanim w coœ uderzysz.");
+					SetPlayerArmedWeapon(playerid, 0);
+					GetVehicleHealth(vehid, vhealth);
+					SetVehicleHealth(vehid, vhealth+5);
 				}
 			}
 		}
