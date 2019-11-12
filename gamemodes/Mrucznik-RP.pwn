@@ -6632,18 +6632,23 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	else
 	{
+		sendErrorMessage(playerid, "1");
 		if(PRESSED(KEY_FIRE))
 		{
+			sendErrorMessage(playerid, "2");
 			if(GetPlayerWeapon(playerid) == 46)
 			{
+				sendErrorMessage(playerid, "3");
 				new vehid;
 				if((vehid = GetClosestVehicleFromPlayer(playerid, 2.5)) != -1)
 				{
+					sendErrorMessage(playerid, "4");
 					if(!GetVehicleDriverID(vehid))
 					{
+						sendErrorMessage(playerid, "5");
 						new Float:vhealth;
 						GetVehicleHealth(veh, vhealth);
-						SetTimerEx("RepairCarAfterHitParachute", 500, false, "i", playerid, vhealth);
+						SetTimerEx("RepairCarAfterHitParachute", 500, false, "df", playerid, vhealth);
 					}
 				}
 			}

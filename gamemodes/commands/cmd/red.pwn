@@ -47,7 +47,7 @@ YCMD:red(playerid, params[], help)
 
     if(PDGPS == playerid)
     {
-        return sendErrorMessage(playerid, "Wezwa³eœ ju¿ wsparcie, u¿yj /gps!");
+        return sendErrorMessage(playerid, "Wezwa³eœ ju¿ wsparcie, u¿yj /gps by wy³¹czyæ.");
     }
 
     new str[128];
