@@ -1669,6 +1669,13 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
+	if(zakuty[playerid] > 0)
+	{
+		TogglePlayerControllable(playerid, 0);
+		GameTextForPlayer(playerid, "~r~Nie atakuj", 3500, 1);
+		SetTimerEx("FreezePlayer", 3500, false, "i", playerid);
+	}
+
 	Log(damageLog, INFO, "%s zg³asza zranienie gracza %s o %fhp broni¹ %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
@@ -6657,12 +6664,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
         				return ShowPlayerDialog(playerid, iddialog[playerid], DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Schowaj spadochron zanim w coœ uderzysz.", "OK", ""); 
 					}
 				}
-			}
-			if(zakuty[playerid] > 0)
-			{
-				TogglePlayerControllable(playerid, 0);
-				GameTextForPlayer(playerid, "~r~Nie atakuj", 2500, 1);
-				SetTimerEx("FreezePlayer", 2500, false, "i", playerid);
 			}
 		}
 	}
