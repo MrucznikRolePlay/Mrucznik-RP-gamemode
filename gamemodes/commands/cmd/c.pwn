@@ -73,6 +73,12 @@ YCMD:c(playerid, params[], help)
             format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Odwo³ujê dodatkowe wsparcie - {FFFFFF}CODE 4", PatrolInfo[pat][patname]);
             SendTeamMessage(1, COLOR_ALLDEPT, str);
         }
+        else if(strcmp(var, "5") == 0)
+        {
+            PatrolInfo[pat][patstan] = 1;
+            format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{6A5ACD} Wolna jednostka w terenie - {FFFFFF}CODE 5", PatrolInfo[pat][patname]);
+            SendTeamMessage(1, COLOR_ALLDEPT, str);
+        }
         else if(strcmp(var, "6") == 0)
         {
             PatrolInfo[pat][patstan] = 3;

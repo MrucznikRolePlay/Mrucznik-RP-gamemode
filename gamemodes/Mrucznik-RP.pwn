@@ -6644,15 +6644,16 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 					ParachuteHit[playerid]++;
 					if(ParachuteHit[playerid] >= 5)
 					{
-						GameTextForPlayer(playerid, "~y~Spadochron wyrzucony", 5000, 1);
 						ParachuteHit[playerid] = 0;
-						RemoveWeaponFromSlot(playerid, 11);
 						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
+						RemoveWeaponFromSlot(playerid, 11);
+						GameTextForPlayer(playerid, "~y~Spadochron wyrzucony", 5000, 1);
 					}
 					else
 					{
-						SendClientMessage(playerid, COLOR_PANICRED, "Schowaj spadochron zanim w coœ uderzysz.");
 						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
+						iddialog[playerid] = DIALOG_MSGBOX;
+        				return ShowPlayerDialog(playerid, iddialog[playerid], DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Schowaj spadochron zanim w coœ uderzysz.", "OK", ""); 
 					}
 				}
 			}

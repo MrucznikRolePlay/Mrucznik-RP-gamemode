@@ -10401,7 +10401,7 @@ Patrol_HideZones(playerid)
 
 GPSMode(playerid, bool:red = false)
 {
-	new string[128], sendername[MAX_PLAYER_NAME];
+	new string[144], sendername[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, sendername, sizeof(sendername));
 
 	if(PDGPS == playerid)
@@ -10415,7 +10415,7 @@ GPSMode(playerid, bool:red = false)
 
 	if(red)
 	{
-		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie! - CODE RED"));
+		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("- odwo³ujê RED") : ("potrzebne wsparcie! - CODE RED"));
 		PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
 	}
 	else
