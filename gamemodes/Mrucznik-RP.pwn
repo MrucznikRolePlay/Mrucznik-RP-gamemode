@@ -890,22 +890,6 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 
 public OnVehicleDamageStatusUpdate(vehicleid, playerid)
 {
-	if(GetPlayerWeapon(playerid) == 46)
-	{
-		SendClientMessage(playerid, COLOR_PANICRED, "Schowaj spadochron zanim w coœ uderzysz.");
-		SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu lub zabraæ
-		/*new Float:vhealth;
-		GetVehicleHealth(vehicleid, vhealth);
-		if((vhealth + 5) < 1000) 
-		{
-			SetVehicleHealth(vehicleid, (vhealth + 5));
-			if(VehicleUID[vehicleid][vUID] != 0)
-			{
-				CarData[VehicleUID[vehicleid][vUID]][c_HP] = (vhealth + 5);
-			}
-		}*/
-		return 0;
-	}
     return 1;
 }
 
@@ -6655,6 +6639,31 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"sliderope", 0);
 				TogglePlayerControllable(playerid, 1);
+			}
+		}
+		if(PRESSED(KEY_FIRE))
+		{
+			if(GetPlayerWeapon(playerid) == 46)
+			{
+				new vehicleid = GetClosestCar(playerid, 2.5);
+				if(vehicleid != -1)
+				{
+					new string[144];
+					format(string, sizeof(string), "Pojazd w pobli¿u: %d", vehicleid); //debug
+					SendClientMessage(playerid, COLOR_PANICRED, string);
+					new Float:vhealth;
+        			SendClientMessage(playerid, COLOR_PANICRED, "Schowaj spadochron zanim w coœ uderzysz.");
+					//SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu lub zabraæ
+					GetVehicleHealth(vehicleid, vhealth);
+					if((vhealth + 5) < 1000) 
+					{
+						SetVehicleHealth(vehicleid, (vhealth + 5));
+						if(VehicleUID[vehicleid][vUID] != 0)
+						{
+							CarData[VehicleUID[vehicleid][vUID]][c_HP] = (vhealth + 5);
+						}
+					}
+				}
 			}
 		}
 	}
