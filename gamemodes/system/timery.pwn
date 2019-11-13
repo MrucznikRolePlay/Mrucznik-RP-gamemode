@@ -2606,7 +2606,7 @@ public JednaSekundaTimer()
 							SetPlayerPosEx(i, x-0.5, y-0.5, z);
 							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
 							TogglePlayerControllable(i, 0);
-							SetTimerEx("FreezePlayer", 2500, false, "i", i);
+							if(PlayerInfo[i][pBW] == 0) SetTimerEx("FreezePlayer", 2000, false, "i", i);
 						}
 					}
 					else
