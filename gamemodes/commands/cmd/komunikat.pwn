@@ -30,17 +30,18 @@
 
 YCMD:komunikat(playerid, params[], help)
 {
-    new string[256], sendername[MAX_PLAYER_NAME];
+    new string[256], sendername[MAX_PLAYER_NAME], org;
     GetPlayerName(playerid, sendername, sizeof(sendername));
     if(!IsPlayerConnected(playerid)) return 1;
-    if(!GetPlayerOrg(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w ¿adnej rodzinie!");
+    org = GetPlayerOrg(playerid);
+    if(!org) return sendErrorMessage(playerid, "Nie jesteœ w ¿adnej rodzinie!");
     if(PlayerInfo[playerid][pRank] < 5) 
     {
         return sendErrorMessage(playerid, "Musisz mieæ 5 range aby tego u¿ywaæ !");
     }
     else
     {
-        if(PlayerInfo[playerid][pMember] == 21 && PlayerInfo[playerid][pRank] < 4) return sendErrorMessage(playerid, "Musisz mieæ 4 range aby tego u¿ywaæ !"); //dla Ammunation Willowfield slot 21
+        if(org == 21 && PlayerInfo[playerid][pRank] < 4) return sendErrorMessage(playerid, "Musisz mieæ 4 range aby tego u¿ywaæ !"); //dla Ammunation Willowfield slot 21
     }
     if(isnull(params)) return sendErrorMessage(playerid, "U¿yj: /komunikat [tekst]");
     if(CMDKomunikat == 1) return sendErrorMessage(playerid, "Komunikat by³ u¿yty przed chwil¹!");

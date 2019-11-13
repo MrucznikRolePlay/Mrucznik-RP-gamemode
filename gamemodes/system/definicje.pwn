@@ -80,7 +80,7 @@
 //specshow
 #define INVALID_SPECTATE_ID 9999
 //PAèDZIOCH
-#define ROPELENGTH 120 //D≥ugoúÊ maksymalna liny (ingame metr)
+#define ROPELENGTH 100 //D≥ugoúÊ maksymalna liny (ingame metr)
 
 #define OFFSETZ 12
 #define DUR 250

@@ -6634,7 +6634,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
 				TogglePlayerControllable(playerid, 1);
-				SetPVarInt(playerid,"roped",0);
+				SetPlayerVelocity(playerid,0,0,0);
 				SetPVarInt(playerid,"chop_id",0);
 				for(new i=0;i<=ROPELENGTH;i++)
 				{
@@ -6660,8 +6660,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 					else
 					{
 						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
-						iddialog[playerid] = DIALOG_MSGBOX;
-        				return ShowPlayerDialog(playerid, iddialog[playerid], DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Schowaj spadochron zanim w coœ uderzysz.", "OK", ""); 
+        				return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Schowaj spadochron zanim w coœ uderzysz."); 
 					}
 				}
 			}

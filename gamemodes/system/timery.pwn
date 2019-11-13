@@ -914,7 +914,7 @@ public syncanim(playerid)
 {
 	if(GetPVarInt(playerid,"roped") == 0) return 0;
  	SetTimerEx("syncanim",DUR,0,"i",playerid);
-  	ApplyAnimation(playerid,"ped","abseil",4.0,0,0,0,1,0);
+  	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
    	return 1;
 }
 
@@ -3630,8 +3630,9 @@ public SlideRope(playerid)
 	    new Float:Y;
 	    new Float:Z;
 	    GetPlayerPos(playerid, X, Y, Z);
-  	 	ApplyAnimation(playerid,"ped","abseil",4.0,0,0,0,1,0);
-	    SetPlayerPos(playerid, X, Y, Z - 3.00);
+  	 	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
+	    SetPlayerPos(playerid, X, Y, Z - 2.00);
+		SetPlayerVelocity(playerid,0,0,0);
 	    SetTimerEx("SlideRope", 1000, 0, "i", playerid);
  	}
 	return 1;
