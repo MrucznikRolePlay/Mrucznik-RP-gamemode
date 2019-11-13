@@ -6632,6 +6632,15 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	else
 	{
+		if(newkeys & KEY_FIRE)
+		{
+			if(GetPVarInt(playerid,"sliderope") == 1)
+			{
+				ClearAnimations(playerid);
+				SetPVarInt(playerid,"sliderope", 0);
+				TogglePlayerControllable(playerid, 1);
+			}
+		}
 		if(PRESSED(KEY_FIRE))
 		{
 			if(GetPlayerWeapon(playerid) == 46)

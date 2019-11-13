@@ -30,9 +30,22 @@
 
 CMD:lina(playerid, cmdtext[])
 {
-    /*
-    if( IsACop(playerid) && GetPVarInt(playerid,"roped") == 0 && GetPlayerVehicleSeat(playerid) != 0 && IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetPlayerVehicleID(playerid)))
+    if(IsACop(playerid) && IsPlayerInAnyVehicle(playerid) && (GetVehicleModel(GetPlayerVehicleID(playerid)) == 497 || GetVehicleModel(GetPlayerVehicleID(playerid)) == 417 || GetVehicleModel(GetPlayerVehicleID(playerid)) == 563) && GetPlayerVehicleSeat(playerid) != 0 && GetPVarInt(playerid,"sliderope") == 0)
     {
+        SetPVarInt(playerid,"sliderope",1);
+        RemovePlayerFromVehicle(playerid);
+        ApplyAnimation(playerid,"ped","abseil",4.0,0,0,0,0,0);
+        TogglePlayerControllable(playerid, 0);
+        SetTimerEx("SlideRope", 1000, 0, "u", playerid);
+        GameTextForPlayer(playerid, "~b~Opuszczasz sie na linie!~n~~n~~g~Aby zakonczyc wcisnij LPM!", 3000, 5);
+    }
+    else
+    {
+        ShowPlayerDialogEx(playerid, -1, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Nie jesteœ w ¿adnym z pojazdów b¹dŸ helikopterze policyjnym, lub opuszczasz siê ju¿ na linie!", "OK", "");
+    }
+
+    /*
+    
     	GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
      	MapAndreas_FindZ_For2DCoord(pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][3]);
       	pl_pos[playerid][4] = floatsub(pl_pos[playerid][2],pl_pos[playerid][3]);

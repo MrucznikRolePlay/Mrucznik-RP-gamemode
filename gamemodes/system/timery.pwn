@@ -3618,6 +3618,21 @@ public closeGate(i, j, playerid)
     return 1;
 }
 
+forward SlideRope(playerid);
+public SlideRope(playerid)
+{
+    if(GetPVarInt(playerid,"sliderope") == 1)
+    {
+		new Float:X;
+	    new Float:Y;
+	    new Float:Z;
+	    GetPlayerPos(playerid, X, Y, Z);
+  	 	ApplyAnimation(playerid,"ped","abseil",4.0,0,0,0,1,0);
+	    SetPlayerPos(playerid, X, Y, Z - 3.00);
+	    SetTimerEx("SlideRope", 1000, 0, "i", playerid);
+ 	}
+	return 1;
+}
 
 
 //EOF
