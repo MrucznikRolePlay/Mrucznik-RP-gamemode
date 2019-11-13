@@ -2604,7 +2604,6 @@ public JednaSekundaTimer()
 							SetPlayerInterior(i, GetPlayerInterior(cop));
 							GetPlayerPos(cop, x, y, z);
 							SetPlayerPosEx(i, x-0.5, y-0.5, z);
-							TogglePlayerControllable(i, 1);
 							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
 						}
 					}
