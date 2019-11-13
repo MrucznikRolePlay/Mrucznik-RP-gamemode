@@ -39,7 +39,7 @@ CMD:lina(playerid, cmdtext[])
         SetPVarInt(playerid,"roped",1);
         SetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],floatsub(pl_pos[playerid][2],2));
         SetPlayerVelocity(playerid,0,0,0);
-        GameTextForPlayer(playerid, "~b~Opuszczasz sie na linie!~n~~n~~g~Aby zakonczyc wcisnij LPM!", 3000, 5);
+        GameTextForPlayer(playerid, "~n~~n~~n~~b~Opuszczasz sie na linie!~n~~g~Aby zakonczyc wcisnij LPM!", 3000, 5);
         for(new i=0;i!=10;i++) ApplyAnimation(playerid,"ped","abseil",4.0,0,0,0,1,0);
         for(new i=0;i<=pl_pos[playerid][4];i++)
         {
