@@ -2372,7 +2372,18 @@ UsunBron(playerid)
 	}
 	return 0;
 }
-stock removePlayerWeapon(playerid, weaponid) return SetPlayerAmmo(playerid, weaponid, -1);
+stock RemoveWeaponFromSlot(playerid, iWeaponSlot) 
+{
+    new wps[13][2];
+    for(new i = 0; i < 13; i++) GetPlayerWeaponData(playerid, i, wps[i][0], wps[i][1]);
+
+    wps[iWeaponSlot][0] = 0;
+
+    ResetPlayerWeapons(playerid);
+
+    for(new i = 0; i < 13; i++) GivePlayerWeapon(playerid, wps[i][0], wps[i][1]);
+
+}
 DajBronieFrakcyjne(playerid)
 {
 	if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
