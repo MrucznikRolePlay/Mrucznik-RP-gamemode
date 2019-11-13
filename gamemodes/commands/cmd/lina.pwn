@@ -55,7 +55,7 @@ CMD:lina(playerid, cmdtext[])
     {
         GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
      	pl_pos[playerid][4] = floatsub(pl_pos[playerid][2],pl_pos[playerid][3]);
-        if(pl_pos[playerid][4] >= ROPELENGTH) return SendClientMessage(playerid,0xAA3333AA,"Jesteœ zbyt wysoko.");
+        if(pl_pos[playerid][4] > ROPELENGTH) return ShowPlayerDialog(playerid, DIALOG_MSGBOX, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Jesteœ zbyt wysoko by opuœciæ siê na linie.", "OK", ""); 
         if(pl_pos[playerid][4] <= 2) return RemovePlayerFromVehicle(playerid);
         SetPVarInt(playerid,"roped",1);
         SetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],floatsub(pl_pos[playerid][2],2));
@@ -68,5 +68,9 @@ CMD:lina(playerid, cmdtext[])
         }
        	SetTimerEx("syncanim",DUR,0,"i",playerid);
 	}
+    else
+    {
+        return ShowPlayerDialog(playerid, DIALOG_MSGBOX, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Nie jesteœ w ¿adnym z pojazdów b¹dŸ helikopterze policyjnym, lub opuszczasz siê ju¿ na linie!", "OK", ""); 
+    }
 	return 1;
 }
