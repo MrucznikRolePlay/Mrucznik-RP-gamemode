@@ -667,7 +667,6 @@ InitCommands()
 
 static Aliases()
 {
-	Command_AddAltNamed("staty2", "stats2"); 
 	//autorzy
 	Command_AddAltNamed("autorzy", "tworcy"); 
 	//tognewbie
@@ -1190,8 +1189,10 @@ static Aliases()
 	Command_AddAltNamed("startujlekcje", "startegzamin");
 
 	//staty
-	Command_AddAltNamed("staty", "stats");
+	/*Command_AddAltNamed("staty", "stats");
 	Command_AddAltNamed("staty", "statystyki");
+	Command_AddAltNamed("staty2", "stats2"); */ //na razie zawieszamy stats do czasu dopracowania tego textdrawa. Zgodnie z decyzj¹ 0Verte.
+	Command_AddAltNamed("staty2", "stats");
 
 	//stopanim
 	Command_AddAltNamed("stopanim", "stopani");

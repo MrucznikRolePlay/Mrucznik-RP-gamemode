@@ -10024,24 +10024,6 @@ Kolczatka_Delete(id)
     return 1;
 }
 
-forward GetClosestVehicleFromPlayer(playerid, Float:dis);
-public GetClosestVehicleFromPlayer(playerid, Float:dis)
-{
-    new veh = -1;
-    new Float:x, Float:y, Float:z;
-    GetPlayerPos(playerid, x, y, z);
-    for(new i = 1; i < MAX_VEHICLES; i++)
-    {
-        new Float:distance = GetVehicleDistanceFromPoint(i, x, y, z);
-        if(distance < dis)
-        {
-            dis = distance;
-            veh = i;
-        }
-    }
-    return veh;
-}
-
 public OnPlayerEnterSpikes(playerid)
 {
     new panels, doors, lights, tires, veh = GetPlayerVehicleID(playerid);
@@ -12354,6 +12336,30 @@ stock IsVehicleRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
     if(vehicleid == INVALID_VEHICLE_ID) return 0;
     return GetVehicleDistanceFromPoint(vehicleid, x, y, z) <= range;
 }  
+
+stock GetClosestCar(playerid, Float:Prevdist=5.0)
+{
+	new Prevcar = -1;
+	for(new carid = 0; carid < MAX_VEHICLES; carid++)
+	{
+		new Float:Dist = GetDistanceToCar(playerid,carid);
+		if((Dist < Prevdist))
+		{
+			Prevdist = Dist;
+			Prevcar = carid;
+		}
+	}
+	return Prevcar;
+}
+
+stock GetDistanceToCar(playerid, carid)
+{
+	new Float:x1,Float:y1,Float:z1,Float:x2,Float:y2,Float:z2,Float:Dis;
+	if (!IsPlayerConnected(playerid))return -1;
+	GetPlayerPos(playerid,x1,y1,z1);GetVehiclePos(carid,x2,y2,z2);
+	Dis = floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
+	return floatround(Dis);
+}
 
 //--------------------------------------------------
 
