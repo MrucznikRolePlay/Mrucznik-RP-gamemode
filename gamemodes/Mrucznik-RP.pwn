@@ -6648,7 +6648,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				new vehicleid = GetClosestCar(playerid, 2.5);
 				if(vehicleid != -1)
 				{
-					new string[144]
+					new string[144];
 					format(string, sizeof(string), "Pojazd w pobli¿u: %d", vehicleid); //debug
 					SendClientMessage(playerid, COLOR_PANICRED, string);
 					new Float:vhealth;
