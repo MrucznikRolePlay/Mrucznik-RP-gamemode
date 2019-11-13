@@ -941,7 +941,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
 	//PAèDZIOCH
-	if(IsAHeliModel(GetVehicleModel(vehicleid)) && ispassenger)
+	if((GetVehicleModel(vehicleid) == 497 || GetVehicleModel(vehicleid) == 417 || GetVehicleModel(vehicleid) == 563) && ispassenger)
  	{
   		SetPVarInt(playerid,"chop_id",GetPlayerVehicleID(playerid));
     	SetPVarInt(playerid,"roped",0);
@@ -1800,7 +1800,6 @@ public OnPlayerDeath(playerid, killerid, reason)
      		DestroyDynamicObject(r0pes[playerid][i]);
        	}
         SetPVarInt(playerid,"roped",0);
-        DisablePlayerCheckpoint(playerid);
 	}
 
     //IBIZA
@@ -2870,18 +2869,6 @@ public OnPlayerEnterCheckpoint(playerid)
 	    SetTimerEx("PizzaJobTimer01", 4000, false, "i", playerid);
 	    GameTextForPlayer(playerid, "KLIENT ZABIERA PIZZE", 4000, 3);
 	    TogglePlayerControllable(playerid,0);
-	}
-	if(GetPVarInt(playerid,"roped") == 1)
-    {
-   		SetPVarInt(playerid,"roped",0);
-        SetPVarInt(playerid,"chop_id",0);
-        ClearAnimations(playerid);
-        TogglePlayerControllable(playerid,0);
-        TogglePlayerControllable(playerid,1);
-        for(new i=0;i<=ROPELENGTH;i++)
-        {
-        	DestroyDynamicObject(r0pes[playerid][i]);
-        }
 	}
 
     TJD_CallCheckpoint(playerid, GetPlayerVehicleID(playerid));
@@ -6634,11 +6621,17 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	{
 		if(newkeys & KEY_FIRE)
 		{
-			if(GetPVarInt(playerid,"sliderope") == 1)
+			if(GetPVarInt(playerid,"roped") == 1)
 			{
 				ClearAnimations(playerid);
-				SetPVarInt(playerid,"sliderope", 0);
+				SetPVarInt(playerid,"roped", 0);
 				TogglePlayerControllable(playerid, 1);
+				SetPVarInt(playerid,"roped",0);
+				SetPVarInt(playerid,"chop_id",0);
+				for(new i=0;i<=ROPELENGTH;i++)
+				{
+					DestroyDynamicObject(r0pes[playerid][i]);
+				}
 			}
 		}
 		if(PRESSED(KEY_FIRE))
@@ -6701,9 +6694,7 @@ public OnVehicleDeath(vehicleid, killerid)
     	{
      		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
        		{
-         		DisablePlayerCheckpoint(i);
           		SetPVarInt(i,"roped",0);
-            	DisablePlayerCheckpoint(i);
              	ClearAnimations(i);
               	TogglePlayerControllable(i,1);
                	for(new j=0;j<=ROPELENGTH;j++)
