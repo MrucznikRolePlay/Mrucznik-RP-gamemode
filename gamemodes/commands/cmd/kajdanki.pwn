@@ -114,7 +114,9 @@ YCMD:kajdanki(playerid, params[], help)
                             }
                         } else
                         {
-                            RunCommand(playerid, "/rozkuj",  giveplayerid);
+                            new str[32];
+                            valstr(str, giveplayerid);
+                            RunCommand(playerid, "/zwolnij",  str);
                         }
                     } else
                     {
