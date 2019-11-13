@@ -6647,6 +6647,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 						GameTextForPlayer(playerid, "~y~Spadochron wyrzucony", 5000, 1);
 						removePlayerWeapon(playerid, 46);
 						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
+						ParachuteHit[playerid] = 0;
 					}
 					else
 					{
