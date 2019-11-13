@@ -6645,7 +6645,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		{
 			if(GetPlayerWeapon(playerid) == 46)
 			{
-				new vehicleid = GetClosestCar(playerid, 2.5);
+				new vehicleid = GetClosestCar(playerid, 3.0);
 				if(vehicleid != -1)
 				{
 					new string[144];
@@ -6653,7 +6653,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 					SendClientMessage(playerid, COLOR_PANICRED, string);
 					new Float:vhealth;
         			SendClientMessage(playerid, COLOR_PANICRED, "Schowaj spadochron zanim w coœ uderzysz.");
-					//SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu lub zabraæ
+					SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu lub zabraæ
 					GetVehicleHealth(vehicleid, vhealth);
 					if((vhealth + 5) < 1000) 
 					{
