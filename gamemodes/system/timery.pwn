@@ -2605,6 +2605,8 @@ public JednaSekundaTimer()
 							GetPlayerPos(cop, x, y, z);
 							SetPlayerPosEx(i, x-0.5, y-0.5, z);
 							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
+							TogglePlayerControllable(i, 0);
+							SetTimerEx("FreezePlayer", 2500, false, "i", i);
 						}
 					}
 					else
