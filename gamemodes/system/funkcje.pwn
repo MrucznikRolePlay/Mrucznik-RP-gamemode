@@ -319,7 +319,7 @@ public OznaczCzitera(playerid)
 	return 1;
 }
 
-GetFreeVehicleSeat(vehicleid)
+/*GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
 	foreach(new i : Player)
@@ -336,6 +336,26 @@ GetFreeVehicleSeat(vehicleid)
 	else if(Seat[1] == false) return 1;
 	else if(Seat[2] == false) return 2;
 	else if(Seat[3] == false) return 3;
+	else return -1;
+}*/
+
+GetFreeVehicleSeatForArrestant(vehicleid)
+{
+	new bool:Seat[4];
+	foreach(new i : Player)
+	{
+		if(IsPlayerInVehicle(i,vehicleid))
+		{
+			if(GetPlayerVehicleSeat(i) == 3) Seat[3] = true;
+			else if(GetPlayerVehicleSeat(i) == 2) Seat[2] = true;
+			else if(GetPlayerVehicleSeat(i) == 1) Seat[1] = true;
+			else if(GetPlayerVehicleSeat(i) == 0) Seat[0] = true;
+		}
+	}
+	if(Seat[3] == false) return 3;
+	else if(Seat[2] == false) return 2;
+	else if(Seat[1] == false) return 1;
+	else if(Seat[0] == false) return 0;
 	else return -1;
 }
 
@@ -2352,6 +2372,7 @@ UsunBron(playerid)
 	}
 	return 0;
 }
+stock removePlayerWeapon(playerid, weaponid) return SetPlayerAmmo(playerid, weaponid, 0);
 DajBronieFrakcyjne(playerid)
 {
 	if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)

@@ -6648,20 +6648,16 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				new vehicleid = GetClosestCar(playerid, 3.0);
 				if(vehicleid != -1)
 				{
-					new string[144];
-					format(string, sizeof(string), "Pojazd w pobli¿u: %d", vehicleid); //debug
-					SendClientMessage(playerid, COLOR_PANICRED, string);
-					new Float:vhealth;
-        			SendClientMessage(playerid, COLOR_PANICRED, "Schowaj spadochron zanim w coœ uderzysz.");
-					SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu lub zabraæ
-					GetVehicleHealth(vehicleid, vhealth);
-					if((vhealth + 5) < 1000) 
+					ParachuteHit[playerid]++;
+					if(ParachuteHit[playerid] >= 5)
 					{
-						SetVehicleHealth(vehicleid, (vhealth + 5));
-						if(VehicleUID[vehicleid][vUID] != 0)
-						{
-							CarData[VehicleUID[vehicleid][vUID]][c_HP] = (vhealth + 5);
-						}
+						GameTextForPlayer(playerid, "~y~Spadochron wyrzucony", 5000, 1);
+						removePlayerWeapon(playerid, 46);
+					}
+					else
+					{
+						SendClientMessage(playerid, COLOR_PANICRED, "Schowaj spadochron zanim w coœ uderzysz.");
+						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
 					}
 				}
 			}

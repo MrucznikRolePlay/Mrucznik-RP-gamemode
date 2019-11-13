@@ -143,6 +143,8 @@ new afk_timer[MAX_PLAYERS];
 new MaTazer[MAX_PLAYERS];
 new TazerAktywny[MAX_PLAYERS];
 ///
+new ParachuteHit[MAX_PLAYERS];
+//13.11.2019
 //17.01.2015
 new TICKS_MySQLRefresh=0;
 new bool:TICKS_Second=false;
@@ -1391,6 +1393,8 @@ ZerujZmienne(playerid)
     MRP_PremiumHours[playerid]=0;
     InitMyItems[playerid] = false;
     PlayerMC[playerid] = 0;
+
+	ParachuteHit[playerid] = 0;
 
     for(new i=0;i<MAX_CAR_SLOT;i++) PlayerInfo[playerid][pCars][i] = 0;
 

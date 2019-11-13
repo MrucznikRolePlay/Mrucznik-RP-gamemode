@@ -3351,7 +3351,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            SkutyGracz[PDkuje[playerid]] = playerid;
 				ClearAnimations(playerid);
                 SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 		    }
 		    if(!response)
 		    {
@@ -3379,7 +3379,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            uzytekajdanki[PDkuje[playerid]] = 1;
 		            SkutyGracz[PDkuje[playerid]] = playerid;
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-					SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+					SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 				}
 				else if(cops == 2)
 				{
@@ -3403,7 +3403,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            uzytekajdanki[PDkuje[playerid]] = 1;
 			            SkutyGracz[PDkuje[playerid]] = playerid;
 						SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-						SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+						SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 				    }
 				}
 				else
@@ -3437,7 +3437,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            SkutyGracz[PDkuje[playerid]] = playerid;
 				ClearAnimations(playerid);
                 SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 		    }
 		    if(!response)
 		    {

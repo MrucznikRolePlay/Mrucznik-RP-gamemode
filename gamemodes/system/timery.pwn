@@ -2611,7 +2611,7 @@ public JednaSekundaTimer()
                         new veh_zakuty = GetPlayerVehicleID(i);
                         if(veh != veh_zakuty) 
                         {
-                            new seat = GetFreeVehicleSeat(veh);
+                            new seat = GetFreeVehicleSeatForArrestant(veh);
                             if(seat != -1)
                             {
                                 PutPlayerInVehicleEx(i, veh, seat);
