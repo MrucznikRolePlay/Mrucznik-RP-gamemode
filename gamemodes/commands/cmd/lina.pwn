@@ -49,7 +49,8 @@ CMD:lina(playerid, cmdtext[])
 	}
     else
     {
-        return ShowPlayerDialog(playerid, DIALOG_MSGBOX, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Nie jesteœ w ¿adnym z pojazdów b¹dŸ helikopterze policyjnym, na s³u¿bie lub opuszczasz siê ju¿ na linie!", "OK", ""); 
+        iddialog[playerid] = DIALOG_MSGBOX;
+        return ShowPlayerDialog(playerid, iddialog[playerid], DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Nie jesteœ w ¿adnym z pojazdów b¹dŸ helikopterze, na s³u¿bie lub opuszczasz siê ju¿ na linie!", "OK", ""); 
     }
 	return 1;
 }
