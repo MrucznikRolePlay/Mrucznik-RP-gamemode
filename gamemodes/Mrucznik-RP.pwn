@@ -6639,14 +6639,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				new vehid;
 				if((vehid = GetClosestVehicleFromPlayer(playerid, 2.5)) != -1)
 				{
-					new Float:vhealth, Float:slx, Float:sly, Float:slz;
-					GetPlayerPos(playerid, slx, sly, slz);
-					SetPlayerPosEx(playerid, slx, sly, slz+3);
-					PlayerPlaySound(playerid, 1130, slx, sly, slz+3);
+					new Float:vhealth;
         			SendClientMessage(playerid, COLOR_PANICRED, "Schowaj spadochron zanim w coœ uderzysz.");
-					SetPlayerArmedWeapon(playerid, 0);
+					//SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu lub zabraæ
 					GetVehicleHealth(vehid, vhealth);
-					SetVehicleHealth(vehid, vhealth+5);
+					if((vhealth + 5) < 1000) SetVehicleHealth(vehid, vhealth+5);
 				}
 			}
 		}

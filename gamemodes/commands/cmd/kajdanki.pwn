@@ -114,7 +114,7 @@ YCMD:kajdanki(playerid, params[], help)
                             }
                         } else
                         {
-                            sendErrorMessage(playerid, "Ten gracz ma ju¿ na sobie kajdanki");
+                            RunCommand(playerid, "/rozkuj",  giveplayerid);
                         }
                     } else
                     {
