@@ -2598,12 +2598,15 @@ public JednaSekundaTimer()
 				{
 					if(GetPlayerState(cop) == 1)
 					{
-						SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
-						SetPlayerInterior(i, GetPlayerInterior(cop));
-						GetPlayerPos(cop, x, y, z);
-						SetPlayerPosEx(i, x-0.5, y-0.5, z);
-						TogglePlayerControllable(i, 0);
-						SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
+						if(!ProxDetectorS(3.5, cop, i))
+						{
+							SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
+							SetPlayerInterior(i, GetPlayerInterior(cop));
+							GetPlayerPos(cop, x, y, z);
+							SetPlayerPosEx(i, x-0.5, y-0.5, z);
+							TogglePlayerControllable(i, 1);
+							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
+						}
 					}
 					else
 					{
@@ -2616,7 +2619,6 @@ public JednaSekundaTimer()
                             {
                                 PutPlayerInVehicleEx(i, veh, seat);
                                 TogglePlayerControllable(i, 0);
-                                SetPVarInt(i, "kajdany_siedzenie", seat);
                             }
                         }
 					}

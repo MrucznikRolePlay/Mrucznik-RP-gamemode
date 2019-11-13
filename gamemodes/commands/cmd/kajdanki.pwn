@@ -92,7 +92,6 @@ YCMD:kajdanki(playerid, params[], help)
                                 //czynnoœci
                                 PlayerInfo[giveplayerid][pBW] = 0;
                                 zakuty[giveplayerid] = 1;
-                                TogglePlayerControllable(giveplayerid, 0);
                                 uzytekajdanki[playerid] = 1;
                                 PDkuje[giveplayerid] = playerid;
                                 SkutyGracz[playerid] = giveplayerid;

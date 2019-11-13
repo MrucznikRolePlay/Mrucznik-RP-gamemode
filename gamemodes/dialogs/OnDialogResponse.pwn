@@ -3346,7 +3346,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
 				zakuty[playerid] = 1;
-	            TogglePlayerControllable(playerid, 0);
 	            uzytekajdanki[PDkuje[playerid]] = 1;
 	            SkutyGracz[PDkuje[playerid]] = playerid;
 				ClearAnimations(playerid);
@@ -3375,7 +3374,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 					SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
 					zakuty[playerid] = 1;
-		            TogglePlayerControllable(playerid, 0);
 		            uzytekajdanki[PDkuje[playerid]] = 1;
 		            SkutyGracz[PDkuje[playerid]] = playerid;
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
@@ -3399,7 +3397,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 						SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
 						zakuty[playerid] = 1;
-			            TogglePlayerControllable(playerid, 0);
 			            uzytekajdanki[PDkuje[playerid]] = 1;
 			            SkutyGracz[PDkuje[playerid]] = playerid;
 						SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);

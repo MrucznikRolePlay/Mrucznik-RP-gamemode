@@ -1742,6 +1742,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
+
 	return 0;
 }
 
@@ -6656,6 +6657,12 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
         				return ShowPlayerDialog(playerid, iddialog[playerid], DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Schowaj spadochron zanim w coœ uderzysz.", "OK", ""); 
 					}
 				}
+			}
+			if(zakuty[playerid] > 0)
+			{
+				TogglePlayerControllable(playerid, 0);
+				GameTextForPlayer(playerid, "~r~Nie atakuj", 2500, 1);
+				SetTimerEx("FreezePlayer", 2500, false, "i", playerid);
 			}
 		}
 	}
