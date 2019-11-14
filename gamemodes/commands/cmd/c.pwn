@@ -42,6 +42,9 @@ YCMD:c(playerid, params[], help)
             2 - wsparcie
             3 - poœcig
             4 - ranny
+            5 - wolna jednostka
+            6 - interwencja poza pojazdem
+            7 - zakoñczenie dzia³añ
         */
         if(strcmp(var, "red", true) == 0)
         {
