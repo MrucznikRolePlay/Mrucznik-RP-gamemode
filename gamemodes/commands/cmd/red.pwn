@@ -65,7 +65,9 @@ YCMD:red(playerid, params[], help)
     }
     else
     {
-        patrolnick = GetNick(playerid);   
+        new nick[MAX_PLAYER_NAME];
+    	GetPlayerName(playerid, nick, sizeof(nick));
+        patrolnick = nick;   
     }
 
     if(PDGPS == playerid)

@@ -126,7 +126,7 @@ public CheckSobeitPlayers()
 
 stock GetNick(playerid)
 {
-	new nick[24];
+	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, sizeof(nick));
 	return nick;
 }
