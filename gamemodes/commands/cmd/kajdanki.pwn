@@ -34,14 +34,15 @@ YCMD:kajdanki(playerid, params[], help)
     {
         if(IsACop(playerid) || (IsABOR(playerid) && PlayerInfo[playerid][pRank] >= 2))
         {
+            new giveplayerid;
+            if(sscanf(params, "k<fix>", giveplayerid))
+            {
+                sendTipMessage(playerid, "U¿yj /kajdanki [ID_GRACZA]");
+                return 1;
+            }
+
             if(uzytekajdanki[playerid] != 1)
             {
-                new giveplayerid;
-                if(sscanf(params, "k<fix>", giveplayerid))
-                {
-                    sendTipMessage(playerid, "U¿yj /kajdanki [ID_GRACZA]");
-                    return 1;
-                }
                 if(IsACop(playerid))
                 {
                     if(OnDuty[playerid] == 0)
@@ -91,13 +92,12 @@ YCMD:kajdanki(playerid, params[], help)
                                 //czynnoœci
                                 PlayerInfo[giveplayerid][pBW] = 0;
                                 zakuty[giveplayerid] = 1;
-                                TogglePlayerControllable(giveplayerid, 0);
                                 uzytekajdanki[playerid] = 1;
                                 PDkuje[giveplayerid] = playerid;
                                 SkutyGracz[playerid] = giveplayerid;
                                 ClearAnimations(giveplayerid);
                                 SetPlayerSpecialAction(giveplayerid, SPECIAL_ACTION_CUFFED);
-                                SetPlayerAttachedObject(giveplayerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+                                SetPlayerAttachedObject(giveplayerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
                                 SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
                                 SetTimerEx("Kajdanki_debug", 1000, 0, "d", giveplayerid);
                                 return 1;
@@ -112,9 +112,12 @@ YCMD:kajdanki(playerid, params[], help)
                                 SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
                                 return 1;
                             }
-                        } else
+                        }
+                        else
                         {
-                            sendErrorMessage(playerid, "Ten gracz ma ju¿ na sobie kajdanki");
+                            new str[32];
+                            valstr(str, giveplayerid);
+                            RunCommand(playerid, "/rozkuj",  str);
                         }
                     } else
                     {
@@ -126,7 +129,9 @@ YCMD:kajdanki(playerid, params[], help)
                 }
             } else
             {
-                sendErrorMessage(playerid, "U¿ywasz ju¿ swoje kajdanki");
+                new str[32];
+                valstr(str, giveplayerid);
+                RunCommand(playerid, "/rozkuj",  str);
                 return 1;
             }
         } else

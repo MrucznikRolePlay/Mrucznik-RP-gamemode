@@ -42,7 +42,7 @@ YCMD:sluzba(playerid, params[], help)
         }
         if(IsACop(playerid) && OnDutyCD[playerid] == 1)
         {
-            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /dutycd lub /dutysbi !");
+            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /dutycd !");
             return 1;
         }
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
@@ -50,6 +50,13 @@ YCMD:sluzba(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
 			return 1;
 		}
+
+        if(PlayerInfo[playerid][pUniform] == 0)
+        {
+            //SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+            sendTipMessage(playerid, "Nie masz skina frakcyjnego, u¿yj /fskin !");
+            return 1;
+        }
 		
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby wzi¹æ s³u¿be musisz byæ pieszo!");
         GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -207,7 +214,7 @@ YCMD:sluzba(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie ERS, nie bêdziesz widzia³ zg³oszeñ.");
                     JobDuty[playerid] = 0;
                     Medics -= 1;
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
                 }
                 else
@@ -215,7 +222,7 @@ YCMD:sluzba(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie ERS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
                     JobDuty[playerid] = 1;
                     Medics += 1;
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
                     SetPlayerToTeamColor(playerid);
                 }
             }
@@ -332,11 +339,6 @@ YCMD:sluzba(playerid, params[], help)
         else
         {
             sendTipMessage(playerid, "Nie jesteœ policjantem !");
-        }
-        if(PlayerInfo[playerid][pUniform] == 0)
-        {
-            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-            sendTipMessage(playerid, "Nie masz skina frakcyjnego!");
         }
     }
     return 1;

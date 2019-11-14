@@ -941,7 +941,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
 	//PADZIOCH
-	if(IsAHeliModel(GetVehicleModel(vehicleid)) && ispassenger)
+	if((GetVehicleModel(vehicleid) == 497 || GetVehicleModel(vehicleid) == 417 || GetVehicleModel(vehicleid) == 563) && ispassenger)
  	{
   		SetPVarInt(playerid,"chop_id",GetPlayerVehicleID(playerid));
     	SetPVarInt(playerid,"roped",0);
@@ -1669,6 +1669,13 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
+	if(zakuty[playerid] > 0)
+	{
+		TogglePlayerControllable(playerid, 0);
+		GameTextForPlayer(playerid, "~r~Nie atakuj", 3500, 1);
+		SetTimerEx("FreezePlayer", 3500, false, "i", playerid);
+	}
+
 	Log(damageLog, INFO, "%s zg³asza zranienie gracza %s o %fhp broni¹ %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
@@ -1742,6 +1749,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
+
 	return 0;
 }
 
@@ -1800,7 +1808,6 @@ public OnPlayerDeath(playerid, killerid, reason)
      		DestroyDynamicObject(r0pes[playerid][i]);
        	}
         SetPVarInt(playerid,"roped",0);
-        DisablePlayerCheckpoint(playerid);
 	}
 
     //IBIZA
@@ -2496,7 +2503,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_GROOVE: //12
 						{
-          					SetPlayerPosEx(playerid, 2777.9751,-1945.4319,13.5469);
+          					SetPlayerPosEx(playerid,2496.8523,-1685.3225,13.4172);
+                            SetPlayerFacingAngle(playerid, 345.4405);
 						}
 						case FRAC_BALLAS: //13
 						{
@@ -2677,7 +2685,13 @@ SetPlayerSpawnSkin(playerid)
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
 		PlayerInfo[playerid][pSkin] = 136;
 	}
-	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pUniform] > 0) {
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
+	}
+	else
+	{
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	}
   /*  if(PlayerInfo[playerid][pChar] > 0)
 		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
 
@@ -2863,18 +2877,6 @@ public OnPlayerEnterCheckpoint(playerid)
 	    SetTimerEx("PizzaJobTimer01", 4000, false, "i", playerid);
 	    GameTextForPlayer(playerid, "KLIENT ZABIERA PIZZE", 4000, 3);
 	    TogglePlayerControllable(playerid,0);
-	}
-	if(GetPVarInt(playerid,"roped") == 1)
-    {
-   		SetPVarInt(playerid,"roped",0);
-        SetPVarInt(playerid,"chop_id",0);
-        ClearAnimations(playerid);
-        TogglePlayerControllable(playerid,0);
-        TogglePlayerControllable(playerid,1);
-        for(new i=0;i<=ROPELENGTH;i++)
-        {
-        	DestroyDynamicObject(r0pes[playerid][i]);
-        }
 	}
 
     TJD_CallCheckpoint(playerid, GetPlayerVehicleID(playerid));
@@ -4872,7 +4874,7 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
     {
         SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina - dostêpne komendy_______________|");
         SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
-        SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty");
+        SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty.");
         SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
         SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
     }
@@ -5542,7 +5544,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odestki: 0.%d procent",tmpintrate);
+						format(string, sizeof(string), "  Odsetki: 0.%d procent",tmpintrate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);
@@ -6623,6 +6625,47 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			}
 		}
 	}
+	else
+	{
+		if(newkeys & KEY_FIRE)
+		{
+			if(GetPVarInt(playerid,"roped") == 1)
+			{
+				ClearAnimations(playerid);
+				SetPVarInt(playerid,"roped", 0);
+				TogglePlayerControllable(playerid, 1);
+				SetPlayerVelocity(playerid,0,0,0);
+				SetPVarInt(playerid,"chop_id",0);
+				for(new i=0;i<=ROPELENGTH;i++)
+				{
+					DestroyDynamicObject(r0pes[playerid][i]);
+				}
+			}
+		}
+		if(PRESSED(KEY_FIRE))
+		{
+			if(GetPlayerWeapon(playerid) == 46)
+			{
+				new vehicleid = GetClosestCar(playerid, 3.0);
+				if(vehicleid != -1)
+				{
+					ParachuteHit[playerid]++;
+					if(ParachuteHit[playerid] >= 5)
+					{
+						ParachuteHit[playerid] = 0;
+						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
+						RemoveWeaponFromSlot(playerid, 11);
+						GameTextForPlayer(playerid, "~y~Spadochron wyrzucony", 5000, 1);
+					}
+					else
+					{
+						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
+        				return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Schowaj spadochron zanim w coœ uderzysz."); 
+					}
+				}
+			}
+		}
+	}
     if(PRESSED(KEY_SECONDARY_ATTACK))
     {
         if(GetPlayerAnimationIndex(playerid)!=1660) SetTimerEx("VendCheck", 500, false, "d", playerid);
@@ -6661,9 +6704,7 @@ public OnVehicleDeath(vehicleid, killerid)
     	{
      		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
        		{
-         		DisablePlayerCheckpoint(i);
           		SetPVarInt(i,"roped",0);
-            	DisablePlayerCheckpoint(i);
              	ClearAnimations(i);
               	TogglePlayerControllable(i,1);
                	for(new j=0;j<=ROPELENGTH;j++)

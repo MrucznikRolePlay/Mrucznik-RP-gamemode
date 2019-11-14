@@ -169,7 +169,7 @@ YCMD:odznaka(playerid, params[], help)
 					}
 					if (GetPlayerFraction(playerid) == FRAC_BOR)
 					{
-						SendClientMessage(giveplayerid, COLOR_PURPLE, "|______________ Odznaka GSA _____________|");
+						SendClientMessage(giveplayerid, COLOR_PURPLE, "|______________ Odznaka USSS _____________|");
 						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
@@ -184,9 +184,7 @@ YCMD:odznaka(playerid, params[], help)
 						{
 							SendClientMessage(giveplayerid,COLOR_WHITE,"Mo¿liwoœæ interwencji: Tak");
 						}
-						SendClientMessage(giveplayerid,COLOR_GRAD2,"Posiadacz tej odznaki ma uprawnienia identyczne jak");
-						SendClientMessage(giveplayerid,COLOR_GRAD2,"inne s³u¿b. porz. jedynie w zakresie ochrony VIP-ów i UM.");
-						SendClientMessage(giveplayerid, COLOR_PURPLE, "|_____ GSA _____|");
+						SendClientMessage(giveplayerid, COLOR_PURPLE, "|_____ United States Secret Service _____|");
 					}
 					if (GetPlayerOrg(playerid) == FAMILY_SAD)
 					{

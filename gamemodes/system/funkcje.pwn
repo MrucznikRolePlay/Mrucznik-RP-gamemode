@@ -319,7 +319,7 @@ public OznaczCzitera(playerid)
 	return 1;
 }
 
-GetFreeVehicleSeat(vehicleid)
+/*GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
 	foreach(new i : Player)
@@ -336,6 +336,26 @@ GetFreeVehicleSeat(vehicleid)
 	else if(Seat[1] == false) return 1;
 	else if(Seat[2] == false) return 2;
 	else if(Seat[3] == false) return 3;
+	else return -1;
+}*/
+
+GetFreeVehicleSeatForArrestant(vehicleid)
+{
+	new bool:Seat[4];
+	foreach(new i : Player)
+	{
+		if(IsPlayerInVehicle(i,vehicleid))
+		{
+			if(GetPlayerVehicleSeat(i) == 3) Seat[3] = true;
+			else if(GetPlayerVehicleSeat(i) == 2) Seat[2] = true;
+			else if(GetPlayerVehicleSeat(i) == 1) Seat[1] = true;
+			else if(GetPlayerVehicleSeat(i) == 0) Seat[0] = true;
+		}
+	}
+	if(Seat[3] == false) return 3;
+	else if(Seat[2] == false) return 2;
+	else if(Seat[1] == false) return 1;
+	else if(Seat[0] == false) return 0;
 	else return -1;
 }
 
@@ -2351,6 +2371,18 @@ UsunBron(playerid)
 		return 1;
 	}
 	return 0;
+}
+stock RemoveWeaponFromSlot(playerid, iWeaponSlot) 
+{
+    new wps[13][2];
+    for(new i = 0; i < 13; i++) GetPlayerWeaponData(playerid, i, wps[i][0], wps[i][1]);
+
+    wps[iWeaponSlot][0] = 0;
+
+    ResetPlayerWeapons(playerid);
+
+    for(new i = 0; i < 13; i++) GivePlayerWeapon(playerid, wps[i][0], wps[i][1]);
+
 }
 DajBronieFrakcyjne(playerid)
 {
@@ -7551,18 +7583,45 @@ SendSMSMessageToAll(senderNumber, message[])
 
 SendSMSMessage(senderNumber, reciverid, message[])
 {
-	new string[256];
+	new string[144], string2[144];
 	
 	new slotKontaktu = PobierzSlotKontaktuPoNumerze(reciverid, senderNumber);
-	if(slotKontaktu >= 0)
+	if(strlen(message) < 78)
 	{
-		format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", message, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+		if(slotKontaktu >= 0)
+		{
+			format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", message, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+		}
+		else
+		{
+			format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+		}
+		SendClientMessage(reciverid, COLOR_YELLOW, string);
 	}
 	else
 	{
-		format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+		new pos = strfind(message, " ", true, strlen(message) / 2);
+		if(pos != -1)
+		{
+			new text2[64], text[128];
+			strmid(text2, text, pos, strlen(text));
+			strdel(text, pos, strlen(text));
+
+			if(slotKontaktu >= 0)
+			{
+				format(string2, sizeof(string2), "[.] %s, Nadawca: %s (%d)", text2, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+			}
+			else
+			{
+				format(string2, sizeof(string2), "[.] %s, Nadawca: %d", text2, senderNumber);
+			}
+
+			format(string, sizeof(string), "SMS: %s [.]", text);
+			SendClientMessage(reciverid, COLOR_YELLOW, string);
+			SendClientMessage(reciverid, COLOR_YELLOW, string2);
+		}
 	}
-	SendClientMessage(reciverid, COLOR_YELLOW, string);
+
 	PlayerPlaySound(reciverid, 6401, 0.0, 0.0, 0.0);
 	LastSMSNumber[reciverid] = senderNumber;
 }
@@ -7660,12 +7719,12 @@ ListaKontaktowGracza(playerid)
 		if(FindPlayerByNumber(Kontakty[playerid][i][eNumer]) != INVALID_PLAYER_ID)
 		{
 			//aktywny
-			format(string, sizeof(string), "%s%s - %d (on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "{FFFFFF}%s%s - %d {00FF00}(on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 		else
 		{
 			//nieaktywny
-			format(string, sizeof(string), "%s%s - %d (off-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "{FFFFFF}%s%s - %d {FF0000}(off-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 	}
 	
@@ -8254,6 +8313,35 @@ public NG_OpenGateWithKey(playerid)
     }
     TextDrawSetString(NG_GateTD[7], "0000");
     DeletePVar(playerid, "ng-key");
+	return 1;
+}
+
+UnFrakcja(playerid, para1)
+{
+	new string[64];
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
+	if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
+	{
+		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ wszystkich liderów\nz organizacji? (Zabierze VLD)", GetNick(para1));
+		SetPVarInt(playerid, "ID_LIDERA", para1);  
+		ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
+		return 1;
+	}
+	GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+	format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", sendername);
+	SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+	SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
+	PlayerInfo[para1][pMember] = 0;
+	PlayerInfo[para1][pLider] = 0;
+	PlayerInfo[para1][pJob] = 0;
+	orgUnInvitePlayer(para1);
+	MedicBill[para1] = 0;
+	SetPlayerSpawn(para1);
+	format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	return 1;
 }
 
@@ -10311,6 +10399,39 @@ Patrol_HideZones(playerid)
     GangZoneHideForPlayer(playerid, PatrolZones[7]);
 }
 
+GPSMode(playerid, bool:red = false)
+{
+	new string[144], sendername[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+
+	if(PDGPS == playerid)
+	{
+		foreach(new i : Player)
+		{
+			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+				DisablePlayerCheckpoint(i);
+		}
+	}
+
+	if(red)
+	{
+		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("- odwo³ujê RED") : ("potrzebne wsparcie! - CODE RED"));
+		PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
+	}
+	else
+	{
+		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie!"));
+		PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
+	}
+
+	SendRadioMessage(1, COLOR_YELLOW2, string);
+	SendRadioMessage(2, COLOR_YELLOW2, string);
+	SendRadioMessage(3, COLOR_YELLOW2, string);
+	SendRadioMessage(4, COLOR_YELLOW2, string);
+	//SendRadioMessage(9, COLOR_YELLOW2, string);
+	SendRadioMessage(FRAC_BOR, COLOR_YELLOW2, string); 
+}
+
 public PatrolGPS()
 {
     new Float:x, Float:y, Float:z;
@@ -12247,6 +12368,30 @@ stock IsVehicleRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
     if(vehicleid == INVALID_VEHICLE_ID) return 0;
     return GetVehicleDistanceFromPoint(vehicleid, x, y, z) <= range;
 }  
+
+stock GetClosestCar(playerid, Float:Prevdist=5.0)
+{
+	new Prevcar = -1;
+	for(new carid = 0; carid < MAX_VEHICLES; carid++)
+	{
+		new Float:Dist = GetDistanceToCar(playerid,carid);
+		if((Dist < Prevdist))
+		{
+			Prevdist = Dist;
+			Prevcar = carid;
+		}
+	}
+	return Prevcar;
+}
+
+stock GetDistanceToCar(playerid, carid)
+{
+	new Float:x1,Float:y1,Float:z1,Float:x2,Float:y2,Float:z2,Float:Dis;
+	if (!IsPlayerConnected(playerid))return -1;
+	GetPlayerPos(playerid,x1,y1,z1);GetVehiclePos(carid,x2,y2,z2);
+	Dis = floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
+	return floatround(Dis);
+}
 
 //--------------------------------------------------
 

@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:boks(playerid, params[], help)
+YCMD:walka(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
@@ -59,7 +59,7 @@ YCMD:boks(playerid, params[], help)
         new giveplayerid;
 		if( sscanf(params, "k<fix>", giveplayerid))
 		{
-			sendTipMessage(playerid, "U¿yj /walcz [playerid/CzêœæNicku]");
+			sendTipMessage(playerid, "U¿yj /walka [playerid/CzêœæNicku]");
 			return 1;
 		}
 

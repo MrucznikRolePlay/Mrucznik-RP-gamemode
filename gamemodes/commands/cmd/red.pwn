@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ unwarn ]------------------------------------------------//
+//--------------------------------------------------[ red ]--------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,52 +28,37 @@
 	
 */
 
-YCMD:unwarn(playerid, params[], help)
+YCMD:red(playerid, params[], help)
 {
-	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
-    {
-    	new giveplayerid, result[64];
-		if( sscanf(params, "k<fix>s[64]", giveplayerid, result))
-		{
-			sendTipMessage(playerid, "U¿yj /unwarn [playerid/CzêœæNicku] [reason]");
-			return 1;
-		}
-
-		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_KARY_UNBAN))
-		{
-		    if(IsPlayerConnected(giveplayerid))
-		    {
-		        if(giveplayerid != INVALID_PLAYER_ID)
-		        {
-                    if(PlayerInfo[giveplayerid][pWarns] <= 0) return sendTipMessageEx(playerid, COLOR_GRAD1, "Ten gracz nie ma warnów!");
-					new str[128];
-				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					PlayerInfo[giveplayerid][pWarns] -= 1;
-					format(str, sizeof(str), "Da³eœ UN-warna %s, powód: %s", giveplayer, (result));
-					SendClientMessage(playerid, COLOR_LIGHTRED, str);
-					format(str, sizeof(str), "Dosta³eœ UN-warna od %s, powód: %s", sendername, (result));
-					SendClientMessage(giveplayerid, COLOR_LIGHTRED, str);
-					format(string, sizeof(string), "AdmCmd: %s zosta³ UN-warnowany przez Admina %s, powód: %s", giveplayer, sendername, (result));
-					ABroadCast(COLOR_YELLOW,string,1);
-            		Log(punishmentLog, INFO, "Admin %s unwarnowa³ %s, powód: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), result);
-					if(GetPlayerAdminDutyStatus(playerid) == 1)
-					{
-						iloscWarn[playerid] = iloscWarn[playerid]+1;
-					}
-					return 1;
-				}
-			}//not connected
-		}
-		else
-		{
-			format(string, sizeof(string), "Gracz o ID %d nie istnieje.", giveplayerid);
-			sendErrorMessage(playerid, string);
-		}
+    if(!IsACop(playerid) && GetPlayerFraction(playerid) != FRAC_LSPD)
+	{
+		return sendErrorMessage(playerid, "Nie jesteœ policjantem.");
 	}
-	return 1;
+
+	if(OnDuty[playerid] != 1 && JobDuty[playerid] != 1)
+	{
+		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
+	}
+
+    if(GetPVarInt(playerid, "patrol") != 1)
+    {
+        return sendErrorMessage(playerid, "Nie jesteœ na patrolu.");
+    }
+
+    if(PDGPS == playerid)
+    {
+        GPSMode(playerid, true);
+        return 1;
+    }
+
+    new str[144], akcja[144];
+    new pat = GetPVarInt(playerid, "patrol-id");
+    PatrolInfo[pat][patstan] = 2;
+    format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", PatrolInfo[pat][patname]);
+    SendTeamMessage(1, COLOR_ALLDEPT, str);
+    format(akcja,sizeof(akcja),"* %s uruchomi³ alert do wszystkich jednostek.",GetNick(playerid));
+    ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+    GPSMode(playerid, true);
+
+    return 1;
 }

@@ -165,6 +165,11 @@ YCMD:panel(playerid, params[], help)
         }
         else if(strcmp(sub, "unwarn", true) == 0)
         {
+            if(!Uprawnienia(playerid, ACCESS_KARY_UNBAN))
+            {
+                sendErrorMessage(playerid, "Uprawnienia: Nie posiadasz wystarczaj¹cych uprawnieñ.");
+                return 1;
+            }
             if(strlen(var) < 1 || strlen(var) > MAX_PLAYER_NAME)
             {
                 SendClientMessage(playerid, COLOR_RED, "Niepoprawna d³ugosc!");
