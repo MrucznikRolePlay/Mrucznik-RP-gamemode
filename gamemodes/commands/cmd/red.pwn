@@ -30,7 +30,9 @@
 
 YCMD:red(playerid, params[], help)
 {
-    if(!IsACop(playerid) && GetPlayerFraction(playerid) != FRAC_LSPD)
+    new frac;
+    frac = GetPlayerFraction(playerid);
+    if(!IsACop(playerid) && frac != FRAC_LSPD)
 	{
 		return sendErrorMessage(playerid, "Nie jesteœ policjantem.");
 	}
@@ -40,9 +42,8 @@ YCMD:red(playerid, params[], help)
 		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
 	}
 
-    new str[144], akcja[144], patrolnick[MAX_PLAYER_NAME];
-
-    if(GetPlayerFraction(playerid) == FRAC_LSPD)
+    new str[144], akcja[144], patrolnick[24];
+    if(frac == FRAC_LSPD)
     {   
         if(GetPVarInt(playerid, "patrol") != 1)
         {
@@ -69,14 +70,14 @@ YCMD:red(playerid, params[], help)
 
     if(PDGPS == playerid)
     {
-        format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{FF0000} Odwo³ujê CODE RED", patrolnick);
+        format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA %s: {FFFFFF}%s:{FF0000} Odwo³ujê CODE RED", FractionNames[frac], patrolnick);
         format(akcja,sizeof(akcja),"* %s wy³¹czy³ alert do wszystkich jednostek.",GetNick(playerid));
         GPSMode(playerid, true);
         return 1;
     }
     else
     {
-        format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", patrolnick);
+        format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA %s: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", FractionNames[frac], patrolnick);
         format(akcja,sizeof(akcja),"* %s uruchomi³ alert do wszystkich jednostek.",GetNick(playerid));
         GPSMode(playerid, true);
     }

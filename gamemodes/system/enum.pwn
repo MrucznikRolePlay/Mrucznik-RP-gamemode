@@ -163,7 +163,7 @@ enum ePat {
     patroluje[2],
     patstrefa,
     patstan,
-    patname[MAX_PLAYER_NAME],
+    patname[24],
     pataktywny,
     pattyp,
     pattime

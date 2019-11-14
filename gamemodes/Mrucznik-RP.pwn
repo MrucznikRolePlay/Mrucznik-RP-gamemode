@@ -1808,6 +1808,7 @@ public OnPlayerDeath(playerid, killerid, reason)
      		DestroyDynamicObject(r0pes[playerid][i]);
        	}
         SetPVarInt(playerid,"roped",0);
+		ClearAnimations(playerid);
 	}
 
     //IBIZA
