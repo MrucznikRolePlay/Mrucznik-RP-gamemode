@@ -1998,7 +1998,7 @@ ApplyAnimation(playerid,"OTB","wtchrace_win",4.1,0,1,1,1,1,1); //edited by erik0
 }
 return 1;
 }
-if(strcmp(cmd, "/animnevada", true) == 0) {
+/*if(strcmp(cmd, "/animnevada", true) == 0) {
 if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT) {
 tmp = strtok(cmdtext, idx);
 if(!strlen(tmp)) {
@@ -2017,7 +2017,7 @@ ApplyAnimation(playerid,"NEVADA","NEVADA_getout",4.1,0,1,1,1,1,1); //edited by e
 }
 return 1;
 }
-}
+}*/
 if(strcmp(cmd, "/animpark", true) == 0) {
 if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT) {
 tmp = strtok(cmdtext, idx);
