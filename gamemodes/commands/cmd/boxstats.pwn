@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:boksstats(playerid, params[], help)
+YCMD:boxstats(playerid, params[], help)
 {
 	new string[128];
 

@@ -116,7 +116,7 @@ YCMD:givegun(playerid, params[], help)
 					{
 					    PlayerInfo[playa][pGun8] = gun;
 		            	PlayerInfo[playa][pAmmo8] = ammo;
-		            	PlayerInfo[playa][pGun12] = 1;
+		            	PlayerInfo[playa][pGun12] = 40;
 		            	PlayerInfo[playa][pAmmo12] = 1;
 						GivePlayerWeapon(playa, gun, ammo);
 						GivePlayerWeapon(playa, 40, 1);

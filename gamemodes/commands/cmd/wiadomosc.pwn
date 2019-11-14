@@ -108,6 +108,11 @@ YCMD:wiadomosc(playerid, params[], help)
             {
                 iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
             }
+            if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1) //podgl¹d admina
+            {
+                format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                ABroadCast2(COLOR_LIGHTGREEN,string,1);
+            }
         }
         else 
         {
@@ -122,8 +127,7 @@ YCMD:wiadomosc(playerid, params[], help)
                 SendClientMessage(playerid, COLOR_YELLOW, string);
             
                 format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(playerid, COLOR_YELLOW, string);
-                
+                SendClientMessage(playerid, COLOR_YELLOW, string);           
                 
                 format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid), playerid, text);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
@@ -138,6 +142,14 @@ YCMD:wiadomosc(playerid, params[], help)
                 {
                     iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
                 }		
+
+                if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1) //podgl¹d admina
+                {
+                    format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                    ABroadCast2(COLOR_LIGHTGREEN,string,1);
+                    format(string, sizeof(string), "[.] %s", text2);
+                    ABroadCast2(COLOR_LIGHTGREEN,string,1);
+                }
             }
         }
 	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), params);
@@ -149,12 +161,6 @@ YCMD:wiadomosc(playerid, params[], help)
         //AntySPAM!!!!!
         SetTimerEx("AntySpamTimer",3000,0,"d",playerid);
 		AntySpam[playerid] = 1;
-        //podgl¹d
-        if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
-        {
-            format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
-            ABroadCast2(COLOR_LIGHTGREEN,string,1);
-        }
     }
     else 
     {

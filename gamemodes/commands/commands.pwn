@@ -57,8 +57,7 @@
 #include "cmd/blok.pwn"
 #include "cmd/blokujnoba.pwn"
 #include "cmd/blokujsprzedarz.pwn"
-#include "cmd/boks.pwn"
-#include "cmd/boksstats.pwn"
+#include "cmd/boxstats.pwn"
 #include "cmd/bonehead.pwn"
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
@@ -364,6 +363,7 @@
 #include "cmd/rapidfly.pwn"
 #include "cmd/raport.pwn"
 #include "cmd/re.pwn"
+#include "cmd/red.pwn"
 #include "cmd/reflektor.pwn"
 #include "cmd/reklama.pwn"
 #include "cmd/reloadbans.pwn"
@@ -531,6 +531,7 @@
 #include "cmd/veh.pwn"
 #include "cmd/vopis.pwn"
 #include "cmd/vopispomoc.pwn"
+#include "cmd/walka.pwn"
 #include "cmd/warn.pwn"
 #include "cmd/wczytajrangi.pwn"
 #include "cmd/wczytajskiny.pwn"
@@ -665,7 +666,6 @@ InitCommands()
 
 static Aliases()
 {
-	Command_AddAltNamed("staty2", "stats2"); 
 	//autorzy
 	Command_AddAltNamed("autorzy", "tworcy"); 
 	//tognewbie
@@ -691,6 +691,8 @@ static Aliases()
 	Command_AddAltNamed("carhelp", "samochodpomoc");
 	//adminduty
 	Command_AddAltNamed("adminduty", "aduty"); 
+	//boxstats
+	Command_AddAltNamed("boxstats", "boksstats");
 	//cbradio
 	Command_AddAltNamed("cbradio", "cb");
 	Command_AddAltNamed("cbradio", "cb_radio");
@@ -1183,8 +1185,10 @@ static Aliases()
 	Command_AddAltNamed("startujlekcje", "startegzamin");
 
 	//staty
-	Command_AddAltNamed("staty", "stats");
+	/*Command_AddAltNamed("staty", "stats");
 	Command_AddAltNamed("staty", "statystyki");
+	Command_AddAltNamed("staty2", "stats2"); */ //na razie zawieszamy stats do czasu dopracowania tego textdrawa. Zgodnie z decyzj¹ 0Verte.
+	Command_AddAltNamed("staty2", "stats");
 
 	//stopanim
 	Command_AddAltNamed("stopanim", "stopani");
@@ -1257,6 +1261,10 @@ static Aliases()
 
 	//usunbron
 	Command_AddAltNamed("usunbron", "ub");
+
+	//walka
+	Command_AddAltNamed("walka", "boks");
+	Command_AddAltNamed("walka", "walcz");
 
 	//wejdz
 	Command_AddAltNamed("wejdz", "enter");

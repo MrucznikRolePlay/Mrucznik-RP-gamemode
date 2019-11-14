@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   money                                                   //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//--------------------------------------------------[ red ]--------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,72 +16,49 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 01.07.2019
-//Opis:
+
+// Opis:
 /*
-	Modu³ odpowiadaj¹cy za operacje na pieni¹dzach gracza.
+	
 */
 
-//
 
-//-----------------<[ Funkcje: ]>-------------------
-public DajKase(playerid, money)
-{
-	new logstring[256];
-	format(logstring, sizeof(logstring), "%s dostal %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pAccount]);
-
-	kaska[playerid] += money;
-	GivePlayerMoney(playerid, money);
+// Notatki skryptera:
+/*
 	
-	if(money < 0)
-	{
-		Log(errorLog, ERROR, logstring);
-	}
-	else
-	{
-		Log(moneyLog, INFO, logstring);
-	}
-	return 1;
-}
+*/
 
-public ZabierzKase(playerid, money)
+YCMD:red(playerid, params[], help)
 {
-	new logstring[256];
-	format(logstring, sizeof(logstring), "%s zabrano %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pAccount]);
-
-	kaska[playerid] -= money;
-	GivePlayerMoney(playerid, -money);
-	
-	if(money < 0)
+    if(!IsACop(playerid) && GetPlayerFraction(playerid) != FRAC_LSPD)
 	{
-		Log(errorLog, ERROR, logstring);
+		return sendErrorMessage(playerid, "Nie jesteœ policjantem.");
 	}
-	else
+
+	if(OnDuty[playerid] != 1 && JobDuty[playerid] != 1)
 	{
-		Log(moneyLog, INFO, logstring);
+		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
 	}
-	return 1;
+
+    if(GetPVarInt(playerid, "patrol") != 1)
+    {
+        return sendErrorMessage(playerid, "Nie jesteœ na patrolu.");
+    }
+
+    if(PDGPS == playerid)
+    {
+        GPSMode(playerid, true);
+        return 1;
+    }
+
+    new str[144], akcja[144];
+    new pat = GetPVarInt(playerid, "patrol-id");
+    PatrolInfo[pat][patstan] = 2;
+    format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", PatrolInfo[pat][patname]);
+    SendTeamMessage(1, COLOR_ALLDEPT, str);
+    format(akcja,sizeof(akcja),"* %s uruchomi³ alert do wszystkich jednostek.",GetNick(playerid));
+    ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+    GPSMode(playerid, true);
+
+    return 1;
 }
-
-public UstawKase(playerid, money)
-{
-	new logstring[256];
-	format(logstring, sizeof(logstring), "%s ustawiono %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pAccount]);
-
-	kaska[playerid] = money;
-	ResetPlayerMoney(playerid);
-	GivePlayerMoney(playerid, money);
-	
-	Log(moneyLog, INFO, logstring);
-	return 1;
-}
-
-public ResetujKase(playerid)
-{
-	kaska[playerid]=0;
-	ResetPlayerMoney(playerid);
-	return 1;
-}
-
-//end

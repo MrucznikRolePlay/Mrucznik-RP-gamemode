@@ -71,7 +71,7 @@ YCMD:rozkuj(playerid, params[], help)
 							PlayerInfo[giveplayerid][pMuted] = 0;
                             ClearAnimations(giveplayerid);
         					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
-							RemovePlayerAttachedObject(giveplayerid, 0);
+							RemovePlayerAttachedObject(giveplayerid, 5);
 						}
 						else
 						{

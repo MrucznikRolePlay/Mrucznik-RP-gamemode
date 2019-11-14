@@ -481,7 +481,7 @@ new FractionNames[][40] = {
     "Emergency Rescue Service",
     "SA Bahamas",
     "Yakuza",
-    "Government Security Agency",
+    "United States Secret Service",
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
@@ -509,9 +509,9 @@ new JobNames[][20] = {
     "Diler broni",
     "Kierowca autobusu",
     "Rozwoziciel pizzy",//11
-    "Brak",
     "Bokser",
     "Brak",
+    "Taksówkarz",//14
     "Gazeciarz",
     "Kurier",
     "Brak",

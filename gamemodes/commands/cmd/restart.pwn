@@ -42,6 +42,7 @@ YCMD:restart(playerid, params[], help)
 			{
 				sendErrorMessage(i, string);
 			}
+			ZapiszDomy();
 			SendRconCommand("gmx");
 		}
 		else

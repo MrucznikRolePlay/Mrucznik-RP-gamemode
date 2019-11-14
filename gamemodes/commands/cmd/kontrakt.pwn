@@ -65,12 +65,12 @@ YCMD:kontrakt(playerid, params[], help)
 			    }
 			    else if(PlayerInfo[giveplayerid][pMember] == 8||PlayerInfo[giveplayerid][pLider] == 8)
 			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontrakru na te osobe !");
+			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
 			        return 1;
 			    }
 			    else if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1)
 			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontrakru na te osobe !");
+			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
 			        return 1;
 			    }
 			    if(PlayerInfo[giveplayerid][pLider] >= 1 && moneys < 100000)
