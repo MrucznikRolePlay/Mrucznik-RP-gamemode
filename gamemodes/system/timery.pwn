@@ -914,7 +914,7 @@ public syncanim(playerid)
 {
 	if(GetPVarInt(playerid,"roped") == 0) return 0;
  	SetTimerEx("syncanim",DUR,0,"i",playerid);
-  	ApplyAnimation(playerid,"ped","abseil",4.0,0,0,0,1,0);
+  	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
    	return 1;
 }
 
@@ -2598,12 +2598,16 @@ public JednaSekundaTimer()
 				{
 					if(GetPlayerState(cop) == 1)
 					{
-						SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
-						SetPlayerInterior(i, GetPlayerInterior(cop));
-						GetPlayerPos(cop, x, y, z);
-						SetPlayerPosEx(i, x-0.5, y-0.5, z);
-						TogglePlayerControllable(i, 0);
-						SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
+						if(!ProxDetectorS(3.5, cop, i))
+						{
+							SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
+							SetPlayerInterior(i, GetPlayerInterior(cop));
+							GetPlayerPos(cop, x, y, z);
+							SetPlayerPosEx(i, x-0.5, y-0.5, z);
+							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
+							TogglePlayerControllable(i, 0);
+							if(PlayerInfo[i][pBW] == 0) SetTimerEx("FreezePlayer", 2000, false, "i", i);
+						}
 					}
 					else
 					{
@@ -2611,12 +2615,11 @@ public JednaSekundaTimer()
                         new veh_zakuty = GetPlayerVehicleID(i);
                         if(veh != veh_zakuty) 
                         {
-                            new seat = GetFreeVehicleSeat(veh);
+                            new seat = GetFreeVehicleSeatForArrestant(veh);
                             if(seat != -1)
                             {
                                 PutPlayerInVehicleEx(i, veh, seat);
                                 TogglePlayerControllable(i, 0);
-                                SetPVarInt(i, "kajdany_siedzenie", seat);
                             }
                         }
 					}
@@ -3618,6 +3621,22 @@ public closeGate(i, j, playerid)
     return 1;
 }
 
+forward SlideRope(playerid);
+public SlideRope(playerid)
+{
+    if(GetPVarInt(playerid,"sliderope") == 1)
+    {
+		new Float:X;
+	    new Float:Y;
+	    new Float:Z;
+	    GetPlayerPos(playerid, X, Y, Z);
+  	 	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
+	    SetPlayerPos(playerid, X, Y, Z - 2.00);
+		SetPlayerVelocity(playerid,0,0,0);
+	    SetTimerEx("SlideRope", 1000, 0, "i", playerid);
+ 	}
+	return 1;
+}
 
 
 //EOF

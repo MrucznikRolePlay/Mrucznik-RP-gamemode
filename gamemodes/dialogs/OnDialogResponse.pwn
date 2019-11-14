@@ -3346,12 +3346,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
 				zakuty[playerid] = 1;
-	            TogglePlayerControllable(playerid, 0);
 	            uzytekajdanki[PDkuje[playerid]] = 1;
 	            SkutyGracz[PDkuje[playerid]] = playerid;
 				ClearAnimations(playerid);
                 SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 		    }
 		    if(!response)
 		    {
@@ -3375,11 +3374,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 					SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
 					zakuty[playerid] = 1;
-		            TogglePlayerControllable(playerid, 0);
 		            uzytekajdanki[PDkuje[playerid]] = 1;
 		            SkutyGracz[PDkuje[playerid]] = playerid;
 					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-					SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+					SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 				}
 				else if(cops == 2)
 				{
@@ -3399,11 +3397,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 						SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
 						zakuty[playerid] = 1;
-			            TogglePlayerControllable(playerid, 0);
 			            uzytekajdanki[PDkuje[playerid]] = 1;
 			            SkutyGracz[PDkuje[playerid]] = playerid;
 						SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-						SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+						SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 				    }
 				}
 				else
@@ -3437,7 +3434,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            SkutyGracz[PDkuje[playerid]] = playerid;
 				ClearAnimations(playerid);
                 SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
 		    }
 		    if(!response)
 		    {
@@ -6642,19 +6639,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-	     		ShowPlayerDialogEx(playerid, 86, DIALOG_STYLE_MSGBOX, "Kupowanie domu - p³atnoœæ", "P³atnoœci chcesz dokonaæ gotówk¹ czy przelewem z banku?", "Gotówka", "Przelew");
+				ShowPlayerDialogEx(playerid, 86, DIALOG_STYLE_LIST, "Kupowanie domu - p³atnoœæ", "Zap³aæ gotówk¹\nZap³aæ przelewem z banku", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 86)//system domów
 		{
 		    if(response)
 		    {
-		        KupowanieDomu(playerid, IDDomu[playerid], 1);
-		    }
-		    if(!response)
-		    {
-		        KupowanieDomu(playerid, IDDomu[playerid], 2);
-		    }
+				switch(listitem)
+		        {
+		            case 0://Informacje o domu
+		            {
+		       		 	KupowanieDomu(playerid, IDDomu[playerid], 1);
+					}
+					case 1:
+					{
+						KupowanieDomu(playerid, IDDomu[playerid], 2);
+					}
+		   		}
+			}
 		}
 		if(dialogid == 87)//system domów
 		{

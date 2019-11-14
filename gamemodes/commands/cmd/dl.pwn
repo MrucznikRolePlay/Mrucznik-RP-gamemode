@@ -36,9 +36,9 @@ YCMD:dl(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAnInstructor(playerid) || PlayerInfo[playerid][pAdmin] >= 5000)
+        if(IsAnInstructor(playerid) || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
         {
-            if(PlayerInfo[playerid][pLocal] == 108 || PlayerInfo[playerid][pAdmin] >= 5000)
+            if(PlayerInfo[playerid][pLocal] == 108 || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
             {
 	            new x_nr[16];
 				new giveplayerid;
@@ -57,11 +57,11 @@ YCMD:dl(playerid, params[], help)
 				
 			    if(strcmp(x_nr,"auto",true) == 0)
 				{
-				    if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pAdmin] >= 5000)
+				    if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		            {
-						if(PlayerInfo[giveplayerid][pDowod] >= 1 || PlayerInfo[playerid][pAdmin] >= 5000)
+						if(PlayerInfo[giveplayerid][pDowod] >= 1 || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 						{
-						    if(PlayerInfo[giveplayerid][pCarLic] == 3 || PlayerInfo[playerid][pAdmin] >= 5000)
+						    if(PlayerInfo[giveplayerid][pCarLic] == 3 || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 						    {
 								if(kaska[playerid] >= 14000)
 								{
@@ -298,7 +298,7 @@ YCMD:dl(playerid, params[], help)
         }
         else
         {
-            sendErrorMessage(playerid, "Nie jesteœ insturktorem !");
+            sendErrorMessage(playerid, "Nie jesteœ instruktorem !");
             return 1;
         }
     }

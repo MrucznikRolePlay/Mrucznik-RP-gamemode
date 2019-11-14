@@ -210,16 +210,25 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 7)//Wejscie do VINYL
 	{
-		if(vinylStatus == 0 && GetPlayerFraction(playerid) != FRAC_SN)
+		if(vinylStatus == 0)
 		{
-			sendErrorMessage(playerid, "Klub jest teraz zamkniêty!"); 
-			return 1;
+			if(GetPlayerFraction(playerid) != FRAC_SN)
+			{
+				sendErrorMessage(playerid, "Klub jest teraz zamkniêty!"); 
+				return 1;
+			}
 		}
-		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 && GetPlayerFraction(playerid) != FRAC_SN)
+		else
 		{
-			sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
-			noAccessCome[playerid] = 1; 
-			return 1;
+			if(GetPVarInt(playerid, "Vinyl-bilet") == 0)
+			{
+				if(GetPlayerFraction(playerid) != FRAC_SN)
+				{
+					sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
+					noAccessCome[playerid] = 1; 
+					return 1;
+				}
+			}
 		}
 		SetPlayerTW(playerid, 5000, 1, 6); 
 		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);

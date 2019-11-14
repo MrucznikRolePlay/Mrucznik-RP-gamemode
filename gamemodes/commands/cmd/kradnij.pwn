@@ -77,16 +77,18 @@ YCMD:kradnij(playerid, params[], help)
 				format(string, sizeof(string),"* %s wyci¹ga m³otek i rozwala os³onkê po czym wyjmuje 2 kabelki.", sendername);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				NieSpamujKradnij[playerid] = 1;
+				new timer;
 				if(kradnij <= mnoznik)
 				{
-					SetTimerEx("udalo1",6000,0,"d",playerid);
+					timer = SetTimerEx("udalo1",6000,0,"d",playerid);
 					KradniecieWozu[playerid] = 1;
 				}
 				else
 				{
-					SetTimerEx("nieudalo1",6000,0,"d",playerid);
+					timer = SetTimerEx("nieudalo1",6000,0,"d",playerid);
 					KradniecieWozu[playerid] = 1;
 				}
+				SetPVarInt(playerid, "timerKradnij", timer);
 			}
 			else
 			{

@@ -44,10 +44,8 @@ YCMD:qf(playerid, params[], help)
 			sendTipMessage(playerid, "Odszed³eœ z frakcji, jesteœ teraz cywilem!", COLOR_LIGHTBLUE);
 			Log(commandLog, INFO, "Gracz %s opuœci³ frakcjê %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pMember]);
 			gTeam[playerid] = 3;
-			PlayerInfo[playerid][pTeam] = 3;
 			PlayerInfo[playerid][pMember] = 0;
 			PlayerInfo[playerid][pRank] = 0;
-			PlayerInfo[playerid][pUniform] = 0;
             orgUnInvitePlayer(playerid);
 			MedicBill[playerid] = 0;
 			SetPlayerSpawn(playerid);

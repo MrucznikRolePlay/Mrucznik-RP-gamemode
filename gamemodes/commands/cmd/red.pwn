@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ unfrakcja ]-----------------------------------------------//
+//--------------------------------------------------[ red ]--------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,36 +28,37 @@
 	
 */
 
-YCMD:unfrakcja(playerid, params[], help)
+YCMD:red(playerid, params[], help)
 {
-    if(!IsPlayerConnected(playerid))
+    if(!IsACop(playerid) && GetPlayerFraction(playerid) != FRAC_LSPD)
+	{
+		return sendErrorMessage(playerid, "Nie jesteœ policjantem.");
+	}
+
+	if(OnDuty[playerid] != 1 && JobDuty[playerid] != 1)
+	{
+		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
+	}
+
+    if(GetPVarInt(playerid, "patrol") != 1)
     {
-		return 1;
-	}
+        return sendErrorMessage(playerid, "Nie jesteœ na patrolu.");
+    }
 
-	new para1;
-	if(sscanf(params, "k<fix>", para1))
-	{
-		return sendTipMessage(playerid, "U¿yj /unfrakcja [ID gracza]");
-	}
+    if(PDGPS == playerid)
+    {
+        GPSMode(playerid, true);
+        return 1;
+    }
 
-	if (PlayerInfo[playerid][pAdmin] < 1000 && !(Uprawnienia(playerid, ACCESS_MAKELEADER)) && !(IsAScripter(playerid)))
-	{
-		return noAccessMessage(playerid);
-	}
+    new str[144], akcja[144];
+    new pat = GetPVarInt(playerid, "patrol-id");
+    PatrolInfo[pat][patstan] = 2;
+    format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", PatrolInfo[pat][patname]);
+    SendTeamMessage(1, COLOR_ALLDEPT, str);
+    format(akcja,sizeof(akcja),"* %s uruchomi³ alert do wszystkich jednostek.",GetNick(playerid));
+    ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+    GPSMode(playerid, true);
 
-	if(IsPlayerConnected(para1))
-	{
-		if(para1 == INVALID_PLAYER_ID)
-		{
-			return 1;
-		}
-	}
-	else
-	{
-		return 1;
-	}
-
-	UnFrakcja(playerid, para1);
-	return 1;
+    return 1;
 }
