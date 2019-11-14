@@ -6632,10 +6632,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		{
 			if(GetPVarInt(playerid,"roped") == 1)
 			{
+				SetPlayerHealth(playerid, 100);
+				SetPlayerVelocity(playerid,0,0,0);
+				TogglePlayerControllable(playerid, 1);
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
-				TogglePlayerControllable(playerid, 1);
-				SetPlayerVelocity(playerid,0,0,0);
 				SetPVarInt(playerid,"chop_id",0);
 				for(new i=0;i<=ROPELENGTH;i++)
 				{
