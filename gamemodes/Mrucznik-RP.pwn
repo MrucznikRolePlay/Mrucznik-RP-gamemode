@@ -1685,6 +1685,11 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+	if(weaponid == 54 && GetPVarInt(playerid,"roped") == 1 && issuerid == INVALID_PLAYER_ID)
+    {
+		return 0;
+    }
+
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)
 	{
 		return 1;
@@ -6632,7 +6637,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		{
 			if(GetPVarInt(playerid,"roped") == 1)
 			{
-				SetPlayerHealth(playerid, 100);
 				SetPlayerVelocity(playerid,0,0,0);
 				TogglePlayerControllable(playerid, 1);
 				ClearAnimations(playerid);
