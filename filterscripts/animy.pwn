@@ -55,9 +55,9 @@ SendClientMessage(playerid, COLOR_GREEN,">/animped /dance /animclothes /animcoac
 SendClientMessage(playerid, COLOR_GREEN,">/animairport /animat /animbar /animball /animfire /animbeach");
 SendClientMessage(playerid, COLOR_GREEN,">/animbp /animinf /animbiked /animbh /animfood /animbikelp /animms /animbikes /animcar");
 SendClientMessage(playerid, COLOR_GREEN,">/animbikev /animbmx /animbikedbz /animchase /animbox /animbomber /animbsp /animcamera ");
-SendClientMessage(playerid, COLOR_GREEN,">/animgym /animpara /animgangs /animlookers /animcarchat /animcasino /animbuddy /animbus");
+SendClientMessage(playerid, COLOR_GREEN,">/animgym /animgangs /animlookers /animcarchat /animcasino /animbuddy /animbus");
 SendClientMessage(playerid, COLOR_GREEN,">/animcarry /animintshop /animjst /animkart /animkissing /animknife /animlapdan /animdend");
-SendClientMessage(playerid, COLOR_GREEN,">/animmedic /animmtb /animmusc /animotb /animnevada /animpark /animsaw /animchoppa");
+SendClientMessage(playerid, COLOR_GREEN,">/animmedic /animmtb /animmusc /animotb /animpark /animsaw /animchoppa");
 SendClientMessage(playerid, COLOR_GREEN,">/animhelp2 - next animation list.");
 return 1;
 }
@@ -1097,7 +1097,11 @@ ApplyAnimation(playerid,"GYMNASIUM","Pedals_still",4.1,0,1,1,1,1,1); //edited by
 }
 return 1;
 }
-if(strcmp(cmd, "/animpara", true) == 0) {
+if(strcmp(cmd, "/animpara", true == 0) {
+SendClientMessage(playerid, 0xFF0000FF, "Te animacje zostaly zablokowane!"); 
+return 1;
+}
+/*if(strcmp(cmd, "/animpara", true) == 0) {
 tmp = strtok(cmdtext, idx);
 if(!strlen(tmp)) {
 SendClientMessage(playerid,0xFF0000FF,">Write /animpara [1-22]");
@@ -1154,7 +1158,7 @@ ApplyAnimation(playerid,"PARACHUTE","PARA_steerR",4.1,0,1,1,1,1,1); //edited by 
 ApplyAnimation(playerid,"PARACHUTE","PARA_steerR_O",4.1,0,1,1,1,1,1); //edited by erik019
 }
 return 1;
-}
+}*/
 if(strcmp(cmd, "/animgangs", true) == 0) {
 tmp = strtok(cmdtext, idx);
 if(!strlen(tmp)) {
@@ -1996,6 +2000,10 @@ ApplyAnimation(playerid,"OTB","wtchrace_out",4.1,0,1,1,1,1,1); //edited by erik0
 }else if(animationplayed == 11) {
 ApplyAnimation(playerid,"OTB","wtchrace_win",4.1,0,1,1,1,1,1); //edited by erik019
 }
+return 1;
+}
+if(strcmp(cmd, "/animnevada", true == 0) {
+SendClientMessage(playerid, 0xFF0000FF, "Te animacje zostaly zablokowane!"); 
 return 1;
 }
 /*if(strcmp(cmd, "/animnevada", true) == 0) {
