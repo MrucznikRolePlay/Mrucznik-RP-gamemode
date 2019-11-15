@@ -45,24 +45,27 @@ YCMD:zmienhp(playerid, params[], help)
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					new giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME];
+					new giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME], additional[54];
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerHealth(playa, health);
-					Log(adminLog, INFO, "Admin %s ustawi³ %s hp na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), health);
-					new string[128];
-					format(string, sizeof(string), "%s da³ %d hp dla %s", sendername, health, giveplayer);
-					SendMessageToAdmin(string, COLOR_P@);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;
 					}
 					if(IsPlayerInAnyVehicle(playerid))
 					{
-						SetVehicleHealth(GetPlayerVehicleID(playa), health);
-						RepairVehicle(GetPlayerVehicleID(playa));
-                        CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
+						new vehid = GetPlayerVehicleID(playa);
+						SetVehicleHealth(vehid, health);
+						RepairVehicle(vehid);
+                        CarData[VehicleUID[vehid][vUID]][c_HP] = 1000.0;
+						additional = " oraz naprawi³ pojazd";
 					}
+
+					Log(adminLog, INFO, "Admin %s ustawi³ %s hp na %d%s", GetPlayerLogName(playerid), GetPlayerLogName(playa), health, additional);
+					new string[128];
+					format(string, sizeof(string), "%s da³ %d hp dla %s%s", sendername, health, giveplayer, additional);
+					SendMessageToAdmin(string, COLOR_P@);
 				}
 			}
 		}
