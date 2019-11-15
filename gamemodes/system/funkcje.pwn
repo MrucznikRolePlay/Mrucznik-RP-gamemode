@@ -3518,7 +3518,7 @@ IsAtGasStation(playerid)
 		{//Stacja pod p¹czkiem LS
 		    return 1;
 		}
-		else if(PlayerToPoint(15.0,playerid,2489.6565,-2101.3022,13.5620)) //stacja w bazie KT
+		else if(PlayerToPoint(10.0,playerid,2489.6565,-2101.3022,13.5620)) //stacja w bazie KT
 		{
 			return 1;
 		}
