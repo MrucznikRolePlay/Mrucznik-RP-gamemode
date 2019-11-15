@@ -82,7 +82,6 @@ YCMD:red(playerid, params[], help)
         format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA %s: {FFFFFF}%s:{FF0000} Odwo³ujê CODE RED", frakcja, GetNick(playerid));
         format(akcja,sizeof(akcja),"* %s wy³¹czy³ alert do wszystkich jednostek.",GetNick(playerid));
         GPSMode(playerid, true);
-        return 1;
     }
     else
     {
