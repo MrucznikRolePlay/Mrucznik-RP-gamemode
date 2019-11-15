@@ -1687,9 +1687,6 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
 	if(GetPVarInt(playerid,"roped") == 1 && issuerid == INVALID_PLAYER_ID)
     {
-		new Float:health;
-		GetPlayerHealth(playerid, health);
-		SetPlayerHealth(playerid, (health)+amount);
 		return 0;
     }
 
