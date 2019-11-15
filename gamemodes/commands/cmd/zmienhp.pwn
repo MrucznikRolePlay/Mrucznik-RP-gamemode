@@ -30,9 +30,6 @@
 
 YCMD:zmienhp(playerid, params[], help)
 {
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
 		new playa, health;
@@ -48,22 +45,23 @@ YCMD:zmienhp(playerid, params[], help)
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
+					new giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME];
+					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerHealth(playa, health);
+					Log(adminLog, INFO, "Admin %s ustawi³ %s hp na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), health);
+					new string[128];
+					format(string, sizeof(string), "%s da³ %d hp dla %s", sendername, health, giveplayer);
+					SendMessageToAdmin(string, COLOR_P@);
+					if(GetPlayerAdminDutyStatus(playerid) == 1)
+					{
+						iloscInne[playerid] = iloscInne[playerid]+1;
+					}
 					if(IsPlayerInAnyVehicle(playerid))
 					{
-					    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						Log(adminLog, INFO, "Admin %s ustawi³ %s hp na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), health);
-					    SetVehicleHealth(GetPlayerVehicleID(playa), health);
+						SetVehicleHealth(GetPlayerVehicleID(playa), health);
 						RepairVehicle(GetPlayerVehicleID(playa));
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
-						new string[128];
-						format(string, sizeof(string), "%s da³ %d hp dla %s", sendername, health, giveplayer);
-						SendMessageToAdmin(string, COLOR_P@);
-						if(GetPlayerAdminDutyStatus(playerid) == 1)
-						{
-							iloscInne[playerid] = iloscInne[playerid]+1;
-						}
 					}
 				}
 			}
