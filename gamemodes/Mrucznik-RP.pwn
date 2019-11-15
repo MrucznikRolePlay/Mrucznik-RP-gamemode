@@ -1509,16 +1509,14 @@ public OnPlayerDisconnect(playerid, reason)
         VAR_NGKeypad = false;
     }
 
-    if(PDGPS == playerid)
-    {
-        foreach(new i : Player)
-        {
-            if(IsACop(i) || IsAMedyk(i) || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
-            {
-                DisablePlayerCheckpoint(i);
-            }
-        }
-    }
+	if(PDGPS == playerid)
+	{
+		foreach(new i : Player)
+		{
+			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+				DisablePlayerCheckpoint(i);
+		}
+	}
 
     if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 	{
