@@ -42,6 +42,11 @@ YCMD:red(playerid, params[], help)
 		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
 	}
 
+    if(PlayerInfo[playerid][pBW] > 0)
+    {
+       return sendErrorMessage(playerid, "Jesteœ nieprzytomny!"); 
+    }
+
     new str[144], akcja[144];
     if(frac == FRAC_LSPD)
     {   
