@@ -1685,6 +1685,11 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+	if(GetPVarInt(playerid,"roped") == 1 && issuerid == INVALID_PLAYER_ID)
+    {
+		return 0;
+    }
+
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)
 	{
 		return 1;
@@ -1807,6 +1812,8 @@ public OnPlayerDeath(playerid, killerid, reason)
     	{
      		DestroyDynamicObject(r0pes[playerid][i]);
        	}
+		ClearAnimations(playerid);
+		SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
         SetPVarInt(playerid,"roped",0);
 	}
 
@@ -2467,9 +2474,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_KT: //10
 						{
-						    SetPlayerPosEx(playerid, 2482.7566, -2105.6033, 32.2773);
-							SetPlayerVirtualWorld(playerid,3);
-							Wchodzenie(playerid);
+							SetPlayerPosEx(playerid,2468.3796,-2082.9690,13.5580);
+                            SetPlayerFacingAngle(playerid, 89.1901);
 						}
 						case FRAC_GOV: //11
 						{
@@ -6631,10 +6637,10 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		{
 			if(GetPVarInt(playerid,"roped") == 1)
 			{
+				SetPlayerVelocity(playerid,0,0,0);
+				TogglePlayerControllable(playerid, 1);
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
-				TogglePlayerControllable(playerid, 1);
-				SetPlayerVelocity(playerid,0,0,0);
 				SetPVarInt(playerid,"chop_id",0);
 				for(new i=0;i<=ROPELENGTH;i++)
 				{

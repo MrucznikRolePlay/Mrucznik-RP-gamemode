@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ gps ]--------------------------------------------------//
+//--------------------------------------------------[ checkbw ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,23 +28,21 @@
 	
 */
 
-YCMD:gps(playerid, params[], help)
+YCMD:checkbw(playerid, params[], help)
 {
-	if(!IsACop(playerid) && !IsAMedyk(playerid) && GetPlayerFraction(playerid) != FRAC_BOR)
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{
-		return sendErrorMessage(playerid, "Nie jesteœ policjantem lub medykiem.");
+		new id;
+		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /checkbw [ID]");
+		if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
+		if(PlayerInfo[id][pBW] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie ma BW.");
+		new string[144]; 
+		format(string, sizeof(string), "Graczowi %s zosta³o do koñca BW: %d sekund", GetNick(id), PlayerInfo[id][pBW]); 
+		SendClientMessage(playerid, COLOR_GRAD2, string);
 	}
-
-	if(OnDuty[playerid] != 1 && JobDuty[playerid] != 1)
+	else
 	{
-		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
+		sendErrorMessage(playerid, "Nie masz uprawnieñ.");
 	}
-
-	if(PlayerInfo[playerid][pBW] > 0)
-	{
-		return sendErrorMessage(playerid, "Musisz byæ przytomny.");
-	}
-
-	GPSMode(playerid);
-	return 1;
+    return 1;
 }

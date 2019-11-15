@@ -63,6 +63,7 @@
 #include "cmd/bp.pwn"
 #include "cmd/brama.pwn"
 #include "cmd/bus.pwn"
+#include "cmd/bw.pwn"
 #include "cmd/bwsettings.pwn"
 #include "cmd/bwtime.pwn"
 #include "cmd/c.pwn"
@@ -75,6 +76,7 @@
 #include "cmd/cca.pwn"
 #include "cmd/cennik.pwn"
 #include "cmd/check.pwn"
+#include "cmd/checkbw.pwn"
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
@@ -594,6 +596,7 @@
 #include "cmd/yo4.pwn"
 #include "cmd/z.pwn"
 #include "cmd/zabierz.pwn"
+#include "cmd/zabierzgps.pwn"
 #include "cmd/zabierzlideraorg.pwn"
 #include "cmd/zablokujtel.pwn"
 #include "cmd/zablokujw.pwn"
@@ -1376,6 +1379,9 @@ static Aliases()
 
 	//zabierz
 	Command_AddAltNamed("zabierz", "take");
+	
+	//zabierzgps
+	Command_AddAltNamed("zabierzgps", "takegps");
 
 	//zablokujtel
 	Command_AddAltNamed("zablokujtel", "togphone");

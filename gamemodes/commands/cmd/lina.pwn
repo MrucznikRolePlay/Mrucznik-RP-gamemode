@@ -37,7 +37,7 @@ CMD:lina(playerid, cmdtext[])
         GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
      	pl_pos[playerid][4] = floatsub(pl_pos[playerid][2],pl_pos[playerid][3]);
         if(pl_pos[playerid][4] > ROPELENGTH) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Jesteœ zbyt wysoko by opuœciæ siê na linie."); 
-        if(pl_pos[playerid][4] < 6) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Jesteœ zbyt nisko by opuœciæ siê na linie."); 
+        if(pl_pos[playerid][4] < 15) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Jesteœ zbyt nisko by opuœciæ siê na linie."); 
             else RemovePlayerFromVehicle(playerid);
         SetPVarInt(playerid,"roped",1);
         SetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],floatsub(pl_pos[playerid][2],2));

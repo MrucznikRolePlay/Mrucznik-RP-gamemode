@@ -138,6 +138,8 @@
 		> clearzone - czyœci strefê
 		> setzonecontrol - ustawia kontrolê nad stref¹ dla... 
 		> unbw - zdejmuje BW graczowi o ID
+		> bw - nadaje BW graczowi o ID
+		> checkbw - informacja o czasie BW gracza
 		> cziterzy - pokazuje liste osób, które AC uzna³ za cziterów 
 		> checkprawko - sprawdza czy gracz ma prawo jazdy
 		> restart - restartuje serwera
