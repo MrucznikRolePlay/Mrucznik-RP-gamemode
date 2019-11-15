@@ -37,7 +37,7 @@ YCMD:checkbw(playerid, params[], help)
 		if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
 		if(PlayerInfo[id][pBW] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie ma BW.");
 		new string[144]; 
-		format(string, sizeof(string), "Graczowi %s zosta³o do koñca BW: %d", GetNick(id), PlayerInfo[id][pBW]); 
+		format(string, sizeof(string), "Graczowi %s zosta³o do koñca BW: %d sekund", GetNick(id), PlayerInfo[id][pBW]); 
 		SendClientMessage(playerid, COLOR_GRAD2, string);
 	}
 	else
