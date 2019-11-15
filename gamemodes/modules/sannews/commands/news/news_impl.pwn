@@ -30,6 +30,11 @@ command_news_Impl(playerid, newsText[256])
         sendErrorMessage(playerid, "Nie jesteœ z frakcji San News!"); 
         return 1;
     }
+    else
+    {
+        if(PlayerInfo[playerid][pRank] == 0) return sendErrorMessage(playerid, "Masz za nisk¹ rangê!"); 
+    }
+
     if(AntySpam[playerid] == 1)
     {
         SendClientMessage(playerid, COLOR_GREY, "Odczekaj 3 sekund");

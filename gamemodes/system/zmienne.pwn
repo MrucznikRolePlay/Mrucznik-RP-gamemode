@@ -283,8 +283,6 @@ new AI_SIGN[3],
 new bool:VAR_Kolejka=false;
 //13.08  s¹d int, drobne zmiany errorów, fly mode dla 1000+ @
 
-new brama_kt[3];
-new brama_kt_state[3];
 new Brama_HA;
 new Brama_HA1;
 new Brama_HA2;

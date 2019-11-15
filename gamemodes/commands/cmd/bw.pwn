@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ gps ]--------------------------------------------------//
+//--------------------------------------------------[ bw ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,23 +28,27 @@
 	
 */
 
-YCMD:gps(playerid, params[], help)
+YCMD:bw(playerid, params[], help)
 {
-	if(!IsACop(playerid) && !IsAMedyk(playerid) && GetPlayerFraction(playerid) != FRAC_BOR)
+    if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{
-		return sendErrorMessage(playerid, "Nie jesteœ policjantem lub medykiem.");
-	}
+		new giveplayerid, czas;
+		if(sscanf(params, "k<fix>d", giveplayerid, czas))
+		{
+			sendTipMessage(playerid, "U¿yj /bw [ID/NICK GRACZA] [czas w sekundach]"); //
+			return 1;
+		}
+		if(!IsPlayerConnected(giveplayerid)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
 
-	if(OnDuty[playerid] != 1 && JobDuty[playerid] != 1)
-	{
-		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
+		new Float:x, Float:y, Float:z;
+		GetPlayerPos(giveplayerid, x, y, z);
+		PlayerInfo[giveplayerid][pBW] = czas;
+		SetSpawnInfo(giveplayerid, 0, GetPlayerSkin(giveplayerid), x, y, z, 0.0, 0, 0, 0, 0, 0, 0);
+		SetPVarInt(giveplayerid, "bw-skin",  GetPlayerSkin(giveplayerid));
+		SetPVarInt(giveplayerid, "bw-vw", GetPlayerVirtualWorld(giveplayerid));
+		SetPVarInt(giveplayerid, "bw-int", GetPlayerInterior(giveplayerid));
+		SetPlayerSpawn(giveplayerid);
+		SendClientMessage(playerid, COLOR_GRAD2, "Nadano BW");
 	}
-
-	if(PlayerInfo[playerid][pBW] > 0)
-	{
-		return sendErrorMessage(playerid, "Musisz byæ przytomny.");
-	}
-
-	GPSMode(playerid);
-	return 1;
+    return 1;
 }
