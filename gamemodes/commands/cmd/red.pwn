@@ -97,11 +97,11 @@ YCMD:red(playerid, params[], help)
 
     ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     SendTeamMessage(1, COLOR_ALLDEPT, str);
-    PlayCrimeReportForPlayersTeam(1, playerid, 2212); //lub 16
+    PlayCrimeReportForPlayersTeam(1, playerid, 16); //lub 16
     SendTeamMessage(2, COLOR_ALLDEPT, str);
-    PlayCrimeReportForPlayersTeam(2, playerid, 2212); //lub 16
+    PlayCrimeReportForPlayersTeam(2, playerid, 16); //lub 16
 	SendTeamMessage(3, COLOR_ALLDEPT, str);
-    PlayCrimeReportForPlayersTeam(3, playerid, 2212); //lub 16
+    PlayCrimeReportForPlayersTeam(3, playerid, 16); //lub 16
 
     return 1;
 }
