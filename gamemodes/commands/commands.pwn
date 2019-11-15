@@ -594,6 +594,7 @@
 #include "cmd/yo4.pwn"
 #include "cmd/z.pwn"
 #include "cmd/zabierz.pwn"
+#include "cmd/zabierzgps.pwn"
 #include "cmd/zabierzlideraorg.pwn"
 #include "cmd/zablokujtel.pwn"
 #include "cmd/zablokujw.pwn"
@@ -1376,6 +1377,9 @@ static Aliases()
 
 	//zabierz
 	Command_AddAltNamed("zabierz", "take");
+	
+	//zabierzgps
+	Command_AddAltNamed("zabierzgps", "takegps");
 
 	//zablokujtel
 	Command_AddAltNamed("zablokujtel", "togphone");
