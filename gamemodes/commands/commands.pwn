@@ -76,6 +76,7 @@
 #include "cmd/cca.pwn"
 #include "cmd/cennik.pwn"
 #include "cmd/check.pwn"
+#include "cmd/checkbw.pwn"
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
