@@ -1097,7 +1097,7 @@ ApplyAnimation(playerid,"GYMNASIUM","Pedals_still",4.1,0,1,1,1,1,1); //edited by
 }
 return 1;
 }
-if(strcmp(cmd, "/animpara", true == 0) {
+if(strcmp(cmd, "/animpara", true) == 0) {
 SendClientMessage(playerid, 0xFF0000FF, "Te animacje zostaly zablokowane!"); 
 return 1;
 }
@@ -2002,7 +2002,7 @@ ApplyAnimation(playerid,"OTB","wtchrace_win",4.1,0,1,1,1,1,1); //edited by erik0
 }
 return 1;
 }
-if(strcmp(cmd, "/animnevada", true == 0) {
+if(strcmp(cmd, "/animnevada", true) == 0) {
 SendClientMessage(playerid, 0xFF0000FF, "Te animacje zostaly zablokowane!"); 
 return 1;
 }
@@ -4278,7 +4278,7 @@ if(!strlen(tmp)) {
 SendClientMessage(playerid,0xFF0000FF,">Write /animswat [1-24]");
 return 1;
 }*/
-if(strcmp(cmd, "/animswat", true == 0) {
+if(strcmp(cmd, "/animswat", true) == 0) {
 SendClientMessage(playerid, 0xFF0000FF, "Te animacje zostaly zablokowane!"); 
 return 1;
 }
