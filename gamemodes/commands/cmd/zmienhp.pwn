@@ -55,6 +55,7 @@ YCMD:zmienhp(playerid, params[], help)
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						Log(adminLog, INFO, "Admin %s ustawi³ %s hp na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), health);
 					    SetVehicleHealth(GetPlayerVehicleID(playa), health);
+						RepairVehicle(GetPlayerVehicleID(playa));
                         CarData[VehicleUID[GetPlayerVehicleID(playa)][vUID]][c_HP] = 1000.0;
 						new string[128];
 						format(string, sizeof(string), "%s da³ %d hp dla %s", sendername, health, giveplayer);
