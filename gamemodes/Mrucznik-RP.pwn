@@ -2474,9 +2474,6 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_KT: //10
 						{
-						    //SetPlayerPosEx(playerid, 2482.7566, -2105.6033, 32.2773);
-							//SetPlayerVirtualWorld(playerid,3);
-							//Wchodzenie(playerid);
 							SetPlayerPosEx(playerid,2468.3796,-2082.9690,13.5580);
                             SetPlayerFacingAngle(playerid, 89.1901);
 						}

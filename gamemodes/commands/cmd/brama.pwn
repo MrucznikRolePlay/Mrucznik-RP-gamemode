@@ -1463,32 +1463,6 @@ YCMD:brama(playerid, params[], help)
 
         	}
         }
-		/*if(IsPlayerInFraction(playerid, FRAC_KT, 5000))
-		{
-			new Float:gate_pos[3][2][6] = {
-				{	//x, y, z, rx, ry, rz
-					{2424.25342, -2096.28613, 13.22150,   0.00000, 0.00000, 90.00000}, //open
-					{2424.25342, -2096.28613, 13.22150,   0.00000, 90.00000, 90.00000} //close
-				},
-				{
-					{2424.25342, -2081.89453, 13.22150,   0.00000, 0.00000, 90.00000}, 
-					{2424.25342, -2081.89453, 13.22150,   0.00000, -90.00000, 90.00000}
-				},
-				{
-					{2540.9431, -2117.0085, 11.0,   0.00000, 0.00000, 90.00000}, 
-					{2540.94312, -2117.00854, 14.19210,   0.00000, 0.00000, 90.00000}
-				}
-			};
-			for(new i; i<3; i++)
-			{
-				if(IsPlayerInRangeOfPoint(playerid, 15.0, gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2]))
-				{
-					MoveDynamicObject(brama_kt[i], gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2], 2,
-						gate_pos[i][brama_kt_state[i]][3], gate_pos[i][brama_kt_state[i]][4], gate_pos[i][brama_kt_state[i]][5]);
-					brama_kt_state[i] = !brama_kt_state[i];
-				}
-			}
-		}*/
 		if(IsAUrzednik(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 		    if(IsPlayerInRangeOfPoint(playerid, 5.0, -2059.30249023,568.60919189,1172.05114746))
