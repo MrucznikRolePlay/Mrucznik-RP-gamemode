@@ -1463,7 +1463,7 @@ YCMD:brama(playerid, params[], help)
 
         	}
         }
-		if(IsPlayerInFraction(playerid, FRAC_KT, 5000))
+		/*if(IsPlayerInFraction(playerid, FRAC_KT, 5000))
 		{
 			new Float:gate_pos[3][2][6] = {
 				{	//x, y, z, rx, ry, rz
@@ -1488,7 +1488,7 @@ YCMD:brama(playerid, params[], help)
 					brama_kt_state[i] = !brama_kt_state[i];
 				}
 			}
-		}
+		}*/
 		if(IsAUrzednik(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 		    if(IsPlayerInRangeOfPoint(playerid, 5.0, -2059.30249023,568.60919189,1172.05114746))

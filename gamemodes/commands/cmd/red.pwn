@@ -42,7 +42,7 @@ YCMD:red(playerid, params[], help)
 		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
 	}
 
-    new str[144], akcja[144], patrolnick[24];
+    new str[144], akcja[144];
     if(frac == FRAC_LSPD)
     {   
         if(GetPVarInt(playerid, "patrol") != 1)
@@ -52,7 +52,6 @@ YCMD:red(playerid, params[], help)
         else
         {
             new pat = GetPVarInt(playerid, "patrol-id");
-            patrolnick = PatrolInfo[pat][patname];
             if(PDGPS == playerid)
             {
                 PatrolInfo[pat][patstan] = 1;
@@ -63,23 +62,31 @@ YCMD:red(playerid, params[], help)
             }
         }
     }
-    else
+
+    new frakcja[10];
+    if(frac == FRAC_LSPD)
     {
-        new nick[MAX_PLAYER_NAME];
-    	GetPlayerName(playerid, nick, sizeof(nick));
-        patrolnick = nick;   
+        frakcja = "LSPD";
+    }
+    else if(frac == FRAC_FBI)
+    {
+        frakcja = "FBI";
+    }
+    else if(frac == FRAC_NG)
+    {
+        frakcja = "SASD";
     }
 
     if(PDGPS == playerid)
     {
-        format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA %s: {FFFFFF}%s:{FF0000} Odwo³ujê CODE RED", FractionNames[frac], patrolnick);
+        format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA %s: {FFFFFF}%s:{FF0000} Odwo³ujê CODE RED", frakcja, GetNick(playerid));
         format(akcja,sizeof(akcja),"* %s wy³¹czy³ alert do wszystkich jednostek.",GetNick(playerid));
         GPSMode(playerid, true);
         return 1;
     }
     else
     {
-        format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA %s: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", FractionNames[frac], patrolnick);
+        format(str, sizeof(str), "{FFFFFF}»»{6A5ACD} CENTRALA %s: {FFFFFF}%s:{FF0000} Potrzebne natychmiastowe wsparcie - {FFFFFF}CODE RED", frakcja, GetNick(playerid));
         format(akcja,sizeof(akcja),"* %s uruchomi³ alert do wszystkich jednostek.",GetNick(playerid));
         GPSMode(playerid, true);
     }
