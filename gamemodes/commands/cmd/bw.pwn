@@ -32,6 +32,7 @@ YCMD:bw(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{
+		new giveplayerid, czas;
 		if(sscanf(params, "k<fix>d", giveplayerid, czas))
 		{
 			sendTipMessage(playerid, "U¿yj /bw [ID/NICK GRACZA] [czas w sekundach]"); //
