@@ -781,7 +781,7 @@ fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             MruMySQL_SetAccInt("Rank", pracownik_nick, 99);
             MruMySQL_SetAccInt("Member", pracownik_nick, 99);
             MruMySQL_SetAccInt("PodszywanieSie", pracownik_nick, 0);
-            MruMySQL_SetAccInt("Skin", pracownik_nick, 0);
+            MruMySQL_SetAccInt("Uniform", pracownik_nick, 0);
             MruMySQL_SetAccInt("Team", pracownik_nick, 3);
             new msg[75];
             format(msg, sizeof(msg), "Zwolni³eœ %s ze swojej frakcji", pracownik_nick, FractionNames[PlayerInfo[playerid][pLider]]);
