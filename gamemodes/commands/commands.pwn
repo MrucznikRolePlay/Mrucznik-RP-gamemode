@@ -63,6 +63,7 @@
 #include "cmd/bp.pwn"
 #include "cmd/brama.pwn"
 #include "cmd/bus.pwn"
+#include "cmd/bw.pwn"
 #include "cmd/bwsettings.pwn"
 #include "cmd/bwtime.pwn"
 #include "cmd/c.pwn"
