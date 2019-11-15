@@ -40,6 +40,11 @@ YCMD:gps(playerid, params[], help)
 		return sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie.");
 	}
 
+	if(PlayerInfo[playerid][pBW] > 0)
+	{
+		return sendErrorMessage(playerid, "Musisz byæ przytomny.");
+	}
+
 	GPSMode(playerid);
 	return 1;
 }

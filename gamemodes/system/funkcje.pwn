@@ -7438,6 +7438,19 @@ SendTeamMessage(team, color, string[], isDepo = 0)
 	}
 }
 
+PlayCrimeReportForPlayersTeam(team, suspectid, level = 16)
+{
+	foreach(new i : Player)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if(PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team)
+		    {
+		    	PlayCrimeReportForPlayer(i, suspectid, level);
+			}
+		}
+	}
+}
 
 SendRadioMessage(member, color, string[])
 {
