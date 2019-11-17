@@ -348,7 +348,6 @@
 #include "cmd/polej.pwn"
 #include "cmd/pomoc2.pwn"
 #include "cmd/pomocdom.pwn"
-#include "cmd/poscig.pwn"
 #include "cmd/pozwolenie.pwn"
 #include "cmd/pr.pwn"
 #include "cmd/pracownicy.pwn"

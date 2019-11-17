@@ -7561,14 +7561,17 @@ public OnPlayerText(playerid, text[])
 				Zgloszenie[id][zgloszenie_status] = 0;
 			}
 
-			new turner[MAX_PLAYER_NAME];
-			new wanted[128];
+			new turner[MAX_PLAYER_NAME], pZone[MAX_ZONE_NAME];
+			new wanted[144];
 			GetPlayerName(playerid, turner, sizeof(turner));
+			GetPlayer2DZone(playerid, pZone, sizeof(pZone));
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg這simy to wszystkim jednostkom w danym obszarze.");
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dzi瘯ujemy za zg這szenie");
 			format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek! Nadawca: %s", turner);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg這szenie: %s", text);
+			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			format(wanted, sizeof(wanted), "Centrala: Lokalizacja zg這szenia: %s", pZone);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
 
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zako鎍zona...");

@@ -37,27 +37,43 @@ YCMD:slap(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
 		new playa;
-		if( sscanf(params, "k<fix>", playa))
+		new option[10];
+		if(sscanf(params, "k<fix>s[1]", playa, option))
 		{
-			sendTipMessage(playerid, "U¿yj /slap [playerid/CzêœæNicku]");
+			if(sscanf(params, "k<fix>", playa))
+			{
+				sendTipMessage(playerid, "U¿yj /slap [playerid/CzêœæNicku] [opcjonalnie: l-lewo, r-prawo]");
+			}
 			return 1;
 		}
 
-		new Float:shealth;
-		new Float:slx, Float:sly, Float:slz;
-
-		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2
-            || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
 		        if(playa != INVALID_PLAYER_ID)
-		        {
+		        {			
+					new Float:shealth;
+					new Float:slx, Float:sly, Float:slz;
 			        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerHealth(playa, shealth);
 					SetPlayerHealth(playa, shealth-5);
 					GetPlayerPos(playa, slx, sly, slz);
+					if(strcmp(option,"l", true) != -1)
+					{
+						slx -= 5;
+					}
+					else if(strcmp(option,"r", true) != -1)
+					{
+						slx += 5;
+					}
+					else
+					{
+						sendTipMessage(playerid, "U¿yj /slap [playerid/CzêœæNicku] [opcjonalnie: l-lewo, r-prawo]");
+						return 1;
+					}
+
 					SetPlayerPosEx(playa, slx, sly, slz+5);
 					PlayerPlaySound(playa, 1130, slx, sly, slz+5);
         			Log(punishmentLog, INFO, "Admin %s da³ slapa %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));

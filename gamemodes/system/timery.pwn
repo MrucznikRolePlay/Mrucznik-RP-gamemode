@@ -3605,7 +3605,13 @@ public VehicleUpdate()
                     CarData[VehicleUID[i][vUID]][c_HP] = 250.0;
                 GetVehicleParamsEx(i, engine, lights, alarm, doors, bonnect, boot, objective);
                 SetVehicleParamsEx(i, 0, lights, alarm, doors, bonnect, boot, objective);
-                Oil_GenerateFromVehicle(i);
+                new hour,minute,second;
+				gettime(hour,minute,second);
+				FixHour(hour);
+				if(shifthour >= 1 && shifthour <= 4)
+				{
+					Oil_GenerateFromVehicle(i);
+				}
             }
         }
     }
