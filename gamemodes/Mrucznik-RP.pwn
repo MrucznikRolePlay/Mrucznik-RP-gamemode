@@ -2030,6 +2030,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 				KoniecWyscigu(-1);
 			}
 		}
+		if(lowcaz[playerid] == killerid)
+		{
+			lowcaz[playerid] = 501;
+			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta?o anulowane - nie mo?esz wzi?? teraz zlecenia na tego samego gracza!");
+		}
 		if(GetPVarInt(playerid, "ZjadlDragi") == 1)
 		{
 			new FirstValue = GetPVarInt(playerid, "FirstValueStrong");

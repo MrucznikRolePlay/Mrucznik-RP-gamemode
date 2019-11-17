@@ -8333,7 +8333,7 @@ public NG_OpenGateWithKey(playerid)
 	return 1;
 }
 
-UnFrakcja(playerid, para1)
+UnFrakcja(playerid, para1, Bool:respawn)
 {
 	new string[64];
 	new giveplayer[MAX_PLAYER_NAME];
@@ -8356,7 +8356,15 @@ UnFrakcja(playerid, para1)
 	PlayerInfo[para1][pJob] = 0;
 	orgUnInvitePlayer(para1);
 	MedicBill[para1] = 0;
-	SetPlayerSpawn(para1);
+	if(respawn)
+	{
+		SetPlayerSpawn(para1);
+	}
+	else
+	{
+		SetPlayerSpawnSkin(playerid);
+		SetPlayerSpawnWeapon(playerid);
+	}
 	format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	return 1;
