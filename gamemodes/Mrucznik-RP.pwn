@@ -78,13 +78,13 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <YSI\y_timers>
+#define AC_MAX_CONNECTS_FROM_IP		3
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
 #include <timestamp>
-#define AC_MAX_CONNECTS_FROM_IP		2
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
 #include <true_random>
 #include <PreviewModelDialog>
