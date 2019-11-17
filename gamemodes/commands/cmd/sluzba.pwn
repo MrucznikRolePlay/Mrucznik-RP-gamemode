@@ -51,9 +51,8 @@ YCMD:sluzba(playerid, params[], help)
 			return 1;
 		}
 
-        if(PlayerInfo[playerid][pUniform] == 0)
+        if((IsACop(playerid) || IsAMedyk(playerid) || GetPlayerFraction(playerid) == FRAC_BOR) && PlayerInfo[playerid][pUniform] == 0)
         {
-            //SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
             sendTipMessage(playerid, "Nie masz skina frakcyjnego, u¿yj /fskin !");
             return 1;
         }
