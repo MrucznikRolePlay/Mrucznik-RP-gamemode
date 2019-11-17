@@ -1839,7 +1839,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		{*/ // nowy system smierci
         new frac = GetPlayerFraction(killerid);
 
-       if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
+        if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
         { //nowy system bw
             new bool:inzone=false;
             for(new i=0;i<MAX_ZONES;i++)
