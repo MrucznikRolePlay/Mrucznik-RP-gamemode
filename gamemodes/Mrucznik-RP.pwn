@@ -273,7 +273,8 @@ public OnGameModeInit()
         new ust = dini_Int("Settings.ini", "OnlyGangZones");
         SetSVarInt("BW_OnlyGangZones", ust);
         ust = dini_Int("Settings.ini", "Time");
-        SetSVarInt("BW_Time", ust);
+        //SetSVarInt("BW_Time", ust);
+		SetSVarInt("BW_Time", 120);
         SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
     }
     else
@@ -283,7 +284,7 @@ public OnGameModeInit()
         dini_IntSet("Settings.ini", "Time", 180);
         dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
         SetSVarInt("BW_OnlyGangZones", 0);
-        SetSVarInt("BW_Time", 180);
+        SetSVarInt("BW_Time", 140);//bylo 180
     }
 
 
@@ -1826,10 +1827,20 @@ public OnPlayerDeath(playerid, killerid, reason)
     //Strefy
     if(killerid != INVALID_PLAYER_ID)
     {
-        new frac = GetPlayerFraction(killerid);
+		new medykionline = 0;
+		foreach(new i : Player)
+		{
+			if(IsAMedyk(i) && OnDuty[i] == 1)
+			{
+				medykionline++;
+			}
+		}
+		if(medykionline >= 3)
+		{
+        //new frac = GetPlayerFraction(killerid);
 
-        if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
-        {
+       // if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
+        //{
             new bool:inzone=false;
             for(new i=0;i<MAX_ZONES;i++)
             {
@@ -1852,7 +1863,8 @@ public OnPlayerDeath(playerid, killerid, reason)
                 SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
                 SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
             }
-        }
+		}
+        //}
     }
 
 	if(IsPlayerConnected(playerid) && playerid != INVALID_PLAYER_ID)
@@ -1964,6 +1976,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 							GotHit[playerid] = 0;
 							GetChased[playerid] = 999;
 							GoChase[killerid] = 999;
+							//tworzenie cia³a
 						}
 					}
 				}
@@ -1976,7 +1989,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		}
 		if(TalkingLive[playerid] != INVALID_PLAYER_ID)
 		{
-			SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca umar³.");
+			SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca jest nieprzytomny.");
 			new talker = TalkingLive[playerid];
 			TalkingLive[playerid] = INVALID_PLAYER_ID;
 			TalkingLive[talker] = INVALID_PLAYER_ID;
@@ -1984,7 +1997,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		//koniec rozmowy telefonicznej
 		if(Mobile[playerid] != INVALID_PLAYER_ID)
 		{
-			SendClientMessage(playerid, COLOR_YELLOW, "Umar³eœ - po³¹czenie zakoñczone.");
+			SendClientMessage(playerid, COLOR_YELLOW, "Jesteœ nieprzytomny - po³¹czenie zakoñczone.");
 			if(Mobile[playerid] >= 0)
 			{
 				SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S³ychaæ nag³y trzask i po³¹czenie zostaje zakoñczone.");
@@ -2011,11 +2024,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 			{
 				KoniecWyscigu(-1);
 			}
-		}
-		if(lowcaz[playerid] == killerid)
-		{
-			lowcaz[playerid] = 501;
-			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta³o anulowane - nie mo¿esz wzi¹æ teraz zlecenia na tego samego gracza!");
 		}
 		if(GetPVarInt(playerid, "ZjadlDragi") == 1)
 		{
