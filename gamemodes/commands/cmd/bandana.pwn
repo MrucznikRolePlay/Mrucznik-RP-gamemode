@@ -47,7 +47,7 @@ YCMD:bandana(playerid, params[], help)
 			{
 				if(GetPlayerAdminDutyStatus(playerid))
 				{
-					Delete3DTextLabel(HiddenPlayerName[playerid]);
+					DeletePlayer3DTextLabel(playerid, HiddenPlayerName[playerid]);
 				}
 				ShowPlayerNameTagForPlayer(i, playerid, 1);
 			}
@@ -66,10 +66,10 @@ YCMD:bandana(playerid, params[], help)
 			{
 				if(GetPlayerAdminDutyStatus(playerid))
 				{
-		   			Delete3DTextLabel(HiddenPlayerName[playerid]);
+		   			DeletePlayer3DTextLabel(playerid, HiddenPlayerName[playerid]);
 					format(pName, sizeof(pName), "%s [%d]\n((maska))", GetNick(playerid), playerid);
-					HiddenPlayerName[playerid] = Create3DTextLabel(pName, COLOR_WHITE, X, Y, Z, 40.0, playerid);
-					Attach3DTextLabelToPlayer(HiddenPlayerName[playerid], playerid, 0, 0, 0.3);
+					HiddenPlayerName[playerid] = CreatePlayer3DTextLabel(i, pName, COLOR_WHITE, X, Y, Z, 40.0, playerid);
+					//Attach3DTextLabelToPlayer(HiddenPlayerName[playerid], playerid, 0, 0, 0.3);
 				}
 				ShowPlayerNameTagForPlayer(i, playerid, 0);
 			}
