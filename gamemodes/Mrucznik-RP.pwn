@@ -1827,7 +1827,7 @@ public OnPlayerDeath(playerid, killerid, reason)
     //Strefy
     if(killerid != INVALID_PLAYER_ID)
     {
-		new medykionline = 0;
+		/*new medykionline = 0;
 		foreach(new i : Player)
 		{
 			if(IsAMedyk(i) && OnDuty[i] == 1)
@@ -1836,11 +1836,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 			}
 		}
 		if(medykionline >= 3)
-		{
+		{*/ // nowy system smierci
         //new frac = GetPlayerFraction(killerid);
 
-       // if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
-        //{
+       if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
+        { //nowy system bw
             new bool:inzone=false;
             for(new i=0;i<MAX_ZONES;i++)
             {
@@ -1855,7 +1855,7 @@ public OnPlayerDeath(playerid, killerid, reason)
             }
             if(inzone || GetSVarInt("BW_OnlyGangZones") == 1)
             {
-                new Float:x, Float:y, Float:z, pZone[MAX_ZONE_NAME], string[144];
+                new Float:x, Float:y, Float:z, pZone[MAX_ZONE_NAME];
 				GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
                 GetPlayerPos(playerid, x, y, z);
                 PlayerInfo[playerid][pBW] = GetSVarInt("BW_Time");
@@ -1863,8 +1863,8 @@ public OnPlayerDeath(playerid, killerid, reason)
                 SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
                 SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
                 SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-				SendFamilyMessage(4, COLOR_ALLDEPT, "Centrala: Do wszystkich jednostek! Nadawca: Œwiadek");
-				SendFamilyMessage(4, COLOR_ALLDEPT, "Centrala: Otrzymano zg³oszenie: nieprzytomna osoba, chyba oddycha... Bojê siê! PrzyjeŸdzie tu!");
+				SendFamilyMessage(4, COLOR_ALLDEPT, "Centrala: Do wszystkich jednostek!");
+				SendFamilyMessage(4, COLOR_ALLDEPT, "Centrala: Otrzymano zg³oszenie: nieprzytomna osoba, chyba oddycha... Bojê siê! PrzyjedŸcie tu!");
 				format(string, sizeof(string), "Centrala: Lokalizacja zg³oszenia: %s", pZone);
 				SendFamilyMessage(4, COLOR_ALLDEPT, string);
             }
