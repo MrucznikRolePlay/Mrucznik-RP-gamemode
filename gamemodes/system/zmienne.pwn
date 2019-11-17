@@ -1052,6 +1052,8 @@ new AllLeaders;
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
 
+new Text3D:HiddenPlayerName[MAX_PLAYERS];
+
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
