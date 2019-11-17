@@ -8333,7 +8333,7 @@ public NG_OpenGateWithKey(playerid)
 	return 1;
 }
 
-UnFrakcja(playerid, para1, Bool:respawn)
+UnFrakcja(playerid, para1, bool:respawn = true)
 {
 	new string[64];
 	new giveplayer[MAX_PLAYER_NAME];

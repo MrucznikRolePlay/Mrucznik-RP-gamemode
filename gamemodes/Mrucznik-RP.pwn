@@ -1837,7 +1837,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		}
 		if(medykionline >= 3)
 		{*/ // nowy system smierci
-        //new frac = GetPlayerFraction(killerid);
+        new frac = GetPlayerFraction(killerid);
 
        if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
         { //nowy system bw
