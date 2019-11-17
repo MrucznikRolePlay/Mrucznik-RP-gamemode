@@ -1658,9 +1658,9 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0://Dodo
 				{
-					ShowPlayerDialogEx(playerid, 411, DIALOG_STYLE_MSGBOX, "Kupowanie Dodo", "Dodo\n\nCena: 50.000.000$\nPrêdkoœæ lotu poziomego: 150km/h\nWielkosc: Ma³y\nOpis:", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 411, DIALOG_STYLE_MSGBOX, "Kupowanie Dodo", "Dodo\n\nCena: 30.000.000$\nPrêdkoœæ lotu poziomego: 150km/h\nWielkosc: Ma³y\nOpis:", "Kup!", "Wróæ");
 					pojazdid[playerid] = 593;
-					CenaPojazdu[playerid] = 50000000;
+					CenaPojazdu[playerid] = 30000000;
 				}
 				case 1://Cropduster
 				{
