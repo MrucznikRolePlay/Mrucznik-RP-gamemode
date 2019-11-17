@@ -32,7 +32,7 @@ CMD:lina(playerid, cmdtext[])
 {
     if(IsAMedyk(playerid) || IsACop(playerid))
     {
-        if(OnDuty[playerid] == 1 && IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetPlayerVehicleID(playerid)) && GetPVarInt(playerid,"roped") == 0)
+        if((OnDuty[playerid] == 1 || JobDuty[playerid] == 1) && IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetPlayerVehicleID(playerid)) && GetPVarInt(playerid,"roped") == 0)
         {
             if(GetPlayerVehicleSeat(playerid) == 0) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Jesteœ pilotem! Tylko pasa¿erowie mog¹ spuœciæ siê po linie."); 
         
