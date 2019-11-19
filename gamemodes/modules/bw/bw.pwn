@@ -77,32 +77,27 @@ GiveInjury(playerid, bool:injury = false, bool:bw = false, customtime = 0)
 {
 	new Float:playerangle;
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	GetPlayerFacingAngle(playerid, playerangle);
+	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
+	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
+	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
+	SetPVarInt(playerid, "bw-angle", playerangle);
 	if(injury)
 	{
 		SendClientMessageToAll(COLOR_GRAD2, "Nadaje Injury");
 		if(!customtime) customtime = INJURY_TIME;
-		GetPlayerFacingAngle(playerid, playerangle);
 		PlayerInfo[playerid][pBW] = 0;
 		PlayerInfo[playerid][pInjury] = customtime;
 		SetPlayerChatBubble(playerid, "(( Ranny ))", COLOR_PANICRED, 30.0, (customtime * 1000));
-		SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
-		SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
-		SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-		SetPVarInt(playerid, "bw-angle", playerangle);
 	}
 	else if(bw)
 	{
 		SendClientMessageToAll(COLOR_GRAD2, "Nadaje BW");
 		//TUTAJ SPAWN W SZPITALU
 		if(!customtime) customtime = BW_TIME;
-		GetPlayerFacingAngle(playerid, playerangle);
 		PlayerInfo[playerid][pInjury] = 0;
 		PlayerInfo[playerid][pBW] = customtime;
 		SetPlayerChatBubble(playerid, "(( Nieprzytomny ))", COLOR_PANICRED, 30.0, (customtime * 1000));
-		SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
-		SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
-		SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-		SetPVarInt(playerid, "bw-angle", playerangle);
 	}
 	InfoMedicsInjury(playerid, injury, bw);
 	return 1;
