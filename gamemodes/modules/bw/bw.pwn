@@ -40,6 +40,7 @@ GiveInjury(playerid, bool:injury, bool:bw)
 		SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 		SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
 		SetPVarInt(playerid, "bw-angle", angle);
+		//komunikat do ERS o rannym jako funkcja
         //GetPlayerPos(playerid, x, y, z);
         //GetPlayerFacingAngle(playerid, angle);
 	}

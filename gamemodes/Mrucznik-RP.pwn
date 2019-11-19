@@ -2360,7 +2360,7 @@ SetPlayerSpawnPos(playerid)
         SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-angle"));
         SetCameraBehindPlayer(playerid);
 		if(GetPVarInt(playerid, "bw-skin") != 0) SetPlayerSkinEx(playerid, GetPVarInt(playerid, "bw-skin"));
-		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{ff542e}Jesteœ ranny! {FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije."); 
+		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije."); 
 		//dialog
         //SendClientMessage(playerid, COLOR_LIGHTRED, "You are injured.");
         //SendClientMessage(playerid, COLOR_LIGHTRED, "Either wait for assistance or /acceptdeath.");
@@ -4961,6 +4961,11 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		}
 	}
 
+	if(PlayerInfo[playerid][pInjury] > 0 && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER))
+	{
+		RemovePlayerFromVehicle(playerid);
+		return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
+	}
 	if(newstate == PLAYER_STATE_DRIVER)
     {
         if(newstate == PLAYER_STATE_DRIVER)
@@ -5361,8 +5366,14 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{
-		if(IsPlayerPremiumOld(playerid)) { SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]); }
-		else { SetPlayerHealth(playerid, 50.0+PlayerInfo[playerid][pSHealth]); }
+		if(IsPlayerPremiumOld(playerid)) 
+		{ 
+			SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]); 
+		}
+		else 
+		{ 
+			SetPlayerHealth(playerid, 50.0+PlayerInfo[playerid][pSHealth]); 
+		}
 		MedicBill[playerid] = 1;
 		gPlayerSpawned[playerid] = 1;
 	}
