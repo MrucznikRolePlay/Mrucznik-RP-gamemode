@@ -1730,7 +1730,7 @@ public Spectator()
 					{
 						if(PlayerInfo[i][pInjury] > 0 || PlayerInfo[i][pBW] > 0)
 						{
-							PlayerChangeWeaponOnInjury(i);
+							return PlayerChangeWeaponOnInjury(i);
 						}
 						GetPlayerName(i, specNAME, sizeof(specNAME));
 						switch(weaponID)
