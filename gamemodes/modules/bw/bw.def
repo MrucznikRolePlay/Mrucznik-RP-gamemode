@@ -23,7 +23,7 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define INJURY_TIME 120
+#define INJURY_TIME 152
 #define INJURY_HP 30
 
 //end

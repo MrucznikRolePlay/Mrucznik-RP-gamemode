@@ -3393,7 +3393,6 @@ public JednaSekundaTimer()
 				format(string, sizeof(string), "* %s po wielu próbach poluzowa³ sznur i jest wolny.", winner);
 				ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				GameTextForPlayer(i, "~r~Jestes wolny!", 2500, 3);
-				TogglePlayerControllable(i, 1);
 				PlayerCuffed[i] = 0;
 				PlayerCuffedTime[i] = 0;
 				pobity[i] = 0;
