@@ -58,10 +58,9 @@ OnPlayerInjurySpawn(playerid)
 	SetPlayerHealth(playerid, INJURY_HP);
 	SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
 	SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
-	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	//SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-angle"));
 	SetCameraBehindPlayer(playerid);
-	if(GetPVarInt(playerid, "bw-skin") != 0) SetPlayerSkinEx(playerid, GetPVarInt(playerid, "bw-skin"));
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije."); 
 	//dialog
 	//SendClientMessage(playerid, COLOR_LIGHTRED, "You are injured.");
@@ -74,6 +73,8 @@ OnPlayerInjurySpawn(playerid)
 GiveInjury(playerid, bool:injury = false, bool:bw = false, customtime = 0)
 {
 	new Float:playerangle, string[58];
+	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 	if(injury)
 	{
 		if(!customtime) customtime = INJURY_TIME;
@@ -81,7 +82,6 @@ GiveInjury(playerid, bool:injury = false, bool:bw = false, customtime = 0)
 		PlayerInfo[playerid][pInjury] = customtime;
 		format(string, sizeof(string), "(( Ranny ))", params);
 		SetPlayerChatBubble(playerid,string,COLOR_PANICRED, 30.0, (customtime * 1000));
-		GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 		SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 		SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 		SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
