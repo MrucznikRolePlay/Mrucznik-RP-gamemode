@@ -1115,28 +1115,11 @@ public Spectator()
         //BW
 		if(PlayerInfo[i][pInjury] > 0)
         {
-            PlayerHasInjuryTimer(i);
+            PlayerHasInjuryTimer(i, true, false);
         }
         if(PlayerInfo[i][pBW] > 0)
         {
-            if(GetPVarInt(i, "bw-sync") != 1 && GetPlayerState(i) == PLAYER_STATE_ONFOOT)
-            {
-                SetPVarInt(i, "bw-sync", 1);
-                PlayerInfo[i][pMuted] = 1;
-            }
-            ApplyAnimation(i, "CRACK", "crckidle1", 4.0, 1, 0, 1, 1, 1);
-            PlayerInfo[i][pBW]-=2;
-            format(string, 128, "~n~~n~~n~~n~~n~~n~~y~%d", PlayerInfo[i][pBW]);
-            GameTextForPlayer(i, string, 2500, 3);
-            if(PlayerInfo[i][pBW] <= 0)
-            {
-                PlayerInfo[i][pBW]=0;
-                TogglePlayerControllable(i, 1);
-                ClearAnimations(i);
-                GameTextForPlayer(i, "Obudziles sie po pobiciu!", 5000, 5);
-                SetPVarInt(i, "bw-sync", 0);
-                PlayerInfo[i][pMuted] = 0;
-            }
+			PlayerHasInjuryTimer(i, false, true);
         }
 		if((specid = Spectate[i]) != INVALID_PLAYER_ID)
 		{
@@ -3400,7 +3383,6 @@ public JednaSekundaTimer()
 				PlayerTied[i] = 0;
                 PlayerInfo[i][pBW]=0;
                 TogglePlayerControllable(i, 1);
-                GameTextForPlayer(i, "Obudziles sie po pobiciu!", 5000, 5);
                 SetPVarInt(i, "bw-sync", 0);
                 PlayerInfo[i][pMuted] = 0;
 			}

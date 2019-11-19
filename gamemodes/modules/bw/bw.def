@@ -25,5 +25,6 @@
 //------------------<[ Define: ]>-------------------
 #define INJURY_TIME 122
 #define INJURY_HP 30
+#define BW_TIME 302
 
 //end

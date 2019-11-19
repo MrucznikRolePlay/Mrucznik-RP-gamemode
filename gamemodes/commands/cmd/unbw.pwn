@@ -43,15 +43,16 @@ YCMD:unbw(playerid, params[], help)
 			}
 			else
 			{
+				SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000);
 				PlayerInfo[id][pInjury] = 2;
+				SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
 			}
-			PlayerInfo[id][pBW] = 2;
 		}
 		else
 		{
 			PlayerInfo[id][pBW] = 2;
+			SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
 		}
-		SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
 	}
 	else
 	{
