@@ -258,6 +258,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`KluczykiDoAuta`='%d',\
 	`Spawn`='%d',\
 	`BW`='%d',\
+	`Injury`='%d',\
 	`Czystka`='%d',\
     `CarSlots`='%d'\
 	WHERE `UID`='%d'", query,
@@ -286,6 +287,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pKluczeAuta],
 	PlayerInfo[playerid][pSpawn],
 	PlayerInfo[playerid][pBW],
+	PlayerInfo[playerid][pInjury],
 	PlayerInfo[playerid][pCzystka],
     PlayerInfo[playerid][pCarSlots],
 	PlayerInfo[playerid][pUID]);
@@ -681,7 +683,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Czystka`, `CarSlots`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `Czystka`, `CarSlots`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
@@ -690,7 +692,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -715,6 +717,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pKluczeAuta],
 		PlayerInfo[playerid][pSpawn],
 		PlayerInfo[playerid][pBW],
+		PlayerInfo[playerid][pInjury],
 		PlayerInfo[playerid][pCzystka],
         PlayerInfo[playerid][pCarSlots]);
 

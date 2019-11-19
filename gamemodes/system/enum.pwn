@@ -1416,6 +1416,7 @@ enum pInfo
  	pKluczeAuta,
   	pSpawn,
  	pBW,
+	pInjury,
  	pNatrasiejest,
 	pDrzwibusazamkniete,
 	pPrawojazdypytania[3],
@@ -1637,7 +1638,7 @@ enum pCrime
 {
 	pBplayer[32],
 	pAccusing[32],
-	pAccusedof[32],
+	pAccusedof[100],
 	pVictim[32],
 };
 

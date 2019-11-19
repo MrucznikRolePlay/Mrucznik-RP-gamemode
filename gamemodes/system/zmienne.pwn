@@ -1052,7 +1052,7 @@ new AllLeaders;
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
 
-new Text3D:HiddenPlayerName[MAX_PLAYERS];
+//new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
@@ -1299,6 +1299,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pNewAP] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
+	PlayerInfo[playerid][pInjury] = 0;
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;

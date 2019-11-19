@@ -1112,6 +1112,29 @@ public Spectator()
 			}
 		}
         //BW
+		if(PlayerInfo[i][pInjury] > 0)
+        {
+            if(GetPVarInt(i, "bw-sync") != 1 && GetPlayerState(i) == PLAYER_STATE_ONFOOT)
+            {
+                SetPVarInt(i, "bw-sync", 1);
+            }
+			ApplyAnimation(i, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+            PlayerInfo[i][pInjury]-=2;
+            format(string, 128, "~n~~n~~n~~n~~n~~n~~y~Ranny: %d", PlayerInfo[i][pInjury]);
+            GameTextForPlayer(i, string, 2500, 3);
+            if(PlayerInfo[i][pInjury] <= 0)
+            {
+				//co zrobiæ gdy czas minie
+                /*PlayerInfo[i][pInjury]=0;
+				PlayerInfo[i][pBW]=0;
+                TogglePlayerControllable(i, 1);
+                ClearAnimations(i);
+                GameTextForPlayer(i, "Obudziles sie po pobiciu!", 5000, 5);
+                SetPVarInt(i, "bw-sync", 0);
+                PlayerInfo[i][pMuted] = 0;
+				*/
+            }
+        }
         if(PlayerInfo[i][pBW] > 0)
         {
             if(GetPVarInt(i, "bw-sync") != 1 && GetPlayerState(i) == PLAYER_STATE_ONFOOT)
