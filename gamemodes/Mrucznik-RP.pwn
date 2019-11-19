@@ -2362,7 +2362,6 @@ SetPlayerSpawnPos(playerid)
 	else if(PlayerInfo[playerid][pBW] > 0)
 	{
 		BWSpawnAtHospital(playerid);
-		OnPlayerInjurySpawn(playerid);
 	}
     else
     {

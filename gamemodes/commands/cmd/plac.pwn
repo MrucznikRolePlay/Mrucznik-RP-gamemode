@@ -77,7 +77,7 @@ YCMD:plac(playerid, params[], help)
 					}
 			        if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
 					{
-						sendTipMessage(playerid, "Jesteœ za daleko od gracza.");
+						sendErrorMessage(playerid, "Jesteœ za daleko od gracza.");
 						return 1;
 					}
 					if (ProxDetectorS(5.0, playerid, giveplayerid))

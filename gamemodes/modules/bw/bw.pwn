@@ -53,6 +53,7 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 }
 OnPlayerInjurySpawn(playerid)
 {
+	new string[144];
 	MedicBill[playerid] = 0;
 	MedicTime[playerid] = 0;
 	NeedMedicTime[playerid] = 0;
@@ -61,7 +62,9 @@ OnPlayerInjurySpawn(playerid)
 	SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
 	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
 	SetCameraBehindPlayer(playerid);
-	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije."); 
+	new type = (PlayerInfo[playerid][pBW] > 0) ? "nieprzytomny" : "ranny";
+	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije.", type);
+	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	SendClientMessageToAll(COLOR_GRAD2, "Spawnuje gracza z Injury");
 	return 1;
@@ -144,7 +147,7 @@ PlayerHasInjuryTimer(playerid)
 		SendClientMessageToAll(COLOR_GRAD2, "#8: Timer: gracz ma BW");
 		ApplyAnimation(i, "CRACK", "crckidle1", 4.0, 1, 0, 0, 1, 0, 1);
 		PlayerInfo[i][pBW]-=2;
-		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Nieprzytomny: %d", PlayerInfo[i][pInjury]);
+		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Nieprzytomny: %d", PlayerInfo[i][pBW]);
 		GameTextForPlayer(i, string, 2500, 3);
 		if(PlayerInfo[i][pBW] <= 0)
 		{
@@ -176,6 +179,7 @@ BWSpawnAtHospital(playerid)
 	SetPlayerCameraPos(playerid,HospitalBeds[randbed][0] + 3, HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
 	SetPlayerCameraLookAt(playerid,HospitalBeds[randbed][0], HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
 	PlayerInfo[playerid][pMuted] = 1;
+	OnPlayerInjurySpawn(playerid);
 }
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
