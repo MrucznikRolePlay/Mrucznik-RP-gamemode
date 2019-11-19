@@ -55,13 +55,14 @@ OnPlayerInjurySpawn(playerid)
 	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	return 1;
 }
-GiveInjury(playerid, bool:injury, bool:bw)
+GiveInjury(playerid, bool:injury, bool:bw, customtime = 0)
 {
+	new Float:playerangle;
 	if(injury)
 	{
-		new Float:playerangle;
+		if(!customtime) customtime = INJURY_TIME;
 		GetPlayerFacingAngle(playerid, playerangle);
-		PlayerInfo[playerid][pInjury] = INJURY_TIME;
+		PlayerInfo[playerid][pInjury] = customtime;
 		//SetPlayerColor(playerid,COLOR_PANICRED);
 		GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 		SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
