@@ -53,7 +53,7 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 }
 OnPlayerInjurySpawn(playerid)
 {
-	new string[144];
+	new string[144], type[144];
 	MedicBill[playerid] = 0;
 	MedicTime[playerid] = 0;
 	NeedMedicTime[playerid] = 0;
@@ -62,7 +62,7 @@ OnPlayerInjurySpawn(playerid)
 	SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
 	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
 	SetCameraBehindPlayer(playerid);
-	new type = (PlayerInfo[playerid][pBW] > 0) ? "nieprzytomny" : "ranny";
+	type = (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny");
 	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije.", type);
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
