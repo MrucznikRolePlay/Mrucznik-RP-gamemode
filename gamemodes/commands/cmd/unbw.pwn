@@ -35,28 +35,22 @@ YCMD:unbw(playerid, params[], help)
 		new id;
 		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /unbw [ID]");
 		if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
-		if(PlayerInfo[id][pBW] <= 0)
+		if(PlayerInfo[id][pBW] > 0)
 		{
-			if(PlayerInfo[id][pInjury] <= 0)
-			{
-				return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie jest ranny.");
-			}
-			else
-			{
-				SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000);
-				PlayerInfo[id][pInjury] = 2;
-				SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
-			}
+			PlayerInfo[id][pBW] = 2;
+		}
+		else if(PlayerInfo[id][pInjury] > 0)
+		{
+			PlayerInfo[id][pInjury] = 0;
+			PlayerInfo[id][pBW] = 2;
 		}
 		else
 		{
-			PlayerInfo[id][pBW] = 2;
-			SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
+			return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie jest ranny.");
 		}
-	}
-	else
-	{
-		sendErrorMessage(playerid, "Nie masz uprawnieñ.");
+
+		SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
+		SetPlayerChatBubble(id, " ", 0xFF0000FF, 100.0, 1000);
 	}
     return 1;
 }

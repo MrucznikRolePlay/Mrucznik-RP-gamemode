@@ -26,5 +26,6 @@
 #define INJURY_TIME 122
 #define INJURY_HP 30
 #define BW_TIME 302
+#define MAX_HOSPITAL_BEDS 10
 
 //end

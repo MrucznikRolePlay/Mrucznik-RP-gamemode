@@ -1895,7 +1895,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(PlayerInfo[playerid][pInjury] > 0)
 		{
-			//dobicie i do szpitala
+			GiveInjury(playerid, false, true);
 			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 			{
 				PlayerInfo[killerid][pKills] ++;
@@ -2359,21 +2359,10 @@ SetPlayerSpawnPos(playerid)
 	{
 		OnPlayerInjurySpawn(playerid);
 	}
-	else if(PlayerInfo[playerid][pBW] >= 1)
+	else if(PlayerInfo[playerid][pBW] > 0)
 	{
-		MedicBill[playerid] = 0;
-		MedicTime[playerid] = 0;
-		NeedMedicTime[playerid] = 0;
-		SetPlayerHealth(playerid, 10.0);
-		SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
-        SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
-        SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-        TogglePlayerControllable(playerid, 0);
-        ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.1, 0, 0, 0, 0, 0, 1);
-        GameTextForPlayer(playerid, "Zostales brutalnie pobity!", 15000, 5);
-        PlayerInfo[playerid][pMuted] = 1;
-        if(GetPVarInt(playerid, "bw-skin") != 0) SetPlayerSkinEx(playerid, GetPVarInt(playerid, "bw-skin"));
-
+		BWSpawnAtHospital(playerid);
+		OnPlayerInjurySpawn(playerid);
 	}
     else
     {
@@ -5753,7 +5742,7 @@ public OnPlayerUpdate(playerid)
 		}
 	}
 
-	if((PlayerInfo[playerid][pInjury] || PlayerInfo[playerid][pBW]) && IsPlayerAimingEx(playerid))
+	if((PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) && IsPlayerAimingEx(playerid))
 	{
 		return FreezePlayerOnInjury(playerid);
 	}

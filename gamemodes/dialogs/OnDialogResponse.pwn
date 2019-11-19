@@ -1474,7 +1474,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 5:
 				{
-					ElevatorTravel(playerid,1158.6868,-1339.4423,120.2738,90,90.0);//p
+					ElevatorTravel(playerid,1158.6868,-1339.4423,120.2738,90,90.0);//p4
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
 				case 6:
