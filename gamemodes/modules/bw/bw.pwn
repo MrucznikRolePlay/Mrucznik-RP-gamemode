@@ -82,6 +82,7 @@ GiveInjury(playerid, bool:injury = false, bool:bw = false, customtime = 0)
 		SendClientMessageToAll(COLOR_GRAD2, "Nadaje Injury");
 		if(!customtime) customtime = INJURY_TIME;
 		GetPlayerFacingAngle(playerid, playerangle);
+		PlayerInfo[playerid][pBW] = 0;
 		PlayerInfo[playerid][pInjury] = customtime;
 		SetPlayerChatBubble(playerid, "(( Ranny ))", COLOR_PANICRED, 30.0, (customtime * 1000));
 		SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
@@ -95,6 +96,7 @@ GiveInjury(playerid, bool:injury = false, bool:bw = false, customtime = 0)
 		//TUTAJ SPAWN W SZPITALU
 		if(!customtime) customtime = BW_TIME;
 		GetPlayerFacingAngle(playerid, playerangle);
+		PlayerInfo[playerid][pInjury] = 0;
 		PlayerInfo[playerid][pBW] = customtime;
 		SetPlayerChatBubble(playerid, "(( Nieprzytomny ))", COLOR_PANICRED, 30.0, (customtime * 1000));
 		SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
