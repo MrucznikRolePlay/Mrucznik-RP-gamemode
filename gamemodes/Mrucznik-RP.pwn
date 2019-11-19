@@ -928,6 +928,15 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	    }
         return 0;
  	}
+
+	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
+	{
+		Player_RemoveFromVeh(playerid);
+		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
+		TogglePlayerControllable(playerid, 0);
+		SetTimerEx("FreezePlayer", 3500, false, "i", playerid);
+        return ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+	}
 	//Sila
 	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)//Zabezpieczenie, jeœli jest podczas biegu
 	{
@@ -4963,7 +4972,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 
 	if(PlayerInfo[playerid][pInjury] > 0 && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER))
 	{
-		RemovePlayerFromVehicle(playerid);
+		Player_RemoveFromVeh(playerid);
 		return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
 	}
 	if(newstate == PLAYER_STATE_DRIVER)
@@ -5762,13 +5771,6 @@ public OnPlayerUpdate(playerid)
 			KickEx(playerid);
 			return 0;
 		}
-	}
-
-	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
-	{
-		TogglePlayerControllable(playerid, 0);
-		SetTimerEx("FreezePlayer", 3500, false, "i", playerid);
-        return ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	}
 
     systempozarow_OnPlayerUpdate(playerid);//System Po¿arów v0.1

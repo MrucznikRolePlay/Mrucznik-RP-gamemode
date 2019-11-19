@@ -1124,13 +1124,16 @@ public Spectator()
             GameTextForPlayer(i, string, 2500, 3);
             if(PlayerInfo[i][pInjury] <= 0)
             {
+				ClearAnimations(i);
+				PlayerInfo[i][pInjury] = 0;
+				TogglePlayerControllable(i, 1);
+				SetPVarInt(i, "bw-sync", 0);
+				PlayerInfo[i][pMuted] = 0;
 				//co zrobiæ gdy czas minie
                 /*PlayerInfo[i][pInjury]=0;
 				PlayerInfo[i][pBW]=0;
                 TogglePlayerControllable(i, 1);
-                ClearAnimations(i);
                 GameTextForPlayer(i, "Obudziles sie po pobiciu!", 5000, 5);
-                SetPVarInt(i, "bw-sync", 0);
                 PlayerInfo[i][pMuted] = 0;
 				*/
             }

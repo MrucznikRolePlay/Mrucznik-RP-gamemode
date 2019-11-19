@@ -79,7 +79,7 @@ YCMD:po(playerid, params[], help)
     						SetPlayerCriminal(giveplayerid,playerid, result);
     						format(string, sizeof(string), "%s ma teraz %d WL. Jest poszukiwany za: %s", giveplayer, PoziomPoszukiwania[giveplayerid], result);
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							if(strfind(result, "ucieczka", true) != -1)
+							if(strfind(result, "ucieczka", true) != -1 || strfind(result, "poscig", true) != -1 || strfind(result, "poœcig", true) != -1 || strfind(result, "ucieka", true) != -1)
 							{
 								if(ProxDetectorS(80.0, playerid, giveplayerid))
 								{
