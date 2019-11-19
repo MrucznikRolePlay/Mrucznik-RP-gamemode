@@ -934,7 +934,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		Player_RemoveFromVeh(playerid);
 		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
 		TogglePlayerControllable(playerid, 0);
-		SetTimerEx("FreezePlayer", 3500, false, "i", playerid);
+		SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
         return ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	}
 	//Sila
@@ -5771,6 +5771,13 @@ public OnPlayerUpdate(playerid)
 			KickEx(playerid);
 			return 0;
 		}
+	}
+
+	if((PlayerInfo[playerid][pInjury] || PlayerInfo[playerid][pBW]) && IsPlayerAiming(playerid))
+	{
+		TogglePlayerControllable(playerid, 0);
+		ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+		return SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
 	}
 
     systempozarow_OnPlayerUpdate(playerid);//System Po¿arów v0.1

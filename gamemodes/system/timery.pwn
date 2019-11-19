@@ -165,6 +165,7 @@ public textVinylT(){
 forward FreezePlayer(playerid);
 public FreezePlayer(playerid){
 	TogglePlayerControllable(playerid, 1);
+	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	return 1;
 }
 
@@ -1749,6 +1750,10 @@ public Spectator()
 				{
 					if(GetPVarInt(i, "dutyadmin") == 0)
 					{
+						if(PlayerInfo[playerid][pInjury] || PlayerInfo[playerid][pBW])
+						{
+							return SetPlayerArmedWeapon(i, starabron[i])
+						}
 						GetPlayerName(i, specNAME, sizeof(specNAME));
 						switch(weaponID)
 						{

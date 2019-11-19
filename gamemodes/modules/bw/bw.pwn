@@ -27,6 +27,13 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
+stock IsPlayerAiming(playerid)
+{
+    new anim = GetPlayerAnimationIndex(playerid);
+    if (((anim >= 1160) && (anim <= 1163)) || (anim == 1167) || (anim == 1365) ||
+    (anim == 1643) || (anim == 1453) || (anim == 220)) return 1;
+    return 0;
+}
 GiveInjury(playerid, bool:injury, bool:bw)
 {
 	if(injury)
