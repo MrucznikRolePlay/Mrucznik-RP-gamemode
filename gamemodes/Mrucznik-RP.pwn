@@ -5766,6 +5766,8 @@ public OnPlayerUpdate(playerid)
 
 	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
 	{
+		TogglePlayerControllable(playerid, 0);
+		SetTimerEx("FreezePlayer", 3500, false, "i", playerid);
         return ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	}
 
