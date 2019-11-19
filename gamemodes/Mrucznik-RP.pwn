@@ -931,11 +931,8 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
 	{
-		Player_RemoveFromVeh(playerid);
-		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
-		TogglePlayerControllable(playerid, 0);
-		SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
-        return ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+		PlayerEnterVehOnInjury(playerid);
+		return FreezePlayerOnInjury(playerid);
 	}
 	//Sila
 	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)//Zabezpieczenie, jeœli jest podczas biegu
@@ -1898,6 +1895,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(PlayerInfo[playerid][pInjury] > 0)
 		{
+			//dobicie i do szpitala
 			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 			{
 				PlayerInfo[killerid][pKills] ++;
@@ -2356,27 +2354,10 @@ SetPlayerSpawnPos(playerid)
 		SetPlayerPosEx(playerid, PaintballSpawns[rand][0], PaintballSpawns[rand][1], PaintballSpawns[rand][2]);
 		SetCameraBehindPlayer(playerid);
 	}
-	//BW:
+	//Injury:
 	else if(PlayerInfo[playerid][pInjury] > 0)
 	{
-		MedicBill[playerid] = 0;
-		MedicTime[playerid] = 0;
-		NeedMedicTime[playerid] = 0;
-		SetPlayerHealth(playerid, INJURY_HP);
-		SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
-        SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
-        SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-        SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-angle"));
-        SetCameraBehindPlayer(playerid);
-		if(GetPVarInt(playerid, "bw-skin") != 0) SetPlayerSkinEx(playerid, GetPVarInt(playerid, "bw-skin"));
-		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije."); 
-		//dialog
-        //SendClientMessage(playerid, COLOR_LIGHTRED, "You are injured.");
-        //SendClientMessage(playerid, COLOR_LIGHTRED, "Either wait for assistance or /acceptdeath.");
-       // AcceptDeathTimer[playerid] = SetTimer("CanAcceptDeath", 60000, false);
-        //LoseHealthTimer[playerid] = SetTimer("LoseHealth", 10000, true);
-        ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
-
+		OnPlayerInjurySpawn(playerid);
 	}
 	else if(PlayerInfo[playerid][pBW] >= 1)
 	{
@@ -4972,8 +4953,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 
 	if(PlayerInfo[playerid][pInjury] > 0 && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER))
 	{
-		Player_RemoveFromVeh(playerid);
-		return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
+		return PlayerEnterVehOnInjury(playerid);
 	}
 	if(newstate == PLAYER_STATE_DRIVER)
     {
@@ -5773,11 +5753,9 @@ public OnPlayerUpdate(playerid)
 		}
 	}
 
-	if((PlayerInfo[playerid][pInjury] || PlayerInfo[playerid][pBW]) && IsPlayerAiming(playerid))
+	if((PlayerInfo[playerid][pInjury] || PlayerInfo[playerid][pBW]) && IsPlayerAimingEx(playerid))
 	{
-		TogglePlayerControllable(playerid, 0);
-		ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
-		return SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
+		return FreezePlayerOnInjury(playerid);
 	}
 
     systempozarow_OnPlayerUpdate(playerid);//System Po¿arów v0.1
