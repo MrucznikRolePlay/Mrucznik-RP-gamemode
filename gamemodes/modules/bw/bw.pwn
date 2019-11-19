@@ -34,6 +34,22 @@ stock IsPlayerAimingEx(playerid)
     (anim == 1643) || (anim == 1453) || (anim == 220)) return 1;
     return 0;
 }
+
+InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
+{
+	new string[144], pZone[MAX_ZONE_NAME], type[24];
+	GetPlayer2DZone(injureplayer, pZone, MAX_ZONE_NAME);
+	if(injury)
+	{
+		type = (injury ? "Ranny" : "Nieprzytomny");
+		format(string, sizeof(string), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s - Lokalizacja: {FFFFFF}%s", type, pZone);
+	}
+	else if(bw)
+	{
+		
+	}
+	SendTeamMessage(4, COLOR_ALLDEPT, string);
+}
 OnPlayerInjurySpawn(playerid)
 {
 	MedicBill[playerid] = 0;
@@ -55,15 +71,16 @@ OnPlayerInjurySpawn(playerid)
 	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	return 1;
 }
-GiveInjury(playerid, bool:injury, bool:bw, customtime = 0)
+GiveInjury(playerid, bool:injury = false, bool:bw = false, customtime = 0)
 {
-	new Float:playerangle;
+	new Float:playerangle, string[58];
 	if(injury)
 	{
 		if(!customtime) customtime = INJURY_TIME;
 		GetPlayerFacingAngle(playerid, playerangle);
 		PlayerInfo[playerid][pInjury] = customtime;
-		//SetPlayerColor(playerid,COLOR_PANICRED);
+		format(string, sizeof(string), "(( Ranny ))", params);
+		SetPlayerChatBubble(playerid,string,COLOR_PANICRED, 30.0, (customtime * 1000));
 		GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 		SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 		SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
@@ -81,6 +98,7 @@ GiveInjury(playerid, bool:injury, bool:bw, customtime = 0)
 	{
 		
 	}
+	InfoMedicsInjury(playerid, injury, bw);
 	return 1;
 }
 FreezePlayerOnInjury(playerid)
