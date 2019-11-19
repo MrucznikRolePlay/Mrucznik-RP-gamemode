@@ -5764,6 +5764,11 @@ public OnPlayerUpdate(playerid)
 		}
 	}
 
+	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
+	{
+        return ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+	}
+
     systempozarow_OnPlayerUpdate(playerid);//System PoøarÛw v0.1
 
 	//Anty BH PAèDZIOCH
