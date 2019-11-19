@@ -72,7 +72,7 @@ OnPlayerInjurySpawn(playerid)
 }
 GiveInjury(playerid, bool:injury = false, bool:bw = false, customtime = 0)
 {
-	new Float:playerangle, string[58];
+	new Float:playerangle;
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 	if(injury)
@@ -80,8 +80,7 @@ GiveInjury(playerid, bool:injury = false, bool:bw = false, customtime = 0)
 		if(!customtime) customtime = INJURY_TIME;
 		GetPlayerFacingAngle(playerid, playerangle);
 		PlayerInfo[playerid][pInjury] = customtime;
-		format(string, sizeof(string), "(( Ranny ))", params);
-		SetPlayerChatBubble(playerid,string,COLOR_PANICRED, 30.0, (customtime * 1000));
+		SetPlayerChatBubble(playerid, "(( Ranny ))", COLOR_PANICRED, 30.0, (customtime * 1000));
 		SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 		SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 		SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
