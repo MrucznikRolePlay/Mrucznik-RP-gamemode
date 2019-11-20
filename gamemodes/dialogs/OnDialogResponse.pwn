@@ -13749,9 +13749,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				ZabierzKase(playerid, IbizaBilet);
-				SejfR_Add(FAMILY_IBIZA, IbizaBilet);
-				DeletePVar(playerid, "HealthPackOffer");
 				new Float:prowizja;
 				prowizja = (HEALTH_PACK_PRICE * 0.3);
 				format(string, sizeof string, "%s kupi³ od Ciebie apteczkê. Otrzymujesz %d$ prowizji.", PlayerName(playerid), prowizja);
@@ -13759,7 +13756,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof string, "Kupi³eœ apteczkê od Lekarza za %d$", HEALTH_PACK_PRICE);
 				SendClientMessage(playerid, 0x00FF00FF, string);
 				format(string, sizeof string, "[ERS] Lekarz sprzeda³ apteczkê! Na konto frakcji wp³ywa %d$", (HEALTH_PACK_PRICE - prowizja));
-        		DajKase(id, prowizja);
+        		SendFamilyMessage(4, COLOR_GREEN, string);
+				DajKase(id, prowizja);
         		Sejf_Add(FRAC_ERS, (HEALTH_PACK_PRICE - prowizja));
 				PlayerInfo[playerid][pHealthPacks]++;
 			}
