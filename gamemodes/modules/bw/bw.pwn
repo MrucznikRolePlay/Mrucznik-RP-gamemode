@@ -143,7 +143,7 @@ ZespawnujGraczaBW(playerid)
 	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
 	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	//TogglePlayerControllable(playerid, 0);
-	SetPlayerHealth(playerid, INJURY_HP);
+	SetPlayerHealth(playerid, INJURY_HP); //tutaj wtf
 	return 1;
 }
 //-----------------<[ Timery: ]>-------------------

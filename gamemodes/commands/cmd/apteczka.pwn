@@ -75,7 +75,7 @@ YCMD:apteczka(playerid, params[], help)
 	else
 	{
 		new string[144], Float:health;
-		if(PlayerInfo[playerid][pHealthPacks] < 1) return sendErrorMessage(playerid, "Nie posiadasz przy sobie apteczki, mo¿esz je kupiæ u Lekarzy!");
+		if(PlayerInfo[playerid][pHealthPacks] < 1) return sendErrorMessage(playerid, "Nie posiadasz przy sobie apteczki, mo¿esz je kupiæ u medyków!");
 		if(PlayerInfo[playerid][pBW] > 0) return sendErrorMessage(playerid, "Nie mo¿esz siê opatrzyæ gdy jesteœ nieprzytomny!");
 		if(PlayerInfo[playerid][pInjury] < 1) return sendErrorMessage(playerid, "Musisz byæ ranny by u¿yæ apteczki.");
 		GetPlayerHealth(playerid, health);
