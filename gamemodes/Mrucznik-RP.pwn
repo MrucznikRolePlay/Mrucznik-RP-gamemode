@@ -2059,18 +2059,25 @@ public OnPlayerDeath(playerid, killerid, reason)
 		}
 		else
 		{
-			//-------<[     WL      ]>---------
-			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
+			if(PlayerInfo[playerid][pBW] > 0)
 			{
-				if(giveWL)
+				return NadajBW(playerid, PlayerInfo[playerid][pBW]);
+			}
+			else
+			{
+				//-------<[     WL      ]>---------
+				if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
 				{
-					if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+					if(giveWL)
 					{
-						NadajWLBW(killerid, playerid, false);
+						if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+						{
+							NadajWLBW(killerid, playerid, false);
+						}
 					}
 				}
+				return NadajRanny(playerid);
 			}
-			return NadajRanny(playerid);
 		}
 	}
 	SetPlayerColor(playerid,COLOR_GRAD2);
