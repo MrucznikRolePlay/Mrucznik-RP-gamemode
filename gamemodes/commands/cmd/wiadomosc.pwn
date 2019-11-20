@@ -66,8 +66,8 @@ YCMD:wiadomosc(playerid, params[], help)
             sendErrorMessage(playerid, "Odczekaj 3 sekundy zanim wyœlesz kolejn¹ wiadomoœæ!"); 
             return 1;
         }
-        if((PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0) && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0 && (PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)) {
-            return sendErrorMessage(playerid, "Gdy jesteœ ranny mo¿esz wysy³aæ wiadomoœci jedynie na ma³¹ odleg³oœæ");
+        if(PlayerInfo[playerid][pBW] > 0 && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0 && (PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)) {
+            return sendErrorMessage(playerid, "Gdy jesteœ nieprzytomny mo¿esz wysy³aæ wiadomoœci jedynie na ma³¹ odleg³oœæ");
         }
         
         //Dodatkowe zabezpieczenia
