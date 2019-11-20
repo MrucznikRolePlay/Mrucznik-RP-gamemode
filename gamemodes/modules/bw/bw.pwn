@@ -140,7 +140,7 @@ RannyTimer(playerid)
 		if(PlayerInfo[i][pInjury] <= 0)
 		{
 			SendClientMessageToAll(COLOR_GRAD2, "#7: Nie uratowano, killam gracza");
-			PlayerInfo[i][pInjury] = 0;
+			PlayerInfo[i][pInjury] = 999;
 			SetPlayerHealth(i, 0);
 		}
 	}

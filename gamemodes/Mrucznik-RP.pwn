@@ -2355,13 +2355,13 @@ SetPlayerSpawnPos(playerid)
 		SetCameraBehindPlayer(playerid);
 	}
 	//Injury:
-	else if(PlayerInfo[playerid][pInjury] > 0)
-	{
-		ZespawnujGraczaBW(playerid);
-	}
 	else if(PlayerInfo[playerid][pBW] > 0)
 	{
 		ZespawnujGraczaSzpitalBW(playerid);
+	}
+	else if(PlayerInfo[playerid][pInjury] > 0)
+	{
+		ZespawnujGraczaBW(playerid);
 	}
     else
     {
