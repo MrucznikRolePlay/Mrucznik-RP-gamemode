@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                    bw                                                     //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//--------------------------------------------[ sprzedajapteczka ]-------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,20 +16,34 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Creative
-// Data utworzenia: 18.11.2019
 
-//
+// Opis:
+/*
+	
+*/
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define INJURY_TIME 122 //czas trybu rannego
-#define INJURY_HP 30 //hp nadawane na tryb ranny i bw
-#define BW_TIME 242 //czas jak zostanie dobity
-#define BW_TIME_CRIMINAL 302 // czas jak zostanie dobity przez przestêpce
-#define MAX_HOSPITAL_BEDS 10
-#define MAX_HEALTH_PACKS 3 //maksymalna ilosc apteczek posiadanych przez gracza
-#define HEALTH_PACK_PRICE 100000 //cena apteczki
-#define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki
 
-//end
+// Notatki skryptera:
+/*
+	
+*/
+
+YCMD:sprzedajapteczka(playerid, params[], help)
+{
+	if(GetPlayerFraction(playerid) == FRAC_ERS)
+	{
+		new id;
+		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /sprzedajapteczka [id]");
+		if(!IsPlayerConnected(id) ) return sendErrorMessage(playerid, "Ten gracz nie jest zalogowanay");
+		new Float:x, Float:y, Float:z, tmp[128];
+		GetPlayerPos(id, x, y, z);
+		if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
+		if(PlayerInfo[id][pHealthPacks] >= MAX_HEALTH_PACKS) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz posiada maksymaln¹ iloœæ apteczek");
+		format(tmp, sizeof tmp, "Proponujesz %s kupno apteczki za %d$", GetNick(id), HEALTH_PACK_PRICE);
+		SendClientMessage(playerid, -1, tmp);
+		format(tmp, sizeof tmp, "Lekarz %s proponuje Ci kupno apteczki za %d$", GetNick(playerid), HEALTH_PACK_PRICE);
+		SetPVarInt(id, "HealthPackOffer", playerid);
+		ShowPlayerDialogEx(id, D_ERS_SPRZEDAZ_APTECZKI, DIALOG_STYLE_MSGBOX, "SAM-ERS", tmp, "Kup", "Anuluj");
+	}
+	return 1;
+}

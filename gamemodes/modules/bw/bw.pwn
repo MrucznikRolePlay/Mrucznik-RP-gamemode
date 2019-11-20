@@ -64,10 +64,13 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 }
 NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 {
+	new faceangle;
+	GetPlayerFacingAngle(playerid, Float:faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
+	SetPVarInt(playerid, "bw-faceangle",  faceangle);
 	//SendClientMessageToAll(COLOR_GRAD2, "#2: NadajRanny");
 	if(!customtime) customtime = INJURY_TIME;
 	PlayerInfo[playerid][pBW] = 0;
@@ -81,10 +84,13 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 }
 NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
+	new faceangle;
+	GetPlayerFacingAngle(playerid, Float:faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
+	SetPVarInt(playerid, "bw-faceangle", faceangle);
 	//SendClientMessageToAll(COLOR_GRAD2, "#2-2: NadajBW");
 	//TogglePlayerControllable(playerid, 0);
 	if(!customtime) customtime = BW_TIME;
@@ -130,7 +136,7 @@ ZespawnujGraczaBW(playerid)
 	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
 	SetCameraBehindPlayer(playerid);
 	format(type, sizeof(type), (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny"));
-	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911) lub poczekaæ %d sekund.\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
+	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911), u¿yæ apteczki (/apteczka) lub poczekaæ %d sekund.\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	// lub ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
@@ -201,7 +207,7 @@ ZespawnujGraczaSzpitalBW(playerid)
 	new randbed = random(sizeof(HospitalBeds));
 	SetPVarInt(playerid, "bw-vw", 90);
 	SetPVarInt(playerid, "bw-int", 0);
-	//SetPVarInt(playerid, "bw-faceangle", HospitalBeds[randbed][3]);
+	SetPVarInt(playerid, "bw-faceangle", Float:HospitalBeds[randbed][3]);
 	PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 	PlayerInfo[playerid][pPos_x] = HospitalBeds[randbed][0];
 	PlayerInfo[playerid][pPos_y] = HospitalBeds[randbed][1];

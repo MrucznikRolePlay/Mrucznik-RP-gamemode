@@ -13735,6 +13735,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DeletePVar(playerid, "IbizaDrink");
 		return 1;
 	}
+	if(dialogid == D_ERS_SPRZEDAZ_APTECZKI)
+	{
+		new string[128];
+		new id = GetPVarInt(playerid, "HealthPackOffer");
+		if(response)
+		{
+			new hajs = kaska[playerid];
+			if(hajs < HEALTH_PACK_PRICE)
+			{
+				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
+				return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
+			}
+			else
+			{
+				ZabierzKase(playerid, IbizaBilet);
+				SejfR_Add(FAMILY_IBIZA, IbizaBilet);
+				DeletePVar(playerid, "HealthPackOffer");
+				new Float:prowizja;
+				prowizja = (HEALTH_PACK_PRICE * 0.3);
+				format(string, sizeof string, "%s kupi³ od Ciebie apteczkê. Otrzymujesz %d$ prowizji.", PlayerName(playerid), prowizja);
+				SendClientMessage(id, 0x0080D0FF, string);
+				format(string, sizeof string, "Kupi³eœ apteczkê od Lekarza za %d$", HEALTH_PACK_PRICE);
+				SendClientMessage(playerid, 0x00FF00FF, string);
+				format(string, sizeof string, "[ERS] Lekarz sprzeda³ apteczkê! Na konto frakcji wp³ywa %d$", (HEALTH_PACK_PRICE - prowizja));
+        		DajKase(id, prowizja);
+        		Sejf_Add(FRAC_ERS, (HEALTH_PACK_PRICE - prowizja));
+				PlayerInfo[playerid][pHealthPacks]++;
+			}
+		}
+		else
+		{
+			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno apteczki.", PlayerName(playerid));
+			SendClientMessage(id, 0xFF0030FF, string);
+		}
+		DeletePVar(playerid, "HealthPackOffer");
+		return 1;
+	}
     if(dialogid == DIALOG_ELEVATOR_SAD)
     {
         if(response)

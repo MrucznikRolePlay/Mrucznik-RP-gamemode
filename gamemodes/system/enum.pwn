@@ -1417,6 +1417,7 @@ enum pInfo
   	pSpawn,
  	pBW,
 	pInjury,
+	pHealthPacks,
  	pNatrasiejest,
 	pDrzwibusazamkniete,
 	pPrawojazdypytania[3],

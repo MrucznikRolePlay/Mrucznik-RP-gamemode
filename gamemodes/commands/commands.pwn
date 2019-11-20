@@ -450,6 +450,7 @@
 #include "cmd/sprunk.pwn"
 #include "cmd/sprzedajalkohol.pwn"
 #include "cmd/sprzedajauto.pwn"
+#include "cmd/sprzedajapteczka.pwn"
 #include "cmd/sprzedajbilet.pwn"
 #include "cmd/sprzedajbron.pwn"
 #include "cmd/sprzedajmaterialy.pwn"

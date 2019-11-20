@@ -488,6 +488,8 @@ CREATE TABLE IF NOT EXISTS `mru_konta_oszustwa` (
   `KluczykiDoAuta` int(11) NOT NULL,
   `Spawn` int(11) NOT NULL,
   `BW` int(11) NOT NULL,
+  `Injury` int(11) NOT NULL,
+  `HealthPacks` int(11) NOT NULL,
   `Czystka` int(11) NOT NULL,
   `CarSlots` int(2) NOT NULL DEFAULT '4',
   `Hat` int(1) NOT NULL,

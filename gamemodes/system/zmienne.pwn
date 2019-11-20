@@ -1306,6 +1306,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	PlayerKilledByAdmin[playerid] = 0;
+	PlayerInfo[playerid][pHealthPacks] = 0;
 
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
