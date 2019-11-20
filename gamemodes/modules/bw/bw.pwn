@@ -166,15 +166,8 @@ BWTimer(playerid)
 		SetPlayerChatBubble(playerid, "(( Nieprzytomny ))", COLOR_PANICRED, 30.0, (PlayerInfo[i][pBW] * 1000));
 		if(PlayerInfo[i][pBW] <= 0)
 		{
-			SendClientMessageToAll(COLOR_GRAD2, "#8: Timer: Graczowi minê³o BW, wybudzam go.");
-			SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000);
-			PlayerInfo[i][pBW]=0;
-			TogglePlayerControllable(i, 1);
-			ClearAnimations(i);
-			SetPlayerSpecialAction(i,SPECIAL_ACTION_NONE);
-			GameTextForPlayer(i, "tutaj po bw, Obudziles sie po pobiciu!", 5000, 5);
-			SetPVarInt(i, "bw-sync", 0);
-			PlayerInfo[i][pMuted] = 0;
+			ZdejmijBW(i);
+			GameTextForPlayer(i, "~n~~n~~n~~g~~h~Obudziles sie", 5000, 5);
 		}
 	}
 	return 1;
@@ -222,6 +215,20 @@ NadajWLBW(killerid, victim, bool:bw)
 		sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
 		sendTipMessage(killerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
 	}
+}
+
+ZdejmijBW(playerid)
+{
+	new i = playerid;
+	SendClientMessageToAll(COLOR_GRAD2, "#11: ZdejmijBW");
+	SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000);
+	PlayerInfo[i][pBW]=0;
+	PlayerInfo[i][pInjury]=0;
+	TogglePlayerControllable(i, 1);
+	ClearAnimations(i);
+	SetPlayerSpecialAction(i,SPECIAL_ACTION_NONE);
+	SetPVarInt(i, "bw-sync", 0);
+	PlayerInfo[i][pMuted] = 0;
 }
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
