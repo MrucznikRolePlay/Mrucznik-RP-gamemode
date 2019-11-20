@@ -25,8 +25,8 @@
 //------------------<[ Define: ]>-------------------
 #define INJURY_TIME 122
 #define INJURY_HP 30
-#define BW_TIME 242
-#define BW_TIME_CRIMINAL 302
+#define BW_TIME 242 //czas jak zostanie dobity
+#define BW_TIME_CRIMINAL 302 // czas jak zostanie dobity przez przestêpce
 #define MAX_HOSPITAL_BEDS 10
 
 //end
