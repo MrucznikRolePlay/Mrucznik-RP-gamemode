@@ -2082,7 +2082,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 							}
 						}
 					}
-					return NadajRanny(playerid);
+					SetPVarInt(playerid, "bw-reason", reason);
+					return NadajRanny(playerid, 0, true);
 				}
 			}
 		}

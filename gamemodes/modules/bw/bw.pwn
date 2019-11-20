@@ -37,16 +37,26 @@ stock IsPlayerAimingEx(playerid)
 
 InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 {
-	new string[144], pZone[MAX_ZONE_NAME], type[144];
+	new string[144], string2[144], pZone[MAX_ZONE_NAME], type[144], reason;
 	GetPlayer2DZone(injureplayer, pZone, MAX_ZONE_NAME);
 	format(type, sizeof(type), (bw ? "Nieprzytomny" : "Ranny"));
 	if(injury)
 	{
-		format(string, sizeof(string), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}- lokalizacja: {FF0000}%s", type, pZone);
+		format(string2, sizeof(string2), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}w okolicach %s", type, pZone);
 	}
 	else if(bw)
 	{
-		format(string, sizeof(string), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}pacjent w salach pooperacyjnych", type);
+		format(string2, sizeof(string2), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}pacjent w salach pooperacyjnych", type);
+	}
+
+	reason = GetPVarInt(injureplayer,"bw-reason");
+	if(reason <= 54 && reason > 0)
+	{
+		format(string, sizeof(string), "%s z urazami od %s", string2, (reason <= 46) ? GunNames[reason] : NiggaNames[reason-46]);
+	}
+	else
+	{
+		string = string2;
 	}
 	//SendClientMessageToAll(COLOR_GRAD2, "#1 Wysy³am komunikat do ERS");
 	SendTeamMessage(4, COLOR_ALLDEPT, string);
@@ -64,7 +74,7 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	PlayerInfo[playerid][pInjury] = customtime;
 	if(medicinformation)
 	{
-		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (customtime * 1000));
+		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 70.0, (customtime * 1000));
 		InfoMedicsInjury(playerid, true, false);
 	}
 	return 1;
@@ -80,10 +90,9 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	if(!customtime) customtime = BW_TIME;
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerInfo[playerid][pBW] = customtime;
-	SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (customtime * 1000));
 	if(medicinformation)
 	{
-		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (customtime * 1000));
+		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 70.0, (customtime * 1000));
 		InfoMedicsInjury(playerid, false, true);
 	}
 	return 1;
