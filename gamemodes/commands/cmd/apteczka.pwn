@@ -76,7 +76,7 @@ YCMD:apteczka(playerid, params[], help)
 	}
 	else
 	{
-		sendErrorMessage(playerid, "Nie masz 2 rangi lub nie jesteœ medykiem!");
+		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
 	}
 	return 1;
 }

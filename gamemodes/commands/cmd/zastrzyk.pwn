@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:zastrzyk(playerid, params[], help)
+/*YCMD:zastrzyk(playerid, params[], help)
 {
 	new playa;
 	if(sscanf(params, "k<fix>", playa))
@@ -76,3 +76,4 @@ YCMD:zastrzyk(playerid, params[], help)
 	}
 	return 1;
 }
+*/

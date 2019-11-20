@@ -610,7 +610,7 @@
 #include "cmd/zapiszkonta.pwn"
 #include "cmd/zapytaj.pwn"
 #include "cmd/zasady.pwn"
-#include "cmd/zastrzyk.pwn"
+//#include "cmd/zastrzyk.pwn"
 #include "cmd/zatankuj.pwn"
 #include "cmd/zatrzymajlekcje.pwn"
 #include "cmd/zaufanyggracz.pwn"

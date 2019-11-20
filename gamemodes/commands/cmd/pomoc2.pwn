@@ -98,7 +98,7 @@ YCMD:pomoc2(playerid, params[], help)
     }
     if (gTeam[playerid] == 1 || PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz *** (/r)adio (/d)epartment /ulecz /sluzba /apteczka /zastrzyk /finfo /zmienplec");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz *** (/r)adio (/d)epartment /ulecz /sluzba /apteczka /finfo /zmienplec");
     }
     if (PlayerInfo[playerid][pAdmin] >= 1)
     {
