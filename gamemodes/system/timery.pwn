@@ -1115,11 +1115,11 @@ public Spectator()
         //BW
 		if(PlayerInfo[i][pInjury] > 0)
         {
-            PlayerHasInjuryTimer(i);
+            RannyTimer(i);
         }
         if(PlayerInfo[i][pBW] > 0)
         {
-			PlayerHasInjuryTimer(i);
+			BWTimer(i);
         }
 		if((specid = Spectate[i]) != INVALID_PLAYER_ID)
 		{

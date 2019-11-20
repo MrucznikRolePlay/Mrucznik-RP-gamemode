@@ -40,7 +40,7 @@ YCMD:bw(playerid, params[], help)
 		}
 		if(!IsPlayerConnected(giveplayerid)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
 
-		GiveInjury(giveplayerid, false, true, czas);
+		NadajBW(giveplayerid, czas);
 		SendClientMessage(playerid, COLOR_GRAD2, "Nadano BW");
 	}
     return 1;

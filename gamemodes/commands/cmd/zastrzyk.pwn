@@ -60,6 +60,7 @@ YCMD:zastrzyk(playerid, params[], help)
 					format(string, sizeof(string), "%s czuje siê lepiej oraz pozby³ siê choroby.", giveplayer);
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					STDPlayer[playa] = 0;
+					PlayerInfo[playa][pBW] = 2;
 				}
 			}
 		}

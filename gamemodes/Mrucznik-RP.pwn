@@ -1895,7 +1895,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(PlayerInfo[playerid][pInjury] > 0)
 		{
-			GiveInjury(playerid, false, true);
+			NadajBW(playerid);
 			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 			{
 				PlayerInfo[killerid][pKills] ++;
@@ -2077,7 +2077,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		}
 		else
 		{
-			return GiveInjury(playerid, true, false);
+			return NadajRanny(playerid);
 		}
 	}
 	SetPlayerColor(playerid,COLOR_GRAD2);
@@ -2357,11 +2357,11 @@ SetPlayerSpawnPos(playerid)
 	//Injury:
 	else if(PlayerInfo[playerid][pInjury] > 0)
 	{
-		OnPlayerInjurySpawn(playerid);
+		ZespawnujGraczaBW(playerid);
 	}
 	else if(PlayerInfo[playerid][pBW] > 0)
 	{
-		BWSpawnAtHospital(playerid);
+		ZespawnujGraczaSzpitalBW(playerid);
 	}
     else
     {

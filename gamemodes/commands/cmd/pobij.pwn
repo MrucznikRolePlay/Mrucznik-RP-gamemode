@@ -93,7 +93,7 @@ YCMD:pobij(playerid, params[], help)
 					       			}
 									if(PlayerInfo[playa][pBW] != 0)
 									{
-										return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz dogorywa na BW. Nie kop le¿¹cego!");
+										return sendTipMessageEx(playerid, COLOR_GRAD2, "Gracz jest nieprzytomny. Nie kop le¿¹cego!");
 									}
 					       			if(GetPlayerWeapon(playa) >= 22)
 					       			{
