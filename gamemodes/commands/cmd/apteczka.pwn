@@ -91,7 +91,7 @@ YCMD:apteczka(playerid, params[], help)
 		format(string, sizeof(string),"* %s wyci¹ga apteczkê, banda¿uje swoje rany oraz ³yka leki.", GetNick(playerid));
 		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		PlayerInfo[playerid][pHealthPacks]--;
-		ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.0999, 0, 0, 0, 0, 0, 0);
+		ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.0999, 0, 0, 0, 0, 0, 0); //opcjonalnie
 	}
 	return 1;
 }
