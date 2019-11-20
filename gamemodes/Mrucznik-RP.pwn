@@ -1897,192 +1897,198 @@ public OnPlayerDeath(playerid, killerid, reason)
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 
-		
-		if(PlayerInfo[playerid][pInjury] > 0)
+		if(PlayerKilledByAdmin[playerid] == 0)
 		{
-			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
+			if(PlayerInfo[playerid][pInjury] > 0)
 			{
-				PlayerInfo[killerid][pKills] ++;
-				if(gPlayerLogged[killerid] == 0)
+				if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 				{
-					KickEx(killerid);
-					return 1;
-				}
-				if(GetPlayerState(killerid) == 2)
-				{
-					Log(warningLog, INFO, "%s zabi³ %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
-					SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
-
-					if(PlayerInfo[killerid][pLevel] > 1)
+					PlayerInfo[killerid][pKills] ++;
+					if(gPlayerLogged[killerid] == 0)
 					{
-						format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
-						SendMessageToAdmin(string, COLOR_YELLOW);
-					}
-					else
-					{
-						format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] z DB, dosta³ kicka !", killername, killerid, playername, playerid);
-						SendMessageToAdmin(string, COLOR_YELLOW);
-						Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
-						SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
 						KickEx(killerid);
 						return 1;
 					}
-				}
-				if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
-				{
-					format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
-					SendMessageToAdmin(string, COLOR_YELLOW);
-					Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
-				}
-				if(reason == 41)
-				{
-					format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s ze spreya !", killerid, killername, playername);
-					SendMessageToAdmin(string, COLOR_YELLOW);
-					Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
-				}
-				if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
-				{
-					format(string, 128, "AdmWarning: £owca Nagród [%d]%s zabi³ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
-					SendMessageToAdmin(string, COLOR_YELLOW);
-					Log(warningLog, INFO, "£owca nagród %s zabi³ gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
-				}
-				//-------<[    Inne    ]>---------
-				if(PlayerPaintballing[playerid] != 0)
-				{
-					PlayerPaintballKills[killerid] ++;
-					if(PlayerPaintballKills[killerid] > PaintballWinnerKills)
+					if(GetPlayerState(killerid) == 2)
 					{
-						PaintballWinner = killerid;
-						PaintballWinnerKills = PlayerPaintballKills[killerid];
-						foreach(new i : Player)
+						Log(warningLog, INFO, "%s zabi³ %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
+						SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
+
+						if(PlayerInfo[killerid][pLevel] > 1)
 						{
-							if(IsPlayerConnected(i))
+							format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
+							SendMessageToAdmin(string, COLOR_YELLOW);
+						}
+						else
+						{
+							format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] z DB, dosta³ kicka !", killername, killerid, playername, playerid);
+							SendMessageToAdmin(string, COLOR_YELLOW);
+							Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
+							SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
+							KickEx(killerid);
+							return 1;
+						}
+					}
+					if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
+					{
+						format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
+						SendMessageToAdmin(string, COLOR_YELLOW);
+						Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+					}
+					if(reason == 41)
+					{
+						format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s ze spreya !", killerid, killername, playername);
+						SendMessageToAdmin(string, COLOR_YELLOW);
+						Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+					}
+					if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
+					{
+						format(string, 128, "AdmWarning: £owca Nagród [%d]%s zabi³ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
+						SendMessageToAdmin(string, COLOR_YELLOW);
+						Log(warningLog, INFO, "£owca nagród %s zabi³ gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+					}
+					//-------<[    Inne    ]>---------
+					if(PlayerPaintballing[playerid] != 0)
+					{
+						PlayerPaintballKills[killerid] ++;
+						if(PlayerPaintballKills[killerid] > PaintballWinnerKills)
+						{
+							PaintballWinner = killerid;
+							PaintballWinnerKills = PlayerPaintballKills[killerid];
+							foreach(new i : Player)
 							{
-								if(PlayerPaintballing[i] != 0)
+								if(IsPlayerConnected(i))
 								{
-									format(string, sizeof(string), "* %s jest na prowadzeniu z %d trafieniami.",killername,PaintballWinnerKills);
-									SendClientMessage(i, COLOR_WHITE, string);
+									if(PlayerPaintballing[i] != 0)
+									{
+										format(string, sizeof(string), "* %s jest na prowadzeniu z %d trafieniami.",killername,PaintballWinnerKills);
+										SendClientMessage(i, COLOR_WHITE, string);
+									}
+								}
+							}
+						}
+						return 1;
+					}
+					if(PlayerInfo[playerid][pHeadValue] > 0)
+					{
+						if(IsPlayerConnected(killerid))
+						{
+							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+							{
+								if(GoChase[killerid] == playerid)
+								{
+									DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
+									format(string,128,"<< Hitman %s wype³ni³ kontrakt na: %s i zarobi³ $%d >>",killername,playername,PlayerInfo[playerid][pHeadValue]);
+									SendFamilyMessage(8, COLOR_YELLOW, string);
+									format(string,128,"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s. Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",playername);
+									SendClientMessageToAll(COLOR_NEWS, string);
+									Log(payLog, INFO, "Hitman %s zabi³ %s i zarobi³ %d$", GetPlayerLogName(killerid), GetPlayerLogName(playerid), PlayerInfo[playerid][pHeadValue]);
+									PlayerInfo[playerid][pHeadValue] = 0;
+									GotHit[playerid] = 0;
+									GetChased[playerid] = 999;
+									GoChase[killerid] = 999;
+									//tworzenie cia³a
 								}
 							}
 						}
 					}
-					return 1;
-				}
-				if(PlayerInfo[playerid][pHeadValue] > 0)
+				} //koniec killerid connected
+				if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
 				{
-					if(IsPlayerConnected(killerid))
+					DisablePlayerCheckpoint(playerid);
+					gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
+				}
+				if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+				{
+					SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca przerwa³ wywiad.");
+					new talker = TalkingLive[playerid];
+					TalkingLive[playerid] = INVALID_PLAYER_ID;
+					TalkingLive[talker] = INVALID_PLAYER_ID;
+				}
+				//koniec rozmowy telefonicznej
+				if(Mobile[playerid] != INVALID_PLAYER_ID)
+				{
+					SendClientMessage(playerid, COLOR_YELLOW, "Jesteœ ranny - po³¹czenie zakoñczone.");
+					if(Mobile[playerid] >= 0)
 					{
-						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
-						{
-							if(GoChase[killerid] == playerid)
-							{
-								DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
-								format(string,128,"<< Hitman %s wype³ni³ kontrakt na: %s i zarobi³ $%d >>",killername,playername,PlayerInfo[playerid][pHeadValue]);
-								SendFamilyMessage(8, COLOR_YELLOW, string);
-								format(string,128,"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s. Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",playername);
-								SendClientMessageToAll(COLOR_NEWS, string);
-								Log(payLog, INFO, "Hitman %s zabi³ %s i zarobi³ %d$", GetPlayerLogName(killerid), GetPlayerLogName(playerid), PlayerInfo[playerid][pHeadValue]);
-								PlayerInfo[playerid][pHeadValue] = 0;
-								GotHit[playerid] = 0;
-								GetChased[playerid] = 999;
-								GoChase[killerid] = 999;
-								//tworzenie cia³a
-							}
-						}
+						SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S³ychaæ nag³y trzask i po³¹czenie zostaje zakoñczone.");
+					}
+					StopACall(playerid);
+				}
+				//kajdanki
+				if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
+				{
+					OdkujKajdanki(playerid);
+				}
+				if(SkutyGracz[playerid] != 0)
+				{
+					PDkuje[SkutyGracz[playerid]] = 0;
+					zakuty[SkutyGracz[playerid]] = 0;
+					SkutyGracz[playerid] = 0;
+				}
+				if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
+				{
+					format(string, sizeof(string), "Wyœcig: {FFFFFF}%s zgin¹³ jak prawdziwy œcigant [*]", playername);
+					WyscigMessage(COLOR_YELLOW, string);
+					IloscZawodnikow --;
+					if(IloscZawodnikow <= Ukonczyl)
+					{
+						KoniecWyscigu(-1);
 					}
 				}
-			} //koniec killerid connected
-			if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
-			{
-				DisablePlayerCheckpoint(playerid);
-				gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
-			}
-			if(TalkingLive[playerid] != INVALID_PLAYER_ID)
-			{
-				SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca przerwa³ wywiad.");
-				new talker = TalkingLive[playerid];
-				TalkingLive[playerid] = INVALID_PLAYER_ID;
-				TalkingLive[talker] = INVALID_PLAYER_ID;
-			}
-			//koniec rozmowy telefonicznej
-			if(Mobile[playerid] != INVALID_PLAYER_ID)
-			{
-				SendClientMessage(playerid, COLOR_YELLOW, "Jesteœ ranny - po³¹czenie zakoñczone.");
-				if(Mobile[playerid] >= 0)
+				if(lowcaz[playerid] == killerid)
 				{
-					SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S³ychaæ nag³y trzask i po³¹czenie zostaje zakoñczone.");
+					lowcaz[playerid] = 501;
+					SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta³o anulowane - nie mo¿esz wzi¹æ teraz zlecenia na tego samego gracza!");
 				}
-				StopACall(playerid);
-			}
-			//kajdanki
-			if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
-			{
-				OdkujKajdanki(playerid);
-			}
-			if(SkutyGracz[playerid] != 0)
-			{
-				PDkuje[SkutyGracz[playerid]] = 0;
-				zakuty[SkutyGracz[playerid]] = 0;
-				SkutyGracz[playerid] = 0;
-			}
-			if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
-			{
-				format(string, sizeof(string), "Wyœcig: {FFFFFF}%s zgin¹³ jak prawdziwy œcigant [*]", playername);
-				WyscigMessage(COLOR_YELLOW, string);
-				IloscZawodnikow --;
-				if(IloscZawodnikow <= Ukonczyl)
+				if(GetPVarInt(playerid, "ZjadlDragi") == 1)
 				{
-					KoniecWyscigu(-1);
+					new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+					SetPVarInt(playerid, "ZjadlDragi", 0);
+					sendTipMessage(playerid, "Z powodu œmierci twój boost (dragów) zosta³ wy³¹czony, za¿yj kolejn¹ dawkê!"); 
+					KillTimer(TimerEfektNarkotyku[playerid]);
+					SetStrong(playerid, FirstValue);
 				}
-			}
-			if(lowcaz[playerid] == killerid)
-			{
-				lowcaz[playerid] = 501;
-				SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta³o anulowane - nie mo¿esz wzi¹æ teraz zlecenia na tego samego gracza!");
-			}
-			if(GetPVarInt(playerid, "ZjadlDragi") == 1)
-			{
-				new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
-				SetPVarInt(playerid, "ZjadlDragi", 0);
-				sendTipMessage(playerid, "Z powodu œmierci twój boost (dragów) zosta³ wy³¹czony, za¿yj kolejn¹ dawkê!"); 
-				KillTimer(TimerEfektNarkotyku[playerid]);
-				SetStrong(playerid, FirstValue);
-			}
 
-			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
-			{
-				if(giveWL)
-				{
-					if(!IsACop(killerid) && lowcaz[killerid] != playerid )
-					{
-						NadajWLBW(killerid, playerid, true);
-					}
-				}
-				if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
-			}
-			return NadajBW(playerid);
-		}
-		else
-		{
-			if(PlayerInfo[playerid][pBW] > 0)
-			{
-				return NadajBW(playerid, PlayerInfo[playerid][pBW]);
-			}
-			else
-			{
-				//-------<[     WL      ]>---------
 				if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
 				{
 					if(giveWL)
 					{
 						if(!IsACop(killerid) && lowcaz[killerid] != playerid )
 						{
-							NadajWLBW(killerid, playerid, false);
+							NadajWLBW(killerid, playerid, true);
 						}
 					}
+					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
-				return NadajRanny(playerid);
+				return NadajBW(playerid);
 			}
+			else
+			{
+				if(PlayerInfo[playerid][pBW] > 0)
+				{
+					return NadajBW(playerid, PlayerInfo[playerid][pBW]);
+				}
+				else
+				{
+					//-------<[     WL      ]>---------
+					if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
+					{
+						if(giveWL)
+						{
+							if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+							{
+								NadajWLBW(killerid, playerid, false);
+							}
+						}
+					}
+					return NadajRanny(playerid);
+				}
+			}
+		}
+		else
+		{
+			PlayerKilledByAdmin[playerid] = 0;			
 		}
 	}
 	SetPlayerColor(playerid,COLOR_GRAD2);
@@ -2359,10 +2365,10 @@ SetPlayerSpawnPos(playerid)
 		SetPlayerPosEx(playerid, PaintballSpawns[rand][0], PaintballSpawns[rand][1], PaintballSpawns[rand][2]);
 		SetCameraBehindPlayer(playerid);
 	}
-	//Injury:
+	//BW:
 	else if(PlayerInfo[playerid][pBW] > 0)
 	{
-		if(PlayerRequestMedic[playerid] != 0)
+		if(PlayerRequestMedic[playerid] == 1)
 		{
 			ZespawnujGraczaBW(playerid);
 		}

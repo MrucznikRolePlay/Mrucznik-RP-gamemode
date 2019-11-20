@@ -52,7 +52,7 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 	SendTeamMessage(4, COLOR_ALLDEPT, string);
 	return 1;
 }
-NadajRanny(playerid, customtime = 0)
+NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 {
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
@@ -62,11 +62,14 @@ NadajRanny(playerid, customtime = 0)
 	if(!customtime) customtime = INJURY_TIME;
 	PlayerInfo[playerid][pBW] = 0;
 	PlayerInfo[playerid][pInjury] = customtime;
-	SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (customtime * 1000));
-	InfoMedicsInjury(playerid, true, false);
+	if(medicinformation)
+	{
+		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (customtime * 1000));
+		InfoMedicsInjury(playerid, true, false);
+	}
 	return 1;
 }
-NadajBW(playerid, customtime = 0)
+NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
@@ -78,7 +81,11 @@ NadajBW(playerid, customtime = 0)
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerInfo[playerid][pBW] = customtime;
 	SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (customtime * 1000));
-	InfoMedicsInjury(playerid, false, true);
+	if(medicinformation)
+	{
+		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (customtime * 1000));
+		InfoMedicsInjury(playerid, false, true);
+	}
 	return 1;
 }
 FreezePlayerOnInjury(playerid)
@@ -144,7 +151,7 @@ RannyTimer(playerid)
 			ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 			SendClientMessageToAll(COLOR_GRAD2, "#7: O¿ywiam gracza, nikt go nie dobi³");
 			ZdejmijBW(playerid);
-			/* tutaj dobicie gracza jesli nie uratowany
+			/* opcjonalnie dobicie gracza i nadanie BW jesli nie uratowany - kod poni¿ej
 			PlayerInfo[i][pInjury] = 999;
 			SetPlayerHealth(i, 0); */
 		}
