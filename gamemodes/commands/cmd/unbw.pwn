@@ -35,22 +35,9 @@ YCMD:unbw(playerid, params[], help)
 		new id;
 		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /unbw [ID]");
 		if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
-		if(PlayerInfo[id][pBW] > 0)
-		{
-			PlayerInfo[id][pBW] = 2;
-		}
-		else if(PlayerInfo[id][pInjury] > 0)
-		{
-			PlayerInfo[id][pInjury] = 0;
-			PlayerInfo[id][pBW] = 2;
-		}
-		else
-		{
-			return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie jest ranny.");
-		}
-
+		if(PlayerInfo[id][pBW] <= 0 && PlayerInfo[id][pInjury] <= 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie jest ranny.");
+		ZdejmijBW(id);
 		SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
-		SetPlayerChatBubble(id, " ", 0xFF0000FF, 100.0, 1000);
 	}
     return 1;
 }

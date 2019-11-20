@@ -46,7 +46,7 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 	}
 	else if(bw)
 	{
-		format(string, sizeof(string), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}w salach pooperacyjnych", type);
+		format(string, sizeof(string), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}pacjent w salach pooperacyjnych", type);
 	}
 	SendClientMessageToAll(COLOR_GRAD2, "#1 Wysy³am komunikat do ERS");
 	SendTeamMessage(4, COLOR_ALLDEPT, string);
@@ -183,11 +183,12 @@ ZespawnujGraczaSzpitalBW(playerid)
 	PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 	PlayerInfo[playerid][pPos_x] = HospitalBeds[randbed][0];
 	PlayerInfo[playerid][pPos_y] = HospitalBeds[randbed][1];
-	PlayerInfo[playerid][pPos_z] = HospitalBeds[randbed][2];
-	//SetPlayerCameraPos(playerid,HospitalBeds[randbed][0] + 3, HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
-	//SetPlayerCameraLookAt(playerid,HospitalBeds[randbed][0], HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
+	PlayerInfo[playerid][pPos_z] = HospitalBeds[randbed][2];		
 	PlayerInfo[playerid][pMuted] = 1;
 	ZespawnujGraczaBW(playerid);
+	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	SetPlayerCameraPos(playerid,HospitalBeds[randbed][0] + 3, HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
+	SetPlayerCameraLookAt(playerid,HospitalBeds[randbed][0], HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
 	return 1;
 }
 
