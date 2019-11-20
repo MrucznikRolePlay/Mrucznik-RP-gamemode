@@ -62,7 +62,8 @@ NadajRanny(playerid, customtime = 0)
 	if(!customtime) customtime = INJURY_TIME;
 	PlayerInfo[playerid][pBW] = 0;
 	PlayerInfo[playerid][pInjury] = customtime;
-	SetPlayerChatBubble(playerid, "(( Ranny ))", COLOR_PANICRED, 30.0, (customtime * 1000));
+	SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (customtime * 1000));
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], GetPlayerSkin(playerid), PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 	InfoMedicsInjury(playerid, true, false);
 	return 1;
 }
@@ -77,7 +78,8 @@ NadajBW(playerid, customtime = 0)
 	if(!customtime) customtime = BW_TIME;
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerInfo[playerid][pBW] = customtime;
-	SetPlayerChatBubble(playerid, "(( Nieprzytomny ))", COLOR_PANICRED, 30.0, (customtime * 1000));
+	SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (customtime * 1000));
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], GetPlayerSkin(playerid), PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 	InfoMedicsInjury(playerid, false, true);
 	return 1;
 }
@@ -137,7 +139,7 @@ RannyTimer(playerid)
 		PlayerInfo[i][pInjury]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Ranny: %d", PlayerInfo[i][pInjury]);
 		GameTextForPlayer(i, string, 2500, 3);
-		SetPlayerChatBubble(playerid, "(( Ranny ))", COLOR_PANICRED, 30.0, (PlayerInfo[i][pInjury] * 1000));
+		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (PlayerInfo[i][pInjury] * 1000));
 		if(PlayerInfo[i][pInjury] <= 0)
 		{
 			SendClientMessageToAll(COLOR_GRAD2, "#7: Nie uratowano, killam gracza");
@@ -162,7 +164,7 @@ BWTimer(playerid)
 		PlayerInfo[i][pBW]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Nieprzytomny: %d", PlayerInfo[i][pBW]);
 		GameTextForPlayer(i, string, 2500, 3);
-		SetPlayerChatBubble(playerid, "(( Nieprzytomny ))", COLOR_PANICRED, 30.0, (PlayerInfo[i][pBW] * 1000));
+		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (PlayerInfo[i][pBW] * 1000));
 		if(PlayerInfo[i][pBW] <= 0)
 		{
 			ZdejmijBW(i);
