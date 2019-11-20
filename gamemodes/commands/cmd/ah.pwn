@@ -79,7 +79,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 7)
 	{
-		SendClientMessage(playerid, COLOR_GRAD1, "*4* ZAS£U¯ONY *** /sban /sblock /skick /fixveh");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* ZAS£U¯ONY *** /sban /sblock /skick /fixveh /sethp");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 10)
 	{
@@ -103,7 +103,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 100)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /reloadbans /dajdzwiek /checkteam /bw");
+		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /reloadbans /dajdzwiek /checkteam /bw /dajapteczke");
 		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /dskill /dsus /setwl /choroba /logoutpl");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 200)

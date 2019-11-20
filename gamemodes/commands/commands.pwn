@@ -660,6 +660,7 @@
 #include "cmd/staty2.pwn"
 #include "cmd/makevlider.pwn"
 #include "cmd/dajscene.pwn"
+#include "cmd/dajapteczke.pwn"
 #include "cmd/fracinfo.pwn"
 #include "cmd/wlsett.pwn"
 

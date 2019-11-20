@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                    bw                                                     //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//----------------------------------------------[ dajapteczke ]----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,21 +16,55 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Creative
-// Data utworzenia: 18.11.2019
 
-//
+// Opis:
+/*
+	
+*/
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define INJURY_TIME 122 //czas trybu rannego
-#define INJURY_HP 30 //hp nadawane na tryb ranny i bw
-#define BW_TIME 242 //czas jak zostanie dobity
-#define BW_TIME_CRIMINAL 302 // czas jak zostanie dobity przez przestêpce
-#define MAX_HOSPITAL_BEDS 10
-#define MAX_HEALTH_PACKS 3 //maksymalna ilosc apteczek posiadanych przez gracza
-#define HEALTH_PACK_PRICE 90000 //cena apteczki
-#define HEALTH_PACK_AMOUNTDOCTOR 10000 //prowizja dla lekarza
-#define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki
 
-//end
+// Notatki skryptera:
+/*
+	
+*/
+
+YCMD:dajapteczke(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+		new playa, ilosc;
+		if( sscanf(params, "k<fix>D(0)", playa, ilosc))
+		{
+			sendTipMessage(playerid, "U¿yj /dajapteczke [playerid/CzêœæNicku] [ilosc]");
+			return 1;
+		}
+
+		if (PlayerInfo[playerid][pAdmin] >= 100 || IsAScripter(playerid))
+		{
+		    if(IsPlayerConnected(playa))
+		    {
+		        if(playa != INVALID_PLAYER_ID)
+		        {
+					new giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME];
+					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					if(GetPlayerAdminDutyStatus(playerid) == 1)
+					{
+						iloscInne[playerid] = iloscInne[playerid]+1;
+					}
+
+					PlayerInfo[playa][pHealthPacks] = ilosc;
+					Log(adminLog, INFO, "Admin %s ustawi³ %s apteczki na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), ilosc);
+					new string[128];
+					format(string, sizeof(string), "%s ustawi³ %d apteczki dla %s", sendername, ilosc, giveplayer);
+					SendMessageToAdmin(string, COLOR_P@);
+				}
+			}
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
+	return 1;
+}
