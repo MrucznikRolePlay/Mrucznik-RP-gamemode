@@ -100,7 +100,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 FreezePlayerOnInjury(playerid)
 {
 	//SendClientMessageToAll(COLOR_GRAD2, "#3: FreezePlayerOnInjury");
-	TogglePlayerControllable(playerid, 0);Sweet_injuredloop
+	TogglePlayerControllable(playerid, 0);
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	// lub ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
