@@ -1695,6 +1695,11 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		return 0;
     }
 
+	if(PlayerInfo[playerid][pBW] > 0)
+    {
+		return 0;
+    }
+
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)
 	{
 		return 1;
@@ -2044,7 +2049,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 				SetStrong(playerid, FirstValue);
 			}
 
-			//-------<[     WL      ]>---------
 			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
 			{
 				if(giveWL)
@@ -2054,6 +2058,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 						NadajWLBW(killerid, playerid, true);
 					}
 				}
+				if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
 			}
 			return NadajBW(playerid);
 		}
@@ -2357,7 +2362,14 @@ SetPlayerSpawnPos(playerid)
 	//Injury:
 	else if(PlayerInfo[playerid][pBW] > 0)
 	{
-		ZespawnujGraczaSzpitalBW(playerid);
+		if(PlayerRequestMedic[playerid] != 0)
+		{
+			ZespawnujGraczaBW(playerid);
+		}
+		else
+		{
+			ZespawnujGraczaSzpitalBW(playerid);
+		}
 	}
 	else if(PlayerInfo[playerid][pInjury] > 0)
 	{

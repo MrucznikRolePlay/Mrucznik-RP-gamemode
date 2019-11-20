@@ -106,7 +106,7 @@ PlayerChangeWeaponOnInjury(playerid)
 }
 ZespawnujGraczaBW(playerid)
 {
-	new string[144], type[144];
+	new string[256], type[144];
 	MedicBill[playerid] = 0;
 	MedicTime[playerid] = 0;
 	NeedMedicTime[playerid] = 0;
@@ -116,7 +116,7 @@ ZespawnujGraczaBW(playerid)
 	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
 	SetCameraBehindPlayer(playerid);
 	format(type, sizeof(type), (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny"));
-	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije.", type);
+	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911) lub poczekaæ %d sekund.\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
@@ -127,7 +127,7 @@ ZespawnujGraczaBW(playerid)
 //-----------------<[ Timery: ]>-------------------
 RannyTimer(playerid)
 {
-	new string[128], i = playerid;
+	new string[256], i = playerid;
 	if(GetPVarInt(i, "bw-sync") != 1 && GetPlayerState(i) == PLAYER_STATE_ONFOOT)
 	{
 		SetPVarInt(i, "bw-sync", 1);
@@ -142,9 +142,13 @@ RannyTimer(playerid)
 		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (PlayerInfo[i][pInjury] * 1000));
 		if(PlayerInfo[i][pInjury] <= 0)
 		{
-			SendClientMessageToAll(COLOR_GRAD2, "#7: Nie uratowano, killam gracza");
+			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê!\n{FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
+			ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
+			SendClientMessageToAll(COLOR_GRAD2, "#7: O¿ywiam gracza, nikt go nie dobi³");
+			ZdejmijBW(playerid);
+			/* tutaj dobicie gracza jesli nie uratowany
 			PlayerInfo[i][pInjury] = 999;
-			SetPlayerHealth(i, 0);
+			SetPlayerHealth(i, 0); */
 		}
 	}
 	return 1;
@@ -168,7 +172,7 @@ BWTimer(playerid)
 		if(PlayerInfo[i][pBW] <= 0)
 		{
 			ZdejmijBW(i);
-			GameTextForPlayer(i, "~n~~n~~n~~g~~h~Obudziles sie", 5000, 5);
+			GameTextForPlayer(i, "~n~~n~~g~~h~Obudziles sie", 5000, 5);
 		}
 	}
 	return 1;
@@ -220,16 +224,17 @@ NadajWLBW(killerid, victim, bool:bw)
 
 ZdejmijBW(playerid)
 {
-	new i = playerid;
 	SendClientMessageToAll(COLOR_GRAD2, "#11: ZdejmijBW");
-	SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000);
+	new i = playerid;
 	PlayerInfo[i][pBW]=0;
 	PlayerInfo[i][pInjury]=0;
+	PlayerInfo[i][pMuted] = 0;
+	PlayerRequestMedic[playerid] = 0;
 	TogglePlayerControllable(i, 1);
+	SetPVarInt(i, "bw-sync", 0);
 	ClearAnimations(i);
 	SetPlayerSpecialAction(i,SPECIAL_ACTION_NONE);
-	SetPVarInt(i, "bw-sync", 0);
-	PlayerInfo[i][pMuted] = 0;
+	SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000);
 }
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------

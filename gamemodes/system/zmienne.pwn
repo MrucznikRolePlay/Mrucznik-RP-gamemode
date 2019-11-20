@@ -721,6 +721,8 @@ new Condom[MAX_PLAYERS];
 new STDPlayer[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
+//BW
+new PlayerRequestMedic[MAX_PLAYERS];
 
 //---------------
 new RepairOffer[MAX_PLAYERS];
@@ -1299,7 +1301,10 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pNewAP] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
+	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
+	PlayerRequestMedic[playerid] = 0;
+
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;
