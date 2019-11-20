@@ -100,8 +100,9 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 FreezePlayerOnInjury(playerid)
 {
 	//SendClientMessageToAll(COLOR_GRAD2, "#3: FreezePlayerOnInjury");
-	TogglePlayerControllable(playerid, 0);
-	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+	TogglePlayerControllable(playerid, 0);Sweet_injuredloop
+	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+	// lub ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
 	return 1;
 }
@@ -131,7 +132,8 @@ ZespawnujGraczaBW(playerid)
 	format(type, sizeof(type), (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny"));
 	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911) lub poczekaæ %d sekund.\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
-	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+	// lub ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
 	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	//TogglePlayerControllable(playerid, 0);
@@ -149,7 +151,8 @@ RannyTimer(playerid)
 	if(PlayerInfo[i][pInjury] > 0)
 	{
 		//SendClientMessageToAll(COLOR_GRAD2, "------Timer: RannyTimer");
-		ApplyAnimation(i, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(i, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+		// lub ApplyAnimation(i, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 		PlayerInfo[i][pInjury]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Ranny: %d", PlayerInfo[i][pInjury]);
 		GameTextForPlayer(i, string, 2500, 3);
