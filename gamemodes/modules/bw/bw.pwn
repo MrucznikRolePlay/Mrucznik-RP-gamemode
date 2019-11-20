@@ -39,10 +39,10 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 {
 	new string[144], pZone[MAX_ZONE_NAME], type[144];
 	GetPlayer2DZone(injureplayer, pZone, MAX_ZONE_NAME);
-	type = (injury ? "Ranny" : "Nieprzytomny");
+	format(type, sizeof(type), (bw ? "Nieprzytomny" : "Ranny"));
 	if(injury)
 	{
-		format(string, sizeof(string), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}- Lokalizacja: {FF0000}%s", type, pZone);
+		format(string, sizeof(string), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}- lokalizacja: {FF0000}%s", type, pZone);
 	}
 	else if(bw)
 	{
@@ -50,24 +50,6 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 	}
 	SendClientMessageToAll(COLOR_GRAD2, "#1 Wysy³am komunikat do ERS");
 	SendTeamMessage(4, COLOR_ALLDEPT, string);
-	return 1;
-}
-ZespawnujGraczaBW(playerid)
-{
-	new string[144], type[144];
-	MedicBill[playerid] = 0;
-	MedicTime[playerid] = 0;
-	NeedMedicTime[playerid] = 0;
-	SetPlayerHealth(playerid, INJURY_HP);
-	SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
-	SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
-	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
-	SetCameraBehindPlayer(playerid);
-	type = (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny");
-	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije.", type);
-	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
-	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
-	SendClientMessageToAll(COLOR_GRAD2, "#2 ZespawnujGraczaBW");
 	return 1;
 }
 NadajRanny(playerid, customtime = 0)
@@ -119,6 +101,26 @@ PlayerChangeWeaponOnInjury(playerid)
 {
 	SendClientMessageToAll(COLOR_GRAD2, "#6: PlayerChangeWeaponOnInjury");
 	SetPlayerArmedWeapon(playerid, starabron[playerid]);
+	return 1;
+}
+ZespawnujGraczaBW(playerid)
+{
+	new string[144], type[144];
+	MedicBill[playerid] = 0;
+	MedicTime[playerid] = 0;
+	NeedMedicTime[playerid] = 0;
+	SetPlayerHealth(playerid, INJURY_HP);
+	SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
+	SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
+	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
+	SetCameraBehindPlayer(playerid);
+	format(type, sizeof(type), (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny"));
+	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc lub poczekaæ a¿ ktoœ Ciê dobije.", type);
+	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
+	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
+	SendClientMessageToAll(COLOR_GRAD2, "#2 ZespawnujGraczaBW");
+	
+	TogglePlayerControllable(playerid, 0);
 	return 1;
 }
 //-----------------<[ Timery: ]>-------------------
@@ -193,8 +195,32 @@ ZespawnujGraczaSzpitalBW(playerid)
 	SetPlayerCameraLookAt(playerid,HospitalBeds[randbed][0], HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
 	PlayerInfo[playerid][pMuted] = 1;
 	ZespawnujGraczaBW(playerid);
-	TogglePlayerControllable(playerid, 0);
 	return 1;
+}
+
+NadajWLBW(killerid, victim, bool:bw)
+{
+	new string[144];
+	new playerid = victim;
+	format(string, sizeof(string), (bw ? "Morderstwo" : "Zranienie"));
+	if(IsACop(playerid))
+	{
+		PoziomPoszukiwania[killerid] += 2;
+		strcat(string, " Policjanta");
+	}
+	if(lowcaz[killerid] == playerid)
+		strcat(string, " £owcy Nagród");
+	if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER || GetPlayerState(killerid) == PLAYER_STATE_PASSENGER)
+		strcat(string, " z okna pojazdu");
+
+	PlayerPlaySound(killerid, 1083, 0.0, 0.0, 0.0);
+	PoziomPoszukiwania[killerid] ++;
+	SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
+	if(PoziomPoszukiwania[killerid] >= 10)
+	{
+		sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
+		sendTipMessage(killerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
+	}
 }
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------

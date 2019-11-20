@@ -1895,7 +1895,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(PlayerInfo[playerid][pInjury] > 0)
 		{
-			NadajBW(playerid);
 			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 			{
 				PlayerInfo[killerid][pKills] ++;
@@ -2046,37 +2045,31 @@ public OnPlayerDeath(playerid, killerid, reason)
 			}
 
 			//-------<[     WL      ]>---------
-			/*if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
+			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
 			{
 				if(giveWL)
 				{
 					if(!IsACop(killerid) && lowcaz[killerid] != playerid )
 					{
-						format(string, sizeof(string), "Morderstwo");
-						if(IsACop(playerid))
-						{
-							PoziomPoszukiwania[killerid] += 2;
-							strcat(string, " Policjanta");
-						}
-						if(lowcaz[killerid] == playerid)
-							strcat(string, " £owcy Nagród");
-						if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER || GetPlayerState(killerid) == PLAYER_STATE_PASSENGER)
-							strcat(string, " z okna pojazdu");
-
-						PlayerPlaySound(killerid, 1083, 0.0, 0.0, 0.0);
-						PoziomPoszukiwania[killerid] ++;
-						SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
-						if(PoziomPoszukiwania[killerid] >= 10)
-						{
-							sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
-							sendTipMessage(killerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
-						}
+						NadajWLBW(killerid, playerid, true);
 					}
 				}
-			}*/
+			}
+			return NadajBW(playerid);
 		}
 		else
 		{
+			//-------<[     WL      ]>---------
+			if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
+			{
+				if(giveWL)
+				{
+					if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+					{
+						NadajWLBW(killerid, playerid, false);
+					}
+				}
+			}
 			return NadajRanny(playerid);
 		}
 	}
