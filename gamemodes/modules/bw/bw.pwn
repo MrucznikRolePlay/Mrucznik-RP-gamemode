@@ -115,7 +115,6 @@ ZespawnujGraczaBW(playerid)
 	MedicBill[playerid] = 0;
 	MedicTime[playerid] = 0;
 	NeedMedicTime[playerid] = 0;
-	SetPlayerHealth(playerid, INJURY_HP);
 	SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
 	SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
 	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
@@ -127,6 +126,7 @@ ZespawnujGraczaBW(playerid)
 	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
 	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	//TogglePlayerControllable(playerid, 0);
+	SetPlayerHealth(playerid, INJURY_HP);
 	return 1;
 }
 //-----------------<[ Timery: ]>-------------------
