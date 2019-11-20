@@ -7616,6 +7616,7 @@ public OnPlayerText(playerid, text[])
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Centrala: Lokalizacja zg³oszenia: %s", pZone);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			if(org == 4 && (PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0)) PlayerRequestMedic[playerid] = 1;
 
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
 			StopACall(playerid);

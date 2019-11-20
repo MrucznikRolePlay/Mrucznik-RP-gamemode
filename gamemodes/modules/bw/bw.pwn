@@ -63,7 +63,6 @@ NadajRanny(playerid, customtime = 0)
 	PlayerInfo[playerid][pBW] = 0;
 	PlayerInfo[playerid][pInjury] = customtime;
 	SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (customtime * 1000));
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], GetPlayerSkin(playerid), PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 	InfoMedicsInjury(playerid, true, false);
 	return 1;
 }
@@ -79,7 +78,6 @@ NadajBW(playerid, customtime = 0)
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerInfo[playerid][pBW] = customtime;
 	SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (customtime * 1000));
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], GetPlayerSkin(playerid), PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 	InfoMedicsInjury(playerid, false, true);
 	return 1;
 }
