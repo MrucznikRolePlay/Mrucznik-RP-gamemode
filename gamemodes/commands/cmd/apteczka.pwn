@@ -40,16 +40,11 @@ YCMD:apteczka(playerid, params[], help)
 	{
 		return sendErrorMessage(playerid, "Nie ma takiego gracza.");
 	}
-	if (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+	if((PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4) && PlayerInfo[playerid][pBW] == 0)
 	{
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-		if(playa == playerid)
-		{
-			sendErrorMessage(playerid, "Nie mo¿esz uzdrowiæ samego siebie!");
-			return 1;
-		}
 		
 		if(GetDistanceBetweenPlayers(playerid,playa) < 5 && Spectate[playa] == INVALID_PLAYER_ID)
 		{
@@ -76,7 +71,7 @@ YCMD:apteczka(playerid, params[], help)
 	}
 	else
 	{
-		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
+		sendErrorMessage(playerid, "Nie jesteœ medykiem lub jesteœ nieprzytomny!");
 	}
 	return 1;
 }
