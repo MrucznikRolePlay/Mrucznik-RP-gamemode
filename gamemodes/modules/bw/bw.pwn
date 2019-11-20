@@ -48,7 +48,7 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 	{
 		format(string, sizeof(string), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}pacjent w salach pooperacyjnych", type);
 	}
-	SendClientMessageToAll(COLOR_GRAD2, "#1 Wysy³am komunikat do ERS");
+	//SendClientMessageToAll(COLOR_GRAD2, "#1 Wysy³am komunikat do ERS");
 	SendTeamMessage(4, COLOR_ALLDEPT, string);
 	return 1;
 }
@@ -58,7 +58,7 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-	SendClientMessageToAll(COLOR_GRAD2, "#2: NadajRanny");
+	//SendClientMessageToAll(COLOR_GRAD2, "#2: NadajRanny");
 	if(!customtime) customtime = INJURY_TIME;
 	PlayerInfo[playerid][pBW] = 0;
 	PlayerInfo[playerid][pInjury] = customtime;
@@ -75,7 +75,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-	SendClientMessageToAll(COLOR_GRAD2, "#2-2: NadajBW");
+	//SendClientMessageToAll(COLOR_GRAD2, "#2-2: NadajBW");
 	//TogglePlayerControllable(playerid, 0);
 	if(!customtime) customtime = BW_TIME;
 	PlayerInfo[playerid][pInjury] = 0;
@@ -90,7 +90,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 }
 FreezePlayerOnInjury(playerid)
 {
-	SendClientMessageToAll(COLOR_GRAD2, "#3: FreezePlayerOnInjury");
+	//SendClientMessageToAll(COLOR_GRAD2, "#3: FreezePlayerOnInjury");
 	TogglePlayerControllable(playerid, 0);
 	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
@@ -98,14 +98,14 @@ FreezePlayerOnInjury(playerid)
 }
 PlayerEnterVehOnInjury(playerid)
 {
-	SendClientMessageToAll(COLOR_GRAD2, "#4: PlayerEnterVehOnInjury");
+	//SendClientMessageToAll(COLOR_GRAD2, "#4: PlayerEnterVehOnInjury");
 	Player_RemoveFromVeh(playerid);
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
 	return 1;
 }
 PlayerChangeWeaponOnInjury(playerid)
 {
-	SendClientMessageToAll(COLOR_GRAD2, "#5: PlayerChangeWeaponOnInjury");
+	//SendClientMessageToAll(COLOR_GRAD2, "#5: PlayerChangeWeaponOnInjury");
 	SetPlayerArmedWeapon(playerid, starabron[playerid]);
 	return 1;
 }
@@ -124,7 +124,7 @@ ZespawnujGraczaBW(playerid)
 	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911) lub poczekaæ %d sekund.\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
-	SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
+	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
 	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	//TogglePlayerControllable(playerid, 0);
 	return 1;
@@ -139,7 +139,7 @@ RannyTimer(playerid)
 	}
 	if(PlayerInfo[i][pInjury] > 0)
 	{
-		SendClientMessageToAll(COLOR_GRAD2, "------Timer: RannyTimer");
+		//SendClientMessageToAll(COLOR_GRAD2, "------Timer: RannyTimer");
 		ApplyAnimation(i, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 		PlayerInfo[i][pInjury]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Ranny: %d", PlayerInfo[i][pInjury]);
@@ -149,7 +149,7 @@ RannyTimer(playerid)
 		{
 			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê!\n{FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
 			ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
-			SendClientMessageToAll(COLOR_GRAD2, "#7: O¿ywiam gracza, nikt go nie dobi³");
+			//SendClientMessageToAll(COLOR_GRAD2, "#7: O¿ywiam gracza, nikt go nie dobi³");
 			ZdejmijBW(playerid);
 			/* opcjonalnie dobicie gracza i nadanie BW jesli nie uratowany - kod poni¿ej
 			PlayerInfo[i][pInjury] = 999;
@@ -168,7 +168,7 @@ BWTimer(playerid)
 	}
 	if(PlayerInfo[playerid][pBW] > 0)
 	{
-		SendClientMessageToAll(COLOR_GRAD2, "------Timer: BWTimer");
+		//SendClientMessageToAll(COLOR_GRAD2, "------Timer: BWTimer");
 		ApplyAnimation(i, "CRACK", "crckidle1", 4.0, 1, 0, 0, 1, 0, 1);
 		PlayerInfo[i][pBW]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Nieprzytomny: %d", PlayerInfo[i][pBW]);
@@ -185,7 +185,7 @@ BWTimer(playerid)
 
 ZespawnujGraczaSzpitalBW(playerid)
 {
-	SendClientMessageToAll(COLOR_GRAD2, "#9: ZespawnujGraczaSzpitalBW");
+	//SendClientMessageToAll(COLOR_GRAD2, "#9: ZespawnujGraczaSzpitalBW");
 	new randbed = random(sizeof(HospitalBeds));
 	SetPVarInt(playerid, "bw-vw", 90);
 	SetPVarInt(playerid, "bw-int", 0);
@@ -203,7 +203,7 @@ ZespawnujGraczaSzpitalBW(playerid)
 
 NadajWLBW(killerid, victim, bool:bw)
 {
-	SendClientMessageToAll(COLOR_GRAD2, "#10: NadajWLBW");
+	//SendClientMessageToAll(COLOR_GRAD2, "#10: NadajWLBW");
 	new string[144];
 	new playerid = victim;
 	format(string, sizeof(string), (bw ? "Morderstwo" : "Zranienie"));
@@ -229,7 +229,7 @@ NadajWLBW(killerid, victim, bool:bw)
 
 ZdejmijBW(playerid)
 {
-	SendClientMessageToAll(COLOR_GRAD2, "#11: ZdejmijBW");
+	//SendClientMessageToAll(COLOR_GRAD2, "#11: ZdejmijBW");
 	new i = playerid;
 	PlayerInfo[i][pBW]=0;
 	PlayerInfo[i][pInjury]=0;
