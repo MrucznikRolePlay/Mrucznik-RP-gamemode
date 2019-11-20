@@ -73,7 +73,7 @@ NadajBW(playerid, customtime = 0)
 	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
 	SendClientMessageToAll(COLOR_GRAD2, "#4: NadajBW");
-	TogglePlayerControllable(playerid, 0);
+	//TogglePlayerControllable(playerid, 0);
 	if(!customtime) customtime = BW_TIME;
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerInfo[playerid][pBW] = customtime;
@@ -120,7 +120,7 @@ ZespawnujGraczaBW(playerid)
 	ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	SendClientMessageToAll(COLOR_GRAD2, "#2 ZespawnujGraczaBW");
 	
-	TogglePlayerControllable(playerid, 0);
+	//TogglePlayerControllable(playerid, 0);
 	return 1;
 }
 //-----------------<[ Timery: ]>-------------------
