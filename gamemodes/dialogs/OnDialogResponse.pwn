@@ -13776,6 +13776,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			if(PlayerInfo[id][pHealthPacks] < 1) return SendClientMessage(id, 0xFF0030FF, "Gracz nie posiada ju¿ apteczek by udzieliæ Ci pomocy.");
+			if(PlayerInfo[playerid][pBW] > 0) return SendClientMessage(playerid, 0xFF0030FF, "Jesteœ ciê¿ko ranny, takie obra¿enia mo¿e opatrzyæ tylko lekarz! (/wezwij medyk)");
 			
 			format(string, sizeof(string),"* Udzielono pomocy medycznej %s i opatrzono rany.", GetNick(playerid));
 			SendClientMessage(id, COLOR_WHITE, string);
