@@ -1969,29 +1969,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 						}
 						return 1;
 					}
-					if(PlayerInfo[playerid][pHeadValue] > 0)
-					{
-						if(IsPlayerConnected(killerid))
-						{
-							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
-							{
-								if(GoChase[killerid] == playerid)
-								{
-									DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
-									format(string,128,"<< Hitman %s wype³ni³ kontrakt na: %s i zarobi³ $%d >>",killername,playername,PlayerInfo[playerid][pHeadValue]);
-									SendFamilyMessage(8, COLOR_YELLOW, string);
-									format(string,128,"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s. Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",playername);
-									SendClientMessageToAll(COLOR_NEWS, string);
-									Log(payLog, INFO, "Hitman %s zabi³ %s i zarobi³ %d$", GetPlayerLogName(killerid), GetPlayerLogName(playerid), PlayerInfo[playerid][pHeadValue]);
-									PlayerInfo[playerid][pHeadValue] = 0;
-									GotHit[playerid] = 0;
-									GetChased[playerid] = 999;
-									GoChase[killerid] = 999;
-									//tworzenie cia³a
-								}
-							}
-						}
-					}
 				} //koniec killerid connected
 				if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
 				{
@@ -2059,6 +2036,17 @@ public OnPlayerDeath(playerid, killerid, reason)
 							NadajWLBW(killerid, playerid, true);
 						}
 					}
+					if(PlayerInfo[playerid][pHeadValue] > 0)
+					{
+						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+						{
+							if(GoChase[killerid] == playerid)
+							{
+								SetPVarInt(playerid, "bw-hitmankiller",  1);
+								SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
+							}
+						}
+					}
 					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
 				return NadajBW(playerid);
@@ -2079,6 +2067,18 @@ public OnPlayerDeath(playerid, killerid, reason)
 							if(!IsACop(killerid) && lowcaz[killerid] != playerid )
 							{
 								NadajWLBW(killerid, playerid, false);
+							}
+						}
+						if(PlayerInfo[playerid][pHeadValue] > 0)
+						{
+							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+							{
+								if(GoChase[killerid] == playerid)
+								{
+									SetPVarInt(playerid, "bw-hitmankiller",  1);
+									SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
+									return NadajBW(playerid, BW_TIME_CRIMINAL);
+								}
 							}
 						}
 					}

@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:sprzedajapteczka(playerid, params[], help)
+YCMD:sprzedajapteczke(playerid, params[], help)
 {
 	if(GetPlayerFraction(playerid) == FRAC_ERS)
 	{

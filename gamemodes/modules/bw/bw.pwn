@@ -39,7 +39,19 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 {
 	new string[144], string2[144], pZone[MAX_ZONE_NAME], type[144], reason;
 	GetPlayer2DZone(injureplayer, pZone, MAX_ZONE_NAME);
-	format(type, sizeof(type), (bw ? "Nieprzytomny" : "Ranny"));
+	reason = GetPVarInt(injureplayer,"bw-reason");
+	if(reason <= 54 && reason > 0)
+	{
+		if(reason > 46 && ((reason-46) == 7 || (reason-46) == 8))
+		{
+			format(type, sizeof(type), "Œmiertelnie ranny");
+		}
+		else
+		{
+			format(type, sizeof(type), (bw ? "Nieprzytomny" : "Ranny"));
+		}
+	}
+
 	if(injury)
 	{
 		format(string2, sizeof(string2), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}w okolicach %s", type, pZone);
@@ -49,7 +61,6 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 		format(string2, sizeof(string2), "{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000}%s {FFFFFF}pacjent w salach pooperacyjnych", type);
 	}
 
-	reason = GetPVarInt(injureplayer,"bw-reason");
 	if(reason <= 54 && reason > 0)
 	{
 		format(string, sizeof(string), "%s z urazami od %s", string2, (reason <= 46) ? GunNames[reason] : NiggaNames[reason-46]);
@@ -59,11 +70,16 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 		string = string2;
 	}
 	//SendClientMessageToAll(COLOR_GRAD2, "#1 Wysy³am komunikat do ERS");
-	SendTeamMessage(4, COLOR_ALLDEPT, string);
+	SendTeamMessageOnDuty(4, COLOR_ALLDEPT, string);
 	return 1;
 }
 NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 {
+	new reason = GetPVarInt(playerid,"bw-reason");
+	if(reason <= 54 && reason > 0)
+	{
+		if(reason > 46 && ((reason-46) == 7 || (reason-46) == 8)) return NadajBW(playerid); //upadek lub zatoniecie
+	}
 	new faceangle;
 	GetPlayerFacingAngle(playerid, Float:faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
@@ -84,6 +100,27 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 }
 NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
+	new string[144];
+	if(GetPVarInt(playerid, "bw-hitmankiller") == 1)
+	{
+		new killerid = GetPVarInt(playerid, "bw-hitmankillerid");
+		if(IsPlayerConnected(killerid))
+		{
+			DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
+			format(string,sizeof(string),"<< Hitman %s wype³ni³ kontrakt na: %s i zarobi³ $%d >>",GetNick(killerid),GetNick(playerid),PlayerInfo[playerid][pHeadValue]);
+			SendFamilyMessage(8, COLOR_YELLOW, string);
+			format(string,sizeof(string),"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s. Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",GetNick(playerid));
+			SendClientMessageToAll(COLOR_NEWS, string);
+			Log(payLog, INFO, "Hitman %s zabi³ %s i zarobi³ %d$", GetPlayerLogName(killerid), GetPlayerLogName(playerid), PlayerInfo[playerid][pHeadValue]);
+			PlayerInfo[playerid][pHeadValue] = 0;
+			GotHit[playerid] = 0;
+			GetChased[playerid] = 999;
+			GoChase[killerid] = 999;
+			DeletePVar(playerid, "bw-hitmankiller");
+			DeletePVar(playerid, "bw-hitmankillerid");
+			customtime = BW_TIME_CRIMINAL;
+		}
+	}
 	new faceangle;
 	GetPlayerFacingAngle(playerid, Float:faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
@@ -92,7 +129,6 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
 	SetPVarInt(playerid, "bw-faceangle", faceangle);
 	//SendClientMessageToAll(COLOR_GRAD2, "#2-2: NadajBW");
-	//TogglePlayerControllable(playerid, 0);
 	if(!customtime) customtime = BW_TIME;
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerInfo[playerid][pBW] = customtime;
@@ -108,7 +144,6 @@ FreezePlayerOnInjury(playerid)
 	//SendClientMessageToAll(COLOR_GRAD2, "#3: FreezePlayerOnInjury");
 	TogglePlayerControllable(playerid, 0);
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
-	// lub ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
 	return 1;
 }
@@ -139,10 +174,8 @@ ZespawnujGraczaBW(playerid)
 	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911), u¿yæ apteczki (/apteczka) lub poczekaæ %d sekund.\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
-	// lub ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
 	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-	//TogglePlayerControllable(playerid, 0);
 	SetPlayerHealth(playerid, INJURY_HP); //tutaj wtf
 	return 1;
 }
@@ -158,7 +191,6 @@ RannyTimer(playerid)
 	{
 		//SendClientMessageToAll(COLOR_GRAD2, "------Timer: RannyTimer");
 		ApplyAnimation(i, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
-		// lub ApplyAnimation(i, "CRACK", "crckdeth2", 4.0, 1, 0, 0, 1, 0, 1);
 		PlayerInfo[i][pInjury]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Ranny: %d", PlayerInfo[i][pInjury]);
 		GameTextForPlayer(i, string, 2500, 3);
@@ -194,8 +226,12 @@ BWTimer(playerid)
 		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (PlayerInfo[i][pBW] * 1000));
 		if(PlayerInfo[i][pBW] <= 0)
 		{
+			SendClientMessage(i, COLOR_LIGHTBLUE, "* Otrzyma³eœ rachunek w wysokoœci 2.000$ za hospitalizacjê.");
+			ZabierzKase(i, 2000);
 			ZdejmijBW(i);
 			GameTextForPlayer(i, "~n~~n~~g~~h~Obudziles sie", 5000, 5);
+			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê!\n{FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
+			ShowPlayerInfoDialog(i, "Mrucznik Role Play", string); 
 		}
 	}
 	return 1;
@@ -207,7 +243,7 @@ ZespawnujGraczaSzpitalBW(playerid)
 	new randbed = random(sizeof(HospitalBeds));
 	SetPVarInt(playerid, "bw-vw", 90);
 	SetPVarInt(playerid, "bw-int", 0);
-	SetPVarInt(playerid, "bw-faceangle", Float:HospitalBeds[randbed][3]);
+	SetPVarInt(playerid, "bw-faceangle", HospitalBeds[randbed][3]);
 	PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 	PlayerInfo[playerid][pPos_x] = HospitalBeds[randbed][0];
 	PlayerInfo[playerid][pPos_y] = HospitalBeds[randbed][1];
@@ -224,7 +260,7 @@ NadajWLBW(killerid, victim, bool:bw)
 	//SendClientMessageToAll(COLOR_GRAD2, "#10: NadajWLBW");
 	new string[144];
 	new playerid = victim;
-	format(string, sizeof(string), (bw ? "Morderstwo" : "Zranienie"));
+	format(string, sizeof(string), (bw ? "Morderstwo" : "Okaleczenie"));
 	if(IsACop(playerid))
 	{
 		PoziomPoszukiwania[killerid] += 2;
@@ -245,7 +281,7 @@ NadajWLBW(killerid, victim, bool:bw)
 	}
 }
 
-ZdejmijBW(playerid)
+ZdejmijBW(playerid, drunklvl = 7000)
 {
 	//SendClientMessageToAll(COLOR_GRAD2, "#11: ZdejmijBW");
 	new i = playerid;
@@ -258,6 +294,7 @@ ZdejmijBW(playerid)
 	ClearAnimations(i);
 	SetPlayerSpecialAction(i,SPECIAL_ACTION_NONE);
 	SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000);
+	SetPlayerDrunkLevel(playerid, drunklvl);
 }
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------

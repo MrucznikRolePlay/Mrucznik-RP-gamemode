@@ -36,7 +36,7 @@ YCMD:unbw(playerid, params[], help)
 		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /unbw [ID]");
 		if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
 		if(PlayerInfo[id][pBW] <= 0 && PlayerInfo[id][pInjury] <= 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie jest ranny.");
-		ZdejmijBW(id);
+		ZdejmijBW(id, 2000);
 		SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
 	}
     return 1;

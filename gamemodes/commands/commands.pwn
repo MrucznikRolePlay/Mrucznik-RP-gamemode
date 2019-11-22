@@ -713,6 +713,11 @@ static Aliases()
 	//czas
 	Command_AddAltNamed("czas", "time");
 
+
+	//dajapteczke
+	Command_AddAltNamed("dajapteczke", "dajapteczka");
+	Command_AddAltNamed("sprzedajapteczke", "sprzedajapteczke");
+
 	//dajklucze
 	Command_AddAltNamed("dajklucze", "kluczyki");
 	Command_AddAltNamed("dajklucze", "dajkluczyki");

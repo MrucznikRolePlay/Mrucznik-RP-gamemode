@@ -13769,6 +13769,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DeletePVar(playerid, "HealthPackOffer");
 		return 1;
 	}
+	if(dialogid == D_UZYCIE_APTECZKI)
+	{
+		new string[144];
+		new id = GetPVarInt(playerid, "HealthPackOffer");
+		if(response)
+		{
+			if(PlayerInfo[id][pHealthPacks] < 1) return SendClientMessage(id, 0xFF0030FF, "Gracz nie posiada ju¿ apteczek by udzieliæ Ci pomocy.");
+			
+			format(string, sizeof(string),"* Udzielono pomocy medycznej %s i opatrzono rany.", GetNick(playerid));
+			SendClientMessage(id, COLOR_WHITE, string);
+			format(string, sizeof(string),"* %s wyci¹ga apteczkê, banda¿uje obra¿enia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
+			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			PlayerInfo[id][pHealthPacks]--;
+			ZdejmijBW(playerid, 2200);
+			SetPlayerHealth(playerid, HEALTH_PACK_HP);
+		}
+		else
+		{
+			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na udzielenie pomocy medycznej.", PlayerName(playerid));
+			SendClientMessage(id, 0xFF0030FF, string);
+		}
+		DeletePVar(playerid, "HealthPackOffer");
+		return 1;
+	}
     if(dialogid == DIALOG_ELEVATOR_SAD)
     {
         if(response)

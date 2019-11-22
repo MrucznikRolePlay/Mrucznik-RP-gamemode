@@ -29,7 +29,7 @@
 #define BW_TIME_CRIMINAL 302 // czas jak zostanie dobity przez przestêpce
 #define MAX_HOSPITAL_BEDS 10
 #define MAX_HEALTH_PACKS 3 //maksymalna ilosc apteczek posiadanych przez gracza
-#define HEALTH_PACK_PRICE 90000 //cena apteczki
+#define HEALTH_PACK_PRICE 50000 //cena apteczki
 #define HEALTH_PACK_AMOUNTDOCTOR 10000 //prowizja dla lekarza
 #define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki
 

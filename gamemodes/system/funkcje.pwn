@@ -7437,6 +7437,26 @@ SendTeamMessage(team, color, string[], isDepo = 0)
 		}
 	}
 }
+SendTeamMessageOnDuty(team, color, string[], isDepo = 0)
+{
+	foreach(new i : Player)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if((PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team) && (OnDuty[i] == 1 || JobDuty[i] == 1))
+		    {
+		    	if(isDepo == 1 && gMuteDepo[i] == 0) 
+                {
+                    SendClientMessage(i, color, string);
+                }
+              	if(isDepo == 0) {
+              		SendClientMessage(i, color, string);
+              	}
+				//SendClientMessage(i, color, string);
+			}
+		}
+	}
+}
 
 PlayCrimeReportForPlayersTeam(team, suspectid, level = 16)
 {
