@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 dodatki                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,17 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 09.08.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "dajobiekt\dajobiekt.pwn"
-#include "dnobiekt\dnobiekt.pwn"
-#include "dodatki\dodatki.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
-#include "zdejmij\zdejmij.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_dodatki_Impl(playerid)
 {
-    command_dajobiekt();
-    command_dnobiekt();
-    command_dodatki();
-    command_zabierzobiekt();
-    command_zdejmij();
-    
+    DialogPlayerAttachedItems(playerid);
+    return 1;
 }
+
+//end

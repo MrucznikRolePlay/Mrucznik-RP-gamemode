@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                przedmioty                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,13 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Creative
+// Data utworzenia: 22.11.2019
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//-----------------<[ Zmienne: ]>-------------------
+//------------------<[ Enumy: ]>--------------------
+//------------------<[ Forwardy: ]>--------------------
 
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "dajobiekt\dajobiekt.pwn"
-#include "dnobiekt\dnobiekt.pwn"
-#include "dodatki\dodatki.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
-#include "zdejmij\zdejmij.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
-{
-    command_dajobiekt();
-    command_dnobiekt();
-    command_dodatki();
-    command_zabierzobiekt();
-    command_zdejmij();
-    
-}
+//end

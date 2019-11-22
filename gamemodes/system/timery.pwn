@@ -1715,7 +1715,13 @@ public Spectator()
 						{
 							return PlayerChangeWeaponOnInjury(i);
 						}
-						GetPlayerName(i, specNAME, sizeof(specNAME));
+						else
+						{
+							return PokazDialogBronie(i);
+
+							//freeze scroll i gui
+						}
+						/*GetPlayerName(i, specNAME, sizeof(specNAME));
 						switch(weaponID)
 						{
 							case 0:
@@ -1972,7 +1978,7 @@ public Spectator()
 								SetPVarInt(i, "tazer", 0);
 							}
 						}
-						starabron[i]=weaponID;
+						starabron[i]=weaponID;*/
 					}
 				}
 			}

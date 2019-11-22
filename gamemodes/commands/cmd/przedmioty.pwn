@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ przedmioty ]----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,43 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// ================= UWAGA! =================
-//
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
+// Opis:
+/*
+	
+*/
 
 
-#include <YSI\y_hooks>
+// Notatki skryptera:
+/*
+	Zal¹¿ek systemu przedmiotów, na razie w formie systemu broni
+*/
 
-//-------<[ include ]>-------
-#include "dajobiekt\dajobiekt.pwn"
-#include "dnobiekt\dnobiekt.pwn"
-#include "dodatki\dodatki.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
-#include "zdejmij\zdejmij.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+YCMD:przedmioty(playerid, params[], help)
 {
-    command_dajobiekt();
-    command_dnobiekt();
-    command_dodatki();
-    command_zabierzobiekt();
-    command_zdejmij();
-    
+    if(gPlayerLogged[playerid] == 1 && IsPlayerConnected(playerid))
+    {
+		new option[128], itemexist;
+		if(!sscanf(params, "s[128]", option)) { //jesli wpisal string (/p [BRON])
+			itemexist = 0;
+			for (new i = 0; i <= 12; i++)
+			{
+				GetPlayerWeaponData(playerid, i, weapon, ammo);
+				if(ammo > 0)
+				{
+					if(strcmp(weapon, option, true) == 0)
+					{
+						itemexist = weapon;
+						//wyciagniecie broni
+					}
+				}
+			}
+			return (itemexist == 0) ? PokazDialogPrzedmioty(playerid) : PrzedmiotyZmienBron(playerid, itemexist);
+		}
+		else //domyœlne gui
+		{
+			return PokazDialogPrzedmioty(playerid);
+		}
+	}
+	return 1;
 }

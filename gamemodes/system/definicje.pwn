@@ -460,6 +460,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 #define D_ERS_SPRZEDAZ_APTECZKI			10107
 #define D_UZYCIE_APTECZKI			    10108
+#define D_PRZEDMIOTY_BRONIE			    10109
 
 
 //------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 {
-    "name": "przedmioty",
+    "name": "dodatki",
     "description": "Wyœwietla posiadane przedmioty premium.",
     "permissions": [
         "everyone"

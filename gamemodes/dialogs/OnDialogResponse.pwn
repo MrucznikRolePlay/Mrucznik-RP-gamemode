@@ -13794,6 +13794,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DeletePVar(playerid, "HealthPackOffer");
 		return 1;
 	}
+	if(dialogid == D_PRZEDMIOTY_BRONIE)
+	{
+		if(response)
+		{
+			new weapons[13], ammo, weaponid;
+			for (new i = 0; i <= 12; i++)
+			{
+				GetPlayerWeaponData(playerid, i, weaponid, ammo);
+				if(ammo > 0) weapons[i] = weaponid;
+			}
+
+			return PrzedmiotyZmienBron(playerid, weapons[listitem]);
+		}
+		else
+		{
+			return SetPlayerArmedWeapon(playerid, starabron[playerid]);
+		}
+		//akcje /me
+	}
     if(dialogid == DIALOG_ELEVATOR_SAD)
     {
         if(response)

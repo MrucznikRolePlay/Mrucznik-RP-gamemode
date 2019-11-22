@@ -1264,6 +1264,9 @@ static Aliases()
 	//uleczmnie
 	Command_AddAltNamed("uleczmnie", "healme");
 
+	//system przedmiotow
+	Command_AddAltNamed("przedmioty", "p");
+
 	//ulepsz
 	Command_AddAltNamed("ulepsz", "upgrade");
 	Command_AddAltNamed("ulepsz", "ulepszenia");

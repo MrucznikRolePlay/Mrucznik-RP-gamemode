@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 dodatki                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,23 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "dajobiekt\dajobiekt.pwn"
-#include "dnobiekt\dnobiekt.pwn"
-#include "dodatki\dodatki.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
-#include "zdejmij\zdejmij.pwn"
-
+#include "dodatki_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_dodatki()
 {
-    command_dajobiekt();
-    command_dnobiekt();
-    command_dodatki();
-    command_zabierzobiekt();
-    command_zdejmij();
+    new command = Command_GetID("dodatki");
+
+    //aliases
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:dodatki(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla posiadane przedmioty premium.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_dodatki_Impl(playerid);
 }

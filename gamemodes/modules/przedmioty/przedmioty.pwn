@@ -1,4 +1,4 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
 //                                                 przedmioty                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
@@ -16,46 +16,48 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+//Opis:
+/*
 
-// ================= UWAGA! =================
+*/
+// Autor: Creative
+// Data utworzenia: 22.11.2019
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "przedmioty_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_przedmioty()
+//-----------------<[ Callbacki: ]>-------------------
+//-----------------<[ Funkcje: ]>-------------------
+/*PlayerChangeWeapon(playerid)
 {
-    new command = Command_GetID("przedmioty");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
+	//SendClientMessageToAll(COLOR_GRAD2, "#5: PlayerChangeWeaponOnInjury");
+	//SetPlayerArmedWeapon(playerid, starabron[playerid]);
+	PokazDialogPrzedmioty(playerid);
+	return 1;
 }
-
-//-------<[ command ]>-------
-YCMD:przedmioty(playerid, params[], help)
+*/
+PrzedmiotyZmienBron(playerid, weaponid)
 {
-    if (help)
-    {
-        sendTipMessage(playerid, "Wyœwietla posiadane przedmioty premium.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_przedmioty_Impl(playerid);
+	starabron[playerid] = weaponid;
+	SetPlayerArmedWeapon(playerid, starabron[playerid]);
+	return 1;
 }
+PokazDialogBronie(playerid)
+{
+	new dialogstring[2048];
+	new weapon, ammo;
+	for (new i = 0; i <= 12; i++)
+	{
+		GetPlayerWeaponData(playerid, i, weapon, ammo);
+		if(ammo > 0)
+		{
+			if(isnull(dialogstring)) format(dialogstring, sizeof(dialogstring), "%s\n", dialogstring);
+			format(dialogstring, sizeof(dialogstring), "%s%s [%s]", dialogstring, GunNames[weapon]);
+		}
+	}
+	if(isnull(dialogstring)) return sendErrorMessage(playerid, "Nie posiadasz przy sobie ¿adnej broni.");
+	return ShowPlayerDialogEx(playerid, D_PRZEDMIOTY_BRONIE, DIALOG_STYLE_LIST, "{4876FF}Mrucznik Role Play » {FFFFFF}Wyci¹gnij broñ", dialogstring, "Wyci¹gnij", "WyjdŸ");
+}
+//------------------<[ MySQL: ]>--------------------
+//-----------------<[ Komendy: ]>-------------------
+
+//end
