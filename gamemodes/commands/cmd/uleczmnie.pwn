@@ -27,7 +27,7 @@
 /*
 	
 */
-
+/*
 YCMD:uleczmnie(playerid, params[], help)
 {
 	new string[128];

@@ -51,6 +51,10 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 			format(type, sizeof(type), (bw ? "Nieprzytomny" : "Ranny"));
 		}
 	}
+	else
+	{
+		format(type, sizeof(type), (bw ? "Nieprzytomny" : "Ranny"));
+	}
 
 	if(injury)
 	{
@@ -171,7 +175,7 @@ ZespawnujGraczaBW(playerid)
 	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
 	SetCameraBehindPlayer(playerid);
 	format(type, sizeof(type), (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny"));
-	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911), u¿yæ apteczki (/apteczka) lub poczekaæ %d sekund.\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
+	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911) lub poczekaæ %d sekund.\nGracze z apteczk¹ mog¹ udzieliæ Ci pomocy medycznej za pomoc¹ (/apteczka).\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
@@ -293,7 +297,8 @@ ZdejmijBW(playerid, drunklvl = 7000)
 	SetPVarInt(i, "bw-sync", 0);
 	ClearAnimations(i);
 	SetPlayerSpecialAction(i,SPECIAL_ACTION_NONE);
-	SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000);
+	SetPlayerChatBubble(playerid, "** Og³uszony **", COLOR_PANICRED, 70.0, (120 * 1000));
+	// SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000); - lub usuwamy napis nad g³ow¹
 	SetPlayerDrunkLevel(playerid, drunklvl);
 }
 //------------------<[ MySQL: ]>--------------------

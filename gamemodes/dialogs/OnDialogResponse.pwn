@@ -13753,7 +13753,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(id, 0x0080D0FF, string);
 				format(string, sizeof string, "Kupi³eœ apteczkê od Lekarza za %d$", (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
 				SendClientMessage(playerid, 0x00FF00FF, string);
-				format(string, sizeof string, "[ERS] Lekarz sprzeda³ apteczkê! Na konto frakcji wp³ywa %d$", HEALTH_PACK_PRICE);
+				format(string, sizeof string, "[ERS] Lekarz %s sprzeda³ apteczkê! Na konto frakcji wp³ywa %d$", PlayerName(id), HEALTH_PACK_PRICE);
         		SendFamilyMessage(4, COLOR_GREEN, string);
 				ZabierzKase(playerid, (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
 				DajKase(id, HEALTH_PACK_AMOUNTDOCTOR);

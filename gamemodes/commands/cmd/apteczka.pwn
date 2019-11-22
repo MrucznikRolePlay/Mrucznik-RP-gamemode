@@ -67,6 +67,7 @@ YCMD:apteczka(playerid, params[], help)
 		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		pobity[playa] = 0;
 		ZdejmijBW(playa);
+		SetPlayerHealth(playa, HEALTH_PACK_HP);
 	}
 	else
 	{

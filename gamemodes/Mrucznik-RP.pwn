@@ -2055,7 +2055,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 			{
 				if(PlayerInfo[playerid][pBW] > 0)
 				{
-					return NadajBW(playerid, PlayerInfo[playerid][pBW]);
+					return NadajBW(playerid, PlayerInfo[playerid][pBW], false);
 				}
 				else
 				{
@@ -2699,20 +2699,23 @@ SetPlayerSpawnWeapon(playerid)
 		PrzywrocBron(playerid);
 
     //HP:
-    if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
-    {
-        SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
-        //f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
-	       //SetPlayerArmour(playerid, 15);
-    }
-    else if(IsAPrzestepca(playerid))
+	if(PlayerInfo[playerid][pInjury] == 0 && PlayerInfo[playerid][pBW] == 0)
 	{
-	    SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
-        //SetPlayerArmour(playerid, 15);
-	}
-	else
-	{
-	    SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
+		if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
+		{
+			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
+			//f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
+			//SetPlayerArmour(playerid, 15);
+		}
+		else if(IsAPrzestepca(playerid))
+		{
+			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
+			//SetPlayerArmour(playerid, 15);
+		}
+		else
+		{
+			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
+		}
 	}
 	return 1;
 }
