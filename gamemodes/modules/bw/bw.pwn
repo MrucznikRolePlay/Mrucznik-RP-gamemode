@@ -27,9 +27,9 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock GetWeaponChangeDelay(playerid, currentWeapon, changeWeapon)
+stock GetWeaponChangeDelay(playerid, currentWeapon, changedWeapon)
 {
-	return WeaponDelay[currentWeapon] + WeaponDelay[changeWeapon]/4;
+	return WeaponDelay[currentWeapon]/4 + WeaponDelay[changeWeapon];
 }
 stock IsPlayerAimingEx(playerid)
 {
