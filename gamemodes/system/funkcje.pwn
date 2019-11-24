@@ -2807,8 +2807,10 @@ PrzywrocBron(playerid)
     if(IsPlayerConnected(playerid))
 	{
 	    ResetPlayerWeapons(playerid);
+		new startowabron = 0;
 	    if(PlayerInfo[playerid][pGun0] == 1)
 		{
+			startowabron = 1;
 		    GivePlayerWeapon(playerid, PlayerInfo[playerid][pGun0], PlayerInfo[playerid][pAmmo0]);
 		}
 		if(PlayerInfo[playerid][pGun1] >= 2)
@@ -2859,6 +2861,7 @@ PrzywrocBron(playerid)
 		{
 		    GivePlayerWeapon(playerid, PlayerInfo[playerid][pGun12], PlayerInfo[playerid][pAmmo12]);
 		}
+		PrzedmiotyZmienBron(playerid, startowabron);
 		return 1;
 	}
 	return 0;
@@ -12307,7 +12310,17 @@ ShowPersonalization(playerid, value)
 			strdel(persona_C, 0, 64); 
 			strins(persona_C, "Kary w TXD\t{FF6A6A}OFF\n", 0); 
 		}
-		format(string, sizeof(string), "%s%s%s", persona_A, persona_B, persona_C);
+		if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 0)
+		{
+			strdel(persona_D, 0, 64);
+			strins(persona_D, "Auto-GUI po zmianie broni\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 1)
+		{
+			strdel(persona_D, 0, 64); 
+			strins(persona_D, "Auto-GUI po zmianie broni\t{FF6A6A}OFF\n", 0); 
+		}
+		format(string, sizeof(string), "%s%s%s%s", persona_A, persona_B, persona_C, persona_D);
 		ShowPlayerDialogEx(playerid, D_PERS_INNE, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz"); 
 	}
 		 

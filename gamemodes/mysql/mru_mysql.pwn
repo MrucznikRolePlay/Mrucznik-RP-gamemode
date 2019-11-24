@@ -503,7 +503,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`DeathWarning` = '%d', \
 	`KaryTXD` = '%d', \
 	`NewNick` = '%d', \
-	`newbie` = '%d'	\
+	`newbie` = '%d',	\
+	`BronieScroll` = '%d'	\
 	WHERE `UID`= '%d'",
 	PlayerPersonalization[playerid][PERS_KB],
 	PlayerPersonalization[playerid][PERS_AD],
@@ -517,6 +518,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_KARYTXD],
 	PlayerPersonalization[playerid][PERS_NEWNICK],
 	PlayerPersonalization[playerid][PERS_NEWBIE],
+	PlayerPersonalization[playerid][PERS_GUNSCROLL],
 	PlayerInfo[playerid][pUID]); 
 
 	if(!mysql_query(query)) fault=false;
@@ -748,14 +750,14 @@ public MruMySQL_LoadAcocount(playerid)
 	} 
 	mysql_free_result();
 	//Wczytaj personalizacje
-	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`";
+	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`, `BronieScroll`";
 	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())
 	{
 		mysql_fetch_row_format(lStr, "|"); 
-		sscanf(lStr, "p<|>dddddddddddd", 
+		sscanf(lStr, "p<|>ddddddddddddd", 
 		PlayerPersonalization[playerid][PERS_KB],
 		PlayerPersonalization[playerid][PERS_AD],
 		PlayerPersonalization[playerid][PERS_LICZNIK],
@@ -767,7 +769,8 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerPersonalization[playerid][WARNDEATH],
 		PlayerPersonalization[playerid][PERS_KARYTXD],
 		PlayerPersonalization[playerid][PERS_NEWNICK],
-		PlayerPersonalization[playerid][PERS_NEWBIE]); 
+		PlayerPersonalization[playerid][PERS_NEWBIE],
+		PlayerPersonalization[playerid][PERS_GUNSCROLL]); 
 	}
 	mysql_free_result();
 	

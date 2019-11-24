@@ -27,10 +27,6 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-stock GetWeaponChangeDelay(playerid, currentWeapon, changedWeapon)
-{
-	return WeaponDelay[currentWeapon]/4 + WeaponDelay[changeWeapon];
-}
 stock IsPlayerAimingEx(playerid)
 {
     new anim = GetPlayerAnimationIndex(playerid);
@@ -88,13 +84,13 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	{
 		if(reason > 46 && ((reason-46) == 7 || (reason-46) == 8)) return NadajBW(playerid); //upadek lub zatoniecie
 	}
-	new faceangle;
-	GetPlayerFacingAngle(playerid, Float:faceangle);
+	new Float:faceangle;
+	GetPlayerFacingAngle(playerid, faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-	SetPVarInt(playerid, "bw-faceangle",  faceangle);
+	SetPVarFloat(playerid, "bw-faceangle", faceangle);
 	//SendClientMessageToAll(COLOR_GRAD2, "#2: NadajRanny");
 	if(!customtime) customtime = INJURY_TIME;
 	PlayerInfo[playerid][pBW] = 0;
@@ -129,13 +125,13 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 			customtime = BW_TIME_CRIMINAL;
 		}
 	}
-	new faceangle;
-	GetPlayerFacingAngle(playerid, Float:faceangle);
+	new Float:faceangle;
+	GetPlayerFacingAngle(playerid, faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
 	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-	SetPVarInt(playerid, "bw-faceangle", faceangle);
+	SetPVarFloat(playerid, "bw-faceangle", faceangle);
 	//SendClientMessageToAll(COLOR_GRAD2, "#2-2: NadajBW");
 	if(!customtime) customtime = BW_TIME;
 	PlayerInfo[playerid][pInjury] = 0;
@@ -176,7 +172,7 @@ ZespawnujGraczaBW(playerid)
 	NeedMedicTime[playerid] = 0;
 	SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
 	SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
-	SetPlayerFacingAngle(playerid, GetPVarInt(playerid, "bw-faceangle"));
+	SetPlayerFacingAngle(playerid, GetPVarFloat(playerid, "bw-faceangle"));
 	SetCameraBehindPlayer(playerid);
 	format(type, sizeof(type), (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny"));
 	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911) lub poczekaæ %d sekund.\nGracze z apteczk¹ mog¹ udzieliæ Ci pomocy medycznej za pomoc¹ (/apteczka).\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
@@ -251,7 +247,7 @@ ZespawnujGraczaSzpitalBW(playerid)
 	new randbed = random(sizeof(HospitalBeds));
 	SetPVarInt(playerid, "bw-vw", 90);
 	SetPVarInt(playerid, "bw-int", 0);
-	SetPVarInt(playerid, "bw-faceangle", HospitalBeds[randbed][3]);
+	SetPVarFloat(playerid, "bw-faceangle", HospitalBeds[randbed][3]);
 	PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 	PlayerInfo[playerid][pPos_x] = HospitalBeds[randbed][0];
 	PlayerInfo[playerid][pPos_y] = HospitalBeds[randbed][1];

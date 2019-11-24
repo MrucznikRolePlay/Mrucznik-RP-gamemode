@@ -1437,6 +1437,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SetPlayerVirtualWorld(playerid, 44);
 					SetPlayerPos(playerid, 1544.1202,-1466.9008,42.8386);
 				}
+				case 6://Dach
+				{
+					SetPlayerVirtualWorld(playerid, 0);
+					SetPlayerPos(playerid, 1542.1123,-1467.8416,63.8593);
+				}
 			}
 		}
 	}
@@ -13783,7 +13788,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof(string),"* %s wyci¹ga apteczkê, banda¿uje obra¿enia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
 			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			PlayerInfo[id][pHealthPacks]--;
-			ZdejmijBW(playerid, 2200);
+			ZdejmijBW(playerid, 4000);
 			SetPlayerHealth(playerid, HEALTH_PACK_HP);
 		}
 		else
@@ -13798,18 +13803,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			new weapons[13], ammo, weaponid;
-			for (new i = 0; i <= 12; i++)
+			GUIExit[playerid] = 0;
+			new weaponid = DynamicGui_GetDataInt(playerid, listitem);
+			new weapondata = DynamicGui_GetValue(playerid, listitem);
+			if(weaponid == starabron[playerid])
 			{
-				GetPlayerWeaponData(playerid, i, weaponid, ammo);
-				if(ammo > 0) weapons[i] = weaponid;
+				weaponid = PlayerInfo[playerid][pGun0];
 			}
-
-			return PrzedmiotyZmienBron(playerid, weapons[listitem]);
+			/*new string[144];
+			format(string, sizeof(string), "* %s wybra³ broñ w GUI (opcja %d) ID broni: %d [%s]", GetNick(playerid), listitem, weaponid, GunNames[weaponid]);
+			SendClientMessageToAll(COLOR_WHITE, string);*/
+			return PrzedmiotyZmienBron(playerid, weaponid, weapondata);
 		}
 		else
 		{
-			return SetPlayerArmedWeapon(playerid, starabron[playerid]);
+			return 1;
+			//return SetPlayerArmedWeapon(playerid, starabron[playerid]);
 		}
 		//akcje /me
 	}
@@ -16290,6 +16299,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						togADMTXD[playerid] =0; 
 						sendTipMessage(playerid, "W³¹czy³eœ textdrawy kar"); 
 						PlayerPersonalization[playerid][PERS_KARYTXD]=0;
+					}
+				}
+				case 3:
+				{
+					if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 0)
+					{
+						sendTipMessage(playerid, "W³¹czy³eœ auto-gui po zmianie broni");
+						PlayerPersonalization[playerid][PERS_GUNSCROLL] = 1;
+					}
+					else if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 1)
+					{
+						sendTipMessage(playerid, "Wy³¹czy³eœ auto-gui po zmianie broni");
+						PlayerPersonalization[playerid][PERS_GUNSCROLL] = 0;
 					}
 				}
 

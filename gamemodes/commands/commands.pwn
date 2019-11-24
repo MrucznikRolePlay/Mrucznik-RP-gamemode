@@ -357,6 +357,7 @@
 #include "cmd/przeszukaj.pwn"
 #include "cmd/przyjmij.pwn"
 #include "cmd/pwarn.pwn"
+#include "cmd/przedmioty.pwn"
 #include "cmd/qf.pwn"
 #include "cmd/quitpraca.pwn"
 #include "cmd/r.pwn"
@@ -503,6 +504,7 @@
 #include "cmd/togpodglad.pwn"
 #include "cmd/togtxda.pwn"
 #include "cmd/togwl.pwn"
+#include "cmd/togscroll.pwn"
 #include "cmd/tp.pwn"
 #include "cmd/trampolina.pwn"
 #include "cmd/trasa.pwn"
@@ -998,7 +1000,7 @@ static Aliases()
 
 	//od
 	Command_AddAltNamed("od", "podnies");
-	Command_AddAltNamed("od", "p");
+	//Command_AddAltNamed("od", "p"); //na rzecz systemu broni
 
 	//og
 	Command_AddAltNamed("og", "advertise");

@@ -524,12 +524,12 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
 	//return 0; = strza³ nie zabiera hp
-    if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
+    /*if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
     {
     	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
 		MaTazer[playerid] = 0;
         return 0;
-	}
+	}*/
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) < 11 && hittype == 1)
     {
         new giveplayer[MAX_PLAYER_NAME];
@@ -553,12 +553,12 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
         TogglePlayerControllable(hitid, 0);
         return 0;
     }
-    else if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) > 10 && hittype == 1)
+    /*else if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) > 10 && hittype == 1)
     {
         GameTextForPlayer(playerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
         MaTazer[playerid] = 0;
         return 0;
-    }
+    }*/
     return 1;
 }
 
@@ -2036,6 +2036,166 @@ public OnPlayerDeath(playerid, killerid, reason)
 							NadajWLBW(killerid, playerid, true);
 						}
 					}
+					if(PoziomPoszukiwania[playerid] >= 1)
+					{
+						//new price = PoziomPoszukiwania[playerid] * 500;
+						new price2 = PoziomPoszukiwania[playerid] * 1000;
+						new count, i = killerid;
+						if(IsACop(playerid) && OnDuty[playerid] == 1)
+						{
+							PoziomPoszukiwania[playerid] = 0;
+						}
+						else if(PlayerInfo[killerid][pJob] == 1)
+						{
+							if(PlayerInfo[i][pDetSkill] <= 50)
+							{
+								if(PoziomPoszukiwania[playerid] == 2 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 11;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+							else if(PlayerInfo[i][pDetSkill] >= 51 && PlayerInfo[i][pDetSkill] < 100)
+							{
+								if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 3 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 22;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+							else if(PlayerInfo[i][pDetSkill] >= 101 && PlayerInfo[i][pDetSkill] < 200)
+							{
+								if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 4 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 33;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+							else if(PlayerInfo[i][pDetSkill] >= 201 && PlayerInfo[i][pDetSkill] < 400)
+							{
+								if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 5 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 44;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+							else if(PlayerInfo[i][pDetSkill] >= 400)
+							{
+								if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 7 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 55;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+						}
+						if(poscig[playerid] == 1)
+						{
+							if(PoziomPoszukiwania[playerid] >= 6)
+							{
+								count = 2;
+							}
+							else
+							{
+								count = 1;
+							}
+						}
+						if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55)
+						{
+							if(!(IsACop(playerid) && OnDuty[playerid] == 1))
+							{
+								new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
+								ZabierzKase(playerid, CenaZabicia);//moneycheat
+								PlayerInfo[playerid][pWantedDeaths] += 1;
+								PlayerInfo[playerid][pJailed] = 1;
+								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
+								format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
+								SendClientMessage(playerid, COLOR_LIGHTRED, string);
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
+								PoziomPoszukiwania[playerid] = 0;
+								poscig[playerid] = 0;
+								WantLawyer[playerid] = 1;
+								UsunBron(playerid);
+							}
+						}
+						else if(count == 2)
+						{
+							if(!(IsACop(playerid) && OnDuty[playerid] == 1))
+							{
+								new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
+								ZabierzKase(playerid, CenaZabicia);//moneycheat
+								PlayerInfo[playerid][pWantedDeaths] += 1;
+								PlayerInfo[playerid][pJailed] = 2;
+								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
+								format(string, sizeof(string), "* Jesteœ w DeMorgan na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
+								SendClientMessage(playerid, COLOR_LIGHTRED, string);
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
+								PoziomPoszukiwania[playerid] = 0;
+								poscig[playerid] = 0;
+								UsunBron(playerid);
+							}
+						}
+						return 1;
+					}
 					if(PlayerInfo[playerid][pHeadValue] > 0)
 					{
 						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
@@ -2309,6 +2469,7 @@ SetPlayerSpawnPos(playerid)
     //Wiêzienie:
 	else if(PlayerInfo[playerid][pJailed] == 1)
 	{
+		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
 		SetPlayerInterior(playerid, 0);
 	    SetPlayerVirtualWorld(playerid, 1);
 	    new losuj= random(sizeof(Cela));
@@ -2319,6 +2480,7 @@ SetPlayerSpawnPos(playerid)
 	}
 	else if(PlayerInfo[playerid][pJailed] == 2)//Stanowe
 	{
+		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Twój wyrok nie dobieg³ koñca, wracasz do wiêzienia stanowego");
 		JailDeMorgan(playerid);
 		return 1;
@@ -5156,197 +5318,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_WASTED)
 	{
-		if(PoziomPoszukiwania[playerid] >= 1)
-		{
-		    new price = PoziomPoszukiwania[playerid] * 500;
-		    new price2 = PoziomPoszukiwania[playerid] * 1000;
-			new count;
-			foreach(new i : Player)
-			{
-				if(IsPlayerConnected(i))
-				{
-				    if(IsACop(playerid) && OnDuty[playerid] == 1)
-				    {
-				        PoziomPoszukiwania[playerid] = 0;
-				        return 1;
-				    }
-				    if(IsACop(i) && OnDuty[i] == 1 && CrimInRange(15.0, playerid,i))
-				    {
-				        if(PoziomPoszukiwania[playerid] >= 6)
-				        {
-                            if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
-                            {
-                                count = 2;
-                            }
-						}
-						else if(PoziomPoszukiwania[playerid] >= 2)
-						{
-							if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
-                            {
-                                count = 1;
-                            }
-						}
-						if(PoziomPoszukiwania[playerid] >= 2)
-						{
-							format(string, sizeof(string), "~w~Niebezpieczny przestepca~r~Zabity~n~Nagroda~g~$%d", price);
-							SendClientMessage(i, COLOR_LIGHTBLUE, "Jeœli chcesz wiêcej zarobiæ za z³apanego bandziora musisz go doprowadziæ ¿ywego do celi.");
-							GameTextForPlayer(i, string, 5000, 1);
-							DajKase(i, price);//moneycheat
-							PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-						}
-					}
-					else if(PlayerInfo[i][pJob] == 1 && CrimInRange(10.0, playerid,i))
-					{
-					    if(PlayerInfo[i][pDetSkill] <= 50)
-					    {
-					        if(PoziomPoszukiwania[playerid] == 2 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 11;
-						        	lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-			 				    }
-					        }
-					    }
-					    else if(PlayerInfo[i][pDetSkill] >= 51 && PlayerInfo[i][pDetSkill] < 100)
-					    {
-					        if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 3 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 22;
-                                    lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-			 				    }
-					        }
-					    }
-					    else if(PlayerInfo[i][pDetSkill] >= 101 && PlayerInfo[i][pDetSkill] < 200)
-					    {
-					        if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 4 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 33;
-                                    lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-			 				    }
-					        }
-					    }
-					    else if(PlayerInfo[i][pDetSkill] >= 201 && PlayerInfo[i][pDetSkill] < 400)
-					    {
-					        if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 5 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 44;
-                                    lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-				 				}
-					        }
-					    }
-					    else if(PlayerInfo[i][pDetSkill] >= 400)
-					    {
-					        if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 7 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 55;
-                                    lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-			 				    }
-					        }
-					    }
-					}
-				}
-			}
-			if(poscig[playerid] == 1)
-			{
-			    if(PoziomPoszukiwania[playerid] >= 6)
-			    {
-			        count = 2;
-			    }
-			    else
-			    {
-			        count = 1;
-			    }
-			}
-			if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55)
-			{
-			    if(!(IsACop(playerid) && OnDuty[playerid] == 1))
-			    {
-			        new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
-					ZabierzKase(playerid, CenaZabicia);//moneycheat
-					PlayerInfo[playerid][pWantedDeaths] += 1;
-					PlayerInfo[playerid][pJailed] = 1;
-				    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-				    format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
-				    SendClientMessage(playerid, COLOR_LIGHTRED, string);
-				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
-					PoziomPoszukiwania[playerid] = 0;
-                    poscig[playerid] = 0;
-					WantLawyer[playerid] = 1;
-					UsunBron(playerid);
-				}
-			}
-			else if(count == 2)
-			{
-			    if(!(IsACop(playerid) && OnDuty[playerid] == 1))
-			    {
-     				new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
-					ZabierzKase(playerid, CenaZabicia);//moneycheat
-					PlayerInfo[playerid][pWantedDeaths] += 1;
-					PlayerInfo[playerid][pJailed] = 2;
-				    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-				    format(string, sizeof(string), "* Jesteœ w DeMorgan na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
-					SendClientMessage(playerid, COLOR_LIGHTRED, string);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
-					PoziomPoszukiwania[playerid] = 0;
-                    poscig[playerid] = 0;
-					UsunBron(playerid);
-				}
-			}
-		}
+		//przeniesiono do onplayerdeath
 	}
 	if(newstate == PLAYER_STATE_DRIVER) //buggy dont finnish
 	{// 38 / 49 / 56 = SS
@@ -5766,6 +5738,50 @@ public OnPlayerUpdate(playerid)
 	if((PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) && IsPlayerAimingEx(playerid))
 	{
 		return FreezePlayerOnInjury(playerid);
+	}
+
+	//---------------------------[/me wyci¹ga broñ ...]---------------------------
+	new i = playerid;
+	new weaponID = GetPlayerWeapon(i);
+    new playerState = GetPlayerState(i);
+	if(starabron[i]!=weaponID)
+	{
+		if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
+		{
+			if(playerState == 1) //|| playerState == 2 || playerState == 3)
+			{
+				if(GetPVarInt(i, "dutyadmin") == 0)
+				{
+					if(PlayerInfo[i][pInjury] > 0 || PlayerInfo[i][pBW] > 0)
+					{
+						return PlayerChangeWeaponOnInjury(i);
+					}
+					else
+					{
+						if(PlayerPersonalization[i][PERS_GUNSCROLL] == 0) return SetPlayerArmedWeapon(i, starabron[i]);
+						return PokazDialogBronie(i);
+
+						//freeze scroll i gui
+					}
+					/*
+					if(weaponID >= 22 && weaponID <= 38)
+					{
+						if(GetPVarInt(i, "tazer") == 1)
+						{
+							format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", specNAME);
+							ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							RemovePlayerAttachedObject(i, 9);
+							SetPVarInt(i, "tazer", 0);
+						}
+					}
+					starabron[i]=weaponID;*/
+				}
+			}
+		}
+		else
+		{
+			ResetPlayerWeapons(i);
+		}
 	}
 
     systempozarow_OnPlayerUpdate(playerid);//System Po¿arów v0.1

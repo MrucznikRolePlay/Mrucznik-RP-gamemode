@@ -1474,7 +1474,8 @@ enum pPInfo
 	WARNDEATH,//Warningi o œmierciach
 	PERS_KARYTXD,//Wyœwietlanie kar w TXD
 	PERS_NEWNICK,//Nowe nicki w 3dtextach
-	PERS_NEWBIE//Wyœwietlanie chatu newbie
+	PERS_NEWBIE,//Wyœwietlanie chatu newbie
+	PERS_GUNSCROLL//Wyœwietlanie GUI z broñ
 };
 new PlayerPersonalization[MAX_PLAYERS][pPInfo];
 enum pHaul
