@@ -97,9 +97,11 @@ YCMD:wiadomosc(playerid, params[], help)
         {
             format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
             SendClientMessage(playerid, COLOR_YELLOW, string);
+            SavePlayerSentMessage(playerid, string);
             
             format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid), playerid, text);
             SendClientMessage(giveplayerid, COLOR_NEWS, string);
+            SavePlayerSentMessage(giveplayerid, string);
             if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
             {
                 iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
@@ -107,11 +109,6 @@ YCMD:wiadomosc(playerid, params[], help)
             if(GetPlayerAdminDutyStatus(playerid) == 1)
             {
                 iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
-            }
-            if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1) //podgl¹d admina
-            {
-                format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
-                ABroadCast2(COLOR_LIGHTGREEN,string,1);
             }
         }
         else 
@@ -125,15 +122,19 @@ YCMD:wiadomosc(playerid, params[], help)
 
                 format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
                 SendClientMessage(playerid, COLOR_YELLOW, string);
+                SavePlayerSentMessage(playerid, string);
             
                 format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(playerid, COLOR_YELLOW, string);           
+                SendClientMessage(playerid, COLOR_YELLOW, string); 
+                SavePlayerSentMessage(playerid, string);          
                 
                 format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid), playerid, text);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
+                SavePlayerSentMessage(giveplayerid, string);
                 
                 format(string, sizeof(string), "[.] %s", text2);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
+                SavePlayerSentMessage(giveplayerid, string);
                 if(GetPlayerAdminDutyStatus(playerid) == 1)
                 {
                     iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
@@ -141,14 +142,6 @@ YCMD:wiadomosc(playerid, params[], help)
                 if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
                 {
                     iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
-                }		
-
-                if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1) //podgl¹d admina
-                {
-                    format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
-                    ABroadCast2(COLOR_LIGHTGREEN,string,1);
-                    format(string, sizeof(string), "[.] %s", text2);
-                    ABroadCast2(COLOR_LIGHTGREEN,string,1);
                 }
             }
         }

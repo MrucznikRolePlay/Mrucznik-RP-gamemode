@@ -1,6 +1,9 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
 
+new SentMessagesIndex = 0;
+new SentMessages[MAX_PLAYERS][MAX_SENT_MESSAGES][144];
+
 new ServerSecret[MAX_SERVER_SECRET_LENGTH];
 
 new prawoJazdyLosowanie[9];
@@ -1292,7 +1295,6 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pPiwo] = 0;
 	PlayerInfo[playerid][pCygaro] = 0;
 	PlayerInfo[playerid][pSprunk] = 0;
-	PlayerInfo[playerid][pPodPW] = 0;
 	PlayerInfo[playerid][pStylWalki] = 0;
 	PlayerInfo[playerid][pNewAP] = 0;
 	PlayerInfo[playerid][pZG] = 0;

@@ -1402,7 +1402,6 @@ enum pInfo
  	pPiwo,
  	pCygaro,
  	pSprunk,
- 	pPodPW,
  	pStylWalki,
  	pNewAP,
  	pZG,

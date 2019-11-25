@@ -12410,6 +12410,32 @@ stock GetDistanceToCar(playerid, carid)
 	return floatround(Dis);
 }
 
+SavePlayerSentMessage(playerid, message[])
+{
+	format(SentMessages[playerid][SentMessagesIndex], 144, "%s", message);
+	SentMessagesIndex = (SentMessagesIndex+1) % MAX_SENT_MESSAGES;
+}
+
+ShowPlayerSentMessages(playerid, forplayerid)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(forplayerid)));
+	new index = SentMessagesIndex;
+	if(index != 0) {
+		for(new i = index-1; i >= 0; i--) {
+			if(strlen(SentMessages[playerid][i])) {
+				SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
+			}
+		}
+	}
+
+	for(new i= MAX_SENT_MESSAGES-1; i >= index; i--) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
+		}
+	}
+}
+
+
 //--------------------------------------------------
 
 public AddsOn()
