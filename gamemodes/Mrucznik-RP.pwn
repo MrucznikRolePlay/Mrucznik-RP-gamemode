@@ -6827,7 +6827,7 @@ public OnPlayerText(playerid, text[])
 			sendTipMessage(playerid, "Nieprawid³owa d³ugoœæ znaków animacji"); 
 			return 0;
 		}
-        new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, text);
+        new lVal = MRP_DoAnimation(playerid, text);
         if(lVal != 1)
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono (/anim)acji.");
