@@ -29,14 +29,14 @@
 MRP_ShowAnim(playerid)
 {
 	new var0[2048];
-	format(var0, sizeof(var0), "{53a142}@bar[1-4]\n{53a142}@caluj\n[1-8]\n{53a142}@car\n[1-11]\n{53a142}@colt[1-7]\n{53a142}@crack[1-5]\n{53a142}@dance[1-4]\n");
-	format(var0, sizeof(var0), "%s{53a142}@diler[1-4]\n{53a142}@idz[1-5]\n{53a142}@klepnij[1-3]\n{53a142}@krzeslo[1-3]", var0);
-	format(var0, sizeof(var0), "%s{53a142}@lez[1-3]\n{53a142}@lokiec[1-2]\n{53a142}@lowrider[1-5]\n{53a142}@nies[1-7]\n{53a142}@papieros[1-2]\n", var0);
-	format(var0, sizeof(var0), "%s{53a142}@placz[1-3]\n{53a142}@ranny[1-3]\n{53a142}@rap\n[1-4]\n{53a142}@rozmowa[1-6]\n{53a142}@sex[1-12]\n{53a142}@sklep[1-8]\n", var0);
-	format(var0, sizeof(var0), "%s{53a142}@smierc[1-2]\n{53a142}@spij[1-4]\n{53a142}@spray[1-2]\n{53a142}@stack[1-11]\n", var0);
-	format(var0, sizeof(var0), "%s{53a142}@strip[1-7]\n{53a142}@wygralem[1-2]\n{53a142}@yo[1-7]\n", var0);
-	format(var0, sizeof(var0), "%s{ebc034}@bomba\n{ebc034}@box\n{ebc034}@celuj\n{ebc034}@celujkarabin\n{ebc034}@crack\n{ebc034}@czas\n{ebc034}@dodge\n{ebc034}@doping\n{ebc034}@drap\n{ebc034}@dzieki", var0);
-	format(var0, sizeof(var0), "%s{ebc034}@fuck\n{ebc034}@greet\n{ebc034}@hitch\n{ebc034}@joint\n{ebc034}@karta\n{ebc034}@komputer\n{ebc034}@kozak\n{ebc034}@kungfu\n{ebc034}@machaj\n{ebc034}@maska", var0);
+	format(var0, sizeof(var0), "{53a142}@bar [1-4]\n{53a142}@caluj [1-8]\n{53a142}@car [1-11]\n{53a142}@colt [1-7]\n{53a142}@crack [1-5]\n{53a142}@dance [1-4]\n");
+	format(var0, sizeof(var0), "%s{53a142}@diler [1-4]\n{53a142}@idz [1-5]\n{53a142}@klepnij [1-3]\n{53a142}@krzeslo [1-3]\n", var0);
+	format(var0, sizeof(var0), "%s{53a142}@lez [1-3]\n{53a142}@lokiec [1-2]\n{53a142}@lowrider [1-5]\n{53a142}@nies [1-7]\n{53a142}@papieros [1-2]\n", var0);
+	format(var0, sizeof(var0), "%s{53a142}@placz [1-3]\n{53a142}@ranny [1-3]\n{53a142}@rap [1-4]\n{53a142}@rozmowa [1-6]\n{53a142}@sex [1-12]\n{53a142}@sklep [1-8]\n", var0);
+	format(var0, sizeof(var0), "%s{53a142}@smierc [1-2]\n{53a142}@spij [1-4]\n{53a142}@spray [1-2]\n{53a142}@stack [1-11]\n", var0);
+	format(var0, sizeof(var0), "%s{53a142}@strip [1-7]\n{53a142}@wygralem [1-2]\n{53a142}@yo [1-7]\n", var0);
+	format(var0, sizeof(var0), "%s{ebc034}@bomba\n{ebc034}@box\n{ebc034}@celuj\n{ebc034}@celujkarabin\n{ebc034}@crack\n{ebc034}@czas\n{ebc034}@dodge\n{ebc034}@doping\n{ebc034}@drap\n{ebc034}@dzieki\n", var0);
+	format(var0, sizeof(var0), "%s{ebc034}@fuck\n{ebc034}@greet\n{ebc034}@hitch\n{ebc034}@joint\n{ebc034}@karta\n{ebc034}@komputer\n{ebc034}@kozak\n{ebc034}@kungfu\n{ebc034}@machaj\n{ebc034}@maska\n", var0);
 	format(var0, sizeof(var0), "%s{ebc034}@medyk\n{ebc034}@napad\n{ebc034}@nie\n{ebc034}@odbierz\n{ebc034}@odloz\n{ebc034}@oh\n{ebc034}@opieraj\n{ebc034}@pa\n{ebc034}@pij\n{ebc034}@placz\n", var0);
 	format(var0, sizeof(var0), "%s{ebc034}@przeladuj\n{ebc034}@ramiona\n{ebc034}@rozciagaj\n{ebc034}@rozlacz\n{ebc034}@siad\n{ebc034}@sikaj\n{ebc034}@smiech\n{ebc034}@stoj\n{ebc034}@tak\n{ebc034}@waledochodze\n", var0);
 	format(var0, sizeof(var0), "%s{ebc034}@walekonia\n{ebc034}@wolaj\n{ebc034}@wozszlug\n{ebc034}@wstan\n{ebc034}@wtf\n{ebc034}@wymiotuj\n{ebc034}@zarcie\n{ebc034}@zmeczony", var0);
