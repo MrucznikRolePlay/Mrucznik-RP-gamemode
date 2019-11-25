@@ -3,7 +3,7 @@
 git checkout master
 git pull
 
-for branch_name in development creative hotfixy simeone 2.6.2 mrucznik
+for branch_name in development creative hotfixy mrucznik
 do
     git checkout $branch_name
     if ! git merge master
