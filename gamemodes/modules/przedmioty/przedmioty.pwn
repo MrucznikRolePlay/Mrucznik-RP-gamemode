@@ -69,7 +69,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 		{
 			format(gname, sizeof(gname), "%s", GunNames[starabron[playerid]]);
 		}
-		format(specNAME, sizeof(specNAME), "%s chowa %s i", specNAME, gname);
+		if(starabron[playerid] > 1) format(specNAME, sizeof(specNAME), "%s chowa %s i", specNAME, gname);
 	}
 
 	switch(weaponid)

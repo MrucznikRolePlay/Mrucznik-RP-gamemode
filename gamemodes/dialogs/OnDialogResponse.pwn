@@ -492,7 +492,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
-				PlayAudioStreamForPlayer(playerid, "http://radyjko.tk/stacja.pls?id=32 ");
+				PlayAudioStreamForPlayer(playerid, "https://waw01-03.ic.smcdn.pl/t092-1.mp3");
 				return 1;
 			}
 			case 7:
@@ -1415,7 +1415,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 1://Recepcja
 				{
 					SetPlayerVirtualWorld(playerid, 41);
-					SetPlayerPos(playerid, 1526.7426,-1469.4413,23.0778);
+					SetPlayerPos(playerid, 1529.8018,-1489.0046,16.5134);
 				}
 				case 2://Sala treningowa
 				{

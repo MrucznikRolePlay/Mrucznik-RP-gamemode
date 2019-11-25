@@ -410,7 +410,7 @@ public OnGameModeInit()
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
-	SetTimer("CheckChangeWeapon", 500, true);
+	SetTimer("CheckChangeWeapon", 250, true);
     SetTimer("RPGTimer", 100, true);
 	//Ustalanie wartoœci wind
 	levelLock[FRAC_SN][5]=1;//Zamkniête

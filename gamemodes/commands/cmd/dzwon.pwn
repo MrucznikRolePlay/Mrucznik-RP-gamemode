@@ -53,7 +53,6 @@ YCMD:dzwon(playerid, params[], help)
 		return 1;
 	}
 	new numerTelefonuOdbiorcy;
-	new reciverid;
 	if( sscanf(params, "d", numerTelefonuOdbiorcy))
 	{
 		sendTipMessage(playerid, "U¿yj /dzwon [numer telefonu]");
@@ -77,11 +76,7 @@ YCMD:dzwon(playerid, params[], help)
 		sendErrorMessage(playerid, "Dzwonisz ju¿ do kogoœ.");
 		return 1;
 	}
-	if(GetPlayerAdminDutyStatus(reciverid) == 1)
-	{
-		sendErrorMessage(playerid, "Osoba do której próbujesz zadzwoniæ jest nieosi¹galna!"); 
-		return 1;
-	}
+
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas s³u¿by administratora!"); 
@@ -90,10 +85,17 @@ YCMD:dzwon(playerid, params[], help)
 	
 	if(numerTelefonuOdbiorcy != 911)
 	{
+		new reciverid;
 		reciverid = FindPlayerByNumber(numerTelefonuOdbiorcy);
 		if(reciverid == INVALID_PLAYER_ID)
 		{
 			sendErrorMessage(playerid, "Gracz o takim numerze jest offline.");
+			return 1;
+		}
+
+		if(GetPlayerAdminDutyStatus(reciverid) == 1)
+		{
+			sendErrorMessage(playerid, "Osoba do której próbujesz zadzwoniæ jest nieosi¹galna!"); 
 			return 1;
 		}
 		

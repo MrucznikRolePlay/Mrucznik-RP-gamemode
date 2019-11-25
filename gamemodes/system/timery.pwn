@@ -883,8 +883,11 @@ public PlayerAFK(playerid, afktime, breaktime)
 		}
 		else if(afktime > 600)
 		{
-			SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (10 minut).");
-			SetTimerEx("KickEx", 500, false, "i", playerid);
+			if(GetPlayerAdminDutyStatus(playerid) == 0)
+			{
+				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (10 minut).");
+				SetTimerEx("KickEx", 500, false, "i", playerid);
+			}
 		}
 		else
 		{
