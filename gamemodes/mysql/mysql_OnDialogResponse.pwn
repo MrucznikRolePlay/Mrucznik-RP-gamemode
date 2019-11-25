@@ -11,19 +11,19 @@ MruMySQL_ZapiszUprawnienia(playerid)
     mysql_query(str);
 }
 
-MruMySQL_PobierzStatystyki(playerid, nick[])
+MruMySQL_PobierzStatystyki(playerid, nickoruid[])
 {
     new lStr[256];
     new nick_escaped[MAX_PLAYER_NAME];
-    mysql_real_escape_string(nick, nick_escaped);
-    format(lStr, sizeof(lStr), "SELECT `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s'", nick_escaped);
+    mysql_real_escape_string(nickoruid, nick_escaped);
+    format(lStr, sizeof(lStr), "SELECT `Nick, `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s' OR `UID`='%d'", nick_escaped, nick_escaped);
     mysql_query(lStr);
     mysql_store_result();
     if(mysql_num_rows())
     {
         mysql_fetch_row_format(lStr, "|");
-        new plvl, padmin, pzg, ppadmin, ppremium, pmoney, pbank, pnr, pjob, pbp, pmember, porg, pdom, pblock, pzn, pwarn, puid;
-        sscanf(lStr, "p<|>ddddddddddddddddd", plvl, padmin, pzg, ppadmin, ppremium, pmoney, pbank, pnr, pjob, pbp, pmember, porg, pdom, pblock, pzn, pwarn, puid);
+        new nick[MAX_PLAYER_NAME], plvl, padmin, pzg, ppadmin, ppremium, pmoney, pbank, pnr, pjob, pbp, pmember, porg, pdom, pblock, pzn, pwarn, puid;
+        sscanf(lStr, "p<|>s[24]ddddddddddddddddd", nick, plvl, padmin, pzg, ppadmin, ppremium, pmoney, pbank, pnr, pjob, pbp, pmember, porg, pdom, pblock, pzn, pwarn, puid);
         format(lStr, sizeof(lStr), "> %s {FFFFFF}(UID: %d)", nick, puid);
         SendClientMessage(playerid, COLOR_RED, lStr);
         format(lStr, sizeof(lStr), "Level: %d ¦ Kasa: %d ¦ Bank: %d ¦ Numer tel.: %d ¦ ZN: %d ¦ Dom: %d", plvl, pmoney, pbank, pnr, pzn, pdom);

@@ -1114,7 +1114,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(strlen(inputtext) < 1 || strlen(inputtext) > MAX_PLAYER_NAME)
         {
             SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc!");
-            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ª Sprawdzanie statystyk gracza", "Wprowadü nick gracza:                    ", "Sprawdü", "Wyjdü");
+            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ª Sprawdzanie statystyk gracza", "Wprowadü nick gracza lub UID:                    ", "Sprawdü", "Wyjdü");
             return 0;
         }
 		MruMySQL_PobierzStatystyki(playerid, inputtext);
