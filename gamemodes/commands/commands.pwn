@@ -675,6 +675,12 @@ static Aliases()
 {
 	//autorzy
 	Command_AddAltNamed("autorzy", "tworcy"); 
+	//animacje
+	Command_AddAltNamed("anim", "anims"); 
+	Command_AddAltNamed("anim", "animacje"); 
+	Command_AddAltNamed("anim", "animhelp"); 
+	Command_AddAltNamed("anim", "animshelp"); 
+	
 	//tognewbie
 	Command_AddAltNamed("tognewbie", "togn"); 
 	//setserverpass

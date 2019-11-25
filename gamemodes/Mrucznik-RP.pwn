@@ -6819,7 +6819,7 @@ public OnPlayerText(playerid, text[])
         new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, text);
         if(lVal != 1)
 		{
-			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
+			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono (/anim)acji.");
 		} 
 		return 0;
 	}
