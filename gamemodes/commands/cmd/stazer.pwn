@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:stazer(playerid, params[], help)
+/*YCMD:stazer(playerid, params[], help)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
@@ -54,3 +54,4 @@ YCMD:stazer(playerid, params[], help)
 	}
 	return 1;
 }
+*/

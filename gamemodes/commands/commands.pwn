@@ -300,7 +300,7 @@
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
 #include "cmd/o.pwn"
-#include "cmd/obezwladnij.pwn"
+//#include "cmd/obezwladnij.pwn" // tazer
 #include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
@@ -323,7 +323,7 @@
 #include "cmd/paliwo.pwn"
 #include "cmd/panel.pwn"
 #include "cmd/panelbasenu.pwn"
-#include "cmd/paralizuj.pwn"
+//#include "cmd/paralizuj.pwn" //tazer
 #include "cmd/patrol.pwn"
 #include "cmd/pban.pwn"
 #include "cmd/pblok.pwn"
@@ -462,7 +462,7 @@
 #include "cmd/startlotto.pwn"
 #include "cmd/startujlekcje.pwn"
 #include "cmd/staty.pwn"
-#include "cmd/stazer.pwn"
+//#include "cmd/stazer.pwn"
 #include "cmd/stopanim.pwn"
 #include "cmd/stopbieg.pwn"
 #include "cmd/streamer.pwn"
@@ -482,7 +482,7 @@
 #include "cmd/tankujauta.pwn"
 #include "cmd/tankveh.pwn"
 #include "cmd/taryfikator.pwn"
-#include "cmd/tazer.pwn"
+//#include "cmd/tazer.pwn"
 #include "cmd/teczka.pwn"
 #include "cmd/telefonpomoc.pwn"
 #include "cmd/teleturniej.pwn"
@@ -561,7 +561,7 @@
 #include "cmd/wobiekt.pwn"
 #include "cmd/wplac.pwn"
 #include "cmd/wrzuc.pwn"
-#include "cmd/wtazer.pwn"
+//#include "cmd/wtazer.pwn"
 #include "cmd/wybieralka.pwn"
 #include "cmd/wyczysc.pwn"
 #include "cmd/wyjdz.pwn"
@@ -992,7 +992,7 @@ static Aliases()
 	Command_AddAltNamed("o", "ooc");
 
 	//obezwladnij
-	Command_AddAltNamed("obezwladnij", "ob");
+	//Command_AddAltNamed("obezwladnij", "ob");
 
 	//ochrona
 	Command_AddAltNamed("ochrona", "guard");
@@ -1021,7 +1021,7 @@ static Aliases()
 	Command_AddAltNamed("paliwo", "licznikpaliwa");
 
 	//paralizuj
-	Command_AddAltNamed("paralizuj", "paraliz");
+	//Command_AddAltNamed("paralizuj", "paraliz");
 	//personalizuj
 	Command_AddAltNamed("personalizuj", "personalizacja");
 	Command_AddAltNamed("personalizuj", "personalize");
