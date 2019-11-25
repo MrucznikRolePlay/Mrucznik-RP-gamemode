@@ -35,7 +35,7 @@ YCMD:podglad(playerid, params[], help)
 		new giveplayerid, reason[64];
 		if( sscanf(params, "k<fix>s[64]", giveplayerid, reason))
 		{
-			sendTipMessage(playerid, "U¿yj /podglad [playerid/CzêœæNicku]");
+			sendTipMessage(playerid, "U¿yj /podglad [playerid/CzêœæNicku] [powód]");
 			return 1;
 		}
 
@@ -43,7 +43,7 @@ YCMD:podglad(playerid, params[], help)
 		{
 		    if(IsPlayerConnected(giveplayerid))
 		    {
-				SendClientMessage(giveplayerid, COLOR_PANICRED, sprintf("Administrator %s podejrza³ Twoje prywatne wiadmomoœci, powód: %s", reason));
+				SendClientMessage(giveplayerid, COLOR_PANICRED, sprintf("Administrator %s podejrza³ Twoje prywatne wiadmomoœci, powód: %s", GetNick(playerid), reason));
 				ShowPlayerSentMessages(playerid, giveplayerid);
 				Log(adminLog, INFO, "Admin %s podejrza³ wiadomoœci gracza %s, powód: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), reason);
 			}
