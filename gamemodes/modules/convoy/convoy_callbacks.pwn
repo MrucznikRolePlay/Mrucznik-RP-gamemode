@@ -47,7 +47,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	}
 	else if(PRESSED(KEY_SECONDARY_ATTACK))
 	{
-		if(IsPlayerCarryingBox(playerid))
+		if(IsPlayerCarryingBox(playerid) && !IsPlayerInAnyVehicle(playerid))
 		{
 			DropBox(playerid);
    			ApplyAnimation(playerid,"CARRY","putdwn", 4.0, 0, 0, 0, 0, 0); 
