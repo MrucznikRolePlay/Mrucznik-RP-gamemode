@@ -63,6 +63,7 @@ YCMD:kurs(playerid, params[], help)
                 }
                 else if(GetVehicleModel(vehicleid) == 431 || GetVehicleModel(vehicleid) == 437)
                 {
+					return sendTipMessageEx(playerid,COLOR_GREY,"W tym pojeŸdzie nie mo¿esz wejœæ na s³u¿bê !"); // na proœbê lidera blokada busów
                     if(moneys < 25 || moneys > 2500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena biletu od $25 do $2500 !"); return 1; }
 					BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 					GetPlayerName(playerid,sendername,sizeof(sendername));
@@ -85,6 +86,7 @@ YCMD:kurs(playerid, params[], help)
                 }
                 else
                 {
+					if(GetVehicleModel(vehicleid) == 418 || GetVehicleModel(vehicleid) == 525 || GetVehicleModel(vehicleid) == 409 || GetVehicleModel(vehicleid) == 402 || GetVehicleModel(vehicleid) == 541) return sendTipMessageEx(playerid,COLOR_GREY,"W tym pojeŸdzie nie mo¿esz wejœæ na s³u¿bê !");
     				if(moneys < 150 || moneys > 2000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $150 do $2000 !"); return 1; }
     				TaxiDrivers += 1; TransportDuty[playerid] = 1; TransportValue[playerid] = moneys;
     				GetPlayerName(playerid,sendername,sizeof(sendername));

@@ -919,6 +919,57 @@ public syncanim(playerid)
    	return 1;
 }
 
+forward CheckChangeWeapon();
+public CheckChangeWeapon()
+{
+	foreach (new i : Player)
+	{
+		new weaponID = GetPlayerWeapon(i);
+		new playerState = GetPlayerState(i);
+		if(starabron[i]!=weaponID)
+		{
+			if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
+			{
+				if(playerState == 1) //|| playerState == 2 || playerState == 3)
+				{
+					if(GetPVarInt(i, "dutyadmin") == 0)
+					{
+						if(PlayerInfo[i][pInjury] > 0 || PlayerInfo[i][pBW] > 0)
+						{
+							return PlayerChangeWeaponOnInjury(i);
+						}
+						else
+						{
+							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, starabron[i]);
+							return PokazDialogBronie(i);
+
+							//freeze scroll i gui
+						}
+						/*
+						if(weaponID >= 22 && weaponID <= 38)
+						{
+							if(GetPVarInt(i, "tazer") == 1)
+							{
+								format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", specNAME);
+								ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								RemovePlayerAttachedObject(i, 9);
+								SetPVarInt(i, "tazer", 0);
+							}
+						}
+						starabron[i]=weaponID;*/
+					}
+				}
+			}
+			else
+			{
+				ResetPlayerWeapons(i);
+			}
+		}
+	}
+	return 1;
+}
+
+
 forward MainTimer();
 public MainTimer()
 {

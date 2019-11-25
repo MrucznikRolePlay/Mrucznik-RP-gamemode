@@ -16,7 +16,7 @@ MruMySQL_PobierzStatystyki(playerid, nickoruid[])
     new lStr[256];
     new nick_escaped[MAX_PLAYER_NAME];
     mysql_real_escape_string(nickoruid, nick_escaped);
-    format(lStr, sizeof(lStr), "SELECT `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s' OR `UID`='%s'", nick_escaped, nick_escaped);
+    format(lStr, sizeof(lStr), "SELECT `Nick`, `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%s' OR `UID`='%s'", nick_escaped, nick_escaped);
     mysql_query(lStr);
     mysql_store_result();
     if(mysql_num_rows())
