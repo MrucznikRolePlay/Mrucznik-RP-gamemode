@@ -13788,7 +13788,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof(string),"* %s wyci¹ga apteczkê, banda¿uje obra¿enia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
 			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			PlayerInfo[id][pHealthPacks]--;
-			ZdejmijBW(playerid, 4000);
+			ZdejmijBW(playerid, 5000);
 			SetPlayerHealth(playerid, HEALTH_PACK_HP);
 		}
 		else
@@ -13817,10 +13817,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
+			GUIExit[playerid] = 0;
 			return 1;
-			//return SetPlayerArmedWeapon(playerid, starabron[playerid]);
 		}
-		//akcje /me
 	}
     if(dialogid == DIALOG_ELEVATOR_SAD)
     {
@@ -16305,12 +16304,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 0)
 					{
-						sendTipMessage(playerid, "W³¹czy³eœ auto-gui po zmianie broni");
+						sendTipMessage(playerid, "Wy³¹czy³eœ auto-gui po zmianie broni");
 						PlayerPersonalization[playerid][PERS_GUNSCROLL] = 1;
 					}
 					else if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 1)
 					{
-						sendTipMessage(playerid, "Wy³¹czy³eœ auto-gui po zmianie broni");
+						sendTipMessage(playerid, "W³¹czy³eœ auto-gui po zmianie broni");
 						PlayerPersonalization[playerid][PERS_GUNSCROLL] = 0;
 					}
 				}

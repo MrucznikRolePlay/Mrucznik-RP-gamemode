@@ -35,12 +35,12 @@ YCMD:togscroll(playerid, params[], help)
 		if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 0)
 		{
 			PlayerPersonalization[playerid][PERS_GUNSCROLL] = 1;
-			MSGBOX_Show(playerid, "Auto-GUI po zmianie broni ~g~ON", MSGBOX_ICON_TYPE_OK);
+			MSGBOX_Show(playerid, "Auto-GUI po zmianie broni ~g~OFF", MSGBOX_ICON_TYPE_OK);
 		}
 		else
 		{
 			PlayerPersonalization[playerid][PERS_GUNSCROLL] = 0;
-			MSGBOX_Show(playerid, "Auto-GUI po zmianie broni ~r~OFF", MSGBOX_ICON_TYPE_OK);
+			MSGBOX_Show(playerid, "Auto-GUI po zmianie broni ~r~ON", MSGBOX_ICON_TYPE_OK);
 		}
 	}
 	return 1;

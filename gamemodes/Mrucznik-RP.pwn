@@ -5758,7 +5758,7 @@ public OnPlayerUpdate(playerid)
 					}
 					else
 					{
-						if(PlayerPersonalization[i][PERS_GUNSCROLL] == 0) return SetPlayerArmedWeapon(i, starabron[i]);
+						if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, starabron[i]);
 						return PokazDialogBronie(i);
 
 						//freeze scroll i gui
