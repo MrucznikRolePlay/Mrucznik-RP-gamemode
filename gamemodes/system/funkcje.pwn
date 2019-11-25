@@ -7325,30 +7325,6 @@ ABroadCast(color,const string[],level)
 	return 1;
 }
 
-ABroadCast2(color,const string[],level)
-{
-	foreach(new i : Player)
-	{
-		if(IsPlayerConnected(i))
-		{
-			if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}
-			else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}
-			/*else if (PlayerInfo[i][pZG] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}*/
-		}
-	}
-	printf("%s", string);
-	return 1;
-}
-
 OOCOff(color,const string[])
 {
 	foreach(new i : Player)
@@ -12412,14 +12388,15 @@ stock GetDistanceToCar(playerid, carid)
 
 SavePlayerSentMessage(playerid, message[])
 {
-	format(SentMessages[playerid][SentMessagesIndex], 144, "%s", message);
-	SentMessagesIndex = (SentMessagesIndex+1) % MAX_SENT_MESSAGES;
+	new idx = SentMessagesIndex[playerid];
+	format(SentMessages[playerid][idx], 144, "%s", message);
+	SentMessagesIndex[playerid] = (idx+1) % MAX_SENT_MESSAGES;
 }
 
 ShowPlayerSentMessages(playerid, forplayerid)
 {
 	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(forplayerid)));
-	new index = SentMessagesIndex;
+	new index = SentMessagesIndex[playerid];
 	if(index != 0) {
 		for(new i = index-1; i >= 0; i--) {
 			if(strlen(SentMessages[playerid][i])) {

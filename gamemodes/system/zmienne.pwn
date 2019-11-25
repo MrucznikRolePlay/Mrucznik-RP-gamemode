@@ -1,7 +1,7 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
 
-new SentMessagesIndex = 0;
+new SentMessagesIndex[MAX_PLAYERS] = 0;
 new SentMessages[MAX_PLAYERS][MAX_SENT_MESSAGES][144];
 
 new ServerSecret[MAX_SERVER_SECRET_LENGTH];
