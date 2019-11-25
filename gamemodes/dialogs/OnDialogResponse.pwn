@@ -15,7 +15,7 @@ CheckDialogId(playerid, dialogid)
     if(dialogid < 0) return 0;
     if(dialogid != iddialog[playerid])
     {
-        if(dialogid == D_ANIMLIST || dialogid > 10000 && dialogid < 10100) return 0;
+        if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B³êdne ID GUI.");
         Log(serverLog, WARNING, "B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
@@ -13820,6 +13820,101 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GUIExit[playerid] = 0;
 			return 1;
 		}
+	}
+	if(dialogid == 15621)
+	{
+		if(!response)
+		{
+			return 1;
+		}
+		
+		switch(listitem)
+		{
+		    case 0: MRP_DoAnimation(playerid,"@bar1");
+		    case 1: MRP_DoAnimation(playerid,"@caluj1");
+		    case 2: MRP_DoAnimation(playerid,"@car1");
+		    case 3: MRP_DoAnimation(playerid,"@colt1");
+		    case 4: MRP_DoAnimation(playerid,"@crack1");
+		    case 5: MRP_DoAnimation(playerid,"@dance1");
+			case 6: MRP_DoAnimation(playerid,"@diler1");
+			case 7: MRP_DoAnimation(playerid,"@idz1");
+			case 8: MRP_DoAnimation(playerid,"@klepnij1");
+			case 9: MRP_DoAnimation(playerid,"@krzeslo1");
+
+			case 10: MRP_DoAnimation(playerid,"@lez1");
+			case 11: MRP_DoAnimation(playerid,"@lokiec1");
+		    case 12: MRP_DoAnimation(playerid,"@lowrider1");
+		    case 13: MRP_DoAnimation(playerid,"@nies1");
+		    case 14: MRP_DoAnimation(playerid,"@papieros1");
+		    case 15: MRP_DoAnimation(playerid,"@placz1");
+			case 16: MRP_DoAnimation(playerid,"@ranny1");
+			case 17: MRP_DoAnimation(playerid,"@rap1");
+			case 18: MRP_DoAnimation(playerid,"@rozmowa1");
+			case 19: MRP_DoAnimation(playerid,"@sex1");
+
+			case 20: MRP_DoAnimation(playerid,"@sklep1");
+   			case 21: MRP_DoAnimation(playerid,"@smierc1");
+		    case 22: MRP_DoAnimation(playerid,"@spij1");
+		    case 23: MRP_DoAnimation(playerid,"@spray1");
+		    case 24: MRP_DoAnimation(playerid,"@stack1");
+		    case 25: MRP_DoAnimation(playerid,"@strip1");
+			case 26: MRP_DoAnimation(playerid,"@wygralem1");
+			case 27: MRP_DoAnimation(playerid,"@yo1");
+			case 28: MRP_DoAnimation(playerid,"@bomba1"); //
+			case 29: MRP_DoAnimation(playerid,"@box1");
+
+		    case 30: MRP_DoAnimation(playerid,"@celuj1");
+       		case 31: MRP_DoAnimation(playerid,"@celujkarabin1");
+		    case 32: MRP_DoAnimation(playerid,"@crack1");
+		    case 33: MRP_DoAnimation(playerid,"@czas1");
+		    case 34: MRP_DoAnimation(playerid,"@dodge1");
+		    case 35: MRP_DoAnimation(playerid,"@doping1");
+			case 36: MRP_DoAnimation(playerid,"@drap1");
+			case 37: MRP_DoAnimation(playerid,"@dzieki1");
+			case 38: MRP_DoAnimation(playerid,"@fuck1");
+			case 39: MRP_DoAnimation(playerid,"@greet1");
+
+		    case 40: MRP_DoAnimation(playerid,"@hitch1");
+		    case 41: MRP_DoAnimation(playerid,"@joint1");
+		    case 42: MRP_DoAnimation(playerid,"@karta1");
+		    case 43: MRP_DoAnimation(playerid,"@komputer1");
+		    case 44: MRP_DoAnimation(playerid,"@kozak1");
+		    case 45: MRP_DoAnimation(playerid,"@kungfu1");
+			case 46: MRP_DoAnimation(playerid,"@machaj1");
+			case 47: MRP_DoAnimation(playerid,"@maska1");
+			case 48: MRP_DoAnimation(playerid,"@medyk1");
+			case 49: MRP_DoAnimation(playerid,"@napad1");
+
+		    case 50: MRP_DoAnimation(playerid,"@nie1");
+		    case 51: MRP_DoAnimation(playerid,"@odbierz1");
+		    case 52: MRP_DoAnimation(playerid,"@odloz1");
+		    case 53: MRP_DoAnimation(playerid,"@oh1");
+		    case 54: MRP_DoAnimation(playerid,"@opieraj1");
+		    case 55: MRP_DoAnimation(playerid,"@pa1");
+			case 56: MRP_DoAnimation(playerid,"@pij1");
+			case 57: MRP_DoAnimation(playerid,"@placz1");
+			case 58: MRP_DoAnimation(playerid,"@przeladuj1");
+			case 59: MRP_DoAnimation(playerid,"@ramiona1");
+
+			case 60: MRP_DoAnimation(playerid,"@rozciagaj1");
+			case 61: MRP_DoAnimation(playerid,"@rozlacz1");
+		    case 62: MRP_DoAnimation(playerid,"@siad1");
+		    case 63: MRP_DoAnimation(playerid,"@sikaj1");
+		    case 64: MRP_DoAnimation(playerid,"@smiech1");
+		    case 65: MRP_DoAnimation(playerid,"@stoj1");
+			case 66: MRP_DoAnimation(playerid,"@tak1");
+			case 67: MRP_DoAnimation(playerid,"@waledochodze1");
+			case 68: MRP_DoAnimation(playerid,"@walekonia1");
+			case 69: MRP_DoAnimation(playerid,"@wolaj1");
+
+			case 70: MRP_DoAnimation(playerid,"@wozszlug1");
+   			case 71: MRP_DoAnimation(playerid,"@wstan1");
+		    case 72: MRP_DoAnimation(playerid,"@wtf1");
+		    case 73: MRP_DoAnimation(playerid,"@wymiotuj1");
+		    case 74: MRP_DoAnimation(playerid,"@zarcie1");
+		    case 75: MRP_DoAnimation(playerid,"@zmeczony1");
+		}
+		return 1;
 	}
     if(dialogid == DIALOG_ELEVATOR_SAD)
     {

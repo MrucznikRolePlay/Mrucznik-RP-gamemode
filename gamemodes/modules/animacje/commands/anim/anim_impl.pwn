@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                    rap                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    anim                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,20 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 11.06.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "rap_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_rap()
+//------------------<[ Implementacja: ]>-------------------
+command_anim_Impl(playerid)
 {
-    new command = Command_GetID("rap");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    Command_SetPrefix(command, '@');
-}
-
-//-------<[ command ]>-------
-YCMD:rap(playerid, params[], help)
-{
-    if (help)
+    if(IsPlayerConnected(playerid))
     {
-        sendTipMessage(playerid, "Wyœwietla animacjê rapowania.");
-        return 1;
+        return MRP_ShowAnim(playerid);
     }
-    
-    
-    //command body
-    return command_rap_Impl(playerid);
+    return 1;
 }
+
+//end

@@ -6701,6 +6701,17 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
         if(GetPlayerAnimationIndex(playerid)!=1660) SetTimerEx("VendCheck", 500, false, "d", playerid);
         return 0;
     }
+	if(newkeys & 4 && GetPVarInt(playerid, "anim_do") == 1) //animacje
+	{
+		if(GetPlayerSpecialAction(playerid) != 0)
+		{
+			SetPlayerSpecialAction(playerid, 0);
+		}
+		ClearAnimations(playerid, 0);
+		ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.0999, 0, 0, 0, 0, 0, 0);
+		SetPVarInt(playerid, "anim_do", 0);
+		return 0;
+	}
 	return 1;
 }
 
