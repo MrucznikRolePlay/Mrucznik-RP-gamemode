@@ -468,7 +468,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Piwo`='%d', \
 	`Cygaro`='%d', \
 	`Sprunk`='%d', \
-	`PodgladWiadomosci`='%d', \
 	`StylWalki`='%d', \
 	`PAdmin`='%d', \
 	`Uniform`='%d', \
@@ -483,7 +482,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPiwo],
 	PlayerInfo[playerid][pCygaro],
 	PlayerInfo[playerid][pSprunk],
-	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
 	PlayerInfo[playerid][pUniform],
@@ -696,7 +694,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -707,7 +705,6 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pPiwo],
 		PlayerInfo[playerid][pCygaro],
 		PlayerInfo[playerid][pSprunk],
-		PlayerInfo[playerid][pPodPW],
 		PlayerInfo[playerid][pStylWalki],
 		PlayerInfo[playerid][pNewAP],
 		PlayerInfo[playerid][pUniform],

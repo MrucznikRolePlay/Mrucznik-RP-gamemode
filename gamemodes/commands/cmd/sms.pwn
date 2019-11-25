@@ -157,6 +157,7 @@ YCMD:sms(playerid, params[], help)
 			format(string, sizeof(string), "Wys³ano SMS: %s, Odbiorca: %d.", messSMS, givePlayerNumber);
 		}
 		SendClientMessage(playerid, COLOR_YELLOW, string);
+		SavePlayerSentMessage(playerid, string);
 		
 		//pobór op³at
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);

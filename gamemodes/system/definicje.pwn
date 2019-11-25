@@ -43,6 +43,8 @@
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
 
+//podgl¹d PW
+#define MAX_SENT_MESSAGES 10
 
 //salt
 #define MAX_SERVER_SECRET_LENGTH 16
