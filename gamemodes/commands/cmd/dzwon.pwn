@@ -83,9 +83,9 @@ YCMD:dzwon(playerid, params[], help)
 		return 1;
 	}
 	
+	new reciverid;
 	if(numerTelefonuOdbiorcy != 911)
 	{
-		new reciverid;
 		reciverid = FindPlayerByNumber(numerTelefonuOdbiorcy);
 		if(reciverid == INVALID_PLAYER_ID)
 		{
