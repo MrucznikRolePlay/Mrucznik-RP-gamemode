@@ -28,7 +28,7 @@
 	
 */
 
-/*YCMD:zastrzyk(playerid, params[], help)
+YCMD:zastrzyk(playerid, params[], help)
 {
 	new playa;
 	if(sscanf(params, "k<fix>", playa))
@@ -60,7 +60,6 @@
 					format(string, sizeof(string), "%s czuje siê lepiej oraz pozby³ siê choroby.", giveplayer);
 					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					STDPlayer[playa] = 0;
-					ZdejmijBW(playa);
 				}
 			}
 		}
@@ -76,4 +75,3 @@
 	}
 	return 1;
 }
-*/

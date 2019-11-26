@@ -933,7 +933,7 @@ public CheckChangeWeapon()
 		{
 			if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
 			{
-				if(playerState == 1) //|| playerState == 2 || playerState == 3)
+				if(playerState == 1)
 				{
 					if(GetPVarInt(i, "dutyadmin") == 0)
 					{
@@ -945,21 +945,7 @@ public CheckChangeWeapon()
 						{
 							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, starabron[i]);
 							return PokazDialogBronie(i);
-
-							//freeze scroll i gui
 						}
-						/*
-						if(weaponID >= 22 && weaponID <= 38)
-						{
-							if(GetPVarInt(i, "tazer") == 1)
-							{
-								format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", specNAME);
-								ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								RemovePlayerAttachedObject(i, 9);
-								SetPVarInt(i, "tazer", 0);
-							}
-						}
-						starabron[i]=weaponID;*/
 					}
 				}
 			}
@@ -1825,15 +1811,7 @@ public CustomPickups()
 	foreach(new i : Player)
 	{
         mystate = GetPlayerState(i);
-		if (IsPlayerInRangeOfPoint(i, 2.0, 1173.2563,-1323.3102,15.3943))
-		{// Hospital near Ammu
-			GameTextForPlayer(i, "~w~Wpisz /uleczmnie aby sie uleczyc", 5000, 5);
-		}
-		else if (IsPlayerInRangeOfPoint(i, 2.0, 2029.5945,-1404.6426,17.2512))
-		{// Hospital near speedway
-			GameTextForPlayer(i, "~w~Wpisz /uleczmnie aby sie uleczyc", 5000, 5);
-		}
-		else if (IsPlayerInRangeOfPoint(i, 2.0, 323.0342,1118.5804,1083.8828))
+		if (IsPlayerInRangeOfPoint(i, 2.0, 323.0342,1118.5804,1083.8828))
 		{//Buyable Drugs for Drug Dealers
 			GameTextForPlayer(i, "~w~Wpisz /get dragi aby wziasc ~r~Dragi~y~~n~Dostosowane do twojego skillu", 5000, 3);
 		}

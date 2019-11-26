@@ -462,7 +462,6 @@
 #include "cmd/startlotto.pwn"
 #include "cmd/startujlekcje.pwn"
 #include "cmd/staty.pwn"
-//#include "cmd/stazer.pwn"
 #include "cmd/stopanim.pwn"
 #include "cmd/stopbieg.pwn"
 #include "cmd/streamer.pwn"
@@ -482,7 +481,6 @@
 #include "cmd/tankujauta.pwn"
 #include "cmd/tankveh.pwn"
 #include "cmd/taryfikator.pwn"
-//#include "cmd/tazer.pwn"
 #include "cmd/teczka.pwn"
 #include "cmd/telefonpomoc.pwn"
 #include "cmd/teleturniej.pwn"
@@ -515,7 +513,6 @@
 #include "cmd/ugotuj.pwn"
 #include "cmd/ukradnij.pwn"
 #include "cmd/ulecz.pwn"
-#include "cmd/uleczmnie.pwn"
 #include "cmd/ulepsz.pwn"
 #include "cmd/unblock.pwn"
 #include "cmd/unbw.pwn"
@@ -561,7 +558,6 @@
 #include "cmd/wobiekt.pwn"
 #include "cmd/wplac.pwn"
 #include "cmd/wrzuc.pwn"
-//#include "cmd/wtazer.pwn"
 #include "cmd/wybieralka.pwn"
 #include "cmd/wyczysc.pwn"
 #include "cmd/wyjdz.pwn"
@@ -613,7 +609,7 @@
 #include "cmd/zapiszkonta.pwn"
 #include "cmd/zapytaj.pwn"
 #include "cmd/zasady.pwn"
-//#include "cmd/zastrzyk.pwn"
+#include "cmd/zastrzyk.pwn"
 #include "cmd/zatankuj.pwn"
 #include "cmd/zatrzymajlekcje.pwn"
 #include "cmd/zaufanyggracz.pwn"
@@ -1001,6 +997,7 @@ static Aliases()
 
 	//od
 	Command_AddAltNamed("od", "podnies");
+	Command_AddAltNamed("od", "odbierz");
 	//Command_AddAltNamed("od", "p"); //na rzecz systemu broni
 
 	//og

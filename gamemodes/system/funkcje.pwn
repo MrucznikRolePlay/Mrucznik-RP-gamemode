@@ -7411,7 +7411,6 @@ SendTeamMessage(team, color, string[], isDepo = 0)
               	if(isDepo == 0) {
               		SendClientMessage(i, color, string);
               	}
-				//SendClientMessage(i, color, string);
 			}
 		}
 	}
@@ -7431,7 +7430,6 @@ SendTeamMessageOnDuty(team, color, string[], isDepo = 0)
               	if(isDepo == 0) {
               		SendClientMessage(i, color, string);
               	}
-				//SendClientMessage(i, color, string);
 			}
 		}
 	}
