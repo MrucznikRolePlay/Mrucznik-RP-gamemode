@@ -66,7 +66,7 @@ YCMD:apteczka(playerid, params[], help)
 		format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", giveplayer);
 		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		pobity[playa] = 0;
-		ZdejmijBW(playa, 4000);
+		ZdejmijBW(playa, 3000);
 		SetPlayerHealth(playa, HEALTH_PACK_HP);
 	}
 	else
