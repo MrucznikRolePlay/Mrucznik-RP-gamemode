@@ -67,7 +67,7 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 
 	if(reason <= 54 && reason > 0)
 	{
-		format(string, sizeof(string), "%s z urazami od %s", string2, (reason <= 46) ? GunNames[reason] : NiggaNames[reason-46]);
+		format(string, sizeof(string), "%s z urazami od %s", string2, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
 	}
 	else
 	{

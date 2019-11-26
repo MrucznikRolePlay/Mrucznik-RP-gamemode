@@ -804,7 +804,7 @@ new GunNames[47][] = {
 	"Spadochron"//46
 };
 
-new NiggaNames[9][] = {
+new DeathNames[9][] = {
     "Spadochron",
 	"Fake Pistol",//47
 	"???",//48
