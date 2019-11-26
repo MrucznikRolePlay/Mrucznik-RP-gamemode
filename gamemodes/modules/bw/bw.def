@@ -32,5 +32,6 @@
 #define HEALTH_PACK_PRICE 50000 //cena apteczki
 #define HEALTH_PACK_AMOUNTDOCTOR 10000 //prowizja dla lekarza
 #define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki (cywil)
+#define HOSPITALIZATION_COST 2000 //ile $$ zabieraæ od gracza po odczekaniu BW za hospitalizacje
 
 //end

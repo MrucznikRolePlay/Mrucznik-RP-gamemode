@@ -500,7 +500,7 @@ Car_Spawn(lUID, bool:loaddesc=true)
 
     new rejestracja[32];
     if(isnull(CarData[lUID][c_Rejestracja]))
-		format(rejestracja, sizeof(rejestracja), "LS%06d", CarData[lUID][c_UID]);
+		format(rejestracja, sizeof(rejestracja), "DMV %d", CarData[lUID][c_UID]);
 	else
 		format(rejestracja, sizeof(rejestracja), "%s", CarData[lUID][c_Rejestracja]);
 

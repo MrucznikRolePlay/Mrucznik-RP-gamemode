@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                    rap                                                    //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                    anim                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,17 +16,48 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 11.06.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_rap_Impl(playerid)
+
+//-------<[ include ]>-------
+#include "anim_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_anim()
 {
-    ApplyAnimation(playerid, "RAPPING", "RAP_A_Loop", 4.0999, 1, 0, 0, 0, 0, 0);
-    return 1;
+    new command = Command_GetID("anim");
+
+    //aliases
+    Command_AddAlt(command, "anims");
+    Command_AddAlt(command, "animacje");
+    Command_AddAlt(command, "animhelp");
+    Command_AddAlt(command, "animshelp");
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:anim(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla animacje.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_anim_Impl(playerid);
+}

@@ -230,9 +230,10 @@ BWTimer(playerid)
 		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (PlayerInfo[i][pBW] * 1000));
 		if(PlayerInfo[i][pBW] <= 0)
 		{
-			SendClientMessage(i, COLOR_LIGHTBLUE, "* Otrzyma³eœ rachunek w wysokoœci 2.000$ za hospitalizacjê.");
-			ZabierzKase(i, 2000);
-			ZdejmijBW(i);
+			format(string, sizeof(string), "* Otrzyma³eœ rachunek w wysokoœci %d$ za hospitalizacjê.", HOSPITALIZATION_COST);
+			SendClientMessage(i, COLOR_LIGHTBLUE, string);
+			ZabierzKase(i, HOSPITALIZATION_COST);
+			ZdejmijBW(i, 5000);
 			GameTextForPlayer(i, "~n~~n~~g~~h~Obudziles sie", 5000, 5);
 			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê!\n{FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
 			ShowPlayerInfoDialog(i, "Mrucznik Role Play", string); 

@@ -39,6 +39,13 @@ YCMD:wyjdz(playerid, params[], help)
 		if(SprawdzWejscia(playerid))
 			return 1;
 		
+		else if(IsPlayerInRangeOfPoint(playerid,5,648.9127, -1367.4266, 29.2878))//stare SAN - recepcja san news wyjscie
+        {
+			SetPlayerPosEx(playerid, 648.4412, -1357.3232, 13.8579);
+            SetPlayerVirtualWorld(playerid,0);
+            TogglePlayerControllable(playerid,0);
+            Wchodzenie(playerid);
+        }
 		else if(IsPlayerInRangeOfPoint(playerid,4,1568.6449, -1689.6379, 6.1932) && IsACop(playerid)//parking LSPD
 		|| IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
 		|| IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan

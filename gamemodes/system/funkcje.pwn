@@ -4161,7 +4161,7 @@ Lotto(number)
 				}
 				else 
 				{
-					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d", PlayerInfo[i][pLottoNr]);
+					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d.", PlayerInfo[i][pLottoNr]);
 					SendClientMessage(i, COLOR_WHITE, string);
 					PlayerInfo[i][pLottoNr] = 0; 
 				}
@@ -4177,7 +4177,7 @@ Lotto(number)
 			{
 				new rand = random(200000); 
 				Jackpot = Jackpot+rand; 
-				format(string, sizeof(string), "Nagroda zosta³a podwy¿szona do %d$", Jackpot);
+				format(string, sizeof(string), "Nikt nie wygra³. Nagroda zosta³a podwy¿szona do %d$", Jackpot);
 				OOCOff(COLOR_WHITE, string);  
 				break; 
 			}
@@ -11052,12 +11052,29 @@ ChangePlayerName(playerid, name[])
 CheckVulgarityString(text[])
 {
 	new valueVulgarity;
-	if(strfind(text, "kurwa") != -1
-	&& strfind(text, "chuj") != -1
-	&& strfind(text, "cipa") != -1
-	&& strfind(text, "fiut") != -1
-	&& strfind(text, "zjeb") != -1
-	&& strfind(text, "dick") != -1)
+	if(strfind(text, "kurwa", true) >=0 
+	|| strfind(text, "chuj", true) >=0 
+	|| strfind(text, "cipa", true) >=0 
+	|| strfind(text, "fiut", true) >=0 
+	|| strfind(text, "zjeb", true) >=0 
+	|| strfind(text, "dick", true) >=0 
+	|| strfind(text, "kurwy", true) >=0 
+	|| strfind(text, "jeb", true)>=0 
+	|| strfind(text , "huj" , true)>=0 
+	|| strfind(text , "pizda" , true)>=0 
+	|| strfind(text , "pizdy" , true)>=0 
+	|| strfind(text , "frajer" , true)>=0
+	|| strfind(text , "szmul" , true)>=0
+	|| strfind(text , "dzban" , true)>=0  	
+	|| strfind(text , "kurwa" , true)>=0
+	|| strfind(text , "kutas" , true)>=0 
+	|| strfind(text , "dupa" , true)>=0 
+	|| strfind(text , "cipa" , true)>=0 
+	|| strfind(text , "cipka" , true)>=0 
+	|| strfind(text , "n00b" , true)>=0 
+	|| strfind(text , "noob" , true)>=0 
+	|| strfind(text , "n0b" , true)>=0
+	|| strfind(text , "kurwy" , true)>=0)
 	{	
 		valueVulgarity = 1;
 	}
