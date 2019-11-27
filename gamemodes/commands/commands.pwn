@@ -996,9 +996,7 @@ static Aliases()
 	Command_AddAltNamed("ochrona", "sellkamizelke");
 
 	//od
-	Command_AddAltNamed("od", "podnies");
 	Command_AddAltNamed("od", "odbierz");
-	//Command_AddAltNamed("od", "p"); //na rzecz systemu broni
 
 	//og
 	Command_AddAltNamed("og", "advertise");
