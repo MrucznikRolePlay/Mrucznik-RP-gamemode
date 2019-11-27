@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ fdaj ]-------------------------------------------------//
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                przedmioty                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,45 +16,62 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Creative
+// Data utworzenia: 22.11.2019
 
-// Opis:
-/*
-	
-*/
+//
 
+//-----------------<[ Zmienne: ]>-------------------
+new WeaponsDelay[47] = {
+    0, // fist
+    0, // kastet
+    750, //Golf club
+    500, //Nightstick
+    100, //Knife
+    750, //Baseball Bat
+    750, //Shovel
+    500, //Pool cure
+    500, //Katana
+    1500, //Chainsaw
+    250, //Purple Dildo
+    250, //Dildo
+    250, //Vibrator
+    250, //Silver Vibrator
+    500, //Flowers
+    500, //Grenade
+    500, //Tear Gas
+    500, //Molotov Cocktail 18
+    0, //nil
+    0, //nil
+    0, //nil
+    500, //9mm
+    500, //Silenced 9mm
+    1500, //Desert Eagle
+    2000, //Shotgun
+    2000, //Shawnoff Shotgun
+    2500, //Combat Shotgun
+    1000, //Mirco SMG
+    1500, //MP5
+    2000, //AK47
+    2000, //M4
+    1000, //Tec9
+    2500, //Country Rifle
+    3000, //Sniper Rifle
+    4000, //RPG
+    4000, //HS Rocket
+    4000, //Flame Thower
+    4000, //Minigun
+    1000, //C4
+    100, //Detonator
+    500, //Spraycan
+    750, //Fire Extinguisher
+    100, //Camera
+    100, //Google
+    100, //Google
+    0 //Parachute
+};
+//------------------<[ Enumy: ]>--------------------
+//------------------<[ Forwardy: ]>--------------------
+forward PlayerChangeWeapon(playerid, newweaponid);
 
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:fdaj(playerid, params[], help)
-{
-	new string[256];
-    if(PlayerInfo[playerid][pAdmin] >=10 || IsAScripter(playerid))
-	{
-	    new giveplayerid, level;
-		if( sscanf(params, "k<fix>d", giveplayerid, level))
-		{
-			sendTipMessage(playerid, "U¿yj /fdaj [id gracza] [id stylu]");
-			return 1;
-		}
-
-		if(level == 4 || level == 5 || level == 6 || level == 7 || level == 15 || level == 16)
-		{
-			if(PlayerInfo[playerid][pLevel] >= 1)
-			{
-				SetPlayerFightingStyle(playerid, level);
-				format(string, sizeof(string), "Administrator %s ustawi³ Ci styl walki na %d", GetNick(playerid), level); 
-				sendTipMessageEx(giveplayerid, COLOR_P@, string); 
-				format(string, sizeof(string), "Ustawi³eœ styl walki dla %s na %d", GetNick(giveplayerid), level);
-				sendTipMessageEx(playerid, COLOR_P@, string); 
-			}
-		}
-		else
-		{
-			return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Dostêpne style walk:\n\n4 - FIGHT_STYLE_NORMAL\n5 - FIGHT_STYLE_BOXING\n6 - FIGHT_STYLE_KUNGFU\n7 - FIGHT_STYLE_KNEEHEAD\n15 - FIGHT_STYLE_GRABKICK\n16 - FIGHT_STYLE_ELBOW"); 
-		}
-	}
-	return 1;
-}
+//end

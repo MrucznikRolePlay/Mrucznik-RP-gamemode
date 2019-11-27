@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ tazer ]-------------------------------------------------//
+//----------------------------------------------[ dajapteczke ]----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,45 +28,50 @@
 	
 */
 
-YCMD:tazer(playerid, params[], help)
+YCMD:dajapteczke(playerid, params[], help)
 {
-    new string[128];
-	new sendername[MAX_PLAYER_NAME];
-    GetPlayerName(playerid, sendername, sizeof(sendername));
     if(IsPlayerConnected(playerid))
     {
-		if((gTeam[playerid] == 2 || IsACop(playerid) || IsABOR(playerid)) && OnDuty[playerid] == 1)
+		new playa, ilosc;
+		if( sscanf(params, "k<fix>D(0)", playa, ilosc))
 		{
-    		if((GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && MaTazer[playerid] == 0)
-			{
-                if(GetPVarInt(playerid, "wytazerowany") > 0) return sendErrorMessage(playerid, "Tazer mo¿esz u¿yæ 15s po u¿yciu!");
- 				MaTazer[playerid] = 1;
- 				//PlayerInfo[playerid][pGun2] = 23;
-				//GivePlayerWeapon(playerid, 23, PlayerInfo[playerid][pAmmo2]);
-				//SetPlayerAttachedObject(playerid, 9,18642, 6, 0.09, 0.05, 0.05, 0, 180, 90, 2, 2, 2);
-       			format(string, sizeof(string), "* %s odbezpiecza, ³aduje nabój i aktywuje tazer.", sendername);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
- 			}
-  			else if((GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && MaTazer[playerid] == 1)
-			{
-				MaTazer[playerid] = 0;
-				//PlayerInfo[playerid][pGun2] = 24;
-				//GivePlayerWeapon(playerid, 24, PlayerInfo[playerid][pAmmo2]);
-				//RemovePlayerAttachedObject(playerid, 9);
-				format(string, sizeof(string), "* %s zabezpiecza i dezaktywuje tazer.", sendername);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			}
-			else
-			{
-				sendTipMessageEx(playerid, COLOR_GREY, "Nie masz wyci¹gniêtej odpowiedniej broni!");
-				return 1;
+			sendTipMessage(playerid, "U¿yj /dajapteczke [playerid/CzêœæNicku] [ilosc]");
+			return 1;
+		}
+
+		if (PlayerInfo[playerid][pAdmin] >= 100 || IsAScripter(playerid))
+		{
+		    if(IsPlayerConnected(playa))
+		    {
+		        if(playa != INVALID_PLAYER_ID)
+		        {
+					new string[144];
+					if(ilosc > MAX_HEALTH_PACKS)
+					{
+						format(string, sizeof(string), "Tip: Maksymalna iloœæ apteczek na gracza to [%d]", MAX_HEALTH_PACKS);
+						return sendTipMessage(playerid, string);
+					}
+					
+					new giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME];
+					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					if(GetPlayerAdminDutyStatus(playerid) == 1)
+					{
+						iloscInne[playerid] = iloscInne[playerid]+1;
+					}
+
+					PlayerInfo[playa][pHealthPacks] = ilosc;
+					Log(adminLog, INFO, "Admin %s ustawi³ %s apteczki na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), ilosc);
+					format(string, sizeof(string), "%s ustawi³ %d apteczki dla %s", sendername, ilosc, giveplayer);
+					SendMessageToAdmin(string, COLOR_P@);
+					if(playerid != playa) _MruAdmin(playa, sprintf("Admin %s [%d] ustawi³ Ci poziom apteczek na [%d]", GetNick(playerid, true), playerid, ilosc));
+				}
 			}
 		}
 		else
 		{
-			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z LSPD/FBI/SASD/USSS lub nie jesteœ na s³u¿bie!");
-			return 1;
+			noAccessMessage(playerid);
 		}
 	}
-    return 1;
+	return 1;
 }

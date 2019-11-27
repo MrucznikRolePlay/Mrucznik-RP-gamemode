@@ -73,6 +73,11 @@ YCMD:federalne(playerid, params[], help)
 								SetPlayerCriminal(giveplayerid,playerid, result);
 								SendClientMessage(giveplayerid, COLOR_LFBI, "   Pope³ni³eœ przestêpstwo federalne, twoj¹ sprawê przejê³o FBI !");
 								SendClientMessage(playerid, COLOR_LFBI, "   Oskar¿y³eœ gracza o przestêpstwo federalne. Ma on teraz 6 Poziom Poszukiwania !");
+								
+								if(IsReasonAPursuitReason(result))
+								{
+									PursuitMode(playerid, giveplayerid);
+								}
 								return 1;
 							}
 							else

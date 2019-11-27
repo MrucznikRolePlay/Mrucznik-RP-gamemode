@@ -62,7 +62,7 @@ YCMD:makeleader(playerid, params[], help)
 
 		if(level == 0)
 		{
-			UnFrakcja(playerid, para1);
+			UnFrakcja(playerid, para1, false);
 			return 1;
 		}
 		if(PlayerInfo[para1][pMember] > 0|| GetPlayerOrg(para1) != 0 )

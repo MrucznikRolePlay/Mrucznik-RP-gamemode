@@ -2807,8 +2807,10 @@ PrzywrocBron(playerid)
     if(IsPlayerConnected(playerid))
 	{
 	    ResetPlayerWeapons(playerid);
+		new startowabron = 0;
 	    if(PlayerInfo[playerid][pGun0] == 1)
 		{
+			startowabron = 1;
 		    GivePlayerWeapon(playerid, PlayerInfo[playerid][pGun0], PlayerInfo[playerid][pAmmo0]);
 		}
 		if(PlayerInfo[playerid][pGun1] >= 2)
@@ -2859,6 +2861,7 @@ PrzywrocBron(playerid)
 		{
 		    GivePlayerWeapon(playerid, PlayerInfo[playerid][pGun12], PlayerInfo[playerid][pAmmo12]);
 		}
+		PrzedmiotyZmienBron(playerid, startowabron);
 		return 1;
 	}
 	return 0;
@@ -4158,7 +4161,7 @@ Lotto(number)
 				}
 				else 
 				{
-					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d", PlayerInfo[i][pLottoNr]);
+					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d.", PlayerInfo[i][pLottoNr]);
 					SendClientMessage(i, COLOR_WHITE, string);
 					PlayerInfo[i][pLottoNr] = 0; 
 				}
@@ -4174,7 +4177,7 @@ Lotto(number)
 			{
 				new rand = random(200000); 
 				Jackpot = Jackpot+rand; 
-				format(string, sizeof(string), "Nagroda zosta³a podwy¿szona do %d$", Jackpot);
+				format(string, sizeof(string), "Nikt nie wygra³. Nagroda zosta³a podwy¿szona do %d$", Jackpot);
 				OOCOff(COLOR_WHITE, string);  
 				break; 
 			}
@@ -4797,7 +4800,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "BizOID:[%d] BizMID[%d] Uniform[%d] JobSkin[%d]", busiOwn, busiMem, PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin]);
+		format(coordsstring, sizeof(coordsstring), "BizOID:[%d] BizMID[%d] Uniform[%d] JobSkin[%d] Apteczki[%d]", busiOwn, busiMem, PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
@@ -7325,30 +7328,6 @@ ABroadCast(color,const string[],level)
 	return 1;
 }
 
-ABroadCast2(color,const string[],level)
-{
-	foreach(new i : Player)
-	{
-		if(IsPlayerConnected(i))
-		{
-			if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}
-			else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}
-			/*else if (PlayerInfo[i][pZG] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}*/
-		}
-	}
-	printf("%s", string);
-	return 1;
-}
-
 OOCOff(color,const string[])
 {
 	foreach(new i : Player)
@@ -7424,6 +7403,26 @@ SendTeamMessage(team, color, string[], isDepo = 0)
 		if(IsPlayerConnected(i))
 		{
 		    if(PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team)
+		    {
+		    	if(isDepo == 1 && gMuteDepo[i] == 0) 
+                {
+                    SendClientMessage(i, color, string);
+                }
+              	if(isDepo == 0) {
+              		SendClientMessage(i, color, string);
+              	}
+				//SendClientMessage(i, color, string);
+			}
+		}
+	}
+}
+SendTeamMessageOnDuty(team, color, string[], isDepo = 0)
+{
+	foreach(new i : Player)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if((PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team) && (OnDuty[i] == 1 || JobDuty[i] == 1))
 		    {
 		    	if(isDepo == 1 && gMuteDepo[i] == 0) 
                 {
@@ -8333,7 +8332,7 @@ public NG_OpenGateWithKey(playerid)
 	return 1;
 }
 
-UnFrakcja(playerid, para1)
+UnFrakcja(playerid, para1, bool:respawn = true)
 {
 	new string[64];
 	new giveplayer[MAX_PLAYER_NAME];
@@ -8356,7 +8355,15 @@ UnFrakcja(playerid, para1)
 	PlayerInfo[para1][pJob] = 0;
 	orgUnInvitePlayer(para1);
 	MedicBill[para1] = 0;
-	SetPlayerSpawn(para1);
+	if(respawn)
+	{
+		SetPlayerSpawn(para1);
+	}
+	else
+	{
+		SetPlayerSpawnSkin(playerid);
+		SetPlayerSpawnWeapon(playerid);
+	}
 	format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	return 1;
@@ -11045,12 +11052,29 @@ ChangePlayerName(playerid, name[])
 CheckVulgarityString(text[])
 {
 	new valueVulgarity;
-	if(strfind(text, "kurwa") != -1
-	&& strfind(text, "chuj") != -1
-	&& strfind(text, "cipa") != -1
-	&& strfind(text, "fiut") != -1
-	&& strfind(text, "zjeb") != -1
-	&& strfind(text, "dick") != -1)
+	if(strfind(text, "kurwa", true) >=0 
+	|| strfind(text, "chuj", true) >=0 
+	|| strfind(text, "cipa", true) >=0 
+	|| strfind(text, "fiut", true) >=0 
+	|| strfind(text, "zjeb", true) >=0 
+	|| strfind(text, "dick", true) >=0 
+	|| strfind(text, "kurwy", true) >=0 
+	|| strfind(text, "jeb", true)>=0 
+	|| strfind(text , "huj" , true)>=0 
+	|| strfind(text , "pizda" , true)>=0 
+	|| strfind(text , "pizdy" , true)>=0 
+	|| strfind(text , "frajer" , true)>=0
+	|| strfind(text , "szmul" , true)>=0
+	|| strfind(text , "dzban" , true)>=0  	
+	|| strfind(text , "kurwa" , true)>=0
+	|| strfind(text , "kutas" , true)>=0 
+	|| strfind(text , "dupa" , true)>=0 
+	|| strfind(text , "cipa" , true)>=0 
+	|| strfind(text , "cipka" , true)>=0 
+	|| strfind(text , "n00b" , true)>=0 
+	|| strfind(text , "noob" , true)>=0 
+	|| strfind(text , "n0b" , true)>=0
+	|| strfind(text , "kurwy" , true)>=0)
 	{	
 		valueVulgarity = 1;
 	}
@@ -12279,7 +12303,17 @@ ShowPersonalization(playerid, value)
 			strdel(persona_C, 0, 64); 
 			strins(persona_C, "Kary w TXD\t{FF6A6A}OFF\n", 0); 
 		}
-		format(string, sizeof(string), "%s%s%s", persona_A, persona_B, persona_C);
+		if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 0)
+		{
+			strdel(persona_D, 0, 64);
+			strins(persona_D, "Auto-GUI po zmianie broni\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 1)
+		{
+			strdel(persona_D, 0, 64); 
+			strins(persona_D, "Auto-GUI po zmianie broni\t{FF6A6A}OFF\n", 0); 
+		}
+		format(string, sizeof(string), "%s%s%s%s", persona_A, persona_B, persona_C, persona_D);
 		ShowPlayerDialogEx(playerid, D_PERS_INNE, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz"); 
 	}
 		 
@@ -12409,6 +12443,60 @@ stock GetDistanceToCar(playerid, carid)
 	Dis = floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
 	return floatround(Dis);
 }
+
+SavePlayerSentMessage(playerid, message[])
+{
+	new idx = SentMessagesIndex[playerid];
+	format(SentMessages[playerid][idx], 144, "%s", message);
+	SentMessagesIndex[playerid] = (idx+1) % MAX_SENT_MESSAGES;
+}
+
+ShowPlayerSentMessages(playerid, forplayerid)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(forplayerid)));
+	new index = SentMessagesIndex[playerid];
+	if(index != 0) {
+		for(new i = index-1; i >= 0; i--) {
+			if(strlen(SentMessages[playerid][i])) {
+				SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
+			}
+		}
+	}
+
+	for(new i= MAX_SENT_MESSAGES-1; i >= index; i--) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
+		}
+	}
+}
+
+IsReasonAPursuitReason(result[])
+{
+	return (strfind(result, "ucieczka", true) != -1 || strfind(result, "poscig", true) != -1 || strfind(result, "poœcig", true) != -1 || strfind(result, "ucieka", true) != -1);
+}
+
+PursuitMode(playerid, giveplayerid)
+{
+	if(ProxDetectorS(80.0, playerid, giveplayerid))
+	{
+		if(poscig[giveplayerid] != 1)
+		{
+			SendClientMessage(playerid,COLOR_LIGHTBLUE,"Rozpocz¹³eœ poœcig! Trwa on 7 minut.");
+			SendClientMessage(giveplayerid,COLOR_PANICRED,"|_________________Tryb Poœcigu_________________|");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"S³u¿by porz¹dkowe ruszy³y za tob¹ w poœcig! W takim wypadku najlepiej siê poddaæ!");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"W trybie poœcigu nie mozesz wyjœæ z gry, zgin¹æ oraz byæ AFK.");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"Z³amanie tych zasad skutkuje kar¹ nadawan¹ automatycznie.");
+			SendClientMessage(giveplayerid,COLOR_PANICRED,"|______________________________________________|");
+			poscig[giveplayerid] = 1;
+			SetTimerEx("PoscigTimer",7*60000,0,"d",giveplayerid);
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
+	}
+}
+
 
 //--------------------------------------------------
 

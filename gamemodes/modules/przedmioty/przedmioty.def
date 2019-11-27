@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                    rap                                                    //
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                 przedmioty                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Creative
+// Data utworzenia: 22.11.2019
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
 
-//-------<[ include ]>-------
-#include "rap_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_rap()
-{
-    new command = Command_GetID("rap");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    Command_SetPrefix(command, '@');
-}
-
-//-------<[ command ]>-------
-YCMD:rap(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Wyœwietla animacjê rapowania.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_rap_Impl(playerid);
-}
+//end

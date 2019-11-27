@@ -258,6 +258,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`KluczykiDoAuta`='%d',\
 	`Spawn`='%d',\
 	`BW`='%d',\
+	`Injury`='%d',\
+	`HealthPacks`='%d',\
 	`Czystka`='%d',\
     `CarSlots`='%d'\
 	WHERE `UID`='%d'", query,
@@ -286,6 +288,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pKluczeAuta],
 	PlayerInfo[playerid][pSpawn],
 	PlayerInfo[playerid][pBW],
+	PlayerInfo[playerid][pInjury],
+	PlayerInfo[playerid][pHealthPacks],
 	PlayerInfo[playerid][pCzystka],
     PlayerInfo[playerid][pCarSlots],
 	PlayerInfo[playerid][pUID]);
@@ -464,7 +468,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Piwo`='%d', \
 	`Cygaro`='%d', \
 	`Sprunk`='%d', \
-	`PodgladWiadomosci`='%d', \
 	`StylWalki`='%d', \
 	`PAdmin`='%d', \
 	`Uniform`='%d', \
@@ -479,7 +482,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPiwo],
 	PlayerInfo[playerid][pCygaro],
 	PlayerInfo[playerid][pSprunk],
-	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
 	PlayerInfo[playerid][pUniform],
@@ -499,7 +501,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`DeathWarning` = '%d', \
 	`KaryTXD` = '%d', \
 	`NewNick` = '%d', \
-	`newbie` = '%d'	\
+	`newbie` = '%d',	\
+	`BronieScroll` = '%d'	\
 	WHERE `UID`= '%d'",
 	PlayerPersonalization[playerid][PERS_KB],
 	PlayerPersonalization[playerid][PERS_AD],
@@ -513,6 +516,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_KARYTXD],
 	PlayerPersonalization[playerid][PERS_NEWNICK],
 	PlayerPersonalization[playerid][PERS_NEWBIE],
+	PlayerPersonalization[playerid][PERS_GUNSCROLL],
 	PlayerInfo[playerid][pUID]); 
 
 	if(!mysql_query(query)) fault=false;
@@ -681,7 +685,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Czystka`, `CarSlots`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
@@ -690,7 +694,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -701,7 +705,6 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pPiwo],
 		PlayerInfo[playerid][pCygaro],
 		PlayerInfo[playerid][pSprunk],
-		PlayerInfo[playerid][pPodPW],
 		PlayerInfo[playerid][pStylWalki],
 		PlayerInfo[playerid][pNewAP],
 		PlayerInfo[playerid][pUniform],
@@ -715,6 +718,8 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pKluczeAuta],
 		PlayerInfo[playerid][pSpawn],
 		PlayerInfo[playerid][pBW],
+		PlayerInfo[playerid][pInjury],
+		PlayerInfo[playerid][pHealthPacks],
 		PlayerInfo[playerid][pCzystka],
         PlayerInfo[playerid][pCarSlots]);
 
@@ -742,14 +747,14 @@ public MruMySQL_LoadAcocount(playerid)
 	} 
 	mysql_free_result();
 	//Wczytaj personalizacje
-	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`";
+	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`, `BronieScroll`";
 	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())
 	{
 		mysql_fetch_row_format(lStr, "|"); 
-		sscanf(lStr, "p<|>dddddddddddd", 
+		sscanf(lStr, "p<|>ddddddddddddd", 
 		PlayerPersonalization[playerid][PERS_KB],
 		PlayerPersonalization[playerid][PERS_AD],
 		PlayerPersonalization[playerid][PERS_LICZNIK],
@@ -761,7 +766,8 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerPersonalization[playerid][WARNDEATH],
 		PlayerPersonalization[playerid][PERS_KARYTXD],
 		PlayerPersonalization[playerid][PERS_NEWNICK],
-		PlayerPersonalization[playerid][PERS_NEWBIE]); 
+		PlayerPersonalization[playerid][PERS_NEWBIE],
+		PlayerPersonalization[playerid][PERS_GUNSCROLL]); 
 	}
 	mysql_free_result();
 	

@@ -58,7 +58,8 @@
 #include "vehicle_attachments\vehicle_attachments.def"
 #include "wejscia\wejscia.def"
 #include "wypadek\wypadek.def"
-
+#include "bw\bw.def"
+#include "przedmioty\przedmioty.def"
 
 //-------<[ .hwn ]>-------
 #include "03DL\03DL.hwn"
@@ -91,6 +92,8 @@
 #include "vehicle_attachments\vehicle_attachments.hwn"
 #include "wejscia\wejscia.hwn"
 #include "wypadek\wypadek.hwn"
+#include "bw\bw.hwn"
+#include "przedmioty\przedmioty.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -124,6 +127,8 @@
 #include "vehicle_attachments\vehicle_attachments.pwn"
 #include "wejscia\wejscia.pwn"
 #include "wypadek\wypadek.pwn"
+#include "bw\bw.pwn"
+#include "przedmioty\przedmioty.pwn"
 
 
 //-------<[ timers ]>-------

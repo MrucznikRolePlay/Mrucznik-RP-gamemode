@@ -45,6 +45,7 @@ YCMD:wyrzucbronie(playerid, params[], help)
         }
         if(wyrzuc)
         {
+            if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) return sendErrorMessage(playerid, "Jesteœ ranny, nie mo¿esz daæ /wb");
     		new string[64], sendername[MAX_PLAYER_NAME];
     		GetPlayerName(playerid, sendername, sizeof(sendername));
     		format(string, sizeof(string), "* s³ychaæ dŸwiêk upuszczonej broni ((%s))", sendername);

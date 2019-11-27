@@ -43,6 +43,8 @@
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
 
+//podgl¹d PW
+#define MAX_SENT_MESSAGES 10
 
 //salt
 #define MAX_SERVER_SECRET_LENGTH 16
@@ -457,6 +459,10 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_KONTAKTY_EDYTUJ_NOWA_NAZWA	10104
 #define D_KONTAKTY_USUN					10105
 #define D_KONTAKTY_LISTA				10106
+
+#define D_ERS_SPRZEDAZ_APTECZKI			10107
+#define D_UZYCIE_APTECZKI			    10108
+#define D_PRZEDMIOTY_BRONIE			    10109
 
 
 //------------------------------------------------------------------------------

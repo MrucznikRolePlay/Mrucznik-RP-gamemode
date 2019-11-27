@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                 przedmioty                                                //
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                    bw                                                     //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,17 +16,22 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 09.08.2019
-
+// Autor: Creative
+// Data utworzenia: 18.11.2019
 
 //
 
-//------------------<[ Implementacja: ]>-------------------
-command_przedmioty_Impl(playerid)
-{
-    DialogPlayerAttachedItems(playerid);
-    return 1;
-}
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+#define INJURY_TIME 122 //czas trybu rannego
+#define INJURY_HP 30 //hp nadawane na tryb ranny i bw
+#define BW_TIME 242 //czas jak zostanie dobity
+#define BW_TIME_CRIMINAL 302 // czas jak zostanie dobity przez przestêpce
+#define MAX_HOSPITAL_BEDS 10
+#define MAX_HEALTH_PACKS 2 //maksymalna ilosc apteczek posiadanych przez gracza
+#define HEALTH_PACK_PRICE 50000 //cena apteczki
+#define HEALTH_PACK_AMOUNTDOCTOR 10000 //prowizja dla lekarza
+#define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki (cywil)
+#define HOSPITALIZATION_COST 2000 //ile $$ zabieraæ od gracza po odczekaniu BW za hospitalizacje
 
 //end

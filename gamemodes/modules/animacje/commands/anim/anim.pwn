@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                 przedmioty                                                //
+//                                                    anim                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,34 +28,36 @@
 
 
 //-------<[ include ]>-------
-#include "przedmioty_impl.pwn"
+#include "anim_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_przedmioty()
+command_anim()
 {
-    new command = Command_GetID("przedmioty");
+    new command = Command_GetID("anim");
 
     //aliases
-    
+    Command_AddAlt(command, "anims");
+    Command_AddAlt(command, "animacje");
+    Command_AddAlt(command, "animhelp");
+    Command_AddAlt(command, "animshelp");
 
     //permissions
     Group_SetGlobalCommand(command, true);
     
 
     //prefix
-    
 }
 
 //-------<[ command ]>-------
-YCMD:przedmioty(playerid, params[], help)
+YCMD:anim(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Wyœwietla posiadane przedmioty premium.");
+        sendTipMessage(playerid, "Wyœwietla animacje.");
         return 1;
     }
     
     
     //command body
-    return command_przedmioty_Impl(playerid);
+    return command_anim_Impl(playerid);
 }

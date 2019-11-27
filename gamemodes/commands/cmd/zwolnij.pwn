@@ -54,6 +54,7 @@ YCMD:zwolnij(playerid, params[], help)
 				    {
 				        if(PlayerInfo[playerid][pLider] == PlayerInfo[para1][pMember])
 						{
+							//unfrakcja tu funkcje
 							GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
                             new liderid = PlayerInfo[playerid][pLider];

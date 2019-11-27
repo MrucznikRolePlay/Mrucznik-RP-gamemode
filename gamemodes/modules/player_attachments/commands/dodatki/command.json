@@ -1,12 +1,11 @@
 {
-    "name": "rap",
-    "description": "Wyœwietla animacjê rapowania.",
+    "name": "dodatki",
+    "description": "Wyœwietla posiadane przedmioty premium.",
     "permissions": [
         "everyone"
     ],
     "author": "Mrucznik",
     "aliases": [],
     "parameters": [],
-    "date": "11.06.2019",
-    "prefix": "@"
+    "date": "09.08.2019"
 }

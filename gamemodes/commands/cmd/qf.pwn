@@ -48,7 +48,7 @@ YCMD:qf(playerid, params[], help)
 			PlayerInfo[playerid][pRank] = 0;
             orgUnInvitePlayer(playerid);
 			MedicBill[playerid] = 0;
-			SetPlayerSpawn(playerid);
+			SetPlayerSpawnSkin(playerid);
 			UsunBron(playerid);
 			SetPVarInt(playerid, "mozeUsunacBronie", 0);
 			return 1;

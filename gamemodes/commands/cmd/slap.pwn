@@ -37,22 +37,19 @@ YCMD:slap(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
 		new playa;
-		if( sscanf(params, "k<fix>", playa))
+		if(sscanf(params, "k<fix>", playa))
 		{
-			sendTipMessage(playerid, "U¿yj /slap [playerid/CzêœæNicku]");
-			return 1;
+			return sendTipMessage(playerid, "U¿yj /slap [playerid/CzêœæNicku]");
 		}
 
-		new Float:shealth;
-		new Float:slx, Float:sly, Float:slz;
-
-		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2
-            || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || PlayerInfo[playerid][pZG] >= 2 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
 		        if(playa != INVALID_PLAYER_ID)
-		        {
+		        {			
+					new Float:shealth;
+					new Float:slx, Float:sly, Float:slz;
 			        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerHealth(playa, shealth);
