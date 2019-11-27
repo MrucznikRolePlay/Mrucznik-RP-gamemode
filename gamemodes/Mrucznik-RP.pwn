@@ -6777,6 +6777,7 @@ public OnPlayerText(playerid, text[])
 			sendTipMessage(playerid, "Nieprawid³owa d³ugoœæ znaków animacji"); 
 			return 0;
 		}
+		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) return 0;
         new lVal = MRP_DoAnimation(playerid, text);
         if(lVal != 1)
 		{
