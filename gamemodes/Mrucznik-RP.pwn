@@ -6181,7 +6181,7 @@ OnPlayerLogin(playerid, password[])
 	}
 
     //Konwersja pojazdów:
-    CONVERT_PlayerCar(playerid);
+    //CONVERT_PlayerCar(playerid);
 
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
