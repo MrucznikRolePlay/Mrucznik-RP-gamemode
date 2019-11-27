@@ -323,7 +323,6 @@
 #include "cmd/paliwo.pwn"
 #include "cmd/panel.pwn"
 #include "cmd/panelbasenu.pwn"
-//#include "cmd/paralizuj.pwn" //tazer
 #include "cmd/patrol.pwn"
 #include "cmd/pban.pwn"
 #include "cmd/pblok.pwn"
@@ -1015,8 +1014,6 @@ static Aliases()
 	Command_AddAltNamed("paliwo", "fuel");
 	Command_AddAltNamed("paliwo", "licznikpaliwa");
 
-	//paralizuj
-	//Command_AddAltNamed("paralizuj", "paraliz");
 	//personalizuj
 	Command_AddAltNamed("personalizuj", "personalizacja");
 	Command_AddAltNamed("personalizuj", "personalize");
