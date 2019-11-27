@@ -71,7 +71,7 @@ YCMD:pomoc2(playerid, params[], help)
     if(PlayerInfo[playerid][pMember] == 8||PlayerInfo[playerid][pLider] == 8){
     SendClientMessage(playerid,COLOR_GRAD5,"*** Hitman Agency *** /laptop /zmienskin /reklama /namierz"); }
     if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7){
-    SendClientMessage(playerid,COLOR_GRAD5,"*** GSA *** /ob /wywalzdmv /radio /family"); }
+    SendClientMessage(playerid,COLOR_GRAD5,"*** GSA *** /wywalzdmv /radio /family"); }
     if(PlayerInfo[playerid][pMember] == 15||PlayerInfo[playerid][pLider] == 15){
     SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /sprzedajneon /napraw /tankowanie /nitro /hydraulika /maluj /felga /zderzak");
     SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /kolory /malunki /felgi /sluzba");

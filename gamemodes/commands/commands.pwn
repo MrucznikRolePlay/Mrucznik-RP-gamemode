@@ -300,7 +300,6 @@
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
 #include "cmd/o.pwn"
-//#include "cmd/obezwladnij.pwn" // tazer
 #include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
@@ -985,9 +984,6 @@ static Aliases()
 
 	//o
 	Command_AddAltNamed("o", "ooc");
-
-	//obezwladnij
-	//Command_AddAltNamed("obezwladnij", "ob");
 
 	//ochrona
 	Command_AddAltNamed("ochrona", "guard");
