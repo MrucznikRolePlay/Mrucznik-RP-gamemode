@@ -69,7 +69,14 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 		{
 			format(gname, sizeof(gname), "%s", GunNames[starabron[playerid]]);
 		}
-		if(starabron[playerid] > 1) format(specNAME, sizeof(specNAME), "%s chowa %s i", specNAME, gname);
+		if(weaponid == starabron[playerid])
+		{
+			weaponid = PlayerInfo[playerid][pGun0];
+		}
+		else if(starabron[playerid] > 1)
+		{
+			format(specNAME, sizeof(specNAME), "%s chowa %s i", specNAME, gname);
+		}
 	}
 
 	MaTazer[playerid] = 0;

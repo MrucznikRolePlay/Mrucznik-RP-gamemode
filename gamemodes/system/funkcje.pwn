@@ -7416,7 +7416,7 @@ SendTeamMessage(team, color, string[], isDepo = 0)
 		}
 	}
 }
-SendTeamMessageOnDuty(team, color, string[], isDepo = 0)
+SendTeamMessageOnDuty(team, color, string[], bool:isBW = false)
 {
 	foreach(new i : Player)
 	{
@@ -7424,14 +7424,14 @@ SendTeamMessageOnDuty(team, color, string[], isDepo = 0)
 		{
 		    if((PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team) && (OnDuty[i] == 1 || JobDuty[i] == 1))
 		    {
-		    	if(isDepo == 1 && gMuteDepo[i] == 0) 
-                {
-                    SendClientMessage(i, color, string);
-                }
-              	if(isDepo == 0) {
+				if(isBW == true)
+				{
+					if(gBW[i] == 0) SendClientMessage(i, color, string);
+				}
+				else
+				{
               		SendClientMessage(i, color, string);
-              	}
-				//SendClientMessage(i, color, string);
+				}
 			}
 		}
 	}
@@ -12470,7 +12470,7 @@ ShowPlayerSentMessages(playerid, forplayerid)
 	}
 }
 
-w(result[])
+IsReasonAPursuitReason(result[])
 {
 	return (strfind(result, "ucieczka", true) != -1 || strfind(result, "poscig", true) != -1 || strfind(result, "poœcig", true) != -1 || strfind(result, "ucieka", true) != -1);
 }

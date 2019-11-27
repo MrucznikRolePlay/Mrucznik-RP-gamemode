@@ -410,7 +410,7 @@ public OnGameModeInit()
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
-	SetTimer("CheckChangeWeapon", 300, true);
+	SetTimer("CheckChangeWeapon", 450, true);
     SetTimer("RPGTimer", 100, true);
 	//Ustalanie wartoœci wind
 	levelLock[FRAC_SN][5]=1;//Zamkniête
@@ -2840,92 +2840,13 @@ SetPlayerSpawnSkin(playerid)
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
 		PlayerInfo[playerid][pSkin] = 136;
 	}
-	if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pUniform] > 0) {
+	if((JobDuty[playerid] == 1 || OnDuty[playerid] == 1) && PlayerInfo[playerid][pUniform] > 0) {
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
 	}
 	else
 	{
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	}
-  /*  if(PlayerInfo[playerid][pChar] > 0)
-		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
-
-    if(GetPlayerFraction(playerid) == FRAC_FBI && PlayerInfo[playerid][pTajniak] != 0)
-    {
-        if(PlayerInfo[playerid][pRank] < 4)
-            PlayerInfo[playerid][pTajniak] =0;
-		else
-		{
-		    switch(PlayerInfo[playerid][pTajniak])
-		    {
-				case 1:
-				{
-                    SetPlayerSkinEx(playerid, 107);
-				}
-				case 2:
-				{
-                    SetPlayerSkinEx(playerid, 104);
-				}
-				case 3:
-				{
-                    SetPlayerSkinEx(playerid, 124);
-				}
-				case 4:
-				{
-                    SetPlayerSkinEx(playerid, 123);
-				}
-				case 5:
-				{
-                    SetPlayerSkinEx(playerid, 108);
-				}
-				case 6:
-				{
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-				}
-			}
-			return 1;
-		}
-    }
-
-	if(PlayerInfo[playerid][pSkin] != 0)
-	{
-		if(GetPlayerFraction(playerid) != 0)
-		{
-			if(IsACop(playerid)  || GetPlayerFraction(playerid) == FRAC_ERS)
-			{
-				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-				else
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-			}
-			else if(GetPlayerFraction(playerid) == FRAC_SN)
-			{
-				if(SanDuty[playerid] == 1)
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-				else
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-			}
-			else
-            {
-				SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-                SetPVarInt(playerid, "skinF", 1);
-            }
-		}
-		else if(GetPlayerOrg(playerid) != 0)
-		{
- 			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-		}
-		else if(JobDuty[playerid] == 1)
-		{
-			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-		}
-	}
-    else
-	{
-		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-        SetPVarInt(playerid, "skinF", 0);
-	}*/
-
 	return 1;
 }
 

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                    bw                                                     //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-------------------------------------------------[ togbw ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,22 +16,35 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Creative
-// Data utworzenia: 18.11.2019
 
-//
+// Opis:
+/*
+	
+*/
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define INJURY_TIME 122 //czas trybu rannego
-#define INJURY_HP 30 //hp nadawane na tryb ranny i bw
-#define BW_TIME 202 //czas jak zostanie dobity
-#define BW_TIME_CRIMINAL 302 // czas jak zostanie dobity przez przestêpce
-#define MAX_HOSPITAL_BEDS 10
-#define MAX_HEALTH_PACKS 3 //maksymalna ilosc apteczek posiadanych przez gracza
-#define HEALTH_PACK_PRICE 40000 //cena apteczki
-#define HEALTH_PACK_AMOUNTDOCTOR 10000 //prowizja dla lekarza
-#define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki (cywil)
-#define HOSPITALIZATION_COST 2000 //ile $$ zabieraæ od gracza po odczekaniu BW za hospitalizacje
 
-//end
+// Notatki skryptera:
+/*
+	
+*/
+
+YCMD:togbw(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(IsAMedyk(playerid))
+        {
+			if (!gBW[playerid])
+			{
+				gBW[playerid] = 1;
+                MSGBOX_Show(playerid, "Raporty o BW ~r~OFF", MSGBOX_ICON_TYPE_OK);
+			}
+			else if (gBW[playerid])
+			{
+				gBW[playerid] = 0;
+                MSGBOX_Show(playerid, "Raporty o BW ~g~ON", MSGBOX_ICON_TYPE_OK);
+			}
+		}
+	}
+	return 1;
+}
