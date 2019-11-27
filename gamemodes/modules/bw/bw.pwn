@@ -100,7 +100,7 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	if(medicinformation)
 	{
 		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 70.0, (customtime * 1000));
-		if(vw == 0 && interior == 0) InfoMedicsInjury(playerid, true, false);
+		if((vw == 0 || vw == 60) && interior == 0) InfoMedicsInjury(playerid, true, false);
 	}
 	return 1;
 }
@@ -143,7 +143,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	if(medicinformation)
 	{
 		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 70.0, (customtime * 1000));
-		if(vw == 0 && interior == 0) InfoMedicsInjury(playerid, false, true);
+		if((vw == 0 || vw == 60) && interior == 0) InfoMedicsInjury(playerid, false, true);
 	}
 	return 1;
 }
@@ -184,7 +184,7 @@ ZespawnujGraczaBW(playerid)
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
 	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-	SetPlayerHealth(playerid, INJURY_HP); //tutaj wtf
+	SetPlayerHealth(playerid, INJURY_HP);
 	return 1;
 }
 //-----------------<[ Timery: ]>-------------------
