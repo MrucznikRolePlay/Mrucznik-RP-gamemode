@@ -29,6 +29,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 		PECET - dobry skrypter
 		LukeSqly - Niby coœ zacz¹³, ale wysz³o jak zwykle
 		Simeone - Kox przez x
+		Creative - mo¿liwe ¿e coœ potrafi
+		Sanda³ - skleci³ modu³ animacji
 
 */
 //----------------------------------------------------*------------------------------------------------------//
