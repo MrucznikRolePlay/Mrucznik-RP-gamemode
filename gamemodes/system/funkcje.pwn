@@ -7411,6 +7411,7 @@ SendTeamMessage(team, color, string[], isDepo = 0)
               	if(isDepo == 0) {
               		SendClientMessage(i, color, string);
               	}
+				//SendClientMessage(i, color, string);
 			}
 		}
 	}
@@ -7430,6 +7431,7 @@ SendTeamMessageOnDuty(team, color, string[], isDepo = 0)
               	if(isDepo == 0) {
               		SendClientMessage(i, color, string);
               	}
+				//SendClientMessage(i, color, string);
 			}
 		}
 	}
@@ -12465,6 +12467,33 @@ ShowPlayerSentMessages(playerid, forplayerid)
 		if(strlen(SentMessages[playerid][i])) {
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
 		}
+	}
+}
+
+IsReasonAPursuitReason(result[])
+{
+	return (strfind(result, "ucieczka", true) != -1 || strfind(result, "poscig", true) != -1 || strfind(result, "poœcig", true) != -1 || strfind(result, "ucieka", true) != -1);
+}
+
+PursuitMode(playerid, giveplayerid)
+{
+	if(ProxDetectorS(80.0, playerid, giveplayerid))
+	{
+		if(poscig[giveplayerid] != 1)
+		{
+			SendClientMessage(playerid,COLOR_LIGHTBLUE,"Rozpocz¹³eœ poœcig! Trwa on 7 minut.");
+			SendClientMessage(giveplayerid,COLOR_PANICRED,"|_________________Tryb Poœcigu_________________|");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"S³u¿by porz¹dkowe ruszy³y za tob¹ w poœcig! W takim wypadku najlepiej siê poddaæ!");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"W trybie poœcigu nie mozesz wyjœæ z gry, zgin¹æ oraz byæ AFK.");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"Z³amanie tych zasad skutkuje kar¹ nadawan¹ automatycznie.");
+			SendClientMessage(giveplayerid,COLOR_PANICRED,"|______________________________________________|");
+			poscig[giveplayerid] = 1;
+			SetTimerEx("PoscigTimer",7*60000,0,"d",giveplayerid);
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
 	}
 }
 

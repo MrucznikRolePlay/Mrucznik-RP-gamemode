@@ -79,27 +79,10 @@ YCMD:po(playerid, params[], help)
     						SetPlayerCriminal(giveplayerid,playerid, result);
     						format(string, sizeof(string), "%s ma teraz %d WL. Jest poszukiwany za: %s", giveplayer, PoziomPoszukiwania[giveplayerid], result);
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							if(strfind(result, "ucieczka", true) != -1 || strfind(result, "poscig", true) != -1 || strfind(result, "poœcig", true) != -1 || strfind(result, "ucieka", true) != -1)
+							
+							if(IsReasonAPursuitReason(result))
 							{
-								if(ProxDetectorS(80.0, playerid, giveplayerid))
-								{
-									if(poscig[giveplayerid] != 1)
-									{
-										SendClientMessage(playerid,COLOR_LIGHTBLUE,"Rozpocz¹³eœ poœcig! Trwa on 7 minut.");
-										SendClientMessage(giveplayerid,COLOR_PANICRED,"|_________________Tryb Poœcigu_________________|");
-										SendClientMessage(giveplayerid,COLOR_WHITE,"S³u¿by porz¹dkowe ruszy³y za tob¹ w poœcig! W takim wypadku najlepiej siê poddaæ!");
-										SendClientMessage(giveplayerid,COLOR_WHITE,"W trybie poœcigu nie mozesz wyjœæ z gry, zgin¹æ oraz byæ AFK.");
-										SendClientMessage(giveplayerid,COLOR_WHITE,"Z³amanie tych zasad skutkuje kar¹ nadawan¹ automatycznie.");
-										SendClientMessage(giveplayerid,COLOR_PANICRED,"|______________________________________________|");
-										poscig[giveplayerid] = 1;
-										SetTimerEx("PoscigTimer",7*60000,0,"d",giveplayerid);
-									}
-								}
-								else
-								{
-									sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
-									return 1;
-								}
+								PursuitMode(playerid, giveplayerid);
 							}
     						return 1;
     					}
