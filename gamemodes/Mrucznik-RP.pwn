@@ -6099,11 +6099,6 @@ OnPlayerLogin(playerid, password[])
 		dini_IntSet("Filtry.ini", "Liczba", 0);
 	}*/
 
-    if(PlayerInfo[playerid][pBW] == 60 || PlayerInfo[playerid][pBW] == 122 || PlayerInfo[playerid][pBW] == 123 || PlayerInfo[playerid][pBW] > 600)
-    {
-        PlayerInfo[playerid][pBW] = 0;
-    }
-
 	//Przywracanie Poziomu Poszukiwania
         //Punkty karne
     if (PlayerInfo[playerid][pWL] >= 10000)
@@ -6777,6 +6772,7 @@ public OnPlayerText(playerid, text[])
 			sendTipMessage(playerid, "Nieprawid³owa d³ugoœæ znaków animacji"); 
 			return 0;
 		}
+		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) return 0;
         new lVal = MRP_DoAnimation(playerid, text);
         if(lVal != 1)
 		{

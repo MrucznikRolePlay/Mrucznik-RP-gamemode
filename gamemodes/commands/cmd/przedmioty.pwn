@@ -32,6 +32,7 @@ YCMD:przedmioty(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1 && IsPlayerConnected(playerid))
     {
+		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) return 1;
 		new playerState = GetPlayerState(playerid);
 		if(playerState == 1)
 		{
