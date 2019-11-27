@@ -524,13 +524,6 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
-	//return 0; = strza³ nie zabiera hp
-    /*if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
-    {
-    	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
-		MaTazer[playerid] = 0;
-        return 0;
-	}*/
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) < 11 && hittype == 1)
     {
         new giveplayer[MAX_PLAYER_NAME];
@@ -554,12 +547,6 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
         TogglePlayerControllable(hitid, 0);
         return 0;
     }
-    /*else if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) > 10 && hittype == 1)
-    {
-        GameTextForPlayer(playerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
-        MaTazer[playerid] = 0;
-        return 0;
-    }*/
     return 1;
 }
 
@@ -1835,43 +1822,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 		DeletePVar(playerid, "IbizaBilet");
 		StopAudioStreamForPlayer(playerid); //POWTÓRKA
 	}
-
-    //Strefy
-    /*if(killerid != INVALID_PLAYER_ID)
-    {
-        new frac = GetPlayerFraction(killerid);
-
-        if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
-        {
-            new bool:inzone=false;
-            for(new i=0;i<MAX_ZONES;i++)
-            {
-                if(bInZone[playerid][i])
-                {
-                    if(bInZone[killerid][i])
-                    {
-                        inzone=true;
-                        break;
-                    }
-                }
-            }
-            if(inzone || GetSVarInt("BW_OnlyGangZones") == 1)
-            {
-                new Float:x, Float:y, Float:z, pZone[MAX_ZONE_NAME];
-				GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
-                GetPlayerPos(playerid, x, y, z);
-                PlayerInfo[playerid][pBW] = GetSVarInt("BW_Time");
-                SetSpawnInfo(playerid, 0, GetPlayerSkin(playerid), x, y, z, 0.0, 0, 0, 0, 0, 0, 0);
-                SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
-                SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
-                SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-				SendFamilyMessage(4, COLOR_ALLDEPT, "Centrala: Do wszystkich jednostek!");
-				SendFamilyMessage(4, COLOR_ALLDEPT, "Centrala: Otrzymano zg³oszenie: nieprzytomna osoba, chyba oddycha... Bojê siê! PrzyjedŸcie tu!");
-				format(string, sizeof(string), "Centrala: Lokalizacja zg³oszenia: %s", pZone);
-				SendFamilyMessage(4, COLOR_ALLDEPT, string);
-            }
-		}
-    }*/
 
 
 	if(IsPlayerConnected(playerid) && playerid != INVALID_PLAYER_ID)
