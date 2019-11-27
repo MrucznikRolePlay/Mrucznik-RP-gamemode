@@ -2277,6 +2277,7 @@ public JednaSekundaTimer()
 					SetPlayerPosEx(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
+					PlayerKilledByAdmin[i] = 1;
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);

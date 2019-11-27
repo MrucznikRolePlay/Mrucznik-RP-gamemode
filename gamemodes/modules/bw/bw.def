@@ -25,7 +25,7 @@
 //------------------<[ Define: ]>-------------------
 #define INJURY_TIME 122 //czas trybu rannego
 #define INJURY_HP 30 //hp nadawane na tryb ranny i bw
-#define BW_TIME 242 //czas jak zostanie dobity
+#define BW_TIME 202 //czas jak zostanie dobity
 #define BW_TIME_CRIMINAL 302 // czas jak zostanie dobity przez przestêpce
 #define MAX_HOSPITAL_BEDS 10
 #define MAX_HEALTH_PACKS 2 //maksymalna ilosc apteczek posiadanych przez gracza

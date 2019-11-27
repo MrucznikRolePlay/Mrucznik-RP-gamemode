@@ -51,7 +51,7 @@ YCMD:apteczka(playerid, params[], help)
 	GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 	GetPlayerName(playerid, sendername, sizeof(sendername));
 
-	if(GetDistanceBetweenPlayers(playerid,playa) > 2)
+	if(GetDistanceBetweenPlayers(playerid,playa) > 5)
 	{
 		format(string, sizeof(string),"Jesteœ zbyt daleko od gracza %s", giveplayer);
 		return SendClientMessage(playerid, COLOR_GRAD1, string);

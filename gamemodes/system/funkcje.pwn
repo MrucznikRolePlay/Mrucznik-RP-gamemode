@@ -12470,7 +12470,7 @@ ShowPlayerSentMessages(playerid, forplayerid)
 	}
 }
 
-IsReasonAPursuitReason(result[])
+w(result[])
 {
 	return (strfind(result, "ucieczka", true) != -1 || strfind(result, "poscig", true) != -1 || strfind(result, "poœcig", true) != -1 || strfind(result, "ucieka", true) != -1);
 }

@@ -166,7 +166,7 @@ main()
 	print("\n----------------------------------");
 	print("M | --- Mrucznik Role Play --- | M");
 	print("R | ---        ****        --- | R");
-	print("U | ---        v2.5        --- | U");
+	print("U | ---        v2.6        --- | U");
 	print("C | ---        ****        --- | C");
 	print("Z | ---    by Mrucznik     --- | Z");
 	print("N | ---                    --- | N");
@@ -410,7 +410,7 @@ public OnGameModeInit()
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
-	SetTimer("CheckChangeWeapon", 250, true);
+	SetTimer("CheckChangeWeapon", 300, true);
     SetTimer("RPGTimer", 100, true);
 	//Ustalanie wartoœci wind
 	levelLock[FRAC_SN][5]=1;//Zamkniête
