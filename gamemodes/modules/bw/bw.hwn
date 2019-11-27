@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ fdaj ]-------------------------------------------------//
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                    bw                                                     //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,45 +16,25 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Creative
+// Data utworzenia: 18.11.2019
 
-// Opis:
-/*
-	
-*/
+//
 
+//-----------------<[ Zmienne: ]>-------------------
+new Float:HospitalBeds[MAX_HOSPITAL_BEDS][4] = {
+    {1133.1757,-1338.0609,120.9200,5.1879},
+    {1136.1616,-1337.9380,120.9200,0.2594},
+    {1138.9819,-1337.7688,120.9200,356.5360},
+    {1144.6099,-1337.9653,120.9200,2.3146},
+    {1141.9595,-1338.1320,120.9200,1.2493},
+    {1145.7433,-1340.9781,120.9200,181.1202},
+    {1142.8413,-1340.7529,120.9200,183.2509},
+    {1139.8573,-1340.7188,120.9200,181.0341},
+    {1136.8865,-1340.8624,120.9200,179.6136},
+    {1134.0631,-1340.5845,120.9200,181.3892} 
+};
+//------------------<[ Enumy: ]>--------------------
+//------------------<[ Forwardy: ]>--------------------
 
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:fdaj(playerid, params[], help)
-{
-	new string[256];
-    if(PlayerInfo[playerid][pAdmin] >=10 || IsAScripter(playerid))
-	{
-	    new giveplayerid, level;
-		if( sscanf(params, "k<fix>d", giveplayerid, level))
-		{
-			sendTipMessage(playerid, "U¿yj /fdaj [id gracza] [id stylu]");
-			return 1;
-		}
-
-		if(level == 4 || level == 5 || level == 6 || level == 7 || level == 15 || level == 16)
-		{
-			if(PlayerInfo[playerid][pLevel] >= 1)
-			{
-				SetPlayerFightingStyle(playerid, level);
-				format(string, sizeof(string), "Administrator %s ustawi³ Ci styl walki na %d", GetNick(playerid), level); 
-				sendTipMessageEx(giveplayerid, COLOR_P@, string); 
-				format(string, sizeof(string), "Ustawi³eœ styl walki dla %s na %d", GetNick(giveplayerid), level);
-				sendTipMessageEx(playerid, COLOR_P@, string); 
-			}
-		}
-		else
-		{
-			return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Dostêpne style walk:\n\n4 - FIGHT_STYLE_NORMAL\n5 - FIGHT_STYLE_BOXING\n6 - FIGHT_STYLE_KUNGFU\n7 - FIGHT_STYLE_KNEEHEAD\n15 - FIGHT_STYLE_GRABKICK\n16 - FIGHT_STYLE_ELBOW"); 
-		}
-	}
-	return 1;
-}
+//end

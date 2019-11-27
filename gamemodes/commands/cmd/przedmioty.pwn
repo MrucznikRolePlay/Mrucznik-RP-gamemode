@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ uleczmnie ]-----------------------------------------------//
+//-----------------------------------------------[ przedmioty ]----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -25,47 +25,42 @@
 
 // Notatki skryptera:
 /*
-	
+	Zal¹¿ek systemu przedmiotów, na razie w formie systemu broni
 */
 
-YCMD:uleczmnie(playerid, params[], help)
+YCMD:przedmioty(playerid, params[], help)
 {
-	new string[128];
-
-    if(IsPlayerConnected(playerid))
-   	{
-        if (PlayerToPoint(3, playerid,1173.2563,-1323.3102,15.3943)||PlayerToPoint(3, playerid,2029.5945,-1404.6426,17.2512))
+    if(gPlayerLogged[playerid] == 1 && IsPlayerConnected(playerid))
+    {
+		new playerState = GetPlayerState(playerid);
+		if(playerState == 1)
 		{
-            if(STDPlayer[playerid] > 0)
-            {
-                if(PlayerInfo[playerid][pPainPerk] >= 1)
+			new option[128], itemexist, weaponid, ammo;
+			if(!sscanf(params, "s[128]", option)) { //jesli wpisal string (/p [BRON])
+				itemexist = 0;
+				for (new i = 0; i <= 12; i++)
 				{
-				    new painpreking = PlayerInfo[playerid][pPainPerk]*300;
-				    new placenie = 1000-painpreking;
-					STDPlayer[playerid] = 0;
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ zdrowy dziêki szpitalnej pomocy !");
-					ZabierzKase(playerid, placenie);
-					format(string, sizeof(string), "Doktor: Koszt pobytu w szpitalu wynosi $%d,-. Mi³ego dnia!", placenie);
-					SendClientMessage(playerid, TEAM_CYAN_COLOR, string);
+					GetPlayerWeaponData(playerid, i, weaponid, ammo);
+					if(ammo > 0)
+					{
+						if(weaponid == 24 && (strfind("Paralizator", option, true) != -1 || strfind("Tazer", option, true) != -1) && (IsACop(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
+						{
+							itemexist = 24;
+						}
+						else if(strfind(GunNames[weaponid], option, true) != -1) 
+						{
+							itemexist = weaponid;
+							//wyciagniecie broni
+						}
+					}
 				}
-				else
- 				{
- 				    STDPlayer[playerid] = 0;
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ zdrowy dziêki szpitalnej pomocy !");
-					ZabierzKase(playerid, 1000);
-					SendClientMessage(playerid, TEAM_CYAN_COLOR, "Doktor: Koszt pobytu w szpitalu wynosi $1000,-. Mi³ego dnia!");
-				}
+				return (itemexist == 0) ? PokazDialogBronie(playerid) : PrzedmiotyZmienBron(playerid, itemexist);
 			}
-			else
+			else //domyœlne gui
 			{
-			    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ chory, nie potrzebujesz leczenia !");
-			    return 1;
+				return PokazDialogBronie(playerid);
 			}
-        }
-        else
-        {
-            sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w szpitalu !");
-        }
-    }
+		}
+	}
 	return 1;
 }

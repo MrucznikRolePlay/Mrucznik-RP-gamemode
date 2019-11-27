@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ wtazer ]------------------------------------------------//
+//--------------------------------------------[ sprzedajapteczka ]-------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,29 +28,22 @@
 	
 */
 
-YCMD:wtazer(playerid, params[], help)
+YCMD:sprzedajapteczke(playerid, params[], help)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
-    {
-        if(IsACop(playerid) || IsABOR(playerid) )
-    	{
-    	    if(OnDuty[playerid] != 0)
-    	    {
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "* %s wyci¹ga paralizator z kabury i w³¹cza.", sendername);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				SetPlayerAttachedObject(playerid, 9,18642, 6, 0.09, 0.05, 0.05, 0, 180, 90, 1.5, 1.5, 1.5);//paralizator
-                SetPVarInt(playerid, "tazer", 1);
-			}
-			else
-			{
-			    sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie !");
-			}
-		}
-		return 1;
+	if(GetPlayerFraction(playerid) == FRAC_ERS)
+	{
+		new id;
+		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /sprzedajapteczka [id]");
+		if(!IsPlayerConnected(id) ) return sendErrorMessage(playerid, "Ten gracz nie jest zalogowanay");
+		new Float:x, Float:y, Float:z, tmp[128];
+		GetPlayerPos(id, x, y, z);
+		if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
+		if(PlayerInfo[id][pHealthPacks] >= MAX_HEALTH_PACKS) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz posiada maksymaln¹ iloœæ apteczek");
+		format(tmp, sizeof tmp, "Proponujesz %s kupno apteczki za %d$", GetNick(id), HEALTH_PACK_PRICE);
+		SendClientMessage(playerid, -1, tmp);
+		format(tmp, sizeof tmp, "Lekarz %s proponuje Ci kupno apteczki za %d$", GetNick(playerid), HEALTH_PACK_PRICE);
+		SetPVarInt(id, "HealthPackOffer", playerid);
+		ShowPlayerDialogEx(id, D_ERS_SPRZEDAZ_APTECZKI, DIALOG_STYLE_MSGBOX, "SAM-ERS", tmp, "Kup", "Anuluj");
 	}
 	return 1;
 }

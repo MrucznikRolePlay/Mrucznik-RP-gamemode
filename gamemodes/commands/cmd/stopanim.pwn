@@ -36,6 +36,10 @@ YCMD:stopanim(playerid, params[], help)
 		GetPlayerVelocity(playerid, Velocity[0], Velocity[1], Velocity[2]);
         if( (!IsPlayerInAnyVehicle(playerid) && Velocity[2] == 0) && (!IsPlayerCarryingBox(playerid)))
         {
+			if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0)
+			{
+				return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz zatrzymaæ animacji.");
+			}
 	        ClearAnimations(playerid);
 	        SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
 	    }

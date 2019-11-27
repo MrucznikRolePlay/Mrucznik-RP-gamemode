@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ stazer ]------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 dodatki                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,41 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "dodatki_impl.pwn"
 
-YCMD:stazer(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_dodatki()
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
+    new command = Command_GetID("dodatki");
 
-    if(IsPlayerConnected(playerid))
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:dodatki(playerid, params[], help)
+{
+    if (help)
     {
-        if(IsACop(playerid) || IsABOR(playerid))
-    	{
-    	    if(OnDuty[playerid] != 0 && GetPVarInt(playerid, "tazer") == 1)
-    	    {
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", sendername);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				RemovePlayerAttachedObject(playerid,9);
-                SetPVarInt(playerid, "tazer", 0);
-			}
-			else
-			{
-			    sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie!");
-			}
-		}
-		return 1;
-	}
-	return 1;
+        sendTipMessage(playerid, "Wyœwietla posiadane przedmioty premium.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_dodatki_Impl(playerid);
 }

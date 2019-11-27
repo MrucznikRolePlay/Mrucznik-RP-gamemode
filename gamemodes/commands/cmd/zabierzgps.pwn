@@ -40,7 +40,7 @@ YCMD:zabierzgps(playerid, params[], help)
         }
 
         new string[144];
-        if(GetDistanceBetweenPlayers(playerid, para1) < 4 && PlayerInfo[para1][pBW] > 0)
+        if(GetDistanceBetweenPlayers(playerid, para1) < 4 && (PlayerInfo[para1][pBW] > 0 || PlayerInfo[para1][pInjury] > 0))
         {
             if(PDGPS == para1)
             {

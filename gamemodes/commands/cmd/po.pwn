@@ -79,6 +79,11 @@ YCMD:po(playerid, params[], help)
     						SetPlayerCriminal(giveplayerid,playerid, result);
     						format(string, sizeof(string), "%s ma teraz %d WL. Jest poszukiwany za: %s", giveplayer, PoziomPoszukiwania[giveplayerid], result);
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+							
+							if(IsReasonAPursuitReason(result))
+							{
+								PursuitMode(playerid, giveplayerid);
+							}
     						return 1;
     					}
     					else

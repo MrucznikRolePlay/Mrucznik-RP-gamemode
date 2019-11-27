@@ -46,7 +46,7 @@ YCMD:wrzuc(playerid, params[], help)
     	if (IsPlayerInAnyVehicle(person))
     	return sendTipMessage(playerid, "Gracz nie mo¿e znajdowaæ siê w pojeŸdzie.");
 
-    	if(pobity[person] >= 1 || PlayerInfo[person][pBW] > 0)
+    	if(pobity[person] >= 1 || PlayerInfo[person][pBW] > 0 || PlayerInfo[person][pInjury] > 0)
         {
     		if (GetDistanceBetweenPlayers(playerid,person) > 5) return sendErrorMessage(playerid, "Gracz nie jest w pobli¿u.");
 

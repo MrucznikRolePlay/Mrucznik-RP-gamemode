@@ -1,6 +1,9 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
 
+new SentMessagesIndex[MAX_PLAYERS] = 0;
+new SentMessages[MAX_PLAYERS][MAX_SENT_MESSAGES][144];
+
 new ServerSecret[MAX_SERVER_SECRET_LENGTH];
 
 new prawoJazdyLosowanie[9];
@@ -721,6 +724,9 @@ new Condom[MAX_PLAYERS];
 new STDPlayer[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
+//BW
+new PlayerRequestMedic[MAX_PLAYERS];
+new PlayerKilledByAdmin[MAX_PLAYERS];
 
 //---------------
 new RepairOffer[MAX_PLAYERS];
@@ -1052,6 +1058,8 @@ new AllLeaders;
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
 
+//new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
+
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1292,11 +1300,16 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pPiwo] = 0;
 	PlayerInfo[playerid][pCygaro] = 0;
 	PlayerInfo[playerid][pSprunk] = 0;
-	PlayerInfo[playerid][pPodPW] = 0;
 	PlayerInfo[playerid][pStylWalki] = 0;
 	PlayerInfo[playerid][pNewAP] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
+	//Creative
+	PlayerInfo[playerid][pInjury] = 0;
+	PlayerRequestMedic[playerid] = 0;
+	PlayerKilledByAdmin[playerid] = 0;
+	PlayerInfo[playerid][pHealthPacks] = 0;
+
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;

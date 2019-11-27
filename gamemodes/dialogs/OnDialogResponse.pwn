@@ -15,7 +15,7 @@ CheckDialogId(playerid, dialogid)
     if(dialogid < 0) return 0;
     if(dialogid != iddialog[playerid])
     {
-        if(dialogid == D_ANIMLIST || dialogid > 10000 && dialogid < 10100) return 0;
+        if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B≥Ídne ID GUI.");
         Log(serverLog, WARNING, "B≥Ídne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
@@ -492,7 +492,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
-				PlayAudioStreamForPlayer(playerid, "http://radyjko.tk/stacja.pls?id=32 ");
+				PlayAudioStreamForPlayer(playerid, "https://waw01-03.ic.smcdn.pl/t092-1.mp3");
 				return 1;
 			}
 			case 7:
@@ -1105,7 +1105,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         else if(listitem == 1)
         {
-            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ª Sprawdzanie statystyk gracza", "Wprowadü nick gracza:                    ", "Sprawdü", "Wyjdü");
+            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ª Sprawdzanie statystyk gracza", "Wprowadü nick_gracza lub UID konta:                    ", "Sprawdü", "Wyjdü");
         }
     }
     else if(dialogid == D_PANEL_CHECKPLAYER)
@@ -1114,7 +1114,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(strlen(inputtext) < 1 || strlen(inputtext) > MAX_PLAYER_NAME)
         {
             SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc!");
-            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ª Sprawdzanie statystyk gracza", "Wprowadü nick gracza:                    ", "Sprawdü", "Wyjdü");
+            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ª Sprawdzanie statystyk gracza", "Wprowadü nick_gracza lub UID konta:                    ", "Sprawdü", "Wyjdü");
             return 0;
         }
 		MruMySQL_PobierzStatystyki(playerid, inputtext);
@@ -1415,7 +1415,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 1://Recepcja
 				{
 					SetPlayerVirtualWorld(playerid, 41);
-					SetPlayerPos(playerid, 1526.7426,-1469.4413,23.0778);
+					SetPlayerPos(playerid, 1529.8018,-1489.0046,16.5134);
 				}
 				case 2://Sala treningowa
 				{
@@ -1436,6 +1436,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					SetPlayerVirtualWorld(playerid, 44);
 					SetPlayerPos(playerid, 1544.1202,-1466.9008,42.8386);
+				}
+				case 6://Dach
+				{
+					SetPlayerVirtualWorld(playerid, 0);
+					SetPlayerPos(playerid, 1542.1123,-1467.8416,63.8593);
 				}
 			}
 		}
@@ -1474,7 +1479,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 5:
 				{
-					ElevatorTravel(playerid,1158.6868,-1339.4423,120.2738,90,90.0);//p
+					ElevatorTravel(playerid,1158.6868,-1339.4423,120.2738,90,90.0);//p4
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
 				case 6:
@@ -13735,6 +13740,183 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DeletePVar(playerid, "IbizaDrink");
 		return 1;
 	}
+	if(dialogid == D_ERS_SPRZEDAZ_APTECZKI)
+	{
+		new string[128];
+		new id = GetPVarInt(playerid, "HealthPackOffer");
+		if(response)
+		{
+			new hajs = kaska[playerid];
+			if(hajs < HEALTH_PACK_PRICE)
+			{
+				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
+				return SendClientMessage(playerid, -1, "Nie masz wystarczajπcej iloúci pieniÍdzy");
+			}
+			else
+			{
+				format(string, sizeof string, "%s kupi≥ od Ciebie apteczkÍ. Otrzymujesz %d$ prowizji.", PlayerName(playerid), HEALTH_PACK_AMOUNTDOCTOR);
+				SendClientMessage(id, 0x0080D0FF, string);
+				format(string, sizeof string, "Kupi≥eú apteczkÍ od Lekarza za %d$", (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
+				SendClientMessage(playerid, 0x00FF00FF, string);
+				format(string, sizeof string, "[ERS] Lekarz %s sprzeda≥ apteczkÍ! Na konto frakcji wp≥ywa %d$", PlayerName(id), HEALTH_PACK_PRICE);
+        		SendFamilyMessage(4, COLOR_GREEN, string);
+				ZabierzKase(playerid, (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
+				DajKase(id, HEALTH_PACK_AMOUNTDOCTOR);
+        		Sejf_Add(FRAC_ERS, HEALTH_PACK_PRICE);
+				PlayerInfo[playerid][pHealthPacks]++;
+			}
+		}
+		else
+		{
+			format(string, sizeof string, "Gracz %s nie zgodzi≥ siÍ na kupno apteczki.", PlayerName(playerid));
+			SendClientMessage(id, 0xFF0030FF, string);
+		}
+		DeletePVar(playerid, "HealthPackOffer");
+		return 1;
+	}
+	if(dialogid == D_UZYCIE_APTECZKI)
+	{
+		new string[144];
+		new id = GetPVarInt(playerid, "HealthPackOffer");
+		if(response)
+		{
+			if(PlayerInfo[id][pHealthPacks] < 1) return SendClientMessage(id, 0xFF0030FF, "Gracz nie posiada juø apteczek by udzieliÊ Ci pomocy.");
+			if(PlayerInfo[playerid][pBW] > 0) return SendClientMessage(playerid, 0xFF0030FF, "Jesteú ciÍøko ranny, takie obraøenia moøe opatrzyÊ tylko lekarz! (/wezwij medyk)");
+			if(GetDistanceBetweenPlayers(playerid,id) > 3) return SendClientMessage(playerid, 0xFF0030FF, "Udzielajπcy pomocy jest zbyt daleko");
+
+			format(string, sizeof(string),"* Udzielono pomocy medycznej %s i opatrzono rany.", GetNick(playerid));
+			SendClientMessage(id, COLOR_WHITE, string);
+			format(string, sizeof(string),"* %s wyciπga apteczkÍ, bandaøuje obraøenia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
+			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			PlayerInfo[id][pHealthPacks]--;
+			ZdejmijBW(playerid, 5000);
+			SetPlayerHealth(playerid, HEALTH_PACK_HP);
+		}
+		else
+		{
+			format(string, sizeof string, "Gracz %s nie zgodzi≥ siÍ na udzielenie pomocy medycznej.", PlayerName(playerid));
+			SendClientMessage(id, 0xFF0030FF, string);
+		}
+		DeletePVar(playerid, "HealthPackOffer");
+		return 1;
+	}
+	if(dialogid == D_PRZEDMIOTY_BRONIE)
+	{
+		if(response)
+		{
+			GUIExit[playerid] = 0;
+			new weaponid = DynamicGui_GetDataInt(playerid, listitem);
+			new weapondata = DynamicGui_GetValue(playerid, listitem);
+			if(weaponid == starabron[playerid])
+			{
+				weaponid = PlayerInfo[playerid][pGun0];
+			}
+			/*new string[144];
+			format(string, sizeof(string), "* %s wybra≥ broÒ w GUI (opcja %d) ID broni: %d [%s]", GetNick(playerid), listitem, weaponid, GunNames[weaponid]);
+			SendClientMessageToAll(COLOR_WHITE, string);*/
+			return PrzedmiotyZmienBron(playerid, weaponid, weapondata);
+		}
+		else
+		{
+			GUIExit[playerid] = 0;
+			return 1;
+		}
+	}
+	if(dialogid == 15621)
+	{
+		if(!response)
+		{
+			return 1;
+		}
+		
+		switch(listitem)
+		{
+		    case 0: MRP_DoAnimation(playerid,"@bar1");
+		    case 1: MRP_DoAnimation(playerid,"@caluj1");
+		    case 2: MRP_DoAnimation(playerid,"@car1");
+		    case 3: MRP_DoAnimation(playerid,"@colt1");
+		    case 4: MRP_DoAnimation(playerid,"@crack1");
+		    case 5: MRP_DoAnimation(playerid,"@dance1");
+			case 6: MRP_DoAnimation(playerid,"@diler1");
+			case 7: MRP_DoAnimation(playerid,"@idz1");
+			case 8: MRP_DoAnimation(playerid,"@klepnij1");
+			case 9: MRP_DoAnimation(playerid,"@krzeslo1");
+
+			case 10: MRP_DoAnimation(playerid,"@lez1");
+			case 11: MRP_DoAnimation(playerid,"@lokiec1");
+		    case 12: MRP_DoAnimation(playerid,"@lowrider1");
+		    case 13: MRP_DoAnimation(playerid,"@nies1");
+		    case 14: MRP_DoAnimation(playerid,"@papieros1");
+		    case 15: MRP_DoAnimation(playerid,"@placz1");
+			case 16: MRP_DoAnimation(playerid,"@ranny1");
+			case 17: MRP_DoAnimation(playerid,"@rap1");
+			case 18: MRP_DoAnimation(playerid,"@rozmowa1");
+			case 19: MRP_DoAnimation(playerid,"@sex1");
+
+			case 20: MRP_DoAnimation(playerid,"@sklep1");
+   			case 21: MRP_DoAnimation(playerid,"@smierc1");
+		    case 22: MRP_DoAnimation(playerid,"@spij1");
+		    case 23: MRP_DoAnimation(playerid,"@spray1");
+		    case 24: MRP_DoAnimation(playerid,"@stack1");
+		    case 25: MRP_DoAnimation(playerid,"@strip1");
+			case 26: MRP_DoAnimation(playerid,"@wygralem1");
+			case 27: MRP_DoAnimation(playerid,"@yo1");
+			case 28: MRP_DoAnimation(playerid,"@bomba1"); //
+			case 29: MRP_DoAnimation(playerid,"@box1");
+
+		    case 30: MRP_DoAnimation(playerid,"@celuj1");
+       		case 31: MRP_DoAnimation(playerid,"@celujkarabin1");
+		    case 32: MRP_DoAnimation(playerid,"@crack1");
+		    case 33: MRP_DoAnimation(playerid,"@czas1");
+		    case 34: MRP_DoAnimation(playerid,"@dodge1");
+		    case 35: MRP_DoAnimation(playerid,"@doping1");
+			case 36: MRP_DoAnimation(playerid,"@drap1");
+			case 37: MRP_DoAnimation(playerid,"@dzieki1");
+			case 38: MRP_DoAnimation(playerid,"@fuck1");
+			case 39: MRP_DoAnimation(playerid,"@greet1");
+
+		    case 40: MRP_DoAnimation(playerid,"@hitch1");
+		    case 41: MRP_DoAnimation(playerid,"@joint1");
+		    case 42: MRP_DoAnimation(playerid,"@karta1");
+		    case 43: MRP_DoAnimation(playerid,"@komputer1");
+		    case 44: MRP_DoAnimation(playerid,"@kozak1");
+		    case 45: MRP_DoAnimation(playerid,"@kungfu1");
+			case 46: MRP_DoAnimation(playerid,"@machaj1");
+			case 47: MRP_DoAnimation(playerid,"@maska1");
+			case 48: MRP_DoAnimation(playerid,"@medyk1");
+			case 49: MRP_DoAnimation(playerid,"@napad1");
+
+		    case 50: MRP_DoAnimation(playerid,"@nie1");
+		    case 51: MRP_DoAnimation(playerid,"@odbierz1");
+		    case 52: MRP_DoAnimation(playerid,"@odloz1");
+		    case 53: MRP_DoAnimation(playerid,"@oh1");
+		    case 54: MRP_DoAnimation(playerid,"@opieraj1");
+		    case 55: MRP_DoAnimation(playerid,"@pa1");
+			case 56: MRP_DoAnimation(playerid,"@pij1");
+			case 57: MRP_DoAnimation(playerid,"@placz1");
+			case 58: MRP_DoAnimation(playerid,"@przeladuj1");
+			case 59: MRP_DoAnimation(playerid,"@ramiona1");
+
+			case 60: MRP_DoAnimation(playerid,"@rozciagaj1");
+			case 61: MRP_DoAnimation(playerid,"@rozlacz1");
+		    case 62: MRP_DoAnimation(playerid,"@siad1");
+		    case 63: MRP_DoAnimation(playerid,"@sikaj1");
+		    case 64: MRP_DoAnimation(playerid,"@smiech1");
+		    case 65: MRP_DoAnimation(playerid,"@stoj1");
+			case 66: MRP_DoAnimation(playerid,"@tak1");
+			case 67: MRP_DoAnimation(playerid,"@waledochodze1");
+			case 68: MRP_DoAnimation(playerid,"@walekonia1");
+			case 69: MRP_DoAnimation(playerid,"@wolaj1");
+
+			case 70: MRP_DoAnimation(playerid,"@wozszlug1");
+   			case 71: MRP_DoAnimation(playerid,"@wstan1");
+		    case 72: MRP_DoAnimation(playerid,"@wtf1");
+		    case 73: MRP_DoAnimation(playerid,"@wymiotuj1");
+		    case 74: MRP_DoAnimation(playerid,"@zarcie1");
+		    case 75: MRP_DoAnimation(playerid,"@zmeczony1");
+		}
+		return 1;
+	}
     if(dialogid == DIALOG_ELEVATOR_SAD)
     {
         if(response)
@@ -16212,6 +16394,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						togADMTXD[playerid] =0; 
 						sendTipMessage(playerid, "W≥πczy≥eú textdrawy kar"); 
 						PlayerPersonalization[playerid][PERS_KARYTXD]=0;
+					}
+				}
+				case 3:
+				{
+					if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 0)
+					{
+						sendTipMessage(playerid, "Wy≥πczy≥eú auto-gui po zmianie broni");
+						PlayerPersonalization[playerid][PERS_GUNSCROLL] = 1;
+					}
+					else if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 1)
+					{
+						sendTipMessage(playerid, "W≥πczy≥eú auto-gui po zmianie broni");
+						PlayerPersonalization[playerid][PERS_GUNSCROLL] = 0;
 					}
 				}
 

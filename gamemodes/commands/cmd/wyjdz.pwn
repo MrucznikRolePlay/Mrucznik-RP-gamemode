@@ -39,6 +39,13 @@ YCMD:wyjdz(playerid, params[], help)
 		if(SprawdzWejscia(playerid))
 			return 1;
 		
+		else if(IsPlayerInRangeOfPoint(playerid,5,648.9127, -1367.4266, 29.2878))//stare SAN - recepcja san news wyjscie
+        {
+			SetPlayerPosEx(playerid, 648.4412, -1357.3232, 13.8579);
+            SetPlayerVirtualWorld(playerid,0);
+            TogglePlayerControllable(playerid,0);
+            Wchodzenie(playerid);
+        }
 		else if(IsPlayerInRangeOfPoint(playerid,4,1568.6449, -1689.6379, 6.1932) && IsACop(playerid)//parking LSPD
 		|| IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
 		|| IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan
@@ -385,8 +392,9 @@ YCMD:wyjdz(playerid, params[], help)
 		}
 		else
 		{
-			Wyjdz(playerid, 738.5865, -1427.7610, 23.5927, 738.8545, -1428.7880, 13.5927, 5.0, "~w~Zapraszamy ponownie!"); //wyjœcie jetty
-		    Wyjdz(playerid, 1285.5999755859,-981.79998779297,32.700000762939, 1300.0999755859,-1094.5999755859,5972.2001953125, 5.0);//int z flagami
+			Wyjdz(playerid, 738.5865, -1427.7610, 23.5927, 738.8545, -1428.7880, 13.5927, 5.0, "~w~Zapraszamy ponownie!"); //wyjœcie jetty przy ulicy
+			Wyjdz(playerid, 734.0619, -1451.6720, 22.5920, 725.6371, -1440.3321, 13.5360, 5.0, "~w~Zapraszamy ponownie!"); //wyjœcie jetty pod schodami	
+			Wyjdz(playerid, 1285.5999755859,-981.79998779297,32.700000762939, 1300.0999755859,-1094.5999755859,5972.2001953125, 5.0);//int z flagami
 		    Wyjdz(playerid, 1302.8000488281,-988.20001220703,38.299999237061, 1301.8000488281,-1083.9000244141,5972.2001953125, 5.0);//g³ówne wejœcie
 		    Wyjdz(playerid, -1716.1999511719,1018.200012207,17.60000038147, -1825.4000244141,1151.6999511719,6803.2998046875, 5.0);//WEJSCIE DO KRYJOWKI
 		    Wyjdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1

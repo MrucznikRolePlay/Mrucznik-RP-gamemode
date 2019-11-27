@@ -804,7 +804,7 @@ new GunNames[47][] = {
 	"Spadochron"//46
 };
 
-new NiggaNames[9][] = {
+new DeathNames[9][] = {
     "Spadochron",
 	"Fake Pistol",//47
 	"???",//48
@@ -1402,7 +1402,6 @@ enum pInfo
  	pPiwo,
  	pCygaro,
  	pSprunk,
- 	pPodPW,
  	pStylWalki,
  	pNewAP,
  	pZG,
@@ -1416,6 +1415,8 @@ enum pInfo
  	pKluczeAuta,
   	pSpawn,
  	pBW,
+	pInjury,
+	pHealthPacks,
  	pNatrasiejest,
 	pDrzwibusazamkniete,
 	pPrawojazdypytania[3],
@@ -1472,7 +1473,8 @@ enum pPInfo
 	WARNDEATH,//Warningi o œmierciach
 	PERS_KARYTXD,//Wyœwietlanie kar w TXD
 	PERS_NEWNICK,//Nowe nicki w 3dtextach
-	PERS_NEWBIE//Wyœwietlanie chatu newbie
+	PERS_NEWBIE,//Wyœwietlanie chatu newbie
+	PERS_GUNSCROLL//Wyœwietlanie GUI z broñ
 };
 new PlayerPersonalization[MAX_PLAYERS][pPInfo];
 enum pHaul
@@ -1637,7 +1639,7 @@ enum pCrime
 {
 	pBplayer[32],
 	pAccusing[32],
-	pAccusedof[32],
+	pAccusedof[100],
 	pVictim[32],
 };
 

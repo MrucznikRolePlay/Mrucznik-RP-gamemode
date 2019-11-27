@@ -148,9 +148,10 @@ YCMD:wejdz(playerid, params[], help)
             IsPlayerInRangeOfPoint(playerid,2.0, 1549.7249,-1462.1644,3.3250)|| //Strefa Pracownika
             IsPlayerInRangeOfPoint(playerid,2.0, 1526.7426,-1469.4413,23.0778) || //Sala treningowa
             IsPlayerInRangeOfPoint(playerid,2.0, 1541.2571,-1464.1281,21.8429)|| //Biura
-            IsPlayerInRangeOfPoint(playerid,2.0, 1544.1202,-1466.9008,42.8386)) //Akademia
+            IsPlayerInRangeOfPoint(playerid,2.0, 1544.1202,-1466.9008,42.8386) || //Akademia 
+            IsPlayerInRangeOfPoint(playerid,2.0, 1542.1123,-1467.8416,63.8593)) //Dach
         {
-            ShowPlayerDialogEx(playerid, D_ELEVATOR_USSS, DIALOG_STYLE_LIST, "Winda:", "{660000}[-1] {D2CFA6}Parking\n{660000}[0] {D2CFA6}Recepcja\n{660000}[1] {D2CFA6}Sala treningowa\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Biura\n{660000}[4] {D2CFA6}Akademia", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, D_ELEVATOR_USSS, DIALOG_STYLE_LIST, "Winda:", "{660000}[-1] {D2CFA6}Parking\n{660000}[0] {D2CFA6}Recepcja\n{660000}[1] {D2CFA6}Sala treningowa\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Biura\n{660000}[4] {D2CFA6}Akademia\n{660000}[5] {D2CFA6}Dach", "Wybierz", "Anuluj");
         }
 		
 //======================================================================

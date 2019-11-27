@@ -1,0 +1,11 @@
+{
+    "name": "anim",
+    "description": "Wyœwietla animacje na serwerze.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Creative",
+    "aliases": ["animacje", "anims", "animhelp", "animshelp"],
+    "parameters": [],
+    "date": "25.11.2019"
+}
