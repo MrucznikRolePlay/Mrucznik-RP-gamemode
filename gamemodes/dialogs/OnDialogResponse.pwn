@@ -13790,8 +13790,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", GetNick(playerid));
 				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				pobity[playerid] = 0;
-				ZdejmijBW(playerid, 3000);
-				SetPlayerHealth(playerid, HEALTH_PACK_HP);
+				ZdejmijBW(playerid, 3500);
+				SetPlayerHealth(playerid, 90.0);
 			}
 			else
 			{
@@ -13803,7 +13803,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				PlayerInfo[id][pHealthPacks]--;
 				pobity[playerid] = 0;
-				ZdejmijBW(playerid, 5000);
+				ZdejmijBW(playerid, 4500);
 				SetPlayerHealth(playerid, HEALTH_PACK_HP);
 			}
 		}

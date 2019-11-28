@@ -100,7 +100,7 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	if(medicinformation)
 	{
 		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 70.0, (customtime * 1000));
-		if((vw == 0 || vw == 60) && interior == 0) InfoMedicsInjury(playerid, true, false);
+		if((vw == 0 || vw == 90) && interior == 0) InfoMedicsInjury(playerid, true, false);
 	}
 	return 1;
 }
@@ -143,7 +143,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	if(medicinformation)
 	{
 		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 70.0, (customtime * 1000));
-		if((vw == 0 || vw == 60) && interior == 0) InfoMedicsInjury(playerid, false, true);
+		if((vw == 0 || vw == 90) && interior == 0) InfoMedicsInjury(playerid, false, true);
 	}
 	return 1;
 }
