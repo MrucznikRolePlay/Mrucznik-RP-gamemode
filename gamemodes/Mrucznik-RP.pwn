@@ -6576,7 +6576,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			SetPlayerSpecialAction(playerid, 0);
 		}
 		ClearAnimations(playerid, 0);
-		ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.0999, 0, 0, 0, 0, 0, 0);
+		ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 0);
 		return 0;
 	}
