@@ -13780,17 +13780,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new id = GetPVarInt(playerid, "HealthPackOffer");
 		if(response)
 		{
-			if(PlayerInfo[id][pHealthPacks] < 1) return SendClientMessage(id, 0xFF0030FF, "Gracz nie posiada ju¿ apteczek by udzieliæ Ci pomocy.");
-			if(PlayerInfo[playerid][pBW] > 0) return SendClientMessage(playerid, 0xFF0030FF, "Jesteœ ciê¿ko ranny, takie obra¿enia mo¿e opatrzyæ tylko lekarz! (/wezwij medyk)");
-			if(GetDistanceBetweenPlayers(playerid,id) > 3) return SendClientMessage(playerid, 0xFF0030FF, "Udzielaj¹cy pomocy jest zbyt daleko");
-
-			format(string, sizeof(string),"* Udzielono pomocy medycznej %s i opatrzono rany.", GetNick(playerid));
-			SendClientMessage(id, COLOR_WHITE, string);
-			format(string, sizeof(string),"* %s wyci¹ga apteczkê, banda¿uje obra¿enia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
-			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			PlayerInfo[id][pHealthPacks]--;
-			ZdejmijBW(playerid, 5000);
-			SetPlayerHealth(playerid, HEALTH_PACK_HP);
+			if(GetDistanceBetweenPlayers(playerid,id) > 5) return SendClientMessage(playerid, 0xFF0030FF, "Udzielaj¹cy pomocy jest zbyt daleko");
+			
+			if(GetPlayerFraction(id) == FRAC_ERS)
+			{
+				SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ uzdrowiony przez Lekarza");
+				format(string, sizeof(string),"* Lekarz %s wyci¹ga apteczkê, banda¿uje rany oraz podaje leki %s.", GetNick(id), GetNick(playerid));
+				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", GetNick(playerid));
+				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				pobity[playerid] = 0;
+				ZdejmijBW(playerid, 3500);
+				SetPlayerHealth(playerid, 90.0);
+			}
+			else
+			{
+				if(PlayerInfo[id][pHealthPacks] < 1) return SendClientMessage(id, 0xFF0030FF, "Gracz nie posiada ju¿ apteczek by udzieliæ Ci pomocy.");
+				if(PlayerInfo[playerid][pBW] > 0) return SendClientMessage(playerid, 0xFF0030FF, "Jesteœ ciê¿ko ranny, takie obra¿enia mo¿e opatrzyæ tylko lekarz! (/wezwij medyk)");
+				format(string, sizeof(string),"* Udzielono pomocy medycznej %s i opatrzono rany.", GetNick(playerid));
+				SendClientMessage(id, COLOR_WHITE, string);
+				format(string, sizeof(string),"* %s wyci¹ga apteczkê, banda¿uje obra¿enia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				PlayerInfo[id][pHealthPacks]--;
+				pobity[playerid] = 0;
+				ZdejmijBW(playerid, 4500);
+				SetPlayerHealth(playerid, HEALTH_PACK_HP);
+			}
 		}
 		else
 		{
@@ -13822,7 +13837,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
-	if(dialogid == 15621)
+	if(dialogid == D_ANIMLIST)
 	{
 		if(!response)
 		{
@@ -13861,59 +13876,59 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    case 25: MRP_DoAnimation(playerid,"@strip1");
 			case 26: MRP_DoAnimation(playerid,"@wygralem1");
 			case 27: MRP_DoAnimation(playerid,"@yo1");
-			case 28: MRP_DoAnimation(playerid,"@bomba1"); //
-			case 29: MRP_DoAnimation(playerid,"@box1");
+			case 28: MRP_DoAnimation(playerid,"@bomba"); //
+			case 29: MRP_DoAnimation(playerid,"@box");
 
-		    case 30: MRP_DoAnimation(playerid,"@celuj1");
-       		case 31: MRP_DoAnimation(playerid,"@celujkarabin1");
-		    case 32: MRP_DoAnimation(playerid,"@crack1");
-		    case 33: MRP_DoAnimation(playerid,"@czas1");
-		    case 34: MRP_DoAnimation(playerid,"@dodge1");
-		    case 35: MRP_DoAnimation(playerid,"@doping1");
-			case 36: MRP_DoAnimation(playerid,"@drap1");
-			case 37: MRP_DoAnimation(playerid,"@dzieki1");
-			case 38: MRP_DoAnimation(playerid,"@fuck1");
-			case 39: MRP_DoAnimation(playerid,"@greet1");
+		    case 30: MRP_DoAnimation(playerid,"@celuj");
+       		case 31: MRP_DoAnimation(playerid,"@celujkarabin");
+		    case 32: MRP_DoAnimation(playerid,"@crack");
+		    case 33: MRP_DoAnimation(playerid,"@czas");
+		    case 34: MRP_DoAnimation(playerid,"@dodge");
+		    case 35: MRP_DoAnimation(playerid,"@doping");
+			case 36: MRP_DoAnimation(playerid,"@drap");
+			case 37: MRP_DoAnimation(playerid,"@dzieki");
+			case 38: MRP_DoAnimation(playerid,"@fuck");
+			case 39: MRP_DoAnimation(playerid,"@greet");
 
-		    case 40: MRP_DoAnimation(playerid,"@hitch1");
-		    case 41: MRP_DoAnimation(playerid,"@joint1");
-		    case 42: MRP_DoAnimation(playerid,"@karta1");
-		    case 43: MRP_DoAnimation(playerid,"@komputer1");
-		    case 44: MRP_DoAnimation(playerid,"@kozak1");
-		    case 45: MRP_DoAnimation(playerid,"@kungfu1");
-			case 46: MRP_DoAnimation(playerid,"@machaj1");
-			case 47: MRP_DoAnimation(playerid,"@maska1");
-			case 48: MRP_DoAnimation(playerid,"@medyk1");
-			case 49: MRP_DoAnimation(playerid,"@napad1");
+		    case 40: MRP_DoAnimation(playerid,"@hitch");
+		    case 41: MRP_DoAnimation(playerid,"@joint");
+		    case 42: MRP_DoAnimation(playerid,"@karta");
+		    case 43: MRP_DoAnimation(playerid,"@komputer");
+		    case 44: MRP_DoAnimation(playerid,"@kozak");
+		    case 45: MRP_DoAnimation(playerid,"@kungfu");
+			case 46: MRP_DoAnimation(playerid,"@machaj");
+			case 47: MRP_DoAnimation(playerid,"@maska");
+			case 48: MRP_DoAnimation(playerid,"@medyk");
+			case 49: MRP_DoAnimation(playerid,"@napad");
 
-		    case 50: MRP_DoAnimation(playerid,"@nie1");
-		    case 51: MRP_DoAnimation(playerid,"@odbierz1");
-		    case 52: MRP_DoAnimation(playerid,"@odloz1");
-		    case 53: MRP_DoAnimation(playerid,"@oh1");
-		    case 54: MRP_DoAnimation(playerid,"@opieraj1");
-		    case 55: MRP_DoAnimation(playerid,"@pa1");
-			case 56: MRP_DoAnimation(playerid,"@pij1");
-			case 57: MRP_DoAnimation(playerid,"@placz1");
-			case 58: MRP_DoAnimation(playerid,"@przeladuj1");
-			case 59: MRP_DoAnimation(playerid,"@ramiona1");
+		    case 50: MRP_DoAnimation(playerid,"@nie");
+		    case 51: MRP_DoAnimation(playerid,"@odbierz");
+		    case 52: MRP_DoAnimation(playerid,"@odloz");
+		    case 53: MRP_DoAnimation(playerid,"@oh");
+		    case 54: MRP_DoAnimation(playerid,"@opieraj");
+		    case 55: MRP_DoAnimation(playerid,"@pa");
+			case 56: MRP_DoAnimation(playerid,"@pij");
+			case 57: MRP_DoAnimation(playerid,"@placz");
+			case 58: MRP_DoAnimation(playerid,"@przeladuj");
+			case 59: MRP_DoAnimation(playerid,"@ramiona");
 
-			case 60: MRP_DoAnimation(playerid,"@rozciagaj1");
-			case 61: MRP_DoAnimation(playerid,"@rozlacz1");
-		    case 62: MRP_DoAnimation(playerid,"@siad1");
-		    case 63: MRP_DoAnimation(playerid,"@sikaj1");
-		    case 64: MRP_DoAnimation(playerid,"@smiech1");
-		    case 65: MRP_DoAnimation(playerid,"@stoj1");
-			case 66: MRP_DoAnimation(playerid,"@tak1");
-			case 67: MRP_DoAnimation(playerid,"@waledochodze1");
-			case 68: MRP_DoAnimation(playerid,"@walekonia1");
-			case 69: MRP_DoAnimation(playerid,"@wolaj1");
+			case 60: MRP_DoAnimation(playerid,"@rozciagaj");
+			case 61: MRP_DoAnimation(playerid,"@rozlacz");
+		    case 62: MRP_DoAnimation(playerid,"@siad");
+		    case 63: MRP_DoAnimation(playerid,"@sikaj");
+		    case 64: MRP_DoAnimation(playerid,"@smiech");
+		    case 65: MRP_DoAnimation(playerid,"@stoj");
+			case 66: MRP_DoAnimation(playerid,"@tak");
+			case 67: MRP_DoAnimation(playerid,"@waledochodze");
+			case 68: MRP_DoAnimation(playerid,"@walekonia");
+			case 69: MRP_DoAnimation(playerid,"@wolaj");
 
-			case 70: MRP_DoAnimation(playerid,"@wozszlug1");
-   			case 71: MRP_DoAnimation(playerid,"@wstan1");
-		    case 72: MRP_DoAnimation(playerid,"@wtf1");
-		    case 73: MRP_DoAnimation(playerid,"@wymiotuj1");
-		    case 74: MRP_DoAnimation(playerid,"@zarcie1");
-		    case 75: MRP_DoAnimation(playerid,"@zmeczony1");
+			case 70: MRP_DoAnimation(playerid,"@wozszlug");
+   			case 71: MRP_DoAnimation(playerid,"@wstan");
+		    case 72: MRP_DoAnimation(playerid,"@wtf");
+		    case 73: MRP_DoAnimation(playerid,"@wymiotuj");
+		    case 74: MRP_DoAnimation(playerid,"@zarcie");
+		    case 75: MRP_DoAnimation(playerid,"@zmeczony");
 		}
 		return 1;
 	}
