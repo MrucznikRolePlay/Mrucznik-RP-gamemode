@@ -12022,7 +12022,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wyscig[tworzenietrasy[playerid]][wNagroda]);
 
 					owyscig[playerid] = tworzenietrasy[playerid];
-					tworzenietrasy[playerid] = 666;
+					//tworzenietrasy[playerid] = 666; - po co pytam sie zmieniac po wybraniu trasy zmienn¹ jakoby TWORZYMY TRASE, PO CO?
 					
 				}
 				else
