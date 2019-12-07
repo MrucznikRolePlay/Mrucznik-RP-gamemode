@@ -85,6 +85,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	{
 		AttachedObjects[playerid][index][ao_active] = false;
 	}
+	VECTOR_clear(VAttachedItems[playerid]);
 	return 1;
 }
 
