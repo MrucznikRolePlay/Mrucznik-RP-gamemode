@@ -109,7 +109,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	new string[144];
 	if(GetPVarInt(playerid, "bw-jailcheck") == 1)
 	{
-		DeletePVar("bw-jailcheck");
+		DeletePVar(playerid, "bw-jailcheck");
 		return 1;
 	}
 	if(GetPVarInt(playerid, "bw-hitmankiller") == 1)
