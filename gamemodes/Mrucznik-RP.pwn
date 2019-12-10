@@ -2116,6 +2116,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 						{
 							if(!(IsACop(playerid) && OnDuty[playerid] == 1))
 							{
+								ZdejmijBW(playerid, 0);
+								SpawnPlayer(playerid);
+								SetPvarInt(playerid, "bw-jailcheck", 1);
+								SendMessageToAll(-1, "Poprawnie zinterpretowane");
 								new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
 								ZabierzKase(playerid, CenaZabicia);//moneycheat
 								PlayerInfo[playerid][pWantedDeaths] += 1;
