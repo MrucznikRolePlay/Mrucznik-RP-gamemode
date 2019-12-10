@@ -107,7 +107,7 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
 	new string[144];
-	if(GetPvarInt(playerid, "bw-jailcheck") == 1)
+	if(GetPVarInt(playerid, "bw-jailcheck") == 1)
 	{
 		DeletePVar("bw-jailcheck");
 		return 1;

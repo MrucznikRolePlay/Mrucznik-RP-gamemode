@@ -2116,15 +2116,15 @@ public OnPlayerDeath(playerid, killerid, reason)
 						{
 							if(!(IsACop(playerid) && OnDuty[playerid] == 1))
 							{
+								SetPVarInt(playerid, "bw-jailcheck", 1);
 								ZdejmijBW(playerid, 0);
 								SpawnPlayer(playerid);
-								SetPvarInt(playerid, "bw-jailcheck", 1);
-								SendMessageToAll(-1, "Poprawnie zinterpretowane");
+								SendClientMessage(playerid, COLOR_P@, "Poprawnie zinterpretowane <playerid>");
+								SendClientMessage(i, COLOR_P@, "Poprawnie zinterpretowane <killerid>");
 								new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
 								ZabierzKase(playerid, CenaZabicia);//moneycheat
 								PlayerInfo[playerid][pWantedDeaths] += 1;
 								PlayerInfo[playerid][pJailed] = 1;
-								PlayerInfo[playerid][pWoundedJailed] = 1;
 								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
 								format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
 								SendClientMessage(playerid, COLOR_LIGHTRED, string);
@@ -2143,7 +2143,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 								ZabierzKase(playerid, CenaZabicia);//moneycheat
 								PlayerInfo[playerid][pWantedDeaths] += 1;
 								PlayerInfo[playerid][pJailed] = 2;
-								PlayerInfo[playerid][pWoundedJailed] = 1;
 								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
 								format(string, sizeof(string), "* Jesteœ w DeMorgan na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
 								SendClientMessage(playerid, COLOR_LIGHTRED, string);
