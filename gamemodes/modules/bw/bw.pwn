@@ -106,6 +106,11 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 }
 NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
+	if(PlayerInfo[playerid][pWoundedJailed] == 1)
+	{
+		PlayerInfo[playerid][pWoundedJailed] = 0;
+		return 1;
+	}
 	new string[144];
 	if(GetPVarInt(playerid, "bw-hitmankiller") == 1)
 	{

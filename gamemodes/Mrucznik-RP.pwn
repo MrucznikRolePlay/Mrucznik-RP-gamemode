@@ -2120,6 +2120,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 								ZabierzKase(playerid, CenaZabicia);//moneycheat
 								PlayerInfo[playerid][pWantedDeaths] += 1;
 								PlayerInfo[playerid][pJailed] = 1;
+								PlayerInfo[playerid][pWoundedJailed] = 1;
 								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
 								format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
 								SendClientMessage(playerid, COLOR_LIGHTRED, string);
@@ -2138,6 +2139,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 								ZabierzKase(playerid, CenaZabicia);//moneycheat
 								PlayerInfo[playerid][pWantedDeaths] += 1;
 								PlayerInfo[playerid][pJailed] = 2;
+								PlayerInfo[playerid][pWoundedJailed] = 1;
 								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
 								format(string, sizeof(string), "* Jesteœ w DeMorgan na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
 								SendClientMessage(playerid, COLOR_LIGHTRED, string);

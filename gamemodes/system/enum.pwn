@@ -1451,7 +1451,8 @@ enum pInfo
 	pBusinessOwner,
 	pBusinessMember,
 	pLiderValue,
-	pUniform
+	pUniform,
+	pWoundedJailed
 };
 enum StringData
 {
