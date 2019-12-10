@@ -835,6 +835,16 @@ public TiNzPJwGUI(playerid)
 	return 1;
 }
 
+public NaprawBronie(playerid)
+{
+	SetTimerEx("NaprawBronieTimer", 1500, false, "i", playerid);
+	return 1;
+}
+public NaprawBronieTimer(playerid)
+{
+	PlayerInfo[playerid][pPrzedmiotyDelay] = 1; //Wykonano delay broni
+	return 1;
+}
 public Naprawianie(playerid){
 naprawiony[playerid] = 0;
 return 1;

@@ -1452,7 +1452,7 @@ enum pInfo
 	pBusinessMember,
 	pLiderValue,
 	pUniform,
-	pWoundedJailed
+	pPrzedmiotyDelay
 };
 enum StringData
 {

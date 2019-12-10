@@ -1021,7 +1021,6 @@ public OnPlayerConnect(playerid)
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
-
     ClearChat(playerid);
 
     // Wy³¹czone na testy
@@ -1164,6 +1163,7 @@ public OnPlayerConnect(playerid)
         gSelectionItems[playerid][x] = PlayerText:INVALID_TEXT_DRAW;
 	}
 	gItemAt[playerid] = 0;
+	NaprawBronie(playerid); // Naprawa zbugowanego dialogu
 	return 1;
 }
 public OnPlayerPause(playerid)

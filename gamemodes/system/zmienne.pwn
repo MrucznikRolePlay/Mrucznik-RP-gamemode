@@ -1306,7 +1306,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
 	//Sandal
-	PlayerInfo[playerid][pWoundedJailed] = 0;
+	PlayerInfo[playerid][pPrzedmiotyDelay] = 0;
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;

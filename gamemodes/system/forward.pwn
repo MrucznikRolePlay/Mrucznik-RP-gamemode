@@ -138,4 +138,7 @@ forward BBD_Timer();
 forward UnhireRentCar(playerid, veh);
 forward MyItems_Load(playerid);
 
+//10.12
+forward NaprawBronie(playerid);
+forward NaprawBronieTimer(playerid);
 //EOF
