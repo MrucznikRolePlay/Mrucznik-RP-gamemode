@@ -6111,6 +6111,10 @@ OnPlayerLogin(playerid, password[])
                 SetPVarInt(playerid, "support_duty", 1);
                 SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
             }
+			else if(PlayerInfo[playerid][pAdmin] > 0)
+			{
+				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/supportduty");
+			}
 
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)
 				ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
@@ -6188,6 +6192,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
 	    Spectate[playerid] = INVALID_PLAYER_ID;
         TogglePlayerSpectating(playerid, 0);
+		SpawnPlayer(playerid);//Próba naprawy bug-banów, Rozw.1
         return 0;
     }
     //30.10
