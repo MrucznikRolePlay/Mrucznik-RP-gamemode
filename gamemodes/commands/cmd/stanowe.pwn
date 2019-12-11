@@ -73,7 +73,7 @@ YCMD:stanowe(playerid, params[], help)
 						ResetPlayerWeapons(giveplayerid);
 						UsunBron(giveplayerid);//usun bron
 						//JailPrice[giveplayerid] = PoziomPoszukiwania[giveplayerid]*50000;  
-						if(PlayerInfo[giveplayerid][pJailed] == 2) timer_StanowePlyCheck[giveplayerid] = SetTimerEx("Stanowe_CheckPlyInVeh", 2000, true, "i", giveplayerid);
+						if(PlayerInfo[giveplayerid][pJailed] == 2) timer_StanowePlyCheck[giveplayerid] = SetTimerEx("Stanowe_CheckPlyInVeh", 500, true, "i", giveplayerid);
 						if(PoziomPoszukiwania[giveplayerid] == 5)
                         {
                             PlayerInfo[giveplayerid][pJailTime] = 1500;
