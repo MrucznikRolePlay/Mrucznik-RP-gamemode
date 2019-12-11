@@ -1200,7 +1200,12 @@ public OnPlayerDisconnect(playerid, reason)
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 	}
 	//SANDAL
-	KillTimer(timer_StanowePlyCheck[playerid]);
+	if(GetPVarInt(playerid, "StanoweCarCheck") == 1) 
+	{
+		KillTimer(timer_StanowePlyCheck[playerid]);
+		SetPVarInt(playerid, "StanoweCarCheck", 0);
+		DeletePVar(playerid, "StanoweCarCheck");
+	}
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
         new giveplayerid = GetPVarInt(playerid, "Mats-id");
@@ -2444,7 +2449,6 @@ SetPlayerSpawnPos(playerid)
 		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Twój wyrok nie dobieg³ koñca, wracasz do wiêzienia stanowego");
 		JailDeMorgan(playerid);
-		timer_StanowePlyCheck[playerid] = SetTimerEx("Stanowe_CheckPlyInVeh", 500, true, "i", playerid);
 		return 1;
 	}
 	else if(PlayerInfo[playerid][pJailed] == 3)//AdminJail

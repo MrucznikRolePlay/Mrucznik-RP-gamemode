@@ -3389,10 +3389,13 @@ public SlideRope(playerid)
 forward Stanowe_CheckPlyInVeh(playerid);
 public Stanowe_CheckPlyInVeh(playerid)
 {
-	if(IsPlayerInAnyVehicle(playerid))
+	if(GetPVarInt(playerid, "StanoweCarCheck") == 1)
 	{
-		RemovePlayerFromVehicleEx(playerid);
-		JailDeMorgan(playerid);
+		if(IsPlayerInAnyVehicle(playerid))
+		{
+			RemovePlayerFromVehicleEx(playerid);
+			JailDeMorgan(playerid);
+		}
 	}
 	return 1;
 }

@@ -1093,6 +1093,7 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	SetPVarInt(playerid, "StanoweCarCheck", 0);
 	
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
