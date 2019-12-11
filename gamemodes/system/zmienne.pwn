@@ -1059,6 +1059,9 @@ new AllLeaders;
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
 
+//SANDAL
+new timer_StanowePlyCheck[MAX_PLAYERS];
+
 //new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
 
 //-----------------------------------------------

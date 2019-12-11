@@ -234,6 +234,7 @@ JailDeMorgan(playerid)
 // WYPUSZCZANIE z DEMORGAN
 UnJailDeMorgan(playerid)
 {
+	KillTimer(timer_StanowePlyCheck[playerid]);
 	SetPlayerVirtualWorld(playerid, 1);
 	SetPlayerPosEx(playerid, 593.1899,-1494.0863,82.1648);
 	Wchodzenie(playerid);

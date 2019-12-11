@@ -1650,6 +1650,8 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 	    if(JobDuty[playerid] == 1) { Mechanics -= 1; }
 	}
+	//SANDAL
+	if(PlayerInfo[playerid][pJailed] == 2) KillTimer(timer_StanowePlyCheck[playerid]);
 
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
@@ -2441,6 +2443,10 @@ SetPlayerSpawnPos(playerid)
 		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Twój wyrok nie dobieg³ koñca, wracasz do wiêzienia stanowego");
 		JailDeMorgan(playerid);
+		if(PlayerInfo[playerid][pJailed] == 2) 
+		{
+			if(!timer_StanowePlyCheck[playerid]) timer_StanowePlyCheck[playerid] = SetTimerEx("Stanowe_CheckPlyInVeh", 2000, true, "i", playerid);
+		}
 		return 1;
 	}
 	else if(PlayerInfo[playerid][pJailed] == 3)//AdminJail
