@@ -10028,7 +10028,7 @@ CancelFlyMode(playerid)
 	CancelEdit(playerid);
 	TogglePlayerSpectating(playerid, false);
 	//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 136, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-	SetTimerEx("rapidfly_tp", 500, false, "ifff", playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2])
+	SetTimerEx("rapidfly_tp", 500, false, "ifff", playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	SpawnPlayer(playerid);
 	//SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
