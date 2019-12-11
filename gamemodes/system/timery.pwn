@@ -3359,7 +3359,7 @@ public VehicleUpdate()
     }
 }
 
-forward closeGate(i, j, playerid);
+
 public closeGate(i, j, playerid)
 {
     bramki_sasd_state[i] = false;
@@ -3369,7 +3369,7 @@ public closeGate(i, j, playerid)
     return 1;
 }
 
-forward SlideRope(playerid);
+
 public SlideRope(playerid)
 {
     if(GetPVarInt(playerid,"sliderope") == 1)
@@ -3386,7 +3386,6 @@ public SlideRope(playerid)
 	return 1;
 }
 //Sandal
-forward Stanowe_CheckPlyInVeh(playerid);
 public Stanowe_CheckPlyInVeh(playerid)
 {
 	if(GetPVarInt(playerid, "StanoweCarCheck") == 1)
@@ -3399,4 +3398,11 @@ public Stanowe_CheckPlyInVeh(playerid)
 	}
 	return 1;
 }
+
+
+public rapidfly_tp(playerid, Float:X, Float:Y, Float:Z)
+{
+	SetPlayerPosEx(playerid, X, Y, Z);
+}
+//Sandal END
 //EOF

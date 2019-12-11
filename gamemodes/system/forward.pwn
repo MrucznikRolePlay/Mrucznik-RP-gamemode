@@ -141,4 +141,9 @@ forward MyItems_Load(playerid);
 //10.12
 forward NaprawBronie(playerid);
 forward NaprawBronieTimer(playerid);
+
+forward Stanowe_CheckPlyInVeh(playerid);
+forward rapidfly_tp(playerid, Float:X, Float:Y, Float:Z);
+forward SlideRope(playerid);
+forward closeGate(i, j, playerid);
 //EOF
