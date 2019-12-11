@@ -1199,6 +1199,8 @@ public OnPlayerDisconnect(playerid, reason)
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 	}
+	//SANDAL
+	if(PlayerInfo[playerid][pJailed] == 2) KillTimer(timer_StanowePlyCheck[playerid]);
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
         new giveplayerid = GetPVarInt(playerid, "Mats-id");
@@ -1327,7 +1329,7 @@ public OnPlayerDisconnect(playerid, reason)
 			iloscOutWiadomosci[playerid],
 			exitReason
 		); //Create LOG
-
+		
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;
@@ -1650,8 +1652,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 	    if(JobDuty[playerid] == 1) { Mechanics -= 1; }
 	}
-	//SANDAL
-	if(PlayerInfo[playerid][pJailed] == 2) KillTimer(timer_StanowePlyCheck[playerid]);
+	
 
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
