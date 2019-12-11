@@ -43,7 +43,7 @@ YCMD:dajskryptera(playerid, params[], help)
 
     GetPlayerName(para1, giveplayer, sizeof(giveplayer));
     GetPlayerName(playerid, sendername, sizeof(sendername));
-    //if(!Uprawnienia(playerid, ACCESS_OWNER)) return noAccessMessage(playerid);
+    if(!Uprawnienia(playerid, ACCESS_OWNER)) return noAccessMessage(playerid);
     if(IsPlayerConnected(para1))
     {
         if(para1 != INVALID_PLAYER_ID)
