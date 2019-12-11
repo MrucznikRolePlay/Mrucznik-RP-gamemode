@@ -1200,7 +1200,7 @@ public OnPlayerDisconnect(playerid, reason)
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 	}
 	//SANDAL
-	if(PlayerInfo[playerid][pJailed] == 2) KillTimer(timer_StanowePlyCheck[playerid]);
+	KillTimer(timer_StanowePlyCheck[playerid]);
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
         new giveplayerid = GetPVarInt(playerid, "Mats-id");

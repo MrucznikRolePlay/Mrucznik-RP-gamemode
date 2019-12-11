@@ -10024,7 +10024,7 @@ CancelFlyMode(playerid)
 	CancelEdit(playerid);
 	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 136, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
 	TogglePlayerSpectating(playerid, false);
-	SetPlayerSpawn(playerid);
+	SpawnPlayer(playerid);
 	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 	DestroyPlayerObject(playerid, noclipdata[playerid][flyobject]);
 	noclipdata[playerid][cameramode] = CAMERA_MODE_NONE;
