@@ -1235,12 +1235,7 @@ enum pSpec
 	sLocal,
 	sCam,
 };
-enum pRapidfly
-{
-	Float:Coords[3],
-};
 new Unspec[MAX_PLAYERS][pSpec];
-new Rapidfly[MAX_PLAYERS][pSpec];
 
 enum eCars
 {

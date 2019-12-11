@@ -1390,9 +1390,6 @@ ZerujZmienne(playerid)
     Unspec[playerid][Coords][0] = 0.0;
     Unspec[playerid][Coords][1] = 0.0;
     Unspec[playerid][Coords][2] = 0.0;
-	Rapidfly[playerid][Coords][0] = 0.0;
-	Rapidfly[playerid][Coords][1] = 0.0;
-	Rapidfly[playerid][Coords][2] = 0.0;
     Unspec[playerid][sPint] = 0;
     Unspec[playerid][sPvw] = 0;
 
