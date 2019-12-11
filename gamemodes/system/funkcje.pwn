@@ -10023,12 +10023,14 @@ GetNextCameraPosition(move_mode, Float:ncCP[3], Float:FV[3], &Float:X, &Float:Y,
 
 CancelFlyMode(playerid)
 {
-    GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
+    GetPlayerPos(playerid, Rapidfly[playerid][Coords][0], Rapidfly[playerid][Coords][1], Rapidfly[playerid][Coords][2]);
 	DeletePVar(playerid, "FlyMode");
 	CancelEdit(playerid);
 	TogglePlayerSpectating(playerid, false);
+	SetPvarInt(playerid, "rapidfly-bugban", 1);
+	//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 136, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
 	SpawnPlayer(playerid);
-	SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
+	//SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
 	DestroyPlayerObject(playerid, noclipdata[playerid][flyobject]);
 	noclipdata[playerid][cameramode] = CAMERA_MODE_NONE;

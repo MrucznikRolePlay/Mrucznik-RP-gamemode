@@ -1094,7 +1094,7 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
 	SetPVarInt(playerid, "StanoweCarCheck", 0);
-	
+
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
 
@@ -1390,6 +1390,9 @@ ZerujZmienne(playerid)
     Unspec[playerid][Coords][0] = 0.0;
     Unspec[playerid][Coords][1] = 0.0;
     Unspec[playerid][Coords][2] = 0.0;
+	Rapidfly[playerid][Coords][0] = 0.0;
+	Rapidfly[playerid][Coords][1] = 0.0;
+	Rapidfly[playerid][Coords][2] = 0.0;
     Unspec[playerid][sPint] = 0;
     Unspec[playerid][sPvw] = 0;
 
