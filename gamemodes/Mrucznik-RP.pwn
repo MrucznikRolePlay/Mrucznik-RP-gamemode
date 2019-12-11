@@ -2406,8 +2406,8 @@ public OnPlayerSpawn(playerid)
 	SetPlayerSpawn(playerid);
 	if(GetPVarInt(playerid, "rapidfly-bugban") == 1)
 	{
-		SetPlayerPosEx(playerid, SetPlayerPosEx(playerid, Rapidfly[playerid][Coords][0], Rapidfly[playerid][Coords][1], Rapidfly[playerid][Coords][2]);
-		DeletePVar("rapidfly-bugban");
+		SetPlayerPosEx(playerid, Rapidfly[playerid][Coords][0], Rapidfly[playerid][Coords][1], Rapidfly[playerid][Coords][2]);
+		DeletePVar(playerid, "rapidfly-bugban");
 	}
     //Spawn Pos
 	SetTimerEx("SpawnPosInfo", 1000, false, "i", playerid);

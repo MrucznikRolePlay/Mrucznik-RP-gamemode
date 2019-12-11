@@ -41,7 +41,7 @@ YCMD:rapidfly(playerid, params[], help)
     	else 
         {
             FlyMode(playerid, typ);
-            SetPvarInt(playerid, "rapidfly-bugban", 1);
+            SetPVarInt(playerid, "rapidfly-bugban", 1);
         }
     }
     return 1;
