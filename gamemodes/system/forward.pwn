@@ -47,7 +47,7 @@ forward BanExTimer(playerid);
 forward Matsowanie(playerid);
 forward pobito(playerid);
 forward togczastimer(playerid);
-forward naczasbicie(playerid);
+forward naczasbicie(playerid, playerid_atak);
 forward UzyteKajdany(playerid);
 forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
