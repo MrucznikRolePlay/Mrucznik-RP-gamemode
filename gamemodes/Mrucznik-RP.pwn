@@ -6201,13 +6201,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
-		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 136, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-		//SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]); //0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
-	    Spectate[playerid] = INVALID_PLAYER_ID;
+		Spectate[playerid] = INVALID_PLAYER_ID;
+		SetTimerEx("rapidfly_tp", 300, false, "ifff", playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
         TogglePlayerSpectating(playerid, 0);
-		SetPlayerSpawn(playerid); //BUGBAN
-		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
-        return 0;
+		SpawnPlayer(playerid);
+		return 0;
     }
     //30.10
     if(HOLDING(KEY_ANALOG_UP))

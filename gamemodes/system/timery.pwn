@@ -3402,11 +3402,11 @@ public Stanowe_CheckPlyInVeh(playerid)
 
 public rapidfly_tp(playerid, Float:X, Float:Y, Float:Z)
 {
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 136, X, Y, Z, 10.0, -1, -1, -1, -1, -1, -1);
-	SpawnPlayer(playerid);
-	//SetPlayerPosEx(playerid, X, Y, Z);
+	Wchodzenie(playerid);
+	SetPlayerPosEx(playerid, X, Y, Z);
 	Wchodzenie(playerid);
 	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+	
 }
 //Sandal END
 //EOF
