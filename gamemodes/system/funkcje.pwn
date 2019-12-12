@@ -951,8 +951,10 @@ public togczastimer(playerid)
 	return 1;
 }
 
-public naczasbicie(playerid){
-zdarzylwpisac[playerid] = 0;
+public naczasbicie(playerid, playerid_atak){
+	zdarzylwpisac[playerid] = 0;
+	TogglePlayerControllable(playerid_atak, 1);
+	ClearAnimations(playerid_atak);
 return 1;
 }
 
