@@ -66,9 +66,12 @@ YCMD:stanowe(playerid, params[], help)
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-						new str[32];
-                        valstr(str, giveplayerid);
-                        RunCommand(playerid, "/rozkuj",  str);
+						if(zakuty[giveplayerid] == 1)
+						{
+							new str[32];
+							valstr(str, giveplayerid);
+							RunCommand(playerid, "/rozkuj",  str);
+						}
 						JailDeMorgan(giveplayerid);
 						ResetPlayerWeapons(giveplayerid);
 						UsunBron(giveplayerid);//usun bron

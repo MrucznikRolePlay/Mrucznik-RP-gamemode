@@ -1203,7 +1203,6 @@ public OnPlayerDisconnect(playerid, reason)
 	if(GetPVarInt(playerid, "StanoweCarCheck") == 1) 
 	{
 		KillTimer(timer_StanowePlyCheck[playerid]);
-		SetPVarInt(playerid, "StanoweCarCheck", 0);
 		DeletePVar(playerid, "StanoweCarCheck");
 	}
 	if(GetPVarInt(playerid, "OKupMats") == 1)
