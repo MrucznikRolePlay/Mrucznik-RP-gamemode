@@ -993,7 +993,7 @@ new komentator[MAX_PLAYERS];//¯u¿el
 new okrazenia[MAX_PLAYERS];//¯u¿el
 new okregi[MAX_PLAYERS];//¯u¿el
 new kodbitwy[256];//Bitwa
-new zdarzylwpisac[MAX_PLAYERS] = 1;//Bitwa
+new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
 new uzytekajdanki[MAX_PLAYERS];//Kajdany
 new zakuty[MAX_PLAYERS];//Kajdany
 new PDkuje[MAX_PLAYERS];//Kajdany

@@ -952,7 +952,7 @@ public togczastimer(playerid)
 }
 
 public naczasbicie(playerid, playerid_atak){
-	zdarzylwpisac[playerid] = 0;
+	zdazylwpisac[playerid] = 0;
 	TogglePlayerControllable(playerid_atak, 1);
 	ClearAnimations(playerid_atak);
 	SendClientMessage(playerid_atak, COLOR_PURPLE, "Wygra³eœ bitwê czasowo.");

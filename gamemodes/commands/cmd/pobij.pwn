@@ -130,8 +130,8 @@ YCMD:pobij(playerid, params[], help)
 										bijep[playerid] = playa;
 										podczasbicia[playa] = 1;
 										pobilem[playerid] = 2;
-										zdarzylwpisac[playerid] = 1;
-										zdarzylwpisac[playa] = 1;
+										zdazylwpisac[playerid] = 1;
+										zdazylwpisac[playa] = 1;
 										SetTimerEx("naczasbicie",15000,0,"dd",playa, playerid);
 									}
 									else
