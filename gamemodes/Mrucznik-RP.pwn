@@ -7366,12 +7366,14 @@ public OnPlayerText(playerid, text[])
 	}
 	if(TalkingLive[playerid] != INVALID_PLAYER_ID)
 	{
+		new SanNews_nick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, SanNews_nick, sizeof(SanNews_nick));
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 		{//todo
 			if(strlen(text) < 78)
 			{
-				format(string, sizeof(string), "%s mówi: %s", GetNick(playerid), text);
-				format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s", GetNick(playerid), text);
+				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
+				format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
 				OOCNews(COLOR_LIGHTGREEN, wywiad_string);
@@ -7386,8 +7388,8 @@ public OnPlayerText(playerid, text[])
 
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
-					format(string, sizeof(string), "%s mówi: %s [..]", GetNick(playerid), text);
-					format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s [..]", GetNick(playerid), text);
+					format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+					format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s [..]", SanNews_nick, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
 					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
@@ -7406,8 +7408,8 @@ public OnPlayerText(playerid, text[])
 		{
 			if(strlen(text) < 78)
 			{
-				format(string, sizeof(string), "%s mówi: %s [..]", GetNick(playerid), text);
-				format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s", GetNick(playerid), text);
+				format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+				format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
 				OOCNews(COLOR_LIGHTGREEN, wywiad_string);
@@ -7423,8 +7425,8 @@ public OnPlayerText(playerid, text[])
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
 
-					format(string, sizeof(string), "%s mówi: %s [..]", GetNick(playerid), text);
-					format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s [..]", GetNick(playerid), text);
+					format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+					format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s [..]", SanNews_nick, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
 					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
