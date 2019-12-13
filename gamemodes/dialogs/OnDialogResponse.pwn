@@ -3117,7 +3117,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    new string[256];
 		    if(response)
 			{
-			    if(zdarzylwpisac[playerid] == 1)
+			    if(zdazylwpisac[playerid] == 1)
 			    {
 				    if(strcmp(kodbitwy, inputtext, true ) == 0 && strlen(inputtext) == 8)
 				    {
@@ -3140,8 +3140,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    	SendClientMessage(playerid, COLOR_WHITE, "CIOS ODBITY!");
 				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
 				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-				    	zdarzylwpisac[playerid] = 1;
-				    	zdarzylwpisac[bijep[playerid]] = 1;
+				    	zdazylwpisac[playerid] = 1;
+				    	zdazylwpisac[bijep[playerid]] = 1;
 				    	SetTimerEx("naczasbicie",9000,0,"d",bijep[playerid]);
 				    }
 				    else
