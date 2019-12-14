@@ -799,7 +799,7 @@ public Wchodzenie(playerid) //Zmiana na inteligentny system odmra¿ania
         }
         SetPVarInt(playerid, "enter-nowobj", count);
     }
-    SetTimerEx("Wchodzenie", 1000, 0, "i", playerid);
+    SetTimerEx("Wchodzenie", 1800, 0, "i", playerid);
     return 1;
 }
 public freezuj(playerid){
