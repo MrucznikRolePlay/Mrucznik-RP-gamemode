@@ -6582,9 +6582,12 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     }
 	if(newkeys & 4 && GetPVarInt(playerid, "anim_do") == 1) //animacje
 	{
-		if(GetPlayerSpecialAction(playerid) != 0)
+		if(!IsPlayerInAnyVehicle(playerid))
 		{
-			SetPlayerSpecialAction(playerid, 0);
+			if(GetPlayerSpecialAction(playerid) != 0)
+			{
+				SetPlayerSpecialAction(playerid, 0);
+			}
 		}
 		ClearAnimations(playerid, 0);
 		ApplyAnimation(playerid, "CARRY", "crry_prtial", 0, 0, 0, 0, 0, 0, 0);
