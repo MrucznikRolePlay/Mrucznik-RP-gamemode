@@ -180,8 +180,13 @@ ZespawnujGraczaBW(playerid)
 	SetPlayerFacingAngle(playerid, GetPVarFloat(playerid, "bw-faceangle"));
 	SetCameraBehindPlayer(playerid);
 	format(type, sizeof(type), (PlayerInfo[playerid][pBW] > 0 ? "nieprzytomny" : "ranny"));
-	format(string, sizeof(string), "{FF542E}Jesteœ %s!\n{FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911) lub poczekaæ %d sekund.\nGracze z apteczk¹ mog¹ udzieliæ Ci pomocy medycznej za pomoc¹ (/apteczka).\nZalecamy odgrywaæ odniesione obra¿enia.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
-	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
+	format(string, sizeof(string), "{FF542E}Jesteœ %s! {FFFFFF}Mo¿esz wezwaæ pomoc (/wezwij medyk, /dzwon 911) lub poczekaæ %d sekund.", type, (PlayerInfo[playerid][pBW] > 0 ? PlayerInfo[playerid][pBW] : PlayerInfo[playerid][pInjury]));
+	SendClientMessage(playerid, COLOR_LIGHTRED, string);
+	format(string, sizeof(string), "Gracze z apteczk¹ mog¹ udzieliæ Ci pomocy medycznej za pomoc¹ (/apteczka).");
+	SendClientMessage(playerid, -1, string);
+	format(string, sizeof(string), "Zalecamy odgrywaæ odniesione obra¿enia.");
+	SendClientMessage(playerid, -1, string);
+	//ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
 	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
@@ -206,8 +211,9 @@ RannyTimer(playerid)
 		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (PlayerInfo[i][pInjury] * 1000));
 		if(PlayerInfo[i][pInjury] <= 0)
 		{
-			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê!\n{FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
-			ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
+			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê! {FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
+			//ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
+			SendClientMessage(playerid, COLOR_NEWS, string);
 			//SendClientMessageToAll(COLOR_GRAD2, "#7: O¿ywiam gracza, nikt go nie dobi³");
 			ZdejmijBW(playerid);
 			/* opcjonalnie dobicie gracza i nadanie BW jesli nie uratowany - kod poni¿ej
@@ -240,8 +246,8 @@ BWTimer(playerid)
 			ZabierzKase(i, HOSPITALIZATION_COST);
 			ZdejmijBW(i, 5000);
 			GameTextForPlayer(i, "~n~~n~~g~~h~Obudziles sie", 5000, 5);
-			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê!\n{FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
-			ShowPlayerInfoDialog(i, "Mrucznik Role Play", string); 
+			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê! {FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
+			SendClientMessage(playerid, COLOR_NEWS, string);
 		}
 	}
 	return 1;
