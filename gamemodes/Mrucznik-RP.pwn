@@ -1021,7 +1021,6 @@ public OnPlayerConnect(playerid)
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
-
     ClearChat(playerid);
 
     // Wy³¹czone na testy
@@ -1164,6 +1163,7 @@ public OnPlayerConnect(playerid)
         gSelectionItems[playerid][x] = PlayerText:INVALID_TEXT_DRAW;
 	}
 	gItemAt[playerid] = 0;
+	NaprawBronie(playerid); // Naprawa zbugowanego dialogu
 	return 1;
 }
 public OnPlayerPause(playerid)
@@ -1198,6 +1198,12 @@ public OnPlayerDisconnect(playerid, reason)
     {
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
+	}
+	//SANDAL
+	if(GetPVarInt(playerid, "StanoweCarCheck") == 1) 
+	{
+		KillTimer(timer_StanowePlyCheck[playerid]);
+		DeletePVar(playerid, "StanoweCarCheck");
 	}
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
@@ -1327,7 +1333,7 @@ public OnPlayerDisconnect(playerid, reason)
 			iloscOutWiadomosci[playerid],
 			exitReason
 		); //Create LOG
-
+		
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;
@@ -1650,6 +1656,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 	    if(JobDuty[playerid] == 1) { Mechanics -= 1; }
 	}
+	
 
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
@@ -2391,6 +2398,7 @@ public OnPlayerSpawn(playerid)
 	}*/
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
+
     //Spawn Pos
 	SetTimerEx("SpawnPosInfo", 1000, false, "i", playerid);
 	return 1;
@@ -5471,7 +5479,7 @@ PayDay()
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if(kaska[i] >= 10000000 && PlayerInfo[i][pLevel] <= 2 || PlayerInfo[i][pAccount] >= 10000000 && PlayerInfo[i][pLevel] <= 2)
+					if(kaska[i] >= 10000000 && PlayerInfo[i][pLevel] <= 2 || PlayerInfo[i][pAccount] >= 10000000 && PlayerInfo[i][pLevel] <= 2 && !DEVELOPMENT)
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
 						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
@@ -6187,13 +6195,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
-		//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-		SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]); //0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
-		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
-	    Spectate[playerid] = INVALID_PLAYER_ID;
+		Spectate[playerid] = INVALID_PLAYER_ID;
+		SetTimerEx("rapidfly_tp", 300, false, "ifff", playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
         TogglePlayerSpectating(playerid, 0);
-		SpawnPlayer(playerid);//Próba naprawy bug-banów, Rozw.1
-        return 0;
+		SpawnPlayer(playerid);
+		return 0;
     }
     //30.10
     if(HOLDING(KEY_ANALOG_UP))
@@ -6576,9 +6582,12 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     }
 	if(newkeys & 4 && GetPVarInt(playerid, "anim_do") == 1) //animacje
 	{
-		if(GetPlayerSpecialAction(playerid) != 0)
+		if(!IsPlayerInAnyVehicle(playerid))
 		{
-			SetPlayerSpecialAction(playerid, 0);
+			if(GetPlayerSpecialAction(playerid) != 0)
+			{
+				SetPlayerSpecialAction(playerid, 0);
+			}
 		}
 		ClearAnimations(playerid, 0);
 		ApplyAnimation(playerid, "CARRY", "crry_prtial", 0, 0, 0, 0, 0, 0, 0);
@@ -6692,6 +6701,7 @@ public OnPlayerText(playerid, text[])
 	new giveplayer[MAX_PLAYER_NAME];
 	new tmp[256];
 	new string[256];
+	new wywiad_string[256];
 	new giveplayerid;
 	if(text[0] == '@')
 	{
@@ -7358,16 +7368,18 @@ public OnPlayerText(playerid, text[])
 	}
 	if(TalkingLive[playerid] != INVALID_PLAYER_ID)
 	{
+		new SanNews_nick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, SanNews_nick, sizeof(SanNews_nick));
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 		{//todo
 			if(strlen(text) < 78)
 			{
-				
-				format(string, sizeof(string), "Reporter: %s: %s", GetNick(playerid), text);
+				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
+				format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-				OOCNews(COLOR_LIGHTGREEN, string);
-				SendDiscordMessage(DISCORD_SAN_NEWS, string);
+				OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+				SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 			}
 			else
 			{
@@ -7378,17 +7390,18 @@ public OnPlayerText(playerid, text[])
 
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
-
-					format(string, sizeof(string), "Reporter %s: %s [..]", GetNick(playerid), text);
+					format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+					format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s [..]", SanNews_nick, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 
 					format(string, sizeof(string), "[..] %s", text2);
+					format(wywiad_string, sizeof(wywiad_string), "[..] %s", text2);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 					SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 				}
 			}
 		
@@ -7397,12 +7410,12 @@ public OnPlayerText(playerid, text[])
 		{
 			if(strlen(text) < 78)
 			{
-				
-				format(string, sizeof(string), "Goœæ wywiadu %s: %s", GetNick(playerid), text);
+				format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+				format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-				OOCNews(COLOR_LIGHTGREEN, string);
-				SendDiscordMessage(DISCORD_SAN_NEWS, string);
+				OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+				SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 			}
 			else
 			{
@@ -7414,16 +7427,18 @@ public OnPlayerText(playerid, text[])
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
 
-					format(string, sizeof(string), "Goœæ wywiadu %s: %s [..]", GetNick(playerid), text);
+					format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+					format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s [..]", SanNews_nick, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 
 					format(string, sizeof(string), "[..] %s", text2);
+					format(wywiad_string, sizeof(wywiad_string), "[..] %s", text2);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 					SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 				}
 			}
 		}

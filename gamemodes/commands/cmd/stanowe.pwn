@@ -66,10 +66,17 @@ YCMD:stanowe(playerid, params[], help)
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+						if(zakuty[giveplayerid] == 1)
+						{
+							new str[32];
+							valstr(str, giveplayerid);
+							RunCommand(playerid, "/rozkuj",  str);
+						}
 						JailDeMorgan(giveplayerid);
 						ResetPlayerWeapons(giveplayerid);
 						UsunBron(giveplayerid);//usun bron
 						//JailPrice[giveplayerid] = PoziomPoszukiwania[giveplayerid]*50000;  
+						if(PlayerInfo[giveplayerid][pJailed] == 2) timer_StanowePlyCheck[giveplayerid] = SetTimerEx("Stanowe_CheckPlyInVeh", 500, true, "i", giveplayerid);
 						if(PoziomPoszukiwania[giveplayerid] == 5)
                         {
                             PlayerInfo[giveplayerid][pJailTime] = 1500;

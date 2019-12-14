@@ -344,6 +344,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 }
 PokazDialogBronie(playerid)
 {
+	if(PlayerInfo[playerid][pPrzedmiotyDelay] == 0) return 1;
 	if(GUIExit[playerid] != 0)
 	{
 		return SetPlayerArmedWeapon(playerid, starabron[playerid]);

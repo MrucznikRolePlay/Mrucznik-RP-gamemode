@@ -228,12 +228,17 @@ JailDeMorgan(playerid)
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
 	GameTextForPlayer(playerid, "~w~Witamy ~r~w sztumie!", 5000, 1);
+	timer_StanowePlyCheck[playerid] = SetTimerEx("Stanowe_CheckPlyInVeh", 500, true, "i", playerid);
+	SetPVarInt(playerid, "StanoweCarCheck", 1);
 	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
 // WYPUSZCZANIE z DEMORGAN
 UnJailDeMorgan(playerid)
 {
+	KillTimer(timer_StanowePlyCheck[playerid]);
+	SetPVarInt(playerid, "StanoweCarCheck", 0);
+	DeletePVar(playerid, "StanoweCarCheck");
 	SetPlayerVirtualWorld(playerid, 1);
 	SetPlayerPosEx(playerid, 593.1899,-1494.0863,82.1648);
 	Wchodzenie(playerid);
@@ -794,7 +799,7 @@ public Wchodzenie(playerid) //Zmiana na inteligentny system odmra¿ania
         }
         SetPVarInt(playerid, "enter-nowobj", count);
     }
-    SetTimerEx("Wchodzenie", 1000, 0, "i", playerid);
+    SetTimerEx("Wchodzenie", 1800, 0, "i", playerid);
     return 1;
 }
 public freezuj(playerid){
@@ -835,6 +840,16 @@ public TiNzPJwGUI(playerid)
 	return 1;
 }
 
+public NaprawBronie(playerid)
+{
+	SetTimerEx("NaprawBronieTimer", 1500, false, "i", playerid);
+	return 1;
+}
+public NaprawBronieTimer(playerid)
+{
+	PlayerInfo[playerid][pPrzedmiotyDelay] = 1; //Wykonano delay broni
+	return 1;
+}
 public Naprawianie(playerid){
 naprawiony[playerid] = 0;
 return 1;
@@ -936,8 +951,11 @@ public togczastimer(playerid)
 	return 1;
 }
 
-public naczasbicie(playerid){
-zdarzylwpisac[playerid] = 0;
+public naczasbicie(playerid, playerid_atak){
+	zdazylwpisac[playerid] = 0;
+	TogglePlayerControllable(playerid_atak, 1);
+	ClearAnimations(playerid_atak);
+	SendClientMessage(playerid_atak, COLOR_PURPLE, "Wygra³eœ bitwê czasowo.");
 return 1;
 }
 
@@ -10011,8 +10029,11 @@ CancelFlyMode(playerid)
     GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	DeletePVar(playerid, "FlyMode");
 	CancelEdit(playerid);
+	SetTimerEx("rapidfly_tp", 300, false, "ifff", playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	TogglePlayerSpectating(playerid, false);
-
+	//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 136, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	SpawnPlayer(playerid);
+	//SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	DestroyPlayerObject(playerid, noclipdata[playerid][flyobject]);
 	noclipdata[playerid][cameramode] = CAMERA_MODE_NONE;
 

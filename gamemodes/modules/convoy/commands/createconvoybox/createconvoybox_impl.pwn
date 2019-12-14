@@ -28,6 +28,7 @@ command_createconvoybox_Impl(playerid)
     if(PlayerInfo[playerid][pAdmin] < 5000)
     {
         noAccessMessage(playerid);
+        return 1;
     }
 
     new Float:x, Float:y, Float:z, Float:ang;

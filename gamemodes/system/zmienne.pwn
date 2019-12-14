@@ -993,7 +993,7 @@ new komentator[MAX_PLAYERS];//¯u¿el
 new okrazenia[MAX_PLAYERS];//¯u¿el
 new okregi[MAX_PLAYERS];//¯u¿el
 new kodbitwy[256];//Bitwa
-new zdarzylwpisac[MAX_PLAYERS] = 1;//Bitwa
+new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
 new uzytekajdanki[MAX_PLAYERS];//Kajdany
 new zakuty[MAX_PLAYERS];//Kajdany
 new PDkuje[MAX_PLAYERS];//Kajdany
@@ -1059,6 +1059,9 @@ new AllLeaders;
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
 
+//SANDAL
+new timer_StanowePlyCheck[MAX_PLAYERS];
+
 //new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
 
 //-----------------------------------------------
@@ -1090,7 +1093,8 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
-	
+	SetPVarInt(playerid, "StanoweCarCheck", 0);
+
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
 
@@ -1305,6 +1309,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pNewAP] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
+	//Sandal
+	PlayerInfo[playerid][pPrzedmiotyDelay] = 0;
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;

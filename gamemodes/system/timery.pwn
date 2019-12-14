@@ -3359,7 +3359,7 @@ public VehicleUpdate()
     }
 }
 
-forward closeGate(i, j, playerid);
+
 public closeGate(i, j, playerid)
 {
     bramki_sasd_state[i] = false;
@@ -3369,7 +3369,7 @@ public closeGate(i, j, playerid)
     return 1;
 }
 
-forward SlideRope(playerid);
+
 public SlideRope(playerid)
 {
     if(GetPVarInt(playerid,"sliderope") == 1)
@@ -3385,6 +3385,28 @@ public SlideRope(playerid)
  	}
 	return 1;
 }
+//Sandal
+public Stanowe_CheckPlyInVeh(playerid)
+{
+	if(GetPVarInt(playerid, "StanoweCarCheck") == 1)
+	{
+		if(IsPlayerInAnyVehicle(playerid))
+		{
+			RemovePlayerFromVehicleEx(playerid);
+			JailDeMorgan(playerid);
+		}
+	}
+	return 1;
+}
 
 
+public rapidfly_tp(playerid, Float:X, Float:Y, Float:Z)
+{
+	Wchodzenie(playerid);
+	SetPlayerPosEx(playerid, X, Y, Z);
+	Wchodzenie(playerid);
+	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+	
+}
+//Sandal END
 //EOF
