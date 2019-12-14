@@ -36,6 +36,7 @@ YCMD:przekaz(playerid, params[], help)
     new giveplayerid;
     new cuffedplayerid;
     new Float:przekaz_x, Float:przekaz_y, Float:przekaz_z;
+    new string[128];
     cuffedplayerid = SkutyGracz[playerid];
     if(sscanf(params, "d<fix>", giveplayerid))
     {
