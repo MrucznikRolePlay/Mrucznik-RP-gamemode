@@ -952,10 +952,13 @@ public togczastimer(playerid)
 }
 
 public naczasbicie(playerid, playerid_atak){
+	new string[90];
 	zdazylwpisac[playerid] = 0;
 	TogglePlayerControllable(playerid_atak, 1);
 	ClearAnimations(playerid_atak);
-	SendClientMessage(playerid_atak, COLOR_PURPLE, "Wygra³eœ bitwê czasowo.");
+	SendClientMessage(playerid_atak, COLOR_NEWS, "Wygra³eœ bitwê poniewa¿ broni¹cy za d³ugo wpisywa³ znaki!");
+	format(string, sizeof(string), "AdmCmd: %s wygra³ /pobij na czas.", GetNick(playerid));
+	ABroadCast(COLOR_LIGHTRED,string,1);
 return 1;
 }
 
