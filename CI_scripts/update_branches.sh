@@ -3,7 +3,7 @@
 git checkout master
 git pull
 
-for branch_name in development creative hotfixy mrucznik
+for branch_name in development creative hotfixy mrucznik Sandal
 do
     git checkout $branch_name
     if ! git merge master
