@@ -56,33 +56,44 @@ YCMD:przekaz(playerid, params[], help)
         sendTipMessage(playerid, "Gracz nie jest na s³u¿bie / nie jest funkcjonariuszem!");
         return 1;
     }
+    if(!IsACop(playerid) || OnDuty[playerid] == 0)
+	{
+        sendTipMessage(playerid, "Nie jesteœ na s³u¿bie!");
+        return 1;
+    }
     if(PDkuje[cuffedplayerid] == playerid)
     {
-        GetPlayerPos(playerid, przekaz_x, przekaz_y, przekaz_z);
-        if(IsPlayerInRangeOfPoint(giveplayerid, 8.0, przekaz_x, przekaz_y, przekaz_z))
+        if(SkutyGracz[playerid] > 0)
         {
-            uzytekajdanki[playerid] = 0;
-            uzytekajdanki[giveplayerid] = 1;
-            PDkuje[cuffedplayerid] = giveplayerid;
-            SkutyGracz[giveplayerid] = cuffedplayerid;
-            SkutyGracz[playerid] = -1;
-            sendTipMessage(playerid, "Przekaza³eœ skutego innemu funkcjonariuszowi.");
-            sendTipMessage(giveplayerid, "Funkcjonariusz przekaza³ ci skutego!");
-            format(string, sizeof(string), "* %s przekaza³ skutego %s dla %s", GetNick(playerid, true), GetNick(cuffedplayerid, true), GetNick(giveplayerid, true));
-            ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                
-            return 1;
+            GetPlayerPos(playerid, przekaz_x, przekaz_y, przekaz_z);
+            if(IsPlayerInRangeOfPoint(giveplayerid, 2.0, przekaz_x, przekaz_y, przekaz_z))
+            {
+                uzytekajdanki[playerid] = 0;
+                uzytekajdanki[giveplayerid] = 1;
+                PDkuje[cuffedplayerid] = giveplayerid;
+                SkutyGracz[giveplayerid] = cuffedplayerid;
+                SkutyGracz[playerid] = -1;
+                sendTipMessage(playerid, "Przekaza³eœ skutego innemu funkcjonariuszowi.");
+                sendTipMessage(giveplayerid, "Funkcjonariusz przekaza³ ci skutego!");
+                format(string, sizeof(string), "* %s przekaza³ skutego %s dla %s", GetNick(playerid, true), GetNick(cuffedplayerid, true), GetNick(giveplayerid, true));
+                ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);                  
+                return 1;
+            }
+            else
+            {
+                sendTipMessage(playerid, "Funkcjonariusz nie stoi obok ciebie.");
+                return 1;
+            } 
         }
         else
         {
-            sendTipMessage(playerid, "Funkcjonariusz nie stoi obok ciebie.");
-            return 1;
-        }  
+            sendTipMessage(playerid, "Nikogo nie sku³eœ!");
+        }
     }
     else
     {
         sendTipMessage(playerid, "Nikogo nie masz skutego!");
-         return 1;
+        return 1;
     }
-return 1;
+    return 1;
 }
