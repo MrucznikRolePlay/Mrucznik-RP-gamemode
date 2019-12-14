@@ -29,6 +29,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 		PECET - dobry skrypter
 		LukeSqly - Niby coœ zacz¹³, ale wysz³o jak zwykle
 		Simeone - Kox przez x
+		Creative - mo¿liwe ¿e coœ potrafi
+		Sanda³ - skleci³ modu³ animacji
 
 */
 //----------------------------------------------------*------------------------------------------------------//
@@ -78,13 +80,13 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <YSI\y_timers>
+#define AC_MAX_CONNECTS_FROM_IP		3
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
 #include <timestamp>
-#define AC_MAX_CONNECTS_FROM_IP		2
 #include <systempozarow>   //System Po¿arów v0.1 by PECET
 #include <true_random>
 #include <PreviewModelDialog>
@@ -166,7 +168,7 @@ main()
 	print("\n----------------------------------");
 	print("M | --- Mrucznik Role Play --- | M");
 	print("R | ---        ****        --- | R");
-	print("U | ---        v2.5        --- | U");
+	print("U | ---        v2.6        --- | U");
 	print("C | ---        ****        --- | C");
 	print("Z | ---    by Mrucznik     --- | Z");
 	print("N | ---                    --- | N");
@@ -410,7 +412,7 @@ public OnGameModeInit()
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
-	SetTimer("CheckChangeWeapon", 250, true);
+	SetTimer("CheckChangeWeapon", 450, true);
     SetTimer("RPGTimer", 100, true);
 	//Ustalanie wartoœci wind
 	levelLock[FRAC_SN][5]=1;//Zamkniête
@@ -524,13 +526,6 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
-	//return 0; = strza³ nie zabiera hp
-    /*if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
-    {
-    	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
-		MaTazer[playerid] = 0;
-        return 0;
-	}*/
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) < 11 && hittype == 1)
     {
         new giveplayer[MAX_PLAYER_NAME];
@@ -554,12 +549,6 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
         TogglePlayerControllable(hitid, 0);
         return 0;
     }
-    /*else if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) > 10 && hittype == 1)
-    {
-        GameTextForPlayer(playerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
-        MaTazer[playerid] = 0;
-        return 0;
-    }*/
     return 1;
 }
 
@@ -1836,43 +1825,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 		StopAudioStreamForPlayer(playerid); //POWTÓRKA
 	}
 
-    //Strefy
-    /*if(killerid != INVALID_PLAYER_ID)
-    {
-        new frac = GetPlayerFraction(killerid);
-
-        if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
-        {
-            new bool:inzone=false;
-            for(new i=0;i<MAX_ZONES;i++)
-            {
-                if(bInZone[playerid][i])
-                {
-                    if(bInZone[killerid][i])
-                    {
-                        inzone=true;
-                        break;
-                    }
-                }
-            }
-            if(inzone || GetSVarInt("BW_OnlyGangZones") == 1)
-            {
-                new Float:x, Float:y, Float:z, pZone[MAX_ZONE_NAME];
-				GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
-                GetPlayerPos(playerid, x, y, z);
-                PlayerInfo[playerid][pBW] = GetSVarInt("BW_Time");
-                SetSpawnInfo(playerid, 0, GetPlayerSkin(playerid), x, y, z, 0.0, 0, 0, 0, 0, 0, 0);
-                SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
-                SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
-                SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-				SendFamilyMessage(4, COLOR_ALLDEPT, "Centrala: Do wszystkich jednostek!");
-				SendFamilyMessage(4, COLOR_ALLDEPT, "Centrala: Otrzymano zg³oszenie: nieprzytomna osoba, chyba oddycha... Bojê siê! PrzyjedŸcie tu!");
-				format(string, sizeof(string), "Centrala: Lokalizacja zg³oszenia: %s", pZone);
-				SendFamilyMessage(4, COLOR_ALLDEPT, string);
-            }
-		}
-    }*/
-
 
 	if(IsPlayerConnected(playerid) && playerid != INVALID_PLAYER_ID)
 	{
@@ -2890,92 +2842,13 @@ SetPlayerSpawnSkin(playerid)
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
 		PlayerInfo[playerid][pSkin] = 136;
 	}
-	if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pUniform] > 0) {
+	if((JobDuty[playerid] == 1 || OnDuty[playerid] == 1) && PlayerInfo[playerid][pUniform] > 0) {
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
 	}
 	else
 	{
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	}
-  /*  if(PlayerInfo[playerid][pChar] > 0)
-		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
-
-    if(GetPlayerFraction(playerid) == FRAC_FBI && PlayerInfo[playerid][pTajniak] != 0)
-    {
-        if(PlayerInfo[playerid][pRank] < 4)
-            PlayerInfo[playerid][pTajniak] =0;
-		else
-		{
-		    switch(PlayerInfo[playerid][pTajniak])
-		    {
-				case 1:
-				{
-                    SetPlayerSkinEx(playerid, 107);
-				}
-				case 2:
-				{
-                    SetPlayerSkinEx(playerid, 104);
-				}
-				case 3:
-				{
-                    SetPlayerSkinEx(playerid, 124);
-				}
-				case 4:
-				{
-                    SetPlayerSkinEx(playerid, 123);
-				}
-				case 5:
-				{
-                    SetPlayerSkinEx(playerid, 108);
-				}
-				case 6:
-				{
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-				}
-			}
-			return 1;
-		}
-    }
-
-	if(PlayerInfo[playerid][pSkin] != 0)
-	{
-		if(GetPlayerFraction(playerid) != 0)
-		{
-			if(IsACop(playerid)  || GetPlayerFraction(playerid) == FRAC_ERS)
-			{
-				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-				else
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-			}
-			else if(GetPlayerFraction(playerid) == FRAC_SN)
-			{
-				if(SanDuty[playerid] == 1)
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-				else
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-			}
-			else
-            {
-				SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-                SetPVarInt(playerid, "skinF", 1);
-            }
-		}
-		else if(GetPlayerOrg(playerid) != 0)
-		{
- 			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-		}
-		else if(JobDuty[playerid] == 1)
-		{
-			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-		}
-	}
-    else
-	{
-		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-        SetPVarInt(playerid, "skinF", 0);
-	}*/
-
 	return 1;
 }
 
@@ -6149,11 +6022,6 @@ OnPlayerLogin(playerid, password[])
 		dini_IntSet("Filtry.ini", "Liczba", 0);
 	}*/
 
-    if(PlayerInfo[playerid][pBW] == 60 || PlayerInfo[playerid][pBW] == 122 || PlayerInfo[playerid][pBW] == 123 || PlayerInfo[playerid][pBW] > 600)
-    {
-        PlayerInfo[playerid][pBW] = 0;
-    }
-
 	//Przywracanie Poziomu Poszukiwania
         //Punkty karne
     if (PlayerInfo[playerid][pWL] >= 10000)
@@ -6231,7 +6099,7 @@ OnPlayerLogin(playerid, password[])
 	}
 
     //Konwersja pojazdów:
-    CONVERT_PlayerCar(playerid);
+    //CONVERT_PlayerCar(playerid);
 
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
@@ -6243,6 +6111,10 @@ OnPlayerLogin(playerid, password[])
                 SetPVarInt(playerid, "support_duty", 1);
                 SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
             }
+			else if(PlayerInfo[playerid][pAdmin] > 0)
+			{
+				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/supportduty");
+			}
 
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)
 				ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
@@ -6320,6 +6192,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
 	    Spectate[playerid] = INVALID_PLAYER_ID;
         TogglePlayerSpectating(playerid, 0);
+		SpawnPlayer(playerid);//Próba naprawy bug-banów, Rozw.1
         return 0;
     }
     //30.10
@@ -6708,7 +6581,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			SetPlayerSpecialAction(playerid, 0);
 		}
 		ClearAnimations(playerid, 0);
-		ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.0999, 0, 0, 0, 0, 0, 0);
+		ApplyAnimation(playerid, "CARRY", "crry_prtial", 0, 0, 0, 0, 0, 0, 0);
 		SetPVarInt(playerid, "anim_do", 0);
 		return 0;
 	}
@@ -6827,6 +6700,7 @@ public OnPlayerText(playerid, text[])
 			sendTipMessage(playerid, "Nieprawid³owa d³ugoœæ znaków animacji"); 
 			return 0;
 		}
+		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) return 0;
         new lVal = MRP_DoAnimation(playerid, text);
         if(lVal != 1)
 		{

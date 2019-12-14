@@ -38,6 +38,11 @@ YCMD:og(playerid, params[], help)
             SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
             return 1;
         }
+		if(PlayerInfo[playerid][pConnectTime] == 0 && PlayerInfo[playerid][pLevel] == 1)
+		{
+			sendErrorMessage(playerid, "Aby pisaæ og³oszenia musisz przegraæ 1h na serwerze!");
+			return 1;
+		}
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
 		{
 			sendErrorMessage(playerid, "Nie mo¿esz pisaæ og³oszeñ podczas s³u¿by administratora!"); 

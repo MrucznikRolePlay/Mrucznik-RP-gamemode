@@ -7411,11 +7411,12 @@ SendTeamMessage(team, color, string[], isDepo = 0)
               	if(isDepo == 0) {
               		SendClientMessage(i, color, string);
               	}
+				//SendClientMessage(i, color, string);
 			}
 		}
 	}
 }
-SendTeamMessageOnDuty(team, color, string[], isDepo = 0)
+SendTeamMessageOnDuty(team, color, string[], bool:isBW = false)
 {
 	foreach(new i : Player)
 	{
@@ -7423,13 +7424,14 @@ SendTeamMessageOnDuty(team, color, string[], isDepo = 0)
 		{
 		    if((PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team) && (OnDuty[i] == 1 || JobDuty[i] == 1))
 		    {
-		    	if(isDepo == 1 && gMuteDepo[i] == 0) 
-                {
-                    SendClientMessage(i, color, string);
-                }
-              	if(isDepo == 0) {
+				if(isBW == true)
+				{
+					if(gBW[i] == 0) SendClientMessage(i, color, string);
+				}
+				else
+				{
               		SendClientMessage(i, color, string);
-              	}
+				}
 			}
 		}
 	}
@@ -8703,7 +8705,7 @@ Sejf_Load()
 IsNickCorrect(nick[])
 {
 	//if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
-	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)
+	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{1,})+$") >= 0)
 	{
 		return 1;
 	}
@@ -12465,6 +12467,33 @@ ShowPlayerSentMessages(playerid, forplayerid)
 		if(strlen(SentMessages[playerid][i])) {
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
 		}
+	}
+}
+
+IsReasonAPursuitReason(result[])
+{
+	return (strfind(result, "ucieczka", true) != -1 || strfind(result, "poscig", true) != -1 || strfind(result, "poœcig", true) != -1 || strfind(result, "ucieka", true) != -1);
+}
+
+PursuitMode(playerid, giveplayerid)
+{
+	if(ProxDetectorS(80.0, playerid, giveplayerid))
+	{
+		if(poscig[giveplayerid] != 1)
+		{
+			SendClientMessage(playerid,COLOR_LIGHTBLUE,"Rozpocz¹³eœ poœcig! Trwa on 7 minut.");
+			SendClientMessage(giveplayerid,COLOR_PANICRED,"|_________________Tryb Poœcigu_________________|");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"S³u¿by porz¹dkowe ruszy³y za tob¹ w poœcig! W takim wypadku najlepiej siê poddaæ!");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"W trybie poœcigu nie mozesz wyjœæ z gry, zgin¹æ oraz byæ AFK.");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"Z³amanie tych zasad skutkuje kar¹ nadawan¹ automatycznie.");
+			SendClientMessage(giveplayerid,COLOR_PANICRED,"|______________________________________________|");
+			poscig[giveplayerid] = 1;
+			SetTimerEx("PoscigTimer",7*60000,0,"d",giveplayerid);
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
 	}
 }
 

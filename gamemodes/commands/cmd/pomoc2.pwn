@@ -71,7 +71,7 @@ YCMD:pomoc2(playerid, params[], help)
     if(PlayerInfo[playerid][pMember] == 8||PlayerInfo[playerid][pLider] == 8){
     SendClientMessage(playerid,COLOR_GRAD5,"*** Hitman Agency *** /laptop /zmienskin /reklama /namierz"); }
     if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7){
-    SendClientMessage(playerid,COLOR_GRAD5,"*** GSA *** /tazer /ob /wywalzdmv /radio /family"); }
+    SendClientMessage(playerid,COLOR_GRAD5,"*** GSA *** /wywalzdmv /radio /family"); }
     if(PlayerInfo[playerid][pMember] == 15||PlayerInfo[playerid][pLider] == 15){
     SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /sprzedajneon /napraw /tankowanie /nitro /hydraulika /maluj /felga /zderzak");
     SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /kolory /malunki /felgi /sluzba");
@@ -84,7 +84,7 @@ YCMD:pomoc2(playerid, params[], help)
     if (IsACop(playerid))
     {
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat (/gov) /stanowe /camera /wywaz /gps /odznaka");
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /pacholek /barierka /skuj /rozkuj /mdc /aresztuj /sluzba /poszukiwani /tazer /cywil");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /pacholek /barierka /skuj /rozkuj /mdc /aresztuj /sluzba /poszukiwani /cywil");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** (/r)adio (/d)epartment /ro(radiooc) /depo(departamentooc) (/m)egafon (/su)spect");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /cela /togcrime /pozwolenie /finfo /red /c /tablet");
     }
@@ -98,7 +98,7 @@ YCMD:pomoc2(playerid, params[], help)
     }
     if (gTeam[playerid] == 1 || PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz *** (/r)adio (/d)epartment /ulecz /sluzba /apteczka /zastrzyk /finfo /zmienplec /sprzedajapteczke");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz *** (/r)adio (/d)epartment /ulecz /sluzba /apteczka /zastrzyk /finfo /zmienplec /sprzedajapteczke /togbw");
     }
     if (PlayerInfo[playerid][pAdmin] >= 1)
     {

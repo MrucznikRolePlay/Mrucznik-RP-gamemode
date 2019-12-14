@@ -852,7 +852,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 
 		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
-			if(GetPVarInt(playerid, "dutyadmin") == 0)
+			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
 				if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
 				{
@@ -864,9 +864,9 @@ public PlayerAFK(playerid, afktime, breaktime)
 			}
 			else
 			{
-				if(afktime > 600 && PlayerInfo[playerid][pAdmin] != 5000)
+				if(afktime > 900 && PlayerInfo[playerid][pAdmin] != 5000)
 				{
-					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas wejœcia na @Duty! Otrzymujesz Kicka (10min)");
+					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas wejœcia na @Duty! Otrzymujesz Kicka (15min)");
 					SetTimerEx("KickEx", 500, false, "i", playerid);
 				}
 				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
@@ -883,11 +883,8 @@ public PlayerAFK(playerid, afktime, breaktime)
 		}
 		else if(afktime > 600)
 		{
-			if(GetPlayerAdminDutyStatus(playerid) == 0)
-			{
-				SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (10 minut).");
-				SetTimerEx("KickEx", 500, false, "i", playerid);
-			}
+			SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (10 minut).");
+			SetTimerEx("KickEx", 500, false, "i", playerid);
 		}
 		else
 		{
@@ -2277,6 +2274,7 @@ public JednaSekundaTimer()
 					SetPlayerPosEx(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
+					PlayerKilledByAdmin[i] = 1;
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);

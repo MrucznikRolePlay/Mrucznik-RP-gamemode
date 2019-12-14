@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ stazer ]------------------------------------------------//
+//-------------------------------------------------[ togbw ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,30 +28,23 @@
 	
 */
 
-/*YCMD:stazer(playerid, params[], help)
+YCMD:togbw(playerid, params[], help)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
     if(IsPlayerConnected(playerid))
     {
-        if(IsACop(playerid) || IsABOR(playerid))
-    	{
-    	    if(OnDuty[playerid] != 0 && GetPVarInt(playerid, "tazer") == 1)
-    	    {
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", sendername);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				RemovePlayerAttachedObject(playerid,9);
-                SetPVarInt(playerid, "tazer", 0);
-			}
-			else
+        if(IsAMedyk(playerid))
+        {
+			if (!gBW[playerid])
 			{
-			    sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie!");
+				gBW[playerid] = 1;
+                MSGBOX_Show(playerid, "Raporty o BW ~r~OFF", MSGBOX_ICON_TYPE_OK);
+			}
+			else if (gBW[playerid])
+			{
+				gBW[playerid] = 0;
+                MSGBOX_Show(playerid, "Raporty o BW ~g~ON", MSGBOX_ICON_TYPE_OK);
 			}
 		}
-		return 1;
 	}
 	return 1;
 }
-*/

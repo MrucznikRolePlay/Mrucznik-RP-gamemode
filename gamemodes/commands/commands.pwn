@@ -300,7 +300,6 @@
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
 #include "cmd/o.pwn"
-//#include "cmd/obezwladnij.pwn" // tazer
 #include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
@@ -323,7 +322,6 @@
 #include "cmd/paliwo.pwn"
 #include "cmd/panel.pwn"
 #include "cmd/panelbasenu.pwn"
-//#include "cmd/paralizuj.pwn" //tazer
 #include "cmd/patrol.pwn"
 #include "cmd/pban.pwn"
 #include "cmd/pblok.pwn"
@@ -502,6 +500,7 @@
 #include "cmd/togpodglad.pwn"
 #include "cmd/togtxda.pwn"
 #include "cmd/togwl.pwn"
+#include "cmd/togbw.pwn"
 #include "cmd/togscroll.pwn"
 #include "cmd/tp.pwn"
 #include "cmd/trampolina.pwn"
@@ -661,7 +660,7 @@
 #include "cmd/dajapteczke.pwn"
 #include "cmd/fracinfo.pwn"
 #include "cmd/wlsett.pwn"
-
+#include "cmd/przekaz.pwn"
 InitCommands()
 {
 	Aliases();
@@ -987,18 +986,13 @@ static Aliases()
 	//o
 	Command_AddAltNamed("o", "ooc");
 
-	//obezwladnij
-	//Command_AddAltNamed("obezwladnij", "ob");
-
 	//ochrona
 	Command_AddAltNamed("ochrona", "guard");
 	Command_AddAltNamed("ochrona", "sellkami");
 	Command_AddAltNamed("ochrona", "sellkamizelke");
 
 	//od
-	Command_AddAltNamed("od", "podnies");
 	Command_AddAltNamed("od", "odbierz");
-	//Command_AddAltNamed("od", "p"); //na rzecz systemu broni
 
 	//og
 	Command_AddAltNamed("og", "advertise");
@@ -1017,8 +1011,6 @@ static Aliases()
 	Command_AddAltNamed("paliwo", "fuel");
 	Command_AddAltNamed("paliwo", "licznikpaliwa");
 
-	//paralizuj
-	//Command_AddAltNamed("paralizuj", "paraliz");
 	//personalizuj
 	Command_AddAltNamed("personalizuj", "personalizacja");
 	Command_AddAltNamed("personalizuj", "personalize");

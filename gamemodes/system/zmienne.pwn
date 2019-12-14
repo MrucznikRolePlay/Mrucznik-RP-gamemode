@@ -754,6 +754,7 @@ new gLastCar[MAX_PLAYERS];
 new gOoc[MAX_PLAYERS];
 new gMuteDepo[MAX_PLAYERS];
 new gCrime[MAX_PLAYERS];
+new gBW[MAX_PLAYERS];
 new gNewbie[MAX_PLAYERS];
 new gNews[MAX_PLAYERS];
 new gFam[MAX_PLAYERS];
