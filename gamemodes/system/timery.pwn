@@ -2190,32 +2190,35 @@ public JednaSekundaTimer()
 			CellTime[i]++;
 		}
 		
-		if(State == (PLAYER_STATE_DRIVER || PLAYER_STATE_PASSENGER) && !ToggleSpeedo[i])
+		if(State == PLAYER_STATE_DRIVER || State == PLAYER_STATE_PASSENGER)
 		{
-			VehicleModel = GetVehicleModel(vehicleid);
-            if(VehicleModel != 0)
-            {
-                GetVehicleHealth(vehicleid, health);
+			if(!ToggleSpeedo[i])
+			{
+				VehicleModel = GetVehicleModel(vehicleid);
+				if(VehicleModel != 0)
+				{
+					GetVehicleHealth(vehicleid, health);
 
-    			if(VehicleModel==509||VehicleModel==481||VehicleModel==510)
-    			{
-    				SetVehicleHealth(vehicleid, 1000.0);
-    				Gas[vehicleid] = 100;
-    			}
-    			if(VehicleModel==520||VehicleModel==476||VehicleModel==593||VehicleModel==553||VehicleModel==513||VehicleModel==512||VehicleModel==577||VehicleModel==592||VehicleModel==511||VehicleModel==539||VehicleModel==464||VehicleModel==519)
-    			{
-    				Gas[vehicleid] = 100;
-    			}
+					if(VehicleModel==509||VehicleModel==481||VehicleModel==510)
+					{
+						SetVehicleHealth(vehicleid, 1000.0);
+						Gas[vehicleid] = 100;
+					}
+					if(VehicleModel==520||VehicleModel==476||VehicleModel==593||VehicleModel==553||VehicleModel==513||VehicleModel==512||VehicleModel==577||VehicleModel==592||VehicleModel==511||VehicleModel==539||VehicleModel==464||VehicleModel==519)
+					{
+						Gas[vehicleid] = 100;
+					}
 
-                GetVehicleVelocity(vehicleid, vel[0], vel[1], vel[2]);
-                Dis = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
+					GetVehicleVelocity(vehicleid, vel[0], vel[1], vel[2]);
+					Dis = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
 
-                GetPlayer2DZone(i, pZone, MAX_ZONE_NAME);
-    			format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d\%~n~GPS: %s~n~%s" ,floatround(Dis), floatround(Gas[vehicleid]),floatround(health/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
-                PlayerTextDrawSetString(i, Licznik[i], string);
-            }
+					GetPlayer2DZone(i, pZone, MAX_ZONE_NAME);
+					format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d\%~n~GPS: %s~n~%s" ,floatround(Dis), floatround(Gas[vehicleid]),floatround(health/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
+					PlayerTextDrawSetString(i, Licznik[i], string);
+				}
 
-			OldCoordsX[i] = x; OldCoordsY[i] = y;
+				OldCoordsX[i] = x; OldCoordsY[i] = y;
+			}
 		}
         //PAYDAY
         level = PlayerInfo[i][pLevel];
