@@ -10032,14 +10032,9 @@ CancelFlyMode(playerid)
     GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	DeletePVar(playerid, "FlyMode");
 	CancelEdit(playerid);
-	SetTimerEx("rapidfly_tp", 100, false, "ifff", playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	TogglePlayerSpectating(playerid, false);
-	//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 136, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-	SpawnPlayer(playerid);
-	//SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	DestroyPlayerObject(playerid, noclipdata[playerid][flyobject]);
 	noclipdata[playerid][cameramode] = CAMERA_MODE_NONE;
-
     if(noclipdata[playerid][fireobject] != 0)
     {
         DestroyDynamicObject(noclipdata[playerid][fireobject]);

@@ -3398,15 +3398,5 @@ public Stanowe_CheckPlyInVeh(playerid)
 	}
 	return 1;
 }
-
-
-public rapidfly_tp(playerid, Float:X, Float:Y, Float:Z)
-{
-	TogglePlayerControllable(playerid, 0);
-	SetPlayerPosEx(playerid, X, Y, Z);
-	Wchodzenie(playerid);
-	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
-	
-}
 //Sandal END
 //EOF

@@ -6196,9 +6196,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
 		Spectate[playerid] = INVALID_PLAYER_ID;
-		SetTimerEx("rapidfly_tp", 100, false, "ifff", playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
-        TogglePlayerSpectating(playerid, 0);
-		SpawnPlayer(playerid);
+		TogglePlayerSpectating(playerid, 0);
 		return 0;
     }
     //30.10
