@@ -239,7 +239,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`HeadValue`='%d',\
 	`BlokadaPisania`='%d',\
 	`Jailed`='%d',\
-	`AJpowod`='%s',\
+	`AJreason`='%s',\
 	`JailTime`='%d',\
 	`Materials`='%d',\
 	`Drugs`='%d',\
@@ -270,7 +270,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pHeadValue],
 	PlayerInfo[playerid][pBP],
 	PlayerInfo[playerid][pJailed],
-	PlayerInfo[playerid][pAJpowod],
+	PlayerInfo[playerid][pAJreason],
 	PlayerInfo[playerid][pJailTime],
 	PlayerInfo[playerid][pMats],
 	PlayerInfo[playerid][pDrugs],
@@ -580,7 +580,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pHeadValue], 
 		PlayerInfo[playerid][pBP], 
 		PlayerInfo[playerid][pJailed], 
-		PlayerInfo[playerid][pAJpowod],
+		PlayerInfo[playerid][pAJreason],
 		PlayerInfo[playerid][pJailTime], 
 		PlayerInfo[playerid][pMats], 
 		PlayerInfo[playerid][pDrugs], 

@@ -1311,7 +1311,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pBW] = 0;
 	//Sandal
 	PlayerInfo[playerid][pPrzedmiotyDelay] = 0;
-	format(PlayerInfo[playerid][pAJpowod], 64, "Brak");
+	format(PlayerInfo[playerid][pAJreason], 64, "Brak");
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
