@@ -2196,7 +2196,7 @@ public JednaSekundaTimer()
 			CellTime[i]++;
 		}
 		
-		if(State == PLAYER_STATE_DRIVER && !ToggleSpeedo[i])
+		if(State == (PLAYER_STATE_DRIVER || PLAYER_STATE_PASSENGER) && !ToggleSpeedo[i])
 		{
 			VehicleModel = GetVehicleModel(vehicleid);
             if(VehicleModel != 0)
