@@ -1451,7 +1451,8 @@ enum pInfo
 	pBusinessMember,
 	pLiderValue,
 	pUniform,
-	pPrzedmiotyDelay
+	pPrzedmiotyDelay,
+	pAJpowod[64]
 };
 enum StringData
 {

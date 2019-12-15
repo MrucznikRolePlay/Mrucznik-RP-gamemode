@@ -2448,11 +2448,15 @@ SetPlayerSpawnPos(playerid)
 	}
 	else if(PlayerInfo[playerid][pJailed] == 3)//AdminJail
 	{
+		new string[128];
 	    SetPlayerInterior(playerid, 0);
 		SetPlayerPosEx(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
 		PlayerInfo[playerid][pMuted] = 1;
 		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
+		if(PlayerInfo[playerid][pAJpowod] == "null") format(PlayerInfo[playerid][pAJpowod], 64, "Brak Powodu");
+		format(string, sizeof(string), "Wracasz do Admin Jaila. Powód: %s", PlayerInfo[playerid][pAJpowod]);
+		SendClientMessage(playerid, COLOR_PANICRED, string);
 	//	SendClientMessage(playerid, COLOR_LIGHTRED, "Gra³eœ NON-RP. Wracasz do Admin Jaila.");
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
