@@ -570,6 +570,7 @@ SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 	}
 	MruMySQL_SetAccInt("Jailed", nickOdbieracza, 3);
 	MruMySQL_SetAccInt("JailTime", nickOdbieracza, timeVal*60);
+	MruMySQL_SetAccString("AJpowod", nickOdbieracza, result);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	return 1;
@@ -581,6 +582,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	SendClientMessage(playerid, COLOR_LIGHTRED, string);
 	PlayerInfo[playerid][pJailed] = 3;
 	PlayerInfo[playerid][pJailTime] = timeVal*60;
+	format(PlayerInfo[playerid][pAJpowod], 64, result);
 	SetPlayerVirtualWorld(playerid, 1000+playerid);
 	PlayerInfo[playerid][pMuted] = 1;
 	SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);

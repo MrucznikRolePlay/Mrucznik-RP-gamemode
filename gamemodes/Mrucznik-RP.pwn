@@ -2448,6 +2448,7 @@ SetPlayerSpawnPos(playerid)
 	}
 	else if(PlayerInfo[playerid][pJailed] == 3)//AdminJail
 	{
+		PlayerInfo[playerid][pAJpowod] = MruMySQL_GetAccString("AJpowod", GetPlayerName(playerid));
 		new string[128];
 	    SetPlayerInterior(playerid, 0);
 		SetPlayerPosEx(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
