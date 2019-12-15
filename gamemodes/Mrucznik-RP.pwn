@@ -5079,7 +5079,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     		ClearAnimations(playerid);
         }
 
-        TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
+        if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
     {
