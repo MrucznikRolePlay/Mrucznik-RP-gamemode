@@ -6199,7 +6199,9 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
 		Spectate[playerid] = INVALID_PLAYER_ID;
-		TogglePlayerSpectating(playerid, 0);
+		//TogglePlayerSpectating(playerid, 0);
+		GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+        SetTimerEx("SpecEnd", 500, false, "d", playerid);
 		return 0;
     }
     //30.10
