@@ -8370,6 +8370,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", sendername);
 	SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 	SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+	SetPlayerColor(para1,TEAM_HIT_COLOR);
 	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
