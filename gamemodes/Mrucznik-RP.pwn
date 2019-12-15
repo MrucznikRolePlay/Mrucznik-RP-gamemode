@@ -5123,6 +5123,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		{
             Taxi_Pay(playerid);
 		}
+		PlayerTextDrawHide(playerid, Licznik[playerid]);
     }
 	if(newstate == PLAYER_STATE_ONFOOT)
 	{
