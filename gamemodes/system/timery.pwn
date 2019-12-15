@@ -188,7 +188,7 @@ forward odczekaj15sec(playerid);
 public odczekaj15sec(playerid)
 {
 	SetPVarInt(playerid, "CanDoIt", 0); 
-	SetPVarInt(playerid, "WhatToDo", 0)
+	SetPVarInt(playerid, "WhatToDo", 0);
 	KillTimer(odczekajTimer[playerid]);
 	return 1; 
 }
