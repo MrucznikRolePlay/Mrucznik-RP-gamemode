@@ -426,6 +426,8 @@ GivePWarnForPlayer(player[], adminid, result[])
 						player,
 						result);
 	MruMySQL_SetAccInt("Warnings", nickDoWarna, MruMySQL_GetAccInt("Warnings", nickDoWarna)+1);
+	if(strfind(result, "/q") != -1 || strfind(result, "ucieczka") != -1) MruMySQL_SetAccInt("Jailed", nickDoWarna, 0);
+
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
