@@ -1200,9 +1200,16 @@ public Spectator()
 					}
 					else
 					{
-						format(string, sizeof(string), "Dosta³eœ kicka od systemu, powód: Spawn Broni [%d]", ac_val);
-						SendClientMessage(i, COLOR_PANICRED, string);
-						KickEx(i);
+						if(GetPVarInt(i, "AC_AntySpawnBroni") == 0)
+						{
+							format(string, sizeof(string), "Dosta³eœ kicka od systemu, powód: Spawn Broni [%d]", ac_val);
+							SendClientMessage(i, COLOR_PANICRED, string);
+							KickEx(i);
+						}
+						else
+						{
+							DeletePVar(i, "AC_AntySpawnBroni");
+						}
 					}
 				}
 				if(weaponID >= 2 && weaponID <= 45)

@@ -70,6 +70,7 @@ YCMD:zwolnij(playerid, params[], help)
 							JobDuty[para1] = 0;
 							OnDuty[para1] = 0;
 							SanDuty[para1] = 0;
+							SetPVarInt(para1, "AC_AntySpawnBroni", 1);
 							UsunBron(para1);
 							SetSpawnInfo(para1, gTeam[para1], PlayerInfo[para1][pSkin],0.0,0.0,0.0,0,0,0,0,0,0,0);
 							MedicBill[para1] = 0;

@@ -842,7 +842,7 @@ public TiNzPJwGUI(playerid)
 
 public NaprawBronie(playerid)
 {
-	SetTimerEx("NaprawBronieTimer", 1500, false, "i", playerid);
+	SetTimerEx("NaprawBronieTimer", 3000, false, "i", playerid);
 	return 1;
 }
 public NaprawBronieTimer(playerid)
@@ -8374,6 +8374,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
 	PlayerInfo[para1][pJob] = 0;
+	SetPVarInt(para1, "AC_AntySpawnBroni", 1);
 	orgUnInvitePlayer(para1);
 	MedicBill[para1] = 0;
 	if(respawn)

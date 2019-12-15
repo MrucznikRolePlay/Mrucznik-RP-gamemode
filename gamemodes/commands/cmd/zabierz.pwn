@@ -115,6 +115,7 @@ YCMD:zabierz(playerid, params[], help)
 				format(string, sizeof(string), "* Oficer %s zabra³ twoj¹ broñ.", sendername);
 				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "* Oficer %s zabra³ %s broñ.", sendername, giveplayer);
+				SetPVarInt(giveplayerid, "AC_AntySpawnBroni", 1);
 				ResetPlayerWeapons(giveplayerid);
 				UsunBron(giveplayerid);
 			}
