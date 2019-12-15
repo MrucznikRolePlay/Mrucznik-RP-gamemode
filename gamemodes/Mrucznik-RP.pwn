@@ -2454,7 +2454,6 @@ SetPlayerSpawnPos(playerid)
 		PlayerInfo[playerid][pMuted] = 1;
 		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
-		if(PlayerInfo[playerid][pAJpowod] == "null") format(PlayerInfo[playerid][pAJpowod], 64, "Brak Powodu");
 		format(string, sizeof(string), "Wracasz do Admin Jaila. Powód: %s", PlayerInfo[playerid][pAJpowod]);
 		SendClientMessage(playerid, COLOR_PANICRED, string);
 	//	SendClientMessage(playerid, COLOR_LIGHTRED, "Gra³eœ NON-RP. Wracasz do Admin Jaila.");
