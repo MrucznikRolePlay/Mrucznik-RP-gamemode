@@ -3402,7 +3402,7 @@ public Stanowe_CheckPlyInVeh(playerid)
 
 public rapidfly_tp(playerid, Float:X, Float:Y, Float:Z)
 {
-	Wchodzenie(playerid);
+	TogglePlayerControllable(playerid, 0);
 	SetPlayerPosEx(playerid, X, Y, Z);
 	Wchodzenie(playerid);
 	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
