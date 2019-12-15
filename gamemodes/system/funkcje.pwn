@@ -8375,7 +8375,8 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
 	PlayerInfo[para1][pJob] = 0;
-	SetPVarInt(para1, "AC_AntySpawnBroni", 1);
+	SetTimerEx("AntySB", 5000, 0, "d", para1);
+	AntySpawnBroni[para1] = 5;
 	orgUnInvitePlayer(para1);
 	MedicBill[para1] = 0;
 	if(respawn)
