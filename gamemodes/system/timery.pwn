@@ -3402,13 +3402,15 @@ public SpecEnd(playerid)
 	{
 		SendClientMessage(playerid, -1, "Pomyœlnie zszed³eœ z ADMIN-SPEC!");
 		SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 156, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-	    TogglePlayerSpectating(playerid, false);
+		TogglePlayerSpectating(playerid, false);
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	}
 	else
 	{
 	    SendClientMessage(playerid, -1, "B³¹d, ale nie ban! Poczekaj kilka sekund! Ju¿ to naprawiam!");
 	    SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 156, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
 	    TogglePlayerSpectating(playerid, false);
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	}
 	return 1;
 }
