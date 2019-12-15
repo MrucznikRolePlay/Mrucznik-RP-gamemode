@@ -5009,7 +5009,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	{
 		return PlayerEnterVehOnInjury(playerid);
 	}
-	if(newstate == PLAYER_STATE_DRIVER)
+	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
         if(newstate == PLAYER_STATE_DRIVER)
         {
