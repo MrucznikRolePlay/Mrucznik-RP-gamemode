@@ -94,7 +94,10 @@ YCMD:goto(playerid, params[], help)
 					}
 					else
 					{
-						SetPlayerPosEx(playerid,plocx,plocy+2, plocz);
+						//Anty bugban test
+						GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+        				SetTimerEx("Goto_antybugban", 500, false, "dfff", playerid, plocx,plocy+2, plocz);
+						//SetPlayerPosEx(playerid,plocx,plocy+2, plocz);
 					}
 					_MruAdmin(playerid, "Zosta³eœ teleportowany!");
 				}
