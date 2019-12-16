@@ -1,0 +1,26 @@
+{
+    "name": "wyrok",
+    "description": "Nadaje wyrok graczowi",
+    "permissions": [],
+    "author": "Sandal",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "czas",
+            "description": "Ilosc Dni"
+        },
+        {
+            "type": "string",
+            "size": "24",
+            "name": "sygnatura",
+            "description": "Sygnatura Wyroku"
+        }
+    ],
+    "date": "16.12.2019"
+}

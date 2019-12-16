@@ -962,6 +962,26 @@ public naczasbicie(playerid, playerid_atak){
 	return 1;
 }
 
+ABroadCast2(color,const string[],level)
+{
+	foreach(new i : Player)
+	{
+		if(IsPlayerConnected(i))
+		{
+			if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
+			{
+				SendClientMessage(i, color, string);
+			}
+			else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
+			{
+				SendClientMessage(i, color, string);
+			}
+		}
+	}
+	printf("%s", string);
+	return 1;
+}
+
 /*public UzyteKajdany(playerid,giveplayerid)
 {
 	if(PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
