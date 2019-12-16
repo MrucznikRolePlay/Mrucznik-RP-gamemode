@@ -113,7 +113,7 @@ YCMD:wiadomosc(playerid, params[], help)
             if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1) //podgl?d admina
             {
                 format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
-                ABroadCast2(COLOR_LIGHTGREEN,string,1);
+                ABroadCast(COLOR_LIGHTGREEN,string,1);
             }
         }
         else 
