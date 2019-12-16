@@ -3113,8 +3113,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] >= 15000 )
 						{
-							PlayerInfo[playa][pGun1] = 5;
-		            		PlayerInfo[playa][pAmmo1] = 1;
+							PlayerInfo[playerid][pGun1] = 5;
+		            		PlayerInfo[playerid][pAmmo1] = 1;
 							GivePlayerWeapon(playerid, 5, 1);
 							ZabierzKase(playerid, 15000);
 							format(string, sizeof(string), "~r~-$%d", 15000);
@@ -3133,8 +3133,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] >= 50000 )
 						{
-							PlayerInfo[playa][pGun1] = 4;
-		            		PlayerInfo[playa][pAmmo1] = 1;
+							PlayerInfo[playerid][pGun1] = 4;
+		            		PlayerInfo[playerid][pAmmo1] = 1;
 							GivePlayerWeapon(playerid, 4, 1);
 							ZabierzKase(playerid, 50000);
 							format(string, sizeof(string), "~r~-$%d", 50000);
