@@ -2470,7 +2470,7 @@ SetPlayerSpawnPos(playerid)
 		UsunBron(playerid);
 		PlayerInfo[playerid][pJailed] = 3;
 		PlayerInfo[playerid][pJailTime] = 15*60;
-		format(PlayerInfo[playerid][pAJreason], sizeof(PlayerInfo[playerid][pAJreason]), "/q podczas akcji (Marcepan)");
+		format(PlayerInfo[playerid][pAJreason], 64, "/q podczas akcji (Marcepan)");
         SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerInfo[playerid][pMuted] = 1;
 		SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
