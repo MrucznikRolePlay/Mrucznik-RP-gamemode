@@ -3416,7 +3416,6 @@ public SpecEnd(playerid)
 }
 public Goto_antybugban(playerid, Float:X, Float:Y, Float:Z)
 {
-	TogglePlayerSpectating(playerid, true);
 	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 156, X, Y, Z, 10.0, -1, -1, -1, -1, -1, -1);
 	TogglePlayerSpectating(playerid, false);
 	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
