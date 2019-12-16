@@ -150,7 +150,7 @@ YCMD:sms(playerid, params[], help)
 		if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[checkNumberPlayer][pPodPW] == 1) //podgl?d admina
         {
             format(string, sizeof(string), "AdmCmd -> %s(%d) /sms -> %s(%d): %s", GetNick(playerid), playerid, GetNick(checkNumberPlayer), checkNumberPlayer, messSMS);
-            ABroadCast2(COLOR_LIGHTGREEN,string,1);
+            ABroadCast2(COLOR_YELLOW,string,1);
         }
 		new slotKontaktu = PobierzSlotKontaktuPoNumerze(playerid, givePlayerNumber);
 		if(slotKontaktu >= 0)
