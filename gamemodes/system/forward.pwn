@@ -144,7 +144,7 @@ forward NaprawBronieTimer(playerid);
 forward SpecEnd(playerid);
 forward Stanowe_CheckPlyInVeh(playerid);
 forward rapidfly_tp(playerid, Float:X, Float:Y, Float:Z);
-forward Goto_antybugban(playerid, Float:X, Float:Y, Float:Z)
+forward Goto_antybugban(playerid, Float:X, Float:Y, Float:Z);
 
 forward SlideRope(playerid);
 forward closeGate(i, j, playerid);

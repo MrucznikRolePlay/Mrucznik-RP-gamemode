@@ -3109,6 +3109,46 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
 					}
+					case 14:
+					{
+						if (kaska[playerid] >= 15000 )
+						{
+							PlayerInfo[playa][pGun1] = 5;
+		            		PlayerInfo[playa][pAmmo1] = 1;
+							GivePlayerWeapon(playerid, 5, 1);
+							ZabierzKase(playerid, 15000);
+							format(string, sizeof(string), "~r~-$%d", 15000);
+							GameTextForPlayer(playerid, string, 5000, 1);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							format(string, sizeof(string), "Zakupiono bejzbol.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							return 1;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
+						}
+					}
+					case 15:
+					{
+						if (kaska[playerid] >= 50000 )
+						{
+							PlayerInfo[playa][pGun1] = 4;
+		            		PlayerInfo[playa][pAmmo1] = 1;
+							GivePlayerWeapon(playerid, 4, 1);
+							ZabierzKase(playerid, 50000);
+							format(string, sizeof(string), "~r~-$%d", 50000);
+							GameTextForPlayer(playerid, string, 5000, 1);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							format(string, sizeof(string), "Zakupiono nó¿.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							return 1;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
+						}
+					}
 				}
 			}
 		}
