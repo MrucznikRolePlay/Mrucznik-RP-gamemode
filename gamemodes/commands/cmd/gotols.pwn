@@ -41,7 +41,7 @@ YCMD:gotols(playerid, params[], help)
 			}
 			else
 			{
-				SetPlayerPosEx(playerid, 1529.6,-1691.2,13.3);
+				SetPlayerPos(playerid, 1529.6,-1691.2,13.3);
 			}
             SetPlayerVirtualWorld(playerid, 0);
             SetPlayerInterior(playerid, 0);
