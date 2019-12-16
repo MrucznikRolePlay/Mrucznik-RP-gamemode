@@ -158,7 +158,6 @@ YCMD:sms(playerid, params[], help)
 		}
 		SendClientMessage(playerid, COLOR_YELLOW, string);
 		SavePlayerSentMessage(playerid, string);
-		
 		//pobór op³at
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "~r~$-%d", smsCost);

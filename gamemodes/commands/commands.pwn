@@ -661,6 +661,7 @@
 #include "cmd/fracinfo.pwn"
 #include "cmd/wlsett.pwn"
 #include "cmd/przekaz.pwn"
+#include "cmd/inwigilacja.pwn"
 InitCommands()
 {
 	Aliases();

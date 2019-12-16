@@ -1452,7 +1452,8 @@ enum pInfo
 	pLiderValue,
 	pUniform,
 	pPrzedmiotyDelay,
-	pAJreason[64]
+	pAJreason[64],
+	pPodPW
 };
 enum StringData
 {
