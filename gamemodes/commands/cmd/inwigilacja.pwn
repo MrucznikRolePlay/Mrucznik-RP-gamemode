@@ -61,9 +61,32 @@ YCMD:inwigilacja(playerid, params[], help)
 				}
 			}
         }
+        else if(PlayerInfo[playerid][pAdmin] >= 1)
+        {
+            new para1;
+            if( sscanf(params, "k<fix>", para1))
+            {
+                sendTipMessage(playerid, "U¿yj /inwiglacja [playerid/CzêœæNicku]");
+                return 1;
+            }
+            if(para1 != INVALID_PLAYER_ID)
+		    {
+		        GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+                if(PlayerInfo[para1][pPodPW] == 1)
+				{
+                    SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(playerid), playerid, GetNick(para1), para1));
+					PlayerInfo[para1][pPodPW] = 0;
+					Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(playerid), GetPlayerLogName(para1));
+                }
+                else
+                {
+                    sendTipMessage(playerid, "Komenda dostêpna od 150@lvl.")
+                }
+            }
+        }
         else
         {
-            noAccessMessage(playerid);
+            return 1;
         }
     }
     return 1;
