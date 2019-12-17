@@ -80,7 +80,7 @@ YCMD:inwigilacja(playerid, params[], help)
                 }
                 else
                 {
-                    sendTipMessage(playerid, "Komenda dostêpna od 150@lvl.")
+                    sendTipMessage(playerid, "Komenda dostêpna od 150@lvl.");
                 }
             }
         }
