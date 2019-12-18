@@ -41,7 +41,7 @@ YCMD:gotoszpital(playerid, params[], help)
 			}
 			else
 			{
-				SetPlayerPosEx(playerid, 1177.5322,-1323.6294,14.0753);
+				SetPlayerPos(playerid, 1177.5322,-1323.6294,14.0753);
 			}
             SetPlayerVirtualWorld(playerid, 0);
             SetPlayerInterior(playerid, 0);
