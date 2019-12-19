@@ -3120,7 +3120,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "~r~-$%d", 15000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							format(string, sizeof(string), "Zakupiono bejzbol.");
+							format(string, sizeof(string), "Zakupiono kij baseballowy.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
@@ -5338,7 +5338,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun1] = 5;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
 	                     	ZabierzKase(playerid, 700);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ bejzbola za 700$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kij baseballowy za 700$");
 		                }
 		                else
 		                {
