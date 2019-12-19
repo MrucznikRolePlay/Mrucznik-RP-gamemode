@@ -1452,7 +1452,7 @@ enum pInfo
 	pLiderValue,
 	pUniform,
 	pPrzedmiotyDelay,
-	pAJreason[64],
+	pAJreason[MAX_AJ_REASON],
 	pPodPW
 };
 enum StringData

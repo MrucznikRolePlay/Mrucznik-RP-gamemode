@@ -582,7 +582,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	SendClientMessage(playerid, COLOR_LIGHTRED, string);
 	PlayerInfo[playerid][pJailed] = 3;
 	PlayerInfo[playerid][pJailTime] = timeVal*60;
-	format(PlayerInfo[playerid][pAJreason], 64, result);
+	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, result);
 	SetPlayerVirtualWorld(playerid, 1000+playerid);
 	PlayerInfo[playerid][pMuted] = 1;
 	SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
