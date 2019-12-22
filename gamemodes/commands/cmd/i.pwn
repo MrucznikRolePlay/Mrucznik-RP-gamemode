@@ -55,8 +55,8 @@ YCMD:i(playerid, params[], help)
         SendIRCMessage(PlayersChannel[playerid], COLOR_YELLOW2, string);
         if(PlayerInfo[playerid][pPodPW] == 1)
         {
-            format(string, sizeof(string), "AdmCmd -> %s(%d) /irc(#%d) -> %s", sendername, playerid, PlayersChannel[playerid], string);
-            ABroadCast2(KOLOR_ROZOWY,string,1);
+            format(string, sizeof(string), "AdmCmd -> %s(%d) /irc(#%d) -> %s", sendername, playerid, PlayersChannel[playerid]+1, string);
+            ABroadCast(KOLOR_ROZOWY,string,1,1);
          }
 		Log(chatLog, INFO, "%s irc %d: %s", GetPlayerLogName(playerid), PlayersChannel[playerid], params);
     }

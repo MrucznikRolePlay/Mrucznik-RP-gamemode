@@ -962,26 +962,6 @@ public naczasbicie(playerid, playerid_atak){
 	return 1;
 }
 
-ABroadCast2(color,const string[],level)
-{
-	foreach(new i : Player)
-	{
-		if(IsPlayerConnected(i))
-		{
-			if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}
-			else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}
-		}
-	}
-	printf("%s", string);
-	return 1;
-}
-
 /*public UzyteKajdany(playerid,giveplayerid)
 {
 	if(PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
@@ -7345,23 +7325,38 @@ BroadCast(color,const string[])
 	return 1;
 }
 
-ABroadCast(color,const string[],level)
+ABroadCast(color,const string[],level, podglad = 0)
 {
 	foreach(new i : Player)
 	{
+		
 		if(IsPlayerConnected(i))
 		{
-			if (PlayerInfo[i][pAdmin] >= level)
+			if(podglad == 0)
 			{
-				SendClientMessage(i, color, string);
+				if (PlayerInfo[i][pAdmin] >= level)
+				{
+					SendClientMessage(i, color, string);
+				}
+				else if (PlayerInfo[i][pNewAP] >= level)
+				{
+					SendClientMessage(i, color, string);
+				}
+				else if (PlayerInfo[i][pZG] >= level)
+				{
+					SendClientMessage(i, color, string);
+				}
 			}
-			else if (PlayerInfo[i][pNewAP] >= level)
+			else
 			{
-				SendClientMessage(i, color, string);
-			}
-			else if (PlayerInfo[i][pZG] >= level)
-			{
-				SendClientMessage(i, color, string);
+				if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
+				{
+					SendClientMessage(i, color, string);
+				}
+				else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
+				{
+					SendClientMessage(i, color, string);
+				}	
 			}
 		}
 	}
