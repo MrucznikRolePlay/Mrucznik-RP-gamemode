@@ -516,166 +516,165 @@ MRP_DoAnimation(playerid, arg1[])
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@bomba", arg1, true) == 0)
+	else if(strcmp("@bomba", arg1, true) == 0)
 	{
 		ClearAnimations(playerid, 1);
 		ApplyAnimation(playerid, "BOMBER", "BOM_Plant", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@celuj", arg1, true) == 0)
+	else if(strcmp("@celuj", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid,"POLICE","COP_getoutcar_LHS",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@smiech", arg1, true) == 0)
+	else if(strcmp("@smiech", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "RAPPING", "Laugh_01", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@maska", arg1, true) == 0)
+	else if(strcmp("@maska", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "SHOP", "ROB_Shifty", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@napad", arg1, true) == 0)
+	else if(strcmp("@napad", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "SHOP", "ROB_Loop_Threat", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@ramiona", arg1, true) == 0)
+	else if(strcmp("@ramiona", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid,"COP_AMBIENT","Coplook_loop",4.0999,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@diler3", arg1, true) == 0)
+	else if(strcmp("@diler3", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "DEALER", "DEALER_IDLE", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@pa", arg1, true) == 0)
+	else if(strcmp("@pa", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "PED", "endchat_03", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@diler4", arg1, true) == 0)
+	else if(strcmp("@diler4", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "DEALER", "DEALER_IDLE_01", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@lez", arg1, true) == 0 || strcmp(arg1, "@lez1", true) == 0)
+	else if(strcmp("@lez", arg1, true) == 0 || strcmp(arg1, "@lez1", true) == 0)
 	{
 		ApplyAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@wymiotuj", arg1, true) == 0)
+	else if(strcmp("@wymiotuj", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@zarcie", arg1, true) == 0)
+	else if(strcmp("@zarcie", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@machaj", arg1, true) == 0)
+	else if(strcmp("@machaj", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "ON_LOOKERS", "wave_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@diler", arg1, true) == 0 || strcmp(arg1, "@diler1", true) == 0)
+	else if(strcmp("@diler", arg1, true) == 0 || strcmp(arg1, "@diler1", true) == 0)
 	{
 		ApplyAnimation(playerid, "DEALER", "DEALER_DEAL", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@crack", arg1, true) == 0 || strcmp(arg1, "@cpun1", true) == 0)
+	else if(strcmp("@crack", arg1, true) == 0 || strcmp(arg1, "@cpun1", true) == 0)
 	{
 		ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@crack2", arg1, true) == 0)
+	else if(strcmp("@crack2", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid,"CRACK","crckdeth1",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@crack3", arg1, true) == 0)
+	else if(strcmp("@crack3", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid,"CRACK","crckdeth3",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@crack4", arg1, true) == 0)
+	else if(strcmp("@crack4", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid,"CRACK","crckdeth4",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@crack5", arg1, true) == 0)
+	else if(strcmp("@crack5", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid,"CRACK","crckidle3",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("spray", arg1, true) == 0 || strcmp("spray1", arg1, true) == 0)
+	else if(strcmp("spray", arg1, true) == 0 || strcmp("spray1", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid,"SPRAYCAN","spraycan_fire",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("spray2", arg1, true) == 0)
+	else if(strcmp("spray2", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid,"SPRAYCAN","spraycan_full",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-
-	if(strcmp("@papieros", arg1, true) == 0 || strcmp(arg1, "@papieros1", true) == 0)
+	else if(strcmp("@papieros", arg1, true) == 0 || strcmp(arg1, "@papieros1", true) == 0)
 	{
 		ApplyAnimation(playerid, "SMOKING", "M_smklean_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@papieros2", arg1, true) == 0)
+	else if(strcmp("@papieros2", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "SMOKING", "F_smklean_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@siad", arg1, true) == 0 || strcmp(arg1, "@siad1", true) == 0)
+	else if(strcmp("@siad", arg1, true) == 0 || strcmp(arg1, "@siad1", true) == 0)
 	{
 		ApplyAnimation(playerid, "BEACH", "ParkSit_M_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@siad2", arg1, true) == 0)
+	else if(strcmp("@siad2", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "BEACH", "ParkSit_W_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@rolki", arg1, true) == 0)
+	else if(strcmp("@rolki", arg1, true) == 0)
 	{
 		/*ApplyAnimation(playerid, "SKATE", "skate_sprint", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);*/
 		SendClientMessage(playerid, -1, "Ta animacja zosta³a wy³¹czona na czas tworzenia systemu przedmiotów!");
 		return 1;
 	}
-	if(strcmp("@siad4", arg1, true) == 0)
+	else if(strcmp("@siad4", arg1, true) == 0)
 	{
 		ApplyAnimation(playerid, "JST_BUISNESS", "girl_02", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
@@ -1035,7 +1034,7 @@ MRP_DoAnimation(playerid, arg1[])
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	if(strcmp("@lez2", arg1, true, 6) == 0)
+	else if(strcmp("@lez2", arg1, true, 6) == 0)
 	{
 		ApplyAnimation(playerid, "BEACH", "SitnWait_loop_W", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
