@@ -2419,9 +2419,9 @@ SetPlayerSpawnPos(playerid)
     {
 		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] >= 1)
 		{
-			SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
+			SetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 			Unspec[playerid][Coords][0] = 0.0, Unspec[playerid][Coords][1] = 0.0, Unspec[playerid][Coords][2] = 0.0;
 			Spectate[playerid] = INVALID_PLAYER_ID;
 			PhoneOnline[playerid] = 0;
