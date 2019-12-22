@@ -1142,7 +1142,6 @@ MRP_DoAnimation(playerid, arg1[])
 		}
 		return 1;
 	}
-
 	else if(strcmp(arg1, "@lowrider", true, 5) == 0)
 	{
 		strmid(arg1, arg1, 9, 7, 32);
@@ -1177,8 +1176,6 @@ MRP_DoAnimation(playerid, arg1[])
 		}
 		return 1;
 	}
-
-
 	else if(strcmp(arg1, "@sklep", true, 5) == 0)
 	{
 		strmid(arg1, arg1, 6, 7, 32);
@@ -1225,7 +1222,6 @@ MRP_DoAnimation(playerid, arg1[])
 		}
 		return 1;
 	}
-
 	else if(strcmp(arg1, "@rozmowa", true, 5) == 0)
 	{
 		strmid(arg1, arg1, 5, 7, 32);
@@ -1264,7 +1260,6 @@ MRP_DoAnimation(playerid, arg1[])
 		}
 		return 1;
 	}
-
 	else if(strcmp(arg1, "@car", true, 4) == 0)
 	{
 		strmid(arg1, arg1, 4, 7, 32);
