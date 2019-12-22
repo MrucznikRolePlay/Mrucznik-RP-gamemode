@@ -10050,7 +10050,6 @@ CancelFlyMode(playerid)
     GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	DeletePVar(playerid, "FlyMode");
 	CancelEdit(playerid);
-	//TogglePlayerSpectating(playerid, false);
 	GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
     SetTimerEx("SpecEnd", 500, false, "d", playerid);
 	DestroyPlayerObject(playerid, noclipdata[playerid][flyobject]);
