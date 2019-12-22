@@ -34,6 +34,8 @@ YCMD:gotols(playerid, params[], help)
     {
 		if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
+			SetPlayerInterior(playerid, 0);
+			SetPlayerVirtualWorld(playerid, 0);
 			if (GetPlayerState(playerid) == 2)
 			{
 				new tmpcar = GetPlayerVehicleID(playerid);
@@ -43,10 +45,7 @@ YCMD:gotols(playerid, params[], help)
 			{
 				SetPlayerPos(playerid, 1529.6,-1691.2,13.3);
 			}
-            SetPlayerVirtualWorld(playerid, 0);
-            SetPlayerInterior(playerid, 0);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany !");
-			SetPlayerInterior(playerid,0);
 			PlayerInfo[playerid][pInt] = 0;
 		}
 		else
