@@ -662,6 +662,7 @@
 #include "cmd/wlsett.pwn"
 #include "cmd/przekaz.pwn"
 #include "cmd/inwigilacja.pwn"
+#include "cmd/togro.pwn"
 InitCommands()
 {
 	Aliases();

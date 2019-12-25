@@ -1061,7 +1061,7 @@ new playerSeeSpec[MAX_PLAYERS];
 
 //SANDAL
 new timer_StanowePlyCheck[MAX_PLAYERS];
-
+new TogRO[MAX_PLAYERS];
 //new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
 
 //-----------------------------------------------
@@ -1133,7 +1133,7 @@ ZerujZmienne(playerid)
 	podczasbicia[playerid] = 0;
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
-	
+	TogRO[playerid] = 0;
 	
 	
     lastMsg[playerid] = 0;

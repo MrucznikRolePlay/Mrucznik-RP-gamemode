@@ -7487,12 +7487,13 @@ PlayCrimeReportForPlayersTeam(team, suspectid, level = 16)
 	}
 }
 
-SendRadioMessage(member, color, string[])
+SendRadioMessage(member, color, string[], ooc = 0)
 {
 	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
+			if(TogRO[playerid] == 1 && ooc == 1) return 1;
 		    if(PlayerInfo[i][pMember] == member || PlayerInfo[i][pLider] == member)
 		    {
 		        if(member == 9)
