@@ -266,6 +266,7 @@ ZespawnujGraczaSzpitalBW(playerid)
 	ZespawnujGraczaBW(playerid);
 	SetPlayerCameraPos(playerid,HospitalBeds[randbed][0] + 3, HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
 	SetPlayerCameraLookAt(playerid,HospitalBeds[randbed][0], HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
+	Wchodzenie(playerid);
 	return 1;
 }
 

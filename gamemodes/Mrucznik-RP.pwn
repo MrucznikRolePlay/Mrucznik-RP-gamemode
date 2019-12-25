@@ -2646,6 +2646,7 @@ SetPlayerSpawnPos(playerid)
 							    SetPlayerInterior(playerid, 0);
 								PlayerInfo[playerid][pLocal] = 108;
 			                    Wchodzenie(playerid);
+								SetTimerEx("Wchodzenie", 1000, false, "i", playerid);
 							}
 							else
 							{
