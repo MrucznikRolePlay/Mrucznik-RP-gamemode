@@ -7493,7 +7493,7 @@ SendRadioMessage(member, color, string[], ooc = 0)
 	{
 		if(IsPlayerConnected(i))
 		{
-			if(TogRO[playerid] == 1 && ooc == 1) return 1;
+			if(TogRO[i] == 1 && ooc == 1) return 1;
 		    if(PlayerInfo[i][pMember] == member || PlayerInfo[i][pLider] == member)
 		    {
 		        if(member == 9)
