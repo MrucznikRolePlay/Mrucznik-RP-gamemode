@@ -1171,9 +1171,9 @@ public OnPlayerPause(playerid)
 	{
 		afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, 1, 0);
 	}
-	return 1;
+	return 
+	1;
 }
-
 public OnPlayerDisconnect(playerid, reason)
 {
 	if(playerid == INVALID_PLAYER_ID || playerid > MAX_PLAYERS)
@@ -1656,7 +1656,6 @@ public OnPlayerDisconnect(playerid, reason)
 	    if(JobDuty[playerid] == 1) { Mechanics -= 1; }
 	}
 	
-
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
     gPlayerLogged[playerid] = 0; //wylogowany
@@ -2449,13 +2448,12 @@ SetPlayerSpawnPos(playerid)
 	{
 		new string[128];
 	    SetPlayerInterior(playerid, 0);
+		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		SetPlayerPosEx(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
 		PlayerInfo[playerid][pMuted] = 1;
-		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Pow�d: %s", PlayerInfo[playerid][pAJreason]);
 		SendClientMessage(playerid, COLOR_PANICRED, string);
-	//	SendClientMessage(playerid, COLOR_LIGHTRED, "Gra�e� NON-RP. Wracasz do Admin Jaila.");
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
 	{
@@ -5484,7 +5482,7 @@ PayDay()
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if(kaska[i] >= 10000000 && PlayerInfo[i][pLevel] <= 2 || PlayerInfo[i][pAccount] >= 10000000 && PlayerInfo[i][pLevel] <= 2 && !DEVELOPMENT)
+					if((kaska[i] >= 10000000 && PlayerInfo[i][pLevel] <= 2 || PlayerInfo[i][pAccount] >= 10000000 && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
 						Log(punishmentLog, INFO, "%s dosta� bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);

@@ -1061,7 +1061,7 @@ new playerSeeSpec[MAX_PLAYERS];
 
 //SANDAL
 new timer_StanowePlyCheck[MAX_PLAYERS];
-new TogRO[MAX_PLAYERS];
+new gRO[MAX_PLAYERS];
 //new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
 
 //-----------------------------------------------
@@ -1133,7 +1133,6 @@ ZerujZmienne(playerid)
 	podczasbicia[playerid] = 0;
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
-	TogRO[playerid] = 0;
 	
 	
     lastMsg[playerid] = 0;
@@ -1310,15 +1309,13 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
 	//Sandal
-	PlayerInfo[playerid][pPrzedmiotyDelay] = 0;
-	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "Brak");
 	PlayerInfo[playerid][pPodPW] = 0;
+	gRO[playerid] = 0;
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	PlayerKilledByAdmin[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
-
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;

@@ -37,12 +37,12 @@ YCMD:togro(playerid, params[], help)
     {
 		if (TogRO[playerid] == 0)
 		{
-			TogRO[playerid] = 1;
+			gRO[playerid] = 1;
             MSGBOX_Show(playerid, "Czat RO ~r~OFF", MSGBOX_ICON_TYPE_OK);
 		}
 		else if (TogRO[playerid] == 1)
 		{
-			TogRO[playerid]  = 0;
+			gRO[playerid]  = 0;
             MSGBOX_Show(playerid, "Czat RO ~g~ON", MSGBOX_ICON_TYPE_OK);
 		}
 	}

@@ -38,11 +38,6 @@ public SpecToggle(playerid)
     Streamer_ToggleAllItems(playerid, STREAMER_TYPE_OBJECT, 1);
     sendTipMessage(playerid, "Wczytywanie obiektów!");
 }
-forward WchodzenieEx(playerid);
-public WchodzenieEx(playerid)
-{
-	Wchodzenie(playerid);
-}
 forward SpawnPosInfo(playerid);
 public SpawnPosInfo(playerid)
 {
