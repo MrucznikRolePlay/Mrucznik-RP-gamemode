@@ -139,8 +139,6 @@ forward UnhireRentCar(playerid, veh);
 forward MyItems_Load(playerid);
 
 //Sandal
-forward NaprawBronie(playerid);
-forward NaprawBronieTimer(playerid);
 forward SpecEnd(playerid);
 forward Stanowe_CheckPlyInVeh(playerid);
 
