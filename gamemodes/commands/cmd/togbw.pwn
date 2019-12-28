@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ fskin ]-------------------------------------------------//
+//-------------------------------------------------[ togbw ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,39 +28,22 @@
 	
 */
 
-YCMD:fskin(playerid, params[], help)
+YCMD:togbw(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(GetPlayerAdminDutyStatus(playerid) == 1)
-		{
-			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
-			return 1;
-		}
-		if (IsAtClothShop(playerid) || (GetPlayerOrg(playerid) == FAMILY_RSC && 
-            IsPlayerInRangeOfPoint(playerid, 4.0, 1636.9476,-1813.6195,13.5263)) ||
-            IsPlayerInRangeOfPoint(playerid, 4.0, 1147.3623,-1314.4891,13.6743) || //duty ers
-            IsPlayerInRangeOfPoint(playerid, 4.0, GetPVarFloat(playerid,"xposspawn"),GetPVarFloat(playerid,"yposspawn"),GetPVarFloat(playerid,"zposspawn")))
-		{
-            //W³¹czenie trybu skinów
-            if(GetPVarInt(playerid, "skin-select") != 0) return DestroySkinSelection(playerid);
-            SetPVarInt(playerid, "skin-select", 1);
-            new frac = GetPlayerFraction(playerid);
-            new fam = GetPlayerOrg(playerid);
-            if(frac != 0)
-            {
-                if(!ProceedSkinSelection(playerid,frac, 1)) return SendClientMessage(playerid, COLOR_GRAD2, "Twoja frakcja nie ma w³asnych skinów.");
-            }
-            else if(fam != 0)
-            {
-                if(!ProceedSkinSelection(playerid,fam, 2)) return SendClientMessage(playerid, COLOR_GRAD2, "Twoja rodzina nie ma w³asnych skinów.");
-            }
-            else return SendClientMessage(playerid, COLOR_GRAD2, "Nie mo¿esz tego u¿yæ.");
-		}
-		else
-		{
-			SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w sklepie z ubraniami lub na miejscu spawnu!");
-			return 1;
+        if(IsAMedyk(playerid))
+        {
+			if (!gBW[playerid])
+			{
+				gBW[playerid] = 1;
+                MSGBOX_Show(playerid, "Raporty o BW ~r~OFF", MSGBOX_ICON_TYPE_OK);
+			}
+			else if (gBW[playerid])
+			{
+				gBW[playerid] = 0;
+                MSGBOX_Show(playerid, "Raporty o BW ~g~ON", MSGBOX_ICON_TYPE_OK);
+			}
 		}
 	}
 	return 1;

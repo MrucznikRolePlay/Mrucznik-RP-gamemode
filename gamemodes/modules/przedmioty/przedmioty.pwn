@@ -69,8 +69,17 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 		{
 			format(gname, sizeof(gname), "%s", GunNames[starabron[playerid]]);
 		}
-		if(starabron[playerid] > 1) format(specNAME, sizeof(specNAME), "%s chowa %s i", specNAME, gname);
+		if(weaponid == starabron[playerid])
+		{
+			weaponid = PlayerInfo[playerid][pGun0];
+		}
+		else if(starabron[playerid] > 1)
+		{
+			format(specNAME, sizeof(specNAME), "%s chowa %s i", specNAME, gname);
+		}
 	}
+
+	MaTazer[playerid] = 0;
 
 	switch(weaponid)
 	{
@@ -183,9 +192,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 			if(weapondata == 1)
 			{
 				MaTazer[playerid] = 1;
-				//SetPVarInt(playerid, "tazer", 1);
 				format(string, sizeof(string), "* %s wyci¹ga Paralizator.", specNAME);
-				SetPlayerAmmo(playerid, 24, 10);
 			}
 			else
 			{
@@ -373,7 +380,7 @@ PokazDialogBronie(playerid)
 	{
 		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun2], PlayerInfo[playerid][pGun2]);
 		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun2] == starabron[playerid])
+		if(PlayerInfo[playerid][pGun2] == starabron[playerid] && GetPVarInt(playerid, "tazer") != 1)
 		{
 			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 		}
@@ -538,7 +545,11 @@ PokazDialogBronie(playerid)
 		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, "Paralizator");
 	}
 
-	if(!weaponexist) return sendErrorMessage(playerid, "Nie posiadasz przy sobie ¿adnej broni.");
+	if(!weaponexist)
+	{
+		GUIExit[playerid] = 0;
+		return sendErrorMessage(playerid, "Nie posiadasz przy sobie ¿adnej broni.");
+	}
 	return ShowPlayerDialogEx(playerid, D_PRZEDMIOTY_BRONIE, DIALOG_STYLE_LIST, "{FFFFFF}Wyci¹gnij broñ (/togscroll) (/p [nazwa])", dialogstring, "Wyci¹gnij", "WyjdŸ");
 }
 //------------------<[ MySQL: ]>--------------------

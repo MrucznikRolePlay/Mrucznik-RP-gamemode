@@ -22,7 +22,8 @@ Mapa serwera Mrucznik Role Play, kreowana od 2009 roku.
 - [Veroon] Developer (brak szczegółowych danych)
 - [niceCzlowiek] Developer w latach 2017-2018
 - [lukeSql] Developer w 2018
-- [Creative] Developer od listopada 2019
+- [Creative] Developer od 6 listopada 2019
+- [Sandał] Developer od 9 grudnia 2019
 
 ## [Edytory do PAWN](IDE.md)
 

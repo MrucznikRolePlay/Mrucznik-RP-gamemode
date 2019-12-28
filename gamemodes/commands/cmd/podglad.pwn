@@ -44,7 +44,7 @@ YCMD:podglad(playerid, params[], help)
 		    if(IsPlayerConnected(giveplayerid))
 		    {
 				SendClientMessage(giveplayerid, COLOR_PANICRED, sprintf("Administrator %s podejrza³ Twoje prywatne wiadmomoœci, powód: %s", GetNick(playerid), reason));
-				ShowPlayerSentMessages(playerid, giveplayerid);
+				ShowPlayerSentMessages(giveplayerid, playerid);
 				Log(adminLog, INFO, "Admin %s podejrza³ wiadomoœci gracza %s, powód: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), reason);
 			}
 		}

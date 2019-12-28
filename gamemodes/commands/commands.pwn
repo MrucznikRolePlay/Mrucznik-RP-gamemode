@@ -500,6 +500,7 @@
 #include "cmd/togpodglad.pwn"
 #include "cmd/togtxda.pwn"
 #include "cmd/togwl.pwn"
+#include "cmd/togbw.pwn"
 #include "cmd/togscroll.pwn"
 #include "cmd/tp.pwn"
 #include "cmd/trampolina.pwn"

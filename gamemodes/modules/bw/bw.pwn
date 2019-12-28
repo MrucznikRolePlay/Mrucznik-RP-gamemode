@@ -74,7 +74,7 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 		string = string2;
 	}
 	//SendClientMessageToAll(COLOR_GRAD2, "#1 Wysy³am komunikat do ERS");
-	SendTeamMessageOnDuty(4, COLOR_ALLDEPT, string);
+	SendTeamMessageOnDuty(4, COLOR_ALLDEPT, string, true);
 	return 1;
 }
 NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
@@ -84,12 +84,14 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	{
 		if(reason > 46 && ((reason-46) == 7 || (reason-46) == 8)) return NadajBW(playerid); //upadek lub zatoniecie
 	}
-	new Float:faceangle;
+	new Float:faceangle, interior, vw;
+	interior = GetPlayerInterior(playerid);
+	vw = GetPlayerVirtualWorld(playerid);
 	GetPlayerFacingAngle(playerid, faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
-	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
-	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
+	SetPVarInt(playerid, "bw-vw", vw);
+	SetPVarInt(playerid, "bw-int", interior);
 	SetPVarFloat(playerid, "bw-faceangle", faceangle);
 	//SendClientMessageToAll(COLOR_GRAD2, "#2: NadajRanny");
 	if(!customtime) customtime = INJURY_TIME;
@@ -98,7 +100,7 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	if(medicinformation)
 	{
 		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 70.0, (customtime * 1000));
-		InfoMedicsInjury(playerid, true, false);
+		if((vw == 0 || vw == 90) && interior == 0) InfoMedicsInjury(playerid, true, false);
 	}
 	return 1;
 }
@@ -125,12 +127,14 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 			customtime = BW_TIME_CRIMINAL;
 		}
 	}
-	new Float:faceangle;
+	new Float:faceangle, interior, vw;
+	interior = GetPlayerInterior(playerid);
+	vw = GetPlayerVirtualWorld(playerid);
 	GetPlayerFacingAngle(playerid, faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
-	SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
-	SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
+	SetPVarInt(playerid, "bw-vw", vw);
+	SetPVarInt(playerid, "bw-int", interior);
 	SetPVarFloat(playerid, "bw-faceangle", faceangle);
 	//SendClientMessageToAll(COLOR_GRAD2, "#2-2: NadajBW");
 	if(!customtime) customtime = BW_TIME;
@@ -139,7 +143,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	if(medicinformation)
 	{
 		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 70.0, (customtime * 1000));
-		InfoMedicsInjury(playerid, false, true);
+		if((vw == 0 || vw == 90) && interior == 0) InfoMedicsInjury(playerid, false, true);
 	}
 	return 1;
 }
@@ -180,7 +184,7 @@ ZespawnujGraczaBW(playerid)
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	//SendClientMessageToAll(COLOR_GRAD2, "#6 ZespawnujGraczaBW");
 	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-	SetPlayerHealth(playerid, INJURY_HP); //tutaj wtf
+	SetPlayerHealth(playerid, INJURY_HP);
 	return 1;
 }
 //-----------------<[ Timery: ]>-------------------
