@@ -11080,7 +11080,11 @@ ChangePlayerName(playerid, name[])
     orgUnInvitePlayer(playerid);
     PlayerInfo[playerid][pZmienilNick]--;
 	PlayerInfo[playerid][pMember] = 0;
-	PlayerInfo[playerid][pLider] = 0;
+	if(PlayerInfo[playerid][pLider] > 0)
+	{
+		Remove_MySQL_Leader(playerid);
+		PlayerInfo[playerid][pLider] = 0;
+	}
 	PlayerInfo[playerid][pJob] = 0;
 	PlayerInfo[playerid][pRank] = 0;
 	PlayerInfo[playerid][pZG] = 0;

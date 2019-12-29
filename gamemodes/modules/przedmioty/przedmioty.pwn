@@ -344,7 +344,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 }
 PokazDialogBronie(playerid)
 {
-	if(AntySpam[playerid] == 1) return 1;
+	if(AntySpam[playerid] == 1) return SetPlayerArmedWeapon(playerid, starabron[playerid]);
 	if(GUIExit[playerid] != 0) return SetPlayerArmedWeapon(playerid, starabron[playerid]);
 	GUIExit[playerid] = 1;
 	DynamicGui_Init(playerid);
