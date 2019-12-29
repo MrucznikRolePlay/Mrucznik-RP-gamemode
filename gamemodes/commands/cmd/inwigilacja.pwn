@@ -45,20 +45,7 @@ YCMD:inwigilacja(playerid, params[], help)
             
             if(para1 != INVALID_PLAYER_ID)
 		    {
-		        GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-		        if(PlayerInfo[para1][pPodPW] == 0)
-				{
-                    SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(playerid), playerid, GetNick(para1), para1));
-					PlayerInfo[para1][pPodPW] = 1;
-                    format(string, sizeof(string), "AdmCmd: %s wlaczyl inwigilacje PW %s",GetNick(playerid) ,giveplayer);
-					Log(adminLog, INFO, "Admin %s w³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(playerid), GetPlayerLogName(para1));
-				}
-				else
-				{
-                    SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(playerid), playerid, GetNick(para1), para1));
-					PlayerInfo[para1][pPodPW] = 0;
-					Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(playerid), GetPlayerLogName(para1));
-				}
+		        ToggleInwigilacja(para1, playerid);
 			}
         }
         else if(PlayerInfo[playerid][pAdmin] >= 1)
@@ -71,17 +58,7 @@ YCMD:inwigilacja(playerid, params[], help)
             }
             if(para1 != INVALID_PLAYER_ID)
 		    {
-		        GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-                if(PlayerInfo[para1][pPodPW] == 1)
-				{
-                    SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(playerid), playerid, GetNick(para1), para1));
-					PlayerInfo[para1][pPodPW] = 0;
-					Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(playerid), GetPlayerLogName(para1));
-                }
-                else
-                {
-                    sendTipMessage(playerid, "Komenda dostêpna od 150@lvl.");
-                }
+		        ToggleInwigilacja(para1, playerid, true);
             }
         }
         else
