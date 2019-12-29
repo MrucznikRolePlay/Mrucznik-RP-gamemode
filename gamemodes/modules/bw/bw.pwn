@@ -37,7 +37,6 @@ stock IsPlayerAimingEx(playerid)
 
 InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 {
-	if(GetPlayerAdminDutyStatus(injureplayer) == 1) return 1;
 	new string[144], string2[144], pZone[MAX_ZONE_NAME], type[144], reason;
 	GetPlayer2DZone(injureplayer, pZone, MAX_ZONE_NAME);
 	reason = GetPVarInt(injureplayer,"bw-reason");

@@ -1856,6 +1856,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			PlayerKilledByAdmin[playerid] = 1;
+		}
+
 		if(PlayerKilledByAdmin[playerid] == 0)
 		{
 			if(PlayerInfo[playerid][pInjury] > 0)
