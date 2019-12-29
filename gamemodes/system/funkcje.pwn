@@ -219,22 +219,18 @@ sendErrorMessage(id, string:msg[]) {
 
 ToggleInwigilacja(playerid, adminid, bool:NISKI_ADMIN_LVL = false)
 {
-	if(PlayerInfo[playerid][pPodPW] == 0 && NISKI_ADMIN_LVL == false)
+	if(PlayerInfo[playerid][pPodPW] == 0 && NISKI_ADMIN_LVL == true) return sendTipMessage(playerid, "W³¹czanie od 150@lvl");
+	if(PlayerInfo[playerid][pPodPW] == 0)
 	{
-	SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
-	PlayerInfo[playerid][pPodPW] = 1;
-	Log(adminLog, INFO, "Admin %s w³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
-	}
-	else if(PlayerInfo[playerid][pPodPW] == 0 && NISKI_ADMIN_LVL == true) 
-	{
-		sendTipMessage(playerid, "W³¹czanie od 150@lvl");
-		return 1;
+		PlayerInfo[playerid][pPodPW] = 1;
+		SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
+		Log(adminLog, INFO, "Admin %s w³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
 	}
 	else if(PlayerInfo[playerid][pPodPW] == 1)
 	{
-	SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
-	PlayerInfo[playerid][pPodPW] = 0;
-	Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
+		PlayerInfo[playerid][pPodPW] = 0;
+		SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
+		Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
 	}
 	return 1;
 }
