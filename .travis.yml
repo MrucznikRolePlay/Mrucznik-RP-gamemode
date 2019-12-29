@@ -20,7 +20,6 @@ branches:
   - simeone
   - creative
   - Sandal
-  - 2.6.16-finale
   - '/^2\.6\.\d+$/'
 
 addons:
