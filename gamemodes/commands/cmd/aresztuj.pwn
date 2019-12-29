@@ -61,9 +61,12 @@ YCMD:aresztuj(playerid, params[], help)
 						{
 						    if(playerid != playa)
 						    {
-						        if(PoziomPoszukiwania[playa] >= 1 && PoziomPoszukiwania[playa] <= 5)
+								if(PoziomPoszukiwania[playa] == 0)
+								{
+									sendTipMessageEx(playerid, COLOR_GRAD3, "Ten gracz nie ma WL.");
+								}
+						        else if(PoziomPoszukiwania[playa] >= 1 && PoziomPoszukiwania[playa] <= 5)
 						        {
-                                    
 						            new price = PoziomPoszukiwania[playa]*4000;
 						            new price2 = PoziomPoszukiwania[playa]*1000;
 						            new bail = PoziomPoszukiwania[playa]*16000;
@@ -117,15 +120,13 @@ YCMD:aresztuj(playerid, params[], help)
 										OOCNews(COLOR_LIGHTRED, string);
 									}
 								}
-								else
+								else if(PoziomPoszukiwania[playa] >= 6) //wsadzanie do stanowca
 								{
-									if(PoziomPoszukiwania[playa] > 1 && !PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))
-								    sendTipMessageEx(playerid, COLOR_GRAD3, "Ten gracz ma za du¿y WL alby wsadziæ go do zwyk³ej celi. WsadŸcie go do stanowego.");
-									else if(PoziomPoszukiwania[playa] == 0)
-									sendTipMessageEx(playerid, COLOR_GRAD3, "Ten gracz nie ma WL.");
-
-									//wsadzanie do stanowca
-									if(PoziomPoszukiwania[playa] >= 6 && PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))
+									if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))
+									{
+								    	sendTipMessageEx(playerid, COLOR_GRAD3, "Ten gracz ma za du¿y WL alby wsadziæ go do zwyk³ej celi. WsadŸcie go do stanowego.");
+									}
+									else
 									{
 										new giveplayerid = playa;
 										if(ProxDetectorS(10.0, playerid, giveplayerid))
