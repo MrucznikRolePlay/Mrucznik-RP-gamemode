@@ -5402,7 +5402,7 @@ PayDay()
 				if (PlayerInfo[i][pDom] != 0)
 				{
 				    if(IsPlayerPremiumOld(i)) { tmpintrate = intrate+4; }
-					else { tmpintrate = intrate+2; }//HouseInfo[key][hLevel]
+					else { tmpintrate = intrate+2; } //HouseInfo[key][hLevel]
 				}
 				else
 				{
