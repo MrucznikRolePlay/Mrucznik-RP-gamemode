@@ -1451,7 +1451,6 @@ enum pInfo
 	pBusinessMember,
 	pLiderValue,
 	pUniform,
-	pPrzedmiotyDelay,
 	pAJreason[MAX_AJ_REASON],
 	pPodPW
 };

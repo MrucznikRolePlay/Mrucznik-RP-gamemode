@@ -79,7 +79,6 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 }
 NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 {
-	if(GetPlayerAdminDutyStatus(playerid) == 1) return 1;
 	new reason = GetPVarInt(playerid,"bw-reason");
 	if(reason <= 54 && reason > 0)
 	{
@@ -107,7 +106,6 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 }
 NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
-	if(GetPlayerAdminDutyStatus(playerid) == 1) return 1;
 	new string[144];
 	if(GetPVarInt(playerid, "bw-hitmankiller") == 1)
 	{

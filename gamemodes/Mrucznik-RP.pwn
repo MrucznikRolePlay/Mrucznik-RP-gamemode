@@ -1852,8 +1852,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 				else format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
             }
             else
+			{
 				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
-			SendMessageToAdminEx(string, COLOR_P@, 2);
+				SendMessageToAdminEx(string, COLOR_P@, 2);
+			}
 		}
 
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
@@ -5488,7 +5490,7 @@ PayDay()
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if((kaska[i] >= 10000000 && PlayerInfo[i][pLevel] <= 2 || PlayerInfo[i][pAccount] >= 10000000 && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
+					if(((kaska[i] >= 10000000 || PlayerInfo[i][pAccount] >= 10000000) && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
 						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);

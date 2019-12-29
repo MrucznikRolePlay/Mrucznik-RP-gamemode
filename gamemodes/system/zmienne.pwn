@@ -1310,7 +1310,6 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
 	//Sandal
-	PlayerInfo[playerid][pPrzedmiotyDelay] = 0;
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "Brak");
 	PlayerInfo[playerid][pPodPW] = 0;
 	//Creative
