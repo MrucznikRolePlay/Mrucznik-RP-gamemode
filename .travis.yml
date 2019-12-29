@@ -15,9 +15,7 @@ branches:
   - master
   - development
   - hotfixy
-  - panpecet-new
   - mrucznik
-  - simeone
   - creative
   - Sandal
   - '/^2\.6\.\d+$/'
