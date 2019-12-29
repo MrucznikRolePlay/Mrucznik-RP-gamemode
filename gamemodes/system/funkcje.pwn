@@ -839,17 +839,6 @@ public TiNzPJwGUI(playerid)
 	ShowPlayerDialogEx(playerid, 13, DIALOG_STYLE_MSGBOX, "Czas min¹³!", "Przykro nam!\nUp³yn¹ czas na udzielenie poprawnej odpowiedzi.\nOblewasz egzamin i mo¿esz go zdaæ ponownie za 2h.", "Wyjdz", "");
 	return 1;
 }
-
-public NaprawBronie(playerid)
-{
-	SetTimerEx("NaprawBronieTimer", 3000, false, "i", playerid);
-	return 1;
-}
-public NaprawBronieTimer(playerid)
-{
-	PlayerInfo[playerid][pPrzedmiotyDelay] = 1; //Wykonano delay broni
-	return 1;
-}
 public Naprawianie(playerid){
 naprawiony[playerid] = 0;
 return 1;
