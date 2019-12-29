@@ -7505,18 +7505,15 @@ SendRadioMessage(member, color, string[], ooc = 0)
 	{
 		if(IsPlayerConnected(i))
 		{
-			if(gRO[i] == 1 && ooc == 1) return 1;
 		    if(PlayerInfo[i][pMember] == member || PlayerInfo[i][pLider] == member)
 		    {
-		        if(member == 9)
+		        if(member == 9 && SanDuty[i] == 1)
 		        {
-		            if(SanDuty[i] == 1)
-		            {
-						SendClientMessage(i, color, string);
-					}
+		            SendClientMessage(i, color, string);
 				}
 				else
 				{
+					if(gRO[i] == 1 && ooc == 1) continue;
 				    SendClientMessage(i, color, string);
 				}
 			}
