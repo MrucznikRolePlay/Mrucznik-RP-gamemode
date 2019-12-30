@@ -52,6 +52,7 @@ YCMD:qf(playerid, params[], help)
 			SetTimerEx("AntySB", 5000, 0, "d", playerid);
 			AntySpawnBroni[playerid] = 5;
 			UsunBron(playerid);
+			SetPlayerSpawnWeapon(playerid);
 			return 1;
 		}
 		else

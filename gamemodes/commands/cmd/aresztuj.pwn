@@ -106,9 +106,8 @@ YCMD:aresztuj(playerid, params[], help)
 									SetPlayerSpecialAction(playa,SPECIAL_ACTION_NONE);
 									RemovePlayerAttachedObject(playa, 0);
 									SkutyGracz[playa] = 0;
-									ResetPlayerWeapons(playa);
 									UsunBron(playa);//usun bron
-
+									SetPlayerSpawnWeapon(playa);
 									if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
 									{
 										format(string, sizeof(string), "<< Policjant %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
@@ -144,8 +143,8 @@ YCMD:aresztuj(playerid, params[], help)
 											uzytekajdanki[playerid] = 0;
 											SkutyGracz[playa] = 0;
 											JailDeMorgan(giveplayerid);
-											ResetPlayerWeapons(giveplayerid);
-											UsunBron(giveplayerid);//usun bron  
+											UsunBron(playa);//usun bron
+											SetPlayerSpawnWeapon(playa);
 											if(PoziomPoszukiwania[giveplayerid] == 5)
 											{
 												PlayerInfo[giveplayerid][pJailTime] = 1500;
