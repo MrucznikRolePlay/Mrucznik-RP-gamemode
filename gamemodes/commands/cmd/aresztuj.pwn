@@ -106,7 +106,6 @@ YCMD:aresztuj(playerid, params[], help)
 									SetPlayerSpecialAction(playa,SPECIAL_ACTION_NONE);
 									RemovePlayerAttachedObject(playa, 0);
 									SkutyGracz[playa] = 0;
-									SetPVarInt(playa, "AC_AntySpawnBroni", 1);
 									ResetPlayerWeapons(playa);
 									UsunBron(playa);//usun bron
 
@@ -145,10 +144,8 @@ YCMD:aresztuj(playerid, params[], help)
 											uzytekajdanki[playerid] = 0;
 											SkutyGracz[playa] = 0;
 											JailDeMorgan(giveplayerid);
-											SetPVarInt(playa, "AC_AntySpawnBroni", 1);
 											ResetPlayerWeapons(giveplayerid);
 											UsunBron(giveplayerid);//usun bron  
-											if(PlayerInfo[giveplayerid][pJailed] == 2) timer_StanowePlyCheck[giveplayerid] = SetTimerEx("Stanowe_CheckPlyInVeh", 500, true, "i", giveplayerid);
 											if(PoziomPoszukiwania[giveplayerid] == 5)
 											{
 												PlayerInfo[giveplayerid][pJailTime] = 1500;

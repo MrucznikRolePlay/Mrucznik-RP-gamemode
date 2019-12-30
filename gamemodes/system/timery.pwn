@@ -3375,19 +3375,6 @@ public SlideRope(playerid)
  	}
 	return 1;
 }
-//Sandal
-public Stanowe_CheckPlyInVeh(playerid)
-{
-	if(GetPVarInt(playerid, "StanoweCarCheck") == 1)
-	{
-		if(IsPlayerInAnyVehicle(playerid))
-		{
-			RemovePlayerFromVehicleEx(playerid);
-			JailDeMorgan(playerid);
-		}
-	}
-	return 1;
-}
 
 public SpecEnd(playerid)
 {

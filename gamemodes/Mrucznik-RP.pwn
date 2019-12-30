@@ -917,8 +917,12 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	        SetTimerEx("KickTimer",500,0,"d",playerid);
 	    }
         return 0;
- 	}
-
+ 	}		
+	if(PlayerInfo[playerid][pJailed] == 2)
+	{
+		Player_RemoveFromVeh(playerid);
+		return JailDeMorgan(playerid);
+	}							
 	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
 	{
 		PlayerEnterVehOnInjury(playerid);
@@ -937,7 +941,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		GetPlayerPos(playerid, pX,pY,pZ);
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
-	//PAèDZIOCH
+
 	if((GetVehicleModel(vehicleid) == 497 || GetVehicleModel(vehicleid) == 417 || GetVehicleModel(vehicleid) == 563) && ispassenger)
  	{
   		SetPVarInt(playerid,"chop_id",GetPlayerVehicleID(playerid));
@@ -1197,12 +1201,6 @@ public OnPlayerDisconnect(playerid, reason)
     {
     	format(reString, sizeof(reString), "SERWER: Gracz znajdujπcy siÍ w pobliøu wyszed≥ z serwera (%s, powÛd: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
-	}
-	//SANDAL
-	if(GetPVarInt(playerid, "StanoweCarCheck") == 1) 
-	{
-		KillTimer(timer_StanowePlyCheck[playerid]);
-		DeletePVar(playerid, "StanoweCarCheck");
 	}
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {

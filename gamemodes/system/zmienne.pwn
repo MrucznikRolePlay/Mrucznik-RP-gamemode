@@ -1060,7 +1060,6 @@ new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
 
 //SANDAL
-new timer_StanowePlyCheck[MAX_PLAYERS];
 new gRO[MAX_PLAYERS];
 //new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
 
@@ -1093,13 +1092,9 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
-	SetPVarInt(playerid, "StanoweCarCheck", 0);
-
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
-
     premium_clearCache(playerid);
-
 
 	//z disconecta
 

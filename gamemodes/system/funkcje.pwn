@@ -247,17 +247,13 @@ JailDeMorgan(playerid)
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
 	GameTextForPlayer(playerid, "~w~Witamy ~r~w sztumie!", 5000, 1);
-	timer_StanowePlyCheck[playerid] = SetTimerEx("Stanowe_CheckPlyInVeh", 500, true, "i", playerid);
-	SetPVarInt(playerid, "StanoweCarCheck", 1);
+	return 1;
 	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
 // WYPUSZCZANIE z DEMORGAN
 UnJailDeMorgan(playerid)
 {
-	KillTimer(timer_StanowePlyCheck[playerid]);
-	SetPVarInt(playerid, "StanoweCarCheck", 0);
-	DeletePVar(playerid, "StanoweCarCheck");
 	SetPlayerVirtualWorld(playerid, 1);
 	SetPlayerPosEx(playerid, 593.1899,-1494.0863,82.1648);
 	Wchodzenie(playerid);
