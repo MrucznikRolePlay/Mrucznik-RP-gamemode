@@ -5938,7 +5938,9 @@ OnPlayerLogin(playerid, password[])
 		}
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
-		Log(connectLog, INFO, "Gracz %s zalogowa³ siê na konto", GetPlayerLogName(playerid));
+		new GPCI[41];
+		gpci(playerid, GPCI, sizeof(GPCI));
+		Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] zalogowa³ siê na konto", GetPlayerLogName(playerid), playerid, GetIp(playerid), GPCI);
         Car_LoadForPlayer(playerid); //System aut
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
