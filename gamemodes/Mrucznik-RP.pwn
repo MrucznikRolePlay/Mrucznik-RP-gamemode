@@ -921,6 +921,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	if(PlayerInfo[playerid][pJailed] == 2)
 	{
 		Player_RemoveFromVeh(playerid);
+		SendClientMessage(playerid, COLOR_GRAD2, "Stra¿nik zauwa¿y³, ¿e coœ kombinujesz. Wracasz do celi.");
 		return JailDeMorgan(playerid);
 	}							
 	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
