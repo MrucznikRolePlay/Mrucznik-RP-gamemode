@@ -27,7 +27,8 @@ command_destroyconvoyactor_Impl(playerid, actor)
 {
     if(PlayerInfo[playerid][pAdmin] < 1) 
     {
-        return noAccessMessage(playerid);
+        noAccessMessage(playerid);
+        return 1;
     }
 
     new actorid;

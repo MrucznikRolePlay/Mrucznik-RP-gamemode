@@ -1021,7 +1021,6 @@ public OnPlayerConnect(playerid)
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
-
     ClearChat(playerid);
 
     // Wy³¹czone na testy
@@ -1199,6 +1198,12 @@ public OnPlayerDisconnect(playerid, reason)
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
 		ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 	}
+	//SANDAL
+	if(GetPVarInt(playerid, "StanoweCarCheck") == 1) 
+	{
+		KillTimer(timer_StanowePlyCheck[playerid]);
+		DeletePVar(playerid, "StanoweCarCheck");
+	}
 	if(GetPVarInt(playerid, "OKupMats") == 1)
     {
         new giveplayerid = GetPVarInt(playerid, "Mats-id");
@@ -1327,7 +1332,7 @@ public OnPlayerDisconnect(playerid, reason)
 			iloscOutWiadomosci[playerid],
 			exitReason
 		); //Create LOG
-
+		
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;
@@ -1650,6 +1655,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 	    if(JobDuty[playerid] == 1) { Mechanics -= 1; }
 	}
+	
 
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
@@ -1846,8 +1852,15 @@ public OnPlayerDeath(playerid, killerid, reason)
 				else format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
             }
             else
+			{
 				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
-			SendMessageToAdminEx(string, COLOR_P@, 2);
+				SendMessageToAdminEx(string, COLOR_P@, 2);
+			}
+		}
+
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			PlayerKilledByAdmin[playerid] = 1;
 		}
 
 		if(PlayerKilledByAdmin[playerid] == 0)
@@ -2162,7 +2175,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
-				return NadajBW(playerid);
+				return (PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1))) ? NadajBW(playerid) : 1;
 			}
 			else
 			{
@@ -2195,8 +2208,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 							}
 						}
 					}
-					SetPVarInt(playerid, "bw-reason", reason);
-					return NadajRanny(playerid, 0, true);
+					if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1)))
+					{
+						SetPVarInt(playerid, "bw-reason", reason);
+						return NadajRanny(playerid, 0, true);
+					}
 				}
 			}
 		}
@@ -2391,6 +2407,7 @@ public OnPlayerSpawn(playerid)
 	}*/
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
+
     //Spawn Pos
 	SetTimerEx("SpawnPosInfo", 1000, false, "i", playerid);
 	return 1;
@@ -2411,9 +2428,9 @@ SetPlayerSpawnPos(playerid)
     {
 		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] >= 1)
 		{
-			SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
+			SetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 			Unspec[playerid][Coords][0] = 0.0, Unspec[playerid][Coords][1] = 0.0, Unspec[playerid][Coords][2] = 0.0;
 			Spectate[playerid] = INVALID_PLAYER_ID;
 			PhoneOnline[playerid] = 0;
@@ -2440,12 +2457,14 @@ SetPlayerSpawnPos(playerid)
 	}
 	else if(PlayerInfo[playerid][pJailed] == 3)//AdminJail
 	{
+		new string[128];
 	    SetPlayerInterior(playerid, 0);
+		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		SetPlayerPosEx(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
 		PlayerInfo[playerid][pMuted] = 1;
-		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
-	//	SendClientMessage(playerid, COLOR_LIGHTRED, "Gra³eœ NON-RP. Wracasz do Admin Jaila.");
+		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
+		SendClientMessage(playerid, COLOR_PANICRED, string);
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
 	{
@@ -2459,6 +2478,7 @@ SetPlayerSpawnPos(playerid)
 		UsunBron(playerid);
 		PlayerInfo[playerid][pJailed] = 3;
 		PlayerInfo[playerid][pJailTime] = 15*60;
+		format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
         SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerInfo[playerid][pMuted] = 1;
 		SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
@@ -2634,6 +2654,7 @@ SetPlayerSpawnPos(playerid)
 							    SetPlayerInterior(playerid, 0);
 								PlayerInfo[playerid][pLocal] = 108;
 			                    Wchodzenie(playerid);
+								SetTimerEx("Wchodzenie", 1000, false, "i", playerid);
 							}
 							else
 							{
@@ -5001,7 +5022,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	{
 		return PlayerEnterVehOnInjury(playerid);
 	}
-	if(newstate == PLAYER_STATE_DRIVER)
+	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
         if(newstate == PLAYER_STATE_DRIVER)
         {
@@ -5071,7 +5092,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     		ClearAnimations(playerid);
         }
 
-        TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
+        if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
     {
@@ -5111,6 +5132,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		{
             Taxi_Pay(playerid);
 		}
+		PlayerTextDrawHide(playerid, Licznik[playerid]);
     }
 	if(newstate == PLAYER_STATE_ONFOOT)
 	{
@@ -5471,7 +5493,7 @@ PayDay()
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if(kaska[i] >= 10000000 && PlayerInfo[i][pLevel] <= 2 || PlayerInfo[i][pAccount] >= 10000000 && PlayerInfo[i][pLevel] <= 2)
+					if(((kaska[i] >= 10000000 || PlayerInfo[i][pAccount] >= 10000000) && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
 						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
@@ -6111,6 +6133,10 @@ OnPlayerLogin(playerid, password[])
                 SetPVarInt(playerid, "support_duty", 1);
                 SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
             }
+			else if(PlayerInfo[playerid][pAdmin] > 0)
+			{
+				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/supportduty");
+			}
 
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)
 				ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
@@ -6183,12 +6209,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
-		//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-		SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]); //0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
-		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglêdu na b³¹d SetSpawnInfo
-	    Spectate[playerid] = INVALID_PLAYER_ID;
-        TogglePlayerSpectating(playerid, 0);
-        return 0;
+		Spectate[playerid] = INVALID_PLAYER_ID;
+		//TogglePlayerSpectating(playerid, 0);
+		GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+        SetTimerEx("SpecEnd", 500, false, "d", playerid);
+		return 0;
     }
     //30.10
     if(HOLDING(KEY_ANALOG_UP))
@@ -6571,12 +6596,15 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     }
 	if(newkeys & 4 && GetPVarInt(playerid, "anim_do") == 1) //animacje
 	{
-		if(GetPlayerSpecialAction(playerid) != 0)
+		if(!IsPlayerInAnyVehicle(playerid))
 		{
-			SetPlayerSpecialAction(playerid, 0);
+			if(GetPlayerSpecialAction(playerid) != 0)
+			{
+				SetPlayerSpecialAction(playerid, 0);
+			}
 		}
 		ClearAnimations(playerid, 0);
-		ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CARRY", "crry_prtial", 0, 0, 0, 0, 0, 0, 0);
 		SetPVarInt(playerid, "anim_do", 0);
 		return 0;
 	}
@@ -6687,6 +6715,7 @@ public OnPlayerText(playerid, text[])
 	new giveplayer[MAX_PLAYER_NAME];
 	new tmp[256];
 	new string[256];
+	new wywiad_string[256];
 	new giveplayerid;
 	if(text[0] == '@')
 	{
@@ -7353,16 +7382,18 @@ public OnPlayerText(playerid, text[])
 	}
 	if(TalkingLive[playerid] != INVALID_PLAYER_ID)
 	{
+		new SanNews_nick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, SanNews_nick, sizeof(SanNews_nick));
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 		{//todo
 			if(strlen(text) < 78)
 			{
-				
-				format(string, sizeof(string), "Reporter: %s: %s", GetNick(playerid), text);
+				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
+				format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-				OOCNews(COLOR_LIGHTGREEN, string);
-				SendDiscordMessage(DISCORD_SAN_NEWS, string);
+				OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+				SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 			}
 			else
 			{
@@ -7373,17 +7404,18 @@ public OnPlayerText(playerid, text[])
 
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
-
-					format(string, sizeof(string), "Reporter %s: %s [..]", GetNick(playerid), text);
+					format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+					format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s [..]", SanNews_nick, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 
 					format(string, sizeof(string), "[..] %s", text2);
+					format(wywiad_string, sizeof(wywiad_string), "[..] %s", text2);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 					SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 				}
 			}
 		
@@ -7392,12 +7424,12 @@ public OnPlayerText(playerid, text[])
 		{
 			if(strlen(text) < 78)
 			{
-				
-				format(string, sizeof(string), "Goœæ wywiadu %s: %s", GetNick(playerid), text);
+				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
+				format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-				OOCNews(COLOR_LIGHTGREEN, string);
-				SendDiscordMessage(DISCORD_SAN_NEWS, string);
+				OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+				SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 			}
 			else
 			{
@@ -7409,16 +7441,18 @@ public OnPlayerText(playerid, text[])
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
 
-					format(string, sizeof(string), "Goœæ wywiadu %s: %s [..]", GetNick(playerid), text);
+					format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+					format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s [..]", SanNews_nick, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 
 					format(string, sizeof(string), "[..] %s", text2);
+					format(wywiad_string, sizeof(wywiad_string), "[..] %s", text2);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 					SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 				}
 			}
 		}

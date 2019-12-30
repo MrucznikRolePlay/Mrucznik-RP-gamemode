@@ -31,18 +31,17 @@
 YCMD:gotostacja(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) {
-        
+        SetPlayerInterior(playerid, 0);
+        SetPlayerVirtualWorld(playerid, 0);
         if (GetPlayerState(playerid) == 2)
         {
             SetVehiclePos(GetPlayerVehicleID(playerid), 1931.9171,-1807.5239,13.5728);
         }
         else
         {
-            SetPlayerPosEx(playerid, 1931.9171,-1807.5239,13.5728);
+            SetPlayerPos(playerid, 1931.9171,-1807.5239,13.5728);
         }
-        SetPlayerVirtualWorld(playerid, 0);
         sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany ");
-        SetPlayerInterior(playerid, 0);
         PlayerInfo[playerid][pInt] = 0;
     }
     return 1;

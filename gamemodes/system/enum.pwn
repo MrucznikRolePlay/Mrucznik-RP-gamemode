@@ -1235,7 +1235,6 @@ enum pSpec
 	sLocal,
 	sCam,
 };
-
 new Unspec[MAX_PLAYERS][pSpec];
 
 enum eCars
@@ -1451,7 +1450,9 @@ enum pInfo
 	pBusinessOwner,
 	pBusinessMember,
 	pLiderValue,
-	pUniform
+	pUniform,
+	pAJreason[MAX_AJ_REASON],
+	pPodPW
 };
 enum StringData
 {

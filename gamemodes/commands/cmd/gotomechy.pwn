@@ -31,7 +31,8 @@
 YCMD:gotomechy(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid)) {
-		
+		SetPlayerInterior(playerid,0);
+		SetPlayerVirtualWorld(playerid, 0);
 		if (GetPlayerState(playerid) == 2)
 		{
 			SetVehiclePos(GetPlayerVehicleID(playerid), 2778.0833, -1612.0159, 10.9219);
@@ -39,11 +40,9 @@ YCMD:gotomechy(playerid, params[], help)
 		}
 		else
 		{
-			SetPlayerPosEx(playerid, 2778.0833,-1612.0159,10.9219);
+			SetPlayerPos(playerid, 2778.0833,-1612.0159,10.9219);
 		}
-        SetPlayerVirtualWorld(playerid, 0);
         sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany na bazê mechaników, ³opata w d³oñ! ");
-        SetPlayerInterior(playerid,0);
         PlayerInfo[playerid][pInt] = 0;
     }
     return 1;

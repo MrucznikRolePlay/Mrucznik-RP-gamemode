@@ -68,12 +68,12 @@ YCMD:sprzedajauto(playerid, params[], help)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 
         //SetPVarInt(playa, "offer-car", gettime() + 30);
-		odczekajTimer[playa] = SetTimerEx("odczekaj15sec", 5000, false, "i", playa);
+		odczekajTimer[playa] = SetTimerEx("odczekaj15sec", 15000, false, "i", playa);
 		SetPVarInt(playa, "CanDoIt", 1);
 		SetPVarInt(playa, "WhatToDo", 1);
 		SetPVarInt(playerid, "WhatToDo", 2);
 		SetPVarInt(playerid, "CanDoIt", 1);
-		odczekajTimer[playerid] = SetTimerEx("odczekaj15sec", 5000, false, "i", playerid);
+		odczekajTimer[playerid] = SetTimerEx("odczekaj15sec", 15000, false, "i", playerid);
 	    format(string, sizeof(string), "%s oferuje ci sprzeda¿ %s za %d$. Jeœli chcesz kupiæ to auto wpisz /akceptuj pojazd aby kupiæ.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], cena);
         SendClientMessage(playa, 0xFFC0CB, string);
         //TODO

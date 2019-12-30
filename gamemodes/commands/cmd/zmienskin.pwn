@@ -36,15 +36,20 @@ YCMD:zmienskin(playerid, params[], help)
         {
             if(PlayerInfo[playerid][pRank] >= 1)
             {
+                if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
+                {
+                    sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile");
+                    return 1;
+                }
                 SetPVarInt(playerid, "CheatDetected", 1);
                 ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
             } 
-						else
+            else
             {
                 sendTipMessage(playerid, "Dozwolone tylko dla rangi 1 lub wiêkszych");
             }
         } 
-				else
+        else
         {
             sendTipMessage(playerid, "Tylko dla Hitman Agency i FBI.");
         }

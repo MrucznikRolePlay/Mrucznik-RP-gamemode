@@ -187,22 +187,9 @@ public SetTimeAndWeather(playerid)
 forward odczekaj15sec(playerid);
 public odczekaj15sec(playerid)
 {
-	timerTime[playerid]++; 
-	if(timerTime[playerid] == 3)
-	{
-		if(GetPVarInt(playerid, "WhatToDo") == 1)
-		{
-			timerTime[playerid] = 0;
-			SetPVarInt(playerid, "CanDoIt", 0); 
-			KillTimer(odczekajTimer[playerid]);
-		}
-		else if(GetPVarInt(playerid, "WhatToDo") == 2)
-		{
-			timerTime[playerid] = 0;
-			SetPVarInt(playerid, "CanDoIt", 0); 
-			KillTimer(odczekajTimer[playerid]);
-		}
-	}
+	SetPVarInt(playerid, "CanDoIt", 0); 
+	SetPVarInt(playerid, "WhatToDo", 0);
+	KillTimer(odczekajTimer[playerid]);
 	return 1; 
 }
 forward glosuj_admin_ankieta();
@@ -2196,32 +2183,35 @@ public JednaSekundaTimer()
 			CellTime[i]++;
 		}
 		
-		if(State == PLAYER_STATE_DRIVER && !ToggleSpeedo[i])
+		if(State == PLAYER_STATE_DRIVER || State == PLAYER_STATE_PASSENGER)
 		{
-			VehicleModel = GetVehicleModel(vehicleid);
-            if(VehicleModel != 0)
-            {
-                GetVehicleHealth(vehicleid, health);
+			if(!ToggleSpeedo[i])
+			{
+				VehicleModel = GetVehicleModel(vehicleid);
+				if(VehicleModel != 0)
+				{
+					GetVehicleHealth(vehicleid, health);
 
-    			if(VehicleModel==509||VehicleModel==481||VehicleModel==510)
-    			{
-    				SetVehicleHealth(vehicleid, 1000.0);
-    				Gas[vehicleid] = 100;
-    			}
-    			if(VehicleModel==520||VehicleModel==476||VehicleModel==593||VehicleModel==553||VehicleModel==513||VehicleModel==512||VehicleModel==577||VehicleModel==592||VehicleModel==511||VehicleModel==539||VehicleModel==464||VehicleModel==519)
-    			{
-    				Gas[vehicleid] = 100;
-    			}
+					if(VehicleModel==509||VehicleModel==481||VehicleModel==510)
+					{
+						SetVehicleHealth(vehicleid, 1000.0);
+						Gas[vehicleid] = 100;
+					}
+					if(VehicleModel==520||VehicleModel==476||VehicleModel==593||VehicleModel==553||VehicleModel==513||VehicleModel==512||VehicleModel==577||VehicleModel==592||VehicleModel==511||VehicleModel==539||VehicleModel==464||VehicleModel==519)
+					{
+						Gas[vehicleid] = 100;
+					}
 
-                GetVehicleVelocity(vehicleid, vel[0], vel[1], vel[2]);
-                Dis = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
+					GetVehicleVelocity(vehicleid, vel[0], vel[1], vel[2]);
+					Dis = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
 
-                GetPlayer2DZone(i, pZone, MAX_ZONE_NAME);
-    			format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d\%~n~GPS: %s~n~%s" ,floatround(Dis), floatround(Gas[vehicleid]),floatround(health/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
-                PlayerTextDrawSetString(i, Licznik[i], string);
-            }
+					GetPlayer2DZone(i, pZone, MAX_ZONE_NAME);
+					format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d\%~n~GPS: %s~n~%s" ,floatround(Dis), floatround(Gas[vehicleid]),floatround(health/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
+					PlayerTextDrawSetString(i, Licznik[i], string);
+				}
 
-			OldCoordsX[i] = x; OldCoordsY[i] = y;
+				OldCoordsX[i] = x; OldCoordsY[i] = y;
+			}
 		}
         //PAYDAY
         level = PlayerInfo[i][pLevel];
@@ -3359,7 +3349,7 @@ public VehicleUpdate()
     }
 }
 
-forward closeGate(i, j, playerid);
+
 public closeGate(i, j, playerid)
 {
     bramki_sasd_state[i] = false;
@@ -3369,7 +3359,7 @@ public closeGate(i, j, playerid)
     return 1;
 }
 
-forward SlideRope(playerid);
+
 public SlideRope(playerid)
 {
     if(GetPVarInt(playerid,"sliderope") == 1)
@@ -3385,6 +3375,26 @@ public SlideRope(playerid)
  	}
 	return 1;
 }
+//Sandal
+public Stanowe_CheckPlyInVeh(playerid)
+{
+	if(GetPVarInt(playerid, "StanoweCarCheck") == 1)
+	{
+		if(IsPlayerInAnyVehicle(playerid))
+		{
+			RemovePlayerFromVehicleEx(playerid);
+			JailDeMorgan(playerid);
+		}
+	}
+	return 1;
+}
 
-
+public SpecEnd(playerid)
+{
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 156, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	TogglePlayerSpectating(playerid, false);
+	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	return 1;
+}
+//Sandal END
 //EOF

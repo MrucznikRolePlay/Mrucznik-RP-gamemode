@@ -70,7 +70,10 @@ YCMD:zwolnij(playerid, params[], help)
 							JobDuty[para1] = 0;
 							OnDuty[para1] = 0;
 							SanDuty[para1] = 0;
+							SetTimerEx("AntySB", 5000, 0, "d", para1);
+							AntySpawnBroni[para1] = 5;
 							UsunBron(para1);
+							SetPlayerColor(para1,TEAM_HIT_COLOR);
 							SetSpawnInfo(para1, gTeam[para1], PlayerInfo[para1][pSkin],0.0,0.0,0.0,0,0,0,0,0,0,0);
 							MedicBill[para1] = 0;
 							SetPlayerSpawn(para1);

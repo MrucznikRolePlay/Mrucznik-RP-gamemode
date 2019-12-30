@@ -34,8 +34,8 @@ YCMD:gotojet(playerid, params[], help)
     {
 		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
-			SetPlayerPosEx(playerid, 1.71875, 30.4062, 1200.34);
 			SetPlayerInterior(playerid,1);
+			SetPlayerPos(playerid, 1.71875, 30.4062, 1200.34);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 		}
 		else

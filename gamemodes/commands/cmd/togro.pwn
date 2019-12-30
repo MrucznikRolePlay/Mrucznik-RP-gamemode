@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                              destroyconvoybox                                             //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ togro ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,25 +16,35 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 20.10.2019
+// Autor: Sanda³
+// Data utworzenia: 25.12.2019
+
+// Opis:
+/*
+
+*/
 
 
-//
+// Notatki skryptera:
+/*
+	
+*/
 
-//------------------<[ Implementacja: ]>-------------------
-command_destroyconvoybox_Impl(playerid, boxid)
+
+YCMD:togro(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] < 5000)
+    if(IsPlayerConnected(playerid))
     {
-        noAccessMessage(playerid);
-        return 1;
-    }
-
-    DestroyBox(boxid);
-
-    SendClientMessage(playerid, -1, sprintf("Zniszczy³eœ box o id %d", boxid));
-    return 1;
+		if (gRO[playerid] == 0)
+		{
+			gRO[playerid] = 1;
+            MSGBOX_Show(playerid, "Czat RO ~r~OFF", MSGBOX_ICON_TYPE_OK);
+		}
+		else if (gRO[playerid] == 1)
+		{
+			gRO[playerid]  = 0;
+            MSGBOX_Show(playerid, "Czat RO ~g~ON", MSGBOX_ICON_TYPE_OK);
+		}
+	}
+	return 1;
 }
-
-//end

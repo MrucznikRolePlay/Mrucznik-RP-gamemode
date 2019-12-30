@@ -455,7 +455,6 @@
 #include "cmd/sprzedajmaterialy.pwn"
 #include "cmd/sprzedajnarkotyki.pwn"
 #include "cmd/sprzedajrybe.pwn"
-#include "cmd/stanowe.pwn"
 #include "cmd/setactoranime.pwn"
 #include "cmd/startlotto.pwn"
 #include "cmd/startujlekcje.pwn"
@@ -660,7 +659,8 @@
 #include "cmd/dajapteczke.pwn"
 #include "cmd/fracinfo.pwn"
 #include "cmd/wlsett.pwn"
-
+#include "cmd/inwigilacja.pwn"
+#include "cmd/togro.pwn"
 InitCommands()
 {
 	Aliases();

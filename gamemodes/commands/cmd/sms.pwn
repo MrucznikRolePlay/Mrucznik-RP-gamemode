@@ -147,6 +147,11 @@ YCMD:sms(playerid, params[], help)
 		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid, true));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	    Log(chatLog, INFO, "%s sms do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(checkNumberPlayer), messSMS);
+		if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[checkNumberPlayer][pPodPW] == 1) //podgl?d admina
+        {
+            format(string, sizeof(string), "AdmCmd -> %s(%d) /sms -> %s(%d): %s", GetNick(playerid), playerid, GetNick(checkNumberPlayer), checkNumberPlayer, messSMS);
+            ABroadCast(COLOR_YELLOW,string,1,1);
+        }
 		new slotKontaktu = PobierzSlotKontaktuPoNumerze(playerid, givePlayerNumber);
 		if(slotKontaktu >= 0)
 		{
@@ -158,7 +163,6 @@ YCMD:sms(playerid, params[], help)
 		}
 		SendClientMessage(playerid, COLOR_YELLOW, string);
 		SavePlayerSentMessage(playerid, string);
-		
 		//pobór op³at
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "~r~$-%d", smsCost);

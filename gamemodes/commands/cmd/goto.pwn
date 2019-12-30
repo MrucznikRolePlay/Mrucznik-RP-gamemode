@@ -94,7 +94,7 @@ YCMD:goto(playerid, params[], help)
 					}
 					else
 					{
-						SetPlayerPosEx(playerid,plocx,plocy+2, plocz);
+						SetPlayerPos(playerid,plocx,plocy+2, plocz);
 					}
 					_MruAdmin(playerid, "Zosta³eœ teleportowany!");
 				}

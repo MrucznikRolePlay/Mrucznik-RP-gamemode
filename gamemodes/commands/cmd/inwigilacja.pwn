@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                              destroyconvoybox                                             //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ inwigilacja ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,25 +16,53 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 20.10.2019
+
+// Opis:
+/*
+
+ */
 
 
-//
+// Notatki skryptera:
+/*
 
-//------------------<[ Implementacja: ]>-------------------
-command_destroyconvoybox_Impl(playerid, boxid)
+ */
+
+YCMD:inwigilacja(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] < 5000)
+    if(IsPlayerConnected(playerid))
     {
-        noAccessMessage(playerid);
-        return 1;
+        if (PlayerInfo[playerid][pAdmin] >= 150)
+        {
+            new para1;
+            if( sscanf(params, "k<fix>", para1))
+            {
+                sendTipMessage(playerid, "U¿yj /inwiglacja [playerid/CzêœæNicku]");
+                return 1;
+            }
+            
+            if(para1 != INVALID_PLAYER_ID)
+		    {
+		       ToggleInwigilacja(para1, playerid);
+			}
+        }
+        else if(PlayerInfo[playerid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] < 150)
+        {
+            new para1;
+            if( sscanf(params, "k<fix>", para1))
+            {
+                sendTipMessage(playerid, "U¿yj /inwiglacja [playerid/CzêœæNicku]");
+                return 1;
+            }
+            if(para1 != INVALID_PLAYER_ID)
+		    {
+		       ToggleInwigilacja(para1, playerid, true);
+            }
+        }
+        else
+        {
+            return 1;
+        }
     }
-
-    DestroyBox(boxid);
-
-    SendClientMessage(playerid, -1, sprintf("Zniszczy³eœ box o id %d", boxid));
     return 1;
 }
-
-//end

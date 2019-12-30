@@ -110,6 +110,11 @@ YCMD:wiadomosc(playerid, params[], help)
             {
                 iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
             }
+            if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
+            {
+                format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                ABroadCast(COLOR_LIGHTGREEN,string,1,1);
+            }
         }
         else 
         {

@@ -249,7 +249,7 @@ IsAKox(playerid)
 
 IsAScripter(playerid)
 {
-	if(PlayerInfo[playerid][pNewAP] == 5 || (PlayerInfo[playerid][pUID] == 1290 && DEVELOPMENT))
+	if(PlayerInfo[playerid][pNewAP] == 5 || ((PlayerInfo[playerid][pUID] == 1290 || PlayerInfo[playerid][pUID] == 1335) && DEVELOPMENT))
 	{
 		return 1;
 	}
@@ -426,6 +426,8 @@ GivePWarnForPlayer(player[], adminid, result[])
 						player,
 						result);
 	MruMySQL_SetAccInt("Warnings", nickDoWarna, MruMySQL_GetAccInt("Warnings", nickDoWarna)+1);
+	if(strfind(result, "/q") != -1 || strfind(result, "ucieczka") != -1) MruMySQL_SetAccInt("Jailed", nickDoWarna, 0);
+
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
@@ -568,6 +570,7 @@ SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 	}
 	MruMySQL_SetAccInt("Jailed", nickOdbieracza, 3);
 	MruMySQL_SetAccInt("JailTime", nickOdbieracza, timeVal*60);
+	MruMySQL_SetAccString("AJreason", nickOdbieracza, result);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	return 1;
@@ -579,6 +582,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	SendClientMessage(playerid, COLOR_LIGHTRED, string);
 	PlayerInfo[playerid][pJailed] = 3;
 	PlayerInfo[playerid][pJailTime] = timeVal*60;
+	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, result);
 	SetPlayerVirtualWorld(playerid, 1000+playerid);
 	PlayerInfo[playerid][pMuted] = 1;
 	SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);

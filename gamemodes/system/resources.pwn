@@ -19,7 +19,7 @@ LoadDLSkins()
 	Dostêpne typy: 0 - normal, 1 - unikaty, 2 - frakcje, 3 - event; 
 	*/
 
-	//SKINY PRZEZNACZONE POD EVENTY 20.000-20.100
+	//SKINY PRZEZNACZONE POD EVENTY 20.000-20.099
 	AddCharModelEx(45, 20001, "mrucznikskin07.dff", "mrucznikskin07.txd", 3);// [SHREK] [STARY] [By:____] [Added: 2.6.1]
 	AddCharModelEx(45, 20002, "mrucznikskin19.dff", "mrucznikskin19.txd", 3);// [PIES] [ŒREDNI] [By:____] [Added: 2.6.1]
 	AddCharModelEx(45, 20003, "mrucznikskin34.dff", "mrucznikskin34.txd", 3);// [FACET[SS_MAN]] [M£ODY] [By:____] [Added: 2.6.1]
