@@ -1,0 +1,15 @@
+GROK PATTERNS:
+
+LOG_PREAMBLE \[%{DATESTAMP:[@metadata][timestamp]}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}
+
+NICKNAME \w+[_ ]\w+
+PLAYER_NAME_UID \{Player: %{NICKNAME:Nick}\[%{INT:UID}\]\}
+PLAYER_NAME \{Player: %{NICKNAME:Nick}\}
+
+WEAPON \{Weapon: %s[id: %d]\}
+WEAPON_AMMO \{Weapon: %s[id: %d, ammo: %d]\}
+VEHICLE \{Vehicle: %s[%d]\}
+HOUSE \{House: %d\}
+BUSINESS \{Business: %s[%d]\}
+FRACTION \{Fraction: %s[%d]\}
+

@@ -1,0 +1,5 @@
+CONNECT_LOG: Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] połączył się z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
+DISCONNECT_LOG: Log(connectLog, INFO, "Gracz %s[id: %d] rozłączył się, powód: %d", GetNick(playerid), playerid, reason);
+OLD_LOGIN_LOG: Gracz %s zalogował się na konto
+NEW_LOGIN_LOG: Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] zalogował się na konto", GetPlayerLogName(playerid), playerid, GetIp(playerid), GPCI);
+
