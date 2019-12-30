@@ -58,6 +58,13 @@ YCMD:sluzba(playerid, params[], help)
         }
 		
         if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby wzi¹æ s³u¿be musisz byæ pieszo!");
+
+        if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
+        {
+            sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile");
+            return 1;
+        }
+
         GetPlayerName(playerid, sendername, sizeof(sendername));
         if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
         {

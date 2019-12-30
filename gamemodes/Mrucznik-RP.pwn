@@ -7424,7 +7424,7 @@ public OnPlayerText(playerid, text[])
 		{
 			if(strlen(text) < 78)
 			{
-				format(string, sizeof(string), "%s mówi: %s [..]", SanNews_nick, text);
+				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
 				format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);

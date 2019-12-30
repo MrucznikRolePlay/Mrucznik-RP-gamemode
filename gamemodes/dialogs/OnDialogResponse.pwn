@@ -3179,7 +3179,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
 				    	zdazylwpisac[playerid] = 1;
 				    	zdazylwpisac[bijep[playerid]] = 1;
-				    	SetTimerEx("naczasbicie",9000,0,"d",bijep[playerid]);
+				    	new timerbicia = SetTimerEx("naczasbicie",9000,0,"d",bijep[playerid]);
+						SetPVarInt(bijep[playerid], "timerBicia", timerbicia);
 				    }
 				    else
 				    {

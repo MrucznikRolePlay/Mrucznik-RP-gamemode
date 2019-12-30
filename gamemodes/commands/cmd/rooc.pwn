@@ -38,6 +38,7 @@ YCMD:rooc(playerid, params[], help)
             sendTipMessage(playerid, "U¿yj (/r)adio [tekst]");
             return 1;
         }
+        if(gRO[playerid] == 1) return sendTipMessage(playerid, "Nie mo¿esz pisaæ na (/ro), zablokowa³eœ ten czat (U¿yj /togro)");
         new member = GetPlayerFraction(playerid);
         if(0 < member <= 4 || member == 11 || member == 7 || member == 17)
         {

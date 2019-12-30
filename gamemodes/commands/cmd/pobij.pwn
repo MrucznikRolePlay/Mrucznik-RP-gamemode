@@ -132,7 +132,8 @@ YCMD:pobij(playerid, params[], help)
 										pobilem[playerid] = 2;
 										zdazylwpisac[playerid] = 1;
 										zdazylwpisac[playa] = 1;
-										SetTimerEx("naczasbicie",15000,0,"dd",playa, playerid);
+										new timerbicia = SetTimerEx("naczasbicie",15000,0,"dd",playa, playerid);
+										SetPVarInt(playa, "timerBicia", timerbicia);
 									}
 									else
 									{

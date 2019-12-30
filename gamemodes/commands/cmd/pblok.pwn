@@ -61,6 +61,11 @@ YCMD:pblok(playerid, params[], help)
 				sendErrorMessage(playerid, "Brak gracza w bazie, nie mo¿na zablokowaæ (konto nie istnieje).");
 				return 1;
 			}
+			else
+			{
+				if(MruMySQL_GetAccInt("Block", nick) != 0) return sendErrorMessage(playerid, "Gracz ma ju¿ aktywn¹ blokadê postaci.");
+			}
+			
 			GivePBlockForPlayer((nick), playerid, (result));
 			if(kary_TXD_Status == 1)
 			{

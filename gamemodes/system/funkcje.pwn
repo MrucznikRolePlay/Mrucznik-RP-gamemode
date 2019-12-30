@@ -967,6 +967,7 @@ public naczasbicie(playerid, playerid_atak){
 	SendClientMessage(playerid_atak, COLOR_NEWS, "Wygra³eœ bitwê poniewa¿ broni¹cy za d³ugo wpisywa³ znaki!");
 	format(string, sizeof(string), "AdmCmd: %s wygra³ /pobij na czas.", GetNick(playerid_atak));
 	ABroadCast(COLOR_LIGHTRED,string,1);
+	KillTimer(GetPVarInt(playerid, "timerBicia"));
 	return 1;
 }
 
@@ -12501,7 +12502,7 @@ SavePlayerSentMessage(playerid, message[])
 
 ShowPlayerSentMessages(playerid, forplayerid)
 {
-	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(forplayerid)));
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
 	new index = SentMessagesIndex[playerid];
 	if(index != 0) {
 		for(new i = index-1; i >= 0; i--) {
