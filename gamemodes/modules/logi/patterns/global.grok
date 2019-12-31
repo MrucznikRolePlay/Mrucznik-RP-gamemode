@@ -1,5 +1,5 @@
 NICKNAME \w+[_ ]\w+(?:[_ ]\w+)?
-PLAYER_NAME \{Player: %{NICKNAME:[player][nick]}(?:\[%{INT:[player][uid]}\]\)?}
+PLAYER_NAME \{Player: %{NICKNAME:[player][nick]}(?:\[%{INT:[player][uid]}\])?}
 PLAYER_ATTACKER \{Player: %{NICKNAME:[attacker][nick]}\[%{INT:[attacker][uid]}\]\}
 PLAYER_VICTIM \{Player: %{NICKNAME:[victim][nick]}\[%{INT:[victim][uid]}\]\}
 PLAYER_ADMIN \{Player: %{NICKNAME:[admin][nick]}\[%{INT:[admin][uid]}\]\}
