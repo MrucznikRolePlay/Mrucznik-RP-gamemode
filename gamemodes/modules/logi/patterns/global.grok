@@ -1,6 +1,9 @@
-NICKNAME \w+[_ ]\w+
+NICKNAME \w+[_ ]\w+(?:[_ ]\w+)?
 PLAYER_NAME_UID \{Player: %{NICKNAME:[player][nick]}\[%{INT:[player][uid]}\]\}
 PLAYER_NAME \{Player: %{NICKNAME:[player][nick]}\}
+PLAYER_ATTACKER \{Player: %{NICKNAME:[attacker][nick]}\[%{INT:[attacker][uid]}\]\}
+PLAYER_VICTIM \{Player: %{NICKNAME:[victim][nick]}\[%{INT:[victim][uid]}\]\}
+PLAYER_ADMIN \{Player: %{NICKNAME:[admin][nick]}\[%{INT:[admin][uid]}\]\}
 
 WEAPON \{Weapon: %{DATA:[weapon][name]}:\[id: %{INT:[weapon][id]}\]\}
 WEAPON_AMMO %{DATA:[weapon][name]}:\[id: %{INT:[weapon][id]}, ammo: %{INT:[weapon][ammo]}\]\}
@@ -17,3 +20,20 @@ CONNECT_LOG Gracz %{NICKNAME:[player][nick]}\[id: %{INT:[player][id]}, ip: %{IPV
 DISCONNECT_LOG Gracz %{NICKNAME:[player][nick]}\[id: %{INT:[player][id]}\] rozłączył się, powód: %{INT:dc_reason}
 OLD_LOGIN_LOG Gracz %{PLAYER_NAME_UID} zalogował się na konto
 NEW_LOGIN_LOG Gracz %{PLAYER_NAME_UID}\[id: %{INT:[player][id]}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]}\] zalogował się na konto
+
+ADMIN_DUTY_LOG Admin %{PLAYER_NAME_UID} zakonczyl sluzbe - wykonal w czasie %{INT:[duty][hours]}:%{INT:[duty][minutes]} \[B%{INT:[duty][bans]}/W%{INT:[duty][warns]}/K%{INT:[duty][kicks]}/I%{INT:[duty][others]}/OA%{INT:[duty][no_duty_time]}/Z%{INT:[duty][zapytaj]}/WI%{INT:[duty][in_messages]}/WO%{INT:[duty][out_messages]}\] - Wyszedl poprzez %{GREEDYDATA:exit_reason}
+
+DAMAGE_LOG_ATTACKER %{PLAYER_ATTACKER} zgłasza zranienie gracza %{PLAYER_VICTIM} o %{BASE10NUM:hp}hp bronią %{INT:weapon_id}
+DAMAGE_LOG_VICTIM %{PLAYER_VICTIM} został zraniony przez %{PLAYER_ATTACKER} o %{BASE10NUM:hp}hp bronią %{INT:weapon_id}
+DAMAGE_LOG_KILL %{PLAYER_VICTIM} został zabity przez %{PLAYER_ATTACKER}, powód: %{INT:death_type}
+DAMAGE_LOG_DEATH %{PLAYER_VICTIM} został zabity przez %{INT}, powód: %{INT:death_type}
+
+MONEY_LOG_INCOME %{PLAYER_NAME_UID} dostal %{INT:income}\$
+MONEY_LOG_LOSS %{PLAYER_NAME_UID} zabrano %{INT:loss}\$
+MONEY_LOG_SET %{PLAYER_NAME_UID} ustawiono %{INT:set}\$
+MONEY_LOG_MONEY_STATE \[kasa: %{INT:cash_before}\$\]\[bank: %{INT:account_before}\$\]
+
+SEJF_LOG SEJF %{DATA:sejf_type} \[%{INT:id}\] \+ \[%{INT:income}\] - poprzednio \[%{INT:balance_before}\]
+
+NICK_LOG %{PLAYER_NAME_UID} zmienił nick na: %{NICKNAME:new_name}
+NICK_LOG_ADMIN Admin %{PLAYER_ADMIN} zmienił %{PLAYER_NAME_UID} nick na %{NICKNAME:new_name}
