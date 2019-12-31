@@ -1,15 +1,19 @@
-GROK PATTERNS:
+NICKNAME \w+[_ ]\w+
+PLAYER_NAME_UID \{Player: %{NICKNAME:[player][nick]}\[%{INT:[player][uid]}\]\}
+PLAYER_NAME \{Player: %{NICKNAME:[player][nick]}\}
+
+WEAPON \{Weapon: %{DATA:[weapon][name]}:\[id: %{INT:[weapon][id]}\]\}
+WEAPON_AMMO %{DATA:[weapon][name]}:\[id: %{INT:[weapon][id]}, ammo: %{INT:[weapon][ammo]}\]\}
+VEHICLE \{Vehicle: %{DATA:[vehicle][name]}\[%{INT:[vehicle][uid]}\]\}
+HOUSE \{House: %{INT:[house][id]}\}
+BUSINESS \{Business: %{DATA:[business][name]}\[%{INT:[business][id]}\]\}
+FRACTION \{Fraction: %{DATA:[fraction][name]}\[%{INT:[fraction][id]}\]\}
+
+GPCI [0-9A-F]{40}
 
 LOG_PREAMBLE \[%{DATESTAMP:[@metadata][timestamp]}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}
 
-NICKNAME \w+[_ ]\w+
-PLAYER_NAME_UID \{Player: %{NICKNAME:Nick}\[%{INT:UID}\]\}
-PLAYER_NAME \{Player: %{NICKNAME:Nick}\}
-
-WEAPON \{Weapon: %s[id: %d]\}
-WEAPON_AMMO \{Weapon: %s[id: %d, ammo: %d]\}
-VEHICLE \{Vehicle: %s[%d]\}
-HOUSE \{House: %d\}
-BUSINESS \{Business: %s[%d]\}
-FRACTION \{Fraction: %s[%d]\}
-
+CONNECT_LOG Gracz %{NICKNAME:[player][nick]}\[id: %{INT:[player][id]}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]}\] połączył się z serwerem
+DISCONNECT_LOG Gracz %{NICKNAME:[player][nick]}\[id: %{INT:[player][id]}\] rozłączył się, powód: %{INT:dc_reason}
+OLD_LOGIN_LOG Gracz %{PLAYER_NAME_UID} zalogował się na konto
+NEW_LOGIN_LOG Gracz %{PLAYER_NAME_UID}\[id: %{INT:[player][id]}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]}\] zalogował się na konto
