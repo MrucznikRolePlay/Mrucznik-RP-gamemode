@@ -12081,7 +12081,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 			{
-				Log(commandLog, INFO, "%s zlikwidowa³ trasê wyœcigow¹ %s[%d]", GetPlayerLogName(playerid), Wyscig[tworzenietrasy[playerid]][wNazwa], tworzenietrasy[playerid]);
+				Log(serverLog, INFO, "%s zlikwidowa³ trasê wyœcigow¹ %s[%d]", GetPlayerLogName(playerid), Wyscig[tworzenietrasy[playerid]][wNazwa], tworzenietrasy[playerid]);
 
 			    Wyscig[tworzenietrasy[playerid]][wStworzony] = 0;
 				strcat(Wyscig[tworzenietrasy[playerid]][wNazwa], "Wolne", 20);

@@ -142,7 +142,7 @@ YCMD:zabierz(playerid, params[], help)
 				return 1;
 			}
 
-			Log(commandLog, INFO, "%s zabra³ %s %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), x_nr);
+			Log(serverLog, INFO, "%s zabra³ %s %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), x_nr);
         }
         else
         {
