@@ -42,15 +42,17 @@ YCMD:qf(playerid, params[], help)
 			new giveplayer[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 			sendTipMessage(playerid, "Odszed³eœ z frakcji, jesteœ teraz cywilem!", COLOR_LIGHTBLUE);
-			Log(commandLog, INFO, "Gracz %s opuœci³ frakcjê %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pMember]);
+			Log(serverLog, INFO, "Gracz %s opuœci³ frakcjê %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pMember]);
 			gTeam[playerid] = 3;
 			PlayerInfo[playerid][pMember] = 0;
 			PlayerInfo[playerid][pRank] = 0;
             orgUnInvitePlayer(playerid);
 			MedicBill[playerid] = 0;
 			SetPlayerSpawnSkin(playerid);
+			SetTimerEx("AntySB", 5000, 0, "d", playerid);
+			AntySpawnBroni[playerid] = 5;
 			UsunBron(playerid);
-			SetPVarInt(playerid, "mozeUsunacBronie", 0);
+			SetPlayerSpawnWeapon(playerid);
 			return 1;
 		}
 		else

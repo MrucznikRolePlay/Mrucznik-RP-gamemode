@@ -80,7 +80,7 @@ YCMD:przyjmij(playerid, params[], help)
 						PlayerInfo[para1][pMember] = PlayerInfo[playerid][pLider];
 						PlayerInfo[para1][pRank] = 0;
 						PlayerInfo[para1][pJob] = 0;
-						Log(commandLog, INFO, "%s przyj¹³ %s do frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(ftextid));
+						Log(serverLog, INFO, "%s przyj¹³ %s do frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(ftextid));
 						format(string, sizeof(string), "Zosta³eœ przyjêty do %s przez lidera %s", FractionNames[ftextid], sendername);
 						sendTipMessageEx(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "Przyj¹³eœ %s do swojej frakcji %s", giveplayer,FractionNames[ftextid]);

@@ -58,7 +58,7 @@ YCMD:zwolnij(playerid, params[], help)
 							GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
                             new liderid = PlayerInfo[playerid][pLider];
-							Log(commandLog, INFO, "%s wyrzuci³ %s z frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(liderid));
+							Log(serverLog, INFO, "%s wyrzuci³ %s z frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(liderid));
 							format(string, sizeof(string), "Zostales wyrzucony z frakcji %s przez %s.", FractionNames[liderid],sendername);
 							sendTipMessageEx(para1, COLOR_LIGHTBLUE, string);
 							gTeam[para1] = 3;
@@ -70,7 +70,10 @@ YCMD:zwolnij(playerid, params[], help)
 							JobDuty[para1] = 0;
 							OnDuty[para1] = 0;
 							SanDuty[para1] = 0;
+							SetTimerEx("AntySB", 5000, 0, "d", para1);
+							AntySpawnBroni[para1] = 5;
 							UsunBron(para1);
+							SetPlayerColor(para1,TEAM_HIT_COLOR);
 							SetSpawnInfo(para1, gTeam[para1], PlayerInfo[para1][pSkin],0.0,0.0,0.0,0,0,0,0,0,0,0);
 							MedicBill[para1] = 0;
 							SetPlayerSpawn(para1);

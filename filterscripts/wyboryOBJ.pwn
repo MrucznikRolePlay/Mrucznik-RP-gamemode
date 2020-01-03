@@ -130,7 +130,7 @@ public OnFilterScriptExit()
 {
 	for(new i; i<OBJECTS_NUMBER; i++)
 	{
-		DestroyDynamicObject(i);
+		DestroyDynamicObject(objects[i]);
 	}
 }
 

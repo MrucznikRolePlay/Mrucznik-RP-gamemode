@@ -1411,36 +1411,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					SetPlayerVirtualWorld(playerid, 0);
 					SetPlayerPos(playerid, 1538.7106,-1474.8816,9.5000);
+					Wchodzenie(playerid);
 				}
 				case 1://Recepcja
 				{
 					SetPlayerVirtualWorld(playerid, 41);
 					SetPlayerPos(playerid, 1529.8018,-1489.0046,16.5134);
+					Wchodzenie(playerid);
 				}
 				case 2://Sala treningowa
 				{
 					SetPlayerVirtualWorld(playerid, 40);
 					SetPlayerPos(playerid, 1549.7249,-1462.1644,3.3250);
+					Wchodzenie(playerid);
 				}
 				case 3://Strefa Pracownika
 				{
 					SetPlayerVirtualWorld(playerid, 42);
 					SetPlayerPos(playerid, 1526.7426,-1469.4413,23.0778);
+					Wchodzenie(playerid);
 				}
 				case 4://Biura
 				{
 					SetPlayerVirtualWorld(playerid, 43);
 					SetPlayerPos(playerid, 1541.2571,-1464.1281,21.8429);
+					Wchodzenie(playerid);
 				}
 				case 5://Akademia
 				{
 					SetPlayerVirtualWorld(playerid, 44);
 					SetPlayerPos(playerid, 1544.1202,-1466.9008,42.8386);
+					Wchodzenie(playerid);
 				}
 				case 6://Dach
 				{
 					SetPlayerVirtualWorld(playerid, 0);
 					SetPlayerPos(playerid, 1542.1123,-1467.8416,63.8593);
+					Wchodzenie(playerid);
 				}
 			}
 		}
@@ -2520,7 +2527,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 						PlayerInfo[playerid][pLocal] = 255;
 						GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
-						
+						Wchodzenie(playerid);
 					}
 					case 1://parking
 					{
@@ -2534,6 +2541,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
 						GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
+						Wchodzenie(playerid);
 					}
 					case 2://stanowe
 					{
@@ -2546,7 +2554,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerPosEx(playerid, 594.05334, -1476.27490, 81.82840+0.5);
 						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
-					
+						Wchodzenie(playerid);
 					}
 					case 3://recepcja
 					{
@@ -2562,6 +2570,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Recepcja");
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 212;
+						Wchodzenie(playerid);
 					}
 					case 4://szatnia
 					{
@@ -2579,6 +2588,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
+						Wchodzenie(playerid);
 					
 					}
 					case 5://Zbrojownia
@@ -2596,6 +2606,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
+						Wchodzenie(playerid);
 
 					}
 					case 6://Biura federalne
@@ -2611,6 +2622,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerPosEx(playerid,596.21857, -1477.92395, 84.06664);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Biura Federalne");
 						PlayerInfo[playerid][pLocal] = 255;
+						Wchodzenie(playerid);
 
 					}
 					case 7://Dyrektorat
@@ -2626,6 +2638,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerPosEx(playerid,589.23029, -1479.66357, 91.74274);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 5, Dyrektorat");
 						PlayerInfo[playerid][pLocal] = 212;
+						Wchodzenie(playerid);
 					}
 					case 8://CID ERT
 					{
@@ -2640,6 +2653,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerVirtualWorld(playerid,6);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, CID/ERT");
 						PlayerInfo[playerid][pLocal] = 212;
+						Wchodzenie(playerid);
 					}
 					case 9://sale treningowe
 					{
@@ -2653,6 +2667,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 7);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
+						Wchodzenie(playerid);
 					}
 					case 10:
 					{
@@ -2666,6 +2681,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 8);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Sale przes³uchañ");
+						Wchodzenie(playerid);
 					}
 					case 11://dach
 					{
@@ -2678,6 +2694,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
 						PlayerInfo[playerid][pLocal] = 255;
+						Wchodzenie(playerid);
 					}
 				}
 			}
@@ -3109,6 +3126,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
 					}
+					case 14:
+					{
+						if (kaska[playerid] >= 15000 )
+						{
+							PlayerInfo[playerid][pGun1] = 5;
+		            		PlayerInfo[playerid][pAmmo1] = 1;
+							GivePlayerWeapon(playerid, 5, 1);
+							ZabierzKase(playerid, 15000);
+							format(string, sizeof(string), "~r~-$%d", 15000);
+							GameTextForPlayer(playerid, string, 5000, 1);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							format(string, sizeof(string), "Zakupiono kij baseballowy.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							return 1;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
+						}
+					}
 				}
 			}
 		}
@@ -3117,7 +3154,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    new string[256];
 		    if(response)
 			{
-			    if(zdarzylwpisac[playerid] == 1)
+			    if(zdazylwpisac[playerid] == 1)
 			    {
 				    if(strcmp(kodbitwy, inputtext, true ) == 0 && strlen(inputtext) == 8)
 				    {
@@ -3140,9 +3177,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    	SendClientMessage(playerid, COLOR_WHITE, "CIOS ODBITY!");
 				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
 				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-				    	zdarzylwpisac[playerid] = 1;
-				    	zdarzylwpisac[bijep[playerid]] = 1;
-				    	SetTimerEx("naczasbicie",9000,0,"d",bijep[playerid]);
+				    	zdazylwpisac[playerid] = 1;
+				    	zdazylwpisac[bijep[playerid]] = 1;
+				    	new timerbicia = SetTimerEx("naczasbicie",9000,0,"d",bijep[playerid]);
+						SetPVarInt(bijep[playerid], "timerBicia", timerbicia);
 				    }
 				    else
 				    {
@@ -5318,7 +5356,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun1] = 5;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
 	                     	ZabierzKase(playerid, 700);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ bejzbola za 700$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi³eœ kij baseballowy za 700$");
 		                }
 		                else
 		                {
@@ -12022,7 +12060,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wyscig[tworzenietrasy[playerid]][wNagroda]);
 
 					owyscig[playerid] = tworzenietrasy[playerid];
-					tworzenietrasy[playerid] = 666;
+					//tworzenietrasy[playerid] = 666; - po co pytam sie zmieniac po wybraniu trasy zmienn¹ jakoby TWORZYMY TRASE, PO CO?
 					
 				}
 				else
@@ -12043,7 +12081,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 			{
-				Log(commandLog, INFO, "%s zlikwidowa³ trasê wyœcigow¹ %s[%d]", GetPlayerLogName(playerid), Wyscig[tworzenietrasy[playerid]][wNazwa], tworzenietrasy[playerid]);
+				Log(serverLog, INFO, "%s zlikwidowa³ trasê wyœcigow¹ %s[%d]", GetPlayerLogName(playerid), Wyscig[tworzenietrasy[playerid]][wNazwa], tworzenietrasy[playerid]);
 
 			    Wyscig[tworzenietrasy[playerid]][wStworzony] = 0;
 				strcat(Wyscig[tworzenietrasy[playerid]][wNazwa], "Wolne", 20);

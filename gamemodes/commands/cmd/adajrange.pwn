@@ -30,7 +30,7 @@ Komenda pozwalaj¹ca nadaæ rangê dla innego ID - stworzona dla adminów z wysokim 
 
 YCMD:adajrange(playerid, params[], help)
 {
-    if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid) || Uprawnienia(playerid, ACCESS_MAKELEADER) || Uprawnienia(playerid, ACCESS_PANEL) || Uprawnienia(playerid, ACCESS_MAKEFAMILY)) //uprawnienia dla panelu KO - TYMCZASOWO do czasu refactoringu
     {
         new giveplayerid, rankValue, string[256]; 
         if(sscanf(params, "k<fix>d", giveplayerid, rankValue))

@@ -106,6 +106,10 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /reloadbans /dajdzwiek /checkteam /bw /dajapteczke");
 		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /dskill /dsus /setwl /choroba /logoutpl");
 	}
+	if (PlayerInfo[playerid][pAdmin] >= 150)
+	{
+		SendClientMessage(playerid, COLOR_GRAD4,"*150* ADMIN *** /inwigilacja");
+	}
 	if (PlayerInfo[playerid][pAdmin] >= 200)
 	{
 		SendClientMessage(playerid, COLOR_GRAD4,"*200* ADMIN *** /mole {FF0000}/scena /scenaallow /scenadisallow");

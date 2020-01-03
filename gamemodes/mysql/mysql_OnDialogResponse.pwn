@@ -13,7 +13,7 @@ MruMySQL_ZapiszUprawnienia(playerid)
 
 MruMySQL_PobierzStatystyki(playerid, nickoruid[])
 {
-    new lStr[256];
+    new lStr[300];
     new nick_escaped[MAX_PLAYER_NAME];
     mysql_real_escape_string(nickoruid, nick_escaped);
     new uid = strval(nickoruid);

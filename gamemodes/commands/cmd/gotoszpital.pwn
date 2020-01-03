@@ -34,6 +34,8 @@ YCMD:gotoszpital(playerid, params[], help)
     {
 		if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 		{
+			SetPlayerInterior(playerid, 0);
+			SetPlayerVirtualWorld(playerid, 0);
 			if (GetPlayerState(playerid) == 2)
 			{
 				new tmpcar = GetPlayerVehicleID(playerid);
@@ -41,12 +43,9 @@ YCMD:gotoszpital(playerid, params[], help)
 			}
 			else
 			{
-				SetPlayerPosEx(playerid, 1177.5322,-1323.6294,14.0753);
+				SetPlayerPos(playerid, 1177.5322,-1323.6294,14.0753);
 			}
-            SetPlayerVirtualWorld(playerid, 0);
-            SetPlayerInterior(playerid, 0);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
-			SetPlayerInterior(playerid,0);
 			PlayerInfo[playerid][pInt] = 0;
 		}
 		else

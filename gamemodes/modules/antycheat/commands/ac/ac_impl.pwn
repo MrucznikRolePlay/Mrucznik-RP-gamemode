@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_ac_Impl(playerid)
+command_ac_Impl()
 {
     return 1;
 }

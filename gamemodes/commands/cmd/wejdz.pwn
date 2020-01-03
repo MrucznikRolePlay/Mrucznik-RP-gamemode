@@ -244,25 +244,25 @@ YCMD:wejdz(playerid, params[], help)
 //======================================================================
 
         
-       //chwilowe do vinyl
-      /*  else if(PlayerToPoint(1.5, playerid, 814.4426,-1378.2600,23.6475))
+       //wejscie do vinyl
+        else if(PlayerToPoint(1.5, playerid, 816.5667, -1415.4117, -22.5834))
         {
+            if(vinylStatus == 0 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
+            {
+                sendTipMessage(playerid, "Vinyl jest aktualnie zamkniêty! Skontaktuj siê z w³aœcicielem klubu."); 
+                return 1;
+            }
             if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
             {
                 sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyla!"); 
                 return 1;
             }
-            if(vinylStatus == 0)
-            {
-                sendTipMessage(playerid, "Vinyl jest aktualnie zamkniêty! Skontaktuj siê z w³aœcicielem klubu."); 
-                return 1;
-            }
             SetPLocal(playerid, PLOCAL_ORG_SN); 
-            SetPlayerPosEx(playerid, 817.0987,-1375.1685,23.6475);
+            SetPlayerPos(playerid, 816.4222, -1413.7644, -22.5834);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);
             return 1;
-        }*/
+        }
         //san news biura
         else if(PlayerToPoint(1.0, playerid, 286.0645,-1602.0117,134.4274) && posDrzwiSN[playerid] == 0)
         {
