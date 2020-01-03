@@ -1,38 +1,38 @@
 NICKNAME \w+[_ ]\w+(?:[_ ]\w+)?
-PLAYER_NAME \{Player: %{NICKNAME:[player][nick]}(?:\[%{INT:[player][uid]}\])?}
-PLAYER_ATTACKER \{Player: %{NICKNAME:[attacker][nick]}\[%{INT:[attacker][uid]}\]\}
-PLAYER_VICTIM \{Player: %{NICKNAME:[victim][nick]}\[%{INT:[victim][uid]}\]\}
-PLAYER_ADMIN \{Player: %{NICKNAME:[admin][nick]}\[%{INT:[admin][uid]}\]\}
+PLAYER_NAME \{Player: %{NICKNAME:[player][nick]:string}(?:\[%{INT:[player][uid]:int}\])?}
+PLAYER_ATTACKER \{Player: %{NICKNAME:[attacker][nick]:string}\[%{INT:[attacker][uid]:int}\]\}
+PLAYER_VICTIM \{Player: %{NICKNAME:[victim][nick]:string}\[%{INT:[victim][uid]:int}\]\}
+PLAYER_ADMIN \{Player: %{NICKNAME:[admin][nick]:string}\[%{INT:[admin][uid]:int}\]\}
 
-WEAPON \{Weapon: %{DATA:[weapon][name]}:\[id: %{INT:[weapon][id]}\]\}
-WEAPON_AMMO %{DATA:[weapon][name]}:\[id: %{INT:[weapon][id]}, ammo: %{INT:[weapon][ammo]}\]\}
-VEHICLE \{Vehicle: %{DATA:[vehicle][name]}\[%{INT:[vehicle][uid]}\]\}
-HOUSE \{House: %{INT:[house][id]}\}
-BUSINESS \{Business: %{DATA:[business][name]}\[%{INT:[business][id]}\]\}
-FRACTION \{Fraction: %{DATA:[fraction][name]}\[%{INT:[fraction][id]}\]\}
+WEAPON \{Weapon: %{DATA:[weapon][name]:string}:\[id: %{INT:[weapon][id]:int}\]\}
+WEAPON_AMMO %{DATA:[weapon][name]:string}:\[id: %{INT:[weapon][id]:int}, ammo: %{INT:[weapon][ammo]:int}\]\}
+VEHICLE \{Vehicle: %{DATA:[vehicle][name]:string}\[%{INT:[vehicle][uid]:int}\]\}
+HOUSE \{House: %{INT:[house][id]:int}\}
+BUSINESS \{Business: %{DATA:[business][name]:string}\[%{INT:[business][id]:int}\]\}
+FRACTION \{Fraction: %{DATA:[fraction][name]:string}\[%{INT:[fraction][id]:int}\]\}
 
 GPCI [0-9A-F]{40}
 
 LOG_PREAMBLE \[%{DATESTAMP:[@metadata][timestamp]}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}
 
-CONNECT_LOG Gracz %{NICKNAME:[player][nick]}\[id: %{INT:[player][id]}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]}\] połączył się z serwerem
-DISCONNECT_LOG Gracz %{NICKNAME:[player][nick]}\[id: %{INT:[player][id]}\] rozłączył się, powód: %{INT:dc_reason}
+CONNECT_LOG Gracz %{NICKNAME:[player][nick]:string}\[id: %{INT:[player][id]:int}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]:string}\] połączył się z serwerem
+DISCONNECT_LOG Gracz %{NICKNAME:[player][nick]:string}\[id: %{INT:[player][id]:int}\] rozłączył się, powód: %{INT:dc_reason:int}
 OLD_LOGIN_LOG Gracz %{PLAYER_NAME} zalogował się na konto
-NEW_LOGIN_LOG Gracz %{PLAYER_NAME}\[id: %{INT:[player][id]}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]}\] zalogował się na konto
+NEW_LOGIN_LOG Gracz %{PLAYER_NAME}\[id: %{INT:[player][id]:int}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]:string}\] zalogował się na konto
 
-ADMIN_DUTY_LOG Admin %{PLAYER_NAME} zakonczyl sluzbe - wykonal w czasie %{INT:[duty][hours]}:%{INT:[duty][minutes]} \[B%{INT:[duty][bans]}/W%{INT:[duty][warns]}/K%{INT:[duty][kicks]}/I%{INT:[duty][others]}/OA%{INT:[duty][no_duty_time]}/Z%{INT:[duty][zapytaj]}/WI%{INT:[duty][in_messages]}/WO%{INT:[duty][out_messages]}\] - Wyszedl poprzez %{GREEDYDATA:exit_reason}
+ADMIN_DUTY_LOG Admin %{PLAYER_NAME} zakonczyl sluzbe - wykonal w czasie %{INT:[duty][hours]:int}:%{INT:[duty][minutes]:int} \[B%{INT:[duty][bans]:int}/W%{INT:[duty][warns]:int}/K%{INT:[duty][kicks]:int}/I%{INT:[duty][others]:int}/OA%{INT:[duty][no_duty_time]:int}/Z%{INT:[duty][zapytaj]:int}/WI%{INT:[duty][in_messages]:int}/WO%{INT:[duty][out_messages]:int}\] - Wyszedl poprzez %{GREEDYDATA:exit_reason}
 
-DAMAGE_LOG_ATTACKER %{PLAYER_ATTACKER} zgłasza zranienie gracza %{PLAYER_VICTIM} o %{BASE10NUM:hp}hp bronią %{INT:weapon_id}
-DAMAGE_LOG_VICTIM %{PLAYER_VICTIM} został zraniony przez %{PLAYER_ATTACKER} o %{BASE10NUM:hp}hp bronią %{INT:weapon_id}
-DAMAGE_LOG_KILL %{PLAYER_VICTIM} został zabity przez %{PLAYER_ATTACKER}, powód: %{INT:death_type}
-DAMAGE_LOG_DEATH %{PLAYER_VICTIM} został zabity przez %{INT}, powód: %{INT:death_type}
+DAMAGE_LOG_ATTACKER %{PLAYER_ATTACKER} zgłasza zranienie gracza %{PLAYER_VICTIM} o %{BASE10NUM:hp:float}hp bronią %{INT:weapon_id:int}
+DAMAGE_LOG_VICTIM %{PLAYER_VICTIM} został zraniony przez %{PLAYER_ATTACKER} o %{BASE10NUM:hp:float}hp bronią %{INT:weapon_id:int}
+DAMAGE_LOG_KILL %{PLAYER_VICTIM} został zabity przez %{PLAYER_ATTACKER}, powód: %{INT:death_type:int}
+DAMAGE_LOG_DEATH %{PLAYER_VICTIM} został zabity przez %{INT}, powód: %{INT:death_type:int}
 
-MONEY_LOG_INCOME %{PLAYER_NAME} dostal %{INT:income}\$
-MONEY_LOG_LOSS %{PLAYER_NAME} zabrano %{INT:loss}\$
-MONEY_LOG_SET %{PLAYER_NAME} ustawiono %{INT:set}\$
-MONEY_LOG_MONEY_STATE \[kasa: %{INT:cash_before}\$\]\[bank: %{INT:account_before}\$\]
+MONEY_LOG_INCOME %{PLAYER_NAME} dostal %{INT:income:int}\$
+MONEY_LOG_LOSS %{PLAYER_NAME} zabrano %{INT:loss:int}\$
+MONEY_LOG_SET %{PLAYER_NAME} ustawiono %{INT:set:int}\$
+MONEY_LOG_MONEY_STATE \[kasa: %{INT:cash_before:int}\$\]\[bank: %{INT:account_before:int}\$\]
 
-SEJF_LOG SEJF %{DATA:sejf_type} \[%{INT:id}\] \+ \[%{INT:income}\] - poprzednio \[%{INT:balance_before}\]
+SEJF_LOG SEJF %{DATA:sejf_type:string} \[%{INT:id:int}\] \+ \[%{INT:income:int}\] - poprzednio \[%{INT:balance_before:int}\]
 
-NICK_LOG %{PLAYER_NAME} zmienił nick na: %{NICKNAME:new_name}
-NICK_LOG_ADMIN Admin %{PLAYER_ADMIN} zmienił %{PLAYER_NAME} nick na %{NICKNAME:new_name}
+NICK_LOG %{PLAYER_NAME} zmienił nick na: %{NICKNAME:new_name:string}
+NICK_LOG_ADMIN Admin %{PLAYER_ADMIN} zmienił %{PLAYER_NAME} nick na %{NICKNAME:new_name:string}
