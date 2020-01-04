@@ -928,7 +928,11 @@ public CheckChangeWeapon()
 						else
 						{
 							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, starabron[i]);
-							return PokazDialogBronie(i);
+							if(PokazDialogBronie(i) == 0)
+							{
+								starabron[i] = 0;
+								SetPlayerArmedWeapon(i, 0);
+							}
 						}
 					}
 				}
