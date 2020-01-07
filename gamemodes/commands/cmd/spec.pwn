@@ -72,7 +72,9 @@ YCMD:spec(playerid, params[], help)
 			new cash =  GetPlayerMoney(pid);
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"));
+			new specIP[32];
+			GetPlayerIp(pid, specIP, sizeof(specIP));
+			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s | World - %d | Int - % | IP - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"), GetPlayerVirtualWorld(pid), GetPlayerInterior(pid), specIP);
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);
