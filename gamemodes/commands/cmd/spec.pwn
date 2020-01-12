@@ -72,7 +72,9 @@ YCMD:spec(playerid, params[], help)
 			new cash =  GetPlayerMoney(pid);
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"));
+			new specIP[32];
+			GetPlayerIp(pid, specIP, sizeof(specIP));
+			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s | VWorld - %d | Int - % | IP - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"), GetPlayerVirtualWorld(pid), GetPlayerInterior(pid), specIP);
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);
@@ -80,6 +82,12 @@ YCMD:spec(playerid, params[], help)
             SetTimerEx("SpecToggle", 3000, false, "i", playerid);
             if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
             else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
+			if(GetPlayerInterior(pid) > 0 || GetPlayerVirtualWorld(pid) > 0) 
+			{
+				new str[32];
+				valstr(str, pid);
+				RunCommand(playerid, "/spec",  str);
+			}
 			if(playerTargetSpec[playerid] != INVALID_SPECTATE_ID)
 			{
 				if(PlayerInfo[playerTargetSpec[playerid]][pAdmin] < 2000)

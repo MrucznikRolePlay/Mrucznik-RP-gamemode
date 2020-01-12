@@ -1853,8 +1853,8 @@ public OnPlayerDeath(playerid, killerid, reason)
             else
 			{
 				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
-				SendMessageToAdminEx(string, COLOR_P@, 2);
 			}
+			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
