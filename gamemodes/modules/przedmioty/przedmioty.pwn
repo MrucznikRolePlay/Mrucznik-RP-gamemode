@@ -547,7 +547,7 @@ PokazDialogBronie(playerid)
 	{
 		GUIExit[playerid] = 0;
 		sendErrorMessage(playerid, "Nie posiadasz przy sobie ¿adnej broni.");
-		return false;
+		return 0;
 	}
 	return ShowPlayerDialogEx(playerid, D_PRZEDMIOTY_BRONIE, DIALOG_STYLE_LIST, "{FFFFFF}Wyci¹gnij broñ (/togscroll) (/p [nazwa])", dialogstring, "Wyci¹gnij", "WyjdŸ");
 }
