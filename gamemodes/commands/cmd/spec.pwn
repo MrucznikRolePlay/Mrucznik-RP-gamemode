@@ -82,12 +82,6 @@ YCMD:spec(playerid, params[], help)
             SetTimerEx("SpecToggle", 3000, false, "i", playerid);
             if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
             else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
-			if(GetPlayerInterior(pid) > 0 || GetPlayerVirtualWorld(pid) > 0) 
-			{
-				new str[32];
-				valstr(str, pid);
-				RunCommand(playerid, "/spec",  str);
-			}
 			if(playerTargetSpec[playerid] != INVALID_SPECTATE_ID)
 			{
 				if(PlayerInfo[playerTargetSpec[playerid]][pAdmin] < 2000)
