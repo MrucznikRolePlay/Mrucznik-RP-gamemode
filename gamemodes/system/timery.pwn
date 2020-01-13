@@ -928,7 +928,11 @@ public CheckChangeWeapon()
 						else
 						{
 							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, starabron[i]);
-							return PokazDialogBronie(i);
+							if(PokazDialogBronie(i) == 0)
+							{
+								starabron[i] = 0;
+								SetPlayerArmedWeapon(i, 0);
+							}
 						}
 					}
 				}
@@ -1149,9 +1153,11 @@ public Spectator()
 		{
 			if(IsPlayerConnected(specid))
 			{
+				new specIP[32];
 				GetPlayerName(specid, specNAME, sizeof(specNAME));
 				GetPlayerHealth(specid, specHP);
-				format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f",specNAME,specid,specHP);
+				GetPlayerIp(specid, specIP, sizeof(specIP));
+				format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
 				GameTextForPlayer(i, string, 2500, 3);
 				SpectateTime[i]++;
 				if(GetPlayerInterior(i) != GetPlayerInterior(specid))

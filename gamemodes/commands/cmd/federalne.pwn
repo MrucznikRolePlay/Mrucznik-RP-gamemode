@@ -53,7 +53,7 @@ YCMD:federalne(playerid, params[], help)
 			return 1;
 		}
 
-		if (IsAFBI(playerid))
+		if (IsACop(playerid) || IsAFBI(playerid))
 		{
 			if(IsPlayerConnected(giveplayerid))
 			{
