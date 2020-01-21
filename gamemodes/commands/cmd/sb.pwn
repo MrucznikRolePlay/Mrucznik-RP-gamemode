@@ -66,8 +66,8 @@ YCMD:sb(playerid, params[], help)
 						new checker = 0;
 						new BronieF[13][2];
 						for(new i = 0; i < 13; i++) { GetPlayerWeaponData(giveplayerid, i, BronieF[i][0], BronieF[i][1]); }
-						//
 					    format(string, sizeof(string), "|__________ Wynik przeszukania %s __________|", giveplayer);
+						SendClientMessage(playerid, COLOR_P@, string);
 					    if(BronieF[10][0] != 0)
 					    {
 					        format(string, sizeof(string), "Broñ bia³a: %s — %s", GunNames[BronieF[10][0]], (playerWeapons[giveplayerid][weaponLegal11] == 1) ? ("LEGALNA") : ("NIEZNANE RÓD£O"));
