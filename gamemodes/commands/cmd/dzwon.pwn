@@ -47,6 +47,11 @@ YCMD:dzwon(playerid, params[], help)
 		sendErrorMessage(playerid, "Nie posiadasz telefonu !");
 		return 1;
 	}
+	if(zakuty[playerid] == 1)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas bycia skutym!");
+		return 1;
+	}
 	if(PlayerInfo[playerid][pJailed] != 0)
 	{
 		sendErrorMessage(playerid, "Nie posiadasz telefonu w wiêzieniu!"); 
