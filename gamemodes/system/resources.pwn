@@ -83,7 +83,7 @@ LoadDLSkins()
 	AddCharModelEx(45, 20430, "mrucznikskin33.dff", "mrucznikskin33.txd", 0);// [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By:____] [Added: 2.6.1]
 	AddCharModelEx(12, 20431, "mrucznikskin36.dff", "mrucznikskin36.txd", 0); // [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By:____] [Added: 2.6.1]
 	AddCharModelEx(20, 20431, "mrucznikskin37.dff", "mrucznikskin37.txd", 0); // [KOBIETA/FACET] [M£ODA/ŒREDNIA/STARA] [By:____] [Added: 2.6.1]
-
+	AddCharModelEx(22, 20432, "mrucznikskin53.dff", "mrucznikskin53.txd",0); 
 	//MODELE
 	AddSimpleModel(0, 19353, -1001, "snlogos1.dff", "wallito.txd");//LOGO LSPD 
 	AddSimpleModel(0, 19353, -1002, "pdlogo.dff", "wallito.txd");//LOGO SN
