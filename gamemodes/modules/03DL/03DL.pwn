@@ -116,9 +116,9 @@ stock skinIsLegally(skinID)
 	
 	return false;
 }
-stock AddCharModelEx(baseID, newID, dffName[25], txdName[25], type)
+stock AddCharModelEx(type)
 {
-	AddCharModel(baseID, newID, dffName, txdName);
+	//AddCharModel(baseID, newID, dffName, txdName); - Sprawdzamy u¿ytecznoœæ
 	skinsLoaded++; 
 	if(type == 0)
 	{
