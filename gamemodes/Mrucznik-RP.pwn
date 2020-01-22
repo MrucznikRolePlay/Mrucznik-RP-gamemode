@@ -96,7 +96,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
 #include "VERSION.pwn"
-#define DEBUG_MODE 0 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
+#define DEBUG_MODE 1 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
 #define RESOURCES_LINK "http://5.133.9.55:8100/models/"
 
 #if !defined gpci
