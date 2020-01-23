@@ -117,7 +117,7 @@ YCMD:kupskin(playerid, params[], help)
 					sendErrorMessage(playerid, "Ten skin jest do kupienia za MC"); 
 					return 1;
 				}
-				else if(skinID > 20400 && skinID <= skinsLoaded_Normal-1)//Normalne skiny dla ka¿dego
+				else if(skinID > 20400 && skinID <= skinsLoaded_Normal)//Normalne skiny dla ka¿dego
 				{
 					new fakeID = GetSkinFakeID(skinID); 
 					new string[124];
