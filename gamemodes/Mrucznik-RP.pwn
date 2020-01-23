@@ -96,7 +96,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
 #include "VERSION.pwn"
-#define DEBUG_MODE 0 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
+#define DEBUG_MODE 1 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
 #define RESOURCES_LINK "http://5.133.9.55:8100/models/"
 
 #if !defined gpci
@@ -114,7 +114,6 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
-#include "system\resources.pwn"
 
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"
@@ -161,6 +160,9 @@ native gpci (playerid, serial [], len);
 
 //-------<[ Dialogi ]>-------
 #include "dialogs\OnDialogResponse.pwn"
+
+//-------<[ 03DL ]>---------
+#include "..\scriptfiles\resources.pwn"
 
 //------------------------------------------------------------------------------------------------------
 main()

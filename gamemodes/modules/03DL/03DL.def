@@ -32,4 +32,13 @@
 #define SKIN_TYPE_ADMIN 3
 #define SKIN_TYPE_FRACTION 4
 
+//p³eæ
+#define SKIN_WOMEN 0
+#define SKIN_MEN 1
+
+//kolory
+#define SKIN_WHITE 0 
+#define SKIN_BLACK 1
+#define SKIN_YELLOW 2
+#define SKIN_ANOTHER 3
 //end

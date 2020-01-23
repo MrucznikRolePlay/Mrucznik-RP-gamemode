@@ -116,10 +116,23 @@ stock skinIsLegally(skinID)
 	
 	return false;
 }
-stock AddCharModelEx(baseID, newID, dffName[25], txdName[25], type)
+stock GetSkinFakeID(newID)//Przeznaczone tylko i wy³¹cznie dla nowych skinów z 03DL
 {
-	AddCharModel(baseID, newID, dffName, txdName);
+	new skinFakeID; 
+	if(newID >= 20000)
+	{
+		skinFakeID = newID-20000; 
+	}
+	return skinFakeID; 
+}
+stock AddNewSkin(type, newID, sex, color, cost)
+{
 	skinsLoaded++; 
+	new fakeID = GetSkinFakeID(newID); 
+	skinSex[fakeID] = sex; 
+	skinColor[fakeID] = color; 
+	skinCost[fakeID] = cost; 
+
 	if(type == 0)
 	{
 		skinsLoaded_Normal++;
