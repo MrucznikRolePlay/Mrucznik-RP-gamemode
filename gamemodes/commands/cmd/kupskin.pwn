@@ -27,6 +27,7 @@
 /*
 	
 */
+/*
 new CenySkinow[] = {
 	15000,
 	15000,
@@ -59,7 +60,7 @@ new CenySkinow[] = {
 	100000,
 	50000,
 	100000
-};
+};*/
 
 YCMD:kupskin(playerid, params[], help)
 {
@@ -80,17 +81,20 @@ YCMD:kupskin(playerid, params[], help)
 			{				
 				if(skinID > 299 && skinID <= 20000)
 				{
-					sendErrorMessage(playerid, "B³êdne ID skina - brak przedzia³u od 300-399"); 
+					sendErrorMessage(playerid, "B³êdne ID skina"); 
 					return 1;
 				}
-				else if(skinIsLegally(skinID))
+				if(skinID <= 299) 
 				{
-					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
-					ZabierzKase(playerid, 5000); 
-					SetPlayerSkin(playerid, skinID);
-					PlayerInfo[playerid][pSkin] = skinID; 
-					return 1;
-				}	
+					if(skinIsLegally(skinID))
+					{
+						sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
+						ZabierzKase(playerid, 5000); 
+						SetPlayerSkin(playerid, skinID);
+						PlayerInfo[playerid][pSkin] = skinID; 
+						return 1;
+					}	
+				}
 				else if(skinID > 20000 && skinID <= skinsLoaded_Event)//SKINY EVENTOWE
 				{
 					if(eventForSkin[skinID-20000] == 0)
@@ -115,9 +119,46 @@ YCMD:kupskin(playerid, params[], help)
 				}
 				else if(skinID > 20400 && skinID <= skinsLoaded_Normal-1)//Normalne skiny dla ka¿dego
 				{
+					new fakeID = GetSkinFakeID(skinID); 
+					new string[124];
+					new plec[10]; 
+					new rasa[24]; 
+
+					if(kaska[playerid] < skinCost[fakeID])
+					{
+						sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki, na tego skina");
+						format(string, sizeof(string), "Ten skin [NR: %d] kosztuje %d$", fakeID+20000, skinCost[fakeID]);
+						sendTipMessage(playerid, string);
+						return 1; 
+					}
+					if(skinSex[fakeID] == SKIN_MEN)
+					{
+						format(plec, sizeof(plec), "mê¿czyzna");
+					}
+					else if (skinSex[fakeID] == SKIN_WOMEN)
+					{
+						format(plec, sizeof(plec), "kobieta"); 
+					}
+					else{format(plec, sizeof(plec), "nieznana");}
+					
+					if(skinColor[fakeID] == SKIN_WHITE)
+					{
+						format(rasa, sizeof(rasa), "Bia³y"); 
+					}
+					else if(skinColor[fakeID] == SKIN_BLACK)
+					{
+						format(rasa, sizeof(rasa), "Afroamerykanin"); 
+					}
+					else if(skinColor[fakeID] == SKIN_YELLOW)
+					{
+						format(rasa, sizeof(rasa), "Azjata");
+					}
+					else{format(rasa, sizeof(rasa), "Nieznana");}
+					format(string, sizeof(string), "Kupi³eœ skina o p³ci: %s, rasy %s", plec, rasa);
+					sendTipMessage(playerid, string); 
 					SetPlayerSkin(playerid, skinID); 
-					sendTipMessage(playerid, "Kupi³eœ nowego skina!"); 
-					ZabierzKase(playerid, CenySkinow[skinID-20401]); 
+					//ZabierzKase(playerid, CenySkinow[skinID-20401]); 
+					ZabierzKase(playerid, skinCost[fakeID]); 
 					PlayerInfo[playerid][pSkin] = skinID; 
 				}
 			}

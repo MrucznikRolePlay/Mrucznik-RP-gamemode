@@ -29,6 +29,9 @@ new skinsLoaded_Uni=20300;
 new skinsLoaded_Fraction=20100; 
 new skinsLoaded_Event=20000;
 
+new skinSex[1000]; 
+new skinColor[1000]; 
+new skinCost[1000]; 
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------
 

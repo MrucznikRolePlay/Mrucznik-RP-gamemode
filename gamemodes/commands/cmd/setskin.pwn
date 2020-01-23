@@ -57,7 +57,7 @@ YCMD:setskin(playerid, params[], help)
 		        if(para1 != INVALID_PLAYER_ID)
 		        {
                     if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby nadaæ skina gracz musi byæ pieszo!");
-					if(level <= LOADED_SKINS)
+					if(level <= skinsLoaded_Normal)
 					{
 						PlayerInfo[para1][pSkin] = level;
 						Log(adminLog, INFO, "Admin %s zmieni³ %s skin na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
