@@ -2336,7 +2336,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
 			                SetPlayerPosEx(playerid,1568.7660,-1691.4886,5.8906);
-			                SetPlayerVirtualWorld(playerid,0);
+			                SetPlayerVirtualWorld(playerid,2);
 			                SetPlayerInterior(playerid,0);
 			                TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
