@@ -54,7 +54,7 @@ YCMD:sb(playerid, params[], help)
 				}
 				if (ProxDetectorS(8.0, playerid, giveplayerid) ||  PlayerInfo[playerid][pAdmin] > 0)
 				{
-				    if(!IsPlayerInAnyVehicle(playerid) && !IsPlayerInAnyVehicle(giveplayerid))
+				    if((!IsPlayerInAnyVehicle(playerid) && !IsPlayerInAnyVehicle(giveplayerid)) || PlayerInfo[playerid][pAdmin] > 0)
 				    {
 					    if(giveplayerid == playerid && PlayerInfo[playerid][pAdmin] < 1)
 						{
