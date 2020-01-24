@@ -38,7 +38,7 @@ YCMD:federalne(playerid, params[], help)
     {
 	 	if(!IsACop(playerid))
 	 	{
-	 		sendErrorMessage(playerid, "Nie jesteœ agentem FBI!");
+	 		sendErrorMessage(playerid, "Nie jesteœ z s³u¿b porz¹dkowych!");
 		    return 1;
 		}
 	    if(OnDuty[playerid] != 1 )
@@ -105,7 +105,7 @@ YCMD:federalne(playerid, params[], help)
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jesteœ z FBI!");
+			sendErrorMessage(playerid, "Nie jesteœ z s³u¿b porz¹dkowych!");
 		}
 	}
 	return 1;
