@@ -35,11 +35,15 @@ YCMD:kuppozwolenie(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pJob] == 2)
         {
-            //if jest w³¹czone wydawanie pozwo przez bota
             if(IsPlayerInRangeOfPoint(playerid, 3.0, -1677.7097,893.5458,-48.9141) && (GetPlayerVirtualWorld(playerid)==1)) 
             {
                 if(ApprovedLawyer[playerid] == 0)
                 {
+                    if(PozwolenieBot == 0)
+                    {
+                        sendTipMessage(playerid, "Wy³¹czono mo¿liwoœæ automatycznego kupna pozwoleñ.");
+                        return 1;
+                    }
                     if(kaska[playerid] >= CENA_POZWOLENIE)
                     {
                         ZabierzKase(playerid, CENA_POZWOLENIE);
