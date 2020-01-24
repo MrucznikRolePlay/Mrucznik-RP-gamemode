@@ -686,7 +686,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
     if(GetPVarInt(playerid, "patrol-map") == 1 && GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == Text:INVALID_TEXT_DRAW)
         {
             SendClientMessage(playerid, COLOR_PAPAYAWHIP, "Wybierz region.");
             SelectTextDraw(playerid, 0xD2691E55);
@@ -751,7 +751,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     }
     else if(GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == Text:INVALID_TEXT_DRAW)
         {
             CancelSelectTextDraw(playerid);
             Patrol_HideMap(playerid);

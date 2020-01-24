@@ -10364,7 +10364,7 @@ Patrol_Unload()
 
     for(new i = 0; i < MAX_PATROLS ; i++)
     {
-        if(PatrolMarker[i] != INVALID_TEXT_DRAW)
+        if(PatrolMarker[i] != Text:INVALID_TEXT_DRAW)
         {
             TextDrawDestroy(PatrolMarker[i]);
         }
@@ -10529,7 +10529,7 @@ public PatrolGPS()
 
 Patrol_CreateMarker(patrolid, Float:x, Float:y, type)
 {
-    if(PatrolMarker[patrolid] != INVALID_TEXT_DRAW)
+    if(PatrolMarker[patrolid] != Text:INVALID_TEXT_DRAW)
     {
         TextDrawDestroy(PatrolMarker[patrolid]);
         PatrolMarker[patrolid] = Text:INVALID_TEXT_DRAW;
