@@ -494,6 +494,7 @@
 #include "cmd/togdepo.pwn"
 #include "cmd/togfam.pwn"
 #include "cmd/togfinfo.pwn"
+#include "cmd/togglepozwo.pwn"
 #include "cmd/toglicznik.pwn"
 #include "cmd/togname.pwn"
 #include "cmd/togooc.pwn"
