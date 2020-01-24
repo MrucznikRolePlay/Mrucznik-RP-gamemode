@@ -253,8 +253,6 @@ public OnGameModeInit()
 	
 	DefaultItems_LicenseCost();
 
-	//-------<[ 0.3DL ]>-------
-	LoadDLSkins();
 	//-------<[ commands ]>-------
 	InitCommands();
 
