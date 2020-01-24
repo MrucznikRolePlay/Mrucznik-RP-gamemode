@@ -385,6 +385,7 @@
 #include "cmd/rodzinny.pwn"
 #include "cmd/roleta.pwn"
 #include "cmd/rooc.pwn"
+#include "cmd/rozbierz.pwn"
 #include "cmd/rozkuj.pwn"
 #include "cmd/rozwiaz.pwn"
 #include "cmd/rozwiedz.pwn"
