@@ -44,9 +44,9 @@ YCMD:app(playerid, params[], help) {
     SendRadioMessage(2, COLOR_PANICRED, string);
     SendRadioMessage(3, COLOR_PANICRED, string);
     ZabierzKase(playerid, CENA_POZWOLENIE);
-    DajKase(ofertaod, 15000);
+    DajKase(ofertaod, CENA_POZWOLENIE_ZYSK);
     SetPVarInt(playerid, "pozwolenie-oferuje", 999);
-    Sejf_Add(PlayerInfo[ofertaod][pMember], 20000);
+    Sejf_Add(PlayerInfo[ofertaod][pMember], CENA_POZWOLENIE_SEJF);
     ApprovedLawyer[playerid] = 1;
     Log(payLog, INFO, "%s da³ zgodê prawnicz¹ %s", GetPlayerLogName(ofertaod), GetPlayerLogName(playerid));
     return 1;

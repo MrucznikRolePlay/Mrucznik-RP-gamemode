@@ -158,7 +158,7 @@
 
 
 //-------<[ others ]>-------
-#include "resources.pwn"
+#include "03DL\resources.pwn"
 
 
 //-------<[ callbacks ]>-------
