@@ -38,9 +38,9 @@ YCMD:pozwolenie(playerid, params[], help) {
     SetPVarInt(komu, "pozwolenie-oferuje", playerid);
     SetPVarInt(playerid, "pozwolenie-oferujeDla", komu);
     new string[128];
-    format(string, sizeof(string), "Zaoferowa³eœ %s pozwolenie prawnicze za $35 000", GetNick(komu, true));
+    format(string, sizeof(string), "Zaoferowa³eœ %s pozwolenie prawnicze za $"#CENA_POZWOLENIE, GetNick(komu, true));
     sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
-    format(string, sizeof(string), "%s zaoferowa³ Ci pozwolenie prawnicze za $35 000. Akceptuj za pomoc¹ /app", GetNick(playerid, true));
+    format(string, sizeof(string), "%s zaoferowa³ Ci pozwolenie prawnicze za $"#CENA_POZWOLENIE". Akceptuj za pomoc¹ /app", GetNick(playerid, true));
     sendTipMessage(komu, string, COLOR_LIGHTBLUE);
     return 1;
 }

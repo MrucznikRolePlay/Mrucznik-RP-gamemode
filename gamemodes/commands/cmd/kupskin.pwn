@@ -123,7 +123,11 @@ YCMD:kupskin(playerid, params[], help)
 					new string[124];
 					new plec[10]; 
 					new rasa[24]; 
-
+					if(skinID == 20446 || skinID == 20445 || skinID == 20451 || skinID == 20449)
+					{
+						sendErrorMessage(playerid, "Nagie skiny mo¿esz za³o¿yæ w swoim domu za pomoc¹ /rozbierz"); 
+						return 1;
+					}
 					if(kaska[playerid] < skinCost[fakeID])
 					{
 						sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki, na tego skina");
@@ -147,7 +151,7 @@ YCMD:kupskin(playerid, params[], help)
 					}
 					else if(skinColor[fakeID] == SKIN_BLACK)
 					{
-						format(rasa, sizeof(rasa), "Afroamerykanin"); 
+						format(rasa, sizeof(rasa), "Murzyn"); 
 					}
 					else if(skinColor[fakeID] == SKIN_YELLOW)
 					{
