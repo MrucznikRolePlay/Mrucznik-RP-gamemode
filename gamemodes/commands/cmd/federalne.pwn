@@ -36,7 +36,7 @@ YCMD:federalne(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	 	if(!IsAFBI(playerid) || !IsACop(playerid))
+	 	if(!IsACop(playerid))
 	 	{
 	 		sendErrorMessage(playerid, "Nie jesteœ agentem FBI!");
 		    return 1;
