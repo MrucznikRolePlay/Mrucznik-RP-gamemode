@@ -1062,6 +1062,8 @@ new playerSeeSpec[MAX_PLAYERS];
 
 //SANDAL
 new gRO[MAX_PLAYERS];
+
+new isNaked[MAX_PLAYERS]; 
 //new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
 
 //-----------------------------------------------
@@ -1078,6 +1080,7 @@ ClearVariableConnect(playerid)
 	timerForHunter[playerid]=0;*/
 	playerTargetSpec[playerid] = INVALID_SPECTATE_ID;
 	playerSeeSpec[playerid] = INVALID_SPECTATE_ID; 
+	isNaked[playerid] = 0; 
 	return 1;
 }
 ClearVariableDisconnect(playerid)

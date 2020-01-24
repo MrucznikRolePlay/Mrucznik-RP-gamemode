@@ -2868,6 +2868,11 @@ SetPlayerSpawnSkin(playerid)
 	{
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	}
+	if(isNaked[playerid] == 1)
+	{
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
+		isNaked[playerid] = 0;
+	}
 	return 1;
 }
 
