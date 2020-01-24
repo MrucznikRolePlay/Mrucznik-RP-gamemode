@@ -134,7 +134,7 @@
 #define LEADERS_TYPES 3
 #define LEADER_FRAC 1
 #define LEADER_FAM 2
-
+#define CENA_POZWOLENIE 35000
 //Kary:
 #define KARA_BAN 1
 #define KARA_BLOCK 2

@@ -250,6 +250,7 @@
 #include "cmd/kupneony.pwn"
 #include "cmd/kupowaniedomu.pwn"
 #include "cmd/kuppojazd.pwn"
+#include "cmd/kuppozwolenie.pwn"
 #include "cmd/kupsamoloty.pwn"
 #include "cmd/kupskin.pwn"
 #include "cmd/kurs.pwn"

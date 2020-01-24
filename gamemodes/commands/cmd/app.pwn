@@ -33,7 +33,7 @@ YCMD:app(playerid, params[], help) {
     new ofertaod = GetPVarInt(playerid, "pozwolenie-oferuje");
     if(!IsPlayerConnected(ofertaod)) return sendErrorMessage(playerid, "Osoba, która oferowa³a Ci pozwolenie wysz³a z serwera!");
     if(GetPVarInt(ofertaod, "pozwolenie-oferujeDla") != playerid) return sendErrorMessage(playerid, "Osoba, która oferowa³a Ci pozwolenie wysz³a z serwera!");
-    if(kaska[playerid] < 35000) return sendErrorMessage(playerid, "Nie staæ Cie na pozwolenie prawnicze");
+    if(kaska[playerid] < CENA_POZWOLENIE) return sendErrorMessage(playerid, "Nie staæ Cie na pozwolenie prawnicze");
     new string[128];
     format(string, sizeof(string), "%s akceptowa³ Twoj¹ ofertê pozwolenia prawiczego, otrzymujesz $15 000", GetNick(playerid, true));
     sendTipMessage(ofertaod, string, COLOR_LIGHTBLUE);
@@ -43,7 +43,7 @@ YCMD:app(playerid, params[], help) {
     SendRadioMessage(1, COLOR_PANICRED, string);
     SendRadioMessage(2, COLOR_PANICRED, string);
     SendRadioMessage(3, COLOR_PANICRED, string);
-    ZabierzKase(playerid, 20000);
+    ZabierzKase(playerid, CENA_POZWOLENIE);
     DajKase(ofertaod, 15000);
     SetPVarInt(playerid, "pozwolenie-oferuje", 999);
     Sejf_Add(PlayerInfo[ofertaod][pMember], 20000);
