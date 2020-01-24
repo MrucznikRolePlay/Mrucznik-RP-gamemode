@@ -161,9 +161,6 @@ native gpci (playerid, serial [], len);
 //-------<[ Dialogi ]>-------
 #include "dialogs\OnDialogResponse.pwn"
 
-//-------<[ 03DL ]>---------
-#include "..\scriptfiles\resources.pwn"
-
 //------------------------------------------------------------------------------------------------------
 main()
 {

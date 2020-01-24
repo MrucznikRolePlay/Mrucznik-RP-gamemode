@@ -38,6 +38,7 @@
 #include "biznesy\biznesy.def"
 #include "bramy\bramy.def"
 #include "budki\budki.def"
+#include "bw\bw.def"
 #include "chaty\chaty.def"
 #include "convoy\convoy.def"
 #include "debug\debug.def"
@@ -52,14 +53,14 @@
 #include "pojazdy\pojazdy.def"
 #include "prace\prace.def"
 #include "premium\premium.def"
+#include "przedmioty\przedmioty.def"
 #include "sannews\sannews.def"
 #include "sila\sila.def"
 #include "urzadls\urzadls.def"
 #include "vehicle_attachments\vehicle_attachments.def"
 #include "wejscia\wejscia.def"
 #include "wypadek\wypadek.def"
-#include "bw\bw.def"
-#include "przedmioty\przedmioty.def"
+
 
 //-------<[ .hwn ]>-------
 #include "03DL\03DL.hwn"
@@ -72,6 +73,7 @@
 #include "biznesy\biznesy.hwn"
 #include "bramy\bramy.hwn"
 #include "budki\budki.hwn"
+#include "bw\bw.hwn"
 #include "chaty\chaty.hwn"
 #include "convoy\convoy.hwn"
 #include "debug\debug.hwn"
@@ -86,14 +88,13 @@
 #include "pojazdy\pojazdy.hwn"
 #include "prace\prace.hwn"
 #include "premium\premium.hwn"
+#include "przedmioty\przedmioty.hwn"
 #include "sannews\sannews.hwn"
 #include "sila\sila.hwn"
 #include "urzadls\urzadls.hwn"
 #include "vehicle_attachments\vehicle_attachments.hwn"
 #include "wejscia\wejscia.hwn"
 #include "wypadek\wypadek.hwn"
-#include "bw\bw.hwn"
-#include "przedmioty\przedmioty.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -107,6 +108,7 @@
 #include "biznesy\biznesy.pwn"
 #include "bramy\bramy.pwn"
 #include "budki\budki.pwn"
+#include "bw\bw.pwn"
 #include "chaty\chaty.pwn"
 #include "convoy\convoy.pwn"
 #include "debug\debug.pwn"
@@ -121,14 +123,13 @@
 #include "pojazdy\pojazdy.pwn"
 #include "prace\prace.pwn"
 #include "premium\premium.pwn"
+#include "przedmioty\przedmioty.pwn"
 #include "sannews\sannews.pwn"
 #include "sila\sila.pwn"
 #include "urzadls\urzadls.pwn"
 #include "vehicle_attachments\vehicle_attachments.pwn"
 #include "wejscia\wejscia.pwn"
 #include "wypadek\wypadek.pwn"
-#include "bw\bw.pwn"
-#include "przedmioty\przedmioty.pwn"
 
 
 //-------<[ timers ]>-------
@@ -157,6 +158,7 @@
 
 
 //-------<[ others ]>-------
+#include "resources.pwn"
 
 
 //-------<[ callbacks ]>-------
