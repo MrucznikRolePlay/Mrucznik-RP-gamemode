@@ -147,7 +147,7 @@ YCMD:kupskin(playerid, params[], help)
 					}
 					else if(skinColor[fakeID] == SKIN_BLACK)
 					{
-						format(rasa, sizeof(rasa), "Afroamerykanin"); 
+						format(rasa, sizeof(rasa), "Murzyn"); 
 					}
 					else if(skinColor[fakeID] == SKIN_YELLOW)
 					{
