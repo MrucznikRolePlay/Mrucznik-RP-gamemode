@@ -2336,7 +2336,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
 			                SetPlayerPosEx(playerid,1568.7660,-1691.4886,5.8906);
-			                SetPlayerVirtualWorld(playerid,0);
+			                SetPlayerVirtualWorld(playerid,2);
 			                SetPlayerInterior(playerid,0);
 			                TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
@@ -17026,6 +17026,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}else{
 				SendClientMessage(playerid, -1, "Nie znajdujesz siê przy monitoringu");
 			}
+		}
+	}
+	else if (dialogid == DIALOG_KUPSKIN)
+	{
+		if(response) 
+		{
+			if(listitem < 0 || listitem >= sizeof(ShopSkins) || ShopSkins[listitem][SKIN_TYPE] != SKIN_TYPE_DEFAULT) 
+			{
+				//should never happend
+				return 1;
+			}
+			if(kaska[playerid] < ShopSkins[listitem][SKIN_PRICE])
+			{
+				sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki, na tego skina");
+				DialogKupSkin(playerid);
+				return 1;
+			}
+			SetPlayerSkin(playerid, ShopSkins[listitem][SKIN_ID]);
+			ZabierzKase(playerid, ShopSkins[listitem][SKIN_PRICE]);
+			PlayerInfo[playerid][pSkin] = ShopSkins[listitem][SKIN_ID]; 
+			
+			sendTipMessage(playerid, sprintf("Kupi³eœ skina za %d$", ShopSkins[listitem][SKIN_PRICE])); 
+			Log(payLog, INFO, "%s kupi³ skina %d za %d$", GetPlayerLogName(playerid), ShopSkins[listitem][SKIN_ID], ShopSkins[listitem][SKIN_PRICE]);
+			return 1;
 		}
 	}
 	return 0;

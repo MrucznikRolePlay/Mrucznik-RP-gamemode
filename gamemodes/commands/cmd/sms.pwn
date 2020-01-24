@@ -43,6 +43,11 @@ YCMD:sms(playerid, params[], help)
 		sendErrorMessage(playerid, "Nie posiadasz telefonu w wiêzieniu!"); 
 		return 1;
 	}
+	if(zakuty[playerid] == 1)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas bycia skutym!");
+		return 1;
+	}
 	if(PlayerInfo[playerid][pPnumber] == 0)
 	{
 		sendErrorMessage(playerid, "Nie posiadasz telefonu! Kup go w sklepie.");

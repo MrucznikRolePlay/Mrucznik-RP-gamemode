@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                    anim                                                    //
+//                                                    anim                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -36,16 +36,18 @@ command_anim()
     new command = Command_GetID("anim");
 
     //aliases
-    Command_AddAlt(command, "anims");
     Command_AddAlt(command, "animacje");
+    Command_AddAlt(command, "anims");
     Command_AddAlt(command, "animhelp");
     Command_AddAlt(command, "animshelp");
+    
 
     //permissions
     Group_SetGlobalCommand(command, true);
     
 
     //prefix
+    
 }
 
 //-------<[ command ]>-------
@@ -53,7 +55,7 @@ YCMD:anim(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Wyœwietla animacje.");
+        sendTipMessage(playerid, "Wyœwietla animacje na serwerze.");
         return 1;
     }
     

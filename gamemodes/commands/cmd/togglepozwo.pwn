@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  premium                                                  //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ togglepozwo ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,53 +16,43 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Autor: Sanda³
+// Data utworzenia: 24.01.2020
 
-//
+// Opis:
+/*
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define PREMIUM_TABLE_	"mru_"
-//tables: mru_premium, mru_premium_skins
-
-#define PREMIUM_DIALOG(%0) (_:%0+7450)
-#define MAX_PREMIUM_VEHICLES 18
-#define MAX_PREMIUM_SKINS 44
-#define MAX_PREMIUM_ITEMS 133
-
-//Czas
-#define KP_MIESIAC 2592000
-#define KP_3_MIESIACE 8046000
-#define KP_TYDZIEN 604800
-
-//Cennik
-#define MIESIAC_KP_CENA 325
-#define PRZEDLUZ_KP_CENA 275
-
-#define CAR_SLOT_CENA 500
-#define ZMIANA_NICKU_CENA 275
-
-#define UNIKATOWY_SKIN_CENA 500
-
-#define TELEFON_CENA_1 10000
-#define TELEFON_CENA_2 2125
-#define TELEFON_CENA_3 1115
-#define TELEFON_CENA_4 675
-#define TELEFON_CENA_5 335
-
-#define PRZEDMIOT_DROGI_CENA 30
-#define PRZEDMIOT_PRZECIETNY_CENA 15
-#define PRZEDMIOT_TANI_CENA 5
+*/
 
 
+// Notatki skryptera:
+/*
+	
+*/
 
-//Kolorki
-
-#define 				PREMIUM_EMBED1 			"{F7F7F2}" // granat
-#define 				PREMIUM_EMBED2 			"{00B7FF}" // niebiedski
-#define 				PREMIUM_EMBED3 			"{49A350}" // zielony
-#define 				PREMIUM_EMBED4 			"{F7F7F2}" // jasny1
-#define 				PREMIUM_EMBED5 			"{E3D8F1}" // jasny2
-
-//end
+YCMD:togglepozwo(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        if(PlayerInfo[playerid][pMember] == 1 && PlayerInfo[playerid][pRank] >= 6)
+        {
+            if(PozwolenieBot == 1)
+            {
+                sendTipMessage(playerid, "Wy³¹czono kupno pozwoleñ od NPC");
+                PozwolenieBot = 0;
+            }
+            else
+            {
+               sendTipMessage(playerid, "W³¹czono kupno pozwoleñ od NPC");
+               PozwolenieBot = 1; 
+            }
+            return 1;
+        }
+        else
+        {
+            sendTipMessage(playerid, "Brak dostêpu do komendy. Tylko dla LSPD [6]+");
+            return 1;
+        }
+    }
+    return 1;
+}

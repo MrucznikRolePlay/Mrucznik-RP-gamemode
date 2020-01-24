@@ -114,7 +114,6 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
-#include "system\resources.pwn"
 
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"
@@ -254,8 +253,6 @@ public OnGameModeInit()
 	
 	DefaultItems_LicenseCost();
 
-	//-------<[ 0.3DL ]>-------
-	LoadDLSkins();
 	//-------<[ commands ]>-------
 	InitCommands();
 
@@ -684,7 +681,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
     if(GetPVarInt(playerid, "patrol-map") == 1 && GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == Text:INVALID_TEXT_DRAW)
         {
             SendClientMessage(playerid, COLOR_PAPAYAWHIP, "Wybierz region.");
             SelectTextDraw(playerid, 0xD2691E55);
@@ -749,7 +746,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     }
     else if(GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == Text:INVALID_TEXT_DRAW)
         {
             CancelSelectTextDraw(playerid);
             Patrol_HideMap(playerid);
@@ -2868,6 +2865,11 @@ SetPlayerSpawnSkin(playerid)
 	else
 	{
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	}
+	if(isNaked[playerid] == 1)
+	{
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
+		isNaked[playerid] = 0;
 	}
 	return 1;
 }
