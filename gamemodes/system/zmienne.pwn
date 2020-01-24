@@ -1307,6 +1307,7 @@ ZerujZmienne(playerid)
 	//Sandal
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "Brak");
 	PlayerInfo[playerid][pPodPW] = 0;
+	new PozwolenieBot = 1;
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
