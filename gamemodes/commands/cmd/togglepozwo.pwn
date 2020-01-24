@@ -54,4 +54,5 @@ YCMD:togglepozwo(playerid, params[], help)
             return 1;
         }
     }
+    return 1;
 }
