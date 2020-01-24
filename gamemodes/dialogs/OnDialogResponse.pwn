@@ -17047,7 +17047,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			ZabierzKase(playerid, ShopSkins[listitem][SKIN_PRICE]);
 			PlayerInfo[playerid][pSkin] = ShopSkins[listitem][SKIN_ID]; 
 			
-			sendTipMessage(playerid, sprintf("Kupi³eœ skina za %d", ShopSkins[listitem][SKIN_PRICE])); 
+			sendTipMessage(playerid, sprintf("Kupi³eœ skina za %d$", ShopSkins[listitem][SKIN_PRICE])); 
 			Log(payLog, INFO, "%s kupi³ skina %d za %d$", GetPlayerLogName(playerid), ShopSkins[listitem][SKIN_ID], ShopSkins[listitem][SKIN_PRICE]);
 			return 1;
 		}
