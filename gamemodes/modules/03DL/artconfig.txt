@@ -1,3 +1,7 @@
+AddCharModel(11, 20001, "mrucznikskin65.dff", "mrucznikskin65.txd");
+AddCharModel(11, 20002, "mrucznikskin66.dff", "mrucznikskin66.txd");
+AddCharModel(11, 20003, "mrucznikskin71.dff", "mrucznikskin71.txd");
+
 AddCharModel(20, 20101, "mrucznikskin46.dff", "mrucznikskin46.txd");
 AddCharModel(20, 20102, "mrucznikskin47.dff", "mrucznikskin47.txd");
 AddCharModel(20, 20103, "mrucznikskin79.dff", "mrucznikskin79.txd");
@@ -6,9 +10,6 @@ AddCharModel(20, 20105, "mrucznikskin81.dff", "mrucznikskin81.txd");
 AddCharModel(20, 20106, "mrucznikskin82.dff", "mrucznikskin82.txd");
 AddCharModel(20, 20107, "mrucznikskin83.dff", "mrucznikskin83.txd");
 AddCharModel(11, 20108, "mrucznikskin84.dff", "mrucznikskin84.txd");
-AddCharModel(11, 20109, "mrucznikskin65.dff", "mrucznikskin65.txd");
-AddCharModel(11, 20110, "mrucznikskin66.dff", "mrucznikskin66.txd");
-AddCharModel(11, 20111, "mrucznikskin71.dff", "mrucznikskin71.txd");
 
 AddCharModel(45, 20301, "mrucznikskin02.dff", "mrucznikskin02.txd");
 AddCharModel(20, 20302, "mrucznikskin38.dff", "mrucznikskin38.txd");

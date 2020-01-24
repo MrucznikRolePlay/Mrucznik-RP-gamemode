@@ -54,11 +54,11 @@ YCMD:rozbierz(playerid, params[], help)
         {
             if(colorID == 1)
             {
-                SetPlayerSkinEx(playerid, 20109);
+                SetPlayerSkinEx(playerid, 20001);
             }
             else
             {
-                SetPlayerSkinEx(playerid, 20110); 
+                SetPlayerSkinEx(playerid, 20002); 
             }
         }
         else
