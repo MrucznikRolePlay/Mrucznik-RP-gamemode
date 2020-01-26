@@ -40,7 +40,7 @@ YCMD:pomoc2(playerid, params[], help)
     if(PlayerInfo[playerid][pJob] == 1) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /namierz /wanted /poddajsie /zlecenie (/m)egafon"); }
     else if(PlayerInfo[playerid][pJob] == 2) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /uwolnij /oczyscmdc /zbijwl /kamera-wiezienna /wanted"); }
+    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /uwolnij /oczyscmdc /zbijwl /kamera-wiezienna /wanted /kuppozwolenie"); }
     else if(PlayerInfo[playerid][pJob] == 3) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sex"); }
     else if(PlayerInfo[playerid][pJob] == 4) {
@@ -86,7 +86,7 @@ YCMD:pomoc2(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat (/gov) /camera /wywaz /gps /odznaka");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /pacholek /barierka /skuj /rozkuj /mdc /aresztuj /sluzba /poszukiwani /cywil");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** (/r)adio (/d)epartment /ro(radiooc) /depo(departamentooc) (/m)egafon (/su)spect");
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /cela /togcrime /pozwolenie /finfo /red /c /tablet /togro /fed");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /cela /togcrime /pozwolenie /finfo /red /c /tablet /togro /fed /togglepozwo");
     }
     if (PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
     {
