@@ -242,7 +242,7 @@ JailDeMorgan(playerid)
 	new losuj= random(sizeof(SpawnStanowe));
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPosEx(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
+	SetPlayerPos(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
 	SetCameraBehindPlayer(playerid);
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
@@ -255,7 +255,7 @@ JailDeMorgan(playerid)
 UnJailDeMorgan(playerid)
 {
 	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPosEx(playerid, 593.1899,-1494.0863,82.1648);
+	SetPlayerPos(playerid, 593.1899,-1494.0863,82.1648);
 	Wchodzenie(playerid);
 	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;
@@ -8434,7 +8434,7 @@ OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
 	}
 	return 1;
 }
-//      Aktualizacja    09.06.2014  KUBI  fix 09.07
+//      Aktualizacja    09.06.2014  KUBI  fix 09 
 ElevatorTravel(playerid, Float:x, Float:y, Float:z, vw, Float:face)
 {
     if(LSMCElevatorQueue) return;
