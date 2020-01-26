@@ -1,0 +1,11 @@
+{
+    "name": "napady",
+    "description": "System napadów dla organizacji przestêpczych",
+    "author": "Simeone",
+    "timers": true,
+    "callbacks": false,
+    "mysql": true,
+    "files": [],
+    "commands": true,
+    "date": "26.01.2020"
+}

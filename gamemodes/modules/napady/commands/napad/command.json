@@ -1,0 +1,23 @@
+{
+    "name": "napad",
+    "description": "Komenda zarz¹dzania napadem.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "napadnij"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "64",
+            "name": "actionToDo",
+            "description": "Akcja"
+        },
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "26.01.2020"
+}
