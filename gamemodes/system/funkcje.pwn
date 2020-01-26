@@ -1356,8 +1356,14 @@ if(PlayerInfo[playerid][pDomWKJ] != 0)
 	SetPlayerVirtualWorld(playerid, 0);
 	PlayerInfo[playerid][pDomWKJ] = 0;
 }
+if(isNaked[playerid])
+{
+    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
+    isNaked[playerid] = 0;
+}
 GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
 DomOgladany[playerid] = 1;
+
 SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
 return 1;
 }
