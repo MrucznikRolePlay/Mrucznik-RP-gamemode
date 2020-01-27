@@ -42,7 +42,7 @@ YCMD:zastrzyk(playerid, params[], help)
 		return sendErrorMessage(playerid, "Nie ma takiego gracza.");
 	}
 
-	if (PlayerInfo[playerid][pMember] == 4 && PlayerInfo[playerid][pRank] >= 4 || PlayerInfo[playerid][pLider] == 4)
+	if (PlayerInfo[playerid][pMember] == 4 && PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pLider] == 4)
 	{
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -71,7 +71,7 @@ YCMD:zastrzyk(playerid, params[], help)
 	}
 	else
 	{
-		sendErrorMessage(playerid, "Nie masz 4 rangi lub nie jesteœ medykiem!");
+		sendErrorMessage(playerid, "Nie masz 1 rangi lub nie jesteœ medykiem!");
 	}
 	return 1;
 }
