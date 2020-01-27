@@ -40,7 +40,7 @@ YCMD:wez(playerid, params[], help)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "|__________________ Get __________________|");
 			SendClientMessage(playerid, COLOR_WHITE, "U¿yj /wez [nazwa]");
-	  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Dragi, Kanister");
+	  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Dragi, Kanister, Gasnice");
 			SendClientMessage(playerid, COLOR_GREEN, "|_________________________________________|");
 			return 1;
 		}
@@ -107,6 +107,56 @@ YCMD:wez(playerid, params[], help)
 			else
 			{
 				SendClientMessage(playerid,COLOR_GREY," Nie jesteœ na stacji benzynowej!");
+				return 1;
+			}
+		}
+		else if(strcmp(x_job,"gasnice",true) == 0 || strcmp(x_job,"gasnica",true) == 0)
+		{
+			if (PlayerInfo[playerid][pMember] == 4)
+			{
+				new newcar=0, Float:dis=2.75, Float:x, Float:y, Float:z, Float:currdist;
+				for(new i=0;i<MAX_VEHICLES;i++)
+				{
+					GetVehiclePos(i, x, y, z);
+					if((currdist = GetPlayerDistanceFromPoint(playerid, x, y, z)) < dis)
+					{
+						dis = currdist;
+						newcar = i;
+					}
+				}
+				if(newcar != 0)
+    			{
+					if(Car_GetOwnerType(newcar) == CAR_OWNER_FRACTION)// wszystkie auta frakcji
+					{
+						if(Car_GetOwner(newcar) == GetPlayerFraction(playerid))
+						{
+							if(GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544)
+							{
+								new string[256];
+								format(string, 256, "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***",GetNick(playerid, true), params);
+								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								GivePlayerWeapon(playerid, 42, 9999);
+	                     		PlayerInfo[playerid][pGun9] = 42;
+	                     		PlayerInfo[playerid][pAmmo9] = 9999;
+								return 1;
+							}
+							else
+							{
+								sendTipMessage(playerid, "Nie jesteœ przy wozie stra¿ackim!");
+								return 1;
+							}
+						}
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Nie jesteœ przy wozie stra¿ackim!");
+					return 1;
+				}
+			}
+			else
+			{
+				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla LSMC.");
 				return 1;
 			}
 		}
