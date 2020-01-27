@@ -130,7 +130,7 @@ YCMD:wez(playerid, params[], help)
 					{
 						if(Car_GetOwner(newcar) == GetPlayerFraction(playerid))
 						{
-							if(GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544)
+							if(GetVehicleModel(newcar) == 407 || GetVehicleModel(newcar) == 544)
 							{
 								new string[256];
 								format(string, 256, "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***",GetNick(playerid, true), params);
