@@ -3346,7 +3346,7 @@ public VehicleUpdate()
                 new hour,minute,second;
 				gettime(hour,minute,second);
 				FixHour(hour);
-				if(shifthour >= 1 && shifthour <= 4)
+				if(shifthour >= 0 && shifthour >= 4)
 				{
 					Oil_GenerateFromVehicle(i);
 				}
