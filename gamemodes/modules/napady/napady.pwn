@@ -26,5 +26,11 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-
+RemovePlayerFromRobbery(playerid)
+{
+	sendTipMessage(playerid, "Zosta³eœ wyrzucony z grupy napadu!"); 
+    isRobbery[playerid] = false;
+    RobbersFromOrg[GetPlayerOrg(playerid)]--;  
+	return 1;
+}
 //end

@@ -1,0 +1,12 @@
+{
+    "name": "mojagrupa",
+    "description": "Komenda, która ukazuje spis osób bior¹cych udzia³ w organizowanym przez nas napadzie.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "mygroup",
+        "grupanapadu"
+    ],
+    "parameters": [],
+    "date": "28.01.2020"
+}

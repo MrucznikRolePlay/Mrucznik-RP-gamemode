@@ -30,12 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "mojagrupa\mojagrupa.pwn"
 #include "napad\napad.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_mojagrupa();
     command_napad();
     
 }
