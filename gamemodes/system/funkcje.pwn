@@ -4388,7 +4388,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 					PoziomPoszukiwania[playerid] = 10;
 				}
 			}
-			else if(PoziomPoszukiwania[playerid] > 10)
+			else if(PoziomPoszukiwania[playerid] > 10) 
 			{
 				if(PoziomPoszukiwania[playerid] != 10)
 				{
