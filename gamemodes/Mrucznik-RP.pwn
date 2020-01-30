@@ -115,6 +115,10 @@ native gpci (playerid, serial [], len);
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
 
+//do implementacji w g³ówny kod (mo¿liwie w modu³y)
+#include "system\doimplementacji\vinylscript.pwn"
+#include "system\doimplementacji\ibizascript.pwn"
+
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"
 #include "old_modules\niceczlowiek\dynamicgui.pwn"
@@ -153,8 +157,7 @@ native gpci (playerid, serial [], len);
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
 #include "obiekty\actorsOnWorld.pwn"
-#include "obiekty\vinylscript.pwn"
-#include "obiekty\ibizascript.pwn"
+
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
