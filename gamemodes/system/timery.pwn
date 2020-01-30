@@ -2247,6 +2247,14 @@ public JednaSekundaTimer()
 					SetPlayerSpawn(i); 
 				}
 			}
+			if(PlayerInfo[i][pJailed] == 3)
+			{
+				if(!IsPlayerInRangeOfPoint(i, AJ_MAXRANGE, AJ_POSX, AJ_POSY, AJ_POSZ))
+				{
+					sendErrorMessage(i, "Nie znajdujesz siê w AJ! Pozycja przywrócona do poprawnej!");
+					SetPlayerSpawn(i); 
+				}
+			}
 			if(PlayerInfo[i][pJailTime] <= 0 && WantLawyer[i] == 0)
 			{
 				PlayerInfo[i][pJailTime] = 0;

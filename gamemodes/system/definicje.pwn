@@ -81,6 +81,12 @@
 
 //specshow
 #define INVALID_SPECTATE_ID 9999
+
+//adminjail
+#define AJ_POSX 1481.1666259766
+#define AJ_POSY -1790.2204589844
+#define AJ_POSZ 156.7875213623
+#define AJ_MAXRANGE 5.0
 //PAèDZIOCH
 #define ROPELENGTH 100 //D≥ugoúÊ maksymalna liny (ingame metr)
 
