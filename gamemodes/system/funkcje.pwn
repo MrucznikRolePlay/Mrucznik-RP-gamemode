@@ -1358,8 +1358,7 @@ if(PlayerInfo[playerid][pDomWKJ] != 0)
 }
 if(isNaked[playerid])
 {
-    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
-    isNaked[playerid] = 0;
+    UndressPlayer(playerid, false); 
 }
 GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
 DomOgladany[playerid] = 1;
@@ -1456,6 +1455,47 @@ IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Float:y2
     return ((x2 * x2) + (y2 * y2) + (z2 * z2)) < (range * range);
 }
 */
+stock UndressPlayer(playerid, bool:dressup, colorID=0)
+{
+	new string[124];
+	if(dressup)
+	{
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
+        isNaked[playerid] = 0;
+        format(string, sizeof(string), "%s ubiera siê.", GetNick(playerid)); 
+        ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	}
+	else
+	{
+		if(PlayerInfo[playerid][pSex] == 2)
+        {
+            if(colorID == 1)
+            {
+                SetPlayerSkinEx(playerid, 20001);
+            }
+            else
+            {
+                SetPlayerSkinEx(playerid, 20002); 
+            }
+        }
+        else
+        {
+            if(colorID == 1)
+            {
+                SetPlayerSkinEx(playerid, 252);
+            }
+            else
+            {
+                SetPlayerSkinEx(playerid, 18); 
+            }
+        }
+        format(string, sizeof(string), "%s rozbiera siê.", GetNick(playerid)); 
+        ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+        sendTipMessage(playerid, "Aby ubraæ siê spowrotem, ponownie u¿yj komendy /rozbierz.");
+        isNaked[playerid] = 1; 
+	}
+	return 1;
+}
 SetAntyCheatForPlayer(playerid, valueCode)
 {
 	SetPVarInt(playerid, "AntyCheatOff", valueCode);
