@@ -33,6 +33,12 @@
 YCMD:kupbilet(playerid, params[], help)
 {
     if(IsPlayerInRangeOfPoint(playerid, 7,  402.6997, -1808.4082, 7.8789)){
+		IbizaTicketsCostCheck();
 		ShowPlayerDialog(playerid, DIALOG_IBIZA_TICKET, DIALOG_STYLE_TABLIST_HEADERS, "IbizaClub - Kup bilet", txt_ibiza_tickets, "Wybierz", "Anuluj");	
 	}
+	else
+	{
+		sendTipMessage(playerid, "Nie jesteœ w ibizie!");
+	}
+	return 1;
 }

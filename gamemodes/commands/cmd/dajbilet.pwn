@@ -108,5 +108,24 @@ YCMD:dajbilet(playerid, params[], help)
 			SendClientMessage(playerid, COLOR_GRAD1, "Koszt wydania biletu: 20 000$, a Ty tyle nie masz");
 		}
     }
+	else if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6)
+    {
+		new giveplayerid;
+		if(sscanf(params, "k<fix>", giveplayerid))
+		{
+			sendTipMessage(playerid, "U¿yj /dajbilet [playerid/CzêœæNicku]");
+            return 1;
+        }
+		if(!IsPlayerConnected(giveplayerid))
+        {
+            sendErrorMessage(playerid, "Ten gracz jest offline!");
+			return 1;
+		}
+		PlayerInfo[giveplayerid][pIbizaBilet] = 3;
+		format(string, sizeof(string), "Da³eœ bilet SUPERVIP graczowi %s.", GetNick(giveplayerid, true));
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string), "Otrzyma³eœ bilet SUPERVIP do klubu Ibiza od %s", GetNick(playerid, true));
+		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+	}
 	return 1;
 }

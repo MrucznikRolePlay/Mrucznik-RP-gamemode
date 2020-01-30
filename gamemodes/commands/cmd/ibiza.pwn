@@ -33,11 +33,12 @@ YCMD:ibiza(playerid, params[], help)
     if(gPlayerOrgLeader[playerid] && GetPlayerOrg(playerid) == FAMILY_IBIZA) 
     {
        if(IsPlayerInRangeOfPoint(playerid, 20, 433.696594, -1845.469360, -68.420249)){
+            IbizaPanelCheck();
 		    ShowPlayerDialog(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
 	    }
         else
         {
-		    SendClientMessage(playerid, -1, "Jesteœ za daleko by u¿yæ tego skryptu");
+		    SendClientMessage(playerid, -1, "Jesteœ za daleko od klubu.");
 	    }
     }
     return 1;
