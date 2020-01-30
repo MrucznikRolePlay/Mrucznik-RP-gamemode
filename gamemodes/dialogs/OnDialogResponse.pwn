@@ -13360,8 +13360,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response){
 			switch(listitem){
 				case 0:{
-					if(kaska[playerid] >= ibizaTicketCost){
-						ZabierzKase(playerid, ibizaTicketCost);
+					if(kaska[playerid] >= ibiza_cenaNorm){
+						ZabierzKase(playerid, ibiza_cenaNorm);
 						PlayerInfo[playerid][pBiletIbiza] = IBIZA_NORMAL;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu!");
@@ -13371,8 +13371,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 				case 1:{
-					if(kaska[playerid]) >= ibizaVIPTicketCost){
-						ZabierzKase(playerid, ibizaVIPTicketCost);
+					if(kaska[playerid]) >= ibiza_cenaVIP){
+						ZabierzKase(playerid, ibiza_cenaVIP);
 						PlayerInfo[playerid][pBiletIbiza] = IBIZA_VIP;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu VIP!");
