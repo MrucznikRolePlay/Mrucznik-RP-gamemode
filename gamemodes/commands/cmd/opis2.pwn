@@ -34,7 +34,7 @@
 YCMD:opis2(playerid, params[], help)
 {
     //SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
-    /*
+    
     if(PlayerInfo[playerid][pConnectTime] < 4) return sendErrorMessage(playerid, "Opis dostêpny od 4 godzin online!");
     new var[8], id=-1;
     sscanf(params, "s[8]K<fix>(-1)", var, id);
@@ -66,6 +66,6 @@ YCMD:opis2(playerid, params[], help)
     else
     {
         SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
-    }*/
+    }
     return 1;
 } 
