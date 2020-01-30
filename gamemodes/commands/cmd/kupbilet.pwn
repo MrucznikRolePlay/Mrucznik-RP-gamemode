@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ ibiza ]-------------------------------------------------//
+//-----------------------------------------------[ kupbilet ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,29 +16,23 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: werem
+// Data utworzenia: 30.01.2020
 
 // Opis:
 /*
 
- */
+*/
 
 
 // Notatki skryptera:
 /*
+	
+*/
 
- */
-
-YCMD:ibiza(playerid, params[], help)
+YCMD:kupbilet(playerid, params[], help)
 {
-    if(gPlayerOrgLeader[playerid] && GetPlayerOrg(playerid) == FAMILY_IBIZA) 
-    {
-       if(IsPlayerInRangeOfPoint(playerid, 20, 433.696594, -1845.469360, -68.420249)){
-		    ShowPlayerDialog(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
-	    }
-        else
-        {
-		    SendClientMessage(playerid, -1, "Jesteœ za daleko by u¿yæ tego skryptu");
-	    }
-    }
-    return 1;
+    if(IsPlayerInRangeOfPoint(playerid, 7,  402.6997, -1808.4082, 7.8789)){
+		ShowPlayerDialog(playerid, DIALOG_IBIZA_TICKET, DIALOG_STYLE_TABLIST_HEADERS, "IbizaClub - Kup bilet", txt_ibiza_tickets, "Wybierz", "Anuluj");	
+	}
 }

@@ -314,6 +314,7 @@
 #include "cmd/opis2.pwn"
 #include "cmd/opispomoc.pwn"
 #include "cmd/opuscdom.pwn"
+#include "cmd/kupbilet.pwn"
 #include "cmd/organizacje.pwn"
 #include "cmd/otworzlinie.pwn"
 #include "cmd/owarsztat.pwn"

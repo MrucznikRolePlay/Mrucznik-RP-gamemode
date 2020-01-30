@@ -40,6 +40,9 @@ new bool:bramki_sasd_state[18];
 new cenaNorm = 50000;
 new cenaVIP = 80000;
 new kasjerkaWolna = 666;
+//ibiza club
+new ibiza_cenaNorm = 30000;
+new ibiza_cenaVIP = 100000;
 //sn
 new SN_ACCESS[MAX_PLAYERS]; 
 //PizzaJob
@@ -1311,6 +1314,7 @@ ZerujZmienne(playerid)
 	//Sandal
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "Brak");
 	PlayerInfo[playerid][pPodPW] = 0;
+	PlayerInfo[playerid][pBiletVinyl] = 0;
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
