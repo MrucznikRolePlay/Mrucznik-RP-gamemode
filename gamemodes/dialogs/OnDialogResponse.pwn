@@ -13453,12 +13453,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	if(dialogid == DIALOG_IBIZA_NORMAL_TICKET){
 		if(response){
-			ibizaTicketCost = strval(inputtext);
+			ibiza_cenaNorm = strval(inputtext);
 		}
 	}
 	if(dialogid == DIALOG_IBIZA_VIP_TICKET){
 		if(response){
-			ibizaVIPTicketCost = strval(inputtext);
+			ibiza_cenaVIP = strval(inputtext);
 		}
 	}
 	if(dialogid == DIALOG_IBIZA_TEXT_ONE){
