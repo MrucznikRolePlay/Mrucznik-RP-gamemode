@@ -13371,7 +13371,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 				case 1:{
-					if(kaska[playerid]) >= ibiza_cenaVIP){
+					if(kaska[playerid] >= ibiza_cenaVIP){
 						ZabierzKase(playerid, ibiza_cenaVIP);
 						PlayerInfo[playerid][pBiletIbiza] = IBIZA_VIP;
 						SetPlayerWeather(playerid, 27);
