@@ -154,6 +154,7 @@ native gpci (playerid, serial [], len);
 #include "obiekty\ikony.pwn"
 #include "obiekty\actorsOnWorld.pwn"
 #include "obiekty\vinylscript.pwn"
+#include "obiekty\ibizascript.pwn"
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
