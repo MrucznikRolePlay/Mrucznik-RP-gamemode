@@ -1344,7 +1344,6 @@ public OnPlayerDisconnect(playerid, reason)
 		AdminDutyGodziny[playerid] = 0;
 		AdminDutyMinuty[playerid] = 0;
 		firstDutyAdmin[playerid] = 0; 
-		
 	}
 	if((PlayerInfo[playerid][pAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
 	|| (PlayerInfo[playerid][pNewAP] >= 1 && iloscPozaDuty[playerid] >= 1))//Gdy nie by³ na admin duty, ale wykonywa³ akcje
