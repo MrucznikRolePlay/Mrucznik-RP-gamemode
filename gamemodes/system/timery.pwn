@@ -1129,6 +1129,24 @@ public Spectator()
             }
         }
         //END vinyl
+		//Ibiza audio check
+        if(!GetPVarInt(i, "IBIZA-stream"))
+        {
+            if(IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && (GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
+            {
+                SetPVarInt(i, "IBIZA-stream", 1);
+                PlayAudioStreamForPlayer(i, IBIZA_Stream,IbizaAudioPos[0],IbizaAudioPos[1],IbizaudioPos[2], IbizaAudioPos[3], 1);
+            }
+        }
+        else
+        {
+            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]))
+            {
+                SetPVarInt(i, "IBIZA-stream", 0);
+                StopAudioStreamForPlayer(i);
+            }
+        }
+        //END ibiza
 		if(GetPlayerPing(i) >= 2000 && PlayerInfo[i][pAdmin] == 0)
 		{
 			if(gPlayerLogged[i] == 1)

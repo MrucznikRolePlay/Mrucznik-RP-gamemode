@@ -57,6 +57,8 @@ new ibizaStrobe1, ibizaStrobe2, ibizaStrobe3, ibizaStrobe4;
 new ibizaSmoke1, ibizaSmoke2;
 new txt_ibiza_klub[512];
 new txt_ibiza_tickets[128];
+new Float:IbizaAudioPos[5] = {417.3976,-1858.9402,-65.3905,1000.0,22};  //pos[3] dist, vw
+new IBIZA_Stream[128];
 //sn
 new SN_ACCESS[MAX_PLAYERS]; 
 //PizzaJob

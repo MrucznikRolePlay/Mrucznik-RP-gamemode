@@ -258,6 +258,7 @@ YCMD:wejdz(playerid, params[], help)
                 return 1;
             }
             SetPLocal(playerid, PLOCAL_ORG_SN); 
+            SetPlayerVirtualWorld(playerid, 71);
             SetPlayerPos(playerid, 816.4222, -1413.7644, -22.5834);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);

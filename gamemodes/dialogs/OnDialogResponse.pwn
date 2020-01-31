@@ -1526,6 +1526,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         format(VINYL_Stream, 128, "%s",inputtext);
     }
+	else if(dialogid == DIALOG_KONSOLA_IBIZA)
+    {
+        if(!response) return 1;
+        if(strlen(inputtext) < 10) return 1;
+
+        foreach(new i : Player)
+        {
+            if(IsPlayerInRangeOfPoint(i, IbizaAudioPos[3],IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && (GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
+            {
+                PlayAudioStreamForPlayer(i, inputtext,IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2], IbizaAudioPos[3], 1);
+            }
+        }
+        format(Ibiza_Stream, 128, "%s",inputtext);
+    }
 	else if(dialogid == 7420)
 	{
 	    if(response)
