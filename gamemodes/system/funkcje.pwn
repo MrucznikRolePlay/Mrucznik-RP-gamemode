@@ -1496,6 +1496,26 @@ stock UndressPlayer(playerid, bool:dressup, colorID=0)
 	}
 	return 1;
 }
+stock IsVehicleInRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
+{
+    if(vehicleid == INVALID_VEHICLE_ID) return 0;
+    
+    new Float:DistantaCar = GetVehicleDistanceFromPoint(vehicleid, x, y, z);
+    
+    if(DistantaCar <= range) return 1;
+    return 0;
+} 
+IsVehicleInCarPark(vehicleid)
+{
+	for(new i; i <= COUNT_CARPARKS; i++)
+	{
+		if(IsVehicleInRangeOfPoint(vehicleid, carParks[i][3], carParks[i][0], carParks[i][1], carParks[i][2]))
+		{
+			return true;
+		}
+	}
+	return false; 
+}
 SetAntyCheatForPlayer(playerid, valueCode)
 {
 	SetPVarInt(playerid, "AntyCheatOff", valueCode);

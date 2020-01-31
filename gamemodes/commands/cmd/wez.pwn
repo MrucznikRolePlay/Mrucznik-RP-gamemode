@@ -132,7 +132,6 @@ YCMD:wez(playerid, params[], help)
 						{
 							if(GetVehicleModel(newcar) == 407 || GetVehicleModel(newcar) == 544)
 							{
-								new string[256];
 								format(string, 256, "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***",GetNick(playerid, true), params);
 								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 								GivePlayerWeapon(playerid, 42, 9999);

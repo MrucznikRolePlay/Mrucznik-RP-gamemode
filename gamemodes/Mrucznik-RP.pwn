@@ -143,7 +143,7 @@ native gpci (playerid, serial [], len);
 //-------<[ Inne ]>-------
 #include "old_modules\inne\ibiza.inc"
 #include "old_modules\inne\external.pwn"
-
+#include "obiekty\carparks.pwn"
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
 
@@ -157,7 +157,6 @@ native gpci (playerid, serial [], len);
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
 #include "obiekty\actorsOnWorld.pwn"
-#include "obiekty\carparks.pwn"
 
 
 //-------<[ Komendy ]>-------
@@ -5265,7 +5264,14 @@ public OnPlayerExitVehicle(playerid, vehicleid)
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Invalid seat");
         return 0;
     }
-
+	/*if(IsVehicleInCarPark(vehicleid))
+	{
+		new float:vPosX, float:vPosY, float:vPosZ; 
+		GetVehiclePos(vehicleid, vPosX, vPosY, vPosZ);
+		TempCarPark[vehicleid][0] = vPosX; 
+		TempCarPark[vehicleid][1] = vPosY; 
+		TempCarPark[vehicleid][2] = vPosZ; 
+	}*/
     //AT400
     if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && GetVehicleModel(vehicleid) == 577 && IsPlayerInFraction(playerid, FRAC_KT, 5000))
     {
@@ -6711,6 +6717,14 @@ public OnVehicleSpawn(vehicleid)
         RepairVehicle(vehicleid); //
 
     }
+	/*if(IsVehicleInCarPark(vehicleid))
+	{
+		new float:vPosX, float:vPosY, float:vPosZ; 
+		GetVehiclePos(vehicleid, vPosX, vPosY, vPosZ);
+		TempCarPark[vehicleid][0] = vPosX; 
+		TempCarPark[vehicleid][1] = vPosY; 
+		TempCarPark[vehicleid][2] = vPosZ; 
+	}*/
     return 1;
 }
 
@@ -7651,6 +7665,10 @@ public OnTrailerUpdate(playerid, vehicleid)
 
 public OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
+	if(IsVehicleInCarPark(vehicleid))
+	{
+		return 0;//Testowe dzia³anie
+	}
     return 1;
 }
 
