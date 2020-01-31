@@ -1538,7 +1538,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 PlayAudioStreamForPlayer(i, inputtext,IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2], IbizaAudioPos[3], 1);
             }
         }
-        format(Ibiza_Stream, 128, "%s",inputtext);
+        format(IBIZA_Stream, 128, "%s",inputtext);
     }
 	else if(dialogid == 7420)
 	{
