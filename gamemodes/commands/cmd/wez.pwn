@@ -155,7 +155,7 @@ YCMD:wez(playerid, params[], help)
 			}
 			else
 			{
-				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla LSMC.");
+				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla ERS.");
 				return 1;
 			}
 		}
