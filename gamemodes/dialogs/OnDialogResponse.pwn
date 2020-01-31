@@ -13427,7 +13427,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 4:{
 					if(ibizaTextOne == false){
 						ibizaTextOne = true;
-						ShowPlayerDialog(playerid, DIALOG_IBIZA_TEXT_ONE, DIALOG_STYLE_INPUT, "IbizaClub - Ustaw tekst #1", "Wpisz tekst", "Zatwierdü", "Anuluj");
+						ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TEXT_ONE, DIALOG_STYLE_INPUT, "IbizaClub - Ustaw tekst #1", "Wpisz tekst", "Zatwierdü", "Anuluj");
 					}else{
 						ibizaTextOne = false;
 						ibizaTextOneOff();
@@ -13436,17 +13436,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 5:{
 					if(ibizaTextTwo == false){
 						ibizaTextTwo = true;
-						ShowPlayerDialog(playerid, DIALOG_IBIZA_TEXT_TWO, DIALOG_STYLE_INPUT, "IbizaClub - Ustaw tekst #2", "Wpisz tekst", "Zatwierdü", "Anuluj");
+						ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TEXT_TWO, DIALOG_STYLE_INPUT, "IbizaClub - Ustaw tekst #2", "Wpisz tekst", "Zatwierdü", "Anuluj");
 					}else{
 						ibizaTextTwo = false;
 						ibizaTextTwoOff();
 					}
 				}
 				case 6:{
-					ShowPlayerDialog(playerid, DIALOG_IBIZA_NORMAL_TICKET, DIALOG_STYLE_INPUT, "IbizaClub - Normalny bilet", "Wpisz cenÍ biletu normalnego", "Zatwierdü", "Anuluj");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_NORMAL_TICKET, DIALOG_STYLE_INPUT, "IbizaClub - Normalny bilet", "Wpisz cenÍ biletu normalnego", "Zatwierdü", "Anuluj");
 				}
 				case 7:{
-					ShowPlayerDialog(playerid, DIALOG_IBIZA_VIP_TICKET, DIALOG_STYLE_INPUT, "IbizaClub - Normalny bilet", "Wpisz cenÍ biletu VIP", "Zatwierdü", "Anuluj");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_VIP_TICKET, DIALOG_STYLE_INPUT, "IbizaClub - Normalny bilet", "Wpisz cenÍ biletu VIP", "Zatwierdü", "Anuluj");
 				}
 			}
 		}

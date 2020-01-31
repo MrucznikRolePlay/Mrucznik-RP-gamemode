@@ -34,7 +34,7 @@ YCMD:ibiza(playerid, params[], help)
     {
        if(IsPlayerInRangeOfPoint(playerid, 20, 433.696594, -1845.469360, -68.420249)){
             IbizaPanelCheck();
-		    ShowPlayerDialog(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
+		    ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
 	    }
         else
         {
