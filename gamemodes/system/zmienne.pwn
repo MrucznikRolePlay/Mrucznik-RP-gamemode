@@ -43,6 +43,20 @@ new kasjerkaWolna = 666;
 //ibiza club
 new ibiza_cenaNorm = 30000;
 new ibiza_cenaVIP = 100000;
+new bool:ibizaStrobes, bool:ibizaLights, bool:ibizaNeons, bool:ibizaSmokes;
+new bool:ibizaTextOne, bool:ibizaTextTwo;
+new ibizaTextOneText, ibizaTextTwoText;
+// NEONY
+new ibizaNeon1, ibizaNeon2, ibizaNeon3, ibizaNeon4, ibizaNeon5, ibizaNeon6, ibizaNeon7;
+new ibizaNeon8, ibizaNeon9, ibizaNeon10, ibizaNeon11;
+// LIGHTS
+new ibizaLight1, ibizaLight2, ibizaLight3, ibizaLight4, ibizaLight5;
+// STROBOSKOPY
+new ibizaStrobe1, ibizaStrobe2, ibizaStrobe3, ibizaStrobe4;
+// DYM
+new ibizaSmoke1, ibizaSmoke2;
+new txt_ibiza_klub[512];
+new txt_ibiza_tickets[128];
 //sn
 new SN_ACCESS[MAX_PLAYERS]; 
 //PizzaJob

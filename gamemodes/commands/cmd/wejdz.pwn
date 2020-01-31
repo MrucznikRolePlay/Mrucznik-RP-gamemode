@@ -267,10 +267,13 @@ YCMD:wejdz(playerid, params[], help)
         //wejscie glowne, na bilet.
         else if(PlayerToPoint(1.5, playerid, 395.9647, -1811.1703, 7.8789))
         {
-            if(PlayerInfo[playerid][pBiletIbiza] == 0 && GetPlayerOrg(playerid) != FAMILY_IBIZA)
+            if(PlayerInfo[playerid][pBiletIbiza] == 0)
             {
-                sendErrorMessage(playerid, "Nie posiadasz biletu do Ibizy!"); 
-                return 1;
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    sendErrorMessage(playerid, "Nie posiadasz biletu do Ibizy!"); 
+                    return 1;
+                }
             }
             SetPlayerVirtualWorld(playerid, 22);
             SetPlayerPos(playerid, 417.3976, -1858.9402, -65.3905);
@@ -279,7 +282,7 @@ YCMD:wejdz(playerid, params[], help)
             return 1;
         }
         //wejscia VIP
-        
+
         //san news biura
         else if(PlayerToPoint(1.0, playerid, 286.0645,-1602.0117,134.4274) && posDrzwiSN[playerid] == 0)
         {

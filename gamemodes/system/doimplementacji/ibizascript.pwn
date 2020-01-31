@@ -21,20 +21,6 @@
 
 
 //dodanie warunkow przy /wejdz i stream sound
-new bool:ibizaStrobes, bool:ibizaLights, bool:ibizaNeons, bool:ibizaSmokes;
-new bool:ibizaTextOne, bool:ibizaTextTwo;
-new ibizaTextOneText, ibizaTextTwoText;
-// NEONY
-new ibizaNeon1, ibizaNeon2, ibizaNeon3, ibizaNeon4, ibizaNeon5, ibizaNeon6, ibizaNeon7;
-new ibizaNeon8, ibizaNeon9, ibizaNeon10, ibizaNeon11;
-// LIGHTS
-new ibizaLight1, ibizaLight2, ibizaLight3, ibizaLight4, ibizaLight5;
-// STROBOSKOPY
-new ibizaStrobe1, ibizaStrobe2, ibizaStrobe3, ibizaStrobe4;
-// DYM
-new ibizaSmoke1, ibizaSmoke2;
-new txt_ibiza_klub[512];
-new txt_ibiza_tickets[128];
 stock IbizaStrobesOn(){
 	ibizaStrobe1 = CreateDynamicObject(354, 431.875701, -1841.316772, -66.600242, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
 	ibizaStrobe2 = CreateDynamicObject(354, 431.875701, -1849.897216, -66.600242, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 

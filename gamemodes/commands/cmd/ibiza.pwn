@@ -30,9 +30,9 @@
 
 YCMD:ibiza(playerid, params[], help)
 {
-    if(gPlayerOrgLeader[playerid] && GetPlayerOrg(playerid) == FAMILY_IBIZA) 
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA) 
     {
-       if(IsPlayerInRangeOfPoint(playerid, 20, 433.696594, -1845.469360, -68.420249)){
+       if(IsPlayerInRangeOfPoint(playerid, 20, 433.1950,-1845.3390,-64.2206)){
             IbizaPanelCheck();
 		    ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
 	    }
@@ -40,6 +40,10 @@ YCMD:ibiza(playerid, params[], help)
         {
 		    SendClientMessage(playerid, -1, "Jesteœ za daleko od klubu.");
 	    }
+    }
+    else
+    {
+        sendTipMessage(playerid, "Brak dostêpu do komendy.");
     }
     return 1;
 }

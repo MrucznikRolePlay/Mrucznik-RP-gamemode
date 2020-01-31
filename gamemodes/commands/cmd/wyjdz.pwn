@@ -239,18 +239,14 @@ YCMD:wyjdz(playerid, params[], help)
 			return 1;
 		}
         //IBIZA
-    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1892.9077,-2451.8071,21.6559) && GetPlayerVirtualWorld(playerid) == 1)
-    	{
-    		if(!IbizaDach) return sendTipMessageEx(playerid, 0xB52E2BFF, "Wyjœcie na dach jest zamkniête");
-    		SetPlayerPosEx(playerid, 397.6700,-1811.8844,14.7359);
-    		SetPlayerFacingAngle(playerid, 182.1396);
-    		SetPlayerVirtualWorld(playerid, 0);
-    		SetPVarInt(playerid, "IbizaWejdz", 0);
-    		StopAudioStreamForPlayer(playerid);
-    		IbizaWyjscie(playerid);
-    		return 1;
-
-    	}
+    	else if(PlayerToPoint(1.5, playerid, 417.3976, -1858.9402, -65.3905))
+        {
+            SetPlayerVirtualWorld(playerid, 21);
+            SetPlayerPos(playerid, 395.9647, -1811.1703, 7.8789);
+            GameTextForPlayer(playerid, "~w~Zapraszamy ponownie!", 5000, 1);
+            Wchodzenie(playerid);
+            return 1;
+        }
     	//wyjœcie bileterki
     	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 397.6174,-1806.2030,7.8381) && GetPlayerOrg(playerid) == FAMILY_IBIZA && GetPlayerVirtualWorld(playerid) == 0) //RANGA
     	{
