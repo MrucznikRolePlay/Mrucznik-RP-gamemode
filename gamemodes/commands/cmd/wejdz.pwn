@@ -282,8 +282,101 @@ YCMD:wejdz(playerid, params[], help)
             Wchodzenie(playerid);
             return 1;
         }
+        //wejscie na scene/konsole
+        else if(PlayerToPoint(1.5, playerid, 430.4849,-1837.2827,-65.5105))
+        {
+            if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+            {
+                GameTextForPlayer(playerid, "~r~Brak dostêpu.", 5000, 1); 
+                return 1;
+            }
+            SetPlayerPos(playerid, 434.7581, -1841.0632, -64.2206);
+            GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
+            Wchodzenie(playerid);
+            return 1;
+        }
         //wejscia VIP
-
+        else if(PlayerToPoint(1.5, playerid, 425.9001, -1854.8367, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 428.3247, -1855.9178, -65.2092);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
+            return 1;
+        }
+        else if(PlayerToPoint(1.5, playerid, 408.6968, -1855.0348, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 406.8980, -1856.6122, -65.2092);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
+            return 1;
+        }
+        else if(PlayerToPoint(1.5, playerid, 408.8490, -1835.8851, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 406.3426, -1835.0138, -65.2092);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
+            return 1;
+        }
+        else if(PlayerToPoint(1.5, playerid, 403.3954,-1843.4607,-65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 416.8028, -1850.4160, -61.9043);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
+            return 1;
+        }
+        //wejscia SUPERVIP
+        else if(PlayerToPoint(1.5, playerid, 424.0322, -1837.0964, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(PlayerInfo[playerid][pBiletIbiza] <= 2)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 426.7242, -1834.9066, -65.2102);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
+            return 1;
+        }
+        else if(PlayerToPoint(1.5, playerid, 422.2131, -1831.5657, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(PlayerInfo[playerid][pBiletIbiza] <= 2)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    return 1;
+                }
+            }
+            SetPlayerVirtualWorld(playerid, 25);
+            SetPlayerPos(playerid, 221.530426, -1546.261352, -15.997495);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
+            Wchodzenie(playerid);
+            return 1;
+        }
         //san news biura
         else if(PlayerToPoint(1.0, playerid, 286.0645,-1602.0117,134.4274) && posDrzwiSN[playerid] == 0)
         {
