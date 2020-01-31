@@ -266,7 +266,7 @@ YCMD:wejdz(playerid, params[], help)
         }
         //IBIZA =======================
         //wejscie glowne, na bilet.
-        else if(PlayerToPoint(1.5, playerid, 395.9647, -1811.1703, 7.8789))
+        else if(PlayerToPoint(1.5, playerid, 395.9647, -1811.1703, 7.8789) && GetPlayerVirtualWorld(playerid) == 21)
         {
             if(PlayerInfo[playerid][pBiletIbiza] == 0)
             {
@@ -287,7 +287,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
             {
-                GameTextForPlayer(playerid, "~r~Brak dostêpu.", 5000, 1); 
+                GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1); 
                 return 1;
             }
             SetPlayerPos(playerid, 434.7581, -1841.0632, -64.2206);
@@ -302,6 +302,7 @@ YCMD:wejdz(playerid, params[], help)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
                 }
             }
@@ -315,6 +316,7 @@ YCMD:wejdz(playerid, params[], help)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
                 }
             }
@@ -328,6 +330,7 @@ YCMD:wejdz(playerid, params[], help)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
                 }
             }
@@ -341,6 +344,7 @@ YCMD:wejdz(playerid, params[], help)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
                 }
             }
@@ -355,6 +359,7 @@ YCMD:wejdz(playerid, params[], help)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
                 }
             }
@@ -368,6 +373,7 @@ YCMD:wejdz(playerid, params[], help)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
                 }
             }
