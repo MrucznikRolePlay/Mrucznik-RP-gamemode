@@ -114,7 +114,7 @@ YCMD:wez(playerid, params[], help)
 		{
 			if (PlayerInfo[playerid][pMember] == 4)
 			{
-				new newcar=0, Float:dis=2.75, Float:x, Float:y, Float:z, Float:currdist;
+				new newcar=0, Float:dis=3.5, Float:x, Float:y, Float:z, Float:currdist;
 				for(new i=0;i<MAX_VEHICLES;i++)
 				{
 					GetVehiclePos(i, x, y, z);
@@ -126,30 +126,32 @@ YCMD:wez(playerid, params[], help)
 				}
 				if(newcar != 0)
     			{
-					if(Car_GetOwnerType(newcar) == CAR_OWNER_FRACTION)// wszystkie auta frakcji
+					if(Car_GetOwnerType(newcar) == CAR_OWNER_FRACTION && (GetVehicleModel(newcar) == 407 || GetVehicleModel(newcar) == 544))// wszystkie auta frakcji
 					{
 						if(Car_GetOwner(newcar) == GetPlayerFraction(playerid))
 						{
-							if(GetVehicleModel(newcar) == 407 || GetVehicleModel(newcar) == 544)
-							{
-								format(string, 256, "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***",GetNick(playerid, true), params);
-								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								GivePlayerWeapon(playerid, 42, 9999);
-	                     		PlayerInfo[playerid][pGun9] = 42;
-	                     		PlayerInfo[playerid][pAmmo9] = 9999;
-								return 1;
-							}
-							else
-							{
-								sendTipMessage(playerid, "Nie jesteœ przy wozie stra¿ackim!");
-								return 1;
-							}
+							format(string, 256, "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***",GetNick(playerid, true), params);
+							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							GivePlayerWeapon(playerid, 42, 9999);
+	                     	PlayerInfo[playerid][pGun9] = 42;
+	                     	PlayerInfo[playerid][pAmmo9] = 9999;
+							return 1;
 						}
+						else
+						{
+							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do ERS.");
+							return 1;
+						}
+					}
+					else
+					{
+						sendTipMessage(playerid, "Ten pojazd nie jest wozem stra¿ackim ERS.");
+						return 1;
 					}
 				}
 				else
 				{
-					sendTipMessage(playerid, "Nie jesteœ przy wozie stra¿ackim!");
+					sendTipMessage(playerid, "Brak aut w pobli¿u.");
 					return 1;
 				}
 			}
