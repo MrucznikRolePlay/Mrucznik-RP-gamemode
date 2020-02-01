@@ -35,7 +35,7 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						IbizaTicket[playerid] = IBIZA_NORMAL;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu!");
-						SejfR_Add(FRAC_IBIZA, ibiza_priceNormal);
+						SejfR_Add(FAMILY_IBIZA, ibiza_priceNormal);
 					}else{
 						SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy!");
 					}
@@ -46,7 +46,7 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						IbizaTicket[playerid] = IBIZA_VIP;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu VIP!");
-						SejfR_Add(FRAC_IBIZA, ibiza_priceVIP);
+						SejfR_Add(FAMILY_IBIZA, ibiza_priceVIP);
 					}else{
 						SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy!");
 					}
