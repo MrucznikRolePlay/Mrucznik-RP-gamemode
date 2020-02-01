@@ -25,10 +25,10 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dajbilet_Impl(playerid, giveplayerid)
 {
-     new var[128];
+    new var[128];
     if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
     {
-        if(PlayerInfo[giveplayerid][pBiletIbiza] != IBIZA_SUPERVIP)
+        if(IbizaTicket[giveplayerid] != IBIZA_SUPERVIP)
         {
             format(var, sizeof(var), "Da³eœ bilet supervip dla %s", GetNick(giveplayerid));
             sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
@@ -36,12 +36,13 @@ command_dajbilet_Impl(playerid, giveplayerid)
             sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, var);
             format(var, sizeof(var), "** %s podaje bilet Ibiza|[SUPERVIP] %s.", GetNick(playerid), GetNick(giveplayerid));
             ProxDetector(15.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-            PlayerInfo[giveplayerid][pBiletIbiza] = IBIZA_SUPERVIP;
+            IbizaTicket[giveplayerid] = IBIZA_SUPERVIP;
             return 1;
         }
         else
         {
             sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta osoba posiada ju¿ bilet supervip.");
+            return 1;
         }
     }
     else
@@ -49,6 +50,7 @@ command_dajbilet_Impl(playerid, giveplayerid)
         noAccessMessage(playerid);
         return 1;
     }
+    return 1;
 }
 
 //end

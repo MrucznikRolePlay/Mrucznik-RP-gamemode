@@ -24,7 +24,7 @@
 */
 
 //
-
+#include "ibiza_dialogs.pwn"
 //-----------------<[ Funkcje: ]>-------------------
 ibiza_clearCache(playerid)
 {
@@ -152,14 +152,14 @@ stock IbizaPanelCheck(){
 	}else{
 		format(txt_ibiza_txtTwo, 128, "{FFFFFF}Tekst #2: \t{00FF00}W³¹czone\n");
 	}
-	format(txt_ibiza_normalTicketCost, 128, "{FFFFFF}Bilet normalny: \t{00FF00}%d \n", ibiza_cenaNorm);
-	format(txt_ibiza_VIPTicketCost, 128, "{FFFFFF}Bilet VIP: \t{00FF00}%d", ibiza_cenaVIP);
+	format(txt_ibiza_normalTicketCost, 128, "{FFFFFF}Bilet normalny: \t{00FF00}%d \n", ibiza_priceNormal);
+	format(txt_ibiza_VIPTicketCost, 128, "{FFFFFF}Bilet VIP: \t{00FF00}%d", ibiza_priceVIP);
 	
 	format(txt_ibiza_klub, 512, "%s %s %s %s %s %s %s %s", txt_ibiza_strobes, txt_ibiza_neons, txt_ibiza_lights, txt_ibiza_smokes, txt_ibiza_txtOne, txt_ibiza_txtTwo, txt_ibiza_normalTicketCost, txt_ibiza_VIPTicketCost);
 	return 1;
 }
 stock IbizaTicketsCostCheck(){
-	format(txt_ibiza_tickets, 128, "{FFFFFF}Rodzaj\tCena\nZwyk³y\t{00FF00}%d\n{FFFFFF}VIP\t{00FF00}%d", ibiza_cenaNorm, ibiza_cenaVIP);
+	format(txt_ibiza_tickets, 128, "{FFFFFF}Rodzaj\tCena\nZwyk³y\t{00FF00}%d\n{FFFFFF}VIP\t{00FF00}%d", ibiza_priceNormal, ibiza_priceVIP);
 	return 1;
 }
 //end
