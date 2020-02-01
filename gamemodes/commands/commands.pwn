@@ -95,7 +95,6 @@
 #include "cmd/cziterzy.pwn"
 #include "cmd/czyjtonumer.pwn"
 #include "cmd/czysc.pwn"
-#include "cmd/dajbilet.pwn"
 #include "cmd/dajdowozu.pwn"
 #include "cmd/dajdzwiek.pwn"
 #include "cmd/dajfiltr.pwn"
