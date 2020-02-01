@@ -26,7 +26,7 @@
 command_dajbilet_Impl(playerid, giveplayerid)
 {
     new var[128];
-    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 4) 
     {
         if(IbizaTicket[giveplayerid] != IBIZA_SUPERVIP)
         {
