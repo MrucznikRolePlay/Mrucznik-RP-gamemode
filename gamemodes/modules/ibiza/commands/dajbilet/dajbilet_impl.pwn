@@ -25,12 +25,13 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dajbilet_Impl(playerid, giveplayerid)
 {
-    new var[128];
+     new var[128];
     if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
     {
         format(var, sizeof(var), "** %s podaje bilet SUPERVIP %s", GetNick(playerid), GetNick(giveplayerid));
 	    ProxDetector(15.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         PlayerInfo[giveplayerid][pBiletIbiza] = 3;
+        return 1;
     }
     else
     {

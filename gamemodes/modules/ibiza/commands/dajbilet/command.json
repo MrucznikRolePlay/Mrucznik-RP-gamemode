@@ -1,8 +1,8 @@
 {
     "name": "dajbilet",
-    "description": "Komenda nadawaj¹ca bilet ibizy",
+    "description": "Komenda nadawaj¹ca bilet do Ibizy",
     "permissions": [
-        "frakcja_LSPD"
+        "everyone"
     ],
     "author": "Sanda³",
     "aliases": [],

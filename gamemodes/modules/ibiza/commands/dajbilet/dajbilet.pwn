@@ -39,7 +39,7 @@ command_dajbilet()
     
 
     //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
@@ -51,7 +51,7 @@ YCMD:dajbilet(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Komenda nadawaj¹ca bilet ibizy");
+        sendTipMessage(playerid, "Komenda nadawaj¹ca bilet do Ibizy");
         return 1;
     }
     //fetching params
