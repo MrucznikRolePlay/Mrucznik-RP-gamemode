@@ -25,6 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sekta_Impl(playerid, opcja[24], giveplayerid)
 {
+    new var[128];
     if(GetPlayerOrg(playerid) == FAMILY_SEKTA && PlayerInfo[playerid][pRank] >= 1)
     {
         if(strcmp(opcja,"klucz",true) == 0)
