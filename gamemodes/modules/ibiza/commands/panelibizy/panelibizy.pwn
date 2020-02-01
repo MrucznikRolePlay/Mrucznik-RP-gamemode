@@ -36,7 +36,7 @@ command_panelibizy()
     new command = Command_GetID("panelibizy");
 
     //aliases
-    Command_AddAlt(command, "panelibizy");
+    Command_AddAlt(command, "panelibiza");
     Command_AddAlt(command, "ibiza");
     
 

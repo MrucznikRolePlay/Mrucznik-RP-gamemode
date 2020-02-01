@@ -249,13 +249,13 @@ YCMD:wyjdz(playerid, params[], help)
             return 1;
         }
 		//wejscie na scene/konsole
-        else if(PlayerToPoint(1.5, playerid, 430.4849,-1837.2827,-65.5105))
+        else if(PlayerToPoint(1.5, playerid, 434.7581, -1841.0632, -64.2206))
         {
 			if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
             {
                 return 1;
             }
-            SetPlayerPos(playerid, 434.7581, -1841.0632, -64.2206);
+            SetPlayerPos(playerid, 430.4849,-1837.2827,-65.5105);
             return 1;
         }
         //wejscia VIP
