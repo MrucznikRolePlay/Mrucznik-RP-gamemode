@@ -37,18 +37,15 @@ command_dajbilet_Impl(playerid, giveplayerid)
             format(var, sizeof(var), "** %s podaje bilet Ibiza|[SUPERVIP] %s.", GetNick(playerid), GetNick(giveplayerid));
             ProxDetector(15.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
             IbizaTicket[giveplayerid] = IBIZA_SUPERVIP;
-            return 1;
         }
         else
         {
             sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta osoba posiada ju¿ bilet supervip.");
-            return 1;
         }
     }
     else
     {
         noAccessMessage(playerid);
-        return 1;
     }
     return 1;
 }

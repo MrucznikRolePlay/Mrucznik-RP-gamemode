@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 panelibizy                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,13 +27,37 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-
+#include "panelibizy_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_panelibizy()
 {
+    new command = Command_GetID("panelibizy");
+
+    //aliases
+    Command_AddAlt(command, "panelibizy");
+    Command_AddAlt(command, "ibiza");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:panelibizy(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Panel wlasciciela ibizy");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_panelibizy_Impl(playerid);
 }

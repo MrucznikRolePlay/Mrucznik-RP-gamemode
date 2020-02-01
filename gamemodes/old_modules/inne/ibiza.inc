@@ -72,15 +72,12 @@ new IbizaDymObiekty[10];
 new IbizaKafle[4];
 new IbizaBilet;
 new bool:IbizaSwiatla = true;
-new bool:IbizaBarierki = true;
 new IbizaBarierkiObiekty[3];
 new bool:IbizaZamek = true;
 new IbizaKanciapaObiekt;
 new bool:IbizaKanciapa = false;
 
 new IbizaPiasek[4];
-new IbizaParkiet = 0;
-new IbizaPodloga[2];
 new bool:IbizaBrama[2] = {true, true};
 new IbizaBramaObiekty[2];
 new bool:IbizaBiuro = false;
@@ -187,21 +184,6 @@ PlayerName(playerid)
 MikserDialog(playerid)
 {
 	ShowPlayerDialogEx(playerid, DIALOG_IBIZA_MIKSER, DIALOG_STYLE_LIST, "Konsola DJa", "Stream\nTelebim\nåwiat≥a\nStroboskopy\nMaszynka do dymu\nRury", "Wybierz", "Wyjdz");
-	return 1;
-}
-
-PrezesDialog(playerid)
-{
-	new string[256];
-	new drzwi[64],biuro[64],dach[64];
-	if(IbizaZamek) format(drzwi, sizeof drzwi, "{FF0000}Drzwi do Klubu{FFFFFF}");
-	else format(drzwi, sizeof drzwi, "{1F7D0C}Drzwi do Klubu{FFFFFF}");
-	if(IbizaBiuro) format(biuro, sizeof biuro, "{1F7D0C}Drzwi do biura{FFFFFF}");
-	else format(biuro, sizeof biuro, "{FF0000}Drzwi do biura{FFFFFF}");
-	if(IbizaDach) format(dach, sizeof dach, "{1F7D0C}Wyjúcie na dach");
-	else format(dach, sizeof dach, "{FF0000}Wyjúcie na dach");
-	format(string, sizeof string, "Sejf\n%s\nCena biletu (%d$)\nCeny Baru\nBarierki\nMikser\nParkiet\n%s\n%s", drzwi, IbizaBilet, biuro, dach);
-	ShowPlayerDialogEx(playerid, DIALOG_IBIZA_IBIZA, DIALOG_STYLE_LIST, "Panel Prezesa", string, "Wybierz", "Wyjdü");
 	return 1;
 }
 

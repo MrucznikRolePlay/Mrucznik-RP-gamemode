@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   ibiza                                                   //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 panelibizy                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,31 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sanda³
+// Data utworzenia: 01.02.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "ibiza_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_ibiza()
+//------------------<[ Implementacja: ]>-------------------
+command_panelibizy_Impl(playerid)
 {
-    new command = Command_GetID("ibiza");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:ibiza(playerid, params[], help)
-{
-    if (help)
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
     {
-        sendTipMessage(playerid, "Panel zarz¹dzania ibiz¹");
-        return 1;
+       if(IsPlayerInRangeOfPoint(playerid, 20, 433.1950,-1845.3390,-64.2206)){
+            IbizaPanelCheck();
+		    ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
+	    }
+        else
+        {
+		    SendClientMessage(playerid, -1, "Jesteœ za daleko od klubu.");
+	    }
     }
-    
-    
-    //command body
-    return command_ibiza_Impl(playerid);
+    else
+    {
+        sendTipMessage(playerid, "Brak dostêpu do komendy.");
+    }
+    return 1;
 }
+
+//end
