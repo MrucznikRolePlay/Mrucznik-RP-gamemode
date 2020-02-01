@@ -1101,6 +1101,7 @@ ZerujZmienne(playerid)
 
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
+	graffiti_clearCache(playerid);
 
 	//z disconecta
 
