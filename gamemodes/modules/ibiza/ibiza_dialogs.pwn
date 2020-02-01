@@ -30,9 +30,9 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response){
 			switch(listitem){
 				case 0:{
-					if(kaska[playerid] >= ibiza_cenaNorm){
-						ZabierzKase(playerid, ibiza_cenaNorm);
-						PlayerInfo[playerid][pBiletIbiza] = IBIZA_NORMAL;
+					if(kaska[playerid] >= ibiza_priceNormal){
+						ZabierzKase(playerid, ibiza_priceNormal);
+						IbizaTicket[playerid] = IBIZA_NORMAL;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu!");
 						// DODANIE KASY DO SEJFU BIZNESU - ibizaTicketCost
@@ -41,9 +41,9 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 				case 1:{
-					if(kaska[playerid] >= ibiza_cenaVIP){
-						ZabierzKase(playerid, ibiza_cenaVIP);
-						PlayerInfo[playerid][pBiletIbiza] = IBIZA_VIP;
+					if(kaska[playerid] >= ibiza_priceVIP){
+						ZabierzKase(playerid, ibiza_priceVIP);
+						IbizaTicket[playerid] = IBIZA_VIP;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu VIP!");
 						// DODANIE KASY DO SEJFU BIZNESU - ibizaVIPTicketCost
@@ -123,12 +123,12 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	if(dialogid == DIALOG_IBIZA_NORMAL_TICKET){
 		if(response){
-			ibiza_cenaNorm = strval(inputtext);
+			ibiza_priceNormal = strval(inputtext);
 		}
 	}
 	if(dialogid == DIALOG_IBIZA_VIP_TICKET){
 		if(response){
-			ibiza_cenaVIP = strval(inputtext);
+			ibiza_priceVIP = strval(inputtext);
 		}
 	}
 	if(dialogid == DIALOG_IBIZA_TEXT_ONE){
@@ -157,4 +157,5 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         format(IBIZA_Stream, 128, "%s",inputtext);
     }
+    return 1;
 }
