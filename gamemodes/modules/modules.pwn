@@ -44,6 +44,7 @@
 #include "debug\debug.def"
 #include "discord\discord.def"
 #include "frakcje\frakcje.def"
+#include "ibiza\ibiza.def"
 #include "komendy\komendy.def"
 #include "logi\logi.def"
 #include "money\money.def"
@@ -79,6 +80,7 @@
 #include "debug\debug.hwn"
 #include "discord\discord.hwn"
 #include "frakcje\frakcje.hwn"
+#include "ibiza\ibiza.hwn"
 #include "komendy\komendy.hwn"
 #include "logi\logi.hwn"
 #include "money\money.hwn"
@@ -114,6 +116,7 @@
 #include "debug\debug.pwn"
 #include "discord\discord.pwn"
 #include "frakcje\frakcje.pwn"
+#include "ibiza\ibiza.pwn"
 #include "komendy\komendy.pwn"
 #include "logi\logi.pwn"
 #include "money\money.pwn"
@@ -158,7 +161,7 @@
 
 
 //-------<[ others ]>-------
-#include "03DL\resources.pwn"
+#include "resources.pwn"
 
 
 //-------<[ callbacks ]>-------
@@ -187,6 +190,7 @@
 #include "convoy\commands\convoy_commands.pwn"
 #include "debug\commands\debug_commands.pwn"
 #include "frakcje\commands\frakcje_commands.pwn"
+#include "ibiza\commands\ibiza_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "logi\commands\logi_commands.pwn"
 #include "organizacje\commands\organizacje_commands.pwn"

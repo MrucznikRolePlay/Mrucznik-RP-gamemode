@@ -39,6 +39,7 @@ command_dajbilet()
     
 
     //permissions
+    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
     
 
     //prefix
