@@ -246,6 +246,7 @@ YCMD:wyjdz(playerid, params[], help)
             SetPlayerPos(playerid, 395.9647, -1811.1703, 7.8789);
             GameTextForPlayer(playerid, "~w~Zapraszamy ponownie!", 5000, 1);
             Wchodzenie(playerid);
+			StopAudioStreamForPlayer(playerid);
             return 1;
         }
 		//wejscie na scene/konsole
