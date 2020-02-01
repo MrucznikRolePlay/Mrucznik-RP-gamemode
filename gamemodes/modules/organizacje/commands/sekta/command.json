@@ -1,14 +1,18 @@
 {
-    "name": "klucz",
-    "description": "Komenda nadaj¹ca klucz do tajnego przejœcia",
+    "name": "sekta",
+    "description": "Komenda zarz¹dzaj¹ca sekt¹",
     "permissions": [
         "everyone"
     ],
     "author": "Sanda³",
-    "aliases": [
-        "dajklucz"
-    ],
+    "aliases": [],
     "parameters": [
+        {
+            "type": "string",
+            "size": "24",
+            "name": "opcja",
+            "description": "klucz, wepchnij, wypusc"
+        },
         {
             "type": "player",
             "name": "giveplayerid",
