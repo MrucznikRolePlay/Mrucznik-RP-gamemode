@@ -39,7 +39,7 @@ YCMD:ticketend(playerid, params[], help)
     	PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
         SetPlayerInterior(playerid, Unspec[playerid][sPint]);
         SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
-    	SetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
+    	SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
         Wchodzenie(playerid);
     }
     else

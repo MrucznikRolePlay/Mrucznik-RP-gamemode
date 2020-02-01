@@ -3402,7 +3402,7 @@ public SlideRope(playerid)
 	    new Float:Z;
 	    GetPlayerPos(playerid, X, Y, Z);
   	 	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
-	    SetPlayerPos(playerid, X, Y, Z - 2.00);
+	    SetPlayerPosEx(playerid, X, Y, Z - 2.00);
 		SetPlayerVelocity(playerid,0,0,0);
 	    SetTimerEx("SlideRope", 1000, 0, "i", playerid);
  	}

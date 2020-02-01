@@ -935,13 +935,13 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		sendTipMessage(playerid, "Nie mo¿esz wejœæ do pojazdu podczas biegu!"); 
 		GetPlayerPos(playerid, pX,pY,pZ);
-		SetPlayerPos(playerid, pX,pY,pZ+2);
+		SetPlayerPosEx(playerid, pX,pY,pZ+2);
 	}
 	if(GetPlayerPing(playerid) >= 180 && !ispassenger)//Zabezpieczenie, jeœli ma za du¿y ping
 	{
 		sendTipMessage(playerid, "Twój ping jest stanowczo za wysoki! Odczekaj chwilê, zanim wsi¹dziesz do pojazdu"); 
 		GetPlayerPos(playerid, pX,pY,pZ);
-		SetPlayerPos(playerid, pX,pY,pZ+2);
+		SetPlayerPosEx(playerid, pX,pY,pZ+2);
 	}
 
 	if((GetVehicleModel(vehicleid) == 497 || GetVehicleModel(vehicleid) == 417 || GetVehicleModel(vehicleid) == 563) && ispassenger)
@@ -2429,7 +2429,7 @@ SetPlayerSpawnPos(playerid)
 		{
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
-			SetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
+			SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 			Unspec[playerid][Coords][0] = 0.0, Unspec[playerid][Coords][1] = 0.0, Unspec[playerid][Coords][2] = 0.0;
 			Spectate[playerid] = INVALID_PLAYER_ID;
 			PhoneOnline[playerid] = 0;

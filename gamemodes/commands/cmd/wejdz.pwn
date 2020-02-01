@@ -259,7 +259,7 @@ YCMD:wejdz(playerid, params[], help)
             }
             SetPLocal(playerid, PLOCAL_ORG_SN); 
             SetPlayerVirtualWorld(playerid, 71);
-            SetPlayerPos(playerid, 816.4222, -1413.7644, -22.5834);
+            SetPlayerPosEx(playerid, 816.4222, -1413.7644, -22.5834);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);
             return 1;
@@ -277,7 +277,7 @@ YCMD:wejdz(playerid, params[], help)
                 }
             }
             SetPlayerVirtualWorld(playerid, 22);
-            SetPlayerPos(playerid, 417.3976, -1858.9402, -65.3905);
+            SetPlayerPosEx(playerid, 417.3976, -1858.9402, -65.3905);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);
             return 1;
@@ -290,7 +290,7 @@ YCMD:wejdz(playerid, params[], help)
                 GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1); 
                 return 1;
             }
-            SetPlayerPos(playerid, 434.7581, -1841.0632, -64.2206);
+            SetPlayerPosEx(playerid, 434.7581, -1841.0632, -64.2206);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);
             return 1;
@@ -306,7 +306,7 @@ YCMD:wejdz(playerid, params[], help)
                     return 1;
                 }
             }
-            SetPlayerPos(playerid, 428.3247, -1855.9178, -65.2092);
+            SetPlayerPosEx(playerid, 428.3247, -1855.9178, -65.2092);
             GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
             return 1;
         }
@@ -320,7 +320,7 @@ YCMD:wejdz(playerid, params[], help)
                     return 1;
                 }
             }
-            SetPlayerPos(playerid, 406.8980, -1856.6122, -65.2092);
+            SetPlayerPosEx(playerid, 406.8980, -1856.6122, -65.2092);
             GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
             return 1;
         }
@@ -334,7 +334,7 @@ YCMD:wejdz(playerid, params[], help)
                     return 1;
                 }
             }
-            SetPlayerPos(playerid, 406.3426, -1835.0138, -65.2092);
+            SetPlayerPosEx(playerid, 406.3426, -1835.0138, -65.2092);
             GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
             return 1;
         }
@@ -348,7 +348,7 @@ YCMD:wejdz(playerid, params[], help)
                     return 1;
                 }
             }
-            SetPlayerPos(playerid, 416.8028, -1850.4160, -61.9043);
+            SetPlayerPosEx(playerid, 416.8028, -1850.4160, -61.9043);
             GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
             return 1;
         }
@@ -363,7 +363,7 @@ YCMD:wejdz(playerid, params[], help)
                     return 1;
                 }
             }
-            SetPlayerPos(playerid, 426.7242, -1834.9066, -65.2102);
+            SetPlayerPosEx(playerid, 426.7242, -1834.9066, -65.2102);
             GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
             return 1;
         }
@@ -378,7 +378,7 @@ YCMD:wejdz(playerid, params[], help)
                 }
             }
             SetPlayerVirtualWorld(playerid, 25);
-            SetPlayerPos(playerid, 221.530426, -1546.261352, -15.997495);
+            SetPlayerPosEx(playerid, 221.530426, -1546.261352, -15.997495);
             GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
             Wchodzenie(playerid);
             return 1;
