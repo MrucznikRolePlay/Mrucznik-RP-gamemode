@@ -74,7 +74,7 @@ YCMD:goto(playerid, params[], help)
 					{
 						Spectate[playerid] = INVALID_PLAYER_ID;
 					}
-					GetPlayerPos(plo, plocx, plocy, plocz);
+					GetPlayerPosEx(plo, plocx, plocy, plocz);
 					SetPlayerInterior(playerid, GetPlayerInterior(plo));
 					SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(plo));
 					if(PlayerInfo[plo][pInt] > 0)

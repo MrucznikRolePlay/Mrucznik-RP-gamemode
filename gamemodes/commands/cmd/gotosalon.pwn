@@ -42,7 +42,7 @@ YCMD:gotosalon(playerid, params[], help)
 				}
 				else
 				{
-					SetPlayerPos(playerid, 2129.2078,-1129.9963,25.5823);
+					SetPlayerPosEx(playerid, 2129.2078,-1129.9963,25.5823);
 				}
    				sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
 		}
