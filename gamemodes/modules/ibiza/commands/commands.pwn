@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ ibiza ]-------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,24 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
- */
+
+#include <YSI\y_hooks>
+
+//-------<[ include ]>-------
 
 
-// Notatki skryptera:
-/*
-
- */
-
-YCMD:ibiza(playerid, params[], help)
+//-------<[ initialize ]>-------
+hook OnGameModeInit()
 {
-    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
-    {
-       if(IsPlayerInRangeOfPoint(playerid, 20, 433.1950,-1845.3390,-64.2206)){
-            IbizaPanelCheck();
-		    ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
-	    }
-        else
-        {
-		    SendClientMessage(playerid, -1, "Jesteœ za daleko od klubu.");
-	    }
-    }
-    else
-    {
-        sendTipMessage(playerid, "Brak dostêpu do komendy.");
-    }
-    return 1;
+    
 }

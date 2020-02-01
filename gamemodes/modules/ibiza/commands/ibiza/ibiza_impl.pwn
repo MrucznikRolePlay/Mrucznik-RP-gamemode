@@ -1,4 +1,4 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
 //                                                   ibiza                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
@@ -19,32 +19,28 @@
 // Autor: Sanda³
 // Data utworzenia: 01.02.2020
 
+
 //
 
-//------------------<[ Enumy: ]>--------------------
-//-----------------<[ Zmienne: ]>-------------------
-new IbizaTicket[MAX_PLAYERS];
-//ibiza club
-new ibiza_priceNormal = 30000;
-new ibiza_priceVIP = 100000;
-new bool:ibizaStrobes, bool:ibizaLights, bool:ibizaNeons, bool:ibizaSmokes;
-new bool:ibizaTextOne, bool:ibizaTextTwo;
-new ibizaTextOneText, ibizaTextTwoText;
-// NEONY
-new ibizaNeon1, ibizaNeon2, ibizaNeon3, ibizaNeon4, ibizaNeon5, ibizaNeon6, ibizaNeon7;
-new ibizaNeon8, ibizaNeon9, ibizaNeon10, ibizaNeon11;
-// LIGHTS
-new ibizaLight1, ibizaLight2, ibizaLight3, ibizaLight4, ibizaLight5;
-// STROBOSKOPY
-new ibizaStrobe1, ibizaStrobe2, ibizaStrobe3, ibizaStrobe4;
-// DYM
-new ibizaSmoke1, ibizaSmoke2;
-// DO DIALOGU
-new txt_ibiza_klub[512];
-new txt_ibiza_tickets[128];
-// KOORDYNATY IBIZY DLA AUDIO STREAM
-new Float:IbizaAudioPos[5] = {417.3976,-1858.9402,-65.3905,1000.0,22};  //pos[3] dist, vw
-new IBIZA_Stream[128];
-//------------------<[ Forwardy: ]>--------------------
+//------------------<[ Implementacja: ]>-------------------
+command_ibiza_Impl(playerid)
+{
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
+    {
+       if(IsPlayerInRangeOfPoint(playerid, 20, 433.1950,-1845.3390,-64.2206)){
+            IbizaPanelCheck();
+		    ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
+	    }
+        else
+        {
+		    SendClientMessage(playerid, -1, "Jesteœ za daleko od klubu.");
+	    }
+    }
+    else
+    {
+        sendTipMessage(playerid, "Brak dostêpu do komendy.");
+    }
+    return 1;
+}
 
 //end

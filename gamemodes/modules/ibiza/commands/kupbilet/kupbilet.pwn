@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                   ibiza                                                   //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  kupbilet                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,35 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Sanda³
-// Data utworzenia: 01.02.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Enumy: ]>--------------------
-//-----------------<[ Zmienne: ]>-------------------
-new IbizaTicket[MAX_PLAYERS];
-//ibiza club
-new ibiza_priceNormal = 30000;
-new ibiza_priceVIP = 100000;
-new bool:ibizaStrobes, bool:ibizaLights, bool:ibizaNeons, bool:ibizaSmokes;
-new bool:ibizaTextOne, bool:ibizaTextTwo;
-new ibizaTextOneText, ibizaTextTwoText;
-// NEONY
-new ibizaNeon1, ibizaNeon2, ibizaNeon3, ibizaNeon4, ibizaNeon5, ibizaNeon6, ibizaNeon7;
-new ibizaNeon8, ibizaNeon9, ibizaNeon10, ibizaNeon11;
-// LIGHTS
-new ibizaLight1, ibizaLight2, ibizaLight3, ibizaLight4, ibizaLight5;
-// STROBOSKOPY
-new ibizaStrobe1, ibizaStrobe2, ibizaStrobe3, ibizaStrobe4;
-// DYM
-new ibizaSmoke1, ibizaSmoke2;
-// DO DIALOGU
-new txt_ibiza_klub[512];
-new txt_ibiza_tickets[128];
-// KOORDYNATY IBIZY DLA AUDIO STREAM
-new Float:IbizaAudioPos[5] = {417.3976,-1858.9402,-65.3905,1000.0,22};  //pos[3] dist, vw
-new IBIZA_Stream[128];
-//------------------<[ Forwardy: ]>--------------------
 
-//end
+//-------<[ include ]>-------
+#include "kupbilet_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_kupbilet()
+{
+    new command = Command_GetID("kupbilet");
+
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:kupbilet(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda do wyswietlenia menu kupna biletu w Ibiza");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_kupbilet_Impl(playerid);
+}

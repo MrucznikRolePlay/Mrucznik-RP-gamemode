@@ -31,11 +31,15 @@
 
 //-------<[ include ]>-------
 #include "dajbilet\dajbilet.pwn"
+#include "ibiza\ibiza.pwn"
+#include "kupbilet\kupbilet.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_dajbilet();
+    command_ibiza();
+    command_kupbilet();
     
 }

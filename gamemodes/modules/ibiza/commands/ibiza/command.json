@@ -1,0 +1,11 @@
+{
+    "name": "ibiza",
+    "description": "Panel zarz¹dzania ibiz¹",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sanda³",
+    "aliases": [],
+    "parameters": [],
+    "date": "01.02.2020"
+}

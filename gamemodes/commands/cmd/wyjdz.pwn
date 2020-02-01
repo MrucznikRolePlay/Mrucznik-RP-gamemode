@@ -261,7 +261,7 @@ YCMD:wyjdz(playerid, params[], help)
         //wejscia VIP
         else if(PlayerToPoint(1.5, playerid, 428.3247, -1855.9178, -65.2092) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            if(IbizaTicket[playerid] <= 1)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -273,7 +273,7 @@ YCMD:wyjdz(playerid, params[], help)
         }
         else if(PlayerToPoint(1.5, playerid, 406.8980, -1856.6122, -65.2092) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            if(IbizaTicket[playerid] <= 1)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -285,7 +285,7 @@ YCMD:wyjdz(playerid, params[], help)
         }
         else if(PlayerToPoint(1.5, playerid, 406.3426, -1835.0138, -65.2092) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            if(IbizaTicket[playerid] <= 1)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -297,7 +297,7 @@ YCMD:wyjdz(playerid, params[], help)
         }
         else if(PlayerToPoint(1.5, playerid, 416.8028, -1850.4160, -61.9043) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            if(IbizaTicket[playerid] <= 1)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -310,7 +310,7 @@ YCMD:wyjdz(playerid, params[], help)
         //wejscia SUPERVIP
         else if(PlayerToPoint(1.5, playerid, 426.7242, -1834.9066, -65.2102) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 2)
+            if(IbizaTicket[playerid] <= 2)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -322,7 +322,7 @@ YCMD:wyjdz(playerid, params[], help)
         }
         else if(PlayerToPoint(1.5, playerid, 221.530426, -1546.261352, -15.997495) && GetPlayerVirtualWorld(playerid) == 25)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 2)
+            if(IbizaTicket[playerid] <= 2)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {

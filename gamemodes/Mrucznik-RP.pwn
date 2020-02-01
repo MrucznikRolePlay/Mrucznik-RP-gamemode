@@ -117,7 +117,6 @@ native gpci (playerid, serial [], len);
 
 //do implementacji w g³ówny kod (mo¿liwie w modu³y)
 #include "system\doimplementacji\vinylscript.pwn"
-#include "system\doimplementacji\ibizascript.pwn"
 
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"

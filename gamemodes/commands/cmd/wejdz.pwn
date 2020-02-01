@@ -268,7 +268,7 @@ YCMD:wejdz(playerid, params[], help)
         //wejscie glowne, na bilet.
         else if(PlayerToPoint(1.5, playerid, 395.9647, -1811.1703, 7.8789) && GetPlayerVirtualWorld(playerid) == 21)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] == 0)
+            if(IbizaTicket[playerid] == 0)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -298,7 +298,7 @@ YCMD:wejdz(playerid, params[], help)
         //wejscia VIP
         else if(PlayerToPoint(1.5, playerid, 425.9001, -1854.8367, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            if(IbizaTicket[playerid] <= 1)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -312,7 +312,7 @@ YCMD:wejdz(playerid, params[], help)
         }
         else if(PlayerToPoint(1.5, playerid, 408.6968, -1855.0348, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            if(IbizaTicket[playerid] <= 1)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -326,7 +326,7 @@ YCMD:wejdz(playerid, params[], help)
         }
         else if(PlayerToPoint(1.5, playerid, 408.8490, -1835.8851, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            if(IbizaTicket[playerid] <= 1)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -340,7 +340,7 @@ YCMD:wejdz(playerid, params[], help)
         }
         else if(PlayerToPoint(1.5, playerid, 403.3954,-1843.4607,-65.5105) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 1)
+            if(IbizaTicket[playerid] <= 1)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -355,7 +355,7 @@ YCMD:wejdz(playerid, params[], help)
         //wejscia SUPERVIP
         else if(PlayerToPoint(1.5, playerid, 424.0322, -1837.0964, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 2)
+            if(IbizaTicket[playerid] <= 2)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
@@ -369,7 +369,7 @@ YCMD:wejdz(playerid, params[], help)
         }
         else if(PlayerToPoint(1.5, playerid, 422.2131, -1831.5657, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
         {
-            if(PlayerInfo[playerid][pBiletIbiza] <= 2)
+            if(IbizaTicket[playerid] <= 2)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {

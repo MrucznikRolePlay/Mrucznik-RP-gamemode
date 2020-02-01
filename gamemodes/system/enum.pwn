@@ -1452,8 +1452,7 @@ enum pInfo
 	pLiderValue,
 	pUniform,
 	pAJreason[MAX_AJ_REASON],
-	pPodPW,
-	pBiletIbiza
+	pPodPW
 };
 enum StringData
 {
