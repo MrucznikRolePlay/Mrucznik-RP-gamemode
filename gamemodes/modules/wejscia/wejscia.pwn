@@ -307,6 +307,10 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		}
 		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
 	}
+	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
+	{
+		GameTextForPlayer(playerid, "~w~UID 17 CHECK", 5000, 1);
+	}
 	return 0; 
 }
 Sprawdz_UID_Wychodzenie(playerid, Check_ID)
