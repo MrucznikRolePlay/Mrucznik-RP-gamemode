@@ -73,6 +73,7 @@ YCMD:wrzuc(playerid, params[], help)
     		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
             sendTipMessage(playerid, "Po trzech minutach osoba zostanie rozwi¹zana!");
             sendTipMessage(person, "Po trzech minutach zostaniesz rozwi¹zany!");
+			SetPlayerChatBubble(person, " ", 0xFF0000FF, 70.0, 1000);
     		return 1;
     	}
     	else
