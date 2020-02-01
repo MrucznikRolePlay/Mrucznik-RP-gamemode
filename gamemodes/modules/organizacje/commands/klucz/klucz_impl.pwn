@@ -25,6 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_klucz_Impl(playerid, giveplayerid)
 {
+    new var[128];
     if(!GetPlayerOrg(playerid) == FAMILY_SEKTA)
     {
         noAccessMessage(playerid);
