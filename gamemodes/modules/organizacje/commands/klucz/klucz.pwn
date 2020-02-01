@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   klucz                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,15 +27,46 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "klucz\klucz.pwn"
-
+#include "klucz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_klucz()
 {
-    command_klucz();
+    new command = Command_GetID("klucz");
+
+    //aliases
+    Command_AddAlt(command, "dajklucz");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:klucz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda nadaj¹ca klucz do tajnego przejœcia");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /klucz [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_klucz_Impl(playerid, giveplayerid);
 }
