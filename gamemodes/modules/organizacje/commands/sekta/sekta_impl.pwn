@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   klucz                                                   //
+//                                                   sekta                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -23,24 +23,34 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_klucz_Impl(playerid, giveplayerid)
+command_sekta_Impl(playerid, opcja[24], giveplayerid)
 {
-    new var[128];
     if(GetPlayerOrg(playerid) == FAMILY_SEKTA && PlayerInfo[playerid][pRank] >= 1)
     {
-        if(SektaKey[giveplayerid] == 0)
-        {
-            format(var, sizeof(var), "Da³eœ klucz do wrot %s", GetNick(giveplayerid));
-            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
-            sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, "Otrzyma³eœ klucz od wrot.");
-            SektaKey[giveplayerid] = 1;
+        if(strcmp(opcja,"klucz",true) == 0)
+		{
+            if(SektaKey[giveplayerid] == 0)
+            {
+                format(var, sizeof(var), "Da³eœ klucz do wrot %s", GetNick(giveplayerid));
+                sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+                sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, "Otrzyma³eœ klucz do wrot.");
+                SektaKey[giveplayerid] = 1;
+            }
+            else
+            {
+                format(var, sizeof(var), "Zabra³eœ klucz do wrot %s", GetNick(giveplayerid));
+                sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+                sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, "Zabrano ci klucz do wrot.");
+                SektaKey[giveplayerid] = 0;
+            }
         }
-        else
-        {
-            format(var, sizeof(var), "Zabra³eœ klucz do wrot %s", GetNick(giveplayerid));
-            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
-            sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, "Zabrano ci klucz od wrot.");
-            SektaKey[giveplayerid] = 0;
+        if(strcmp(opcja,"wepchnij",true) == 0)
+		{
+            sendTipMessage(playerid, "komenda wepchnij");
+        }
+        if(strcmp(opcja,"wypusc",true) == 0)
+		{
+            sendTipMessage(playerid, "komenda wypusc");
         }
     }
     else

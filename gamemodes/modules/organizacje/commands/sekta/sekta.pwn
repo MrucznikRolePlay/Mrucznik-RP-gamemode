@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   klucz                                                   //
+//                                                   sekta                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,15 +28,14 @@
 
 
 //-------<[ include ]>-------
-#include "klucz_impl.pwn"
+#include "sekta_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_klucz()
+command_sekta()
 {
-    new command = Command_GetID("klucz");
+    new command = Command_GetID("sekta");
 
     //aliases
-    Command_AddAlt(command, "dajklucz");
     
 
     //permissions
@@ -48,18 +47,18 @@ command_klucz()
 }
 
 //-------<[ command ]>-------
-YCMD:klucz(playerid, params[], help)
+YCMD:sekta(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Komenda nadaj¹ca klucz do tajnego przejœcia");
+        sendTipMessage(playerid, "Komenda zarz¹dzaj¹ca sekt¹");
         return 1;
     }
     //fetching params
-    new giveplayerid;
-    if(sscanf(params, "r", giveplayerid))
+    new opcja[24], giveplayerid;
+    if(sscanf(params, "s[24]r", opcja, giveplayerid))
     {
-        sendTipMessage(playerid, "U¿yj /klucz [Nick/ID] ");
+        sendTipMessage(playerid, "U¿yj /sekta [klucz, wepchnij, wypusc] [Nick/ID] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -68,5 +67,5 @@ YCMD:klucz(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_klucz_Impl(playerid, giveplayerid);
+    return command_sekta_Impl(playerid, opcja, giveplayerid);
 }
