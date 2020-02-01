@@ -74,7 +74,7 @@ YCMD:goto(playerid, params[], help)
 					{
 						Spectate[playerid] = INVALID_PLAYER_ID;
 					}
-					GetPlayerPosEx(plo, plocx, plocy, plocz);
+					GetPlayerPos(plo, plocx, plocy, plocz);
 					SetPlayerInterior(playerid, GetPlayerInterior(plo));
 					SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(plo));
 					if(PlayerInfo[plo][pInt] > 0)
@@ -94,7 +94,7 @@ YCMD:goto(playerid, params[], help)
 					}
 					else
 					{
-						SetPlayerPos(playerid,plocx,plocy+2, plocz);
+						SetPlayerPosEx(playerid,plocx,plocy+2, plocz);
 					}
 					_MruAdmin(playerid, "Zosta³eœ teleportowany!");
 				}
