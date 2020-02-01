@@ -49,7 +49,7 @@ YCMD:wrzuc(playerid, params[], help)
     	if(pobity[person] >= 1 || PlayerInfo[person][pBW] > 0 || PlayerInfo[person][pInjury] > 0)
         {
     		if (GetDistanceBetweenPlayers(playerid,person) > 5) return sendErrorMessage(playerid, "Gracz nie jest w pobli¿u.");
-
+			ZdejmijBW(person);
             TogglePlayerControllable(person, 1);
     		new Float:pos[6];
     		GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
