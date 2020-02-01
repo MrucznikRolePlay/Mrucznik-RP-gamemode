@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   klucz                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,26 +16,35 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sanda³
+// Data utworzenia: 02.02.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "klucz\klucz.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_klucz_Impl(playerid, giveplayerid)
 {
-    command_klucz();
-    
+    if(!GetPlayerOrg(playerid) == FAMILY_SEKTA)
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
+    if(SektaKey[giveplayerid] == 0)
+    {
+        format(var, sizeof(var), "Da³eœ klucz do wrot %s", GetNick(giveplayerid));
+        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+        sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, "Otrzyma³eœ klucz od wrot.");
+        SektaKey[giveplayerid] = 1;
+    }
+    else
+    {
+        format(var, sizeof(var), "Zabra³eœ klucz do wrot %s", GetNick(giveplayerid));
+        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+        sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, "Zabrano ci klucz od wrot.");
+        SektaKey[giveplayerid] = 0;
+    }
+    return 1;
 }
+
+//end

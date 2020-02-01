@@ -309,7 +309,11 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
 	{
-		GameTextForPlayer(playerid, "~w~UID 17 CHECK", 5000, 1);
+		if(!GetPlayerOrg(playerid) == FAMILY_SEKTA && SektaKey[playerid] == 0) 
+    	{
+			return 1;
+		}
+		GameTextForPlayer(playerid, "~w~by~n~Rozalka & Deduir", 5000, 1);
 	}
 	return 0; 
 }

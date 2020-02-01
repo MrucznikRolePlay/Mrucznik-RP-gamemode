@@ -8738,6 +8738,11 @@ Config_FamilyScript()
             FAMILY_FDU = id;
             printf("FAMILY_FDU = %d", FAMILY_FDU);
         }
+		if(strcmp(nazwa, "FAMILY_SEKTA") == 0)
+        {
+            FAMILY_SEKTA = id;
+            printf("FAMILY_SEKTA = %d", FAMILY_SEKTA);
+        }
     }
     mysql_free_result();
 }
