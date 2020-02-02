@@ -44,7 +44,7 @@ hook OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y, F
 			GraffitiInfo[f][YYpos] = ry;
 			GraffitiInfo[f][ZYpos] = rz;
             GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
-            DestroyDynamicObject(pGraffiti[playerid]);
+            //DestroyDynamicObject(pGraffiti[playerid]);
 			DeletePVar(playerid,"GraffitiCreating");
         }
     }
@@ -53,6 +53,7 @@ hook OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y, F
         if( GetPVarInt(playerid, "GraffitiCreating") == 1 )
         {
             DestroyDynamicObject(pGraffiti[playerid]);
+			GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
 			DeletePVar(playerid,"GraffitiCreating");
         }
     }
@@ -66,11 +67,13 @@ stock graffiti_GetNewID(playerid)
 stock graffiti_CreateGraffiti(playerid)
 {
 	new Float:PlayerPos[3];
+	SetPVarInt(playerid, "GraffitiCreating", 1);
 	GetPlayerPos(playerid, PlayerPos[0], PlayerPos[1], PlayerPos[2]);
 	pGraffiti[playerid] = CreateDynamicObject(19482, PlayerPos[0], PlayerPos[1], PlayerPos[2], 0.0, 0.0, 0.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid, 200);
-    SetDynamicObjectMaterialText(pGraffiti[playerid], 0, Graffiti_Text[playerid], OBJECT_MATERIAL_SIZE_256x256, "Diploma", 26, 0, 0xFFFFFF, 0, 1);
-    EditDynamicObject(playerid, pGraffiti[playerid]);
-	SetPVarInt(playerid, "GraffitiCreating", 1);
+    SetDynamicObjectMaterialText(pGraffiti[playerid], 0, "Test", OBJECT_MATERIAL_SIZE_256x256, "Arial", 26, 0, 0xFFFFFF, 0, 1);
+	sendTipMessage(playerid, Graffiti_Text[playerid]);
+	sendTipMessage(playerid, Graffiti_Color[playerid]);
+	EditDynamicObject(playerid, pGraffiti[playerid]);
 	return 1;
 }
 graffiti_ZerujZmienne(playerid)
