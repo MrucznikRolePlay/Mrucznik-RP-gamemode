@@ -1,20 +1,20 @@
 {
-    "name": "graffiti",
+    "name": "grafiti",
     "description": "System graffiti",
     "permissions": [
         "everyone"
     ],
     "author": "Sanda³",
     "aliases": [
-        "grafiti"
+        "graffiti"
     ],
     "parameters": [
         {
             "type": "string",
             "size": "24",
             "name": "opcja",
-            "description": "stworz, edytuj, usun, sprawdz"
+            "description": "stworz, edytuj, usun, namierz, sprawdz"
         }
     ],
-    "date": "01.02.2020"
+    "date": "02.02.2020"
 }

@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  graffiti                                                 //
+//                                                  grafiti                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,15 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "graffiti_impl.pwn"
+#include "grafiti_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_graffiti()
+command_grafiti()
 {
-    new command = Command_GetID("graffiti");
+    new command = Command_GetID("grafiti");
 
     //aliases
-    Command_AddAlt(command, "grafiti");
+    Command_AddAlt(command, "graffiti");
     
 
     //permissions
@@ -48,7 +48,7 @@ command_graffiti()
 }
 
 //-------<[ command ]>-------
-YCMD:graffiti(playerid, params[], help)
+YCMD:grafiti(playerid, params[], help)
 {
     if (help)
     {
@@ -59,10 +59,10 @@ YCMD:graffiti(playerid, params[], help)
     new opcja[24];
     if(sscanf(params, "s[24]", opcja))
     {
-        sendTipMessage(playerid, "U¿yj /graffiti [stworz, edytuj, usun, sprawdz] ");
+        sendTipMessage(playerid, "U¿yj /grafiti [stworz, edytuj, usun, namierz, sprawdz] ");
         return 1;
     }
     
     //command body
-    return command_graffiti_Impl(playerid, opcja);
+    return command_grafiti_Impl(playerid, opcja);
 }
