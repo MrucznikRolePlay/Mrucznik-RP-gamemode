@@ -70,9 +70,11 @@ stock graffiti_CreateGraffiti(playerid)
 	SetPVarInt(playerid, "GraffitiCreating", 1);
 	GetPlayerPos(playerid, PlayerPos[0], PlayerPos[1], PlayerPos[2]);
 	pGraffiti[playerid] = CreateDynamicObject(19482, PlayerPos[0], PlayerPos[1], PlayerPos[2], 0.0, 0.0, 0.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid, 200);
-    SetDynamicObjectMaterialText(pGraffiti[playerid], 0, "Test", OBJECT_MATERIAL_SIZE_256x256, "Arial", 26, 0, 0xFFFFFF, 0, 1);
+    SetDynamicObjectMaterialText(pGraffiti[playerid], 0, "Test", OBJECT_MATERIAL_SIZE_256x256, "Arial", 26, 0, 0xFFFFFFFF, 0, 1);
 	sendTipMessage(playerid, Graffiti_Text[playerid]);
 	sendTipMessage(playerid, Graffiti_Color[playerid]);
+	sendTipMessage(playerid, pGraffiti[playerid]);
+	sendTipMessage(playerid, graffiti_GetNewID(playerid));
 	EditDynamicObject(playerid, pGraffiti[playerid]);
 	return 1;
 }
