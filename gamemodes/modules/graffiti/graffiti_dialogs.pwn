@@ -47,20 +47,20 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
             {
  
-                case 0: Graffiti_Color[playerid] = 0;// CZARNY
+                case 0: Graffiti_Color[playerid] = "000000";// CZARNY
  
-                case 1: Graffiti_Color[playerid] = 1; // BIALY
+                case 1: Graffiti_Color[playerid] = "FFFFFF"; // BIALY
  
-                case 2: Graffiti_Color[playerid] = 2; // CZERWONY
+                case 2: Graffiti_Color[playerid] = "F81414"; // CZERWONY
  
-                case 3: Graffiti_Color[playerid] = 3; // ZIELONY
+                case 3: Graffiti_Color[playerid] = "00FF22"; // ZIELONY
  
-                case 4: Graffiti_Color[playerid] = 4; // NIEBIESKI
+                case 4: Graffiti_Color[playerid] = "00CED1"; // NIEBIESKI
  
-                case 5: Graffiti_Color[playerid] = 5;  // SZARY
+                case 5: Graffiti_Color[playerid] = "C3C3C3";  // SZARY
  
             }
-			//kod na tworzenie graffiti
+			graffiti_CreateGraffiti(playerid);
 		}
 		else return GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
 	}
