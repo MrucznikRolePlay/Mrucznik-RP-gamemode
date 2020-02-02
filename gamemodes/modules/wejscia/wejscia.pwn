@@ -309,12 +309,10 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
 	{
-		if(SektaKey[playerid] == 0) 
+		if(GetPlayerOrg(playerid) == FAMILY_SEKTA) return 0;
+		else if(SektaKey[playerid] == 0) 
     	{
-			if(GetPlayerOrg(playerid) != FAMILY_SEKTA) 
-			{	
-				return 1;
-			}
+			return 1;
 		}
 	}
 	return 0; 

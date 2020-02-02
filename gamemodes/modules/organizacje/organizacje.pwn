@@ -24,8 +24,6 @@
 */
 
 //
-
-//-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
 organizacje_clearCache(playerid)
 {
@@ -65,6 +63,7 @@ organizacje_wepchnijSekta(playerid, giveplayerid)
         format(var, sizeof(var), "* %s og³uszy³(a) i wrzuci³(a) do celi %s.", GetNick(playerid) ,GetNick(giveplayerid));
         ProxDetector(20.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		SektaUwieziony[giveplayerid] = 1;
+		Wchodzenie(giveplayerid);
     }
     else
     {
