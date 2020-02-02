@@ -311,9 +311,11 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	{
 		if(SektaKey[playerid] == 0) 
     	{
-			if(GetPlayerOrg(playerid) != FAMILY_SEKTA ) return 1;
+			if(GetPlayerOrg(playerid) != FAMILY_SEKTA) 
+			{	
+				return 1;
+			}
 		}
-		if(GetPlayerVirtualWorld(playerid) == 0) GameTextForPlayer(playerid, "~w~by~n~~g~Rozalka & Deduir", 5000, 1);
 	}
 	return 0; 
 }

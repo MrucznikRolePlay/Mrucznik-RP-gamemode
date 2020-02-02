@@ -987,7 +987,7 @@ new antyHider[MAX_PLAYERS];
 new taxitest[MAX_PLAYERS];//Taxi Test
 new mechanikid[MAX_PLAYERS];//Mechanik w GUI
 new naprawiony[MAX_PLAYERS];//Napr
-new SektaKey[MAX_PLAYERS];
+
 
 new zawodnik[MAX_PLAYERS];//¯u¿el
 new wyscigz;//¿u¿el
@@ -1102,8 +1102,12 @@ ZerujZmienne(playerid)
 
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
+<<<<<<< HEAD
 	graffiti_clearCache(playerid);
 
+=======
+	organizacje_clearCache(playerid);
+>>>>>>> 5c184264... Implementacja kodu do module, dokonczenie /sekta
 	//z disconecta
 
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
@@ -1111,7 +1115,6 @@ ZerujZmienne(playerid)
     PlayerInfo[playerid][pDescLabel] = tmp_label;
 
     PlayerInfo[playerid][pDesc][0] = EOS;
-	SektaKey[playerid] = 0;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
 	komentator[playerid] = 0;//¯u¿el
