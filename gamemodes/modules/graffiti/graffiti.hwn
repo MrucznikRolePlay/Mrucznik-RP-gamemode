@@ -22,7 +22,23 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum gInfo
+{
+    gID,
+    gText[128],
+    gColor,
+    Float:Xpos,
+    Float:Ypos,
+    Float:Zpos,
+    Float:XYpos,
+    Float:YYpos,
+    Float:ZYpos,
+    pCreator[40],
+    pUID,
+}
 //-----------------<[ Zmienne: ]>-------------------
+new Graffiti_Info[GRAFFITI_MAX][gInfo];
+new Graffiti_Color[MAX_PLAYERS];
+new Graffiti_Text[MAX_PLAYERS][128];
 //------------------<[ Forwardy: ]>--------------------
-
 //end
