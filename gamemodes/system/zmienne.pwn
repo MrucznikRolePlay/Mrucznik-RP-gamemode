@@ -1102,12 +1102,8 @@ ZerujZmienne(playerid)
 
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
-<<<<<<< HEAD
 	graffiti_clearCache(playerid);
-
-=======
 	organizacje_clearCache(playerid);
->>>>>>> 5c184264... Implementacja kodu do module, dokonczenie /sekta
 	//z disconecta
 
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
