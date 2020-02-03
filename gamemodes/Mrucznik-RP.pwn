@@ -1800,11 +1800,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
     }
 
-    if(ZoneAttacker[playerid])
-    {
-        OnPlayerLeaveGangZone(playerid, GetPVarInt(playerid, "zoneid"));
-    }
-    else if(ZoneDefender[playerid])
+    if(ZoneAttacker[playerid] || ZoneDefender[playerid])
     {
         OnPlayerLeaveGangZone(playerid, GetPVarInt(playerid, "zoneid"));
     }
@@ -1856,7 +1852,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 
-		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		if(GetPlayerAdminDutyStatus(playerid) == 1 || GetPlayerAdminDutyStatus(killerid) == 1)
 		{
 			PlayerKilledByAdmin[playerid] = 1;
 		}

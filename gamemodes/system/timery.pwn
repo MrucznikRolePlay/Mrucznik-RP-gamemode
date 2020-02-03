@@ -975,6 +975,7 @@ public MainTimer()
     }
     if(TICKS_1Min == 59)
     {
+		CJSkinCheck();
         SyncUp();
     }
     if(TICKS_5Min == (60*5)-1)
@@ -3240,6 +3241,16 @@ public Fillup()
 	return 1;
 }
 
+public CJSkinCheck()
+{
+	foreach(new j : Player)
+	{
+		if(GetPlayerSkin(j) == 0)
+		{
+			SetPlayerSkinEx(j, 299);
+		}
+	}
+}
 //11.06.2014
 public CarCheck()
 {

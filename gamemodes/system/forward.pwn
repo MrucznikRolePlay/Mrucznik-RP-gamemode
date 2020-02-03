@@ -24,6 +24,7 @@ forward CustomPickups();
 forward IdleKick();
 forward Fillup();
 forward CheckGas();
+forward CJSkinCheck();
 forward CarCheck();
 forward KartingEnded();
 forward StartKarting();
