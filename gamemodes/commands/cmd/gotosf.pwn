@@ -43,7 +43,7 @@ YCMD:gotosf(playerid, params[], help)
 			}
 			else
 			{
-				SetPlayerPosEx(playerid, -1417.0,-295.8,14.1);
+				SetPlayerPos(playerid, -1417.0,-295.8,14.1);
 			}
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 			PlayerInfo[playerid][pInt] = 0;

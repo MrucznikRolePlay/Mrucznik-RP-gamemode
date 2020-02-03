@@ -45,7 +45,7 @@ YCMD:kolejka(playerid, params[], help)
             //And teleport
             SetPVarInt(playerid, "kolejka", 1);
             SetPlayerVirtualWorld(playerid, 5000);
-            SetPlayerPosEx(playerid,3841.4478, -562.6168, 2.7752);
+            SetPlayerPos(playerid,3841.4478, -562.6168, 2.7752);
             sendTipMessageEx(playerid, 0x75C8B7FF, "Witamy! Proszê ustawiæ siê w kolejce. Aby wyjœæ wpisz ponownie /kolejka");
             Wchodzenie(playerid);
         }

@@ -16,7 +16,7 @@ NowaWybieralka_Setup(playerid)
 	SetPlayerInterior(playerid, 1);
 	SetPlayerVirtualWorld(playerid, 5151+playerid);
 
-	SetPlayerPosEx(playerid, 208.3876,-34.8742,1001.9297);
+	SetPlayerPos(playerid, 208.3876,-34.8742,1001.9297);
 	SetPlayerFacingAngle(playerid, 138.8926);
 
 	SetPlayerCameraPos(playerid, 206.288314, -38.114028, 1002.229675);
@@ -140,7 +140,7 @@ NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 	    	PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 	        SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 	        SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
-	    	SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
+	    	SetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	        Wchodzenie(playerid);
 	        sendTipMessageEx(playerid, COLOR_P@, sprintf("Kupi³eœ skin %d za $5000", PlayerInfo[playerid][pSkin]));
 	        ZabierzKase(playerid, 5000);

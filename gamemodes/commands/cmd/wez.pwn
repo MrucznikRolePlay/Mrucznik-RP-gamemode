@@ -30,7 +30,7 @@
 
 YCMD:wez(playerid, params[], help)
 {
-	new string[128];
+	new string[144];
 
     if(IsPlayerConnected(playerid))
     {
@@ -38,7 +38,7 @@ YCMD:wez(playerid, params[], help)
 		new ammount=0;
 		if( sscanf(params, "s[16]D", x_job, ammount))
 		{
-			SendClientMessage(playerid, COLOR_WHITE, "|__________________ Get __________________|");
+			SendClientMessage(playerid, COLOR_WHITE, "|__________________ WeŸ __________________|");
 			SendClientMessage(playerid, COLOR_WHITE, "U¿yj /wez [nazwa]");
 	  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Dragi, Kanister, Gasnice");
 			SendClientMessage(playerid, COLOR_GREEN, "|_________________________________________|");
@@ -114,23 +114,14 @@ YCMD:wez(playerid, params[], help)
 		{
 			if (PlayerInfo[playerid][pMember] == 4)
 			{
-				new newcar=0, Float:dis=3.5, Float:x, Float:y, Float:z, Float:currdist;
-				for(new i=0;i<MAX_VEHICLES;i++)
-				{
-					GetVehiclePos(i, x, y, z);
-					if((currdist = GetPlayerDistanceFromPoint(playerid, x, y, z)) < dis)
-					{
-						dis = currdist;
-						newcar = i;
-					}
-				}
-				if(newcar != 0)
+				new vehicleid = GetClosestCar(playerid, 3.5);
+				if(vehicleid != -1)
     			{
-					if(Car_GetOwnerType(newcar) == CAR_OWNER_FRACTION && (GetVehicleModel(newcar) == 407 || GetVehicleModel(newcar) == 544))// wszystkie auta frakcji
+					if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && (GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544))// wszystkie auta frakcji
 					{
-						if(Car_GetOwner(newcar) == GetPlayerFraction(playerid))
+						if(Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))
 						{
-							format(string, 256, "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***",GetNick(playerid, true), params);
+							format(string, sizeof(string), "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***", GetNick(playerid, true));
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							GivePlayerWeapon(playerid, 42, 9999);
 	                     	PlayerInfo[playerid][pGun9] = 42;
@@ -145,7 +136,8 @@ YCMD:wez(playerid, params[], help)
 					}
 					else
 					{
-						sendTipMessage(playerid, "Ten pojazd nie jest wozem stra¿ackim ERS.");
+						format(string, sizeof(string), "Ten pojazd nie jest wozem stra¿ackim ERS. (%s)", VehicleNames[GetVehicleModel(vehicleid)-400]);
+						sendTipMessage(playerid, string);
 						return 1;
 					}
 				}

@@ -97,7 +97,7 @@ YCMD:aresztuj(playerid, params[], help)
 									PlayerInfo[playa][pArrested] += 1;
 									SetPlayerVirtualWorld(playa, 1);
 								    new losuj= random(sizeof(Cela));
-									SetPlayerPosEx(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+									SetPlayerPos(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 									TogglePlayerControllable(playa, 0);
                                     Wchodzenie(playa);
 									JailPrice[playa] = bail;

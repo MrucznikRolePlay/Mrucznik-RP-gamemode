@@ -47,11 +47,6 @@ GetTickDiff(newtick, oldtick)
 	return newtick - oldtick;
 }
 
-SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
-{
-    SetPlayerPos(playerid,X,Y,Z);
-}
-
 PutPlayerInVehicleEx(playerid,vehicleid,seatid)
 {
     PutPlayerInVehicle(playerid,vehicleid,seatid);
@@ -65,7 +60,7 @@ RemovePlayerFromVehicleEx(playerid)
     {
         new Float:x, Float:y, Float:z;
         GetPlayerPos(playerid, x, y, z);
-        SetPlayerPosEx(playerid, x, y, z+0.7);
+        SetPlayerPos(playerid, x, y, z+0.7);
     }
     RemovePlayerFromVehicle(playerid);
 }
@@ -242,7 +237,7 @@ JailDeMorgan(playerid)
 	new losuj= random(sizeof(SpawnStanowe));
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPosEx(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
+	SetPlayerPos(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
 	SetCameraBehindPlayer(playerid);
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
@@ -255,7 +250,7 @@ JailDeMorgan(playerid)
 UnJailDeMorgan(playerid)
 {
 	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPosEx(playerid, 593.1899,-1494.0863,82.1648);
+	SetPlayerPos(playerid, 593.1899,-1494.0863,82.1648);
 	Wchodzenie(playerid);
 	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;
@@ -1351,7 +1346,7 @@ public OgladanieDOM(playerid){
 new deem = PlayerInfo[playerid][pDomWKJ];
 if(PlayerInfo[playerid][pDomWKJ] != 0)
 {
-	SetPlayerPosEx(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
+	SetPlayerPos(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 0);
 	PlayerInfo[playerid][pDomWKJ] = 0;
@@ -1505,17 +1500,7 @@ stock IsVehicleInRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
     if(DistantaCar <= range) return 1;
     return 0;
 } 
-IsVehicleInCarPark(vehicleid)
-{
-	for(new i; i <= COUNT_CARPARKS; i++)
-	{
-		if(IsVehicleInRangeOfPoint(vehicleid, carParks[i][3], carParks[i][0], carParks[i][1], carParks[i][2]))
-		{
-			return true;
-		}
-	}
-	return false; 
-}
+
 SetAntyCheatForPlayer(playerid, valueCode)
 {
 	SetPVarInt(playerid, "AntyCheatOff", valueCode);
@@ -1774,7 +1759,7 @@ HandlePlayerItemSelection(playerid, selecteditem)
     new Float:x, Float:y, Float:z, Float:a;
     GetPlayerPos(playerid, x, y, z);
     GetPlayerFacingAngle(playerid, a);
-    SetPlayerPosEx(playerid, x, y, z+0.2);
+    SetPlayerPos(playerid, x, y, z+0.2);
     x+=2*floatsin(-a, degrees);
     y+=2*floatcos(-a, degrees);
 
@@ -1964,7 +1949,7 @@ public PaintballEnded()//nowe domy biznes wa¿ne
 	            }
 	            ResetPlayerWeapons(i);
 	            PlayerPaintballing[i] = 0;
-	            SetPlayerPosEx(i, 1310.126586,-1367.812255,13.540800);
+	            SetPlayerPos(i, 1310.126586,-1367.812255,13.540800);
 	        }
 		}
 	}
@@ -3880,7 +3865,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		}
 		PlayerInfo[playerid][pLocal] = local;
 		SprawdzMuzyke(playerid);
-		SetPlayerPosEx(playerid, x2, y2, z2);
+		SetPlayerPos(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, vw);
 		SetPlayerWeather(playerid, 3);
 		SetPlayerInterior(playerid, interior);
@@ -3919,7 +3904,7 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		PlayerInfo[playerid][pLocal] = local;
 		SetPlayerTime(playerid, ServerTime, 0); 
 		SetPlayerWeather(playerid, 2);
-		SetPlayerPosEx(playerid, x2, y2, z2);
+		SetPlayerPos(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, 0);
 		SetPlayerInterior(playerid, 0);
 		Wchodzenie(playerid);
@@ -3944,7 +3929,7 @@ Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:t
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
-    	SetPlayerPosEx(playerid, x2, y2, z2);
+    	SetPlayerPos(playerid, x2, y2, z2);
 	 	SetPlayerVirtualWorld(playerid, 235);
         Wchodzenie(playerid);
 		
@@ -3960,7 +3945,7 @@ Wyjdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:t
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
-    	SetPlayerPosEx(playerid, x2, y2, z2);
+    	SetPlayerPos(playerid, x2, y2, z2);
 	 	SetPlayerVirtualWorld(playerid, 0);
         Wchodzenie(playerid);
 		
@@ -6471,7 +6456,7 @@ KupowanieDomu(playerid, dom, platnosc)
 		DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1239, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
 	    Dom[dom][hIkonka] = 0;
-	    SetPlayerPosEx(playerid, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]);
+	    SetPlayerPos(playerid, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]);
 	    SetPlayerInterior(playerid, Dom[dom][hInterior]);
 	    SetPlayerVirtualWorld(playerid, Dom[dom][hVW]);
 	    PlayerInfo[playerid][pDomWKJ] = dom;
@@ -6903,7 +6888,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	if(model == 484)//jacht
 	{
 		SetPlayerInterior(playerid, 9);
-	    SetPlayerPosEx(playerid, 1935.6661376953, 1360.8430175781, 12313.875976563);
+	    SetPlayerPos(playerid, 1935.6661376953, 1360.8430175781, 12313.875976563);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~w~Witamy na ~b~jachcie", 5000, 1);
@@ -6911,7 +6896,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 519)//shamal
 	{
 		SetPlayerInterior(playerid, 9);
-	    SetPlayerPosEx(playerid, 1074.3032226563, -1843.8029785156, 10657.265625);
+	    SetPlayerPos(playerid, 1074.3032226563, -1843.8029785156, 10657.265625);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~odrzutowcu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6919,13 +6904,13 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 553)//nevada
 	{
         SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 1.808619,32.384357,1199.593750);
+	    SetPlayerPos(playerid, 1.808619,32.384357,1199.593750);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~nevadzie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 409)//limuzyna
 	{
 		SetPlayerInterior(playerid, 9);
-	    SetPlayerPosEx(playerid, 2985.498046875, 1866.7770996094, 371.35998535156);
+	    SetPlayerPos(playerid, 2985.498046875, 1866.7770996094, 371.35998535156);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~limuzynie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6933,14 +6918,14 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 416)//karetka
 	{
 		SetPlayerVirtualWorld(playerid, 32);
-	    SetPlayerPosEx(playerid, 1079.5173, -1309.6299, 22.0575);
+	    SetPlayerPos(playerid, 1079.5173, -1309.6299, 22.0575);
         Wchodzenie(playerid);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Skalpel ~r~w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 508)//journey
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 2512.8455,-1729.0057,778.6371);
+	    SetPlayerPos(playerid, 2512.8455,-1729.0057,778.6371);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6948,7 +6933,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 431)//autobus
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 1450.3420,-1779.3888,3.6388);
+	    SetPlayerPos(playerid, 1450.3420,-1779.3888,3.6388);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zapinaj Pasy - Jedziemy do piekla!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6957,7 +6942,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 427)//Enforcer pd
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 1479.1534,-1617.7773,-4.2809);
+	    SetPlayerPos(playerid, 1479.1534,-1617.7773,-4.2809);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Lap za bron!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6966,7 +6951,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 570)//Wagony KT
 	{
 			SetPlayerInterior(playerid, 1);
-			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
+			SetPlayerPos(playerid, 1708.72290, -1953.05688, -17.18891);
 			Wchodzenie(playerid);
 			TogglePlayerControllable(playerid, 0);
 			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6977,7 +6962,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 582)//sanvan
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 739.3749,-1365.0778,7.4080);
+	    SetPlayerPos(playerid, 739.3749,-1365.0778,7.4080);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Mikrofon w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6994,44 +6979,44 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	model = GetVehicleModel(vehicleid);
     if(model == 484)//jacht
 	{
-	    SetPlayerPosEx(playerid, vehx, vehy, vehz+2);
+	    SetPlayerPos(playerid, vehx, vehy, vehz+2);
 	}
 	else if(model == 519)//shamal
 	{
-	    SetPlayerPosEx(playerid, vehx-0.5, vehy-2, vehz);
+	    SetPlayerPos(playerid, vehx-0.5, vehy-2, vehz);
 	}
 	else if(model == 553)//nevada
 	{
-	    SetPlayerPosEx(playerid, vehx-7, vehy, vehz);
+	    SetPlayerPos(playerid, vehx-7, vehy, vehz);
 	}
 	else if(model == 409)//limuzyna
 	{
-	    SetPlayerPosEx(playerid, vehx-2, vehy-1, vehz);
+	    SetPlayerPos(playerid, vehx-2, vehy-1, vehz);
 	}
 	else if(model == 416)//karetka
 	{
-		SetPlayerPosEx(playerid, vehx-1, vehy-1, vehz);
+		SetPlayerPos(playerid, vehx-1, vehy-1, vehz);
 	}
 	else if(model == 508)//journey
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		SetPlayerPos(playerid, vehx, vehy+0.23, vehz);
 	}
 	else if(model == 570)//kt 
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+3, vehz);
+		SetPlayerPos(playerid, vehx, vehy+3, vehz);
 	
 	}
 	else if(model == 427)
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		SetPlayerPos(playerid, vehx, vehy+0.23, vehz);
 	}
 	else if(model == 431)
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		SetPlayerPos(playerid, vehx, vehy+0.23, vehz);
 	}
 	else if(model == 582)//sanvan
 	{
-	    SetPlayerPosEx(playerid, vehx-1, vehy-1, vehz);
+	    SetPlayerPos(playerid, vehx-1, vehy-1, vehz);
 	}
 	GameTextForPlayer(playerid, "~w~Opusciles pojazd", 5000, 1);
     SetPlayerVirtualWorld(playerid, 0);
@@ -8176,7 +8161,7 @@ SetCamBack(playerid)
     {
 		new Float:plocx,Float:plocy,Float:plocz;
 		GetPlayerPos(playerid, plocx, plocy, plocz);
-		SetPlayerPosEx(playerid, -1863.15, -21.6598, 1060.15); // Warp the player
+		SetPlayerPos(playerid, -1863.15, -21.6598, 1060.15); // Warp the player
 		SetPlayerInterior(playerid,14);
 	}
 }
@@ -8336,7 +8321,7 @@ public OPCLogin(playerid)
     //format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
     //PlayAudioStreamForPlayer(playerid, str);
 	
-    /*SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
+    /*SetPlayerPos(playerid, 1868.1099, -1936.2098, -10.0);
     SetPlayerCameraPos(playerid, 1868.1099, -1936.2098, 48.0756);
     SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);*/
     SetPlayerVirtualWorld(playerid, 0);
@@ -8525,7 +8510,7 @@ ElevatorTravel(playerid, Float:x, Float:y, Float:z, vw, Float:face)
 
 public ElevatorTravelEND(playerid)
 {
-    SetPlayerPosEx(playerid, GetPVarFloat(playerid, "ElX"),GetPVarFloat(playerid, "ElY"), GetPVarFloat(playerid, "ElZ"));
+    SetPlayerPos(playerid, GetPVarFloat(playerid, "ElX"),GetPVarFloat(playerid, "ElY"), GetPVarFloat(playerid, "ElZ"));
     SetPlayerFacingAngle(playerid,GetPVarFloat(playerid, "ElFace"));
     SetCameraBehindPlayer(playerid);
     SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "ElVW"));
@@ -11978,7 +11963,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 1854.0327, -1845.7213, 32.9084, 1802.8463, -1853.9320, 24.3721, 12000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 1802.8463, -1853.9320, 24.3721, 1802.0990, -1854.0040, 24.4220, 11000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid, 1802.8463, -1853.9320, 0.0);
+            SetPlayerPos(playerid, 1802.8463, -1853.9320, 0.0);
             Streamer_UpdateEx(playerid, 1802.8463, -1853.9320, 0.0);
             lTime = 13000;
         }
@@ -11986,7 +11971,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 1597.6156, -1731.9628, 22.5997, 1481.4576, -1727.4557, 15.2575, 12000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 1481.4576, -1727.4557, 15.2575, 1481.4741, -1728.4609, 15.6023, 11000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid,1597.6156, -1731.9628, 0.0);
+            SetPlayerPos(playerid,1597.6156, -1731.9628, 0.0);
             Streamer_UpdateEx(playerid, 1597.6156, -1731.9628, 0.0);
             lTime = 12000;
         }
@@ -11994,7 +11979,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 1330.4507, -1423.9467, 69.1760, 1216.2252, -1343.8439, 18.0992, 15000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 1216.2252, -1343.8439, 18.0992, 1215.3202, -1343.4011, 18.0841, 14000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid, 1216.2252, -1343.8439, 0.0);
+            SetPlayerPos(playerid, 1216.2252, -1343.8439, 0.0);
             Streamer_UpdateEx(playerid, 1216.2252, -1343.8439, 0.0);
             lTime = 16000;
         }
@@ -12002,7 +11987,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 1890.8367, -2133.2148, 31.2670, 1801.7451, -2073.0071, 18.8819, 9000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 1801.7451, -2073.0071, 18.8819, 1800.7998, -2072.6538, 18.7769, 8000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid, 1801.7451, -2073.0071,0.0);
+            SetPlayerPos(playerid, 1801.7451, -2073.0071,0.0);
             Streamer_UpdateEx(playerid, 1801.7451, -2073.0071, 0.0);
             lTime = 10000;
         }
@@ -12010,7 +11995,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 2212.6924, -1750.6774, 15.7084, 2410.6738, -1750.8768, 15.7241, 15000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 2410.6738, -1750.8768, 15.7241, 2409.6650, -1750.8837, 15.7341, 12000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid, 2410.6738, -1750.8768, 0.0);
+            SetPlayerPos(playerid, 2410.6738, -1750.8768, 0.0);
             Streamer_UpdateEx(playerid, 2410.6738, -1750.8768, 0.0);
             lTime = 16000;
         }
@@ -12018,7 +12003,7 @@ public TourCamera(playerid, step)
         {
             SetPlayerCameraPos(playerid,421.1918, -1756.8279, 12.7905);
             SetPlayerCameraLookAt(playerid, 420.8176, -1757.7660, 12.7204);
-            SetPlayerPosEx(playerid, 421.1918, -1756.8279, 0.0);
+            SetPlayerPos(playerid, 421.1918, -1756.8279, 0.0);
             Streamer_UpdateEx(playerid, 421.1918, -1756.8279, 0.0);
         }
     }

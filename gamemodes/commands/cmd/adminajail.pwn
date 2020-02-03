@@ -91,7 +91,7 @@ YCMD:adminajail(playerid, params[], help)
 					PlayerInfo[playa][pJailTime] = money*60;
 					SetPlayerVirtualWorld(playa, 1000+playa);
 					PlayerInfo[playa][pMuted] = 1;
-					SetPlayerPosEx(playa, AJ_POSX, AJ_POSY, AJ_POSZ);
+					SetPlayerPos(playa, AJ_POSX, AJ_POSY, AJ_POSZ);
 					poscig[playa] = 0;
 					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ AJ %d minut, powód: %s", 
 						GetPlayerLogName(playerid),

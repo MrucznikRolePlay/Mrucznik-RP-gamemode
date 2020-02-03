@@ -53,7 +53,7 @@ YCMD:gotocar(playerid, params[], help)
 			}
 			else
 			{
-				SetPlayerPosEx(playerid, cwx2, cwy2, cwz2);
+				SetPlayerPos(playerid, cwx2, cwy2, cwz2);
 			}
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
 		}
