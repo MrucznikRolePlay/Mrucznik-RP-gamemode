@@ -3245,13 +3245,10 @@ public CJSkinCheck()
 {
 	foreach(new j : Player)
 	{
-		if(GetPlayerSkin(j) == 0)
+		if(GetPlayerSkin(j) == 0 && PlayerInfo[j][pAdmin] == 0)
 		{
-			if(PlayerInfo[j][pAdmin] == 0)
-			{
-				PlayerInfo[j][pSkin] = 299;
-				SetPlayerSkinEx(j, 299);
-			}
+			PlayerInfo[j][pSkin] = 299;
+			SetPlayerSkinEx(j, 299);
 		}
 	}
 }
