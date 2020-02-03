@@ -52,7 +52,7 @@ YCMD:poddajesie(playerid, params[], help)
 				JailPrice[playerid] = PoziomPoszukiwania[lowcap[playerid]]*16000;
 				WantLawyer[playerid] = 1;
 				new losuj= random(sizeof(Cela));
-				SetPlayerPosEx(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+				SetPlayerPos(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 				TogglePlayerControllable(playerid, 0);
                 Wchodzenie(playerid);
 				format(string, sizeof(string), "* %s podda³ siê, dostajesz %d nagrody za z³apanie ¿ywego przestêpcy",sendername, lowcak);

@@ -1,0 +1,11 @@
+{
+    "name": "kupbilet",
+    "description": "Komenda do wyswietlenia menu kupna biletu w Ibiza",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sanda³",
+    "aliases": [],
+    "parameters": [],
+    "date": "01.02.2020"
+}

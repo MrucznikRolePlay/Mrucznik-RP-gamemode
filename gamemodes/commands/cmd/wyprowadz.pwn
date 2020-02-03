@@ -42,7 +42,7 @@ YCMD:wyprowadz(playerid, params[], help)
 		if(GetPlayerOrg(id) == FAMILY_IBIZA) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie mo¿esz wyprowadziæ cz³onka klubu Ibiza");
 		SetPVarInt(id, "IbizaWejdz", 0);
 		SetPVarInt(id, "IbizaBilet", 0);
-		SetPlayerPosEx(id, 394.2784,-1805.9104,7.8302);
+		SetPlayerPos(id, 394.2784,-1805.9104,7.8302);
 		SetPlayerFacingAngle(id, 178.8095);
 		SetPlayerVirtualWorld(id, 0);
 		StopAudioStreamForPlayer(id);

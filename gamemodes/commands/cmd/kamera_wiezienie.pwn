@@ -54,7 +54,7 @@ YCMD:kamera_wiezienie(playerid, params[], help)
                     TogglePlayerControllable(playerid, 0);
                     SetPlayerInterior(playerid, 10);
                     PlayerInfo[playerid][pMuted] = 1;
-                    SetPlayerPosEx(playerid, 214.6996,121.2643,1008.2188);
+                    SetPlayerPos(playerid, 214.6996,121.2643,1008.2188);
                 }
 
                 if(number == 1) { SetPlayerCameraPos(playerid, 214.8968,114.7074,999.0156); SetPlayerCameraLookAt(playerid, 215.8725,110.4934,999.0156); } else if(number == 2) { SetPlayerCameraPos(playerid, 218.4975,114.4323,999.0156); SetPlayerCameraLookAt(playerid, 218.4825,110.1900,999.0156); } else if(number == 3) { SetPlayerCameraPos(playerid, 222.6395,114.3951,999.0156); SetPlayerCameraLookAt(playerid, 223.1496,110.0053,999.0156); } else if(number == 4) { SetPlayerCameraPos(playerid, 227.0445,114.3556,999.0156); SetPlayerCameraLookAt(playerid, 227.0232,109.7559,999.0156); } else if(number == 5) { SetPlayerCameraPos(playerid, 217.9721,119.7951,999.0156); SetPlayerCameraLookAt(playerid, 215.8725,110.4934,999.0156); } else if(number == 6)
@@ -69,7 +69,7 @@ YCMD:kamera_wiezienie(playerid, params[], help)
                     TogglePlayerControllable(playerid, 1);
                     SetCameraBehindPlayer(playerid);
                     PlayerInfo[playerid][pMuted] = 0;
-                    SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+                    SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
                     Wchodzenie(playerid);
                 }
             } else

@@ -65,7 +65,7 @@ YCMD:jail(playerid, params[], help)
                     SetPlayerInterior(playa, 0);
                     SetPlayerVirtualWorld(playa, 1);
                     new losuj= random(sizeof(Cela));
-                    SetPlayerPosEx(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+                    SetPlayerPos(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
                     format(string, sizeof(string), "Zosta³eœ uwiêziony na %s minut.   Kaucja: Niedostêpna", money);
                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                     Wchodzenie(playa);

@@ -184,7 +184,7 @@ ZespawnujGraczaBW(playerid)
 	format(string, sizeof(string), "Gracze z apteczk¹ mog¹ udzieliæ Ci pomocy medycznej za pomoc¹ (/apteczka). Zalecamy odgrywaæ odniesione obra¿enia.");
 	SendClientMessage(playerid, COLOR_WHITE, string);
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
-	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPlayerHealth(playerid, INJURY_HP);
 	return 1;
 }

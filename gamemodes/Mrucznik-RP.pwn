@@ -115,6 +115,9 @@ native gpci (playerid, serial [], len);
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
 
+//do implementacji w g³ówny kod (mo¿liwie w modu³y)
+#include "system\doimplementacji\vinylscript.pwn"
+
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"
 #include "old_modules\niceczlowiek\dynamicgui.pwn"
@@ -139,7 +142,6 @@ native gpci (playerid, serial [], len);
 //-------<[ Inne ]>-------
 #include "old_modules\inne\ibiza.inc"
 #include "old_modules\inne\external.pwn"
-
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
 
@@ -153,7 +155,7 @@ native gpci (playerid, serial [], len);
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
 #include "obiekty\actorsOnWorld.pwn"
-#include "obiekty\vinylscript.pwn"
+
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
@@ -610,7 +612,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		x = GetPVarFloat(playerid, "IbizaKameraX");
 		y = GetPVarFloat(playerid, "IbizaKameraY");
 		z = GetPVarFloat(playerid, "IbizaKameraZ");
-		SetPlayerPosEx(playerid, x, y, z);
+		SetPlayerPos(playerid, x, y, z);
 		SetPlayerVirtualWorld(playerid, 1);
 		SetCameraBehindPlayer(playerid);
         Wchodzenie(playerid);
@@ -954,7 +956,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
     {
         new Float:slx, Float:sly, Float:slz;
 		GetPlayerPos(playerid, slx, sly, slz);
-		SetPlayerPosEx(playerid, slx, sly, slz+0.1);
+		SetPlayerPos(playerid, slx, sly, slz+0.1);
 		ClearAnimations(playerid);
     }
 
@@ -991,7 +993,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
-			SetPlayerPosEx(playerid, slx, sly, slz+1);
+			SetPlayerPos(playerid, slx, sly, slz+1);
 			ClearAnimations(playerid);
 		}
 	}
@@ -1344,7 +1346,6 @@ public OnPlayerDisconnect(playerid, reason)
 		AdminDutyGodziny[playerid] = 0;
 		AdminDutyMinuty[playerid] = 0;
 		firstDutyAdmin[playerid] = 0; 
-		
 	}
 	if((PlayerInfo[playerid][pAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
 	|| (PlayerInfo[playerid][pNewAP] >= 1 && iloscPozaDuty[playerid] >= 1))//Gdy nie by³ na admin duty, ale wykonywa³ akcje
@@ -1614,7 +1615,7 @@ public OnPlayerDisconnect(playerid, reason)
 	        if(IsPlayerConnected(Boxer2))
 	        {
 	        	PlayerBoxing[Boxer2] = 0;
-	        	SetPlayerPosEx(Boxer2, 765.8433,3.2924,1000.7186);
+	        	SetPlayerPos(Boxer2, 765.8433,3.2924,1000.7186);
 	        	SetPlayerInterior(Boxer2, 5);
 	        	GameTextForPlayer(Boxer2, "~r~Walka przerwana", 5000, 1);
 			}
@@ -1624,7 +1625,7 @@ public OnPlayerDisconnect(playerid, reason)
 	        if(IsPlayerConnected(Boxer1))
 	        {
 	        	PlayerBoxing[Boxer1] = 0;
-	        	SetPlayerPosEx(Boxer1, 765.8433,3.2924,1000.7186);
+	        	SetPlayerPos(Boxer1, 765.8433,3.2924,1000.7186);
 	        	SetPlayerInterior(Boxer1, 5);
 	        	GameTextForPlayer(Boxer1, "~r~Walka przerwana", 5000, 1);
 			}
@@ -1798,11 +1799,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
     }
 
-    if(ZoneAttacker[playerid])
-    {
-        OnPlayerLeaveGangZone(playerid, GetPVarInt(playerid, "zoneid"));
-    }
-    else if(ZoneDefender[playerid])
+    if(ZoneAttacker[playerid] || ZoneDefender[playerid])
     {
         OnPlayerLeaveGangZone(playerid, GetPVarInt(playerid, "zoneid"));
     }
@@ -1854,7 +1851,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 
-		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		if(GetPlayerAdminDutyStatus(playerid) == 1 || GetPlayerAdminDutyStatus(killerid) == 1)
 		{
 			PlayerKilledByAdmin[playerid] = 1;
 		}
@@ -2439,7 +2436,7 @@ SetPlayerSpawnPos(playerid)
 		SetPlayerInterior(playerid, 0);
 	    SetPlayerVirtualWorld(playerid, 1);
 	    new losuj= random(sizeof(Cela));
-		SetPlayerPosEx(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+		SetPlayerPos(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Twój wyrok nie dobieg³ koñca, wracasz do wiêzienia.");
 		TogglePlayerControllable(playerid, 0);
 		Wchodzenie(playerid);
@@ -2456,7 +2453,7 @@ SetPlayerSpawnPos(playerid)
 		new string[128];
 	    SetPlayerInterior(playerid, 0);
 		SetPlayerVirtualWorld(playerid, 1000+playerid);
-		SetPlayerPosEx(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
+		SetPlayerPos(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
 		PlayerInfo[playerid][pMuted] = 1;
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
@@ -2477,7 +2474,7 @@ SetPlayerSpawnPos(playerid)
 		format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
         SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerInfo[playerid][pMuted] = 1;
-		SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
+		SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 		format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po³owê kasy i broñ", sendername);
@@ -2494,7 +2491,7 @@ SetPlayerSpawnPos(playerid)
 	    ResetPlayerWeapons(playerid);
   		GivePlayerWeapon(playerid, 29, 999);
 	    new rand = random(sizeof(PaintballSpawns));
-		SetPlayerPosEx(playerid, PaintballSpawns[rand][0], PaintballSpawns[rand][1], PaintballSpawns[rand][2]);
+		SetPlayerPos(playerid, PaintballSpawns[rand][0], PaintballSpawns[rand][1], PaintballSpawns[rand][2]);
 		SetCameraBehindPlayer(playerid);
 	}
 	//BW:
@@ -2519,7 +2516,7 @@ SetPlayerSpawnPos(playerid)
 	    //Przywracanie do poprzedniego spawnu
 		if(GetPVarInt(playerid, "spawn") == 2)
 		{
-			SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
 			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			Wchodzenie(playerid);
@@ -2546,106 +2543,106 @@ SetPlayerSpawnPos(playerid)
 						case FRAC_LSPD: //1
 						{
 						    new rand = random(sizeof(gCopPlayerSpawns));
-							SetPlayerPosEx(playerid, gCopPlayerSpawns[rand][0], gCopPlayerSpawns[rand][1], gCopPlayerSpawns[rand][2]);
+							SetPlayerPos(playerid, gCopPlayerSpawns[rand][0], gCopPlayerSpawns[rand][1], gCopPlayerSpawns[rand][2]);
 							SetPlayerFacingAngle(playerid, 90.0);
 						}
 						case FRAC_FBI: //2
 						{
 						    if(PlayerInfo[playerid][pTajniak] == 0)
 						    {
-                                SetPlayerPosEx(playerid, 598.2130,-1491.1135,15.1351);
+                                SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
 								SetPlayerFacingAngle(playerid, 270.0);
 		  					}
 		  					else if(PlayerInfo[playerid][pTajniak] == 1)
 		  					{
-		  					    SetPlayerPosEx(playerid, 2495.2163,-1687.2322,13.5150);
+		  					    SetPlayerPos(playerid, 2495.2163,-1687.2322,13.5150);
 		  					}
 		  					else if(PlayerInfo[playerid][pTajniak] == 2)
 		  					{
-		  					    SetPlayerPosEx(playerid, 1939.1940,-1116.3353,27.0151);
+		  					    SetPlayerPos(playerid, 1939.1940,-1116.3353,27.0151);
 		  					}
 		  					else if(PlayerInfo[playerid][pTajniak] == 3)
 		  					{
-                                SetPlayerPosEx(playerid, 738.8827,-1429.9484,13.5234);
+                                SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
 		  					}
          					else if(PlayerInfo[playerid][pTajniak] == 4)
 		  					{
-                                SetPlayerPosEx(playerid, 2801.0273,-1089.4576,30.7188);
+                                SetPlayerPos(playerid, 2801.0273,-1089.4576,30.7188);
 		  					}
 		  					else if(PlayerInfo[playerid][pTajniak] == 5)
 		  					{
-		  					    SetPlayerPosEx(playerid, 2467.5117,-1278.2054,29.9264);
+		  					    SetPlayerPos(playerid, 2467.5117,-1278.2054,29.9264);
 							}
 		  					else if(PlayerInfo[playerid][pTajniak] == 6)
 		  					{
 								new rand = random(sizeof(gTajniakSpawn));
-								SetPlayerPosEx(playerid, gTajniakSpawn[rand][0], gTajniakSpawn[rand][1], gTajniakSpawn[rand][2]); // Warp the player
+								SetPlayerPos(playerid, gTajniakSpawn[rand][0], gTajniakSpawn[rand][1], gTajniakSpawn[rand][2]); // Warp the player
 								SetPlayerFacingAngle(playerid, 270.0);
 		  					}
 		  					else
 		  					{
-                                SetPlayerPosEx(playerid, 2467.5117,-1278.2054,29.9264);
+                                SetPlayerPos(playerid, 2467.5117,-1278.2054,29.9264);
 		  					}
 
 						}
 						case FRAC_NG: //3
 						{
-						    SetPlayerPosEx(playerid, 261.8342, 71.2429, 1003.2422);// stara: 2515.0200, -2459.5896, 13.8187
+						    SetPlayerPos(playerid, 261.8342, 71.2429, 1003.2422);// stara: 2515.0200, -2459.5896, 13.8187
 							SetPlayerInterior(playerid, 6);
 							SetPlayerVirtualWorld(playerid, 88);
 							Wchodzenie(playerid);
 						}
 						case FRAC_ERS:  //4
 						{
-						    SetPlayerPosEx(playerid, 1148.4323,-1315.4225,13.9841);
+						    SetPlayerPos(playerid, 1148.4323,-1315.4225,13.9841);
 		    				SetPlayerFacingAngle(playerid,358.0);
 						}
 						case FRAC_LCN: //5
 						{
-						    SetPlayerPosEx(playerid, 738.8827,-1429.9484,13.5234);
+						    SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
 						}
 						case FRAC_YKZ: //6
 						{
-                            SetPlayerPosEx(playerid, 2794.8042,-1087.1310,30.7188);
+                            SetPlayerPos(playerid, 2794.8042,-1087.1310,30.7188);
 						}
 						case FRAC_BOR: //7
 						{
-						    SetPlayerPosEx(playerid, 1519.0970,-1449.6099,13.5391);
+						    SetPlayerPos(playerid, 1519.0970,-1449.6099,13.5391);
 						}
 						case FRAC_HA: //8
 						{
-						    SetPlayerPosEx(playerid, -50.400001525879,-279.20001220703,6.0999999046326);
+						    SetPlayerPos(playerid, -50.400001525879,-279.20001220703,6.0999999046326);
 						}
 						case FRAC_SN: //9
 						{
 							if(PlayerInfo[playerid][pRank] <= 1)
 							{
-								SetPlayerPosEx(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
+								SetPlayerPos(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
 								Wchodzenie(playerid);
 								sendTipMessage(playerid, "Zrespi³eœ siê na dachu San News"); 
 							}
 							else if(PlayerInfo[playerid][pRank] >= 2 && PlayerInfo[playerid][pRank] < 7) 
 							{
-								SetPlayerPosEx(playerid, 288.0914,-1609.7465,17.9994); 
+								SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
 								Wchodzenie(playerid);
 							}
 							else if(PlayerInfo[playerid][pRank] >= 8)
 							{
-								SetPlayerPosEx(playerid, 288.0914,-1609.7465,17.9994); 
+								SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
 								Wchodzenie(playerid);
 							}
-						   // SetPlayerPosEx(playerid, 735.2266,-1336.5826,13.5358);
+						   // SetPlayerPos(playerid, 735.2266,-1336.5826,13.5358);
 						}
 						case FRAC_KT: //10
 						{
-							SetPlayerPosEx(playerid,2468.3796,-2082.9690,13.5580);
+							SetPlayerPos(playerid,2468.3796,-2082.9690,13.5580);
                             SetPlayerFacingAngle(playerid, 89.1901);
 						}
 						case FRAC_GOV: //11
 						{
 							if(PlayerInfo[playerid][pLider] == 11)
 							{
-							    SetPlayerPosEx(playerid, 1460.4297,-1853.9827,81.9475);
+							    SetPlayerPos(playerid, 1460.4297,-1853.9827,81.9475);
 							    SetPlayerVirtualWorld(playerid, 50);
 							    SetPlayerInterior(playerid, 0);
 								PlayerInfo[playerid][pLocal] = 108;
@@ -2656,7 +2653,7 @@ SetPlayerSpawnPos(playerid)
 							{
 							    if(PlayerInfo[playerid][pRank] >= 1)
 								{
-								    SetPlayerPosEx(playerid, 1445.3516,-1827.1736,81.4602);
+								    SetPlayerPos(playerid, 1445.3516,-1827.1736,81.4602);
 									SetPlayerFacingAngle(playerid, 0.0);
 									SetPlayerVirtualWorld(playerid, 50);
 									SetPlayerInterior(playerid, 0);
@@ -2664,7 +2661,7 @@ SetPlayerSpawnPos(playerid)
 								}
 								else
 								{
-								    SetPlayerPosEx(playerid, 1471.8883,-1811.8147,77.9612);
+								    SetPlayerPos(playerid, 1471.8883,-1811.8147,77.9612);
 									SetPlayerFacingAngle(playerid, 4.6505);
 									SetPlayerVirtualWorld(playerid, 50);
 									SetPlayerInterior(playerid, 0);
@@ -2674,27 +2671,27 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_GROOVE: //12
 						{
-          					SetPlayerPosEx(playerid,2496.8523,-1685.3225,13.4172);
+          					SetPlayerPos(playerid,2496.8523,-1685.3225,13.4172);
                             SetPlayerFacingAngle(playerid, 345.4405);
 						}
 						case FRAC_BALLAS: //13
 						{
-						    SetPlayerPosEx(playerid,2502.7222,-1244.7454,35.4519);
+						    SetPlayerPos(playerid,2502.7222,-1244.7454,35.4519);
                             SetPlayerFacingAngle(playerid, 181.7818);
 						}
 						case FRAC_VAGOS: //14
 						{
-						    SetPlayerPosEx(playerid, 2177.1636,-984.1085,64.4688);
+						    SetPlayerPos(playerid, 2177.1636,-984.1085,64.4688);
 							SetPlayerFacingAngle(playerid, 165.360);
 						}
 						case FRAC_NOA: //15
 						{
-						    SetPlayerPosEx(playerid, 1104.4066,-1224.0862,15.8435);
+						    SetPlayerPos(playerid, 1104.4066,-1224.0862,15.8435);
 		    				SetPlayerFacingAngle(playerid, 181.0);
 						}
 						case FRAC_WPS: //16
 						{
-						    SetPlayerPosEx(playerid, 2508.0671,-2019.8987,13.9482);
+						    SetPlayerPos(playerid, 2508.0671,-2019.8987,13.9482);
 						}
 				    }
 				}
@@ -2705,14 +2702,14 @@ SetPlayerSpawnPos(playerid)
 		            {
 		                SetPlayerVirtualWorld(playerid, OrgInfo[org][o_VW]);
 		    		    SetPlayerInteriorEx(playerid, OrgInfo[org][o_Int]);
-		    		    SetPlayerPosEx(playerid, OrgInfo[org][o_Spawn][0], OrgInfo[org][o_Spawn][1], OrgInfo[org][o_Spawn][2]);
+		    		    SetPlayerPos(playerid, OrgInfo[org][o_Spawn][0], OrgInfo[org][o_Spawn][1], OrgInfo[org][o_Spawn][2]);
 		    		    SetPlayerFacingAngle(playerid, OrgInfo[org][o_Spawn][3]);
 		            }
 		            else
 		            {
 						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawnu - spawnujesz siê jako cywil");
                         new rand = random(sizeof(gRandomPlayerSpawns));
-			    		SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
+			    		SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 			    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
 					}
 				}
@@ -2722,41 +2719,41 @@ SetPlayerSpawnPos(playerid)
 				    {
 						case JOB_MECHANIC:
 						{
-						    SetPlayerPosEx(playerid,2794.5515,-1619.3689,10.9219);
+						    SetPlayerPos(playerid,2794.5515,-1619.3689,10.9219);
 		    				SetPlayerFacingAngle(playerid, 80.0);
 						}
 						case JOB_LAWYER:
 						{
-						    SetPlayerPosEx(playerid,319.72470092773, -1548.3374023438, 13.845289230347);
+						    SetPlayerPos(playerid,319.72470092773, -1548.3374023438, 13.845289230347);
 		    				SetPlayerFacingAngle(playerid, 230.0);
 						}
 						case JOB_LOWCA:
 						{
-						    SetPlayerPosEx(playerid,322.0553894043, 303.41961669922, 999.1484375);
+						    SetPlayerPos(playerid,322.0553894043, 303.41961669922, 999.1484375);
 		    				SetPlayerInterior(playerid,5);
 						}
 						case JOB_BOXER:
 						{
-						    SetPlayerPosEx(playerid,766.0804,14.5133,1000.7004);
+						    SetPlayerPos(playerid,766.0804,14.5133,1000.7004);
 		    				SetPlayerInterior(playerid, 5);
 						}
 						case JOB_TRUCKER:
 						{
-						    SetPlayerPosEx(playerid, 1751.4445, -2054.9761, 13.0593);
+						    SetPlayerPos(playerid, 1751.4445, -2054.9761, 13.0593);
 		    				SetPlayerFacingAngle(playerid, 180.0);
 						}
 						case JOB_BUSDRIVER:
 						{
-						    SetPlayerPosEx(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
+						    SetPlayerPos(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
 						}
 						case JOB_BODYGUARD:
 						{
-						    SetPlayerPosEx(playerid, 2207.4038,-1725.1147,13.4060);
+						    SetPlayerPos(playerid, 2207.4038,-1725.1147,13.4060);
 						}
 						default:
 						{
 							new rand = random(sizeof(gRandomPlayerSpawns));
-							SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
+							SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 							SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
 						}
 				    }
@@ -2764,7 +2761,7 @@ SetPlayerSpawnPos(playerid)
 				else //Spawn cywila
 				{
 				    new rand = random(sizeof(gRandomPlayerSpawns));
-		    		SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
+		    		SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 		    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
 				}
 		    }
@@ -2781,7 +2778,7 @@ SetPlayerSpawnPos(playerid)
 					SetPlayerSpawnPos(playerid);
 				    return 1;
 				}
-                SetPlayerPosEx(playerid, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]);
+                SetPlayerPos(playerid, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]);
 	  		}
 	  		else if(PlayerInfo[playerid][pSpawn] == 2) //Spawn w œrodku domu
 	  		{
@@ -2800,7 +2797,7 @@ SetPlayerSpawnPos(playerid)
    				SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);
      			PlayerInfo[playerid][pDomT] = h;
                 PlayerInfo[playerid][pDomWKJ] = PlayerInfo[playerid][pDom];
-                SetPlayerPosEx(playerid, Dom[i][hInt_X], Dom[i][hInt_Y], Dom[i][hInt_Z]);
+                SetPlayerPos(playerid, Dom[i][hInt_X], Dom[i][hInt_Y], Dom[i][hInt_Z]);
                 SetPlayerInteriorEx(playerid, Dom[i][hInterior]);
                 SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
                 GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
@@ -4890,7 +4887,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 {
                     SendClientMessage(i, 0xFF0000FF, "Zejdz z obiektu!!");
                     GetPlayerPos(i, rox, roy, roz);
-                    SetPlayerPosEx(i, rox+0.3,roy+0.3,roz+0.2);
+                    SetPlayerPos(i, rox+0.3,roy+0.3,roz+0.2);
                     SetPlayerVelocity(i, 0.15, 0.12, 0.1);
                 }
             }
@@ -5089,7 +5086,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         {
             new Float:slx, Float:sly, Float:slz;
     		GetPlayerPos(playerid, slx, sly, slz);
-    		SetPlayerPosEx(playerid, slx, sly, slz+0.2);
+    		SetPlayerPos(playerid, slx, sly, slz+0.2);
     		ClearAnimations(playerid);
         }
 
@@ -5261,12 +5258,19 @@ public OnPlayerExitVehicle(playerid, vehicleid)
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Invalid seat");
         return 0;
     }
-
+	/*if(IsVehicleInCarPark(vehicleid))
+	{
+		new float:vPosX, float:vPosY, float:vPosZ; 
+		GetVehiclePos(vehicleid, vPosX, vPosY, vPosZ);
+		TempCarPark[vehicleid][0] = vPosX; 
+		TempCarPark[vehicleid][1] = vPosY; 
+		TempCarPark[vehicleid][2] = vPosZ; 
+	}*/
     //AT400
     if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && GetVehicleModel(vehicleid) == 577 && IsPlayerInFraction(playerid, FRAC_KT, 5000))
     {
         GameTextForPlayer(playerid, "Wracaj szybko!", 5000, 5);
-        SetPlayerPosEx(playerid, 0.1389+KTAir_Offsets[0],33.2975+KTAir_Offsets[1],0.5391+100+KTAir_Offsets[2]);
+        SetPlayerPos(playerid, 0.1389+KTAir_Offsets[0],33.2975+KTAir_Offsets[1],0.5391+100+KTAir_Offsets[2]);
         SetPlayerVirtualWorld(playerid, 2);
         Wchodzenie(playerid);
         SetCameraBehindPlayer(playerid);
@@ -6707,6 +6711,14 @@ public OnVehicleSpawn(vehicleid)
         RepairVehicle(vehicleid); //
 
     }
+	/*if(IsVehicleInCarPark(vehicleid))
+	{
+		new float:vPosX, float:vPosY, float:vPosZ; 
+		GetVehiclePos(vehicleid, vPosX, vPosY, vPosZ);
+		TempCarPark[vehicleid][0] = vPosX; 
+		TempCarPark[vehicleid][1] = vPosY; 
+		TempCarPark[vehicleid][2] = vPosZ; 
+	}*/
     return 1;
 }
 
@@ -7647,6 +7659,10 @@ public OnTrailerUpdate(playerid, vehicleid)
 
 public OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
+	// if(IsVehicleInCarPark(vehicleid))
+	// {
+	// 	return 0;//Testowe dzia³anie
+	// }
     return 1;
 }
 

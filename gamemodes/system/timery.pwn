@@ -291,15 +291,17 @@ public AktywujPozar()
 {
     SetTimer("UsunPozar", 3600000, false);
     new losowy = random(15);
+	new fraction_name[128];
+	format(fraction_name, sizeof(fraction_name), "--------[%s]--------", FractionNames[4]);
 	if(losowy == 1)
 	{
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: DOM JEDNORODZINNY - IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH KUCHENKI GAZOWEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-   		SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: DOM JEDNORODZINNY - IDLEWOOD");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH KUCHENKI GAZOWEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+   		SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: DOM JEDNORODZINNY - IDLEWOOD",1);
     	AddFire(2016.998,-1696.110,15.036, 400);
 		AddFire(2016.998,-1697.411,15.036, 400);
@@ -324,13 +326,13 @@ public AktywujPozar()
     }
 	else if(losowy == 2)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 W OKOLICACH DMV");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK SKLEPU");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 W OKOLICACH DMV");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK SKLEPU");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP 24/7 W OKOLICACH DMV",1);
     	AddFire(1362.514,-1759.767,12.359,400);
 		AddFire(1361.113,-1759.767,12.359,400);
@@ -360,13 +362,13 @@ public AktywujPozar()
     }
 	else if(losowy == 3)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: PIZZERIA IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA KUCHENKI GAZOWEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK RESTAURACJI");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: PIZZERIA IDLEWOOD");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA KUCHENKI GAZOWEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK RESTAURACJI");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: PIZZERIA IDLEWOOD",1);
 		AddFire(2105.741,-1796.412,12.551, 400);
 		AddFire(2105.741,-1797.312,12.551, 400);
@@ -393,13 +395,13 @@ public AktywujPozar()
     }
 	else if(losowy == 4)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP BINCO - GANTON");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP BINCO - GANTON");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP BINCO - GANTON",1);
 		AddFire(2248.296,-1667.368,14.286, 400);
 		AddFire(2247.255,-1667.017,14.286, 400);
@@ -416,13 +418,13 @@ public AktywujPozar()
     }
 	else if(losowy == 5)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: STACJA PALIW - TEMPLE");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH DYSTRYBUTORA");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK STACJI");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: STACJA PALIW - TEMPLE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH DYSTRYBUTORA");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK STACJI");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: STACJA PALIW - TEMPLE",1);
     	AddFire(995.978,-938.445,40.229, 400);
 		AddFire(997.778,-938.445,40.229, 400);
@@ -439,13 +441,13 @@ public AktywujPozar()
     }
 	else if(losowy == 6)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: KONTENERY - LOSTNISKO LOS SANTOS");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: OCHRONA LOTNISKA");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: KONTENERY - LOSTNISKO LOS SANTOS");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: OCHRONA LOTNISKA");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: KONTENERY - LOSTNISKO LOS SANTOS",1);
     	AddFire(2067.007,-2206.814,13.666, 400);
 		AddFire(2067.007,-2208.004,13.666, 400);
@@ -475,13 +477,13 @@ public AktywujPozar()
     }
 	else if(losowy == 7)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: P¥CZKARNIA NA MARKET");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: P¥CZKARNIA NA MARKET");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: P¥CZKARNIA NA MARKET",1);
 		AddFire(1037.776,-1341.086,12.726, 400);
 		AddFire(1038.607,-1341.086,12.726, 400);
@@ -506,13 +508,13 @@ public AktywujPozar()
     }
 	else if(losowy == 8)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BAR W DILLIMORE");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: BAR W DILLIMORE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BAR W DILLIMORE",1);
     	AddFire(681.627,-473.598,15.457, 400);
 		AddFire(681.627,-473.598,14.177, 400);
@@ -547,13 +549,13 @@ public AktywujPozar()
     }
 	else if(losowy == 9)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: URZ¥D MIASTA PALOMINO CREEK");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK URZÊDU MIASTA");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: URZ¥D MIASTA PALOMINO CREEK");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK URZÊDU MIASTA");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: URZ¥D MIASTA PALOMINO CREEK",1);
     	AddFire(2269.603,-74.425,25.554, 400);
 		AddFire(2269.603,-74.425,24.344, 400);
@@ -578,13 +580,13 @@ public AktywujPozar()
     }
 	else if(losowy == 10)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 - IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 - IDLEWOOD");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP 24/7 - IDLEWOOD",1);
 		AddFire(1833.399,-1840.566,12.578, 400);
 		AddFire(1833.399,-1838.866,12.578, 400);
@@ -609,13 +611,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 11)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: MOTEL JEFFERSON");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: MOTEL JEFFERSON");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: MOTEL JEFFERSON",1);
     	AddFire(2233.332,-1160.049,23.629, 400);
 		AddFire(2233.332,-1160.049,25.089, 400);
@@ -651,13 +653,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 12)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SALON AUT");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: SALON AUT");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SALON AUT",1);
     	AddFire(2133.200,-1151.196,23.681, 400);
     	AddFire(2133.200,-1151.196,22.271, 400);
@@ -687,13 +689,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 13)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: GUNSHOP OBOK BAZY LSFD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: GUNSHOP OBOK BAZY LSFD");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: GUNSHOP OBOK BAZY LSFD",1);
     	AddFire(1781.413,-1161.296,22.015, 400);
     	AddFire(1781.413,-1161.296,23.765, 400);
@@ -723,13 +725,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 14)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK BIUROWCA FBI");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK BIUROWCA FBI");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BUDYNEK OBOK BIUROWCA FBI",1);
     	AddFire(651.468,-1458.514,14.407, 400);
     	AddFire(651.468,-1459.935,14.407, 400);
@@ -759,13 +761,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 15)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK VINYL CLUB");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK VINYL CLUB");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BUDYNEK OBOK VINYL CLUB",1);
     	AddFire(830.011,-1385.443,15.928, 400);
     	AddFire(830.862,-1385.703,15.928, 400);
@@ -797,7 +799,6 @@ public AktywujPozar()
     	AddFire(830.952,-1385.703,17.368, 400);
     	AddFire(833.223,-1385.703,17.368, 400);
     	AddFire(834.723,-1385.703,17.368, 400);
-
 	}
     return 1;
 }
@@ -974,6 +975,7 @@ public MainTimer()
     }
     if(TICKS_1Min == 59)
     {
+		CJSkinCheck();
         SyncUp();
     }
     if(TICKS_5Min == (60*5)-1)
@@ -1129,6 +1131,24 @@ public Spectator()
             }
         }
         //END vinyl
+		//Ibiza audio check
+        if(!GetPVarInt(i, "IBIZA-stream"))
+        {
+            if(IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && (GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
+            {
+                SetPVarInt(i, "IBIZA-stream", 1);
+                PlayAudioStreamForPlayer(i, IBIZA_Stream,IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2], IbizaAudioPos[3], 1);
+            }
+        }
+        else
+        {
+            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]))
+            {
+                SetPVarInt(i, "IBIZA-stream", 0);
+                StopAudioStreamForPlayer(i);
+            }
+        }
+        //END ibiza
 		if(GetPlayerPing(i) >= 2000 && PlayerInfo[i][pAdmin] == 0)
 		{
 			if(gPlayerLogged[i] == 1)
@@ -2247,17 +2267,25 @@ public JednaSekundaTimer()
 					SetPlayerSpawn(i); 
 				}
 			}
+			if(PlayerInfo[i][pJailed] == 3)
+			{
+				if(!IsPlayerInRangeOfPoint(i, AJ_MAXRANGE, AJ_POSX, AJ_POSY, AJ_POSZ))
+				{
+					sendErrorMessage(i, "Nie znajdujesz siê w AJ! Pozycja przywrócona do poprawnej!");
+					SetPlayerSpawn(i); 
+				}
+			}
 			if(PlayerInfo[i][pJailTime] <= 0 && WantLawyer[i] == 0)
 			{
 				PlayerInfo[i][pJailTime] = 0;
 				if(PlayerInfo[i][pJailed] == 1)
 				{
-					SetPlayerPosEx(i,-1681.1091,917.8300,-52.4141);
+					SetPlayerPos(i,-1681.1091,917.8300,-52.4141);
 				}
 				else if(PlayerInfo[i][pJailed] == 2)
 				{
 					//SetPlayerWorldBounds(i,20000.0000,-20000.0000,20000.0000,-20000.0000); //Reset world to player
-                    //SetPlayerPosEx(i, NG_JAIL_X,NG_JAIL_Y,NG_JAIL_Z);
+                    //SetPlayerPos(i, NG_JAIL_X,NG_JAIL_Y,NG_JAIL_Z);
 					UnJailDeMorgan(i);
 				}
 				else if(PlayerInfo[i][pJailed] == 3)
@@ -2267,7 +2295,7 @@ public JednaSekundaTimer()
 					PlayerInfo[i][pJailTime] = 0;
 					SetPlayerVirtualWorld(i, 0);
 					PlayerInfo[i][pMuted] = 0;
-					SetPlayerPosEx(i,1481.1666259766,-1790.2204589844,156.7875213623);
+					SetPlayerPos(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
 					PlayerKilledByAdmin[i] = 1;
@@ -2343,7 +2371,7 @@ public JednaSekundaTimer()
 							SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
 							SetPlayerInterior(i, GetPlayerInterior(cop));
 							GetPlayerPos(cop, x, y, z);
-							SetPlayerPosEx(i, x-0.5, y-0.5, z);
+							SetPlayerPos(i, x-0.5, y-0.5, z);
 							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
 							TogglePlayerControllable(i, 0);
 							if(PlayerInfo[i][pBW] == 0) SetTimerEx("FreezePlayer", 2000, false, "i", i);
@@ -2622,7 +2650,7 @@ public JednaSekundaTimer()
 			TutTime[i] += 1;
 			if(TutTime[i] == 3)
 			{
-				SetPlayerPosEx(i, 849.62371826172, -989.92199707031, -5.0);
+				SetPlayerPos(i, 849.62371826172, -989.92199707031, -5.0);
 				SetPlayerCameraPos(i, 849.62371826172, -989.92199707031, 53.211112976074);// kamera
 				SetPlayerCameraLookAt(i, 907.40313720703, -913.14117431641, 77.788856506348);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: Pocz¹tek ____|");
@@ -2633,7 +2661,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 14)
 			{
-				SetPlayerPosEx(i, 326.09194946289, -1521.3157958984, 20.0);
+				SetPlayerPos(i, 326.09194946289, -1521.3157958984, 20.0);
 				SetPlayerCameraPos(i, 398.16021728516, -1511.9237060547, 78.641815185547);// kamera
 				SetPlayerCameraLookAt(i, 326.09194946289, -1521.3157958984, 42.154850006104);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - DM i Nick ____|");
@@ -2649,7 +2677,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 30)
 			{
-				SetPlayerPosEx(i, 1016.9872436523, -1372.0234375, -5.0);
+				SetPlayerPos(i, 1016.9872436523, -1372.0234375, -5.0);
 				SetPlayerCameraPos(i, 1053.3154296875, -1326.3295898438, 28.300031661987);// kamera
 				SetPlayerCameraLookAt(i, 1016.9872436523, -1372.0234375, 15.836219787598);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - Bug Using i cheatowanie ____|");
@@ -2663,7 +2691,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 52)
 			{
-				SetPlayerPosEx(i, 1352.2797851563, -1757.189453125, -5.0);
+				SetPlayerPos(i, 1352.2797851563, -1757.189453125, -5.0);
 				SetPlayerCameraPos(i, 1352.4576416016, -1725.1925048828, 23.291763305664);// kamera
 				SetPlayerCameraLookAt(i, 1352.2797851563, -1757.189453125, 13.5078125);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady Serwera - OOC i IC ____|");
@@ -2679,7 +2707,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 74)
 			{
-				SetPlayerPosEx(i, 370.02825927734, -2083.5886230469, -10.0);
+				SetPlayerPos(i, 370.02825927734, -2083.5886230469, -10.0);
 				SetPlayerCameraPos(i, 340.61755371094, -2091.701171875, 22.800081253052);// kamera
 				SetPlayerCameraLookAt(i, 370.02825927734, -2083.5886230469, 8.1386299133301);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - IC ____|");
@@ -2693,7 +2721,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 96)
 			{
-				SetPlayerPosEx(i, 1172.8602294922, -1331.978515625, -5.0);
+				SetPlayerPos(i, 1172.8602294922, -1331.978515625, -5.0);
 				SetPlayerCameraPos(i, 1228.7977294922, -1345.1479492188, 21.532119750977);// kamera
 				SetPlayerCameraLookAt(i, 1172.8602294922, -1331.978515625, 14.317019462585);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - MG i PG ____|");
@@ -2708,7 +2736,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 112)
 			{
-				SetPlayerPosEx(i, 412.80743408203, -1312.4066162109, -5.0);
+				SetPlayerPos(i, 412.80743408203, -1312.4066162109, -5.0);
 				SetPlayerCameraPos(i, 402.2776184082, -1351.4703369141, 43.704566955566);// kamera
 				SetPlayerCameraLookAt(i, 412.80743408203, -1312.4066162109, 39.677307128906);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zakoñczenie ____|");
@@ -2726,7 +2754,7 @@ public JednaSekundaTimer()
 			{
 				TogglePlayerSpectating(i, false);
 				
-				SetPlayerPosEx(i, 208.3876,-34.8742,1001.9297);
+				SetPlayerPos(i, 208.3876,-34.8742,1001.9297);
 				SetPlayerFacingAngle(i, 138.8926);
 
 				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
@@ -2845,7 +2873,7 @@ public JednaSekundaTimer()
 					{
 						if(IsPlayerConnected(Boxer1) && IsPlayerConnected(Boxer2))
 						{
-							SetPlayerPosEx(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPosEx(Boxer2, 765.8433,3.2924,1000.7186);
+							SetPlayerPos(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPos(Boxer2, 765.8433,3.2924,1000.7186);
 							SetPlayerInterior(Boxer1, 5); SetPlayerInterior(Boxer2, 5);
 							GetPlayerName(Boxer1, loser, sizeof(loser));
 							GetPlayerName(Boxer2, winner, sizeof(winner));
@@ -2921,7 +2949,7 @@ public JednaSekundaTimer()
 					{
 						if(IsPlayerConnected(Boxer1) && IsPlayerConnected(Boxer2))
 						{
-							SetPlayerPosEx(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPosEx(Boxer2, 765.8433,3.2924,1000.7186);
+							SetPlayerPos(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPos(Boxer2, 765.8433,3.2924,1000.7186);
 							SetPlayerInterior(Boxer1, 5); SetPlayerInterior(Boxer2, 5);
 							GetPlayerName(Boxer1, winner, sizeof(winner));
 							GetPlayerName(Boxer2, loser, sizeof(loser));
@@ -3213,6 +3241,17 @@ public Fillup()
 	return 1;
 }
 
+public CJSkinCheck()
+{
+	foreach(new j : Player)
+	{
+		if(GetPlayerSkin(j) == 0 && PlayerInfo[j][pAdmin] == 0)
+		{
+			PlayerInfo[j][pSkin] = 299;
+			SetPlayerSkinEx(j, 299);
+		}
+	}
+}
 //11.06.2014
 public CarCheck()
 {
@@ -3346,7 +3385,7 @@ public VehicleUpdate()
                 new hour,minute,second;
 				gettime(hour,minute,second);
 				FixHour(hour);
-				if(shifthour >= 1 && shifthour <= 4)
+				if(shifthour >= 4)
 				{
 					Oil_GenerateFromVehicle(i);
 				}

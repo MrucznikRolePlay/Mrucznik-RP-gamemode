@@ -40,6 +40,7 @@ new bool:bramki_sasd_state[18];
 new cenaNorm = 50000;
 new cenaVIP = 80000;
 new kasjerkaWolna = 666;
+
 //sn
 new SN_ACCESS[MAX_PLAYERS]; 
 //PizzaJob
@@ -987,6 +988,7 @@ new taxitest[MAX_PLAYERS];//Taxi Test
 new mechanikid[MAX_PLAYERS];//Mechanik w GUI
 new naprawiony[MAX_PLAYERS];//Napr
 
+
 new zawodnik[MAX_PLAYERS];//¯u¿el
 new wyscigz;//¿u¿el
 new iloscwygranych;//¿u¿el
@@ -1098,8 +1100,9 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "wizytowka", -1);
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
+	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
-
+	organizacje_clearCache(playerid);
 	//z disconecta
 
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
@@ -1107,7 +1110,6 @@ ZerujZmienne(playerid)
     PlayerInfo[playerid][pDescLabel] = tmp_label;
 
     PlayerInfo[playerid][pDesc][0] = EOS;
-
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
 	komentator[playerid] = 0;//¯u¿el

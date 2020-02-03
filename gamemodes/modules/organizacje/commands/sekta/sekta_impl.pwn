@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ ibiza ]-------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   sekta                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,22 +16,35 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-
- */
+// Autor: Sanda³
+// Data utworzenia: 02.02.2020
 
 
-// Notatki skryptera:
-/*
+//
 
- */
-
-YCMD:ibiza(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_sekta_Impl(playerid, opcja[24], giveplayerid)
 {
-    if(gPlayerOrgLeader[playerid] && GetPlayerOrg(playerid) == FAMILY_IBIZA) { //RANGA
-        PrezesDialog(playerid);
+    if(GetPlayerOrg(playerid) == FAMILY_SEKTA && PlayerInfo[playerid][pRank] >= 1)
+    {
+        if(strcmp(opcja,"klucz",true) == 0)
+		{
+            organizacje_toggleSektaKey(playerid, giveplayerid);
+        }
+        if(strcmp(opcja,"wepchnij",true) == 0)
+		{
+            organizacje_wepchnijSekta(playerid, giveplayerid);
+        }
+        if(strcmp(opcja,"wypusc",true) == 0)
+		{
+            organizacje_wypuscSekta(playerid, giveplayerid);
+        }
+    }
+    else
+    {
+        noAccessMessage(playerid);
     }
     return 1;
 }
+
+//end

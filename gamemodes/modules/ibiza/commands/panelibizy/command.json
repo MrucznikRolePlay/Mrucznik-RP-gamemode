@@ -1,0 +1,14 @@
+{
+    "name": "panelibizy",
+    "description": "Panel wlasciciela ibizy",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sanda³",
+    "aliases": [
+        "panelibiza",
+        "ibiza"
+    ],
+    "parameters": [],
+    "date": "01.02.2020"
+}

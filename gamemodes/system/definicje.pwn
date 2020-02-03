@@ -81,6 +81,12 @@
 
 //specshow
 #define INVALID_SPECTATE_ID 9999
+
+//adminjail
+#define AJ_POSX 1481.1666259766
+#define AJ_POSY -1790.2204589844
+#define AJ_POSZ 156.7875213623
+#define AJ_MAXRANGE 5.0
 //PAèDZIOCH
 #define ROPELENGTH 100 //D≥ugoúÊ maksymalna liny (ingame metr)
 
@@ -217,7 +223,7 @@
 #define HYDRA_D 250000
 
 new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
-    FAMILY_FDU = -1;
+    FAMILY_FDU = -1, FAMILY_SEKTA = -1;
 
 //2015.09.12
 #define TAJNIAK_FBI		0
@@ -427,6 +433,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_VINYL_J 5525
 #define D_VINYL_CAM 5526
 
+
 #define SCENA_DIALOG_MAIN       5998
 #define SCENA_DIALOG_CREATE     5999
 #define SCENA_DIALOG_EFEKTY     6000
@@ -532,7 +539,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define TJD_LOADUNLOAD_TIME 1000
 
 #define MAX_BOOMBOX         15
-#define MAX_BBD_DISTANCE    20.0
+#define MAX_BBD_DISTANCE    25.0
 
 //14.11
 #define MAX_CARS        100000

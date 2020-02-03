@@ -30,7 +30,7 @@
 
 YCMD:dajdowozu(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >=5 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
@@ -39,12 +39,9 @@ YCMD:dajdowozu(playerid, params[], help)
 			return 1;
 		}
 
-		if(PlayerInfo[playerid][pLevel] >= 1)
-		{
-			SetAntyCheatForPlayer(giveplayerid, 2001); 
-		    PutPlayerInVehicleEx(giveplayerid, level, 0);
-        	Log(adminLog, INFO, "Admin %s u¿y³ /dajdowozu na graczu %s id wozu %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), level);
-		}
+		SetAntyCheatForPlayer(giveplayerid, 2001); 
+		PutPlayerInVehicleEx(giveplayerid, level, 0);
+		Log(adminLog, INFO, "Admin %s u¿y³ /dajdowozu na graczu %s id wozu %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), level);
 	}
 	return 1;
 }

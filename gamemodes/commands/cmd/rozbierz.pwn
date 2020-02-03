@@ -30,15 +30,10 @@
 
 YCMD:rozbierz(playerid, params[], help)
 {
-    new string[128];
     new colorID; 
-
     if(isNaked[playerid])
     {
-        SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
-        isNaked[playerid] = 0;
-        format(string, sizeof(string), "%s ubiera siê.", GetNick(playerid)); 
-        ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+        UndressPlayer(playerid, true);
         return 1;
     }
     
@@ -50,32 +45,7 @@ YCMD:rozbierz(playerid, params[], help)
 
     if(GetPlayerVirtualWorld(playerid) == 40 || PlayerInfo[playerid][pDomWKJ] != 0)
     {
-        if(PlayerInfo[playerid][pSex] == 2)
-        {
-            if(colorID == 1)
-            {
-                SetPlayerSkinEx(playerid, 20001);
-            }
-            else
-            {
-                SetPlayerSkinEx(playerid, 20002); 
-            }
-        }
-        else
-        {
-            if(colorID == 1)
-            {
-                SetPlayerSkinEx(playerid, 252);
-            }
-            else
-            {
-                SetPlayerSkinEx(playerid, 18); 
-            }
-        }
-        format(string, sizeof(string), "%s rozbiera siê.", GetNick(playerid)); 
-        ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-        sendTipMessage(playerid, "Aby ubraæ siê spowrotem, ponownie u¿yj komendy /rozbierz.");
-        isNaked[playerid] = 1; 
+        UndressPlayer(playerid,false, colorID); 
     }
     else
     {

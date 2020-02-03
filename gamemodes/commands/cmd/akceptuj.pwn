@@ -531,8 +531,8 @@ YCMD:akceptuj(playerid, params[], help)
                     SetPlayerHealth(playerid, mypoints);
                     SetPlayerHealth(BoxOffer[playerid], points);
                     SetPlayerInterior(playerid, 5); SetPlayerInterior(BoxOffer[playerid], 5);
-                    SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                    SetPlayerPosEx(BoxOffer[playerid], 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(BoxOffer[playerid], 313.1165);
+                    SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+                    SetPlayerPos(BoxOffer[playerid], 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(BoxOffer[playerid], 313.1165);
                     TogglePlayerControllable(playerid, 0); TogglePlayerControllable(BoxOffer[playerid], 0);
                     GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(BoxOffer[playerid], "~r~Czekaj", 3000, 1);
                     new name[MAX_PLAYER_NAME];
@@ -824,7 +824,7 @@ YCMD:akceptuj(playerid, params[], help)
 
                     SetPlayerInterior(playerid,0);
                     new rand = random(sizeof(gInviteSpawns));
-                    SetPlayerPosEx(playerid, gInviteSpawns[rand][0], gInviteSpawns[rand][1], gInviteSpawns[rand][2]); // Warp the player
+                    SetPlayerPos(playerid, gInviteSpawns[rand][0], gInviteSpawns[rand][1], gInviteSpawns[rand][2]); // Warp the player
                     SetPlayerFacingAngle(playerid, gInviteSpawns[rand][3]);
                     SetPlayerCameraPos(playerid,gInviteSpawns[rand][0] + 3, gInviteSpawns[rand][1], gInviteSpawns[rand][2]);
                     SetPlayerCameraLookAt(playerid,gInviteSpawns[rand][0], gInviteSpawns[rand][1], gInviteSpawns[rand][2]);
