@@ -55,7 +55,7 @@
 #define PRZEDMIOT_PRZECIETNY_CENA 15
 #define PRZEDMIOT_TANI_CENA 5
 
-
+#define MC_GIVER_FILE "mc.conf"
 
 //Kolorki
 
