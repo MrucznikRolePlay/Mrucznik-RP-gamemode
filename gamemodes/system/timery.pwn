@@ -3247,7 +3247,11 @@ public CJSkinCheck()
 	{
 		if(GetPlayerSkin(j) == 0)
 		{
-			SetPlayerSkinEx(j, 299);
+			if(PlayerInfo[j][pAdmin] == 0)
+			{
+				PlayerInfo[j][pSkin] = 299;
+				SetPlayerSkinEx(j, 299);
+			}
 		}
 	}
 }
