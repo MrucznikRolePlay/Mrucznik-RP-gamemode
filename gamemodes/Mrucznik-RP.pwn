@@ -7659,10 +7659,10 @@ public OnTrailerUpdate(playerid, vehicleid)
 
 public OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
-	if(IsVehicleInCarPark(vehicleid))
-	{
-		return 0;//Testowe dzia³anie
-	}
+	// if(IsVehicleInCarPark(vehicleid))
+	// {
+	// 	return 0;//Testowe dzia³anie
+	// }
     return 1;
 }
 
