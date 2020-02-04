@@ -30,6 +30,14 @@ hook OnPlayerConnect(playerid)
 {
     graffiti_ZerujZmienne(playerid);
 }
+
+/*forward OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz);
+public OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz)
+{
+    CallRemoteFunction("OnPlayerEditDynamicObject", "iisffffff", playerid, objectid, response, x, y, z, rx, ry, rz);
+} */ //mo¿e Ci sie przydac potem (chyba) ~ Creative
+
+//hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz) // opcjonalnie zamiast tego poni¿ej
 hook OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
 {
  	if( response == EDIT_RESPONSE_FINAL )
@@ -66,15 +74,16 @@ stock graffiti_GetNewID(playerid)
 }
 stock graffiti_CreateGraffiti(playerid)
 {
-	new Float:PlayerPos[3];
+	new debug_string[144];
 	SetPVarInt(playerid, "GraffitiCreating", 1);
-	GetPlayerPos(playerid, PlayerPos[0], PlayerPos[1], PlayerPos[2]);
-	pGraffiti[playerid] = CreateDynamicObject(19482, PlayerPos[0], PlayerPos[1], PlayerPos[2], 0.0, 0.0, 0.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid, 200);
+	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
+	pGraffiti[playerid] = CreateDynamicObject(19482, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2], 0.0, 0.0, 0.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid, 200);
     SetDynamicObjectMaterialText(pGraffiti[playerid], 0, "Test", OBJECT_MATERIAL_SIZE_256x256, "Arial", 26, 0, 0xFFFFFFFF, 0, 1);
 	sendTipMessage(playerid, Graffiti_Text[playerid]);
 	sendTipMessage(playerid, Graffiti_Color[playerid]);
 	sendTipMessage(playerid, pGraffiti[playerid]);
-	sendTipMessage(playerid, graffiti_GetNewID(playerid));
+	format(debug_string, sizeof(debug_string), "ID: %d", graffiti_GetNewID(playerid));
+	sendTipMessage(playerid, debug_string);
 	EditDynamicObject(playerid, pGraffiti[playerid]);
 	return 1;
 }
