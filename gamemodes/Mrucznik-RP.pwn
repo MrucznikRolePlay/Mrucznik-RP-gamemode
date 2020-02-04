@@ -261,7 +261,6 @@ public OnGameModeInit()
     systempozarow_init();
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
-	LoadBiz();
 	//LoadActors(); 	
 	//-------<[ actors ]>-------
 	PushActors(); 
@@ -336,7 +335,6 @@ public OnGameModeInit()
 	
 	//discordconnect
 	DiscordConnectInit();
-
 
 	//AFK timer
 	for(new i; i<MAX_PLAYERS; i++)
@@ -452,7 +450,6 @@ public OnGameModeInit()
     }
 
     pusteZgloszenia();
-
 
     print("----- OnGameModeInit done.");
 	return 1;

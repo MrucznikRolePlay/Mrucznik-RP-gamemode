@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_mbizcreate_Impl(playerid, bCost, bName[64])
 {
-    if(!isAHeadAdmin(playerid))
+    if(!IsAHeadAdmin(playerid))
     {
         noAccessMessage(playerid); 
         return 1;

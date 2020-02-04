@@ -37,6 +37,7 @@
 #include "antyspam\antyspam.def"
 #include "bramy\bramy.def"
 #include "budki\budki.def"
+#include "business\business.def"
 #include "bw\bw.def"
 #include "chaty\chaty.def"
 #include "convoy\convoy.def"
@@ -73,6 +74,7 @@
 #include "antyspam\antyspam.hwn"
 #include "bramy\bramy.hwn"
 #include "budki\budki.hwn"
+#include "business\business.hwn"
 #include "bw\bw.hwn"
 #include "chaty\chaty.hwn"
 #include "convoy\convoy.hwn"
@@ -109,6 +111,7 @@
 #include "antyspam\antyspam.pwn"
 #include "bramy\bramy.pwn"
 #include "budki\budki.pwn"
+#include "business\business.pwn"
 #include "bw\bw.pwn"
 #include "chaty\chaty.pwn"
 #include "convoy\convoy.pwn"
@@ -138,6 +141,7 @@
 //-------<[ timers ]>-------
 #include "admin\admin_timers.pwn"
 #include "antyspam\antyspam_timers.pwn"
+#include "business\business_timers.pwn"
 #include "convoy\convoy_timers.pwn"
 #include "graffiti\graffiti_timers.pwn"
 #include "money\money_timers.pwn"
@@ -152,6 +156,7 @@
 
 //-------<[ mysql ]>-------
 #include "admin\admin_mysql.pwn"
+#include "business\business_mysql.pwn"
 #include "graffiti\graffiti_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
 #include "player_attachments\player_attachments_mysql.pwn"
@@ -185,6 +190,7 @@
 #include "animacje\commands\animacje_commands.pwn"
 #include "antycheat\commands\antycheat_commands.pwn"
 #include "bramy\commands\bramy_commands.pwn"
+#include "business\commands\business_commands.pwn"
 #include "chaty\commands\chaty_commands.pwn"
 #include "convoy\commands\convoy_commands.pwn"
 #include "debug\commands\debug_commands.pwn"

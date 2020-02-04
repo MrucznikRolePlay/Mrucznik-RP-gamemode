@@ -42,6 +42,7 @@ enum eBiz {
     b_TYPE2
 };
 new mBiz[MAX_BIZ][eBiz]; 
+new loadedBiz; 
 
 //-----------------<[ Zmienne: ]>-------------------
 //------------------<[ Forwardy: ]>--------------------
