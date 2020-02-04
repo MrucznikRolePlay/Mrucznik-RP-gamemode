@@ -48,10 +48,6 @@ YCMD:akceptuj(playerid, params[], help)
             SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
             return 1;
         }
-		if(strcmp(x_job, "biznes", false) == 0)
-		{
-            Business_AkceptujBiznes(playerid);
-		}
 		else if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
 		{
 			new dawacz = GetPVarInt(playerid, "wizytowka");
