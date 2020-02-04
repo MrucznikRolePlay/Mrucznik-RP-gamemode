@@ -79,12 +79,6 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 }
 NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 {
-	if(GetPlayerAdminDutyStatus(playerid) == 1) return 1;
-	if(PlayerInfo[playerid][pInjury] > 0)
-	{
-		NadajBW(playerid);
-		return 1;
-	}
 	new reason = GetPVarInt(playerid,"bw-reason");
 	if(reason <= 54 && reason > 0)
 	{
@@ -112,7 +106,6 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 }
 NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
-	if(GetPlayerAdminDutyStatus(playerid) == 1) return 1;
 	new string[144];
 	if(GetPVarInt(playerid, "bw-hitmankiller") == 1)
 	{
@@ -191,7 +184,7 @@ ZespawnujGraczaBW(playerid)
 	format(string, sizeof(string), "Gracze z apteczk¹ mog¹ udzieliæ Ci pomocy medycznej za pomoc¹ (/apteczka). Zalecamy odgrywaæ odniesione obra¿enia.");
 	SendClientMessage(playerid, COLOR_WHITE, string);
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
-	SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	SetPlayerHealth(playerid, INJURY_HP);
 	return 1;
 }

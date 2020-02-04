@@ -74,7 +74,7 @@ YCMD:zrobkolejke(playerid, params[], help)
             if(GetPVarInt(i, "kolejka") == 1)
             {
                 SetPVarInt(i, "kolejka", 0);
-                SetPlayerPosEx(i, GetPVarFloat(i, "kolejka-x"),GetPVarFloat(i, "kolejka-y"),GetPVarFloat(i, "kolejka-z"));
+                SetPlayerPos(i, GetPVarFloat(i, "kolejka-x"),GetPVarFloat(i, "kolejka-y"),GetPVarFloat(i, "kolejka-z"));
                 SetPlayerVirtualWorld(i, GetPVarInt(i, "kolejka-vw"));
                 SetPlayerInterior(i, GetPVarInt(i, "kolejka-int"));
                 Wchodzenie(i);

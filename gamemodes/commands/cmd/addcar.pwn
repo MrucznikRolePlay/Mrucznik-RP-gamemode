@@ -38,7 +38,7 @@ YCMD:addcar(playerid, params[], help)
     GetPlayerFacingAngle(playerid, a);
     x+=floatsin(-a, degrees);
     y+=floatcos(-a, degrees);
-    SetPlayerPosEx(playerid, x, y, z+0.5);
+    SetPlayerPos(playerid, x, y, z+0.5);
     new id = Car_Create(model, x,y,z,a, color1, color2);
     if(id == -1) return SendClientMessage(playerid, COLOR_GRAD2, "Brak wolnego miejsca?");
     new str[128];

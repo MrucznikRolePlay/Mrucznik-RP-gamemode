@@ -585,7 +585,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, result);
 	SetPlayerVirtualWorld(playerid, 1000+playerid);
 	PlayerInfo[playerid][pMuted] = 1;
-	SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
+	SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 	poscig[playerid] = 0;
 	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNick(adminid), timeVal, (result)); 
 	SendMessageToAdmin(string, COLOR_RED); 

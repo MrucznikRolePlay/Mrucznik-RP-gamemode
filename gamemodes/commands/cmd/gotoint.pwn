@@ -49,7 +49,7 @@ YCMD:gotoint(playerid, params[], help)
 				if (PlayerInfo[playerid][pAdmin] >= 20)
 				{
 					SetPlayerInterior(playerid, IntInfo[plo][Int]);
-					SetPlayerPosEx(playerid, IntInfo[plo][Int_X], IntInfo[plo][Int_Y], IntInfo[plo][Int_Z]);
+					SetPlayerPos(playerid, IntInfo[plo][Int_X], IntInfo[plo][Int_Y], IntInfo[plo][Int_Z]);
   					format(string, sizeof(string), "Dom %d, dane: Interior %d, Kategoria %d, Iloœæ pokoi %d", plo, IntInfo[plo][Int], IntInfo[plo][Kategoria], IntInfo[plo][Pokoje]);
 	    			SendClientMessage(playerid, COLOR_GREY, string);
 				}

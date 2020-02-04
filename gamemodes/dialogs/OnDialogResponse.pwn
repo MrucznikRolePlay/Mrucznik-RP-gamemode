@@ -2236,7 +2236,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
     	                SetPlayerVirtualWorld(playerid,0);
-    	                SetPlayerPosEx(playerid,288.0914,-1609.7465,17.9994);
+    	                SetPlayerPos(playerid,288.0914,-1609.7465,17.9994);
     	            	SetServerWeatherAndTime(playerid); 
 						SetPLocal(playerid, PLOCAL_DEFAULT);
     	            }
@@ -2265,7 +2265,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,14);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid, 292.0818,-1610.0715,124.7512);
+    				    SetPlayerPos(playerid, 292.0818,-1610.0715,124.7512);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone", 5000, 1);
 						SetPLocal(playerid, PLOCAL_ORG_SN);
@@ -2280,7 +2280,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,16);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,296.9033,-1598.3610,117.0619);
+    				    SetPlayerPos(playerid,296.9033,-1598.3610,117.0619);
 						SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
 						SetPLocal(playerid, PLOCAL_ORG_SN);
@@ -2295,7 +2295,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,17);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,295.1328,-1609.4705,115.6818);
+    				    SetPlayerPos(playerid,295.1328,-1609.4705,115.6818);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
 						SetPLocal(playerid, PLOCAL_ORG_SN);
@@ -2310,7 +2310,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,18);
     				    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-    				    SetPlayerPosEx(playerid,290.7577,-1604.3273,134.6113);
+    				    SetPlayerPos(playerid,290.7577,-1604.3273,134.6113);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
 						SetPLocal(playerid, PLOCAL_ORG_SN);
@@ -2323,7 +2323,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
     	                SetPlayerVirtualWorld(playerid,0);
-    	                SetPlayerPosEx(playerid,285.8397,-1596.4153,114.5687);
+    	                SetPlayerPos(playerid,285.8397,-1596.4153,114.5687);
     	                SetServerWeatherAndTime(playerid);
 						SetPLocal(playerid, PLOCAL_DEFAULT);
     	            }
@@ -2340,7 +2340,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
-			                SetPlayerPosEx(playerid,1568.7660,-1691.4886,5.8906);
+			                SetPlayerPos(playerid,1568.7660,-1691.4886,5.8906);
 			                SetPlayerVirtualWorld(playerid,2);
 			                SetPlayerInterior(playerid,0);
 			                TogglePlayerControllable(playerid,0);
@@ -2358,7 +2358,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            	// parking gorny
 		            	if(IsACop(playerid) || IsABOR(playerid))
            				{
-			                SetPlayerPosEx(playerid,1570.9799,-1636.7758,13.5713); // pos gornego
+			                SetPlayerPos(playerid,1570.9799,-1636.7758,13.5713); // pos gornego
 			                SetPlayerVirtualWorld(playerid,0);
 			                SetPlayerInterior(playerid,0);
 			                TogglePlayerControllable(playerid,0);
@@ -2374,7 +2374,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 2:
 		            {
-		                SetPlayerPosEx(playerid,-1645.1858, 883.1620, -45.4112);
+		                SetPlayerPos(playerid,-1645.1858, 883.1620, -45.4112);
 		                SetPlayerVirtualWorld(playerid,1);
 		                TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2383,7 +2383,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 3:
 		            {
-		                SetPlayerPosEx(playerid,-1621.7272, 834.5807, -26.1115);
+		                SetPlayerPos(playerid,-1621.7272, 834.5807, -26.1115);
 		                SetPlayerVirtualWorld(playerid,1);
 		                TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2392,7 +2392,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 4:
 		            {
-		                SetPlayerPosEx(playerid,-1745.1101, 824.0737, -48.0110);
+		                SetPlayerPos(playerid,-1745.1101, 824.0737, -48.0110);
 		                SetPlayerVirtualWorld(playerid,1);
 		                TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2401,7 +2401,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 5:
 		            {
-		                SetPlayerPosEx(playerid,1568.1061, 2205.3196, -50.9522);
+		                SetPlayerPos(playerid,1568.1061, 2205.3196, -50.9522);
 		                SetPlayerVirtualWorld(playerid,3);
 		                TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
@@ -2412,7 +2412,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(IsACop(playerid) || IsABOR(playerid))
 						{
-							SetPlayerPosEx(playerid,1565.0798, -1665.6580, 28.4782);
+							SetPlayerPos(playerid,1565.0798, -1665.6580, 28.4782);
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerInterior(playerid,0);
 							GameTextForPlayer(playerid, "~w~ [Poziom 5]~n~~b~Dach", 5000, 1);
@@ -2435,7 +2435,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            {
 	                case 0:
 	                {
-                 		SetPlayerPosEx(playerid, 707.06085205078,-508.38107299805,27.871946334839);//salka konferencyjna
+                 		SetPlayerPos(playerid, 707.06085205078,-508.38107299805,27.871946334839);//salka konferencyjna
 				        GameTextForPlayer(playerid, "~w~Witamy w salce konferencyjnej", 5000, 1);
 				        SetPlayerVirtualWorld(playerid, 35);
 				        TogglePlayerControllable(playerid, 0);
@@ -2443,7 +2443,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                }
 	                case 1:
 	                {
-	                    SetPlayerPosEx(playerid, 700.6748046875,-502.41955566406,23.515483856201);//biura
+	                    SetPlayerPos(playerid, 700.6748046875,-502.41955566406,23.515483856201);//biura
 				        GameTextForPlayer(playerid, "~w~Projekt by Kacper Monari", 5000, 1);
 				        SetPlayerVirtualWorld(playerid, 35);
 				        TogglePlayerControllable(playerid, 0);
@@ -2452,7 +2452,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                case 2:
 	                {
 					/*
-						SetPlayerPosEx(playerid, 694.27490234375,-569.04272460938,-79.225189208984);//piwnica
+						SetPlayerPos(playerid, 694.27490234375,-569.04272460938,-79.225189208984);//piwnica
 				        GameTextForPlayer(playerid, "~w~Mroczne piwnice i stare biura", 5000, 1);
 				        SetPlayerVirtualWorld(playerid, 35);
 				        TogglePlayerControllable(playerid, 0);
@@ -2472,7 +2472,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
            				if(IsAUrzednik(playerid) || IsABOR(playerid))//zaplecze
            				{
-					        SetPlayerPosEx(playerid,1412.3348388672, -1790.5777587891, 15.370599746704);
+					        SetPlayerPos(playerid,1412.3348388672, -1790.5777587891, 15.370599746704);
 					        SetPlayerVirtualWorld(playerid,0);
 					        SetPlayerInterior(playerid,0);
 					        PlayerInfo[playerid][pLocal] = 255;
@@ -2486,7 +2486,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 1:
 			        {
-				        SetPlayerPosEx(playerid,1450.6615,-1819.2279,77.9613);//g³ówna sala urzêdu
+				        SetPlayerPos(playerid,1450.6615,-1819.2279,77.9613);//g³ówna sala urzêdu
 				        SetPlayerVirtualWorld(playerid,50);
 				        SetPlayerInterior(playerid,0);
 	                    TogglePlayerControllable(playerid,0);
@@ -2502,7 +2502,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 					case 2:
 					{
-						SetPlayerPosEx(playerid,1481.5200,-1821.0967,58.1563);
+						SetPlayerPos(playerid,1481.5200,-1821.0967,58.1563);
 						SetPlayerVirtualWorld(playerid,51);
 				        SetPlayerInterior(playerid,0);
 	                    TogglePlayerControllable(playerid,0);
@@ -2528,7 +2528,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 						SetPlayerVirtualWorld(playerid,2);
-						SetPlayerPosEx(playerid,1093.0625,1530.8715,6.6905);
+						SetPlayerPos(playerid,1093.0625,1530.8715,6.6905);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 						PlayerInfo[playerid][pLocal] = 255;
 						GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
@@ -2542,7 +2542,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 						SetPlayerVirtualWorld(playerid,0);
-						SetPlayerPosEx(playerid,596.5255, -1489.2544, 15.3587);
+						SetPlayerPos(playerid,596.5255, -1489.2544, 15.3587);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
 						GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
@@ -2556,7 +2556,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 						SetPlayerVirtualWorld(playerid, 1);
-						SetPlayerPosEx(playerid, 594.05334, -1476.27490, 81.82840+0.5);
+						SetPlayerPos(playerid, 594.05334, -1476.27490, 81.82840+0.5);
 						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
 						Wchodzenie(playerid);
@@ -2571,7 +2571,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,1);
-						SetPlayerPosEx(playerid,586.83704, -1473.89270, 89.30576);
+						SetPlayerPos(playerid,586.83704, -1473.89270, 89.30576);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 1, Recepcja");
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 212;
@@ -2588,7 +2588,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,2);
-						SetPlayerPosEx(playerid,592.65466, -1486.76575, 82.10487);
+						SetPlayerPos(playerid,592.65466, -1486.76575, 82.10487);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 2, Szatnia");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
@@ -2606,7 +2606,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,3);
-						SetPlayerPosEx(playerid,591.37579, -1482.26672, 80.43560);
+						SetPlayerPos(playerid,591.37579, -1482.26672, 80.43560);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 3 - Zbrojownia");
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
@@ -2624,7 +2624,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,4);
-						SetPlayerPosEx(playerid,596.21857, -1477.92395, 84.06664);
+						SetPlayerPos(playerid,596.21857, -1477.92395, 84.06664);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 4, Biura Federalne");
 						PlayerInfo[playerid][pLocal] = 255;
 						Wchodzenie(playerid);
@@ -2640,7 +2640,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,5);
-						SetPlayerPosEx(playerid,589.23029, -1479.66357, 91.74274);
+						SetPlayerPos(playerid,589.23029, -1479.66357, 91.74274);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 5, Dyrektorat");
 						PlayerInfo[playerid][pLocal] = 212;
 						Wchodzenie(playerid);
@@ -2652,7 +2652,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPosEx(playerid,585.70782, -1479.54211, 99.01273);
+						SetPlayerPos(playerid,585.70782, -1479.54211, 99.01273);
 						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,6);
@@ -2667,7 +2667,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPosEx(playerid, 590.42767, -1447.62939, 80.95732);
+						SetPlayerPos(playerid, 590.42767, -1447.62939, 80.95732);
 						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 7);
@@ -2681,7 +2681,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPosEx(playerid, 605.5609, -1462.2583, 88.1674);
+						SetPlayerPos(playerid, 605.5609, -1462.2583, 88.1674);
 						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 8);
@@ -2696,7 +2696,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 						SetPlayerVirtualWorld(playerid,0);
-						SetPlayerPosEx(playerid,613.4404,-1471.9745,73.8816);
+						SetPlayerPos(playerid,613.4404,-1471.9745,73.8816);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
 						PlayerInfo[playerid][pLocal] = 255;
 						Wchodzenie(playerid);
@@ -6159,7 +6159,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                {
 	                    if(Kredyty[playerid] >= 10)
 	                    {
-	                    	SetPlayerPosEx(playerid, 578.9954,-2194.5471,7.1380);//trampolina 5m
+	                    	SetPlayerPos(playerid, 578.9954,-2194.5471,7.1380);//trampolina 5m
 				        	GameTextForPlayer(playerid, "~w~Wysokosc 5m ~r~Pobrano 10 kredytow", 5000, 1);
 				        	Kredyty[playerid] -= 10;
 				        }
@@ -6172,7 +6172,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                {
 	                    if(Kredyty[playerid] >= 20)
 	                    {
-		                    SetPlayerPosEx(playerid, 577.5804,-2194.8018,12.1380);//trampolina 10m
+		                    SetPlayerPos(playerid, 577.5804,-2194.8018,12.1380);//trampolina 10m
 					        GameTextForPlayer(playerid, "~w~Wysokosc 10m ~r~Pobrano 20 kredytow", 5000, 1);
 					        Kredyty[playerid] -= 20;
 	                    }
@@ -6192,7 +6192,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 					{
-						SetPlayerPosEx(playerid, -653.34765625,-5448.5634765625,13.368634223938);
+						SetPlayerPos(playerid, -653.34765625,-5448.5634765625,13.368634223938);
 						TogglePlayerControllable(playerid, 0);
 						SetPlayerInterior(playerid, 0);
                         Wchodzenie(playerid);
@@ -6204,7 +6204,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    new txt1[1024] = "Dziêki tej sprzelnicy na otwartym powietrzu mo¿na æwiczyæ precyzyjne i dok³adne strza³y z m4,mp5 i rifle\n Cele s¹ dwuczêœciowe: sk³adaj¹ siê z g³owy i reszty cia³a\n Zalecane s¹: 3 pkt za strza³ w g³owê i 1pkt za strza³ w cel\n ";
 					    new txt2[512] = "W tym æwiczeniu nie przewidziano ograniczeñ czasowych\n, agent oddaje strza³ tylko do jednego celu zu¿ywaj¹c max 3 naboje\n Zniszczenie budki w której stoi cel skutkuje niezaliczeniem zadania";
 					    strcat(txt1, txt2, sizeof(txt1));
-					    SetPlayerPosEx(playerid, 1703.9327392578,141.29598999023,30.903503417969);
+					    SetPlayerPos(playerid, 1703.9327392578,141.29598999023,30.903503417969);
 						TogglePlayerControllable(playerid, 0);
 						SetPlayerInterior(playerid, 0);
                         Wchodzenie(playerid);
@@ -6212,7 +6212,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 2:
 					{
-					    SetPlayerPosEx(playerid, 1581.8731689453,5490.7412109375,329.73870849609);
+					    SetPlayerPos(playerid, 1581.8731689453,5490.7412109375,329.73870849609);
 						TogglePlayerControllable(playerid, 0);
 						SetPlayerInterior(playerid, 0);
 						GivePlayerWeapon(playerid, 46, 1);
@@ -6224,7 +6224,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    new txt1[1024] = "W opuszczonym domu przestêpcy przetrzymuj¹ zak³adników\n Zadanie polega na zlikwidowaniu wszytkich przestêpców (kobiety) bez ¿adnych strat w cywilach ( ludzie nieuzbrojeni i mê¿czyŸni)\n Czas na wykonanie zadania to 1minuta\n Zu¿ycie naboi to max 40\n Prowadz¹cy trening musi znajdowaæ siê w pomieszczeniu aby po 1 minucie podliczyæ wyniki agenta\n Na torze znajduje siê 17 zak³adników i 17 bandytów";
 					    new txt2[512] = "\n Na torze znajduj¹ sie równie¿ headshoty i zadanie na celnoœæ\n Zaleca siê przyznawaæ 1 pkt za przestêpce -5pkt za zak³adnika 2pkt za headshot oraz 5 pkt za manekina\n Czas powy¿ej 1:30sek oraz zu¿ycie wiêcej ni¿ 40 naboi skutkuje niezaliczeniem zadania";
 					    strcat(txt1, txt2, sizeof(txt1));
-					    SetPlayerPosEx(playerid, 2236.0786132813,-6891.2177734375,21.423152923584);
+					    SetPlayerPos(playerid, 2236.0786132813,-6891.2177734375,21.423152923584);
 						TogglePlayerControllable(playerid, 0);
 						SetPlayerInterior(playerid, 8);
                         Wchodzenie(playerid);
@@ -6372,7 +6372,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    if(drukarnia == 0 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 					    {
-						    SetPlayerPosEx(playerid, 1817.9636230469,-1314.1984863281,109.95202636719);
+						    SetPlayerPos(playerid, 1817.9636230469,-1314.1984863281,109.95202636719);
 							TogglePlayerControllable(playerid, 0);
                             Wchodzenie(playerid);
 			                sanwyjdz[playerid] = 1;
@@ -6387,7 +6387,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    if(studiovic == 0 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 					    {
-						    SetPlayerPosEx(playerid, -1768.1467285156,1537.67578125,4767.3256835938);
+						    SetPlayerPos(playerid, -1768.1467285156,1537.67578125,4767.3256835938);
 							TogglePlayerControllable(playerid, 0);
                             Wchodzenie(playerid);
 			                SetPlayerInterior(playerid, 13);
@@ -6403,7 +6403,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    if(studiog == 0 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 					    {
-						    SetPlayerPosEx(playerid, 702.70550537109,-1382.9512939453,-93.994110107422);
+						    SetPlayerPos(playerid, 702.70550537109,-1382.9512939453,-93.994110107422);
 							TogglePlayerControllable(playerid, 0);
                             Wchodzenie(playerid);
 			                SetPlayerInterior(playerid, 13);
@@ -6420,7 +6420,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    if(studion == 0 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 					    {
-						    SetPlayerPosEx(playerid, -2928.0815429688,3636.6806640625,693.05780029297);
+						    SetPlayerPos(playerid, -2928.0815429688,3636.6806640625,693.05780029297);
 							TogglePlayerControllable(playerid, 0);
                             Wchodzenie(playerid);
 			                SetPlayerInterior(playerid, 13);
@@ -6436,7 +6436,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    if(biurosan == 0 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 					    {
-						    SetPlayerPosEx(playerid, 1833.8078613281,-1275.3975830078,109.40234375);
+						    SetPlayerPos(playerid, 1833.8078613281,-1275.3975830078,109.40234375);
 							TogglePlayerControllable(playerid, 0);
                             Wchodzenie(playerid);
 			                sanwyjdz[playerid] = 1;
@@ -6451,7 +6451,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    if(drukarnia == 0 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 					    {
-						    SetPlayerPosEx(playerid, 736.890625,-1373.8778076172,30.01620674133);
+						    SetPlayerPos(playerid, 736.890625,-1373.8778076172,30.01620674133);
 							TogglePlayerControllable(playerid, 0);
                             Wchodzenie(playerid);
 			                SetPlayerVirtualWorld(playerid, 31);
@@ -6662,7 +6662,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							if(Dom[i][hKupiony] == 0)
 							{
 	          					new deem = Dom[i][hDomNr];
-						        SetPlayerPosEx(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
+						        SetPlayerPos(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
 						        SetPlayerInterior(playerid, IntInfo[deem][Int]);
 						        PlayerInfo[playerid][pDomWKJ] = i;
 						        GameTextForPlayer(playerid, "~g~Masz 30 sekund", 5000, 1);
@@ -13993,7 +13993,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	            SetPlayerVirtualWorld(playerid,10);
     				TogglePlayerControllable(playerid,0);
                     Wchodzenie(playerid);
-    				SetPlayerPosEx(playerid,1311.5483,-1361.2096,62.8567);
+    				SetPlayerPos(playerid,1311.5483,-1361.2096,62.8567);
     				SetInteriorTimeAndWeather(playerid); 
 					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
@@ -14007,7 +14007,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	            SetPlayerVirtualWorld(playerid,11);
     				TogglePlayerControllable(playerid,0);
                     Wchodzenie(playerid);
-    				SetPlayerPosEx(playerid,1305.9991,-1326.1344,52.5659);
+    				SetPlayerPos(playerid,1305.9991,-1326.1344,52.5659);
     				SetInteriorTimeAndWeather(playerid); 
 					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
@@ -14021,7 +14021,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	            SetPlayerVirtualWorld(playerid,12);
     				TogglePlayerControllable(playerid,0);
                     Wchodzenie(playerid);
-    				SetPlayerPosEx(playerid,1309.9982,-1364.2216,59.6271);
+    				SetPlayerPos(playerid,1309.9982,-1364.2216,59.6271);
     				SetInteriorTimeAndWeather(playerid); 
 					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
@@ -14035,7 +14035,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	            SetPlayerVirtualWorld(playerid,13);
     				TogglePlayerControllable(playerid,0);
                     Wchodzenie(playerid);
-    				SetPlayerPosEx(playerid,1310.1989,-1328.8876,82.5859);
+    				SetPlayerPos(playerid,1310.1989,-1328.8876,82.5859);
     				SetInteriorTimeAndWeather(playerid); 
 					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				}
@@ -14049,7 +14049,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	            SetPlayerVirtualWorld(playerid,14);
     				TogglePlayerControllable(playerid,0);
                     Wchodzenie(playerid);
-    				SetPlayerPosEx(playerid,1310.2946,-1321.2517,74.6955);
+    				SetPlayerPos(playerid,1310.2946,-1321.2517,74.6955);
     				SetInteriorTimeAndWeather(playerid); 
 					GameTextForPlayer(playerid, "~w~By~n~~r~skLolsy & skTom", 5000, 1);
 				
@@ -14062,7 +14062,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						return 1;
 					}
     	            SetPlayerVirtualWorld(playerid,0);
-    	            SetPlayerPosEx(playerid,1310.3961,-1319.0530,35.6587);
+    	            SetPlayerPos(playerid,1310.3961,-1319.0530,35.6587);
     	            new Hour, Minute, Second;
     				gettime(Hour, Minute, Second);
     				SetPlayerTime(playerid,Hour,Minute);
@@ -14894,24 +14894,24 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 case 0:
 				{
-			 			SetPlayerPosEx(playerid, 1745.8119,-1129.8972,24.0781);
+			 			SetPlayerPos(playerid, 1745.8119,-1129.8972,24.0781);
                         SetPlayerVirtualWorld(playerid, 0);
 				}
                 case 1:
 				{
-						SetPlayerPosEx(playerid, 1746.2399,-1128.2211,227.8059);
+						SetPlayerPos(playerid, 1746.2399,-1128.2211,227.8059);
                         SetPlayerVirtualWorld(playerid, 22);
                         Wchodzenie(playerid);
 				}
                 case 2:
 				{
-						SetPlayerPosEx(playerid, 1745.8934,-1129.6250,47.2859);
+						SetPlayerPos(playerid, 1745.8934,-1129.6250,47.2859);
                         SetPlayerVirtualWorld(playerid, 23);
                         Wchodzenie(playerid);
 				}
                 case 3:
 				{
-						SetPlayerPosEx(playerid, 1745.8119,-1129.8972,46.5700);
+						SetPlayerPos(playerid, 1745.8119,-1129.8972,46.5700);
                         SetPlayerVirtualWorld(playerid, 0);
 				}
             }
@@ -14934,7 +14934,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         Unspec[playerid][sPvw] = GetPlayerVirtualWorld(playerid);
 
         GetPlayerPos(pid, x, y, z);
-        SetPlayerPosEx(playerid, x, y, z);
+        SetPlayerPos(playerid, x, y, z);
         SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
         SetPlayerInterior(playerid, GetPlayerInterior(pid));
         Wchodzenie(playerid);

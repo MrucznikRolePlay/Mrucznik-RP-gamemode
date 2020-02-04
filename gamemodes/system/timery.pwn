@@ -975,6 +975,7 @@ public MainTimer()
     }
     if(TICKS_1Min == 59)
     {
+		CJSkinCheck();
         SyncUp();
     }
     if(TICKS_5Min == (60*5)-1)
@@ -2279,12 +2280,12 @@ public JednaSekundaTimer()
 				PlayerInfo[i][pJailTime] = 0;
 				if(PlayerInfo[i][pJailed] == 1)
 				{
-					SetPlayerPosEx(i,-1681.1091,917.8300,-52.4141);
+					SetPlayerPos(i,-1681.1091,917.8300,-52.4141);
 				}
 				else if(PlayerInfo[i][pJailed] == 2)
 				{
 					//SetPlayerWorldBounds(i,20000.0000,-20000.0000,20000.0000,-20000.0000); //Reset world to player
-                    //SetPlayerPosEx(i, NG_JAIL_X,NG_JAIL_Y,NG_JAIL_Z);
+                    //SetPlayerPos(i, NG_JAIL_X,NG_JAIL_Y,NG_JAIL_Z);
 					UnJailDeMorgan(i);
 				}
 				else if(PlayerInfo[i][pJailed] == 3)
@@ -2294,7 +2295,7 @@ public JednaSekundaTimer()
 					PlayerInfo[i][pJailTime] = 0;
 					SetPlayerVirtualWorld(i, 0);
 					PlayerInfo[i][pMuted] = 0;
-					SetPlayerPosEx(i,1481.1666259766,-1790.2204589844,156.7875213623);
+					SetPlayerPos(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
 					PlayerKilledByAdmin[i] = 1;
@@ -2370,7 +2371,7 @@ public JednaSekundaTimer()
 							SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
 							SetPlayerInterior(i, GetPlayerInterior(cop));
 							GetPlayerPos(cop, x, y, z);
-							SetPlayerPosEx(i, x-0.5, y-0.5, z);
+							SetPlayerPos(i, x-0.5, y-0.5, z);
 							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
 							TogglePlayerControllable(i, 0);
 							if(PlayerInfo[i][pBW] == 0) SetTimerEx("FreezePlayer", 2000, false, "i", i);
@@ -2649,7 +2650,7 @@ public JednaSekundaTimer()
 			TutTime[i] += 1;
 			if(TutTime[i] == 3)
 			{
-				SetPlayerPosEx(i, 849.62371826172, -989.92199707031, -5.0);
+				SetPlayerPos(i, 849.62371826172, -989.92199707031, -5.0);
 				SetPlayerCameraPos(i, 849.62371826172, -989.92199707031, 53.211112976074);// kamera
 				SetPlayerCameraLookAt(i, 907.40313720703, -913.14117431641, 77.788856506348);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: Pocz¹tek ____|");
@@ -2660,7 +2661,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 14)
 			{
-				SetPlayerPosEx(i, 326.09194946289, -1521.3157958984, 20.0);
+				SetPlayerPos(i, 326.09194946289, -1521.3157958984, 20.0);
 				SetPlayerCameraPos(i, 398.16021728516, -1511.9237060547, 78.641815185547);// kamera
 				SetPlayerCameraLookAt(i, 326.09194946289, -1521.3157958984, 42.154850006104);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - DM i Nick ____|");
@@ -2676,7 +2677,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 30)
 			{
-				SetPlayerPosEx(i, 1016.9872436523, -1372.0234375, -5.0);
+				SetPlayerPos(i, 1016.9872436523, -1372.0234375, -5.0);
 				SetPlayerCameraPos(i, 1053.3154296875, -1326.3295898438, 28.300031661987);// kamera
 				SetPlayerCameraLookAt(i, 1016.9872436523, -1372.0234375, 15.836219787598);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - Bug Using i cheatowanie ____|");
@@ -2690,7 +2691,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 52)
 			{
-				SetPlayerPosEx(i, 1352.2797851563, -1757.189453125, -5.0);
+				SetPlayerPos(i, 1352.2797851563, -1757.189453125, -5.0);
 				SetPlayerCameraPos(i, 1352.4576416016, -1725.1925048828, 23.291763305664);// kamera
 				SetPlayerCameraLookAt(i, 1352.2797851563, -1757.189453125, 13.5078125);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady Serwera - OOC i IC ____|");
@@ -2706,7 +2707,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 74)
 			{
-				SetPlayerPosEx(i, 370.02825927734, -2083.5886230469, -10.0);
+				SetPlayerPos(i, 370.02825927734, -2083.5886230469, -10.0);
 				SetPlayerCameraPos(i, 340.61755371094, -2091.701171875, 22.800081253052);// kamera
 				SetPlayerCameraLookAt(i, 370.02825927734, -2083.5886230469, 8.1386299133301);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - IC ____|");
@@ -2720,7 +2721,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 96)
 			{
-				SetPlayerPosEx(i, 1172.8602294922, -1331.978515625, -5.0);
+				SetPlayerPos(i, 1172.8602294922, -1331.978515625, -5.0);
 				SetPlayerCameraPos(i, 1228.7977294922, -1345.1479492188, 21.532119750977);// kamera
 				SetPlayerCameraLookAt(i, 1172.8602294922, -1331.978515625, 14.317019462585);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - MG i PG ____|");
@@ -2735,7 +2736,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 112)
 			{
-				SetPlayerPosEx(i, 412.80743408203, -1312.4066162109, -5.0);
+				SetPlayerPos(i, 412.80743408203, -1312.4066162109, -5.0);
 				SetPlayerCameraPos(i, 402.2776184082, -1351.4703369141, 43.704566955566);// kamera
 				SetPlayerCameraLookAt(i, 412.80743408203, -1312.4066162109, 39.677307128906);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zakoñczenie ____|");
@@ -2753,7 +2754,7 @@ public JednaSekundaTimer()
 			{
 				TogglePlayerSpectating(i, false);
 				
-				SetPlayerPosEx(i, 208.3876,-34.8742,1001.9297);
+				SetPlayerPos(i, 208.3876,-34.8742,1001.9297);
 				SetPlayerFacingAngle(i, 138.8926);
 
 				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
@@ -2872,7 +2873,7 @@ public JednaSekundaTimer()
 					{
 						if(IsPlayerConnected(Boxer1) && IsPlayerConnected(Boxer2))
 						{
-							SetPlayerPosEx(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPosEx(Boxer2, 765.8433,3.2924,1000.7186);
+							SetPlayerPos(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPos(Boxer2, 765.8433,3.2924,1000.7186);
 							SetPlayerInterior(Boxer1, 5); SetPlayerInterior(Boxer2, 5);
 							GetPlayerName(Boxer1, loser, sizeof(loser));
 							GetPlayerName(Boxer2, winner, sizeof(winner));
@@ -2948,7 +2949,7 @@ public JednaSekundaTimer()
 					{
 						if(IsPlayerConnected(Boxer1) && IsPlayerConnected(Boxer2))
 						{
-							SetPlayerPosEx(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPosEx(Boxer2, 765.8433,3.2924,1000.7186);
+							SetPlayerPos(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPos(Boxer2, 765.8433,3.2924,1000.7186);
 							SetPlayerInterior(Boxer1, 5); SetPlayerInterior(Boxer2, 5);
 							GetPlayerName(Boxer1, winner, sizeof(winner));
 							GetPlayerName(Boxer2, loser, sizeof(loser));
@@ -3240,6 +3241,17 @@ public Fillup()
 	return 1;
 }
 
+public CJSkinCheck()
+{
+	foreach(new j : Player)
+	{
+		if(GetPlayerSkin(j) == 0 && PlayerInfo[j][pAdmin] == 0)
+		{
+			PlayerInfo[j][pSkin] = 299;
+			SetPlayerSkinEx(j, 299);
+		}
+	}
+}
 //11.06.2014
 public CarCheck()
 {
@@ -3373,7 +3385,7 @@ public VehicleUpdate()
                 new hour,minute,second;
 				gettime(hour,minute,second);
 				FixHour(hour);
-				if(shifthour >= 0 && shifthour >= 4)
+				if(shifthour >= 4)
 				{
 					Oil_GenerateFromVehicle(i);
 				}
@@ -3402,7 +3414,7 @@ public SlideRope(playerid)
 	    new Float:Z;
 	    GetPlayerPos(playerid, X, Y, Z);
   	 	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
-	    SetPlayerPosEx(playerid, X, Y, Z - 2.00);
+	    SetPlayerPos(playerid, X, Y, Z - 2.00);
 		SetPlayerVelocity(playerid,0,0,0);
 	    SetTimerEx("SlideRope", 1000, 0, "i", playerid);
  	}

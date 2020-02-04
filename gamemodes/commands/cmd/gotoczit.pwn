@@ -34,7 +34,7 @@ YCMD:gotoczit(playerid, params[], help)
     {
         SetPlayerVirtualWorld(playerid, 0);
         SetPlayerInterior(playerid, 0);
-        SetPlayerPosEx(playerid, czitX, czitY, czitZ);
+        SetPlayerPos(playerid, czitX, czitY, czitZ);
         SendClientMessage(playerid, -1, "Teleportowa³eœ siê na miejsce zbrodni");
     }
     return 1;
