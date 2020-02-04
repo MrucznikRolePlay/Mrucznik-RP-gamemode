@@ -35,7 +35,6 @@
 #include "animacje\animacje.def"
 #include "antycheat\antycheat.def"
 #include "antyspam\antyspam.def"
-#include "biznesy\biznesy.def"
 #include "bramy\bramy.def"
 #include "budki\budki.def"
 #include "bw\bw.def"
@@ -72,7 +71,6 @@
 #include "animacje\animacje.hwn"
 #include "antycheat\antycheat.hwn"
 #include "antyspam\antyspam.hwn"
-#include "biznesy\biznesy.hwn"
 #include "bramy\bramy.hwn"
 #include "budki\budki.hwn"
 #include "bw\bw.hwn"
@@ -109,7 +107,6 @@
 #include "animacje\animacje.pwn"
 #include "antycheat\antycheat.pwn"
 #include "antyspam\antyspam.pwn"
-#include "biznesy\biznesy.pwn"
 #include "bramy\bramy.pwn"
 #include "budki\budki.pwn"
 #include "bw\bw.pwn"
@@ -155,7 +152,6 @@
 
 //-------<[ mysql ]>-------
 #include "admin\admin_mysql.pwn"
-#include "biznesy\biznesy_mysql.pwn"
 #include "graffiti\graffiti_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
 #include "player_attachments\player_attachments_mysql.pwn"
@@ -172,7 +168,6 @@
 //-------<[ callbacks ]>-------
 #include "admin\admin_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
-#include "biznesy\biznesy_callbacks.pwn"
 #include "convoy\convoy_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "money\money_callbacks.pwn"
@@ -189,7 +184,6 @@
 #include "admin\commands\admin_commands.pwn"
 #include "animacje\commands\animacje_commands.pwn"
 #include "antycheat\commands\antycheat_commands.pwn"
-#include "biznesy\commands\biznesy_commands.pwn"
 #include "bramy\commands\bramy_commands.pwn"
 #include "chaty\commands\chaty_commands.pwn"
 #include "convoy\commands\convoy_commands.pwn"

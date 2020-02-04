@@ -676,32 +676,6 @@ YCMD:wejdz(playerid, params[], help)
             Wejdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
             
-			//BIZNESY
-            for(new i=0; i<=BusinessLoaded; i++)
-            {
-                if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ])
-                && GetPlayerVirtualWorld(playerid) == 0)
-                {
-                    if(BizOpenStatus[i] == 1 
-                    && PlayerInfo[playerid][pBusinessOwner] != i
-                    && PlayerInfo[playerid][pBusinessMember] != i)
-                    {
-                        sendErrorMessage(playerid, "Ten biznes jest zamkniêty!"); 
-                        return 1;
-                    }
-                    if(Business[i][b_vw] == 0 && Business[i][b_enX] == Business[i][b_exX])
-                    {
-                        sendTipMessage(playerid, "Ten biznes nie ma wnêtrza!"); 
-                        return 1;
-                    }
-                    SetPlayerVirtualWorld(playerid, Business[i][b_vw]); 
-                    SetPlayerInterior(playerid, Business[i][b_int]); 
-                    SetPLocal(playerid, Business[i][b_pLocal]); 
-                    SetPlayerPos(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
-                    Wchodzenie(playerid);
-                    return 1;  
-                }
-            }
 
             for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
             {

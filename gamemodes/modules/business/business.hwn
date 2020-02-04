@@ -22,6 +22,27 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum eBiz {
+	b_Name[64], 
+	b_ownerUID,
+	b_Name_Owner[MAX_PLAYER_NAME], 
+	Float:b_enX,
+	Float:b_enY,
+	Float:b_enZ,
+	Float:b_exX,
+	Float:b_exY,
+	Float:b_exZ,
+	b_int,
+	b_vw,
+	b_pLocal,
+	b_Location[64],
+	b_cost,
+	b_moneyPocket,
+    b_TYPE,
+    b_TYPE2
+};
+new mBiz[MAX_BIZ][eBiz]; 
+
 //-----------------<[ Zmienne: ]>-------------------
 //------------------<[ Forwardy: ]>--------------------
 

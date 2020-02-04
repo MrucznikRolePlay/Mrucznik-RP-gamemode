@@ -31,6 +31,7 @@
 
 //-------<[ include ]>-------
 #include "mbizbuy\mbizbuy.pwn"
+#include "mbizcreate\mbizcreate.pwn"
 #include "mbiznesy\mbiznesy.pwn"
 
 
@@ -38,6 +39,7 @@
 hook OnGameModeInit()
 {
     command_mbizbuy();
+    command_mbizcreate();
     command_mbiznesy();
     
 }
