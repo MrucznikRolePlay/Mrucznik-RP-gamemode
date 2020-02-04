@@ -1849,7 +1849,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 		if(GetPlayerAdminDutyStatus(playerid) == 1 || GetPlayerAdminDutyStatus(killerid) == 1)
 		{
-			SetPVarInt(playerid, 'skip_bw', 1);
+			SetPVarInt(playerid, "skip_bw", 1);
 		}
 
 		if(GetPlayerState(killerid) == 2)
@@ -1869,7 +1869,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 				Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
 				SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
 				KickEx(killerid);
-				SetPVarInt(playerid, 'skip_bw', 1);
+				SetPVarInt(playerid, "skip_bw", 1);
 				return 1;
 			}
 		}
@@ -1886,7 +1886,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 			Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 		}
 
-		if(GetPVarInt(playerid, 'skip_bw')  == 0)
+		if(GetPVarInt(playerid, "skip_bw")  == 0)
 		{
 			if(PlayerInfo[playerid][pInjury] > 0)
 			{
@@ -2238,7 +2238,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		}
 		else
 		{
-			DeletePVar(playerid, 'skip_bw');		
+			DeletePVar(playerid, "skip_bw");		
 		}
 	}
 	SetPlayerColor(playerid,COLOR_GRAD2);
