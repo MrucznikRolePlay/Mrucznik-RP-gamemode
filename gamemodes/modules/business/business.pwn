@@ -63,8 +63,7 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	new query[1024];
 	new bIDE = FreeBizID();
 	//=====================================[Polecenie do bazy danych]============================
-	format(query, sizeof(query), "INSERT INTO `mru_biz` (`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Cost`, `Location`, `MoneyPocket`) VALUES\
-	('%d', '%d', '%s', '%s', '%f', '%f', '%f', '%f', '%f', '%f', '%d', '%d', '%d', '%d', '%s', '%d')", 
+	format(query, sizeof(query), "INSERT INTO `mru_biz` (`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Cost`, `Location`, `MoneyPocket`) VALUES ('%d', '%d', '%s', '%s', '%f', '%f', '%f', '%f', '%f', '%f', '%d', '%d', '%d', '%d', '%s', '%d')", 
 	bIDE, 
 	0,
 	"Brak",
@@ -103,7 +102,7 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	mBiz[bIDE][b_TYPE] = BTYPE_DEFAULT; 
 	mBiz[bIDE][b_TYPE2] = BTYPE2_DEFAULT; 
 	CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 10.0);
-    CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
+    CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
 	loadedBiz++; 
 	return 1;
 }

@@ -336,7 +336,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`JobSkin`='%d', \
 	`PhoneNr`='%d', \
 	`Dom`='%d', \
-	`Bizz`='%d', \
 	`BizzMember`='%d', \
 	`Wynajem`='%d', \
 	`Pos_x`='%f', \
@@ -353,7 +352,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pJobSkin],
 	PlayerInfo[playerid][pPnumber],
 	PlayerInfo[playerid][pDom],
-	PlayerInfo[playerid][pBusinessOwner],
 	PlayerInfo[playerid][pBusinessMember],
 	PlayerInfo[playerid][pWynajem],
 	PlayerInfo[playerid][pPos_x],
@@ -593,7 +591,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pSkin], 
 		PlayerInfo[playerid][pContractTime]);
 
-        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
+        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
@@ -623,7 +621,6 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pJobSkin],
 		PlayerInfo[playerid][pPnumber],
 		PlayerInfo[playerid][pDom],
-		PlayerInfo[playerid][pBusinessOwner],
 		PlayerInfo[playerid][pBusinessMember],
 		PlayerInfo[playerid][pWynajem],
 		PlayerInfo[playerid][pPos_x],
