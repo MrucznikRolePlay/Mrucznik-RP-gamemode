@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  business                                                 //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  mbizinfo                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,43 +17,42 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Simeone
-// Data utworzenia: 04.02.2020
+// Data utworzenia: 05.02.2020
+
 
 //
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define LVL_TO_BUY_BIZ 5
-
-
-//dialogi
-#define DIALOG_BIZ_BUY 6550
-#define DIALOG_BIZ_BUY2 6551
-#define DIALOG_BIZ_BUY3 6552
-#define DIALOG_BIZ_BUYBOX 6553
-#define BIZ_DIALOG_INFO 6554
-#define MAX_BIZ 200
-
-//koszta dodatkowe
-#define COST_SHOP24 500000//500k
-#define COST_SHOPCLOTHES 750000//750k 
-//Typy (ogólnikowe)
-#define BTYPE_DEFAULT 0
-#define BTYPE_SERVICES 1
-#define BTYPE_INDUSTRY 2 
-
-//Typy (szczegó³owe)
-    //Do TYPU US£UGOWEGO
-#define BTYPE2_DEFAULT 0 
-#define BTYPE2_SHOP 1
-#define BTYPE2_CLOTHESSHOP 2
-#define BTYPE2_CASINO 3
-#define BTYPE2_RESTAURANT 6
-    //Do TYPU PRZEMYS£OWEGO
-#define BTYPE2_CLOTHES 4
-#define BTYPE2_OIL 5
-
-#define INVALID_BUSINESSID 9999
-
+//------------------<[ Implementacja: ]>-------------------
+command_mbizinfo_Impl(playerid)
+{
+    if(GetPlayerVirtualWorld(playerid) == 0)
+    {
+        new string[250];
+        for(new i; i <= MAX_BIZ; i++)
+        {
+            if(IsPlayerInRangeOfPoint(playerid, 4.0, 
+            mBiz[i][b_enX], 
+            mBiz[i][b_enY], 
+            mBiz[i][b_enZ]))
+            {
+                format(string, sizeof(string), "Nazwa: %s\nW³aœciciel: %s\nTyp: %s\nLokalizacja: %s\nCena: %d\ntID: %d",
+                mBiz[i][b_Name],
+                mBiz[i][b_Name_Owner],
+                GetTypeNameBiz(i),
+                mBiz[i][b_Location],
+                mBiz[i][b_cost],
+                i);
+                ShowPlayerDialogEx(playerid, 
+                BIZ_DIALOG_INFO,
+                DIALOG_STYLE_MSGBOX, 
+                "Mrucznik Role Play", 
+                string, 
+                "Okej", 
+                "");  
+            }   
+        }
+    }
+    return 1;
+}
 
 //end

@@ -1,0 +1,12 @@
+{
+    "name": "mbizinfo",
+    "description": "Pozwala sprawdziæ informacje na temat biznesu",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "bizinfo",
+        "businessinfo"
+    ],
+    "parameters": [],
+    "date": "05.02.2020"
+}
