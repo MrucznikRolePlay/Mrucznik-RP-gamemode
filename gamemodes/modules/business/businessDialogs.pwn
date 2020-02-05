@@ -103,7 +103,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     mBiz[pBizID][b_cost]+COST_SHOP24, 
                     mBiz[pBizID][b_Location]); 
                     SetPVarInt(playerid, "BuyBizChoice", 1); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, "Mrucznik Role Play", string, "Kupujê", "Rezygnujê"); 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Kupujê", "Rezygnujê"); 
                 }
                 case 1:
                 {
