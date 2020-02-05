@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  business                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  mbizinfo                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,44 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 04.02.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
-
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define LVL_TO_BUY_BIZ 5
-
-
-//dialogi
-#define DIALOG_BIZ_BUY 6550
-#define DIALOG_BIZ_BUY2 6551
-#define DIALOG_BIZ_BUY3 6552
-#define DIALOG_BIZ_BUYBOX 6553
-#define BIZ_DIALOG_INFO 6554
-#define MAX_BIZ 200
-
-//koszta dodatkowe
-#define COST_SHOP24 500000//500k
-#define COST_SHOPCLOTHES 750000//750k 
-//Typy (ogólnikowe)
-#define BTYPE_DEFAULT 0
-#define BTYPE_SERVICES 1
-#define BTYPE_INDUSTRY 2 
-
-//Typy (szczegó³owe)
-    //Do TYPU US£UGOWEGO
-#define BTYPE2_DEFAULT 0 
-#define BTYPE2_SHOP 1
-#define BTYPE2_CLOTHESSHOP 2
-#define BTYPE2_CASINO 3
-#define BTYPE2_RESTAURANT 6
-    //Do TYPU PRZEMYS£OWEGO
-#define BTYPE2_CLOTHES 4
-#define BTYPE2_OIL 5
-
-#define INVALID_BUSINESSID 9999
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-//end
+//-------<[ include ]>-------
+#include "mbizinfo_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_mbizinfo()
+{
+    new command = Command_GetID("mbizinfo");
+
+    //aliases
+    Command_AddAlt(command, "bizinfo");
+    Command_AddAlt(command, "businessinfo");
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:mbizinfo(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Pozwala sprawdziæ informacje na temat biznesu");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_mbizinfo_Impl(playerid);
+}
