@@ -262,7 +262,7 @@ public OnGameModeInit()
     NowaWybieralka_Init();
 	LoadBiz();
 	//LoadActors(); 
-	CreateBusinessIcon();	
+	//CreateBusinessIcon();	
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
