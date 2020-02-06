@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                  business                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  bizback                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,52 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 04.02.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define LVL_TO_BUY_BIZ 5
 
+//-------<[ include ]>-------
+#include "bizback_impl.pwn"
 
-//dialogi
-#define DIALOG_BIZ_BUY 6550
-#define DIALOG_BIZ_BUY2 6551
-#define DIALOG_BIZ_BUY3 6552
-#define DIALOG_BIZ_BUYBOX 6553
-#define BIZ_DIALOG_INFO 6554
-#define DIALOG_BIZ_ADMINEDIT 6555
-#define MAX_BIZ 200
+//-------<[ initialize ]>-------
+command_bizback()
+{
+    
 
-//koszta dodatkowe
-#define COST_SHOP24 500000//500k
-#define COST_SHOPCLOTHES 750000//750k 
-//Typy (ogólnikowe)
-#define BTYPE_DEFAULT 0
-#define BTYPE_SERVICES 1
-#define BTYPE_INDUSTRY 2 
+    //aliases
+    
 
-//Typy (szczegó³owe)
-    //Do TYPU US£UGOWEGO
-#define BTYPE2_DEFAULT 0 
-#define BTYPE2_SHOP 1
-#define BTYPE2_CLOTHESSHOP 2
-#define BTYPE2_CASINO 3
-#define BTYPE2_RESTAURANT 6
-    //Do TYPU PRZEMYS£OWEGO
-#define BTYPE2_CLOTHES 4
-#define BTYPE2_OIL 5
+    //permissions
+    
 
-#define INVALID_BUSINESSID 9999
+    //prefix
+    
+}
 
-//Choice
-#define BIZ_CHOICE_NOTHING 0
-#define BIZ_CHOICE_PRZENIES 1
-#define BIZ_CHOICE_DODAJ 2
-#define BIZ_CHOICE_USUN_BIZ 3
-#define BIZ_CHOICE_USUN_WLAS 4
-#define BIZ_CHOICE_WYZERUJ_KASE 5
-#define BIZ_CHOICE_ZMIEN_CENE 6
-//end
+//-------<[ command ]>-------
+YCMD:bizback(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda pozwalaj¹ca anulowaæ edycjê biznesu");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_bizback_Impl(playerid);
+}
