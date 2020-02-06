@@ -41,7 +41,7 @@ YCMD:rozkuj(playerid, params[], help)
 		    new giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))
 			{
-				sendTipMessage(playerid, "U¿yj /odkuj [playerid/CzêœæNicku]");
+				sendTipMessage(playerid, "U¿yj /rozkuj [playerid/CzêœæNicku]");
 				return 1;
 			}
 			if(IsPlayerConnected(giveplayerid))
