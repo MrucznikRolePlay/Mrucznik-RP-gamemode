@@ -49,8 +49,8 @@ stock LoadBiz()
 		mysql_store_result();
 		if (mysql_num_rows())
 		{
-			mysql_fetch_row_format(lStr, "|");
-			sscanf(lStr, "p<|>ds[32]s[64]ffffffdddds[64]d",
+			mysql_fetch_row_format(query, "|");
+			sscanf(query, "p<|>ds[32]s[64]ffffffdddds[64]d",
 			mBiz[i][b_ownerUID],
 			mBiz[i][b_Name_Owner],
 			mBiz[i][b_Name],
