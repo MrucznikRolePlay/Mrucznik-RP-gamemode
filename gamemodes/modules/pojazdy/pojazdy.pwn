@@ -783,7 +783,7 @@ stock rower_GetPlayerSpeed(carid)
     final_speed = floatround(speed,floatround_round);
     return final_speed;
 }
-stock rower_SetVehSpeed(playerid, carid)
+stock rower_SetVehSpeed(carid)
 {
 	new Float:Velocity[3];
 	GetVehicleVelocity(carid, Velocity[0], Velocity[1], Velocity[2]);
@@ -803,8 +803,6 @@ public rower_skoksprawdz(playerid, Float:vehz, carid)
 	new Float:vehx, Float:vehy, Float:vehz_s;
 	GetVehiclePos(carid, vehx, vehy, vehz_s);
     sendTipMessage(playerid, "Wykonuje skoksprawdz");
-    sendTipMessage(playerid, vehz_s);
-    sendTipMessage(playerid, vehz);
 	if(vehz_s > vehz+ROWER_SKOKMAX)
 	{
         sendTipMessage(playerid, "Wieksze skokmax");

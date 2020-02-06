@@ -838,6 +838,27 @@ public PlayerAFK(playerid, afktime, breaktime)
 		else
 			format(caption, sizeof(caption), "[AFK] %d min. %d sek (%d)", afktime/60, afktime%60, playerid);
 
+
+		if(afktime == 840 && GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 14 minut.");
+		}
+		else if(afktime == 1740 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime == 1740 && PlayerInfo[playerid][pNewAP] >= 1)
+		{
+			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 29 minut.");
+		}
+		else if(afktime == 1140 && IsPlayerPremiumOld(playerid))
+		{
+			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 19 minut.");
+		}
+		else if(afktime == 540)
+		{
+			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 9 minut.");
+		}
 		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
 			if(GetPlayerAdminDutyStatus(playerid) == 0)
