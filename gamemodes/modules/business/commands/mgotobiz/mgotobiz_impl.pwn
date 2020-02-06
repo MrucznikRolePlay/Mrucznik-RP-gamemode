@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  mgotobiz                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,28 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 06.02.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "bizback\bizback.pwn"
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbizcreate\mbizcreate.pwn"
-#include "mbizedit\mbizedit.pwn"
-#include "mbizinfo\mbizinfo.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-#include "mgotobiz\mgotobiz.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_mgotobiz_Impl(playerid, bIDE)
 {
-    command_bizback();
-    command_mbizbuy();
-    command_mbizcreate();
-    command_mbizedit();
-    command_mbizinfo();
-    command_mbiznesy();
-    command_mgotobiz();
-    
+    new string[124];
+    if(!BizExist(bIDE))
+    {
+        sendErrorMessage(playerid, "Nie istnieje taki biznes // Jest zbugowany!"); 
+        return 1;
+    }
+    if(PlayerInfo[playerid][pAdmin] >= 1)
+    {
+        SetPlayerPosEx(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]);
+        format(string, sizeof(string), "Zosta³eœ teleportowany do biznesu %s", mBiz[bIDE][b_Name]); 
+        sendTipMessage(playerid, string); 
+    }
+    return 1;
 }
+
+//end
