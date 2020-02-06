@@ -1065,7 +1065,7 @@ new playerSeeSpec[MAX_PLAYERS];
 new gRO[MAX_PLAYERS];
 
 new isNaked[MAX_PLAYERS]; 
-//new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
+new Text3D:HiddenPlayerName[MAX_PLAYERS];
 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
