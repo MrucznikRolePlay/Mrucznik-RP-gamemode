@@ -33,6 +33,7 @@ hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
     if(GetVehicleModel(vehicleid) == 509 || GetVehicleModel(vehicleid) == 510 || GetVehicleModel(vehicleid) == 481)
 	{
   		Rower_timerSZYBKOSC[playerid] = SetTimerEx("rower_sprawdzanie", 150, true, "ii", playerid, vehicleid);
+        sendTipMessage(playerid, "Wszedles do roweru");
  	}
 }
 
@@ -42,6 +43,7 @@ hook OnPlayerExitVehicle(playerid, vehicleid)
 	{
 		KillTimer(Rower_timerSZYBKOSC[playerid]);
         KillTimer(Rower_timerSKOK[playerid]);
+        sendTipMessage(playerid, "Zszedles z roweru");
 	}
 }
 
@@ -58,9 +60,10 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		  		new Float:Velocity[3];
 		  		new Float:rower_vehx, Float:rower_vehy, Float:rower_vehz;
    				GetVehiclePos(rower_carid, rower_vehx, rower_vehy, rower_vehz);
-				Rower_timerSKOK[playerid] = SetTimerEx("rower_skoksprawdz", 200, false, "if", playerid, rower_vehz, rower_carid);
+				Rower_timerSKOK[playerid] = SetTimerEx("rower_skoksprawdz", 175, false, "if", playerid, rower_vehz, rower_carid);
 				GetVehicleVelocity(rower_carid, Velocity[0], Velocity[1], Velocity[2]);
     		    SetVehicleVelocity(rower_carid, Velocity[0]/1.5, Velocity[1]/1.5, Velocity[2]/1.5);
+                sendTipMessage(playerid, "Sprawdzono skok");
 			}
 	    }
 	}
@@ -788,6 +791,7 @@ stock rower_SetVehSpeed(playerid, carid)
 	new Float:Velocity[3];
 	GetVehicleVelocity(carid, Velocity[0], Velocity[1], Velocity[2]);
     SetVehicleVelocity(carid, Velocity[0]*0.75, Velocity[1]*0.75, Velocity[2]*0.8);
+    sendTipMessage(playerid, "Ustawiono prêdkoœæ");
 }
 
 //-----------------<[ Timery: ]>--------------------
@@ -804,6 +808,7 @@ stock rower_skoksprawdz(playerid, Float:vehz, carid)
 	GetVehiclePos(carid, vehx, vehy, vehz_s);
 	if(vehz_s > vehz+ROWER_SKOKMAX)
 	{
+        sendTipMessage(playerid, "Wieksze skokmax");
         GameTextForPlayer(playerid, "~r~Nie skacz!",800, 5);
 	    SetVehiclePos(carid, vehx, vehy, vehz_s);
 	}
