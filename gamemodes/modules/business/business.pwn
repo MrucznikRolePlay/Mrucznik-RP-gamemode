@@ -154,6 +154,7 @@ CheckPlayerBusiness(playerid)
 			}
 		}
 	}
+	return 1;
 }
 GetTypeNameBiz(bIDE)
 {
