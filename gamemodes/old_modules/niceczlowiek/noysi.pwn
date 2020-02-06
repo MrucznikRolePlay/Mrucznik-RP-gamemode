@@ -632,7 +632,7 @@ changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono interior nr. 11");
 				SendClientMessage(playerid,COLOR_WHITE,"Dodano barierki zagradzaj¹ce wjazd do banku");
 				SendClientMessage(playerid,COLOR_WHITE,"Object Pack dla skTom jako nagroda za pochwa³y od graczy.");
-				SendClientMessage(playerid,COLOR_BLUE,"----------   Poprawki b³êdów   ---------");
+					
 				SendClientMessage(playerid,COLOR_WHITE,"Darmowa broñ od dilera po œmierci - poprawiono");
 				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono komendê dla DMV (/pjtest)");
 				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono bug wywiadu (gdy reporter wychodzi z serwera wywiad automatycznie siê koñczy)");
@@ -683,6 +683,31 @@ changeLog_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 				showChangeLog(playerid);
 			}
+			case 16:
+			{
+				SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.6.18 <<<_______________________|");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Poprawki b³êdów   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono dzia³anie /su [id] 'poœcig' przy 10WL");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono AC przy /zabierz");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono komendê /rozbierz");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono wyrzucanie z serwera podczas teleportacji w niektóre miejsca");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono AJ, mo¿liwoœæ wychodzenia z niego");
+				SendClientMessage(playerid,COLOR_WHITE,"Naprawiono nadawanie skina CJ");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Proœby od graczy/organizacji   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano komunikaty o po¿arze dla ERS");
+				SendClientMessage(playerid,COLOR_WHITE,"Zmieniono range /zastrzyk na [1]+");
+				SendClientMessage(playerid,COLOR_WHITE,"Zaaktualizowano  i w³¹czono ponownie system plam");
+				SendClientMessage(playerid,COLOR_WHITE,"Poprawiono boombox dla gangów");
+				SendClientMessage(playerid,COLOR_BLUE,"----------   Nowoœci   ---------");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano skrypt Ibiza klub (GUI & system oœwietlenia by mrN, _Kamil)");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano nowe komendy dla ibizy (/ibiza, /kupbilet, /dajbilet)");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano /wez [gasnica] dla ERS gdy jest w pobli¿u auta stra¿y");
+				SendClientMessage(playerid,COLOR_WHITE,"Stworzono now¹ frakcjê SEKTA");
+				SendClientMessage(playerid,COLOR_WHITE,"Dodano nowy interior dla sekty");
+				SendClientMessage(playerid,COLOR_WHITE,"Komenda /sekta [klucz,wepchnij,wypuœæ] dostêpna tylko dla organizacji sekty");
+				SendClientMessage(playerid,COLOR_P@,"|_______________________>>> Wersja v2.6.18 <<<_______________________|");
+				showChangeLog(playerid);
+			}
 		}
 	}
 	return 0;
@@ -709,6 +734,7 @@ showChangeLog(playerid, page = CHANGELOG_MAIN)
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.810\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.92\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.93", string);
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.6.18", string);
 		ShowPlayerDialogEx(playerid, 1962, DIALOG_STYLE_LIST, "Wybierz aktualizacjê", string, "Ok", "WyjdŸ");
 	}
 	return 1;
