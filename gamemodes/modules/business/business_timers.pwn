@@ -26,5 +26,10 @@
 //
 
 //-----------------<[ Timery: ]>-------------------
-
+forward OdczekajDialogBiz(playerid);
+public OdczekajDialogBiz(playerid)
+{
+	SetPVarInt(playerid, "MozeUzycKomendyBiz", 0); 
+	return 1;
+}
 //end
