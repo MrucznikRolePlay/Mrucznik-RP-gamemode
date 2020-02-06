@@ -778,7 +778,7 @@ ShowCarEditDialog(playerid)
     return 1;
 }
 
-stock rower_GetPlayerSpeed(playerid, carid)
+stock rower_GetPlayerSpeed(carid)
 {
     new Float:x,Float:y,Float:z,Float:speed,final_speed;
     GetVehicleVelocity(carid,x,y,z);
@@ -795,14 +795,14 @@ stock rower_SetVehSpeed(playerid, carid)
 }
 
 //-----------------<[ Timery: ]>--------------------
-stock rower_sprawdzanie(playerid, carid)
+public rower_sprawdzanie(playerid, carid)
 {
     new Float:Velocity[3];
 	GetVehicleVelocity(carid, Velocity[0], Velocity[1], Velocity[2]);
-	new rower_szybkosc = rower_GetPlayerSpeed(playerid, carid);
+	new rower_szybkosc = rower_GetPlayerSpeed(carid);
 	if(rower_szybkosc > ROWER_VMAX) rower_SetVehSpeed(playerid, carid);
 }
-stock rower_skoksprawdz(playerid, Float:vehz, carid)
+public rower_skoksprawdz(playerid, Float:vehz, carid)
 {
 	new Float:vehx, Float:vehy, Float:vehz_s;
 	GetVehiclePos(carid, vehx, vehy, vehz_s);
