@@ -49,7 +49,7 @@ YCMD:kill(playerid, params[], help)
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {		
-					SetPVarInt(playerid, 'skip_bw', 1);
+					SetPVarInt(playerid, "skip_bw", 1);
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerHealth(playa, 0);

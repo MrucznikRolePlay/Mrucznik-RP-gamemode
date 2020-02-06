@@ -4361,6 +4361,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 		}
 		format(turnmes, sizeof(turnmes), "Pope³ni³eœ przestêpstwo ( %s ). Zg³osi³: %s.",reason,turner);
 		SendClientMessage(playerid, COLOR_LIGHTRED, turnmes);
+		PlayCrimeReportForPlayer(playerid, declare,5);
 		if(points > 0)
 		{
 			if(points == 1)
@@ -4447,6 +4448,9 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
       				PoziomPoszukiwania[playerid] = 0;
 				}
 			}
+
+			SetPlayerWantedLevel(playerid, (PoziomPoszukiwania[playerid] >= 6 ? 6 : PoziomPoszukiwania[playerid]));
+			
 			if(sendmessage)
 			{
 				format(wantedmes, sizeof(wantedmes), "Posiadany Wanted Level: %d", PoziomPoszukiwania[playerid]);
