@@ -23,20 +23,22 @@
 	System graffiti
 */
 
-//
+//WYLACZONY BO WARNINGI DAJE
+
+/*
 #include <YSI\y_hooks>
 #include "graffiti_dialogs.pwn"
 hook OnPlayerConnect(playerid)
 {
     graffiti_ZerujZmienne(playerid);
-}
+}*/
 
 /*forward OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz);
 public OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz)
 {
     CallRemoteFunction("OnPlayerEditDynamicObject", "iisffffff", playerid, objectid, response, x, y, z, rx, ry, rz);
 } */ //mo¿e Ci sie przydac potem (chyba) ~ Creative
-
+/*
 //hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz) // opcjonalnie zamiast tego poni¿ej
 hook OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
 {
@@ -104,3 +106,4 @@ graffiti_ShowColorMenu(playerid)
 	ShowPlayerDialogEx(playerid, GRAFFITI_DIALOG_SELECT_COLOR, DIALOG_STYLE_LIST, "Graffiti", "{000000}Czarny\n{FFFFFF}Bia³y\n{F81414}Czerwony\n{00FF22}Zielony\n{00CED1}Niebieski\n{C3C3C3}Szary", "Wybierz", "Anuluj");
 }
 //end
+*/

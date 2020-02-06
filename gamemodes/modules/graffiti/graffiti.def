@@ -23,10 +23,11 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+/*
 #define GRAFFITI_MAX 100
 #define GRAFFITI_ADMIN 1 // od którego @lvl mozna zmieniaæ innych graffiti
 #define GRAFFITI_DIALOG_LIST 10310
 #define GRAFFITI_DIALOG_ENTER_TEXT 10320
 #define GRAFFITI_DIALOG_SELECT_COLOR 10321
-
+*/
 //end
