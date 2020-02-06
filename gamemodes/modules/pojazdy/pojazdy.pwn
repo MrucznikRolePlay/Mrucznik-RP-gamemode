@@ -60,7 +60,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		  		new Float:Velocity[3];
 		  		new Float:rower_vehx, Float:rower_vehy, Float:rower_vehz;
    				GetVehiclePos(rower_carid, rower_vehx, rower_vehy, rower_vehz);
-				Rower_timerSKOK[playerid] = SetTimerEx("rower_skoksprawdz", 250, false, "if", playerid, rower_vehz, rower_carid);
+				Rower_timerSKOK[playerid] = SetTimerEx("rower_skoksprawdz", 200, false, "ifi", playerid, rower_vehz, rower_carid);
 				GetVehicleVelocity(rower_carid, Velocity[0], Velocity[1], Velocity[2]);
     		    SetVehicleVelocity(rower_carid, Velocity[0]/1.5, Velocity[1]/1.5, Velocity[2]/1.5);
                 sendTipMessage(playerid, "Sprawdzono skok");
