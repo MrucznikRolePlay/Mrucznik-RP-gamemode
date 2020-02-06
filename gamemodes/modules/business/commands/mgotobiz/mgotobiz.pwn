@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  mgotobiz                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,27 +27,41 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "bizback\bizback.pwn"
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbizcreate\mbizcreate.pwn"
-#include "mbizedit\mbizedit.pwn"
-#include "mbizinfo\mbizinfo.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-#include "mgotobiz\mgotobiz.pwn"
-
+#include "mgotobiz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_mgotobiz()
 {
-    command_bizback();
-    command_mbizbuy();
-    command_mbizcreate();
-    command_mbizedit();
-    command_mbizinfo();
-    command_mbiznesy();
-    command_mgotobiz();
+    new command = Command_GetID("mgotobiz");
+
+    //aliases
+    Command_AddAlt(command, "gotobiz");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:mgotobiz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala teleportowaæ siê do biznesu");
+        return 1;
+    }
+    //fetching params
+    new bIDE;
+    if(sscanf(params, "d", bIDE))
+    {
+        sendTipMessage(playerid, "U¿yj /mgotobiz [ID biznesu] ");
+        return 1;
+    }
+    
+    //command body
+    return command_mgotobiz_Impl(playerid, bIDE);
 }

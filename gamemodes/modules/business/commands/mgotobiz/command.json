@@ -1,0 +1,17 @@
+{
+    "name": "mgotobiz",
+    "description": "Komenda, która pozwala teleportowaæ siê do biznesu",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "gotobiz"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "bIDE",
+            "description": "ID biznesu"
+        }
+    ],
+    "date": "06.02.2020"
+}
