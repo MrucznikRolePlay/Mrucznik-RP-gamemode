@@ -802,10 +802,8 @@ public rower_skoksprawdz(playerid, Float:vehz, carid)
 {
 	new Float:vehx, Float:vehy, Float:vehz_s;
 	GetVehiclePos(carid, vehx, vehy, vehz_s);
-    sendTipMessage(playerid, "Wykonuje skoksprawdz");
 	if(vehz_s > vehz+ROWER_SKOKMAX)
 	{
-        sendTipMessage(playerid, "Wieksze skokmax");
         GameTextForPlayer(playerid, "~r~Nie skacz!",800, 5);
 	    SetVehiclePos(carid, vehx, vehy, vehz_s);
 	}

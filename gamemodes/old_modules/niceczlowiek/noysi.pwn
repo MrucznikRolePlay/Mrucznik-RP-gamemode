@@ -733,7 +733,7 @@ showChangeLog(playerid, page = CHANGELOG_MAIN)
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.811\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.4.810\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.92\n", string);
-		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.93", string);
+		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.5.93\n", string);
 		format(string, sizeof(string), "%s##\t"#HQ_COLOR_TEKST2"2.6.18", string);
 		ShowPlayerDialogEx(playerid, 1962, DIALOG_STYLE_LIST, "Wybierz aktualizacjê", string, "Ok", "WyjdŸ");
 	}

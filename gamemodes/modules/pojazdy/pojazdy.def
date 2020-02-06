@@ -23,6 +23,6 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define ROWER_VMAX 70
+#define ROWER_VMAX 45
 #define ROWER_SKOKMAX 1.5
 //end
