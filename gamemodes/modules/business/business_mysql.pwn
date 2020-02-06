@@ -72,7 +72,7 @@ stock LoadBiz()
 	}
 	format(string, sizeof(string), "Zaladowano %d biznesow z %d w bazie", loadedBiz, valueBiz);
 	print(string);
-	return 1;
+	return 0;
 }
 stock SaveBiz(bIDE)
 {
