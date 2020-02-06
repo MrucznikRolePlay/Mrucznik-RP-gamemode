@@ -1066,6 +1066,8 @@ ClearVariableConnect(playerid)
 	timerForHunter[playerid]=0;*/
 	playerTargetSpec[playerid] = INVALID_SPECTATE_ID;
 	playerSeeSpec[playerid] = INVALID_SPECTATE_ID; 
+	isNaked[playerid] = 0; 
+	PlayerInfo[playerid][pBusinessOwner] = 9999;
 	return 1;
 }
 ClearVariableDisconnect(playerid)
@@ -1073,7 +1075,6 @@ ClearVariableDisconnect(playerid)
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
 	PlayerGames[playerid] = 0;//Zdrapki 
-	PlayerInfo[playerid][pBusinessOwner] = 9999;
 	return 1;
 }
 ZerujZmienne(playerid)

@@ -261,7 +261,8 @@ public OnGameModeInit()
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	LoadBiz();
-	//LoadActors(); 	
+	//LoadActors(); 
+	CreateBusinessIcon();	
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
@@ -1164,6 +1165,7 @@ public OnPlayerConnect(playerid)
         gSelectionItems[playerid][x] = PlayerText:INVALID_TEXT_DRAW;
 	}
 	gItemAt[playerid] = 0;
+
 	return 1;
 }
 public OnPlayerPause(playerid)
