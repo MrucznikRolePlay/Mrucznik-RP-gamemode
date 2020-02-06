@@ -2299,13 +2299,13 @@ public JednaSekundaTimer()
 					SetPlayerPos(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
-					PlayerKilledByAdmin[i] = 1;
+					SetPVarInt(i, 'skip_bw', 1);
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
 					if(GetPVarInt(i, "DostalDM2") == 1)
 					{
-						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]", GetNick(i, true));
+						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [Odsiedzia³ karê za DM2]", GetNick(i, true));
 						SendAdminMessage(COLOR_PANICRED, string);
 						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i, true));
 						sendTipMessage(i, string);
