@@ -112,6 +112,8 @@
 #include "debug\debug.pwn"
 #include "discord\discord.pwn"
 #include "frakcje\frakcje.pwn"
+#include "graffiti\graffiti.pwn"
+#include "ibiza\ibiza.pwn"
 #include "komendy\komendy.pwn"
 #include "logi\logi.pwn"
 #include "money\money.pwn"
