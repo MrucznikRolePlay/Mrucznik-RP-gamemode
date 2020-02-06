@@ -728,7 +728,6 @@ new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
 //BW
 new PlayerRequestMedic[MAX_PLAYERS];
-new PlayerKilledByAdmin[MAX_PLAYERS];
 
 //---------------
 new RepairOffer[MAX_PLAYERS];
@@ -1317,7 +1316,6 @@ ZerujZmienne(playerid)
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
-	PlayerKilledByAdmin[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
 
 	PlayerInfo[playerid][pCzystka] = 0;
