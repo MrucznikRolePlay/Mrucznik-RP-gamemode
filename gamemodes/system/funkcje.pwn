@@ -4449,7 +4449,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 				}
 			}
 
-			SetPlayerWantedLevel(playerid, (PoziomPoszukiwania[playerid] >= 6 ? 6 : PoziomPoszukiwania[playerid]));
+			SetPlayerWantedLevel(playerid, (PoziomPoszukiwania[playerid] > 6 ? 6 : PoziomPoszukiwania[playerid]));
 			
 			if(sendmessage)
 			{

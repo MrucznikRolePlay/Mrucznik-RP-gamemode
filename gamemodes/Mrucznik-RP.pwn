@@ -2379,7 +2379,7 @@ public OnPlayerSpawn(playerid)
 	else if(PlayerInfo[playerid][pStylWalki] == 2) SetPlayerFightingStyle(playerid, FIGHT_STYLE_KUNGFU);
 	else if(PlayerInfo[playerid][pStylWalki] == 3) SetPlayerFightingStyle(playerid, FIGHT_STYLE_KNEEHEAD);
 	//WL
-	SetPlayerWantedLevel(playerid, (PoziomPoszukiwania[playerid] >= 1 ? PoziomPoszukiwania[playerid] : 6);
+	SetPlayerWantedLevel(playerid, (PoziomPoszukiwania[playerid] > 6 ? 6 : PoziomPoszukiwania[playerid]));
 
 	//DŸwiêki
 	StopAudioStreamForPlayer(playerid);
