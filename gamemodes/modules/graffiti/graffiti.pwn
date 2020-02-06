@@ -94,7 +94,7 @@ graffiti_ZerujZmienne(playerid)
 	Graffiti_Text[playerid] = "";
 }
 
-graffiti_ShowCreationDialog(playerid)
+stock graffiti_ShowCreationDialog(playerid)
 {
 	ShowPlayerDialogEx(playerid, GRAFFITI_DIALOG_ENTER_TEXT, DIALOG_STYLE_INPUT, "Graffiti", "WprowadŸ tekst(max 120 znaków)", "Dalej", "Anuluj");
 }

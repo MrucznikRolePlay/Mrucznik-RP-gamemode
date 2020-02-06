@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_grafiti_Impl(playerid, opcja[24])
 {
-    graffiti_ShowCreationDialog(playerid);
+//    graffiti_ShowCreationDialog(playerid);
     return 1;
 }
 
