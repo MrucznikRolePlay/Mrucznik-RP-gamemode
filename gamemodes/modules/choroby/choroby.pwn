@@ -194,7 +194,7 @@ StartPlayerTreatment(playerid, eDiseases:disease)
 	new time = DiseaseData[disease][CureTime];
 	SetPVarInt(playerid, "disease-treatement", disease);
 
-	TogglePlayerControllable(playerid, true);
+	TogglePlayerControllable(playerid, false);
 	ApplyAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
 
 	CurrationCounter(playerid, time);
@@ -206,6 +206,8 @@ EndPlayerTreatment(playerid)
 	new eDiseases:disease = eDiseases:GetPVarInt(playerid, "disease-treatement");
 	new chance = DiseaseData[disease][DrugResistance];
 	new rand = random(100);
+	TogglePlayerControllable(playerid, true);
+	SetPVarInt(playerid, "disease-treatment", 0);
 
 	if(rand < chance) //nie uda³o siê
 	{
@@ -218,6 +220,11 @@ EndPlayerTreatment(playerid)
 		CurePlayer(playerid, disease);
 		GameTextForPlayer(playerid, "~g~Wyleczony!", 5000, 1);
 	}
+}
+
+IsPlayerTreated(playerid)
+{
+	return GetPVarInt(playerid, "disease-treatement") != 0;
 }
 
 //-----------------<[ Disease effects: ]>-------------------

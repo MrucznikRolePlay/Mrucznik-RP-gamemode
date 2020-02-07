@@ -44,7 +44,7 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 			return 1;
 		}
 
-		if(GetPVarInt(playerid, "disease-treatement") == 0) //nie wywo³uj efektów podczas leczenia
+		if(IsPlayerTreated(playerid)) //nie wywo³uj efektów podczas leczenia
 		{
 			return 1;
 		}
