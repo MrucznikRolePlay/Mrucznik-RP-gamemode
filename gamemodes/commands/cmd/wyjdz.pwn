@@ -337,7 +337,7 @@ YCMD:wyjdz(playerid, params[], help)
 			Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 22);
             SetPlayerPos(playerid, 422.2131, -1831.5657, -65.5105);
-			PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+			PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             return 1;
         }
     	//wyjœcie bileterki
