@@ -157,9 +157,12 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 			{
 				if(PlayerImmunity[i] <= 0) 
 				{
-					InfectPlayer(i, disease);
-					new messageTime = random(60000);//minuta
-					defer InfectedEffectMessage[messageTime](i);
+					if(RandomizeSouldBeInfected(effect[InfectionChance], DiseaseData[disease][ContagiousRatio])) // do infection
+					{
+						InfectPlayer(i, disease);
+						new messageTime = random(60000);//minuta
+						defer InfectedEffectMessage[messageTime](i);
+					}
 				}
 				else
 				{
@@ -168,6 +171,13 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 			}
 		}
 	}
+}
+
+RandomizeSouldBeInfected(chance, Float:ratio=1.0) 
+{
+	new infectionRand = random(100);
+	new Float:infectionChance = chance * ratio;
+	return infectionRand < infectionChance;
 }
 
 ShowDiseaseList(playerid)

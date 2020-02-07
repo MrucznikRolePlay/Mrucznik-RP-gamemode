@@ -50,13 +50,7 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 		}
 
 		CallEffectActivateCallback(playerid, disease, effect);
-
-		new infectionRand = random(100);
-		new Float:infectionChance = DiseaseData[disease][ContagiousRatio] * effect[InfectionChance];
-		if(infectionRand < infectionChance) // do infection
-		{
-			DoInfecting(playerid, disease, effect);
-		}
+		DoInfecting(playerid, disease, effect);
 	}
 	return 1;
 }

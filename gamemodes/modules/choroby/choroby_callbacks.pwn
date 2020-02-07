@@ -58,6 +58,13 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 				new eDiseases:disease = eDiseases:MEM_get_val(i);
 				if(DiseaseData[disease][SpreadingOnContact])
 				{
+					if(IsPlayerSick(playerid, disease)) 
+						return 1;
+
+					//10% chance to get infected
+					if(RandomizeSouldBeInfected(10, DiseaseData[disease][ContagiousRatio])) 
+						return 1;
+
 					InfectPlayer(playerid, disease);
 					new messageTime = random(60000);//minuta
 					defer InfectedEffectMessage[messageTime](playerid);
@@ -65,6 +72,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
+	return 1;
 }
 
 //end
