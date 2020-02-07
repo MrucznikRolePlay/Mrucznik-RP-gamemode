@@ -34,6 +34,12 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 
 	if(IsPlayerSick(playerid, disease)) 
 	{
+		if(PlayerImmunity[playerid] > 0) 
+		{
+			PlayerImmunity[playerid]--;
+			return 1;
+		}
+
 		new effect[eEffectData];
 		VECTOR_get_arr(DiseaseData[disease][VEffects], effectID, effect);
 

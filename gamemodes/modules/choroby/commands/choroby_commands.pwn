@@ -31,6 +31,7 @@
 
 //-------<[ include ]>-------
 #include "diagnozuj\diagnozuj.pwn"
+#include "kuracja\kuracja.pwn"
 #include "ulecz\ulecz.pwn"
 #include "uleczall\uleczall.pwn"
 #include "zaraz\zaraz.pwn"
@@ -41,6 +42,7 @@
 hook OnGameModeInit()
 {
     command_diagnozuj();
+    command_kuracja();
     command_ulecz();
     command_uleczall();
     command_zaraz();

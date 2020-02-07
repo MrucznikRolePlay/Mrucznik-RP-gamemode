@@ -1,0 +1,22 @@
+{
+    "name": "kuracja",
+    "description": "Oferuje graczowi kuracjê choroby.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "money",
+            "description": "koszt"
+        }
+    ],
+    "date": "07.02.2020"
+}

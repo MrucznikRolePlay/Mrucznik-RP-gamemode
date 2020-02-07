@@ -68,6 +68,8 @@ new DiseaseData[eDiseases][eDiseaseData] = {
     {"Zatrucie", 50000, 1, 25, 1.0, false, VECTOR_NULL}
 };
 
+new PlayerImmunity[MAX_PLAYERS];
+
 //------------------<[ Forwardy: ]>--------------------
 forward FeelingBadEffect(playerid, disease, value);
 forward CouchingEffect(playerid, disease, value);

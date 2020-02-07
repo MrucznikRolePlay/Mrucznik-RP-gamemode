@@ -37,14 +37,24 @@ command_zastrzyk_Impl(playerid, giveplayerid)
         return 1;
     }
 
-    SendClientMessage(giveplayerid, COLOR_WHITE, "Lekarz da³ ci zastrzyk i wyleczy³ z choroby");
     ProxDetector(20.0, playerid, sprintf("* Lekarz %s wyci¹ga strzykawkê i wstrzykuje leki %s.", GetNick(playerid), GetNick(giveplayerid)), 
         COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
     );
-    ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz pozby³ siê choroby. ((server))", GetNick(giveplayerid)), 
-        COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
-    );
-    CurePlayer(giveplayerid);
+    if(IsPlayerHealthy(playerid)) 
+    {
+        SendClientMessage(giveplayerid, COLOR_WHITE, "Lekarz da³ ci zastrzyk i pooprawi³ Twoj¹ odpornoœæ.");
+        ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz jego organizm sta³ siê bardziej odporny na choroby. ((server))", GetNick(giveplayerid)), 
+            COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
+        );
+    }
+    else
+    {
+        SendClientMessage(giveplayerid, COLOR_WHITE, "Lekarz da³ ci zastrzyk i za³agodzi³ objawy choroby.");
+        ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz jego organizm lepiej radzi sobie z objawami choroby. ((server))", GetNick(giveplayerid)), 
+            COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
+        );
+    }
+    PlayerImmunity[giveplayerid] = 5;
     return 1;
 }
 

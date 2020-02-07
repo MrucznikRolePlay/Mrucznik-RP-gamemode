@@ -153,9 +153,16 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 		{
 			if(IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
 			{
-				InfectPlayer(i, disease);
-				new messageTime = random(60000);//minuta
-				defer InfectedEffectMessage[messageTime](i);
+				if(PlayerImmunity[i] <= 0) 
+				{
+					InfectPlayer(i, disease);
+					new messageTime = random(60000);//minuta
+					defer InfectedEffectMessage[messageTime](i);
+				}
+				else
+				{
+					PlayerImmunity[i]--;
+				}
 			}
 		}
 	}

@@ -1,5 +1,5 @@
-//----------------------------------------------<< Callbacks >>----------------------------------------------//
-//                                                  choroby                                                  //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  kuracja                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,55 +16,56 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 07.02.2020
-//Opis:
-/*
-	System chorób.
-*/
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-#include <YSI\y_hooks>
 
-//-----------------<[ Callbacki: ]>-----------------
-choroby_OnPlayerLogin(playerid)
+//-------<[ include ]>-------
+#include "kuracja_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_kuracja()
 {
-	MruMySQL_LoadDiseasesData(playerid);
-	return 1;
+    new command = Command_GetID("kuracja");
+
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
 }
 
-hook OnGameModeInit()
+//-------<[ command ]>-------
+YCMD:kuracja(playerid, params[], help)
 {
-	choroby_InitEffects();
+    if (help)
+    {
+        sendTipMessage(playerid, "Oferuje graczowi kuracjê choroby.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, money;
+    if(sscanf(params, "rd", giveplayerid, money))
+    {
+        sendTipMessage(playerid, "U¿yj /kuracja [Nick/ID] [koszt] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_kuracja_Impl(playerid, giveplayerid, money);
 }
-
-hook OnPlayerDisconnect(playerid, reason)
-{
-	VECTOR_clear(VPlayerDiseases[playerid]);
-	PlayerImmunity[playerid] = 0;
-	return 1;
-}
-
-hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
-{
-	//infecting on contact
-	if(weaponid >= 0 && weaponid <= 15) //melee weapons only
-	{
-		if(!IsPlayerHealthy(issuerid)) 
-		{
-			VECTOR_foreach(i : VPlayerDiseases[issuerid])
-			{
-				new eDiseases:disease = eDiseases:MEM_get_val(i);
-				if(DiseaseData[disease][SpreadingOnContact])
-				{
-					InfectPlayer(playerid, disease);
-					new messageTime = random(60000);//minuta
-					defer InfectedEffectMessage[messageTime](playerid);
-				}
-			}
-		}
-	}
-}
-
-//end
