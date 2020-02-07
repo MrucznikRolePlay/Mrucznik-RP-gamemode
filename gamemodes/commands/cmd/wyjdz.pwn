@@ -37,8 +37,13 @@ YCMD:wyjdz(playerid, params[], help)
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
 		
 		if(SprawdzWejscia(playerid))
+		{
 			return 1;
-		
+		}
+		else if(IsPlayerNearBusinessDoor(playerid))
+		{
+			return 1;
+		}
 		else if(IsPlayerInRangeOfPoint(playerid,4,1568.6449, -1689.6379, 6.1932) && IsACop(playerid)//parking LSPD
 		|| IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
 		|| IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan

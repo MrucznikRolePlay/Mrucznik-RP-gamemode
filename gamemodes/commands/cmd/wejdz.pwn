@@ -50,7 +50,14 @@ YCMD:wejdz(playerid, params[], help)
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
         
         if(SprawdzWejscia(playerid))
+        {
             return 1;
+        }
+        else if(IsPlayerNearBusinessDoor(playerid))
+        {
+
+            return 1;
+        }
         
 //======================================================================
 //==================[Windy pod /wejdz]==================================

@@ -85,7 +85,8 @@ stock CreateMBiz(playerid, bCost, bName[64])
 
 	//================================[Tworzenie biznesu w czasie realnym]=========================
 	mysql_real_escape_string(bName, mBiz[bIDE][b_Name]); 
-	mysql_real_escape_string("Brak", mBiz[bIDE][b_Name_Owner]); 
+	mysql_real_escape_string("Brak", mBiz[bIDE][b_Name_Owner]);
+	mysql_real_escape_string("[Default MOTD] Witaj w biznesie", mBiz[bIDE][b_motd]); 
 	mBiz[bIDE][b_ownerUID] = 0; 
 	mBiz[bIDE][b_moneyPocket] = 0; 
 	mBiz[bIDE][b_enX] = posX;
@@ -139,6 +140,53 @@ IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
 		return true;
 	}
 	return false; 
+}
+IsPlayerNearBusinessDoor(playerid)//Powoduje wejœcie do biznesu
+{
+	new string[124];
+	for(new i2; i2<=MAX_BIZ; i2++)
+	{
+		if(i2 == MAX_BIZ)
+		{
+			break;
+		}
+		if(BizExist(i2))
+		{
+			if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i2][b_enX], mBiz[i2][b_enY], mBiz[i2][b_enZ])
+			&& GetPlayerVirtualWorld(playerid) == 0)
+			{
+				if(mBiz[i2][b_enX] == mBiz[i2][b_exX]
+				&& mBiz[i2][b_enY] == mBiz[i2][b_exY]
+				&& mBiz[i2][b_enX] == mBiz[i2][b_exZ])
+				{
+					sendErrorMessage(playerid, "Ten biznes nie posiada wnêtrza!"); 
+					sendTipMessage(playerid, "Aby skorzystaæ z udogodnieñ biznesu stañ w jego ikonce"); 
+				}
+				else
+				{
+					SetPlayerPos(playerid, mBiz[i2][b_exX], mBiz[i2][b_exY], mBiz[i2][b_exZ]);
+					SetPlayerVirtualWorld(playerid, mBiz[i2][b_vw]);
+					SetPlayerInterior(playerid, mBiz[i2][b_int]); 
+					SetPLocal(playerid, mBiz[i2][b_pLocal]);
+					format(string, sizeof(string), "%s", mBiz[i2][b_motd]);
+					sendTipMessageEx(playerid, COLOR_GREEN, string); 
+				}
+				return 1;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i2][b_exX], mBiz[i2][b_exY], mBiz[i2][b_exZ])
+			&& GetPlayerVirtualWorld(playerid) != 0)
+			{
+				SetPlayerPos(playerid, mBiz[i2][b_enX], mBiz[i2][b_enY], mBiz[i2][b_enZ]);
+				SetPlayerVirtualWorld(playerid, 0);
+				SetPlayerInterior(playerid, 0); 
+				SetPLocal(playerid, PLOCAL_DEFAULT);
+				format(string, sizeof(string), "Zapraszamy ponownie do %s!", mBiz[i2][b_Name]);
+				sendTipMessageEx(playerid, COLOR_GREEN, string); 
+				return 1;	
+			}
+		}
+	}
+	return 0; 
 }
 CheckPlayerBusiness(playerid)
 {
