@@ -28,15 +28,21 @@
 //-----------------<[ Timery: ]>-------------------
 //CallEffectTimer(playerid, disease, callback)
 
-timer EffectTimer[5000](playerid, eDiseases:disease, eEffects:effect)
+timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 {
-	if(PlayerHasDisease(playerid, disease)) 
+	if(PlayerInfo[playerid][pUID] != uid) return 1;
+
+	if(IsPlayerSick(playerid, disease)) 
 	{
+		new effect[eEffectData];
+		VECTOR_get_arr(DiseaseData[disease][VEffects], effectID, effect);
+
 		CallEffectActivateCallback(playerid, disease, effect);
-		CallEffectTimer(playerid, disease, effect);
+		CallEffectTimer(playerid, disease, effect, effectID);
 
 		new infectionRand = random(100);
-		if(infectionRand < Effects[effect][InfectionChance]) // do infection
+		new Float:infectionChance = DiseaseData[disease][ContagiousRatio] * effect[InfectionChance];
+		if(infectionRand < infectionChance) // do infection
 		{
 			DoInfecting(playerid, disease, effect);
 		}
@@ -46,7 +52,7 @@ timer EffectTimer[5000](playerid, eDiseases:disease, eEffects:effect)
 
 timer InfectedEffectMessage[15000](playerid) 
 {
-	ChatMe(playerid, " poczu³ siê, jakby zarazi³ siê chorob¹.");
+	ChatMe(playerid, "poczu³ siê, jakby zarazi³ siê chorob¹.");
 	return 1;
 }
 

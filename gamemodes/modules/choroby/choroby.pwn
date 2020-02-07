@@ -83,57 +83,67 @@ IsPlayerHealthy(playerid)
 	return VECTOR_size(VPlayerDiseases[playerid]) == 0;
 }
 
-PlayerHasDisease(playerid, eDiseases:disease) 
+IsPlayerSick(playerid, eDiseases:disease) 
 {
 	return VECTOR_find_val(VPlayerDiseases[playerid], disease) != INVALID_VECTOR_INDEX;
 }
 
 ActivateDiseaseEffect(playerid, eDiseases:disease)
 {
-	VECTOR_foreach(i : DiseaseData[disease][VEffects])
+	new effectID = 0;
+	VECTOR_foreach(v : DiseaseData[disease][VEffects])
 	{
-		new eEffects:effect = eEffects:MEM_get_val(i);
-		if(Effects[effect][Pernament]) 
+		new effect[eEffectData];
+		MEM_UM_zero(UnmanagedPointer:MEM_UM_get_addr(effect[eEffectData:0]), sizeof(effect));
+		MEM_get_arr(v, _, effect, sizeof(effect));
+
+		if(effect[Pernament]) 
 		{
 			CallEffectActivateCallback(playerid, disease, effect);
 		} 
 		else 
 		{
-			CallEffectTimer(playerid, disease, effect);
+			CallEffectTimer(playerid, disease, effect, effectID);
 		}
+		effectID ++;
 	}
 	return 1;
 }
 
 DeactivateDiseaseEffect(playerid, eDiseases:disease)
 {
-	VECTOR_foreach(i : DiseaseData[disease][VEffects])
+	VECTOR_foreach(v : DiseaseData[disease][VEffects])
 	{
-		new eEffects:effect = eEffects:MEM_get_val(i);
+		new effect[eEffectData];
+		MEM_UM_zero(UnmanagedPointer:MEM_UM_get_addr(effect[eEffectData:0]), sizeof(effect));
+		MEM_get_arr(v, _, effect, sizeof(effect));
+
 		CallEffectDesactivateCallback(playerid, disease, effect);
 	}
 }
 
-CallEffectTimer(playerid, eDiseases:disease, eEffects:effect) 
+CallEffectTimer(playerid, eDiseases:disease, effect[eEffectData], effectID) 
 {
-	new effectTime = Effects[effect][MinTime] + random(Effects[effect][TimeRange]);
-	defer EffectTimer[effectTime](playerid, disease, effect);
+	new effectTime = effect[MinTime] + random(effect[TimeRange]);
+	defer EffectTimer[effectTime](playerid, PlayerInfo[playerid][pUID], disease, effectID);
 	return 1;
 }
 
-CallEffectActivateCallback(playerid, eDiseases:disease, eEffects:effect)
+CallEffectActivateCallback(playerid, eDiseases:disease, effect[eEffectData])
 {
-	CallLocalFunction(Effects[effect][ActivateCallback], "iii", playerid, disease, effect);
+	if(isnull(effect[ActivateCallback])) return 1;
+	CallLocalFunction(effect[ActivateCallback], "iii", playerid, disease, effect[AdditionalValue]);
 	return 1;
 }
 
-CallEffectDesactivateCallback(playerid, eDiseases:disease, eEffects:effect)
+CallEffectDesactivateCallback(playerid, eDiseases:disease, effect[eEffectData])
 {
-	CallLocalFunction(Effects[effect][DeactivateCallback], "iii", playerid, disease, effect);
+	if(isnull(effect[DeactivateCallback])) return 1;
+	CallLocalFunction(effect[DeactivateCallback], "iii", playerid, disease, effect[AdditionalValue]);
 	return 1;
 }
 
-DoInfecting(playerid, eDiseases:disease, eEffects:effect)
+DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 {
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
@@ -141,14 +151,88 @@ DoInfecting(playerid, eDiseases:disease, eEffects:effect)
 	{
 		if(IsPlayerStreamedIn(i, playerid)) //dla optymalizacji
 		{
-			if(IsPlayerInRangeOfPoint(i, Effects[effect][ContagiousRange], x, y, z))
+			if(IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
 			{
 				InfectPlayer(i, disease);
 				new messageTime = random(60000);//minuta
-				defer InfectedEffectMessage[messageTime](playerid);
+				defer InfectedEffectMessage[messageTime](i);
 			}
 		}
 	}
+}
+
+
+//-----------------<[ Disease effects: ]>-------------------
+
+AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, bool:pernament, Float:contagiousRange, infectionChance, additionalValue)
+{
+	new array[eEffectData]; //TODO: Czy mo¿na to zrobiæ inicjalizacj¹ {}?
+	strcat(array[ActivateCallback], activateCallback, 32);
+	strcat(array[DeactivateCallback], deactivateCallback, 32);
+	array[MinTime] = minTime;
+	array[TimeRange] = timeRange;
+	array[Pernament] = pernament;
+	array[ContagiousRange] = contagiousRange;
+	array[InfectionChance] = infectionChance;
+	array[AdditionalValue] = additionalValue;
+	VECTOR_push_back_arr(DiseaseData[disease][VEffects], array);
+	return 1;
+}
+
+public FeelingBadEffect(playerid, disease, value)
+{
+	ChatMe(playerid, "poczu³ siê Ÿle.");
+	ApplyAnimation(playerid, "FAT", "IDLE_tired", 4.0999, 1, 0, 0, 1, 0, 1);
+	return 1;
+}
+public CouchingEffect(playerid, disease, value)
+{
+	ChatMe(playerid, "zaczyna kaszleæ.");
+	ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+	return 1;
+}
+public VomitEffect(playerid, disease, value)
+{
+	ChatMe(playerid, "zaczyna wymiotowaæ.");
+	ApplyAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 1, 0, 1);
+	return 1;
+}
+public HPLossEffect(playerid, disease, value)
+{
+	new Float:hp;
+	GetPlayerHealth(playerid, hp);
+
+	new Float:loss = value;
+	SetPlayerHealth(playerid, (hp - loss < 0) ? 1.0 : hp-loss);
+	ChatMe(playerid, "poczu³, ¿e coœ jest nie tak z jego zdrowiem.");
+	return 1;
+}
+public HPLossToDeathEffect(playerid, disease, value)
+{
+	new Float:hp;
+	GetPlayerHealth(playerid, hp);
+
+	new Float:loss = value;
+	SetPlayerHealth(playerid, (hp - loss < 0) ? 0.0 : hp-loss);
+	ChatMe(playerid, "poczu³ mocny ból.");
+	return 1;
+}
+public BlackoutEffect(playerid, disease, value)
+{
+	//TODO
+	return 1;
+}
+public FaintEffect(playerid, disease, value)
+{
+	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
+	ChatMe(playerid, "omdla³.");
+	return 1;
+}
+public DeathEffect(playerid, disease, value)
+{
+	SetPlayerHealth(playerid, 0);
+	ChatMe(playerid, "umar³ na skutek choroby.");
+	return 1;
 }
 
 //end
