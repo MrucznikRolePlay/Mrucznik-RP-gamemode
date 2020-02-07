@@ -134,11 +134,70 @@ GiveBizToPlayer(playerid, bIDE, bType, bType2)
 	mBiz[bIDE][b_moneyPocket] = 0; 
 	mBiz[bIDE][b_TYPE] = bType; 
 	mBiz[bIDE][b_TYPE2] = bType2; 
-	sendTipMessage(playerid, "Zakupi³eœ nowy biznes!");
-	format(string, sizeof(string), "ID [%d] NAME [%s]", bIDE, mBiz[bIDE][b_Location]); 
+	SendClientMessage(playerid, COLOR_GREEN, "======<[Zakupi³eœ nowy biznes]>======");
+	format(string, sizeof(string), "ID: [%d] NAME: [%s] LOCATION: [%s]", bIDE, mBiz[bIDE][b_Name], mBiz[bIDE][b_Location]); 
 	SendClientMessage(playerid, COLOR_RED, string); 
+	sendTipMessage(playerid, "Mo¿esz zarz¹dzaæ swoim biznesem za pomoc¹ /bizlider"); 
 	Log(businessLog, INFO, "Gracz %s kupil biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	return 1;
+}
+PlayerNearBusinessType(playerid, BTYPE, BTYPE2)
+{
+	new businessChecked; 
+	for(new i; i<=MAX_BIZ; i++)
+	{
+		if(businessChecked == loadedBiz)
+		{
+			return false; 
+		}
+		if(BizExist(i))
+		{
+			if(mBiz[i][b_TYPE] == BTYPE)
+			{
+				if(mBiz[i][b_TYPE2] == BTYPE2)
+				{
+					if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ])
+					&& GetPlayerVirtualWorld(playerid) == 0)//SPRAWDZANIE ZEWN¥TRZ
+					{
+						return true;
+					}
+					else if(IsPlayerInRangeOfPoint(playerid, 10.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]) 
+					&& GetPlayerVirtualWorld(playerid) == mBiz[i][b_vw]
+					&& GetPlayerInterior(playerid) == mBiz[i][b_int])// SPRAWDZANIE WEWN¥TRZ
+					{
+						return true;
+					}
+				}
+			}
+			businessChecked++; 
+		}
+	}
+	return false; 
+}
+GetNearBusinessID(playerid)
+{
+	for(new i; i<=MAX_BIZ; i++)
+	{
+		if(i == MAX_BIZ)
+		{
+			break;
+		}
+		if(BizExist(i))
+		{
+			if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ])
+			&& GetPlayerVirtualWorld(playerid) == 0)//SPRAWDZANIE ZEWN¥TRZ
+			{
+				return i;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid, 10.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]) 
+			&& GetPlayerVirtualWorld(playerid) == mBiz[i][b_vw]
+			&& GetPlayerInterior(playerid) == mBiz[i][b_int])// SPRAWDZANIE WEWN¥TRZ
+			{
+				return i;
+			}
+		}
+	}
+	return INVALID_BUSINESSID; 
 }
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
 {
