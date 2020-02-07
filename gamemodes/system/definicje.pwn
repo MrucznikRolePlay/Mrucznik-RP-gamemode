@@ -593,7 +593,22 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 //AJ powód
 #define MAX_AJ_REASON 64
-
+//24-7 items cost
+#define S_CENA_TELEFON 10000
+#define S_CENA_ZDRAPKA 50000
+#define S_CENA_KSIAZKA 10000
+#define S_CENA_KOSTKA 1000
+#define S_CENA_APARAT 5000
+#define S_CENA_ZAMEK 10000
+#define S_CENA_PREDKOSCIOMIERZ 5000
+#define S_CENA_KONDOM 400
+#define S_CENA_ODTWARZACZ 5000
+#define S_CENA_PIWO 500
+#define S_CENA_WINO 700
+#define S_CENA_SPRUNK 250
+#define S_CENA_CBRADIO 8000
+#define S_CENA_CYGARO 800
+#define S_CENA_KIJ 15000
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);
 public _SafeReturnCode_(dest[], src[], bytes)
