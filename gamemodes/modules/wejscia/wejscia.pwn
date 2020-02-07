@@ -315,6 +315,14 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			return 1;
 		}
 	}
+	else if(Check_ID == 18) //ibiza audio
+	{
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+	}
+	else if(Check_ID == 19)
+	{
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+	}
 	return 0; 
 }
 Sprawdz_UID_Wychodzenie(playerid, Check_ID)
@@ -387,6 +395,14 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 			return 1;
 		}
 		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
+	}
+	else if(Check_ID == 18) //ibiza audio
+	{
+		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+	}
+	else if(Check_ID == 19)
+	{
+		StopAudioStreamForPlayer(playerid); 
 	}
 
 	return 0; 

@@ -247,11 +247,10 @@ YCMD:wyjdz(playerid, params[], help)
 		//wyjscie glowne
     	else if(PlayerToPoint(1.5, playerid, 417.3976, -1858.9402, -65.3905))
         {
+			Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 21);
             SetPlayerPos(playerid, 395.9647, -1811.1703, 7.8789);
             GameTextForPlayer(playerid, "~w~Zapraszamy ponownie!", 5000, 1);
-            Wchodzenie(playerid);
-			StopAudioStreamForPlayer(playerid);
             return 1;
         }
 		//wejscie na scene/konsole
@@ -335,9 +334,10 @@ YCMD:wyjdz(playerid, params[], help)
                     return 1;
                 }
             }
+			Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 22);
             SetPlayerPos(playerid, 422.2131, -1831.5657, -65.5105);
-            Wchodzenie(playerid);
+			PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             return 1;
         }
     	//wyjœcie bileterki
