@@ -26,7 +26,6 @@
 #include "cmd/admini.pwn"
 #include "cmd/adminstats.pwn"
 #include "cmd/ah.pwn"
-#include "cmd/akceptuj.pwn"
 #include "cmd/alarm.pwn"
 #include "cmd/alkomat.pwn"
 #include "cmd/ann.pwn"

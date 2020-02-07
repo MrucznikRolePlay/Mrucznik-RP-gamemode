@@ -14,5 +14,6 @@
             "description": "nazwa"
         }
     ],
-    "date": "07.02.2020"
+    "date": "07.02.2020",
+    "custom": true
 }

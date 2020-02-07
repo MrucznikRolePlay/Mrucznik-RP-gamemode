@@ -23,7 +23,7 @@
 //
 //TODO: przerobiæ ca³kowicie
 //------------------<[ Implementacja: ]>-------------------
-command_akceptuj_Impl(playerid, x_job[32], giveplayerid)
+command_akceptuj_Impl(playerid, x_job[32])
 {
     new string[256];
     new giveplayer[MAX_PLAYER_NAME];
@@ -1448,27 +1448,7 @@ command_akceptuj_Impl(playerid, x_job[32], giveplayerid)
     }
     else if(strcmp(x_job,"kuracje",true) == 0 || strcmp(x_job,"kuracja",true) == 0)
     {
-        new giveplayerid = GetPVarInt(playerid, "kuracja-doctorid");
-        if(giveplayerid == INVALID_PLAYER_ID || !IsPlayerConnected(giveplayerid))
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Gracz, który oferowa³ Ci kuracjê, wyszed³ z gry.");
-            return 1;
-        }
-
-        if(GetPVarInt(playerid, "kuracja-uid") != PlayerInfo[giveplayerid][pUID]) 
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Gracz, który oferowa³ Ci kuracjê, wyszed³ z gry.");
-            SetPVarInt(playerid, "kuracja-doctorid", INVALID_PLAYER_ID);
-            return 1;
-        }
-
-        if (!ProxDetectorS(10.0, playerid, giveplayerid))
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Jesteœ za daleko !");
-            return 1;
-        }
-
-        kuracja_akceptuj(playerid, giveplayerid);
+        kuracja_akceptuj(playerid);
     }
     return 1;
 }

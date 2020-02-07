@@ -28,15 +28,17 @@
 //-----------------<[ Funkcje: ]>-------------------
 eDiseases:GetDiseaseID(diseaseName[]) 
 {
-	switch(YHash(diseaseName))
+	for(new eDiseases:i; i<eDiseases; i++) 
 	{
-		default:
-			return eDiseases:NONE;
+		if(strcmp(DiseaseData[i][Name], diseaseName, true) == 0) 
+		{
+			return i;
+		}
 	}
 	return eDiseases:NONE;
 }
 
-CureFormAll(playerid)
+CureFromAllDiseases(playerid)
 {
 	VECTOR_clear(VPlayerDiseases[playerid]);
 	MruMySQL_RemoveAllDiseases(playerid);
@@ -168,6 +170,45 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 	}
 }
 
+ShowDiseaseList(playerid)
+{
+	SendClientMessage(playerid, COLOR_WHITE, "|__________________ Choroby __________________|");
+	//TODO: automatyczne generowanie nazw chorób
+	SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: grypa, zatrucie");
+	SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
+	return 1;
+}
+
+StartPlayerTreatment(playerid, eDiseases:disease)
+{
+	new time = DiseaseData[disease][CureTime];
+	SetPVarInt(playerid, "disease-treatement", disease);
+
+	TogglePlayerControllable(playerid, true);
+	ApplyAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
+
+	CurrationCounter(playerid, time);
+	return 1;
+}
+
+EndPlayerTreatment(playerid)
+{
+	new eDiseases:disease = eDiseases:GetPVarInt(playerid, "disease-treatement");
+	new chance = DiseaseData[disease][DrugResistance];
+	new rand = random(100);
+
+	if(rand < chance) //nie uda³o siê
+	{
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Niestety, leczenie siê nie powiod³o. Spróbuj jeszcze raz.");
+		GameTextForPlayer(playerid, "~r~Nie uda³o siê :(", 5000, 1);
+	}
+	else //uda³o siê
+	{
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Uda³o Ci siê pokonaæ chorobê!");
+		CurePlayer(playerid, disease);
+		GameTextForPlayer(playerid, "~g~Wyleczony!", 5000, 1);
+	}
+}
 
 //-----------------<[ Disease effects: ]>-------------------
 

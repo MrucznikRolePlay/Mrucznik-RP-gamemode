@@ -13,9 +13,15 @@
             "description": "Nick/ID"
         },
         {
+            "type": "string",
+            "size": "32",
+            "name": "disease",
+            "description": "choroba"
+        },
+        {
             "type": "integer",
             "name": "money",
-            "description": "koszt"
+            "description": "prowizja"
         }
     ],
     "date": "07.02.2020"

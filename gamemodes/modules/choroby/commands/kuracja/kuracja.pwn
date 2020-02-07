@@ -55,10 +55,10 @@ YCMD:kuracja(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new giveplayerid, money;
-    if(sscanf(params, "rd", giveplayerid, money))
+    new giveplayerid, disease[32], money;
+    if(sscanf(params, "rs[32]d", giveplayerid, disease, money))
     {
-        sendTipMessage(playerid, "U¿yj /kuracja [Nick/ID] [koszt] ");
+        sendTipMessage(playerid, "U¿yj /kuracja [Nick/ID] [choroba] [prowizja] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -67,5 +67,5 @@ YCMD:kuracja(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_kuracja_Impl(playerid, giveplayerid, money);
+    return command_kuracja_Impl(playerid, giveplayerid, disease, money);
 }

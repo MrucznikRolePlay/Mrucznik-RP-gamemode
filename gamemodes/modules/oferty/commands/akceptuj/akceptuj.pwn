@@ -56,8 +56,7 @@ YCMD:akceptuj(playerid, params[], help)
     }
     //fetching params
     new nazwa[32];
-    new giveplayerid=-1;
-    if(sscanf(params, "s[32]R(0)", nazwa, giveplayerid))
+    if(sscanf(params, "s[32]", nazwa))
     {
         SendClientMessage(playerid, COLOR_WHITE, "|__________________ Accept __________________|");
         SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
@@ -69,5 +68,5 @@ YCMD:akceptuj(playerid, params[], help)
     }
     
     //command body
-    return command_akceptuj_Impl(playerid, nazwa, giveplayerid);
+    return command_akceptuj_Impl(playerid, nazwa);
 }

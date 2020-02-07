@@ -33,7 +33,7 @@ command_uleczall_Impl(playerid)
 
     foreach(new i : Player) 
     {
-        CureFormAll(i);
+        CureFromAllDiseases(i);
     }
     Log(adminLog, INFO, "Admin %s wyleczy³ wszystkich graczy z chorób.", GetPlayerLogName(playerid));
     SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s wyleczy³ wszystkich graczy z chorób.", GetNick(playerid)));
