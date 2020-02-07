@@ -34,6 +34,11 @@ choroby_OnPlayerLogin(playerid)
 	return 1;
 }
 
+hook OnGameModeInit()
+{
+	choroby_InitEffects();
+}
+
 hook OnPlayerDisconnect(playerid, reason)
 {
 	VECTOR_clear(VPlayerDiseases[playerid]);

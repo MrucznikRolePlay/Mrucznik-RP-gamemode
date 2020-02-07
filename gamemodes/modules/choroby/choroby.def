@@ -24,4 +24,14 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 
+// time settings in ms
+#define RARE_EFFECT_MIN (1000*60*60)
+#define RARE_EFFECT_RANGE (1000*60*120)
+
+#define REGULAR_EFFECT_MIN (1000*60*20)
+#define REGULAR_EFFECT_RANGE (1000*60*20)
+
+#define FREQUENT_EFFECT_MIN (1000*60*5)
+#define FREQUENT_EFFECT_RANGE (1000*60*10)
+
 //end

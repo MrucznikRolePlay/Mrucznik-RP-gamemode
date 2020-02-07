@@ -23,44 +23,44 @@
 
 //------------------<[ Enumy: ]>--------------------
 enum eDiseases {
-    NONE,
-    HIV,
-    GRYPA,
-    ZATRUCIE,
-    CORONAVIRUS
+    NONE
 };
 
-enum eSpreadingTypes {
-    NONE,
-    OTHER,
-    ON_CONTACT,
-    ON_FREQUENT_EFFECT,
-    ON_REGULAR_EFFECT,
-    ON_RARE_EFFECT
+enum eEffects {
+    NONE
 };
+
+enum eEffectData {
+    ActivateCallback[32],
+    DeactivateCallback[32],
+    MinTime,
+    TimeRange,
+    bool:Pernament,
+    Float:ContagiousRange,
+    InfectionChance // chance of getting disease if player is in contagious range
+}
 
 enum eDiseaseData {
     Name[32],
     CureCost,
     CureTime,
     DrugResistance, // chance of unsuccessful treatment in percent
-    SpreadingType,
-    FrequentEffect[32],
-    RegularEffect[32],
-    RareEffect[32],
-    PermanentEffect[32]
+    bool:SpreadingOnContact,
+    Vector:VEffects
 };
 
 //-----------------<[ Zmienne: ]>-------------------
 new Vector:VPlayerDiseases[MAX_PLAYERS];
 
-new DiseaseData[eDiseases][eDiseaseData] = {
-    {"None", 0, 0, 0, eSpreadingTypes:NONE, "NoEffect", "NoEffect", "NoEffect", "NoEffect"},
-    {"HIV", 2},
-    {"GRYPA", 2},
-    {"ZATRUCIE", 2},
-    {"CORONAVIRUS", 2}
-};
+new DiseaseData[eDiseases][eDiseaseData];
+new Effects[eEffects][eEffectData] = {
+    {"Test", "Test", RARE_EFFECT_MIN, RARE_EFFECT_RANGE, false, 0.0, 0}
+}; 
+
+choroby_InitEffects()
+{
+    return 1;
+}
 
 //------------------<[ Forwardy: ]>--------------------
 
