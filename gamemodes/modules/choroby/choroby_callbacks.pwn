@@ -28,5 +28,16 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
+choroby_OnPlayerLogin(playerid)
+{
+	MruMySQL_LoadDiseasesData(playerid);
+	return 1;
+}
+
+hook OnPlayerDisconnect(playerid, reason)
+{
+	VECTOR_clear(VPlayerDiseases[playerid]);
+	return 1;
+}
 
 //end

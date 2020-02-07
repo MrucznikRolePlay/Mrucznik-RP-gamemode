@@ -41,8 +41,7 @@ command_diagnozuj_Impl(playerid, giveplayerid)
         COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
     );
     
-    SendClientMessage(playerid, COLOR_WHITE, sprintf("|__________ Wynik diagnozy %s __________|", GetNick(giveplayerid)));
-    SendClientMessage(playerid, COLOR_GREY, sprintf("Choroba: brak"));
+    DiagnosePlayer(giveplayerid, playerid);
     return 1;
 }
 

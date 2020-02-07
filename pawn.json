@@ -23,7 +23,8 @@
 		"IllidanS4/PawnPlus:v1.1",
 		"Pottus/ColAndreas:v1.4.0.3",
 		"BigETI/pawn-map",
-		"Y-Less/indirection"
+		"Y-Less/indirection",
+		"Zeex/amx_assembly"
 	],
 	"build": {
 		"name": "",

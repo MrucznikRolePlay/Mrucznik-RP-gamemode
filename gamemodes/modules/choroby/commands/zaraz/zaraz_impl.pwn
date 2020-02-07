@@ -31,7 +31,7 @@ command_zaraz_Impl(playerid, giveplayerid, disease[32])
         return 1;
     }
 
-    new diseaseID = GetDiseaseID(disease);
+    new eDiseases:diseaseID = GetDiseaseID(disease);
     InfectPlayer(giveplayerid, diseaseID);
     Log(adminLog, INFO, "Admin %s zarazi³ %s chorob¹ %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), disease);
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "   Zarazi³eœ siê chorob¹");

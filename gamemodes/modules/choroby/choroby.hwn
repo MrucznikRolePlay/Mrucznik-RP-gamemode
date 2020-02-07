@@ -24,15 +24,44 @@
 //------------------<[ Enumy: ]>--------------------
 enum eDiseases {
     NONE,
-    CHLAMYDIA,
-    RZEZACZKA,
-    SYPHILIS,
     HIV,
-    PRZEZIEBIENIE,
+    GRYPA,
+    ZATRUCIE,
     CORONAVIRUS
 };
 
+enum eSpreadingTypes {
+    NONE,
+    OTHER,
+    ON_CONTACT,
+    ON_FREQUENT_EFFECT,
+    ON_REGULAR_EFFECT,
+    ON_RARE_EFFECT
+};
+
+enum eDiseaseData {
+    Name[32],
+    CureCost,
+    CureTime,
+    DrugResistance, // chance of unsuccessful treatment in percent
+    SpreadingType,
+    FrequentEffect[32],
+    RegularEffect[32],
+    RareEffect[32],
+    PermanentEffect[32]
+};
+
 //-----------------<[ Zmienne: ]>-------------------
+new Vector:VPlayerDiseases[MAX_PLAYERS];
+
+new DiseaseData[eDiseases][eDiseaseData] = {
+    {"None", 0, 0, 0, eSpreadingTypes:NONE, "NoEffect", "NoEffect", "NoEffect", "NoEffect"},
+    {"HIV", 2},
+    {"GRYPA", 2},
+    {"ZATRUCIE", 2},
+    {"CORONAVIRUS", 2}
+};
+
 //------------------<[ Forwardy: ]>--------------------
 
 //end

@@ -25,10 +25,11 @@
 
 //
 
+//TODO: efekty chorób:
+// - trzêsienie ekranem
+// - animacje
+// - 
+
 //-----------------<[ Timery: ]>-------------------
-ptask DiseaseEffects[500](playerid) 
-{
-	
-}
 
 //end
