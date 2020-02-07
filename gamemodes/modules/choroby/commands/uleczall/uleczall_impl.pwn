@@ -25,12 +25,18 @@
 //------------------<[ Implementacja: ]>-------------------
 command_uleczall_Impl(playerid)
 {
+    if(PlayerInfo[playerid][pAdmin] < 100)
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
+
     foreach(new i : Player) 
     {
         CurePlayer(i);
     }
-    Log(adminLog, INFO, "Admin %s uleczy³ wszystkich graczy.", GetPlayerLogName(playerid));
-    SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s uleczy³ wszystkich graczy.", GetNick(playerid)));
+    Log(adminLog, INFO, "Admin %s wyleczy³ wszystkich graczy z chorób.", GetPlayerLogName(playerid));
+    SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s wyleczy³ wszystkich graczy z chorób.", GetNick(playerid)));
     return 1;
 }
 
