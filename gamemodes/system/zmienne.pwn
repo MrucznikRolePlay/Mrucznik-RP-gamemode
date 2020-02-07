@@ -1064,6 +1064,7 @@ new playerSeeSpec[MAX_PLAYERS];
 //SANDAL
 new gRO[MAX_PLAYERS];
 
+new gBizSet[MAX_PLAYERS]=false; 
 new isNaked[MAX_PLAYERS]; 
 new Text3D:HiddenPlayerName[MAX_PLAYERS];
 
@@ -1089,7 +1090,8 @@ ClearVariableDisconnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
-	PlayerGames[playerid] = 0;//Zdrapki 
+	PlayerGames[playerid] = 0;//Zdrapki
+	gBizSet[playerid]=false;  
 	return 1;
 }
 ZerujZmienne(playerid)
